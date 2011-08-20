@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.reference">
-    <title>Zend_CodeGenerator Réference</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.reference"><info><title>Zend_CodeGenerator Réference</title></info>
+    
 
-    <sect2 id="zend.codegenerator.reference.abstracts">
-        <title>Classes abstraites et interfaces</title>
+    <section xml:id="zend.codegenerator.reference.abstracts"><info><title>Classes abstraites et interfaces</title></info>
+        
 
-        <sect3 id="zend.codegenerator.reference.abstracts.abstract">
-            <title>Zend_CodeGenerator_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.abstract"><info><title>Zend_CodeGenerator_Abstract</title></info>
+            
 
             <para>
                 La classe de base de CodeGenerator dont toutes les classes héritent. Elle
-                propose l'<acronym>API</acronym> suivante&#160;:
+                propose l'<acronym>API</acronym> suivante :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -54,16 +52,16 @@ abstract class Zend_CodeGenerator_Abstract
                 soit de définir le contenu par défaut soit de remplacer ce contenu par la tâche de
                 génération.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.abstracts.php-abstract">
-            <title>Zend_CodeGenerator_Php_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-abstract"><info><title>Zend_CodeGenerator_Php_Abstract</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Abstract</classname> étend
                 <classname>Zend_CodeGenerator_Abstract</classname> et ajoute des méthodes permettant
                 de savoir si le contenu a changé et aussi le nombre d'indentation à utiliser avant
-                chaque ligne de code à générer. L'<acronym>API</acronym> est la suivante&#160;:
+                chaque ligne de code à générer. L'<acronym>API</acronym> est la suivante :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -76,16 +74,16 @@ abstract class Zend_CodeGenerator_Php_Abstract
     public function getIndentation()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.abstracts.php-member-abstract">
-            <title>Zend_CodeGenerator_Php_Member_Abstract</title>
+        <section xml:id="zend.codegenerator.reference.abstracts.php-member-abstract"><info><title>Zend_CodeGenerator_Php_Member_Abstract</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> est une classe
                 de base pour générer des propriétés ou des méthodes de classe, et propose des
                 accesseurs et des mutateurs pour créer la visibilité, l'abstraction, la staticité ou
-                la finalité. L'<acronym>API</acronym> est la suivante&#160;:
+                la finalité. L'<acronym>API</acronym> est la suivante :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -102,14 +100,14 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
     public function getName()
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.codegenerator.reference.concrete">
-        <title>Classes CodeGenerator concrêtes</title>
+    <section xml:id="zend.codegenerator.reference.concrete"><info><title>Classes CodeGenerator concrêtes</title></info>
+        
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-body">
-            <title>Zend_CodeGenerator_Php_Body</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-body"><info><title>Zend_CodeGenerator_Php_Body</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Body</classname> est utilisée pour générer
@@ -118,7 +116,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
                 <methodname>generate()</methodname> appelé.
             </para>
 
-            <para>L'<acronym>API</acronym> de cette classe est comme suit&#160;:</para>
+            <para>L'<acronym>API</acronym> de cette classe est comme suit :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
@@ -128,10 +126,10 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-class">
-            <title>Zend_CodeGenerator_Php_Class</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-class"><info><title>Zend_CodeGenerator_Php_Class</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Class</classname> est utilisée pour générer
@@ -139,11 +137,11 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
                 classe <acronym>PHP</acronym> elle-même, ainsi que ses commentaires
                 <acronym>PHP</acronym> DocBlock. Vous pouvez bien sûr spécifier
                 la classe comme abstraite, finale, ou encore lui rajouter des
-                constantes&#160;/&#160;attributs&#160;/&#160;méthodes sous
+                constantes / attributs / méthodes sous
                 forme d'autres objets décrits eux aussi dans ce chapitre.
             </para>
 
-            <para>Voici l'<acronym>API</acronym>&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
@@ -188,10 +186,10 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
                 A noter que <methodname>setDocBlock()</methodname> attend une instance de
                 <classname>Zend_CodeGenerator_Php_DocBlock</classname>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock">
-            <title>Zend_CodeGenerator_Php_Docblock</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock"><info><title>Zend_CodeGenerator_Php_Docblock</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock</classname> est utilisée pour
@@ -206,7 +204,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
                 permettra sa construction.
             </para>
 
-            <para>Voici l'<acronym>API</acronym>&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
@@ -224,10 +222,10 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag">
-            <title>Zend_CodeGenerator_Php_Docblock_Tag</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag"><info><title>Zend_CodeGenerator_Php_Docblock_Tag</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> est utilisée pour
@@ -236,7 +234,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
                 (ce qui suit le tag).
             </para>
 
-            <para>Voici l'<acronym>API</acronym>&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag
@@ -252,20 +250,20 @@ class Zend_CodeGenerator_Php_Docblock_Tag
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-param">
-            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-param"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_DocBlock_Tag_Param</classname> est une
                 version spéciale de <classname>Zend_CodeGenerator_Php_DocBlock_Tag</classname>, et
                 permet de représenter un paramètre d'une méthode. Le nom du tag est donc connu, mais
-                des informations additionnelles sont requises&#160;: le nom du paramètre et le type
+                des informations additionnelles sont requises : le nom du paramètre et le type
                 de données qu'il représente.
             </para>
 
-            <para>L'<acronym>API</acronym> de cette classe est la suivante&#160;:</para>
+            <para>L'<acronym>API</acronym> de cette classe est la suivante :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
@@ -281,10 +279,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-return">
-            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-docblock-tag-return"><info><title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Docblock_Tab_Return</classname> est une
@@ -292,7 +290,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
                 nom du tag est connu ('return') mais pas le type de retour.
             </para>
 
-            <para>Voici l'<acronym>API</acronym>&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
@@ -306,10 +304,10 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-file">
-            <title>Zend_CodeGenerator_Php_File</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-file"><info><title>Zend_CodeGenerator_Php_File</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_File</classname> est utilisée pour générer
@@ -324,7 +322,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
                 PHPDoc et la classe <classname>Zend_CodeGenerator_Php_Docblock</classname>
             </para>
 
-            <para>Voici l'<acronym>API</acronym> de la classe&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> de la classe :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
@@ -350,10 +348,10 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-member-container">
-            <title>Zend_CodeGenerator_Php_Member_Container</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-member-container"><info><title>Zend_CodeGenerator_Php_Member_Container</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Member_Container</classname> est utilisée en
@@ -361,7 +359,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
                 trace des attributs et des méthodes de classe. Ceux-ci sont indéxés par nom.
             </para>
 
-            <para>Voici l'<acronym>API</acronym> de cette classe&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> de cette classe :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
@@ -369,10 +367,10 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
     public function __construct($type = self::TYPE_PROPERTY)
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-method">
-            <title>Zend_CodeGenerator_Php_Method</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-method"><info><title>Zend_CodeGenerator_Php_Method</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Method</classname> est utilisée pour décrire
@@ -391,7 +389,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
                 dernière classe.
             </para>
 
-            <para>L'<acronym>API</acronym> de cette classe est la suivante&#160;:</para>
+            <para>L'<acronym>API</acronym> de cette classe est la suivante :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Method
@@ -411,10 +409,10 @@ class Zend_CodeGenerator_Php_Method
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-parameter">
-            <title>Zend_CodeGenerator_Php_Parameter</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-parameter"><info><title>Zend_CodeGenerator_Php_Parameter</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Parameter</classname> est utilisée pour
@@ -423,7 +421,7 @@ class Zend_CodeGenerator_Php_Method
                 enfin un nom.
             </para>
 
-            <para>Voici l'<acronym>API</acronym>&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
@@ -450,7 +448,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
                 <constant>NULL</constant>, un booléen ou un tableau en tant que valeur par
                 défaut. Pour ceci le conteneur
                 <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> peut être
-                utilisé, par exemple&#160;:
+                utilisé, par exemple :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -467,10 +465,10 @@ $parameter->setDefaultValue(
                 En interne <methodname>setDefaultValue()</methodname> convertit aussi les valeurs
                 qui peuvent être exprimées en <acronym>PHP</acronym> dans le conteneur.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.codegenerator.reference.concrete.php-property">
-            <title>Zend_CodeGenerator_Php_Property</title>
+        <section xml:id="zend.codegenerator.reference.concrete.php-property"><info><title>Zend_CodeGenerator_Php_Property</title></info>
+            
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Property</classname> est utilisée pour
@@ -480,7 +478,7 @@ $parameter->setDefaultValue(
                 <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>.
             </para>
 
-            <para>Voici l'<acronym>API</acronym>&#160;:</para>
+            <para>Voici l'<acronym>API</acronym> :</para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Property
@@ -496,6 +494,6 @@ class Zend_CodeGenerator_Php_Property
     public function generate()
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

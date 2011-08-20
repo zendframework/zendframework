@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19912 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.intro">
-    <title>Introducción a MVC &amp; ZF</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.quickstart.intro.zf">
-        <title>Zend Framework</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><info><title>Introducción a MVC &amp; ZF</title></info>
+    
+
+    <section xml:id="learning.quickstart.intro.zf"><info><title>Zend Framework</title></info>
+        
 
         <para>
             Zend Framework es un framework de código abierto y orientado a objectos para facilitar
@@ -17,7 +17,7 @@
             ser utilizado para fijar la estructura básica de las aplicaciones desarrolladas con el framework.
             Encontrarás la lista completa de los componentes de Zend Framework junto a
             breves descripciones de los mismos en la
-            <ulink url="http://framework.zend.com/about/components">lista de componentes</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/about/components">lista de componentes</link>.
             En este tutorial te ayudaremos a familiarizarte con aquellos componentes del framework
             utilizados de manera más frecuente incluyendo
             <classname>Zend_Controller</classname>, <classname>Zend_Layout</classname>,
@@ -35,22 +35,20 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink
-                        url="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">formato zip</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">formato zip</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <ulink
-                        url="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">formato tar.gz</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">formato tar.gz</link>
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.intro.mvc">
-        <title>Modelo-Vista-Controlador</title>
+    <section xml:id="learning.quickstart.intro.mvc"><info><title>Modelo-Vista-Controlador</title></info>
+        
 
         <para>
             En resumen ¿qué es exactamente el patrón <acronym>MVC</acronym> del que tanto hablan? ¿y por qué
@@ -65,16 +63,15 @@
             trabajando en la misma aplicación.
         </para>
 
-        <note>
-            <title>Más información</title>
+        <note><info><title>Más información</title></info>
+            
 
             <para>
                 Profundicemos un poco y veamos cada parte de este patrón por separado:
             </para>
 
             <para>
-                <inlinegraphic width="321" scale="100" align="center" valign="middle"
-                               fileref="figures/learning.quickstart.intro.mvc.png" format="PNG" />
+                <inlinemediaobject><imageobject><imagedata width="321" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.intro.mvc.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <itemizedlist>
@@ -99,18 +96,17 @@
                         Según el pedido del usuario y otras variables ellos pueden decidir ejecutar
                         otro controlador o manipular los datos del modelo para luego asignarle el resultado
                         a una vista en particular.
-                        Muchos expertos en <acronym>MVC</acronym> recomiendan <ulink
-                            url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">mantener
-                            el controlador lo más limpio posible</ulink>.
+                        Muchos expertos en <acronym>MVC</acronym> recomiendan <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">mantener
+                            el controlador lo más limpio posible</link>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                Podríamos <ulink url="http://ootips.org/mvc-pattern.html">extendernos aún más</ulink>
+                Podríamos <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ootips.org/mvc-pattern.html">extendernos aún más</link>
                 sobre este patrón pero por ahora ya posees los conocimientos suficientes
                 que te permitirán entender la aplicación que vamos a construir.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.locale">
-    <title>Zend_Application_Resource_Locale</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.locale"><info><title>Zend_Application_Resource_Locale</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Locale</classname> kann verwendet werden um ein
@@ -17,8 +15,8 @@
         sollte abhängig auf den Notwendigkeiten der Anwendung verwendet werden.
     </para>
 
-    <sect3 id="zend.application.available-resources.locale.auto">
-        <title>Automatische Erkennung des zu verwendenden Gebietsschemas</title>
+    <section xml:id="zend.application.available-resources.locale.auto"><info><title>Automatische Erkennung des zu verwendenden Gebietsschemas</title></info>
+        
 
         <para>
             Ohne Spezifikation einer Option für
@@ -90,14 +88,13 @@
         </itemizedlist>
 
         <para>
-            Für weitere Informationen über die Erkennung von Gebietsschema sollte in <link
-                linkend="zend.locale.selection.automatic">dieses Kapitel für Zend_Locale's
+            Für weitere Informationen über die Erkennung von Gebietsschema sollte in <link linkend="zend.locale.selection.automatic">dieses Kapitel für Zend_Locale's
                 automatischer Erkennung</link> gesehen werden.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.application.available-resources.locale.fallback">
-        <title>Das Gebietsschema automatisch erkennen und ein eigenes Fallback hinzufügen</title>
+    <section xml:id="zend.application.available-resources.locale.fallback"><info><title>Das Gebietsschema automatisch erkennen und ein eigenes Fallback hinzufügen</title></info>
+        
 
         <para>
             Die automatische Erkennung von vorher könnte zu Problemen führen wenn das Gebietsschema
@@ -107,8 +104,8 @@
             setzen welches in dem Fall verwendet wird wenn kein Gebietsschema erkannt wird.
         </para>
 
-        <example id="zend.application.available-resources.locale.configExampleDetectAndFallback">
-            <title>Automatische Erkennung des Gebietsschemas und setzen eines Fallbacks</title>
+        <example xml:id="zend.application.available-resources.locale.configExampleDetectAndFallback"><info><title>Automatische Erkennung des Gebietsschemas und setzen eines Fallbacks</title></info>
+            
 
             <para>
                 Der folgende Abschnitt zeigt wie ein eigenes Standardgebietsschema gesetzt werden
@@ -121,10 +118,10 @@
 resources.locale.default = "nl_NL"
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.application.available-resources.locale.forcing">
-        <title>Erzwingen eines Gebietsschemas für die Verwendung</title>
+    <section xml:id="zend.application.available-resources.locale.forcing"><info><title>Erzwingen eines Gebietsschemas für die Verwendung</title></info>
+        
 
         <para>
             Manchmal ist es nützlich ein einzelnes Gebietsschema zu definieren welches verwendet
@@ -137,8 +134,8 @@ resources.locale.default = "nl_NL"
             Erkennung wird ausgeschaltet.
         </para>
 
-        <example id="zend.application.available-resources.locale.configExampleFallbackOnly">
-            <title>Definition eines einzelnen Gebietsschemas für die Verwendung</title>
+        <example xml:id="zend.application.available-resources.locale.configExampleFallbackOnly"><info><title>Definition eines einzelnen Gebietsschemas für die Verwendung</title></info>
+            
 
             <para>
                 Der folgende Abschnitt zeigt wie ein einzelnes Gebietsschema für die komplette
@@ -151,5 +148,5 @@ resources.locale.default = "nl_NL"
 resources.locale.force = true
 ]]></programlisting>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

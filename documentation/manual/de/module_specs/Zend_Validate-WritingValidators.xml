@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.writing_validators">
-    <title>Schreiben von Prüfern</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Schreiben von Prüfern</title></info>
+    
 
     <para>
         <classname>Zend_Validate</classname> bietet ein Set von standardmäßig benötigten Prüfern,
@@ -16,8 +14,7 @@
         Benutzerklassen implementiert werden können um eigene Prüfobjekte zu erstellen. Ein Objekt
         welches das <classname>Zend_Validate_Interface</classname> Interface implementiert kann
         einer Prüfkette mit <methodname>Zend_Validate::addValidator()</methodname> hinzugefügt
-        werden. Solche Objekte können auch mit <link
-            linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link> verwendet
+        werden. Solche Objekte können auch mit <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link> verwendet
         werden.
     </para>
 
@@ -54,8 +51,8 @@
         benötigt werden um zu erkennen ob die Prüfung gültig oder ungültig ist.
     </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
-        <title>Erstellen einer einfachen Prüfklasse</title>
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Erstellen einer einfachen Prüfklasse</title></info>
+        
 
         <para>
             Das folgende Beispiel demonstriert wie ein sehr einfacher eigener Prüfer geschrieben
@@ -97,8 +94,8 @@ class MyValid_Float extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
-        <title>Schreiben einer Prüfklasse die abhängige Konditionen besitzt</title>
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Schreiben einer Prüfklasse die abhängige Konditionen besitzt</title></info>
+        
 
         <para>
             Das folgende Beispiel demonstriert ein komplexeres Set von Prüfregeln, wobei es
@@ -192,8 +189,8 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.independent">
-        <title>Prüfen mit unabhängigen Konditionen, mehrfache Gründe für Fehler</title>
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Prüfen mit unabhängigen Konditionen, mehrfache Gründe für Fehler</title></info>
+        
 
         <para>
             Angenommen es wird eine Prüfklasse geschrieben für das Erzwingen von Passwortstärke -
@@ -271,4 +268,4 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
             einen nachfolgenden Aufruf von <methodname>getMessages()</methodname>.
         </para>
     </example>
-</sect1>
+</section>

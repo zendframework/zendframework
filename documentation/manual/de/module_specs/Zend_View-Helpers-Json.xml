@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19434 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.json">
-    <title>JSON Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.json"><info><title>JSON Helfer</title></info>
+    
 
     <para>
         Wenn Views erstellt werden die <acronym>JSON</acronym> zurückgeben ist es wichtig auch den
@@ -32,8 +30,8 @@ Content-Type: application/json
 <?php echo $this->json($this->data) ?>
 ]]></programlisting>
 
-    <note>
-        <title>Layouts behalten und Encoding einschalten durch Verwendung von Zend_Json_Expr</title>
+    <note><info><title>Layouts behalten und Encoding einschalten durch Verwendung von Zend_Json_Expr</title></info>
+        
 
         <para>
             Jede Methode im <acronym>JSON</acronym> Helfer akzwptiert ein zweites, optionales,
@@ -73,7 +71,4 @@ echo $this->json($this->data, array('keepLayouts' => true));
 )) ?>
 ]]></programlisting>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

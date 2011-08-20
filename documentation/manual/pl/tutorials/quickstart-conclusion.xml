@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19996 -->
-<!-- Reviewed: yes -->
-<sect1 id="learning.quickstart.conclusion">
-    <title>Gratulacje!</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.conclusion"><info><title>Gratulacje!</title></info>
+    
 
     <para>
         Szanowny czytelniku, właśnie ukończyłeś tworzenie swojej pierwszej, prostej 
@@ -16,4 +16,4 @@
         i o wszystkich pozostałych. Mamy nadzieję, że Zend Framework okaże się dla 
         Ciebie przydatny i - co ważniejsze - dający satysfakcję.
     </para>
-</sect1>
+</section>

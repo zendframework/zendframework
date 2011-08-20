@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22756 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.measure.output">
-    <title>Ausgabe von Maßeinheiten</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.output"><info><title>Ausgabe von Maßeinheiten</title></info>
+    
 
     <para>
         Maßeinheiten können auf verschiedenen Wegen als Zahl ausgegeben werden.
@@ -24,15 +22,15 @@
         <link linkend="zend.measure.output.unit">Ausgabe als lokalisierte Zeichenkette</link>
     </para>
 
-    <sect2 id="zend.measure.output.auto">
-        <title>Automatische Ausgabe</title>
+    <section xml:id="zend.measure.output.auto"><info><title>Automatische Ausgabe</title></info>
+        
 
         <para>
             <classname>Zend_Measure</classname> unterstützt die automatische Ausgabe von
             Zeichenketten.
 
-            <example id="zend.measure.output.auto.example-1">
-                <title>Automatische Ausgabe</title>
+            <example xml:id="zend.measure.output.auto.example-1"><info><title>Automatische Ausgabe</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -46,26 +44,26 @@ echo $unit;
             </example>
         </para>
 
-        <note>
-            <title>Ausgabe der Maßeinheit</title>
+        <note><info><title>Ausgabe der Maßeinheit</title></info>
+            
 
             <para>
                 Die Ausgabe kann einfach erzielt werden durch Verwendung von
-                <ulink url="http://php.net/echo">echo</ulink> oder
-                <ulink url="http://php.net/print">print</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/echo">echo</link> oder
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/print">print</link>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.value">
-        <title>Ausgabe als Wert</title>
+    <section xml:id="zend.measure.output.value"><info><title>Ausgabe als Wert</title></info>
+        
 
         <para>
             Der Wert einer Maßeinheit kann mit <methodname>getValue()</methodname> ausgegeben
             werden.
 
-            <example id="zend.measure.output.value.example-1">
-                <title>Ausgabe eines Wertes</title>
+            <example xml:id="zend.measure.output.value.example-1"><info><title>Ausgabe eines Wertes</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -84,16 +82,16 @@ echo $unit->getValue();
             <property>round</property> der es erlaubt eine Genauigkeit für die erstellte Ausgabe zu
             definieren. Die Standardgenauigkeit ist '2'.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.unit">
-        <title>Ausgabe mit einer Maßeinheit</title>
+    <section xml:id="zend.measure.output.unit"><info><title>Ausgabe mit einer Maßeinheit</title></info>
+        
 
         <para>
             Die Funktion <methodname>getType()</methodname> gibt die aktuelle Maßeinheit zurück.
 
-            <example id="zend.measure.output.unit.example-1">
-                <title>Outputting units</title>
+            <example xml:id="zend.measure.output.unit.example-1"><info><title>Outputting units</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -106,10 +104,10 @@ echo $unit->getType();
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.output.localized">
-        <title>Ausgabe als lokalisierte Zeichenkette</title>
+    <section xml:id="zend.measure.output.localized"><info><title>Ausgabe als lokalisierte Zeichenkette</title></info>
+        
 
         <para>
             Die Ausgabe einer Zeichenkette in einem Format welches in dem Land des Benutzers üblich
@@ -117,5 +115,5 @@ echo $unit->getType();
             Beispiel zu "1.234.567,8" werden. Diese Funktionalität wird in einem zukünftigen Release
             unterstützt.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

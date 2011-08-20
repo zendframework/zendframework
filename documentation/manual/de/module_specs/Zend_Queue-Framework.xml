@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20522 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.framework">
-    <title>Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.framework"><info><title>Framework</title></info>
+    
 
     <para>
         <classname>Zend_Queue</classname> ist ein Proxy der die Details des Queue Services
@@ -66,8 +64,8 @@ foreach ($messages as $i => $message) {
         <classname>Zend_Queue_Exception</classname>.
     </para>
 
-    <sect2 id="zend.queue.framework.basics">
-        <title>Einführung</title>
+    <section xml:id="zend.queue.framework.basics"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> ist eine Proxy Klasse die einen Adapter
@@ -84,10 +82,10 @@ foreach ($messages as $i => $message) {
             Die Methoden <methodname>createQueue()</methodname>,
             <methodname>deleteQueue()</methodname> werden verwendet um Queues zu managen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.framework.support">
-        <title>Gemeinsamkeiten für alle Adapter</title>
+    <section xml:id="zend.queue.framework.support"><info><title>Gemeinsamkeiten für alle Adapter</title></info>
+        
 
         <para>
             Die Queue Services die von <classname>Zend_Queue</classname> unterstützt werden
@@ -174,5 +172,5 @@ foreach ($messages as $i => $message) {
             Die Methoden <methodname>createQueue()</methodname> und
             <methodname>deleteQueue()</methodname> werden verwendet um Queues zu managen.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

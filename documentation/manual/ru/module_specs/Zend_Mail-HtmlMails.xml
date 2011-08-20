@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.html-mails">
-    <title>Сообщение в формате HTML</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>Сообщение в формате HTML</title></info>
+    
     <para>
         Для отправки сообщения электронной почты в формате HTML устанавливайте
         тело сообщения через метод <methodname>setBodyHTML()</methodname> вместо
@@ -11,8 +10,8 @@
         HTML-формат, то будет автоматически сгенерировано MIME-сообщение типа
         <code>multipart/alternative</code>:
     </para>
-    <example id="zend.mail.html-mails.example-1">
-        <title>Отправка сообщения в формате HTML</title>
+    <example xml:id="zend.mail.html-mails.example-1"><info><title>Отправка сообщения в формате HTML</title></info>
+        
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('My Nice Test Text');
@@ -23,7 +22,4 @@ $mail->setSubject('TestSubject');
 $mail->send();
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

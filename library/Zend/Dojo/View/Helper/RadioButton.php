@@ -87,6 +87,6 @@ class RadioButton extends Dijit
             }
         }
 
-        return $this->view->formRadio($id, $value, $attribs, $options, $listsep);
+        return $this->view->broker('formRadio')->direct($id, $value, $attribs, $options, $listsep);
     }
 }

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect3 id="zend.controller.plugins.standard.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         <emphasis>ActionStack</emphasis> プラグインは、リクエストをスタックで管理します。
@@ -64,7 +64,4 @@
         そして、リクエストを未ディスパッチ状態に戻します
         (ディスパッチループの次の処理に強制的に進ませます)。
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

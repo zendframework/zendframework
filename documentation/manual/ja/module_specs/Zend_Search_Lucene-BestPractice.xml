@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.search.lucene.best-practice">
-    <title>ベストプラクティス</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.best-practice"><info><title>ベストプラクティス</title></info>
+    
 
-    <sect2 id="zend.search.lucene.best-practice.field-names">
-        <title>フィールド名</title>
+    <section xml:id="zend.search.lucene.best-practice.field-names"><info><title>フィールド名</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> では、フィールド名に関する制限は特にありません。
@@ -54,10 +52,10 @@ foreach ($hits as $hit) {
 }
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.indexing-performance">
-        <title>インデックス作成のパフォーマンス</title>
+    <section xml:id="zend.search.lucene.best-practice.indexing-performance"><info><title>インデックス作成のパフォーマンス</title></info>
+        
 
         <para>
             インデックス作成のパフォーマンスは、
@@ -265,10 +263,10 @@ $index->optimize();
             そこで、まず上の公式をもとに <emphasis>MergeFactor</emphasis> を調整し、
             それから <emphasis>MaxMergeDocs</emphasis> を微調整してパフォーマンスを最適化しましょう。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.shutting-down">
-        <title>インデックスの終了時処理</title>
+    <section xml:id="zend.search.lucene.best-practice.shutting-down"><info><title>インデックスの終了時処理</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> オブジェクトは、
@@ -331,10 +329,10 @@ $index->commit();
             "<link linkend="zend.search.lucene.advanced.static">応用: 静的プロパティとしてのインデックスの使用</link>"
             でも説明しています。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.unique-id">
-        <title>一意な ID によるドキュメントの取得</title>
+    <section xml:id="zend.search.lucene.best-practice.unique-id"><info><title>一意な ID によるドキュメントの取得</title></info>
+        
 
         <para>
             ドキュメントの一意な ID、たとえば URL やパス、データベース上の ID
@@ -382,10 +380,10 @@ foreach ($docIds as $id) {
 }
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.memory-usage">
-        <title>メモリの使用法</title>
+    <section xml:id="zend.search.lucene.best-practice.memory-usage"><info><title>メモリの使用法</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> は、比較的メモリを消費するモジュールです。
@@ -437,10 +435,10 @@ foreach ($docIds as $id) {
             インデックスの最適化 (完全最適化、部分最適化の両方)
             はストリーム上で行なわれるので、あまりメモリを消費しません。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.encoding">
-        <title>エンコーディング</title>
+    <section xml:id="zend.search.lucene.best-practice.encoding"><info><title>エンコーディング</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> は、内部で UTF-8 文字列を使用しています。
@@ -528,10 +526,10 @@ $hits = $index->find($queryStr);
             <link linkend="zend.search.lucene.charset">文字セット</link>
             についての説明を参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.best-practice.maintenance">
-        <title>インデックスの保守</title>
+    <section xml:id="zend.search.lucene.best-practice.maintenance"><info><title>インデックスの保守</title></info>
+        
 
         <para>
             まずはっきりさせておくべきなのは、<classname>Zend_Search_Lucene</classname> やその他の
@@ -563,5 +561,5 @@ $hits = $index->find($queryStr);
             そうすれば、障害からの復旧にかかる時間が短縮できます。
         </para>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

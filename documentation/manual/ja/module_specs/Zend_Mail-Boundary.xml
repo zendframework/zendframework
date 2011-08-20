@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20819 -->
-<sect1 id="zend.mail.boundary">
-    <title>MIME バウンダリの制御</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.boundary"><info><title>MIME バウンダリの制御</title></info>
+    
 
     <para>
         マルチパートメッセージで個々のパートを区切るための
@@ -12,8 +10,8 @@
         これが実現できます。
     </para>
 
-    <example id="zend.mail.boundary.example-1">
-        <title>MIME バウンダリの変更</title>
+    <example xml:id="zend.mail.boundary.example-1"><info><title>MIME バウンダリの変更</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -21,7 +19,4 @@ $mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // メッセージを作成します...
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

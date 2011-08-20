@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.create-a-project">
-    <title>Créer un projet</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.create-a-project"><info><title>Créer un projet</title></info>
+    
 
     <note>
         <para>
@@ -21,9 +21,9 @@
 
     <para>
         Pour démarrer avec <classname>Zend_Tool_Project</classname>, vous devez simplement créer
-        un projet. La création d'un projet est simple&#160;: allez où vous le souhaitez dans votre
+        un projet. La création d'un projet est simple : allez où vous le souhaitez dans votre
         système de fichiers, créez un dossier, allez dans le dossier créé, ensuite exécutez les
-        commandes suivantes&#160;:
+        commandes suivantes :
     </para>
 
     <para>
@@ -31,7 +31,7 @@
     </para>
 
     <para>
-        Optionnellement, vous pouvez créer un projet n'importe où en exéxcutant&#160;:
+        Optionnellement, vous pouvez créer un projet n'importe où en exéxcutant :
     </para>
 
     <para>
@@ -45,8 +45,8 @@
         comportement de l'action et du fournisseur.
     </para>
 
-    <table id="zend.tool.project.project-provider-table">
-        <title>Project Provider Options</title>
+    <table xml:id="zend.tool.project.project-provider-table"><info><title>Project Provider Options</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -74,4 +74,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
+</section>

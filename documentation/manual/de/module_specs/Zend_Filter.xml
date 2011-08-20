@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22722 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         Die <classname>Zend_Filter</classname> Komponente bietet ein Set von normalerweise benötigen
@@ -11,8 +9,8 @@
         können.
     </para>
 
-    <sect2 id="zend.filter.introduction.definition">
-        <title>Was ist ein Filter?</title>
+    <section xml:id="zend.filter.introduction.definition"><info><title>Was ist ein Filter?</title></info>
+        
 
         <para>
             In der physikalischen Welt wird ein Filter typischerweise für das entfernen von
@@ -42,10 +40,10 @@
             <classname>Zend_Filter</classname>, bedeutet einige Umwandlungen über Eingabedaten
             durchzuführen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.using">
-        <title>Normale Verwendung von Filtern</title>
+    <section xml:id="zend.filter.introduction.using"><info><title>Normale Verwendung von Filtern</title></info>
+        
 
         <para>
             Diese Filterdefinition bekanntgegeben zu haben bietet die Grundlage für
@@ -57,19 +55,19 @@
         <para>
             Nachfolgend ist ein grundsätzliches Beispiel der Verwendung eines Filters über zwei
             Eingabedaten, einem Und-Zeichen (<emphasis>&amp;</emphasis>) und einem Hochkommazeichen
-            (<emphasis>&quot;</emphasis>):
+            (<emphasis>"</emphasis>):
         </para>
 
         <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.static">
-        <title>Verwenden der statischen staticFilter() Methode</title>
+    <section xml:id="zend.filter.introduction.static"><info><title>Verwenden der statischen staticFilter() Methode</title></info>
+        
 
         <para>
             Wenn es unbequem ist einen gegebene Filterklasse zu Laden und eine Instanz des Filters
@@ -108,12 +106,11 @@ echo Zend_Filter::filterStatic('"',
         <para>
             Die <classname>Zend_Filter_Input</classname> Klasse erlaubt es also, mehrere Filter zu
             instanzieren und auszurufen, und wenn benötigt, den Prüfklassen diese Sets von
-            Eingabedaten zu verarbeiten. Siehe <link
-                linkend="zend.filter.input">Zend_Filter_Input</link>.
+            Eingabedaten zu verarbeiten. Siehe <link linkend="zend.filter.input">Zend_Filter_Input</link>.
         </para>
 
-        <sect3 id="zend.filter.introduction.static.namespaces">
-            <title>Namespaces</title>
+        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
+            
 
             <para>
                 Wenn man mit selbst definierten Filtern arbeitet, dann kann man an
@@ -183,11 +180,11 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.filter.introduction.caveats">
-        <title>Doppelt filtern</title>
+    <section xml:id="zend.filter.introduction.caveats"><info><title>Doppelt filtern</title></info>
+        
 
         <para>
             Wenn zwei Filter nacheinander verwendet werden muss man bedenken dass es oft nicht
@@ -221,5 +218,5 @@ $filtered = $filter2->filter($filtered)
             Filter angewendet wird der das Gegenteil zu sein scheint. Das hängt vom Filter und auch
             von der angegebenen Inhalt ab.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.cache.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Cache</classname> は、任意のデータをキャッシュするための一般的な手法を提供します。
@@ -25,8 +23,8 @@
         こともできます。
     </para>
 
-    <example id="zend.cache.introduction.example-1">
-        <title>Zend_Cache::factory() によるフロントエンドの取得</title>
+    <example xml:id="zend.cache.introduction.example-1"><info><title>Zend_Cache::factory() によるフロントエンドの取得</title></info>
+        
 
         <para>
             <methodname>Zend_Cache::factory()</methodname> は、適切なオブジェクトを作成してそれらを互いに結び付けます。
@@ -52,8 +50,8 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>複数の単語からなるフロントエンドやバックエンドについて</title>
+    <note><info><title>複数の単語からなるフロントエンドやバックエンドについて</title></info>
+        
 
         <para>
             'ZendPlatform' のように複数の単語からなるフロントエンドやバックエンドもあります。
@@ -63,8 +61,8 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example id="zend.cache.introduction.example-2">
-        <title>データベースへのクエリの結果のキャッシュ</title>
+    <example xml:id="zend.cache.introduction.example-2"><info><title>データベースへのクエリの結果のキャッシュ</title></info>
+        
 
         <para>
             これでフロントエンドが得られました。あらゆる種類のデータを保存できます
@@ -99,8 +97,8 @@ print_r($result);
 ]]></programlisting>
     </example>
 
-    <example id="zend.cache.introduction.example-3">
-        <title>Zend_Cache 出力フロントエンドによる出力のキャッシュ</title>
+    <example xml:id="zend.cache.introduction.example-3"><info><title>Zend_Cache 出力フロントエンドによる出力のキャッシュ</title></info>
+        
 
         <para>
             まず、出力をキャッシュしたい部分を何らかの条件式で「マークアップ」し、
@@ -166,7 +164,4 @@ echo 'これはキャッシュされません ('.time().').';
             さらに悪いことにはまったく無関係な場所に表示されてしまったりなどという問題が起こります。
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect2 id="zend.application.available-resources.session">
-    <title>Zend_Application_Resource_Session</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.session"><info><title>Zend_Application_Resource_Session</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Session</classname>
@@ -48,8 +46,8 @@
         <classname>Zend_Session</classname>を構成するために、<methodname>Zend_Session::setOptions()</methodname>に渡されます。
     </para>
 
-    <example id="zend.application.available-resources.session.configExample">
-        <title>セッション・リソース構成サンプル</title>
+    <example xml:id="zend.application.available-resources.session.configExample"><info><title>セッション・リソース構成サンプル</title></info>
+        
 
         <para>
             下記は、セッション・リソースを設定する方法を示す<acronym>INI</acronym>スニペット・サンプルです。
@@ -75,17 +73,16 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>最初にデータベースを起動してください!</title>
+    <note><info><title>最初にデータベースを起動してください!</title></info>
+        
 
         <para>
             もし<classname>Zend_Session_SaveHandler_DbTable</classname>セッション保存ハンドラを構成しているなら、
             それが機能するためのデータベース接続を最初に構成しなければなりません。
-            いずれでも、<link
-                linkend="zend.application.available-resources.db">Db</link>リソースを用いてこれを実行してください。
+            いずれでも、<link linkend="zend.application.available-resources.db">Db</link>リソースを用いてこれを実行してください。
             "<property>resources.db</property>" キーが "<property>resources.session</property>" キーよりも優先されることを確認してください。
             あるいは、データベースを初期化するあなた自身のリソースを書くことによって。
             そして、特にデフォルト<classname>Zend_Db_Table</classname>アダプタを設定します。
         </para>
     </note>
-</sect2>
+</section>

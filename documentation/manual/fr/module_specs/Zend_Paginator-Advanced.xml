@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.advanced">
-    <title>Utilisation avancée</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.advanced"><info><title>Utilisation avancée</title></info>
+    
 
-    <sect2 id="zend.paginator.advanced.adapters">
-        <title>Adaptateurs de source de données personnalisée</title>
+    <section xml:id="zend.paginator.advanced.adapters"><info><title>Adaptateurs de source de données personnalisée</title></info>
+        
 
         <para>
             À partir d'un moment, vous pourriez avoir besoin de parcourir un type de données
@@ -36,8 +34,7 @@
         </para>
 
         <para>
-            Si vous avez déjà utilisé l'interface SPL <ulink
-            url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
+            Si vous avez déjà utilisé l'interface SPL <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></link>,
             vous êtes familier avec <methodname>count()</methodname>. Utilisé avec
             <classname>Zend_Paginator</classname>, il s'agit du nombre total d'éléments dans la
             collection de données. De plus, l'instance <classname>Zend_Paginator</classname> fournit
@@ -62,10 +59,10 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
             <classname>Zend_Paginator_Adapter_Interface</classname>) pour avoir une idée de la
             manière d'implémenter votre propre adaptateur.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.scrolling-styles">
-        <title>Styles de défilement personnalisés</title>
+    <section xml:id="zend.paginator.advanced.scrolling-styles"><info><title>Styles de défilement personnalisés</title></info>
+        
 
         <para>
             Créer votre propre style de défilement requiert que vous implémentiez
@@ -114,10 +111,10 @@ $prefix = 'Mon_Paginator_StyleDefilement';
 $path   = 'Mon/Paginator/StyleDefilement/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
 ]]></programlisting></para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.caching">
-        <title>Fonctionnalité de mise en cache</title>
+    <section xml:id="zend.paginator.advanced.caching"><info><title>Fonctionnalité de mise en cache</title></info>
+        
 
         <para>
             <classname>Zend_Paginator</classname> peut mettre en cache les données qu'il a
@@ -212,10 +209,10 @@ $otherItems = $paginator->getItemsPerPage(4);
 var_dump($paginator->getPageItemCache());
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.advanced.aggregator">
-        <title>Zend_Paginator_AdapterAggregate Interface</title>
+    <section xml:id="zend.paginator.advanced.aggregator"><info><title>Zend_Paginator_AdapterAggregate Interface</title></info>
+        
 
         <para>
             Depending on your application you might want to paginate objects, whose internal data-structure
@@ -246,5 +243,5 @@ interface Zend_Paginator_AdapterAggregate
             recognized by both <code>Zend_Paginator::factory</code> and the constructor of Zend_Paginator and
             handled accordingly.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

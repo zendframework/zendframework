@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect3 id="zend.ldap.api.reference.zend-ldap-filter">
-    <title>Zend_Ldap_Filter</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <table id="zend.ldap.api.reference.zend-filter.table">
-        <title>Zend_Ldap_Filter API</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api.reference.zend-ldap-filter"><info><title>Zend_Ldap_Filter</title></info>
+    
+
+    <table xml:id="zend.ldap.api.reference.zend-filter.table"><info><title>Zend_Ldap_Filter API</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -131,8 +131,8 @@
                     <entry>
                         文字列のマスクからフィルタを作成。
                         <varname>$value</varname> 引数の全てが、
-                        <ulink url="http://php.net/sprintf">
-                        <methodname>sprintf()</methodname></ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/sprintf">
+                        <methodname>sprintf()</methodname></link>
                         関数を用いて <varname>$mask</varname> にエスケープされ、置換されます。
                     </entry>
                 </row>
@@ -229,4 +229,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect3>
+</section>

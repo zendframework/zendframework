@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20763 -->
-<sect1 id="zend.application.quick-start">
-    <title>Zend_Application クイックスタート</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.quick-start"><info><title>Zend_Application クイックスタート</title></info>
+    
 
     <para>
         <classname>Zend_Application</classname>で始める方法は2つあります、
@@ -18,8 +16,8 @@
         <link linkend="zend.application.quick-start.manual">読み飛ばして先に進み</link>たいことでしょう。
     </para>
 
-    <sect2 id="zend.application.quick-start.zend-tool">
-        <title>Zend_Toolの利用</title>
+    <section xml:id="zend.application.quick-start.zend-tool"><info><title>Zend_Toolの利用</title></info>
+        
 
         <para>
             <classname>Zend_Application</classname>を使い始めるために最も早い方法は、
@@ -148,13 +146,12 @@ $application->bootstrap()
 
         <para>
             クイックスタートを続けるには、
-            <link
-            linkend="zend.application.quick-start.resources">リソース節まで読み飛ばし</link>てください。
+            <link linkend="zend.application.quick-start.resources">リソース節まで読み飛ばし</link>てください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.manual">
-        <title>アプリケーションにZend_Applicationを追加する</title>
+    <section xml:id="zend.application.quick-start.manual"><info><title>アプリケーションにZend_Applicationを追加する</title></info>
+        
 
         <para>
             <classname>Zend_Application</classname>の基本は本当に単純です:
@@ -277,15 +274,14 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-        <note>
-            <title>mod_rewriteについて学ぶ</title>
+        <note><info><title>mod_rewriteについて学ぶ</title></info>
+            
 
             <para>
                 上記の書き換えルールでは、バーチャル・ホスト・ドキュメント・ルートの配下の
                 どのファイルでもアクセスが許可されます。
                 このように公開されたくないファイルがあるならば、より限定的なルールにしたいかもしれません。
-                <ulink
-                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">mod_rewriteについてより学ぶ</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">mod_rewriteについてより学ぶ</link>
                 ためにはApache ウェブサイトを訪れてください。
             </para>
         </note>
@@ -294,10 +290,10 @@ RewriteRule ^.*$ index.php [NC,L]
             ここまでで、
             <classname>Zend_Application</classname>をすっかり利用し始められるようになっています。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.resources">
-        <title>リソースの追加と作成</title>
+    <section xml:id="zend.application.quick-start.resources"><info><title>リソースの追加と作成</title></info>
+        
 
         <para>
             上記の手引きに従うと、ブートストラップ・クラスはフロントコントローラを利用します。
@@ -404,10 +400,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             このメソッドはアプリケーションを起動する際に自動的に実行されて、
             アプリケーションの必要性に従ってビューが初期化されることを確実にします。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.next-steps">
-        <title>Zend_Applicationを使った次のステップ</title>
+    <section xml:id="zend.application.quick-start.next-steps"><info><title>Zend_Applicationを使った次のステップ</title></info>
+        
 
         <para>
             上記は、<classname>Zend_Application</classname>で始めるようにさせるべきです。
@@ -415,5 +411,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ここから、リソース・メソッドや、再利用性を最大にするために、リソース・プラグイン・クラスを作成し始めるべきです。
             より学ぶために、引き続きご覧下さい！
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

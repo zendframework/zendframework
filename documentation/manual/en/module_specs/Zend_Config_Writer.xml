@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.config.writer.introduction">
-    <title>Zend_Config_Writer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.writer.introduction"><info><title>Zend_Config_Writer</title></info>
+    
 
     <para>
         <classname>Zend_Config_Writer</classname> gives you the ability to write config
@@ -40,7 +39,7 @@
     <para>
         The <acronym>INI</acronym> writer has two modes for rendering with regard to sections.
         By default the top-level configuration is always written into section names.
-        By calling <command>$writer->setRenderWithoutSections();</command> all options are written
+        By calling <command>$writer-&gt;setRenderWithoutSections();</command> all options are written
         into the global namespace of the <acronym>INI</acronym> file and no sections are applied.
     </para>
 
@@ -62,8 +61,8 @@
         on the root <classname>Zend_Config</classname> object.
     </para>
 
-    <example id="zend.config.writer.example.using">
-        <title>Using Zend_Config_Writer</title>
+    <example xml:id="zend.config.writer.example.using"><info><title>Using Zend_Config_Writer</title></info>
+        
 
         <para>
             This example illustrates the basic use of
@@ -108,8 +107,8 @@ $writer->write('config.xml', $config);
         </para>
     </example>
 
-    <example id="zend.config.writer.modifying">
-        <title>Modifying an Existing Config</title>
+    <example xml:id="zend.config.writer.modifying"><info><title>Modifying an Existing Config</title></info>
+        
 
         <para>
             This example demonstrates how to edit an existing config file.
@@ -132,8 +131,8 @@ $writer->write();
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Loading a Config File</title>
+    <note><info><title>Loading a Config File</title></info>
+        
 
         <para>
             When loading an existing config file for modifications it is very
@@ -149,7 +148,4 @@ $writer->write();
         build the configuration string. This method can be used from the outside also if you need
         to access the string-representation of the configuration data.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

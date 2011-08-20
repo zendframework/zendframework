@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.application.theory-of-operation">
-    <title>Teoría de Operación</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.theory-of-operation"><info><title>Teoría de Operación</title></info>
+    
 
     <para>
         Obtener una aplicación
@@ -165,8 +163,8 @@
         configuración.
     </para>
 
-    <sect2 id="zend.application.theory-of-operation.bootstrap">
-        <title>Bootstrapping</title>
+    <section xml:id="zend.application.theory-of-operation.bootstrap"><info><title>Bootstrapping</title></info>
+        
 
         <para>
             La segunda área de responsabilidad de
@@ -219,8 +217,8 @@ interface Zend_Application_Bootstrap_Bootstrapper
             familiarizarse.
        </para>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-methods">
-            <title>Métodos Recursos</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-methods"><info><title>Métodos Recursos</title></info>
+            
 
             <para>
                 La implementación de
@@ -307,10 +305,10 @@ $bootstrap->bootstrap(array('foo', 'bar));
             <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-plugins">
-            <title>Bootstraps que usan plugins de recursos</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-plugins"><info><title>Bootstraps que usan plugins de recursos</title></info>
+            
 
             <para>
                 Para hacer más re-utilizables sus bootstraps, hemos
@@ -471,10 +469,10 @@ $bootstrap->bootstrap(array('FrontController', 'Foo'));
 // Ejecute todos los métodos de recursos y plugins:
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.registry">
-            <title>Registro de Recursos</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.registry"><info><title>Registro de Recursos</title></info>
+            
 
             <para>
                 Muchos, si no todos, sus métodos de recursos o plugins
@@ -586,10 +584,10 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.dependency-tracking">
-            <title>Localización de las Dependencias</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.dependency-tracking"><info><title>Localización de las Dependencias</title></info>
+            
 
             <para>
                 Además de ejecutar los métodos de recursos métodos y plugins,
@@ -657,11 +655,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.application.theory-of-operation.resources">
-        <title>Plugins de Recursos</title>
+    <section xml:id="zend.application.theory-of-operation.resources"><info><title>Plugins de Recursos</title></info>
+        
 
         <para>
             <link linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">Como se señaló anteriormente</link>
@@ -770,5 +768,5 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
             se está
             asegurando así que usa el suyo en lugar del original.
        </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

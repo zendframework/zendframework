@@ -1,27 +1,27 @@
 <?php
 
 // Set used namespaces
-use Zend\Locale\Locale;
-use Zend\Registry;
-use Zend\Service\LiveDocx\Helper;
+use \Zend\Loader\StandardAutoloader;
+use \Zend\Locale\Locale;
+use \Zend\Service\LiveDocx\Helper;
 
 // Turn up error reporting
 error_reporting(E_ALL | E_STRICT);
 
-// Set up autoloader
+// Library base
 $base = dirname(dirname(dirname(dirname(__DIR__))));
+
+// Set up autoloader
 require_once "{$base}/library/Zend/Loader/StandardAutoloader.php";
-$loader = new \Zend\Loader\StandardAutoloader();
+$loader = new StandardAutoloader();
 $loader->registerNamespace('Zend', "{$base}/library/Zend");
 $loader->register();
 
 // Include utility class
 require_once "{$base}/demos/Zend/Service/LiveDocx/library/Zend/Service/LiveDocx/Helper.php";
 
-// Set default locale
-Locale::setDefault(Helper::LOCALE);
-$locale = new Locale(Locale::ZFDEFAULT);
-Registry::set('Zend_Locale', $locale);
+// Set fallback locale
+Locale::setFallback(Helper::LOCALE);
 
 // Ensure LiveDocx credentials are available
 if (false === Helper::credentialsAvailable()) {

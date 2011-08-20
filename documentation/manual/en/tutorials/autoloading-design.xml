@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.design">
-    <title>Goals and Design</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.autoloading.design.naming">
-        <title>Class Naming Conventions</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.design"><info><title>Goals and Design</title></info>
+    
+
+    <section xml:id="learning.autoloading.design.naming"><info><title>Class Naming Conventions</title></info>
+        
 
         <para>
             To understand autoloading in Zend Framework, first you need to understand the
@@ -12,7 +13,7 @@
         </para>
 
         <para>
-            Zend Framework has borrowed an idea from <ulink url="http://pear.php.net/">PEAR</ulink>,
+            Zend Framework has borrowed an idea from <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pear.php.net/">PEAR</link>,
             whereby class names have a 1:1 relationship with the filesystem. Simply put, the
             underscore character ("_") is replaced by a directory separator in order to resolve
             the path to the file, and then the suffix "<filename>.php</filename>" is added. For
@@ -25,8 +26,7 @@
         </para>
 
         <para>
-            Additionally, per <acronym>PEAR</acronym> as well as the <ulink
-                url="http://php.net/userlandnaming.tips">PHP project</ulink>, we use and recommend
+            Additionally, per <acronym>PEAR</acronym> as well as the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/userlandnaming.tips">PHP project</link>, we use and recommend
             using a vendor or project prefix for your code. What this means is that all classes you
             write will share a common class prefix; for example, all code in Zend Framework has the
             prefix "Zend_". This naming convention helps prevent naming collisions. Within Zend
@@ -38,10 +38,10 @@
             Zend Framework follows these simple rules internally, and our coding standards encourage
             that you do so as well for all library code.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.autoloading.design.autoloader">
-        <title>Autoloader Conventions and Design</title>
+    <section xml:id="learning.autoloading.design.autoloader"><info><title>Autoloader Conventions and Design</title></info>
+        
 
         <para>
             Zend Framework's autoloading support, provided primarily via
@@ -101,5 +101,5 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

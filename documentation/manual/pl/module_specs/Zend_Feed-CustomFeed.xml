@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.custom-feed">
-    <title>Własne klasy kanału i wpisu</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Własne klasy kanału i wpisu</title></info>
+    
 
     <para>
         Ostatecznie możesz rozszerzyć klasę <code>Zend_Feed</code> jeśli chcesz
@@ -14,8 +15,8 @@
         nie musi w ogóle martwić się o przestrzenie nazw.
     </para>
 
-    <example id="zend.feed.custom-feed.example.extending">
-        <title>Rozszerzanie klasy wpisu Atom z własnymi przestrzeniami nazw</title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Rozszerzanie klasy wpisu Atom z własnymi przestrzeniami nazw</title></info>
+        
         <programlisting role="php"><![CDATA[
 /**
  * Własna klasa wpisu może automatycznie nadawać adres URI (opcjonalnie)
@@ -71,8 +72,8 @@ class MyEntry extends Zend_Feed_Entry_Atom
     }
 
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             Teraz aby użyć tej klasy, musisz po prostu bezpośrednio utworzyć jej
             instancję i przypisać wartość właściwości <code>myUpdated</code>:
@@ -85,8 +86,8 @@ $entry->myUpdated = '2005-04-19T15:30';
 $entry->myUpdated();
 // wywołanie w stylu właściwości jest obsługiwane przez funkcję __get
 $entry->myUpdated;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-</sect1>
+</section>

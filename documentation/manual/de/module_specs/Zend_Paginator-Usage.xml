@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.usage">
-    <title>Verwendung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.usage"><info><title>Verwendung</title></info>
+    
 
-    <sect2 id="zend.paginator.usage.paginating">
-        <title>Seitendarstellung von Datensammlungen</title>
+    <section xml:id="zend.paginator.usage.paginating"><info><title>Seitendarstellung von Datensammlungen</title></info>
+        
 
         <para>
             Um Elemente in Seiten darzustellen muß <classname>Zend_Paginator</classname> einen
@@ -14,8 +12,8 @@
             Framework standardmäßig ausgeliefert:
         </para>
 
-        <table id="zend.paginator.usage.paginating.adapters">
-            <title>Adapter für Zend_Paginator</title>
+        <table xml:id="zend.paginator.usage.paginating.adapters"><info><title>Adapter für Zend_Paginator</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -35,8 +33,7 @@
                         <entry>DbSelect</entry>
 
                         <entry>
-                            Verwendet eine Instanz von <link
-                                linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>,
+                            Verwendet eine Instanz von <link linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>,
                             welche ein Array zurückgibt
                         </entry>
                     </row>
@@ -45,8 +42,7 @@
                         <entry>DbTableSelect</entry>
 
                         <entry>
-                            Verwendet eine Instanz von <link
-                                linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
+                            Verwendet eine Instanz von <link linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
                             welche eine Instanz von
                             <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgibt. Das
                             gibt zusätzliche Information pber das Ergebnisset, wie z.B. die Namen
@@ -58,8 +54,7 @@
                         <entry>Iterator</entry>
 
                         <entry>
-                            Verwendet eine Instanz von <ulink
-                                url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
+                            Verwendet eine Instanz von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></link>
                         </entry>
                     </row>
 
@@ -172,10 +167,10 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
         <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.usage.dbselect">
-        <title>Die Adapter DbSelect und DbTableSelect</title>
+    <section xml:id="zend.paginator.usage.dbselect"><info><title>Die Adapter DbSelect und DbTableSelect</title></info>
+        
 
         <para>
             Die Verwendung der meisten Adapter ist recht zielgerichtet. Trotzdem benötigen die
@@ -232,10 +227,10 @@ $paginator = new Zend_Paginator($adapter);
             und großen Datenmengen kann ein ähnlicher Weg eine signifikante Performance
             Verbesserung ergeben.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.paginator.rendering">
-        <title>Seiten mit View Skripten darstellen</title>
+    <section xml:id="zend.paginator.rendering"><info><title>Seiten mit View Skripten darstellen</title></info>
+        
 
         <para>
             Das View Skript wird verwendet um die Seitenelemente darzustellen (wenn
@@ -244,8 +239,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
 
         <para>
-            Weil <classname>Zend_Paginator</classname> Das <acronym>SPL</acronym> Interface <ulink
-                url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></ulink>
+            Weil <classname>Zend_Paginator</classname> Das <acronym>SPL</acronym> Interface <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><classname>IteratorAggregate</classname></link>
             integriert, ist das Durchlaufen von Elementen und deren Darstellung einfach.
         </para>
 
@@ -283,9 +277,7 @@ $paginator = new Zend_Paginator($adapter);
         </para>
 
         <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.paginator.usage.rendering.control.png"
-                format="PNG"/>
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.paginator.usage.rendering.control.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -301,8 +293,8 @@ $paginator = new Zend_Paginator($adapter);
             Es gibt view Scrolling Stile die mit dem Zend Framework geliefert werden:
         </para>
 
-        <table id="zend.paginator.usage.rendering.scrolling-styles">
-            <title>Scrolling Stile für Zend_Paginator</title>
+        <table xml:id="zend.paginator.usage.rendering.scrolling-styles"><info><title>Scrolling Stile für Zend_Paginator</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -406,8 +398,8 @@ $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
         </note>
 
-        <sect3 id="zend.paginator.usage.rendering.example-controls">
-            <title>Beispiel der Seitenkontrolle</title>
+        <section xml:id="zend.paginator.usage.rendering.example-controls"><info><title>Beispiel der Seitenkontrolle</title></info>
+            
 
             <para>
                 Das folgende Beispiel von Seitenkontrollen wird Ihnen hoffentlich helfen um erstmals
@@ -428,10 +420,10 @@ Siehe http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <!-- Vorheriger Seitenlink -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Vorher
+    < Vorher
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Vorher</span> |
+  <span class="disabled">< Vorher</span> |
 <?php endif; ?>
 
 <!-- Anzahl an Seitenlinks -->
@@ -448,10 +440,10 @@ Siehe http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <!-- Nächster Seitenlink -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Nächster &gt;
+    Nächster >
   </a>
 <?php else: ?>
-  <span class="disabled">Nächster &gt;</span>
+  <span class="disabled">Nächster ></span>
 <?php endif; ?>
 </div>
 <?php endif; ?>
@@ -483,19 +475,19 @@ of <?php echo $this->totalItemCount; ?>
 <!-- Vorheriger Seitenlink -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Vorheriger
+    < Vorheriger
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Vorheriger</span> |
+  <span class="disabled">< Vorheriger</span> |
 <?php endif; ?>
 
 <!-- Next page link -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Nächster &gt;
+    Nächster >
   </a> |
 <?php else: ?>
-  <span class="disabled">Nächster &gt;</span> |
+  <span class="disabled">Nächster ></span> |
 <?php endif; ?>
 
 <!-- Last page link -->
@@ -537,17 +529,17 @@ $('paginationControl').observe('change', function() {
 })
 </script>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.paginator.usage.rendering.properties">
-            <title>Tabelle von Eigenschaften</title>
+        <section xml:id="zend.paginator.usage.rendering.properties"><info><title>Tabelle von Eigenschaften</title></info>
+            
 
             <para>
                 Die folgenden Optionen von für eine Seitenkontrolle bei View Partials vorhanden:
             </para>
 
-            <table id="zend.paginator.usage.rendering.properties.table">
-                <title>Eigenschaften die bei View Partials vorhanden sind</title>
+            <table xml:id="zend.paginator.usage.rendering.properties.table"><info><title>Eigenschaften die bei View Partials vorhanden sind</title></info>
+                
 
                 <tgroup cols="3">
                     <thead>
@@ -657,6 +649,6 @@ $('paginationControl').observe('change', function() {
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

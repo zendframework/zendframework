@@ -1,19 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.internals">
-    <title>Zend_Tool_Project Internals</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.tool.project.internals.xml-structure">
-        <title>Zend_Tool_Project Internal Xml Structure</title>
 
-        <para></para>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.internals"><info><title>Zend_Tool_Project Internals</title></info>
+    
+
+    <section xml:id="zend.tool.project.internals.xml-structure"><info><title>Zend_Tool_Project Internal Xml Structure</title></info>
+        
+
+        <para/>
         <!-- @todo -->
-    </sect2>
+    </section>
 
-    <sect2 id="zend.tool.project.internals.extending">
-        <title>Zend_Tool_Project Internal Extending</title>
+    <section xml:id="zend.tool.project.internals.extending"><info><title>Zend_Tool_Project Internal Extending</title></info>
+        
 
-        <para></para>
+        <para/>
         <!-- @todo -->
-    </sect2>
-</sect1>
+    </section>
+</section>

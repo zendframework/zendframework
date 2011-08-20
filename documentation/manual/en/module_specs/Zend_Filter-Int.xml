@@ -1,23 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.int">
-    <title>Int</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.int"><info><title>Int</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Int</classname> allows you to transform a sclar value which contains
         into an integer.
     </para>
 
-    <sect3 id="zend.filter.set.int.options">
-        <title>Supported options for Zend_Filter_Int</title>
+    <section xml:id="zend.filter.set.int.options"><info><title>Supported options for Zend_Filter_Int</title></info>
+        
 
         <para>
             There are no additional options for <classname>Zend_Filter_Int</classname>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.int.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.int.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
@@ -32,5 +31,5 @@ print $filter->filter('-4 is less than 0');
         <para>
             This will return '-4'.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

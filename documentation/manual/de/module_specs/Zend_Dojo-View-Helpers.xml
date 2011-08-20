@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22256 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.dojo.view.dijit">
-    <title>Dijit-Spezifische View Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dijit"><info><title>Dijit-Spezifische View Helfer</title></info>
+    
 
     <para>
         Aus dem Dojo Handbuch: "Dijit ist ein Widget System das über Dojo gelegt wurde.". Dijit
@@ -162,23 +160,22 @@
         registriert werden.
     </para>
 
-    <example id="zend.dojo.view.dijit.prefixpath">
-        <title>Registrierung des Präfix Pfades zu den Dojo Viewhelfern</title>
+    <example xml:id="zend.dojo.view.dijit.prefixpath"><info><title>Registrierung des Präfix Pfades zu den Dojo Viewhelfern</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
     </example>
 
-    <sect3 id="zend.dojo.view.dijit.layout">
-        <title>Dijit Layout Elemente</title>
+    <section xml:id="zend.dojo.view.dijit.layout"><info><title>Dijit Layout Elemente</title></info>
+        
 
         <para>
             Die Familie der <command>dijit.layout</command> Elemente sind für die Erstellung von
             eigenen, vorhersagbaren Layouts für die eigene Site. Für alle Fragen über die generelle
-            Verwendung <ulink
-                url="http://dojotoolkit.org/reference-guide/dijit/layout.html">lesen Sie
-                hierüber im Dojo Handbuch nach</ulink>.
+            Verwendung <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dijit/layout.html">lesen Sie
+                hierüber im Dojo Handbuch nach</link>.
         </para>
 
         <para>
@@ -376,8 +373,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             </listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.view.dijit.layout.borderexample">
-            <title>Beispiel eines BorderContainer Layout Dijits</title>
+        <example xml:id="zend.dojo.view.dijit.layout.borderexample"><info><title>Beispiel eines BorderContainer Layout Dijits</title></info>
+            
 
             <para>
                 BorderContainers, speziell wenn Sie mit der Fähigkeit gekoppelt werden Inhalte zu
@@ -419,17 +416,16 @@ echo $view->contentPane(
 echo $view->borderContainer()->captureEnd('masterLayout');
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dijit.form">
-        <title>Dijit Formularelemente</title>
+    <section xml:id="zend.dojo.view.dijit.form"><info><title>Dijit Formularelemente</title></info>
+        
 
         <para>
             Dojo's Formularprüfung und Eingabe Dijits sind im <command>dijit.form</command> Baum.
             Für zusätzliche Informationen über die generelle Verwendung dieser Elemente, sowie der
-            akzeptierten Parameter <ulink
-                url="http://dojotoolkit.org/reference-guide/dijit/form.html">besuchen
-                Sie bitte die dijit.form Dokumentation</ulink>.
+            akzeptierten Parameter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dijit/form.html">besuchen
+                Sie bitte die dijit.form Dokumentation</link>.
         </para>
 
         <para>
@@ -637,13 +633,12 @@ echo $view->currencyTextBox(
 );
 ]]></programlisting>
 
-                <note>
-                    <title>Probleme mit Builds</title>
+                <note><info><title>Probleme mit Builds</title></info>
+                    
 
                     <para>
-                        es gibt aktuell <ulink
-                            url="http://trac.dojotoolkit.org/ticket/7183">bekannte Probleme bei der
-                            Verwendung der CurrencyTextBox mit Build Layern</ulink>. Ein bekannter
+                        es gibt aktuell <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://trac.dojotoolkit.org/ticket/7183">bekannte Probleme bei der
+                            Verwendung der CurrencyTextBox mit Build Layern</link>. Ein bekannter
                         Work-Around ist sicherzustellen dass das http-equiv Metatag des
                         Content-Types des Dokument auf das Zeichenset utf-8 gestellt wird, was mit
                         folgendem Aufruf gemacht wird:
@@ -686,22 +681,20 @@ echo $view->dateTextBox(
                     <acronym>WYSIGYG</acronym> Editor über den Benutzer Inhalte erstellen oder
                     bearbeiten können. <command>dijit.Editor</command> ist ein pluginfähiger,
                     erweiterbarer Editor mit einer Vielzahl an Parametern die für die Anpassung
-                    verwendet werden können; siehe <ulink
-                        url="http://dojotoolkit.org/reference-guide/dijit/Editor.html">in
-                        die dijit.Editor Dokumentation</ulink> für weitere Details.
+                    verwendet werden können; siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dijit/Editor.html">in
+                        die dijit.Editor Dokumentation</link> für weitere Details.
                 </para>
 
                 <programlisting language="php"><![CDATA[
 echo $view->editor('foo');
 ]]></programlisting>
 
-                <note>
-                    <title>Das Editor Dijit verwendet standardmäßig div</title>
+                <note><info><title>Das Editor Dijit verwendet standardmäßig div</title></info>
+                    
 
                     <para>
                         Das Editor dijit verwendet standardmäßig ein <acronym>HTML</acronym>
-                        <acronym>DIV</acronym>. Die <ulink
-                            url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">Dokumentation</ulink>
+                        <acronym>DIV</acronym>. Die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">Dokumentation</link>
                         für <command>dijit._editor.RichText</command> zeigt dass es potentielle
                         Sicherheits Probleme bereiten kann wenn man es auf ein
                         <acronym>HTML</acronym> <acronym>TEXTAREA</acronym> erstellt.
@@ -1176,10 +1169,10 @@ echo $view->validationTextBox(
 ]]></programlisting>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dijit.custom">
-        <title>Eigene Dijits</title>
+    <section xml:id="zend.dojo.view.dijit.custom"><info><title>Eigene Dijits</title></info>
+        
 
         <para>
             Wenn man viel in Dojo herumtaucht, wird man sehr bald selbst eigene Dijits schreiben,
@@ -1205,8 +1198,8 @@ echo $view->validationTextBox(
             als sein "params" Argument übergibt.
         </para>
 
-        <example id="zend.dojo.view.dijit.custom.example">
-            <title>Verwendung von CustomDijit um ein dojox.layout.ContentPane darzustellen</title>
+        <example xml:id="zend.dojo.view.dijit.custom.example"><info><title>Verwendung von CustomDijit um ein dojox.layout.ContentPane darzustellen</title></info>
+            
 
             <para>
                 <command>dojox.layout.ContentPane</command> ist eine Next-Generation Erweiterung von
@@ -1280,5 +1273,5 @@ class My_View_Helper_FooContentPane
                 <classname>CustomDijit</classname> korrekt funktionieren.
             </para>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

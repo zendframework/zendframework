@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.session">
-    <title>Zend_Application_Resource_Session</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.session"><info><title>Zend_Application_Resource_Session</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Session</classname> allows you to configure
@@ -47,8 +46,8 @@
         <classname>Zend_Session</classname>.
     </para>
 
-    <example id="zend.application.available-resources.session.configExample">
-        <title>Sample Session resource configuration</title>
+    <example xml:id="zend.application.available-resources.session.configExample"><info><title>Sample Session resource configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> snippet showing how to configure the session
@@ -74,19 +73,18 @@ resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Bootstrap your database first!</title>
+    <note><info><title>Bootstrap your database first!</title></info>
+        
 
         <para>
             If you are configuring the
             <classname>Zend_Session_SaveHandler_DbTable</classname> session save
             handler, you must first configure your database connection for it to
-            work. Do this by either using the <link
-                linkend="zend.application.available-resources.db">Db</link>
+            work. Do this by either using the <link linkend="zend.application.available-resources.db">Db</link>
             resource -- and make sure the "<property>resources.db</property>" key comes prior to
             the "<property>resources.session</property>" key -- or by writing your own resource
             that initializes the database, and specifically sets the default
             <classname>Zend_Db_Table</classname> adapter.
         </para>
     </note>
-</sect2>
+</section>

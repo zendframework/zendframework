@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 use Zend\Dojo\View\Helper\VerticalSlider as VerticalSliderHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_VerticalSlider.
@@ -57,7 +57,7 @@ class VerticalSliderTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -149,7 +149,7 @@ class VerticalSliderTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.form.VerticalSlider")/', $html);
-        $this->assertNotNull($this->view->dojo()->getDijit('elementId-slider'));
+        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId-slider'));
     }
 
     public function testShouldCreateOnChangeAttributeByDefault()

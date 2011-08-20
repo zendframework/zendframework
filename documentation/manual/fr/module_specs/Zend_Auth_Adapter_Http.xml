@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.http">
-    <title>Adaptateur d'authentification HTTP</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.http"><info><title>Adaptateur d'authentification HTTP</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.http.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.auth.adapter.http.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_Http</classname> fournit une implémentation des
             authentifications <acronym>HTTP</acronym>
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</ulink>et
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic</link>et
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</link>,
             au regard de la norme
-            <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>. Digest est une
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc2617">RFC-2617</link>. Digest est une
             méthode d'authentification <acronym>HTTP</acronym> basée sur Basic, mais qui augmente
             la sécurité en fournissant un moyen d'authentification sans transmettre le mot de passe
             en clair, sur le réseau.
         </para>
 
         <para>
-            <emphasis>Caractéristiques principales&#160;:</emphasis>
+            <emphasis>Caractéristiques principales :</emphasis>
         </para>
 
         <itemizedlist>
             <listitem>
-                <para>Support des méthodes Basic et Digest&#160;;</para>
+                <para>Support des méthodes Basic et Digest ;</para>
             </listitem>
             <listitem>
                 <para>
                     Propose tous les des schémas de challenge, le client peut répondre avec
-                    le schéma qu'il supporte&#160;;
+                    le schéma qu'il supporte ;
                 </para>
             </listitem>
             <listitem>
-                <para>Support de l'authentification Proxy&#160;;</para>
+                <para>Support de l'authentification Proxy ;</para>
             </listitem>
             <listitem>
                 <para>
@@ -46,27 +44,27 @@
 
         <para>
             Il y a quelques caractéristiques de la <acronym>RFC-2617</acronym> qui ne sont pas
-            encore supportées&#160;:
+            encore supportées :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     Le "Nonce tracking", mécanisme qui évite les attaques par
-                    répétitions&#160;;
+                    répétitions ;
                 </para>
             </listitem>
             <listitem>
-                <para>Authentification avec vérification d'intégrité ("auth-int")&#160;;</para>
+                <para>Authentification avec vérification d'intégrité ("auth-int") ;</para>
             </listitem>
             <listitem>
                 <para>En-tête <acronym>HTTP</acronym> "Authentication-Info".</para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.design_overview">
-        <title>Fonctionnement</title>
+    <section xml:id="zend.auth.adapter.design_overview"><info><title>Fonctionnement</title></info>
+        
 
         <para>
             Cette adaptateur utilise 2 sous-composants, la classe d'authentification
@@ -77,19 +75,19 @@
             Ils sont alors comparés aux valeurs envoyées par le client pour déterminer une
             éventuelle correspondance.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.configuration_options">
-        <title>Options de configuration</title>
+    <section xml:id="zend.auth.adapter.configuration_options"><info><title>Options de configuration</title></info>
+        
 
         <para>
             La classe <classname>Zend_Auth_Adapter_Http</classname> requière un tableau de
             configuration lors de sa construction. Il y a plusieurs options de configuration
-            disponibles, dont certaines requises&#160;:
+            disponibles, dont certaines requises :
         </para>
 
-        <table id="zend.auth.adapter.configuration_options.table">
-            <title>Liste des options de configuration</title>
+        <table xml:id="zend.auth.adapter.configuration_options.table"><info><title>Liste des options de configuration</title></info>
+            
 
             <tgroup cols="3">
                 <thead>
@@ -106,7 +104,7 @@
                         <entry>
                             Détermine les schémas d'authentification que l'adaptateur va
                             accepter du client. Ce doit être une liste séparée par des espaces,
-                            contenant <emphasis>'basic'</emphasis> et&#160;/&#160;ou
+                            contenant <emphasis>'basic'</emphasis> et / ou
                             <emphasis>'digest'</emphasis>.
                         </entry>
                     </row>
@@ -114,7 +112,7 @@
                         <entry><emphasis><property>realm</property></emphasis></entry>
                         <entry>Oui</entry>
                         <entry>
-                            Fournit le nom de l'authentification ("realm")&#160;;
+                            Fournit le nom de l'authentification ("realm") ;
                             chaque nom d'utilisateur doit être unique, par nom
                             d'authentification.
                         </entry>
@@ -164,10 +162,10 @@
                 le paramètre "nonce tracking" sera supporté.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.resolvers">
-        <title>Résolveurs</title>
+    <section xml:id="zend.auth.adapter.http.resolvers"><info><title>Résolveurs</title></info>
+        
 
         <para>
             Le travail du résolveur consiste à récupérer un nom d'utilisateur
@@ -185,15 +183,15 @@
             classe peut être écrite, grâce à l'interface.
         </para>
 
-        <sect3 id="zend.auth.adapter.http.resolvers.file">
-            <title>Résolveur fichiers</title>
+        <section xml:id="zend.auth.adapter.http.resolvers.file"><info><title>Résolveur fichiers</title></info>
+            
 
             <para>
                 Cette classe est très simple. Son constructeur ne prend qu'un paramètre qui
                 définit le nom du fichier cible. Un accesseur existe aussi. Sa méthode
                 <methodname>resolve()</methodname> traverse le fichier texte à la recherche de la
                 ligne qui correspond au "username" et au "realm". La syntaxe est
-                similaire aux fichiers htpasswd d'Apache&#160;:
+                similaire aux fichiers htpasswd d'Apache :
             </para>
 
             <programlisting language="txt"><![CDATA[
@@ -210,7 +208,7 @@
             </para>
 
             <para>
-                Pour créer des résolveurs de fichiers séparés, utilisez&#160;:
+                Pour créer des résolveurs de fichiers séparés, utilisez :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -231,14 +229,14 @@ $resolver->setFile($path);
             <para>
                 Si le chemin donné n'est pas lisible, une exception est envoyée.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.auth.adapter.http.basic_usage">
-        <title>Usage général&#160;:</title>
+    <section xml:id="zend.auth.adapter.http.basic_usage"><info><title>Usage général :</title></info>
+        
 
         <para>
-            Tout d'abord, créez un tableau de configuration avec les options requises&#160;:
+            Tout d'abord, créez un tableau de configuration avec les options requises :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -259,7 +257,7 @@ $config = array(
         </para>
 
         <para>
-            Ensuite, créez un objet de <classname>Zend_Auth_Adapter_Http</classname>&#160;:
+            Ensuite, créez un objet de <classname>Zend_Auth_Adapter_Http</classname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -268,7 +266,7 @@ $adapter = new Zend_Auth_Adapter_Http($config);
 
         <para>
             Comme nous supportons les 2 modes Basic et Digest, nous avons besoin de deux
-            résolveurs différents&#160;:
+            résolveurs différents :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -284,7 +282,7 @@ $adapter->setDigestResolver($digestResolver);
 
         <para>
             Enfin, nous procédons à la demande d'authentification. L'adaptateur a besoin de
-            deux objets "Request" et "Response"&#160;:
+            deux objets "Request" et "Response" :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -299,5 +297,5 @@ if (!$result->isValid()) {
     // Mauvais username/password, ou action annulée
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.session.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         L'équipe Auth de Zend Framework apprécie considérablement votre feedback et vos
-        contributions sur notre liste émail : <ulink
-        url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>.
+        contributions sur notre liste émail : <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>.
     </para>
 
     <para>
@@ -20,12 +19,10 @@
         seulement partagées avec le client quand le code source du côté serveur rend volontairement
         disponible les données par l'intermédiaire d'une réponse à une demande du client. Dans le
         cadre de ce composant et de cette documentation, le terme "données de session" se rapportent
-        aux données du côté serveur stockées dans <ulink
-        url="http://www.php.net/manual/fr/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></ulink>,
+        aux données du côté serveur stockées dans <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/fr/reserved.variables.php#reserved.variables.session"><varname>$_SESSION</varname></link>,
         contrôlées par <classname>Zend_Session</classname>, et individuellement manipulées par des
         objets <classname>Zend_Session_Namespace</classname>. <emphasis>Les espaces de noms de
-        session</emphasis> permettent d'accéder aux données de session en utilisant les <ulink
-        url="http://fr.wikipedia.org/wiki/Espace_de_noms">espaces de noms</ulink> classiques
+        session</emphasis> permettent d'accéder aux données de session en utilisant les <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.wikipedia.org/wiki/Espace_de_noms">espaces de noms</link> classiques
         implémentés logiquement en tant que groupes nommés de tableaux associatifs, indexés par des
         chaînes (semblables aux tableaux habituels de <acronym>PHP</acronym>).
     </para>
@@ -44,8 +41,7 @@
         <classname>Zend_Session_Namespace</classname> pour stocker les informations liées aux
         utilisateurs authentifiés. Puisque <classname>Zend_Session</classname> emploie les fonctions
         normales de l'extension session de <acronym>PHP</acronym>, tous les options et réglages familiers de
-        configuration s'appliquent (voir <ulink
-        url="http://www.php.net/manual/fr/ref.session.php">http://www.php.net/session</ulink>), avec
+        configuration s'appliquent (voir <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/fr/ref.session.php">http://www.php.net/session</link>), avec
         en bonus la facilité d'accès par une interface orientée objet et un comportement par défaut
         fournissant les meilleures pratiques et une intégration sans problèmes dans Zend Framework.
         Ainsi, un id standard de session <acronym>PHP</acronym>, stocké soit dans un cookie côté client ou incorporé
@@ -53,8 +49,7 @@
     </para>
 
     <para>
-        La fonction de gestion de session par défaut <ulink
-        url="http://www.php.net/manual/fr/function.session-set-save-handler.php">session_set_save_handler</ulink>
+        La fonction de gestion de session par défaut <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/fr/function.session-set-save-handler.php">session_set_save_handler</link>
         ne maintient pas cette association dans un faisceau (NDT. : "cluster") de serveurs sous
         certaines conditions car les données de session sont sauvegardées seulement sur le serveur
         qui répond à la requête. Si une requête peut être réalisée par un serveur différent de celui
@@ -62,8 +57,7 @@
         données de session (si elles ne sont pas disponibles dans un système de fichiers en réseau).
         Une liste additionnelle de gestionnaire de session sera fournie, dès que possible. Les
         membres de la communauté sont encouragés à suggérer et soumettre des gestionnaires de
-        sauvegardes à la liste <ulink
-        url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>. Un gestionnaire de
+        sauvegardes à la liste <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</link>. Un gestionnaire de
         sauvegarde compatible <classname>Zend_Db</classname> a été signalé à la liste.
     </para>
-</sect1>
+</section>

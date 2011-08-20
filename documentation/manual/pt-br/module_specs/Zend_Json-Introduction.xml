@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.json.introduction">
-    <title>Introdução</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Introdução</title></info>
+    
 
     <para>
         <classname>Zend_Json</classname> provê métodos convenientes para serialização do
         <acronym>PHP</acronym> nativo para <acronym>JSON</acronym> e a descodificação
         <acronym>JSON</acronym> para <acronym>PHP</acronym> nativo. Para mais informações sobre
-        <acronym>JSON</acronym>, <ulink url="http://www.json.org/">visite o site do projeto
-        <acronym>JSON</acronym></ulink>.
+        <acronym>JSON</acronym>, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">visite o site do projeto
+        <acronym>JSON</acronym></link>.
     </para>
 
     <para>
@@ -31,7 +31,4 @@
         vantajosa função que resulta em mais dados específicos do aplicativo de
         processamento de dados.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

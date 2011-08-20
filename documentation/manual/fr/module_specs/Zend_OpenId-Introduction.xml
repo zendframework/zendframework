@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20843 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.openid.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_OpenId</classname> est le composant de Zend Framework qui propose une
         <acronym>API</acronym> simple pour l'utilisation de la technologie OpenID dans son applicatif internet.
     </para>
 
-    <sect2 id="zend.openid.introduction.what">
-        <title>Qu'est ce qu'OpenID ?</title>
+    <section xml:id="zend.openid.introduction.what"><info><title>Qu'est ce qu'OpenID ?</title></info>
+        
 
         <para>
             OpenID est un ensemble de protocole permettant une gestion centralisée de
@@ -24,15 +24,13 @@
         </para>
 
         <para>
-            Visitez donc <ulink url="http://www.openid.net/">le site officiel de
-            OpenID</ulink> pour plus d'information, voyez aussi <ulink
-            url="http://www.openidbook.com/">le OpenID Book, par Rafeeq Rehman</ulink> ou <ulink
-            url="http://www.openidfrance.fr">OpenIDFrance</ulink>.
+            Visitez donc <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">le site officiel de
+            OpenID</link> pour plus d'information, voyez aussi <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openidbook.com/">le OpenID Book, par Rafeeq Rehman</link> ou <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openidfrance.fr">OpenIDFrance</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.how">
-        <title>Comment cela fonctionne-t-il ?</title>
+    <section xml:id="zend.openid.introduction.how"><info><title>Comment cela fonctionne-t-il ?</title></info>
+        
 
         <para>
             Le but de <classname>Zend_OpenId</classname> est d'implémenter le protocole
@@ -40,8 +38,7 @@
         </para>
 
         <para>
-            <inlinegraphic align="center" fileref="figures/zend.openid.protocol.jpg"
-            format="JPEG" scale="100" valign="middle" width="559" />
+            <inlinemediaobject><imageobject><imagedata align="center" fileref="figures/zend.openid.protocol.jpg" format="JPEG" scale="100" valign="middle" width="559"/></imageobject></inlinemediaobject>
         </para>
 
         <orderedlist>
@@ -63,8 +60,7 @@
             <listitem>
                 <para>
                     Le service protégé par OpenID établit optionnellement une connexion avec
-                    le serveur OpenID en utilisant des clés <ulink
-                    url="http://fr.wikipedia.org/wiki/%C3%89change_de_cl%C3%A9s_Diffie-Hellman">Diffie-Hellman</ulink>.
+                    le serveur OpenID en utilisant des clés <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.wikipedia.org/wiki/%C3%89change_de_cl%C3%A9s_Diffie-Hellman">Diffie-Hellman</link>.
                     Les deux parties partagent alors un "secret" utilisé pour signer et vérifier les
                     messages suivants.
                 </para>
@@ -117,10 +113,10 @@
                 </para>
             </listitem>
         </orderedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.structure">
-        <title>Zend_OpenId Structure</title>
+    <section xml:id="zend.openid.introduction.structure"><info><title>Zend_OpenId Structure</title></info>
+        
 
         <para>
             <classname>Zend_OpenId</classname> contient deux sous-classes.
@@ -139,16 +135,15 @@
 
         <note>
             <para>
-                <classname>Zend_OpenId</classname> utilise <ulink
-                url="http://www.php.net/manual/fr/ref.gmp.php">l'extension GMP</ulink>, lorsqu'elle
+                <classname>Zend_OpenId</classname> utilise <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/fr/ref.gmp.php">l'extension GMP</link>, lorsqu'elle
                 est disponible. Activez cette extension si possible, ceci améliorera les
                 performances avec <classname>Zend_OpenId</classname>.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.standards">
-        <title>Standards OpenID supportés</title>
+    <section xml:id="zend.openid.introduction.standards"><info><title>Standards OpenID supportés</title></info>
+        
 
         <para>
             Le composant <classname>Zend_OpenId</classname> est conforme aux standards
@@ -172,5 +167,5 @@
                 <para>OpenID Simple Registration Extension version 1.1 draft 1</para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

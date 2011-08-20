@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16767 -->
-<!-- Reviewed: no -->
-<sect1 id="introduction.installation">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Telepítés</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.installation"><info><title>Telepítés</title></info>
+
+    
 
     <para>
         Lásd a <link linkend="requirements">követelmények függeléket</link> a
@@ -20,16 +20,16 @@
     <itemizedlist>
         <listitem>
             <para>
-                <ulink url="http://framework.zend.com/download/latest">Az utolsó
-                stabil kiadás letöltése.</ulink> Ez a mind
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/latest">Az utolsó
+                stabil kiadás letöltése.</link> Ez a mind
                 <filename>.zip</filename>, mind <filename>.tar.gz</filename>
                 alakban elérhető változat jó választás az új felhasználóknak.
             </para>
         </listitem>
         <listitem>
             <para>
-                <ulink url="http://framework.zend.com/download/snapshot">A
-                legutóbbi éjjeli pillanatkép letöltése.</ulink> Azok számára,
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/download/snapshot">A
+                legutóbbi éjjeli pillanatkép letöltése.</link> Azok számára,
                 akik elég bátrak az élen járni, az éjjeli pillanatképek
                 reprezentálják a Zend Framework fejlesztésének legutóbbi
                 lépéseit. A pillanatképek elérhetők mind kizárólag angol,
@@ -41,7 +41,7 @@
         </listitem>
         <listitem>
             <para>
-                <ulink url="http://subversion.tigris.org">Subversion</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://subversion.tigris.org">Subversion</link>
                 (<acronym>SVN</acronym>) ügyfél használata. A Zend Framework
                 nyílt forrású szoftver, és a fejlesztéséhez használt
                 Subversion tárolója nyílvánosan hozzáférhető. Egy
@@ -53,31 +53,31 @@
                 kiadások megjelennek.
             </para>
             <para>
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
-                Az exportálás</ulink> egy adott átirat letöltése a
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
+                Az exportálás</link> egy adott átirat letöltése a
                 munkapéldányokban létrejövő <filename>.svn</filename> könyvtárak
                 nélkül.
             </para>
             <para>
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">
-                Egy munkapéldány letöltése</ulink> szükséges a közreműködéshez.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">
+                Egy munkapéldány letöltése</link> szükséges a közreműködéshez.
                 A munkapéldányok bármikor naprakészre hozhatók az
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">
-                svn update</ulink>, a változtatások pedig felküldhetők az
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">
+                svn update</link>, a változtatások pedig felküldhetők az
                 <acronym>SVN</acronym> tárolónkba az
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
-                svn commit</ulink> paranccsal.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
+                svn commit</link> paranccsal.
             </para>
             <para>
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
-                Egy külső meghatározás</ulink> igen kényelmes azon fejlesztők
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
+                Egy külső meghatározás</link> igen kényelmes azon fejlesztők
                 számára, akik már használnak SVN-t alkalmazásaik
                 munkapéldányainak kezeléséhez.
             </para>
                 <para>
                     Az URL a Zend Framework SVN tárolójának törzséhez:
-                    <ulink url="http://framework.zend.com/svn/framework/trunk">
-                    http://framework.zend.com/svn/framework/trunk</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/svn/framework/trunk">
+                    http://framework.zend.com/svn/framework/trunk</link>.
                 </para>
         </listitem>
     </itemizedlist>
@@ -85,17 +85,17 @@
     <para>
         Ha rendelkezésre áll a Zend Framework egy példánya, az alkalmazásnak
         hozzá kell férnie a keretrendszer osztályaihoz.
-        <ulink url="http://www.php.net/manual/hu/configuration.changes.php">Noha
-        ez sokféleképp megoldható</ulink>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/hu/configuration.changes.php">Noha
+        ez sokféleképp megoldható</link>,
         a <acronym>PHP</acronym>
-        <ulink url="http://www.php.net/manual/hu/ini.core.php#ini.include-path">
-        include_path</ulink>-nak tartalmaznia kell a Zend Framework
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/hu/ini.core.php#ini.include-path">
+        include_path</link>-nak tartalmaznia kell a Zend Framework
         osztálykönyvtárát.
     </para>
 
     <para>
-        A Zend egy <ulink url="http://framework.zend.com/docs/quickstart">
-        gyorstalpalót</ulink> kínál a minél gyorsabb indulás érdekében. Ez egy
+        A Zend egy <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/docs/quickstart">
+        gyorstalpalót</link> kínál a minél gyorsabb indulás érdekében. Ez egy
         kiváló útja elkezdeni tanulni a keretrendszert valós vilégbéli példákra
         építve.
     </para>
@@ -107,4 +107,4 @@
         kézikönyvet alkotnak.
     </para>
 
-</sect1>
+</section>

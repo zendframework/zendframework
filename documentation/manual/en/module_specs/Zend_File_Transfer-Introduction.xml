@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.file.transfer.introduction">
-    <title>Zend_File_Transfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.file.transfer.introduction"><info><title>Zend_File_Transfer</title></info>
+    
 
     <para>
         <classname>Zend_File_Transfer</classname> provides extensive support for file uploads and
@@ -11,8 +10,8 @@
         WEBDAV and more.
     </para>
 
-    <note>
-        <title>Limitation</title>
+    <note><info><title>Limitation</title></info>
+        
 
         <para>
             The current implementation of <classname>Zend_File_Transfer</classname> is limited to
@@ -24,8 +23,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Forms</title>
+    <note><info><title>Forms</title></info>
+        
 
         <para>
             When you are using <classname>Zend_Form</classname> you should use the
@@ -44,8 +43,8 @@
         example:
     </para>
 
-    <example id="zend.file.transfer.introduction.example">
-        <title>Simple Form for Uploading Files</title>
+    <example xml:id="zend.file.transfer.introduction.example"><info><title>Simple Form for Uploading Files</title></info>
+        
 
         <para>
             This example illustrates basic file uploading.
@@ -62,8 +61,7 @@
 ]]></programlisting>
 
         <para>
-           For convenience, you can use <link
-               linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> instead of
+           For convenience, you can use <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> instead of
            building the <acronym>HTML</acronym> manually.
         </para>
 
@@ -93,8 +91,8 @@ if (!$adapter->receive()) {
         </para>
     </example>
 
-    <note>
-        <title>Attention</title>
+    <note><info><title>Attention</title></info>
+        
 
         <para>
             This example is suitable only for demonstrating the basic <acronym>API</acronym> of
@@ -104,8 +102,8 @@ if (!$adapter->receive()) {
         </para>
     </note>
 
-    <sect2 id="zend.file.transfer.introduction.adapters">
-        <title>Supported Adapters for Zend_File_Transfer</title>
+    <section xml:id="zend.file.transfer.introduction.adapters"><info><title>Supported Adapters for Zend_File_Transfer</title></info>
+        
 
         <para>
             <classname>Zend_File_Transfer</classname> is designed to support a variety of adapters
@@ -113,10 +111,10 @@ if (!$adapter->receive()) {
             download and even forward (upload one adapter and download with another adapter at the
             same time) files.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.introduction.options">
-        <title>Options for Zend_File_Transfer</title>
+    <section xml:id="zend.file.transfer.introduction.options"><info><title>Options for Zend_File_Transfer</title></info>
+        
 
         <para>
             <classname>Zend_File_Transfer</classname> and its adapters support different options.
@@ -136,10 +134,10 @@ if (!$adapter->receive()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.introduction.checking">
-        <title>Checking Files</title>
+    <section xml:id="zend.file.transfer.introduction.checking"><info><title>Checking Files</title></info>
+        
 
         <para>
             <classname>Zend_File_Transfer</classname> has several methods that check for various
@@ -178,8 +176,8 @@ if (!$adapter->receive()) {
             </listitem>
         </itemizedlist>
 
-        <example id="zend.file.transfer.introduction.checking.example">
-            <title>Checking Files</title>
+        <example xml:id="zend.file.transfer.introduction.checking.example"><info><title>Checking Files</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
@@ -204,10 +202,10 @@ foreach ($files as $file => $info) {
 $upload->receive();
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.introduction.informations">
-        <title>Additional File Informations</title>
+    <section xml:id="zend.file.transfer.introduction.informations"><info><title>Additional File Informations</title></info>
+        
 
         <para>
             <classname>Zend_File_Transfer</classname> can return additional information on files.
@@ -264,8 +262,8 @@ $upload->receive();
             will truncate the file path when set to <constant>FALSE</constant>.
         </para>
 
-        <example id="zend.file.transfer.introduction.informations.example1">
-            <title>Getting the Filename</title>
+        <example xml:id="zend.file.transfer.introduction.informations.example1"><info><title>Getting the Filename</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
@@ -294,8 +292,8 @@ $names = $upload->getFileName('foo');
             <property>useByteString</property> option to <constant>FALSE</constant>.
         </para>
 
-        <example id="zend.file.transfer.introduction.informations.example.getfilesize">
-            <title>Getting the size of a file</title>
+        <example xml:id="zend.file.transfer.introduction.informations.example.getfilesize"><info><title>Getting the size of a file</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
@@ -310,8 +308,8 @@ $size = $upload->getFileSize();
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Client given filesize</title>
+        <note><info><title>Client given filesize</title></info>
+            
 
             <para>
                 Note that the filesize which is given by the client is not seen as save input.
@@ -323,12 +321,12 @@ $size = $upload->getFileSize();
         <para>
             <methodname>getHash()</methodname> accepts the name of a hash algorithm as first
             parameter. For a list of known algorithms refer to
-            <ulink url="http://php.net/hash_algos">PHP's hash_algos method</ulink>. If you don't
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/hash_algos">PHP's hash_algos method</link>. If you don't
             specify an algorithm, the <emphasis>crc32</emphasis> algorithm will be used by default.
         </para>
 
-        <example id="zend.file.transfer.introduction.informations.example2">
-            <title>Getting the hash of a file</title>
+        <example xml:id="zend.file.transfer.introduction.informations.example2"><info><title>Getting the hash of a file</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
@@ -342,8 +340,8 @@ $names = $upload->getHash('crc32', 'foo');
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Return value</title>
+        <note><info><title>Return value</title></info>
+            
 
             <para>
                 Note that if the given file or form name contains more than one file, the returned
@@ -356,8 +354,8 @@ $names = $upload->getHash('crc32', 'foo');
             file was uploaded it returns an array, otherwise a string.
         </para>
 
-        <example id="zend.file.transfer.introduction.informations.getmimetype">
-            <title>Getting the mimetype of a file</title>
+        <example xml:id="zend.file.transfer.introduction.informations.getmimetype"><info><title>Getting the mimetype of a file</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
@@ -370,8 +368,8 @@ $names = $upload->getMimeType('foo');
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Client given mimetype</title>
+        <note><info><title>Client given mimetype</title></info>
+            
 
             <para>
                 Note that the mimetype which is given by the client is not seen as save input.
@@ -380,8 +378,8 @@ $names = $upload->getMimeType('foo');
             </para>
         </note>
 
-        <warning>
-            <title>Possible exception</title>
+        <warning><info><title>Possible exception</title></info>
+            
 
             <para>
                 Note that this method uses the fileinfo extension if it is available. If this
@@ -390,8 +388,8 @@ $names = $upload->getMimeType('foo');
             </para>
         </warning>
 
-        <warning>
-            <title>Original data within $_FILES</title>
+        <warning><info><title>Original data within $_FILES</title></info>
+            
 
             <para>
                 Due to security reasons also the original data within $_FILES will be overridden
@@ -405,10 +403,10 @@ $names = $upload->getMimeType('foo');
                 <classname>Zend_File_Transfer</classname>.
             </para>
         </warning>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.file.transfer.introduction.uploadprogress">
-        <title>Progress for file uploads</title>
+    <section xml:id="zend.file.transfer.introduction.uploadprogress"><info><title>Progress for file uploads</title></info>
+        
 
         <para>
             <classname>Zend_File_Transfer</classname> can give you the actual state of a fileupload
@@ -436,8 +434,8 @@ $names = $upload->getMimeType('foo');
             there are 2 official ways to handle this.
         </para>
 
-        <sect3 id="zend.file.transfer.introduction.uploadprogress.progressadapter">
-            <title>Using a progressbar adapter</title>
+        <section xml:id="zend.file.transfer.introduction.uploadprogress.progressadapter"><info><title>Using a progressbar adapter</title></info>
+            
 
             <para>
                 You can use the convinient <emphasis>Zend_ProgressBar</emphasis> to get the actual
@@ -448,12 +446,11 @@ $names = $upload->getMimeType('foo');
                 To archive this, you have to add the wished
                 <emphasis>Zend_ProgressBar_Adapter</emphasis> to
                 <methodname>getProgress()</methodname> when you are calling it the first time. For
-                details about the right adapter to use, look into the chapter <link
-                    linkend="zend.progressbar.adapters">Zend_ProgressBar Standard Adapters</link>.
+                details about the right adapter to use, look into the chapter <link linkend="zend.progressbar.adapters">Zend_ProgressBar Standard Adapters</link>.
             </para>
 
-            <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
-                <title>Using the progressbar adapter to retrieve the actual state</title>
+            <example xml:id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1"><info><title>Using the progressbar adapter to retrieve the actual state</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $adapter = new Zend_ProgressBar_Adapter_Console();
@@ -470,10 +467,10 @@ while (!$upload['done']) {
                 The complete handling is done by <methodname>getProgress()</methodname> for you in
                 the background.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.file.transfer.introduction.uploadprogress.manually">
-            <title>Using getProgress() manually</title>
+        <section xml:id="zend.file.transfer.introduction.uploadprogress.manually"><info><title>Using getProgress() manually</title></info>
+            
 
             <para>
                 You can also work manually with <methodname>getProgress()</methodname> without the
@@ -563,8 +560,8 @@ while (!$upload['done']) {
                 The following example shows a possible manual usage:
             </para>
 
-            <example id="zend.file.transfer.introduction.uploadprogress.manually.example1">
-                <title>Manual usage of the file progress</title>
+            <example xml:id="zend.file.transfer.introduction.uploadprogress.manually.example1"><info><title>Manual usage of the file progress</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress();
@@ -577,8 +574,8 @@ while (!$upload['done']) {
 ]]></programlisting>
             </example>
 
-            <note>
-                <title>Knowing the file to get the progress from</title>
+            <note><info><title>Knowing the file to get the progress from</title></info>
+                
 
                 <para>
                     The above example works when your upload identified is set to 'progress_key'.
@@ -587,9 +584,6 @@ while (!$upload['done']) {
                     initial call.
                 </para>
             </note>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+        </section>
+    </section>
+</section>

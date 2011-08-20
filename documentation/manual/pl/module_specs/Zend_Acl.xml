@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Wprowadzenie</title></info>
+    
 
     <para>
         <classname>Zend_Acl</classname> zapewnia lekką i elastyczną obsługę
@@ -43,8 +42,8 @@
         przydzielany dostęp do chronionych obiektów (zasobów).
     </para>
 
-    <sect2 id="zend.acl.introduction.resources">
-        <title>O zasobach</title>
+    <section xml:id="zend.acl.introduction.resources"><info><title>O zasobach</title></info>
+        
         <para>
             Tworzenie zasobu w Zend_Acl jest bardzo proste. <classname>Zend_Acl</classname> zapewnia
             interfejs <classname>Zend_Acl_Resource_Interface</classname> aby ułatwić
@@ -78,10 +77,10 @@
             reguły, które mają zastosowanie do wszystkich przywilejów, lub dla
             konkretnych przywilejów dla jednego lub więcej zasobów.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.roles">
-        <title>O rolach</title>
+    <section xml:id="zend.acl.introduction.roles"><info><title>O rolach</title></info>
+        
         <para>
             Tak jak tworzenie zasobów, tworzenie ról także jest bardzo proste.
             Wszystkie role muszą implementować interfejs <classname>Zend_Acl_Role_Interface</classname>
@@ -107,8 +106,8 @@
             złożoności. Poniższy przykład ilustruje niejasny przypadek
             dziedziczenia i pokazuje w jaki sposób <classname>Zend_Acl</classname> go rozwiązuje.
         </para>
-        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Dziedziczenie po wielu rolach</title>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Dziedziczenie po wielu rolach</title></info>
+            
             <para>
                 Poniższy kod definiuje trzy podstawowe role, po których inne role
                 mogą dziedziczyć - "guest", "member",
@@ -142,7 +141,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 Z tego względu, że nie ma zdefiniowanych reguł konkretnie dla
                 roli "someUser" oraz dla zasobu "someResource",
                 <classname>Zend_Acl</classname> musi szukać zasad, ktore mogą być zdefiniowane dla ról,
-                po których dziedziczy rola "someUser>". Wpierw
+                po których dziedziczy rola "someUser&gt;". Wpierw
                 sprawdzana jest rola "admin", a dla niej nie ma
                 zdefiniowanej żadnej reguły dostępu. Następnie sprawdzana jest
                 rola "member" i <classname>Zend_Acl</classname> znajduje zdefiniowaną
@@ -174,10 +173,10 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 celu znalezienia ról pasujących do zapytania autoryzacyjnego.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.creating">
-        <title>Tworzenie list kontroli dostępu</title>
+    <section xml:id="zend.acl.introduction.creating"><info><title>Tworzenie list kontroli dostępu</title></info>
+        
 
         <para>
             <acronym>ACL</acronym> może reprezentować dowolny zestaw fizycznych lub wirtualnych
@@ -198,10 +197,10 @@ $acl = new Zend_Acl();
                 zasobów.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.role_registry">
-        <title>Rejestrowanie ról</title>
+    <section xml:id="zend.acl.introduction.role_registry"><info><title>Rejestrowanie ról</title></info>
+        
 
         <para>
             System Zarządzania Treścią prawie zawsze potrzebuje hierarchii
@@ -221,8 +220,8 @@ $acl = new Zend_Acl();
             uprawnień. Uprawnienia mogą być wyrażone w taki sposób:
         </para>
 
-        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-          <title>Kontrola dostępu dla przykładowego CMS</title>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Kontrola dostępu dla przykładowego CMS</title></info>
+          
           <tgroup cols="3">
             <thead>
               <row>
@@ -286,10 +285,10 @@ $acl->addRole(new Zend_Acl_Role('editor'), 'staff');
 $acl->addRole(new Zend_Acl_Role('administrator'));
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.defining">
-        <title>Definiowanie kontroli dostępu</title>
+    <section xml:id="zend.acl.introduction.defining"><info><title>Definiowanie kontroli dostępu</title></info>
+        
 
         <para>
             Teraz gdy <acronym>ACL</acronym> zawiera stosowne role, możemy ustalić reguły, które
@@ -350,10 +349,10 @@ $acl->allow('administrator');
             <methodname>allow()</methodname> oznaczają, że reguły dotyczą wszystkich zasobów.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.querying">
-        <title>Zapytania ACL</title>
+    <section xml:id="zend.acl.introduction.querying"><info><title>Zapytania ACL</title></info>
+        
 
         <para>
             Posiadamy teraz elastyczne <acronym>ACL</acronym>, ktore mogą być użyte do określenia,
@@ -396,5 +395,5 @@ echo $acl->isAllowed('administrator', null, 'update') ?
 // dozwolone ponieważ administrator ma wszystkie uprawnienia
 ]]></programlisting>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

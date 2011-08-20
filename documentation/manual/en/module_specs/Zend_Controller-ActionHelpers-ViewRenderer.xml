@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.viewrenderer">
-    <title>ViewRenderer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.viewrenderer"><info><title>ViewRenderer</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <emphasis>ViewRenderer</emphasis> helper is designed to satisfy the
@@ -73,7 +72,7 @@
             <para>
                 The <emphasis>ViewRenderer</emphasis> is enabled by default. You may
                 disable it via the front controller <emphasis>noViewRenderer</emphasis>
-                param (<command>$front->setParam('noViewRenderer', true);</command>) or
+                param (<command>$front-&gt;setParam('noViewRenderer', true);</command>) or
                 removing the helper from the helper broker stack
                 (<methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>).
             </para>
@@ -115,10 +114,10 @@ $viewRenderer->setView($view)
                 </listitem>
             </itemizedlist>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.api">
-        <title>API</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.api"><info><title>API</title></info>
+        
 
         <para>
             At its most basic usage, you simply instantiate the
@@ -434,8 +433,8 @@ $viewRenderer =
             </listitem>
         </itemizedlist>
 
-        <note>
-            <title>Default Lookup Conventions</title>
+        <note><info><title>Default Lookup Conventions</title></info>
+            
 
             <para>
                 The <emphasis>ViewRenderer</emphasis> does some path normalization to
@@ -611,13 +610,13 @@ $viewRenderer =
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.basicusage">
-        <title>Basic Usage Examples</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.basicusage"><info><title>Basic Usage Examples</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-1">
-            <title>Basic Usage</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-1"><info><title>Basic Usage</title></info>
+            
 
             <para>
                 At its most basic, you simply initialize and register the
@@ -662,8 +661,8 @@ class Foo_BarController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Naming Conventions: Word Delimiters in Controller and Action Names</title>
+        <note><info><title>Naming Conventions: Word Delimiters in Controller and Action Names</title></info>
+            
 
             <para>
                 If your controller or action name is composed of several
@@ -693,8 +692,8 @@ class Foo_BarController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-2">
-            <title>Disabling Autorender</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-2"><info><title>Disabling Autorender</title></info>
+            
 
             <para>
                 For some actions or controllers, you may want to turn off the
@@ -738,8 +737,8 @@ class Bar_BatController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-3">
-            <title>Choosing a Different View Script</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-3"><info><title>Choosing a Different View Script</title></info>
+            
 
             <para>
                 Some situations require that you render a different script than
@@ -784,8 +783,8 @@ class Foo_BarController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
-            <title>Modifying the Registered View</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-4"><info><title>Modifying the Registered View</title></info>
+            
 
             <para>
                 What if you need to modify the view object -- for instance,
@@ -814,20 +813,20 @@ class Foo_BarController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.advancedusage">
-        <title>Advanced Usage Examples</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.advancedusage"><info><title>Advanced Usage Examples</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1">
-            <title>Changing the Path Specifications</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1"><info><title>Changing the Path Specifications</title></info>
+            
 
             <para>
                 In some circumstances, you may decide that the default path
                 specifications do not fit your site's needs. For instance, you
                 may want to have a single template tree to which you may then
                 give access to your designers (this is very typical when using
-                <ulink url="http://smarty.php.net/">Smarty</ulink>, for
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://smarty.php.net/">Smarty</link>, for
                 instance). In such a case, you may want to hardcode the view
                 base path specification, and create an alternate specification
                 for the action view script paths themselves.
@@ -861,8 +860,8 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
-            <title>Rendering Multiple View Scripts from a Single Action</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2"><info><title>Rendering Multiple View Scripts from a Single Action</title></info>
+            
 
             <para>
                 At times, you may need to render multiple view scripts from a
@@ -892,8 +891,5 @@ class SearchController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

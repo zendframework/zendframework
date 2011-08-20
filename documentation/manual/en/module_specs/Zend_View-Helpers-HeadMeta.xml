@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headmeta">
-    <title>HeadMeta Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>HeadMeta Helper</title></info>
+    
 
     <para>
         The <acronym>HTML</acronym> <emphasis>&lt;meta&gt;</emphasis> element is used to provide
@@ -106,8 +105,8 @@
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder helper</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headmeta.basicusage">
-        <title>HeadMeta Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>HeadMeta Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify a new meta tag at any time. Typically, you
@@ -179,7 +178,4 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

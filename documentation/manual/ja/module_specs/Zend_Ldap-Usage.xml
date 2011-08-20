@@ -1,29 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.ldap.usage">
-    <title>利用シナリオ</title>
-    <sect2 id="zend.ldap.usage.authentication">
-        <title>認証シナリオ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.usage"><info><title>利用シナリオ</title></info>
+    
+    <section xml:id="zend.ldap.usage.authentication"><info><title>認証シナリオ</title></info>
+        
 
-        <sect3 id="zend.ldap.usage.authentication.openldap">
-            <title>OpenLDAP</title>
+        <section xml:id="zend.ldap.usage.authentication.openldap"><info><title>OpenLDAP</title></info>
+            
             <para/>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.authentication.activedirectory">
-            <title>ActiveDirectory</title>
+        <section xml:id="zend.ldap.usage.authentication.activedirectory"><info><title>ActiveDirectory</title></info>
+            
             <para/>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.ldap.usage.basic">
-        <title>基本的なCRUD操作</title>
+    <section xml:id="zend.ldap.usage.basic"><info><title>基本的なCRUD操作</title></info>
+        
 
-        <sect3 id="zend.ldap.usage.basic.retrieve">
-            <title>LDAPからデータを取得</title>
-            <example id="zend.ldap.usage.basic.retrieve.dn">
-                <title>そのDNで項目を取得</title>
+        <section xml:id="zend.ldap.usage.basic.retrieve"><info><title>LDAPからデータを取得</title></info>
+            
+            <example xml:id="zend.ldap.usage.basic.retrieve.dn"><info><title>そのDNで項目を取得</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -42,8 +40,8 @@ array(
 ]]></programlisting>
             </example>
 
-            <example id="zend.ldap.usage.basic.retrieve.exists">
-                <title>与えられたDNが存在するかチェック</title>
+            <example xml:id="zend.ldap.usage.basic.retrieve.exists"><info><title>与えられたDNが存在するかチェック</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -52,8 +50,8 @@ $isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
 ]]></programlisting>
             </example>
 
-            <example id="zend.ldap.usage.basic.retrieve.counting-children">
-                <title>与えられたDNの子供を数える</title>
+            <example xml:id="zend.ldap.usage.basic.retrieve.counting-children"><info><title>与えられたDNの子供を数える</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -63,8 +61,8 @@ $childrenCount = $ldap->countChildren(
 ]]></programlisting>
         </example>
 
-            <example id="zend.ldap.usage.basic.retrieve.search">
-                <title>LDAPツリーを検索</title>
+            <example xml:id="zend.ldap.usage.basic.retrieve.search"><info><title>LDAPツリーを検索</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -77,12 +75,12 @@ foreach ($result as $item) {
 }
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.basic.add">
-            <title>LDAPにデータを追加</title>
-            <example>
-                <title>LDAPに新規項目を追加</title>
+        <section xml:id="zend.ldap.usage.basic.add"><info><title>LDAPにデータを追加</title></info>
+            
+            <example><info><title>LDAPに新規項目を追加</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -94,12 +92,12 @@ Zend_Ldap_Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
 $ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
 ]]></programlisting>
                 </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.basic.delete">
-            <title>LDAPからデータを削除</title>
-            <example>
-                <title>LDAPから存在する項目を削除</title>
+        <section xml:id="zend.ldap.usage.basic.delete"><info><title>LDAPからデータを削除</title></info>
+            
+            <example><info><title>LDAPから存在する項目を削除</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -107,12 +105,12 @@ $ldap->bind();
 $ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
 ]]></programlisting>
                 </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.ldap.usage.basic.update">
-            <title>LDAPを更新</title>
-            <example>
-                <title>LDAPに存在する項目を更新</title>
+        <section xml:id="zend.ldap.usage.basic.update"><info><title>LDAPを更新</title></info>
+            
+            <example><info><title>LDAPに存在する項目を更新</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -125,17 +123,17 @@ Zend_Ldap_Attribute::setPassword($hm,
 $ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
 ]]></programlisting>
                 </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.ldap.usage.extended">
-        <title>拡張された操作</title>
+    <section xml:id="zend.ldap.usage.extended"><info><title>拡張された操作</title></info>
+        
 
-        <sect3 id="zend.ldap.usage.extended.copy-and-move">
-            <title>LDAPで項目をコピーまたは移動</title>
+        <section xml:id="zend.ldap.usage.extended.copy-and-move"><info><title>LDAPで項目をコピーまたは移動</title></info>
+            
 
-            <example id="zend.ldap.usage.extended.copy-and-move.copy">
-                <title>LDAP項目をその全ての派生物と共に再帰的にコピー</title>
+            <example xml:id="zend.ldap.usage.extended.copy-and-move.copy"><info><title>LDAP項目をその全ての派生物と共に再帰的にコピー</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -146,10 +144,10 @@ $ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
 ]]></programlisting>
             </example>
 
-            <example id="zend.ldap.usage.extended.copy-and-move.move-to-subtree">
-                <title>
+            <example xml:id="zend.ldap.usage.extended.copy-and-move.move-to-subtree"><info><title>
                     LDAP項目をその全ての派生物と共に再帰的に異なるサブツリーに移動
-                </title>
+                </title></info>
+                
                 <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -160,6 +158,6 @@ $ldap->moveToSubtree('cn=Hugo Müller,ou=People,dc=my,dc=local',
 ]]></programlisting>
             </example>
 
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

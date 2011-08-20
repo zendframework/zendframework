@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22247 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.alpha">
-    <title>Alpha</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.alpha"><info><title>Alpha</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Alpha</classname> ist ein Filter der den String
@@ -11,8 +9,8 @@
         erlaubt.
     </para>
 
-    <sect3 id="zend.filter.set.alpha.options">
-        <title>Unterstützte Optionen für Zend_Filter_Alpha</title>
+    <section xml:id="zend.filter.set.alpha.options"><info><title>Unterstützte Optionen für Zend_Filter_Alpha</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Filter_Alpha</classname> unterstützt:
@@ -27,10 +25,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.alpha.basic">
-        <title>Einfache Verwendung</title>
+    <section xml:id="zend.filter.set.alpha.basic"><info><title>Einfache Verwendung</title></info>
+        
 
         <para>
             Ein einfaches Beispiel der Verwendung ist anbei:
@@ -55,10 +53,10 @@ print $filter->filter('Das ist (mein) Inhalt: 123');
                 <classname>Zend_Locale</classname> erkannt.
             </para>
         </note>
-    </sect3>
+    </section>
 
-     <sect3 id="zend.filter.set.alpha.whitespace">
-         <title>Leerzeichen erlauben</title>
+     <section xml:id="zend.filter.set.alpha.whitespace"><info><title>Leerzeichen erlauben</title></info>
+         
 
         <para>
             <classname>Zend_Filter_Alpha</classname> kann auch Leerzeichen erlauben. Dies kann
@@ -86,8 +84,5 @@ print $filter->filter('Das ist (mein) Inhalt: 123');
             Um den aktuellen Wert von <property>allowWhiteSpace</property> zu erhalten kann die
             Methode <methodname>getAllowWhiteSpace()</methodname> verwendet werden.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

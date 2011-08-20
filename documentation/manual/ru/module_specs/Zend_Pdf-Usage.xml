@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.usage">
-    <title>Пример использования модуля Zend_Pdf <!-- Zend_Pdf module usage example.--></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Пример использования модуля Zend_Pdf <!-- Zend_Pdf module usage example.--></title></info>
+    
     <para>
     Этот раздел дает пример использования модуля.
 <!--
@@ -22,8 +23,8 @@
 -->
     </para>
 
-    <example>
-        <title>Демонстрация использования модуля Zend_Pdf<!-- Zend_Pdf module usage demo.--></title>
+    <example><info><title>Демонстрация использования модуля Zend_Pdf<!-- Zend_Pdf module usage demo.--></title></info>
+        
         <programlisting language="php"><![CDATA[<?php
 /**
  * @package Zend_Pdf
@@ -159,7 +160,4 @@ if (isset($argv[2])) {
 ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

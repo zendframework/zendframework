@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-layout">
-    <title>Create A Layout</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-layout"><info><title>Create A Layout</title></info>
+    
 
     <para>
         You may have noticed that the view scripts in the previous sections were
@@ -16,12 +15,9 @@
     </para>
 
     <para>
-        There are two design patterns that Zend Framework uses to implement layouts: <ulink
-            url="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</ulink> and
-        <ulink
-            url="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
-            View</ulink>. <emphasis>Two Step View</emphasis> is usually associated with the <ulink
-            url="http://www.martinfowler.com/eaaCatalog/transformView.html">Transform View</ulink>
+        There are two design patterns that Zend Framework uses to implement layouts: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</link> and
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
+            View</link>. <emphasis>Two Step View</emphasis> is usually associated with the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/transformView.html">Transform View</link>
         pattern; the basic idea is that your application view creates a representation that is then
         injected into the master view for final transformation. The <emphasis>Composite
             View</emphasis> pattern deals with a view made of one or more atomic, application views.
@@ -219,12 +215,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         rendered page.
     </para>
 
-    <note>
-        <title>Checkpoint</title>
+    <note><info><title>Checkpoint</title></info>
+        
 
         <para>
             Now go to "http://localhost" and check out the source. You should see your XHTML header,
             head, title, and body sections.
         </para>
     </note>
-</sect1>
+</section>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.http.client.adapters">
-    <title>Zend_Http_Client - Connection Adapters</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client.adapters"><info><title>Zend_Http_Client - Connection Adapters</title></info>
+    
 
-    <sect2 id="zend.http.client.adapters.overview">
-        <title>Overview</title>
+    <section xml:id="zend.http.client.adapters.overview"><info><title>Overview</title></info>
+        
 
         <para>
             <classname>Zend_Http_Client</classname> is based on a connection adapter design. The
@@ -55,12 +54,12 @@
             a string containing the adapter's name (eg. 'Zend_Http_Client_Adapter_Socket')
             or to a variable holding an adapter object (eg.
             <command>new Zend_Http_Client_Adapter_Test</command>). You can also set the
-            adapter later, using the <classname>Zend_Http_Client->setConfig()</classname> method.
+            adapter later, using the <classname>Zend_Http_Client-&gt;setConfig()</classname> method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.socket">
-        <title>The Socket Adapter</title>
+    <section xml:id="zend.http.client.adapters.socket"><info><title>The Socket Adapter</title></info>
+        
 
         <para>
             The default connection adapter is the
@@ -72,11 +71,11 @@
 
         <para>
             The Socket adapter allows several extra configuration options that
-            can be set using <classname>Zend_Http_Client->setConfig()</classname> or
+            can be set using <classname>Zend_Http_Client-&gt;setConfig()</classname> or
             passed to the client constructor.
 
-            <table id="zend.http.client.adapter.socket.configuration.table">
-                <title>Zend_Http_Client_Adapter_Socket configuration parameters</title>
+            <table xml:id="zend.http.client.adapter.socket.configuration.table"><info><title>Zend_Http_Client_Adapter_Socket configuration parameters</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -145,8 +144,8 @@
                 </tgroup>
             </table>
 
-            <note>
-                <title>Persistent TCP Connections</title>
+            <note><info><title>Persistent TCP Connections</title></info>
+                
 
                 <para>
                     Using persistent <acronym>TCP</acronym> connections can potentially speed up
@@ -166,15 +165,14 @@
 
                 <para>
                     Additionally, when using persistent connections it is recommended to enable
-                    Keep-Alive <acronym>HTTP</acronym> requests as described in <link
-                        linkend="zend.http.client.configuration">the configuration section</link> -
+                    Keep-Alive <acronym>HTTP</acronym> requests as described in <link linkend="zend.http.client.configuration">the configuration section</link> -
                     otherwise persistent connections might have little or no
                     effect.
                 </para>
             </note>
 
-            <note>
-                <title>HTTPS SSL Stream Parameters</title>
+            <note><info><title>HTTPS SSL Stream Parameters</title></info>
+                
 
                 <para>
                     <property>ssltransport</property>, <property>sslcert</property> and
@@ -187,14 +185,13 @@
                     applications, you might need to change them if the server
                     you are connecting to requires special client setup. If so,
                     you should read the sections about <acronym>SSL</acronym> transport layers and
-                    options <ulink
-                        url="http://www.php.net/manual/en/transports.php#transports.inet">here</ulink>.
+                    options <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/transports.php#transports.inet">here</link>.
                 </para>
             </note>
         </para>
 
-        <example id="zend.http.client.adapters.socket.example-1">
-            <title>Changing the HTTPS transport layer</title>
+        <example xml:id="zend.http.client.adapters.socket.example-1"><info><title>Changing the HTTPS transport layer</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Set the configuration parameters
@@ -220,14 +217,13 @@ $response = $client->request();
             <methodname>fsockopen('tls://www.example.com', 443)</methodname>
         </para>
 
-        <sect3 id="zend.http.client.adapters.socket.streamcontext">
-            <title>Customizing and accessing the Socket adapter stream context</title>
+        <section xml:id="zend.http.client.adapters.socket.streamcontext"><info><title>Customizing and accessing the Socket adapter stream context</title></info>
+            
 
             <para>
                 Starting from Zend Framework 1.9,
                 <classname>Zend_Http_Client_Adapter_Socket</classname> provides direct access to the
-                underlying <ulink
-                    url="http://php.net/manual/en/stream.contexts.php">stream context</ulink> used
+                underlying <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/en/stream.contexts.php">stream context</link> used
                 to connect to the remote server. This allows the user to pass specific options and
                 parameters to the <acronym>TCP</acronym> stream, and to the <acronym>SSL</acronym>
                 wrapper in case of <acronym>HTTPS</acronym> connections.
@@ -242,8 +238,7 @@ $response = $client->request();
                         <para>
                             <firstterm><methodname>setStreamContext($context)</methodname></firstterm>
                             Sets the stream context to be used by the adapter. Can accept either
-                            a stream context resource created using the <ulink
-                                url="http://php.net/manual/en/function.stream-context-create.php"><methodname>stream_context_create()</methodname></ulink>
+                            a stream context resource created using the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/en/function.stream-context-create.php"><methodname>stream_context_create()</methodname></link>
                             <acronym>PHP</acronym> function, or an array of stream context options,
                             in the same format provided to this function. Providing an array will
                             create a new stream context using these options, and set it.
@@ -262,8 +257,8 @@ $response = $client->request();
                 </itemizedlist>
             </para>
 
-            <example id="zend.http.client.adapters.socket.streamcontext.example-1">
-                <title>Setting stream context options for the Socket adapter</title>
+            <example xml:id="zend.http.client.adapters.socket.streamcontext.example-1"><info><title>Setting stream context options for the Socket adapter</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Array of options
@@ -318,11 +313,11 @@ echo $opts['ssl']['peer_certificate'];
                     method.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.proxy">
-        <title>The Proxy Adapter</title>
+    <section xml:id="zend.http.client.adapters.proxy"><info><title>The Proxy Adapter</title></info>
+        
 
         <para>
             The <classname>Zend_Http_Client_Adapter_Proxy</classname> adapter is similar to the
@@ -336,8 +331,8 @@ echo $opts['ssl']['peer_certificate'];
             Using the Proxy adapter requires several additional configuration
             parameters to be set, in addition to the default 'adapter' option:
 
-            <table id="zend.http.client.adapters.proxy.table">
-                <title>Zend_Http_Client configuration parameters</title>
+            <table xml:id="zend.http.client.adapters.proxy.table"><info><title>Zend_Http_Client configuration parameters</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -410,8 +405,8 @@ echo $opts['ssl']['peer_certificate'];
             basic authentication (Zend_Http_Client::AUTH_BASIC) is supported.
         </para>
 
-        <example id="zend.http.client.adapters.proxy.example-1">
-            <title>Using Zend_Http_Client behind a proxy server</title>
+        <example xml:id="zend.http.client.adapters.proxy.example-1"><info><title>Using Zend_Http_Client behind a proxy server</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Set the configuration parameters
@@ -441,15 +436,14 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             <para>
                 Since the proxy adapter inherits from
                 <classname>Zend_Http_Client_Adapter_Socket</classname>, you can use the stream
-                context access method (see <link
-                    linkend="zend.http.client.adapters.socket.streamcontext">this section</link>)
+                context access method (see <link linkend="zend.http.client.adapters.socket.streamcontext">this section</link>)
                 to set stream context options on Proxy connections as demonstrated above.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.curl">
-        <title>The cURL Adapter</title>
+    <section xml:id="zend.http.client.adapters.curl"><info><title>The cURL Adapter</title></info>
+        
 
         <para>
             cURL is a standard <acronym>HTTP</acronym> client library that is distributed with many
@@ -461,8 +455,8 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
             between servers.
         </para>
 
-        <example id="zend.http.client.adapters.curl.example-1">
-            <title>Setting cURL options</title>
+        <example xml:id="zend.http.client.adapters.curl.example-1"><info><title>Setting cURL options</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $config = array(
@@ -480,11 +474,11 @@ $client = new Zend_Http_Client($uri, $config);
             specifying the 'curloptions' key in the constructor of the adapter or by calling
             <methodname>setCurlOption($name, $value)</methodname>. The <varname>$name</varname> key
             corresponds to the CURL_* constants of the cURL extension. You can
-            get access to the Curl handle by calling <command>$adapter->getHandle();</command>
+            get access to the Curl handle by calling <command>$adapter-&gt;getHandle();</command>
         </para>
 
-        <example id="zend.http.client.adapters.curl.example-2">
-            <title>Transfering Files by Handle</title>
+        <example xml:id="zend.http.client.adapters.curl.example-2"><info><title>Transfering Files by Handle</title></info>
+            
 
             <para>
                 You can use cURL to transfer very large files over <acronym>HTTP</acronym> by
@@ -507,10 +501,10 @@ $adapter->setConfig(array(
 $client->request("PUT");
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.test">
-        <title>The Test Adapter</title>
+    <section xml:id="zend.http.client.adapters.test"><info><title>The Test Adapter</title></info>
+        
 
         <para>
             Sometimes, it is very hard to test code that relies on <acronym>HTTP</acronym>
@@ -537,8 +531,8 @@ $client->request("PUT");
             request.
         </para>
 
-        <example id="zend.http.client.adapters.test.example-1">
-            <title>Testing Against a Single HTTP Response Stub</title>
+        <example xml:id="zend.http.client.adapters.test.example-1"><info><title>Testing Against a Single HTTP Response Stub</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Instantiate a new adapter and client
@@ -583,8 +577,8 @@ $response = $client->request('GET');
             before returning to the caller.
         </para>
 
-        <example id="zend.http.client.adapters.test.example-2">
-            <title>Testing Against Multiple HTTP Response Stubs</title>
+        <example xml:id="zend.http.client.adapters.test.example-2"><info><title>Testing Against Multiple HTTP Response Stubs</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Instantiate a new adapter and client
@@ -655,8 +649,8 @@ $adapter->addResponse(
             and you want to test this feature.
         </para>
 
-        <example id="zend.http.client.adapters.test.example-3">
-            <title>Forcing the adapter to fail</title>
+        <example xml:id="zend.http.client.adapters.test.example-3"><info><title>Forcing the adapter to fail</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Instantiate a new adapter and client
@@ -679,10 +673,10 @@ try {
 // you call setNextRequestWillFail(true) again
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.adapters.extending">
-        <title>Creating your own connection adapters</title>
+    <section xml:id="zend.http.client.adapters.extending"><info><title>Creating your own connection adapters</title></info>
+        
 
         <para>
             You can create your own connection adapters and use them. You could, for
@@ -698,8 +692,8 @@ try {
             functions defined in this example must be defined in your adapter as well:
         </para>
 
-        <example id="zend.http.client.adapters.extending.example-1">
-            <title>Creating your own connection adapter</title>
+        <example xml:id="zend.http.client.adapters.extending.example-1"><info><title>Creating your own connection adapter</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 class MyApp_Http_Client_Adapter_BananaProtocol
@@ -775,5 +769,5 @@ $client = new Zend_Http_Client(array(
 ));
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

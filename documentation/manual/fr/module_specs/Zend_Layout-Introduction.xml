@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Layout</classname> utilise le design pattern Two Step View, ce qui
@@ -44,8 +44,7 @@
 
         <listitem>
             <para>
-                Utiliser les mêmes règles de résolution (inflexion) que le <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>, mais sans
+                Utiliser les mêmes règles de résolution (inflexion) que le <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>, mais sans
                 empêcher de les personnaliser à part.
             </para>
         </listitem>
@@ -57,4 +56,4 @@
             </para>
         </listitem>
     </itemizedlist>
-</sect1>
+</section>

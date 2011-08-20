@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.tag.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Tag</classname>は、タグ付けできる項目で動作するための機能を与える
@@ -31,8 +29,8 @@
         更なる機能を与えます。
     </para>
 
-    <example id="zend.tag.example.using">
-        <title>Zend_Tagの利用</title>
+    <example xml:id="zend.tag.example.using"><info><title>Zend_Tagの利用</title></info>
+        
 
         <para>
             この例は、タグの一覧を作成して、
@@ -62,4 +60,4 @@ foreach ($list as $item) {
             絶対値の10、１及び２で出力します。
         </para>
     </example>
-</sect1>
+</section>

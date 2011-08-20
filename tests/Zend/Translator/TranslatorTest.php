@@ -846,14 +846,12 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     public function testSettingLogPriorityForLog()
     {
         $stream = fopen('php://memory', 'w+');
-        require_once 'Zend/Log/Writer/Stream.php';
-        $writer = new Zend_Log_Writer_Stream($stream);
-        require_once 'Zend/Log.php';
-        $log    = new Zend_Log($writer);
+        $writer = new Writer\Stream($stream);
+        $log    = new Log\Logger($writer);
 
-        $lang = new Zend_Translate(array(
-            'adapter'     => Zend_Translate::AN_CSV,
-            'content'     => dirname(__FILE__) . '/Translate/Adapter/_files',
+        $lang = new Translator\Translator(array(
+            'adapter'     => Translator\Translator::AN_CSV,
+            'content'     => __DIR__ . '/../_files',
             'locale'      => 'en',
             'delimiter'   => ',',
             'logPriority' => 3,

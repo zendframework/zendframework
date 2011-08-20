@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17593 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.controller.exceptions">
-    <title>Excepciones MVC</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>Excepciones MVC</title></info>
+    
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>Introducción</title>
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>Introducción</title></info>
+        
 
         <para>
             Los componentes
@@ -34,10 +32,10 @@
             excepciones y las registra con el objeto respuesta; a su vez, y por
             defecto, el objeto respuesta no muestra mensajes de excepción.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>Manejando las Excepciones</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>Manejando las Excepciones</title></info>
+        
 
         <para>
             Ya hay varios mecanismos construidos en los componentes de
@@ -186,10 +184,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>Excepciones MVC que Usted Pueda Encontrar</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>Excepciones MVC que Usted Pueda Encontrar</title></info>
+        
 
         <para>
             Los diversos componentes de
@@ -450,5 +448,5 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

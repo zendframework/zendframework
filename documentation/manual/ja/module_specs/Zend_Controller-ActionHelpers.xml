@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>アクションヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers"><info><title>アクションヘルパー</title></info>
+    
 
-    <sect2 id="zend.controller.actionhelper.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.actionhelper.introduction"><info><title>導入</title></info>
+        
 
         <para>
             アクションヘルパーを使用すると、<classname>Zend_Controller_Action</classname>
@@ -18,20 +16,18 @@
 
         <para>
             アクションヘルパーにはさまざまな使用法があります。
-            たとえば、<link
-                linkend="zend.view.helpers">Zend_View_Helper</link>
-            や <link
-                linkend="zend.controller.plugins">Zend_Controller_Plugin</link>
+            たとえば、<link linkend="zend.view.helpers">Zend_View_Helper</link>
+            や <link linkend="zend.controller.plugins">Zend_Controller_Plugin</link>
             と同じように、処理の仲買をするために用いることもできます。
             アクションヘルパーは (<classname>Zend_View_Helper</classname> と同様に)、
             必要になった時点で読み込むこともできますし、
             リクエスト時 (起動時) やアクションコントローラの作成時 (<methodname>init()</methodname>)
             で読み込むこともできます。詳細は、以下の使用例を参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.initialization">
-        <title>ヘルパーの初期化</title>
+    <section xml:id="zend.controller.actionhelper.initialization"><info><title>ヘルパーの初期化</title></info>
+        
 
         <para>
             ヘルパーを初期化するにはいくつかの方法があります。
@@ -96,10 +92,10 @@ $this->_helper->FlashMessenger('先ほどのリクエストで、あることを
             すべてのアクションのヘルパーブローカに同じヘルパーを渡したいだとかいった場合です。
             インスタンスを作成する方法は、通常の <acronym>PHP</acronym> のクラスと同じです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.broker">
-        <title>ヘルパーブローカ</title>
+    <section xml:id="zend.controller.actionhelper.broker"><info><title>ヘルパーブローカ</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action_HelperBroker</classname>
@@ -160,8 +156,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
         </para>
 
         <para>
-            内部的には、ヘルパーブローカは <link
-                linkend="zend.loader.pluginloader">PluginLoader
+            内部的には、ヘルパーブローカは <link linkend="zend.loader.pluginloader">PluginLoader
                 のインスタンス</link> を用いてパスを保持します。静的メソッド
             <methodname>getPluginLoader()</methodname> で PluginLoader
             を取得することもできますし、また独自の PluginLoader
@@ -229,10 +224,10 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.stockhelpers">
-        <title>組み込みのアクションヘルパー</title>
+    <section xml:id="zend.controller.actionhelper.stockhelpers"><info><title>組み込みのアクションヘルパー</title></info>
+        
 
         <para>
             Zend Framework には、いくつかのアクションヘルパーがデフォルトで組み込まれています。
@@ -247,17 +242,17 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             <emphasis>ViewRenderer</emphasis> です。
         </para>
 
-        <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-AutoComplete.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ContextSwitch.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-FlashMessenger.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Json.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Redirector.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ViewRenderer.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-AutoComplete.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ContextSwitch.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-FlashMessenger.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Redirector.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ViewRenderer.xml"/>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.writingyourown">
-        <title>独自のヘルパーの作成</title>
+    <section xml:id="zend.controller.actionhelper.writingyourown"><info><title>独自のヘルパーの作成</title></info>
+        
 
         <para>
             アクションヘルパーは、抽象クラス
@@ -333,8 +328,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             メソッドを実装することもできます。これを定義しておくと、
             ヘルパーブローカのメソッドであるかのようにそのヘルパーを扱えるようになります。
             これにより、一度だけ使用するようなヘルパーが扱いやすくなります。
-            たとえば、<link
-                linkend="zend.controller.actionhelpers.redirector">redirector</link>
+            たとえば、<link linkend="zend.controller.actionhelpers.redirector">redirector</link>
             の <methodname>direct()</methodname> は <methodname>goto()</methodname>
             のエイリアスとなっているので、このようにして使用できます。
         </para>
@@ -356,8 +350,5 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
             独自のヘルパークラスを作成した場合は、
             上で説明したようにしてそれを利用できるようにしておきましょう。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

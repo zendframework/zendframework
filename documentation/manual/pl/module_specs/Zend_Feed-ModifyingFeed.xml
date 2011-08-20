@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.modifying-feed">
-    <title>Modyfikacja kanału oraz struktury wpisów</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Modyfikacja kanału oraz struktury wpisów</title></info>
+    
 
     <para>
         Naturalna składnia <code>Zend_Feed</code> pozwala na konstruowanie oraz
@@ -8,8 +9,8 @@
         aby zapisać go do pliku lub wysłać na serwer.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>Modyfikacja istniejącego wpisu</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Modyfikacja istniejącego wpisu</title></info>
+        
         <programlisting role="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
@@ -18,8 +19,8 @@ $entry->title = 'To jest nowy tytuł';
 $entry->author->email = 'my_email@example.com';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             To wyświetli pełną (dołączając prolog <code>&lt;?xml ... &gt;</code>)
             reprezentację XML nowego wpisu, dołączając potrzebne przestrzenie
@@ -43,8 +44,8 @@ echo $entry->saveXML();
         przestrzeni nazw jeśli nie określisz precyzyjnie innej przestrzeni.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>Tworzenie wpisu Atom z elementami własnej przestrzeni nazw</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Tworzenie wpisu Atom z elementami własnej przestrzeni nazw</title></info>
+        
         <programlisting role="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // id w Atom jest zawsze nadane przez serwer
@@ -60,7 +61,7 @@ $entry->{'myns:container_elt'}->part1 = 'pierwsza zagnieżdżona część';
 $entry->{'myns:container_elt'}->part2 = 'druga zagnieżdżona część';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect1>
+</section>

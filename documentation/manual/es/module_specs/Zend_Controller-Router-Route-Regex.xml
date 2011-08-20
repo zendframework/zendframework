@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17592 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.regex">
-    <title>Zend_Controller_Router_Route_Regex</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.regex"><info><title>Zend_Controller_Router_Route_Regex</title></info>
+    
 
     <para>Además de los tipos de ruta estáticos y por defecto, también está
         disponible el tipo de
@@ -285,4 +283,4 @@ $router->addRoute('blogArchive', $route);
     <para>Como puede ver, esto añade una enorme cantidad de flexibilidad por
         encima del standard
         route.</para>
-</sect3>
+</section>

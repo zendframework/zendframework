@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21357 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.dojo.data">
-    <title>Zend_Dojo_Data: dojo.data Envelopes</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.data"><info><title>Zend_Dojo_Data: dojo.data Envelopes</title></info>
+    
 
     <para>
         Dojo bietet Datenabstraktionen für daten-aktivierte Widgets über seine
@@ -36,8 +34,8 @@
         Serialisierung in ein Array oder <acronym>JSON</acronym>.
     </para>
 
-    <sect2 id="zend.dojo.data.usage">
-        <title>Verwendung von Zend_Dojo_Data</title>
+    <section xml:id="zend.dojo.data.usage"><info><title>Verwendung von Zend_Dojo_Data</title></info>
+        
 
         <para>
             In seiner einfachsten Form, verlangt <command>dojo.data</command> dass der Name des
@@ -45,16 +43,16 @@
             Man kann diese entweder über den Konstruktor übergeben, oder über Mutatoren:
         </para>
 
-        <example id="zend.dojo.data.usage.constructor">
-            <title>Initialisierung von Zend_Dojo_Data über den Konstruktor</title>
+        <example xml:id="zend.dojo.data.usage.constructor"><info><title>Initialisierung von Zend_Dojo_Data über den Konstruktor</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data('id', $items);
 ]]></programlisting>
         </example>
 
-        <example id="zend.dojo.data.usage.mutators">
-            <title>Initialisierung von Zend_Dojo_Data über Mutatoren</title>
+        <example xml:id="zend.dojo.data.usage.mutators"><info><title>Initialisierung von Zend_Dojo_Data über Mutatoren</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data();
@@ -69,8 +67,8 @@ $data->setIdentifier('id')
             wird.
         </para>
 
-        <example id="zend.dojo.data.usage.append">
-            <title>Hinzufügen von Daten bei Zend_Dojo_Data</title>
+        <example xml:id="zend.dojo.data.usage.append"><info><title>Hinzufügen von Daten bei Zend_Dojo_Data</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data($identifier, $items);
@@ -80,8 +78,8 @@ $data->addItems($someMoreItems);
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Immer einen Identifikator verwenden!</title>
+        <note><info><title>Immer einen Identifikator verwenden!</title></info>
+            
 
             <para>
                 Für jeden <command>dojo.data</command> Datenspeicher muß die Identifikatorspalte
@@ -143,8 +141,8 @@ $data->addItems($someMoreItems);
             <methodname>setLabel()</methodname> aufgerufen werden:
         </para>
 
-        <example id="zend.dojo.data.usage.label">
-            <title>Spezifizierung eines Labelfeldes in Zend_Dojo_Data</title>
+        <example xml:id="zend.dojo.data.usage.label"><info><title>Spezifizierung eines Labelfeldes in Zend_Dojo_Data</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data->setLabel('name');
@@ -157,17 +155,17 @@ $data->setLabel('name');
             <methodname>fromJson()</methodname> Methode verwendet wird.
         </para>
 
-        <example id="zend.dojo.data.usage.populate">
-            <title>Zend_Dojo_Data von JSON aus bekanntgeben</title>
+        <example xml:id="zend.dojo.data.usage.populate"><info><title>Zend_Dojo_Data von JSON aus bekanntgeben</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $data->fromJson($json);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dojo.data.metadata">
-        <title>Den Containern Metadaten hinzufügen</title>
+    <section xml:id="zend.dojo.data.metadata"><info><title>Den Containern Metadaten hinzufügen</title></info>
+        
 
         <para>
             Einige Dojo Komponenten benötigen zusätzliche Metadaten zusammen mit dem
@@ -212,10 +210,10 @@ $data->clearMetadata('numRows');
 // Entfernt alle Metadaten:
 $data->clearMetadata();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dojo.data.advanced">
-        <title>Gehobenere Verwendungsfälle</title>
+    <section xml:id="zend.dojo.data.advanced"><info><title>Gehobenere Verwendungsfälle</title></info>
+        
 
         <para>
             Neben der Funktion als serialisierbarer Datenkontainer bietet
@@ -293,8 +291,8 @@ echo $data; // Ausgabe als JSON String
 $json = (string) $data; // Casten zu einem String == casten zu JSON
 ]]></programlisting>
 
-        <sect3 id="zend.dojo.data.advanced.methods">
-            <title>Vorhandene Methoden</title>
+        <section xml:id="zend.dojo.data.advanced.methods"><info><title>Vorhandene Methoden</title></info>
+            
 
             <para>
                 Neben den Methoden die notwendig sind um die oben beschriebenen Interfaces zu
@@ -424,6 +422,6 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

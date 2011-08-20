@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20855 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Service</classname> ist eine abstrakte Klasse welche die Grundlage für
@@ -11,8 +11,7 @@
 
     <para>
         Wenn Unterstützung für generische, <acronym>XML</acronym>-basierte REST Services sucht,
-        sollte sich den <link
-            linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link> anschauen.
+        sollte sich den <link linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link> anschauen.
     </para>
 
     <para>
@@ -50,4 +49,4 @@
     <para>
         Zusätzliche Services kommen demnächst.
     </para>
-</sect1>
+</section>

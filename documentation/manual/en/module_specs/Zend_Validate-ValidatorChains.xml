@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.validator_chains">
-    <title>Validator Chains</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>Validator Chains</title></info>
+    
 
     <para>
         Often multiple validations should be applied to some value in a particular order. The
@@ -62,7 +61,4 @@ $validatorChain->addValidator(
         Any object that implements <classname>Zend_Validate_Interface</classname> may be used in a
         validator chain.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

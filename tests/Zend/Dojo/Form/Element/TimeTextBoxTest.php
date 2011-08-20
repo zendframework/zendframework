@@ -25,7 +25,7 @@ use Zend\Dojo\Form\Element\TimeTextBox as TimeTextBoxElement,
     Zend\Dojo\Form\Element\DateTextBox as DateTextBoxElement,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_TimeTextBox.
@@ -58,7 +58,7 @@ class TimeTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -104,7 +104,7 @@ class TimeTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function testClickableIncrementMutatorShouldRaiseExceptionOnInvalidFormat()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element->setClickableIncrement('en-US');
     }
 
@@ -120,7 +120,7 @@ class TimeTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function testVisibleIncrementMutatorShouldRaiseExceptionOnInvalidFormat()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element->setVisibleIncrement('en-US');
     }
 
@@ -136,7 +136,7 @@ class TimeTextBoxTest extends \PHPUnit_Framework_TestCase
 
     public function testVisibleRangeMutatorShouldRaiseExceptionOnInvalidFormat()
     {
-        $this->setExpectedException('Zend\Form\ElementException');
+        $this->setExpectedException('Zend\Form\Element\Exception\InvalidArgumentException');
         $this->element->setVisibleRange('en-US');
     }
 

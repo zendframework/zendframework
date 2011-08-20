@@ -25,7 +25,7 @@
 namespace Zend\Tool\Framework;
 
 /**
- * Basic Interface for factilities that load Zend_Tool providers or manifests.
+ * Basic Interface for factilities that load Zend\Tool providers or manifests.
  *
  * @category   Zend
  * @package    Zend_Tool

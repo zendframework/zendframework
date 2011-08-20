@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20818 -->
-<sect1 id="zend.service.amazon.ec2.zones">
-    <title>Zend_Service_Amazon_Ec2:リージョンおよび利用可能ゾーン</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.zones"><info><title>Zend_Service_Amazon_Ec2:リージョンおよび利用可能ゾーン</title></info>
+    
 
     <para>
         アマゾンEC2は、リージョンおよび利用可能ゾーン毎にインスタンスを設置する能力を提供します。
@@ -14,8 +12,8 @@
         アプリケーションを単一の利用可能ゾーンの失敗から保護できます。
     </para>
 
-    <sect2 id="zend.service.amazon.ec2.zones.regions">
-        <title>アマゾンEC2リージョン</title>
+    <section xml:id="zend.service.amazon.ec2.zones.regions"><info><title>アマゾンEC2リージョン</title></info>
+        
 
         <para>
             必須条件を満たす場所で、アマゾンEC2インスタンスを開始できるように、
@@ -31,8 +29,8 @@
             そして、それはEC2リソース毎の場所感覚を明白にもたらします。
         </para>
 
-        <example id="zend.service.amazon.ec2.zones.regions.example">
-            <title>利用可能リージョンを表示</title>
+        <example xml:id="zend.service.amazon.ec2.zones.regions.example"><info><title>利用可能リージョンを表示</title></info>
+            
 
             <para>
                 <code>describe</code>は、アカウントがアクセスすべきリージョンを見つけるために使われます。
@@ -52,10 +50,10 @@ foreach($regions as $region) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.zones.availability">
-        <title>アマゾンEC2利用可能ゾーン</title>
+    <section xml:id="zend.service.amazon.ec2.zones.availability"><info><title>アマゾンEC2利用可能ゾーン</title></info>
+        
 
         <para>
             インスタンスを開始するとき、利用可能ゾーンを任意に指定できます。
@@ -68,8 +66,8 @@ foreach($regions as $region) {
             利用可能なゾーンを指定することを考慮しないかもしれません。
         </para>
 
-        <example id="zend.service.amazon.ec2.zones.availability.example">
-            <title>利用可能ゾーンを表示</title>
+        <example xml:id="zend.service.amazon.ec2.zones.availability.example"><info><title>利用可能ゾーンを表示</title></info>
+            
 
             <para>
                 <code>describe</code>は、各利用可能ゾーンの状態を探すために使われます。
@@ -90,5 +88,5 @@ foreach($zones as $zone) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

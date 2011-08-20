@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.save">
-    <title>Wijzigen van het PDF document opslaan</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Wijzigen van het PDF document opslaan</title></info>
+    
     <para>
     Er kunnen twee methodes worden aangewend om gewijzigde PDF documenten op te slaan. Deze zijn de
     <code>Zend_Pdf::save()</code> en <code>Zend_Pdf::render()</code> methodes.
@@ -16,8 +17,8 @@
     Indien $newSegmentOnly TRUE is, wordt alleen het nieuwe PDF bestandssegment teruggestuurd.
     </para>
 
-    <example>
-        <title>Een PDF document opslaan</title>
+    <example><info><title>Een PDF document opslaan</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 ...
 // PDF document laden.
@@ -35,7 +36,4 @@ $pdfString = $pdf->render();
 ?>]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

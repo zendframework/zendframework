@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.isbn">
-    <title>Isbn</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.isbn"><info><title>Isbn</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Isbn</classname> allows you to validate an
         <acronym>ISBN-10</acronym> or <acronym>ISBN-13</acronym> value.
     </para>
 
-    <sect3 id="zend.validate.set.isbn.options">
-        <title>Supported options for Zend_Validate_Isbn</title>
+    <section xml:id="zend.validate.set.isbn.options"><info><title>Supported options for Zend_Validate_Isbn</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Isbn</classname>:
@@ -33,10 +32,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.isbn.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
@@ -55,10 +54,10 @@ if ($validator->isValid($isbn)) {
             This will validate any <acronym>ISBN-10</acronym> and <acronym>ISBN-13</acronym> without
             separator.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.type-explicit">
-        <title>Setting an explicit ISBN validation type</title>
+    <section xml:id="zend.validate.set.isbn.type-explicit"><info><title>Setting an explicit ISBN validation type</title></info>
+        
 
         <para>
             An example of an <acronym>ISBN</acronym> type restriction is below:
@@ -100,10 +99,10 @@ if ($validator->isValid($isbn)) {
                 <para><constant>Zend_Validate_Isbn::ISBN13</constant></para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.separator">
-        <title>Specifying a separator restriction</title>
+    <section xml:id="zend.validate.set.isbn.separator"><info><title>Specifying a separator restriction</title></info>
+        
 
         <para>
             An example of separator restriction is below:
@@ -124,8 +123,8 @@ if ($validator->isValid($isbn)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Values without separator</title>
+        <note><info><title>Values without separator</title></info>
+            
 
             <para>
                 This will return <constant>FALSE</constant> if <varname>$isbn</varname> doesn't
@@ -143,8 +142,5 @@ if ($validator->isValid($isbn)) {
             <listitem><para>"-" (hyphen)</para></listitem>
             <listitem><para>" " (space)</para></listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

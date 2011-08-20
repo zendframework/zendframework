@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 17942 -->
-<sect1 id="zend.test.phpunit.db" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Test_PHPUnit_Db</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db"><info><title>Zend_Test_PHPUnit_Db</title></info>
+    
 
     <para>
         データ・アクセスとドメインモデルを組み合わせると、
@@ -49,11 +49,11 @@
         インスタンス化できるようにします。
     </para>
 
-    <xi:include href="Zend_Test-PHPUnit-Db-Quickstart.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Test-PHPUnit-Db-Quickstart.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Db-Quickstart.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Test-PHPUnit-Db-Quickstart.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Test-PHPUnit-Db-Testing.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Test-PHPUnit-Db-Testing.xml" /></xi:fallback>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Db-Testing.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Test-PHPUnit-Db-Testing.xml"/></xi:fallback>
     </xi:include>
-    <xi:include href="Zend_Test-PHPUnit-Db-Adapter.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Db-Adapter.xml"/>
+</section>

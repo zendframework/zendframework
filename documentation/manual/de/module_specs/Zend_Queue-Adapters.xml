@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.adapters">
-    <title>Adapter</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.adapters"><info><title>Adapter</title></info>
+    
 
     <para>
         <classname>Zend_Queue</classname> unterstützt alle Queues die das Interface
@@ -12,7 +10,7 @@
 
     <itemizedlist>
         <listitem>
-            <para><ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>.</para>
+            <para><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://activemq.apache.org/">Apache ActiveMQ</link>.</para>
         </listitem>
 
         <listitem>
@@ -21,15 +19,14 @@
 
         <listitem>
             <para>
-                Eine <ulink url="http://memcachedb.org/memcacheq/">MemcacheQ</ulink> verwendende
+                Eine <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://memcachedb.org/memcacheq/">MemcacheQ</link> verwendende
                 Queue über <classname>Memcache</classname>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Die Job Queue von <ulink
-                    url="http://www.zend.com/en/products/platform/">Zend Platform's</ulink>.
+                Die Job Queue von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/platform/">Zend Platform's</link>.
             </para>
         </listitem>
 
@@ -38,24 +35,24 @@
         </listitem>
     </itemizedlist>
 
-    <note id="zend.queue.adapters.limitations">
-        <title>Einschränkungen</title>
+    <note xml:id="zend.queue.adapters.limitations"><info><title>Einschränkungen</title></info>
+        
 
         <para>
             Das Transaction Handling für Nachrichten wird nicht unterstützt.
         </para>
     </note>
 
-    <sect2 id="zend.queue.adapters.configuration">
-        <title>Spezielle Adapter - Konfigurations Optionen</title>
+    <section xml:id="zend.queue.adapters.configuration"><info><title>Spezielle Adapter - Konfigurations Optionen</title></info>
+        
 
         <para>
             Wenn eine Standardeinstellung angezeigt wird, dann ist der Parameter optional.
             Wenn keine Standardeinstellung spezifiziert ist dann wird der Parameter benötigt.
         </para>
 
-        <sect3 id="zend.queue.adapters.configuration.apachemq">
-            <title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title>
+        <section xml:id="zend.queue.adapters.configuration.apachemq"><info><title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title></info>
+            
 
             <para>
                 Hier aufgeführte Optionen sind bekannte Notwendigkeiten. Nicht alle Nachrichten
@@ -137,10 +134,10 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.Db">
-            <title>Db - Zend_Queue_Adapter_Db</title>
+        <section xml:id="zend.queue.adapters.configuration.Db"><info><title>Db - Zend_Queue_Adapter_Db</title></info>
+            
 
             <para>
                 Optionen des Treibers werden für wenige benötigte Optionen geprüft so wie
@@ -239,10 +236,10 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.memcacheq">
-            <title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title>
+        <section xml:id="zend.queue.adapters.configuration.memcacheq"><info><title>MemcacheQ - Zend_Queue_Adapter_Memcacheq</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -282,10 +279,10 @@ $queue = new Zend_Queue('Db', $options);
                     <para>Die Standardeinstellung für port ist 22201.</para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.platformjq">
-            <title>Zend Platform Job Queue - Zend_Queue_Adapter_PlatformJobQueue</title>
+        <section xml:id="zend.queue.adapters.configuration.platformjq"><info><title>Zend Platform Job Queue - Zend_Queue_Adapter_PlatformJobQueue</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -311,10 +308,10 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.configuration.array">
-            <title>Array - Zend_Queue_Adapter_Array</title>
+        <section xml:id="zend.queue.adapters.configuration.array"><info><title>Array - Zend_Queue_Adapter_Array</title></info>
+            
 
             <itemizedlist>
                 <listitem>
@@ -327,15 +324,15 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.queue.adapters.notes">
-        <title>Hinweise für spezielle Adapter</title>
+    <section xml:id="zend.queue.adapters.notes"><info><title>Hinweise für spezielle Adapter</title></info>
+        
         <para>Die folgenden Adapter haben Hinweise:</para>
 
-        <sect3 id="zend.queue.adapters.notes.activemq">
-            <title>Apache ActiveMQ</title>
+        <section xml:id="zend.queue.adapters.notes.activemq"><info><title>Apache ActiveMQ</title></info>
+            
 
             <para>
                 Die Dauer der Sichtbarkeit (visibility duration) ist für
@@ -390,30 +387,28 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.zend_db">
-            <title>Zend_Db</title>
+        <section xml:id="zend.queue.adapters.notes.zend_db"><info><title>Zend_Db</title></info>
+            
 
             <para>
                 Das Datenbank <acronym>SQL</acronym> Statement
                 <emphasis>CREATE TABLE ( ... )</emphasis> kann in
                 <filename>Zend/Queue/Adapter/Db/mysql.sql</filename> gefunden werden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.memcacheQ">
-            <title>MemcacheQ</title>
+        <section xml:id="zend.queue.adapters.notes.memcacheQ"><info><title>MemcacheQ</title></info>
+            
 
             <para>
-                Memcache kann von <ulink
-                    url="http://www.danga.com/memcached/">http://www.danga.com/memcached/</ulink>
+                Memcache kann von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">http://www.danga.com/memcached/</link>
                 heruntergeladen werden.
             </para>
 
             <para>
-                MemcacheQ kann von <ulink
-                    url="http://memcachedb.org/memcacheq/">http://memcachedb.org/memcacheq/</ulink>
+                MemcacheQ kann von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://memcachedb.org/memcacheq/">http://memcachedb.org/memcacheq/</link>
                 heruntergeladen werden.
             </para>
 
@@ -436,18 +431,17 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.platformjq">
-            <title>Zend Platform Job Queue</title>
+        <section xml:id="zend.queue.adapters.notes.platformjq"><info><title>Zend Platform Job Queue</title></info>
+            
 
             <para>
                 Job Queue ist ein Feature das von Zend Platform's Enterprise Solution angeboten
                 wird. Es ist keine traditionelle Nachrichten Queue, sondern erlaubt es ein Skript
                 zu queuen um es auszuführen, zusammen mit den Parametern die man an dieses
-                übergeben will. Man kann mehr über die Job Queue <ulink
-                    url="http://www.zend.com/en/products/platform/">auf der Webseite von
-                    zend.com</ulink> herausfinden.
+                übergeben will. Man kann mehr über die Job Queue <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/en/products/platform/">auf der Webseite von
+                    zend.com</link> herausfinden.
             </para>
 
             <para>
@@ -656,16 +650,16 @@ $queue = new Zend_Queue('Db', $options);
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.queue.adapters.notes.array">
-            <title>Array (Lokal)</title>
+        <section xml:id="zend.queue.adapters.notes.array"><info><title>Array (Lokal)</title></info>
+            
 
             <para>
                 Die Array Queue ist ein <acronym>PHP</acronym> <methodname>array()</methodname>
                 im lokalen Speicher. <classname>Zend_Queue_Adapter_Array</classname> ist gut
                 für das Unit Testen.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

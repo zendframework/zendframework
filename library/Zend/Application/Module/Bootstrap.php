@@ -80,13 +80,6 @@ abstract class Bootstrap
         if (!$broker->hasPlugin('frontcontroller')) {
             $broker->registerSpec('frontcontroller');
         }
-
-        // ZF-6545: prevent recursive registration of modules
-        if ($broker->hasPlugin('modules')) {
-            // Both unregister the resource and spec
-            $broker->unregister('modules');
-            $broker->unregisterSpec('modules');
-        }
     }
 
     /**

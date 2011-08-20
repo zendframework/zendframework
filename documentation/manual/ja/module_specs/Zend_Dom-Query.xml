@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21585 -->
-<sect1 id="zend.dom.query">
-    <title>Zend_Dom_Query</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
+    
 
     <para>
         <classname>Zend_Dom_Query</classname> を使用すると、<acronym>XML</acronym> や (X)<acronym>HTML</acronym> ドキュメントに対して
@@ -17,14 +15,14 @@
         この記法は、スタイルシートを扱ったことのある人ならきっとおなじみでしょうし、
         Javascript のツールキットの中にも
         <acronym>CSS</acronym> セレクタを使用してノードを選択できる機能を持つものがあります
-        (<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype の
-            $$()</ulink> や
-        <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo の
-            dojo.query</ulink> をヒントにしてこのコンポーネントを作成しました)。
+        (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://prototypejs.org/api/utility/dollar-dollar">Prototype の
+            $$()</link> や
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo の
+            dojo.query</link> をヒントにしてこのコンポーネントを作成しました)。
     </para>
 
-    <sect2 id="zend.dom.query.operation">
-        <title>動作原理</title>
+    <section xml:id="zend.dom.query.operation"><info><title>動作原理</title></info>
+        
 
         <para>
             <classname>Zend_Dom_Query</classname> を使用するには、
@@ -98,7 +96,7 @@
             <listitem><para>
                 <emphasis>直接の子孫</emphasis>:
                 セレクタの間で '&gt;' を使用すると、
-                直接の子要素であることを表します。'div > span'
+                直接の子要素であることを表します。'div &gt; span'
                 は、'span' 要素のうち 'div' の直接の子であるものだけを選択します。
                 上のセレクタのどれとでも共用できます。
             </para></listitem>
@@ -166,17 +164,17 @@ foreach ($results as $result) {
             XPath クエリとして正しいものならなんでもこのメソッドに渡すことができ、
             結果は <classname>Zend_Dom_Query_Result</classname> オブジェクトで返されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dom.query.methods">
-        <title>使用可能なメソッド</title>
+    <section xml:id="zend.dom.query.methods"><info><title>使用可能なメソッド</title></info>
+        
 
         <para>
             <classname>Zend_Dom_Query</classname> 系のクラスでは、次のメソッドが使用できます。
         </para>
 
-        <sect3 id="zend.dom.query.methods.zenddomquery">
-            <title>Zend_Dom_Query</title>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><info><title>Zend_Dom_Query</title></info>
+            
 
             <para>
                 次のメソッドが
@@ -227,10 +225,10 @@ foreach ($results as $result) {
                     XPath 記法でドキュメントへの問い合わせを行います。
                 </para></listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.dom.query.methods.zenddomqueryresult">
-            <title>Zend_Dom_Query_Result</title>
+        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><info><title>Zend_Dom_Query_Result</title></info>
+            
 
             <para>
                 先ほど説明したように、<classname>Zend_Dom_Query_Result</classname>
@@ -261,9 +259,6 @@ foreach ($results as $result) {
                     問い合わせ対象となった DOMDocument を取得します。
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21129 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.realpath">
-    <title>RealPath</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.realpath"><info><title>RealPath</title></info>
+    
 
     <para>
         Dieser Filter löst gegebene Links und Pfadnamen auf und gibt kanonische absolute Pfadnamen
@@ -42,4 +40,4 @@ $filtered = $filter->filter($path);
 // Gibt '/www/non/existing/path' zurück, selbst wenn
 // file_exists oder realpath false zurückgeben würden
 ]]></programlisting>
-</sect2>
+</section>

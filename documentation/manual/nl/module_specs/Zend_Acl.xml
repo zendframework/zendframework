@@ -1,5 +1,6 @@
-<sect1 id="zend.acl.introduction">
-    <title>Introductie</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Introductie</title></info>
+    
 
     <para>
         Zend_Acl levert een lichte en flexibele toegangscontrolelijst (ACL) functionaliteit
@@ -36,8 +37,8 @@
         te gebruiken.
     </para>
 
-    <sect2 id="zend.acl.introduction.resources">
-        <title>Over Bronnen</title>
+    <section xml:id="zend.acl.introduction.resources"><info><title>Over Bronnen</title></info>
+        
         <para>
             In Zend_Acl is het maken van een bron heel simpel. Zend_Acl heeft een
             <code>Zend_Acl_Resource_Interface</code> om het ontwikkelaars makkelijk te maken bij het
@@ -63,10 +64,10 @@
             de ontwikkelaar kan regels toekennen die effect hebben op alle privileges of specifieke privileges
             op een Bron.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.roles">
-        <title>Over Rollen</title>
+    <section xml:id="zend.acl.introduction.roles"><info><title>Over Rollen</title></info>
+        
         <para>
             Net als bij Bronnen, is het aanmaken van een Rol ook heel simpel. Zend_Acl levert
             <code>Zend_Acl_Role_Interface</code> om het ontwikkelaars makkelijk te maken bij het maken
@@ -87,8 +88,8 @@
             overervingen een zekere mate van complexiteit met zich mee. Het volgende voorbeeld illustreert
             een tegenstrijdige bepaling en hoe Zend_Acl dit oplost.
         </para>
-        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Meerdere overervingen tussen rollen</title>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Meerdere overervingen tussen rollen</title></info>
+            
             <para>
                 De volgende code defineerd 3 basis Rollen - "<code>gast</code>", "<code>lid</code>", en
                 "<code>admin</code>" - waarvan andere Rollen kunnen erven. Vervolgens, wordt er een Rol,
@@ -116,8 +117,8 @@ $acl->add(new Zend_Acl_Resource('eenBron'));
 $acl->deny('gast', 'eenBron');
 $acl->allow('lid', 'eenBron');
 
-echo $acl->isAllowed('eenGebruiker', 'eenBron') ? 'toegestaan' : 'weigeren';]]>
-            </programlisting>
+echo $acl->isAllowed('eenGebruiker', 'eenBron') ? 'toegestaan' : 'weigeren';
+            ]]></programlisting>
             <para>
                 Omdat er geen regel is gespecificeerd voor de "<code>eenGebruiker</code>" Rol en
                 "<code>eenBron</code>", gaat Zend_Acl opzoek naar regels die mogelijk gedefineerd zijn
@@ -145,10 +146,10 @@ echo $acl->isAllowed('eenGebruiker', 'eenBron') ? 'toegestaan' : 'weigeren';]]>
                 in de lijst als eerste doorzocht wordt op regels die toepasbaar zijn op de autorisatie vraag.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.creating">
-        <title>Maken van de toegangscontrolelijst (ACL)</title>
+    <section xml:id="zend.acl.introduction.creating"><info><title>Maken van de toegangscontrolelijst (ACL)</title></info>
+        
 
         <para>
             Een ACL kan iedere groep van fysieke en virtuele objecten bevatten die je wenst.
@@ -159,8 +160,8 @@ echo $acl->isAllowed('eenGebruiker', 'eenBron') ? 'toegestaan' : 'weigeren';]]>
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Acl.php';
 
-$acl = new Zend_Acl();]]>
-        </programlisting>
+$acl = new Zend_Acl();
+        ]]></programlisting>
 
         <note>
             <para>
@@ -168,10 +169,10 @@ $acl = new Zend_Acl();]]>
                 van iedere Bron verbieden voor elke Rol.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.role_registry">
-        <title>Registeren van Rollen</title>
+    <section xml:id="zend.acl.introduction.role_registry"><info><title>Registeren van Rollen</title></info>
+        
 
         <para>
             Content Management Systemen zullen bijna altijd een hiërarchie van rechten nodig hebben
@@ -186,8 +187,8 @@ $acl = new Zend_Acl();]]>
             De rechten kunnen als volgt worden weergegeven:
         </para>
 
-        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-          <title>Toegang controle voor een voorbeeld CMS</title>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Toegang controle voor een voorbeeld CMS</title></info>
+          
           <tgroup cols="3">
             <thead>
               <row>
@@ -250,13 +251,13 @@ $acl->addRole(new Zend_Acl_Role('medewerker'), 'gast');
 $acl->addRole(new Zend_Acl_Role('redacteur'), 'medewerker');
 
 // Administrator erft geen ouder Rollen
-$acl->addRole(new Zend_Acl_Role('administrator'));]]>
-        </programlisting>
+$acl->addRole(new Zend_Acl_Role('administrator'));
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.defining">
-        <title>Defineren van de toegangscontrole</title>
+    <section xml:id="zend.acl.introduction.defining"><info><title>Defineren van de toegangscontrole</title></info>
+        
 
         <para>
             Nu de ACL de relevante Rollen bevat, kunnen de regels worden opgesteld die defineren hoe
@@ -302,18 +303,18 @@ $acl->allow('medewerker', null, array('wijzig', 'verzend', 'herzien'));
 $acl->allow('redacteur', null, array('publiceer', 'archiveer', 'verwijder'));
 
 // Administrator erft niets, maar is alle privileges toegestaan
-$acl->allow('administrator');]]>
-        </programlisting>
+$acl->allow('administrator');
+        ]]></programlisting>
 
         <para>
             De <code>null</code> waarde in bovenstaande <code>allow()</code> aanroepen worden gebruikt
             om aan te geven dat de toestaan regels op alle Bronnen van toepassing zijn.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.querying">
-        <title>Raadplegen van de ACL</title>
+    <section xml:id="zend.acl.introduction.querying"><info><title>Raadplegen van de ACL</title></info>
+        
 
         <para>
             We hebben nu een flexibele ACL die gebruikt kan worden om te bepalen of de aanvrager
@@ -344,11 +345,8 @@ echo $acl->isAllowed('administrator') ?
      "toegestaan" : "geweigerd"; // toegestaan want administrator is alles toegestaan
 
 echo $acl->isAllowed('administrator', null, 'update') ?
-     "toegestaan" : "geweigerd"; // toegestaan want administrator is alles toegestaan]]>
-        </programlisting>
+     "toegestaan" : "geweigerd"; // toegestaan want administrator is alles toegestaan
+        ]]></programlisting>
 
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

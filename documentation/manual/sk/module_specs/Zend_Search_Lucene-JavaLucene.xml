@@ -1,22 +1,23 @@
-<sect1 id="zend.search.lucene.java-lucene">
-    <title>Spolupráca s Java Lucene</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Spolupráca s Java Lucene</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.file-formats">
-        <title>Formáty súborov</title>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Formáty súborov</title></info>
+        
         <para>
             Indexový súbor Zend_Search_Lucene je binárne kompatibilný s verziou
             Lucene 1.4 a vyššou.
         </para>
 
         <para>
-            Detailný <ulink url="http://lucene.apache.org/java/2_0_0/fileformats.html">popis formátu</ulink>
+            Detailný <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/2_0_0/fileformats.html">popis formátu</link>
             je k dispozícii na stránke projektu Lucene
             <footnote><para>Aktuálne podporovaná verzia indexového súboru je v2.0.</para></footnote>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.index-directory">
-        <title>Adresár indexu</title>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Adresár indexu</title></info>
+        
 
         <para>
         Po vytvorení indexu obsahuje adresár niekoľko súborov:
@@ -41,10 +42,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.source-code">
-        <title>Zdrojový kód v Java</title>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Zdrojový kód v Java</title></info>
+        
         <para>
             Nasledujúci Java kód poskytuje príklad ako indexovať súbor s použitím
             Java Lucene:
@@ -77,11 +78,7 @@ FileInputStream is = new FileInputStream(f);
 Reader reader = new BufferedReader(new InputStreamReader(is));
 doc.add(Field.Text("contents", reader));
 
-indexWriter.addDocument(doc);]]>
-        </programlisting>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+indexWriter.addDocument(doc);
+        ]]></programlisting>
+    </section>
+</section>

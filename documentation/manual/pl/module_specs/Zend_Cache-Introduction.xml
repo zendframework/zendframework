@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Wprowadzenie</title></info>
+    
     <para>
         <classname>Zend_Cache</classname> zapewnia ogólny sposób buforowania danych.
     </para>
@@ -20,8 +19,8 @@
         <emphasis>Output</emphasis>, <emphasis>File</emphasis>, <emphasis>Function</emphasis> 
         oraz <emphasis>Class</emphasis>.
     </para>
-    <example id="zend.cache.introduction.example-1">
-        <title>Pobieranie frontendu za pomocą Zend_Cache::factory()</title>
+    <example xml:id="zend.cache.introduction.example-1"><info><title>Pobieranie frontendu za pomocą Zend_Cache::factory()</title></info>
+        
         <para>
             <methodname>Zend_Cache::factory()</methodname> tworzy instancję odpowiedniego
             obiektu łączy je razem. W tym pierwszym przykładzie użyjemy
@@ -46,8 +45,8 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
    </example>
 
-   <note>
-       <title>Frontendy i backendy składające się z wielu słów</title>
+   <note><info><title>Frontendy i backendy składające się z wielu słów</title></info>
+       
        <para>
             Niektóre frontendy i backendy są nazwane przy użyciu wielu słów, na
             przykład 'ZendPlatform'. Gdy określamy ich nazwę w metodzie fabryki,
@@ -56,8 +55,8 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example id="zend.cache.introduction.example-2">
-        <title>Buforowanie wyniku zapytania do bazy danych</title>
+    <example xml:id="zend.cache.introduction.example-2"><info><title>Buforowanie wyniku zapytania do bazy danych</title></info>
+        
         <para>
             Teraz gdy mamy frontend, możemy buforować dowolny typ danych
             (włączyliśmy serializację). Na przykład, możemy buforować wynik
@@ -89,8 +88,8 @@ if(!$result = $cache->load('myresult')) {
 print_r($result);
 ]]></programlisting>
     </example>
-    <example id="zend.cache.introduction.example-3">
-        <title>Buforowanie danych wyjściowych przy użyciu frontendu <classname>Zend_Cache</classname></title>
+    <example xml:id="zend.cache.introduction.example-3"><info><title>Buforowanie danych wyjściowych przy użyciu frontendu <classname>Zend_Cache</classname></title></info>
+        
         <para>
             Sekcje w których chcemy buforować dane wyjściowe oznaczamy dodając
             pewną warunkową logikę, ograniczającą sekcję za pomocą metod
@@ -146,4 +145,4 @@ echo 'To nie jest nigdy buforowane ('.time().').';
         powiązane buforowane rekordy mogą się nawzajem ścierać, lub gorzej,
         jeden może wyświetlić się w miejscu drugiego.
     </para></note>
-</sect1>
+</section>

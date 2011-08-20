@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Service_Amazon_Ec2</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2"><info><title>Zend_Service_Amazon_Ec2</title></info>
+    
 
-    <sect2 id="zend.service.amazon.ec2.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.service.amazon.ec2.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Service_Amazon_Ec2</classname> provides an interface to Amazon Elastic
             Clound Computing (EC2).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.whatis">
-        <title>What is Amazon Ec2?</title>
+    <section xml:id="zend.service.amazon.ec2.whatis"><info><title>What is Amazon Ec2?</title></info>
+        
 
         <para>
             Amazon EC2 is a web service that enables you to launch and manage server instances in
@@ -21,10 +20,10 @@
             You can use Amazon EC2 server instances at any time, for as long as you need, and for
             any legal purpose.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.amazon.ec2.staticmethods">
-        <title>Static Methods</title>
+    <section xml:id="zend.service.amazon.ec2.staticmethods"><info><title>Static Methods</title></info>
+        
 
         <para>
             To make using the Ec2 class easier to use there are two static methods that can be
@@ -33,8 +32,8 @@
             create any new object you don't need to pass in any keys to the constructor.
         </para>
 
-        <example id="zend.service.amazon.ec2.staticmethods.setkeys">
-            <title>setKeys() Example</title>
+        <example xml:id="zend.service.amazon.ec2.staticmethods.setkeys"><info><title>setKeys() Example</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
@@ -48,21 +47,21 @@ Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
             stating that.
         </para>
 
-        <example id="zend.service.amazon.ec2.staticmethods.setregion">
-            <title>setRegion() Example</title>
+        <example xml:id="zend.service.amazon.ec2.staticmethods.setregion"><info><title>setRegion() Example</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setRegion('us-east-1');
 ]]></programlisting>
         </example>
 
-        <note id="zend.service.amazon.ec2.staticmethods.setregion.note">
-            <title>Set Amazon Ec2 Region</title>
+        <note xml:id="zend.service.amazon.ec2.staticmethods.setregion.note"><info><title>Set Amazon Ec2 Region</title></info>
+            
 
             <para>
                 Alternativly you can set the region when you create each class as the third
                 parameter in the constructor method.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,18 +1,19 @@
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
 
-    <sect2 id="zend.mime.part.introduction">
-      <title>הקדמה</title>
+    <section xml:id="zend.mime.part.introduction"><info><title>הקדמה</title></info>
+      
 
       <para>
           מחלקה זו מייצגת חלק בודד מהודעת MIME.
         היא מכילה את התוכן של ההודעה ואת המידע אודות הקידוד שלה, סוג התוכן ושם הקובץ המקורי.
         היא מספקת מתודה ליצירת סטרינג מהמידע שנשמר. אובייקטים של <code>Zend_Mime_Part</code> ניתנים להוספה אל <link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
          כדי להרכיב הודעה מרובה חלקים מלאה.</para>
-    </sect2>
+    </section>
 
-  <sect2 id="zend.mime.part.instantiation">
-    <title>התקנה</title>
+  <section xml:id="zend.mime.part.instantiation"><info><title>התקנה</title></info>
+    
 
     <para>
         <code>Zend_Mime_Part</code> נקראת ונוצרת עם הוספת פרמטר שמהווה סטרינג שמייצג את התוכן של החלק החדש. הסוג בדרך כלל מוגדר ל OCTET-STREAM, קידוד הינו 8ביט.
@@ -30,12 +31,12 @@ public $charset;
 public $boundary;
 public $location;
 public $language;
-]]>
-    </programlisting>
-    </sect2>
 
-  <sect2 id="zend.mime.part.methods">
-    <title>מתודות</title>
+    ]]></programlisting>
+    </section>
+
+  <section xml:id="zend.mime.part.methods"><info><title>מתודות</title></info>
+    
 
     <para>
         <code>getContent()</code> מחזיר את התוכן המקודד של ה MimePart בתור סטרינג על ידי שימוש בקידוד שהוגדר בערך $encoding.
@@ -96,8 +97,5 @@ public $language;
             </listitem>
         </itemizedlist>
     </para>
-  </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+  </section>
+</section>

@@ -65,7 +65,7 @@ class Reader
     /**
      * Cache instance
      *
-     * @var \Zend\Cache\Core
+     * @var \Zend\Cache\Frontend\Core
      */
     protected static $_cache = null;
 
@@ -111,7 +111,7 @@ class Reader
     /**
      * Get the Feed cache
      *
-     * @return \Zend\Cache\Core
+     * @return \Zend\Cache\Frontend\Core
      */
     public static function getCache()
     {
@@ -121,10 +121,10 @@ class Reader
     /**
      * Set the feed cache
      *
-     * @param \Zend\Cache\Core $cache
+     * @param \Zend\Cache\Frontend\Core $cache
      * @return void
      */
-    public static function setCache(\Zend\Cache\Core $cache)
+    public static function setCache(\Zend\Cache\Frontend\Core $cache)
     {
         self::$_cache = $cache;
     }

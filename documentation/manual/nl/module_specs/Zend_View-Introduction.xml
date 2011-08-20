@@ -1,6 +1,7 @@
-<sect1 id="zend.view.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.introduction"><info><title>Inleiding</title></info>
 
-    <title>Inleiding</title>
+    
 
     <para>
         Zend_View is een klasse bestemd om met het "view" deel van
@@ -28,9 +29,9 @@
         output genereert.
     </para>
 
-    <sect2 id="zend.view.introduction.controller">
+    <section xml:id="zend.view.introduction.controller"><info><title>Controller Script</title></info>
 
-        <title>Controller Script</title>
+        
 
         <para>
             Als een eenvoudig voorbeeld, laat ons zeggen dat je controller een
@@ -62,14 +63,14 @@ $view->books = $data;
 
 // en geef het view script genaamd "boeklijst.php" weer
 echo $view->render('boeklijst.php');
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.introduction.view">
+    <section xml:id="zend.view.introduction.view"><info><title>View Script</title></info>
 
-        <title>View Script</title>
+        
 
         <para>
             Nu hebben we het geassocieerde view script, "boeklijst.php" nodig.
@@ -104,17 +105,14 @@ echo $view->render('boeklijst.php');
 
     <p>Er zijn geen boeken af te beelden.</p>
 
-<?php endif; ?>]]>
-        </programlisting>
+<?php endif; ?>
+        ]]></programlisting>
 
         <para>
             Merk op hoe we de "escape()" methode gebruiken om output
             escaping op de variabelen toe te passen.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

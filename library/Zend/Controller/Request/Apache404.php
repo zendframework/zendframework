@@ -34,8 +34,6 @@ namespace Zend\Controller\Request;
  * In each case, the URL to check against is found in REDIRECT_URL, not
  * REQUEST_URI.
  *
- * @uses       \Zend\Controller\Request\Http
- * @uses       \Zend\Uri\Uri
  * @package    Zend_Controller
  * @subpackage Request
  */

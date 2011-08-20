@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22747 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.http.response">
-    <title>Zend_Http_Response</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+    
 
-    <sect2 id="zend.http.response.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.http.response.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             <classname>Zend_Http_Response</classname> stellt den einfachen Zugriff auf eine
@@ -21,8 +19,8 @@
             <acronym>HTTP</acronym> Rückantwort enthält und ein
             <classname>Zend_Http_Response</classname> Objekt zurückgibt.
 
-            <example id="zend.http.response.introduction.example-1">
-                <title>Ein Zend_Http_Response Object über die factory Methode instanzieren</title>
+            <example xml:id="zend.http.response.introduction.example-1"><info><title>Ein Zend_Http_Response Object über die factory Methode instanzieren</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $str = '';
@@ -62,7 +60,7 @@ $response = Zend_Http_Response::fromString($str);
             <listitem>
                 <para>
                     <varname>$headers</varname>: Ein assoziatives Array mit <acronym>HTTP</acronym>
-                    Antwort Headers (z.B. 'Host' => 'example.com')
+                    Antwort Headers (z.B. 'Host' =&gt; 'example.com')
                 </para>
             </listitem>
 
@@ -87,10 +85,10 @@ $response = Zend_Http_Response::fromString($str);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.testers">
-        <title>Boolesche Testmethoden</title>
+    <section xml:id="zend.http.response.testers"><info><title>Boolesche Testmethoden</title></info>
+        
 
         <para>
             Sobald ein <classname>Zend_Http_Response</classname> Objekt instantiert ist, stellt es
@@ -125,8 +123,8 @@ $response = Zend_Http_Response::fromString($str);
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.http.response.testers.example-1">
-                <title>Die isError() Method verwenden, um eine Antwort zu validieren</title>
+            <example xml:id="zend.http.response.testers.example-1"><info><title>Die isError() Method verwenden, um eine Antwort zu validieren</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 if ($response->isError()) {
@@ -138,10 +136,10 @@ if ($response->isError()) {
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.acessors">
-        <title>Zugriffsmethoden</title>
+    <section xml:id="zend.http.response.acessors"><info><title>Zugriffsmethoden</title></info>
+        
 
         <para>
             Der Hauptzweck eines Response Okjektes ist der einfache Zugriff auf diverse
@@ -180,7 +178,7 @@ if ($response->isError()) {
                 <listitem>
                     <para>
                         <methodname>getHeaders()</methodname>: Erhalte die <acronym>HTTP</acronym>
-                        Antwort Header als assoziatives Array (z.B. 'Content-type' => 'text/html')
+                        Antwort Header als assoziatives Array (z.B. 'Content-type' =&gt; 'text/html')
                         zurück.
                     </para>
                 </listitem>
@@ -217,8 +215,8 @@ if ($response->isError()) {
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.http.response.acessors.example-1">
-                <title>Zend_Http_Response Zugriffsmethoden verwenden</title>
+            <example xml:id="zend.http.response.acessors.example-1"><info><title>Zend_Http_Response Zugriffsmethoden verwenden</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 if ($response->getStatus() == 200) {
@@ -231,8 +229,8 @@ if ($response->getStatus() == 200) {
 ]]></programlisting>
             </example>
 
-            <note>
-                <title>Immer die Rückgabewerte prüfen</title>
+            <note><info><title>Immer die Rückgabewerte prüfen</title></info>
+                
 
                 <para>
                     Weil eine Antwort mehrere Instanzen des selben Headers beinhalten kann, können
@@ -242,8 +240,8 @@ if ($response->getStatus() == 200) {
                 </para>
             </note>
 
-            <example id="zend.http.response.acessors.example-2">
-                <title>Auf Antwort Header zugreifen</title>
+            <example xml:id="zend.http.response.acessors.example-2"><info><title>Auf Antwort Header zugreifen</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $ctype = $response->getHeader('Content-type');
@@ -258,10 +256,10 @@ echo $body;
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.static_parsers">
-        <title>Statische HTTP Antwortanalysierer</title>
+    <section xml:id="zend.http.response.static_parsers"><info><title>Statische HTTP Antwortanalysierer</title></info>
+        
 
         <para>
             Die <classname>Zend_Http_Response</classname> Klasse beinhaltet auch verschiedene,
@@ -321,7 +319,7 @@ echo $body;
                         werden die <acronym>HTTP</acronym>/1.1 Standardantworten zurück gegeben,
                         andernfalls die <acronym>HTTP</acronym>/1.0 Antworten. Wird
                         <varname>$code</varname> nicht angegeben, wird diese Methode alle bekannten
-                        <acronym>HTTP</acronym> Antwortcodes als assoziatives Array (code =>
+                        <acronym>HTTP</acronym> Antwortcodes als assoziatives Array (code =&gt;
                         message) zurückgeben.
                     </para>
                 </listitem>
@@ -355,5 +353,5 @@ echo $body;
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

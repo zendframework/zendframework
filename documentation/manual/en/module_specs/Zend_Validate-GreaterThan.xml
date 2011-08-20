@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.greaterthan">
-    <title>GreaterThan</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><info><title>GreaterThan</title></info>
+    
 
     <para>
         <classname>Zend_Validate_GreaterThan</classname> allows you to validate if a given value is
         greater than a minimum border value.
     </para>
 
-    <note>
-        <title>Zend_Validate_GreaterThan supports only number validation</title>
+    <note><info><title>Zend_Validate_GreaterThan supports only number validation</title></info>
+        
 
         <para>
             It should be noted that <classname>Zend_Validate_GreaterThan</classname> supports only
@@ -17,8 +16,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.greaterthan.options">
-        <title>Supported options for Zend_Validate_GreaterThan</title>
+    <section xml:id="zend.validate.set.greaterthan.options"><info><title>Supported options for Zend_Validate_GreaterThan</title></info>
+        
 
         <para>
             The following options are supported for
@@ -32,10 +31,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.greaterthan.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.greaterthan.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             To validate if a given value is greater than a defined border simply use the following
@@ -53,8 +52,5 @@ $return = $valid->isValid($value);
             The above example returns <constant>TRUE</constant> for all values which are equal to 10
             or greater than 10.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

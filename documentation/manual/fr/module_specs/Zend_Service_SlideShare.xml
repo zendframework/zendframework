@@ -1,25 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20855 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.slideshare">
-    <title>Zend_Service_SlideShare</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.slideshare"><info><title>Zend_Service_SlideShare</title></info>
+    
 
     <para>
         Le composant <classname>Zend_Service_SlideShare</classname> est utilisé dans
-        l'interaction avec les services Web de <ulink
-        url="http://www.slideshare.net/">slideshare.net</ulink>, plate-forme servant d'hébergement
+        l'interaction avec les services Web de <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.slideshare.net/">slideshare.net</link>, plate-forme servant d'hébergement
         de diaporamas. Grâce à ce composant, vous pouvez intégrer des diaporamas de Slideshare, dans
         votre propre site Web, ou même uploader des nouveaux diaporamas sur votre compte Slideshare,
         depuis votre site Web.
     </para>
 
-    <sect2 id="zend.service.slideshare.basicusage">
-        <title>Démarrage avec <classname>Zend_Service_SlideShare</classname></title>
+    <section xml:id="zend.service.slideshare.basicusage"><info><title>Démarrage avec <classname>Zend_Service_SlideShare</classname></title></info>
+        
 
         <para>
             Pour utiliser <classname>Zend_Service_SlideShare</classname>, vous devez créer au
-            préalable un compte sur slideshare.net (plus d'informations à ce sujet <ulink
-            url="http://www.slideshare.net/developers/">ici</ulink>), afin de recevoir votre clé
+            préalable un compte sur slideshare.net (plus d'informations à ce sujet <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.slideshare.net/developers/">ici</link>), afin de recevoir votre clé
             d'API et votre login / mot de passe, indispensables pour utiliser le service Web.
         </para>
 
@@ -36,10 +32,10 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'USERNAME',
                                   'PASSWORD');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.slideshowobj">
-        <title>L'objet SlideShow</title>
+    <section xml:id="zend.service.slideshare.slideshowobj"><info><title>L'objet SlideShow</title></info>
+        
 
         <para>
             Chaque diaporama issu de <classname>Zend_Service_SlideShare</classname> est
@@ -200,10 +196,10 @@ class Zend_Service_SlideShare_SlideShow {
             de données Slideshow sera souvent utilisée pour parcourir, ajouter, ou modifier des
             diaporamas.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.getslideshow">
-        <title>Récupérer un diaporama simplement</title>
+    <section xml:id="zend.service.slideshare.getslideshow"><info><title>Récupérer un diaporama simplement</title></info>
+        
 
         <para>
             La manière la plus simple d'utiliser
@@ -226,10 +222,10 @@ $slideshow = $ss->getSlideShow(123456);
 print "Titre du diaporama : {$slideshow->getTitle()}<br/>\n";
 print "Nombre de diapositives : {$slideshow->getNumViews()}<br/>\n";
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.getslideshowlist">
-        <title>Récupérer des groupes de diaporamas</title>
+    <section xml:id="zend.service.slideshare.getslideshowlist"><info><title>Récupérer des groupes de diaporamas</title></info>
+        
 
         <para>
             Si vous ne connaissez pas l'ID spécifique d'un diaporama vous intéressant, il est
@@ -288,16 +284,16 @@ foreach($ss_user as $slideshow) {
    print "Titre du diaporama : {$slideshow->getTitle}<br/>\n";
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.caching">
-        <title>Politique de cache de <classname>Zend_Service_SlideShare</classname></title>
+    <section xml:id="zend.service.slideshare.caching"><info><title>Politique de cache de <classname>Zend_Service_SlideShare</classname></title></info>
+        
 
         <para>
             Par défaut, <classname>Zend_Service_SlideShare</classname> va mettre en cache
             toute requête concernant le service Web, dans le système de fichier (par défaut :
             <code>/tmp</code>), ceci pour une durée de 12 heures. Si vous voulez changer ce
-            comportement, vous devez passer votre propre objet <xref linkend="zend.cache" /> en
+            comportement, vous devez passer votre propre objet <xref linkend="zend.cache"/> en
             utilisant la méthode <code>setCacheObject</code> :
         </para>
 
@@ -321,16 +317,15 @@ $ss->setCacheObject($cache);
 
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.slideshare.httpclient">
-        <title>Changer le comportement du client HTTP</title>
+    <section xml:id="zend.service.slideshare.httpclient"><info><title>Changer le comportement du client HTTP</title></info>
+        
 
         <para>
             Si pour une raison quelconque vous souhaitez changer le comportement de l'objet
             client <acronym>HTTP</acronym> utilisé pour interroger le service Web, vous pouvez créer votre propre
-            instance de <classname>Zend_Http_Client</classname> (voyez <xref
-            linkend="zend.http" />). Ceci peut être utile par exemple pour spécifier un timeout ou
+            instance de <classname>Zend_Http_Client</classname> (voyez <xref linkend="zend.http"/>). Ceci peut être utile par exemple pour spécifier un timeout ou
             toute autre chose :
         </para>
 
@@ -345,5 +340,5 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 $ss->setHttpClient($client);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

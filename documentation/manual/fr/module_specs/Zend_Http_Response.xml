@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.http.response">
-    <title>Zend_Http_Response</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+    
 
-    <sect2 id="zend.http.response.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.http.response.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Http_Response</classname> fournit un accès simplifié aux réponses
@@ -18,9 +16,9 @@
             Dans la plupart des cas, un objet <classname>Zend_Http_Response</classname> sera
             instancié en utilisant la méthode <methodname>fromString()</methodname>, qui lit une chaîne contenant
             une réponse HTTP, et retourne un nouvel objet <classname>Zend_Http_Response</classname>
-            : <example id="zend.http.response.introduction.example-1">
-                    <title>Instancier un objet Zend_Http_Response en utilisant la méthode
-                    factory</title>
+            : <example xml:id="zend.http.response.introduction.example-1"><info><title>Instancier un objet Zend_Http_Response en utilisant la méthode
+                    factory</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $str = '';
@@ -86,10 +84,10 @@ $response = Zend_Http_Response::fromString($str);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.testers">
-        <title>Méthodes de tests booléennes</title>
+    <section xml:id="zend.http.response.testers"><info><title>Méthodes de tests booléennes</title></info>
+        
 
         <para>
             Une fois qu'un objet <classname>Zend_Http_Response</classname> est instancié, il
@@ -117,8 +115,8 @@ $response = Zend_Http_Response::fromString($str);
                         Retourne <code>true </code> pour les codes de réponses <acronym>HTTP</acronym> 3xx.
                     </para>
                 </listitem>
-            </itemizedlist> <example id="zend.http.response.testers.example-1">
-                <title>Utiliser la méthode isError() pour valider une réponse</title>
+            </itemizedlist> <example xml:id="zend.http.response.testers.example-1"><info><title>Utiliser la méthode isError() pour valider une réponse</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 if ($response->isError()) {
@@ -132,10 +130,10 @@ if ($response->isError()) {
 ]]></programlisting>
                 </example>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.acessors">
-        <title>Méthodes accesseurs</title>
+    <section xml:id="zend.http.response.acessors"><info><title>Méthodes accesseurs</title></info>
+        
 
         <para>
             Le but principal de l'objet réponse est de fournir un accès facile à divers
@@ -205,8 +203,8 @@ if ($response->isError()) {
                         <methodname>asString()</methodname>.
                     </para>
                 </listitem>
-            </itemizedlist> <example id="zend.http.response.acessors.example-1">
-                <title>Utiliser les méthodes accesseurs de Zend_Http_Response</title>
+            </itemizedlist> <example xml:id="zend.http.response.acessors.example-1"><info><title>Utiliser les méthodes accesseurs de Zend_Http_Response</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 if ($response->getStatus() == 200) {
@@ -217,8 +215,8 @@ if ($response->getStatus() == 200) {
   echo $response->getStatus() . ": " . $response->getMessage();
 }
 ]]></programlisting>
-            </example> <note>
-                <title>Vérifier toujours la valeur retournée</title>
+            </example> <note><info><title>Vérifier toujours la valeur retournée</title></info>
+                
 
                 <para>
                     Puisqu'une réponse peut contenir plusieurs exemplaires du même en-tête, la
@@ -227,8 +225,8 @@ if ($response->getStatus() == 200) {
                     pour chaque en-tête. Vous devez donc toujours vérifier si la valeur retournée
                     est une chaîne ou un tableau.
                 </para>
-            </note> <example id="zend.http.response.acessors.example-2">
-                <title>Accéder aux en-têtes de réponse</title>
+            </note> <example xml:id="zend.http.response.acessors.example-2"><info><title>Accéder aux en-têtes de réponse</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $ctype = $response->getHeader('Content-type');
@@ -243,10 +241,10 @@ echo $body;
 ]]></programlisting>
                 </example>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.static_parsers">
-        <title>Analyseurs statiques de réponse HTTP</title>
+    <section xml:id="zend.http.response.static_parsers"><info><title>Analyseurs statiques de réponse HTTP</title></info>
+        
 
         <para>
             La classe <classname>Zend_Http_Response</classname> inclut également plusieurs
@@ -335,5 +333,5 @@ echo $body;
                 </listitem>
                 </itemizedlist>
             </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

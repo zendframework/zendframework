@@ -205,13 +205,15 @@ class Helper
     }
 
     /**
-     * Print result line in check-environment.php script
+     * Print result line like in a table of contents i.e.:
+     *
+     * n: XXX YYY ZZZ....ZZZ
      *
      * @param $counter
      * @param $testString
      * @param $testResult
      */
-    public static function printCheckEnvironmentLine($counter, $testString, $testResult)
+    public static function printLineToc($counter, $testString, $testResult)
     {
         $lineLength = self::LINE_LENGTH;
 

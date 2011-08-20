@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.smtp-secure">
-    <title>Защищенное SMTP-соединение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Защищенное SMTP-соединение</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> также поддерживает использование
@@ -13,8 +12,8 @@
         <acronym>TLS</acronym> или 465 для <acronym>SSL</acronym>.
     </para>
 
-    <example id="zend.mail.smtp-secure.example-1">
-        <title>Включение защищенного соединения через Zend_Mail_Transport_Smtp</title>
+    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Включение защищенного соединения через Zend_Mail_Transport_Smtp</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $config = array('ssl' => 'tls',
@@ -30,7 +29,4 @@ $mail->setSubject('TestSubject');
 $mail->send($transport);
 ]]></programlisting>
   </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.quickstart">
-    <title>Szybki start z Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Szybki start z Zend_Form</title></info>
+    
 
     <para>
         Ten przewodnik opisuje podstawy tworzenia, weryfikacji oraz
         renderowania formularzy za pomocą komponentu <classname>Zend_Form</classname>.
     </para>
 
-    <sect2 id="zend.form.quickstart.create">
-        <title>Tworzenie obiektu formularza</title>
+    <section xml:id="zend.form.quickstart.create"><info><title>Tworzenie obiektu formularza</title></info>
+        
 
         <para>
             Tworzenie obiektu formularza jest bardzo proste: należy, po prostu, utworzyć
@@ -19,8 +17,8 @@
 
         <programlisting language="php"><![CDATA[
 $form = new Zend_Form;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             W zaawansowanych przypadkach można rozszerzyć klasę
@@ -37,8 +35,8 @@ $form = new Zend_Form;
         <programlisting language="php"><![CDATA[
 $form->setAction('/resource/process')
      ->setMethod('post');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Powyższy kod ustawia akcję formularza na adres <acronym>URL</acronym>
@@ -56,12 +54,12 @@ $form->setAction('/resource/process')
 
         <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.form.quickstart.elements">
-        <title>Dodawanie elementów do formularza</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.form.quickstart.elements"><info><title>Dodawanie elementów do formularza</title></info>
+        
 
         <para>
             Formularz jest bezużyteczny jeśli nie posiada elementów.
@@ -134,8 +132,8 @@ $form->addElement(new Zend_Form_Element_Text('username'));
 
 // Przekazanie typu elementu do obiektu:
 $form->addElement('text', 'username');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Domyślnie, elementy te nie posiadają filtrów ani walidatorów.
@@ -162,8 +160,8 @@ $username->addValidator(new Zend_Validate_Alnum());
 
 // Przekazanie nazwy walidatora:
 $username->addValidator('alnum');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Dla drugiego sposobu, można przekazać w trzecim parametrze metody
@@ -173,8 +171,8 @@ $username->addValidator('alnum');
         <programlisting language="php"><![CDATA[
 // Przekazanie wzoru
 $username->addValidator('regex', false, array('/^[a-z]/i'));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             (Drugi parametr jest używany aby określić czy niepowodzenie w
@@ -191,8 +189,8 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         <programlisting language="php"><![CDATA[
 // Ustawienie elementu jako wymaganego:
 $username->setRequired(true);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Gdy element jest wymagany, dodawany jest walidator 'NotEmpty' na
@@ -208,8 +206,8 @@ $username->setRequired(true);
 
         <programlisting language="php"><![CDATA[
 $username->addFilter('StringtoLower');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Finalnie konfiguracja elementu może wyglądać tak:
@@ -227,8 +225,8 @@ $username->addValidators(array('alnum',
     ))
     ->setRequired(true)
     ->addFilters(array('StringToLower'));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Tworzenie obiektu dla każdego z elementów formularza może być
@@ -248,8 +246,8 @@ $form->addElement('text', 'username', array(
     'required' => true,
     'filters'  => array('StringToLower'),
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <note>
             <para>
@@ -259,10 +257,10 @@ $form->addElement('text', 'username', array(
                 tworzenia własnych elementów. Może to oszczędzić nieco pracy.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.render">
-        <title>Renderowanie formularza</title>
+    <section xml:id="zend.form.quickstart.render"><info><title>Renderowanie formularza</title></info>
+        
 
         <para>
             Renderowanie formularza jest proste. Większość elementów używa do
@@ -278,8 +276,8 @@ echo $form->render($view);
 
 // Zakładając że obiekt widoku został wcześniej ustawiony za pomocą setView():
 echo $form;
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Domyślnie obiekty <classname>Zend_Form</classname> oraz
@@ -291,8 +289,8 @@ echo $form;
 
         <programlisting language="php"><![CDATA[
 <? echo $this->form ?>
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             <classname>Zend_Form</classname> używa "dekoratorów" do przeprowadzania
@@ -311,8 +309,8 @@ $element->addDecorators(array(
     array('HtmlTag', array('tag' => 'dd')),
     array('Label', array('tag' => 'dt')),
 ));
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             (Gdzie &lt;HELPERNAME&gt; jest nazwą klasy pomocniczej widoku, która
@@ -370,10 +368,10 @@ $element->setOrder(10);
         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.validate">
-        <title>Sprawdzanie poprawności formularza</title>
+    <section xml:id="zend.form.quickstart.validate"><info><title>Sprawdzanie poprawności formularza</title></info>
+        
 
         <para>
             Po tym jak formularz zostanie wysłany, należy sprawdzić czy pomyślnie
@@ -411,8 +409,8 @@ if ($form->isValidPartial($_POST)) {
 } else {
     // jeden lub więcej elementów nie przeszło poprawnie weryfikacji
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Do częściowej weryfikacji formularza można także użyć metody
@@ -428,8 +426,8 @@ if ($form->isValidPartial($_POST)) {
 
         <programlisting language="php"><![CDATA[
 $values = $form->getValues();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Jeśli potrzeba niefiltrowanych wartości, należy użyć:
@@ -437,12 +435,12 @@ $values = $form->getValues();
 
         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.form.quickstart.errorstatus">
-        <title>Pobieranie informacji o błędach</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Pobieranie informacji o błędach</title></info>
+        
 
         <para>
             Formularz nie przeszedł weryfikacji? W większości przypadków
@@ -458,8 +456,8 @@ if (!$form->isValid($_POST)) {
     $this->view->form = $form;
     return $this->render('form');
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             Dostępne są dwie metody do sprawdzania błędów. Metoda
@@ -471,10 +469,10 @@ if (!$form->isValid($_POST)) {
             postaci kod / komunikat). Jeśli dany element nie zawiera błędów, nie
             będzie zawarty w tablicy.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.puttingtogether">
-        <title>Złożenie w całość</title>
+    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Złożenie w całość</title></info>
+        
 
         <para>
             Teraz można przystąpić do budowy prostego formularza logowania.
@@ -578,10 +576,10 @@ class UserController extends Zend_Controller_Action
             pracy: jeśli wysłane dane będą poprawne, należy przeprowadzić
             uwierzytelnienie używając np. klasy <classname>Zend_Auth</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.config">
-        <title>Użycie obiektu Zend_Config</title>
+    <section xml:id="zend.form.quickstart.config"><info><title>Użycie obiektu Zend_Config</title></info>
+        
 
         <para>
             Wszystkie klasy <classname>Zend_Form</classname> można skonfigurować za pomocą
@@ -635,18 +633,15 @@ $form   = new Zend_Form($config->user->login);
         <para>
             w ten sposób cały formularz został zdefiniowany.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.conclusion">
-        <title>Podsumowanie</title>
+    <section xml:id="zend.form.quickstart.conclusion"><info><title>Podsumowanie</title></info>
+        
 
         <para>
             Dzięki temu przewodnikowi czytelnik powinien być na dobrej drodze do wykorzystania mocy
             i elastyczności komponentu <classname>Zend_Form</classname>. Aby uzyskać
             bardziej szczegółowe informacje należy zapoznać się z dalszymi częściami dokumentacji.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

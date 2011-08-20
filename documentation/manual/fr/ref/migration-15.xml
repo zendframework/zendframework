@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.15">
-    <title>Zend Framework 1.5</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.15"><info><title>Zend Framework 1.5</title></info>
+    
 
     <para>
         Lors de la migration d'un version précédente vers Zend Framework 1.5 ou plus récent
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <sect2 id="migration.15.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.15.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             Bien que la plupart des fonctionnalités de base demeurent les mêmes, et que
@@ -46,7 +44,7 @@
         <para>
             Quelques développeurs se sont fondés sur ce "dispositif", qui n'a jamais été
             prévu. Plusieurs changements de l'arbre 1.5.0, cependant, l'ont fait de sorte que le
-            <code>ViewRenderer</code> ne résout plus ces chemins&#160;; le lien sémantique est
+            <code>ViewRenderer</code> ne résout plus ces chemins ; le lien sémantique est
             maintenant imposé. A partir de maintenant, le distributeur impose la sensibilité à la
             casse dans les noms d'action. Ceci veut dire que la référence vers vos actions dans
             l'URL en utilisant la notationCamel ne résoudra plus les mêmes méthodes qu'en utilisant
@@ -57,24 +55,24 @@
 
         <para>
             Si vous constatez que vous comptiez sur ce "dispositif", vous avez plusieurs
-            options&#160;:
+            options :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Meilleure option : renommez vos scripts de vue. Pour&#160;: compatibilité
-                    ascendante. Contre&#160;: si vous avez beaucoup de scripts de vue basés sur
+                    Meilleure option : renommez vos scripts de vue. Pour : compatibilité
+                    ascendante. Contre : si vous avez beaucoup de scripts de vue basés sur
                     l'ancien, comportement fortuit, vous aurez beaucoup de renommage à
                     faire.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Seconde meilleure option&#160;: le <code>ViewRenderer</code> délégue
+                    Seconde meilleure option : le <code>ViewRenderer</code> délégue
                     maintenant la résolution des scripts de vue à
                     <classname>Zend_Filter_Inflector</classname> ; vous pouvez modifier les règles
-                    de l'inflecteur pour ne plus séparer les mots d'une action avec un tiret&#160;:
+                    de l'inflecteur pour ne plus séparer les mots d'une action avec un tiret :
                 </para>
                 <programlisting language="php"><![CDATA[
 $viewRenderer =
@@ -90,7 +88,7 @@ $inflector->setFilterRule(':action', array(
 ]]></programlisting>
                 <para>
                     Le code ci-dessus modifiera l'inflecteur pour ne plus séparer les mots
-                    avec un tiret&#160;; vous pouvez aussi vouloir supprimer le filtre
+                    avec un tiret ; vous pouvez aussi vouloir supprimer le filtre
                     <code>StringToLower</code> si vous <emphasis>voulez</emphasis> que vos scripts
                     de vues utilisent aussi la notationCamel.
                 </para>
@@ -102,9 +100,9 @@ $inflector->setFilterRule(':action', array(
             </listitem>
             <listitem>
                 <para>
-                    Option la moins souhaitable&#160;: vous pouvez forcer le distributeur à
+                    Option la moins souhaitable : vous pouvez forcer le distributeur à
                     distribuer les noms d'action écrits en notationCamel avec un nouveau drapeau du
-                    contrôleur frontal, <code>useCaseSensitiveActions</code>&#160;:
+                    contrôleur frontal, <code>useCaseSensitiveActions</code> :
                 </para>
                 <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
@@ -122,5 +120,5 @@ $front->setParam('useCaseSensitiveActions', true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

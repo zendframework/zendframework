@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20885 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.frontcontroller">
-    <title>Zend_Application_Resource_Frontcontroller</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.frontcontroller"><info><title>Zend_Application_Resource_Frontcontroller</title></info>
+    
 
     <para>
         Probablemente el recurso más común que se carga con
@@ -143,8 +141,8 @@
         .
     </para>
 
-    <example id="zend.application.available-resources.frontcontroller.configExample">
-        <title>Ejemplo Front Controller resource configuration</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.configExample"><info><title>Ejemplo Front Controller resource configuration</title></info>
+        
 
         <para>
             A continuación,
@@ -170,8 +168,8 @@ resources.frontController.returnresponse = 1
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>
-    <example id="zend.application.available-resources.frontcontroller.frontControllerPropertyExample">
-        <title>Recuperar el Front Controller de su arranque (bootstrap)</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.frontControllerPropertyExample"><info><title>Recuperar el Front Controller de su arranque (bootstrap)</title></info>
+        
         <para>
             Una vez que el recurso de su Front Controller ha sido inicializado,
             se puede recuperar la
@@ -186,4 +184,4 @@ $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>
     </example>
-</sect2>
+</section>

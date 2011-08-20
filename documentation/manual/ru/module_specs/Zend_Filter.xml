@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.filter.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Введение</title></info>
 
-    <title>Введение</title>
+    
 
     <para>
         Компонента <classname>Zend_Filter</classname> предоставляет набор наиболее часто используемых
@@ -12,9 +11,9 @@
         пользователем.
     </para>
 
-    <sect2 id="zend.filter.introduction.definition">
+    <section xml:id="zend.filter.introduction.definition"><info><title>Что есть фильтр?</title></info>
 
-        <title>Что есть фильтр?</title>
+        
 
         <para>
             В материальном мире фильтр обычно используется для удаления
@@ -43,11 +42,11 @@
             некоторых преобразований над входными данными.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.introduction.using">
+    <section xml:id="zend.filter.introduction.using"><info><title>Основы использования фильтров</title></info>
 
-        <title>Основы использования фильтров</title>
+        
 
         <para>
             Такое определение фильтра дает основу для
@@ -59,22 +58,22 @@
         <para>
             Ниже приведен пример использования фильтра с двумя вариантами
             входных данных - амперсандом (<code>&amp;</code>) и двойными
-            кавычками (<code>&quot;</code>).
+            кавычками (<code>"</code>).
             
             <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
-echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;
+echo $htmlEntities->filter('&'); // &
+echo $htmlEntities->filter('"'); // "
 ]]></programlisting>
 
     </para>
 
-    </sect2>
+    </section>
     
-    <sect2 id="zend.filter.introduction.static">
+    <section xml:id="zend.filter.introduction.static"><info><title>Использование статического метода get()</title></info>
 
-        <title>Использование статического метода get()</title>
+        
 
         <para>
             Каждый раз загружать нужный класс фильтра и создавать его экземпляр
@@ -117,12 +116,9 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
             <classname>Zend_Filter_Input</classname> также позволяет инстанцировать и запускать
             несколько фильтров и валидаторов для обработки наборов
             данных. Более подробную информацию читайте в
-            <xref linkend="zend.filter.input" />.
+            <xref linkend="zend.filter.input"/>.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

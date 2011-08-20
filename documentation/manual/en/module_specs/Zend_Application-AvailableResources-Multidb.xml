@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.multidb">
-    <title>Zend_Application_Resource_Multidb</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.multidb"><info><title>Zend_Application_Resource_Multidb</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Multidb</classname> is used to initialize
@@ -10,8 +9,8 @@
         However, for specifying a default connection, you can also use the 'default' directive.
     </para>
 
-    <example id="zend.application.available-resources.multidb.configexample">
-        <title>Setting up multiple Db Connections</title>
+    <example xml:id="zend.application.available-resources.multidb.configexample"><info><title>Setting up multiple Db Connections</title></info>
+        
 
         <para>
             Below is an example <acronym>INI</acronym> configuration that can be used to initialize
@@ -35,8 +34,8 @@ resources.multidb.db2.default = true
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.multidb.retrieveSpecificDb">
-        <title>Retrieving a specific database adapter</title>
+    <example xml:id="zend.application.available-resources.multidb.retrieveSpecificDb"><info><title>Retrieving a specific database adapter</title></info>
+        
 
         <para>
             When using this resource plugin you usually will want to retrieve
@@ -56,8 +55,8 @@ $defaultDb = $resource->getDb();
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
-        <title>Retrieving the default database adapter</title>
+    <example xml:id="zend.application.available-resources.multidb.retrieveDefaultDb"><info><title>Retrieving the default database adapter</title></info>
+        
 
         <para>
             Additionally, you can retrieve the default database adapter
@@ -82,4 +81,4 @@ $db1 = $resource->getDefaultDb();
 $null = $resource->getDefaultDb(false); // null
 ]]></programlisting>
     </example>
-</sect2>
+</section>

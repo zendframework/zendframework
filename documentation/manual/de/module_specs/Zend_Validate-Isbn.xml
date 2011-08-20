@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.isbn">
-    <title>Isbn</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.isbn"><info><title>Isbn</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Isbn</classname> erlaubt es einen
         <acronym>ISBN-10</acronym> oder <acronym>ISBN-13</acronym> Wert zu prüfen.
     </para>
 
-    <sect3 id="zend.validate.set.isbn.options">
-        <title>Unterstützte Optionen für Zend_Validate_Isbn</title>
+    <section xml:id="zend.validate.set.isbn.options"><info><title>Unterstützte Optionen für Zend_Validate_Isbn</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Isbn</classname> unterstützt:
@@ -35,10 +33,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.basic">
-        <title>Einfache Verwendung</title>
+    <section xml:id="zend.validate.set.isbn.basic"><info><title>Einfache Verwendung</title></info>
+        
 
         <para>
             Ein einfaches Verwendungsbeispiel ist anbei zu finden:
@@ -57,10 +55,10 @@ if ($validator->isValid($isbn)) {
             Das prüft jeden <acronym>ISBN-10</acronym> und <acronym>ISBN-13</acronym> Wert ohne
             Trennzeichen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.type-explicit">
-        <title>Einen expliziten ISBN Prüfungstyp setzen</title>
+    <section xml:id="zend.validate.set.isbn.type-explicit"><info><title>Einen expliziten ISBN Prüfungstyp setzen</title></info>
+        
 
         <para>
             Ein Beispiel für die Begrenzung auf einen <acronym>ISBN</acronym> Typ ist anbei zu
@@ -103,10 +101,10 @@ if ($validator->isValid($isbn)) {
                 <para><constant>Zend_Validate_Isbn::ISBN13</constant></para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.isbn.separator">
-        <title>Eine Begrenzung auf ein Trennzeichen spezifizieren</title>
+    <section xml:id="zend.validate.set.isbn.separator"><info><title>Eine Begrenzung auf ein Trennzeichen spezifizieren</title></info>
+        
 
         <para>
             Ein Beispiel für die Begrenzung auf ein Trennzeichen ist anbei zu finden:
@@ -127,8 +125,8 @@ if ($validator->isValid($isbn)) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Werte ohne Trennzeichen</title>
+        <note><info><title>Werte ohne Trennzeichen</title></info>
+            
 
             <para>
                 Es ist zu beachten das dies <constant>FALSE</constant> zurückgibt wenn
@@ -146,5 +144,5 @@ if ($validator->isValid($isbn)) {
             <listitem><para>"-" (Bindestrich)</para></listitem>
             <listitem><para>" " (Leerzeichen)</para></listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
+    </section>
+</section>

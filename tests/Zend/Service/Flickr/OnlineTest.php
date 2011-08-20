@@ -205,7 +205,7 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     *  @see ZF-6397
+     *  @group ZF-6397
      */
     function testTotalForEmptyResultSet()
     {

@@ -775,7 +775,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2443
+     * @group ZF-2443
      */
     public function testStockInflectorWorksWithViewBaseSpec()
     {
@@ -800,7 +800,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2738
+     * @group ZF-2738
      */
     public function testStockInflectorWorksWithDottedRequestParts()
     {
@@ -846,7 +846,7 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $body = $this->response->getBody();
         $this->assertContains('SampleZfHelper invoked', $body, 'Received ' . $body);
     }
-    
+
     protected function _normalizePath($path)
     {
         return str_replace(array('/', '\\'), '/', $path);

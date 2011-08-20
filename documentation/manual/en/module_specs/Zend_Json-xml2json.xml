@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.json.xml2json">
-    <title>XML to JSON conversion</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>XML to JSON conversion</title></info>
+    
 
     <para>
         <classname>Zend_Json</classname> provides a convenience method for transforming
         <acronym>XML</acronym> formatted data into <acronym>JSON</acronym> format. This feature was
-        inspired from an <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
-        IBM developerWorks article</ulink>.
+        inspired from an <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
+        IBM developerWorks article</link>.
     </para>
 
     <para>
@@ -118,9 +117,6 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
     <para>
         More details about this xml2json feature can be found in the original proposal itself.
         Take a look at the
-        <ulink url="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</link>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

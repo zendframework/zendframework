@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.character-sets">
-    <title>Zestawy znaków</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Zestawy znaków</title></info>
+    
     <para>
         <code>Zend_Mail</code> nie sprawdza poprawności zestawu znaków poszczególnych
         części wiadomości. Kiedy tworzymy instancję <code>Zend_Mail</code>, możemy
@@ -9,14 +12,11 @@
         tworzymy nową część wiadomości, możemy użyć innego zestawu znaków dla każdej
         z części.
     </para>
-    <note>
-        <title>Tylko w formacie tekstowym</title>
+    <note><info><title>Tylko w formacie tekstowym</title></info>
+        
         <para>
             Zestawy znaków mają jedynie zastosowanie dla części wiadomości które są
             w formacie tekstowym.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

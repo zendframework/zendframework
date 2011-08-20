@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Стандартный маршрутизатор</title>
-    <sect2 id="zend.controller.router.introduction">
-        <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router"><info><title>Стандартный маршрутизатор</title></info>
+    
+    <section xml:id="zend.controller.router.introduction"><info><title>Введение</title></info>
+        
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> является стандартным
             маршрутизатором фреймворка. Маршрутизация - это процесс принятия
@@ -50,7 +49,7 @@ RewriteRule ^.*$ index.php [NC,L]
         <para>
             Rewrite Router может также использоваться с веб-сервером IIS версии
             7.0 и ниже, если
-            <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.isapirewrite.com">Isapi_Rewrite</link>
             был установлен как расширение Isapi со следующими правилами
             перезаписи:
         </para>
@@ -59,8 +58,8 @@ RewriteRule ^.*$ index.php [NC,L]
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
 ]]></programlisting>
 
-        <note>
-            <title>IIS Isapi_Rewrite</title>
+        <note><info><title>IIS Isapi_Rewrite</title></info>
+            
             <para>
                 Если используется IIS, то <varname>$_SERVER['REQUEST_URI']</varname>
                 не будет определен, либо будет установлен как пустая
@@ -116,10 +115,10 @@ url.rewrite-once = (
     "" => "/index.php"
 )
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.usage">
-        <title>Использование маршрутизатора</title>
+    <section xml:id="zend.controller.router.usage"><info><title>Использование маршрутизатора</title></info>
+        
 
         <para>
             Для того, чтобы правильно использовать маршрутизатор, вы должны
@@ -138,10 +137,10 @@ $router->addRoute(
                                            'action' => 'info'))
 );
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.basic">
-        <title>Базовые операции Rewrite Router</title>
+    <section xml:id="zend.controller.router.basic"><info><title>Базовые операции Rewrite Router</title></info>
+        
 
         <para>
             Сущностью RewriteRouter (перезаписывающий маршрутизатор) является
@@ -163,22 +162,22 @@ $router->addRoute('user',
 
         <itemizedlist mark="opencircle">
             <listitem><para>
-                <xref linkend="zend.controller.router.routes.standard" />
+                <xref linkend="zend.controller.router.routes.standard"/>
             </para></listitem>
             <listitem><para>
-                <xref linkend="zend.controller.router.routes.static" />
+                <xref linkend="zend.controller.router.routes.static"/>
             </para></listitem>
             <listitem><para>
-                <xref linkend="zend.controller.router.routes.regex" />
+                <xref linkend="zend.controller.router.routes.regex"/>
             </para></listitem>
             <listitem><para>
-                <xref linkend="zend.controller.router.routes.hostname" />
+                <xref linkend="zend.controller.router.routes.hostname"/>
             </para></listitem>
             <listitem><para>
-                <xref linkend="zend.controller.router.routes.chain" />
+                <xref linkend="zend.controller.router.routes.chain"/>
             </para></listitem>
             <listitem><para>
-                <xref linkend="zend.controller.router.default-routes" /> *
+                <xref linkend="zend.controller.router.default-routes"/> *
              </para></listitem>
         </itemizedlist>
 
@@ -234,8 +233,8 @@ $router->addRoute('user',
             то используйте <code>getCurrentRoute()</code>.
         </para>
 
-        <note>
-            <title>Обратный порядок сопоставления</title>
+        <note><info><title>Обратный порядок сопоставления</title></info>
+            
             <para>
                 Маршруты сопоставляются в обратном порядке, поэтому
                 удостоверьтесь, что наиболее общие маршруты определены
@@ -243,8 +242,8 @@ $router->addRoute('user',
             </para>
         </note>
 
-        <note>
-            <title>Возвращаемые значения</title>
+        <note><info><title>Возвращаемые значения</title></info>
+            
             <para>
                 Значения, возвращаемые при маршрутизации, получаются из
                 параметров URL или определенных пользователем значений по
@@ -262,8 +261,8 @@ $router->addRoute('user',
             управление.
         </para>
 
-        <note>
-            <title>Специальные переменные</title>
+        <note><info><title>Специальные переменные</title></info>
+            
             <para>
                 Имена этих переменных могут быть другими, если вы измените их
                 через методы <code>setControllerKey</code> и
@@ -271,10 +270,10 @@ $router->addRoute('user',
             </para>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.default-routes">
-        <title>Маршруты, используемые по умолчанию</title>
+    <section xml:id="zend.controller.router.default-routes"><info><title>Маршруты, используемые по умолчанию</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> изначально
@@ -357,10 +356,10 @@ $this->addRoute('default', $compat);
 $router->removeDefaultRoutes();
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.rewritebase">
-        <title>Базовый URL и поддиректории</title>
+    <section xml:id="zend.controller.router.rewritebase"><info><title>Базовый URL и поддиректории</title></info>
+        
 
         <para>
             RewriteRouter может использоваться в поддиректориях (например,
@@ -375,17 +374,17 @@ $router->removeDefaultRoutes();
             Если базовый URL определяется некорректно, то вы можете
             переопределить его через метод <code>setBaseUrl()</code> объекта
             <classname>Zend_Controller_Request_Http</classname> (см.
-            <xref linkend="zend.controller.request.http.baseurl" />):
+            <xref linkend="zend.controller.request.http.baseurl"/>):
         </para>
 
         <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.global.parameters">
-        <title>Глобальные параметры</title>
+    <section xml:id="zend.controller.router.global.parameters"><info><title>Глобальные параметры</title></info>
+        
 
         <para>
             Используя метод <code>setGlobalParam</code>, вы можете устанавливать
@@ -399,29 +398,29 @@ $request->setBaseUrl('/~user/application-root/');
         <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.routes">
-        <title>Типы маршрутов</title>
-        <xi:include href="Zend_Controller-Router-Route.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route.xml" /></xi:fallback>
+    <section xml:id="zend.controller.router.routes"><info><title>Типы маршрутов</title></info>
+        
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-Router-Route-Static.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Static.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Static.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Static.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-Router-Route-Regex.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Regex.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Regex.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Regex.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-Router-Route-Hostname.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Hostname.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Hostname.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Hostname.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Controller-Router-Route-Chain.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Chain.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Router-Route-Chain.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Router-Route-Chain.xml"/></xi:fallback>
         </xi:include>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.add-config">
-        <title>Использование Zend_Config вместе с RewriteRouter</title>
+    <section xml:id="zend.controller.router.add-config"><info><title>Использование Zend_Config вместе с RewriteRouter</title></info>
+        
 
         <para>
             Иногда может быть более удобным обновлять конфигурационный файл
@@ -483,10 +482,10 @@ $router->addConfig($config, 'routes');
             для маршрута 'news' должен использоваться класс
             <classname>Zend_Controller_Router_Route_Static</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.router.subclassing">
-        <title>Создание подклассов маршрутизатора</title>
+    <section xml:id="zend.controller.router.subclassing"><info><title>Создание подклассов маршрутизатора</title></info>
+        
 
         <para>
             Стандартный RewriteRouter создан с тем, чтобы предоставлять полный
@@ -525,8 +524,5 @@ interface Zend_Controller_Router_Interface
             маршрут, то маршрутизатор не должен ничего делать с объектом
             запроса.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

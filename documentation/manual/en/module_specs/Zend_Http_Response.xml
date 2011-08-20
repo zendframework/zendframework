@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.http.response">
-    <title>Zend_Http_Response</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+    
 
-    <sect2 id="zend.http.response.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.http.response.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Http_Response</classname> provides easy access to an
@@ -19,8 +18,8 @@
             using the fromString() method, which reads a string containing a
             <acronym>HTTP</acronym> response message, and returns a new
             <classname>Zend_Http_Response</classname> object:
-            <example id="zend.http.response.introduction.example-1">
-                <title>Instantiating a Zend_Http_Response Object Using the Factory Method</title>
+            <example xml:id="zend.http.response.introduction.example-1"><info><title>Instantiating a Zend_Http_Response Object Using the Factory Method</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $str = '';
@@ -60,7 +59,7 @@ $response = Zend_Http_Response::fromString($str);
             <listitem>
                 <para>
                     <varname>$headers</varname>: An associative array of <acronym>HTTP</acronym>
-                    response headers (eg. 'Host' => 'example.com')
+                    response headers (eg. 'Host' =&gt; 'example.com')
                 </para>
             </listitem>
 
@@ -85,10 +84,10 @@ $response = Zend_Http_Response::fromString($str);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.testers">
-        <title>Boolean Tester Methods</title>
+    <section xml:id="zend.http.response.testers"><info><title>Boolean Tester Methods</title></info>
+        
 
         <para>
             Once a <classname>Zend_Http_Response</classname> object is instantiated, it provides
@@ -120,8 +119,8 @@ $response = Zend_Http_Response::fromString($str);
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.http.response.testers.example-1">
-                <title>Using the isError() method to validate a response</title>
+            <example xml:id="zend.http.response.testers.example-1"><info><title>Using the isError() method to validate a response</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 if ($response->isError()) {
@@ -133,10 +132,10 @@ if ($response->isError()) {
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.acessors">
-        <title>Accessor Methods</title>
+    <section xml:id="zend.http.response.acessors"><info><title>Accessor Methods</title></info>
+        
 
         <para>
             The main goal of the response object is to provide easy access to
@@ -174,7 +173,7 @@ if ($response->isError()) {
                 <listitem>
                     <para>
                         <methodname>getHeaders()</methodname>: Get the <acronym>HTTP</acronym>
-                        response headers as an associative array (eg. 'Content-type' => 'text/html')
+                        response headers as an associative array (eg. 'Content-type' =&gt; 'text/html')
                     </para>
                 </listitem>
 
@@ -207,8 +206,8 @@ if ($response->isError()) {
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.http.response.acessors.example-1">
-                <title>Using Zend_Http_Response Accessor Methods</title>
+            <example xml:id="zend.http.response.acessors.example-1"><info><title>Using Zend_Http_Response Accessor Methods</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 if ($response->getStatus() == 200) {
@@ -221,8 +220,8 @@ if ($response->getStatus() == 200) {
 ]]></programlisting>
             </example>
 
-            <note>
-                <title>Always check return value</title>
+            <note><info><title>Always check return value</title></info>
+                
 
                 <para>
                     Since a response can contain several instances of the same header,
@@ -232,8 +231,8 @@ if ($response->getStatus() == 200) {
                 </para>
             </note>
 
-            <example id="zend.http.response.acessors.example-2">
-                <title>Accessing Response Headers</title>
+            <example xml:id="zend.http.response.acessors.example-2"><info><title>Accessing Response Headers</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $ctype = $response->getHeader('Content-type');
@@ -248,10 +247,10 @@ echo $body;
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.response.static_parsers">
-        <title>Static HTTP Response Parsers</title>
+    <section xml:id="zend.http.response.static_parsers"><info><title>Static HTTP Response Parsers</title></info>
+        
 
         <para>
             The <classname>Zend_Http_Response</classname> class also includes several
@@ -311,7 +310,7 @@ echo $body;
                         <acronym>HTTP</acronym>/1.1 standard messages - otherwise
                         <acronym>HTTP</acronym>/1.0 messages will be returned. If
                         <varname>$code</varname> is not specified, this method will return all known
-                        <acronym>HTTP</acronym> response codes as an associative (code => message)
+                        <acronym>HTTP</acronym> response codes as an associative (code =&gt; message)
                         array.
                     </para>
                 </listitem>
@@ -345,8 +344,5 @@ echo $body;
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

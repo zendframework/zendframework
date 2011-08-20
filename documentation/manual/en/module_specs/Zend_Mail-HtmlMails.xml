@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.html-mails">
-    <title>HTML E-Mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>HTML E-Mail</title></info>
+    
 
     <para>
         To send an e-mail in <acronym>HTML</acronym> format, set the body using the method
@@ -12,8 +11,8 @@
         generated:
     </para>
 
-    <example id="zend.mail.html-mails.example-1">
-        <title>Sending HTML E-Mail</title>
+    <example xml:id="zend.mail.html-mails.example-1"><info><title>Sending HTML E-Mail</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -25,7 +24,4 @@ $mail->setSubject('TestSubject');
 $mail->send();
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

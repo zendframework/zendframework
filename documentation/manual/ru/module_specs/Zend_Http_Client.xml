@@ -1,8 +1,9 @@
-<sect1 id="zend.http.client">
-    <title>Zend_Http_Client - Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>Zend_Http_Client - Введение</title></info>
+    
 
-    <sect2 id="zend.http.client.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.http.client.introduction"><info><title>Введение</title></info>
+        
         <para>
             Zend_Http_Client предоставляет простой интерфейс для выполнения
             HTTP-запросов. Zend_Http_Client поддерживает как большинство простых
@@ -10,7 +11,7 @@
             функции, такие, как HTTP-аутентификация и выгрузка файлов. При
             успешно выполненных запросах (и большинстве неуспешно выполненных)
             возвращается объект Zend_Http_Response, который предоставляет доступ
-            к заголовкам и телу ответа (см. <xref linkend="zend.http.response" />).
+            к заголовкам и телу ответа (см. <xref linkend="zend.http.response"/>).
 <!--
             Zend_Http_Client provides an easy interface for preforming Hyper-Text
             Transfer Protocol (HTTP) requests. Zend_Http_Client supports most simple
@@ -32,10 +33,10 @@
             array of configuration parameters. Both can be left out,
             and set later using the setUri() and setConfig() methods.
 -->
-            <example>
-                <title>Инстанцирование объекта Zend_Http_Client<!--Instantiating a Zend_Http_Client object--></title>
-                <programlisting language="php">
-<![CDATA[<?php
+            <example><info><title>Инстанцирование объекта Zend_Http_Client<!--Instantiating a Zend_Http_Client object--></title></info>
+                
+                <programlisting language="php"><![CDATA[
+<?php
     require_once 'Zend/Http/Client.php';
 
     $client = new Zend_Http_Client('http://example.org', array(
@@ -52,9 +53,9 @@
 ?>]]></programlisting>
             </example>
         </para>
-    </sect2>
-    <sect2 id="zend.http.client.configuration">
-        <title>Параметры конфигурации<!--Configuration Parameters--></title>
+    </section>
+    <section xml:id="zend.http.client.configuration"><info><title>Параметры конфигурации<!--Configuration Parameters--></title></info>
+        
         <para>
             Конструктор и метод <code>setConfig()</code> принимают ассоциативный
             массив параметров конфигурации. Установка этих параметров является
@@ -64,8 +65,8 @@
             of configuration parameters. Setting these parameters is optional,
             as they all have default values.
 -->
-            <table>
-                <title>Параметры конфигурации Zend_Http_Client<!--Zend_Http_Client configuration parameters--></title>
+            <table><info><title>Параметры конфигурации Zend_Http_Client<!--Zend_Http_Client configuration parameters--></title></info>
+                
                 <tgroup cols="4">
                     <thead>
                         <row>
@@ -92,7 +93,7 @@
                             <entry>strictredirects</entry>
                             <entry>
                                 Строгое следование спецификации RFC при
-                                перенаправлениях (см. <xref linkend="zend.http.client.redirections" />)
+                                перенаправлениях (см. <xref linkend="zend.http.client.redirections"/>)
 <!--
                                 Whether to strictly follow the RFC when redirecting (see <xref linkend="zend.http.client.redirections" />)
 -->
@@ -138,7 +139,7 @@
                             <entry>adapter</entry>
                             <entry>
                                 Используемый класс адаптера соединения
-                                (см. <xref linkend="zend.http.client.adapters" />)
+                                (см. <xref linkend="zend.http.client.adapters"/>)
 <!--
                                 Connection adapter class to use (see <xref linkend="zend.http.client.adapters" />)
 -->
@@ -165,9 +166,9 @@
                 </tgroup>
             </table>
         </para>
-    </sect2>
-    <sect2 id="zend.http.client.basic-requests">
-        <title>Выполнение базовых HTTP-запросов<!--Performing Basic HTTP Requests--></title>
+    </section>
+    <section xml:id="zend.http.client.basic-requests"><info><title>Выполнение базовых HTTP-запросов<!--Performing Basic HTTP Requests--></title></info>
+        
         <para>
             Выполнение простых HTTP-запросов с использованием метода
             <code>request()</code> довольно простое, и редко требуется больше
@@ -177,10 +178,10 @@
             Performing simple HTTP requests is very easily done using the
             request() method, and rarely needs more than three lines of code:
 -->
-            <example>
-                <title>Выполнение простого запроса GET<!--Preforming a Simple GET Request--></title>
-                <programlisting language="php">
-<![CDATA[<?php
+            <example><info><title>Выполнение простого запроса GET<!--Preforming a Simple GET Request--></title></info>
+                
+                <programlisting language="php"><![CDATA[
+<?php
     require_once 'Zend/Http/Client.php';
 
     $client = new Zend_Http_Client('http://example.org');
@@ -197,7 +198,7 @@
 -->
             <footnote>
               <para>
-                См. RFC 2616 - <ulink url="http://www.w3.org/Protocols/rfc2616/rfc2616.html" />.
+                См. RFC 2616 - <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">http://www.w3.org/Protocols/rfc2616/rfc2616.html</uri>.
               </para>
             </footnote>.
             Для удобства все они определены как константы класса:
@@ -217,10 +218,10 @@
             call is used. If setMethod() was never called, the default request
             method is GET (see the above example).
 -->
-            <example>
-                <title>Использование методов запроса, отличных от GET<!--Using Request Methods Other Than GET--></title>
-                <programlisting language="php">
-<![CDATA[<?php
+            <example><info><title>Использование методов запроса, отличных от GET<!--Using Request Methods Other Than GET--></title></info>
+                
+                <programlisting language="php"><![CDATA[
+<?php
     // Выполнение запроса POST
     $response = $client->request('POST');
 
@@ -230,17 +231,17 @@
 ?>]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.parameters">
-        <title>Добавление параметров GET и POST<!--Adding GET and POST parameters--></title>
+    <section xml:id="zend.http.client.parameters"><info><title>Добавление параметров GET и POST<!--Adding GET and POST parameters--></title></info>
+        
         <para>
             Добавление параметров GET в HTTP-запрос довольно простое, это может
             быть сделано посредством определения параметров как часть URL или с
             использованием метода <code>setParameterGet()</code>. Этот метод
             принимает имя параметра GET и его значение первый и второй аргументы
             соответственно. Метод <code>setParameterGet()</code>
-            может также принимать ассоциативный массив пар имя => значение, что
+            может также принимать ассоциативный массив пар имя =&gt; значение, что
             удобно, если нужно установить несколько параметров GET.
 <!--
             Adding GET parameters to an HTTP request is quite simple, and can
@@ -252,10 +253,10 @@
             single associative array of name => value GET variables - which may
             be more comfortable when several GET parameters need to be set.
 -->
-            <example>
-                <title>Установка параметров GET<!--Setting GET Parameters--></title>
-                <programlisting language="php">
-<![CDATA[<?php
+            <example><info><title>Установка параметров GET<!--Setting GET Parameters--></title></info>
+                
+                <programlisting language="php"><![CDATA[
+<?php
     // Установка параметра GET с использованием метода setParameterGet
     $client->setParameterGet('knight', 'lancelot');
 
@@ -284,10 +285,10 @@
             and can be done with the setParameterPost() method, which is
             similar to the setParameterGet() method in structure.
 -->
-            <example>
-                <title>Установка параметров POST<!--Setting POST Parameters--></title>
-                <programlisting language="php">
-<![CDATA[<?php
+            <example><info><title>Установка параметров POST<!--Setting POST Parameters--></title></info>
+                
+                <programlisting language="php"><![CDATA[
+<?php
     // Установка параметра POST
     $client->setParameterPost('language', 'fr');
 
@@ -314,18 +315,18 @@
             ignored.
 -->
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.accessing_last">
-        <title>Получение последних запроса и ответа<!--Accessing Last Request and Response--></title>
+    <section xml:id="zend.http.client.accessing_last"><info><title>Получение последних запроса и ответа<!--Accessing Last Request and Response--></title></info>
+        
         <para>
             Zend_Http_Client предоставляет методы для получения последнего
             отправленного запроса и последнего ответа, полученного через
             объект клиента. Метод
-            <code>Zend_Http_Client->getLastRequest()</code> не требует
+            <code>Zend_Http_Client-&gt;getLastRequest()</code> не требует
             параметров и возвращает последний HTTP-запрос, отправленный
             через объект клиента, в виде строки. Аналогично,
-            <code>Zend_Http_Client->getLastResponse()</code> возвращает
+            <code>Zend_Http_Client-&gt;getLastResponse()</code> возвращает
             последний HTTP-ответ, полученный через объект клиента, в виде
             объекта <link linkend="zend.http.response">Zend_Http_Response</link>.
 <!--
@@ -338,10 +339,6 @@
             <link linkend="zend.http.response">Zend_Http_Response</link> object.
 -->
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

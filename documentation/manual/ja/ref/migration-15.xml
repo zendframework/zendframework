@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="migration.15">
-    <title>Zend Framework 1.5</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.15"><info><title>Zend Framework 1.5</title></info>
+    
 
     <para>
         以前のバージョンから Zend Framework 1.5 またはそれ以降に更新する際は、
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <sect2 id="migration.15.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.15.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             基本的な機能は同じでドキュメント化されている機能も変わりませんが、
@@ -128,8 +126,5 @@ $front->setParam('useCaseSensitiveActions', true);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

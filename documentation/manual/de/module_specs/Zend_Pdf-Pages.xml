@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.pages">
-    <title>Arbeiten mit Seiten</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Arbeiten mit Seiten</title></info>
+    
 
-    <sect2 id="zend.pdf.pages.creation">
-        <title>Erstellen von Seiten</title>
+    <section xml:id="zend.pdf.pages.creation"><info><title>Erstellen von Seiten</title></info>
+        
 
         <para>
             Die Seiten in einem <acronym>PDF</acronym> Dokument werden durch
@@ -61,8 +59,8 @@
             Array verändert werden:
         </para>
 
-        <example id="zend.pdf.pages.example-1">
-            <title>Verwaltung von PDF Dokumentseiten</title>
+        <example xml:id="zend.pdf.pages.example-1"><info><title>Verwaltung von PDF Dokumentseiten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -80,10 +78,10 @@ unset($pdf->pages[$id]);
 ...
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.pdf.pages.cloning">
-        <title>Klonen von Seiten</title>
+    <section xml:id="zend.pdf.pages.cloning"><info><title>Klonen von Seiten</title></info>
+        
 
         <para>
             Bestehende <acronym>PDF</acronym> Seiten können durch das Erstellen eines neuen
@@ -91,8 +89,8 @@ unset($pdf->pages[$id]);
             Seite als Parameter angegeben wird:
         </para>
 
-        <example id="zend.pdf.pages.example-2">
-            <title>Klonen bestehender Seiten</title>
+        <example xml:id="zend.pdf.pages.example-2"><info><title>Klonen bestehender Seiten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -129,5 +127,5 @@ unset($pdf->pages[$templatePageIndex]);
                 abgespeichert werden.
             </para>
         </caution>
-    </sect2>
-</sect1>
+    </section>
+</section>

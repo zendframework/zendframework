@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.view.scripts">
-    <title>View Scripts</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>View Scripts</title></info>
+    
 
     <para>
         Once your controller has assigned variables and called <methodname>render()</methodname>,
@@ -15,7 +14,7 @@
         Variables assigned to the view from the controller are referred
         to as instance properties. For example, if the controller were
         to assign a variable 'something', you would refer to it as
-        $this->something in the view script. (This allows you to keep
+        $this-&gt;something in the view script. (This allows you to keep
         track of which values were assigned to the script, and which are
         internal to the script itself.)
     </para>
@@ -51,8 +50,8 @@
 <?php endif;?>
 ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
-        <title>Escaping Output</title>
+    <section xml:id="zend.view.scripts.escaping"><info><title>Escaping Output</title></info>
+        
 
         <para>
             One of the most important tasks to perform in a view script
@@ -107,10 +106,10 @@ echo $view->render(...);
             escaped as its first parameter, and all other parameters should
             be optional.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
-        <title>Using Alternate Template Systems</title>
+    <section xml:id="zend.view.scripts.templates"><info><title>Using Alternate Template Systems</title></info>
+        
 
         <para>
             Although <acronym>PHP</acronym> is itself a powerful template system, many developers
@@ -120,8 +119,8 @@ echo $view->render(...);
             second by implementing <classname>Zend_View_Interface</classname>.
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>Template Systems Using View Scripts</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Template Systems Using View Scripts</title></info>
+            
 
             <para>
                 A view script may be used to instantiate and manipulate a
@@ -176,10 +175,10 @@ if ($this->books) {
 <!-- nobooks.tpl -->
 <p>There are no books to display.</p>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Template Systems Using Zend_View_Interface</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Template Systems Using Zend_View_Interface</title></info>
+            
 
             <para>
                 Some may find it easier to simply provide a
@@ -460,9 +459,6 @@ class FooController extends Zend_Controller_Action
                      ->setViewSuffix('tpl');
     }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

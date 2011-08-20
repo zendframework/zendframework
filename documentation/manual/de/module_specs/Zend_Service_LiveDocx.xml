@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22745 -->
-<!-- Reviewed: 22745 -->
-<sect1 id="zend.service.livedocx">
-    <title>Zend_Service_LiveDocx</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.livedocx"><info><title>Zend_Service_LiveDocx</title></info>
+    
 
-    <sect2 id="zend.service.livedocx.introduction">
-        <title>Einführung in LiveDocx</title>
+    <section xml:id="zend.service.livedocx.introduction"><info><title>Einführung in LiveDocx</title></info>
+        
 
         <para>
             LiveDocx ist ein <acronym>SOAP</acronym>-Service, der es Entwicklern erlaubt, MS Word
@@ -13,15 +11,14 @@
             Template kombiniert werden, die in einer MS Word-kompatiblen Anwendung erstellt wurden.
             Das resultierende Dokument kann als <acronym>PDF</acronym>, <acronym>DOCX</acronym>,
             <acronym>DOC</acronym>, <acronym>HTML</acronym> oder <acronym>RTF</acronym> Datei
-            gespeichert werden. LiveDocx implementiert <ulink
-                url="http://en.wikipedia.org/wiki/Mail_merge">Mail-Merge</ulink> in
+            gespeichert werden. LiveDocx implementiert <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Mail_merge">Mail-Merge</link> in
             <acronym>PHP</acronym>.
         </para>
 
         <para>
             Die Familie der <classname>Zend_Service_LiveDocx</classname> Komponenten bietet ein
-            klares und einfaches Interface zur <ulink url="http://www.livedocx.com">LiveDocx
-                API</ulink> und bietet zusätzlich Funktionalitäten, um die Geschwindigkeit im
+            klares und einfaches Interface zur <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.livedocx.com">LiveDocx
+                API</link> und bietet zusätzlich Funktionalitäten, um die Geschwindigkeit im
             Netzwerk zu erhöhen.
         </para>
 
@@ -47,48 +44,47 @@
 
             <listitem>
                 <para>
-                    <ulink url="http://www.phplivedocx.org/">
-                    <classname>Zend_Service_LiveDocx</classname> Blog und Webseite</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phplivedocx.org/">
+                    <classname>Zend_Service_LiveDocx</classname> Blog und Webseite</link>.
                </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <ulink url="http://www.livedocx.com/pub/documentation/api.aspx">
-                    LiveDocx SOAP API Dokumentation</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.livedocx.com/pub/documentation/api.aspx">
+                    LiveDocx SOAP API Dokumentation</link>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <ulink url="https://api.livedocx.com/1.2/mailmerge.asmx?wsdl">
-                    LiveDocx WSDL</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://api.livedocx.com/1.2/mailmerge.asmx?wsdl">
+                    LiveDocx WSDL</link>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <ulink url="https://www.livedocx.com/">LiveDocx Blog und Webseite</ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.livedocx.com/">LiveDocx Blog und Webseite</link>.
                 </para>
             </listitem>
         </itemizedlist>
 
-        <sect3 id="zend.service.livedocx.account">
-            <title>Für einen Account anmelden</title>
+        <section xml:id="zend.service.livedocx.account"><info><title>Für einen Account anmelden</title></info>
+            
 
             <para>
                 Bevor man damit beginnt LiveDocx zu verwenden, muss man sich zuerst für einen Account
-                <ulink
-                    url="https://www.livedocx.com/user/account_registration.aspx">anmelden</ulink>.
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.livedocx.com/user/account_registration.aspx">anmelden</link>.
                 Der Account ist komplett kostenlos, und es muss nur ein
                 <emphasis>Benutzername</emphasis>, ein <emphasis>Passwort</emphasis> und eine
                 <emphasis>E-Mail-Adresse</emphasis> eingegeben werden. Die Anmeldedaten werden mit der
                 E-Mail-Adresse verknüpft, die man angibt, deshalb sollte man vorsichtig tippen.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.service.livedocx.templates-documents">
-            <title>Templates und Dokumente</title>
+        <section xml:id="zend.service.livedocx.templates-documents"><info><title>Templates und Dokumente</title></info>
+            
 
             <para>
                 LiveDocx unterscheidet zwischen den folgenden Ausdrücken: 1)
@@ -101,26 +97,24 @@
             <para>
                 Der Ausdruck <emphasis>Template</emphasis> wird verwendet, um auf eine Eingabedatei
                 zu verweisen, die in einer Textverarbeitung erstellt wurde und Formatierungen sowie
-                Textfelder enthält. Man kann ein <ulink
-                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-template.docx">Beispieltemplate</ulink>
+                Textfelder enthält. Man kann ein <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-template.docx">Beispieltemplate</link>
                 herunterladen, welches als <acronym>DOCX</acronym> Datei gespeichert ist. Der Ausdruck
                 <emphasis>Dokument</emphasis> wird verwendet, um auf eine Ausgabedatei zu verweisen,
                 welche die Templatedatei enthält, zusammen mit Daten - z.B. das fertiggestellte
-                Dokument. Man kann ein <ulink
-                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-document.pdf">Beispieldokument</ulink>
+                Dokument. Man kann ein <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-document.pdf">Beispieldokument</link>
                 herunterlaen, welches als <acronym>PDF</acronym> Datei gespeichert ist.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.service.livedocx.formats">
-            <title>Unterstützte Dateiformate</title>
+        <section xml:id="zend.service.livedocx.formats"><info><title>Unterstützte Dateiformate</title></info>
+            
 
             <para>
                 LiveDocx unterstützt die folgenden Dateiformate:
             </para>
 
-            <sect4 id="zend.service.livedocx.formats.template">
-                <title>Template Dateiformate (Eingabe)</title>
+            <section xml:id="zend.service.livedocx.formats.template"><info><title>Template Dateiformate (Eingabe)</title></info>
+                
 
                 <para>
                     Templates können in jedem der folgenden Dateiformate gespeichert werden:
@@ -129,36 +123,36 @@
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Office_Open_XML">DOCX</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Office_Open_XML">DOCX</link> -
                             Office Open <acronym>XML</acronym> Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/DOC_(computing)">DOC</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/DOC_(computing)">DOC</link> -
                             Microsoft Word <acronym>DOC</acronym> Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</link> -
                             Rich-Text-Dateiformat
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://www.textcontrol.com/">TXD</ulink> - TX Text Control
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.textcontrol.com/">TXD</link> - TX Text Control
                             Format
                         </para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.service.livedocx.formats.document">
-                <title>Dateiformate des Dokuments (Ausgabe):</title>
+            <section xml:id="zend.service.livedocx.formats.document"><info><title>Dateiformate des Dokuments (Ausgabe):</title></info>
+                
 
                 <para>
                     Das resultierende Dokument kann in jedem der folgenden Dateiformate gespeichert
@@ -168,58 +162,57 @@
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Office_Open_XML">DOCX</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Office_Open_XML">DOCX</link> -
                             Office Open <acronym>XML</acronym> Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/DOC_(computing)">DOC</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/DOC_(computing)">DOC</link> -
                             Microsoft Word <acronym>DOC</acronym> Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Xhtml">HTML</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Xhtml">HTML</link> -
                             <acronym>XHTML</acronym> 1.0 Transitional Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</link> -
                             Rich-Text-Dateiformat
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink
-                                url="http://en.wikipedia.org/wiki/Portable_Document_Format">PDF</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Portable_Document_Format">PDF</link>
                             - Acrobat Portable Document Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://www.textcontrol.com/">TXD</ulink> - TX Text Control
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.textcontrol.com/">TXD</link> - TX Text Control
                             Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Text_file">TXT</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Text_file">TXT</link> -
                             <acronym>ANSI</acronym> reiner Text
                         </para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.service.livedocx.formats.image">
-                <title>Bilddateiformate (Ausgabe):</title>
+            <section xml:id="zend.service.livedocx.formats.image"><info><title>Bilddateiformate (Ausgabe):</title></info>
+                
 
                 <para>
                     Das resultierende Dokument kann in jedem der folgenden grafischen Dateiformate
@@ -229,62 +222,60 @@
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/BMP_file_format">BMP</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/BMP_file_format">BMP</link> -
                             Bitmap Bildformat
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/GIF">GIF</ulink> - Graphics
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/GIF">GIF</link> - Graphics
                             Interchange Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Jpg">JPG</ulink> - Joint
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Jpg">JPG</link> - Joint
                             Photographic Experts Group Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink
-                                url="http://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG</link>
                             - Portable Network Graphics Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink
-                                url="http://en.wikipedia.org/wiki/Tagged_Image_File_Format">TIFF</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Tagged_Image_File_Format">TIFF</link>
                             - Tagged Image File Format
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <ulink url="http://en.wikipedia.org/wiki/Windows_Metafile">WMF</ulink> -
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Windows_Metafile">WMF</link> -
                             Windows Meta File Format
                         </para>
                     </listitem>
                 </itemizedlist>
-            </sect4>
-        </sect3>
-    </sect2>
+            </section>
+        </section>
+    </section>
 
-    <sect2 id="zend.service.livedocx.mailmerge">
-        <title>Zend_Service_LiveDocx_MailMerge</title>
+    <section xml:id="zend.service.livedocx.mailmerge"><info><title>Zend_Service_LiveDocx_MailMerge</title></info>
+        
 
         <para>
              <classname>Zend_Service_LiveDocx_MailMerge</classname> ist das Mail-Merge-Objekt in der
              <classname>Zend_Service_LiveDocx</classname> Familie.
         </para>
 
-        <sect3 id="zend.service.livedocx.mailmerge.generation">
-            <title>Prozess der Dokumentenerstellung</title>
+        <section xml:id="zend.service.livedocx.mailmerge.generation"><info><title>Prozess der Dokumentenerstellung</title></info>
+            
 
             <para>
                 Der Prozess der Erstellung des Dokuments kann mit der folgenden Gleichung
@@ -300,9 +291,7 @@
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -314,10 +303,10 @@
                 wird, wird in LiveDocx geladen. Daten werden in das Template eingesetzt und
                 das resultierende Dokument wird in jedes der unterstützten Formate gespeichert.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.service.livedocx.mailmerge.templates">
-            <title>Erstellen von Templates in Microsoft Word 2007</title>
+        <section xml:id="zend.service.livedocx.mailmerge.templates"><info><title>Erstellen von Templates in Microsoft Word 2007</title></info>
+            
 
             <para>
                 Man muss damit beginnen Microsoft Word zu starten und ein neues Dokument zu
@@ -326,9 +315,7 @@
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -343,9 +330,7 @@
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -362,9 +347,7 @@
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -372,8 +355,7 @@
             </para>
 
             <para>
-                Um die Merge Felder, im vorher unterteilten Screenshot des <ulink
-                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-template.docx">Templates</ulink>,
+                Um die Merge Felder, im vorher unterteilten Screenshot des <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-template.docx">Templates</link>,
                 in Microsoft Word auszufüllen, muss das folgende geschrieben werden:
             </para>
 
@@ -405,18 +387,16 @@ file_put_contents('document.pdf', $document);
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
                 Resultierendes Dokument als <acronym>PDF</acronym> im Document Viewer 2.26.1.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.service.livedocx.mailmerge.advanced">
-            <title>Gehobeneres Mail-Merge</title>
+        <section xml:id="zend.service.livedocx.mailmerge.advanced"><info><title>Gehobeneres Mail-Merge</title></info>
+            
 
             <para>
                 <classname>Zend_Service_LiveDocx_MailMerge</classname> erlaubt es Entwicklern eine
@@ -449,9 +429,7 @@ file_put_contents('document.pdf', $document);
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -482,9 +460,7 @@ blockEnd_block1
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -552,9 +528,7 @@ file_put_contents('document.pdf', $document);
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -563,20 +537,18 @@ file_put_contents('document.pdf', $document);
             </para>
 
             <para>
-                Man kann die <acronym>DOC</acronym> <ulink
-                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/telephone-bill-template.doc">Template
-                    Datei</ulink> und das resultierende <ulink
-                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/telephone-bill-document.pdf">PDF
-                    Dokument</ulink> hier herunterladen.
+                Man kann die <acronym>DOC</acronym> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phplivedocx.org/wp-content/uploads/2009/01/telephone-bill-template.doc">Template
+                    Datei</link> und das resultierende <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phplivedocx.org/wp-content/uploads/2009/01/telephone-bill-document.pdf">PDF
+                    Dokument</link> hier herunterladen.
             </para>
 
             <para>
                 <emphasis>BEACHTE:</emphasis> Blöcke können nicht verschachtelt werden.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.service.livedocx.mailmerge.bitmaps">
-            <title>Erstellen von Bitmap Bildern</title>
+        <section xml:id="zend.service.livedocx.mailmerge.bitmaps"><info><title>Erstellen von Bitmap Bildern</title></info>
+            
 
             <para>
                 Zusätzlich zu den Dateiformaten für Dokumente erlaubt es
@@ -644,9 +616,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
@@ -654,18 +624,16 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             </para>
 
             <para>
-                <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png"
-                    format="PNG" />
+                <inlinemediaobject><imageobject><imagedata fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <para>
                 documentPage2.png.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.service.livedocx.mailmerge.templates-types">
-            <title>Lokale vs. Remote Templates</title>
+        <section xml:id="zend.service.livedocx.mailmerge.templates-types"><info><title>Lokale vs. Remote Templates</title></info>
+            
 
             <para>
                 Templates können <emphasis>lokal</emphasis> auf der Client-Maschine gespeichert
@@ -734,10 +702,10 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
 
 // assign data and create document
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.service.livedocx.mailmerge.information">
-            <title>Informationen erhalten</title>
+        <section xml:id="zend.service.livedocx.mailmerge.information"><info><title>Informationen erhalten</title></info>
+            
 
             <para>
                 <classname>Zend_Service_LiveDocx_MailMerge</classname> bietet eine Anzahl an
@@ -745,8 +713,8 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
                 Formate zu erhalten.
             </para>
 
-            <example id="zend.service.livedocx.mailmerge.information.getfieldname">
-                <title>Ein Array an Feldnamen vom Template erhalten</title>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getfieldname"><info><title>Ein Array an Feldnamen vom Template erhalten</title></info>
+                
 
                 <para>
                     Der folgende Code gibt ein Array aller Feldnamen im angegebenen Template
@@ -770,8 +738,8 @@ foreach ($fieldNames as $fieldName) {
 ]]></programlisting>
             </example>
 
-            <example id="zend.service.livedocx.mailmerge.information.getblockfieldname">
-                <title>Ein Array an Blockfeldnamen vom Template erhalten</title>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getblockfieldname"><info><title>Ein Array an Blockfeldnamen vom Template erhalten</title></info>
+                
 
                 <para>
                     Der folgende Code zeigt ein Array aller Blockfeldnamen im
@@ -800,10 +768,10 @@ foreach ($blockNames as $blockName) {
 ]]></programlisting>
             </example>
 
-            <example id="zend.service.livedocx.mailmerge.information.getfontnames">
-                <title>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getfontnames"><info><title>
                     Ein Array von Schriftarten erhalten welche auf dem Server installiert sind
-                </title>
+                </title></info>
+                
 
                 <para>
                     Der folgende Code zeigt ein Array aller auf dem Server installierten
@@ -832,8 +800,8 @@ Zend_Debug::dump($phpLiveDocx->getFontNames());
                 </para>
             </example>
 
-            <example id="zend.service.livedocx.mailmerge.information.gettemplateformats">
-                <title>Ein Array an unterstützten Dateiformaten für Templates erhalten</title>
+            <example xml:id="zend.service.livedocx.mailmerge.information.gettemplateformats"><info><title>Ein Array an unterstützten Dateiformaten für Templates erhalten</title></info>
+                
 
                 <para>
                     Der folgende Code zeigt ein Array aller unterstützten
@@ -858,8 +826,8 @@ Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
                 </para>
             </example>
 
-            <example id="zend.service.livedocx.mailmerge.information.getdocumentformats">
-                <title>Ein Array an unterstützten Dateiformaten für Dokumente erhalten</title>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getdocumentformats"><info><title>Ein Array an unterstützten Dateiformaten für Dokumente erhalten</title></info>
+                
 
                 <para>
                     Der folgende Code zeigt ein Array aller unterstützten
@@ -878,8 +846,8 @@ Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
 ]]></programlisting>
             </example>
 
-            <example id="zend.service.livedocx.mailmerge.information.getimageformats">
-                <title>Ein Array an unterstützten Dateiformaten für Bilder erhalten</title>
+            <example xml:id="zend.service.livedocx.mailmerge.information.getimageformats"><info><title>Ein Array an unterstützten Dateiformaten für Bilder erhalten</title></info>
+                
 
                 <para>
                     Der folgende Code zeigt ein Array aller unterstützten
@@ -903,6 +871,6 @@ Zend_Debug::dump($phpLiveDocx->getImageFormats());
                     <classname>Zend_Cache</classname> - das macht die Anwendung sichtbar schneller.
                 </para>
             </example>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

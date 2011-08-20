@@ -1,5 +1,6 @@
-<sect1 id="zend.json.objects">
-    <title>كائنات JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>كائنات JSON</title></info>
+    
     <para>
         عند القيام بعملية ترميز "encoding" لكائنات فى لغة PHP لتصبح فى صيغة JSON ,
         كل الـ public properties الخاصة بهذا الكائن سيتم ترميزها لتصبح كائنات JSON.
@@ -29,7 +30,4 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         إن كان يجب أن يتم إنشاء كائن JSON من نوع محدد, فيمكن أن يتم إنشائه من خلال أكواد المبرمج
         الخاصة ثم يتم تسكينه بالقيم التى تم فك ترميزها بإستخدام <code>Zend_Json</code>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

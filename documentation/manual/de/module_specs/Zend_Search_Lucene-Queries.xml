@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.query-api">
-    <title>Abfrage Erzeugungs API</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-api"><info><title>Abfrage Erzeugungs API</title></info>
+    
 
     <para>
         Zusätzlich zum automatischen Analysieren vom Abfragen ist es auch möglich diese durch eine
@@ -19,8 +17,8 @@
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
 
-    <sect2 id="zend.search.lucene.queries.exceptions">
-        <title>Abfrageparser Ausnahmen</title>
+    <section xml:id="zend.search.lucene.queries.exceptions"><info><title>Abfrageparser Ausnahmen</title></info>
+        
 
         <para>
             Der Abfrageparser kann zwei Typen von Ausnahmen erstellen.
@@ -71,10 +69,10 @@ try {
             <methodname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</methodname>
             Methoden sind auch dazu gedacht das Verhalten der Exceptionsbehandlung zu verwalten.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.term-query">
-        <title>Begriffsabfrage</title>
+    <section xml:id="zend.search.lucene.queries.term-query"><info><title>Begriffsabfrage</title></info>
+        
 
         <para>
             Begriffsabfragen können für das Suchen mit einem einzelnen Begriff verwendet werden.
@@ -111,10 +109,10 @@ $term  = new Zend_Search_Lucene_Index_Term('wort1');
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.multiterm-query">
-        <title>Mehrfache Begriffsabfrage</title>
+    <section xml:id="zend.search.lucene.queries.multiterm-query"><info><title>Mehrfache Begriffsabfrage</title></info>
+        
 
         <para>
             Mehrfache Begriffsabfragen sind für Suchen mit einem Satz von Begriffen gedacht.
@@ -238,10 +236,10 @@ $hits  = $index->find($query);
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.boolean-query">
-        <title>Boolsche Abfragen</title>
+    <section xml:id="zend.search.lucene.queries.boolean-query"><info><title>Boolsche Abfragen</title></info>
+        
 
         <para>
             Boolsche Abfragen erlauben die Erstellung von Abfragen die andere Abfragen und boolsche
@@ -404,10 +402,10 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
         <programlisting language="querystring"><![CDATA[
 (+(word1) +(+word2 +word3 -word4)) (word5)
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.wildcard">
-        <title>Wildcard Abfragen</title>
+    <section xml:id="zend.search.lucene.queries.wildcard"><info><title>Wildcard Abfragen</title></info>
+        
 
         <para>
             Wildcard Abfragen können dazu verwendet werden um nach Dokumenten zu suchen die Strings
@@ -452,10 +450,10 @@ $pattern = new Zend_Search_Lucene_Index_Term('test*');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
 $hits  = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.fuzzy">
-        <title>Fuzzy Abfragen</title>
+    <section xml:id="zend.search.lucene.queries.fuzzy"><info><title>Fuzzy Abfragen</title></info>
+        
 
         <para>
             Fuzzy Abfragen können verwendet werden um nach Dokumenten zu Suchen die Strings
@@ -521,10 +519,10 @@ $term = new Zend_Search_Lucene_Index_Term('test');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
 $hits  = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.phrase-query">
-        <title>Phrasenabfrage</title>
+    <section xml:id="zend.search.lucene.queries.phrase-query"><info><title>Phrasenabfrage</title></info>
+        
 
         <para>
             Phrasenabfragen können für das Suchen einer Phrase innerhalb von Dokumenten verwendet
@@ -732,10 +730,10 @@ $hits1 = $index->find($query);
 $query->setSlop(2);
 $hits2 = $index->find($query);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.queries.range">
-        <title>Bereichsabfragen</title>
+    <section xml:id="zend.search.lucene.queries.range"><info><title>Bereichsabfragen</title></info>
+        
 
         <para>
             <link linkend="zend.search.lucene.query-language.range">Bereichsabfragen</link> sind
@@ -794,5 +792,5 @@ $query = new Zend_Search_Lucene_Search_Query_Range(
              );
 $hits  = $index->find($query);
 ]]></programlisting>
-     </sect2>
-</sect1>
+     </section>
+</section>

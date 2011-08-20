@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
-    <title>Zend_Application_Bootstrap_Bootstrap</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-bootstrap"><info><title>Zend_Application_Bootstrap_Bootstrap</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_Bootstrap</classname> is a concrete
-        implementation of <link
-            linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>.
-        It's primary feature are that it registers the <link
-            linkend="zend.application.available-resources.frontcontroller">Front
+        implementation of <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>.
+        It's primary feature are that it registers the <link linkend="zend.application.available-resources.frontcontroller">Front
             Controller resource</link>, and that the <methodname>run()</methodname> method
         first checks that a default module is defined and then dispatches the
         front controller.
@@ -20,14 +17,13 @@
         to utilize.
     </para>
 
-    <sect3 id="zend.application.core-functionality.bootstrap-bootstrap.autoloading">
-        <title>Enabling Application Autoloading</title>
+    <section xml:id="zend.application.core-functionality.bootstrap-bootstrap.autoloading"><info><title>Enabling Application Autoloading</title></info>
+        
 
         <para>
             Additionally, this bootstrap implementation provides the ability to specify the
             "namespace" or class prefix for resources located in its tree, which will enable
-            autoloading of various application resources; essentially, it instantiates a <link
-                linkend="zend.loader.autoloader-resource.module">Zend_Application_Module_Autoloader</link>
+            autoloading of various application resources; essentially, it instantiates a <link linkend="zend.loader.autoloader-resource.module">Zend_Application_Module_Autoloader</link>
             object, providing the requested namespace and the bootstrap's directory as arguments.
             You may enable this functionality by providing a namespace to the "appnamespace"
             configuration option. As an <acronym>INI</acronym> example:
@@ -61,5 +57,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected $_appNamespace = 'Application';
 }
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

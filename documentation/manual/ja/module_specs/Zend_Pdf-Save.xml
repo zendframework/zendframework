@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.pdf.save">
-    <title>PDF ドキュメントへの変更内容の保存</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>PDF ドキュメントへの変更内容の保存</title></info>
+    
     <para>
     <acronym>PDF</acronym> ドキュメントの変更内容を保存するには 2 種類の方法があります。
     <methodname>Zend_Pdf::save()</methodname> および <methodname>Zend_Pdf::render()</methodname> メソッドです。
@@ -21,8 +19,8 @@
     新しい <acronym>PDF</acronym> ファイルセグメントのみが返されます。
     </para>
 
-    <example id="zend.pdf.save.example-1">
-        <title>PDF ドキュメントの保存</title>
+    <example xml:id="zend.pdf.save.example-1"><info><title>PDF ドキュメントの保存</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 ...
@@ -41,7 +39,4 @@ $pdfString = $pdf->render();
 ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

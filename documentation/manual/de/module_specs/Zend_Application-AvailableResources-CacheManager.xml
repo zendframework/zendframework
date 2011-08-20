@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22140 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.cachemanager">
-    <title>Zend_Application_Resource_Cachemanager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.cachemanager"><info><title>Zend_Application_Resource_Cachemanager</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Cachemanager</classname> kann verwendet werden um ein
@@ -17,8 +15,8 @@
         initialisieren.
     </para>
 
-    <example id="zend.application.available-resources.cachemanager.configExample">
-        <title>Beispiel einer Cachemanager Ressource Konfiguration</title>
+    <example xml:id="zend.application.available-resources.cachemanager.configExample"><info><title>Beispiel einer Cachemanager Ressource Konfiguration</title></info>
+        
 
         <para>
             Anbei ist eine Beispiel <acronym>INI</acronym> Datei die zeigt wie
@@ -44,7 +42,7 @@ resources.cachemanager.database.frontendBackendAutoload = false
             Das Empfangen dieses Caches vom Cache Manager ist in Wirklichkeit so einfach wie
             der Zugriff auf eine Instanz des Managers (<classname>Zend_Cache_Manager</classname>)
             was von <classname>Zend_Application_Resource_Cachemanager</classname> empfangen wird
-            beim Aufruf von <command>$cacheManager->getCache('database');</command>. Das folgende
+            beim Aufruf von <command>$cacheManager-&gt;getCache('database');</command>. Das folgende
             Beispiel ist von einem Controller genommen bei dem auf die Bootstrap Klasse als Front
             Controller Parameter zugegriffen werden kann (welcher automatisch wärend des
             bootstrappens zugeordnet wird). Wie man sehen kann implementiert die Cache Manager
@@ -67,4 +65,4 @@ $dbCache = $manager->getCache('database');
             <acronym>INI</acronym> Datei.
         </para>
     </example>
-</sect2>
+</section>

@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.cycle">
-    <title>Cycle Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><info><title>Cycle Helper</title></info>
+    
 
     <para>
         The <classname>Cycle</classname> helper is used to alternate a set of values.
     </para>
 
-    <example id="zend.view.helpers.initial.cycle.basicusage">
-        <title>Cycle Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><info><title>Cycle Helper Basic Usage</title></info>
+        
 
         <para>
             To add elements to cycle just specify them in constructor
@@ -44,12 +43,12 @@ $this->cycle()->prev();
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.cycle.advanceusage">
-        <title>Working with two or more cycles</title>
+    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><info><title>Working with two or more cycles</title></info>
+        
 
        <para>
            To use two cycles you have to specify the names of cycles. Just set second parameter in
-           cycle method. <command>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>. You
+           cycle method. <command>$this-&gt;cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>. You
            can also use setName($name) function.
         </para>
     </example>
@@ -64,7 +63,4 @@ $this->cycle()->prev();
 </tr>
 <?php endforeach;?>
 ]]></programlisting>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

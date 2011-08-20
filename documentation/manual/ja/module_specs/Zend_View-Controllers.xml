@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20799 -->
-<sect1 id="zend.view.controllers">
-    <title>コントローラスクリプト</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>コントローラスクリプト</title></info>
+    
 
     <para>
         <classname>Zend_View</classname> のインスタンスを作成して設定を行うのがコントローラの役目です。
@@ -10,9 +8,9 @@
         適切なスクリプトを使用して出力をレンダリングするように指示します。
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
+    <section xml:id="zend.view.controllers.assign"><info><title>変数の代入</title></info>
 
-        <title>変数の代入</title>
+        
 
         <para>
             ビュースクリプトに制御を移す前に、
@@ -71,11 +69,11 @@ $view->assign('b', "Bee");
 $view->assign('c', "Sea");
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
+    <section xml:id="zend.view.controllers.render"><info><title>ビュースクリプトのレンダリング</title></info>
 
-        <title>ビュースクリプトのレンダリング</title>
+        
 
         <para>
             必要な変数にすべて値を代入したら、コントローラは <classname>Zend_View</classname> に、
@@ -95,17 +93,17 @@ $view->c = "Sea";
 echo $view->render('someView.php');
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
+    <section xml:id="zend.view.controllers.script-paths"><info><title>ビュースクリプトのパス</title></info>
 
-        <title>ビュースクリプトのパス</title>
+        
 
         <para>
             デフォルトでは、<classname>Zend_View</classname> は、
             ビュースクリプトが呼び出し元スクリプトからの相対パス上にあることを想定しています。
             例えばコントローラスクリプトが "/path/to/app/controllers"
-            にあった場合に、そこで $view->render('someView.php')
+            にあった場合に、そこで $view-&gt;render('someView.php')
             をコールすると、<classname>Zend_View</classname> は
             "/path/to/app/controllers/someView.php" を探します。
         </para>
@@ -122,7 +120,7 @@ $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
 
         <para>
-            こうすると、$view->render('someView.php') がコールされた場合に
+            こうすると、$view-&gt;render('someView.php') がコールされた場合に
             "/path/to/app/views/someView.php" を探すようになります。
         </para>
 
@@ -146,8 +144,8 @@ $view->addScriptPath('/path/to/custom/');
 // カレントディレクトリから "booklist.php" を探します。
 ]]></programlisting>
 
-        <note>
-            <title>ユーザの入力内容をスクリプトパスに設定してはいけません</title>
+        <note><info><title>ユーザの入力内容をスクリプトパスに設定してはいけません</title></info>
+            
 
             <para>
                 <classname>Zend_View</classname> は、
@@ -175,8 +173,5 @@ $view->render('passwd');
                 アプリケーションできちんと管理できるパスが指定されていることを確認するようにしましょう。
             </para>
         </note>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

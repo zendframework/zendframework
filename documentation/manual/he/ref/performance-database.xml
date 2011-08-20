@@ -1,5 +1,6 @@
-<sect1 id="performance.database">
-    <title>Zend_Db שימוש נכון למיטב הביצועים</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Db שימוש נכון למיטב הביצועים</title></info>
+    
 
     <para>
         <code>Zend_Db</code> הינה בסיס שכבות למחלקות אשר מטפלות במסדי נתונים, ונועדה
@@ -10,9 +11,9 @@
         הם לעתים יכולים לגרום לבעיות משמעותיות בביצועים של המערכת.
     </para>
 
-    <sect2 id="performance.database.tableMetadata">
-        <title>אין ניתן להפחית את כמות המשאבים שצורכת המחלקה של Zend_Db_Table
-               בזמן שליפת נתונים אודות טבלה/טבלאות?</title>
+    <section xml:id="performance.database.tableMetadata"><info><title>אין ניתן להפחית את כמות המשאבים שצורכת המחלקה של Zend_Db_Table
+               בזמן שליפת נתונים אודות טבלה/טבלאות?</title></info>
+        
 
         <para>
             כדי לייעל ולפשט את השימוש כמה שניתן, ועדיין לתמוך בתרשים מסד הנתונים גם כשהוא משתנה תוך כדי פיתוח,
@@ -25,8 +26,8 @@
             למרבה המזל ישנם טכניקות שונות לשיפור התפעול במצבים כאלו.
         </para>
 
-        <sect3 id="performance.database.tableMetadata.cache">
-            <title>שימוש במטמון אודות הנתונים של המסד</title>
+        <section xml:id="performance.database.tableMetadata.cache"><info><title>שימוש במטמון אודות הנתונים של המסד</title></info>
+            
 
             <para>
                 <code>Zend_Db_Table</code> יכולה להשתמש ב <code>Zend_Cache</code> כדי לשמור את הנתונים אודות התרשים של מסד הנתונים שנשלף במטמון.
@@ -37,29 +38,28 @@
                 הדוקומנטציה של <link linkend="zend.db.table.metadata.caching"><code>Zend_Db_Table</code>
                 מכילה מידע אודות שימוש במטמון במחלקה זו.</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.database.tableMetadata.hardcoding">
-            <title>כתיבה ידנית של המידע אודות הטבלה בהגדרות של אותה טבלה</title>
+        <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>כתיבה ידנית של המידע אודות הטבלה בהגדרות של אותה טבלה</title></info>
+            
 
             <para>
-                מאז גרסא 1.7.0, <code>Zend_Db_Table</code> מאפשר תמיכה ב <link
-                    linkend="zend.db.table.metadata.caching.hardcoding">כתיבה ידנית של המידע אודות הטבלה בהגדרות של אותה טבלה</link>.
+                מאז גרסא 1.7.0, <code>Zend_Db_Table</code> מאפשר תמיכה ב <link linkend="zend.db.table.metadata.caching.hardcoding">כתיבה ידנית של המידע אודות הטבלה בהגדרות של אותה טבלה</link>.
                 זהו שימוש מתקדם יותר, ורצוי להשתמש בו רק כשתרשים הטבלה ידוע מראש וסביר להניח שהוא לא השתנה מאוחר יותר, או שתוכלו להמשיך ולעדכן את ההגדרות של הטבלה בכל פעם שתרשים הטבלה השתנה.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.database.select">
-        <title>פקודות SQL אשר נוצרו בעזרת Zend_Db_Select לא משתמשות באינדקסים של הטבלה; כיצד ניתן לשפר זאת?</title>
+    <section xml:id="performance.database.select"><info><title>פקודות SQL אשר נוצרו בעזרת Zend_Db_Select לא משתמשות באינדקסים של הטבלה; כיצד ניתן לשפר זאת?</title></info>
+        
 
         <para>
             <code>Zend_Db_Select</code> בהחלט עושה עבודה טובה במה שהוא אמור לעשות.
              אך למרות זאת, במידה והנכם מבצעים שאילתות מסובכות למסד הנתונים אשר מכילות חיבורים בין טבלאות ותתי שאילתות, זה יכול להיות לפעמים תמים בנושא זה.
         </para>
 
-        <sect3 id="performance.database.select.writeyourown">
-            <title>כתבו את פונקציות השליפה כנגד מסד הנתונים בעצמכם</title>
+        <section xml:id="performance.database.select.writeyourown"><info><title>כתבו את פונקציות השליפה כנגד מסד הנתונים בעצמכם</title></info>
+            
 
             <para>
                 התשובה האמיתית היחידה היא כתיבת פונקציות שליפת הנתונים שלכם בעצמכם;
@@ -84,9 +84,6 @@ $sql = vsprintf(
     array_walk($values, array($adapter, 'quoteInto'))
 );
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

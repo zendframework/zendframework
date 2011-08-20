@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.codegenerator.examples">
-    <title>Zend_CodeGenerator Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.codegenerator.examples"><info><title>Zend_CodeGenerator Examples</title></info>
+    
 
-    <example id="zend.codegenerator.examples.class">
-        <title>Generating PHP classes</title>
+    <example xml:id="zend.codegenerator.examples.class"><info><title>Generating PHP classes</title></info>
+        
 
         <para>
             The following example generates an empty class with a class-level
@@ -53,8 +52,8 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.class-properties">
-        <title>Generating PHP classes with class properties</title>
+    <example xml:id="zend.codegenerator.examples.class-properties"><info><title>Generating PHP classes with class properties</title></info>
+        
 
         <para>
             Building on the previous example, we now add properties to our
@@ -126,8 +125,8 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.class-methods">
-        <title>Generating PHP classes with class methods</title>
+    <example xml:id="zend.codegenerator.examples.class-methods"><info><title>Generating PHP classes with class methods</title></info>
+        
 
         <para>
             <classname>Zend_CodeGenerator_Php_Class</classname> allows you to attach
@@ -258,8 +257,8 @@ class Foo
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.file">
-        <title>Generating PHP files</title>
+    <example xml:id="zend.codegenerator.examples.file"><info><title>Generating PHP files</title></info>
+        
 
         <para>
             <classname>Zend_CodeGenerator_Php_File</classname> can be used to generate the
@@ -359,8 +358,8 @@ define('APPLICATION_ENV', 'testing');
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.reflection-file">
-        <title>Seeding PHP file code generation via reflection</title>
+    <example xml:id="zend.codegenerator.examples.reflection-file"><info><title>Seeding PHP file code generation via reflection</title></info>
+        
 
         <para>
             You can add <acronym>PHP</acronym> code to an existing <acronym>PHP</acronym> file
@@ -377,8 +376,8 @@ file_put_contents($path, $generator->generate());
 ]]></programlisting>
     </example>
 
-    <example id="zend.codegenerator.examples.reflection-class">
-        <title>Seeding PHP class generation via reflection</title>
+    <example xml:id="zend.codegenerator.examples.reflection-class"><info><title>Seeding PHP class generation via reflection</title></info>
+        
 
         <para>
             You may add code to an existing class. To do so, first use the
@@ -413,4 +412,4 @@ $generator->setMethod(array(
 $code = $generator->generate();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

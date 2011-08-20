@@ -132,30 +132,15 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
         }
 
         for ($count = 0; $count < 64; $count += 2) {
-            if (version_compare(PHP_VERSION, '5.2') < 0) {
-                $value = $memObjects[$count]->getRef();
-                $this->assertEquals($value[16], (string)($count % 10));
-            } else {
-                $this->assertEquals($memObjects[$count]->value[16], (string)($count % 10));
-            }
+            $this->assertEquals($memObjects[$count]->value[16], (string)($count % 10));
         }
 
         for ($count = 63; $count > 0; $count -= 2) {
-            if (version_compare(PHP_VERSION, '5.2') < 0) {
-                $value = &$memObjects[$count]->getRef();
-                $value[16] = '_';
-            } else {
-                $memObjects[$count]->value[16] = '_';
-            }
+            $memObjects[$count]->value[16] = '_';
         }
 
         for ($count = 1; $count < 64; $count += 2) {
-            if (version_compare(PHP_VERSION, '5.2') < 0) {
-                $value = $memObjects[$count]->getRef();
-                $this->assertEquals($value[16], '_');
-            } else {
-                $this->assertEquals($memObjects[$count]->value[16], '_');
-            }
+            $this->assertEquals($memObjects[$count]->value[16], '_');
         }
     }
 

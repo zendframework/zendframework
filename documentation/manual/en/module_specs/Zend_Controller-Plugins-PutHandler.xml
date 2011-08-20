@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.plugins.standard.puthandler">
-    <title>Zend_Controller_Plugin_PutHandler</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.puthandler"><info><title>Zend_Controller_Plugin_PutHandler</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Plugin_PutHandler</classname> provides a drop-in
@@ -41,4 +40,4 @@ public function putAction()
 }
 ...
 ]]></programlisting>
-</sect3>
+</section>

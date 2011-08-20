@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 19436 -->
-<sect3 id="zend.view.helpers.initial.action">
-    <title>Action ビューヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.action"><info><title>Action ビューヘルパー</title></info>
+    
 
     <para>
         <classname>Action</classname> ビューヘルパーは、
@@ -26,8 +24,8 @@
         は必須です。モジュールを省略した場合はデフォルトのモジュールを使用します。
     </para>
 
-    <example id="zend.view.helpers.initial.action.usage">
-        <title>Action ビューヘルパーの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.action.usage"><info><title>Action ビューヘルパーの基本的な使用法</title></info>
+        
 
         <para>
             たとえば <classname>CommentController</classname> に
@@ -47,7 +45,4 @@
 </div>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="migration.08">
-    <title>Zend Framework 0.8</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.08"><info><title>Zend Framework 0.8</title></info>
+    
 
     <para>
         以前のバージョンから Zend Framework 0.8 またはそれ以降に更新する際は、
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <sect2 id="migration.08.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.08.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             前回変更された、もっとも基本的な <acronym>MVC</acronym> コンポーネントの使用法は、そのまま同じです。
@@ -47,8 +45,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                 <para>
                     rewrite ルータで使用する、新しいルートクラスが追加されました。名前は
                     <classname>Zend_Controller_Router_Route_Module</classname> です。
-                    これは <acronym>MVC</acronym> で使用するデフォルトのルートのほかに、<link
-                        linkend="zend.controller.modular">コントローラモジュール
+                    これは <acronym>MVC</acronym> で使用するデフォルトのルートのほかに、<link linkend="zend.controller.modular">コントローラモジュール
                         </link> をサポートしています。
                 </para>
             </listitem>
@@ -93,8 +90,5 @@ final protected function _forward($action,
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

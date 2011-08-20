@@ -22,13 +22,11 @@
 * @namespace
 */
 namespace Zend\Feed\Writer;
-use Zend\Date;
-use Zend\Uri;
+
+use Zend\Date,
+    Zend\Uri;
 
 /**
-* @uses \Zend\Date\Date
-* @uses \Zend\Feed\Exception
-* @uses \Zend\Uri\Uri
 * @category Zend
 * @package Zend_Feed_Writer
 * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -173,7 +171,7 @@ class Deleted
         if (isset($by['uri'])) {
             if (empty($by['uri']) 
                 || !is_string($by['uri']) 
-                || !Uri\Url::validate($by['uri'])
+                || !Uri\UriFactory::factory($by['uri'])->isValid()
             ) {
                 throw new Exception('Invalid parameter: "uri" array value must'
                  . ' be a non-empty string and valid URI/IRI');

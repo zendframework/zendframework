@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.boolean">
-    <title>Boolean</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.boolean"><info><title>Boolean</title></info>
+    
 
     <para>
         This filter changes a given input to be a <constant>BOOLEAN</constant> value. This is often
         useful when working with databases or when processing form values.
     </para>
 
-    <sect3 id="zend.filter.set.boolean.options">
-        <title>Supported options for Zend_Filter_Boolean</title>
+    <section xml:id="zend.filter.set.boolean.options"><info><title>Supported options for Zend_Filter_Boolean</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_Boolean</classname>:
@@ -39,10 +38,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.boolean.default">
-        <title>Default behaviour for Zend_Filter_Boolean</title>
+    <section xml:id="zend.filter.set.boolean.default"><info><title>Default behaviour for Zend_Filter_Boolean</title></info>
+        
 
         <para>
             By default, this filter works by casting the input to a <constant>BOOLEAN</constant>
@@ -63,10 +62,10 @@ $result = $filter->filter($value);
             <constant>BOOLEAN</constant> just as you would get by type casting to
             <constant>BOOLEAN</constant>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.boolean.types">
-        <title>Changing behaviour for Zend_Filter_Boolean</title>
+    <section xml:id="zend.filter.set.boolean.types"><info><title>Changing behaviour for Zend_Filter_Boolean</title></info>
+        
 
         <para>
             Sometimes casting with <command>(boolean)</command> will not suffice.
@@ -197,10 +196,10 @@ $filter = new Zend_Filter_Boolean(array(
             types. To set types after instantiation, use the <methodname>setType()</methodname>
             method.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.boolean.localized">
-        <title>Localized booleans</title>
+    <section xml:id="zend.filter.set.boolean.localized"><info><title>Localized booleans</title></info>
+        
 
         <para>
             As mentioned previously, <classname>Zend_Filter_Boolean</classname> can also recognise
@@ -229,10 +228,10 @@ $filter->setLocale('en');
 // returns true
 $filter->filter('yes');
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.boolean.casting">
-        <title>Disable casting</title>
+    <section xml:id="zend.filter.set.boolean.casting"><info><title>Disable casting</title></info>
+        
 
         <para>
             Sometimes it is necessary to recognise only <constant>TRUE</constant> or
@@ -248,8 +247,8 @@ $filter->filter('yes');
             <property>casting</property> is set to <constant>FALSE</constant>
         </para>
 
-        <table id="zend.filter.set.boolean.casting.table">
-            <title>Usage without casting</title>
+        <table xml:id="zend.filter.set.boolean.casting.table"><info><title>Usage without casting</title></info>
+            
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -281,7 +280,7 @@ $filter->filter('yes');
                     <row>
                         <entry><constant>Zend_Filter_Boolean::STRING</constant></entry>
                         <entry>""</entry>
-                        <entry />
+                        <entry/>
                     </row>
 
                     <row>
@@ -293,13 +292,13 @@ $filter->filter('yes');
                     <row>
                         <entry><constant>Zend_Filter_Boolean::EMPTY_ARRAY</constant></entry>
                         <entry><methodname>array()</methodname></entry>
-                        <entry />
+                        <entry/>
                     </row>
 
                     <row>
                         <entry><constant>Zend_Filter_Boolean::NULL</constant></entry>
                         <entry><constant>NULL</constant></entry>
-                        <entry />
+                        <entry/>
                     </row>
 
                     <row>
@@ -337,8 +336,5 @@ echo $filter->filter(1);
 // returns the value
 echo $filter->filter(2);
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

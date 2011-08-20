@@ -24,7 +24,7 @@ namespace ZendTest\Form\Decorator;
 use Zend\Form\Form,
     Zend\Form\SubForm,
     Zend\Translator\Translator,
-    Zend\View\View;
+    Zend\View\PhpRenderer;
 
 /**
  * Test class for Zend_Form_Decorator_PrepareElements
@@ -53,7 +53,7 @@ class PrepareElementsTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new PhpRenderer();
         return $view;
     }
 
@@ -120,4 +120,18 @@ class PrepareElementsTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    public function testEachSubFormShouldBePrepared()
+    {
+        $subForm = new SubForm();
+        $subSubForm = new SubForm();
+
+        $subForm->addSubForm($subSubForm, "subSubForm");
+        $this->form->addSubForm($subForm, "subForm");
+
+        $this->form->render();
+
+        $this->assertEquals("subForm[subSubForm]", $this->form->getSubForm("subForm")->getSubForm("subSubForm")->getElementsBelongTo());
+    }
+
 }

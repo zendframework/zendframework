@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.character-sets">
-    <title>Наборы символов</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.character-sets"><info><title>Наборы символов</title></info>
+    
     <para>
         <classname>Zend_Mail</classname> не проверяет правильность выбранного
         набора символов для частей сообщения. Набор символов для сообщения
@@ -12,13 +13,10 @@
         При создании новых частей сообщения отличающаяся кодировка
         должна быть указана.
     </para>
-    <note>
-        <title>Только для текстового формата</title>
+    <note><info><title>Только для текстового формата</title></info>
+        
         <para>
             Наборы символов применимы только к частям сообщения в текстовом формате.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

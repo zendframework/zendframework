@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.introduction">
-    <title>Introduzione</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Introduzione</title></info>
+    
     <para>
         <code>Zend_Feed</code> fornisce le funzionalità per utilizzare feed RSS e Atom.
         Offre una sintassi naturale per accedere alla struttura del feed del feed, attributi ed attributi degli elementi.
@@ -15,16 +16,16 @@
         L'esempio seguente dimostra un semplice caso di lettura e salvataggio di una porzione di dati da un feed in un semplice array PHP, che può essere utilizzato per stampare i dati, salvarli in un database, ecc.
     </para>
 
-    <note>
-        <title>Attenzione</title>
+    <note><info><title>Attenzione</title></info>
+        
         <para>
             Molti feed RSS hanno diverse proprietà disponibili per il canale (channel) così come per i suoi elementi (item).
             Le specifiche RSS indicano numerose proprietà opzionali quindi è necessario prestare loro attenzione quando si scrive codice per interagire con dati provenienti da un RSS.
         </para>
     </note>
 
-    <example id="zend.feed.introduction.example.rss">
-        <title>Lettura di un feed RSS con Zend_Feed</title>
+    <example xml:id="zend.feed.introduction.example.rss"><info><title>Lettura di un feed RSS con Zend_Feed</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Feed.php';
 
@@ -52,10 +53,7 @@ foreach ($slashdotRss as $item) {
         'link'        => $item->link(),
         'description' => $item->description()
         );
-}]]>
-        </programlisting>
+}
+        ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.docs">
-    <title>Verwenden der Google Dokumente Listen Daten API</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.docs"><info><title>Verwenden der Google Dokumente Listen Daten API</title></info>
+    
 
     <para>
         Die Google Dokumente Listen Daten <acronym>API</acronym> erlaubt es Client Anwendungen
@@ -12,13 +10,12 @@
     </para>
 
     <para>
-        Siehe <ulink
-            url="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</ulink>
+        Siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</link>
         für weitere Informationen über die Google Dokumente Listen <acronym>API</acronym>.
     </para>
 
-    <sect2 id="zend.gdata.docs.listdocuments">
-        <title>Eine Liste von Dokumenten erhalten</title>
+    <section xml:id="zend.gdata.docs.listdocuments"><info><title>Eine Liste von Dokumenten erhalten</title></info>
+        
 
         <para>
             Man kann eine Liste von den Google Dokumenten für einen bestimmten Benutzer erhalten
@@ -39,13 +36,13 @@ $feed = $docs->getDocumentListFeed();
             Das sich ergebende <classname>Zend_Gdata_Docs_DocumentListFeed</classname> Objekt
             repräsentiert die Antwort des Servers. Dieser Feed enthält eine Liste von
             <classname>Zend_Gdata_Docs_DocumentListEntry</classname> Objekten
-            (<command>$feed->entries</command>), wobei jeder von Ihnen ein einzelnes Google Dokument
+            (<command>$feed-&gt;entries</command>), wobei jeder von Ihnen ein einzelnes Google Dokument
             repräsentiert.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.docs.creating">
-        <title>Ein Dokument hochladen</title>
+    <section xml:id="zend.gdata.docs.creating"><info><title>Ein Dokument hochladen</title></info>
+        
 
         <para>
             Man kann ein neues Google Dokument erstellen indem ein Wortverarbeitungs Dokument, eine
@@ -108,24 +105,24 @@ function uploadDocument($docs, $html, $originalFileName,
   if ($html) {echo "</a>\n";}
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.docs.queries">
-        <title>Den Dokumenten Feed durchsuchen</title>
+    <section xml:id="zend.gdata.docs.queries"><info><title>Den Dokumenten Feed durchsuchen</title></info>
+        
 
         <para>
             Die Dokumenten Liste kann durchsucht werden indem einer der
-            <ulink url="http://code.google.com/apis/gdata/reference.html#Queries">standardmäßigen
-            Google Daten <acronym>API</acronym> Abfrageparameter</ulink> verwendet wird. Kategorien
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/gdata/reference.html#Queries">standardmäßigen
+            Google Daten <acronym>API</acronym> Abfrageparameter</link> verwendet wird. Kategorien
             werden verwendet um den Typ des Dokuments das zurückgegeben wird (Wortverarbeitungs
             Dokument, Tabellenkalkulation) einzuschränken. Detailiertere Informationen über
             Parameter die speziell in der Dokumenten Liste vorhanden sind können in der
-            <ulink url="http://code.google.com/apis/documents/reference.html#Parameters">Dokumenten
-                Listen Daten <acronym>API</acronym> Referenz Anleitung</ulink> gefunden werden.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/documents/reference.html#Parameters">Dokumenten
+                Listen Daten <acronym>API</acronym> Referenz Anleitung</link> gefunden werden.
         </para>
 
-        <sect3 id="zend.gdata.docs.listwpdocuments">
-            <title>Eine Liste von Wortverarbeitungs Dokumenten erhalten</title>
+        <section xml:id="zend.gdata.docs.listwpdocuments"><info><title>Eine Liste von Wortverarbeitungs Dokumenten erhalten</title></info>
+            
 
             <para>
                 Ein Feed der alle Dokumente eines speziellen Typs enthält kann auch angefragt
@@ -137,10 +134,10 @@ function uploadDocument($docs, $html, $originalFileName,
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/document');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.docs.listspreadsheets">
-            <title>Eine Liste von Tabellenkalkulationen erhalten</title>
+        <section xml:id="zend.gdata.docs.listspreadsheets"><info><title>Eine Liste von Tabellenkalkulationen erhalten</title></info>
+            
 
             <para>
                 Um eine Liste aller eigenen Google Tabellenkalkulationen zu erhalten kann die
@@ -151,10 +148,10 @@ $feed = $docs->getDocumentListFeed(
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.docs.textquery">
-            <title>Eine Textabfrage durchführen</title>
+        <section xml:id="zend.gdata.docs.textquery"><info><title>Eine Textabfrage durchführen</title></info>
+            
 
             <para>
                 Der Inhalt von Dokumenten kann durch Verwendung von
@@ -170,6 +167,6 @@ $docsQuery = new Zend_Gdata_Docs_Query();
 $docsQuery->setQuery($query);
 $feed = $client->getDocumentListFeed($docsQuery);
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

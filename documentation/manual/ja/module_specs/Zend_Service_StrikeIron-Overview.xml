@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<sect1 id="zend.service.strikeiron">
-    <title>Zend_Service_StrikeIron</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron"><info><title>Zend_Service_StrikeIron</title></info>
+    
 
     <para>
         <classname>Zend_Service_StrikeIron</classname> は、StrikeIron
@@ -11,21 +9,21 @@
 
     <para>
         <itemizedlist>
-            <listitem><para><xref linkend="zend.service.strikeiron" /></para></listitem>
+            <listitem><para><xref linkend="zend.service.strikeiron"/></para></listitem>
         </itemizedlist>
         <itemizedlist>
-            <listitem><para><xref linkend="zend.service.strikeiron.bundled-services" /></para></listitem>
+            <listitem><para><xref linkend="zend.service.strikeiron.bundled-services"/></para></listitem>
         </itemizedlist>
         <itemizedlist>
-            <listitem><para><xref linkend="zend.service.strikeiron.advanced-uses" /></para></listitem>
+            <listitem><para><xref linkend="zend.service.strikeiron.advanced-uses"/></para></listitem>
         </itemizedlist>
     </para>
 
-    <sect2 id="zend.service.strikeiron.overview">
-        <title>概要</title>
+    <section xml:id="zend.service.strikeiron.overview"><info><title>概要</title></info>
+        
 
         <para>
-          <ulink url="http://www.strikeiron.com">StrikeIron</ulink>
+          <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com">StrikeIron</link>
           は、さまざまな商用データサービス ("Data as a Service") を提供しています。たとえば
           Online Sales Tax, Currency Rates, Stock Quotes, Geocodes, Global
           Address Verification, Yellow/White Pages, MapQuest Driving Directions,
@@ -37,13 +35,13 @@
           <acronym>API</acronym> を共有しています。これにより、複数のサービスを統合して管理するのが簡単になります。
           StrikeIron はまた、すべてのサービスの支払いを単一のアカウントで管理しています。
           ソリューションプロバイダにとって完璧な環境といえます。
-          <ulink url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink>
+          <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</link>
           で、フリーなウェブサービスを試してみましょう。
         </para>
 
         <para>
           StrikeIron のサービスは、
-          <ulink url="http://jp.php.net/soap"><acronym>PHP</acronym> 5 の <acronym>SOAP</acronym> 拡張モジュール</ulink>
+          <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://jp.php.net/soap"><acronym>PHP</acronym> 5 の <acronym>SOAP</acronym> 拡張モジュール</link>
           のみでも使用することができるでしょう。
           しかし、StrikeIron をこの方法で使用すると、
           真の <acronym>PHP</acronym> 風インターフェイスを活用することができません。
@@ -96,14 +94,14 @@
           </itemizedlist>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.registering">
-      <title>StrikeIron への登録</title>
+    <section xml:id="zend.service.strikeiron.registering"><info><title>StrikeIron への登録</title></info>
+      
       <para>
         <classname>Zend_Service_StrikeIron</classname> を使用するには、まず
         StrikeIron 開発者アカウントを取得するために
-        <ulink url="http://strikeiron.com/Register.aspx">登録</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://strikeiron.com/Register.aspx">登録</link>
         する必要があります。
       </para>
 
@@ -115,7 +113,7 @@
 
       <para>
         また、StrikeIron の Super Data Pack Web Service にも
-        <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=257">登録</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=257">登録</link>
         する必要があります。
       </para>
 
@@ -123,15 +121,15 @@
         どちらの登録処理も無料です。
         StrikeIron のウェブサイト上で比較的速やかに行えます。
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.getting-started">
-      <title>では、はじめましょう</title>
+    <section xml:id="zend.service.strikeiron.getting-started"><info><title>では、はじめましょう</title></info>
+      
       <para>
         StrikeIron のアカウントを
-        <ulink url="http://strikeiron.com/Register.aspx">取得</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://strikeiron.com/Register.aspx">取得</link>
         して
-        <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=257">Super Data Pack</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=257">Super Data Pack</link>
         にも参加したら、<classname>Zend_Service_StrikeIron</classname>
         を使うための準備は完了です。
       </para>
@@ -185,10 +183,10 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
         <link linkend="zend.service.strikeiron.advanced-uses.services-by-wsdl">WSDL によるサービスの使用</link>
         で説明します。
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.making-first-query">
-      <title>はじめてのクエリ</title>
+    <section xml:id="zend.service.strikeiron.making-first-query"><info><title>はじめてのクエリ</title></info>
+      
 
       <para>
         <methodname>getService()</methodname> で StrikeIron サービス用のクライアントを取得したら、
@@ -233,23 +231,23 @@ echo $rateInfo->GST;
         <link linkend="zend.service.strikeiron.bundled-services">バンドルされているサービス</link>
         を参照ください。
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.examining-results">
-      <title>結果の吟味</title>
+    <section xml:id="zend.service.strikeiron.examining-results"><info><title>結果の吟味</title></info>
+      
       <para>
         StrikeIron サービスについて学習したりデバッグしたりする際には、
         メソッドから返された内容を出力できると便利です。
         メソッドの返り値は常に
         <classname>Zend_Service_StrikeIron_Decorator</classname> のインスタンスとなります。
         これはちょっとした
-        <ulink url="http://ja.wikipedia.org/wiki/Decorator_%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3">デコレータ</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ja.wikipedia.org/wiki/Decorator_%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3">デコレータ</link>
         オブジェクトであり、メソッドのコール結果をラップしています。
       </para>
 
       <para>
         サービスが返した結果を調べる最も単純な方法は、
-        <ulink url="http://www.php.net/print_r">print_r()</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/print_r">print_r()</link>
         のような <acronym>PHP</acronym> の組み込み関数を使うことです。
 
         <programlisting language="php"><![CDATA[
@@ -289,7 +287,7 @@ Zend_Service_StrikeIron_Decorator Object
         この結果から、<code>$rateInfo</code> には <code>abbreviation</code>
         や <code>province</code>、<constant>GST</constant>
         といった公開プロパティがあることがわかります。これらは
-        <code>$rateInfo->province</code> のようにしてアクセスできます。
+        <code>$rateInfo-&gt;province</code> のようにしてアクセスできます。
       </para>
 
       <tip>
@@ -308,10 +306,10 @@ Zend_Service_StrikeIron_Decorator Object
         それぞれ <methodname>getDecoratedObject()</methodname> および
         <methodname>getDecoratedObjectName()</methodname> を使用します。
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.handling-errors">
-      <title>エラー処理</title>
+    <section xml:id="zend.service.strikeiron.handling-errors"><info><title>エラー処理</title></info>
+      
       <para>
         先ほどの例はあまりにも無邪気すぎるところがありました。
         エラー処理を一切していなかったのです。
@@ -365,10 +363,10 @@ try {
       </note>
 
       <para><!-- included for whitespace --></para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.checking-subscription">
-      <title>購入内容の確認</title>
+    <section xml:id="zend.service.strikeiron.checking-subscription"><info><title>購入内容の確認</title></info>
+      
       <para>
         StrikeIron にはさまざまなサービスがあります。
         その中には無料で使えるものもあればお試し版のものもあります。
@@ -413,5 +411,5 @@ echo $subscription->remainingHits;
         <methodname>getSubscriptionInfo()</methodname> に指示するには、
         <methodname>getSubscriptionInfo(true)</methodname> とします。
       </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

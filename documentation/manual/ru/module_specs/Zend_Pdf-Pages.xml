@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.pages">
-    <title>Страницы документа<!-- Document pages. --></title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Страницы документа<!-- Document pages. --></title></info>
+    
     <para>
     Абстракция страницы документа PDF представлена классом <code>Zend_Pdf_Page</code>.
 <!--
@@ -84,8 +85,8 @@
 -->
     </para>
 
-    <example>
-        <title>Управление страницами документа PDF<!-- PDF document pages management. --></title>
+    <example><info><title>Управление страницами документа PDF<!-- PDF document pages management. --></title></info>
+        
         <programlisting language="php"><![CDATA[<?php
 ...
 // Изменение порядка страниц на противоположный
@@ -103,7 +104,4 @@ unset($pdf->pages[$id]);
 ?>]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

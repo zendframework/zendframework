@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21818 -->
-<sect1 id="zend.mail.adding-recipients">
-    <title>受信者の追加</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>受信者の追加</title></info>
+    
 
     <para>
         受信者を追加するには、次のようにします。
@@ -33,8 +33,8 @@
         <methodname>clearRecipients()</methodname> によりあて先一覧を消去します。
     </para>
 
-    <note>
-        <title>追加のパラメータ</title>
+    <note><info><title>追加のパラメータ</title></info>
+        
 
         <para>
             <methodname>addTo()</methodname> および <methodname>addCc()</methodname> では、
@@ -43,8 +43,8 @@
         </para>
     </note>
 
-    <note>
-        <title>選択できる使用法</title>
+    <note><info><title>選択できる使用法</title></info>
+        
 
         <para>
             これらのメソッド３つは全て、１回につき一つの代わりに、
@@ -53,7 +53,4 @@
             それらは、キーが人間が読み取れる受取人の名前である連想配列でありえます。
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.multiple-emails">
-    <title>Envoyer plusieurs émail par connexion SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Envoyer plusieurs émail par connexion SMTP</title></info>
+    
 
     <para>
         Par défaut un transport SMTP unique crée une connexion unique et la réutilise pour
@@ -22,8 +20,8 @@
         <methodname>clearDefaultReplyTo</methodname>.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-1">
-        <title>Envoyer plusieurs émail par connexion SMTP</title>
+    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Envoyer plusieurs émail par connexion SMTP</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Créer un transport
@@ -59,8 +57,8 @@ Zend_Mail::clearDefaultReplyTo();
         distribution en accédant à l'objet de protocole de transport.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-2">
-        <title>Contrôler manuellement la connexion de transport</title>
+    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Contrôler manuellement la connexion de transport</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Créer un transport
@@ -91,4 +89,4 @@ $protocol->quit();
 $protocol->disconnect();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

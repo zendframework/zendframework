@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22593 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.view">
-    <title>Zend_Application_Resource_View</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.view"><info><title>Zend_Application_Resource_View</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_View</classname> kann verwendet werden um eine Instanz
-        von <classname>Zend_View</classname> zu konfigurieren. Konfigurations Optionen sind <link
-            linkend="zend.view.introduction.options">die <classname>Zend_View</classname>
+        von <classname>Zend_View</classname> zu konfigurieren. Konfigurations Optionen sind <link linkend="zend.view.introduction.options">die <classname>Zend_View</classname>
             Optionen</link>.
     </para>
 
@@ -18,8 +15,8 @@
         Sie später empfangen kann.
     </para>
 
-    <example id="zend.application.available-resources.view.configExample">
-        <title>Beispiel der Konfiguration einer View Ressource</title>
+    <example xml:id="zend.application.available-resources.view.configExample"><info><title>Beispiel der Konfiguration einer View Ressource</title></info>
+        
 
         <para>
             Anbei ist das Beispiel eines <acronym>INI</acronym> Abschnitts der zeigt wie die View
@@ -31,4 +28,4 @@ resources.view.encoding = "UTF-8"
 resources.view.basePath = APPLICATION_PATH "/views/"
 ]]></programlisting>
     </example>
-</sect2>
+</section>

@@ -1,5 +1,6 @@
-<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>תוספי עזרה ל Dojo</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view"><info><title>תוספי עזרה ל Dojo</title></info>
+    
 
     <para>
         Zend Framework מספקת את תוספי העזרה הבאים לשימוש ספציפי ב Dojo:
@@ -13,8 +14,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.dojo.view.setup">
-        <title>שימוש בתוספי עזרה ל Dojo</title>
+    <example xml:id="zend.dojo.view.setup"><info><title>שימוש בתוספי עזרה ל Dojo</title></info>
+        
 
         <para>
             כדי להשתמש בתוספי העזרה, תצטרכו להגיד לאובייקט התצוגה שלהם איפה הם נמצאים. תוכלו לעשות זאת על ידי:
@@ -23,8 +24,8 @@
 
         <programlisting role="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             לחלופין תוכלו להשתמש במתודה <code>enableView()</code> של המחלקה <code>Zend_Dojo</code> כדי שתעשה את העבודה בישבלכם:
@@ -32,13 +33,10 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 
         <programlisting role="php"><![CDATA[
 Zend_Dojo::enableView($view);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-    <xi:include href="Zend_Dojo-View-Dojo.xml" />
-    <xi:include href="Zend_Dojo-View-Helpers.xml" />
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Dojo.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Dojo-View-Helpers.xml"/>
+</section>

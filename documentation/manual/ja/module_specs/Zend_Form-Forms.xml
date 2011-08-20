@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
-<sect1 id="zend.form.forms">
-    <title>Zend_Form によるフォームの作成</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><info><title>Zend_Form によるフォームの作成</title></info>
+    
 
     <para>
         <classname>Zend_Form</classname> クラスは、フォームの要素や
@@ -71,8 +69,8 @@ $form = new Zend_Form($config);
         デコレータで自分自身をレンダリングすることもできます。
     </para>
 
-    <sect2 id="zend.form.forms.plugins">
-        <title>プラグインローダー</title>
+    <section xml:id="zend.form.forms.plugins"><info><title>プラグインローダー</title></info>
+        
         <para>
             <classname>Zend_Form</classname> では、
             <classname>Zend_Loader_PluginLoader</classname> を使用することで
@@ -137,8 +135,7 @@ $form = new Zend_Form($config);
                 <code>$type</code> を指定する場合は、それは
                 <classname>Zend_Form_Element</classname>
                 で指定したプラグインローダーの型のひとつでなければなりません。
-                <code>$type</code> にどんな値が指定できるのかについては <link
-                    linkend="zend.form.elements.loaders">要素のプラグインのセクション</link>
+                <code>$type</code> にどんな値が指定できるのかについては <link linkend="zend.form.elements.loaders">要素のプラグインのセクション</link>
                 を参照ください。<code>$type</code> を省略した場合は、
                 すべての型で用いる全般的なプレフィックスとみなします。
             </para></listitem>
@@ -161,10 +158,10 @@ $form = new Zend_Form($config);
             <link linkend="zend.form.elements.loaders.customLabel">独自のラベルを作る例</link>
             を参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.elements">
-        <title>要素</title>
+    <section xml:id="zend.form.forms.elements"><info><title>要素</title></info>
+        
         <para>
             <classname>Zend_Form</classname> では、フォームに要素を追加したり
             フォームから要素を削除したりするためのアクセサを提供しています。
@@ -200,8 +197,8 @@ $form->addElement('text', 'foo');
 $form->addElement('text', 'foo', array('label' => 'Foo:'));
 ]]></programlisting>
 
-        <note>
-            <title>addElement() における「流れるようなインターフェイス」の実装</title>
+        <note><info><title>addElement() における「流れるようなインターフェイス」の実装</title></info>
+            
 
             <para>
                 <methodname>addElement()</methodname> は「流れるようなインターフェイス」
@@ -252,8 +249,8 @@ $foo = $form->foo;
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
 
-        <sect3 id="zend.form.forms.elements.values">
-            <title>値の設定と取得</title>
+        <section xml:id="zend.form.forms.elements.values"><info><title>値の設定と取得</title></info>
+            
 
             <para>
                 フォームの検証をすませたら、通常は値を取得することになるでしょう。
@@ -290,10 +287,10 @@ $form->populate($data);
             <programlisting language="php"><![CDATA[
 $form->reset();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.elements.global">
-            <title>グローバルな操作</title>
+        <section xml:id="zend.form.forms.elements.global"><info><title>グローバルな操作</title></info>
+            
 
             <para>
                 時には、すべての要素に対して何らかの操作を行いたくなることもあります。
@@ -302,8 +299,8 @@ $form->reset();
                 以下に例を示します。
             </para>
 
-            <example id="zend.form.forms.elements.global.allpaths">
-                <title>すべての要素に対するプレフィックスパスの設定</title>
+            <example xml:id="zend.form.forms.elements.global.allpaths"><info><title>すべての要素に対するプレフィックスパスの設定</title></info>
+                
 
                 <para>
                     型を指定してすべての要素に対するプレフィックスパスを設定したり、
@@ -333,8 +330,8 @@ $form->addElementPrefixPath('My_Foo_Decorator',
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.elements.global.decorators">
-                <title>すべての要素に対するデコレータの設定</title>
+            <example xml:id="zend.form.forms.elements.global.decorators"><info><title>すべての要素に対するデコレータの設定</title></info>
+                
 
                 <para>
                     すべての要素に対するデコレータを設定できます。
@@ -354,8 +351,8 @@ $form->setElementDecorators(array(
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.elements.global.decoratorsFilter">
-                <title>いくつかの要素に対するデコレータの設定</title>
+            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><info><title>いくつかの要素に対するデコレータの設定</title></info>
+                
 
                 <para>
                     設定したい要素、あるいは設定したくない要素を指定することで、
@@ -411,8 +408,8 @@ $form->setElementDecorators(
 ]]></programlisting>
             </example>
 
-                <note>
-                    <title>要素によっては不適切なデコレータもある</title>
+                <note><info><title>要素によっては不適切なデコレータもある</title></info>
+                    
 
                     <para>
                         <methodname>setElementDecorators()</methodname>
@@ -436,8 +433,8 @@ $form->setElementDecorators(
                     </para>
                 </note>
 
-            <example id="zend.form.forms.elements.global.filters">
-                <title>すべての要素に対するフィルタの設定</title>
+            <example xml:id="zend.form.forms.elements.global.filters"><info><title>すべての要素に対するフィルタの設定</title></info>
+                
 
                 <para>
                     すべての要素に対して同じフィルタを適用したくなることもよくあります。
@@ -448,10 +445,10 @@ $form->setElementDecorators(
 $form->setElementFilters(array('StringTrim'));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.elements.methods">
-            <title>要素を操作するためのメソッド</title>
+        <section xml:id="zend.form.forms.elements.methods"><info><title>要素を操作するためのメソッド</title></info>
+            
 
             <para>
                 次のメソッドを使用して、要素を操作します。
@@ -530,11 +527,11 @@ $form->setElementFilters(array('StringTrim'));
                     <methodname>addElementPrefixPaths(array $spec)</methodname>
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.displaygroups">
-        <title>表示グループ</title>
+    <section xml:id="zend.form.forms.displaygroups"><info><title>表示グループ</title></info>
+        
 
         <para>
             表示グループを使用すると、複数の要素を仮想的にグループ化して
@@ -581,8 +578,8 @@ $login = $form->getDisplayGroup('login');
 $login = $form->login;
 ]]></programlisting>
 
-        <note>
-            <title>読み込み不要なデフォルトのデコレータ</title>
+        <note><info><title>読み込み不要なデフォルトのデコレータ</title></info>
+            
 
             <para>
                 デフォルトのデコレータは、
@@ -606,16 +603,16 @@ $form->addDisplayGroup(
             </para>
         </note>
 
-        <sect3 id="zend.form.forms.displaygroups.global">
-            <title>グローバルな操作</title>
+        <section xml:id="zend.form.forms.displaygroups.global"><info><title>グローバルな操作</title></info>
+            
 
             <para>
                 要素と同様、表示グループに対しても全体に共通の操作があるでしょう。
                 デコレータを設定したり、デコレータを探すプラグインパスを設定したりといったものです。
             </para>
 
-            <example id="zend.form.forms.displaygroups.global.paths">
-                <title>すべての表示グループに対するデコレータプレフィックスパスの設定</title>
+            <example xml:id="zend.form.forms.displaygroups.global.paths"><info><title>すべての表示グループに対するデコレータプレフィックスパスの設定</title></info>
+                
 
                 <para>
                     デフォルトでは、表示グループはフォームが使用しているデコレータパスを継承します。
@@ -628,8 +625,8 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.displaygroups.global.decorators">
-                <title>すべての表示グループに対するデコレータの設定</title>
+            <example xml:id="zend.form.forms.displaygroups.global.decorators"><info><title>すべての表示グループに対するデコレータの設定</title></info>
+                
 
                 <para>
                     すべての表示グループに対するデコレータを設定できます。
@@ -649,10 +646,10 @@ $form->setDisplayGroupDecorators(array(
 ));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.customClasses">
-            <title>独自の表示グループクラスの使用</title>
+        <section xml:id="zend.form.forms.displaygroups.customClasses"><info><title>独自の表示グループクラスの使用</title></info>
+            
 
             <para>
                 デフォルトでは、<classname>Zend_Form</classname> は
@@ -696,10 +693,10 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                 そうすれば、事前にこのクラスが読み込まれて
                 すべての表示グループでこのクラスを使うようになります。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.interactionmethods">
-            <title>表示グループを操作するためのメソッド</title>
+        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><info><title>表示グループを操作するためのメソッド</title></info>
+            
 
             <para>
                 次のメソッドを使用して、表示グループを操作します。
@@ -750,10 +747,10 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <methodname>getDefaultDisplayGroupClass($class)</methodname>
                 </para></listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.methods">
-            <title>Zend_Form_DisplayGroup のメソッド</title>
+        <section xml:id="zend.form.forms.displaygroups.methods"><info><title>Zend_Form_DisplayGroup のメソッド</title></info>
+            
 
             <para>
                 <classname>Zend_Form_DisplayGroup</classname> には次のようなメソッドがあります。
@@ -875,11 +872,11 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.subforms">
-        <title>サブフォーム</title>
+    <section xml:id="zend.form.forms.subforms"><info><title>サブフォーム</title></info>
+        
 
         <para>
             サブフォームの役割は、次のようなものです。
@@ -940,8 +937,8 @@ $subForm = $form->subform;
             サブフォーム内の要素は処理できません。
         </para>
 
-        <sect3 id="zend.form.forms.subforms.global">
-            <title>グローバルな操作</title>
+        <section xml:id="zend.form.forms.subforms.global"><info><title>グローバルな操作</title></info>
+            
 
             <para>
                 要素や表示グループと同様、サブフォームに対しても全体に共通の操作があるでしょう。
@@ -960,10 +957,10 @@ $form->setSubFormDecorators(array(
     'Fieldset'
 ));
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.subforms.methods">
-            <title>サブフォームを操作するためのメソッド</title>
+        <section xml:id="zend.form.forms.subforms.methods"><info><title>サブフォームを操作するためのメソッド</title></info>
+            
 
             <para>
                 次のメソッドを使用して、サブフォームを操作します。
@@ -1002,11 +999,11 @@ $form->setSubFormDecorators(array(
                     <methodname>setSubFormDecorators(array $decorators)</methodname>
                 </para></listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.metadata">
-        <title>メタデータおよび属性</title>
+    <section xml:id="zend.form.forms.metadata"><info><title>メタデータおよび属性</title></info>
+        
 
         <para>
             フォームで一番大切なのはフォームが含む要素ですが、
@@ -1102,10 +1099,10 @@ $form->removeAttrib('onSubmit');
 // すべての属性を削除します
 $form->clearAttribs();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.decorators">
-        <title>デコレータ</title>
+    <section xml:id="zend.form.forms.decorators"><info><title>デコレータ</title></info>
+        
 
         <para>
             フォームのマークアップを作成するのは手間のかかる作業です。
@@ -1155,8 +1152,8 @@ $form->setDecorators(array(
             HTML の <code>&lt;form&gt;</code> タグの属性となります。
         </para>
 
-        <note>
-            <title>読み込み不要なデフォルトのデコレータ</title>
+        <note><info><title>読み込み不要なデフォルトのデコレータ</title></info>
+            
 
             <para>
                 デフォルトのデコレータは、
@@ -1176,8 +1173,8 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             </para>
         </note>
 
-        <note>
-            <title>同じ型の複数のデコレータの使用法</title>
+        <note><info><title>同じ型の複数のデコレータの使用法</title></info>
+            
 
             <para>
                 内部的には、<classname>Zend_Form</classname>
@@ -1287,10 +1284,10 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
         <para>
             デコレータが存在しない場合は、例外が発生します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.validation">
-        <title>バリデーション</title>
+    <section xml:id="zend.form.forms.validation"><info><title>バリデーション</title></info>
+        
 
         <para>
             フォームの主な使用法は、送信されたデータを検証することです。
@@ -1392,8 +1389,8 @@ $messages = $form->getMessages('username');
             </para>
         </note>
 
-        <sect3 id="zend.form.forms.validation.errors">
-            <title>独自のエラーメッセージ</title>
+        <section xml:id="zend.form.forms.validation.errors"><info><title>独自のエラーメッセージ</title></info>
+            
 
             <para>
                 時には、要素にアタッチされたバリデータが生成するエラーメッセージではなく
@@ -1457,11 +1454,11 @@ $messages = $form->getMessages('username');
             <para>
                 この方式で設定したすべてのエラーは翻訳されることになります。
             </para>
-        </sect3>
+        </section>
 
         <!-- TODO : to be translated -->
-        <sect3 id="zend.form.forms.validation.values">
-            <title>Retrieving Valid Values Only</title>
+        <section xml:id="zend.form.forms.validation.values"><info><title>Retrieving Valid Values Only</title></info>
+            
 
             <para>
                 There are scenarios when you want to allow your user to work on a valid form
@@ -1477,11 +1474,11 @@ $messages = $form->getMessages('username');
             <programlisting language="php"><![CDATA[
 $validValues = $form->getValidValues($_POST);
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.methods">
-        <title>メソッド</title>
+    <section xml:id="zend.form.forms.methods"><info><title>メソッド</title></info>
+        
 
         <para>
             以下の一覧は、<classname>Zend_Form</classname> のメソッドをタイプ別にまとめたものです。
@@ -1672,10 +1669,10 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.config">
-        <title>設定</title>
+    <section xml:id="zend.form.forms.config"><info><title>設定</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> は、
@@ -1784,10 +1781,10 @@ decorators.form.decorator = "Form"
             これは、<acronym>XML</acronym> や <acronym>PHP</acronym>
             の配列形式の設定ファイルにも簡単に置き換えることができます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.custom">
-        <title>カスタムフォーム</title>
+    <section xml:id="zend.form.forms.custom"><info><title>カスタムフォーム</title></info>
+        
 
         <para>
             独自の設定のフォームを使用するもうひとつの方法は、
@@ -1901,8 +1898,5 @@ class My_Form_Login extends Zend_Form
     }
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

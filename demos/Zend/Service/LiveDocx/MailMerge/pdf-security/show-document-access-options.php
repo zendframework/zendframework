@@ -17,7 +17,7 @@ Helper::printLine(
 $mailMerge = new MailMerge();
 
 // Set WSDL of your *premium* service server
-$mailMerge->setWSDL(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
+$mailMerge->setWsdl(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
 
 // Set username and password of your *premium* service server
 $mailMerge->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_USERNAME)

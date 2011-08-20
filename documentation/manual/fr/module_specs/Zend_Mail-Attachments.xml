@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21230 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.attachments">
-    <title>Fichiers joints</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.attachments"><info><title>Fichiers joints</title></info>
+    
 
     <para>
         Des fichiers peuvent-être attachés à un émail en utilisant la méthode
@@ -13,8 +11,8 @@
         paramètres à <methodname>createAttachment()</methodname> :
     </para>
 
-    <example id="zend.mail.attachments.example-1">
-        <title>Émail avec fichiers joints</title>
+    <example xml:id="zend.mail.attachments.example-1"><info><title>Émail avec fichiers joints</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -62,4 +60,4 @@ $mail->addAttachment($at);
 
 $mail->send();
 ]]></programlisting>
-</sect1>
+</section>

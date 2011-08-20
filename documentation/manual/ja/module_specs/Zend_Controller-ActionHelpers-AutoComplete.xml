@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22210 -->
-<sect3 id="zend.controller.actionhelpers.autocomplete">
-    <title>AutoComplete</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.autocomplete"><info><title>AutoComplete</title></info>
+    
 
     <para>
         多くの <acronym>AJAX</acronym> 用 javascript ライブラリでは、
@@ -114,8 +112,8 @@ class FooController extends Zend_Controller_Action
         ライブラリは、Dojo と Scriptaculous です。
     </para>
 
-    <sect4 id="zend.controller.actionhelpers.autocomplete.dojo">
-        <title>Dojo でのオートコンプリート</title>
+    <section xml:id="zend.controller.actionhelpers.autocomplete.dojo"><info><title>Dojo でのオートコンプリート</title></info>
+        
 
         <para>
             Dojo には、オートコンプリートのためだけのウィジェットはありません。
@@ -123,7 +121,7 @@ class FooController extends Zend_Controller_Action
             のふたつのウィジェットがオートコンプリート機能を持っています。
             どちらのウィジェットも、QueryReadStore
             を実装したデータを必要とします。詳細は
-            <ulink url="http://dojotoolkit.org/reference-guide/dojo/data.html">dojo.data</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/reference-guide/dojo/data.html">dojo.data</link>
             のドキュメントを参照ください。
         </para>
 
@@ -138,8 +136,8 @@ class FooController extends Zend_Controller_Action
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
 
-        <example id="zend.controller.actionhelpers.autocomplete.dojo.example1">
-            <title>Zend MVC を使用した、Dojo でのオートコンプリート</title>
+        <example xml:id="zend.controller.actionhelpers.autocomplete.dojo.example1"><info><title>Zend MVC を使用した、Dojo でのオートコンプリート</title></info>
+            
 
             <para>
                 Zend <acronym>MVC</acronym> で Dojo によるオートコンプリートを使用するには、
@@ -335,12 +333,12 @@ dojo.require("custom.TestNameReadStore");
                 これで、Dojo のオートコンプリートを動作させるための準備がすべて整いました。
             </para>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.autocomplete.scriptaculous">
-        <title>Scriptaculous でのオートコンプリート</title>
+    <section xml:id="zend.controller.actionhelpers.autocomplete.scriptaculous"><info><title>Scriptaculous でのオートコンプリート</title></info>
+        
         <para>
-            <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</link>
             は、所定の形式の <acronym>HTML</acronym> レスポンスを受け取ることを想定しています。
         </para>
 
@@ -349,8 +347,5 @@ dojo.require("custom.TestNameReadStore");
             このヘルパーにデータの配列を渡せば、Ajax.Autocompleter
             に対応した形式の <acronym>HTML</acronym> レスポンスができあがります。
         </para>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<chapter id="introduction.overview">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Overview</title>
+
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Overview</title></info>
+
+    
 
     <para>
         Zend Framework is an open source framework for developing web applications and services
@@ -27,8 +28,8 @@
     </para>
 
     <para>
-        The principal sponsor of the project 'Zend Framework' is <ulink url="http://www.zend.com">
-        Zend Technologies</ulink>, but many companies have contributed components or significant
+        The principal sponsor of the project 'Zend Framework' is <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">
+        Zend Technologies</link>, but many companies have contributed components or significant
         features to the framework. Companies such as Google, Microsoft, and StrikeIron have
         partnered with Zend to provide interfaces to web services and other technologies that they
         wish to make available to Zend Framework developers.
@@ -37,12 +38,9 @@
     <para>
         Zend Framework could not deliver and support all of these features without the help of the
         vibrant Zend Framework community. Community members, including contributors, make
-        themselves available on <ulink url="http://framework.zend.com/archives">mailing
-            lists</ulink>, <ulink url="http://www.zftalk.com">IRC channels</ulink>, and other
+        themselves available on <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">mailing
+            lists</link>, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">IRC channels</link>, and other
         forums. Whatever question you have about Zend Framework, the community is always available
         to address it.
     </para>
 </chapter>
-<!--
-vim:se ts=4 sw=4 et:
--->

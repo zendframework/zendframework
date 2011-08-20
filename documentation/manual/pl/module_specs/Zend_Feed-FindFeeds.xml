@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.findFeeds">
-    <title>Odbieranie kanałów informacyjnych ze stron internetowych</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.findFeeds"><info><title>Odbieranie kanałów informacyjnych ze stron internetowych</title></info>
+    
     <para>
         Strony internetowe często zawierają tagi <code>&lt;link&gt;</code>, które
         odwołują się do kanałów informacyjnych odpowiadających danej stronie.
@@ -8,8 +9,8 @@
     </para>
     <programlisting role="php"><![CDATA[
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         Tutaj metoda <code>findFeeds()</code> zwraca tablicę obiektów <code>Zend_Feed_Abstract</code>
         do których na stronie news.html są odniesienia w postaci <code>&lt;link&gt;</code>. Zależenie
@@ -18,4 +19,4 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         wyjątek <code>Zend_Feed_Exception</code> w razie niepowodzenia, na przykład gdy otrzyma
         w odpowiedzi kod HTTP 404 lub gdy dane kanału będą nieprawidłowe.
     </para>
-</sect1>
+</section>

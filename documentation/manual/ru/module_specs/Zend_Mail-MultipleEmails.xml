@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sect1 id="zend.mail.multiple-emails">
-    <title>Отправка нескольких сообщений за одно SMTP-соединение</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Отправка нескольких сообщений за одно SMTP-соединение</title></info>
+    
 
     <para>
         По умолчанию один SMTP-транспорт создает одно соединение и повторно
@@ -9,9 +9,9 @@
         До каждой отправки передается команда RSET для получения подтверждения
         связи.
     </para>
-    <example id="zend.mail.multiple-emails.example-1">
+    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Отправка нескольких сообщений за одно SMTP-соединение</title></info>
 
-        <title>Отправка нескольких сообщений за одно SMTP-соединение</title>
+        
 
         <programlisting language="php"><![CDATA[
 // Создание транспорта
@@ -40,9 +40,9 @@ for ($i = 0; $i > 5; $i++) {
         объект протокола транспорта.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-2">
+    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Управление транспортным соединением вручную</title></info>
 
-        <title>Управление транспортным соединением вручную</title>
+        
 
         <programlisting language="php"><![CDATA[
 // Создание транспорта
@@ -75,7 +75,4 @@ $protocol->disconnect();
 
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

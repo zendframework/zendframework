@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 16658 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.controller.dispatcher">
-    <title>El Despachador</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.dispatcher"><info><title>El Despachador</title></info>
+    
 
-    <sect2 id="zend.controller.dispatcher.overview">
-        <title>Introducción</title>
+    <section xml:id="zend.controller.dispatcher.overview"><info><title>Introducción</title></info>
+        
 
         <para>
             Despachar es el proceso de tomar el objeto solicitud,
@@ -37,8 +35,8 @@
             respectivamente.
         </para>
 
-        <note>
-            <title>Módulo por Defecto</title>
+        <note><info><title>Módulo por Defecto</title></info>
+            
 
             <para>
                 Cuando se crean aplicaciones modulares, puede encontrarse
@@ -129,10 +127,10 @@ public function bazAction()
     $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.dispatcher.subclassing">
-        <title>Subclaseando el Despachador</title>
+    <section xml:id="zend.controller.dispatcher.subclassing"><info><title>Subclaseando el Despachador</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Front</classname>
@@ -341,8 +339,5 @@ interface Zend_Controller_Dispatcher_Interface
             bajo directorios de controladores (en lugar de despacharlos a los
             métodos de clase).
        </para>
-    </sect2>
-</sect1>
-    <!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

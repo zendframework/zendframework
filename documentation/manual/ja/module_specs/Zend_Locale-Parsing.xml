@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.locale.parsing">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.parsing"><info><title>正規化および地域化</title></info>
 
-    <title>正規化および地域化</title>
+    
 
     <para>
         <classname>Zend_Locale_Format</classname> は、<classname>Zend_Locale</classname> が内部で使用しているコンポーネントです。
@@ -20,8 +18,8 @@
         これらの文字列を正規化し、標準化されたデータ構造に変換する必要があります。
         したがって、<classname>Zend_Locale_Format</classname> のすべてのメソッドは、
         入力データを処理するためにロケール情報を必要とします。
-        <note>
-            <title>デフォルトの "root" ロケール</title>
+        <note><info><title>デフォルトの "root" ロケール</title></info>
+            
             <para>
                 ロケールを省略した場合は、正規化や地域化の際に
                 標準の "root" ロケールを使用します。
@@ -31,28 +29,28 @@
         </note>
     </para>
 
-    <sect2 id="zend.locale.number.normalize">
+    <section xml:id="zend.locale.number.normalize"><info><title>数値の正規化: getNumber($input, Array $options)</title></info>
 
-        <title>数値の正規化: getNumber($input, Array $options)</title>
+        
 
         <para>
             標準の
-            <ulink url="http://en.wikipedia.org/wiki/Decimal">十進形式</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Decimal">十進形式</link>
             (例: "3.14") とは異なる
-            <ulink url="http://en.wikipedia.org/wiki/Numeral">数値形式</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Numeral">数値形式</link>
             には、さまざまなものがあります。
             数値を正規化するには <methodname>getNumber()</methodname>
             関数を使用します。これは、標準の十進形式を返します。
             このマニュアルにおける数値関連の説明はすべて、特にことわりがない限り
-            <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">アラビア数字 (0,1,2,3,4,5,6,7,8,9)</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Arabic_numerals">アラビア数字 (0,1,2,3,4,5,6,7,8,9)</link>
             を想定したものです。オプションの配列で 'locale'
             を指定し、桁区切り文字および小数点を定義できます。
             また、配列に 'precision' を指定すると、
             あふれた桁を結果から取り除きます。
         </para>
 
-        <example id="zend.locale.number.normalize.example-1">
-            <title>数値の正規化</title>
+        <example xml:id="zend.locale.number.normalize.example-1"><info><title>数値の正規化</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getNumber('13.524,678',
@@ -64,18 +62,18 @@ print $number; // 13524.678 を返します
 ]]></programlisting>
         </example>
 
-        <sect3 id="zend.locale.number.normalize.precision">
+        <section xml:id="zend.locale.number.normalize.precision"><info><title>計算の精度</title></info>
 
-            <title>計算の精度</title>
+            
 
             <para>
                 <methodname>getNumber($value, array $options = array())</methodname> では非常に大きな数値も正規化できるので、
                 <acronym>PHP</acronym> の通常の数値計算のように精度が限られている計算をする前には注意しましょう。
                 たとえば <code>if
                 ((string)int_val($number) != $number) {
-                <ulink url="http://www.php.net/bc">BCMath</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/bc">BCMath</link>
                 あるいは
-                <ulink url="http://www.php.net/gmp">GMP</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/gmp">GMP</link>
                 を使用するなど。
                 </code>
                 実際にインストールされている <acronym>PHP</acronym> のほとんどは、
@@ -99,8 +97,8 @@ print $number; // 13524.678 を返します
                 例を参照ください。
             </para>
 
-            <example id="zend.locale.number.normalize.precision.example-1">
-                <title>精度を指定した数値の正規化</title>
+            <example xml:id="zend.locale.number.normalize.precision.example-1"><info><title>精度を指定した数値の正規化</title></info>
+                
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getNumber('13.524,678',
@@ -117,13 +115,13 @@ print $number; // 13524.67 を返します
 ]]></programlisting>
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.number.localize">
+    <section xml:id="zend.locale.number.localize"><info><title>数値の地域化</title></info>
 
-        <title>数値の地域化</title>
+        
 
         <para>
             <methodname>toNumber($value, array $options = array())</methodname> は、
@@ -134,8 +132,8 @@ print $number; // 13524.67 を返します
             <methodname>toNumber()</methodname> で用いるデフォルト以外の数値書式を設定できます。
         </para>
 
-        <example id="zend.locale.number.localize.example-1">
-            <title>数値の地域化</title>
+        <example xml:id="zend.locale.number.localize.example-1"><info><title>数値の地域化</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toNumber(13547.36,
@@ -147,8 +145,8 @@ print $number;
         </example>
 
         <para>
-            <note>
-                <title>長さは無制限</title>
+            <note><info><title>長さは無制限</title></info>
+                
                 <para>
                     <methodname>toNumber()</methodname> が地域化できる数値の長さには制限がありません。
                     整数や浮動小数点数の範囲の制限を受けることはありません。
@@ -162,8 +160,8 @@ print $number;
             精度を指定しなかった場合は、地域化した数値を完全な状態で返します。
         </para>
 
-        <example id="zend.locale.number.localize.example-2">
-            <title>精度を指定した数値の地域化</title>
+        <example xml:id="zend.locale.number.localize.example-2"><info><title>精度を指定した数値の地域化</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toNumber(13547.3678,
@@ -184,9 +182,9 @@ print $number;
             ',' を用いますが、英語では小数点に '.' を使用します。
         </para>
 
-        <table id="zend.locale.number.localize.table-1">
-            <title>自分で作成する数値書式用の書式トークン
-            </title>
+        <table xml:id="zend.locale.number.localize.table-1"><info><title>自分で作成する数値書式用の書式トークン
+            </title></info>
+            
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -231,8 +229,8 @@ print $number;
             </tgroup>
         </table>
 
-        <example id="zend.locale.number.localize.example-3">
-            <title>自分で定義した数値書式の使用</title>
+        <example xml:id="zend.locale.number.localize.example-3"><info><title>自分で定義した数値書式の使用</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toNumber(13547.3678,
@@ -253,19 +251,19 @@ print $number;
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.number.test">
+    <section xml:id="zend.locale.number.test"><info><title>数値かどうかの確認</title></info>
 
-        <title>数値かどうかの確認</title>
+        
 
         <para>
             <methodname>isNumber($value, array $options = array())</methodname> は、指定した文字列が数値であるかどうかを
             <constant>TRUE</constant> あるいは <constant>FALSE</constant> で返します。
         </para>
 
-        <example id="zend.locale.number.test.example-1">
-            <title>数値かどうかの確認</title>
+        <example xml:id="zend.locale.number.test.example-1"><info><title>数値かどうかの確認</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
@@ -276,19 +274,19 @@ if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.float.normalize">
+    <section xml:id="zend.locale.float.normalize"><info><title>浮動小数点値の正規化</title></info>
 
-        <title>浮動小数点値の正規化</title>
+        
 
         <para>
             浮動小数点値のパースには <methodname>getFloat($value, array $options = array())</methodname>
             関数を使用します。これは、浮動小数点値を返します。
         </para>
 
-        <example id="zend.locale.float.normalize.example-1">
-            <title>浮動小数点値の正規化</title>
+        <example xml:id="zend.locale.float.normalize.example-1"><info><title>浮動小数点値の正規化</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getFloat('13.524,678',
@@ -301,19 +299,19 @@ print $number;
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.float.localize">
+    <section xml:id="zend.locale.float.localize"><info><title>浮動小数点値の地域化</title></info>
 
-        <title>浮動小数点値の地域化</title>
+        
 
         <para>
             <methodname>toFloat()</methodname> は、浮動小数点値の地域化を行います。
             この関数は、指定した数値を地域化した文字列を返します。
         </para>
 
-        <example id="zend.locale.float.localize.example-1">
-            <title>浮動小数点値の地域化</title>
+        <example xml:id="zend.locale.float.localize.example-1"><info><title>浮動小数点値の地域化</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toFloat(13547.3655,
@@ -326,11 +324,11 @@ print $number;
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.float.test">
+    <section xml:id="zend.locale.float.test"><info><title>浮動小数点値かどうかの確認</title></info>
 
-        <title>浮動小数点値かどうかの確認</title>
+        
 
         <para>
             <methodname>isFloat($value, array $options = array())</methodname> は、
@@ -338,8 +336,8 @@ print $number;
             <constant>TRUE</constant> あるいは <constant>FALSE</constant> で返します。
         </para>
 
-        <example id="zend.locale.float.test.example-1">
-            <title>浮動小数点値かどうかの確認</title>
+        <example xml:id="zend.locale.float.test.example-1"><info><title>浮動小数点値かどうかの確認</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
@@ -350,19 +348,19 @@ if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.integer.normalize">
+    <section xml:id="zend.locale.integer.normalize"><info><title>整数値の正規化</title></info>
 
-        <title>整数値の正規化</title>
+        
 
         <para>
             整数値のパースには <methodname>getInteger()</methodname>
             関数を使用します。これは、整数値を返します。
         </para>
 
-        <example id="zend.locale.integer.normalize.example-1">
-            <title>整数値の正規化</title>
+        <example xml:id="zend.locale.integer.normalize.example-1"><info><title>整数値の正規化</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::getInteger('13.524,678',
@@ -373,19 +371,19 @@ print $number;
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.integer.localize">
+    <section xml:id="zend.locale.integer.localize"><info><title>整数値の地域化</title></info>
 
-        <title>整数値の地域化</title>
+        
 
         <para>
             <methodname>toInteger($value, array $options = array())</methodname> は、整数値の地域化を行います。
             この関数は、指定した数値を地域化した文字列を返します。
         </para>
 
-        <example id="zend.locale.integer.localize.example-1">
-            <title>整数値の地域化</title>
+        <example xml:id="zend.locale.integer.localize.example-1"><info><title>整数値の地域化</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $number = Zend_Locale_Format::toInteger(13547.3655,
@@ -396,11 +394,11 @@ print $number;
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.integer.test">
+    <section xml:id="zend.locale.integer.test"><info><title>整数値かどうかの確認</title></info>
 
-        <title>整数値かどうかの確認</title>
+        
 
         <para>
             <methodname>isInteger($value, array $options = array())</methodname> は、
@@ -408,8 +406,8 @@ print $number;
             <constant>TRUE</constant> あるいは <constant>FALSE</constant> で返します。
         </para>
 
-        <example id="zend.locale.integer.test.example-1">
-            <title>整数値かどうかの確認</title>
+        <example xml:id="zend.locale.integer.test.example-1"><info><title>整数値かどうかの確認</title></info>
+            
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
@@ -420,19 +418,19 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
 ]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.locale.numbersystems">
+    <section xml:id="zend.locale.numbersystems"><info><title>数値系の変換</title></info>
 
-        <title>数値系の変換</title>
+        
 
         <para>
             <methodname>Zend_Locale_Format::convertNumerals()</methodname> は、
             さまざまな
-            <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">数値系</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Arabic_numerals">数値系</link>
             の間での数値の変換を行います。その中には、標準のアラビア数字
             (0,1,2,3,4,5,6,7,8,9) も含まれます。これは、
-            <ulink url="http://en.wikipedia.org/wiki/Eastern_Arabic_numerals">東アラビア数字</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Eastern_Arabic_numerals">東アラビア数字</link>
             とは異なることに注意しましょう。
             東アラビア数字は、アラビア語で数字を表す際に用いられることがあります。
             サポートしていない数値系を使用すると、例外が発生します。
@@ -440,8 +438,8 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
             指定された数値系で数値として扱われない文字は、
             そのまま出力に渡されます。つまり、単位の区切り文字などは変換されないということです。
             <classname>Zend_Locale*</classname> コンポーネントは、<acronym>CLDR</acronym> が提供するデータに依存しています
-            (<ulink url="http://unicode.org/cldr/data/diff/supplemental/languages_and_scripts.html?sortby=date">
-                言語ごとの文字の一覧</ulink> を参照ください)。
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://unicode.org/cldr/data/diff/supplemental/languages_and_scripts.html?sortby=date">
+                言語ごとの文字の一覧</link> を参照ください)。
         </para>
 
         <para>
@@ -462,8 +460,8 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
             に変換したものを返します。
         </para>
 
-        <example id="zend.locale.numbersystems.example-1">
-            <title>東アラビア文字から European/Latin 文字への変換</title>
+        <example xml:id="zend.locale.numbersystems.example-1"><info><title>東アラビア文字から European/Latin 文字への変換</title></info>
+            
             <programlisting language="php"><![CDATA[
 $arabicScript = "١‎٠٠";   // アラビア文字で "100" を表します
 $latinScript = Zend_Locale_Format::convertNumerals($arabicScript,
@@ -479,8 +477,8 @@ print "\n正規化したもの: " . $latinScript;
             同様にして、任意の数値系をその他サポートしている数値系に変換できます。
         </para>
 
-        <example id="zend.locale.numbersystems.example-2">
-            <title>ラテン文字から東アラビア文字への変換</title>
+        <example xml:id="zend.locale.numbersystems.example-2"><info><title>ラテン文字から東アラビア文字への変換</title></info>
+            
             <programlisting language="php"><![CDATA[
 $latinScript = '123';
 $arabicScript = Zend_Locale_Format::convertNumerals($latinScript,
@@ -492,8 +490,8 @@ print "\n地域化したもの: " . $arabicScript;
 ]]></programlisting>
         </example>
 
-        <example id="zend.locale.numbersystems.example-3">
-            <title>各国語での文字名を使用した、4 文字の <acronym>CLDR</acronym> 文字コードの取得</title>
+        <example xml:id="zend.locale.numbersystems.example-3"><info><title>各国語での文字名を使用した、4 文字の <acronym>CLDR</acronym> 文字コードの取得</title></info>
+            
             <programlisting language="php"><![CDATA[
 function getScriptCode($scriptName, $locale)
 {
@@ -513,9 +511,6 @@ echo getScriptCode('tamoul', 'fr'); // 出力は "Taml" となります
             をコールすれば取得できます。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

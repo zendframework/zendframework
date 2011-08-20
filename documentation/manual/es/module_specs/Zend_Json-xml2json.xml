@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20792 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.json.xml2json">
-    <title>Conversión de XML a JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>Conversión de XML a JSON</title></info>
+    
     <para>
         <classname>Zend_Json</classname>
         roporciona una método conveniente para
@@ -12,8 +10,8 @@
         <acronym>JSON</acronym>
         . Esta
         característica fue inspirado en un
-        <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
-            artículo de IBM developerWorks</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
+            artículo de IBM developerWorks</link>
         .
     </para>
 
@@ -171,8 +169,8 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         Más detalles sobre esta característica xml2json pueden encontrarse en
         la propuesta original.
         Eche un vistazo a la
-        <ulink url="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</link>
         .
     </para>
 
-</sect1>
+</section>

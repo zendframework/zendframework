@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: IniTest.php 18950 2009-11-12 15:37:56Z alexander $
  */
@@ -29,7 +29,7 @@ use Zend\Config\Yaml as YamlConfig,
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
@@ -112,7 +112,10 @@ class YamlTest extends \PHPUnit_Framework_TestCase
         $config = new YamlConfig($this->_iniFileConfig, 'extendserror');
     }
 
-    public function testZF413_MultiSections()
+    /**
+     * @group ZF-413
+     */
+    public function testMultiSections()
     {
         $config = new YamlConfig($this->_iniFileAllSectionsConfig, array('staging','other_staging'));
 
@@ -121,14 +124,20 @@ class YamlTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testZF413_AllSections()
+    /**
+     * @group ZF-413
+     */
+    public function testAllSections()
     {
         $config = new YamlConfig($this->_iniFileAllSectionsConfig, null);
         $this->assertEquals('otherStaging', $config->other_staging->only_in);
         $this->assertEquals('staging', $config->staging->hostname);
     }
 
-    public function testZF414()
+    /**
+     * @group ZF-414
+     */
+    public function testGetSectionNameAndAreAllSectionsLoaded()
     {
         $config = new YamlConfig($this->_iniFileAllSectionsConfig, null);
         $this->assertEquals(null, $config->getSectionName());
@@ -143,7 +152,10 @@ class YamlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $config->areAllSectionsLoaded());
     }
 
-    public function testZF415()
+    /**
+     * @group ZF-415
+     */
+    public function testErrorCircularInheritance()
     {
         $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'circular inheritance');
         $config = new YamlConfig($this->_iniFileCircularConfig, null);
@@ -173,7 +185,10 @@ class YamlTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testZF3196_InvalidIniFile()
+    /**
+     * @group ZF-3196
+     */
+    public function testInvalidIniFile()
     {
         try {
             $config = new YamlConfig($this->_iniFileInvalid);
@@ -184,7 +199,10 @@ class YamlTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testZF2285_MultipleKeysOfTheSameName()
+    /**
+     * @group ZF-2285
+     */
+    public function testMultipleKeysOfTheSameName()
     {
         $config = new YamlConfig($this->_iniFileSameNameKeysConfig, null);
         $this->assertEquals('2a', $config->one->two->{0});
@@ -193,7 +211,10 @@ class YamlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('5', $config->three->four->{0}->five);
     }
 
-    public function testZF2437_ArraysWithMultipleChildren()
+    /**
+     * @group ZF-2437
+     */
+    public function testArraysWithMultipleChildren()
     {
         $config = new YamlConfig($this->_iniFileSameNameKeysConfig, null);
         $this->assertEquals('1', $config->six->seven->{0}->eight);
@@ -223,10 +244,23 @@ class YamlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array($this, 'yamlDecoder'), $config->getYamlDecoder());
     }
 
-    public function testConstructorRaisesExceptionWhenUnableToLoadFile()
+    public function testFileNotFound()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'file_get_contents');
-        $config = new YamlConfig('__foo__');
+        try {
+            $file = '__foo__';
+            $config = new YamlConfig($file);
+            $this->fail('Missing expected exception');
+        } catch (Exception\RuntimeException $e) {
+            // read exception stack
+            do {
+                $stack[] = $e;
+            } while ( ($e = $e->getPrevious()) );
+
+            // test two thrown exceptions
+            $this->assertEquals(2, count($stack));
+            $this->assertContains($file, $stack[0]->getMessage());
+            $this->assertContains('file_get_contents', $stack[1]->getMessage());
+        }
     }
 
     public function testBadIndentationRaisesException()

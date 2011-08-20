@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16746 -->
-<!-- Reviewed: no -->
-<sect1 id="introduction.overview">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Áttekintés</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Áttekintés</title></info>
+
+    
 
     <para>
         A Zend Framework egy nyíltforrású keretrendszer webalkalmazások és
@@ -35,7 +35,7 @@
     
     <para>
         A „Zend Keretrendszer” kezdeményezés elsődleges támogatója a
-        <ulink url="http://www.zend.com">Zend Technologies</ulink>, azonban sok
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">Zend Technologies</link>, azonban sok
         vállalat működött közre összetevők vagy jelentősebb fejlesztések
         felajánlásával. Olyan cégek működnek együtt a Zenddel a Keretrendszer
         fejlesztők számára elérhetővé tenni kívánt webszolgáltatás felületeik és
@@ -46,12 +46,9 @@
         Mindezen lehetőségek megteremtése és fenntartása nem valósulhatott volna
         meg a Zend Framework élénk közösségének segítsége nélkül. A közösségi
         tagok, beleértve a közreműködőket is, elérhetők a 
-        <ulink url="http://framework.zend.com/archives">levelezőlistákon</ulink>
-        , <ulink url="http://www.zftalk.com">IRC csatornákon</ulink> és
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">levelezőlistákon</link>
+        , <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">IRC csatornákon</link> és
         más fórumokon. Bármilyen kérdés merüljön fel, a közösség mindig elérhető
         hogy megválaszolja.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

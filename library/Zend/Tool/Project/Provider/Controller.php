@@ -57,7 +57,7 @@ class Controller
     public static function createResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         if (!($controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName))) {
@@ -88,7 +88,7 @@ class Controller
     public static function hasResource(ProjectProfile $profile, $controllerName, $moduleName = null)
     {
         if (!is_string($controllerName)) {
-            throw new Exception\RuntimeException('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
+            throw new Exception\RuntimeException('Zend\\Tool\\Project\\Provider\\Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
 
         $controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName);

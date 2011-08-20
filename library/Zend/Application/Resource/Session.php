@@ -57,7 +57,7 @@ class Session extends AbstractResource
 
     /**
      * Retrieve session manager
-     * 
+     *
      * @return Zend\Session\Manager|null
      */
     public function getManager()
@@ -70,7 +70,7 @@ class Session extends AbstractResource
      *
      * @param  array|string|\Zend\Session\SaveHandler $saveHandler
      * @return \Zend\Application\Resource\Session
-     * @throws \Zend\Application\ResourceException When $saveHandler is no valid save handler
+     * @throws \Zend\Application\ResourceException When $saveHandler is not a valid save handler
      */
     public function setSaveHandler($saveHandler)
     {

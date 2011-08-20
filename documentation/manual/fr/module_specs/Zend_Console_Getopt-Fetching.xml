@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.console.getopt.fetching">
-    <title>Extraire les options et les arguments</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.console.getopt.fetching"><info><title>Extraire les options et les arguments</title></info>
+    
 
     <para>
         Après avoir déclaré les options que l'objet <classname>Zend_Console_Getopt</classname> doit
@@ -20,8 +18,8 @@
         que l'analyse ne soit lancée.
     </para>
 
-    <sect2 id="zend.console.getopt.fetching.exceptions">
-        <title>Manipuler les exceptions Getopt</title>
+    <section xml:id="zend.console.getopt.fetching.exceptions"><info><title>Manipuler les exceptions Getopt</title></info>
+        
 
         <para>
             Si l'utilisateur a donné des options invalides sur la ligne de commande, la
@@ -37,8 +35,8 @@
             options déclarées.
         </para>
 
-        <example id="zend.console.getopt.fetching.exceptions.example">
-            <title>Récupérer une exception Getopt</title>
+        <example xml:id="zend.console.getopt.fetching.exceptions.example"><info><title>Récupérer une exception Getopt</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 try {
@@ -51,7 +49,7 @@ try {
 ]]></programlisting>
         </example>
 
-        <para>Les cas, où l'analyse syntaxique lève une exception, incluent&#160;:</para>
+        <para>Les cas, où l'analyse syntaxique lève une exception, incluent :</para>
 
         <itemizedlist>
             <listitem>
@@ -67,10 +65,10 @@ try {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.fetching.byname">
-        <title>Extraire les options par nom</title>
+    <section xml:id="zend.console.getopt.fetching.byname"><info><title>Extraire les options par nom</title></info>
+        
 
         <para>
             Vous pouvez employer la méthode <methodname>getOption()</methodname> pour connaître la
@@ -80,8 +78,8 @@ try {
             méthode retournerait <constant>NULL</constant>.
         </para>
 
-        <example id="zend.console.getopt.fetching.byname.example.setoption">
-            <title>Utiliser getOption()</title>
+        <example xml:id="zend.console.getopt.fetching.byname.example.setoption"><info><title>Utiliser getOption()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -97,8 +95,8 @@ $p_parameter = $opts->getOption('p');
             <methodname>__isset()</methodname> est également implémentée.
         </para>
 
-        <example id="zend.console.getopt.fetching.byname.example.magic">
-            <title>Utiliser les méthodes magiques __get() et __isset()</title>
+        <example xml:id="zend.console.getopt.fetching.byname.example.magic"><info><title>Utiliser les méthodes magiques __get() et __isset()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -113,10 +111,10 @@ $p_parameter = $opts->p; // null si non fourni
             Si vos options sont déclarées avec des alias, vous pouvez employer n'importe quel
             alias de l'option dans les méthodes ci-dessus.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.fetching.reporting">
-        <title>Extraire les options</title>
+    <section xml:id="zend.console.getopt.fetching.reporting"><info><title>Extraire les options</title></info>
+        
 
         <para>
             Il y a plusieurs méthodes pour extraire l'ensemble complet des options fournies
@@ -126,7 +124,7 @@ $p_parameter = $opts->p; // null si non fourni
         <itemizedlist>
             <listitem>
                 <para>
-                    Comme pour une chaîne de caractères&#160;: employez la méthode
+                    Comme pour une chaîne de caractères : employez la méthode
                     <methodname>toString()</methodname>. Les options sont retournées sous la
                     forme d'une chaîne de caractère où les paires <command>drapeau=valeur</command>
                     sont séparées par des espaces. La valeur d'une option qui n'a pas de paramètre
@@ -135,7 +133,7 @@ $p_parameter = $opts->p; // null si non fourni
             </listitem>
             <listitem>
                 <para>
-                    Comme un tableau&#160;: employez la méthode <methodname>toArray()</methodname>.
+                    Comme un tableau : employez la méthode <methodname>toArray()</methodname>.
                     Les options sont retournées dans un tableau de chaînes de caractères indexé par
                     des nombres, les chaînes de drapeau sont suivies par les chaînes de paramètres
                     éventuels.
@@ -143,13 +141,13 @@ $p_parameter = $opts->p; // null si non fourni
             </listitem>
             <listitem>
                 <para>
-                    Comme une chaîne au format <acronym>JSON</acronym>&#160;: employez la méthode
+                    Comme une chaîne au format <acronym>JSON</acronym> : employez la méthode
                     <methodname>toJson()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Comme une chaîne au format <acronym>XML</acronym>&#160;: employez la méthode
+                    Comme une chaîne au format <acronym>XML</acronym> : employez la méthode
                     <methodname>toXml()</methodname>.
                 </para>
             </listitem>
@@ -162,10 +160,10 @@ $p_parameter = $opts->p; // null si non fourni
             première chaîne, "<command>verbose</command>", est employé comme nom de l'option.
             Le nom du drapeau d'option n'inclut pas le tiret précédent.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.console.getopt.fetching.remainingargs">
-        <title>Extraction des arguments sans option</title>
+    <section xml:id="zend.console.getopt.fetching.remainingargs"><info><title>Extraction des arguments sans option</title></info>
+        
 
         <para>
             Après que les arguments d'option et ainsi que les paramètres de la ligne de
@@ -175,8 +173,8 @@ $p_parameter = $opts->p; // null si non fourni
             qui ne fait partie d'aucune option.
         </para>
 
-        <example id="zend.console.getopt.fetching.remainingargs.example">
-            <title>Utiliser getRemainingArgs()</title>
+        <example xml:id="zend.console.getopt.fetching.remainingargs.example"><info><title>Utiliser getRemainingArgs()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -192,5 +190,5 @@ $args = $opts->getRemainingArgs(); // retourne array('nomdefichier')
             options. C'est utile si vous avez un argument sans options qui commence par
             un tiret. Par exemple : "<command>rm -- -nomdefichier-avec-tiret</command>".
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

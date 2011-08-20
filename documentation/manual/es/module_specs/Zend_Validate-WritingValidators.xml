@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 21241 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.validate.writing_validators">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.writing_validators"><info><title>Escribiendo Validadores</title></info>
 
-    <title>Escribiendo Validadores</title>
+    
 
     <para>
         <classname>Zend_Validate</classname> provee un conjunto de validadores
@@ -55,9 +53,9 @@
         una base de datos no estuviera disponible. Estos son casos en los que
         puede ser necesario determinar el éxito o fracaso de la validación. </para>
 
-    <example id="zend.validate.writing_validators.example.simple">
+    <example xml:id="zend.validate.writing_validators.example.simple"><info><title>Crear una Clase de Validación sencilla</title></info>
 
-        <title>Crear una Clase de Validación sencilla</title>
+        
 
         <para> El siguiente ejemplo demuestra cómo podría escribirse un sencillo
             validador personalizado. En este caso las reglas de validación son
@@ -96,10 +94,10 @@ class MyValid_Float extends Zend_Validate_Abstract
 
     </example>
 
-    <example id="zend.validate.writing_validators.example.conditions.dependent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.dependent"><info><title>Escribiendo una Clase de Validación habiendo Condiciones
+            Dependientes </title></info>
 
-        <title>Escribiendo una Clase de Validación habiendo Condiciones
-            Dependientes </title>
+        
         <para> El siguiente ejemplo muestra un conjunto de reglas de validación
             más complejo, donde es necesario que el valor de entrada ser
             numérico y dentro del límite de un rango de valores mínimos y
@@ -190,11 +188,10 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
     </example>
 
-    <example
-        id="zend.validate.writing_validators.example.conditions.independent">
+    <example xml:id="zend.validate.writing_validators.example.conditions.independent"><info><title>Validación con Condiciones Independientes, Múltiples Razones del
+            Fracaso</title></info>
 
-        <title>Validación con Condiciones Independientes, Múltiples Razones del
-            Fracaso</title>
+        
         <para> Considere escribir una clase de validación y control de
             contraseñas - cuando es necesario que un usuario elija una
             contraseña que cumple determinados criterios para ayudar a tener
@@ -273,4 +270,4 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 
     </example>
 
-</sect1>
+</section>

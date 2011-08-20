@@ -1,7 +1,8 @@
-<sect1 id="zend.pdf.pages">
-    <title>Strony dokumentu.</title>
-    <sect2 id="zend.pdf.pages.creation">
-        <title>Tworzenie strony.</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Strony dokumentu.</title></info>
+    
+    <section xml:id="zend.pdf.pages.creation"><info><title>Tworzenie strony.</title></info>
+        
         <para>
             Strona dokumentu PDF jest reprezentowana przez klasę <code>Zend_Pdf_Page</code>.
         </para>
@@ -53,8 +54,8 @@
             stron dokumentu, a także możemy nią manipulować jak zwykłą tablicą:
         </para>
 
-        <example id="zend.pdf.pages.example-1">
-            <title>Zarządzanie stronami dokumentu PDF.</title>
+        <example xml:id="zend.pdf.pages.example-1"><info><title>Zarządzanie stronami dokumentu PDF.</title></info>
+            
             <programlisting role="php"><![CDATA[
 ...
 // Odwróć kolejność stron
@@ -69,20 +70,20 @@ $pdf->pages[] = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 unset($pdf->pages[$id]);
 
 ...
-]]>
-            </programlisting>
-        </example>
-    </sect2>
 
-    <sect2 id="zend.pdf.pages.cloning">
-        <title>Klonowanie stron.</title>
+            ]]></programlisting>
+        </example>
+    </section>
+
+    <section xml:id="zend.pdf.pages.cloning"><info><title>Klonowanie stron.</title></info>
+        
         <para>
             Istniejące strony PDF mogą być klonowane przez tworzenie nowego
             obiektu <code>Zend_Pdf_Page</code> z istniejącą stroną w parametrze.
         </para>
 
-        <example id="zend.pdf.pages.example-2">
-            <title>Klonowanie istniejącej strony.</title>
+        <example xml:id="zend.pdf.pages.example-2"><info><title>Klonowanie istniejącej strony.</title></info>
+            
             <programlisting role="php"><![CDATA[
 ...
 // Przechowaj szablon strony w osobnej zmiennej
@@ -102,8 +103,8 @@ $pdf->pages[] = $page2;
 unset($pdf->pages[$templatePageIndex]);
 
 ...
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -119,5 +120,5 @@ unset($pdf->pages[$templatePageIndex]);
                 jako nowy dokument.
             </para>
         </caution>
-    </sect2>
-</sect1>
+    </section>
+</section>

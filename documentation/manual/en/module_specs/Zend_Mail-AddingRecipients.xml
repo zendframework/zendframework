@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.adding-recipients">
-    <title>Adding Recipients</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Adding Recipients</title></info>
+    
 
     <para>
         Recipients can be added in three ways:
@@ -33,8 +34,8 @@
         <methodname>clearRecipients()</methodname> clears the list.
     </para>
 
-    <note>
-        <title>Additional parameter</title>
+    <note><info><title>Additional parameter</title></info>
+        
 
         <para>
             <methodname>addTo()</methodname> and <methodname>addCc()</methodname> accept a second
@@ -44,8 +45,8 @@
         </para>
     </note>
 
-    <note>
-        <title>Optional Usage</title>
+    <note><info><title>Optional Usage</title></info>
+        
 
         <para>
             All three of these methods can also accept an array of email addresses
@@ -54,7 +55,4 @@
             human readable name for the recipient.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

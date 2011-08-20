@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20872 -->
-<sect1 id="zend.search.lucene.overview">
-    <title>概要</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.overview"><info><title>概要</title></info>
+    
 
-    <sect2 id="zend.search.lucene.introduction">
-        <title>導入</title>
+    <section xml:id="zend.search.lucene.introduction"><info><title>導入</title></info>
+        
         <para><classname>Zend_Search_Lucene</classname> は、完全に PHP 5
             で書かれている汎用的なテキスト検索エンジンです。
             インデックスをファイルシステム上に保存するためデータベースサーバを必要とせず、
@@ -30,11 +28,11 @@
             現在 (Zend Framework 1.6 以降) サポートしている Lucene インデックスフォーマットバージョンは
             1.4 - 2.3 です。
             Lucene についての詳細は
-            <ulink url="http://lucene.apache.org/java/docs/"/>
+            <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/">http://lucene.apache.org/java/docs/</uri>
             を参照ください。
         </para>
-        <note>
-            <title/>
+        <note><info><title/></info>
+            
             <para>
                 以前の <classname>Zend_Search_Lucene</classname> の実装は Lucene 1.4 (1.9) - 2.1 インデックスフォーマットに対応しています。
             </para>
@@ -46,10 +44,10 @@
                 Zend Framework 1.0.x に含まれる Zend_Search_Lucene の実装で読み込むことができません。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.documents-and-fields">
-        <title>Document および Field オブジェクト</title>
+    <section xml:id="zend.search.lucene.index-creation.documents-and-fields"><info><title>Document および Field オブジェクト</title></info>
+        
             <para>
                 <classname>Zend_Search_Lucene</classname> は、ドキュメント単位でインデックスを作成します。
                 ドキュメントは名前つきのフィールドから構成され、
@@ -161,10 +159,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                 <link linkend="zend.search.lucene.query-language.fields">"デフォルトの検索フィールド"</link>
                 の章を参照ください。
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.understanding-field-types">
-        <title>フィールド型について理解する</title>
+    <section xml:id="zend.search.lucene.index-creation.understanding-field-types"><info><title>フィールド型について理解する</title></info>
+        
         <itemizedlist>
             <listitem>
                 <para>
@@ -212,8 +210,8 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                     結果をデータベースから取得するために、もうひとつ別の ID フィールドを使用します。
                </para>
 
-                <table id="zend.search.lucene.index-creation.understanding-field-types.table">
-                    <title>Zend_Search_Lucene_Field の型</title>
+                <table xml:id="zend.search.lucene.index-creation.understanding-field-types.table"><info><title>Zend_Search_Lucene_Field の型</title></info>
+                    
                     <tgroup cols="5">
                         <thead>
                             <row>
@@ -265,10 +263,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                 </table>
            </listitem>
        </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.html-documents">
-        <title>HTML ドキュメント</title>
+    <section xml:id="zend.search.lucene.index-creation.html-documents"><info><title>HTML ドキュメント</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene</classname> には HTML をパースする機能もあります。
             次のようにして、HTML ファイルや文字列からドキュメントを直接作成できます。
@@ -364,10 +362,10 @@ $headerLinksArray = $doc->getHeaderLinks();
             メソッドは、この "nofollow リンクを除外する"
             フラグの現在の状態を返します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.docx-documents">
-        <title>Word 2007 ドキュメント</title>
+    <section xml:id="zend.search.lucene.index-creation.docx-documents"><info><title>Word 2007 ドキュメント</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene</classname> には Word 2007 のパース機能があります。Word 2007 ファイルから直接ドキュメントを作成できます。
             <programlisting language="php"><![CDATA[
@@ -453,10 +451,10 @@ $index->addDocument($doc);
 ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.pptx-documents">
-        <title>Powerpoint 2007 ドキュメント</title>
+    <section xml:id="zend.search.lucene.index-creation.pptx-documents"><info><title>Powerpoint 2007 ドキュメント</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene</classname> には Powerpoint 2007 のパース機能があります。Powerpoint 2007 ファイルから直接ドキュメントを作成できます。
             <programlisting language="php"><![CDATA[
@@ -539,10 +537,10 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
 $index->addDocument($doc);
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.xlsx-documents">
-        <title>Excel 2007 ドキュメント</title>
+    <section xml:id="zend.search.lucene.index-creation.xlsx-documents"><info><title>Excel 2007 ドキュメント</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene</classname> には Excel 2007 のパース機能があります。Excel 2007 ファイルから直接ドキュメントを作成できます。
             <programlisting language="php"><![CDATA[
@@ -625,5 +623,5 @@ $doc->addField(Zend_Search_Lucene_Field::Text(
 $index->addDocument($doc);
 ]]></programlisting>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

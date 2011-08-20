@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.form.quickstart">
-    <title>Zend_Form Quick Start</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.quickstart"><info><title>Zend_Form Quick Start</title></info>
+    
 
     <para>
         This quick start guide covers the basics of creating,
         validating, and rendering forms with <classname>Zend_Form</classname>.
     </para>
 
-    <sect2 id="zend.form.quickstart.create">
-        <title>Create a form object</title>
+    <section xml:id="zend.form.quickstart.create"><info><title>Create a form object</title></info>
+        
 
         <para>
             Creating a form object is very simple: simply instantiate
@@ -54,10 +53,10 @@ $form->setAction('/resource/process')
         <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.elements">
-        <title>Add elements to the form</title>
+    <section xml:id="zend.form.quickstart.elements"><info><title>Add elements to the form</title></info>
+        
 
         <para>
             A form is nothing without its elements. <classname>Zend_Form</classname>
@@ -217,10 +216,10 @@ $form->addElement('text', 'username', array(
                 instead; this will save you typing in the long-run.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.render">
-        <title>Render a form</title>
+    <section xml:id="zend.form.quickstart.render"><info><title>Render a form</title></info>
+        
 
         <para>
             Rendering a form is simple. Most elements use a
@@ -323,10 +322,10 @@ $element->setOrder(10);
         <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.validate">
-        <title>Check if a form is valid</title>
+    <section xml:id="zend.form.quickstart.validate"><info><title>Check if a form is valid</title></info>
+        
 
         <para>
             After a form is submitted, you will need to check and see if it
@@ -398,10 +397,10 @@ $unfiltered = $form->getUnfilteredValues();
         <programlisting language="php"><![CDATA[
 $values = $form->getValidValues($_POST);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.errorstatus">
-        <title>Get error status</title>
+    <section xml:id="zend.form.quickstart.errorstatus"><info><title>Get error status</title></info>
+        
 
         <para>
             Did your form have failed validations on submission? In most cases, you can simply
@@ -428,10 +427,10 @@ if (!$form->isValid($_POST)) {
             code / error message pairs). If a given element does not have any
             errors, it will not be included in the array.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.puttingtogether">
-        <title>Putting it together</title>
+    <section xml:id="zend.form.quickstart.puttingtogether"><info><title>Putting it together</title></info>
+        
 
         <para>
             Let's build a simple login form. It will need elements
@@ -535,10 +534,10 @@ class UserController extends Zend_Controller_Action
             while the submission may be valid, you may still need to do some authentication
             using <classname>Zend_Auth</classname> or another authorization mechanism.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.config">
-        <title>Using a Zend_Config Object</title>
+    <section xml:id="zend.form.quickstart.config"><info><title>Using a Zend_Config Object</title></info>
+        
 
         <para>
             All <classname>Zend_Form</classname> classes are configurable using
@@ -591,18 +590,15 @@ $form   = new Zend_Form($config->user->login);
         <para>
             and the entire form will be defined.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.quickstart.conclusion">
-        <title>Conclusion</title>
+    <section xml:id="zend.form.quickstart.conclusion"><info><title>Conclusion</title></info>
+        
 
         <para>
             Hopefully with this little tutorial, you should now be well on your
             way to unlocking the power and flexibility of
             <classname>Zend_Form</classname>. Read on for more in-depth information!
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

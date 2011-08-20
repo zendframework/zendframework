@@ -804,9 +804,6 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $meta = $stmt->getColumnMeta($i);
             $this->assertType('array', $meta);
             foreach ($this->_getColumnMetaKeys as $key) {
-                if ($key == 'table' && version_compare(PHP_VERSION, '5.2.0', '<')) {
-                    continue;
-                }
                 $this->assertContains($key, array_keys($meta));
             }
         }

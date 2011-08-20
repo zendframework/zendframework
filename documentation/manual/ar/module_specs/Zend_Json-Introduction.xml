@@ -1,9 +1,12 @@
-<sect1 id="zend.json.introduction">
-    <title>مقدمة</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>مقدمة</title></info>
+    
     <para>
         توفر <code>Zend_Json</code> مجموعة من الـ methods التى تسهل عملية الـ serialization من PHP
         إلى JSON , و عملية تحويل JSON إلى PHP عادية , و لمزيد من المعلومات عن JSON :
-        <ulink url="http://www.json.org/">قم بزيارة موقع مشروع JSON</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">قم بزيارة موقع مشروع JSON</link>.
     </para>
     <para>
         JSON أو JavaScript Object Notation , يمكن إستخدامها لتبادل البيانات بين لغة JavaScript
@@ -11,7 +14,4 @@
         لذلك تتميز بكفائة و خفة وزن أكبر من التى توفرها XML و ذلك فى عمليات تبادل البيانات
         مع لغة JavaScript .
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

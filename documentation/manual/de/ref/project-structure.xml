@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19711 -->
-<!-- Reviewed: no -->
-<appendix id="project-structure">
-    <title>Vorgeschlagene Struktur für die Projekt Struktur von Zend Framework MVC Anwendungen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="project-structure"><info><title>Vorgeschlagene Struktur für die Projekt Struktur von Zend Framework MVC Anwendungen</title></info>
+    
 
-    <sect1 id="project-structure.overview">
-        <title>Übersicht</title>
+    <section xml:id="project-structure.overview"><info><title>Übersicht</title></info>
+        
 
         <para>
             Viele Entwickler suchen Hilfe für die beste Projekt Struktur für ein Zend Framework
@@ -34,10 +32,10 @@
             Aber Anwendungen mit Notwendigkeiten die nicht von dieser Struktur unterstützt werden,
             sollten ein eigenes Projekt Profil verwenden.
         </para>
-    </sect1>
+    </section>
 
-    <sect1 id="project-structure.project">
-        <title>Vorgeschlagene Verzeichnis Struktur für Projekte</title>
+    <section xml:id="project-structure.project"><info><title>Vorgeschlagene Verzeichnis Struktur für Projekte</title></info>
+        
 
         <programlisting language="text"><![CDATA[
 <project name>/
@@ -150,9 +148,8 @@
                             <emphasis><filename>services/</filename></emphasis>: Dieses Verzeichnis
                             ist für eigene Anwendungsspezifische Web-Service Dateien welche von der
                             eigenen Anwendung angeboten werden, oder für die Implementierung eines
-                            <ulink
-                                url="http://www.martinfowler.com/eaaCatalog/serviceLayer.html">Service
-                                Layers</ulink> für eigene Modelle.
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/serviceLayer.html">Service
+                                Layers</link> für eigene Modelle.
                         </para>
                     </listitem>
 
@@ -195,9 +192,8 @@
                     <property>include_path</property> von <acronym>PHP</acronym> sein. Entwickler
                     sollten den Bibliotheks-Code Ihrer Anwendung in diesem Verzeichnis, unter einem
                     eindeutigen Namespace platzieren, und den Richtlinien folgen die im Handbuch von
-                    <acronym>PHP</acronym> unter <ulink
-                        url="http://www.php.net/manual/de/userlandnaming.php">Userland Naming
-                        Guide</ulink> beschrieben sind, sowie denen die von Zend selbst beschrieben
+                    <acronym>PHP</acronym> unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/de/userlandnaming.php">Userland Naming
+                        Guide</link> beschrieben sind, sowie denen die von Zend selbst beschrieben
                     sind.; Dieses Verzeichnis kann auch den Zend Framework selbst enthalten; wenn
                     dem so ist, würde er unter <filename>library/Zend/</filename> platziert werden.
                 </para>
@@ -253,10 +249,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect1>
+    </section>
 
-    <sect1 id="project-structure.filesystem">
-        <title>Modul Struktur</title>
+    <section xml:id="project-structure.filesystem"><info><title>Modul Struktur</title></info>
+        
 
         <para>
             Die Verzeichnis Struktur für Module sollte jene des
@@ -288,10 +284,10 @@
             Der Zweck dieses Verzeichnisse bleibt exakt der gleiche wie der für die vorgeschlagene
             Verzeichnis Struktur des Projekts.
         </para>
-    </sect1>
+    </section>
 
-    <sect1 id="project-structure.rewrite">
-        <title>Leitfaden für die Rewrite Konfiguration</title>
+    <section xml:id="project-structure.rewrite"><info><title>Leitfaden für die Rewrite Konfiguration</title></info>
+        
 
         <para>
             <acronym>URL</acronym> Rewriting ist eine der üblichen Funktionen von
@@ -301,8 +297,8 @@
             geschrieben wurde, vorhanden sind.
         </para>
 
-        <sect2 id="project-structure.rewrite.apache">
-            <title>Apache HTTP Server</title>
+        <section xml:id="project-structure.rewrite.apache"><info><title>Apache HTTP Server</title></info>
+            
 
             <para>
                 Alle folgenden Beispiel verwenden <property>mod_rewrite</property>, ein offizielles
@@ -310,12 +306,12 @@
                 <property>mod_rewrite</property> entweder wärend der Zeit des Kompilierens enthalten
                 sein, oder als Dynamic Shared Objekt (<acronym>DSO</acronym>) aktiviert werden.
                 Konsultieren Sie bitte die
-                <ulink url="http://httpd.apache.org/docs/">Apache Dokumentation</ulink> für weitere
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/">Apache Dokumentation</link> für weitere
                 Informationen über Ihre Version.
             </para>
 
-            <sect3 id="project-structure.rewrite.apache.vhost">
-                <title>Rewriting innerhalb eines VirtualHost</title>
+            <section xml:id="project-structure.rewrite.apache.vhost"><info><title>Rewriting innerhalb eines VirtualHost</title></info>
+                
 
                 <para>
                     Hier ist eine sehr grundsätzliche Definition eines virtuellen Hosts. Diese
@@ -346,10 +342,10 @@
                     vorangestellt ist; die Regeln für <filename>.htaccess</filename> unterscheiden
                     sich in diesem Punkt.
                 </para>
-            </sect3>
+            </section>
 
-            <sect3 id="project-structure.rewrite.apache.htaccess">
-                <title>Rewriting innerhalb einer .htaccess Datei</title>
+            <section xml:id="project-structure.rewrite.apache.htaccess"><info><title>Rewriting innerhalb einer .htaccess Datei</title></info>
+                
 
                 <para>
                     Anbei ist eine einfache <filename>.htaccess</filename> Datei welche
@@ -370,15 +366,15 @@ RewriteRule ^.*$ index.php [NC,L]
                 <para>
                     Es gibt viele Wege um <property>mod_rewrite</property> zu konfigurieren; wenn
                     man weitere Informationen haben will, dann sollte man in Jayson Minard's
-                    <ulink url="http://devzone.zend.com/a/70">Blueprint for PHP Applications:
-                    Bootstrapping</ulink> sehen.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://devzone.zend.com/a/70">Blueprint for PHP Applications:
+                    Bootstrapping</link> sehen.
                 </para>
-            </sect3>
+            </section>
 
-        </sect2>
+        </section>
 
-        <sect2 id="project-structure.rewrite.iis">
-            <title>Microsoft Internet Information Server</title>
+        <section xml:id="project-structure.rewrite.iis"><info><title>Microsoft Internet Information Server</title></info>
+            
 
             <para>
                 Ab Version 7.0 wird <acronym>IIS</acronym> jetzt mit einer Standardmäßigen Rewrite
@@ -414,6 +410,6 @@ RewriteRule ^.*$ index.php [NC,L]
     </system.webServer>
 </configuration>
 ]]></programlisting>
-        </sect2>
-    </sect1>
+        </section>
+    </section>
 </appendix>

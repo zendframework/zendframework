@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19803 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.intro">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.intro"><info><title>Einführung</title></info>
+    
 
     <para>
         Wenn eine Website gebaut wird, die Zend Frameworks <acronym>MVC</acronym> Layer verwendet,
@@ -42,7 +40,7 @@
     </para>
 
     <para>
-        Das <ulink url="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</ulink>
+        Das <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</link>
         Design Pattern beantwortet viele der gezeigten Probleme. In diesem Pattern wird die
         "application" (Anwendungs) View als erstes erstellt, und dann in die "page" (Seite) Views
         injiziert, welche anschließend dem Kunden presentiert wird. Die Seitenansicht kann wie ein
@@ -54,4 +52,4 @@
         Im Zend Framework implementiert <classname>Zend_Layout</classname> das Two Step View
         Pattern.
     </para>
-</sect1>
+</section>

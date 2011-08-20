@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.info">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.info"><info><title>Informations du document et métadonnées</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
 
-    <title>Informations du document et métadonnées</title>
+    
 
     <para>
         Un document <acronym>PDF</acronym> peut inclure des informations générales comme le titre du document,
@@ -181,15 +179,13 @@ $pdf->save($pdfPath);
 
     <para>
         Depuis la version v1.6 de la norme <acronym>PDF</acronym>, les métadonnées peuvent être stockées dans un
-        document <acronym>XML</acronym> spécial attaché au document <acronym>PDF</acronym> (XMP - <ulink
-        url="http://www.adobe.com/products/xmp/">eXtensible Metadata Platform</ulink>).
+        document <acronym>XML</acronym> spécial attaché au document <acronym>PDF</acronym> (XMP - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.adobe.com/products/xmp/">eXtensible Metadata Platform</link>).
     </para>
 
     <para>
         Ce document XML peut être récupéré et attaché au document PDF avec les méthodes
         <methodname>Zend_Pdf::getMetadata()</methodname> et
-        <methodname>Zend_Pdf::setMetadata($metadata)</methodname> : <programlisting
-        role="php"><![CDATA[
+        <methodname>Zend_Pdf::setMetadata($metadata)</methodname> : <programlisting role="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 $metadata = $pdf->getMetadata();
 $metadataDOM = new DOMDocument();
@@ -216,4 +212,4 @@ $pdf->save($pdfPath);
         document de métadonnées (s'il est présent). Il est de la responsabilité de l'utilisateur de
         l'application de les maintenir synchronisées.
     </para>
-</sect1>
+</section>

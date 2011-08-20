@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.importing">
-    <title>Импортирование лент с помощью Zend_Feed</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Импортирование лент с помощью Zend_Feed</title></info>
+    
     <para>
         <code>Zend_Feed</code> позволяет легко получать ленты.
         Если вам известен URI ленты, то просто используйте метод
@@ -8,8 +9,8 @@
 
     <programlisting language="php"><![CDATA[
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         Еще вы можете использовать <code>Zend_Feed</code> для извлечения содержимого
@@ -22,8 +23,8 @@ $feedFromFile = Zend_Feed::importFile('feed.xml');
 
 // импортирование ленты из строки
 $feedFromPHP = Zend_Feed::importString($feedString);
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         В примерах выше в случае успеха возвращается
@@ -36,9 +37,9 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         такой, как недоступная для чтения или плохо сформированная лента.
     </para>
 
-    <sect2 id="zend.feed.importing.custom">
+    <section xml:id="zend.feed.importing.custom"><info><title>Создание собственных лент</title></info>
 
-        <title>Создание собственных лент</title>
+        
 
         <para>
             <code>Zend_Feed</code> позволяет разработчикам легко создавать
@@ -51,9 +52,9 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             <code>Zend_Feed_Builder_Interface</code>.
         </para>
 
-        <sect3 id="zend.feed.importing.custom.importarray">
+        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Импортирование массива</title></info>
 
-            <title>Импортирование массива</title>
+            
 
             <programlisting language="php"><![CDATA[
 // Импортирование ленты из массива
@@ -65,8 +66,8 @@ $atomFeedFromArray = Zend_Feed::importArray($array, 'atom');
 
 // Импортирование ленты RSS из массива
 $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Формат массива должен соответствовать следующей структуре:
@@ -180,42 +181,42 @@ array(
                                    )
                              )
        );
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Информационные ресурсы:
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Спецификация RSS 2.0: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                            Спецификация RSS 2.0: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Спецификация Atom: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                            Спецификация Atom: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc4287">RFC 4287</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Спецификация WFW: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                            Formed Web</ulink>
+                            Спецификация WFW: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             Спецификация iTunes:
-                            <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">Технические спецификации iTunes</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.apple.com/itunes/store/podcaststechspecs.html">Технические спецификации iTunes</link>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.importbuilder">
+        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Импортирование из специального источника данных</title></info>
 
-            <title>Импортирование из специального источника данных</title>
+            
 
             <para>
                 Вы можете создать экземпляр Zeed_Feed из любого источника
@@ -261,14 +262,14 @@ $atomFeedFromArray =
 // Импортирование RSS-ленты из специально созданного ресурса-компоновщика
 $rssFeedFromArray =
     Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
-]]>
-            </programlisting>
 
-        </sect3>
+            ]]></programlisting>
 
-        <sect3 id="zend.feed.importing.custom.dump">
+        </section>
 
-            <title>Дапм содержимого ленты</title>
+        <section xml:id="zend.feed.importing.custom.dump"><info><title>Дапм содержимого ленты</title></info>
+
+            
 
             <para>
                 Для того, чтобы произвести дамп экземпляра
@@ -276,8 +277,8 @@ $rssFeedFromArray =
                 <code>send()</code> или <code>saveXml()</code>.
             </para>
 
-            <programlisting language="php">
-<![CDATA[
+            <programlisting language="php"><![CDATA[
+
 assert($feed instanceof Zend_Feed_Abstract);
 
 // вывод дампа ленты
@@ -285,14 +286,11 @@ print $feed->saveXML();
 
 // отправка HTTP-заголовков и вывод дампа ленты
 $feed->send();
-]]>
-            </programlisting>
 
-        </sect3>
+            ]]></programlisting>
 
-    </sect2>
+        </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+
+</section>

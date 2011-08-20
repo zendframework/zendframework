@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.custom-feed">
-    <title>Classes personnalisées pour les flux et entrées</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Classes personnalisées pour les flux et entrées</title></info>
+    
 
     <para>
         Pour finir, vous pouvez étendre les classes de <classname>Zend_Feed</classname> si
@@ -17,11 +15,11 @@
         soucier des espaces de noms.
     </para>
 
-    <example id="zend.feed.custom-feed.example.extending">
-        <title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>
             Étendre la classe représentant les entrées Atom pour ajouter la gestion d'un
             espace de noms personnalisé
-        </title>
+        </title></info>
+        
 
         <programlisting language="php"><![CDATA[
 /**
@@ -81,7 +79,7 @@ class MonEntree extends Zend_Feed_Entry_Atom
 
         <para>
             Puis pour utiliser cette classe, instanciez-la directement et définissez la
-            propriété <code>maMiseAJour</code>&#160;:
+            propriété <code>maMiseAJour</code> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -95,4 +93,4 @@ $entree->maMiseAJour();
 $entree->maMiseAJour;
 ]]></programlisting>
     </example>
-</sect1>
+</section>

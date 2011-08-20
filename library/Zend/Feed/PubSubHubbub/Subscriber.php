@@ -23,16 +23,10 @@
  */
 namespace Zend\Feed\PubSubHubbub;
 
-use Zend\Uri;
-use Zend\Date;
+use Zend\Date,
+    Zend\Uri;
 
 /**
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\PubSubHubbub\PubSubHubbub
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Http\Client
- * @uses       \Zend\Uri\Uri
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -90,8 +84,7 @@ class Subscriber
      *
      * @var string
      */
-    protected $_preferredVerificationMode
-        = PubSubHubbub::VERIFICATION_MODE_SYNC;
+    protected $_preferredVerificationMode = PubSubHubbub::VERIFICATION_MODE_SYNC;
 
     /**
      * An array of any errors including keys for 'response', 'hubUrl'.
@@ -213,7 +206,7 @@ class Subscriber
      */
     public function setTopicUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
+        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception('Invalid parameter "url"'
                 .' of "' . $url . '" must be a non-empty string and a valid'
                 .' URL');
@@ -273,7 +266,7 @@ class Subscriber
      */
     public function setCallbackUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
+        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception('Invalid parameter "url"'
                 . ' of "' . $url . '" must be a non-empty string and a valid'
                 . ' URL');
@@ -340,7 +333,7 @@ class Subscriber
      */
     public function addHubUrl($url)
     {
-        if (empty($url) || !is_string($url) || !\Zend\Uri\Url::validate($url)) {
+        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception('Invalid parameter "url"'
                 . ' of "' . $url . '" must be a non-empty string and a valid'
                 . ' URL');
@@ -399,7 +392,7 @@ class Subscriber
      */
     public function addAuthentication($url, array $authentication)
     {
-        if (empty($url) || !is_string($url) || !URI\Zend\Uri\Uri::check($url)) {
+        if (empty($url) || !is_string($url) || !Uri\UriFactory::factory($url)->isValid()) {
             throw new Exception('Invalid parameter "url"'
                 . ' of "' . $url . '" must be a non-empty string and a valid'
                 . ' URL');

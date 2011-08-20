@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.static">
-    <title>Zend_Controller_Router_Route_Static</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.static"><info><title>Zend_Controller_Router_Route_Static</title></info>
+    
 
     <para>
         Во всех примерах выше использовались динамические маршруты - маршруты,
@@ -25,8 +24,8 @@ $router->addRoute('login', $route);
         <code>AuthController::loginAction()</code>.
     </para>
 
-    <note id="zend.controller.router.routes.static.warning">
-        <title>Предупреждение: статические маршруты должны содержать все необходимые значения по умолчанию</title>
+    <note xml:id="zend.controller.router.routes.static.warning"><info><title>Предупреждение: статические маршруты должны содержать все необходимые значения по умолчанию</title></info>
+        
 
         <para>
             Поскольку статический маршрут не передает части URL в качестве
@@ -62,7 +61,4 @@ $front->setParam('useDefaultControllerAlways', true);
             образом указывать для маршрута значения по умолчанию.
         </para>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,17 +1,20 @@
-<sect1 id="zend.mime.mime">
-    <title>Zend_Mime</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.mime.mime.introduction">
-        <title>简介</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+    
+
+    <section xml:id="zend.mime.mime.introduction"><info><title>简介</title></info>
+        
         <para>
             <code>Zend_Mime</code>是一个用来处理多段MIME消息的辅助类，
              在<link linkend="zend.mail"><code>Zend_Mail</code></link>和<link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>中使用了它，
              也可在需要MIME支持的应用程序中使用。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.mime.static">
-    <title>静态方法和常量</title>
+    <section xml:id="zend.mime.mime.static"><info><title>静态方法和常量</title></info>
+    
     <para>
         <code>Zend_Mime</code>提供了一系列静态辅助方法来处理MIME：
         <itemizedlist>
@@ -82,10 +85,10 @@
             </listitem>
         </itemizedlist>
     </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.mime.instantiation">
-    <title>实例化Zend_Mime</title>
+    <section xml:id="zend.mime.mime.instantiation"><info><title>实例化Zend_Mime</title></info>
+    
     <para>
         在实例化<code>Zend_Mime</code> 对象时，指定了MIME分界线(MIME boundary)，
          在调用下面的非静态函数都会用到它(MIME分界线)。
@@ -112,8 +115,5 @@
             </listitem>
         </itemizedlist>
     </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

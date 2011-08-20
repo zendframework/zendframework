@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect1 id="zend.service.strikeiron.advanced-uses">
-    <title>Zend_Service_StrikeIron: 応用編</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.advanced-uses"><info><title>Zend_Service_StrikeIron: 応用編</title></info>
+    
 
     <para>
       このセクションでは、<classname>Zend_Service_StrikeIron</classname>
       のより進んだ使用法を説明します。
     </para>
 
-    <sect2 id="zend.service.strikeiron.advanced-uses.services-by-wsdl">
-      <title>WSDL によるサービスの使用</title>
+    <section xml:id="zend.service.strikeiron.advanced-uses.services-by-wsdl"><info><title>WSDL によるサービスの使用</title></info>
+      
 
       <para>
         StrikeIron のサービスの中には <acronym>PHP</acronym> のラッパークラスが存在するものもあります。
@@ -47,11 +45,11 @@ echo $result->listingName;
         WSDL ファイルについての基礎知識が必要です。
         StrikeIron のサイトには、そのためのリソースも豊富に用意されています。
         また、
-        <ulink url="http://horde.org">Horde プロジェクト</ulink> の
-        <ulink url="http://janschneider.de">Jan Schneider</ulink> が、
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://horde.org">Horde プロジェクト</link> の
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://janschneider.de">Jan Schneider</link> が、
         WSDL ファイルを読みやすく HTML 形式に変換するための
-        <ulink url="http://janschneider.de/news/25/268">ちょっとした
-        <acronym>PHP</acronym> のルーチン</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://janschneider.de/news/25/268">ちょっとした
+        <acronym>PHP</acronym> のルーチン</link>
         を公開しています。
       </para>
 
@@ -61,10 +59,10 @@ echo $result->listingName;
         に挙げられているものだけであることに注意しましょう。
       </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.viewing-soap-transactions">
-      <title>SOAP トランザクションの表示</title>
+    <section xml:id="zend.service.strikeiron.viewing-soap-transactions"><info><title>SOAP トランザクションの表示</title></info>
+      
 
       <para>
         StrikeIron との通信は、すべて <acronym>SOAP</acronym> 拡張モジュールを用いて行います。
@@ -81,7 +79,7 @@ echo $result->listingName;
 
       <para>
         <acronym>PHP</acronym> の
-        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-construct.php">SOAPClient</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/function.soap-soapclient-construct.php">SOAPClient</link>
         には <code>trace</code> オプションがあり、これを使用すると直前のトランザクションで交換された
         <acronym>XML</acronym> を取得できます。<classname>Zend_Service_StrikeIron</classname> は、デフォルトでは
         <code>trace</code> を有効にしません。しかし、<code>SOAPClient</code>
@@ -92,9 +90,9 @@ echo $result->listingName;
         <acronym>SOAP</acronym> のトランザクションを見るには、
         <methodname>getSoapClient()</methodname> メソッドをコールして
         <code>SOAPClient</code> のインスタンスを取得し、
-        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></link>
         や
-        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/ja/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></link>
         のような適切なメソッドをコールします。
 
         <programlisting language="php"><![CDATA[
@@ -116,5 +114,5 @@ echo $soapClient->__getLastResponse();
 ]]></programlisting>
       </para>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

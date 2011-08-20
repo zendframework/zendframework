@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22743 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.soap.autodiscovery">
-    <title>AutoDiscovery</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><info><title>AutoDiscovery</title></info>
+    
 
-    <sect2 id="zend.soap.autodiscovery.introduction">
-        <title>AutoDiscovery Einführung</title>
+    <section xml:id="zend.soap.autodiscovery.introduction"><info><title>AutoDiscovery Einführung</title></info>
+        
 
         <para>
             Die <acronym>SOAP</acronym> Funktionalität die im Zend Framework implementiert ist, ist
@@ -48,14 +46,12 @@
 
         <para>
             Wir müssen immer wissen, welche Funktionalität vom <acronym>SOAP</acronym> Server
-            angeboten wird um mit Ihm zu arbeiten. <ulink
-                url="http://www.w3.org/TR/wsdl">WSDL</ulink> wird verwendet um die Netzwerk Service
+            angeboten wird um mit Ihm zu arbeiten. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl">WSDL</link> wird verwendet um die Netzwerk Service
             <acronym>API</acronym> im Detail zu beschreiben.
         </para>
 
         <para>
-            Die WSDL Sprache ist komplex genug (siehe <ulink
-                url="http://www.w3.org/TR/wsdl">http://www.w3.org/TR/wsdl</ulink> für die Details).
+            Die WSDL Sprache ist komplex genug (siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl">http://www.w3.org/TR/wsdl</link> für die Details).
             Es ist also kompliziert genug die richtige WSDL Beschreibung vorzubereiten.
         </para>
 
@@ -93,8 +89,7 @@
 
         <para>
             Die <classname>Zend_Soap_AutoDiscovery</classname> Klasse unterstützt auch das Mapping
-            von Datentypen von <acronym>PHP</acronym> zu <ulink
-                url="http://www.w3.org/TR/xmlschema-2/">XSD Typen</ulink>.
+            von Datentypen von <acronym>PHP</acronym> zu <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/xmlschema-2/">XSD Typen</link>.
         </para>
 
         <para>
@@ -120,8 +115,8 @@ $autodiscover->handle();
             welche die AutoDiscovery Klasse anbietet.
         </para>
 
-        <note id="zend.soap.autodiscovery.introduction.noserver">
-            <title>Zend_Soap_Autodiscover ist kein Soap Server</title>
+        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend_Soap_Autodiscover ist kein Soap Server</title></info>
+            
 
             <para>
                 Es ist wichtig anzumerken, das die Klasse
@@ -152,10 +147,10 @@ if(isset($_GET['wsdl'])) {
 }
 ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.class">
-        <title>Automatische Erkennung von Klassen</title>
+    <section xml:id="zend.soap.autodiscovery.class"><info><title>Automatische Erkennung von Klassen</title></info>
+        
 
         <para>
             Wenn eine Klasse verwendet wird um SOAP Server Funktionalitäten anzubieten, dann sollte
@@ -200,8 +195,7 @@ $autodiscover->handle();
 
                 <listitem>
                     <para>
-                        Klassen Methoden werden in einen <ulink
-                            url="http://www.w3.org/TR/wsdl#_porttypes">Port Typ</ulink> übernommen.
+                        Klassen Methoden werden in einen <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">Port Typ</link> übernommen.
                     </para>
 
                     <para>
@@ -229,8 +223,8 @@ $autodiscover->handle();
             </itemizedlist>
         </para>
 
-        <note>
-            <title>Wichtig!</title>
+        <note><info><title>Wichtig!</title></info>
+            
 
             <para>
                 WSDL Autodiscovery verwendet <acronym>PHP</acronym> Docblocks die vom Entwickler
@@ -244,10 +238,10 @@ $autodiscover->handle();
                 nicht nur beste Praxis, sondern wird für das erkunden der Klasse benötigt.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.functions">
-        <title>Funktionen für Autodiscovery</title>
+    <section xml:id="zend.soap.autodiscovery.functions"><info><title>Funktionen für Autodiscovery</title></info>
+        
 
         <para>
             Wenn ein Set von Funktionen verwendet wird um SOAP Server Funktionalität anzubieten,
@@ -293,8 +287,7 @@ $autodiscover->handle();
 
                 <listitem>
                     <para>
-                        Funktionen werden in einem <ulink
-                            url="http://www.w3.org/TR/wsdl#_porttypes">Port Typ</ulink> verbunden.
+                        Funktionen werden in einem <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">Port Typ</link> verbunden.
                     </para>
 
                     <para>
@@ -322,8 +315,8 @@ $autodiscover->handle();
             </itemizedlist>
         </para>
 
-        <note>
-            <title>Wichtig!</title>
+        <note><info><title>Wichtig!</title></info>
+            
 
             <para>
                 WSDL Autodiscovery verwendet <acronym>PHP</acronym> Docblocks die vom Entwickler
@@ -337,10 +330,10 @@ $autodiscover->handle();
                 nicht nur beste Praxis, sondern wird für das erkunden der Klasse benötigt.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.datatypes">
-        <title>Automatische Erkennung. Datentypen</title>
+    <section xml:id="zend.soap.autodiscovery.datatypes"><info><title>Automatische Erkennung. Datentypen</title></info>
+        
 
         <para>
             Eingabe/Ausgabe Datentypen werden in Netzwerk Service Typen konvertiert indem das
@@ -361,8 +354,7 @@ $autodiscover->handle();
                 <listitem>
                     <para>
                         <acronym>PHP</acronym> Klasse &lt;-&gt; basierend auf der Strategie der
-                        komplexen Typen (Siehe <link
-                            linkend="zend.soap.wsdl.types.add_complex">diesen Abschnitt</link>)
+                        komplexen Typen (Siehe <link linkend="zend.soap.wsdl.types.add_complex">diesen Abschnitt</link>)
 
                         <footnote>
                             <para>
@@ -375,8 +367,7 @@ $autodiscover->handle();
                                 implementieren oder einen String mit dem Nmaen der Klasse. Um
                                 Backwards Compatibility mit <varname>$extractComplexType</varname>
                                 zu gewährleisten werden boolsche Variablen wie in
-                                <classname>Zend_Soap_Wsdl</classname> geparst. Siehe das <link
-                                    linkend="zend.soap.wsdl.types.add_complex"><classname>Zend_Soap_Wsdl</classname>
+                                <classname>Zend_Soap_Wsdl</classname> geparst. Siehe das <link linkend="zend.soap.wsdl.types.add_complex"><classname>Zend_Soap_Wsdl</classname>
                                     Manual über das Hinzufügen von komplexen</link> Typen für
                                 weitere Informationen.
                             </para>
@@ -405,10 +396,10 @@ $autodiscover->handle();
             <code>soap-enc:</code> ein "http://schemas.xmlsoap.org/soap/encoding/" Namespace, und
             <code>tns:</code> ist ein "Ziel Namespace" für einen Service.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.autodiscovery.wsdlstyles">
-        <title>Stile für das Binden von WSDL</title>
+    <section xml:id="zend.soap.autodiscovery.wsdlstyles"><info><title>Stile für das Binden von WSDL</title></info>
+        
 
         <para>
             WSDL bietet verschiedene Transport Mechanismen und Stile. Das beeinträchtigt die
@@ -438,5 +429,5 @@ $autodiscover->setBindingStyle(
 $autodiscover->addFunction('myfunc1');
 $autodiscover->handle();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22432 -->
-<sect1 id="zend.log.filters">
-    <title>フィルタ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.filters"><info><title>フィルタ</title></info>
+    
 
     <para>
         フィルタオブジェクトは、ログに書き出されるメッセージをブロックします。
     </para>
 
-    <sect2 id="zend.log.filters.all-writers">
-        <title>すべてのライターに対するフィルタリング</title>
+    <section xml:id="zend.log.filters.all-writers"><info><title>すべてのライターに対するフィルタリング</title></info>
+        
 
         <para>
             すべてのライターの前にフィルタをかけるには、任意の数のフィルタを
@@ -36,10 +34,10 @@ $logger->emerg('緊急メッセージ');
             ログオブジェクトにフィルタを追加すると、
             フィルタを全て通過したものだけをライターが受け取るようになります。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.log.filters.single-writer">
-        <title>ライターのインスタンスに対するフィルタリング</title>
+    <section xml:id="zend.log.filters.single-writer"><info><title>ライターのインスタンスに対するフィルタリング</title></info>
+        
 
         <para>
             特定のライターインスタンスに対してだけフィルタをかけるには、ライターの
@@ -65,5 +63,5 @@ $logger->info('通知メッセージ');
 // 両方のライターに記録されます
 $logger->emerg('緊急メッセージ');
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

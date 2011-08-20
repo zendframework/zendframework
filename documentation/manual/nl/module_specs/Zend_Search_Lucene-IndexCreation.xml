@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.index-creation">
-    <title>Indexes Bouwen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.index-creation"><info><title>Indexes Bouwen</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.creating">
-        <title>Een Nieuwe Index Maken</title>
+    <section xml:id="zend.search.lucene.index-creation.creating"><info><title>Een Nieuwe Index Maken</title></info>
+        
 
         <para>
             De mogelijkheid om nieuwe Indexes te maken en ze up te daten is geïmplementeerd in de Zend_Search_Lucene
@@ -49,7 +50,7 @@ $index->commit();
             <para>
             Lucene index segment bestanden zijn niet updatebaar. Segment update noodzaakt een volledige
             segment reorganisatie. Zie de Lucene index bestandsformaten voor details
-            (<ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>).
+            (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</link>).
             Het aantal segmenten opvoeren verlaagt de kwaliteit van de index, maar index optimalisatie herstelt dit.
             Optimalisatie beperkt zich tot het bijeen voegen van verscheidene segmenten in één enkel segment. Dit
             proces doet geen update van de segmenten. Het genereert een nieuw groot segment, een nieuwe segmentenlijst
@@ -70,10 +71,10 @@ $index->commit();
             Automatisch segment management optimalisatie is onderdeel van de toekomstige Zend_Search_Lucene
             verbeteringen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.updating">
-        <title>Index Updaten</title>
+    <section xml:id="zend.search.lucene.index-creation.updating"><info><title>Index Updaten</title></info>
+        
 
         <para>
             Dezelfde procedure wordt gebruikt om een bestaande index up te daten. Het enige verschil is dat de index
@@ -108,12 +109,12 @@ $index->commit();
             Een groot segment is meer optimaal, maar heeft meer geheugen nodig tijdens zijn creatie.
         </para>
         <para>
-            Lucene Java en Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
+            Lucene Java en Luke (Lucene Index Toolbox - <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getopt.org/luke/">http://www.getopt.org/luke/</link>)
             kunnen worden geraadpleegd om indexes te optimaliseren met deze versie van Zend_Search_Lucene.
         </para>
-    </sect2>
-    <sect2 id="zend.search.lucene.index-creation.document-updating">
-        <title>Documenten updaten</title>
+    </section>
+    <section xml:id="zend.search.lucene.index-creation.document-updating"><info><title>Documenten updaten</title></info>
+        
 
         <para>
             Het Lucene index bestandformaat ondersteund het updaten van documenten niet. Documenten zouden moeten worden
@@ -133,9 +134,5 @@ foreach ($hits as $hit) {
 }
 $index->commit();
 ?>]]></programlisting>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

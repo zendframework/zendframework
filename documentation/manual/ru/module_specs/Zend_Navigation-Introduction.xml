@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.navigation.introduction">
-    <title>Введение</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>Введение</title></info>
+    
 
     <para>
         <classname>Zend_Navigation</classname> является компонентой для
@@ -11,16 +12,16 @@
         качестве модели в других целях, связанных с навигацией.
     </para>
 
-    <sect2 id="zend.navigation.introduction.concepts">
-        <title>Страницы и контейнеры</title>
+    <section xml:id="zend.navigation.introduction.concepts"><info><title>Страницы и контейнеры</title></info>
+        
 
         <para>
             Есть две основные концепции в
             <classname>Zend_Navigation</classname>:
         </para>
 
-        <sect3 id="zend.navigation.introduction.pages">
-            <title>Страницы</title>
+        <section xml:id="zend.navigation.introduction.pages"><info><title>Страницы</title></info>
+            
             <para>
                 Страница (<classname>Zend_Navigation_Page</classname>)
                 в <classname>Zend_Navigation</classname> в своем
@@ -36,10 +37,10 @@
                 Более подробную информацию о страницах читайте в разделе о
                 <link linkend="zend.navigation.pages">страницах</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.navigation.introduction.containers">
-            <title>Контейнеры</title>
+        <section xml:id="zend.navigation.introduction.containers"><info><title>Контейнеры</title></info>
+            
             <para>
                 Контейнер (<classname>Zend_Navigation_Container</classname>)
                 в <classname>Zend_Navigation</classname>
@@ -47,7 +48,7 @@
                 Он имеет методы для добавления, извлечения, удаления и обхода
                 страниц.
                 Класс контейнера реализует интерфейсы из
-                <ulink url="http://php.net/spl">SPL</ulink>
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/spl">SPL</link>
                 <classname>RecursiveIterator</classname>
                 и <classname>Countable</classname>, таким образом, он может
                 использоваться с SPL-итераторами, такими, как
@@ -66,11 +67,11 @@
                     это значит, что любая страница может содержать подстраницы.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.navigation.introduction.separation">
-        <title>Разделение данных (модели) и отображения (вида)</title>
+    <section xml:id="zend.navigation.introduction.separation"><info><title>Разделение данных (модели) и отображения (вида)</title></info>
+        
 
         <para>
             Классы в пространстве имен <classname>Zend_Navigation</classname>
@@ -89,5 +90,5 @@
             <link linkend="zend.view.helpers.initial.navigation">помощниках
             навигации</link>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

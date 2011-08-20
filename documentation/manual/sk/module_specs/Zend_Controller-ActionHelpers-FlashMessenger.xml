@@ -1,8 +1,9 @@
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Úvod</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Úvod</title></info>
+        
         <para>
             Pomocná trieda <code>FlashMessenger</code> umožnuje odovzdanie správ
             ktoré možno potrebuje vidieť užívateľ pri ďalšom požiadavku. Pri
@@ -15,13 +16,13 @@
             <link linkend="zend.session.startingasession">Zend Session</link>)
         </para>
 
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Základné použitie</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Základné použitie</title></info>
+        
         <para>
             Nasledujúci príklad ukazuje jednoduché použitie <code>FlashMessenger</code>.
-            Ak zavolá akcia <code>/some/my</code>, tak sa uloží správa &quot;Uložené!&quot;.
+            Ak zavolá akcia <code>/some/my</code>, tak sa uloží správa "Uložené!".
             Nasledujúca požiadavka na akciu <code>/some/my-next-request</code>
             získa túto správu (a tak ju zmaže).
         </para>
@@ -59,5 +60,5 @@ class SomeController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.modular">
-    <title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.modular"><info><title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title></info>
+    
 
-    <sect2 id="zend.controller.modular.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.modular.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Eine konventionelle modulare Verzeichnisstruktur erlaubt es verschiedene
@@ -62,8 +60,8 @@ application/
             Verzeichnisstruktur wird für die Beispiele in diesem Kapitel verwendet.
         </para>
 
-        <note>
-            <title>Keine Verwendung von Namensräumen im Standard Modul</title>
+        <note><info><title>Keine Verwendung von Namensräumen im Standard Modul</title></info>
+            
 
             <para>
                 Es ist zu beachten das Controller, im Standardmodul, keinen Prefix für den
@@ -79,10 +77,10 @@ application/
             Also, wie kann solch ein Verzeichnislayout mit den <acronym>MVC</acronym> Komponenten
             des Zend Frameworks implementiert werden?
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.directories">
-        <title>Verzeichnisse für Modul Controller spezifizieren</title>
+    <section xml:id="zend.controller.modular.directories"><info><title>Verzeichnisse für Modul Controller spezifizieren</title></info>
+        
 
         <para>
             Der erste Schritt um Module zu verwenden ist es, die Art der Spezifizierung der
@@ -178,10 +176,10 @@ $front->addModuleDirectory('/path/to/application/modules');
                 <methodname>setModuleControllerDirectoryName()</methodname> übergeben wird.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.router">
-        <title>Zu Modulen routen</title>
+    <section xml:id="zend.controller.modular.router"><info><title>Zu Modulen routen</title></info>
+        
 
         <para>
             Die Standardroute in <classname>Zend_Controller_Router_Rewrite</classname> ist ein
@@ -201,10 +199,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             Controller Verzeichnis Array existiert, das dem Front Controller und Dispatcher
             übergeben wird.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>Modul oder globaler Standard Controller</title>
+    <section xml:id="zend.controller.modular.defaultcontroller"><info><title>Modul oder globaler Standard Controller</title></info>
+        
 
         <para>
             Im Standardrouter wird der StandardController verwendet
@@ -223,5 +221,5 @@ $front->addModuleDirectory('/path/to/application/modules');
         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
 
-    <sect2 id="zend.mime.part.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.mime.part.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Diese Klasse repräsentiert einen einzelnen Abschnitte einer <acronym>MIME</acronym>
@@ -13,15 +11,14 @@
             Informationen über Ihre Verschlüsselung, den Typ und den originalen Dateinamen.
             Sie stellt ausserdem eine Methode, für die Erzeugung eines Strings aus den
             in Ihr gespeicherten Daten, zur Verfügung. <classname>Zend_Mime_Part</classname> Objekte
-            können zu <link
-                linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
+            können zu <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
             hinzugefügt werden, um zu einer kompletten mehrteiligen Nachricht verknüpft
             zu werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.instantiation">
-        <title>Instanziierung</title>
+    <section xml:id="zend.mime.part.instantiation"><info><title>Instanziierung</title></info>
+        
 
         <para>
             <classname>Zend_Mime_Part</classname> wird instanziiert mit einem String welcher den
@@ -43,10 +40,10 @@ public $boundary;
 public $location;
 public $language;
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.methods">
-        <title>Methoden für das übertragen der des Teils der Nachricht zu einem String</title>
+    <section xml:id="zend.mime.part.methods"><info><title>Methoden für das übertragen der des Teils der Nachricht zu einem String</title></info>
+        
 
         <para>
             <methodname>getContent()</methodname> gibt den verschlüsselten Inhalt des MimeParts als
@@ -118,5 +115,5 @@ public $language;
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

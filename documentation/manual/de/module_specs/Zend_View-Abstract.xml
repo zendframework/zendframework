@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18822 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.abstract">
-    <title>Zend_View_Abstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.abstract"><info><title>Zend_View_Abstract</title></info>
+    
 
     <para>
         <classname>Zend_View_Abstract</classname> ist die Basisklasse auf der
@@ -56,7 +54,4 @@ protected function _run()
         beschränkt die durchgeführt werden können, und es erlaubt kritische Bereiche vor Missbrauch
         durch View Skripte zu schützen.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,9 @@
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
 
-    <sect2 id="zend.mime.part.introduction">
-      <title>Wprowadzenie</title>
+    <section xml:id="zend.mime.part.introduction"><info><title>Wprowadzenie</title></info>
+      
 
       <para>Ta klasa reprezentuje pojedynczą część wiadomości MIME. Zawiera ona
       aktualną zawartość części wiadomości oraz informacje o jej kodowaniu, typie
@@ -11,10 +12,10 @@
       być dodane do
       <link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
       aby zebrać kompletną wieloczęściową wiadomość.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.part.instantiation">
-        <title>Tworzenie instancji</title>
+    <section xml:id="zend.mime.part.instantiation"><info><title>Tworzenie instancji</title></info>
+        
 
         <para>Obiekt <code>Zend_Mime_Part</code> jest tworzony z łańcuchem znaków
         zawierającym część wiadomości podanym jako parametr konstruktora.
@@ -30,12 +31,12 @@ public $disposition;
 public $filename;
 public $description;
 public $charset;
-]]>
-        </programlisting>
-    </sect2>
 
-  <sect2 id="zend.mime.part.methods">
-    <title>Metody do renderowania części wiadomości do łańcucha znaków</title>
+        ]]></programlisting>
+    </section>
+
+  <section xml:id="zend.mime.part.methods"><info><title>Metody do renderowania części wiadomości do łańcucha znaków</title></info>
+    
 
     <para><code>getContent()</code> zwraca zawartość MimePart zakodowaną
     jako łańcuch znaków przy użyciu kodowania określonego w atrybucie $encoding.
@@ -84,5 +85,5 @@ public $charset;
            </listitem>
       </itemizedlist>
     </para>
-  </sect2>
-</sect1>
+  </section>
+</section>

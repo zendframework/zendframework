@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.form.standardDecorators">
-    <title>Standard Form Decorators Shipped With Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><info><title>Standard Form Decorators Shipped With Zend Framework</title></info>
+    
 
     <para>
         <classname>Zend_Form</classname> ships with several standard decorators. For more
-        information on general decorator usage, see <link
-            linkend="zend.form.decorators">the Decorators section</link>.
+        information on general decorator usage, see <link linkend="zend.form.decorators">the Decorators section</link>.
     </para>
 
-    <sect2 id="zend.form.standardDecorators.callback">
-        <title>Zend_Form_Decorator_Callback</title>
+    <section xml:id="zend.form.standardDecorators.callback"><info><title>Zend_Form_Decorator_Callback</title></info>
+        
 
         <para>
             The Callback decorator can execute an arbitrary callback to
@@ -47,14 +45,13 @@ class Util
             the callback return value; 'prepend' and 'append' are still
             valid as well.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.captcha">
-        <title>Zend_Form_Decorator_Captcha</title>
+    <section xml:id="zend.form.standardDecorators.captcha"><info><title>Zend_Form_Decorator_Captcha</title></info>
+        
 
         <para>
-            The Captcha decorator is for use with the <link
-                linkend="zend.form.standardElements.captcha">CAPTCHA form
+            The Captcha decorator is for use with the <link linkend="zend.form.standardElements.captcha">CAPTCHA form
                 element</link>. It utilizes the CAPTCHA adapter's
             <methodname>render()</methodname> method to generate the output.
         </para>
@@ -66,10 +63,10 @@ class Util
             user verification of the CAPTCHA. These are validated as a single
             element.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.description">
-        <title>Zend_Form_Decorator_Description</title>
+    <section xml:id="zend.form.standardDecorators.description"><info><title>Zend_Form_Decorator_Description</title></info>
+        
 
         <para>
             The Description decorator can be used to display a description set
@@ -95,10 +92,10 @@ class Util
             <constant>FALSE</constant> value to the decorator's 'escape' option or
             <methodname>setEscape()</methodname> method.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.dtDdWrapper">
-        <title>Zend_Form_Decorator_DtDdWrapper</title>
+    <section xml:id="zend.form.standardDecorators.dtDdWrapper"><info><title>Zend_Form_Decorator_DtDdWrapper</title></info>
+        
 
         <para>
             The default decorators utilize definition lists
@@ -123,10 +120,10 @@ class Util
             This decorator replaces the content provided to it by wrapping
             it within the <emphasis>&lt;dd&gt;</emphasis> element.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.errors">
-        <title>Zend_Form_Decorator_Errors</title>
+    <section xml:id="zend.form.standardDecorators.errors"><info><title>Zend_Form_Decorator_Errors</title></info>
+        
 
         <para>
             Element errors get their own decorator with the Errors
@@ -140,10 +137,10 @@ class Util
             The Errors decorator can either prepend or append the content
             provided to it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.fieldset">
-        <title>Zend_Form_Decorator_Fieldset</title>
+    <section xml:id="zend.form.standardDecorators.fieldset"><info><title>Zend_Form_Decorator_Fieldset</title></info>
+        
 
         <para>
             Display groups and sub forms render their content within
@@ -154,10 +151,10 @@ class Util
             original content. Any attributes set in the decorated item are
             passed to the fieldset as <acronym>HTML</acronym> attributes.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.file">
-        <title>Zend_Form_Decorator_File</title>
+    <section xml:id="zend.form.standardDecorators.file"><info><title>Zend_Form_Decorator_File</title></info>
+        
 
         <para>
             File Elements have special notation when you use multiple
@@ -166,10 +163,10 @@ class Util
             file elements with only a single methodcall. It is used
             automatically and fixes the elements name.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.form">
-        <title>Zend_Form_Decorator_Form</title>
+    <section xml:id="zend.form.standardDecorators.form"><info><title>Zend_Form_Decorator_Form</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> objects typically need to render an
@@ -178,10 +175,10 @@ class Util
             <classname>Zend_Form</classname> object's action and method, and any
             attributes as <acronym>HTML</acronym> attributes.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.formElements">
-        <title>Zend_Form_Decorator_FormElements</title>
+    <section xml:id="zend.form.standardDecorators.formElements"><info><title>Zend_Form_Decorator_FormElements</title></info>
+        
 
         <para>
             Forms, display groups, and sub forms are collections of
@@ -191,10 +188,10 @@ class Util
             registered separator. It can either append or prepend content
             passed to it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.formErrors">
-        <title>Zend_Form_Decorator_FormErrors</title>
+    <section xml:id="zend.form.standardDecorators.formErrors"><info><title>Zend_Form_Decorator_FormErrors</title></info>
+        
 
         <para>
             Some developers and designers prefer to group all error messages at
@@ -282,10 +279,10 @@ class Util
             The FormErrors decorator can either prepend or append the content
             provided to it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.htmlTag">
-        <title>Zend_Form_Decorator_HtmlTag</title>
+    <section xml:id="zend.form.standardDecorators.htmlTag"><info><title>Zend_Form_Decorator_HtmlTag</title></info>
+        
 
         <para>
             The HtmlTag decorator allows you to utilize <acronym>HTML</acronym> tags to
@@ -295,10 +292,10 @@ class Util
             replaces the content by wrapping it in the given tag. However,
             you can specify a placement to append or prepend a tag as well.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.image">
-        <title>Zend_Form_Decorator_Image</title>
+    <section xml:id="zend.form.standardDecorators.image"><info><title>Zend_Form_Decorator_Image</title></info>
+        
 
         <para>
             The Image decorator allows you to create an <acronym>HTML</acronym> image input
@@ -320,10 +317,10 @@ class Util
             'tag' option to the decorator, or explicitly call
             <methodname>setTag()</methodname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.label">
-        <title>Zend_Form_Decorator_Label</title>
+    <section xml:id="zend.form.standardDecorators.label"><info><title>Zend_Form_Decorator_Label</title></info>
+        
 
         <para>
             Form elements typically have labels, and the Label decorator is
@@ -393,15 +390,14 @@ class Util
             content; specify a 'placement' option of 'append' to place it
             after the content.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.prepareElements">
-        <title>Zend_Form_Decorator_PrepareElements</title>
+    <section xml:id="zend.form.standardDecorators.prepareElements"><info><title>Zend_Form_Decorator_PrepareElements</title></info>
+        
 
         <para>
             Forms, display groups, and sub forms are collections of
-            elements. When using the <link
-                linkend="zend.form.standardDecorators.viewScript">ViewScript</link>
+            elements. When using the <link linkend="zend.form.standardDecorators.viewScript">ViewScript</link>
             decorator with your form or sub form, it's useful to be able to
             recursively set the view object, translator, and all fully qualifid
             names (as determined by sub form array notation). The
@@ -415,10 +411,10 @@ $form->setDecorators(array(
     array('ViewScript', array('viewScript' => 'form.phtml')),
 ));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.viewHelper">
-        <title>Zend_Form_Decorator_ViewHelper</title>
+    <section xml:id="zend.form.standardDecorators.viewHelper"><info><title>Zend_Form_Decorator_ViewHelper</title></info>
+        
 
         <para>
             Most elements utilize <classname>Zend_View</classname> helpers for
@@ -439,10 +435,10 @@ $form->setDecorators(array(
             By default, this decorator appends content; use the 'placement'
             option to specify alternate placement.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.viewScript">
-        <title>Zend_Form_Decorator_ViewScript</title>
+    <section xml:id="zend.form.standardDecorators.viewScript"><info><title>Zend_Form_Decorator_ViewScript</title></info>
+        
 
         <para>
             Sometimes you may wish to use a view script for creating your
@@ -528,8 +524,8 @@ $element->setDecorators(array(array('ViewScript',
 </div>
 ]]></programlisting>
 
-        <note>
-            <title>Replacing content with a view script</title>
+        <note><info><title>Replacing content with a view script</title></info>
+            
 
             <para>
                 You may find it useful for the view script to replace the
@@ -557,8 +553,5 @@ $this->decorator->setOption('placement', false);
             Using the ViewScript decorator is recommended for when you want to
             have very fine-grained control over how your elements are rendered.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+    </section>
+</section>

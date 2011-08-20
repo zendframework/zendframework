@@ -1,5 +1,6 @@
-<sect1 id="zend.json.objects">
-    <title>Объекты JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.objects"><info><title>Объекты JSON</title></info>
+    
     <para>
         Когда объекты PHP закодировываются в JSON, все публичные свойства этого
         объекта будут закодированы в объект JSON.
@@ -78,7 +79,4 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         code and populated with the values decoded using <code>Zend_Json</code>.
 -->
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

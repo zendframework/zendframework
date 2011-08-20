@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="migration.16">
-    <title>Zend Framework 1.6</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.16"><info><title>Zend Framework 1.6</title></info>
+    
 
     <para>
         When upgrading from a previous release to Zend Framework 1.6 or higher you
         should note the following migration notes.
     </para>
 
-    <sect2 id="migration.16.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.16.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
-        <sect3 id="migration.16.zend.controller.dispatcher">
-            <title>Dispatcher Interface Changes</title>
+        <section xml:id="migration.16.zend.controller.dispatcher"><info><title>Dispatcher Interface Changes</title></info>
+            
 
             <para>
                 Users brought to our attention the fact that
@@ -46,14 +45,14 @@
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.16.zend.file.transfer">
-        <title>Zend_File_Transfer</title>
+    <section xml:id="migration.16.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+        
 
-        <sect3 id="migration.16.zend.file.transfer.validators">
-            <title>Changes when using validators</title>
+        <section xml:id="migration.16.zend.file.transfer.validators"><info><title>Changes when using validators</title></info>
+            
 
             <para>
                 As noted by users, the validators from <classname>Zend_File_Transfer</classname>
@@ -89,8 +88,8 @@
                 <constant>FALSE</constant> after defining the wished validator.
             </para>
 
-            <example id="migration.16.zend.file.transfer.example">
-                <title>How to change your file validators from 1.6.1 to 1.6.2</title>
+            <example xml:id="migration.16.zend.file.transfer.example"><info><title>How to change your file validators from 1.6.1 to 1.6.2</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Example for 1.6.1
@@ -103,9 +102,6 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('FilesSize', false, array('1B', '100kB'));
 ]]></programlisting>
         </example>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

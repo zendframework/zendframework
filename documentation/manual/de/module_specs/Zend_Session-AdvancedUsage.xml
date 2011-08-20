@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22743 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.session.advanced_usage">
-    <title>Fortgeschrittene Benutzung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advanced_usage"><info><title>Fortgeschrittene Benutzung</title></info>
+    
 
     <para>
         Wärend die Beispiele für die Basisnutzung völlig akzeptierbar sind, in ihrem Weg Zend
@@ -11,16 +9,16 @@
         Benutzung der <classname>Zend_Session</classname> Komponente.
     </para>
 
-    <sect2 id="zend.session.advanced_usage.starting_a_session">
-        <title>Starten einer Session</title>
+    <section xml:id="zend.session.advanced_usage.starting_a_session"><info><title>Starten einer Session</title></info>
+        
 
         <para>
             Wenn man alle Anfragen einer Session durch <classname>Zend_Session</classname>
             bearbeitet haben will, muß die Session in der Bootstrap Datei gestartet werden:
         </para>
 
-        <example id="zend.session.advanced_usage.starting_a_session.example">
-            <title>Starten einer globalen Session</title>
+        <example xml:id="zend.session.advanced_usage.starting_a_session.example"><info><title>Starten einer globalen Session</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Session::start();
@@ -43,9 +41,8 @@ Zend_Session::start();
         <orderedlist>
             <listitem>
                 <para>
-                    Falsch: <acronym>PHP</acronym>'s <ulink
-                        url="http://www.php.net/manual/de/ref.session.php#ini.session.auto-start"><code>session.auto_start</code>
-                        Einstellung</ulink> darf nicht eingeschaltet werden. Wenn keine Möglichkeit
+                    Falsch: <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/de/ref.session.php#ini.session.auto-start"><code>session.auto_start</code>
+                        Einstellung</link> darf nicht eingeschaltet werden. Wenn keine Möglichkeit
                     besteht diese Einstellung in php.ini zu deaktivieren, und mod_php (oder
                     ähnliches) verwendet wird, und die Einstellung schon in <code>php.ini</code>
                     aktiviert ist, kann das folgende in der <code>.htaccess</code> Datei
@@ -60,8 +57,7 @@ php_value session.auto_start 0
 
             <listitem>
                 <para>
-                    Falsch: <acronym>PHP</acronym>'s <ulink
-                        url="http://www.php.net/session_start"><methodname>session_start()</methodname></ulink>
+                    Falsch: <acronym>PHP</acronym>'s <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session_start"><methodname>session_start()</methodname></link>
                     Funktion darf nicht direkt verwendet werden. Wenn
                     <methodname>session_start()</methodname> direkt, und anschließend
                     <classname>Zend_Session_Namespace</classname> verwendet wird, wird von
@@ -133,19 +129,17 @@ php_value session.auto_start 0
                     in den meisten Situationen gut funktioniert. Trotzdem ist man dann dafür
                     verantwortlich darauf zu schauen dass das erste
                     <code>new Zend_Session_Namespace()</code> passiert <emphasis>bevor</emphasis>
-                    irgendeine Ausgabe (z.B. <ulink
-                        url="http://www.php.net/headers_sent">HTTP headers</ulink> ) von
+                    irgendeine Ausgabe (z.B. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/headers_sent">HTTP headers</link> ) von
                     <acronym>PHP</acronym> an den Client gesendet wird, wenn standardmäßige,
-                    Cookie-basierte Sessions verwendet werden (sehr empfehlenswert). Siehe <link
-                        linkend="zend.session.global_session_management.headers_sent">dieses
+                    Cookie-basierte Sessions verwendet werden (sehr empfehlenswert). Siehe <link linkend="zend.session.global_session_management.headers_sent">dieses
                         Kapitel</link> für weitere Informationen.
                 </para>
             </listitem>
         </orderedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.locking">
-        <title>Gesperrte Session Namensräume</title>
+    <section xml:id="zend.session.advanced_usage.locking"><info><title>Gesperrte Session Namensräume</title></info>
+        
 
         <para>
             Session Namensräume können gesperrt werden um weitere Veränderungen der Daten in diesem
@@ -158,12 +152,11 @@ php_value session.auto_start 0
             die Verwendung der Setz-Methoden des Namensraumes welche das gespeicherte Objekt direkt
             im Namensraum löschen oder ersetzen. Gleichwohl verhindert das Sperren von
             <classname>Zend_Session_Namespace</classname> Instanzen nicht die Verwendung von
-            symbolischen Tabellen-Aliasen auf die gleichen Daten (siehe <ulink
-                url="http://www.php.net/references">PHP references</ulink>).
+            symbolischen Tabellen-Aliasen auf die gleichen Daten (siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/references">PHP references</link>).
         </para>
 
-        <example id="zend.session.advanced_usage.locking.example.basic">
-            <title>Sperren von Session Namensräumen</title>
+        <example xml:id="zend.session.advanced_usage.locking.example.basic"><info><title>Sperren von Session Namensräumen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
@@ -177,10 +170,10 @@ if ($userProfileNamespace->isLocked()) {
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.expiration">
-        <title>Verfall von Namensräumen</title>
+    <section xml:id="zend.session.advanced_usage.expiration"><info><title>Verfall von Namensräumen</title></info>
+        
 
         <para>
             Limits können plaziert werden an der Lebensdauer von beidem, Namensräumen und
@@ -192,8 +185,8 @@ if ($userProfileNamespace->isLocked()) {
             basieren, wobei ein Sprung für jede folgende Anfrage stattfindet.
         </para>
 
-        <example id="zend.session.advanced_usage.expiration.example">
-            <title>Beispiel für den Verfall</title>
+        <example xml:id="zend.session.advanced_usage.expiration.example"><info><title>Beispiel für den Verfall</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $s = new Zend_Session_Namespace('expireAll');
@@ -221,10 +214,10 @@ $s->setExpirationSeconds(60);
             Daten in eine temporäre Variable geholt werden, diese im Namensraum entfernt und
             anschliessend der entsprechende Schlüssel wieder gesetzt werden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.controllers">
-        <title>Kapseln von Sessions und Controller</title>
+    <section xml:id="zend.session.advanced_usage.controllers"><info><title>Kapseln von Sessions und Controller</title></info>
+        
 
         <para>
             Namensräume können auch verwendet werden um den Zugriff auf Sessions durch Controller
@@ -233,8 +226,8 @@ $s->setExpirationSeconds(60);
             halten um notwendigen Sicherheiten zu entsprechen.
         </para>
 
-        <example id="zend.session.advanced_usage.controllers.example">
-            <title>Session Namensräume für Controller mit automatischem Verfall</title>
+        <example xml:id="zend.session.advanced_usage.controllers.example"><info><title>Session Namensräume für Controller mit automatischem Verfall</title></info>
+            
 
             <para>
                 Der folgende Code ist Teil eines Controllers der die Test Frage anzeigt und eine
@@ -272,10 +265,10 @@ $testSpace->accept_answer = true;
 // ...
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.single_instance">
-        <title>Mehrfache Instanzen pro Namensraum verhindern</title>
+    <section xml:id="zend.session.advanced_usage.single_instance"><info><title>Mehrfache Instanzen pro Namensraum verhindern</title></info>
+        
 
         <para>
             Obwohl <link linkend="zend.session.advanced_usage.locking">session locking</link> einen
@@ -292,8 +285,8 @@ $testSpace->accept_answer = true;
             selben Namensraum zu instanzieren wird in einer geworfenen Ausnahme resultieren.
         </para>
 
-        <example id="zend.session.advanced_usage.single_instance.example">
-            <title>Zugriff auf Session Namensräume auf eine einzelne Instanz limitieren</title>
+        <example xml:id="zend.session.advanced_usage.single_instance.example"><info><title>Zugriff auf Session Namensräume auf eine einzelne Instanz limitieren</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // Eine Instanz eines Namensraumes erstellen
@@ -329,28 +322,26 @@ try {
             <varname>$authSpaceAccessor2</varname>, oder <varname>$authSpaceAccessor3</varname> im
             obigen Beispiel), wenn der Zugriff auf den Namensraum der Session zu einer späteren Zeit
             wärend des selben Requests benötigt wird. Zum Beispiel, könnte ein Entwickler die
-            Referenz in einer statischen Variable speichern, die Referenz zu einer <ulink
-                url="http://www.martinfowler.com/eaaCatalog/registry.html">Registry</ulink>
+            Referenz in einer statischen Variable speichern, die Referenz zu einer <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/registry.html">Registry</link>
             hinzufügen (siehe <link linkend="zend.registry">Zend_Registry</link>), oder diese
             andernfalls für andere Methoden verfügbar zu machen die Zugriff auf den Namensraum der
             Session benötigen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.arrays">
-        <title>Arbeiten mit Arrays</title>
+    <section xml:id="zend.session.advanced_usage.arrays"><info><title>Arbeiten mit Arrays</title></info>
+        
 
         <para>
             Durch die Vergangenheit der Implmentationen der Magischen Methoden in
             <acronym>PHP</acronym>, wird das Ändern von Arrays innerhalb eines Namensraumes nicht
             unter <acronym>PHP</acronym> Versionen vor 5.2.1 funktionieren. Wenn nur mit
-            <acronym>PHP</acronym> 5.2.1 oder neuer gearbeitet wird, kann <link
-                linkend="zend.session.advanced_usage.objects">zum nächsten Kapitel gesprungen</link>
+            <acronym>PHP</acronym> 5.2.1 oder neuer gearbeitet wird, kann <link linkend="zend.session.advanced_usage.objects">zum nächsten Kapitel gesprungen</link>
             werden.
         </para>
 
-        <example id="zend.session.advanced_usage.arrays.example.modifying">
-            <title>Array Daten innerhalb eines Session Namensraumes verändern</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.modifying"><info><title>Array Daten innerhalb eines Session Namensraumes verändern</title></info>
+            
 
             <para>
                 Das folgende illustriert wie das Problem reproduziert werden kann:
@@ -365,8 +356,8 @@ echo $sessionNamespace->array['testKey'];
 ]]></programlisting>
         </example>
 
-        <example id="zend.session.advanced_usage.arrays.example.building_prior">
-            <title>Arrays erstellen bevor es Session Speicher gab</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.building_prior"><info><title>Arrays erstellen bevor es Session Speicher gab</title></info>
+            
 
             <para>
                 Wenn möglich, sollte das Problem vermieden werden indem Array nur dann im Session
@@ -385,8 +376,8 @@ $sessionNamespace->array = array('a', 'b', 'c');
             verbunden wurde, kann einer oder beide der folgenden Workarounds verwendet werden.
         </para>
 
-        <example id="zend.session.advanced_usage.arrays.example.workaround.reassign">
-            <title>Workaround: Ein geändertes Array neu Verbinden</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reassign"><info><title>Workaround: Ein geändertes Array neu Verbinden</title></info>
+            
 
             <para>
                 Im folgenden Code wird eine Kopie des gespeicherten Array erstellt, geändert und
@@ -413,8 +404,8 @@ echo $sessionNamespace->array['fruit']; // gibt "peach" aus
 ]]></programlisting>
         </example>
 
-        <example id="zend.session.advanced_usage.arrays.example.workaround.reference">
-            <title>Workaround: Array das Referenz enthält speichern</title>
+        <example xml:id="zend.session.advanced_usage.arrays.example.workaround.reference"><info><title>Workaround: Array das Referenz enthält speichern</title></info>
+            
 
             <para>
                 Alternativ, kann ein Array gespeichert werden das eine Referenz zum gewünschten
@@ -429,15 +420,14 @@ $a['foo'] = 'bar';
 echo $myNamespace->someArray['foo']; // gibt "bar" aus
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.objects">
-        <title>Sessions mit Objekten verwenden</title>
+    <section xml:id="zend.session.advanced_usage.objects"><info><title>Sessions mit Objekten verwenden</title></info>
+        
 
         <para>
              Wenn Objekte in einer <acronym>PHP</acronym> Session fixiert werden sollen, muß bedacht
-             werden das diese für das Speichern <ulink
-                 url="http://www.php.net/manual/de/language.oop.serialization.php">serialisiert</ulink>
+             werden das diese für das Speichern <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/de/language.oop.serialization.php">serialisiert</link>
              werden. Deshalb muß jedes Objekt das in einer <acronym>PHP</acronym> Session verewigt
              wurde deserialisiert werden nachdem es vom Speicher empfangen wurde. Das impliziert das
              der Entwickler sicherstellen muß das die Klassen für das verewigte Objekt definiert
@@ -445,10 +435,10 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
              Klasse eines unserialisierten Objektes nicht definiert wurde, wird es eine Instand von
              <code>stdClass</code>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.advanced_usage.testing">
-        <title>Verwenden von Sessions mit Unit Tests</title>
+    <section xml:id="zend.session.advanced_usage.testing"><info><title>Verwenden von Sessions mit Unit Tests</title></info>
+        
 
         <para>
             Zend Framework vertraut auf PHPUnit um das Testen von sich selbst zu ermöglichen. Viele
@@ -480,8 +470,8 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
             beendet hat, bevor <methodname>exec()</methodname> verwendet wird.
         </para>
 
-        <example id="zend.session.advanced_usage.testing.example">
-            <title>PHPUnit Test Code der auf Zend_Session beruht</title>
+        <example xml:id="zend.session.advanced_usage.testing.example"><info><title>PHPUnit Test Code der auf Zend_Session beruht</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 // testen von setExpirationSeconds()
@@ -532,5 +522,5 @@ $this->assertTrue($result === ';p === plum',
     "fehlgeschlaten (result=$result)");
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

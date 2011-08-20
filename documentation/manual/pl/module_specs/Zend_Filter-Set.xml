@@ -1,76 +1,79 @@
-<sect1 id="zend.filter.set">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Standardowe klasy filtrów</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set"><info><title>Standardowe klasy filtrów</title></info>
+
+    
 
     <para>
         Zend Framework posiada standardowy zestaw gotowych do użycia filtrów..
     </para>
 
-    <sect2 id="zend.filter.set.alnum">
-        <title>Alnum</title>
+    <section xml:id="zend.filter.set.alnum"><info><title>Alnum</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
             oprócz znaków alfabetu oraz cyfr. Filtr posiada także opcję,
             służącą do zezwolenia na wystąpienie białych znaków.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.alpha">
-        <title>Alpha</title>
+    <section xml:id="zend.filter.set.alpha"><info><title>Alpha</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
             oprócz znaków alfabetu. Filtr posiada także opcję, służącą do
             zezwolenia na wystąpienie białych znaków.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.basename">
-        <title>BaseName</title>
+    <section xml:id="zend.filter.set.basename"><info><title>BaseName</title></info>
+        
         <para>
             Gdy podamy łańcuch znaków zawierający ścieżkę do pliku, to filtr
             zwróci bazową nazwę pliku.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.digits">
-        <title>Digits</title>
+    <section xml:id="zend.filter.set.digits"><info><title>Digits</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
             oprócz cyfr.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.dir">
-        <title>Dir</title>
+    <section xml:id="zend.filter.set.dir"><info><title>Dir</title></info>
+        
         <para>
             Zwraca nazwę katalogu gdy podamy ścieżkę do pliku lub katalogu.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.htmlentities">
-        <title>HtmlEntities</title>
+    <section xml:id="zend.filter.set.htmlentities"><info><title>HtmlEntities</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code>, zamieniając znaki na ich odpowiadające
             encje HTML, jeśli istnieją.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.int">
-        <title>Int</title>
+    <section xml:id="zend.filter.set.int"><info><title>Int</title></info>
+        
         <para>
             Zwraca wartość całkowitą (int) <code>$value</code>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.stripnewlines">
-        <title>StripNewlines</title>
+    <section xml:id="zend.filter.set.stripnewlines"><info><title>StripNewlines</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code> bez znaków nowej linii.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.realpath">
-        <title>RealPath</title>
+    <section xml:id="zend.filter.set.realpath"><info><title>RealPath</title></info>
+        
         <para>
             Rozwiązauje wszystkie dowiązania symboliczne oraz odniesienia do
             elementów '/./', '/../' oraz '/' w podanej ścieżce i zwraca
@@ -84,32 +87,32 @@
             jeśli tylko ostatnia część ścieżki nie istnieje, a w pozostałych systemach
             zwróci wartość <code>FALSE</code>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.stringtolower">
-        <title>StringToLower</title>
+    <section xml:id="zend.filter.set.stringtolower"><info><title>StringToLower</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code>, zamieniając wszystkie litery na małe.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.stringtoupper">
-        <title>StringToUpper</title>
+    <section xml:id="zend.filter.set.stringtoupper"><info><title>StringToUpper</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code>, zamieniając wszystkie litery na wielkie.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.stringtrim">
-        <title>StringTrim</title>
+    <section xml:id="zend.filter.set.stringtrim"><info><title>StringTrim</title></info>
+        
         <para>
             Zwraca łańcuch znaków <code>$value</code> usuwając znaki na początku
             oraz na końcu łańcucha.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.filter.set.striptags">
-        <title>StripTags</title>
+    <section xml:id="zend.filter.set.striptags"><info><title>StripTags</title></info>
+        
         <para>
             Filtr zwraca łańcuch znaków z usuniętymi wszystkimi znacznikami
             HTML oraz PHP, z wyjątkiem tych, których wystąpienie zostało
@@ -120,9 +123,6 @@
             kontrolowanie, czy komentarze (np., <code>&lt;!-- ... --&gt;</code>)
             mają być usuwane, czy są dozwolone.
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

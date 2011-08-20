@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.paginator.configuration">
-    <title>Konfiguration</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.paginator.configuration"><info><title>Konfiguration</title></info>
+    
 
     <para>
         <classname>Zend_Paginator</classname> hat verschiedene Konfigurationsmethoden die aufgerufen
         werden können:
     </para>
 
-    <table id="zend.paginator.configuration.table">
-        <title>Konfigurationsmethoden für Zend_Paginator</title>
+    <table xml:id="zend.paginator.configuration.table"><info><title>Konfigurationsmethoden für Zend_Paginator</title></info>
+        
 
         <tgroup cols="2">
             <thead>
@@ -53,4 +53,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
+</section>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.db.table">
-    <title>Zend_Db_Table</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.table"><info><title>Zend_Db_Table</title></info>
+    
 
-    <sect2 id="zend.db.table.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.db.table.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <classname>Zend_Db_Table</classname> class is an object-oriented interface to
@@ -14,15 +13,15 @@
 
         <para>
             The <classname>Zend_Db_Table</classname> solution is an implementation of the
-            <ulink url="http://www.martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
-            Gateway</ulink> pattern. The solution also includes a class that implements the
-            <ulink url="http://www.martinfowler.com/eaaCatalog/rowDataGateway.html">Row Data
-            Gateway</ulink> pattern.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
+            Gateway</link> pattern. The solution also includes a class that implements the
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/rowDataGateway.html">Row Data
+            Gateway</link> pattern.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.concrete">
-        <title>Using Zend_Db_Table as a concrete class</title>
+    <section xml:id="zend.db.table.concrete"><info><title>Using Zend_Db_Table as a concrete class</title></info>
+        
 
         <para>
             As of Zend Framework 1.9, you can instantiate <classname>Zend_Db_Table</classname>. This
@@ -31,8 +30,8 @@
             table. below is an example of the simplest of use cases.
         </para>
 
-        <example id="zend.db.table.defining.concrete-instantiation.example1">
-            <title>Declaring a table class with just the string name</title>
+        <example xml:id="zend.db.table.defining.concrete-instantiation.example1"><info><title>Declaring a table class with just the string name</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Db_Table::setDefaultAdapter($dbAdapter);
@@ -47,18 +46,18 @@ $bugTable = new Zend_Db_Table('bug');
             relationhip features, see the <classname>Zend_Db_Table_Definition</classname>
             documentation.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.defining">
-        <title>Defining a Table Class</title>
+    <section xml:id="zend.db.table.defining"><info><title>Defining a Table Class</title></info>
+        
 
         <para>
             For each table in your database that you want to access, define a class that extends
             <classname>Zend_Db_Table_Abstract</classname>.
         </para>
 
-        <sect3 id="zend.db.table.defining.table-schema">
-            <title>Defining the Table Name and Schema</title>
+        <section xml:id="zend.db.table.defining.table-schema"><info><title>Defining the Table Name and Schema</title></info>
+            
 
             <para>
                 Declare the database table for which this class is defined, using the protected
@@ -66,8 +65,8 @@ $bugTable = new Zend_Db_Table('bug');
                 the table spelled as it appears in the database.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example1">
-                <title>Declaring a table class with explicit table name</title>
+            <example xml:id="zend.db.table.defining.table-schema.example1"><info><title>Declaring a table class with explicit table name</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -83,8 +82,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 it appears in the database.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example">
-                <title>Declaring a table class with implicit table name</title>
+            <example xml:id="zend.db.table.defining.table-schema.example"><info><title>Declaring a table class with implicit table name</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class bugs extends Zend_Db_Table_Abstract
@@ -103,8 +102,8 @@ class bugs extends Zend_Db_Table_Abstract
                 term for schema is "database" or "tablespace," but it is used similarly.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example3">
-                <title>Declaring a table class with schema</title>
+            <example xml:id="zend.db.table.defining.table-schema.example3"><info><title>Declaring a table class with schema</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // First alternative:
@@ -139,8 +138,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 provided with the <property>schema</property> option.
             </para>
 
-            <example id="zend.db.table.defining.table-schema.example.constructor">
-                <title>Declaring table and schema names upon instantiation</title>
+            <example xml:id="zend.db.table.defining.table-schema.example.constructor"><info><title>Declaring table and schema names upon instantiation</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -167,10 +166,10 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                 If you don't specify the schema name, it defaults to the schema to which your
                 database adapter instance is connected.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.defining.primary-key">
-            <title>Defining the Table Primary Key</title>
+        <section xml:id="zend.db.table.defining.primary-key"><info><title>Defining the Table Primary Key</title></info>
+            
 
             <para>
                 Every table must have a primary key. You can declare the column for the primary key
@@ -179,8 +178,8 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
                 names if your primary key is a compound key.
             </para>
 
-            <example id="zend.db.table.defining.primary-key.example">
-                <title>Example of specifying the primary key</title>
+            <example xml:id="zend.db.table.defining.primary-key.example"><info><title>Example of specifying the primary key</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -206,10 +205,10 @@ class Bugs extends Zend_Db_Table_Abstract
                     cannot be used with <classname>Zend_Db_Table</classname>.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.defining.setup">
-            <title>Overriding Table Setup Methods</title>
+        <section xml:id="zend.db.table.defining.setup"><info><title>Overriding Table Setup Methods</title></info>
+            
 
             <para>
                 When you create an instance of a Table class, the constructor calls a set of
@@ -218,8 +217,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 same name in the parent class at the end of your method.
             </para>
 
-            <example id="zend.db.table.defining.setup.example">
-                <title>Example of overriding the _setupTableName() method</title>
+            <example xml:id="zend.db.table.defining.setup.example"><info><title>Example of overriding the _setupTableName() method</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -275,10 +274,10 @@ class Bugs extends Zend_Db_Table_Abstract
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.initialization">
-            <title>Table initialization</title>
+        <section xml:id="zend.db.table.initialization"><info><title>Table initialization</title></info>
+            
 
             <para>
                 If application-specific logic needs to be initialized when a Table class is
@@ -288,8 +287,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 method if you do not need to alter the metadata in any programmatic way.
             </para>
 
-            <example id="zend.db.table.defining.init.usage.example">
-                <title>Example usage of init() method</title>
+            <example xml:id="zend.db.table.defining.init.usage.example"><info><title>Example usage of init() method</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -303,11 +302,11 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.constructing">
-        <title>Creating an Instance of a Table</title>
+    <section xml:id="zend.db.table.constructing"><info><title>Creating an Instance of a Table</title></info>
+        
 
         <para>
             Before you use a Table class, create an instance using its constructor. The
@@ -317,8 +316,8 @@ class Bugs extends Zend_Db_Table_Abstract
             Table class, and these three ways are described below:
         </para>
 
-        <sect3 id="zend.db.table.constructing.adapter">
-            <title>Specifying a Database Adapter</title>
+        <section xml:id="zend.db.table.constructing.adapter"><info><title>Specifying a Database Adapter</title></info>
+            
 
             <para>
                 The first way to provide a database adapter to a Table class is by passing it as an
@@ -326,8 +325,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 identified by the key '<property>db</property>'.
             </para>
 
-            <example id="zend.db.table.constructing.adapter.example">
-                <title>Example of constructing a Table using an Adapter object</title>
+            <example xml:id="zend.db.table.constructing.adapter.example"><info><title>Example of constructing a Table using an Adapter object</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
@@ -335,10 +334,10 @@ $db = Zend_Db::factory('PDO_MYSQL', $options);
 $table = new Bugs(array('db' => $db));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.constructing.default-adapter">
-            <title>Setting a Default Database Adapter</title>
+        <section xml:id="zend.db.table.constructing.default-adapter"><info><title>Setting a Default Database Adapter</title></info>
+            
 
             <para>
                 The second way to provide a database adapter to a Table class is by declaring an
@@ -349,8 +348,8 @@ $table = new Bugs(array('db' => $db));
                 is an object of type <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
-            <example id="zend.db.table.constructing.default-adapter.example">
-                <title>Example of constructing a Table using a the Default Adapter</title>
+            <example xml:id="zend.db.table.constructing.default-adapter.example"><info><title>Example of constructing a Table using a the Default Adapter</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
@@ -369,10 +368,10 @@ $table = new Bugs();
                 your application. However, setting a default adapter is limited to a single adapter
                 instance.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.constructing.registry">
-            <title>Storing a Database Adapter in the Registry</title>
+        <section xml:id="zend.db.table.constructing.registry"><info><title>Storing a Database Adapter in the Registry</title></info>
+            
 
             <para>
                 The third way to provide a database adapter to a Table class is by passing a string
@@ -382,8 +381,8 @@ $table = new Bugs();
                 <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
-            <example id="zend.db.table.constructing.registry.example">
-                <title>Example of constructing a Table using a Registry key</title>
+            <example xml:id="zend.db.table.constructing.registry.example"><info><title>Example of constructing a Table using a Registry key</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
@@ -403,11 +402,11 @@ $table = new Bugs(array('db' => 'my_db'));
                 instance. If your application needs access to multiple databases or even multiple
                 database brands, then you need to use multiple adapters.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.insert">
-        <title>Inserting Rows to a Table</title>
+    <section xml:id="zend.db.table.insert"><info><title>Inserting Rows to a Table</title></info>
+        
 
         <para>
             You can use the Table object to insert rows into the database table on which the Table
@@ -415,8 +414,8 @@ $table = new Bugs(array('db' => 'my_db'));
             The argument is an associative array, mapping column names to values.
         </para>
 
-        <example id="zend.db.table.insert.example">
-            <title>Example of inserting to a Table</title>
+        <example xml:id="zend.db.table.insert.example"><info><title>Example of inserting to a Table</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -438,8 +437,8 @@ $table->insert($data);
             <classname>Zend_Db_Expr</classname> to do this.
         </para>
 
-        <example id="zend.db.table.insert.example-expr">
-            <title>Example of inserting expressions to a Table</title>
+        <example xml:id="zend.db.table.insert.example-expr"><info><title>Example of inserting expressions to a Table</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -459,8 +458,8 @@ $data = array(
             as well. The following sections describe how to support different types of primary keys.
         </para>
 
-        <sect3 id="zend.db.table.insert.key-auto">
-            <title>Using a Table with an Auto-incrementing Key</title>
+        <section xml:id="zend.db.table.insert.key-auto"><info><title>Using a Table with an Auto-incrementing Key</title></info>
+            
 
             <para>
                 An auto-incrementing primary key generates a unique integer value for you if you
@@ -475,8 +474,8 @@ $data = array(
                 auto-incrementing primary key.
             </para>
 
-            <example id="zend.db.table.insert.key-auto.example">
-                <title>Example of declaring a Table with auto-incrementing primary key</title>
+            <example xml:id="zend.db.table.insert.key-auto.example"><info><title>Example of declaring a Table with auto-incrementing primary key</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -504,10 +503,10 @@ class Bugs extends Zend_Db_Table_Abstract
                 auto-incrementing column with respect to declaring the <varname>$_sequence</varname>
                 member as <constant>TRUE</constant>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.insert.key-sequence">
-            <title>Using a Table with a Sequence</title>
+        <section xml:id="zend.db.table.insert.key-sequence"><info><title>Using a Table with a Sequence</title></info>
+            
 
             <para>
                 A sequence is a database object that generates a unique value, which can be used
@@ -521,8 +520,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 value is used in the <constant>INSERT</constant> operation.
             </para>
 
-            <example id="zend.db.table.insert.key-sequence.example">
-                <title>Example of declaring a Table with a sequence</title>
+            <example xml:id="zend.db.table.insert.key-sequence.example"><info><title>Example of declaring a Table with a sequence</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -546,10 +545,10 @@ class Bugs extends Zend_Db_Table_Abstract
                 as a string only in cases where you would invoke the sequence explicitly to get the
                 next key value.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.insert.key-natural">
-            <title>Using a Table with a Natural Key</title>
+        <section xml:id="zend.db.table.insert.key-natural"><info><title>Using a Table with a Natural Key</title></info>
+            
 
             <para>
                 Some tables have a natural key. This means that the key is not automatically
@@ -565,8 +564,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 method, or else this method throws a <classname>Zend_Db_Table_Exception</classname>.
             </para>
 
-            <example id="zend.db.table.insert.key-natural.example">
-                <title>Example of declaring a Table with a natural key</title>
+            <example xml:id="zend.db.table.insert.key-natural.example"><info><title>Example of declaring a Table with a natural key</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class BugStatus extends Zend_Db_Table_Abstract
@@ -586,11 +585,11 @@ class BugStatus extends Zend_Db_Table_Abstract
                     primary keys.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.update">
-        <title>Updating Rows in a Table</title>
+    <section xml:id="zend.db.table.update"><info><title>Updating Rows in a Table</title></info>
+        
 
         <para>
             You can update rows in a database table using the <methodname>update()</methodname>
@@ -600,8 +599,8 @@ class BugStatus extends Zend_Db_Table_Abstract
             as criteria for the rows to change in the <constant>UPDATE</constant> operation.
         </para>
 
-        <example id="zend.db.table.update.example">
-            <title>Example of updating rows in a Table</title>
+        <example xml:id="zend.db.table.update.example"><info><title>Example of updating rows in a Table</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -633,10 +632,10 @@ $table->update($data, $where);
                 methods of the database adapter.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.delete">
-        <title>Deleting Rows from a Table</title>
+    <section xml:id="zend.db.table.delete"><info><title>Deleting Rows from a Table</title></info>
+        
 
         <para>
             You can delete rows from a database table using the <methodname>delete()</methodname>
@@ -644,8 +643,8 @@ $table->update($data, $where);
             that is used in a <constant>WHERE</constant> clause, as criteria for the rows to delete.
         </para>
 
-        <example id="zend.db.table.delete.example">
-            <title>Example of deleting rows from a Table</title>
+        <example xml:id="zend.db.table.delete.example"><info><title>Example of deleting rows from a Table</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -672,10 +671,10 @@ $table->delete($where);
                 methods of the database adapter.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.find">
-        <title>Finding Rows by Primary Key</title>
+    <section xml:id="zend.db.table.find"><info><title>Finding Rows by Primary Key</title></info>
+        
 
         <para>
             You can query the database table for rows matching specific values in the primary key,
@@ -684,8 +683,8 @@ $table->delete($where);
             table.
         </para>
 
-        <example id="zend.db.table.find.example">
-            <title>Example of finding rows by primary key values</title>
+        <example xml:id="zend.db.table.find.example"><info><title>Example of finding rows by primary key values</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -730,8 +729,8 @@ $rows = $table->find(array(1234, 5678));
             elements of all the arrays define the second compound primary key value, and so on.
         </para>
 
-        <example id="zend.db.table.find.example-compound">
-            <title>Example of finding rows by compound primary key values</title>
+        <example xml:id="zend.db.table.find.example-compound"><info><title>Example of finding rows by compound primary key values</title></info>
+            
 
             <para>
                 The call to <methodname>find()</methodname> below to match multiple rows can match
@@ -757,13 +756,13 @@ $rows = $table->find(1234, 'ABC');
 $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.fetch-all">
-        <title>Querying for a Set of Rows</title>
+    <section xml:id="zend.db.table.fetch-all"><info><title>Querying for a Set of Rows</title></info>
+        
 
-        <sect3 id="zend.db.table.fetch-all.select">
-            <title>Select API</title>
+        <section xml:id="zend.db.table.fetch-all.select"><info><title>Select API</title></info>
+            
 
             <warning>
                 <para>
@@ -873,8 +872,8 @@ $row = $table->fetchRow(
                 </listitem>
             </itemizedlist>
 
-            <example id="zend.db.table.qry.rows.set.simple.usage.example">
-                <title>Simple usage</title>
+            <example xml:id="zend.db.table.qry.rows.set.simple.usage.example"><info><title>Simple usage</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -891,8 +890,8 @@ $rows = $table->fetchAll($select);
                 this in a more abbreviated form.
             </para>
 
-            <example id="zend.db.table.qry.rows.set.fluent.interface.example">
-                <title>Example of fluent interface</title>
+            <example xml:id="zend.db.table.qry.rows.set.fluent.interface.example"><info><title>Example of fluent interface</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -901,10 +900,10 @@ $rows =
     $table->fetchAll($table->select()->where('bug_status = ?', 'NEW'));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.fetch-all.usage">
-            <title>Fetching a rowset</title>
+        <section xml:id="zend.db.table.fetch-all.usage"><info><title>Fetching a rowset</title></info>
+            
 
             <para>
                 You can query for a set of rows using any criteria other than the primary key
@@ -913,8 +912,8 @@ $rows =
                 <classname>Zend_Db_Table_Rowset_Abstract</classname>.
             </para>
 
-            <example id="zend.db.table.qry.rows.set.finding.row.example">
-                <title>Example of finding rows by an expression</title>
+            <example xml:id="zend.db.table.qry.rows.set.finding.row.example"><info><title>Example of finding rows by an expression</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -933,8 +932,8 @@ $rows = $table->fetchAll($select);
                 <constant>LIMIT</constant> syntax.
             </para>
 
-            <example id="zend.db.table.fetch-all.example2">
-                <title>Example of finding rows by an expression</title>
+            <example xml:id="zend.db.table.fetch-all.example2"><info><title>Example of finding rows by an expression</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -959,10 +958,10 @@ $rows = $table->fetchAll($select);
                 no <constant>LIMIT</constant> clause is set, you retrieve every row in the table
                 that matches the <constant>WHERE</constant> clause.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.advanced.usage">
-            <title>Advanced usage</title>
+        <section xml:id="zend.db.table.advanced.usage"><info><title>Advanced usage</title></info>
+            
 
             <para>
                 For more specific and optimized requests, you may wish to limit the number of
@@ -974,8 +973,8 @@ $rows = $table->fetchAll($select);
                 automatically determine the table name.
             </para>
 
-            <example id="zend.db.table.qry.rows.set.retrieving.a.example">
-                <title>Retrieving specific columns</title>
+            <example xml:id="zend.db.table.qry.rows.set.retrieving.a.example"><info><title>Retrieving specific columns</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1006,8 +1005,8 @@ $rows = $table->fetchAll($select);
                 the schema.
             </para>
 
-            <example id="zend.db.table.qry.rows.set.retrieving.b.example">
-                <title>Retrieving expressions as columns</title>
+            <example xml:id="zend.db.table.qry.rows.set.retrieving.b.example"><info><title>Retrieving expressions as columns</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1028,8 +1027,8 @@ $rows = $table->fetchAll($select);
                 all new bugs reported by 'Bob'.
             </para>
 
-            <example id="zend.db.table.qry.rows.set.refine.example">
-                <title>Using a lookup table to refine the results of fetchAll()</title>
+            <example xml:id="zend.db.table.qry.rows.set.refine.example"><info><title>Using a lookup table to refine the results of fetchAll()</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1058,10 +1057,10 @@ $rows = $table->fetchAll($select);
                 exception).
             </para>
 
-            <example id="zend.db.table.qry.rows.set.integrity.example">
-                <title>
+            <example xml:id="zend.db.table.qry.rows.set.integrity.example"><info><title>
                     Removing the integrity check on Zend_Db_Table_Select to allow JOINed rows
-                </title>
+                </title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1077,19 +1076,19 @@ $select->where('bug_status = ?', 'NEW')
 $rows = $table->fetchAll($select);
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.fetch-row">
-        <title>Querying for a Single Row</title>
+    <section xml:id="zend.db.table.fetch-row"><info><title>Querying for a Single Row</title></info>
+        
 
         <para>
             You can query for a single row using criteria similar to that of the
             <methodname>fetchAll()</methodname> method.
         </para>
 
-        <example id="zend.db.table.fetch-row.example1">
-            <title>Example of finding a single row by an expression</title>
+        <example xml:id="zend.db.table.fetch-row.example1"><info><title>Example of finding a single row by an expression</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1107,10 +1106,10 @@ $row = $table->fetchRow($select);
             <methodname>fetchRow()</methodname> returns <acronym>PHP</acronym>'s
             <constant>NULL</constant> value.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.info">
-        <title>Retrieving Table Metadata Information</title>
+    <section xml:id="zend.db.table.info"><info><title>Retrieving Table Metadata Information</title></info>
+        
 
         <para>
             The <classname>Zend_Db_Table_Abstract</classname> class provides some information about
@@ -1118,8 +1117,8 @@ $row = $table->fetchRow($select);
             information about the table, its columns and primary key, and other metadata.
         </para>
 
-        <example id="zend.db.table.info.example">
-            <title>Example of getting the table name</title>
+        <example xml:id="zend.db.table.info.example"><info><title>Example of getting the table name</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1138,27 +1137,27 @@ echo "The table name is " . $info['name'] . "\n";
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>name</emphasis> => the name of the table.
+                    <emphasis>name</emphasis> =&gt; the name of the table.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>cols</emphasis> => an array, naming the columns of
+                    <emphasis>cols</emphasis> =&gt; an array, naming the columns of
                     the table.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>primary</emphasis> => an array, naming the columns in
+                    <emphasis>primary</emphasis> =&gt; an array, naming the columns in
                     the primary key.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>metadata</emphasis> => an associative array, mapping
+                    <emphasis>metadata</emphasis> =&gt; an associative array, mapping
                     column names to information about the columns. This is the information returned
                     by the <methodname>describeTable()</methodname> method.
                 </para>
@@ -1166,7 +1165,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis>rowClass</emphasis> => the name of the concrete class
+                    <emphasis>rowClass</emphasis> =&gt; the name of the concrete class
                     used for Row objects returned by methods of this table instance. This defaults
                     to <classname>Zend_Db_Table_Row</classname>.
                 </para>
@@ -1174,7 +1173,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis>rowsetClass</emphasis> => the name of the concrete
+                    <emphasis>rowsetClass</emphasis> =&gt; the name of the concrete
                     class used for Rowset objects returned by methods of this table instance. This
                     defaults to <classname>Zend_Db_Table_Rowset</classname>.
                 </para>
@@ -1182,7 +1181,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis>referenceMap</emphasis> => an associative array, with
+                    <emphasis>referenceMap</emphasis> =&gt; an associative array, with
                     information about references from this table to any parent tables. See
                     <link linkend="zend.db.table.relationships.defining">this chapter</link>.
                 </para>
@@ -1190,7 +1189,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis>dependentTables</emphasis> => an array of class names
+                    <emphasis>dependentTables</emphasis> =&gt; an array of class names
                     of tables that reference this table. See
                     <link linkend="zend.db.table.relationships.defining">this chapter</link>.
                 </para>
@@ -1198,15 +1197,15 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis>schema</emphasis> => the name of the schema (or
+                    <emphasis>schema</emphasis> =&gt; the name of the schema (or
                     database or tablespace) for this table.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.metadata.caching">
-        <title>Caching Table Metadata</title>
+    <section xml:id="zend.db.table.metadata.caching"><info><title>Caching Table Metadata</title></info>
+        
 
         <para>
             By default, <classname>Zend_Db_Table_Abstract</classname> queries the
@@ -1263,8 +1262,8 @@ echo "The table name is " . $info['name'] . "\n";
             metadata cache and the ability to change the cache for individual table objects.
         </para>
 
-        <example id="zend.db.table.metadata.caching-default">
-            <title>Using a Default Metadata Cache for all Table Objects</title>
+        <example xml:id="zend.db.table.metadata.caching-default"><info><title>Using a Default Metadata Cache for all Table Objects</title></info>
+            
 
             <para>
                 The following code demonstrates how to set a default metadata cache to be used for
@@ -1300,8 +1299,8 @@ $bugs = new Bugs();
 ]]></programlisting>
         </example>
 
-        <example id="zend.db.table.metadata.caching-instance">
-            <title>Using a Metadata Cache for a Specific Table Object</title>
+        <example xml:id="zend.db.table.metadata.caching-instance"><info><title>Using a Metadata Cache for a Specific Table Object</title></info>
+            
 
             <para>
                 The following code demonstrates how to set a metadata cache for a specific table
@@ -1334,8 +1333,8 @@ $bugs = new Bugs(array('metadataCache' => $cache));
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Automatic Serialization with the Cache Frontend</title>
+        <note><info><title>Automatic Serialization with the Cache Frontend</title></info>
+            
 
             <para>
                 Since the information returned from the adapter's
@@ -1351,8 +1350,8 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <link linkend="zend.cache">Zend_Cache</link> for more information.
         </para>
 
-        <sect3 id="zend.db.table.metadata.caching.hardcoding">
-            <title>Hardcoding Table Metadata</title>
+        <section xml:id="zend.db.table.metadata.caching.hardcoding"><info><title>Hardcoding Table Metadata</title></info>
+            
 
             <para>
                 To take metadata caching a step further, you can also choose to
@@ -1411,14 +1410,14 @@ $bugs->setMetadataCacheInClass(false);
                 <varname>$_metadata</varname> array is only populated once per
                 instance.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.db.table.extending">
-        <title>Customizing and Extending a Table Class</title>
+    <section xml:id="zend.db.table.extending"><info><title>Customizing and Extending a Table Class</title></info>
+        
 
-        <sect3 id="zend.db.table.extending.row-rowset">
-            <title>Using Custom Row or Rowset Classes</title>
+        <section xml:id="zend.db.table.extending.row-rowset"><info><title>Using Custom Row or Rowset Classes</title></info>
+            
 
             <para>
                 By default, methods of the Table class return a Rowset in instances of the concrete
@@ -1435,8 +1434,8 @@ $bugs->setMetadataCacheInClass(false);
                 respectively. Specify the names of the classes using strings.
             </para>
 
-            <example id="zend.db.table.extending.row-rowset.example">
-                <title>Example of specifying the Row and Rowset classes</title>
+            <example xml:id="zend.db.table.extending.row-rowset.example"><info><title>Example of specifying the Row and Rowset classes</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class My_Row extends Zend_Db_Table_Row_Abstract
@@ -1471,8 +1470,8 @@ $rows = $table->fetchAll($where);
                 the class of any row or rowset objects you have created previously.
             </para>
 
-            <example id="zend.db.table.extending.row-rowset.example2">
-                <title>Example of changing the Row and Rowset classes</title>
+            <example xml:id="zend.db.table.extending.row-rowset.example2"><info><title>Example of changing the Row and Rowset classes</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $table = new Bugs();
@@ -1496,13 +1495,12 @@ $rowsCustom = $table->fetchAll($where);
 
             <para>
                 For more information on the Row and Rowset classes, see
-                <link linkend="zend.db.table.row">this chapter</link> and <link
-                    linkend="zend.db.table.rowset">this one</link>.
+                <link linkend="zend.db.table.row">this chapter</link> and <link linkend="zend.db.table.rowset">this one</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.extending.insert-update">
-            <title>Defining Custom Logic for Insert, Update, and Delete</title>
+        <section xml:id="zend.db.table.extending.insert-update"><info><title>Defining Custom Logic for Insert, Update, and Delete</title></info>
+            
 
             <para>
                 You can override the <methodname>insert()</methodname> and
@@ -1511,8 +1509,8 @@ $rowsCustom = $table->fetchAll($where);
                 operation. Be sure to call the parent class method when you are done.
             </para>
 
-            <example id="zend.db.table.extending.insert-update.example">
-                <title>Custom logic to manage timestamps</title>
+            <example xml:id="zend.db.table.extending.insert-update.example"><info><title>Custom logic to manage timestamps</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -1543,10 +1541,10 @@ class Bugs extends Zend_Db_Table_Abstract
             <para>
                 You can also override the <methodname>delete()</methodname> method.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.extending.finders">
-            <title>Define Custom Search Methods in Zend_Db_Table</title>
+        <section xml:id="zend.db.table.extending.finders"><info><title>Define Custom Search Methods in Zend_Db_Table</title></info>
+            
 
             <para>
                 You can implement custom query methods in your Table class, if you have frequent
@@ -1557,8 +1555,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 the Table class to perform frequently-used queries against this table.
             </para>
 
-            <example id="zend.db.table.extending.finders.example">
-                <title>Custom method to find bugs by status</title>
+            <example xml:id="zend.db.table.extending.finders.example"><info><title>Custom method to find bugs by status</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -1573,10 +1571,10 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.db.table.extending.inflection">
-            <title>Define Inflection in Zend_Db_Table</title>
+        <section xml:id="zend.db.table.extending.inflection"><info><title>Define Inflection in Zend_Db_Table</title></info>
+            
 
             <para>
                 Some people prefer that the table class name match a table name in the
@@ -1620,8 +1618,8 @@ class Bugs extends Zend_Db_Table_Abstract
                 extend your new abstract class.
             </para>
 
-            <example id="zend.db.table.extending.inflection.example">
-                <title>Example of an abstract table class that implements inflection</title>
+            <example xml:id="zend.db.table.extending.inflection.example"><info><title>Example of an abstract table class that implements inflection</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 abstract class MyAbstractTable extends Zend_Db_Table_Abstract
@@ -1645,9 +1643,6 @@ class BugsProducts extends MyAbstractTable
                 You are responsible for writing the functions to perform inflection transformation.
                 Zend Framework does not provide such a function.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

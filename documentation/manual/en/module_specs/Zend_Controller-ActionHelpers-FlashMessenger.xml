@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.flashmessenger">
-    <title>FlashMessenger</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.flashmessenger"><info><title>FlashMessenger</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             The <emphasis>FlashMessenger</emphasis> helper allows you to pass messages
@@ -18,10 +17,10 @@
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
             documentation for more details on its usage.)
         </para>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
-        <title>Basic Usage Example</title>
+    <section xml:id="zend.controller.actionhelper.flashmessenger.basicusage"><info><title>Basic Usage Example</title></info>
+        
 
         <para>
             The usage example below shows the use of the flash messenger at its
@@ -65,5 +64,5 @@ class SomeController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-    </sect4>
-</sect3>
+    </section>
+</section>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21129 -->
-<sect1 id="zend.filter.writing_filters">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.writing_filters"><info><title>フィルタの書き方</title></info>
 
-    <title>フィルタの書き方</title>
+    
 
     <para>
         <classname>Zend_Filter</classname> には、よく使うフィルタ群が付属しています。
@@ -44,7 +42,4 @@ $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
 ]]></programlisting>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

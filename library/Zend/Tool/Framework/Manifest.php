@@ -47,7 +47,7 @@ interface Manifest
      * Should either return a single metadata object or an array
      * of metadata objects
      *
-     * @return array|Zend_Tool_Framework_Manifest_Metadata
+     * @return array|Zend\Tool\Framework\Manifest\Metadata
      **
 
     public function getMetadata();

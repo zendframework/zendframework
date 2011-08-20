@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.writer">
-    <title>Zend_Feed_Writer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.writer"><info><title>Zend_Feed_Writer</title></info>
+    
 
-    <sect2 id="zend.feed.writer.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.feed.writer.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Feed_Writer</classname> is the sibling component to
@@ -42,10 +41,10 @@
             is a standalone replacement for <classname>Zend_Feed</classname>'s Builder architecture
             and is not compatible with those classes.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.architecture">
-        <title>Architecture</title>
+    <section xml:id="zend.feed.writer.architecture"><info><title>Architecture</title></info>
+        
 
         <para>
             The architecture of <classname>Zend_Feed_Writer</classname> is very simple. It has two
@@ -102,10 +101,10 @@
             automatically used by the core classes. We'll meet Extensions in more detail at the end
             of this section.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.getting.started">
-        <title>Getting Started</title>
+    <section xml:id="zend.feed.writer.getting.started"><info><title>Getting Started</title></info>
+        
 
         <para>
             Using <classname>Zend_Feed_Writer</classname> is as simple as setting data and
@@ -215,10 +214,10 @@ $out = $feed->export('atom');
             ignore all Exceptions. This built in safeguard was added to ensure users without
             in-depth knowledge of the relevant specifications have a bit less to worry about.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.setting.feed.data.points">
-        <title>Setting Feed Data Points</title>
+    <section xml:id="zend.feed.writer.setting.feed.data.points"><info><title>Setting Feed Data Points</title></info>
+        
 
         <para>
             Before you can render a feed, you must first setup the data necessary for
@@ -263,8 +262,8 @@ $out = $feed->export('atom');
             <classname>Iterator</classname> interfaces.
         </para>
 
-        <table>
-            <title>Feed Level API Methods</title>
+        <table><info><title>Feed Level API Methods</title></info>
+            
 
             <tgroup cols="2">
                 <tbody>
@@ -524,10 +523,10 @@ $out = $feed->export('atom');
 
         <!-- remaining feed stuff -->
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.feed.writer.setting.entry.data.points">
-        <title>Setting Entry Data Points</title>
+    <section xml:id="zend.feed.writer.setting.entry.data.points"><info><title>Setting Entry Data Points</title></info>
+        
 
         <para>
             Here's a summary of the Core <acronym>API</acronym> for Entries and Items. You should
@@ -544,8 +543,8 @@ $out = $feed->export('atom');
             <classname>Zend_Feed_Writer_Entry</classname>.
         </para>
 
-        <table>
-            <title>Entry Level API Methods</title>
+        <table><info><title>Entry Level API Methods</title></info>
+            
 
             <tgroup cols="2">
                 <tbody>
@@ -727,5 +726,5 @@ $out = $feed->export('atom');
                 the Entry data container.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

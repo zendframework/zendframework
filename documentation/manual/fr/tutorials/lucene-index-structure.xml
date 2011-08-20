@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 19807 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.index-structure">
-    <title>Structure d'index Lucene</title>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.index-structure"><info><title>Structure d'index Lucene</title></info>
+    
 
     <para>
         Afin d'utiliser l'intégralité des fonctionnalités de
@@ -53,14 +53,14 @@
 
     <para>
         D'un autre coté, utiliser plusieurs segments (avoir un document par segment est un
-        cas exceptionnel) augmente le temps de recherche&#160;:
+        cas exceptionnel) augmente le temps de recherche :
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
                 La récupération d'un terme depuis le dictionnaire est effectué pour chaque
-                segment&#160;;
+                segment ;
             </para>
         </listitem>
 
@@ -98,21 +98,21 @@
         fusionner.
     </para>
 
-    <para>L'auto optimisation d'index est contrôlé par trois options&#160;:</para>
+    <para>L'auto optimisation d'index est contrôlé par trois options :</para>
 
     <itemizedlist>
         <listitem>
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> (Le nombre minimal de documents requis
                 avant que les documents mis en mémoire tampon soit écrits dans un nouveau
-                segment)&#160;;
+                segment) ;
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <emphasis>MaxMergeDocs</emphasis> (Le plus grand nombre de documents
-                fusionnés par une opération d'optimisation)&#160;; et
+                fusionnés par une opération d'optimisation) ; et
             </para>
         </listitem>
 
@@ -130,4 +130,4 @@
         seul document est créé à la fin de l'exécution du script, moment auquel démarre le
         processus d'auto-optimisation).
     </para>
-</sect1>
+</section>

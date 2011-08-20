@@ -94,14 +94,14 @@ class Hostname extends AbstractValidator
     const ALLOW_LOCAL = 4;
 
     /**
-     * Allows all types of hostnames
+     * Allows URI hostnames
      */
-    const ALLOW_ALL   = 7;
+    const ALLOW_URI = 8;
 
     /**
      * Allows all types of hostnames
      */
-    const ALLOW_URI = 8;
+    const ALLOW_ALL   = 15;
 
     /**
      * Array of valid top-level-domains
@@ -526,8 +526,27 @@ class Hostname extends AbstractValidator
             }
         }
 
-        // Check input against DNS hostname schema
+        // Local hostnames are allowed to be partitial (ending '.')
+        if ($this->_options['allow'] & self::ALLOW_LOCAL) {
+            if (substr($value, -1) === '.') {
+                $value = substr($value, 0, -1);
+                if (substr($value, -1) === '.') {
+                    // Empty hostnames (ending '..') are not allowed
+                    $this->_error(self::INVALID_LOCAL_NAME);
+                    return false;
+                }
+            }
+        }
+
         $domainParts = explode('.', $value);
+
+        // Prevent partitial IP V4 adresses (ending '.')
+        if ((count($domainParts) == 4) && preg_match('/^[0-9.a-e:.]*$/i', $value) &&
+            $this->_options['ip']->setTranslator($this->getTranslator())->isValid($value)) {
+            $this->_error(self::INVALID_LOCAL_NAME);
+        }
+
+        // Check input against DNS hostname schema
         if ((count($domainParts) > 1) && (strlen($value) >= 4) && (strlen($value) <= 254)) {
             $status = false;
 
@@ -646,7 +665,7 @@ class Hostname extends AbstractValidator
         }
 
         // Check input against local network name schema; last chance to pass validation
-        $regexLocal = '/^(([a-zA-Z0-9\x2d]{1,63}\x2e)*[a-zA-Z0-9\x2d]{1,63}){1,254}$/';
+        $regexLocal = '/^(([a-zA-Z0-9\x2d]{1,63}\x2e)*[a-zA-Z0-9\x2d]{1,63}[\x2e]{0,1}){1,254}$/';
         $status = @preg_match($regexLocal, $value);
 
         // If the input passes as a local network name, and local network names are allowed, then the

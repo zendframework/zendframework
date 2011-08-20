@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21684 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.exceptions">
-    <title>MVC Ausnahmen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.exceptions"><info><title>MVC Ausnahmen</title></info>
+    
 
-    <sect2 id="zend.controller.exceptions.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.exceptions.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Die <acronym>MVC</acronym> Komponenten im Zend Framework verwenden einen Front
@@ -21,10 +19,10 @@
             <classname>Zend_Controller_Front</classname> gefangen und im Antwortobjekt registriert;
             zusätzlich zeigt das Antwortobjekt die Ausnahmemeldungen standardmäßig nicht an.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.handling">
-        <title>Behandeln von Ausnahmen</title>
+    <section xml:id="zend.controller.exceptions.handling"><info><title>Behandeln von Ausnahmen</title></info>
+        
 
         <para>
             Verschiedene Mechanismen sind bereits in die <acronym>MVC</acronym> Komponenten
@@ -135,10 +133,10 @@ if ($response->isException()) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.exceptions.internal">
-        <title>MVC Ausnahme die auftreten können</title>
+    <section xml:id="zend.controller.exceptions.internal"><info><title>MVC Ausnahme die auftreten können</title></info>
+        
 
         <para>
             Die verschiedenen <acronym>MVC</acronym> Komponenten -- Anfragen, Router, Dispatcher,
@@ -352,5 +350,5 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

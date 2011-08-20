@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.scripts">
-    <title>View Scripte</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>View Scripte</title></info>
+    
 
     <para>
         Sobald dein Controller die Variablen übergeben und die <methodname>render()</methodname>
@@ -15,7 +13,7 @@
     <para>
         Auf Variablen, die vom Controller an den View übergeben worden sind, kann als Eigenschaften
         der Instanz zurückgegriffen werden. Wenn der Controller zum Beispiel eine Variable
-        'irgendwas' übergeben hat, würdest du in deinem View Skript über $this->irgendwas darauf
+        'irgendwas' übergeben hat, würdest du in deinem View Skript über $this-&gt;irgendwas darauf
         zugreifen können. (Dies erlaubt es dir, den Überblick darüber zu behalten, welche Variablen
         an das Skript übergeben worden sind und welche Variablen intern zum Skript selber gehören.)
     </para>
@@ -51,8 +49,8 @@
 <?php endif; ?>
 ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
-        <title>Ausgaben maskieren</title>
+    <section xml:id="zend.view.scripts.escaping"><info><title>Ausgaben maskieren</title></info>
+        
 
         <para>
             Eine der wichtigsten Aufgaben, die in einem View Skript zu erledigen sind, ist es
@@ -107,10 +105,10 @@ echo $view->render(...);
             Diese Callback Funktion oder Methode sollte den zu maskierenden Wert als ersten
             Parameter übernehmen und alle anderen Parameter sollten optional sein.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
-        <title>Verwendung alternativer Templatesysteme</title>
+    <section xml:id="zend.view.scripts.templates"><info><title>Verwendung alternativer Templatesysteme</title></info>
+        
 
         <para>
             Obwohl <acronym>PHP</acronym> selber eine mächtiges Templatesystem ist, haben viele
@@ -120,8 +118,8 @@ echo $view->render(...);
             die zweite durch Implementierung von <classname>Zend_View_Interface</classname>.
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>Template Systeme die View Scripte verwenden</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Template Systeme die View Scripte verwenden</title></info>
+            
 
             <para>
                 Ein Viewskript kann verwendet werden, um ein separats Templateobjekt zu instanzieren
@@ -175,10 +173,10 @@ if ($this->books) {
 <!-- nobooks.tpl -->
 <p>Es gibt keine Bücher zum Anzeigen.</p>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Ein Templatesystem mit Hilfe von Zend_View_Interface verwenden</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Ein Templatesystem mit Hilfe von Zend_View_Interface verwenden</title></info>
+            
 
             <para>
                 Manche finden es einfacher, ein <classname>Zend_View</classname> kompatibles
@@ -459,6 +457,6 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

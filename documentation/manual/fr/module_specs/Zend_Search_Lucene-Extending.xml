@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.extending">
-    <title>Extensibilité</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Extensibilité</title></info>
+    
 
-    <sect2 id="zend.search.lucene.extending.analysis">
-        <title>Analyse de texte</title>
+    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Analyse de texte</title></info>
+        
 
         <para>
             La classe <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> est utilisé par
@@ -20,7 +18,7 @@
 
         <para>
             Vous pouvez assigner votre propre analyseur de texte ou choisir parmi un ensemble
-            d'analyseurs prédéfinis&#160;:
+            d'analyseurs prédéfinis :
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</classname> et
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
             (par défaut). Tout deux interprètent les segments comme des séquences de lettres.
@@ -29,7 +27,7 @@
         </para>
 
         <para>
-            Pour changer d'analyseur&#160;:
+            Pour changer d'analyseur :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -56,9 +54,9 @@ $index->addDocument($doc);
 
         <para>
             Voici l'exemple d'analyseur personnalisé, qui accepte des mots contenant des chiffres
-            comme terme&#160;:
-            <example id="zend.search.lucene.extending.analysis.example-1">
-                <title>Analyseur de texte personnalisé</title>
+            comme terme :
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Analyseur de texte personnalisé</title></info>
+                
                 <programlisting language="php"><![CDATA[
 /**
  * Voici un analyseur de texte qui traite les mots contenant des chiffres comme
@@ -123,10 +121,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.filters">
-        <title>Filtrage des segments</title>
+    <section xml:id="zend.search.lucene.extending.filters"><info><title>Filtrage des segments</title></info>
+        
 
         <para>
             L'analyseur <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> offre
@@ -146,7 +144,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         </para>
 
         <para>
-            Il y a trois filtres déjà défini dans le sous-paquet d'analyse&#160;:
+            Il y a trois filtres déjà défini dans le sous-paquet d'analyse :
             <itemizedlist>
                 <listitem>
                     <para>
@@ -173,7 +171,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             Les filtres <code>ShortWords</code> et <code>StopWords</code> peuvent être utilisés avec
-            des analyseurs prédéfinis ou personnalisés comme ceci&#160;:
+            des analyseurs prédéfinis ou personnalisés comme ceci :
             <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
@@ -195,7 +193,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         <para>
             Le constructeur <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname>
             prends un tableau de stop-words en entrée.
-            Mais les stop-words peuvent aussi être chargé à partir d'un fichier&#160;:
+            Mais les stop-words peuvent aussi être chargé à partir d'un fichier :
             <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
@@ -214,14 +212,14 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             optionnel.
             Il s'agit de la longueur maximum de mot, elle est définie par défaut à 2.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.scoring">
-        <title>Algorithme de score</title>
+    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Algorithme de score</title></info>
+        
 
         <para>
             Le score d'un document <literal>d</literal> pour une requête <literal>q</literal>
-            est défini comme suit&#160;:
+            est défini comme suit :
         </para>
 
         <para>
@@ -321,10 +319,10 @@ class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
 $mySimilarity = new MySimilarity();
 Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.storage">
-        <title>Conteneur de stockage</title>
+    <section xml:id="zend.search.lucene.extending.storage"><info><title>Conteneur de stockage</title></info>
+        
 
         <para>
             La classe abstraite <classname>Zend_Search_Lucene_Storage_Directory</classname> définit
@@ -355,7 +353,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
         </para>
 
         <para>
-            Les méthodes de<classname>Zend_Search_Lucene_Storage_Directory</classname>&#160;:
+            Les méthodes de<classname>Zend_Search_Lucene_Storage_Directory</classname> :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -481,5 +479,5 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
     }
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

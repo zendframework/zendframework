@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21087 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.position">
-    <title>Où est le symbole monnétaire?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.position"><info><title>Où est le symbole monnétaire?</title></info>
+    
 
     <para>
         Le signe symbolique de la monnaie est positionné par rapport à sa valeur en fonction de
@@ -10,8 +8,8 @@
         <property>display</property> qui se configure au moyen de constantes:
     </para>
 
-    <table id="zend.currency.position.table-1">
-        <title>Positions disponibles pour la monnaie</title>
+    <table xml:id="zend.currency.position.table-1"><info><title>Positions disponibles pour la monnaie</title></info>
+        
 
         <tgroup cols="2" align="left">
             <thead>
@@ -47,8 +45,8 @@
         </tgroup>
     </table>
 
-    <example id="zend.currency.position.example-1">
-        <title>Paramétrer la position du symbole monnétaire</title>
+    <example xml:id="zend.currency.position.example-1"><info><title>Paramétrer la position du symbole monnétaire</title></info>
+        
 
         <para>
             Imaginons que le client utilise la locale "en_US". Sans option, la valeur retournée
@@ -86,4 +84,4 @@ print $currency; // Retournerait '100 $';
             quelle que soit la locale ou la monnaie considérée.
         </para>
     </example>
-</sect1>
+</section>

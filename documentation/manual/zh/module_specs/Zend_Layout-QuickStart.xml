@@ -1,12 +1,13 @@
-<sect1 id="zend.layout.quickstart">
-    <title>Zend_Layout 快速入门</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout 快速入门</title></info>
+    
 
     <para>
         <code>Zend_Layout</code>有两个基本用例：带有Zend Framework MVC和不带。
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>布局脚本</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>布局脚本</title></info>
+        
 
         <para>
             在两种情况下都需要创建布局脚本。布局脚本简单地使用Zend_View（或者无论哪种你在使用的视图实现）。布局变量用<code>Zend_Layout</code> <link linkend="zend.view.helpers.initial.placeholder">placeholder</link> 注册，可以通过占位符助手或者通过布局助手从布局对象的对象属性里获取。
@@ -68,10 +69,10 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title> 和Zend Framework MVC一起使用 Zend_Layout </title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title> 和Zend Framework MVC一起使用 Zend_Layout </title></info>
+        
 
         <para>
             <code>Zend_Controller</code>通过<link linkend="zend.controller.plugins">前端控制器插件</link> 和 <link linkend="zend.controller.actionhelpers">动作控制器助手</link>  提供了一组丰富的扩展函数。<code>Zend_View</code> 也有<link linkend="zend.view.helpers">助手</link>。当和（Zend Framework）MVC组件一起使用时，<code>Zend_Layout</code> 利用这些多种扩展点。
@@ -91,7 +92,7 @@ Zend_Layout::startMvc();
 ?>]]></programlisting>
 
         <para>
-            <code>startMvc()</code> 可以带一个可选的数组或<code>Zend_Config</code> 对象来定制实例；这些选项详见<xref linkend="zend.layout.options" /> 。
+            <code>startMvc()</code> 可以带一个可选的数组或<code>Zend_Config</code> 对象来定制实例；这些选项详见<xref linkend="zend.layout.options"/> 。
         </para>
 
         <para>
@@ -153,10 +154,10 @@ $layout = Zend_Layout::getMvcInstance();
         <para>
             当和动作堆栈 <link linkend="zend.controller.actionhelpers.actionstack">动作助手</link> 和 <link linkend="zend.controller.plugins.standard.actionstack">插件</link>一起协同使用时，这个特性特别有用，通过循环可以设置一个动作堆栈，这样就创建一个部件化的页面。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>使用Zend_Layout做为独立的组件</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>使用Zend_Layout做为独立的组件</title></info>
+        
 
         <para>
             做为独立组件，Zend_Layout不提供和MVC一起使用那样的方便和更多的功能。然而，它仍有两个主要优点：
@@ -192,25 +193,21 @@ $layout->setLayout('foo');
 // render final layout
 echo $layout->render();
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>尝试一下布局</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>尝试一下布局</title></info>
+        
 
         <para>
             有时候百闻不如一见。下面是一个布局脚本例子来展示它是如何工作的。
         </para>
 
          <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.layout.quickstart.example.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
             基于所设置的CSS文件，实际元素的顺序可能不同；例如：如果使用绝对位置，导航稍后显示在文档种，但仍在顶部；对于sidebar或header同样适用，然而实际的显示内容的机制保持相同。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

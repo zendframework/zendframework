@@ -1,38 +1,39 @@
-<sect1 id="zend.loader.load">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><info><title>Caricamento dinamico di file e classi</title></info>
 
-    <title>Caricamento dinamico di file e classi</title>
+    
 
     <para>
         La classe Zend_Loader include metodi per aiutare il caricamento dinamico di file.
     </para>
 
-    <tip>
-        <title>Zend_Loader contro require_once()</title>
+    <tip><info><title>Zend_Loader contro require_once()</title></info>
+        
         <para>
             I metodi di <code>Zend_Loader</code> sono la scelta migliore se il nome del file da caricare è variabile.
             Per esempio, se è basato su un parametro immesso da un utente o l'argomento di un metodo.
             Se si sta caricando un file o una classe dove il nome è costante, non c'è alcun beneficio nell'utilizzo di <code>Zend_Loader</code> rispetto all'uso delle funzioni PHP tradizionali come
-            <ulink url="http://php.net/require_once"><code>require_once()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/require_once"><code>require_once()</code></link>.
         </para>
     </tip>
 
-    <sect2 id="zend.loader.load.file">
+    <section xml:id="zend.loader.load.file"><info><title>Caricamento di file</title></info>
 
-        <title>Caricamento di file</title>
+        
 
         <para>
             Il metodo statico <code>Zend_Loader::loadFile()</code> carica un file PHP.
             Il file caricato può contenere qualsiasi codice PHP.
             Questo metodo è un wrapper per la funzione PHP
-            <ulink url="http://php.net/include"><code>include()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><code>include()</code></link>.
             Genera un'eccezione <code>Zend_Exception</code> in caso di errore ad esempio se il file specificato non esiste.
         </para>
 
-        <example id="zend.loader.load.file.example">
-            <title>Esempio del metodo loadFile()</title>
+        <example xml:id="zend.loader.load.file.example"><info><title>Esempio del metodo loadFile()</title></info>
+            
             <programlisting role="php"><![CDATA[<?php
-Zend_Loader::loadFile($filename, $dirs=null, $once=false);]]>
-            </programlisting>
+Zend_Loader::loadFile($filename, $dirs=null, $once=false);
+            ]]></programlisting>
     </example>
 
         <para>
@@ -51,31 +52,31 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);]]>
         <para>
             Il parametro <code>$once</code> è un booleano.
             Se <code>TRUE</code>, <code>Zend_Loader::loadFile()</code> utilizza la funzione PHP
-            <ulink url="http://php.net/include"><code>include_once()</code></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><code>include_once()</code></link>
             per caricare il file, altrimenti è utilizzata la funzione PHP
-            <ulink url="http://php.net/include_once"><code>include()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include_once"><code>include()</code></link>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.class">
+    <section xml:id="zend.loader.load.class"><info><title>Caricamento di classi</title></info>
 
-        <title>Caricamento di classi</title>
+        
 
         <para>
             Il metodo statico <code>Zend_Loader::loadClass($class, $dirs)</code> carica un file PHP ed esegue un controllo sull'esistenza della classe.
         </para>
 
-        <example id="zend.loader.load.class.example">
-            <title>Esempio del metodo loadClass()</title>
+        <example xml:id="zend.loader.load.class.example"><info><title>Esempio del metodo loadClass()</title></info>
+            
             <programlisting role="php"><![CDATA[<?php
 Zend_Loader::loadClass('Container_Tree',
     array(
         '/home/production/mylib',
         '/home/production/myapp'
     )
-);]]>
-            </programlisting>
+);
+            ]]></programlisting>
         </example>
 
         <para>
@@ -97,39 +98,39 @@ Zend_Loader::loadClass('Container_Tree',
             Il metodo <code>Zend_Loader::loadFile()</code> è utilizzato per il caricamento del file, dunque il nome della classe può contenere solo caratteri alfanumerici, trattini ("-"), underscore ("_") o punti (".").
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.isreadable">
+    <section xml:id="zend.loader.load.isreadable"><info><title>Verifica del permesso di lettura di un file</title></info>
 
-        <title>Verifica del permesso di lettura di un file</title>
+        
 
         <para>
             Il metodo statico <code>Zend_Loader::isReadable($pathname)</code> restituisce <code>TRUE</code> se il file al percorso specificato esiste ed è leggibile, altrimenti <code>FALSE</code>.
         </para>
 
-        <example id="zend.loader.load.isreadable.example">
-            <title>Esempio del metodo isReadable()</title>
+        <example xml:id="zend.loader.load.isreadable.example"><info><title>Esempio del metodo isReadable()</title></info>
+            
             <programlisting role="php"><![CDATA[<?php
 if (Zend_Loader::isReadable($filename)) {
     // fai qualcosa con $filename
-}]]>
-            </programlisting>
+}
+            ]]></programlisting>
         </example>
 
         <para>
             Il parametro <code>$filename</code> specifica il nome del file da verificare.
             Può contenere l'indicazione di un percorso.
             Questo metodo è un wrapper per la funzione PHP
-            <ulink url="http://php.net/is_readable"><code>is_readable()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/is_readable"><code>is_readable()</code></link>.
             La funzione PHP non esegue la ricerca nelle cartelle indicate da <code>include_path</code>,
             contrariamente a <code>Zend_Loader::isReadable()</code>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.autoload">
+    <section xml:id="zend.loader.load.autoload"><info><title>Utilizzo dell'autoloader</title></info>
 
-        <title>Utilizzo dell'autoloader</title>
+        
 
         <para>
             La classe <code>Zend_Loader</code> contiene un metodo che è possibile registrare nella libreria PHP SPL autoloader.
@@ -138,11 +139,11 @@ if (Zend_Loader::isReadable($filename)) {
             Se l'estensione <code>spl_autoload</code> non è presente nell'ambiente PHP, il metodo <code>registerAutoload()</code> genera un'eccezione <code>Zend_Exception</code>.
         </para>
 
-        <example id="zend.loader.load.autoload.example">
-            <title>Esempio di registrazione del metodo di callback autoloader</title>
+        <example xml:id="zend.loader.load.autoload.example"><info><title>Esempio di registrazione del metodo di callback autoloader</title></info>
+            
             <programlisting role="php"><![CDATA[<?php
-Zend_Loader::registerAutoload();]]>
-            </programlisting>
+Zend_Loader::registerAutoload();
+            ]]></programlisting>
         </example>
 
         <para>
@@ -154,8 +155,8 @@ Zend_Loader::registerAutoload();]]>
             Se si estende la classe <code>Zend_Loader</code> è possibile passare un parametro opzionale al metodo <code>registerAutoload()</code> per specificare la classe dalla quale registrare il metodo <code>autoload()</code>.
         </para>
 
-        <example id="zend.loader.load.autoload.example-extended">
-            <title>Esempio di registrazione del metodo di callback autoloader di una classe estesa</title>
+        <example xml:id="zend.loader.load.autoload.example-extended"><info><title>Esempio di registrazione del metodo di callback autoloader di una classe estesa</title></info>
+            
             <para>
                 A causa della semantica del referenziamento delle classi statiche in PHP, è necessario implementare il codice per entrambi i metodi <code>loadClass()</code> ed <code>autoload()</code>, ed il metodo <code>autoload()</code> deve chiamare <code>self::loadClass()</code>.
                 Se il proprio metodo <code>autoload()</code> delega al metodo genitore la chiamata a <code>self::loadClass()</code>, allora chiama il metodo con lo stesso nome nella classe genitore, non nella sottoclasse.
@@ -179,8 +180,8 @@ class Mio_Loader extends Zend_Loader
     }
 }
 
-Zend_Loader::registerAutoload('Mio_Loader');]]>
-            </programlisting>
+Zend_Loader::registerAutoload('Mio_Loader');
+            ]]></programlisting>
         </example>
 
         <para>
@@ -189,9 +190,6 @@ Zend_Loader::registerAutoload('Mio_Loader');]]>
             Se il parametro ha valore <code>FALSE</code> allora il callback è rimosso dalla pila degli autoload SPL al posto di essere registrato.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

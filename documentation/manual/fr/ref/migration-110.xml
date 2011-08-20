@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.110">
-    <title>Zend Framework 1.10</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><info><title>Zend Framework 1.10</title></info>
+    
 
     <para>
         Lors de la migration d'un version précédente vers Zend Framework 1.10 ou plus récent
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <sect2 id="migration.110.zend.controller.front">
-        <title>Zend_Controller_Front</title>
+    <section xml:id="migration.110.zend.controller.front"><info><title>Zend_Controller_Front</title></info>
+        
 
         <para>
             A wrong behaviour was fixed, when there was no module route and no route
@@ -49,10 +47,10 @@
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
     // ...
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.feed.reader">
-        <title>Zend_Feed_Reader</title>
+    <section xml:id="migration.110.zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
+        
 
         <para>
             With the introduction of Zend Framework 1.10, <classname>Zend_Feed_Reader</classname>'s
@@ -109,13 +107,13 @@ $authors = $feed->getAuthors();
 $feed = Zend_Feed_Reader::import('http://example.com/feed');
 $authors = $feed->getAuthors()->getValues();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.file.transfer">
-        <title>Zend_File_Transfer</title>
+    <section xml:id="migration.110.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+        
 
-        <sect3 id="migration.110.zend.file.transfer.files">
-            <title>Security change</title>
+        <section xml:id="migration.110.zend.file.transfer.files"><info><title>Security change</title></info>
+            
 
             <para>
                 For security reasons <classname>Zend_File_Transfer</classname> does no longer store
@@ -135,18 +133,18 @@ $authors = $feed->getAuthors()->getValues();
                 <property>disableInfos</property> option at initiation. Note that this option is
                 useless when its given after initiation.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.110.zend.file.transfer.count">
-            <title>Count validation</title>
+        <section xml:id="migration.110.zend.file.transfer.count"><info><title>Count validation</title></info>
+            
 
             <para>
                 Before release 1.10 the <classname>MimeType</classname> validator used a wrong
                 naming. For consistency the following constants have been changed:
             </para>
 
-            <table id="migration.110.zend.file.transfer.count.table">
-                <title>Changed Validation Messages</title>
+            <table xml:id="migration.110.zend.file.transfer.count.table"><info><title>Changed Validation Messages</title></info>
+                
                 <tgroup cols="4">
                     <thead>
                         <row>
@@ -181,11 +179,11 @@ $authors = $feed->getAuthors()->getValues();
                 As benefit you don't need to translate the original string anymore to get a correct
                 spelling.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.110.zend.filter.html-entities">
-        <title>Zend_Filter_HtmlEntities</title>
+    <section xml:id="migration.110.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+        
 
         <para>
             In order to default to a more secure character encoding,
@@ -203,10 +201,10 @@ $authors = $feed->getAuthors()->getValues();
             retrieved by their explicit accessors. If you were extending the filter in the past,
             please check your code and unit tests to ensure everything still continues to work.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.filter.strip-tags">
-        <title>Zend_Filter_StripTags</title>
+    <section xml:id="migration.110.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+        
 
         <para>
             <classname>Zend_Filter_StripTags</classname> contains a flag,
@@ -221,13 +219,13 @@ $authors = $feed->getAuthors()->getValues();
             <acronym>HTML</acronym> tags or nested commments, will be stripped from the final output
             of the filter.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.translate">
-        <title>Zend_Translate</title>
+    <section xml:id="migration.110.zend.translate"><info><title>Zend_Translate</title></info>
+        
 
-        <sect3 id="migration.110.zend.translate.xliff">
-            <title>Xliff adapter</title>
+        <section xml:id="migration.110.zend.translate.xliff"><info><title>Xliff adapter</title></info>
+            
 
             <para>
                 In past the Xliff adapter used the source string as message Id. According to the
@@ -245,14 +243,14 @@ $trans = new Zend_Translate(
     'xliff', '/path/to/source', $locale, array('useId' => false)
 );
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.110.zend.validate">
-        <title>Zend_Validate</title>
+    <section xml:id="migration.110.zend.validate"><info><title>Zend_Validate</title></info>
+        
 
-        <sect3 id="migration.110.zend.validate.selfwritten">
-            <title>Adaptateurs personnels</title>
+        <section xml:id="migration.110.zend.validate.selfwritten"><info><title>Adaptateurs personnels</title></info>
+            
 
             <para>
                 Lorsqu'une erreur apparait dans un adaptateur crée de toute pièce,
@@ -295,10 +293,10 @@ My_Validator extends Zend_Validate_Abstract
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.110.zend.validate.datevalidator">
-            <title>Simplification dans le validateur des dates</title>
+        <section xml:id="migration.110.zend.validate.datevalidator"><info><title>Simplification dans le validateur des dates</title></info>
+            
 
             <para>
                 Avant Zend Framework 1.10, 2 messages identiques étaient envoyés dans le validateur
@@ -307,10 +305,10 @@ My_Validator extends Zend_Validate_Abstract
                 <constant>FALSEFORMAT</constant> sera retourné lorsque la date passée ne correspond pas
                 au format demandé.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.110.zend.validate.barcodevalidator">
-            <title>Corrections dans Alpha, Alnum et Barcode</title>
+        <section xml:id="migration.110.zend.validate.barcodevalidator"><info><title>Corrections dans Alpha, Alnum et Barcode</title></info>
+            
 
             <para>
                 Avant Zend Framework 1.10, les messages dans les 2 validateurs barcode, le Alpha
@@ -325,8 +323,8 @@ My_Validator extends Zend_Validate_Abstract
                 opérés:
             </para>
 
-            <table id="migration.110.zend.validate.barcodevalidator.table">
-                <title>Messages de validation disponibles</title>
+            <table xml:id="migration.110.zend.validate.barcodevalidator.table"><info><title>Messages de validation disponibles</title></info>
+                
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -381,6 +379,6 @@ My_Validator extends Zend_Validate_Abstract
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22760 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.text.table.introduction">
-    <title>Zend_Text_Table</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.text.table.introduction"><info><title>Zend_Text_Table</title></info>
+    
 
     <para>
         <classname>Zend_Text_Table</classname> ist eine Komponente für die Erstellung von
@@ -14,8 +12,8 @@
         Ausrichtung.
     </para>
 
-    <note>
-        <title>Kodierung</title>
+    <note><info><title>Kodierung</title></info>
+        
 
         <para>
             <classname>Zend_Text_Table</classname> erwartet die Strings standardmäßig als UTF-8
@@ -137,8 +135,8 @@
         ausführt.
     </para>
 
-    <example id="zend.text.table.example.using">
-        <title>Verwenden von Zend_Text_Table</title>
+    <example xml:id="zend.text.table.example.using"><info><title>Verwenden von Zend_Text_Table</title></info>
+        
 
         <para>
             Ein Beispiel zeigt die grundsätzliche Verwendung von
@@ -172,4 +170,4 @@ echo $table;
 └──────────┴────────────────────┘
 ]]></programlisting>
     </example>
-</sect1>
+</section>

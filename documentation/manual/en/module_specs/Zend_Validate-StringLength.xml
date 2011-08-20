@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.stringlength">
-    <title>StringLength</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.stringlength"><info><title>StringLength</title></info>
+    
 
     <para>
         This validator allows you to validate if a given string is between a defined length.
     </para>
 
-    <note>
-        <title>Zend_Validate_StringLength supports only string validation</title>
+    <note><info><title>Zend_Validate_StringLength supports only string validation</title></info>
+        
 
         <para>
             It should be noted that <classname>Zend_Validate_StringLength</classname> supports only
@@ -17,8 +16,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.stringlength.options">
-        <title>Supported options for Zend_Validate_StringLength</title>
+    <section xml:id="zend.validate.set.stringlength.options"><info><title>Supported options for Zend_Validate_StringLength</title></info>
+        
 
         <para>
             The following options are supported for
@@ -47,10 +46,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.stringlength.basic">
-        <title>Default behaviour for Zend_Validate_StringLength</title>
+    <section xml:id="zend.validate.set.stringlength.basic"><info><title>Default behaviour for Zend_Validate_StringLength</title></info>
+        
 
         <para>
             Per default this validator checks if a value is between <property>min</property> and
@@ -63,10 +62,10 @@
             So per default, without giving any options, this validator only checks if the input
             is a string.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.stringlength.maximum">
-        <title>Limiting the maximum allowed length of a string</title>
+    <section xml:id="zend.validate.set.stringlength.maximum"><info><title>Limiting the maximum allowed length of a string</title></info>
+        
 
         <para>
             To limit the maximum allowed length of a string you need to set the
@@ -93,10 +92,10 @@ $validator->setMax(6);
 $validator->isValid("Test"); // returns true
 $validator->isValid("Testing"); // returns false
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.stringlength.minimum">
-        <title>Limiting the minimal required length of a string</title>
+    <section xml:id="zend.validate.set.stringlength.minimum"><info><title>Limiting the minimal required length of a string</title></info>
+        
 
         <para>
             To limit the minimal required length of a string you need to set the
@@ -123,10 +122,10 @@ $validator->setMin(5);
 $validator->isValid("Test"); // returns false
 $validator->isValid("Testing"); // returns true
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.stringlength.both">
-        <title>Limiting a string on both sides</title>
+    <section xml:id="zend.validate.set.stringlength.both"><info><title>Limiting a string on both sides</title></info>
+        
 
         <para>
             Sometimes it is required to get a string which has a maximal defined length but which
@@ -144,8 +143,8 @@ $validator->isValid("Test"); // returns true
 $validator->isValid("Testing"); // returns true
 ]]></programlisting>
 
-        <note>
-            <title>Setting a lower maximum border than the minimum border</title>
+        <note><info><title>Setting a lower maximum border than the minimum border</title></info>
+            
 
             <para>
                 When you try to set a lower maximum value as the actual minimum value, or a
@@ -153,10 +152,10 @@ $validator->isValid("Testing"); // returns true
                 raised.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.stringlength.encoding">
-        <title>Encoding of values</title>
+    <section xml:id="zend.validate.set.stringlength.encoding"><info><title>Encoding of values</title></info>
+        
 
         <para>
             Strings are always using a encoding. Even when you don't set the encoding explicit,
@@ -190,8 +189,5 @@ $validator2->isValid("Ärger"); // returns true
             So when your installation and your application are using different encodings, then you
             should always set an encoding yourself.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

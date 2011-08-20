@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.autoloading.conclusion">
-    <title>Conclusion</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.autoloading.conclusion"><info><title>Conclusion</title></info>
+    
 
     <para>
         Zend Framework encourages the use of autoloading, and even initializes it by default in
@@ -12,9 +13,7 @@
     </para>
 
     <para>
-        For more information on its usage, read the <link
-            linkend="zend.loader.autoloader">Zend_Loader_Autoloader</link> and <link
-            linkend="zend.loader.autoloader-resource">Zend_Loader_Autoloader_Resource</link> manual
+        For more information on its usage, read the <link linkend="zend.loader.autoloader">Zend_Loader_Autoloader</link> and <link linkend="zend.loader.autoloader-resource">Zend_Loader_Autoloader_Resource</link> manual
         pages.
     </para>
-</sect1>
+</section>

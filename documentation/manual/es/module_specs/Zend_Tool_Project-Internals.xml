@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20799 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.tool.project.internals">
-    <title>Zend_Tool_Project Internos</title>
-    <sect2 id="zend.tool.project.internals.xml-structure">
-        <title>Zend_Tool_Project Estructura Xml Interna</title>
-        <para/>
-        <!-- @todo -->
-    </sect2>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.tool.project.internals.extending">
-        <title>Zend_Tool_Project Enxtensión Interna</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.internals"><info><title>Zend_Tool_Project Internos</title></info>
+    
+    <section xml:id="zend.tool.project.internals.xml-structure"><info><title>Zend_Tool_Project Estructura Xml Interna</title></info>
+        
         <para/>
         <!-- @todo -->
-    </sect2>
-</sect1>
+    </section>
+
+    <section xml:id="zend.tool.project.internals.extending"><info><title>Zend_Tool_Project Enxtensión Interna</title></info>
+        
+        <para/>
+        <!-- @todo -->
+    </section>
+</section>

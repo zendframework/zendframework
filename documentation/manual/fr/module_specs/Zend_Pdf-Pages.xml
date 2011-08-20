@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.pages">
-    <title>Les pages d'un document</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.pages"><info><title>Les pages d'un document</title></info>
+    
 
-    <sect2 id="zend.pdf.pages.creation">
-        <title>Création de page</title>
+    <section xml:id="zend.pdf.pages.creation"><info><title>Création de page</title></info>
+        
 
         <para>
             Les pages d'un document <acronym>PDF</acronym> sont représentés par la classe
@@ -64,8 +62,8 @@
             de celle-ci et peut-être manipulé comme un tableau classique :
         </para>
 
-        <example id="zend.pdf.pages.example-1">
-            <title>Gestion des pages d'un document PDF</title>
+        <example xml:id="zend.pdf.pages.example-1"><info><title>Gestion des pages d'un document PDF</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -82,18 +80,18 @@ unset($pdf->pages[$id]);
 ...
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.pdf.pages.cloning">
-        <title>Clonage de page</title>
+    <section xml:id="zend.pdf.pages.cloning"><info><title>Clonage de page</title></info>
+        
 
         <para>
             Les pages existantes d'un <acronym>PDF</acronym> peuvent être clonées en créant un nouvel objet
             <classname>Zend_Pdf_Page</classname> avec la page existante comme paramètre :
         </para>
 
-        <example id="zend.pdf.pages.example-2">
-            <title>Cloner une page existante</title>
+        <example xml:id="zend.pdf.pages.example-2"><info><title>Cloner une page existante</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 ...
@@ -125,5 +123,5 @@ unset($pdf->pages[$templatePageIndex]);
                 modèle. Le document modifié peut être sauvegardé comme nouveau document.
             </para>
         </caution>
-    </sect2>
-</sect1>
+    </section>
+</section>

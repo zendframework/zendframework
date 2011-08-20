@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.gapps">
-    <title>Using Google Apps Provisioning</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.gapps"><info><title>Using Google Apps Provisioning</title></info>
+    
 
     <para>
         Google Apps is a service which allows domain administrators to offer
@@ -21,13 +20,12 @@
 
     <para>
         For more information on the Google Apps Provisioning <acronym>API</acronym>, including
-        instructions for enabling <acronym>API</acronym> access, refer to the <ulink
-            url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisioning
-            <acronym>API</acronym> V2.0 Reference</ulink>.
+        instructions for enabling <acronym>API</acronym> access, refer to the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisioning
+            <acronym>API</acronym> V2.0 Reference</link>.
     </para>
 
-    <note>
-        <title>Authentication</title>
+    <note><info><title>Authentication</title></info>
+        
 
         <para>
             The Provisioning <acronym>API</acronym> does not support authentication via AuthSub
@@ -36,8 +34,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.gapps.domain">
-        <title>Setting the current domain</title>
+    <section xml:id="zend.gdata.gapps.domain"><info><title>Setting the current domain</title></info>
+        
 
         <para>
             In order to use the Provisioning <acronym>API</acronym>, the domain being
@@ -47,8 +45,8 @@
             requests.
         </para>
 
-        <sect3 id="zend.gdata.gapps.domain.service">
-            <title>Setting the domain for the service class</title>
+        <section xml:id="zend.gdata.gapps.domain.service"><info><title>Setting the domain for the service class</title></info>
+            
 
             <para>
                 To set the domain for requests made by the service class,
@@ -60,10 +58,10 @@
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.domain.query">
-            <title>Setting the domain for query classes</title>
+        <section xml:id="zend.gdata.gapps.domain.query"><info><title>Setting the domain for query classes</title></info>
+            
 
             <para>
                 Setting the domain for requests made by query classes is
@@ -89,11 +87,11 @@ $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 $query = $gdata->newUserQuery($arg);
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.users">
-        <title>Interacting with users</title>
+    <section xml:id="zend.gdata.gapps.users"><info><title>Interacting with users</title></info>
+        
 
         <para>
             Each user account on a Google Apps hosted domain is represented as
@@ -102,8 +100,8 @@ $query = $gdata->newUserQuery($arg);
             password, access rights, and current quota.
         </para>
 
-        <sect3 id="zend.gdata.gapps.users.creating">
-            <title>Creating a user account</title>
+        <section xml:id="zend.gdata.gapps.users.creating"><info><title>Creating a user account</title></info>
+            
 
             <para>
                 User accounts can be created by calling the
@@ -135,13 +133,13 @@ $user = $gdata->insertUser($user);
             <para>
                 The user's password should normally be provided as cleartext.
                 Optionally, the password can be provided as an <acronym>SHA-1</acronym> digest if
-                <command>login->passwordHashFunction</command> is set to
+                <command>login-&gt;passwordHashFunction</command> is set to
                 '<property>SHA-1</property>'.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.users.retrieving">
-            <title>Retrieving a user account</title>
+        <section xml:id="zend.gdata.gapps.users.retrieving"><info><title>Retrieving a user account</title></info>
+            
 
             <para>
                 Individual user accounts can be retrieved by calling the
@@ -190,13 +188,12 @@ echo 'Has Agreed To Terms: ' .
                 If the specified user cannot be located a ServiceException
                 will be thrown with an error code of
                 <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>.
-                ServiceExceptions will be covered in <link
-                linkend="zend.gdata.gapps.exceptions">the exceptions chapter</link>.
+                ServiceExceptions will be covered in <link linkend="zend.gdata.gapps.exceptions">the exceptions chapter</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.users.retrievingAll">
-            <title>Retrieving all users in a domain</title>
+        <section xml:id="zend.gdata.gapps.users.retrievingAll"><info><title>Retrieving all users in a domain</title></info>
+            
 
             <para>
                 To retrieve all users in a domain, call the
@@ -221,8 +218,7 @@ foreach ($feed as $user) {
                 Alternatively, call <methodname>getUserFeed()</methodname> with no
                 options. Keep in mind that on larger
                 domains this feed may be paged by the server. For more
-                information on paging, see <link
-                linkend="zend.gdata.introduction.paging">the paging chapter</link>.
+                information on paging, see <link linkend="zend.gdata.introduction.paging">the paging chapter</link>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -233,10 +229,10 @@ foreach ($feed as $user) {
         ' ' . $user->name->familyName . ")\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.users.updating">
-            <title>Updating a user account</title>
+        <section xml:id="zend.gdata.gapps.users.updating"><info><title>Updating a user account</title></info>
+            
 
             <para>
                 The easiest way to update a user account is to retrieve the
@@ -252,12 +248,12 @@ $user->name->familyName = 'Bar';
 $user = $user->save();
 ]]></programlisting>
 
-            <sect4 id="zend.gdata.gapps.users.updating.resettingPassword">
-                <title>Resetting a user's password</title>
+            <section xml:id="zend.gdata.gapps.users.updating.resettingPassword"><info><title>Resetting a user's password</title></info>
+                
 
                 <para>
                     A user's password can be reset to a new value by updating
-                    the <command>login->password</command> property.
+                    the <command>login-&gt;password</command> property.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -271,15 +267,15 @@ $user = $user->save();
                     manner as stored passwords are not made available via the
                     Provisioning <acronym>API</acronym> for security reasons.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.gdata.gapps.users.updating.forcingPasswordChange">
-                <title>Forcing a user to change their password</title>
+            <section xml:id="zend.gdata.gapps.users.updating.forcingPasswordChange"><info><title>Forcing a user to change their password</title></info>
+                
 
                 <para>
                     A user can be forced to change their password at their
                     next login by setting the
-                    <command>login->changePasswordAtNextLogin</command> property to
+                    <command>login-&gt;changePasswordAtNextLogin</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -291,13 +287,13 @@ $user = $user->save();
 
                 <para>
                     Similarly, this can be undone by setting the
-                    <command>login->changePasswordAtNextLogin</command> property to
+                    <command>login-&gt;changePasswordAtNextLogin</command> property to
                     <constant>FALSE</constant>.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.gdata.gapps.users.updating.suspendingAccount">
-                <title>Suspending a user account</title>
+            <section xml:id="zend.gdata.gapps.users.updating.suspendingAccount"><info><title>Suspending a user account</title></info>
+                
 
                 <para>
                     Users can be restricted from logging in without deleting
@@ -315,7 +311,7 @@ $gdata->restoreUser('foo');
 
                 <para>
                     Alternatively, you can set the UserEntry's
-                    <command>login->suspended</command> property to
+                    <command>login-&gt;suspended</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -327,17 +323,17 @@ $user = $user->save();
 
                 <para>
                     To restore the user's access, set the
-                    <command>login->suspended</command> property to
+                    <command>login-&gt;suspended</command> property to
                     <constant>FALSE</constant>.
                 </para>
-            </sect4>
+            </section>
 
-            <sect4 id="zend.gdata.gapps.users.updating.grantingAdminRights">
-                <title>Granting administrative rights</title>
+            <section xml:id="zend.gdata.gapps.users.updating.grantingAdminRights"><info><title>Granting administrative rights</title></info>
+                
 
                 <para>
                     Users can be granted the ability to administer your domain
-                    by setting their <command>login->admin</command> property to
+                    by setting their <command>login-&gt;admin</command> property to
                     <constant>TRUE</constant>.
                 </para>
 
@@ -348,15 +344,15 @@ $user = $user->save();
 ]]></programlisting>
 
                 <para>
-                    And as expected, setting a user's <command>login->admin</command>
+                    And as expected, setting a user's <command>login-&gt;admin</command>
                     property to <constant>FALSE</constant> revokes their
                     administrative rights.
                 </para>
-            </sect4>
-        </sect3>
+            </section>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.users.deleting">
-            <title>Deleting user accounts</title>
+        <section xml:id="zend.gdata.gapps.users.deleting"><info><title>Deleting user accounts</title></info>
+            
 
             <para>
                 Deleting a user account to which you already hold a UserEntry
@@ -377,11 +373,11 @@ $user->delete();
             <programlisting language="php"><![CDATA[
 $gdata->deleteUser('foo');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.nicknames">
-        <title>Interacting with nicknames</title>
+    <section xml:id="zend.gdata.gapps.nicknames"><info><title>Interacting with nicknames</title></info>
+        
 
         <para>
             Nicknames serve as email aliases for existing users. Each nickname
@@ -395,8 +391,8 @@ $gdata->deleteUser('foo');
             <classname>Zend_Gdata_Gapps_NicknameEntry</classname>.
         </para>
 
-        <sect3 id="zend.gdata.gapps.nicknames.creating">
-            <title>Creating a nickname</title>
+        <section xml:id="zend.gdata.gapps.nicknames.creating"><info><title>Creating a nickname</title></info>
+            
 
             <para>
                 Nicknames can be created by calling the
@@ -420,10 +416,10 @@ $nickname->login = $gdata->newLogin('foo');
 $nickname->nickname = $gdata->newNickname('bar');
 $nickname = $gdata->insertNickname($nickname);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.nicknames.retrieving">
-            <title>Retrieving a nickname</title>
+        <section xml:id="zend.gdata.gapps.nicknames.retrieving"><info><title>Retrieving a nickname</title></info>
+            
 
             <para>
                 Nicknames can be retrieved by calling the
@@ -458,13 +454,12 @@ echo 'Owner: ' . $nickname->login->username . "\n";
                 As with users, if no corresponding nickname is found a
                 ServiceException will be thrown with an error code of
                 <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant>. Again, these
-                will be discussed in <link
-                    linkend="zend.gdata.gapps.exceptions">the exceptions chapter</link>.
+                will be discussed in <link linkend="zend.gdata.gapps.exceptions">the exceptions chapter</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.nicknames.retrievingUser">
-            <title>Retrieving all nicknames for a user</title>
+        <section xml:id="zend.gdata.gapps.nicknames.retrievingUser"><info><title>Retrieving all nicknames for a user</title></info>
+            
 
             <para>
                 To retrieve all nicknames associated with a given user, call
@@ -500,10 +495,10 @@ foreach ($feed as $nickname) {
     echo '  * ' . $nickname->nickname->name . "\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.nicknames.retrievingAll">
-            <title>Retrieving all nicknames in a domain</title>
+        <section xml:id="zend.gdata.gapps.nicknames.retrievingAll"><info><title>Retrieving all nicknames in a domain</title></info>
+            
 
             <para>
                 To retrieve all nicknames in a feed, simply call the
@@ -537,10 +532,10 @@ foreach ($feed as $nickname) {
         $nickname->login->username . "\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.nicknames.deleting">
-            <title>Deleting a nickname</title>
+        <section xml:id="zend.gdata.gapps.nicknames.deleting"><info><title>Deleting a nickname</title></info>
+            
 
             <para>
                 Deleting a nickname to which you already hold a NicknameEntry
@@ -561,11 +556,11 @@ $nickname->delete();
             <programlisting language="php"><![CDATA[
 $gdata->deleteNickname('bar');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.groups">
-        <title>Interacting with groups</title>
+    <section xml:id="zend.gdata.gapps.groups"><info><title>Interacting with groups</title></info>
+        
 
         <para>
             Google Groups allows people to post messages like an email list. Google
@@ -582,8 +577,8 @@ $gdata->deleteNickname('bar');
             <classname>Zend_Gdata_Gapps_GroupEntry</classname>.
         </para>
 
-        <sect3 id="zend.gdata.gapps.groups.creating">
-            <title>Creating a group</title>
+        <section xml:id="zend.gdata.gapps.groups.creating"><info><title>Creating a group</title></info>
+            
 
             <para>
                 Groups can be created by calling the
@@ -615,10 +610,10 @@ $group->property = $properties;
 
 $group = $gdata->insertGroup($group);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groups.retrieveGroup">
-            <title>Retrieving an individual group</title>
+        <section xml:id="zend.gdata.gapps.groups.retrieveGroup"><info><title>Retrieving an individual group</title></info>
+            
 
             <para>
                 To retrieve an individual group, call the
@@ -656,10 +651,10 @@ foreach ($entry->property as $p) {
     echo "\nProperty Value: " . $p->value . "\n\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groups.retrievingAll">
-            <title>Retrieving all groups in a domain</title>
+        <section xml:id="zend.gdata.gapps.groups.retrievingAll"><info><title>Retrieving all groups in a domain</title></info>
+            
 
             <para>
                 To retrieve all groups in a domain, call the convenience
@@ -699,10 +694,10 @@ foreach ($feed->entry as $entry) {
     echo "\n\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groups.deleting">
-            <title>Deleting a group</title>
+        <section xml:id="zend.gdata.gapps.groups.deleting"><info><title>Deleting a group</title></info>
+            
 
             <para>
                 To delete a group, call the <methodname>deleteGroup()</methodname> convenience
@@ -712,10 +707,10 @@ foreach ($feed->entry as $entry) {
             <programlisting language="php"><![CDATA[
 $gdata->deleteGroup('friends');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groups.updating">
-            <title>Updating a group</title>
+        <section xml:id="zend.gdata.gapps.groups.updating"><info><title>Updating a group</title></info>
+            
 
             <para>
                 Groups can be updated by calling the
@@ -732,10 +727,10 @@ $gdata->updateGroup('group-id-here', 'Group Name Here');
                 respectively are optional. Setting any of these optional parameters
                 to null will not update that item.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groups.retrieve">
-            <title>Retrieving all groups to which a person is a member</title>
+        <section xml:id="zend.gdata.gapps.groups.retrieve"><info><title>Retrieving all groups to which a person is a member</title></info>
+            
 
             <para>
                 To retrieve all groups to which a particular person is a
@@ -780,11 +775,11 @@ foreach ($feed->entry as $entry) {
     echo "\n\n";
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.groupMembers">
-        <title>Interacting with group members</title>
+    <section xml:id="zend.gdata.gapps.groupMembers"><info><title>Interacting with group members</title></info>
+        
 
         <para>
             Each member subscribed to a group is represented by an
@@ -793,8 +788,8 @@ foreach ($feed->entry as $entry) {
             from groups.
         </para>
 
-        <sect3 id="zend.gdata.gapps.groupMembers.adding">
-            <title>Adding a member to a group</title>
+        <section xml:id="zend.gdata.gapps.groupMembers.adding"><info><title>Adding a member to a group</title></info>
+            
 
             <para>
                 To add a member to a group, simply call the
@@ -804,10 +799,10 @@ foreach ($feed->entry as $entry) {
             <programlisting language="php"><![CDATA[
 $gdata->addMemberToGroup('bar@somewhere.com', 'friends');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groupMembers.check">
-            <title>Check to see if member belongs to group</title>
+        <section xml:id="zend.gdata.gapps.groupMembers.check"><info><title>Check to see if member belongs to group</title></info>
+            
 
             <para>
                 To check to see if member belongs to group, simply call the
@@ -823,10 +818,10 @@ var_dump($isMember);
                 The method returns a boolean value. If the member belongs to the
                 group specified, the method returns true, else it returns false.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groupMembers.removing">
-            <title>Removing a member from a group</title>
+        <section xml:id="zend.gdata.gapps.groupMembers.removing"><info><title>Removing a member from a group</title></info>
+            
 
             <para>
                 To remove a member from a group, call the
@@ -837,10 +832,10 @@ var_dump($isMember);
             <programlisting language="php"><![CDATA[
 $gdata->removeMemberFromGroup('baz', 'friends');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groupMembers.retrieving">
-            <title>Retrieving the list of members to a group</title>
+        <section xml:id="zend.gdata.gapps.groupMembers.retrieving"><info><title>Retrieving the list of members to a group</title></info>
+            
 
             <para>
                 The convenience method <methodname>retrieveAllMembers()</methodname>
@@ -881,11 +876,11 @@ foreach ($feed as $member) {
                 This will create a <classname>Zend_Gdata_Gapps_MemberFeed</classname>
                 object which holds each member for the selected group.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.groupOwners">
-        <title>Interacting with group owners</title>
+    <section xml:id="zend.gdata.gapps.groupOwners"><info><title>Interacting with group owners</title></info>
+        
 
         <para>
             Each owner associated with a group is represented by an
@@ -894,8 +889,8 @@ foreach ($feed as $member) {
             from groups.
         </para>
 
-        <sect3 id="zend.gdata.gapps.groupOwners.adding">
-            <title>Adding an owner to a group</title>
+        <section xml:id="zend.gdata.gapps.groupOwners.adding"><info><title>Adding an owner to a group</title></info>
+            
 
             <para>
                 To add an owner to a group, simply call the
@@ -905,10 +900,10 @@ foreach ($feed as $member) {
             <programlisting language="php"><![CDATA[
 $gdata->addOwnerToGroup('bar@somewhere.com', 'friends');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groupOwners.retrieving">
-            <title>Retrieving the list of the owner of a group</title>
+        <section xml:id="zend.gdata.gapps.groupOwners.retrieving"><info><title>Retrieving the list of the owner of a group</title></info>
+            
 
             <para>
                 The convenience method <methodname>retrieveGroupOwners()</methodname>
@@ -949,10 +944,10 @@ foreach ($feed as $owner) {
                 This will create a <classname>Zend_Gdata_Gapps_OwnerFeed</classname>
                 object which holds each member for the selected group.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groupOwners.check">
-            <title>Check to see if an email is the owner of a group</title>
+        <section xml:id="zend.gdata.gapps.groupOwners.check"><info><title>Check to see if an email is the owner of a group</title></info>
+            
 
             <para>
                 To check to see if an email is the owner of a group, simply call
@@ -968,10 +963,10 @@ var_dump($isOwner);
                 The method returns a boolean value. If the email is the owner of
                 the group specified, the method returns true, else it returns false.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.groupOwners.removing">
-            <title>Removing an owner from a group</title>
+        <section xml:id="zend.gdata.gapps.groupOwners.removing"><info><title>Removing an owner from a group</title></info>
+            
 
             <para>
                 To remove an owner from a group, call the
@@ -982,11 +977,11 @@ var_dump($isOwner);
             <programlisting language="php"><![CDATA[
 $gdata->removeOwnerFromGroup('baz@somewhere.com', 'friends');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.emailLists">
-        <title>Interacting with email lists</title>
+    <section xml:id="zend.gdata.gapps.emailLists"><info><title>Interacting with email lists</title></info>
+        
 
         <para>
             Email lists allow several users to retrieve email addressed to a
@@ -1000,8 +995,8 @@ $gdata->removeOwnerFromGroup('baz@somewhere.com', 'friends');
             <classname>Zend_Gdata_Gapps_EmailListEntry</classname>.
         </para>
 
-        <sect3 id="zend.gdata.gapps.emailLists.creating">
-            <title>Creating an email list</title>
+        <section xml:id="zend.gdata.gapps.emailLists.creating"><info><title>Creating an email list</title></info>
+            
 
             <para>
                 Email lists can be created by calling the
@@ -1024,10 +1019,10 @@ $list = $gdata->newEmailListEntry();
 $list->emailList = $gdata->newEmailList('friends');
 $list = $gdata->insertEmailList($list);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.emailList.retrieve">
-            <title>Retrieving all email lists to which a recipient is subscribed</title>
+        <section xml:id="zend.gdata.gapps.emailList.retrieve"><info><title>Retrieving all email lists to which a recipient is subscribed</title></info>
+            
 
             <para>
                 To retrieve all email lists to which a particular recipient is
@@ -1064,10 +1059,10 @@ foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.emailLists.retrievingAll">
-            <title>Retrieving all email lists in a domain</title>
+        <section xml:id="zend.gdata.gapps.emailLists.retrievingAll"><info><title>Retrieving all email lists in a domain</title></info>
+            
 
             <para>
                 To retrieve all email lists in a domain, call the convenience
@@ -1099,10 +1094,10 @@ foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.emailList.deleting">
-            <title>Deleting an email list</title>
+        <section xml:id="zend.gdata.gapps.emailList.deleting"><info><title>Deleting an email list</title></info>
+            
 
             <para>
                 To delete an email list, call the <methodname>deleteEmailList()</methodname>
@@ -1112,11 +1107,11 @@ foreach ($feed as $list) {
             <programlisting language="php"><![CDATA[
 $gdata->deleteEmailList('friends');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.emailListRecipients">
-        <title>Interacting with email list recipients</title>
+    <section xml:id="zend.gdata.gapps.emailListRecipients"><info><title>Interacting with email list recipients</title></info>
+        
 
         <para>
             Each recipient subscribed to an email list is represented by an
@@ -1125,8 +1120,8 @@ $gdata->deleteEmailList('friends');
             lists.
         </para>
 
-        <sect3 id="zend.gdata.gapps.emailListRecipients.adding">
-            <title>Adding a recipient to an email list</title>
+        <section xml:id="zend.gdata.gapps.emailListRecipients.adding"><info><title>Adding a recipient to an email list</title></info>
+            
 
             <para>
                 To add a recipient to an email list, simply call the
@@ -1136,10 +1131,10 @@ $gdata->deleteEmailList('friends');
             <programlisting language="php"><![CDATA[
 $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.emailListRecipients.retrieving">
-            <title>Retrieving the list of subscribers to an email list</title>
+        <section xml:id="zend.gdata.gapps.emailListRecipients.retrieving"><info><title>Retrieving the list of subscribers to an email list</title></info>
+            
 
             <para>
                 The convenience method <methodname>retrieveAllRecipients()</methodname>
@@ -1175,10 +1170,10 @@ foreach ($feed as $recipient) {
                 This will create a <classname>Zend_Gdata_Gapps_EmailListRecipientFeed</classname>
                 object which holds each recipient for the selected email list.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.gapps.emailListRecipients.removing">
-            <title>Removing a recipient from an email list</title>
+        <section xml:id="zend.gdata.gapps.emailListRecipients.removing"><info><title>Removing a recipient from an email list</title></info>
+            
 
             <para>
                 To remove a recipient from an email list, call the
@@ -1189,11 +1184,11 @@ foreach ($feed as $recipient) {
             <programlisting language="php"><![CDATA[
 $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.gdata.gapps.exceptions">
-        <title>Handling errors</title>
+    <section xml:id="zend.gdata.gapps.exceptions"><info><title>Handling errors</title></info>
+        
 
         <para>
             In addition to the standard suite of exceptions thrown by
@@ -1210,9 +1205,8 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
             (optionally) the input which triggered the exception. A complete
             list of known error codes is provided in Zend Framework's <acronym>API</acronym>
             documentation under <classname>Zend_Gdata_Gapps_Error</classname>. Additionally, the
-            authoritative error list is available online at <ulink
-                url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
-            Apps Provisioning <acronym>API</acronym> V2.0 Reference: Appendix D</ulink>.
+            authoritative error list is available online at <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
+            Apps Provisioning <acronym>API</acronym> V2.0 Reference: Appendix D</link>.
         </para>
 
         <para>
@@ -1244,5 +1238,5 @@ function retrieveUser ($username) {
     return $user;
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

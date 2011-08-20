@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.form.forms">
-    <title>Creating Forms Using Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.forms"><info><title>Creating Forms Using Zend_Form</title></info>
+    
 
     <para>
         The <classname>Zend_Form</classname> class is used to aggregate form elements,
@@ -79,8 +78,8 @@ $form = new Zend_Form($config);
         through decorators.
     </para>
 
-    <sect2 id="zend.form.forms.plugins">
-        <title>Plugin Loaders</title>
+    <section xml:id="zend.form.forms.plugins"><info><title>Plugin Loaders</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> makes use of
@@ -153,8 +152,7 @@ $form = new Zend_Form($config);
                     Just like <methodname>addPrefixPath()</methodname>, you must specify a class
                     prefix and a path. <varname>$type</varname>, when specified, must be
                     one of the plugin loader types specified by
-                    <classname>Zend_Form_Element</classname>; see the <link
-                        linkend="zend.form.elements.loaders">element plugins
+                    <classname>Zend_Form_Element</classname>; see the <link linkend="zend.form.elements.loaders">element plugins
                         section</link> for more information on valid
                     <varname>$type</varname> values. If no <varname>$type</varname> is
                     specified, the method will assume it is a general prefix for all
@@ -175,16 +173,15 @@ $form = new Zend_Form($config);
         <para>
             Custom elements and decorators are an easy way to share
             functionality between forms and encapsulate custom functionality.
-            See the <link
-                linkend="zend.form.elements.loaders.customLabel">Custom Label
+            See the <link linkend="zend.form.elements.loaders.customLabel">Custom Label
                 example</link> in the elements documentation for an example of
             how custom elements can be used as replacements for standard
             classes.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.elements">
-        <title>Elements</title>
+    <section xml:id="zend.form.forms.elements"><info><title>Elements</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> provides several accessors for adding and
@@ -221,8 +218,8 @@ $form->addElement('text', 'foo');
 $form->addElement('text', 'foo', array('label' => 'Foo:'));
 ]]></programlisting>
 
-        <note>
-            <title>addElement() Implements Fluent Interface</title>
+        <note><info><title>addElement() Implements Fluent Interface</title></info>
+            
 
             <para>
                 <methodname>addElement()</methodname> implements a fluent interface; that is
@@ -275,8 +272,8 @@ $foo = $form->foo;
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
 
-        <sect3 id="zend.form.forms.elements.values">
-            <title>Populating and Retrieving Values</title>
+        <section xml:id="zend.form.forms.elements.values"><info><title>Populating and Retrieving Values</title></info>
+            
 
             <para>
                 After validating a form, you will typically need to retrieve the
@@ -316,10 +313,10 @@ $form->populate($data);
             <programlisting language="php"><![CDATA[
 $form->reset();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.elements.global">
-            <title>Global Operations</title>
+        <section xml:id="zend.form.forms.elements.global"><info><title>Global Operations</title></info>
+            
 
             <para>
                 Occasionally you will want certain operations to affect all
@@ -328,8 +325,8 @@ $form->reset();
                 setting filters for all elements. As examples:
             </para>
 
-            <example id="zend.form.forms.elements.global.allpaths">
-                <title>Setting Prefix Paths for All Elements</title>
+            <example xml:id="zend.form.forms.elements.global.allpaths"><info><title>Setting Prefix Paths for All Elements</title></info>
+                
 
                 <para>
                     You can set prefix paths for all elements by type, or using
@@ -359,8 +356,8 @@ $form->addElementPrefixPath('My_Foo_Decorator',
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.elements.global.decorators">
-                <title>Setting Decorators for All Elements</title>
+            <example xml:id="zend.form.forms.elements.global.decorators"><info><title>Setting Decorators for All Elements</title></info>
+                
 
                 <para>
                     You can set decorators for all elements.
@@ -379,8 +376,8 @@ $form->setElementDecorators(array(
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.elements.global.decoratorsFilter">
-                <title>Setting Decorators for Some Elements</title>
+            <example xml:id="zend.form.forms.elements.global.decoratorsFilter"><info><title>Setting Decorators for Some Elements</title></info>
+                
 
                 <para>
                     You can also set decorators for a subset of elements,
@@ -438,8 +435,8 @@ $form->setElementDecorators(
 ]]></programlisting>
             </example>
 
-            <note>
-                <title>Some Decorators are Inappropriate for Some Elements</title>
+            <note><info><title>Some Decorators are Inappropriate for Some Elements</title></info>
+                
 
                 <para>
                     While <methodname>setElementDecorators()</methodname> may seem like
@@ -465,8 +462,8 @@ $form->setElementDecorators(
                 </para>
             </note>
 
-            <example id="zend.form.forms.elements.global.filters">
-                <title>Setting Filters for All Elements</title>
+            <example xml:id="zend.form.forms.elements.global.filters"><info><title>Setting Filters for All Elements</title></info>
+                
 
                 <para>
                     In some cases, you may want to apply the same filter to all
@@ -477,10 +474,10 @@ $form->setElementDecorators(
 $form->setElementFilters(array('StringTrim'));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.elements.methods">
-            <title>Methods For Interacting With Elements</title>
+        <section xml:id="zend.form.forms.elements.methods"><info><title>Methods For Interacting With Elements</title></info>
+            
 
             <para>
                 The following methods may be used to interact with elements:
@@ -596,11 +593,11 @@ $form->setElementFilters(array('StringTrim'));
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.displaygroups">
-        <title>Display Groups</title>
+    <section xml:id="zend.form.forms.displaygroups"><info><title>Display Groups</title></info>
+        
 
         <para>
             Display groups are a way to create virtual groupings of elements for
@@ -644,8 +641,8 @@ $login = $form->getDisplayGroup('login');
 $login = $form->login;
 ]]></programlisting>
 
-        <note>
-            <title>Default Decorators Do Not Need to Be Loaded</title>
+        <note><info><title>Default Decorators Do Not Need to Be Loaded</title></info>
+            
 
             <para>
                 By default, the default decorators are loaded during object
@@ -668,8 +665,8 @@ $form->addDisplayGroup(
             </para>
         </note>
 
-        <sect3 id="zend.form.forms.displaygroups.global">
-            <title>Global Operations</title>
+        <section xml:id="zend.form.forms.displaygroups.global"><info><title>Global Operations</title></info>
+            
 
             <para>
                 Just as with elements, there are some operations which might
@@ -677,8 +674,8 @@ $form->addDisplayGroup(
                 setting the plugin path in which to look for decorators.
             </para>
 
-            <example id="zend.form.forms.displaygroups.global.paths">
-                <title>Setting Decorator Prefix Path for All Display Groups</title>
+            <example xml:id="zend.form.forms.displaygroups.global.paths"><info><title>Setting Decorator Prefix Path for All Display Groups</title></info>
+                
 
                 <para>
                     By default, display groups inherit whichever decorator paths
@@ -692,8 +689,8 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
 
-            <example id="zend.form.forms.displaygroups.global.decorators">
-                <title>Setting Decorators for All Display Groups</title>
+            <example xml:id="zend.form.forms.displaygroups.global.decorators"><info><title>Setting Decorators for All Display Groups</title></info>
+                
 
                 <para>
                     You can set decorators for all display groups.
@@ -712,10 +709,10 @@ $form->setDisplayGroupDecorators(array(
 ));
 ]]></programlisting>
             </example>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.customClasses">
-            <title>Using Custom Display Group Classes</title>
+        <section xml:id="zend.form.forms.displaygroups.customClasses"><info><title>Using Custom Display Group Classes</title></info>
+            
 
             <para>
                 By default, <classname>Zend_Form</classname> uses the
@@ -757,10 +754,10 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                 'defaultDisplayGroupClass', and will be loaded early to ensure
                 all display groups use that class.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.interactionmethods">
-            <title>Methods for Interacting With Display Groups</title>
+        <section xml:id="zend.form.forms.displaygroups.interactionmethods"><info><title>Methods for Interacting With Display Groups</title></info>
+            
 
             <para>
                 The following methods may be used to interact with display
@@ -835,10 +832,10 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.displaygroups.methods">
-            <title>Zend_Form_DisplayGroup Methods</title>
+        <section xml:id="zend.form.forms.displaygroups.methods"><info><title>Zend_Form_DisplayGroup Methods</title></info>
+            
 
             <para>
                 <classname>Zend_Form_DisplayGroup</classname> has the following methods,
@@ -1040,11 +1037,11 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.subforms">
-        <title>Sub Forms</title>
+    <section xml:id="zend.form.forms.subforms"><info><title>Sub Forms</title></info>
+        
 
         <para>
             Sub forms serve several purposes:
@@ -1109,8 +1106,8 @@ $subForm = $form->subform;
             contain are not.
         </para>
 
-        <sect3 id="zend.form.forms.subforms.global">
-            <title>Global Operations</title>
+        <section xml:id="zend.form.forms.subforms.global"><info><title>Global Operations</title></info>
+            
 
             <para>
                 Like elements and display groups, there are some operations that
@@ -1130,10 +1127,10 @@ $form->setSubFormDecorators(array(
     'Fieldset'
 ));
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.subforms.methods">
-            <title>Methods for Interacting With Sub Forms</title>
+        <section xml:id="zend.form.forms.subforms.methods"><info><title>Methods for Interacting With Sub Forms</title></info>
+            
 
             <para>
                 The following methods may be used to interact with sub forms:
@@ -1188,11 +1185,11 @@ $form->setSubFormDecorators(array(
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.metadata">
-        <title>Metadata and Attributes</title>
+    <section xml:id="zend.form.forms.metadata"><info><title>Metadata and Attributes</title></info>
+        
 
         <para>
             While a form's usefulness primarily derives from the elements it
@@ -1285,10 +1282,10 @@ $form->removeAttrib('onSubmit');
 // Clear all attributes:
 $form->clearAttribs();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.decorators">
-        <title>Decorators</title>
+    <section xml:id="zend.form.forms.decorators"><info><title>Decorators</title></info>
+        
 
         <para>
             Creating the markup for a form is often a time-consuming task,
@@ -1337,8 +1334,8 @@ $form->setDecorators(array(
             attributes of the <emphasis>&lt;form&gt;</emphasis> tag.
         </para>
 
-        <note>
-            <title>Default Decorators Do Not Need to Be Loaded</title>
+        <note><info><title>Default Decorators Do Not Need to Be Loaded</title></info>
+            
 
             <para>
                 By default, the default decorators are loaded during object
@@ -1356,8 +1353,8 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             </para>
         </note>
 
-        <note>
-            <title>Using Multiple Decorators of the Same Type</title>
+        <note><info><title>Using Multiple Decorators of the Same Type</title></info>
+            
 
             <para>
                 Internally, <classname>Zend_Form</classname> uses a decorator's
@@ -1482,10 +1479,10 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
         <para>
             If the decorator does not exist, an exception is raised.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.validation">
-        <title>Validation</title>
+    <section xml:id="zend.form.forms.validation"><info><title>Validation</title></info>
+        
 
         <para>
             A primary use case for forms is validating submitted data.
@@ -1587,8 +1584,8 @@ $messages = $form->getMessages('username');
             </para>
         </note>
 
-        <sect3 id="zend.form.forms.validation.errors">
-            <title>Custom Error Messages</title>
+        <section xml:id="zend.form.forms.validation.errors"><info><title>Custom Error Messages</title></info>
+            
 
             <para>
                 At times, you may want to specify one or more specific error
@@ -1670,10 +1667,10 @@ $messages = $form->getMessages('username');
             <para>
                 All errors set in this fashion may be translated.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.form.forms.validation.values">
-            <title>Retrieving Valid Values Only</title>
+        <section xml:id="zend.form.forms.validation.values"><info><title>Retrieving Valid Values Only</title></info>
+            
 
             <para>
                 There are scenarios when you want to allow your user to work on a valid form
@@ -1689,11 +1686,11 @@ $messages = $form->getMessages('username');
             <programlisting language="php"><![CDATA[
 $validValues = $form->getValidValues($_POST);
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.form.forms.methods">
-        <title>Methods</title>
+    <section xml:id="zend.form.forms.methods"><info><title>Methods</title></info>
+        
 
         <para>
             The following is a full list of methods available to
@@ -2008,10 +2005,10 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.config">
-        <title>Configuration</title>
+    <section xml:id="zend.form.forms.config"><info><title>Configuration</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> is fully configurable via
@@ -2120,10 +2117,10 @@ decorators.form.decorator = "Form"
             The above could easily be abstracted to an <acronym>XML</acronym> or
             <acronym>PHP</acronym> array-based configuration file.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.forms.custom">
-        <title>Custom forms</title>
+    <section xml:id="zend.form.forms.custom"><info><title>Custom forms</title></info>
+        
 
         <para>
             An alternative to using configuration-based forms is to subclass
@@ -2245,8 +2242,5 @@ class My_Form_Login extends Zend_Form
     }
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

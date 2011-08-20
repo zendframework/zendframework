@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect1 id="zend.mime.mime">
-    <title>Zend_Mime</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.mime.mime.introduction">
-        <title>導入</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+    
+
+    <section xml:id="zend.mime.mime.introduction"><info><title>導入</title></info>
+        
 
         <para>
             <classname>Zend_Mime</classname> は、マルチパート <acronym>MIME</acronym>
@@ -14,10 +14,10 @@
             <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>、
             そして <acronym>MIME</acronym> サポートを必要とするその他のアプリケーションから使用されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.mime.static">
-        <title>静的メソッドおよび定数</title>
+    <section xml:id="zend.mime.mime.static"><info><title>静的メソッドおよび定数</title></info>
+        
 
         <para>
             <classname>Zend_Mime</classname> は、<acronym>MIME</acronym> を処理するための以下のような静的ヘルパーメソッドを提供しています。
@@ -143,10 +143,10 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.mime.instatiation">
-        <title>Zend_Mime インスタンスの作成</title>
+    <section xml:id="zend.mime.mime.instatiation"><info><title>Zend_Mime インスタンスの作成</title></info>
+        
 
         <para>
             <classname>Zend_Mime</classname> オブジェクトのインスタンスを作成する際に、
@@ -180,8 +180,5 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

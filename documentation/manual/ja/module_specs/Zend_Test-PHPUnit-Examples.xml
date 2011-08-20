@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22236 -->
-<sect2 id="zend.test.phpunit.examples">
-    <title>例</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.examples"><info><title>例</title></info>
+    
 
     <para>
         テスト環境の設定方法とアサーションの作成方法を説明しましたが、
@@ -10,8 +8,8 @@
         実際のテストシナリオをもとにテストの方法を確認していきましょう。
     </para>
 
-    <example id="zend.test.phpunit.examples.userController">
-        <title>UserController のテスト</title>
+    <example xml:id="zend.test.phpunit.examples.userController"><info><title>UserController のテスト</title></info>
+        
 
         <para>
             ウェブサイトの一般的なタスクである、
@@ -302,16 +300,12 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             そんな場合は、何らかの scaffold を使用してデータベースの初期状態を作成し、
             テスト用の設定を行うという作業が各テストの最初に発生します。
             PHPUnit にはそのための機能が既に用意されています。
-            <ulink
-                url="http://www.phpunit.de/manual/3.4/en/database.html">
-                PHPUnit のドキュメントを参照ください</ulink>。
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.phpunit.de/manual/3.4/en/database.html">
+                PHPUnit のドキュメントを参照ください</link>。
             テスト時と実運用時には別のデータベースを使用することを推奨します。
             また、特に (ファイルあるいはインメモリ形式の) SQLite
             を使うことを推奨します。どちらも別のサーバを必要とせず、
             大半の <acronym>SQL</acronym> 構文を使用できます。
         </para>
     </example>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

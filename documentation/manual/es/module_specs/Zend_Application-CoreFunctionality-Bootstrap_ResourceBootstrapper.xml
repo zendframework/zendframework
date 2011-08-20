@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.application.core-functionality.bootstrap-resourcebootstrapper">
-    <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.core-functionality.bootstrap-resourcebootstrapper"><info><title>Zend_Application_Bootstrap_ResourceBootstrapper</title></info>
+    
 
     <para>
         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
@@ -23,8 +23,8 @@
         Los siguientes métodos conforman la definición de la interfaz.
    </para>
 
-    <table id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table">
-        <title>Zend_Application_Bootstrap_ResourceBootstrapper Interface</title>
+    <table xml:id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table"><info><title>Zend_Application_Bootstrap_ResourceBootstrapper Interface</title></info>
+        
         <tgroup cols="4">
             <thead>
                 <row>
@@ -223,4 +223,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

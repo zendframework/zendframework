@@ -76,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given, value should be a string" => "Ongeldig type opgegeven, waarde moet een string zijn",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' is geen geldig e-mail adres in het basis formaat lokaal-gedeelte@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' is geen geldige hostnaam voor e-mail adres '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' is geen geldig e-mail adres in het basis formaat lokaal-gedeelte@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' is geen geldige hostnaam voor e-mail adres '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' lijkt geen geldig MX record te hebben voor e-mail adres '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network." => "'%hostname%' bevindt zich niet in een routeerbaar netwerk segment. Het e-mail adres '%value%' zou niet naar mogen worden verwezen vanaf een publiek netwerk.",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' kan niet worden gematched met het dot-atom formaat",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' kan niet worden gematched met het quoted-string formaat",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' is geen geldig lokaal gedeelte voor e-mail adres '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' is geen geldig lokaal gedeelte voor e-mail adres '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' overschrijdt de toegestane lengte",
 
     // Zend_Validate_File_Count
@@ -223,7 +223,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given, value should be string or integer" => "Ongeldig type opgegeven, waarde moet een string of integer zijn",
-    "'%value%' is no valid ISBN number" => "'%value%' is geen geldig ISBN nummer",
+    "'%value%' is not a valid ISBN number" => "'%value%' is geen geldig ISBN nummer",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' is niet minder dan '%max%'",
@@ -242,19 +242,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Er is een interne fout opgetreden tijdens het gebruik van het patroon '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' is geen geldige sitemap changefreq",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' is geen geldige sitemap changefreq",
     "Invalid type given, the value should be a string" => "Ongeldig type opgegeven, waarde dient een string te zijn",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' is geen geldige sitemap lastmod",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' is geen geldige sitemap lastmod",
     "Invalid type given, the value should be a string" => "Ongeldig type opgegeven, waarde dient een string te zijn",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' is geen geldige sitemap locatie",
+    "'%value%' is not a valid sitemap location" => "'%value%' is geen geldige sitemap locatie",
     "Invalid type given, the value should be a string" => "Ongeldig type opgegeven, waarde dient een string te zijn",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' is geen geldige sitemap prioriteit",
+    "'%value%' is not a valid sitemap priority" => "'%value%' is geen geldige sitemap prioriteit",
     "Invalid type given, the value should be a integer, a float or a numeric string" => "Ongeldig type opgegeven, waarde dient een integer, float of een numerieke string te zijn",
 
     // Zend_Validate_StringLength

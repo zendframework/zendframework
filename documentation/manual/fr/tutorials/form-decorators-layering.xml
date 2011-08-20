@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20649 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.layering">
-    <title>Chainer les décorateurs</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.layering"><info><title>Chainer les décorateurs</title></info>
+    
 
     <para>
         Si vous avez bien suivi <link linkend="learning.form.decorators.simplest">la section
@@ -20,20 +18,20 @@
     </para>
 
     <para>
-        Pour la plupart des éléments, les décorateurs suivants sont chargés par défaut&#160;:
+        Pour la plupart des éléments, les décorateurs suivants sont chargés par défaut :
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <classname>ViewHelper</classname>&#160;: utilise une aide de vue pour rendre
+                <classname>ViewHelper</classname> : utilise une aide de vue pour rendre
                 l'élément balise de formulaire à proprement parlé.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Errors</classname>&#160;: utilise l'aide de vue
+                <classname>Errors</classname> : utilise l'aide de vue
                 <classname>FormErrors</classname> pour afficher les erreurs de validation
                 éventuelles.
             </para>
@@ -41,7 +39,7 @@
 
         <listitem>
             <para>
-                <classname>Description</classname>&#160;: utilise l'aide de vue
+                <classname>Description</classname> : utilise l'aide de vue
                 <classname>FormNote</classname> afin de rendre la description éventuelle de
                 l'élément.
             </para>
@@ -49,14 +47,14 @@
 
         <listitem>
             <para>
-                <classname>HtmlTag</classname>&#160;: encapsule les trois objets ci-dessus
+                <classname>HtmlTag</classname> : encapsule les trois objets ci-dessus
                 dans un tag <code>&lt;dd&gt;</code>.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Label</classname>&#160;: rend l'intitulé de l'élément en utilisant
+                <classname>Label</classname> : rend l'intitulé de l'élément en utilisant
                 l'aide de vue <classname>FormLabel</classname> (et en encapsulant le tout
                 dans un tag <code>&lt;dt&gt;</code>).
             </para>
@@ -72,7 +70,7 @@
     </para>
 
     <para>
-        Cet argument <varname>$content</varname> vient de là aussi&#160;: chaque décorateur
+        Cet argument <varname>$content</varname> vient de là aussi : chaque décorateur
         travaille avec sa méthode <methodname>render()</methodname> sur un contenu (généralement
         généré par le décorateur immédiatement précédent dans la pile globale) et embellit ce
         contenu en lui rajoutant ou en lui faisant précéder des informations. Il peut aussi
@@ -85,8 +83,7 @@
     </para>
 
     <para>
-        Voyons voir un exemple, le même que celui<link
-            linkend="learning.form.decorators.simplest">de la section précédente</link>&#160;:
+        Voyons voir un exemple, le même que celui<link linkend="learning.form.decorators.simplest">de la section précédente</link> :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -147,13 +144,13 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
     <para>
-        Ok, ca semble bon mais il y a un problème&#160;: le dernier décorateur va l'emporter. Vous
+        Ok, ca semble bon mais il y a un problème : le dernier décorateur va l'emporter. Vous
         allez vous retrouver avec comme seul rendu, celui du dernier décorateur.
     </para>
 
     <para>
         Pour faire fonctionner le tout comme il se doit, concaténez simplement le contenu précédent
-        <varname>$content</varname> avec le contenu généré&#160;:
+        <varname>$content</varname> avec le contenu généré :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -162,10 +159,10 @@ return $content . $markup;
 
     <para>
         Le problème avec cette approche est que vous ne pouvez pas choisir où se place le contenu
-        du décorateur en question. Heureusement, un mécanisme standard existe&#160;;
+        du décorateur en question. Heureusement, un mécanisme standard existe ;
         <classname>Zend_Form_Decorator_Abstract</classname> possède le concept de place et définit
         des constantes pour le régler. Aussi, il permet de préciser un séparateur à placer entre
-        les 2. Voyons celà&#160;:
+        les 2. Voyons celà :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -225,7 +222,7 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
     </para>
 
     <para>
-        Créons dès lors un élément de formulaire qui va utiliser tout celà&#160;:
+        Créons dès lors un élément de formulaire qui va utiliser tout celà :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -244,24 +241,24 @@ $element = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
     <para>
-        Comment ça fonctionne&#160;? et bien nous appelons <methodname>render()</methodname>,
+        Comment ça fonctionne ? et bien nous appelons <methodname>render()</methodname>,
         l'élément va alors commencer une itération sur tous ses décorateurs, en appelant
         <methodname>render()</methodname> sur chacun. Il va passer une chaîne vide comme contenu
         pour le premier décorateur, et le rendu de chaque décorateur va servir de contenu pour
-        le suivant, ainsi de suite&#160;:
+        le suivant, ainsi de suite :
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Contenu initial&#160;: chaîne vide: ''.
+                Contenu initial : chaîne vide: ''.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 Chaîne vide ('') est passée au décorateur <classname>SimpleInput</classname>, qui
-                génère un tag de formulaire de type input qu'il ajoute à la chaîne vide&#160;:
+                génère un tag de formulaire de type input qu'il ajoute à la chaîne vide :
                 <emphasis>&lt;input id="bar-foo" name="bar[foo]" type="text"
                     value="test"/&gt;</emphasis>.
             </para>
@@ -272,17 +269,17 @@ $element = new Zend_Form_Element('foo', array(
                 Ce contenu généré est alors passé comme contenu original pour le décorateur
                 <classname>SimpleLabel</classname> qui génère un libellé et le place avant le
                 contenu original avec comme séparateur <constant>PHP_EOL</constant>, ce qui
-                donne&#160;: <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo"
+                donne : <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo"
                     name="bar[foo]" type="text" value="test"/&gt;</emphasis>.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Mais attendez une minute&#160;! Et si nous voulions que le libellé soit rendu après le tag
-        de formulaire pour une raison quelconque&#160;? Vous souvenez-vous de l'option
-        "placement"&#160;? Vous pouvez la préciser comme option de décorateur, et le plus simple
-        est alors de la passer à la création de l'élément&#160;:
+        Mais attendez une minute ! Et si nous voulions que le libellé soit rendu après le tag
+        de formulaire pour une raison quelconque ? Vous souvenez-vous de l'option
+        "placement" ? Vous pouvez la préciser comme option de décorateur, et le plus simple
+        est alors de la passer à la création de l'élément :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -306,18 +303,18 @@ $element = new Zend_Form_Element('foo', array(
     </para>
 
     <para>
-        Le code ci-dessus propose un rendu&#160;: <emphasis>&lt;input id="bar-foo" name="bar[foo]"
+        Le code ci-dessus propose un rendu : <emphasis>&lt;input id="bar-foo" name="bar[foo]"
             type="text" value="test"/&gt;\n&lt;label for="bar-foo"&gt;</emphasis>.
     </para>
 
     <para>
         Grâce à cette technique, vous pouvez avoir plusieurs décorateurs dont chacun s'occupe
-        de rendre une petite partie d'un élément&#160;; et c'est en utilisant plusieurs décorateurs
-        et en les chaînant correctement que vous obtiendrez un rendu complet&#160;: l'oignon final.
+        de rendre une petite partie d'un élément ; et c'est en utilisant plusieurs décorateurs
+        et en les chaînant correctement que vous obtiendrez un rendu complet : l'oignon final.
     </para>
 
     <para>
-        Avantages et inconvénients d'une telle technique, commençons par les inconvénients&#160;:
+        Avantages et inconvénients d'une telle technique, commençons par les inconvénients :
     </para>
 
     <itemizedlist>
@@ -338,7 +335,7 @@ $element = new Zend_Form_Element('foo', array(
     </itemizedlist>
 
     <para>
-        Les avantages sont&#160;:
+        Les avantages sont :
     </para>
 
     <itemizedlist>
@@ -364,4 +361,4 @@ $element = new Zend_Form_Element('foo', array(
         indépendante, a version 1.7 a ajouté des méthodes flexibles rendant les formulaires
         ressemblant au style Rail. Nous allons nous pencher sur ce fait dans la section suivante.
     </para>
-</sect1>
+</section>

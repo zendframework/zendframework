@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22596 -->
-<sect2 id="zend.application.available-resources.frontcontroller">
-    <title>Zend_Application_Resource_Frontcontroller</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.frontcontroller"><info><title>Zend_Application_Resource_Frontcontroller</title></info>
+    
 
     <para>
         おそらく、あなたが<classname>Zend_Application</classname>でロードする
@@ -109,8 +107,8 @@
         フロントコントローラ・パラメータとして登録されます。
     </para>
 
-    <example id="zend.application.available-resources.frontcontroller.configExample">
-        <title>フロントコントローラ・リソース構成サンプル</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.configExample"><info><title>フロントコントローラ・リソース構成サンプル</title></info>
+        
 
         <para>
             下記は、フロントコントローラ・リソースを設定する方法を示す<acronym>INI</acronym>スニペット・サンプルです。
@@ -138,8 +136,8 @@ resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.frontcontroller.propertyExample">
-        <title>ブートストラップでフロントコントローラを取得</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.propertyExample"><info><title>ブートストラップでフロントコントローラを取得</title></info>
+        
 
         <para>
             一旦フロントコントローラ・リソースが初期化されたら、
@@ -152,4 +150,4 @@ $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>
     </example>
-</sect2>
+</section>

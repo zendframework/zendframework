@@ -52,7 +52,7 @@ abstract class AbstractClient implements RegistryEnabled
     protected $_isInitialized = false;
 
     /**
-     * @var \Zend\Log\Logger
+     * @var Log\Logger
      */
     protected $_debugLogger = null;
 

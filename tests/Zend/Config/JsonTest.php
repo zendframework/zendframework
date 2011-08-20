@@ -173,7 +173,6 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
     public function testCanLoadConfigWithNoSections()
     {
         $config = new JsonConfig($this->_iniFileNoSectionsConfig);

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.create-model">
-    <title>Create a Model and Database Table</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-model"><info><title>Create a Model and Database Table</title></info>
+    
 
     <para>
         Before we get started, let's consider something: where will these classes live, and how will
@@ -369,8 +368,8 @@ Data Loaded.
     </para>
 
     <para>
-        We'll use a <ulink url="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
-            Gateway</ulink> to connect to our data source; <classname>Zend_Db_Table</classname>
+        We'll use a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
+            Gateway</link> to connect to our data source; <classname>Zend_Db_Table</classname>
         provides this functionality. To get started, lets create a
         <classname>Zend_Db_Table</classname>-based table class. Just as we've done for layouts and
         the database adapter, we can use the <command>zf</command> tool to assist, using the command
@@ -417,8 +416,8 @@ class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
     </para>
 
     <para>
-        Now let's create a <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
-            Mapper</ulink>. A <emphasis>Data Mapper</emphasis> maps a domain object to the database.
+        Now let's create a <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
+            Mapper</link>. A <emphasis>Data Mapper</emphasis> maps a domain object to the database.
         In our case, it will map our model, <classname>Application_Model_Guestbook</classname>, to
         our data source, <classname>Application_Model_DbTable_Guestbook</classname>. A typical
         <acronym>API</acronym> for a data mapper is as follows:
@@ -712,8 +711,8 @@ Guestbook Entries: <br />
 </dl>
 ]]></programlisting>
 
-    <note>
-        <title>Checkpoint</title>
+    <note><info><title>Checkpoint</title></info>
+        
 
         <para>
             Now browse to "http://localhost/guestbook". You should see the following in your
@@ -721,13 +720,12 @@ Guestbook Entries: <br />
         </para>
 
         <para>
-            <inlinegraphic width="525" scale="100" align="center" valign="middle"
-                fileref="figures/learning.quickstart.create-model.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata width="525" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.create-model.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
     </note>
 
-    <note>
-        <title>Using the data loader script</title>
+    <note><info><title>Using the data loader script</title></info>
+        
 
         <para>
             The data loader script introduced in this section
@@ -753,4 +751,4 @@ Usage: load.sqlite.php [ options ]
             you choose for your application when deploying.
         </para>
     </note>
-</sect1>
+</section>

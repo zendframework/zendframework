@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17942 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.test.phpunit.db" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_Test_PHPUnit_Db</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.db"><info><title>Zend_Test_PHPUnit_Db</title></info>
+    
 
     <para>
         Die Kopplung von Datenzugriff und dem Domain Modell benötigt oft die Verwendung einer
@@ -40,7 +40,7 @@
         <acronym>API</acronym> Methoden verwendet wird.
     </para>
 
-    <xi:include href="Zend_Test-PHPUnit-Db-Quickstart.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Db-Testing.xml" />
-    <xi:include href="Zend_Test-PHPUnit-Db-Adapter.xml" />
-</sect1>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Db-Quickstart.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Db-Testing.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Test-PHPUnit-Db-Adapter.xml"/>
+</section>

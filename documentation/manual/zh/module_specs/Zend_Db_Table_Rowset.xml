@@ -1,10 +1,11 @@
-<sect1 id="zend.db.tablerowset">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.tablerowset"><info><title>Zend_Db_Table_Rowset</title></info>
 
-    <title>Zend_Db_Table_Rowset</title>
+    
 
-    <sect2 id="zend.db.table.rowset.introduction">
+    <section xml:id="zend.db.table.rowset.introduction"><info><title>简介</title></info>
 
-        <title>简介</title>
+        
 
         <para>
             Zend_Db_Table_Rowset是 Zend_Db_Table_Row对象集合的迭代器.通常来说,你不可以自己实例化Zend_Db_Table_Rowset,
@@ -12,11 +13,11 @@
             结果数据返回过来.接下来就可以遍历Zend_Db_Table_Row对象集合并进行修改.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.fetch">
+    <section xml:id="zend.db.table.rowset.fetch"><info><title>取回结果集</title></info>
 
-        <title>取回结果集</title>
+        
 
         <para>
             首先,需要实例化一个Zend_Db_Table类.
@@ -41,8 +42,8 @@ Zend_Db_Table::setDefaultAdapter($db);
 // 连接数据库表
 class RoundTable extends Zend_Db_Table {}
 $table = new RoundTable();
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             接下来,可以使用Zend_Db_Table::find()方法和多个键值,或者使用Zend_Db_Table::fetchAll()方法对数据库进行查询,
@@ -56,14 +57,14 @@ $rowset = $table->fetchAll();
 //
 // $rowset现在是一个Zend_Db_Table_Rowset对象,该对象中每条记录就是一个Zend_Db_Table_Row对象
 //
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.db.table.rowset.iterate">
+    <section xml:id="zend.db.table.rowset.iterate"><info><title>遍历结果集</title></info>
 
-        <title>遍历结果集</title>
+        
 
         <para>
             Zend_Db_Table_Rowset实现了简单程序设计语言的迭代器接口,也就是说,可以对Zend_Db_Table_Rowset
@@ -94,12 +95,9 @@ foreach ($rowset as $row) {
     // 保存新记录.
     $row->save();
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

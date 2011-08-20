@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20794 -->
-<sect3 id="zend.view.helpers.initial.partial">
-    <title>Partial ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.partial"><info><title>Partial ヘルパー</title></info>
+    
 
     <para>
         <classname>Partial</classname> ビューヘルパーは、
@@ -18,8 +16,8 @@
         その各要素に対してレンダリングを行うものです。
     </para>
 
-    <note>
-        <title>PartialLoop カウンタ</title>
+    <note><info><title>PartialLoop カウンタ</title></info>
+        
         <para>
             <classname>PartialLoop</classname> ビューヘルパーは、変数を
             <emphasis>partialCounter</emphasis> というビューに代入します。
@@ -29,8 +27,8 @@
 
     </note>
 
-    <example id="zend.view.helpers.initial.partial.usage">
-        <title>Partial の基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.partial.usage"><info><title>Partial の基本的な使用法</title></info>
+        
 
         <para>
             partial の基本的な使用法は、
@@ -68,8 +66,8 @@
 ]]></programlisting>
 
     </example>
-        <note>
-            <title>モデルは何?</title>
+        <note><info><title>モデルは何?</title></info>
+            
 
             <para>
                 <classname>Partial</classname> ビューヘルパーが使用するモデルは、
@@ -127,8 +125,8 @@ $view->partialLoop()->setObjectKey('model');
             </para>
         </note>
 
-    <example id="zend.view.helpers.initial.partial.partialloop">
-        <title>PartialLoop による反復処理可能なモデルのレンダリング</title>
+    <example xml:id="zend.view.helpers.initial.partial.partialloop"><info><title>PartialLoop による反復処理可能なモデルのレンダリング</title></info>
+        
 
         <para>
             一般に、ループ内で partial
@@ -200,8 +198,8 @@ $model = array(
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.partial.modules">
-        <title>他のモジュールの Partial のレンダリング</title>
+    <example xml:id="zend.view.helpers.initial.partial.modules"><info><title>他のモジュールの Partial のレンダリング</title></info>
+        
 
         <para>
             時には partial が別のモジュールに存在することもあるでしょう。
@@ -225,7 +223,4 @@ $model = array(
             再利用可能な partial は、共有のビュースクリプトのパスに配置することをおすすめします。
         </para>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

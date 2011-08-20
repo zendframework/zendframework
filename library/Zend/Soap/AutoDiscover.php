@@ -30,12 +30,6 @@ use Zend\Uri,
 /**
  * \Zend\Soap\AutoDiscover
  *
- * @uses       \Zend\Server\AbstractServer
- * @uses       \Zend\Server\Server
- * @uses       \Zend\Server\Reflection
- * @uses       \Zend\Soap\AutoDiscover\Exception
- * @uses       \Zend\Soap\Wsdl
- * @uses       \Zend\Uri\Uri
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage AutoDiscover
@@ -88,13 +82,13 @@ class AutoDiscover implements \Zend\Server\Server
      *
      * @var string
      */
-    protected $_wsdlClass = '\Zend\Soap\Wsdl';
+    protected $_wsdlClass = 'Zend\Soap\Wsdl';
 
     /**
      * Constructor
      *
      * @param boolean|string|\Zend\Soap\Wsdl\Strategy $strategy
-     * @param string|\Zend\Uri\Uri $uri
+     * @param string|Uri\Uri $uri
      * @param string $wsdlClass
      */
     public function __construct($strategy = true, $uri=null, $wsdlClass=null)
@@ -115,7 +109,7 @@ class AutoDiscover implements \Zend\Server\Server
      * Set the location at which the WSDL file will be availabe.
      *
      * @throws \Zend\Soap\AutoDiscover\Exception
-     * @param  \Zend\Uri\Uri|string $uri
+     * @param  Uri\Uri|string $uri
      * @return \Zend\Soap\AutoDiscover
      */
     public function setUri($uri)
@@ -138,7 +132,7 @@ class AutoDiscover implements \Zend\Server\Server
     /**
      * Return the current Uri that the SOAP WSDL Service will be located at.
      *
-     * @return \Zend\Uri\Uri
+     * @return Uri\Uri
      */
     public function getUri()
     {
@@ -148,7 +142,7 @@ class AutoDiscover implements \Zend\Server\Server
             $schema     = $this->getSchema();
             $host       = $this->getHostName();
             $scriptName = $this->getRequestUriWithoutParameters();
-            $uri = new Uri\Url($schema . '://' . $host . $scriptName);
+            $uri = Uri\UriFactory::factory($schema . '://' . $host . $scriptName);
             $this->setUri($uri);
         }
         return $uri;

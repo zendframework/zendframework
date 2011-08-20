@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<sect1 id="zend.search.lucene.query-language">
-    <title>クエリ言語</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.query-language"><info><title>クエリ言語</title></info>
+    
 
     <para>
         Java Lucene および <classname>Zend_Search_Lucene</classname> では、非常に強力なクエリ言語を使用できます。
@@ -15,12 +13,12 @@
 
     <para>
         Java Lucene のクエリ言語の文法についての完全な文書は
-        <ulink url="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">ここ</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">ここ</link>
         にあります。
     </para>
 
-    <sect2 id="zend.search.lucene.query-language.terms">
-        <title>用語</title>
+    <section xml:id="zend.search.lucene.query-language.terms"><info><title>用語</title></info>
+        
 
         <para>
             クエリは、単語と演算子から成り立ちます。単語には三種類の形式があります。
@@ -40,10 +38,10 @@
             複数の単語を論理演算子で組み合わせることで、より複雑なクエリを作成できます
             (以下を参照ください)。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.fields">
-        <title>フィールド</title>
+    <section xml:id="zend.search.lucene.query-language.fields"><info><title>フィールド</title></info>
+        
 
         <para>
             Lucene は、フィールド指定したデータをサポートしています。
@@ -104,10 +102,10 @@ title:Do it right
             <constant>NULL</constant> に設定されている場合は、"it" や "right"
             はすべてのフィールドから探します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.wildcard">
-        <title>ワイルドカード</title>
+    <section xml:id="zend.search.lucene.query-language.wildcard"><info><title>ワイルドカード</title></info>
+        
         <para>
             Lucene は、単一の文字あるいは複数の文字を表すワイルドカードをサポートしています
             これは、単語検索でのみ使用可能です (フレーズクエリでは使用できません)。
@@ -162,10 +160,10 @@ test*
             <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code>
             メソッドで変更できます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.modifiers">
-        <title>単語の修正子</title>
+    <section xml:id="zend.search.lucene.query-language.modifiers"><info><title>単語の修正子</title></info>
+        
 
         <para>
             Lucene は、クエリの単語を修飾して幅広い検索オプションを指定することをサポートしています。
@@ -174,10 +172,10 @@ test*
             "~" 修正子を使用すると、
             フレーズに対する近接検索や個別の単語に対するあいまい検索が可能となります。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.range">
-        <title>範囲検索</title>
+    <section xml:id="zend.search.lucene.query-language.range"><info><title>範囲検索</title></info>
+        
 
         <para>
             範囲検索は、フィールドの値の下限と上限を指定して
@@ -207,10 +205,10 @@ title:{Aida TO Carmen}
 {Aida TO Carmen}
 ]]></programlisting>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.fuzzy">
-        <title>あいまい検索</title>
+    <section xml:id="zend.search.lucene.query-language.fuzzy"><info><title>あいまい検索</title></info>
+        
         <para>
             <classname>Zend_Search_Lucene</classname> は、Java Lucene と同様にあいまい検索をサポートします。
             これは、レーベンシュタイン距離のアルゴリズムにもとづくものです。
@@ -235,10 +233,10 @@ roam~0.8
 
             このパラメータを省略した場合のデフォルトは 0.5 です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.matched-terms-limitations">
-        <title>マッチする単語の制限</title>
+    <section xml:id="zend.search.lucene.query-language.matched-terms-limitations"><info><title>マッチする単語の制限</title></info>
+        
 
         <para>
             ワイルドカード検索や範囲検索、あいまい検索は、マッチする単語が多くなりすぎる可能性があります。
@@ -254,10 +252,10 @@ roam~0.8
         <para>
             デフォルトのマッチ数の制限は、クエリ単位で 1024 です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.proximity-search">
-        <title>近接検索</title>
+    <section xml:id="zend.search.lucene.query-language.proximity-search"><info><title>近接検索</title></info>
+        
 
         <para>
             Lucene は、複数の単語が指定した範囲内にあらわれる状態の検索をサポートしています。
@@ -268,10 +266,10 @@ roam~0.8
 ]]></programlisting>
             とします。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.boosting">
-        <title>単語の強調</title>
+    <section xml:id="zend.search.lucene.query-language.boosting"><info><title>単語の強調</title></info>
+        
 
         <para>
             Java Lucene および <classname>Zend_Search_Lucene</classname> は、
@@ -299,10 +297,10 @@ PHP^4 framework
             のようになります。デフォルトの強調度は 1 です。強調度には正の数値を指定しますが、
             1 より小さくする (たとえば 0.2 など) ことも可能です。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.boolean">
-        <title>論理演算子</title>
+    <section xml:id="zend.search.lucene.query-language.boolean"><info><title>論理演算子</title></info>
+        
 
         <para>
             論理演算子によって、複数の単語を組み合わせることができます。
@@ -322,8 +320,8 @@ PHP^4 framework
             より高くなります。これは Java Lucene の挙動とは異なります。
         </para>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.and">
-            <title>AND</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.and"><info><title>AND</title></info>
+            
             <para>
                 AND 演算子の意味は、"AND グループ"
                 のすべての単語がドキュメントにマッチしなければならないということです。
@@ -335,10 +333,10 @@ PHP^4 framework
 ]]></programlisting>
                 を使用します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.or">
-            <title>OR</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.or"><info><title>OR</title></info>
+            
             <para>
                 OR 演算子は、クエリをいくつかのオプションに分割します。
             </para>
@@ -349,10 +347,10 @@ PHP^4 framework
 ]]></programlisting>
                 を使用します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.not">
-            <title>NOT</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.not"><info><title>NOT</title></info>
+            
             <para>
                 NOT 演算子は、NOT の後に続く単語を含むドキュメントを除外します。
                 しかし "AND グループ" が NOT 演算子つきの単語しか含まない場合は、
@@ -365,17 +363,17 @@ PHP^4 framework
 ]]></programlisting>
                 を使用します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.other-form">
-            <title>&amp;&amp;、|| および ! 演算子</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.other-form"><info><title>&amp;&amp;、|| および ! 演算子</title></info>
+            
             <para>
                 &amp;&amp;、|| および ! は、それぞれ AND、OR および NOT 演算子の代わりに使用します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.plus">
-            <title>+</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.plus"><info><title>+</title></info>
+            
             <para>
                 "+" 演算子 (必須演算子) は、
                 "+" 記号の後の単語が必ずドキュメントにマッチしなければならないことを意味します。
@@ -387,10 +385,10 @@ PHP^4 framework
 ]]></programlisting>
                 を使用します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.minus">
-            <title>-</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.minus"><info><title>-</title></info>
+            
             <para>
                 "-" 演算子 (禁止演算子) は、
                 "-" 記号の後の単語を含むドキュメントを検索結果から除外します。
@@ -402,10 +400,10 @@ PHP^4 framework
 ]]></programlisting>
                 を使用します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.search.lucene.query-language.boolean.no-operator">
-            <title>演算子なし</title>
+        <section xml:id="zend.search.lucene.query-language.boolean.no-operator"><info><title>演算子なし</title></info>
+            
             <para>
                 演算子を使用しなかった場合は、
                 その挙動は "デフォルトの boolean 演算子" として定義されます。
@@ -436,11 +434,11 @@ PHP^4 framework
                 <classname>Zend_Search_Lucene_Search_QueryParser::B_AND</classname> および
                 <classname>Zend_Search_Lucene_Search_QueryParser::B_OR</classname> です。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.grouping">
-        <title>グループ化</title>
+    <section xml:id="zend.search.lucene.query-language.grouping"><info><title>グループ化</title></info>
+        
 
         <para>
             Java Lucene および <classname>Zend_Search_Lucene</classname> では、
@@ -451,10 +449,10 @@ PHP^4 framework
 ]]></programlisting>
             <classname>Zend_Search_Lucene</classname> は、あらゆるレベルのサブクエリをサポートしています。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.field-grouping">
-        <title>フィールドのグループ化</title>
+    <section xml:id="zend.search.lucene.query-language.field-grouping"><info><title>フィールドのグループ化</title></info>
+        
 
         <para>
             Lucene では、括弧を使用して複数の条件をひとつのフィールドに適用できます。
@@ -466,10 +464,10 @@ title:(+return +"pink panther")
 ]]></programlisting>
             を使用します。Zend_Search_Lucene は、あらゆるレベルのサブクエリをサポートしています。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.query-language.escaping">
-        <title>特殊文字のエスケープ</title>
+    <section xml:id="zend.search.lucene.query-language.escaping"><info><title>特殊文字のエスケープ</title></info>
+        
 
         <para>
             Lucene は、クエリの文法に含まれる特殊文字のエスケープをサポートしています。
@@ -489,6 +487,6 @@ title:(+return +"pink panther")
 ]]></programlisting>
             を使用します。
         </para>
-    </sect2>
+    </section>
 
-</sect1>
+</section>

@@ -301,9 +301,8 @@ class Barcode
         }
 
         $rendererName = self::getPluginLoader(self::RENDERER)->load($renderer);
-
         if (!class_exists($rendererName)) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Invalid renderer "%s"; does not resolve to a valid class', $renderer
             ));
         }

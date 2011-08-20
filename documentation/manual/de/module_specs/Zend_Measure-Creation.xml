@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22748 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.measure.creation">
-    <title>Erstellung einer Maßeinheit</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.creation"><info><title>Erstellung einer Maßeinheit</title></info>
+    
 
     <para>
         Bei der Erstellung einer Maßeinheit erwarten die <classname>Zend_Measure_*</classname>
@@ -15,19 +13,19 @@
         Parameter definiert werden.
     </para>
 
-    <sect2 id="zend.measure.creation.number">
-        <title>Eine Maßeinheit von einer Integer oder Floatzahl erstellen</title>
+    <section xml:id="zend.measure.creation.number"><info><title>Eine Maßeinheit von einer Integer oder Floatzahl erstellen</title></info>
+        
 
         <para>
             Zusätzlich zu Integerwerten können Floatwerte benutzt werden, aber
-            <ulink url="http://www.php.net/float">"einfache Dezimalbrüche wie 0.1 or 0.7 können
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/float">"einfache Dezimalbrüche wie 0.1 or 0.7 können
             nicht in Ihre binäre Entsprechung konvertiert werden ohne den Verlust von
-            Genauigkeit,"</ulink> was zeitweise zu erstaunlichen Ergebnissen führt. Genauso sollten
+            Genauigkeit,"</link> was zeitweise zu erstaunlichen Ergebnissen führt. Genauso sollten
             zwei Floatzahlen nicht auf Gleichheit geprüft werden.
         </para>
 
-        <example id="zend.measure.creation.number.example-1">
-            <title>Erstellung einer Maßeinheit durch Integer oder Floatwerte</title>
+        <example xml:id="zend.measure.creation.number.example-1"><info><title>Erstellung einer Maßeinheit durch Integer oder Floatwerte</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
@@ -41,16 +39,15 @@ echo $unit;
 // Ausgabe '1234.7 m' (Meter)
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.creation.string">
-        <title>Erstellen einer Maßeinheit aus Zeichenketten</title>
+    <section xml:id="zend.measure.creation.string"><info><title>Erstellen einer Maßeinheit aus Zeichenketten</title></info>
+        
 
         <para>
             Viele Maßeinheiten die als Eingabe einer Zend Framework Anwendung empfangen werden
             können nur als Zeichenketten den Klassen von <classname>Zend_Measure_*</classname>
-            übergeben werden, wie z.B. Zahlen die in <ulink
-                url="http://en.wikipedia.org/wiki/Roman_numerals">Römischer Schreibweise</ulink>
+            übergeben werden, wie z.B. Zahlen die in <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Roman_numerals">Römischer Schreibweise</link>
             geschrieben werden, oder extrem lange Binärwerte welche die Genauigkeit von
             <acronym>PHP</acronym>'s natürlichen Integer und Floattypen übersteigen würden. Da
             Integer auch als Zeichenketten geschrieben werden können sollten, sobald die Gefahr
@@ -58,12 +55,11 @@ echo $unit;
             Floatwerten besteht, stattdessen Zeichenketten verwendet werden.
             <classname>Zend_Measure_Number</classname> benutzt die BCMath Erweiterung um
             aussergewöhnliche Genauigkeit zu unterstützen, wie im gezeigen Beispiel, um die
-            Beschränkungen von vielen <acronym>PHP</acronym> Funktionen wie <ulink
-                url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink> zu umgehen.
+            Beschränkungen von vielen <acronym>PHP</acronym> Funktionen wie <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/bin2dec"><methodname>bin2dec()</methodname></link> zu umgehen.
         </para>
 
-        <example id="zend.measure.creation.string.example-1">
-            <title>Erstellung einer Maßeinheit durch Strings</title>
+        <example xml:id="zend.measure.creation.string.example-1"><info><title>Erstellung einer Maßeinheit durch Strings</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
@@ -72,10 +68,10 @@ $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
 echo $unit;
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.creation.localized">
-        <title>Maßeinheiten von lokalisierten Zeichenketten</title>
+    <section xml:id="zend.measure.creation.localized"><info><title>Maßeinheiten von lokalisierten Zeichenketten</title></info>
+        
 
         <para>
             Wenn eine Zeichenkette in lokalisierter Schreibweise eingegeben wurde, kann die richtige
@@ -88,8 +84,8 @@ echo $unit;
             Eingabe richtig zu interpretieren.
         </para>
 
-        <example id="zend.measure.creation.localized.example-1">
-            <title>Lokalisierte Zeichenketten</title>
+        <example xml:id="zend.measure.creation.localized.example-1"><info><title>Lokalisierte Zeichenketten</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -123,5 +119,5 @@ Zend_Registry::set('Zend_Locale', $locale);
 // Irgendwo in der eigenen Anwendung
 $length = new Zend_Measure_Length(Zend_Measure_Length::METER();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

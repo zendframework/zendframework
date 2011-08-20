@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="performance.database">
-    <title>Zend_Dbパフォーマンス</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Dbパフォーマンス</title></info>
+    
 
     <para>
         <classname>Zend_Db</classname>はデータベースを抽象化するレイヤーで、
@@ -13,9 +11,9 @@
         しばしばパフォーマンスのオーバーヘッドをもたらします。
     </para>
 
-    <sect2 id="performance.database.tableMetadata">
-        <title>テーブルのメタデータを取得する際にZend_Db_Tableによってもたらされる
-        オーバーヘッドをどのようにしたら減らせますか？</title>
+    <section xml:id="performance.database.tableMetadata"><info><title>テーブルのメタデータを取得する際にZend_Db_Tableによってもたらされる
+        オーバーヘッドをどのようにしたら減らせますか？</title></info>
+        
 
         <para>
             できる限り使い方を簡単に保つために、
@@ -30,8 +28,8 @@
             幸運なことにその状況を改善する技術があります。
         </para>
 
-        <sect3 id="performance.database.tableMetadata.cache">
-            <title>メタデータキャッシュの利用</title>
+        <section xml:id="performance.database.tableMetadata.cache"><info><title>メタデータキャッシュの利用</title></info>
+            
 
             <para>
                 <classname>Zend_Db_Table</classname>ではテーブルのメタデータをキャッシュする
@@ -44,26 +42,25 @@
                 <link linkend="zend.db.table.metadata.caching"><classname>Zend_Db_Table</classname>
                 のドキュメントにメタデータをキャッシュすることについて情報があります。</link>
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.database.tableMetadata.hardcoding">
-            <title>テーブル定義でメタデータをハードコーディングする</title>
+        <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>テーブル定義でメタデータをハードコーディングする</title></info>
+            
 
             <para>
-                1.7.0では、<classname>Zend_Db_Table</classname>は<link
-                    linkend="zend.db.table.metadata.caching.hardcoding">テーブルの定義でメタデータをハードコーディングすることをサポート</link>
+                1.7.0では、<classname>Zend_Db_Table</classname>は<link linkend="zend.db.table.metadata.caching.hardcoding">テーブルの定義でメタデータをハードコーディングすることをサポート</link>
                 することもします。
                 これは高度な使用例であり、テーブルのスキーマが変更されそうにないと知っているか、
                 または定義を最新状態に保ち続けられる時のみ利用されるべきでしょう。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.database.select">
-        <title>
+    <section xml:id="performance.database.select"><info><title>
             Zend_Db_Selectで生成されたSQLがインデックスにヒットしません。
             どのようにしたらより良く出来ますか？
-        </title>
+        </title></info>
+        
 
         <para>
             <classname>Zend_Db_Select</classname>は比較的その仕事が得意です。
@@ -71,8 +68,8 @@
             しばしばかなりの素人になりえます。
         </para>
 
-        <sect3 id="performance.database.select.writeyourown">
-            <title>自分で最適化したSQLを書く</title>
+        <section xml:id="performance.database.select.writeyourown"><info><title>自分で最適化したSQLを書く</title></info>
+            
 
             <para>
                 現実的な唯一の答えは自分で<acronym>SQL</acronym>を書くことです;
@@ -103,9 +100,6 @@ $sql = vsprintf(
     array_walk($values, array($adapter, 'quoteInto'))
 );
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

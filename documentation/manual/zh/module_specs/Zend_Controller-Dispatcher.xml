@@ -1,15 +1,16 @@
-<sect1 id="zend.controller.dispatcher">
-    <title>分发器</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.dispatcher"><info><title>分发器</title></info>
+    
 
-    <sect2 id="zend.controller.dispatcher.overview">
-        <title>概述</title>
+    <section xml:id="zend.controller.dispatcher.overview"><info><title>概述</title></info>
+        
 
         <para>
             分发是取得请求对象，提取其中的模块名，控制器名，动作名以及可选参数，然后实例化控制器并调用其中的动作的整过过程。如果其中的模块、控制器或者动作没能找到，将使用它们的默认值。<code>Zend_Controller_Dispatcher_Standard</code>指定每个控制器和动作的默认值为 <code>index</code>，模块的默认值为<code>default</code>，允许开发人通过<code>setDefaultController()</code>、<code>setDefaultAction()</code>和<code>setDefaultModule()</code>改变默认值设定。
         </para>
 
-        <note>
-            <title>缺省模块</title>
+        <note><info><title>缺省模块</title></info>
+            
 
             <para>
                 当创建模块程序，你可能也需要缺省模块的命名空间（缺省配置中，缺省模块<emphasis>没有</emphasis>命名空间）。从 1.5.0 开始，可以在前端控制器或你的派遣器里通过指定 <code>prefixDefaultModule</code>  为 true 来实现。
@@ -21,8 +22,8 @@ $front->setParam('prefixDefaultModule', true);
 
 // 在你的分发器中：
 $dispatcher->setParam('prefixDefaultModule', true);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 这允许你重定义一个已存在的模块为程序的缺省模块。
@@ -62,12 +63,12 @@ public function bazAction()
     // Foo_BarController::bazAction():
     $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
 }
-]]>
-        </programlisting>
-    </sect2>
 
-    <sect2 id="zend.controller.dispatcher.subclassing">
-        <title>子类化分发器</title>
+        ]]></programlisting>
+    </section>
+
+    <section xml:id="zend.controller.dispatcher.subclassing"><info><title>子类化分发器</title></info>
+        
 
         <para>
             <code>Zend_Controller_Front</code>首先调用路由器找到请求中的第一个动作，然后进入分发循环，调用分发器分发动作。
@@ -235,8 +236,8 @@ interface Zend_Controller_Dispatcher_Interface
      */
     public function getDefaultAction();
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
            不过大多数情况下，只需要简单地扩展抽象类<code>Zend_Controller_Dispatcher_Abstract</code>，其中已经定义好了上面的大部分方法。或者扩展<code>Zend_Controller_Dispatcher_Standard</code>类，基于标准分发器来修改功能。
@@ -245,8 +246,5 @@ interface Zend_Controller_Dispatcher_Interface
         <para>
             需要子类化分发器的可能原因包括：期望在动作控制器中使用不同的类和方法命名模式，或者期望使用不同的分发方式，比如分发到控制器目录下的动作文件，而不是控制器类的动作方法。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

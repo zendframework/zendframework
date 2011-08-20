@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.oauth.introduction.getting-started">
-    <title>Getting Started</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.oauth.introduction.getting-started"><info><title>Getting Started</title></info>
+    
 
     <para>
         With the OAuth protocol explained, let's show a simple example of it with
@@ -217,4 +216,4 @@ echo $result;
         Zend Framework service or other classes using <classname>Zend_Http_Client
         </classname> displacing the default client they would otherwise use.
     </para>
-</sect2>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Cache</classname> provides a generic way to cache any data.
@@ -22,8 +21,8 @@
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> and <emphasis>Class</emphasis>.
     </para>
 
-    <example id="zend.cache.introduction.example-1">
-        <title>Getting a Frontend with Zend_Cache::factory()</title>
+    <example xml:id="zend.cache.introduction.example-1"><info><title>Getting a Frontend with Zend_Cache::factory()</title></info>
+        
 
         <para>
             <methodname>Zend_Cache::factory()</methodname> instantiates correct objects and ties
@@ -49,8 +48,8 @@ $cache = Zend_Cache::factory('Core',
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Frontends and Backends Consisting of Multiple Words</title>
+    <note><info><title>Frontends and Backends Consisting of Multiple Words</title></info>
+        
 
         <para>
             Some frontends and backends are named using multiple words, such
@@ -60,8 +59,8 @@ $cache = Zend_Cache::factory('Core',
         </para>
     </note>
 
-    <example id="zend.cache.introduction.example-2">
-        <title>Caching a Database Query Result</title>
+    <example xml:id="zend.cache.introduction.example-2"><info><title>Caching a Database Query Result</title></info>
+        
 
         <para>
             Now that we have a frontend, we can cache any type of data (we turned on serialization).
@@ -95,8 +94,8 @@ print_r($result);
 ]]></programlisting>
     </example>
 
-    <example id="zend.cache.introduction.example-3">
-        <title>Caching Output with Zend_Cache Output Frontend</title>
+    <example xml:id="zend.cache.introduction.example-3"><info><title>Caching Output with Zend_Cache Output Frontend</title></info>
+        
 
         <para>
             We 'mark up' sections in which we want to cache output by adding some conditional logic,
@@ -157,7 +156,4 @@ echo 'This is never cached ('.time().').';
             place of the other.
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

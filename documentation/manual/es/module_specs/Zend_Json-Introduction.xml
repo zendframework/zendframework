@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20792 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.json.introduction">
-    <title>Introducción</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Introducción</title></info>
+    
     <para>
         <classname>Zend_Json</classname> ofrece métodos convenientes para la
         serialización desde <acronym>PHP</acronym> nativo a
             <acronym>JSON</acronym> y la decodificación <acronym>JSON</acronym>
         a <acronym>PHP</acronym> nativo. Para más información sobre
-            <acronym>JSON</acronym> , <ulink url="http://www.json.org/"> visite
+            <acronym>JSON</acronym> , <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/"> visite
             el sitio del proyecto <acronym>JSON</acronym>
-        </ulink> . </para>
+        </link> . </para>
     <para>
         <acronym>JSON</acronym> , JavaScript Object Notation, puede ser
         utilizado para intercambio de datos entre JavaScript y otros lenguajes.
@@ -33,4 +33,4 @@
         que facilita las técnicas de procesamiento de datos para aplicaciones
         específicas. </para>
 
-</sect1>
+</section>

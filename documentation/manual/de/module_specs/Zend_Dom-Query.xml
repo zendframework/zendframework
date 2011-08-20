@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21585 -->
-<!-- Reviewed: 21585 -->
-<sect1 id="zend.dom.query">
-    <title>Zend_Dom_Query</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dom.query"><info><title>Zend_Dom_Query</title></info>
+    
 
     <para>
         <classname>Zend_Dom_Query</classname> bietet einen Mechanismus für die Abfrage von
@@ -18,13 +16,13 @@
         Strukturen zu helfen. Diese Schreibweise sollte jedem, der Cascading Style Sheets entwickelt
         hat, bekannt sein, oder jedem, der Javascript Toolkits verwendet, die Funktionalität für das
         Auswählen von Knoten bei der Anpassung von <acronym>CSS</acronym> Selektoren anbieten
-        (<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's $$()</ulink> und
-        <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
-            dojo.query</ulink> sind beides Inspirationen für diese Komponente).
+        (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://prototypejs.org/api/utility/dollar-dollar">Prototype's $$()</link> und
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
+            dojo.query</link> sind beides Inspirationen für diese Komponente).
     </para>
 
-    <sect2 id="zend.dom.query.operation">
-        <title>Theorie der Anwendung</title>
+    <section xml:id="zend.dom.query.operation"><info><title>Theorie der Anwendung</title></info>
+        
 
         <para>
             Um <classname>Zend_Dom_Query</classname> zu verwenden muß ein
@@ -105,7 +103,7 @@
             <listitem>
                 <para>
                     <emphasis>Direkt abhängig</emphasis>: Verwende '&gt;' zwischen Selektoren um
-                    direkte Abhängigkeit auszudrücken. 'div > span' würde nur 'span' Elemente
+                    direkte Abhängigkeit auszudrücken. 'div &gt; span' würde nur 'span' Elemente
                     auswählen, die direkt von 'div' abhängig sind. Kann auch mit jedem Selektor
                     darüber verwendet werden.
                 </para>
@@ -169,18 +167,18 @@ foreach ($results as $result) {
             XPath Abfrage an diese Methode übergeben, und Sie wird ein
             <classname>Zend_Dom_Query_Result</classname> Objekt zurückgeben.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.dom.query.methods">
-        <title>Vorhandene Methoden</title>
+    <section xml:id="zend.dom.query.methods"><info><title>Vorhandene Methoden</title></info>
+        
 
         <para>
             Die <classname>Zend_Dom_Query</classname> Familie an Klassen enthält die folgenden
             Methoden.
         </para>
 
-        <sect3 id="zend.dom.query.methods.zenddomquery">
-            <title>Zend_Dom_Query</title>
+        <section xml:id="zend.dom.query.methods.zenddomquery"><info><title>Zend_Dom_Query</title></info>
+            
 
             <para>
                 Die folgenden Methoden sind in <classname>Zend_Dom_Query</classname> vorhanden:
@@ -246,10 +244,10 @@ foreach ($results as $result) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.dom.query.methods.zenddomqueryresult">
-            <title>Zend_Dom_Query_Result</title>
+        <section xml:id="zend.dom.query.methods.zenddomqueryresult"><info><title>Zend_Dom_Query_Result</title></info>
+            
 
             <para>
                 Wie vorher erwähnt, implementiert <classname>Zend_Dom_Query_Result</classname>
@@ -284,6 +282,6 @@ foreach ($results as $result) {
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

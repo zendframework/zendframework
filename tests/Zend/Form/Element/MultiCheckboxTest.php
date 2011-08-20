@@ -134,7 +134,7 @@ class MultiCheckboxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2830
+     * @group ZF-2830
      */
     public function testRenderingMulticheckboxCreatesCorrectArrayNotation()
     {
@@ -147,7 +147,7 @@ class MultiCheckboxTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2828
+     * @group ZF-2828
      */
     public function testCanPopulateCheckboxOptionsFromPostedData()
     {

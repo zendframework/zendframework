@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.multiple-emails">
-    <title>Sending Multiple Mails per SMTP Connection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.multiple-emails"><info><title>Sending Multiple Mails per SMTP Connection</title></info>
+    
 
     <para>
         By default, a single SMTP transport creates a single connection and
@@ -21,8 +20,8 @@
         <methodname>clearDefaultReplyTo</methodname>.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-1">
-        <title>Sending Multiple Mails per SMTP Connection</title>
+    <example xml:id="zend.mail.multiple-emails.example-1"><info><title>Sending Multiple Mails per SMTP Connection</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Create transport
@@ -59,8 +58,8 @@ Zend_Mail::clearDefaultReplyTo();
         transport's protocol object.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-2">
-        <title>Manually controlling the transport connection</title>
+    <example xml:id="zend.mail.multiple-emails.example-2"><info><title>Manually controlling the transport connection</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 // Create transport
@@ -91,7 +90,4 @@ $protocol->quit();
 $protocol->disconnect();
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

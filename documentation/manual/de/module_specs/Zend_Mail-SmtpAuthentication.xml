@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.smtp-authentication">
-    <title>SMTP Authentifizierung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-authentication"><info><title>SMTP Authentifizierung</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> unterstützt die Verwendung von SMTP Authentifizierung,
@@ -13,8 +11,8 @@
         Array erwarten.
     </para>
 
-    <example id="zend.mail.smtp-authentication.example-1">
-        <title>Authentifizierung innerhalb von Zend_Mail_Transport_Smtp einschalten</title>
+    <example xml:id="zend.mail.smtp-authentication.example-1"><info><title>Authentifizierung innerhalb von Zend_Mail_Transport_Smtp einschalten</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $config = array('auth' => 'login',
@@ -32,13 +30,13 @@ $mail->send($transport);
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Authentifizierungs Typen</title>
+    <note><info><title>Authentifizierungs Typen</title></info>
+        
 
         <para>
             Der Authentifizierungs Typ ist Groß-Kleinschreibungs unempfindlich enthält aber keine
-            Satzzeichen. Um z.B. CRAM-MD5 zu verwenden müsste 'auth' => 'crammd5' dem
+            Satzzeichen. Um z.B. CRAM-MD5 zu verwenden müsste 'auth' =&gt; 'crammd5' dem
             <classname>Zend_Mail_Transport_Smtp</classname> Konstruktor übergeben werden.
         </para>
     </note>
-</sect1>
+</section>

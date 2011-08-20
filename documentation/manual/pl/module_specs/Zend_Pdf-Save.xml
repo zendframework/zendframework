@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.save">
-    <title>Zapisywanie zmian w dokumencie PDF.</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title>Zapisywanie zmian w dokumencie PDF.</title></info>
+    
     <para>
     Dostępne są dwie metody, które zapewniają zapisywanie zmian w dokumencie PDF.
     Są to metody <code>Zend_Pdf::save()</code> oraz <code>Zend_Pdf::render()</code>.
@@ -18,8 +19,8 @@
     zwracany jest nowy segment pliku PDF.
     </para>
 
-    <example id="zend.pdf.save.example-1">
-        <title>Zapisywanie dokumentu PDF.</title>
+    <example xml:id="zend.pdf.save.example-1"><info><title>Zapisywanie dokumentu PDF.</title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Załaduj dokument PDF.
@@ -34,8 +35,8 @@ $pdf->save($newFileName);
 $pdfString = $pdf->render();
 
 ...
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-</sect1>
+</section>

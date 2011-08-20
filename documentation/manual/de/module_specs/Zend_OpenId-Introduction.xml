@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20843 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.openid.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_OpenId</classname> ist eine Zend Framework Komponente die eine einfache
@@ -10,8 +10,8 @@
         Providern bietet.
     </para>
 
-    <sect2 id="zend.openid.introduction.what">
-        <title>Was ist OpenID?</title>
+    <section xml:id="zend.openid.introduction.what"><info><title>Was ist OpenID?</title></info>
+        
 
         <para>
             OpenID ist ein Set von Protokollen für Benutzer-zentrierte digitale Identitäts Provider.
@@ -33,12 +33,12 @@
 
         <para>
             Für weitere Informationen über OpenId siehe die
-            <ulink url="http://www.openid.net/">offizielle OpenID Seite</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openid.net/">offizielle OpenID Seite</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.how">
-        <title>Wie funktioniert das ?</title>
+    <section xml:id="zend.openid.introduction.how"><info><title>Wie funktioniert das ?</title></info>
+        
 
         <para>
             Der Zweck der <classname>Zend_OpenId</classname> Komponente ist es das OpenID
@@ -47,8 +47,7 @@
         </para>
 
         <para>
-            <inlinegraphic align="center" fileref="figures/zend.openid.protocol.jpg" format="JPEG"
-                scale="100" valign="middle" width="559" />
+            <inlinemediaobject><imageobject><imagedata align="center" fileref="figures/zend.openid.protocol.jpg" format="JPEG" scale="100" valign="middle" width="559"/></imageobject></inlinemediaobject>
         </para>
 
         <orderedlist>
@@ -126,10 +125,10 @@
                 </para>
             </listitem>
         </orderedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.structure">
-        <title>Zend_OpenId Struktur</title>
+    <section xml:id="zend.openid.introduction.structure"><info><title>Zend_OpenId Struktur</title></info>
+        
 
         <para>
             <classname>Zend_OpenId</classname> besteht aus zwei Unterpaketen. Das erste ist
@@ -150,15 +149,15 @@
         <note>
             <para>
                 <classname>Zend_OpenId</classname> hat Vorteile davon wenn die
-                <ulink url="http://php.net/gmp">GMP Erweiterung</ulink> vorhanden ist. Es sollte
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gmp">GMP Erweiterung</link> vorhanden ist. Es sollte
                 Angedacht werden die GMP Erweiterung für eine verbesserte Performance einzuschalten
                 wenn <classname>Zend_OpenId</classname> verwendet wird.OpenID
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.introduction.standards">
-        <title>Unterstützte OpenId Standards</title>
+    <section xml:id="zend.openid.introduction.standards"><info><title>Unterstützte OpenId Standards</title></info>
+        
 
         <para>
             Die <classname>Zend_OpenId</classname> Komponente unterstützt die folgenden Standards:
@@ -181,5 +180,5 @@
                 <para>OpenID Einfache Registrierungs Erweiterung Version 1.1 Entwurf 1</para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

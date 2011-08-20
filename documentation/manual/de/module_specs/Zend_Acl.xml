@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: 20763 -->
-<sect1 id="zend.acl.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         <classname>Zend_Acl</classname> stellt eine Implementation von leichtgewichtigen und
@@ -44,8 +42,8 @@
         kontrollieren, wie Rollen den Zugriff auf Ressourcen eingeräumt bekommen.
     </para>
 
-    <sect2 id="zend.acl.introduction.resources">
-        <title>Ressourcen</title>
+    <section xml:id="zend.acl.introduction.resources"><info><title>Ressourcen</title></info>
+        
 
         <para>
             Das Erstellen einer Ressource ist in <classname>Zend_Acl</classname> sehr einfach.
@@ -82,10 +80,10 @@
             kann, die alle Rechte oder bestimmte Rechte von einer oder mehreren Ressourcen
             beeinflussen.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.roles">
-        <title>Rollen</title>
+    <section xml:id="zend.acl.introduction.roles"><info><title>Rollen</title></info>
+        
 
         <para>
             Wie bei den Ressourcen ist auch das Erstellen einer Rolle sehr einfach. Alle Rollen
@@ -112,8 +110,8 @@
             <classname>Zend_Acl</classname> sie auflöst.
         </para>
 
-        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Mehrfache Vererbung zwischen Rollen</title>
+        <example xml:id="zend.acl.introduction.roles.example.multiple_inheritance"><info><title>Mehrfache Vererbung zwischen Rollen</title></info>
+            
 
             <para>
                 Der folgende Code definiert drei Basisrollen - "guest", "member" und "admin" - von
@@ -176,10 +174,10 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 Autorisierungsabfrage passen.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.creating">
-        <title>Erstellen einer Zugriffskontrollliste</title>
+    <section xml:id="zend.acl.introduction.creating"><info><title>Erstellen einer Zugriffskontrollliste</title></info>
+        
 
         <para>
             Eine Zugriffskontrollliste (<acronym>ACL</acronym>) kann jeden gewünschten Satz von
@@ -201,10 +199,10 @@ $acl = new Zend_Acl();
                 durch jede Rolle.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.role_registry">
-        <title>Rollen registrieren</title>
+    <section xml:id="zend.acl.introduction.role_registry"><info><title>Rollen registrieren</title></info>
+        
 
         <para>
             <acronym>CMS</acronym> brauchen fast immer eine Hierarchie von Genehmigungen, um die
@@ -222,8 +220,8 @@ $acl = new Zend_Acl();
             ausgedrückt werden:
         </para>
 
-        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-            <title>Zugangsbeschränkung für ein Beispiel-CMS</title>
+        <table xml:id="zend.acl.introduction.role_registry.table.example_cms_access_controls"><info><title>Zugangsbeschränkung für ein Beispiel-CMS</title></info>
+            
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -291,10 +289,10 @@ $acl->addRole(new Zend_Acl_Role('editor'), 'staff');
 $acl->addRole(new Zend_Acl_Role('administrator'));
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.defining">
-        <title>Zugangsbeschränkung definieren</title>
+    <section xml:id="zend.acl.introduction.defining"><info><title>Zugangsbeschränkung definieren</title></info>
+        
 
         <para>
             Nun, da die <acronym>ACL</acronym> die relevanten Rollen enthält, können Regeln
@@ -351,10 +349,10 @@ $acl->allow('administrator');
             Die <constant>NULL</constant>-Werte in obigen <methodname>allow()</methodname>-Aufrufen
             werden verwendet, um anzugeben, dass diese Regeln für alle Ressourcen gelten.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.introduction.querying">
-        <title>Abfragen einer ACL</title>
+    <section xml:id="zend.acl.introduction.querying"><info><title>Abfragen einer ACL</title></info>
+        
 
         <para>
             Wir haben nun eine flexible <acronym>ACL</acronym>, die in der gesamten Anwendung
@@ -396,5 +394,5 @@ echo $acl->isAllowed('administrator', null, 'update') ?
      "allowed" : "denied";
 // erlaubt, weil Administrator alle Rechte haben
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

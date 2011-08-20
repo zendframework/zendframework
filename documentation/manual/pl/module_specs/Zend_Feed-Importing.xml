@@ -1,6 +1,7 @@
-<sect1 id="zend.feed.importing">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.importing"><info><title>Importowanie kanałów informacyjnych</title></info>
 
-    <title>Importowanie kanałów informacyjnych</title>
+    
 
     <para>
         <code>Zend_Feed</code> pozwala programistom bardzo łatwo odbierać wiadomości
@@ -10,8 +11,8 @@
 
     <programlisting role="php"><![CDATA[
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         Możesz także użyć <code>Zend_Feed</code> do pobrania zawartości kanału
@@ -24,8 +25,8 @@ $feedFromFile = Zend_Feed::importFile('feed.xml');
 
 // importowanie kanału z łańcucha znaków PHP
 $feedFromPHP = Zend_Feed::importString($feedString);
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         We wszystkich powyższych przykładach w razie powodzenia operacji zwracany
@@ -38,9 +39,9 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         gdy nie jest możliwe odczytanie kanału lub gdy dane są błędne.
     </para>
 
-    <sect2 id="zend.feed.importing.custom">
+    <section xml:id="zend.feed.importing.custom"><info><title>Własne kanały</title></info>
 
-        <title>Własne kanały</title>
+        
 
         <para>
             <code>Zend_Feed</code> pozwala programistom na bardzo łatwe
@@ -52,9 +53,9 @@ $feedFromPHP = Zend_Feed::importString($feedString);
             implementujące interfejs <code>Zend_Feed_Builder_Interface</code>.
         </para>
 
-        <sect3 id="zend.feed.importing.custom.importarray">
+        <section xml:id="zend.feed.importing.custom.importarray"><info><title>Importowanie własnej tablicy</title></info>
 
-            <title>Importowanie własnej tablicy</title>
+            
 
             <programlisting role="php"><![CDATA[
 // importowanie kanału z tablicy
@@ -66,8 +67,8 @@ $atomFeedFromArray = Zend_Feed::importArray($array, 'atom');
 
 // importowanie kanału rss z tablicy
 $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Format tablicy musi zgadzać się z taką strukturą:
@@ -175,43 +176,43 @@ array(
                                    )
                              )
        );
-]]>
-            </programlisting>
+
+            ]]></programlisting>
 
             <para>
                 Odnośniki:
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Specyfikacja RSS 2.0: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                            Specyfikacja RSS 2.0: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Specyfikacja Atom: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                            Specyfikacja Atom: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tools.ietf.org/html/rfc4287">RFC 4287</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Specyfikacja WFW: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
-                            Formed Web</ulink>
+                            Specyfikacja WFW: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</link>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             Specyfikacja iTunes:
-                            <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">Specyfikacja
-                            Techniczna iTunes</ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.apple.com/itunes/store/podcaststechspecs.html">Specyfikacja
+                            Techniczna iTunes</link>
                         </para>
                     </listitem>
                 </itemizedlist>
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.feed.importing.custom.importbuilder">
+        <section xml:id="zend.feed.importing.custom.importbuilder"><info><title>Importowanie własnego źródła danych</title></info>
 
-            <title>Importowanie własnego źródła danych</title>
+            
 
             <para>
                 Możesz utworzyć instancję Zend_Feed z dowolnego źródła danych
@@ -256,22 +257,22 @@ $atomFeedFromArray =
 // importowanie kanału rss z własnego źródła
 $rssFeedFromArray =
     Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
-]]>
-            </programlisting>
 
-        </sect3>
+            ]]></programlisting>
 
-        <sect3 id="zend.feed.importing.custom.dump">
+        </section>
 
-            <title>Zrzucanie zawartości kanału</title>
+        <section xml:id="zend.feed.importing.custom.dump"><info><title>Zrzucanie zawartości kanału</title></info>
+
+            
 
             <para>
                 Aby zrzucić zawartość instancji <code>Zend_Feed_Abstract</code>,
                 możesz użyć metody <code>send()</code> lub <code>saveXml()</code>.
             </para>
 
-            <programlisting role="php">
-<![CDATA[
+            <programlisting role="php"><![CDATA[
+
 assert($feed instanceof Zend_Feed_Abstract);
 
 // zrzuca kanał do standardowego wyjścia
@@ -279,8 +280,8 @@ print $feed->saveXML();
 
 // wysyła nagłówki oraz zrzuca zawartość kanału
 $feed->send();
-]]>
-            </programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+
+            ]]></programlisting>
+        </section>
+    </section>
+</section>

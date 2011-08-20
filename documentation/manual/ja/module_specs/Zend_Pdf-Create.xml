@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20854 -->
-<sect1 id="zend.pdf.create">
-    <title>PDF ドキュメントの作成および読み込み</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.create"><info><title>PDF ドキュメントの作成および読み込み</title></info>
+    
     <para>
     <classname>Zend_Pdf</classname> クラスは <acronym>PDF</acronym> ドキュメントを表すもので、
     ドキュメントレベルの機能を提供します。
@@ -21,8 +19,8 @@
     エラーが発生した場合には例外がスローされます。
     </para>
 
-    <example id="zend.pdf.create.example-1">
-        <title>新しい PDF ドキュメントの作成あるいは既存の PDF ドキュメントの読み込み</title>
+    <example xml:id="zend.pdf.create.example-1"><info><title>新しい PDF ドキュメントの作成あるいは既存の PDF ドキュメントの読み込み</title></info>
+        
         <programlisting language="php"><![CDATA[
 ...
 // 新しい PDF ドキュメントを作成します。
@@ -56,8 +54,8 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     call.
     </para>
 
-    <example id="zend.pdf.create.example-2">
-        <title>指定した版の PDF ドキュメントの取得</title>
+    <example xml:id="zend.pdf.create.example-2"><info><title>指定した版の PDF ドキュメントの取得</title></info>
+        
         <programlisting language="php"><![CDATA[
 ...
 // 前の版の PDF ドキュメントを読み込みます。
@@ -74,7 +72,4 @@ $pdf3->rollback($revisions - 1);
 ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

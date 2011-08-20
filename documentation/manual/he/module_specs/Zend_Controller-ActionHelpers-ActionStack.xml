@@ -1,5 +1,6 @@
-<sect3 id="zend.controller.actionhelpers.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         תוסף העזרה <code>ActionStack</code> מאפשר לך לדחוף בקשות אל <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link> שנמצא בפרונט קונטרולר,
@@ -8,16 +9,16 @@
         action/controller/module.
     </para>
 
-    <note>
-        <title>שימוש בתוסף ActionStack יקרא גם לפלאגין <code>ActionStack</code></title>
+    <note><info><title>שימוש בתוסף ActionStack יקרא גם לפלאגין <code>ActionStack</code></title></info>
+        
 
         <para>
             קריאה לתוסף <code>ActionStack</code> קורא מייד לפלאגין <code>ActionStack</code> -- וזה אומר שאין צורך ולקרוא לפלאגין <code>ActionStack</code> בצורה יחודית.
         </para>
     </note>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple">
-        <title>הוספת משימה על ידי הוספת שמות של action / controller / module</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple"><info><title>הוספת משימה על ידי הוספת שמות של action / controller / module</title></info>
+        
 
         <para>
             לעיתים, הכי פשוט יהיה להגדיר את ה action, controller, module בדיוק באותה מידע כשתרצו לקרוא ל <code>Zend_Controller_Action::_forward()</code>:
@@ -41,13 +42,13 @@ class FooController extends Zend_Controller_Action
         $this->_helper->actionStack('bat', 'bar');
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
     </example>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple2">
-        <title>הוספת משימה על ידי אובייקט</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple2"><info><title>הוספת משימה על ידי אובייקט</title></info>
+        
 
         <para>
             לפעמים שימוש ב OOP להעברת אובייקט לתוסף העזרה כדי להוסיף את הערך לערמה היא הדרך הטובה ביותר; תוכל לבצע זאת על ידי העברת אובייקט ל  <code>ActionStack</code>  :
@@ -76,10 +77,7 @@ class FooController extends Zend_Controller_Action
         $this->_helper->actionStack($request);
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
-<sect1 id="zend.feed.consuming-rss">
-    <title>RSS フィードの使用</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>RSS フィードの使用</title></info>
+    
     <para>
         <acronym>RSS</acronym> フィードの読み込みは、フィードの <acronym>URL</acronym> を指定して
         <classname>Zend_Feed_Rss</classname> のインスタンスを作成するのと同じくらい簡単です。
@@ -23,9 +21,9 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
 echo $channel->title();
 ]]></programlisting>
     <para>
-        関数の構文に注意しましょう。"getter" 方式の構文 (<code>$obj->property</code>)
+        関数の構文に注意しましょう。"getter" 方式の構文 (<code>$obj-&gt;property</code>)
         をした場合は、<classname>Zend_Feed</classname> はプロパティを <acronym>XML</acronym> オブジェクトとして扱います。
-        一方、メソッドの構文 (<code>$obj->property()</code>)
+        一方、メソッドの構文 (<code>$obj-&gt;property()</code>)
         を使用した場合は文字列として扱います。
         これにより、特定のノードを取得したあとで、さらにその子要素にもアクセスできるようになります。
     </para>
@@ -143,17 +141,14 @@ if ($item->propname()) {
 ]]></programlisting>
 
     <para>
-        <code>$item->propname</code> 形式を使用した場合は、
+        <code>$item-&gt;propname</code> 形式を使用した場合は、
         空のオブジェクトについても <constant>TRUE</constant> と評価されてしまうので、
         このように調べることはできません。
     </para>
 
     <para>
         詳細な情報は、
-        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>
         にある <acronym>RSS</acronym> 2.0 の公式仕様を参照ください。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

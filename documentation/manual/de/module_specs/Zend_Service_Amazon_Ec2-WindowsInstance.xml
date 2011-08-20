@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20843 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.windows.instance">
-    <title>Zend_Service_Amazon_Ec2: Windows Instanzen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.windows.instance"><info><title>Zend_Service_Amazon_Ec2: Windows Instanzen</title></info>
+    
 
     <para>
         Die Verwendung von Amazon EC2 Instanzen auf denen Windows läuft ist ähnlich wie die
@@ -99,11 +97,11 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.service.amazon.ec2.windows.instance.operations">
-        <title>Verwendung von Windows Instanzen</title>
+    <section xml:id="zend.service.amazon.ec2.windows.instance.operations"><info><title>Verwendung von Windows Instanzen</title></info>
+        
 
-        <example id="zend.service.amazon.ec2.windows.instance.operations.bundle">
-            <title>Bündelt eine Amazon EC2 Instanz auf der Windows läuft</title>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.bundle"><info><title>Bündelt eine Amazon EC2 Instanz auf der Windows läuft</title></info>
+            
 
             <para>
                 <methodname>bundle()</methodname> hat drei benötigte Parameter und einen optionalen
@@ -150,8 +148,8 @@ $return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.windows.instance.operations.describe">
-            <title>Beschreibt die aktuellen Bündelungstasks</title>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.describe"><info><title>Beschreibt die aktuellen Bündelungstasks</title></info>
+            
 
             <para>
                 <methodname>describeBundle()</methodname> Beschreibt die aktuellen Bündelungstasks
@@ -170,8 +168,8 @@ $return = $ec2_instance->describeBundle('bundleId');
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.amazon.ec2.windows.instance.operations.cancel">
-            <title>Beendet eine Amazon EC2 Bündel-Operation</title>
+        <example xml:id="zend.service.amazon.ec2.windows.instance.operations.cancel"><info><title>Beendet eine Amazon EC2 Bündel-Operation</title></info>
+            
 
             <para>
                 <methodname>cancelBundle()</methodname> Beendet eine Amazon EC2 Bündel-Operation
@@ -189,5 +187,5 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
 $return = $ec2_instance->cancelBundle('bundleId');
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

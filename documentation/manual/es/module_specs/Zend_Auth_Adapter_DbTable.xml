@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17175 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>Tabla de base de datos de autenticación</title>
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>Introducción</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Tabla de base de datos de autenticación</title></info>
+    
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Introducción</title></info>
+        
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname>
             proporciona la
@@ -99,8 +97,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>Uso Básico</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Uso Básico</title></info>
+            
             <para>
                 Como se explicó en la introducción, el constructor
                 <classname>Zend_Auth_Adapter_DbTable</classname>
@@ -229,10 +227,10 @@ Array
                 proteger los valores contra accesos no
                 deseados.</para>
         </example>
-    </sect2>
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>Advanced Usage: Manteniendo el resultado del Objeto
-            DbTable</title>
+    </section>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Advanced Usage: Manteniendo el resultado del Objeto
+            DbTable</title></info>
+        
         <para>
             Por defecto,
             <classname>Zend_Auth_Adapter_DbTable</classname>
@@ -279,10 +277,10 @@ if ($result->isValid()) {
 
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>Ejemplo de Uso Avanzado</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Ejemplo de Uso Avanzado</title></info>
+        
         <para>
             Si bien el objetivo primordial de
             <classname>Zend_Auth</classname>
@@ -439,5 +437,5 @@ $select->where('active = "TRUE"');
 // authenticate, esto asegura que users.active = TRUE
 $adapter->authenticate();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

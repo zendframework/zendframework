@@ -1,22 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.client">
-    <title>Zend_Rest_Client</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.client"><info><title>Zend_Rest_Client</title></info>
+    
 
-    <sect2 id="zend.rest.client.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.rest.client.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             Using the <classname>Zend_Rest_Client</classname> is very similar to using
-            <code>SoapClient</code> objects (<ulink
-            url="http://www.php.net/soap">SOAP web service extension</ulink>).
+            <code>SoapClient</code> objects (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/soap">SOAP web service extension</link>).
             You can simply call the REST service procedures as
             <classname>Zend_Rest_Client</classname> methods. Specify the service's full
             address in the <classname>Zend_Rest_Client</classname> constructor.
         </para>
 
-        <example id="zend.rest.client.introduction.example-1">
-            <title>A basic REST request</title>
+        <example xml:id="zend.rest.client.introduction.example-1"><info><title>A basic REST request</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 /**
@@ -28,8 +26,8 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Differences in calling</title>
+        <note><info><title>Differences in calling</title></info>
+            
 
             <para>
                 <classname>Zend_Rest_Client</classname> attempts to make remote methods
@@ -45,10 +43,10 @@ $client->sayHello('Davey', 'Day');
 echo $client->get();
 ]]></programlisting>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.return">
-        <title>Responses</title>
+    <section xml:id="zend.rest.client.return"><info><title>Responses</title></info>
+        
 
         <para>
             All requests made using <classname>Zend_Rest_Client</classname> return a
@@ -63,8 +61,8 @@ echo $client->get();
             type.
         </para>
 
-        <example id="zend.rest.client.return.example-1">
-            <title>Response Status</title>
+        <example xml:id="zend.rest.client.return.example-1"><info><title>Response Status</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Day')->get();
@@ -95,8 +93,8 @@ if ($result->isSuccess()) {
             for the object, or an array of <acronym>PHP</acronym> value results.
         </para>
 
-        <example id="zend.rest.client.return.example-2">
-            <title>Using Technorati's Rest Service</title>
+        <example xml:id="zend.rest.client.return.example-2"><info><title>Using Technorati's Rest Service</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
@@ -107,8 +105,8 @@ echo $result->firstname() .' '. $result->lastname();
 ]]></programlisting>
         </example>
 
-        <example id="zend.rest.client.return.example-3">
-            <title>Example Technorati Response</title>
+        <example xml:id="zend.rest.client.return.example-3"><info><title>Example Technorati Response</title></info>
+            
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
@@ -153,8 +151,8 @@ echo $result->firstname() .' '. $result->lastname();
             name.
         </para>
 
-        <note>
-            <title>Multiple items</title>
+        <note><info><title>Multiple items</title></info>
+            
 
             <para>
                 If multiple items are found when accessing a value by name, an
@@ -162,10 +160,10 @@ echo $result->firstname() .' '. $result->lastname();
                 method notation will return an array of <acronym>PHP</acronym> values.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.rest.client.args">
-        <title>Request Arguments</title>
+    <section xml:id="zend.rest.client.args"><info><title>Request Arguments</title></info>
+        
 
         <para>
             Unless you are making a request to a <classname>Zend_Rest_Server</classname>
@@ -178,8 +176,8 @@ echo $result->firstname() .' '. $result->lastname();
             method when calling a <classname>Zend_Rest_Server</classname> service.
         </para>
 
-        <example id="zend.rest.client.args.example-1">
-            <title>Setting Request Arguments</title>
+        <example xml:id="zend.rest.client.args.example-1"><info><title>Setting Request Arguments</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $client = new Zend_Rest_Client('http://example.org/rest');
@@ -202,15 +200,15 @@ $client->arg('value1')->arg2('value2')->get();
 
         <para>
             You will notice that the first call of
-            <code>$client->arg('value1');</code> resulted in both
+            <code>$client-&gt;arg('value1');</code> resulted in both
             <code>method=arg&amp;arg1=value1</code> and <code>arg=value1</code>;
             this is so that <classname>Zend_Rest_Server</classname> can understand the
             request properly, rather than requiring pre-existing knowledge of
             the service.
         </para>
 
-        <warning>
-            <title>Strictness of Zend_Rest_Client</title>
+        <warning><info><title>Strictness of Zend_Rest_Client</title></info>
+            
 
             <para>
                 Any REST service that is strict about the arguments it receives will likely fail
@@ -218,8 +216,5 @@ $client->arg('value1')->arg2('value2')->get();
                 above. This is not a common practice and should not cause problems.
             </para>
         </warning>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.captcha.adapters">
-    <title>CAPTCHA アダプタ</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.adapters"><info><title>CAPTCHA アダプタ</title></info>
+    
 
     <para>
         次のアダプタが、Zend Framework に同梱されています。
     </para>
 
-    <sect2 id="zend.captcha.adapters.word">
-        <title>Zend_Captcha_Word</title>
+    <section xml:id="zend.captcha.adapters.word"><info><title>Zend_Captcha_Word</title></info>
+        
 
         <para>
             <classname>Zend_Captcha_Word</classname> は抽象アダプタで、
@@ -95,10 +95,10 @@
             直接そのインスタンスを作成することはできません。
         </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.dumb">
-        <title>Zend_Captcha_Dumb</title>
+    <section xml:id="zend.captcha.adapters.dumb"><info><title>Zend_Captcha_Dumb</title></info>
+        
 
         <para>
             <classname>Zend_Captch_Dumb</classname> アダプタは、その名が示すとおりのものです。
@@ -108,36 +108,34 @@
             あるいは、ほかに手がない場合の最後の手段としてのみ使うようにしましょう。
             このアダプタは <classname>Zend_Captcha_Word</classname> を継承しています。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.figlet">
-        <title>Zend_Captcha_Figlet</title>
+    <section xml:id="zend.captcha.adapters.figlet"><info><title>Zend_Captcha_Figlet</title></info>
+        
 
         <para>
-            <classname>Zend_Captcha_Figlet</classname> アダプタは、<link
-                linkend="zend.text.figlet">Zend_Text_Figlet</link>
+            <classname>Zend_Captcha_Figlet</classname> アダプタは、<link linkend="zend.text.figlet">Zend_Text_Figlet</link>
             を使用して Figlet をユーザに表示します。
         </para>
 
         <para>
-            コンストラクタに渡されたオプションは、アダプタが使用する <link
-                linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
+            コンストラクタに渡されたオプションは、アダプタが使用する <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
             オブジェクトにも渡されます。
             使用できる設定オプションについては、
             <link linkend="zend.text.figlet"><classname>Zend_Text_Figlet</classname></link>
             のドキュメントを参照ください。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.image">
-        <title>Zend_Captcha_Image</title>
+    <section xml:id="zend.captcha.adapters.image"><info><title>Zend_Captcha_Image</title></info>
+        
 
         <para>
             <classname>Zend_Captcha_Image</classname> アダプタは、
             生成された単語を受け取ってそれを画像としてレンダリングし、
             それをいろいろな方法で歪めて自動判読を困難にします。
             これを使用するには、
-            <ulink url="http://php.net/gd">GD 拡張モジュール</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/gd">GD 拡張モジュール</link>
             を TrueType あるいは Freetype のサポートつきでコンパイルする必要があります。
             現在、<classname>Zend_Captcha_Image</classname> アダプタが生成できるのは
             <acronym>PNG</acronym> 画像のみです。
@@ -230,14 +228,13 @@
             その際には、メソッド名の先頭の 'set' を取り除いて先頭を小文字にした名前
             ("suffix", "height", "imgUrl" など) を使用します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.captcha.adapters.recaptcha">
-        <title>Zend_Captcha_ReCaptcha</title>
+    <section xml:id="zend.captcha.adapters.recaptcha"><info><title>Zend_Captcha_ReCaptcha</title></info>
+        
 
         <para>
-            <classname>Zend_Captcha_ReCaptcha</classname> アダプタは、<link
-                linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
+            <classname>Zend_Captcha_ReCaptcha</classname> アダプタは、<link linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
             を使用して <acronym>CAPTCHA</acronym> の生成と検証を行います。
             次のメソッドを公開しています。
         </para>
@@ -263,8 +260,5 @@
                 ReCaptcha サービスオブジェクトを取得したり取得したりします。
             </para></listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

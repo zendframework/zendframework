@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.digest">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.digest"><info><title>Uwierzytelnianie Digest</title></info>
 
-    <title>Uwierzytelnianie Digest</title>
+    
 
-    <sect2 id="zend.auth.adapter.digest.introduction">
+    <section xml:id="zend.auth.adapter.digest.introduction"><info><title>Wprowadzenie</title></info>
 
-        <title>Wprowadzenie</title>
+        
 
         <para>
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Uwierzytelnianie Digest</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Digest_access_authentication">Uwierzytelnianie Digest</link>
             jest metodą uwierzytelniania <acronym>HTTP</acronym>, która udoskonala
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">uwierzytelnianie Basic</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Basic_authentication_scheme">uwierzytelnianie Basic</link>
             dostarczając sposób uwierzytelniania bez konieczności przesyłania
             hasła w postaci czystego tekstu poprzez sieć.
         </para>
@@ -50,11 +49,11 @@
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.specifics">
+    <section xml:id="zend.auth.adapter.digest.specifics"><info><title>Parametry</title></info>
 
-        <title>Parametry</title>
+        
 
         <para>
             Adapter uwierzytelniania digest, <classname>Zend_Auth_Adapter_Digest</classname>,
@@ -90,11 +89,11 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
             <methodname>authenticate()</methodname>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.digest.identity">
+    <section xml:id="zend.auth.adapter.digest.identity"><info><title>Tożsamość</title></info>
 
-        <title>Tożsamość</title>
+        
 
         <para>
             Adapter uwierzytelniania digest zwraca obiekt <classname>Zend_Auth_Result</classname>,
@@ -125,5 +124,5 @@ Array
 */
 ]]></programlisting>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

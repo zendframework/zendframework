@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tool.project.providers">
-    <title>Zend_Tool Project Providers</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tool.project.providers"><info><title>Zend_Tool Project Providers</title></info>
+    
 
     <para>
         Below is a table of all of the providers shipped with
         <classname>Zend_Tool_Project</classname>.
     </para>
 
-    <table id="zend.tool.project.project-provider">
-        <title>Project Provider Options</title>
+    <table xml:id="zend.tool.project.project-provider"><info><title>Project Provider Options</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -79,4 +80,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect1>
+</section>

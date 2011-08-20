@@ -99,7 +99,7 @@ abstract class AbstractBootstrap
      *
      * @param  Zend\Application\Application|\Zend\Application\Bootstrapper $application
      * @return void
-     * @throws \Zend\Application\BootstrapException When invalid applicaiton is provided
+     * @throws \Zend\Application\Exception\InvalidArgumentException When invalid application is provided
      */
     public function __construct($application)
     {
@@ -113,12 +113,12 @@ abstract class AbstractBootstrap
      *
      * @param  array $options
      * @return \Zend\Application\AbstractBootstrap
+     * @throws \Zend\Application\Exception\InvalidArgumentException
      */
     public function setOptions(array $options)
     {
-        $this->_options = $this->mergeOptions($this->_options, $options);
-
-        $options = array_change_key_case($options, CASE_LOWER);
+        $options           = array_change_key_case($options, CASE_LOWER);
+        $this->_options    = $this->mergeOptions($this->_options, $options);
         $this->_optionKeys = array_merge($this->_optionKeys, array_keys($options));
 
         $methods = get_class_methods($this);
@@ -132,7 +132,7 @@ abstract class AbstractBootstrap
 
             if (is_array($brokerOption)) {
                 if (!isset($brokerOption['class'])) {
-                    throw new BootstrapException(
+                    throw new Exception\InvalidArgumentException(
                         'Broker option must contain a "class" key; none provided'
                     );
                 }
@@ -153,8 +153,9 @@ abstract class AbstractBootstrap
             if (in_array($method, $methods)) {
                 $this->$method($value);
             } elseif ('resources' == $key) {
+                $broker = $this->getBroker();
                 foreach ($value as $resource => $resourceOptions) {
-                    $this->getBroker()->registerSpec($resource, $resourceOptions);
+                    $broker->registerSpec($resource, $resourceOptions);
                 }
             }
         }
@@ -224,25 +225,12 @@ abstract class AbstractBootstrap
     /**
      * Get class resources (as resource/method pairs)
      *
-     * Uses get_class_methods() by default, reflection on prior to 5.2.6,
-     * as a bug prevents the usage of get_class_methods() there.
-     *
      * @return array
      */
     public function getClassResources()
     {
         if (null === $this->_classResources) {
-            if (version_compare(PHP_VERSION, '5.2.6') === -1) {
-                $class        = new \ReflectionObject($this);
-                $classMethods = $class->getMethods();
-                $methodNames  = array();
-
-                foreach ($classMethods as $method) {
-                    $methodNames[] = $method->getName();
-                }
-            } else {
-                $methodNames = get_class_methods($this);
-            }
+            $methodNames = get_class_methods($this);
 
             $this->_classResources = array();
             foreach ($methodNames as $method) {
@@ -268,8 +256,8 @@ abstract class AbstractBootstrap
 
     /**
      * Set resource plugin broker instance
-     * 
-     * @param  ResourceBroker $broker 
+     *
+     * @param  ResourceBroker $broker
      * @return AbstractBootstrap
      */
     public function setBroker($broker)
@@ -283,7 +271,7 @@ abstract class AbstractBootstrap
             }
             $broker = new $broker();
         }
-        if (!$broker instanceof LazyLoadingBroker 
+        if (!$broker instanceof LazyLoadingBroker
             || !$broker instanceof BootstrapAware
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -298,7 +286,7 @@ abstract class AbstractBootstrap
 
     /**
      * Get resource plugin broker instance
-     * 
+     *
      * @todo   Should this allow using a default class name for lazy loading purposes?
      * @return ResourceBroker
      */
@@ -463,7 +451,7 @@ abstract class AbstractBootstrap
      *
      * @param  null|string|array $resource
      * @return \Zend\Application\AbstractBootstrap
-     * @throws \Zend\Application\BootstrapException When invalid argument was passed
+     * @throws \Zend\Application\Exception\InvalidArgumentException When invalid argument was passed
      */
     final public function bootstrap($resource = null)
     {
@@ -477,7 +465,7 @@ abstract class AbstractBootstrap
      * @param  string $method
      * @param  array  $args
      * @return void
-     * @throws \Zend\Application\BootstrapException On invalid method name
+     * @throws \Zend\Application\Exception\BadMethodCallException On invalid method name
      */
     public function __call($method, $args)
     {
@@ -497,7 +485,7 @@ abstract class AbstractBootstrap
      *
      * @param  null|string|array $resource
      * @return void
-     * @throws \Zend\Application\BootstrapException When invalid argument was passed
+     * @throws \Zend\Application\Exception\InvalidArgumentException When invalid argument was passed
      */
     protected function _bootstrap($resource = null)
     {
@@ -505,10 +493,10 @@ abstract class AbstractBootstrap
             foreach ($this->getClassResourceNames() as $resource) {
                 $this->_executeResource($resource);
             }
-
-            foreach ($this->getBroker()->getRegisteredPlugins() as $resource) {
-                $this->_executeResource($resource);
-            }
+            if(!$this instanceof Module\Bootstrap)
+                foreach ($this->getBroker()->getRegisteredPlugins() as $resource) {
+                    $this->_executeResource($resource);
+                }
         } elseif (is_string($resource)) {
             $this->_executeResource($resource);
         } elseif (is_array($resource)) {
@@ -532,7 +520,7 @@ abstract class AbstractBootstrap
      *
      * @param  string $resource
      * @return void
-     * @throws \Zend\Application\BootstrapException When resource not found
+     * @throws \Zend\Application\Exception\InvalidArgumentException When resource not found
      */
     protected function _executeResource($resource)
     {
@@ -562,12 +550,17 @@ abstract class AbstractBootstrap
         }
 
         $broker = $this->getBroker();
+
+        if ($broker->isRun($resourceName)) {
+           return;
+        }
+
         if ($broker->hasPlugin($resource)) {
             $this->_started[$resourceName] = true;
-            $plugin = $broker->load($resource);
+            $broker->markRun($resourceName);
+            $plugin = $broker->load($resourceName);
             $return = $plugin->init();
             unset($this->_started[$resourceName]);
-            $this->_markRun($resourceName);
 
             if (null !== $return) {
                 $this->getContainer()->{$resourceName} = $return;

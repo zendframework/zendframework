@@ -1,10 +1,11 @@
-<sect1 id="zend.cache.frontends">
-    <title>الـ frontends المتوفرة فى Zend_Cache</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>الـ frontends المتوفرة فى Zend_Cache</title></info>
+    
 
-    <sect2 id="zend.cache.core">
-        <title>Zend_Cache_Core</title>
-        <sect3 id="zend.cache.core.introduction">
-            <title>مقدمة</title>
+    <section xml:id="zend.cache.core"><info><title>Zend_Cache_Core</title></info>
+        
+        <section xml:id="zend.cache.core.introduction"><info><title>مقدمة</title></info>
+            
             <para>
                 <code>Zend_Cache_Core</code> هو frontend مميز لأنه جوهر الـ module .
 هو عبارة cache frontend عام و هناك classes أخرى ممتدة منه.
@@ -13,14 +14,14 @@
                 كل الـ frontends ترث من <code>Zend_Cache_Core</code> و بهذا كل الـ methods
 و الـ options الخاصة به (سيتم توضيحها لاحقاً) متوفرة فى الـ frontends الأخرى , لذلك لن نقوم بشرحها هناك.
             </para></note>
-        </sect3>
-        <sect3 id="zend.cache.core.options">
-            <title>الـ options المتوفرة</title>
+        </section>
+        <section xml:id="zend.cache.core.options"><info><title>الـ options المتوفرة</title></info>
+            
             <para>
                 هذه الـ options يتم تمريرها الى الـ factory method كما كان موضحاً فى امثلة سابقة.
             </para>
-            <table>
-                <title>الـ options المتوفرة لـ Zend_Cache_Core</title>
+            <table><info><title>الـ options المتوفرة لـ Zend_Cache_Core</title></info>
+                
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -96,10 +97,10 @@ control ممتاز )
                       </tbody>
                   </tgroup>
               </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.core.examples">
-            <title>امثلة</title>
+        <section xml:id="zend.cache.core.examples"><info><title>امثلة</title></info>
+            
             <para>
                 تم اعطاء مثال فى بداية هذا الفصل.
             </para>
@@ -128,7 +129,7 @@ if (!($data = $cache->load($id))) {
 
 // [...] do something with $data (echo it, pass it on etc.)
 
-?>]]>       </programlisting>
+?>       ]]></programlisting>
             <para>
                 إن كنت تريد حفظ اكثر من بلوك او مجموعة بيانات مختلفة, فهى نفس الفكرة :
             </para>
@@ -169,30 +170,30 @@ if (!($data = $cache->load($id2))) {
 }
 echo($data);
 
-?>]]>       </programlisting>
-        </sect3>
-    </sect2>
+?>       ]]></programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontend.output">
-        <title>Zend_Cache_Frontend_Output</title>
-        <sect3 id="zend.cache.frontend.output.introduction">
-            <title>مقدمة</title>
+    <section xml:id="zend.cache.frontend.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+        
+        <section xml:id="zend.cache.frontend.output.introduction"><info><title>مقدمة</title></info>
+            
             <para>
                 <code>Zend_Cache_Frontend_Output</code> هو frontend يستخدم فى التقاط البيانات
 المخرجة. يستخدم خاصية الـ output buffering التى تقدمها لغة PHP ليلتقط كل شئ يتم اخراجه بين
 الـ methods المسمى <code>()start</code> و <code>()end</code>.
             </para>
-        </sect3>
-        <sect3 id="zend.cache.frontend.output.options">
-            <title>الـ options المتوفرة</title>
+        </section>
+        <section xml:id="zend.cache.frontend.output.options"><info><title>الـ options المتوفرة</title></info>
+            
             <para>
                 هذا الـ frontend لا يحتوى اى options جديدة بخلاف الموجودة فى
 <code>Zend_Cache_Core</code>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontend.output.examples">
-            <title>امثلة</title>
+        <section xml:id="zend.cache.frontend.output.examples"><info><title>امثلة</title></info>
+            
             <para>
                 تم اعطاء مثال فى بداية هذا الفصل, ها هو مع بعض التعديلات الصغيرة:
             </para>
@@ -210,28 +211,28 @@ endif;
 
 echo 'This is never cached ('.time().').';
 
-?>]]>       </programlisting>
+?>       ]]></programlisting>
             <para>
                 بإستخدام هذه الطريقة يمكنك بسهولة إدخال خاصية الـ caching لمخرجات الأكواد فى مشروعك بإستخدام القليل او
 ربما عدم الأحتياج لعمل refactoring.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontend.function">
-        <title>Zend_Cache_Frontend_Function</title>
-        <sect3 id="zend.cache.frontend.function.introduction">
-            <title>مقدمة</title>
+    <section xml:id="zend.cache.frontend.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+        
+        <section xml:id="zend.cache.frontend.function.introduction"><info><title>مقدمة</title></info>
+            
             <para>
                 تقوم <code>Zend_Cache_Frontend_Function</code> بعمل cache
 لناتج استدعاء دالة ما, و لديها method واحد رئيسى يسمى <code>()call</code> و الذى
 يأخذ اسم الدالة المراد استدعائها و array تحتوتى الـ parameters التى سيتم تمريرها لهذه الدالة.
             </para>
-        </sect3>
-        <sect3 id="zend.cache.frontend.function.options">
-            <title>الـ options المتوفرة</title>
-            <table>
-                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_Function</title>
+        </section>
+        <section xml:id="zend.cache.frontend.function.options"><info><title>الـ options المتوفرة</title></info>
+            
+            <table><info><title>الـ options المتوفرة لـ Zend_Cache_Frontend_Function</title></info>
+                
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -253,7 +254,7 @@ echo 'This is never cached ('.time().').';
                          <row>
                               <entry><code>cachedFunctions</code></entry>
                               <entry><code>array</code></entry>
-                              <entry></entry>
+                              <entry/>
                               <entry>
                                   اسماء الـ functions التى سيتم عمل cache لها دائما.
                               </entry>
@@ -261,7 +262,7 @@ echo 'This is never cached ('.time().').';
                          <row>
                               <entry><code>nonCachedFunctions</code></entry>
                               <entry><code>array</code></entry>
-                              <entry></entry>
+                              <entry/>
                               <entry>
                                   اسماء الـ functions التى لا يجب عمل cache لها ابدا.
                               </entry>
@@ -269,10 +270,10 @@ echo 'This is never cached ('.time().').';
                       </tbody>
                   </tgroup>
               </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontend.function.examples">
-            <title>امثلة</title>
+        <section xml:id="zend.cache.frontend.function.examples"><info><title>امثلة</title></info>
+            
             <para>
                 استخدام الـ method المسمى <code>()call</code> هو نفس طريقة استخدام
 دالة لغة PHP المسمى <code>()call_user_func_array</code> :
@@ -285,7 +286,7 @@ $cache->call('veryExpensiveFunc', $params);
 # for example to call (with caching) veryExpensiveFunc(1, 'foo', 'bar'), you will use
 # $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'))
 
-?>]]>       </programlisting>
+?>       ]]></programlisting>
             <para>
                 <code>Zend_Cache_Frontend_Function</code> ذكية كفاية لتقوم بعمل
 cache لكل من ناتج الدالة العائد من "return" و البيانات المخرجة داخل الدالة (مثل عمل طباعة
@@ -305,23 +306,23 @@ cache لكل من ناتج الدالة العائد من "return" و البيا
 
   <code>unset</code>.
             </para></note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontend.class">
-        <title>Zend_Cache_Frontend_Class</title>
-        <sect3 id="zend.cache.frontend.class.introduction">
-            <title>مقدمة</title>
+    <section xml:id="zend.cache.frontend.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+        
+        <section xml:id="zend.cache.frontend.class.introduction"><info><title>مقدمة</title></info>
+            
             <para>
                 يختلف <code>Zend_Cache_Frontend_Class</code> عن
 <code>Zend_Cache_Frontend_Function</code> حيث انه
 يقوم بعمل cache لعمليات استدعاء الـ objects و الـ static methods.
             </para>
-        </sect3>
-        <sect3 id="zend.cache.frontend.class.options">
-            <title>الـ options المتوفر</title>
-            <table>
-                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_Class</title>
+        </section>
+        <section xml:id="zend.cache.frontend.class.options"><info><title>الـ options المتوفر</title></info>
+            
+            <table><info><title>الـ options المتوفرة لـ Zend_Cache_Frontend_Class</title></info>
+                
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -335,7 +336,7 @@ cache لكل من ناتج الدالة العائد من "return" و البيا
                           <row>
                               <entry><code>cachedEntity</code> (مطلوب)</entry>
                               <entry><code>mixed</code></entry>
-                              <entry></entry>
+                              <entry/>
                               <entry>
                                   إن كانت قيمتها عبارة عن اسم class, سيتم عمل cache للـ class على انه abstract
 و سيتم استخدام طلبات الـ static mithods الخاصة به.
@@ -354,7 +355,7 @@ cache لكل من ناتج الدالة العائد من "return" و البيا
                          <row>
                               <entry><code>cachedMethods</code></entry>
                               <entry><code>array</code></entry>
-                              <entry></entry>
+                              <entry/>
                               <entry>
                                  اسماء الـ methods التى يستم عمل cache لها دائما.
                               </entry>
@@ -362,7 +363,7 @@ cache لكل من ناتج الدالة العائد من "return" و البيا
                          <row>
                               <entry><code>nonCachedMethods</code></entry>
                               <entry><code>array</code></entry>
-                              <entry></entry>
+                              <entry/>
                               <entry>
                                   اسماء الـ methods التى لا يجب عمل cache لها ابدا.
                               </entry>
@@ -370,10 +371,10 @@ cache لكل من ناتج الدالة العائد من "return" و البيا
                       </tbody>
                   </tgroup>
               </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontend.class.examples">
-            <title>امثلة</title>
+        <section xml:id="zend.cache.frontend.class.examples"><info><title>امثلة</title></info>
+            
             <para>
                 مثال على عمل cache لأستدعائات الـ static methods:
             </para>
@@ -398,7 +399,7 @@ $frontendOptions = array(
 # The cached call
 $res = $cache->foobar('1', '2');
 
-?>]]>       </programlisting>
+?>       ]]></programlisting>
             <para>
                 لعمل cache للـ methods العادية:
             </para>
@@ -425,14 +426,14 @@ $frontendOptions = array(
 # The cached call
 $res = $cache->foobar2('1', '2');
 
-?>]]>       </programlisting>
-        </sect3>
-    </sect2>
+?>       ]]></programlisting>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.file">
-        <title>Zend_Cache_Frontend_File</title>
-        <sect3 id="zend.cache.frontends.file.introduction">
-            <title>مقدمة</title>
+    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+        
+        <section xml:id="zend.cache.frontends.file.introduction"><info><title>مقدمة</title></info>
+            
             <para>
                 <code>Zend_Cache_Frontend_File</code> هو frontend يعتمد
 على اخر وقت تعديل ملف معين "master file".
@@ -449,11 +450,11 @@ $res = $cache->foobar2('1', '2');
 إذاً, إن تم تعديل ملف الـ XML سيتم اعتبار النسخة فى الـ cache غير صالحة للإستخدام و سيتم إنشاء
 اخرى جديدة.
             </para>
-        </sect3>
-        <sect3 id="zend.cache.frontends.file.options">
-            <title>الـ options المتوفرة</title>
-            <table>
-                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_File</title>
+        </section>
+        <section xml:id="zend.cache.frontends.file.options"><info><title>الـ options المتوفرة</title></info>
+            
+            <table><info><title>الـ options المتوفرة لـ Zend_Cache_Frontend_File</title></info>
+                
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -467,7 +468,7 @@ $res = $cache->foobar2('1', '2');
                           <row>
                               <entry><code>masterFile (إجبارى)</code></entry>
                               <entry><code>string</code></entry>
-                              <entry><code></code></entry>
+                              <entry><code/></entry>
                               <entry>
                                   المسار الكامل للملف "master file".
                               </entry>
@@ -475,21 +476,21 @@ $res = $cache->foobar2('1', '2');
                       </tbody>
                   </tgroup>
               </table>
-        </sect3>
-        <sect3 id="zend.cache.frontends.file.examples">
-            <title>امثلة</title>
+        </section>
+        <section xml:id="zend.cache.frontends.file.examples"><info><title>امثلة</title></info>
+            
             <para>
                 إستخدام هذا الـ frontend هو نفس طريقة استخدام <code>Zend_Cache_Core</code>,
 لذلك لا يوجد حاجة إلى مثال جديد, الشئ الوحيد الذى ستقوم به هو تعريف قيمة
 <code>masterFile</code> عند إستخدام الـ factory.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.page">
-        <title>Zend_Cache_Frontend_Page</title>
-        <sect3 id="zend.cache.frontends.page.introduction">
-            <title>مقدمة</title>
+    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+        
+        <section xml:id="zend.cache.frontends.page.introduction"><info><title>مقدمة</title></info>
+            
             <para>
                 <code>Zend_Cache_Frontend_Page</code> يتشابه مع
 <code>Zend_Cache_Frontend_Output</code> إلا انه تم تصميمه
@@ -515,11 +516,11 @@ $res = $cache->foobar2('1', '2');
               Zend_Cache_Frontend_Page يعتبر فى المرحلة alpha الأن , إى انه سيتم عمل
  تطويرات جديدة له مع مرور الوقت.
             </para></note>
-        </sect3>
-        <sect3 id="zend.cache.frontends.page.options">
-            <title>الـ options المتوفرة</title>
-            <table>
-                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_Page</title>
+        </section>
+        <section xml:id="zend.cache.frontends.page.options"><info><title>الـ options المتوفرة</title></info>
+            
+            <table><info><title>الـ options المتوفرة لـ Zend_Cache_Frontend_Page</title></info>
+                
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -649,9 +650,9 @@ $res = $cache->foobar2('1', '2');
                       </tbody>
                   </tgroup>
               </table>
-        </sect3>
-        <sect3 id="zend.cache.frontends.page.examples">
-            <title>امثلة</title>
+        </section>
+        <section xml:id="zend.cache.frontends.page.examples"><info><title>امثلة</title></info>
+            
             <para>
                 إستخدام Zend_Cache_Frontend_Page سهل جدا :
             </para>
@@ -664,7 +665,7 @@ $cache->start();
 
 // rest of the page ...
 
-?>]]>       </programlisting>
+?>       ]]></programlisting>
             <para>
                 مثال اكثر تعقيدا يوضح اسلوب لتنفيذ إدارة مركزية للـ cache داخل ملف bootstrap
 "ملف رئيسى لتشغيل البرنامج".
@@ -704,7 +705,7 @@ $cache->start();
 
 // [...] the end of the bootstrap file (these lines won't be executed if the cache is hit)
 
-?>]]>       </programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+?>       ]]></programlisting>
+        </section>
+    </section>
+</section>

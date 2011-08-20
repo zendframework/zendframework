@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.authsub">
-    <title>Authenticating with AuthSub</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.authsub"><info><title>Authenticating with AuthSub</title></info>
+    
 
     <para>
         The AuthSub mechanism enables you to write web applications
@@ -10,8 +9,7 @@
     </para>
 
     <para>
-        See <ulink
-            url="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</ulink>
+        See <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</link>
         for more information about Google Data AuthSub authentication.
     </para>
 
@@ -31,8 +29,8 @@
         account credentials that are known to that user.
     </para>
 
-    <note>
-        <title>Registered applications</title>
+    <note><info><title>Registered applications</title></info>
+        
 
         <para>
             <classname>Zend_Gdata</classname> currently does not support use of secure tokens,
@@ -41,8 +39,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.gdata.authsub.login">
-        <title>Creating an AuthSub authenticated Http Client</title>
+    <section xml:id="zend.gdata.authsub.login"><info><title>Creating an AuthSub authenticated Http Client</title></info>
+        
 
         <para>
             Your <acronym>PHP</acronym> application should provide a hyperlink to the
@@ -104,10 +102,10 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 // Create a Gdata object using the authenticated Http Client
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.authsub.logout">
-        <title>Revoking AuthSub authentication</title>
+    <section xml:id="zend.gdata.authsub.logout"><info><title>Revoking AuthSub authentication</title></info>
+        
 
         <para>
             To terminate the authenticated status of a given token, use the
@@ -131,8 +129,8 @@ if (isset($_GET['logout'])) {
 }
 ]]></programlisting>
 
-        <note>
-            <title>Security notes</title>
+        <note><info><title>Security notes</title></info>
+            
 
             <para>
                 The treatment of the <varname>$php_self</varname> variable in the
@@ -149,5 +147,5 @@ if (isset($_GET['logout'])) {
                 a good practice to terminate authenticated access to any service.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

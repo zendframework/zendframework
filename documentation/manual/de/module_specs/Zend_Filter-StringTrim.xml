@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22255 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.stringtrim">
-    <title>StringTrim</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.stringtrim"><info><title>StringTrim</title></info>
+    
 
     <para>
         Dieser Filter verändert einen angegebenen String so dass bestimmte Zeichen vom Anfang und
         vom Ende entfernt werden.
     </para>
 
-     <sect3 id="zend.filter.set.stringtrim.options">
-        <title>Unterstützte Optionen für Zend_Filter_StringTrim</title>
+     <section xml:id="zend.filter.set.stringtrim.options"><info><title>Unterstützte Optionen für Zend_Filter_StringTrim</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Filter_StringTrim</classname>
@@ -27,10 +25,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.stringtrim.basic">
-        <title>Einfache Verwendung</title>
+    <section xml:id="zend.filter.set.stringtrim.basic"><info><title>Einfache Verwendung</title></info>
+        
 
         <para>
             Ein einfaches Beispiel der Verwendung ist nachfolgend zu finden:
@@ -46,10 +44,10 @@ print $filter->filter(' Das ist (mein) Inhalt: ');
             Das obige Beispiel gibe 'Das ist (mein) Inhalt:' zurück. Es sollte beachtet werden dass
             alle Leerzeichen entfernt wurden.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.stringtrim.types">
-        <title>Standardverhalten für Zend_Filter_StringTrim</title>
+    <section xml:id="zend.filter.set.stringtrim.types"><info><title>Standardverhalten für Zend_Filter_StringTrim</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringTrim(':');
@@ -67,8 +65,5 @@ print $filter->filter(' Das ist (mein) Inhalt:');
             <methodname>getCharList()</methodname> gibt die Werte zurück welche für die Zeichenliste
             gesetzt sind.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

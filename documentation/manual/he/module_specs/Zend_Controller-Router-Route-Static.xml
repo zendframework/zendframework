@@ -1,5 +1,6 @@
-<sect3 id="zend.controller.router.routes.static">
-    <title>Zend_Controller_Router_Route_Static</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.static"><info><title>Zend_Controller_Router_Route_Static</title></info>
+    
 
     <para>
         הדוגמאות למעלה משתמשות כולן בניתוב דינאמי -- נתבים יכולים להכיל תבניות שניתן להתאים מולן.
@@ -13,15 +14,15 @@ $route = new Zend_Controller_Router_Route_Static(
     array('controller' => 'auth', 'action' => 'login')
 );
 $router->addRoute('login', $route);
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
         הנתב למעלה יתאים קישור כמו <code>http://domain.com/login</code>, וינתב אותו אל <code>AuthController::loginAction()</code>.
     </para>
 
-    <note id="zend.controller.router.routes.static.warning">
-        <title>אזהרה: נתבים סטטיים חייבים להכיל את כל הפרמטרים הדרושים</title>
+    <note xml:id="zend.controller.router.routes.static.warning"><info><title>אזהרה: נתבים סטטיים חייבים להכיל את כל הפרמטרים הדרושים</title></info>
+        
 
         <para>
             מאחר ונתב סטטי לא מעביר שום פרמטר מהקישור לאובייקט המבוקש, חובה להעביר את כל הפרמטרים הדרושים לניתוב הבקשה כברירת מחדל בניתוב עצמו.
@@ -50,7 +51,4 @@ $front->setParam('useDefaultControllerAlways', true);
             למרות, שדרך זו היא לא מומלצת, ותמיד רצוי להגדיר את פרמטרים ברירת המחדל בכל ניתוב סטטי.
         </para>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

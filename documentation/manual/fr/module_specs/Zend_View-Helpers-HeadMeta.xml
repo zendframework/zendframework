@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headmeta">
-    <title>L'aide de vue HeadMeta</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headmeta"><info><title>L'aide de vue HeadMeta</title></info>
+    
 
     <para>
         L'élément HTML <code>&lt;meta&gt;</code> est utilisé pour fournir des métadonnées
@@ -91,12 +89,11 @@
     </para>
 
     <para>
-        L'aide de vue <code>HeadMeta</code> est une implémentation concrète de l'aide <link
-        linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
+        L'aide de vue <code>HeadMeta</code> est une implémentation concrète de l'aide <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
     </para>
 
-    <example id="zend.view.helpers.initial.headmeta.basicusage">
-        <title>Utilisation basique de l'aide HeadMeta</title>
+    <example xml:id="zend.view.helpers.initial.headmeta.basicusage"><info><title>Utilisation basique de l'aide HeadMeta</title></info>
+        
 
         <para>
             Vous pouvez spécifier une nouvelle métadonnée à n'importe quel moment.
@@ -143,7 +140,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
 
          <para>
             Si vous proposez un document <acronym>HTML5</acronym>, vous pouvez fournir l'encodage
-            de cette manière&#160;:
+            de cette manière :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -173,4 +170,4 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>
-</sect3>
+</section>

@@ -1,5 +1,6 @@
-<sect1 id="zend.view.controllers">
-    <title>جزء الـ Controller</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.controllers"><info><title>جزء الـ Controller</title></info>
+    
 
     <para>
         الـ controller هو حيث يتم إنشاء نسخة من Zend_View و إعدادها , أنت بعد ذلك تقم
@@ -7,9 +8,9 @@
         ثم تقوم بالأمر بأن يتم معاجلة الـ view و إنتاج الخرج الذى سيتم عرضه.
     </para>
 
-    <sect2 id="zend.view.controllers.assign">
+    <section xml:id="zend.view.controllers.assign"><info><title>إنشاء متغيرات و إعطائها قيم</title></info>
 
-        <title>إنشاء متغيرات و إعطائها قيم</title>
+        
 
         <para>
             يجب أن يقوم الـ controller خاصتك بإنشاء المتغيرات التى يحتاج إليها فى الـ view و تمريرها له
@@ -22,8 +23,8 @@ $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             لكن ربما هذا سيكون مزعج فى حالة أنك قد قمت مسبقاً بجمع كل القيم التى تريد تمريرها فى مصفوفة
@@ -55,8 +56,8 @@ $obj->a = "Hay";
 $obj->b = "Bee";
 $obj->c = "Sea";
 $view->assign((array) $obj);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
         أيضاً, يمكنك ان تستخدم الـ method المسمى assign لإنشاء متغيرت بطريقة واحد-واحد ,
@@ -69,14 +70,14 @@ $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.render">
+    <section xml:id="zend.view.controllers.render"><info><title>معالجة(تصيير) جزء الـ View</title></info>
 
-        <title>معالجة(تصيير) جزء الـ View</title>
+        
 
         <para>
             بمجرد إنتهائك من عملية إنساب المتغيرات التى تحتاجها فى الـ view , يجب أن يقوم الـ controller
@@ -91,20 +92,20 @@ $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.controllers.script-paths">
+    <section xml:id="zend.view.controllers.script-paths"><info><title>مسارات أجزاء الـ View</title></info>
 
-        <title>مسارات أجزاء الـ View</title>
+        
 
         <para>
             الأعدادات الأساسية لـ Zend_View تعتبر أن الملفات التى تحتوى أجزاء الـ view خاصتك
             تتواجد فى مسارات لها علاقة "relative" مع مكان تواجد الكود الذى يستدعيها,
             على سبيل المثال : إن كان الـ controller خاصتك موجود فى "path/to/app/controllers/"
-            و هو يقوم بإستدعاء ('view->render('someView.php$ , سيقوم Zend_View
+            و هو يقوم بإستدعاء ('view-&gt;render('someView.php$ , سيقوم Zend_View
             بالبحث فى المسار "path/to/app/controllers/someView.php/".
         </para>
 
@@ -117,11 +118,11 @@ echo $view->render('someView.php');
         <programlisting role="php"><![CDATA[<?php
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
-            الأن عندما ستقوم بإستدعاء ('view->render('someView.php$ ,
+            الأن عندما ستقوم بإستدعاء ('view-&gt;render('someView.php$ ,
             سيتم البحث فى المسار "path/to/app/views/someView.php/".
         </para>
 
@@ -143,12 +144,9 @@ $view->addScriptPath('/path/to/custom/');
 // look first for "/path/to/custom/booklist.php", then for
 // "/path/to/app/views/booklist.php", and finally in the current
 // directory for "booklist.php".
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

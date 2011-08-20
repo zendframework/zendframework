@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.basics">
-    <title>Basic Placeholder Usage</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.basics"><info><title>Basic Placeholder Usage</title></info>
+    
 
     <para>
         Zend Framework defines a generic <methodname>placeholder()</methodname> view helper that you
@@ -250,8 +249,7 @@ $this->placeholder('sidebar')
 
     <para>
         There are a large number of things you can do by combining placeholders and layout scripts;
-        experiment with them, and read the <link
-            linkend="zend.view.helpers.initial.placeholder">relevant manual sections</link> for more
+        experiment with them, and read the <link linkend="zend.view.helpers.initial.placeholder">relevant manual sections</link> for more
         information.
     </para>
-</sect1>
+</section>

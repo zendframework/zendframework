@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.prefix-path-mapper">
-    <title>The PrefixPathMapper Interface</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.prefix-path-mapper"><info><title>The PrefixPathMapper Interface</title></info>
+    
 
-    <sect2 id="zend.loader.prefix-path-mapper.intro">
-        <title>Overview</title>
+    <section xml:id="zend.loader.prefix-path-mapper.intro"><info><title>Overview</title></info>
+        
 
         <para>
             One approach to resolving plugin names to class names utilizes prefix/path pairs. In
@@ -15,10 +14,10 @@
             <interfacename>PrefixPathMapper</interfacename> interface defines a common interface for
             specifying and modifying a map of prefix/path pairs.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.prefix-path-mapper.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.prefix-path-mapper.quick-start"><info><title>Quick Start</title></info>
+        
 
         <para>
             The <interfacename>PrefixPathMapper</interfacename> provides simply two methods: one for
@@ -34,20 +33,20 @@ interface PrefixPathMapper
     public function removePrefixPath($prefix, $path);
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.prefix-path-mapper.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.prefix-path-mapper.options"><info><title>Configuration Options</title></info>
+        
 
         <para>
             This component defines no configuration options, as it is an interface.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.prefix-path-mapper.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.prefix-path-mapper.methods"><info><title>Available Methods</title></info>
+        
 
-        <refentry id="zend.loader.prefix-path-mapper.methods.add-prefix-path">
+        <refentry xml:id="zend.loader.prefix-path-mapper.methods.add-prefix-path">
             <refnamediv>
                 <refname>addPrefixPath</refname>
                 <refpurpose>Register a prefix/path association</refpurpose>
@@ -62,8 +61,8 @@ interface PrefixPathMapper
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>addPrefixPath()</title>
+            <refsection><info><title>addPrefixPath()</title></info>
+                
 
                 <para>
                     Implement this method to allow registering a prefix/path pair. The prefix may be
@@ -72,10 +71,10 @@ interface PrefixPathMapper
                     namespace. The implemenation should determine whether or not to aggregate paths
                     for each namespace, or simply maintain a 1:1 association.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.prefix-path-mapper.methods.remove-prefix-path">
+        <refentry xml:id="zend.loader.prefix-path-mapper.methods.remove-prefix-path">
             <refnamediv>
                 <refname>removePrefixPath</refname>
                 <refpurpose>Remove a prefix/path association</refpurpose>
@@ -90,23 +89,23 @@ interface PrefixPathMapper
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>removePrefixPath()</title>
+            <refsection><info><title>removePrefixPath()</title></info>
+                
 
                 <para>
                     Implement this method to remove a prefix/path association from the internal map.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.prefix-path-mapper.examples">
-        <title>Examples</title>
+    <section xml:id="zend.loader.prefix-path-mapper.examples"><info><title>Examples</title></info>
+        
 
         <para>
             Please see the <link linkend="zend.loader.prefix-path-mapper.quick-start">Quick
                 Start</link> for the interface specification.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,6 +1,7 @@
-<sect1 id="zend.version.reading">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><info><title>הצגת גרסאת Zend Framework</title></info>
 
-    <title>הצגת גרסאת Zend Framework</title>
+    
 
     <para>
         <code>Zend_Version</code> מספקת שימוש בערך קבוע במחלקה
@@ -9,20 +10,17 @@
     </para>
 
     <para>
-        המתודה הסטטית <code>Zend_Version::compareVersion($version)</code> מבוססת על הפונקציה של PHP  <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        המתודה הסטטית <code>Zend_Version::compareVersion($version)</code> מבוססת על הפונקציה של PHP  <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/version_compare"><code>version_compare()</code></link>.
         מתודה זו מחזירה -1 אם הגרסא שצויינה ישנה יותר מהגרסא הנוכחית של Zend Framework, 0 אם הם זהים, ו +1 אם הגרסא שצויינה עדכנית יותר מהגרסא הנוכחית של Zend Framework אשר הינך משתמש בה.
     </para>
 
-    <example id="zend.version.reading.example">
-        <title>דוגמא לשימוש במתודת <code>compareVersion()</code></title>
+    <example xml:id="zend.version.reading.example"><info><title>דוגמא לשימוש במתודת <code>compareVersion()</code></title></info>
+        
         <programlisting role="php"><![CDATA[
 // returns -1, 0 or 1
 $cmp = Zend_Version::compareVersion('2.0.0');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

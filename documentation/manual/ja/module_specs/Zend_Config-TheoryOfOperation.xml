@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 16674 -->
-<sect1 id="zend.config.theory_of_operation">
-    <title>動作原理</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><info><title>動作原理</title></info>
+    
 
     <para>
         <classname>Zend_Config</classname> のコンストラクタを通じて、
@@ -33,20 +33,20 @@
         インターフェイスを実装しており、
         これを使用して設定データに容易にアクセスできるようになっています。
         つまり、<classname>Zend_Config</classname> オブジェクトに対して
-        <ulink url="http://php.net/count"><methodname>count()</methodname></ulink>
-        関数や <ulink url="http://php.net/foreach"><emphasis>foreach</emphasis></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/count"><methodname>count()</methodname></link>
+        関数や <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/foreach"><emphasis>foreach</emphasis></link>
         などを使用できるということです。
     </para>
 
     <para>
         デフォルトでは、<classname>Zend_Config</classname>
         で利用できる設定データは読み込み専用です。代入
-        (<command>$config->database->host = 'example.com';</command> など)
+        (<command>$config-&gt;database-&gt;host = 'example.com';</command> など)
         を行おうとすると例外がスローされます。しかし、
         コンストラクタでこの振る舞いを変更し、データの変更を許可することも可能です。
         また、変更を許可した場合には、<classname>Zend_Config</classname>
         は値の設定の解除もサポートしています
-        (<methodname>unset($config->database->host)</methodname> とします)。
+        (<methodname>unset($config-&gt;database-&gt;host)</methodname> とします)。
         <methodname>readOnly()</methodname> メソッドを使用すると、
         指定した <classname>Zend_Config</classname> オブジェクトの変更が許可されているかどうかを取得することができます。
         また <methodname>setReadOnly()</methodname> メソッドを使用すると、
@@ -95,7 +95,7 @@
         <methodname>merge()</methodname> 関数でそれをひとつにまとめることができます。
         たとえば、<varname>$config</varname> と <varname>$localConfig</varname>
         がある場合に <varname>$localConfig</varname> のデータを <varname>$config</varname>
-        に統合するには <command>$config->merge($localConfig);</command> とします。
+        に統合するには <command>$config-&gt;merge($localConfig);</command> とします。
         <varname>$localConfig</varname> の中に <varname>$config</varname>
         と同名の項目がある場合は、もとの値は上書きされます。
     </para>
@@ -109,7 +109,4 @@
             メソッドを使用すると、それ以降の変更を禁じることができます。
         </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

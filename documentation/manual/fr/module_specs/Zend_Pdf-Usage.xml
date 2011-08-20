@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.pdf.usage">
-    <title>Exemple d'utilisation du module Zend_Pdf</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.usage"><info><title>Exemple d'utilisation du module Zend_Pdf</title></info>
+    
 
     <para>
         Cette section propose un exemple d'utilisation du module
@@ -19,8 +17,8 @@
         réaliser des tests.
     </para>
 
-    <example id="zend.pdf.usage.example-1">
-        <title>Exemple d'utilisation du module Zend_Pdf</title>
+    <example xml:id="zend.pdf.usage.example-1"><info><title>Exemple d'utilisation du module Zend_Pdf</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 /**
@@ -272,4 +270,4 @@ if (isset($argv[2])) {
 }
 ]]></programlisting>
     </example>
-</sect1>
+</section>

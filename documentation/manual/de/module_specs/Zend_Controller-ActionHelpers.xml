@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Action Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers"><info><title>Action Helfer</title></info>
+    
 
-    <sect2 id="zend.controller.actionhelper.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.controller.actionhelper.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Aktion Helfer erlauben Entwicklern Runtime und/oder On-Demand Funktionalität in jeden
@@ -16,18 +14,16 @@
 
         <para>
             Es gibt eine Menge an Wegen um Aktion Helfer zu verwenden. Aktion Helfer verwenden ein
-            Broker System, ähnlich den Typen von Brokern in <link
-                linkend="zend.view.helpers">Zend_View_Helper</link>, und denen von <link
-                linkend="zend.controller.plugins">Zend_Controller_Plugin</link>. Aktion Helfer
+            Broker System, ähnlich den Typen von Brokern in <link linkend="zend.view.helpers">Zend_View_Helper</link>, und denen von <link linkend="zend.controller.plugins">Zend_Controller_Plugin</link>. Aktion Helfer
             <classname>Zend_View_Helper</classname>) können bei Bedarf geladen und aufgerufen
             werden, oder Sie können wärend der Anfragezeit (Bootstrap) instanziert werden oder
             wären der Erstellungszeit des Aktion Controllers (<methodname>init()</methodname>). Um
             Sie näher zu verstehen, betrachten wir Ihre Verwendung in der folgenden Sektion.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.initialization">
-        <title>Helfer Initialisierung</title>
+    <section xml:id="zend.controller.actionhelper.initialization"><info><title>Helfer Initialisierung</title></info>
+        
 
         <para>
             Ein Helfer kann auf vielen verschiedenen Wegen initialisiert werden, basierend auf den
@@ -91,10 +87,10 @@ $this->_helper->FlashMessenger('Wir haben in der letzten Anfrage etwas getan');
             Helfer Broker übergeben wird um Ihn durch irgendeine Aktion zu verwenden. Instanziert
             wird er wie jede andere <acronym>PHP</acronym> Klasse.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.broker">
-        <title>Der Helfer Broker</title>
+    <section xml:id="zend.controller.actionhelper.broker"><info><title>Der Helfer Broker</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Action_HelperBroker</classname> behandelt die Details der
@@ -219,10 +215,10 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.stockhelpers">
-        <title>Eingebaute Aktions Helfer</title>
+    <section xml:id="zend.controller.actionhelper.stockhelpers"><info><title>Eingebaute Aktions Helfer</title></info>
+        
 
         <para>
             Zend Framework enthält standardmäßig verschiedene Action Helfer:
@@ -237,17 +233,17 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             im Controller und dem Rendern von Views zu automatisieren.
         </para>
 
-        <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-AutoComplete.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ContextSwitch.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-FlashMessenger.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Json.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-Redirector.xml" />
-        <xi:include href="Zend_Controller-ActionHelpers-ViewRenderer.xml" />
-    </sect2>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-AutoComplete.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ContextSwitch.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-FlashMessenger.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Json.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-Redirector.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-ActionHelpers-ViewRenderer.xml"/>
+    </section>
 
-    <sect2 id="zend.controller.actionhelper.writingyourown">
-        <title>Schreiben eigener Helfer</title>
+    <section xml:id="zend.controller.actionhelper.writingyourown"><info><title>Schreiben eigener Helfer</title></info>
+        
 
         <para>
             Aktions Helfer erweitern <classname>Zend_Controller_Action_Helper_Abstract</classname>,
@@ -315,8 +311,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             Optional kann eine <methodname>direct()</methodname> Methode in der eigenen Helfer
             Klasse inkludiert werden. Wenn Sie definiert ist, erlaubt Sie den Helfer als eine
             Methode des Helfer Brokers zu verwenden, um eine einfache rein-raus Verwendung des
-            Helfers zu ermöglichen. Als Beispiel definiert der <link
-                linkend="zend.controller.actionhelpers.redirector">Umleiter</link>
+            Helfers zu ermöglichen. Als Beispiel definiert der <link linkend="zend.controller.actionhelpers.redirector">Umleiter</link>
             <methodname>direct()</methodname> als einen Alias von <methodname>goto()</methodname>
             und erlaubt damit die Verwendung des Helfers wie folgt:
         </para>
@@ -337,5 +332,5 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
             Wenn eine eigene Helfer Klasse erstellt wurde, kann man zu Ihr wie im obigen Kapitel
             beschrieben, Zugang erhalten.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

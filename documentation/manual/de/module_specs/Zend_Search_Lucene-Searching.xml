@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.searching">
-    <title>Einen Index durchsuchen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.searching"><info><title>Einen Index durchsuchen</title></info>
+    
 
-    <sect2 id="zend.search.lucene.searching.query_building">
-        <title>Abfrage erstellen</title>
+    <section xml:id="zend.search.lucene.searching.query_building"><info><title>Abfrage erstellen</title></info>
+        
 
         <para>
             Es gibt zwei Arten, den Index zu durchsuchen. Die erste Methode verwendet den
@@ -100,8 +98,8 @@ $index->find($query);
             keinem Fall. Das passt deshalb eher für computergenerierte oder nicht geteilte Felder.
         </para>
 
-        <sect3 id="zend.search.lucene.searching.query_building.parsing">
-            <title>Parsen der Abfrage</title>
+        <section xml:id="zend.search.lucene.searching.query_building.parsing"><info><title>Parsen der Abfrage</title></info>
+            
 
             <para>
                 Die <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> Methode
@@ -167,17 +165,17 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
                 gibt die aktuelle Standard Codierung des Abfrage Strings zurück (leerer String
                 bedeutet "aktuelles Gebietsschema").
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results">
-        <title>Suchergebnisse</title>
+    <section xml:id="zend.search.lucene.searching.results"><info><title>Suchergebnisse</title></info>
+        
 
         <para>
             Das Suchergebnis ist ein Array mit
             <classname>Zend_Search_Lucene_Search_QueryHit</classname> Objekten. Jedes davon hat zwei
-            Eigenschaften: <code>$hit->id</code> ist eine Dokumentnummer innerhalb des Index
-            und <code>$hit->score</code> ist ein Punktwert für den Treffer im Suchergebnis. Das
+            Eigenschaften: <code>$hit-&gt;id</code> ist eine Dokumentnummer innerhalb des Index
+            und <code>$hit-&gt;score</code> ist ein Punktwert für den Treffer im Suchergebnis. Das
             Ergebnis wird anhand der Punktwerte sortiert (absteigend von der besten Wertung).
         </para>
 
@@ -243,10 +241,10 @@ foreach ($hits as $hit) {
             Beachte, dass die Dokumentidentität ('path' in unserem Beispiel) auch im Index
             gespeichert wird und von ihm zurückgewonnen werden muß.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results-limiting">
-        <title>Begrenzen des Ergebnissets</title>
+    <section xml:id="zend.search.lucene.searching.results-limiting"><info><title>Begrenzen des Ergebnissets</title></info>
+        
 
         <para>
             Der berechnungsintensivste Teil des Suchens ist die Berechnung der Treffer. Das kann für
@@ -279,10 +277,10 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
                 </para>
             </footnote>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.results-scoring">
-        <title>Ergebnisgewichtung</title>
+    <section xml:id="zend.search.lucene.searching.results-scoring"><info><title>Ergebnisgewichtung</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> verwendet die selben Gewichtungsalgorithmen
@@ -314,14 +312,13 @@ foreach ($hits as $hit) {
 
         <para>
             Die <classname>Zend_Search_Lucene_Search_Similarity</classname> Klasse wird verwendet,
-            um den Punktwert für jeden Treffer zu berechnen. Beachte den <link
-                linkend="zend.search.lucene.extending.scoring">Erweiterbarkeit. Algorithmen für
+            um den Punktwert für jeden Treffer zu berechnen. Beachte den <link linkend="zend.search.lucene.extending.scoring">Erweiterbarkeit. Algorithmen für
                 Punktwertermittlung</link> Abschnitt für weitere Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.sorting">
-        <title>Sortierung der Suchergebnisse</title>
+    <section xml:id="zend.search.lucene.searching.sorting"><info><title>Sortierung der Suchergebnisse</title></info>
+        
 
         <para>
             Standardmäßig werden die Suchergebnisse nach dem Punktwert sortiert. Der Programmierer
@@ -330,7 +327,7 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            <code>$index->find()</code> Aufruf kann verschiedene optionale Parameter entgegen
+            <code>$index-&gt;find()</code> Aufruf kann verschiedene optionale Parameter entgegen
             nehmen:
         </para>
 
@@ -379,10 +376,10 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
             die Abfrage muß Dokumente komplett vom Index empfangen werden, was die Geschwindigkeit
             der Suche dramatisch reduziert.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.searching.highlighting">
-        <title>Such Resultate hervorheben</title>
+    <section xml:id="zend.search.lucene.searching.highlighting"><info><title>Such Resultate hervorheben</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> bietet zwei Optionen für das Highlightinh von
@@ -459,7 +456,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 
         <para>
             Das Ergebnis der Highlighting Operation wird von der
-            <code>Zend_Search_Lucene_Document_Html->getHTML()</code> Methode empfangen.
+            <code>Zend_Search_Lucene_Document_Html-&gt;getHTML()</code> Methode empfangen.
         </para>
 
         <note>
@@ -489,7 +486,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 
         <para>
             Die zweite Option ist die Verwendung der
-            <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[,
+            <code>Zend_Search_Lucene_Search_Query-&gt;highlightMatches(string $inputHTML[,
             $defaultEncoding = 'UTF-8'[,
             Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code> Methode:
         </para>
@@ -541,7 +538,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         <para>
             Wobei das <code>Zend_Search_Lucene_Document_Html</code> Objekt ein Objekt ist welches
             von der HMTL Quelle erzeugt wird, die wiederum von der
-            <code>Zend_Search_Lucene_Search_Query->highlightMatches()</code> Methode geliefert
+            <code>Zend_Search_Lucene_Search_Query-&gt;highlightMatches()</code> Methode geliefert
             wird.
         </para>
 
@@ -564,11 +561,11 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         </para>
 
         <para>
-            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code>
+            <code>Zend_Search_Lucene_Search_Query-&gt;htmlFragmentHighlightMatches()</code>
             hat ein ähnliches Verhalten. Der einzige Unterschied besteht darin das er eine
-            Eingabe entgegen nimmt, und <acronym>HTML</acronym> Fragmente ohne die &lt;>HTML>,
-            &lt;HEAD>, &lt;BODY> Tags zurückgibt. Trotzdem werden Fragmente automatisch in gültiges
+            Eingabe entgegen nimmt, und <acronym>HTML</acronym> Fragmente ohne die &lt;&gt;HTML&gt;,
+            &lt;HEAD&gt;, &lt;BODY&gt; Tags zurückgibt. Trotzdem werden Fragmente automatisch in gültiges
             <acronym>XHTML</acronym> transformiert.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

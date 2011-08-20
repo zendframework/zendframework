@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="zend.form.advanced">
-    <title>Zend_Form の高度な使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Zend_Form の高度な使用法</title></info>
+    
 
     <para>
         <classname>Zend_Form</classname> にはさまざまな機能があり、
@@ -10,8 +8,8 @@
         それらの機能について例を交えて説明します。
     </para>
 
-    <sect2 id="zend.form.advanced.arrayNotation">
-        <title>配列記法</title>
+    <section xml:id="zend.form.advanced.arrayNotation"><info><title>配列記法</title></info>
+        
 
         <para>
             関連するフォーム要素について、要素名を配列形式にしてグループ化したいこともあるでしょう。
@@ -207,10 +205,10 @@
             フォームを経由して暗黙的に設定されたものなのか)
             を知るには <methodname>getBelongsTo()</methodname> アクセサを使用します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.advanced.multiPage">
-        <title>複数ページのフォーム</title>
+    <section xml:id="zend.form.advanced.multiPage"><info><title>複数ページのフォーム</title></info>
+        
 
         <para>
             現在、複数ページのフォームは
@@ -226,8 +224,8 @@
             かつすべてのサブフォームの入力を終えるまでフォームの処理を行わないということができます。
         </para>
 
-        <example id="zend.form.advanced.multiPage.registration">
-            <title>登録フォームの例</title>
+        <example xml:id="zend.form.advanced.multiPage.registration"><info><title>登録フォームの例</title></info>
+            
 
             <para>
                 例として、登録フォームを考えてみましょう。
@@ -739,8 +737,5 @@ endforeach ?>
                 上の例のようにするのが最も無難でしょう。
             </para>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

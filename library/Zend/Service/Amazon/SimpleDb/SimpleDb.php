@@ -23,8 +23,10 @@
  * @namespace
  */
 namespace Zend\Service\Amazon\SimpleDb;
-use Zend\Http,
-    Zend\Crypt;
+
+use Zend\Crypt,
+    Zend\Http,
+    Zend\Uri;
 
 /**
  * @category   Zend
@@ -80,13 +82,13 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
 	/**
      * Set SimpleDB endpoint to use
      *
-     * @param string|Zend\Uri\Http $endpoint
+     * @param string|Uri\Uri $endpoint
      * @return Zend\Service\Amazon\SimpleDb\SimpleDb
      */
     public function setEndpoint($endpoint)
     {
-    	if(!($endpoint instanceof \Zend\Uri\Url)) {
-    		$endpoint = new \Zend\Uri\Url($endpoint);
+    	if(!($endpoint instanceof Uri\Uri)) {
+    		$endpoint = Uri\UriFactory::factory($endpoint);
     	}
     	if(!$endpoint->isValid()) {
     		throw new Exception\InvalidArgumentException("Invalid endpoint supplied");
@@ -98,7 +100,7 @@ class SimpleDb extends \Zend\Service\Amazon\AbstractAmazon
     /**
      * Get SimpleDB endpoint
      *
-     * @return Zend\Uri\Http
+     * @return Uri\Uri
      */
     public function getEndpoint() 
     {

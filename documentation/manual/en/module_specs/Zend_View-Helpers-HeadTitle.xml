@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.headtitle">
-    <title>HeadTitle Helper</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.headtitle"><info><title>HeadTitle Helper</title></info>
+    
 
     <para>
         The <acronym>HTML</acronym> <emphasis>&lt;title&gt;</emphasis> element is used to provide a
@@ -30,8 +29,8 @@
         pass a different attach order as the second parameter.
     </para>
 
-    <example id="zend.view.helpers.initial.headtitle.basicusage">
-        <title>HeadTitle Helper Basic Usage</title>
+    <example xml:id="zend.view.helpers.initial.headtitle.basicusage"><info><title>HeadTitle Helper Basic Usage</title></info>
+        
 
         <para>
             You may specify a title tag at any time. A typical usage would have
@@ -62,7 +61,4 @@ $this->headTitle()->setSeparator(' / ');
 <?php echo $this->headTitle() ?>
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

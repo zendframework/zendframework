@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21821 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.paginator.control">
-    <title>Seitenkontrolle und ScrollingStyles</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.control"><info><title>Seitenkontrolle und ScrollingStyles</title></info>
+    
 
     <para>
         Die Darstellung von Elementen für eine Bildschirmseite ist ein guter Start. In den Code
@@ -38,19 +36,19 @@
 <!-- Link zur vorherigen Seite -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Vorherige
+    < Vorherige
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Vorherige</span> |
+  <span class="disabled">< Vorherige</span> |
 <?php endif; ?>
 
 <!-- Link zur nächsten Seite -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Nächste &gt;
+    Nächste >
   </a> |
 <?php else: ?>
-  <span class="disabled">Nächste &gt;</span> |
+  <span class="disabled">Nächste ></span> |
 <?php endif; ?>
 
 <!-- Link zur letzten Seite -->
@@ -111,4 +109,4 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
         Für eine Liste aller vorhandenen ScrollingStyles, kann in das Referenz Handbuch gesehen
         werden.
     </para>
-</sect1>
+</section>

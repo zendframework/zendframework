@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.dojo.form.examples">
-    <title>Dojo Form Examples</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.examples"><info><title>Dojo Form Examples</title></info>
+    
 
-    <example id="zend.dojo.form.examples.dojoform">
-        <title>Using Zend_Dojo_Form</title>
+    <example xml:id="zend.dojo.form.examples.dojoform"><info><title>Using Zend_Dojo_Form</title></info>
+        
 
         <para>
             The easiest way to utilize Dojo with <classname>Zend_Form</classname> is to
@@ -351,8 +350,8 @@ class My_Form_Test extends Zend_Dojo_Form
 ]]></programlisting>
     </example>
 
-    <example id="zend.dojo.form.examples.decorating">
-        <title>Modifying an existing form to utilize Dojo</title>
+    <example xml:id="zend.dojo.form.examples.decorating"><info><title>Modifying an existing form to utilize Dojo</title></info>
+        
 
         <para>
             Existing forms can be modified to utilize Dojo as well, by use of
@@ -408,7 +407,4 @@ class My_Custom_Form extends Zend_Form
             replacement of <classname>Zend_Form</classname> that's already Dojo-enabled...
         </para>
     </example>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

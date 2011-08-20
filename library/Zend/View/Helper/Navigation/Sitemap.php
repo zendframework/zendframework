@@ -24,8 +24,11 @@
  */
 namespace Zend\View\Helper\Navigation;
 
-use Zend\Navigation\AbstractPage,
+use DOMDocument,
+    RecursiveIteratorIterator,
+    Zend\Navigation\AbstractPage,
     Zend\Navigation\Container,
+    Zend\Uri,
     Zend\View;
 
 /**
@@ -33,16 +36,6 @@ use Zend\Navigation\AbstractPage,
  *
  * @link http://www.sitemaps.org/protocol.php
  *
- * @uses       DOMDocument
- * @uses       RecursiveIteratorIterator
- * @uses       \Zend\Uri\Url
- * @uses       \Zend\Uri\Exception
- * @uses       \Zend\Validator\Sitemap\Changefreq
- * @uses       \Zend\Validator\Sitemap\Lastmod
- * @uses       \Zend\Validator\Sitemap\Loc
- * @uses       \Zend\Validator\Sitemap\Priority
- * @uses       \Zend\View\Exception
- * @uses       \Zend\View\Helper\Navigation\AbstractHelper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
@@ -224,21 +217,21 @@ class Sitemap extends AbstractHelper
      *
      * @param  string $serverUrl                    server URL to set (only
      *                                              scheme and host)
-     * @throws \Zend\Uri\Exception                   if invalid server URL
-     * @return \Zend\View\Helper\Navigation\Sitemap  fluent interface, returns
+     * @throws Uri\Exception                   if invalid server URL
+     * @return Sitemap  fluent interface, returns
      *                                              self
      */
     public function setServerUrl($serverUrl)
     {
-        $uri = new \Zend\Uri\Url($serverUrl);
+        $uri = Uri\UriFactory::factory($serverUrl);
         $uri->setFragment('');
         $uri->setPath('');
         $uri->setQuery('');
 
         if ($uri->isValid()) {
-            $this->_serverUrl = $uri->generate();
+            $this->_serverUrl = $uri->toString();
         } else {
-            $e = new \Zend\Uri\Exception(sprintf(
+            $e = new Uri\Exception\InvalidUriException(sprintf(
                     'Invalid server URL: "%s"',
                     $serverUrl));
             $e->setView($this->view);
@@ -279,15 +272,7 @@ class Sitemap extends AbstractHelper
             $enc = $this->view->getEncoding();
         }
 
-        // TODO: remove check when minimum PHP version is >= 5.2.3
-        if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
-            // do not encode existing HTML entities
-            return htmlspecialchars($string, ENT_QUOTES, $enc, false);
-        } else {
-            $string = preg_replace('/&(?!(?:#\d++|[a-z]++);)/ui', '&amp;', $string);
-            $string = str_replace(array('<', '>', '\'', '"'), array('&lt;', '&gt;', '&#39;', '&quot;'), $string);
-            return $string;
-        }
+        return htmlspecialchars($string, ENT_QUOTES, $enc, false);
     }
 
     // Public methods:
@@ -316,7 +301,7 @@ class Sitemap extends AbstractHelper
             $curDoc = $this->getView()->broker('url')->direct();
             $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
             $url = rtrim($this->getServerUrl(), '/') . '/'
-                 . $curDoc 
+                 . $curDoc
                  . (empty($curDoc) ? '' : '/') . $href;
         }
 
@@ -355,7 +340,7 @@ class Sitemap extends AbstractHelper
         }
 
         // create document
-        $dom = new \DOMDocument('1.0', 'UTF-8');
+        $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->formatOutput = $this->getFormatOutput();
 
         // ...and urlset (root) element
@@ -363,8 +348,8 @@ class Sitemap extends AbstractHelper
         $dom->appendChild($urlSet);
 
         // create iterator
-        $iterator = new \RecursiveIteratorIterator($container,
-            \RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator($container,
+            RecursiveIteratorIterator::SELF_FIRST);
 
         $maxDepth = $this->getMaxDepth();
         if (is_int($maxDepth)) {

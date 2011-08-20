@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17987 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.i18n">
-    <title>Internationalisierung von Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Internationalisierung von Zend_Form</title></info>
+    
 
     <para>
         Immer mehr Entwickler müssen ihren Inhalt für mehere Sprachen und Regionen zur Verfügung
         stellen. <classname>Zend_Form</classname> versucht so einen Arbeitsschritt so einfach wie
-        möglich zu machen und verwendet Funktionalitäten sowohl in <link
-            linkend="zend.translate">Zend_Translate</link>, als auch in <link
-            linkend="zend.validate">Zend_Validate</link> um das zu tun.
+        möglich zu machen und verwendet Funktionalitäten sowohl in <link linkend="zend.translate">Zend_Translate</link>, als auch in <link linkend="zend.validate">Zend_Validate</link> um das zu tun.
     </para>
 
     <para>
@@ -22,8 +18,8 @@
         <link linkend="zend.translate">Dokumentation zu Zend_Translate</link>.
     </para>
 
-    <note>
-        <title>Die Übersetzung kann für jedes Element einzeln abgeschaltet werden</title>
+    <note><info><title>Die Übersetzung kann für jedes Element einzeln abgeschaltet werden</title></info>
+        
 
         <para>
             Übersetzung kann für jedes Formular, Element, Anzeigegruppe, oder Unterformular, durch
@@ -34,8 +30,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.form.i18n.initialization">
-        <title>I18n in Formularen initialisieren</title>
+    <section xml:id="zend.form.i18n.initialization"><info><title>I18n in Formularen initialisieren</title></info>
+        
 
         <para>
             Um I18n in Formularen zu initialisieren, muss man entweder ein
@@ -114,10 +110,10 @@ $element->setTranslator($translate);
 ]]></programlisting>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.i18n.standard">
-        <title>Standard I18n Ziele</title>
+    <section xml:id="zend.form.i18n.standard"><info><title>Standard I18n Ziele</title></info>
+        
 
         <para>
             Was kann nun standardmäßig übersetzt werden, nachdem ein Übersetzungsobjekt
@@ -187,5 +183,5 @@ $element->setTranslator($translate);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

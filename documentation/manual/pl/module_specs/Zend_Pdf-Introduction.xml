@@ -1,6 +1,9 @@
-<sect1 id="zend.pdf.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.introduction"><info><title>Wprowadzenie</title></info>
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Wprowadzenie</title>
+    
     <para>
     Moduł Zend_Pdf jest silnikiem służącym do manipulacji plikami PDF (Portable Document Format)
     napisanym w całości w PHP 5. Może on ładować istniejące dokumenty, tworzyć nowe,
@@ -64,7 +67,4 @@
         </listitem>
     </itemizedlist>
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

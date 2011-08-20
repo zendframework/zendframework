@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.file-transport">
-    <title>Using File Transport</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.file-transport"><info><title>Using File Transport</title></info>
+    
     
     <para>
         <classname>Zend_Mail_Transport_File</classname> is useful in a
@@ -36,4 +35,4 @@ $mail->send($tr);
     <para>
         The resulting file will be something like <filename>somebody@example.com_1493362665.tmp</filename>
     </para>
-</sect1>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20819 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.smtp-secure">
-    <title>Sécuriser les transports SMTP</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.smtp-secure"><info><title>Sécuriser les transports SMTP</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> supporte aussi l'utilisation des connexions SMTP
@@ -12,8 +10,8 @@
         <acronym>SSL</acronym>.
     </para>
 
-    <example id="zend.mail.smtp-secure.example-1">
-        <title>Activer une connexion sécurisée dans Zend_Mail_Transport_Smtp</title>
+    <example xml:id="zend.mail.smtp-secure.example-1"><info><title>Activer une connexion sécurisée dans Zend_Mail_Transport_Smtp</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $config = array('ssl' => 'tls',
@@ -29,4 +27,4 @@ $mail->setSubject('Sujet de test');
 $mail->send($transport);
 ]]></programlisting>
     </example>
-</sect1>
+</section>

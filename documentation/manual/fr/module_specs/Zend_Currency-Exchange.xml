@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21646 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.exchange">
-    <title>Echanger (convertir) des monnaies</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.exchange"><info><title>Echanger (convertir) des monnaies</title></info>
+    
 
     <para>
         Dans la section précédente, nous avons parlé des calculs sur les monnaies. Mais comme vous pouvez imaginer,
@@ -90,8 +88,8 @@ print $currency->add($currency2);
         un taux de 2 vers 2.000 <acronym>EUR</acronym>.
     </para>
 
-    <note>
-        <title>Calcul sans service de change</title>
+    <note><info><title>Calcul sans service de change</title></info>
+        
 
         <para>
             Si vous tentez des calculs avec deux monnaies de types différents et qu'aucun service de change
@@ -99,4 +97,4 @@ print $currency->add($currency2);
             nativement passer d'une monnaie à une autre.
         </para>
     </note>
-</sect1>
+</section>

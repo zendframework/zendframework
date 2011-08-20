@@ -1,8 +1,9 @@
-<sect1 id="zend.json.xml2json">
-    <title>Conversione da XML a JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.xml2json"><info><title>Conversione da XML a JSON</title></info>
+    
     <para>
         <code>Zend_Json</code> fornisce un metodo di supporto per la trasformazione di dati XML nel formato JSON.
-        Questa funzione è stata ispirata dall'<ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">articolo IBM developerWorks</ulink>.
+        Questa funzione è stata ispirata dall'<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">articolo IBM developerWorks</link>.
     </para>
 
     <para>
@@ -14,8 +15,8 @@
     <programlisting role="php"><![CDATA[
         // la funzione fromXml accetta semplicemente una stringa
         // con contenuto XML come input
-        $contenutoJson = Zend_Json::fromXml($stringaContenutoXml, true);?>]]>
-    </programlisting>
+        $contenutoJson = Zend_Json::fromXml($stringaContenutoXml, true);?>
+    ]]></programlisting>
 
     <para>
         La funzione <code>Zend_Json::fromXml()</code> esegue la conversione del parametro stringa contenente l'XML e restituisce l'equivalente contenuto nel formato JSON.
@@ -55,8 +56,8 @@
         <author><first>Jack</first><last>Herrington</last></author>
         <publisher>O'Reilly</publisher>
     </book>
-</books> ?>]]>
-    </programlisting>
+</books> ?>
+    ]]></programlisting>
 
     <para>
         La stringa JSON restituita dalla funzione <code>Zend_Json::fromXml()</code>:
@@ -92,15 +93,12 @@
          "publisher" : "O'Reilly"
       }
    ]}
-}  ?>]]>
-    </programlisting>
+}  ?>
+    ]]></programlisting>
 
     <para>
         E' possibile trovare maggiori dettagli su questa funzionalità xml2json nella proposta originale.
-        Si consiglia di dare uno sguardo alla <ulink url="http://tinyurl.com/2tfa8z">proposta Zend_xml2json</ulink>.
+        Si consiglia di dare uno sguardo alla <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://tinyurl.com/2tfa8z">proposta Zend_xml2json</link>.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

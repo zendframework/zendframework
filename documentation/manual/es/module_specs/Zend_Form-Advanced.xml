@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.form.advanced">
-    <title>Uso avanzado de Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Uso avanzado de Zend_Form</title></info>
+    
 
     <para>
         <classname>Zend_Form</classname> tiene una funcional riqueza, muchas de
         ellas dirigidas a expertos desarroladores. Este capítulo esta dirigido a
         documentar algunas de las funcionalidades con ejemplos y casos de uso. </para>
 
-    <sect2 id="zend.form.advanced.arrayNotation">
-        <title>Notación de array</title>
+    <section xml:id="zend.form.advanced.arrayNotation"><info><title>Notación de array</title></info>
+        
 
         <para>A muchos desarroladores web experimentados les gusta agrupar
             elementos relacionados de formulario usando notación de array en los
@@ -146,8 +144,7 @@
 
         <para>
             <classname>Zend_Form</classname> intenta automatizar este proceso
-            con los <link linkend="zend.form.forms.subforms"
-                >subformularios</link> . Por defecto, los subformularios son
+            con los <link linkend="zend.form.forms.subforms">subformularios</link> . Por defecto, los subformularios son
             generados usando la notación de array como se muestra en el anterior
             formulario <acronym>HTML</acronym> listado completo con
             identificadores. El nombre del array esta basado en el nombre del
@@ -202,10 +199,10 @@
             Para descubrir el valor que tiene -- sea o no sea definido
             explícitamente o implícitamente a través del formulario -- se puede
             usar el accesor <methodname>getBelongsTo()</methodname> . </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.advanced.multiPage">
-        <title>Formularios Multi-Página</title>
+    <section xml:id="zend.form.advanced.multiPage"><info><title>Formularios Multi-Página</title></info>
+        
 
         <para> Actualmente, los formularios multi-página no están oficialmente
             soportados en <classname>Zend_Form</classname> ; sin embargo, la
@@ -218,8 +215,8 @@
             validarlo, pero no procesar el formulario hasta que todos los
             subformularios esten completos.</para>
 
-        <example id="zend.form.advanced.multiPage.registration">
-            <title>Ejemplo de formulario de registro</title>
+        <example xml:id="zend.form.advanced.multiPage.registration"><info><title>Ejemplo de formulario de registro</title></info>
+            
             <para>Vamos a usar un formulario de registro como ejemplo. Para
                 nuestros propósitos, queremos capturar el nombre del usuario y
                 la contraseña en la primera página, después la información del
@@ -712,5 +709,5 @@ endforeach
                 arriba debería servir como guia razonable para alcanzar esta
                 tarea en su web.</para>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

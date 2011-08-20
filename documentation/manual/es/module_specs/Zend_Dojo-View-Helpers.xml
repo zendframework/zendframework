@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20176 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.dojo.view.dijit">
-    <title>Ayudantes de Vistas Específicos de Dijit</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.view.dijit"><info><title>Ayudantes de Vistas Específicos de Dijit</title></info>
+    
 
     <para>Del manual de Dojo: "Dijit es un sistema de widgets estratificados
         encima de dojo". Dijit incluye una variedad de diseños y forms de
@@ -150,23 +148,21 @@
     <para>Con el fin de utilizar estos ayudantes de vista, necesita registrar el
         path a los ayudantes de vista dojo con su objeto vista.</para>
 
-    <example id="zend.dojo.view.dijit.prefixpath">
-        <title>Registrando el Prefijo del Path al Ayudante de Vista de
-            Dojo</title>
+    <example xml:id="zend.dojo.view.dijit.prefixpath"><info><title>Registrando el Prefijo del Path al Ayudante de Vista de
+            Dojo</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
     </example>
 
-    <sect3 id="zend.dojo.view.dijit.layout">
-        <title>Elementos del Esquema Dijit</title>
+    <section xml:id="zend.dojo.view.dijit.layout"><info><title>Elementos del Esquema Dijit</title></info>
+        
 
         <para> La familia de elementos dijit.layout son para crear esquemas
             personalizados y previsibles para su sitio. Para cualquier pregunta
-            sobre el uso general, <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/layout"
-                > lea más sobre ellos en el manual de Dojo</ulink> . </para>
+            sobre el uso general, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/layout"> lea más sobre ellos en el manual de Dojo</link> . </para>
 
         <para> Todos los elementos de los esquemas dijit tienen la firma
                 <command>string ($id = null, $content = '', array $params =
@@ -354,8 +350,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
             </listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.view.dijit.layout.borderexample">
-            <title>Ejemplo de esquema de BorderContainer dijit</title>
+        <example xml:id="zend.dojo.view.dijit.layout.borderexample"><info><title>Ejemplo de esquema de BorderContainer dijit</title></info>
+            
 
             <para>Los BorderContainers, particularmente cuando junto a la
                 capacidad de capturar contenido, son útiles especialmente para
@@ -396,16 +392,14 @@ echo $view->contentPane(
 echo $view->borderContainer()->captureEnd('masterLayout');
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dijit.form">
-        <title>Elementos de Dijit Form</title>
+    <section xml:id="zend.dojo.view.dijit.form"><info><title>Elementos de Dijit Form</title></info>
+        
 
         <para> la validación de forms en Dojo y los dijits de entrada están en
             dijit.form.tree. Para más información sobre la utilización de estos
-            elementos, así como los parámetros aceptados, por favor <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input"
-                >vea la docuemntación de dijit.form</ulink> . </para>
+            elementos, así como los parámetros aceptados, por favor <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input">vea la docuemntación de dijit.form</link> . </para>
 
         <para> Los siguientes elementos de dijit form están disponibles en Zend
             Framework. Excepto cuando se señaló que todos tienen la firma
@@ -593,13 +587,12 @@ echo $view->currencyTextBox(
 );
 ]]></programlisting>
 
-                <note>
-                    <title>Cuestiones con la Construcción</title>
+                <note><info><title>Cuestiones con la Construcción</title></info>
+                    
 
-                    <para> Actualmente hay <ulink
-                            url="http://trac.dojotoolkit.org/ticket/7183">
+                    <para> Actualmente hay <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://trac.dojotoolkit.org/ticket/7183">
                             problemas conocidos con el uso de CurrencyTextBox en
-                            la construcción de capas</ulink> . Una conocida
+                            la construcción de capas</link> . Una conocida
                         solución alternativa es garantizar que el meta tag
                         Content-Type de http-equiv en su documento esté
                         establecido al conjunto de caracteres utf-8, que puede
@@ -644,23 +637,19 @@ echo $view->dateTextBox(
                     el contenido. <command>dijit.Editor</command> es un editor
                     pluggable y extensible, con una variedad de parámetros que
                     puede utilizar para personalización; para más detalles vea
-                        <ulink
-                        url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text"
-                        >la documentación de dijit.Editor</ulink> . </para>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">la documentación de dijit.Editor</link> . </para>
 
                 <programlisting language="php"><![CDATA[
 echo $view->editor('foo');
 ]]></programlisting>
 
-                <note>
-                    <title>Editor Dijit uses div by default</title>
+                <note><info><title>Editor Dijit uses div by default</title></info>
+                    
 
                     <para> The Editor dijit uses an <acronym>HTML</acronym>
                         <acronym>DIV</acronym> by default. The
                             <classname>dijit._editor.RichText</classname>
-                        <ulink
-                            url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText"
-                            >documentation</ulink> indicates that having it
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">documentation</link> indicates that having it
                         built on an <acronym>HTML</acronym>
                         <acronym>TEXTAREA</acronym> can potentially have
                         security implications. </para>
@@ -1116,10 +1105,10 @@ echo $view->validationTextBox(
 ]]></programlisting>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.view.dijit.custom">
-        <title>Dijits Personalizados</title>
+    <section xml:id="zend.dojo.view.dijit.custom"><info><title>Dijits Personalizados</title></info>
+        
 
         <para> Si ahonda mucho en Dojo, se encontrará escribiendo bastantes
             dijits personalizados, o utilizando dijits experimentales de Dojox.
@@ -1144,9 +1133,9 @@ echo $view->validationTextBox(
                 <methodname>captureStart()</methodname> también espera que pase
             el atributo "dojoType" a su argumento "params". </para>
 
-        <example id="zend.dojo.view.dijit.custom.example">
-            <title>Usando CustomDijit para mostrar un
-                dojox.layout.ContentPane</title>
+        <example xml:id="zend.dojo.view.dijit.custom.example"><info><title>Usando CustomDijit para mostrar un
+                dojox.layout.ContentPane</title></info>
+            
 
             <para>
                 <methodname>dojox.layout.ContentPane</methodname> es la
@@ -1216,5 +1205,5 @@ class My_View_Helper_FooContentPane
                 extender <code>CustomDijit</code> debería funcionar
                 correctamente. </para>
         </example>
-    </sect3>
-</sect2>
+    </section>
+</section>

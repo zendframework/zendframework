@@ -1,6 +1,7 @@
-<sect1 id="zend.debug.dumping">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.debug.dumping"><info><title>Variabelen dumpen</title></info>
 
-    <title>Variabelen dumpen</title>
+    
 
     <para>
         Informatie over een uitdrukking wordt door de statische methode
@@ -10,8 +11,8 @@
         programma's of debug omgevingen nodig heeft.
     </para>
 
-    <example id="zend.debug.dumping.example">
-        <title>Voorbeeld van de dump() methode</title>
+    <example xml:id="zend.debug.dumping.example"><info><title>Voorbeeld van de dump() methode</title></info>
+        
         <programlisting role="php"><![CDATA[<?php
 
 Zend_Debug::dump($var, $label=null, $echo=true);]]></programlisting>
@@ -39,15 +40,15 @@ Zend_Debug::dump($var, $label=null, $echo=true);]]></programlisting>
 
     <para>
         Het is misschien handig om te weten dat intern de  <code>Zend_Debug::dump()</code>
-        methode, de PHP functie <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>
+        methode, de PHP functie <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/var_dump"><code>var_dump()</code></link>
         omhulst. Als er wordt gedetecteerd dat het om een web presentatie gaat,
         dan wordt de waarde van <code>var_dump()</code> automatisch door
-        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink> gehaald
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></link> gehaald
         en door de (x)HTML <code>&lt;pre&gt;</code> tags omhulst.
     </para>
 
-    <tip>
-        <title>Debuggen met Zend_Log</title>
+    <tip><info><title>Debuggen met Zend_Log</title></info>
+        
         <para>
             Het gebruiken van <code>Zend_Debug::dump()</code> is goed voor ad hoc debuggen
             tijdens software ontwikkeling. Je kunt snel code om een variabele te dumpen
@@ -62,7 +63,4 @@ Zend_Debug::dump($var, $label=null, $echo=true);]]></programlisting>
         </para>
     </tip>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

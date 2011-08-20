@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17592 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.static">
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.static"><info><title>Zend_Controller_Router_Route_Static</title></info>
 
-    <title>Zend_Controller_Router_Route_Static</title>
+    
 
     <para>
         Les exemples ci-dessus utilisent des routes dynamiques - routes qui contiennent des
         motifs pour chercher des correspondances. Seulement, parfois, une route particulière est
         marquée en dur, et mettre en marche le moteur d'expression régulière serait inutile. La
-        réponse à cette situation est l'utilisation de routes statiques&#160;:
+        réponse à cette situation est l'utilisation de routes statiques :
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -25,11 +23,11 @@ $router->addRoute('login', $route);
         distribue l'action <methodname>AuthController::loginAction()</methodname>.
     </para>
 
-    <note id="zend.controller.router.routes.static.warning">
-        <title>
+    <note xml:id="zend.controller.router.routes.static.warning"><info><title>
             ATTENTION : Les routes statiques doivent contenir des valeurs par défaut
             saines
-        </title>
+        </title></info>
+        
         <para>
             Puisqu'une route statique ne fournit aucune partie de l'URL à l'objet de requête
             en tant que paramètres, vous <emphasis>devez</emphasis> fournir par défaut pour la
@@ -51,14 +49,14 @@ $router->addRoute('login', $route);
         </itemizedlist>
         <para>
             Optionnellement, vous pouvez activer le paramètre "useDefaultControllerAlways" du
-            contrôleur frontal lors de l'amorçage&#160;:
+            contrôleur frontal lors de l'amorçage :
         </para>
         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
         <para>
-            Cependant, ceci est considéré comme un contournement&#160;; il vaut toujours mieux
+            Cependant, ceci est considéré comme un contournement ; il vaut toujours mieux
             définir explicitement des valeurs par défaut saines.
         </para>
     </note>
-</sect3>
+</section>

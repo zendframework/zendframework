@@ -24,6 +24,8 @@
  */
 namespace Zend\Dojo\Form\Element;
 
+use Zend\Form\Element\Exception;
+
 /**
  * NumberTextBox dijit
  *
@@ -108,7 +110,7 @@ class NumberTextBox extends ValidationTextBox
     {
         $type = strtolower($type);
         if (!in_array($type, $this->_allowedTypes)) {
-            throw new \Zend\Form\ElementException(sprintf('Invalid numeric type "%s" specified', $type));
+            throw new Exception\InvalidArgumentException(sprintf('Invalid numeric type "%s" specified', $type));
         }
 
         $this->setConstraint('type', $type);

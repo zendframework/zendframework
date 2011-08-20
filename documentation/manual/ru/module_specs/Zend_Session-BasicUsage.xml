@@ -1,6 +1,7 @@
-<sect1 id="zend.session.basicusage">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.basicusage"><info><title>Базовое использование<!--Basic Usage--></title></info>
 
-    <title>Базовое использование<!--Basic Usage--></title>
+    
 
     <para>
         <code>Zend_Session_Namespace</code> создает экземпляры контейнеров,
@@ -27,9 +28,9 @@
 -->
     </para>
 
-    <sect2 id="zend.session.basicexamples">
+    <section xml:id="zend.session.basicexamples"><info><title>Учебные примеры<!--Tutorial Examples--></title></info>
 
-        <title>Учебные примеры<!--Tutorial Examples--></title>
+        
 
         <para>
             Если при инстанцировании Zend_Session не было указано пространство
@@ -51,10 +52,10 @@
 -->
         </para>
 
-        <example>
-            <title>Подсчет количества просмотров страниц<!--Counting Page Views--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Подсчет количества просмотров страниц<!--Counting Page Views--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     require_once 'Zend/Session.php';
 
     $defaultNamespace = new Zend_Session_Namespace('Default');
@@ -97,10 +98,10 @@
 -->
         </para>
 
-        <example>
-            <title>Новый подход: избежание конфликтов с помощью пространств имен<!--New Way: Namespaces Avoid Collisions--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Новый подход: избежание конфликтов с помощью пространств имен<!--New Way: Namespaces Avoid Collisions--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     // in the Zend_Auth component
     require_once 'Zend/Session.php';
     $authNamespace = new Zend_Session_Namespace('Zend_Auth');
@@ -122,24 +123,24 @@
 -->
         </para>
 
-        <example>
-            <title>Старый подход: обращение к сессиям PHP<!--Old Way: PHP Session Access--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Старый подход: обращение к сессиям PHP<!--Old Way: PHP Session Access--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     $_SESSION['Zend_Auth']['user'] = "myusername";
     $_SESSION['Some_Web_Service']['user'] = "mywebusername";
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.iteration">
+    <section xml:id="zend.session.iteration"><info><title>Итерация по пространствам имен<!--Iterating Over Session Namespaces--></title></info>
 
-        <title>Итерация по пространствам имен<!--Iterating Over Session Namespaces--></title>
+        
 
         <para>
             <code>Zend_Session_Namespace</code> предоставляет полный интерфейс
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate</ulink>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html">IteratorAggregate</link>,
             включая поддержку выражения <code>foreach</code>:
 <!--
             <code>Zend_Session_Namespace</code> provides the full
@@ -148,10 +149,10 @@
 -->
         </para>
 
-        <example>
-            <title>Итерация по сессии<!--Session Iteration--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Итерация по сессии<!--Session Iteration--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     // Zend_Session is iteratable
     require_once 'Zend/Session.php';
     $aNamespace = new Zend_Session_Namespace('some_namespace_with_data_present');
@@ -161,11 +162,11 @@
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.accessors">
+    <section xml:id="zend.session.accessors"><info><title>Методы доступа для пространств имен<!--Accessors for Session Namespaces--></title></info>
 
-        <title>Методы доступа для пространств имен<!--Accessors for Session Namespaces--></title>
+        
 
         <para>
             Обычные методы доступа доступны через "магические" методы (magic
@@ -180,15 +181,15 @@
 -->
         </para>
 
-        <example>
-            <title>Доступ к сессионным данным<!--Accessing Session Data--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Доступ к сессионным данным<!--Accessing Session Data--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
             $object->property = $value;
             echo (isset($object->property) ? 'set' : 'unset');
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

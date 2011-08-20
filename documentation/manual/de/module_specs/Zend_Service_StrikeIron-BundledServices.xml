@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.strikeiron.bundled-services">
-    <title>Zend_Service_StrikeIron: Mitgelieferte Services</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.strikeiron.bundled-services"><info><title>Zend_Service_StrikeIron: Mitgelieferte Services</title></info>
+    
 
     <para>
         <classname>Zend_Service_StrikeIron</classname> kommt mit Wrapper Klassen für drei populäre
         StrikeIron Services.
     </para>
 
-    <sect2 id="zend.service.strikeiron.bundled-services.zip-code-information">
-        <title>ZIP Code Informationen</title>
+    <section xml:id="zend.service.strikeiron.bundled-services.zip-code-information"><info><title>ZIP Code Informationen</title></info>
+        
 
         <para>
             <classname>Zend_Service_StrikeIron_ZipCodeInfo</classname> bietet einen Client für
@@ -20,16 +18,15 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code
-                            Informations Service Seite</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code
+                            Informations Service Seite</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <ulink
-                            url="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip
-                            Code Informations Service WSDL</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip
+                            Code Informations Service WSDL</link>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -75,10 +72,10 @@ if ($zips->count == 0) {
 // http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
 $status = $response->serviceStatus;
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.bundled-services.us-address-verification">
-        <title>U.S. Address-Prüfung</title>
+    <section xml:id="zend.service.strikeiron.bundled-services.us-address-verification"><info><title>U.S. Address-Prüfung</title></info>
+        
 
         <para>
             <classname>Zend_Service_StrikeIron_USAddressVerification</classname> bietet einen Client
@@ -88,16 +85,15 @@ $status = $response->serviceStatus;
             <itemizedlist>
                 <listitem>
                     <para>
-                        <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S.
-                            Address-Prüfungs Service Seite</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S.
+                            Address-Prüfungs Service Seite</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <ulink
-                            url="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S.
-                            Address-Prüfungs Service WSDL</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S.
+                            Address-Prüfungs Service WSDL</link>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -140,10 +136,10 @@ if ($result->addressErrorNumber != 0) {
     $valid = ($result->valid == 'VALID');
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.service.strikeiron.bundled-services.sales-use-tax-basic">
-        <title>Verkaufs &amp; Steuer Grundlagen</title>
+    <section xml:id="zend.service.strikeiron.bundled-services.sales-use-tax-basic"><info><title>Verkaufs &amp; Steuer Grundlagen</title></info>
+        
 
         <para>
             <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname> bietet einen Client für
@@ -153,16 +149,15 @@ if ($result->addressErrorNumber != 0) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=351">Verkaufs
-                            &amp; Steuer Grundlagen Service Seite</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.strikeiron.com/ProductDetail.aspx?p=351">Verkaufs
+                            &amp; Steuer Grundlagen Service Seite</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <ulink
-                            url="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Verkaufs
-                            &amp; Steuer Grundlagen Service WSDL</ulink>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Verkaufs
+                            &amp; Steuer Grundlagen Service WSDL</link>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -191,5 +186,5 @@ $rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
 print_r($rateInfo);               // alle Eigenschaften zeigen
 echo $rateInfo->state_sales_tax;  // oder nur die Staatenweise Verkaufssteuer
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

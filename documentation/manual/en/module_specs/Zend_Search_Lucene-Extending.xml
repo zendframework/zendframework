@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.extending">
-    <title>Extensibility</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.extending"><info><title>Extensibility</title></info>
+    
 
-    <sect2 id="zend.search.lucene.extending.analysis">
-        <title>Text Analysis</title>
+    <section xml:id="zend.search.lucene.extending.analysis"><info><title>Text Analysis</title></info>
+        
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> class is used by the
@@ -54,8 +53,8 @@ $index->addDocument($doc);
         <para>
             Here is an example of a custom analyzer, which accepts words with digits as terms:
 
-            <example id="zend.search.lucene.extending.analysis.example-1">
-                <title>Custom text Analyzer</title>
+            <example xml:id="zend.search.lucene.extending.analysis.example-1"><info><title>Custom text Analyzer</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 /**
@@ -131,10 +130,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.filters">
-        <title>Tokens Filtering</title>
+    <section xml:id="zend.search.lucene.extending.filters"><info><title>Tokens Filtering</title></info>
+        
 
         <para>
             The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> analyzer also
@@ -235,10 +234,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             constructor has one optional argument. This is the word length limit, set by default to
             2.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.scoring">
-        <title>Scoring Algorithms</title>
+    <section xml:id="zend.search.lucene.extending.scoring"><info><title>Scoring Algorithms</title></info>
+        
 
         <para>
             The score of a document <literal>d</literal> for a query <literal>q</literal>
@@ -343,10 +342,10 @@ class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
 $mySimilarity = new MySimilarity();
 Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.extending.storage">
-        <title>Storage Containers</title>
+    <section xml:id="zend.search.lucene.extending.storage"><info><title>Storage Containers</title></info>
+        
 
         <para>
             The abstract class <classname>Zend_Search_Lucene_Storage_Directory</classname> defines
@@ -511,8 +510,5 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
     }
 }
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

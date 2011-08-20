@@ -1,5 +1,8 @@
-<sect1 id="zend.rest.introduction">
-    <title>הקדמה</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.introduction"><info><title>הקדמה</title></info>
+    
 
     <para>
         מאגר השירות REST משתמש בפורמט XML מסויים.
@@ -11,8 +14,4 @@
         Zend Framework מאפשר שימוש ובקרה גם כצד לקוח וגם כצד שרת, אשר שילוב של שניהם מאפשר חווית ממשק לוקאלי הרבה יותר למחלקות.
         רכיבי השרת מאפשרים קריאה למחלקות ומתודות אוטומטית ישירות בעזרת פורמט XML פשוט.
     </para>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

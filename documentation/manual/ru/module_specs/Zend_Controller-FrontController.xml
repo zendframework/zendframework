@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.front">
-    <title>Фронт-контроллер</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.front"><info><title>Фронт-контроллер</title></info>
+    
 
-    <sect2 id="zend.controller.front.overview">
-        <title>Обзор</title>
+    <section xml:id="zend.controller.front.overview"><info><title>Обзор</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Front</classname> реализует
-            <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">паттерн
-            Front Controller</ulink>, используемый в приложениях <ulink
-                url="http://en.wikipedia.org/wiki/Model-view-controller">MVC</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">паттерн
+            Front Controller</link>, используемый в приложениях <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Model-view-controller">MVC</link>.
             Его назначение состоит в инициализации окружения запроса, проложении
             маршрута приходящего запроса и последующем запуске выявленных
             действий. Он агрегирует все ответы и возвращает их по завершении
@@ -19,16 +17,15 @@
 
         <para>
             <classname>Zend_Controller_Front</classname> также реализует
-            <ulink url="http://en.wikipedia.org/wiki/Singleton_pattern">паттерн
-            Singleton</ulink>, это означает, что в любое время может быть
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Singleton_pattern">паттерн
+            Singleton</link>, это означает, что в любое время может быть
             доступен только один экземпляр этого класса. Это позволяет ему также
             выступать в качестве реестра, в котором хранятся другие объекты,
             участвующие в процессе диспетчеризации.
         </para>
 
         <para>
-            <classname>Zend_Controller_Front</classname> регистрирует в себе <link
-            linkend="zend.controller.plugins">брокер плагинов</link> (plugin
+            <classname>Zend_Controller_Front</classname> регистрирует в себе <link linkend="zend.controller.plugins">брокер плагинов</link> (plugin
             broker), что позволяет с помощью плагинов отслеживать события,
             инициируемые фронт-контроллером.
             В большинстве случаев это дает возможность подгонять
@@ -44,13 +41,11 @@
             настройки конфигураций фронт-контроллера и его помощников.
         </para>
 
-        <note>
-            <title>Поведение по умолчанию</title>
+        <note><info><title>Поведение по умолчанию</title></info>
+            
             <para>
-                По умолчанию фронт-контроллер загружает плагин <link
-                linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
-                и помощник действий <link
-                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                По умолчанию фронт-контроллер загружает плагин <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
+                и помощник действий <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                 Это сделано для упрощения обработки ошибок и рендеринга видов в
                 контроллерах, соответственно.
             </para>
@@ -76,10 +71,10 @@ $front->setParam('noViewRenderer', true);
 ]]></programlisting>
         </note>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.primary">
-        <title>Ключевые методы</title>
+    <section xml:id="zend.controller.front.methods.primary"><info><title>Ключевые методы</title></info>
+        
 
         <para>
             Фронт-контроллер имеет несколько аксессоров для настройки его
@@ -87,8 +82,8 @@ $front->setParam('noViewRenderer', true);
             его функционале методов.
         </para>
 
-        <sect3 id="zend.controller.front.methods.primary.getinstance">
-            <title>getInstance()</title>
+        <section xml:id="zend.controller.front.methods.primary.getinstance"><info><title>getInstance()</title></info>
+            
 
             <para>
                 <code>getInstance()</code> используется для получения экземпляра
@@ -100,19 +95,17 @@ $front->setParam('noViewRenderer', true);
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.setcontrollerdirectory">
-            <title>setControllerDirectory() и addControllerDirectory()</title>
+        <section xml:id="zend.controller.front.methods.primary.setcontrollerdirectory"><info><title>setControllerDirectory() и addControllerDirectory()</title></info>
+            
 
             <para>
                 <code>setControllerDirectory()</code> используется для того,
-                чтобы указать <link
-                linkend="zend.controller.dispatcher">диспетчеру</link>, где
-                искать файлы классов <link
-                linkend="zend.controller.action">контроллеров действий</link>.
+                чтобы указать <link linkend="zend.controller.dispatcher">диспетчеру</link>, где
+                искать файлы классов <link linkend="zend.controller.action">контроллеров действий</link>.
                 Он принимает один путь или ассоциативный массив пар
-                модуль => путь в качестве параметра.
+                модуль =&gt; путь в качестве параметра.
             </para>
 
             <para>
@@ -147,17 +140,16 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 Можно получить текущие установки для директорий
                 контроллеров, используя метод
                 <code>getControllerDirectory()</code>. Он вернет массив пар
-                модуль => директория.
+                модуль =&gt; директория.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.addmoduledirectory">
-            <title>addModuleDirectory() и getModuleDirectory()</title>
+        <section xml:id="zend.controller.front.methods.primary.addmoduledirectory"><info><title>addModuleDirectory() и getModuleDirectory()</title></info>
+            
 
             <para>
                 Одной из возможностей фронт-контроллера является то, что вы
-                можете <link
-                    linkend="zend.controller.modular">определять модульную
+                можете <link linkend="zend.controller.modular">определять модульную
                 структуру директорий</link> для создания отдельных компонент,
                 которые называются "модулями".
             </para>
@@ -184,10 +176,10 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 возвращает путь к нему, иначе возвращается путь к текущему
                 модулю.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.dispatch">
-            <title>dispatch()</title>
+        <section xml:id="zend.controller.front.methods.primary.dispatch"><info><title>dispatch()</title></info>
+            
 
             <para>
                 <code>dispatch(Zend_Controller_Request_Abstract $request = null,
@@ -242,10 +234,10 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 других действий. Когда все действия выполнены, фронт-контроллер
                 возвращает ответ.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.front.methods.primary.run">
-            <title>run()</title>
+        <section xml:id="zend.controller.front.methods.primary.run"><info><title>run()</title></info>
+            
 
             <para>
                 <code>Zend_Controller_Front::run($path)</code> - статический
@@ -267,11 +259,11 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 // выполнение диспетчеризации в одном вызове:
 Zend_Controller_Front::run('../application/controllers');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.environment">
-        <title>Методы-аксессоры для конфигурирования</title>
+    <section xml:id="zend.controller.front.methods.environment"><info><title>Методы-аксессоры для конфигурирования</title></info>
+        
 
         <para>
             Кроме методов, перечисленных выше, есть методы-аксессоры, которые
@@ -386,8 +378,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</code>
-                    позволяет регистрировать <link
-                        linkend="zend.controller.plugins">объекты плагинов</link>.
+                    позволяет регистрировать <link linkend="zend.controller.plugins">объекты плагинов</link>.
                     Путем установки опционального параметра
                     <varname>$stackIndex</varname>, вы можете
                     контролировать порядок, в котором выполняются плагины.
@@ -397,8 +388,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>unregisterPlugin($plugin)</code> позволяет отменять
-                    регистрацию <link
-                        linkend="zend.controller.plugins">объектов плагинов</link>.
+                    регистрацию <link linkend="zend.controller.plugins">объектов плагинов</link>.
                     <varname>$plugin</varname> может быть как объектом плагина, так и строкой, обозначающей класс плагина, регистрацию которого надо отменить.
                 </para>
             </listitem>
@@ -440,10 +430,10 @@ Zend_Controller_Front::run('../application/controllers');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.methods.params">
-        <title>Параметры фронт-контроллера</title>
+    <section xml:id="zend.controller.front.methods.params"><info><title>Параметры фронт-контроллера</title></info>
+        
 
         <para>
             Во введении мы указали на то, что фронт-контроллер также выступает
@@ -537,8 +527,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>noViewRenderer</code> используется для отключения
-                    помощника <link
-                        linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                    помощника <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                     Установите этот параметр в true для его отключения.
                 </para>
             </listitem>
@@ -546,17 +535,16 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>noErrorHandler</code> используется для отключения
-                    <link
-                        linkend="zend.controller.plugins.standard.errorhandler">плагина
+                    <link linkend="zend.controller.plugins.standard.errorhandler">плагина
                         Error Handler</link>
                     Установите этот параметр в true для его отключения.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.front.subclassing">
-        <title>Расширение фронт-контроллера</title>
+    <section xml:id="zend.controller.front.subclassing"><info><title>Расширение фронт-контроллера</title></info>
+        
 
         <para>
             При наследовании от фронт-контроллера, необходимо, как
@@ -596,8 +584,5 @@ class My_Controller_Front extends Zend_Controller_Front
             контроллеров, установка других используемых по умолчанию
             маршрутизатора и диспетчера и т.д.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

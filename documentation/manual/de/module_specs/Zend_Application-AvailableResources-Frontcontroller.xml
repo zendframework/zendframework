@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.frontcontroller">
-    <title>Zend_Application_Resource_Frontcontroller</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.frontcontroller"><info><title>Zend_Application_Resource_Frontcontroller</title></info>
+    
 
     <para>
         Die warscheinlich am meisten verwendete Ressource die man mit
@@ -107,8 +105,8 @@
         wird.
     </para>
 
-    <example id="zend.application.available-resources.frontcontroller.configExample">
-        <title>Beispiel der Konfiguration einer Front Controller Ressource</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.configExample"><info><title>Beispiel der Konfiguration einer Front Controller Ressource</title></info>
+        
 
         <para>
             Anbei ist ein Beispiel eines <acronym>INI</acronym> Abschnitts der zeigt wie die Front
@@ -137,8 +135,8 @@ resources.frontController.actionHelperPaths.HELPER_Prefix = "My/Helper/Path"
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.frontcontroller.propertyExample">
-        <title>Empfangen des Front Controllers im eigenen Bootstrap</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.propertyExample"><info><title>Empfangen des Front Controllers im eigenen Bootstrap</title></info>
+        
 
         <para>
             Sobald die Front Controller Ressource initialisiert wurde, kann die Front Controller
@@ -151,4 +149,4 @@ $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>
     </example>
-</sect2>
+</section>

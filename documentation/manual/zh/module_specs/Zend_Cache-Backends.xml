@@ -1,16 +1,17 @@
-<sect1 id="zend.cache.backends">
-    <title>Zend_Cache后端</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.backends"><info><title>Zend_Cache后端</title></info>
+    
 
-    <sect2 id="zend.cache.backends.file">
-        <title>Zend_Cache_Backend_File</title>
+    <section xml:id="zend.cache.backends.file"><info><title>Zend_Cache_Backend_File</title></info>
+        
         <para>
             此后端把缓存纪录存储到文件中去(在一个选定的目录中).
         </para>
         <para>
             可用的选项有 :
         </para>
-        <table id="zend.cache.backends.file.table">
-            <title>文件后端选项</title>
+        <table xml:id="zend.cache.backends.file.table"><info><title>文件后端选项</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -103,17 +104,17 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.sqlite">
-        <title>Zend_Cache_Backend_Sqlite</title>
+    </section>
+    <section xml:id="zend.cache.backends.sqlite"><info><title>Zend_Cache_Backend_Sqlite</title></info>
+        
         <para>
             此后端把缓存纪录存储到SQLite数据库中.
         </para>
         <para>
             可用的选项有:
         </para>
-        <table id="zend.cache.backends.sqlite.table">
-            <title>Sqlite 后端选项</title>
+        <table xml:id="zend.cache.backends.sqlite.table"><info><title>Sqlite 后端选项</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -140,20 +141,20 @@
                               禁用 / 调整自动清理过程. 自动清理过程将对数据库文件进行碎片整理(and make
                             it smaller) 当clean() 或则 delete() 被调用时 : 0
                             表示不自动清理; 1 表示自动清理(当调用 delete() 或者 clean()
-                            方法时) ; x (整数) > 1 => 当调用 delete() 或者 clean()
+                            方法时) ; x (整数) &gt; 1 =&gt; 当调用 delete() 或者 clean()
                             方法时随机清理1到x次.
                           </entry>
                       </row>
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.memcached">
-        <title>Zend_Cache_Backend_Memcached</title>
+    </section>
+    <section xml:id="zend.cache.backends.memcached"><info><title>Zend_Cache_Backend_Memcached</title></info>
+        
         <para>
-            本后端把缓存纪录存储到memcached服务器. <ulink url="http://www.danga.com/memcached/">memcached</ulink>
+            本后端把缓存纪录存储到memcached服务器. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.danga.com/memcached/">memcached</link>
             是一个高性能的,分布式内存对象缓存系统.要使用此后端,你需要一个memecached守护进程(daemon)和
-             <ulink url="http://pecl.php.net/package/memcache">memcache PECL 扩展</ulink>.
+             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/memcache">memcache PECL 扩展</link>.
         </para>
         <para>
             注意 : 使用此后端当设置"doNotTestCacheValidity=true"参数时,不支持"tags"
@@ -161,8 +162,8 @@
         <para>
             可用的选项有:
         </para>
-        <table id="zend.cache.backends.memcached.table">
-            <title>Memcached 后端选项</title>
+        <table xml:id="zend.cache.backends.memcached.table"><info><title>Memcached 后端选项</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -176,11 +177,11 @@
                       <row>
                           <entry><code>servers</code></entry>
                           <entry><code>array</code></entry>
-                          <entry><code>array(array('host' => 'localhost','port' => 11211, 'persistent' => true))</code></entry>
+                          <entry><code>array(array('host' =&gt; 'localhost','port' =&gt; 11211, 'persistent' =&gt; true))</code></entry>
                           <entry>
                                一个memcached服务器数组;其中每个memcached服务器描述为一个关联数组:
-                            'host' => (string) : memcached服务器的名称, 'port'
-                            => (int) : memcached服务器端口, 'persistent' =>
+                            'host' =&gt; (string) : memcached服务器的名称, 'port'
+                            =&gt; (int) : memcached服务器端口, 'persistent' =&gt;
                             (bool) : 是否使用到memcached服务器的持久连接
                           </entry>
                       </row>
@@ -195,12 +196,12 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.apc">
-        <title>Zend_Cache_Backend_Apc</title>
+    </section>
+    <section xml:id="zend.cache.backends.apc"><info><title>Zend_Cache_Backend_Apc</title></info>
+        
         <para>
             此后端通过
-            <ulink url="http://pecl.php.net/package/APC">APC</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://pecl.php.net/package/APC">APC</link>
             (Alternative PHP Cache) 扩展把缓存纪录存储于共享内存中 (当然为使用此后端,APC是需要的).
         </para>
         <para>
@@ -209,11 +210,11 @@
         <para>
             此后端没有选项.
         </para>
-    </sect2>
-        <sect2 id="zend.cache.backends.xcache">
-        <title>Zend_Cache_Backend_Xcache</title>
+    </section>
+        <section xml:id="zend.cache.backends.xcache"><info><title>Zend_Cache_Backend_Xcache</title></info>
+        
         <para>
-            整个后端通过 <ulink url="http://xcache.lighttpd.net/">XCache</ulink> 扩展（它当然需要使用这个后端）
+            整个后端通过 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://xcache.lighttpd.net/">XCache</link> 扩展（它当然需要使用这个后端）
             在共享内存里存储了缓存记录。
         </para>
         <para>
@@ -222,8 +223,8 @@
         <para>
             可用的选项如下：
         </para>
-        <table id="zend.cache.backends.xcache.table">
-            <title>Xcache backend 选项</title>
+        <table xml:id="zend.cache.backends.xcache.table"><info><title>Xcache backend 选项</title></info>
+            
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -253,11 +254,11 @@
                   </tbody>
               </tgroup>
           </table>
-    </sect2>
-    <sect2 id="zend.cache.backends.platform">
-        <title>Zend_Cache_Backend_ZendPlatform</title>
+    </section>
+    <section xml:id="zend.cache.backends.platform"><info><title>Zend_Cache_Backend_ZendPlatform</title></info>
+        
         <para>
-            本后端使用 <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink>产品的内容缓存API. 要使用此后端必须安装Zend Platform.
+            本后端使用 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com/products/platform">Zend Platform</link>产品的内容缓存API. 要使用此后端必须安装Zend Platform.
         </para>
         <para>
     本后端支持标记(tags),但不支持 <code>CLEANING_MODE_NOT_MATCHING_TAG</code>清除模式.
@@ -267,13 +268,10 @@
         </para>
         <programlisting role="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             此后端没有选项.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

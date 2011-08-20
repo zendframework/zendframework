@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20799 -->
-<sect1 id="zend.wildfire.chapter">
+<?xml version="1.0" encoding="utf-8"?>
 
-  <title>Zend_Wildfire</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.wildfire.chapter"><info><title>Zend_Wildfire</title></info>
+
+  
 
   <para>
     <classname>Zend_Wildfire</classname> は、<acronym>PHP</acronym> コードと
-    <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>
+    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.wildfirehq.org/">Wildfire</link>
     クライアントコンポーネントとの間の通信を行うコンポーネントです。
   </para>
   <para>
@@ -15,7 +15,7 @@
     動的でスクリプタブルなプラグイン機構の間の通信を標準化することです。
     現時点でもっとも力を注いでいるのは、サーバサイドの <acronym>PHP</acronym>
     コードのログメッセージを
-    <ulink url="http://www.getfirebug.com/">Firebug コンソール</ulink>
+    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.getfirebug.com/">Firebug コンソール</link>
     に送る仕組みを提供することです。
   </para>
   <para>
@@ -34,7 +34,4 @@
     コンポーネントを使用すると、データベースのプロファイル情報を Firebug に記録できます。
   </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

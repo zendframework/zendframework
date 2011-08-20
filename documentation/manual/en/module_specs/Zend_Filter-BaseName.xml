@@ -1,23 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.basename">
-    <title>BaseName</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.basename"><info><title>BaseName</title></info>
+    
 
     <para>
         <classname>Zend_Filter_BaseName</classname> allows you to filter a string which contains
         the path to a file and it will return the base name of this file.
     </para>
 
-    <sect3 id="zend.filter.set.basename.options">
-        <title>Supported options for Zend_Filter_BaseName</title>
+    <section xml:id="zend.filter.set.basename.options"><info><title>Supported options for Zend_Filter_BaseName</title></info>
+        
 
         <para>
             There are no additional options for <classname>Zend_Filter_BaseName</classname>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.basename.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.basename.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
@@ -42,5 +41,5 @@ print $filter->filter('/vol/tmp/filename.txt');
         <para>
             This will return '<filename>filename.txt</filename>'.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

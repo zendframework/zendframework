@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.between">
-    <title>Between</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.between"><info><title>Between</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Between</classname> allows you to validate if a given value is
         between two other values.
     </para>
 
-    <note>
-        <title>Zend_Validate_Between supports only number validation</title>
+    <note><info><title>Zend_Validate_Between supports only number validation</title></info>
+        
 
         <para>
             It should be noted that <classname>Zend_Validate_Between</classname> supports only the
@@ -17,8 +16,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.between.options">
-        <title>Supported options for Zend_Validate_Between</title>
+    <section xml:id="zend.validate.set.between.options"><info><title>Supported options for Zend_Validate_Between</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_Between</classname>:
@@ -47,10 +46,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.between.basic">
-        <title>Default behaviour for Zend_Validate_Between</title>
+    <section xml:id="zend.validate.set.between.basic"><info><title>Default behaviour for Zend_Validate_Between</title></info>
+        
 
         <para>
             Per default this validator checks if a value is between <property>min</property> and
@@ -70,10 +69,10 @@ $result = $valid->isValid($value);
             value from '0' to '10' is allowed. And values like '-1' and '11' will return
             <constant>FALSE</constant>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.between.inclusively">
-        <title>Validation exclusive the border values</title>
+    <section xml:id="zend.validate.set.between.inclusively"><info><title>Validation exclusive the border values</title></info>
+        
 
         <para>
             Sometimes it is useful to validate a value by excluding the border values. See the
@@ -98,8 +97,5 @@ $result = $valid->isValid($value);
             the values '0' and '10' are no longer allowed and will return
             <constant>FALSE</constant>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

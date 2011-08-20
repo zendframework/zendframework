@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.db">
-    <title>Zend_Application_Resource_Db</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.db"><info><title>Zend_Application_Resource_Db</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Db</classname>
@@ -14,8 +12,7 @@
         <classname>Zend_Db_Table</classname>
         .
          <classname>Zend_Db_Table</classname>. If you want to use mutliple databases
-        simultaneously, you can use the <link
-        linkend="zend.application.available-resources.multidb">Multidb Resource
+        simultaneously, you can use the <link linkend="zend.application.available-resources.multidb">Multidb Resource
         Plugin</link>.
     </para>
 
@@ -55,8 +52,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.application.available-resources.db.configExample">
-        <title>Muestra de la Configuracion de Recursos del Adaptador DB (Base de Datos) </title>
+    <example xml:id="zend.application.available-resources.db.configExample"><info><title>Muestra de la Configuracion de Recursos del Adaptador DB (Base de Datos) </title></info>
+        
         <para>
             A continuación, un ejemplo de configuración
             <acronym>INI</acronym>
@@ -75,8 +72,8 @@ resources.db.isDefaultTableAdapter = true
 ]]></programlisting>
     </example>
 
-    <note>
-        <title>Recuperando la Instancia del Adaptador</title>
+    <note><info><title>Recuperando la Instancia del Adaptador</title></info>
+        
 
         <para>Si decide no hacer la instanciación del adaptador con este recurso por defecto del
             adaptador de tabla, ¿cómo puede recuperar la instancia del adaptador?</para>
@@ -99,4 +96,4 @@ $resource = $bootstrap->getPluginResource('db');
 $db = $resource->getDbAdapter();
 ]]></programlisting>
     </note>
-</sect2>
+</section>

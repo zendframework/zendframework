@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.cachemanager">
-    <title>Zend_Application_Resource_Cachemanager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.cachemanager"><info><title>Zend_Application_Resource_Cachemanager</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Cachemanager</classname> may be
@@ -15,8 +14,8 @@
         to option templates used to instantiate a cache object on request.
     </para>
 
-    <example id="zend.application.available-resources.cachemanager.configExample">
-        <title>Sample Cachemanager resource configuration</title>
+    <example xml:id="zend.application.available-resources.cachemanager.configExample"><info><title>Sample Cachemanager resource configuration</title></info>
+        
 
         <para>
             Below is a sample <acronym>INI</acronym> file showing how
@@ -64,4 +63,4 @@ $dbCache = $manager->getCache('database');
             cache via a configuration file such as out example <acronym>INI</acronym> file above.
         </para>
     </example>
-</sect2>
+</section>

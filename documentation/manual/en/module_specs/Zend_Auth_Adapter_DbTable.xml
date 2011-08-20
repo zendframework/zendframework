@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.auth.adapter.dbtable">
-    <title>Database Table Authentication</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.adapter.dbtable"><info><title>Database Table Authentication</title></info>
+    
 
-    <sect2 id="zend.auth.adapter.dbtable.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.auth.adapter.dbtable.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> provides the ability to
@@ -67,8 +66,8 @@
             </listitem>
         </itemizedlist>
 
-        <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-            <title>Basic Usage</title>
+        <example xml:id="zend.auth.adapter.dbtable.introduction.example.basic_usage"><info><title>Basic Usage</title></info>
+            
 
             <para>
                 As explained in the introduction, the
@@ -185,10 +184,10 @@ Array
                 important to secure the values against unintended access.
             </para>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-        <title>Advanced Usage: Persisting a DbTable Result Object</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.storing_result_row"><info><title>Advanced Usage: Persisting a DbTable Result Object</title></info>
+        
 
         <para>
             By default, <classname>Zend_Auth_Adapter_DbTable</classname> returns the
@@ -229,10 +228,10 @@ if ($result->isValid()) {
 
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
-        <title>Advanced Usage By Example</title>
+    <section xml:id="zend.auth.adapter.dbtable.advanced.advanced_usage"><info><title>Advanced Usage By Example</title></info>
+        
 
         <para>
             While the primary purpose of <classname>Zend_Auth</classname> (and consequently
@@ -358,5 +357,5 @@ $select->where('active = "TRUE"');
 // authenticate, this ensures that users.active = TRUE
 $adapter->authenticate();
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

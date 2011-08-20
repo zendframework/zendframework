@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.mime">
-    <title>Zend_Mime</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.mime.mime.introduction">
-        <title>Введение</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+    
+
+    <section xml:id="zend.mime.mime.introduction"><info><title>Введение</title></info>
+        
         <para>
             <classname>Zend_Mime</classname> является вспомогательным классом
             для работы с сообщениями <acronym>MIME</acronym> multipart. Он
             используется
             <link linkend="zend.mail"><classname>Zend_Mail</classname></link>
-            и <link
-            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>,
+            и <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>,
             может использоваться в приложениях, требующих поддержки
             <acronym>MIME</acronym>.
         </para>
-    </sect2>
+    </section>
     
-    <sect2 id="zend.mime.mime.static">
-    <title>Статические методы и константы</title>
+    <section xml:id="zend.mime.mime.static"><info><title>Статические методы и константы</title></info>
+    
         <para>
             <classname>Zend_Mime</classname> предоставляет простой набор
             статических методов для работы с <acronym>MIME</acronym>:
@@ -95,10 +95,10 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
+    </section>
     
-    <sect2 id="zend.mime.mime.instantiation">
-        <title>Инстанциирование Zend_Mime</title>
+    <section xml:id="zend.mime.mime.instantiation"><info><title>Инстанциирование Zend_Mime</title></info>
+        
         <para>
             При создании объекта <classname>Zend_Mime</classname>
             сохраняется разделитель <acronym>MIME</acronym>, он будет
@@ -133,8 +133,5 @@
                 </listitem>
             </itemizedlist>
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

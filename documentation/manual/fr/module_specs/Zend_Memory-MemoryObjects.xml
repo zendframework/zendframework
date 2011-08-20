@@ -1,16 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.memory.memory-objects">
-    <title>Objet mémoire</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-objects"><info><title>Objet mémoire</title></info>
+    
 
-    <sect2 id="zend.memory.memory-objects.movable">
-        <title>Mobile</title>
+    <section xml:id="zend.memory.memory-objects.movable"><info><title>Mobile</title></info>
+        
 
         <para>
             Créer des objets mémoires mobiles en utilisant la méthode
-            <methodname>create([$data])</methodname> du manager de mémoire : <programlisting
-            role="php"><![CDATA[
+            <methodname>create([$data])</methodname> du manager de mémoire : <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting></para>
 
@@ -18,15 +15,14 @@ $memObject = $memoryManager->create($data);
             "Mobile" signifie que de tels objets peuvent être mis en cache et déchargés de la
             mémoire et chargés ensuite quand le code de l'application accède à l'objet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-objects.locked">
-        <title>Verrouillé</title>
+    <section xml:id="zend.memory.memory-objects.locked"><info><title>Verrouillé</title></info>
+        
 
         <para>
             Créer des objets mémoires verrouillés en utilisant la méthode
-            <methodname>createLocked([$data])</methodname> du manager de mémoire : <programlisting
-            role="php"><![CDATA[
+            <methodname>createLocked([$data])</methodname> du manager de mémoire : <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting></para>
 
@@ -58,15 +54,14 @@ $memObject = $memoryManager->createLocked($data);
             performance qu'en travaillant avec une variable de type chaîne de caractères. La couche
             supérieure est un simple référence pour récupérer la propriété de classe.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-objects.value">
-        <title>Propriété "value" du manager de mémoire</title>
+    <section xml:id="zend.memory.memory-objects.value"><info><title>Propriété "value" du manager de mémoire</title></info>
+        
 
         <para>
             Utilisez la propriété "<code>value</code>" du conteneur de mémoire (mobile ou
-            verrouillé) pour travailler avec les données des objets mémoire : <programlisting
-            role="php"><![CDATA[
+            verrouillé) pour travailler avec les données des objets mémoire : <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 echo $memObject->value;
@@ -87,15 +82,15 @@ $memObject->value = substr($memObject->value, $start, $length);
             inférieure à 5.2. Il devrait aussi être utilisé dans quelques autres cas pour des
             raisons de performance.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-objects.api">
-        <title>Interface du conteneur de mémoire</title>
+    <section xml:id="zend.memory.memory-objects.api"><info><title>Interface du conteneur de mémoire</title></info>
+        
 
         <para>Le conteneur de mémoire fournit les méthodes suivantes :</para>
 
-        <sect3 id="zend.memory.memory-objects.api.getRef">
-            <title>La méthode getRef()</title>
+        <section xml:id="zend.memory.memory-objects.api.getRef"><info><title>La méthode getRef()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 public function &getRef();
@@ -133,10 +128,10 @@ for ($count = 0; $count < strlen($value); $count++) {
     ...
 }
 ]]></programlisting></para>
-            </sect3>
+            </section>
 
-            <sect3 id="zend.memory.memory-objects.api.touch">
-                <title>La méthode touch()</title>
+            <section xml:id="zend.memory.memory-objects.api.touch"><info><title>La méthode touch()</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 public function touch();
@@ -161,10 +156,10 @@ for ($count = 0; $count < strlen($value); $count++) {
 
 $memObject->touch();
 ]]></programlisting></para>
-            </sect3>
+            </section>
 
-            <sect3 id="zend.memory.memory-objects.api.lock">
-                <title>La méthode lock()</title>
+            <section xml:id="zend.memory.memory-objects.api.lock"><info><title>La méthode lock()</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 public function lock();
@@ -201,10 +196,10 @@ $memObject1->touch();
 $memObject1->unlock();
 $memObject2->unlock();
 ]]></programlisting></para>
-            </sect3>
+            </section>
 
-            <sect3 id="zend.memory.memory-objects.api.unlock">
-                <title>La méthode unlock()</title>
+            <section xml:id="zend.memory.memory-objects.api.unlock"><info><title>La méthode unlock()</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 public function unlock();
@@ -214,10 +209,10 @@ public function unlock();
                 La méthode <methodname>unlock()</methodname> déverrouille l'objet quand il n'est plus
                 nécessaire de maintenir verrouillé. Voir l'exemple ci-dessus.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-objects.api.isLocked">
-            <title>La méthode isLocked()</title>
+        <section xml:id="zend.memory.memory-objects.api.isLocked"><info><title>La méthode isLocked()</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 public function isLocked();
@@ -230,6 +225,6 @@ public function isLocked();
                 les objets "verrouillés" et peut être <constant>TRUE</constant> ou <constant>FALSE</constant> pour
                 des objets "mobiles".
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

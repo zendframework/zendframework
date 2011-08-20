@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22312 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.view.placeholders.conclusion">
-    <title>View Placeholders: Conclusion</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.view.placeholders.conclusion"><info><title>View Placeholders: Conclusion</title></info>
+    
 
     <para>
         Les objets placeholders de vue sont des manières simples et puissante de créer des layouts
@@ -14,4 +14,4 @@
         personnalisée. Expérimentez les et visitez les sections appropriées du manuel pour découvrir
         et tester des fonctionnalités supplémentaires qui vous seront sûrement utiles.
     </para>
-</sect1>
+</section>

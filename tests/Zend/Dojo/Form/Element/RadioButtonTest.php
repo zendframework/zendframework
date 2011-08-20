@@ -26,7 +26,7 @@ use Zend\Dojo\Form\Element\RadioButton as RadioButtonElement,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\Validator\InArray as InArrayValidator,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Element_RadioButton.
@@ -59,7 +59,7 @@ class RadioButtonTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.mail.read">
-    <title>メールメッセージの読み込み</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.read"><info><title>メールメッセージの読み込み</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> を使用すると、
@@ -13,8 +11,8 @@
         各保存形式で実装されている機能の概要については以下の表を参照ください。
     </para>
 
-    <table id="zend.mail.read.table-1">
-        <title>メール読み込み機能の概要</title>
+    <table xml:id="zend.mail.read.table-1"><info><title>メール読み込み機能の概要</title></info>
+        
         <tgroup cols="5">
             <thead>
                 <row>
@@ -79,8 +77,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.mail.read-example">
-        <title>Pop3 によるシンプルな読み込み例</title>
+    <section xml:id="zend.mail.read-example"><info><title>Pop3 によるシンプルな読み込み例</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'localhost',
@@ -93,9 +91,9 @@ foreach ($mail as $message) {
 }
 ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-open-local">
-        <title>ローカルに保存されたメールのオープン</title>
+    </section>
+    <section xml:id="zend.mail.read-open-local"><info><title>ローカルに保存されたメールのオープン</title></info>
+        
 
         <para>
             ローカルのメール保存形式としては、Mbox および Maildir
@@ -123,9 +121,9 @@ $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
          <classname>Zend_Mail_Exception</classname> をスローします。
         </para>
 
-    </sect2>
-    <sect2 id="zend.mail.read-open-remote">
-        <title>リモートに保存されたメールのオープン</title>
+    </section>
+    <section xml:id="zend.mail.read-open-remote"><info><title>リモートに保存されたメールのオープン</title></info>
+        
 
         <para>
             リモートの保存形式としては、もっとも有名なふたつである
@@ -181,9 +179,9 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
             (<classname>Zend_Mail_Exception</classname> を継承したもの) をスローします。
         </para>
 
-    </sect2>
-    <sect2 id="zend.mail.read-fetching">
-        <title>メッセージの取得およびシンプルなメソッド</title>
+    </section>
+    <section xml:id="zend.mail.read-fetching"><info><title>メッセージの取得およびシンプルなメソッド</title></info>
+        
 
         <para>
             ストレージをオープンしたら、メッセージを取得できます。
@@ -240,9 +238,9 @@ $mail->removeMessage($messageNum);
 unset($mail[$messageNum]);
 ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-message">
-        <title>メッセージの操作</title>
+    </section>
+    <section xml:id="zend.mail.read-message"><info><title>メッセージの操作</title></info>
+        
 
         <para><methodname>getMessage()</methodname> でメッセージを取得したら、
         次にしたくなることは、ヘッダの取得やマルチパートメッセージの各パートの取得などでしょう。
@@ -370,9 +368,9 @@ if (!$foundPart) {
 }
 ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-flags">
-        <title>フラグのチェック</title>
+    </section>
+    <section xml:id="zend.mail.read-flags"><info><title>フラグのチェック</title></info>
+        
 
         <para>Maildir および IMAP はフラグの保存をサポートしています。
         <classname>Zend_Mail_Storage</classname> クラスには、maildir や IMAP
@@ -436,9 +434,9 @@ if (!$message->hasFlag('$SpamTested')) {
 }
 ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-folders">
-        <title>フォルダの使用法</title>
+    </section>
+    <section xml:id="zend.mail.read-folders"><info><title>フォルダの使用法</title></info>
+        
 
         <para>
             Pop3 以外のすべての保存形式は、フォルダをサポートしています。
@@ -504,8 +502,8 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             ローカル名とは親フォルダから見た名前のことです。
         </para>
 
-        <table id="zend.mail.read-folders.table-1">
-            <title>Mail フォルダの名前</title>
+        <table xml:id="zend.mail.read-folders.table-1"><info><title>Mail フォルダの名前</title></info>
+            
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -581,12 +579,12 @@ echo 'Last folder was '
 $mail->selectFolder($folder);
 ]]></programlisting>
 
-    </sect2>
-    <sect2 id="zend.mail.read-advanced">
-        <title>高度な使用法</title>
+    </section>
+    <section xml:id="zend.mail.read-advanced"><info><title>高度な使用法</title></info>
+        
 
-        <sect3 id="zend.mail.read-advanced.noop">
-            <title>NOOP の使用</title>
+        <section xml:id="zend.mail.read-advanced.noop"><info><title>NOOP の使用</title></info>
+            
 
             <para>
                 リモートの保存形式を使用しており、何らかの事情で接続をずっと保持し続けたい場合は
@@ -606,9 +604,9 @@ foreach ($mail as $message) {
 }
 ]]></programlisting>
 
-        </sect3>
-        <sect3 id="zend.mail.read-advanced.caching">
-            <title>インスタンスのキャッシュ</title>
+        </section>
+        <section xml:id="zend.mail.read-advanced.caching"><info><title>インスタンスのキャッシュ</title></info>
+            
 
             <para>
             <classname>Zend_Mail_Storage_Mbox</classname>、<classname>Zend_Mail_Storage_Folder_Mbox</classname>、<classname>Zend_Mail_Storage_Maildir</classname>
@@ -645,9 +643,9 @@ if (!$cache->isCached($cache_id) ||
 $cache->set($cache_id, $mail);
 ]]></programlisting>
 
-        </sect3>
-        <sect3 id="zend.mail.read-advanced.extending">
-            <title>プロトコルクラスの拡張</title>
+        </section>
+        <section xml:id="zend.mail.read-advanced.extending"><info><title>プロトコルクラスの拡張</title></info>
+            
 
             <para>
                 リモートの保存形式では、ふたつのクラス <classname>Zend_Mail_Storage_&lt;Name&gt;</classname> および
@@ -741,9 +739,9 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
                 その後のメソッドが失敗してしまいます。
             </para>
 
-        </sect3>
-        <sect3 id="zend.mail.read-advanced.quota">
-            <title>容量制限の使用 (1.5 以降)</title>
+        </section>
+        <section xml:id="zend.mail.read-advanced.quota"><info><title>容量制限の使用 (1.5 以降)</title></info>
+            
 
             <para>
             <classname>Zend_Mail_Storage_Writable_Maildir</classname> は Maildir++
@@ -824,10 +822,6 @@ class Example_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
 }
 ]]></programlisting>
 
-        </sect3>
-    </sect2>
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

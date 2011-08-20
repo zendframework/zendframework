@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.autocomplete">
-    <title>AutoComplete</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.autocomplete"><info><title>AutoComplete</title></info>
+    
 
     <para>
         Многие JavaScript-библиотеки для AJAX предоставляют функционал для
@@ -120,15 +119,15 @@ class FooController extends Zend_Controller_Action
         Dojo и Scriptaculous.
     </para>
 
-    <sect4 id="zend.controller.actionhelpers.autocomplete.dojo">
-        <title>Автодополнение c Dojo</title>
+    <section xml:id="zend.controller.actionhelpers.autocomplete.dojo"><info><title>Автодополнение c Dojo</title></info>
+        
 
         <para>
             В Dojo нет собственно виджета для автодополнения, но есть два
             виджета, которые могут производить автодополнение: ComboBox и
             FilteringSelect. В обоих случаях они требуют использования хранилища
             данных, который реализует QueryReadStore, читайте документацию по
-            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink> для получения более подробной информации по этой теме.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</link> для получения более подробной информации по этой теме.
         </para>
 
         <para>
@@ -142,8 +141,8 @@ class FooController extends Zend_Controller_Action
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
 
-        <example id="zend.controller.actionhelpers.autocomplete.dojo.example1">
-            <title>Автодополнение с Dojo и Zend MVC</title>
+        <example xml:id="zend.controller.actionhelpers.autocomplete.dojo.example1"><info><title>Автодополнение с Dojo и Zend MVC</title></info>
+            
 
             <para>
                 Автодополнение с Dojo через Zend MVC требует реализации
@@ -334,12 +333,12 @@ dojo.require("custom.TestNameReadStore");
                 Теперь у нас есть всё для того, чтобы автодополнение с Dojo заработало.
             </para>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelpers.autocomplete.scriptaculous">
-        <title>Автодополнение с Scriptaculous</title>
+    <section xml:id="zend.controller.actionhelpers.autocomplete.scriptaculous"><info><title>Автодополнение с Scriptaculous</title></info>
+        
         <para>
-            <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</link>
             ожидает HTML-ответ в определенном формате.
         </para>
 
@@ -349,8 +348,5 @@ dojo.require("custom.TestNameReadStore");
             Просто передавайте ему массив данных, и он создает ответ HTML,
             совместимый с Ajax.Autocompleter.
         </para>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

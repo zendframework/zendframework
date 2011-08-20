@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20885 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.frontcontroller">
-    <title>Zend_Application_Resource_Frontcontroller</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.frontcontroller"><info><title>Zend_Application_Resource_Frontcontroller</title></info>
+    
 
     <para>
         Probablement la ressource que vous allez le plus communément charger avec
@@ -19,49 +17,49 @@
 
     <para>
         Les clés de configuration disponibles incluent les suivantes et sont sensibles à la
-        casse&#160;:
+        casse :
     </para>
 
     <itemizedlist>
         <listitem><para>
-            <emphasis><property>controllerDirectory</property></emphasis>&#160;: une chaîne de
+            <emphasis><property>controllerDirectory</property></emphasis> : une chaîne de
             caractères spécifiant un seul dossier de contrôleurs, ou un tableau associant un
             nom de module et un dossier de contrôleurs.
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>moduleControllerDirectoryName</property></emphasis>&#160;: une
+            <emphasis><property>moduleControllerDirectoryName</property></emphasis> : une
             chaîne de caractères indiquant un sous-dossier dans ce module qui contient les
             contrôleurs.
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>moduleDirectory</property></emphasis>&#160;: un dossier dans
+            <emphasis><property>moduleDirectory</property></emphasis> : un dossier dans
             lequel tous les modules peuvent être trouvés.
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>defaultControllerName</property></emphasis>&#160;: nom du
+            <emphasis><property>defaultControllerName</property></emphasis> : nom du
             contrôleur par défaut (normalement "index").
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>defaultAction</property></emphasis>&#160;: nom de l'action par
+            <emphasis><property>defaultAction</property></emphasis> : nom de l'action par
             défaut (normalement "index").
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>defaultModule</property></emphasis>&#160;: nom du module par
+            <emphasis><property>defaultModule</property></emphasis> : nom du module par
             défaut (normalement "default").
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>baseUrl</property></emphasis>&#160;: <acronym>URL</acronym>
+            <emphasis><property>baseUrl</property></emphasis> : <acronym>URL</acronym>
             de base explicite vers l'application (normalement auto-détecté).
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>plugins</property></emphasis>&#160;: tableau de nom de classe
+            <emphasis><property>plugins</property></emphasis> : tableau de nom de classe
             de plugins de contrôleurs. La ressource instanciera chaque classe (sans arguments
             de contructeur) et les enregistrera dans le contrôleur frontal. Si vous souhaitez
             enregistrer un plugin avec un index particulier dans la pile des plugins, vous
@@ -70,15 +68,15 @@
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>params</property></emphasis>&#160;: tableau de paires
-            clés&#160;/&#160;valeurs à enregistrer dans le contrôleur frontal.
+            <emphasis><property>params</property></emphasis> : tableau de paires
+            clés / valeurs à enregistrer dans le contrôleur frontal.
         </para></listitem>
 
         <listitem>
             <para>
-                <emphasis><property>returnresponse</property></emphasis>&#160;: active ou non le
+                <emphasis><property>returnresponse</property></emphasis> : active ou non le
                 retour de l'objet de réponse après la distribution du contrôleur frontal. Cette
-                valeur devrait être booléenne&#160;; par défaut, ceci est désactivé.
+                valeur devrait être booléenne ; par défaut, ceci est désactivé.
             </para>
         </listitem>
     </itemizedlist>
@@ -88,8 +86,8 @@
         frontal en la fournissant à <methodname>setParam()</methodname>.
     </para>
 
-    <example id="zend.application.available-resources.frontcontroller.configExample">
-        <title>Exemple de configuration d'une ressource de contrôleur frontal</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.configExample"><info><title>Exemple de configuration d'une ressource de contrôleur frontal</title></info>
+        
 
         <para>
             Voici un extrait de configuration <acronym>INI</acronym> montrant comment configurer
@@ -114,8 +112,8 @@ resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.frontcontroller.propertyExample">
-        <title>Récupération de votre contrôleur frontal à partir de votre initialiseur</title>
+    <example xml:id="zend.application.available-resources.frontcontroller.propertyExample"><info><title>Récupération de votre contrôleur frontal à partir de votre initialiseur</title></info>
+        
 
         <para>
             Une fois la ressource de contrôleur frontal initialisée, vous pouvez récupérer
@@ -127,4 +125,4 @@ $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>
     </example>
-</sect2>
+</section>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authorization">
-    <title>Building an Authorization System in Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.authorization"><info><title>Building an Authorization System in Zend Framework</title></info>
+    
 
-    <sect2 id="learning.multiuser.authorization.intro">
-        <title>Introduction to Authorization</title>
+    <section xml:id="learning.multiuser.authorization.intro"><info><title>Introduction to Authorization</title></info>
+        
 
         <para>
             After a user has been identified as being authentic, an application can go about its
@@ -40,10 +39,10 @@
             building a tree of roles, resources and privileges to manage and query authorization
             requests against.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.multiuser.authorization.basic-usage">
-        <title>Basic Usage of Zend_Acl</title>
+    <section xml:id="learning.multiuser.authorization.basic-usage"><info><title>Basic Usage of Zend_Acl</title></info>
+        
 
 <!-- explain the interaction with a User object, how -->
 
@@ -240,5 +239,5 @@ $acl->allow('publisher', 'blogPost', 'publish');
             <property>ownerUserId</property> property of the blog post matches the id of the
             owner passed in.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

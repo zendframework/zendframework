@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Zend_ProgressBar</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.introduction"><info><title>Zend_ProgressBar</title></info>
+    
 
-    <sect2 id="zend.progressbar.whatisit">
-        <title>Introduction</title>
+    <section xml:id="zend.progressbar.whatisit"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> est un composant pour créer et mettre à
@@ -15,10 +13,10 @@
             l'adaptateur avec certaines valeurs précalculées comme le pourcentage et le temps
             restant estimé.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.basic">
-        <title>Utilisation basique de Zend_Progressbar</title>
+    <section xml:id="zend.progressbar.basic"><info><title>Utilisation basique de Zend_Progressbar</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> est assez simple d'utilisation. Vous créez
@@ -54,10 +52,10 @@ $progressBar->finish();
             Ceci est pratique quand il n'y a aucune donnée à mettre à jour mais que vous souhaitez
             que la barre de progression soit mise à jour.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.progressbar.adapters">
-        <title>Adaptateurs standard</title>
+    <section xml:id="zend.progressbar.adapters"><info><title>Adaptateurs standard</title></info>
+        
 
         <para>
             <classname>Zend_ProgressBar</classname> est fourni avec les deux adaptateurs
@@ -65,7 +63,7 @@ $progressBar->finish();
                     <listitem>
                     <para>
 
-                            <xref linkend="zend.progressbar.adapter.console" />
+                            <xref linkend="zend.progressbar.adapter.console"/>
 
                     </para>
                 </listitem>
@@ -73,7 +71,7 @@ $progressBar->finish();
                 <listitem>
                     <para>
 
-                            <xref linkend="zend.progressbar.adapter.jspush" />
+                            <xref linkend="zend.progressbar.adapter.jspush"/>
 
                     </para>
                 </listitem>
@@ -81,17 +79,17 @@ $progressBar->finish();
                 <listitem>
                     <para>
 
-                            <xref linkend="zend.progressbar.adapter.jspull" />
+                            <xref linkend="zend.progressbar.adapter.jspull"/>
 
                     </para>
                 </listitem>
                 </itemizedlist>
             </para>
 
-        <xi:include href="Zend_ProgressBar_Adapter_Console.xml" />
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_Console.xml"/>
 
-        <xi:include href="Zend_ProgressBar_Adapter_JsPush.xml" />
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPush.xml"/>
 
-        <xi:include href="Zend_ProgressBar_Adapter_JsPull.xml" />
-    </sect2>
-</sect1>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_ProgressBar_Adapter_JsPull.xml"/>
+    </section>
+</section>

@@ -1,5 +1,6 @@
-<sect3 id="zend.controller.actionhelpers.json">
-    <title>JSON</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.json"><info><title>JSON</title></info>
+    
 
     <para>
         תגובות JSON נעשות יותר ויותר פופולריות כשזה מגיע לעבודה מול AJAX; ניתן לעבד קוד JSON ישירות בצד הלקוח ולכן לגרום למערכת לבצע את הטעינה והעיבוד מהר יותר.
@@ -47,11 +48,11 @@ class FooController extends Zend_Controller_Action
         $json = $this->_helper->json->encodeJson($data);
     }
 }
-]]>
-    </programlisting>
 
-    <note>
-        <title>תבניות פעילות</title>
+    ]]></programlisting>
+
+    <note><info><title>תבניות פעילות</title></info>
+        
 
         <para>
             אם ישנה תבנית נפרדת לתגובות מסוג JSON -- כדי אולי לעטוף את התגובה של JSON שהתקבלה בתוכן מסויים -- כל מתודה בתוסף העזרה של JSON מקבל פרמטר שני.
@@ -67,10 +68,7 @@ class FooController extends Zend_Controller_Action
         $json = $this->_helper->json->encodeJson($data, true);
     }
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </note>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

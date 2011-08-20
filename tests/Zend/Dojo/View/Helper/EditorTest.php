@@ -25,7 +25,7 @@ use Zend\Dojo\View\Helper\Editor as EditorHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Json\Json,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_Editor.
@@ -58,7 +58,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -87,7 +87,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldRegisterDijitModule()
     {
         $html = $this->helper->direct('foo');
-        $modules = $this->view->dojo()->getModules();
+        $modules = $this->view->broker('dojo')->getModules();
         $this->assertContains('dijit.Editor', $modules);
     }
 
@@ -112,7 +112,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldCreateJavascriptToConnectEditorToHiddenValue()
     {
         $this->helper->direct('foo');
-        $onLoadActions = $this->view->dojo()->getOnLoadActions();
+        $onLoadActions = $this->view->broker('dojo')->getOnLoadActions();
         $found = false;
         foreach ($onLoadActions as $action) {
             if (strstr($action, "dojo.byId('foo').value = dijit.byId('foo-Editor').getValue(false);")) {
@@ -126,7 +126,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldCreateJavascriptToFindParentForm()
     {
         $this->helper->direct('foo');
-        $javascript = $this->view->dojo()->getJavascript();
+        $javascript = $this->view->broker('dojo')->getJavascript();
         $found = false;
         foreach ($javascript as $action) {
             if (strstr($action, "zend.findParentForm = function")) {
@@ -140,7 +140,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldNotRegisterDojoStylesheet()
     {
         $this->helper->direct('foo');
-        $this->assertFalse($this->view->dojo()->registerDojoStylesheet());
+        $this->assertFalse($this->view->broker('dojo')->registerDojoStylesheet());
     }
 
     /**
@@ -154,7 +154,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         );
         $html = $this->helper->direct('foo', '', array('plugins' => array_keys($plugins)));
 
-        $dojo = $this->view->dojo()->__toString();
+        $dojo = $this->view->broker('dojo')->__toString();
         foreach (array_values($plugins) as $plugin) {
             $this->assertContains('dojo.require("dijit._editor.plugins.' . $plugin . '")', $dojo, $dojo);
         }

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: yes -->
-<sect1 id="learning.quickstart.create-layout">
-    <title>Utworzenie layoutu</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.create-layout"><info><title>Utworzenie layoutu</title></info>
+    
 
     <para>
         Jak nie trudno zauważyć, skrypty widoków z poprzedniej części zawierały jedynie fragmenty
@@ -19,15 +17,12 @@
     </para>
 
     <para>
-        Zend Framework używa dwóch wzorów projektowych przy implementacji layoutów: <ulink
-        url="http://martinfowler.com/eaaCatalog/twoStepView.html">Widok dwustopniowy
-        (Two Step View)</ulink> oraz
-        <ulink
-        url="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Widok
-        złożony (Composite View)</ulink>.
-        <emphasis>Widok dwustopniowy</emphasis> jest najczęściej powiązany z <ulink
-        url="http://www.martinfowler.com/eaaCatalog/transformView.html">Widokiem przekształconym
-        (Transform View)</ulink> - podstawową cechą jest założenie, że aplikacja tworzy widok
+        Zend Framework używa dwóch wzorów projektowych przy implementacji layoutów: <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://martinfowler.com/eaaCatalog/twoStepView.html">Widok dwustopniowy
+        (Two Step View)</link> oraz
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Widok
+        złożony (Composite View)</link>.
+        <emphasis>Widok dwustopniowy</emphasis> jest najczęściej powiązany z <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/transformView.html">Widokiem przekształconym
+        (Transform View)</link> - podstawową cechą jest założenie, że aplikacja tworzy widok
         podrzędny, który zostaje umieszczony w widoku głównym (layout) i dopiero taki - złożony
         widok jest przetwarzany do pokazania użytkownikowi.
         <emphasis>Widok złożony</emphasis> natomiast, zakłada tworzenie jednego bądź wielu
@@ -230,8 +225,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         stronie pojawi się automatycznie).
     </para>
 
-    <note>
-        <title>Punkt kontrolny</title>
+    <note><info><title>Punkt kontrolny</title></info>
+        
 
         <para>
             Teraz należy udać się pod adres "http://localhost" i sprawdzić efekty oraz
@@ -239,4 +234,4 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             elementy head, title oraz body.
         </para>
     </note>
-</sect1>
+</section>

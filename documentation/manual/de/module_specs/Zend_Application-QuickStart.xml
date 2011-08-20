@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.application.quick-start">
-    <title>Zend_Application Quick Start</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.quick-start"><info><title>Zend_Application Quick Start</title></info>
+    
 
     <para>
         Es gibt zwei Wege um mit <classname>Zend_Application</classname> anzufangen, und diese
@@ -14,12 +12,11 @@
     <para>
         Wenn man plant <classname>Zend_Tool</classname> zu verwenden um das eigene Projekt zu
         erstellen sollte man anbei weiterlesen. Wenn man <classname>Zend_Application</classname> zu
-        einem existierenden Projekt hinzufügen will, sollte man <link
-            linkend="zend.application.quick-start.manual"> hier weiterlesen</link>.
+        einem existierenden Projekt hinzufügen will, sollte man <link linkend="zend.application.quick-start.manual"> hier weiterlesen</link>.
     </para>
 
-    <sect2 id="zend.application.quick-start.zend-tool">
-        <title>Verwenden von Zend_Tool</title>
+    <section xml:id="zend.application.quick-start.zend-tool"><info><title>Verwenden von Zend_Tool</title></info>
+        
 
         <para>
             Der schnellste Weg um mit <classname>Zend_Application</classname> zu beginnen ist die
@@ -149,13 +146,12 @@ $application->bootstrap()
 ]]></programlisting>
 
         <para>
-            Um mit dem Quick Start weiterzumachen, springen Sie bitte <link
-            linkend="zend.application.quick-start.resources">auf das Ressource Kapitel</link>.
+            Um mit dem Quick Start weiterzumachen, springen Sie bitte <link linkend="zend.application.quick-start.resources">auf das Ressource Kapitel</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.manual">
-        <title>Zend_Application in der eigenen Anwendung hinzufügen</title>
+    <section xml:id="zend.application.quick-start.manual"><info><title>Zend_Application in der eigenen Anwendung hinzufügen</title></info>
+        
 
         <para>
             Die Basis von <classname>Zend_Application</classname> ist wirklich einfach:
@@ -280,16 +276,15 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-        <note>
-            <title>Mehr über mod_rewrite lernen</title>
+        <note><info><title>Mehr über mod_rewrite lernen</title></info>
+            
 
             <para>
                 Die obigen Rewrite Regeln erlauben es auf jede Datei im Document Root des eigenen
                 virtuellen Host's zuzugreifen. Wenn es Dateien gibt die man auf diesem Weg nicht
                 bereitstellen will, muss man in seinen Regeln restriktiver sein. Gehe zur
-                Apache WebSite und <ulink
-                url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">lerne mehr über
-                mod_rewrite</ulink>.
+                Apache WebSite und <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">lerne mehr über
+                mod_rewrite</link>.
             </para>
         </note>
 
@@ -297,10 +292,10 @@ RewriteRule ^.*$ index.php [NC,L]
             An diesem Punkt, wurde alles gesetzt um die Vorteile von
             <classname>Zend_Application</classname> zu verwenden.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.resources">
-        <title>Hinzufügen und Erstellen von Ressourcen</title>
+    <section xml:id="zend.application.quick-start.resources"><info><title>Hinzufügen und Erstellen von Ressourcen</title></info>
+        
 
         <para>
             Wenn man den Anleitungen von oben gefolgt ist, dann verwendet die Bootstrap Klasse
@@ -409,10 +404,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             wird und stellt sicher das die View so initialisiert wird wie die Anwendung das
             benötigt.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.application.quick-start.next-steps">
-        <title>Nächste Schritte mit Zend_Application</title>
+    <section xml:id="zend.application.quick-start.next-steps"><info><title>Nächste Schritte mit Zend_Application</title></info>
+        
 
         <para>
             Das oben erwähnte reicht um mit <classname>Zend_Application</classname> zu beginnen und
@@ -420,5 +415,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Ressource-Methoden zu erstellen, oder, für maximale Wiederverwendbarkeit,
             Ressource-Plugin Klassen. Lesen Sie weiter, um mehr zu lernen!
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

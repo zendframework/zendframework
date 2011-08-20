@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22741 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.rest.introduction">
-    <title>Einführung</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.rest.introduction"><info><title>Einführung</title></info>
+    
 
     <para>
         REST Web Services verwenden ein service-spezifisches <acronym>XML</acronym> Format. Dieser
@@ -25,9 +25,8 @@
 
     <para>
         Zusätzlich zu den Komponenten <classname>Zend_Rest_Server</classname> und
-        <classname>Zend_Rest_Client</classname> bieten die Klassen <link
-            linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname> und
+        <classname>Zend_Rest_Client</classname> bieten die Klassen <link linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname> und
             <classname>Zend_Rest_Controller</classname></link> Hilfe beim Routen von REST Anfragen
         zum Controller.
     </para>
-</sect1>
+</section>

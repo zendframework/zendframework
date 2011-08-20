@@ -1,24 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22253 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.int">
-    <title>Int</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.int"><info><title>Int</title></info>
+    
 
     <para>
         <classname>Zend_Filter_Int</classname> erlaubt es einen skalaren Wert in einen Integer Wert
         zu konvertieren.
     </para>
 
-    <sect3 id="zend.filter.set.int.options">
-        <title>Unterstützte Optionen für Zend_Filter_Int</title>
+    <section xml:id="zend.filter.set.int.options"><info><title>Unterstützte Optionen für Zend_Filter_Int</title></info>
+        
 
         <para>
             Es gibt keine zusätzlichen Optionen für <classname>Zend_Filter_Int</classname>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.int.basic">
-        <title>Einfache Verwendung</title>
+    <section xml:id="zend.filter.set.int.basic"><info><title>Einfache Verwendung</title></info>
+        
 
         <para>
             Ein einfaches Beispiel der Verwendung ist nachfolgend zu finden:
@@ -33,5 +31,5 @@ print $filter->filter('-4 ist weniger als 0');
         <para>
             Das gibt '-4' zurück.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

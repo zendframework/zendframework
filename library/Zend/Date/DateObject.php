@@ -1017,10 +1017,8 @@ abstract class DateObject {
         }
 
         // throw an error on false input, but only if the new date extension is available
-        if (function_exists('timezone_open')) {
-            if (!@timezone_open($zone)) {
-                throw new Exception\InvalidArgumentException("timezone ($zone) is not a known timezone");
-            }
+        if (!@timezone_open($zone)) {
+            throw new Exception\InvalidArgumentException("timezone ($zone) is not a known timezone");
         }
         // this can generate an error if the date extension is not available and a false timezone is given
         $result = @date_default_timezone_set($zone);

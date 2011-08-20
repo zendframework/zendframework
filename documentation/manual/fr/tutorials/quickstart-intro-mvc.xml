@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20106 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.intro">
-    <title>Zend Framework &amp; Introduction MVC</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.quickstart.intro.zf">
-        <title>Zend Framework</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><info><title>Zend Framework &amp; Introduction MVC</title></info>
+    
+
+    <section xml:id="learning.quickstart.intro.zf"><info><title>Zend Framework</title></info>
+        
 
         <para>
             Zend Framework est un cadre de travail open source orienté objets pour des applications
@@ -15,7 +15,7 @@
             aussi une solution avancée Model-View-Controller (<acronym>MVC</acronym>) qui peut être
             utilisée pour monter des structures de base pour vos applications. Une liste complète
             des composants de Zend Framework avec une brève description peut être trouvée dans
-            <ulink url="http://framework.zend.com/about/components">l'aperçu des composants</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/about/components">l'aperçu des composants</link>.
             Ce guide de démarrage montre les composants les plus utilisés dans Zend Framework, comme
             <classname>Zend_Controller</classname>, <classname>Zend_Layout</classname>,
             <classname>Zend_Config</classname>, <classname>Zend_Db</classname>,
@@ -26,36 +26,34 @@
         <para>
             En utilisant ces composants nous allons construire un livre d'or reposant sur une base
             de données, simple, en quelques minutes. Le code source complet pour cette application
-            est disponible dans les formats&#160;:
+            est disponible dans les formats :
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink
-                        url="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">zip</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">zip</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <ulink
-                        url="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">tar.gz</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">tar.gz</link>
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.intro.mvc">
-        <title>Model-View-Controller</title>
+    <section xml:id="learning.quickstart.intro.mvc"><info><title>Model-View-Controller</title></info>
+        
 
         <para>
             Qu'est ce que <acronym>MVC</acronym> dont tout le monde parle et pourquoi se pencher
-            dessus&#160;? <acronym>MVC</acronym> est bien plus qu'un acronyme de trois lettres
-            (<acronym>TLA</acronym>) que vous pouvez sortir pour faire "élégant"&#160;; c'est
+            dessus ? <acronym>MVC</acronym> est bien plus qu'un acronyme de trois lettres
+            (<acronym>TLA</acronym>) que vous pouvez sortir pour faire "élégant" ; c'est
             devenu un standard de conception des applications Web modernes, ceci pour de bonnes
             raisons. La plupart du code des application se retrouvent dans une de ces
-            catégories&#160;: présentation, logique métier, accès aux données. Le pattern
+            catégories : présentation, logique métier, accès aux données. Le pattern
             <acronym>MVC</acronym> modélise cette séparation à merveille. Le résultat final est
             qu'un code de présentation peut être travaillé à un endroit de l'application alors que
             la logique métier et l'accès aux données le sont à d'autres endroits. La plupart des
@@ -64,16 +62,15 @@
             même application.
         </para>
 
-        <note>
-            <title>Plus d'informations</title>
+        <note><info><title>Plus d'informations</title></info>
+            
 
             <para>
-                Cassons le pattern pour voir les pièces individuellement&#160;:
+                Cassons le pattern pour voir les pièces individuellement :
             </para>
 
             <para>
-                <inlinegraphic width="321" scale="100" align="center" valign="middle"
-                    fileref="figures/learning.quickstart.intro.mvc.png" format="PNG" />
+                <inlinemediaobject><imageobject><imagedata width="321" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.intro.mvc.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <itemizedlist>
@@ -101,18 +98,17 @@
                         tout. Ils manipulent les modèles, décident de la vue à rendre en fonction
                         de la requête utilisateur et d'autres facteurs, passent les données dont
                         chaque vue a besoin et passent éventuellement la main à un autre contrôleur.
-                        La plupart des experts <acronym>MVC</acronym> experts recommandent <ulink
-                            url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">de
-                            garder les contrôleurs les plus simples et petits possibles</ulink>.
+                        La plupart des experts <acronym>MVC</acronym> experts recommandent <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">de
+                            garder les contrôleurs les plus simples et petits possibles</link>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                Bien sûr <ulink url="http://ootips.org/mvc-pattern.html">on pourrait en dire plus
-                </ulink> sur ce pattern critique, mais nous avons là suffisament d'informations
+                Bien sûr <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ootips.org/mvc-pattern.html">on pourrait en dire plus
+                </link> sur ce pattern critique, mais nous avons là suffisament d'informations
                 pour comprendre l'application de livre d'or que nous allons construire.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

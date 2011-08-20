@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.serializer.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.serializer.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Serializer</classname> provides an adapter based interface to simply
@@ -9,8 +8,8 @@
         and recover.
     </para>
 
-    <example id="zend.serializer.introduction.example.dynamic">
-        <title>Using Zend_Serializer dynamic interface</title>
+    <example xml:id="zend.serializer.introduction.example.dynamic"><info><title>Using Zend_Serializer dynamic interface</title></info>
+        
 
         <para>
             To instantiate a serializer you should use the factory method with the name of the
@@ -79,8 +78,8 @@ try {
         method.
     </para>
 
-    <example id="zend.serializer.introduction.example.static.php">
-        <title>Using the Zend_Serializer static interface</title>
+    <example xml:id="zend.serializer.introduction.example.static.php"><info><title>Using the Zend_Serializer static interface</title></info>
+        
 
         <para>
             You can register a specific serializer adapter as a default serialization adapter for
@@ -103,7 +102,4 @@ try {
 }
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

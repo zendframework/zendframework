@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         Помощник <code>ActionStack</code> позволяет помещать в стек запросы к
@@ -13,8 +12,8 @@
         действие/контроллер/модуль.
     </para>
 
-    <note>
-        <title>Вызов помощника ActionStack инициализирует плагин ActionStack</title>
+    <note><info><title>Вызов помощника ActionStack инициализирует плагин ActionStack</title></info>
+        
 
         <para>
             При вызове помощника <code>ActionStack</code> неявным образом
@@ -25,8 +24,8 @@
         </para>
     </note>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple">
-        <title>Добавление задачи с использованием имен действия, контроллера и модуля</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple"><info><title>Добавление задачи с использованием имен действия, контроллера и модуля</title></info>
+        
 
         <para>
             Зачастую наиболее простым способом будет указание действия,
@@ -57,8 +56,8 @@ class FooController extends Zend_Controller_Action
 
     </example>
 
-    <example id="zend.controller.actionhelpers.actionstack.simple2">
-        <title>Добавление задачи с использованием объекта запроса</title>
+    <example xml:id="zend.controller.actionhelpers.actionstack.simple2"><info><title>Добавление задачи с использованием объекта запроса</title></info>
+        
 
         <para>
             Иногда имеет смысл использовать объект запроса, что более
@@ -93,7 +92,4 @@ class FooController extends Zend_Controller_Action
 }
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

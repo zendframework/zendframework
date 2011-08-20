@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20876 -->
-<sect1 id="performance.classloading">
-    <title>クラスの読み込み</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.classloading"><info><title>クラスの読み込み</title></info>
+    
 
     <para>
         Zend Frameworkアプリケーションのプロファイルをとってみた人は誰でも、
@@ -14,8 +12,8 @@
         この章ではこれらの問題に対して確立したいくつかの解決方法を提示するつもりです。
     </para>
 
-    <sect2 id="performance.classloading.includepath">
-        <title>どのようにしたらinclude_pathを最適化できますか？</title>
+    <section xml:id="performance.classloading.includepath"><info><title>どのようにしたらinclude_pathを最適化できますか？</title></info>
+        
 
         <para>
             クラスの読み込み速度を向上させるためにできる、
@@ -27,8 +25,8 @@
             そして現行ディレクトリパスをinclude_pathの最後にだけincludeすることです。
         </para>
 
-        <sect3 id="performance.classloading.includepath.abspath">
-            <title>絶対パスを使う</title>
+        <section xml:id="performance.classloading.includepath.abspath"><info><title>絶対パスを使う</title></info>
+            
 
             <para>
                 これは些細な最適化に見えますが、
@@ -70,10 +68,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 しかしながらそうであっても、
                 <methodname>realpath()</methodname> にパスを単純に渡すことが一般的にありふれたやり方でしょう。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.reduce">
-            <title>定義したincludeパスの数を減らす</title>
+        <section xml:id="performance.classloading.includepath.reduce"><info><title>定義したincludeパスの数を減らす</title></info>
+            
 
             <para>
                 includeパスはinclude_pathに記載された順番にスキャンされます。
@@ -95,10 +93,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 １つ以上のライブラリを共通のディレクトリにsymlinkでまとめるのと同じくらい簡単に、
                 しばしば目標に達することができます。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.early">
-            <title>Zend Frameworkのinclude_pathを出来るだけ先に定義する</title>
+        <section xml:id="performance.classloading.includepath.early"><info><title>Zend Frameworkのinclude_pathを出来るだけ先に定義する</title></info>
+            
 
             <para>
                 前述の提案に引き続き、
@@ -107,10 +105,10 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 このことにより、
                 Zend Frameworkからincludeされるファイルが最初のスキャンで見つかることを保証します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.classloading.includepath.currentdir">
-            <title>現行ディレクトリは最後に定義するか、または定義しない</title>
+        <section xml:id="performance.classloading.includepath.currentdir"><info><title>現行ディレクトリは最後に定義するか、または定義しない</title></info>
+            
 
             <para>
                 ほとんどの例でinclude_pathに現行ディレクトリ、つまり '.' が見受けられます。
@@ -123,8 +121,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 間違いなく現行ディレクトリはリストの最後の要素に入れても良いでしょう。
             </para>
 
-        <example id="performance.classloading.includepath.example">
-            <title>例: 最適化されたinclude_path</title>
+        <example xml:id="performance.classloading.includepath.example"><info><title>例: 最適化されたinclude_path</title></info>
+            
 
             <para>
                 それではこれらすべての提案を一緒に実施してみましょう。
@@ -178,11 +176,11 @@ $paths = array(
 set_include_path(implode(PATH_SEPARATOR, $paths));
 ]]></programlisting>
         </example>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.striprequires">
-        <title>どのようにしたら不要なrequire_once文を除去できますか？</title>
+    <section xml:id="performance.classloading.striprequires"><info><title>どのようにしたら不要なrequire_once文を除去できますか？</title></info>
+        
 
         <para>
             Lazy loadingとは、
@@ -205,8 +203,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
             それらの<methodname>require_once()</methodname>呼び出しをどのようにしたら除去できるでしょう？
         </para>
 
-        <sect3 id="performance.classloading.striprequires.sed">
-            <title>findおよびsedコマンドを使ってrequire_onceの呼び出しを取り去る</title>
+        <section xml:id="performance.classloading.striprequires.sed"><info><title>findおよびsedコマンドを使ってrequire_onceの呼び出しを取り去る</title></info>
+            
 
             <para>
                 <methodname>require_once()</methodname>呼び出しを除去する簡単な方法は、
@@ -247,11 +245,11 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.classloading.pluginloader">
-        <title>どのようにしたらプラグインの読み込みを速く出来ますか？</title>
+    <section xml:id="performance.classloading.pluginloader"><info><title>どのようにしたらプラグインの読み込みを速く出来ますか？</title></info>
+        
 
         <para>
             多くのコンポーネントにはプラグインがあり、
@@ -320,9 +318,8 @@ Zend_Loader_Autoloader::getInstance();
             どのようにしたらそのような生成された呼び出しの数を減らせますか？
         </para>
 
-        <sect3
-            id="performance.classloading.pluginloader.includefilecache">
-            <title>ファイルキャッシュを含むプラグインローダーを使う</title>
+        <section xml:id="performance.classloading.pluginloader.includefilecache"><info><title>ファイルキャッシュを含むプラグインローダーを使う</title></info>
+            
 
             <para>
                 Zend Frameworkの1.7.0でプラグインローダーにincludeファイルキャッシュが
@@ -334,13 +331,9 @@ Zend_Loader_Autoloader::getInstance();
             </para>
 
             <para>
-                プラグインローダーのドキュメントに<link
-                    linkend="zend.loader.pluginloader.performance.example">
+                プラグインローダーのドキュメントに<link linkend="zend.loader.pluginloader.performance.example">
                     その使い方の完全な例があります</link>。
             </para>
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

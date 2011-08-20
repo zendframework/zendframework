@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20807 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.timesync.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.timesync.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_TimeSync</classname> est capable de recevoir une information
@@ -19,19 +19,18 @@
         gestion du temps, grâce aux protocoles NTP ou SNTP.
     </para>
 
-    <note>
-        <title>En tâche de fond</title>
+    <note><info><title>En tâche de fond</title></info>
+        
 
         <para>
             <classname>Zend_TimeSync</classname> ne peut pas changer le temps sur le serveur,
-            mais il peut en revanche retourner un objet <link
-            linkend="zend.date.introduction">Zend_Date</link> de différence de temps, pour
+            mais il peut en revanche retourner un objet <link linkend="zend.date.introduction">Zend_Date</link> de différence de temps, pour
             travailler avec.
         </para>
     </note>
 
-    <sect2 id="zend.timesync.introduction.why">
-        <title>Pourquoi <classname>Zend_TimeSync</classname> ?</title>
+    <section xml:id="zend.timesync.introduction.why"><info><title>Pourquoi <classname>Zend_TimeSync</classname> ?</title></info>
+        
 
         <para>Pourquoi donc utiliser <classname>Zend_TimeSync</classname> ?</para>
 
@@ -98,22 +97,21 @@
             Dans tous ces cas là, <classname>Zend_TimeSync</classname> est une solution
             parfaite lorsque vous ne pouvez installer de service sur vos serveurs.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.ntp">
-        <title>Qu'est ce que NTP ?</title>
+    <section xml:id="zend.timesync.introduction.ntp"><info><title>Qu'est ce que NTP ?</title></info>
+        
 
         <para>
             Le <code>Network Time Protocol</code> (<emphasis>NTP</emphasis>) est un protocole
             utilisé pour la synchronisation du temps des systèmes informatiques au travers du
-            réseau. NTP utilise le port UDP 123 comme couche de transport. Voyez cet <ulink
-            url="http://fr.wikipedia.org/wiki/Network_Time_Protocol"> article wikipédia</ulink> pour
+            réseau. NTP utilise le port UDP 123 comme couche de transport. Voyez cet <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.wikipedia.org/wiki/Network_Time_Protocol"> article wikipédia</link> pour
             plus d'informations sur le protocole.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.sntp">
-        <title>Qu'est ce que SNTP?</title>
+    <section xml:id="zend.timesync.introduction.sntp"><info><title>Qu'est ce que SNTP?</title></info>
+        
 
         <para>
             Le <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>) est un
@@ -121,10 +119,10 @@
             du réseau. SNTP utilise le port UDP 37 comme couche de transport. Il est très semblable
             à <constant>NTP</constant>, mais plus simple (comme son nom l'indique).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.problematic">
-        <title>Problèmes courants d'utilisation</title>
+    <section xml:id="zend.timesync.introduction.problematic"><info><title>Problèmes courants d'utilisation</title></info>
+        
 
         <para>
             Faites attention avec l'utilisation de <classname>Zend_TimeSync</classname>. Vous
@@ -133,10 +131,10 @@
             décrites ici. Lisez les bien avant d'utiliser
             <classname>Zend_TimeSync</classname>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.timesync.introduction.decision">
-        <title>Décider quel serveur de temps utiliser</title>
+    <section xml:id="zend.timesync.introduction.decision"><info><title>Décider quel serveur de temps utiliser</title></info>
+        
 
         <para>
             Décider du serveur de temps à utiliser est assez minutieux. Vous devrez prendre en
@@ -187,9 +185,9 @@
         </para>
 
         <para>
-            Voyez <ulink url="http://www.pool.ntp.org">www.pool.ntp.org</ulink> afin de
+            Voyez <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.pool.ntp.org">www.pool.ntp.org</link> afin de
             récupérer le pool le plus proche de vous. Par exemple pour un serveur en France
             <code>0.europe.pool.ntp.org</code> pourra faire l'affaire.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

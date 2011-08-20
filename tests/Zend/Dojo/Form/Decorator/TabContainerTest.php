@@ -26,7 +26,7 @@ use Zend\Dojo\Form\Decorator\TabContainer as TabContainerDecorator,
     Zend\Dojo\Form\Form as DojoForm,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_Form_Decorator_TabContainer.
@@ -61,7 +61,7 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -84,7 +84,7 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
     public function testRenderingShouldEnableDojo()
     {
         $html = $this->decorator->render('');
-        $this->assertTrue($this->view->dojo()->isEnabled());
+        $this->assertTrue($this->view->broker('dojo')->isEnabled());
     }
 
     public function testRenderingShouldCreateDijit()

@@ -1,8 +1,9 @@
-<sect1 id="zend.search.lucene.java-lucene">
-    <title>Interoperatie met Java Lucene</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Interoperatie met Java Lucene</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.file-formats">
-        <title>Bestandsformaten</title>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Bestandsformaten</title></info>
+        
         <para>
           Het bestandsformaat van het Zend_Search_Lucene index bestand is binary compatible met Lucene
           versie 1.4 en hoger.
@@ -10,12 +11,12 @@
 
         <para>
           Een gedetailleerde beschrijving van dit formaat is beschikbaar op:
-          <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>.
+          <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</uri>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.index-directory">
-        <title>Index Map</title>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Index Map</title></info>
+        
 
         <para>
         Na het aanmaken van de index zal de index map verschillende bestanden bevatten:
@@ -40,10 +41,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.source-code">
-        <title>Java Broncode</title>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Java Broncode</title></info>
+        
         <para>
             Het volgende Java programmavoorbeeld geeft een voorbeeld van hoe je een bestand
             indexeert via Java Lucene:
@@ -76,17 +77,17 @@ FileInputStream is = new FileInputStream(f);
 Reader reader = new BufferedReader(new InputStreamReader(is));
 doc.add(Field.Text("contents", reader));
 
-indexWriter.addDocument(doc);]]>
-        </programlisting>
-    </sect2>
+indexWriter.addDocument(doc);
+        ]]></programlisting>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.jar">
-        <title>LuceneIndexCreation.jar gebruiken</title>
+    <section xml:id="zend.search.lucene.java-lucene.jar"><info><title>LuceneIndexCreation.jar gebruiken</title></info>
+        
 
         <para>
             Om snel te kunnen starten met Zend_Search_Lucene werd een JAR bestand (Java) aangemaakt
             dat je toelaat een index vanaf de commandoregel aan te maken. Voor meer informatie over
-            JAR bestanden kan je terecht op: <ulink url="http://java.sun.com/docs/books/tutorial/jar/basics/index.html"/>.
+            JAR bestanden kan je terecht op: <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://java.sun.com/docs/books/tutorial/jar/basics/index.html">http://java.sun.com/docs/books/tutorial/jar/basics/index.html</uri>.
         </para>
 
         <para>
@@ -129,10 +130,6 @@ indexWriter.addDocument(doc);]]>
         <para>
             Wees voorzichtig, het gebruik van de <option>-s</option> optie vergroot de index ongeveer vijf maal.
         </para>
-    </sect2>
+    </section>
 
-</sect1>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

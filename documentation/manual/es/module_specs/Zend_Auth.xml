@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 20763 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.auth.introduction">
-    <title>Introducción</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.auth.introduction"><info><title>Introducción</title></info>
+    
     <para>
         <classname>Zend_Auth</classname> provee una <acronym>API</acronym> para
         autenticación e incluye adaptadores concretos de autenticación para
@@ -16,8 +14,7 @@
         Autorización, el proceso de decidir si se permite a una entidad: acceso
         a, o el realizar operaciones en, otras entidades esta fuera del alcance
         de <classname>Zend_Auth</classname> . Para más información sobre
-        autorización y control de acceso con Zend Framework, por favor vea <link
-            linkend="zend.acl">Zend_Acl</link> . </para>
+        autorización y control de acceso con Zend Framework, por favor vea <link linkend="zend.acl">Zend_Acl</link> . </para>
     <note>
         <para> La clase <classname>Zend_Auth</classname> implementa el patrón
             Singleton - sólo una instancia de la clase está disponible - a
@@ -28,9 +25,9 @@
                 <methodname>Zend_Auth::getInstance()</methodname> en su lugar.
         </para>
     </note>
-    <sect2 id="zend.auth.introduction.adapters">
+    <section xml:id="zend.auth.introduction.adapters"><info><title>Adaptadores</title></info>
 
-        <title>Adaptadores</title>
+        
 
         <para> Un adaptador <classname>Zend_Auth</classname> es usado para
             autenticar en contra de un tipo particular de servicio de
@@ -96,11 +93,11 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             excepción que se derive de
                 <classname>Zend_Auth_Adapter_Exception</classname> . </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.results">
+    <section xml:id="zend.auth.introduction.results"><info><title>Resultados</title></info>
 
-        <title>Resultados</title>
+        
 
         <para> Los adaptadores <classname>Zend_Auth</classname> regresan una
             instancia de <classname>Zend_Auth_Result</classname> con
@@ -192,11 +189,11 @@ switch ($result->getCode()) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.persistence">
+    <section xml:id="zend.auth.introduction.persistence"><info><title>Persistencia de Identidad</title></info>
 
-        <title>Persistencia de Identidad</title>
+        
 
         <para>Autenticar una petición que incluye credenciales de autenticación
             es util por sí mismo, pero también es importante el soportar
@@ -209,9 +206,9 @@ switch ($result->getCode()) {
             facilitar mantener el estado a través de multiples peticiones en
             aplicaciones web del lado del servidor. </para>
 
-        <sect3 id="zend.auth.introduction.persistence.default">
+        <section xml:id="zend.auth.introduction.persistence.default"><info><title>Persistencia por Defecto en la Sesión PHP</title></info>
 
-            <title>Persistencia por Defecto en la Sesión PHP</title>
+            
 
             <para> Por defecto, <classname>Zend_Auth</classname> provee
                 almacenamiento persistente de la identidad desde un intento de
@@ -240,9 +237,9 @@ switch ($result->getCode()) {
                 </para>
             </note>
 
-            <example id="zend.auth.introduction.persistence.default.example">
+            <example xml:id="zend.auth.introduction.persistence.default.example"><info><title>Modifying the Session Namespace</title></info>
 
-                <title>Modifying the Session Namespace</title>
+                
 
                 <para>
                     <classname>Zend_Auth_Storage_Session</classname> usa un
@@ -274,11 +271,11 @@ $result = $auth->authenticate($authAdapter);
 
             </example>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.auth.introduction.persistence.custom">
+        <section xml:id="zend.auth.introduction.persistence.custom"><info><title>Implementando Almacenamiento Personalizado</title></info>
 
-            <title>Implementando Almacenamiento Personalizado</title>
+            
 
             <para> En ocaciones los desarrolladores podrían necesitar usar un
                 diferente comportamiento de persistencia de identidad que el
@@ -288,9 +285,9 @@ $result = $auth->authenticate($authAdapter);
                 suplir una instancia de la clase a
                     <methodname>Zend_Auth::setStorage()</methodname> . </para>
 
-            <example id="zend.auth.introduction.persistence.custom.example">
+            <example xml:id="zend.auth.introduction.persistence.custom.example"><info><title>Usando una Clase de Almacenamiento Personalizada</title></info>
 
-                <title>Usando una Clase de Almacenamiento Personalizada</title>
+                
 
                 <para> Para poder utilizar una clase de almacenamiento
                     persistente de identidad diferente a
@@ -382,13 +379,13 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
             </example>
 
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.auth.introduction.using">
+    <section xml:id="zend.auth.introduction.using"><info><title>Uso</title></info>
 
-        <title>Uso</title>
+        
 
         <para> Hay dos formas provistas de usar adaptadores
                 <classname>Zend_Auth</classname> : </para>
@@ -481,6 +478,6 @@ if (!$result->isValid()) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

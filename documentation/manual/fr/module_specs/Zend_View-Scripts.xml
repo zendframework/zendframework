@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.scripts">
-    <title>Scripts de vue</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>Scripts de vue</title></info>
+    
 
     <para>
         Une fois que le contrôleur a assigné les variables et appelé <methodname>render()</methodname>,
@@ -51,8 +49,8 @@
 <?php endif; ?>
 ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
-        <title>Échapper la sortie</title>
+    <section xml:id="zend.view.scripts.escaping"><info><title>Échapper la sortie</title></info>
+        
 
         <para>
             Une des tâches les plus importantes à effectuer dans un script de vue est de
@@ -108,10 +106,10 @@ echo $view->render(...);
             La fonction ou méthode de rappel doit prendre la valeur à échapper dans le premier
             paramètre, et tous les autres paramètres devraient être optionnels.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
-        <title>Utiliser des systèmes de gabarit (template) alternatifs</title>
+    <section xml:id="zend.view.scripts.templates"><info><title>Utiliser des systèmes de gabarit (template) alternatifs</title></info>
+        
 
         <para>
             Bien que <acronym>PHP</acronym> lui-même un moteur de gabarit puissant, beaucoup de développeurs
@@ -121,8 +119,8 @@ echo $view->render(...);
             second en implémentant <classname>Zend_View_Interface</classname>.
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>Système de gabarit utilisant les scripts de vues</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>Système de gabarit utilisant les scripts de vues</title></info>
+            
 
             <para>
                 Un script de vue peut être utilisé pour instancier et manipuler un objet de
@@ -174,10 +172,10 @@ if ($this->livres) {
 <!-- pasdelivres.tpl -->
 <p>Aucun livre à afficher</p>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>Système de gabarit utilisant Zend_View_Interface</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>Système de gabarit utilisant Zend_View_Interface</title></info>
+            
 
             <para>
                 Certains peuvent trouver plus facile de simplement fournir un moteur de
@@ -462,6 +460,6 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.view.helpers.initial.cycle">
-    <title>Cycle Helfer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.cycle"><info><title>Cycle Helfer</title></info>
+    
 
     <para>
       Der <classname>Cycle</classname> Helfer wird verwendet um ein Set von Werte zu ändern.
     </para>
 
-    <example id="zend.view.helpers.initial.cycle.basicusage">
-        <title>Grundsätzliche Verwendung des Cycle Helfers</title>
+    <example xml:id="zend.view.helpers.initial.cycle.basicusage"><info><title>Grundsätzliche Verwendung des Cycle Helfers</title></info>
+        
 
         <para>
             Um Elemente hinzuzufügen die man durchlaufen will müssen diese im Constructor
@@ -46,13 +44,13 @@ $this->cycle()->prev();
 ]]></programlisting>
     </example>
 
-    <example id="zend.view.helpers.initial.cycle.advanceusage">
-        <title>Mit einem oder mehreren Zyklen arbeiten</title>
+    <example xml:id="zend.view.helpers.initial.cycle.advanceusage"><info><title>Mit einem oder mehreren Zyklen arbeiten</title></info>
+        
 
         <para>
             Um zwei Zyklen zu verwenden muß man den Namen des Zyklus verwenden. Einfach zwei
             Parameter in der cycle Methode setzen.
-            <command>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>. Man kann auch die
+            <command>$this-&gt;cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>. Man kann auch die
             setName($name) Funktion verwenden.
         </para>
     </example>
@@ -67,4 +65,4 @@ $this->cycle()->prev();
 </tr>
 <?php endforeach;?>
 ]]></programlisting>
-</sect3>
+</section>

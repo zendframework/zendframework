@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 22129 -->
-<sect2 id="zend.validate.set.float">
-    <title>Float</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.float"><info><title>Float</title></info>
+    
 
     <para>
         <classname>Zend_Validate_Float</classname> permet de valider si une donnée contient une valeur
         flottante. Les entrées localisées sont supportées.
     </para>
 
-    <sect3 id="zend.validate.set.float.options">
-        <title>Options supportées par Zend_Validate_Float</title>
+    <section xml:id="zend.validate.set.float.options"><info><title>Options supportées par Zend_Validate_Float</title></info>
+        
 
         <para>
             Les options suivantes sont supportées par <classname>Zend_Validate_Float</classname>:
@@ -24,10 +22,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.float.basic">
-        <title>Validation float simple</title>
+    <section xml:id="zend.validate.set.float.basic"><info><title>Validation float simple</title></info>
+        
 
         <para>
             Au plus simple, vous utiliserez les paramètres systèmes, c'est à dire la locale correspondant
@@ -45,10 +43,10 @@ $validator->isValid('1,234.5'); // retourne true
         <para>
             Dans l'exemple ci-dessus, nous supposons un environnement à locale "en".
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.float.localized">
-        <title>Validation float localisée</title>
+    <section xml:id="zend.validate.set.float.localized"><info><title>Validation float localisée</title></info>
+        
 
         <para>
             Il peut être parfois nécessire de prendre en compte la locale pour valider une valeur flottante.
@@ -79,8 +77,5 @@ $validator->isValid("1.234"); // retourne true
             La locale peut être affectée/récupérée après la création de l'objet de validation au moyen des méthodes
             <methodname>setLocale()</methodname> et <methodname>getLocale()</methodname>.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,6 +1,7 @@
-<sect1 id="zend.registry.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.registry.using"><info><title>Использование реестра<!--Using the Registry--></title></info>
 
-    <title>Использование реестра<!--Using the Registry--></title>
+    
 
     <para>
         Реестр является контейнером для хранения объектов и значений в
@@ -28,9 +29,9 @@
 -->
     </para>
 
-    <sect2 id="zend.registry.using.storing">
+    <section xml:id="zend.registry.using.storing"><info><title>Установка значений в реестре<!--Setting Values in the Registry--></title></info>
 
-        <title>Установка значений в реестре<!--Setting Values in the Registry--></title>
+        
 
         <para>
             Для того, чтобы сохранить значение в реестре, используйте
@@ -41,8 +42,8 @@
 -->
         </para>
 
-        <example id="zend.registry.using.storing.example">
-            <title>Пример использования метода set()<!--Example of set() method--></title>
+        <example xml:id="zend.registry.using.storing.example"><info><title>Пример использования метода set()<!--Example of set() method--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 Zend_Registry::set('index', $value);
@@ -71,11 +72,11 @@ Zend_Registry::set('index', $value);
 -->
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.retrieving">
+    <section xml:id="zend.registry.using.retrieving"><info><title>Получение значений из реестра<!--Getting Values from the Registry--></title></info>
 
-        <title>Получение значений из реестра<!--Getting Values from the Registry--></title>
+        
 
         <para>
             Для того, чтобы получить запись из реестра, используйте статический
@@ -86,8 +87,8 @@ Zend_Registry::set('index', $value);
 -->
         </para>
 
-        <example id="zend.registry.using.retrieving.example">
-            <title>Пример использования метода get()<!--Example of get() method--></title>
+        <example xml:id="zend.registry.using.retrieving.example"><info><title>Пример использования метода get()<!--Example of get() method--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 $value = Zend_Registry::get('index');
@@ -110,8 +111,8 @@ $value = Zend_Registry::get('index');
 -->
         </para>
 
-        <example id="zend.registry.using.retrieving.example-iterating">
-            <title>Пример итерации по реестру<!--Example of iterating over the registry--></title>
+        <example xml:id="zend.registry.using.retrieving.example-iterating"><info><title>Пример итерации по реестру<!--Example of iterating over the registry--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 $registry = Zend_Registry::getInstance();
@@ -124,11 +125,11 @@ foreach ($registry as $index => $value) {
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.constructing">
+    <section xml:id="zend.registry.using.constructing"><info><title>Создание объекта реестра<!--Constructing a Registry Object--></title></info>
 
-        <title>Создание объекта реестра<!--Constructing a Registry Object--></title>
+        
 
         <para>
             Кроме доступа к статическому реестру через статические методы, вы
@@ -166,8 +167,8 @@ foreach ($registry as $index => $value) {
 -->
         </para>
 
-        <example id="zend.registry.using.constructing.example">
-            <title>Пример создания реестра<!--Example of constructing a registry--></title>
+        <example xml:id="zend.registry.using.constructing.example"><info><title>Пример создания реестра<!--Example of constructing a registry--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 $registry = new Zend_Registry(array('index' => $value));
@@ -188,8 +189,8 @@ $registry = new Zend_Registry(array('index' => $value));
 -->
         </para>
 
-        <example id="zend.registry.using.constructing.example-setinstance">
-            <title>Пример инициализации статического реестра<!--Example of initializing the static registry--></title>
+        <example xml:id="zend.registry.using.constructing.example-setinstance"><info><title>Пример инициализации статического реестра<!--Example of initializing the static registry--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 $registry = new Zend_Registry(array('index' => $value));
@@ -210,11 +211,11 @@ Zend_Registry::setInstance($registry);
 -->
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.array-access">
+    <section xml:id="zend.registry.using.array-access"><info><title>Доступ к реестру как к массиву<!--Accessing the Registry as an Array--></title></info>
 
-        <title>Доступ к реестру как к массиву<!--Accessing the Registry as an Array--></title>
+        
 
         <para>
             Если необходимо установить или получить несколько значений, то
@@ -226,8 +227,8 @@ Zend_Registry::setInstance($registry);
 -->
         </para>
 
-        <example id="zend.registry.using.array-access.example">
-            <title>Пример доступа как к массиву<!--Example of array access--></title>
+        <example xml:id="zend.registry.using.array-access.example"><info><title>Пример доступа как к массиву<!--Example of array access--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 $registry = Zend_Registry::getInstance();
@@ -239,11 +240,11 @@ var_dump( $registry['index'] );
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.array-object">
+    <section xml:id="zend.registry.using.array-object"><info><title>Доступ к реестру как к объекту <!--Accessing the Registry as an Object--></title></info>
 
-        <title>Доступ к реестру как к объекту <!--Accessing the Registry as an Object--></title>
+        
 
         <para>
             К реестру можно обращаться так же, как к объекту, используя имена
@@ -269,8 +270,8 @@ var_dump( $registry['index'] );
 -->
         </para>
 
-        <example id="zend.registry.using.array-object.example">
-            <title>Пример доступа как к объекту<!--Example of object access--></title>
+        <example xml:id="zend.registry.using.array-object.example"><info><title>Пример доступа как к объекту<!--Example of object access--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 // в загрузочном коде:
@@ -294,11 +295,11 @@ var_dump($registry->index);
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.isset">
+    <section xml:id="zend.registry.using.isset"><info><title>Проверка существования индекса<!--Querying if an index exists--></title></info>
 
-        <title>Проверка существования индекса<!--Querying if an index exists--></title>
+        
 
         <para>
             Для проверки того, существует ли в реестре значение под определенным
@@ -309,8 +310,8 @@ var_dump($registry->index);
 -->
         </para>
 
-        <example id="zend.registry.using.isset.example-isregistered">
-            <title>Пример использования метода isRegistered()<!--Example of isRegistered() method--></title>
+        <example xml:id="zend.registry.using.isset.example-isregistered"><info><title>Пример использования метода isRegistered()<!--Example of isRegistered() method--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 if (Zend_Registry::isRegistered($index)) {
@@ -330,8 +331,8 @@ if (Zend_Registry::isRegistered($index)) {
 -->
         </para>
 
-        <example id="zend.registry.using.isset.example-isset">
-            <title>Пример использования метода isset()<!--Example of isset() method--></title>
+        <example xml:id="zend.registry.using.isset.example-isset"><info><title>Пример использования метода isset()<!--Example of isset() method--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 $registry = Zend_Registry::getInstance();
@@ -349,11 +350,11 @@ if (isset($registry->index)) {
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.subclassing">
+    <section xml:id="zend.registry.using.subclassing"><info><title>Создание подклассов<!--Extending the Registry--></title></info>
 
-        <title>Создание подклассов<!--Extending the Registry--></title>
+        
 
         <para>
             Статический реестр является экземпляром класса Zend_Registry. Если
@@ -372,8 +373,8 @@ if (isset($registry->index)) {
 -->
         </para>
 
-        <example id="zend.registry.using.subclassing.example">
-            <title>Пример установки класса статического реестра<!--Example of specifying the static registry's class name--></title>
+        <example xml:id="zend.registry.using.subclassing.example"><info><title>Пример установки класса статического реестра<!--Example of specifying the static registry's class name--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 Zend_Registry::setClassName('My_Registry');
@@ -396,11 +397,11 @@ Zend_Registry::set('index', $value);
 -->
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.registry.using.unsetting">
+    <section xml:id="zend.registry.using.unsetting"><info><title>Уничтожение статического реестра<!--Unsetting the Static Registry--></title></info>
 
-        <title>Уничтожение статического реестра<!--Unsetting the Static Registry--></title>
+        
 
         <para>
             Хотя обычно в этом нет необходимости, вы можете уничтожить
@@ -413,8 +414,8 @@ Zend_Registry::set('index', $value);
 -->
         </para>
 
-        <note>
-            <title>Угроза потери данных<!--Data loss risk--></title>
+        <note><info><title>Угроза потери данных<!--Data loss risk--></title></info>
+            
             <para>
                 Когда используете <code>_unsetInstance()</code>, все данные
                 в статическом реестре удаляются и не могут быть восстановлены.
@@ -440,8 +441,8 @@ Zend_Registry::set('index', $value);
 -->
         </para>
 
-        <example id="zend.registry.using.unsetting.example">
-            <title>Пример использования метода _unsetInstance()<!--Example of _unsetInstance() method--></title>
+        <example xml:id="zend.registry.using.unsetting.example"><info><title>Пример использования метода _unsetInstance()<!--Example of _unsetInstance() method--></title></info>
+            
             <programlisting language="php"><![CDATA[<?php
 
 Zend_Registry::set('index', $value);
@@ -456,9 +457,6 @@ Zend_Registry::set('index', $value);
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

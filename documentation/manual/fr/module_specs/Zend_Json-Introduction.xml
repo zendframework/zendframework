@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20792 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.json.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Json</classname> fournit des méthodes pratiques permettant de
         convertir du code <acronym>PHP</acronym> natif en notation <acronym>JSON</acronym>, et vice versa. Pour plus d'informations
-        concernant <acronym>JSON</acronym>, visitez le site du <ulink url="http://www.json.org/">projet
-        <acronym>JSON</acronym></ulink>.
+        concernant <acronym>JSON</acronym>, visitez le site du <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">projet
+        <acronym>JSON</acronym></link>.
     </para>
 
     <para>
@@ -28,4 +28,4 @@
         dans les applications côté client. Il offre une fonction utilitaire agréable qui aboutit aux
         techniques plus simples de traitement de données d'applications spécifiques.
     </para>
-</sect1>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
-<!-- Reviewed: 20763 -->
-<sect1 id="zend.acl.advanced">
-    <title>Fortgeschrittene Verwendung</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Fortgeschrittene Verwendung</title></info>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
-        <title>Dauerhafte Speicherung von ACL-Daten</title>
+    <section xml:id="zend.acl.advanced.storing"><info><title>Dauerhafte Speicherung von ACL-Daten</title></info>
+        
 
         <para>
             <classname>Zend_Acl</classname> wurde so entwickelt, dass keine spezielle Backend
@@ -21,16 +19,15 @@
             Die Speicherung der <acronym>ACL</acronym>-Daten ist deshalb die Aufgabe des
             Entwicklers, da sich die Anwendungsfälle für verschiedene Situationen erwartungsgemäß
             stark unterscheiden. Da <classname>Zend_Acl</classname> serialisierbar ist, können
-            <acronym>ACL</acronym>-Objekte mit der <acronym>PHP</acronym>-Funktion <ulink
-                url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
+            <acronym>ACL</acronym>-Objekte mit der <acronym>PHP</acronym>-Funktion <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize"><methodname>serialize()</methodname></link>
             serialisiert werden und das Ergebnis kann überall gespeichert werden, wo es der
             Entwickler möchte, wie z.B. in einer Datei, in einer Datenbank oder mit einem
             Cache-Mechanismus.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
-        <title>Schreiben von bedingten ACL-Regeln mit Zusicherungen</title>
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Schreiben von bedingten ACL-Regeln mit Zusicherungen</title></info>
+        
 
         <para>
             Manchmal soll eine Regel für das Erlauben oder Verbieten des Zugriffs auf eine
@@ -99,5 +96,5 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             Kontext für die Zusicherungsklasse bereit zu stellen, um die Bedingungen zu ermitteln wo
             erforderlich.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,6 +1,7 @@
-<sect3 id="zend.view.helpers.initial.translate">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translate"><info><title> 翻译助手 </title></info>
 
-    <title> 翻译助手 </title>
+    
 
     <para>
         通常，网站支持多种语言。使用 <link linkend="zend.translate.introduction">Zend 翻译 </link> 来翻译网站的内容并且 使用 <code> 翻译 </code> 视图助手来在视图里集成 <code>Zend 翻译 </code>。
@@ -39,9 +40,9 @@
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.registered">
+    <example xml:id="zend.view.helpers.initial.translate.registered"><info><title> 已注册的实例 </title></info>
 
-        <title> 已注册的实例 </title>
+        
 
         <para>
             为使用已注册的实例就是创建一个 <code>Zend_Translate</code> 或者 <code>Zend_Translate_Adapter</code> 的实例并在 <code>Zend_Registry</code> 里用 <code>Zend_Translate</code> 作为它的键。
@@ -63,9 +64,9 @@ echo $this->translate('simple');
         如果你熟悉 fluent interface ，那么也可以在视图里创建一个实例然后实例化这个助手。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.afterwards">
+    <example xml:id="zend.view.helpers.initial.translate.afterwards"><info><title> 在视图里 </title></info>
 
-        <title> 在视图里 </title>
+        
 
         <para>
             为了使用 fluent interface ，创建一个 <code>Zend_Translate</code> 或者 <code>Zend_Translate_Adapter</code> 的实例，调用不带参数的助手并调用 <code>setTranslator</code> 方法。
@@ -84,9 +85,9 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         如果你使用没有<code>Zend_View</code>的助手，那么你也可以直接使用它。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.directly">
+    <example xml:id="zend.view.helpers.initial.translate.directly"><info><title> 直接用法 </title></info>
 
-        <title> 直接用法 </title>
+        
 
         <programlisting role="php"><![CDATA[<?php
 // 我们的例子适配器
@@ -107,9 +108,9 @@ print $translate->translate('simple'); // this returns 'einfach'
         就象已经知道，<code>translate()</code> 方法用来返回翻译。用需要的翻译适配器的信息 id 来调用它。但它也可以在翻译字符串里替换参数。因此，它有两个方法接受变量参数。或者是参数类表，或者是参数数组。如下例：
     </para>
 
-    <example id="zend.view.helpers.initial.translate.parameter">
+    <example xml:id="zend.view.helpers.initial.translate.parameter"><info><title> 单个参数 </title></info>
 
-        <title> 单个参数 </title>
+        
 
         <para>
             使用单个参数就把它添加到这个方法。
@@ -130,9 +131,9 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example id="zend.view.helpers.initial.translate.parameterlist">
+    <example xml:id="zend.view.helpers.initial.translate.parameterlist"><info><title> 参数列表 </title></info>
 
-        <title> 参数列表 </title>
+        
 
         <para>
             使用参数列表并添加给方法。
@@ -149,9 +150,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, $month, $
 
     </example>
 
-    <example id="zend.view.helpers.initial.translate.parameterarray">
+    <example xml:id="zend.view.helpers.initial.translate.parameterarray"><info><title> 参数数组 </title></info>
 
-        <title> 参数数组 </title>
+        
 
         <para>
             使用参数数组并添加到方法。
@@ -170,9 +171,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         有时候必需要修改翻译的地点。可以通过动态翻译或者把所有的静态翻译来完成。并且你可以使用参数类表和参数数组。在这两种情况下，地点被当作最后一个单个参数给出。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.dynamic">
+    <example xml:id="zend.view.helpers.initial.translate.dynamic"><info><title> 动态修改地点 （locale）</title></info>
 
-        <title> 动态修改地点 （locale）</title>
+        
 
         <programlisting role="php"><![CDATA[<?php
 // 在视图里
@@ -186,9 +187,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         这个例子为 messageid 返回意大利语的翻译。但它将只能用一次。下个翻译将从适配器里设置地点。通常地在添加它到注册表之前你将在翻译适配器里设置期望的地点。但你也可以从助手里设置地点：
     </para>
 
-    <example id="zend.view.helpers.initial.translate.static">
+    <example xml:id="zend.view.helpers.initial.translate.static"><info><title> 静态修改地点 （locale）</title></info>
 
-        <title> 静态修改地点 （locale）</title>
+        
 
         <programlisting role="php"><![CDATA[<?php
 // 在视图里
@@ -207,9 +208,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         当然，还有 <code>getLocale()</code> 方法来获得当前设置的地点。
     </para>
 
-    <example id="zend.view.helpers.initial.translate.getlocale">
+    <example xml:id="zend.view.helpers.initial.translate.getlocale"><info><title> 获得当前设置的地点 </title></info>
 
-        <title> 获得当前设置的地点 </title>
+        
 
         <programlisting role="php"><![CDATA[<?php
 // 在视图里
@@ -227,7 +228,4 @@ $this->translate()->getLocale();
 
     </example>
 
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

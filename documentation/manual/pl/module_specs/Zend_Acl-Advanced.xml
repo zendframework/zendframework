@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.advanced">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Zaawansowane użycie</title></info>
 
-    <title>Zaawansowane użycie</title>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
+    <section xml:id="zend.acl.advanced.storing"><info><title>Trwałe przechowywanie danych ACL</title></info>
 
-        <title>Trwałe przechowywanie danych ACL</title>
+        
 
         <para>
             Klasa <classname>Zend_Acl</classname> została zaprojektowana w taki 
@@ -25,16 +24,16 @@
             dla programisty, dlatego, że przykłady użycia mogą się bardzo różnić w rozmaitych
             sytuacjach. Ponieważ możliwe jest serializowanie <classname>Zend_Acl</classname>, 
             obiekty <acronym>ACL</acronym> mogą być serializowane za pomocą funkcji 
-            <acronym>PHP</acronym> <ulink url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>,
+            <acronym>PHP</acronym> <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize"><methodname>serialize()</methodname></link>,
             a wyniki mogą być przechowane tam gdzie określi to programista, na
             przykład w pliku, w bazie danych lub w mechanizmie buforowania.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Tworzenie warunkowych reguł ACL z zapewnieniami</title></info>
 
-        <title>Tworzenie warunkowych reguł ACL z zapewnieniami</title>
+        
 
         <para>
             Czasem reguła przyznawania lub zabraniania dostępu roli do zasobu nie
@@ -106,6 +105,6 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             gdzie są one potrzebne.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

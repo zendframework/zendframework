@@ -24,7 +24,7 @@
 namespace Zend\Dojo\Form\Decorator;
 
 use Zend\Form\Decorator\ViewHelper as ViewHelperDecorator,
-    Zend\Form\Decorator\Exception as DecoratorException;
+    Zend\Form\Decorator\Exception\RunTimeException as DecoratorException;
 
 /**
  * Zend_Dojo_Form_Decorator_DijitElement
@@ -172,12 +172,12 @@ class DijitElement extends ViewHelperDecorator
         $dijitParams['required'] = $element->isRequired();
 
         $id = $element->getId();
-        if ($view->dojo()->hasDijit($id)) {
+        if ($view->broker('dojo')->hasDijit($id)) {
             trigger_error(sprintf('Duplicate dijit ID detected for id "%s; temporarily generating uniqid"', $id), E_USER_NOTICE);
             $base = $id;
             do {
                 $id = $base . '-' . uniqid();
-            } while ($view->dojo()->hasDijit($id));
+            } while ($view->broker('dojo')->hasDijit($id));
         }
         $attribs['id'] = $id;
 
@@ -185,7 +185,7 @@ class DijitElement extends ViewHelperDecorator
                $options = $attribs['options'];
         }
 
-        $elementContent = $view->$helper($name, $value, $dijitParams, $attribs, $options);
+        $elementContent = $view->broker($helper)->direct($name, $value, $dijitParams, $attribs, $options);
         switch ($this->getPlacement()) {
             case self::APPEND:
                 return $content . $separator . $elementContent;

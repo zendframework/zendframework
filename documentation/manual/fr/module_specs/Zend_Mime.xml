@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mime.mime">
-    <title>Zend_Mime</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.mime.mime.introduction">
-        <title>Introduction</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.mime"><info><title>Zend_Mime</title></info>
+    
+
+    <section xml:id="zend.mime.mime.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Mime</classname> est une classe de support pour gérer les messages
-            <acronym>MIME</acronym> en plusieurs parties. Elle est utilisé par <link
-            linkend="zend.mail"><classname>Zend_Mail</classname></link> et <link
-            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>, est
+            <acronym>MIME</acronym> en plusieurs parties. Elle est utilisé par <link linkend="zend.mail"><classname>Zend_Mail</classname></link> et <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>, est
             peut-être utilisée dans l'application qui nécessite un support <acronym>MIME</acronym>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.mime.static">
-        <title>Méthodes statiques et constantes</title>
+    <section xml:id="zend.mime.mime.static"><info><title>Méthodes statiques et constantes</title></info>
+        
 
         <para>
             <classname>Zend_Mime</classname> fournit un jeu simple de méthodes statiques pour
@@ -135,10 +133,10 @@
                 </listitem>
             </itemizedlist>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.mime.instatiation">
-        <title>Instancier Zend_Mime</title>
+    <section xml:id="zend.mime.mime.instatiation"><info><title>Instancier Zend_Mime</title></info>
+        
 
         <para>
             Lors de l'instanciation d'un objet <classname>Zend_Mime</classname>, une frontière
@@ -170,5 +168,5 @@
                 </listitem>
                 </itemizedlist>
             </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

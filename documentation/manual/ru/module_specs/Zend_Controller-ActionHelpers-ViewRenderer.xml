@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.actionhelpers.viewrenderer">
-    <title>ViewRenderer</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.actionhelpers.viewrenderer"><info><title>ViewRenderer</title></info>
+    
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.introduction"><info><title>Введение</title></info>
+        
 
         <para>
             Помощник <code>ViewRenderer</code> предназначен для решения
@@ -72,7 +71,7 @@
                 <code>ViewRenderer</code> включен по умолчанию. Вы можете
                 отключить его через параметр фронт-контроллера
                 <code>noViewRenderer</code>
-                (<varname>$front->setParam('noViewRenderer', true)</varname>) или
+                (<varname>$front-&gt;setParam('noViewRenderer', true)</varname>) или
                 посредством удаления помощника из стека брокера помощников
                 (<code>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</code>).
             </para>
@@ -114,10 +113,10 @@ $viewRenderer->setView($view)
                 </listitem>
             </itemizedlist>
         </note>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.api">
-        <title>API</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.api"><info><title>API</title></info>
+        
 
         <para>
             В простейшем варианте использования вы просто инстанцируете
@@ -443,8 +442,8 @@ $viewRenderer =
             </para></listitem>
         </itemizedlist>
 
-        <note>
-            <title>Используемые по умолчанию соглашения по поиску</title>
+        <note><info><title>Используемые по умолчанию соглашения по поиску</title></info>
+            
 
             <para>
                 <code>ViewRenderer</code> производит некоторую нормализацию пути
@@ -622,13 +621,13 @@ $viewRenderer =
                 </para>
             </listitem>
         </itemizedlist>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.basicusage">
-        <title>Примеры базового использования</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.basicusage"><info><title>Примеры базового использования</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-1">
-            <title>Базовое использование</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-1"><info><title>Базовое использование</title></info>
+            
 
             <para>
                 В простейшем случае вы просто инициализируете и
@@ -676,8 +675,8 @@ class Foo_BarController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <note>
-            <title>Соглашения по именованию: Разделители слов в именах контроллера и действия</title>
+        <note><info><title>Соглашения по именованию: Разделители слов в именах контроллера и действия</title></info>
+            
             <para>
                 Если имена вашего контроллера и действия состоят из
                 нескольких слов, то диспетчер требует, чтобы в URL они были
@@ -708,8 +707,8 @@ class Foo_BarController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-2">
-            <title>Отключение авторендеринга</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-2"><info><title>Отключение авторендеринга</title></info>
+            
 
             <para>
                 Может потребоваться отключить авторендеринг для некоторых
@@ -754,8 +753,8 @@ class Bar_BatController extends Zend_Controller_Action
             </para>
         </note>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-3">
-            <title>Выбор другого скрипта вида</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-3"><info><title>Выбор другого скрипта вида</title></info>
+            
 
             <para>
                 В некоторых случаях требуется, чтобы производился рендеринг
@@ -801,8 +800,8 @@ class Foo_BarController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
-            <title>Изменение зарегистрированного объекта вида</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.basicusage.example-4"><info><title>Изменение зарегистрированного объекта вида</title></info>
+            
 
             <para>
                 А что, если нужно модифицировать объект вида - например,
@@ -833,13 +832,13 @@ class Foo_BarController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
+    </section>
 
-    <sect4 id="zend.controller.actionhelper.viewrenderer.advancedusage">
-        <title>Примеры продвинутого использования</title>
+    <section xml:id="zend.controller.actionhelper.viewrenderer.advancedusage"><info><title>Примеры продвинутого использования</title></info>
+        
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1">
-            <title>Изменение спецификаций пути</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1"><info><title>Изменение спецификаций пути</title></info>
+            
 
             <para>
                 В некоторых случаях вы можете решить, что спецификации пути,
@@ -847,7 +846,7 @@ class Foo_BarController extends Zend_Controller_Action
                 сайта. Например, вы можете захотеть иметь одно дерево шаблонов,
                 к которому можно давать доступ дизайнерам (что, например,
                 довольно типично в случае использованя
-                <ulink url="http://smarty.php.net/">Smarty</ulink>).
+                <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://smarty.php.net/">Smarty</link>).
                 В таком случае вы можете захотеть задать жесткую
                 спецификацию базового пути вида и создать альтернативную
                 спецификацию для собственно путей к скриптам вида.
@@ -881,8 +880,8 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
-            <title>Рендеринг нескольких скриптов вида из одного действия</title>
+        <example xml:id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2"><info><title>Рендеринг нескольких скриптов вида из одного действия</title></info>
+            
 
             <para>
                 Иногда бывает нужно произвести рендеринг нескольких скриптов
@@ -913,8 +912,5 @@ class SearchController extends Zend_Controller_Action
 }
 ]]></programlisting>
         </example>
-    </sect4>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

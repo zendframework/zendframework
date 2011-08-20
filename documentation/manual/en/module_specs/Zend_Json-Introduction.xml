@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.json.introduction">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Json</classname> provides convenience methods for serializing native
         <acronym>PHP</acronym> to <acronym>JSON</acronym> and decoding <acronym>JSON</acronym> to
-        native <acronym>PHP</acronym>. For more information on <acronym>JSON</acronym>, <ulink
-            url="http://www.json.org/">visit the <acronym>JSON</acronym> project site</ulink>.
+        native <acronym>PHP</acronym>. For more information on <acronym>JSON</acronym>, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">visit the <acronym>JSON</acronym> project site</link>.
     </para>
 
     <para>
@@ -27,7 +27,4 @@
         <acronym>XML</acronym> parsing in the browser-side applications. It offers a nice utility
         function that results in easier application-specific data processing techniques.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

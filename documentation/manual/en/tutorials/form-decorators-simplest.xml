@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.simplest">
-    <title>Decorator Basics</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.simplest"><info><title>Decorator Basics</title></info>
+    
 
-    <sect2 id="learning.form.decorators.simplest.decorator-overview">
-        <title>Overview of the Decorator Pattern</title>
+    <section xml:id="learning.form.decorators.simplest.decorator-overview"><info><title>Overview of the Decorator Pattern</title></info>
+        
 
         <para>
-            To begin, we'll cover some background on the <ulink
-                url="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator design
-                pattern</ulink>. One common technique is to define a common interface that both
+            To begin, we'll cover some background on the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator design
+                pattern</link>. One common technique is to define a common interface that both
             your originating object and decorator will implement; your decorator than accepts the
             originating object as a dependency, and will either proxy to it or override its methods.
             Let's put that into code to make it more easily understood:
@@ -92,8 +90,7 @@ class LockedWindow implements Window
         </para>
 
         <para>
-            In this particular example, we're going to use <ulink
-                url="http://en.wikipedia.org/wiki/Duck_typing">duck typing</ulink> instead of an
+            In this particular example, we're going to use <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Duck_typing">duck typing</link> instead of an
             explicit interface. This allows our implementation to be a bit more flexible, while
             still allowing the decorator object to act exactly as if it were a Person object.
         </para>
@@ -151,10 +148,10 @@ class TextPerson
             order to render. The decorator then can access the element's methods and properties in
             order to create a representation of the element -- or a subset of it.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.form.decorators.simplest.first-decorator">
-        <title>Creating Your First Decorator</title>
+    <section xml:id="learning.form.decorators.simplest.first-decorator"><info><title>Creating Your First Decorator</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> decorators all implement a common interface,
@@ -240,5 +237,5 @@ $element = new Zend_Form_Element('foo', array(
             In the next section, we'll look at how to combine decorators in order to create
             composite output.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

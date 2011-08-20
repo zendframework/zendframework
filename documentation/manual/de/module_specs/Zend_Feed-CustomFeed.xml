@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.feed.custom-feed">
-    <title>Eigene Klassen für Feeds und Einträge</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.custom-feed"><info><title>Eigene Klassen für Feeds und Einträge</title></info>
+    
 
     <para>
         Schließlich kannst du die <classname>Zend_Feed</classname> Klasse erweitern, wenn du dein
@@ -17,8 +15,8 @@
         Endbenutzer nicht um Namensräume kümmern muss.
     </para>
 
-    <example id="zend.feed.custom-feed.example.extending">
-        <title>Die Klasse für Atom Einträge mit einem eigenen Namensraum erweitern</title>
+    <example xml:id="zend.feed.custom-feed.example.extending"><info><title>Die Klasse für Atom Einträge mit einem eigenen Namensraum erweitern</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 /**
@@ -91,4 +89,4 @@ $entry->myUpdated();
 $entry->myUpdated;
 ]]></programlisting>
     </example>
-</sect1>
+</section>

@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21815 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.measure.types">
-    <title>Types de mesures</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.types"><info><title>Types de mesures</title></info>
+    
 
     <para>
         Tous les types de mesures supportées sont listées ci-dessous, chacun avec une exemple
         d'utilisation standard pour ce type de mesure.
     </para>
 
-    <table id="zend.measure.types.table-1">
-        <title>Liste des types de mesure</title>
+    <table xml:id="zend.measure.types.table-1"><info><title>Liste des types de mesure</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -263,8 +261,8 @@
         </tgroup>
     </table>
 
-    <sect2 id="zend.measure.types.binary">
-        <title>Conseils pour Zend_Measure_Binary</title>
+    <section xml:id="zend.measure.types.binary"><info><title>Conseils pour Zend_Measure_Binary</title></info>
+        
 
         <para>
             Quelques conventions binaires populaires, incluent des termes comme le kilo-, le
@@ -283,10 +281,10 @@
             SI-notation, mais presque tous les disques durs sont marqués dans la numérotation
             binaire des ordinateurs.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.types.decimal">
-        <title>Conseils pour Zend_Measure_Number</title>
+    <section xml:id="zend.measure.types.decimal"><info><title>Conseils pour Zend_Measure_Number</title></info>
+        
 
         <para>
             Le format de nombre le plus connu est le système décimal. De manière
@@ -295,15 +293,14 @@
             populaires. Noter que seulement la partie décimale des nombres est manipulée. Toute
             partie fractionnelle sera effacée.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.types.roman">
-        <title>Chiffres romains</title>
+    <section xml:id="zend.measure.types.roman"><info><title>Chiffres romains</title></info>
+        
 
         <para>
-            Les chiffres romains plus grands que 4000 sont supportés. <ulink
-            url="http://fr.wikipedia.org/wiki/Num%C3%A9ration_romaine#Extensions_classiques">Ces
-            nombres sont écrits avec une barre au dessus</ulink>. Comme cette barre ne peut pas être
+            Les chiffres romains plus grands que 4000 sont supportés. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.wikipedia.org/wiki/Num%C3%A9ration_romaine#Extensions_classiques">Ces
+            nombres sont écrits avec une barre au dessus</link>. Comme cette barre ne peut pas être
             représentée sur l'ordinateur, il faut utiliser un tiret bas en début de chaîne.
         </para>
 
@@ -318,5 +315,5 @@ $unite = new Zend_Measure_Number($valeur_grande,
 echo $unite->convertTo(Zend_Measure_Number::DECIMAL);
 // affiche 10000
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

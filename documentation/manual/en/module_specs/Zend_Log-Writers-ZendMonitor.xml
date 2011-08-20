@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.zendmonitor">
-    <title>Writing to the Zend Server Monitor</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.zendmonitor"><info><title>Writing to the Zend Server Monitor</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_ZendMonitor</classname> allows you to log events via Zend
@@ -19,8 +18,8 @@
         monitor.
     </para>
 
-    <note>
-        <title>Zend Monitor must be installed and enabled</title>
+    <note><info><title>Zend Monitor must be installed and enabled</title></info>
+        
 
         <para>
             In order to use this log writer, Zend Monitor must be both installed and enabled.
@@ -73,7 +72,7 @@ $log->info('Exception occurred', array(
     </para>
 
     <para>
-        <inlinegraphic fileref="figures/zend.log.writers.zendmonitor-events.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata fileref="figures/zend.log.writers.zendmonitor-events.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -87,7 +86,7 @@ $log->info('Exception occurred', array(
     </para>
 
     <para>
-        <inlinegraphic fileref="figures/zend.log.writers.zendmonitor-event.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata fileref="figures/zend.log.writers.zendmonitor-event.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -101,13 +100,12 @@ $log->info('Exception occurred', array(
         example.
     </para>
 
-    <note>
-        <title>Integration with Zend_Application</title>
+    <note><info><title>Integration with Zend_Application</title></info>
+        
 
         <para>
             By default, the <command>zf.sh</command> and <command>zf.bat</command> commands add
-            configuration for the <link
-                linkend="zend.application.available-resources.log"><classname>Zend_Application</classname>
+            configuration for the <link linkend="zend.application.available-resources.log"><classname>Zend_Application</classname>
                 log resource</link>, which includes configuration for the
             <classname>ZendMonitor</classname> log writer. Additionally, the
             <classname>ErrorController</classname> uses the configured logger to log application
@@ -120,4 +118,4 @@ $log->info('Exception occurred', array(
             <constant>NULL</constant> logger.
         </para>
     </note>
-</sect2>
+</section>

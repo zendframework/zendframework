@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.quickstart.intro">
-    <title>Zend Framework &amp; MVC Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.quickstart.intro.zf">
-        <title>Zend Framework</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.quickstart.intro"><info><title>Zend Framework &amp; MVC Introduction</title></info>
+    
+
+    <section xml:id="learning.quickstart.intro.zf"><info><title>Zend Framework</title></info>
+        
 
         <para>
             Zend Framework is an open source, object oriented web application framework for
@@ -13,8 +14,7 @@
             Zend Framework also provides an advanced Model-View-Controller (<acronym>MVC</acronym>)
             implementation that can be used to establish a basic structure for your Zend Framework
             applications. A full list of Zend Framework components along with short descriptions may
-            be found in the <ulink
-                url="http://framework.zend.com/about/components">components overview</ulink>. This
+            be found in the <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/about/components">components overview</link>. This
             QuickStart will introduce you to some of Zend Framework's most commonly used components,
             including <classname>Zend_Controller</classname>, <classname>Zend_Layout</classname>,
             <classname>Zend_Config</classname>, <classname>Zend_Db</classname>,
@@ -31,22 +31,20 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <ulink
-                        url="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">zip</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.zip">zip</link>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <ulink
-                        url="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">tar.gz</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/demos/ZendFrameworkQuickstart.tar.gz">tar.gz</link>
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.quickstart.intro.mvc">
-        <title>Model-View-Controller</title>
+    <section xml:id="learning.quickstart.intro.mvc"><info><title>Model-View-Controller</title></info>
+        
 
         <para>
             So what exactly is this <acronym>MVC</acronym> pattern everyone keeps talking about, and
@@ -62,16 +60,15 @@
             when more than one developer is working on the same application.
         </para>
 
-        <note>
-            <title>More Information</title>
+        <note><info><title>More Information</title></info>
+            
 
             <para>
                 Let's break down the pattern and take a look at the individual pieces:
             </para>
 
             <para>
-                <inlinegraphic width="321" scale="100" align="center" valign="middle"
-                    fileref="figures/learning.quickstart.intro.mvc.png" format="PNG" />
+                <inlinemediaobject><imageobject><imagedata width="321" scale="100" align="center" valign="middle" fileref="figures/learning.quickstart.intro.mvc.png" format="PNG"/></imageobject></inlinemediaobject>
             </para>
 
             <itemizedlist>
@@ -100,18 +97,17 @@
                         pattern together. They manipulate models, decide which view to display based
                         on the user's request and other factors, pass along the data that each view
                         will need, or hand off control to another controller entirely. Most
-                        <acronym>MVC</acronym> experts recommend <ulink
-                            url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">keeping
-                        controllers as skinny as possible</ulink>.
+                        <acronym>MVC</acronym> experts recommend <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">keeping
+                        controllers as skinny as possible</link>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                Of course there is <ulink url="http://ootips.org/mvc-pattern.html">more to be
-                    said</ulink> about this critical pattern, but this should give you enough
+                Of course there is <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ootips.org/mvc-pattern.html">more to be
+                    said</link> about this critical pattern, but this should give you enough
                 background to understand the guestbook application we'll be building.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

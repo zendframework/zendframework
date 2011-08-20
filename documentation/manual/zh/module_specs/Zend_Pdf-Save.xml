@@ -1,5 +1,6 @@
-<sect1 id="zend.pdf.save">
-    <title> 保存修改到 PDF 文档 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.pdf.save"><info><title> 保存修改到 PDF 文档 </title></info>
+    
     <para>
         有两个方法来保存修改到 PDF 文档：<code>Zend_Pdf::save()</code> 和 <code>Zend_Pdf::render()</code>。
     </para>
@@ -12,8 +13,8 @@
         <code>Zend_Pdf::render($newSegmentOnly = false)</code> 把 PDF 文档当作字符串返回。如果 $newSegmentOnly 是 true，那么只有新的 PDF 文件段返回。
     </para>
 
-    <example id="zend.pdf.save.example-1">
-        <title>Save PDF document.</title>
+    <example xml:id="zend.pdf.save.example-1"><info><title>Save PDF document.</title></info>
+        
         <programlisting role="php"><![CDATA[
 ...
 // Load PDF document.
@@ -28,11 +29,8 @@ $pdf->save($newFileName);
 $pdfString = $pdf->render();
 
 ...
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

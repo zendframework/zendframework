@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21586 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.exception.previous">
-    <title>Exceções Precedentes</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.previous"><info><title>Exceções Precedentes</title></info>
+    
 
     <para>
         Desde o Zend Framework 1.10, <classname>Zend_Exception</classname> implementa às exceções
@@ -17,8 +15,8 @@
         Exceções precedentes são indicadas como o terceiro argumento para um construtor de exceção.
     </para>
 
-    <example id="zend.exception.previous.example">
-        <title>Exceções precedentes</title>
+    <example xml:id="zend.exception.previous.example"><info><title>Exceções precedentes</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 try {
@@ -41,7 +39,4 @@ try {
 }
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

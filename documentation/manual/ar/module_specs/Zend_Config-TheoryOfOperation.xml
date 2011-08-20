@@ -1,5 +1,8 @@
-<sect1 id="zend.config.theory_of_operation">
-    <title>نظرية العمل</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.theory_of_operation"><info><title>نظرية العمل</title></info>
+    
     <para>
         يتم تمرير بيانات الأعدادات إلى <code>Zend_Config</code> على شكل associative array
         و التى من الممكن ان تكون متعددة الأبعاد, و من أجل دعم تنظيم البيانات من الشكل العام إلى المحدد,
@@ -12,18 +15,18 @@
         يطبق <code>Zend_Config</code> كل من الـ interfaces المسمى
         <code>Countable</code> و <code>Iterator</code> ليوفر وسائل سهلة للوصل إلى البيانات,
         حيث سيمكنك إستخدام دالة الـ PHP المسمى
-        <ulink url="http://php.net/count"><code>()count</code></ulink>
-        أو إستخدام <ulink url="http://php.net/foreach"><code>foreach</code></ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/count"><code>()count</code></link>
+        أو إستخدام <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/foreach"><code>foreach</code></link>
         على كائنات <code>Zend_Config</code> .
     </para>
     <para>
         السلوك الطبيعى لـ <code>Zend_Config</code> يسمح بالقرائة فقط للبيانات , و عملية تعديل لأحد
         قيم البيانات المحفوظة به مثل
-        ( <code><![CDATA[$config->database->host = 'example.com']]></code>)
+        ( <code>$config-&gt;database-&gt;host = 'example.com'</code>)
         يتسبب فى إلقاء exception , و يمكن تغيير هذا السلوك من خلال الـ constuctor و ذلك
         للسماح بتعديل قيم البيانات.
-        <note>
-            <title>لاحظ أن</title>
+        <note><info><title>لاحظ أن</title></info>
+            
             <para>
                 تسمح <code>Zend_Config</code> بعمل تغييرات فى بيانات الـ configuration التى تم تحميلها الى الذاكرة ,
                 و لكنها لا توفر امكانية حفظ هذه البيانات فى اى من وسائط حفظ البيانات , الأدوات التى تقوم بإنشاء و تعديل بيانات الـ
@@ -48,7 +51,4 @@
         و القسم الذى يرث من الممكن أن يغير القيم الموروثة من القسم الأب, و الذى من الممكن أن يكون ورث من
         قسم جد (أب الأب) و هكذا , لكن الوراثة المتعددة (مثل القسم C يرث مباشرة من الأقسام A و B ) غير مدعومة.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17592 -->
-    <!-- Reviewed: no -->
-<sect3 id="zend.controller.router.routes.hostname">
-    <title>Zend_Controller_Router_Route_Hostname</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.hostname"><info><title>Zend_Controller_Router_Route_Hostname</title></info>
+    
 
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname>
@@ -66,7 +64,7 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         hacer es encadenar una ruta del path a la ruta del nombre del host. Esto
         se
         hace como en el ejemplo llamando a
-        <command>$hostnameRoute->chain($pathRoute);</command>
+        <command>$hostnameRoute-&gt;chain($pathRoute);</command>
         .
         Haciendo esto,
         <varname>$hostnameRoute</varname>
@@ -77,4 +75,4 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         ), que
         luego puede ser entregada al router.
     </para>
-</sect3>
+</section>

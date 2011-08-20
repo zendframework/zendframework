@@ -1,6 +1,7 @@
-<sect1 id="zend.view.scripts">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>View Scripts</title></info>
 
-    <title>View Scripts</title>
+    
 
     <para>
         Eenmaal je controller de variabelen heeft toegewezen en render()
@@ -14,7 +15,7 @@
         Variabelen die aan het view script werden toegewezen door de
         controller worden beschouwd als instantie-eigenschappen. Bijvoorbeeld,
         indien de controller een variabele 'iets' zou toewijzen, zou je
-        ernaar verwijzen in je view script als $this->iets. (Dit laat je toe
+        ernaar verwijzen in je view script als $this-&gt;iets. (Dit laat je toe
         de variabelen die werden toegewezen te scheiden van de variabelen die
         intern zijn aan het script zelf.)
     </para>
@@ -46,12 +47,12 @@
 
     <p>Er zijn geen boeken af te beelden.</p>
 
-<?php endif; ?>]]>
-    </programlisting>
+<?php endif; ?>
+    ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
+    <section xml:id="zend.view.scripts.escaping"><info><title>Escaping Output</title></info>
 
-        <title>Escaping Output</title>
+        
 
         <para>
             Eén van de meest belangrijke taken die in een view script
@@ -74,8 +75,8 @@ echo $this->variable;
 
 // goed gebruik van het view-script:
 echo $this->escape($this->variable);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Standaard gebruikt de escape() methode de PHP functie htmlspecialchars()
@@ -101,8 +102,8 @@ $view->setEscape(array($obj, 'methodeNaam'));
 
 // en geef dan je view weer
 echo $view->render(...);
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             De callback functie of methode zou de waarde die ge-escaped moet
@@ -110,11 +111,11 @@ echo $view->render(...);
             moeten optioneel zijn.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
+    <section xml:id="zend.view.scripts.templates"><info><title>Template Systemen</title></info>
 
-        <title>Template Systemen</title>
+        
 
         <para>
             Alhoewel PHP zelf een machtig template systeem is vinden
@@ -147,8 +148,8 @@ if ($this->books) {
     $tpl->setFile("geenboeken", "geenboeken.tpl")
     $tpl->pparse("output", "geenboeken");
 }
-?>]]>
-        </programlisting>
+?>
+        ]]></programlisting>
 
         <para>
             Dit zouden de template bestanden zijn:
@@ -172,12 +173,9 @@ if ($this->books) {
 
 <!-- geenboeken.tpl -->
 <p>Er zijn geen boeken af te beelden.</p>
-]]>
-        </programlisting>
 
-    </sect2>
+        ]]></programlisting>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+
+</section>

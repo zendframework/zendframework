@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22767 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.email_address">
-    <title>Email Adresse</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.email_address"><info><title>Email Adresse</title></info>
+    
 
     <para>
         <classname>Zend_Validate_EmailAddress</classname> erlaubt die Prüfung von Email Adressen.
@@ -10,8 +8,8 @@
         bekannten Spezifikationen für Email Adressen und Hostnamen zu prüfen.
     </para>
 
-    <sect3 id="zend.validate.set.email_address.basic">
-        <title>Normale Verwendung</title>
+    <section xml:id="zend.validate.set.email_address.basic"><info><title>Normale Verwendung</title></info>
+        
 
         <para>
             Ein Beispiel einer normalen Benutzung ist anbei:
@@ -33,10 +31,10 @@ if ($validator->isValid($email)) {
             Das prüft die Email Adresse <varname>$email</varname> und gibt bei einem Fehler über
             <methodname>getMessages()</methodname> eine nützliche Fehlermeldung aus.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.options">
-        <title>Optionen für die Prüfung von Email Adressen</title>
+    <section xml:id="zend.validate.set.email_address.options"><info><title>Optionen für die Prüfung von Email Adressen</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> unterstützt verschiedene Optionen
@@ -51,8 +49,7 @@ if ($validator->isValid($email)) {
                     <emphasis><property>allow</property></emphasis>: Definiert welche Typen von
                     Domain Namen akzeptiert werden. Diese Option wird in Verbindung mit der hostname
                     Option verwendet um die Hostname Prüfung zu setzen. Für weitere Informationen
-                    über mögliche Werte dieser Option sehen Sie bitte unter <link
-                        linkend="zend.validate.set.hostname">Hostname</link> und mögliche
+                    über mögliche Werte dieser Option sehen Sie bitte unter <link linkend="zend.validate.set.hostname">Hostname</link> und mögliche
                     <constant>ALLOW</constant>* Konstanten. Der Standardwert dieser Option ist
                     <constant>ALLOW_DNS</constant>.
                 </para>
@@ -101,10 +98,10 @@ if ($validator->isValid($email)) {
 $validator = new Zend_Validate_EmailAddress();
 $validator->setOptions(array('domain' => false));
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.complexlocal">
-        <title>Komplexe lokale Abschnitte</title>
+    <section xml:id="zend.validate.set.email_address.complexlocal"><info><title>Komplexe lokale Abschnitte</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAdress</classname> prüft jede gültige Email Adresse mit
@@ -118,10 +115,10 @@ $validator->setOptions(array('domain' => false));
             Einige Email Formate werden aktuell nicht geprüft (z.B. Zeilenumbruch Zeichen oder ein
             "\" Zeichen in einer Email Adresse).
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.purelocal">
-        <title>Nur den lokalen Teil prüfen</title>
+    <section xml:id="zend.validate.set.email_address.purelocal"><info><title>Nur den lokalen Teil prüfen</title></info>
+        
 
         <para>
             Wenn man will das <classname>Zend_Validate_EmailAddress</classname> nur den lokalen Teil
@@ -135,14 +132,13 @@ $validator->setOptions(array('domain' => false));
 $validator = new Zend_Validate_EmailAddress();
 $validator->setOptions(array('domain' => FALSE));
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.hostnametype">
-        <title>Prüfen von unterschiedlichen Typen von Hostnamen</title>
+    <section xml:id="zend.validate.set.email_address.hostnametype"><info><title>Prüfen von unterschiedlichen Typen von Hostnamen</title></info>
+        
 
         <para>
-            Der Teil des Hostnamens einer Email Adresse wird mit <link
-                linkend="zend.validate.set.hostname"><classname>Zend_Validate_Host</classname></link>
+            Der Teil des Hostnamens einer Email Adresse wird mit <link linkend="zend.validate.set.hostname"><classname>Zend_Validate_Host</classname></link>
             geprüft. Standardmäßig werden nur DNS Hostnamen in der Form
             <filename>domain.com</filename> akzeptiert, aber wenn es gewünscht ist, können auch IP
             Adressen und lokale Hostnamen auch akzeptiert werden.
@@ -169,10 +165,10 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.checkacceptance">
-        <title>Prüfen ob der Hostname aktuell Emails akzeptiert</title>
+    <section xml:id="zend.validate.set.email_address.checkacceptance"><info><title>Prüfen ob der Hostname aktuell Emails akzeptiert</title></info>
+        
 
         <para>
             Nur weil eine Email Adresse im richtigen Format ist, heißt das notwendigerweise nicht
@@ -197,8 +193,8 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <note>
-            <title>Die MX Prüfung unter Windows</title>
+        <note><info><title>Die MX Prüfung unter Windows</title></info>
+            
 
             <para>
                 In Windows Umgebungen ist die MX Prüfung nicht vorhanden wenn <acronym>PHP</acronym>
@@ -240,8 +236,8 @@ $validator = new Zend_Validate_EmailAddress(
 );
 ]]></programlisting>
 
-        <warning>
-            <title>Performance Warnung</title>
+        <warning><info><title>Performance Warnung</title></info>
+            
 
             <para>
                 Man sollte darauf achten das die Aktivierung der MX Prüfung das Skript langsamer
@@ -251,8 +247,8 @@ $validator = new Zend_Validate_EmailAddress(
             </para>
         </warning>
 
-        <note>
-            <title>Disallowed IP addresses</title>
+        <note><info><title>Disallowed IP addresses</title></info>
+            
 
             <para>
                 Man sollte beachten das die MX Prüfung nur für externe Server akzeptiert wird. Wenn
@@ -260,10 +256,10 @@ $validator = new Zend_Validate_EmailAddress(
                 <command>192.168.*</command> oder <command>169.254.*</command> nicht akzeptiert.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.validateidn">
-        <title>Internationale Domain Namen prüfen</title>
+    <section xml:id="zend.validate.set.email_address.validateidn"><info><title>Internationale Domain Namen prüfen</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> prüft auch internationale Zeichen
@@ -287,10 +283,10 @@ $validator->getHostnameValidator->setValidateIdn(false);
             Es sollte darauf geachtet werden das IDNs nur geprüft werden wenn erlaubt ist DNS
             Hostnamen zu prüfen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.validatetld">
-        <title>Top Level Domains prüfen</title>
+    <section xml:id="zend.validate.set.email_address.validatetld"><info><title>Top Level Domains prüfen</title></info>
+        
 
         <para>
             Standardmäßig wird ein Hostname mit einer List von bekannten TLDs geprüft. Das ist
@@ -312,10 +308,10 @@ $validator->getHostnameValidator->setValidateTld(false);
             Es sollte darauf geachtet werden das TLDs nur geprüft werden wenn es auch erlaubt ist
             DNS Hostnamen zu prüfen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.email_address.setmessage">
-        <title>Setzen von Meldungen</title>
+    <section xml:id="zend.validate.set.email_address.setmessage"><info><title>Setzen von Meldungen</title></info>
+        
 
         <para>
             <classname>Zend_Validate_EmailAddress</classname> verwendet auch
@@ -338,8 +334,5 @@ $validator->setMessages(array(
             <classname>Zend_Validate_EmailAddress</classname> setzen um die eigenen Meldungen
             zurückzubekommen.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,8 +1,9 @@
-<sect1 id="zend.server.reflection">
-    <title>Zend_Server_Reflection</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.reflection"><info><title>Zend_Server_Reflection</title></info>
+    
 
-    <sect2 id="zend.server.reflection.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.server.reflection.introduction"><info><title>Введение</title></info>
+        
 
         <para>
             <code>Zend_Server_Reflection</code> предоставляет стандарный
@@ -29,9 +30,9 @@
             server classes for the framework.
 -->
         </para>
-    </sect2>
-    <sect2 id="zend.server.reflection.usage">
-        <title>Использование</title>
+    </section>
+    <section xml:id="zend.server.reflection.usage"><info><title>Использование</title></info>
+        
 
         <para>
             Основное использование простое:
@@ -85,8 +86,5 @@ $reflection->getNamespace();
             the API documentation to know what methods are available to each.
 -->
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

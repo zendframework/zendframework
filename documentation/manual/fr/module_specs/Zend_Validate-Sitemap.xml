@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 21263 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.sitemap">
-    <title>Validateurs de Sitemap</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.sitemap"><info><title>Validateurs de Sitemap</title></info>
+    
 
     <para>
-        Les validateurs suivant sont conformes au protocole <ulink
-            url="http://www.sitemaps.org/protocol.php"><acronym>XML</acronym> Sitemap</ulink>.
+        Les validateurs suivant sont conformes au protocole <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.sitemaps.org/protocol.php"><acronym>XML</acronym> Sitemap</link>.
     </para>
 
-    <sect3 id="zend.validate.sitemap.changefreq">
-        <title>Sitemap_Changefreq</title>
+    <section xml:id="zend.validate.sitemap.changefreq"><info><title>Sitemap_Changefreq</title></info>
+        
 
         <para>
             Valide si oui ou non une chaîne utilisable en tant qu'élément "changefreq" dans un
-            document <acronym>XML</acronym> Sitemap. Les valeurs valides sont&#160;: "always",
+            document <acronym>XML</acronym> Sitemap. Les valeurs valides sont : "always",
             "hourly", "daily", "weekly", "monthly", "yearly", or "never".
         </para>
 
@@ -22,10 +19,10 @@
             Retourne <constant>TRUE</constant> si et seulement si la valeur est une chaîne
             et qu'elle vaut une dès fréquences ci-dessus.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.sitemap.lastmod">
-        <title>Sitemap_Lastmod</title>
+    <section xml:id="zend.validate.sitemap.lastmod"><info><title>Sitemap_Lastmod</title></info>
+        
 
         <para>
             Valide si oui ou non une chaîne utilisable en tant qu'élément "lastmod" dans un
@@ -39,8 +36,8 @@
             et qu'elle est valide suivant le protocole.
         </para>
 
-        <example id="zend.validate.sitemap.lastmod.example">
-            <title>Validateur de "lastmod" Sitemap</title>
+        <example xml:id="zend.validate.sitemap.lastmod.example"><info><title>Validateur de "lastmod" Sitemap</title></info>
+            
             <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Sitemap_Lastmod();
 $validator->isValid('1999-11-11T22:23:52-02:00'); // true
@@ -54,10 +51,10 @@ $validator->isValid('2008-05-32'); // false
 $validator->isValid('yesterday'); // false
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.sitemap.loc">
-        <title>Sitemap_Loc</title>
+    <section xml:id="zend.validate.sitemap.loc"><info><title>Sitemap_Loc</title></info>
+        
 
         <para>
             Valide si oui ou non une chaîne utilisable en tant qu'élément "loc" dans un
@@ -65,10 +62,10 @@ $validator->isValid('yesterday'); // false
             <methodname>Zend_Form::check()</methodname>. Vous pouvez en lire davantage avec la
             <link linkend="zend.uri.validation">validation d'URI</link>.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.sitemap.priority">
-        <title>Sitemap_Priority</title>
+    <section xml:id="zend.validate.sitemap.priority"><info><title>Sitemap_Priority</title></info>
+        
 
         <para>
             Valide si oui ou non une valeur est utilisable en tant qu'élément "priority" dans un
@@ -76,8 +73,8 @@ $validator->isValid('yesterday'); // false
             0.0 et 1.0. Ce validateur accepte à la fois des valeurs numériques ou textuelles.
         </para>
 
-        <example id="zend.validate.sitemap.priority.example">
-            <title>Validateur de "priority" Sitemap</title>
+        <example xml:id="zend.validate.sitemap.priority.example"><info><title>Validateur de "priority" Sitemap</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Sitemap_Priority();
@@ -92,13 +89,13 @@ $validator->isValid(0xFF); // false
 $validator->isValid('foo'); // false
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.sitemap.options">
-        <title>Options supportées par Zend_Validate_Sitemap_*</title>
+    <section xml:id="zend.validate.set.sitemap.options"><info><title>Options supportées par Zend_Validate_Sitemap_*</title></info>
+        
 
         <para>
             Il n'y a pas d'options supportées par ce validateur.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

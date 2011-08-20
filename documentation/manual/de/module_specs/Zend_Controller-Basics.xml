@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.basics">
-    <title>Zend_Controller Grundlagen</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.basics"><info><title>Zend_Controller Grundlagen</title></info>
+    
 
     <para>
         Das <classname>Zend_Controller</classname> System wurde leichtgewichtig, modular und
@@ -18,8 +18,7 @@
     </para>
 
     <para>
-        <inlinegraphic width="483" scale="100" align="center" valign="middle"
-            fileref="figures/zend.controller.basics.png" format="PNG" />
+        <inlinemediaobject><imageobject><imagedata width="483" scale="100" align="center" valign="middle" fileref="figures/zend.controller.basics.png" format="PNG"/></imageobject></inlinemediaobject>
     </para>
 
     <para>
@@ -125,8 +124,8 @@
                 <emphasis>bar</emphasis> zugegriffen.
             </para>
 
-            <note>
-                <title>Konventionen von Namens-Schreibweisen</title>
+            <note><info><title>Konventionen von Namens-Schreibweisen</title></info>
+                
 
                 <para>
                     Da Menschen grundsätzlich inkonsistent sind im Behandeln und der
@@ -193,4 +192,4 @@
         Controller ausgeführt werden soll, wird der Durchlauf fortgesetzt und ein weiterer
         Dispatcher Prozess wird durchlaufen. Andernfalls endet der Prozess.
     </para>
-</sect1>
+</section>

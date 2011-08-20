@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.multiuser.intro">
-    <title>Building Multi-User Applications With Zend Framework</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="learning.multiuser.intro.zf">
-        <title>Zend Framework</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.multiuser.intro"><info><title>Building Multi-User Applications With Zend Framework</title></info>
+    
+
+    <section xml:id="learning.multiuser.intro.zf"><info><title>Zend Framework</title></info>
+        
 
         <para>
             When the original "web" was created, it was designed to be a publishing platform
@@ -49,8 +50,8 @@
             </listitem>
         </itemizedlist>
 
-        <note>
-            <title>Consumer Vs. User</title>
+        <note><info><title>Consumer Vs. User</title></info>
+            
 
             <para>
                 Notice we use the term "consumer" instead of person. Increasingly, web applications
@@ -70,5 +71,5 @@
             <classname>Zend_Acl</classname>; provide an out-of-the-box solution as well as the
             extension points each have that will cater to a more customized solution.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

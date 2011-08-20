@@ -24,7 +24,7 @@ namespace ZendTest\Dojo\View\Helper;
 use Zend\Dojo\View\Helper\FilteringSelect as FilteringSelectHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_FilteringSelect.
@@ -57,7 +57,7 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -110,7 +110,7 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElementAsSelect();
         $this->assertNotRegexp('/<select[^>]*(dojoType="dijit.form.FilteringSelect")/', $html);
-        $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
+        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
     }
 
     public function testShouldAllowDeclarativeDijitCreationAsRemoter()
@@ -128,12 +128,12 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
         $html = $this->getElementAsRemoter();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.FilteringSelect")/', $html);
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
-        $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
+        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
 
-        $this->assertContains('var stateStore;', $this->view->dojo()->getJavascript());
+        $this->assertContains('var stateStore;', $this->view->broker('dojo')->getJavascript());
 
         $found = false;
-        $scripts = $this->view->dojo()->_getZendLoadActions();
+        $scripts = $this->view->broker('dojo')->_getZendLoadActions();
         foreach ($scripts as $js) {
             if (strstr($js, 'stateStore = new ')) {
                 $found = true;

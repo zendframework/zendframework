@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21586 -->
-<sect1 id="zend.feed.modifying-feed">
-    <title>フィードおよびエントリの構造の変更</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>フィードおよびエントリの構造の変更</title></info>
+    
 
     <para>
         フィードやエントリを読み込むだけでなく、それらを作成したり変更したりする場合にも
@@ -11,8 +9,8 @@
         妥当な形式の <acronym>XML</acronym> でファイルに保存したりサーバに送信したりといったことが簡単にできます。
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>既存のフィードエントリの変更</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>既存のフィードエントリの変更</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
@@ -47,8 +45,8 @@ echo $entry->saveXML();
         明示的に名前空間を指定しない限りデフォルトの名前空間に配置されます。
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>独自の名前空間の要素としての Atom エントリの作成</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>独自の名前空間の要素としての Atom エントリの作成</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
@@ -67,7 +65,4 @@ $entry->{'myns:container_elt'}->part2 = '入れ子になった独自部分、そ
 echo $entry->saveXML();
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

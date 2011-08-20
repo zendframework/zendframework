@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21994 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.encrypt">
-    <title>Encrypt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><info><title>Encrypt</title></info>
+    
 
     <para>
         Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
@@ -43,8 +41,8 @@ $filter->setAdapter('openssl');
         </para>
     </note>
 
-    <sect3 id="zend.filter.set.encrypt.mcrypt">
-        <title>Verschlüsselung mit Mcrypt</title>
+    <section xml:id="zend.filter.set.encrypt.mcrypt"><info><title>Verschlüsselung mit Mcrypt</title></info>
+        
 
         <para>
             Wenn man die <classname>Mcrypt</classname> Erweiterung installiert hat, kann man den
@@ -63,8 +61,7 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>algorithm</emphasis>: Der Algorithmus der verwendet werden soll. Das
-                    sollte einer der Algorithmus Cipher sein die man unter <ulink
-                        url="http://php.net/mcrypt">PHP's Mcrypt Cipers</ulink> finden kann. Wenn er
+                    sollte einer der Algorithmus Cipher sein die man unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mcrypt">PHP's Mcrypt Cipers</link> finden kann. Wenn er
                     nicht gesetzt wird, ist er standardmäßig 'blowfish'.
                 </para>
             </listitem>
@@ -80,8 +77,8 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>mode</emphasis>: Der Verschlüsselungs Modus der verwendet werden soll.
-                    Es sollte einer der Modi sein der unter <ulink url="http://php.net/mcrypt">PHP's
-                    Mcrypt Modi</ulink> gefunden werden kann. Wenn er nicht gesetzt wird, ist er
+                    Es sollte einer der Modi sein der unter <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mcrypt">PHP's
+                    Mcrypt Modi</link> gefunden werden kann. Wenn er nicht gesetzt wird, ist er
                     standardmäßig 'cbc'.
                 </para>
             </listitem>
@@ -112,8 +109,7 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>compression</emphasis>: Ob der verschlüsselte Wert komprimiert werden
-                    soll. Der Standard ist nicht komprimiert. Für Details sehen Sie unter <link
-                        linkend="zend.filter.set.encrypt.openssl.compressed">Komprimierung für
+                    soll. Der Standard ist nicht komprimiert. Für Details sehen Sie unter <link linkend="zend.filter.set.encrypt.openssl.compressed">Komprimierung für
                         Openssl</link> nach.
                 </para>
             </listitem>
@@ -174,10 +170,10 @@ print $encrypted;
 
 // Für Entschlüsselung siehe den Decrypt Filter
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.encrypt.openssl">
-        <title>Verschlüsselung mit OpenSSL</title>
+    <section xml:id="zend.filter.set.encrypt.openssl"><info><title>Verschlüsselung mit OpenSSL</title></info>
+        
 
         <para>
             Wenn man die <classname>OpenSSL</classname> Erweiterung installiert hat, kann man den
@@ -312,8 +308,8 @@ print $encrypted;
 // Für die Entschlüsselung siehe beim Decrypt Filter
 ]]></programlisting>
 
-        <sect4 id="zend.filter.set.encrypt.openssl.simplified">
-            <title>Vereinfachte Verwendung mit Openssl</title>
+        <section xml:id="zend.filter.set.encrypt.openssl.simplified"><info><title>Vereinfachte Verwendung mit Openssl</title></info>
+            
 
             <para>
                 Wie vorher zu sehen war, muss man den Umschlagschlüssel holen um in der Lage zu sein
@@ -349,10 +345,10 @@ print $encrypted;
                 jetzt nur mehr entschlüsselt werden indem man
                 <classname>Zend_Filter_Encrypt</classname> verwendet.
             </para>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.filter.set.encrypt.openssl.compressed">
-            <title>Komprimieren des Inhalts</title>
+        <section xml:id="zend.filter.set.encrypt.openssl.compressed"><info><title>Komprimieren des Inhalts</title></info>
+            
 
             <para>
                 Basierend auf dem originalen Wert, kann der verschlüsselte Wert ein sehr langer
@@ -386,8 +382,8 @@ $filter2 = new Zend_Filter_Encrypt(array(
 ));
 ]]></programlisting>
 
-            <note>
-                <title>Entschlüsselung mit den selben Werten</title>
+            <note><info><title>Entschlüsselung mit den selben Werten</title></info>
+                
 
                 <para>
                     Wenn man einen Wert entschlüsseln will welcher zusätzlich komprimiert wurde,
@@ -396,6 +392,6 @@ $filter2 = new Zend_Filter_Encrypt(array(
                     fehlschlagen.
                 </para>
             </note>
-        </sect4>
-    </sect3>
-</sect2>
+        </section>
+    </section>
+</section>

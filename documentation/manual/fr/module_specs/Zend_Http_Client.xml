@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.http.client">
-    <title>Introduction</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.client"><info><title>Introduction</title></info>
+    
 
     <para>
         <classname>Zend_Http_Client</classname> fournit une interface qui permet d'utiliser le
@@ -10,19 +8,19 @@
         supporte les fonctionnalités de base d'un client <acronym>HTTP</acronym>, ainsi que des fonctionnalités plus
         avancées, comme l'authentification ou l'upload de fichiers. Toutes les requêtes retournent
         un objet Zend_Http_Response, avec lequel on pourra accéder au corps ou aux en-têtes de la
-        réponse <acronym>HTTP</acronym> (voyez <xref linkend="zend.http.response" />).
+        réponse <acronym>HTTP</acronym> (voyez <xref linkend="zend.http.response"/>).
     </para>
 
-    <sect2 id="zend.http.client.introduction">
-        <title>Utilisation de Zend_Http_Client</title>
+    <section xml:id="zend.http.client.introduction"><info><title>Utilisation de Zend_Http_Client</title></info>
+        
 
         <para>
             Le constructeur de classe accepte deux paramètres : l'URI (ou un objet
             <code><classname>Zend_Uri_Http</classname></code>), et un tableau ou un objet Zend_Config
             d'options de configuration. Ils peuvent aussi être définis avec des méthodes plus tard :
             <methodname>setUri()</methodname> et <methodname>setConfig()</methodname>.
-            <example id="zend.http.client.introduction.example-1">
-                    <title>Instanciation d'un objet Zend_Http_Client</title>
+            <example xml:id="zend.http.client.introduction.example-1"><info><title>Instanciation d'un objet Zend_Http_Client</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org', array(
@@ -49,22 +47,21 @@ $client->setConfig($config);
                 <classname>Zend_Uri_Http</classname> pour valider les <acronym>URL</acronym>s. Ce qui veut dire que
                 certains caractères comme les pipes ("|") ou le symbole "^" ne seront pas acceptés
                 par défaut dans les <acronym>URL</acronym>s. Ceci peut être modifié par le réglage de l'option
-                "allow_unwise" de <classname>Zend_Uri</classname> à <constant>TRUE</constant>. Voir <xref
-                linkend="zend.uri.validation.allowunwise" /> pour de plus amples
+                "allow_unwise" de <classname>Zend_Uri</classname> à <constant>TRUE</constant>. Voir <xref linkend="zend.uri.validation.allowunwise"/> pour de plus amples
                 informations.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.configuration">
-        <title>Les paramètres de configuration</title>
+    <section xml:id="zend.http.client.configuration"><info><title>Les paramètres de configuration</title></info>
+        
 
         <para>
             Le constructeur et <methodname>setConfig()</methodname> acceptent un tableau associatif de
             paramètre de configuration, ou un objet Zend_Config. Fixer ces paramètres est optionnel,
             ils ont tous une valeur par défaut.
-                <table id="zend.http.client.configuration.table">
-                    <title>Zend_Http_Client : paramètres de configuration</title>
+                <table xml:id="zend.http.client.configuration.table"><info><title>Zend_Http_Client : paramètres de configuration</title></info>
+                    
 
                     <tgroup cols="4">
                         <thead>
@@ -96,8 +93,7 @@ $client->setConfig($config);
                             <row>
                                 <entry>strictredirects</entry>
                                 <entry>Est ce que le client doit suivre strictement les redirections
-                                selon la <constant>RFC2616</constant> ? (voyez <xref
-                                linkend="zend.http.client.redirections" />)</entry>
+                                selon la <constant>RFC2616</constant> ? (voyez <xref linkend="zend.http.client.redirections"/>)</entry>
                                 <entry>booléen</entry>
                                 <entry><constant>FALSE</constant></entry>
                             </row>
@@ -127,8 +123,7 @@ $client->setConfig($config);
 
                             <row>
                                 <entry>adapter</entry>
-                                <entry>Classe adaptateur à utiliser (voyez <xref
-                                linkend="zend.http.client.adapters" />)</entry>
+                                <entry>Classe adaptateur à utiliser (voyez <xref linkend="zend.http.client.adapters"/>)</entry>
                                 <entry>mixed</entry>
                                 <entry>'Zend_Http_Client_Adapter_Socket'</entry>
                             </row>
@@ -163,16 +158,15 @@ $client->setConfig($config);
                     </tgroup>
                 </table>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.basic-requests">
-        <title>Utilisation basique</title>
+    <section xml:id="zend.http.client.basic-requests"><info><title>Utilisation basique</title></info>
+        
 
         <para>
             Exécuter des requêtes HTTP basiques est très simple grâce à la méthode
-            <methodname>request()</methodname>, et ceci nécessite rarement plus d'une ligne de code : <example
-                    id="zend.http.client.basic-requests.example-1">
-                    <title>Requête GET simple</title>
+            <methodname>request()</methodname>, et ceci nécessite rarement plus d'une ligne de code : <example xml:id="zend.http.client.basic-requests.example-1"><info><title>Requête GET simple</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
@@ -182,8 +176,7 @@ $response = $client->request();
             définissant la méthode HTTP, - GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS ou CONNECT -
             comme définies dans la RFC 2616 concernant le protocole HTTP <footnote>
                 <para>
-                    Voyez la RFC 2616 - <ulink
-                    url="http://www.w3.org/Protocols/rfc2616/rfc2616.html"></ulink>.
+                    Voyez la RFC 2616 - <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">http://www.w3.org/Protocols/rfc2616/rfc2616.html</uri>.
                 </para>
             </footnote>. Ces méthodes HTTP sont aussi définies en tant que constantes de classe,
             Zend_Http_Request::GET, Zend_Http_Request::POST, etc...
@@ -192,9 +185,8 @@ $response = $client->request();
         <para>
             Si aucune méthode de requêtage HTTP n'est définie, alors la dernière utilisée via
             <methodname>setMethod()</methodname> sera utilisée. Si <methodname>setMethod()</methodname> n'a jamais été
-            appelée, GET est alors utilisée par défaut. <example
-                    id="zend.http.client.basic-requests.example-2">
-                    <title>Requêtes d'autres types que GET</title>
+            appelée, GET est alors utilisée par défaut. <example xml:id="zend.http.client.basic-requests.example-2"><info><title>Requêtes d'autres types que GET</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 // requête POST
@@ -206,18 +198,17 @@ $response = $client->request();
 ]]></programlisting>
                 </example>
             </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.parameters">
-        <title>Ajouts de paramètres GET et POST</title>
+    <section xml:id="zend.http.client.parameters"><info><title>Ajouts de paramètres GET et POST</title></info>
+        
 
         <para>
             Ajouter des paramètres GET à la requête HTTP est très simple. Vous pouvez les
             ajouter en tant que partie de l'URL désirée, ou en utilisant la méthode
             <methodname>setParameterGet()</methodname>. Celle-ci prend en premier paramètre le nom du paramètre
-            GET, et en second sa valeur. Un tableau associatif peut aussi être utilisé. <example
-                    id="zend.http.client.parameters.example-1">
-                    <title>Ajouts de paramètres GET</title>
+            GET, et en second sa valeur. Un tableau associatif peut aussi être utilisé. <example xml:id="zend.http.client.parameters.example-1"><info><title>Ajouts de paramètres GET</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 // Avec la méthode setParameterGet
@@ -240,8 +231,8 @@ $client->setParameterGet(array(
             Coté POST, c'est très similaire à GET, sauf que les paramètres POST doivent faire
             partie du corps de la requête. Il n'est donc pas possible de les ajouter dans l'URL.
             Utilisez simplement <methodname>setParameterPost()</methodname> de la même manière que sa soeur
-            <methodname>setParameterGet()</methodname>. <example id="zend.http.client.parameters.example-2">
-                    <title>Ajout de paramètres POST</title>
+            <methodname>setParameterGet()</methodname>. <example xml:id="zend.http.client.parameters.example-2"><info><title>Ajout de paramètres POST</title></info>
+                    
 
                     <programlisting language="php"><![CDATA[
 // passage de paramètre POST simple
@@ -258,10 +249,10 @@ $client->setParameterPost(array(
             GET à une requête POST. Le contraire n'est pas possible, ainsi les paramètres POST
             ajoutés à une requête GET seront acceptés certes, mais ignorés.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.http.client.accessing_last">
-        <title>Accéder à la dernière requête, ou réponse</title>
+    <section xml:id="zend.http.client.accessing_last"><info><title>Accéder à la dernière requête, ou réponse</title></info>
+        
 
         <para>
             <classname>Zend_Http_Client</classname> fournit un moyen d'accéder à la dernière
@@ -269,8 +260,7 @@ $client->setParameterPost(array(
             <classname>Zend_Http_Client-&gt;getLastRequest()</classname> ne prends pas de paramètres
             et retourne la dernière requête sous forme de chaîne de caractères.
             <classname>Zend_Http_Client-&gt;getLastResponse()</classname> retourne elle la dernière
-            réponse, mais sous forme d'objet <link
-            linkend="zend.http.response">Zend_Http_Response</link>.
+            réponse, mais sous forme d'objet <link linkend="zend.http.response">Zend_Http_Response</link>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

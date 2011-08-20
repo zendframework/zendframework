@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21826 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.clientlogin">
-    <title>Authentifizieren mit ClientLogin</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.clientlogin"><info><title>Authentifizieren mit ClientLogin</title></info>
+    
 
     <para>
         Der ClientLogin Mechanismus erlaubt es <acronym>PHP</acronym> Anwendungen zu schreiben die
@@ -11,8 +9,7 @@
     </para>
 
     <para>
-        Siehe <ulink
-            url="http://code.google.com/apis/accounts/AuthForInstalledApps.html">http://code.google.com/apis/accounts/AuthForInstalledApps.html</ulink>
+        Siehe <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/accounts/AuthForInstalledApps.html">http://code.google.com/apis/accounts/AuthForInstalledApps.html</link>
         für weitere Informationen über die Google Data ClientLogin Authentifizierung.
     </para>
 
@@ -31,8 +28,8 @@
         der die <acronym>PHP</acronym> Anwendung verwendet.
     </para>
 
-    <sect2 id="zend.gdata.clientlogin.login">
-        <title>Erstellen eines ClientLogin autentifizierten Http Clienten</title>
+    <section xml:id="zend.gdata.clientlogin.login"><info><title>Erstellen eines ClientLogin autentifizierten Http Clienten</title></info>
+        
 
         <para>
             Der Prozess der Erstellung eines autentifizierten <acronym>HTTP</acronym> Clients durch
@@ -98,10 +95,10 @@ try {
 
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.clientlogin.terminating">
-        <title>Den über ClientLogin authentifizierten Http Client beenden</title>
+    <section xml:id="zend.gdata.clientlogin.terminating"><info><title>Den über ClientLogin authentifizierten Http Client beenden</title></info>
+        
 
         <para>
             Es gibt keine Methode um ClientLogin Authentifizierungen zu verwerfen da es eine AuthSub
@@ -109,5 +106,5 @@ $cal = new Zend_Gdata_Calendar($client);
             verwendet werden sind der Login und das Passwort zu einem Google Account, und deshalb
             können diese wiederholend in der Zukunft verwendet werden.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21087 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.number">
-    <title>Wie sieht die Währung aus?</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.number"><info><title>Wie sieht die Währung aus?</title></info>
+    
 
     <para>
         Wie der Wert einer Währung dargestellt wird hängt hauptsächlich vom verwendeten
@@ -19,8 +17,8 @@
         Beispiel:
     </para>
 
-    <example id="zend.currency.number.example-1">
-        <title>Verwendung einer eigenen Schreibweise</title>
+    <example xml:id="zend.currency.number.example-1"><info><title>Verwendung einer eigenen Schreibweise</title></info>
+        
 
         <para>
             Angenommen wir verwenden wieder unsere Währung "Dollar". Aber jetzt wollen wir unsere
@@ -97,8 +95,7 @@ print $currency_2; // Könnte '$ 1,000' zurückgeben
 ]]></programlisting>
 
     <para>
-        Wenn man es manuell definiert muss es dem Format entsprechen welches in <link
-            linkend="zend.locale.number.localize.table-1">diesem Kapitel über Lokalisierung</link>
+        Wenn man es manuell definiert muss es dem Format entsprechen welches in <link linkend="zend.locale.number.localize.table-1">diesem Kapitel über Lokalisierung</link>
         beschrieben wird. Siehe das folgende:
     </para>
 
@@ -117,4 +114,4 @@ print $currency; // Könnte '$ 1000' zurückgeben
     <para>
         Im obigen Abschnitt haben wir den Separator und auch die Genauigkeit gelöscht.
     </para>
-</sect1>
+</section>

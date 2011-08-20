@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.acl.advanced">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.acl.advanced"><info><title>Расширенное использование</title></info>
 
-    <title>Расширенное использование</title>
+    
 
-    <sect2 id="zend.acl.advanced.storing">
+    <section xml:id="zend.acl.advanced.storing"><info><title>Постоянное хранение данных ACL</title></info>
 
-        <title>Постоянное хранение данных ACL</title>
+        
 
         <para>
             <classname>Zend_Acl</classname> спроектирован таким образом, что не требует для хранения
@@ -24,16 +23,16 @@
             т.к. случаи использования могут сильно варьироваться в различных
             ситуациях. Поскольку <classname>Zend_Acl</classname> доступен для сериализации, то можно
             сериализовать объекты <acronym>ACL</acronym> через PHP-функцию
-            <ulink url="http://php.net/serialize"><code>serialize()</code></ulink>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/serialize"><code>serialize()</code></link>,
             и результаты можно хранить там, где пожелает разработчик - например,
             в файле, базе данных или с помощью механизма кэширования.
      </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.acl.advanced.assertions">
+    <section xml:id="zend.acl.advanced.assertions"><info><title>Написание условных правил ACL с утверждениями</title></info>
 
-        <title>Написание условных правил ACL с утверждениями</title>
+        
 
         <para>
             Иногда правило разрешения или запрета доступа роли к ресурсу должно
@@ -106,9 +105,6 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             условий там, где это нужно.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

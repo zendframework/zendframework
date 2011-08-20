@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="performance.database">
-    <title>Zend_Db Performance</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Db Performance</title></info>
+    
 
     <para>
         <classname>Zend_Db</classname> ist ein Datenbank Abstraktion Layer und ist dazu gedacht
@@ -13,11 +11,11 @@
         manchmal auch zu Geschwindigkeitsnachteilen führen.
     </para>
 
-    <sect2 id="performance.database.tableMetadata">
-        <title>
+    <section xml:id="performance.database.tableMetadata"><info><title>
             Wie kann ich den Overhead reduzieren der von Zend_Db_Table eingeführt wird um die
             Metadaten der Tabelle zu erhalten?
-        </title>
+        </title></info>
+        
 
         <para>
             Um die Verwendung so einfach wie möglich zu halten, und auch sich konstant ändernde
@@ -32,8 +30,8 @@
             Glücklicherweise gibt es Techniken um die Situation zu verbessern.
         </para>
 
-        <sect3 id="performance.database.tableMetadata.cache">
-            <title>Den Metadaten Cache verwenden</title>
+        <section xml:id="performance.database.tableMetadata.cache"><info><title>Den Metadaten Cache verwenden</title></info>
+            
 
             <para>
                 <classname>Zend_Db_Table</classname> kann optional <classname>Zend_Cache</classname>
@@ -43,14 +41,13 @@
             </para>
 
             <para>
-                Die Dokumentation von <link
-                    linkend="zend.db.table.metadata.caching"><classname>Zend_Db_Table</classname>
+                Die Dokumentation von <link linkend="zend.db.table.metadata.caching"><classname>Zend_Db_Table</classname>
                     enthält Informationen über das Cachen der Metadaten</link>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="performance.database.tableMetadata.hardcoding">
-            <title>Die Metadaten in der Tabellendefinition fix codieren</title>
+        <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>Die Metadaten in der Tabellendefinition fix codieren</title></info>
+            
 
             <para>
                 Mit 1.7.0, bietet <classname>Zend_Db_Table</classname> auch
@@ -60,14 +57,14 @@
                 Tabellenschema nicht ändern wird, oder das man fähig ist die Definition immer
                 up-to-date zu halten.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="performance.database.select">
-        <title>
+    <section xml:id="performance.database.select"><info><title>
             SQL die mit Zend_Db_Select erzeugt wurde greift nicht auf die Indezes zu; wie kann man
             das besser machen?
-        </title>
+        </title></info>
+        
 
         <para>
             <classname>Zend_Db_Select</classname> ist relativ gut in seinem Job. Trotzdem kann es,
@@ -75,8 +72,8 @@
             sein.
         </para>
 
-        <sect3 id="performance.database.select.writeyourown">
-            <title>Selbst getuntes SQL schreiben</title>
+        <section xml:id="performance.database.select.writeyourown"><info><title>Selbst getuntes SQL schreiben</title></info>
+            
 
             <para>
                 Die einzige echte Antwort ist es eigenes <acronym>SQL</acronym> zu schreiben;
@@ -107,6 +104,6 @@ $sql = vsprintf(
     array_walk($values, array($adapter, 'quoteInto'))
 );
 ]]></programlisting>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

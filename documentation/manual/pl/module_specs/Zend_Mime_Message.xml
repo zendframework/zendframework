@@ -1,8 +1,11 @@
-<sect1 id="zend.mime.message">
-    <title>Zend_Mime_Message</title>
+<?xml version="1.0" encoding="utf-8"?>
 
-    <sect2 id="zend.mime.message.introduction">
-      <title>Wprowadzenie</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.message"><info><title>Zend_Mime_Message</title></info>
+    
+
+    <section xml:id="zend.mime.message.introduction"><info><title>Wprowadzenie</title></info>
+      
 
       <para><code>Zend_Mime_Message</code> reprezetuje wiadomość zgodną z MIME,
       która zawiera jedną lub więcej odrębnych części (Reprezentowanych przez obiekty
@@ -13,17 +16,17 @@
       mogą być także zrekonstruowane z podanych łańcuchów znaków (eksperymentalne).
       Klasa używana jest przez <link linkend="zend.mail"><code>Zend_Mail</code></link>.
       </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.instantiation">
-        <title>Tworzenie instancji</title>
+    <section xml:id="zend.mime.message.instantiation"><info><title>Tworzenie instancji</title></info>
+        
         <para>
             <code>Zend_Mime_Message</code> nie posiada konstruktora.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.addparts">
-        <title>Dodawanie części MIME</title>
+    <section xml:id="zend.mime.message.addparts"><info><title>Dodawanie części MIME</title></info>
+        
 
         <para>Obiekty <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
         mogą być dodane poprzez ich przekazanie do obiektu <code>Zend_Mime_Message</code>
@@ -41,10 +44,10 @@
         w obiekcie <code>Zend_Mime_Message</code> zarejestrowanych jest więcej
         części niż jedna. Wtedy gdy obiekt będzie generował wyjściową wiadomość,
         wygeneruje ją jako wieloczęściową wiadomość MIME.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.bondary">
-        <title>Obsługa pola rozgraniczającego (boundary)</title>
+    <section xml:id="zend.mime.message.bondary"><info><title>Obsługa pola rozgraniczającego (boundary)</title></info>
+        
 
         <para><code>Zend_Mime_Message</code> zazwyczaj tworzy obiekt <code>Zend_Mime</code>
         i używa go do tworzenia pola rozgraniczającego. Jeśli chcesz zdefiniować
@@ -61,11 +64,11 @@
 
         <para><code>-&gt;generateMessage()</code> renderuje wiadomość
         <code>Zend_Mime_Message</code> do postaci łańcuchu znaków.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.mime.message.parse">
-        <title>Tworzenie obiektu Zend_Mime_Message z łańcucha znaków.
-        (eksperymentalne)</title>
+    <section xml:id="zend.mime.message.parse"><info><title>Tworzenie obiektu Zend_Mime_Message z łańcucha znaków.
+        (eksperymentalne)</title></info>
+        
 
         <para>Wiadomość zgodna z MIME zapisana w postaci łańcucha znaków może
         być użyta do zrekonstruowania obiektu <code>Zend_Mime_Message</code>.
@@ -77,8 +80,5 @@
         dekoduje podany łańcuch znaków i zwraca obiekt <code>Zend_Mime_Message</code>.
         Jego poprawność może być następnie sprawdzona przez użycie metody
         <code>-&gt;getParts()</code></para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

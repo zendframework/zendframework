@@ -24,6 +24,8 @@
  */
 namespace Zend\Dojo\Form\Element;
 
+use Zend\Form\Element\Exception;
+
 /**
  * CurrencyTextBox dijit
  *
@@ -77,7 +79,7 @@ class CurrencyTextBox extends NumberTextBox
         $symbol = strtoupper((string) $symbol);
         $length = strlen($symbol);
         if (3 > $length) {
-            throw new \Zend\Form\ElementException('Invalid symbol provided; please provide ISO 4217 alphabetic currency code');
+            throw new Exception\InvalidArgumentException('Invalid symbol provided; please provide ISO 4217 alphabetic currency code');
         }
         if (3 < $length) {
             $symbol = substr($symbol, 0, 3);

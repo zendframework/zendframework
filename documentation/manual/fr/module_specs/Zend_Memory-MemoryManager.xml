@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21829 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.memory.memory-manager">
-    <title>Manager de mémoire</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.memory-manager"><info><title>Manager de mémoire</title></info>
+    
 
-    <sect2 id="zend.memory.memory-manager.creation">
-        <title>Créer un manager de mémoire</title>
+    <section xml:id="zend.memory.memory-manager.creation"><info><title>Créer un manager de mémoire</title></info>
+        
 
         <para>
             Vous pouvez créer un nouveau manager de mémoire (objet
@@ -50,18 +48,18 @@ $memoryManager = Zend_Memory::factory('None');
         </para>
 
         <para>Le backend "<code>None</code>" ne nécessite aucune option.</para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.memory-manager.objects-management">
-        <title>Manager les objets mémoire</title>
+    <section xml:id="zend.memory.memory-manager.objects-management"><info><title>Manager les objets mémoire</title></info>
+        
 
         <para>
             Cette section décrit la création et la destruction d'objet de mémoire, et les
             réglages du manager de mémoire.
         </para>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.movable">
-            <title>Créer des objets mobiles</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.movable"><info><title>Créer des objets mobiles</title></info>
+            
 
             <para>
                 Créer des objets mobiles (objets qui peuvent être mis en cache) en utilisant
@@ -75,16 +73,15 @@ $memObject = $memoryManager->create($data);
                 valeur de l'objet. Si l'argument <varname>$data</varname> est omis, la valeur est une
                 chaîne vide.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.locked">
-            <title>Créer des objets verrouillés</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.locked"><info><title>Créer des objets verrouillés</title></info>
+            
 
             <para>
                 Créer des objets verrouillés (objets qui ne doivent pas être mis en cache) en
                 utilisant la méthode
-                <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> : <programlisting
-                role="php"><![CDATA[
+                <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> : <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting></para>
 
@@ -93,10 +90,10 @@ $memObject = $memoryManager->createLocked($data);
                 valeur de l'objet. Si l'argument <varname>$data</varname> est omis, la valeur est une
                 chaîne vide.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.objects-management.destruction">
-            <title>Détruire des objets</title>
+        <section xml:id="zend.memory.memory-manager.objects-management.destruction"><info><title>Détruire des objets</title></info>
+            
 
             <para>
                 Les objets mémoire sont automatiquement détruits et effacés de la mémoire
@@ -127,14 +124,14 @@ function foo()
 ]]></programlisting></para>
 
                 <para>Ceci s'applique aux objets mobiles et verrouillés.</para>
-            </sect3>
-        </sect2>
+            </section>
+        </section>
 
-        <sect2 id="zend.memory.memory-manager.settings">
-            <title>Régler le manager de mémoire</title>
+        <section xml:id="zend.memory.memory-manager.settings"><info><title>Régler le manager de mémoire</title></info>
+            
 
-            <sect3 id="zend.memory.memory-manager.settings.memory-limit">
-                <title>Mémoire limite</title>
+            <section xml:id="zend.memory.memory-manager.settings.memory-limit"><info><title>Mémoire limite</title></info>
+                
 
             <para>
                 La mémoire limite est le nombre d'octets autorisés à être utilisés par des
@@ -164,10 +161,10 @@ $memoryManager->setMemoryLimit($newLimit);
                 "<code>memory_limit</code>" dans le php.ini ou "no limit" (-1) si
                 "<code>memory_limit</code>" n'est pas réglé dans le php.ini.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.memory-manager.settings.min-size">
-            <title>MinSize (taille minimum)</title>
+        <section xml:id="zend.memory.memory-manager.settings.min-size"><info><title>MinSize (taille minimum)</title></info>
+            
 
             <para>
                 <code>MinSize</code> est la taille minimale des objets de mémoire, qui peuvent
@@ -178,8 +175,7 @@ $memoryManager->setMemoryLimit($newLimit);
 
             <para>
                 Vous pouvez récupérer et régler la taille minimale en utilisant les méthodes
-                <methodname>getMinSize()</methodname> et <methodname>setMinSize($newSize)</methodname> : <programlisting
-                role="php"><![CDATA[
+                <methodname>getMinSize()</methodname> et <methodname>setMinSize($newSize)</methodname> : <programlisting role="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();
 // Récupère la taille minimale en octets
 $memoryManager->setMinSize($newSize);
@@ -187,6 +183,6 @@ $memoryManager->setMinSize($newSize);
 ]]></programlisting></para>
 
                 <para>La taille minimum par défaut est 16KB (16384 octets).</para>
-            </sect3>
-        </sect2>
-    </sect1>
+            </section>
+        </section>
+    </section>

@@ -1,5 +1,8 @@
-<sect1 id="zend.server.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.server.introduction"><info><title>Wprowadzenie</title></info>
+    
     <para>
         Rodzina klas <code>Zend_Server</code> zapewnia funkcjonalność dla różnych
         klas serwerów, włączając w to klasy <code>Zend_XmlRpc_Server</code>,
@@ -16,7 +19,4 @@
         <code>getFunctions()</code> oraz <code>loadFunctions()</code> klasy
         <code>Zend_Server_Interface</code>.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

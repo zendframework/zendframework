@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.modifying-feed">
-    <title>Изменение структуры лент и их сообщений</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.modifying-feed"><info><title>Изменение структуры лент и их сообщений</title></info>
+    
 
     <para>
         Естетственный синтаксис <code>Zend_Feed</code> используется для создания
@@ -8,8 +9,8 @@
         синтаксически корректный XML для сохранения в файл или отправки серверу.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.modifying">
-        <title>Изменение существующего сообщения в ленте</title>
+    <example xml:id="zend.feed.modifying-feed.example.modifying"><info><title>Изменение существующего сообщения в ленте</title></info>
+        
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
@@ -18,8 +19,8 @@ $entry->title = 'This is a new title';
 $entry->author->email = 'my_email@example.com';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
         <para>
             Это выведет полное (включая вступление
             <code>&lt;?xml ... &gt;</code>) XML-представление
@@ -48,8 +49,8 @@ echo $entry->saveXML();
         другое пространство имен.
     </para>
 
-    <example id="zend.feed.modifying-feed.example.creating">
-        <title>Создание сообщения Atom с элементами в специальном пространстве имен</title>
+    <example xml:id="zend.feed.modifying-feed.example.creating"><info><title>Создание сообщения Atom с элементами в специальном пространстве имен</title></info>
+        
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // id уже присвоен сервером
@@ -65,10 +66,7 @@ $entry->{'myns:container_elt'}->part1 = 'first nested custom part';
 $entry->{'myns:container_elt'}->part2 = 'second nested custom part';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

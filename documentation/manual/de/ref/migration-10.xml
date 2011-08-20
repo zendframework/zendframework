@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.10">
-    <title>Zend Framework 1.0</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.10"><info><title>Zend Framework 1.0</title></info>
+    
 
     <para>
         Wenn man von einem älteren Release auf Zend Framework 1.0 oder höher hochrüstet sollte
         man die folgenden Migrations Hinweise beachten.
     </para>
 
-    <sect2 id="migration.10.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.10.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             Die prinzipiellen Änderungen die durch 1.0.0RC1 angeboten werden sind die Einführung und
@@ -68,9 +66,9 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <itemizedlist>
-            <listitem><para>Aufruf von <command>$this->render();</command></para></listitem>
-            <listitem><para>Aufruf von <command>$this->_forward();</command></para></listitem>
-            <listitem><para>Aufruf von <command>$this->_redirect();</command></para></listitem>
+            <listitem><para>Aufruf von <command>$this-&gt;render();</command></para></listitem>
+            <listitem><para>Aufruf von <command>$this-&gt;_forward();</command></para></listitem>
+            <listitem><para>Aufruf von <command>$this-&gt;_redirect();</command></para></listitem>
 
             <listitem>
                 <para>Aufruf des <classname>Redirector</classname> Aktionhelfers</para>
@@ -127,7 +125,7 @@ public function preDispatch()
                 <para>
                     Wenn man <methodname>render()</methodname> mit Argumenten aufruft, und danach
                     nicht irgendeine Bearbeitung durchführt oder mehrere View sktipe rendert, können
-                    diese Aufrufe zu <command>$this->_helper->viewRenderer();</command> geändert
+                    diese Aufrufe zu <command>$this-&gt;_helper-&gt;viewRenderer();</command> geändert
                     werden.
                 </para>
             </listitem>
@@ -188,10 +186,10 @@ $viewRenderer->setView($view);
             <classname>ErrorHandler</classname> und <classname>ViewRenderer</classname> zu verwenden
             da diese neue Kernfunktionalitäten sind.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.10.zend.currency">
-        <title>Zend_Currency</title>
+    <section xml:id="migration.10.zend.currency"><info><title>Zend_Currency</title></info>
+        
 
         <para>
             Die Erstellung von <classname>Zend_Currency</classname> wurde vereinfacht.
@@ -211,7 +209,7 @@ $currency = new Zend_Currency($currency, $locale);
             überarbeitet:
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para><emphasis>position</emphasis>: Ersetzt den alten 'rules' Parameter.</para>
             </listitem>
@@ -266,5 +264,5 @@ $currency->toCurrency($value, array $options);
             sind nicht länger statisch und können vom Objekt aus aufgerufen werden. Die geben den
             aktuell gesetzten Wert des Objekts zurück wenn kein Parameter gesetzt wurde.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

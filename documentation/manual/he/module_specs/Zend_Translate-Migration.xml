@@ -1,16 +1,17 @@
-<sect1 id="zend.translate.migration">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.migration"><info><title>עדכון מגרסאות קודמות</title></info>
 
-    <title>עדכון מגרסאות קודמות</title>
+    
 
     <para>
         ה API של <code>Zend_Translate</code> השתנה מדי פעם.
         אם התחלת להשתמש ב <code>Zend_Translate</code> ותתי הרכיבים שלו בגרסאות קודמות עקוב אחר ההוראות הבאות כדי לעדכן את הקוד שלך ל API החדש.
     </para>
 
-    <sect2 id="zend.translate.migration.fromonesixtooneseven">
-        <title>עדכון מגרסא 1.6 ל 1.7 ומעלה</title>
-        <sect3 id="zend.translate.migration.fromonesixtooneseven.languages">
-            <title>הגדרת שפות</title>
+    <section xml:id="zend.translate.migration.fromonesixtooneseven"><info><title>עדכון מגרסא 1.6 ל 1.7 ומעלה</title></info>
+        
+        <section xml:id="zend.translate.migration.fromonesixtooneseven.languages"><info><title>הגדרת שפות</title></info>
+            
 
             <para>
                 כשנעשה שימוש בזיהוי אוטומטי של שפות, או הגדרת שפות ידנית ישירות אל <code>Zend_Translate</code> יכול להיות ששמתה לב להערה שנזרקה על שפות שלא נוספו או שפות ריקות.
@@ -31,8 +32,8 @@
                 כדי להפטר מהערות אלו תוכל פשוט להגדיר את ההגדרה החדשה 'disableNotices' ל true. כברירת מחדל היא נמצאת תחת false.
             </para>
 
-            <example id="zend.translate.migration.fromonesixtooneseven.example">
-                <title>הגדרת שפות ללא קבלת הערות</title>
+            <example xml:id="zend.translate.migration.fromonesixtooneseven.example"><info><title>הגדרת שפות ללא קבלת הערות</title></info>
+                
 
                 <para>
                     נניח ויש לנו תמיכה בשפה אנגלית והמשתמש מבקש תמיכה בשפה הצרפתית שהיא לא נתמכת במערכת שלנו.
@@ -42,8 +43,8 @@
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto');
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
                 <para>
                     במקרה הזה תוצג הערה אודות שפה שלא נתמכת.
@@ -55,11 +56,11 @@ $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto',
                                array('disableNotices' => true));
-]]>
-                </programlisting>
+
+                ]]></programlisting>
 
             </example>
 
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

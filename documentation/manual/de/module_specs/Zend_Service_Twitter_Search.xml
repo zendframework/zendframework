@@ -1,24 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.service.twitter.search">
-    <title>Zend_Service_Twitter_Search</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.twitter.search"><info><title>Zend_Service_Twitter_Search</title></info>
+    
 
-    <sect3 id="zend.service.twitter.search.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.service.twitter.search.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
-            <classname>Zend_Service_Twitter_Search</classname> bietet einen Client für die <ulink
-                url="http://apiwiki.twitter.com/Search+API+Documentation">Such
-                <acronym>API</acronym> von Twitter</ulink>. Das Twitter Suchservice wird verwendet
+            <classname>Zend_Service_Twitter_Search</classname> bietet einen Client für die <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://apiwiki.twitter.com/Search+API+Documentation">Such
+                <acronym>API</acronym> von Twitter</link>. Das Twitter Suchservice wird verwendet
             um in Twitter zu suchen. Aktuell gibt es Daten nur im Atom oder <acronym>JSON</acronym>
             Format zurück, aber ein komplettes <acronym>REST</acronym> Service kommt in Zukunft
             welche auch <acronym>XML</acronym> Antworten unterstützen wird.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.service.twitter.search.trends">
-        <title>Twitter Trends</title>
+    <section xml:id="zend.service.twitter.search.trends"><info><title>Twitter Trends</title></info>
+        
 
         <para>
             Gibt die Top Zehn Abfragen zurück die aktuell bei Twitter Trend sind. Die Antwort
@@ -55,15 +52,14 @@ foreach($twitterTrends as $trend) {
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.service.twitter.search.search">
-        <title>Suchen in Twitter</title>
+    <section xml:id="zend.service.twitter.search.search"><info><title>Suchen in Twitter</title></info>
+        
 
         <para>
             Die Verwendung der Suchmethode gibt Tweets zurück die einer speziellen Abfrage
-            entsprechen. Es gibt eine Anzahl von <ulink
-                url="http://search.twitter.com/operators">Suchoperatoren</ulink> die für die Abfrage
+            entsprechen. Es gibt eine Anzahl von <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://search.twitter.com/operators">Suchoperatoren</link> die für die Abfrage
             verwendet werden können.
         </para>
 
@@ -76,8 +72,7 @@ foreach($twitterTrends as $trend) {
             <listitem>
                 <para>
                     <code>lang</code> begrenzt die Tweets auf eine angegebene Sprache.
-                    <code>lang</code> muß durch einen <ulink
-                        url="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 Code</ulink>
+                    <code>lang</code> muß durch einen <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 Code</link>
                     angegeben werden.
                 </para>
             </listitem>
@@ -123,8 +118,8 @@ foreach($twitterTrends as $trend) {
             </listitem>
         </itemizedlist>
 
-        <example id="zend.service.twitter.search.search.json">
-            <title>Suchbeispiel für JSON</title>
+        <example xml:id="zend.service.twitter.search.search.json"><info><title>Suchbeispiel für JSON</title></info>
+            
 
             <para>
                 Das folgende Codebeispiel gibt ein Array mit den Suchergebnissen zurück.
@@ -136,8 +131,8 @@ $searchResults = $twitterSearch->search('zend', array('lang' => 'en'));
 ]]></programlisting>
         </example>
 
-        <example id="zend.service.twitter.search.search.atom">
-            <title>Suchbeispiel für ATOM</title>
+        <example xml:id="zend.service.twitter.search.search.atom"><info><title>Suchbeispiel für ATOM</title></info>
+            
 
             <para>
                 Das folgende Codebeispiel gibt ein <classname>Zend_Feed_Atom</classname> Objekt
@@ -149,10 +144,10 @@ $twitterSearch = new Zend_Service_Twitter_Search('atom');
 $searchResults = $twitterSearch->search('zend', array('lang' => 'en'));
 ]]></programlisting>
         </example>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.service.twitter.search.accessors">
-        <title>Zend-Spezifische Zugriffsmethoden</title>
+    <section xml:id="zend.service.twitter.search.accessors"><info><title>Zend-Spezifische Zugriffsmethoden</title></info>
+        
 
         <para>
             Wärend die Such <acronym>API</acronym> von Twitter nur zwei Methoden spezifiziert, hat
@@ -169,5 +164,5 @@ $searchResults = $twitterSearch->search('zend', array('lang' => 'en'));
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
-</sect2>
+    </section>
+</section>

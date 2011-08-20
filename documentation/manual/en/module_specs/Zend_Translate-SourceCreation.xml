@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.translate.sourcecreation">
-    <title>Creating source files</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.sourcecreation"><info><title>Creating source files</title></info>
+    
 
     <para>
         Below you will find a description of the different source formats
@@ -17,8 +16,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.translate.sourcecreation.array">
-        <title>Creating Array source files</title>
+    <section xml:id="zend.translate.sourcecreation.array"><info><title>Creating Array source files</title></info>
+        
 
         <para>
             Array source files are plain arrays. But you have to define them
@@ -78,10 +77,10 @@ $translate = new Zend_Translate(
                 Also any output within this file will be ignored and suppressed.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.gettext">
-        <title>Creating Gettext source files</title>
+    <section xml:id="zend.translate.sourcecreation.gettext"><info><title>Creating Gettext source files</title></info>
+        
 
         <para>
             Gettext source files are created by GNU's gettext library.
@@ -90,7 +89,7 @@ $translate = new Zend_Translate(
             These have the extension <emphasis>*.mo</emphasis>
             and they are binary files.
             An open source tool for creating the files is
-            <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">poEdit</link>.
             This tool also supports you during the translation process itself.
         </para>
 
@@ -160,10 +159,10 @@ $translate = new Zend_Translate(
 );
 print_r($translate->getAdapterInfo());
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.tmx">
-        <title>Creating TMX source files</title>
+    <section xml:id="zend.translate.sourcecreation.tmx"><info><title>Creating TMX source files</title></info>
+        
 
         <para>
             TMX source files are a new industry standard.
@@ -174,8 +173,8 @@ print_r($translate->getAdapterInfo());
             creating TMX source files are not freely available.
         </para>
 
-        <example id="zend.translate.sourcecreation.tmx.example">
-            <title>Example TMX file</title>
+        <example xml:id="zend.translate.sourcecreation.tmx.example"><info><title>Example TMX file</title></info>
+            
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
@@ -223,8 +222,8 @@ $translate = new Zend_Translate(
             languages.
         </para>
 
-        <note>
-            <title>Option useId</title>
+        <note><info><title>Option useId</title></info>
+            
 
             <para>
                 When you set the <emphasis>useId</emphasis> option to <constant>FALSE</constant>
@@ -244,10 +243,10 @@ $translate = new Zend_Translate(
                 <emphasis>tuv</emphasis> entry which is set like shown in the above example.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.csv">
-        <title>Creating CSV source files</title>
+    <section xml:id="zend.translate.sourcecreation.csv"><info><title>Creating CSV source files</title></info>
+        
 
         <para>
             CSV source files are small and human readable.
@@ -255,8 +254,8 @@ $translate = new Zend_Translate(
             you will probably use the CSV adapter.
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example">
-            <title>Example CSV file</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example"><info><title>Example CSV file</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
@@ -305,8 +304,8 @@ $translate->addTranslation(
             set a different one using the option <emphasis>enclosure</emphasis>.
         </para>
 
-        <example id="zend.translate.sourcecreation.csv.example2">
-            <title>Second CSV file example</title>
+        <example xml:id="zend.translate.sourcecreation.csv.example2"><info><title>Second CSV file example</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
@@ -341,10 +340,10 @@ $translate->addTranslation(
                 missing characters in your translation.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.translate.sourcecreation.ini">
-        <title>Creating INI source files</title>
+    <section xml:id="zend.translate.sourcecreation.ini"><info><title>Creating INI source files</title></info>
+        
 
         <para>
             <acronym>INI</acronym> source files are human readable but normally not very small as
@@ -352,8 +351,8 @@ $translate->addTranslation(
             editable by your customers you can use the <acronym>INI</acronym> adapter.
         </para>
 
-        <example id="zend.translate.sourcecreation.ini.example">
-            <title>Example INI file</title>
+        <example xml:id="zend.translate.sourcecreation.ini.example"><info><title>Example INI file</title></info>
+            
 
             <programlisting language="txt"><![CDATA[
 [Test]
@@ -392,8 +391,5 @@ $translate->addTranslation(
             <emphasis>{}|&amp;~![()"</emphasis> must not be used anywhere in the key and have a
             special meaning in the value. Do not use them as it will produce unexpected behaviour.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.form.decorators.layering">
-    <title>Layering Decorators</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.form.decorators.layering"><info><title>Layering Decorators</title></info>
+    
 
     <para>
         If you were following closely in <link linkend="learning.form.decorators.simplest">the
@@ -78,8 +77,7 @@
     </para>
 
     <para>
-        To simplify the process, we'll take a look at the example from <link
-            linkend="learning.form.decorators.simplest">the previous section</link>. Recall:
+        To simplify the process, we'll take a look at the example from <link linkend="learning.form.decorators.simplest">the previous section</link>. Recall:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -359,4 +357,4 @@ $element = new Zend_Form_Element('foo', array(
         which gives some Rails-like simplicity to rendering forms. We'll look at that in the next
         section.
     </para>
-</sect1>
+</section>

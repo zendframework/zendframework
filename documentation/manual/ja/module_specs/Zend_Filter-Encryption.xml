@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21740 -->
-<sect2 id="zend.filter.set.encrypt">
-    <title>Encrypt</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.encrypt"><info><title>Encrypt</title></info>
+    
 
     <para>
         このフィルタは、指定した設定で任意の文字列を暗号化します。
@@ -45,8 +43,8 @@ $filter->setAdapter('openssl');
         </para>
     </note>
 
-    <sect3 id="zend.filter.set.encrypt.mcrypt">
-        <title>Mcrypt での暗号化</title>
+    <section xml:id="zend.filter.set.encrypt.mcrypt"><info><title>Mcrypt での暗号化</title></info>
+        
 
         <para>
             <classname>Mcrypt</classname> 拡張モジュールをインストールすると、
@@ -66,7 +64,7 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>algorithm</emphasis>: 使用するアルゴリズム。
-                    <ulink url="http://php.net/mcrypt">PHP マニュアルの mcrypt のページ</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mcrypt">PHP マニュアルの mcrypt のページ</link>
                     であげられている暗号化アルゴリズムのいずれかでなければなりません。
                     省略した場合のデフォルトは 'blowfish' です。
                 </para>
@@ -84,7 +82,7 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>mode</emphasis>: 使用する暗号化モード。
-                    <ulink url="http://php.net/mcrypt">PHP マニュアルの mcrypt のページ</ulink>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/mcrypt">PHP マニュアルの mcrypt のページ</link>
                     であげられているモードのいずれかでなければなりません。
                     省略した場合のデフォルトは 'cbc' です。
                 </para>
@@ -118,8 +116,7 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>compression</emphasis>: If the encrypted value should be compressed.
-                    Default is no compression. For details take a look into <link
-                        linkend="zend.filter.set.encrypt.openssl.compressed">compression for
+                    Default is no compression. For details take a look into <link linkend="zend.filter.set.encrypt.openssl.compressed">compression for
                         Openssl</link>.
                 </para>
             </listitem>
@@ -177,10 +174,10 @@ print $encrypted;
 
 // 復号の方法は Decrypt フィルタを参照ください
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.encrypt.openssl">
-        <title>OpenSSL での暗号化</title>
+    <section xml:id="zend.filter.set.encrypt.openssl"><info><title>OpenSSL での暗号化</title></info>
+        
 
         <para>
             <classname>OpenSSL</classname> 拡張モジュールをインストールすると、
@@ -308,8 +305,8 @@ print $encrypted;
 ]]></programlisting>
 
         <!-- TODO : to be translated -->
-        <sect4 id="zend.filter.set.encrypt.openssl.simplified">
-            <title>Simplified usage with Openssl</title>
+        <section xml:id="zend.filter.set.encrypt.openssl.simplified"><info><title>Simplified usage with Openssl</title></info>
+            
 
             <para>
                 As seen before, you need to get the envelope key to be able to decrypt the previous
@@ -342,10 +339,10 @@ print $encrypted;
                 this feature, the encrypted value can now only be decrypted by using
                 <classname>Zend_Filter_Encrypt</classname>.
             </para>
-        </sect4>
+        </section>
 
-        <sect4 id="zend.filter.set.encrypt.openssl.compressed">
-            <title>Compressing the content</title>
+        <section xml:id="zend.filter.set.encrypt.openssl.compressed"><info><title>Compressing the content</title></info>
+            
 
             <para>
                 Based on the original value, the encrypted value can be a very large string. To
@@ -379,8 +376,8 @@ $filter2 = new Zend_Filter_Encrypt(array(
 ));
 ]]></programlisting>
 
-            <note>
-                <title>Decryption with same settings</title>
+            <note><info><title>Decryption with same settings</title></info>
+                
 
                 <para>
                     When you want to decrypt a value which is additionally compressed, then you
@@ -388,10 +385,6 @@ $filter2 = new Zend_Filter_Encrypt(array(
                     Otherwise the decryption will fail.
                 </para>
             </note>
-        </sect4>
-    </sect3>
-</sect2>
-
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

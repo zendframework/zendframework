@@ -1,5 +1,6 @@
-<sect2 id="zend.dojo.form.decorators">
-    <title>Dijit-Specific 表单装饰器</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.dojo.form.decorators"><info><title>Dijit-Specific 表单装饰器</title></info>
+    
 
     <para>
         大多数表单元素可以使用 DijitElement 装饰器，它从元素抓取 dijit 参数，
@@ -13,8 +14,8 @@
         这些就和其它属性分离，这样就不会有重复的信息。
     </para>
 
-    <sect3 id="zend.dojo.form.decorators.dijitElement">
-        <title>DijitElement 装饰器</title>
+    <section xml:id="zend.dojo.form.decorators.dijitElement"><info><title>DijitElement 装饰器</title></info>
+        
 
         <para>
             就像 <link linkend="zend.form.standardDecorators.viewHelper">视图助手装饰器</link>，
@@ -33,8 +34,8 @@
             标准用法是在装饰器链附加这个装饰器为第一个装饰器，不需要另外的选项。
         </para>
 
-        <example id="zend.dojo.form.decorators.dijitElement.usage">
-            <title>DijitElement 装饰器用法</title>
+        <example xml:id="zend.dojo.form.decorators.dijitElement.usage"><info><title>DijitElement 装饰器用法</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 $element->setDecorators(array(
@@ -43,17 +44,16 @@ $element->setDecorators(array(
     'Label',
     'ContentPane',
 ));
-]]>
-            </programlisting>
-        </example>
-    </sect3>
 
-    <sect3 id="zend.dojo.form.decorators.dijitForm">
-        <title>DijitForm 装饰器</title>
+            ]]></programlisting>
+        </example>
+    </section>
+
+    <section xml:id="zend.dojo.form.decorators.dijitForm"><info><title>DijitForm 装饰器</title></info>
+        
 
         <para>
-            DijitForm 装饰器和 <link
-                linkend="zend.form.standardDecorators.form">表单装饰器
+            DijitForm 装饰器和 <link linkend="zend.form.standardDecorators.form">表单装饰器
                 </link> 非常类似；事实上，它们可以交互使用，因为它们使用同样的视图助手名（'form'）。
         </para>
 
@@ -61,15 +61,14 @@ $element->setDecorators(array(
             因为 dijit.form.Form 不要求任何 dijit 参数来配置，主要的不同之处是 dijit 表单视图助手
             要求传递一个 DOM ID 来确保程序生成 dijit。装饰器通过传递表单名为表示符来保证它。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.dojo.form.decorators.dijitContainer">
-        <title>DijitContainer-based 装饰器</title>
+    <section xml:id="zend.dojo.form.decorators.dijitContainer"><info><title>DijitContainer-based 装饰器</title></info>
+        
 
         <para>
             <code>DijitContainer</code> 装饰器实际上是一个摘要类，其它装饰器都从它派生。它
-            提供了和 <link
-                linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link> 一样的功能，
+            提供了和 <link linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link> 一样的功能，
             并带有另外的标题支持。许多布局 dijits 要求或使用标题；如果可能，DijitContainer 将使用元素的 legend 属性，如果传递
             它也可以使用 'legend' 或 'title'装饰器选项其中之一。如果有对应的翻译适配器，标题将被翻译。
         </para>
@@ -88,8 +87,8 @@ $element->setDecorators(array(
             <listitem><para>TabContainer</para></listitem>
         </itemizedlist>
 
-        <example id="zend.dojo.form.decorators.dijitContainer.usage">
-            <title>DijitContainer 装饰器用法</title>
+        <example xml:id="zend.dojo.form.decorators.dijitContainer.usage"><info><title>DijitContainer 装饰器用法</title></info>
+            
 
             <programlisting role="php"><![CDATA[
 // Use a TabContainer for your form:
@@ -112,11 +111,8 @@ $subForm->setDecorators(array(
     array('HtmlTag', array('tag' => 'dl')),
     'ContentPane',
 ));
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

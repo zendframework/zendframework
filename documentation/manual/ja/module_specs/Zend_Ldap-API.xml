@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20792 -->
-<sect1 id="zend.ldap.api" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>API概要</title>
 
-    <sect2 id="zend.ldap.api.configuration">
-        <title>設定／オプション</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.ldap.api"><info><title>API概要</title></info>
+    
+
+    <section xml:id="zend.ldap.api.configuration"><info><title>設定／オプション</title></info>
+        
 
         <para>
             <classname>Zend_Ldap</classname>コンポーネント用のオプション配列は、
@@ -13,8 +13,8 @@
             下記のオプションが利用できます:
         </para>
 
-        <table id="zend.ldap.api.configuration.table">
-            <title>Zend_Ldapオプション</title>
+        <table xml:id="zend.ldap.api.configuration.table"><info><title>Zend_Ldapオプション</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -120,8 +120,7 @@
 
                         <entry>
                             アカウント名の正規化方式を表す整数値。
-                            以下の<link
-                                linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
+                            以下の<link linkend="zend.ldap.introduction.theory-of-operations.account-name-canonicalization">
                             <emphasis>アカウント名の正規化</emphasis></link>
                             節を参照ください。
                         </entry>
@@ -152,7 +151,7 @@
                         <entry>
                             アカウントを検索する際に使用する<acronym>LDAP</acronym>検索フィルタ。
                             この文字列は
-                            <ulink url="http://php.net/sprintf"><methodname>sprintf()</methodname></ulink>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/sprintf"><methodname>sprintf()</methodname></link>
                             形式のものとなり、ユーザ名を表す '<emphasis>%s</emphasis>'
                             をひとつ含む必要があります。デフォルト値は
                             '<emphasis>(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>' です。
@@ -205,30 +204,30 @@
                 </tbody>
             </tgroup>
         </table>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.ldap.api.reference">
-        <title>APIリファレンス</title>
+    <section xml:id="zend.ldap.api.reference"><info><title>APIリファレンス</title></info>
+        
 
         <note>
             <para><emphasis>斜体</emphasis>のメソッド名は static メソッドです。</para>
         </note>
 
-        <xi:include href="Zend_Ldap-API-Ldap.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Attribute.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Attribute.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Attribute.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Attribute.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Dn.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Dn.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Dn.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Dn.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Filter.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Node.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node.xml" /></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Filter.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Node.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Ldap-API-Ldap-Node.xml"/></xi:fallback>
         </xi:include>
-        <xi:include href="Zend_Ldap-API-Ldap-Node-RootDse.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Node-Schema.xml" />
-        <xi:include href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml" />
-    </sect2>
-</sect1>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Node-RootDse.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Node-Schema.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Ldap-API-Ldap-Ldif-Encoder.xml"/>
+    </section>
+</section>

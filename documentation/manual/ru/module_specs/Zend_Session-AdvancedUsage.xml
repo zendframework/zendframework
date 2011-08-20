@@ -1,6 +1,7 @@
-<sect1 id="zend.session.advancedusage">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.session.advancedusage"><info><title>Расширенное использование<!--Advanced Usage--></title></info>
 
-    <title>Расширенное использование<!--Advanced Usage--></title>
+    
 
     <para>
         Хотя базовое использование является совершенно допустимым вариантом
@@ -20,9 +21,9 @@
 -->
     </para>
 
-    <sect2 id="zend.session.startingasession">
+    <section xml:id="zend.session.startingasession"><info><title>Старт сессии<!--Starting a Session--></title></info>
 
-        <title>Старт сессии<!--Starting a Session--></title>
+        
 
         <para>
             Если вы хотите, чтобы все запросы имели сессии и использовали
@@ -33,10 +34,10 @@
 -->
         </para>
 
-        <example>
-            <title>Старт общей сессии<!--Starting the Global Session--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Старт общей сессии<!--Starting the Global Session--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
 ...
 require_once 'Zend/Session.php';
 Zend_Session::start();
@@ -67,7 +68,7 @@ Zend_Session::start();
 -->
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     1. Неправильно: Устанавливать опцию session.auto_start в
@@ -90,7 +91,7 @@ Zend_Session::start();
             <listitem>
                 <para>
                     2. Неправильно: Непосредственно использовать функцию
-                    <ulink url="http://www.php.net/session_start"><code>session_start()</code></ulink>.
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/session_start"><code>session_start()</code></link>.
                     Если вы вызываете <code>session_start()</code> напрямую и
                     начинаете использование Zend_Session_Namespace, то при
                     вызове метода <code>Zend_Session::start()</code> будет
@@ -126,7 +127,7 @@ Zend_Session::start();
                     sessions, then:
 -->
                 </para>
-                <itemizedlist mark='opencircle'>
+                <itemizedlist mark="opencircle">
                     <listitem>
                         <para>
                             Установите опцию <code>strict</code> в true (см.
@@ -212,8 +213,8 @@ Zend_Session::start();
                     агенту пользователя будут отправлены HTTP-заголовки),
                     если используются основанные на куках сессии
                     (очень рекомендуется). Использование
-                    <ulink url="http://php.net/outcontrol">буферизации
-                    вывода</ulink> может быть удачным решением, при этом может
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/outcontrol">буферизации
+                    вывода</link> может быть удачным решением, при этом может
                     быть улучшена производительность. Например, в
                     <code>php.ini</code>
                     "<code>output_buffering = 65535</code>" включает буферизацию
@@ -235,11 +236,11 @@ Zend_Session::start();
             </listitem>
         </itemizedlist>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.locking">
+    <section xml:id="zend.session.locking"><info><title>Блокировка пространств имен<!--Locking Session Namespaces--></title></info>
 
-        <title>Блокировка пространств имен<!--Locking Session Namespaces--></title>
+        
 
         <para>
             Можно применять блокировку к пространствам имен для предотвращения
@@ -256,7 +257,7 @@ Zend_Session::start();
             объектов, сохраненных непосредственно в пространстве имен.
             Также блокирование пространств имен Zend_Session_Namespace не
             препятствует использованию ссылок на те же данные
-            (см. <ulink url="http://www.php.net/references">PHP references</ulink>).
+            (см. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/references">PHP references</link>).
 <!--
             Session namespaces can be locked, to prevent further alterations to the data in that namespace. Use
             <code>Zend_Session_Namespace's lock()</code> to make a specific namespace read-only, <code>unLock()</code>
@@ -271,10 +272,10 @@ Zend_Session::start();
 -->
         </para>
 
-        <example>
-            <title>Блокировка пространств имен<!--Locking Session Namespaces--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Блокировка пространств имен<!--Locking Session Namespaces--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     // assuming:
     $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
 
@@ -305,10 +306,10 @@ Zend_Session::start();
 -->
         </para>
 
-        <example>
-            <title>Блокировка сессий в видах<!--Locking Sessions in Views--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Блокировка сессий в видах<!--Locking Sessions in Views--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
 class FooModule_View extends Zend_View
 {
     public function show($name)
@@ -331,11 +332,11 @@ class FooModule_View extends Zend_View
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.expiration">
+    <section xml:id="zend.session.expiration"><info><title>Время жизни пространства имен<!--Namespace Expiration--></title></info>
 
-        <title>Время жизни пространства имен<!--Namespace Expiration--></title>
+        
 
         <para>
             Время жизни может быть ограничено как у пространства имен в целом,
@@ -363,10 +364,10 @@ class FooModule_View extends Zend_View
 -->
         </para>
 
-        <example>
-            <title>Примеры установки времени жизни<!--Expiration Examples--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Примеры установки времени жизни<!--Expiration Examples--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
 $s = new Zend_Session_Namespace('expireAll');
 $s->a = 'apple';
 $s->p = 'pear';
@@ -403,11 +404,11 @@ $s->setExpirationSeconds(60);
 -->
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.controllers">
+    <section xml:id="zend.session.controllers"><info><title>Инкапсуляция сессий и контроллеры<!--Session Encapsulation and Controllers--></title></info>
 
-        <title>Инкапсуляция сессий и контроллеры<!--Session Encapsulation and Controllers--></title>
+        
 
         <para>
             Пространства имен могут также использоваться для разделения доступа
@@ -421,10 +422,10 @@ $s->setExpirationSeconds(60);
 -->
         </para>
 
-        <example>
-            <title>Сессии с пространствами имен для контроллеров с автоматическим истечением времени<!--Namespaced Sessions for Controllers with Automatic Expiration--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Сессии с пространствами имен для контроллеров с автоматическим истечением времени<!--Namespaced Sessions for Controllers with Automatic Expiration--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
 require_once 'Zend/Session.php';
 // контроллер для вывода вопроса
 $testSpace = new Zend_Session_Namespace('testSpace');
@@ -446,11 +447,11 @@ else {
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.limitinginstances">
+    <section xml:id="zend.session.limitinginstances"><info><title>Ограничение количества экземпляров Zend_Session_Namespace до одного на каждое пространство имен<!--Limiting Instances of Zend_Session to One Per Namespace--></title></info>
 
-        <title>Ограничение количества экземпляров Zend_Session_Namespace до одного на каждое пространство имен<!--Limiting Instances of Zend_Session to One Per Namespace--></title>
+        
 
         <para>
             Мы рекомендуем использовать блокировку сессии (см. выше) вместо этой
@@ -497,10 +498,10 @@ else {
 -->
         </para>
 
-        <example>
-            <title>Ограничение до единичных экземпляров<!--Limiting to Single Instances--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Ограничение до единичных экземпляров<!--Limiting to Single Instances--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     require_once 'Zend/Session.php';
     $authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
     $authSpaceAccessor2 = new Zend_Session_Namespace('Zend_Auth', Zend_Session_Namespace::SINGLE_INSTANCE);
@@ -539,16 +540,16 @@ else {
 -->
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.modifyingarray">
+    <section xml:id="zend.session.modifyingarray"><info><title>Работа с массивами в пространствах имен<!--Working with Arrays in Namespaces--></title></info>
 
-        <title>Работа с массивами в пространствах имен<!--Working with Arrays in Namespaces--></title>
+        
 
         <para>
             Изменение массива внутри пространства имен невозможно. Простейшим
             решением является сохранение массивов после того, как все желаемые
-            значения были установлены. <ulink url="http://framework.zend.com/issues/browse/ZF-800">ZF-800</ulink>
+            значения были установлены. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/issues/browse/ZF-800">ZF-800</link>
             подтверждает известный баг, затрагивающий многие PHP-приложения,
             использующие "магические" методы и массивы.
 
@@ -560,10 +561,10 @@ else {
 -->
         </para>
 
-        <example>
-            <title>Известные проблемы с массивами<!--Known problem with arrays--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Известные проблемы с массивами<!--Known problem with arrays--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     $sessionNamespace = new Zend_Session_Namespace('Foo');
     $sessionNamespace->array = array();
     $sessionNamespace->array['testKey'] = 1; // Не работает в версиях ниже PHP 5.2.1
@@ -580,10 +581,10 @@ else {
 -->
         </para>
 
-        <example>
-            <title>Обходной путь: извлечение, изменение и сохранение<!--Workaround: fetch, modify, save--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Обходной путь: извлечение, изменение и сохранение<!--Workaround: fetch, modify, save--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     $sessionNamespace = new Zend_Session_Namespace('Foo');
     $sessionNamespace->array = array('tree' => 'apple');
     $tmp = $sessionNamespace->array;
@@ -600,10 +601,10 @@ else {
 -->
         </para>
 
-        <example>
-            <title>Обходной путь: сохранение массива, содержащего ссылку<!--Workaround: store array containing reference--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Обходной путь: сохранение массива, содержащего ссылку<!--Workaround: store array containing reference--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     $myNamespace = new Zend_Session_Namespace('mySpace');
 
     // работает даже с версиями PHP, содержащими баг
@@ -613,11 +614,11 @@ else {
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.auth">
+    <section xml:id="zend.session.auth"><info><title>Использование сессий вместе с аутентификацией<!--Using Sessions with Authentication--></title></info>
 
-        <title>Использование сессий вместе с аутентификацией<!--Using Sessions with Authentication--></title>
+        
 
         <para>
             Если ваш адаптер аутентификации для <code>Zend_Auth</code>
@@ -660,10 +661,10 @@ else {
 -->
         </para>
 
-        <example>
-            <title>Пример: Простой доступ к ID авторизации<!--Example: Simplified access of authorization ids--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Пример: Простой доступ к ID авторизации<!--Example: Simplified access of authorization ids--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
     // pre-authentication request
     require_once 'Zend/Auth/Adapter/Digest.php';
     $adapter = new Zend_Auth_Adapter_Digest($filename, $realm, $username, $password);
@@ -734,11 +735,11 @@ else {
 -->
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.session.testing">
+    <section xml:id="zend.session.testing"><info><title>Использование сессий с юнит-тестами<!--Using Sessions with Unit Tests--></title></info>
 
-        <title>Использование сессий с юнит-тестами<!--Using Sessions with Unit Tests--></title>
+        
 
         <para>
             Zend Framework использует PHPUnit для своего тестирования. Многие
@@ -795,10 +796,10 @@ else {
 -->
         </para>
 
-        <example>
-            <title>Использование PHPUnit для тестирования кода, написанного с использованием Zend_Session*<!--Using PHPUnit to test code written using Zend_Session*--></title>
-<programlisting language="php">
-<![CDATA[<?php
+        <example><info><title>Использование PHPUnit для тестирования кода, написанного с использованием Zend_Session*<!--Using PHPUnit to test code written using Zend_Session*--></title></info>
+            
+<programlisting language="php"><![CDATA[
+<?php
         // testing setExpirationSeconds()
         require 'tests/Zend/Session/SessionTestHelper.php'; // also see SessionTest.php in trunk/
         $script = 'SessionTestHelper.php';
@@ -842,6 +843,6 @@ else {
 ?>]]></programlisting>
         </example>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

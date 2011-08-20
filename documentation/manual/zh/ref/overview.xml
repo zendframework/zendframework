@@ -1,6 +1,9 @@
-<sect1 id="introduction.overview">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>概述</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>概述</title></info>
+
+    
 
     <para>
         Zend Framework (ZF) 是一个开放源代码的 PHP5 开发框架，可用于来开发 web 程序和服务。ZF 100%用面向对象代码实现。
@@ -15,16 +18,13 @@
         不论你的程序需要什么，你都可能从 Zend Framework 中找到经过全面和严格测试的组件来使用，可以极为有效地减少开发时间。
     </para>
     <para>
-        Zend Framework 项目的主要赞助者是 <ulink url="http://www.zend.com">Zend Technologies</ulink>，但许多
+        Zend Framework 项目的主要赞助者是 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">Zend Technologies</link>，但许多
         其它公司也贡献了组件或重大功能。例如 Google、 Microsoft 和 StrikeIron 作为伙伴提供了 web 服务接口和其它
         希望给 Zend Framework 开发者使用的技术。
     </para>
     <para>
         没有活跃的 ZF 社区，Zend Framework 就不能交付和支持所有这些功能。社区成员包括贡献者都可以在这些地方找到：
-        <ulink url="http://framework.zend.com/archives">mailing lists</ulink>, <ulink url="http://www.zftalk.com">
-        IRC channels</ulink> 和其它论坛。无论你有什么关于 ZF 的问题，在社区里总能找到答案。
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">mailing lists</link>, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">
+        IRC channels</link> 和其它论坛。无论你有什么关于 ZF 的问题，在社区里总能找到答案。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

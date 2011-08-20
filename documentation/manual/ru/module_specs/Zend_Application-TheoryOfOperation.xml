@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.application.theory-of-operation">
-    <title>Теоретические основы работы с Zend_Application</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.theory-of-operation"><info><title>Теоретические основы работы с Zend_Application</title></info>
+    
 
     <para>
         Получение сконфигурированного <acronym>MVC</acronym>-приложения,
@@ -141,8 +140,8 @@
         или путью к конфигурационному файлу.
     </para>
 
-    <sect2 id="zend.application.theory-of-operation.bootstrap">
-        <title>Начальная загрузка</title>
+    <section xml:id="zend.application.theory-of-operation.bootstrap"><info><title>Начальная загрузка</title></info>
+        
 
         <para>
             Второй областью отвественности компоненты
@@ -186,8 +185,8 @@ interface Zend_Application_Bootstrap_Bootstrapper
             с которыми вы должны ознакомиться.
         </para>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-methods">
-            <title>Методы ресурсов</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-methods"><info><title>Методы ресурсов</title></info>
+            
 
             <para>
                 <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
@@ -261,10 +260,10 @@ $bootstrap->bootstrap(array('foo', 'bar'));
             <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.resource-plugins">
-            <title>Загрузки, использующие плагины ресурсов</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.resource-plugins"><info><title>Загрузки, использующие плагины ресурсов</title></info>
+            
 
             <para>
                 Для того, чтобы вы могли сделать свои загрузки более пригодными
@@ -272,8 +271,7 @@ $bootstrap->bootstrap();
                 помещать свои ресурсы в классы-плагины ресурсов.
                 Это позволит вам легко комбинировать ресурсы, используя
                 конфигурацию.
-                Ниже будет описание того, <link
-                    linkend="zend.application.theory-of-operation.resources">как
+                Ниже будет описание того, <link linkend="zend.application.theory-of-operation.resources">как
                     создавать ресурсы</link>, в данном разделе мы только
                 покажем, как использовать их.
             </para>
@@ -403,10 +401,10 @@ $bootstrap->bootstrap(array('FrontController', 'Foo'));
 // Выполнить все ресурсы и плагины:
 $bootstrap->bootstrap();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.registry">
-            <title>Реестр ресурсов</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.registry"><info><title>Реестр ресурсов</title></info>
+            
 
             <para>
                 Большинство, если не все, методы и плагины ресурсов
@@ -504,10 +502,10 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.application.theory-of-operation.bootstrap.dependency-tracking">
-            <title>Отслеживание зависимостей</title>
+        <section xml:id="zend.application.theory-of-operation.bootstrap.dependency-tracking"><info><title>Отслеживание зависимостей</title></info>
+            
 
             <para>
                 Кроме выполнения методов и плагинов ресурсов,
@@ -567,11 +565,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 }
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.application.theory-of-operation.resources">
-        <title>Плагины ресурсов</title>
+    <section xml:id="zend.application.theory-of-operation.resources"><info><title>Плагины ресурсов</title></info>
+        
 
         <para>
             <link linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">Как
@@ -672,5 +670,5 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
             переопределите идущий в поставке плагин ресурса "View", тем самым
             обеспечивая использование своего плагина вместо него.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

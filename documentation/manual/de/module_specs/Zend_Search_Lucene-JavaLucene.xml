@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20854 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.search.lucene.java-lucene">
-    <title>Zusammenarbeit Mit Java Lucene</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>Zusammenarbeit Mit Java Lucene</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.file-formats">
-        <title>Dateiformate</title>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>Dateiformate</title></info>
+        
 
         <para>
             <classname>Zend_Search_Lucene</classname> Indexdateiformate sind binär kompatibel mit
@@ -14,7 +12,7 @@
 
         <para>
             Eine detaillierte Beschreibung dieses Formats ist hier erhältlich:
-            <ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html"/>.
+            <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</uri>.
 
             <footnote>
                 <para>
@@ -23,10 +21,10 @@
                 </para>
             </footnote>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.index-directory">
-        <title>Indexverzeichnis</title>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>Indexverzeichnis</title></info>
+        
 
         <para>
             Nach der Indexerstellung wird das Indexverzeichnis verschiedene Dateien enthalten:
@@ -53,10 +51,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.source-code">
-        <title>Java Quellcode</title>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>Java Quellcode</title></info>
+        
 
         <para>
             Das unten gelistete Java Programm stellt ein Beispiel für die Indizierung einer Datei
@@ -92,5 +90,5 @@ doc.add(Field.Text("contents", reader));
 
 indexWriter.addDocument(doc);
 ]]></programlisting>
-    </sect2>
-</sect1>
+    </section>
+</section>

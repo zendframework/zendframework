@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22743 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.soap.wsdl">
-    <title>WSDL Zugriffsmethoden</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.wsdl"><info><title>WSDL Zugriffsmethoden</title></info>
+    
 
     <note>
         <para>
@@ -20,8 +18,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.soap.wsdl.constructor">
-        <title>Zend_Soap_Wsdl Konstruktor</title>
+    <section xml:id="zend.soap.wsdl.constructor"><info><title>Zend_Soap_Wsdl Konstruktor</title></info>
+        
 
         <para>
             Der <classname>Zend_Soap_Wsdl</classname> Konstruktor nimmt drei Parameter:
@@ -48,17 +46,16 @@
                         <varname>$extractComplexTypes</varname> und kann aus Gründen der
                         Rückwärtskompatibilität noch immer als Boolean gesetzt werden. Standardmäßig
                         ist das Erkennungsverhalten von 1.6 gesetzt. Um mit Strategien für komplexe
-                        Typenerkennung weiterzumachen lesen wie weiter im Kapitel: <link
-                            linkend="zend.soap.wsdl.types.add_complex">Komplexe Typen
+                        Typenerkennung weiterzumachen lesen wie weiter im Kapitel: <link linkend="zend.soap.wsdl.types.add_complex">Komplexe Typen
                             hinzufügen</link>.
                     </simpara>
                 </listitem>
             </orderedlist>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.addmessage">
-        <title>Die addMessage() Methode</title>
+    <section xml:id="zend.soap.wsdl.addmessage"><info><title>Die addMessage() Methode</title></info>
+        
 
         <para>
             Die <methodname>addMessage($name, $parts)</methodname> Methode fügt eine neue
@@ -90,7 +87,7 @@
         <note>
             <para>
                 Nachrichten Teile können entweder 'element' oder 'type' Attribute für das typisieren
-                verwenden (siehe <ulink url="http://www.w3.org/TR/wsdl#_messages"/>).
+                verwenden (siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_messages">http://www.w3.org/TR/wsdl#_messages</uri>).
             </para>
 
             <para>
@@ -100,7 +97,7 @@
 
             <para>
                 Alle standardmäßigen XSD Typen haben beide 'element' und 'complexType' Definitionen
-                (siehe <ulink url="http://schemas.xmlsoap.org/soap/encoding/"/>).
+                (siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</uri>).
             </para>
 
             <para>
@@ -115,10 +112,10 @@
                 Attribut um Typen zu beschreiben.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_port_type">
-        <title>Die addPortType() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_port_type"><info><title>Die addPortType() Methode</title></info>
+        
 
         <para>
             Die <methodname>addPortType($name)</methodname> Methode fügt neue Port Typen zu einem
@@ -131,12 +128,12 @@
         </para>
 
         <para>
-            Siehe <ulink url="http://www.w3.org/TR/wsdl#_porttypes"/> für Details.
+            Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">http://www.w3.org/TR/wsdl#_porttypes</uri> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_port_operation">
-        <title>Die addPortOperation() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_port_operation"><info><title>Die addPortOperation() Methode</title></info>
+        
 
         <para>
             Die <code>addPortOperation($portType, $name, $input = false, $output = false, $fault =
@@ -181,12 +178,12 @@
         </para>
 
         <para>
-            Siehe <ulink url="http://www.w3.org/TR/wsdl#_request-response"/> für Details.
+            Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_request-response">http://www.w3.org/TR/wsdl#_request-response</uri> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_binding">
-        <title>Die addBinding() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_binding"><info><title>Die addBinding() Methode</title></info>
+        
 
         <para>
             Die <methodname>addBinding($name, $portType)</methodname> Methode fügt neue Bindungen in
@@ -196,7 +193,7 @@
         <para>
             Der 'binding' WSDL Dokument Knoten definiert das Nachrichtenformat und Protokolldetails
             für Operationen und Nachrichten die von einem speziellen portType definiert sind
-            (siehe <ulink url="http://www.w3.org/TR/wsdl#_bindings"/>).
+            (siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_bindings">http://www.w3.org/TR/wsdl#_bindings</uri>).
         </para>
 
         <para>
@@ -209,10 +206,10 @@
             <code>$serviceName . 'Binding'</code> Namen für das 'binding' Element eines WSDL
             Dokuments.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_binding_operation">
-        <title>Die addBindingOperation() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_binding_operation"><info><title>Die addBindingOperation() Methode</title></info>
+        
 
         <para>
             Die <code>addBindingOperation($binding, $name, $input = false, $output = false, $fault =
@@ -236,12 +233,12 @@
         </para>
 
         <para>
-            Siehe <ulink url="http://www.w3.org/TR/wsdl#_bindings"/> für Details.
+            Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_bindings">http://www.w3.org/TR/wsdl#_bindings</uri> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_soap_binding">
-        <title>Die addSoapBinding() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_soap_binding"><info><title>Die addSoapBinding() Methode</title></info>
+        
 
         <para>
             Die <code>addSoapBinding($binding, $style = 'document', $transport =
@@ -258,12 +255,12 @@
         </para>
 
         <para>
-            Siehe <ulink url="http://www.w3.org/TR/wsdl#_bindings"/> für Details.
+            Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_bindings">http://www.w3.org/TR/wsdl#_bindings</uri> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_soap_operation">
-        <title>Die addSoapOperation() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_soap_operation"><info><title>Die addSoapOperation() Methode</title></info>
+        
 
         <para>
             Die <methodname>addSoapOperation($binding, $soap_action)</methodname> Methode fügt einen
@@ -288,12 +285,12 @@
         </para>
 
         <para>
-            Siehe <ulink url="http://www.w3.org/TR/wsdl#_soap:operation"/> für Details.
+            Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_soap:operation">http://www.w3.org/TR/wsdl#_soap:operation</uri> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_service">
-        <title>Die addService() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_service"><info><title>Die addService() Methode</title></info>
+        
 
         <para>
             Die <methodname>addService($name, $port_name, $binding, $location)</methodname> Methode
@@ -357,12 +354,12 @@
         </para>
 
         <para>
-            Siehe <ulink url="http://www.w3.org/TR/wsdl#_services"/> für Details.
+            Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_services">http://www.w3.org/TR/wsdl#_services</uri> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.types">
-        <title>Typ Entsprechung</title>
+    <section xml:id="zend.soap.wsdl.types"><info><title>Typ Entsprechung</title></info>
+        
 
         <para>
             Die <classname>Zend_Soap</classname> WSDL Implementation der Zugriffsmethoden verwendet
@@ -400,8 +397,7 @@
                 <listitem>
                     <para>
                         <acronym>PHP</acronym> Klasse &lt;-&gt; basierend auf der Strategie der
-                        komplexen Typen (Siehe: <link
-                            linkend="zend.soap.wsdl.types.add_complex">diesen Abschnitt</link>)
+                        komplexen Typen (Siehe: <link linkend="zend.soap.wsdl.types.add_complex">diesen Abschnitt</link>)
 
                         <footnote>
                             <para>
@@ -439,8 +435,8 @@
             und <code>tns:</code> ist ein "Ziel Namespace" für das Service.
         </para>
 
-        <sect3 id="zend.soap.wsdl.types.retrieve">
-            <title>Empfangen von Typ Informationen</title>
+        <section xml:id="zend.soap.wsdl.types.retrieve"><info><title>Empfangen von Typ Informationen</title></info>
+            
 
             <para>
                 Die <methodname>getType($type)</methodname> Methode kann verwendet werden um ein
@@ -461,10 +457,10 @@ class MyClass {
 ...
 $soapMyClassType = $wsdl->getType('MyClass');
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.soap.wsdl.types.add_complex">
-            <title>Hinzufügen komplexer Typ Informationen</title>
+        <section xml:id="zend.soap.wsdl.types.add_complex"><info><title>Hinzufügen komplexer Typ Informationen</title></info>
+            
 
             <para>
                 Die <methodname>addComplexType($type)</methodname> Methode wird verwendet um
@@ -536,7 +532,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
                         komplexe Typen (Klassennamen) zu der gewünschten Strategie über die
                         <methodname>connectTypeToStrategy($type, $strategy)</methodname> Methode
                         verbunden werden. Eine komplette Typemap kann dem Contructor als Array, mit
-                        <varname>$type</varname> -> <varname>$strategy</varname> Paaren angegeben
+                        <varname>$type</varname> -&gt; <varname>$strategy</varname> Paaren angegeben
                         werden. Der zweite Parameter spezifiziert die Standardstrategie die
                         verwendet wird wenn ein unbekannter Typ hinzugefügt werden soll. Diese
                         Parameter ist standardmäßig die
@@ -569,13 +565,13 @@ $soapMyClassType = $wsdl->getType('MyClass');
             </para>
 
             <para>
-                Siehe <ulink url="http://www.w3.org/TR/wsdl#_types"/> für Details.
+                Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_types">http://www.w3.org/TR/wsdl#_types</uri> für Details.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.add_documentation">
-        <title>Die addDocumentation() Methode</title>
+    <section xml:id="zend.soap.wsdl.add_documentation"><info><title>Die addDocumentation() Methode</title></info>
+        
 
         <para>
             Die <methodname>addDocumentation($input_node, $documentation)</methodname> Methode fügt
@@ -589,17 +585,17 @@ $soapMyClassType = $wsdl->getType('MyClass');
         </para>
 
         <para>
-            Siehe <ulink url="http://www.w3.org/TR/wsdl#_documentation"/> für Details.
+            Siehe <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_documentation">http://www.w3.org/TR/wsdl#_documentation</uri> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.soap.wsdl.retrieve">
-        <title>Das endgültige WSDL Dokument erhalten</title>
+    <section xml:id="zend.soap.wsdl.retrieve"><info><title>Das endgültige WSDL Dokument erhalten</title></info>
+        
 
         <para>
             Die <methodname>toXML()</methodname>, <methodname>toDomDocument()</methodname> und
             <code>dump($filename = false)</code> Methoden können verwendet werden um das WSDL
             Dokument als <acronym>XML</acronym>, DOM Struktur oder Datei zu erhalten.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

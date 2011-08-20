@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18822 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.view.abstract">
-    <title>Zend_View_Abstract</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.abstract"><info><title>Zend_View_Abstract</title></info>
+    
 
     <para>
         <classname>Zend_View_Abstract</classname> est la classe de base à partir de laquelle
@@ -57,4 +55,4 @@ protected function _run()
         exécuter, et nous permettant de sécuriser des secteurs critiques d'un risque de modification
         par les scripts de vue.
     </para>
-</sect1>
+</section>

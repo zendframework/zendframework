@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17987 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.form.i18n">
-    <title>Internacionalización de Zend_Form</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Internacionalización de Zend_Form</title></info>
+    
 
     <para>
         Cada vez más, desarrolladores necesitan adaptar su contenido para multiples idiomas y
@@ -33,8 +31,8 @@
         crear el objeto traducción y los archivos de traducción
     </para>
 
-    <note>
-        <title>La Traducción Puede Ser Deshabilitado Por Item</title>
+    <note><info><title>La Traducción Puede Ser Deshabilitado Por Item</title></info>
+        
 
         <para>
             Se puede deshabilitar la traducción para cualquier formulario, elemento, grupo de
@@ -49,8 +47,8 @@
         </para>
     </note>
 
-    <sect2 id="zend.form.i18n.initialization">
-        <title>Inicializando I18n en formularios</title>
+    <section xml:id="zend.form.i18n.initialization"><info><title>Inicializando I18n en formularios</title></info>
+        
 
         <para>
             Para poder inicializar I18n en formularios, se necesitará un objeto
@@ -142,10 +140,10 @@ $element->setTranslator($translate);
 ]]></programlisting>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.i18n.standard">
-        <title>Objetivos estándar I18n</title>
+    <section xml:id="zend.form.i18n.standard"><info><title>Objetivos estándar I18n</title></info>
+        
 
         <para>Ahora que ya se tiene adjuntado un objeto de traducción, ¿qué se puede traducir
             exactamente por defecto?</para>
@@ -228,5 +226,5 @@ $element->setTranslator($translate);
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

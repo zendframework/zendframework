@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.cache.manager">
-    <title>The Cache Manager</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.cache.manager"><info><title>The Cache Manager</title></info>
+    
 
     <para>
         It's the nature of applications to require a multitude of caches of any
@@ -200,4 +199,4 @@ $databaseCache = $manager->getCache('database');
         <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname> if overloading
         all of their options.
     </para>
-</sect1>
+</section>

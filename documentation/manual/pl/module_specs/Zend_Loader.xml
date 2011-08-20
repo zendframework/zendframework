@@ -1,14 +1,15 @@
-<sect1 id="zend.loader.load">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><info><title>Dynamiczne ładowanie plików i klas</title></info>
 
-    <title>Dynamiczne ładowanie plików i klas</title>
+    
 
     <para>
         Klasa <code>Zend_Loader</code> zawiera metody pomagające ci w dynamicznym ładowaniu
         plików.
     </para>
 
-    <tip>
-        <title>Zend_Loader a require_once()</title>
+    <tip><info><title>Zend_Loader a require_once()</title></info>
+        
         <para>
             Metody klasy <code>Zend_Loader</code> są przydatne gdy nazwa pliku, który chcesz
             załadować jest zmienną. Na przykład, jeśli nazwa jest oparta na
@@ -16,29 +17,29 @@
             Jeśli ładujesz plik lub klasę których nazwą jest stała, nie ma
             dodatkowych korzyści z użycia <code>Zend_Loader</code> zamiast tradycyjnych
             funkcji PHP takich jak
-            <ulink url="http://php.net/require_once"><code>require_once()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/require_once"><code>require_once()</code></link>.
         </para>
     </tip>
 
-    <sect2 id="zend.loader.load.file">
+    <section xml:id="zend.loader.load.file"><info><title>Ładowanie plików</title></info>
 
-        <title>Ładowanie plików</title>
+        
 
         <para>
             Statyczna metoda <code>Zend_Loader::loadFile()</code> ładuje plik
             PHP. Ładowany plik może zawierać dowolny kod PHP. Ta metoda używa
             funkcji PHP
-            <ulink url="http://php.net/include"><code>include()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><code>include()</code></link>.
             Metoda ta wyrzuca wyjątek <code>Zend_Exception</code> w przypadku
             niepowodzenia, na przykład gdy dany plik nie istnieje.
         </para>
 
-        <example id="zend.loader.load.file.example">
-            <title>Przykład użycia metody loadFile()</title>
+        <example xml:id="zend.loader.load.file.example"><info><title>Przykład użycia metody loadFile()</title></info>
+            
             <programlisting role="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
-]]>
-            </programlisting>
+
+            ]]></programlisting>
     </example>
 
         <para>
@@ -63,24 +64,24 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
             Argument <code>$once</code> jest zmienną logiczną. Jeśli ma wartość
             <code>TRUE</code>, to metoda <code>Zend_Loader::loadFile()</code>
             używa do ładowania pliku funkcji PHP
-            <ulink url="http://php.net/include"><code>include_once()</code></ulink>,
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><code>include_once()</code></link>,
             w przeciwnym wypadku używa funkcji PHP
-            <ulink url="http://php.net/include_once"><code>include()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include_once"><code>include()</code></link>.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.class">
+    <section xml:id="zend.loader.load.class"><info><title>Ładowanie klas</title></info>
 
-        <title>Ładowanie klas</title>
+        
 
         <para>
             Statyczna metoda <code>Zend_Loader::loadClass($class, $dirs)</code>
             ładuje plik PHP, a następnie sprawdza czy dana klasa istnieje.
         </para>
 
-        <example id="zend.loader.load.class.example">
-            <title>Przykład użycia metody loadClass()</title>
+        <example xml:id="zend.loader.load.class.example"><info><title>Przykład użycia metody loadClass()</title></info>
+            
             <programlisting role="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
     array(
@@ -88,8 +89,8 @@ Zend_Loader::loadClass('Container_Tree',
         '/home/production/myapp'
     )
 );
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -120,11 +121,11 @@ Zend_Loader::loadClass('Container_Tree',
             myślniki ("-"), podkreślniki ("_"), oraz kropki (".").
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.isreadable">
+    <section xml:id="zend.loader.load.isreadable"><info><title>Sprawdzanie czy plik jest dostępny do odczytu</title></info>
 
-        <title>Sprawdzanie czy plik jest dostępny do odczytu</title>
+        
 
         <para>
             Statyczna metoda <code>Zend_Loader::isReadable($pathname)</code>
@@ -133,29 +134,29 @@ Zend_Loader::loadClass('Container_Tree',
             wartość <code>FALSE</code>.
         </para>
 
-        <example id="zend.loader.load.isreadable.example">
-            <title>Przykład użycia metody isReadable()</title>
+        <example xml:id="zend.loader.load.isreadable.example"><info><title>Przykład użycia metody isReadable()</title></info>
+            
             <programlisting role="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // zrób coś z $filename
 }
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
             Argument <code>$filename</code> określa nazwę pliku do sprawdzenia.
             Może on zawierać informacje o ścieżce. Ta metoda używa funkcji PHP
-            <ulink url="http://php.net/is_readable"><code>is_readable()</code></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/is_readable"><code>is_readable()</code></link>.
             Funkcja PHP nie sprawdza ścieżek z dyrektywy <code>include_path</code>,
             a metoda <code>Zend_Loader::isReadable()</code> sprawdza.
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.autoload">
+    <section xml:id="zend.loader.load.autoload"><info><title>Użycie Autoloadera</title></info>
 
-        <title>Użycie Autoloadera</title>
+        
 
         <para>
             Klasa <code>Zend_Loader</code> zawiera metodę, którą możesz zarejestrować jako
@@ -168,8 +169,8 @@ if (Zend_Loader::isReadable($filename)) {
 
         </para>
 
-        <example id="zend.loader.load.autoload.example-extended">
-            <title>Przykład zarejestrowania metody autoloadera</title>
+        <example xml:id="zend.loader.load.autoload.example-extended"><info><title>Przykład zarejestrowania metody autoloadera</title></info>
+            
             <para>
                 Z powodu semantyki referencji do statycznych funkcji w PHP,
                 musisz zaimplementować kod zarówno dla metody <code>loadClass()</code>
@@ -182,8 +183,8 @@ if (Zend_Loader::isReadable($filename)) {
             </para>
             <programlisting role="php"><![CDATA[
 Zend_Loader::registerAutoload();
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -200,9 +201,9 @@ Zend_Loader::registerAutoload();
             klasę, której metoda <code>autoload()</code> ma zostać zarejestrowana.
         </para>
 
-        <example id="zend.loader.load.autoload.example">
-            <title>Przykład rejestrowania metody autoloadera z rozszerzonej
-                klasy</title>
+        <example xml:id="zend.loader.load.autoload.example"><info><title>Przykład rejestrowania metody autoloadera z rozszerzonej
+                klasy</title></info>
+            
             <programlisting role="php"><![CDATA[
 class My_Loader extends Zend_Loader
 {
@@ -223,8 +224,8 @@ class My_Loader extends Zend_Loader
 }
 
 Zend_Loader::registerAutoload('My_Loader');
-]]>
-            </programlisting>
+
+            ]]></programlisting>
         </example>
 
         <para>
@@ -235,9 +236,6 @@ Zend_Loader::registerAutoload('My_Loader');
             wyrejestrowana ze stosu autoloaderów SPL.
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

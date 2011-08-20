@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.navigation.pages.uri">
-    <title>Zend_Navigation_Page_Uri</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.pages.uri"><info><title>Zend_Navigation_Page_Uri</title></info>
+    
 
     <para>
         Seiten des Typs <classname>Zend_Navigation_Page_Uri</classname> können verwendet werden
         um auf Seiten von anderen Domains oder Sites zu verweisen, oder um eigene Logik für die
         Seite zu implementieren. <acronym>URI</acronym> Seiten sind einfach; zusätzlich zu den
         normalen Seitenoptionen nimmt eine <acronym>URI</acronym> Seite nur eine Option -
-        <code>uri</code>. <code>uri</code> wird zurückgegeben wenn <code>$page->getHref()</code>
+        <code>uri</code>. <code>uri</code> wird zurückgegeben wenn <code>$page-&gt;getHref()</code>
         aufgerufen wird, und kann ein <type>String</type> oder <constant>NULL</constant> sein.
     </para>
 
     <note>
         <para>
             <classname>Zend_Navigation_Page_Uri</classname> versucht nicht zu erkennen ob es aktiv
-            ist wenn <code>$page->isActive()</code> aufgerufen wird. Es gibt zurück, was aktuell
+            ist wenn <code>$page-&gt;isActive()</code> aufgerufen wird. Es gibt zurück, was aktuell
             gesetzt ist. Um also eine <acronym>URI</acronym> Seite aktiv zu machen muß man händisch
-            <code>$page->setActive()</code> aufrufen oder <code>active</code> als eine Option
+            <code>$page-&gt;setActive()</code> aufrufen oder <code>active</code> als eine Option
             der Seite bei der Erstellung spezifizieren.
         </para>
     </note>
 
-    <table id="zend.navigation.pages.uri.options">
-        <title>URI Seiten Optionen</title>
+    <table xml:id="zend.navigation.pages.uri.options"><info><title>URI Seiten Optionen</title></info>
+        
 
         <tgroup cols="4">
             <thead>
@@ -50,4 +50,4 @@
             </tbody>
         </tgroup>
     </table>
-</sect2>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21992 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.validate.messages">
-    <title>Prüfungsmeldungen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><info><title>Prüfungsmeldungen</title></info>
+    
 
     <para>
         Jede Prüfung die auf <classname>Zend_Validate</classname> basiert, bietet im Fall einer
@@ -59,8 +57,8 @@ $validator->setMessage(
         nicht angibt, wird die angegebene Meldung für alle möglichen Fehler dieser Prüfung gesetzt.
     </para>
 
-    <sect2 id="zend.validate.messages.pretranslated">
-        <title>Verwendung vor-übersetzter Prüfungsmeldungen</title>
+    <section xml:id="zend.validate.messages.pretranslated"><info><title>Verwendung vor-übersetzter Prüfungsmeldungen</title></info>
+        
 
         <para>
             Zend Framework wird mit mehr als 45 unterschiedlichen Prüfern und mehr als 200
@@ -71,8 +69,8 @@ $validator->setMessage(
             gefunden werden.
         </para>
 
-        <note>
-            <title>Verwendeter Pfad</title>
+        <note><info><title>Verwendeter Pfad</title></info>
+            
 
             <para>
                 Die Ressource Dateien liegen ausserhalb des Bibliothekspfads weil alle Übersetzungen
@@ -98,8 +96,8 @@ $translator = new Zend_Translate(
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>
 
-        <note>
-            <title>Verwendeter Übersetzungsadapter</title>
+        <note><info><title>Verwendeter Übersetzungsadapter</title></info>
+            
 
             <para>
                 Als Übersetzungsadapter hat Zend Framework den Array Adapter ausgewählt. Er ist
@@ -107,8 +105,8 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
             </para>
         </note>
 
-        <note>
-            <title>Unterstützte Sprachen</title>
+        <note><info><title>Unterstützte Sprachen</title></info>
+            
 
             <para>
                 Dieses Feature ist sehr jung, und deshalb ist die Anzahl der unterstützten Sprachen
@@ -122,10 +120,10 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
                 umzuschreiben. Man muss diese Dateien also nicht selbst per Hand erstellen.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.messages.limitation">
-        <title>Begrenzen der Größe einer Prüfungsmeldung</title>
+    <section xml:id="zend.validate.messages.limitation"><info><title>Begrenzen der Größe einer Prüfungsmeldung</title></info>
+        
 
         <para>
             Manchmal ist es notwendig die maximale Größe die eine Prüfungsmeldung haben kann zu
@@ -154,8 +152,8 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
 Zend_Validate::setMessageLength(100);
 ]]></programlisting>
 
-        <note>
-            <title>Wo wird dieser Parameter verwendet?</title>
+        <note><info><title>Wo wird dieser Parameter verwendet?</title></info>
+            
 
             <para>
                 Die gesetzte Länge der Nachrichten wird für alle Prüfungen verwendet, sogar für
@@ -163,5 +161,5 @@ Zend_Validate::setMessageLength(100);
                 erweitern.
             </para>
         </note>
-    </sect2>
-</sect1>
+    </section>
+</section>

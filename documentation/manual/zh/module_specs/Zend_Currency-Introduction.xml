@@ -1,20 +1,23 @@
-<sect1 id="zend.currency.introduction">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title> Zend_Currency 简介 </title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.introduction"><info><title> Zend_Currency 简介 </title></info>
+
+    
 
     <para>
         <code>Zend_Currency</code> 是Zend_Framework I18n 核心的一部分。它处理所有关于货币、钱的表示和格式。它也提供另外的信息方法，包括货币的本地化信息、关于哪个货币在哪个地区使用等等。
     </para>
 
-    <sect2 id="zend.currency.introduction.list">
+    <section xml:id="zend.currency.introduction.list"><info><title> 为什么使用 <code>Zend_Currency</code> ？</title></info>
 
-        <title> 为什么使用 <code>Zend_Currency</code> ？</title>
+        
 
         <para>
             <code>Zend_Currency</code> 提供了下列函数来处理货币和钱相关的工作。
         </para>
 
-        <itemizedlist mark='opencircle'>
+        <itemizedlist mark="opencircle">
             <listitem>
                 <para>
                     <emphasis role="strong"> 完全本地支持 </emphasis>
@@ -48,6 +51,6 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-</sect1>
+</section>

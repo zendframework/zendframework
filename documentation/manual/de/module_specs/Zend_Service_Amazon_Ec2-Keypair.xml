@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.service.amazon.ec2.keypairs">
-    <title>Zend_Service_Amazon_Ec2: Schlüsselpaare</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.service.amazon.ec2.keypairs"><info><title>Zend_Service_Amazon_Ec2: Schlüsselpaare</title></info>
+    
 
     <para>
         Schlüsselpaare werden verwendet um auf Instanzen zuzugreifen.
     </para>
 
-    <example id="zend.service.amazon.ec2.keypairs.create">
-        <title>Erstellen eines neuen Amazon Schlüsselpaars</title>
+    <example xml:id="zend.service.amazon.ec2.keypairs.create"><info><title>Erstellen eines neuen Amazon Schlüsselpaars</title></info>
+        
 
         <para>
             <code>create</code>, erstellt ein neues 2048 RSA Schlüsselpaar und gibt eine eindeutige
@@ -28,8 +26,8 @@ $return = $ec2_kp->create('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example id="zend.service.amazon.ec2.keypairs.delete">
-        <title>Löschen eines Amazon Schlüsselpaares</title>
+    <example xml:id="zend.service.amazon.ec2.keypairs.delete"><info><title>Löschen eines Amazon Schlüsselpaares</title></info>
+        
 
         <para>
             <code>delete</code>, löscht das Schlüsselpaar. Das verhindert nur das er von neuen
@@ -48,8 +46,8 @@ $return = $ec2_kp->delete('my-new-key');
 ]]></programlisting>
     </example>
 
-    <example id="zend.service.amazon.ec2.describe">
-        <title>Ein Amazon Schlüsselpaar beschreiben</title>
+    <example xml:id="zend.service.amazon.ec2.describe"><info><title>Ein Amazon Schlüsselpaar beschreiben</title></info>
+        
 
         <para>
             <code>describe</code> gibt Informationen über das vorliegende Schlüsselpaar zurück.
@@ -67,4 +65,4 @@ $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->describe('my-new-key');
 ]]></programlisting>
     </example>
-</sect1>
+</section>

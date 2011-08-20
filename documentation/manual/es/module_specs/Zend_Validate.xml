@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.validate.introduction">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introducción</title></info>
 
-    <title>Introducción</title>
+    
 
     <para> Cuando se necesita validar algún tipo de dato, el componente
             <classname>Zend_Validate</classname> ofrece un conjunto de
@@ -11,9 +9,9 @@
         validaciones por el cual múltiples validadores pueden aplicarse a un
         dato en un orden definido por el usuario. </para>
 
-    <sect2 id="zend.validate.introduction.definition">
+    <section xml:id="zend.validate.introduction.definition"><info><title>¿Qué es un validador?</title></info>
 
-        <title>¿Qué es un validador?</title>
+        
 
         <para> Un validador examina su entrada con respecto a algunos
             requerimientos y produce un resultado booleano si la entrada valida
@@ -28,11 +26,11 @@
             Si el nombre de usuario elegido no cumple con uno o ambos de los
             requisitos, sería útil saber cuál de estos requisitos no se cumple. </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.using">
+    <section xml:id="zend.validate.introduction.using"><info><title>Uso básico de validadores</title></info>
 
-        <title>Uso básico de validadores</title>
+        
 
         <para> Habiendo definido la validación de esta manera, Zend Framework
             nos proporciona el fundamento para
@@ -82,11 +80,11 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.messages">
+    <section xml:id="zend.validate.introduction.messages"><info><title>Personalizar los mensajes</title></info>
 
-        <title>Personalizar los mensajes</title>
+        
 
         <para> Para validar las clases se proporciona un método
                 <methodname>setMessage()</methodname> con el que se puede
@@ -170,11 +168,11 @@ if (!validator->isValid('word')) {
 ]]></programlisting>
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.validate.introduction.static">
+    <section xml:id="zend.validate.introduction.static"><info><title> Utilizando el método estático is() </title></info>
 
-        <title> Utilizando el método estático is() </title>
+        
 
         <para> Si es inconveniente cargar una clase de validación y crear una
             instancia del validador, puede usar el método estático
@@ -216,9 +214,9 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
             permite crear ejemplos y ejecutar múltiples filtros y clases de
             validadores por demanda, para procesar juegos de datos de entrada.
             Ver <xref linkend="zend.filter.input"/> . </para>
-        <sect3 id="zend.validate.introduction.static.namespaces">
+        <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Namespaces</title></info>
 
-            <title>Namespaces</title>
+            
 
             <para> When working with self defined validators you can give a
                 forth parameter to <methodname>Zend_Validate::is()</methodname>
@@ -289,12 +287,12 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
                         are set. </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-    </sect2>
-    <sect2 id="zend.validate.introduction.translation">
+    </section>
+    <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
 
-        <title>Translating messages</title>
+        
 
         <para> Validate classes provide a
                 <methodname>setTranslator()</methodname> method with which you
@@ -356,5 +354,5 @@ if (!$validator->isTranslatorDisabled()) {
             you should keep in mind, that the translator works also on messages
             you set your own. </para>
 
-    </sect2>
-</sect1>
+    </section>
+</section>

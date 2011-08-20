@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21815 -->
-<sect1 id="zend.translate.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.using"><info><title>翻訳アダプタの使用法</title></info>
 
-    <title>翻訳アダプタの使用法</title>
+    
 
     <para>
         次は、アダプタをコード内で使用する方法です。
     </para>
 
-    <example id="zend.translate.using.example1">
-        <title>単一言語の PHP コードの例</title>
+    <example xml:id="zend.translate.using.example1"><info><title>単一言語の PHP コードの例</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 print "Example\n";
@@ -35,8 +33,8 @@ print "Here is line two\n";
         最初から翻訳を意識したコードを書くほうがずっと簡単です。
     </para>
 
-    <example id="zend.translate.using.example2">
-        <title>多言語対応の PHP コードの例</title>
+    <example xml:id="zend.translate.using.example2"><info><title>多言語対応の PHP コードの例</title></info>
+        
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     array(
@@ -156,9 +154,9 @@ print $translate->_(2) . "\n";
         エラーや例外を発生させることはありません。
     </para>
 
-    <sect2 id="zend.translate.using.structure">
+    <section xml:id="zend.translate.using.structure"><info><title>翻訳ソースの構造</title></info>
 
-        <title>翻訳ソースの構造</title>
+        
 
         <para>
             次に行うのは、翻訳したい言語用の翻訳ソースを作成することです。
@@ -309,9 +307,6 @@ print $translate->_(2) . "\n";
             次に翻訳ソースファイルを作っていきましょう。
         </para>
 
-    </sect2>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

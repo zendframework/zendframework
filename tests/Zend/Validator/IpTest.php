@@ -120,8 +120,8 @@ class IpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2694
-     * @see ZF-8253
+     * @group ZF-2694
+     * @group ZF-8253
      */
     public function testIPv6addresses()
     {

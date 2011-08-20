@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect1 id="migration.110">
-    <title>Zend Framework 1.10</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><info><title>Zend Framework 1.10</title></info>
+    
 
     <para>
         以前のバージョンから Zend Framework 1.10 またはそれ以降に更新する際は、
         下記の移行上の注意点に注意すべきです。
     </para>
 
-    <sect2 id="migration.110.zend.controller.front">
-        <title>Zend_Controller_Front</title>
+    <section xml:id="migration.110.zend.controller.front"><info><title>Zend_Controller_Front</title></info>
+        
 
         <para>
             A wrong behaviour was fixed, when there was no module route and no route
@@ -49,10 +47,10 @@
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
     // ...
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.feed.reader">
-        <title>Zend_Feed_Reader</title>
+    <section xml:id="migration.110.zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
+        
 
         <para>
             With the introduction of Zend Framework 1.10, <classname>Zend_Feed_Reader</classname>'s
@@ -108,13 +106,13 @@ $authors = $feed->getAuthors();
 $feed = Zend_Feed_Reader::import('http://example.com/feed');
 $authors = $feed->getAuthors()->getValues();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.file.transfer">
-        <title>Zend_File_Transfer</title>
+    <section xml:id="migration.110.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
+        
 
-        <sect3 id="migration.110.zend.file.transfer.files">
-            <title>Security change</title>
+        <section xml:id="migration.110.zend.file.transfer.files"><info><title>Security change</title></info>
+            
 
             <para>
                 For security reasons <classname>Zend_File_Transfer</classname> does no longer store
@@ -134,18 +132,18 @@ $authors = $feed->getAuthors()->getValues();
                 <property>disableInfos</property> option at initiation. Note that this option is
                 useless when its given after initiation.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.110.zend.file.transfer.count">
-            <title>Count 検証</title>
+        <section xml:id="migration.110.zend.file.transfer.count"><info><title>Count 検証</title></info>
+            
 
             <para>
                 リリース 1.10 より前は <classname>MimeType</classname> バリデータが誤った命名を使っていました。
                 一貫性のために、下記の定数が変更されました。
             </para>
 
-            <table id="migration.110.zend.file.transfer.count.table">
-                <title>変更された検証メッセージ</title>
+            <table xml:id="migration.110.zend.file.transfer.count.table"><info><title>変更された検証メッセージ</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -182,11 +180,11 @@ $authors = $feed->getAuthors()->getValues();
                 コード内でこれらのメッセージを翻訳している場合、新しい定数を使います。
                 利点として、正しいつづりを得るために、本来の文字列を翻訳する必要はもうありません。
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.110.zend.filter.html-entities">
-        <title>Zend_Filter_HtmlEntities</title>
+    <section xml:id="migration.110.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
+        
 
         <para>
             In order to default to a more secure character encoding,
@@ -204,10 +202,10 @@ $authors = $feed->getAuthors()->getValues();
             retrieved by their explicit accessors. If you were extending the filter in the past,
             please check your code and unit tests to ensure everything still continues to work.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.filter.strip-tags">
-        <title>Zend_Filter_StripTags</title>
+    <section xml:id="migration.110.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
+        
 
         <para>
             <classname>Zend_Filter_StripTags</classname> contains a flag,
@@ -222,13 +220,13 @@ $authors = $feed->getAuthors()->getValues();
             <acronym>HTML</acronym> tags or nested commments, will be stripped from the final output
             of the filter.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="migration.110.zend.translate">
-        <title>Zend_Translate</title>
+    <section xml:id="migration.110.zend.translate"><info><title>Zend_Translate</title></info>
+        
 
-        <sect3 id="migration.110.zend.translate.xliff">
-            <title>Xliff アダプタ</title>
+        <section xml:id="migration.110.zend.translate.xliff"><info><title>Xliff アダプタ</title></info>
+            
 
             <para>
                 過去には Xliff アダプタはソースの文字列をメッセージ Id として使いました。
@@ -248,14 +246,14 @@ $trans = new Zend_Translate(
     'xliff', '/path/to/source', $locale, array('useId' => false)
 );
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="migration.110.zend.validate">
-        <title>Zend_Validate</title>
+    <section xml:id="migration.110.zend.validate"><info><title>Zend_Validate</title></info>
+        
 
-        <sect3 id="migration.110.zend.validate.selfwritten">
-            <title>書かれたバリデータ自身</title>
+        <section xml:id="migration.110.zend.validate.selfwritten"><info><title>書かれたバリデータ自身</title></info>
+            
 
             <para>
                 かかれたバリデータ自身の内部からエラーを返すよう設定するときは、
@@ -298,10 +296,10 @@ My_Validator extends Zend_Validate_Abstract
     }
 }
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.110.zend.validate.datevalidator">
-            <title>日付バリデータの簡略化</title>
+        <section xml:id="migration.110.zend.validate.datevalidator"><info><title>日付バリデータの簡略化</title></info>
+            
 
             <para>
                 Zend Framework 1.10 以前では、同一の２つのメッセージが、
@@ -311,10 +309,10 @@ My_Validator extends Zend_Validate_Abstract
                 与えられた日付が設定されたフォーマットに一致しない場合、
                 <constant>FALSEFORMAT</constant>メッセージだけが返されます。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="migration.110.zend.validate.barcodevalidator">
-            <title>Alpha、Alnum及びBarcodeバリデータの修正</title>
+        <section xml:id="migration.110.zend.validate.barcodevalidator"><info><title>Alpha、Alnum及びBarcodeバリデータの修正</title></info>
+            
 
             <para>
                 Zend Framework 1.10 以前では、バーコード・アダプタ２種類と、
@@ -331,8 +329,8 @@ My_Validator extends Zend_Validate_Abstract
                 下記の表では変更された値を示します。
             </para>
 
-            <table id="migration.110.zend.validate.barcodevalidator.table">
-                <title>利用可能なバリデータのメッセージ</title>
+            <table xml:id="migration.110.zend.validate.barcodevalidator.table"><info><title>利用可能なバリデータのメッセージ</title></info>
+                
 
                 <tgroup cols="3">
                     <thead>
@@ -389,9 +387,6 @@ My_Validator extends Zend_Validate_Abstract
                 </tgroup>
             </table>
 
-        </sect3>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        </section>
+    </section>
+</section>

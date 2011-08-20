@@ -1,5 +1,8 @@
-<sect1 id="zend.mail.adding-recipients">
-    <title>Geadresseerde bijvoegen</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.adding-recipients"><info><title>Geadresseerde bijvoegen</title></info>
+    
     <para>
         Geadresseerden kunnen op drie manieren worden bijgevoegd:
         <itemizedlist>
@@ -20,7 +23,4 @@
         voor de mens leesbare naam van de geadresseerde.
       </para>
     </note>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

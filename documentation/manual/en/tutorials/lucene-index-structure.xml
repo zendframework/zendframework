@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="learning.lucene.index-structure">
-    <title>Lucene Index Structure</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.lucene.index-structure"><info><title>Lucene Index Structure</title></info>
+    
 
     <para>
         In order to fully utilize <classname>Zend_Search_Lucene</classname>'s capabilities with
@@ -114,4 +115,4 @@
         actually not used (only one new segment with only one document is created at the end of
         script execution, at which time the auto-optimization process starts).
     </para>
-</sect1>
+</section>

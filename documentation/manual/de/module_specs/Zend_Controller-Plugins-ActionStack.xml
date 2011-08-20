@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.plugins.standard.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         Das <emphasis>ActionStack</emphasis> Plugin erlaubt es einen Stack von Anfragen zu
@@ -64,4 +64,4 @@
         angegebenen Anfrageobjekts, und markiert dieses als unerledigt (das forciert einen weiteren
         Durchlauf der Dispatch Schleife).
     </para>
-</sect3>
+</section>

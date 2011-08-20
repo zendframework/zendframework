@@ -1,12 +1,13 @@
-<sect1 id="zend.feed.consuming-rss">
-    <title>RSS Feed的使用</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.consuming-rss"><info><title>RSS Feed的使用</title></info>
+    
     <para>
         用一个<code>Zend_Feed_Rss</code>对象实例和一个Feed的URL来读取一个RSS Feed再简单不过了:
     </para>
     <programlisting role="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
-]]>
-    </programlisting>
+
+    ]]></programlisting>
     <para>
         如果在获得feed时发生任何错误，那么一个<code>Zend_Feed_Exception</code>异常将被抛出。
     </para>
@@ -16,10 +17,10 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
     </para>
     <programlisting role="php"><![CDATA[
 echo $channel->title();?>
-]]>
-     </programlisting>
+
+     ]]></programlisting>
     <para>
-        注意函数语法。如果用 "getter" 的语法 (<code>$obj->property</code>) 取一个对象变量或是调用一个对象方法(<code>$obj->property()</code>)时，<code>Zend_Feed</code>将把这个变量名或方法名作为一个XML对象的属性处理(就像访问XML中的某个节点)。这样在取得指定的节点内容后还能访问其子节点。
+        注意函数语法。如果用 "getter" 的语法 (<code>$obj-&gt;property</code>) 取一个对象变量或是调用一个对象方法(<code>$obj-&gt;property()</code>)时，<code>Zend_Feed</code>将把这个变量名或方法名作为一个XML对象的属性处理(就像访问XML中的某个节点)。这样在取得指定的节点内容后还能访问其子节点。
     </para>
 
     <para>
@@ -27,8 +28,8 @@ echo $channel->title();?>
     </para>
     <programlisting role="php"><![CDATA[
 echo $channel->category['domain'];?>
-]]>
-     </programlisting>
+
+     ]]></programlisting>
     <para>
         因为XML的属性不能拥有子节点，所以不需要用方法的语法访问其属性。
         values.
@@ -42,8 +43,8 @@ echo $channel->category['domain'];?>
 foreach ($channel as $item) {
     echo $item->title() . "\n";
 }
-]]>
-     </programlisting>
+
+     ]]></programlisting>
     <para>
         如果你对RSS不是很熟，那这有一分关于RSS channel和各个RSS item(条目)标准元素的列表可能对你有帮助。
     </para>
@@ -125,17 +126,14 @@ foreach ($channel as $item) {
 if ($item->propname()) {
     // ... proceed.
 }
-]]>
-    </programlisting>
+
+    ]]></programlisting>
 
     <para>
-        如果你用<code>$item->propname</code>代替<code>$item->propname()</code>，那么你将总是得到一个空对象使条件判断为<code>TRUE</code>，因此条件判断将失效。
+        如果你用<code>$item-&gt;propname</code>代替<code>$item-&gt;propname()</code>，那么你将总是得到一个空对象使条件判断为<code>TRUE</code>，因此条件判断将失效。
     </para>
 
     <para>
-        更多信息，请参看RSS 2.0的官方说明:<ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>。
+        更多信息，请参看RSS 2.0的官方说明:<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</link>。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

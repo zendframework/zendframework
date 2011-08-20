@@ -1,12 +1,13 @@
-<sect1 id="zend.form.advanced">
-    <title>Zend_Form 的高级用法 </title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.advanced"><info><title>Zend_Form 的高级用法 </title></info>
+    
 
     <para>
         <code>Zend_Form</code> 有丰富的函数，其中许多面向有经验的开发者。这一章打算用例子和用例来介绍这些函数。
     </para>
 
-    <sect2 id="zend.form.advanced.arrayNotation">
-        <title> 数组符号（Notation）</title>
+    <section xml:id="zend.form.advanced.arrayNotation"><info><title> 数组符号（Notation）</title></info>
+        
 
         <para>
             许多有经验的 web 开发者喜欢在元素名上用数组符号把相关的表单元素组成组。例如，如果有两个地址在表单上，一个邮寄地址和一个帐单地址，你可能会有相同的元素，通过把它们用数组组成组，你可以确保它们能分别被抓取。用下面的表单做个例子：
@@ -162,10 +163,10 @@
             另外，在元素一级，你可以用 <code>Zend_Form_Element::setBelongsTo()</code> 方法指定可能属于特定的数组的独立的元素。
             为了找出这个值是什么 － 是否显式或隐式地通过表单 － 可以用 <code>getBelongsTo()</code> 访问器来做。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.advanced.multiPage">
-        <title> 多页表单 </title>
+    <section xml:id="zend.form.advanced.multiPage"><info><title> 多页表单 </title></info>
+        
 
         <para>
             目前，<code>Zend_Form</code> 没有正式支持多页表单，然而，可以用一些额外的工具来实现。
@@ -175,8 +176,8 @@
             生成多页表单的关键是利用子表单，但每个页面只显示一个子表单。这让你一次提交一个单个的表单并校验它，直到所有表单都提交了才处理。
         </para>
 
-        <example id="zend.form.advanced.multiPage.registration">
-            <title> 注册表单示例 </title>
+        <example xml:id="zend.form.advanced.multiPage.registration"><info><title> 注册表单示例 </title></info>
+            
 
             <para>
                 让我们用注册表单作为例子，我们的意图是在第一页上读取期望的用户名和密码，还有用户的元数据 －－ 用户的名字、姓和地点 －－ 最后让他们决定使用哪个邮件列表（如果有的话）。
@@ -618,8 +619,5 @@ endforeach ?>
                 Zend Framework 的下次发行将通过抽象会话和顺序逻辑来提供制作多页面表单的组件。在这期间，上述例子对如何为你的站点生成多页面是个合理的指南。
             </para>
         </example>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

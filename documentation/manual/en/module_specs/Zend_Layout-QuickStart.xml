@@ -1,21 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.layout.quickstart">
-    <title>Zend_Layout Quick Start</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout Quick Start</title></info>
+    
 
     <para>
         There are two primary use cases for <classname>Zend_Layout</classname>: with the
         Zend Framework <acronym>MVC</acronym>, and without.
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>Layout scripts</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>Layout scripts</title></info>
+        
 
         <para>
             In both cases, however, you'll need to create a layout script. Layout scripts simply
             utilize <classname>Zend_View</classname> (or whatever view implementation you are
-            using). Layout variables are registered with a <classname>Zend_Layout</classname> <link
-                linkend="zend.view.helpers.initial.placeholder">placeholder</link>,
+            using). Layout variables are registered with a <classname>Zend_Layout</classname> <link linkend="zend.view.helpers.initial.placeholder">placeholder</link>,
             and may be accessed via the placeholder helper or by fetching them
             as object properties of the layout object via the layout helper.
         </para>
@@ -54,8 +52,7 @@
             Because <classname>Zend_Layout</classname> utilizes <classname>Zend_View</classname> for
             rendering, you can also use any view helpers registered, and also
             have access to any previously assigned view variables. Particularly
-            useful are the various <link
-                linkend="zend.view.helpers.initial.placeholder">placeholder
+            useful are the various <link linkend="zend.view.helpers.initial.placeholder">placeholder
                 helpers</link>, as they allow you to
             retrieve content for areas such as the &lt;head&gt; section,
             navigation, etc.:
@@ -83,18 +80,16 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title>Using Zend_Layout with the Zend Framework MVC</title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title>Using Zend_Layout with the Zend Framework MVC</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> offers a rich set of functionality for
             extension via its <link linkend="zend.controller.plugins">front
-            controller plugins</link> and <link
-            linkend="zend.controller.actionhelpers">action controller
-            helpers</link>. <classname>Zend_View</classname> also has <link
-            linkend="zend.view.helpers">helpers</link>. <classname>Zend_Layout</classname>
+            controller plugins</link> and <link linkend="zend.controller.actionhelpers">action controller
+            helpers</link>. <classname>Zend_View</classname> also has <link linkend="zend.view.helpers">helpers</link>. <classname>Zend_Layout</classname>
             takes advantage of these various extension points when used with the
             <acronym>MVC</acronym> components.
         </para>
@@ -205,15 +200,14 @@ $layout = Zend_Layout::getMvcInstance();
         <para>
             This feature is particularly useful when used in conjunction with
             the ActionStack <link linkend="zend.controller.actionhelpers.actionstack">action
-            helper</link> and <link
-            linkend="zend.controller.plugins.standard.actionstack">plugin</link>,
+            helper</link> and <link linkend="zend.controller.plugins.standard.actionstack">plugin</link>,
             which you can use to setup a stack of actions through
             which to loop, and thus create widgetized pages.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>Using Zend_Layout as a Standalone Component</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>Using Zend_Layout as a Standalone Component</title></info>
+        
 
         <para>
             As a standalone component, <classname>Zend_Layout</classname> does not offer nearly as
@@ -251,10 +245,10 @@ $layout->setLayout('foo');
 // render final layout
 echo $layout->render();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>Sample Layout</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>Sample Layout</title></info>
+        
 
         <para>
             Sometimes a picture is worth a thousand words. The following is a
@@ -262,8 +256,7 @@ echo $layout->render();
         </para>
 
          <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.layout.quickstart.example.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -274,8 +267,5 @@ echo $layout->render();
             header. The actual mechanics of pulling the content remain the same,
             however.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

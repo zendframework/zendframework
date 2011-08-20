@@ -1,18 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21614 -->
-<sect1 id="zend.form.standardDecorators">
-    <title>Zend Framework に同梱されている標準のデコレータ</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardDecorators"><info><title>Zend Framework に同梱されている標準のデコレータ</title></info>
+    
 
     <para>
         <classname>Zend_Form</classname> には、標準でいくつかのデコレータが組み込まれています。
-        デコレータの一般的な使用法については <link
-            linkend="zend.form.decorators">デコレータの説明</link>
+        デコレータの一般的な使用法については <link linkend="zend.form.decorators">デコレータの説明</link>
         を参照ください。
     </para>
 
-    <sect2 id="zend.form.standardDecorators.callback">
-        <title>Zend_Form_Decorator_Callback</title>
+    <section xml:id="zend.form.standardDecorators.callback"><info><title>Zend_Form_Decorator_Callback</title></info>
+        
 
         <para>
             Callback デコレータは、コンテンツをレンダリングする際に任意のコールバックを実行します。
@@ -48,14 +45,13 @@ class Util
             それは、元のコンテンツをコールバックの返り値で上書きします。
             'prepend' や 'append' を指定した場合も正しく動作します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.captcha">
-        <title>Zend_Form_Decorator_Captcha</title>
+    <section xml:id="zend.form.standardDecorators.captcha"><info><title>Zend_Form_Decorator_Captcha</title></info>
+        
 
         <para>
-            Captcha デコレータは <link
-                linkend="zend.form.standardElements.captcha">CAPTCHA
+            Captcha デコレータは <link linkend="zend.form.standardElements.captcha">CAPTCHA
                 フォーム要素</link> と組み合わせて使用します。
             これは、CAPTCHA アダプタの
             <methodname>render()</methodname> メソッドを使用して出力を生成します。
@@ -68,10 +64,10 @@ class Util
             CAPTCHA のユーザ入力を表します。
             これらは単一の要素として検証されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.description">
-        <title>Zend_Form_Decorator_Description</title>
+    <section xml:id="zend.form.standardDecorators.description"><info><title>Zend_Form_Decorator_Description</title></info>
+        
 
         <para>
             Description デコレータは
@@ -100,10 +96,10 @@ class Util
             'escape' に <constant>FALSE</constant> を渡すか、あるいは
             <methodname>setEscape()</methodname> メソッドをコールします。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.dtDdWrapper">
-        <title>Zend_Form_Decorator_DtDdWrapper</title>
+    <section xml:id="zend.form.standardDecorators.dtDdWrapper"><info><title>Zend_Form_Decorator_DtDdWrapper</title></info>
+        
 
         <para>
             デフォルトのデコレータで、フォームの要素を定義リスト
@@ -128,10 +124,10 @@ class Util
             このデコレータは、元のコンテンツを上書きし、
             <code>&lt;dd&gt;</code> 要素でラップしたもので置き換えます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.errors">
-        <title>Zend_Form_Decorator_Errors</title>
+    <section xml:id="zend.form.standardDecorators.errors"><info><title>Zend_Form_Decorator_Errors</title></info>
+        
 
         <para>
             要素のエラーを処理するのが Errors デコレータです。
@@ -144,10 +140,10 @@ class Util
         <para>
             Errors デコレータは、元のコンテンツの先頭あるいは末尾に文字列を追加します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.fieldset">
-        <title>Zend_Form_Decorator_Fieldset</title>
+    <section xml:id="zend.form.standardDecorators.fieldset"><info><title>Zend_Form_Decorator_Fieldset</title></info>
+        
 
         <para>
             グループやサブフォームの内容を、デフォルトで fieldset
@@ -160,10 +156,10 @@ class Util
             元の項目に設定されていた属性は、すべて fieldset
             の HTML 属性として設定されます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.file">
-        <title>Zend_Form_Decorator_File</title>
+    <section xml:id="zend.form.standardDecorators.file"><info><title>Zend_Form_Decorator_File</title></info>
+        
 
         <para>
             File 要素には特殊な記法があり、
@@ -172,10 +168,10 @@ class Util
             が使用するもので、複数の file 要素を一度のメソッドコールで設定できます。
             自動的に使用され、要素名を自動的に修正します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.form">
-        <title>Zend_Form_Decorator_Form</title>
+    <section xml:id="zend.form.standardDecorators.form"><info><title>Zend_Form_Decorator_Form</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> オブジェクトは HTML の form タグをレンダリングするものです。
@@ -184,10 +180,10 @@ class Util
             その際に <classname>Zend_Form</classname> オブジェクトの action や method、
             そして属性を使用します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.formElements">
-        <title>Zend_Form_Decorator_FormElements</title>
+    <section xml:id="zend.form.standardDecorators.formElements"><info><title>Zend_Form_Decorator_FormElements</title></info>
+        
 
         <para>
             フォームや表示グループ、サブフォームはいくつかの要素のコレクションです。
@@ -196,10 +192,10 @@ class Util
             をコールし、登録されている区切り文字で結果を連結します。
             このデコレータは、元のコンテンツの先頭あるいは末尾に文字列を追加します。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.formErrors">
-        <title>Zend_Form_Decorator_FormErrors</title>
+    <section xml:id="zend.form.standardDecorators.formErrors"><info><title>Zend_Form_Decorator_FormErrors</title></info>
+        
 
         <para>
             開発者やデザイナの中には、
@@ -272,10 +268,10 @@ class Util
         <para>
             FormErrors デコレータは、コンテンツの前と後の両方に追加できます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.htmlTag">
-        <title>Zend_Form_Decorator_HtmlTag</title>
+    <section xml:id="zend.form.standardDecorators.htmlTag"><info><title>Zend_Form_Decorator_HtmlTag</title></info>
+        
 
         <para>
             HtmlTag デコレータは、HTML タグを使ってコンテンツを装飾します。
@@ -285,10 +281,10 @@ class Util
             指定したタグでコンテンツをラップして元のコンテンツを上書きします。
             しかし、placement に append あるいは prepend を指定することもできます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.image">
-        <title>Zend_Form_Decorator_Image</title>
+    <section xml:id="zend.form.standardDecorators.image"><info><title>Zend_Form_Decorator_Image</title></info>
+        
 
         <para>
             Image デコレータは、HTML の image input
@@ -310,10 +306,10 @@ class Util
             この要素をラップする HTML タグを指定するには、デコレータのオプション
             'tag' を指定するか、あるいは <methodname>setTag()</methodname> をコールします。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.label">
-        <title>Zend_Form_Decorator_Label</title>
+    <section xml:id="zend.form.standardDecorators.label"><info><title>Zend_Form_Decorator_Label</title></info>
+        
 
         <para>
             フォーム要素には通常ラベルがあります。Label
@@ -377,15 +373,14 @@ class Util
             'placement' オプションを 'append' にすると、
             コンテンツの末尾に追加できます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.prepareElements">
-        <title>Zend_Form_Decorator_PrepareElements</title>
+    <section xml:id="zend.form.standardDecorators.prepareElements"><info><title>Zend_Form_Decorator_PrepareElements</title></info>
+        
 
         <para>
             フォーム、表示グループそしてサブフォームは、要素のコレクションです。
-            <link
-                linkend="zend.form.standardDecorators.viewScript">ViewScript</link>
+            <link linkend="zend.form.standardDecorators.viewScript">ViewScript</link>
             デコレータをフォームやサブフォームで使用する際に、
             ビューオブジェクトやトランスレータ、完全修飾名
             (サブフォームの配列記法で定義されるもの) を再帰的に設定できたら便利です。
@@ -399,10 +394,10 @@ $form->setDecorators(array(
     array('ViewScript', array('viewScript' => 'form.phtml')),
 ));
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.viewHelper">
-        <title>Zend_Form_Decorator_ViewHelper</title>
+    <section xml:id="zend.form.standardDecorators.viewHelper"><info><title>Zend_Form_Decorator_ViewHelper</title></info>
+        
 
         <para>
             大半の要素のレンダリングには <classname>Zend_View</classname>
@@ -422,10 +417,10 @@ $form->setDecorators(array(
             デフォルトでは、このデコレータはコンテンツの末尾に結果を追加します。
             'placement' オプションを指定すれば、先頭に追加させることもできます。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.standardDecorators.viewScript">
-        <title>Zend_Form_Decorator_ViewScript</title>
+    <section xml:id="zend.form.standardDecorators.viewScript"><info><title>Zend_Form_Decorator_ViewScript</title></info>
+        
 
         <para>
             ビュースクリプトを使用して要素を作成したくなることもあるでしょう。
@@ -502,8 +497,8 @@ $element->setDecorators(array(array('ViewScript',
 </div>
 ]]></programlisting>
 
-        <note>
-            <title>ビュースクリプトによるコンテンツの置換</title>
+        <note><info><title>ビュースクリプトによるコンテンツの置換</title></info>
+            
 
             <para>
                 デコレータに渡されたコンテンツをビュースクリプトで置換したいこともあるでしょう。
@@ -531,8 +526,5 @@ $this->decorator->setOption('placement', false);
             ViewScript デコレータは、
             要素のレンダリングをよりきめ細やかに設定したい場合に使用することをおすすめします。
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->
+    </section>
+</section>

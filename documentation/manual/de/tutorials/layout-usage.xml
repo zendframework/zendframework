@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19803 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.layout.usage">
-    <title>Zend_Layout verwenden</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.layout.usage"><info><title>Zend_Layout verwenden</title></info>
+    
 
     <para>
         Die grundsätzliche Verwendung von <classname>Zend_Layout</classname> ist recht trivial.
@@ -10,8 +8,8 @@
         einfach ein paar Konfigurations Optionen übergeben und ein Layout View Skript erstellen.
     </para>
 
-    <sect2 id="learning.layout.usage.configuration">
-        <title>Layout Konfiguration</title>
+    <section xml:id="learning.layout.usage.configuration"><info><title>Layout Konfiguration</title></info>
+        
 
         <para>
             Der empfohlene Ort für Layouts ist im Unterverzeichnis
@@ -46,10 +44,10 @@ resources.layout.layout = "layout"
             Erweiterung für View Skripts (welche standardmäßig mit "<filename>.phtml</filename>"
             angenommen wird).
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.layout-script">
-        <title>Ein Layout Skript erstellen</title>
+    <section xml:id="learning.layout.usage.layout-script"><info><title>Ein Layout Skript erstellen</title></info>
+        
 
         <para>
             Jetzt da man die Konfiguration gesetzt hat, muss man sein Layout Skript erstellen.
@@ -86,10 +84,10 @@ resources.layout.layout = "layout"
             An diesem Punkt hat man ein funktionierendes Layout Skript, und die eigene Anwendung ist
             über seinen Ort informiert und weis wie es darzustellen ist.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.access">
-        <title>Auf das Layout Objekt zugreifen</title>
+    <section xml:id="learning.layout.usage.access"><info><title>Auf das Layout Objekt zugreifen</title></info>
+        
 
         <para>
             Manchmal ist ein Direktzugriff auf das Layout Objekt notwendig. Es gibt drei Wege wie
@@ -167,17 +165,16 @@ $layout = $bootstrap->getResource('Layout');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="learning.layout.usage.other-operations">
-        <title>Andere Operationen</title>
+    <section xml:id="learning.layout.usage.other-operations"><info><title>Andere Operationen</title></info>
+        
 
         <para>
             In den meisten Fällen empfängt die obige Konfiguration und das Layout Skript (mit
             Änderungen) das, was benötigt wird. Trotzdem existieren einigen andere Funktionalitäten
             die man früher oder später verwenden wird. In allen der folgenden Beispiele kann man
-            eine der <link
-                linkend="learning.layout.usage.access">oben aufgeführten Methoden</link> verwenden
+            eine der <link linkend="learning.layout.usage.access">oben aufgeführten Methoden</link> verwenden
             um das Layout Objekt zu erhalten.
         </para>
 
@@ -251,5 +248,5 @@ $layout->setLayout('alternate');
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

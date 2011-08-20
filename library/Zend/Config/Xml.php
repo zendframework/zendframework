@@ -84,17 +84,34 @@ class Xml extends Config
             }
         }
 
-        set_error_handler(array($this, '_loadFileErrorHandler')); // Warnings and errors are suppressed
+        // load XML and throw exception of each failure using previous exception
+        $oldUseInternalErrors = libxml_use_internal_errors(true);
+        if ($oldUseInternalErrors) {
+            libxml_clear_errors();
+        }
         if (strstr($xml, '<' . '?xml')) { // string concat to fix syntax highlighting
             $config = simplexml_load_string($xml);
         } else {
             $config = simplexml_load_file($xml);
         }
+        $xmlErrors = libxml_get_errors();
+        if (!$oldUseInternalErrors) {
+            libxml_use_internal_errors(false);
+        }
+        if ( ($xmlErrorCnt = count($xmlErrors)) ) {
+            libxml_clear_errors();
 
-        restore_error_handler();
-        // Check if there was a error while loading file
-        if ($this->_loadFileErrorStr !== null) {
-            throw new Exception\InvalidArgumentException($this->_loadFileErrorStr);
+            // create and throw exception stack
+            $e = null;
+            foreach ($xmlErrors as $xmlError) {
+                $msg  = trim($xmlError->message);
+                $line = $xmlError->line;
+                $col  = $xmlError->column;
+                $e = new Exception\RuntimeException(
+                    $msg . ' @ line/column ' . $line . '/' . $col, 0, $e
+                );
+            }
+            throw $e;
         }
 
         if ($section === null) {

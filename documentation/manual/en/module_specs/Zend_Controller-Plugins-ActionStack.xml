@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.controller.plugins.standard.actionstack">
-    <title>ActionStack</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins.standard.actionstack"><info><title>ActionStack</title></info>
+    
 
     <para>
         The <emphasis>ActionStack</emphasis> plugin allows you to manage a stack of
@@ -62,7 +63,4 @@
         to the state of the provided request object, and markes it as
         undispatched (forcing another iteration of the dispatch loop).
     </para>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20765 -->
-<sect1 id="zend.controller.modular">
-    <title>モジュラーディレクトリ構造の規約の使用</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.modular"><info><title>モジュラーディレクトリ構造の規約の使用</title></info>
+    
 
-    <sect2 id="zend.controller.modular.introduction">
-        <title>導入</title>
+    <section xml:id="zend.controller.modular.introduction"><info><title>導入</title></info>
+        
 
         <para>
             モジュラーディレクトリ構造の規約 (The Conventional Modular directory structure)
@@ -62,8 +60,8 @@ application/
             ここで示したディレクトリ構造を使用します。
         </para>
 
-        <note>
-            <title>デフォルトモジュールでは名前空間を使用しない</title>
+        <note><info><title>デフォルトモジュールでは名前空間を使用しない</title></info>
+            
 
             <para>
                 デフォルトモジュールでは、コントローラは
@@ -80,10 +78,10 @@ application/
             それでは、Zend Framework の <acronym>MVC</acronym> コンポーネントを使用して
             これらのディレクトリ配置を実装するにはどうすればいいのでしょうか?
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.directories">
-        <title>モジュールコントローラディレクトリの指定</title>
+    <section xml:id="zend.controller.modular.directories"><info><title>モジュールコントローラディレクトリの指定</title></info>
+        
 
         <para>
             モジュールを使用するための第一歩となるのが、
@@ -180,10 +178,10 @@ $front->addModuleDirectory('/path/to/application/modules');
                 に空の文字列を指定します。
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.router">
-        <title>モジュールへのルーティング</title>
+    <section xml:id="zend.controller.modular.router"><info><title>モジュールへのルーティング</title></info>
+        
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> のデフォルトのルートは
@@ -204,10 +202,10 @@ $front->addModuleDirectory('/path/to/application/modules');
             コントローラディレクトリの配列に同名のキーがある場合にのみ
             モジュールにマッチするということです。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.modular.defaultcontroller">
-        <title>モジュールあるいはグローバルのデフォルトコントローラ</title>
+    <section xml:id="zend.controller.modular.defaultcontroller"><info><title>モジュールあるいはグローバルのデフォルトコントローラ</title></info>
+        
 
         <para>
             デフォルトのルータでは、コントローラが <acronym>URL</acronym> で指定されなかった場合には
@@ -227,8 +225,5 @@ $front->addModuleDirectory('/path/to/application/modules');
         <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

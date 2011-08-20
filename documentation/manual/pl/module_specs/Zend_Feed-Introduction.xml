@@ -1,5 +1,6 @@
-<sect1 id="zend.feed.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.feed.introduction"><info><title>Wprowadzenie</title></info>
+    
     <para>
         <code>Zend_Feed</code> zapewnia funkcjonalność umożliwiającą przetwarzanie
         kanałów informacyjnych RSS oraz Atom. Zapewnia ona naturalną składnię umożliwiającą
@@ -25,8 +26,8 @@
         danych itp.
     </para>
 
-    <note>
-        <title>Bądż ostrożny</title>
+    <note><info><title>Bądż ostrożny</title></info>
+        
         <para>
             Wiele kanałów RSS ma dostępne różne właściwości samego kanału i jego elementów.
             Specyfikacja RSS umożliwia użycie wielu opcjonalnych parametrów, więc
@@ -34,8 +35,8 @@
         </para>
     </note>
 
-    <example id="zend.feed.introduction.example.rss">
-        <title>Użycie Zend_Feed do pobierania danych RSS</title>
+    <example xml:id="zend.feed.introduction.example.rss"><info><title>Użycie Zend_Feed do pobierania danych RSS</title></info>
+        
         <programlisting role="php"><![CDATA[
 // Ściągamy najnowsze nagłówki ze Slashdot
 try {
@@ -63,7 +64,7 @@ foreach ($slashdotRss as $item) {
         'description' => $item->description()
         );
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
-</sect1>
+</section>

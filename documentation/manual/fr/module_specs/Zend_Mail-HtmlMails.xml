@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.html-mails">
-    <title>Émail HTML</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.html-mails"><info><title>Émail HTML</title></info>
+    
 
     <para>
         Pour envoyer un émail au format HTML, définissez le corps du message en utilisant la
@@ -12,8 +10,8 @@
         généré :
     </para>
 
-    <example id="zend.mail.html-mails.example-1">
-        <title>Envoyer des émail HTML</title>
+    <example xml:id="zend.mail.html-mails.example-1"><info><title>Envoyer des émail HTML</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -25,4 +23,4 @@ $mail->setSubject('Sujet de test');
 $mail->send();
 ]]></programlisting>
     </example>
-</sect1>
+</section>

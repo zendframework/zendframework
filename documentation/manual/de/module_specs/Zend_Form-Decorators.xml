@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.form.decorators">
-    <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title></info>
+    
 
     <para>
         Die Darstellung eines Form Objektes ist komplett optional --
@@ -39,8 +37,8 @@
         das komplette Element repräsentiert.
     </para>
 
-    <sect2 id="zend.form.decorators.operation">
-        <title>Operationen</title>
+    <section xml:id="zend.form.decorators.operation"><info><title>Operationen</title></info>
+        
 
         <para>
             Um einen Dekorator zu konfigurieren, kann ein Array von Optionen, oder ein
@@ -131,20 +129,20 @@
             entweder diesen String ersetzen, voranstellen oder anfügen; ein optionaler Separator
             wird in den späteren zwei Situationen verwendet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.standard">
-        <title>Standard Dekoratoren</title>
+    <section xml:id="zend.form.decorators.standard"><info><title>Standard Dekoratoren</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname> wird mit vielen Standard Dekoratoren ausgeliefert;
             siehe <link linkend="zend.form.standardDecorators">das Kapitel über
                 Standard Dekoratoren</link> für Details.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.custom">
-        <title>Eigene Dekoratoren</title>
+    <section xml:id="zend.form.decorators.custom"><info><title>Eigene Dekoratoren</title></info>
+        
 
         <para>
             Wenn man der Meinung ist, dass die Notwendigkeiten der Darstellung sehr komplex sind,
@@ -344,10 +342,10 @@ class My_Decorator_Errors
             Dekorators nach dem bestehenden Standard Dekorator, kann die Dekoration verändert werden
             ohne, dass der Dekorator des Elements verändert werden muss.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.individual">
-        <title>Darstellung individueller Dekoratoren</title>
+    <section xml:id="zend.form.decorators.individual"><info><title>Darstellung individueller Dekoratoren</title></info>
+        
 
         <para>
             Da Dekoratoren verschiedene Metadaten, eines Elements oder Formulars das sie darstellen,
@@ -383,5 +381,5 @@ echo $form->renderHtmlTag('wrap this content');
             dargestellt wird; jedes Element kann seine angehängten Dekoratoren verwenden um Inhalte
             darzustellen, aber mit fein-abgestimmter Kontrolle.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

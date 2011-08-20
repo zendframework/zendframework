@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 15681 -->
-<sect1 id="zend.captcha.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.captcha.introduction"><info><title>導入</title></info>
+    
 
     <para>
-        <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</link>
         とは "Completely Automated Public Turing test to tell Computers and Humans
         Apart (コンピュータと人間を区別するための、
         完全に自動化された公開チューリングテスト)" のことです。
@@ -23,7 +23,4 @@
         単体でも <classname>Zend_Form</classname>
         と組み合わせても使用できるようにすることを目指しています。
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

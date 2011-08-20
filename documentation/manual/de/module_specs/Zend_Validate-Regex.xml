@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22146 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.regex">
-    <title>Regex</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.regex"><info><title>Regex</title></info>
+    
 
     <para>
         Diese Prüfung erlaubt es zu prüfen ob ein angegebener String einer definierten Regular
         Expression entspricht.
     </para>
 
-    <sect3 id="zend.validate.set.regex.options">
-        <title>Unterstützte Optionen für Zend_Validate_Regex</title>
+    <section xml:id="zend.validate.set.regex.options"><info><title>Unterstützte Optionen für Zend_Validate_Regex</title></info>
+        
 
         <para>
             Die folgenden Optionen werden für <classname>Zend_Validate_Regex</classname>
@@ -25,10 +23,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.regex.basic">
-        <title>Prüfen mit Zend_Validate_Regex</title>
+    <section xml:id="zend.validate.set.regex.basic"><info><title>Prüfen mit Zend_Validate_Regex</title></info>
+        
 
         <para>
             Die Prüfung mit Regular Expressions erlaubt es komplizierte Prüfungen durchzuführen,
@@ -47,14 +45,13 @@ $validator->isValid("Pest"); // Gibt false zurück
         <para>
             Wie man sehen kann hat das Pattern welches anzugeben ist die gleiche Syntax wie für
             <methodname>preg_match()</methodname>. Für Details über Regular Expressions sollte man
-            einen Blick in <ulink
-                url="http://php.net/manual/en/reference.pcre.pattern.syntax.php">PHP's Handbuch
-                über die PCRE Pattern Syntax</ulink> werfen.
+            einen Blick in <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/en/reference.pcre.pattern.syntax.php">PHP's Handbuch
+                über die PCRE Pattern Syntax</link> werfen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.regex.handling">
-        <title>Handhabung von Pattern</title>
+    <section xml:id="zend.validate.set.regex.handling"><info><title>Handhabung von Pattern</title></info>
+        
 
         <para>
             Es ist auch möglich andere Pattern im Nachhinein zu setzen indem
@@ -70,8 +67,5 @@ $validator->isValid("Test"); // Gibt false zurück
 $validator->isValid("Testing"); // Gibt true zurück
 $validator->isValid("Pest"); // Gibt false zurück
 ]]></programlisting>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

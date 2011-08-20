@@ -1,20 +1,20 @@
-<sect1 id="zend.mime.part">
-    <title>Zend_Mime_Part</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mime.part"><info><title>Zend_Mime_Part</title></info>
+    
 
-    <sect2 id="zend.mime.part.introduction">
-      <title>Inleiding</title>
+    <section xml:id="zend.mime.part.introduction"><info><title>Inleiding</title></info>
+      
 
       <para>Deze klasse stelt een enkel deel van een MIME bericht voor. Het
       bevat de inhoud van het berichtdeel, plus informatie over de
       encodering, inhoudstype en oorspronkelijke bestandsnaam ervan. Het
       biedt een methode om een string te genereren vanaf opgeslagen data.
-      <code>Zend_Mime_Part</code> objecten kunnen aan <link
-      linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
+      <code>Zend_Mime_Part</code> objecten kunnen aan <link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
       worden toegevoegd om een compleet mulitpart bericht te assembleren.</para>
-    </sect2>
+    </section>
 
-  <sect2 id="zend.mime.part.instantiation">
-    <title>Instantiëring</title>
+  <section xml:id="zend.mime.part.instantiation"><info><title>Instantiëring</title></info>
+    
 
     <para><code>Zend_Mime_Part</code> word geïnstantieert met een string die
     de inhoud van het nieuwe deel bevat. Het wordt aangenomen dat het type
@@ -31,10 +31,10 @@ public $filename;
 public $description;
 public $charset;
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-  <sect2 id="zend.mime.part.methods">
-    <title>Methodes om een berichtdeel naar een string te schrijven</title>
+  <section xml:id="zend.mime.part.methods"><info><title>Methodes om een berichtdeel naar een string te schrijven</title></info>
+    
 
     <para><code>-&gt;getContent()</code> geeft de geëncodeerde inhoud van
     de Mime_Part als een string weer, geëncodeert volgens de in het attribuut
@@ -78,8 +78,5 @@ public $charset;
           </para>
         </listitem>
       </itemizedlist></para>
-  </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+  </section>
+</section>

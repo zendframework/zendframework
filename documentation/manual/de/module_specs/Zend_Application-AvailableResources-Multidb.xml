@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20176 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.multidb">
-    <title>Zend_Application_Resource_Multidb</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.multidb"><info><title>Zend_Application_Resource_Multidb</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Multidb</classname> wird verwendet um mehrere
-        Datenbankverbindungen zu initialisieren. Man kann die gleichen Optionen wie beim <link
-            linkend="zend.application.available-resources.db">Db Ressource Plugin</link> verwenden.
+        Datenbankverbindungen zu initialisieren. Man kann die gleichen Optionen wie beim <link linkend="zend.application.available-resources.db">Db Ressource Plugin</link> verwenden.
         Trotzdem kann für das Spezifizieren einer Standardverbindung auch die 'default' Direktive
         verwendet werden.
     </para>
 
-    <example id="zend.application.available-resources.multidb.configexample">
-        <title>Mehrere Db Verbindungen konfigurieren</title>
+    <example xml:id="zend.application.available-resources.multidb.configexample"><info><title>Mehrere Db Verbindungen konfigurieren</title></info>
+        
 
         <para>
             Anbei ist eine beispielhafte <acronym>INI</acronym> Konfiguration die verwendet werden
@@ -37,8 +34,8 @@ resources.multidb.db2.default = true
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.multidb.retrieveSpecificDb">
-        <title>Einen speziellen Datenbankadapter empfangen</title>
+    <example xml:id="zend.application.available-resources.multidb.retrieveSpecificDb"><info><title>Einen speziellen Datenbankadapter empfangen</title></info>
+        
 
         <para>
             Wenn dieses Ressource Plugin verwendet wird, will man normalerweise eine spezifische
@@ -57,8 +54,8 @@ $defaultDb = $resource->getDb();
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
-        <title>Den standardmäßigen Datenbankadapter empfangen</title>
+    <example xml:id="zend.application.available-resources.multidb.retrieveDefaultDb"><info><title>Den standardmäßigen Datenbankadapter empfangen</title></info>
+        
 
         <para>
             Zusätzlich kann der standardmäßige Datenbankadapter empfangen werden indem die Methode
@@ -83,4 +80,4 @@ $db1 = $resource->getDefaultDb();
 $null = $resource->getDefaultDb(false); // Null
 ]]></programlisting>
     </example>
-</sect2>
+</section>

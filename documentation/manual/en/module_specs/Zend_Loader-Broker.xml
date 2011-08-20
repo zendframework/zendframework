@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.broker">
-    <title>The Broker Interface</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.broker"><info><title>The Broker Interface</title></info>
+    
 
-    <sect2 id="zend.loader.broker.intro">
-        <title>Overview</title>
+    <section xml:id="zend.loader.broker.intro"><info><title>Overview</title></info>
+        
 
         <para>
             Withing Zend Framework, a number of components have a need to:
@@ -32,13 +31,12 @@
         </para>
 
         <para>
-            A concrete implementation of this interface is provided with <link
-                linkend="zend.loader.plugin-broker">the PluginBroker class</link>.
+            A concrete implementation of this interface is provided with <link linkend="zend.loader.plugin-broker">the PluginBroker class</link>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.broker.quick-start">
-        <title>Quick Start</title>
+    <section xml:id="zend.loader.broker.quick-start"><info><title>Quick Start</title></info>
+        
 
         <para>
             A concrete interface must simply follow the contract as specified in the interface:
@@ -55,20 +53,20 @@ interface Broker
     public function getClassLoader();
 }
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.broker.options">
-        <title>Configuration Options</title>
+    <section xml:id="zend.loader.broker.options"><info><title>Configuration Options</title></info>
+        
 
         <para>
             This component defines no configuration options, as it is an interface.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.broker.methods">
-        <title>Available Methods</title>
+    <section xml:id="zend.loader.broker.methods"><info><title>Available Methods</title></info>
+        
 
-        <refentry id="zend.loader.broker.methods.load">
+        <refentry xml:id="zend.loader.broker.methods.load">
             <refnamediv>
                 <refname>load</refname>
                 <refpurpose>Locate and return a plugin instance</refpurpose>
@@ -83,8 +81,8 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>load()</title>
+            <refsection><info><title>load()</title></info>
+                
 
                 <para>
                     <methodname>load()</methodname> is intended to do the heavy lifting of the
@@ -94,10 +92,10 @@ interface Broker
                     instances, the <varname>$options</varname> argument can be used to seed and
                     configure the plugin.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.broker.methods.register">
+        <refentry xml:id="zend.loader.broker.methods.register">
             <refnamediv>
                 <refname>register</refname>
                 <refpurpose>Register a plugin</refpurpose>
@@ -112,8 +110,8 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>register()</title>
+            <refsection><info><title>register()</title></info>
+                
 
                 <para>
                     <methodname>register()</methodname> allows explicitly registering a plugin with
@@ -123,10 +121,10 @@ interface Broker
                     a string class name or an object instance; the implementation will determine
                     usage.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.broker.methods.unregister">
+        <refentry xml:id="zend.loader.broker.methods.unregister">
             <refnamediv>
                 <refname>unregister</refname>
                 <refpurpose>Unregister a plugin from the broker</refpurpose>
@@ -141,18 +139,18 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>unregister()</title>
+            <refsection><info><title>unregister()</title></info>
+                
 
                 <para>
                     Used to remove a plugin from the broker. Based on the implementation, this may
                     simply remove a previous instance registered in the broker, or it may prevent
                     ever loading it again.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.broker.methods.set-class-loader">
+        <refentry xml:id="zend.loader.broker.methods.set-class-loader">
             <refnamediv>
                 <refname>setClassLoader</refname>
                 <refpurpose>Specify a class loader to be used for plugin class lookups</refpurpose>
@@ -167,8 +165,8 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>setClassLoader()</title>
+            <refsection><info><title>setClassLoader()</title></info>
+                
 
                 <para>
                     Plugins are supposed to be dynamic, overridable functionality. A class loader is
@@ -176,10 +174,10 @@ interface Broker
                     retrieved from the broker. This method allows you to specify what implementation
                     to utilize.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
 
-        <refentry id="zend.loader.broker.methods.get-class-loader">
+        <refentry xml:id="zend.loader.broker.methods.get-class-loader">
             <refnamediv>
                 <refname>getClassLoader</refname>
                 <refpurpose>Retrieve the plugin class loader</refpurpose>
@@ -191,22 +189,22 @@ interface Broker
                 </methodsynopsis>
             </refsynopsisdiv>
 
-            <refsect1>
-                <title>getClassLoader()</title>
+            <refsection><info><title>getClassLoader()</title></info>
+                
 
                 <para>
                     Retrieves the currently registered plugin class loader.
                 </para>
-            </refsect1>
+            </refsection>
         </refentry>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.broker.examples">
-        <title>Examples</title>
+    <section xml:id="zend.loader.broker.examples"><info><title>Examples</title></info>
+        
 
         <para>
             Please see the <link linkend="zend.loader.broker.quick-start">Quick Start</link> for the
             interface specification.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

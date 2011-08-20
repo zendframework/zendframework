@@ -1,21 +1,22 @@
-<sect1 id="zend.search.lucene.java-lucene">
-    <title>שימוש ב Java Lucene</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.search.lucene.java-lucene"><info><title>שימוש ב Java Lucene</title></info>
+    
 
-    <sect2 id="zend.search.lucene.index-creation.file-formats">
-        <title>סוגי קבצים</title>
+    <section xml:id="zend.search.lucene.index-creation.file-formats"><info><title>סוגי קבצים</title></info>
+        
         <para>
             אינדקס סוגי הקבצים של <code>Zend_Search_Lucene</code> תומכים בסוג בינארי עם Java Lucene גרסא 1.4 ומעלה.
         </para>
 
         <para>
             הסבר מלא אודות פורמט זה ניתן לקרוא כאן:
-          <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>
+          <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</uri>
           <footnote><para>הגרסא הנתמכת הנוכחית בפורמט אינדקס קבצים היא 2.3 החל מ Zend Framework 1.6.</para></footnote>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.index-creation.index-directory">
-        <title>תיקית אינדקס</title>
+    <section xml:id="zend.search.lucene.index-creation.index-directory"><info><title>תיקית אינדקס</title></info>
+        
 
         <para>
         לאחר יצירת האינדקס, תיקית האינדקס תכיל כמה דברים:
@@ -39,10 +40,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.search.lucene.java-lucene.source-code">
-        <title>קוד המקור</title>
+    <section xml:id="zend.search.lucene.java-lucene.source-code"><info><title>קוד המקור</title></info>
+        
         <para>
             תוכנת ה Java המוצגת למעלה מדגימה כיצד לאנדקס קובץ בעזרת Java Lucene:
         </para>
@@ -75,11 +76,7 @@ Reader reader = new BufferedReader(new InputStreamReader(is));
 doc.add(Field.Text("contents", reader));
 
 indexWriter.addDocument(doc);
-]]>
-</programlisting>
-    </sect2>
-</sect1>
 
-<!--
-vim:se ts=4 sw=4 et:
--->
+]]></programlisting>
+    </section>
+</section>

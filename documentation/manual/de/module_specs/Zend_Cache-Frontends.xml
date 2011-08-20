@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22140 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.cache.frontends">
-    <title>Zend_Cache Frontends</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.frontends"><info><title>Zend_Cache Frontends</title></info>
+    
 
-    <sect2 id="zend.cache.frontends.core">
-        <title>Zend_Cache_Core</title>
+    <section xml:id="zend.cache.frontends.core"><info><title>Zend_Cache_Core</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.core.introduction">
-            <title>Einführung</title>
+        <section xml:id="zend.cache.frontends.core.introduction"><info><title>Einführung</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Core</classname> ist ein spezielles Frontend, da es der Kern
@@ -23,18 +21,18 @@
                     Frontends vorhanden sind. Deswegen werden sie dort nicht dokumentiert.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.core.options">
-            <title>Mögliche Optionen</title>
+        <section xml:id="zend.cache.frontends.core.options"><info><title>Mögliche Optionen</title></info>
+            
 
             <para>
                 Diese Optionen werden der Factory Methode übergeben wie im nachfolgenden Beispiel
                 demonstriert.
             </para>
 
-            <table id="zend.cache.frontends.core.options.table">
-                <title>Core Frontend Optionen</title>
+            <table xml:id="zend.cache.frontends.core.options.table"><info><title>Core Frontend Optionen</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -152,10 +150,10 @@
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.core.examples">
-            <title>Beispiele</title>
+        <section xml:id="zend.cache.core.examples"><info><title>Beispiele</title></info>
+            
 
             <para>
                 Ein Beispiel wird ganz am Anfang des Handbuches gegeben.
@@ -272,14 +270,14 @@ if (!($cache->test($id))) {
 
 // Wir machen irgendetwas mit $data
 ]]></programlisting>
-       </sect3>
-    </sect2>
+       </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.output">
-        <title>Zend_Cache_Frontend_Output</title>
+    <section xml:id="zend.cache.frontends.output"><info><title>Zend_Cache_Frontend_Output</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.output.introduction">
-            <title>Einführung</title>
+        <section xml:id="zend.cache.frontends.output.introduction"><info><title>Einführung</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Output</classname> ist ein Ausgabe-Empfangendes
@@ -287,19 +285,19 @@ if (!($cache->test($id))) {
                 zwischen der <methodname>start()</methodname> und der
                 <methodname>end()</methodname> Methode zu fangen.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.output.options">
-            <title>Mögliche Optionen</title>
+        <section xml:id="zend.cache.frontends.output.options"><info><title>Mögliche Optionen</title></info>
+            
 
             <para>
                 Dieses Frontend hat keine bestimmten Optionen zusätzlich zu denen von
                 <classname>Zend_Cache_Core</classname>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.output.examples">
-            <title>Beispiele</title>
+        <section xml:id="zend.cache.frontends.output.examples"><info><title>Beispiele</title></info>
+            
 
             <para>
                 Ein Beispiel wird ganz am Anfang des Handbuches gegeben. Hier ist es mit kleinen
@@ -325,14 +323,14 @@ echo 'Hier wird nie gecached ('.time().').';
                 Die Verwendung dieser Form ist ziemlich einfach, um Ausgabe caching in einem bereits
                 bestehenden Projekt, mit nur wenig oder gar keinen Codeänderungen, zu erhalten.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.function">
-        <title>Zend_Cache_Frontend_Function</title>
+    <section xml:id="zend.cache.frontends.function"><info><title>Zend_Cache_Frontend_Function</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.function.introduction">
-            <title>Einführung</title>
+        <section xml:id="zend.cache.frontends.function.introduction"><info><title>Einführung</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Function</classname> cached das Ergebnis von
@@ -340,13 +338,13 @@ echo 'Hier wird nie gecached ('.time().').';
                 <methodname>call()</methodname>, welche den Funktionsnamen und Parameter für den
                 Aufruf in einem Array entgegennimmt.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.function.options">
-            <title>Mögliche Optionen</title>
+        <section xml:id="zend.cache.frontends.function.options"><info><title>Mögliche Optionen</title></info>
+            
 
-            <table id="zend.cache.frontends.function.options.table">
-                <title>Cache Frontend Optionen</title>
+            <table xml:id="zend.cache.frontends.function.options.table"><info><title>Cache Frontend Optionen</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -373,23 +371,23 @@ echo 'Hier wird nie gecached ('.time().').';
                         <row>
                             <entry><emphasis>cached_functions</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>Funktionsnamen, die immer gecached werden sollen</entry>
                         </row>
 
                         <row>
                             <entry><emphasis>non_cached_functions</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>Funktionsnamen, die nie gecached werden sollen</entry>
                         </row>
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.function.examples">
-            <title>Beispiele</title>
+        <section xml:id="zend.cache.frontends.function.examples"><info><title>Beispiele</title></info>
+            
 
             <para>
                 Die Verwendung der <methodname>call()</methodname> Funktion ist die gleiche, wie
@@ -420,27 +418,27 @@ $cache->call('veryExpensiveFunc', $params);
                     <methodname>unset()</methodname>.
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.class">
-        <title>Zend_Cache_Frontend_Class</title>
+    <section xml:id="zend.cache.frontends.class"><info><title>Zend_Cache_Frontend_Class</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.class.introduction">
-            <title>Einführung</title>
+        <section xml:id="zend.cache.frontends.class.introduction"><info><title>Einführung</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Class</classname> ist unterschiedlich zu
                 <classname>Zend_Cache_Frontend_Function</classname>, weil es das Cachen von Objekten
                 und statischen Methodenaufrufen erlaubt.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.class.options">
-            <title>Mögliche Optionen</title>
+        <section xml:id="zend.cache.frontends.class.options"><info><title>Mögliche Optionen</title></info>
+            
 
-            <table id="zend.cache.frontends.class.options.table">
-                <title>Class Frontend Optionen</title>
+            <table xml:id="zend.cache.frontends.class.options.table"><info><title>Class Frontend Optionen</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -456,7 +454,7 @@ $cache->call('veryExpensiveFunc', $params);
                         <row>
                             <entry><emphasis>cached_entity</emphasis> (Notwendig)</entry>
                             <entry><type>Mixed</type></entry>
-                            <entry></entry>
+                            <entry/>
 
                             <entry>
                                   Wenn auf einen Klassennamen gesetzt, wird eine abstrakte Klasse
@@ -479,23 +477,23 @@ $cache->call('veryExpensiveFunc', $params);
                         <row>
                             <entry><emphasis>cached_methods</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>Methodennamen, die immer gecached werden sollen</entry>
                         </row>
 
                         <row>
                             <entry><emphasis>non_cached_methods</emphasis></entry>
                             <entry><type>Array</type></entry>
-                            <entry></entry>
+                            <entry/>
                             <entry>Methodennamen, die nie gecached werden sollen</entry>
                         </row>
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.class.examples">
-            <title>Beispiele</title>
+        <section xml:id="zend.cache.frontends.class.examples"><info><title>Beispiele</title></info>
+            
 
             <para>
                 zum Beispiel, um einen statischen Aufruf zu cachen:
@@ -548,14 +546,14 @@ $frontendOptions = array(
 // Der gecachte Aufruf
 $res = $cache->foobar2('1', '2');
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.file">
-        <title>Zend_Cache_Frontend_File</title>
+    <section xml:id="zend.cache.frontends.file"><info><title>Zend_Cache_Frontend_File</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.file.introduction">
-            <title>Einführung</title>
+        <section xml:id="zend.cache.frontends.file.introduction"><info><title>Einführung</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_File</classname> ist ein Frontend angetrieben durch
@@ -574,13 +572,13 @@ $res = $cache->foobar2('1', '2');
                 Wenn also die <acronym>XML</acronym> Konfigurationsdatei geändert wird, wird der
                 Cache sofort ungültig.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.file.options">
-            <title>Mögliche Optionen</title>
+        <section xml:id="zend.cache.frontends.file.options"><info><title>Mögliche Optionen</title></info>
+            
 
-            <table id="zend.cache.frontends.file.options.table">
-                <title>File Frontend Optionen</title>
+            <table xml:id="zend.cache.frontends.file.options.table"><info><title>File Frontend Optionen</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -635,10 +633,10 @@ $res = $cache->foobar2('1', '2');
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.file.examples">
-            <title>Beispiele</title>
+        <section xml:id="zend.cache.frontends.file.examples"><info><title>Beispiele</title></info>
+            
 
             <para>
                 Die Verwendung dieses Frontends ist die gleiche wie die von
@@ -646,14 +644,14 @@ $res = $cache->foobar2('1', '2');
                 einziges gemacht werden muß, ist das <emphasis>master_File</emphasis> zu
                 definieren, wenn die Factory verwendet wird.
             </para>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.page">
-        <title>Zend_Cache_Frontend_Page</title>
+    <section xml:id="zend.cache.frontends.page"><info><title>Zend_Cache_Frontend_Page</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.page.introduction">
-            <title>Einführung</title>
+        <section xml:id="zend.cache.frontends.page.introduction"><info><title>Einführung</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Page</classname> ist wie
@@ -687,19 +685,19 @@ $res = $cache->foobar2('1', '2');
                     Ausgabebuffer, den der Dispatcher verwendet, deaktiviert sein indem die
                     <methodname>setParam()</methodname> Methode von
                     <classname>Zend_Controller_Front</classname> verwendet wird. Zum Beispiel
-                    <command>$front->setParam('disableOutputBuffering', true)</command> oder durch
+                    <command>$front-&gt;setParam('disableOutputBuffering', true)</command> oder durch
                     Hinzufügen von "resources.frontcontroller.params.disableOutputBuffering = true"
                     zum eigenen Konfigurationsdatei der Bootstrap (<acronym>INI</acronym>
                     angenommen) wenn <classname>Zend_Application</classname> verwendet wird.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.options">
-            <title>Mögliche Optionen</title>
+        <section xml:id="zend.cache.frontends.page.options"><info><title>Mögliche Optionen</title></info>
+            
 
-            <table id="zend.cache.frontends.page.options.table">
-                <title>Page Frontend Optionen</title>
+            <table xml:id="zend.cache.frontends.page.options.table"><info><title>Page Frontend Optionen</title></info>
+                
 
                 <tgroup cols="4">
                     <thead>
@@ -914,10 +912,10 @@ $res = $cache->foobar2('1', '2');
                     </tbody>
                 </tgroup>
             </table>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.examples">
-            <title>Beispiele</title>
+        <section xml:id="zend.cache.frontends.page.examples"><info><title>Beispiele</title></info>
+            
 
             <para>
                 Die Verwendung von <classname>Zend_Cache_Frontend_Page</classname> ist wirklich
@@ -991,10 +989,10 @@ $cache->start();
 // [...] das Ende der Bootstrap Datei
 // diese Zeilen werden nicht ausgeführt, wenn der Cache ausgegeben wurde
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.cache.frontends.page.cancel">
-            <title>Die spezielle cancel Methode</title>
+        <section xml:id="zend.cache.frontends.page.cancel"><info><title>Die spezielle cancel Methode</title></info>
+            
 
             <para>
                 Aus Designgründen, kann es in einigen Fällen (zum Beispiel bei Verwendung von nicht
@@ -1017,14 +1015,14 @@ if ($someTest) {
 
 // [...]
 ]]></programlisting>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.cache.frontends.capture">
-        <title>Zend_Cache_Frontend_Capture</title>
+    <section xml:id="zend.cache.frontends.capture"><info><title>Zend_Cache_Frontend_Capture</title></info>
+        
 
-        <sect3 id="zend.cache.frontends.capture.introduction">
-            <title>Einführung</title>
+        <section xml:id="zend.cache.frontends.capture.introduction"><info><title>Einführung</title></info>
+            
 
             <para>
                 <classname>Zend_Cache_Frontend_Capture</classname> ist wie
@@ -1053,12 +1051,12 @@ if ($someTest) {
                     den der Dispatcher verwendet, deaktiviert sein indem die
                     <methodname>setParam()</methodname> Methode von
                     <classname>Zend_Controller_Front</classname> verwendet wird. Zum Beispiel
-                    <command>$front->setParam('disableOutputBuffering', true)</command> oder durch
+                    <command>$front-&gt;setParam('disableOutputBuffering', true)</command> oder durch
                     Hinzufügen von "resources.frontcontroller.params.disableOutputBuffering = true"
                     zum eigenen Konfigurationsdatei der Bootstrap (<acronym>INI</acronym>
                     angenommen) wenn <classname>Zend_Application</classname> verwendet wird.
                 </para>
             </note>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

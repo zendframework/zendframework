@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20807 -->
-<sect2 id="zend.test.phpunit.assertions">
-    <title>アサーション</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.assertions"><info><title>アサーション</title></info>
+    
 
     <para>
         アサーションは、ユニットテストの肝となるものです。
@@ -12,8 +12,8 @@
         <acronym>MVC</acronym> アプリケーションやコントローラのテストをよりシンプルにできるようにしています。
     </para>
 
-    <sect3 id="zend.test.phpunit.assertions.query">
-        <title>CSS セレクタアサーション</title>
+    <section xml:id="zend.test.phpunit.assertions.query"><info><title>CSS セレクタアサーション</title></info>
+        
 
         <para>
             <acronym>CSS</acronym> セレクタを使うと、
@@ -25,13 +25,11 @@
         </para>
 
         <para>
-            この機能は <link
-                linkend="zend.dom.query">Zend_Dom_Query</link>
+            この機能は <link linkend="zend.dom.query">Zend_Dom_Query</link>
             を用いて実装されており、'Query' アサーションに統合されています。
             個々のアサーションの最初の引数に <acronym>CSS</acronym> セレクタを指定し、
             アサーションの型に応じてオプション引数やエラーメッセージも指定します。
-            <acronym>CSS</acronym> セレクタの書き方の規則については、<link
-                linkend="zend.dom.query.operation">Zend_Dom_Query
+            <acronym>CSS</acronym> セレクタの書き方の規則については、<link linkend="zend.dom.query.operation">Zend_Dom_Query
                 の操作方法の章</link>
             を参照ください。Query アサーションには次のようなものがあります。
         </para>
@@ -109,15 +107,14 @@
             (min および max については対応するメソッドは存在しませんが、
             それは自明なことだからです)。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.xpath">
-        <title>XPath アサーション</title>
+    <section xml:id="zend.test.phpunit.assertions.xpath"><info><title>XPath アサーション</title></info>
+        
 
         <para>
             <acronym>CSS</acronym> セレクタよりも XPath のほうが使いやすいという開発者もいることでしょう。
-            そこで、 <link
-                linkend="zend.test.phpunit.assertions.query">Query
+            そこで、 <link linkend="zend.test.phpunit.assertions.query">Query
                 アサーション</link>
             のすべてのメソッドに対して、同等の動作をする XPath
             版のメソッドを用意しています。
@@ -155,10 +152,10 @@
                 <methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname>
             </para></listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.redirect">
-        <title>リダイレクトアサーション</title>
+    <section xml:id="zend.test.phpunit.assertions.redirect"><info><title>リダイレクトアサーション</title></info>
+        
 
         <para>
             アクションがリダイレクトを行うこともよくあります。
@@ -204,10 +201,10 @@
                 で指定した正規表現にマッチしない」のいずれかであることを表明します。
             </para></listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.header">
-        <title>レスポンスヘッダアサーション</title>
+    <section xml:id="zend.test.phpunit.assertions.header"><info><title>レスポンスヘッダアサーション</title></info>
+        
 
         <para>
             リダイレクトヘッダのチェックだけでなく、
@@ -247,10 +244,10 @@
             さらに、上であげたそれぞれに対する否定のアサーションを行う
             'Not' 系のメソッドが存在します。
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.request">
-        <title>リクエストアサーション</title>
+    <section xml:id="zend.test.phpunit.assertions.request"><info><title>リクエストアサーション</title></info>
+        
 
         <para>
             最後に実行されたアクションやコントローラ、
@@ -284,8 +281,5 @@
             そして、それぞれについて否定を表す
             'Not' 系のメソッドが存在します。
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

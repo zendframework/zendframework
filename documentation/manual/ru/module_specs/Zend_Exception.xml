@@ -1,14 +1,15 @@
-<sect1 id="zend.exception.using">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.exception.using"><info><title>Использование исключений</title></info>
 
-    <title>Использование исключений</title>
+    
 
     <para>
         Все исключения, бросаемые классами Zend Framework, должны быть
         наследниками основного класса Zend_Exception.
     </para>
 
-    <example id="zend.exception.using.example">
-        <title>Пример отлова исключения</title>
+    <example xml:id="zend.exception.using.example"><info><title>Пример отлова исключения</title></info>
+        
         <programlisting language="php"><![CDATA[
 try {
     Zend_Loader::loadClass('nonexistantclass');
@@ -17,8 +18,8 @@ try {
     echo "Message: " . $e->getMessage() . "\n";
     // other code to recover from the failure.
 }
-]]>
-        </programlisting>
+
+        ]]></programlisting>
     </example>
 
     <para>
@@ -28,7 +29,4 @@ try {
         соответсвующей компоненте Zend Framework.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

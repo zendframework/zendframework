@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20063 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.queue.custom">
-    <title>Anpassen von Zend_Queue</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.queue.custom"><info><title>Anpassen von Zend_Queue</title></info>
+    
 
-    <sect2 id="zend.queue.custom.adapter">
-        <title>Erstellung eigener Adapter</title>
+    <section xml:id="zend.queue.custom.adapter"><info><title>Erstellung eigener Adapter</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> akzeptiert jeden Adapter der
@@ -79,10 +77,10 @@ $options = array(
 );
 $queue = new Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom.message">
-        <title>Eine eigene Nachrichtenklasse erstellen</title>
+    <section xml:id="zend.queue.custom.message"><info><title>Eine eigene Nachrichtenklasse erstellen</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> akzeptiert auch eigene Nachrichten Klassen. Unsere
@@ -100,10 +98,10 @@ class Zend_Queue_Message
             Man kann die bestehende Nachrichten Klasse erweitern. Siehe den Beispielcode in
             <filename>tests/Zend/Queue/Custom/Message.php</filename>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom-iterator">
-        <title>Erstellen einer eigenen Nachrichten Iterator Klasse</title>
+    <section xml:id="zend.queue.custom-iterator"><info><title>Erstellen einer eigenen Nachrichten Iterator Klasse</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> akzeptiert auch eine eigene Nachrichten Iterator
@@ -118,10 +116,10 @@ class Zend_Queue_Message
             Siehe den Beispiel Dateinamen in
             <filename>tests/Zend/Queue/Custom/Messages.php</filename>.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.queue.custom.queue">
-        <title>Erstellen einer eigenen Queue Klasse</title>
+    <section xml:id="zend.queue.custom.queue"><info><title>Erstellen einer eigenen Queue Klasse</title></info>
+        
 
         <para>
             <classname>Zend_Queue</classname> kann auch sehr einfach überladen werden.
@@ -131,5 +129,5 @@ class Zend_Queue_Message
             Siehe den Beispiel Dateinamen in
             <filename>tests/Zend/Queue/Custom/Queue.php</filename>.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,6 +1,7 @@
-<sect1 id="zend.validate.validator_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>Reťazenie validátorov</title></info>
 
-    <title>Reťazenie validátorov</title>
+    
 
     <para>
         Často je potrebné aplikovať viac typov validácie na hodnotu v istom poradí.
@@ -63,7 +64,4 @@ $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         použitý v zreťazení validátorov.
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

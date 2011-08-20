@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.quickstart">
-    <title>Zend_Controller - Démarrage rapide</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.quickstart"><info><title>Zend_Controller - Démarrage rapide</title></info>
+    
 
-    <sect2 id="zend.controller.quickstart.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.quickstart.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             <classname>Zend_Controller</classname> est le coeur du système <acronym>MVC</acronym> de Zend
             Framework. <acronym>MVC</acronym> équivaut à
-            <ulink url="http://fr.wikipedia.org/wiki/Mod%C3%A8le-Vue-Contr%C3%B4leur">
-            Modèle-Vue-Contrôleur</ulink>et est un motif de conception ("design pattern") visant à
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://fr.wikipedia.org/wiki/Mod%C3%A8le-Vue-Contr%C3%B4leur">
+            Modèle-Vue-Contrôleur</link>et est un motif de conception ("design pattern") visant à
             séparer la logique d'application de la logique d'affichage.
             <classname>Zend_Controller_Front</classname> implémente un modèle de
-            <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">contrôleur
-            frontal ("Front Controller")</ulink>, dans lequel toutes les demandes sont arrêtées par
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.martinfowler.com/eaaCatalog/frontController.html">contrôleur
+            frontal ("Front Controller")</link>, dans lequel toutes les demandes sont arrêtées par
             le contrôleur frontal et distribuées vers différents contrôleurs d'action ("Action
             Controller") basés sur l'URL demandé.
         </para>
@@ -28,22 +26,22 @@
             plugins ou d'aides d'action afin d'utiliser ou d'augmenter les fonctionnalités du
             système.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.quickstart.go">
-        <title>Démarrage rapide</title>
+    <section xml:id="zend.controller.quickstart.go"><info><title>Démarrage rapide</title></info>
+        
 
         <para>
             Si vous avez besoin d'informations plus détaillées, lisez les sections suivantes.
             Si vous voulez juste démarrer rapidement, lisez ce qui suit.
         </para>
 
-        <sect3 id="zend.controller.quickstart.go.directory">
-            <title>Créer votre disposition de système de fichiers</title>
+        <section xml:id="zend.controller.quickstart.go.directory"><info><title>Créer votre disposition de système de fichiers</title></info>
+            
 
             <para>
                 La première étape est de créer votre disposition de système de fichiers. La
-                disposition typique est la suivante&#160;:
+                disposition typique est la suivante :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -61,21 +59,21 @@ html/
     .htaccess
     index.php
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.docroot">
-            <title>Régler votre document root</title>
+        <section xml:id="zend.controller.quickstart.go.docroot"><info><title>Régler votre document root</title></info>
+            
 
             <para>
                 Dans votre serveur Web, faîtes pointer votre "document root" vers le dossier
                 <code>html</code> du système de fichiers ci-dessus.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.rewrite">
-            <title>Créer vos règles de réécriture</title>
+        <section xml:id="zend.controller.quickstart.go.rewrite"><info><title>Créer vos règles de réécriture</title></info>
+            
 
-            <para>Éditez le fichier <code>html/.htaccess</code> afin de lire ceci&#160;:</para>
+            <para>Éditez le fichier <code>html/.htaccess</code> afin de lire ceci :</para>
 
             <programlisting language="php"><![CDATA[
 RewriteEngine On
@@ -86,21 +84,20 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-            <note>
-                <title>Connaître mod_rewrite</title>
+            <note><info><title>Connaître mod_rewrite</title></info>
+                
 
                 <para>
                     Les règles de réécriture ci-dessus autorisent l'accès à tous fichiers sous la
                     racine de votre hôte virtuel. Si vous avez des fichiers que vous ne souhaitez
                     pas exposer, vous pouvez souhaiter restreindre ces règles. Allez sur le site
-                    d'Apache <ulink
-                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">pour en
-                        apprendre davantage concernant mod_rewrite</ulink>.
+                    d'Apache <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">pour en
+                        apprendre davantage concernant mod_rewrite</link>.
                 </para>
             </note>
 
             <para>
-                Si vous avez <acronym>IIS</acronym> 7.0, utilisez ceci pour votre configuration de réécriture&#160;:
+                Si vous avez <acronym>IIS</acronym> 7.0, utilisez ceci pour votre configuration de réécriture :
             </para>
 
             <programlisting language="xml"><![CDATA[
@@ -145,16 +142,16 @@ RewriteRule ^.*$ index.php [NC,L]
                     routeur</link>.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.bootstrap">
-            <title>Créer votre fichier d'amorçage (bootstrap)</title>
+        <section xml:id="zend.controller.quickstart.go.bootstrap"><info><title>Créer votre fichier d'amorçage (bootstrap)</title></info>
+            
 
             <para>
                 Le fichier d'amorçage est la page vers laquelle toutes les demandes sont
                 dirigées -- <code>html/index.php</code> dans ce cas-ci. Ouvrez
                 <code>html/index.php</code> dans l'éditeur de votre choix et ajouter ce qui
-                suit&#160;:
+                suit :
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -166,10 +163,10 @@ Zend_Controller_Front::run('/chemin/vers/application/controllers');
                 demandes vers les contrôleurs d'action.
             </para>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.controller">
-            <title>Créer votre contrôleur d'action par défaut</title>
+        <section xml:id="zend.controller.quickstart.go.controller"><info><title>Créer votre contrôleur d'action par défaut</title></info>
+            
 
             <para>
                 Avant de discuter des contrôleurs d'action, vous devez d'abord comprendre
@@ -236,10 +233,10 @@ class IndexController extends Zend_Controller_Action
                 <code>views/scripts/</code>. Ainsi le modèle rendu sera trouvé dans
                 <code>application/views/scripts/index/index.phtml</code>.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.view">
-            <title>Créer votre script de vue</title>
+        <section xml:id="zend.controller.quickstart.go.view"><info><title>Créer votre script de vue</title></info>
+            
 
             <para>
                 Comme mentionné
@@ -265,10 +262,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.errorhandler">
-            <title>Créer votre contrôleur d'erreur</title>
+        <section xml:id="zend.controller.quickstart.go.errorhandler"><info><title>Créer votre contrôleur d'erreur</title></info>
+            
 
             <para>
                 Par défaut,
@@ -311,10 +308,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 </body>
 </html>
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.controller.quickstart.go.finish">
-            <title>Voir le site !</title>
+        <section xml:id="zend.controller.quickstart.go.finish"><info><title>Voir le site !</title></info>
+            
 
             <para>
                 Avec votre premier contrôleur et votre première vue, vous pouvez maintenant
@@ -339,6 +336,6 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 Vous êtes maintenant prêt à créer de nouveaux contrôleurs et de nouvelles
                 méthodes d'action. Félicitations !
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

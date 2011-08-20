@@ -1,5 +1,6 @@
-<sect1 id="zend.config.introduction">
-    <title>Introductie</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.config.introduction"><info><title>Introductie</title></info>
+    
     <para>
         <code>Zend_Config</code> is ontworpen om de toegang tot en het gebruik van configuratiedata te
         vereenvoudigen voor webapplicaties. Het levert een op geneste object eigenschap gebaseerde gebruikers interface
@@ -9,8 +10,8 @@
         opgeslagen via <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> en
         <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
     </para>
-     <example id="zend.config.introduction.example.using">
-        <title>Zend_Config gebruiken zonder hulpklasse</title>
+     <example xml:id="zend.config.introduction.example.using"><info><title>Zend_Config gebruiken zonder hulpklasse</title></info>
+        
         <para>
             Normaal gesproken wordt er verondersteld dat gebruikers één van de hulpklassen als
             <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> of
@@ -60,10 +61,10 @@ $db = Zend_Db::factory($config->database);]]></programlisting>
         niet bestaat. Als voorbeeld:
     </para>
     <programlisting role="php"><![CDATA[<?php
-$host = $config->database->get('host', 'localhost');]]>
-    </programlisting>
-    <example id="zend.config.introduction.example.file.php">
-        <title>Zend_Config gebruiken met een PHP configuratie bestand</title>
+$host = $config->database->get('host', 'localhost');
+    ]]></programlisting>
+    <example xml:id="zend.config.introduction.example.file.php"><info><title>Zend_Config gebruiken met een PHP configuratie bestand</title></info>
+        
         <para>
             Het is vaak wenselijk om een puur op PHP gebaseerd configuratie bestand te gebruiken.
             De volgende code illustreerd hoe dat bereikt kan worden:
@@ -90,7 +91,4 @@ $config = new Zend_Config(require 'config.php');
 // Geeft een configuratie waarde weer (resulteert in 'www.example.com')
 echo $config->webhost;]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

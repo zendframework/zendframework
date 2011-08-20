@@ -1,10 +1,13 @@
-<sect1 id="zend.json.introduction">
-    <title>Wprowadzenie</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.json.introduction"><info><title>Wprowadzenie</title></info>
+    
     <para>
         <code>Zend_Json</code> dostarcza wygodne metody serializowania danych
         PHP do formatu JSON i dekodowania z formatu JSON do PHP. Aby dowiedzieć
-        się więcej o JSON <ulink url="http://www.json.org/">odwiedź stronę
-        projektu JSON</ulink>.
+        się więcej o JSON <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.json.org/">odwiedź stronę
+        projektu JSON</link>.
     </para>
     <para>
         Format JSON, JavaScript Object Notation, może być użyty do wymiany danych
@@ -23,7 +26,4 @@
         aplikacji w przeglądarce internetowej. Daje ona funkcjonalność,
         która powoduje ułatwienie technik przetwarzania danych w aplikacji.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

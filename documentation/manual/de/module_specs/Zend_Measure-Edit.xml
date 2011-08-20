@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22756 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.measure.edit">
-    <title>Manipulation von Maßeinheiten</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.measure.edit"><info><title>Manipulation von Maßeinheiten</title></info>
+    
 
     <para>
         Analysieren und normalisieren von Eingaben kombiniert mit der Ausgabe in lokalisierter
@@ -49,8 +47,8 @@
         </listitem>
     </itemizedlist>
 
-    <sect2 id="zend.measure.edit.convert">
-        <title>Konvertieren</title>
+    <section xml:id="zend.measure.edit.convert"><info><title>Konvertieren</title></info>
+        
 
         <para>
             Das warscheinlich wichtigste Feature ist die Konvertierung in verschiedene Maßeinheiten.
@@ -67,8 +65,8 @@
             werden. Die Standardgenauigkeit ist '2'.
         </para>
 
-        <example id="zend.measure.edit.convert.example-1">
-            <title>Konvertieren</title>
+        <example xml:id="zend.measure.edit.convert.example-1"><info><title>Konvertieren</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
@@ -84,10 +82,10 @@ print "Tonne:".$unit->convertTo(Zend_Measure_Weight::TON);
 print "Tonne:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.add">
-        <title>Addieren und Subtrahieren</title>
+    <section xml:id="zend.measure.edit.add"><info><title>Addieren und Subtrahieren</title></info>
+        
 
         <para>
             Maßeinheiten können miteinander durch <methodname>add()</methodname> addiert und durch
@@ -98,8 +96,8 @@ print "Tonne:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         </para>
 
         <para>
-            <example id="zend.measure.edit.add.example-1">
-                <title>Werte addieren</title>
+            <example xml:id="zend.measure.edit.add.example-1"><info><title>Werte addieren</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Objekte definieren
@@ -114,20 +112,19 @@ echo $sum; // Ausgabe "300 cm"
             </example>
         </para>
 
-        <note>
-            <title>Automatische Konvertierung</title>
+        <note><info><title>Automatische Konvertierung</title></info>
+            
 
             <para>
                 Beim Addieren eines Objektes zu einem anderen wird dieses automatisch in die
-                richtige Einheit konvertiert. Es ist nicht notwendig <link
-                    linkend="zend.measure.edit.convert"><methodname>convertTo()</methodname></link>
+                richtige Einheit konvertiert. Es ist nicht notwendig <link linkend="zend.measure.edit.convert"><methodname>convertTo()</methodname></link>
                 aufzurufen bevor unterschiedliche Einheiten addiert werden.
             </para>
         </note>
 
         <para>
-            <example id="zend.measure.edit.add.example-2">
-                <title>Subtrahieren</title>
+            <example xml:id="zend.measure.edit.add.example-2"><info><title>Subtrahieren</title></info>
+                
 
                 <para>
                     Das Subtrahieren von Maßeinheiten funktioniert genauso wie das Addieren.
@@ -145,10 +142,10 @@ echo $sum;
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.equal">
-        <title>Identität Vergleichen</title>
+    <section xml:id="zend.measure.edit.equal"><info><title>Identität Vergleichen</title></info>
+        
 
         <para>
             Maßeinheiten können genauso verglichen werden, aber ohne automatische Konvertierung. Das
@@ -157,8 +154,8 @@ echo $sum;
         </para>
 
         <para>
-            <example id="zend.measure.edit.equal.example-1">
-                <title>Unterschiedliche Maßeinheiten</title>
+            <example xml:id="zend.measure.edit.equal.example-1"><info><title>Unterschiedliche Maßeinheiten</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Maßeinheiten definieren
@@ -173,8 +170,8 @@ if ($unit->equals($unit2)) {
 ]]></programlisting>
             </example>
 
-            <example id="zend.measure.edit.equal.example-2">
-                <title>Identische Maßeinheiten</title>
+            <example xml:id="zend.measure.edit.equal.example-2"><info><title>Identische Maßeinheiten</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 // Maßeinheiten definieren
@@ -191,10 +188,10 @@ if ($unit->equals($unit2)) {
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.compare">
-        <title>Werte Vergleichen</title>
+    <section xml:id="zend.measure.edit.compare"><info><title>Werte Vergleichen</title></info>
+        
 
         <para>
             Um herauszufinden ob eine Maßeinheite kleiner oder größer als eine andere ist kann
@@ -204,8 +201,8 @@ if ($unit->equals($unit2)) {
         </para>
 
         <para>
-            <example id="zend.measure.edit.compare.example-1">
-                <title>Differenz</title>
+            <example xml:id="zend.measure.edit.compare.example-1"><info><title>Differenz</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
@@ -218,10 +215,10 @@ print "Größer:".$unit3->compare($unit2);
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.changevalue">
-        <title>Werte per Hand ändern</title>
+    <section xml:id="zend.measure.edit.changevalue"><info><title>Werte per Hand ändern</title></info>
+        
 
         <para>
             Um den Wert einer Maßeinheit explizit zu Ändern, kann
@@ -230,8 +227,8 @@ print "Größer:".$unit3->compare($unit2);
         </para>
 
         <para>
-            <example id="zend.measure.edit.changevalue.example-1">
-                <title>Verändern eines Wertes</title>
+            <example xml:id="zend.measure.edit.changevalue.example-1"><info><title>Verändern eines Wertes</title></info>
+                
 
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
@@ -248,18 +245,18 @@ echo $unit;
 ]]></programlisting>
             </example>
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.measure.edit.changetype">
-        <title>Typ per Hand ändern</title>
+    <section xml:id="zend.measure.edit.changetype"><info><title>Typ per Hand ändern</title></info>
+        
 
         <para>
             Um den Typ einer Maßeinheit ohne den Wert zu verändern kann
             <methodname>setType()</methodname> verwendet werden.
         </para>
 
-        <example id="zend.measure.edit.changetype.example-1">
-            <title>Verändern des Typs</title>
+        <example xml:id="zend.measure.edit.changetype.example-1"><info><title>Verändern des Typs</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
@@ -269,5 +266,5 @@ $unit->setType(Zend_Measure_Length::KILOMETER);
 echo $unit; // Ausgabe "1000 km"
 ]]></programlisting>
         </example>
-    </sect2>
-</sect1>
+    </section>
+</section>

@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 21825 -->
-<sect3 id="zend.view.helpers.initial.doctype">
-    <title>Doctype ヘルパー</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.doctype"><info><title>Doctype ヘルパー</title></info>
+    
 
     <para>
         正しい形式の <acronym>HTML</acronym> ドキュメントおよび <acronym>XHTML</acronym> ドキュメントには、
@@ -40,8 +38,8 @@
         の具象実装です。
     </para>
 
-    <example id="zend.view.helpers.initial.doctype.basicusage">
-        <title>Doctype ヘルパーの基本的な使用法</title>
+    <example xml:id="zend.view.helpers.initial.doctype.basicusage"><info><title>Doctype ヘルパーの基本的な使用法</title></info>
+        
 
         <para>
             doctype は、いつでも指定できます。
@@ -65,8 +63,8 @@ $doctypeHelper->doctype('XHTML1_STRICT');
 
     </example>
 
-    <example id="zend.view.helpers.initial.doctype.retrieving">
-        <title>Doctype の取得</title>
+    <example xml:id="zend.view.helpers.initial.doctype.retrieving"><info><title>Doctype の取得</title></info>
+        
 
         <para>
             doctype を知りたくなったら、オブジェクトの
@@ -102,7 +100,4 @@ if ($view->doctype()->isHtml5()) {
 }
 ]]></programlisting>
     </example>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

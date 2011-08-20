@@ -1,13 +1,14 @@
-<sect1 id="zend.view.scripts">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.scripts"><info><title>视图脚本</title></info>
 
-    <title>视图脚本</title>
+    
 
     <para>
         Controller完成变量赋值和调用render()之后，Zend_View就会调用视图脚本并在Zend_View的实例内部执行。因此，在你的视图脚本内，$this指向Zend_View的实例。
     </para>
 
     <para>
-        从控制器传递到视图的变量以Zend_View实例属性的形式来调用。例如，控制器有一个变量"something" ，那么视图代码中就要用$this->something来调用。这样的作法可以让你分清哪些是来自Zend_View实例的变量，哪些是视图自身的变量。
+        从控制器传递到视图的变量以Zend_View实例属性的形式来调用。例如，控制器有一个变量"something" ，那么视图代码中就要用$this-&gt;something来调用。这样的作法可以让你分清哪些是来自Zend_View实例的变量，哪些是视图自身的变量。
     </para>
 
     <para>
@@ -36,12 +37,12 @@
 
     <p>There are no books to display.</p>
 
-<?php endif; ]]>
-    </programlisting>
+<?php endif; 
+    ]]></programlisting>
 
-    <sect2 id="zend.view.scripts.escaping">
+    <section xml:id="zend.view.scripts.escaping"><info><title>转义输出（Escaping Output）</title></info>
 
-        <title>转义输出（Escaping Output）</title>
+        
 
         <para>
             View脚本的最重要的工作之一是保证输出的内容是合适的，比如需要避免跨站攻击漏洞(XSS)。除非你已经使用一个函数、类方法或助手类（helper）来转义内容，你需要在输出时对变量进行转义。
@@ -57,8 +58,8 @@ echo $this->variable;
 
 // 好的做法：
 echo $this->escape($this->variable);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
             默认地，escape()方法使用PHP函数htmlspecialchars()来过滤，但你也可以通过setEscape()方法来在Controller内告诉Zend_View需要怎么过滤。
@@ -80,25 +81,25 @@ $view->setEscape(array($obj, 'methodName'));
 
 //最后输出你的视图
 echo $view->render(...);
-]]>
-        </programlisting>
+
+        ]]></programlisting>
 
         <para>
 
             设定的转义函数会将需要转义的变量作为其第一个参数，其它参数是可选的。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.view.scripts.templates">
-        <title>使用模板系统</title>
+    <section xml:id="zend.view.scripts.templates"><info><title>使用模板系统</title></info>
+        
 
         <para>
             尽管许多开发者觉得PHP本身就是一个强大的模板系统，但对模板设计师来说，使用PHP标签过于复杂。Zend_View提供了两套机制来同时满足这两种要求，一种是直接通过通过视图脚本，另一种是实现Zend_View_Interface接口。
         </para>
 
-        <sect3 id="zend.view.scripts.templates.scripts">
-            <title>使用View脚本的模板系统</title>
+        <section xml:id="zend.view.scripts.templates.scripts"><info><title>使用View脚本的模板系统</title></info>
+            
 
             <para>
                               View脚本可能要被用来初始化和操作一个其它模板对象的实例，例如PHPLIB风格的模板。这时View脚本可能是这样的：
@@ -148,13 +149,13 @@ if ($this->books) {
     </tr>
 
 <!-- nobooks.tpl -->
-<p>There are no books to display.</p>]]>>
-           </programlisting>
+<p>There are no books to display.</p>>
+           ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.view.scripts.templates.interface">
-            <title>通过Zend_View_Interface接口使用模板系统</title>
+        <section xml:id="zend.view.scripts.templates.interface"><info><title>通过Zend_View_Interface接口使用模板系统</title></info>
+            
 
             <para>
 
@@ -218,8 +219,8 @@ public function clearVars();
  * Render the template named $name
  * 输出参数$name指定的某个模板
  */
-public function render($name);]]>
-            </programlisting>
+public function render($name);
+            ]]></programlisting>
 
             <para>
                使用这个接口，把第三方的模板系统封装成Zend_View兼容的类是相当容易的。例如，下面是封装Smarty的示例代码：
@@ -408,8 +409,8 @@ class Zend_View_Smarty implements Zend_View_Interface
     {
         return $this->_smarty->fetch($name);
     }
-}]]>
-            </programlisting>
+}
+            ]]></programlisting>
 
             <para>
                 在这个示例中，实例化<code>Zend_View_Smarty</code>而不是<code>Zend_View</code>，然后就像使用 <code>Zend_View</code>一样地使用它。
@@ -420,13 +421,10 @@ $view = new Zend_View_Smarty();
 $view->setScriptPath('/path/to/templates');
 $view->book = 'Zend PHP 5 Certification Study Guide';
 $view->author = 'Davey Shafik and Ben Ramsey'
-$rendered = $view->render('bookinfo.tpl');]]>
-            </programlisting>
+$rendered = $view->render('bookinfo.tpl');
+            ]]></programlisting>
 
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

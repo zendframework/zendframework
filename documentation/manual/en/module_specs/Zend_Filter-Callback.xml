@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.callback">
-    <title>Callback</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.callback"><info><title>Callback</title></info>
+    
 
     <para>
         This filter allows you to use own methods in conjunction with
@@ -9,8 +8,8 @@
         have a method which does the job.
     </para>
 
-    <sect3 id="zend.filter.set.callback.options">
-        <title>Supported options for Zend_Filter_Callback</title>
+    <section xml:id="zend.filter.set.callback.options"><info><title>Supported options for Zend_Filter_Callback</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Filter_Callback</classname>:
@@ -31,13 +30,13 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.callback.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.filter.set.callback.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
-            The usage of this filter is quite simple. Let&apos;s expect we want to create a filter which
+            The usage of this filter is quite simple. Let's expect we want to create a filter which
             reverses a string.
         </para>
 
@@ -71,18 +70,18 @@ print $filter->filter('Hello!');
             another callback use <methodname>setCallback()</methodname>.
         </para>
 
-        <note>
-            <title>Possible exceptions</title>
+        <note><info><title>Possible exceptions</title></info>
+            
 
             <para>
                 You should note that defining a callback method which can not be called will raise
                 an exception.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.filter.set.callback.parameters">
-        <title>Default parameters within a callback</title>
+    <section xml:id="zend.filter.set.callback.parameters"><info><title>Default parameters within a callback</title></info>
+        
 
         <para>
             It is also possible to define default parameters, which are given to the called method
@@ -107,5 +106,5 @@ $filter->filter(array('value' => 'Hello'));
         <programlisting language="php"><![CDATA[
 $value = MyMethod('Hello', 'param1', 'param2');
 ]]></programlisting>
-    </sect3>
-</sect2>
+    </section>
+</section>

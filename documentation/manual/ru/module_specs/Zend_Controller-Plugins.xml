@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Плагины</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins"><info><title>Плагины</title></info>
+    
 
-    <sect2 id="zend.controller.plugins.introduction">
-        <title>Введение</title>
+    <section xml:id="zend.controller.plugins.introduction"><info><title>Введение</title></info>
+        
 
         <para>
             Архитектура контроллеров включает в себя систему плагинов, которая
@@ -84,10 +83,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.writing">
-        <title>Написание плагинов</title>
+    <section xml:id="zend.controller.plugins.writing"><info><title>Написание плагинов</title></info>
+        
 
         <para>
             Для того, чтобы написать класс плагина, просто включите и расширьте
@@ -116,10 +115,10 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             <code>getRequest()</code> и <code>getResponse()</code>,
             соответственно.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.using">
-        <title>Использование плагинов</title>
+    <section xml:id="zend.controller.plugins.using"><info><title>Использование плагинов</title></info>
+        
 
         <para>
             Классы плагинов регистрируются через
@@ -198,10 +197,10 @@ $front->dispatch();
                 этот метод не будет запущен.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.manipulating">
-        <title>Извлечение и работа с плагинами</title>
+    <section xml:id="zend.controller.plugins.manipulating"><info><title>Извлечение и работа с плагинами</title></info>
+        
 
         <para>
             Иногда может понадобиться отменить регистрацию плагина или извлечь
@@ -227,20 +226,17 @@ $front->dispatch();
                 передаете имя класса, то будут удалены все плагины этого класса.
             </para></listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.standard">
-        <title>Плагины, включенные в стандартную поставку</title>
+    <section xml:id="zend.controller.plugins.standard"><info><title>Плагины, включенные в стандартную поставку</title></info>
+        
 
         <para>
             Zend Framework в его стандартной поставке включает в себя плагин для
             обработки ошибок.
         </para>
 
-        <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
-        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ErrorHandler.xml"/>
+    </section>
+</section>

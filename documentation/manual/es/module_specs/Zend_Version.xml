@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.version.reading">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.version.reading"><info><title>Obteniendo la versión de Zend Framework Version</title></info>
 
-    <title>Obteniendo la versión de Zend Framework Version</title>
+    
 
     <para>
         <classname>Zend_Version</classname> proporciona una  constante de clase
@@ -14,8 +12,7 @@
 
     <para>
         El método estático <methodname>Zend_Version::compareVersion($version)</methodname>
-        esta basada en la función <ulink
-            url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>
+        esta basada en la función <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/version_compare"><methodname>version_compare()</methodname></link>
             de <acronym>PHP</acronym>.
         Este método devuelve -1 si la versíón especificada es mayor
         que la versión instalada de Zend Framework, 0 si son iguales
@@ -23,15 +20,12 @@
         la versión de la instalación de Zend Framework.
     </para>
 
-    <example id="zend.version.reading.example">
-        <title>Ejemplo de uso del método compareVersion() </title>
+    <example xml:id="zend.version.reading.example"><info><title>Ejemplo de uso del método compareVersion() </title></info>
+        
         <programlisting language="php"><![CDATA[
 // returns -1, 0 or 1
 $cmp = Zend_Version::compareVersion('2.0.0');
 ]]></programlisting>
     </example>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

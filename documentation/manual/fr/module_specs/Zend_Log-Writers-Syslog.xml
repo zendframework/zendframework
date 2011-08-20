@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17880 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.syslog">
-    <title>Ecrire dans lee journal du système</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.syslog"><info><title>Ecrire dans lee journal du système</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Syslog</classname> écrit les rapports de log dans le
@@ -43,7 +41,7 @@ $writer->setApplicationName('BarBaz');
         Pour spécifier le type d'application, utilisez le constructeur ou l'accesseur.
         Cette option peut être l'une des constantes utilisées par
         <methodname>openlog()</methodname>, définies dans la page
-        <ulink url="http://php.net/openlog">du manuel de openlog()</ulink>.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/openlog">du manuel de openlog()</link>.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -59,4 +57,4 @@ $writer->setFacility(LOG_USER);
         <classname>Zend_Log</classname>, elles vont être converties en leurs valeurs
         par <methodname>syslog()</methodname>.
     </para>
-</sect2>
+</section>

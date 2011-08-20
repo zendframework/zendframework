@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.tag.cloud">
-    <title>Zend_Tag_Cloud</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.tag.cloud"><info><title>Zend_Tag_Cloud</title></info>
+    
 
     <para>
         <classname>Zend_Tag_Cloud</classname> is the rendering part of
@@ -76,8 +75,8 @@
         </listitem>
     </itemizedlist>
 
-    <example id="zend.tag.cloud.example.using">
-        <title>Using Zend_Tag_Cloud</title>
+    <example xml:id="zend.tag.cloud.example.using"><info><title>Using Zend_Tag_Cloud</title></info>
+        
 
         <para>
             This example illustrates a basic example of how to create a tag
@@ -107,8 +106,8 @@ echo $cloud;
         </para>
     </example>
 
-    <sect2 id="zend.tag.cloud.decorators">
-        <title>Decorators</title>
+    <section xml:id="zend.tag.cloud.decorators"><info><title>Decorators</title></info>
+        
 
         <para>
             <classname>Zend_Tag_Cloud</classname> requires two types of decorators to be
@@ -120,8 +119,8 @@ echo $cloud;
             to the weight values of the tags assigned to them.
         </para>
 
-        <sect3 id="zend.tag.cloud.decorators.htmltag">
-            <title>HTML Tag decorator</title>
+        <section xml:id="zend.tag.cloud.decorators.htmltag"><info><title>HTML Tag decorator</title></info>
+            
 
             <para>
                 The <acronym>HTML</acronym> tag decorator will by default render every tag in an
@@ -129,8 +128,8 @@ echo $cloud;
                 fixed and cannot be changed, but the surounding element(s) can.
             </para>
 
-            <note>
-                <title>URL parameter</title>
+            <note><info><title>URL parameter</title></info>
+                
 
                 <para>
                     As the <acronym>HTML</acronym> tag decorator always surounds the tag title with
@@ -152,7 +151,7 @@ echo $cloud;
                     <para>
                         <property>fontSizeUnit</property>: defines the font-size unit
                         used for all font-sizes. The possible values are:
-                        em, ex, px, in, cm, mm, pt, pc and &#37;.
+                        em, ex, px, in, cm, mm, pt, pc and %.
                     </para>
                 </listitem>
 
@@ -188,10 +187,10 @@ echo $cloud;
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.tag.cloud.decorators.htmlcloud">
-            <title>HTML Cloud decorator</title>
+        <section xml:id="zend.tag.cloud.decorators.htmlcloud"><info><title>HTML Cloud decorator</title></info>
+            
 
             <para>
                 The <acronym>HTML</acronym> cloud decorator will suround the <acronym>HTML</acronym>
@@ -218,6 +217,6 @@ echo $cloud;
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22748 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.memory.overview">
-    <title>Übersicht</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.memory.overview"><info><title>Übersicht</title></info>
+    
 
-    <sect2 id="zend.memory.introduction">
-        <title>Einführung</title>
+    <section xml:id="zend.memory.introduction"><info><title>Einführung</title></info>
+        
 
         <para>
             Die <classname>Zend_Memory</classname> Komponente ist dafür gedacht Daten in
@@ -33,8 +31,8 @@
             als Speicheranbieter.
         </para>
 
-        <example id="zend.memory.introduction.example-1">
-            <title>Verwenden der Zend_Memory Komponente</title>
+        <example xml:id="zend.memory.introduction.example-1"><info><title>Verwenden der Zend_Memory Komponente</title></info>
+            
 
             <para>
                 <methodname>Zend_Memory::factory()</methodname> instantiiert das Speichermanager
@@ -66,10 +64,10 @@ $loadedFiles[$index2]->value = $newValue;
 $loadedFiles[$index3]->value[$charIndex] = '_';
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.memory.theory-of-operation">
-        <title>Theorie der Verwendung</title>
+    <section xml:id="zend.memory.theory-of-operation"><info><title>Theorie der Verwendung</title></info>
+        
 
         <para>
             Die <classname>Zend_Memory</classname> Komponente arbeitet mit den folgenden Konzepten:
@@ -82,18 +80,18 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             </itemizedlist>
         </para>
 
-        <sect3 id="zend.memory.theory-of-operation.manager">
-            <title>Memory Manager</title>
+        <section xml:id="zend.memory.theory-of-operation.manager"><info><title>Memory Manager</title></info>
+            
 
             <para>
                 Der Memory Manager erzeugt Memory Objekte (gesperrt oder verschiebbar)
                 durch Anfrage der Anwendung des Benutzers und gibt diese
                 in einem Memory Container Objekt zurück.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.container">
-            <title>Memory Container</title>
+        <section xml:id="zend.memory.theory-of-operation.container"><info><title>Memory Container</title></info>
+            
 
             <para>
                 Der Memory Container hat ein virtuelles oder aktuelles Attribut
@@ -124,25 +122,24 @@ $memObject->value = substr($memObject->value, $start, $length);
             <note>
                 <para>
                     Wenn eine <acronym>PHP</acronym> Version vor 5.2 verwendet wird, sollte
-                    stattdessen die <link
-                         linkend="zend.memory.memory-objects.api.getRef">getRef()</link> Methode
+                    stattdessen die <link linkend="zend.memory.memory-objects.api.getRef">getRef()</link> Methode
                     verwendet werden statt direkt auf die Wert Eigenschaften zuzugreifen.
                 </para>
             </note>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.locked">
-            <title>Verschlüsselter Memory</title>
+        <section xml:id="zend.memory.theory-of-operation.locked"><info><title>Verschlüsselter Memory</title></info>
+            
 
             <para>
                 Verschlüsselte Speicher Objekte werden immer im Speicher gespeichert.
                 Daten welche im verschlüsselten Speicher gespeichert sind, werden
                 niemals in das Cache Backend getauscht.
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.memory.theory-of-operation.movable">
-            <title>Verschiebbarer Memory</title>
+        <section xml:id="zend.memory.theory-of-operation.movable"><info><title>Verschiebbarer Memory</title></info>
+            
 
             <para>
                 Verschiebbare Memory Objekte werden transparent geswappt und geladen von und in das
@@ -156,6 +153,6 @@ $memObject->value = substr($memObject->value, $start, $length);
                 <link linkend="zend.memory.memory-manager.settings.min-size">diesen Abschnitt</link>
                 für mehr Details.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </section>
+    </section>
+</section>

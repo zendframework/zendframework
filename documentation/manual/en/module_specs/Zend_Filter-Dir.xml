@@ -1,23 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.filter.set.dir">
-    <title>Dir</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.dir"><info><title>Dir</title></info>
+    
 
     <para>
         Given a string containing a path to a file, this function will return the
         name of the directory.
     </para>
 
-     <sect3 id="zend.filter.set.dir.options">
-        <title>Supported options for Zend_Filter_Dir</title>
+     <section xml:id="zend.filter.set.dir.options"><info><title>Supported options for Zend_Filter_Dir</title></info>
+        
 
         <para>
             There are no additional options for <classname>Zend_Filter_Dir</classname>.
         </para>
-    </sect3>
+    </section>
 
-     <sect3 id="zend.filter.set.dir.basic">
-        <title>Basic usage</title>
+     <section xml:id="zend.filter.set.dir.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             A basic example of usage is below:
@@ -42,5 +41,5 @@ print $filter->filter('C:/Temp/x');
         <para>
             This returns "<filename>C:/Temp</filename>".
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

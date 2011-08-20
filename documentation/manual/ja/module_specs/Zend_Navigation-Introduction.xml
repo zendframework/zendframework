@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20827 -->
-<sect1 id="zend.navigation.introduction">
-    <title>導入</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.navigation.introduction"><info><title>導入</title></info>
+    
 
     <para>
         <classname>Zend_Navigation</classname>は、
@@ -12,15 +12,15 @@
         他のナビゲーション関連の目的のひな型の役目を果たすことができます。
     </para>
 
-    <sect2 id="zend.navigation.introduction.concepts">
-        <title>ページとコンテナ</title>
+    <section xml:id="zend.navigation.introduction.concepts"><info><title>ページとコンテナ</title></info>
+        
 
         <para>
             <classname>Zend_Navigation</classname>には2つの主要な概念があります:
         </para>
 
-        <sect3 id="zend.navigation.introduction.pages">
-            <title>ページ</title>
+        <section xml:id="zend.navigation.introduction.pages"><info><title>ページ</title></info>
+            
 
             <para>
                 <classname>Zend_Navigation</classname>におけるページ (<classname>Zend_Navigation_Page</classname>) は、
@@ -36,16 +36,16 @@
                 <link linkend="zend.navigation.pages">ページ</link>
                 節をさらにお読みください。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.navigation.introduction.containers">
-            <title>コンテナ</title>
+        <section xml:id="zend.navigation.introduction.containers"><info><title>コンテナ</title></info>
+            
 
             <para>
                 ナビゲーション・コンテナ (<classname>Zend_Navigation_Container</classname>) は、
                 ページのためのコンテナ・クラスです。
                 ページを追加したり、取得したり、削除したり、反復したりするためのメソッドがあります。
-                それは<ulink url="http://php.net/spl">SPL</ulink>
+                それは<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/spl">SPL</link>
                 インターフェース <classname>RecursiveIterator</classname> 及び <classname>Countable</classname> を実装して、
                 そのため、<classname>RecursiveIteratorIterator</classname> のようなSPLイテレータで反復できます。
             </para>
@@ -63,11 +63,11 @@
                     を拡張します。それはページがサブページを持てることを意味します。
                 </para>
             </note>
-        </sect3>
-    </sect2>
+        </section>
+    </section>
 
-    <sect2 id="zend.navigation.introduction.separation">
-        <title>データ（モデル）とレンダリング（ビュー）の分離</title>
+    <section xml:id="zend.navigation.introduction.separation"><info><title>データ（モデル）とレンダリング（ビュー）の分離</title></info>
+        
 
         <para>
             <classname>Zend_Navigation</classname> 名前空間のクラスは、
@@ -84,5 +84,5 @@
             <link linkend="zend.view.helpers.initial.navigation">ナビゲーション・ヘルパー</link>の
             マニュアル部分でナビゲーション用の要素のレンダリングについてさらにお読みください。
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

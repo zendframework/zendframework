@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21825 -->
-<!-- Reviewed: no -->
-<sect1 id="learning.plugins.usage">
-    <title>Utiliser des Plugins</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.plugins.usage"><info><title>Utiliser des Plugins</title></info>
+    
 
     <para>
         Les composants utilisant des plugins se servent de
@@ -19,8 +17,8 @@
         Voici quelques exemples pour éclaircir tout ça.
     </para>
 
-    <example id="learning.plugins.usage.basic">
-        <title>Exemple de base: ajouter un chemin de préfixes simple</title>
+    <example xml:id="learning.plugins.usage.basic"><info><title>Exemple de base: ajouter un chemin de préfixes simple</title></info>
+        
 
         <para>
             Dans cet exemple, nous supposerons que des validateurs ont été écrits et enregistrés
@@ -74,8 +72,8 @@ $element->addValidator('NotEmpty')
         </para>
     </example>
 
-    <note>
-        <title>Que se passe-t-il si un plugin n'est pas trouvé?</title>
+    <note><info><title>Que se passe-t-il si un plugin n'est pas trouvé?</title></info>
+        
 
         <para>
             Que se passe-t-il si un plugin est demandé mais que le PluginLoader ne peut pas trouver
@@ -95,8 +93,8 @@ $element->addValidator('NotEmpty')
         </para>
     </note>
 
-    <example id="learning.plugins.usage.override">
-        <title>Exemple intermédiaire: Surcharger un plugin existant</title>
+    <example xml:id="learning.plugins.usage.override"><info><title>Exemple intermédiaire: Surcharger un plugin existant</title></info>
+        
 
         <para>
             Une des forces du PluginLoader est qu'il utilise une pile LIFO, ceci vous permet
@@ -149,4 +147,4 @@ $view->addHelperPath('foo/view/helpers', 'Foo_View_Helper');
             <classname>Foo_View_Helper_Button</classname>!
         </para>
     </example>
-</sect1>
+</section>

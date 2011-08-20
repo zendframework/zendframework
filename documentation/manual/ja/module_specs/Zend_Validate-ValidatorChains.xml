@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20799 -->
-<sect1 id="zend.validate.validator_chains">
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.validator_chains"><info><title>バリデータチェイン</title></info>
 
-    <title>バリデータチェイン</title>
+    
 
     <para>
         ひとつの値に対して、複数のバリデータを指定した順に適用しなければならないことがよくあります。
-        以下のコードは、<link
-            linkend="zend.validate.introduction">導入</link>
+        以下のコードは、<link linkend="zend.validate.introduction">導入</link>
         で説明した例を解決するための方法を示すものです。
         ユーザ名が 6 文字から 12 文字までの英数字であるかどうかを検証します。
 
@@ -66,7 +63,4 @@ $validatorChain->addValidator(
         バリデータチェインで使用できます。
     </para>
 
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

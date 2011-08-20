@@ -1,20 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
-<!-- Reviewed: no -->
-<sect1 id="migration.06">
-    <title>Zend Framework 0.6</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.06"><info><title>Zend Framework 0.6</title></info>
+    
 
     <para>
         Lors de la migration d'un version précédente vers Zend Framework 0.6 ou plus récent
         vous devriez prendre note de ce qui suit.
     </para>
 
-    <sect2 id="migration.06.zend.controller">
-        <title>Zend_Controller</title>
+    <section xml:id="migration.06.zend.controller"><info><title>Zend_Controller</title></info>
+        
 
         <para>
             L'utilisation de base des composants <acronym>MVC</acronym> n'a pas changé ; vous pouvez toujours
-            faire comme suit&#160;:
+            faire comme suit :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -45,8 +43,8 @@ $ctrl->dispatch();
             réponse en utilisant <methodname>returnResponse()</methodname>, et qui ensuite effectue le rendu de
             la réponse suivant votre propre logique. Une version future du contrôleur frontal peut
             mettre en application l'utilisation de l'objet Réponse via la
-            <ulink url="http://php.net/manual/fr/ref.outcontrol.php">bufferisation de
-            sortie</ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/manual/fr/ref.outcontrol.php">bufferisation de
+            sortie</link>.
         </para>
 
         <para>
@@ -57,7 +55,7 @@ $ctrl->dispatch();
         <para>
             Le changement le plus important auquel vous devrez faire attention apparaîtra
             quand vous tenterez de sous-classer les différents composants. La clé se trouve
-            ci-dessous&#160;:
+            ci-dessous :
         </para>
 
         <itemizedlist>
@@ -66,12 +64,12 @@ $ctrl->dispatch();
                     <methodname>Zend_Controller_Front::dispatch()</methodname> intercepte par
                     défaut les exceptions dans l'objet réponse, et ne les affiche pas, afin
                     d'éviter l'affichage d'information sensible du système. Vous pouvez surcharger
-                    ceci de différentes manières&#160;:
+                    ceci de différentes manières :
                 </para>
                 <itemizedlist>
                     <listitem>
                         <para>
-                            Régler <methodname>throwExceptions()</methodname> dans le contrôleur frontal&#160;:
+                            Régler <methodname>throwExceptions()</methodname> dans le contrôleur frontal :
                         </para>
                         <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
@@ -79,7 +77,7 @@ $front->throwExceptions(true);
                     </listitem>
                     <listitem>
                         <para>
-                            Régler <methodname>renderExceptions()</methodname> dans l'objet Réponse&#160;:
+                            Régler <methodname>renderExceptions()</methodname> dans l'objet Réponse :
                         </para>
                         <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
@@ -98,21 +96,21 @@ echo $response;
                 <para>
                     <methodname>Zend_Controller_Dispatcher_Interface::dispatch()</methodname>
                     accepte maintenant et retourne un objet
-                    <xref linkend="zend.controller.request" /> au lieu d'un élément du
+                    <xref linkend="zend.controller.request"/> au lieu d'un élément du
                     distributeur.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <methodname>Zend_Controller_Router_Interface::route()</methodname> accepte
-                    maintenant et retourne un objet <xref linkend="zend.controller.request" /> au
+                    maintenant et retourne un objet <xref linkend="zend.controller.request"/> au
                     lieu d'un élément du distributeur.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     Les changements de <classname>Zend_Controller_Action</classname>
-                    incluent&#160;:
+                    incluent :
                 </para>
                 <itemizedlist>
                     <listitem>
@@ -171,7 +169,7 @@ echo $response;
                             n'existe plus maintenant. Le seul but de cet élément est de fournir
                             l'information concernant le contrôleur, l'action et les paramètres
                             d'URL de la requête. Cette information est maintenant disponible dans
-                            l'objet requête, et peut être interrogé comme ceci&#160;:
+                            l'objet requête, et peut être interrogé comme ceci :
                         </para>
                         <programlisting language="php"><![CDATA[
 // Récupère le nom de controleur de la requête
@@ -199,7 +197,7 @@ $foo = $this->_getParam('foo', 'default');
                         <para>
                             <methodname>noRouteAction()</methodname> a été effacée. La manière appropriée
                             de gérer les méthodes d'actions non-existantes est de les router vers
-                            une action par défaut en utilisant <methodname>__call()</methodname>&#160;:
+                            une action par défaut en utilisant <methodname>__call()</methodname> :
                         </para>
                         <programlisting language="php"><![CDATA[
 public function __call($method, $args)
@@ -230,10 +228,10 @@ public function __call($method, $args)
                     <classname>Zend_Controller_Plugin_Interface</classname> a été remplacée
                     par <classname>Zend_Controller_Plugin_Abstract</classname>. Toutes les méthodes
                     acceptent et retournent maintenant un objet
-                    <xref linkend="zend.controller.request" /> au lieu d'un élément du
+                    <xref linkend="zend.controller.request"/> au lieu d'un élément du
                     distributeur.
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
-</sect1>
+    </section>
+</section>

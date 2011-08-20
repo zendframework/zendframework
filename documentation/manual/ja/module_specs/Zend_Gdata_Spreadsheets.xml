@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<!-- EN-Revision: 20779 -->
-<sect1 id="zend.gdata.spreadsheets">
-    <title>Google Spreadsheets の使用法</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.spreadsheets"><info><title>Google Spreadsheets の使用法</title></info>
+    
 
     <para>
         Google Spreadsheets データ <acronym>API</acronym> を使用すると、
@@ -15,20 +13,20 @@
 
     <para>
         Google Spreadsheets <acronym>API</acronym> についての詳細な情報は
-        <ulink url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</link>
         を参照ください。
     </para>
 
-    <sect2 id="zend.gdata.spreadsheets.creating">
-        <title>スプレッドシートの作成</title>
+    <section xml:id="zend.gdata.spreadsheets.creating"><info><title>スプレッドシートの作成</title></info>
+        
         <para>
             Spreadsheets データ <acronym>API</acronym> は、現在はプログラム上でのスプレッドシートの
             作成・削除はサポートしていません。
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.spreadsheets.listspreadsheets">
-        <title>スプレッドシートの一覧の取得</title>
+    <section xml:id="zend.gdata.spreadsheets.listspreadsheets"><info><title>スプレッドシートの一覧の取得</title></info>
+        
         <para>
             特定のユーザのスプレッドシートの一覧を取得するには
             Spredsheets サービスの <code>getSpreadsheetFeed</code> メソッドを使用します。
@@ -42,10 +40,10 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $spreadsheetService = new Zend_Gdata_Spreadsheets($client);
 $feed = $spreadsheetService->getSpreadsheetFeed();
 ]]></programlisting>
-    </sect2>
+    </section>
 
-     <sect2 id="zend.gdata.spreadsheets.listworksheets">
-        <title>ワークシートの一覧の取得</title>
+     <section xml:id="zend.gdata.spreadsheets.listworksheets"><info><title>ワークシートの一覧の取得</title></info>
+        
         <para>
             ひとつのスプレッドシートの中には複数のワークシートがあります。
             各スプレッドシートは、その内部のすべてのワークシートをあらわすメタフィード含んでいます。
@@ -69,14 +67,14 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
             オブジェクトは、サーバからのレスポンスを表します。
             その他の場合と同じように、このフィードには
             <classname>Zend_Gdata_Spreadsheets_WorksheetEntry </classname> オブジェクト
-            (<code>$feed->entries</code>) の一覧が含まれます。
+            (<code>$feed-&gt;entries</code>) の一覧が含まれます。
             個々のオブジェクトがひとつのワークシートを表します。
         </para>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.spreadsheets.listfeeds">
-        <title>リストベースのフィードの扱い</title>
+    <section xml:id="zend.gdata.spreadsheets.listfeeds"><info><title>リストベースのフィードの扱い</title></info>
+        
         <para>
             ワークシートには通常複数の行が含まれ、各行には複数のセルが存在します。
             ワークシートのデータを取得するには、リストベースのフィード
@@ -116,8 +114,8 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
             リストフィードの行は、そのワークシートが持っているのと同じだけのカラムを保持します。
         </para>
 
-        <sect3 id="zend.gdata.spreadsheets.listfeeds.get">
-            <title>リストベースのフィードの取得</title>
+        <section xml:id="zend.gdata.spreadsheets.listfeeds.get"><info><title>リストベースのフィードの取得</title></info>
+            
             <para>
                 ワークシートのリストフィードを取得するには、Spreadsheets サービスの
                 <code>getListFeed</code> メソッドを使用します。
@@ -134,7 +132,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 その結果得られた <classname>Zend_Gdata_Spreadsheets_ListFeed</classname>
                 オブジェクトである <varname>$listfeed</varname> が、サーバからのレスポンスを表します。
                 またこのフィードは <classname>Zend_Gdata_Spreadsheets_ListEntry</classname>
-                オブジェクトの配列 (<code>$listFeed->entries</code>)
+                オブジェクトの配列 (<code>$listFeed-&gt;entries</code>)
                 を含んでおり、この配列の各要素がワークシートのひとつの行を表します。
             </para>
 
@@ -161,10 +159,10 @@ foreach($rowData as $customEntry) {
 $customEntry = $listFeed->entries[1]->getCustomByName('my_heading');
 echo $customEntry->getColumnName() . " = " . $customEntry->getText();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.spreadsheets.listfeeds.reverse">
-            <title>逆順での行の並べ替え</title>
+        <section xml:id="zend.gdata.spreadsheets.listfeeds.reverse"><info><title>逆順での行の並べ替え</title></info>
+            
 
             <para>
                 デフォルトでは、フィード内の行の並び順は GUI
@@ -189,10 +187,10 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 <code>column:&lt;そのカラムのヘッダ&gt;</code>
                 とします。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.spreadsheets.listfeeds.sq">
-            <title>構造化問い合わせ</title>
+        <section xml:id="zend.gdata.spreadsheets.listfeeds.sq"><info><title>構造化問い合わせ</title></info>
+            
 
             <para>
                 <classname>Zend_Gdata_Spreadsheets_ListQuery</classname> の
@@ -211,10 +209,10 @@ $query->setWorksheetId($worksheetId);
 $query->setSpreadsheetQuery('name=John and age>25');
 $listFeed = $spreadsheetService->getListFeed($query);
 ]]></programlisting>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.spreadsheets.listfeeds.addrow">
-            <title>行の追加</title>
+        <section xml:id="zend.gdata.spreadsheets.listfeeds.addrow"><info><title>行の追加</title></info>
+            
 
             <para>
                 スプレッドシートに行を追加するには、Spreadsheet サービスの
@@ -239,10 +237,10 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
                 Spreadsheets は、リストベースのフィードの一番最後の行の直後に新しい行を追加します。
                 つまり、最初に登場する空行の直前ということです。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.spreadsheets.listfeeds.editrow">
-            <title>行の編集</title>
+        <section xml:id="zend.gdata.spreadsheets.listfeeds.editrow"><info><title>行の編集</title></info>
+            
 
             <para>
                 <classname>Zend_Gdata_Spreadsheets_ListEntry</classname>
@@ -262,10 +260,10 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                 <classname>Zend_Gdata_Spreadsheets_SpreadsheetsEntry</classname>
                 オブジェクトを返します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.spreadsheets.listfeeds.deleterow">
-            <title>行の削除</title>
+        <section xml:id="zend.gdata.spreadsheets.listfeeds.deleterow"><info><title>行の削除</title></info>
+            
 
             <para>
                 行を削除するには、単に
@@ -286,12 +284,12 @@ $spreadsheetService->deleteRow($listEntry);
             <programlisting language="php"><![CDATA[
 $listEntry->delete();
 ]]></programlisting>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-    <sect2 id="zend.gdata.spreadsheets.cellfeeds">
-        <title>セルベースのフィードの扱い</title>
+    <section xml:id="zend.gdata.spreadsheets.cellfeeds"><info><title>セルベースのフィードの扱い</title></info>
+        
 
         <para>
             セルベースのフィードでは、各エントリがひとつのセルを表します。
@@ -302,8 +300,8 @@ $listEntry->delete();
             セルベースのフィードとリストベースのフィードを同時に使用するのはやめておきましょう。
         </para>
 
-        <sect3 id="zend.gdata.spreadsheets.cellfeeds.get">
-            <title>セルベースのフィードの取得</title>
+        <section xml:id="zend.gdata.spreadsheets.cellfeeds.get"><info><title>セルベースのフィードの取得</title></info>
+            
             <para>
                 ワークシートのセルフィードを取得するには、Spreadsheets サービスの
                 <code>getCellFeed</code> メソッドを使用します。
@@ -320,7 +318,7 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
                 その結果得られた <classname>Zend_Gdata_Spreadsheets_CellFeed</classname>
                 オブジェクトである <varname>$cellFeed</varname> が、サーバからのレスポンスを表します。
                 またこのフィードは <classname>Zend_Gdata_Spreadsheets_CellEntry</classname>
-                オブジェクトの配列 (<code>$cellFeed>entries</code>)
+                オブジェクトの配列 (<code>$cellFeed&gt;entries</code>)
                 を含んでおり、この配列の各要素がワークシートのひとつのセルを表します。
                 この情報を表示するには次のようにします。
             </para>
@@ -334,10 +332,10 @@ foreach($cellFeed as $cellEntry) {
 }
 ]]></programlisting>
 
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.spreadsheets.cellfeeds.cellrangequery">
-            <title>セルの範囲の問い合わせ</title>
+        <section xml:id="zend.gdata.spreadsheets.cellfeeds.cellrangequery"><info><title>セルの範囲の問い合わせ</title></info>
+            
 
             <para>
                 ワークシートの最初のカラムのセルを取得したいとしましょう。
@@ -355,10 +353,10 @@ $feed = $spreadsheetService->getCellsFeed($query);
             <para>
                 これは、二行目以降のデータの最初のカラムのみのデータを返します。
             </para>
-        </sect3>
+        </section>
 
-        <sect3 id="zend.gdata.spreadsheets.cellfeeds.updatecell">
-            <title>セルの内容の変更</title>
+        <section xml:id="zend.gdata.spreadsheets.cellfeeds.updatecell"><info><title>セルの内容の変更</title></info>
+            
 
             <para>
                 セルの内容を変更するには、
@@ -380,8 +378,8 @@ $updatedCell = $spreadsheetService->updateCell($row,
                 注意: <code>updateCell</code> を使用すると、
                 もともとそのセルが空であった場合もデータを更新します。
             </para>
-        </sect3>
+        </section>
 
-    </sect2>
+    </section>
 
-</sect1>
+</section>

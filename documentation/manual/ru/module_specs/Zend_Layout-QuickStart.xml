@@ -1,13 +1,14 @@
-<sect1 id="zend.layout.quickstart">
-    <title>Zend_Layout - Быстрый старт</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.layout.quickstart"><info><title>Zend_Layout - Быстрый старт</title></info>
+    
 
     <para>
         В этом разделе представлены два основных способа использования
         <code>Zend_Layout</code>: с MVC и без.
     </para>
 
-    <sect2 id="zend.layout.quickstart.layouts">
-        <title>Скрипты макетов</title>
+    <section xml:id="zend.layout.quickstart.layouts"><info><title>Скрипты макетов</title></info>
+        
 
         <para>
             В обоих случаях вам нужно создать скрипт макета.
@@ -59,8 +60,7 @@
             для рендеринга, то вы можете использовать любые зарегистрированные
             помощники видов, а также обращаться к любым установленным ранее
             переменным вида.
-            Особенно полезны различные <link
-                linkend="zend.view.helpers.initial.placeholder">помощники меток
+            Особенно полезны различные <link linkend="zend.view.helpers.initial.placeholder">помощники меток
                 заполнения</link>, так как они позволяют извлекать содержимое
                 таких областей, как раздел &lt;head&gt;, навигация и т.п.:
         </para>
@@ -87,17 +87,16 @@
 </body>
 </html>
 ]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.mvc">
-        <title>Использование Zend_Layout с MVC Zend Framework-а</title>
+    <section xml:id="zend.layout.quickstart.mvc"><info><title>Использование Zend_Layout с MVC Zend Framework-а</title></info>
+        
 
         <para>
             <code>Zend_Controller</code> предлагает богатый набор
             возможностей для расширения посредством
             <link linkend="zend.controller.plugins">плагинов
-            фронт-контроллера</link> и <link
-            linkend="zend.controller.actionhelpers">помощников действий</link>.
+            фронт-контроллера</link> и <link linkend="zend.controller.actionhelpers">помощников действий</link>.
             <code>Zend_View</code> тоже имеет своих
             <link linkend="zend.view.helpers">помощников</link>.
             <code>Zend_Layout</code> использует возможности такого расширения
@@ -129,7 +128,7 @@ Zend_Layout::startMvc();
         <para>
             <code>startMvc()</code> может принимать массив опций или объект
             <code>Zend_Config</code> для настойки экземпляра. Эти опции описаны
-            в <xref linkend="zend.layout.options" />.
+            в <xref linkend="zend.layout.options"/>.
         </para>
 
         <para>
@@ -215,16 +214,15 @@ $layout = Zend_Layout::getMvcInstance();
             Эта возможность особенно полезна, если используется вместе с
             <link linkend="zend.controller.actionhelpers.actionstack">помощником
             действий</link> и
-            <link
-            linkend="zend.controller.plugins.standard.actionstack">плагином
+            <link linkend="zend.controller.plugins.standard.actionstack">плагином
             ActionStack</link>, с помощью которых вы можете создавать
             стек действий для обхода в цикле диспетчеризации и таким
             образом создавать страницы с различными "виджетами".
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.standalone">
-        <title>Использование Zend_Layout как отдельной компоненты</title>
+    <section xml:id="zend.layout.quickstart.standalone"><info><title>Использование Zend_Layout как отдельной компоненты</title></info>
+        
 
         <para>
             Как отдельная компонента Zend_Layout не предоставляет столько
@@ -266,10 +264,10 @@ $layout->setLayout('foo');
 // рендеринг конечного макета
 echo $layout->render();
 ?>]]></programlisting>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.layout.quickstart.example">
-        <title>Пример макета</title>
+    <section xml:id="zend.layout.quickstart.example"><info><title>Пример макета</title></info>
+        
 
         <para>
             Иногда одна картинка стоит тысячи слов. Ниже показан пример
@@ -277,8 +275,7 @@ echo $layout->render();
         </para>
 
          <para>
-            <inlinegraphic align="center" valign="middle"
-                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+            <inlinemediaobject><imageobject><imagedata align="center" valign="middle" fileref="figures/zend.layout.quickstart.example.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
 
         <para>
@@ -289,8 +286,5 @@ echo $layout->render();
             боковой панели, заголовке. Реальный порядок извлечения
             содержимого остается тем же.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

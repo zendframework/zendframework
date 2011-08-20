@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21740 -->
-<!-- Reviewed: yes -->
-<sect1 id="introduction.overview">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <title>Wstęp</title>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Wstęp</title></info>
+
+    
 
     <para>
         Zend Framework (ZF) jest frameworkiem o otwartym kodzie źródłowym
@@ -32,8 +32,8 @@
         mocno zmniejszy czas tworzenia aplikacji.
     </para>
     <para>
-        Głównym sponsorem projektu Zend Framework jest firma <ulink url="http://www.zend.com">
-        Zend Technologies</ulink>, ale wiele innych firm współtworzyło komponenty i
+        Głównym sponsorem projektu Zend Framework jest firma <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">
+        Zend Technologies</link>, ale wiele innych firm współtworzyło komponenty i
         inne ważne funkcjonalności frameworka. Firmy takie jak Google, Microsoft,
         czy StrikeIron zostały partnerami firmy Zend aby pomóc w tworzeniu
         interfejsów obsługi ich serwisów i innych technologii które chcieli
@@ -44,11 +44,8 @@
         pomoc społeczności ZF.
         Członkowie społeczności, włączając w to osoby wnoszące wkład do ZF, są
         dostępni na
-        <ulink url="http://framework.zend.com/archives">listach dyskusyjnych</ulink>,
-        <ulink url="http://www.zftalk.com">kanałach IRC</ulink> oraz na innych forach.
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">listach dyskusyjnych</link>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">kanałach IRC</link> oraz na innych forach.
         Jeśli masz pytania odnośnie ZF, najlepiej będzie skierować je do społeczności.
     </para>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17173 -->
-    <!-- Reviewed: no -->
-<sect1 id="zend.form.decorators">
-    <title>Creando un personalizado marcado de formulario usando
-        Zend_Form_Decorator</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Creando un personalizado marcado de formulario usando
+        Zend_Form_Decorator</title></info>
+    
 
     <para>
         Representar un objeto form es completamente opcional -- no está
@@ -58,8 +56,8 @@
         representando al item entero.
     </para>
 
-    <sect2 id="zend.form.decorators.operation">
-        <title>Operación</title>
+    <section xml:id="zend.form.decorators.operation"><info><title>Operación</title></info>
+        
 
         <para>
             Para configurar un decorador, pase un array de opciones o un
@@ -193,10 +191,10 @@
             cadena; una separador
             opcional será usado en las dos últimas situaciones.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.standard">
-        <title>Decoradores estándar</title>
+    <section xml:id="zend.form.decorators.standard"><info><title>Decoradores estándar</title></info>
+        
 
         <para>
             <classname>Zend_Form</classname>
@@ -206,10 +204,10 @@
                 capítulo Decoradores estándar</link>
             para detalles.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.custom">
-        <title>Decoradores personalizados</title>
+    <section xml:id="zend.form.decorators.custom"><info><title>Decoradores personalizados</title></info>
+        
 
         <para>Si encuentra que sus necesidades son complejas o necesita una
             enorme personalización,
@@ -426,10 +424,10 @@ class My_Decorator_Errors
             puede modificar decoradores sin necesitad de
             modificar sus elementos decoradores.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.form.decorators.individual">
-        <title>Generando decoradores individuales</title>
+    <section xml:id="zend.form.decorators.individual"><info><title>Generando decoradores individuales</title></info>
+        
 
         <para>Desde que los decoradores pueden capturar distintos metadatos del
             elemento o formulario
@@ -468,5 +466,5 @@ echo $form->renderHtmlTag('wrap this content');
             decoradores adjuntos para generar contenido,
             pero con un control
             minucioso.</para>
-    </sect2>
-</sect1>
+    </section>
+</section>

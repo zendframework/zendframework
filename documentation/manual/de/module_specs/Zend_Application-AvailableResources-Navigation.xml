@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18621 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.navigation">
-    <title>Zend_Application_Resource_Navigation</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.navigation"><info><title>Zend_Application_Resource_Navigation</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Navigation</classname> kann verwendet werden um eine
         <classname>Zend_Navigation</classname> Instanz zu konfigurieren. Die Optionen der
-        Konfiguration entsprechen <link
-            linkend="zend.navigation.pages.common.options">den Optionen von
+        Konfiguration entsprechen <link linkend="zend.navigation.pages.common.options">den Optionen von
             <classname>Zend_Navigation</classname></link>.
     </para>
 
@@ -18,8 +15,8 @@
         geholt werden kann.
     </para>
 
-    <example id="zend.application.available-resources.navigation.configExample">
-        <title>Beispiel der Konfiguration einer Navigations Ressource</title>
+    <example xml:id="zend.application.available-resources.navigation.configExample"><info><title>Beispiel der Konfiguration einer Navigations Ressource</title></info>
+        
 
         <para>
             Anbei ist ein Beispiel eines <acronym>INI</acronym> Abschnitts der zeigt wir die
@@ -36,4 +33,4 @@ resources.navigation.pages.page1.pages.page2.label = "Überschrift Seite zwei"
 resources.navigation.pages.page1.pages.page2.uri = "/url/to/page/2"
 ]]></programlisting>
     </example>
-</sect2>
+</section>

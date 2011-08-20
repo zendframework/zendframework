@@ -25,7 +25,7 @@ use Zend\Dojo\View\Helper\NumberSpinner as NumberSpinnerHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Json\Json,
     Zend\Registry,
-    Zend\View\View;
+    Zend\View;
 
 /**
  * Test class for Zend_Dojo_View_Helper_NumberSpinner.
@@ -58,7 +58,7 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View();
+        $view = new View\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -90,7 +90,7 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.NumberSpinner")/', $html);
-        $this->assertNotNull($this->view->dojo()->getDijit('elementId'));
+        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
     }
 
     public function testShouldCreateTextInput()
@@ -106,7 +106,7 @@ class NumberSpinnerTest extends \PHPUnit_Framework_TestCase
             $this->fail('Did not serialize constraints');
         }
         $constraints = str_replace("'", '"', $m[1]);
-        $constraints = Json::decode($constraints);
+        $constraints = Json::decode($constraints, JSON::TYPE_ARRAY);
         $this->assertTrue(is_array($constraints), var_export($m[1], 1));
         $this->assertTrue(array_key_exists('min', $constraints));
         $this->assertTrue(array_key_exists('max', $constraints));

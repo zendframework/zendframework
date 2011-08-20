@@ -45,6 +45,7 @@ class HelperLoader extends PluginClassLoader
         'contentpane'        => 'Zend\Dojo\View\Helper\ContentPane',
         'currencytextbox'    => 'Zend\Dojo\View\Helper\CurrencyTextBox',
         'customdijit'        => 'Zend\Dojo\View\Helper\CustomDijit',
+        'datetextbox'        => 'Zend\Dojo\View\Helper\DateTextBox',
         'dijitcontainer'     => 'Zend\Dojo\View\Helper\DijitContainer',
         'dijit'              => 'Zend\Dojo\View\Helper\Dijit',
         'dojo'               => 'Zend\Dojo\View\Helper\Dojo',

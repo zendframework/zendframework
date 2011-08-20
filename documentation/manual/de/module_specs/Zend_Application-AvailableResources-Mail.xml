@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.mail">
-    <title>Zend_Application_Resource_Mail</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.mail"><info><title>Zend_Application_Resource_Mail</title></info>
+    
 
     <para>
         <classname>Zend_Application_Resource_Mail</classname> kann verwendet werden um einen
@@ -17,8 +15,8 @@
         dieses Verhalten nicht mehr statt.
     </para>
 
-    <example id="zend.application.available-resources.mail.configExample">
-        <title>Beispiel der Konfiguration der Mail Ressource</title>
+    <example xml:id="zend.application.available-resources.mail.configExample"><info><title>Beispiel der Konfiguration der Mail Ressource</title></info>
+        
 
         <para>
             Anbei ist ein beispielhafter <acronym>INI</acronym> Abschnitt der zeigt wie das Mail
@@ -39,4 +37,4 @@ resources.mail.defaultReplyTo.email = Jane@example.com
 resources.mail.defaultReplyTo.name = "Jane Doe"
 ]]></programlisting>
     </example>
-</sect2>
+</section>

@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22752 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.loader.load">
-    <title>Dynamisches Laden von Dateien und Klassen</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.loader.load"><info><title>Dynamisches Laden von Dateien und Klassen</title></info>
+    
 
     <para>
         Die <classname>Zend_Loader</classname> Klasse enthält Methoden die helfen Dateien dynamisch
         zu laden.
     </para>
 
-    <tip>
-        <title>Zend_Loader vs. require_once()</title>
+    <tip><info><title>Zend_Loader vs. require_once()</title></info>
+        
 
         <para>
             Die <classname>Zend_Loader</classname> Methoden werden am Besten verwendet wenn der
@@ -18,25 +16,24 @@
             einer Benutzereinfabe oder eines Arguments einer Methode basiert. Wenn
             eine Datei oder eine Klasse geladen werden soll deren Name konstant ist,
             gibt es keinen Vorteil durch die Verwendung von <classname>Zend_Loader</classname>
-            gegenüber traditionellen <acronym>PHP</acronym> Funktionen wie <ulink
-                url="http://php.net/require_once"><methodname>require_once()</methodname></ulink>.
+            gegenüber traditionellen <acronym>PHP</acronym> Funktionen wie <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/require_once"><methodname>require_once()</methodname></link>.
         </para>
     </tip>
 
-    <sect2 id="zend.loader.load.file">
-        <title>Dateien laden</title>
+    <section xml:id="zend.loader.load.file"><info><title>Dateien laden</title></info>
+        
 
         <para>
             Die statische Methode <methodname>Zend_Loader::loadFile()</methodname> lädt eine
             <acronym>PHP</acronym> Datei. Die geladene Datei kann jeden <acronym>PHP</acronym> Code
             enthalten. Diese Methode ist ein Wrapper für die <acronym>PHP</acronym> Funktion
-            <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><methodname>include()</methodname></link>.
             Diese Methode gibt bei einem Fehler ein boosches <constant>FALSE</constant> zurück,
             zum Beispiel wenn die definierte Datei nicht existiert.
         </para>
 
-        <example id="zend.loader.load.file.example">
-            <title>Beispiel der loadFile() Methode</title>
+        <example xml:id="zend.loader.load.file.example"><info><title>Beispiel der loadFile() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
@@ -64,24 +61,23 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <para>
             Das <varname>$once</varname> Argument ist Boolean. Wenn es <constant>TRUE</constant>
             ist, verwendet <methodname>Zend_Loader::loadFile()</methodname> die
-            <acronym>PHP</acronym> Funktion <ulink
-                url="http://php.net/include"><methodname>include_once()</methodname></ulink>
+            <acronym>PHP</acronym> Funktion <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include"><methodname>include_once()</methodname></link>
             für das Laden der Datei, andernfalls wird die <acronym>PHP</acronym> Funktion
-            <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/include_once"><methodname>include()</methodname></link>
             verwendet.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.class">
-        <title>Klassen laden</title>
+    <section xml:id="zend.loader.load.class"><info><title>Klassen laden</title></info>
+        
 
         <para>
             Die statische Methode <methodname>Zend_Loader::loadClass($class, $dirs)</methodname>
             lädt eine <acronym>PHP</acronym> Datei und prüft anschließend ob die Klasse existiert.
         </para>
 
-        <example id="zend.loader.load.class.example">
-            <title>Beispiel der loadClass() Methode</title>
+        <example xml:id="zend.loader.load.class.example"><info><title>Beispiel der loadClass() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
@@ -121,15 +117,14 @@ Zend_Loader::loadClass('Container_Tree',
             den Unterstrich ('_') und den Punkt ('.') enthalten.
         </para>
 
-        <note>
-            <title>Klassen von PHP Namespaces laden</title>
+        <note><info><title>Klassen von PHP Namespaces laden</title></info>
+            
 
             <para>
                 Beginnend mit Version 1.10.0 erlaubt Zend Framework das Laden von Klassen aus
                 <acronym>PHP</acronym> Namespaces. Diese Unterstützung folgt den gleichen
-                Richtlinien und Implementationen wie Sie in der <ulink
-                    url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
-                Framework Interop Group PSR-0</ulink> Referenz Implementation gefunden werden
+                Richtlinien und Implementationen wie Sie in der <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
+                Framework Interop Group PSR-0</link> Referenz Implementation gefunden werden
                 können.
             </para>
 
@@ -189,10 +184,10 @@ Zend_Loader::loadClass('Container_Tree',
                 </listitem>
             </itemizedlist>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.isreadable">
-        <title>Testen ob eine Datei gelesen werden kann</title>
+    <section xml:id="zend.loader.load.isreadable"><info><title>Testen ob eine Datei gelesen werden kann</title></info>
+        
 
         <para>
             Die statische Methode <methodname>Zend_Loader::isReadable($pathname)</methodname>
@@ -200,8 +195,8 @@ Zend_Loader::loadClass('Container_Tree',
             existiert und lesbar ist, andernfalls <constant>FALSE</constant>.
         </para>
 
-        <example id="zend.loader.load.isreadable.example">
-            <title>Beispiel der isReadable() Methode</title>
+        <example xml:id="zend.loader.load.isreadable.example"><info><title>Beispiel der isReadable() Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
@@ -214,14 +209,14 @@ if (Zend_Loader::isReadable($filename)) {
             Das <varname>$filename</varname> Argument definiert den Dateinamen der
             geprüft werden soll. Er darf Pfadinformationen enthalten. Diese Methode
             ist ein Wrapper für die <acronym>PHP</acronym> Funktion
-            <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/is_readable"><methodname>is_readable()</methodname></link>.
             Diese <acronym>PHP</acronym> Funktion durchsucht den <property>include_path</property>
             nicht, wärend <methodname>Zend_Loader::isReadable()</methodname> dies macht.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.loader.load.autoload">
-        <title>Verwenden von Autoloaders</title>
+    <section xml:id="zend.loader.load.autoload"><info><title>Verwenden von Autoloaders</title></info>
+        
 
         <para>
             Die <classname>Zend_Loader</classname> Klasse enthält eine Methode die im
@@ -235,8 +230,8 @@ if (Zend_Loader::isReadable($filename)) {
             <classname>Zend_Exception</classname> werfen.
         </para>
 
-        <example id="zend.loader.load.autoload.example">
-            <title>Beispiel für das registrieren der Autoloader Callback Methode</title>
+        <example xml:id="zend.loader.load.autoload.example"><info><title>Beispiel für das registrieren der Autoloader Callback Methode</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 Zend_Loader::registerAutoload();
@@ -258,11 +253,11 @@ Zend_Loader::registerAutoload();
             werden soll.
         </para>
 
-        <example id="zend.loader.load.autoload.example-extended">
-            <title>
+        <example xml:id="zend.loader.load.autoload.example-extended"><info><title>
                 Beispiel für das registrieren der Autoload Callback Methode von einer
                 erweiterten Klasse
-            </title>
+            </title></info>
+            
 
             <para>
                 Wegen der Semantik der Referenzen von statischen Funktionen in
@@ -304,5 +299,5 @@ Zend_Loader::registerAutoload('My_Loader');
             <constant>FALSE</constant> ist, wird die Registrierung des Callback des Autoloaders vom
             SPL Autoload Stack entfernt.
         </para>
-    </sect2>
-</sect1>
+    </section>
+</section>

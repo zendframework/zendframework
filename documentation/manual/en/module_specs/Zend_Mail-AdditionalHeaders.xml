@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.mail.additional-headers">
-    <title>Additional Headers</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mail.additional-headers"><info><title>Additional Headers</title></info>
+    
 
     <para>
         <classname>Zend_Mail</classname> provides several methods to set additional Mail Headers:
@@ -33,12 +32,11 @@
         </itemizedlist>
     </para>
 
-    <note>
-        <title>Return-Path</title>
+    <note><info><title>Return-Path</title></info>
+        
 
         <para>
-            If you set Return-Path on your mail, see <link linkend="zend.mail.introduction.sendmail"
-                >Configuring sendmail transport</link>.
+            If you set Return-Path on your mail, see <link linkend="zend.mail.introduction.sendmail">Configuring sendmail transport</link>.
             Unfortunately, <methodname>setReturnPath($email)</methodname> method does not perform
             this purpose.
         </para>
@@ -51,8 +49,8 @@
         should have only one or multiple values:
     </para>
 
-    <example id="zend.mail.additional-headers.example-1">
-        <title>Adding E-Mail Message Headers</title>
+    <example xml:id="zend.mail.additional-headers.example-1"><info><title>Adding E-Mail Message Headers</title></info>
+        
 
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
@@ -61,7 +59,4 @@ $mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values
 $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

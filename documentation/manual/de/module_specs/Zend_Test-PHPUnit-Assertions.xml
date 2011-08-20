@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 22761 -->
-<!-- Reviewed: 22761 -->
-<sect2 id="zend.test.phpunit.assertions">
-    <title>Zusicherungen</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.assertions"><info><title>Zusicherungen</title></info>
+    
 
     <para>
         Zusicherungen sind das Herz der UnitTests; sie können verwendet werden um zu prüfen, ob
@@ -11,8 +11,8 @@
         das Testen eigener <acronym>MVC</acronym>-Anwendungen und Controller einfacher zu machen.
     </para>
 
-    <sect3 id="zend.test.phpunit.assertions.query">
-        <title>CSS-Selektor-Zusicherungen</title>
+    <section xml:id="zend.test.phpunit.assertions.query"><info><title>CSS-Selektor-Zusicherungen</title></info>
+        
 
         <para>
             <acronym>CSS</acronym>-Selektoren sind ein einfacher Weg um zu prüfen, dass bestimmte
@@ -108,10 +108,10 @@
             <methodname>assertNotQueryCount()</methodname>. (Es ist zu beachten, dass die min und max
             Zählen keine dieser Varianten haben, was aus logischen Gründen so ist.)
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.xpath">
-        <title>XPath-Zusicherungen</title>
+    <section xml:id="zend.test.phpunit.assertions.xpath"><info><title>XPath-Zusicherungen</title></info>
+        
 
         <para>
             Einige Entwickler sind mit XPath vertrauter als mit <acronym>CSS</acronym>-Selektoren,
@@ -179,10 +179,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.redirect">
-        <title>Umleitungszusicherungen</title>
+    <section xml:id="zend.test.phpunit.assertions.redirect"><info><title>Umleitungszusicherungen</title></info>
+        
 
         <para>
             Oft wird eine Aktion umgeleitet. Statt der Umleitung zu folgen, erlaubt es
@@ -238,10 +238,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.header">
-        <title>Antwort-Header-Zusicherungen</title>
+    <section xml:id="zend.test.phpunit.assertions.header"><info><title>Antwort-Header-Zusicherungen</title></info>
+        
 
         <para>
             Zusätzlich zur Prüfung auf Umleitungs-Header, ist es oft notwendig auf spezielle
@@ -287,10 +287,10 @@
             Zusätzlich hat jede der obigen Zusicherungen eine 'Not'-Variante für negative
             Zusicherungen.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.test.phpunit.assertions.request">
-        <title>Anfragezusicherungen</title>
+    <section xml:id="zend.test.phpunit.assertions.request"><info><title>Anfragezusicherungen</title></info>
+        
 
         <para>
             Es ist oft sinnvoll gegen die letzte Aktion, den Controller und das Modul zu prüfen;
@@ -332,5 +332,5 @@
         <para>
             Jede hat auch eine 'Not'-Variante für negative Zusicherungen.
         </para>
-    </sect3>
-</sect2>
+    </section>
+</section>

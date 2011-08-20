@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.validate.set.creditcard">
-    <title>CreditCard</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.creditcard"><info><title>CreditCard</title></info>
+    
 
     <para>
         <classname>Zend_Validate_CreditCard</classname> allows you to validate if a given value
@@ -85,8 +84,8 @@
         </listitem>
     </itemizedlist>
 
-    <note>
-        <title>Invalid institutes</title>
+    <note><info><title>Invalid institutes</title></info>
+        
 
         <para>
             The institutes <emphasis>Bankcard</emphasis> and <emphasis>Diners Club
@@ -99,8 +98,8 @@
         </para>
     </note>
 
-    <sect3 id="zend.validate.set.creditcard.options">
-        <title>Supported options for Zend_Validate_CreditCard</title>
+    <section xml:id="zend.validate.set.creditcard.options"><info><title>Supported options for Zend_Validate_CreditCard</title></info>
+        
 
         <para>
             The following options are supported for <classname>Zend_Validate_CreditCard</classname>:
@@ -121,10 +120,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.basic">
-        <title>Basic usage</title>
+    <section xml:id="zend.validate.set.creditcard.basic"><info><title>Basic usage</title></info>
+        
 
         <para>
             There are several credit card institutes which can be validated by
@@ -144,10 +143,10 @@ if ($valid->isValid($input)) {
         <para>
             The above example would validate against all known credit card institutes.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.institute">
-        <title>Accepting defined credit cards</title>
+    <section xml:id="zend.validate.set.creditcard.institute"><info><title>Accepting defined credit cards</title></info>
+        
 
         <para>
             Sometimes it is necessary to accept only defined credit card institutes instead of all;
@@ -194,8 +193,8 @@ $valid = new Zend_Validate_CreditCard(array(
 ));
 ]]></programlisting>
 
-        <table id="zend.validate.set.creditcard.institute.table">
-            <title>Constants for credit card institutes</title>
+        <table xml:id="zend.validate.set.creditcard.institute.table"><info><title>Constants for credit card institutes</title></info>
+            
 
             <tgroup cols="2">
                 <thead>
@@ -288,8 +287,8 @@ $valid->setType(array(
 ));
 ]]></programlisting>
 
-        <note>
-            <title>Default institute</title>
+        <note><info><title>Default institute</title></info>
+            
 
             <para>
                 When no institute is given at initiation then <constant>ALL</constant> will be
@@ -301,10 +300,10 @@ $valid->setType(array(
                 institutes are already added.
             </para>
         </note>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.validate.set.creditcard.servicecheck">
-        <title>Validation by using foreign APIs</title>
+    <section xml:id="zend.validate.set.creditcard.servicecheck"><info><title>Validation by using foreign APIs</title></info>
+        
 
         <para>
             As said before <classname>Zend_Validate_CreditCard</classname> will only validate
@@ -331,8 +330,7 @@ $valid->setType(array(
             <methodname>getService()</methodname> returns the set service. As a configuration
             option,
             you can give the array key '<property>service</property>' at initiation. For details
-            about possible options take a look into <link
-                linkend="zend.validate.set.callback">Callback</link>.
+            about possible options take a look into <link linkend="zend.validate.set.callback">Callback</link>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -355,8 +353,5 @@ $valid->setService(array($service, 'checkOnline'));
             As you can see the callback method will be called with the creditcard number as the
             first parameter, and the accepted types as the second parameter.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

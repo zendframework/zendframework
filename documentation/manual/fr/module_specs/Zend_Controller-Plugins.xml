@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20765 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Plugins</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.plugins"><info><title>Plugins</title></info>
+    
 
-    <sect2 id="zend.controller.plugins.introduction">
-        <title>Introduction</title>
+    <section xml:id="zend.controller.plugins.introduction"><info><title>Introduction</title></info>
+        
 
         <para>
             L'architecture <acronym>MVC</acronym> de Zend Framework propose l'injection de plugins
@@ -18,7 +16,7 @@
         <para>
             Les instants clés sont des méthodes événementielles définies dans la classe
             abstraite <classname>Zend_Controller_Plugin_Abstract</classname>, dont tous les plugins
-            doivent hériter&#160;:
+            doivent hériter :
         </para>
 
         <itemizedlist>
@@ -79,10 +77,10 @@
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.writing">
-        <title>Écrire des plugins</title>
+    <section xml:id="zend.controller.plugins.writing"><info><title>Écrire des plugins</title></info>
+        
 
         <para>
             Tous les plugins doivent hériter de
@@ -110,15 +108,15 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             est de toute façon passé en paramètre à vos méthodes. Veillez à le récupérer dans la
             définition de vos méthodes sinon une erreur <constant>E_STRICT</constant> sera levée.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.using">
-        <title>Utilisation des plugins</title>
+    <section xml:id="zend.controller.plugins.using"><info><title>Utilisation des plugins</title></info>
+        
 
         <para>
             Les plugins sont enregistrés avec
             <methodname>Zend_Controller_Front::registerPlugin()</methodname>, et peuvent l'être
-            n'importe quand. Voici un exemple&#160;:
+            n'importe quand. Voici un exemple :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -175,7 +173,7 @@ $front->dispatch();
 
         <para>
             Si aucune autre action ne génère une sortie (typiquement, un rendu de vue), alors
-            le résultat suivant devrait s'afficher&#160;:
+            le résultat suivant devrait s'afficher :
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -199,14 +197,14 @@ $front->dispatch();
                 enregistrez.
             </para>
         </note>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.manipulating">
-        <title>Récupération et manipulations des plugins</title>
+    <section xml:id="zend.controller.plugins.manipulating"><info><title>Récupération et manipulations des plugins</title></info>
+        
 
         <para>
             Il peut arriver que vous ayez besoin de récupérer des plugins, ou d'en supprimer.
-            Les méthodes suivantes vous seront alors utiles&#160;:
+            Les méthodes suivantes vous seront alors utiles :
         </para>
 
         <itemizedlist>
@@ -233,15 +231,15 @@ $front->dispatch();
                 </para>
             </listitem>
         </itemizedlist>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.controller.plugins.standard">
-        <title>Plugins inclus dans Zend Framework</title>
+    <section xml:id="zend.controller.plugins.standard"><info><title>Plugins inclus dans Zend Framework</title></info>
+        
 
-        <para>Zend Framework possède des plugins dans sa distribution&#160;:</para>
+        <para>Zend Framework possède des plugins dans sa distribution :</para>
 
-        <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
-        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
-        <xi:include href="Zend_Controller-Plugins-PutHandler.xml" />
-    </sect2>
-</sect1>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ActionStack.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-ErrorHandler.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Controller-Plugins-PutHandler.xml"/>
+    </section>
+</section>

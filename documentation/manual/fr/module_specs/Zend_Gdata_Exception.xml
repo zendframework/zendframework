@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.gdata.exception">
-    <title>Attraper les exceptions Gdata</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.gdata.exception"><info><title>Attraper les exceptions Gdata</title></info>
+    
 
     <para>
         La classe <classname>Zend_Gdata_App_Exception</classname> est la classe de base de
@@ -66,10 +64,8 @@ try {
                     <trademark>CAPTCHA</trademark> . Cette image est un puzzle visuel qui devrait
                     être retournée à l'utilisateur du service. Après récupération de la réponse de
                     l'utilisateur, celle-ci peut être incluse lors du ClientLogin suivant.
-                    L'utilisateur peut aussi alternativement être redirigé vers ce site : <ulink
-                    url="https://www.google.com/accounts/DisplayUnlockCaptcha"></ulink>. De plus
-                    amples informations peuvent être trouvées dans <link
-                    linkend="zend.gdata.clientlogin">la documentation du ClientLogin</link>.
+                    L'utilisateur peut aussi alternativement être redirigé vers ce site : <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.google.com/accounts/DisplayUnlockCaptcha">https://www.google.com/accounts/DisplayUnlockCaptcha</uri>. De plus
+                    amples informations peuvent être trouvées dans <link linkend="zend.gdata.clientlogin">la documentation du ClientLogin</link>.
                 </para>
             </listitem>
             </itemizedlist>
@@ -97,4 +93,4 @@ try {
     die($httpEx->getMessage);
 }
 ]]></programlisting>
-</sect1>
+</section>

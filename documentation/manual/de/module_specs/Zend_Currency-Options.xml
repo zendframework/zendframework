@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21087 -->
-<!-- Reviewed: no -->
-<sect1 id="zend.currency.options">
-    <title>Optionen für Währungen</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.currency.options"><info><title>Optionen für Währungen</title></info>
+    
 
     <para>
         Abhängig von der Notwendigkeit können verschiedene Optionen bei der Instanzierung
@@ -10,7 +10,7 @@
         zu definieren wie die eigenen Währungen dargestellt werden sollen. Das enthält zum Beispiel:
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis>Währungssymbol, Kurzname oder Name</emphasis>:
@@ -42,8 +42,7 @@
             <para>
                 Man könnte die Schreibweise definieren die verwendet wird wenn Ziffern dargestellt
                 werden. Detailierte Informationen über Schreibweisen und deren Verwendung können in
-                <classname>Zend_Locale</classname>'s Kapitel über <link
-                    linkend="zend.locale.numbersystems">Konvertierung des Zahlensystems</link>
+                <classname>Zend_Locale</classname>'s Kapitel über <link linkend="zend.locale.numbersystems">Konvertierung des Zahlensystems</link>
                 gefunden werden.
             </para>
         </listitem>
@@ -68,7 +67,7 @@
         gesetzt werden. In jedem Fall müssen diese Optionen als Array angegeben werden.
     </para>
 
-    <itemizedlist mark='opencircle'>
+    <itemizedlist mark="opencircle">
         <listitem>
             <para>
                 <emphasis><property>currency</property></emphasis>: Definiert die Abkürzung welche
@@ -80,8 +79,7 @@
             <para>
                 <emphasis><property>display</property></emphasis>: Definiert welcher Teil der
                 Währung für die Darstellung der Währungsrepräsenation verwendet werden soll. Es gibt
-                4 Repräsentationen welche verwendet werden können und alle sind in <link
-                    linkend="zend.currency.description">dieser Tabelle</link> beschrieben.
+                4 Repräsentationen welche verwendet werden können und alle sind in <link linkend="zend.currency.description">dieser Tabelle</link> beschrieben.
             </para>
         </listitem>
 
@@ -92,8 +90,7 @@
                 Beispiel den Tausender-Separator. Man kann entweder ein Standardformat verwenden
                 in dem ein Identifikator für ein Gebietsschema angegeben wird, oder durch manuelles
                 definieren des Nummernformats. Wenn kein Format gesetzt wird, dann wird das
-                Gebietsschema vom <classname>Zend_Currency</classname> Objekt verwendet. Siehe <link
-                    linkend="zend.locale.number.localize.table-1">das Kapitel über
+                Gebietsschema vom <classname>Zend_Currency</classname> Objekt verwendet. Siehe <link linkend="zend.locale.number.localize.table-1">das Kapitel über
                     Zahlenformatierung</link> für Details.
             </para>
         </listitem>
@@ -172,4 +169,4 @@
         bereits erwähnt, die Standardwerte dieser Einstellungen den offiziellen Standards der
         Währungsdarstellung für jedes Land.
     </para>
-</sect1>
+</section>

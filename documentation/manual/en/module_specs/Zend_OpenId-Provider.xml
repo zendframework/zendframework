@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect1 id="zend.openid.provider">
-    <title>Zend_OpenId_Provider</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.openid.provider"><info><title>Zend_OpenId_Provider</title></info>
+    
 
     <para>
         <classname>Zend_OpenId_Provider</classname> can be used to implement OpenID
         servers. This chapter provides examples that demonstrate how to
         build a very basic server. However, for implementation of a production OpenID
-        server (such as <ulink url="http://www.myopenid.com">www.myopenid.com</ulink>) you
+        server (such as <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.myopenid.com">www.myopenid.com</link>) you
         may have to deal with more complex issues.
     </para>
 
-    <sect2 id="zend.openid.provider.start">
-        <title>Quick start</title>
+    <section xml:id="zend.openid.provider.start"><info><title>Quick start</title></info>
+        
 
         <para>
             The following example includes code for creating a user account
@@ -28,8 +27,8 @@
             identities.
         </para>
 
-        <example id="zend.openid.provider.example-1">
-            <title>The Identity</title>
+        <example xml:id="zend.openid.provider.example-1"><info><title>The Identity</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -69,8 +68,8 @@ if (!$server->hasUser(TEST_ID)) {
             request.
         </para>
 
-        <example id="zend.openid.provider.example-2">
-            <title>Simple Identity Provider</title>
+        <example xml:id="zend.openid.provider.example-2"><info><title>Simple Identity Provider</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider("example-8-login.php",
@@ -122,8 +121,8 @@ if (is_string($ret)) {
             </para>
         </note>
 
-        <example id="zend.openid.provider.example-3">
-            <title>Simple Login Screen</title>
+        <example xml:id="zend.openid.provider.example-3"><info><title>Simple Login Screen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -162,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 </td>
 </tr>
 <tr>
-<td>&nbsp;</td>
+<td> </td>
 <td>
 <input type="submit"
        name="openid_action"
@@ -188,8 +187,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
             automatically without user interaction.
         </para>
 
-        <example id="zend.openid.provider.example-4">
-            <title>Simple Trust Screen</title>
+        <example xml:id="zend.openid.provider.example-4"><info><title>Simple Trust Screen</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -243,10 +242,10 @@ is your identity URL.
             the provider. In this case, the trust page can be extended to allow
             entering requested fields or selecting a specific user profile.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.provider.all">
-        <title>Combined Provide Scripts</title>
+    <section xml:id="zend.openid.provider.all"><info><title>Combined Provide Scripts</title></info>
+        
 
         <para>
             It is possible to combine all provider functionality in one script. In
@@ -264,8 +263,8 @@ is your identity URL.
             </para>
         </note>
 
-        <example id="zend.openid.provider.example-5">
-            <title>Everything Together</title>
+        <example xml:id="zend.openid.provider.example-5"><info><title>Everything Together</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
@@ -303,10 +302,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             <methodname>unset($_GET['openid_action'])</methodname>. This call to
             <methodname>unset()</methodname> is necessary to route the next request to main handler.
         </para>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.provider.sreg">
-        <title>Simple Registration Extension</title>
+    <section xml:id="zend.openid.provider.sreg"><info><title>Simple Registration Extension</title></info>
+        
 
         <para>
             Again, the code before the &lt;html&gt; tag is just a trick to demonstrate
@@ -316,8 +315,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             this manual.
         </para>
 
-        <example id="zend.openid.provider.example-6">
-            <title>Identity with Profile</title>
+        <example xml:id="zend.openid.provider.example-6"><info><title>Identity with Profile</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -371,8 +370,8 @@ if (!$server->hasUser(TEST_ID)) {
             argument to the <methodname>Zend_OpenId_Provider::handle()</methodname> method.
         </para>
 
-        <example id="zend.openid.provider.example-7">
-            <title>Provider with SREG</title>
+        <example xml:id="zend.openid.provider.example-7"><info><title>Provider with SREG</title></info>
+            
 
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
@@ -402,10 +401,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 }
 ]]></programlisting>
         </example>
-    </sect2>
+    </section>
 
-    <sect2 id="zend.openid.provider.else">
-        <title>Anything Else?</title>
+    <section xml:id="zend.openid.provider.else"><info><title>Anything Else?</title></info>
+        
 
         <para>
             Building OpenID providers is much less common than building
@@ -450,8 +449,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
             certificates, but it can be extended easily using
             <classname>Zend_OpenId_Extension</classname>s or by standard object-oriented extension.
         </para>
-    </sect2>
-</sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

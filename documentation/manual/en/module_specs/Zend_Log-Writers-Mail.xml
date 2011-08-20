@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.log.writers.mail">
-    <title>Writing to Email</title>
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.log.writers.mail"><info><title>Writing to Email</title></info>
+    
 
     <para>
         <classname>Zend_Log_Writer_Mail</classname> writes log entries in an email message
@@ -59,8 +58,8 @@ $log->error('unable to connect to database');
         a total of seven log entries.
     </para>
 
-    <sect3 id="zend.log.writers.mail.layoutusage">
-        <title>Zend_Layout Usage</title>
+    <section xml:id="zend.log.writers.mail.layoutusage"><info><title>Zend_Layout Usage</title></info>
+        
 
         <para>
             A <classname>Zend_Layout</classname> instance may be used to generate the
@@ -112,10 +111,10 @@ $log->error('unable to connect to database');
 // all log entries at or above the Zend_Log filter level. The email will
 // contain both plain text and HTML parts.
 ]]></programlisting>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.dynamicsubjectline">
-        <title>Subject Line Error Level Summary</title>
+    <section xml:id="zend.log.writers.mail.dynamicsubjectline"><info><title>Subject Line Error Level Summary</title></info>
+        
 
         <para>
             The <methodname>setSubjectPrependText()</methodname> method may be used in place
@@ -128,10 +127,10 @@ $log->error('unable to connect to database');
             <classname>Zend_Log_Writer_Mail</classname>, the <classname>Zend_Mail</classname>
             subject line, if any, is used.
         </para>
-    </sect3>
+    </section>
 
-    <sect3 id="zend.log.writers.mail.caveats">
-        <title>Caveats</title>
+    <section xml:id="zend.log.writers.mail.caveats"><info><title>Caveats</title></info>
+        
 
         <para>
             Sending log entries via email can be dangerous. If error conditions
@@ -155,8 +154,5 @@ $log->error('unable to connect to database');
             being put in place to prevent those circumstances in the future,
             then email-based notification of errors can be a valuable tool.
         </para>
-    </sect3>
-</sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->
+    </section>
+</section>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect3 id="zend.progressbar.adapter.console">
-    <title>Zend_ProgressBar_Adapter_Console</title>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.progressbar.adapter.console"><info><title>Zend_ProgressBar_Adapter_Console</title></info>
+    
 
     <para>
         <classname>Zend_ProgressBar_Adapter_Console</classname> is a text-based adapter
@@ -11,8 +12,8 @@
         define the style of the progressbar itself.
     </para>
 
-    <note>
-        <title>Automatic console width recognition</title>
+    <note><info><title>Automatic console width recognition</title></info>
+        
 
         <para>
             <code>shell_exec</code> is required for this feature to work on
@@ -117,7 +118,4 @@
             </para>
         </listitem>
     </itemizedlist>
-</sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->
+</section>

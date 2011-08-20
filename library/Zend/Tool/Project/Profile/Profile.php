@@ -25,7 +25,7 @@
 namespace Zend\Tool\Project\Profile;
 
 /**
- * This class is the front most class for utilizing Zend_Tool_Project
+ * This class is the front most class for utilizing Zend\Tool\Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
@@ -158,7 +158,7 @@ class Profile extends Resource\Container
         } else {
             $projectProfileFilePath = rtrim($this->_attributes['projectDirectory'], '/\\') . '/.zfproject.xml';
             if (!file_exists($projectProfileFilePath)) {
-                throw new Exception\RuntimeException('"projectDirectory" was supplied but no profile file file was not found at location ' . $projectProfileFilePath);
+                throw new Exception\RuntimeException('"projectDirectory" was supplied but no profile file was not found at location ' . $projectProfileFilePath);
             }
             $this->_attributes['projectProfileFile'] = $projectProfileFilePath;
         }

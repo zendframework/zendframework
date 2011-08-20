@@ -128,7 +128,7 @@ class PhpDocblock extends AbstractPhp
      * @param array $tags
      * @return \Zend\CodeGenerator\PhpDocblock
      */
-    public function setTags(Array $tags)
+    public function setTags(array $tags)
     {
         foreach ($tags as $tag) {
             $this->setTag($tag);

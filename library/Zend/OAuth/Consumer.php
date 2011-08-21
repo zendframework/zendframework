@@ -109,7 +109,7 @@ class Consumer extends OAuth
      *
      * @param  null|array $customServiceParameters
      * @param  null|Zend\OAuth\Token\Request $token
-     * @param  null|Zend_OAuth_HTTP_UserAuthorization $redirect
+     * @param  null|Zend\OAuth\HTTP\UserAuthorization $redirect
      * @return string
      */
     public function getRedirectUrl(

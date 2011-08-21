@@ -40,7 +40,6 @@ class Page extends Core
      *
      * ====> (boolean) http_conditional :
      * - if true, http conditional mode is on
-     * WARNING : http_conditional OPTION IS NOT IMPLEMENTED FOR THE MOMENT (TODO)
      *
      * ====> (boolean) debug_header :
      * - if true, a debug text is added before each cached pages
@@ -143,11 +142,6 @@ class Page extends Core
                     break;
                 default:
                     $this->setOption($name, $value);
-            }
-        }
-        if (isset($this->_specificOptions['http_conditional'])) {
-            if ($this->_specificOptions['http_conditional']) {
-                Cache::throwException('http_conditional is not implemented for the moment !');
             }
         }
         $this->setOption('automatic_serialization', true);
@@ -338,6 +332,9 @@ class Page extends Core
     protected function _makeId()
     {
         $tmp = $_SERVER['REQUEST_URI'];
+        if ($this->_specificOptions['http_conditional'] == true) {
+            $tmp = $_SERVER['HTTP_HOST'] . $tmp;
+        }
         $array = explode('?', $tmp, 2);
           $tmp = $array[0];
         foreach (array('Get', 'Post', 'Session', 'Files', 'Cookie') as $arrayName) {

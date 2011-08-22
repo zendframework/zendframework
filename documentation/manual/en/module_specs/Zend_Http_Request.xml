@@ -17,7 +17,8 @@
         <para>
             A typical HTTP Request looks like this:
         </para>
-        <pre>
+
+        <literallayout>
 --------------------------
 | METHOD | URI | VERSION |
 --------------------------
@@ -25,8 +26,7 @@
 --------------------------
 |         BODY           |
 --------------------------
-        </pre>
-
+        </literallayout>
 
         <para>
             In simplified terms, the request consist of a method, uri and the HTTP
@@ -86,9 +86,11 @@ $request->post()->set('foo', 'bar');
             None currently
         </para>
 
+        <!--
         <variablelist>
             <title/>
         </variablelist>
+        -->
     </section>
 
     <section xml:id="zend.http.request.methods">

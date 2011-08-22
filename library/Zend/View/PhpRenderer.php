@@ -294,23 +294,4 @@ class PhpRenderer implements Renderer
 
         return $this->getFilterChain()->filter($content); // filter output
     }
-
-    /**
-     * Accesses a helper object from within a script.
-     *
-     * @param string $name The helper name.
-     * @param array $args The parameters for the helper.
-     * @return mixed The result of the helper output.
-     */
-    public function __call($name, $args)
-    {
-        // load the helper
-        $helper = $this->broker($name);
-
-        // call direct() method on the helper
-        return call_user_func_array(
-        	array($helper,'direct'),
-        	$args
-        );
-    }
 }

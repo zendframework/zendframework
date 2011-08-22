@@ -266,7 +266,7 @@ class Request extends Message implements RequestDescription
     }
     
     /**
-     * @return \Zend\Stdlib\ParametersDescription
+     * @return Header\Cookie[]
      */
     public function cookie()
     {

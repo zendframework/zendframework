@@ -23,8 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Http;
-use Zend\Http;
-use Zend\Uri;
+use Zend\Http\Header\Cookie;
+//use Zend\Uri;
 
 /**
  * Zend_Http_Cookie unit tests
@@ -39,6 +39,43 @@ use Zend\Uri;
  */
 class CookieTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function testCookieFromStringCreatesValidCookieHeader()
+    {
+        $cookieHeader = Cookie::fromString('Cookie: name=value');
+        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $cookieHeader);
+        $this->assertInstanceOf('ArrayObject', $cookieHeader);
+        $this->assertInstanceOf('Zend\Http\Header\Cookie', $cookieHeader);
+    }
+
+    public function testCookieFromStringCreatesValidCookieHeadersWithMultipleValues()
+    {
+        $cookieHeader = Cookie::fromString('Cookie: name=value; foo=bar');
+        $this->assertEquals('value', $cookieHeader->name);
+        $this->assertEquals('bar', $cookieHeader['foo']);
+    }
+
+    public function testCookieGetFieldNameReturnsHeaderName()
+    {
+        $cookieHeader = new Cookie();
+        $this->assertEquals('Cookie', $cookieHeader->getFieldName());
+    }
+
+    public function testCookieGetFieldValueReturnsProperValue()
+    {
+        $cookieHeader = new Cookie();
+        $cookieHeader->foo = 'bar';
+        $this->assertEquals('foo=bar', $cookieHeader->getFieldValue());
+    }
+
+    public function testCookieToStringReturnsHeaderFormattedString()
+    {
+        $cookieHeader = new Cookie();
+
+        $cookieHeader->foo = 'bar';
+        $this->assertEquals('Cookie: foo=bar', $cookieHeader->toString());
+    }
+
 //    /**
 //     * Cookie creation and data accessors tests
 //     */

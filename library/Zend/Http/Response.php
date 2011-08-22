@@ -238,6 +238,14 @@ class Response extends Message implements ResponseDescription
     }
 
     /**
+     * @return Header\SetCookie[]
+     */
+    public function cookie()
+    {
+        return $this->headers()->get('Set-Cookie');
+    }
+
+    /**
      * @param string $version
      * @return Response
      */

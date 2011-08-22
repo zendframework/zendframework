@@ -57,29 +57,6 @@ class SetCookie implements MultipleHeaderDescription
      */
     protected $httponly = null;
 
-    /*
-    public static function fromStringMultipleHeaders($headerLine)
-    {
-        $headers = array();
-
-        list($name, $value) = preg_split('#: #', $headerLine, 2);
-
-        // check to ensure proper header type for this factory
-        if (strtolower($name) !== 'set-cookie') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Set-Cookie string');
-        }
-
-        $singleHeaderLines = preg_split('#(Sun|Mon|Tue|Wed|Thu|Fri|Sat),#', $headerLine);
-
-        die();
-        foreach ($singleHeaderLines as $singleHeaderLine) {
-            $headers[] = self::fromString($singleHeaderLine, true);
-        }
-
-        return $headers;
-    }
-    */
-
     /**
      * @static
      * @throws Exception\InvalidArgumentException
@@ -209,10 +186,16 @@ class SetCookie implements MultipleHeaderDescription
 
     /**
      * @param string $name
+     * @return SetCookie
      */
     public function setName($name)
     {
+        if (preg_match("/[=,; \t\r\n\013\014]/", $name)) {
+            throw new Exception\InvalidArgumentException("Cookie name cannot contain these characters: =,; \\t\\r\\n\\013\\014 ({$name})");
+        }
+
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -241,18 +224,33 @@ class SetCookie implements MultipleHeaderDescription
 
     /**
      * @param int $expires
+     * @return SetCookie
      */
     public function setExpires($expires)
     {
-        $this->expires = $expires;
+        if (!empty($expires)) {
+            if (is_string($expires)) {
+                $expires = strtotime($expires);
+            } elseif (!is_int($expires)) {
+                throw new Exception\InvalidArgumentException('Invalid expires time specified');
+            }
+            $this->expires = (int) $expires;
+        }
+        return $this;
     }
 
     /**
      * @return int
      */
-    public function getExpires()
+    public function getExpires($inSeconds = false)
     {
-        return $this->expires;
+        if ($this->expires == null) {
+            return;
+        }
+        if ($inSeconds) {
+            return $this->expires;
+        }
+        return gmdate('D, d-M-Y H:i:s', $this->expires) . ' GMT';
     }
 
     /**
@@ -317,6 +315,37 @@ class SetCookie implements MultipleHeaderDescription
     public function isHttponly()
     {
         return $this->httponly;
+    }
+
+    /**
+     * Check whether the cookie has expired
+     *
+     * Always returns false if the cookie is a session cookie (has no expiry time)
+     *
+     * @param int $now Timestamp to consider as "now"
+     * @return boolean
+     */
+    public function isExpired($now = null)
+    {
+        if ($now === null) {
+            $now = time();
+        }
+
+        if (is_int($this->expires) && $this->expires < $now) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check whether the cookie is a session cookie (has no expiry time set)
+     *
+     * @return boolean
+     */
+    public function isSessionCookie()
+    {
+        return ($this->expires === null);
     }
 
     public function toString()

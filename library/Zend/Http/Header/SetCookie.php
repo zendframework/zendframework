@@ -93,7 +93,6 @@ class SetCookie implements MultipleHeaderDescription
                     }
                 }
 
-
                 return $header;
             };
         }
@@ -347,6 +346,8 @@ class SetCookie implements MultipleHeaderDescription
     {
         return ($this->expires === null);
     }
+
+    
 
     public function toString()
     {

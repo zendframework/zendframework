@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Http;
-use Zend\Http\Header\Cookie;
+use Zend\Http\Header\Cookie,
+    Zend\Http\Header\SetCookie;
 //use Zend\Uri;
 
 /**
@@ -53,6 +54,17 @@ class CookieTest extends \PHPUnit_Framework_TestCase
         $cookieHeader = Cookie::fromString('Cookie: name=value; foo=bar');
         $this->assertEquals('value', $cookieHeader->name);
         $this->assertEquals('bar', $cookieHeader['foo']);
+    }
+
+    public function testCookieFromSetCookieArrayProducesASingleCookie()
+    {
+        $setCookies = array(
+            new SetCookie('foo', 'bar'),
+            new SetCookie('name', 'value')
+        );
+
+        $cookie = Cookie::fromSetCookieArray($setCookies);
+        $this->assertEquals('Cookie: foo=bar; name=value', $cookie->toString());
     }
 
     public function testCookieGetFieldNameReturnsHeaderName()

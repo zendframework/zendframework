@@ -25,9 +25,11 @@
             <title>Configuration Options</title>
         </info>
 
+        <!--
         <variablelist>
             <title/>
         </variablelist>
+        -->
     </section>
 
     <section xml:id="zend.http.headers.methods">
@@ -48,12 +50,13 @@
 
                 <listitem>
                     <para>Populates headers from string representation</para>
-                    <para>Parses a string for headers, and aggregates them, in order, in the
-current instance.
+                    <para>Parses a string for headers, and aggregates them, in order, in the current instance.</para>
 
-On Request/Response variants, this should look for the first line
-matching the appropriate regex, and then forward the remainder of the
-string on to parent::fromString().</para>
+                    <para>
+                        On Request/Response variants, this should look for the first line
+                        matching the appropriate regex, and then forward the remainder of the
+                        string on to <methodname>parent::fromString()</methodname>.
+                    </para>
                     <para>Returns Zend\Http\Headers</para>
                 </listitem>
             </varlistentry>

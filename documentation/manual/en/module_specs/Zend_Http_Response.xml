@@ -19,7 +19,9 @@
 
         <para>
             A typical HTTP Response looks like this:
-            <literal>
+        </para>
+
+        <literallayout>
 ---------------------------
 | VERSION | CODE | REASON |
 ---------------------------
@@ -27,8 +29,7 @@
 ---------------------------
 |         BODY            |
 ---------------------------
-            </literal>
-        </para>
+        </literallayout>
 
         <para>
             In simplified terms, the response consist of the HTTP version, status
@@ -97,9 +98,11 @@ EOS);
             None currently available
         </para>
 
+        <!--
         <variablelist>
             <title/>
         </variablelist>
+        -->
     </section>
 
     <section xml:id="zend.http.response.methods">

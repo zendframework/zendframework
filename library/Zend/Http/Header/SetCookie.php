@@ -347,7 +347,28 @@ class SetCookie implements MultipleHeaderDescription
         return ($this->expires === null);
     }
 
-    
+    public function isValidForRequest($requestUri, $requestDomain, $expiration = null, $isSecure = null)
+    {
+        if ($requestUri instanceof \Zend\Uri\Uri) {
+            $uri = $requestUri->getPath();
+        }
+        /* @todo test for path
+        if ($this->getPath() && (strpos($uri, $this->getPath()) !== 0)) {
+            return false;
+        }
+        */
+
+        /* @todo test for domain
+        if ($this->getDomain() && (strrpos($requestDomain, $this->getDomain()) !== false)) {
+            return false;
+        }
+        */
+
+        // @todo test expiration
+        // @todo test isSecure
+
+        return true;
+    }
 
     public function toString()
     {

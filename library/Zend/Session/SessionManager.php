@@ -84,16 +84,14 @@ class SessionManager extends AbstractManager
     /**
      * Start session
      *
-     * if No sesion currently exists, attempt to start it. Calls
-     * {@link isValid()} once session_start() is called, and raises an
+     * if No sesion currently exists, attempt to start it. Calls 
+     * {@link isValid()} once session_start() is called, and raises an 
      * exception if validation fails.
-     *
-     * @param bool $preserveStorage        If set to true, current session storage will not be overwritten by the 
-     *                                     contents of $_SESSION.
+     * 
      * @return void
      * @throws Exception
      */
-    public function start($preserveStorage = false)
+    public function start()
     {
         if ($this->sessionExists()) {
             return;
@@ -109,9 +107,7 @@ class SessionManager extends AbstractManager
         if ($storage instanceof Storage\SessionStorage
             && $_SESSION !== $storage
         ) {
-            if(!$preserveStorage){
-                $storage->fromArray($_SESSION);
-            }
+            $storage->fromArray($_SESSION);
             $_SESSION = $storage;
         }
     }
@@ -261,7 +257,9 @@ class SessionManager extends AbstractManager
             session_regenerate_id();
             return $this;
         }
+        $this->destroy();
         session_regenerate_id();
+        $this->start();
         return $this;
     }
 
@@ -386,12 +384,19 @@ class SessionManager extends AbstractManager
             return;
         }
 
-        // Set new cookie TTL
+        if ($this->sessionExists()) {
+            $this->destroy(array('send_expire_cookie' => false));
+
+            // Since a cookie was destroyed, we should regenerate the ID
+            $this->regenerateId();
+        }
+
+        // Now simply set the cookie TTL
         $config->setCookieLifetime($ttl);
 
-        if ($this->sessionExists()) {
-            // There is a running session so we'll regenerate id to send a new cookie
-            $this->regenerateId();
+        if (!$this->sessionExists()) {
+            // Restart session if necessary
+            $this->start();
         }
     }
 }

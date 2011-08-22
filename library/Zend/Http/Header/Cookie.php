@@ -45,54 +45,7 @@ use Zend\Uri;
  */
 class Cookie implements HeaderDescription
 {
-    /**
-     * Cookie name
-     *
-     * @var string
-     */
-    protected $name;
-    
-    /**
-     * Cookie value
-     * 
-     * @var string 
-     */
-    protected $value;
 
-    /**
-     * Cookie expiry date
-     *
-     * @var int
-     */
-    protected $expires = null;
-
-    /**
-     * Cookie domain
-     *
-     * @var string
-     */
-    protected $domain = null;
-
-    /**
-     * Cookie path
-     *
-     * @var string
-     */
-    protected $path = '/';
-
-    /**
-     * Whether the cookie is secure or not
-     *
-     * @var boolean
-     */
-    protected $secure = false;
-
-    /**
-     * Whether the cookie value has been encoded/decoded
-     *
-     * @var boolean
-     */
-    protected $encodeValue;
 
     /**
      * Generate a new Cookie object from a cookie string
@@ -183,42 +136,7 @@ class Cookie implements HeaderDescription
         }
     }
 
-    /**
-     * Cookie object constructor
-     *
-     * @todo Add validation of each one of the parameters (legal domain, etc.)
-     *
-     * @param string $name
-     * @param string $value
-     * @param string $domain
-     * @param int $expires
-     * @param string $path
-     * @param bool $secure
-     */
-    public function __construct($name = null, $value = null, $domain = null, $expires = null, $path = null, $secure = false)
-    {
-        $this->type = 'Cookie';
 
-        if ($name) {
-            $this->setName($name);
-        }
-
-        if ($value) {
-            $this->setValue($value); // in parent
-        }
-
-        if ($domain) {
-            $this->setDomain($domain);
-        }
-
-        if ($expires) {
-            $this->setExpires($expires);
-        }
-
-        if ($secure) {
-            $this->setSecure($secure);
-        }
-    }
 
     public function getFieldName()
     {

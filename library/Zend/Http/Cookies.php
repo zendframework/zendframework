@@ -35,51 +35,79 @@ use Zend\Stdlib\ParametersDescription,
  */
 class Cookies extends Headers
 {
-    /**
-     * Return cookie(s) as a Zend\Http\Header\Cookie object
-     *
-     */
-    const COOKIE_OBJECT = 0;
+
+
+
+
+//    /**
+//     * Return cookie(s) as a Zend\Http\Header\Cookie object
+//     *
+//     */
+//    const COOKIE_OBJECT = 0;
+//
+//    /**
+//     * Return cookie(s) as a string (suitable for sending in an HTTP request)
+//     *
+//     */
+//    const COOKIE_STRING_ARRAY = 1;
+//
+//    /**
+//     * Return all cookies as one long string (suitable for sending in an HTTP request)
+//     *
+//     */
+//    const COOKIE_STRING_CONCAT = 2;
+//
+//    /**
+//     * Array storing cookies
+//     *
+//     * Cookies are stored according to domain and path:
+//     * $cookies
+//     *  + www.mydomain.com
+//     *    + /
+//     *      - cookie1
+//     *      - cookie2
+//     *    + /somepath
+//     *      - othercookie
+//     *  + www.otherdomain.net
+//     *    + /
+//     *      - alsocookie
+//     *
+//     * @var array
+//     */
+
+
 
     /**
-     * Return cookie(s) as a string (suitable for sending in an HTTP request)
-     *
+     * @var Headers
      */
-    const COOKIE_STRING_ARRAY = 1;
+    protected $headers = null;
 
     /**
-     * Return all cookies as one long string (suitable for sending in an HTTP request)
-     *
+     * @static
+     * @throws Exception\RuntimeException
+     * @param $string
+     * @return void
      */
-    const COOKIE_STRING_CONCAT = 2;
+    public static function fromString($string)
+    {
+        throw new Exception\RuntimeException(
+            __CLASS__ . '::' . __FUNCTION__ . ' should not be used as a factory, use '
+            . __NAMESPACE__ . '\Headers::fromtString() instead.'
+        );
+    }
 
-    /**
-     * Array storing cookies
-     *
-     * Cookies are stored according to domain and path:
-     * $cookies
-     *  + www.mydomain.com
-     *    + /
-     *      - cookie1
-     *      - cookie2
-     *    + /somepath
-     *      - othercookie
-     *  + www.otherdomain.net
-     *    + /
-     *      - alsocookie
-     *
-     * @var array
-     */
-    protected $cookies = array();
+//    /**
+//     * The Zend\Http\Header\Cookie array
+//     *
+//     * @var array
+//     */
+//    protected $_rawCookies = array();
 
-    /**
-     * The Zend\Http\Header\Cookie array
-     *
-     * @var array
-     */
-    protected $_rawCookies = array();
-
-
+    public function __construct(Headers $headers, $context = self::CONTEXT_REQUEST)
+    {
+        $this->headers = $headers;
+        parent::__construct();
+    }
 
     /**
      * Add a cookie to the class. Cookie should be passed either as a Zend\Http\Header\Cookie object
@@ -88,7 +116,7 @@ class Cookies extends Headers
      * @param Cookie|string $cookie
      * @param Uri\Uri|string    $ref_uri Optional reference URI (for domain, path, secure)
      */
-    public function addCookie($cookie, $ref_uri = null)
+    public function addCookie(Cookie $cookie, $ref_uri = null)
     {
         if (is_string($cookie)) {
             $cookie = Cookie::fromString($cookie, $ref_uri);

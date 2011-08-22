@@ -14,6 +14,18 @@ use Zend\Loader\PluginClassLoader,
 class Headers implements Iterator, Countable
 {
 
+    /**@#+
+     * @const string Context of this cookie container
+     */
+    const CONTEXT_REQUEST = 'request';
+    const CONTEXT_RESPONSE = 'response';
+    /**@#-*/
+
+    /**
+     * @var string
+     */
+    protected $context = self::CONTEXT_REQUEST;
+
     /**
      * @var PluginClassLoader
      */
@@ -83,13 +95,20 @@ class Headers implements Iterator, Countable
         return $headers;
     }
 
+    public function __construct($context = self::CONTEXT_REQUEST)
+    {
+        if ($context !== self::CONTEXT_REQUEST) {
+            $this->setContext($context);
+        }
+    }
+
     /**
      * @param PluginClassLoader $pluginLoader
      * @return Headers
      */
-    public function setPluginLoader(PluginClassLoader $pluginLoader)
+    public function setPluginClassLoader(PluginClassLoader $pluginClassLoader)
     {
-        $this->pluginClassLoader = $pluginLoader;
+        $this->pluginClassLoader = $pluginClassLoader;
         return $this;
     }
 
@@ -158,6 +177,20 @@ class Headers implements Iterator, Countable
         return $this->pluginClassLoader;
     }
 
+    public function setContext($context)
+    {
+        if (!in_array($context, array(self::CONTEXT_REQUEST, self::CONTEXT_RESPONSE))) {
+            throw new Exception\InvalidArgumentException('Invalid context provided to this headers collection');
+        }
+        $this->context = $context;
+        return $this;
+    }
+
+    public function getContext()
+    {
+        return $this->context;
+    }
+
     /**
      * Add many headers at once
      *
@@ -207,13 +240,13 @@ class Headers implements Iterator, Countable
         if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $headerFieldNameOrLine, $matches)) {
             // is a header
             $headerName = $matches['name'];
-            $headerKey = str_replace(array('-', '_'), '', strtolower($matches['name']));
+            $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($matches['name']));
             $line = $headerFieldNameOrLine;
         } elseif ($fieldValue === null) {
             throw new Exception\InvalidArgumentException('A field name was provided without a field value');
         } else {
             $headerName = $headerFieldNameOrLine;
-            $headerKey = str_replace(array('-', '_'), '', strtolower($headerFieldNameOrLine));
+            $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($headerFieldNameOrLine));
             $line = $headerFieldNameOrLine . ': ' . $fieldValue;
         }
 
@@ -230,7 +263,7 @@ class Headers implements Iterator, Countable
      */
     public function addHeader(Header\HeaderDescription $header)
     {
-        $key = str_replace(array('-', '_'), '', strtolower($header->getFieldName()));
+        $key = str_replace(array('-', '_', ' ', '.'), '', strtolower($header->getFieldName()));
 
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
@@ -273,7 +306,7 @@ class Headers implements Iterator, Countable
      */
     public function get($name)
     {
-        $key = str_replace(array('-', '_'), '', strtolower($name));
+        $key = str_replace(array('-', '_', ' ', '.'), '', strtolower($name));
         if (!in_array($key, $this->headersKeys)) {
             return false;
         }
@@ -312,7 +345,7 @@ class Headers implements Iterator, Countable
      */
     public function has($name)
     {
-        $name = str_replace(array('-', '_'), '', strtolower($name));
+        $name = str_replace(array('-', '_', ' ', '.'), '', strtolower($name));
         return (in_array($name, $this->headersKeys));
     }
 

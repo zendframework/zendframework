@@ -312,15 +312,11 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $headers = array(
             'Accept-encoding' => 'gzip,deflate',
             'X-baz' => 'Foo',
-            'X-powered-by' => 'A large wooden badger'
+            'X-powered-by' => 'A large wooden badger',
+            'Accept' => 'text/xml,text/html,*/*'
         );
 
-        foreach ($headers as $key => $val) {
-            $this->client->setHeaders($key, $val);
-        }
-
-        $acceptHeader = "Accept: text/xml,text/html,*/*";
-        $this->client->setHeaders($acceptHeader);
+        $this->client->setHeaders($headers);
         $this->client->setMethod('TRACE');
         
         $res = $this->client->send();
@@ -607,38 +603,13 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             'cookie' => 'crumble'
         );
 
-        foreach ($cookies as $k => $v) {
-            $this->client->setCookie($k, $v);
-        }
+        $this->client->setCookies($cookies);
 
         $res = $this->client->send();
-
+            
         $this->assertEquals($res->getBody(), serialize($cookies), 'Response body does not contain the expected cookies');
     }
 
-    /**
-     * Make sure we can set object cookies with no jar
-     *
-     */
-    public function testSetCookieObjectNoJar()
-    {
-        $this->client->setUri($this->baseuri. 'testCookies.php');
-        $refuri = $this->client->getUri();
-
-        $cookies = array(
-            Http\Header\Cookie::fromString('chocolate=chips', $refuri),
-            Http\Header\Cookie::fromString('crumble=apple', $refuri)
-        );
-
-        $strcookies = array();
-        foreach ($cookies as $c) {
-            $this->client->setCookie($c);
-            $strcookies[$c->getName()] = $c->getValue();
-        }
-
-        $res = $this->client->send();
-        $this->assertEquals($res->getBody(), serialize($strcookies), 'Response body does not contain the expected cookies');
-    }
 
     /**
      * Make sure we can set an array of object cookies
@@ -650,20 +621,15 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $refuri = $this->client->getUri();
 
         $cookies = array(
-            Http\Header\Cookie::fromString('chocolate=chips', $refuri),
-            Http\Header\Cookie::fromString('crumble=apple', $refuri),
-            Http\Header\Cookie::fromString('another=cookie', $refuri)
+            'chocolate' => 'chips',
+            'crumble' => 'apple',
+            'another' => 'cookie'
         );
 
-        $this->client->setCookie($cookies);
-
-        $strcookies = array();
-        foreach ($cookies as $c) {
-            $strcookies[$c->getName()] = $c->getValue();
-        }
+        $this->client->setCookies($cookies);
 
         $res = $this->client->send();
-        $this->assertEquals($res->getBody(), serialize($strcookies), 'Response body does not contain the expected cookies');
+        $this->assertEquals($res->getBody(), serialize($cookies), 'Response body does not contain the expected cookies');
     }
 
     /**
@@ -680,35 +646,10 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             'another'   => 'cookie'
         );
 
-        $this->client->setCookie($cookies);
+        $this->client->setCookies($cookies);
 
         $res = $this->client->send();
         $this->assertEquals($res->getBody(), serialize($cookies), 'Response body does not contain the expected cookies');
-    }
-
-    /**
-     * Make sure we can set cookie objects with a jar
-     *
-     */
-    public function testSetCookieObjectJar()
-    {
-        $this->client->setUri($this->baseuri. 'testCookies.php');
-        $this->client->setCookies();
-        $refuri = $this->client->getUri();
-
-        $cookies = array(
-            Http\Header\Cookie::fromString('chocolate=chips', $refuri),
-            Http\Header\Cookie::fromString('crumble=apple', $refuri)
-        );
-
-        $strcookies = array();
-        foreach ($cookies as $c) {
-            $this->client->setCookie($c);
-            $strcookies[$c->getName()] = $c->getValue();
-        }
-
-        $res = $this->client->send();
-        $this->assertEquals($res->getBody(), serialize($strcookies), 'Response body does not contain the expected cookies');
     }
 
     /**
@@ -890,6 +831,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
     public function testStreamResponseBody()
     {
+        $this->markTestSkipped('To check with the new ZF2 implementation');
+        
         if(!($this->client->getAdapter() instanceof Adapter\Stream)) {
               $this->markTestSkipped('Current adapter does not support streaming');
               return;

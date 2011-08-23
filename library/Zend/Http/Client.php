@@ -26,7 +26,7 @@ namespace Zend\Http;
 use Zend\Config\Config,
     Zend\Uri\Http,
     Zend\Http\Header\Cookie,
-    Zend\Http\Client\Cookies,
+    Zend\Http\Header\SetCookie,
     Zend\Stdlib\Parameters,
     Zend\Stdlib\ParametersDescription;
 
@@ -91,9 +91,9 @@ class Client
     protected $streamName = null;
 
     /**
-     * @var Header
+     * @var array of Header\SetCookie
      */
-    protected $cookies = null;
+    protected $cookies = array();
 
     /**
      * @var string
@@ -129,9 +129,9 @@ class Client
         'httpversion'     => Request::VERSION_11,
         'storeresponse'   => true,
         'keepalive'       => false,
-        'outputstream'   => false,
+        'outputstream'    => false,
         'encodecookies'   => true,
-        'rfc3986strict'  => false
+        'rfc3986strict'   => false
     );
    
     /**
@@ -177,8 +177,7 @@ class Client
 
         /** Config Key Normalization */
         foreach ($config as $k => $v) {
-            unset($config[$k]); // unset original value
-            $config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
+            $this->config[str_replace(array('-', '_', ' ', '.'), '', strtolower($k))] = $v; // replace w/ normalized
         }
 
         // Pass configuration options to the adapter if it exists
@@ -338,7 +337,7 @@ class Client
         if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
              $method == Request::METHOD_DELETE) && empty($this->encType)) {
             $this->setEncType(self::ENC_URLENCODED);
-        }
+        } 
         
         return $this;
     }
@@ -410,122 +409,111 @@ class Client
         $this->getRequest()->query()->fromArray($query);
         return $this;
     }
-    /**
-     * Add a cookie to the request. If the client has no Cookie Jar, the cookies
-     * will be added directly to the headers array as "Cookie" headers.
-     *
-     * @param \Zend\Http\Header\Cookie|string $cookie
-     * @param string|null $value If "cookie" is a string, this is the cookie value.
-     * @return Client
-     * @throws Exception
-     */
-    public function setCookie($cookie, $value = null)
-    {
-        if (is_array($cookie)) {
-            foreach ($cookie as $c => $v) {
-                if (is_string($c)) {
-                    $this->setCookie($c, $v);
-                } else {
-                    $this->setCookie($v);
-                }
-            }
-            return $this;
-        }
-
-        if ($value !== null && $this->config['encodecookies']) {
-            $value = urlencode($value);
-        }
-
-        if (empty($this->cookies)) {
-            $this->cookies = new Cookies();
-        }
-        
-        if ($cookie instanceof Cookie) {
-            $this->cookies->addCookie($cookie);
-        } elseif (is_string($cookie) && $value !== null) {
-            $cookie = Cookie::fromString("{$cookie}={$value}",
-                                          $this->getUri()->toString(),
-                                          $this->config['encodecookies']);
-            $this->cookies->addCookie($cookie);
-        } 
-
-        return $this;
-    }
-    /**
-     * Set the HTTP client's cookies
-     *
-     * A cookies is an object that holds and maintains cookies across HTTP requests
-     * and responses.
-     *
-     * @param  Cookies $cookies 
-     * @return Client
-     * @throws Exception
-     */
-    public function setCookies($cookies = null)
-    {
-        if (empty($cookies) || $cookies instanceof Cookies) {
-            $this->cookies = $cookies;
-        } else {
-            throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookies');
-        }
-
-        return $this;
-    }
+    
     /**
      * Return the current cookies
      *
-     * @return Cookies|null
+     * @return array
      */
     public function getCookies()
     {
         return $this->cookies;
     }
+    
     /**
-     * Set the headers (for the request)
+     * Get the cookie Id (name+domain+path)
      * 
-     * @param  $headers
+     * @param  SetCookie|Cookie $cookie
+     * @return string|boolean 
+     */
+    protected function getCookieId($cookie)
+    {
+        if (($cookie instanceof SetCookie) || ($cookie instanceof Cookie)) {
+            return $cookie->getName() . $cookie->getDomain() . $cookie->getPath();
+        }
+        return false;
+    }
+
+    /**
+     * Add a cookie
+     * 
+     * @param ArrayIterator|SetCookie|string $cookie
+     * @param string  $value
+     * @param string  $domain
+     * @param string  $expire
+     * @param string  $path
+     * @param boolean $secure
+     * @param boolean $httponly
      * @return Client 
      */
-    public function setHeaders($headers)
+    public function addCookie($cookie, $value=null, $domain=null, $expire=null, $path=null, $secure=false, $httponly=true)
     {
-        if (!empty($headers)) {
-            if (is_array($headers)) {
-                $str = '';
-                foreach ($headers as $key => $value) {
-                    $str .= "$key: $value\r\n";
+        if ($cookie instanceof \ArrayIterator) {
+            foreach ($cookie as $setCookie) {
+                if ($setCookie instanceof SetCookie) {
+                    $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
+                } else {
+                    throw new Exception\InvalidArgumentException('The cookie parameter is not a valid Set-Cookie type');
                 }
-                $headers = $str;
-            } elseif (!is_string($headers) && !($headers instanceof ParametersDescription)) {
-                throw new Exception\InvalidArgumentException('Invalid parameter headers passed');
             }
-            $this->getRequest()->setHeaders($headers);
+        } elseif ($cookie instanceof SetCookie) {
+            $this->cookies[$this->getCookieId($cookie)] = $cookie;
+        } elseif (is_string($cookie) && !empty($value)) {
+            if (!empty($value) && $this->config['encodecookies']) {
+                $value = urlencode($value);
+            }
+            $setCookie = new SetCookie($cookie, $value, $domain, $expire, $path, $secure, $httponly);
+            $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid parameter type passed as Cookie');
         }
         return $this;
     }
 
     /**
-     * Add an header to the request
+     * Set an array of cookies
      * 
-     * @param  string|array $type
-     * @param  string $value 
-     * @return boolean
+     * @param  array $cookies
+     * @return Client 
      */
-    public function addHeader($type,$value = null)
+    public function setCookies($cookies)
     {
-        if (!empty($type)) {
-            if (is_array($type)) {
-                $this->getRequest()->headers()->addHeaders($type);
-                /*
-                foreach ($type as $key => $value) {
-                    $this->getRequest()->headers()->addHeaderLine($key, $value);
-                }
-                */
-            } else {
-                $this->getRequest()->headers()->addHeaderLine($type, $value);
+        if (is_array($cookies)) {
+            $this->clearCookies();
+            foreach ($cookies as $name => $value) {
+                $this->addCookie($name,$value);
             }
-            return true;
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid cookies passed as parameter, it must be an array');
         }
-        return false;
+        return $this;
+    }
+    /**
+     * Clear all the cookies
+     */
+    public function clearCookies()
+    {
+        $this->cookies= array();
+    }
+    
+    /**
+     * Set the headers (for the request)
+     * 
+     * @param  Headers|array $headers
+     * @return Client 
+     */
+    public function setHeaders($headers)
+    {
+        if (is_array($headers)) {
+            $newHeaders= new Headers();
+            $newHeaders->addHeaders($headers);
+            $this->getRequest()->setHeaders($newHeaders);
+        } elseif ($headers instanceof Headers) {
+            $this->getRequest()->setHeaders($headers);
+        } else {    
+            throw new Exception\InvalidArgumentException('Invalid parameter headers passed');
+        }
+        return $this;
     }
 
     /**
@@ -770,14 +758,21 @@ class Client
             // headers
             $headers = $this->prepareHeaders($body,$uri);
             
+            $secure= $uri->getScheme() == 'https' ? true : false;
+            
+            // cookies
+            $cookie = $this->prepareCookies($uri->getHost(), $uri->getPath(), $secure);
+            if ($cookie->getFieldValue()) {
+                $headers['Cookie']= $cookie->getFieldValue();
+            }
+            
             // check that adapter supports streaming before using it
             if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
             
             // Open the connection, send the request and read the response
-            $this->adapter->connect($uri->getHost(), $uri->getPort(),
-                ($uri->getScheme() == 'https' ? true : false));
+            $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
 
             if($this->config['outputstream']) {
                 if($this->adapter instanceof Client\Adapter\Stream) {
@@ -820,19 +815,18 @@ class Client
                 $response = Response::fromString($response);
             }
 
-            $responseHeaders = $response->headers()->toArray();
-
-            // Load cookies into cookie jar
-            if (isset($this->cookies)) {
-                $this->cookies->addCookiesFromResponse($response, $uri);
+            // Get the cookies from response (if any)
+            $setCookie= $response->cookie();
+            if (!empty($setCookie)) {
+                $this->addCookie($setCookie);
             }
 
             // If we got redirected, look for the Location header
-            if ($response->isRedirect() && (isset($responseHeaders['Location']))) {
+            if ($response->isRedirect() && ($response->headers()->has('Location'))) {
 
                 // Avoid problems with buggy servers that add whitespace at the
                 // end of some headers
-                $responseHeaders['Location'] = trim($responseHeaders['Location']);
+                $location = trim($response->headers()->get('Location')->getFieldValue());
                 
                 // Check whether we send the exact same request again, or drop the parameters
                 // and send a GET request
@@ -845,28 +839,28 @@ class Client
                 }
 
                 // If we got a well formed absolute URI
-                if (($scheme = substr($responseHeaders['Location'], 0, 6)) &&
+                if (($scheme = substr($location, 0, 6)) &&
                         ($scheme == 'http:/' || $scheme == 'https:')) {
-                    $this->setUri($responseHeaders['Location']);
+                    $this->setUri($location);
                 } else {
 
                     // Split into path and query and set the query
-                    if (strpos($responseHeaders['Location'], '?') !== false) {
-                        list($responseHeaders['Location'], $query) = explode('?', $responseHeaders['Location'], 2);
+                    if (strpos($location, '?') !== false) {
+                        list($location, $query) = explode('?', $location, 2);
                     } else {
                         $query = '';
                     }
                     $this->getUri()->setQuery($query);
 
                     // Else, if we got just an absolute path, set it
-                    if(strpos($responseHeaders['Location'], '/') === 0) {
-                        $this->getUri()->setPath($responseHeaders['Location']);
+                    if(strpos($location, '/') === 0) {
+                        $this->getUri()->setPath($location);
                         // Else, assume we have a relative path
                     } else {
                         // Get the current path directory, removing any trailing slashes
                         $path = $this->getUri()->getPath();
                         $path = rtrim(substr($path, 0, strrpos($path, '/')), "/");
-                        $this->getUri()->setPath($path . '/' . $responseHeaders['Location']);
+                        $this->getUri()->setPath($path . '/' . $location);
                     }
                 }
                 ++$this->redirectCounter;
@@ -938,6 +932,36 @@ class Client
     }
     
     /**
+     * Prepare Cookies
+     * 
+     * @param   string $uri
+     * @param   string $domain
+     * @param   boolean $secure
+     * @return  Cookie|boolean
+     */
+    protected function prepareCookies($domain, $path, $secure)
+    {
+        $validCookies = array();
+
+        if (!empty($this->cookies)) {
+            foreach ($this->cookies as $id => $cookie) {
+                if ($cookie->isExpired()) {
+                    unset($this->cookies[$id]);
+                    continue;
+                }
+
+                if ($cookie->isValidForRequest($domain, $path, $secure)) {
+                    $validCookies[] = $cookie;
+                }
+            }
+        }
+        
+        $cookies = Cookie::fromSetCookieArray($validCookies);
+
+        return $cookies;
+    }
+
+    /**
      * Prepare the request headers
      *
      * @return array
@@ -959,7 +983,7 @@ class Client
         }
 
         // Set the connection header
-        if (!$this->hasHeader('Connection')) {
+        if (!$this->getRequest()->headers()->has('Connection')) {
             if (!$this->config['keepalive']) {
                 $headers['Connection'] = 'close';
             }
@@ -977,7 +1001,7 @@ class Client
 
 
         // Set the user agent header
-        if (!$this->hasHeader('User-Agent') && isset($this->config['useragent'])) {
+        if (!$this->getRequest()->headers()->has('User-Agent') && isset($this->config['useragent'])) {
             $headers['User-Agent'] = $this->config['useragent'];
         }
 
@@ -992,16 +1016,6 @@ class Client
                     break;
                 case self::AUTH_DIGEST :
                     throw new Exception\RuntimeException("The digest authentication is not implemented yet"); 
-            }
-        }
-
-        // Load cookies from client cookies
-        if (isset($this->cookies)) {
-            $cookstr = $this->cookies->getMatchingCookies($this->getUri()->toString(),
-                true, Cookies::COOKIE_STRING_CONCAT);
-
-            if ($cookstr) {
-                $headers['Cookie'] = $cookstr;
             }
         }
 
@@ -1060,7 +1074,7 @@ class Client
 
         $body = '';
         
-        if (!$this->hasHeader('Content-Type')) {
+        if (!$this->getRequest()->headers()->has('Content-Type')) {
             $totalFiles = count($this->getRequest()->file()->toArray());
             // If we have files to upload, force encType to multipart/form-data
             if ($totalFiles > 0) {

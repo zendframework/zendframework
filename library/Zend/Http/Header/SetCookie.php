@@ -7,7 +7,7 @@ namespace Zend\Http\Header;
  * @see http://www.ietf.org/rfc/rfc2109.txt
  * @see http://www.w3.org/Protocols/rfc2109/rfc2109
  */
-class SetCookie implements MultipleHeaderDescription
+class SetCookie implements HeaderDescription //MultipleHeaderDescription
 {
 
     /**
@@ -356,27 +356,22 @@ class SetCookie implements MultipleHeaderDescription
         return ($this->expires === null);
     }
 
-    public function isValidForRequest($requestUri, $requestDomain, $expiration = null, $isSecure = null)
+    public function isValidForRequest($requestDomain, $path, $isSecure = false)
     {
-        if ($requestUri instanceof \Zend\Uri\Uri) {
-            $uri = $requestUri->getPath();
-        }
-        /* @todo test for path
-        if ($this->getPath() && (strpos($uri, $this->getPath()) !== 0)) {
-            return false;
-        }
-        */
-
-        /* @todo test for domain
         if ($this->getDomain() && (strrpos($requestDomain, $this->getDomain()) !== false)) {
             return false;
         }
-        */
-
-        // @todo test expiration
-        // @todo test isSecure
-
+        
+        if ($this->getPath() && (strpos($uri, $this->getPath()) !== 0)) {
+            return false;
+        }
+        
+        if ($this->secure && $this->isSecure()!==$isSecure) {
+            return false;
+        }
+        
         return true;
+
     }
 
     public function toString()
@@ -398,10 +393,6 @@ class SetCookie implements MultipleHeaderDescription
         }
         return $headerLine;
     }
-
-
-
-
 
 
 }

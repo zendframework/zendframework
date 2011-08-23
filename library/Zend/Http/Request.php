@@ -150,6 +150,9 @@ class Request extends Message implements RequestDescription
      */
     public function setMethod($method)
     {
+        if (!defined('self::METHOD_'.strtoupper($method))) {
+            throw new Exception\InvalidArgumentException('Invalid HTTP method passed');
+        }
         $this->method = $method;
         return $this;
     }

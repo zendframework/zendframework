@@ -58,7 +58,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testRequestUsesHeadersContainerByDefault()
     {
         $request = new Request();
-        $this->assertInstanceOf('Zend\Http\Headers', $request->headers());
+        $this->assertInstanceOf('Zend\Http\Headers', $request->header());
     }
 
     public function testRequestCanSetHeaders()
@@ -66,9 +66,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $request = new Request();
         $headers = new \Zend\Http\Headers();
 
-        $ret = $request->setHeaders($headers);
+        $ret = $request->setHeader($headers);
         $this->assertInstanceOf('Zend\Http\Request', $ret);
-        $this->assertSame($headers, $request->headers());
+        $this->assertSame($headers, $request->header());
     }
 
     public function testRequestCanSetAndRetrieveValidMethod()

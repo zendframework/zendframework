@@ -218,7 +218,7 @@ class Response extends Message implements ResponseDescription
      * @param  Headers $headers
      * @return Response
      */
-    public function setHeaders(Headers $headers)
+    public function setHeader(Headers $headers)
     {
         $this->headers = $headers;
         return $this;
@@ -229,7 +229,7 @@ class Response extends Message implements ResponseDescription
      * 
      * @return Headers
      */
-    public function headers()
+    public function header()
     {
         if ($this->headers === null || is_string($this->headers)) {
             $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
@@ -242,7 +242,7 @@ class Response extends Message implements ResponseDescription
      */
     public function cookie()
     {
-        return $this->headers()->get('Set-Cookie');
+        return $this->header()->get('Set-Cookie');
     }
 
     /**
@@ -341,7 +341,7 @@ class Response extends Message implements ResponseDescription
     {
         $body = (string) $this->getContent();
 
-        $transferEncoding = $this->headers()->get('Transfer-Encoding');
+        $transferEncoding = $this->header()->get('Transfer-Encoding');
 
         if (!empty($transferEncoding)) {
             if (strtolower($transferEncoding->getFieldValue()) == 'chunked') {
@@ -349,7 +349,7 @@ class Response extends Message implements ResponseDescription
             }
         }
 
-        $contentEncoding = $this->headers()->get('Content-Encoding');
+        $contentEncoding = $this->header()->get('Content-Encoding');
         
         if (!empty($contentEncoding)) {
             $contentEncoding = $contentEncoding->getFieldValue();
@@ -456,7 +456,7 @@ class Response extends Message implements ResponseDescription
     public function toString()
     {
         $str = $this->renderResponseLine() . "\r\n";
-        $str .= $this->headers()->toString();
+        $str .= $this->header()->toString();
         $str .= "\r\n";
         $str .= $this->getBody();
         return $str;

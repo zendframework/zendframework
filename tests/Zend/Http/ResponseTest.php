@@ -32,7 +32,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function testResponseUsesHeadersContainerByDefault()
     {
         $response = new Response();
-        $this->assertInstanceOf('Zend\Http\Headers', $response->headers());
+        $this->assertInstanceOf('Zend\Http\Headers', $response->header());
     }
 
     public function testRequestCanSetHeaders()
@@ -40,9 +40,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $response = new Response();
         $headers = new \Zend\Http\Headers();
 
-        $ret = $response->setHeaders($headers);
+        $ret = $response->setHeader($headers);
         $this->assertInstanceOf('Zend\Http\Response', $ret);
-        $this->assertSame($headers, $response->headers());
+        $this->assertSame($headers, $response->header());
     }
 
     public function testResponseCanSetStatusCode()

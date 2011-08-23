@@ -299,7 +299,7 @@ class Request extends Message implements RequestDescription
      */
     public function cookie()
     {
-        return $this->headers()->get('Cookie');
+        return $this->header()->get('Cookie');
     }
 
     /**

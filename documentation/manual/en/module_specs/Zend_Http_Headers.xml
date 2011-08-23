@@ -520,15 +520,17 @@ concrete classes to prepend with the appropriate status/request line.</para>
                     </row>
                     <row>
                         <entry>AcceptRanges</entry>
-                        <entry>N/A</entry>
+                        <entry>
+                            <para>getRangeUnit() / setRangeUnit() - The range unit of the accept ranges header</para>
+                        </entry>
                     </row>
                     <row>
                         <entry>Age</entry>
-                        <entry>N/A</entry>
+                        <entry>getDeltaSeconds() / setDeltaSeconds() - The age in delta seconds</entry>
                     </row>
                     <row>
                         <entry>Allow</entry>
-                        <entry>N/A</entry>
+                        <entry>getAllowedMethods() / setAllowedMethods() - An array of allowed methods</entry>
                     </row>
                     <row>
                         <entry>AuthenticationInfo</entry>
@@ -580,7 +582,10 @@ concrete classes to prepend with the appropriate status/request line.</para>
                     </row>
                     <row>
                         <entry>Cookie</entry>
-                        <entry>N/A</entry>
+                        <entry>
+                            <para>Extends \ArrayObject</para>
+                            <para>setEncodeValue() / getEncodeValue() - Whether or not to encode values</para>
+                        </entry>
                     </row>
                     <row>
                         <entry>Date</entry>
@@ -676,7 +681,15 @@ concrete classes to prepend with the appropriate status/request line.</para>
                     </row>
                     <row>
                         <entry>SetCookie</entry>
-                        <entry>N/A</entry>
+                        <entry>
+                            <para>getName() / setName() - The cookies name</para>
+                            <para>getValue() / setValue() - The cookie value</para>
+                            <para>getDomain() / setDomain() - The domain the cookie applies to</para>
+                            <para>getExpires() / setExpires() - The time frame the cookie is valid for, null is a session cookie</para>
+                            <para>getPath() / setPath() - The uri path the cookie is bound to</para>
+                            <para>isSecure() / setSecure() - Whether the cookies contains the Secure flag</para>
+                            <para>isHttponly() / setHttponly() - Whether the cookies can be accessed via HTTP only</para>
+                        </entry>
                     </row>
                     <row>
                         <entry>TE</entry>

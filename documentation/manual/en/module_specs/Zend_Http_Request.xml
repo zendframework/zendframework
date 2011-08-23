@@ -53,7 +53,7 @@
             by simply instantiating the Zend\Http\Request class.
         </para>
 
-        <programlisting language="php"><![CDATA[
+        <programlisting role="php" language="php"><![CDATA[
 $request = Zend\Http\Request::fromString(<<<EOS
 POST /foo HTTP/1.1
 HeaderField1: header-field-value
@@ -62,12 +62,12 @@ HeaderField2: header-field-value2
 foo=bar&
 EOS);
 
-// OR
+// OR, the completely equivalent
 
 $request = new Zend\Http\Request();
 $request->setMethod(Zend\Http\Request::METHOD_POST);
 $request->setUri('/foo');
-$request->headers()->addHeaders(array(
+$request->header()->addHeaders(array(
 'HeaderField1' => 'header-field-value'
 'HeaderField2' => 'header-field-value2'
 );
@@ -102,7 +102,7 @@ $request->post()->set('foo', 'bar');
             <varlistentry xml:id="zend.http.request.methods.from-string">
                 <term>
                     <methodsynopsis>
-                        <methodname>fromString</methodname>
+                        <methodname>Request::fromString</methodname>
                         <methodparam>
                             <funcparams>string $string</funcparams>
                         </methodparam>
@@ -110,8 +110,8 @@ $request->post()->set('foo', 'bar');
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>A factory that produces a Request object from a well-formed Http Request string</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -127,8 +127,8 @@ $request->post()->set('foo', 'bar');
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Set the method for this request</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -138,14 +138,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>getMethod</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the method for this request</para>
+                    <para> </para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -161,8 +161,8 @@ $request->post()->set('foo', 'bar');
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Set the URI/URL for this request, this can be a string or an instance of Zend\Uri\Http</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -172,14 +172,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>getUri</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the URI for this request object</para>
+                    <para> </para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -189,14 +189,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>uri</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the URI for this request object as an instance of Zend\Uri\Http</para>
+                    <para> </para>
                     <para>Returns Zend\Stdlib\RequestDescription\Zend\Stdlib\Message\Zend\Stdlib\ParametersDescription\Zend\Stdlib\Parameters\Zend\Uri\Http</para>
                 </listitem>
             </varlistentry>
@@ -212,8 +212,8 @@ $request->post()->set('foo', 'bar');
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Set the HTTP version for this object, one of 1.0 or 1.1 (Request::VERSION_10, Request::VERSION_11)</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -223,14 +223,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>getVersion</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the HTTP version for this request</para>
+                    <para> </para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -240,14 +240,15 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setQuery</methodname>
                         <methodparam>
-                            <funcparams>ParametersDescription $query</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersDescription $query</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Provide an alternate Parameter Container implementation for query parameters in this object, (this is NOT the
+primary API for value setting, for that see query())</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -257,15 +258,15 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>query</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
-                    <para>Returns ParametersDescription</para>
+                    <para>Return the parameter container responsible for query parameters</para>
+                    <para> </para>
+                    <para>Returns Zend\Stdlib\ParametersDescription</para>
                 </listitem>
             </varlistentry>
 
@@ -274,14 +275,15 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setPost</methodname>
                         <methodparam>
-                            <funcparams>ParametersDescription $post</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersDescription $post</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Provide an alternate Parameter Container implementation for post parameters in this object, (this is NOT the
+primary API for value setting, for that see post())</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -291,14 +293,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>post</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the parameter container responsible for post parameters</para>
+                    <para> </para>
                     <para>Returns Zend\Stdlib\ParametersDescription</para>
                 </listitem>
             </varlistentry>
@@ -308,15 +310,15 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>cookie</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
-                    <para>Returns Zend\Stdlib\ParametersDescription</para>
+                    <para>Return the Cookie header, this is the same as calling $request-&gt;header()-&gt;get('Cookie');</para>
+                    <para> </para>
+                    <para>Returns Zend\Http\Header\Cookie</para>
                 </listitem>
             </varlistentry>
 
@@ -325,14 +327,15 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setFile</methodname>
                         <methodparam>
-                            <funcparams>ParametersDescription $files</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersDescription $files</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Provide an alternate Parameter Container implementation for file parameters in this object, (this is NOT the
+primary API for value setting, for that see file())</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -342,14 +345,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>file</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the parameter container responsible for file parameters</para>
+                    <para> </para>
                     <para>Returns ParametersDescription</para>
                 </listitem>
             </varlistentry>
@@ -359,14 +362,15 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>setServer</methodname>
                         <methodparam>
-                            <funcparams>ParametersDescription $server</funcparams>
+                            <funcparams>Zend\Stdlib\ParametersDescription $server</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Provide an alternate Parameter Container implementation for server parameters in this object, (this is NOT the
+primary API for value setting, for that see server())</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -376,14 +380,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>server</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the parameter container responsible for server parameters</para>
+                    <para> </para>
                     <para>Returns Zend\Stdlib\ParametersDescription</para>
                 </listitem>
             </varlistentry>
@@ -399,8 +403,9 @@ $request->post()->set('foo', 'bar');
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Provide an alternate Parameter Container implementation for env parameters in this object, (this is NOT the
+primary API for value setting, for that see env())</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -410,49 +415,50 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>env</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the parameter container responsible for env parameters</para>
+                    <para> </para>
                     <para>Returns Zend\Stdlib\ParametersDescription</para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.http.request.methods.set-headers">
+            <varlistentry xml:id="zend.http.request.methods.set-header">
                 <term>
                     <methodsynopsis>
-                        <methodname>setHeaders</methodname>
+                        <methodname>setHeader</methodname>
                         <methodparam>
-                            <funcparams>Zend\Http\RequestHeaders $headers</funcparams>
+                            <funcparams>Zend\Http\Headers $headers</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Provide an alternate Parameter Container implementation for headers in this object, (this is NOT the
+primary API for value setting, for that see header())</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.http.request.methods.headers">
+            <varlistentry xml:id="zend.http.request.methods.header">
                 <term>
                     <methodsynopsis>
-                        <methodname>headers</methodname>
+                        <methodname>header</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
-                    <para>Returns Zend\Http\RequestHeaders</para>
+                    <para>Return the header container responsible for headers</para>
+                    <para> </para>
+                    <para>Returns Zend\Http\Headers</para>
                 </listitem>
             </varlistentry>
 
@@ -467,8 +473,8 @@ $request->post()->set('foo', 'bar');
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Set the raw body for the request</para>
+                    <para> </para>
                     <para>Returns Zend\Http\Request</para>
                 </listitem>
             </varlistentry>
@@ -478,14 +484,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>getRawBody</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Get the raw body for the request</para>
+                    <para> </para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -495,14 +501,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isOptions</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this an OPTIONS method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -512,14 +518,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isGet</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this a GET method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -529,14 +535,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isHead</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this a HEAD method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -546,14 +552,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isPost</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this a POST method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -563,14 +569,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isPut</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this a PUT method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -580,14 +586,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isDelete</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this a DELETE method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -597,14 +603,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isTrace</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this a TRACE method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -614,14 +620,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>isConnect</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Is this a CONNECT method request?</para>
+                    <para> </para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -631,14 +637,14 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>renderRequestLine</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Return the formatted request line (first line) for this http request</para>
+                    <para> </para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -648,19 +654,36 @@ $request->post()->set('foo', 'bar');
                     <methodsynopsis>
                         <methodname>toString</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para> </para>
+                    <para> </para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.set-metadata">
+            <varlistentry xml:id="zend.http.request.methods.__to-string">
+                <term>
+                    <methodsynopsis>
+                        <methodname>__toString</methodname>
+                        <methodparam>
+                            <funcparams> </funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Allow PHP casting of this object</para>
+                    <para> </para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.stdlib.message.methods.set-metadata">
                 <term>
                     <methodsynopsis>
                         <methodname>setMetadata</methodname>
@@ -678,7 +701,7 @@ the entire metadata container.</para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.get-metadata">
+            <varlistentry xml:id="zend.stdlib.message.methods.get-metadata">
                 <term>
                     <methodsynopsis>
                         <methodname>getMetadata</methodname>
@@ -690,12 +713,12 @@ the entire metadata container.</para>
 
                 <listitem>
                     <para>Retrieve all metadata or a single metadatum as specified by key</para>
-                    <para></para>
+                    <para> </para>
                     <para>Returns mixed</para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.set-content">
+            <varlistentry xml:id="zend.stdlib.message.methods.set-content">
                 <term>
                     <methodsynopsis>
                         <methodname>setContent</methodname>
@@ -707,24 +730,24 @@ the entire metadata container.</para>
 
                 <listitem>
                     <para>Set message content</para>
-                    <para></para>
+                    <para> </para>
                     <para>Returns Zend\Stdlib\Message</para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.http.request._parent_.zend.stdlib.message.methods.get-content">
+            <varlistentry xml:id="zend.stdlib.message.methods.get-content">
                 <term>
                     <methodsynopsis>
                         <methodname>getContent</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Get message content</para>
-                    <para></para>
+                    <para> </para>
                     <para>Returns mixed</para>
                 </listitem>
             </varlistentry>
@@ -732,10 +755,48 @@ the entire metadata container.</para>
         </variablelist>
     </section>
 
+
     <section xml:id="zend.http.request.examples">
         <info>
             <title>Examples</title>
         </info>
+
+        <para>Generating a Request object from a string</para>
+
+        <programlisting language="php" role="php"><![CDATA[
+$string = "GET /foo HTTP/1.1\r\n\r\nSome Content";
+$request = Request::fromString($string);
+
+$request->getMethod(); // returns Request::METHOD_GET
+$request->getUri(); // returns '/foo'
+$request->getVersion(); // returns Request::VERSION_11 or '1.1'
+$request->getRawBody(); // returns 'Some Content'
+]]></programlisting>
+
+        <para>Generating a Request object from an array</para>
+
+        <programlisting language="php" role="php"><![CDATA[
+TBD
+]]></programlisting>
+
+        <para>Retrieving and setting headers</para>
+
+        <programlisting language="php" role="php"><![CDATA[
+TBD
+]]></programlisting>
+
+        <para>Retrieving and setting GET and POST parameters</para>
+
+        <programlisting language="php" role="php"><![CDATA[
+TBD
+]]></programlisting>
+
+        <para>Generating an formatted HTTP Request from an Request object</para>
+
+        <programlisting language="php" role="php"><![CDATA[
+TBD
+]]></programlisting>
+
 
     </section>
 

@@ -11,6 +11,29 @@
             <title>Overview</title>
         </info>
 
+        <para>
+            The Zend\Http\Headers object is a container for HTTP headers.  It is typically accessed as part of
+            a Zend\Http\Request or Zend\Http\Response header() call.  The Headers container will lazily load
+            actual Header objects as to reduce the overhead of header specific parsing.
+        </para>
+
+        <para>
+            The Zend\Http\Header\* classes are the domain specific implementations for the various types of
+            Headers that one might encounter during the typical HTTP request.  If a header of unknown type
+            is encountered, it will be implemented as a Zend\Http\Header\GenericHeader instance.  See the below
+            table for a list of the various HTTP headers and the API that is specific to each header type.
+
+        </para>
+
+        <!--
+        <para>
+            In general, the Headers
+            container object cares not about the context that it is being used within (whether it is request or
+            response), so it is up to the consumer to apply the appropriate Header
+        </para>
+        -->
+
+
     </section>
 
     <section xml:id="zend.http.headers.quick-start">
@@ -18,12 +41,21 @@
             <title>Quick Start</title>
         </info>
 
+        <para>
+            The quickest way to get started interacting with header objects is by getting an already populated
+            Headers container from a request or response object.
+        </para>
+
     </section>
 
     <section xml:id="zend.http.headers.options">
         <info>
             <title>Configuration Options</title>
         </info>
+
+        <para>
+            None currently available.
+        </para>
 
         <!--
         <variablelist>
@@ -41,7 +73,7 @@
             <varlistentry xml:id="zend.http.headers.methods.from-string">
                 <term>
                     <methodsynopsis>
-                        <methodname>fromString</methodname>
+                        <methodname>Headers::fromString</methodname>
                         <methodparam>
                             <funcparams>string $string</funcparams>
                         </methodparam>
@@ -50,29 +82,25 @@
 
                 <listitem>
                     <para>Populates headers from string representation</para>
-                    <para>Parses a string for headers, and aggregates them, in order, in the current instance.</para>
-
-                    <para>
-                        On Request/Response variants, this should look for the first line
-                        matching the appropriate regex, and then forward the remainder of the
-                        string on to <methodname>parent::fromString()</methodname>.
-                    </para>
+                    <para>Parses a string for headers, and aggregates them, in order, in the
+current instance, primarily as strings until they are needed (they
+will be lazy loaded)</para>
                     <para>Returns Zend\Http\Headers</para>
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.http.headers.methods.set-plugin-loader">
+            <varlistentry xml:id="zend.http.headers.methods.set-plugin-class-loader">
                 <term>
                     <methodsynopsis>
-                        <methodname>setPluginLoader</methodname>
+                        <methodname>setPluginClassLoader</methodname>
                         <methodparam>
-                            <funcparams>PluginClassLoader $pluginLoader</funcparams>
+                            <funcparams>Zend\Loader\PluginClassLocator $pluginClassLoader</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Set an alternate implementation for the PluginClassLoader</para>
                     <para></para>
                     <para>Returns Zend\Http\Headers</para>
                 </listitem>
@@ -89,9 +117,9 @@
                 </term>
 
                 <listitem>
+                    <para>Return an instance of a PluginClassLocator, lazyload and inject map if necessary</para>
                     <para></para>
-                    <para></para>
-                    <para>Returns PluginClassLoader</para>
+                    <para>Returns PluginClassLocator</para>
                 </listitem>
             </varlistentry>
 
@@ -123,8 +151,9 @@
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
+                    <para>Add a raw header line, either in name =&gt; value, or as a single string 'name: value'</para>
+                    <para>This method allows for lazy-loading in that the parsing and instantiation of Header object
+will be delayed until they are retrieved by either get() or current()</para>
                     <para>Returns Zend\Http\Headers</para>
                 </listitem>
             </varlistentry>
@@ -140,7 +169,7 @@
                 </term>
 
                 <listitem>
-                    <para>Add a header onto the queue</para>
+                    <para>Add a Header to this container, for raw values @see addHeaderLine() and addHeaders()</para>
                     <para></para>
                     <para>Returns Zend\Http\Headers</para>
                 </listitem>
@@ -151,15 +180,15 @@
                     <methodsynopsis>
                         <methodname>removeHeader</methodname>
                         <methodparam>
-                            <funcparams>Header $header</funcparams>
+                            <funcparams>Zend\Http\Header\HeaderDescription $header</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
+                    <para>Remove a Header from the container</para>
                     <para></para>
-                    <para></para>
-                    <para>Returns Zend\Http\Headers</para>
+                    <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
@@ -176,7 +205,7 @@
                 <listitem>
                     <para>Clear all headers</para>
                     <para>Removes all headers from queue</para>
-                    <para>Returns void</para>
+                    <para>Returns Zend\Http\Headers</para>
                 </listitem>
             </varlistentry>
 
@@ -225,7 +254,7 @@
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Advance the pointer for this object as an interator</para>
                     <para></para>
                     <para>Returns void</para>
                 </listitem>
@@ -242,7 +271,7 @@
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Return the current key for this object as an interator</para>
                     <para></para>
                     <para>Returns mixed</para>
                 </listitem>
@@ -259,7 +288,7 @@
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Is this iterator still valid?</para>
                     <para></para>
                     <para>Returns bool</para>
                 </listitem>
@@ -276,7 +305,7 @@
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Reset the internal pointer for this object as an iterator</para>
                     <para></para>
                     <para>Returns void</para>
                 </listitem>
@@ -293,7 +322,7 @@
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Return the current value for this iterator, lazy loading it if need be</para>
                     <para></para>
                     <para>Returns Zend\Http\Header\HeaderDescription</para>
                 </listitem>
@@ -310,7 +339,8 @@
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Return the number of headers in this contain, if all headers have not been parsed, actual count could
+increase if MultipleHeader objects exist in the Request/Response.    If you need an exact count, iterate</para>
                     <para></para>
                     <para>Returns int</para>
                 </listitem>
@@ -339,15 +369,32 @@ concrete classes to prepend with the appropriate status/request line.</para>
                     <methodsynopsis>
                         <methodname>toArray</methodname>
                         <methodparam>
-                            <funcparams></funcparams>
+                            <funcparams> </funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
+                    <para>Return the headers container as an array</para>
                     <para></para>
                     <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.headers.methods.force-loading">
+                <term>
+                    <methodsynopsis>
+                        <methodname>forceLoading</methodname>
+                        <methodparam>
+                            <funcparams> </funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>By calling this, it will force parsing and loading of all headers, after this count() will be accurate</para>
+                    <para></para>
+                    <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
@@ -360,4 +407,318 @@ concrete classes to prepend with the appropriate status/request line.</para>
         </info>
 
     </section>
+
+    <section xml:id="zend.http.headers.header-description">
+        <info>
+            <title>Zend\Http\Header\* Base Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.http.header.generic-header.methods.from-string">
+                <term>
+                    <methodsynopsis>
+                        <methodname>fromString</methodname>
+                        <methodparam>
+                            <funcparams>string $headerLine</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Factory to generate a header object from a string</para>
+                    <para> </para>
+                    <para>Returns Zend\Http\Header\GenericHeader</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.header.generic-header.methods.get-field-name">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getFieldName</methodname>
+                        <methodparam>
+                            <funcparams> </funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Retrieve header field name</para>
+                    <para> </para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.header.generic-header.methods.get-field-value">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getFieldValue</methodname>
+                        <methodparam>
+                            <funcparams> </funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Retrieve header field value</para>
+                    <para></para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.http.header.generic-header.methods.to-string">
+                <term>
+                    <methodsynopsis>
+                        <methodname>toString</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Cast to string as a well formed HTTP header line</para>
+                    <para>Returns in form of "NAME: VALUE\r\n"</para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.http.header-types.list">
+        <info>
+            <title>List of Http Header Types</title>
+        </info>
+
+        <table frame='all'>
+
+            <title>Zend\Http\Header\* Classes</title>
+
+            <tgroup cols='5' align='left' colsep='1' rowsep='1'>
+                <thead>
+                    <row>
+                        <entry>Class Name</entry>
+                        <entry>Additional Methods</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Accept</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>AcceptCharset</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>AcceptEncoding</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>AcceptLanguage</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>AcceptRanges</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Age</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Allow</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>AuthenticationInfo</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Authorization</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>CacheControl</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Connection</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentDisposition</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentEncoding</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentLanguage</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentLength</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentLocation</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentMD5</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentRange</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ContentType</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Cookie</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Date</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Etag</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Expect</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Expires</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>From</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Host</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>IfMatch</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>IfModifiedSince</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>IfNoneMatch</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>IfRange</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>IfUnmodifiedSince</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>KeepAlive</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>LastModified</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Location</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>MaxForwards</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Pragma</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ProxyAuthenticate</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>ProxyAuthorization</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Range</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Referer</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Refresh</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>RetryAfter</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Server</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>SetCookie</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>TE</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Trailer</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>TransferEncoding</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Upgrade</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>UserAgent</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Vary</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Via</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>Warning</entry>
+                        <entry>N/A</entry>
+                    </row>
+                    <row>
+                        <entry>WWWAuthenticate</entry>
+                        <entry>N/A</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </section>
+
+
 </section>

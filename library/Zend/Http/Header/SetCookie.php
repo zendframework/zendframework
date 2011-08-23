@@ -128,6 +128,8 @@ class SetCookie implements MultipleHeaderDescription
      * @param int $expires
      * @param string $path
      * @param bool $secure
+     * @param bool $httponly
+     * @return SetCookie
      */
     public function __construct($name = null, $value = null, $domain = null, $expires = null, $path = null, $secure = false, $httponly = true)
     {
@@ -154,11 +156,18 @@ class SetCookie implements MultipleHeaderDescription
         }
     }
 
+    /**
+     * @return string 'Set-Cookie'
+     */
     public function getFieldName()
     {
         return 'Set-Cookie';
     }
 
+    /**
+     * @throws Exception\RuntimeException
+     * @return string
+     */
     public function getFieldValue()
     {
         if ($this->getName() == '') {

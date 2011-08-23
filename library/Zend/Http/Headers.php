@@ -3,6 +3,7 @@
 namespace Zend\Http;
 
 use Zend\Loader\PluginClassLoader,
+    Zend\Loader\PluginClassLocator,
     Iterator,
     Countable;
 
@@ -13,21 +14,8 @@ use Zend\Loader\PluginClassLoader,
  */
 class Headers implements Iterator, Countable
 {
-
-    /**@#+
-     * @const string Context of this cookie container
-     */
-    const CONTEXT_REQUEST = 'request';
-    const CONTEXT_RESPONSE = 'response';
-    /**@#-*/
-
     /**
-     * @var string
-     */
-    protected $context = self::CONTEXT_REQUEST;
-
-    /**
-     * @var PluginClassLoader
+     * @var \Zend\Loader\PluginClassLoader
      */
     protected $pluginClassLoader = null;
 
@@ -45,19 +33,15 @@ class Headers implements Iterator, Countable
      * Populates headers from string representation
      *
      * Parses a string for headers, and aggregates them, in order, in the
-     * current instance.
-     *
-     * On Request/Response variants, this should look for the first line
-     * matching the appropriate regex, and then forward the remainder of the
-     * string on to parent::fromString().
+     * current instance, primarily as strings until they are needed (they
+     * will be lazy loaded)
      *
      * @param  string $string
      * @return Headers
      */
     public static function fromString($string)
     {
-        $class = get_called_class();
-        $headers = new $class();
+        $headers = new static();
         $current = array();
 
         // iterate the header lines, some might be continuations
@@ -95,25 +79,22 @@ class Headers implements Iterator, Countable
         return $headers;
     }
 
-    public function __construct($context = self::CONTEXT_REQUEST)
-    {
-        if ($context !== self::CONTEXT_REQUEST) {
-            $this->setContext($context);
-        }
-    }
-
     /**
-     * @param PluginClassLoader $pluginLoader
+     * Set an alternate implementation for the PluginClassLoader
+     *
+     * @param \Zend\Loader\PluginClassLocator $pluginClassLoader
      * @return Headers
      */
-    public function setPluginClassLoader(PluginClassLoader $pluginClassLoader)
+    public function setPluginClassLoader(PluginClassLocator $pluginClassLoader)
     {
         $this->pluginClassLoader = $pluginClassLoader;
         return $this;
     }
 
     /**
-     * @return PluginClassLoader
+     * Return an instance of a PluginClassLocator, lazyload and inject map if necessary
+     *
+     * @return PluginClassLocator
      */
     public function getPluginClassLoader()
     {
@@ -177,20 +158,6 @@ class Headers implements Iterator, Countable
         return $this->pluginClassLoader;
     }
 
-    public function setContext($context)
-    {
-        if (!in_array($context, array(self::CONTEXT_REQUEST, self::CONTEXT_RESPONSE))) {
-            throw new Exception\InvalidArgumentException('Invalid context provided to this headers collection');
-        }
-        $this->context = $context;
-        return $this;
-    }
-
-    public function getContext()
-    {
-        return $this->context;
-    }
-
     /**
      * Add many headers at once
      *
@@ -229,15 +196,21 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Add a raw header line, either in name => value, or as a single string 'name: value'
+     *
+     * This method allows for lazy-loading in that the parsing and instantiation of Header object
+     * will be delayed until they are retrieved by either get() or current()
+     *
      * @throws Exception\InvalidArgumentException
      * @param string $headerFieldNameOrLine
-     * @param string $fieldValue
+     * @param string $fieldValue optional
      * @return Headers
      */
     public function addHeaderLine($headerFieldNameOrLine, $fieldValue = null)
     {
         $matches = null;
-        if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $headerFieldNameOrLine, $matches)) {
+        if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $headerFieldNameOrLine, $matches)
+            && $fieldValue === null) {
             // is a header
             $headerName = $matches['name'];
             $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($matches['name']));
@@ -256,7 +229,7 @@ class Headers implements Iterator, Countable
     }
 
     /**
-     * Add a header onto the queue
+     * Add a Header to this container, for raw values @see addHeaderLine() and addHeaders()
      * 
      * @param  Header\HeaderDescription $header
      * @return Headers
@@ -271,6 +244,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Remove a Header from the container
+     *
      * @param Header\HeaderDescription $header
      * @return bool
      */
@@ -350,6 +325,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Advance the pointer for this object as an interator
+     *
      * @return void
      */
     public function next()
@@ -358,6 +335,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Return the current key for this object as an interator
+     *
      * @return mixed
      */
     public function key()
@@ -366,6 +345,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Is this iterator still valid?
+     *
      * @return bool
      */
     public function valid()
@@ -374,6 +355,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Reset the internal pointer for this object as an iterator
+     *
      * @return void
      */
     public function rewind()
@@ -382,6 +365,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Return the current value for this iterator, lazy loading it if need be
+     *
      * @return Header\HeaderDescription
      */
     public function current()
@@ -394,6 +379,9 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Return the number of headers in this contain, if all headers have not been parsed, actual count could
+     * increase if MultipleHeader objects exist in the Request/Response.  If you need an exact count, iterate
+     *
      * @return int count of currently known headers
      */
     public function count()
@@ -420,6 +408,8 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Return the headers container as an array
+     *
      * @return array
      */
     public function toArray()
@@ -438,6 +428,19 @@ class Headers implements Iterator, Countable
             }
         }
         return $headers;
+    }
+
+    /**
+     * By calling this, it will force parsing and loading of all headers, after this count() will be accurate
+     *
+     * @return bool
+     */
+    public function forceLoading()
+    {
+        foreach ($this as $item) {
+            // $item should now be loaded
+        }
+        return true;
     }
 
     /**

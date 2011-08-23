@@ -82,6 +82,8 @@ class Request extends Message implements RequestDescription
     protected $rawBody = null;
 
     /**
+     * A factory that produces a Request object from a well-formed Http Request string
+     *
      * @param string $string
      * @return \Zend\Http\Request
      */
@@ -141,6 +143,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Set the method for this request
+     *
      * @param string $method
      * @return Request
      */
@@ -151,6 +155,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Return the method for this request
+     *
      * @return string
      */
     public function getMethod()
@@ -159,6 +165,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Set the URI/URL for this request, this can be a string or an instance of Zend\Uri\Http
+     *
      * @throws Exception\InvalidArgumentException
      * @param string|HttpUri $uri
      * @return Request
@@ -172,12 +180,14 @@ class Request extends Message implements RequestDescription
         } elseif (!($uri instanceof \Zend\Uri\Http)) {
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');
         }
-        $this->uri= $uri;
+        $this->uri = $uri;
         
         return $this;
     }
 
     /**
+     * Return the URI for this request object
+     *
      * @return string
      */
     public function getUri()
@@ -189,6 +199,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Return the URI for this request object as an instance of Zend\Uri\Http
+     *
      * @return HttpUri
      */
     public function uri()
@@ -200,6 +212,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Set the HTTP version for this object, one of 1.0 or 1.1 (Request::VERSION_10, Request::VERSION_11)
+     *
      * @throws Exception\InvalidArgumentException
      * @param string $version (Must be 1.0 or 1.1)
      * @return Request
@@ -214,6 +228,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Return the HTTP version for this request
+     *
      * @return string
      */
     public function getVersion()
@@ -222,6 +238,9 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Provide an alternate Parameter Container implementation for query parameters in this object, (this is NOT the
+     * primary API for value setting, for that see query())
+     *
      * @param \Zend\Stdlib\ParametersDescription $query
      * @return Request
      */
@@ -232,6 +251,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Return the parameter container responsible for query parameters
+     *
      * @return \Zend\Stdlib\ParametersDescription
      */
     public function query()
@@ -244,6 +265,9 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Provide an alternate Parameter Container implementation for post parameters in this object, (this is NOT the
+     * primary API for value setting, for that see post())
+     *
      * @param \Zend\Stdlib\ParametersDescription $post
      * @return Request
      */
@@ -254,6 +278,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Return the parameter container responsible for post parameters
+     *
      * @return \Zend\Stdlib\ParametersDescription
      */
     public function post()
@@ -266,7 +292,10 @@ class Request extends Message implements RequestDescription
     }
     
     /**
-     * @return Header\Cookie[]
+     * Return the Cookie header, this is the same as calling $request->headers()->get('Cookie');
+     *
+     * @convenience $request->headers()->get('Cookie');
+     * @return Header\Cookie
      */
     public function cookie()
     {
@@ -274,6 +303,9 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Provide an alternate Parameter Container implementation for file parameters in this object, (this is NOT the
+     * primary API for value setting, for that see file())
+     *
      * @param \Zend\Stdlib\ParametersDescription $files
      * @return Request
      */
@@ -284,6 +316,8 @@ class Request extends Message implements RequestDescription
     }
     
     /**
+     * Return the parameter container responsible for file parameters
+     *
      * @return ParametersDescription
      */
     public function file()
@@ -296,6 +330,9 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Provide an alternate Parameter Container implementation for server parameters in this object, (this is NOT the
+     * primary API for value setting, for that see server())
+     *
      * @param \Zend\Stdlib\ParametersDescription $server
      * @return Request
      */
@@ -304,8 +341,11 @@ class Request extends Message implements RequestDescription
         $this->serverParams = $server;
         return $this;
     }
-    
+
     /**
+     * Return the parameter container responsible for server parameters
+     *
+     * @see http://www.faqs.org/rfcs/rfc3875.html
      * @return \Zend\Stdlib\ParametersDescription
      */
     public function server()
@@ -318,6 +358,9 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Provide an alternate Parameter Container implementation for env parameters in this object, (this is NOT the
+     * primary API for value setting, for that see env())
+     *
      * @param \Zend\Stdlib\ParametersDescription $env
      * @return \Zend\Http\Request
      */
@@ -328,6 +371,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Return the parameter container responsible for env parameters
+     *
      * @return \Zend\Stdlib\ParametersDescription
      */
     public function env()
@@ -340,36 +385,36 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Provide an alternate Parameter Container implementation for headers in this object, (this is NOT the
+     * primary API for value setting, for that see headers())
      *
-     * @param \Zend\Http\RequestHeaders $headers
+     * @param \Zend\Http\Headers $headers
      * @return \Zend\Http\Request
      */
-    public function setHeaders($headers)
+    public function setHeader(Headers $headers)
     {
         $this->headers = $headers;
         return $this;
     }
 
     /**
+     * Return the header container responsible for headers
      *
      * @return \Zend\Http\Headers
      */
-    public function headers()
+    public function header()
     {
         if ($this->headers === null || is_string($this->headers)) {
+            // this is only here for fromString lazy loading
             $this->headers = (is_string($this->headers)) ? Headers::fromString($this->headers) : new Headers();
-        } elseif (is_array($this->headers)) {
-            $headers='';
-            foreach ($this->headers as $type => $value) {
-                $headers.= "$type: $value\r\n";
-            }
-            $this->headers = Headers::fromString($headers);
         }
 
         return $this->headers;
     }
 
     /**
+     * Set the raw body for the request
+     *
      * @param string $string
      * @return \Zend\Http\Request
      */
@@ -380,6 +425,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Get the raw body for the request
+     *
      * @return string
      */
     public function getRawBody()
@@ -388,6 +435,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this an OPTIONS method request?
+     *
      * @return bool
      */
     public function isOptions()
@@ -396,6 +445,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this a GET method request?
+     *
      * @return bool
      */
     public function isGet()
@@ -404,6 +455,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this a HEAD method request?
+     *
      * @return bool
      */
     public function isHead()
@@ -412,6 +465,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this a POST method request?
+     *
      * @return bool
      */
     public function isPost()
@@ -420,6 +475,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this a PUT method request?
+     *
      * @return bool
      */
     public function isPut()
@@ -428,6 +485,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this a DELETE method request?
+     *
      * @return bool
      */
     public function isDelete()
@@ -436,6 +495,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this a TRACE method request?
+     *
      * @return bool
      */
     public function isTrace()
@@ -444,6 +505,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Is this a CONNECT method request?
+     *
      * @return bool
      */
     public function isConnect()
@@ -452,6 +515,8 @@ class Request extends Message implements RequestDescription
     }
 
     /**
+     * Return the formatted request line (first line) for this http request
+     *
      * @return string
      */
     public function renderRequestLine()
@@ -471,6 +536,16 @@ class Request extends Message implements RequestDescription
         $str .= "\r\n";
         $str .= $this->getContent();
         return $str;
+    }
+
+    /**
+     * Allow PHP casting of this object
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 
 }

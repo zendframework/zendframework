@@ -14,6 +14,13 @@ class GenericHeader implements HeaderDescription
      */
     protected $fieldValue = null;
 
+    /**
+     * Factory to generate a header object from a string
+     *
+     * @static
+     * @param string $headerLine
+     * @return GenericHeader
+     */
     public static function fromString($headerLine)
     {
         list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
@@ -39,7 +46,7 @@ class GenericHeader implements HeaderDescription
     }
 
     /**
-     * Set header name
+     * Set header field name
      * 
      * @param  string $fieldName
      * @return GenericHeader
@@ -63,7 +70,7 @@ class GenericHeader implements HeaderDescription
     }
 
     /**
-     * Retrieve header name
+     * Retrieve header field name
      *
      * @return string
      */
@@ -73,9 +80,9 @@ class GenericHeader implements HeaderDescription
     }
 
     /**
-     * Set header value
+     * Set header field value
      * 
-     * @param  string|array $fieldValue
+     * @param  string $fieldValue
      * @return GenericHeader
      */
     public function setFieldValue($fieldValue)
@@ -91,7 +98,7 @@ class GenericHeader implements HeaderDescription
     }
 
     /**
-     * Retrieve header value
+     * Retrieve header field value
      * 
      * @return string
      */
@@ -101,7 +108,7 @@ class GenericHeader implements HeaderDescription
     }
 
     /**
-     * Cast to string
+     * Cast to string as a well formed HTTP header line
      *
      * Returns in form of "NAME: VALUE\r\n"
      *

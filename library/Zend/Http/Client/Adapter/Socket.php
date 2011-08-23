@@ -321,7 +321,7 @@ class Socket implements HttpAdapter, Stream
         if ($statusCode == 100 || $statusCode == 101) return $this->read();
 
         // Check headers to see what kind of connection / transfer encoding we have
-        $headers = $responseObj->header()->toArray();
+        $headers = $responseObj->headers()->toArray();
 
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected

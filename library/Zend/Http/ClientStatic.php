@@ -74,7 +74,7 @@ class ClientStatic
         }
         
         if (!empty($headers) && is_array($headers)) {
-            $request->header($headers);
+            $request->headers($headers);
         }
         
         if (!empty($body)) {
@@ -112,7 +112,7 @@ class ClientStatic
         }
         
         if (!empty($headers) && is_array($headers)) {
-            $request->setHeader($headers);
+            $request->setHeaders($headers);
         }
         
         if (!empty($body)) {

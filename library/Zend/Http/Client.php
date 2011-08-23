@@ -498,7 +498,7 @@ class Client
             } elseif (!is_string($headers) && !($headers instanceof ParametersDescription)) {
                 throw new Exception\InvalidArgumentException('Invalid parameter headers passed');
             }
-            $this->getRequest()->setHeader($headers);
+            $this->getRequest()->setHeaders($headers);
         }
         return $this;
     }
@@ -514,14 +514,14 @@ class Client
     {
         if (!empty($type)) {
             if (is_array($type)) {
-                $this->getRequest()->header()->addHeaders($type);
+                $this->getRequest()->headers()->addHeaders($type);
                 /*
                 foreach ($type as $key => $value) {
                     $this->getRequest()->headers()->addHeaderLine($key, $value);
                 }
                 */
             } else {
-                $this->getRequest()->header()->addHeaderLine($type, $value);
+                $this->getRequest()->headers()->addHeaderLine($type, $value);
             }
             return true;
         }
@@ -536,7 +536,7 @@ class Client
      */
     public function hasHeader($name)
     { 
-        $headers = $this->getRequest()->header();
+        $headers = $this->getRequest()->headers();
         
         if ($headers instanceof Headers) {
             return $headers->has($name);
@@ -553,7 +553,7 @@ class Client
      */
     public function getHeader($name)
     {
-        $headers = $this->getRequest()->header();
+        $headers = $this->getRequest()->headers();
 
         if ($headers instanceof Headers) {
             if ($headers->get($name)) {
@@ -820,7 +820,7 @@ class Client
                 $response = Response::fromString($response);
             }
 
-            $responseHeaders = $response->header()->toArray();
+            $responseHeaders = $response->headers()->toArray();
 
             // Load cookies into cookie jar
             if (isset($this->cookies)) {
@@ -1021,7 +1021,7 @@ class Client
         }
         
         // Merge the headers of the request (if any)
-        $requestHeaders = $this->getRequest()->header()->toArray();
+        $requestHeaders = $this->getRequest()->headers()->toArray();
         foreach ($requestHeaders as $key => $value) {
             $headers[$key] = $value;
         }

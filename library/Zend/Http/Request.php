@@ -299,7 +299,7 @@ class Request extends Message implements RequestDescription
      */
     public function cookie()
     {
-        return $this->header()->get('Cookie');
+        return $this->headers()->get('Cookie');
     }
 
     /**
@@ -391,7 +391,7 @@ class Request extends Message implements RequestDescription
      * @param \Zend\Http\Headers $headers
      * @return \Zend\Http\Request
      */
-    public function setHeader(Headers $headers)
+    public function setHeaders(Headers $headers)
     {
         $this->headers = $headers;
         return $this;
@@ -402,7 +402,7 @@ class Request extends Message implements RequestDescription
      *
      * @return \Zend\Http\Headers
      */
-    public function header()
+    public function headers()
     {
         if ($this->headers === null || is_string($this->headers)) {
             // this is only here for fromString lazy loading

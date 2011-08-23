@@ -150,7 +150,7 @@ class Cookies extends Headers
             throw new Exception\InvalidArgumentException('$response is expected to be a Response object');
         }
 
-        $cookie_hdrs = $response->header()->get('Set-Cookie');
+        $cookie_hdrs = $response->headers()->get('Set-Cookie');
 
         if (is_array($cookie_hdrs)) {
             foreach ($cookie_hdrs as $cookie) {

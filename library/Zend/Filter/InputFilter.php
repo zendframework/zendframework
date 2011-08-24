@@ -770,6 +770,17 @@ class InputFilter
                         break 1;
                     }
 
+                    if (is_array($rule)) {
+                        $keys = array_keys($rule);
+                        $classKey = array_shift($keys);
+                        $ruleClass = $rule[$classKey];
+                        if ($ruleClass === 'NotEmpty') {
+                            $foundNotEmptyValidator = true;
+                            // field may not be empty, we are ready
+                            break 1;
+                        }
+                    }
+
                     // we must check if it is an object before using instanceof
                     if (!is_object($rule)) {
                         // it cannot be a NotEmpty validator, skip this one
@@ -988,7 +999,7 @@ class InputFilter
                 $validatorChain->addValidator($validatorRule[self::VALIDATOR_CHAIN]);
             }
 
-            foreach ($field as $value) {
+            foreach ($field as $key => $value) {
                 if ($validatorRule[self::ALLOW_EMPTY]  &&  !$notEmptyValidator->isValid($value)) {
                     // Field is empty AND it's allowed. Do nothing.
                     continue;

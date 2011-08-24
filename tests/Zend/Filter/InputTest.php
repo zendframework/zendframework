@@ -1866,7 +1866,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
      *
      * @group ZF-9289
      */
-    function testAllowEmptyTrueRespectsNotEmtpyValidators()
+    function testAllowEmptyTrueRespectsNotEmptyValidators()
     {
         $data = array(
             'field1' => 'foo',

@@ -7,7 +7,7 @@ namespace Zend\Http\Header;
  * @see http://www.ietf.org/rfc/rfc2109.txt
  * @see http://www.w3.org/Protocols/rfc2109/rfc2109
  */
-class SetCookie implements HeaderDescription //MultipleHeaderDescription
+class SetCookie implements HeaderDescription
 {
 
     /**

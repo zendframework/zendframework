@@ -196,7 +196,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
                 $this->fail();
             } catch (\Exception $e) {
                 $class = 'Zend\Http\Client\Adapter\Exception';
-                $this->assertType($class, $e);
+                $this->assertInstanceOf($class, $e);
                 $this->assertRegexp('/out of range/i', $e->getMessage());
             }
         }

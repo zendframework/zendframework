@@ -58,7 +58,8 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$request = Zend\Http\Response::fromString(<<<EOS
+use Zend\Http\Response;
+$response = Response::fromString(<<<EOS
 HTTP/1.0 200 OK
 HeaderField1: header-field-value
 HeaderField2: header-field-value2
@@ -72,13 +73,13 @@ EOS);
 
 // OR
 
-$request = new Zend\Http\Request();
-$request->setStatusCode(Zend\Http\Response::STATUS_CODE_200);
-$request->headers()->addHeaders(array(
+$response = new Request();
+$response->setStatusCode(Response::STATUS_CODE_200);
+$response->headers()->addHeaders(array(
     'HeaderField1' => 'header-field-value',
     'HeaderField2' => 'header-field-value2',
 );
-$request->setRawBody(<<<EOS
+$response->setRawBody(<<<EOS
 <html>
 <body>
     Hello World
@@ -113,7 +114,7 @@ EOS);
             <varlistentry xml:id="zend.http.response.methods.from-string">
                 <term>
                     <methodsynopsis>
-                        <methodname>fromString</methodname>
+                        <methodname>Response::fromString</methodname>
                         <methodparam>
                             <funcparams>string $string</funcparams>
                         </methodparam>
@@ -488,6 +489,46 @@ the entire metadata container.</para>
         <info>
             <title>Examples</title>
         </info>
+
+        <example xml:id="zend.http.response.examples.from-string">
+            <info><title>Generating a Response object from a string</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Http\Response;
+$request = Response::fromString(<<<EOS
+HTTP/1.0 200 OK
+HeaderField1: header-field-value
+HeaderField2: header-field-value2
+
+<html>
+<body>
+    Hello World
+</body>
+</html>
+EOS);
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.http.response.examples.construct-response">
+            <info><title>Generating a Response object from a string</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Http\Response;
+$response = new Response();
+$response->setStatusCode(Response::STATUS_CODE_200);
+$response->headers()->addHeaders(array(
+    'HeaderField1' => 'header-field-value',
+    'HeaderField2' => 'header-field-value2',
+);
+$response->setRawBody(<<<EOS
+<html>
+<body>
+    Hello World
+</body>
+</html>
+EOS);
+]]></programlisting>
+        </example>
 
     </section>
 </section>

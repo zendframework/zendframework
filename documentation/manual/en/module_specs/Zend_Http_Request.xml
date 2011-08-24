@@ -56,7 +56,8 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-$request = Zend\Http\Request::fromString(<<<EOS
+use Zend\Http\Request;
+$request = Request::fromString(<<<EOS
 POST /foo HTTP/1.1
 HeaderField1: header-field-value
 HeaderField2: header-field-value2
@@ -66,8 +67,8 @@ EOS);
 
 // OR, the completely equivalent
 
-$request = new Zend\Http\Request();
-$request->setMethod(Zend\Http\Request::METHOD_POST);
+$request = new Request();
+$request->setMethod(Request::METHOD_POST);
 $request->setUri('/foo');
 $request->header()->addHeaders(array(
     'HeaderField1' => 'header-field-value',
@@ -699,6 +700,7 @@ the entire metadata container.</para>
             <info><title>Generating a Request object from a string</title></info>
 
             <programlisting language="php"><![CDATA[
+use Zend\Http\Request;
 $string = "GET /foo HTTP/1.1\r\n\r\nSome Content";
 $request = Request::fromString($string);
 
@@ -713,7 +715,7 @@ $request->getRawBody(); // returns 'Some Content'
             <info><title>Generating a Request object from an array</title></info>
 
             <programlisting language="php"><![CDATA[
-TBD
+N/A
 ]]></programlisting>
         </example>
 
@@ -721,6 +723,7 @@ TBD
             <info><title>Retrieving and setting headers</title></info>
 
             <programlisting language="php"><![CDATA[
+use Zend\Http\Request;
 $request = new Request();
 $request->headers()->get('Content-Type'); // return content type
 $request->headers()->addHeader(new Cookie('foo' => 'bar'));
@@ -734,6 +737,7 @@ foreach ($request->headers() as $header) {
             <info><title>Retrieving and setting GET and POST values</title></info>
 
             <programlisting language="php"><![CDATA[
+use Zend\Http\Request;
 $request = new Request();
 
 // post() and get() both return, by default, a Parameters object, which extends ArrayObject
@@ -747,8 +751,9 @@ echo $request->get()->offsetGet('myVar');
             <info><title>Generating an formatted HTTP Request from an Request object</title></info>
 
             <programlisting language="php"><![CDATA[
-$request = new Zend\Http\Request();
-$request->setMethod(Zend\Http\Request::METHOD_POST);
+use Zend\Http\Request;
+$request = new Request();
+$request->setMethod(Request::METHOD_POST);
 $request->setUri('/foo');
 $request->header()->addHeaders(array(
     'HeaderField1' => 'header-field-value',

@@ -870,6 +870,7 @@ $response = $client->send();
 
             <programlisting language="php"><![CDATA[
 use Zend\Http\Client;
+$client = new Client();
 // Preforming a POST request
 $response = $client->request('POST');
 
@@ -898,6 +899,9 @@ $response = $client->request();
             </para>
 
             <programlisting language="php"><![CDATA[
+use Zend\Http\Client;
+$client = new Client();
+
 // Setting a get parameter using the setParameterGet method
 $client->setParameterGet('knight', 'lancelot');
 
@@ -929,6 +933,8 @@ $client->setParameterGet(array(
             </para>
 
             <programlisting language="php"><![CDATA[
+use Zend\Http\Client;
+$client = new Client();
 // Setting a POST parameter
 $client->setParameterPost('language', 'fr');
 
@@ -958,12 +964,14 @@ $client->setParameterPost(array(
             <para></para>
 
             <programlisting language="php" role="php"><![CDATA[
-$request = new Zend\Http\Request();
+use Zend\Http\Request,
+    Zend\Http\Client;
+$request = new Request();
 $request->setUri('http://www.test.com');
 $request->setMethod('POST');
 $request->setParameterPost(array('foo' => 'bar));
 
-$client = new Zend\Http\Client();
+$client = new Client();
 $response = $client->dispatch($request);
 
 if ($response->isSuccess()) {

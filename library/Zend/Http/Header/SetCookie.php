@@ -362,7 +362,7 @@ class SetCookie implements MultipleHeaderDescription
             return false;
         }
         
-        if ($this->getPath() && (strpos($uri, $this->getPath()) !== 0)) {
+        if ($this->getPath() && (strpos($path, $this->getPath()) !== 0)) {
             return false;
         }
         

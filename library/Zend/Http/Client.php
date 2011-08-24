@@ -28,7 +28,10 @@ use Zend\Config\Config,
     Zend\Http\Header\Cookie,
     Zend\Http\Header\SetCookie,
     Zend\Stdlib\Parameters,
-    Zend\Stdlib\ParametersDescription;
+    Zend\Stdlib\ParametersDescription,
+    Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\RequestDescription,
+    Zend\Stdlib\ResponseDescription;
 
 /**
  * Http client
@@ -38,23 +41,21 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client
+class Client implements Dispatchable
 {
-    /**#@+
+    /**
      * @const string Supported HTTP Authentication methods
      */
     const AUTH_BASIC  = 'basic';
     const AUTH_DIGEST = 'digest';  // not implemented yet
-    /**#@-*/
-    
-    /**#@+
+
+    /**
      * @const string POST data encoding methods
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
-    /**#@-*/
-    
-    /**#@+
+
+    /**
      * @const string DIGEST Authentication
      */
     const DIGEST_REALM  = 'realm';
@@ -63,7 +64,6 @@ class Client
     const DIGEST_OPAQUE = 'opaque';
     const DIGEST_NC     = 'nc';
     const DIGEST_CNONCE = 'cnonce';
-    /**#@-*/
 
     /**
      * @var Response
@@ -158,6 +158,18 @@ class Client
         if ($config !== null) {
             $this->setConfig($config);
         }
+    }
+    /**
+     * Dispatch
+     * 
+     * @param RequestDescription $request
+     * @param ResponseDescription $response
+     * @return ResponseDescription 
+     */
+    public function dispatch(RequestDescription $request, ResponseDescription $response = null)
+    {
+        $response= $this->send($request);
+        return $response;
     }
     /**
      * Set configuration parameters for this HTTP client

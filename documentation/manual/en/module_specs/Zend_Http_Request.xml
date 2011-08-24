@@ -721,15 +721,25 @@ TBD
             <info><title>Retrieving and setting headers</title></info>
 
             <programlisting language="php"><![CDATA[
-TBD
+$request = new Request();
+$request->headers()->get('Content-Type'); // return content type
+$request->headers()->addHeader(new Cookie('foo' => 'bar'));
+foreach ($request->headers() as $header) {
+    echo $header->getFieldName() . ' with value ' . $header->getFieldValue();
+}
 ]]></programlisting>
         </example>
 
         <example xml:id="zend.http.request.examples.parameters">
-            <info><title>Retrieving and setting GET and POST titlemeters</title></info>
+            <info><title>Retrieving and setting GET and POST values</title></info>
 
             <programlisting language="php"><![CDATA[
-TBD
+$request = new Request();
+
+// post() and get() both return, by default, a Parameters object, which extends ArrayObject
+$request->post()->foo = 'value';
+echo $request->get()->myVar;
+echo $request->get()->offsetGet('myVar');
 ]]></programlisting>
         </example>
 
@@ -737,7 +747,23 @@ TBD
             <info><title>Generating an formatted HTTP Request from an Request object</title></info>
 
             <programlisting language="php"><![CDATA[
-TBD
+$request = new Zend\Http\Request();
+$request->setMethod(Zend\Http\Request::METHOD_POST);
+$request->setUri('/foo');
+$request->header()->addHeaders(array(
+    'HeaderField1' => 'header-field-value',
+    'HeaderField2' => 'header-field-value2',
+);
+$request->post()->set('foo', 'bar');
+echo $request->toString();
+
+/** Will produce:
+POST /foo HTTP/1.1
+HeaderField1: header-field-value
+HeaderField2: header-field-value2
+
+foo=bar
+*/
 ]]></programlisting>
         </example>
     </section>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response">
-
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0"
+    xml:id="zend.http.response">
     <info>
         <title>Zend\Http\Response</title>
     </info>
@@ -12,9 +12,9 @@
         </info>
 
         <para>
-            The Zend\Http\Response object is responsible for providing a fluent
-            API that allows a developer to interact with all the various parts
-            of an HTTP response.
+            The <classname>Zend\Http\Response</classname> class is responsible for providing a
+            fluent API that allows a developer to interact with all the various parts of an HTTP
+            response.
         </para>
 
         <para>
@@ -32,16 +32,15 @@
         </literallayout>
 
         <para>
-            In simplified terms, the response consist of the HTTP version, status
-            code, and the reason string for the provided status code which all
-            make up the Response Line.  Next, is a set of headers, there can be 0
-            or an unlimited amount of headers. After that, is the request body,
-            which is typically an string of HTML that will render on the clients
-            browser, but can also be a place for request/response payload data
-            typical of an AJAX request.  More information on the structure and
-            specification of an HTTP request can be found in the RFC2616 on W3.org
-            site: <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html">
-            here</a>
+            The first line of the response consists of the HTTP version, status code, and the reason
+            string for the provided status code; this is called the Response Line.  Next is a set of
+            headers; there can be 0 or an unlimited number of headers. The remainder of the response
+            is the response body, which is typically a string of HTML that will render on the
+            client's browser, but which can also be a place for request/response payload data
+            typical of an AJAX request.  More information on the structure and specification of an
+            HTTP response can be found in <link
+                xl:href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html">RFC-2616 on the
+                W3.org site</link>.
         </para>
 
     </section>
@@ -52,9 +51,10 @@
         </info>
 
         <para>
-            Response objects can either be created from the provided fromString()
-            factory, or if you wish to have a completely empty object to start with
-            by simply instantiating the Zend\Http\Response class.
+            Response objects can either be created from the provided
+            <methodname>fromString()</methodname> factory, or, if you wish to have a completely
+            empty object to start with, by simply instantiating the
+            <classname>Zend\Http\Response</classname> class.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -75,8 +75,8 @@ EOS);
 $request = new Zend\Http\Request();
 $request->setStatusCode(Zend\Http\Response::STATUS_CODE_200);
 $request->headers()->addHeaders(array(
-'HeaderField1' => 'header-field-value'
-'HeaderField2' => 'header-field-value2'
+    'HeaderField1' => 'header-field-value',
+    'HeaderField2' => 'header-field-value2',
 );
 $request->setRawBody(<<<EOS
 <html>
@@ -86,7 +86,6 @@ $request->setRawBody(<<<EOS
 </html>
 EOS);
      ]]></programlisting>
-
     </section>
 
     <section xml:id="zend.http.response.options">
@@ -123,8 +122,7 @@ EOS);
 
                 <listitem>
                     <para>Populate object from string</para>
-                    <para></para>
-                    <para>Returns Zend\Http\Response</para>
+                    <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -132,15 +130,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>renderStatusLine</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Render the status line header</para>
-                    <para></para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -150,15 +144,14 @@ EOS);
                     <methodsynopsis>
                         <methodname>setHeaders</methodname>
                         <methodparam>
-                            <funcparams>Headers $headers</funcparams>
+                            <funcparams>Zend\Http\Headers $headers</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Set response headers</para>
-                    <para></para>
-                    <para>Returns Zend\Http\Response</para>
+                    <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -166,16 +159,12 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>headers</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Get response headers</para>
-                    <para></para>
-                    <para>Returns Headers</para>
+                    <para>Returns <classname>Zend\Http\Headers</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -190,9 +179,7 @@ EOS);
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
-                    <para>Returns Zend\Http\Response</para>
+                    <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -200,15 +187,10 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>getVersion</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -217,15 +199,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>getStatusCode</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Retrieve HTTP status code</para>
-                    <para></para>
                     <para>Returns int</para>
                 </listitem>
             </varlistentry>
@@ -241,9 +219,7 @@ EOS);
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
-                    <para>Returns Zend\Http\Response</para>
+                    <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -251,15 +227,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>getReasonPhrase</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Get HTTP status message</para>
-                    <para></para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -276,8 +248,7 @@ EOS);
 
                 <listitem>
                     <para>Set HTTP status code and (optionally) message</para>
-                    <para></para>
-                    <para>Returns Zend\Http\Response</para>
+                    <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -285,15 +256,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isClientError</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Does the status code indicate a client error?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -302,15 +269,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isForbidden</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Is the request forbidden due to ACLs?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -319,15 +282,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isInformational</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Is the current status "informational"?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -336,15 +295,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isNotFound</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Does the status code indicate the resource is not found?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -353,15 +308,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isOk</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Do we have a normal, OK response?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -370,15 +321,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isServerError</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Does the status code reflect a server error?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -387,15 +334,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isRedirect</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Do we have a redirect?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -404,15 +347,11 @@ EOS);
                 <term>
                     <methodsynopsis>
                         <methodname>isSuccess</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
                     <para>Was the response successful?</para>
-                    <para></para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
@@ -429,7 +368,6 @@ EOS);
 
                 <listitem>
                     <para>Decode a "chunked" transfer-encoded body and return the decoded text</para>
-                    <para></para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
@@ -482,7 +420,7 @@ EOS);
                     <para>Set message metadata</para>
                     <para>Non-destructive setting of message metadata; always adds to the metadata, never overwrites
 the entire metadata container.</para>
-                    <para>Returns Zend\Stdlib\Message</para>
+                    <para>Returns <classname>Zend\Stdlib\Message</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -498,7 +436,6 @@ the entire metadata container.</para>
 
                 <listitem>
                     <para>Retrieve all metadata or a single metadatum as specified by key</para>
-                    <para></para>
                     <para>Returns mixed</para>
                 </listitem>
             </varlistentry>
@@ -515,8 +452,7 @@ the entire metadata container.</para>
 
                 <listitem>
                     <para>Set message content</para>
-                    <para></para>
-                    <para>Returns Zend\Stdlib\Message</para>
+                    <para>Returns <classname>Zend\Stdlib\Message</classname></para>
                 </listitem>
             </varlistentry>
 
@@ -524,9 +460,6 @@ the entire metadata container.</para>
                 <term>
                     <methodsynopsis>
                         <methodname>getContent</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
@@ -541,19 +474,13 @@ the entire metadata container.</para>
                 <term>
                     <methodsynopsis>
                         <methodname>toString</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
                     </methodsynopsis>
                 </term>
 
                 <listitem>
-                    <para></para>
-                    <para></para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
-
         </variablelist>
     </section>
 

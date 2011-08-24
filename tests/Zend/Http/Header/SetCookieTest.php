@@ -10,6 +10,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
     public function testSetCookieFromStringCreatesValidSetCookieHeader()
     {
         $setCookieHeader = SetCookie::fromString('Set-Cookie: xxx');
+        $this->assertInstanceOf('Zend\Http\Header\MultipleHeaderDescription', $setCookieHeader);
         $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $setCookieHeader);
         $this->assertInstanceOf('Zend\Http\Header\SetCookie', $setCookieHeader);
     }
@@ -25,7 +26,7 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
             'set-cookie: myname=myvalue; Domain=docs.foo.com; Path=/accounts;'
             . 'Expires=Wed, 13-Jan-2021 22:23:01 GMT; Secure; HttpOnly'
         );
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $setCookieHeader);
+        $this->assertInstanceOf('Zend\Http\Header\MultipleHeaderDescription', $setCookieHeader);
         $this->assertEquals('myname', $setCookieHeader->getName());
         $this->assertEquals('myvalue', $setCookieHeader->getValue());
         $this->assertEquals('docs.foo.com', $setCookieHeader->getDomain());
@@ -46,12 +47,12 @@ class SetCookieTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $setCookieHeaders);
 
         $setCookieHeader = $setCookieHeaders[0];
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $setCookieHeader);
+        $this->assertInstanceOf('Zend\Http\Header\MultipleHeaderDescription', $setCookieHeader);
         $this->assertEquals('myname', $setCookieHeader->getName());
         $this->assertEquals('myvalue', $setCookieHeader->getValue());
 
         $setCookieHeader = $setCookieHeaders[1];
-        $this->assertInstanceOf('Zend\Http\Header\HeaderDescription', $setCookieHeader);
+        $this->assertInstanceOf('Zend\Http\Header\MultipleHeaderDescription', $setCookieHeader);
         $this->assertEquals('someothername', $setCookieHeader->getName());
         $this->assertEquals('someothervalue', $setCookieHeader->getValue());
         $this->assertEquals('Wed, 13-Jan-2021 22:23:01 GMT', $setCookieHeader->getExpires());

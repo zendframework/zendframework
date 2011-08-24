@@ -623,7 +623,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Load default decorators
      *
-     * @return void
+     * @return \Zend\Form\DisplayGroup
      */
     public function loadDefaultDecorators()
     {

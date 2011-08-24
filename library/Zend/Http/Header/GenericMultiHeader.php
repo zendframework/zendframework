@@ -2,7 +2,7 @@
 
 namespace Zend\Http\Header;
 
-class GenericMultiHeader implements HeaderDescription, MultipleHeaderDescription
+class GenericMultiHeader implements MultipleHeaderDescription
 {
     /**
      * @var string
@@ -14,21 +14,22 @@ class GenericMultiHeader implements HeaderDescription, MultipleHeaderDescription
      */
     protected $fieldValue = null;
 
-    public static function fromStringMultipleHeaders($headerLine)
-    {
-        list($fieldName, $fieldValues) = explode(': ', $headerLine, 2);
-        $headers = array();
-        foreach (explode(',', $fieldValues) as $fieldValue) {
-            $headers[] = new static($fieldName, ltrim($fieldValue));
-        }
-        return $headers;
-    }
-
     public static function fromString($headerLine)
     {
-        list($fieldName, $fieldValue) = explode(': ', $headerLine, 1);
-        $header = new static($fieldName, $fieldValue);
-        return $header;
+        list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
+
+        if (strpos($fieldValue, ',')) {
+            $headers = array();
+            foreach (explode(',', $fieldValue) as $multiValue) {
+                $headers[] = new static($fieldName, $multiValue);
+            }
+            return $headers;
+        } else {
+            $header = new static($fieldName, $fieldValue);
+            return $header;
+        }
+
+
     }
 
     /**

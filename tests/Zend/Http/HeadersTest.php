@@ -69,6 +69,16 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('boo-baz', $header->getFieldValue());
     }
 
+    public function testHeadersFromStringMultiHeaderWillAggregateLazyLoadedHeaders()
+    {
+        $headers = new Headers();
+        /* @var $pcl \Zend\Loader\PluginClassLoader */
+        $pcl = $headers->getPluginClassLoader();
+        $pcl->registerPlugin('foo', 'Zend\Http\Header\GenericMultiHeader');
+        $headers->addHeaderLine('foo: bar1,bar2,bar3');
+        $headers->forceLoading();
+        $this->assertEquals(3, $headers->count());
+    }
 
     public function testHeadersHasAndGetWorkProperly()
     {

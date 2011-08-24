@@ -410,6 +410,7 @@ class Headers implements Iterator, Countable
     /**
      * Return the headers container as an array
      *
+     * @todo determine how to produce single line headers, if they are supported
      * @return array
      */
     public function toArray()
@@ -418,7 +419,7 @@ class Headers implements Iterator, Countable
         /* @var $header Header\HeaderDescription */
         foreach ($this->headers as $header) {
             if ($header instanceof Header\HeaderDescription) {
-                $headers[$header->getFieldName()]= $header->getFieldValue();
+                $headers[$header->getFieldName()] = $header->getFieldValue();
             } else {
                 $matches = null;
                 preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):\s*(?P<value>.*)$/', $header['line'], $matches);
@@ -455,18 +456,19 @@ class Headers implements Iterator, Countable
         /* @var $class Header\HeaderDescription */
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Http\Header\GenericHeader';
 
-        if (in_array('Zend\Http\Header\MultipleHeaderDescription', class_implements($class, true))) {
-            $headers = $class::fromStringMultipleHeaders($current['line']);
+        $headers = $class::fromString($current['line']);
+        if (is_array($headers)) {
             $this->headers[$index] = $current = array_shift($headers);
             foreach ($headers as $header) {
                 $this->headersKeys[] = $key;
                 $this->headers[] = $header;
             }
+            return $current;
         } else {
-            $this->headers[$index] = $current = $class::fromString($current['line']);
+            $this->headers[$index] = $current = $headers;
+            return $current;
         }
 
-        return $current;
     }
 
 }

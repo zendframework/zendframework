@@ -26,8 +26,8 @@ namespace ZendTest\Http\Client;
 use \Zend\Uri\Http as UriHttp,
     \Zend\Http\Client as HTTPClient,
     \Zend\Http,
-    \Zend\Http\Request,
-    \Zend\Http\Client\Cookies;
+    \Zend\Http\Header\SetCookie,
+    \Zend\Http\Request;
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
@@ -173,29 +173,13 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetNewCookies()
     {
-        $this->_client->setCookie('cookie', 'value');
-        $this->_client->setCookie('chocolate', 'chips');
-        $jar = $this->_client->getCookies();
-        
-        // Check we got the right cookiejar
-        $this->assertTrue($jar instanceof Cookies, '$jar is not an instance of Zend\Http\Client\Cookies as expected');
-        $this->assertEquals(count($jar->getAllCookies()), 2, '$jar does not contain 2 cookies as expected');
-    }
-
-    /**
-     * Test we can properly set an existing cookie jar
-     *
-     */
-    public function testSetReadyCookies()
-    {
-        $jar = new Cookies();
-        $jar->addCookie('cookie=value', 'http://www.example.com');
-        $jar->addCookie('chocolate=chips; path=/foo', 'http://www.example.com');
-
-        $this->_client->setCookies($jar);
+        $this->_client->addCookie('cookie', 'value');
+        $this->_client->addCookie('chocolate', 'chips');
+        $cookies = $this->_client->getCookies();
 
         // Check we got the right cookiejar
-        $this->assertEquals($jar, $this->_client->getCookies(), '$jar is not the client\'s cookie jar as expected');
+        $this->assertTrue((is_array($cookies) && $cookies['chocolate'] instanceof SetCookie), '$cookie is not an array of Zend\Http\Header\SetCookie');
+        $this->assertEquals(count($cookies), 2, '$cookies does not contain 2 SetCokie as expected');
     }
 
     /**
@@ -205,14 +189,15 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     public function testUnsetCookies()
     {
         // Set the cookie jar just like in testSetNewCookieJar
-        $this->_client->setCookie('cookie', 'value');
-        $this->_client->setCookie('chocolate', 'chips');
-        $jar = $this->_client->getCookies();
+        $this->_client->addCookie('cookie', 'value');
+        $this->_client->addCookie('chocolate', 'chips');
+        $cookies = $this->_client->getCookies();
 
-        // Try unsetting the cookiejar
-        $this->_client->setCookies(null);
-
-        $this->assertNull($this->_client->getCookies(), 'Cookie jar is expected to be null but it is not');
+        // Try unsetting the cookies
+        $this->_client->clearCookies();
+        $cookies = $this->_client->getCookies();
+        
+        $this->assertTrue(empty($cookies), 'Cookies is expected to be null but it is not');
     }
 
     /**
@@ -223,9 +208,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'Zend\Http\Exception\InvalidArgumentException',
-            'Invalid parameter type passed as Cookies');
+            'Invalid parameter type passed as Cookie');
 
-        $this->_client->setCookies('cookie');
+        $this->_client->addCookie('cookie');
     }
 
     /**
@@ -238,6 +223,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsArray()
     {
+        
         $config = array(
             'timeout'    => 500,
             'someoption' => 'hasvalue'
@@ -246,6 +232,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setConfig($config);
 
         $hasConfig = $this->_client->config;
+
         foreach($config as $k => $v) {
             $this->assertEquals($v, $hasConfig[$k]);
         }
@@ -258,7 +245,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsZendConfig()
     {
-
+ 
         $config = new \Zend\Config\Config(array(
             'timeout'  => 400,
             'nested'   => array(
@@ -295,6 +282,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigPassToAdapterZF4557()
     {
+        
         $adapter = new MockAdapter();
 
         // test that config passes when we set the adapter
@@ -480,7 +468,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
         $url = 'http://www.example.com/';
         $config = array (
-            'output_stream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
+            'outputstream' => realpath(__DIR__ . '/_files/zend_http_client_stream.file'),
         );
         $client = new HTTPClient($url, $config);
         try {
@@ -506,7 +494,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $url = 'http://www.example.com';
         $config = array (
-            'output_stream' => '/path/to/bogus/file.ext',
+            'outputstream' => '/path/to/bogus/file.ext',
         );
         $client = new HTTPClient($url, $config);
         $client->setMethod('GET');
@@ -578,7 +566,7 @@ class MockClient extends HTTPClient
         'keepalive'       => false,
         'storeresponse'   => true,
         'strict'          => true,
-        'output_stream'   => false,
+        'outputstream'   => false,
         'encodecookies'   => true,
     );
 }

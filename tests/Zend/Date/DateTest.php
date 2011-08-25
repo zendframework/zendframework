@@ -5666,8 +5666,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
      */
     public function testChineseFullDates()
     {
-      $date = new Zend_Date(array('year' => 2008, 'month' => 10, 'day' => 12));
-      $this->assertEquals('2008年10月12日', $date->get(Zend_Date::DATE_LONG, 'zh'));
+      $date = new Date(array('year' => 2008, 'month' => 10, 'day' => 12));
+      $this->assertEquals('2008年10月12日', $date->get(Date::DATE_LONG, 'zh'));
     }
 }
 

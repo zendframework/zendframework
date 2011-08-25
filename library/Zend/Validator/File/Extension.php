@@ -185,6 +185,10 @@ class Extension extends \Zend\Validator\AbstractValidator
      */
     public function isValid($value, $file = null)
     {
+        if ($file === null) {
+            $file = array('name' => basename($value));
+        }
+
         // Is file readable ?
         if (!\Zend\Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
@@ -220,8 +224,14 @@ class Extension extends \Zend\Validator\AbstractValidator
      */
     protected function _throw($file, $errorType)
     {
-        if (null !== $file) {
-            $this->_value = $file['name'];
+        if ($file !== null) {
+            if (is_array($file)) {
+                if(array_key_exists('name', $file)) {
+                    $this->_value = $file['name'];
+                }
+            } else if (is_string($file)) {
+                $this->_value = $file;
+            }
         }
 
         $this->_error($errorType);

@@ -171,4 +171,15 @@ class ExcludeExtensionTest extends \PHPUnit_Framework_TestCase
         $validator->addExtension('');
         $this->assertEquals(array('mo', 'gif', 'jpg', 'to', 'zip', 'ti'), $validator->getExtension());
     }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\ExcludeExtension('mo');
+        $this->assertEquals(false, $validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertTrue(array_key_exists('fileExcludeExtensionNotFound', $validator->getMessages()));
+        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+    }
 }

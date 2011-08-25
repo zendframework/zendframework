@@ -35,13 +35,12 @@ namespace Zend\Validator\File;
  */
 class WordCount extends Count
 {
-    /**#@+
+    /**
      * @const string Error constants
      */
     const TOO_MUCH  = 'fileWordCountTooMuch';
     const TOO_LESS  = 'fileWordCountTooLess';
     const NOT_FOUND = 'fileWordCountNotFound';
-    /**#@-*/
 
     /**
      * @var array Error message templates
@@ -62,6 +61,10 @@ class WordCount extends Count
      */
     public function isValid($value, $file = null)
     {
+        if ($file === null) {
+            $file = array('name' => basename($value));
+        }
+
         // Is file readable ?
         if (!\Zend\Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
@@ -90,7 +93,13 @@ class WordCount extends Count
     protected function _throw($file, $errorType)
     {
         if ($file !== null) {
-            $this->_value = $file['name'];
+            if (is_array($file)) {
+                if(array_key_exists('name', $file)) {
+                    $this->_value = $file['name'];
+                }
+            } else if (is_string($file)) {
+                $this->_value = $file;
+            }
         }
 
         $this->_error($errorType);

@@ -117,4 +117,15 @@ class WordCountTest extends \PHPUnit_Framework_TestCase
         $validator->setMin(100);
         $this->assertEquals(1000000, $validator->getMax());
     }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\WordCount(array('min' => 1, 'max' => 10000));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertTrue(array_key_exists('fileWordCountNotFound', $validator->getMessages()));
+        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+    }
 }

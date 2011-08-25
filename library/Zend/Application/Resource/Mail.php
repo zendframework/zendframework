@@ -24,18 +24,11 @@
  */
 namespace Zend\Application\Resource;
 
-use Zend\Loader,
-    Zend\Application\ResourceException;
+use Zend\Application\ResourceException;
 
 /**
  * Resource for setting up Mail Transport and default From & ReplyTo addresses
  *
- * @uses       \Zend\Application\ResourceException
- * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Loader\Autoloader
- * @uses       \Zend\Mail\Mail
- * @uses       \Zend\Mail\Transport\Sendmail
- * @uses       \Zend\Mail\Transport\Smtp
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -130,25 +123,21 @@ class Mail extends AbstractResource
     		$options['type'] = 'sendmail';
     	}
 
-    	$loader = new Loader\StandardAutoloader();
         $transportName = $options['type'];
-        if(! $loader->autoload($transportName)) {
-            $transportName = ucfirst(strtolower($transportName));
-
-            if(! $loader->autoload($transportName)) {
-                $transportName = 'Zend\\Mail\\Transport\\' . $transportName;
-                if(! $loader->autoload($transportName)) {
-                    throw new Exception\InitializationException(
-                        "Specified Mail Transport '{$transportName}' could not be found"
-                    );
-                }
+        if (!class_exists($options['type'])) {
+            $qualifiedTransportName = 'Zend\Mail\Transport\\' . $transportName;
+            if (!class_exists($qualifiedTransportName)) {
+                throw new Exception\InitializationException(
+                    "Specified Mail Transport '{$transportName}' could not be found"
+                );
             }
+            $transportName = $qualifiedTransportName;
         }
 
         unset($options['type']);
 
         switch($transportName) {
-            case 'Zend\\Mail\\Transport\\Smtp':
+            case 'Zend\Mail\Transport\Smtp':
                 if(!isset($options['host'])) {
                     throw new Exception\InitializationException(
                         'A host is necessary for smtp transport,'
@@ -157,7 +146,7 @@ class Mail extends AbstractResource
 
                 $transport = new $transportName($options['host'], $options);
                 break;
-            case 'Zend\\Mail\\Transport\\Sendmail':
+            case 'Zend\Mail\Transport\Sendmail':
             default:
                 $transport = new $transportName($options);
                 break;

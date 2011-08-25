@@ -28,6 +28,18 @@
 
         <listitem>
             <para>
+                <emphasis>CODE128</emphasis>: CODE128 is a high density barcode.
+            </para>
+
+            <para>
+                This barcode has no length limitation. It supports the first 128 ascii characters.
+                When used with printing characters it has an checksum which is calculated modulo 103.
+                This standard is used worldwide as it supports upper and lowercase characters.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>CODE25</emphasis>: Often called "two of five" or "Code25 Industrial".
             </para>
 

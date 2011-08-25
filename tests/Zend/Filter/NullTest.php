@@ -58,6 +58,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $filter = $this->_filter;
+        $this->assertEquals(null, $filter(0.0));
         $this->assertEquals(null, $filter('0'));
         $this->assertEquals(null, $filter(''));
         $this->assertEquals(null, $filter(0));
@@ -76,6 +77,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $filter->setType(NullFilter::BOOLEAN);
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals('0', $filter('0'));
         $this->assertEquals('', $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -94,6 +96,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $filter->setType(NullFilter::INTEGER);
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals('0', $filter('0'));
         $this->assertEquals('', $filter(''));
         $this->assertEquals(null, $filter(0));
@@ -112,6 +115,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $filter->setType(NullFilter::EMPTY_ARRAY);
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals('0', $filter('0'));
         $this->assertEquals('', $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -130,6 +134,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $filter->setType(NullFilter::STRING);
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals('0', $filter('0'));
         $this->assertEquals(null, $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -148,6 +153,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $filter->setType(NullFilter::ZERO);
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals(null, $filter('0'));
         $this->assertEquals('', $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -172,6 +178,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
             )
         );
 
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals(null, $filter('0'));
         $this->assertEquals(null, $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -198,6 +205,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
             )
         );
 
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals(null, $filter('0'));
         $this->assertEquals(null, $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -218,6 +226,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
             NullFilter::ZERO + NullFilter::STRING + NullFilter::BOOLEAN
         );
 
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals(null, $filter('0'));
         $this->assertEquals(null, $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -240,6 +249,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
             )
         );
 
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals(null, $filter('0'));
         $this->assertEquals(null, $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -260,6 +270,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
             'boolean'
         );
 
+        $this->assertEquals(0.0, $filter(0.0));
         $this->assertEquals('0', $filter('0'));
         $this->assertEquals(null, $filter(''));
         $this->assertEquals(0, $filter(0));
@@ -288,5 +299,30 @@ class NullTest extends \PHPUnit_Framework_TestCase
     public function testGetType()
     {
         $this->assertEquals(31, $this->_filter->getType());
+    }
+
+    /**
+     * @group ZF-10388
+     */
+    public function testDataTypeFloat()
+    {
+        $filter = $this->_filter;
+        $this->assertEquals(null, $filter(0.0));
+
+    /**
+     * @group ZF-10388
+     */
+    public function testOnlyFloat()
+    {
+        $filter = $this->_filter;
+        $filter->setType(NullFilter::FLOAT);
+        $this->assertEquals(null, $filter(0.0));
+        $this->assertEquals('0', $filter('0'));
+        $this->assertEquals('', $filter(''));
+        $this->assertEquals(0, $filter(0));
+        $this->assertEquals(array(), $filter(array()));
+        $this->assertEquals(false, $filter(false));
+        $this->assertEquals('test', $filter('test'));
+        $this->assertEquals(true, $filter(true));
     }
 }

@@ -45,7 +45,7 @@ use Zend\Dojo\View\Exception,
 class Container
 {
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     public $view;
 
@@ -1138,7 +1138,7 @@ EOJ;
         }
 
         $onLoadActions = array();
-        // Get Zend specific onLoad actions; these will always be first to 
+        // Get Zend specific onLoad actions; these will always be first to
         // ensure that dijits are created in the correct order
         foreach ($this->_getZendLoadActions() as $callback) {
             $onLoadActions[] = 'dojo.addOnLoad(' . $callback . ');';
@@ -1179,12 +1179,12 @@ EOJ;
     /**
      * Add an onLoad action related to ZF dijit creation
      *
-     * This method is public, but prefixed with an underscore to indicate that 
+     * This method is public, but prefixed with an underscore to indicate that
      * it should not normally be called by userland code. It is pertinent to
-     * ensuring that the correct order of operations occurs during dijit 
+     * ensuring that the correct order of operations occurs during dijit
      * creation.
-     * 
-     * @param  string $callback 
+     *
+     * @param  string $callback
      * @return \Zend\Dojo\View\Helper\Dojo\Container
      */
     public function _addZendLoad($callback)
@@ -1197,7 +1197,7 @@ EOJ;
 
     /**
      * Retrieve all ZF dijit callbacks
-     * 
+     *
      * @return array
      */
     public function _getZendLoadActions()

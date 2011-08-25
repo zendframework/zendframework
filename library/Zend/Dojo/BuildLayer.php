@@ -150,7 +150,7 @@ class BuildLayer
     /**
      * Retrieve view object
      *
-     * @return \Zend\View\ViewEngine|null
+     * @return \Zend\View\Renderer|null
      */
     public function getView()
     {

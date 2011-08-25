@@ -873,7 +873,7 @@ class File extends Xhtml
      * Render form element
      * Checks for decorator interface to prevent errors
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     public function render(View $view = null)

@@ -25,7 +25,7 @@
 namespace Zend\Form\Decorator;
 
 use Zend\Form,
-    Zend\View\ViewEngine as View;
+    Zend\View\Renderer as View;
 
 /**
  * Zend_Form_Decorator_FormErrors
@@ -350,7 +350,7 @@ class FormErrors extends AbstractDecorator
 
     /**
      * Get showCustomFormErrors
-     * 
+     *
      * @return bool
      */
     public function getShowCustomFormErrors()
@@ -380,7 +380,7 @@ class FormErrors extends AbstractDecorator
 
     /**
      * Get onlyCustomFormErrors
-     * 
+     *
      * @return bool
      */
     public function getOnlyCustomFormErrors()
@@ -413,7 +413,7 @@ class FormErrors extends AbstractDecorator
      * Render element label
      *
      * @param  \Zend\Form\Element $element
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     public function renderLabel(Form\Element $element, View $view)
@@ -432,7 +432,7 @@ class FormErrors extends AbstractDecorator
      * Recurse through a form object, rendering errors
      *
      * @param  \Zend\Form\Form $form
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     protected function _recurseForm(Form\Form $form, View $view)

@@ -38,18 +38,6 @@ class StripTags extends AbstractFilter
     const UNIQUE_ID_PREFIX = '__Zend_Filter_StripTags__';
 
     /**
-     * Whether comments are allowed
-     *
-     * If false (the default), then comments are removed from the input string.
-     *
-     * This setting is now deprecated, and ignored internally.
-     *
-     * @deprecated
-     * @var boolean
-     */
-    public $commentsAllowed = false;
-
-    /**
      * Array of allowed tags and allowed attributes for each allowed tag
      *
      * Tags are stored in the array keys, and the array values are themselves
@@ -104,38 +92,6 @@ class StripTags extends AbstractFilter
         if (array_key_exists('allowAttribs', $options)) {
             $this->setAttributesAllowed($options['allowAttribs']);
         }
-
-        if (array_key_exists('allowComments', $options)) {
-            $this->setCommentsAllowed($options['allowComments']);
-        }
-    }
-
-    /**
-     * Returns the commentsAllowed option
-     *
-     * This setting is now deprecated and ignored internally.
-     *
-     * @deprecated
-     * @return bool
-     */
-    public function getCommentsAllowed()
-    {
-        return $this->commentsAllowed;
-    }
-
-    /**
-     * Sets the commentsAllowed option
-     *
-     * This setting is now deprecated and ignored internally.
-     *
-     * @deprecated
-     * @param  boolean $commentsAllowed
-     * @return \Zend\Filter\StripTags Provides a fluent interface
-     */
-    public function setCommentsAllowed($commentsAllowed)
-    {
-       $this->commentsAllowed = (boolean) $commentsAllowed;
-       return $this;
     }
 
     /**

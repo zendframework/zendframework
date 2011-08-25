@@ -52,14 +52,14 @@ class Mail extends AbstractResource
 
     /**
      * Initialize mail resource
-     * 
+     *
      * @return \Zend\Mail\AbstractTransport
      */
-    public function init() 
+    public function init()
     {
         return $this->getMail();
     }
-    
+
     /**
      * @return \Zend\Mail\AbstractTransport|null
      */
@@ -68,7 +68,7 @@ class Mail extends AbstractResource
         if (null === $this->_transport) {
             $options = $this->getOptions();
             foreach($options as $key => $option) {
-                $options[strtolower($key)] = $option;         
+                $options[strtolower($key)] = $option;
             }
             $this->setOptions($options);
 
@@ -85,21 +85,21 @@ class Mail extends AbstractResource
                     \Zend\Mail\Mail::setDefaultTransport($this->_transport);
                 }
             }
-            
+
             $this->_setDefaults('from');
             $this->_setDefaults('replyTo');
         }
 
         return $this->_transport;
     }
-    
+
     /**
      * Set transport/message defaults
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return void
      */
-    protected function _setDefaults($type) 
+    protected function _setDefaults($type)
     {
         $key = strtolower('default' . $type);
         $options = $this->getOptions();
@@ -117,11 +117,11 @@ class Mail extends AbstractResource
             }
         }
     }
-    
+
     /**
      * Setup mail transport
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return void
      */
     protected function _setupTransport(array $options)
@@ -129,24 +129,24 @@ class Mail extends AbstractResource
     	if(!isset($options['type'])) {
     		$options['type'] = 'sendmail';
     	}
-    	
+
+    	$loader = new Loader\StandardAutoloader();
         $transportName = $options['type'];
-        if(!Loader\Autoloader::autoload($transportName)) {
+        if(! $loader->autoload($transportName)) {
             $transportName = ucfirst(strtolower($transportName));
 
-            if(!Loader\Autoloader::autoload($transportName)) {
+            if(! $loader->autoload($transportName)) {
                 $transportName = 'Zend\\Mail\\Transport\\' . $transportName;
-                if(!Loader\Autoloader::autoload($transportName)) {
+                if(! $loader->autoload($transportName)) {
                     throw new Exception\InitializationException(
-                        "Specified Mail Transport '{$transportName}'"
-                        . 'could not be found'
+                        "Specified Mail Transport '{$transportName}' could not be found"
                     );
                 }
             }
         }
-        
+
         unset($options['type']);
-        
+
         switch($transportName) {
             case 'Zend\\Mail\\Transport\\Smtp':
                 if(!isset($options['host'])) {
@@ -154,7 +154,7 @@ class Mail extends AbstractResource
                         'A host is necessary for smtp transport,'
                         .' but none was given');
                 }
-                
+
                 $transport = new $transportName($options['host'], $options);
                 break;
             case 'Zend\\Mail\\Transport\\Sendmail':

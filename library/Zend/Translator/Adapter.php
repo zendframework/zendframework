@@ -257,19 +257,24 @@ abstract class Adapter
 
                         $ignore .= $match . '|';
                     } else {
-                        $ignore .= $separator . $match . '|';
+                        $ignore .= preg_quote($separator . $match, '/') . '|';
                     }
                 }
                 $ignore = substr($ignore, 0, -1) . '/u';
             } else {
-                $ignore = '/' . $separator . $options['ignore'] . '/u';
+                $ignore = '/' . preg_quote($separator . $options['ignore'], '/') . '/u';
             }
 
-            foreach (new RecursiveIteratorIterator(
-                     new RecursiveRegexIterator(
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveRegexIterator(
                      new RecursiveDirectoryIterator($options['content'], RecursiveDirectoryIterator::KEY_AS_PATHNAME),
-                     $ignore, RecursiveRegexIterator::MATCH),
-                     RecursiveIteratorIterator::SELF_FIRST) as $directory => $info) {
+                     $ignore,
+                     RecursiveRegexIterator::MATCH
+                ),
+                RecursiveIteratorIterator::SELF_FIRST
+            );
+
+            foreach ($iterator as $directory => $info) {
                 $file = $info->getFilename();
                 if (is_array($options['ignore'])) {
                     foreach ($options['ignore'] as $key => $hop) {

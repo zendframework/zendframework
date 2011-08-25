@@ -243,8 +243,12 @@ abstract class Adapter
 
         $options  = $options + $this->_options;
         if (is_string($options['content']) and is_dir($options['content'])) {
-            $options['content'] = realpath($options['content']);
-            $search             = strlen($options['content']);
+            $test = realpath($options['content']);
+            if ($test !== false) {
+                $options['content'] = $test;
+            }
+            $search = strlen($options['content']);
+
             $prev = '';
             if (DIRECTORY_SEPARATOR == '\\') {
                 $separator = '\\\\';

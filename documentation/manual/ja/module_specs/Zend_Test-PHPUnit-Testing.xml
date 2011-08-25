@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>コントローラおよび MVC アプリケーションのテスト</title></info>
-    
+
 
     <para>
         起動用の設定を済ませたら、テストの開始です。
@@ -60,7 +60,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         ));
 
         // ヘッダを設定することもできます
-        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
+        $this->request->setHeader('X-Requested-With', 'XMLHttpRequest');
 
         // リクエストメソッドを設定します
         $this->request->setMethod('POST');
@@ -78,7 +78,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     </para>
 
     <section xml:id="zend.test.phpunit.testing.redirector"><info><title>コントローラのテストと Redirector アクションヘルパー</title></info>
-        
+
 
         <important>
             <para>

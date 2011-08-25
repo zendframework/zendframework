@@ -53,7 +53,7 @@ class OfflineTest extends \ZendTest\Ldap\TestCase
     {
         $data=$this->_createTestArrayData();
         $node=Node::fromArray($data);
-        $this->assertType('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Zend\\Ldap\\Node', $node);
         $this->assertFalse($node->isAttached());
         $this->assertFalse($node->willBeDeleted());
         $this->assertFalse($node->willBeMoved());
@@ -65,7 +65,7 @@ class OfflineTest extends \ZendTest\Ldap\TestCase
         $data=$this->_createTestArrayData();
         $data['dn']=Ldap\Dn::fromString($data['dn']);
         $node=Node::fromArray($data);
-        $this->assertType('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Zend\\Ldap\\Node', $node);
         $this->assertFalse($node->isAttached());
     }
 
@@ -104,7 +104,7 @@ class OfflineTest extends \ZendTest\Ldap\TestCase
         $data=$this->_createTestArrayData();
         $data['dn']=Ldap\Dn::fromString($data['dn']);
         $node=Node::fromArray($data);
-        $this->assertType('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Zend\\Ldap\\Node', $node);
         $this->assertFalse($node->isAttached());
         unset($data['dn']);
         $this->assertEquals($data, $node->getData());
@@ -343,7 +343,7 @@ class OfflineTest extends \ZendTest\Ldap\TestCase
     public function testAttributeAccessDnGet()
     {
         $node=$this->_createTestNode();
-        $this->assertType('string', $node->dn);
+        $this->assertInternalType('string', $node->dn);
         $this->assertEquals($node->getDn()->toString(), $node->dn);
     }
 

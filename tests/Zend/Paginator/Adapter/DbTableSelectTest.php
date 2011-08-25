@@ -44,7 +44,7 @@ class DbTableSelectTest extends \ZendTest\Paginator\Adapter\DbSelectTest
         $adapter = new Adapter\DbTableSelect($query);
         $items   = $adapter->getItems(0, 10);
 
-        $this->assertType('Zend\Db\Table\Rowset', $items);
+        $this->assertInstanceOf('Zend\\Db\\Table\\Rowset', $items);
     }
 
     public function testToJsonWithRowset()

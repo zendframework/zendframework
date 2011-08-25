@@ -272,7 +272,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $vars = $this->_validator->getMessageVariables();
 
-        $this->assertType('array', $vars);
+        $this->assertInternalType('array', $vars);
         $this->assertEquals(array('min', 'max'), $vars);
         $message = 'variables: %notvar% ';
         foreach ($vars as $var) {

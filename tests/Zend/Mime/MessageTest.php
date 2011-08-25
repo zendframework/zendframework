@@ -62,13 +62,13 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $msg = new Mime\Message();  // No Parts
         $m = $msg->getMime();
-        $this->assertType('\Zend\Mime\Mime', $m);
+        $this->assertInstanceOf('Zend\\Mime\\Mime', $m);
 
         $msg = new Mime\Message();  // No Parts
         $mime = new Mime\Mime('1234');
         $msg->setMime($mime);
         $m2 = $msg->getMime();
-        $this->assertType('\Zend\Mime\Mime', $m2);
+        $this->assertInstanceOf('Zend\\Mime\\Mime', $m2);
         $this->assertEquals('1234', $m2->boundary());
     }
 

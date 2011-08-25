@@ -160,7 +160,7 @@ class StaticValidatorTest extends \PHPUnit_Framework_TestCase
     public function testLazyLoadsValidatorBrokerByDefault()
     {
         $broker = Validator\StaticValidator::getBroker();
-        $this->assertType('Zend\Validator\ValidatorBroker', $broker);
+        $this->assertInstanceOf('Zend\Validator\ValidatorBroker', $broker);
     }
 
     public function testCanSetCustomPluginBroker()

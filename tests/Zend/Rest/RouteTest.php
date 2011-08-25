@@ -105,9 +105,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         $request = $this->_buildRequest('GET', '/');
         $values = $this->_invokeRouteMatch($request);
 
-//        $this->assertInternalType('array', $values);
         $this->assertInternalType('array', $values);
-
         $this->assertTrue(isset($values['module']));
         $this->assertEquals('default', $values['module']);
         $this->assertEquals('index', $values['controller']);

@@ -22,9 +22,7 @@
         </para>
     </section>
 
-
     <section xml:id="zend.barcode.objects.details.code128"><info><title>Zend_Barcode_Object_Code128</title></info>
-
         <para>
             <inlinemediaobject><imageobject><imagedata width="152" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.code128.png" format="PNG"/></imageobject></inlinemediaobject>
         </para>
@@ -45,6 +43,42 @@
             <listitem>
                 <para>
                     <emphasis>Checksum:</emphasis> optional (modulo 103)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> variable
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+    </section>
+
+    <section xml:id="zend.barcode.objects.details.codabar"><info><title>Zend_Barcode_Object_Code25</title></info>
+        <para>
+            <inlinemediaobject><imageobject><imagedata width="152" align="center" valign="middle" fileref="figures/zend.barcode.objects.details.codabar.png" format="PNG"/></imageobject></inlinemediaobject>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Codabar (or Code 2 of 7)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789-$:/.+' with 'ABCD' as start and stop characters
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> none
                 </para>
             </listitem>
 

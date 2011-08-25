@@ -262,6 +262,6 @@ class UploadTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Upload();
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
         $this->assertTrue(array_key_exists('fileUploadErrorFileNotFound', $validator->getMessages()));
-        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+        $this->assertContains("nofile.mo'", current($validator->getMessages()));
     }
 }

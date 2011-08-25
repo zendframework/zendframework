@@ -275,7 +275,7 @@ class Delicious
             $parms['url'] = $url;
         }
         if ($dt) {
-            $parms['dt'] = $dt->get('Y-m-d\TH:i:s\Z');
+            $parms['dt'] = $dt->toString('Y-m-d\TH:i:s\Z', 'php');
         }
 
         $response = $this->makeRequest(self::PATH_POSTS_GET, $parms);

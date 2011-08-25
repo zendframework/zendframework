@@ -449,10 +449,10 @@ class Editor extends Dijit
      */
     public function setMinHeight($minHeight)
     {
-        if (!preg_match('/^\d+(em)?$/i', $minHeight)) {
+        if (!preg_match('/^\d+(em|px|%)?$/i', $minHeight)) {
             throw new ElementException('Invalid minHeight provided; must be integer or CSS measurement');
         }
-        if ('em' != substr($minHeight, -2)) {
+        if (!preg_match('/(em|px|%)$/', $minHeight)) {
             $minHeight .= 'em';
         }
         return $this->setDijitParam('minHeight', $minHeight);

@@ -424,7 +424,7 @@ class FormErrors extends AbstractDecorator
         }
 
         return $this->getMarkupElementLabelStart()
-             . $view->escape($label)
+             . $view->vars()->escape($label)
              . $this->getMarkupElementLabelEnd();
     }
 
@@ -442,7 +442,7 @@ class FormErrors extends AbstractDecorator
         $custom = $form->getCustomMessages();
         if ($this->getShowCustomFormErrors() && count($custom)) {
             $content .= $this->getMarkupListItemStart()
-                     .  $view->formErrors($custom, $this->getOptions())
+                     .  $view->broker('formErrors')->direct($custom, $this->getOptions())
                      .  $this->getMarkupListItemEnd();
         }
         foreach ($form->getElementsAndSubFormsOrdered() as $subitem) {
@@ -452,7 +452,7 @@ class FormErrors extends AbstractDecorator
                     $subitem->setView($view);
                     $content .= $this->getMarkupListItemStart()
                              .  $this->renderLabel($subitem, $view)
-                             .  $view->formErrors($messages, $this->getOptions())
+                             .  $view->broker('formErrors')->direct($messages, $this->getOptions())
                              .  $this->getMarkupListItemEnd();
                 }
             } elseif ($subitem instanceof Zend\Form && !$this->ignoreSubForms()) {

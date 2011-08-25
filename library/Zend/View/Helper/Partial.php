@@ -95,7 +95,7 @@ class Partial extends AbstractHelper
                 $view->vars()->assign($model);
             } elseif (is_object($model)) {
                 if (null !== ($objectKey = $this->getObjectKey())) {
-                    $view->vars()->assign($objectKey, $model);
+                    $view->vars()->offsetSet($objectKey, $model);
                 } elseif (method_exists($model, 'toArray')) {
                     $view->vars()->assign($model->toArray());
                 } else {

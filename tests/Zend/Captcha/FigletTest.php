@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Captcha;
-use Zend\View\View;
+use Zend\View\PhpRenderer as View;
 
 /**
  * @category   Zend
@@ -67,7 +67,6 @@ class FigletTest extends \PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new View();
-        $view->addHelperPath(__DIR__ . '/../../../../library/Zend/View/Helper');
         return $view;
     }
 

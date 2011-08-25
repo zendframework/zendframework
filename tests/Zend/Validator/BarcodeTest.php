@@ -451,4 +451,20 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $barcode = new Barcode('issn');
         $this->assertTrue($barcode->isValid('18710360'));
     }
+
+    /**
+     * @group ZF-8674
+     */
+    public function testCODE128()
+    {
+        $barcode = new Barcode('code128');
+        $this->assertTrue($barcode->isValid('ˆCODE128:Š'));
+        $this->assertTrue($barcode->isValid('‡01231[Š'));
+
+        $barcode->setChecksum(false);
+        $this->assertTrue($barcode->isValid('012345'));
+        $this->assertTrue($barcode->isValid('ABCDEF'));
+        $this->assertFalse($barcode->isValid('01234Ê'));
+
+    }
 }

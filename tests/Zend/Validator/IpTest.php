@@ -147,7 +147,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
             '::1.2.3.4'             => true,
             '::127.0.0.1'           => true,
             '::256.0.0.1'           => false,
-            '::01.02.03.04'         => false,
+            '::01.02.03.04'         => true, // according to RFC this can be interpreted as hex notation IpV4
             'a:b:c::1.2.3.4'        => true,
             'a:b:c:d::1.2.3.4'      => true,
             'a:b:c:d:e::1.2.3.4'    => true,
@@ -206,9 +206,9 @@ class IpTest extends \PHPUnit_Framework_TestCase
 
         foreach($IPs as $ip => $expectedOutcome) {
             if($expectedOutcome) {
-                $this->assertTrue($this->_validator->isValid($ip));
+                $this->assertTrue($this->_validator->isValid($ip), $ip . " failed validation");
             } else {
-                $this->assertFalse($this->_validator->isValid($ip));
+                $this->assertFalse($this->_validator->isValid($ip), $ip . " failed validation");
             }
         }
 
@@ -228,5 +228,36 @@ class IpTest extends \PHPUnit_Framework_TestCase
     public function testNonNewlineValidation()
     {
         $this->assertFalse($this->_validator->isValid("::C0A8:2\n"));
+    }
+
+    /**
+     * @group ZF-10621
+     */
+    public function testIPv4addressnotations()
+    {
+        $IPs = array(
+            // binary notation
+            '00000001.00000010.00000011.00000100' => true,
+            '10000000.02000000.00000000.00000001' => false,
+
+            // octal notation (always seen as integer!)
+            '001.002.003.004' => true,
+            '009.008.007.006' => true,
+            '0a0.100.001.010' => false,
+
+            // hex notation
+            '01.02.03.04' => true,
+            'a0.b0.c0.d0' => true,
+            'g0.00.00.00' => false
+        );
+
+        foreach($IPs as $ip => $expectedOutcome) {
+            if($expectedOutcome) {
+                $this->assertTrue($this->_validator->isValid($ip), $ip . " failed validation");
+            } else {
+                $this->assertFalse($this->_validator->isValid($ip), $ip . " failed validation");
+            }
+        }
+
     }
 }

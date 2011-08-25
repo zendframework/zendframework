@@ -28,6 +28,7 @@
  *                              current directory
  * --output|-o [ <string> ]     Where to write autoload file; if not provided, 
  *                              assumes ".classmap.php" in library directory
+ * --append|-a                  Append to autoload file if it exists
  * --overwrite|-w               Whether or not to overwrite existing autoload 
  *                              file
  */
@@ -55,6 +56,7 @@ $rules = array(
     'help|h'        => 'Get usage message',
     'library|l-s'   => 'Library to parse; if none provided, assumes current directory',
     'output|o-s'    => 'Where to write autoload file; if not provided, assumes ".classmap.php" in library directory',
+    'append|a'      => 'Append to autoload file if it exists',
     'overwrite|w'   => 'Whether or not to overwrite existing autoload file',
 );
 
@@ -86,6 +88,7 @@ if (isset($opts->l)) {
 }
 
 $usingStdout = false;
+$appending = $opts->getOption('a');
 $output = $path . DIRECTORY_SEPARATOR . '.classmap.php';
 if (isset($opts->o)) {
     $output = $opts->o;
@@ -98,7 +101,7 @@ if (isset($opts->o)) {
             . $opts->getUsageMessage();
         exit(2);
     } elseif (file_exists($output)) {
-        if (!$opts->getOption('w')) {
+        if (!$opts->getOption('w') && !$appending) {
             echo "Autoload file already exists at '$output'," . PHP_EOL
                 . "but 'overwrite' flag was not specified; aborting." . PHP_EOL 
                 . PHP_EOL
@@ -111,7 +114,11 @@ if (isset($opts->o)) {
 $strip     = $path;
 
 if (!$usingStdout) {
-    echo "Creating class file map for library in '$path'..." . PHP_EOL;
+    if ($appending) {
+        echo "Appending to class file map '$output' for library in '$path'..." . PHP_EOL;
+    } else {
+        echo "Creating class file map for library in '$path'..." . PHP_EOL;
+    }
 }
 
 // Get the ClassFileLocator, and pass it the library path
@@ -134,16 +141,38 @@ iterator_apply($l, function() use ($l, $map, $strip){
     return true;
 });
 
-// Create a file with the class/file map.
-// Stupid syntax highlighters make separating < from PHP declaration necessary
-$content = '<' . "?php\n"
-         . 'return ' . var_export((array) $map, true) . ';';
+if ($appending) {
 
-// Prefix with __DIR__; modify the generated content
-$content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+    $content = var_export((array) $map, true) . ';';
 
-// Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
-$content = str_replace("\\'", "'", $content);
+    // Prefix with __DIR__; modify the generated content
+    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+
+    // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
+    $content = str_replace("\\'", "'", $content);
+
+    // Convert to an array and remove the first "array ("
+    $content = explode(PHP_EOL, $content);
+    array_shift($content);
+
+    // Load existing class map file and remove the closing "bracket ");" from it
+    $existing = file($output, FILE_IGNORE_NEW_LINES);
+    array_pop($existing); 
+
+    // Merge
+    $content = implode(PHP_EOL, $existing + $content);
+} else {
+    // Create a file with the class/file map.
+    // Stupid syntax highlighters make separating < from PHP declaration necessary
+    $content = '<' . "?php\n"
+             . 'return ' . var_export((array) $map, true) . ';';
+
+    // Prefix with __DIR__; modify the generated content
+    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+
+    // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
+    $content = str_replace("\\'", "'", $content);
+}
 
 // Write the contents to disk
 file_put_contents($output, $content);

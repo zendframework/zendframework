@@ -21,7 +21,7 @@
 
 namespace ZendTest\Dojo\View\Helper;
 
-use Zend\Dojo\View\Helper\Form as FormHelper,
+use Zend\Dojo\View\Helper\DojoForm as DojoFormHelper,
     Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Registry,
     Zend\View;
@@ -37,7 +37,7 @@ use Zend\Dojo\View\Helper\Form as FormHelper,
  * @group      Zend_Dojo
  * @group      Zend_Dojo_View
  */
-class FormTest extends \PHPUnit_Framework_TestCase
+class DojoFormTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -51,7 +51,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseDeclarative();
 
         $this->view   = $this->getView();
-        $this->helper = new FormHelper();
+        $this->helper = new DojoFormHelper();
         $this->helper->setView($this->view);
     }
 
@@ -84,7 +84,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testOnlyIdShouldBeNecessary()
     {
         DojoHelper::setUseDeclarative();
-        $html = $this->view->broker('form')->direct('foo');
+        $html = $this->view->broker('dojoform')->direct('foo');
         $this->assertRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html, $html);
         $this->assertRegexp('/<form[^>]*(id="foo")/', $html, $html);
     }
@@ -99,5 +99,11 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $html = $this->helper->direct('foo');
         $this->assertNotRegexp('/<\/form>/', $html);
+    }
+
+    public function testShouldNotUseDojoIfRegularZendFormIsUsed()
+    {
+        $html = $this->view->broker('form')->direct('foo');
+        $this->assertNotRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html);
     }
 }

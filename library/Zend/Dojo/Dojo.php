@@ -91,5 +91,25 @@ class Dojo
         }
         $view->broker()->getClassLoader()->registerPlugins(new View\HelperLoader());
     }
+    
+    /**
+     * Dojo-disable a dojo enabled view
+     * 
+     * @param  \Zend\View\Renderer $view
+     * @return void
+     */
+    public static function disableView(Renderer $view)
+    {
+        if (!$view instanceof PhpRenderer) {
+            return;
+        }
+        
+        $broker = $view->broker();
+        $plugins = $broker->getPlugins();
+        foreach($plugins as $plugin => $void) {
+            $broker->unregister($plugin);
+            $broker->getClassLoader()->unregisterPlugin($plugin);
+        }
+    }
 }
 

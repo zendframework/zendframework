@@ -622,7 +622,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testStartingSessionThatFailsAValidatorShouldRaiseException()
     {
         $chain = $this->manager->getValidatorChain();
-        $chain->connect('session.validate', function() {
+        $chain->attach('session.validate', function() {
              return false;
         });
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'xxx');

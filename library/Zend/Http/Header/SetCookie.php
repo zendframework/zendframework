@@ -66,6 +66,7 @@ class SetCookie implements MultipleHeaderDescription
      */
     public static function fromString($headerLine, $bypassHeaderFieldName = false)
     {
+        /* @var $setCookieProcessor Closure */
         static $setCookieProcessor = null;
 
         if ($setCookieProcessor === null) {

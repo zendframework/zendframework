@@ -188,4 +188,14 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $html = $this->helper->direct('foo');
         $this->assertRegexp('#</noscript><input#', $html, $html);
     }
+
+    /** @group ZF-5711 */
+    public function testHelperShouldJsonifyExtraPlugins()
+    {
+        $extraPlugins = array('copy', 'cut', 'paste');
+        $html = $this->helper->direct('foo', '', array('extraPlugins' => $extraPlugins));
+        $pluginsString = Json::encode($extraPlugins);
+        $pluginsString = str_replace('"', "'", $pluginsString);
+        $this->assertContains('extraPlugins="' . $pluginsString . '"', $html);
+    }
 }

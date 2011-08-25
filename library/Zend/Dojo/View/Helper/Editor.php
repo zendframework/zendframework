@@ -55,7 +55,14 @@ class Editor extends Dijit
         'fontSize' => 'FontChoice',
         'formatBlock' => 'FontChoice',
         'foreColor' => 'TextColor',
-        'hiliteColor' => 'TextColor'
+        'hiliteColor' => 'TextColor',
+        'enterKeyHandling' => 'EnterKeyHandling',
+        'fullScreen' => 'FullScreen',
+        'newPage' => 'NewPage',
+        'print' => 'Print',
+        'tabIndent' => 'TabIndent',
+        'toggleDir' => 'ToggleDir',
+        'viewSource' => 'ViewSource'
     );
 
     /**

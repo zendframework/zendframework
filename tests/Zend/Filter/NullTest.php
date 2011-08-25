@@ -298,7 +298,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetType()
     {
-        $this->assertEquals(31, $this->_filter->getType());
+        $this->assertEquals(63, $this->_filter->getType());
     }
 
     /**
@@ -308,6 +308,7 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $filter = $this->_filter;
         $this->assertEquals(null, $filter(0.0));
+    }
 
     /**
      * @group ZF-10388

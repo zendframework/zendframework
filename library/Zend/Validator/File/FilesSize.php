@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator\File;
 
+use Zend\Loader;
+
 /**
  * Validator for the size of all files which will be validated in sum
  *
@@ -112,7 +114,7 @@ class FilesSize extends Size
         $size = $this->_getSize();
         foreach ($value as $files) {
             // Is file readable ?
-            if (!\Zend\Loader::isReadable($files)) {
+            if (!Loader::isReadable($files)) {
                 $this->_throw($file, self::NOT_READABLE);
                 continue;
             }

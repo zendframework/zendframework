@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator\File;
 
+use Zend\Loader;
+
 /**
  * Validator for counting all words in a file
  *
@@ -66,7 +68,7 @@ class WordCount extends Count
         }
 
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

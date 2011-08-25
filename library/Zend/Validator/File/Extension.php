@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator\File;
 
+use Zend\Loader;
+
 /**
  * Validator for the file extension of a file
  *
@@ -190,7 +192,7 @@ class Extension extends \Zend\Validator\AbstractValidator
         }
 
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

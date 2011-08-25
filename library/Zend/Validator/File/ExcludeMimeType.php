@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator\File;
 
+use Loader;
+
 /**
  * Validator for the mime type of a file
  *
@@ -59,7 +61,7 @@ class ExcludeMimeType extends MimeType
         }
 
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }
 

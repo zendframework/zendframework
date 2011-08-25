@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator\File;
 
+use Zend\Loader;
+
 /**
  * Validator for the excluding file extensions
  *
@@ -64,7 +66,7 @@ class ExcludeExtension extends Extension
         }
 
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

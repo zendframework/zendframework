@@ -22,7 +22,9 @@
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator,
+
+use Zend\Loader,
+    Zend\Validator,
     Zend\Validator\Exception;
 
 /**
@@ -309,7 +311,7 @@ class ImageSize extends Validator\AbstractValidator
         }
 
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }
 

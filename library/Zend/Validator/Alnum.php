@@ -42,7 +42,7 @@ class Alnum extends AbstractValidator
      *
      * @var boolean
      */
-    protected $_allowWhiteSpace;
+    protected $allowWhiteSpace;
 
     /**
      * Alphanumeric filter used for validation
@@ -82,7 +82,7 @@ class Alnum extends AbstractValidator
             }
         }
 
-        $this->_allowWhiteSpace = (boolean) $allowWhiteSpace;
+        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
     }
 
     /**
@@ -92,7 +92,7 @@ class Alnum extends AbstractValidator
      */
     public function getAllowWhiteSpace()
     {
-        return $this->_allowWhiteSpace;
+        return $this->allowWhiteSpace;
     }
 
     /**
@@ -103,7 +103,7 @@ class Alnum extends AbstractValidator
      */
     public function setAllowWhiteSpace($allowWhiteSpace)
     {
-        $this->_allowWhiteSpace = (boolean) $allowWhiteSpace;
+        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
         return $this;
     }
 
@@ -131,7 +131,7 @@ class Alnum extends AbstractValidator
             self::$_filter = new \Zend\Filter\Alnum();
         }
 
-        self::$_filter->setAllowWhiteSpace($this->_allowWhiteSpace);
+        self::$_filter->setAllowWhiteSpace($this->allowWhiteSpace);
 
         if ($value != self::$_filter->filter($value)) {
             $this->_error(self::NOT_ALNUM);

@@ -29,14 +29,6 @@ use Zend\Http\Response as HTTPResponse,
 
 interface Token
 {
-    /**
-     * Intialize a token, based on the HTTP Response and Utility
-     * 
-     * @param  HTTPResponse $response 
-     * @param  HTTPUtility $utility 
-     * @return void
-     */
-    public function __construct(HTTPResponse $response = null, HTTPUtility $utility = null);
 
     /**
      * Retrieve an arbitrary named parameter from the token

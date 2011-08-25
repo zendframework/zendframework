@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator;
 
+use Zend\Config\Config;
+
 /**
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception
@@ -73,12 +75,12 @@ class GreaterThan extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  mixed|array|\Zend\Config\Config $options
+     * @param  mixed|array|Config $options
      * @return void
      */
     public function __construct($options)
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
         } else if (!is_array($options)) {
             $options = func_get_args();

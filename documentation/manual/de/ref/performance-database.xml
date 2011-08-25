@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.database"><info><title>Zend_Db Performance</title></info>
-    
+
 
     <para>
         <classname>Zend_Db</classname> ist ein Datenbank Abstraktion Layer und ist dazu gedacht
         eine gemeinsame <acronym>API</acronym> für <acronym>SQL</acronym> Operationen zu bieten.
-        <classname>Zend_Db_Table</classname> ist ein Table Data Bateway, dazu gedacht übliche
+        <classname>Zend_Db_Table</classname> ist ein Table Data Gateway, dazu gedacht übliche
         Tabellen-artige Datenbank Operationen zu abstrahieren. Wegen Ihrer abstrakten Natur und der
         "Magie" die Sie versteckt haben um Ihre Operationen durchführen zu können, können Sie
         manchmal auch zu Geschwindigkeitsnachteilen führen.
@@ -15,7 +15,7 @@
             Wie kann ich den Overhead reduzieren der von Zend_Db_Table eingeführt wird um die
             Metadaten der Tabelle zu erhalten?
         </title></info>
-        
+
 
         <para>
             Um die Verwendung so einfach wie möglich zu halten, und auch sich konstant ändernde
@@ -31,7 +31,7 @@
         </para>
 
         <section xml:id="performance.database.tableMetadata.cache"><info><title>Den Metadaten Cache verwenden</title></info>
-            
+
 
             <para>
                 <classname>Zend_Db_Table</classname> kann optional <classname>Zend_Cache</classname>
@@ -47,7 +47,7 @@
         </section>
 
         <section xml:id="performance.database.tableMetadata.hardcoding"><info><title>Die Metadaten in der Tabellendefinition fix codieren</title></info>
-            
+
 
             <para>
                 Mit 1.7.0, bietet <classname>Zend_Db_Table</classname> auch
@@ -64,7 +64,7 @@
             SQL die mit Zend_Db_Select erzeugt wurde greift nicht auf die Indezes zu; wie kann man
             das besser machen?
         </title></info>
-        
+
 
         <para>
             <classname>Zend_Db_Select</classname> ist relativ gut in seinem Job. Trotzdem kann es,
@@ -73,7 +73,7 @@
         </para>
 
         <section xml:id="performance.database.select.writeyourown"><info><title>Selbst getuntes SQL schreiben</title></info>
-            
+
 
             <para>
                 Die einzige echte Antwort ist es eigenes <acronym>SQL</acronym> zu schreiben;

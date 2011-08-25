@@ -584,7 +584,7 @@ class File extends Xhtml
     }
 
     /**
-     * Sets the maximum file size of the form
+     * Gets the maximum file size of the form
      *
      * @return integer
      */

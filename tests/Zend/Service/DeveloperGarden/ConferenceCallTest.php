@@ -929,7 +929,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
         $this->assertNull($result->getSchedule());
         $this->assertEquals(0, $result->getStartTime());
 
-        $this->assertType('array', $result->getParticipants());
+        $this->assertInternalType('array', $result->getParticipants());
         $this->assertTrue(count($result->getParticipants()) === 2);
         foreach ($result->getParticipants() as $v) {
             $this->assertType(
@@ -1031,7 +1031,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
         $this->assertNull($result->getSchedule());
         $this->assertEquals(0, $result->getStartTime());
 
-        $this->assertType('array', $result->getParticipants());
+        $this->assertInternalType('array', $result->getParticipants());
         $this->assertTrue(count($result->getParticipants()) === 2);
         foreach ($result->getParticipants() as $v) {
             $this->assertType(
@@ -1145,7 +1145,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
             'Zend_Service_DeveloperGarden_Response_ConferenceCall_GetParticipantStatusResponseType',
             $result
         );
-        $this->assertType('array', $result->getStatus());
+        $this->assertInternalType('array', $result->getStatus());
         foreach ($result->getStatus() as $v) {
             $this->assertType('Zend_Service_DeveloperGarden_ConferenceCall_ParticipantStatus', $v);
             $this->assertNotNull($v->getName());
@@ -1395,7 +1395,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
         $this->assertEquals('Some Description', $detail->getDescription());
         $this->assertEquals(123, $detail->getDuration());
 
-        $this->assertType('array', $result->getParticipants());
+        $this->assertInternalType('array', $result->getParticipants());
         $this->assertTrue(count($result->getParticipants()) > 0);
         foreach ($result->getParticipants() as $k => $v) {
             $this->assertType(
@@ -1423,7 +1423,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
             'Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail',
             $pid1->getDetail()
         );
-        $this->assertType('array', $pid1->getStatus());
+        $this->assertInternalType('array', $pid1->getStatus());
     }
 
     public function testGetConferenceTemplateList()
@@ -1469,7 +1469,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
             $result
         );
         $list = $result->getTemplateIds();
-        $this->assertType('array', $list);
+        $this->assertInternalType('array', $list);
         foreach ($list as $k => $v) {
             $this->assertNotNull($v);
         }
@@ -1511,7 +1511,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
         $templateId = $result->getTemplateId();
         $this->assertNotNull($templateId);
 
-        $this->assertType('array', $participants);
+        $this->assertInternalType('array', $participants);
         foreach ($participants as $k => $v) {
             $result = $this->service->addConferenceTemplateParticipant($templateId, $v);
             $this->assertType(
@@ -1678,7 +1678,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
             $result
         );
         $list = $result->getParticipants();
-        $this->assertType('array', $list);
+        $this->assertInternalType('array', $list);
 
         foreach ($list as $k => $v) {
             $participantId = $v->getParticipantId();
@@ -1755,7 +1755,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
             $result
         );
         $list = $result->getTemplateIds();
-        $this->assertType('array', $list);
+        $this->assertInternalType('array', $list);
         foreach ($list as $k => $v) {
             $templateId = $v;
             $this->assertNotNull($templateId);
@@ -1802,7 +1802,7 @@ class Zend_Service_DeveloperGarden_ConferenceCallTest extends PHPUnit_Framework_
             $result
         );
         $list = $result->getTemplateIds();
-        $this->assertType('array', $list);
+        $this->assertInternalType('array', $list);
         foreach ($list as $k => $v) {
             $templateId = $v;
             $this->assertNotNull($templateId);

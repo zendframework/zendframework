@@ -65,7 +65,7 @@ class StaticTest extends AbstractTest
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts"', $sql);
         $stmt = $select->query();
         \Zend\Loader::loadClass('Zend_Db_Statement_Static');
-        $this->assertType('Zend_Db_Statement_Static', $stmt);
+        $this->assertInstanceOf('Zend_Db_Statement_Static', $stmt);
     }
 
     /**
@@ -81,7 +81,7 @@ class StaticTest extends AbstractTest
 
         $stmt = $select->query();
         \Zend\Loader::loadClass('Zend_Db_Statement_Static');
-        $this->assertType('Zend_Db_Statement_Static', $stmt);
+        $this->assertInstanceOf('Zend_Db_Statement_Static', $stmt);
     }
 
     /**

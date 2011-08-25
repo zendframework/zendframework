@@ -102,7 +102,7 @@ class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetPluginsReturnsPriorityStack()
     {
-        $this->assertType('Zend\Controller\Action\HelperPriorityStack', $this->broker->getPlugins());
+        $this->assertInstanceOf('Zend\Controller\Action\HelperPriorityStack', $this->broker->getPlugins());
     }
 
     public function testGetPluginsLoadsSpeccedHelpers()

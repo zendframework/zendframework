@@ -44,7 +44,7 @@ abstract class AbstractPdoTest extends AbstractTest
             ->from('zfproducts');
         $sql = $select->__toString();
         $stmt = new PDO($this->_db, $sql);
-        $this->assertType('Zend\Db\Statement\PDO', $stmt);
+        $this->assertInstanceOf('Zend\Db\Statement\PDO', $stmt);
         $stmt->closeCursor();
     }
 
@@ -53,7 +53,7 @@ abstract class AbstractPdoTest extends AbstractTest
         $select = $this->_db->select()
             ->from('zfproducts');
         $stmt = new PDO($this->_db, $select);
-        $this->assertType('Zend\Db\Statement', $stmt);
+        $this->assertInstanceOf('Zend\Db\Statement', $stmt);
         $stmt->closeCursor();
     }
 
@@ -66,7 +66,7 @@ abstract class AbstractPdoTest extends AbstractTest
             $stmt->nextRowset();
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals('SQLSTATE[IM001]: Driver does not support this function: driver does not support multiple rowsets', $e->getMessage());
         }
@@ -84,7 +84,7 @@ abstract class AbstractPdoTest extends AbstractTest
         foreach ($stmt as $test) {
             $this->assertTrue($test instanceof \stdClass);
         }
-        $this->assertType('int', iterator_count($stmt));
+        $this->assertInternalType('int', iterator_count($stmt));
     }
 
     public function testStatementConstructExceptionBadSql()
@@ -94,10 +94,10 @@ abstract class AbstractPdoTest extends AbstractTest
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Statement\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Statement\Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertTrue($e->hasChainedException(), 'Missing Chained Exception');
-            $this->assertType('PDOException', $e->getChainedException(), 'Wrong type of Exception');
+            $this->assertInstanceOf('PDOException', $e->getChainedException(), 'Wrong type of Exception');
         }
     }
 

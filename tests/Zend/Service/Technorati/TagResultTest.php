@@ -60,9 +60,9 @@ class Zend_Service_Technorati_TagResultTest extends Zend_Service_Technorati_Test
         $object = new Zend_Service_Technorati_TagResult($this->domElements->item(1));
 
         // check properties
-        $this->assertType('string', $object->getTitle());
+        $this->assertInternalType('string', $object->getTitle());
         $this->assertContains('Permalink for : VerveEarth', $object->getTitle());
-        $this->assertType('string', $object->getExcerpt());
+        $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('VerveEarth: Locate Your Blog!', $object->getExcerpt());
         $this->assertType('Zend_Uri_Http', $object->getPermalink());
         $this->assertEquals(Zend_Uri::factory('http://scienceroll.com/2007/11/14/verveearth-locate-your-blog/'), $object->getPermalink());

@@ -178,7 +178,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $this->broker->register('sample', new TestAsset\SamplePlugin());
         $this->broker->load('sample');
         $plugins = $this->broker->getPlugins();
-        $this->assertType('array', $plugins);
+        $this->assertInternalType('array', $plugins);
         $this->assertEquals(1, count($plugins));
     }
 

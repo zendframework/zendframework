@@ -137,7 +137,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
 
-        $this->assertType('Zend\Cache\Frontend\Core', Translator::getCache());
+        $this->assertInstanceOf('Zend\Cache\Frontend\Core', Translator::getCache());
         Translator::clearCache();
     }
 }

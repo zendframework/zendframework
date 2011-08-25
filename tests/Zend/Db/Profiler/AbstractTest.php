@@ -65,28 +65,28 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         // execute query a first time
         $stmt->execute();
         $results = $stmt->fetchAll();
-        $this->assertType('array', $results);
+        $this->assertInternalType('array', $results);
         $this->assertEquals(2, $results[0]['bug_id']);
 
         // analyze query profiles
         $profiles = $this->_db->getProfiler()->getQueryProfiles();
-        $this->assertType('array', $profiles);
+        $this->assertInternalType('array', $profiles);
         $this->assertEquals(1, count($profiles), 'Expected to find 1 profile');
         $qp = $profiles[0];
-        $this->assertType('Zend\Db\Profiler\Query', $qp);
+        $this->assertInstanceOf('Zend\Db\Profiler\Query', $qp);
 
         // execute query a second time
         $stmt->execute();
         $results = $stmt->fetchAll();
-        $this->assertType('array', $results);
+        $this->assertInternalType('array', $results);
         $this->assertEquals(2, $results[0]['bug_id']);
 
         // analyze query profiles
         $profiles = $this->_db->getProfiler()->getQueryProfiles();
-        $this->assertType('array', $profiles);
+        $this->assertInternalType('array', $profiles);
         $this->assertEquals(2, count($profiles), 'Expected to find 2 profiles');
         $qp = $profiles[1];
-        $this->assertType('Zend\Db\Profiler\Query', $qp);
+        $this->assertInstanceOf('Zend\Db\Profiler\Query', $qp);
 
         $this->assertNotSame($profiles[0], $profiles[1]);
         $this->assertEquals($profiles[0]->getQuery(), $profiles[1]->getQuery());
@@ -106,35 +106,35 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         // execute query a first time
         $stmt->execute(array(2, 'VERIFIED'));
         $results = $stmt->fetchAll();
-        $this->assertType('array', $results);
+        $this->assertInternalType('array', $results);
         $this->assertEquals(2, $results[0]['bug_id']);
 
         // analyze query profiles
         $profiles = $this->_db->getProfiler()->getQueryProfiles();
-        $this->assertType('array', $profiles);
+        $this->assertInternalType('array', $profiles);
         $this->assertEquals(1, count($profiles), 'Expected to find 1 profile');
         $qp = $profiles[0];
-        $this->assertType('Zend\Db\Profiler\Query', $qp);
+        $this->assertInstanceOf('Zend\Db\Profiler\Query', $qp);
 
         // analyze query in the profile
         $sql = $qp->getQuery();
         $this->assertContains(" = ?", $sql);
         $params = $qp->getQueryParams();
-        $this->assertType('array', $params);
+        $this->assertInternalType('array', $params);
         $this->assertEquals(array(1 => 2, 2 => 'VERIFIED'), $params);
 
         // execute query a second time
         $stmt->execute(array(3, 'FIXED'));
         $results = $stmt->fetchAll();
-        $this->assertType('array', $results);
+        $this->assertInternalType('array', $results);
         $this->assertEquals(3, $results[0]['bug_id']);
 
         // analyze query profiles
         $profiles = $this->_db->getProfiler()->getQueryProfiles();
-        $this->assertType('array', $profiles);
+        $this->assertInternalType('array', $profiles);
         $this->assertEquals(2, count($profiles), 'Expected to find 2 profiles');
         $qp = $profiles[1];
-        $this->assertType('Zend\Db\Profiler\Query', $qp);
+        $this->assertInstanceOf('Zend\Db\Profiler\Query', $qp);
         $this->assertNotSame($profiles[0], $profiles[1]);
         $this->assertEquals($profiles[0]->getQuery(), $profiles[1]->getQuery());
 
@@ -142,7 +142,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $sql = $qp->getQuery();
         $this->assertContains(" = ?", $sql);
         $params = $qp->getQueryParams();
-        $this->assertType('array', $params);
+        $this->assertInternalType('array', $params);
         $this->assertEquals(array(1 => 3, 2 => 'FIXED'), $params);
 
         $this->assertNotSame($profiles[0], $profiles[1]);
@@ -169,21 +169,21 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $status = 'VERIFIED';
         $stmt->execute();
         $results = $stmt->fetchAll();
-        $this->assertType('array', $results);
+        $this->assertInternalType('array', $results);
         $this->assertEquals(2, $results[0]['bug_id']);
 
         // analyze query profiles
         $profiles = $this->_db->getProfiler()->getQueryProfiles();
-        $this->assertType('array', $profiles, 'Expected array, got '.gettype($profiles));
+        $this->assertInternalType('array', $profiles, 'Expected array, got '.gettype($profiles));
         $this->assertEquals(1, count($profiles), 'Expected to find 1 profile');
         $qp = $profiles[0];
-        $this->assertType('Zend\Db\Profiler\Query', $qp);
+        $this->assertInstanceOf('Zend\Db\Profiler\Query', $qp);
 
         // analyze query in the profile
         $sql = $qp->getQuery();
         $this->assertContains(" = ?", $sql);
         $params = $qp->getQueryParams();
-        $this->assertType('array', $params);
+        $this->assertInternalType('array', $params);
         $this->assertEquals(array(1 => 2, 2 => 'VERIFIED'), $params);
 
         // execute query a second time
@@ -191,21 +191,21 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $status = 'FIXED';
         $stmt->execute();
         $results = $stmt->fetchAll();
-        $this->assertType('array', $results);
+        $this->assertInternalType('array', $results);
         $this->assertEquals(3, $results[0]['bug_id']);
 
         // analyze query profiles
         $profiles = $this->_db->getProfiler()->getQueryProfiles();
-        $this->assertType('array', $profiles, 'Expected array, got '.gettype($profiles));
+        $this->assertInternalType('array', $profiles, 'Expected array, got '.gettype($profiles));
         $this->assertEquals(2, count($profiles), 'Expected to find 2 profiles');
         $qp = $profiles[1];
-        $this->assertType('Zend\Db\Profiler\Query', $qp);
+        $this->assertInstanceOf('Zend\Db\Profiler\Query', $qp);
 
         // analyze query in the profile
         $sql = $qp->getQuery();
         $this->assertContains(" = ?", $sql);
         $params = $qp->getQueryParams();
-        $this->assertType('array', $params);
+        $this->assertInternalType('array', $params);
         $this->assertEquals(array(1 => 3, 2 => 'FIXED'), $params);
     }
 
@@ -231,7 +231,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $this->_db->query("UPDATE $bugs SET $bug_status = ?", array('FIXED'));
 
         $qps = $prof->getQueryProfiles();
-        $this->assertType('array', $qps, 'Expecting some query profiles, got none');
+        $this->assertInternalType('array', $qps, 'Expecting some query profiles, got none');
         foreach ($qps as $qp) {
             $qtype = $qp->getQueryType();
             $this->assertEquals($queryType, $qtype,

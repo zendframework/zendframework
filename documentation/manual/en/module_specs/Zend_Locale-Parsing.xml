@@ -348,7 +348,7 @@ print $number;
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
-if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
+if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale))) {
     print "float";
 } else {
     print "not a float";

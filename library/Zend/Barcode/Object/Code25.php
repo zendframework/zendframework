@@ -92,7 +92,7 @@ class Code25 extends AbstractObject
         $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
         $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
         $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , 1);
+        $barcodeTable[] = array(0 , $this->_barThinWidth);
 
         $text = str_split($this->getText());
         foreach ($text as $char) {
@@ -101,7 +101,7 @@ class Code25 extends AbstractObject
                 /* visible, width, top, length */
                 $width = $c ? $this->_barThickWidth : $this->_barThinWidth;
                 $barcodeTable[] = array(1 , $width , 0 , 1);
-                $barcodeTable[] = array(0 , 1);
+                $barcodeTable[] = array(0 , $this->_barThinWidth);
             }
         }
 

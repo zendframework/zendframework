@@ -48,6 +48,36 @@ class SvgTest extends TestCommon
         $this->assertSame('svg', $this->_renderer->getType());
     }
 
+    public function testGoodHeight()
+    {
+        $this->assertSame(0, $this->_renderer->getHeight());
+        $this->_renderer->setHeight(123);
+        $this->assertSame(123, $this->_renderer->getHeight());
+        $this->_renderer->setHeight(0);
+        $this->assertSame(0, $this->_renderer->getHeight());
+    }
+
+    public function testBadHeight()
+    {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->_renderer->setHeight(-1);
+    }
+
+    public function testGoodWidth()
+    {
+        $this->assertSame(0, $this->_renderer->getWidth());
+        $this->_renderer->setWidth(123);
+        $this->assertSame(123, $this->_renderer->getWidth());
+        $this->_renderer->setWidth(0);
+        $this->assertSame(0, $this->_renderer->getWidth());
+    }
+
+    public function testBadWidth()
+    {
+        $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
+        $this->_renderer->setWidth(-1);
+    }
+
     public function testGoodSvgResource()
     {
         $svgResource = new \DOMDocument();

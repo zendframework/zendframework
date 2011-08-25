@@ -77,7 +77,7 @@ class Factory
                     case 'http://www.w3.org/2000/09/xmldsig#':
                         return simplexml_load_string($strXmlData, 'Zend\InfoCard\XML\KeyInfo\XMLDSig');
                     default:
-                        throw new XML\Exception\RuntimeExcpetion("Unknown KeyInfo Namespace provided");
+                        throw new XML\Exception\RuntimeException("Unknown KeyInfo Namespace provided");
                     // We are ignoring these lines, as XDebug reports each as a "non executed" line
                     // which breaks my coverage %
                     // @codeCoverageIgnoreStart

@@ -871,6 +871,23 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @ZF-10941
+     */
+    public function testIgnoreBasePath()
+    {
+        $lang = new Translator\Translator(
+             Translator\Translator::AN_ARRAY,
+             __DIR__ . '/Adapter/_files/.iamhidden/testarray',
+             'en_GB',
+             array('scan' => Translator\Translator::LOCALE_DIRECTORY)
+        );
+
+        $this->assertEquals('Message 1 (ja)', $lang->_('Message 1', 'ja'        ));
+        $this->assertEquals('Message 1 (en)', $lang->_('Message 1'              ));
+        $this->assertEquals(array('de_AT' => 'de_AT', 'en_GB' => 'en_GB', 'ja' => 'ja'), $lang->getList());
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

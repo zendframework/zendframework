@@ -244,6 +244,7 @@ abstract class Adapter
         $options  = $options + $this->_options;
         if (is_string($options['content']) and is_dir($options['content'])) {
             $options['content'] = realpath($options['content']);
+            $search             = strlen($options['content']);
             $prev = '';
             if (DIRECTORY_SEPARATOR == '\\') {
                 $separator = '\\\\';
@@ -280,20 +281,21 @@ abstract class Adapter
 
             foreach ($iterator as $directory => $info) {
                 $file = $info->getFilename();
+                $original = substr($directory, $search);
                 if (is_array($options['ignore'])) {
                     foreach ($options['ignore'] as $key => $hop) {
                         if (strpos($key, 'regex') !== false) {
-                            if (preg_match($hop, $directory)) {
+                            if (preg_match($hop, $original)) {
                                 // ignore files matching the given regex from option 'ignore' and all files below
                                 continue 2;
                             }
-                        } else if (strpos($directory, DIRECTORY_SEPARATOR . $hop) !== false) {
+                        } else if (strpos($original, DIRECTORY_SEPARATOR . $hop) !== false) {
                             // ignore files matching first characters from option 'ignore' and all files below
                             continue 2;
                         }
                     }
                 } else {
-                    if (strpos($directory, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
+                    if (strpos($original, DIRECTORY_SEPARATOR . $options['ignore']) !== false) {
                         // ignore files matching first characters from option 'ignore' and all files below
                         continue;
                     }

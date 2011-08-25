@@ -30,7 +30,7 @@ use Zend\Form\Element\Exception;
  * TimeTextBox dijit
  *
  * @uses       \Zend\Dojo\Form\Element\DateTextBox
- * @uses       \Zend\Form\ElementException
+ * @uses       \Zend\Form\Element\Exception
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -49,7 +49,7 @@ class TimeTextBox extends DateTextBox
      *
      * @param  string $format
      * @return true
-     * @throws \Zend\Form\ElementException
+     * @throws \Zend\Form\Element\Exception
      */
     protected function _validateIso8601($format)
     {

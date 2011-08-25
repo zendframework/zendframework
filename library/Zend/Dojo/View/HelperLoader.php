@@ -51,7 +51,7 @@ class HelperLoader extends PluginClassLoader
         'dojo'               => 'Zend\Dojo\View\Helper\Dojo',
         'editor'             => 'Zend\Dojo\View\Helper\Editor',
         'filteringselect'    => 'Zend\Dojo\View\Helper\FilteringSelect',
-        'form'               => 'Zend\Dojo\View\Helper\Form',
+        'dojoform'           => 'Zend\Dojo\View\Helper\DojoForm',
         'horizontalslider'   => 'Zend\Dojo\View\Helper\HorizontalSlider',
         'numberspinner'      => 'Zend\Dojo\View\Helper\NumberSpinner',
         'numbertextbox'      => 'Zend\Dojo\View\Helper\NumberTextBox',

@@ -849,7 +849,7 @@ class Container
      */
     public function dijitsToJson()
     {
-        return Json::encode($this->getDijits());
+        return Json::encode($this->getDijits(), false, array('enableJsonExprFinder' => true));
     }
 
     /**
@@ -886,7 +886,7 @@ EOJ;
      */
     public function addJavascript($js)
     {
-        $js = preg_replace('/^\s*(.*?)\s*$/s', '$1', $js);
+        $js = trim($js);
         if (!in_array(substr($js, -1), array(';', '}'))) {
             $js .= ';';
         }

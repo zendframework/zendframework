@@ -65,7 +65,6 @@ class SimpleTextarea extends Dijit
             $attribs['id']    = $id;
         }
         $attribs['name']  = $id;
-        $attribs['type']  = $this->_elementType;
 
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 

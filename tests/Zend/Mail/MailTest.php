@@ -38,8 +38,15 @@ use Zend\Date;
  */
 class MailTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     public function setUp()
     {
+        $this->_originaltimezone = date_default_timezone_get();
         // Set timezone to avoid "date(): It is not safe to rely on the system's timezone settings."
         // message.
         date_default_timezone_set('GMT');
@@ -49,6 +56,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
     {
         Mail\Mail::clearDefaultFrom();
         Mail\Mail::clearDefaultReplyTo();
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     /**
@@ -908,7 +916,7 @@ class MailTest extends \PHPUnit_Framework_TestCase
             $mail->send($transport);
             $this->fail('Exception should have been thrown, but wasn\'t');
         } catch(Transport\Exception $e) {
-        	// do nothing
+            // do nothing
         }
     }
 

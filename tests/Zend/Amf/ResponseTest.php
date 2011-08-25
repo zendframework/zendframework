@@ -51,10 +51,17 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     protected $_response;
 
     /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
+    /**
      * Setup environment
      */
     public function setUp()
     {
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('America/Chicago');
         Locale::setDefault('en_US');
         Parser\TypeLoader::resetMap();
@@ -67,6 +74,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->_response);
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     /**

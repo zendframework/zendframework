@@ -46,9 +46,24 @@ use Zend\Pdf\Destination;
  */
 class ActionTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     public function setUp()
     {
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('GMT');
+    }
+
+    /**
+     * Teardown environment
+     */
+    public function tearDown()
+    {
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     public function testLoad()

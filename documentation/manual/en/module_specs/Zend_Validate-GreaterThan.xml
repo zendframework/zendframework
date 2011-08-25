@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.set.greaterthan"><info><title>GreaterThan</title></info>
-    
+
 
     <para>
         <classname>Zend_Validate_GreaterThan</classname> allows you to validate if a given value is
@@ -8,7 +8,7 @@
     </para>
 
     <note><info><title>Zend_Validate_GreaterThan supports only number validation</title></info>
-        
+
 
         <para>
             It should be noted that <classname>Zend_Validate_GreaterThan</classname> supports only
@@ -17,7 +17,7 @@
     </note>
 
     <section xml:id="zend.validate.set.greaterthan.options"><info><title>Supported options for Zend_Validate_GreaterThan</title></info>
-        
+
 
         <para>
             The following options are supported for
@@ -27,6 +27,14 @@
         <itemizedlist>
             <listitem>
                 <para>
+                    <emphasis><property>inclusive</property></emphasis>: Defines if the validation
+                    is inclusive the minimum border value or exclusive. It defaults
+                    to <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <emphasis><property>min</property></emphasis>: Sets the minimum allowed value.
                 </para>
             </listitem>
@@ -34,7 +42,7 @@
     </section>
 
     <section xml:id="zend.validate.set.greaterthan.basic"><info><title>Basic usage</title></info>
-        
+
 
         <para>
             To validate if a given value is greater than a defined border simply use the following
@@ -43,14 +51,40 @@
 
         <programlisting language="php"><![CDATA[
 $valid  = new Zend_Validate_GreaterThan(array('min' => 10));
-$value  = 10;
+$value  = 8;
 $return = $valid->isValid($value);
+// returns false
+]]></programlisting>
+
+        <para>
+            The above example returns <constant>TRUE</constant> for all values which are greater than 10.
+        </para>
+    </section>
+
+    <section xml:id="zend.validate.set.greaterthan.inclusively"><info><title>Validation inclusive the border value</title></info>
+
+
+        <para>
+            Sometimes it is useful to validate a value by including the border value. See the
+            following example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid  = new Zend_Validate_GreaterThan(
+    array(
+        'min' => 10,
+        'inclusive' => true
+    )
+);
+$value  = 10;
+$result = $valid->isValid($value);
 // returns true
 ]]></programlisting>
 
         <para>
-            The above example returns <constant>TRUE</constant> for all values which are equal to 10
-            or greater than 10.
+            The example is almost equal to our first example but we included the border value. Now
+            the value '10' is allowed and will return
+            <constant>TRUE</constant>.
         </para>
     </section>
 </section>

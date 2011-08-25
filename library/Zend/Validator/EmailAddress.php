@@ -174,6 +174,8 @@ class EmailAddress extends AbstractValidator
             } else {
                 $this->setHostnameValidator($options['hostname']);
             }
+        } else if ($this->_options['hostname'] == null) {
+            $this->setHostnameValidator();
         }
 
         if (array_key_exists('mx', $options)) {

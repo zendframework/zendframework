@@ -547,6 +547,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             $this->multipleOptionsDetected = true;
         }
     }
+
     /**
      * @group ZF-11222
      * @group ZF-11451
@@ -556,5 +557,14 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('example@gmail.com.'));
         $this->assertFalse($this->_validator->isValid('test@test.co.'));
         $this->assertFalse($this->_validator->isValid('test@test.co.za.'));
+    }
+
+    /**
+     * @group ZF-11239
+     */
+    public function testNotSetHostnameValidator()
+    {
+        $hostname = $this->_validator->getHostnameValidator();
+        $this->assertTrue($hostname instanceof Validator\Hostname);
     }
 }

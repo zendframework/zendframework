@@ -174,7 +174,7 @@ class EmailAddress extends AbstractValidator
             } else {
                 $this->setHostnameValidator($options['hostname']);
             }
-        } else if ($this->_options['hostname'] == null) {
+        } elseif ($this->_options['hostname'] === null) {
             $this->setHostnameValidator();
         }
 

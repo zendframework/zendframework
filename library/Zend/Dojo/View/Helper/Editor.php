@@ -119,8 +119,7 @@ class Editor extends Dijit
 
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 
-        $html  = '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
-        $html .= '<div' . $this->_htmlAttribs($attribs) . '>'
+        $html = '<div' . $this->_htmlAttribs($attribs) . '>'
                . $value
                . "</div>\n";
 
@@ -130,6 +129,8 @@ class Editor extends Dijit
                . $this->view->broker('formTextarea')->direct($hiddenId, $value, $attribs)
                . '</noscript>';
 
+        $html  .= '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
+        
         return $html;
     }
 

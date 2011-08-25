@@ -1338,8 +1338,8 @@ class Element implements Validator
 
         // Find the correct translator. Zend\Validator\AbstractValidator::getDefaultTranslator()
         // will get either the static translator attached to Zend\Validator\AbstractValidator
-        // or the 'Zend_Translate' from Zend\Registry.
-        if (AbstractValidator::hasDefaultTranslator()
+        // or the 'Zend_Translator' from Zend\Registry.
+        if (AbstractValidator::hasDefaultTranslator() 
             && !Form::hasDefaultTranslator())
         {
             $translator = AbstractValidator::getDefaultTranslator();

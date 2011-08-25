@@ -401,7 +401,7 @@ echo $this->formCheckbox('foo',
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
     </section>
 
     <section xml:id="zend.view.helpers.paths"><info><title>Localizando os Assistentes</title></info>

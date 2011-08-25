@@ -139,7 +139,7 @@ class InputFilter
 
     /**
      * Translation object
-     * @var Zend\Translate\Translate
+     * @var Zend\Translator\Translator
      */
     protected $translator;
 
@@ -496,7 +496,7 @@ class InputFilter
     /**
      * Set translation object
      *
-     * @param  Zend_Translate|Zend\Translate\Adapter\Adapter|null $translator
+     * @param  Zend_Translator|Zend\Translator\Adapter\Adapter|null $translator
      * @return Zend\Filter\InputFilter
      */
     public function setTranslator($translator = null)
@@ -515,7 +515,7 @@ class InputFilter
     /**
      * Return translation object
      *
-     * @return Zend\Translate\Adapter\Adapter|null
+     * @return Zend\Translator\Adapter\Adapter|null
      */
     public function getTranslator()
     {
@@ -524,8 +524,8 @@ class InputFilter
         }
 
         if ($this->translator === null) {
-            if (\Zend\Registry::isRegistered('Zend_Translate')) {
-                $translator = \Zend\Registry::get('Zend_Translate');
+            if (\Zend\Registry::isRegistered('Zend_Translator')) {
+                $translator = \Zend\Registry::get('Zend_Translator');
                 if ($translator instanceof TranslationAdapter) {
                     return $translator;
                 } elseif ($translator instanceof Translator) {

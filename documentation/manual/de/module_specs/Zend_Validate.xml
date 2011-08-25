@@ -312,14 +312,14 @@ if (Zend_Validate::is($value,
 
         <para>
             Prüfungsklassen bieten eine Methode <methodname>setTranslator()</methodname>, mit der man
-            eine Instanz von <classname>Zend_Translate</classname> definieren kann, die Nachrichten
+            eine Instanz von <classname>Zend_Translator</classname> definieren kann, die Nachrichten
             im Falle eines Prüfungsfehlers übersetzt. Die <methodname>getTranslator()</methodname>
             Methode gibt die gesetzte Übersetzungsinstanz zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(
@@ -334,13 +334,13 @@ $validator->setTranslator($translate);
 
         <para>
             Mit der statischen Methode <methodname>setDefaultTranslator()</methodname> kann eine
-            Instanz von <classname>Zend_Translate</classname> gesetzt werden und mit
+            Instanz von <classname>Zend_Translator</classname> gesetzt werden und mit
             <methodname>getDefaultTranslator()</methodname> empfangen. Das verhindert, dass man den
             Übersetzer manuell für alle Prüfungsklassen setzen muss und vereinfacht den Code.
         </para>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(

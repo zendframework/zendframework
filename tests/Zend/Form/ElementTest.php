@@ -1937,7 +1937,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         $registryTranslations = array('alphaInvalid' => 'Registry message');
         $registryTranslate = new Translator('ArrayAdapter', $registryTranslations);
-        Registry::set('Zend_Translate', $registryTranslate);
+        Registry::set('Zend_Translator', $registryTranslate);
         
         $validatorTranslations = array('alphaInvalid' => 'Validator message');
         $validatorTranslate = new Translator('ArrayAdapter', $validatorTranslations);
@@ -1960,7 +1960,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     {
         $registryTranslations = array('alphaInvalid' => 'Registry message');
         $registryTranslate = new Translator('ArrayAdapter', $registryTranslations);
-        Registry::set('Zend_Translate', $registryTranslate);
+        Registry::set('Zend_Translator', $registryTranslate);
         
         $validatorTranslations = array('alphaInvalid' => 'Validator message');
         $validatorTranslate = new Translator('ArrayAdapter', $validatorTranslations);

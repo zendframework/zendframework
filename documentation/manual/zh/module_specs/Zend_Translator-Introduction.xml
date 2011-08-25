@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.introduction"><info><title>简介</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.introduction"><info><title>简介</title></info>
 
     
 
     <para>
-        Zend_Translate是Zend框架为多语言应用程序提供的一个解决方案.
+        Zend_Translator是Zend框架为多语言应用程序提供的一个解决方案.
     </para>
 
     <para>
@@ -42,7 +42,7 @@
     </itemizedlist>
 
     <para>
-        Zend_Translate没有上面的问题.这就是为什么我们推进使用Zend_Translate而不是PHP的原生函数.Zend_Translate的优点有:
+        Zend_Translator没有上面的问题.这就是为什么我们推进使用Zend_Translator而不是PHP的原生函数.Zend_Translator的优点有:
     </para>
 
     <itemizedlist>
@@ -51,20 +51,20 @@
                 <emphasis role="strong">
                     支持多种源格式:
                 </emphasis>
-                Zend_Translate 支持多种源格式,
+                Zend_Translator 支持多种源格式,
                 包括被PHP支持的,和其他的格式,包括TMX和CSV文件.
             </para>
         </listitem>
         <listitem>
             <para>
                 <emphasis role="strong">线程安全的gettext:</emphasis>
-                Zend_Translate 的 gettext reader是线程安全的.在多线程的环境中使用它没有问题.
+                Zend_Translator 的 gettext reader是线程安全的.在多线程的环境中使用它没有问题.
             </para>
         </listitem>
         <listitem>
             <para>
                 <emphasis role="strong">简易并且通用的API:</emphasis>
-                Zend_Translate的API非常简单并且只要求少数的函数.因此易于学习和维护.所有的源格式用同样的方法处理,如果你的源格式从Gettext改为TMX,
+                Zend_Translator的API非常简单并且只要求少数的函数.因此易于学习和维护.所有的源格式用同样的方法处理,如果你的源格式从Gettext改为TMX,
                 你只需要改变一行代码指定存储适配器.
             </para>
         </listitem>
@@ -73,18 +73,18 @@
                 <emphasis role="strong">
                     用户的标准语言检测:
                 </emphasis>
-                用户访问站点的首选语言能够通过被检测并被Zend_Translate使用。
+                用户访问站点的首选语言能够通过被检测并被Zend_Translator使用。
             </para>
         </listitem>
         <listitem>
       <para>
        <emphasis role="strong"> 自动源文检测：</emphasis>
-        Zend_Translate 能够检测和集成多个源文件并根据文件名或目录另外地检测哪个地方（locale）在用。
+        Zend_Translator 能够检测和集成多个源文件并根据文件名或目录另外地检测哪个地方（locale）在用。
       </para>
     </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.translate.introduction.adapters"><info><title>开始多语言化</title></info>
+    <section xml:id="zend.translator.introduction.adapters"><info><title>开始多语言化</title></info>
 
         
 
@@ -99,7 +99,7 @@
             </listitem>
             <listitem>
                 <para>
-                    创建视图并把Zend_Translate集成到你的代码中.
+                    创建视图并把Zend_Translator集成到你的代码中.
                 </para>
             </listitem>
             <listitem>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introduction</title></info>
-    
+
 
     <para>
         The <classname>Zend_Validate</classname> component provides a set of commonly needed
@@ -10,7 +10,7 @@
     </para>
 
     <section xml:id="zend.validate.introduction.definition"><info><title>What is a validator?</title></info>
-        
+
 
         <para>
             A validator examines its input with respect to some requirements
@@ -31,7 +31,7 @@
     </section>
 
     <section xml:id="zend.validate.introduction.using"><info><title>Basic usage of validators</title></info>
-        
+
 
         <para>
             Having defined validation in this way provides the foundation for
@@ -86,7 +86,7 @@ if ($validator->isValid($email)) {
     </section>
 
     <section xml:id="zend.validate.introduction.messages"><info><title>Customizing messages</title></info>
-        
+
 
         <para>
             Validate classes provide a <methodname>setMessage()</methodname> method with
@@ -173,7 +173,7 @@ if (!validator->isValid('word')) {
     </section>
 
     <section xml:id="zend.validate.introduction.static"><info><title>Using the static is() method</title></info>
-        
+
 
         <para>
             If it's inconvenient to load a given validation class and create an
@@ -228,7 +228,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
         </para>
 
         <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Namespaces</title></info>
-            
+
 
             <para>
                 When working with self defined validators you can give a fourth parameter
@@ -304,18 +304,18 @@ if (Zend_Validate::is($value,
     </section>
 
     <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
-        
+
 
         <para>
             Validate classes provide a <methodname>setTranslator()</methodname> method with
-            which you can specify a instance of <classname>Zend_Translate</classname> which
+            which you can specify a instance of <classname>Zend_Translator</classname> which
             will translate the messages in case of a validation failure. The
             <methodname>getTranslator()</methodname> method returns the set translator instance.
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(
@@ -330,14 +330,14 @@ $validator->setTranslator($translate);
 
         <para>
             With the static <methodname>setDefaultTranslator()</methodname> method you can set
-            a instance of <classname>Zend_Translate</classname> which will be used for all
+            a instance of <classname>Zend_Translator</classname> which will be used for all
             validation classes, and can be retrieved with
             <methodname>getDefaultTranslator()</methodname>. This prevents you from setting a
             translator manually for all validator classes, and simplifies your code.
         </para>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(

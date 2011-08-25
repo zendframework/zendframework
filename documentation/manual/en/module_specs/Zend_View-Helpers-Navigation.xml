@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.navigation"><info><title>Navigation Helpers</title></info>
-    
+
 
     <para>
         The navigation helpers are used for rendering navigational elements
@@ -55,7 +55,7 @@
         All built-in helpers extend
         <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, which
         adds integration with <link linkend="zend.acl">ACL</link> and
-        <link linkend="zend.translate">translation</link>. The abstract class
+        <link linkend="zend.translator">translation</link>. The abstract class
         implements the interface
         <classname>Zend_View_Helper_Navigation_Helper</classname>, which
         defines the following methods:
@@ -222,7 +222,7 @@
     </para>
 
     <example xml:id="zend.view.helpers.initial.navigation.proxy.example"><info><title>Proxying calls to the navigation container</title></info>
-        
+
 
         <para>
             Navigation view helpers use the magic method <methodname>__call()</methodname>
@@ -243,16 +243,16 @@ $this->navigation()->addPage(array(
     </example>
 
     <section xml:id="zend.view.helpers.initial.navigation.i18n"><info><title>Translation of labels and titles</title></info>
-        
+
 
         <para>
             The navigation helpers support translation of page labels and titles.
-            You can set a translator of type <classname>Zend_Translate</classname>
-            or <classname>Zend_Translate_Adapter</classname> in the helper using
+            You can set a translator of type <classname>Zend_Translator</classname>
+            or <classname>Zend_Translator_Adapter</classname> in the helper using
             <command>$helper-&gt;setTranslator($translator)</command>, or like with other
             I18n-enabled components; by adding the translator to
             <link linkend="zend.registry">the registry</link> by using the key
-            <classname>Zend_Translate</classname>.
+            <classname>Zend_Translator</classname>.
         </para>
 
         <para>
@@ -276,7 +276,7 @@ $this->navigation()->addPage(array(
     </section>
 
     <section xml:id="zend.view.helpers.initial.navigation.acl"><info><title>Integration with ACL</title></info>
-        
+
 
         <para>
             All navigational view helpers support <acronym>ACL</acronym> inherently from the
@@ -309,7 +309,7 @@ $this->navigation()->addPage(array(
     </section>
 
     <section xml:id="zend.view.helpers.initial.navigation.setup"><info><title>Navigation setup used in examples</title></info>
-        
+
 
         <para>
             This example shows the setup of a navigation container for a
@@ -567,7 +567,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
     </section>
 
     <section xml:id="zend.view.helpers.initial.navigation.breadcrumbs"><info><title>Breadcrumbs Helper</title></info>
-        
+
 
         <para>
             Breadcrumbs are used for indicating where in a sitemap
@@ -651,7 +651,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
        </itemizedlist>
 
         <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example1"><info><title>Rendering breadcrumbs</title></info>
-            
+
 
             <para>
                 This example shows how to render breadcrumbs with default
@@ -672,7 +672,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example2"><info><title>Specifying indentation</title></info>
-            
+
 
             <para>
                 This example shows how to render breadcrumbs with initial
@@ -689,7 +689,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example3"><info><title>Customize breadcrumbs output</title></info>
-            
+
 
             <para>
                 This example shows how to customze breadcrumbs output by
@@ -726,7 +726,7 @@ Nothing, because the deepest active page is not at level 10 or deeper.
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.breadcrumbs.example4"><info><title>Rendering breadcrumbs using a partial view script</title></info>
-            
+
 
             <para>
                 This example shows how to render customized breadcrumbs using
@@ -771,7 +771,7 @@ Products, Foo Server, FAQ
     </section>
 
     <section xml:id="zend.view.helpers.initial.navigation.links"><info><title>Links Helper</title></info>
-        
+
 
         <para>
             The links helper is used for rendering <acronym>HTML</acronym> <constant>LINK</constant>
@@ -1093,7 +1093,7 @@ Products, Foo Server, FAQ
         </itemizedlist>
 
         <example xml:id="zend.view.helpers.initial.navigation.links.example1"><info><title>Specify relations in pages</title></info>
-            
+
 
             <para>
                 This example shows how to specify relations in pages.
@@ -1142,7 +1142,7 @@ $container = new Zend_Navigation(array(
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.links.example2"><info><title>Default rendering of links</title></info>
-            
+
 
             <para>
                 This example shows how to render a menu from a container
@@ -1167,7 +1167,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.links.example3"><info><title>Specify which relations to render</title></info>
-            
+
 
             <para>
                 This example shows how to specify which relations to find
@@ -1219,7 +1219,7 @@ Output:
     </section>
 
     <section xml:id="zend.view.helpers.initial.navigation.menu"><info><title>Menu Helper</title></info>
-        
+
 
         <para>
             The Menu helper is used for rendering menus from navigation
@@ -1379,7 +1379,7 @@ Output:
        </itemizedlist>
 
         <example xml:id="zend.view.helpers.initial.navigation.menu.example1"><info><title>Rendering a menu</title></info>
-            
+
 
             <para>
                 This example shows how to render a menu from a container
@@ -1464,7 +1464,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.menu.example2"><info><title>Calling renderMenu() directly</title></info>
-            
+
 
             <para>
                 This example shows how to render a menu that is not
@@ -1498,7 +1498,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.menu.example3"><info><title>Rendering the deepest active menu</title></info>
-            
+
 
             <para>
                 This example shows how the <methodname>renderSubMenu()</methodname>
@@ -1545,7 +1545,7 @@ The output will be the same if 'FAQ' or 'Foo Server' is active:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.menu.example4"><info><title>Rendering a menu with maximum depth</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1597,7 +1597,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.menu.example5"><info><title>Rendering a menu with minimum depth</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1658,7 +1658,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.menu.example6"><info><title>Rendering only the active branch of a menu</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1695,7 +1695,7 @@ Output:
         <example xml:id="zend.view.helpers.initial.navigation.menu.example7"><info><title>
                 Rendering only the active branch of a menu with minimum depth
             </title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1728,7 +1728,7 @@ Output:
         <example xml:id="zend.view.helpers.initial.navigation.menu.example8"><info><title>
                 Rendering only the active branch of a menu with maximum depth
             </title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 <?php
@@ -1759,7 +1759,7 @@ Output:
                 Rendering only the active branch of a menu with maximum depth
                 and no parents
             </title></info>
-            
+
 
             <para>
             </para>
@@ -1786,7 +1786,7 @@ Output:
         </example>
 
         <example xml:id="zend.view.helpers.initial.navigation.menu.example10"><info><title>Rendering a custom menu using a partial view script</title></info>
-            
+
 
             <para>
                 This example shows how to render a custom menu using
@@ -1826,7 +1826,7 @@ foreach ($this->container as $page) {
     </section>
 
     <section xml:id="zend.view.helpers.initial.navigation.sitemap"><info><title>Sitemap Helper</title></info>
-        
+
 
         <para>
             The Sitemap helper is used for generating <acronym>XML</acronym> sitemaps, as
@@ -1857,7 +1857,7 @@ foreach ($this->container as $page) {
         </para>
 
         <table xml:id="zend.view.helpers.initial.navigation.sitemap.elements"><info><title>Sitemap XML elements</title></info>
-            
+
 
             <tgroup cols="2">
                 <thead>
@@ -2020,7 +2020,7 @@ foreach ($this->container as $page) {
        </itemizedlist>
 
         <example xml:id="zend.view.helpers.initial.navigation.sitemap.example"><info><title>Rendering an XML sitemap</title></info>
-            
+
 
             <para>
                 This example shows how to render an <acronym>XML</acronym> sitemap based
@@ -2222,7 +2222,7 @@ echo $this->navigation()
         </example>
 
         <note><info><title>UTF-8 encoding used by default</title></info>
-            
+
 
             <para>
                 By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding,
@@ -2246,7 +2246,7 @@ echo $this->navigation()
     </section>
 
     <section xml:id="zend.view.helpers.initial.navigation.navigation"><info><title>Navigation Helper</title></info>
-        
+
 
         <para>
             The Navigation helper is a proxy helper

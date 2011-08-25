@@ -1175,22 +1175,22 @@
                 </entry>
                 <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translate.adapter.html">
-                        <classname>Zend_Translate_Adapter_Qt</classname>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translator.adapter.html">
+                        <classname>Zend_Translator_Adapter_Qt</classname>
                     </link>
                 </entry>
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translate.adapter.html">
-                        <classname>Zend_Translate_Adapter_Tmx</classname>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translator.adapter.html">
+                        <classname>Zend_Translator_Adapter_Tmx</classname>
                     </link>
                 </entry>
             </row>
             <row>
                 <entry>
-                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translate.adapter.html">
-                        <classname>Zend_Translate_Adapter_Xliff</classname>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translator.adapter.html">
+                        <classname>Zend_Translator_Adapter_Xliff</classname>
                     </link>
                 </entry>
             </row>

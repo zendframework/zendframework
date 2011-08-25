@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>View Helpers</title></info>
-    
+
 
     <para>
         In your view scripts, often it is necessary to perform certain
@@ -21,7 +21,7 @@
     </para>
 
     <note><info><title>Watch the Case</title></info>
-        
+
 
         <para>
             Helper names are always camelCased, i.e., they never begin with an
@@ -31,7 +31,7 @@
     </note>
 
     <note><info><title>Default Helper Path</title></info>
-        
+
 
         <para>
             The default helper path always points to the Zend Framework view
@@ -53,7 +53,7 @@
     </para>
 
     <section xml:id="zend.view.helpers.initial"><info><title>Initial Helpers</title></info>
-        
+
 
         <para>
             <classname>Zend_View</classname> comes with an initial set of helper classes,
@@ -404,11 +404,11 @@ echo $this->formCheckbox('foo',
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-InlineScript.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml"/>
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Navigation.xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
     </section>
 
     <section xml:id="zend.view.helpers.paths"><info><title>Helper Paths</title></info>
-        
+
 
         <para>
             As with view scripts, your controller can specify a stack of paths
@@ -456,7 +456,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
     </section>
 
     <section xml:id="zend.view.helpers.custom"><info><title>Writing Custom Helpers</title></info>
-        
+
 
         <para>
             Writing custom helpers is easy; just follow these rules:
@@ -604,7 +604,7 @@ class My_View_Helper_ScriptPath
     </section>
 
     <section xml:id="zend.view.helpers.registering-concrete"><info><title>Registering Concrete Helpers</title></info>
-        
+
 
         <para>
             Sometimes it is convenient to instantiate a view helper, and then register it with the
@@ -626,7 +626,7 @@ $view->registerHelper($helper, 'foo');
         </para>
 
         <note><info><title>Helper name should match a method</title></info>
-            
+
 
             <para>
                 The second argument to <methodname>registerHelper()</methodname> is the name of the

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.using"><info><title>Using Translation Adapters</title></info>
-    
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.using"><info><title>Using Translation Adapters</title></info>
+
 
     <para>
         The next step is to use the adapter within your code.
     </para>
 
-    <example xml:id="zend.translate.using.example1"><info><title>Example of single-language PHP code</title></info>
-        
+    <example xml:id="zend.translator.using.example1"><info><title>Example of single-language PHP code</title></info>
+
 
         <programlisting language="php"><![CDATA[
 print "Example\n";
@@ -27,16 +27,16 @@ print "Here is line two\n";
     </para>
 
     <para>
-        The next step is to integrate <classname>Zend_Translate</classname> into your existing code.
+        The next step is to integrate <classname>Zend_Translator</classname> into your existing code.
         Of course it is much easier if you had already written your code with
         translation in mind, than changing your code afterwards.
     </para>
 
-    <example xml:id="zend.translate.using.example2"><info><title>Example of multi-lingual PHP code</title></info>
-        
+    <example xml:id="zend.translator.using.example2"><info><title>Example of multi-lingual PHP code</title></info>
+
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/my/path/source-de.mo',
@@ -63,15 +63,15 @@ print $translate->_("Here is line two") . "\n";
 
     <para>
         Now let's take a deeper look into what has been done and how to
-        integrate <classname>Zend_Translate</classname> into your own code.
+        integrate <classname>Zend_Translator</classname> into your own code.
     </para>
 
     <para>
-        Create a new <classname>Zend_Translate</classname> object and define the base adapter:
+        Create a new <classname>Zend_Translator</classname> object and define the base adapter:
     </para>
 
     <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate
+$translate = new Zend_Translator
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/translation/source-de.mo',
@@ -148,7 +148,7 @@ print $translate->_(2) . "\n";
     <para>
         Also you will have problems if some strings are not translated.
         You must always keep in mind how translation works.
-        First <classname>Zend_Translate</classname> checks whether the specified language has a
+        First <classname>Zend_Translator</classname> checks whether the specified language has a
         translation for the given message ID or string.
         If no translation string has been found it refers to the next lower
         level language as defined within <classname>Zend_Locale</classname>.
@@ -159,12 +159,12 @@ print $translate->_(2) . "\n";
         then the original message is returned.
         This way you always have an output, even in case the message translation
         does not exist in your message storage.
-        <classname>Zend_Translate</classname> never throws an error or exception when translating
+        <classname>Zend_Translator</classname> never throws an error or exception when translating
         strings.
     </para>
 
-    <section xml:id="zend.translate.using.structure"><info><title>Translation Source Structures</title></info>
-        
+    <section xml:id="zend.translator.using.structure"><info><title>Translation Source Structures</title></info>
+
 
         <para>
             Your next step is to create the translation sources for the
@@ -175,7 +175,7 @@ print $translate->_(2) . "\n";
 
         <para>
             You have to decide where to store your translation source files.
-            Using <classname>Zend_Translate</classname> you are not restricted in any way.
+            Using <classname>Zend_Translator</classname> you are not restricted in any way.
             The following structures are preferable:
         </para>
 
@@ -311,7 +311,7 @@ print $translate->_(2) . "\n";
 
         <para>
             Single structured and language structured source files are most
-            usable for <classname>Zend_Translate</classname>.
+            usable for <classname>Zend_Translator</classname>.
         </para>
 
         <para>

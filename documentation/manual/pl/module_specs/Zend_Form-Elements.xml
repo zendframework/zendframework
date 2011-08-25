@@ -437,7 +437,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             </para>
 
             <para>
-                A better option is to use a <code>Zend_Translate_Adapter</code>
+                A better option is to use a <code>Zend_Translator_Adapter</code>
                 with your form. Error codes are automatically passed to the
                 adapter by the default Errors decorator; you can then specify
                 your own error message strings by setting up translations for
@@ -1139,7 +1139,7 @@ $element->class = 'text;
 
             <listitem><para>I18N:</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                    <listitem><para><code>setTranslator(Zend_Translator_Adapter $translator = null)</code></para></listitem>
                     <listitem><para><code>getTranslator()</code></para></listitem>
                     <listitem><para><code>setDisableTranslator($flag)</code></para></listitem>
                     <listitem><para><code>translatorIsDisabled()</code></para></listitem>

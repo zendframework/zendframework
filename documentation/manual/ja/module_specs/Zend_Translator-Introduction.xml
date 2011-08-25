@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.introduction"><info><title>導入</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.introduction"><info><title>導入</title></info>
 
     
 
     <para>
-        <classname>Zend_Translate</classname> は、Zend Framework
+        <classname>Zend_Translator</classname> は、Zend Framework
         で多言語対応のアプリケーションを作成するためのパッケージです。
     </para>
 
@@ -56,17 +56,17 @@
     </itemizedlist>
 
     <para>
-        <classname>Zend_Translate</classname> にはここであげたような問題はありません。
+        <classname>Zend_Translator</classname> にはここであげたような問題はありません。
         というわけで、<acronym>PHP</acronym> のネイティブ関数ではなく
-        <classname>Zend_Translate</classname> を使用することを推奨します。
-        <classname>Zend_Translate</classname> の利点は、以下のとおりです。
+        <classname>Zend_Translator</classname> を使用することを推奨します。
+        <classname>Zend_Translator</classname> の利点は、以下のとおりです。
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
                 <emphasis>複数の入力フォーマットのサポート:</emphasis>
-                <classname>Zend_Translate</classname> はいくつかの入力フォーマットに対応しています。
+                <classname>Zend_Translator</classname> はいくつかの入力フォーマットに対応しています。
                 <acronym>PHP</acronym> でサポートしているもののほかに、TMX や CSV
                 形式のファイルにも対応しています。
             </para>
@@ -75,7 +75,7 @@
         <listitem>
             <para>
                 <emphasis>スレッドセーフな gettext:</emphasis>
-                <classname>Zend_Translate</classname> の gettext リーダーはスレッドセーフです。
+                <classname>Zend_Translator</classname> の gettext リーダーはスレッドセーフです。
                 マルチスレッド環境でも問題なく使用できます。
             </para>
         </listitem>
@@ -83,7 +83,7 @@
         <listitem>
             <para>
                 <emphasis>簡単で汎用的な <acronym>API</acronym>:</emphasis>
-                <classname>Zend_Translate</classname> の <acronym>API</acronym> は非常にシンプルで、使用する関数はほんの少しだけです。
+                <classname>Zend_Translator</classname> の <acronym>API</acronym> は非常にシンプルで、使用する関数はほんの少しだけです。
                 そのため、容易に覚えることができ、保守も簡単です。
                 すべての入力フォーマットを同じように処理できます。
                 つまり、仮に入力ファイルが gettext から TMX に変わったとしても、
@@ -95,20 +95,20 @@
             <para>
                 <emphasis>ユーザの標準言語の検出:</emphasis>
                 ユーザがサイトにアクセスする際の preferred language
-                設定を検出し、<classname>Zend_Translate</classname> で使用できます。
+                設定を検出し、<classname>Zend_Translator</classname> で使用できます。
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <emphasis>自動的なソースの検出:</emphasis>
-                <classname>Zend_Translate</classname> は、複数のソースファイルを検出して統合できます。
+                <classname>Zend_Translator</classname> は、複数のソースファイルを検出して統合できます。
                 さらに、ディレクトリやファイル名に応じて使用するロケールを自動検出することもできます。
             </para>
         </listitem>
     </itemizedlist>
 
-    <section xml:id="zend.translate.introduction.adapters"><info><title>多言語対応をはじめよう</title></info>
+    <section xml:id="zend.translator.introduction.adapters"><info><title>多言語対応をはじめよう</title></info>
 
         
 
@@ -131,7 +131,7 @@
 
             <listitem>
                 <para>
-                    ビューを作成し、<classname>Zend_Translate</classname> をコードに組み込む
+                    ビューを作成し、<classname>Zend_Translator</classname> をコードに組み込む
                 </para>
             </listitem>
 

@@ -194,13 +194,13 @@ $router->addRoute('archive', $route);
         <para>
             The standard route supports translated segments. To use this
             feature, you have to define at least a translator (an instance
-            of <classname>Zend_Translate</classname>) via one of the following ways:
+            of <classname>Zend_Translator</classname>) via one of the following ways:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Put it into the registry with the key <classname>Zend_Translate</classname>.
+                    Put it into the registry with the key <classname>Zend_Translator</classname>.
                 </para>
             </listitem>
 
@@ -219,7 +219,7 @@ $router->addRoute('archive', $route);
         </itemizedlist>
 
         <para>
-            By default, the locale specified in the <classname>Zend_Translate</classname>
+            By default, the locale specified in the <classname>Zend_Translator</classname>
             instance will be used. To override it, you set it
             (an instance of <classname>Zend_Locale</classname> or a locale string) in one
             of the following ways:
@@ -282,7 +282,7 @@ $router->addRoute('archive', $route);
 
         <programlisting language="php"><![CDATA[
 // Prepare the translator
-$translator = new Zend_Translate(
+$translator = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(),

@@ -5061,8 +5061,8 @@
             <row>
                 <entry morerows="3" valign="middle">
                     <emphasis>
-                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translate.html">
-                            <classname>Zend_Translate</classname>
+                        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.translator.html">
+                            <classname>Zend_Translator</classname>
                         </link>
                     </emphasis>
                 </entry>

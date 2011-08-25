@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Adaptateurs pour Zend_Translate</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.adapter"><info><title>Adaptateurs pour Zend_Translator</title></info>
     
 
     <para>
-        <classname>Zend_Translate</classname> peut manipuler différents adaptateurs pour la
+        <classname>Zend_Translator</classname> peut manipuler différents adaptateurs pour la
         traduction. Chaque adaptateur a ses propres avantages et inconvénients. Ci-dessous vous
         trouverez la liste complète de tous les adaptateurs supportés pour la traduction des
         fichiers sources.
     </para>
 
-    <table xml:id="zend.translate.adapter.table"><info><title>Liste des adaptateurs pour Zend_Translate</title></info>
+    <table xml:id="zend.translator.adapter.table"><info><title>Liste des adaptateurs pour Zend_Translator</title></info>
         
 
         <tgroup cols="3">
@@ -95,12 +95,12 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.translate.adapter.decision"><info><title>Comment décider quel adaptateur de traduction utiliser ?</title></info>
+    <section xml:id="zend.translator.adapter.decision"><info><title>Comment décider quel adaptateur de traduction utiliser ?</title></info>
         
 
         <para>
             Vous devrez décider quel adaptateur vous voulez utiliser avec
-            <classname>Zend_Translate</classname>. Fréquemment, des critères externes tels qu'une
+            <classname>Zend_Translator</classname>. Fréquemment, des critères externes tels qu'une
             condition du projet ou une exigence du client détermine ceci pour vous, mais si vous
             êtes en position de le faire vous-même, les conseils suivants peuvent simplifier votre
             décision.
@@ -110,7 +110,7 @@
             <para>
                 En choisissant votre adaptateur vous devriez également prendre en compte
                 l'encodage utilisé. Même si Zend Framework déclare UTF-8 comme encodage par défaut,
-                il vous sera parfois nécessaire d'utiliser un autre encodage. Zend_Translate ne
+                il vous sera parfois nécessaire d'utiliser un autre encodage. Zend_Translator ne
                 changera pas l'encodage défini dans votre fichier source ce qui veut dire que si
                 votre source Gettext est construite en ISO-8859-1, il retournera les chaînes dans
                 cet encodage sans les convertir. Il existe une seule restriction :
@@ -125,7 +125,7 @@
             </para>
         </note>
 
-        <section xml:id="zend.translate.adapter.array"><info><title>Zend_Translate_Adapter_Array</title></info>
+        <section xml:id="zend.translator.adapter.array"><info><title>Zend_Translator_Adapter_Array</title></info>
             
 
             <para>
@@ -143,7 +143,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.csv"><info><title>Zend_Translate_Adapter_Csv</title></info>
+        <section xml:id="zend.translator.adapter.csv"><info><title>Zend_Translator_Adapter_Csv</title></info>
             
 
             <para>
@@ -168,7 +168,7 @@
             </note>
         </section>
 
-        <section xml:id="zend.translate.adapter.gettext"><info><title>Zend_Translate_Adapter_Gettext</title></info>
+        <section xml:id="zend.translator.adapter.gettext"><info><title>Zend_Translator_Adapter_Gettext</title></info>
             
 
             <para>
@@ -176,7 +176,7 @@
                 est un format de source de traduction qui a été présenté par GNU, et est maintenant
                 employé dans le monde entier. Il n'est pas lisible pour l'homme, mais il y a
                 plusieurs outils gratuiciels (par exemple, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link>), qui sont très utiles.
-                L'adaptateur <classname>Zend_Translate_Gettext</classname> n'est pas implémenté en
+                L'adaptateur <classname>Zend_Translator_Gettext</classname> n'est pas implémenté en
                 utilisant l'extension gettext de <acronym>PHP</acronym>. Vous pouvez utiliser l'adaptateur Gettext même
                 si vous n'avez pas installer l'extension gettext de <acronym>PHP</acronym>. En outre l'adaptateur est
                 "thread-safe" alors que l'extension gettext de <acronym>PHP</acronym> ne l'est pas actuellement.
@@ -190,7 +190,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.ini"><info><title>Zend_Translate_Adapter_Ini</title></info>
+        <section xml:id="zend.translator.adapter.ini"><info><title>Zend_Translator_Adapter_Ini</title></info>
             
 
             <para>
@@ -220,7 +220,7 @@
             </warning>
         </section>
 
-        <section xml:id="zend.translate.adapter.tbx"><info><title>Zend_Translate_Adapter_Tbx</title></info>
+        <section xml:id="zend.translator.adapter.tbx"><info><title>Zend_Translator_Adapter_Tbx</title></info>
             
 
             <para>
@@ -241,7 +241,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.tmx"><info><title>Zend_Translate_Adapter_Tmx</title></info>
+        <section xml:id="zend.translator.adapter.tmx"><info><title>Zend_Translator_Adapter_Tmx</title></info>
             
 
             <para>
@@ -259,7 +259,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.qt"><info><title>Zend_Translate_Adapter_Qt</title></info>
+        <section xml:id="zend.translator.adapter.qt"><info><title>Zend_Translator_Adapter_Qt</title></info>
             
 
             <para>
@@ -275,7 +275,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.xliff"><info><title>Zend_Translate_Adapter_Xliff</title></info>
+        <section xml:id="zend.translator.adapter.xliff"><info><title>Zend_Translator_Adapter_Xliff</title></info>
             
 
             <para>
@@ -292,7 +292,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.xmltm"><info><title>Zend_Translate_Adapter_XmlTm</title></info>
+        <section xml:id="zend.translator.adapter.xmltm"><info><title>Zend_Translator_Adapter_XmlTm</title></info>
             
 
             <para>
@@ -311,36 +311,36 @@
         </section>
     </section>
 
-    <section xml:id="zend.translate.adapter.selfwritten"><info><title>Intégrer ses propres adaptateurs</title></info>
+    <section xml:id="zend.translator.adapter.selfwritten"><info><title>Intégrer ses propres adaptateurs</title></info>
         
 
         <para>
-            <classname>Zend_Translate</classname> vous permet d'intégrer et d'utiliser vos
+            <classname>Zend_Translator</classname> vous permet d'intégrer et d'utiliser vos
             propres classes d'adaptateurs. Elles peuvent être utilisées commes les classes standards
-            qui sont déjà incluses dans <classname>Zend_Translate</classname>.
+            qui sont déjà incluses dans <classname>Zend_Translator</classname>.
         </para>
 
         <para>
             Toute classe d'adaptateur que vous voulez utiliser avec
-            <classname>Zend_Translate</classname> doit être une sous-classe de
-            <classname>Zend_Translate_Adapter</classname>.
-            <classname>Zend_Translate_Adapter</classname> est une classe abstraite qui définit déjà
+            <classname>Zend_Translator</classname> doit être une sous-classe de
+            <classname>Zend_Translator_Adapter</classname>.
+            <classname>Zend_Translator_Adapter</classname> est une classe abstraite qui définit déjà
             tout ce qui est nécessaire pour la traduction. Ce qui doit être fait par vous, est la
             définition du lecteur des données traduites.
         </para>
 
         <para>
             L'usage du préfixe "Zend" devrait être limité à Zend Framework. Si vous étendez
-            <classname>Zend_Translate</classname> avec votre propre adaptateur, vous devriez le
-            nommer "MonEntreprise_Translate_Adapter_MonFormat". Le code suivant montre un exemple de
+            <classname>Zend_Translator</classname> avec votre propre adaptateur, vous devriez le
+            nommer "MonEntreprise_Translator_Adapter_MonFormat". Le code suivant montre un exemple de
             la manière dont une classe d'adaptateur personnalisée peut être implémentée :
         </para>
 
         <programlisting language="php"><![CDATA[
 try {
-    $translate = new Zend_Translate(
+    $translate = new Zend_Translator(
         array(
-            'adapter' => 'MonEntreprise_Translate_Adapter_MonFormat',
+            'adapter' => 'MonEntreprise_Translator_Adapter_MonFormat',
             'content' => '/path/to/translate.xx',
             'locale'  => 'en',
             'myoption' => 'myvalue'
@@ -352,11 +352,11 @@ try {
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.translate.adapter.caching"><info><title>Améliorer les performances de tous les adaptateurs</title></info>
+    <section xml:id="zend.translator.adapter.caching"><info><title>Améliorer les performances de tous les adaptateurs</title></info>
         
 
         <para>
-            <classname>Zend_Translate</classname> vous permet d'utiliser en interne
+            <classname>Zend_Translator</classname> vous permet d'utiliser en interne
             <classname>Zend_Cache</classname> pour accélérer le chargement des sources de
             traduction. Cela devient très pratique si vous utilisez beaucoup de sources de
             traduction ou des formats source vastes comme des fichiers au format <acronym>XML</acronym>.
@@ -364,7 +364,7 @@ try {
 
         <para>
             Pour utiliser le cache, vous devez juste fournir un objet de cache à la méthode
-            <methodname>Zend_Translate::setCache()</methodname>. Elle prend une instance de
+            <methodname>Zend_Translator::setCache()</methodname>. Elle prend une instance de
             <classname>Zend_Cache</classname> comme seul paramètre. En outre si vous utilisez
             n'importe quel adaptateur direct, vous pouvez employer la méthode
             <methodname>setCache()</methodname>. Par commodité, il existe des méthodes statiques
@@ -377,8 +377,8 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-Zend_Translate::setCache($cache);
-$translate = new Zend_Translate(
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator(
     array(
         'adapter' => 'gettext',
         'content' => '/path/to/translate.mo',
@@ -390,7 +390,7 @@ $translate = new Zend_Translate(
         <note>
             <para>
                 Vous devez paramétrer le cache <emphasis>avant</emphasis> d'utiliser ou
-                d'initialiser tout adaptateur ou instance de <classname>Zend_Translate</classname>.
+                d'initialiser tout adaptateur ou instance de <classname>Zend_Translator</classname>.
                 Sinon votre source de traduction ne sera pas mise en cache tant que vous n'aurez pas
                 ajouté une nouvelle source avec la méthode <methodname>addTranslation()</methodname>.
             </para>

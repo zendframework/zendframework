@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translate.adapter"><info><title>Zend_Translate适配器</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.adapter"><info><title>Zend_Translator适配器</title></info>
 
     
 
     <para>
-        Zend_Translate能够处理不同的翻译适配器，每种适配器有它自己的优点和缺点，下面是一个完整的适配器支持列表。
+        Zend_Translator能够处理不同的翻译适配器，每种适配器有它自己的优点和缺点，下面是一个完整的适配器支持列表。
     </para>
 
-    <table xml:id="zend.translate.adapter.table"><info><title>Zend_Translate适配器</title></info>
+    <table xml:id="zend.translator.adapter.table"><info><title>Zend_Translator适配器</title></info>
         
         <tgroup cols="3">
             <thead>
@@ -72,18 +72,18 @@
         </tgroup>
     </table>
 
-    <section xml:id="zend.translate.adapter.decision"><info><title>如何判断使用哪种翻译适配器</title></info>
+    <section xml:id="zend.translator.adapter.decision"><info><title>如何判断使用哪种翻译适配器</title></info>
 
         
 
         <para>
-            你应该决定对Zend_Translate使用哪种适配器，常常，外部条件,例如一个项目需求或者客户需求为你决定了使用哪种适配器，但是入你站在决策的位置,下面的提示可能有对你的决定帮助。
+            你应该决定对Zend_Translator使用哪种适配器，常常，外部条件,例如一个项目需求或者客户需求为你决定了使用哪种适配器，但是入你站在决策的位置,下面的提示可能有对你的决定帮助。
         </para>
 
         <note>
             <para>
                 决定适配器的时候，应当知道编码的使用。即便 Zend Framework 声明 UTF-8 为缺省编码，你有时候也需要其它编码。
-                <code>Zend_Translate</code> 不改变任何定义在源文件种的编码，意味着如果你的 Gettext 源建立在 ISO-8859-1  之上，它也俺此编码返回字符串而不需要转换。
+                <code>Zend_Translator</code> 不改变任何定义在源文件种的编码，意味着如果你的 Gettext 源建立在 ISO-8859-1  之上，它也俺此编码返回字符串而不需要转换。
                 只有一个唯一的限制：
             </para>
 
@@ -93,7 +93,7 @@
             </para>
         </note>
 
-        <section xml:id="zend.translate.adapter.array"><info><title>Zend_Translate_Adapter_Array</title></info>
+        <section xml:id="zend.translator.adapter.array"><info><title>Zend_Translator_Adapter_Array</title></info>
 
             
 
@@ -106,7 +106,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.csv"><info><title>Zend_Translate_Adapter_Csv</title></info>
+        <section xml:id="zend.translator.adapter.csv"><info><title>Zend_Translator_Adapter_Csv</title></info>
 
             
 
@@ -119,19 +119,19 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.gettext"><info><title>Zend_Translate_Adapter_Gettext</title></info>
+        <section xml:id="zend.translator.adapter.gettext"><info><title>Zend_Translator_Adapter_Gettext</title></info>
 
             
 
             <para>
-                Gettext适配器是最常用的一种适配器。Gettext是一种由GNU引入的翻译源格式，现在在世界上广泛使用，它不是人可读的，但有几个免费的工具（例如 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link>），用于读取Gettext数据。Zend_Translate Gettext 适配器并不是使用 PHP 的 gettext 扩展实现的。 你可以在没有安装 PHP 的 gettext 扩展的情况下也能够使用 Gettext 适配器。还有 Zend_Translate 的 Gettext 适配器是线程安全的，而 PHP 的 gettext 扩展当前是非线程安全的。
+                Gettext适配器是最常用的一种适配器。Gettext是一种由GNU引入的翻译源格式，现在在世界上广泛使用，它不是人可读的，但有几个免费的工具（例如 <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link>），用于读取Gettext数据。Zend_Translator Gettext 适配器并不是使用 PHP 的 gettext 扩展实现的。 你可以在没有安装 PHP 的 gettext 扩展的情况下也能够使用 Gettext 适配器。还有 Zend_Translator 的 Gettext 适配器是线程安全的，而 PHP 的 gettext 扩展当前是非线程安全的。
             </para>
 
             <para>
                 大多数人使用本适配器，可用的工具，专业的翻译非常简单。但是 gettext 数据存储为机器可读的格式，没有工具，它是不可读的。
             </para>
         </section>
-        <section xml:id="zend.translate.adapter.ini"><info><title>Zend_Translate_Adapter_Ini</title></info>
+        <section xml:id="zend.translator.adapter.ini"><info><title>Zend_Translator_Adapter_Ini</title></info>
 
             
 
@@ -144,7 +144,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.tbx"><info><title>Zend_Translate_Adapter_Tbx</title></info>
+        <section xml:id="zend.translator.adapter.tbx"><info><title>Zend_Translator_Adapter_Tbx</title></info>
 
             
 
@@ -157,7 +157,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.tmx"><info><title>Zend_Translate_Adapter_Tmx</title></info>
+        <section xml:id="zend.translator.adapter.tmx"><info><title>Zend_Translator_Adapter_Tmx</title></info>
 
             
 
@@ -170,7 +170,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.qt"><info><title>Zend_Translate_Adapter_Qt</title></info>
+        <section xml:id="zend.translator.adapter.qt"><info><title>Zend_Translator_Adapter_Qt</title></info>
 
             
 
@@ -183,7 +183,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.xliff"><info><title>Zend_Translate_Adapter_Xliff</title></info>
+        <section xml:id="zend.translator.adapter.xliff"><info><title>Zend_Translator_Adapter_Xliff</title></info>
 
             
 
@@ -196,7 +196,7 @@
             </para>
         </section>
 
-        <section xml:id="zend.translate.adapter.xmltm"><info><title>Zend_Translate_Adapter_XmlTm</title></info>
+        <section xml:id="zend.translator.adapter.xmltm"><info><title>Zend_Translator_Adapter_XmlTm</title></info>
 
             
 
@@ -211,27 +211,27 @@
 
     </section>
 
-    <section xml:id="zend.translate.adapter.selfwritten"><info><title> 集成编写自己的适配器 </title></info>
+    <section xml:id="zend.translator.adapter.selfwritten"><info><title> 集成编写自己的适配器 </title></info>
 
         
 
         <para>
-            Zend_Translate 允许编写并使用自己的适配器类。并且可以像 Zend_Translate 内置的标准类一样使用。
+            Zend_Translator 允许编写并使用自己的适配器类。并且可以像 Zend_Translator 内置的标准类一样使用。
         </para>
 
         <para>
-            任何要在 Zend_Translate 使用的适配器都必须继承于 Zend_Translate_Adapter，抽象类 Zend_Translate_Adapter 定义了所有翻译需要的内容。用户需要做的，就是定义如何读取翻译数据（Translation Data）。
+            任何要在 Zend_Translator 使用的适配器都必须继承于 Zend_Translator_Adapter，抽象类 Zend_Translator_Adapter 定义了所有翻译需要的内容。用户需要做的，就是定义如何读取翻译数据（Translation Data）。
         </para>
 
         <para>
-            前缀“Zend”仅限由 Zend_Framework 使用。如果使用自己的适配器扩展了 Zend_Framework，应当命名为 “Company_Translate_Adapter_MyFormat”。下面的代码演示了如何编写一个自定义适配器：
+            前缀“Zend”仅限由 Zend_Framework 使用。如果使用自己的适配器扩展了 Zend_Framework，应当命名为 “Company_Translator_Adapter_MyFormat”。下面的代码演示了如何编写一个自定义适配器：
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-require_once 'Zend/Translate.php';
+require_once 'Zend/Translaore.php';
 
 try {
-    $translate = new Zend_Translate('Company_Translate_Adapter_MyFormat', '/path/to/translate.xx', 'en', array('myoption' => 'myvalue'));
+    $translate = new Zend_Translator('Company_Translator_Adapter_MyFormat', '/path/to/translate.xx', 'en', array('myoption' => 'myvalue'));
 } catch (Exception $e) {
     // 文件没找到，没有适配器类
     // 通常的错误
@@ -240,30 +240,30 @@ try {
 
     </section>
 
-    <section xml:id="zend.translate.adapter.caching"><info><title> 加速所有的适配器 </title></info>
+    <section xml:id="zend.translator.adapter.caching"><info><title> 加速所有的适配器 </title></info>
 
         
 
         <para>
-            <code>Zend_Translate</code>  允许内部使用 <code>Zend_Cache</code>  来加速翻译源文件的加载，如果使用很多翻译源文件或很多源文件格式如基于 XML 的文件格式，这非常好使。
+            <code>Zend_Translator</code>  允许内部使用 <code>Zend_Cache</code>  来加速翻译源文件的加载，如果使用很多翻译源文件或很多源文件格式如基于 XML 的文件格式，这非常好使。
         </para>
 
         <para>
-            为使用缓存，将只需要给 <code>Zend_Translate::setCache()</code>  方法一个缓存对象， 它把 <code>Zend_Cache</code> 的实例做为唯一的参数，并且，如果直接使用任何适配器，你可以使用 <code>setCache()</code> 方法。
-            静态方法 <code>Zend_Translate::getCache()</code> 可以方便你的使用
+            为使用缓存，将只需要给 <code>Zend_Translator::setCache()</code>  方法一个缓存对象， 它把 <code>Zend_Cache</code> 的实例做为唯一的参数，并且，如果直接使用任何适配器，你可以使用 <code>setCache()</code> 方法。
+            静态方法 <code>Zend_Translator::getCache()</code> 可以方便你的使用
         </para>
 
         <programlisting role="php"><![CDATA[<?php
-require_once 'Zend/Translate.php';
+require_once 'Zend/Translator.php';
 
 $cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
-Zend_Translate::setCache($cache);
-$translate = new Zend_Translate('gettext', '/path/to/translate.mo', 'en');
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator('gettext', '/path/to/translate.mo', 'en');
         ]]></programlisting>
 
         <note>
             <para>
-                你必须 <emphasis role="strong"> 在 </emphasis> 使用或初始化任何适配器或 <code>Zend_Translate</code> 的实例 <emphasis role="strong"> 之前 </emphasis> 设置缓存，否则，直到用 <code>addTranslation()</code> 方法添加源文件，翻译源文件将不会缓存。
+                你必须 <emphasis role="strong"> 在 </emphasis> 使用或初始化任何适配器或 <code>Zend_Translator</code> 的实例 <emphasis role="strong"> 之前 </emphasis> 设置缓存，否则，直到用 <code>addTranslation()</code> 方法添加源文件，翻译源文件将不会缓存。
             </para>
         </note>
 

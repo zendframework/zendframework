@@ -38,7 +38,7 @@ use Zend;
  * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Translate extends AbstractHelper
+class Translator extends AbstractHelper
 {
     /**
      * Translation object
@@ -67,7 +67,7 @@ class Translate extends AbstractHelper
      * Example 2: translate('%1\$s + %2\$s', array($value1, $value2), $locale);
      *
      * @param  string $messageid Id of the message to be translated
-     * @return string|\Zend\View\Helper\Translate Translated message
+     * @return string|\Zend\View\Helper\Translator Translated message
      */
     public function direct($messageid = null)
     {
@@ -107,7 +107,7 @@ class Translate extends AbstractHelper
      *
      * @param  \Zend\Translator\Translator|\Zend\Translator\Translator_Adapter $translate Instance of \Zend\Translator\Translator
      * @throws \Zend\View\Exception When no or a false instance was set
-     * @return \Zend\View\Helper\Translate
+     * @return \Zend\View\Helper\Translator
      */
     public function setTranslator($translate)
     {
@@ -116,7 +116,7 @@ class Translate extends AbstractHelper
         } else if ($translate instanceof \Zend\Translator\Translator) {
             $this->_translator = $translate->getAdapter();
         } else {
-            $e = new View\Exception('You must set an instance of Zend_Translate or Zend_Translate_Adapter');
+            $e = new View\Exception('You must set an instance of Zend_Translator or Zend_Translator_Adapter');
             $e->setView($this->view);
             throw $e;
         }
@@ -132,8 +132,8 @@ class Translate extends AbstractHelper
     public function getTranslator()
     {
         if ($this->_translator === null) {
-            if (\Zend\Registry::isRegistered('Zend_Translate')) {
-                $this->setTranslator(\Zend\Registry::get('Zend_Translate'));
+            if (\Zend\Registry::isRegistered('Zend_Translator')) {
+                $this->setTranslator(\Zend\Registry::get('Zend_Translator'));
             }
         }
 
@@ -145,13 +145,13 @@ class Translate extends AbstractHelper
      *
      * @param  string|\Zend\Locale\Locale $locale New locale to set
      * @throws Zend_View_Exception When no \Zend\Translator\Translator instance was set
-     * @return \Zend\View\Helper\Translate
+     * @return \Zend\View\Helper\Translator
      */
     public function setLocale($locale = null)
     {
         $translate = $this->getTranslator();
         if ($translate === null) {
-            $e = new View\Exception('You must set an instance of Zend_Translate or Zend_Translate_Adapter');
+            $e = new View\Exception('You must set an instance of Zend_Translator or Zend_Translator_Adapter');
             $e->setView($this->view);
             throw $e;
         }
@@ -170,7 +170,7 @@ class Translate extends AbstractHelper
     {
         $translate = $this->getTranslator();
         if ($translate === null) {
-            $e = new View\Exception('You must set an instance of Zend_Translate or Zend_Translate_Adapter');
+            $e = new View\Exception('You must set an instance of Zend_Translator or Zend_Translator_Adapter');
             $e->setView($this->view);
             throw $e;
         }

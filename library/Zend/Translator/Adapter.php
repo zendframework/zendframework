@@ -92,6 +92,8 @@ abstract class Adapter
      *   'logPriority'     => priority which is used to write the log message
      *   'logUntranslated' => when true, untranslated messages are not logged
      *   'reload'          => reloads the cache by reading the content again
+     *   'route'           => adds routing for for not found translations
+     *   'routeHttp'       => when true, uses routing by HTTP_ACCEPT_HEADER
      *   'scan'            => searches for translation files using the LOCALE constants
      *   'tag'             => tag to use for the cache
      *
@@ -109,8 +111,9 @@ abstract class Adapter
         'logUntranslated' => false,
         'reload'          => false,
         'route'           => null,
+        'routeHttp'       => true,
         'scan'            => null,
-        'tag'             => 'Zend_Translate'
+        'tag'             => 'Zend_Translator'
     );
 
     /**
@@ -153,7 +156,7 @@ abstract class Adapter
         }
 
         if (isset(self::$_cache)) {
-            $id = 'Zend_Translate_' . $this->toString() . '_Options';
+            $id = 'Zend_Translator_' . $this->toString() . '_Options';
             $result = self::$_cache->load($id);
             if ($result) {
                 $this->_options = $result;
@@ -180,7 +183,28 @@ abstract class Adapter
         }
 
         if ($this->getLocale() !== (string) $options['locale']) {
-            $this->setLocale($options['locale']);
+            if (!empty($this->_options['route'])) {
+                $locale = $options['locale'];
+                if ($locale == 'auto') {
+                    $locale = Locale\Locale::findLocale($locale);
+                }
+
+                while (true) {
+                    if (!empty($this->_translate[$locale])) {
+                        break;
+                    }
+
+                    if (empty($this->_options['route'][$locale])) {
+                        break;
+                    } else {
+                        $locale = $this->_options['route'][$locale];
+                    }
+                }
+
+                $this->setLocale($locale);
+            } else {
+                $this->setLocale($options['locale']);
+            }
         }
     }
 
@@ -236,6 +260,9 @@ abstract class Adapter
                 }
 
                 $options['locale'] = Locale\Locale::findLocale($options['locale']);
+            } else if (empty($options['locale'])) {
+                $originate = (string) $this->_options['locale'];
+                $options['locale'] = $options['content']->getLocale();
             }
         } catch (Locale\Exception $e) {
             throw new Exception\InvalidArgumentException("The given Language '{$options['locale']}' does not exist", 0, $e);
@@ -374,6 +401,30 @@ abstract class Adapter
     {
         $change = false;
         $locale = null;
+        if (isset($options['routeHttp']) && !empty($options['routeHttp'])) {
+            $routing = Locale\Locale::getBrowser();
+            arsort($routing);
+            $route = array();
+            reset($routing);
+            $prev = key($routing);
+            foreach($routing as $language => $quality) {
+                if ($prev == $language) {
+                    continue;
+                }
+
+                $route[$prev] = $language;
+                $prev         = $language;
+            }
+
+            if (!empty($route)) {
+                if (isset($options['route'])) {
+                    $options['route'] = array_merge($route, $options['route']);
+                } else {
+                    $options['route'] = $route;
+                }
+            }
+        }
+
         foreach ($options as $key => $option) {
             if ($key == 'locale') {
                 $locale = $option;
@@ -400,8 +451,12 @@ abstract class Adapter
         }
 
         if (isset(self::$_cache) and ($change == true)) {
-            $id = 'Zend_Translate_' . $this->toString() . '_Options';
-            $this->saveCache($this->_options, $id);
+            $id = 'Zend_Translator_' . $this->toString() . '_Options';
+            if (self::$_cacheTags) {
+                self::$_cache->save($this->_options, $id, array($this->_options['tag']));
+            } else {
+                self::$_cache->save($this->_options, $id);
+            }
         }
 
         return $this;
@@ -461,7 +516,15 @@ abstract class Adapter
         if (!isset($this->_translate[$locale])) {
             $temp = explode('_', $locale);
             if (!isset($this->_translate[$temp[0]]) and !isset($this->_translate[$locale])) {
-                if (!$this->_options['disableNotices']) {
+                if (($this->_automatic == true) && (!empty($this->_options['route'])) &&
+                        array_key_exists($locale, $this->_options['route'])) {
+                    $this->_routed[$locale] = true;
+                    return $this->setLocale($this->_options['route'][$locale]);
+                } else if (($this->_automatic == true) && (!empty($this->_options['route'])) &&
+                        array_key_exists($temp[0], $this->_options['route'])) {
+                    $this->_routed[$temp[0]] = true;
+                    return $this->setLocale($this->_options['route'][$temp[0]]);
+                } else if (!$this->_options['disableNotices']) {
                     if ($this->_options['log']) {
                         $this->_options['log']->log("The language '{$locale}' has to be added before it can be used.", $this->_options['logPriority']);
                     } else {
@@ -487,6 +550,7 @@ abstract class Adapter
             $this->_options['locale'] = $locale;
         }
 
+        $this->_routed = array();
         return $this;
     }
 
@@ -594,8 +658,8 @@ abstract class Adapter
      *
      * @see    Zend_Locale
      * @param  array|\Zend\Config $content Translation data to add
-     * @throws \Zend\Translate\Exception\InvalidArgumentException
-     * @return \Zend\Translate\Adapter Provides fluent interface
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
+     * @return \Zend\Translator\Adapter Provides fluent interface
      */
     private function _addTranslationData($options = array())
     {
@@ -616,19 +680,20 @@ abstract class Adapter
 
         if (($options['content'] instanceof Translator) || ($options['content'] instanceof Adapter)) {
             $options['usetranslateadapter'] = true;
-            if (!empty($options['locale']) && ($options['locale'] !== 'auto')) {
-                $options['content'] = $options['content']->getMessages($options['locale']);
-            } else {
-                $content = $options['content'];
+            $content = $options['content'];
+            if (empty($options['locale']) || ($options['locale'] == 'auto')) {
                 $locales = $content->getList();
-                foreach ($locales as $locale) {
-                    $options['locale']  = $locale;
-                    $options['content'] = $content->getMessages($locale);
-                    $this->_addTranslationData($options);
-                }
-
-                return $this;
+            } else {
+                $locales = array(1 => $options['locale']);
             }
+
+            foreach ($locales as $locale) {
+                $options['locale']  = $locale;
+                $options['content'] = $content->getMessages($locale);
+                $this->_addTranslationData($options);
+            }
+
+            return $this;
         }
 
         try {
@@ -643,7 +708,7 @@ abstract class Adapter
 
         $read = true;
         if (isset(self::$_cache)) {
-            $id = 'Zend_Translate_' . md5(serialize($options['content'])) . '_' . $this->toString();
+            $id = 'Zend_Translator_' . md5(serialize($options['content'])) . '_' . $this->toString();
             $temp = self::$_cache->load($id);
             if ($temp) {
                 $read = false;
@@ -690,8 +755,12 @@ abstract class Adapter
         }
 
         if (($read) and (isset(self::$_cache))) {
-            $id = 'Zend_Translate_' . md5(serialize($options['content'])) . '_' . $this->toString();
-            $this->saveCache($temp, $id);
+            $id = 'Zend_Translator_' . md5(serialize($options['content'])) . '_' . $this->toString();
+            if (self::$_cacheTags) {
+                self::$_cache->save($temp, $id, array($this->_options['tag']));
+            } else {
+                self::$_cache->save($temp, $id);
+            }
         }
 
         return $this;
@@ -732,17 +801,26 @@ abstract class Adapter
         }
 
         if (!Locale\Locale::isLocale($locale, true)) {
-            if (!Locale\Locale::isLocale($locale, false)) {
+            // use rerouting when enabled
+            if (!empty($this->_options['route'])) {
+                if (array_key_exists($locale, $this->_options['route']) &&
+                    !array_key_exists($locale, $this->_routed)) {
+                    $this->_routed[$locale] = true;
+                    return $this->translate($messageId, $this->_options['route'][$locale]);
+                }
+            }
+
+            $temp = explode('_', $locale);
+            if (!Locale\Locale::isLocale($temp[0], true)) {
                 // language does not exist, return original string
-                $this->_log($messageId, $locale);
-                // use rerouting when enabled
                 if (!empty($this->_options['route'])) {
-                    if (array_key_exists($locale, $this->_options['route']) &&
-                        !array_key_exists($locale, $this->_routed)) {
-                        $this->_routed[$locale] = true;
-                        return $this->translate($messageId, $this->_options['route'][$locale]);
+                    if (array_key_exists($temp[0], $this->_options['route']) &&
+                        !array_key_exists($temp[0], $this->_routed)) {
+                        $this->_routed[$temp[0]] = true;
+                        return $this->translate($messageId, $this->_options['route'][$temp[0]]);
                     }
                 }
+                $this->_log($messageId, $locale);
 
                 $this->_routed = array();
                 if ($plural === null) {
@@ -773,6 +851,10 @@ abstract class Adapter
                 $this->_routed = array();
                 return $this->_translate[$locale][$plural[0]][$rule];
             }
+        } else if (!empty($this->_options['route']) && array_key_exists($locale, $this->_options['route']) &&
+                !array_key_exists($locale, $this->_routed)) {
+            $this->_routed[$locale] = true;
+            return $this->translate($messageId, $this->_options['route'][$locale]);
         } else if (strlen($locale) != 2) {
             // faster than creating a new locale and separate the leading part
             $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
@@ -792,7 +874,6 @@ abstract class Adapter
             }
         }
 
-        $this->_log($messageId, $locale);
         // use rerouting when enabled
         if (!empty($this->_options['route'])) {
             if (array_key_exists($locale, $this->_options['route']) &&
@@ -801,6 +882,7 @@ abstract class Adapter
                 return $this->translate($messageId, $this->_options['route'][$locale]);
             }
         }
+        $this->_log($messageId, $locale);
 
         $this->_routed = array();
         if ($plural === null) {
@@ -925,7 +1007,7 @@ abstract class Adapter
     }
 
     /**
-     * Sets a cache for all Zend_Translate_Adapters
+     * Sets a cache for all Zend_Translator_Adapters
      *
      * @param \Zend\Cache\Frontend $cache Cache to store to
      */
@@ -969,7 +1051,7 @@ abstract class Adapter
     {
         if (self::$_cacheTags) {
             if ($tag == null) {
-                $tag = 'Zend_Translate';
+                $tag = 'Zend_Translator';
             }
 
             self::$_cache->clean(Cache\Cache::CLEANING_MODE_MATCHING_TAG, array($tag));

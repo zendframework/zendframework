@@ -193,7 +193,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testCanTranslateTitle()
     {
         $adapter = new \Zend\Translator\Adapter\Ini(__DIR__ . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
-        \Zend\Registry::set('Zend_Translate', $adapter);
+        \Zend\Registry::set('Zend_Translator', $adapter);
         $this->helper->enableTranslation();
         $this->helper->direct('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());

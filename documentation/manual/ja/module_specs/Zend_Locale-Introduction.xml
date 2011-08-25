@@ -27,7 +27,7 @@
         <code>L10n</code> と <code>I18n</code> は、お互い補完しあうものです。
         Zend Framework では、いくつかのコンポーネントを組み合わせることで
         これらのサポートを提供しています。たとえば <classname>Zend_Locale</classname>、<classname>Zend_Date</classname>、
-        <classname>Zend_Measure</classname>、<classname>Zend_Translate</classname>、<classname>Zend_Currency</classname>
+        <classname>Zend_Measure</classname>、<classname>Zend_Translator</classname>、<classname>Zend_Currency</classname>
         そして <classname>Zend_TimeSync</classname> といったコンポーネントがあります。
     </para>
 
@@ -67,7 +67,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Translate</classname> - 文字列を翻訳します。
+                    <classname>Zend_Translator</classname> - 文字列を翻訳します。
                 </para>
             </listitem>
             <listitem>

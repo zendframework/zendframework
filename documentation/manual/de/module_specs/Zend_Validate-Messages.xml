@@ -85,12 +85,12 @@ $validator->setMessage(
         </para>
 
         <programlisting language="php"><![CDATA[
-$translator = new Zend_Translate(
+$translator = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => '/resources/languages',
         'locale'  => $language,
-        'scan'    => Zend_Translate::LOCALE_DIRECTORY
+        'scan'    => Zend_Translator::LOCALE_DIRECTORY
     )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);

@@ -1752,7 +1752,7 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
             'locale'  => 'en_US',
             'content' => array('missingMessage' => 'Still missing'),
         ));
-        \Zend\Registry::set('Zend_Translate', $translator);
+        \Zend\Registry::set('Zend_Translator', $translator);
 
         $validators = array(
             'rule1'   => array('presence' => 'required',

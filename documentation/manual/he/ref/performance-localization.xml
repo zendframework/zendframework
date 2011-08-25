@@ -66,7 +66,7 @@
             
 
             <para>
-                גם <code>Zend_Translate</code> ו <code>Zend_Locale</code> מאפשרים שימוש במטמון אשר מאיצים ומשפרים את הביצועים בצורה משמעותית.
+                גם <code>Zend_Translator</code> ו <code>Zend_Locale</code> מאפשרים שימוש במטמון אשר מאיצים ומשפרים את הביצועים בצורה משמעותית.
                 בשני המקרים, הבעיה הגדולה ביותר והבעיה שיוצרת את צוואר הבקבוק היא בדרך כלל קריאה ועיבוד הקבצים, לא הצגת הנתונים; שימוש במטמון מסיר את הדרישה של טעינה ועיבוד של קבצי השפה בכל פעם.
             </para>
 
@@ -77,7 +77,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.translate.adapter.caching"><code>Zend_Translate</code>
+                        <link linkend="zend.translator.adapter.caching"><code>Zend_Translator</code>
                             מתאם מטמון</link>
                     </para>
                 </listitem>

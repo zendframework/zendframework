@@ -8,7 +8,7 @@
         <classname>Zend_Form</classname>
         intenta hacer de ésta una tarea trivial, y provee
         funcionalidad en ambas
-        <link linkend="zend.translate">Zend_Translate</link>
+        <link linkend="zend.translator">Zend_Translator</link>
         y
         <link linkend="zend.validate">Zend_Validate</link>
         para realizar esa funcionalidad.
@@ -20,13 +20,13 @@
         <classname>Zend_Form</classname>
         , se necesitará instanciar un
         objeto
-        <classname>Zend_Translate</classname>
+        <classname>Zend_Translator</classname>
         con un adaptador apropiado, y adjuntarlo a
         <classname>Zend_Form</classname>
         y/o
         <classname>Zend_Validate</classname>
         . Ver la
-        <link linkend="zend.translate">documentación Zend_Translate </link>
+        <link linkend="zend.translator">documentación Zend_Translator </link>
         para más información sobre
         crear el objeto traducción y los archivos de traducción
     </para>
@@ -52,11 +52,11 @@
 
         <para>
             Para poder inicializar I18n en formularios, se necesitará un objeto
-            <classname>Zend_Translate</classname>
+            <classname>Zend_Translator</classname>
             o un objeto
-            <classname>Zend_Translate_Adapter</classname>
+            <classname>Zend_Translator_Adapter</classname>
             , como se detalló en la documentación
-            <classname>Zend_Translate</classname>
+            <classname>Zend_Translator</classname>
             . Una vez que se tenga el objeto traducción,
             existen varias opciones:
         </para>
@@ -69,13 +69,13 @@
                     Zend Framework descubrirán
                     automáticamente un objeto traducción que está en el
                     registro con la clave
-                    'Zend_Translate' y lo usará para ejecutar la traducción
+                    'Zend_Translator' y lo usará para ejecutar la traducción
                     y/o la localización:
                 </para>
 
                 <programlisting language="php"><![CDATA[
-// use la clave 'Zend_Translate'; $translate es un objeto Zend_Translate:
-Zend_Registry::set('Zend_Translate', $translate);
+// use la clave 'Zend_Translator'; $translate es un objeto Zend_Translator:
+Zend_Registry::set('Zend_Translator', $translate);
 ]]></programlisting>
 
                 <para>
@@ -84,7 +84,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                     ,
                     <classname>Zend_Validate</classname>
                     y
-                    <classname>Zend_View_Helper_Translate</classname>
+                    <classname>Zend_View_Helper_Translator</classname>
                     .
                 </para>
             </listitem>

@@ -389,7 +389,9 @@ abstract class Adapter
                 }
 
                 $this->_options[$key] = $option;
-                $change = true;
+                if ($key != 'log') {
+                    $change = true;
+                }
             }
         }
 

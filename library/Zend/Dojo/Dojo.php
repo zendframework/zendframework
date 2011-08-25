@@ -89,7 +89,10 @@ class Dojo
         if (!$view instanceof PhpRenderer) {
             return;
         }
-        $view->broker()->getClassLoader()->registerPlugins(new View\HelperLoader());
+
+        $view->broker()
+             ->getClassLoader()
+             ->registerPlugins(new View\HelperLoader());
     }
     
     /**
@@ -104,11 +107,12 @@ class Dojo
             return;
         }
         
-        $broker = $view->broker();
+        $broker  = $view->broker();
+        $loader  = $broker->getClassLoader();
         $plugins = $broker->getPlugins();
-        foreach($plugins as $plugin => $void) {
+        foreach ($plugins as $plugin => $void) {
             $broker->unregister($plugin);
-            $broker->getClassLoader()->unregisterPlugin($plugin);
+            $loader->unregisterPlugin($plugin);
         }
     }
 }

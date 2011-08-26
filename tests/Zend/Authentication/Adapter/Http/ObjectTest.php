@@ -116,7 +116,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             $this->fail('Valid config deemed invalid');
         }
         $this->assertFalse(empty($t));
-        $this->assertType('Zend\\Authentication\\Adapter\\Http', $t);
+        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
         unset($t);
 
         try {
@@ -125,7 +125,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             $this->fail('Valid config deemed invalid');
         }
         $this->assertFalse(empty($t));
-        $this->assertType('Zend\\Authentication\\Adapter\\Http', $t);
+        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
         unset($t);
 
         try {
@@ -134,7 +134,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             $this->fail('Valid config deemed invalid');
         }
         $this->assertFalse(empty($t));
-        $this->assertType('Zend\\Authentication\\Adapter\\Http', $t);
+        $this->assertInstanceOf('Zend\\Authentication\\Adapter\\Http', $t);
         unset($t);
     }
 

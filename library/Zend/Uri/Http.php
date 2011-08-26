@@ -172,4 +172,14 @@ class Http extends Uri
         $this->setUser($user);
         $this->setPassword($password);
     }
+    
+    public function getPort()
+    {
+        if (empty($this->port)) {
+            if (array_key_exists($this->scheme, self::$defaultPorts)) {
+                $this->port= self::$defaultPorts[$this->scheme];
+            }
+        }
+        return $this->port;
+    }
 }

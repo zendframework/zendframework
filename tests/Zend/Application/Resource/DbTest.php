@@ -164,6 +164,6 @@ class DbTest extends \PHPUnit_Framework_TestCase
         );
         $resource = new DbResource($config);
         $resource->init();
-        $this->assertType('Zend\Cache\Frontend', \Zend\Db\Table\AbstractTable::getDefaultMetadataCache());
+        $this->assertInstanceOf('Zend\Cache\Frontend', \Zend\Db\Table\AbstractTable::getDefaultMetadataCache());
     }
 }

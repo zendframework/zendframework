@@ -210,7 +210,7 @@ class Socket implements HttpAdapter, Stream
 
             $flags = STREAM_CLIENT_CONNECT;
             if ($this->config['persistent']) $flags |= STREAM_CLIENT_PERSISTENT;
-
+            
             $this->socket = @stream_socket_client($host . ':' . $port,
                                                   $errno,
                                                   $errstr,
@@ -234,6 +234,7 @@ class Socket implements HttpAdapter, Stream
         }
     }
 
+    
     /**
      * Send request to the remote server
      *
@@ -312,20 +313,22 @@ class Socket implements HttpAdapter, Stream
         
         $this->_checkSocketReadTimeout();
 
-        $statusCode = Response::extractCode($response);
+        $responseObj= Response::fromString($response);
+        
+        $statusCode = $responseObj->getStatusCode();
 
         // Handle 100 and 101 responses internally by restarting the read again
         if ($statusCode == 100 || $statusCode == 101) return $this->read();
 
         // Check headers to see what kind of connection / transfer encoding we have
-        $headers = Response::extractHeaders($response);
+        $headers = $responseObj->headers()->toArray();
 
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected
          * to have a body - stop reading here
          */
         if ($statusCode == 304 || $statusCode == 204 ||
-            $this->method == \Zend\Http\Client::HEAD) {
+            $this->method == \Zend\Http\Request::METHOD_HEAD) {
 
             // Close the connection if requested to do so by the server
             if (isset($headers['connection']) && $headers['connection'] == 'close') {

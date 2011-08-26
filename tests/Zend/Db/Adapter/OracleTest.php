@@ -104,7 +104,7 @@ class OracleTest extends AbstractTest
         // Test associative array
         $result = $this->_db->fetchAll("SELECT * FROM $products WHERE $product_id > :id ORDER BY $product_id ASC", array(":id"=>1), Db\Db::FETCH_ASSOC);
         $this->assertEquals(2, count($result));
-        $this->assertType('array', $result[0]);
+        $this->assertInternalType('array', $result[0]);
         $this->assertEquals(2, count($result[0])); // count columns
         $this->assertEquals(2, $result[0][$col_name]);
 
@@ -114,7 +114,7 @@ class OracleTest extends AbstractTest
         // Ensure original fetch mode has been retained
         $result = $this->_db->fetchAll("SELECT * FROM $products WHERE $product_id > :id ORDER BY $product_id", array(":id"=>1));
         $this->assertEquals(2, count($result));
-        $this->assertType('object', $result[0]);
+        $this->assertInternalType('object', $result[0]);
         $this->assertEquals(2, $result[0]->$col_name);
     }
 
@@ -145,7 +145,7 @@ class OracleTest extends AbstractTest
 
         $this->_db->setFetchMode(Db\Db::FETCH_OBJ);
         $result = $this->_db->fetchAssoc("SELECT * FROM $products WHERE $product_id > :id ORDER BY $product_id DESC", array(":id"=>1));
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals(array('product_id', 'product_name'), array_keys(current($result)));
     }
 
@@ -175,7 +175,7 @@ class OracleTest extends AbstractTest
 
         $this->_db->setFetchMode(Db\Db::FETCH_OBJ);
         $result = $this->_db->fetchCol("SELECT * FROM $products WHERE $product_id > :id ORDER BY $product_id ASC", array(":id"=>1));
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals(2, count($result)); // count rows
         $this->assertEquals(2, $result[0]);
         $this->assertEquals(3, $result[1]);
@@ -210,7 +210,7 @@ class OracleTest extends AbstractTest
         $this->_db->setFetchMode(Db\Db::FETCH_OBJ);
         $prod = 'Linux';
         $result = $this->_db->fetchOne("SELECT $product_name FROM $products WHERE $product_id > :id ORDER BY $product_id", array(":id"=>1));
-        $this->assertType('string', $result);
+        $this->assertInternalType('string', $result);
         $this->assertEquals($prod, $result);
     }
 
@@ -242,7 +242,7 @@ class OracleTest extends AbstractTest
         $this->_db->setFetchMode(Db\Db::FETCH_OBJ);
         $prod = 'Linux';
         $result = $this->_db->fetchPairs("SELECT $product_id, $product_name FROM $products WHERE $product_id > :id ORDER BY $product_id ASC", array(":id"=>1));
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals(2, count($result)); // count rows
         $this->assertEquals($prod, $result[2]);
     }
@@ -275,7 +275,7 @@ class OracleTest extends AbstractTest
 
         // Test associative array
         $result = $this->_db->fetchRow("SELECT * FROM $products WHERE $product_id > :id ORDER BY $product_id", array(":id"=>1), Db\Db::FETCH_ASSOC);
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals(2, count($result)); // count columns
         $this->assertEquals(2, $result['product_id']);
 
@@ -284,7 +284,7 @@ class OracleTest extends AbstractTest
 
         // Ensure original fetch mode has been retained
         $result = $this->_db->fetchRow("SELECT * FROM $products WHERE $product_id > :id ORDER BY $product_id", array(":id"=>1));
-        $this->assertType('object', $result);
+        $this->assertInternalType('object', $result);
         $this->assertEquals(2, $result->$col_name);
     }
 
@@ -315,7 +315,7 @@ class OracleTest extends AbstractTest
             ->from('zfproducts')
             ->where("$product_id = 4");
         $result = $this->_db->fetchAll($select);
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals('SOLARIS', $result[0]['product_name']);
     }
 
@@ -415,7 +415,7 @@ class OracleTest extends AbstractTest
         $documents = $this->_db->quoteIdentifier('zfdocuments');
         $document_id = $this->_db->quoteIdentifier('doc_id');
         $value = $this->_db->fetchRow("SELECT * FROM $documents WHERE $document_id = 1");
-        $this->assertType('OCI-Lob', $value['doc_clob']);
+        $this->assertInstanceOf('OCI-Lob', $value['doc_clob']);
         $expected = 'this is the clob that never ends...'.
                     'this is the clob that never ends...'.
                     'this is the clob that never ends...';
@@ -440,7 +440,7 @@ class OracleTest extends AbstractTest
         $documents = $this->_db->quoteIdentifier('zfdocuments');
         $document_id = $this->_db->quoteIdentifier('doc_id');
         $value = $this->_db->fetchAssoc("SELECT * FROM $documents WHERE $document_id = 1");
-        $this->assertType('OCI-Lob', $value[1]['doc_clob']);
+        $this->assertInstanceOf('OCI-Lob', $value[1]['doc_clob']);
         $expected = 'this is the clob that never ends...'.
                     'this is the clob that never ends...'.
                     'this is the clob that never ends...';
@@ -466,7 +466,7 @@ class OracleTest extends AbstractTest
         $document_id = $this->_db->quoteIdentifier('doc_id');
         $document_clob = $this->_db->quoteIdentifier('doc_clob');
         $value = $this->_db->fetchOne("SELECT $document_clob FROM $documents WHERE $document_id = 1");
-        $this->assertType('OCI-Lob', $value);
+        $this->assertInstanceOf('OCI-Lob', $value);
         $expected = 'this is the clob that never ends...'.
                     'this is the clob that never ends...'.
                     'this is the clob that never ends...';

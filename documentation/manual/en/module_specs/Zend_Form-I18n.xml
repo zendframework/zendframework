@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.i18n"><info><title>Internationalization of Zend_Form</title></info>
-    
+
 
     <para>
         Increasingly, developers need to tailor their content for multiple
         languages and regions. <classname>Zend_Form</classname> aims to make such a task trivial,
-        and leverages functionality in both <link linkend="zend.translate">Zend_Translate</link> and <link linkend="zend.validate">Zend_Validate</link> to do so.
+        and leverages functionality in both <link linkend="zend.translator">Zend_Translator</link> and <link linkend="zend.validate">Zend_Validate</link> to do so.
     </para>
 
     <para>
         By default, no internationalisation (I18n) is performed. To turn on I18n
         features in <classname>Zend_Form</classname>, you will need to instantiate a
-        <classname>Zend_Translate</classname> object with an appropriate adapter, and
+        <classname>Zend_Translator</classname> object with an appropriate adapter, and
         attach it to <classname>Zend_Form</classname> and/or <classname>Zend_Validate</classname>.
-        See the <link linkend="zend.translate">Zend_Translate
+        See the <link linkend="zend.translator">Zend_Translator
             documentation</link> for more information on creating the translate
         object and translation files
     </para>
 
     <note><info><title>Translation Can Be Turned Off Per Item</title></info>
-        
+
 
         <para>
             You can disable translation for any form, element, display group, or
@@ -31,13 +31,13 @@
     </note>
 
     <section xml:id="zend.form.i18n.initialization"><info><title>Initializing I18n in Forms</title></info>
-        
+
 
         <para>
             In order to initialize I18n in forms, you will need either a
-            <classname>Zend_Translate</classname> object or a
-            <classname>Zend_Translate_Adapter</classname> object, as detailed in the
-            <classname>Zend_Translate</classname> documentation. Once you have a
+            <classname>Zend_Translator</classname> object or a
+            <classname>Zend_Translator_Adapter</classname> object, as detailed in the
+            <classname>Zend_Translator</classname> documentation. Once you have a
             translation object, you have several options:
         </para>
 
@@ -46,19 +46,19 @@
                 <para>
                     <emphasis>Easiest:</emphasis> add it to the registry. All I18n
                     aware components of Zend Framework will autodiscover a translate
-                    object that is in the registry under the 'Zend_Translate' key
+                    object that is in the registry under the 'Zend_Translator' key
                     and use it to perform translation and/or localization:
                 </para>
 
                 <programlisting language="php"><![CDATA[
-// use the 'Zend_Translate' key; $translate is a Zend_Translate object:
-Zend_Registry::set('Zend_Translate', $translate);
+// use the 'Zend_Translator' key; $translate is a Zend_Translator object:
+Zend_Registry::set('Zend_Translator', $translate);
 ]]></programlisting>
 
                 <para>
                     This will be picked up by <classname>Zend_Form</classname>,
                     <classname>Zend_Validate</classname>, and
-                    <classname>Zend_View_Helper_Translate</classname>.
+                    <classname>Zend_View_Helper_Translator</classname>.
                 </para>
             </listitem>
 
@@ -112,7 +112,7 @@ $element->setTranslator($translate);
     </section>
 
     <section xml:id="zend.form.i18n.standard"><info><title>Standard I18n Targets</title></info>
-        
+
 
         <para>
             Now that you've attached a translation object to, what exactly can

@@ -24,7 +24,7 @@ namespace ZendTest\Form\Element;
 use Zend\Form\Element\Captcha as CaptchaElement,
     Zend\Form\Form,
     Zend\Captcha\Dumb as DumbCaptcha,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * @category   Zend
@@ -76,7 +76,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         $this->element->addPrefixPath('My\Captcha', 'My/Captcha/', 'captcha');
         $loader = $this->element->getPluginLoader('captcha');
         $paths  = $loader->getPaths('My\Captcha');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
     }
 
     public function testAddingNullPrefixPathShouldAddCaptchaPrefixPath()
@@ -84,7 +84,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         $this->element->addPrefixPath('My', 'My');
         $loader = $this->element->getPluginLoader('captcha');
         $paths  = $loader->getPaths('My\Captcha');
-        $this->assertTrue(is_array($paths));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
     }
 
     /**

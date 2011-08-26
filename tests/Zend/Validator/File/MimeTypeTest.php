@@ -158,6 +158,10 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetMagicFileWithinConstructor()
     {
+        if (!extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'The given magicfile is not accepted by finfo');
         $validator = new File\MimeType(array('image/gif', 'magicfile' => __FILE__));
     }
@@ -212,5 +216,19 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
                 . "\nMessages: " . var_export($validator->getMessages(), 1)
             );
         }
+    }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\MimeType(array(
+            'image/gif',
+            'image/jpg',
+            'headerCheck' => true));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertTrue(array_key_exists('fileMimeTypeNotReadable', $validator->getMessages()));
+        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
     }
 }

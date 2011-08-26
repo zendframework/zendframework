@@ -411,8 +411,8 @@ echo $this->formCheckbox('foo',
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Json.xml">
             <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Json.xml"/></xi:fallback>
         </xi:include>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translate.xml">
-            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Translate.xml"/></xi:fallback>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Translator.xml"/></xi:fallback>
         </xi:include>
 
     </section>

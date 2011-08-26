@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.sourcecreation">
+    <info><title>Erstellen von Quelldateien</title></info>
+
+    <para>
+        Anbei ist eine Beschreibung der unterschiedlichen Quellformate, welche mit
+        <classname>Zend_Translator</classname> verwendet werden können.
+    </para>
+
+    <note>
+        <para>
+            Es ist zu beachten, dass die meisten der beschriebenen Formate durch Verwendung eines
+            Tools oder eines Erzeugungsprozesses erstellt werden sollten. Diese Tools und
+            Prozesse sind nicht Teil von Zend Framework und für die meisten der beschriebenen
+            Formate sind kostenlose Tools verfügbar.
+        </para>
+    </note>
+
+    <section xml:id="zend.translator.sourcecreation.array">
+        <info><title>Erstellung von Array-Quelldateien</title></info>
+
+        <para>
+            Array-Quelldateien sind reine Arrays. Sie müssen aber manuell definiert werden, da
+            es hierfür keine Tools gibt, die helfen könnten. Weil sie so einfach zu handhaben sind,
+            ist ihre Verwendung auch der schnellste Weg um zu testen, ob Nachrichten innerhalb des
+            Codes wie erwartet arbeiten. Er ist generell der beste Adapter, um mit Mehrsprachigkeit
+            zu beginnen, wenn man keine diesbezüglichen Kenntnisse hat.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$english = array(
+    'message1' => 'message1',
+    'message2' => 'message2',
+    'message3' => 'message3');
+
+$german = array(
+    'message1' => 'Nachricht1',
+    'message2' => 'Nachricht2',
+    'message3' => 'Nachricht3');
+
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'array',
+        'content' => $english,
+        'locale'  => 'en'
+    )
+);
+$translate->addTranslation(array('content' => $german, 'locale' => 'de'));
+]]></programlisting>
+
+        <para>
+            Seit Release 1.5 wird auch das Einbinden von externen Dateien unterstützt,
+            welche Arrays beinhalten. Es ist der Dateiname anzugeben und
+            <classname>Zend_Translator</classname> wird diesen automatisch inkludieren und den
+            Array suchen. Siehe das folgende Beispiel für Details:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// myarray.php
+return array(
+    'message1' => 'Nachricht1',
+    'message2' => 'Nachricht2',
+    'message3' => 'Nachricht3');
+
+// controller
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'array',
+        'content' => '/path/to/myarray.php',
+        'locale'  => 'de'
+    )
+);
+]]></programlisting>
+
+        <note>
+            <para>
+                Bei Dateien, die kein Array zurückgeben, wird das inkludieren fehlschlagen. Auch
+                jegliche Ausgabe innerhalb dieser Dateien wird ignoriert und unterdrückt.
+            </para>
+        </note>
+    </section>
+
+    <section xml:id="zend.translator.sourcecreation.gettext">
+        <info><title>Erstellung von Gettext Quellen</title></info>
+
+        <para>
+            Gettext-Quellen werden von der GNU Gettext-Bibliothek erstellt. Es gibt einige
+            kostenlose Tools, welche den Code parsen können und hierbei die gewünschten Gettext
+            Quellen erstellen. Diese haben die Endung <emphasis>*.mo</emphasis> und
+            sind binäre Dateien. Ein Open Source Tool für die Erstellung der Quellen ist
+            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">poEdit</link>. Dieses Tool
+            unterstützt auch beim Übersetzungsprozess selbst.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Wir nehmen an das die mo Datien erstellt und übersetzt wurden
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/english.mo',
+        'locale'  => 'en'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/german.mo',
+        'locale'  => 'de'
+    )
+);
+]]></programlisting>
+
+        <para>
+            Offensichtlich wird dieser Adapter bis auf einen kleinen Unterschied auf exakt die gleiche
+            Art und Weise verwendet: <emphasis>array</emphasis> wird geändert zu
+            <emphasis>gettext</emphasis>. Alle anderen Punkte werden in jedem anderen
+            Adapter auf exakt die gleiche Weise verwendet. Mit diesem Gettext-Adapter muss nicht
+            mehr auf die Standardverzeichnisstruktur von Gettext oder die Verwendung von
+            bindtextdomain und textdomain geachtet werden. Nur der Pfad und der Dateiname muss dem Adapter
+            übergeben werden.
+        </para>
+
+        <note>
+            <para>
+                 Man sollte immer UTF-8 als Quell-Encoding verwenden. Man könnte sonst Probleme
+                 bekommen, wenn man zwei verschiedene Encodings verwendet. Wenn z.B. eine Quelldatei
+                 mit ISO-8815-11 und eine andere mit CP815 encoded ist. Man kann
+                 immer nur ein Encoding für alle Quelldateien verwenden und hierbei würde eine der
+                 gewünschten Sprachen nicht korrekt angezeigt werden.
+            </para>
+
+            <para>
+                 UTF-8 ist ein portables Format, welches alle Sprachen unterstützt. Wenn UTF-8 für
+                 alle Sprachen verwendet wird, eliminiert man die Probleme mit inkompatiblen
+                 Encodings.
+            </para>
+        </note>
+
+        <para>
+            Viele Gettext-Editoren fügen Informationen über den Adapter als Übersetzung eines
+            leeren Strings hinzu. Das ist der Grund, warum leere Strings nicht übersetzt werden, wenn
+            der Gettext-Adapter verwendet wird. Stattdessen wird er von der Übersetzungstabelle
+            gelöscht und von der <methodname>getAdapterInfo()</methodname> Methode angeboten. Sie
+            gibt die Adapterinformationen für alle hinzugefügten Gettextdateien als Array zurück,
+            wobei der Dateiname als Schlüssel verwendet wird.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Informationen des Adapters bekommen
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/english.mo',
+        'locale'  => 'en'
+    )
+);
+print_r($translate->getAdapterInfo());
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.translator.sourcecreation.tmx">
+        <info><title>Erstellung von TMX Quellen</title></info>
+
+        <para>
+            TMX-Quellen sind der neue Industriestandard. Sie haben den Vorteil, dass sie
+            <acronym>XML</acronym> Dateien sind und deswegen mit jedem Texteditor lesbar und
+            natürlich auch von Menschen. Man kann TMX-Dateien entweder per Hand erstellen oder man
+            verwendet spezielle Tools dafür. Allerdings sind die meisten Tools für die
+            Erstellung von TMX Quellen nicht frei erhältlich.
+        </para>
+
+        <example xml:id="zend.translator.sourcecreation.tmx.example">
+            <info><title>Beispiel einer TMX Datei</title></info>
+
+            <programlisting language="xml"><![CDATA[
+<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+   <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
+           adminlang="en-us" srclang="de-at" o-tmf="abc"
+           creationtool="XYZTool" >
+   </header>
+   <body>
+       <tu tuid='message1'>
+           <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
+           <tuv xml:lang="en"><seg>message1</seg></tuv>
+       </tu>
+       <tu tuid='message2'>
+           <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
+           <tuv xml:lang="en"><seg>message2</seg></tuv>
+       </tu>
+   </body>
+</tmx>
+]]></programlisting>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'tmx',
+        'content' => 'path/to/mytranslation.tmx',
+        'locale'  => 'en'
+    )
+);
+]]></programlisting>
+        </example>
+
+        <para>
+            TMX-Dateien können mehrere Sprachen in derselben Datei enthalten. Alle anderen in der
+            Quelle enthaltenen Sprachen werden automatisch hinzugefügt und müssen nicht durch einen
+            extra Aufruf von <methodname>addTranslation()</methodname> ergänzt werden.
+        </para>
+
+        <para>
+            Wenn man nur spezielle Sprachen aus der Quelle übersetzen will, kann die Option
+            <property>defined_language</property> auf <constant>TRUE</constant> gesetzt werden. Mit
+            dieser Option können gewünschte Sprachen explizit mit
+            <methodname>addTranslation()</methodname> hinzugefügt werden. Der Standardwert für diese
+            Option fügt alle Sprachen hinzu.
+        </para>
+
+        <note><info><title>Option useId</title></info>
+
+
+            <para>
+                Wenn man die Option <emphasis>useId</emphasis> auf <constant>FALSE</constant> setzt,
+                dann wird der <emphasis>srclang</emphasis>-Header verwendet, um die Sprache zu
+                definieren, welche die Meldung setzt.
+            </para>
+
+            <para>
+                In unserem Beispiel würde der Schlüssel der Meldung standardmäßig
+                <emphasis>message1</emphasis> sein. Wenn diese Option auf <constant>FALSE</constant>
+                gesetzt wird, dann würde der Schlüssel <emphasis>Nachricht1</emphasis> verwendet
+                werden.
+            </para>
+
+            <para>
+                Es ist zu beachten, dass der Eintrag <emphasis>tuv</emphasis>, welcher dem
+                Eintrag <emphasis>srclang</emphasis> entspricht, der erste <emphasis>tuv</emphasis>
+                Eintrag sein muss, welcher gesetzt wird, wie im obigen Beispiel zu sehen ist.
+            </para>
+        </note>
+    </section>
+
+    <section xml:id="zend.translator.sourcecreation.csv">
+        <info><title>Erstellung von CSV-Quellen</title></info>
+
+        <para>
+            CSV-Quellen sind sehr klein und von Menschen lesbar. Wenn ein Kunde selbst übersetzen
+            will, ist die Verwendung des CSV-Adapters wahrscheinlich die beste Wahl.
+        </para>
+
+        <example xml:id="zend.translator.sourcecreation.csv.example">
+            <info><title>Beispiel CSV Datei</title></info>
+
+            <programlisting language="txt"><![CDATA[
+﻿#Example csv file
+message1;Nachricht1
+message2;Nachricht2
+]]></programlisting>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => 'path/to/other.csv',
+        'locale' => 'fr'
+    )
+);
+]]></programlisting>
+        </example>
+
+        <para>
+            Es gibt drei verschiedene Optionen für den CSV-Adapter. Es können
+            <property>delimiter</property>, <property>limit</property> und
+            <property>enclosure</property> gesetzt werden.
+        </para>
+
+        <para>
+            Das Standardtrennzeichen für CSV-Strings ist '<emphasis>;</emphasis>', aber es muss
+            nicht dieses Zeichen sein. Mit der Option <property>delimiter</property> kann ein
+            anderes verwendet werden.
+        </para>
+
+        <para>
+            Das Standardlimit für eine Zeile in einer CSV-Datei ist '<emphasis>0</emphasis>'. Das
+            bedeutet, dass das Ende der CSV-Zeile automatisch gesucht wird. Wenn
+            <property>limit</property> auf irgendeinen Wert gesetzt wird, dann wird die CSV-Datei
+            schneller gelesen, aber jede Zeile, die dieses Limit überschreitet, wird abgeschnitten.
+        </para>
+
+        <para>
+            Das standardmäßige Anführungszeichen für die Verwendung mit CSV-Dateien ist
+            '<emphasis>"</emphasis>'. Man kann ein anderes setzen, indem die Option
+            <property>enclosure</property> verwendet wird.
+        </para>
+
+        <example xml:id="zend.translator.sourcecreation.csv.example2">
+            <info><title>Zweites Beispiel für CSV-Dateien</title></info>
+
+            <programlisting language="txt"><![CDATA[
+﻿# Example CSV file
+"message,1",Nachricht1
+message2,"Nachricht,2"
+"message3,",Nachricht3
+]]></programlisting>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de',
+        'delimiter' => ','
+    )
+);
+
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/other.csv',
+        'locale' => 'fr'
+    )
+);
+]]></programlisting>
+        </example>
+
+        <note>
+            <para>
+                Wenn nicht-ASCII-Zeichen in der CSV-Datei verwendet werden, wie z.B. Umlaute oder
+                UTF-8 Zeichen, dann sollte man immer Hochkommas verwenden. Das Weglassen der
+                Hochkommas kann zu fehlenden Zeichen in der Übersetzung führen.
+            </para>
+        </note>
+    </section>
+
+    <section xml:id="zend.translator.sourcecreation.ini">
+        <info><title>Erstellung von INI-Quelldateien</title></info>
+
+        <para>
+            <acronym>INI</acronym>-Quelldateien sind menschenlesbar, aber normalerweise nicht sehr
+            klein, da sie neben der Übersetzung auch andere Daten enthalten. Wenn Sie Daten haben, die
+            von Ihrem Kunden zu bearbeitet sind, verwenden Sie den <acronym>INI</acronym>-Adapter.
+        </para>
+
+        <example xml:id="zend.translator.sourcecreation.ini.example">
+            <info><title>Beispiel einer INI-Datei</title></info>
+
+            <programlisting language="txt"><![CDATA[
+[Test]
+;TestPage Comment
+Message_1="Nachricht 1 (de)"
+Message_2="Nachricht 2 (de)"
+Message_3="Nachricht :3 (de)"
+]]></programlisting>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'ini',
+        'content' => '/path/to/mytranslation.ini',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/other.ini',
+        'locale' => 'it'
+    )
+);
+]]></programlisting>
+        </example>
+
+        <para>
+            <acronym>INI</acronym>-Dateien haben verschiedene Einschränkungen. Wenn ein Wert in
+            einer <acronym>INI</acronym>-Datei irgendein nicht alphanumerisches Zeichen enthält,
+            muss er in doppelte Anführungszeichen (<emphasis>"</emphasis>) eingeschlossen werden. Es
+            gibt auch reservierte Wörter, welche nicht als Schlüssel für
+            <acronym>INI</acronym>-Dateien verwendet werden dürfen. Diese enthalten:
+            <constant>NULL</constant>, <emphasis>yes</emphasis>, <emphasis>no</emphasis>,
+            <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
+            <constant>NULL</constant>, <emphasis>no</emphasis> und <constant>FALSE</constant> führen
+            zu <emphasis>""</emphasis>, <emphasis>yes</emphasis> und <constant>TRUE</constant>
+            resultieren in '1'. Die Zeichen <emphasis>{}|&amp;~![()"</emphasis> dürfen nirgendwo im
+            Schlüssel verwendet werden und haben im Wert eine spezielle Bedeutung. Diese sollten
+            nicht verwendet werden, da sie zu unerwartetem Verhalten führen.
+        </para>
+    </section>
+</section>

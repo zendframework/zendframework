@@ -139,7 +139,7 @@ class InputFilter
 
     /**
      * Translation object
-     * @var Zend\Translate\Translate
+     * @var Zend\Translator\Translator
      */
     protected $translator;
 
@@ -496,7 +496,7 @@ class InputFilter
     /**
      * Set translation object
      *
-     * @param  Zend_Translate|Zend\Translate\Adapter\Adapter|null $translator
+     * @param  Zend_Translator|Zend\Translator\Adapter\Adapter|null $translator
      * @return Zend\Filter\InputFilter
      */
     public function setTranslator($translator = null)
@@ -515,7 +515,7 @@ class InputFilter
     /**
      * Return translation object
      *
-     * @return Zend\Translate\Adapter\Adapter|null
+     * @return Zend\Translator\Adapter\Adapter|null
      */
     public function getTranslator()
     {
@@ -524,8 +524,8 @@ class InputFilter
         }
 
         if ($this->translator === null) {
-            if (\Zend\Registry::isRegistered('Zend_Translate')) {
-                $translator = \Zend\Registry::get('Zend_Translate');
+            if (\Zend\Registry::isRegistered('Zend_Translator')) {
+                $translator = \Zend\Registry::get('Zend_Translator');
                 if ($translator instanceof TranslationAdapter) {
                     return $translator;
                 } elseif ($translator instanceof Translator) {
@@ -761,7 +761,44 @@ class InputFilter
                 $validatorRule[self::PRESENCE] = $this->defaults[self::PRESENCE];
             }
             if (!isset($validatorRule[self::ALLOW_EMPTY])) {
-                $validatorRule[self::ALLOW_EMPTY] = $this->defaults[self::ALLOW_EMPTY];
+                $foundNotEmptyValidator = false;
+
+                foreach ($validatorRule as $rule) {
+                    if ($rule === 'NotEmpty') {
+                        $foundNotEmptyValidator = true;
+                        // field may not be empty, we are ready
+                        break 1;
+                    }
+
+                    if (is_array($rule)) {
+                        $keys = array_keys($rule);
+                        $classKey = array_shift($keys);
+                        $ruleClass = $rule[$classKey];
+                        if ($ruleClass === 'NotEmpty') {
+                            $foundNotEmptyValidator = true;
+                            // field may not be empty, we are ready
+                            break 1;
+                        }
+                    }
+
+                    // we must check if it is an object before using instanceof
+                    if (!is_object($rule)) {
+                        // it cannot be a NotEmpty validator, skip this one
+                        continue;
+                    }
+
+                    if($rule instanceof Validator\NotEmpty) {
+                        $foundNotEmptyValidator = true;
+                        // field may not be empty, we are ready
+                        break 1;
+                    }
+                }
+
+                if (!$foundNotEmptyValidator) {
+                    $validatorRule[self::ALLOW_EMPTY] = $this->defaults[self::ALLOW_EMPTY];
+                } else {
+                    $validatorRule[self::ALLOW_EMPTY] = false;
+                }
             }
 
             if (!isset($validatorRule[self::MESSAGES])) {
@@ -913,8 +950,11 @@ class InputFilter
                 $messages         = array();
 
                 foreach ($data as $fieldKey => $field) {
-                    $notEmptyValidator = $this->_getValidator('NotEmpty');
-                    $notEmptyValidator->setMessage($this->_getNotEmptyMessage($validatorRule[self::RULE], $fieldKey));
+                    // If there is no Validator\NotEmpty instance in the rules, we will use the default
+                    if (!($notEmptyValidator = $this->_getNotEmptyValidatorInstance($validatorRule))) {
+                        $notEmptyValidator = $this->_getValidator('NotEmpty');
+                        $notEmptyValidator->setMessage($this->_getNotEmptyMessage($validatorRule[self::RULE], $fieldKey));
+                    }
 
                     if (!$notEmptyValidator->isValid($field)) {
                         foreach ($notEmptyValidator->getMessages() as $messageKey => $message) {
@@ -952,8 +992,12 @@ class InputFilter
                 $field = array($field);
             }
 
-            $notEmptyValidator = $this->_getValidator('NotEmpty');
-            $notEmptyValidator->setMessage($this->_getNotEmptyMessage($validatorRule[self::RULE], $fieldName));
+            // If there is no \Zend\Validator\NotEmpty instance in the rules, we will use the default
+            if (!($notEmptyValidator = $this->_getNotEmptyValidatorInstance($validatorRule))) {
+                $notEmptyValidator = $this->_getValidator('NotEmpty');
+                $notEmptyValidator->setMessage($this->_getNotEmptyMessage($validatorRule[self::RULE], $fieldName));
+            }
+
             if ($validatorRule[self::ALLOW_EMPTY]) {
                 $validatorChain = $validatorRule[self::VALIDATOR_CHAIN];
             } else {
@@ -962,7 +1006,7 @@ class InputFilter
                 $validatorChain->addValidator($validatorRule[self::VALIDATOR_CHAIN]);
             }
 
-            foreach ($field as $value) {
+            foreach ($field as $key => $value) {
                 if ($validatorRule[self::ALLOW_EMPTY]  &&  !$notEmptyValidator->isValid($value)) {
                     // Field is empty AND it's allowed. Do nothing.
                     continue;
@@ -1010,6 +1054,23 @@ class InputFilter
                 $this->validFields[$field] = $data[$field];
             }
         }
+    }
+
+    /**
+     * Check a validatorRule for the presence of a NotEmpty validator instance.
+     * The purpose is to preserve things like a custom message, that may have been
+     * set on the validator outside \Zend\Filter\InputFilter.
+     * @param  array $validatorRule
+     * @return mixed False if none is found, \Zend\Validator\NotEmpty instance if found
+     */
+    protected function _getNotEmptyValidatorInstance($validatorRule) {
+        foreach ($validatorRule as $rule => $value) {
+            if (is_object($value) and $value instanceof Validator\NotEmpty) {
+                return $value;
+            }
+        }
+
+        return false;
     }
 
     /**

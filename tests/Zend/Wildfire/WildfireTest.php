@@ -43,8 +43,15 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
     protected $_request = null;
     protected $_response = null;
 
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     public function setUp()
     {
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('America/Los_Angeles');
         Channel\HttpHeaders::destroyInstance();
         FirePhp::destroyInstance();
@@ -55,6 +62,7 @@ class WildfireTest extends \PHPUnit_Framework_TestCase
         Controller\Front::getInstance()->resetInstance();
         Channel\HttpHeaders::destroyInstance();
         FirePhp::destroyInstance();
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     protected function _setupWithFrontController()

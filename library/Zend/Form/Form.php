@@ -35,11 +35,11 @@ use Zend\Config\Config,
 /**
  * Zend_Form
  *
- * A rewrite on this component is planned. At the bare minimum, this class 
+ * A rewrite on this component is planned. At the bare minimum, this class
  * will be refactored to utilize the new PluginBroker implementation with
- * regards to loading elements and decorators (though decorators may be 
- * either removed or pushed to a DecoratorChain). Potentially, it may be 
- * modified to accept a Zend\Filter\InputFilter instance, from which it would 
+ * regards to loading elements and decorators (though decorators may be
+ * either removed or pushed to a DecoratorChain). Potentially, it may be
+ * modified to accept a Zend\Filter\InputFilter instance, from which it would
  * inject values and error messages into attached elements.
  *
  * @todo       Convert to PluginBroker usage
@@ -1346,11 +1346,11 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     {
         $values = array();
         $eBelongTo = null;
-        
+
         if ($this->isArray()) {
             $eBelongTo = $this->getElementsBelongTo();
         }
-        
+
         foreach ($this->getElements() as $key => $element) {
             if (!$element->getIgnore()) {
                 $merge = array();
@@ -1439,9 +1439,9 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
             }
             $values = $this->_array_replace_recursive($values, $merge);
         }
-        if (!$suppressArrayNotation 
-            && $this->isArray() 
-            && !empty($values) 
+        if (!$suppressArrayNotation
+            && $this->isArray()
+            && !empty($values)
             && !$this->_getIsRendered()
         ) {
             $values = $this->_attachToArray($values, $this->getElementsBelongTo());
@@ -1625,8 +1625,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
             $form->setOrder($order);
         }
 
-        if (($oldName = $form->getName()) 
-            && $oldName !== $name 
+        if (($oldName = $form->getName())
+            && $oldName !== $name
             && $oldName === $form->getElementsBelongTo()
         ) {
             $form->setElementsBelongTo($name);
@@ -2101,8 +2101,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * Given an array, an optional arrayPath and a key this method
      * dissolves the arrayPath and unsets the key within the array
      * if it exists.
-     * 
-     * @param array $array 
+     *
+     * @param array $array
      * @param string|null $arrayPath
      * @param string $key
      * @return array
@@ -2112,7 +2112,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         $unset =& $array;
         $path  = trim(strtr((string)$arrayPath, array('[' => '/', ']' => '')), '/');
         $segs  = ('' !== $path) ? explode('/', $path) : array();
-        
+
         foreach ($segs as $seg) {
             if (!array_key_exists($seg, (array)$unset)) {
                 return $array;
@@ -2158,9 +2158,9 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * Subitems are inserted based on their order Setting if set,
      * otherwise they are appended, the resulting numerical index
      * may differ from the order value.
-     * 
+     *
      * @access protected
-     * @return array 
+     * @return array
      */
     public function getElementsAndSubFormsOrdered()
     {
@@ -2186,8 +2186,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     }
 
     /**
-     * This is a helper function until php 5.3 is widespreaded 
-     * 
+     * This is a helper function until php 5.3 is widespreaded
+     *
      * @param array $into
      * @access protected
      * @return void
@@ -2478,7 +2478,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
                 return $this->getSubForm($name)->getErrors(null, true);
             }
         }
-        
+
         foreach ($this->_elements as $key => $element) {
             $errors[$key] = $element->getErrors();
         }
@@ -2554,8 +2554,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
             }
         }
 
-        if (!$suppressArrayNotation 
-            && $this->isArray() 
+        if (!$suppressArrayNotation
+            && $this->isArray()
             && !$this->_getIsRendered()
         ) {
             $messages = $this->_attachToArray($messages, $this->getElementsBelongTo());
@@ -2567,7 +2567,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Retrieve translated custom error messages
      * Proxies to {@link _getErrorMessages()}.
-     * 
+     *
      * @return array
      */
     public function getCustomMessages()
@@ -2677,7 +2677,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     public function addDecorators(array $decorators)
     {
         foreach ($decorators as $decoratorName => $decoratorInfo) {
-            if (is_string($decoratorInfo) 
+            if (is_string($decoratorInfo)
                 || $decoratorInfo instanceof Decorator
             ) {
                 if (!is_numeric($decoratorName)) {
@@ -2926,7 +2926,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Set translator object
      *
-     * @param  Zend_Translate|\Zend\Translator\Adapter|null $translator
+     * @param  Zend_Translator|\Zend\Translator\Adapter|null $translator
      * @return \Zend\Form\Form
      */
     public function setTranslator($translator = null)
@@ -2979,17 +2979,17 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         }
 
         return $this->_translator;
-    }    
+    }
 
     /**
      * Does this form have its own specific translator?
-     * 
+     *
      * @return bool
      */
     public function hasTranslator()
     {
         return (bool)$this->_translator;
-    }    
+    }
 
     /**
      * Get global default translator object
@@ -2999,8 +2999,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     public static function getDefaultTranslator()
     {
         if (null === self::$_translatorDefault) {
-            if (Registry::isRegistered('Zend_Translate')) {
-                $translator = Registry::get('Zend_Translate');
+            if (Registry::isRegistered('Zend_Translator')) {
+                $translator = Registry::get('Zend_Translator');
                 if ($translator instanceof Translator\Adapter) {
                     return $translator;
                 } elseif ($translator instanceof Translator\Translator) {
@@ -3013,14 +3013,14 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
 
     /**
      * Is there a default translation object set?
-     * 
+     *
      * @return boolean
      */
     public static function hasDefaultTranslator()
-    { 
+    {
         return (bool)self::$_translatorDefault;
     }
-    
+
     /**
      * Indicate whether or not translation should be disabled
      *
@@ -3262,7 +3262,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     /**
      * Load the default decorators
      *
-     * @return void
+     * @return \Zend\Form
      */
     public function loadDefaultDecorators()
     {

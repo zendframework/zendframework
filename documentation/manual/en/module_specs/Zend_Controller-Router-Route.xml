@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.controller.router.routes.standard"><info><title>Zend_Controller_Router_Route</title></info>
-    
+
 
     <para>
         <classname>Zend_Controller_Router_Route</classname> is the standard framework
@@ -40,7 +40,7 @@ $router->addRoute('user', $route);
     </para>
 
     <note><info><title>Character Usage</title></info>
-        
+
 
         <para>
             The current implementation allows you to use any character (except a
@@ -103,7 +103,7 @@ $router->addRoute('default', $route);
 ]]></programlisting>
 
     <section xml:id="zend.controller.router.routes.standard.variable-defaults"><info><title>Variable Defaults</title></info>
-        
+
 
         <para>
             Every variable in the route can have a default and this is what the
@@ -157,7 +157,7 @@ $router->addRoute('archive', $route);
     </section>
 
     <section xml:id="zend.controller.router.routes.standard.variable-requirements"><info><title>Variable Requirements</title></info>
-        
+
 
         <para>
             One can add a third parameter to the
@@ -189,18 +189,18 @@ $router->addRoute('archive', $route);
     </section>
 
     <section xml:id="zend.controller.router.routes.standard.translated-segments"><info><title>Translated segments</title></info>
-        
+
 
         <para>
             The standard route supports translated segments. To use this
             feature, you have to define at least a translator (an instance
-            of <classname>Zend_Translate</classname>) via one of the following ways:
+            of <classname>Zend_Translator</classname>) via one of the following ways:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Put it into the registry with the key <classname>Zend_Translate</classname>.
+                    Put it into the registry with the key <classname>Zend_Translator</classname>.
                 </para>
             </listitem>
 
@@ -219,7 +219,7 @@ $router->addRoute('archive', $route);
         </itemizedlist>
 
         <para>
-            By default, the locale specified in the <classname>Zend_Translate</classname>
+            By default, the locale specified in the <classname>Zend_Translator</classname>
             instance will be used. To override it, you set it
             (an instance of <classname>Zend_Locale</classname> or a locale string) in one
             of the following ways:
@@ -265,7 +265,7 @@ $router->addRoute('archive', $route);
         </para>
 
         <note><info><title>Message IDs and separate language file</title></info>
-            
+
 
             <para>
                 Occasionally a message ID which you want to use in one
@@ -282,7 +282,7 @@ $router->addRoute('archive', $route);
 
         <programlisting language="php"><![CDATA[
 // Prepare the translator
-$translator = new Zend_Translate(
+$translator = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(),

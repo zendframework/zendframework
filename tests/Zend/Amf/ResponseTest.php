@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Amf;
+
 use Zend\Amf\Parser,
     Zend\Amf\Value\Messaging,
     Zend\Amf\Value,
@@ -51,12 +52,19 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     protected $_response;
 
     /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
+    /**
      * Setup environment
      */
     public function setUp()
     {
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('America/Chicago');
-        Locale::setDefault('en_US');
+        Locale::setFallback('en_US');
         Parser\TypeLoader::resetMap();
         $this->_response = new \Zend\Amf\Response\StreamResponse();
     }
@@ -67,6 +75,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->_response);
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     /**

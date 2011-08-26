@@ -131,7 +131,7 @@ class KeypairTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->keypairInstance->create('example-key-name');
 
-        $this->assertType('array', $response);
+        $this->assertInternalType('array', $response);
 
         $this->assertEquals('example-key-name', $response['keyName']);
         $this->assertEquals('1f:51:ae:28:bf:89:e9:d8:1f:25:5d:37:2d:7d:b8:ca:9f:f5:f1:6f', $response['keyFingerprint']);

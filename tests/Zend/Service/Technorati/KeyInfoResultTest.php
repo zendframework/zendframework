@@ -61,11 +61,11 @@ class Zend_Service_Technorati_KeyInfoResultTest extends Zend_Service_Technorati_
     {
         $object = new Zend_Service_Technorati_KeyInfoResult($this->dom, self::TEST_API_KEY);
 
-        $this->assertType('string', $object->getApiKey());
+        $this->assertInternalType('string', $object->getApiKey());
         $this->assertEquals(self::TEST_API_KEY, $object->getApiKey());
-        $this->assertType('integer', $object->getApiQueries());
+        $this->assertInternalType('integer', $object->getApiQueries());
         $this->assertEquals(27, $object->getApiQueries());
-        $this->assertType('integer', $object->getMaxQueries());
+        $this->assertInternalType('integer', $object->getMaxQueries());
         $this->assertEquals(1500, $object->getMaxQueries());
     }
 
@@ -81,7 +81,7 @@ class Zend_Service_Technorati_KeyInfoResultTest extends Zend_Service_Technorati_
 
         $set = 'anewapikey';
         $get = $object->setApiKey($set)->getApiKey();
-        $this->assertType('string', $get);
+        $this->assertInternalType('string', $get);
         $this->assertEquals($set, $get);
     }
 }

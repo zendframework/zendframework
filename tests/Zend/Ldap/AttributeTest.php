@@ -67,7 +67,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $value=Ldap\Attribute::getAttribute($data, 'uid2', 0);
         $this->assertNull($value);
         $array=Ldap\Attribute::getAttribute($data, 'uid2');
-        $this->assertType('array', $array);
+        $this->assertInternalType('array', $array);
         $this->assertEquals(0, count($array));
     }
 
@@ -84,7 +84,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
     {
         $data=array('uid' => array('value'));
         $value=Ldap\Attribute::getAttribute($data, 'uid');
-        $this->assertType('array', $value);
+        $this->assertInternalType('array', $value);
         $this->assertEquals(1, count($value));
         $this->assertContains('value', $value);
     }
@@ -94,7 +94,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array();
         Ldap\Attribute::setAttribute($data, 'uid', 'new', false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertType('array', $data['uid']);
+        $this->assertInternalType('array', $data['uid']);
         $this->assertEquals(1, count($data['uid']));
         $this->assertContains('new', $data['uid']);
     }
@@ -104,7 +104,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('uid' => array('old'));
         Ldap\Attribute::setAttribute($data, 'uid', 'new', false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertType('array', $data['uid']);
+        $this->assertInternalType('array', $data['uid']);
         $this->assertEquals(1, count($data['uid']));
         $this->assertContains('new', $data['uid']);
     }
@@ -114,7 +114,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('uid' => array('old'));
         Ldap\Attribute::setAttribute($data, 'uid', 'new', true);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertType('array', $data['uid']);
+        $this->assertInternalType('array', $data['uid']);
         $this->assertEquals(2, count($data['uid']));
         $this->assertContains('old', $data['uid']);
         $this->assertContains('new', $data['uid']);
@@ -141,7 +141,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array();
         Ldap\Attribute::setAttribute($data, 'uid', array('new1', 'new2'), false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertType('array', $data['uid']);
+        $this->assertInternalType('array', $data['uid']);
         $this->assertEquals(2, count($data['uid']));
         $this->assertContains('new1', $data['uid']);
         $this->assertContains('new2', $data['uid']);
@@ -154,7 +154,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('uid' => array('old'));
         Ldap\Attribute::setAttribute($data, 'uid', array('new1', 'new2'), false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertType('array', $data['uid']);
+        $this->assertInternalType('array', $data['uid']);
         $this->assertEquals(2, count($data['uid']));
         $this->assertContains('new1', $data['uid']);
         $this->assertContains('new2', $data['uid']);
@@ -167,7 +167,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('uid' => array('old'));
         Ldap\Attribute::setAttribute($data, 'uid', array('new1', 'new2'), true);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertType('array', $data['uid']);
+        $this->assertInternalType('array', $data['uid']);
         $this->assertEquals(3, count($data['uid']));
         $this->assertContains('old', $data['uid']);
         $this->assertContains('new1', $data['uid']);
@@ -327,7 +327,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('test' => array('value1', 'value2', 'value3', 'value3'));
         Ldap\Attribute::removeFromAttribute($data, 'test', 'value2');
         $this->assertArrayHasKey('test', $data);
-        $this->assertType('array', $data['test']);
+        $this->assertInternalType('array', $data['test']);
         $this->assertEquals(3, count($data['test']));
         $this->assertContains('value1', $data['test']);
         $this->assertContains('value3', $data['test']);
@@ -339,7 +339,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('test' => array('value1', 'value2', 'value3', 'value3'));
         Ldap\Attribute::removeFromAttribute($data, 'test', array('value1', 'value2'));
         $this->assertArrayHasKey('test', $data);
-        $this->assertType('array', $data['test']);
+        $this->assertInternalType('array', $data['test']);
         $this->assertEquals(2, count($data['test']));
         $this->assertContains('value3', $data['test']);
         $this->assertNotContains('value1', $data['test']);
@@ -351,7 +351,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('test' => array('value1', 'value2', 'value3', 'value3'));
         Ldap\Attribute::removeFromAttribute($data, 'test', 'value3');
         $this->assertArrayHasKey('test', $data);
-        $this->assertType('array', $data['test']);
+        $this->assertInternalType('array', $data['test']);
         $this->assertEquals(2, count($data['test']));
         $this->assertContains('value1', $data['test']);
         $this->assertContains('value2', $data['test']);
@@ -363,7 +363,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('test' => array('value1', 'value2', 'value3', 'value3'));
         Ldap\Attribute::removeFromAttribute($data, 'test', array('value1', 'value3'));
         $this->assertArrayHasKey('test', $data);
-        $this->assertType('array', $data['test']);
+        $this->assertInternalType('array', $data['test']);
         $this->assertEquals(1, count($data['test']));
         $this->assertContains('value2', $data['test']);
         $this->assertNotContains('value1', $data['test']);
@@ -375,7 +375,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('test' => array('TRUE', 'FALSE', 'TRUE', 'FALSE'));
         Ldap\Attribute::removeFromAttribute($data, 'test', false);
         $this->assertArrayHasKey('test', $data);
-        $this->assertType('array', $data['test']);
+        $this->assertInternalType('array', $data['test']);
         $this->assertEquals(2, count($data['test']));
         $this->assertContains('TRUE', $data['test']);
         $this->assertNotContains('FALSE', $data['test']);
@@ -386,7 +386,7 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $data=array('test' => array('1', '2', '3', '4'));
         Ldap\Attribute::removeFromAttribute($data, 'test', array(2, 4));
         $this->assertArrayHasKey('test', $data);
-        $this->assertType('array', $data['test']);
+        $this->assertInternalType('array', $data['test']);
         $this->assertEquals(2, count($data['test']));
         $this->assertContains('1', $data['test']);
         $this->assertContains('3', $data['test']);

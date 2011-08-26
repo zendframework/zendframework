@@ -73,7 +73,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $xmlrpcClient = new Client('http://foo');
         $httpClient = $xmlrpcClient->getHttpClient();
-        $this->assertType('Zend\\Http\\Client', $httpClient);
+        $this->assertInstanceOf('Zend\\Http\\Client', $httpClient);
         $this->assertSame($httpClient, $xmlrpcClient->getHttpClient());
     }
 
@@ -107,8 +107,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->setServerResponseTo(true);
         $this->xmlrpcClient->call('foo');
 
-        $this->assertType('Zend\\XmlRpc\\Request', $this->xmlrpcClient->getLastRequest());
-        $this->assertType('Zend\\XmlRpc\\Response', $this->xmlrpcClient->getLastResponse());
+        $this->assertInstanceOf('Zend\\XmlRpc\\Request', $this->xmlrpcClient->getLastRequest());
+        $this->assertInstanceOf('Zend\\XmlRpc\\Response', $this->xmlrpcClient->getLastResponse());
     }
 
     public function testSuccessfulRpcMethodCallWithNoParameters()
@@ -336,8 +336,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProxyReturnsServerProxy()
     {
-        $class = 'Zend\\XmlRpc\\Client\\ServerProxy';
-        $this->assertType($class, $this->xmlrpcClient->getProxy());
+        $this->assertInstanceOf('Zend\\XmlRpc\\Client\\ServerProxy', $this->xmlrpcClient->getProxy());
     }
 
     public function testRpcMethodCallsThroughServerProxy()
@@ -390,7 +389,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $xmlrpcClient = new Client('http://foo');
         $introspector = $xmlrpcClient->getIntrospector();
-        $this->assertType('Zend\\XmlRpc\\Client\\ServerIntrospection', $introspector);
+        $this->assertInstanceOf('Zend\\XmlRpc\\Client\\ServerIntrospection', $introspector);
         $this->assertSame($introspector, $xmlrpcClient->getIntrospector());
     }
 

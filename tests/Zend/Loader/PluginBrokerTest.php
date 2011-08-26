@@ -178,7 +178,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $this->broker->register('sample', new TestAsset\SamplePlugin());
         $this->broker->load('sample');
         $plugins = $this->broker->getPlugins();
-        $this->assertType('array', $plugins);
+        $this->assertInternalType('array', $plugins);
         $this->assertEquals(1, count($plugins));
     }
 
@@ -204,6 +204,19 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
     {
         $this->broker->register('sample', new TestAsset\SamplePlugin());
         $this->assertTrue($this->broker->isLoaded('sample'));
+    }
+    
+    public function testRegisterPluginsOnLoadDisabled()
+    {
+        $this->broker->setRegisterPluginsOnLoad(false);
+        
+        $loader = $this->broker->getClassLoader();
+        $loader->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
+        
+        $plugin1 = $this->broker->load('sample');
+        $plugin2 = $this->broker->load('sample');
+        
+        $this->assertNotSame($plugin1, $plugin2);
     }
 
     /**

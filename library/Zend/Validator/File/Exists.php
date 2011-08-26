@@ -193,7 +193,13 @@ class Exists extends Validator\AbstractValidator
     protected function _throw($file, $errorType)
     {
         if ($file !== null) {
-            $this->_value = $file['name'];
+            if (is_array($file)) {
+                if(array_key_exists('name', $file)) {
+                    $this->_value = basename($file['name']);
+                }
+            } else if (is_string($file)) {
+                $this->_value = basename($file);
+            }
         }
 
         $this->_error($errorType);

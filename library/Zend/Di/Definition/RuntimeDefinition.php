@@ -6,22 +6,44 @@ use Zend\Di\Definition;
 
 class RuntimeDefinition implements Definition
 {
+    /**@#+
+     * @const string Lookup Type
+     */
     const LOOKUP_TYPE_IMPLICIT = 'implicit';
     const LOOKUP_TYPE_EXPLICIT = 'explicit';
 
+    /**
+     * @var string Initial lookup type
+     */
     protected $lookupType = self::LOOKUP_TYPE_IMPLICIT;
-    
+
+    /**
+     * @var IntrospectionRuleset
+     */
     protected $introspectionRuleset = null;
-    
+
+    /**
+     * @var array
+     */
     protected $classes = array();
-    
+
+    /**
+     * @var array
+     */
     protected $injectionMethodCache = array();
-    
+
+    /**
+     * @param string $lookupType
+     */
     public function __construct($lookupType = self::LOOKUP_TYPE_IMPLICIT)
     {
         $this->lookupType = $lookupType;
     }
-    
+
+    /**
+     * @param IntrospectionRuleset $introspectionRuleset
+     * @return void
+     */
     public function setIntrospectionRuleset(IntrospectionRuleset $introspectionRuleset)
     {
         $this->introspectionRuleset = $introspectionRuleset;
@@ -60,7 +82,7 @@ class RuntimeDefinition implements Definition
     
     /**
      * Track classes when using EXPLICIT lookups
-     * @param unknown_type $class
+     * @param string $class
      */
     public function addClass($class)
     {
@@ -69,7 +91,8 @@ class RuntimeDefinition implements Definition
 
     /**
      * Return whether the class exists
-     * 
+     *
+     * @param string $class
      * @return bool
      */
     public function hasClass($class)
@@ -79,7 +102,8 @@ class RuntimeDefinition implements Definition
 
     /**
      * Return the supertypes for this class
-     * 
+     *
+     * @param string $class
      * @return array of types
      */
     public function getClassSupertypes($class)
@@ -89,6 +113,8 @@ class RuntimeDefinition implements Definition
 
     /**
      * Get the instiatiator
+     *
+     * @param string $class
      * @return string|callable
      */
     public function getInstantiator($class)
@@ -102,7 +128,8 @@ class RuntimeDefinition implements Definition
 
     /**
      * Return if there are injection methods
-     * 
+     *
+     * @param string $class
      * @return bool
      */
     public function hasInjectionMethods($class)
@@ -113,7 +140,9 @@ class RuntimeDefinition implements Definition
 
     /**
      * Return injection methods
-     * 
+     *
+     * @param string $class
+     * @param string $method
      * @return bool
      */
     public function hasInjectionMethod($class, $method)
@@ -124,7 +153,8 @@ class RuntimeDefinition implements Definition
 
     /**
      * Return an array of the injection methods
-     * 
+     *
+     * @param string $class
      * @return array
      */
     public function getInjectionMethods($class)
@@ -177,7 +207,7 @@ class RuntimeDefinition implements Definition
                     continue;
                 }
 
-                // explicity NOT in excluded classes
+                // explicitly NOT in excluded classes
                 if ($sRules['excludedClasses']
                     && (in_array($className, $sRules['excludedClasses'])
                         || in_array($declaringClassName, $sRules['excludedClasses']))) {
@@ -228,13 +258,15 @@ class RuntimeDefinition implements Definition
 
     /**
      * Return the parameters for a method
-     * 
+     *
      * 3 item array:
      *     #1 - Class name, string if it exists, else null
      *     #2 - Optional?, boolean
      *     #3 - Instantiable, boolean if class exists, otherwise null
-     * 
-     * @return array 
+     *
+     * @param string $class
+     * @param string $method
+     * @return array
      */
     public function getInjectionMethodParameters($class, $method)
     {
@@ -264,7 +296,7 @@ class RuntimeDefinition implements Definition
             
             $params[$paramName] = array();
             
-            // set the clas name, if it exists
+            // set the class name, if it exists
             $params[$paramName][] = ($pc !== null) ? $pc->getName() : null;
 
             // optional?

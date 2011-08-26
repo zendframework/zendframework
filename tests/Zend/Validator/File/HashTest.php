@@ -160,4 +160,15 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $validator->addHash(array('12321', '12121'));
         $this->assertEquals(array('12345' => 'crc32', '12344' => 'crc32', '12321' => 'crc32', '12121' => 'crc32'), $validator->getHash());
     }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\Hash('3f8d07e2');
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertTrue(array_key_exists('fileHashNotFound', $validator->getMessages()));
+        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+    }
 }

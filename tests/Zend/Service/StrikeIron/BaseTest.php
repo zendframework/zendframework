@@ -78,7 +78,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
         $this->base->foo();
         $headers = $this->soapClient->calls[0]['headers'];
 
-        $this->assertType('array', $headers);
+        $this->assertInternalType('array', $headers);
         $this->assertEquals(1, count($headers));
         $header = $headers[0];
 
@@ -137,7 +137,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
 
         $headers = $this->soapClient->calls[0]['headers'];
 
-        $this->assertType('array', $headers);
+        $this->assertInternalType('array', $headers);
         $this->assertEquals(1, count($headers));
         $header = $headers[0];
 
@@ -158,7 +158,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
 
         $headers = $this->soapClient->calls[0]['headers'];
 
-        $this->assertType('array', $headers);
+        $this->assertInternalType('array', $headers);
         $this->assertEquals(3, count($headers));  // these 2 + default LicenseInfo
     }
 

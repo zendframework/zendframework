@@ -170,7 +170,7 @@ abstract class TestAbstract extends \PHPUnit_Framework_TestCase
     /**
      * Returns translator
      *
-     * @return Zend_Translate
+     * @return Zend_Translator
      */
     protected function _getTranslator()
     {

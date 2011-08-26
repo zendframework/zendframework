@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.response"><info><title>Zend_Http_Response</title></info>
+    
+
+    <section xml:id="zend.http.response.introduction"><info><title>Introduction</title></info>
+        
+
+        <para>
+            <classname>Zend_Http_Response</classname> provides easy access to an
+            <acronym>HTTP</acronym> responses message, as well as a set of static methods for
+            parsing <acronym>HTTP</acronym> response messages. Usually,
+            <classname>Zend_Http_Response</classname> is used as an object returned by a
+            <classname>Zend_Http_Client</classname> request.
+        </para>
+
+        <para>
+            In most cases, a <classname>Zend_Http_Response</classname> object will be instantiated
+            using the fromString() method, which reads a string containing a
+            <acronym>HTTP</acronym> response message, and returns a new
+            <classname>Zend_Http_Response</classname> object:
+            <example xml:id="zend.http.response.introduction.example-1"><info><title>Instantiating a Zend_Http_Response Object Using the Factory Method</title></info>
+                
+
+                <programlisting language="php"><![CDATA[
+$str = '';
+$sock = fsockopen('www.example.com', 80);
+$req =     "GET / HTTP/1.1\r\n" .
+        "Host: www.example.com\r\n" .
+        "Connection: close\r\n" .
+        "\r\n";
+
+fwrite($sock, $req);
+while ($buff = fread($sock, 1024))
+    $str .= $sock;
+
+$response = Zend_Http_Response::fromString($str);
+]]></programlisting>
+            </example>
+        </para>
+
+        <para>
+            You can also use the contractor method to create a new response
+            object, by specifying all the parameters of the response:
+        </para>
+
+        <para>
+            <command>public function __construct($code, $headers, $body = null, $version = '1.1',
+                $message = null)</command>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <varname>$code</varname>: The <acronym>HTTP</acronym> response code (eg. 200,
+                    404, etc.)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <varname>$headers</varname>: An associative array of <acronym>HTTP</acronym>
+                    response headers (eg. 'Host' =&gt; 'example.com')
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <varname>$body</varname>: The response body as a string
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <varname>$version</varname>: The <acronym>HTTP</acronym> response version
+                    (usually 1.0 or 1.1)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <varname>$message</varname>: The <acronym>HTTP</acronym> response message (eg
+                    'OK', 'Internal Server Error'). If not specified, the message will be set
+                    according to the response code
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+
+    <section xml:id="zend.http.response.testers"><info><title>Boolean Tester Methods</title></info>
+        
+
+        <para>
+            Once a <classname>Zend_Http_Response</classname> object is instantiated, it provides
+            several methods that can be used to test the type of the response. These all
+            return Boolean <constant>TRUE</constant> or <constant>FALSE</constant>:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>isSuccessful()</methodname>: Whether the request was successful
+                        or not. Returns <constant>TRUE</constant> for <acronym>HTTP</acronym> 1xx
+                        and 2xx response codes
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>isError()</methodname>: Whether the response code implies an
+                        error or not. Returns <constant>TRUE</constant> for <acronym>HTTP</acronym>
+                        4xx (client errors) and 5xx (server errors) response codes
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>isRedirect()</methodname>: Whether the response is a redirection
+                        response or not. Returns <constant>TRUE</constant> for
+                        <acronym>HTTP</acronym> 3xx response codes
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <example xml:id="zend.http.response.testers.example-1"><info><title>Using the isError() method to validate a response</title></info>
+                
+
+                <programlisting language="php"><![CDATA[
+if ($response->isError()) {
+  echo "Error transmitting data.\n"
+  echo "Server reply was: " . $response->getStatus() .
+       " " . $response->getMessage() . "\n";
+}
+// .. process the response here...
+]]></programlisting>
+            </example>
+        </para>
+    </section>
+
+    <section xml:id="zend.http.response.acessors"><info><title>Accessor Methods</title></info>
+        
+
+        <para>
+            The main goal of the response object is to provide easy access to
+            various response parameters.
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>getStatus()</methodname>: Get the <acronym>HTTP</acronym>
+                        response status code (eg. 200, 504, etc.)
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getMessage()</methodname>: Get the <acronym>HTTP</acronym>
+                        response status message (eg. "Not Found", "Authorization Required")
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getBody()</methodname>: Get the fully decoded
+                        <acronym>HTTP</acronym> response body
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getRawBody()</methodname>: Get the raw, possibly encoded
+                        <acronym>HTTP</acronym> response body. if the body was decoded using GZIP
+                        encoding for example, it will not be decoded.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getHeaders()</methodname>: Get the <acronym>HTTP</acronym>
+                        response headers as an associative array (eg. 'Content-type' =&gt; 'text/html')
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getHeader($header)</methodname>: Get a specific
+                        <acronym>HTTP</acronym> response header, specified by $header
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getHeadersAsString($status_line, $br)</methodname>: Get
+                        the entire set of headers as a string. If <varname>$status_line</varname> is
+                        <constant>TRUE</constant> (default), the first status line (eg. "HTTP/1.1
+                        200 OK") will also be returned. Lines are broken with the
+                        <varname>$br</varname> parameter (Can be, for example, "&lt;br /&gt;".
+                        Default "\n")
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>string asString($br)</methodname>: Get the entire response message as
+                        a string. Lines are broken with the $br parameter (Can be, for example,
+                        "&lt;br /&gt;". Default "\n"). You can also use the magic method
+                        <methodname>__toString()</methodname> when casting the object as a string.
+                        It will then proxy to <methodname>asString()</methodname>.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <example xml:id="zend.http.response.acessors.example-1"><info><title>Using Zend_Http_Response Accessor Methods</title></info>
+                
+
+                <programlisting language="php"><![CDATA[
+if ($response->getStatus() == 200) {
+  echo "The request returned the following information:<br />";
+  echo $response->getBody();
+} else {
+  echo "An error occurred while fetching data:<br />";
+  echo $response->getStatus() . ": " . $response->getMessage();
+}
+]]></programlisting>
+            </example>
+
+            <note><info><title>Always check return value</title></info>
+                
+
+                <para>
+                    Since a response can contain several instances of the same header,
+                    the getHeader() method and getHeaders() method may return either a
+                    single string, or an array of strings for each header. You should
+                    always check whether the returned value is a string or array.
+                </para>
+            </note>
+
+            <example xml:id="zend.http.response.acessors.example-2"><info><title>Accessing Response Headers</title></info>
+                
+
+                <programlisting language="php"><![CDATA[
+$ctype = $response->getHeader('Content-type');
+if (is_array($ctype)) $ctype = $ctype[0];
+
+$body = $response->getBody();
+if ($ctype == 'text/html' || $ctype == 'text/xml') {
+  $body = htmlentities($body);
+}
+
+echo $body;
+]]></programlisting>
+            </example>
+        </para>
+    </section>
+
+    <section xml:id="zend.http.response.static_parsers"><info><title>Static HTTP Response Parsers</title></info>
+        
+
+        <para>
+            The <classname>Zend_Http_Response</classname> class also includes several
+            internally-used methods for processing and parsing <acronym>HTTP</acronym> response
+            messages. These methods are all exposed as static methods, which means they can be
+            used externally, even if you do not need to instantiate a response
+            object, and just want to extract a specific part of the response.
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::extractCode($response_str)</methodname>:
+                        Extract and return the <acronym>HTTP</acronym> response code (eg. 200 or
+                        404) from <varname>$response_str</varname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::extractMessage($response_str)</methodname>:
+                        Extract and return the <acronym>HTTP</acronym> response message (eg. "OK" or
+                        "File Not Found") from <varname>$response_str</varname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::extractVersion($response_str)</methodname>:
+                        Extract and return the <acronym>HTTP</acronym> version (eg. 1.1 or 1.0) from
+                        <varname>$response_str</varname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::extractHeaders($response_str)</methodname>:
+                        Extract and return the <acronym>HTTP</acronym> response headers from
+                        <varname>$response_str</varname> as an array
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::extractBody($response_str)</methodname>:
+                        Extract and return the <acronym>HTTP</acronym> response body from
+                        <varname>$response_str</varname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::responseCodeAsText($code,
+                            $http11)</methodname>: Get the standard <acronym>HTTP</acronym> response
+                        message for a response code $code. For example, will return "Internal Server
+                        Error" if <varname>$code</varname> is 500. If <varname>$http11</varname> is
+                        <constant>TRUE</constant> (default), will return
+                        <acronym>HTTP</acronym>/1.1 standard messages - otherwise
+                        <acronym>HTTP</acronym>/1.0 messages will be returned. If
+                        <varname>$code</varname> is not specified, this method will return all known
+                        <acronym>HTTP</acronym> response codes as an associative (code =&gt; message)
+                        array.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            Apart from parser methods, the class also includes a set of decoders for common
+            <acronym>HTTP</acronym> response transfer encodings:
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::decodeChunkedBody($body)</methodname>:
+                        Decode a complete "Content-Transfer-Encoding: Chunked" body
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::decodeGzip($body)</methodname>: Decode
+                        a "Content-Encoding: gzip" body
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Http_Response::decodeDeflate($body)</methodname>: Decode
+                        a "Content-Encoding: deflate" body
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </section>
+</section>

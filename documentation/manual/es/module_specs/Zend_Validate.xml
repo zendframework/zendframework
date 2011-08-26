@@ -296,14 +296,14 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
 
         <para> Validate classes provide a
                 <methodname>setTranslator()</methodname> method with which you
-            can specify a instance of <classname>Zend_Translate</classname>
+            can specify a instance of <classname>Zend_Translator</classname>
             which will translate the messages in case of a validation failure.
             The <methodname>getTranslator()</methodname> method returns the set
             translator instance. </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
     'en'
@@ -314,14 +314,14 @@ $validator->setTranslator($translate);
 
         <para> With the static <methodname>setDefaultTranslator()</methodname>
             method you can set a instance of
-                <classname>Zend_Translate</classname> which will be used for all
+                <classname>Zend_Translator</classname> which will be used for all
             validation classes, and can be retrieved with
                 <methodname>getDefaultTranslator()</methodname> . This prevents
             you from setting a translator manually for all validator classes,
             and simplifies your code. </para>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
     'en'

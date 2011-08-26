@@ -107,7 +107,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->_response->getFault());
         $this->_response->loadXml('foo');
-        $this->assertType('Zend\\XmlRpc\\Fault', $this->_response->getFault());
+        $this->assertInstanceOf('Zend\\XmlRpc\\Fault', $this->_response->getFault());
     }
 
     /**

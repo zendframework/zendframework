@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><info><title>Translator Helper</title></info>
+
+
+    <para>
+        Often web sites are available in several languages. To translate the
+        content of a site you should simply use <link linkend="zend.translator.introduction">Zend_Translator</link> and to
+        integrate <classname>Zend_Translator</classname> within your view you should use
+        the <emphasis>Translator</emphasis> View Helper.
+    </para>
+
+    <para>
+        In all following examples we are using the simple Array Translation
+        Adapter. Of course you can also use any instance of
+        <classname>Zend_Translator</classname> and also any subclasses of
+        <classname>Zend_Translator_Adapter</classname>. There are several ways to initiate
+        the <emphasis>Translator</emphasis> View Helper:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Registered, through a previously registered instance in
+                <classname>Zend_Registry</classname>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Afterwards, through the fluent interface
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Directly, through initiating the class
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        A registered instance of <classname>Zend_Translator</classname> is the preferred
+        usage for this helper. You can also select the locale to be used simply
+        before you add the adapter to the registry.
+    </para>
+
+    <note>
+        <para>
+            We are speaking of locales instead of languages because a language
+            also may contain a region. For example English is spoken in
+            different dialects. There may be a translation for British and one
+            for American English. Therefore, we say "locale" instead of
+            "language."
+        </para>
+    </note>
+
+    <example xml:id="zend.view.helpers.initial.translator.registered"><info><title>Registered instance</title></info>
+
+
+        <para>
+            To use a registered instance just create an instance of
+            <classname>Zend_Translator</classname> or <classname>Zend_Translator_Adapter</classname>
+            and register it within <classname>Zend_Registry</classname> using
+            <classname>Zend_Translator</classname> as its key.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// our example adapter
+$adapter = new Zend_Translator(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
+Zend_Registry::set('Zend_Translator', $adapter);
+
+// within your view
+echo $this->translate('simple');
+// this returns 'einfach'
+]]></programlisting>
+    </example>
+
+    <para>
+        If you are more familiar with the fluent interface, then you can also
+        create an instance within your view and initiate the helper afterwards.
+    </para>
+
+    <example xml:id="zend.view.helpers.initial.translator.afterwards"><info><title>Within the view</title></info>
+
+
+        <para>
+            To use the fluent interface, create an instance of
+            <classname>Zend_Translator</classname> or <classname>Zend_Translator_Adapter</classname>,
+            call the helper without a parameter, and call the
+            <methodname>setTranslator()</methodname> method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// within your view
+$adapter = new Zend_Translator(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
+$this->translate()->setTranslator($adapter)->translate('simple');
+// this returns 'einfach'
+]]></programlisting>
+    </example>
+
+    <para>
+        If you are using the helper without <classname>Zend_View</classname> then you can
+        also use it directly.
+    </para>
+
+    <example xml:id="zend.view.helpers.initial.translator.directly"><info><title>Direct usage</title></info>
+
+
+        <programlisting language="php"><![CDATA[
+// our example adapter
+$adapter = new Zend_Translator(
+    array(
+        'adapter' => 'array',
+        'content' => array('simple' => 'einfach'),
+        'locale'  => 'de'
+    )
+);
+
+// initiate the adapter
+$translate = new Zend_View_Helper_Translator($adapter);
+print $translate->translate('simple'); // this returns 'einfach'
+]]></programlisting>
+
+        <para>
+            You would use this way if you are not working with
+            <classname>Zend_View</classname> and need to create translated output.
+        </para>
+    </example>
+
+    <para>
+        As already seen, the <methodname>translate()</methodname> method is used to return
+        the translation. Just call it with the needed messageid of your
+        translation adapter. But it can also replace parameters within the
+        translation string. Therefore, it accepts variable parameters in two ways:
+        either as a list of parameters, or as an array of parameters. As examples:
+    </para>
+
+    <example xml:id="zend.view.helpers.initial.translator.parameter"><info><title>Single parameter</title></info>
+
+
+        <para>
+            To use a single parameter just add it to the method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// within your view
+$date = "Monday";
+$this->translate("Today is %1\$s", $date);
+// could return 'Heute ist Monday'
+]]></programlisting>
+    </example>
+
+    <note>
+        <para>
+            Keep in mind that if you are using parameters which are also text,
+            you may also need to translate these parameters.
+        </para>
+    </note>
+
+    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><info><title>List of parameters</title></info>
+
+
+        <para>
+            Or use a list of parameters and add it to the method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// within your view
+$date = "Monday";
+$month = "April";
+$time = "11:20:55";
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
+                 $date,
+                 $month,
+                 $time);
+// Could return 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55'
+]]></programlisting>
+    </example>
+
+    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><info><title>Array of parameters</title></info>
+
+
+        <para>
+            Or use an array of parameters and add it to the method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// within your view
+$date = array("Monday", "April", "11:20:55");
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
+// Could return 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55'
+]]></programlisting>
+    </example>
+
+    <para>
+        Sometimes it is necessary to change the locale of the translation. This
+        can be done either dynamically per translation or statically for all
+        following translations. And you can use it with both a parameter list
+        and an array of parameters. In both cases the locale must be given as
+        the last single parameter.
+    </para>
+
+    <example xml:id="zend.view.helpers.initial.translator.dynamic"><info><title>Change locale dynamically</title></info>
+
+
+        <programlisting language="php"><![CDATA[
+// within your view
+$date = array("Monday", "April", "11:20:55");
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
+]]></programlisting>
+    </example>
+
+    <para>
+        This example returns the Italian translation for the messageid. But it
+        will only be used once. The next translation will use the locale from
+        the adapter. Normally you will set the desired locale within the
+        translation adapter before you add it to the registry. But you can also
+        set the locale from within the helper:
+    </para>
+
+    <example xml:id="zend.view.helpers.initial.translator.static"><info><title>Change locale statically</title></info>
+
+
+        <programlisting language="php"><![CDATA[
+// within your view
+$date = array("Monday", "April", "11:20:55");
+$this->translate()->setLocale('it');
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
+]]></programlisting>
+    </example>
+
+    <para>
+        The above example sets <emphasis>'it'</emphasis> as the new default locale which
+        will be used for all further translations.
+    </para>
+
+    <para>
+        Of course there is also a <methodname>getLocale()</methodname> method to get the
+        currently set locale.
+    </para>
+
+    <example xml:id="zend.view.helpers.initial.translator.getlocale"><info><title>Get the currently set locale</title></info>
+
+
+        <programlisting language="php"><![CDATA[
+// within your view
+$date = array("Monday", "April", "11:20:55");
+
+// returns 'de' as set default locale from our above examples
+$this->translate()->getLocale();
+
+$this->translate()->setLocale('it');
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
+
+// returns 'it' as new set default locale
+$this->translate()->getLocale();
+]]></programlisting>
+    </example>
+</section>

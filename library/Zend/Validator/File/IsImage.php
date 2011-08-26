@@ -110,6 +110,7 @@ class IsImage extends MimeType
             'image/x-niff',
             'image/x-pict',
             'image/x-pcx',
+            'image/x-png',
             'image/x-portable-anymap',
             'image/x-portable-bitmap',
             'image/x-portable-greymap',
@@ -154,7 +155,16 @@ class IsImage extends MimeType
      */
     protected function _throw($file, $errorType)
     {
-        $this->_value = $file['name'];
+        if ($file !== null) {
+            if (is_array($file)) {
+                if(array_key_exists('name', $file)) {
+                    $this->_value = basename($file['name']);
+                }
+            } else if (is_string($file)) {
+                $this->_value = basename($file);
+            }
+        }
+
         switch($errorType) {
             case MimeType::FALSE_TYPE :
                 $errorType = self::FALSE_TYPE;

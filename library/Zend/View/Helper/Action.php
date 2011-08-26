@@ -129,7 +129,7 @@ class Action extends AbstractHelper
         if ($action == null || $controller == null) {
             throw new \InvalidArgumentException('Action: missing argument. $action and $controller are required in action($action, $controller, $module = null, array $params = array())');
         }
-        
+
         $this->resetObjects();
         if (null === $module) {
             $module = $this->defaultModule;
@@ -167,7 +167,7 @@ class Action extends AbstractHelper
     /**
      * Clone the current View
      *
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      */
     public function cloneView()
     {

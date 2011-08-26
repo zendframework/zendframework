@@ -424,7 +424,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             </para>
 
             <para>
-                もっとよいやりかたは、<classname>Zend_Translate_Adapter</classname>
+                もっとよいやりかたは、<classname>Zend_Translator_Adapter</classname>
                 をフォームで使用することでしょう。エラーコードは、
                 デフォルトのエラーデコレータが自動的にアダプタに渡します。
                 そこで、バリデータのエラーコードに対応する翻訳文字列を設定すればいいのです。
@@ -1185,7 +1185,7 @@ $element->class = 'text;
 
             <listitem><para>I18n</para>
                 <itemizedlist>
-                    <listitem><para><methodname>setTranslator(Zend_Translate_Adapter $translator = null)</methodname></para></listitem>
+                    <listitem><para><methodname>setTranslator(Zend_Translator_Adapter $translator = null)</methodname></para></listitem>
                     <listitem><para><methodname>getTranslator()</methodname></para></listitem>
                     <listitem><para><methodname>setDisableTranslator($flag)</methodname></para></listitem>
                     <listitem><para><methodname>translatorIsDisabled()</methodname></para></listitem>

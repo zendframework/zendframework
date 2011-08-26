@@ -115,7 +115,7 @@ class CoreTest extends \PHPUnit_Framework_TestCase
         $this->_instance->setBackend($backend);
         $log = $backend->getLastLog();
         $this->assertEquals('setDirectives', $log['methodName']);
-        $this->assertType('array', $log['args'][0]);
+        $this->assertInternalType('array', $log['args'][0]);
     }
 
     public function testSetOptionCorrectCall()

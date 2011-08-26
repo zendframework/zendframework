@@ -58,13 +58,13 @@ class IbanTest extends \PHPUnit_Framework_TestCase
     public function testSettingAndGettingLocale()
     {
         $validator = new Validator\Iban();
-        
+
         $validator->setLocale('de_DE');
         $this->assertEquals('de_DE', $validator->getLocale());
-        
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'IBAN validation');
         $validator->setLocale('de_QA');
-        
+
     }
 
     public function testInstanceWithLocale()
@@ -77,5 +77,14 @@ class IbanTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator\Iban('en_US');
         $this->assertFalse($validator->isValid('AT611904300234573201'));
+    }
+
+    /**
+     * @group ZF-10556
+     */
+    public function testIbanDetectionWithoutLocale()
+    {
+        $validator = new Validator\Iban(false);
+        $this->assertTrue($validator->isValid('AT611904300234573201'));
     }
 }

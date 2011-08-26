@@ -42,9 +42,16 @@ namespace ZendTest\Queue;
  */
 class Queue1Test extends QueueBaseTest
 {
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     protected function setUp()
     {
-        date_default_timezone_set('GMT');
+        $this->_originaltimezone = date_default_timezone_get();
+    	date_default_timezone_set('GMT');
 
         // Test Zend_Config
         $this->config = array(
@@ -52,5 +59,13 @@ class Queue1Test extends QueueBaseTest
         );
 
         $this->queue = new \Zend\Queue\Queue('ArrayAdapter', $this->config);
+    }
+
+    /**
+     * Teardown environment
+     */
+    public function tearDown()
+    {
+        date_default_timezone_set($this->_originaltimezone);
     }
 }

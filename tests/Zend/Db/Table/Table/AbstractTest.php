@@ -714,7 +714,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
             'product_id' => 1
         );
         $primary = $table->insert($row);
-        $this->assertType('array', $primary);
+        $this->assertInternalType('array', $primary);
         $this->assertEquals(2, count($primary));
         $this->assertEquals(array(2, 1), array_values($primary));
     }
@@ -1500,7 +1500,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testSerialiseTable()
     {
         $table = $this->_table['products'];
-        $this->assertType('string', serialize($table));
+        $this->assertInternalType('string', serialize($table));
     }
 
     /**

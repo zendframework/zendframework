@@ -35,7 +35,7 @@ use Zend\Controller\Request\AbstractRequest,
  * @uses       \Zend\Controller\Exception
  * @uses       \Zend\Controller\Front
  * @uses       \Zend\View\View
- * @uses       \Zend\View\ViewEngine
+ * @uses       \Zend\View\Renderer
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -44,7 +44,7 @@ use Zend\Controller\Request\AbstractRequest,
 abstract class Action implements ActionController
 {
     /**
-     * Helper broker instance 
+     * Helper broker instance
      * @var Broker
      */
     protected $broker;
@@ -94,7 +94,7 @@ abstract class Action implements ActionController
 
     /**
      * View object
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     public $view;
 
@@ -133,8 +133,8 @@ abstract class Action implements ActionController
 
     /**
      * Set Helper Broker instance
-     * 
-     * @param  Broker $broker 
+     *
+     * @param  Broker $broker
      * @return Action
      */
     public function setHelperBroker(Broker $broker)
@@ -170,7 +170,7 @@ abstract class Action implements ActionController
      * - helper path = views/helpers/
      * - filter path = views/filters/
      *
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      * @throws \Zend\Controller\Exception if base view directory does not exist
      */
     public function initView()

@@ -125,7 +125,7 @@ class Layout
     protected $_pluginClass = 'Zend\Layout\Controller\Plugin\Layout';
 
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -510,7 +510,7 @@ class Layout
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Layout\Layout
      */
     public function setView(\Zend\View\Renderer $view)
@@ -569,7 +569,7 @@ class Layout
      * If no view object currently set, retrieves it from the ViewRenderer.
      *
      * @todo Set inflector from view renderer at same time
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      */
     public function getView()
     {

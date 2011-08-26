@@ -508,6 +508,44 @@ EOT;
     }
 */
 
+    /**
+     *  @group ZF-3257
+     */
+    public function testUsingXML8() {
+
+        // Set the XML contents that will be tested here.
+        $xmlStringContents = <<<EOT
+<?xml version="1.0"?>
+<a><b id="foo" />bar</a>
+
+EOT;
+
+        // There are not going to be any XML attributes in this test XML.
+        // Hence, set the flag to ignore XML attributes.
+        $ignoreXmlAttributes = false;
+        $jsonContents = "";
+        $ex = null;
+
+        // Convert XML to JSON now.
+        // fromXml function simply takes a String containing XML contents as input.
+        try {
+            $jsonContents = Json\Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
+        } catch (Exception $ex) {
+            ;
+        }
+        $this->assertSame($ex, null, "Zend_JSON::fromXml returned an exception.");
+
+        // Convert the JSON string into a PHP array.
+        $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
+        // Test if it is not a NULL object.
+        $this->assertNotNull($phpArray, "JSON result for XML input 1 is NULL");
+
+        $this->assertSame("bar", $phpArray['a']['@text'], "The text element of a is not correct");
+        $this->assertSame("foo", $phpArray['a']['b']['@attributes']['id'], "The id attribute of b is not correct");
+
+    }
+
+
 }
 
 

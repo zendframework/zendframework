@@ -196,6 +196,99 @@ class Json
         }
         return $value;
     }
+    /**
+     * Return the value of an XML attribute text or the text between
+     * the XML tags
+     *
+     * In order to allow Zend_Json_Expr from xml, we check if the node
+     * matchs the pattern that try to detect if it is a new Zend_Json_Expr
+     * if it matches, we return a new Zend_Json_Expr instead of a text node
+     *
+     * @param SimpleXMLElement $simpleXmlElementObject
+     * @return Zend_Json_Expr|string
+     */
+    protected static function _getXmlValue($simpleXmlElementObject) {
+        $pattern = '/^[\s]*new Zend_Json_Expr[\s]*\([\s]*[\"\']{1}(.*)[\"\']{1}[\s]*\)[\s]*$/';
+        $matchings = array();
+        $match = preg_match ($pattern, $simpleXmlElementObject, $matchings);
+        if ($match) {
+            return new Expr($matchings[1]);
+        } else {
+            return (trim(strval($simpleXmlElementObject)));
+        }
+    }
+    /**
+     * _processXml - Contains the logic for xml2json
+     *
+     * The logic in this function is a recursive one.
+     *
+     * The main caller of this function (i.e. fromXml) needs to provide
+     * only the first two parameters i.e. the SimpleXMLElement object and
+     * the flag for ignoring or not ignoring XML attributes. The third parameter
+     * will be used internally within this function during the recursive calls.
+     *
+     * This function converts the SimpleXMLElement object into a PHP array by
+     * calling a recursive (protected static) function in this class. Once all
+     * the XML elements are stored in the PHP array, it is returned to the caller.
+     *
+     * Throws a Zend\Json\RecursionException if the XML tree is deeper than the allowed limit.
+     *
+     * @param SimpleXMLElement $simpleXmlElementObject
+     * @param boolean $ignoreXmlAttributes
+     * @param integer $recursionDepth
+     * @return array
+     */
+    protected static function _processXml ($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth=0) {
+        // Keep an eye on how deeply we are involved in recursion.
+        if ($recursionDepth > self::$maxRecursionDepthAllowed) {
+            // XML tree is too deep. Exit now by throwing an exception.
+            throw new RecursionException(
+                "Function _processXml exceeded the allowed recursion depth of " .
+                self::$maxRecursionDepthAllowed);
+        } // End of if ($recursionDepth > self::$maxRecursionDepthAllowed)
+        $childrens= $simpleXmlElementObject->children();
+        $name= $simpleXmlElementObject->getName();
+        $value= self::_getXmlValue($simpleXmlElementObject);
+        $attributes= (array) $simpleXmlElementObject->attributes();
+        if (count($childrens)==0) {
+            if (!empty($attributes) && !$ignoreXmlAttributes) {
+                foreach ($attributes['@attributes'] as $k => $v) {
+                    $attributes['@attributes'][$k]= self::_getXmlValue($v);
+                }
+                if (!empty($value)) {
+                    $attributes['@text']= $value;
+                } 
+                return array($name => $attributes);
+            } else {
+               return array($name => $value);
+            }
+        } else {
+            $childArray= array();
+            foreach ($childrens as $child) {
+                $childname= $child->getName();
+                $element= self::_processXml($child,$ignoreXmlAttributes,$recursionDepth+1);
+                if (array_key_exists($childname, $childArray)) {
+                    if (empty($subChild[$childname])) {
+                        $childArray[$childname]=array($childArray[$childname]);
+                        $subChild[$childname]=true;
+                    }
+                    $childArray[$childname][]= $element[$childname];
+                } else {
+                    $childArray[$childname]= $element[$childname];
+                }
+            }
+            if (!empty($attributes) && !$ignoreXmlAttributes) {
+                foreach ($attributes['@attributes'] as $k => $v) {
+                    $attributes['@attributes'][$k]= self::_getXmlValue($v);
+                }
+                $childArray['@attributes']= $attributes['@attributes'];
+            }
+            if (!empty($value)) {
+                $childArray['@text']= $value;
+            }
+            return array($name => $childArray);
+        }
+    }
 
     /**
      * fromXml - Converts XML to JSON
@@ -242,110 +335,6 @@ class Json
         return($jsonStringOutput);
     }
 
-    /**
-     * _processXml - Contains the logic for xml2json
-     *
-     * The logic in this function is a recursive one.
-     *
-     * The main caller of this function (i.e. fromXml) needs to provide
-     * only the first two parameters i.e. the SimpleXMLElement object and
-     * the flag for ignoring or not ignoring XML attributes. The third parameter
-     * will be used internally within this function during the recursive calls.
-     *
-     * This function converts the SimpleXMLElement object into a PHP array by
-     * calling a recursive (protected static) function in this class. Once all
-     * the XML elements are stored in the PHP array, it is returned to the caller.
-     *
-     * @static
-     * @access protected
-     * @param SimpleXMLElement $simpleXmlElementObject XML element to be converted
-     * @param boolean $ignoreXmlAttributes Include or exclude XML attributes in
-     * the xml2json conversion process.
-     * @param int $recursionDepth Current recursion depth of this function
-     * @return mixed - On success, a PHP associative array of traversed XML elements
-     * @throws Zend\Json\Exception\RecursionException if the XML tree is deeper than the allowed limit
-     */
-    protected static function _processXml ($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth=0) {
-        // Keep an eye on how deeply we are involved in recursion.
-        if ($recursionDepth > self::$maxRecursionDepthAllowed) {
-            // XML tree is too deep. Exit now by throwing an exception.
-            throw new RecursionException(
-                "Function _processXml exceeded the allowed recursion depth of " .
-                self::$maxRecursionDepthAllowed);
-        } // End of if ($recursionDepth > self::$maxRecursionDepthAllowed)
-
-        if ($recursionDepth == 0) {
-            // Store the original SimpleXmlElementObject sent by the caller.
-            // We will need it at the very end when we return from here for good.
-            $callerProvidedSimpleXmlElementObject = $simpleXmlElementObject;
-        } // End of if ($recursionDepth == 0)
-
-        if ($simpleXmlElementObject instanceof \SimpleXMLElement) {
-            // Get a copy of the simpleXmlElementObject
-            $copyOfSimpleXmlElementObject = $simpleXmlElementObject;
-            // Get the object variables in the SimpleXmlElement object for us to iterate.
-            $simpleXmlElementObject = get_object_vars($simpleXmlElementObject);
-        } // End of if (get_class($simpleXmlElementObject) == "SimpleXMLElement")
-
-        // It needs to be an array of object variables.
-        if (is_array($simpleXmlElementObject)) {
-            // Initialize a result array.
-            $resultArray = array();
-            // Is the input array size 0? Then, we reached the rare CDATA text if any.
-            if (count($simpleXmlElementObject) <= 0) {
-                // Let us return the lonely CDATA. It could even be
-                // an empty element or just filled with whitespaces.
-                return (trim(strval($copyOfSimpleXmlElementObject)));
-            } // End of if (count($simpleXmlElementObject) <= 0)
-
-            // Let us walk through the child elements now.
-            foreach($simpleXmlElementObject as $key=>$value) {
-                // Check if we need to ignore the XML attributes.
-                // If yes, you can skip processing the XML attributes.
-                // Otherwise, add the XML attributes to the result array.
-                if(($ignoreXmlAttributes == true) && (is_string($key)) && ($key == "@attributes")) {
-                    continue;
-                } // End of if(($ignoreXmlAttributes == true) && ($key == "@attributes"))
-
-                // Let us recursively process the current XML element we just visited.
-                // Increase the recursion depth by one.
-                $recursionDepth++;
-                $resultArray[$key] = self::_processXml ($value, $ignoreXmlAttributes, $recursionDepth);
-
-                // Decrease the recursion depth by one.
-                $recursionDepth--;
-            } // End of foreach($simpleXmlElementObject as $key=>$value) {
-
-            if ($recursionDepth == 0) {
-                // That is it. We are heading to the exit now.
-                // Set the XML root element name as the root [top-level] key of
-                // the associative array that we are going to return to the original
-                // caller of this recursive function.
-                $tempArray = $resultArray;
-                $resultArray = array();
-                $resultArray[$callerProvidedSimpleXmlElementObject->getName()] = $tempArray;
-            } // End of if ($recursionDepth == 0)
-
-            return($resultArray);
-        } else {
-            // We are now looking at either the XML attribute text or
-            // the text between the XML tags.
-
-            // In order to allow Zend_Json_Expr from xml, we check if the node
-            // matchs the pattern that try to detect if it is a new Zend_Json_Expr
-            // if it matches, we return a new Zend_Json_Expr instead of a text node
-            $pattern = '/^[\s]*new Zend_Json_Expr[\s]*\([\s]*[\"\']{1}(.*)[\"\']{1}[\s]*\)[\s]*$/';
-            $matchings = array();
-            $match = preg_match($pattern, $simpleXmlElementObject, $matchings);
-            if ($match) {
-                return new Expr($matchings[1]);
-            } else {
-                return (trim(strval($simpleXmlElementObject)));
-            }
-
-        } // End of if (is_array($simpleXmlElementObject))
-    } // End of function _processXml.
-    
     /**
      * Pretty-print JSON string
      * 

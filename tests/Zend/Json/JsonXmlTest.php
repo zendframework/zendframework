@@ -545,6 +545,80 @@ EOT;
 
     }
 
+    /**
+     * @group ZF-11385
+     * @expectedException Zend\Json\Exception\RecursionException
+     * @dataProvider providerNestingDepthIsHandledProperly
+     */
+    public function testNestingDepthIsHandledProperlyWhenNestingDepthExceedsMaximum($xmlStringContents)
+    {        
+        Json\Json::$maxRecursionDepthAllowed = 1;
+        Json\Json::fromXml($xmlStringContents, true);
+    }
+    
+    /**
+     * @group ZF-11385
+     * @dataProvider providerNestingDepthIsHandledProperly
+     */
+    public function testNestingDepthIsHandledProperlyWhenNestingDepthDoesNotExceedMaximum($xmlStringContents)
+    {   
+        try {
+            Json\Json::$maxRecursionDepthAllowed = 25;
+            $jsonString = Json\Json::fromXml($xmlStringContents, true);
+            $jsonArray = Json\Json::decode($jsonString, Json\Json::TYPE_ARRAY);
+            $this->assertNotNull($jsonArray, "JSON decode result is NULL");
+            $this->assertSame('A', $jsonArray['response']['message_type']['defaults']['close_rules']['after_responses']);
+        } catch ( Zend\Json\Exception\RecursionException $ex ) {
+            $this->fail('Zend_Json::fromXml does not implement recursion check properly');
+        }
+    }
+    
+    /**
+     * XML document provider for ZF-11385 tests
+     * @return array
+     */
+    public static function providerNestingDepthIsHandledProperly()
+    {
+        $xmlStringContents = <<<EOT
+<response>
+	<status>success</status>
+	<description>200 OK</description>
+	<message_type>
+		<system_name>A</system_name>
+		<shortname>B</shortname>
+		<long_name>C</long_name>
+		<as_verb>D</as_verb>
+		<as_noun>E</as_noun>
+		<challenge_phrase>F</challenge_phrase>
+		<recipient_details>G</recipient_details>
+		<sender_details>H</sender_details>
+		<example_text>A</example_text>
+		<short_description>B</short_description>
+		<long_description>C</long_description>
+		<version>D</version>
+		<developer>E</developer>
+		<config_instructions>A</config_instructions>
+		<config_fragment>B</config_fragment>
+		<icon_small>C</icon_small>
+		<icon_medium>D</icon_medium>
+		<icon_large>E</icon_large>
+		<defaults>
+			<close_rules>
+				<after_responses>A</after_responses>
+			</close_rules>
+			<recipient_visibility>B</recipient_visibility>
+			<recipient_invite>C</recipient_invite>
+			<results_visibility>A</results_visibility>
+			<response_visibility>B</response_visibility>
+			<recipient_resubmit>C</recipient_resubmit>
+			<feed_status>D</feed_status>
+		</defaults>
+	</message_type>
+	<execution_time>0.0790269374847</execution_time>	
+</response>
+EOT;
+        return array(array($xmlStringContents));
+    }
 
 }
 

@@ -43,7 +43,7 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->tokenDocument = __DIR__ . '/_files/encryptedtoken.xml';
-        $this->tokenDocument = __DIR__ . '/_files/encryptedtoken2.xml';
+        $this->tokenDocument2 = __DIR__ . '/_files/encryptedtoken2.xml';
         $this->loadXmlDocument();
     }
 
@@ -192,8 +192,8 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
 
     public function testKeyInfoThrowsExceptionOnInvalidInput()
     {
-        $this->setExpectedException('Zend\InfoCard\XML\Exception\RuntimeExcpetion', 'Invalid Data provided to create instance');
-        KeyInfo\Factory::getInstance("<foo/>");
+        $this->setExpectedException('Zend\InfoCard\XML\Exception\RuntimeException', 'Unknown KeyInfo Namespace provided');
+        KeyInfo\Factory::getInstance("<foo xmlns:enc=\"http://notxmlencns.org#foo\"/>");
     }
     
     public function testKeyInfoThrowsExceptionOnInvalidInput2()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.Db"><info><title>Db_RecordExists and Db_NoRecordExists</title></info>
-    
+
 
     <para>
         <classname>Zend_Validate_Db_RecordExists</classname> and
@@ -10,7 +10,7 @@
     </para>
 
     <section xml:id="zend.validate.set.db.options"><info><title>Supported options for Zend_Validate_Db_*</title></info>
-        
+
 
         <para>
             The following options are supported for
@@ -57,7 +57,7 @@
     </section>
 
     <section xml:id="zend.validate.db.basic-usage"><info><title>Basic usage</title></info>
-        
+
 
         <para>
             An example of basic usage of the validators:
@@ -117,7 +117,7 @@ if ($validator->isValid($username)) {
     </section>
 
     <section xml:id="zend.validate.db.excluding-records"><info><title>Excluding records</title></info>
-        
+
 
         <para>
             <classname>Zend_Validate_Db_RecordExists</classname> and
@@ -171,12 +171,12 @@ if ($validator->isValid($username)) {
         </para>
 
         <programlisting language="php"><![CDATA[
-$post_id   = $post->getId();
-$clause    = $db->quoteInto('post_id = ?', $category_id);
+$email     = 'user@example.com';
+$clause    = $db->quoteInto('email = ?', $email);
 $validator = new Zend_Validate_Db_RecordExists(
     array(
-        'table'   => 'posts_categories',
-        'field'   => 'post_id',
+        'table'   => 'users',
+        'field'   => 'username',
         'exclude' => $clause
     )
 );
@@ -193,14 +193,15 @@ if ($validator->isValid($username)) {
 ]]></programlisting>
 
         <para>
-            The above example will check the 'posts_categories' table
-            to ensure that a record with the 'post_id' has a value
-            matching <varname>$category_id</varname>
+            The above example will check the 'users' table
+            to ensure that only a record with both the username
+            <varname>$username</varname> and with the email
+            <varname>$email</varname> is valid.
         </para>
     </section>
 
     <section xml:id="zend.validate.db.database-adapters"><info><title>Database Adapters</title></info>
-        
+
 
         <para>
             You can also specify an adapter. This will allow you to work with
@@ -220,7 +221,7 @@ $validator = new Zend_Validate_Db_RecordExists(
     </section>
 
     <section xml:id="zend.validate.db.database-schemas"><info><title>Database Schemas</title></info>
-        
+
 
         <para>
             You can specify a schema within your database for adapters such as

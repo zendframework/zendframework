@@ -189,7 +189,7 @@ class SqlsrvTest extends AbstractTest
         $errors = $stmt->errorInfo();
         $this->assertEquals(2, count($errors));
         $this->assertEquals($stmt->errorCode(), $errors[0]);
-        $this->assertType('string', $errors[1]);
+        $this->assertInternalType('string', $errors[1]);
     }
 
     public function getDriver()

@@ -60,15 +60,15 @@ class Zend_Service_Technorati_TagResultSetTest extends Zend_Service_Technorati_T
         $object = new Zend_Service_Technorati_TagResultSet($this->dom);
 
         // check counts
-        $this->assertType('integer', $object->totalResults());
+        $this->assertInternalType('integer', $object->totalResults());
         $this->assertEquals(3, $object->totalResults());
-        $this->assertType('integer', $object->totalResultsAvailable());
+        $this->assertInternalType('integer', $object->totalResultsAvailable());
         $this->assertEquals(268877, $object->totalResultsAvailable());
 
         // check properties
-        $this->assertType('integer', $object->getPostsMatched());
+        $this->assertInternalType('integer', $object->getPostsMatched());
         $this->assertEquals(268877, $object->getPostsMatched());
-        $this->assertType('integer', $object->getBlogsMatched());
+        $this->assertInternalType('integer', $object->getBlogsMatched());
         $this->assertEquals(1812, $object->getBlogsMatched());
     }
 

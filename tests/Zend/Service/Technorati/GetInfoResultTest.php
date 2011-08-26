@@ -66,7 +66,7 @@ class Zend_Service_Technorati_GetInfoResultTest extends Zend_Service_Technorati_
 
         // check weblogs
         $weblogs = $object->getWeblogs();
-        $this->assertType('array', $weblogs);
+        $this->assertInternalType('array', $weblogs);
         $this->assertEquals(2, count($weblogs));
         $this->assertType('Zend_Service_Technorati_Weblog', $weblogs[0]);
     }

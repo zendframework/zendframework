@@ -23,6 +23,9 @@
  */
 namespace Zend\Validator\File;
 
+use Zend\Loader,
+    Zend\Validator\Exception;
+
 /**
  * Validator for the sha1 hash of given files
  *
@@ -74,7 +77,7 @@ class Sha1 extends Hash
         } elseif (is_scalar($options)) {
             $options = array('hash1' => $options);
         } elseif (!is_array($options)) {
-            throw new \Zend\Validator\Exception\InvalidArgumentException('Invalid options to validator provided');
+            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         $this->setHash($options);
@@ -157,8 +160,12 @@ class Sha1 extends Hash
      */
     public function isValid($value, $file = null)
     {
+        if ($file === null) {
+            $file = array('name' => basename($value));
+        }
+
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 

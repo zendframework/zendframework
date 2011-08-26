@@ -63,9 +63,9 @@ class Code39Test extends TestCommon
     public function testSetTextWithSpaces()
     {
         $this->_object->setText(' 0123456789 ');
-        $this->assertSame('0123456789', $this->_object->getRawText());
-        $this->assertSame('*0123456789*', $this->_object->getText());
-        $this->assertSame('*0123456789*', $this->_object->getTextToDisplay());
+        $this->assertSame(' 0123456789 ', $this->_object->getRawText());
+        $this->assertSame('* 0123456789 *', $this->_object->getText());
+        $this->assertSame('* 0123456789 *', $this->_object->getTextToDisplay());
     }
 
     public function testSetTextWithChecksum()

@@ -108,6 +108,17 @@ class Code39 extends AbstractObject
     }
 
     /**
+     * Set text to encode
+     * @param string $value
+     * @return Zend_Barcode_Object
+     */
+    public function setText($value)
+    {
+        $this->_text = $value;
+        return $this;
+    }
+
+    /**
      * Retrieve text to display
      * @return string
      */
@@ -147,7 +158,7 @@ class Code39 extends AbstractObject
                 $barcodeTable[] = array((int) $visible, $width, 0, 1);
                 $visible = ! $visible;
             }
-            $barcodeTable[] = array(0 , 1);
+            $barcodeTable[] = array(0 , $this->_barThinWidth);
         }
         return $barcodeTable;
     }

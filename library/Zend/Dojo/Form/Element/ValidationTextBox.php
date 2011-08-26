@@ -133,6 +133,8 @@ class ValidationTextBox extends TextBox
      */
     public function setConstraints(array $constraints)
     {
+        $tmp = $this->getConstraints();
+        $constraints = array_merge($tmp, $constraints);
         array_walk_recursive($constraints, array($this, '_castBoolToString'));
         $this->setDijitParam('constraints', $constraints);
         return $this;

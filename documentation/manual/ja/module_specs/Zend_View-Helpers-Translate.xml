@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translate"><info><title>翻訳ヘルパー</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers.initial.translator"><info><title>翻訳ヘルパー</title></info>
 
     
 
     <para>
         ウェブサイトを複数言語で提供することもよくあります。
         サイト上のコンテンツを翻訳するには、
-        <link linkend="zend.translate.introduction">Zend_Translate</link>
-        を使用します。 <classname>Zend_Translate</classname> をビューと統合するために使用するのが
-        <emphasis>Translate</emphasis> ビューヘルパーです。
+        <link linkend="zend.translator.introduction">Zend_Translator</link>
+        を使用します。 <classname>Zend_Translator</classname> をビューと統合するために使用するのが
+        <emphasis>Translator</emphasis> ビューヘルパーです。
     </para>
 
     <para>
         これ以降のすべての例では、単純は配列翻訳アダプタを使用します。
-        もちろん <classname>Zend_Translate</classname> の任意のインスタンスやお好みの
-        <classname>Zend_Translate_Adapter</classname> のサブクラスを使うことも可能です。
-        <emphasis>Translate</emphasis> ビューヘルパーのインスタンスを作成するにはいくつかの方法があります。
+        もちろん <classname>Zend_Translator</classname> の任意のインスタンスやお好みの
+        <classname>Zend_Translator_Adapter</classname> のサブクラスを使うことも可能です。
+        <emphasis>Translator</emphasis> ビューヘルパーのインスタンスを作成するにはいくつかの方法があります。
     </para>
 
     <itemizedlist>
@@ -37,7 +37,7 @@
     </itemizedlist>
 
     <para>
-        登録済みの <classname>Zend_Translate</classname> のインスタンスを使用する方法をおすすめします。
+        登録済みの <classname>Zend_Translator</classname> のインスタンスを使用する方法をおすすめします。
         アダプタをレジストリに追加する際に、使用するロケールを選択できます。
     </para>
 
@@ -51,27 +51,27 @@
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translate.registered"><info><title>登録済みのインスタンス</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.registered"><info><title>登録済みのインスタンス</title></info>
 
         
 
         <para>
-            登録済みのインスタンスを使用するには、まず <classname>Zend_Translate</classname> あるいは
-            <classname>Zend_Translate_Adapter</classname> のインスタンスを作成し、
+            登録済みのインスタンスを使用するには、まず <classname>Zend_Translator</classname> あるいは
+            <classname>Zend_Translator_Adapter</classname> のインスタンスを作成し、
             それを <classname>Zend_Registry</classname> に登録します。登録する際のキーとして
-            <classname>Zend_Translate</classname> を使用します。
+            <classname>Zend_Translator</classname> を使用します。
         </para>
 
         <programlisting language="php"><![CDATA[
 // サンプルアダプタ
-$adapter = new Zend_Translate(
+$adapter = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array('simple' => 'einfach'),
         'locale'  => 'de'
     )
 );
-Zend_Registry::set('Zend_Translate', $adapter);
+Zend_Registry::set('Zend_Translator', $adapter);
 
 // ビューの中で
 echo $this->translate('simple');
@@ -85,20 +85,20 @@ echo $this->translate('simple');
         ビューの中でインスタンスを作成し、ヘルパーのインスタンスは後で作成することもできます。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translate.afterwards"><info><title>ビューの中で</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.afterwards"><info><title>ビューの中で</title></info>
 
         
 
         <para>
-            流れるようなインターフェイスで <classname>Zend_Translate</classname> あるいは
-            <classname>Zend_Translate_Adapter</classname> のインスタンスを作成するには、
+            流れるようなインターフェイスで <classname>Zend_Translator</classname> あるいは
+            <classname>Zend_Translator_Adapter</classname> のインスタンスを作成するには、
             パラメータを指定せずにヘルパーをコールし、それから
             <methodname>setTranslator()</methodname> メソッドをコールします。
         </para>
 
         <programlisting language="php"><![CDATA[
 // ビューの中で
-$adapter = new Zend_Translate(
+$adapter = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array('simple' => 'einfach'),
@@ -116,13 +116,13 @@ $this->translate()->setTranslator($adapter)->translate('simple');
         ヘルパーを直接使用することもできます。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translate.directly"><info><title>直接使用する方法</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.directly"><info><title>直接使用する方法</title></info>
 
         
 
         <programlisting language="php"><![CDATA[
 // サンプルアダプタ
-$adapter = new Zend_Translate(
+$adapter = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array('simple' => 'einfach'),
@@ -131,7 +131,7 @@ $adapter = new Zend_Translate(
 );
 
 // アダプタを初期化します
-$translate = new Zend_View_Helper_Translate($adapter);
+$translate = new Zend_View_Helper_Translator($adapter);
 print $translate->translate('simple'); // これは 'einfach' を返します
 ]]></programlisting>
 
@@ -151,7 +151,7 @@ print $translate->translate('simple'); // これは 'einfach' を返します
         たとえば次のようになります。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translate.parameter"><info><title>単一のパラメータ</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameter"><info><title>単一のパラメータ</title></info>
 
         
 
@@ -175,7 +175,7 @@ $this->translate("Today is %1\$s", $date);
         </para>
     </note>
 
-    <example xml:id="zend.view.helpers.initial.translate.parameterlist"><info><title>パラメータのリスト</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterlist"><info><title>パラメータのリスト</title></info>
 
         
 
@@ -197,7 +197,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 
     </example>
 
-    <example xml:id="zend.view.helpers.initial.translate.parameterarray"><info><title>パラメータの配列</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.parameterarray"><info><title>パラメータの配列</title></info>
 
         
 
@@ -222,7 +222,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         どひらの形式の場合も、ロケールは最後のパラメータとして指定します。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translate.dynamic"><info><title>ロケールの動的な変更</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.dynamic"><info><title>ロケールの動的な変更</title></info>
 
         
 
@@ -242,7 +242,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
         しかし、ロケールの設定をヘルパー内で行うこともできます。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translate.static"><info><title>ロケールの静的な変更</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.static"><info><title>ロケールの静的な変更</title></info>
 
         
 
@@ -265,7 +265,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         <methodname>getLocale()</methodname> もあります。
     </para>
 
-    <example xml:id="zend.view.helpers.initial.translate.getlocale"><info><title>現在設定されているロケールの取得</title></info>
+    <example xml:id="zend.view.helpers.initial.translator.getlocale"><info><title>現在設定されているロケールの取得</title></info>
 
         
 

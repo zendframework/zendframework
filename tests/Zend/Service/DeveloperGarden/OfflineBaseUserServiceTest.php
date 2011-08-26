@@ -65,7 +65,7 @@ class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Fr
     public function testGetModuleIds()
     {
         $ids = $this->service->getModuleIds();
-        $this->assertType('array', $ids);
+        $this->assertInternalType('array', $ids);
         $this->assertNotNull($ids);
         $this->assertGreaterThan(0, count($ids));
     }
@@ -120,7 +120,7 @@ class Zend_Service_DeveloperGarden_OfflineBaseUserServiceTest extends PHPUnit_Fr
     public function testModuleIds()
     {
         $moduleIds = $this->service->getModuleIds();
-        $this->assertType('array', $moduleIds);
+        $this->assertInternalType('array', $moduleIds);
         $this->assertEquals(10, count($moduleIds));
     }
 

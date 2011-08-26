@@ -48,7 +48,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     public function testDbConstructor()
     {
         $db = new TestAsset\StaticAdapter( array('dbname' => 'dummy') );
-        $this->assertType('Zend\Db\Adapter\AbstractAdapter', $db);
+        $this->assertInstanceOf('Zend\Db\Adapter\AbstractAdapter', $db);
         $this->assertEquals('dummy', $db->config['dbname']);
     }
 
@@ -77,7 +77,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         );
         $config1 = new Config\Config($configData1);
         $db = new TestAsset\StaticAdapter($config1->params);
-        $this->assertType('Zend\Db\Adapter\AbstractAdapter', $db);
+        $this->assertInstanceOf('Zend\Db\Adapter\AbstractAdapter', $db);
         $this->assertEquals('dummy', $db->config['dbname']);
     }
 
@@ -85,9 +85,9 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Forcing autoloader invalidates this.');
         $db = Db\Db::factory('StaticAdapter', array('dbname' => 'dummy') );
-        $this->assertType('Zend\Db\Adapter\AbstractAdapter', $db);
+        $this->assertInstanceOf('Zend\Db\Adapter\AbstractAdapter', $db);
         $this->assertTrue(class_exists('ZendTest\Db\Adapter\TestAsset\StaticAdapter'));
-        $this->assertType('ZendTest\Db\Adapter\TestAsset\StaticAdapter', $db);
+        $this->assertInstanceOf('ZendTest\Db\Adapter\TestAsset\StaticAdapter', $db);
         $this->assertEquals('dummy', $db->config['dbname']);
     }
 
@@ -100,11 +100,11 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             $this->fail('Caught exception of type '.get_class($e).' where none was expected: '.$e->getMessage());
         }
         
-        $this->assertType('Zend\Db\Adapter\AbstractAdapter', $db);
+        $this->assertInstanceOf('Zend\Db\Adapter\AbstractAdapter', $db);
         $this->assertTrue(class_exists('ZendTest\Db\Adapter\TestAsset\StaticAdapter'));
-        $this->assertType('ZendTest\Db\Adapter\TestAsset\StaticAdapter', $db);
+        $this->assertInstanceOf('ZendTest\Db\Adapter\TestAsset\StaticAdapter', $db);
         $this->assertTrue(class_exists('ZendTest\Db\Adapter\TestAsset\Testnamespace\StaticAdapter'));
-        $this->assertType('ZendTest\Db\Adapter\TestAsset\Testnamespace\StaticAdapter', $db);
+        $this->assertInstanceOf('ZendTest\Db\Adapter\TestAsset\Testnamespace\StaticAdapter', $db);
     }
 
     public function testDbFactoryAlternateNamespaceExceptionInvalidAdapter()
@@ -114,7 +114,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             $db = Db\Db::factory('Version', array('dbname' => 'dummy', 'adapterNamespace' => 'Zend'));
             $this->fail('Expected to catch Zend_Db_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Exception', $e,
                 'Expected exception of type Zend_Db_Exception, got '.get_class($e));
             $this->assertEquals("Adapter class 'Zend\Version' does not extend Zend\Db\Adapter\AbstractAdapter", $e->getMessage());
         }
@@ -126,7 +126,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             $db = Db\Db::factory(null);
             $this->fail('Expected to catch Zend_Db_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Exception', $e,
                 'Expected exception of type Zend_Db_Exception, got '.get_class($e));
             $this->assertEquals($e->getMessage(), 'Adapter name must be specified in a string');
         }
@@ -170,7 +170,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             $db = Db\Db::factory('StaticAdapter', array());
             $this->fail('Expected to catch Zend_Db_Adapter_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend_Db_Adapter_Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Adapter\Exception', $e,
                 'Expected exception of type Zend_Db_Adapter_Exception, got '.get_class($e));
             $this->assertEquals("Configuration must have a key for 'dbname' that names the database instance", $e->getMessage());
         }
@@ -187,7 +187,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         );
         $config1 = new Config\Config($configData1);
         $db = Db\Db::factory($config1);
-        $this->assertType('ZendTest\Db\Adapter\TestAsset\StaticAdapter', $db);
+        $this->assertInstanceOf('ZendTest\Db\Adapter\TestAsset\StaticAdapter', $db);
         $this->assertEquals('dummy', $db->config['dbname']);
     }
 
@@ -204,7 +204,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             $db = Db\Db::factory($config1);
             $this->fail('Expected to catch Zend_Db_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend_Db_Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Exception', $e,
                 'Expected exception of type Zend_Db_Exception, got '.get_class($e));
             $this->assertEquals($e->getMessage(), 'Adapter name must be specified in a string');
         }
@@ -224,7 +224,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         );
         $config1 = new Config\Config($configData1);
         $db = Db\Db::factory($config1, $configData2);
-        $this->assertType('Zend_Db_Adapter_Static', $db);
+        $this->assertInstanceOf('Zend_Db_Adapter_Static', $db);
         // second arg should be ignored
         $this->assertEquals('dummy', $db->config['dbname']);
     }
@@ -244,7 +244,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $config1 = new Config\Config($configData1);
         $config2 = new Config\Config($configData2);
         $db = Db\Db::factory($config1, $config2);
-        $this->assertType('Zend_Db_Adapter_Static', $db);
+        $this->assertInstanceOf('Zend_Db_Adapter_Static', $db);
         // second arg should be ignored
         $this->assertEquals('dummy', $db->config['dbname']);
     }
@@ -253,14 +253,14 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     {
         $db = Db\Db::factory('StaticAdapter', array('dbname' => 'dummy', 'adapterNamespace' => '\ZendTest\Db\Adapter\TestAsset'));
         $conn = $db->getConnection();
-        $this->assertType('\ZendTest\Db\Adapter\TestAsset\StaticAdapter', $conn);
+        $this->assertInstanceOf('\ZendTest\Db\Adapter\TestAsset\StaticAdapter', $conn);
     }
 
     public function testDbGetFetchMode()
     {
         $db = Db\Db::factory('StaticAdapter', array('dbname' => 'dummy', 'adapterNamespace' => '\ZendTest\Db\Adapter\TestAsset'));
         $mode = $db->getFetchMode();
-        $this->assertType('integer', $mode);
+        $this->assertInternalType('integer', $mode);
     }
 
     /**
@@ -323,7 +323,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->assertType('ZendTest\Db\Adapter\TestAsset\Test\MyCompany2\Dbadapter', $adapter);
+        $this->assertInstanceOf('ZendTest\Db\Adapter\TestAsset\Test\MyCompany2\Dbadapter', $adapter);
     }
 
     /**

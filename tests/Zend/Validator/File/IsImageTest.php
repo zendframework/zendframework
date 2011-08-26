@@ -176,4 +176,15 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\IsImage();
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertTrue(array_key_exists('fileIsImageNotReadable', $validator->getMessages()));
+        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+    }
 }

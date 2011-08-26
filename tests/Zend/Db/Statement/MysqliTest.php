@@ -49,7 +49,7 @@ class MySQLiTest extends AbstractTest
         $stmt = $this->_db->prepare("DELETE FROM $products WHERE $product_id = 1");
 
         $n = $stmt->rowCount();
-        $this->assertType('integer', $n);
+        $this->assertInternalType('integer', $n);
         $this->assertEquals(-1, $n, 'Expecting row count to be -1 before executing query');
 
         $stmt->execute();
@@ -57,7 +57,7 @@ class MySQLiTest extends AbstractTest
         $n = $stmt->rowCount();
         $stmt->closeCursor();
 
-        $this->assertType('integer', $n);
+        $this->assertInternalType('integer', $n);
         $this->assertEquals(1, $n, 'Expected row count to be one after executing query');
     }
 
@@ -124,7 +124,7 @@ class MySQLiTest extends AbstractTest
             $stmt = $this->_db->query($sql);
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Exception $e) {
-            $this->assertType('int', $e->getCode());
+            $this->assertInternalType('integer', $e->getCode());
         }
     }
 
@@ -184,7 +184,7 @@ class MySQLiTest extends AbstractTest
         	$this->fail('Bounding params failed: ' . $e->getMessage());
         }
         $result = $stmt->fetch();
-        $this->assertType('array', $result);
+        $this->assertInternalType('array', $result);
         $this->assertEquals(5, count($result));
         $this->assertEquals(1, $result['object_id']);
         $this->assertEquals(1, $result['object_type']);

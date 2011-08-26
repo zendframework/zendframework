@@ -487,9 +487,9 @@
                         <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/zh/ref.xml.php"><code>xml</code></link></entry>
                         <entry>依赖</entry>
                         <entry>
-                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Qt</code></link>,
-                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Tmx</code></link>,
-                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Xliff</code></link>
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Qt</code></link>,
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Tmx</code></link>,
+                            <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Xliff</code></link>
                         </entry>
                     </row>
                     <row>
@@ -887,12 +887,12 @@
                         </entry>
                     </row>
                     <row>
-                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.html"><code>Zend_Translate</code></link></entry>
+                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.html"><code>Zend_Translator</code></link></entry>
                         <entry>
                             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/zh/ref.xml.php"><code>xml</code></link>
-                            ( <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Qt</code></link> / 依赖 )
-                            ( <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Tmx</code></link> / 依赖 )
-                            ( <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Xliff</code></link> / 依赖 )
+                            ( <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Qt</code></link> / 依赖 )
+                            ( <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Tmx</code></link> / 依赖 )
+                            ( <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Xliff</code></link> / 依赖 )
                         </entry>
                     </row>
                     <row>

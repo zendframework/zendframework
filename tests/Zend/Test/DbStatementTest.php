@@ -147,7 +147,7 @@ class DbStatementTest extends \PHPUnit_Framework_TestCase
         $stmt->append($row);
 
         $object = $stmt->fetchObject();
-        $this->assertType('stdClass', $object);
+        $this->assertInternalType('object', $object);
         $this->assertEquals('bar', $object->foo);
         $this->assertEquals('baz', $object->bar);
     }

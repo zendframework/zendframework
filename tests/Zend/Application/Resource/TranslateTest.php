@@ -23,7 +23,7 @@ namespace ZendTest\Application\Resource;
 
 use Zend\Loader\Autoloader,
     Zend\Application,
-    Zend\Application\Resource\Translate as TranslateResource,
+    Zend\Application\Resource\Translator as TranslateResource,
     Zend\Translator\Translator,
     Zend\Registry;
 
@@ -35,7 +35,7 @@ use Zend\Loader\Autoloader,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class TranslateTest extends \PHPUnit_Framework_TestCase
+class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
     private $_translationOptions = array('data' => array(
         'message1' => 'message1',
@@ -76,8 +76,8 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $translate = $resource->getTranslate();
-        $this->assertTrue(Registry::isRegistered('Zend_Translate'));
-        $this->assertSame(Registry::get('Zend_Translate'), $translate);
+        $this->assertTrue(Registry::isRegistered('Zend_Translator'));
+        $this->assertSame(Registry::get('Zend_Translator'), $translate);
     }
 
     public function testResourceThrowsExceptionWithoutData()
@@ -97,7 +97,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
                                           array('data' => array('message4' => 'bericht4')));
 
         $translate = new \Zend\Translator\Translator(\Zend\Translator\Translator::AN_ARRAY, $options1);
-        Registry::set('Zend_Translate', $translate);
+        Registry::set('Zend_Translator', $translate);
 
         $resource = new TranslateResource($options2);
 
@@ -137,7 +137,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
 
-        $this->assertType('Zend\Cache\Frontend\Core', Translator::getCache());
+        $this->assertInstanceOf('Zend\Cache\Frontend\Core', Translator::getCache());
         Translator::clearCache();
     }
 }

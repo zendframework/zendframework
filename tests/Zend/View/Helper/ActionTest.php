@@ -239,7 +239,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     {
         $value = $this->helper->direct('bar', 'foo', 'foo');
         $this->assertContains('In foo module, Foo_FooController::barAction()', $value);
-        $this->assertNull($this->view->bar);
+        $this->assertNull($this->view->vars()->bar);
     }
 
     public function testNestingActionsDoesNotBreakPlaceholderHelpers()

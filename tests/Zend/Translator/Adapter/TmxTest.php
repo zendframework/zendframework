@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -29,7 +29,7 @@ use Zend\Translator;
 use Zend\Locale;
 
 /**
- * Zend_Translate_Adapter_Tmx
+ * Zend_Translator_Adapter_Tmx
  */
 
 /**
@@ -38,11 +38,11 @@ use Zend\Locale;
 
 /**
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
+ * @group      Zend_Translator
  */
 class TmxTest extends \PHPUnit_Framework_TestCase
 {

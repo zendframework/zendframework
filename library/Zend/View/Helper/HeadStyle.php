@@ -324,7 +324,7 @@ class HeadStyle extends Placeholder\Container\Standalone
         $attrString = '';
         if (!empty($item->attributes)) {
             $enc = 'UTF-8';
-            if ($this->view instanceof View\ViewEngine
+            if ($this->view instanceof View\Renderer
                 && method_exists($this->view, 'getEncoding')
             ) {
                 $enc = $this->view->getEncoding();

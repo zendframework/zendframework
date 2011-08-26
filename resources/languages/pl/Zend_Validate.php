@@ -13,15 +13,14 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
- * @subpackage Ressource
+ * @package    Zend_Translator
+ * @subpackage Resource
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id:$
  */
 
 /**
- * EN-Revision: 21759
+ * EN-Revision: 25.Jul.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -77,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Podana wartość nie jest ciągiem znaków",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' nie jest poprawnym adresem email w formacie nazwa@serwer",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "Email '%value%' zawiera niepoprawną nazwę serwera '%hostname%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' nie jest poprawnym adresem email w formacie nazwa@serwer",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "Email '%value%' zawiera niepoprawną nazwę serwera '%hostname%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "Serwer '%hostname%' nie posiada poprawnie zdefiniowanego rekordu MX dla adresu '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' nie rutowalnym segmentem sieci. Email '%value%' nie powinien być wykrywany z sieci publiczej",
     "'%localPart%' can not be matched against dot-atom format" => "Nazwa '%localPart%' nie jest w formacie dot-atom",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' nie jest w formacie quoted-string",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' nie jest poprawną nazwą",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' nie jest poprawną nazwą",
     "'%value%' exceeds the allowed length" => "Wartość '%value%' przekroczyła dozwoloną długość",
 
     // Zend_Validate_File_Count
@@ -224,7 +223,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given. String or integer expected" => "Podana wartość powinna być ciągiem znaków lub liczbą całkowitą",
-    "'%value%' is no valid ISBN number"  => "'%value%' nie jest poprawnym ISBN",
+    "'%value%' is not a valid ISBN number"  => "'%value%' nie jest poprawnym ISBN",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' nie jest mniejsze niż '%max%'",
@@ -243,19 +242,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Wystąpił błąd podczas dopasowania wyrażenia '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' nie jest poprawną wartością changefreq",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' nie jest poprawną wartością changefreq",
     "Invalid type given. String expected" => "Podana wartość nie jest ciągiem znaków",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' nie jest poprawną wartością lastmod",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' nie jest poprawną wartością lastmod",
     "Invalid type given. String expected" => "Podana wartość nie jest ciągiem znaków",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' nie jest poprawną lokalizacją mapy strony",
+    "'%value%' is not a valid sitemap location" => "'%value%' nie jest poprawną lokalizacją mapy strony",
     "Invalid type given. String expected" => "Podana wartość nie jest ciągiem znaków",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' nie jest poprawną wartością priorytetu",
+    "'%value%' is not a valid sitemap priority" => "'%value%' nie jest poprawną wartością priorytetu",
     "Invalid type given. Numeric string, integer or float expected" => "Podana wartość powinna być ciągiem znaków, liczbą całkowitą lub liczbą zmiennoprzecinkową",
 
     // Zend_Validate_StringLength

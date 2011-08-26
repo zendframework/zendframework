@@ -38,18 +38,6 @@ class StripTags extends AbstractFilter
     const UNIQUE_ID_PREFIX = '__Zend_Filter_StripTags__';
 
     /**
-     * Whether comments are allowed
-     *
-     * If false (the default), then comments are removed from the input string.
-     *
-     * This setting is now deprecated, and ignored internally.
-     *
-     * @deprecated
-     * @var boolean
-     */
-    public $commentsAllowed = false;
-
-    /**
      * Array of allowed tags and allowed attributes for each allowed tag
      *
      * Tags are stored in the array keys, and the array values are themselves
@@ -57,7 +45,7 @@ class StripTags extends AbstractFilter
      *
      * @var array
      */
-    protected $_tagsAllowed = array();
+    protected $tagsAllowed = array();
 
     /**
      * Array of allowed attributes for all allowed tags
@@ -66,7 +54,7 @@ class StripTags extends AbstractFilter
      *
      * @var array
      */
-    protected $_attributesAllowed = array();
+    protected $attributesAllowed = array();
 
     /**
      * Sets the filter options
@@ -104,38 +92,6 @@ class StripTags extends AbstractFilter
         if (array_key_exists('allowAttribs', $options)) {
             $this->setAttributesAllowed($options['allowAttribs']);
         }
-
-        if (array_key_exists('allowComments', $options)) {
-            $this->setCommentsAllowed($options['allowComments']);
-        }
-    }
-
-    /**
-     * Returns the commentsAllowed option
-     *
-     * This setting is now deprecated and ignored internally.
-     *
-     * @deprecated
-     * @return bool
-     */
-    public function getCommentsAllowed()
-    {
-        return $this->commentsAllowed;
-    }
-
-    /**
-     * Sets the commentsAllowed option
-     *
-     * This setting is now deprecated and ignored internally.
-     *
-     * @deprecated
-     * @param  boolean $commentsAllowed
-     * @return \Zend\Filter\StripTags Provides a fluent interface
-     */
-    public function setCommentsAllowed($commentsAllowed)
-    {
-       $this->commentsAllowed = (boolean) $commentsAllowed;
-       return $this;
     }
 
     /**
@@ -145,7 +101,7 @@ class StripTags extends AbstractFilter
      */
     public function getTagsAllowed()
     {
-        return $this->_tagsAllowed;
+        return $this->tagsAllowed;
     }
 
     /**
@@ -166,7 +122,7 @@ class StripTags extends AbstractFilter
                 // Canonicalize the tag name
                 $tagName = strtolower($element);
                 // Store the tag as allowed with no attributes
-                $this->_tagsAllowed[$tagName] = array();
+                $this->tagsAllowed[$tagName] = array();
             }
             // Otherwise, if a tag was provided with attributes
             else if (is_string($index) && (is_array($element) || is_string($element))) {
@@ -177,12 +133,12 @@ class StripTags extends AbstractFilter
                     $element = array($element);
                 }
                 // Store the tag as allowed with the provided attributes
-                $this->_tagsAllowed[$tagName] = array();
+                $this->tagsAllowed[$tagName] = array();
                 foreach ($element as $attribute) {
                     if (is_string($attribute)) {
                         // Canonicalize the attribute name
                         $attributeName = strtolower($attribute);
-                        $this->_tagsAllowed[$tagName][$attributeName] = null;
+                        $this->tagsAllowed[$tagName][$attributeName] = null;
                     }
                 }
             }
@@ -198,7 +154,7 @@ class StripTags extends AbstractFilter
      */
     public function getAttributesAllowed()
     {
-        return $this->_attributesAllowed;
+        return $this->attributesAllowed;
     }
 
     /**
@@ -218,7 +174,7 @@ class StripTags extends AbstractFilter
             if (is_string($attribute)) {
                 // Canonicalize the attribute name
                 $attributeName = strtolower($attribute);
-                $this->_attributesAllowed[$attributeName] = null;
+                $this->attributesAllowed[$attributeName] = null;
             }
         }
 
@@ -307,7 +263,7 @@ class StripTags extends AbstractFilter
         $tagEnd        = $matches[5];
 
         // If the tag is not an allowed tag, then remove the tag entirely
-        if (!isset($this->_tagsAllowed[$tagName])) {
+        if (!isset($this->tagsAllowed[$tagName])) {
             return '';
         }
 
@@ -317,7 +273,7 @@ class StripTags extends AbstractFilter
         // If there are non-whitespace characters in the attribute string
         if (strlen($tagAttributes)) {
             // Parse iteratively for well-formed attributes
-            preg_match_all('/(\w+)\s*=\s*(?:(")(.*?)"|(\')(.*?)\')/s', $tagAttributes, $matches);
+            preg_match_all('/([\w-]+)\s*=\s*(?:(")(.*?)"|(\')(.*?)\')/s', $tagAttributes, $matches);
 
             // Initialize valid attribute accumulator
             $tagAttributes = '';
@@ -329,8 +285,8 @@ class StripTags extends AbstractFilter
                 $attributeValue     = empty($matches[3][$index]) ? $matches[5][$index] : $matches[3][$index];
 
                 // If the attribute is not allowed, then remove it entirely
-                if (!array_key_exists($attributeName, $this->_tagsAllowed[$tagName])
-                    && !array_key_exists($attributeName, $this->_attributesAllowed)) {
+                if (!array_key_exists($attributeName, $this->tagsAllowed[$tagName])
+                    && !array_key_exists($attributeName, $this->attributesAllowed)) {
                     continue;
                 }
                 // Add the attribute to the accumulator

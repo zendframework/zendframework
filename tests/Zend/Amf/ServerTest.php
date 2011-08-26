@@ -1027,7 +1027,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function testAcceptsStringArgumentToSetBroker()
     {
         $this->_server->setBroker('Zend\View\HelperBroker');
-        $this->assertType('Zend\View\HelperBroker', $this->_server->getBroker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->_server->getBroker());
     }
 
     public function testAcceptsBrokerObjectToSetBroker()

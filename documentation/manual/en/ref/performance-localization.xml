@@ -2,7 +2,7 @@
 
 
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="performance.localization"><info><title>Internationalization (i18n) and Localization (l10n)</title></info>
-    
+
 
     <para>
         Internationalizing and localizing a site are fantastic ways to expand
@@ -13,7 +13,7 @@
     </para>
 
     <section xml:id="performance.localization.translationadapter"><info><title>Which translation adapter should I use?</title></info>
-        
+
 
         <para>
             Not all translation adapters are made equal. Some have more
@@ -24,7 +24,7 @@
         </para>
 
         <section xml:id="performance.localization.translationadapter.fastest"><info><title>Use non-XML translation adapters for greatest speed</title></info>
-            
+
 
             <para>
                 Zend Framework ships with a variety of translation adapters.
@@ -81,7 +81,7 @@
     </section>
 
     <section xml:id="performance.localization.cache"><info><title>How can I make translation and localization even faster?</title></info>
-        
+
 
         <para>
             Maybe, for business reasons, you're limited to an <acronym>XML</acronym>-based
@@ -91,10 +91,10 @@
         </para>
 
         <section xml:id="performance.localization.cache.usage"><info><title>Use translation and localization caches</title></info>
-            
+
 
             <para>
-                Both <classname>Zend_Translate</classname> and <classname>Zend_Locale</classname>
+                Both <classname>Zend_Translator</classname> and <classname>Zend_Locale</classname>
                 implement caching functionality that can greatly affect
                 performance. In the case of each, the major bottleneck is
                 typically reading the files, not the actual lookups; using a
@@ -110,7 +110,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
+                        <link linkend="zend.translator.adapter.caching"><classname>Zend_Translator</classname>
                             adapter caching</link>
                     </para>
                 </listitem>

@@ -81,7 +81,7 @@ abstract class Dijit extends HtmlElement
      *
      * Set view and enable dojo
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Dojo\View\Helper\Dijit
      */
     public function setView(View $view)

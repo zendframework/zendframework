@@ -260,12 +260,12 @@
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Tool_Project-Internals.xml" parse="xml"/>
     </chapter>
 
-    <chapter xml:id="zend.translate">
-        <info><title>Zend_Translate</title></info>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translate-Introduction.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translate-Adapters.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translate-Using.xml" parse="xml"/>
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translate-Migration.xml" parse="xml"/>
+    <chapter xml:id="zend.translator">
+        <info><title>Zend_Translator</title></info>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translator-Introduction.xml" parse="xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translator-Adapters.xml" parse="xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translator-Using.xml" parse="xml"/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Translator-Migration.xml" parse="xml"/>
     </chapter>
 
     <chapter xml:id="zend.uri">

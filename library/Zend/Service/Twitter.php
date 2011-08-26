@@ -55,7 +55,7 @@ class Twitter extends Rest\Client\RestClient
     const OAUTH_BASE_URI = 'http://twitter.com/oauth';
     
     /**
-     * @var \Zend\Http\CookieJar
+     * @var \Cookies\Http\CookieJar
      */
     protected $_cookieJar;
     

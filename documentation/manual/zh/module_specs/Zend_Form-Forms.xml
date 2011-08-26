@@ -699,7 +699,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>I18n:</para>
                     <itemizedlist>
-                        <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                        <listitem><para><code>setTranslator(Zend_Translator_Adapter $translator = null)</code></para></listitem>
 
                         <listitem><para><code>getTranslator()</code></para></listitem>
 
@@ -1346,7 +1346,7 @@ $messages = $form->getMessages('username');
 
             <listitem><para>I18n:</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                    <listitem><para><code>setTranslator(Zend_Translator_Adapter $translator = null)</code></para></listitem>
 
                     <listitem><para><code>getTranslator()</code></para></listitem>
 

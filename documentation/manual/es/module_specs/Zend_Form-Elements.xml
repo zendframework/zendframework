@@ -408,7 +408,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
                 validador en particular. </para>
 
             <para> Una opción mejor es usar
-                    <classname>Zend_Translate_Adapter</classname> con su
+                    <classname>Zend_Translator_Adapter</classname> con su
                 formulario. Los códigos de error son automáticamente pasados al
                 adaptador por el decorador Errors por defecto; puede especificar
                 su propias cadenas de mensaje de error mediante la creación de
@@ -1195,7 +1195,7 @@ $element->class = 'text;
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <methodname>setTranslator(Zend_Translate_Adapter
+                            <methodname>setTranslator(Zend_Translator_Adapter
                                 $translator = null)</methodname>
                         </para>
                     </listitem>

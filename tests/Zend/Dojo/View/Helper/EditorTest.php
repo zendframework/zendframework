@@ -115,7 +115,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         $onLoadActions = $this->view->broker('dojo')->getOnLoadActions();
         $found = false;
         foreach ($onLoadActions as $action) {
-            if (strstr($action, "dojo.byId('foo').value = dijit.byId('foo-Editor').getValue(false);")) {
+            if (strstr($action, "value = dijit.byId('foo-Editor').getValue(false);")) {
                 $found = true;
                 break;
             }
@@ -178,5 +178,24 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     {
         $html = $this->helper->direct('foo');
         $this->assertRegexp('#<noscript><textarea[^>]*>#', $html, $html);
+    }
+    
+    /**
+     * @group ZF-11315
+     */
+    public function testHiddenInputShouldBeRenderedLast()
+    {
+        $html = $this->helper->direct('foo');
+        $this->assertRegexp('#</noscript><input#', $html, $html);
+    }
+
+    /** @group ZF-5711 */
+    public function testHelperShouldJsonifyExtraPlugins()
+    {
+        $extraPlugins = array('copy', 'cut', 'paste');
+        $html = $this->helper->direct('foo', '', array('extraPlugins' => $extraPlugins));
+        $pluginsString = Json::encode($extraPlugins);
+        $pluginsString = str_replace('"', "'", $pluginsString);
+        $this->assertContains('extraPlugins="' . $pluginsString . '"', $html);
     }
 }

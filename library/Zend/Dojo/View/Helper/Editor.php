@@ -55,14 +55,21 @@ class Editor extends Dijit
         'fontSize' => 'FontChoice',
         'formatBlock' => 'FontChoice',
         'foreColor' => 'TextColor',
-        'hiliteColor' => 'TextColor'
+        'hiliteColor' => 'TextColor',
+        'enterKeyHandling' => 'EnterKeyHandling',
+        'fullScreen' => 'FullScreen',
+        'newPage' => 'NewPage',
+        'print' => 'Print',
+        'tabIndent' => 'TabIndent',
+        'toggleDir' => 'ToggleDir',
+        'viewSource' => 'ViewSource'
     );
 
     /**
      * JSON-encoded parameters
      * @var array
      */
-    protected $_jsonParams = array('captureEvents', 'events', 'plugins');
+    protected $_jsonParams = array('captureEvents', 'events', 'plugins', 'extraPlugins');
 
     /**
      * dijit.Editor
@@ -112,8 +119,7 @@ class Editor extends Dijit
 
         $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
 
-        $html  = '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
-        $html .= '<div' . $this->_htmlAttribs($attribs) . '>'
+        $html = '<div' . $this->_htmlAttribs($attribs) . '>'
                . $value
                . "</div>\n";
 
@@ -123,6 +129,8 @@ class Editor extends Dijit
                . $this->view->broker('formTextarea')->direct($hiddenId, $value, $attribs)
                . '</noscript>';
 
+        $html  .= '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
+        
         return $html;
     }
 
@@ -176,7 +184,11 @@ class Editor extends Dijit
 function() {
     var form = zend.findParentForm(dojo.byId('$hiddenId'));
     dojo.connect(form, 'submit', function(e) {
-        dojo.byId('$hiddenId').value = dijit.byId('$editorId').getValue(false);
+        var value = dijit.byId('$editorId').getValue(false);
+        if(dojo.isFF) {
+            value = value.replace(/<br _moz_editor_bogus_node="TRUE" \/>/, '');
+        }
+        dojo.byId('$hiddenId').value = value;
     });
 }
 EOJ;

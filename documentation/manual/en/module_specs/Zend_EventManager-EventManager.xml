@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section id="zend.event-manager.event-manager">
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.event-manager.event-manager">
     <info><title>The EventManager</title></info>
  
-    <section id="zend.event-manager.event-manager.intro">
+    <section xml:id="zend.event-manager.event-manager.intro">
         <info><title>Overview</title></info>
 
         <para>
@@ -38,7 +38,7 @@
         </para>
     </section>
  
-    <section id="zend.event-manager.event-manager.quick-start">
+    <section xml:id="zend.event-manager.event-manager.quick-start">
         <info><title>Quick Start</title></info>
 
         <para>
@@ -180,7 +180,7 @@ $foo->bar('baz', 'bat');
         </para>
     </section>
  
-    <section id="zend.event-manager.event-manager.options">
+    <section xml:id="zend.event-manager.event-manager.options">
         <info><title>Configuration Options</title></info>
  
         <variablelist>
@@ -226,11 +226,11 @@ $foo->bar('baz', 'bat');
         </variablelist>
     </section>
  
-    <section id="zend.event-manager.event-manager.methods">
+    <section xml:id="zend.event-manager.event-manager.methods">
         <info><title>Available Methods</title></info>
  
         <variablelist>
-            <varlistentry id="zend.event-manager.event-manager.methods.constructor">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.constructor">
                 <term>
                     <methodsynopsis>
                         <methodname>__construct</methodname>
@@ -248,7 +248,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.set-event-class">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.set-event-class">
                 <term>
                     <methodsynopsis>
                         <methodname>setEventClass</methodname>
@@ -266,7 +266,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.set-static-connections">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.set-static-connections">
                 <term>
                     <methodsynopsis>
                         <methodname>setStaticConnections</methodname>
@@ -288,7 +288,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.get-static-connections">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.get-static-connections">
                 <term>
                     <methodsynopsis>
                         <methodname>getStaticConnections</methodname>
@@ -310,7 +310,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.trigger">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.trigger">
                 <term>
                     <methodsynopsis>
                         <methodname>trigger</methodname>
@@ -342,7 +342,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.trigger-until">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.trigger-until">
                 <term>
                     <methodsynopsis>
                         <methodname>triggerUntil</methodname>
@@ -366,7 +366,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.attach">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.attach">
                 <term>
                     <methodsynopsis>
                         <methodname>attach</methodname>
@@ -395,7 +395,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.attach-aggregate">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.attach-aggregate">
                 <term>
                     <methodsynopsis>
                         <methodname>attachAggregate</methodname>
@@ -419,7 +419,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.detach">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.detach">
                 <term>
                     <methodsynopsis>
                         <methodname>detach</methodname>
@@ -443,7 +443,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.detach-aggregate">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.detach-aggregate">
                 <term>
                     <methodsynopsis>
                         <methodname>detachAggregate</methodname>
@@ -468,7 +468,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.get-events">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.get-events">
                 <term>
                     <methodsynopsis>
                         <methodname>getEvents</methodname>
@@ -482,7 +482,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.get-handlers">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.get-handlers">
                 <term>
                     <methodsynopsis>
                         <methodname>getHandlers</methodname>
@@ -501,7 +501,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.clear-handlers">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.clear-handlers">
                 <term>
                     <methodsynopsis>
                         <methodname>clearHandlers</methodname>
@@ -519,7 +519,7 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry id="zend.event-manager.event-manager.methods.prepare-args">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.prepare-args">
                 <term>
                     <methodsynopsis>
                         <methodname>prepareArgs</methodname>
@@ -542,10 +542,10 @@ $foo->bar('baz', 'bat');
         </variablelist>
     </section>
  
-    <section id="zend.event-manager.event-manager.examples">
+    <section xml:id="zend.event-manager.event-manager.examples">
         <info><title>Examples</title></info>
  
-        <example id="zend.event-manager.event-manager.examples.modifying-args">
+        <example xml:id="zend.event-manager.event-manager.examples.modifying-args">
             <info><title>Modifying Arguments</title></info>
  
             <para>
@@ -601,7 +601,7 @@ $v->inject(array(
 ]]></programlisting>
         </example>
 
-        <example id="zend.event-manager.event-manager.examples.short-circuiting">
+        <example xml:id="zend.event-manager.event-manager.examples.short-circuiting">
             <info><title>Short Circuiting</title></info>
  
             <para>
@@ -672,7 +672,7 @@ class Foo implements Dispatchable
 ]]></programlisting>
         </example>
 
-        <example id="zend.event-manager.event-manager.examples.priority">
+        <example xml:id="zend.event-manager.event-manager.examples.priority">
             <info><title>Assigning Priority to Listeners</title></info>
  
             <para>

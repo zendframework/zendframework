@@ -46,14 +46,21 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
     protected $_profiler = null;
     protected $_db = null;
 
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     public function setUp()
     {
         $this->markTestSkipped('This suite is skipped until Zend\Db can be refactored.');
-        
+
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Requires PDO Sqlite extension');
         }
 
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('America/Los_Angeles');
 
         $this->_request  = new \Zend_Db_Profiler_FirebugTest_Request();
@@ -77,6 +84,7 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
     {
         Channel\HttpHeaders::destroyInstance();
         FirePhp::destroyInstance();
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     public function testEnable()

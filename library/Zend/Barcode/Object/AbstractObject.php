@@ -387,7 +387,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set factor applying to
      * thinBarWidth - thickBarWidth - barHeight - fontSize
-     * @param integer $value
+     * @param float $value
      * @return \Zend\Barcode\BarcodeObject
      * @throw \Zend\Barcode\Object\Exception
      */

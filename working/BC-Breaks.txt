@@ -116,11 +116,11 @@ Zend_Server:
  * "Zend_Server_Reflection_ReturnValue" becomes "Zend\Server\Reflection\ReflectionReturnValue"
  * "Zend_Server_Reflection_Function_Abstract" becomes "Zend\Server\Reflection\AbstractFunction"
  
-Zend_Translate
- * "Zend_Translate" prefix now becomes "Zend\Translator" namespace
- * "Zend_Translate" becomes "Zend\Translator\Translator"
+Zend_Translator
+ * "Zend_Translator" prefix now becomes "Zend\Translator" namespace
+ * "Zend_Translator" becomes "Zend\Translator\Translator"
  * "Zend\Translator\Adapter\Array" renamed to "Zend\Translator\Adapter\ArrayAdapter"
- * Translation adapter interface is now "Zend\Translate\Adapter"
+ * Translation adapter interface is now "Zend\Translator\Adapter"
 
 Zend_Acl
  * "Zend_Acl_Role_Interface" becomes "Zend\Acl\Role"

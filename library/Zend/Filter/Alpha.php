@@ -38,9 +38,8 @@ class Alpha extends AbstractFilter
      * Whether to allow white space characters; off by default
      *
      * @var boolean
-     * @deprecated
      */
-    public $allowWhiteSpace;
+    protected $allowWhiteSpace;
 
     /**
      * Is PCRE is compiled with UTF-8 and Unicode support

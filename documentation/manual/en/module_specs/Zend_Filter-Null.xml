@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.set.null"><info><title>Null</title></info>
-    
+
 
     <para>
         This filter will change the given input to be <constant>NULL</constant> if it meets specific
@@ -9,7 +9,7 @@
     </para>
 
     <section xml:id="zend.filter.set.null.options"><info><title>Supported options for Zend_Filter_Null</title></info>
-        
+
 
         <para>
             The following options are supported for <classname>Zend_Filter_Null</classname>:
@@ -26,7 +26,7 @@
     </section>
 
     <section xml:id="zend.filter.set.null.default"><info><title>Default behaviour for Zend_Filter_Null</title></info>
-        
+
 
         <para>
             Per default this filter works like <acronym>PHP</acronym>'s
@@ -54,7 +54,7 @@ $result = $filter->filter($value);
     </section>
 
     <section xml:id="zend.filter.set.null.types"><info><title>Changing behaviour for Zend_Filter_Null</title></info>
-        
+
 
         <para>
             Sometimes it's not enough to filter based on <methodname>empty()</methodname>. Therefor
@@ -85,6 +85,13 @@ $result = $filter->filter($value);
             <listitem>
                 <para>
                     <emphasis>empty_array</emphasis>: Converts an empty <emphasis>array</emphasis>
+                    to <constant>NULL</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>float</emphasis>: Converts an float <emphasis>0.0</emphasis> value
                     to <constant>NULL</constant>.
                 </para>
             </listitem>

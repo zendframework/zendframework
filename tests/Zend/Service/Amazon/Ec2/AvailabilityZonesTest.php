@@ -98,7 +98,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($rawHttpResponse);
 
         $response = $this->availabilityZones->describe('us-east-1a');
-        $this->assertType('array', $response);
+        $this->assertInternalType('array', $response);
         $this->assertEquals('us-east-1a', $response[0]['zoneName']);
         $this->assertEquals('available', $response[0]['zoneState']);
     }
@@ -134,7 +134,7 @@ class AvailabilityZonesTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->availabilityZones->describe();
 
-        $this->assertType('array', $response);
+        $this->assertInternalType('array', $response);
 
         $arrExpected = array('us-east-1a', 'us-east-1b', 'us-east-1c');
         foreach ($response as $k => $node) {

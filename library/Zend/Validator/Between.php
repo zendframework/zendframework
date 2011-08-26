@@ -33,14 +33,7 @@ namespace Zend\Validator;
  */
 class Between extends AbstractValidator
 {
-    /**
-     * Validation failure message key for when the value is not between the min and max, inclusively
-     */
     const NOT_BETWEEN        = 'notBetween';
-
-    /**
-     * Validation failure message key for when the value is not strictly between the min and max
-     */
     const NOT_BETWEEN_STRICT = 'notBetweenStrict';
 
     /**
@@ -218,5 +211,4 @@ class Between extends AbstractValidator
         }
         return true;
     }
-
 }

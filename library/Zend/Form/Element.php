@@ -30,7 +30,7 @@ use Zend\Config\Config,
     Zend\Validator\Validator,
     Zend\Filter\Filter,
     Zend\Validator\AbstractValidator,
-    Zend\Form\Element\Exception,
+    Zend\Form\Element\Exception as ElementException,
     Zend\View\Renderer as View;
 
 /**
@@ -217,7 +217,7 @@ class Element implements Validator
     protected $_value;
 
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -242,7 +242,7 @@ class Element implements Validator
      * @param  string|array|\Zend\Config\Config $spec
      * @param  array|\Zend\Config\Config $options
      * @return void
-     * @throws \Zend\Form\Element\Exception if no element name after initialization
+     * @throws \Zend\Form\ElementException if no element name after initialization
      */
     public function __construct($spec, $options = null)
     {
@@ -261,7 +261,7 @@ class Element implements Validator
         }
 
         if (null === $this->getName()) {
-            throw new Element\Exception\UnexpectedValueException('Zend_Form_Element requires each element to have a name');
+            throw new ElementException\UnexpectedValueException('Zend_Form_Element requires each element to have a name');
         }
 
         /**
@@ -402,7 +402,7 @@ class Element implements Validator
         } elseif ($translator instanceof \Zend\Translator\Translator) {
             $this->_translator = $translator->getAdapter();
         } else {
-            throw new Element\Exception\InvalidArgumentException('Invalid translator specified');
+            throw new ElementException\InvalidArgumentException('Invalid translator specified');
         }
         return $this;
     }
@@ -423,10 +423,10 @@ class Element implements Validator
         }
         return $this->_translator;
     }
-    
+
     /**
      * Does this element have its own specific translator?
-     * 
+     *
      * @return bool
      */
     public function hasTranslator()
@@ -484,7 +484,7 @@ class Element implements Validator
     {
         $name = $this->filterName($name);
         if ('' === $name) {
-            throw new Element\Exception\InvalidArgumentException('Invalid name provided; must contain only valid variable characters and be non-empty');
+            throw new ElementException\InvalidArgumentException('Invalid name provided; must contain only valid variable characters and be non-empty');
         }
 
         $this->_name = $name;
@@ -836,13 +836,13 @@ class Element implements Validator
      * @param  string $name
      * @param  mixed $value
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Element\Exception for invalid $name values
+     * @throws \Zend\Form\ElementException for invalid $name values
      */
     public function setAttrib($name, $value)
     {
         $name = (string) $name;
         if ('_' == $name[0]) {
-            throw new Element\Exception\InvalidArgumentException(sprintf('Invalid attribute "%s"; must not contain a leading underscore', $name));
+            throw new ElementException\InvalidArgumentException(sprintf('Invalid attribute "%s"; must not contain a leading underscore', $name));
         }
 
         if (null === $value) {
@@ -913,7 +913,7 @@ class Element implements Validator
     public function __get($key)
     {
         if ('_' == $key[0]) {
-            throw new Element\Exception\RunTimeException(sprintf('Cannot retrieve value for protected/private property "%s"', $key));
+            throw new ElementException\RunTimeException(sprintf('Cannot retrieve value for protected/private property "%s"', $key));
         }
 
         if (!isset($this->$key)) {
@@ -943,7 +943,7 @@ class Element implements Validator
      * @param  string $method
      * @param  array $args
      * @return string
-     * @throws \Zend\Form\Element\Exception for invalid decorator or invalid method call
+     * @throws \Zend\Form\ElementException for invalid decorator or invalid method call
      */
     public function __call($method, $args)
     {
@@ -961,10 +961,10 @@ class Element implements Validator
                 return $decorator->render($seed);
             }
 
-            throw new Element\Exception\BadMethodCallException(sprintf('Decorator by name %s does not exist', $decoratorName));
+            throw new ElementException\BadMethodCallException(sprintf('Decorator by name %s does not exist', $decoratorName));
         }
 
-        throw new Element\Exception\BadMethodCallException(sprintf('Method %s does not exist', $method));
+        throw new ElementException\BadMethodCallException(sprintf('Method %s does not exist', $method));
     }
 
     // Loaders
@@ -975,7 +975,7 @@ class Element implements Validator
      * @param  \Zend\Loader\PrefixPathMapper $loader
      * @param  string $type 'decorator', 'filter', or 'validate'
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Element\Exception on invalid type
+     * @throws \Zend\Form\ElementException on invalid type
      */
     public function setPluginLoader(PrefixPathMapper $loader, $type)
     {
@@ -987,7 +987,7 @@ class Element implements Validator
                 $this->_loaders[$type] = $loader;
                 return $this;
             default:
-                throw new Element\Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
+                throw new ElementException\InvalidArgumentException(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }
     }
 
@@ -1021,7 +1021,7 @@ class Element implements Validator
                 }
                 return $this->_loaders[$type];
             default:
-                throw new Element\Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new ElementException\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
         }
     }
 
@@ -1040,7 +1040,7 @@ class Element implements Validator
      * @param  string $path
      * @param  string $type
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Element\Exception for invalid type
+     * @throws \Zend\Form\ElementException for invalid type
      */
     public function addPrefixPath($prefix, $path, $type = null)
     {
@@ -1068,7 +1068,7 @@ class Element implements Validator
                 }
                 return $this;
             default:
-                throw new Element\Exception\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
+                throw new ElementException\InvalidArgumentException(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
         }
     }
 
@@ -1125,7 +1125,7 @@ class Element implements Validator
      * @param  bool $breakChainOnFailure
      * @param  array $options
      * @return \Zend\Form\Element
-     * @throws \Zend\Form\Element\Exception if invalid validator type
+     * @throws \Zend\Form\ElementException if invalid validator type
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = array())
     {
@@ -1143,7 +1143,7 @@ class Element implements Validator
                 'options'             => $options,
             );
         } else {
-            throw new Element\Exception\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\Validator');
+            throw new ElementException\InvalidArgumentException('Invalid validator provided to addValidator; must be string or Zend\Validator\Validator');
         }
 
 
@@ -1194,7 +1194,7 @@ class Element implements Validator
                     }
                 }
             } else {
-                throw new Element\Exception\InvalidArgumentException('Invalid validator passed to addValidators()');
+                throw new ElementException\InvalidArgumentException('Invalid validator passed to addValidators()');
             }
         }
 
@@ -1338,7 +1338,7 @@ class Element implements Validator
 
         // Find the correct translator. Zend\Validator\AbstractValidator::getDefaultTranslator()
         // will get either the static translator attached to Zend\Validator\AbstractValidator
-        // or the 'Zend_Translate' from Zend\Registry.
+        // or the 'Zend_Translator' from Zend\Registry.
         if (AbstractValidator::hasDefaultTranslator() 
             && !Form::hasDefaultTranslator())
         {
@@ -1608,7 +1608,7 @@ class Element implements Validator
             );
             $this->_filters[$name] = $filter;
         } else {
-            throw new Element\Exception\InvalidArgumentException('Invalid filter provided to addFilter; must be string or Zend_Filter_Interface');
+            throw new ElementException\InvalidArgumentException('Invalid filter provided to addFilter; must be string or Zend_Filter_Interface');
         }
 
         $this->_filters[$name] = $filter;
@@ -1652,7 +1652,7 @@ class Element implements Validator
                     }
                 }
             } else {
-                throw new Element\Exception\InvalidArgumentException('Invalid filter passed to addFilters()');
+                throw new ElementException\InvalidArgumentException('Invalid filter passed to addFilters()');
             }
         }
 
@@ -1764,7 +1764,7 @@ class Element implements Validator
     /**
      * Set view object
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Form\Element
      */
     public function setView(View $view = null)
@@ -1778,7 +1778,7 @@ class Element implements Validator
      *
      * Retrieves from ViewRenderer if none previously set.
      *
-     * @return null|\Zend\View\ViewEngine
+     * @return null|\Zend\View\Renderer
      */
     public function getView()
     {
@@ -1831,7 +1831,7 @@ class Element implements Validator
                 break;
             }
             if (is_numeric($name)) {
-                throw new Element\Exception\InvalidArgumentException('Invalid alias provided to addDecorator; must be alphanumeric string');
+                throw new ElementException\InvalidArgumentException('Invalid alias provided to addDecorator; must be alphanumeric string');
             }
             if (is_string($spec)) {
                 $decorator = array(
@@ -1842,7 +1842,7 @@ class Element implements Validator
                 $decorator = $spec;
             }
         } else {
-            throw new Element\Exception\InvalidArgumentException('Invalid decorator provided to addDecorator; must be string or Zend_Form_Decorator_Interface');
+            throw new ElementException\InvalidArgumentException('Invalid decorator provided to addDecorator; must be string or Zend_Form_Decorator_Interface');
         }
 
         $this->_decorators[$name] = $decorator;
@@ -1889,7 +1889,7 @@ class Element implements Validator
                     }
                 }
             } else {
-                throw new Element\Exception\InvalidArgumentException('Invalid decorator passed to addDecorators()');
+                throw new ElementException\InvalidArgumentException('Invalid decorator passed to addDecorators()');
             }
         }
 
@@ -1995,7 +1995,7 @@ class Element implements Validator
     /**
      * Render form element
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     public function render(View $view = null)
@@ -2046,7 +2046,7 @@ class Element implements Validator
         $name     = $this->getPluginLoader(self::FILTER)->load($filter['filter']);
 
         if (array_key_exists($name, $this->_filters)) {
-            throw new Element\Exception\RunTimeException(sprintf('Filter instance already exists for filter "%s"', $origName));
+            throw new ElementException\RunTimeException(sprintf('Filter instance already exists for filter "%s"', $origName));
         }
 
         if (empty($filter['options'])) {
@@ -2094,7 +2094,7 @@ class Element implements Validator
         $name     = $this->getPluginLoader(self::VALIDATE)->load($validator['validator']);
 
         if (array_key_exists($name, $this->_validators)) {
-            throw new Element\Exception\RunTimeException(sprintf('Validator instance already exists for validator "%s"', $origName));
+            throw new ElementException\RunTimeException(sprintf('Validator instance already exists for validator "%s"', $origName));
         }
 
         $messages = false;

@@ -922,6 +922,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 'locale'    => 'auto',
                 'scan'      => Translator\Translator::LOCALE_FILENAME,
                 'ignore'    => array('.', 'ignoreme', 'LC_OTHER'),
+                // needed because browser settings can not be simulated in phpunit
+                'route'     => array('ja' => 'de_AT', 'de_AT' => 'de_DE', 'de_DE' => 'en_US'),
                 'routeHttp' => true,
             )
         );
@@ -935,6 +937,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $translate->addTranslation($translate2);
+
         $langs = $translate->getList();
         $this->assertFalse(array_key_exists('de_AT', $langs));
         $this->assertTrue(array_key_exists('ja', $langs));

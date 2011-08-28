@@ -772,6 +772,19 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('stdClass', Json\Decoder::decode('{"var":"value"}'));
     }
 
+    /**
+     * @group ZF-9521
+     */
+    public function testWillEncodeArrayOfObjectsEachWithToJsonMethod()
+    {
+        $array = array('one'=>new ToJsonClass());
+        $expected = '{"one":{"__className":"ZendTest\\\\Json\\\\ToJSONClass","firstName":"John","lastName":"Doe","email":"john@doe.com"}}';
+
+        Json\Json::$useBuiltinEncoderDecoder = true;
+        $json = Json\Encoder::encode($array);
+        $this->assertEquals($expected, $json);
+    }
+
 }
 
 /**

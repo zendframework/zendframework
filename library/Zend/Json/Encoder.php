@@ -146,18 +146,22 @@ class Encoder
 
         $props = '';
 
-        if ($value instanceof \Iterator) {
-            $propCollection = $value;
+        if (method_exists($value, 'toJson')) {
+            $props =',' . preg_replace("/^\{(.*)\}$/","\\1",$value->toJson());
         } else {
-            $propCollection = get_object_vars($value);
-        }
+            if ($value instanceof \Iterator) {
+                $propCollection = $value;
+            } else {
+                $propCollection = get_object_vars($value);
+            }
 
-        foreach ($propCollection as $name => $propValue) {
-            if (isset($propValue)) {
-                $props .= ','
-                        . $this->_encodeValue($name)
-                        . ':'
-                        . $this->_encodeValue($propValue);
+            foreach ($propCollection as $name => $propValue) {
+                if (isset($propValue)) {
+                    $props .= ','
+                            . $this->_encodeValue($name)
+                            . ':'
+                            . $this->_encodeValue($propValue);
+                }
             }
         }
 

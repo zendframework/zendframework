@@ -772,6 +772,7 @@ abstract class Adapter
         }
 
         $plural = null;
+        $origId = $messageId;
         if (is_array($messageId)) {
             if (count($messageId) > 2) {
                 $number = array_pop($messageId);
@@ -795,7 +796,7 @@ abstract class Adapter
                 if (array_key_exists($locale, $this->_options['route']) &&
                     !array_key_exists($locale, $this->_routed)) {
                     $this->_routed[$locale] = true;
-                    return $this->translate($messageId, $this->_options['route'][$locale]);
+                    return $this->translate($origId, $this->_options['route'][$locale]);
                 }
             }
 
@@ -806,7 +807,7 @@ abstract class Adapter
                     if (array_key_exists($temp[0], $this->_options['route']) &&
                         !array_key_exists($temp[0], $this->_routed)) {
                         $this->_routed[$temp[0]] = true;
-                        return $this->translate($messageId, $this->_options['route'][$temp[0]]);
+                        return $this->translate($origId, $this->_options['route'][$temp[0]]);
                     }
                 }
                 $this->_log($messageId, $locale);
@@ -843,7 +844,7 @@ abstract class Adapter
         } else if (!empty($this->_options['route']) && array_key_exists($locale, $this->_options['route']) &&
                 !array_key_exists($locale, $this->_routed)) {
             $this->_routed[$locale] = true;
-            return $this->translate($messageId, $this->_options['route'][$locale]);
+            return $this->translate($origId, $this->_options['route'][$locale]);
         } else if (strlen($locale) != 2) {
             // faster than creating a new locale and separate the leading part
             $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
@@ -868,7 +869,7 @@ abstract class Adapter
             if (array_key_exists($locale, $this->_options['route']) &&
                 !array_key_exists($locale, $this->_routed)) {
                 $this->_routed[$locale] = true;
-                return $this->translate($messageId, $this->_options['route'][$locale]);
+                return $this->translate($origId, $this->_options['route'][$locale]);
             }
         }
         $this->_log($messageId, $locale);

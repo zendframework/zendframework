@@ -190,7 +190,9 @@ class MimeType extends Validator\AbstractValidator
      */
     public function setMagicFile($file)
     {
-        if (empty($file)) {
+        if ($file === false) {
+            $this->_magicfile = false;
+        } else if (empty($file)) {
             $this->_magicfile = null;
         } else if (!(class_exists('finfo', false))) {
             $this->_magicfile = null;

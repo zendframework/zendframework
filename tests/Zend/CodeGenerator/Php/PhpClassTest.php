@@ -24,7 +24,7 @@
  */
 namespace ZendTest\CodeGenerator\Php;
 use Zend\CodeGenerator\Php;
-use Zend\Reflection;
+use Zend\Code\Reflection;
 
 /**
  * @category   Zend

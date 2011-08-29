@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\CodeGenerator\Php;
-use Zend\Reflection;
+use Zend\Code\Reflection;
 
 /**
  * @uses       \Zend\CodeGenerator\Php\AbstractPhp

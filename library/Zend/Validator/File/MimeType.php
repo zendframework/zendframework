@@ -23,7 +23,8 @@
  */
 namespace Zend\Validator\File;
 
-use Zend\Loader,
+use Zend\Config\Config,
+    Zend\Loader,
     Zend\Validator,
     Zend\Validator\Exception;
 
@@ -126,7 +127,7 @@ class MimeType extends Validator\AbstractValidator
      */
     public function __construct($mimetype)
     {
-        if ($mimetype instanceof \Zend\Config\Config) {
+        if ($mimetype instanceof Config) {
             $mimetype = $mimetype->toArray();
         } elseif (is_string($mimetype)) {
             $mimetype = explode(',', $mimetype);
@@ -244,7 +245,7 @@ class MimeType extends Validator\AbstractValidator
      */
     public function getMimeType($asArray = false)
     {
-        $asArray   = (bool) $asArray;
+        $asArray  = (bool) $asArray;
         $mimetype = (string) $this->_mimetype;
         if ($asArray) {
             $mimetype = explode(',', $mimetype);

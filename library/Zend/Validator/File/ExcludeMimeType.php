@@ -23,7 +23,8 @@
  */
 namespace Zend\Validator\File;
 
-use Loader;
+use finfo,
+    Zend\Loader;
 
 /**
  * Validator for the mime type of a file
@@ -56,7 +57,7 @@ class ExcludeMimeType extends MimeType
         if ($file === null) {
             $file = array(
                 'type' => null,
-                'name' => $value
+                'name' => $value,
             );
         }
 
@@ -69,9 +70,9 @@ class ExcludeMimeType extends MimeType
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
             if (!empty($mimefile)) {
-                $mime = new \finfo($const, $mimefile);
+                $mime = new finfo($const, $mimefile);
             } else {
-                $mime = new \finfo($const);
+                $mime = new finfo($const);
             }
 
             if (!empty($mime)) {
@@ -99,7 +100,7 @@ class ExcludeMimeType extends MimeType
 
         $types = explode('/', $this->_type);
         $types = array_merge($types, explode('-', $this->_type));
-        foreach($mimetype as $mime) {
+        foreach ($mimetype as $mime) {
             if (in_array($mime, $types)) {
                 return $this->_throw($file, self::FALSE_TYPE);
             }

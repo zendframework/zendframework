@@ -86,7 +86,7 @@ class PartialLoop extends Partial
         }
 
         $content = '';
-        // reset the counter if it's call again
+        // reset the counter if it's called again
         $this->partialCounter = 0;
         foreach ($model as $item) {
             // increment the counter variable

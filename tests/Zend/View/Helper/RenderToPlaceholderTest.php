@@ -24,6 +24,8 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\Placeholder as PlaceholderHelper;
 
 /**
  * @category   Zend
@@ -41,13 +43,14 @@ class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_view = new \Zend\View\View(array('scriptPath'=>__DIR__.'/_files/scripts/'));
+        $this->_view = new View();
+        $this->_view->resolver()->addPath(__DIR__.'/_files/scripts/');
     }
 
     public function testDefaultEmpty()
     {
-        $this->_view->renderToPlaceholder('rendertoplaceholderscript.phtml', 'fooPlaceholder');
-        $placeholder = new \Zend\View\Helper\Placeholder();
+        $this->_view->broker('renderToPlaceholder')->direct('rendertoplaceholderscript.phtml', 'fooPlaceholder');
+        $placeholder = new PlaceholderHelper();
         $this->assertEquals("Foo Bar\n", $placeholder->direct('fooPlaceholder')->getValue());
     }
 

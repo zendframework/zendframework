@@ -23,7 +23,10 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\View\Helper;
+
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\Doctype,
+    Zend\View\Helper\HtmlObject;
 
 /**
  * @category   Zend
@@ -49,8 +52,8 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\View();
-        $this->helper = new Helper\HtmlObject();
+        $this->view   = new View();
+        $this->helper = new HtmlObject();
         $this->helper->setView($this->view);
     }
 
@@ -61,7 +64,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testViewObjectIsSet()
     {
-        $this->assertType('Zend\View\ViewEngine', $this->helper->view);
+        $this->assertInstanceof('Zend\View\Renderer', $this->helper->getView());
     }
 
     public function testMakeHtmlObjectWithoutAttribsWithoutParams()
@@ -85,7 +88,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsHtml()
     {
-        $this->view->broker('doctype')->direct(Helper\Doctype::HTML4_STRICT);
+        $this->view->broker('doctype')->direct(Doctype::HTML4_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');
@@ -104,7 +107,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsXhtml()
     {
-        $this->view->broker('doctype')->direct(Helper\Doctype::XHTML1_STRICT);
+        $this->view->broker('doctype')->direct(Doctype::XHTML1_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');

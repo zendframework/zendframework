@@ -1,6 +1,6 @@
 <xenc:EncryptedData 
 	Type="http://www.w3.org/2001/04/xmlenc#Element" 
-	xmlns:enc="http://www.w3.org/2001/04/xmlenc#">
+	xmlns:xenc="http://www.w3.org/2001/04/xmlenc#">
 
 	<xenc:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" />
 	<KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">

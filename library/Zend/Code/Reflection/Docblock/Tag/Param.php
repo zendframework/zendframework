@@ -38,12 +38,12 @@ class Param extends Reflection\ReflectionDocblockTag
     /**
      * @var string
      */
-    protected $_type = null;
+    protected $type = null;
 
     /**
      * @var string
      */
-    protected $_variableName = null;
+    protected $variableName = null;
 
     /**
      * Constructor
@@ -63,10 +63,10 @@ class Param extends Reflection\ReflectionDocblockTag
         }
 
         $this->_name = 'param';
-        $this->_type = $matches[2];
+        $this->type = $matches[2];
 
         if (isset($matches[3])) {
-            $this->_variableName = $matches[3];
+            $this->variableName = $matches[3];
         }
 
         if (isset($matches[4])) {
@@ -81,7 +81,7 @@ class Param extends Reflection\ReflectionDocblockTag
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -91,6 +91,6 @@ class Param extends Reflection\ReflectionDocblockTag
      */
     public function getVariableName()
     {
-        return $this->_variableName;
+        return $this->variableName;
     }
 }

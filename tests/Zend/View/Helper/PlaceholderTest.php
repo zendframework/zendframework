@@ -23,8 +23,11 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\View\Helper;
-use Zend\View\Helper\Placeholder\Registry;
+
+use Zend\Registry,
+    Zend\View\PhpRenderer as View,
+    Zend\View\Helper,
+    Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry;
 
 
 /**
@@ -65,7 +68,7 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->placeholder);
-        \Zend\Registry::getInstance()->offsetUnset(Registry::REGISTRY_KEY);
+        Registry::getInstance()->offsetUnset(PlaceholderRegistry::REGISTRY_KEY);
     }
 
     /**
@@ -73,13 +76,13 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorCreatesRegistryOffset()
     {
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
+        $this->assertTrue(Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY));
     }
 
     public function testMultiplePlaceholdersUseSameRegistry()
     {
-        $this->assertTrue(\Zend\Registry::isRegistered(Registry::REGISTRY_KEY));
-        $registry = \Zend\Registry::get(Registry::REGISTRY_KEY);
+        $this->assertTrue(Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY));
+        $registry = Registry::get(PlaceholderRegistry::REGISTRY_KEY);
         $this->assertSame($registry, $this->placeholder->getRegistry());
 
         $placeholder = new Helper\Placeholder();
@@ -93,9 +96,9 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetView()
     {
-        $view = new \Zend\View\View();
+        $view = new View();
         $this->placeholder->setView($view);
-        $this->assertSame($view, $this->placeholder->view);
+        $this->assertSame($view, $this->placeholder->getView());
     }
 
     /**
@@ -104,7 +107,7 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
     public function testPlaceholderRetrievesContainer()
     {
         $container = $this->placeholder->direct('foo');
-        $this->assertTrue($container instanceof \Zend\View\Helper\Placeholder\Container\AbstractContainer);
+        $this->assertInstanceOf('Zend\View\Helper\Placeholder\Container\AbstractContainer', $container);
     }
 
     /**

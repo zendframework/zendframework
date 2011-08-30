@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper;
 
+use Zend\Controller\Front as FrontController;
+
 /**
  * Helper for making easy links and getting urls that depend on the routes and router
  *
@@ -48,7 +50,7 @@ class Url extends AbstractHelper
      */
     public function direct(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
     {
-        $router = \Zend\Controller\Front::getInstance()->getRouter();
+        $router = FrontController::getInstance()->getRouter();
         return $router->assemble($urlOptions, $name, $reset, $encode);
     }
 }

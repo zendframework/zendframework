@@ -125,7 +125,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testContainerClassAccessorsSetState()
     {
-        $this->assertEquals('\Zend\View\Helper\Placeholder\Container', $this->registry->getContainerClass());
+        $this->assertEquals('Zend\View\Helper\Placeholder\Container', $this->registry->getContainerClass());
         $this->registry->setContainerClass('ZendTest\View\Helper\Placeholder\MockContainer');
         $this->assertEquals('ZendTest\View\Helper\Placeholder\MockContainer', $this->registry->getContainerClass());
     }

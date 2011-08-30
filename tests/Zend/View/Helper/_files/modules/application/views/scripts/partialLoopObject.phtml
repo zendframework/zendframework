@@ -1,6 +1,6 @@
-<?php if (!isset($this->obj)): ?>
+<?php if (!isset($this->vars()->obj)): ?>
 No object model passed
 <?php else: 
-    echo 'This is an iteration: ' . $this->obj->message . "\n";
+    echo 'This is an iteration: ' . $this->vars()->obj->message . "\n";
 endif ?>
 

@@ -51,8 +51,8 @@ class RenderToPlaceholder extends AbstractHelper
             throw new \InvalidArgumentException('Action: missing argument. $script and $placeholder are required in renderToPlaceholder($script, $placeholder)');
         }
         
-        $this->view->placeholder($placeholder)->captureStart();
+        $this->view->broker('placeholder')->direct($placeholder)->captureStart();
         echo $this->view->render($script);
-        $this->view->placeholder($placeholder)->captureEnd();
+        $this->view->broker('placeholder')->direct($placeholder)->captureEnd();
     }
 }

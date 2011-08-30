@@ -23,8 +23,12 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Controller;
-use Zend\View;
+
+use ArrayObject,
+    Iterator,
+    Zend\Controller\Front as FrontController,
+    Zend\View\PhpRenderer as View,
+    Zend\View\Helper\PartialLoop;
 
 /**
  * Test class for Zend_View_Helper_PartialLoop.
@@ -58,8 +62,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->helper = new \Zend\View\Helper\PartialLoop();
-        Controller\Front::getInstance()->resetInstance();
+        $this->helper = new PartialLoop();
+        FrontController::getInstance()->resetInstance();
     }
 
     /**
@@ -85,9 +89,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             array('message' => 'bat')
         );
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoop.phtml', $data);
@@ -110,9 +113,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
         $o = new IteratorTest($data);
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoop.phtml', $o);
@@ -135,9 +137,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             $rIterator->addItem(new IteratorTest($data));
         }
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoop.phtml', $rIterator);
@@ -161,9 +162,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
         $o = new BogusIteratorTest($data);
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         try {
@@ -178,7 +178,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartialLoopFindsModule()
     {
-        Controller\Front::getInstance()->addModuleDirectory($this->basePath);
+        FrontController::getInstance()->addModuleDirectory($this->basePath);
         $data = array(
             array('message' => 'foo'),
             array('message' => 'bar'),
@@ -186,9 +186,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             array('message' => 'bat')
         );
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoop.phtml', 'foo', $data);
@@ -212,11 +211,10 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             array('message' => 'baz'),
             array('message' => 'bat')
         );
-        $o = new \ArrayObject($data);
+        $o = new ArrayObject($data);
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoop.phtml', $o);
@@ -236,9 +234,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
         $o = new ToArrayTest($data);
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoop.phtml', $o);
@@ -262,9 +259,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         );
         $o = new IteratorWithToArrayTest($data);
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
         $this->helper->setObjectKey('obj');
 
@@ -280,9 +276,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
      */
     public function testEmptyArrayPassedToPartialLoopShouldNotThrowException()
     {
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         try {
@@ -310,15 +305,18 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             array('message' => 'bat')
         );
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoopCouter.phtml', $data);
-        foreach ($data as $key=>$item) {
-            $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
-            $this->assertContains($string, $result);
+        foreach ($data as $key => $item) {
+            $string = sprintf(
+                'This is an iteration: %s, pointer at %d',
+                $item['message'],
+                $key + 1
+            );
+            $this->assertContains($string, $result, $result);
         }
     }
 
@@ -334,9 +332,8 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             array('message' => 'bat')
         );
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
         $result = $this->helper->direct('partialLoopCouter.phtml', $data);
@@ -353,7 +350,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class IteratorTest implements \Iterator
+class IteratorTest implements Iterator
 {
     public $items;
 
@@ -393,7 +390,7 @@ class IteratorTest implements \Iterator
     }
 }
 
-class RecursiveIteratorTest implements \Iterator
+class RecursiveIteratorTest implements Iterator
 {
     public $items;
 
@@ -402,7 +399,7 @@ class RecursiveIteratorTest implements \Iterator
         $this->items = array();
     }
 
-    public function addItem(\Iterator $iterator)
+    public function addItem(Iterator $iterator)
     {
         $this->items[] = $iterator;
         return $this;
@@ -451,7 +448,7 @@ class ToArrayTest
     }
 }
 
-class IteratorWithToArrayTest implements \Iterator
+class IteratorWithToArrayTest implements Iterator
 {
     public $items;
 

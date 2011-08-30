@@ -10,17 +10,7 @@ use Zend\Http\Response;
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
 
-<<<<<<< HEAD
     public function testResponseFactoryFromStringCreatesValidResponse()
-=======
-        // Check we get an array if no code is passed
-        $codes = Response::responseCodeAsText();
-        $this->assertInternalType('array', $codes);
-        $this->assertEquals('OK', $codes[200]);
-    }
-
-    public function testUnknownCode()
->>>>>>> a181f8c8390b0d7a8fcab620b1a53cd65e8fe603
     {
         $string = 'HTTP/1.0 200 OK' . "\r\n\r\n" . 'Foo Bar';
         $response = Response::fromString($string);

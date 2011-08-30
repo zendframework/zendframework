@@ -718,12 +718,12 @@ class Client implements Dispatchable
     {   
         $uri = $this->getUri();
         
-        $this->auth = null;
+        $this->auth       = null;
         $this->streamName = null;
-        $this->cookies = null;
-        $this->encType = null;
-        $this->request = null;
-        $this->response = null;
+        $this->cookies    = null;
+        $this->encType    = null;
+        $this->request    = null;
+        $this->response   = null;
         
         $this->setUri($uri);
     }

@@ -23,18 +23,18 @@
 namespace ZendTest\OAuth;
 
 use Zend\OAuth,
-    Zend\Config\Config;
+    Zend\Config\Config,
+    Zend\Http\Client;
 
 /**
  * @category   Zend
  * @package    Zend_OAuth
  * @subpackage UnitTests
  * @group      Zend_OAuth
- * @group      disable
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OauthTest extends \PHPUnit_Framework_TestCase
+class OAuthTest extends \PHPUnit_Framework_TestCase
 {
 
     public function teardown()
@@ -45,7 +45,7 @@ class OauthTest extends \PHPUnit_Framework_TestCase
     public function testCanSetCustomHttpClient()
     {
         OAuth\OAuth::setHttpClient(new HTTPClient19485876());
-        $this->assertType('ZendTest\\OAuth\\HttpClient19485876', OAuth\OAuth::getHttpClient());
+        $this->assertInstanceOf('ZendTest\\OAuth\\HttpClient19485876', OAuth\OAuth::getHttpClient());
     }
 
     public function testGetHttpClientResetsParameters()
@@ -55,13 +55,13 @@ class OauthTest extends \PHPUnit_Framework_TestCase
         OAuth\OAuth::setHttpClient($client);
         $resetClient = OAuth\OAuth::getHttpClient();
         $resetClient->setUri('http://www.example.com');
-        $this->assertEquals('http://www.example.com:80', $resetClient->getUri(true));
+        $this->assertEquals('http://www.example.com:80', (string) $resetClient->getUri(true));
     }
 
     public function testGetHttpClientResetsAuthorizationHeader()
     {
         $client = new HTTPClient19485876();
-        $client->setHeaders('Authorization', 'realm="http://www.example.com",oauth_version="1.0"');
+        $client->setHeaders(array('Authorization' => 'realm="http://www.example.com",oauth_version="1.0"'));
         OAuth\OAuth::setHttpClient($client);
         $resetClient = OAuth\OAuth::getHttpClient();
         $this->assertEquals(null, $resetClient->getHeader('Authorization'));

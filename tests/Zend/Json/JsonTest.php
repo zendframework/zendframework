@@ -772,6 +772,84 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('stdClass', Json\Decoder::decode('{"var":"value"}'));
     }
 
+    /**
+     * @group ZF-10185
+     */
+    public function testJsonPrettyPrintWorksWithArrayNotationInStringLiteral()
+    {
+        $o = new \stdClass();
+        $o->test = 1;
+        $o->faz = 'fubar';
+
+        // The escaped double-quote in item 'stringwithjsonchars' ensures that
+        // escaped double-quotes don't throw off prettyPrint's string literal detection
+        $test = array(
+            'simple'=>'simple test string',
+            'stringwithjsonchars'=>'\"[1,2]',
+            'complex'=>array(
+                'foo'=>'bar',
+                'far'=>'boo',
+                'faz'=>array(
+                    'obj'=>$o
+                )
+            )
+        );
+        $pretty = Json\Json::prettyPrint(Json\Json::encode($test), array("indent"  => " "));
+        $expected = <<<EOB
+{
+ "simple":"simple test string",
+ "stringwithjsonchars":"\\\\\\"[1,2]",
+ "complex":{
+  "foo":"bar",
+  "far":"boo",
+  "faz":{
+   "obj":{
+    "test":1,
+    "faz":"fubar"
+   }
+  }
+ }
+}
+EOB;
+        $this->assertSame($expected, $pretty);
+    }
+
+    /**
+     * @group ZF-11167
+     */
+    public function testEncodeWillUseToArrayMethodWhenAvailable()
+    {
+        $o = new ZF11167_ToArrayClass();
+        $objJson = Json\Json::encode($o);
+        $arrJson = Json\Json::encode($o->toArray());
+        $this->assertSame($arrJson, $objJson);
+    }
+
+    /**
+     * @group ZF-11167
+     */
+    public function testEncodeWillUseToJsonWhenBothToJsonAndToArrayMethodsAreAvailable()
+    {
+        $o = new ZF11167_ToArrayToJsonClass();
+        $objJson = Json\Json::encode($o);
+        $this->assertEquals('"bogus"', $objJson);
+        $arrJson = Json\Json::encode($o->toArray());
+        $this->assertNotSame($objJson, $arrJson);
+    }
+
+    /**
+     * @group ZF-9521
+     */
+    public function testWillEncodeArrayOfObjectsEachWithToJsonMethod()
+    {
+        $array = array('one'=>new ToJsonClass());
+        $expected = '{"one":{"__className":"ZendTest\\\\Json\\\\ToJSONClass","firstName":"John","lastName":"Doe","email":"john@doe.com"}}';
+
+        Json\Json::$useBuiltinEncoderDecoder = true;
+        $json = Json\Encoder::encode($array);
+        $this->assertEquals($expected, $json);
+    }
+
 }
 
 /**
@@ -823,6 +901,41 @@ class ToJSONClass
         );
 
         return Json\Json::encode($data);
+    }
+}
+
+/**
+ * Serializable class exposing a toArray() method
+ * @see ZF-11167
+ */
+class ZF11167_ToArrayClass
+{
+    private $_firstName = 'John';
+
+    private $_lastName = 'Doe';
+
+    private $_email = 'john@doe.com';
+
+    public function toArray()
+    {
+        $data = array(
+            'firstName' => $this->_firstName,
+            'lastName'  => $this->_lastName,
+            'email'     => $this->_email
+        );
+        return $data;
+    }
+}
+
+/**
+ * Serializable class exposing both toArray() and toJson() methods
+ * @see ZF-11167
+ */
+class ZF11167_ToArrayToJsonClass extends ZF11167_ToArrayClass
+{
+    public function toJson()
+    {
+        return Json\Json::encode('bogus');
     }
 }
 

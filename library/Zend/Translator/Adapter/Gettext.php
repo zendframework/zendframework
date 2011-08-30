@@ -78,6 +78,7 @@ class Gettext extends TranslationAdapter
             throw new InvalidArgumentException('Error opening translation file \'' . $filename . '\'.');
         }
         if (@filesize($filename) < 10) {
+            @fclose($this->_file);
             throw new InvalidFileTypeException('\'' . $filename . '\' is not a gettext file');
         }
 
@@ -88,6 +89,7 @@ class Gettext extends TranslationAdapter
         } else if (strtolower(substr(dechex($input[1]), -8)) == "de120495") {
             $this->_bigEndian = true;
         } else {
+            @fclose($this->_file);
             throw new InvalidFileTypeException('\'' . $filename . '\' is not a gettext file');
         }
         // read revision - not supported for now
@@ -136,6 +138,7 @@ class Gettext extends TranslationAdapter
             }
         }
 
+        @fclose($this->_file);
         $result[$locale][''] = trim($result[$locale]['']);
         if (empty($result[$locale][''])) {
             $this->_adapterInfo[$filename] = 'No adapter information available';

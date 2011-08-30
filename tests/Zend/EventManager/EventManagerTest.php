@@ -214,7 +214,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('zero', $responses->last());
     }
 
-    public function testCanAttachAggregateInstances()
+    public function testCanAttachHandlerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
@@ -224,26 +224,11 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testHandlerAggregateReturnedByAttachAggregate()
+    public function testAttachAggregateReturnsAttachOfHandlerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
-        $test      = $this->events->attachAggregate($aggregate);
-        $this->assertSame($aggregate, $test);
-    }
-
-    public function testAttachAggregateAllowsPassingAHandlerAggregateClassName()
-    {
-        $this->events->attachAggregate('ZendTest\EventManager\TestAsset\MockAggregate');
-        $events = $this->events->getEvents();
-        foreach (array('foo.bar', 'foo.baz') as $event) {
-            $this->assertContains($event, $events);
-        }
-    }
-
-    public function testPassingClassNameToAttachAggregateReturnsHandlerAggregateInstance()
-    {
-        $test = $this->events->attachAggregate('ZendTest\EventManager\TestAsset\MockAggregate');
-        $this->assertInstanceOf('ZendTest\EventManager\TestAsset\MockAggregate', $test);
+        $method    = $this->events->attachAggregate($aggregate);
+        $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::attach', $method);
     }
 
     public function testCanDetachHandlerAggregates()
@@ -274,6 +259,14 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $handlers = $this->events->getHandlers('other');
         $this->assertEquals(1, count($handlers));
         $this->assertContains($handlerOther, $handlers);
+    }
+
+    public function testDetachAggregateReturnsDetachOfHandlerAggregate()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attachAggregate($aggregate);
+        $method = $this->events->detachAggregate($aggregate);
+        $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::detach', $method);
     }
 
     public function testCallingEventsStopPropagationMethodHaltsEventEmission()

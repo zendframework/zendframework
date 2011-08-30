@@ -524,7 +524,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests getting plurals from lowered locale
+     * Tests getting plurals from unknown locale
      */
     public function testGettingPluralsFromUnknownLocale()
     {
@@ -650,7 +650,36 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests getting plurals from lowered locale
+     * This test must be done BEFORE own rules are set to prevent unintentional behaviour
+     *
+     * @group ZF-11173
+     */
+    public function testRoutingPlurals()
+    {
+        $lang = new Translator\Translator(
+            Translator\Translator::AN_ARRAY,
+            array('singular' =>
+                array('plural_0 (en)',
+                    'plural_1 (en)',
+                    'plural_2 (en)',
+                    'plural_3 (en)'),
+                'plural' => ''),
+            'en',
+            array(
+                'route' => array('fr' => 'en'),
+            )
+        );
+
+        $lang->addTranslation(array('msg1' => 'Message 1 (fr)'), 'fr');
+        $this->assertEquals('plural_0 (en)', $lang->plural('singular', 'plural', 1));
+        $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 2));
+        $lang->setLocale('fr');
+        $this->assertEquals('plural_0 (en)', $lang->plural('singular', 'plural', 1));
+        $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 2));
+    }
+
+    /**
+     * Tests getting plurals from own rule
      */
     public function testGettingPluralsUsingOwnRule()
     {
@@ -672,7 +701,6 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('plural_1 (en)', $lang->translate(array('singular', 'plural', 0)));
         $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 0));
     }
-
 
     /**
      * @group ZF-9489
@@ -922,6 +950,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
                 'locale'    => 'auto',
                 'scan'      => Translator\Translator::LOCALE_FILENAME,
                 'ignore'    => array('.', 'ignoreme', 'LC_OTHER'),
+                // needed because browser settings can not be simulated in phpunit
+                'route'     => array('ja' => 'de_AT', 'de_AT' => 'de_DE', 'de_DE' => 'en_US'),
                 'routeHttp' => true,
             )
         );
@@ -935,6 +965,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $translate->addTranslation($translate2);
+
         $langs = $translate->getList();
         $this->assertFalse(array_key_exists('de_AT', $langs));
         $this->assertTrue(array_key_exists('ja', $langs));

@@ -34,10 +34,27 @@ use Zend\EventManager\EventCollection,
  */
 class MockAggregate implements HandlerAggregate
 {
+
+    protected $handles = array();
+
     public function attach(EventCollection $events)
     {
-        $events->attach('foo.bar', array( $this, 'fooBar' ));
-        $events->attach('foo.baz', array( $this, 'fooBaz' ));
+        $handles = array();
+        $handles[] = $events->attach('foo.bar', array( $this, 'fooBar' ));
+        $handles[] = $events->attach('foo.baz', array( $this, 'fooBaz' ));
+
+        $this->handles[ \spl_object_hash($events) ] = $handles;
+
+        return __METHOD__;
+    }
+
+    public function detach(EventCollection $events)
+    {
+        foreach ($this->handles[ \spl_object_hash($events) ] as $handle) {
+            $events->detach($handle);
+        }
+
+        return __METHOD__;
     }
 
     public function fooBar()

@@ -368,4 +368,34 @@ CODE;
         $received = $codeGenClass->generate();
         $this->assertContains('class FunClass', $received, $received);
     }
+
+    /**
+     * @group ZF-11513
+     */
+    public function testAllowsClassConstantToHaveSameNameAsClassProperty()
+    {
+        $const = new Php\PhpProperty();
+        $const->setName('name')->setDefaultValue('constant')->setConst(true);
+
+        $property = new Php\PhpProperty();
+        $property->setName('name')->setDefaultValue('property');
+
+        $codeGenClass = new Php\PhpClass();
+        $codeGenClass->setName('My_Class')->setProperties(array($const, $property));
+
+        $expected = <<<CODE
+class My_Class
+{
+
+    const name = 'constant';
+
+    public \$name = 'property';
+
+
+}
+
+CODE;
+        $this->assertEquals( $expected, $codeGenClass->generate() );
+    }
+
 }

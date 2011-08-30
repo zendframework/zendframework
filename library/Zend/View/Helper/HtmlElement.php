@@ -98,7 +98,11 @@ abstract class HtmlElement extends AbstractHelper
                     // non-scalar data should be cast to JSON first
                     $val = \Zend\Json\Json::encode($val);
                 }
-                $val = preg_replace('/"([^"]*)":/', '$1:', $val);
+                // Escape single quotes inside event attribute values.
+                // This will create html, where the attribute value has
+                // single quotes around it, and escaped single quotes or
+                // non-escaped double quotes inside of it
+                $val = str_replace('\'', '&#39;', $val);
             } else {
                 if (is_array($val)) {
                     $val = implode(' ', $val);

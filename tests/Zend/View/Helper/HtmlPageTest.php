@@ -24,6 +24,9 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\HtmlPage;
+
 /**
  * @category   Zend
  * @package    Zend_View
@@ -48,8 +51,8 @@ class HtmlPageTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\View();
-        $this->helper = new \Zend\View\Helper\HtmlPage();
+        $this->view   = new View();
+        $this->helper = new HtmlPage();
         $this->helper->setView($this->view);
     }
 

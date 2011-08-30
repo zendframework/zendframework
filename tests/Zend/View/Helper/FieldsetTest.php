@@ -24,6 +24,9 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\Fieldset;
+
 /**
  * Test class for Zend_View_Helper_Fieldset
  *
@@ -46,8 +49,8 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->view   = new \Zend\View\View();
-        $this->helper = new \Zend\View\Helper\Fieldset();
+        $this->view   = new View();
+        $this->helper = new Fieldset();
         $this->helper->setView($this->view);
         ob_start();
     }

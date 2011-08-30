@@ -24,6 +24,10 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\Registry,
+    Zend\View\PhpRenderer as View,
+    Zend\View\Helper\FormMultiCheckbox;
+
 /**
  * Test class for Zend_View_Helper_FormMultiCheckbox
  *
@@ -46,12 +50,12 @@ class FormMultiCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (\Zend\Registry::isRegistered('Zend_View_Helper_Doctype')) {
-            $registry = \Zend\Registry::getInstance();
+        if (Registry::isRegistered('Zend_View_Helper_Doctype')) {
+            $registry = Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view   = new \Zend\View\View();
-        $this->helper = new \Zend\View\Helper\FormMultiCheckbox();
+        $this->view   = new View();
+        $this->helper = new FormMultiCheckbox();
         $this->helper->setView($this->view);
         ob_start();
     }

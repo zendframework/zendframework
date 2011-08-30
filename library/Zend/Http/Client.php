@@ -43,19 +43,21 @@ use Zend\Config\Config,
  */
 class Client implements Dispatchable
 {
-    /**
+    /**#@+
      * @const string Supported HTTP Authentication methods
      */
     const AUTH_BASIC  = 'basic';
     const AUTH_DIGEST = 'digest';  // not implemented yet
+    /**#@-*/
 
-    /**
+    /**#@+
      * @const string POST data encoding methods
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
+    /**#@-*/
 
-    /**
+    /**#@+
      * @const string DIGEST Authentication
      */
     const DIGEST_REALM  = 'realm';
@@ -64,6 +66,7 @@ class Client implements Dispatchable
     const DIGEST_OPAQUE = 'opaque';
     const DIGEST_NC     = 'nc';
     const DIGEST_CNONCE = 'cnonce';
+    /**#@-*/
 
     /**
      * @var Response
@@ -159,18 +162,7 @@ class Client implements Dispatchable
             $this->setConfig($config);
         }
     }
-    /**
-     * Dispatch
-     * 
-     * @param RequestDescription $request
-     * @param ResponseDescription $response
-     * @return ResponseDescription 
-     */
-    public function dispatch(RequestDescription $request, ResponseDescription $response = null)
-    {
-        $response= $this->send($request);
-        return $response;
-    }
+
     /**
      * Set configuration parameters for this HTTP client
      *
@@ -199,6 +191,7 @@ class Client implements Dispatchable
 
         return $this;
     }
+
     /**
      * Load the connection adapter
      *
@@ -206,7 +199,7 @@ class Client implements Dispatchable
      * seperated from ->request() to preserve logic and readability
      *
      * @param  Client\Adapter|string $adapter
-     * @return null
+     * @return Client
      * @throws \Zend\Http\Client\Exception
      */
     public function setAdapter($adapter)
@@ -226,7 +219,9 @@ class Client implements Dispatchable
         $config = $this->config;
         unset($config['adapter']);
         $this->adapter->setConfig($config);
+        return $this;
     }
+
     /**
      * Load the connection adapter
      *
@@ -236,6 +231,19 @@ class Client implements Dispatchable
     {
         return $this->adapter;
     }
+
+    /**
+     * Set request
+     *
+     * @param Request $request
+     * @return Client
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
     /**
      * Get Request
      * 
@@ -248,6 +256,19 @@ class Client implements Dispatchable
         }
         return $this->request;
     }
+
+    /**
+     * Set response
+     *
+     * @param Response $response
+     * @return Client
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+        return $this;
+    }
+
     /**
      * Get Response
      * 
@@ -260,24 +281,8 @@ class Client implements Dispatchable
         }
         return $this->response;
     }
-    /**
-     * Set request
-     * 
-     * @param Zend\Http\Request $request 
-     */
-    public function setRequest(Request $request)
-    {
-        $this->request = $request;
-    }
-    /**
-     * Set response
-     * 
-     * @param Zend\Http\Response $response 
-     */
-    public function setResponse(Response $response)
-    {
-        $this->response = $response;
-    }
+
+
     /**
      * Get the last request (as a string)
      * 
@@ -287,6 +292,7 @@ class Client implements Dispatchable
     {
         return $this->lastRequest;
     }
+
     /**
      * Get the last response (as a string)
      * 
@@ -296,6 +302,7 @@ class Client implements Dispatchable
     {
         return $this->lastResponse;
     }
+
     /**
      * Get the redirections count
      * 
@@ -309,7 +316,8 @@ class Client implements Dispatchable
     /**
      * Set Uri (to the request)
      * 
-     * @param string|Zend\Uri\Http $uri 
+     * @param string|\Zend\Uri\Http $uri
+     * @return Client
      */
     public function setUri($uri)
     {
@@ -326,7 +334,9 @@ class Client implements Dispatchable
                 $this->getUri()->setPort(($this->getUri()->getScheme() == 'https' ? 443 : 80));
             }
         }
+        return $this;
     }
+
     /**
      * Get uri (from the request)
      * 
@@ -336,6 +346,7 @@ class Client implements Dispatchable
     {
         return $this->getRequest()->uri();
     }
+
     /**
      * Set the HTTP method (to the request)
      * 
@@ -353,6 +364,7 @@ class Client implements Dispatchable
         
         return $this;
     }
+
     /**
      * Get the HTTP method
      * 
@@ -362,11 +374,13 @@ class Client implements Dispatchable
     {
         return $this->getRequest()->getMethod();
     }
+
     /**
      * Set the encoding type and the boundary (if any)
      * 
      * @param string $encType 
      * @param string $boundary
+     * @return Client
      */
     public function setEncType($encType, $boundary = null)
     {
@@ -379,6 +393,7 @@ class Client implements Dispatchable
         }
         return $this;
     }
+
     /**
      * Get the encoding type
      * 
@@ -388,6 +403,7 @@ class Client implements Dispatchable
     {
         return $this->encType;
     }
+
     /**
      * Set raw body (for advanced use cases)
      * 
@@ -399,6 +415,7 @@ class Client implements Dispatchable
         $this->getRequest()->setRawBody($body);
         return $this;
     }
+
     /**
      * Set the POST parameters
      * 
@@ -410,6 +427,7 @@ class Client implements Dispatchable
         $this->getRequest()->post()->fromArray($post);
         return $this;
     }
+
     /**
      * Set the GET parameters
      * 
@@ -421,7 +439,7 @@ class Client implements Dispatchable
         $this->getRequest()->query()->fromArray($query);
         return $this;
     }
-    
+
     /**
      * Return the current cookies
      *
@@ -458,7 +476,7 @@ class Client implements Dispatchable
      * @param boolean $httponly
      * @return Client 
      */
-    public function addCookie($cookie, $value=null, $domain=null, $expire=null, $path=null, $secure=false, $httponly=true)
+    public function addCookie($cookie, $value = null, $domain = null, $expire = null, $path = null, $secure = false, $httponly = true)
     {
         if ($cookie instanceof \ArrayIterator) {
             foreach ($cookie as $setCookie) {
@@ -500,12 +518,13 @@ class Client implements Dispatchable
         }
         return $this;
     }
+
     /**
      * Clear all the cookies
      */
     public function clearCookies()
     {
-        $this->cookies= array();
+        $this->cookies = array();
     }
     
     /**
@@ -517,7 +536,7 @@ class Client implements Dispatchable
     public function setHeaders($headers)
     {
         if (is_array($headers)) {
-            $newHeaders= new Headers();
+            $newHeaders = new Headers();
             $newHeaders->addHeaders($headers);
             $this->getRequest()->setHeaders($newHeaders);
         } elseif ($headers instanceof Headers) {
@@ -581,7 +600,7 @@ class Client implements Dispatchable
      */
     public function getStream()
     {
-        return $this->config["output_stream"];
+        return $this->config["outputstream"];
     }
 
     /**
@@ -596,7 +615,7 @@ class Client implements Dispatchable
         if(!is_string($this->streamName)) {
             // If name is not given, create temp name
             $this->streamName = tempnam(
-                isset($this->config['stream_tmp_dir']) ? $this->config['stream_tmp_dir'] : sys_get_temp_dir(),
+                isset($this->config['streamtmpdir']) ? $this->config['streamtmpdir'] : sys_get_temp_dir(),
                 'Zend\Http\Client'
             );
         }
@@ -673,9 +692,9 @@ class Client implements Dispatchable
                     }
                 }
                 $ha1 = md5($user . ':' . $digest['realm'] . ':' . $password);
-                if (empty($digest['qop']) || strtolower($digest['qop'])=='auth') {
+                if (empty($digest['qop']) || strtolower($digest['qop']) == 'auth') {
                     $ha2 = md5($this->getMethod() . ':' . $this->getUri()->getPath());
-                } elseif (strtolower($digest['qop'])=='auth-int') {
+                } elseif (strtolower($digest['qop']) == 'auth-int') {
                      if (empty($entityBody)) {
                         throw new Exception\InvalidArgumentException("I cannot use the auth-int digest authentication without the entity body");
                      }
@@ -708,6 +727,20 @@ class Client implements Dispatchable
         
         $this->setUri($uri);
     }
+
+    /**
+     * Dispatch
+     *
+     * @param RequestDescription $request
+     * @param ResponseDescription $response
+     * @return ResponseDescription
+     */
+    public function dispatch(RequestDescription $request, ResponseDescription $response = null)
+    {
+        $response = $this->send($request);
+        return $response;
+    }
+
     /**
      * Send HTTP request
      *
@@ -770,12 +803,12 @@ class Client implements Dispatchable
             // headers
             $headers = $this->prepareHeaders($body,$uri);
             
-            $secure= $uri->getScheme() == 'https' ? true : false;
+            $secure = ($uri->getScheme() == 'https') ? true : false;
             
             // cookies
             $cookie = $this->prepareCookies($uri->getHost(), $uri->getPath(), $secure);
             if ($cookie->getFieldValue()) {
-                $headers['Cookie']= $cookie->getFieldValue();
+                $headers['Cookie'] = $cookie->getFieldValue();
             }
             
             // check that adapter supports streaming before using it
@@ -828,7 +861,7 @@ class Client implements Dispatchable
             }
 
             // Get the cookies from response (if any)
-            $setCookie= $response->cookie();
+            $setCookie = $response->cookie();
             if (!empty($setCookie)) {
                 $this->addCookie($setCookie);
             }
@@ -887,6 +920,7 @@ class Client implements Dispatchable
         $this->response = $response;
         return $response;
     }
+
     /**
      * Set a file to upload (using a POST request)
      *
@@ -913,7 +947,7 @@ class Client implements Dispatchable
             if (($data = @file_get_contents($filename)) === false) {
                 throw new Exception\RuntimeException("Unable to read file '{$filename}' for upload");
             }
-            if (! $ctype) {
+            if (!$ctype) {
                 $ctype = $this->detectFileMimeType($filename);
             }
         }
@@ -927,6 +961,7 @@ class Client implements Dispatchable
 
         return $this;
     }
+
     /**
      * Remove a file to upload
      *
@@ -1108,13 +1143,13 @@ class Client implements Dispatchable
                     // Get POST parameters and encode them
                     $params = self::flattenParametersArray($this->getRequest()->post()->toArray());
                     foreach ($params as $pp) {
-                        $body .= self::encodeFormData($boundary, $pp[0], $pp[1]);
+                        $body .= $this->encodeFormData($boundary, $pp[0], $pp[1]);
                     }
 
                     // Encode files
                     foreach ($this->getRequest()->file()->toArray() as $key => $file) {
                         $fhead = array('Content-Type' => $file['ctype']);
-                        $body .= self::encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
+                        $body .= $this->encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
                     }
 
                     $body .= "--{$boundary}--\r\n";
@@ -1193,7 +1228,8 @@ class Client implements Dispatchable
      * @param array $headers Associative array of optional headers @example ("Content-Transfer-Encoding" => "binary")
      * @return string
      */
-    public static function encodeFormData($boundary, $name, $value, $filename = null, $headers = array()) {
+    public function encodeFormData($boundary, $name, $value, $filename = null, $headers = array())
+    {
         $ret = "--{$boundary}\r\n" .
             'Content-Disposition: form-data; name="' . $name .'"';
 
@@ -1225,7 +1261,7 @@ class Client implements Dispatchable
      * @param string $prefix
      * @return array
      */
-    static protected function flattenParametersArray($parray, $prefix = null)
+    protected function flattenParametersArray($parray, $prefix = null)
     {
         if (!is_array($parray)) {
             return $parray;
@@ -1247,7 +1283,7 @@ class Client implements Dispatchable
             }
 
             if (is_array($value)) {
-                $parameters = array_merge($parameters, self::flattenParametersArray($value, $key));
+                $parameters = array_merge($parameters, $this->flattenParametersArray($value, $key));
 
             } else {
                 $parameters[] = array($key, $value);

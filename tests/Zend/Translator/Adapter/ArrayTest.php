@@ -286,6 +286,8 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cache instanceof Frontend\Core);
         unset ($adapter);
 
+        Adapter\ArrayAdapter::setCache($cache);
+        $this->assertTrue(Adapter\ArrayAdapter::hasCache());
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
         $this->assertTrue($cache instanceof Frontend\Core);

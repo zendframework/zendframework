@@ -284,21 +284,18 @@ abstract class Adapter
             }
 
             if (is_array($options['ignore'])) {
-                $ignore = '/';
+                $ignore = '{';
                 foreach($options['ignore'] as $key => $match) {
                     if (strpos($key, 'regex') !== false) {
-                        if (($match[0] === '/') && (substr($match, -1, 1) === '/')) {
-                            $match = substr($match, 1, -1);
-                        }
-
                         $ignore .= $match . '|';
                     } else {
-                        $ignore .= preg_quote($separator . $match, '/') . '|';
+                        $ignore .= $separator . $match . '|';
                     }
                 }
-                $ignore = substr($ignore, 0, -1) . '/u';
+
+                $ignore = substr($ignore, 0, -1) . '}u';
             } else {
-                $ignore = '/' . preg_quote($separator . $options['ignore'], '/') . '/u';
+                $ignore = '{' . $separator . $options['ignore'] . '}u';
             }
 
             $iterator = new RecursiveIteratorIterator(
@@ -452,11 +449,7 @@ abstract class Adapter
 
         if (isset(self::$_cache) and ($change == true)) {
             $id = 'Zend_Translator_' . $this->toString() . '_Options';
-            if (self::$_cacheTags) {
-                self::$_cache->save($this->_options, $id, array($this->_options['tag']));
-            } else {
-                self::$_cache->save($this->_options, $id);
-            }
+            $this->saveCache($this->_options, $id);
         }
 
         return $this;
@@ -756,11 +749,7 @@ abstract class Adapter
 
         if (($read) and (isset(self::$_cache))) {
             $id = 'Zend_Translator_' . md5(serialize($options['content'])) . '_' . $this->toString();
-            if (self::$_cacheTags) {
-                self::$_cache->save($temp, $id, array($this->_options['tag']));
-            } else {
-                self::$_cache->save($temp, $id);
-            }
+            $this->saveCache($temp, $id);
         }
 
         return $this;

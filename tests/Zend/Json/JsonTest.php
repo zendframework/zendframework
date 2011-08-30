@@ -837,6 +837,19 @@ EOB;
         $this->assertNotSame($objJson, $arrJson);
     }
 
+    /**
+     * @group ZF-9521
+     */
+    public function testWillEncodeArrayOfObjectsEachWithToJsonMethod()
+    {
+        $array = array('one'=>new ToJsonClass());
+        $expected = '{"one":{"__className":"ZendTest\\\\Json\\\\ToJSONClass","firstName":"John","lastName":"Doe","email":"john@doe.com"}}';
+
+        Json\Json::$useBuiltinEncoderDecoder = true;
+        $json = Json\Encoder::encode($array);
+        $this->assertEquals($expected, $json);
+    }
+
 }
 
 /**

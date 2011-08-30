@@ -207,10 +207,11 @@ class Json
      * @param SimpleXMLElement $simpleXmlElementObject
      * @return Zend_Json_Expr|string
      */
-    protected static function _getXmlValue($simpleXmlElementObject) {
-        $pattern = '/^[\s]*new Zend_Json_Expr[\s]*\([\s]*[\"\']{1}(.*)[\"\']{1}[\s]*\)[\s]*$/';
+    protected static function _getXmlValue($simpleXmlElementObject) 
+    {
+        $pattern   = '/^[\s]*new Zend[_\\]Json[_\\]Expr[\s]*\([\s]*[\"\']{1}(.*)[\"\']{1}[\s]*\)[\s]*$/';
         $matchings = array();
-        $match = preg_match ($pattern, $simpleXmlElementObject, $matchings);
+        $match     = preg_match($pattern, $simpleXmlElementObject, $matchings);
         if ($match) {
             return new Expr($matchings[1]);
         } else {
@@ -238,56 +239,63 @@ class Json
      * @param integer $recursionDepth
      * @return array
      */
-    protected static function _processXml ($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth=0) {
+    protected static function _processXml($simpleXmlElementObject, $ignoreXmlAttributes, $recursionDepth = 0) 
+    {
         // Keep an eye on how deeply we are involved in recursion.
         if ($recursionDepth > self::$maxRecursionDepthAllowed) {
             // XML tree is too deep. Exit now by throwing an exception.
             throw new RecursionException(
-                "Function _processXml exceeded the allowed recursion depth of " .
-                self::$maxRecursionDepthAllowed);
-        } // End of if ($recursionDepth > self::$maxRecursionDepthAllowed)
-        $childrens= $simpleXmlElementObject->children();
-        $name= $simpleXmlElementObject->getName();
-        $value= self::_getXmlValue($simpleXmlElementObject);
-        $attributes= (array) $simpleXmlElementObject->attributes();
-        if (count($childrens)==0) {
+                "Function _processXml exceeded the allowed recursion depth of " 
+                .  self::$maxRecursionDepthAllowed
+            );
+        }
+
+        $children   = $simpleXmlElementObject->children();
+        $name       = $simpleXmlElementObject->getName();
+        $value      = self::_getXmlValue($simpleXmlElementObject);
+        $attributes = (array) $simpleXmlElementObject->attributes();
+
+        if (!count($children)) {
             if (!empty($attributes) && !$ignoreXmlAttributes) {
                 foreach ($attributes['@attributes'] as $k => $v) {
-                    $attributes['@attributes'][$k]= self::_getXmlValue($v);
+                    $attributes['@attributes'][$k] = self::_getXmlValue($v);
                 }
                 if (!empty($value)) {
-                    $attributes['@text']= $value;
+                    $attributes['@text'] = $value;
                 } 
                 return array($name => $attributes);
-            } else {
-               return array($name => $value);
             }
-        } else {
-            $childArray= array();
-            foreach ($childrens as $child) {
-                $childname= $child->getName();
-                $element= self::_processXml($child,$ignoreXmlAttributes,$recursionDepth+1);
-                if (array_key_exists($childname, $childArray)) {
-                    if (empty($subChild[$childname])) {
-                        $childArray[$childname]=array($childArray[$childname]);
-                        $subChild[$childname]=true;
-                    }
-                    $childArray[$childname][]= $element[$childname];
-                } else {
-                    $childArray[$childname]= $element[$childname];
-                }
-            }
-            if (!empty($attributes) && !$ignoreXmlAttributes) {
-                foreach ($attributes['@attributes'] as $k => $v) {
-                    $attributes['@attributes'][$k]= self::_getXmlValue($v);
-                }
-                $childArray['@attributes']= $attributes['@attributes'];
-            }
-            if (!empty($value)) {
-                $childArray['@text']= $value;
-            }
-            return array($name => $childArray);
+
+            return array($name => $value);
         }
+
+        $childArray = array();
+        foreach ($children as $child) {
+            $childname = $child->getName();
+            $element   = self::_processXml($child,$ignoreXmlAttributes,$recursionDepth + 1);
+            if (array_key_exists($childname, $childArray)) {
+                if (empty($subChild[$childname])) {
+                    $childArray[$childname] = array($childArray[$childname]);
+                    $subChild[$childname]   = true;
+                }
+                $childArray[$childname][] = $element[$childname];
+            } else {
+                $childArray[$childname] = $element[$childname];
+            }
+        }
+
+        if (!empty($attributes) && !$ignoreXmlAttributes) {
+            foreach ($attributes['@attributes'] as $k => $v) {
+                $attributes['@attributes'][$k] = self::_getXmlValue($v);
+            }
+            $childArray['@attributes'] = $attributes['@attributes'];
+        }
+
+        if (!empty($value)) {
+            $childArray['@text'] = $value;
+        }
+
+        return array($name => $childArray);
     }
 
     /**

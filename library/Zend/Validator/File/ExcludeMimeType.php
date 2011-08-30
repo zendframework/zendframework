@@ -23,7 +23,7 @@
  */
 namespace Zend\Validator\File;
 
-use Loader;
+use Zend\Loader;
 
 /**
  * Validator for the mime type of a file

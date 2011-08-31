@@ -239,7 +239,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
         if ($this->_defaultValue !== null) {
             $output .= ' = ';
             if (is_string($this->_defaultValue)) {
-                $output .= PhpValue::escape($this->_defaultValue);
+                $output .= ValueGenerator::escape($this->_defaultValue);
             } else if($this->_defaultValue instanceof \Zend\Code\Generator\PhpParameterDefaultValue) {
                 $output .= (string)$this->_defaultValue;
             } else {

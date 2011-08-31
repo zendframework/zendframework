@@ -31,23 +31,23 @@ namespace Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpBody extends \Zend\CodeGenerator\AbstractCodeGenerator
+class BodyGenerator extends AbstractGenerator
 {
 
     /**
      * @var string
      */
-    protected $_content = null;
+    protected $content = null;
 
     /**
      * setContent()
      *
      * @param string $content
-     * @return \Zend\Code\Generator\PhpBody
+     * @return BodyGenerator
      */
     public function setContent($content)
     {
-        $this->_content = $content;
+        $this->content = $content;
         return $this;
     }
 
@@ -58,7 +58,7 @@ class PhpBody extends \Zend\CodeGenerator\AbstractCodeGenerator
      */
     public function getContent()
     {
-        return (string) $this->_content;
+        return (string) $this->content;
     }
 
     /**

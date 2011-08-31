@@ -24,7 +24,7 @@
  */
 namespace Zend\Code\Generator;
 
-class PhpValue extends AbstractPhp
+class ValueGenerator extends AbstractPhp
 {
     /**#@+
      * Constant values
@@ -51,32 +51,32 @@ class PhpValue extends AbstractPhp
     /**
      * @var array of reflected constants
      */
-    protected static $_constants = array();
+    protected static $constants = array();
 
     /**
      * @var mixed
      */
-    protected $_value = null;
+    protected $value = null;
 
     /**
      * @var string
      */
-    protected $_type  = self::TYPE_AUTO;
+    protected $type  = self::TYPE_AUTO;
 
     /**
      * @var int
      */
-    protected $_arrayDepth = 1;
+    protected $arrayDepth = 1;
 
     /**
      * @var string
      */
-    protected $_outputMode = self::OUTPUT_MULTIPLE_LINE;
+    protected $outputMode = self::OUTPUT_MULTIPLE_LINE;
 
     /**
      * @var array
      */
-    protected $_allowedTypes = null;
+    protected $allowedTypes = null;
 
     /**
      * _init()
@@ -85,11 +85,11 @@ class PhpValue extends AbstractPhp
      */
     protected function _init()
     {
-        if(count(self::$_constants) == 0) {
+        if(count(self::$constants) == 0) {
             $reflect = new \ReflectionClass(get_class($this));
             foreach ($reflect->getConstants() as $name => $value) {
                 if (substr($name, 0, 4) == 'TYPE') {
-                    self::$_constants[$name] = $value;
+                    self::$constants[$name] = $value;
                 }
             }
             unset($reflect);
@@ -103,10 +103,10 @@ class PhpValue extends AbstractPhp
      */
     public function isValidConstantType()
     {
-        if ($this->_type == self::TYPE_AUTO) {
-            $type = $this->_getAutoDeterminedType($this->_value);
+        if ($this->type == self::TYPE_AUTO) {
+            $type = $this->_getAutoDeterminedType($this->value);
         } else {
-            $type = $this->_type;
+            $type = $this->type;
         }
 
         // valid types for constants
@@ -130,11 +130,11 @@ class PhpValue extends AbstractPhp
      * setValue()
      *
      * @param mixed $value
-     * @return \Zend\Code\Generator\PhpPropertyValue
+     * @return ValueGenerator
      */
     public function setValue($value)
     {
-        $this->_value = $value;
+        $this->value = $value;
         return $this;
     }
 
@@ -145,18 +145,18 @@ class PhpValue extends AbstractPhp
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
      * setType()
      *
      * @param string $type
-     * @return \Zend\Code\Generator\PhpPropertyValue
+     * @return ValueGenerator
      */
     public function setType($type)
     {
-        $this->_type = $type;
+        $this->type = $type;
         return $this;
     }
 
@@ -167,18 +167,18 @@ class PhpValue extends AbstractPhp
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
      * setArrayDepth()
      *
      * @param int $arrayDepth
-     * @return \Zend\Code\Generator\PhpPropertyValue
+     * @return ValueGenerator
      */
     public function setArrayDepth($arrayDepth)
     {
-        $this->_arrayDepth = $arrayDepth;
+        $this->arrayDepth = $arrayDepth;
         return $this;
     }
 
@@ -189,7 +189,7 @@ class PhpValue extends AbstractPhp
      */
     public function getArrayDepth()
     {
-        return $this->_arrayDepth;
+        return $this->arrayDepth;
     }
 
     /**
@@ -200,7 +200,7 @@ class PhpValue extends AbstractPhp
      */
     protected function _getValidatedType($type)
     {
-        if (($constName = array_search($type, self::$_constants)) !== false) {
+        if (($constName = array_search($type, self::$constants)) !== false) {
             return $type;
         }
 
@@ -245,13 +245,13 @@ class PhpValue extends AbstractPhp
      */
     public function generate()
     {
-        $type = $this->_type;
+        $type = $this->type;
 
         if ($type != self::TYPE_AUTO) {
             $type = $this->_getValidatedType($type);
         }
 
-        $value = $this->_value;
+        $value = $this->value;
 
         if ($type == self::TYPE_AUTO) {
             $type = $this->_getAutoDeterminedType($value);
@@ -299,14 +299,14 @@ class PhpValue extends AbstractPhp
                 $curArrayMultiblock = false;
                 if (count($value) > 1) {
                     $curArrayMultiblock = true;
-                    if ($this->_outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                        $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth + 1);
+                    if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
+                        $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->arrayDepth + 1);
                     }
                 }
                 $outputParts = array();
                 $noKeyIndex = 0;
                 foreach ($value as $n => $v) {
-                    $v->setArrayDepth($this->_arrayDepth + 1);
+                    $v->setArrayDepth($this->arrayDepth + 1);
                     $partV = $v->generate();
                     if ($n === $noKeyIndex) {
                         $outputParts[] = $partV;
@@ -315,12 +315,12 @@ class PhpValue extends AbstractPhp
                         $outputParts[] = (is_int($n) ? $n : self::escape($n)) . ' => ' . $partV;
                     }
                 }
-                $padding = ($this->_outputMode == self::OUTPUT_MULTIPLE_LINE)
-                    ? self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth + 1)
+                $padding = ($this->outputMode == self::OUTPUT_MULTIPLE_LINE)
+                    ? self::LINE_FEED . str_repeat($this->_indentation, $this->arrayDepth + 1)
                     : ' ';
                 $output .= implode(',' . $padding, $outputParts);
-                if ($curArrayMultiblock == true && $this->_outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                    $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->_arrayDepth + 1);
+                if ($curArrayMultiblock == true && $this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
+                    $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->arrayDepth + 1);
                 }
                 $output .= ')';
                 break;

@@ -43,7 +43,7 @@ class MemberContainer extends \ArrayObject
     /**
      * @var const|string
      */
-    protected $_type = self::TYPE_PROPERTY;
+    protected $type = self::TYPE_PROPERTY;
 
     /**
      * __construct()
@@ -52,7 +52,7 @@ class MemberContainer extends \ArrayObject
      */
     public function __construct($type = self::TYPE_PROPERTY)
     {
-        $this->_type = $type;
+        $this->type = $type;
         parent::__construct(array(), self::ARRAY_AS_PROPS);
     }
 

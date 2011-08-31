@@ -34,7 +34,7 @@ namespace Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpParameterDefaultValue extends PhpValue
+class PhpParameterDefaultValue extends ValueGenerator
 {
     
     protected $_outputMode = self::OUTPUT_SINGLE_LINE;

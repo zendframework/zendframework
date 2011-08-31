@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\CodeGenerator;
+namespace Zend\Code\Generator;
 use Zend\Config;
 
 /**
@@ -31,7 +31,7 @@ use Zend\Config;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractCodeGenerator
+abstract class AbstractGenerator
 {
 
     /**

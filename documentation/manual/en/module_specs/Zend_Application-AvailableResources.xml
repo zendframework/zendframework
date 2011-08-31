@@ -2,7 +2,7 @@
 
 
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources"><info><title>Available Resource Plugins</title></info>
-    
+
 
     <para>
         Here you'll find <acronym>API</acronym>-like documentation about all resource plugins
@@ -22,5 +22,6 @@
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Application-AvailableResources-Navigation.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Application-AvailableResources-Router.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Application-AvailableResources-Session.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Application-AvailableResources-Translator.xml"/>
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Application-AvailableResources-View.xml"/>
 </section>

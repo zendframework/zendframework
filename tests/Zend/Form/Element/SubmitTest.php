@@ -29,7 +29,7 @@ use Zend\Form\Element\Submit as SubmitElement,
     Zend\Registry,
     Zend\Translator\Translator,
     Zend\Translator\Adapter\ArrayAdapter as ArrayTranslator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Submit

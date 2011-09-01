@@ -25,7 +25,7 @@ use Zend\Form\Element\Checkbox as CheckboxElement,
     Zend\Form\Element\Xhtml as XhtmlElement,
     Zend\Form\Element,
     Zend\Form\Decorator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Checkbox

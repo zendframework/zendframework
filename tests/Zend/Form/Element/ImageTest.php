@@ -26,7 +26,7 @@ use Zend\Form\Element\Image as ImageElement,
     Zend\Form\Element,
     Zend\Form\Decorator,
     Zend\Translator\Adapter\ArrayAdapter as ArrayTranslator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Image

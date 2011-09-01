@@ -40,7 +40,7 @@
             <para>
                 <emphasis><property>options</property></emphasis> : les options varient en fonction 
                 de l'adaptateur choisi. Veuillez vous reporter à la section 
-                <xref linked="zend.translate.using.options" /> de ce dernier pour plus de détails.
+                <xref linkend="zend.translate.using.options" /> de ce dernier pour plus de détails.
             </para>
         </listitem>
 
@@ -49,7 +49,7 @@
                 <emphasis><property>registry</property></emphasis> : spécifie la clé du registre 
                 pour stocker l'instance de <classname>Zend_Translate</classname>. Ce paramètre 
                 est optionnel, car il sera mis par défaut dans le registre avec la clé 
-                Zend_Translate.
+                <property>Zend_Translate</property>.
             </para>
         </listitem>
 
@@ -57,7 +57,7 @@
             <para>
                 <emphasis><property>cache</property></emphasis> : spécifie le nom d'un modèle du 
                 gestionnaire de cache ou l'objet de cache pour les sources de traduction. Cela 
-                permet d'améliorer les performances en particulier pour les formats XML.
+                permet d'améliorer les performances en particulier pour les formats <acronym>XML</acronym>.
             </para>
         </listitem>
     </itemizedlist>

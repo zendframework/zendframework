@@ -24,7 +24,10 @@
  */
 namespace Zend\Code\Generator;
 
+use Zend\Code\Reflection\ReflectionParameter;
+
 /**
+ *
  * @uses       \Zend\Code\Generator\AbstractPhp
  * @uses       Zend_CodeGenerator_Php_ParameterDefaultValue
  * @category   Zend
@@ -32,50 +35,50 @@ namespace Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpParameter extends \Zend\Code\Generator\AbstractPhp
+class ParameterGenerator extends AbstractGenerator
 {
     /**
      * @var string
      */
-    protected $_type = null;
+    protected $type = null;
 
     /**
      * @var string
      */
-    protected $_name = null;
+    protected $name = null;
 
     /**
-     * @var string
+     * @var string|ValueGenerator
      */
-    protected $_defaultValue = null;
+    protected $defaultValue = null;
 
     /**
      * @var int
      */
-    protected $_position = null;
+    protected $position = null;
 
     /**
      * @var bool
      */
-    protected $_passedByReference = false;
+    protected $passedByReference = false;
 
     /**
      * @var array
      */
-    protected static $_simple = array('int', 'bool', 'string', 'float', 'resource', 'mixed', 'object');
+    protected static $simple = array('int', 'bool', 'string', 'float', 'resource', 'mixed', 'object');
 
     /**
      * fromReflection()
      *
-     * @param \Zend\Reflection\ReflectionParameter $reflectionParameter
-     * @return \Zend\Code\Generator\PhpParameter\Parameter
+     * @param ReflectionParameter $reflectionParameter
+     * @return ParameterGenerator
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionParameter $reflectionParameter)
+    public static function fromReflection(ReflectionParameter $reflectionParameter)
     {
-        $param = new PhpParameter();
+        $param = new ParameterGenerator();
         $param->setName($reflectionParameter->getName());
 
-        if($reflectionParameter->isArray()) {
+        if ($reflectionParameter->isArray()) {
             $param->setType('array');
         } else {
             $typeClass = $reflectionParameter->getClass();
@@ -86,7 +89,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
 
         $param->setPosition($reflectionParameter->getPosition());
 
-        if($reflectionParameter->isOptional()) {
+        if ($reflectionParameter->isOptional()) {
             $param->setDefaultValue($reflectionParameter->getDefaultValue());
         }
         $param->setPassedByReference($reflectionParameter->isPassedByReference());
@@ -102,7 +105,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function setType($type)
     {
-        $this->_type = $type;
+        $this->type = $type;
         return $this;
     }
 
@@ -113,7 +116,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -124,7 +127,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
         return $this;
     }
 
@@ -135,7 +138,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -149,20 +152,20 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
     public function setDefaultValue($defaultValue)
     {
         if ($defaultValue === null) {
-            $this->_defaultValue = new PhpParameterDefaultValue(array('value' => null));
+            $this->defaultValue = new PhpParameterDefaultValue(array('value' => null));
         } elseif(is_string($defaultValue)) {
-            $this->_defaultValue = new PhpParameterDefaultValue(array('value' => $defaultValue));
+            $this->defaultValue = new PhpParameterDefaultValue(array('value' => $defaultValue));
         } elseif(is_array($defaultValue)) {
             $defaultValue = str_replace(array("\r", "\n"), "", var_export($defaultValue, true));
-            $this->_defaultValue = new PhpParameterDefaultValue(array('value' => $defaultValue));
+            $this->defaultValue = new PhpParameterDefaultValue(array('value' => $defaultValue));
         } elseif(is_bool($defaultValue)) {
             if($defaultValue == true) {
-                $this->_defaultValue = new PhpParameterDefaultValue(array('value' => "true"));
+                $this->defaultValue = new PhpParameterDefaultValue(array('value' => "true"));
             } else {
-                $this->_defaultValue = new PhpParameterDefaultValue(array('value' => "false"));
+                $this->defaultValue = new PhpParameterDefaultValue(array('value' => "false"));
             }
         } else {
-            $this->_defaultValue = $defaultValue;
+            $this->defaultValue = $defaultValue;
         }
         return $this;
     }
@@ -174,7 +177,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function getDefaultValue()
     {
-        return $this->_defaultValue;
+        return $this->defaultValue;
     }
 
     /**
@@ -185,7 +188,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function setPosition($position)
     {
-        $this->_position = $position;
+        $this->position = $position;
         return $this;
     }
 
@@ -196,7 +199,7 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function getPosition()
     {
-        return $this->_position;
+        return $this->position;
     }
 
     /**
@@ -204,16 +207,16 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
      */
     public function getPassedByReference()
     {
-        return $this->_passedByReference;
+        return $this->passedByReference;
     }
 
     /**
      * @param bool $passedByReference
-     * @return \Zend\Code\Generator\PhpParameter\Parameter
+     * @return ParameterGenerator
      */
     public function setPassedByReference($passedByReference)
     {
-        $this->_passedByReference = $passedByReference;
+        $this->passedByReference = $passedByReference;
         return $this;
     }
 
@@ -226,24 +229,25 @@ class PhpParameter extends \Zend\Code\Generator\AbstractPhp
     {
         $output = '';
 
-        if ($this->_type && !in_array($this->_type, self::$_simple)) {
-            $output .= $this->_type . ' ';
+        if ($this->type && !in_array($this->type, self::$simple)) {
+            $output .= $this->type . ' ';
         }
 
-        if($this->_passedByReference === true) {
+        if($this->passedByReference === true) {
             $output .= '&';
         }
 
-        $output .= '$' . $this->_name;
+        $output .= '$' . $this->name;
 
-        if ($this->_defaultValue !== null) {
+        if ($this->defaultValue !== null) {
             $output .= ' = ';
-            if (is_string($this->_defaultValue)) {
-                $output .= ValueGenerator::escape($this->_defaultValue);
-            } else if($this->_defaultValue instanceof \Zend\Code\Generator\PhpParameterDefaultValue) {
-                $output .= (string)$this->_defaultValue;
+            if (is_string($this->defaultValue)) {
+                $output .= ValueGenerator::escape($this->defaultValue);
+            } else if($this->defaultValue instanceof ValueGenerator) {
+                $this->defaultValue->setOutputMode(ValueGenerator::OUTPUT_SINGLE_LINE);
+                $output .= (string) $this->defaultValue;
             } else {
-                $output .= $this->_defaultValue;
+                $output .= $this->defaultValue;
             }
         }
 

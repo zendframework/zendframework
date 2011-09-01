@@ -34,81 +34,81 @@ use Zend\Code\Reflection;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpFile extends AbstractPhp
+class FileGenerator extends AbstractGenerator
 {
 
     /**
      * @var array Array of \Zend\Code\Generator\PhpFile
      */
-    protected static $_fileCodeGenerators = array();
+    protected static $loadedFileGenerators = array();
 
     /**#@+
      * @var string
      */
-    protected static $_markerDocblock = '/* Zend_CodeGenerator_Php_File-DocblockMarker */';
-    protected static $_markerNamespace = '/* Zend_CodeGenerator_Php_File-NamespaceMarker */';
-    protected static $_markerRequire = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
-    protected static $_markerClass = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
+    protected static $markerDocblock  = '/* Zend_CodeGenerator_Php_File-DocblockMarker */';
+    protected static $markerNamespace = '/* Zend_CodeGenerator_Php_File-NamespaceMarker */';
+    protected static $markerRequire   = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
+    protected static $markerClass     = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
     /**#@-*/
 
     /**
      * @var string
      */
-    protected $_filename = null;
+    protected $filename = null;
 
     /**
      * @var \Zend\Code\GeneratorDocblock
      */
-    protected $_docblock = null;
+    protected $docblock = null;
 
     /**
      * @var array
      */
-    protected $_requiredFiles = array();
+    protected $requiredFiles = array();
 
     /**
      * @var string
      */
-    protected $_namespace = null;
+    protected $namespace = null;
 
     /**
      * @var array
      */
-    protected $_uses = array();
+    protected $uses = array();
 
     /**
      * @var array
      */
-    protected $_classes = array();
+    protected $classes = array();
 
     /**
      * @var string
      */
-    protected $_body = null;
+    protected $body = null;
 
     /**
      * registerFileCodeGnereator()
      *
      * A file code generator registry
      *
-     * @param PhpFile $fileCodeGenerator
-     * @param string $fileName
+     * @param FileGenerator $fileGenerator
+     * @param string $filename
      */
-    public static function registerFileCodeGenerator(PhpFile $fileCodeGenerator, $fileName = null)
+    public static function registerFileCodeGenerator(FileGenerator $fileGenerator, $filename = null)
     {
-        if ($fileName == null) {
-            $fileName = $fileCodeGenerator->getFilename();
+        if ($filename == null) {
+            $filename = $fileGenerator->getFilename();
         }
 
-        if ($fileName == '') {
+        if ($filename == '') {
             throw new Exception\InvalidArgumentException('FileName does not exist.');
         }
 
         // cannot use realpath since the file might not exist, but we do need to have the index
         // in the same DIRECTORY_SEPARATOR that realpath would use:
-        $fileName = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $fileName);
+        $filename = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $filename);
 
-        self::$_fileCodeGenerators[$fileName] = $fileCodeGenerator;
+        self::$loadedFileGenerators[$filename] = $fileGenerator;
 
     }
 
@@ -119,20 +119,20 @@ class PhpFile extends AbstractPhp
      * @param string $filePath
      * @param bool $usePreviousCodeGeneratorIfItExists
      * @param bool $includeIfNotAlreadyIncluded
-     * @return \Zend\Code\Generator\PhpFile
+     * @return \FileGenerator\Code\Generator\PhpFile
      */
     public static function fromReflectedFileName($filePath, $usePreviousCodeGeneratorIfItExists = true, $includeIfNotAlreadyIncluded = true)
     {
         $realpath = realpath($filePath);
 
         if ($realpath === false) {
-            if ( ($realpath = Reflection\file::findRealpathInIncludePath($filePath)) === false) {
+            if ( ($realpath = Reflection\ReflectionFile::findRealpathInIncludePath($filePath)) === false) {
                 throw new Exception\InvalidArgumentException('No file for ' . $realpath . ' was found.');
             }
         }
 
-        if ($usePreviousCodeGeneratorIfItExists && isset(self::$_fileCodeGenerators[$realpath])) {
-            return self::$_fileCodeGenerators[$realpath];
+        if ($usePreviousCodeGeneratorIfItExists && isset(self::$loadedFileGenerators[$realpath])) {
+            return self::$loadedFileGenerators[$realpath];
         }
 
         if ($includeIfNotAlreadyIncluded && !in_array($realpath, get_included_files())) {
@@ -141,8 +141,8 @@ class PhpFile extends AbstractPhp
 
         $codeGenerator = self::fromReflection(($fileReflector = new Reflection\ReflectionFile($realpath)));
 
-        if (!isset(self::$_fileCodeGenerators[$fileReflector->getFileName()])) {
-            self::$_fileCodeGenerators[$fileReflector->getFileName()] = $codeGenerator;
+        if (!isset(self::$loadedFileGenerators[$fileReflector->getFileName()])) {
+            self::$loadedFileGenerators[$fileReflector->getFileName()] = $codeGenerator;
         }
 
         return $codeGenerator;
@@ -152,7 +152,7 @@ class PhpFile extends AbstractPhp
      * fromReflection()
      *
      * @param \Zend\Reflection\ReflectionFile $reflectionFile
-     * @return \Zend\Code\Generator\PhpFile
+     * @return \FileGenerator\Code\Generator\PhpFile
      */
     public static function fromReflection(Reflection\ReflectionFile $reflectionFile)
     {
@@ -165,7 +165,7 @@ class PhpFile extends AbstractPhp
 
         // @todo this whole area needs to be reworked with respect to how body lines are processed
         foreach ($reflectionFile->getClasses() as $class) {
-            $phpClass = PhpClass::fromReflection($class);
+            $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setPhpFile($file);
             $file->setClass($phpClass);
             $classStartLine = $class->getStartLine(true);
@@ -175,7 +175,7 @@ class PhpFile extends AbstractPhp
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
                 if ($lineNum == $classStartLine) {
-                    $bodyReturn[] = str_replace('?', $class->getName(), self::$_markerClass);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
+                    $bodyReturn[] = str_replace('?', $class->getName(), self::$markerClass);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $classEndLine;
                 } else {
                     $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
@@ -197,13 +197,13 @@ class PhpFile extends AbstractPhp
 
         if (($reflectionFile->getDocComment() != '')) {
             $docblock = $reflectionFile->getDocblock();
-            $file->setDocblock(PhpDocblock::fromReflection($docblock));
+            $file->setDocblock(DocblockGenerator::fromReflection($docblock));
 
             $bodyLines = explode("\n", $body);
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
                 if ($lineNum == $docblock->getStartLine()) {
-                    $bodyReturn[] = str_replace('?', $class->getName(), self::$_markerDocblock);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
+                    $bodyReturn[] = str_replace('?', $class->getName(), self::$markerDocblock);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $docblock->getEndLine();
                 } else {
                     $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
@@ -222,7 +222,7 @@ class PhpFile extends AbstractPhp
      * setDocblock() Set the docblock
      *
      * @param \Zend\Code\GeneratorDocblock|array|string $docblock
-     * @return \Zend\Code\Generator\PhpFile
+     * @return \FileGenerator\Code\Generator\PhpFile
      */
     public function setDocblock($docblock)
     {
@@ -231,34 +231,34 @@ class PhpFile extends AbstractPhp
         }
 
         if (is_array($docblock)) {
-            $docblock = new PhpDocblock($docblock);
-        } elseif (!$docblock instanceof PhpDocblock) {
+            $docblock = new DocblockGenerator($docblock);
+        } elseif (!$docblock instanceof DocblockGenerator) {
             throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
 
-        $this->_docblock = $docblock;
+        $this->docblock = $docblock;
         return $this;
     }
 
     /**
      * Get docblock
      *
-     * @return \Zend\Code\GeneratorDocblock
+     * @return DocblockGenerator
      */
     public function getDocblock()
     {
-        return $this->_docblock;
+        return $this->docblock;
     }
 
     /**
      * setRequiredFiles
      *
      * @param array $requiredFiles
-     * @return \Zend\Code\Generator\PhpFile
+     * @return \FileGenerator\Code\Generator\PhpFile
      */
     public function setRequiredFiles(array $requiredFiles)
     {
-        $this->_requiredFiles = $requiredFiles;
+        $this->requiredFiles = $requiredFiles;
         return $this;
     }
 
@@ -269,14 +269,14 @@ class PhpFile extends AbstractPhp
      */
     public function getRequiredFiles()
     {
-        return $this->_requiredFiles;
+        return $this->requiredFiles;
     }
 
     /**
      * setClasses()
      *
      * @param array $classes
-     * @return \Zend\Code\Generator\PhpFile
+     * @return \FileGenerator\Code\Generator\PhpFile
      */
     public function setClasses(array $classes)
     {
@@ -293,7 +293,7 @@ class PhpFile extends AbstractPhp
      */
     public function getNamespace()
     {
-        return $this->_namespace;
+        return $this->namespace;
     }
 
     /**
@@ -304,7 +304,7 @@ class PhpFile extends AbstractPhp
      */
     public function setNamespace($namespace)
     {
-        $this->_namespace = $namespace;
+        $this->namespace = $namespace;
         return $this;
     }
 
@@ -320,7 +320,7 @@ class PhpFile extends AbstractPhp
      */
     public function getUses($withResolvedAs = false)
     {
-        $uses = $this->_uses;
+        $uses = $this->uses;
         if ($withResolvedAs) {
             for ($useIndex = 0; $useIndex < count($uses); $useIndex++) {
                 if ($uses[$useIndex][1] == '') {
@@ -340,7 +340,7 @@ class PhpFile extends AbstractPhp
     /**
      * setUses()
      *
-     * @param $uses
+     * @param array $uses
      * @return Zend\Code\Generator\PhpFile
      */
     public function setUses(array $uses)
@@ -354,13 +354,13 @@ class PhpFile extends AbstractPhp
     /**
      * setUse()
      *
-     * @param $use
-     * @param $as
+     * @param string $use
+     * @param string $as
      * @return Zend\Code\Generator\PhpFile
      */
     public function setUse($use, $as = null)
     {
-        $this->_uses[] = array($use, $as);
+        $this->uses[] = array($use, $as);
         return $this;
     }
 
@@ -368,30 +368,30 @@ class PhpFile extends AbstractPhp
      * getClass()
      *
      * @param string $name
-     * @return \Zend\Code\Generator\PhpClass
+     * @return ClassGenerator
      */
     public function getClass($name = null)
     {
         if ($name == null) {
-            reset($this->_classes);
-            return current($this->_classes);
+            reset($this->classes);
+            return current($this->classes);
         }
 
-        return $this->_classes[$name];
+        return $this->classes[$name];
     }
 
     /**
      * setClass()
      *
-     * @param \Zend\Code\Generator\PhpClass|array $class
-     * @return \Zend\Code\Generator\PhpFile
+     * @param array|ClassGenerator $class
+     * @return FileGenerator
      */
     public function setClass($class)
     {
         if (is_array($class)) {
-            $class = new PhpClass($class);
+            $class = new ClassGenerator($class);
             $className = $class->getName();
-        } elseif ($class instanceof PhpClass) {
+        } elseif ($class instanceof ClassGenerator) {
             $className = $class->getName();
         } else {
             throw new Exception\InvalidArgumentException('Expecting either an array or an instance of Zend_CodeGenerator_Php_Class');
@@ -399,7 +399,7 @@ class PhpFile extends AbstractPhp
 
         // @todo check for dup here
 
-        $this->_classes[$className] = $class;
+        $this->classes[$className] = $class;
         return $this;
     }
 
@@ -407,11 +407,11 @@ class PhpFile extends AbstractPhp
      * setFilename()
      *
      * @param string $filename
-     * @return \Zend\Code\Generator\PhpFile
+     * @return \FileGenerator\Code\Generator\PhpFile
      */
     public function setFilename($filename)
     {
-        $this->_filename = $filename;
+        $this->filename = $filename;
         return $this;
     }
 
@@ -422,28 +422,28 @@ class PhpFile extends AbstractPhp
      */
     public function getFilename()
     {
-        return $this->_filename;
+        return $this->filename;
     }
 
     /**
      * getClasses()
      *
-     * @return array Array of \Zend\Code\Generator\PhpClass
+     * @return ClassGenerator[] Array of ClassGenerators
      */
     public function getClasses()
     {
-        return $this->_classes;
+        return $this->classes;
     }
 
     /**
      * setBody()
      *
      * @param string $body
-     * @return \Zend\Code\Generator\PhpFile
+     * @return \FileGenerator\Code\Generator\PhpFile
      */
     public function setBody($body)
     {
-        $this->_body = $body;
+        $this->body = $body;
         return $this;
     }
 
@@ -454,7 +454,7 @@ class PhpFile extends AbstractPhp
      */
     public function getBody()
     {
-        return $this->_body;
+        return $this->body;
     }
 
     /**
@@ -468,7 +468,7 @@ class PhpFile extends AbstractPhp
             return true;
         }
 
-        foreach ($this->_classes as $class) {
+        foreach ($this->classes as $class) {
             if ($class->isSourceDirty()) {
                 return true;
             }
@@ -485,7 +485,7 @@ class PhpFile extends AbstractPhp
     public function generate()
     {
         if ($this->isSourceDirty() === false) {
-            return $this->_sourceContent;
+            return $this->sourceContent;
         }
 
         $output = '';
@@ -505,7 +505,7 @@ class PhpFile extends AbstractPhp
         // Add file docblock, if any
         if (null !== ($docblock = $this->getDocblock())) {
             $docblock->setIndentation('');
-            $regex = preg_quote(self::$_markerDocblock, '#');
+            $regex = preg_quote(self::$markerDocblock, '#');
             if (preg_match('#'.$regex.'#', $output)) {
                 $output  = preg_replace('#'.$regex.'#', $docblock->generate(), $output, 1);
             } else {
@@ -551,7 +551,7 @@ class PhpFile extends AbstractPhp
         $classes = $this->getClasses();
         if (!empty($classes)) {
             foreach ($classes as $class) {
-                $regex = str_replace('?', $class->getName(), self::$_markerClass);
+                $regex = str_replace('?', $class->getName(), self::$markerClass);
                 $regex = preg_quote($regex, '#');
                 if (preg_match('#'.$regex.'#', $output)) {
                     $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);
@@ -577,10 +577,10 @@ class PhpFile extends AbstractPhp
 
     public function write()
     {
-        if ($this->_filename == '' || !is_writable(dirname($this->_filename))) {
+        if ($this->filename == '' || !is_writable(dirname($this->filename))) {
             throw new Exception\RuntimeException('This code generator object is not writable.');
         }
-        file_put_contents($this->_filename, $this->generate());
+        file_put_contents($this->filename, $this->generate());
         return $this;
     }
 

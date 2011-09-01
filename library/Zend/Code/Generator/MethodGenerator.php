@@ -24,6 +24,8 @@
  */
 namespace Zend\Code\Generator;
 
+use Zend\Code\Reflection\ReflectionMethod;
+
 /**
  * @uses       \Zend\Code\GeneratorDocblock
  * @uses       \Zend\Code\Generator\Exception
@@ -34,35 +36,35 @@ namespace Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpMethod extends PhpMember\AbstractMember
+class MethodGenerator extends AbstractMemberGenerator
 {
     /**
-     * @var \Zend\Code\GeneratorDocblock
+     * @var DocblockGenerator
      */
-    protected $_docblock = null;
+    protected $docblock = null;
 
     /**
      * @var bool
      */
-    protected $_isFinal = false;
+    protected $isFinal = false;
 
     /**
      * @var array
      */
-    protected $_parameters = array();
+    protected $parameters = array();
 
     /**
      * @var string
      */
-    protected $_body = null;
+    protected $body = null;
 
     /**
      * fromReflection()
      *
      * @param \Zend\Reflection\ReflectionMethod $reflectionMethod
-     * @return \Zend\Code\Generator\PhpMethod
+     * @return \MethodGenerator\Code\Generator\PhpMethod
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionMethod $reflectionMethod)
+    public static function fromReflection(ReflectionMethod $reflectionMethod)
     {
         $method = new self();
 
@@ -70,7 +72,7 @@ class PhpMethod extends PhpMember\AbstractMember
         $method->setSourceDirty(false);
 
         if ($reflectionMethod->getDocComment() != '') {
-            $method->setDocblock(PhpDocblock::fromReflection($reflectionMethod->getDocblock()));
+            $method->setDocblock(DocblockGenerator::fromReflection($reflectionMethod->getDocblock()));
         }
 
         $method->setFinal($reflectionMethod->isFinal());
@@ -88,7 +90,7 @@ class PhpMethod extends PhpMember\AbstractMember
         $method->setName($reflectionMethod->getName());
 
         foreach ($reflectionMethod->getParameters() as $reflectionParameter) {
-            $method->setParameter(PhpParameter::fromReflection($reflectionParameter));
+            $method->setParameter(ParameterGenerator::fromReflection($reflectionParameter));
         }
 
         $method->setBody($reflectionMethod->getBody());
@@ -103,14 +105,14 @@ class PhpMethod extends PhpMember\AbstractMember
      */
     public function setFinal($isFinal)
     {
-        $this->_isFinal = ($isFinal) ? true : false;
+        $this->isFinal = ($isFinal) ? true : false;
     }
 
     /**
      * setParameters()
      *
      * @param array $parameters
-     * @return \Zend\Code\Generator\PhpMethod
+     * @return \MethodGenerator\Code\Generator\PhpMethod
      */
     public function setParameters(array $parameters)
     {
@@ -124,18 +126,18 @@ class PhpMethod extends PhpMember\AbstractMember
      * setParameter()
      *
      * @param \Zend\Code\Generator\Parameter\Parameter|array $parameter
-     * @return \Zend\Code\Generator\PhpMethod
+     * @return \MethodGenerator\Code\Generator\PhpMethod
      */
     public function setParameter($parameter)
     {
         if (is_array($parameter)) {
-            $parameter = new PhpParameter($parameter);
-        } elseif (!$parameter instanceof PhpParameter) {
+            $parameter = new ParameterGenerator($parameter);
+        } elseif (!$parameter instanceof ParameterGenerator) {
             throw new Exception\InvalidArgumentException('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
         }
         $parameterName = $parameter->getName();
 
-        $this->_parameters[$parameterName] = $parameter;
+        $this->parameters[$parameterName] = $parameter;
         return $this;
     }
 
@@ -146,18 +148,18 @@ class PhpMethod extends PhpMember\AbstractMember
      */
     public function getParameters()
     {
-        return $this->_parameters;
+        return $this->parameters;
     }
 
     /**
      * setBody()
      *
      * @param string $body
-     * @return \Zend\Code\Generator\PhpMethod
+     * @return \MethodGenerator\Code\Generator\PhpMethod
      */
     public function setBody($body)
     {
-        $this->_body = $body;
+        $this->body = $body;
         return $this;
     }
 
@@ -168,7 +170,7 @@ class PhpMethod extends PhpMember\AbstractMember
      */
     public function getBody()
     {
-        return $this->_body;
+        return $this->body;
     }
 
     /**
@@ -210,8 +212,8 @@ class PhpMethod extends PhpMember\AbstractMember
 
         $output .= ')' . self::LINE_FEED . $indent . '{' . self::LINE_FEED;
 
-        if ($this->_body) {
-            $output .= preg_replace('#^(.+?)$#m', $indent . $indent . '$1', trim($this->_body))
+        if ($this->body) {
+            $output .= preg_replace('#^(.+?)$#m', $indent . $indent . '$1', trim($this->body))
                     .  self::LINE_FEED;
         }
 

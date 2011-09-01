@@ -48,7 +48,7 @@ class DocblockTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $this->_docblock = new \Zend\Code\Generator\PhpDocblock();
+        $this->_docblock = new \Zend\Code\Generator\DocblockGenerator();
     }
 
     public function teardown()

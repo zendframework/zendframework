@@ -22,8 +22,8 @@
 /**
  * @namespace
  */
-namespace ZendTest\Code\Generator\Property;
-use Zend\Code\Generator;
+namespace ZendTest\Code\Generator;
+use Zend\Code\Generator\ValueGenerator;
 
 /**
  * @category   Zend
@@ -35,51 +35,51 @@ use Zend\Code\Generator;
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class PhpPropertyValueTest extends \PHPUnit_Framework_TestCase
+class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testPropertyDefaultValueConstructor()
     {
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $this->isInstanceOf($propDefaultValue, 'Zend\Code\Generator\Property\DefaultValue');
+        $valueGenerator = new ValueGenerator();
+        $this->isInstanceOf($valueGenerator, 'Zend\Code\Generator\ValueGenerator');
     }
 
     public function testPropertyDefaultValueIsSettable()
     {
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $propDefaultValue->setValue('foo');
-        $this->assertEquals('foo', $propDefaultValue->getValue());
-        //$this->assertEquals('\'foo\';', $propDefaultValue->generate());
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue('foo');
+        $this->assertEquals('foo', $valueGenerator->getValue());
+        //$this->assertEquals('\'foo\';', $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleStrings()
     {
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $propDefaultValue->setValue('foo');
-        $this->assertEquals('\'foo\';', $propDefaultValue->generate());
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue('foo');
+        $this->assertEquals('\'foo\'', $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleArray()
     {
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $propDefaultValue->setValue(array('foo'));
-        $this->assertEquals('array(\'foo\');', $propDefaultValue->generate());
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue(array('foo'));
+        $this->assertEquals('array(\'foo\')', $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleUnquotedString()
     {
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $propDefaultValue->setValue('PHP_EOL');
-        $propDefaultValue->setType('constant');
-        $this->assertEquals('PHP_EOL;', $propDefaultValue->generate());
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue('PHP_EOL');
+        $valueGenerator->setType('constant');
+        $this->assertEquals('PHP_EOL', $valueGenerator->generate());
 
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $propDefaultValue->setValue(5);
-        $this->assertEquals('5;', $propDefaultValue->generate());
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue(5);
+        $this->assertEquals('5', $valueGenerator->generate());
 
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $propDefaultValue->setValue(5.25);
-        $this->assertEquals('5.25;', $propDefaultValue->generate());
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue(5.25);
+        $this->assertEquals('5.25', $valueGenerator->generate());
     }
 
     public function testPropertyDefaultValueCanHandleComplexArrayOfTypes()
@@ -96,7 +96,7 @@ class PhpPropertyValueTest extends \PHPUnit_Framework_TestCase
                     'baz2'
                     )
                 ),
-            new Php\PhpValue(array('value' => 'PHP_EOL', 'type' => 'constant'))
+            new ValueGenerator(array('value' => 'PHP_EOL', 'type' => 'constant'))
             );
 
         $expectedSource = <<<EOS
@@ -116,9 +116,9 @@ array(
         );
 EOS;
 
-        $propDefaultValue = new Php\PhpPropertyValue();
-        $propDefaultValue->setValue($targetValue);
-        $generatedTargetSource = $propDefaultValue->generate();
+        $valueGenerator = new ValueGenerator();
+        $valueGenerator->setValue($targetValue);
+        $generatedTargetSource = $valueGenerator->generate();
         $this->assertEquals($expectedSource, $generatedTargetSource);
 
     }

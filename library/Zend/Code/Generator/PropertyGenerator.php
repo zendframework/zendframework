@@ -24,6 +24,8 @@
  */
 namespace Zend\Code\Generator;
 
+use Zend\Code\Reflection\ReflectionProperty;
+
 /**
  * @uses       \Zend\Code\Generator\Exception
  * @uses       \Zend\Code\Generator\PhpMember\AbstractMember
@@ -33,26 +35,26 @@ namespace Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpProperty extends PhpMember\AbstractMember
+class PropertyGenerator extends AbstractMemberGenerator
 {
 
     /**
      * @var bool
      */
-    protected $_isConst = null;
+    protected $isConst = null;
 
     /**
      * @var string
      */
-    protected $_defaultValue = null;
+    protected $defaultValue = null;
 
     /**
      * fromReflection()
      *
-     * @param \Zend\Reflection\ReflectionProperty $reflectionProperty
-     * @return \Zend\Code\Generator\PhpProperty
+     * @param ReflectionProperty $reflectionProperty
+     * @return PropertyGenerator
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionProperty $reflectionProperty)
+    public static function fromReflection(ReflectionProperty $reflectionProperty)
     {
         $property = new self();
 
@@ -63,7 +65,7 @@ class PhpProperty extends PhpMember\AbstractMember
         $property->setDefaultValue($allDefaultProperties[$reflectionProperty->getName()]);
 
         if ($reflectionProperty->getDocComment() != '') {
-            $property->setDocblock(Php\PhpDocblock::fromReflection($reflectionProperty->getDocComment()));
+            $property->setDocblock(DocblockGenerator::fromReflection($reflectionProperty->getDocComment()));
         }
 
         if ($reflectionProperty->isStatic()) {
@@ -87,11 +89,11 @@ class PhpProperty extends PhpMember\AbstractMember
      * setConst()
      *
      * @param bool $const
-     * @return \Zend\Code\Generator\PhpProperty
+     * @return \PropertyGenerator\Code\Generator\PhpProperty
      */
     public function setConst($const)
     {
-        $this->_isConst = $const;
+        $this->isConst = $const;
         return $this;
     }
 
@@ -102,14 +104,14 @@ class PhpProperty extends PhpMember\AbstractMember
      */
     public function isConst()
     {
-        return ($this->_isConst) ? true : false;
+        return ($this->isConst) ? true : false;
     }
 
     /**
      * setDefaultValue()
      *
-     * @param \Zend\Code\Generator\PhpPropertyValue|string|array $defaultValue
-     * @return \Zend\Code\Generator\PhpProperty
+     * @param \PropertyValueGenerator\Code\Generator\PhpPropertyValue|string|array $defaultValue
+     * @return \PropertyGenerator\Code\Generator\PhpProperty
      */
     public function setDefaultValue($defaultValue)
     {
@@ -117,25 +119,25 @@ class PhpProperty extends PhpMember\AbstractMember
         if (is_array($defaultValue)
             && array_key_exists('value', $defaultValue)
             && array_key_exists('type', $defaultValue)) {
-            $defaultValue = new PhpPropertyValue($defaultValue);
+            $defaultValue = new PropertyValueGenerator($defaultValue);
         }
 
-        if (!($defaultValue instanceof PhpPropertyValue)) {
-            $defaultValue = new PhpPropertyValue(array('value' => $defaultValue));
+        if (!($defaultValue instanceof PropertyValueGenerator)) {
+            $defaultValue = new PropertyValueGenerator(array('value' => $defaultValue));
         }
 
-        $this->_defaultValue = $defaultValue;
+        $this->defaultValue = $defaultValue;
         return $this;
     }
 
     /**
      * getDefaultValue()
      *
-     * @return \Zend\Code\Generator\PhpPropertyValue
+     * @return \PropertyValueGenerator\Code\Generator\PhpPropertyValue
      */
     public function getDefaultValue()
     {
-        return $this->_defaultValue;
+        return $this->defaultValue;
     }
 
     /**
@@ -157,7 +159,7 @@ class PhpProperty extends PhpMember\AbstractMember
 
         if ($this->isConst()) {
             if ($defaultValue != null && !$defaultValue->isValidConstantType()) {
-                throw new Exception\RuntimeException('The property ' . $this->_name . ' is said to be '
+                throw new Exception\RuntimeException('The property ' . $this->name . ' is said to be '
                     . 'constant but does not have a valid constant value.');
             }
             $output .= $this->_indentation . 'const ' . $name . ' = '

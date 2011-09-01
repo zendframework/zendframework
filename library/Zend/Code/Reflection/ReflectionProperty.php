@@ -40,7 +40,8 @@ class ReflectionProperty extends PhpReflectionProperty implements Reflection
     /**
      * Get declaring class reflection object
      *
-     * @return \Zend\Code\Reflection\ReflectionClass
+     * @param string $reflectionClass
+     * @return ReflectionClass
      */
     public function getDeclaringClass($reflectionClass = 'Zend\Code\Reflection\ReflectionClass')
     {
@@ -71,5 +72,10 @@ class ReflectionProperty extends PhpReflectionProperty implements Reflection
             throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Code\Reflection\ReflectionDocblock');
         }
         return $r;
+    }
+
+    public function toString()
+    {
+        return $this->__toString();
     }
 }

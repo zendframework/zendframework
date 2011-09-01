@@ -68,7 +68,7 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
             ));
         $params = $codeGen->getParameters();
         $param = array_shift($params);
-        $this->assertTrue($param instanceof \Zend\Code\Generator\PhpParameter, 'Failed because $param was not instance of Zend_CodeGenerator_Php_Property');
+        $this->assertTrue($param instanceof \Zend\Code\Generator\ParameterGenerator, 'Failed because $param was not instance of Zend_CodeGenerator_Php_Property');
     }
 
     public function testMethodBodyGetterAndSetter()
@@ -79,7 +79,7 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
 
     public function testDocblockGetterAndSetter()
     {
-        $d = new \Zend\Code\Generator\PhpDocblock();
+        $d = new \Zend\Code\Generator\DocblockGenerator();
 
         $this->_method->setDocblock($d);
         $this->assertTrue($d === $this->_method->getDocblock());

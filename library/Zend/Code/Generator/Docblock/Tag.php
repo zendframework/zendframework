@@ -22,7 +22,10 @@
 /**
  * @namespace
  */
-namespace Zend\Code\Generator;
+namespace Zend\Code\Generator\Docblock;
+
+use Zend\Code\Reflection\ReflectionDocblockTag,
+    Zend\Code\Generator\AbstractGenerator;
 
 /**
  * @uses       \Zend\CodeGenerator\AbstractCodeGenerator
@@ -32,7 +35,7 @@ namespace Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpDocblockTag extends AbstractPhp
+class Tag extends AbstractGenerator
 {
 
     protected static $_typeFormats = array(
@@ -53,20 +56,20 @@ class PhpDocblockTag extends AbstractPhp
     /**
      * @var string
      */
-    protected $_name = null;
+    protected $name = null;
 
     /**
      * @var string
      */
-    protected $_description = null;
+    protected $description = null;
 
     /**
      * fromReflection()
      *
-     * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTag
-     * @return \Zend\Code\Generator\PhpDocblockTag
+     * @param ReflectionDocblockTag $reflectionTag
+     * @return Tag
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionDocblockTag $reflectionTag)
+    public static function fromReflection(ReflectionDocblockTag $reflectionTag)
     {
         $tagName = $reflectionTag->getName();
 
@@ -91,11 +94,11 @@ class PhpDocblockTag extends AbstractPhp
      * setName()
      *
      * @param string $name
-     * @return \Zend\Code\Generator\PhpDocblockTag
+     * @return Tag
      */
     public function setName($name)
     {
-        $this->_name = ltrim($name, '@');
+        $this->name = ltrim($name, '@');
         return $this;
     }
 
@@ -106,18 +109,18 @@ class PhpDocblockTag extends AbstractPhp
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
      * setDescription()
      *
      * @param string $description
-     * @return \Zend\Code\Generator\PhpDocblockTag
+     * @return Tag
      */
     public function setDescription($description)
     {
-        $this->_description = $description;
+        $this->description = $description;
         return $this;
     }
 
@@ -128,7 +131,7 @@ class PhpDocblockTag extends AbstractPhp
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -138,7 +141,7 @@ class PhpDocblockTag extends AbstractPhp
      */
     public function generate()
     {
-        return '@' . $this->_name . ' ' . $this->_description;
+        return '@' . $this->name . ' ' . $this->description;
     }
 
 }

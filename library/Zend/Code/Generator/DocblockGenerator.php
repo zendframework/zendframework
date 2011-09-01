@@ -24,6 +24,8 @@
  */
 namespace Zend\Code\Generator;
 
+use Zend\Code\Reflection\ReflectionDocblock;
+
 /**
  * @uses       \Zend\Code\Generator\AbstractPhp
  * @uses       \Zend\Code\Generator\PhpDocblockTag
@@ -33,35 +35,35 @@ namespace Zend\Code\Generator;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpDocblock extends AbstractPhp
+class DocblockGenerator extends AbstractGenerator
 {
     /**
      * @var string
      */
-    protected $_shortDescription = null;
+    protected $shortDescription = null;
 
     /**
      * @var string
      */
-    protected $_longDescription = null;
+    protected $longDescription = null;
 
     /**
      * @var array
      */
-    protected $_tags = array();
+    protected $tags = array();
 
     /**
      * @var string
      */
-    protected $_indentation = '';
+    protected $indentation = '';
 
     /**
      * fromReflection() - Build a docblock generator object from a reflection object
      *
-     * @param Zend_Reflection_Docblock $reflectionDocblock
-     * @return \Zend\Code\GeneratorDocblock
+     * @param ReflectionDocblock $reflectionDocblock
+     * @return DocblockGenerator
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionDocblock $reflectionDocblock)
+    public static function fromReflection(ReflectionDocblock $reflectionDocblock)
     {
         $docblock = new self();
 
@@ -72,7 +74,7 @@ class PhpDocblock extends AbstractPhp
         $docblock->setLongDescription($reflectionDocblock->getLongDescription());
 
         foreach ($reflectionDocblock->getTags() as $tag) {
-            $docblock->setTag(PhpDocblockTag::fromReflection($tag));
+            $docblock->setTag(Docblock\Tag::fromReflection($tag));
         }
 
         return $docblock;
@@ -82,11 +84,11 @@ class PhpDocblock extends AbstractPhp
      * setShortDescription()
      *
      * @param string $shortDescription
-     * @return \Zend\Code\GeneratorDocblock
+     * @return DocblockGenerator
      */
     public function setShortDescription($shortDescription)
     {
-        $this->_shortDescription = $shortDescription;
+        $this->shortDescription = $shortDescription;
         return $this;
     }
 
@@ -97,7 +99,7 @@ class PhpDocblock extends AbstractPhp
      */
     public function getShortDescription()
     {
-        return $this->_shortDescription;
+        return $this->shortDescription;
     }
 
     /**
@@ -108,7 +110,7 @@ class PhpDocblock extends AbstractPhp
      */
     public function setLongDescription($longDescription)
     {
-        $this->_longDescription = $longDescription;
+        $this->longDescription = $longDescription;
         return $this;
     }
 
@@ -119,7 +121,7 @@ class PhpDocblock extends AbstractPhp
      */
     public function getLongDescription()
     {
-        return $this->_longDescription;
+        return $this->longDescription;
     }
 
     /**
@@ -146,26 +148,26 @@ class PhpDocblock extends AbstractPhp
     public function setTag($tag)
     {
         if (is_array($tag)) {
-            $tag = new PhpDocblockTag($tag);
-        } elseif (!$tag instanceof PhpDocblockTag) {
+            $tag = new Docblock\Tag($tag);
+        } elseif (!$tag instanceof Docblock\Tag) {
             throw new Exception\InvalidArgumentException(
                 'setTag() expects either an array of method options or an '
                 . 'instance of Zend_CodeGenerator_Php_Docblock_Tag'
                 );
         }
 
-        $this->_tags[] = $tag;
+        $this->tags[] = $tag;
         return $this;
     }
 
     /**
      * getTags
      *
-     * @return array Array of \Zend\Code\Generator\PhpDocblockTag
+     * @return Docblock\Tag[]
      */
     public function getTags()
     {
-        return $this->_tags;
+        return $this->tags;
     }
 
     /**
@@ -176,7 +178,7 @@ class PhpDocblock extends AbstractPhp
     public function generate()
     {
         if (!$this->isSourceDirty()) {
-            return $this->_docCommentize($this->getSourceContent());
+            return $this->docCommentize($this->getSourceContent());
         }
 
         $output  = '';
@@ -191,7 +193,7 @@ class PhpDocblock extends AbstractPhp
             $output .= $tag->generate() . self::LINE_FEED;
         }
 
-        return $this->_docCommentize(trim($output));
+        return $this->docCommentize(trim($output));
     }
 
     /**
@@ -200,7 +202,7 @@ class PhpDocblock extends AbstractPhp
      * @param string $content
      * @return string
      */
-    protected function _docCommentize($content)
+    protected function docCommentize($content)
     {
         $indent = $this->getIndentation();
         $output = $indent . '/**' . self::LINE_FEED;

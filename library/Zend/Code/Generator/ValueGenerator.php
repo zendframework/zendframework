@@ -24,7 +24,7 @@
  */
 namespace Zend\Code\Generator;
 
-class ValueGenerator extends AbstractPhp
+class ValueGenerator extends AbstractGenerator
 {
     /**#@+
      * Constant values
@@ -47,11 +47,6 @@ class ValueGenerator extends AbstractPhp
 
     const OUTPUT_MULTIPLE_LINE = 'multipleLine';
     const OUTPUT_SINGLE_LINE = 'singleLine';
-
-    /**
-     * @var array of reflected constants
-     */
-    protected static $constants = array();
 
     /**
      * @var mixed
@@ -79,24 +74,6 @@ class ValueGenerator extends AbstractPhp
     protected $allowedTypes = null;
 
     /**
-     * _init()
-     *
-     * This method will prepare the constant array for this class
-     */
-    protected function _init()
-    {
-        if(count(self::$constants) == 0) {
-            $reflect = new \ReflectionClass(get_class($this));
-            foreach ($reflect->getConstants() as $name => $value) {
-                if (substr($name, 0, 4) == 'TYPE') {
-                    self::$constants[$name] = $value;
-                }
-            }
-            unset($reflect);
-        }
-    }
-
-    /**
      * isValidConstantType()
      *
      * @return bool
@@ -104,7 +81,7 @@ class ValueGenerator extends AbstractPhp
     public function isValidConstantType()
     {
         if ($this->type == self::TYPE_AUTO) {
-            $type = $this->_getAutoDeterminedType($this->value);
+            $type = $this->getAutoDeterminedType($this->value);
         } else {
             $type = $this->type;
         }
@@ -121,7 +98,7 @@ class ValueGenerator extends AbstractPhp
             self::TYPE_STRING,
             self::TYPE_CONSTANT,
             self::TYPE_NULL
-            );
+        );
 
         return in_array($type, $scalarTypes);
     }
@@ -198,9 +175,26 @@ class ValueGenerator extends AbstractPhp
      * @param string $type
      * @return string
      */
-    protected function _getValidatedType($type)
+    protected function getValidatedType($type)
     {
-        if (($constName = array_search($type, self::$constants)) !== false) {
+        $types = array(
+            self::TYPE_AUTO,
+            self::TYPE_BOOLEAN,
+            self::TYPE_BOOL,
+            self::TYPE_NUMBER,
+            self::TYPE_INTEGER,
+            self::TYPE_INT,
+            self::TYPE_FLOAT,
+            self::TYPE_DOUBLE,
+            self::TYPE_STRING,
+            self::TYPE_ARRAY,
+            self::TYPE_CONSTANT,
+            self::TYPE_NULL,
+            self::TYPE_OBJECT,
+            self::TYPE_OTHER
+        );
+
+        if (in_array($type, $types)) {
             return $type;
         }
 
@@ -213,7 +207,7 @@ class ValueGenerator extends AbstractPhp
      * @param mixed $value
      * @return string
      */
-    public function _getAutoDeterminedType($value)
+    public function getAutoDeterminedType($value)
     {
         switch (gettype($value)) {
             case 'boolean':
@@ -248,13 +242,13 @@ class ValueGenerator extends AbstractPhp
         $type = $this->type;
 
         if ($type != self::TYPE_AUTO) {
-            $type = $this->_getValidatedType($type);
+            $type = $this->getValidatedType($type);
         }
 
         $value = $this->value;
 
         if ($type == self::TYPE_AUTO) {
-            $type = $this->_getAutoDeterminedType($value);
+            $type = $this->getAutoDeterminedType($value);
 
             if ($type == self::TYPE_ARRAY) {
                 $rii = new \RecursiveIteratorIterator(
@@ -263,7 +257,8 @@ class ValueGenerator extends AbstractPhp
                     );
                 foreach ($rii as $curKey => $curValue) {
                     if (!$curValue instanceof self) {
-                        $curValue = new self(array('value' => $curValue));
+                        $curValue = new self();
+                        $curValue->setValue($curValue);
                         $rii->getSubIterator()->offsetSet($curKey, $curValue);
                     }
                     $curValue->setArrayDepth($rii->getDepth());
@@ -300,7 +295,7 @@ class ValueGenerator extends AbstractPhp
                 if (count($value) > 1) {
                     $curArrayMultiblock = true;
                     if ($this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                        $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->arrayDepth + 1);
+                        $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
                     }
                 }
                 $outputParts = array();
@@ -316,18 +311,18 @@ class ValueGenerator extends AbstractPhp
                     }
                 }
                 $padding = ($this->outputMode == self::OUTPUT_MULTIPLE_LINE)
-                    ? self::LINE_FEED . str_repeat($this->_indentation, $this->arrayDepth + 1)
+                    ? self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1)
                     : ' ';
                 $output .= implode(',' . $padding, $outputParts);
                 if ($curArrayMultiblock == true && $this->outputMode == self::OUTPUT_MULTIPLE_LINE) {
-                    $output .= self::LINE_FEED . str_repeat($this->_indentation, $this->arrayDepth + 1);
+                    $output .= self::LINE_FEED . str_repeat($this->indentation, $this->arrayDepth + 1);
                 }
                 $output .= ')';
                 break;
             case self::TYPE_OTHER:
             default:
                 throw new Exception\RuntimeException(
-                    "Type '".get_class($value)."' is unknown or cannot be used as property default value."
+                    "Type '" . get_class($value) . "' is unknown or cannot be used as property default value."
                 );
         }
 
@@ -352,4 +347,23 @@ class ValueGenerator extends AbstractPhp
 
         return $output;
     }
+
+    /**
+     * @param string $outputMode
+     * @return ValueGenerator
+     */
+    public function setOutputMode($outputMode)
+    {
+        $this->outputMode = $outputMode;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOutputMode()
+    {
+        return $this->outputMode;
+    }
+
 }

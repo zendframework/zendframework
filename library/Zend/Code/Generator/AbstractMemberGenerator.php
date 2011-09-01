@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Code\Generator\PhpMember;
+namespace Zend\Code\Generator;
 use Zend\Code\Generator,
     Zend\Code\Generator\Exception;
 
@@ -35,7 +35,7 @@ use Zend\Code\Generator,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractMember extends Php\AbstractPhp
+abstract class AbstractMemberGenerator extends AbstractGenerator
 {
 
     /**#@+
@@ -49,38 +49,38 @@ abstract class AbstractMember extends Php\AbstractPhp
     /**
      * @var \Zend\Code\GeneratorDocblock
      */
-    protected $_docblock   = null;
+    protected $docblock   = null;
 
     /**
      * @var bool
      */
-    protected $_isAbstract = false;
+    protected $isAbstract = false;
 
     /**
      * @var bool
      */
-    protected $_isFinal    = false;
+    protected $isFinal    = false;
 
     /**
      * @var bool
      */
-    protected $_isStatic   = false;
+    protected $isStatic   = false;
 
     /**
      * @var const
      */
-    protected $_visibility = self::VISIBILITY_PUBLIC;
+    protected $visibility = self::VISIBILITY_PUBLIC;
 
     /**
      * @var string
      */
-    protected $_name = null;
+    protected $name = null;
 
     /**
      * setDocblock() Set the docblock
      *
-     * @param \Zend\Code\GeneratorDocblock|array|string $docblock
-     * @return \Zend\Code\Generator\PhpMember\AbstractMember
+     * @param DocblockGenerator|array|string $docblock
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
      */
     public function setDocblock($docblock)
     {
@@ -89,34 +89,34 @@ abstract class AbstractMember extends Php\AbstractPhp
         }
 
         if (is_array($docblock)) {
-            $docblock = new Php\PhpDocblock($docblock);
-        } elseif (!$docblock instanceof Php\PhpDocblock) {
+            $docblock = new DocblockGenerator($docblock);
+        } elseif (!$docblock instanceof DocblockGenerator) {
             throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
 
-        $this->_docblock = $docblock;
+        $this->docblock = $docblock;
         return $this;
     }
 
     /**
      * getDocblock()
      *
-     * @return \Zend\Code\GeneratorDocblock
+     * @return DocblockGenerator
      */
     public function getDocblock()
     {
-        return $this->_docblock;
+        return $this->docblock;
     }
 
     /**
      * setAbstract()
      *
      * @param bool $isAbstract
-     * @return \Zend\Code\Generator\PhpMember\AbstractMember
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
      */
     public function setAbstract($isAbstract)
     {
-        $this->_isAbstract = ($isAbstract) ? true : false;
+        $this->isAbstract = ($isAbstract) ? true : false;
         return $this;
     }
 
@@ -127,18 +127,18 @@ abstract class AbstractMember extends Php\AbstractPhp
      */
     public function isAbstract()
     {
-        return $this->_isAbstract;
+        return $this->isAbstract;
     }
 
     /**
      * setFinal()
      *
      * @param bool $isFinal
-     * @return \Zend\Code\Generator\PhpMember\AbstractMember
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
      */
     public function setFinal($isFinal)
     {
-        $this->_isFinal = ($isFinal) ? true : false;
+        $this->isFinal = ($isFinal) ? true : false;
         return $this;
     }
 
@@ -149,18 +149,18 @@ abstract class AbstractMember extends Php\AbstractPhp
      */
     public function isFinal()
     {
-        return $this->_isFinal;
+        return $this->isFinal;
     }
 
     /**
      * setStatic()
      *
      * @param bool $isStatic
-     * @return \Zend\Code\Generator\PhpMember\AbstractMember
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
      */
     public function setStatic($isStatic)
     {
-        $this->_isStatic = ($isStatic) ? true : false;
+        $this->isStatic = ($isStatic) ? true : false;
         return $this;
     }
 
@@ -171,18 +171,18 @@ abstract class AbstractMember extends Php\AbstractPhp
      */
     public function isStatic()
     {
-        return $this->_isStatic;
+        return $this->isStatic;
     }
 
     /**
-     * setVisitibility()
+     * setVisibility()
      *
      * @param const $visibility
-     * @return \Zend\Code\Generator\PhpMember\AbstractMember
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
      */
     public function setVisibility($visibility)
     {
-        $this->_visibility = $visibility;
+        $this->visibility = $visibility;
         return $this;
     }
 
@@ -193,18 +193,18 @@ abstract class AbstractMember extends Php\AbstractPhp
      */
     public function getVisibility()
     {
-        return $this->_visibility;
+        return $this->visibility;
     }
 
     /**
      * setName()
      *
      * @param string $name
-     * @return \Zend\Code\Generator\PhpMember\AbstractMember
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
         return $this;
     }
 
@@ -215,6 +215,7 @@ abstract class AbstractMember extends Php\AbstractPhp
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
+
 }

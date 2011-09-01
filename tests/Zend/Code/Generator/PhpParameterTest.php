@@ -40,7 +40,7 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \Zend\Code\Generator\PhpParameter
+     * @var \ParameterGenerator\Code\Generator\PhpParameter
      */
     protected $_parameter = null;
 

@@ -1151,7 +1151,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         }
         $filter = $this->element->getFilter('Alnum');
         $this->assertTrue($filter instanceof \Zend\Filter\Alnum);
-        $this->assertTrue($filter->allowWhiteSpace);
+        $this->assertTrue($filter->getAllowWhiteSpace());
     }
 
     public function testShouldUseFilterConstructorOptionsAsPassedToAddFilter()

@@ -2406,7 +2406,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElements();
         $data = array('foo' => '123456', 'bar' => 'abcdef', 'baz' => 'abc-123');
-        $return = Json::decode($this->form->processAjax($data));
+        $return = Json::decode($this->form->processAjax($data), Json::TYPE_ARRAY);
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return));
     }
@@ -2415,7 +2415,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElements();
         $data = array('baz' => 'abc-123');
-        $return = Json::decode($this->form->processAjax($data));
+        $return = Json::decode($this->form->processAjax($data), Json::TYPE_ARRAY);
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return), var_export($return, 1));
     }
@@ -2672,7 +2672,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
             'foo' => '',
         );
         $return = $this->form->processAjax($data);
-        $messages = Json::decode($return);
+        $messages = Json::decode($return, Json::TYPE_ARRAY);
         $this->assertTrue(is_array($messages));
 
         $this->assertTrue(isset($messages['foo']));

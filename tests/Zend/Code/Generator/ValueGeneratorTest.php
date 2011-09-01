@@ -96,7 +96,7 @@ class ValueGeneratorTest extends \PHPUnit_Framework_TestCase
                     'baz2'
                     )
                 ),
-            new ValueGenerator(array('value' => 'PHP_EOL', 'type' => 'constant'))
+            new ValueGenerator('PHP_EOL', 'constant')
             );
 
         $expectedSource = <<<EOS
@@ -113,7 +113,7 @@ array(
                 )
             ),
         PHP_EOL
-        );
+        )
 EOS;
 
         $valueGenerator = new ValueGenerator();

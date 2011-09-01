@@ -39,6 +39,17 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
 {
 
     /**#@+
+     * @const int Flags for construction usage
+     */
+    const FLAG_ABSTRACT  = 0x01;
+    const FLAG_FINAL     = 0x02;
+    const FLAG_STATIC    = 0x04;
+    const FLAG_PUBLIC    = 0x10;
+    const FLAG_PROTECTED = 0x20;
+    const FLAG_PRIVATE   = 0x40;
+    /**#@-*/
+
+    /**#@+
      * @param const string
      */
     const VISIBILITY_PUBLIC    = 'public';
@@ -49,27 +60,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * @var \Zend\Code\GeneratorDocblock
      */
-    protected $docblock   = null;
-
-    /**
-     * @var bool
-     */
-    protected $isAbstract = false;
-
-    /**
-     * @var bool
-     */
-    protected $isFinal    = false;
-
-    /**
-     * @var bool
-     */
-    protected $isStatic   = false;
-
-    /**
-     * @var const
-     */
-    protected $visibility = self::VISIBILITY_PUBLIC;
+    protected $docblock = null;
 
     /**
      * @var string
@@ -77,10 +68,43 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     protected $name = null;
 
     /**
+     * @var int
+     */
+    protected $flags = self::FLAG_PUBLIC;
+
+    public function setFlags($flags)
+    {
+
+        if (is_array($flags)) {
+            $flagsArray = $flags;
+            $flags = 0x00;
+            foreach ($flagsArray as $flag) {
+                $flags |= $flag;
+            }
+        }
+        // check that visibility is one of three
+        $this->flags = $flags;
+        return $this;
+    }
+
+    public function addFlag($flag)
+    {
+        $this->setFlags($this->flags | $flag);
+        return $this;
+    }
+
+    public function removeFlag($flag)
+    {
+        $this->setFlags($this->flags & $flag);
+        return $this;
+    }
+
+
+    /**
      * setDocblock() Set the docblock
      *
      * @param DocblockGenerator|array|string $docblock
-     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
+     * @return AbstractMemberGenerator
      */
     public function setDocblock($docblock)
     {
@@ -116,8 +140,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function setAbstract($isAbstract)
     {
-        $this->isAbstract = ($isAbstract) ? true : false;
-        return $this;
+        return (($isAbstract) ? $this->addFlag(self::FLAG_ABSTRACT) : $this->removeFlag(self::FLAG_ABSTRACT));
     }
 
     /**
@@ -127,7 +150,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function isAbstract()
     {
-        return $this->isAbstract;
+        return ($this->flags & self::FLAG_ABSTRACT);
     }
 
     /**
@@ -138,8 +161,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function setFinal($isFinal)
     {
-        $this->isFinal = ($isFinal) ? true : false;
-        return $this;
+        return (($isFinal) ? $this->addFlag(self::FLAG_FINAL) : $this->removeFlag(self::FLAG_FINAL));
     }
 
     /**
@@ -149,7 +171,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function isFinal()
     {
-        return $this->isFinal;
+        return ($this->flags & self::FLAG_FINAL);
     }
 
     /**
@@ -160,8 +182,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function setStatic($isStatic)
     {
-        $this->isStatic = ($isStatic) ? true : false;
-        return $this;
+        return (($isStatic) ? $this->addFlag(self::FLAG_STATIC) : $this->removeFlag(self::FLAG_STATIC));
     }
 
     /**
@@ -171,18 +192,31 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function isStatic()
     {
-        return $this->isStatic;
+        return ($this->flags & self::FLAG_STATIC); // is FLAG_STATIC in flags
     }
 
     /**
      * setVisibility()
      *
-     * @param const $visibility
-     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
+     * @param string $visibility
+     * @return AbstractMemberGenerator
      */
     public function setVisibility($visibility)
     {
-        $this->visibility = $visibility;
+        switch ($visibility) {
+            case self::VISIBILITY_PUBLIC:
+                $this->removeFlag(self::FLAG_PRIVATE & self::FLAG_PROTECTED); // remove both
+                $this->addFlag(self::FLAG_PUBLIC);
+                break;
+            case self::VISIBILITY_PROTECTED:
+                $this->removeFlag(self::FLAG_PUBLIC & self::FLAG_PRIVATE); // remove both
+                $this->addFlag(self::FLAG_PROTECTED);
+                break;
+            case self::VISIBILITY_PRIVATE:
+                $this->removeFlag(self::FLAG_PUBLIC & self::FLAG_PROTECTED); // remove both
+                $this->addFlag(self::FLAG_PRIVATE);
+                break;
+        }
         return $this;
     }
 
@@ -193,7 +227,14 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
      */
     public function getVisibility()
     {
-        return $this->visibility;
+        switch (true) {
+            case ($this->flags | self::FLAG_PROTECTED):
+                return self::VISIBILITY_PROTECTED;
+            case ($this->flags | self::FLAG_PRIVATE):
+                return self::VISIBILITY_PRIVATE;
+            default:
+                return self::VISIBILITY_PUBLIC;
+        }
     }
 
     /**

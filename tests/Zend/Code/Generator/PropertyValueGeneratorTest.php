@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_CodeGenerator
- * @subpackage PHP
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,27 +22,24 @@
 /**
  * @namespace
  */
-namespace Zend\Code\Generator;
+namespace ZendTest\Code\Generator;
+use Zend\Code\Generator\PropertyValueGenerator;
 
 /**
- * @uses       \Zend\Code\Generator\AbstractPhp
- * @uses       \Zend\Code\Generator\Exception
  * @category   Zend
  * @package    Zend_CodeGenerator
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ *
+ * @group Zend_CodeGenerator
+ * @group Zend_CodeGenerator_Php
  */
-class PropertyValueGenerator extends ValueGenerator
+class PropertyValueGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * generate()
-     *
-     * @return string
-     */
-    public function generate()
+    public function testPropertyValueAddsSemicolonToValueGenerator()
     {
-        return parent::generate() . ';';
+        $value = new PropertyValueGenerator('foo');
+        $this->assertEquals('\'foo\';', $value->generate());
     }
-
 }

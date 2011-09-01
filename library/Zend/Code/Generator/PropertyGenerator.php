@@ -38,13 +38,15 @@ use Zend\Code\Reflection\ReflectionProperty;
 class PropertyGenerator extends AbstractMemberGenerator
 {
 
+    const FLAG_CONSTANT = 0x08;
+
     /**
      * @var bool
      */
     protected $isConst = null;
 
     /**
-     * @var string
+     * @var PropertyValueGenerator
      */
     protected $defaultValue = null;
 
@@ -85,16 +87,30 @@ class PropertyGenerator extends AbstractMemberGenerator
         return $property;
     }
 
+    public function __construct($name = null, $defaultValue = null, $flags = self::FLAG_PUBLIC)
+    {
+        if ($name !== null) {
+            $this->setName($name);
+        }
+        if ($defaultValue !== null) {
+            $this->setDefaultValue($defaultValue);
+        }
+        if ($flags !== self::FLAG_PUBLIC) {
+            $this->setFlags($flags);
+        }
+    }
+
     /**
      * setConst()
      *
      * @param bool $const
-     * @return \PropertyGenerator\Code\Generator\PhpProperty
+     * @return PropertyGenerator
      */
     public function setConst($const)
     {
-        $this->isConst = $const;
-        return $this;
+        if ($const) {
+            $this->removeFlag(self::FLAG_PUBLIC | self::FLAG_PRIVATE | self::FLAG_PROTECTED);
+        }
     }
 
     /**
@@ -104,7 +120,7 @@ class PropertyGenerator extends AbstractMemberGenerator
      */
     public function isConst()
     {
-        return ($this->isConst) ? true : false;
+        return ($this->flags & self::FLAG_CONSTANT);
     }
 
     /**
@@ -123,7 +139,7 @@ class PropertyGenerator extends AbstractMemberGenerator
         }
 
         if (!($defaultValue instanceof PropertyValueGenerator)) {
-            $defaultValue = new PropertyValueGenerator(array('value' => $defaultValue));
+            $defaultValue = new PropertyValueGenerator($defaultValue);
         }
 
         $this->defaultValue = $defaultValue;
@@ -133,7 +149,7 @@ class PropertyGenerator extends AbstractMemberGenerator
     /**
      * getDefaultValue()
      *
-     * @return \PropertyValueGenerator\Code\Generator\PhpPropertyValue
+     * @return PropertyValueGenerator
      */
     public function getDefaultValue()
     {
@@ -162,10 +178,10 @@ class PropertyGenerator extends AbstractMemberGenerator
                 throw new Exception\RuntimeException('The property ' . $this->name . ' is said to be '
                     . 'constant but does not have a valid constant value.');
             }
-            $output .= $this->_indentation . 'const ' . $name . ' = '
+            $output .= $this->indentation . 'const ' . $name . ' = '
                 . (($defaultValue !== null) ? $defaultValue->generate() : 'null;');
         } else {
-            $output .= $this->_indentation
+            $output .= $this->indentation
                 . $this->getVisibility()
                 . (($this->isStatic()) ? ' static' : '')
                 . ' $' . $name . ' = '

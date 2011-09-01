@@ -73,6 +73,20 @@ class ValueGenerator extends AbstractGenerator
      */
     protected $allowedTypes = null;
 
+    public function __construct($value = null, $type = self::TYPE_AUTO, $outputMode = self::OUTPUT_MULTIPLE_LINE)
+    {
+        if ($value) {
+            $this->setValue($value);
+        }
+        if ($type !== self::TYPE_AUTO) {
+            $this->setType($type);
+        }
+        if ($outputMode !== self::OUTPUT_MULTIPLE_LINE) {
+            $this->setOutputMode($outputMode);
+        }
+
+    }
+
     /**
      * isValidConstantType()
      *
@@ -256,9 +270,8 @@ class ValueGenerator extends AbstractGenerator
                     \RecursiveIteratorIterator::SELF_FIRST
                     );
                 foreach ($rii as $curKey => $curValue) {
-                    if (!$curValue instanceof self) {
-                        $curValue = new self();
-                        $curValue->setValue($curValue);
+                    if (!$curValue instanceof ValueGenerator) {
+                        $curValue = new self($curValue);
                         $rii->getSubIterator()->offsetSet($curKey, $curValue);
                     }
                     $curValue->setArrayDepth($rii->getDepth());
@@ -301,6 +314,7 @@ class ValueGenerator extends AbstractGenerator
                 $outputParts = array();
                 $noKeyIndex = 0;
                 foreach ($value as $n => $v) {
+                    /* @var $v ValueGenerator */
                     $v->setArrayDepth($this->arrayDepth + 1);
                     $partV = $v->generate();
                     if ($n === $noKeyIndex) {

@@ -24,7 +24,7 @@ namespace ZendTest\Form\Decorator;
 use Zend\Form\Decorator\FormDecorator,
     Zend\Form\DisplayGroup,
     Zend\Form\Form,
-    Zend\Loader\PluginLoader,
+    Zend\Loader\PrefixPathLoader,
     Zend\View\View;
 
 /**
@@ -71,7 +71,7 @@ class FormDecoratorTest extends \PHPUnit_Framework_TestCase
             'enctype' => 'ascii',
             'charset' => 'us-ascii'
         );
-        $loader = new PluginLoader(array('Zend\Form\Decorator' => 'Zend/Form/Decorator/'));
+        $loader = new PrefixPathLoader(array('Zend\Form\Decorator' => 'Zend/Form/Decorator/'));
         $displayGroup = new DisplayGroup('foo', $loader, array('attribs' => $attribs));
         $this->decorator->setElement($displayGroup);
         $options = $this->decorator->getOptions();

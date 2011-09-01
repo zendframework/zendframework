@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.translate"><info><title>Zend_Application_Resource_Translate</title></info>
+
+    <para>
+        <classname>Zend_Application_Resource_Translate</classname> initialisera un adaptateur
+        <classname>Zend_Translate</classname> basé sur les options qui lui seront fourni.
+    </para>
+
+    <para>
+        Les clés de configuration suivantes sont reconnues :
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis><property>adapter</property></emphasis> : le type de l'adaptateur
+                <classname>Zend_Translate</classname>. S'il n'est pas précisé, l'adaptateur 
+                par défaut est de type tableau (array).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>data</property></emphasis> : le chemin d'accès aux sources de 
+                traduction.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>locale</property></emphasis> : la locale à utiliser pour 
+                choisir la traduction. Ce paramètre est optionnel, car la langue de l'utilisateur 
+                peut être soit détectée automatiquement soit forcée avec une instance <classname>
+                Zend_Locale</classname> placée dans <classname>Zend_Registry</classname> avec une
+                langue choisie.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>options</property></emphasis> : les options varient en fonction 
+                de l'adaptateur choisi. Veuillez vous reporter à la section 
+                <xref linked="zend.translate.using.options" /> de ce dernier pour plus de détails.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>registry</property></emphasis> : spécifie la clé du registre 
+                pour stocker l'instance de <classname>Zend_Translate</classname>. Ce paramètre 
+                est optionnel, car il sera mis par défaut dans le registre avec la clé 
+                Zend_Translate.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>cache</property></emphasis> : spécifie le nom d'un modèle du 
+                gestionnaire de cache ou l'objet de cache pour les sources de traduction. Cela 
+                permet d'améliorer les performances en particulier pour les formats XML.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <example id="zend.application.available-resources.translate.configExample">
+        <title>Exemple de configuration d'une ressource multilingue</title>
+
+        <para>
+            Voici un extrait de configuration <acronym>INI</acronym> montrant comment configurer une
+            ressource multilingue.
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+resources.translate.adapter = tmx
+resources.translate.data = APPLICATION_PATH "/../data/locales"
+resources.translate.scan = Zend_Translate::LOCALE_DIRECTORY
+
+; Optionnellement, on peut utiliser un modèle du gestionnaire de cache :
+resources.translate.cache = "languages"
+]]></programlisting>
+    </example>
+</section>

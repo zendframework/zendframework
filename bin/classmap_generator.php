@@ -81,7 +81,7 @@ if (array_key_exists('PWD', $_SERVER)) {
 $libraryPath = '';
 if (isset($opts->l)) {
     $libraryPath = $opts->l;
-    $libraryPath = rtrim($libraryPath, '/\\') . '/';
+    $libraryPath = rtrim($libraryPath, '/\\') . DIRECTORY_SEPARATOR;
     if (!is_dir($libraryPath)) {
         echo "Invalid library directory provided" . PHP_EOL . PHP_EOL;
         echo $opts->getUsageMessage();
@@ -134,7 +134,7 @@ $strip .= DIRECTORY_SEPARATOR;
 iterator_apply($l, function() use ($l, $map, $strip, $libraryPath){
     $file      = $l->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
-    $filename  = str_replace($strip, '', $file->getPath() . '/' . $file->getFilename());
+    $filename  = str_replace($strip, '', $file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename());
 
     // Add in relative path to library
     $filename  = $libraryPath . $filename;

@@ -3,12 +3,16 @@
 namespace Zf2Mvc;
 
 use Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager;
+    Zend\EventManager\EventManager,
+    Zend\Http\Request,
+    Zend\Http\Response;
 
 class Application implements AppContext
 {
     protected $events;
     protected $locator;
+    protected $request;
+    protected $response;
     protected $router;
 
     /**
@@ -47,6 +51,30 @@ class Application implements AppContext
     }
 
     /**
+     * Set the request object
+     *
+     * @param  Request $request
+     * @return AppContext
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * Set the response object
+     *
+     * @param  Response $response 
+     * @return AppContext
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
+        return $this;
+    }
+
+    /**
      * Set the router used to decompose the request
      *
      * A router should return a metadata object containing a controller key.
@@ -68,6 +96,32 @@ class Application implements AppContext
     public function getLocator()
     {
         return $this->locator;
+    }
+
+    /**
+     * Get the request object
+     * 
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if (!$this->request instanceof Request) {
+            $this->setRequest(new Request());
+        }
+        return $this->request;
+    }
+
+    /**
+     * Get the response object
+     * 
+     * @return Response
+     */
+    public function getResponse()
+    {
+        if (!$this->response instanceof Response) {
+            $this->setResponse(new Response());
+        }
+        return $this->response;
     }
 
     /**

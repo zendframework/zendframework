@@ -93,7 +93,7 @@ class File extends AbstractDecorator implements FileDecorator
 
         $view = $element->getView();
         if (!$view instanceof Renderer || !method_exists($view, 'broker')) {
-            throw new Exception\UnexpectedValueException('File decorator cannot render without a registered view object containing a broker() method');
+            return $content;
         }
 
         $name      = $element->getName();

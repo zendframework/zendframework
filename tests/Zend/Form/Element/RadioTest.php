@@ -158,7 +158,7 @@ class RadioTest extends \PHPUnit_Framework_TestCase
 
         $element = $form->getElement('foo');
 
-        $this->assertType('My\Decorator\Label', $element->getDecorator('Label'));
+        $this->assertInstanceOf('My\Decorator\Label', $element->getDecorator('Label'));
     }
 
     /**

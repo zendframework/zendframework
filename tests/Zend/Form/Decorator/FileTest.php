@@ -25,7 +25,7 @@ use Zend\Form\Decorator\File as FileDecorator,
     Zend\Form\Decorator\AbstractDecorator,
     Zend\Form\Element\File as FileElement,
     Zend\Form\Element,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Errors

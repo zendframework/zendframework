@@ -23,7 +23,7 @@ namespace ZendTest\Form\Decorator;
 
 use Zend\Form\Decorator\Errors as ErrorsDecorator,
     Zend\Form\Element,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Errors

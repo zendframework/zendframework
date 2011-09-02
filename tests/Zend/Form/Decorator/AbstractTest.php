@@ -26,7 +26,7 @@ use Zend\Form\Decorator,
     Zend\Form\Element,
     Zend\Form\Form,
     Zend\Config\Config,
-    Zend\Loader\PluginLoader;
+    Zend\Loader\PrefixPathLoader;
 
 /**
  * Test class for Zend_Form_Decorator_Abstract
@@ -93,7 +93,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testSetElementAllowsDisplayGroups()
     {
-        $loader = new PluginLoader(array('Zend\Form\Decorator' => 'Zend/Form/Decorator'));
+        $loader = new PrefixPathLoader(array('Zend\Form\Decorator' => 'Zend/Form/Decorator'));
         $group  = new DisplayGroup('foo', $loader);
         $this->decorator->setElement($group);
         $this->assertSame($group, $this->decorator->getElement());

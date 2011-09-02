@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../library/Zend/Loader/ClassMapAutoloader.php';
 $loader = new Zend\Loader\ClassMapAutoloader();
-$loader->registerAutoloadMap(__DIR__ . '/../library/Zend/Controller/.classmap.php');
+$loader->registerAutoloadMap(__DIR__ . '/../library/Zend/.classmap.php');
 $loader->register();
 
 if (!class_exists('Zend\Controller\Action')) {
@@ -12,5 +12,5 @@ if (!class_exists('Zend\Controller\Action')) {
 if (!class_exists('Zend\Version')) {
     echo "Could not find version class!\n";
 } else {
-    echo "Found version class?\n";
+    echo "Found version class!\n";
 }

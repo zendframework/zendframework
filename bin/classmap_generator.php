@@ -78,11 +78,9 @@ if (array_key_exists('PWD', $_SERVER)) {
     $path = $_SERVER['PWD'];
 }
 
-$libraryPath = '';
 $relativePathForClassmap = '';
 if (isset($opts->l)) {
-    $libraryPath = $opts->l;
-    $libraryPath = rtrim($libraryPath, '/\\') . '/';
+    $libraryPath = rtrim($opts->l, '/\\') . '/';
     if (!is_dir($libraryPath)) {
         echo "Invalid library directory provided" . PHP_EOL . PHP_EOL;
         echo $opts->getUsageMessage();

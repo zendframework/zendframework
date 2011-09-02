@@ -24,7 +24,7 @@
  */
 namespace Zend\Router\Http;
 
-use Zend\Stdlib\RequestDescription as Request,
+use Zend\Http\Request,
     Zf2Mvc\Router\Route as BaseRoute;
 
 /**

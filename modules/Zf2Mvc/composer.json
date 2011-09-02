@@ -1,0 +1,20 @@
+{
+    "name": "Zf2Mvc",
+    "type": "Library",
+    "description": "MVC prototype for ZF2 utilizing Zend\\Di",
+    "keywords": ["zf2","mvc"],
+    "homepage": "http://framework.zend.com/zf2",
+    "version": "0.0.1",
+    "license": "New BSD",
+    "authors": [
+        {
+            "name": "Matthew Weier O'Phinney",
+            "email": "matthew@zend.com",
+            "homepage": "http://framework.zend.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "zf2": ">=2.0.0dev4"
+    }
+}

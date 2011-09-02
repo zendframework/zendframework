@@ -9,6 +9,7 @@ class Application implements AppContext
 {
     protected $events;
     protected $locator;
+    protected $router;
 
     /**
      * Set the event manager instance used by this context
@@ -50,11 +51,13 @@ class Application implements AppContext
      *
      * A router should return a metadata object containing a controller key.
      * 
-     * @param  Router $router 
+     * @param  Router\RouteStack $router 
      * @return AppContext
      */
-    public function setRouter(Router $router)
+    public function setRouter(Router\RouteStack $router)
     {
+        $this->router = $router;
+        return $this;
     }
 
     /**
@@ -74,6 +77,10 @@ class Application implements AppContext
      */
     public function getRouter()
     {
+        if (!$this->router instanceof Router\RouteStack) {
+            $this->setRouter(new Router\SimpleRouteStack());
+        }
+        return $this->router;
     }
 
     /**

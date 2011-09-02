@@ -98,6 +98,7 @@ class Application implements AppContext
      *
      * A router should return a metadata object containing a controller key.
      * 
+<<<<<<< HEAD
      * @param  Router\RouteStack $router 
      * @return AppContext
      */

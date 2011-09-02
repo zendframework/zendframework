@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Router\Http;
+namespace Zf2Mvc\Router\Http;
 
 use Zend\Http\Request,
     Zf2Mvc\Router\Route as BaseRoute;
@@ -43,7 +43,8 @@ interface Route extends BaseRoute
      * @param  Request $request
      * @param  integer $pathOffset
      * @return RouteMatch
+     * @todo   Cannot redeclare match in an interface...
      */
-    public function match(Request $request, $pathOffset = null);
+    // public function match(Request $request, $pathOffset = null);
 }
 

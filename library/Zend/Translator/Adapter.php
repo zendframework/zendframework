@@ -837,7 +837,7 @@ abstract class Adapter
             }
 
             $rule = Plural::getPlural($number, $locale);
-            if (isset($this->_translate[$locale][$plural[0]][$rule])) {
+            if (is_array($this->_translate[$locale][$plural[0]]) && isset($this->_translate[$locale][$plural[0]][$rule])) {
                 $this->_routed = array();
                 return $this->_translate[$locale][$plural[0]][$rule];
             }

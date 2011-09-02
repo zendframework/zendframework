@@ -26,7 +26,7 @@ namespace Zend\Router\Http;
 
 use Traversable,
     Zend\Config\Config,
-    Zend\Stdlib\RequestDescription,
+    Zend\Http\Request,
     Zf2Mvc\Router\Exception;
 
 /**
@@ -135,10 +135,10 @@ class Part extends TreeRouteStack
                 }
             }
 
-            if (method_exists($request, 'getRequestUri')) {
-                if ($this->mayTerminate && $nextOffset === strlen($request->getRequestUri())) {
-                    return $match;
-                }
+            $uri  = $request->getUri();
+            $path = $uri->getPath();
+            if ($this->mayTerminate && $nextOffset === strlen($path)) {
+                return $match;
             }
         }
 

@@ -26,7 +26,7 @@ namespace Zf2Mvc\Router\Http;
 
 use Traversable,
     Zend\Config\Config,
-    Zend\Stdlib\RequestDescription as Request,
+    Zend\Http\Request,
     Zf2Mvc\Router\Exception,
     Zf2Mvc\Router\RouteMatch;
 
@@ -95,15 +95,14 @@ class Literal implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'getRequestUri')) {
-            throw new Exception\InvalidArgumentException('Literal route requires an HTTP request');
-        }
+        $uri  = $request->getUri();
+        $path = $uri->getPath();
         if ($pathOffset !== null) {
-            if (strpos($request->getRequestUri(), $this->route) === $pathOffset) {
+            if (strpos($path, $this->route) === $pathOffset) {
                 return new RouteMatch($this->defaults, $this);
             }
         } else {
-            if ($request->getRequestUri() === $this->route) {
+            if ($path === $this->route) {
                 return new RouteMatch($this->defaults, $this);
             }
         }

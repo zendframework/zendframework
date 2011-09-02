@@ -26,4 +26,4 @@ spl_autoload_register(function($classname) {
         return false;
     }
     return include_once($realpath);
-})
+});

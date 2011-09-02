@@ -79,7 +79,7 @@ if (array_key_exists('PWD', $_SERVER)) {
 }
 
 $libraryPath = '';
-if (isset($opts->l)) {
+if (isset($opts->l) && isset($opts->o)) {
     $libraryPath = $opts->l;
     $libraryPath = rtrim($libraryPath, '/\\') . '/';
     if (!is_dir($libraryPath)) {

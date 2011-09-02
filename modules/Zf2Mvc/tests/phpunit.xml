@@ -1,0 +1,17 @@
+<phpunit bootstrap="./bootstrap.php" colors="true">
+    <testsuite name="ZF2 MVC Module Test Suite">
+        <directory>./</directory>
+    </testsuite>
+
+    <groups>
+        <exclude>
+            <group>disable</group>
+        </exclude>
+    </groups>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../src/</directory> -->
+        </whitelist>
+    </filter>
+</phpunit>

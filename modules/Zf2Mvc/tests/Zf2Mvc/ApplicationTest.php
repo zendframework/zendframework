@@ -68,4 +68,19 @@ class ApplicationTest extends TestCase
         $app->setLocator($locator);
         $this->assertSame($locator, $app->getLocator());
     }
+
+    public function testRouterIsLazyLoaded()
+    {
+        $app    = new Application();
+        $router = $app->getRouter();
+        $this->assertInstanceOf('Zf2Mvc\Router\RouteStack', $router);
+    }
+
+    public function testRouterMayBeInjected()
+    {
+        $app    = new Application();
+        $router = new Router\SimpleRouteStack();
+        $app->setRouter($router);
+        $this->assertSame($router, $app->getRouter());
+    }
 }

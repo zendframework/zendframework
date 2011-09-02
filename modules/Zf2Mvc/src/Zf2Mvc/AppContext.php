@@ -76,12 +76,6 @@ interface AppContext
      */
     public function getResponse();
 
-    /**
-     * Get the router object
-     * 
-     * @return Router
-     */
-    public function getRouter();
 
     /**
      * Retrieve the event manager

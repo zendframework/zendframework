@@ -1046,18 +1046,18 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
 
             $this->_elements[$name] = $this->createElement($element, $name, $options);
         } elseif ($element instanceof Element) {
-            $prefixPaths              = array();
-            $prefixPaths['decorator'] = $this->getPluginLoader('decorator')->getPaths();
+            $prefixPaths = array();
+            $prefixPaths['decorator'] = $this->getDecoratorPrefixPaths();
             if (!empty($this->_elementPrefixPaths)) {
                 $prefixPaths = array_merge($prefixPaths, $this->_elementPrefixPaths);
             }
+            $element->addPrefixPaths($prefixPaths);
 
             if (null === $name) {
                 $name = $element->getName();
             }
 
             $this->_elements[$name] = $element;
-            $this->_elements[$name]->addPrefixPaths($prefixPaths);
         }
 
         $this->_order[$name] = $this->_elements[$name]->getOrder();
@@ -1091,7 +1091,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         }
 
         $prefixPaths              = array();
-        $prefixPaths['decorator'] = $this->getPluginLoader('decorator')->getPaths();
+        $prefixPaths['decorator'] = $this->getDecoratorPrefixPaths();
         if (!empty($this->_elementPrefixPaths)) {
             $prefixPaths = array_merge($prefixPaths, $this->_elementPrefixPaths);
         }
@@ -3365,5 +3365,26 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
             }
         }
         return $messages;
+    }
+
+    /**
+     * Get a normalized list of decorator prefix paths
+     *
+     * Returns a list in the form of prefix => path[] pairs.
+     * 
+     * @return array
+     */
+    protected function getDecoratorPrefixPaths()
+    {
+        $loader      = $this->getPluginLoader('decorator');
+        $prefixPaths = array();
+        foreach ($loader->getPaths() as $prefix => $paths) {
+            $pathList = array();
+            foreach ($paths as $path) {
+                $pathList[] = $path;
+            }
+            $prefixPaths[$prefix] = $pathList;
+        }
+        return $prefixPaths;
     }
 }

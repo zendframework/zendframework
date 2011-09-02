@@ -159,5 +159,11 @@ class Application implements AppContext
      */
     public function run()
     {
+        $locator = $this->getLocator();
+        if (!$locator) {
+            throw new Exception\MissingLocatorException(
+                'Cannot run application without a locator'
+            );
+        }
     }
 }

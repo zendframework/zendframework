@@ -43,7 +43,7 @@ class Codabar extends AbstractAdapter
      * Note: The first and last character can be A, B, C or D
      * @var string
      */
-    protected $_characters = '0123456789-$:/.+ABCD';
+    protected $_characters = '0123456789-$:/.+ABCDTN*E';
 
     /**
      * Constructor
@@ -73,6 +73,20 @@ class Codabar extends AbstractAdapter
 
             $last = substr($value, -1, 1);
             if (strpbrk($last, 'ABCD') === false) {
+                // Missing stop char
+                return false;
+            }
+
+            $value = substr($value, 1, -1);
+        } else if (strpbrk($value, 'TN*E') !== false) {
+            $first = $value[0];
+            if (strpbrk($first, 'TN*E') === false) {
+                // Missing start char
+                return false;
+            }
+
+            $last = substr($value, -1, 1);
+            if (strpbrk($last, 'TN*E') === false) {
                 // Missing stop char
                 return false;
             }

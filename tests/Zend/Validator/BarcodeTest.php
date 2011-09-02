@@ -441,6 +441,8 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($barcode->isValid('A123C'));
         $this->assertFalse($barcode->isValid('A123E'));
         $this->assertFalse($barcode->isValid('A1A23C'));
+        $this->assertTrue($barcode->isValid('T123*'));
+        $this->assertFalse($barcode->isValid('*123A'));
     }
 
     /**

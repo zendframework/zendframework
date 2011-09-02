@@ -32,10 +32,10 @@ interface AppContext
      *
      * A router should return a metadata object containing a controller key.
      * 
-     * @param  Router $router 
+     * @param  Router\RouteStack $router 
      * @return AppContext
      */
-    public function setRouter(Router $router);
+    public function setRouter(Router\RouteStack $router);
 
     /**
      * Get the locator object

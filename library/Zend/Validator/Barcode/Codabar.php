@@ -64,29 +64,29 @@ class Codabar extends AbstractAdapter
     public function checkChars($value)
     {
         $first = $value[0];
-        if (strpbrk($value, 'ABCD') !== false) {
+        if (strpbrk($value, 'ABCD')) {
             $first = $value[0];
-            if (strpbrk($first, 'ABCD') === false) {
+            if (!strpbrk($first, 'ABCD')) {
                 // Missing start char
                 return false;
             }
 
             $last = substr($value, -1, 1);
-            if (strpbrk($last, 'ABCD') === false) {
+            if (!strpbrk($last, 'ABCD')) {
                 // Missing stop char
                 return false;
             }
 
             $value = substr($value, 1, -1);
-        } else if (strpbrk($value, 'TN*E') !== false) {
+        } elseif (strpbrk($value, 'TN*E')) {
             $first = $value[0];
-            if (strpbrk($first, 'TN*E') === false) {
+            if (!strpbrk($first, 'TN*E')) {
                 // Missing start char
                 return false;
             }
 
             $last = substr($value, -1, 1);
-            if (strpbrk($last, 'TN*E') === false) {
+            if (!strpbrk($last, 'TN*E')) {
                 // Missing stop char
                 return false;
             }

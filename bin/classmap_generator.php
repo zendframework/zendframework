@@ -79,7 +79,8 @@ if (array_key_exists('PWD', $_SERVER)) {
 }
 
 $libraryPath = '';
-if (isset($opts->l) && isset($opts->o)) {
+$relativePathForClassmap = '';
+if (isset($opts->l)) {
     $libraryPath = $opts->l;
     $libraryPath = rtrim($libraryPath, '/\\') . '/';
     if (!is_dir($libraryPath)) {
@@ -88,6 +89,12 @@ if (isset($opts->l) && isset($opts->o)) {
         exit(2);
     }
     $path = realpath($libraryPath);
+    
+    // If -o has been used, then we need to add the $libraryPath into the relative 
+    // path that is created in the classmap file.
+    if ($opts->o != '') {
+        $relativePathForClassmap = $libraryPath;
+    }
 }
 
 $usingStdout = false;
@@ -131,13 +138,13 @@ $l = new \Zend\File\ClassFileLocator($path);
 // classname => filename, where the filename is relative to the library path
 $map    = new \stdClass;
 $strip .= DIRECTORY_SEPARATOR;
-iterator_apply($l, function() use ($l, $map, $strip, $libraryPath){
+iterator_apply($l, function() use ($l, $map, $strip, $relativePathForClassmap){
     $file      = $l->current();
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getPath() . '/' . $file->getFilename());
 
     // Add in relative path to library
-    $filename  = $libraryPath . $filename;
+    $filename  = $relativePathForClassmap . $filename;
 
     // Replace directory separators with constant
     $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);

@@ -24,7 +24,7 @@
  */
 namespace Zend\Router\Http;
 
-use Zend\Stdlib\RequestDescription as Request,
+use Zend\Http\Request,
     Zf2Mvc\Router\Route,
     Zf2Mvc\Router\RouteMatch;
 
@@ -73,14 +73,13 @@ class Regex implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'getRequestUri')) {
-            return null;
-        }
+        $uri  = $request->getUri();
+        $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->_regex . ')i', $request->getRequestUri(), $match, null, $pathOffset);
+            $result = preg_match('(\G' . $this->_regex . ')i', $path, $match, null, $pathOffset);
         } else {
-            $result = preg_match('(^' . $this->_regex . '$)i', $request->getRequestUri(), $match);
+            $result = preg_match('(^' . $this->_regex . '$)i', $path, $match);
         }
 
         if ($result === null) {

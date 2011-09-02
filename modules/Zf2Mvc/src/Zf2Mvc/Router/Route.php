@@ -23,7 +23,7 @@
  */
 namespace Zf2Mvc\Router;
 
-use Zend\Stdlib\RequestDescription as Request;
+use Zend\Http\Request;
 
 /**
  * Route interface.

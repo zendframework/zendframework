@@ -165,5 +165,46 @@ class Application implements AppContext
                 'Cannot run application without a locator'
             );
         }
+
+        $routeMatch     = $this->route();
+
+        if (!$routeMatch instanceof Router\RouteMatch) {
+            throw new \Exception('UNIMPLEMENTED: Handling of failed routing');
+        }
+
+        $controllerName = $routeMatch->getParam('controller', 'not-found');
+        $controller     = $locator->get($controllerName);
+
+        if (!$controller instanceof Dispatchable) {
+            throw new \Exception('UNIMPLEMENTED: Handling not-found controller');
+        }
+
+        $request  = $this->getRequest();
+        $response = $this->getResponse();
+        $result   = $controller->dispatch($request, $response);
+
+        if ($result instanceof Response) {
+            $return = $result;
+        } else {
+            $return = $response;
+        }
+
+        return $return;
+    }
+
+    protected function route()
+    {
+        $request = $this->getRequest();
+        $router  = $this->getRouter();
+        $events  = $this->events();
+        $params  = compact('request', 'router');
+
+        $events->trigger('route.pre', $this, $params);
+
+        $routeMatch = $router->match($request);
+
+        $params['__RESULT__'] = $routeMatch;
+        $events->trigger('route.post', $this, $params);
+        return $routeMatch;
     }
 }

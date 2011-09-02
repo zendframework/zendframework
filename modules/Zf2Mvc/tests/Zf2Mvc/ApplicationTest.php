@@ -5,7 +5,9 @@ namespace Zf2Mvc;
 use PHPUnit_Framework_TestCase as TestCase,
     stdClass,
     Zend\Di\DependencyInjector,
-    Zend\Di\ServiceLocator;
+    Zend\Di\ServiceLocator,
+    Zend\Http\Request,
+    Zend\Http\Response;
 
 class ApplicationTest extends TestCase
 {
@@ -82,5 +84,35 @@ class ApplicationTest extends TestCase
         $router = new Router\SimpleRouteStack();
         $app->setRouter($router);
         $this->assertSame($router, $app->getRouter());
+    }
+
+    public function testRequestIsLazyLoaded()
+    {
+        $app     = new Application();
+        $request = $app->getRequest();
+        $this->assertInstanceOf('Zend\Http\Request', $request);
+    }
+
+    public function testRequestMayBeInjected()
+    {
+        $app     = new Application();
+        $request = new Request();
+        $app->setRequest($request);
+        $this->assertSame($request, $app->getRequest());
+    }
+
+    public function testResponseIsLazyLoaded()
+    {
+        $app      = new Application();
+        $response = $app->getResponse();
+        $this->assertInstanceOf('Zend\Http\Response', $response);
+    }
+
+    public function testResponseMayBeInjected()
+    {
+        $app      = new Application();
+        $response = new Response();
+        $app->setResponse($response);
+        $this->assertSame($response, $app->getResponse());
     }
 }

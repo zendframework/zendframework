@@ -76,7 +76,6 @@ interface AppContext
      */
     public function getResponse();
 
-
     /**
      * Retrieve the event manager
      *

@@ -30,6 +30,8 @@ class Application implements AppContext
 
     protected $events;
     protected $locator;
+    protected $request;
+    protected $response;
     protected $router;
 
     /**

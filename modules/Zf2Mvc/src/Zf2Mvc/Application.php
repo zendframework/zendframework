@@ -8,6 +8,7 @@ use Zend\EventManager\EventCollection,
 class Application implements AppContext
 {
     protected $events;
+    protected $locator;
 
     /**
      * Set the event manager instance used by this context
@@ -34,6 +35,14 @@ class Application implements AppContext
      */
     public function setLocator($locator)
     {
+        if (!is_object($locator)) {
+            throw new Exception\InvalidArgumentException('Locator must be an object');
+        }
+        if (!method_exists($locator, 'get')) {
+            throw new Exception\InvalidArgumentException('Locator must implement a "get()" method');
+        }
+        $this->locator = $locator;
+        return $this;
     }
 
     /**
@@ -51,10 +60,11 @@ class Application implements AppContext
     /**
      * Get the locator object
      * 
-     * @return mixed
+     * @return null|object
      */
     public function getLocator()
     {
+        return $this->locator;
     }
 
     /**

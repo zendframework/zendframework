@@ -23,7 +23,10 @@
  * @namespace
  */
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator;
+use Zend\Code\Generator\MethodGenerator,
+    Zend\Code\Generator\ParameterGenerator,
+    Zend\Code\Generator\ValueGenerator,
+    Zend\Code\Reflection\ReflectionMethod;
 
 /**
  * @category   Zend
@@ -39,58 +42,44 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
 {
 
 
-    /**
-     * @var Zend_CodeGenerator_Php_Method
-     */
-    protected $_method = null;
-
-    public function setup()
-    {
-        $this->_method = new Php\PhpMethod();
-    }
-
-    public function teardown()
-    {
-        $this->_method = null;
-    }
 
     public function testMethodConstructor()
     {
-        $codeGenMethod = new Php\PhpMethod();
-        $this->isInstanceOf($codeGenMethod, '\Zend\Code\Generator\PhpMethod');
+        $methodGenerator = new MethodGenerator();
+        $this->isInstanceOf($methodGenerator, '\Zend\Code\Generator\PhpMethod');
     }
 
     public function testMethodParameterAccessors()
     {
-        $codeGen = new Php\PhpMethod();
-        $codeGen->setParameters(array(
-            array('name' => 'one')
-            ));
-        $params = $codeGen->getParameters();
+        $methodGenerator = new MethodGenerator();
+        $methodGenerator->setParameters(array('one'));
+        $params = $methodGenerator->getParameters();
         $param = array_shift($params);
         $this->assertTrue($param instanceof \Zend\Code\Generator\ParameterGenerator, 'Failed because $param was not instance of Zend_CodeGenerator_Php_Property');
     }
 
     public function testMethodBodyGetterAndSetter()
     {
-        $this->_method->setBody('Foo');
-        $this->assertEquals('Foo', $this->_method->getBody());
+        $method = new MethodGenerator();
+        $method->setBody('Foo');
+        $this->assertEquals('Foo', $method->getBody());
     }
 
     public function testDocblockGetterAndSetter()
     {
-        $d = new \Zend\Code\Generator\DocblockGenerator();
+        $docblockGenerator = new \Zend\Code\Generator\DocblockGenerator();
 
-        $this->_method->setDocblock($d);
-        $this->assertTrue($d === $this->_method->getDocblock());
+        $method = new MethodGenerator();
+        $method->setDocblock($docblockGenerator);
+        $this->assertTrue($docblockGenerator === $method->getDocblock());
     }
 
 
     public function testMethodFromReflection()
     {
-        $ref = new \Zend\Reflection\ReflectionMethod('\ZendTest\Code\Generator\TestAsset\TestSampleSingleClass', 'someMethod');
+        $ref = new ReflectionMethod('ZendTest\Code\Generator\TestAsset\TestSampleSingleClass', 'someMethod');
 
-        $codeGenMethod = Php\PhpMethod::fromReflection($ref);
+        $methodGenerator = MethodGenerator::fromReflection($ref);
         $target = <<<EOS
     /**
      * Enter description here...
@@ -104,7 +93,7 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
     }
 
 EOS;
-        $this->assertEquals($target, (string) $codeGenMethod);
+        $this->assertEquals($target, (string) $methodGenerator);
     }
 
     /**
@@ -112,12 +101,10 @@ EOS;
      */
     public function testMethodWithStaticModifierIsEmitted()
     {
-        $codeGen = new Php\PhpMethod();
-        $codeGen->setName('foo');
-        $codeGen->setParameters(array(
-            array('name' => 'one')
-            ));
-        $codeGen->setStatic(true);
+        $methodGenerator = new MethodGenerator();
+        $methodGenerator->setName('foo');
+        $methodGenerator->setParameters(array('one'));
+        $methodGenerator->setStatic(true);
 
         $expected = <<<EOS
     public static function foo(\$one)
@@ -126,7 +113,7 @@ EOS;
 
 EOS;
 
-        $this->assertEquals($expected, $codeGen->generate());
+        $this->assertEquals($expected, $methodGenerator->generate());
     }
 
     /**
@@ -134,12 +121,10 @@ EOS;
      */
     public function testMethodWithFinalModifierIsEmitted()
     {
-        $codeGen = new Php\PhpMethod();
-        $codeGen->setName('foo');
-        $codeGen->setParameters(array(
-            array('name' => 'one')
-            ));
-        $codeGen->setFinal(true);
+        $methodGenerator = new MethodGenerator();
+        $methodGenerator->setName('foo');
+        $methodGenerator->setParameters(array('one'));
+        $methodGenerator->setFinal(true);
 
         $expected = <<<EOS
     final public function foo(\$one)
@@ -147,7 +132,7 @@ EOS;
     }
 
 EOS;
-        $this->assertEquals($expected, $codeGen->generate());
+        $this->assertEquals($expected, $methodGenerator->generate());
     }
 
     /**
@@ -155,13 +140,11 @@ EOS;
      */
     public function testMethodWithFinalModifierIsNotEmittedWhenMethodIsAbstract()
     {
-        $codeGen = new Php\PhpMethod();
-        $codeGen->setName('foo');
-        $codeGen->setParameters(array(
-            array('name' => 'one')
-            ));
-        $codeGen->setFinal(true);
-        $codeGen->setAbstract(true);
+        $methodGenerator = new MethodGenerator();
+        $methodGenerator->setName('foo');
+        $methodGenerator->setParameters(array('one'));
+        $methodGenerator->setFinal(true);
+        $methodGenerator->setAbstract(true);
 
         $expected = <<<EOS
     abstract public function foo(\$one)
@@ -169,7 +152,7 @@ EOS;
     }
 
 EOS;
-        $this->assertEquals($expected, $codeGen->generate());
+        $this->assertEquals($expected, $methodGenerator->generate());
     }
 
     /**
@@ -177,12 +160,13 @@ EOS;
      */
     public function testMethodCanHaveDocblock()
     {
-        $codeGenProperty = new Php\PhpMethod(array(
-            'name' => 'someFoo',
-            'static' => true,
-            'visibility' => 'protected',
-            'docblock' => '@var string $someVal This is some val'
-            ));
+        $methodGeneratorProperty = new MethodGenerator(
+            'someFoo',
+            array(),
+            MethodGenerator::FLAG_STATIC | MethodGenerator::FLAG_PROTECTED,
+            null,
+            '@var string $someVal This is some val'
+        );
 
         $expected = <<<EOS
     /**
@@ -193,7 +177,7 @@ EOS;
     }
 
 EOS;
-        $this->assertEquals($expected, $codeGenProperty->generate());
+        $this->assertEquals($expected, $methodGeneratorProperty->generate());
     }
 
     /**
@@ -201,16 +185,11 @@ EOS;
      */
     public function testDefaultValueGenerationDoesNotIncludeTrailingSemicolon()
     {
-        $method = new Php\PhpMethod(array(
-            'name' => 'setOptions',
-        ));
-        $default = new Php\PhpParameterDefaultValue();
+        $method = new MethodGenerator('setOptions');
+        $default = new ValueGenerator();
         $default->setValue(array());
 
-        $param   = new Php\PhpParameter(array(
-            'name' => 'options',
-            'type' => 'array',
-        ));
+        $param   = new ParameterGenerator('options', 'array');
         $param->setDefaultValue($default);
 
         $method->setParameter($param);

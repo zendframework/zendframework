@@ -234,5 +234,15 @@ class ReflectionClass extends PhpReflectionClass implements Reflection
         return $zendReflections;
     }
 
+    public function toString()
+    {
+        return parent::__toString();
+    }
+
+    public function __toString()
+    {
+        return parent::__toString();
+    }
+
 }
 

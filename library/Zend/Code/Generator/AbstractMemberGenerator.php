@@ -95,7 +95,7 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
 
     public function removeFlag($flag)
     {
-        $this->setFlags($this->flags & $flag);
+        $this->setFlags($this->flags & ~$flag);
         return $this;
     }
 
@@ -103,16 +103,12 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     /**
      * setDocblock() Set the docblock
      *
-     * @param DocblockGenerator|array|string $docblock
+     * @param DocblockGenerator|string $docblock
      * @return AbstractMemberGenerator
      */
     public function setDocblock($docblock)
     {
         if (is_string($docblock)) {
-            $docblock = array('shortDescription' => $docblock);
-        }
-
-        if (is_array($docblock)) {
             $docblock = new DocblockGenerator($docblock);
         } elseif (!$docblock instanceof DocblockGenerator) {
             throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
@@ -205,15 +201,15 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     {
         switch ($visibility) {
             case self::VISIBILITY_PUBLIC:
-                $this->removeFlag(self::FLAG_PRIVATE & self::FLAG_PROTECTED); // remove both
+                $this->removeFlag(self::FLAG_PRIVATE | self::FLAG_PROTECTED); // remove both
                 $this->addFlag(self::FLAG_PUBLIC);
                 break;
             case self::VISIBILITY_PROTECTED:
-                $this->removeFlag(self::FLAG_PUBLIC & self::FLAG_PRIVATE); // remove both
+                $this->removeFlag(self::FLAG_PUBLIC | self::FLAG_PRIVATE); // remove both
                 $this->addFlag(self::FLAG_PROTECTED);
                 break;
             case self::VISIBILITY_PRIVATE:
-                $this->removeFlag(self::FLAG_PUBLIC & self::FLAG_PROTECTED); // remove both
+                $this->removeFlag(self::FLAG_PUBLIC | self::FLAG_PROTECTED); // remove both
                 $this->addFlag(self::FLAG_PRIVATE);
                 break;
         }
@@ -228,9 +224,9 @@ abstract class AbstractMemberGenerator extends AbstractGenerator
     public function getVisibility()
     {
         switch (true) {
-            case ($this->flags | self::FLAG_PROTECTED):
+            case ($this->flags & self::FLAG_PROTECTED):
                 return self::VISIBILITY_PROTECTED;
-            case ($this->flags | self::FLAG_PRIVATE):
+            case ($this->flags & self::FLAG_PRIVATE):
                 return self::VISIBILITY_PRIVATE;
             default:
                 return self::VISIBILITY_PUBLIC;

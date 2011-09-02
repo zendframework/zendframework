@@ -144,7 +144,16 @@ class ReflectionDocblockTag implements Reflection
     {
         return array_key_exists(strtolower($name), $this->values);
     }
-    
+
+    public function toString()
+    {
+        $str = "Docblock Tag [ * @"
+            . $this->name
+            . " ]".PHP_EOL;
+
+        return $str;
+    }
+
     /**
      * Serialize to string
      *
@@ -155,11 +164,7 @@ class ReflectionDocblockTag implements Reflection
      */
     public function __toString()
     {
-        $str = "Docblock Tag [ * @"
-            . $this->name
-            . " ]".PHP_EOL;
-
-        return $str;
+        return $this->toString();
     }
     
     protected function parse($docblockLine)

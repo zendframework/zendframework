@@ -24,7 +24,8 @@
  */
 namespace ZendTest\Code\Generator;
 
-use Zend\Code\Generator;
+use Zend\Code\Generator\ParameterGenerator,
+    Zend\Code\Generator\ValueGenerator;
 
 /**
  * @category   Zend
@@ -36,88 +37,80 @@ use Zend\Code\Generator;
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class PhpParameterTest extends \PHPUnit_Framework_TestCase
+class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
-    /**
-     * @var \ParameterGenerator\Code\Generator\PhpParameter
-     */
-    protected $_parameter = null;
-
-    public function setup()
-    {
-        $this->_parameter = new Php\PhpParameter();
-    }
-
-    public function teardown()
-    {
-        $this->_parameter = null;
-    }
 
     public function testTypeGetterAndSetterPersistValue()
     {
-        $this->_parameter->setType('Foo');
-        $this->assertEquals('Foo', $this->_parameter->getType());
+        $parameterGenerator = new ParameterGenerator();
+        $parameterGenerator->setType('Foo');
+        $this->assertEquals('Foo', $parameterGenerator->getType());
     }
 
     public function testNameGetterAndSetterPersistValue()
     {
-        $this->_parameter->setName('Foo');
-        $this->assertEquals('Foo', $this->_parameter->getName());
+        $parameterGenerator = new ParameterGenerator();
+        $parameterGenerator->setName('Foo');
+        $this->assertEquals('Foo', $parameterGenerator->getName());
     }
 
     public function testDefaultValueGetterAndSetterPersistValue()
     {
-        $value = new Php\PhpParameterDefaultValue(array('value'=>'Foo','type'=>'constant'));
-        $this->_parameter->setDefaultValue($value);
-        $this->assertEquals('Foo', (string) $this->_parameter->getDefaultValue());
+        $parameterGenerator = new ParameterGenerator();
+
+        $value = new ValueGenerator('Foo', ValueGenerator::TYPE_CONSTANT);
+        $parameterGenerator->setDefaultValue($value);
+        $this->assertEquals('Foo', (string) $parameterGenerator->getDefaultValue());
     }
 
     public function testPositionGetterAndSetterPersistValue()
     {
-        $this->_parameter->setPosition(2);
-        $this->assertEquals(2, $this->_parameter->getPosition());
+        $parameterGenerator = new ParameterGenerator();
+        $parameterGenerator->setPosition(2);
+        $this->assertEquals(2, $parameterGenerator->getPosition());
     }
 
     public function testGenerateIsCorrect()
     {
-        $this->_parameter->setType('Foo');
-        $this->_parameter->setName('bar');
-        $this->_parameter->setDefaultValue(15);
-        $this->assertEquals('Foo $bar = 15', $this->_parameter->generate());
+        $parameterGenerator = new ParameterGenerator();
+        $parameterGenerator->setType('Foo');
+        $parameterGenerator->setName('bar');
+        $parameterGenerator->setDefaultValue(15);
+        $this->assertEquals('Foo $bar = 15', $parameterGenerator->generate());
 
-        $this->_parameter->setDefaultValue('foo');
-        $this->assertEquals('Foo $bar = \'foo\'', $this->_parameter->generate());
+        $parameterGenerator->setDefaultValue('foo');
+        $this->assertEquals('Foo $bar = \'foo\'', $parameterGenerator->generate());
     }
 
     public function testFromReflectionGetParameterName()
     {
-        $reflParam = $this->_getFirstReflectionParameter('name');
-        $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
+        $reflectionParameter = $this->getFirstReflectionParameter('name');
+        $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
         $this->assertEquals('param', $codeGenParam->getName());
     }
 
     public function testFromReflectionGetParameterType()
     {
-        $reflParam = $this->_getFirstReflectionParameter('type');
-        $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
+        $reflectionParameter = $this->getFirstReflectionParameter('type');
+        $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
         $this->assertEquals('stdClass', $codeGenParam->getType());
     }
 
     public function testFromReflectionGetReference()
     {
-        $reflParam = $this->_getFirstReflectionParameter('reference');
-        $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
+        $reflectionParameter = $this->getFirstReflectionParameter('reference');
+        $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
         $this->assertTrue($codeGenParam->getPassedByReference());
     }
 
     public function testFromReflectionGetDefaultValue()
     {
-        $reflParam = $this->_getFirstReflectionParameter('defaultValue');
-        $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
+        $reflectionParameter = $this->getFirstReflectionParameter('defaultValue');
+        $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
         $defaultValue = $codeGenParam->getDefaultValue();
         $this->assertEquals('\'foo\'', (string) $defaultValue);
@@ -125,22 +118,36 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
 
     public function testFromReflectionGetArrayHint()
     {
-        $reflParam = $this->_getFirstReflectionParameter('fromArray');
-        $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
+        $reflectionParameter = $this->getFirstReflectionParameter('fromArray');
+        $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
         $this->assertEquals('array', $codeGenParam->getType());
     }
 
     public function testFromReflectionGetWithNativeType()
     {
-        $reflParam = $this->_getFirstReflectionParameter('hasNativeDocTypes');
-        $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
+        $reflectionParameter = $this->getFirstReflectionParameter('hasNativeDocTypes');
+        $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
 
         $this->assertNotEquals('int', $codeGenParam->getType());
         $this->assertEquals('', $codeGenParam->getType());
     }
 
-    static public function dataFromReflectionGenerate()
+    /**
+     * @dataProvider dataFromReflectionGenerate
+     * @param string $methodName
+     * @param string $expectedCode
+     */
+    public function testFromReflectionGenerate($methodName, $expectedCode)
+    {
+        //$this->markTestSkipped('Test may not be necessary any longer');
+        $reflectionParameter = $this->getFirstReflectionParameter($methodName);
+        $codeGenParam = ParameterGenerator::fromReflection($reflectionParameter);
+
+        $this->assertEquals($expectedCode, $codeGenParam->generate());
+    }
+
+    public function dataFromReflectionGenerate()
     {
         return array(
             array('name', '$param'),
@@ -161,28 +168,15 @@ class PhpParameterTest extends \PHPUnit_Framework_TestCase
             );
     }
 
-    /**
-     * @dataProvider dataFromReflectionGenerate
-     * @param string $methodName
-     * @param string $expectedCode
-     */
-    public function testFromReflectionGenerate($methodName, $expectedCode)
-    {
-        $this->markTestSkipped('Test may not be necessary any longer');
-        $reflParam = $this->_getFirstReflectionParameter($methodName);
-        $codeGenParam = Php\PhpParameter::fromReflection($reflParam);
-
-        $this->assertEquals($expectedCode, $codeGenParam->generate());
-    }
 
     /**
      * @param  string $method
      * @return \Zend\Reflection\ReflectionParameter
      */
-    private function _getFirstReflectionParameter($method)
+    protected function getFirstReflectionParameter($method)
     {
-        $reflClass = new \Zend\Reflection\ReflectionClass('\ZendTest\Code\Generator\TestAsset\ParameterClass');
-        $method = $reflClass->getMethod($method);
+        $reflectionClass = new \Zend\Code\Reflection\ReflectionClass('ZendTest\Code\Generator\TestAsset\ParameterClass');
+        $method = $reflectionClass->getMethod($method);
 
         $params = $method->getParameters();
         return array_shift($params);

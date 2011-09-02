@@ -269,15 +269,7 @@ class ReflectionDocblock implements Reflection
         $this->longDescription  = rtrim($this->longDescription);
     }
 
-    /**
-     * Serialize to string
-     *
-     * Required by the Reflector interface
-     *
-     * @todo   What should this return?
-     * @return string
-     */
-    public function __toString()
+    public function toString()
     {
         $str = "Docblock [ /* Docblock */ ] {".PHP_EOL.PHP_EOL;
         $str .= "  - Tags [".count($this->tags)."] {".PHP_EOL;
@@ -290,6 +282,18 @@ class ReflectionDocblock implements Reflection
         $str .= "}".PHP_EOL;
 
         return $str;
+    }
+
+    /**
+     * Serialize to string
+     *
+     * Required by the Reflector interface
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 
 }

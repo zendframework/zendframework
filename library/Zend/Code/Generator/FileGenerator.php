@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Code\Generator;
-use Zend\Code\Reflection;
+use Zend\Code\Reflection\ReflectionFile;
 
 /**
  * @uses       \Zend\Code\Generator\AbstractPhp
@@ -126,7 +126,7 @@ class FileGenerator extends AbstractGenerator
         $realpath = realpath($filePath);
 
         if ($realpath === false) {
-            if ( ($realpath = Reflection\ReflectionFile::findRealpathInIncludePath($filePath)) === false) {
+            if ( ($realpath = ReflectionFile::findRealpathInIncludePath($filePath)) === false) {
                 throw new Exception\InvalidArgumentException('No file for ' . $realpath . ' was found.');
             }
         }
@@ -139,7 +139,7 @@ class FileGenerator extends AbstractGenerator
             include $realpath;
         }
 
-        $codeGenerator = self::fromReflection(($fileReflector = new Reflection\ReflectionFile($realpath)));
+        $codeGenerator = self::fromReflection(($fileReflector = new ReflectionFile($realpath)));
 
         if (!isset(self::$loadedFileGenerators[$fileReflector->getFileName()])) {
             self::$loadedFileGenerators[$fileReflector->getFileName()] = $codeGenerator;
@@ -151,10 +151,10 @@ class FileGenerator extends AbstractGenerator
     /**
      * fromReflection()
      *
-     * @param \Zend\Reflection\ReflectionFile $reflectionFile
-     * @return \FileGenerator\Code\Generator\PhpFile
+     * @param ReflectionFile $reflectionFile
+     * @return FileGenerator
      */
-    public static function fromReflection(Reflection\ReflectionFile $reflectionFile)
+    public static function fromReflection(ReflectionFile $reflectionFile)
     {
         $file = new self();
 
@@ -166,7 +166,7 @@ class FileGenerator extends AbstractGenerator
         // @todo this whole area needs to be reworked with respect to how body lines are processed
         foreach ($reflectionFile->getClasses() as $class) {
             $phpClass = ClassGenerator::fromReflection($class);
-            $phpClass->setPhpFile($file);
+            $phpClass->setContainingFile($file);
             $file->setClass($phpClass);
             $classStartLine = $class->getStartLine(true);
             $classEndLine = $class->getEndLine();
@@ -217,6 +217,28 @@ class FileGenerator extends AbstractGenerator
 
         return $file;
     }
+
+    public static function fromArray(array $values)
+    {
+        $fileGenerator = new static;
+        foreach ($values as $name => $value) {
+            switch ($name) {
+                case 'filename':
+                    $fileGenerator->filename = $value;
+                    continue;
+                case 'class':
+                    $fileGenerator->setClass(($value instanceof ClassGenerator) ?: ClassGenerator::fromArray($value));
+                    continue;
+                default:
+                    if (property_exists($fileGenerator, $name)) {
+                        $fileGenerator->{$name} = $value;
+                    } elseif (method_exists($fileGenerator, 'set' . $name)) {
+                        $fileGenerator->{'set' . $name}($value);
+                    }
+            }
+        }
+    }
+
 
     /**
      * setDocblock() Set the docblock

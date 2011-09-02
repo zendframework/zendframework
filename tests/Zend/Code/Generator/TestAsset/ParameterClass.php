@@ -19,11 +19,11 @@ class ParameterClass
 
     }
 
-    public function defaultValue($value="foo")
+    public function defaultValue($value = "foo")
     {
     }
 
-    public function defaultNull($value=null)
+    public function defaultNull($value = null)
     {
 
     }

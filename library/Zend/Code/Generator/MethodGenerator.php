@@ -98,14 +98,23 @@ class MethodGenerator extends AbstractMemberGenerator
         return $method;
     }
 
-    /**
-     * setFinal()
-     *
-     * @param bool $isFinal
-     */
-    public function setFinal($isFinal)
+    public function __construct($name = null, array $parameters = array(), $flags = self::FLAG_PUBLIC, $body = null, $docblock = null)
     {
-        $this->isFinal = ($isFinal) ? true : false;
+        if ($name !== null) {
+            $this->setName($name);
+        }
+        if ($parameters !== array()) {
+            $this->setParameters($parameters);
+        }
+        if ($flags !== self::FLAG_PUBLIC) {
+            $this->setFlags($flags);
+        }
+        if ($body !== null) {
+            $this->setBody($body);
+        }
+        if ($docblock !== null) {
+            $this->setDocblock($docblock);
+        }
     }
 
     /**
@@ -125,12 +134,12 @@ class MethodGenerator extends AbstractMemberGenerator
     /**
      * setParameter()
      *
-     * @param \Zend\Code\Generator\Parameter\Parameter|array $parameter
+     * @param ParameterGenerator|string $parameter
      * @return \MethodGenerator\Code\Generator\PhpMethod
      */
     public function setParameter($parameter)
     {
-        if (is_array($parameter)) {
+        if (is_string($parameter)) {
             $parameter = new ParameterGenerator($parameter);
         } elseif (!$parameter instanceof ParameterGenerator) {
             throw new Exception\InvalidArgumentException('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
@@ -220,6 +229,11 @@ class MethodGenerator extends AbstractMemberGenerator
         $output .= $indent . '}' . self::LINE_FEED;
 
         return $output;
+    }
+
+    public function __toString()
+    {
+        return $this->generate();
     }
 
 }

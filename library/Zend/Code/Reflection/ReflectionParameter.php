@@ -126,4 +126,15 @@ class ReflectionParameter extends PhpReflectionParameter implements Reflection
 
         return null;
     }
+
+    public function toString()
+    {
+        return parent::__toString();
+    }
+
+    public function __toString()
+    {
+        return parent::__toString();
+    }
+
 }

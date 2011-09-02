@@ -290,6 +290,11 @@ class ReflectionFile implements Reflection
         return $this->contents;
     }
 
+    public function toString()
+    {
+        return ''; // @todo
+    }
+
     /**
      * Serialize to string
      *

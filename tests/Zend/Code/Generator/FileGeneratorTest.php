@@ -23,8 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Code\Generator;
-use Zend\Code\Generator;
-use Zend\Code\Reflection;
+use Zend\Code\Generator\FileGenerator,
+    Zend\Code\Reflection\ReflectionFile;
 
 /**
  * @category   Zend
@@ -37,32 +37,32 @@ use Zend\Code\Reflection;
  * @group Zend_CodeGenerator_Php
  * @group Zend_CodeGenerator_Php_File
  */
-class PhpFileTest extends \PHPUnit_Framework_TestCase
+class FileGeneratorTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testConstruction()
     {
-        $file = new Php\PhpFile();
-        $this->assertEquals(get_class($file), 'Zend\Code\Generator\PhpFile');
+        $file = new FileGenerator();
+        $this->assertEquals('Zend\Code\Generator\FileGenerator', get_class($file));
     }
 
     public function testSourceContentGetterAndSetter()
     {
-        $file = new Php\PhpFile();
+        $file = new FileGenerator();
         $file->setSourceContent('Foo');
         $this->assertEquals('Foo', $file->getSourceContent());
     }
 
     public function testIndentationGetterAndSetter()
     {
-        $file = new Php\PhpFile();
+        $file = new FileGenerator();
         $file->setIndentation('        ');
         $this->assertEquals('        ', $file->getIndentation());
     }
 
     public function testToString()
     {
-        $codeGenFile = new Php\PhpFile(array(
+        $codeGenFile = new FileGenerator(array(
             'requiredFiles' => array('SampleClass.php'),
             'class' => array(
                 'abstract' => true,
@@ -95,7 +95,7 @@ EOS;
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'UnitFile');
 
-        $codeGenFile = new Php\PhpFile(array(
+        $codeGenFile = new FileGenerator(array(
             'class' => array(
                 'name' => 'SampleClass'
                 )
@@ -105,12 +105,12 @@ EOS;
 
         require_once $tempFile;
 
-        $codeGenFileFromDisk = Php\PhpFile::fromReflection(new Reflection\ReflectionFile($tempFile));
+        $fileGenerator = FileGenerator::fromReflection(new ReflectionFile($tempFile));
 
         unlink($tempFile);
 
-        $this->assertEquals(get_class($codeGenFileFromDisk), 'Zend\Code\Generator\PhpFile');
-        $this->assertEquals(count($codeGenFileFromDisk->getClasses()), 1);
+        $this->assertEquals('Zend\Code\Generator\FileGenerator', get_class($fileGenerator));
+        $this->assertEquals(1, count($fileGenerator->getClasses()));
 
     }
 
@@ -120,7 +120,7 @@ EOS;
         $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
         require_once $file;
 
-        $codeGenFileFromDisk = Php\PhpFile::fromReflection(new Reflection\ReflectionFile($file));
+        $codeGenFileFromDisk = FileGenerator::fromReflection(new ReflectionFile($file));
 
         $codeGenFileFromDisk->getClass()->setMethod(array('name' => 'foobar'));
 
@@ -172,7 +172,7 @@ EOS;
 
     public function testFileLineEndingsAreAlwaysLineFeed()
     {
-        $codeGenFile = new Php\PhpFile(array(
+        $codeGenFile = new FileGenerator(array(
             'requiredFiles' => array('SampleClass.php'),
             'class' => array(
                 'abstract' => true,
@@ -195,7 +195,7 @@ EOS;
      */
     public function testGeneratesUseStatements()
     {
-        $file = new Php\PhpFile();
+        $file = new FileGenerator();
         $file->setUse('My\Baz')
              ->setUses(array(
                  array('Your\Bar', 'bar'),
@@ -207,7 +207,7 @@ EOS;
 
     public function testGeneratesNamespaceStatements()
     {
-        $file = new Php\PhpFile();
+        $file = new FileGenerator();
         $file->setNamespace('Foo\Bar');
         $generated = $file->generate();
         $this->assertContains('namespace Foo\\Bar', $generated, $generated);

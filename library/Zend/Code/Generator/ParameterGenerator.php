@@ -40,12 +40,12 @@ class ParameterGenerator extends AbstractGenerator
     /**
      * @var string
      */
-    protected $type = null;
+    protected $name = null;
 
     /**
      * @var string
      */
-    protected $name = null;
+    protected $type = null;
 
     /**
      * @var string|ValueGenerator
@@ -95,6 +95,25 @@ class ParameterGenerator extends AbstractGenerator
         $param->setPassedByReference($reflectionParameter->isPassedByReference());
 
         return $param;
+    }
+
+    public function __construct($name = null, $type = null, $defaultValue = null, $position = null, $passByReference = false)
+    {
+        if ($name !== null) {
+            $this->setName($name);
+        }
+        if ($type !== null) {
+            $this->setType($type);
+        }
+        if ($defaultValue !== null) {
+            $this->setDefaultValue($defaultValue);
+        }
+        if ($position !== null) {
+            $this->setPosition($position);
+        }
+        if ($passByReference !== false) {
+            $this->setPassedByReference(true);
+        }
     }
 
     /**
@@ -151,22 +170,29 @@ class ParameterGenerator extends AbstractGenerator
      */
     public function setDefaultValue($defaultValue)
     {
+        if (!$defaultValue instanceof ValueGenerator) {
+            $this->defaultValue = new ValueGenerator($defaultValue);
+        } else {
+            $this->defaultValue = $defaultValue;
+        }
+        /*
         if ($defaultValue === null) {
-            $this->defaultValue = new PhpParameterDefaultValue(array('value' => null));
-        } elseif(is_string($defaultValue)) {
-            $this->defaultValue = new PhpParameterDefaultValue(array('value' => $defaultValue));
-        } elseif(is_array($defaultValue)) {
+            $this->defaultValue = new ValueGenerator();
+        } elseif (is_string($defaultValue)) {
+            $this->defaultValue = new ValueGenerator($defaultValue);
+        } elseif (is_array($defaultValue)) {
             $defaultValue = str_replace(array("\r", "\n"), "", var_export($defaultValue, true));
-            $this->defaultValue = new PhpParameterDefaultValue(array('value' => $defaultValue));
-        } elseif(is_bool($defaultValue)) {
+            $this->defaultValue = new ValueGenerator($defaultValue);
+        } elseif (is_bool($defaultValue)) {
             if($defaultValue == true) {
-                $this->defaultValue = new PhpParameterDefaultValue(array('value' => "true"));
+                $this->defaultValue = new ValueGenerator('true');
             } else {
-                $this->defaultValue = new PhpParameterDefaultValue(array('value' => "false"));
+                $this->defaultValue = new ValueGenerator('false');
             }
         } else {
             $this->defaultValue = $defaultValue;
         }
+        */
         return $this;
     }
 

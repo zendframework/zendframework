@@ -45,6 +45,61 @@ class PropertyGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->isInstanceOf($codeGenProperty, 'Zend\Code\Generator\PropertyGenerator');
     }
 
+    /**
+     * @return array
+     */
+    public function dataSetTypeSetValueGenerate()
+    {
+        return array(
+            array('string', 'foo', "'foo';"),
+            array('int', 1, "1;"),
+            array('integer', 1, "1;"),
+            array('bool', true, "true;"),
+            array('bool', false, "false;"),
+            array('boolean', true, "true;"),
+            array('number', 1, '1;'),
+            array('float', 1.23, '1.23;'),
+            array('double', 1.23, '1.23;'),
+            array('constant', 'FOO', 'FOO;'),
+            array('null', null, 'null;'),
+        );
+    }
+
+    /**
+     * @dataProvider dataSetTypeSetValueGenerate
+     * @param string $type
+     * @param mixed $value
+     * @param string $code
+     */
+    public function testSetTypeSetValueGenerate($type, $value, $code)
+    {
+        $defaultValue = new PropertyValueGenerator();
+        $defaultValue->setType($type);
+        $defaultValue->setValue($value);
+
+        $this->assertEquals($type, $defaultValue->getType());
+        $this->assertEquals($code, $defaultValue->generate());
+    }
+
+    /**
+     * @dataProvider dataSetTypeSetValueGenerate
+     * @param string $type
+     * @param mixed $value
+     * @param string $code
+     */
+    public function testSetBogusTypeSetValueGenerateUseAutoDetection($type, $value, $code)
+    {
+        if($type == 'constant') {
+            return; // constant can only be detected explicitly
+        }
+
+        $defaultValue = new PropertyValueGenerator();
+        $defaultValue->setType("bogus");
+        $defaultValue->setValue($value);
+
+        $this->assertEquals($code, $defaultValue->generate());
+    }
+
     public function testPropertyReturnsSimpleValue()
     {
         $codeGenProperty = new PropertyGenerator('someVal', 'some string value');
@@ -131,7 +186,7 @@ EOS;
         $codeGenProperty = new PropertyGenerator(
             'someVal',
             'some string value',
-            PropertyGenerator::FLAG_STATIC
+            PropertyGenerator::FLAG_STATIC | PropertyGenerator::FLAG_PROTECTED
         );
         $this->assertEquals('    protected static $someVal = \'some string value\';', $codeGenProperty->generate());
     }
@@ -160,10 +215,7 @@ EOS;
 
     public function testOtherTypesThrowExceptionOnGenerate()
     {
-        $codeGenProperty = new PropertyGenerator(array(
-            'name' => 'someVal',
-            'defaultValue' => new \stdClass(),
-        ));
+        $codeGenProperty = new PropertyGenerator('someVal', new \stdClass());
 
         $this->setExpectedException(
             'Zend\Code\Generator\Exception\RuntimeException',
@@ -173,72 +225,4 @@ EOS;
         $codeGenProperty->generate();
     }
 
-    static public function dataSetTypeSetValueGenerate()
-    {
-        return array(
-            array('string', 'foo', "'foo';"),
-            array('int', 1, "1;"),
-            array('integer', 1, "1;"),
-            array('bool', true, "true;"),
-            array('bool', false, "false;"),
-            array('boolean', true, "true;"),
-            array('number', 1, '1;'),
-            array('float', 1.23, '1.23;'),
-            array('double', 1.23, '1.23;'),
-            array('constant', 'FOO', 'FOO;'),
-            array('null', null, 'null;'),
-        );
-    }
-
-    /**
-     * @dataProvider dataSetTypeSetValueGenerate
-     * @param string $type
-     * @param mixed $value
-     * @param string $code
-     */
-    public function testSetTypeSetValueGenerate($type, $value, $code)
-    {
-        $defaultValue = new PropertyValueGenerator();
-        $defaultValue->setType($type);
-        $defaultValue->setValue($value);
-
-        $this->assertEquals($type, $defaultValue->getType());
-        $this->assertEquals($code, $defaultValue->generate());
-    }
-
-    /**
-     * @dataProvider dataSetTypeSetValueGenerate
-     * @param string $type
-     * @param mixed $value
-     * @param string $code
-     */
-    public function testSetBogusTypeSetValueGenerateUseAutoDetection($type, $value, $code)
-    {
-        if($type == 'constant') {
-            return; // constant can only be detected explicitly
-        }
-
-        $defaultValue = new PropertyValueGenerator();
-        $defaultValue->setType("bogus");
-        $defaultValue->setValue($value);
-
-        $this->assertEquals($code, $defaultValue->generate());
-    }
-    
-    /**
-     * @group ZF-8849
-     */
-    public function testZF8849()
-    {
-        $property = new PropertyGenerator(array(
-            'defaultValue' => array('value' => 1.337, 'type' => 'string'),
-            'name'         => 'ZF8849',
-            'const'        => true
-        ));
-        
-        $this->assertEquals(
-            "    const ZF8849 = '1.337';",
-            $property->generate()
-        );
-    }
 }

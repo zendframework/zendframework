@@ -24,6 +24,8 @@
  */
 namespace ZendTest\Code\Generator;
 
+use Zend\Code\Generator\DocblockGenerator;
+
 /**
  * @see Zend_CodeGenerator_Php_Class
  */
@@ -38,34 +40,21 @@ namespace ZendTest\Code\Generator;
  * @group Zend_CodeGenerator
  * @group Zend_CodeGenerator_Php
  */
-class DocblockTest extends \PHPUnit_Framework_TestCase
+class DocblockGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-
-    /**
-     * @var Zend_CodeGenerator_Php_Docblock
-     */
-    protected $_docblock = null;
-
-    public function setup()
-    {
-        $this->_docblock = new \Zend\Code\Generator\DocblockGenerator();
-    }
-
-    public function teardown()
-    {
-        $this->_docblock = null;
-    }
 
     public function testShortDescriptionGetterAndSetter()
     {
-        $this->_docblock->setShortDescription('Short Description');
-        $this->assertEquals('Short Description', $this->_docblock->getShortDescription());
+        $docblockGenerator = new DocblockGenerator();
+        $docblockGenerator->setShortDescription('Short Description');
+        $this->assertEquals('Short Description', $docblockGenerator->getShortDescription());
     }
 
     public function testLongDescriptionGetterAndSetter()
     {
-        $this->_docblock->setLongDescription('Long Description');
-        $this->assertEquals('Long Description', $this->_docblock->getLongDescription());
+        $docblockGenerator = new DocblockGenerator();
+        $docblockGenerator->setLongDescription('Long Description');
+        $this->assertEquals('Long Description', $docblockGenerator->getLongDescription());
     }
 
     public function testTagGettersAndSetters()
@@ -87,6 +76,16 @@ class DocblockTest extends \PHPUnit_Framework_TestCase
 //
 //        $this->assertEquals($target, $this->_docblock->generate());
 
+    }
+
+    public function testGenerationOfDocblock()
+    {
+        $docblockGenerator = new DocblockGenerator();
+        $docblockGenerator->setShortDescription('@var Foo this is foo bar');
+
+        $expected = '/**' . DocblockGenerator::LINE_FEED . ' * @var Foo this is foo bar'
+            . DocblockGenerator::LINE_FEED . ' */' . DocblockGenerator::LINE_FEED;
+        $this->assertEquals($expected, $docblockGenerator->generate());
     }
 
 }

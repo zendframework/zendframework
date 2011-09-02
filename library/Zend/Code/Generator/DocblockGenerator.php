@@ -80,6 +80,20 @@ class DocblockGenerator extends AbstractGenerator
         return $docblock;
     }
 
+    public function __construct($shortDescription = null, $longDescription = null, array $tags = array())
+    {
+        if ($shortDescription !== null) {
+            $this->setShortDescription($shortDescription);
+        }
+        if ($longDescription !== null) {
+            $this->setLongDescription($longDescription);
+        }
+        if ($this->tags !== array()) {
+            $this->setTag($tags);
+        }
+
+    }
+
     /**
      * setShortDescription()
      *
@@ -197,7 +211,7 @@ class DocblockGenerator extends AbstractGenerator
     }
 
     /**
-     * _docCommentize()
+     * docCommentize()
      *
      * @param string $content
      * @return string

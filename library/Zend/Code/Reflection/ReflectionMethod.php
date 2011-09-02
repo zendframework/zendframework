@@ -159,10 +159,11 @@ class ReflectionMethod extends PhpReflectionMethod implements Reflection
         return rtrim(ltrim(implode("\n", $lines), '{'), '}');
     }
 
-    /**
-     * PHP Bug
-     * @return string
-     */
+    public function toString()
+    {
+        return parent::__toString();
+    }
+
     public function __toString()
     {
         return parent::__toString();

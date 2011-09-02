@@ -89,8 +89,8 @@ class ClassGenerator extends AbstractGenerator
     /**
      * fromReflection() - build a Code Generation Php Object from a Class Reflection
      *
-     * @param \Zend\Reflection\ReflectionClass $reflectionClass
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @param ReflectionClass $reflectionClass
+     * @return ClassGenerator
      */
     public static function fromReflection(ReflectionClass $reflectionClass)
     {
@@ -143,6 +143,28 @@ class ClassGenerator extends AbstractGenerator
         $class->setMethods($methods);
 
         return $class;
+    }
+
+    public function __construct($name = null, $namespaceName = null, $flags = null, $extends = null, $interfaces = array(), $properties = array(), $methods = array(), $docblock = null)
+    {
+        if ($name !== null) {
+            $this->setName($name);
+        }
+        if ($namespaceName !== null) {
+            $this->setNamespaceName($namespaceName);
+        }
+        if ($flags !== null) {
+            // @todo
+        }
+        if ($properties !== array()) {
+            $this->setProperties($properties);
+        }
+        if ($methods !== array()) {
+            $this->setMethods($methods);
+        }
+        if ($docblock !== null) {
+            $this->setDocblock($docblock);
+        }
     }
 
     /**
@@ -337,11 +359,12 @@ class ClassGenerator extends AbstractGenerator
      */
     public function setProperty($property)
     {
-        if (is_array($property)) {
+        if (is_string($property)) {
             $property = new PropertyGenerator($property);
         } elseif (!$property instanceof PropertyGenerator) {
-            throw new Exception\InvalidArgumentException('setProperty() expects either an array of property options or an instance of Zend_CodeGenerator_Php_Property');
+            throw new Exception\InvalidArgumentException('setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator');
         }
+        
         $propertyName = $property->getName();
 
         if (isset($this->properties[$propertyName])) {
@@ -411,10 +434,10 @@ class ClassGenerator extends AbstractGenerator
      */
     public function setMethod($method)
     {
-        if (is_array($method)) {
+        if (is_string($method)) {
             $method = new MethodGenerator($method);
         } elseif (!$method instanceof MethodGenerator) {
-            throw new Exception\InvalidArgumentException('setMethod() expects either an array of method options or an instance of Zend\Code\Generator\Method');
+            throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
         }
         $methodName = $method->getName();
 

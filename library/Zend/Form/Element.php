@@ -319,9 +319,9 @@ class Element implements Validator
 
         $decorators = $this->getDecorators();
         if (empty($decorators)) {
-            $getId = create_function('$decorator',
-                                     'return $decorator->getElement()->getId()
-                                             . "-element";');
+            $getId = function(Decorator $decorator) {
+                return $decorator->getElement()->getId() . '-element';
+            };
             $this->addDecorator('ViewHelper')
                  ->addDecorator('Errors')
                  ->addDecorator('Description', array('tag' => 'p', 'class' => 'description'))

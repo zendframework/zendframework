@@ -7,7 +7,8 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Di\DependencyInjector,
     Zend\Di\ServiceLocator,
     Zend\Http\Request,
-    Zend\Http\Response;
+    Zend\Http\Response,
+    Zend\Uri\UriFactory;
 
 class ApplicationTest extends TestCase
 {
@@ -130,5 +131,41 @@ class ApplicationTest extends TestCase
         $app     = new Application();
         $app->setLocator($locator);
         $app->run();
+    }
+
+    public function testRoutingIsExecutedDuringRun()
+    {
+        $app   = new Application();
+        $uri   = UriFactory::factory('http://example.local/path');
+        $route = new Router\Http\Literal(array(
+            'route'    => '/path',
+            'defaults' => array(
+                'controller' => 'path',
+            ),
+        ));
+        $request = new Request();
+        $request->setUri($uri);
+        $app->setRequest($request);
+        $router  = $app->getRouter();
+        $router->addRoute('path', $route);
+
+        $locator = new TestAsset\Locator();
+        $locator->add('path', function() {
+            return new TestAsset\PathController;
+        });
+        $app->setLocator($locator);
+
+        $log = array();
+        $app->events()->attach('route.post', function($e) use ($log) {
+            $match = $e->getParam('__RESULT__', false);
+            if (!$match) {
+                return;
+            }
+            $log['route-match'] = $match;
+        });
+
+        $app->run();
+        $this->assertArrayHasKey('route-match', $log);
+        $this->assertInstanceOf('Zf2Mvc\Router\RouteMatch', $log['route-match']);
     }
 }

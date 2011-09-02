@@ -45,6 +45,6 @@ interface Route extends BaseRoute
      * @return RouteMatch
      * @todo   Cannot redeclare match in an interface...
      */
-    public function match(Request $request, $pathOffset = null);
+    // public function match(Request $request, $pathOffset = null);
 }
 

@@ -115,4 +115,20 @@ class ApplicationTest extends TestCase
         $app->setResponse($response);
         $this->assertSame($response, $app->getResponse());
     }
+
+    public function testRunRaisesAnExceptionIfNoLocatorIsAvailable()
+    {
+        $app = new Application();
+
+        $this->setExpectedException('RuntimeException');
+        $app->run();
+    }
+
+    public function testRunExecutesNormallyWhenLocatorPresent()
+    {
+        $locator = new TestAsset\Locator;
+        $app     = new Application();
+        $app->setLocator($locator);
+        $app->run();
+    }
 }

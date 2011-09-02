@@ -28,7 +28,8 @@ use Zend\Layout,
     Zend\Controller\Action\Helper,
     Zend\Controller\Action,
     Zend\Controller,
-    Zend\Config;
+    Zend\Config,
+    Zend\Json\Json;
 
 /**
  * Test class for Zend_Controller_Action_Helper_ContextSwitch.
@@ -666,7 +667,7 @@ class ContextSwitchTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($found, 'JSON content type header not found');
 
         $body = $this->response->getBody();
-        $result = \Zend\Json\Json::decode($body);
+        $result = Json::decode($body, Json::TYPE_ARRAY);
         $this->assertTrue(is_array($result), var_export($body, 1));
         $this->assertTrue(isset($result['foo']), var_export($result, 1));
         $this->assertTrue(isset($result['bar']));

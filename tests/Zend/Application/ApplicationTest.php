@@ -105,8 +105,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingAutoloaderNamespaceOptionsShouldProxyToAutoloader()
     {
-        $this->markTestSkipped('Zend\Loader\StandardAutoloader::registerNamespace fatal error - skip this test now.');
-        return;
         $autoloader = new TestAsset\Autoloader();
         $this->application->setAutoloader($autoloader);
         $this->application->setOptions(array(
@@ -115,7 +113,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             ),
         ));
         $namespaces = $autoloader->getNamespaces();
-        $this->assertContains('Foo', $namespaces);
+        $this->assertArrayHasKey('Foo' . StandardAutoloader::NS_SEPARATOR, $namespaces);
     }
 
     public function testPassingIncludePathOptionShouldModifyIncludePath()
@@ -421,7 +419,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('baz', $application->getOption('foo'));
     }
-    
+
     /**
      * @group ZF-10898
      */

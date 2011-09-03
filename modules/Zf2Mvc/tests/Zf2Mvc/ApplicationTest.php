@@ -125,7 +125,7 @@ class ApplicationTest extends TestCase
         $app->run();
     }
 
-    public function testRoutingIsExecutedDuringRun()
+    public function setupPathController()
     {
         $app = new Application();
 
@@ -149,6 +149,14 @@ class ApplicationTest extends TestCase
         });
         $app->setLocator($locator);
 
+
+        return $app;
+    }
+
+    public function testRoutingIsExecutedDuringRun()
+    {
+        $app = $this->setupPathController();
+
         $log = array();
         $app->events()->attach('route.post', function($e) use (&$log) {
             $match = $e->getParam('__RESULT__', false);
@@ -161,5 +169,14 @@ class ApplicationTest extends TestCase
         $app->run();
         $this->assertArrayHasKey('route-match', $log);
         $this->assertInstanceOf('Zf2Mvc\Router\RouteMatch', $log['route-match']);
+    }
+
+    public function testControllerIsDispatchedDuringRun()
+    {
+        $app = $this->setupPathController();
+
+        $response = $app->run();
+        $this->assertContains('PathController', $response->getContent());
+        $this->assertContains('dispatch', $response->getContent());
     }
 }

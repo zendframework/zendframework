@@ -95,7 +95,7 @@ class Literal implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        $uri  = $request->getUri();
+        $uri  = $request->uri();
         $path = $uri->getPath();
         if ($pathOffset !== null) {
             if (strpos($path, $this->route) === $pathOffset) {

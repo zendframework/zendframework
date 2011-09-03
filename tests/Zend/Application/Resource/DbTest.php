@@ -130,9 +130,6 @@ class DbTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetDefaultMetadataCacheFromCacheManager()
     {
-        $this->markTestSkipped('DbResource has fatal error - skip this test now.');
-        return;
-
         $configCache = array(
             'database' => array(
                 'frontend' => array(
@@ -152,7 +149,7 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
 
-        //$this->bootstrap->registerPluginResource('cachemanager', $configCache);
+        $this->bootstrap->getBroker()->registerSpec('cachemanager', $configCache);
 
         $config = array(
             'bootstrap' => $this->bootstrap,

@@ -8,7 +8,12 @@ use Zend\Stdlib\Dispatchable,
 
 class PathController implements Dispatchable
 {
-    public function Dispatch(Request $request, Response $response = null)
+    public function dispatch(Request $request, Response $response = null)
     {
+        if (!$response) {
+            $response = new HttpResponse();
+        }
+        $response->setContent(__METHOD__);
+        return $response;
     }
 }

@@ -168,29 +168,13 @@ class Application implements AppContext
         }
 
         $routeMatch = $this->route();
-
-        if (!$routeMatch instanceof Router\RouteMatch) {
-            throw new \Exception('UNIMPLEMENTED: Handling of failed routing');
-        }
-
-        $controllerName = $routeMatch->getParam('controller', 'not-found');
-        $controller     = $locator->get($controllerName);
-
-        if (!$controller instanceof Dispatchable) {
-            throw new \Exception('UNIMPLEMENTED: Handling not-found controller');
-        }
-
-        $request  = $this->getRequest();
-        $response = $this->getResponse();
-        $result   = $controller->dispatch($request, $response);
+        $result     = $this->dispatch($routeMatch);
 
         if ($result instanceof Response) {
-            $return = $result;
-        } else {
-            $return = $response;
+            return $result;
         }
 
-        return $return;
+        return $this->getResponse();
     }
 
     protected function route()
@@ -204,8 +188,45 @@ class Application implements AppContext
 
         $routeMatch = $router->match($request);
 
+        if (!$routeMatch instanceof Router\RouteMatch) {
+            /**
+             * @todo handle failed routing
+             *
+             * This might be something we can do via an event
+             */
+            throw new \Exception('UNIMPLEMENTED: Handling of failed routing');
+        }
+
         $params['__RESULT__'] = $routeMatch;
         $events->trigger('route.post', $this, $params);
         return $routeMatch;
+    }
+
+    protected function dispatch($routeMatch)
+    {
+        $events  = $this->events();
+        $params  = compact('routeMatch');
+        $events->trigger('dispatch.pre', $this, $params);
+
+        $controllerName = $routeMatch->getParam('controller', 'not-found');
+        $locator        = $this->getLocator();
+        $controller     = $locator->get($controllerName);
+
+        if (!$controller instanceof Dispatchable) {
+            /**
+             * @todo handle undispatchable controller
+             *
+             * This might be something to handle via an event?
+             */
+            throw new \Exception('UNIMPLEMENTED: Handling not-found controller');
+        }
+
+        $request  = $this->getRequest();
+        $response = $this->getResponse();
+        $result   = $controller->dispatch($request, $response);
+
+        $params['result'] =& $result;
+        $events->trigger('dispatch.post', $this, $params);
+        return $result;
     }
 }

@@ -135,7 +135,7 @@ class Part extends TreeRouteStack
                 }
             }
 
-            $uri  = $request->getUri();
+            $uri  = $request->uri();
             $path = $uri->getPath();
             if ($this->mayTerminate && $nextOffset === strlen($path)) {
                 return $match;

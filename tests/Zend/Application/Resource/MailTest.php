@@ -36,7 +36,7 @@ use Zend\Loader\Autoloader,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class MailResourceTest extends \PHPUnit_Framework_TestCase
+class MailTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

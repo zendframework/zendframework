@@ -25,7 +25,8 @@ use Zend\Loader\Autoloader,
     Zend\Application\Resource\Mail as MailResource,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    Zend\Mail\Mail;
+    Zend\Mail\Mail,
+    ZendTest\Application\Resource\TestAsset\CustomMailTranSPorT;
 
 /**
  * @category   Zend
@@ -173,13 +174,13 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-9136
      */
-    public function testCustomMailTransportWithWrontCasesAsShouldBe()
+    public function testCustomMailTransportWithWrongCasesAsShouldBe()
     {
-        $options = array('transport' => array('type' => 'ZendTest\\Application\\Resource\\mailTestCAsE'));
+        $options = array('transport' => array('type' => 'ZendTest\Application\Resource\TestAsset\CustomMailTranSPorT'));
         $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
-        $this->assertTrue($resource->init() instanceof mailTestCAsE);
+        $this->assertTrue($resource->init() instanceof CustomMailTranSPorT);
     }
 }

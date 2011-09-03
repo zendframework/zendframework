@@ -25,7 +25,7 @@
 namespace Zend\Application\Resource;
 
 use Zend\Registry,
-    Zend\Translator\Translator;
+    Zend\Translator\Translator as Translate;
 
 /**
  * Resource for setting translation options
@@ -76,7 +76,7 @@ class Translator extends AbstractResource
             }
 
             if (empty($options['adapter'])) {
-                $options['adapter'] = Translator::AN_ARRAY;
+                $options['adapter'] = Translate::AN_ARRAY;
             }
 
             if (!empty($options['data'])) {
@@ -112,7 +112,7 @@ class Translator extends AbstractResource
 
             if(Registry::isRegistered($key)) {
                 $translate = Registry::get($key);
-                if(!$translate instanceof Translator) {
+                if(!$translate instanceof Translate) {
                     throw new Exception\InitializationException($key
                                    . ' already registered in registry but is '
                                    . 'no instance of Zend_Translator');
@@ -121,7 +121,7 @@ class Translator extends AbstractResource
                 $translate->addTranslation($options);
                 $this->_translate = $translate;
             } else {
-                $this->_translate = new Translator($options);
+                $this->_translate = new Translate($options);
                 Registry::set($key, $this->_translate);
             }
         }

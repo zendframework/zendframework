@@ -21,7 +21,7 @@
 
         <listitem>
             <para>
-                <emphasis><property>data</property></emphasis> : le chemin d'accès aux sources de 
+                <emphasis><property>content</property></emphasis> : le chemin d'accès aux sources de 
                 traduction.
             </para>
         </listitem>
@@ -72,7 +72,7 @@
 
         <programlisting language="ini"><![CDATA[
 resources.translate.adapter = tmx
-resources.translate.data = APPLICATION_PATH "/../data/locales"
+resources.translate.content = APPLICATION_PATH "/../data/locales"
 resources.translate.scan = Zend_Translate::LOCALE_DIRECTORY
 
 ; Optionnellement, on peut utiliser un modèle du gestionnaire de cache :

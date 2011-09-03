@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.translator">
-    <title>Zend_Application_Resource_Translator</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.translator"><info><title>Zend_Application_Resource_Translator</title></info>
 
     <para>
         <classname>Zend_Application_Resource_Translator</classname> will initialize a
@@ -97,5 +95,4 @@ resources.translator.cache = "languages"
             about the options which can be used.
         </para>
     </note>
-</sect2>
-
+</section>

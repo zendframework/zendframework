@@ -4,6 +4,7 @@ namespace Zf2Mvc;
 
 use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
+    Zend\Stdlib\Dispatchable,
     Zend\Http\Request,
     Zend\Http\Response;
 
@@ -166,7 +167,7 @@ class Application implements AppContext
             );
         }
 
-        $routeMatch     = $this->route();
+        $routeMatch = $this->route();
 
         if (!$routeMatch instanceof Router\RouteMatch) {
             throw new \Exception('UNIMPLEMENTED: Handling of failed routing');

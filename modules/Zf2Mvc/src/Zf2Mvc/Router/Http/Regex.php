@@ -73,7 +73,7 @@ class Regex implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        $uri  = $request->getUri();
+        $uri  = $request->uri();
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {

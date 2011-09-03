@@ -125,27 +125,21 @@ class ApplicationTest extends TestCase
         $app->run();
     }
 
-    public function testRunExecutesNormallyWhenLocatorPresent()
-    {
-        $locator = new TestAsset\Locator;
-        $app     = new Application();
-        $app->setLocator($locator);
-        $app->run();
-    }
-
     public function testRoutingIsExecutedDuringRun()
     {
-        $app   = new Application();
-        $uri   = UriFactory::factory('http://example.local/path');
+        $app = new Application();
+
+        $request = new Request();
+        $uri     = UriFactory::factory('http://example.local/path');
+        $request->setUri($uri);
+        $app->setRequest($request);
+
         $route = new Router\Http\Literal(array(
             'route'    => '/path',
             'defaults' => array(
                 'controller' => 'path',
             ),
         ));
-        $request = new Request();
-        $request->setUri($uri);
-        $app->setRequest($request);
         $router  = $app->getRouter();
         $router->addRoute('path', $route);
 
@@ -156,7 +150,7 @@ class ApplicationTest extends TestCase
         $app->setLocator($locator);
 
         $log = array();
-        $app->events()->attach('route.post', function($e) use ($log) {
+        $app->events()->attach('route.post', function($e) use (&$log) {
             $match = $e->getParam('__RESULT__', false);
             if (!$match) {
                 return;

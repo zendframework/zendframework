@@ -64,9 +64,10 @@ class Dojo extends AbstractResource
             $view = $this->getBootstrap()->view;
 
             \Zend\Dojo\Dojo::enableView($view);
-            $view->dojo()->setOptions($this->getOptions());
+            $dojoContainer = $view->broker('dojo')->direct()
+                ->setOptions($this->getOptions());
 
-            $this->_dojo = $view->dojo();
+            $this->_dojo = $dojoContainer;
         }
 
         return $this->_dojo;

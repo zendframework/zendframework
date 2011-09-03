@@ -8,6 +8,14 @@ use Zend\EventManager\EventCollection,
     Zend\Http\Request,
     Zend\Http\Response;
 
+/**
+ * Main application class for invoking applications
+ *
+ * Expects the user will provide a Service Locator or Dependency Injector, as 
+ * well as a configured router. Once done, calling run() will invoke the 
+ * application, first routing, then dispatching the discovered controller. A
+ * response will then be returned, which may then be sent to the caller.
+ */
 class Application implements AppContext
 {
     protected $events;

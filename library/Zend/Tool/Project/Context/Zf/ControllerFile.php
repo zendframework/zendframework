@@ -143,6 +143,11 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
                                 'body' => <<<'EOS'
 $errors = $this->_getParam('error_handler');
 
+if (!$errors) {
+    $this->view->vars()->message = 'You have reached the error page';
+    return;
+}
+
 switch ($errors->type) {
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ROUTE:
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_CONTROLLER:

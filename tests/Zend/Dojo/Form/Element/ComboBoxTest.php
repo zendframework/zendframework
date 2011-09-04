@@ -151,7 +151,7 @@ class ComboBoxTest extends \PHPUnit_Framework_TestCase
         $subform = new SubForm(array('name' => 'bar'));
         $subform->addElement($this->element);
         $html = $this->element->render();
-        $dojo = $this->view->broker('dojo')->__toString();
+        $dojo = $this->view->plugin('dojo')->__toString();
         $this->assertContains('"store":"foo"', $dojo, $dojo);
     }
 }

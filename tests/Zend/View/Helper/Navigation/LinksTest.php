@@ -68,7 +68,7 @@ class LinksTest extends TestAbstract
         parent::setUp();
 
         // doctype fix (someone forgot to clean up after their unit tests)
-        $this->_doctypeHelper = $this->_helper->getView()->broker('doctype');
+        $this->_doctypeHelper = $this->_helper->getView()->plugin('doctype');
         $this->_oldDoctype = $this->_doctypeHelper->getDoctype();
         $this->_doctypeHelper->setDoctype(
                 \Zend\View\Helper\Doctype::HTML4_LOOSE);

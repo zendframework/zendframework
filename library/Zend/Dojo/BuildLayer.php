@@ -183,7 +183,7 @@ class BuildLayer
             if (null === ($view = $this->getView())) {
                 throw new Exception\RuntimeException('View object not registered; cannot retrieve dojo helper');
             }
-            $this->setDojoHelper($view->broker('dojo')->direct());
+            $this->setDojoHelper($view->plugin('dojo')->direct());
         }
         return $this->_dojo;
     }

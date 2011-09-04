@@ -200,8 +200,8 @@ class HeadMeta extends Placeholder\Container\Standalone
         }
 
         if (!isset($item->content)
-        && (! $this->view->broker('doctype')->isHtml5()
-        || (! $this->view->broker('doctype')->isHtml5() && $item->type !== 'charset'))) {
+        && (! $this->view->plugin('doctype')->isHtml5()
+        || (! $this->view->plugin('doctype')->isHtml5() && $item->type !== 'charset'))) {
             return false;
         }
 
@@ -326,7 +326,7 @@ class HeadMeta extends Placeholder\Container\Standalone
 
         $modifiersString = '';
         foreach ($item->modifiers as $key => $value) {
-            if ($this->view->broker('doctype')->isHtml5()
+            if ($this->view->plugin('doctype')->isHtml5()
             && $key == 'scheme') {
                 throw new View\Exception('Invalid modifier '
                 . '"scheme" provided; not supported by HTML5');
@@ -337,13 +337,13 @@ class HeadMeta extends Placeholder\Container\Standalone
             $modifiersString .= $key . '="' . $this->_escape($value) . '" ';
         }
 
-        if (method_exists($this->view, 'broker')) {
-            if ($this->view->broker('doctype')->isHtml5()
+        if ($this->view instanceof \Zend\Loader\Pluggable) {
+            if ($this->view->plugin('doctype')->isHtml5()
             && $type == 'charset') {
-				$tpl = ($this->view->broker('doctype')->isXhtml())
+				$tpl = ($this->view->plugin('doctype')->isXhtml())
 					? '<meta %s="%s"/>'
 					: '<meta %s="%s">';
-            } elseif ($this->view->broker('doctype')->isXhtml()) {
+            } elseif ($this->view->plugin('doctype')->isXhtml()) {
                 $tpl = '<meta %s="%s" content="%s" %s/>';
             } else {
                 $tpl = '<meta %s="%s" content="%s" %s>';

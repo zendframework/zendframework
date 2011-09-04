@@ -98,7 +98,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         \Zend\Dojo\Dojo::enableForm($form);
         $view = $form->getView();
         
-        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }
 
     public function testEnableViewShouldRegisterDojoViewHelpers()
@@ -106,7 +106,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $view = new View\PhpRenderer;
         \Zend\Dojo\Dojo::enableView($view);
         
-        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }
     
     public function testDisableViewShouldUnregisterDojoViewHelpers()
@@ -114,12 +114,12 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $view = new View\PhpRenderer;
         \Zend\Dojo\Dojo::enableView($view);
         
-        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
         
         \Zend\Dojo\Dojo::disableView($view);
         
         try {
-            $view->broker('dojo');
+            $view->plugin('dojo');
             $this->fail('RuntimeException was expected but not thrown');
         } catch(\Zend\Loader\Exception\RuntimeException $e) {
             // success

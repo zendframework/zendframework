@@ -84,7 +84,7 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
     public function testRenderingShouldEnableDojo()
     {
         $html = $this->decorator->render('');
-        $this->assertTrue($this->view->broker('dojo')->isEnabled());
+        $this->assertTrue($this->view->plugin('dojo')->isEnabled());
     }
 
     public function testRenderingShouldCreateDijit()

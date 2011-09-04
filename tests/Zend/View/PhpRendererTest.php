@@ -91,12 +91,12 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesHelperBrokerByDefault()
     {
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
     }
 
     public function testPassingArgumentToBrokerReturnsHelperByThatName()
     {
-        $helper = $this->renderer->broker('doctype');
+        $helper = $this->renderer->plugin('doctype');
         $this->assertInstanceOf('Zend\View\Helper\Doctype', $helper);
     }
 
@@ -109,7 +109,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testPassingValidStringClassToSetBrokerCreatesBroker()
     {
         $this->renderer->setBroker('Zend\View\HelperBroker');
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
     }
 
     public function invalidBrokers()
@@ -134,7 +134,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testInjectsSelfIntoHelperBroker()
     {
-        $broker = $this->renderer->broker();
+        $broker = $this->renderer->getBroker();
         $this->assertSame($this->renderer, $broker->getView());
     }
 

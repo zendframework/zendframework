@@ -454,7 +454,7 @@ class HeadScript extends Placeholder\Container\Standalone
                 : $this->getIndent();
 
         if ($this->view) {
-            $useCdata = $this->view->broker('doctype')->isXhtml() ? true : false;
+            $useCdata = $this->view->plugin('doctype')->isXhtml() ? true : false;
         } else {
             $useCdata = $this->useCdata ? true : false;
         }

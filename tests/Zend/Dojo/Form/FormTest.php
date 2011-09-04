@@ -88,14 +88,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testShouldRegisterDojoViewHelper()
     {
         $view = $this->form->getView();
-        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }
 
     public function testDisplayGroupShouldRegisterDojoViewHelper()
     {
         $this->form->dg->setView(new View\PhpRenderer());
         $view   = $this->form->dg->getView();
-        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }
 
     /**

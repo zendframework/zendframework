@@ -74,6 +74,6 @@ class HtmlPage extends HtmlElement
         // Params
         $params = array_merge(array('data' => $data), $params);
 
-        return $this->getView()->broker('htmlObject')->direct($data, self::TYPE, $attribs, $params, $content);
+        return $this->getView()->plugin('htmlObject')->direct($data, self::TYPE, $attribs, $params, $content);
     }
 }

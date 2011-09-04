@@ -190,14 +190,14 @@ abstract class DijitContainer extends \Zend\Form\Decorator\AbstractDecorator
         $helper      = $this->getHelper();
         $id          = $element->getId() . '-' . $helper;
 
-        if ($view->broker('dojo')->hasDijit($id)) {
+        if ($view->plugin('dojo')->hasDijit($id)) {
             trigger_error(sprintf('Duplicate dijit ID detected for id "%s; temporarily generating uniqid"', $id), E_USER_WARNING);
             $base = $id;
             do {
                 $id = $base . '-' . uniqid();
-            } while ($view->broker('dojo')->hasDijit($id));
+            } while ($view->plugin('dojo')->hasDijit($id));
         }
 
-        return $view->broker($helper)->direct($id, $content, $dijitParams, $attribs);
+        return $view->plugin($helper)->direct($id, $content, $dijitParams, $attribs);
     }
 }

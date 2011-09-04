@@ -149,7 +149,7 @@ class VerticalSliderTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.form.VerticalSlider")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId-slider'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId-slider'));
     }
 
     public function testShouldCreateOnChangeAttributeByDefault()

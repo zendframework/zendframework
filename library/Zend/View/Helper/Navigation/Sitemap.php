@@ -298,7 +298,7 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $curDoc = $this->getView()->broker('url')->direct();
+            $curDoc = $this->getView()->plugin('url')->direct();
             $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
             $url = rtrim($this->getServerUrl(), '/') . '/'
                  . $curDoc
@@ -368,7 +368,7 @@ class Sitemap extends AbstractHelper
             }
 
             // get absolute url from page
-            if (!$url = $this->getView()->broker('url')->direct($page->toArray())) {
+            if (!$url = $this->getView()->plugin('url')->direct($page->toArray())) {
                 // skip page if it has no url (rare case)
                 continue;
             }

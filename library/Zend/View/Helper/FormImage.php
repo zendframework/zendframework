@@ -83,7 +83,7 @@ class FormImage extends FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (method_exists($this->view, 'broker') && !$this->view->broker('doctype')->isXhtml()) {
+        if ($this->view instanceof \Zend\Loader\Pluggable && !$this->view->plugin('doctype')->isXhtml()) {
             $endTag= '>';
         }
 

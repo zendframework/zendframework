@@ -87,6 +87,6 @@ class RadioButtonTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.RadioButton")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
     }
 }

@@ -68,7 +68,7 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
         foreach (array('top', 'bottom', 'center', 'left', 'right') as $pane) {
             $id      = $pane . 'Pane';
             $content = 'This is the content of pane ' . $pane;
-            $html   .= $this->view->broker('contentPane')->direct($id, $content, array('region' => $pane));
+            $html   .= $this->view->plugin('contentPane')->direct($id, $content, array('region' => $pane));
         }
         return $this->helper->direct('container', $html, array('design' => 'headline'));
     }
@@ -84,6 +84,6 @@ class TabContainerTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getContainer();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.layout.TabContainer")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('container'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('container'));
     }
 }

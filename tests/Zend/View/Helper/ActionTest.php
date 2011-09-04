@@ -245,7 +245,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
     public function testNestingActionsDoesNotBreakPlaceholderHelpers()
     {
         $html = $this->helper->direct('nest', 'foo', 'foo');
-        $title = $this->view->broker('headTitle')->toString();
+        $title = $this->view->plugin('headTitle')->toString();
         $this->assertContains(' - ', $title, $title);
         $this->assertContains('Foo Nest', $title);
         $this->assertContains('Nested Stuff', $title);

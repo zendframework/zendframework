@@ -88,7 +88,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsHtml()
     {
-        $this->view->broker('doctype')->direct(Doctype::HTML4_STRICT);
+        $this->view->plugin('doctype')->direct(Doctype::HTML4_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');
@@ -107,7 +107,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsXhtml()
     {
-        $this->view->broker('doctype')->direct(Doctype::XHTML1_STRICT);
+        $this->view->plugin('doctype')->direct(Doctype::XHTML1_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');

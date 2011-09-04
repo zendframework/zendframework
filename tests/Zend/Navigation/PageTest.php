@@ -690,6 +690,14 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $page->setVisible(0);
         $this->assertFalse($page->isVisible());
 
+        /**
+         * ZF-10146
+         * 
+         * @link http://framework.zend.com/issues/browse/ZF-10146
+         */
+        $page->setVisible('False');
+        $this->assertFalse($page->isVisible());
+
         $page->setVisible(array());
         $this->assertFalse($page->isVisible());
     }

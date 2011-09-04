@@ -37,7 +37,7 @@ use Zend\View;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class SitemapTest extends TestAbstract
+class SitemapTest extends AbstractTest
 {
     protected $_front;
     protected $_oldRequest;

@@ -39,7 +39,7 @@ use Zend\View;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class NavigationTest extends TestAbstract
+class NavigationTest extends AbstractTest
 {
     /**
      * Class name for view helper to test

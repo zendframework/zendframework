@@ -164,7 +164,8 @@ class Application implements AppContext
     /**
      * Run the application
      * 
-     * @return \Zend\Http\Response
+     * @events route.pre, route.post, dispatch.pre, dispatch.post
+     * @return Response
      */
     public function run()
     {
@@ -185,6 +186,12 @@ class Application implements AppContext
         return $this->getResponse();
     }
 
+    /**
+     * Route the request
+     * 
+     * @events route.pre, route.post
+     * @return Router\RouteMatch
+     */
     protected function route()
     {
         $request = $this->getRequest();
@@ -210,6 +217,13 @@ class Application implements AppContext
         return $routeMatch;
     }
 
+    /**
+     * Dispatch the matched route
+     * 
+     * @events dispatch.pre, dispatch.post
+     * @param  Router\RouteMatch $routeMatch 
+     * @return mixed
+     */
     protected function dispatch($routeMatch)
     {
         $events  = $this->events();
@@ -230,7 +244,9 @@ class Application implements AppContext
         }
 
         $request  = $this->getRequest();
+        $request->setMetadata('route-match', $routeMatch);
         $response = $this->getResponse();
+
         $result   = $controller->dispatch($request, $response);
 
         $params['result'] =& $result;

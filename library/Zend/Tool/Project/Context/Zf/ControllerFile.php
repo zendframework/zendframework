@@ -143,7 +143,7 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
                                 'body' => <<<'EOS'
 $errors = $this->_getParam('error_handler');
 
-if (!$errors) {
+if (!$errors || !$errors instanceof \ArrayObject) {
     $this->view->vars()->message = 'You have reached the error page';
     return;
 }

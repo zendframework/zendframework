@@ -197,7 +197,11 @@ class Application implements AppContext
     /**
      * Run the application
      * 
+<<<<<<< HEAD
      * @events route.pre, route.post, dispatch.pre, dispatch.post, dispatch.error
+=======
+     * @events route.pre, route.post, dispatch.pre, dispatch.post
+>>>>>>> Committed basic action and RESTful controller implementations
      * @return Response
      */
     public function run()
@@ -309,7 +313,6 @@ class Application implements AppContext
         $request  = $this->getRequest();
         $request->setMetadata('route-match', $routeMatch);
         $response = $this->getResponse();
-
         $return   = $controller->dispatch($request, $response);
 
         complete:

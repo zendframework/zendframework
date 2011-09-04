@@ -37,18 +37,18 @@ use Zend\Code\Reflection\ReflectionFile;
 class FileGenerator extends AbstractGenerator
 {
 
-    /**
-     * @var array Array of \Zend\Code\Generator\PhpFile
-     */
-    protected static $loadedFileGenerators = array();
+//    /**
+//     * @var array Array of \Zend\Code\Generator\PhpFile
+//     */
+//    protected static $loadedFileGenerators = array();
 
     /**#@+
      * @var string
      */
-    protected static $markerDocblock  = '/* Zend_CodeGenerator_Php_File-DocblockMarker */';
-    protected static $markerNamespace = '/* Zend_CodeGenerator_Php_File-NamespaceMarker */';
-    protected static $markerRequire   = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
-    protected static $markerClass     = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
+    protected $markerDocblock  = '/* Zend_CodeGenerator_Php_File-DocblockMarker */';
+    protected $markerNamespace = '/* Zend_CodeGenerator_Php_File-NamespaceMarker */';
+    protected $markerRequire   = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
+    protected $markerClass     = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
     /**#@-*/
 
     /**
@@ -86,31 +86,31 @@ class FileGenerator extends AbstractGenerator
      */
     protected $body = null;
 
-    /**
-     * registerFileCodeGnereator()
-     *
-     * A file code generator registry
-     *
-     * @param FileGenerator $fileGenerator
-     * @param string $filename
-     */
-    public static function registerFileCodeGenerator(FileGenerator $fileGenerator, $filename = null)
-    {
-        if ($filename == null) {
-            $filename = $fileGenerator->getFilename();
-        }
-
-        if ($filename == '') {
-            throw new Exception\InvalidArgumentException('FileName does not exist.');
-        }
-
-        // cannot use realpath since the file might not exist, but we do need to have the index
-        // in the same DIRECTORY_SEPARATOR that realpath would use:
-        $filename = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $filename);
-
-        self::$loadedFileGenerators[$filename] = $fileGenerator;
-
-    }
+//    /**
+//     * registerFileCodeGnereator()
+//     *
+//     * A file code generator registry
+//     *
+//     * @param FileGenerator $fileGenerator
+//     * @param string $filename
+//     */
+//    public static function registerFileCodeGenerator(FileGenerator $fileGenerator, $filename = null)
+//    {
+//        if ($filename == null) {
+//            $filename = $fileGenerator->getFilename();
+//        }
+//
+//        if ($filename == '') {
+//            throw new Exception\InvalidArgumentException('FileName does not exist.');
+//        }
+//
+//        // cannot use realpath since the file might not exist, but we do need to have the index
+//        // in the same DIRECTORY_SEPARATOR that realpath would use:
+//        $filename = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $filename);
+//
+//        self::$loadedFileGenerators[$filename] = $fileGenerator;
+//
+//    }
 
     /**
      * fromReflectedFilePath() - use this if you intend on generating code generation objects based on the same file.
@@ -175,7 +175,7 @@ class FileGenerator extends AbstractGenerator
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
                 if ($lineNum == $classStartLine) {
-                    $bodyReturn[] = str_replace('?', $class->getName(), self::$markerClass);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
+                    $bodyReturn[] = str_replace('?', $class->getName(), $this->markerClass);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $classEndLine;
                 } else {
                     $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
@@ -203,7 +203,7 @@ class FileGenerator extends AbstractGenerator
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
                 if ($lineNum == $docblock->getStartLine()) {
-                    $bodyReturn[] = str_replace('?', $class->getName(), self::$markerDocblock);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
+                    $bodyReturn[] = str_replace('?', $class->getName(), $this->markerDocblock);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
                     $lineNum = $docblock->getEndLine();
                 } else {
                     $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
@@ -243,8 +243,8 @@ class FileGenerator extends AbstractGenerator
     /**
      * setDocblock() Set the docblock
      *
-     * @param \Zend\Code\GeneratorDocblock|array|string $docblock
-     * @return \FileGenerator\Code\Generator\PhpFile
+     * @param DocblockGenerator|string $docblock
+     * @return FileGenerator
      */
     public function setDocblock($docblock)
     {
@@ -276,7 +276,7 @@ class FileGenerator extends AbstractGenerator
      * setRequiredFiles
      *
      * @param array $requiredFiles
-     * @return \FileGenerator\Code\Generator\PhpFile
+     * @return FileGenerator
      */
     public function setRequiredFiles(array $requiredFiles)
     {
@@ -298,7 +298,7 @@ class FileGenerator extends AbstractGenerator
      * setClasses()
      *
      * @param array $classes
-     * @return \FileGenerator\Code\Generator\PhpFile
+     * @return FileGenerator
      */
     public function setClasses(array $classes)
     {
@@ -337,7 +337,7 @@ class FileGenerator extends AbstractGenerator
      * If $withResolvedAs is set to true, there will be a third element that is the
      * "resolved" as statement, as the second part is not required in use statements
      *
-     * @param $withResolvedAs
+     * @param bool $withResolvedAs
      * @return array
      */
     public function getUses($withResolvedAs = false)
@@ -527,7 +527,7 @@ class FileGenerator extends AbstractGenerator
         // Add file docblock, if any
         if (null !== ($docblock = $this->getDocblock())) {
             $docblock->setIndentation('');
-            $regex = preg_quote(self::$markerDocblock, '#');
+            $regex = preg_quote($this->markerDocblock, '#');
             if (preg_match('#'.$regex.'#', $output)) {
                 $output  = preg_replace('#'.$regex.'#', $docblock->generate(), $output, 1);
             } else {
@@ -573,7 +573,7 @@ class FileGenerator extends AbstractGenerator
         $classes = $this->getClasses();
         if (!empty($classes)) {
             foreach ($classes as $class) {
-                $regex = str_replace('?', $class->getName(), self::$markerClass);
+                $regex = str_replace('?', $class->getName(), $this->markerClass);
                 $regex = preg_quote($regex, '#');
                 if (preg_match('#'.$regex.'#', $output)) {
                     $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);

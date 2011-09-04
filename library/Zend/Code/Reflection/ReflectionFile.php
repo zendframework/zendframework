@@ -74,12 +74,12 @@ class ReflectionFile implements Reflection
     protected $requiredFiles   = array();
 
     /**
-     * @var \Zend\Code\Reflection\ReflectionClass[]
+     * @var ReflectionClass[]
      */
     protected $classes         = array();
 
     /**
-     * @var \Zend\Code\Reflection\ReflectionFunction[]
+     * @var ReflectionFunction[]
      */
     protected $functions       = array();
 
@@ -91,8 +91,8 @@ class ReflectionFile implements Reflection
     /**
      * Constructor
      *
-     * @param  string $file
-     * @return void
+     * @param string $file
+     * @return ReflectionFile
      */
     public function __construct($file)
     {

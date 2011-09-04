@@ -86,6 +86,14 @@ class Mvc extends AbstractPage
     protected $_resetParams = true;
 
     /**
+     * Whether href should be encoded when assembling URL
+     *
+     * @see getHref()
+     * @var bool 
+     */
+    protected $_encodeUrl = true;
+
+    /**
      * Cached href
      *
      * The use of this variable minimizes execution time when getHref() is
@@ -193,7 +201,8 @@ class Mvc extends AbstractPage
         
         $url = self::$_urlHelper->__invoke($params,
                                       $this->getRoute(),
-                                      $this->getResetParams());
+                                      $this->getResetParams(),
+                                      $this->getEncodeUrl());
 
         return $this->_hrefCache = $url;
     }
@@ -393,6 +402,35 @@ class Mvc extends AbstractPage
     }
 
     /**
+     * Sets whether href should be encoded when assembling URL
+     * 
+     * @see getHref()
+     *
+     * @param bool $resetParams         whether href should be encoded when
+     *                                  assembling URL
+     * @return \Zend\Navigation\Page\Mvc fluent interface, returns self
+     */
+    public function setEncodeUrl($encodeUrl)
+    {
+        $this->_encodeUrl = (bool) $encodeUrl;
+        $this->_hrefCache = null;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns whether herf should be encoded when assembling URL
+     * 
+     * @see getHref()
+     *
+     * @return bool whether herf should be encoded when assembling URL 
+     */
+    public function getEncodeUrl()
+    {
+        return $this->_encodeUrl;
+    }
+
+    /**
      * Sets action helper for assembling URLs
      *
      * @see getHref()
@@ -422,7 +460,8 @@ class Mvc extends AbstractPage
                 'module'       => $this->getModule(),
                 'params'       => $this->getParams(),
                 'route'        => $this->getRoute(),
-                'reset_params' => $this->getResetParams()
+                'reset_params' => $this->getResetParams(),
+                'encodeUrl'    => $this->getEncodeUrl(),
             ));
     }
 }

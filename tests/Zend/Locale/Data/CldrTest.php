@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Locale;
+namespace ZendTest\Locale\Data;
 
 use Zend\Locale\Data\Cldr,
     Zend\Locale\Exception\InvalidArgumentException,
@@ -41,9 +41,9 @@ class CldrTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_cache =Cache::factory('Core', 'File',
+        $this->_cache = Cache::factory('Core', 'File',
                  array('lifetime' => 1, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
+                 array('cache_dir' => __DIR__ . '/../../_files/'));
         Cldr::setCache($this->_cache);
     }
 

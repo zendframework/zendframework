@@ -5,9 +5,9 @@ namespace Zf2Mvc\Controller;
 use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Http\Response as HttpResponse,
-    Zf2\Stdlib\Dispatchable,
-    Zf2\Stdlib\Request,
-    Zf2\Stdlib\Response;
+    Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\ResponseDescription as Response;
 
 /**
  * Basic action controller

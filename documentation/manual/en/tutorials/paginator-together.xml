@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.together"><info><title>Putting it all Together</title></info>
-    
+
 
     <para>
         You have seen how to create a Paginator object, how to render the items on the current page,
@@ -34,7 +34,7 @@ class IndexController extends Zend_Controller_Action
         $db = Zend_Registry::get('db');
 
         // Create a select object which fetches blog posts, sorted decending by date of creation
-        $select = $db->select()->from('posts')->sort('date_created DESC');
+        $select = $db->select()->from('posts')->order('date_created DESC');
 
         // Create a Paginator for the blog posts query
         $paginator = Zend_Paginator::factory($select);
@@ -59,7 +59,7 @@ class IndexController extends Zend_Controller_Action
 <?php
 // Render each the title of each post for the current page in a list-item
 foreach ($this->paginator as $item) {
-    echo '<li>' . $item->title . '</li>';
+    echo '<li>' . $item["title"] . '</li>';
 }
 ?>
 </ul>

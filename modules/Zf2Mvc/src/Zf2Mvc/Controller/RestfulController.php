@@ -138,9 +138,9 @@ abstract class RestfulController implements Dispatchable
                     if (null === $id = $request->getMetadata('id')) {
                         throw new \DomainException('Missing identifier');
                     }
-                    $params = $request->getContent();
-                    $params = parse_str($params);
-                    $return = $this->update($id, $params);
+                    $content = $request->getContent();
+                    parse_str($content, $parsedParams);
+                    $return = $this->update($id, $parsedParams);
                     break;
                 case 'delete':
                     if (null === $id = $request->getMetadata('id')) {

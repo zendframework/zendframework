@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Créer un visuel personnalisé en utilisant Zend_Form_Decorator</title></info>
-    
+
 
     <para>
         Rendre visuellement un objet de formulaire est complètement optionnel -- il n'est pas
@@ -37,7 +37,7 @@
     </para>
 
     <section xml:id="zend.form.decorators.operation"><info><title>Configuration</title></info>
-        
+
 
         <para>
             Pour configurer un décorateur, passez un tableau d'options ou un objet
@@ -117,7 +117,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.standard"><info><title>Décorateurs standards</title></info>
-        
+
 
         <para>
             <classname>Zend_Form</classname> est fourni avec quelques décorateurs de base,
@@ -127,7 +127,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.custom"><info><title>Décorateurs personnalisés</title></info>
-        
+
 
         <para>
             Si vos rendus HTML sont complexes, ou si vous avez besoin de beaucoup de
@@ -244,7 +244,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
                 . $input
                 . $errors
                 . $desc
-                . '</div>'
+                . '</div>';
 
         switch ($placement) {
             case (self::PREPEND):
@@ -329,7 +329,7 @@ class My_Decorator_Errors
     </section>
 
     <section xml:id="zend.form.decorators.individual"><info><title>Rendre des décorateurs individuellement</title></info>
-        
+
 
         <para>
             Comme les décorateurs agissent souvent sur une propriété d'un élément, et en

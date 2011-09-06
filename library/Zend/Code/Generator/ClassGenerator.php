@@ -41,10 +41,13 @@ use Zend\Code\Reflection\ReflectionClass;
 class ClassGenerator extends AbstractGenerator
 {
 
+    const FLAG_ABSTRACT  = 0x01;
+    const FLAG_FINAL     = 0x02;
+
     /**
      * @var \FileGenerator\Code\Generator\PhpFile
      */
-    protected $containingFile = null;
+    protected $containingFileGenerator = null;
 
     /**
      * @var string
@@ -52,7 +55,7 @@ class ClassGenerator extends AbstractGenerator
     protected $namespaceName = null;
 
     /**
-     * @var \DocblockGenerator\Code\Generator\PhpDocblock
+     * @var DocblockGenerator
      */
     protected $docblock = null;
 
@@ -64,7 +67,7 @@ class ClassGenerator extends AbstractGenerator
     /**
      * @var bool
      */
-    protected $isAbstract = false;
+    protected $flags = 0x00;
 
     /**
      * @var string
@@ -94,67 +97,112 @@ class ClassGenerator extends AbstractGenerator
      */
     public static function fromReflection(ReflectionClass $reflectionClass)
     {
-        $class = new self();
+        // class generator
+        $cg = new static($reflectionClass->getName());
 
-        $class->setSourceContent($class->getSourceContent());
-        $class->setSourceDirty(false);
+        $cg->setSourceContent($cg->getSourceContent());
+        $cg->setSourceDirty(false);
 
         if ($reflectionClass->getDocComment() != '') {
-            $class->setDocblock(DocblockGenerator::fromReflection($reflectionClass->getDocblock()));
+            $cg->setDocblock(DocblockGenerator::fromReflection($reflectionClass->getDocblock()));
         }
 
-        $class->setAbstract($reflectionClass->isAbstract());
+        $cg->setAbstract($reflectionClass->isAbstract());
 
         // set the namespace
         if ($reflectionClass->inNamespace()) {
-            $class->setNamespaceName($reflectionClass->getNamespaceName());
+            $cg->setNamespaceName($reflectionClass->getNamespaceName());
         }
 
-        $class->setName($reflectionClass->getName());
-
+        /* @var $parentClass \Zend\Code\Reflection\ReflectionClass */
         if ($parentClass = $reflectionClass->getParentClass()) {
-            $class->setExtendedClass($parentClass->getName());
+            $cg->setExtendedClass($parentClass->getName());
             $interfaces = array_diff($reflectionClass->getInterfaces(), $parentClass->getInterfaces());
         } else {
             $interfaces = $reflectionClass->getInterfaces();
         }
 
         $interfaceNames = array();
-        foreach($interfaces AS $interface) {
+        foreach ($interfaces AS $interface) {
+            /* @var $interface \Zend\Code\Reflection\ReflectionClass */
             $interfaceNames[] = $interface->getName();
         }
 
-        $class->setImplementedInterfaces($interfaceNames);
+        $cg->setImplementedInterfaces($interfaceNames);
 
         $properties = array();
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
-            if ($reflectionProperty->getDeclaringClass()->getName() == $class->getName()) {
+            /* @var $reflectionProperty \Zend\Code\Reflection\ReflectionProperty */
+            if ($reflectionProperty->getDeclaringClass()->getName() == $cg->getName()) {
                 $properties[] = PropertyGenerator::fromReflection($reflectionProperty);
             }
         }
-        $class->setProperties($properties);
+        $cg->setProperties($properties);
 
         $methods = array();
         foreach ($reflectionClass->getMethods() as $reflectionMethod) {
-            if ($reflectionMethod->getDeclaringClass()->getName() == $class->getName()) {
+            /* @var $reflectionMethod \Zend\Code\Reflection\ReflectionMethod */
+            if ($reflectionMethod->getDeclaringClass()->getName() == $cg->getName()) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
         }
-        $class->setMethods($methods);
+        $cg->setMethods($methods);
 
-        return $class;
+        return $cg;
     }
 
-    public function __construct($name = null, $namespaceName = null, $flags = null, $extends = null, $interfaces = array(), $properties = array(), $methods = array(), $docblock = null)
+    public static function fromArray(array $array)
     {
-        if ($name !== null) {
-            $this->setName($name);
+        if (!isset($array['name'])) {
+            throw new Exception\InvalidArgumentException('Class generator requires that a name is provided for this object');
         }
+        $cg = new static($array['name']);
+        foreach ($array as $name => $value) {
+            switch ($name) {
+                case 'containingFile':
+                    $cg->setContainingFileGenerator($value);
+                    break;
+                case 'namespaceName':
+                    $cg->setNamespaceName($value);
+                    break;
+                case 'docblock':
+                    $cg->setDocblock((!$value instanceof DocblockGenerator) ?: DocblockGenerator::fromArray($value));
+                    break;
+                case 'flag':
+                    $cg->setFlags($value);
+                    break;
+                case 'extendedClass':
+                    $cg->setExtendedClass($value);
+                    break;
+                case 'implementedInterfaces':
+                    $cg->setImplementedInterfaces($value);
+                    break;
+                case 'properties':
+                    foreach ($value as $pValue) {
+                        $cg->setProperty((!$pValue instanceof PropertyGenerator) ?: PropertyGenerator::fromArray($pValue));
+                    }
+                    break;
+                case 'methods':
+                    foreach ($value as $mValue) {
+                        $cg->setMethod((!$mValue instanceof MethodGenerator) ?: MethodGenerator::fromArray($mValue));
+                    }
+                    break;
+                    
+
+            }
+        }
+        return $cg;
+    }
+
+    public function __construct($name, $namespaceName = null, $flags = null, $extends = null, $interfaces = array(), $properties = array(), $methods = array(), $docblock = null)
+    {
+        $this->setName($name);
+
         if ($namespaceName !== null) {
             $this->setNamespaceName($namespaceName);
         }
         if ($flags !== null) {
-            // @todo
+            $this->setFlags($flags);
         }
         if ($properties !== array()) {
             $this->setProperties($properties);
@@ -165,81 +213,6 @@ class ClassGenerator extends AbstractGenerator
         if ($docblock !== null) {
             $this->setDocblock($docblock);
         }
-    }
-
-    /**
-     * setPhpFile()
-     *
-     * @param FileGenerator $phpFile
-     */
-    public function setContainingFile(FileGenerator $phpFile)
-    {
-        $this->containingFile = $phpFile;
-        return $this;
-    }
-
-    /**
-     * getPhpFile()
-     *
-     * @return Zend\Code\Generator\PhpFile
-     */
-    public function getContainingFile()
-    {
-        return $this->containingFile;
-    }
-    
-    /**
-     * setDocblock() Set the docblock
-     *
-     * @param \Zend\Code\GeneratorDocblock|array|string $docblock
-     * @return \FileGenerator\Code\Generator\PhpFile
-     */
-    public function setDocblock($docblock)
-    {
-        if (is_string($docblock)) {
-            $docblock = array('shortDescription' => $docblock);
-        }
-
-        if (is_array($docblock)) {
-            $docblock = new DocblockGenerator($docblock);
-        } elseif (!$docblock instanceof DocblockGenerator) {
-            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
-        }
-
-        $this->docblock = $docblock;
-        return $this;
-    }
-
-    /**
-     * getNamespaceName()
-     * 
-     * @return string
-     */
-    public function getNamespaceName()
-    {
-        return $this->namespaceName;
-    }
-    
-    /**
-     * setNamespaceName()
-     * 
-     * @param $namespaceName
-     * @return Zend\Code\Generator\PhpClass
-     */
-    public function setNamespaceName($namespaceName)
-    {
-        $this->namespaceName = $namespaceName;
-        return $this;
-    }
-    
-    /**
-     * getDocblock()
-     *
-     * @return DocblockGenerator
-     */
-    public function getDocblock()
-    {
-        return $this->docblock;
     }
 
     /**
@@ -271,15 +244,116 @@ class ClassGenerator extends AbstractGenerator
     }
 
     /**
+     * getNamespaceName()
+     *
+     * @return string
+     */
+    public function getNamespaceName()
+    {
+        return $this->namespaceName;
+    }
+
+    /**
+     * setNamespaceName()
+     *
+     * @param $namespaceName
+     * @return Zend\Code\Generator\PhpClass
+     */
+    public function setNamespaceName($namespaceName)
+    {
+        $this->namespaceName = $namespaceName;
+        return $this;
+    }
+
+    /**
+     * setPhpFile()
+     *
+     * @param ClassGenerator $phpFile
+     */
+    public function setContainingFileGenerator(FileGenerator $fileGenerator)
+    {
+        $this->containingFileGenerator = $fileGenerator;
+        return $this;
+    }
+
+    /**
+     * getPhpFile()
+     *
+     * @return Zend\Code\Generator\PhpFile
+     */
+    public function getContainingFileGenerator()
+    {
+        return $this->containingFileGenerator;
+    }
+    
+    /**
+     * setDocblock() Set the docblock
+     *
+     * @param \Zend\Code\GeneratorDocblock|array|string $docblock
+     * @return \FileGenerator\Code\Generator\PhpFile
+     */
+    public function setDocblock($docblock)
+    {
+        if (is_string($docblock)) {
+            $docblock = array('shortDescription' => $docblock);
+        }
+
+        if (is_array($docblock)) {
+            $docblock = new DocblockGenerator($docblock);
+        } elseif (!$docblock instanceof DocblockGenerator) {
+            throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
+        }
+
+        $this->docblock = $docblock;
+        return $this;
+    }
+
+    
+    /**
+     * getDocblock()
+     *
+     * @return DocblockGenerator
+     */
+    public function getDocblock()
+    {
+        return $this->docblock;
+    }
+
+    public function setFlags($flags)
+    {
+        if (is_array($flags)) {
+            $flagsArray = $flags;
+            $flags = 0x00;
+            foreach ($flagsArray as $flag) {
+                $flags |= $flag;
+            }
+        }
+        // check that visibility is one of three
+        $this->flags = $flags;
+        return $this;
+    }
+
+    public function addFlag($flag)
+    {
+        $this->setFlags($this->flags | $flag);
+        return $this;
+    }
+
+    public function removeFlag($flag)
+    {
+        $this->setFlags($this->flags & ~$flag);
+        return $this;
+    }
+
+    /**
      * setAbstract()
      *
      * @param bool $isAbstract
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
      */
     public function setAbstract($isAbstract)
     {
-        $this->isAbstract = ($isAbstract) ? true : false;
-        return $this;
+        return (($isAbstract) ? $this->addFlag(self::FLAG_ABSTRACT) : $this->removeFlag(self::FLAG_ABSTRACT));
     }
 
     /**
@@ -289,7 +363,28 @@ class ClassGenerator extends AbstractGenerator
      */
     public function isAbstract()
     {
-        return $this->isAbstract;
+        return ($this->flags & self::FLAG_ABSTRACT);
+    }
+
+    /**
+     * setFinal()
+     *
+     * @param bool $isFinal
+     * @return \AbstractMemberGenerator\Code\Generator\PhpMember\AbstractMember
+     */
+    public function setFinal($isFinal)
+    {
+        return (($isFinal) ? $this->addFlag(self::FLAG_FINAL) : $this->removeFlag(self::FLAG_FINAL));
+    }
+
+    /**
+     * isFinal()
+     *
+     * @return bool
+     */
+    public function isFinal()
+    {
+        return ($this->flags & self::FLAG_FINAL);
     }
 
     /**
@@ -340,7 +435,7 @@ class ClassGenerator extends AbstractGenerator
      * setProperties()
      *
      * @param array $properties
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @return ClassGenerator
      */
     public function setProperties(array $properties)
     {
@@ -357,13 +452,13 @@ class ClassGenerator extends AbstractGenerator
      * @param array|\PropertyGenerator\Code\Generator\PhpProperty $property
      * @return \ClassGenerator\Code\Generator\PhpClass
      */
-    public function setProperty($property)
+    public function setProperty(PropertyGenerator $property)
     {
-        if (is_string($property)) {
-            $property = new PropertyGenerator($property);
-        } elseif (!$property instanceof PropertyGenerator) {
-            throw new Exception\InvalidArgumentException('setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator');
-        }
+        //if (is_string($property)) {
+        //    $property = new PropertyGenerator($property);
+        //} elseif (!$property instanceof PropertyGenerator) {
+        //    throw new Exception\InvalidArgumentException('setProperty() expects either a string or an instance of Zend\Code\Generator\PropertyGenerator');
+        //}
         
         $propertyName = $property->getName();
 
@@ -432,13 +527,13 @@ class ClassGenerator extends AbstractGenerator
      * @param array|\MethodGenerator\Code\Generator\PhpMethod $method
      * @return \ClassGenerator\Code\Generator\PhpClass
      */
-    public function setMethod($method)
+    public function setMethod(MethodGenerator $method)
     {
-        if (is_string($method)) {
-            $method = new MethodGenerator($method);
-        } elseif (!$method instanceof MethodGenerator) {
-            throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
-        }
+        //if (is_string($method)) {
+        //    $method = new MethodGenerator($method);
+        //} elseif (!$method instanceof MethodGenerator) {
+        //    throw new Exception\InvalidArgumentException('setMethod() expects either a string method name or an instance of Zend\Code\Generator\MethodGenerator');
+        //}
         $methodName = $method->getName();
 
         if (isset($this->methods[$methodName])) {

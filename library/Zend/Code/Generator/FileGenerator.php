@@ -37,20 +37,6 @@ use Zend\Code\Reflection\ReflectionFile;
 class FileGenerator extends AbstractGenerator
 {
 
-//    /**
-//     * @var array Array of \Zend\Code\Generator\PhpFile
-//     */
-//    protected static $loadedFileGenerators = array();
-
-    /**#@+
-     * @var string
-     */
-    protected $markerDocblock  = '/* Zend_CodeGenerator_Php_File-DocblockMarker */';
-    protected $markerNamespace = '/* Zend_CodeGenerator_Php_File-NamespaceMarker */';
-    protected $markerRequire   = '/* Zend_CodeGenerator_Php_File-RequireMarker: {?} */';
-    protected $markerClass     = '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */';
-    /**#@-*/
-
     /**
      * @var string
      */
@@ -86,42 +72,15 @@ class FileGenerator extends AbstractGenerator
      */
     protected $body = null;
 
-//    /**
-//     * registerFileCodeGnereator()
-//     *
-//     * A file code generator registry
-//     *
-//     * @param FileGenerator $fileGenerator
-//     * @param string $filename
-//     */
-//    public static function registerFileCodeGenerator(FileGenerator $fileGenerator, $filename = null)
-//    {
-//        if ($filename == null) {
-//            $filename = $fileGenerator->getFilename();
-//        }
-//
-//        if ($filename == '') {
-//            throw new Exception\InvalidArgumentException('FileName does not exist.');
-//        }
-//
-//        // cannot use realpath since the file might not exist, but we do need to have the index
-//        // in the same DIRECTORY_SEPARATOR that realpath would use:
-//        $filename = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $filename);
-//
-//        self::$loadedFileGenerators[$filename] = $fileGenerator;
-//
-//    }
-
     /**
      * fromReflectedFilePath() - use this if you intend on generating code generation objects based on the same file.
      * This will keep previous changes to the file in tact during the same PHP process
      *
      * @param string $filePath
-     * @param bool $usePreviousCodeGeneratorIfItExists
      * @param bool $includeIfNotAlreadyIncluded
-     * @return \FileGenerator\Code\Generator\PhpFile
+     * @return FileGenerator
      */
-    public static function fromReflectedFileName($filePath, $usePreviousCodeGeneratorIfItExists = true, $includeIfNotAlreadyIncluded = true)
+    public static function fromReflectedFileName($filePath, $includeIfNotAlreadyIncluded = true)
     {
         $realpath = realpath($filePath);
 
@@ -131,19 +90,11 @@ class FileGenerator extends AbstractGenerator
             }
         }
 
-        if ($usePreviousCodeGeneratorIfItExists && isset(self::$loadedFileGenerators[$realpath])) {
-            return self::$loadedFileGenerators[$realpath];
-        }
-
         if ($includeIfNotAlreadyIncluded && !in_array($realpath, get_included_files())) {
             include $realpath;
         }
 
         $codeGenerator = self::fromReflection(($fileReflector = new ReflectionFile($realpath)));
-
-        if (!isset(self::$loadedFileGenerators[$fileReflector->getFileName()])) {
-            self::$loadedFileGenerators[$fileReflector->getFileName()] = $codeGenerator;
-        }
 
         return $codeGenerator;
     }
@@ -163,10 +114,10 @@ class FileGenerator extends AbstractGenerator
 
         $body = $reflectionFile->getContents();
 
-        // @todo this whole area needs to be reworked with respect to how body lines are processed
         foreach ($reflectionFile->getClasses() as $class) {
+            /* @var $class \Zend\Code\Reflection\ReflectionClass */
             $phpClass = ClassGenerator::fromReflection($class);
-            $phpClass->setContainingFile($file);
+            $phpClass->setContainingFileGenerator($file);
             $file->setClass($phpClass);
             $classStartLine = $class->getStartLine(true);
             $classEndLine = $class->getEndLine();
@@ -175,7 +126,13 @@ class FileGenerator extends AbstractGenerator
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
                 if ($lineNum == $classStartLine) {
-                    $bodyReturn[] = str_replace('?', $class->getName(), $this->markerClass);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
+
+                    $bodyReturn[] = str_replace(
+                        '?',
+                        $class->getName(),
+                        '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */'
+                    );
+
                     $lineNum = $classEndLine;
                 } else {
                     $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
@@ -196,6 +153,7 @@ class FileGenerator extends AbstractGenerator
         }
 
         if (($reflectionFile->getDocComment() != '')) {
+            /* @var $docblock \Zend\Code\Reflection\ReflectionDocblock */
             $docblock = $reflectionFile->getDocblock();
             $file->setDocblock(DocblockGenerator::fromReflection($docblock));
 
@@ -203,7 +161,11 @@ class FileGenerator extends AbstractGenerator
             $bodyReturn = array();
             for ($lineNum = 1; $lineNum <= count($bodyLines); $lineNum++) {
                 if ($lineNum == $docblock->getStartLine()) {
-                    $bodyReturn[] = str_replace('?', $class->getName(), $this->markerDocblock);  //'/* Zend_CodeGenerator_Php_File-ClassMarker: {' . $class->getName() . '} */';
+                    $bodyReturn[] = str_replace(
+                        '?',
+                        $class->getName(),
+                        '/* Zend_CodeGenerator_Php_File-DocblockMarker */'
+                    );
                     $lineNum = $docblock->getEndLine();
                 } else {
                     $bodyReturn[] = $bodyLines[$lineNum - 1]; // adjust for index -> line conversion
@@ -237,6 +199,7 @@ class FileGenerator extends AbstractGenerator
                     }
             }
         }
+        return $fileGenerator;
     }
 
 
@@ -408,19 +371,19 @@ class FileGenerator extends AbstractGenerator
      * @param array|ClassGenerator $class
      * @return FileGenerator
      */
-    public function setClass($class)
+    public function setClass(ClassGenerator $class)
     {
-        if (is_array($class)) {
+        /*if (is_array($class)) {
             $class = new ClassGenerator($class);
             $className = $class->getName();
         } elseif ($class instanceof ClassGenerator) {
             $className = $class->getName();
         } else {
             throw new Exception\InvalidArgumentException('Expecting either an array or an instance of Zend_CodeGenerator_Php_Class');
-        }
+        }*/
 
         // @todo check for dup here
-
+        $className = $class->getName();
         $this->classes[$className] = $class;
         return $this;
     }
@@ -527,9 +490,9 @@ class FileGenerator extends AbstractGenerator
         // Add file docblock, if any
         if (null !== ($docblock = $this->getDocblock())) {
             $docblock->setIndentation('');
-            $regex = preg_quote($this->markerDocblock, '#');
-            if (preg_match('#'.$regex.'#', $output)) {
-                $output  = preg_replace('#'.$regex.'#', $docblock->generate(), $output, 1);
+
+            if (preg_match('#/* Zend_CodeGenerator_Php_File-DocblockMarker */#', $output)) {
+                $output = preg_replace('#/* Zend_CodeGenerator_Php_File-DocblockMarker */#', $docblock->generate(), $output, 1);
             } else {
                 $output .= $docblock->generate() . self::LINE_FEED;
             }
@@ -573,7 +536,7 @@ class FileGenerator extends AbstractGenerator
         $classes = $this->getClasses();
         if (!empty($classes)) {
             foreach ($classes as $class) {
-                $regex = str_replace('?', $class->getName(), $this->markerClass);
+                $regex = str_replace('?', $class->getName(), '/* Zend_CodeGenerator_Php_File-ClassMarker: {?} */');
                 $regex = preg_quote($regex, '#');
                 if (preg_match('#'.$regex.'#', $output)) {
                     $output = preg_replace('#'.$regex.'#', $class->generate(), $output, 1);

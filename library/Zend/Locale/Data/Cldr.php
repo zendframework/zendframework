@@ -1604,6 +1604,8 @@ class Cldr extends AbstractLocale
      */
     protected static function readCldr($filePath, $locale, $cacheId, $keyPath, $keyAttrib, $valuePath, $valueAttrib, $detail)
     {
+	$locale = self::_checkLocale($locale);
+
         if (self::getCache() === null && !self::isCacheDisabled()) {
             self::setDefaultCache();
         }

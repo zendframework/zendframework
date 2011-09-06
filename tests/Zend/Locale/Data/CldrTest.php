@@ -59,17 +59,17 @@ class CldrTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoLocale()
     {
-        $this->assertTrue(is_array(Cldr::getList(null, 'language')));
+        $this->assertTrue(is_array(Cldr::getDisplayLanguage(null)));
 
         try {
-            $value = Cldr::getList('nolocale','language');
+            $value = Cldr::getDisplayLanguage('nolocale');
             $this->fail('locale should throw exception');
         } catch (InvalidArgumentException $e) {
             // success
         }
 
         $locale = new Locale('de');
-        $this->assertTrue(is_array(Cldr::getList($locale, 'language')));
+        $this->assertTrue(is_array(Cldr::getDisplayLanguage($locale)));
     }
 
 
@@ -101,11 +101,11 @@ class CldrTest extends \PHPUnit_Framework_TestCase
      */
     public function testLanguage()
     {
-        $data = Cldr::getList('de','language');
+        $data = Cldr::getDisplayLanguage('de');
         $this->assertEquals('Deutsch',  $data['de']);
         $this->assertEquals('Englisch', $data['en']);
 
-        $value = Cldr::getContent('de', 'language', 'de');
+        $value = Cldr::getDisplayLanguage('de', false, 'de');
         $this->assertEquals('Deutsch', $value);
     }
 
@@ -115,11 +115,11 @@ class CldrTest extends \PHPUnit_Framework_TestCase
      */
     public function testScript()
     {
-        $data = Cldr::getList('de_AT', 'script');
+        $data = Cldr::getDisplayScript('de_AT');
         $this->assertEquals('Arabisch',   $data['Arab']);
         $this->assertEquals('Lateinisch', $data['Latn']);
 
-        $value = Cldr::getContent('de_AT', 'script', 'Arab');
+        $value = Cldr::getDisplayScript('de_AT', false, 'Arab');
         $this->assertEquals('Arabisch', $value);
     }
 
@@ -129,11 +129,11 @@ class CldrTest extends \PHPUnit_Framework_TestCase
      */
     public function testTerritory()
     {
-        $data = Cldr::getList('de_AT', 'territory');
+        $data = Cldr::getDisplayTerritory('de_AT');
         $this->assertEquals('Österreich', $data['AT']);
         $this->assertEquals('Martinique', $data['MQ']);
 
-        $value = Cldr::getContent('de_AT', 'territory', 'AT');
+        $value = Cldr::getDisplayTerritory('de_AT', false, 'AT');
         $this->assertEquals('Österreich', $value);
     }
 

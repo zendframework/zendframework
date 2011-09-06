@@ -112,7 +112,7 @@ Let's assume we have a "Hello" controller:
 
 Let's now create a route:
 
-    use Zend\Http\Router\Http\LiteralRoute;
+    use Zf2Mvc\Router\Http\LiteralRoute;
 
     // Assume this is likely in some bootstrap
     $route = new LiteralRoute(array(

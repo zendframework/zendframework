@@ -4,9 +4,11 @@ namespace Zf2Mvc;
 
 use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
+    Zend\Http\Header\Cookie,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\Parameters,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
@@ -117,7 +119,30 @@ class Application implements AppContext
     public function getRequest()
     {
         if (!$this->request instanceof Request) {
-            $this->setRequest(new HttpRequest());
+            $request = new HttpRequest();
+
+            $request->setQuery(new PhpEnvironment\GetContainer())
+                    ->setPost(new PhpEnvironment\PostContainer())
+                    ->setEnv(new Parameters($_ENV))
+                    ->setServer(new Parameters($_SERVER));
+
+            if ($_COOKIE) {
+                $request->headers()->addHeader(new Cookie($_COOKIE));
+            }
+
+            if ($_FILES) {
+                $request->setFile(new Parameters($_FILES));
+            }
+
+            if (isset($_SERVER['REQUEST_METHOD'])) {
+                $request->setMethod($_SERVER['REQUEST_METHOD']);
+            }
+
+            if (isset($_SERVER['REQUEST_URI'])) {
+                $request->setUri($_SERVER['REQUEST_URI']);
+            }
+
+            $this->setRequest($request);
         }
         return $this->request;
     }

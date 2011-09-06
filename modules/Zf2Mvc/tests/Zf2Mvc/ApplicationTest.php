@@ -179,4 +179,114 @@ class ApplicationTest extends TestCase
         $this->assertContains('PathController', $response->getContent());
         $this->assertContains('dispatch', $response->getContent());
     }
+
+    public function testDefaultRequestObjectContainsPhpEnvironmentContainers()
+    {
+        $app = new Application();
+        $request = $app->getRequest();
+        $query = $request->query();
+        $this->assertInstanceOf('Zf2Mvc\PhpEnvironment\GetContainer', $query);
+        $post = $request->post();
+        $this->assertInstanceOf('Zf2Mvc\PhpEnvironment\PostContainer', $post);
+    }
+
+    public function testDefaultRequestObjectMirrorsEnvSuperglobal()
+    {
+        if (empty($_ENV)) {
+            $this->markTestSkipped('ENV is empty');
+        }
+        $app = new Application();
+        $req = $app->getRequest();
+        $env = $req->env();
+        $this->assertSame($_ENV, $env->toArray());
+    }
+
+    public function testDefaultRequestObjectMirrorsServerSuperglobal()
+    {
+        $app    = new Application();
+        $req    = $app->getRequest();
+        $server = $req->server();
+        $this->assertSame($_SERVER, $server->toArray());
+    }
+
+    public function testDefaultRequestObjectMirrorsCookieSuperglobal()
+    {
+        $_COOKIE = array('foo' => 'bar');
+        $app     = new Application();
+        $req     = $app->getRequest();
+        $cookie  = $req->cookie();
+        $this->assertInstanceOf('Zend\Http\Header\Cookie', $cookie);
+        $this->assertSame($_COOKIE, $cookie->getArrayCopy());
+    }
+
+    public function testDefaultRequestObjectMirrorsFilesSuperglobal()
+    {
+        $_FILES  = array(
+            'foo.txt' => array(
+                'name'     => 'foo.txt',
+                'type'     => 'text/plain',
+                'size'     => 0,
+                'tmp_name' => '/tmp/' . uniqid(),
+                'error'    => 0,
+            ),
+        );
+        $app     = new Application();
+        $req     = $app->getRequest();
+        $files   = $req->file();
+        $this->assertSame($_FILES, $files->getArrayCopy());
+    }
+
+    public static function methods()
+    {
+        $methods = array(
+            'OPTIONS',
+            'GET',
+            'HEAD',
+            'POST',
+            'PUT',
+            'DELETE',
+            'TRACE',
+            'CONNECT',
+        );
+
+        $values = array();
+        foreach ($methods as $key => $method) {
+            $maskMethods = $methods;
+            unset($maskMethods[$key]);
+            $values[] = array($method, $maskMethods);
+        }
+        return $values;
+    }
+
+    /**
+     * @dataProvider methods
+     */
+    public function testDefaultRequestObjectRequestMethodMirrorsServerHttpMethodKey($method, $methods)
+    {
+        $_SERVER['REQUEST_METHOD'] = $method;
+        $app = new Application();
+        $req = $app->getRequest();
+
+        $testMethod = 'is' . ucfirst(strtolower($method));
+        $this->assertTrue($req->$testMethod());
+
+        foreach ($methods as $test) {
+            $testMethod = 'is' . ucfirst($test);
+            $this->assertFalse($req->$testMethod());
+        }
+    }
+
+    public function testDefaultRequestObjectContainsUriCreatedFromServerRequestUri()
+    {
+        $_SERVER['REQUEST_URI'] = 'http://framework.zend.com/api/zf-version?test=this';
+        $app = new Application();
+        $req = $app->getRequest();
+
+        $uri = $req->uri();
+        $this->assertInstanceOf('Zend\Uri\Uri', $uri);
+        $this->assertEquals('http', $uri->getScheme());
+        $this->assertEquals('framework.zend.com', $uri->getHost());
+        $this->assertEquals('/api/zf-version', $uri->getPath());
+        $this->assertEquals('test=this', $uri->getQuery());
+    }
 }

@@ -153,6 +153,34 @@ class ApplicationTest extends TestCase
         return $app;
     }
 
+    public function setupActionController()
+    {
+        $app = new Application();
+
+        $request = new Request();
+        $uri     = UriFactory::factory('http://example.local/sample');
+        $request->setUri($uri);
+        $app->setRequest($request);
+
+        $route = new Router\Http\Literal(array(
+            'route'    => '/sample',
+            'defaults' => array(
+                'controller' => 'sample',
+                'action'     => 'test',
+            ),
+        ));
+        $router  = $app->getRouter();
+        $router->addRoute('sample', $route);
+
+        $locator = new TestAsset\Locator();
+        $locator->add('sample', function() {
+            return new Controller\TestAsset\SampleController;
+        });
+        $app->setLocator($locator);
+
+        return $app;
+    }
+
     public function testRoutingIsExecutedDuringRun()
     {
         $app = $this->setupPathController();
@@ -288,5 +316,33 @@ class ApplicationTest extends TestCase
         $this->assertEquals('framework.zend.com', $uri->getHost());
         $this->assertEquals('/api/zf-version', $uri->getPath());
         $this->assertEquals('test=this', $uri->getQuery());
+    }
+
+    public function testPostDispatchResultIsPassedByReferenceToEventListeners()
+    {
+        $app = $this->setupActionController();
+
+        $app->events()->attach('dispatch.post', function($e) {
+            $result = $e->getParam('__RESULT__', false);
+            if (!$result) {
+                return;
+            }
+            $result['foo'] = 'bar';
+        });
+        $app->events()->attach('dispatch.post', function($e) {
+            $result = $e->getParam('__RESULT__', false);
+            if (!$result) {
+                return;
+            }
+            $response = new Response();
+            $content  = json_encode($result);
+            $response->setContent($content);
+            return $response;
+        });
+
+        $response = $app->run()->getResponse();
+        $response = json_decode($response->getContent());
+        $this->assertTrue(isset($response->foo), var_export($response, 1));
+        $this->assertEquals('bar', $response->foo);
     }
 }

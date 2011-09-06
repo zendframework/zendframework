@@ -4,9 +4,11 @@ namespace Zf2Mvc;
 
 use Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
+    Zend\Http\Request as HttpRequest,
+    Zend\Http\Response as HttpResponse,
     Zend\Stdlib\Dispatchable,
-    Zend\Http\Request,
-    Zend\Http\Response;
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\ResponseDescription as Response;
 
 /**
  * Main application class for invoking applications
@@ -115,7 +117,7 @@ class Application implements AppContext
     public function getRequest()
     {
         if (!$this->request instanceof Request) {
-            $this->setRequest(new Request());
+            $this->setRequest(new HttpRequest());
         }
         return $this->request;
     }
@@ -128,7 +130,7 @@ class Application implements AppContext
     public function getResponse()
     {
         if (!$this->response instanceof Response) {
-            $this->setResponse(new Response());
+            $this->setResponse(new HttpResponse());
         }
         return $this->response;
     }
@@ -249,7 +251,7 @@ class Application implements AppContext
 
         $result   = $controller->dispatch($request, $response);
 
-        $params['result'] =& $result;
+        $params['__RESULT__'] =& $result;
         $events->trigger('dispatch.post', $this, $params);
         return $result;
     }

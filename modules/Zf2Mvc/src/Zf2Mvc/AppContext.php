@@ -3,8 +3,8 @@
 namespace Zf2Mvc;
 
 use Zend\EventManager\EventCollection,
-    Zend\Http\Request,
-    Zend\Http\Response;
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\ResponseDescription as Response;
 
 interface AppContext
 {

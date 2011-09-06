@@ -75,7 +75,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         $helper = new Helper\PaginationControl();
         $this->assertNull($helper->getView());
         $helper->setView($view);
-        $this->assertType('Zend\View\Renderer', $helper->getView());
+        $this->assertInstanceOf('Zend\View\Renderer', $helper->getView());
     }
 
     public function testGetsAndSetsDefaultViewPartial()
@@ -99,7 +99,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         try {
             $this->_viewHelper->direct($this->_paginator);
         } catch (\Exception $e) {
-            $this->assertType('Zend\View\Exception', $e);
+            $this->assertInstanceOf('Zend\View\Exception', $e);
             $this->assertEquals('No view partial provided and no default set', $e->getMessage());
         }
     }
@@ -149,7 +149,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         try {
             $output = $this->_viewHelper->direct();
         } catch (\Exception $e) {
-            $this->assertType('Zend\View\Exception', $e);
+            $this->assertInstanceOf('Zend\View\Exception', $e);
             $this->assertEquals('No paginator instance provided or incorrect type', $e->getMessage());
         }
     }
@@ -165,7 +165,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
             /* We don't care whether or not the module exists--we just want to
              * make sure it gets to Zend_View_Helper_Partial and it's recognized
              * as a module. */
-            $this->assertType('Zend\View\Helper\Partial\Exception', $e);
+            $this->assertInstanceOf('Zend\View\Helper\Partial\Exception', $e);
             $this->assertEquals('Cannot render partial; module does not exist', $e->getMessage());
         }
     }

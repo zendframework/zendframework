@@ -175,7 +175,7 @@ class ApplicationTest extends TestCase
     {
         $app = $this->setupPathController();
 
-        $response = $app->run();
+        $response = $app->run()->getResponse();
         $this->assertContains('PathController', $response->getContent());
         $this->assertContains('dispatch', $response->getContent());
     }

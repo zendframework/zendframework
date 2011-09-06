@@ -96,11 +96,9 @@ class GetoptTest extends \PHPUnit_Framework_TestCase
 
     public function testGetoptDumpJson()
     {
-        $this->markTestIncomplete('INCOMPLETE due to waiting for Zend_Json migration to namespaces');
         $opts = new Getopt('abp:', array('-a', '-p', 'p_arg'));
         $this->assertEquals($opts->toJson(),
             '{"options":[{"option":{"flag":"a","parameter":true}},{"option":{"flag":"p","parameter":"p_arg"}}]}');
-
     }
 
     public function testGetoptDumpXml()

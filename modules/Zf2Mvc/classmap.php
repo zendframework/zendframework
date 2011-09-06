@@ -1,0 +1,22 @@
+<?php
+return array (
+  'Zf2Mvc\\Application' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Application.php',
+  'Zf2Mvc\\Router\\Http\\TreeRouteStack' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'TreeRouteStack.php',
+  'Zend\\Router\\Http\\Regex' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Regex.php',
+  'Zend\\Router\\Http\\Part' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Part.php',
+  'Zf2Mvc\\Router\\Http\\Literal' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Literal.php',
+  'Zf2Mvc\\Router\\Http\\Route' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Route.php',
+  'Zf2Mvc\\Router\\Exception\\RuntimeException' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Exception' . DIRECTORY_SEPARATOR . 'RuntimeException.php',
+  'Zf2Mvc\\Router\\Exception' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Exception.php',
+  'Zf2Mvc\\Router\\PriorityList' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'PriorityList.php',
+  'Zf2Mvc\\Router\\RouteMatch' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'RouteMatch.php',
+  'Zf2Mvc\\Router\\SimpleRouteStack' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'SimpleRouteStack.php',
+  'Zf2Mvc\\Router\\RouteStack' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'RouteStack.php',
+  'Zf2Mvc\\Router\\Route' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Route.php',
+  'Zf2Mvc\\Exception\\InvalidArgumentException' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Exception' . DIRECTORY_SEPARATOR . 'InvalidArgumentException.php',
+  'Zf2Mvc\\Exception\\MissingLocatorException' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Exception' . DIRECTORY_SEPARATOR . 'MissingLocatorException.php',
+  'Zf2Mvc\\Exception' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Exception.php',
+  'Zf2Mvc\\Controller\\ActionController' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'ActionController.php',
+  'Zf2Mvc\\Controller\\RestfulController' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'RestfulController.php',
+  'Zf2Mvc\\AppContext' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'AppContext.php',
+);

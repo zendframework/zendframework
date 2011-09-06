@@ -24,6 +24,7 @@
 namespace Zf2Mvc\Router;
 
 use ArrayAccess,
+    ArrayIterator,
     Traversable,
     Zend\Http\Request,
     Zend\Loader\PluginBroker;
@@ -203,10 +204,10 @@ class SimpleRouteStack implements RouteStack
      */
     protected function routeFromArray($specs)
     {
-        if (!is_array($options) && !$options instanceof ArrayAccess) {
+        if (!is_array($specs) && !$specs instanceof ArrayAccess) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Expected an array or ArrayAccess; received "%s"',
-                (is_object($options) ? get_class($options) : gettype($options))
+                (is_object($specs) ? get_class($specs) : gettype($specs))
             ));
         }
     

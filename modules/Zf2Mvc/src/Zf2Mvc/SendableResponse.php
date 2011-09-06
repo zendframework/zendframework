@@ -79,7 +79,7 @@ class SendableResponse
 
         $version = $this->response->getVersion();
         $code    = $this->response->getStatusCode();
-        $message = $this->response->getReason();
+        $message = $this->response->getReasonPhrase();
         $status  = sprintf('HTTP/%s %d %s', $version, $code, $message);
         header($status);
 

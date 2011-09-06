@@ -2,7 +2,8 @@
 
 namespace Zf2Mvc;
 
-use Zend\EventManager\EventCollection,
+use ArrayObject,
+    Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
     Zend\Http\Request as HttpRequest,
@@ -257,7 +258,12 @@ class Application implements AppContext
     {
         $events  = $this->events();
         $params  = compact('routeMatch');
-        $events->trigger('dispatch.pre', $this, $params);
+        $result  = $events->triggerUntil('dispatch.pre', $this, $params, function($result) {
+            return ($result instanceof Response);
+        });
+        if ($result->stopped()) {
+            return $result->last();
+        }
 
         $controllerName = $routeMatch->getParam('controller', 'not-found');
         $locator        = $this->getLocator();
@@ -276,10 +282,28 @@ class Application implements AppContext
         $request->setMetadata('route-match', $routeMatch);
         $response = $this->getResponse();
 
-        $result   = $controller->dispatch($request, $response);
+        $return   = $controller->dispatch($request, $response);
 
-        $params['__RESULT__'] =& $result;
-        $events->trigger('dispatch.post', $this, $params);
-        return $result;
+        if (!is_object($return)) {
+            if (static::isAssocArray($return)) {
+                $return = new ArrayObject($return, ArrayObject::ARRAY_AS_PROPS);
+            }
+        }
+
+        $params['__RESULT__'] = $return;
+        $result  = $events->triggerUntil('dispatch.post', $this, $params, function($result) {
+            return ($result instanceof Response);
+        });
+        if ($result->stopped()) {
+            return $result->last();
+        }
+
+        return $params['__RESULT__'];
+    }
+
+    public static function isAssocArray ($arr) 
+    {
+        return (is_array($arr) 
+                && count(array_filter(array_keys($arr),'is_string')) == count($arr));
     }
 }

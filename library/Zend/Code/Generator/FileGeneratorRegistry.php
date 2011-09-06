@@ -1,9 +1,11 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: ralphschindler
- * Date: 9/3/11
- * Time: 11:39 AM
- * To change this template use File | Settings | File Templates.
- */
- 
+
+namespace Zend\Code\Generator;
+
+class FileGeneratorRegistry
+{
+    /**
+     * @todo Complete this when Zend\Tool get's refractored as it is the only 
+     *       piece that cares if its "double reflecting" file generators
+     */
+}

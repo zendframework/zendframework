@@ -151,6 +151,25 @@ class ClassGenerator extends AbstractGenerator
         return $cg;
     }
 
+    /**
+     *
+     *
+     * @configkey name           string        [required] Class Name
+     * @configkey filegenerator  FileGenerator File generator that holds this class
+     * @configkey namespacename  string        The namespace for this class
+     * @configkey docblock       string        The docblock information
+     * @configkey flags          int           Flags, one of ClassGenerator::FLAG_ABSTRACT ClassGenerator::FLAG_FINAL
+     * @configkey extendedclass  string        Class which this class is extending
+     * @configkey implementedinterfaces 
+     * @configkey properties
+     * @configkey methods
+     *
+     *
+     * @static
+     * @throws Exception\InvalidArgumentException
+     * @param array $array
+     * @return ClassGenerator
+     */
     public static function fromArray(array $array)
     {
         if (!isset($array['name'])) {
@@ -158,23 +177,24 @@ class ClassGenerator extends AbstractGenerator
         }
         $cg = new static($array['name']);
         foreach ($array as $name => $value) {
-            switch ($name) {
-                case 'containingFile':
+            // normalize key
+            switch (strtolower(str_replace(array('.', '-', '_'), '', $name))) {
+                case 'containingfile':
                     $cg->setContainingFileGenerator($value);
                     break;
-                case 'namespaceName':
+                case 'namespacename':
                     $cg->setNamespaceName($value);
                     break;
                 case 'docblock':
                     $cg->setDocblock((!$value instanceof DocblockGenerator) ?: DocblockGenerator::fromArray($value));
                     break;
-                case 'flag':
+                case 'flags':
                     $cg->setFlags($value);
                     break;
-                case 'extendedClass':
+                case 'extendedclass':
                     $cg->setExtendedClass($value);
                     break;
-                case 'implementedInterfaces':
+                case 'implementedinterfaces':
                     $cg->setImplementedInterfaces($value);
                     break;
                 case 'properties':
@@ -187,8 +207,6 @@ class ClassGenerator extends AbstractGenerator
                         $cg->setMethod((!$mValue instanceof MethodGenerator) ?: MethodGenerator::fromArray($mValue));
                     }
                     break;
-                    
-
             }
         }
         return $cg;
@@ -292,8 +310,9 @@ class ClassGenerator extends AbstractGenerator
      * @param \Zend\Code\GeneratorDocblock|array|string $docblock
      * @return \FileGenerator\Code\Generator\PhpFile
      */
-    public function setDocblock($docblock)
+    public function setDocblock(DocblockGenerator $docblock)
     {
+        /*
         if (is_string($docblock)) {
             $docblock = array('shortDescription' => $docblock);
         }
@@ -303,6 +322,7 @@ class ClassGenerator extends AbstractGenerator
         } elseif (!$docblock instanceof DocblockGenerator) {
             throw new Exception\InvalidArgumentException('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }
+        */
 
         $this->docblock = $docblock;
         return $this;
@@ -391,7 +411,7 @@ class ClassGenerator extends AbstractGenerator
      * setExtendedClass()
      *
      * @param string $extendedClass
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @return ClassGenerator
      */
     public function setExtendedClass($extendedClass)
     {
@@ -413,7 +433,7 @@ class ClassGenerator extends AbstractGenerator
      * setImplementedInterfaces()
      *
      * @param array $implementedInterfaces
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @return ClassGenerator
      */
     public function setImplementedInterfaces(array $implementedInterfaces)
     {
@@ -449,8 +469,8 @@ class ClassGenerator extends AbstractGenerator
     /**
      * setProperty()
      *
-     * @param array|\PropertyGenerator\Code\Generator\PhpProperty $property
-     * @return \ClassGenerator\Code\Generator\PhpClass
+     * @param PropertyGenerator $property
+     * @return ClassGenerator
      */
     public function setProperty(PropertyGenerator $property)
     {

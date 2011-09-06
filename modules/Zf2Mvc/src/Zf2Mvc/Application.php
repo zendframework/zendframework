@@ -207,10 +207,12 @@ class Application implements AppContext
         $result     = $this->dispatch($routeMatch);
 
         if ($result instanceof Response) {
-            return $result;
+            $response = $result;
+        } else {
+            $response = $this->getResponse();
         }
-
-        return $this->getResponse();
+        $response = new SendableResponse($response);
+        return $response;
     }
 
     /**

@@ -140,3 +140,97 @@ Finally, our DI configuration needs to know about the controller.
 
 Once these are in place, when navigating to the url "/hello", we'll now execute
 our controller's `dispatch()` method.
+
+While this approach is portable and allows you to handle any request, we doubt
+you'll want to write `dispatch()` logic for each and every controller you write,
+much less each and every action. As such, this module also includes two base
+controllers you can extend, the `ActionController` and the `RestfulController`.
+
+h3. The ActionController
+
+`Zf2Mvc\Controller\ActionController` is very similar to `Zend_Controller_Action`
+in the Zend Framework 1.X series. It checks for a matched "action" token in the
+returned array from a router, and then maps this to a corresponding "Action" 
+method. As some examples:
+
+* Action "foo" maps to method "fooAction"
+* Action "foo-bar" maps to method "fooBarAction"
+* Action "bar.baz" maps to method "barBazAction"
+* Action "baz\_.bat" maps to method "bazBatAction"
+
+As you can see, the simple rule is that "-", ".", and "\_" all become word 
+separators, and the individual words are camelCased and appended with the word
+"Action".
+
+The "action" token is something your route will discover. For instance given a 
+standard route of:
+
+    /:controller/:action
+
+and the invoked URL:
+
+    /foo/bar
+
+the assumption is that the controller name is "foo" and will map to a 
+Dispatchable class, and the action name is "bar". These values are returned by
+the router as members of an instance of `Zf2Mvc\Router\RouteMatch`. That class
+allows you to pull such members using the method `getParam()`, which also 
+allows you to specify a default value to return if the parameter is not found.
+
+    $action = $routeMatch->getParam('action', false);
+    if (!$action) {
+        // No action found!
+        // ...
+    }
+
+Two special actions are defined by default, "index" and "not-found". The former
+is used whenever an ActionController is invoked without an "action" parameter
+in the route match. The latter is invoked if the discovered action does not map
+to an existing method in the controller. 
+
+Normal development using an `ActionController` is very straight-forward: you 
+identify needed functionality, and simply create an action method for that
+endpoint. As an example, let's return to the "/foo/bar" URL from earlier:
+
+    namespace SomeModule\Controller;
+
+    use Zf2Mvc\Controller\ActionController;
+
+    class FooController extends ActionController
+    {
+        public function barAction()
+        {
+            // do some stuff
+        }
+    }
+
+It is up to you as a developer what you will return from an action method. We
+suggest returning either an associative array, or a value object of some kind.
+This can then easily be passed to some sort of renderer during the execution
+chain in order to generate a response payload.
+
+Alternately, you could return a response object from your method. This allows
+you to essentially return as early as possible from execution.
+
+h3. RestfulController
+
+`Zf2Mvc\Controller\RestfulController` is a somewhat naive interpretation of the
+REST paradigm. It operates primarily as a CRUD (Create-Read-Update-Delete)-style
+controller, but uses HTTP verbs in order to determine what to do.
+
+*   GET can return either a list of resources, or a single resource.
+    * With no identifier provided, a list of resources is returned.
+    * With an identifier provided -- perhaps by the query string, potentially
+        via routing -- a single resource is returned.
+*   POST creates a new resource. Ideally, you will return it, as well as a
+    Location header indicating the new URI to the resource, and a 201 HTTP 
+    response code.
+*   PUT requires an identifier, and uses the data provided to update the
+    specified resource, assuming it exists.
+*   DELETE requires an identifier, and should delete the given resource; 
+    typically, a 204 response code should be returned.
+
+Additionally, you can define "action" methods like you would with a standard
+`ActionController`. If an "action" token is found in the route match, it will
+look for a matching action method and execute it, or a "not-found" action if 
+no match exists.

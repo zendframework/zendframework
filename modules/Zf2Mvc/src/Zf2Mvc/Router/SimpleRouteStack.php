@@ -69,7 +69,7 @@ class SimpleRouteStack implements RouteStack
         
         if ($this->pluginBroker === null) {
             $this->pluginBroker = new PluginBroker(array(
-                'auto_register_plugins' => false
+                'register_plugins_on_load' => false
             ));            
         }
         

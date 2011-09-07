@@ -421,13 +421,13 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('baz', $application->getOption('foo'));
     }
-    
+
     /**
      * @group ZF-10898
      */
     public function testPassingStringIniDistfileConfigPathOptionToConstructorShouldLoadOptions()
     {
-        $application = new Application\Application('testing', dirname(__FILE__) . '/_files/appconfig.ini.dist');
+        $application = new Application\Application('testing', __DIR__ . '/_files/appconfig.ini.dist');
         $this->assertTrue($application->hasOption('foo'));
     }
 
@@ -436,8 +436,35 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingArrayOptionsWithConfigKeyDistfileShouldLoadOptions()
     {
-        $application = new Application\Application('testing', array('bar' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.ini.dist'));
+        $application = new Application\Application('testing', array('bar' => 'baz', 'config' => __DIR__ . '/_files/appconfig.ini.dist'));
         $this->assertTrue($application->hasOption('foo'));
         $this->assertTrue($application->hasOption('bar'));
+    }
+
+    /**
+     * @group ZF-10568
+     */
+    public function testPassingStringYamlConfigPathOptionToConstructorShouldLoadOptions()
+    {
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.yaml');
+        $this->assertTrue($application->hasOption('foo'));
+    }
+
+    /**
+     * @group ZF-10568
+     */
+    public function testPassingStringJsonConfigPathOptionToConstructorShouldLoadOptions()
+    {
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.json');
+        $this->assertTrue($application->hasOption('foo'));
+    }
+
+    /**
+     * @group ZF-11425
+     */
+    public function testPassingStringYmlConfigPathOptionToConstructorShouldLoadOptionsAsYaml()
+    {
+        $application = new Application\Application('testing', __DIR__ . '/TestAsset/appconfig.yml');
+        $this->assertTrue($application->hasOption('foo'));
     }
 }

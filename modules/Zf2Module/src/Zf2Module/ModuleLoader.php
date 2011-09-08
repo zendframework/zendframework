@@ -93,5 +93,4 @@ class ModuleLoader implements ModuleResolver
         $path .= DIRECTORY_SEPARATOR;
         return $path;
     }
-
 }

@@ -40,7 +40,7 @@ class ModuleLoader implements ModuleResolver
     public function registerPath($path)
     {
         if (!is_string($path)) {
-            throw new Exception(sprintf(
+            throw new \Exception(sprintf(
                 'Invalid path provided; must be a string, received %s',
                 gettype($path)
             ));
@@ -74,7 +74,7 @@ class ModuleLoader implements ModuleResolver
                 return $moduleName . '\Information';
             }
         }
-        throw new Exception(sprintf(
+        throw new \Exception(sprintf(
             'Unable to load module \'%s\' from module path (%s)',
             $moduleName, implode(':', $this->paths)
         ));

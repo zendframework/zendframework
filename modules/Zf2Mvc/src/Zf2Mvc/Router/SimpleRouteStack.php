@@ -253,12 +253,15 @@ class SimpleRouteStack implements RouteStack
     {
         if (!isset($options['name'])) {
             throw new Exception\InvalidArgumentException('Missing "name" option');
-        } elseif (null === ($route = $this->route->get($options['name']))) {
+        } 
+
+        $route = $this->routes->get($options['name']);
+        if (!$route) {
             throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
         }
         
         unset($options['name']);
-        
+
         return $route->assemble($params, $options);
     }
 }

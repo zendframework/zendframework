@@ -25,7 +25,8 @@ use Zend\Loader\Autoloader,
     Zend\Application\Resource\Mail as MailResource,
     Zend\Application,
     Zend\Controller\Front as FrontController,
-    Zend\Mail\Mail;
+    Zend\Mail\Mail,
+    ZendTest\Application\Resource\TestAsset\CustomMailTranSPorT;
 
 /**
  * @category   Zend
@@ -35,7 +36,7 @@ use Zend\Loader\Autoloader,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Application
  */
-class MailResourceTest extends \PHPUnit_Framework_TestCase
+class MailTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -47,14 +48,11 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        Mail::clearDefaultTransport();
     }
 
     public function testInitializationInitializesMailObject()
     {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
         $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array('transport' => array('type' => 'sendmail')));
@@ -65,11 +63,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
 
     public function testInitializationReturnsMailObject()
     {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions(array('transport' => array('type' => 'sendmail')));
@@ -80,11 +73,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionsPassedToResourceAreUsedToInitializeMailTransportSmtp()
     {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         // If host option isn't passed on, an exception is thrown, making this text effective
         $options = array('transport' => array('type' => 'smtp',
                                               'host' => 'example.com',
@@ -99,11 +87,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
 
     public function testNotRegisteringTransport()
     {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         // If host option isn't passed on, an exception is thrown, making this test effective
         $options = array('transport' => array('type' => 'sendmail',
                                               'register' => false));
@@ -117,11 +100,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultFromAndReplyTo()
     {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         $options = array('defaultfrom'    => array('email' => 'foo@example.com',
                                                    'name' => 'Foo Bar'),
                          'defaultreplyto' => array('email' => 'john@example.com',
@@ -140,11 +118,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
      * Got notice: Undefined index:  type
      */
     public function testDefaultTransport() {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         $options = array('transport' => array(//'type' => 'sendmail', // dont define type
                                               'register' => true));
         $resource = new MailResource(array());
@@ -159,11 +132,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
     * @group ZF-8811
     */
     public function testDefaultsCaseSensivity() {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         $options = array('defaultFroM'    => array('email' => 'f00@example.com', 'name' => null),
                          'defAultReplyTo' => array('email' => 'j0hn@example.com', 'name' => null));
         $resource = new MailResource(array());
@@ -180,11 +148,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
      * @group ZF-8981
      */
     public function testNumericRegisterDirectiveIsPassedOnCorrectly() {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         $options = array('transport' => array('type' => 'sendmail',
                                               'register' => '1')); // Culprit
         $resource = new MailResource(array());
@@ -200,11 +163,6 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
      */
     public function testCustomMailTransportWithFQName()
     {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
         $options = array('transport' => array('type' => 'Zend\Mail\Transport\Sendmail'));
         $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
@@ -216,20 +174,13 @@ class MailResourceTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-9136
      */
-    public function testCustomMailTransportWithWrontCasesAsShouldBe()
+    public function testCustomMailTransportWithWrongCasesAsShouldBe()
     {
-        $this->markTestSkipped(
-              'MailResource has fatal error - skip this tets for now.'
-            );
-        return;
-
-        // Have to add an autoloader for ZendTest so that loadClass() can find it.
-        $this->autoloader->unshiftAutoloader('ZendTest_Autoloader', 'ZendTest');
-        $options = array('transport' => array('type' => 'ZendTest\\Application\\Resource\\mailTestCAsE'));
+        $options = array('transport' => array('type' => 'ZendTest\Application\Resource\TestAsset\CustomMailTranSPorT'));
         $resource = new MailResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->setOptions($options);
 
-        $this->assertTrue($resource->init() instanceof mailTestCAsE);
+        $this->assertTrue($resource->init() instanceof CustomMailTranSPorT);
     }
 }

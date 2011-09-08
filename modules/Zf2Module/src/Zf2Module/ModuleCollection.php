@@ -65,7 +65,11 @@ class ModuleCollection
     {
         if (!isset($this->modules[$moduleName])) {
             $infoClass = $this->getLoader()->load($moduleName);
-            $this->modules[$moduleName] = new $infoClass;
+            $module = new $infoClass;
+            if (is_callable(array($module, 'init'))) {
+                $module->init();
+            }
+            $this->modules[$moduleName] = $module;
         }
         return $this->modules[$moduleName];
     }
@@ -86,5 +90,23 @@ class ModuleCollection
         }
         $config->setReadOnly();
         return $config;
+    }
+
+    /**
+     * fromConfig 
+     * Convenience method
+     * 
+     * @param Config $config 
+     * @return ModuleCollection
+     */
+    public static function fromConfig(Config $config)
+    {
+        if (!isset($config->modulesPath) || !isset($config->modules)) {
+
+        }
+        $moduleCollection = new static; 
+        $moduleCollection->getLoader()->registerPaths($config->modulePaths->toArray());
+        $moduleCollection->loadModules($config->modules->toArray());
+        return $moduleCollection;
     }
 }

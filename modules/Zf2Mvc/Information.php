@@ -2,6 +2,8 @@
 
 namespace Zf2Mvc;
 
+use Zend\Loader\AutoLoaderFactory;
+
 /**
  * Class detailing metadata about this module
  *
@@ -9,4 +11,17 @@ namespace Zf2Mvc;
  */
 class Information
 {
+    public function init()
+    {
+        $this->initAutoloader();
+    }
+
+    protected function initAutoloader()
+    {
+        AutoloaderFactory::factory(array(
+            'Zend\Loader\ClassMapAutoloader' => array(
+                __DIR__ . '/classmap.php',
+            )
+        ));
+    }
 }

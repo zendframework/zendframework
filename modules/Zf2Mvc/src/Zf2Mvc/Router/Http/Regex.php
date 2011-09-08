@@ -22,9 +22,12 @@
 /**
  * @namespace
  */
-namespace Zend\Router\Http;
+namespace Zf2Mvc\Router\Http;
 
-use Zend\Http\Request,
+use Traversable,
+    Zend\Config\Config,
+    Zend\Http\Request,
+    Zf2Mvc\Router\Exception,
     Zf2Mvc\Router\Route,
     Zf2Mvc\Router\RouteMatch;
 
@@ -44,14 +47,21 @@ class Regex implements Route
      * 
      * @var string
      */
-    protected $_regex;
+    protected $regex;
 
     /**
      * Default values
      *
      * @var array
      */
-    protected $_defaults;
+    protected $defaults;
+
+    /**
+     * Matches
+     * 
+     * @var array
+     */
+    protected $matches = array();
 
     /**
      * __construct(): defined by Route interface.
@@ -62,6 +72,23 @@ class Regex implements Route
      */
     public function __construct($options = null)
     {
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        } elseif ($options instanceof Traversable) {
+            $options = iterator_to_array($options);
+        }
+
+        if (!is_array($options)) {
+            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
+        }
+
+        if (!isset($options['regex']) || !is_string($options['regex'])) {
+            throw new Exception\InvalidArgumentException('Regex not defined nor not a string');
+        }
+        
+        $this->regex    = $options['regex'];
+        $this->defaults = isset($options['defaults']) ? $options['defaults'] : array();
+        $this->spec     = isset($options['spec']) ? $options['spec'] : "%s";
     }
 
     /**
@@ -77,17 +104,24 @@ class Regex implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->_regex . ')i', $path, $match, null, $pathOffset);
+            $result = preg_match('#\G' . $this->regex . '#i', $path, $match, null, $pathOffset);
         } else {
-            $result = preg_match('(^' . $this->_regex . '$)i', $path, $match);
+            $result = preg_match('#^' . $this->regex . '$#i', $path, $match);
         }
 
-        if ($result === null) {
+        if (!$result) {
             return null;
         }
 
-        // @todo: examine $match
-        return $this->_defaults;
+        foreach ($match as $key => $value) {
+            if (is_numeric($key) || is_int($key)) {
+                unset($match[$key]);
+            }
+        }
+
+        $matches       = array_merge($this->defaults, $match);
+        $this->matches = $matches;
+        return new RouteMatch($matches, $this);
     }
 
     /**
@@ -100,6 +134,9 @@ class Regex implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        // @todo: implement this
+        $params  = (array) $params;
+        $values  = array_merge($this->matches, $params);
+        $escaped = array_map('urlencode', $values);
+        return vsprintf($this->spec, array_values($escaped));
     }
 }

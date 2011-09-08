@@ -85,7 +85,7 @@ class ModuleCollection
         $config = new Config(array(), true);
         foreach ($this->modules as $module) {
             if (is_callable(array($module, 'getConfig'))) {
-                $config->merge($module->getConfig());
+                $config->merge($module->getConfig(defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL));
             }
         }
         $config->setReadOnly();

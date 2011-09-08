@@ -2,10 +2,12 @@
 
 namespace Zf2Mvc\Controller;
 
-use Zend\EventManager\EventCollection,
+use ArrayObject,
+    Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Http\Response as HttpResponse,
     Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
@@ -81,7 +83,13 @@ abstract class ActionController implements Dispatchable
 
         $actionResponse = $this->$method();
 
-        $params['__RESULT__'] =& $actionResponse;
+        if (!is_object($actionResponse)) {
+            if (IsAssocArray::test($actionResponse)) {
+                $actionResponse = new ArrayObject($actionResponse, ArrayObject::ARRAY_AS_PROPS);
+            }
+        }
+
+        $params['__RESULT__'] = $actionResponse;
         $result = $events->triggerUntil('dispatch.post', $this, $params, function($test) {
             return ($test instanceof Response);
         });

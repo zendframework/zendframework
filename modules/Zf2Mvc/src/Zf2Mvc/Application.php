@@ -10,6 +10,7 @@ use ArrayObject,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\Parameters,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
@@ -314,7 +315,7 @@ class Application implements AppContext
         complete:
 
         if (!is_object($return)) {
-            if (static::isAssocArray($return)) {
+            if (IsAssocArray::test($return)) {
                 $return = new ArrayObject($return, ArrayObject::ARRAY_AS_PROPS);
             }
         }
@@ -328,11 +329,5 @@ class Application implements AppContext
         }
 
         return $params['__RESULT__'];
-    }
-
-    public static function isAssocArray ($arr) 
-    {
-        return (is_array($arr) 
-                && count(array_filter(array_keys($arr),'is_string')) == count($arr));
     }
 }

@@ -3,6 +3,7 @@
 namespace Zf2Mvc;
 
 use ArrayObject,
+    Zend\Di\Exception\ClassNotFoundException,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
@@ -23,6 +24,9 @@ use ArrayObject,
  */
 class Application implements AppContext
 {
+    const ERROR_CONTROLLER_NOT_FOUND = 404;
+    const ERROR_CONTROLLER_INVALID   = 500;
+
     protected $events;
     protected $locator;
     protected $request;
@@ -192,7 +196,7 @@ class Application implements AppContext
     /**
      * Run the application
      * 
-     * @events route.pre, route.post, dispatch.pre, dispatch.post
+     * @events route.pre, route.post, dispatch.pre, dispatch.post, dispatch.error
      * @return Response
      */
     public function run()
@@ -250,7 +254,7 @@ class Application implements AppContext
     /**
      * Dispatch the matched route
      * 
-     * @events dispatch.pre, dispatch.post
+     * @events dispatch.pre, dispatch.post, dispatch.error
      * @param  Router\RouteMatch $routeMatch 
      * @return mixed
      */
@@ -267,15 +271,38 @@ class Application implements AppContext
 
         $controllerName = $routeMatch->getParam('controller', 'not-found');
         $locator        = $this->getLocator();
-        $controller     = $locator->get($controllerName);
+
+        try {
+            $controller = $locator->get($controllerName);
+        } catch (ClassNotFoundException $e) {
+            $errorParams = array(
+                'error'       => static::ERROR_CONTROLLER_NOT_FOUND,
+                'controller'  => $controllerName,
+                'route-match' => $routeMatch,
+            );
+            $results = $events->trigger('dispatch.error', $this, $errorParams);
+            if (count($results)) {
+                $return  = $results->last();
+            } else {
+                $return = $errorParams;
+            }
+            goto complete;
+        }
 
         if (!$controller instanceof Dispatchable) {
-            /**
-             * @todo handle undispatchable controller
-             *
-             * This might be something to handle via an event?
-             */
-            throw new \Exception('UNIMPLEMENTED: Handling not-found controller');
+            $errorParams = array(
+                'error'            => static::ERROR_CONTROLLER_INVALID,
+                'controller'       => $controllerName,
+                'controller-class' => get_class($controller),
+                'route-match'      => $routeMatch,
+            );
+            $results = $events->trigger('dispatch.error', $this, $errorParams);
+            if (count($results)) {
+                $return  = $results->last();
+            } else {
+                $return = $errorParams;
+            }
+            goto complete;
         }
 
         $request  = $this->getRequest();
@@ -283,6 +310,8 @@ class Application implements AppContext
         $response = $this->getResponse();
 
         $return   = $controller->dispatch($request, $response);
+
+        complete:
 
         if (!is_object($return)) {
             if (static::isAssocArray($return)) {

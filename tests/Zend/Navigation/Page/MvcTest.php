@@ -149,12 +149,12 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->_front->getRequest()->setParams(array(
-            'module' => 'default',
+            'module' => 'application',
             'controller' => 'index',
             'action' => 'index'
         ));
 
-        $this->assertEquals(true, $page->isActive());
+        $this->assertTrue($page->isActive());
     }
 
     public function testIsActiveReturnsFalseOnDifferentModuleControllerAction()
@@ -171,7 +171,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'action' => 'index'
         ));
 
-        $this->assertEquals(false, $page->isActive());
+        $this->assertFalse($page->isActive());
     }
 
     public function testIsActiveReturnsTrueOnIdenticalIncludingPageParams()
@@ -193,7 +193,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'id' => '1337'
         ));
 
-        $this->assertEquals(true, $page->isActive());
+        $this->assertTrue($page->isActive());
     }
 
     public function testIsActiveReturnsTrueWhenRequestHasMoreParams()
@@ -212,7 +212,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'id' => '1337'
         ));
 
-        $this->assertEquals(true, $page->isActive());
+        $this->assertTrue($page->isActive());
     }
 
     public function testIsActiveReturnsFalseWhenRequestHasLessParams()
@@ -234,7 +234,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'id' => null
         ));
 
-        $this->assertEquals(false, $page->isActive());
+        $this->assertFalse($page->isActive());
     }
 
     public function testActionAndControllerAccessors()

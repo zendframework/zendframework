@@ -25,7 +25,8 @@ use Zend\Loader\Autoloader,
     Zend\Application,
     Zend\Application\Resource\Navigation as NavigationResource,
     Zend\Registry,
-    Zend\Navigation\Page as NavigationPage;
+    Zend\Navigation\AbstractPage as NavigationPage,
+    Zend\Navigation\Page\Mvc as MvcPage;
 
 /**
  * @category   Zend
@@ -40,8 +41,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->application = new Application\Application('testing');
-
         $this->bootstrap = new Application\Bootstrap($this->application);
+        $this->broker = $this->bootstrap->getBroker();
 
         Registry::_unsetInstance();
     }
@@ -52,54 +53,48 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
 
     public function testInitializationInitializesNavigationObject()
     {
-        $this->markTestSkipped('NavigationResource has fatal error - skip this test now.');
-        return;
-        $this->bootstrap->registerPluginResource('view');
+        $this->broker->registerSpec('view');
         $resource = new NavigationResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $this->assertTrue($resource->getContainer() instanceof \Zend\Navigation\Container);
-        $this->bootstrap->unregisterPluginResource('view');
+        $this->broker->unregisterSpec('view');
     }
 
     public function testInitializationReturnsNavigationObject()
     {
-        $this->markTestSkipped('NavigationResource has fatal error - skip this test now.');
-        return;
-        $this->bootstrap->registerPluginResource('view');
+        $this->broker->registerSpec('view');
         $resource = new NavigationResource(array());
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
         $this->assertTrue($test instanceof \Zend\Navigation\Navigation);
-        $this->bootstrap->unregisterPluginResource('view');
+        $this->broker->unregisterSpec('view');
     }
 
     public function testContainerIsStoredInViewhelper()
     {
-        $this->markTestSkipped('NavigationResource has fatal error - skip this test now.');
-        return;
-
-           $options = array('pages'=> array(new NavigationPage\Mvc(array(
+        $options = array('pages'=> array(new MvcPage(array(
             'action'     => 'index',
-            'controller' => 'index'))));
+            'controller' => 'index'
+        ))));
 
-        $this->bootstrap->registerPluginResource('view');
+        $this->broker->registerSpec('view');
         $resource = new NavigationResource($options);
         $resource->setBootstrap($this->bootstrap)->init();
 
-        $view = $this->bootstrap->getBroker()->getPlugin('view')->getView();
-        $number = $view->getHelper('navigation')->getContainer()->count();
+        $view = $this->bootstrap->getResource('view');
+        $number = $view->broker('navigation')->getContainer()->count();
 
         $this->assertEquals($number,1);
-        $this->bootstrap->unregisterPluginResource('view');
+        $this->broker->unregisterSpec('view');
     }
 
     public function testContainerIsStoredInRegistry()
     {
-
-           $options = array('pages'=> array(new NavigationPage\Mvc(array(
+        $options = array('pages'=> array(new MvcPage(array(
             'action'     => 'index',
-            'controller' => 'index'))), 'storage' => array('registry' => true));
+            'controller' => 'index')
+        )), 'storage' => array('registry' => true));
 
         $resource = new NavigationResource($options);
         $resource->setBootstrap($this->bootstrap)->init();
@@ -117,11 +112,8 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     public function testViewMethodIsUsedWhenAvailableInsteadOfResourcePlugin()
     {
-        $this->markTestSkipped('NavigationResource has fatal error - skip this test now.');
-        return;
-
         $bootstrap = new TestAsset\ZfAppBootstrapCustomView($this->application);
-        $bootstrap->registerPluginResource('view');
+        $this->broker->registerSpec('view');
         $view = $bootstrap->bootstrap('view')->view;
 
         $this->assertEquals($view->setInMethodByTest,true);
@@ -132,15 +124,12 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegistryIsUsedWhenNumericRegistryValueIsGiven()
     {
-        $this->markTestSkipped('NavigationResource has fatal error - skip this test now.');
-        return;
-
         // Register view for cases where registry should/is not (be) used
-        $this->bootstrap->registerPluginResource('view');
-        $this->bootstrap->getBroker()->getPlugin('view')->getView();
+        $this->broker->registerSpec('view');
+        $this->bootstrap->getResource('view');
 
         $options1 = array(
-            'pages'=> array(new NavigationPage\Mvc(array(
+            'pages'=> array(new MvcPage(array(
                 'action'     => 'index',
                 'controller' => 'index'))
             ),
@@ -162,7 +151,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
             Registry::set($key,null);
         }
 
-        $this->assertEquals(array(true,true,true,false),$results);
-        $this->bootstrap->unregisterPluginResource('view');
+        $this->assertEquals(array(true, true, true, false), $results);
+        $this->broker->unregisterSpec('view');
     }
 }

@@ -108,6 +108,38 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/lolcat/myaction/1337', $page->getHref());
     }
 
+    /**
+     * @group ZF-8922
+     */
+    public function testGetHrefWithFragmentIdentifier()
+    {
+        $page = new Page\Mvc(array(
+            'label'              => 'foo',
+            'fragmentIdentifier' => 'qux',
+            'controller'         => 'mycontroller',
+            'action'             => 'myaction',
+            'route'              => 'myroute',
+            'params'             => array(
+                'page' => 1337
+            )
+        ));
+ 
+        $this->_front->getRouter()->addRoute(
+            'myroute',
+            new \Zend\Controller\Router\Route\Route(
+                'lolcat/:action/:page',
+                array(
+                    'module'     => 'default',
+                    'controller' => 'foobar',
+                    'action'     => 'bazbat',
+                    'page'       => 1
+                )
+            )
+        );
+ 
+        $this->assertEquals('/lolcat/myaction/1337#qux', $page->getHref());
+    }
+
     public function testIsActiveReturnsTrueOnIdenticalModuleControllerAction()
     {
         $page = new Page\Mvc(array(
@@ -324,6 +356,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'action' => 'index',
             'controller' => 'index',
             'module' => 'test',
+            'fragmentIdentifier' => 'bar',
             'id' => 'my-id',
             'class' => 'my-class',
             'title' => 'my-title',

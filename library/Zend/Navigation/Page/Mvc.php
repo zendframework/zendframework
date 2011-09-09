@@ -195,6 +195,12 @@ class Mvc extends AbstractPage
                                       $this->getRoute(),
                                       $this->getResetParams());
 
+        // Add the fragment identifier if it is set
+        $fragmentIdentifier = $this->getFragmentIdentifier();       
+        if (null !== $fragmentIdentifier) {
+            $url .= '#' . $fragmentIdentifier;
+        } 
+
         return $this->_hrefCache = $url;
     }
 

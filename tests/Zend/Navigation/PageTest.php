@@ -168,6 +168,35 @@ class PageTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @group ZF-8922
+     */
+    public function testSetAndGetFragmentIdentifier()
+    {
+        $page = AbstractPage::factory(array(
+            'uri'                => '#',
+            'fragmentIdentifier' => 'foo',
+        ));
+        
+        $this->assertEquals('foo', $page->getFragmentIdentifier());
+        
+        $page->setFragmentIdentifier('bar');
+        $this->assertEquals('bar', $page->getFragmentIdentifier());
+        
+        $invalids = array(42, (object) null);
+        foreach ($invalids as $invalid) {
+            try {
+                $page->setFragmentIdentifier($invalid);
+                $this->fail('An invalid value was set, but a ' .
+                            'Zend_Navigation_Exception was not thrown');
+            } catch (Navigation\Exception\InvalidArgumentException $e) {
+                $this->assertContains(
+                    'Invalid argument: $fragmentIdentifier', $e->getMessage()
+                );
+            }
+        }
+    }
+
     public function testSetAndGetId()
     {
         $page = AbstractPage::factory(array(
@@ -1099,7 +1128,8 @@ class PageTest extends \PHPUnit_Framework_TestCase
     {
         $options = array(
             'label'    => 'foo',
-            'uri'      => '#',
+            'uri'      => 'http://www.example.com/foo.html',
+            'fragmentIdentifier' => 'bar',
             'id'       => 'my-id',
             'class'    => 'my-class',
             'title'    => 'my-title',
@@ -1119,11 +1149,11 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'pages'    => array(
                 array(
                     'label' => 'foo.bar',
-                    'uri'   => '#'
+                    'uri'   => 'http://www.example.com/foo.html'
                 ),
                 array(
                     'label' => 'foo.baz',
-                    'uri'   => '#'
+                    'uri'   => 'http://www.example.com/foo.html'
                 )
             )
         );
@@ -1145,6 +1175,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
         // tweak options to what we expect sub page 1 to be
         $options['label'] = 'foo.bar';
+        $options['fragmentIdentifier'] = null;
         $options['order'] = null;
         $options['id'] = null;
         $options['class'] = null;

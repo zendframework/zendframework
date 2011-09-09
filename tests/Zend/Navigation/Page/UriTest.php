@@ -104,4 +104,22 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($uri, $page->getHref());
     }
+
+    /**
+     * @group ZF-8922
+     */
+    public function testGetHrefWithFragmentIdentifier()
+    {
+        $uri = 'http://www.example.com/foo.html';
+        
+        $page = new Page\Uri();
+        $page->setUri($uri);
+        $page->setFragmentIdentifier('bar');
+        
+        $this->assertEquals($uri . '#bar', $page->getHref());
+        
+        $page->setUri('#');
+        
+        $this->assertEquals('#bar', $page->getHref());
+    }
 }

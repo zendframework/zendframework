@@ -62,15 +62,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $message->setMetadata(array('Foo' => 'bar', 'One' => 'Two'));
         $message->setContent('This is my content');
         $expected = "Foo: bar\r\nOne: Two\r\n\r\nThis is my content";
-        $this->assertEquals($expected, $message->__toString());
+        $this->assertEquals($expected, $message->toString());
     }
-    
-    public function testMessageThrowsExceptionOnFromString()
-    {
-        $message = new Message();
-        
-        $this->setExpectedException('Zend\Stdlib\Exception\DomainException');
-        $message->fromString('some string');
-    }
-    
 }

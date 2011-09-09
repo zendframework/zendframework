@@ -22,7 +22,9 @@
  * @namespace
  */
 namespace Zend\Filter;
-use Zend\Locale\Locale;
+
+use Zend\Locale\Locale,
+    Zend\Registry;
 
 /**
  * @uses       Zend\Filter\AbstractFilter
@@ -86,8 +88,8 @@ class Alnum extends AbstractFilter
         }
 
         if (null === self::$_meansEnglishAlphabet) {
-            if (\Zend\Registry::isRegistered('Zend_Locale')) {
-                $this->_locale = \Zend\Registry::get('Zend_Locale');
+            if (Registry::isRegistered('Zend_Locale')) {
+                $this->_locale = Registry::get('Zend_Locale');
             } else {
         	    $this->_locale = new Locale('auto');
             }

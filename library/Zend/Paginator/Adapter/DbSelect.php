@@ -189,8 +189,10 @@ class DbSelect implements Adapter
          */
         if (!empty($unionParts)) {
             $expression = new Db\Expr($countPart . $countColumn);
-
-            $rowCount = $db->select()->from($rowCount, $expression);
+            $rowCount = $db
+                            ->select()
+                            ->bind($rowCount->getBind())
+                            ->from($rowCount, $expression);
         } else {
             $columnParts = $rowCount->getPart(Select::COLUMNS);
             $groupParts  = $rowCount->getPart(Select::GROUP);

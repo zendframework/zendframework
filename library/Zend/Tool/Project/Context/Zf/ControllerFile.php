@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
+
 use Zend\CodeGenerator\Php;
 
 /**
@@ -148,7 +149,7 @@ switch ($errors->type) {
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ACTION:
         // 404 error -- controller or action not found
         $this->getResponse()->setHttpResponseCode(404);
-	$priority = \Zend\Log\Logger::NOTICE;
+        $priority = \Zend\Log\Logger::NOTICE;
         $this->view->vars()->message = 'Page not found';
         break;
     default:

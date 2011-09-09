@@ -2,7 +2,9 @@
 
 namespace Zf2Module;
 
-use Zend\Config\Config;
+use Zend\Config\Config,
+    Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManager;
 
 class ModuleCollection
 {
@@ -15,6 +17,11 @@ class ModuleCollection
      * @var array An array of Module classes of loaded modules
      */
     protected $modules = array();
+
+    /**
+     * @var EventCollection
+     */
+    protected $events;
 
     /**
      * getLoader 
@@ -52,6 +59,7 @@ class ModuleCollection
         foreach ($modules as $moduleName) {
             $this->loadModule($moduleName);
         }
+        $this->events()->trigger('init.post', $this);
         return $this->modules;
     }
 
@@ -108,5 +116,32 @@ class ModuleCollection
         $moduleCollection->getLoader()->registerPaths($config->modulePaths->toArray());
         $moduleCollection->loadModules($config->modules->toArray());
         return $moduleCollection;
+    }
+
+    /**
+     * Set the event manager instance used by this context
+     * 
+     * @param  EventCollection $events 
+     * @return ModuleCollection
+     */
+    public function setEventManager(EventCollection $events)
+    {
+        $this->events = $events;
+        return $this;
+    }
+
+    /**
+     * Retrieve the event manager
+     *
+     * Lazy-loads an EventManager instance if none registered.
+     * 
+     * @return EventCollection
+     */
+    public function events()
+    {
+        if (!$this->events instanceof EventCollection) {
+            $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
+        }
+        return $this->events;
     }
 }

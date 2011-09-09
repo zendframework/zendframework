@@ -13,7 +13,7 @@ class ModuleLoader implements ModuleResolver
     protected $paths = array();
 
     /**
-     * @var array An array of Information class names of loaded modules
+     * @var array An array of Module class names of loaded modules
      */
     protected $modules = array();
 
@@ -51,8 +51,8 @@ class ModuleLoader implements ModuleResolver
 
     /**
      * Resolves and loads a module based on name, ensures that it's 
-     * Information.php file has been included/required, and returns
-     * the full class name of the module's Information class.
+     * Module.php file has been included/required, and returns
+     * the full class name of the module's Module class.
      * 
      * @param string $moduleName 
      * @return string
@@ -68,10 +68,10 @@ class ModuleLoader implements ModuleResolver
     protected function _resolveModule($moduleName)
     {
         foreach ($this->paths as $path) {
-            $file = new SplFileInfo($path . $moduleName . '/Information.php');
+            $file = new SplFileInfo($path . $moduleName . '/Module.php');
             if ($file->isReadable()) {
                 require_once $file->getRealPath();
-                return $moduleName . '\Information';
+                return $moduleName . '\Module';
             }
         }
         throw new \Exception(sprintf(

@@ -12,7 +12,7 @@ class ModuleCollection
     protected $loader;
 
     /**
-     * @var array An array of Information classes of loaded modules
+     * @var array An array of Module classes of loaded modules
      */
     protected $modules = array();
 

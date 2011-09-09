@@ -163,6 +163,7 @@ switch ($errors->type) {
 // Log exception, if logger available
 if (($log = $this->getLog())) {
     $log->log($this->view->vars()->message, $priority, $errors->exception);
+    $log->log('Request Parameters', $priority, $errors->request->getParams());
 }
 
 // conditionally display exceptions

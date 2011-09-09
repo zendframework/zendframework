@@ -22,8 +22,8 @@ interface ModuleResolver
 
     /**
      * Resolves and loads a module based on name, ensures that it's 
-     * Information.php file has been included/required, and returns
-     * the full class name of the module's Information class.
+     * Module.php file has been included/required, and returns
+     * the full class name of the module's Module class.
      * 
      * @param string $moduleName 
      * @return string

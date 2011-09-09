@@ -9,7 +9,7 @@ use Zend\Loader\AutoLoaderFactory;
  *
  * Ideas include exposing DI definitions, event handlers, configuration, etc.
  */
-class Information
+class Module
 {
     public function init()
     {

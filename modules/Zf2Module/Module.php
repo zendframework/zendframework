@@ -2,6 +2,6 @@
 
 namespace Zf2Module;
 
-class Information
+class Module
 {
 }

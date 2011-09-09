@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Zend_Form_Decorator による独自のフォームマークアップの作成</title></info>
-    
+
 
     <para>
         フォームオブジェクトのレンダリングは、完全に別の処理です。
@@ -38,7 +38,7 @@
     </para>
 
     <section xml:id="zend.form.decorators.operation"><info><title>操作方法</title></info>
-        
+
 
         <para>
             デコレータを設定するには、オプションの配列あるいは
@@ -123,7 +123,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.standard"><info><title>標準のデコレータ</title></info>
-        
+
 
         <para>
             <classname>Zend_Form</classname> には、多くのデコレータが標準で組み込まれています。
@@ -133,7 +133,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.custom"><info><title>独自のデコレータ</title></info>
-        
+
 
         <para>
             複雑なレンダリングを要したり大幅なカスタマイズが必要な場合は、
@@ -249,7 +249,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
                 . $input
                 . $errors
                 . $desc
-                . '</div>'
+                . '</div>';
 
         switch ($placement) {
             case (self::PREPEND):
@@ -337,7 +337,7 @@ class My_Decorator_Errors
     </section>
 
     <section xml:id="zend.form.decorators.individual"><info><title>個々のデコレータのレンダリング</title></info>
-        
+
 
         <para>
             デコレータは特定の要素のメタデータやフォームを対象にしてデコレートすることが可能なので、

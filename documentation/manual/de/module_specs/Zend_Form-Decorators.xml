@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title></info>
-    
+
 
     <para>
         Die Darstellung eines Form Objektes ist komplett optional --
@@ -38,7 +38,7 @@
     </para>
 
     <section xml:id="zend.form.decorators.operation"><info><title>Operationen</title></info>
-        
+
 
         <para>
             Um einen Dekorator zu konfigurieren, kann ein Array von Optionen, oder ein
@@ -132,7 +132,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.standard"><info><title>Standard Dekoratoren</title></info>
-        
+
 
         <para>
             <classname>Zend_Form</classname> wird mit vielen Standard Dekoratoren ausgeliefert;
@@ -142,7 +142,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.custom"><info><title>Eigene Dekoratoren</title></info>
-        
+
 
         <para>
             Wenn man der Meinung ist, dass die Notwendigkeiten der Darstellung sehr komplex sind,
@@ -258,7 +258,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
                 . $input
                 . $errors
                 . $desc
-                . '</div>'
+                . '</div>';
 
         switch ($placement) {
             case (self::PREPEND):
@@ -345,7 +345,7 @@ class My_Decorator_Errors
     </section>
 
     <section xml:id="zend.form.decorators.individual"><info><title>Darstellung individueller Dekoratoren</title></info>
-        
+
 
         <para>
             Da Dekoratoren verschiedene Metadaten, eines Elements oder Formulars das sie darstellen,

@@ -30,7 +30,7 @@ return array (
   'Zf2Mvc\\Router\\PriorityList' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'PriorityList.php',
   'Zf2Mvc\\Router\\SimpleRouteStack' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'SimpleRouteStack.php',
   'Zf2Mvc\\Router\\Http\\Route' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Route.php',
-  'Zend\\Router\\Http\\Regex' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Regex.php',
+  'Zf2Mvc\\Router\\Http\\Regex' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Regex.php',
   'Zf2Mvc\\Router\\Http\\TreeRouteStack' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'TreeRouteStack.php',
   'Zend\\Router\\Http\\Part' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Part.php',
   'Zf2Mvc\\Router\\Http\\Literal' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Router' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Literal.php',

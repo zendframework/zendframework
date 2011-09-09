@@ -44,7 +44,7 @@ use Zend\Navigation\AbstractPage,
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class LinksTest extends TestAbstract
+class LinksTest extends AbstractTest
 {
     /**
      * Class name for view helper to test

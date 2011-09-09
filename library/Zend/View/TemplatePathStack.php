@@ -63,7 +63,7 @@ class TemplatePathStack implements TemplateResolver
      */
     public function __construct($options = null)
     {
-        $this->useViewStream = (bool) ini_get('short_open_tag') ? false : true;
+        $this->useViewStream = (bool) ini_get('short_open_tag');
         if ($this->useViewStream) {
             if (!in_array('zend.view', stream_get_wrappers())) {
                 stream_wrapper_register('zend.view', 'Zend\View\Stream');

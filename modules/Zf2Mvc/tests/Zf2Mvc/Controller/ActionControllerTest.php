@@ -23,7 +23,7 @@ class ActionControllerTest extends TestCase
     public function testDispatchInvokesIndexActionWhenNoActionPresentInRouteMatch()
     {
         $result = $this->controller->dispatch($this->request);
-        $this->assertArrayHasKey('content', $result);
+        $this->assertTrue(isset($result['content']));
         $this->assertContains('Placeholder page', $result['content']);
     }
 
@@ -33,7 +33,7 @@ class ActionControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertArrayHasKey('content', $result);
+        $this->assertTrue(isset($result['content']));
         $this->assertContains('Page not found', $result['content']);
     }
 
@@ -41,7 +41,7 @@ class ActionControllerTest extends TestCase
     {
         $this->routeMatch->setParam('action', 'test');
         $result = $this->controller->dispatch($this->request);
-        $this->assertArrayHasKey('content', $result);
+        $this->assertTrue(isset($result['content']));
         $this->assertContains('test', $result['content']);
     }
 
@@ -49,7 +49,7 @@ class ActionControllerTest extends TestCase
     {
         $this->routeMatch->setParam('action', 'test.some-strangely_separated.words');
         $result = $this->controller->dispatch($this->request);
-        $this->assertArrayHasKey('content', $result);
+        $this->assertTrue(isset($result['content']));
         $this->assertContains('Test Some Strangely Separated Words', $result['content']);
     }
 

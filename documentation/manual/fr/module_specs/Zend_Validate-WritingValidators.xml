@@ -70,7 +70,7 @@ class MonValidateur_Float extends Zend_Validate_Abstract
         $this->_setValue($value);
 
         if (!is_float($value)) {
-            $this->_error();
+            $this->_error(self::FLOAT);
             return false;
         }
 

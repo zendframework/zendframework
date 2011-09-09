@@ -75,7 +75,7 @@ class ModuleCollection
             $infoClass = $this->getLoader()->load($moduleName);
             $module = new $infoClass;
             if (is_callable(array($module, 'init'))) {
-                $module->init();
+                $module->init($this->events());
             }
             $this->modules[$moduleName] = $module;
         }

@@ -123,7 +123,7 @@ class Mail extends AbstractResource
     		$options['type'] = 'sendmail';
     	}
 
-        $transportName = $options['type'];
+        $transportName = ucfirst($options['type']);
         if (!class_exists($options['type'])) {
             $qualifiedTransportName = 'Zend\Mail\Transport\\' . $transportName;
             if (!class_exists($qualifiedTransportName)) {

@@ -349,6 +349,54 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $page->getParams());
     }
 
+    /**
+     * @group ZF-10465
+     */
+    public function testSetAndGetEncodeUrl()
+    {
+        $page = new Page\Mvc(array(
+            'label'      => 'foo',
+            'action'     => 'index',
+            'controller' => 'index',
+        ));
+        
+        $page->setEncodeUrl(false);
+        $this->assertEquals(false, $page->getEncodeUrl());
+    }
+    
+    /**
+     * @group ZF-10465
+     */
+    public function testEncodeUrlIsRouteAware()
+    {
+        $page = new Page\Mvc(array(
+            'label'      => 'foo',
+            'route'      => 'myroute',
+            'encodeUrl'  => false,
+            'params'     => array(
+                'contentKey' => 'pagexy/subpage',
+            )
+        ));
+ 
+        $this->_front->getRouter()->addRoute(
+            'myroute',
+            new \Zend\Controller\Router\Route\Regex(
+                '(.+)\.html',
+                array(
+                    'module'     => 'default',
+                    'controller' => 'foobar',
+                    'action'     => 'bazbat',
+                ),
+                array(
+                    1 => 'contentKey'
+                ),
+                '%s.html'
+            )
+        );
+
+        $this->assertEquals('/pagexy/subpage.html', $page->getHref());
+    }
+
     public function testToArrayMethod()
     {
         $options = array(
@@ -364,6 +412,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'order' => 100,
             'active' => true,
             'visible' => false,
+            'encodeUrl'  => false,
 
             'foo' => 'bar',
             'meaning' => 42

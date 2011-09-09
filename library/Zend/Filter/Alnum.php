@@ -86,7 +86,12 @@ class Alnum extends AbstractFilter
         }
 
         if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new Locale('auto');
+            if (\Zend\Registry::isRegistered('Zend_Locale')) {
+                $this->_locale = \Zend\Registry::get('Zend_Locale');
+            } else {
+        	    $this->_locale = new Locale('auto');
+            }
+            
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
                                                     array('ja', 'ko', 'zh')
                                                     );

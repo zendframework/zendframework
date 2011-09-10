@@ -455,7 +455,7 @@ class FormErrors extends AbstractDecorator
                              .  $view->plugin('formErrors')->direct($messages, $this->getOptions())
                              .  $this->getMarkupListItemEnd();
                 }
-            } elseif ($subitem instanceof Zend\Form && !$this->ignoreSubForms()) {
+            } elseif ($subitem instanceof Form\Form && !$this->ignoreSubForms()) {
                 $content .= $this->getMarkupListStart()
                           . $this->_recurseForm($subitem, $view)
                           . $this->getMarkupListEnd();

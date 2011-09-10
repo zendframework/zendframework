@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
+
 use Zend\CodeGenerator\Php;
 
 /**
@@ -146,21 +147,23 @@ switch ($errors->type) {
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ROUTE:
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_CONTROLLER:
     case \Zend\Controller\Plugin\ErrorHandler::EXCEPTION_NO_ACTION:
-
         // 404 error -- controller or action not found
         $this->getResponse()->setHttpResponseCode(404);
+        $priority = \Zend\Log\Logger::NOTICE;
         $this->view->vars()->message = 'Page not found';
         break;
     default:
         // application error
         $this->getResponse()->setHttpResponseCode(500);
+        $priority = \Zend\Log\Logger::CRIT;
         $this->view->vars()->message = 'Application error';
         break;
 }
 
 // Log exception, if logger available
 if (($log = $this->getLog())) {
-    $log->crit($this->view->vars()->message, $errors->exception);
+    $log->log($this->view->vars()->message, $priority, $errors->exception);
+    $log->log('Request Parameters', $priority, $errors->request->getParams());
 }
 
 // conditionally display exceptions

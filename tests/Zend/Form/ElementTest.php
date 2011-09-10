@@ -657,7 +657,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         }
         $validator = $this->element->getValidator('Alnum');
         $this->assertTrue($validator instanceof \Zend\Validator\Alnum);
-        $this->assertTrue($validator->allowWhiteSpace);
+        $this->assertTrue($validator->getAllowWhiteSpace());
     }
 
     public function testCanRetrieveSingleValidatorRegisteredAsValidatorObjectUsingShortName()
@@ -1151,7 +1151,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         }
         $filter = $this->element->getFilter('Alnum');
         $this->assertTrue($filter instanceof \Zend\Filter\Alnum);
-        $this->assertTrue($filter->allowWhiteSpace);
+        $this->assertTrue($filter->getAllowWhiteSpace());
     }
 
     public function testShouldUseFilterConstructorOptionsAsPassedToAddFilter()

@@ -22,7 +22,9 @@
  * @namespace
  */
 namespace Zend\Filter;
-use Zend\Locale\Locale;
+
+use Zend\Locale\Locale,
+    Zend\Registry;
 
 /**
  * @uses       Zend\Filter\AbstractFilter
@@ -86,7 +88,12 @@ class Alpha extends AbstractFilter
         }
 
         if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new Locale('auto');
+            if (Registry::isRegistered('Zend_Locale')) {
+                $this->_locale = Registry::get('Zend_Locale');
+            } else {
+                $this->_locale = new Locale('auto');
+            }
+            
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
                                                     array('ja', 'ko', 'zh')
                                                     );

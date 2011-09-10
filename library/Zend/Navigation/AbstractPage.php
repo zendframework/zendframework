@@ -48,6 +48,20 @@ abstract class AbstractPage extends Container
     protected $_label;
 
     /**
+     * Fragment identifier (anchor identifier)
+     * 
+     * The fragment identifier (anchor identifier) pointing to an anchor within 
+     * a resource that is subordinate to another, primary resource.
+     * The fragment identifier introduced by a hash mark "#".
+     * Example: http://www.example.org/foo.html#bar ("bar" is the fragment identifier)
+     * 
+     * @link http://www.w3.org/TR/html401/intro/intro.html#fragment-uri
+     * 
+     * @var string|null
+     */
+    protected $_fragmentIdentifier;
+
+    /**
      * Page id
      *
      * @var string|null
@@ -317,6 +331,34 @@ abstract class AbstractPage extends Container
     public function getLabel()
     {
         return $this->_label;
+    }
+
+    /**
+     * Sets a fragment identifier
+     *
+     * @param  string $fragmentIdentifier   new fragment identifier
+     * @return Zend_Navigation_Page         fluent interface, returns self
+     * @throws Zend_Navigation_Exception    if empty/no string is given
+     */
+    public function setFragmentIdentifier($fragmentIdentifier)
+    {
+        if (null !== $fragmentIdentifier && !is_string($fragmentIdentifier)) {
+            throw new Exception\InvalidArgumentException(
+                    'Invalid argument: $fragmentIdentifier must be a string or null');
+        }
+ 
+        $this->_fragmentIdentifier = $fragmentIdentifier;
+        return $this;
+    }
+    
+     /**
+     * Returns fragment identifier
+     *
+     * @return string|null  fragment identifier
+     */
+    public function getFragmentIdentifier()
+    {
+        return $this->_fragmentIdentifier;
     }
 
     /**
@@ -722,6 +764,9 @@ abstract class AbstractPage extends Container
      */
     public function setVisible($visible = true)
     {
+        if (is_string($visible) && 'false' == strtolower($visible)) {
+            $visible = false;
+        }
         $this->_visible = (bool) $visible;
         return $this;
     }
@@ -1068,7 +1113,8 @@ abstract class AbstractPage extends Container
         return array_merge(
             $this->getCustomProperties(),
             array(
-                'label'     => $this->getlabel(),
+                'label'     => $this->getLabel(),
+                'fragmentIdentifier' => $this->getFragmentIdentifier(),
                 'id'        => $this->getId(),
                 'class'     => $this->getClass(),
                 'title'     => $this->getTitle(),

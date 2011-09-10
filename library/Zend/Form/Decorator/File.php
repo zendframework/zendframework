@@ -93,7 +93,7 @@ class File extends AbstractDecorator implements FileDecorator
 
         $view = $element->getView();
         if (!$view instanceof Renderer || !$view instanceof Pluggable) {
-            throw new Exception\UnexpectedValueException('File decorator cannot render without a registered pluggable view object');
+            return $content;
         }
 
         $name      = $element->getName();

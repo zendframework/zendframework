@@ -146,7 +146,7 @@ class Cldr extends AbstractLocale
         // load locale file if not already in cache
         // needed for alias tag when referring to other locale
         if (empty(self::$_ldml[(string) $locale])) {
-            $filename = __DIR__ . '/' . self::$_path . $locale . '.xml';
+            $filename = self::getPath() . '/' . $locale . '.xml';
             if (!file_exists($filename)) {
                 throw new InvalidArgumentException(
                   "Missing locale file '$filename'"
@@ -1604,6 +1604,8 @@ class Cldr extends AbstractLocale
      */
     protected static function readCldr($filePath, $locale, $cacheId, $keyPath, $keyAttrib, $valuePath, $valueAttrib, $detail)
     {
+	$locale = self::_checkLocale($locale);
+
         if (self::getCache() === null && !self::isCacheDisabled()) {
             self::setDefaultCache();
         }
@@ -1660,7 +1662,7 @@ class Cldr extends AbstractLocale
             );
         } else {
             return self::readCldr(
-                self::getPath() . '/main',(string) $locale, 'CldrLanguage1',
+                self::getPath() . '/main', (string) $locale, 'CldrLanguage1',
                 '//ldml/localeDisplayNames/languages/language', null,
                 '//ldml/localeDisplayNames/languages/language', 'type',
                 $detail

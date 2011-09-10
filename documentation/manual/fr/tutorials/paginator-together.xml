@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.together"><info><title>Assembler le tout</title></info>
-    
+
 
     <para>
         Nous avons vu comment créer un objet Paginator, comment le rendre sur la page et aussi comment
@@ -34,7 +34,7 @@ class IndexController extends Zend_Controller_Action
         $db = Zend_Registry::get('db');
 
         // Créons un objet select qui récupère des billets et les range par date de création descendante
-        $select = $db->select()->from('posts')->sort('date_created DESC');
+        $select = $db->select()->from('posts')->order('date_created DESC');
 
         // Créons un paginateur pour cette requête
         $paginator = Zend_Paginator::factory($select);
@@ -59,7 +59,7 @@ class IndexController extends Zend_Controller_Action
 <?php
 // Affiche le titre de chaque billet pour la page en cours
 foreach ($this->paginator as $item) {
-    echo '<li>' . $item->title . '</li>';
+    echo '<li>' . $item["title"] . '</li>';
 }
 ?>
 </ul>

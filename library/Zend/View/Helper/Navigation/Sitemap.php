@@ -249,7 +249,7 @@ class Sitemap extends AbstractHelper
     public function getServerUrl()
     {
         if (!isset($this->_serverUrl)) {
-            $this->_serverUrl = $this->view->serverUrl();
+            $this->_serverUrl = $this->getView()->broker('serverUrl')->direct();
         }
 
         return $this->_serverUrl;
@@ -368,7 +368,7 @@ class Sitemap extends AbstractHelper
             }
 
             // get absolute url from page
-            if (!$url = $this->getView()->plugin('url')->direct($page->toArray())) {
+            if (!$url = $this->getView()->plugin('url')->direct($page)) {
                 // skip page if it has no url (rare case)
                 continue;
             }

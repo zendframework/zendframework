@@ -165,8 +165,9 @@ class Encoder
             }
         }
 
-        return '{"__className":"' 
-            . str_replace('\\', '\\\\', get_class($value)) . '"'
+        $className = get_class($value);
+        return '{"__className":' 
+            . $this->_encodeString($className)
             . $props . '}';
     }
 

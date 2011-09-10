@@ -108,6 +108,38 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/lolcat/myaction/1337', $page->getHref());
     }
 
+    /**
+     * @group ZF-8922
+     */
+    public function testGetHrefWithFragmentIdentifier()
+    {
+        $page = new Page\Mvc(array(
+            'label'              => 'foo',
+            'fragmentIdentifier' => 'qux',
+            'controller'         => 'mycontroller',
+            'action'             => 'myaction',
+            'route'              => 'myroute',
+            'params'             => array(
+                'page' => 1337
+            )
+        ));
+ 
+        $this->_front->getRouter()->addRoute(
+            'myroute',
+            new \Zend\Controller\Router\Route\Route(
+                'lolcat/:action/:page',
+                array(
+                    'module'     => 'default',
+                    'controller' => 'foobar',
+                    'action'     => 'bazbat',
+                    'page'       => 1
+                )
+            )
+        );
+ 
+        $this->assertEquals('/lolcat/myaction/1337#qux', $page->getHref());
+    }
+
     public function testIsActiveReturnsTrueOnIdenticalModuleControllerAction()
     {
         $page = new Page\Mvc(array(
@@ -117,12 +149,12 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         ));
 
         $this->_front->getRequest()->setParams(array(
-            'module' => 'default',
+            'module' => 'application',
             'controller' => 'index',
             'action' => 'index'
         ));
 
-        $this->assertEquals(true, $page->isActive());
+        $this->assertTrue($page->isActive());
     }
 
     public function testIsActiveReturnsFalseOnDifferentModuleControllerAction()
@@ -139,7 +171,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'action' => 'index'
         ));
 
-        $this->assertEquals(false, $page->isActive());
+        $this->assertFalse($page->isActive());
     }
 
     public function testIsActiveReturnsTrueOnIdenticalIncludingPageParams()
@@ -161,7 +193,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'id' => '1337'
         ));
 
-        $this->assertEquals(true, $page->isActive());
+        $this->assertTrue($page->isActive());
     }
 
     public function testIsActiveReturnsTrueWhenRequestHasMoreParams()
@@ -180,7 +212,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'id' => '1337'
         ));
 
-        $this->assertEquals(true, $page->isActive());
+        $this->assertTrue($page->isActive());
     }
 
     public function testIsActiveReturnsFalseWhenRequestHasLessParams()
@@ -202,7 +234,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'id' => null
         ));
 
-        $this->assertEquals(false, $page->isActive());
+        $this->assertFalse($page->isActive());
     }
 
     public function testActionAndControllerAccessors()
@@ -317,6 +349,54 @@ class MvcTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $page->getParams());
     }
 
+    /**
+     * @group ZF-10465
+     */
+    public function testSetAndGetEncodeUrl()
+    {
+        $page = new Page\Mvc(array(
+            'label'      => 'foo',
+            'action'     => 'index',
+            'controller' => 'index',
+        ));
+        
+        $page->setEncodeUrl(false);
+        $this->assertEquals(false, $page->getEncodeUrl());
+    }
+    
+    /**
+     * @group ZF-10465
+     */
+    public function testEncodeUrlIsRouteAware()
+    {
+        $page = new Page\Mvc(array(
+            'label'      => 'foo',
+            'route'      => 'myroute',
+            'encodeUrl'  => false,
+            'params'     => array(
+                'contentKey' => 'pagexy/subpage',
+            )
+        ));
+ 
+        $this->_front->getRouter()->addRoute(
+            'myroute',
+            new \Zend\Controller\Router\Route\Regex(
+                '(.+)\.html',
+                array(
+                    'module'     => 'default',
+                    'controller' => 'foobar',
+                    'action'     => 'bazbat',
+                ),
+                array(
+                    1 => 'contentKey'
+                ),
+                '%s.html'
+            )
+        );
+
+        $this->assertEquals('/pagexy/subpage.html', $page->getHref());
+    }
+
     public function testToArrayMethod()
     {
         $options = array(
@@ -324,6 +404,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'action' => 'index',
             'controller' => 'index',
             'module' => 'test',
+            'fragmentIdentifier' => 'bar',
             'id' => 'my-id',
             'class' => 'my-class',
             'title' => 'my-title',
@@ -331,6 +412,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'order' => 100,
             'active' => true,
             'visible' => false,
+            'encodeUrl'  => false,
 
             'foo' => 'bar',
             'meaning' => 42

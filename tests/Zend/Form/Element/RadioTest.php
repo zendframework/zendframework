@@ -27,7 +27,7 @@ use Zend\Form\Element\Radio as RadioElement,
     Zend\Form\Element,
     Zend\Form\Form,
     Zend\Form\Decorator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Radio
@@ -158,7 +158,7 @@ class RadioTest extends \PHPUnit_Framework_TestCase
 
         $element = $form->getElement('foo');
 
-        $this->assertType('My\Decorator\Label', $element->getDecorator('Label'));
+        $this->assertInstanceOf('My\Decorator\Label', $element->getDecorator('Label'));
     }
 
     /**

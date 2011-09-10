@@ -37,7 +37,7 @@ use Zend\Loader\Autoloader,
  */
 class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
-    private $_translationOptions = array('data' => array(
+    private $_translationOptions = array('content' => array(
         'message1' => 'message1',
         'message2' => 'message2',
         'message3' => 'message3'
@@ -94,7 +94,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     {
         $options1 = array('foo' => 'bar');
         $options2 = array_merge_recursive($this->_translationOptions,
-                                          array('data' => array('message4' => 'bericht4')));
+                                          array('content' => array('message4' => 'bericht4')));
 
         $translate = new \Zend\Translator\Translator(\Zend\Translator\Translator::AN_ARRAY, $options1);
         Registry::set('Zend_Translator', $translate);

@@ -27,7 +27,7 @@ use Zend\Form\Element\MultiCheckbox as MultiCheckboxElement,
     Zend\Form\Element,
     Zend\Form\Decorator,
     Zend\Form\Form,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_MultiCheckbox

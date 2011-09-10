@@ -21,7 +21,8 @@
 
 namespace ZendTest\Application\Resource\TestAsset;
 
-use Zend\Application\Bootstrap;
+use Zend\Application\Bootstrap,
+    Zend\View\PhpRenderer;
 
 /**
  * @category   Zend
@@ -34,7 +35,7 @@ class ZfAppBootstrapCustomView extends Bootstrap
 {
     public function _initView()
     {
-        $view = new \Zend\View\View();
+        $view = new PhpRenderer();
         $view->setInMethodByTest = true;
         return $view;
     }

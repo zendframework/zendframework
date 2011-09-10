@@ -1,0 +1,8 @@
+{
+    "production": {
+        "foo": "bar"
+    },
+    "testing": {
+        "_extends": "production"
+    }
+}

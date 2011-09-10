@@ -368,7 +368,7 @@ class Sitemap extends AbstractHelper
             }
 
             // get absolute url from page
-            if (!$url = $this->getView()->plugin('url')->direct($page)) {
+            if (!$url = $this->url($page)) {
                 // skip page if it has no url (rare case)
                 continue;
             }

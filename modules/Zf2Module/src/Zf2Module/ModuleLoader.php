@@ -60,12 +60,12 @@ class ModuleLoader implements ModuleResolver
     public function load($moduleName)
     {
         if (!isset($this->modules[$moduleName])) {
-            $this->modules[$moduleName] = $this->_resolveModule($moduleName);
+            $this->modules[$moduleName] = $this->resolveModule($moduleName);
         }
         return $this->modules[$moduleName];
     }
 
-    protected function _resolveModule($moduleName)
+    protected function resolveModule($moduleName)
     {
         foreach ($this->paths as $path) {
             $file = new SplFileInfo($path . $moduleName . '/Module.php');

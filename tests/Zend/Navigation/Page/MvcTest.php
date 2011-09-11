@@ -115,7 +115,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
     {
         $page = new Page\Mvc(array(
             'label'              => 'foo',
-            'fragmentIdentifier' => 'qux',
+            'fragment' => 'qux',
             'controller'         => 'mycontroller',
             'action'             => 'myaction',
             'route'              => 'myroute',
@@ -404,7 +404,7 @@ class MvcTest extends \PHPUnit_Framework_TestCase
             'action' => 'index',
             'controller' => 'index',
             'module' => 'test',
-            'fragmentIdentifier' => 'bar',
+            'fragment' => 'bar',
             'id' => 'my-id',
             'class' => 'my-class',
             'title' => 'my-title',

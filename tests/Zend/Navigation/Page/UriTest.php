@@ -114,7 +114,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         
         $page = new Page\Uri();
         $page->setUri($uri);
-        $page->setFragmentIdentifier('bar');
+        $page->setFragment('bar');
         
         $this->assertEquals($uri . '#bar', $page->getHref());
         

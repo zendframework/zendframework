@@ -5,12 +5,12 @@ namespace Zend\Di;
 class DependencyInjector implements DependencyInjection
 {
     /**
-     * @var Zend\Di\Definition
+     * @var Definition
      */
     protected $definition = null;
     
     /**
-     * @var Zend\Di\InstanceManager
+     * @var InstanceManager
      */
     protected $instanceManager = null;
 

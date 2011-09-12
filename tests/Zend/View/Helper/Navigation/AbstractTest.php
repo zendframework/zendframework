@@ -40,7 +40,7 @@ use Zend\Navigation,
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-abstract class TestAbstract extends \PHPUnit_Framework_TestCase
+abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 {
     const REGISTRY_KEY = 'Zend_Navigation';
 

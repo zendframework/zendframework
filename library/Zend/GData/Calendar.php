@@ -71,7 +71,7 @@ class Calendar extends GData
         $this->registerPackage('Zend\GData\Calendar');
         $this->registerPackage('Zend\GData\Calendar\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
     }
 
     /**

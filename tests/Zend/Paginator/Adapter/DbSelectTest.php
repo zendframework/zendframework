@@ -126,7 +126,7 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Paginator\Adapter\Exception\InvalidArgumentException', 'Row count column not found');
         $this->_adapter->setRowCount($this->_db->select()->from('test'));
     }
-    
+
     public function testThrowsExceptionIfInvalidQuerySuppliedForRowCount2()
     {
         $wrongcolumn = $this->_db->quoteIdentifier('wrongcolumn');
@@ -453,5 +453,33 @@ class DbSelectTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $adapter->getCountSelect()->__toString());
         $this->assertEquals(250, $adapter->count());
+    }
+
+    /**
+     * @group ZF-10704
+     */
+    public function testObjectSelectWithBind()
+    {
+        $select = $this->_db->select();
+        $select->from('test', array('number'))
+               ->where('number = ?')
+               ->distinct(true)
+               ->bind(array(250));
+
+        $adapter = new Adapter\DbSelect($select);
+        $this->assertEquals(1, $adapter->count());
+
+        $select->reset(\Zend\Db\Select::DISTINCT);
+        $select2 = clone $select;
+        $select2->reset(\Zend\Db\Select::WHERE)
+                ->where('number = 500');
+
+        $selectUnion = $this->_db
+                           ->select()
+                           ->bind(array(250));
+
+        $selectUnion->union(array($select, $select2));
+        $adapter = new Adapter\DbSelect($selectUnion);
+        $this->assertEquals(2, $adapter->count());
     }
 }

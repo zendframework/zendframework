@@ -71,17 +71,12 @@ class Translator extends AbstractResource
         if (null === $this->_translate) {
             $options = $this->getOptions();
 
-            if (!isset($options['data'])) {
+            if (!isset($options['content'])) {
                 throw new Exception\InitializationException('No translation source data provided.');
             }
 
             if (empty($options['adapter'])) {
                 $options['adapter'] = Translate::AN_ARRAY;
-            }
-
-            if (!empty($options['data'])) {
-                $options['content'] = $options['data'];
-                unset($options['data']);
             }
 
             if (isset($options['options'])) {

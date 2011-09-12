@@ -35,8 +35,7 @@ namespace ZendTest\View\Helper\Navigation;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class MenuTest
-    extends TestAbstract
+class MenuTest extends AbstractTest
 {
     /**
      * Class name for view helper to test

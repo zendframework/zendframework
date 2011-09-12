@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.translate">
-    <title>Zend_Application_Resource_Translate</title>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.application.available-resources.translator"><info><title>Zend_Application_Resource_Translator</title></info>
 
     <para>
-        <classname>Zend_Application_Resource_Translate</classname> will initialize a
-        <classname>Zend_Translate</classname> adapter based on the options passed to it.
+        <classname>Zend_Application_Resource_Translator</classname> will initialize a
+        <classname>Zend_Translator</classname> adapter based on the options passed to it.
     </para>
 
     <para>
@@ -15,7 +13,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis><property>adapter</property></emphasis> : <classname>Zend_Translate
+                <emphasis><property>adapter</property></emphasis> : <classname>Zend_Translator
                 </classname> adapter type. The default adapter is array if not specified.
             </para>
         </listitem>
@@ -38,7 +36,7 @@
         <listitem>
             <para>
                 <emphasis><property>options</property></emphasis> : the options are different for
-                each adapter. See the section <xref linkend="zend.translate.additional.options" /> for
+                each adapter. See the section <xref linkend="zend.translator.additional.options" /> for
                 more details.
             </para>
         </listitem>
@@ -46,7 +44,7 @@
         <listitem>
             <para>
                 <emphasis><property>registry</property></emphasis> : the custom key to store the
-                <classname>Zend_Translate</classname> instance in the registry. By default, the
+                <classname>Zend_Translator</classname> instance in the registry. By default, the
                 key is <property>Zend_Translate</property>.
             </para>
         </listitem>
@@ -55,9 +53,9 @@
             <para>
                 <emphasis><property>scan</property></emphasis> : when <property>content</property>
                 points to a directory this option allows to define how the locale is encoded.
-                <property>Zend_Translate::LOCALE_DIRECTORY</property> defines that the directory contains
+                <property>Zend_Translator::LOCALE_DIRECTORY</property> defines that the directory contains
                 the locale of the translation files within that directory.
-                <property>Zend_Translate::LOCALE_FILENAME</property> defines that the name of the translation
+                <property>Zend_Translator::LOCALE_FILENAME</property> defines that the name of the translation
                 file itself contains the locale for this file.
             </para>
         </listitem>
@@ -66,13 +64,13 @@
             <para>
                 <emphasis><property>cache</property></emphasis> : the name of the cache template
                 or an instance of <classname>Zend_Cache_Core</classname> to use as cache for
-                <classname>Zend_Translate_Adapter</classname>. The goal is to accelerate the
+                <classname>Zend_Translator_Adapter</classname>. The goal is to accelerate the
                 loading specialy for the <acronym>XML</acronym> based files.
             </para>
         </listitem>
     </itemizedlist>
 
-    <example id="zend.application.available-resources.translate.configExample">
+    <example id="zend.application.available-resources.translator.configExample">
         <title>Sample translate adapter resource configuration</title>
 
         <para>
@@ -81,21 +79,20 @@
         </para>
 
         <programlisting language="ini"><![CDATA[
-resources.translate.adapter = tmx
-resources.translate.content = APPLICATION_PATH "/../data/locales"
-resources.translate.scan = Zend_Translate::LOCALE_DIRECTORY
+resources.translator.adapter = tmx
+resources.translator.content = APPLICATION_PATH "/../data/locales"
+resources.translator.scan = Zend_Translator::LOCALE_DIRECTORY
 
 ; Optionally you can also the cache template to use for caching:
-resources.translate.cache = "languages"
+resources.translator.cache = "languages"
 ]]></programlisting>
     </example>
 
     <note>
         <info><title>Options to use</title></info>
         <para>
-            Please take a look within <xref linkend="zend.translate" /> for detailed information
+            Please take a look within <xref linkend="zend.translator" /> for detailed information
             about the options which can be used.
         </para>
     </note>
-</sect2>
-
+</section>

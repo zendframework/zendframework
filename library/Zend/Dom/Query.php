@@ -159,7 +159,7 @@ class Query
 
     /**
      * Get any DOMDocument errors found
-     * 
+     *
      * @return false|array
      */
     public function getDocumentErrors()
@@ -183,7 +183,7 @@ class Query
      * Perform an XPath query
      *
      * @param  string|array $xpathQuery
-     * @param  string $query CSS selector query
+     * @param  string|null  $query      CSS selector query
      * @return \Zend\Dom\NodeList
      */
     public function queryXpath($xpathQuery, $query = null)

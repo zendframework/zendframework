@@ -321,10 +321,10 @@ class Application
 
         foreach ($namespaces as $namespace => $directory) {
             $autoloader->registerNamespace($namespace, $directory);
-        }        
-        
+        }
+
         $autoloader->register();
-        
+
         return $this;
     }
 
@@ -434,6 +434,15 @@ class Application
 
             case 'xml':
                 $config = new \Zend\Config\Xml($file, $environment);
+                break;
+
+            case 'json':
+                $config = new \Zend\Config\Json($file, $environment);
+                break;
+
+            case 'yaml':
+            case 'yml':
+                $config = new \Zend\Config\Yaml($file, $environment);
                 break;
 
             case 'php':

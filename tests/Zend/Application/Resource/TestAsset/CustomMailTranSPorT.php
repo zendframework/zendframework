@@ -13,47 +13,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Paginator
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Paginator;
+namespace ZendTest\Application\Resource\TestAsset;
 
-use Zend\Loader\PluginBroker;
+use Zend\Mail\AbstractTransport;
 
 /**
- * Broker for pagination adapter instances
- *
  * @category   Zend
- * @package    Zend_Paginator
+ * @package    Zend_Application
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AdapterBroker extends PluginBroker
+class CustomMailTranSPorT extends AbstractTransport
 {
-    /**
-     * @var string Default plugin loading strategy
-     */
-    protected $defaultClassLoader = 'Zend\Paginator\AdapterLoader';
-
-    /**
-     * @var boolean Adapters must not be registred on load
-     */
-    protected $registerPluginsOnLoad = false;
-
-    /**
-     * Determine if we have a valid adapter
-     * 
-     * @param  mixed $plugin 
-     * @return true
-     * @throws Exception
-     */
-    protected function validatePlugin($plugin)
+    public function _sendMail()
     {
-        if (!$plugin instanceof Adapter) {
-            throw new Exception('Pagination adapters must implement Zend\Paginator\Adapter');
-        }
-        return true;
-    }
+		// We dont want to do anything here, do we?
+	}
 }

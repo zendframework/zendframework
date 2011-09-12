@@ -422,7 +422,7 @@ class File extends Xhtml
      */
     public function isValid($value, $context = null)
     {
-        if ($this->_validated) {
+        if (($this->_validated) || ($this->isValueDisabled())) {
             return true;
         }
 
@@ -458,9 +458,15 @@ class File extends Xhtml
     public function receive()
     {
         if (!$this->_validated) {
+            $disabled = $this->isValueDisabled();
+            $this->setValueDisabled(false);
+            
             if (!$this->isValid($this->getName())) {
+                $this->setValueDisabled($disabled);
                 return false;
             }
+            
+            $this->setValueDisabled($disabled);
         }
 
         $adapter = $this->getTransferAdapter();

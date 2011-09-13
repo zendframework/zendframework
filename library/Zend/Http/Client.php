@@ -103,12 +103,12 @@ class Client implements Dispatchable
     /**
      * @var Request
      */
-    protected $lastRequest = null;
+    protected $lastRawRequest = null;
 
     /**
      * @var Response
      */
-    protected $lastResponse = null;
+    protected $lastRawResponse = null;
 
     /**
      * @var int
@@ -283,18 +283,18 @@ class Client implements Dispatchable
      * 
      * @return string 
      */
-    public function getLastRequest()
+    public function getLastRawRequest()
     {
-        return $this->lastRequest;
+        return $this->lastRawRequest;
     }
     /**
      * Get the last response (as a string)
      * 
      * @return string 
      */
-    public function getLastResponse()
+    public function getLastRawResponse()
     {
-        return $this->lastResponse;
+        return $this->lastRawResponse;
     }
     /**
      * Get the redirections count
@@ -396,7 +396,7 @@ class Client implements Dispatchable
      */
     public function setRawBody($body)
     {
-        $this->getRequest()->setRawBody($body);
+        $this->getRequest()->setContent($body);
         return $this;
     }
     /**
@@ -796,7 +796,7 @@ class Client implements Dispatchable
             }
 
             // HTTP connection
-            $this->lastRequest = $this->adapter->write($method,
+            $this->lastRawRequest = $this->adapter->write($method,
                 $uri, $this->config['httpversion'], $headers, $body);
             
             $response = $this->adapter->read();
@@ -805,9 +805,9 @@ class Client implements Dispatchable
             }
             
             if ($this->config['storeresponse']) {
-                $this->lastResponse = $response;
+                $this->lastRawResponse = $response;
             } else {
-                $this->lastResponse = null;
+                $this->lastRawResponse = null;
             }
             
             if($this->config['outputstream']) {
@@ -1076,7 +1076,7 @@ class Client implements Dispatchable
             mb_internal_encoding('ASCII');
         }
         
-        $rawBody = $this->getRequest()->getRawBody();
+        $rawBody = $this->getRequest()->getContent();
         if (!empty($rawBody)) {
             if (isset($mbIntEnc)) {
                 mb_internal_encoding($mbIntEnc);

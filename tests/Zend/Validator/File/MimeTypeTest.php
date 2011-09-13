@@ -147,9 +147,10 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetMagicFile()
     {
         $validator = new File\MimeType('image/gif');
-        if (!empty($_ENV['MAGIC'])) {
+        $magic     = getenv('magic');
+        if (!empty($magic)) {
             $mimetype  = $validator->getMagicFile();
-            $this->assertEquals($_ENV['MAGIC'], $mimetype);
+            $this->assertEquals(getenv('magic'), $mimetype);
         }
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'can not be');

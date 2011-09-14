@@ -101,6 +101,6 @@ class ViewTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $view  = $resource->getView();
-        $this->assertEquals('XHTML1_FRAMESET', $view->broker('doctype')->getDoctype());
+        $this->assertEquals('XHTML1_FRAMESET', $view->plugin('doctype')->getDoctype());
     }
 }

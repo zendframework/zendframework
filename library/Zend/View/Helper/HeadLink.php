@@ -284,8 +284,8 @@ class HeadLink extends Placeholder\Container\Standalone
             }
         }
 
-        if (method_exists($this->view, 'broker')) {
-            $link .= ($this->view->broker('doctype')->isXhtml()) ? '/>' : '>';
+        if ($this->view instanceof \Zend\Loader\Pluggable) {
+            $link .= ($this->view->plugin('doctype')->isXhtml()) ? '/>' : '>';
         } else {
             $link .= '/>';
         }

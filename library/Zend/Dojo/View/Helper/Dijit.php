@@ -87,7 +87,7 @@ abstract class Dijit extends HtmlElement
     public function setView(View $view)
     {
         parent::setView($view);
-        $this->dojo = $this->view->broker('dojo');
+        $this->dojo = $this->view->plugin('dojo');
         $this->dojo->enable();
         return $this;
     }

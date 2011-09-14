@@ -93,7 +93,7 @@ class FormPasswordTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowRenderingAsXhtml()
     {
-        $this->view->broker('doctype')->direct('XHTML1_STRICT');
+        $this->view->plugin('doctype')->direct('XHTML1_STRICT');
         $test = $this->helper->direct('foo', 'bar');
         $this->assertContains(' />', $test);
     }

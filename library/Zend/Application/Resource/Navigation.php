@@ -108,7 +108,7 @@ class Navigation
     {
         $this->getBootstrap()->bootstrap('view');
         $view = $this->getBootstrap()->view;
-        $view->broker('navigation')->setContainer($this->getContainer());
+        $view->plugin('navigation')->setContainer($this->getContainer());
     }
 
     /**

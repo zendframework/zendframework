@@ -134,6 +134,6 @@ class FormDecorator extends AbstractDecorator
         $attribs       = $this->getOptions();
         $name          = $form->getFullyQualifiedName();
         $attribs['id'] = $form->getId();
-        return $view->broker($helper)->direct($name, $attribs, $content);
+        return $view->plugin($helper)->direct($name, $attribs, $content);
     }
 }

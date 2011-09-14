@@ -109,12 +109,12 @@ class PaginationControl extends AbstractHelper
             }
 
             if ($partial[1] !== null) {
-                return $this->view->broker('partial')->direct($partial[0], $partial[1], $pages);
+                return $this->view->plugin('partial')->direct($partial[0], $partial[1], $pages);
             }
 
             $partial = $partial[0];
         }
 
-        return $this->view->broker('partial')->direct($partial, $pages);
+        return $this->view->plugin('partial')->direct($partial, $pages);
     }
 }

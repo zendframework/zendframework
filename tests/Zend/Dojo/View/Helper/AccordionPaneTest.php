@@ -64,7 +64,7 @@ class AccordionPaneTest extends \PHPUnit_Framework_TestCase
 
     public function getContainer()
     {
-        return $this->view->broker('accordionPane')->direct('pane1', 'This is the pane content', array('title' => 'Pane 1'));
+        return $this->view->plugin('accordionPane')->direct('pane1', 'This is the pane content', array('title' => 'Pane 1'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -78,6 +78,6 @@ class AccordionPaneTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getContainer();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.layout.AccordionPane")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('pane1'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('pane1'));
     }
 }

@@ -12,7 +12,7 @@ abstract class Options implements ParameterObject
                 $this->processArray($config);
             } else {
                 throw new \InvalidArgumentException(
-                    'Parameter to \\Zend\\Stdlib\\Configuration\'s '
+                    'Parameter to \\Zend\\Stdlib\\Options\'s '
                     . 'constructor must be an array or implement the '
                     . '\\Traversable interface'
                 );

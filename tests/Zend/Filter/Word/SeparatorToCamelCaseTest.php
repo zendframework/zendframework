@@ -54,4 +54,38 @@ class SeparatorToCamelCaseTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('CamelCasedWords', $filtered);
     }
+
+    /**
+     * @group ZF-10517
+     */
+    public function testFilterSeparatesUniCodeCamelCasedWordsWithProvidedSeparator()
+    {
+        if (!extension_loaded('mbstring')) {
+            $this->markTestSkipped('Extension mbstring not available');
+        }
+
+        $string   = 'camel:-:cased:-:Words';
+        $filter   = new SeparatorToCamelCaseFilter(':-:');
+        $filtered = $filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('CamelCasedWords', $filtered);
+    }
+
+    /**
+     * @group ZF-10517
+     */
+    public function testFilterSeparatesUniCodeCamelCasedUserWordsWithProvidedSeparator()
+    {
+        if (!extension_loaded('mbstring')) {
+            $this->markTestSkipped('Extension mbstring not available');
+        }
+
+        $string   = 'test šuma';
+        $filter   = new SeparatorToCamelCaseFilter(' ');
+        $filtered = $filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('TestŠuma', $filtered);
+    }
 }

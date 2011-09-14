@@ -86,12 +86,12 @@ class Uri extends AbstractPage
     {
         $uri = $this->getUri();
         
-        $fragmentIdentifier = $this->getFragmentIdentifier();       
-        if (null !== $fragmentIdentifier) {
+        $fragment = $this->getFragment();       
+        if (null !== $fragment) {
             if ('#' == substr($uri, -1)) {
-                return $uri . $fragmentIdentifier;
+                return $uri . $fragment;
             } else {                
-                return $uri . '#' . $fragmentIdentifier;
+                return $uri . '#' . $fragment;
             }
         }
         

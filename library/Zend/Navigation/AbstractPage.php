@@ -59,7 +59,7 @@ abstract class AbstractPage extends Container
      * 
      * @var string|null
      */
-    protected $_fragmentIdentifier;
+    protected $_fragment;
 
     /**
      * Page id
@@ -336,18 +336,18 @@ abstract class AbstractPage extends Container
     /**
      * Sets a fragment identifier
      *
-     * @param  string $fragmentIdentifier   new fragment identifier
+     * @param  string $fragment   new fragment identifier
      * @return Zend_Navigation_Page         fluent interface, returns self
      * @throws Zend_Navigation_Exception    if empty/no string is given
      */
-    public function setFragmentIdentifier($fragmentIdentifier)
+    public function setFragment($fragment)
     {
-        if (null !== $fragmentIdentifier && !is_string($fragmentIdentifier)) {
+        if (null !== $fragment && !is_string($fragment)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $fragmentIdentifier must be a string or null');
+                    'Invalid argument: $fragment must be a string or null');
         }
  
-        $this->_fragmentIdentifier = $fragmentIdentifier;
+        $this->_fragment = $fragment;
         return $this;
     }
     
@@ -356,9 +356,9 @@ abstract class AbstractPage extends Container
      *
      * @return string|null  fragment identifier
      */
-    public function getFragmentIdentifier()
+    public function getFragment()
     {
-        return $this->_fragmentIdentifier;
+        return $this->_fragment;
     }
 
     /**
@@ -1114,7 +1114,7 @@ abstract class AbstractPage extends Container
             $this->getCustomProperties(),
             array(
                 'label'     => $this->getLabel(),
-                'fragmentIdentifier' => $this->getFragmentIdentifier(),
+                'fragment' => $this->getFragment(),
                 'id'        => $this->getId(),
                 'class'     => $this->getClass(),
                 'title'     => $this->getTitle(),

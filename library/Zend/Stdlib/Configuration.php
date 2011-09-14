@@ -2,7 +2,7 @@
 
 namespace Zend\Stdlib;
 
-class Configuration implements ParameterObject
+abstract class Options implements ParameterObject
 {
 
     public function __construct($config = null)

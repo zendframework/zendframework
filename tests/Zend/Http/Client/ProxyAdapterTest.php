@@ -110,7 +110,7 @@ class ProxyAdapterTest extends SocketTest
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
 
-        $this->assertEquals($this->client->getLastRequest(), $res->getBody(), 'Response body should be exactly like the last request');
+        $this->assertEquals($this->client->getLastRawRequest(), $res->getBody(), 'Response body should be exactly like the last request');
     }
 
     public function testGetLastRequest()

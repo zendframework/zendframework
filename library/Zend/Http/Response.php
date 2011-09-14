@@ -316,22 +316,6 @@ class Response extends Message implements ResponseDescription
         return $this;
     }
 
-    public function setRawBody($body)
-    {
-        $this->setContent($body);
-        return $this;
-    }
-
-    public function getRawBody()
-    {
-        return (string) $this->getContent();
-    }
-
-    public function setBody($body, $encoding = null)
-    {
-        
-    }
-
     /**
      * Get the body of the response
      * 

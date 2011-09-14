@@ -23,7 +23,8 @@
  */
 namespace Zend\Filter;
 
-use Zend\Locale\Locale as ZendLocale,
+use Zend\Config\Config,
+    Zend\Locale\Locale as ZendLocale,
     Zend\Registry;
 
 /**
@@ -65,9 +66,9 @@ class Alnum extends AbstractFilter
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config) {
             $options = $options->toArray();
-        } else if (!is_array($options)) {
+        } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
@@ -151,16 +152,18 @@ class Alnum extends AbstractFilter
     public function filter($value)
     {
         $whiteSpace = $this->allowWhiteSpace ? '\s' : '';
+
         if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z0-9 match
             $pattern = '/[^a-zA-Z0-9' . $whiteSpace . ']/';
-        } else if (((string) $this->locale == 'ja') ||
-                   ((string) $this->locale == 'ko') ||
-                   ((string) $this->locale == 'zh')) {
-            //The Alphabet means english alphabet.
+        } elseif (((string) $this->locale == 'ja') 
+                  || ((string) $this->locale == 'ko') 
+                  || ((string) $this->locale == 'zh')
+        ) {
+            // The Alphabet means english alphabet.
             $pattern = '/[^a-zA-Z0-9'  . $whiteSpace . ']/u';
         } else {
-            //The Alphabet means each language's alphabet.
+            // The Alphabet means each language's alphabet.
             $pattern = '/[^\p{L}\p{N}' . $whiteSpace . ']/u';
         }
 

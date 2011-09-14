@@ -249,7 +249,7 @@ class Sitemap extends AbstractHelper
     public function getServerUrl()
     {
         if (!isset($this->_serverUrl)) {
-            $this->_serverUrl = $this->getView()->broker('serverUrl')->direct();
+            $this->_serverUrl = $this->getView()->plugin('serverUrl')->direct();
         }
 
         return $this->_serverUrl;

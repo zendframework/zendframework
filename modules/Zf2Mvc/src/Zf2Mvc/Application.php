@@ -309,6 +309,7 @@ class Application implements AppContext
         $request  = $this->getRequest();
         $request->setMetadata('route-match', $routeMatch);
         $response = $this->getResponse();
+
         $return   = $controller->dispatch($request, $response);
 
         complete:

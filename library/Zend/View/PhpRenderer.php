@@ -174,12 +174,16 @@ class PhpRenderer implements Renderer, Pluggable
             ));
         }
         
-        $variablesAsArray = array();
-        foreach ($variables as $key => $value) {
-            $variablesAsArray[$key] = $value;
+        // Enforce a Variables container
+        if (!$variables instanceof Variables) {
+            $variablesAsArray = array();
+            foreach ($variables as $key => $value) {
+                $variablesAsArray[$key] = $value;
+            }
+            $variables = new Variables($variablesAsArray);
         }
         
-        $this->vars = new Variables($variablesAsArray);
+        $this->vars = $variables;
         return $this;
     }
 

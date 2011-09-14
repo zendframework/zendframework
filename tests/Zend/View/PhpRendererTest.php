@@ -23,6 +23,7 @@ namespace ZendTest\View;
 
 use Zend\View\PhpRenderer,
     Zend\View\TemplatePathStack,
+    Zend\View\Variables,
     Zend\Filter\FilterChain;
 
 /**
@@ -187,6 +188,16 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $vars = array('foo' => 'bar');
         $this->renderer->setVars($vars);       
-        $this->assertTrue($this->renderer->vars() instanceof \Zend\View\Variables);
+        $this->assertTrue($this->renderer->vars() instanceof Variables);
+    }
+
+    /**
+     * @group ZF2-68
+     */
+    public function testPassingVariablesObjectToSetVarsShouldUseItDirectoy()
+    {
+        $vars = new Variables(array('foo' => '<p>Bar</p>'));
+        $this->renderer->setVars($vars);
+        $this->assertSame($vars, $this->renderer->vars());
     }
 }

@@ -159,4 +159,16 @@ class DateTextBoxTest extends \PHPUnit_Framework_TestCase
         $html = $this->element->render();
         $this->assertContains('dojoType="dijit.form.DateTextBox"', $html);
     }
+
+    /**
+     * @group ZF-7813
+     */
+    public function testCanSetValue()
+    {
+        $this->element->setValue('2011-05-10');
+        $html = $this->element->render();
+        
+        $this->assertSame('2011-05-10', $this->element->getValue());
+        $this->assertContains('value="2011-05-10"', $html);
+    }
 }

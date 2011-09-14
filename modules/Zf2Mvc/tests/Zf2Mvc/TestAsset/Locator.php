@@ -2,10 +2,12 @@
 
 namespace Zf2Mvc\TestAsset;
 
+use Zend\Di\Locator as LocatorDefinition;
+
 /**
  * Dummy locator used to test handling of locator objects by Application
  */
-class Locator
+class Locator implements LocatorDefinition
 {
     protected $services = array();
 

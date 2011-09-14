@@ -4,6 +4,7 @@ namespace Zf2Mvc;
 
 use ArrayObject,
     Zend\Di\Exception\ClassNotFoundException,
+    Zend\Di\Locator,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
@@ -47,24 +48,13 @@ class Application implements AppContext
     }
 
     /**
-     * Set a service locator object
+     * Set a service locator/DI object
      *
-     * Since the DI DependencyInjection and ServiceLocation objects do not 
-     * share a common interface, we will not specify an interface here. That
-     * said, both implement the same "get()" method signature, and this is 
-     * what we will enforce.
-     * 
-     * @param  mixed $locator 
+     * @param  Locator $locator 
      * @return AppContext
      */
-    public function setLocator($locator)
+    public function setLocator(Locator $locator)
     {
-        if (!is_object($locator)) {
-            throw new Exception\InvalidArgumentException('Locator must be an object');
-        }
-        if (!method_exists($locator, 'get')) {
-            throw new Exception\InvalidArgumentException('Locator must implement a "get()" method');
-        }
         $this->locator = $locator;
         return $this;
     }
@@ -110,7 +100,7 @@ class Application implements AppContext
     /**
      * Get the locator object
      * 
-     * @return null|object
+     * @return null|Locator
      */
     public function getLocator()
     {

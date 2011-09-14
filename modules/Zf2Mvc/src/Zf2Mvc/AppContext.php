@@ -2,7 +2,8 @@
 
 namespace Zf2Mvc;
 
-use Zend\EventManager\EventCollection,
+use Zend\Di\Locator,
+    Zend\EventManager\EventCollection,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
@@ -17,17 +18,12 @@ interface AppContext
     public function setEventManager(EventCollection $events);
 
     /**
-     * Set a service locator object
+     * Set a service locator/DI object
      *
-     * Since the DI DependencyInjection and ServiceLocation objects do not 
-     * share a common interface, we will not specify an interface here. That
-     * said, both implement the same "get()" method signature, and this is 
-     * what we will enforce.
-     * 
-     * @param  mixed $locator 
+     * @param  Locator $locator 
      * @return AppContext
      */
-    public function setLocator($locator);
+    public function setLocator(Locator $locator);
 
     /**
      * Set request object that will be consumed
@@ -58,7 +54,7 @@ interface AppContext
     /**
      * Get the locator object
      * 
-     * @return mixed
+     * @return Locator
      */
     public function getLocator();
 

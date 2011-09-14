@@ -20,33 +20,6 @@ class ApplicationTest extends TestCase
         $this->assertInstanceOf('Zend\EventManager\EventManager', $events);
     }
 
-    public static function invalidLocators()
-    {
-        return array(
-            array(null),
-            array(0),
-            array(1),
-            array(1.0),
-            array(''),
-            array('bad'),
-            array(array()),
-            array(array('foo')),
-            array(array('foo' => 'bar')),
-            array(new stdClass),
-        );
-    }
-
-    /**
-     * @dataProvider invalidLocators
-     */
-    public function testLocatorMutatorShouldRaiseExceptionOnInvalidInput($locator)
-    {
-        $app = new Application();
-
-        $this->setExpectedException('InvalidArgumentException');
-        $app->setLocator($locator);
-    }
-
     public function testLocatorIsNullByDefault()
     {
         $app = new Application();

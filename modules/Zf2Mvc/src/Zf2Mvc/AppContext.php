@@ -77,6 +77,13 @@ interface AppContext
     public function getResponse();
 
     /**
+     * Get the router object
+     * 
+     * @return Router
+     */
+    public function getRouter();
+
+    /**
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.

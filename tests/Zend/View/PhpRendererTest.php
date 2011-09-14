@@ -73,14 +73,14 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $a = new \ArrayObject;
         $this->renderer->setVars($a);
-        $this->assertSame($a, $this->renderer->vars());
+        $this->assertSame($a->getArrayCopy(), $this->renderer->vars()->getArrayCopy());
     }
 
     public function testCanSpecifyArrayForVars()
     {
         $vars = array('foo' => 'bar');
         $this->renderer->setVars($vars);
-        $this->assertEquals($vars, $this->renderer->vars());
+        $this->assertEquals($vars, $this->renderer->vars()->getArrayCopy());
     }
 
     public function testPassingArgumentToVarsReturnsValueFromThatKey()
@@ -178,5 +178,15 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         foreach (array('foo', 'bar', 'baz') as $value) {
             $this->assertContains("<li>$value</li>", $content);
         }
+    }
+    
+    /**
+     * @group ZF2-68
+     */
+    public function testCanSpecifyArrayForVarsAndGetAlwaysArrayObject()
+    {
+        $vars = array('foo' => 'bar');
+        $this->renderer->setVars($vars);       
+        $this->assertTrue($this->renderer->vars() instanceof \Zend\View\Variables);
     }
 }

@@ -172,7 +172,13 @@ class PhpRenderer implements Renderer
                 (is_object($variables) ? get_class($variables) : gettype($variables))
             ));
         }
-        $this->vars = $variables;
+        
+        $variablesAsArray = array();
+        foreach ($variables as $key => $value) {
+            $variablesAsArray[$key] = $value;
+        }
+        
+        $this->vars = new Variables($variablesAsArray);
         return $this;
     }
 

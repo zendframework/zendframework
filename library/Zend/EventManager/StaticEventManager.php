@@ -56,6 +56,15 @@ class StaticEventManager implements StaticEventCollection
     }
 
     /**
+     * Singleton
+     *
+     * @return void
+     */
+    private function __clone()
+    {
+    }
+
+    /**
      * Retrieve instance
      * 
      * @return EventManager

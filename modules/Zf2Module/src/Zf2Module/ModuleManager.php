@@ -6,7 +6,7 @@ use Zend\Config\Config,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
-class ModuleCollection
+class ModuleManager
 {
     /**
      * @var ModuleResolver
@@ -40,7 +40,7 @@ class ModuleCollection
      * setLoader 
      * 
      * @param ModuleResolver $loader 
-     * @return ModuleCollection
+     * @return ModuleManager
      */
     public function setLoader(ModuleResolver $loader)
     {
@@ -52,7 +52,7 @@ class ModuleCollection
      * loadModules 
      * 
      * @param array $modules 
-     * @return ModuleCollection
+     * @return ModuleManager
      */
     public function loadModules(array $modules)
     {
@@ -105,7 +105,7 @@ class ModuleCollection
      * Convenience method
      * 
      * @param Config $config 
-     * @return ModuleCollection
+     * @return ModuleManager
      */
     public static function fromConfig(Config $config)
     {
@@ -122,7 +122,7 @@ class ModuleCollection
      * Set the event manager instance used by this context
      * 
      * @param  EventCollection $events 
-     * @return ModuleCollection
+     * @return ModuleManager
      */
     public function setEventManager(EventCollection $events)
     {

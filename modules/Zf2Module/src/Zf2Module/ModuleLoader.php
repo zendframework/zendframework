@@ -71,7 +71,7 @@ class ModuleLoader implements ModuleResolver
             $file = new SplFileInfo($path . $moduleName . '/Module.php');
             if ($file->isReadable()) {
                 require_once $file->getRealPath();
-                return $moduleName . '\Module';
+                $moduleClass = $moduleName . '\Module';
             } else {
                 $file = new SplFileInfo($path . $moduleName);
                 if ($file->isReadable() && $file->isFile()) {
@@ -80,9 +80,12 @@ class ModuleLoader implements ModuleResolver
                         $moduleName = explode('.', $moduleName);
                         $moduleName = array_shift($moduleName);
                     }
-                    return $moduleName . '\Module';
+                    $moduleClass = $moduleName . '\Module';
                 }
             }
+        }
+        if (class_exists($moduleClass)) {
+            return $moduleClass;
         }
         throw new \Exception(sprintf(
             'Unable to load module \'%s\' from module path (%s)',

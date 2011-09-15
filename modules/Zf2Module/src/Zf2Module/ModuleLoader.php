@@ -72,6 +72,16 @@ class ModuleLoader implements ModuleResolver
             if ($file->isReadable()) {
                 require_once $file->getRealPath();
                 return $moduleName . '\Module';
+            } else {
+                $file = new SplFileInfo($path . $moduleName);
+                if ($file->isReadable() && $file->isFile()) {
+                    require_once $file->getRealPath();
+                    if (strstr($moduleName, '.') !== false) {
+                        $moduleName = explode('.', $moduleName);
+                        $moduleName = array_shift($moduleName);
+                    }
+                    return $moduleName . '\Module';
+                }
             }
         }
         throw new \Exception(sprintf(

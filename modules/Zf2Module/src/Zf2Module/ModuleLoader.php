@@ -67,6 +67,7 @@ class ModuleLoader implements ModuleResolver
 
     protected function resolveModule($moduleName)
     {
+        $moduleClass = null;
         foreach ($this->paths as $path) {
             $file = new SplFileInfo($path . $moduleName . '/Module.php');
             if ($file->isReadable()) {

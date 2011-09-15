@@ -542,8 +542,6 @@ class App
         if ($method != 'POST' && $method != 'GET' && self::getHttpMethodOverride()) {
             $headers['x-http-method-override'] = $method;
             $method = 'POST';
-        } else {
-            $headers['x-http-method-override'] = null;
         }
 
         if ($contentTypeOverride != null) {
@@ -579,6 +577,7 @@ class App
         if ($headers === null) {
             $headers = array();
         }
+        
         // Append a Gdata version header if protocol v2 or higher is in use.
         // (Protocol v1 does not use this header.)
         $major = $this->getMajorProtocolVersion();
@@ -617,7 +616,7 @@ class App
         // In addition to standard headers to reset via resetParameters(),
         // also reset the Slug and If-Match headers
         $this->_httpClient->resetParameters();
-        $this->_httpClient->setHeaders(array('Slug', 'If-Match'));
+        $this->_httpClient->setHeaders(array('Slug' => 'If-Match'));
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);
@@ -648,11 +647,12 @@ class App
             }
             $this->_httpClient->setAdapter($newAdapter);
         } else {
-            $this->_httpClient->setRawData($body, $contentType);
+            $this->_httpClient->setRawBody($body);
         }
 
         try {
-            $response = $this->_httpClient->request($method);
+            $this->_httpClient->setMethod($method);
+            $response = $this->_httpClient->send();
             // reset adapter
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
@@ -675,7 +675,7 @@ class App
                         'Number of redirects exceeds maximum', null, $response);
             }
         }
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             $exceptionMessage = 'Expected response code 200, got ' .
                 $response->getStatus();
             if (self::getVerboseExceptionMessages()) {
@@ -947,7 +947,7 @@ class App
         $returnEntry = new $className($response->getBody());
         $returnEntry->setHttpClient(self::getstaticHttpClient());
 
-        $etag = $response->getHeader('ETag');
+        $etag = $response->headers()->get('ETag');
         if ($etag !== null) {
             $returnEntry->setEtag($etag);
         }

@@ -113,7 +113,7 @@ class GApps extends GData
         $this->registerPackage('Zend\GData\GApps');
         $this->registerPackage('Zend\GData\GApps\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
         $this->_domain = $domain;
     }
 

@@ -80,7 +80,7 @@ class Docs extends GData
     {
         $this->registerPackage('Zend\GData\Docs');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
     }
 
     /**

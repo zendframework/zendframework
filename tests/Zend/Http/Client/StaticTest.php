@@ -122,7 +122,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setMethod('GET');
         $res = $this->_client->send();
 
-        $this->assertContains($qstr, $this->_client->getLastRequest(),
+        $this->assertContains($qstr, $this->_client->getLastRawRequest(),
             'Request is expected to contain the entire query string');
     }
 
@@ -302,14 +302,14 @@ class StaticTest extends \PHPUnit_Framework_TestCase
      */
 
     /**
-     * Test the getLastResponse() method actually returns the last response
+     * Test the getLastRawResponse() method actually returns the last response
      *
      */
-    public function testGetLastResponse()
+    public function testGetLastRawResponse()
     {
         // First, make sure we get null before the request
-        $this->assertEquals(null, $this->_client->getLastResponse(),
-            'getLastResponse() is still expected to return null');
+        $this->assertEquals(null, $this->_client->getLastRawResponse(),
+            'getLastRawResponse() is still expected to return null');
 
         // Now, test we get a proper response after the request
         $this->_client->setUri('http://example.com/foo/bar');
@@ -321,10 +321,10 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that getLastResponse returns null when not storing
+     * Test that getLastRawResponse returns null when not storing
      *
      */
-    public function testGetLastResponseWhenNotStoring()
+    public function testGetLastRawResponseWhenNotStoring()
     {
         // Now, test we get a proper response after the request
         $this->_client->setUri('http://example.com/foo/bar');
@@ -333,8 +333,8 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->_client->send();
 
-        $this->assertNull($this->_client->getLastResponse(),
-            'getLastResponse is expected to be null when not storing');
+        $this->assertNull($this->_client->getLastRawResponse(),
+            'getLastRawResponse is expected to be null when not storing');
     }
 
     /**
@@ -417,7 +417,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
 
         $expectedLines = file(__DIR__ . '/_files/ZF7038-multipartarrayrequest.txt');
         
-        $gotLines = explode("\n", $this->_client->getLastRequest());
+        $gotLines = explode("\n", $this->_client->getLastRawRequest());
         
         $this->assertEquals(count($expectedLines), count($gotLines));
 
@@ -450,7 +450,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
         $this->_client->setEncType('text/plain');
         $this->_client->setMethod('POST');
         $this->_client->send();
-        $request = $this->_client->getLastRequest();
+        $request = $this->_client->getLastRawRequest();
 
         if (! preg_match('/^content-length:\s+(\d+)/mi', $request, $match)) {
             $this->fail("Unable to find content-length header in request");

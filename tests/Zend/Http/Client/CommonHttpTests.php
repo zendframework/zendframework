@@ -148,7 +148,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      * Test we can get the last request as string
      *
      */
-    public function testGetLastRequest()
+    public function testGetLastRawRequest()
     {
         $this->client->setUri($this->baseuri . 'testHeaders.php');
         $this->client->setParameterGet(array('someinput' => 'somevalue'));
@@ -162,7 +162,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped("Server does not allow the TRACE method");
         }
 
-        $this->assertEquals($this->client->getLastRequest(), $res->getBody(), 'Response body should be exactly like the last request');
+        $this->assertEquals($this->client->getLastRawRequest(), $res->getBody(), 'Response body should be exactly like the last request');
     }
 
     /**

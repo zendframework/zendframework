@@ -72,7 +72,7 @@ abstract class HtmlElement extends AbstractHelper
      */
     protected function _isXhtml()
     {
-        $doctype = $this->view->broker('doctype');
+        $doctype = $this->view->plugin('doctype');
         return $doctype->isXhtml();
     }
 

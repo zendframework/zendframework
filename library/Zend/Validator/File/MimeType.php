@@ -95,7 +95,7 @@ class MimeType extends Validator\AbstractValidator
     protected $_finfo;
 
     /**
-     * If no $_ENV['MAGIC'] is set, try and autodiscover it based on common locations
+     * If no environment variable 'MAGIC' is set, try and autodiscover it based on common locations
      * @var array
      */
     protected $_magicFiles = array(
@@ -156,8 +156,9 @@ class MimeType extends Validator\AbstractValidator
     public function getMagicFile()
     {
         if (null === $this->_magicfile) {
-            if (!empty($_ENV['MAGIC'])) {
-                $this->setMagicFile($_ENV['MAGIC']);
+            $magic = getenv('magic');
+            if (!empty($magic)) {
+                $this->setMagicFile($magic);
             } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
                 foreach ($this->_magicFiles as $file) {
                     // supressing errors which are thrown due to openbase_dir restrictions

@@ -75,11 +75,6 @@ class Request extends Message implements RequestDescription
      * @var string|\Zend\Http\Headers
      */
     protected $headers = null;
-    
-    /**
-     * @var string
-     */
-    protected $rawBody = null;
 
     /**
      * A factory that produces a Request object from a well-formed Http Request string
@@ -136,7 +131,7 @@ class Request extends Message implements RequestDescription
         }
 
         if ($rawBody) {
-            $request->setRawBody(implode("\r\n", $rawBody));
+            $request->setContent(implode("\r\n", $rawBody));
         }
 
         return $request;
@@ -413,28 +408,6 @@ class Request extends Message implements RequestDescription
         }
 
         return $this->headers;
-    }
-
-    /**
-     * Set the raw body for the request
-     *
-     * @param string $string
-     * @return \Zend\Http\Request
-     */
-    public function setRawBody($string)
-    {
-        $this->rawBody = $string;
-        return $this;
-    }
-
-    /**
-     * Get the raw body for the request
-     *
-     * @return string
-     */
-    public function getRawBody()
-    {
-        return $this->rawBody;
     }
 
     /**

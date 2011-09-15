@@ -249,7 +249,7 @@ class Sitemap extends AbstractHelper
     public function getServerUrl()
     {
         if (!isset($this->_serverUrl)) {
-            $this->_serverUrl = $this->getView()->broker('serverUrl')->direct();
+            $this->_serverUrl = $this->getView()->plugin('serverUrl')->direct();
         }
 
         return $this->_serverUrl;
@@ -298,7 +298,7 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $curDoc = $this->getView()->broker('url')->direct();
+            $curDoc = $this->getView()->plugin('url')->direct();
             $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
             $url = rtrim($this->getServerUrl(), '/') . '/'
                  . $curDoc

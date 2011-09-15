@@ -83,7 +83,7 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap)->init();
 
         $view = $this->bootstrap->getResource('view');
-        $number = $view->broker('navigation')->getContainer()->count();
+        $number = $view->plugin('navigation')->getContainer()->count();
 
         $this->assertEquals($number,1);
         $this->broker->unregisterSpec('view');

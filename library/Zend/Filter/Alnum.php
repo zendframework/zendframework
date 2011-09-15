@@ -23,7 +23,8 @@
  */
 namespace Zend\Filter;
 
-use Zend\Locale\Locale,
+use Zend\Config\Config,
+    Zend\Locale\Locale as ZendLocale,
     Zend\Registry;
 
 /**
@@ -48,21 +49,14 @@ class Alnum extends AbstractFilter
      *
      * @var mixed
      **/
-    protected static $_unicodeEnabled;
+    protected static $unicodeEnabled;
 
     /**
-     * Locale in browser.
+     * Locale to use
      *
      * @var \Zend\Locale\Locale object
      */
-    protected $_locale;
-
-    /**
-     * The Alphabet means english alphabet.
-     *
-     * @var boolean
-     */
-    protected static $_meansEnglishAlphabet;
+    protected $locale;
 
     /**
      * Sets default option values for this instance
@@ -70,35 +64,37 @@ class Alnum extends AbstractFilter
      * @param  boolean $allowWhiteSpace
      * @return void
      */
-    public function __construct($allowWhiteSpace = false)
+    public function __construct($options = null)
     {
-        if ($allowWhiteSpace instanceof \Zend\Config\Config) {
-            $allowWhiteSpace = $allowWhiteSpace->toArray();
-        } else if (is_array($allowWhiteSpace)) {
-            if (array_key_exists('allowwhitespace', $allowWhiteSpace)) {
-                $allowWhiteSpace = $allowWhiteSpace['allowwhitespace'];
-            } else {
-                $allowWhiteSpace = false;
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        } elseif (!is_array($options)) {
+            $options = func_get_args();
+            $temp    = array();
+            if (!empty($options)) {
+                $temp['allowwhitespace'] = array_shift($options);
             }
-        }
 
-        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
-        if (null === self::$_unicodeEnabled) {
-            self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
-        }
-
-        if (null === self::$_meansEnglishAlphabet) {
-            if (Registry::isRegistered('Zend_Locale')) {
-                $this->_locale = Registry::get('Zend_Locale');
-            } else {
-        	    $this->_locale = new Locale('auto');
+            if (!empty($options)) {
+                $temp['locale'] = array_shift($options);
             }
-            
-            self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
-                                                    array('ja', 'ko', 'zh')
-                                                    );
+
+            $options = $temp;
         }
 
+        if (null === self::$unicodeEnabled) {
+            self::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        }
+
+        if (array_key_exists('allowwhitespace', $options)) {
+            $this->setAllowWhiteSpace($options['allowwhitespace']);
+        }
+
+        if (!array_key_exists('locale', $options)) {
+            $options['locale'] = null;
+        }
+
+        $this->setLocale($options['locale']);
     }
 
     /**
@@ -124,6 +120,28 @@ class Alnum extends AbstractFilter
     }
 
     /**
+     * Returns the locale option
+     *
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Sets the locale option
+     *
+     * @param boolean $locale
+     * @return \Zend\Filter\Alnum Provides a fluent interface
+     */
+    public function setLocale($locale = null)
+    {
+        $this->locale = ZendLocale::findLocale($locale);
+        return $this;
+    }
+
+    /**
      * Defined by Zend_Filter_Interface
      *
      * Returns the string $value, removing all but alphabetic and digit characters
@@ -134,14 +152,18 @@ class Alnum extends AbstractFilter
     public function filter($value)
     {
         $whiteSpace = $this->allowWhiteSpace ? '\s' : '';
-        if (!self::$_unicodeEnabled) {
+
+        if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z0-9 match
             $pattern = '/[^a-zA-Z0-9' . $whiteSpace . ']/';
-        } else if (self::$_meansEnglishAlphabet) {
-            //The Alphabet means english alphabet.
+        } elseif (((string) $this->locale == 'ja') 
+                  || ((string) $this->locale == 'ko') 
+                  || ((string) $this->locale == 'zh')
+        ) {
+            // The Alphabet means english alphabet.
             $pattern = '/[^a-zA-Z0-9'  . $whiteSpace . ']/u';
         } else {
-            //The Alphabet means each language's alphabet.
+            // The Alphabet means each language's alphabet.
             $pattern = '/[^\p{L}\p{N}' . $whiteSpace . ']/u';
         }
 

@@ -78,13 +78,13 @@ class DojoFormTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getForm();
         $this->assertNotRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('myForm'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('myForm'));
     }
 
     public function testOnlyIdShouldBeNecessary()
     {
         DojoHelper::setUseDeclarative();
-        $html = $this->view->broker('dojoform')->direct('foo');
+        $html = $this->view->plugin('dojoform')->direct('foo');
         $this->assertRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html, $html);
         $this->assertRegexp('/<form[^>]*(id="foo")/', $html, $html);
     }
@@ -103,7 +103,7 @@ class DojoFormTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldNotUseDojoIfRegularZendFormIsUsed()
     {
-        $html = $this->view->broker('form')->direct('foo');
+        $html = $this->view->plugin('form')->direct('foo');
         $this->assertNotRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html);
     }
 }

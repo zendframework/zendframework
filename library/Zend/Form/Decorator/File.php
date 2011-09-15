@@ -92,7 +92,7 @@ class File extends AbstractDecorator implements FileDecorator
         }
 
         $view = $element->getView();
-        if (!$view instanceof Renderer || !method_exists($view, 'broker')) {
+        if (!$view instanceof Renderer || !$view instanceof Pluggable) {
             return $content;
         }
 
@@ -108,13 +108,13 @@ class File extends AbstractDecorator implements FileDecorator
         $size      = $element->getMaxFileSize();
         if ($size > 0) {
             $element->setMaxFileSize(0);
-            $markup[] = $view->broker('formHidden')->direct('MAX_FILE_SIZE', $size);
+            $markup[] = $view->plugin('formHidden')->direct('MAX_FILE_SIZE', $size);
         }
 
         if (Adapter\Http::isApcAvailable()) {
-            $markup[] = $view->broker('formHidden')->direct(ini_get('apc.rfc1867_name'), uniqid(), array('id' => 'progress_key'));
+            $markup[] = $view->plugin('formHidden')->direct(ini_get('apc.rfc1867_name'), uniqid(), array('id' => 'progress_key'));
         } else if (Adapter\Http::isUploadProgressAvailable()) {
-            $markup[] = $view->broker('formHidden')->direct('UPLOAD_IDENTIFIER', uniqid(), array('id' => 'progress_key'));
+            $markup[] = $view->plugin('formHidden')->direct('UPLOAD_IDENTIFIER', uniqid(), array('id' => 'progress_key'));
         }
 
         if ($element->isArray()) {
@@ -123,10 +123,10 @@ class File extends AbstractDecorator implements FileDecorator
             for ($i = 0; $i < $count; ++$i) {
                 $htmlAttribs        = $attribs;
                 $htmlAttribs['id'] .= '-' . $i;
-                $markup[] = $view->broker('formFile')->direct($name, null, $htmlAttribs);
+                $markup[] = $view->plugin('formFile')->direct($name, null, $htmlAttribs);
             }
         } else {
-            $markup[] = $view->broker('formFile')->direct($name, null, $attribs);
+            $markup[] = $view->plugin('formFile')->direct($name, null, $attribs);
         }
 
         $markup = implode($separator, $markup);

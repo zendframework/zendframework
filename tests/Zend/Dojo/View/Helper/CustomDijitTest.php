@@ -63,19 +63,19 @@ class CustomDijitTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldRaiseExceptionIfNoDojoTypePassed()
     {
         $this->setExpectedException('Zend\Dojo\View\Exception\InvalidArgumentException', 'No dojoType specified; cannot create dijit');
-        $this->view->broker('customDijit')->direct('foo');
+        $this->view->plugin('customDijit')->direct('foo');
     }
 
     public function testHelperInDeclarativeModeShouldGenerateDivWithPassedDojoType()
     {
-        $content = $this->view->broker('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
+        $content = $this->view->plugin('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
         $this->assertContains('dojoType="custom.Dijit"', $content);
     }
 
     public function testHelperInDeclarativeModeShouldRegisterDojoTypeAsModule()
     {
-        $content = $this->view->broker('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
-        $dojo    = $this->view->broker('dojo');
+        $content = $this->view->plugin('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
+        $dojo    = $this->view->plugin('dojo');
         $modules = $dojo->getModules();
         $this->assertContains('custom.Dijit', $modules);
     }
@@ -83,8 +83,8 @@ class CustomDijitTest extends \PHPUnit_Framework_TestCase
     public function testHelperInProgrammaticModeShouldRegisterDojoTypeAsModule()
     {
         DojoHelper::setUseProgrammatic();
-        $content = $this->view->broker('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
-        $dojo    = $this->view->broker('dojo');
+        $content = $this->view->plugin('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
+        $dojo    = $this->view->plugin('dojo');
         $modules = $dojo->getModules();
         $this->assertContains('custom.Dijit', $modules);
     }
@@ -92,15 +92,15 @@ class CustomDijitTest extends \PHPUnit_Framework_TestCase
     public function testHelperInProgrammaticModeShouldGenerateDivWithoutPassedDojoType()
     {
         DojoHelper::setUseProgrammatic();
-        $content = $this->view->broker('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
+        $content = $this->view->plugin('customDijit')->direct('foo', 'content', array('dojoType' => 'custom.Dijit'));
         $this->assertNotContains('dojoType="custom.Dijit"', $content);
     }
 
     public function testHelperShouldAllowCapturingContent()
     {
-        $this->view->broker('customDijit')->captureStart('foo', array('dojoType' => 'custom.Dijit'));
+        $this->view->plugin('customDijit')->captureStart('foo', array('dojoType' => 'custom.Dijit'));
         echo "Captured content started\n";
-        $content = $this->view->broker('customDijit')->captureEnd('foo');
+        $content = $this->view->plugin('customDijit')->captureEnd('foo');
         $this->assertContains(">Captured content started\n<", $content);
     }
 
@@ -128,7 +128,7 @@ class CustomDijitTest extends \PHPUnit_Framework_TestCase
      */
     public function testHelperShouldAllowSpecifyingRootNode()
     {
-        $content = $this->view->broker('customDijit')->direct('foo', 'content', array(
+        $content = $this->view->plugin('customDijit')->direct('foo', 'content', array(
             'dojoType' => 'custom.Dijit',
             'rootNode' => 'select',
         ));

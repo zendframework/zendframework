@@ -554,7 +554,7 @@ class Page
         }
 
         if ($this->_attached) {
-            throw new Exception\LogicException('Page is attached to other documen. Use clone $page to get it context free.');
+            throw new Exception\LogicException('Page is attached to other document. Use clone $page to get it context free.');
         } else {
             $objFactory->attach($this->_objFactory);
         }

@@ -90,7 +90,7 @@ class Dojo
             return;
         }
 
-        $view->broker()
+        $view->getBroker()
              ->getClassLoader()
              ->registerPlugins(new View\HelperLoader());
     }
@@ -107,7 +107,7 @@ class Dojo
             return;
         }
         
-        $broker  = $view->broker();
+        $broker  = $view->getBroker();
         $loader  = $broker->getClassLoader();
         $plugins = $broker->getPlugins();
         foreach ($plugins as $plugin => $void) {

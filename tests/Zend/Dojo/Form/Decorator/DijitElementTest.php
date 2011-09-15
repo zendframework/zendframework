@@ -116,12 +116,12 @@ class DijitElementTest extends \PHPUnit_Framework_TestCase
     public function testRenderingShouldEnableDojo()
     {
         $html = $this->decorator->render('');
-        $this->assertTrue($this->view->broker('dojo')->isEnabled());
+        $this->assertTrue($this->view->plugin('dojo')->isEnabled());
     }
 
     public function testRenderingShouldTriggerErrorWhenDuplicateDijitDetected()
     {
-        $this->view->broker('dojo')->addDijit('foo', array('dojoType' => 'dijit.form.TextBox'));
+        $this->view->plugin('dojo')->addDijit('foo', array('dojoType' => 'dijit.form.TextBox'));
 
         $handler = set_error_handler(array($this, 'handleError'));
         $html = $this->decorator->render('');

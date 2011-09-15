@@ -23,6 +23,7 @@ namespace ZendTest\View;
 
 use Zend\View\PhpRenderer,
     Zend\View\TemplatePathStack,
+    Zend\View\Variables,
     Zend\Filter\FilterChain;
 
 /**
@@ -73,14 +74,14 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $a = new \ArrayObject;
         $this->renderer->setVars($a);
-        $this->assertSame($a, $this->renderer->vars());
+        $this->assertSame($a->getArrayCopy(), $this->renderer->vars()->getArrayCopy());
     }
 
     public function testCanSpecifyArrayForVars()
     {
         $vars = array('foo' => 'bar');
         $this->renderer->setVars($vars);
-        $this->assertEquals($vars, $this->renderer->vars());
+        $this->assertEquals($vars, $this->renderer->vars()->getArrayCopy());
     }
 
     public function testPassingArgumentToVarsReturnsValueFromThatKey()
@@ -91,12 +92,12 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesHelperBrokerByDefault()
     {
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
     }
 
     public function testPassingArgumentToBrokerReturnsHelperByThatName()
     {
-        $helper = $this->renderer->broker('doctype');
+        $helper = $this->renderer->plugin('doctype');
         $this->assertInstanceOf('Zend\View\Helper\Doctype', $helper);
     }
 
@@ -109,7 +110,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testPassingValidStringClassToSetBrokerCreatesBroker()
     {
         $this->renderer->setBroker('Zend\View\HelperBroker');
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
     }
 
     public function invalidBrokers()
@@ -134,7 +135,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testInjectsSelfIntoHelperBroker()
     {
-        $broker = $this->renderer->broker();
+        $broker = $this->renderer->getBroker();
         $this->assertSame($this->renderer, $broker->getView());
     }
 
@@ -178,5 +179,25 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         foreach (array('foo', 'bar', 'baz') as $value) {
             $this->assertContains("<li>$value</li>", $content);
         }
+    }
+    
+    /**
+     * @group ZF2-68
+     */
+    public function testCanSpecifyArrayForVarsAndGetAlwaysArrayObject()
+    {
+        $vars = array('foo' => 'bar');
+        $this->renderer->setVars($vars);       
+        $this->assertTrue($this->renderer->vars() instanceof Variables);
+    }
+
+    /**
+     * @group ZF2-68
+     */
+    public function testPassingVariablesObjectToSetVarsShouldUseItDirectoy()
+    {
+        $vars = new Variables(array('foo' => '<p>Bar</p>'));
+        $this->renderer->setVars($vars);
+        $this->assertSame($vars, $this->renderer->vars());
     }
 }

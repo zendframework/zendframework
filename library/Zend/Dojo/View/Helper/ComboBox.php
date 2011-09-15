@@ -110,7 +110,7 @@ class ComboBox extends Dijit
         }
         // do as normal select
         $attribs = $this->_prepareDijit($attribs, $params, 'element');
-        return $this->view->broker('formSelect')->direct($id, $value, $attribs, $options);
+        return $this->view->plugin('formSelect')->direct($id, $value, $attribs, $options);
     }
 
     /**

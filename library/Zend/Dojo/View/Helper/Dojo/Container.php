@@ -961,7 +961,7 @@ EOJ;
             return '';
         }
 
-        $this->_isXhtml = $this->view->broker('doctype')->isXhtml();
+        $this->_isXhtml = $this->view->plugin('doctype')->isXhtml();
 
         if (DojoHelper::useDeclarative()) {
             if (null === $this->getDjConfigOption('parseOnLoad')) {

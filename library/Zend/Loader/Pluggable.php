@@ -13,46 +13,48 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
  * @namespace
  */
-namespace ZendTest\View\Helper;
-
-use Zend\View\PhpRenderer as View,
-    Zend\View\Helper\Placeholder as PlaceholderHelper;
+namespace Zend\Loader;
 
 /**
+ * Pluggable class interface
+ *
  * @category   Zend
- * @package    Zend_View
- * @subpackage UnitTests
+ * @package    Zend_Loader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_View
- * @group      Zend_View_Helper
  */
-class RenderToPlaceholderTest extends \PHPUnit_Framework_TestCase
+interface Pluggable
 {
+    /**
+     * Get plugin broker instance
+     * 
+     * @return Zend\Loader\Broker
+     */
+    public function getBroker();
 
-    protected $_view = null;
+    /**
+     * Set plugin broker instance
+     * 
+     * @param  string|Broker $broker Plugin broker to load plugins
+     * @return Zend\Loader\Pluggable
+     */
+    public function setBroker($broker);
 
-    public function setUp()
-    {
-        $this->_view = new View();
-        $this->_view->resolver()->addPath(__DIR__.'/_files/scripts/');
-    }
-
-    public function testDefaultEmpty()
-    {
-        $this->_view->plugin('renderToPlaceholder')->direct('rendertoplaceholderscript.phtml', 'fooPlaceholder');
-        $placeholder = new PlaceholderHelper();
-        $this->assertEquals("Foo Bar\n", $placeholder->direct('fooPlaceholder')->getValue());
-    }
-
+    /**
+     * Get plugin instance
+     * 
+     * @param  string     $plugin  Name of plugin to return
+     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @return mixed
+     */
+    public function plugin($name, array $options = null);
 }
-

@@ -59,6 +59,6 @@ class HtmlFlash extends HtmlElement
         $params = array_merge(array('movie'   => $data,
                                     'quality' => 'high'), $params);
 
-        return $this->getView()->broker('htmlObject')->direct($data, self::TYPE, $attribs, $params, $content);
+        return $this->getView()->plugin('htmlObject')->direct($data, self::TYPE, $attribs, $params, $content);
     }
 }

@@ -235,4 +235,12 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(array_reverse($this->paths), $stack->getPaths()->toArray());
     }
+
+    public function testAllowsRelativePharPath()
+    {
+        $path = 'phar://' . __DIR__ . '/_templates/view.phar/start/../views';
+        $this->stack->addPath($path);
+        $test = $this->stack->getScriptPath('foo/hello.phtml');
+        $this->assertEquals($path . '/foo/hello.phtml', $test);
+    }
 }

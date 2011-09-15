@@ -257,7 +257,13 @@ class TemplatePathStack implements TemplateResolver
             $file = new SplFileInfo($path . $name);
             if ($file->isReadable()) {
                 // Found! Return it.
-                $filePath = $file->getRealPath();
+                if (($filePath = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
+                    // Do not try to expand phar paths (realpath + phars == fail)
+                    $filePath = $path . $name;
+                    if (!file_exists($filePath)) {
+                        break;
+                    }
+                } 
                 if ($this->useStreamWrapper()) {
                     // If using a stream wrapper, prepend the spec to the path
                     $filePath = 'zend.view://' . $filePath;

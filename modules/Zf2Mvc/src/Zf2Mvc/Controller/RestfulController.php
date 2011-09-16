@@ -125,7 +125,7 @@ abstract class RestfulController implements Dispatchable
             // RESTful methods
             switch (strtolower($request->getMethod())) {
                 case 'get':
-                    if (null !== $id = $request->getMetadata('id')) {
+                    if (null !== $id = $routeMatch->getParam('id')) {
                         $return = $this->get($id);
                         break;
                     }
@@ -135,7 +135,7 @@ abstract class RestfulController implements Dispatchable
                     $return = $this->create($request->post()->toArray());
                     break;
                 case 'put':
-                    if (null === $id = $request->getMetadata('id')) {
+                    if (null === $id = $routeMatch->getParam('id')) {
                         throw new \DomainException('Missing identifier');
                     }
                     $content = $request->getContent();
@@ -143,7 +143,7 @@ abstract class RestfulController implements Dispatchable
                     $return = $this->update($id, $parsedParams);
                     break;
                 case 'delete':
-                    if (null === $id = $request->getMetadata('id')) {
+                    if (null === $id = $routeMatch->getParam('id')) {
                         throw new \DomainException('Missing identifier');
                     }
                     $return = $this->delete($id);

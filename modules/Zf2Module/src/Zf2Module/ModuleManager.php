@@ -2,7 +2,8 @@
 
 namespace Zf2Module;
 
-use Zend\Config\Config,
+use Traversable,
+    Zend\Config\Config,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
@@ -16,12 +17,34 @@ class ModuleManager
     /**
      * @var array An array of Module classes of loaded modules
      */
-    protected $modules = array();
+    protected $loadedModules = array();
 
     /**
      * @var EventCollection
      */
     protected $events;
+
+    /**
+     * @var ModuleManagerOptions
+     */
+    protected $options;
+
+    /**
+     * __construct 
+     * 
+     * @param ModuleLoader $loader 
+     * @param array|Traversable $modules 
+     * @param ModuleManagerOptions $options 
+     * @return void
+     */
+    public function __construct(ModuleLoader $loader, $modules, ModuleManagerOptions $options = null)
+    {
+        if ($options === null) {
+            $this->setOptions(new ModuleManagerOptions);
+        }
+        $this->setLoader($loader);
+        $this->loadModules($modules);
+    }
 
     /**
      * getLoader 
@@ -51,16 +74,24 @@ class ModuleManager
     /**
      * loadModules 
      * 
-     * @param array $modules 
+     * @param array|Traversable $modules 
      * @return ModuleManager
      */
-    public function loadModules(array $modules)
+    public function loadModules($modules)
     {
-        foreach ($modules as $moduleName) {
-            $this->loadModule($moduleName);
+        if (is_array($modules) || $modules instanceof Traversable) {
+            foreach ($modules as $moduleName) {
+                $this->loadModule($moduleName);
+            }
+        } else {
+            throw new \InvalidArgumentException(
+                'Parameter to \\Zf2Module\\ModuleManager\'s '
+                . 'loadModules method must be an array or '
+                . 'implement the \\Traversable interface'
+            );
         }
         $this->events()->trigger('init.post', $this);
-        return $this->modules;
+        return $this;
     }
 
     /**
@@ -71,15 +102,15 @@ class ModuleManager
      */
     public function loadModule($moduleName)
     {
-        if (!isset($this->modules[$moduleName])) {
+        if (!isset($this->loadedModules[$moduleName])) {
             $infoClass = $this->getLoader()->load($moduleName);
             $module = new $infoClass;
             if (is_callable(array($module, 'init'))) {
                 $module->init($this->events());
             }
-            $this->modules[$moduleName] = $module;
+            $this->loadedModules[$moduleName] = $module;
         }
-        return $this->modules[$moduleName];
+        return $this->loadedModules[$moduleName];
     }
 
     /**
@@ -91,31 +122,13 @@ class ModuleManager
     public function getMergedConfig()
     {
         $config = new Config(array(), true);
-        foreach ($this->modules as $module) {
+        foreach ($this->loadedModules as $module) {
             if (is_callable(array($module, 'getConfig'))) {
                 $config->merge($module->getConfig(defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL));
             }
         }
         $config->setReadOnly();
         return $config;
-    }
-
-    /**
-     * fromConfig 
-     * Convenience method
-     * 
-     * @param Config $config 
-     * @return ModuleManager
-     */
-    public static function fromConfig(Config $config)
-    {
-        if (!isset($config->modulesPath) || !isset($config->modules)) {
-
-        }
-        $moduleCollection = new static; 
-        $moduleCollection->getLoader()->registerPaths($config->modulePaths->toArray());
-        $moduleCollection->loadModules($config->modules->toArray());
-        return $moduleCollection;
     }
 
     /**
@@ -144,4 +157,28 @@ class ModuleManager
         }
         return $this->events;
     }
+
+ 
+    /**
+     * Get options.
+     *
+     * @return ModuleManagerOptions
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+ 
+    /**
+     * Set options 
+     * 
+     * @param ModuleManagerOptions $options 
+     * @return ModuleManager
+     */
+    public function setOptions(ModuleManagerOptions $options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+ 
 }

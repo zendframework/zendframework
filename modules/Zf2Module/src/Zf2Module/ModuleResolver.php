@@ -7,10 +7,10 @@ interface ModuleResolver
     /**
      * registerPaths 
      * 
-     * @param array $paths 
+     * @param array|Traversable $paths 
      * @return void
      */
-    public function registerPaths(array $paths);
+    public function registerPaths($paths);
 
     /**
      * registerPath 

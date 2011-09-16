@@ -2,7 +2,8 @@
 
 namespace Zf2Module;
 
-use SplFileInfo;
+use SplFileInfo,
+    Traversable;
 
 class ModuleLoader implements ModuleResolver
 {
@@ -15,26 +16,44 @@ class ModuleLoader implements ModuleResolver
     /**
      * @var array An array of Module class names of loaded modules
      */
-    protected $modules = array();
+    protected $loadedModules = array();
+
+    /**
+     * __construct 
+     * 
+     * @param array|Traversable $paths 
+     */
+    public function __construct($paths = null)
+    {
+        $this->registerPaths($paths);
+    }
 
     /**
      * registerPaths 
      * 
-     * @param array $paths 
+     * @param array|Traversable $paths 
      * @return ModuleLoader
      */
-    public function registerPaths(array $paths)
+    public function registerPaths($paths)
     {
-        foreach ($paths as $path) {
-            $this->registerPath($path);
-        } 
+        if (is_array($paths) || $paths instanceof Traversable) {
+            foreach ($paths as $path) {
+                $this->registerPath($path);
+            } 
+        } else {
+            throw new \InvalidArgumentException(
+                'Parameter to \\Zf2Module\\ModuleLoader\'s '
+                . 'registerPaths methos must be an array or '
+                . 'implement the \\Traversable interface'
+            );
+        }
         return $this;
     }
 
     /**
      * registerPath 
      * 
-     * @param mixed $path 
+     * @param string $path 
      * @return ModuleLoader
      */
     public function registerPath($path)
@@ -55,43 +74,38 @@ class ModuleLoader implements ModuleResolver
      * the full class name of the module's Module class.
      * 
      * @param string $moduleName 
-     * @return string
+     * @return string The Module class name, which is now loaded
      */
     public function load($moduleName)
     {
-        if (!isset($this->modules[$moduleName])) {
-            $this->modules[$moduleName] = $this->resolveModule($moduleName);
-        }
-        return $this->modules[$moduleName];
-    }
-
-    protected function resolveModule($moduleName)
-    {
-        $moduleClass = null;
-        foreach ($this->paths as $path) {
-            $file = new SplFileInfo($path . $moduleName . '/Module.php');
-            if ($file->isReadable()) {
-                require_once $file->getRealPath();
-                $moduleClass = $moduleName . '\Module';
-            } else {
-                $file = new SplFileInfo($path . $moduleName);
-                if ($file->isReadable() && $file->isFile()) {
+        if (!isset($this->loadedModules[$moduleName])) {
+            $moduleClass = null;
+            foreach ($this->paths as $path) {
+                $file = new SplFileInfo($path . $moduleName . '/Module.php');
+                if ($file->isReadable()) {
                     require_once $file->getRealPath();
-                    if (strstr($moduleName, '.') !== false) {
-                        $moduleName = explode('.', $moduleName);
-                        $moduleName = array_shift($moduleName);
-                    }
                     $moduleClass = $moduleName . '\Module';
+                } else {
+                    $file = new SplFileInfo($path . $moduleName);
+                    if ($file->isReadable() && $file->isFile()) {
+                        require_once $file->getRealPath();
+                        if (strstr($moduleName, '.') !== false) {
+                            $moduleName = explode('.', $moduleName);
+                            $moduleName = array_shift($moduleName);
+                        }
+                        $moduleClass = $moduleName . '\Module';
+                    }
                 }
             }
+            if (!class_exists($moduleClass)) {
+                throw new \Exception(sprintf(
+                    'Unable to load module \'%s\' from module path (%s)',
+                    $moduleName, implode(':', $this->paths)
+                ));
+            }
+            $this->loadedModules[$moduleName] = $moduleClass;
         }
-        if (class_exists($moduleClass)) {
-            return $moduleClass;
-        }
-        throw new \Exception(sprintf(
-            'Unable to load module \'%s\' from module path (%s)',
-            $moduleName, implode(':', $this->paths)
-        ));
+        return $this->loadedModules[$moduleName];
     }
 
     /**

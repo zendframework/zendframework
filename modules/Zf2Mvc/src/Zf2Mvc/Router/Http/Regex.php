@@ -64,6 +64,15 @@ class Regex implements Route
     protected $matches = array();
 
     /**
+     * Specification for URL assembly
+     *
+     * Parameters accepting subsitutions should be denoted as "%key%"
+     * 
+     * @var string
+     */
+    protected $spec;
+
+    /**
      * __construct(): defined by Route interface.
      *
      * @see    Route::__construct()
@@ -136,7 +145,14 @@ class Regex implements Route
     {
         $params  = (array) $params;
         $values  = array_merge($this->matches, $params);
-        $escaped = array_map('urlencode', $values);
-        return vsprintf($this->spec, array_values($escaped));
+
+        $url = $this->spec;
+        foreach ($values as $key => $value) {
+            $spec = '%' . $key . '%';
+            if (strstr($url, $spec)) {
+                $url = str_replace($spec, urlencode($value), $url);
+            }
+        }
+        return $url;
     }
 }

@@ -57,8 +57,21 @@ class ModuleManagerOptions
      */
     public function setCacheDir($cacheDir)
     {
-        $this->cacheDir = $cacheDir;
+        $this->cacheDir = rtrim(rtrim($cacheDir, '/'), '\\');
         return $this;
+    }
+
+    /**
+     * getCacheFilePath 
+     * 
+     * Should this be an option, or should the dir option include the 
+     * filename, or should it simply remain hard-coded? Thoughts?
+     *
+     * @return string
+     */
+    public function getCacheFilePath()
+    {
+        return $this->getCacheDir() . '/merged-module-config.php';
     }
 
     /**

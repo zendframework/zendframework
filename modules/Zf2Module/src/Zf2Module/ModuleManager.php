@@ -41,6 +41,8 @@ class ModuleManager
     {
         if ($options === null) {
             $this->setOptions(new ModuleManagerOptions);
+        } else {
+            $this->setOptions($options);
         }
         $this->setLoader($loader);
         $this->loadModules($modules);
@@ -113,23 +115,6 @@ class ModuleManager
         return $this->loadedModules[$moduleName];
     }
 
-    /**
-     * getMergedConfig
-     * Build a merged config object for all loaded modules
-     * 
-     * @return Zend\Config\Config
-     */
-    public function getMergedConfig()
-    {
-        $config = new Config(array(), true);
-        foreach ($this->loadedModules as $module) {
-            if (is_callable(array($module, 'getConfig'))) {
-                $config->merge($module->getConfig(defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL));
-            }
-        }
-        $config->setReadOnly();
-        return $config;
-    }
 
     /**
      * Set the event manager instance used by this context
@@ -158,7 +143,6 @@ class ModuleManager
         return $this->events;
     }
 
- 
     /**
      * Get options.
      *
@@ -180,5 +164,53 @@ class ModuleManager
         $this->options = $options;
         return $this;
     }
- 
+
+    /**
+     * getMergedConfig
+     * Build a merged config object for all loaded modules
+     * 
+     * @return Zend\Config\Config
+     */
+    public function getMergedConfig()
+    {
+        if (($config = $this->getCachedConfig()) !== false) {
+            return $config;
+        }
+        $config = new Config(array(), true);
+        foreach ($this->loadedModules as $module) {
+            if (is_callable(array($module, 'getConfig'))) {
+                $config->merge($module->getConfig(defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL));
+            }
+        }
+        $config->setReadOnly();
+        if ($this->getOptions()->getCacheConfig()) {
+            $this->saveConfigCache($config);
+        }
+        return $config;
+    }
+
+    protected function hasCachedConfig()
+    {
+        if($this->getOptions()->getCacheConfig()) {
+            if (file_exists($this->getOptions()->getCacheFilePath())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected function getCachedConfig()
+    {
+        if ($this->hasCachedConfig()) {
+            return new Config(include $this->getOptions()->getCacheFilePath());
+        }
+        return false; 
+    }
+
+    protected function saveConfigCache($config)
+    {
+        $content = "<?php\nreturn " . var_export($config->toArray(), 1) . ';';
+        file_put_contents($this->getOptions()->getCacheFilePath(), $content);
+        return $this;
+    }
 }

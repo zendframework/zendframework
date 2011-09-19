@@ -1,7 +1,7 @@
 <?php
 return array (
   'Zf2Mvc\\Controller\\RestfulControllerTest' => __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'RestfulControllerTest.php',
-  'Zf2Mvc\\Controller\\TestAsset\\RestfulController' => __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'RestfulController.php',
+  'Zf2Mvc\\Controller\\TestAsset\\RestfulTestController' => __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'RestfulTestController.php',
   'Zf2Mvc\\Controller\\TestAsset\\SampleController' => __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'TestAsset' . DIRECTORY_SEPARATOR . 'SampleController.php',
   'Zf2Mvc\\Controller\\ActionControllerTest' => __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'ActionControllerTest.php',
   'Zf2Mvc\\PhpEnvironment\\PostContainerTest' => __DIR__ . DIRECTORY_SEPARATOR . 'tests' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'PhpEnvironment' . DIRECTORY_SEPARATOR . 'PostContainerTest.php',
@@ -15,6 +15,7 @@ return array (
   'Zf2Mvc\\Controller\\ActionController' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'ActionController.php',
   'Zf2Mvc\\Controller\\RestfulController' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'RestfulController.php',
   'Zf2Mvc\\Application' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Application.php',
+  'Zf2Mvc\\MvcEvent' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'MvcEvent.php',
   'Zf2Mvc\\Exception' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Exception.php',
   'Zf2Mvc\\PhpEnvironment\\GetContainer' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'PhpEnvironment' . DIRECTORY_SEPARATOR . 'GetContainer.php',
   'Zf2Mvc\\PhpEnvironment\\PostContainer' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'PhpEnvironment' . DIRECTORY_SEPARATOR . 'PostContainer.php',

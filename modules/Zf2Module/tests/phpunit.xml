@@ -1,5 +1,5 @@
 <phpunit bootstrap="./bootstrap.php" colors="true">
-    <testsuite name="ZF2 Module Loader Test Suite">
+    <testsuite name="ZF2 Module Manager Test Suite">
         <directory>./</directory>
     </testsuite>
 

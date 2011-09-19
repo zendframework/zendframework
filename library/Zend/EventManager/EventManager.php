@@ -122,19 +122,24 @@ class EventManager implements EventCollection
     /**
      * Trigger all listeners for a given event
      *
+     * Can emulate triggerUntil() if the last argument provided is a callback.
+     *
      * @param  string $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
+     * @param  null|callback $callback 
      * @return ResponseCollection All listener return values
      */
-    public function trigger($event, $target = null, $argv = array())
+    public function trigger($event, $target = null, $argv = array(), $callback = null)
     {
         if ($event instanceof EventDescription) {
             $e        = $event;
             $event    = $e->getName();
+            $callback = $target;
         } elseif ($target instanceof EventDescription) {
             $e = $target;
             $e->setName($event);
+            $callback = $argv;
         } elseif ($argv instanceof EventDescription) {
             $e = $argv;
             $e->setName($event);
@@ -146,9 +151,11 @@ class EventManager implements EventCollection
             $e->setParams($argv);
         }
 
-        $callback = function() {
-            return false;
-        };
+        if (!$callback) {
+            $callback = function() {
+                return false;
+            };
+        }
 
         return $this->triggerListeners($event, $e, $callback);
     }

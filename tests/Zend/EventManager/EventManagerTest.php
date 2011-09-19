@@ -407,4 +407,42 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(__FUNCTION__, $event->getName());
         $this->assertSame($this, $event->getTarget());
     }
+
+    public function testTriggerCanTakeAnOptionalCallbackArgumentToEmulateTriggerUntil()
+    {
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+
+        // Four scenarios:
+        // First: normal signature:
+        $responses = $this->events->trigger(__FUNCTION__, $this, array(), function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+
+        // Second: Event as $argv parameter:
+        $event = new Event();
+        $responses = $this->events->trigger(__FUNCTION__, $this, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+
+        // Third: Event as $target parameter:
+        $event = new Event();
+        $event->setTarget($this);
+        $responses = $this->events->trigger(__FUNCTION__, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+
+        // Fourth: Event as $event parameter:
+        $event = new Event();
+        $event->setTarget($this);
+        $event->setName(__FUNCTION__);
+        $responses = $this->events->trigger($event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+    }
 }

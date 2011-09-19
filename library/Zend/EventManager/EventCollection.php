@@ -37,24 +37,36 @@ interface EventCollection
 {
     /**
      * Trigger an event
+     *
+     * Should allow handling the following scenarios:
+     * - Passing Event object only
+     * - Passing event name and Event object only
+     * - Passing event name, target, and Event object
+     * - Passing event name, target, and array|ArrayAccess of arguments
      * 
      * @param  string $event 
-     * @param  object|string $context 
+     * @param  object|string $target 
      * @param  array|object $argv 
      * @return ResponseCollection
      */
-    public function trigger($event, $context, $argv = array());
+    public function trigger($event, $target = null, $argv = array());
 
     /**
      * Trigger an event until the given callback returns a boolean false
+     *
+     * Should allow handling the following scenarios:
+     * - Passing Event object and callback only
+     * - Passing event name, Event object, and callback only
+     * - Passing event name, target, Event object, and callback
+     * - Passing event name, target, array|ArrayAccess of arguments, and callback
      * 
      * @param  string $event 
-     * @param  object|string $context 
+     * @param  object|string $target 
      * @param  array|object $argv 
      * @param  callback $callback 
      * @return ResponseCollection
      */
-    public function triggerUntil($event, $context, $argv, $callback);
+    public function triggerUntil($event, $target, $argv = null, $callback = null);
 
     /**
      * Attach a handler to an event

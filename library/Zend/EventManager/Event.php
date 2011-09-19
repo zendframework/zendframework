@@ -36,7 +36,7 @@ use ArrayAccess;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Event
+class Event implements EventDescription
 {
     /**
      * @var string Event name
@@ -70,8 +70,8 @@ class Event
      */
     public function __construct($name, $target, $params)
     {
-        $this->name   = $name;
-        $this->target = $target;
+        $this->setName($name);
+        $this->setTarget($target);
         $this->setParams($params);
     }
 
@@ -156,6 +156,30 @@ class Event
     }
 
     /**
+     * Set the event name
+     * 
+     * @param  string $name 
+     * @return Event
+     */
+    public function setName($name)
+    {
+        $this->name = (string) $name;
+        return $this;
+    }
+
+    /**
+     * Set the event target/context
+     * 
+     * @param  null|string|object $target 
+     * @return Event
+     */
+    public function setTarget($target)
+    {
+        $this->target = $target;
+        return $this;
+    }
+
+    /**
      * Set an individual parameter to a value
      * 
      * @param  string|int $name 
@@ -180,7 +204,7 @@ class Event
      * @param  bool $flag 
      * @return void
      */
-    public function stopPropagation($flag)
+    public function stopPropagation($flag = true)
     {
         $this->stopPropagation = (bool) $flag;
     }

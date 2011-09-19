@@ -7,7 +7,7 @@ use Zend\Loader\AutoLoaderFactory;
 /**
  * Class detailing metadata about this module
  *
- * Ideas include exposing DI definitions, event handlers, configuration, etc.
+ * Ideas include exposing DI definitions, event listeners, configuration, etc.
  */
 class Module
 {

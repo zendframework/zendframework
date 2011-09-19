@@ -95,7 +95,7 @@ abstract class RestfulController implements Dispatchable
 
         // Emit pre-dispatch signal, passing:
         // - request, response
-        // If a handler returns a response object, return it immediately
+        // If a listener returns a response object, return it immediately
         $events = $this->events();
         $params = compact('request', 'response');
         $result = $events->triggerUntil('dispatch.pre', $this, $params, function($result) {
@@ -155,7 +155,7 @@ abstract class RestfulController implements Dispatchable
 
         // Emit post-dispatch signal, passing:
         // - return from method, request, response
-        // If a handler returns a response object, return it immediately
+        // If a listener returns a response object, return it immediately
         $params['__RESULT__'] =& $return;
         $result = $events->triggerUntil(__FUNCTION__ . '.post', $this, $params, function($result) {
             return ($result instanceof Response);

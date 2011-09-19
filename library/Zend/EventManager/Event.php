@@ -68,11 +68,19 @@ class Event implements EventDescription
      * @param  array|ArrayAccess $params 
      * @return void
      */
-    public function __construct($name, $target, $params)
+    public function __construct($name = null, $target = null, $params = null)
     {
-        $this->setName($name);
-        $this->setTarget($target);
-        $this->setParams($params);
+        if (null !== $name) {
+            $this->setName($name);
+        }
+
+        if (null !== $target) {
+            $this->setTarget($target);
+        }
+
+        if (null !== $params) {
+            $this->setParams($params);
+        }
     }
 
     /**

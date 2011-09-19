@@ -24,7 +24,7 @@
 namespace Zend\EventManager;
 
 /**
- * Interface for global (static) event handler collections
+ * Interface for global (static) event listener collections
  *
  * @category   Zend
  * @package    Zend_EventManager
@@ -33,5 +33,5 @@ namespace Zend\EventManager;
  */
 interface StaticEventCollection
 {
-    public function getHandlers($id, $event);
+    public function getListeners($id, $event);
 }

@@ -42,7 +42,7 @@ use Zend\Stdlib\CallbackHandler,
 class EventManager implements EventCollection
 {
     /**
-     * Subscribed events and their handlers
+     * Subscribed events and their listeners
      * @var array Array of PriorityQueue objects
      */
     protected $events = array();
@@ -120,12 +120,12 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Trigger all handlers for a given event
+     * Trigger all listeners for a given event
      *
      * @param  string $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
-     * @return ResponseCollection All handler return values
+     * @return ResponseCollection All listener return values
      */
     public function trigger($event, $target = null, $argv = array())
     {
@@ -154,11 +154,11 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Trigger handlers until return value of one causes a callback to
+     * Trigger listeners until return value of one causes a callback to
      * evaluate to true
      *
-     * Triggers handlers until the provided callback evaluates the return
-     * value of one as true, or until all handlers have been executed.
+     * Triggers listeners until the provided callback evaluates the return
+     * value of one as true, or until all listeners have been executed.
      *
      * @param  string $event
      * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
@@ -195,11 +195,11 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Attach a handler to an event
+     * Attach a listener to an event
      *
      * The first argument is the event, and the next argument describes a
      * callback that will respond to that event. A CallbackHandler instance
-     * describing the event handler combination will be returned.
+     * describing the event listener combination will be returned.
      *
      * The last argument indicates a priority at which the event should be
      * executed. By default, this value is 1; however, you may set it for any
@@ -208,46 +208,46 @@ class EventManager implements EventCollection
      * @param  string $event
      * @param  callback $callback PHP callback
      * @param  int $priority If provided, the priority at which to register the callback
-     * @return HandlerAggregate (to allow later unsubscribe)
+     * @return ListenerAggregate (to allow later unsubscribe)
      */
     public function attach($event, $callback, $priority = 1)
     {
         if (empty($this->events[$event])) {
             $this->events[$event] = new PriorityQueue();
         }
-        $handler = new CallbackHandler($event, $callback, array('priority' => $priority));
-        $this->events[$event]->insert($handler, $priority);
-        return $handler;
+        $listener = new CallbackHandler($event, $callback, array('priority' => $priority));
+        $this->events[$event]->insert($listener, $priority);
+        return $listener;
     }
 
     /**
-     * Attach a handler aggregate
+     * Attach a listener aggregate
      *
-     * Handler aggregates accept an EventCollection instance, and call attach()
+     * Listener aggregates accept an EventCollection instance, and call attach()
      * one or more times, typically to attach to multiple events using local
      * methods.
      *
-     * @param  HandlerAggregate $aggregate
-     * @return mixed return value of {@link HandlerAggregate::attach()}
+     * @param  ListenerAggregate $aggregate
+     * @return mixed return value of {@link ListenerAggregate::attach()}
      */
-    public function attachAggregate(HandlerAggregate $aggregate)
+    public function attachAggregate(ListenerAggregate $aggregate)
     {
         return $aggregate->attach($this);
     }
 
     /**
-     * Unsubscribe a handler from an event
+     * Unsubscribe a listener from an event
      *
-     * @param  CallbackHandler $handler
-     * @return bool Returns true if event and handle found, and unsubscribed; returns false if either event or handle not found
+     * @param  CallbackHandler $listener
+     * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
      */
-    public function detach(CallbackHandler $handler)
+    public function detach(CallbackHandler $listener)
     {
-        $event = $handler->getEvent();
+        $event = $listener->getEvent();
         if (empty($this->events[$event])) {
             return false;
         }
-        $return = $this->events[$event]->remove($handler);
+        $return = $this->events[$event]->remove($listener);
         if (!$return) {
             return false;
         }
@@ -258,15 +258,15 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Detach a handler aggregate
+     * Detach a listener aggregate
      *
-     * Handler aggregates accept an EventCollection instance, and call detach()
-     * of all previously attached handlers.
+     * Listener aggregates accept an EventCollection instance, and call detach()
+     * of all previously attached listeners.
      *
-     * @param  HandlerAggregate $aggregate
-     * @return mixed return value of {@link HandlerAggregate::detach()}
+     * @param  ListenerAggregate $aggregate
+     * @return mixed return value of {@link ListenerAggregate::detach()}
      */
-    public function detachAggregate(HandlerAggregate $aggregate)
+    public function detachAggregate(ListenerAggregate $aggregate)
     {
         return $aggregate->detach($this);
     }
@@ -282,12 +282,12 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Retrieve all handlers for a given event
+     * Retrieve all listeners for a given event
      *
      * @param  string $event
      * @return PriorityQueue
      */
-    public function getHandlers($event)
+    public function getListeners($event)
     {
         if (!array_key_exists($event, $this->events)) {
             return new PriorityQueue();
@@ -296,12 +296,12 @@ class EventManager implements EventCollection
     }
 
     /**
-     * Clear all handlers for a given event
+     * Clear all listeners for a given event
      *
      * @param  string $event
      * @return void
      */
-    public function clearHandlers($event)
+    public function clearListeners($event)
     {
         if (!empty($this->events[$event])) {
             unset($this->events[$event]);
@@ -312,7 +312,7 @@ class EventManager implements EventCollection
      * Prepare arguments
      *
      * Use this method if you want to be able to modify arguments from within a
-     * handler. It returns an ArrayObject of the arguments, which may then be
+     * listener. It returns an ArrayObject of the arguments, which may then be
      * passed to trigger() or triggerUntil().
      *
      * @param  array $args
@@ -338,13 +338,13 @@ class EventManager implements EventCollection
     {
         $responses = new ResponseCollection;
 
-        $handlers = $this->getHandlers($event);
-        if ($handlers->isEmpty()) {
-            return $this->triggerStaticHandlers($callback, $e, $responses);
+        $listeners = $this->getListeners($event);
+        if ($listeners->isEmpty()) {
+            return $this->triggerStaticListeners($callback, $e, $responses);
         }
 
-        foreach ($handlers as $handler) {
-            $responses->push(call_user_func($handler->getCallback(), $e));
+        foreach ($listeners as $listener) {
+            $responses->push(call_user_func($listener->getCallback(), $e));
             if ($e->propagationIsStopped()) {
                 $responses->setStopped(true);
                 break;
@@ -356,20 +356,20 @@ class EventManager implements EventCollection
         }
 
         if (!$responses->stopped()) {
-            $this->triggerStaticHandlers($callback, $e, $responses);
+            $this->triggerStaticListeners($callback, $e, $responses);
         }
         return $responses;
     }
 
     /**
-     * Emit handlers matching the current identifier found in the static handler
+     * Emit listeners matching the current identifier found in the static listener
      *
      * @param  callback $callback
      * @param  Event $event
      * @param  ResponseCollection $responses
      * @return ResponseCollection
      */
-    protected function triggerStaticHandlers($callback, Event $event, ResponseCollection $responses)
+    protected function triggerStaticListeners($callback, Event $event, ResponseCollection $responses)
     {
         if (!$staticConnections = $this->getStaticConnections()) {
             return $responses;
@@ -378,11 +378,11 @@ class EventManager implements EventCollection
         $identifiers = (array) $this->identifier;
 
         foreach ($identifiers as $id) {
-            if (!$handlers = $staticConnections->getHandlers($id, $event->getName())) {
+            if (!$listeners = $staticConnections->getListeners($id, $event->getName())) {
                 continue;
             }
-            foreach ($handlers as $handler) {
-                $responses->push(call_user_func($handler->getCallback(), $event));
+            foreach ($listeners as $listener) {
+                $responses->push(call_user_func($listener->getCallback(), $event));
                 if ($event->propagationIsStopped()) {
                     $responses->setStopped(true);
                     break;

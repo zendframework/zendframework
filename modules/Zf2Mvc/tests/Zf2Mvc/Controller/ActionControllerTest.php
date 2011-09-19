@@ -6,23 +6,30 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\StaticEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
+    Zf2Mvc\MvcEvent,
     Zf2Mvc\Router\RouteMatch;
 
 class ActionControllerTest extends TestCase
 {
+    public $controller;
+    public $event;
+    public $request;
+    public $response;
+
     public function setUp()
     {
         $this->controller = new TestAsset\SampleController();
-        $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample'));
         $this->request    = new Request();
-        $this->request->setMetadata('route-match', $this->routeMatch);
+        $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample'));
+        $this->event      = new MvcEvent();
+        $this->event->setRouteMatch($this->routeMatch);
 
         StaticEventManager::resetInstance();
     }
 
     public function testDispatchInvokesIndexActionWhenNoActionPresentInRouteMatch()
     {
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertTrue(isset($result['content']));
         $this->assertContains('Placeholder page', $result['content']);
     }
@@ -30,7 +37,7 @@ class ActionControllerTest extends TestCase
     public function testDispatchInvokesNotFoundActionWhenInvalidActionPresentInRouteMatch()
     {
         $this->routeMatch->setParam('action', 'totally-made-up-action');
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertTrue(isset($result['content']));
@@ -40,7 +47,7 @@ class ActionControllerTest extends TestCase
     public function testDispatchInvokesProvidedActionWhenMethodExists()
     {
         $this->routeMatch->setParam('action', 'test');
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertTrue(isset($result['content']));
         $this->assertContains('test', $result['content']);
     }
@@ -48,7 +55,7 @@ class ActionControllerTest extends TestCase
     public function testDispatchCallsActionMethodBasedOnNormalizingAction()
     {
         $this->routeMatch->setParam('action', 'test.some-strangely_separated.words');
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertTrue(isset($result['content']));
         $this->assertContains('Test Some Strangely Separated Words', $result['content']);
     }
@@ -60,7 +67,7 @@ class ActionControllerTest extends TestCase
         $this->controller->events()->attach('dispatch.pre', function($e) use ($response) {
             return $response;
         });
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
 
@@ -71,7 +78,7 @@ class ActionControllerTest extends TestCase
         $this->controller->events()->attach('dispatch.post', function($e) use ($response) {
             return $response;
         });
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
 
@@ -83,7 +90,7 @@ class ActionControllerTest extends TestCase
         $events->attach('Zend\Stdlib\Dispatchable', 'dispatch.pre', function($e) use ($response) {
             return $response;
         });
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
 
@@ -95,7 +102,7 @@ class ActionControllerTest extends TestCase
         $events->attach('Zf2Mvc\Controller\ActionController', 'dispatch.pre', function($e) use ($response) {
             return $response;
         });
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
 
@@ -107,7 +114,7 @@ class ActionControllerTest extends TestCase
         $events->attach(get_class($this->controller), 'dispatch.pre', function($e) use ($response) {
             return $response;
         });
-        $result = $this->controller->dispatch($this->request);
+        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
 }

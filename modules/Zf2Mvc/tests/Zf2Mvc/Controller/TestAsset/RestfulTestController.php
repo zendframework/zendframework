@@ -2,9 +2,9 @@
 
 namespace Zf2Mvc\Controller\TestAsset;
 
-use Zf2Mvc\Controller\RestfulController as RestfulBase;
+use Zf2Mvc\Controller\RestfulController;
 
-class RestfulController extends RestfulBase
+class RestfulTestController extends RestfulController
 {
     public $entities = array();
     public $entity   = array();

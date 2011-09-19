@@ -159,8 +159,8 @@ class ApplicationTest extends TestCase
         $app = $this->setupPathController();
 
         $log = array();
-        $app->events()->attach('route.post', function($e) use (&$log) {
-            $match = $e->getParam('__RESULT__', false);
+        $app->events()->attach('route', function($e) use (&$log) {
+            $match = $e->getRouteMatch();
             if (!$match) {
                 return;
             }
@@ -295,15 +295,15 @@ class ApplicationTest extends TestCase
     {
         $app = $this->setupActionController();
 
-        $app->events()->attach('dispatch.post', function($e) {
-            $result = $e->getParam('__RESULT__', false);
+        $app->events()->attach('dispatch', function($e) {
+            $result = $e->getResult();
             if (!$result) {
                 return;
             }
             $result['foo'] = 'bar';
         });
-        $app->events()->attach('dispatch.post', function($e) {
-            $result = $e->getParam('__RESULT__', false);
+        $app->events()->attach('dispatch', function($e) {
+            $result = $e->getResult();
             if (!$result) {
                 return;
             }

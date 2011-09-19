@@ -4,12 +4,14 @@ namespace Zf2Mvc\Controller;
 
 use ArrayObject,
     Zend\EventManager\EventCollection,
+    Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
     Zend\Http\Response as HttpResponse,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\Stdlib\ResponseDescription as Response,
+    Zf2Mvc\MvcEvent;
 
 /**
  * Basic action controller
@@ -46,10 +48,11 @@ abstract class ActionController implements Dispatchable
      * 
      * @events dispatch.pre, dispatch.post
      * @param  Request $request 
-     * @param  Response $response 
+     * @param  null|Response $response 
+     * @param  null|Event $e
      * @return Response|mixed
      */
-    public function dispatch(Request $request, Response $response = null)
+    public function dispatch(Request $request, Response $response = null, Event $e = null)
     {
         $this->request = $request;
         if (!$response) {
@@ -57,16 +60,30 @@ abstract class ActionController implements Dispatchable
         }
         $this->response = $response;
 
+        $routeMatch = false;
+        if ($e instanceof MvcEvent) {
+            $routeMatch = $e->getRouteMatch();
+        } elseif ($e instanceof Event) {
+            $eventParams = $e->getParams();
+            $e = new MvcEvent();
+            $e->setParams($eventParams);
+            unset($eventParams);
+        }
+        if (null === $e) {
+            $e = new MvcEvent();
+        }
+        $e->setRequest($request)
+          ->setResponse($response)
+          ->setTarget($this);
+
         $events = $this->events();
-        $params = compact('request', 'response');
-        $result = $events->triggerUntil('dispatch.pre', $this, $params, function($test) {
+        $result = $events->trigger('dispatch.pre', $e, function($test) {
             return ($test instanceof Response);
         });
         if ($result->stopped()) {
             return $result->last();
         }
 
-        $routeMatch = $request->getMetadata('route-match', false);
         if (!$routeMatch) {
             /**
              * @todo Determine requirements for when route match is missing.
@@ -74,6 +91,7 @@ abstract class ActionController implements Dispatchable
              */
             throw new \DomainException('Missing route matches; unsure how to retrieve action');
         }
+
         $action = $routeMatch->getParam('action', 'index');
         $method = static::getMethodFromAction($action);
 
@@ -89,15 +107,15 @@ abstract class ActionController implements Dispatchable
             }
         }
 
-        $params['__RESULT__'] = $actionResponse;
-        $result = $events->triggerUntil('dispatch.post', $this, $params, function($test) {
+        $e->setResult($actionResponse);
+        $result = $events->triggerUntil('dispatch.post', $e, function($test) {
             return ($test instanceof Response);
         });
         if ($result->stopped()) {
             return $result->last();
         }
 
-        return $params['__RESULT__'];
+        return $e->getResult();
     }
 
     /**

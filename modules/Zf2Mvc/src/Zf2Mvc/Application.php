@@ -43,6 +43,8 @@ class Application implements AppContext
      */
     public function setEventManager(EventCollection $events)
     {
+        $events->attach('route', array($this, 'route'));
+        $events->attach('dispatch', array($this, 'dispatch'));
         $this->events = $events;
         return $this;
     }
@@ -199,14 +201,25 @@ class Application implements AppContext
             );
         }
 
-        $routeMatch = $this->route();
-        $result     = $this->dispatch($routeMatch);
+        $events = $this->events();
+        $event  = new MvcEvent();
+        $event->setTarget($this);
+        $event->setRequest($this->getRequest())
+              ->setRouter($this->getRouter());
 
-        if ($result instanceof Response) {
-            $response = $result;
-        } else {
+        $event->setName('route');
+        $events->trigger($event);
+
+        $event->setName('dispatch');
+        $result = $events->trigger($event, function ($r) {
+            return ($r instanceof Response);
+        });
+
+        $response = $result->last();
+        if (!$response instanceof Response) {
             $response = $this->getResponse();
         }
+
         $response = new SendableResponse($response);
         return $response;
     }
@@ -217,14 +230,10 @@ class Application implements AppContext
      * @events route.pre, route.post
      * @return Router\RouteMatch
      */
-    protected function route()
+    public function route(MvcEvent $e)
     {
-        $request = $this->getRequest();
-        $router  = $this->getRouter();
-        $events  = $this->events();
-        $params  = compact('request', 'router');
-
-        $events->trigger('route.pre', $this, $params);
+        $request = $e->getRequest();
+        $router  = $e->getRouter();
 
         $routeMatch = $router->match($request);
 
@@ -237,8 +246,7 @@ class Application implements AppContext
             throw new \Exception('UNIMPLEMENTED: Handling of failed routing');
         }
 
-        $params['__RESULT__'] = $routeMatch;
-        $events->trigger('route.post', $this, $params);
+        $e->setRouteMatch($routeMatch);
         return $routeMatch;
     }
 
@@ -249,16 +257,10 @@ class Application implements AppContext
      * @param  Router\RouteMatch $routeMatch 
      * @return mixed
      */
-    protected function dispatch($routeMatch)
+    public function dispatch(MvcEvent $e)
     {
-        $events  = $this->events();
-        $params  = compact('routeMatch');
-        $result  = $events->triggerUntil('dispatch.pre', $this, $params, function($result) {
-            return ($result instanceof Response);
-        });
-        if ($result->stopped()) {
-            return $result->last();
-        }
+        $events     = $this->events();
+        $routeMatch = $e->getRouteMatch();
 
         $controllerName = $routeMatch->getParam('controller', 'not-found');
         $locator        = $this->getLocator();
@@ -266,40 +268,39 @@ class Application implements AppContext
         try {
             $controller = $locator->get($controllerName);
         } catch (ClassNotFoundException $e) {
-            $errorParams = array(
-                'error'       => static::ERROR_CONTROLLER_NOT_FOUND,
-                'controller'  => $controllerName,
-                'route-match' => $routeMatch,
-            );
-            $results = $events->trigger('dispatch.error', $this, $errorParams);
+            $error = clone $e;
+            $error->setError(static::ERROR_CONTROLLER_NOT_FOUND)
+                  ->setController($controllerName)
+                  ->setName('dispatch.error');
+
+            $results = $events->trigger($error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
-                $return = $errorParams;
+                $return = $error->getParams();
             }
             goto complete;
         }
 
         if (!$controller instanceof Dispatchable) {
-            $errorParams = array(
-                'error'            => static::ERROR_CONTROLLER_INVALID,
-                'controller'       => $controllerName,
-                'controller-class' => get_class($controller),
-                'route-match'      => $routeMatch,
-            );
-            $results = $events->trigger('dispatch.error', $this, $errorParams);
+            $error = clone $e;
+            $error->setError(static::ERROR_CONTROLLER_INVALID)
+                  ->setController($controllerName)
+                  ->setControllerClass(get_class($controller))
+                  ->setName('dispatch.error');
+            $results = $events->trigger($error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
-                $return = $errorParams;
+                $return = $error->getParams();
             }
             goto complete;
         }
 
-        $request  = $this->getRequest();
-        $request->setMetadata('route-match', $routeMatch);
+        $request  = $e->getRequest();
         $response = $this->getResponse();
-        $return   = $controller->dispatch($request, $response);
+        $event    = clone $e;
+        $return   = $controller->dispatch($request, $response, $e);
 
         complete:
 
@@ -308,15 +309,7 @@ class Application implements AppContext
                 $return = new ArrayObject($return, ArrayObject::ARRAY_AS_PROPS);
             }
         }
-
-        $params['__RESULT__'] = $return;
-        $result  = $events->triggerUntil('dispatch.post', $this, $params, function($result) {
-            return ($result instanceof Response);
-        });
-        if ($result->stopped()) {
-            return $result->last();
-        }
-
-        return $params['__RESULT__'];
+        $e->setResult($return);
+        return $return;
     }
 }

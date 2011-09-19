@@ -33,7 +33,7 @@ use Zend\EventManager\StaticEventCollection;
  */
 class StaticEventsMock implements StaticEventCollection
 {
-    public function getHandlers($id, $event)
+    public function getListeners($id, $event)
     {
         return array();
     }

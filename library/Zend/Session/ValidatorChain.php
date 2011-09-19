@@ -61,7 +61,7 @@ class ValidatorChain extends EventManager
     }
 
     /**
-     * Attach a handler to the session validator chain
+     * Attach a listener to the session validator chain
      * 
      * @param  string $event
      * @param  callback $context 
@@ -86,8 +86,8 @@ class ValidatorChain extends EventManager
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::attach($event, $callback, $priority);
-        return $handle;
+        $listener = parent::attach($event, $callback, $priority);
+        return $listener;
     }
 
     /**

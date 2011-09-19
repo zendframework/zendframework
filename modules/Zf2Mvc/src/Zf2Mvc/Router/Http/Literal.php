@@ -28,6 +28,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Http\Request,
     Zf2Mvc\Router\Exception,
+    Zf2Mvc\Router\Route,
     Zf2Mvc\Router\RouteMatch;
 
 /**

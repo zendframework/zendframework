@@ -123,26 +123,26 @@ class EventManager implements EventCollection
      * Trigger all handlers for a given event
      *
      * @param  string $event
-     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name)
+     * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @return ResponseCollection All handler return values
      */
-    public function trigger($event, $context = null, $argv = array())
+    public function trigger($event, $target = null, $argv = array())
     {
         if ($event instanceof EventDescription) {
             $e        = $event;
             $event    = $e->getName();
-        } elseif ($context instanceof EventDescription) {
-            $e = $context;
+        } elseif ($target instanceof EventDescription) {
+            $e = $target;
             $e->setName($event);
         } elseif ($argv instanceof EventDescription) {
             $e = $argv;
             $e->setName($event);
-            $e->setTarget($context);
+            $e->setTarget($target);
         } else {
             $e = new $this->eventClass();
             $e->setName($event);
-            $e->setTarget($context);
+            $e->setTarget($target);
             $e->setParams($argv);
         }
 
@@ -161,29 +161,29 @@ class EventManager implements EventCollection
      * value of one as true, or until all handlers have been executed.
      *
      * @param  string $event
-     * @param  string|object $context Object calling emit, or symbol describing context (such as static method name)
+     * @param  string|object $target Object calling emit, or symbol describing target (such as static method name)
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @param  Callable $callback
      * @throws InvalidCallbackException if invalid callback provided
      */
-    public function triggerUntil($event, $context, $argv = null, $callback = null)
+    public function triggerUntil($event, $target, $argv = null, $callback = null)
     {
         if ($event instanceof EventDescription) {
             $e        = $event;
             $event    = $e->getName();
-            $callback = $context;
-        } elseif ($context instanceof EventDescription) {
-            $e = $context;
+            $callback = $target;
+        } elseif ($target instanceof EventDescription) {
+            $e = $target;
             $e->setName($event);
             $callback = $argv;
         } elseif ($argv instanceof EventDescription) {
             $e = $argv;
             $e->setName($event);
-            $e->setTarget($context);
+            $e->setTarget($target);
         } else {
             $e = new $this->eventClass();
             $e->setName($event);
-            $e->setTarget($context);
+            $e->setTarget($target);
             $e->setParams($argv);
         }
 

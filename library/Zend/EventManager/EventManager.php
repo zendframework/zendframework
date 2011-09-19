@@ -24,6 +24,7 @@
 namespace Zend\EventManager;
 
 use Zend\Stdlib\CallbackHandler,
+    Zend\Stdlib\Exception\InvalidCallbackException,
     Zend\Stdlib\PriorityQueue,
     ArrayObject;
 
@@ -126,11 +127,30 @@ class EventManager implements EventCollection
      * @param  array|ArrayAccess $argv Array of arguments; typically, should be associative
      * @return ResponseCollection All handler return values
      */
-    public function trigger($event, $context, $argv = array())
+    public function trigger($event, $context = null, $argv = array())
     {
-        return $this->triggerUntil($event, $context, $argv, function(){
+        if ($event instanceof EventDescription) {
+            $e        = $event;
+            $event    = $e->getName();
+        } elseif ($context instanceof EventDescription) {
+            $e = $context;
+            $e->setName($event);
+        } elseif ($argv instanceof EventDescription) {
+            $e = $argv;
+            $e->setName($event);
+            $e->setTarget($context);
+        } else {
+            $e = new $this->eventClass();
+            $e->setName($event);
+            $e->setTarget($context);
+            $e->setParams($argv);
+        }
+
+        $callback = function() {
             return false;
-        });
+        };
+
+        return $this->triggerListeners($event, $e, $callback);
     }
 
     /**
@@ -146,39 +166,32 @@ class EventManager implements EventCollection
      * @param  Callable $callback
      * @throws InvalidCallbackException if invalid callback provided
      */
-    public function triggerUntil($event, $context, $argv, $callback)
+    public function triggerUntil($event, $context, $argv = null, $callback = null)
     {
+        if ($event instanceof EventDescription) {
+            $e        = $event;
+            $event    = $e->getName();
+            $callback = $context;
+        } elseif ($context instanceof EventDescription) {
+            $e = $context;
+            $e->setName($event);
+            $callback = $argv;
+        } elseif ($argv instanceof EventDescription) {
+            $e = $argv;
+            $e->setName($event);
+            $e->setTarget($context);
+        } else {
+            $e = new $this->eventClass();
+            $e->setName($event);
+            $e->setTarget($context);
+            $e->setParams($argv);
+        }
+
         if (!is_callable($callback)) {
             throw new InvalidCallbackException('Invalid callback provided');
         }
 
-        $responses = new ResponseCollection;
-        $e         = new $this->eventClass();
-        $e->setName($event);
-        $e->setTarget($context);
-        $e->setParams($argv);
-
-        $handlers = $this->getHandlers($event);
-        if ($handlers->isEmpty()) {
-            return $this->triggerStaticHandlers($callback, $e, $responses);
-        }
-
-        foreach ($handlers as $handler) {
-            $responses->push(call_user_func($handler->getCallback(), $e));
-            if ($e->propagationIsStopped()) {
-                $responses->setStopped(true);
-                break;
-            }
-            if (call_user_func($callback, $responses->last())) {
-                $responses->setStopped(true);
-                break;
-            }
-        }
-
-        if (!$responses->stopped()) {
-            $this->triggerStaticHandlers($callback, $e, $responses);
-        }
-        return $responses;
+        return $this->triggerListeners($event, $e, $callback);
     }
 
     /**
@@ -308,6 +321,44 @@ class EventManager implements EventCollection
     public function prepareArgs(array $args)
     {
         return new ArrayObject($args);
+    }
+
+    /**
+     * Trigger listeners
+     *
+     * Actual functionality for triggering listeners, to which both trigger() and triggerUntil() 
+     * delegate.
+     * 
+     * @param  string $event Event name
+     * @param  EventDescription $e 
+     * @param  callback $callback 
+     * @return ResponseCollection
+     */
+    protected function triggerListeners($event, EventDescription $e, $callback)
+    {
+        $responses = new ResponseCollection;
+
+        $handlers = $this->getHandlers($event);
+        if ($handlers->isEmpty()) {
+            return $this->triggerStaticHandlers($callback, $e, $responses);
+        }
+
+        foreach ($handlers as $handler) {
+            $responses->push(call_user_func($handler->getCallback(), $e));
+            if ($e->propagationIsStopped()) {
+                $responses->setStopped(true);
+                break;
+            }
+            if (call_user_func($callback, $responses->last())) {
+                $responses->setStopped(true);
+                break;
+            }
+        }
+
+        if (!$responses->stopped()) {
+            $this->triggerStaticHandlers($callback, $e, $responses);
+        }
+        return $responses;
     }
 
     /**

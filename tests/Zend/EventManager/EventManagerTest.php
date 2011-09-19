@@ -20,7 +20,10 @@
  */
 
 namespace ZendTest\EventManager;
-use Zend\EventManager\EventManager,
+
+use Zend\EventManager\Event,
+    Zend\EventManager\EventDescription,
+    Zend\EventManager\EventManager,
     Zend\EventManager\ResponseCollection,
     Zend\Stdlib\CallbackHandler;
 
@@ -316,5 +319,92 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, $params);
         $this->assertEquals('FOO', $params->foo);
         $this->assertEquals('BAR', $params->bar);
+    }
+
+    public function testCanPassEventObjectAsSoleArgumentToTrigger()
+    {
+        $event = new Event();
+        $event->setName(__FUNCTION__);
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->trigger($event);
+        $this->assertSame($event, $responses->last());
+    }
+
+    public function testCanPassEventNameAndEventObjectAsSoleArgumentsToTrigger()
+    {
+        $event = new Event();
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->trigger(__FUNCTION__, $event);
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+    }
+
+    public function testCanPassEventObjectAsArgvToTrigger()
+    {
+        $event = new Event();
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->trigger(__FUNCTION__, $this, $event);
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+        $this->assertSame($this, $event->getTarget());
+    }
+
+    public function testCanPassEventObjectAndCallbackAsSoleArgumentsToTriggerUntil()
+    {
+        $event = new Event();
+        $event->setName(__FUNCTION__);
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->triggerUntil($event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+        $this->assertSame($event, $responses->last());
+    }
+
+    public function testCanPassEventNameAndEventObjectAndCallbackAsSoleArgumentsToTriggerUntil()
+    {
+        $event = new Event();
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->triggerUntil(__FUNCTION__, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+    }
+
+    public function testCanPassEventObjectAsArgvToTriggerUntil()
+    {
+        $event = new Event();
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->triggerUntil(__FUNCTION__, $this, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+        $this->assertSame($this, $event->getTarget());
     }
 }

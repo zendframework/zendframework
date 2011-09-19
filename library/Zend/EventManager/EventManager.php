@@ -153,9 +153,12 @@ class EventManager implements EventCollection
         }
 
         $responses = new ResponseCollection;
-        $e         = new $this->eventClass($event, $context, $argv);
-        $handlers  = $this->getHandlers($event);
+        $e         = new $this->eventClass();
+        $e->setName($event);
+        $e->setTarget($context);
+        $e->setParams($argv);
 
+        $handlers = $this->getHandlers($event);
         if ($handlers->isEmpty()) {
             return $this->triggerStaticHandlers($callback, $e, $responses);
         }

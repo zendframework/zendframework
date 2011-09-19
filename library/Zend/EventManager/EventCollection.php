@@ -43,13 +43,16 @@ interface EventCollection
      * - Passing event name and Event object only
      * - Passing event name, target, and Event object
      * - Passing event name, target, and array|ArrayAccess of arguments
+     *
+     * Can emulate triggerUntil() if the last argument provided is a callback.
      * 
      * @param  string $event 
      * @param  object|string $target 
      * @param  array|object $argv 
+     * @param  null|callback $callback 
      * @return ResponseCollection
      */
-    public function trigger($event, $target = null, $argv = array());
+    public function trigger($event, $target = null, $argv = array(), $callback = null);
 
     /**
      * Trigger an event until the given callback returns a boolean false

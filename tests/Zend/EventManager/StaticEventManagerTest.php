@@ -69,18 +69,18 @@ class StaticEventManagerTest extends TestCase
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $this->assertContains('bar', $events->getEvents('foo'));
-        $expected = array($this, __FUNCTION__);
-        $found    = false;
-        $handlers    = $events->getHandlers('foo', 'bar');
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $handlers);
-        $this->assertTrue(0 < count($handlers), 'Empty handlers!');
-        foreach ($handlers as $handler) {
-            if ($expected === $handler->getCallback()) {
+        $expected  = array($this, __FUNCTION__);
+        $found     = false;
+        $listeners = $events->getListeners('foo', 'bar');
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+        $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+        foreach ($listeners as $listener) {
+            if ($expected === $listener->getCallback()) {
                 $found = true;
                 break;
             }
         }
-        $this->assertTrue($found, 'Did not find handler!');
+        $this->assertTrue($found, 'Did not find listener!');
     }
 
     public function testCanAttachSameEventToMultipleResourcesAtOnce()
@@ -91,30 +91,30 @@ class StaticEventManagerTest extends TestCase
         $this->assertContains('bar', $events->getEvents('test'));
         $expected = array($this, __FUNCTION__);
         foreach (array('foo', 'test') as $id) {
-            $found    = false;
-            $handlers    = $events->getHandlers($id, 'bar');
-            $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $handlers);
-            $this->assertTrue(0 < count($handlers), 'Empty handlers!');
-            foreach ($handlers as $handler) {
-                if ($expected === $handler->getCallback()) {
+            $found     = false;
+            $listeners = $events->getListeners($id, 'bar');
+            $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+            $this->assertTrue(0 < count($listeners), 'Empty listeners!');
+            foreach ($listeners as $listener) {
+                if ($expected === $listener->getCallback()) {
                     $found = true;
                     break;
                 }
             }
-            $this->assertTrue($found, 'Did not find handler!');
+            $this->assertTrue($found, 'Did not find listener!');
         }
     }
 
-    public function testCanDetachHandlerFromResource()
+    public function testCanDetachListenerFromResource()
     {
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
-        foreach ($events->getHandlers('foo', 'bar') as $handler) {
+        foreach ($events->getListeners('foo', 'bar') as $listener) {
             // only one; retrieving it so we can detach
         }
-        $events->detach('foo', $handler);
-        $handlers = $events->getHandlers('foo', 'bar');
-        $this->assertEquals(0, count($handlers));
+        $events->detach('foo', $listener);
+        $listeners = $events->getListeners('foo', 'bar');
+        $this->assertEquals(0, count($listeners));
     }
 
     public function testCanGetEventsByResource()
@@ -124,38 +124,38 @@ class StaticEventManagerTest extends TestCase
         $this->assertEquals(array('bar'), $events->getEvents('foo'));
     }
 
-    public function testCanGetHandlersByResourceAndEvent()
+    public function testCanGetListenersByResourceAndEvent()
     {
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
-        $handlers = $events->getHandlers('foo', 'bar');
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $handlers);
-        $this->assertEquals(1, count($handlers));
+        $listeners = $events->getListeners('foo', 'bar');
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $listeners);
+        $this->assertEquals(1, count($listeners));
     }
 
-    public function testCanClearHandlersByResource()
+    public function testCanClearListenersByResource()
     {
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $events->attach('foo', 'baz', array($this, __FUNCTION__));
-        $events->clearHandlers('foo');
-        $this->assertFalse($events->getHandlers('foo', 'bar'));
-        $this->assertFalse($events->getHandlers('foo', 'baz'));
+        $events->clearListeners('foo');
+        $this->assertFalse($events->getListeners('foo', 'bar'));
+        $this->assertFalse($events->getListeners('foo', 'baz'));
     }
 
-    public function testCanClearHandlersByResourceAndEvent()
+    public function testCanClearListenersByResourceAndEvent()
     {
         $events = StaticEventManager::getInstance();
         $events->attach('foo', 'bar', array($this, __FUNCTION__));
         $events->attach('foo', 'baz', array($this, __FUNCTION__));
         $events->attach('foo', 'bat', array($this, __FUNCTION__));
-        $events->clearHandlers('foo', 'baz');
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getHandlers('foo', 'baz'));
-        $this->assertEquals(0, count($events->getHandlers('foo', 'baz')));
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getHandlers('foo', 'bar'));
-        $this->assertEquals(1, count($events->getHandlers('foo', 'bar')));
-        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getHandlers('foo', 'bat'));
-        $this->assertEquals(1, count($events->getHandlers('foo', 'bat')));
+        $events->clearListeners('foo', 'baz');
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getListeners('foo', 'baz'));
+        $this->assertEquals(0, count($events->getListeners('foo', 'baz')));
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getListeners('foo', 'bar'));
+        $this->assertEquals(1, count($events->getListeners('foo', 'bar')));
+        $this->assertInstanceOf('Zend\Stdlib\PriorityQueue', $events->getListeners('foo', 'bat'));
+        $this->assertEquals(1, count($events->getListeners('foo', 'bat')));
     }
 
     public function testCanPassArrayOfIdentifiersToConstructor()
@@ -164,7 +164,7 @@ class StaticEventManagerTest extends TestCase
         $manager = new EventManager($identifiers);
     }
 
-    public function testHandlersAttachedToAnyIdentifierProvidedToEventManagerWillBeTriggered()
+    public function testListenersAttachedToAnyIdentifierProvidedToEventManagerWillBeTriggered()
     {
         $identifiers = array('foo', 'bar');
         $manager = new EventManager($identifiers);

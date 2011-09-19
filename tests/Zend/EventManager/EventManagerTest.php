@@ -47,67 +47,67 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testAttachShouldReturnCallbackHandler()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $this->assertTrue($handle instanceof CallbackHandler);
+        $listener = $this->events->attach('test', array($this, __METHOD__));
+        $this->assertTrue($listener instanceof CallbackHandler);
     }
 
-    public function testAttachShouldAddHandlerToEvent()
+    public function testAttachShouldAddListenerToEvent()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $handles = $this->events->getHandlers('test');
-        $this->assertEquals(1, count($handles));
-        $this->assertContains($handle, $handles);
+        $listener  = $this->events->attach('test', array($this, __METHOD__));
+        $listeners = $this->events->getListeners('test');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listener, $listeners);
     }
 
     public function testAttachShouldAddEventIfItDoesNotExist()
     {
         $events = $this->events->getEvents();
         $this->assertTrue(empty($events), var_export($events, 1));
-        $handle  = $this->events->attach('test', array($this, __METHOD__));
+        $listener = $this->events->attach('test', array($this, __METHOD__));
         $events = $this->events->getEvents();
         $this->assertFalse(empty($events));
         $this->assertContains('test', $events);
     }
 
-    public function testDetachShouldRemoveHandlerFromEvent()
+    public function testDetachShouldRemoveListenerFromEvent()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $handles = $this->events->getHandlers('test');
-        $this->assertContains($handle, $handles);
-        $this->events->detach($handle);
-        $handles = $this->events->getHandlers('test');
-        $this->assertNotContains($handle, $handles);
+        $listener  = $this->events->attach('test', array($this, __METHOD__));
+        $listeners = $this->events->getListeners('test');
+        $this->assertContains($listener, $listeners);
+        $this->events->detach($listener);
+        $listeners = $this->events->getListeners('test');
+        $this->assertNotContains($listener, $listeners);
     }
 
     public function testDetachShouldReturnFalseIfEventDoesNotExist()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $this->events->clearHandlers('test');
-        $this->assertFalse($this->events->detach($handle));
+        $listener = $this->events->attach('test', array($this, __METHOD__));
+        $this->events->clearListeners('test');
+        $this->assertFalse($this->events->detach($listener));
     }
 
-    public function testDetachShouldReturnFalseIfHandlerDoesNotExist()
+    public function testDetachShouldReturnFalseIfListenerDoesNotExist()
     {
-        $handle1 = $this->events->attach('test', array($this, __METHOD__));
-        $this->events->clearHandlers('test');
-        $handle2 = $this->events->attach('test', array($this, 'handleTestEvent'));
-        $this->assertFalse($this->events->detach($handle1));
+        $listener1 = $this->events->attach('test', array($this, __METHOD__));
+        $this->events->clearListeners('test');
+        $listener2 = $this->events->attach('test', array($this, 'handleTestEvent'));
+        $this->assertFalse($this->events->detach($listener1));
     }
 
-    public function testRetrievingAttachedHandlersShouldReturnEmptyArrayWhenEventDoesNotExist()
+    public function testRetrievingAttachedListenersShouldReturnEmptyArrayWhenEventDoesNotExist()
     {
-        $handles = $this->events->getHandlers('test');
-        $this->assertEquals(0, count($handles));
+        $listeners = $this->events->getListeners('test');
+        $this->assertEquals(0, count($listeners));
     }
 
-    public function testTriggerShouldTriggerAttachedHandlers()
+    public function testTriggerShouldTriggerAttachedListeners()
     {
-        $handle = $this->events->attach('test', array($this, 'handleTestEvent'));
+        $listener = $this->events->attach('test', array($this, 'handleTestEvent'));
         $this->events->trigger('test', $this, array('message' => 'test message'));
         $this->assertEquals('test message', $this->message);
     }
 
-    public function testTriggerShouldReturnAllHandlerReturnValues()
+    public function testTriggerShouldReturnAllListenerReturnValues()
     {
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '__NOT_FOUND__');
@@ -189,7 +189,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($responses->contains('zero'));
     }
 
-    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastHandler()
+    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener()
     {
         $this->events->attach('foo.bar', function () { return 'bogus'; });
         $this->events->attach('foo.bar', function () { return 'nada'; });
@@ -217,7 +217,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('zero', $responses->last());
     }
 
-    public function testCanAttachHandlerAggregate()
+    public function testCanAttachListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
@@ -227,20 +227,20 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testAttachAggregateReturnsAttachOfHandlerAggregate()
+    public function testAttachAggregateReturnsAttachOfListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
         $method    = $this->events->attachAggregate($aggregate);
         $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::attach', $method);
     }
 
-    public function testCanDetachHandlerAggregates()
+    public function testCanDetachListenerAggregates()
     {
-        // setup some other event handlers, to ensure appropriate items are detached
-        $handlerFooBar1 = $this->events->attach('foo.bar', function(){ return true; });
-        $handlerFooBar2 = $this->events->attach('foo.bar', function(){ return true; });
-        $handlerFooBaz1 = $this->events->attach('foo.baz', function(){ return true; });
-        $handlerOther   = $this->events->attach('other', function(){ return true; });
+        // setup some other event listeners, to ensure appropriate items are detached
+        $listenerFooBar1 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBar2 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBaz1 = $this->events->attach('foo.baz', function(){ return true; });
+        $listenerOther   = $this->events->attach('other', function(){ return true; });
 
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
@@ -250,21 +250,21 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             $this->assertContains($event, $events);
         }
 
-        $handlers = $this->events->getHandlers('foo.bar');
-        $this->assertEquals(2, count($handlers));
-        $this->assertContains($handlerFooBar1, $handlers);
-        $this->assertContains($handlerFooBar2, $handlers);
+        $listeners = $this->events->getListeners('foo.bar');
+        $this->assertEquals(2, count($listeners));
+        $this->assertContains($listenerFooBar1, $listeners);
+        $this->assertContains($listenerFooBar2, $listeners);
 
-        $handlers = $this->events->getHandlers('foo.baz');
-        $this->assertEquals(1, count($handlers));
-        $this->assertContains($handlerFooBaz1, $handlers);
+        $listeners = $this->events->getListeners('foo.baz');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerFooBaz1, $listeners);
 
-        $handlers = $this->events->getHandlers('other');
-        $this->assertEquals(1, count($handlers));
-        $this->assertContains($handlerOther, $handlers);
+        $listeners = $this->events->getListeners('other');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerOther, $listeners);
     }
 
-    public function testDetachAggregateReturnsDetachOfHandlerAggregate()
+    public function testDetachAggregateReturnsDetachOfListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);

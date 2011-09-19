@@ -69,43 +69,43 @@ interface EventCollection
     public function triggerUntil($event, $target, $argv = null, $callback = null);
 
     /**
-     * Attach a handler to an event
+     * Attach a listener to an event
      * 
      * @param  string $event 
      * @param  callback $callback
-     * @param  int $priority Priority at which to register handler
+     * @param  int $priority Priority at which to register listener
      * @return CallbackHandler
      */
     public function attach($event, $callback, $priority = 1);
 
     /**
-     * Detach an event handler
+     * Detach an event listener
      * 
-     * @param  CallbackHandler $handle 
+     * @param  CallbackHandler $listener 
      * @return void
      */
-    public function detach(CallbackHandler $handle);
+    public function detach(CallbackHandler $listener);
 
     /**
-     * Get a list of events for which this collection has handlers
+     * Get a list of events for which this collection has listeners
      * 
      * @return array
      */
     public function getEvents();
 
     /**
-     * Retrieve a list of handlers registered to a given event
+     * Retrieve a list of listeners registered to a given event
      * 
      * @param  string $event 
      * @return array|object
      */
-    public function getHandlers($event);
+    public function getListeners($event);
 
     /**
-     * Clear all handlers for a given event
+     * Clear all listeners for a given event
      * 
      * @param  string $event 
      * @return void
      */
-    public function clearHandlers($event);
+    public function clearListeners($event);
 }

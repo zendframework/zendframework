@@ -24,6 +24,9 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\DeclareVars;
+
 /**
  * @category   Zend
  * @package    Zend_View
@@ -37,10 +40,10 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $view = new \Zend\View\View();
+        $view = new View();
         $base = str_replace('/', DIRECTORY_SEPARATOR, '/../_templates');
-        $view->setScriptPath(__DIR__ . $base);
-        $view->strictVars(true);
+        $view->resolver()->addPath(__DIR__ . $base);
+        $view->vars()->setStrictVars(true);
         $this->view = $view;
     }
 
@@ -51,7 +54,7 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
 
     protected function _declareVars()
     {
-        $this->view->declareVars(
+        $this->view->plugin('declareVars')->direct(
             'varName1',
             'varName2',
             array(
@@ -65,31 +68,33 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
     {
         $this->_declareVars();
 
-        $this->assertTrue(isset($this->view->varName1));
-        $this->assertTrue(isset($this->view->varName2));
-        $this->assertTrue(isset($this->view->varName3));
-        $this->assertTrue(isset($this->view->varName4));
+        $vars = $this->view->vars();
+        $this->assertTrue(isset($vars->varName1));
+        $this->assertTrue(isset($vars->varName2));
+        $this->assertTrue(isset($vars->varName3));
+        $this->assertTrue(isset($vars->varName4));
 
-        $this->assertEquals('defaultValue', $this->view->varName3);
-        $this->assertEquals(array(), $this->view->varName4);
+        $this->assertEquals('defaultValue', $vars->varName3);
+        $this->assertEquals(array(), $vars->varName4);
     }
 
     public function testDeclareDeclaredVars()
     {
-        $this->view->varName2 = 'alreadySet';
-        $this->view->varName3 = 'myValue';
-        $this->view->varName5 = 'additionalValue';
+        $vars = $this->view->vars();
+        $vars->varName2 = 'alreadySet';
+        $vars->varName3 = 'myValue';
+        $vars->varName5 = 'additionalValue';
 
         $this->_declareVars();
 
-        $this->assertTrue(isset($this->view->varName1));
-        $this->assertTrue(isset($this->view->varName2));
-        $this->assertTrue(isset($this->view->varName3));
-        $this->assertTrue(isset($this->view->varName4));
-        $this->assertTrue(isset($this->view->varName5));
+        $this->assertTrue(isset($vars->varName1));
+        $this->assertTrue(isset($vars->varName2));
+        $this->assertTrue(isset($vars->varName3));
+        $this->assertTrue(isset($vars->varName4));
+        $this->assertTrue(isset($vars->varName5));
 
-        $this->assertEquals('alreadySet', $this->view->varName2);
-        $this->assertEquals('myValue', $this->view->varName3);
-        $this->assertEquals('additionalValue', $this->view->varName5);
+        $this->assertEquals('alreadySet', $vars->varName2);
+        $this->assertEquals('myValue', $vars->varName3);
+        $this->assertEquals('additionalValue', $vars->varName5);
     }
 }

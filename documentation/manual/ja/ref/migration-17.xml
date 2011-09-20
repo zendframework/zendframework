@@ -455,14 +455,14 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
         </section>
     </section>
 
-    <section xml:id="migration.17.zend.translate"><info><title>Zend_Translate</title></info>
+    <section xml:id="migration.17.zend.translator"><info><title>Zend_Translator</title></info>
         
 
-        <section xml:id="migration.17.zend.translate.languages"><info><title>言語の設定</title></info>
+        <section xml:id="migration.17.zend.translator.languages"><info><title>言語の設定</title></info>
             
 
             <para>
-                言語の自動検出を使用したり <classname>Zend_Translate</classname> に手動で言語を設定したりする際に、
+                言語の自動検出を使用したり <classname>Zend_Translator</classname> に手動で言語を設定したりする際に、
                 「追加に失敗」や「翻訳がない」などの理由で notice が発行されることがありました。
                 以前のリリースでは、場合によっては例外が発生することもありました。
             </para>
@@ -486,7 +486,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 'disableNotices' を <constant>TRUE</constant> に設定するだけです。デフォルトは <constant>FALSE</constant> となっています。
             </para>
 
-            <example xml:id="migration.17.zend.translate.example"><info><title>notice を取得せずに言語の設定を行う</title></info>
+            <example xml:id="migration.17.zend.translator.example"><info><title>notice を取得せずに言語の設定を行う</title></info>
                 
 
                 <para>
@@ -495,7 +495,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$language = new Zend_Translate('gettext',
+$language = new Zend_Translator('gettext',
                                '/path/to/translations',
                                'auto');
 ]]></programlisting>
@@ -506,7 +506,7 @@ $language = new Zend_Translate('gettext',
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$language = new Zend_Translate('gettext',
+$language = new Zend_Translator('gettext',
                                '/path/to/translations',
                                'auto',
                                array('disableNotices' => true));

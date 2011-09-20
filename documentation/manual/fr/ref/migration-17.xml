@@ -497,15 +497,15 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
         </section>
     </section>
 
-    <section xml:id="migration.17.zend.translate"><info><title>Zend_Translate</title></info>
+    <section xml:id="migration.17.zend.translator"><info><title>Zend_Translator</title></info>
         
 
-        <section xml:id="migration.17.zend.translate.languages"><info><title>Paramétrer les langues</title></info>
+        <section xml:id="migration.17.zend.translator.languages"><info><title>Paramétrer les langues</title></info>
             
 
             <para>
                 Lors de l'utilisation de la détection automatique des langues, ou du réglage
-                manuel des langues de <classname>Zend_Translate</classname>, vous avez peut-être
+                manuel des langues de <classname>Zend_Translator</classname>, vous avez peut-être
                 remarqué que de temps en temps une notice est envoyée concernant le non-ajout de
                 traductions vides. Dans certaines versions précédentes, une exception était levée
                 dans certains cas.
@@ -532,7 +532,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 défaut étant <constant>FALSE</constant>.
             </para>
 
-            <example xml:id="migration.17.zend.translate.example"><info><title>Paramétrer les langues sans avoir de notices</title></info>
+            <example xml:id="migration.17.zend.translator.example"><info><title>Paramétrer les langues sans avoir de notices</title></info>
                 
 
                 <para>
@@ -542,7 +542,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$language = new Zend_Translate('gettext',
+$language = new Zend_Translator('gettext',
                                '/chemin/vers/les/traductions',
                                'auto');
 ]]></programlisting>
@@ -554,7 +554,7 @@ $language = new Zend_Translate('gettext',
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$language = new Zend_Translate('gettext',
+$language = new Zend_Translator('gettext',
                                '/chemin/vers/les/traductions',
                                'auto',
                                array('disableNotices' => true));

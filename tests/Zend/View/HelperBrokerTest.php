@@ -41,7 +41,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesHelperLoaderAsDefaultClassLoader()
     {
-        $this->assertType('Zend\View\HelperLoader', $this->broker->getClassLoader());
+        $this->assertInstanceOf('Zend\View\HelperLoader', $this->broker->getClassLoader());
     }
 
     public function testViewIsNullByDefault()

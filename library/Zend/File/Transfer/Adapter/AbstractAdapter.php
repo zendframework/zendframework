@@ -375,7 +375,7 @@ abstract class AbstractAdapter
      * @param  boolean      $breakChainOnFailure If the validation chain should stop an failure
      * @param  string|array $options             Options to set for the validator
      * @param  string|array $files               Files to limit this validator to
-     * @return Zend_File_Transfer_Adapter
+     * @return \Zend\File\Transfer\Adapter\AbstractAdapter
      */
     public function addValidator($validator, $breakChainOnFailure = false, $options = null, $files = null)
     {

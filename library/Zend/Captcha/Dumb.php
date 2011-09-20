@@ -45,7 +45,7 @@ class Dumb extends Word
      * @param  mixed $element
      * @return string
      */
-    public function render(\Zend\View\ViewEngine $view = null, $element = null)
+    public function render(\Zend\View\Renderer $view = null, $element = null)
     {
         return 'Please type this word backwards: <b>'
              . strrev($this->getWord())

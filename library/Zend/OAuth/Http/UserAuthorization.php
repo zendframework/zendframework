@@ -49,7 +49,7 @@ class UserAuthorization extends HTTPClient
             $this->_httpUtility->toEncodedQueryString($params)
         );
 
-        return $uri->generate();
+        return $uri->toString();
     }
 
     /**

@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.additional"><info><title>Additional features for translation</title></info>
+
+
+    <para>
+        There are several additional features which are supported by
+        <classname>Zend_Translator</classname>. Read here for these additional informations.
+    </para>
+
+    <section xml:id="zend.translator.additional.options"><info><title>Options for adapters</title></info>
+
+
+        <para>
+            Options can be used with all adapters. Of course the options are different for all
+            adapters. You can set options when you create the adapter. Actually there is one option
+            which is available to all adapters: '<emphasis>clear</emphasis>' sets if translation
+            data should be added to existing one or not. Standard behaviour is to add new
+            translation data to existing one. But the translation data is only cleared for the
+            selected language. So other languages remain untouched.
+        </para>
+
+        <para>
+            You can set options temporarily by giving them to
+            <methodname>addTranslation()</methodname>. And you can use the method
+            <methodname>setOptions()</methodname> to set options permanent.
+        </para>
+
+        <example xml:id="zend.translator.additional.options.example"><info><title>Using translation options</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+// define ':' as separator for the translation source files
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'csv',
+        'content' => '/path/to/mytranslation.csv',
+        'locale'  => 'de',
+        'delimiter' => ':'
+    )
+);
+
+...
+
+// clear the defined language and use new translation data
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/new.csv',
+        'locale'  => 'fr',
+        'clear'   => true
+    )
+);
+]]></programlisting>
+        </example>
+
+        <para>
+            Here you can find all available options for the different adapters with a description
+            of their usage:
+        </para>
+
+        <table xml:id="zend.translator.additional.options.alloptions"><info><title>Options for translation adapters</title></info>
+
+
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry>Option</entry>
+                        <entry>Adapter</entry>
+                        <entry>Description</entry>
+                        <entry>Default value</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>adapter</entry>
+                        <entry><classname>Zend_Translator</classname> only</entry>
+
+                        <entry>
+                            Defines the adapter which will be used for the translation. This option
+                            can only be given when a new instance of
+                            <classname>Zend_Translator</classname> is created. When it is set
+                            afterwards, then it will be ignored
+                        </entry>
+
+                        <entry><emphasis>Must be set as it has no default value</emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>clear</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            If set to <constant>TRUE</constant>, the already read translations will
+                            be cleared. This can be used instead of creating a new instance when
+                            reading new translation data
+                        </entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>cache</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets a cache for the translation adapter. This must be a instance of
+                            <classname>Zend_Cache_Core</classname>
+                        </entry>
+
+                        <entry>
+                            <emphasis>Per default no cache is set</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>content</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets the content for the translation adapter. This could be an array,
+                            a filename or a directory. Which type of content is supported depends
+                            on the used adapter
+                        </entry>
+
+                        <entry>
+                            <emphasis>The default value depends on the used adapter</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>disableNotices</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            If set to <constant>TRUE</constant>, all notices regarding not available
+                            translations will be disabled. You should set this option to
+                            <constant>TRUE</constant> in production environment
+                        </entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>ignore</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            All directories and files beginning with this prefix will be ignored
+                            when searching for files. This value defaults to
+                            <emphasis>'.'</emphasis> which leads to the behavior that all hidden
+                            files will be ignored. Setting this value to <emphasis>'tmp'</emphasis>
+                            would mean that directories and files like 'tmpImages' and
+                            'tmpFiles' would be ignored as well as all subsequent
+                            directories. This option also accepts an array which can be used when
+                            you want to ignore more than one prefix.
+                        </entry>
+
+                        <entry><emphasis>.</emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>log</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            An instance of <classname>Zend_Log</classname> where untranslated
+                            messages and notices will be written to
+                        </entry>
+
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>logMessage</entry>
+                        <entry>all</entry>
+                        <entry>The message which will be written into the log</entry>
+
+                        <entry>
+                            <emphasis>Untranslated message within '%locale%': %message%</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>logPriority</entry>
+                        <entry>all</entry>
+                        <entry>The priority which is used to write the message into the log</entry>
+
+                        <entry>
+                            <emphasis>5</emphasis>
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>logUntranslated</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            When this option is set to <constant>TRUE</constant>, all message IDs
+                            which can not be translated will be written into the attached log
+                        </entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>reload</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            When this option is set to <constant>TRUE</constant>, then files are
+                            reloaded into the cache. This option can be used to recreate the cache,
+                            or to add translations to already cached data after the cache has
+                            already been created.
+                        </entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>route</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            This option allows to use reroute from non existing translations to
+                            other languages. See the <link linkend="zend.translator.additional.rerouting">Rerouting
+                                Section</link> for details about this option.
+                        </entry>
+
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>routeHttp</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            This option uses the browsers HTTP language header to set the routing
+                            between languages. See the <link linkend="zend.translator.additional.rerouting">Rerouting
+                                Section</link> for details about this option.
+                        </entry>
+
+                        <entry><emphasis><constant>true</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>scan</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            If set to <constant>NULL</constant>, no scanning of the directory
+                            structure will be done. If set to
+                            <constant>Zend_Translator::LOCALE_DIRECTORY</constant> the
+                            locale will be detected within the directory. If set to
+                            <constant>Zend_Translator::LOCALE_FILENAME</constant> the locale will
+                            be detected within the filename. See <link linkend="zend.translator.additional.detection">this chapter</link>
+                            for details
+                        </entry>
+
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>tag</entry>
+                        <entry>all</entry>
+
+                        <entry>
+                            Sets an individual tag which is used for the attached cache. Using this
+                            option allows to use and clear the cache for single instances. When this
+                            option is not set, the attached cache is used for all instances combined
+                        </entry>
+
+                        <entry><emphasis><classname>Zend_Translator</classname></emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>delimiter</entry>
+                        <entry>Csv</entry>
+
+                        <entry>
+                            Defines which sign is used as delimiter for separating source and
+                            translation
+                        </entry>
+
+                        <entry><emphasis>;</emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>enclosure</entry>
+                        <entry>Csv</entry>
+
+                        <entry>
+                            Defines the enclosure character to be used. Defaults to a doublequote
+                        </entry>
+
+                        <entry><emphasis>"</emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>length</entry>
+                        <entry>Csv</entry>
+
+                        <entry>
+                            Defines the maximum length of a csv line. When set to 0 it will be
+                            detected automatically
+                        </entry>
+
+                        <entry><emphasis>0</emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>useId</entry>
+                        <entry>Xliff and Tmx</entry>
+
+                        <entry>
+                            If you set this option to <constant>FALSE</constant>, then the source
+                            string will be used as message Id. The default for this option is
+                            <constant>TRUE</constant>, which means that the Id from the trans-unit
+                            element will be used as message Id
+                        </entry>
+
+                        <entry><emphasis><constant>TRUE</constant></emphasis></entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            When you want to have self defined options, you are also able to use them within all
+            adapters. The <methodname>setOptions()</methodname> method can be used to define your
+            option. <methodname>setOptions()</methodname> needs an array with the options you want
+            to set. If an given option exists it will be signed over. You can define as much options
+            as needed as they will not be checked by the adapter. Just make sure not to overwrite
+            any existing option which is used by an adapter.
+        </para>
+
+        <para>
+            To return the option you can use the <methodname>getOptions()</methodname> method. When
+            <methodname>getOptions()</methodname> is called without a parameter it will return all
+            options set. When the optional parameter is given you will only get the specified
+            option.
+        </para>
+    </section>
+
+    <section xml:id="zend.translator.additional.languages"><info><title>Handling languages</title></info>
+
+
+        <para>
+            When working with different languages there are a few methods which will be useful.
+        </para>
+
+        <para>
+            The <methodname>getLocale()</methodname> method can be used to get the currently set
+            language. It can either hold an instance of <classname>Zend_Locale</classname> or the
+            identifier of a locale.
+        </para>
+
+        <para>
+            The <methodname>setLocale()</methodname> method sets a new standard language for
+            translation. This prevents the need of setting the optional language parameter more than
+            once to the <methodname>translate()</methodname> method. If the given language does not
+            exist, or no translation data is available for the language,
+            <methodname>setLocale()</methodname> tries to downgrade to the language without the
+            region if any was given. A language of <emphasis>en_US</emphasis> would be downgraded to
+            <emphasis>en</emphasis>. When even the downgraded language can not be found an exception
+            will be thrown.
+        </para>
+
+        <para>
+            The <methodname>isAvailable()</methodname> method checks if a given language is already
+            available. It returns <constant>TRUE</constant> if data for the given language exist.
+        </para>
+
+        <para>
+            And finally the <methodname>getList()</methodname> method can be used to get all
+            currently set languages for an adapter returned as array.
+        </para>
+
+        <example xml:id="zend.translator.additional.languages.example"><info><title>Handling languages with adapters</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+// returns the currently set language
+$actual = $translate->getLocale();
+
+// you can use the optional parameter while translating
+echo $translate->_("my_text", "fr");
+// or set a new language
+$translate->setLocale("fr");
+echo $translate->_("my_text");
+// refer to the base language
+// fr_CH will be downgraded to fr
+$translate->setLocale("fr_CH");
+echo $translate->_("my_text");
+
+// check if this language exist
+if ($translate->isAvailable("fr")) {
+    // language exists
+}
+]]></programlisting>
+        </example>
+
+        <section xml:id="zend.translator.additional.languages.automatic"><info><title>Automatical handling of languages</title></info>
+
+
+            <para>
+                Note that as long as you only add new translation sources with the
+                <methodname>addTranslation()</methodname> method
+                <classname>Zend_Translator</classname> will automatically set the best fitting
+                language for your environment when you use one of the automatic locales which are
+                '<emphasis>auto</emphasis>' or '<emphasis>browser</emphasis>'. So normally you will
+                not need to call <methodname>setLocale()</methodname>. This should only be used in
+                conjunction with automatic source detection.
+            </para>
+
+            <para>
+                The algorithm will search for the best fitting locale depending on the user's
+                browser and your environment. See the following example for details:
+            </para>
+
+            <example xml:id="zend.translator.additional.languages.automatic.example"><info><title>Automatically language detection</title></info>
+
+
+                <programlisting language="php"><![CDATA[
+// Let's expect the browser returns these language settings:
+// HTTP_ACCEPT_LANGUAGE = "de_AT=1;fr=1;en_US=0.8";
+
+// Example 1:
+// When no fitting language is found, the message ID is returned
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translator::LOCALE_FILENAME
+    )
+);
+
+// Example 2:
+// Best found fitting language is 'fr'
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_fr.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translator::LOCALE_FILENAME
+    )
+);
+
+// Example 3:
+// Best found fitting language is 'de' ('de_AT' will be degraded)
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translator::LOCALE_FILENAME
+    )
+);
+
+// Example 4:
+// Returns 'it' as translation source and overrides the automatic settings
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_it.mo',
+        'locale'  => 'auto',
+        'scan' => Zend_Translator::LOCALE_FILENAME
+    )
+);
+
+$translate->addTranslation(array('content' => 'my_ru.mo', 'locale' => 'ru'));
+$translate->setLocale('it_IT');
+]]></programlisting>
+            </example>
+
+            <para>
+                After setting a language manually with the <methodname>setLocale()</methodname>
+                method the automatic detection will be switched off and overridden.
+            </para>
+
+            <para>
+                If you want to use it again, you can set the language
+                <emphasis>auto</emphasis> with <methodname>setLocale()</methodname> which will
+                reactivate the automatic detection for <classname>Zend_Translator</classname>.
+            </para>
+
+            <para>
+                Since Zend Framework 1.7.0 <classname>Zend_Translator</classname> also recognises an
+                application wide locale. You can simply set a <classname>Zend_Locale</classname>
+                instance to the registry like shown below. With this notation you can forget about
+                setting the locale manually with each instance when you want to use the same locale
+                multiple times.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// in your bootstrap file
+$locale = new Zend_Locale();
+Zend_Registry::set('Zend_Locale', $locale);
+
+// default language when requested language is not available
+$defaultlanguage = 'en';
+
+// somewhere in your application
+$translate = new Zend_Translator(
+    array('adapter' => 'gettext', 'content' => 'my_de.mo')
+);
+
+if (!$translate->isAvailable($locale->getLanguage())) {
+    // not available languages are rerouted to another language
+    $translate->setLocale($defaultlanguage);
+}
+
+$translate->getLocale();
+]]></programlisting>
+        </section>
+
+        <section xml:id="zend.translator.additional.languages.territory"><info><title>Using a country as language</title></info>
+
+
+            <para>
+                You can also use a country as locale parameter. This could be useful when you
+                provide your user with flags, which represent the country in which he lives, and
+                when he selects his flag, he would automatically get the default language for this
+                country.
+            </para>
+
+            <para>
+                For example, when the user selected <emphasis>US</emphasis> then you would get
+                <emphasis>en_US</emphasis> in return as locale which is being used. This leads
+                automatically to the language <emphasis>en</emphasis> which is the default language
+                for the country <emphasis>US</emphasis>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => 'my_de.mo',
+        'locale'  => 'US'
+    )
+);
+]]></programlisting>
+
+            <note><info><title>Always uppercase countries</title></info>
+
+
+                <para>
+                    Using this syntax you should always uppercase the input when you know that it's
+                    a country. The reason is that there are also languages which have the same
+                    letters as a country. Take for example <emphasis>om</emphasis>. You could expect
+                    to get <emphasis>ar_OM</emphasis> when you mean the country "Oman", or you could
+                    expect the language "Oromo" which is spoken in Kenia for example.
+                </para>
+
+                <para>
+                    As <classname>Zend_Translator</classname> is related to languages it will always
+                    use the language in this case. Therefor always uppercase the locale when you
+                    want it to be recognised as country.
+                </para>
+            </note>
+        </section>
+    </section>
+
+    <section xml:id="zend.translator.additional.detection"><info><title>Automatic source detection</title></info>
+
+
+        <para>
+            <classname>Zend_Translator</classname> can detect translation sources automatically. So
+            you don't have to declare each source file manually. You can let
+            <classname>Zend_Translator</classname> do this job and scan the complete directory
+            structure for source files.
+        </para>
+
+        <note>
+            <para>
+                Automatic source detection is available since Zend Framework version 1.5 .
+            </para>
+        </note>
+
+        <para>
+            The usage is quite the same as initiating a single translation source with one
+            difference. You must give a directory which has to be scanned instead a file.
+        </para>
+
+        <example xml:id="zend.translator.additional.languages.directory.example"><info><title>Scanning a directory structure for sources</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+// assuming we have the following structure
+//  /language/
+//  /language/login/login.tmx
+//  /language/logout/logout.tmx
+//  /language/error/loginerror.tmx
+//  /language/error/logouterror.tmx
+
+$translate = new Zend_Translator(
+    array('adapter' => 'tmx', 'content' => '/language')
+);
+]]></programlisting>
+        </example>
+
+        <para>
+            So <classname>Zend_Translator</classname> does not only search the given directory, but
+            also all subdirectories for translation source files. This makes the usage quite
+            simple. But <classname>Zend_Translator</classname> will ignore all files which are not
+            sources or which produce failures while reading the translation data. So you have to
+            make sure that all of your translation sources are correct and readable because you
+            will not get any failure if a file is bogus or can not be read.
+        </para>
+
+        <note>
+            <para>
+                Depending on how deep your directory structure is and how much files are within
+                this structure it can take a long time for <classname>Zend_Translator</classname>
+                to complete.
+            </para>
+        </note>
+
+        <para>
+            In our example we have used the <acronym>TMX</acronym> format which includes the
+            language to be used within the source. But many of the other source formats are not
+            able to include the language within the file. Even this sources can be used with
+            automatic scanning if you do some pre-requisits as described below:
+        </para>
+
+        <section xml:id="zend.translator.additional.detection.directory"><info><title>Language through naming directories</title></info>
+
+
+            <para>
+                One way to include automatic language detection is to name the directories related
+                to the language which is used for the sources within this directory. This is the
+                easiest way and is used for example within standard gettext implementations.
+            </para>
+
+            <para>
+                <classname>Zend_Translator</classname> needs the '<property>scan</property>' option
+                to know that it should search the names of all directories for languages. See the
+                following example for details:
+            </para>
+
+            <example xml:id="zend.translator.additional.detection.directory.example"><info><title>Directory scanning for languages</title></info>
+
+
+                <programlisting language="php"><![CDATA[
+// assuming we have the following structure
+//  /language/
+//  /language/de/login/login.mo
+//  /language/de/error/loginerror.mo
+//  /language/en/login/login.mo
+//  /language/en/error/loginerror.mo
+
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan' => Zend_Translator::LOCALE_DIRECTORY
+    )
+);
+]]></programlisting>
+            </example>
+
+            <note>
+                <para>
+                    This works only for adapters which do not include the language within the
+                    source file. Using this option for example with <acronym>TMX</acronym> will be
+                    ignored. Also language definitions within the filename will be ignored when
+                    using this option.
+                </para>
+            </note>
+
+            <note>
+                <para>
+                    You should be aware if you have several subdirectories under the same
+                    structure. Assuming we have a structure like
+                    <filename>/language/module/de/en/file.mo</filename>. In this case the path
+                    contains multiple strings which would be detected as locale. It could be either
+                    <emphasis>de</emphasis> or <emphasis>en</emphasis>. In such a case the behaviour
+                    is undefined and it is recommended to use file detection in such situations.
+                </para>
+            </note>
+        </section>
+
+        <section xml:id="zend.translator.additional.detection.filename"><info><title>Language through filenames</title></info>
+
+
+            <para>
+                Another way to detect the language automatically is to use special filenames. You
+                can either name the complete file or parts of a file after the used language. To
+                use this way of detection you will have to set the '<property>scan</property>'
+                option at initiation. There are several ways of naming the sourcefiles which are
+                described below:
+            </para>
+
+            <example xml:id="zend.translator.additional.detection.filename.example"><info><title>Filename scanning for languages</title></info>
+
+
+                <programlisting language="php"><![CDATA[
+// assuming we have the following structure
+//  /language/
+//  /language/login/login_en.mo
+//  /language/login/login_de.mo
+//  /language/error/loginerror_en.mo
+//  /language/error/loginerror_de.mo
+
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/language',
+        'scan' => Zend_Translator::LOCALE_FILENAME
+    )
+);
+]]></programlisting>
+            </example>
+
+            <section xml:id="zend.translator.additional.detection.filename.complete"><info><title>Complete filename</title></info>
+
+
+                <para>
+                    Having the whole file named after the language is the simplest way but only
+                    viable if you have only one file per language.
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/languages/
+/languages/en.mo
+/languages/de.mo
+/languages/es.mo
+]]></programlisting>
+            </section>
+
+            <section xml:id="zend.translator.additional.detection.filename.extension"><info><title>Extension of the file</title></info>
+
+
+                <para>
+                    Another simple way to use the extension of the file for language detection.
+                    But this may be confusing since you will no longer have an idea which extension
+                    the file originally had.
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/languages/
+/languages/view.en
+/languages/view.de
+/languages/view.es
+]]></programlisting>
+            </section>
+
+            <section xml:id="zend.translator.additional.detection.filename.token"><info><title>Filename tokens</title></info>
+
+
+                <para>
+                    <classname>Zend_Translator</classname> is also capable of detecting the language
+                    if it is included within the filename. But if you go this way you will have to
+                    separate the language with a token. There are three supported tokens which can
+                    be used: a dot '.', an underscore '_', or a hyphen '-'.
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/languages/
+/languages/view_en.mo -> detects english
+/languages/view_de.mo -> detects german
+/languages/view_it.mo -> detects italian
+]]></programlisting>
+
+                <para>
+                    The first found string delimited by a token which can be interpreted as a
+                    locale will be used. See the following example for details.
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/languages/
+/languages/view_en_de.mo -> detects english
+/languages/view_en_es.mo -> detects english and overwrites the first file
+/languages/view_it_it.mo -> detects italian
+]]></programlisting>
+
+                <para>
+                    All three tokens are used to detect the locale. When the filename contains
+                    multiple tokens, the first found token depends on the order of the tokens
+                    which are used. See the following example for details.
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/languages/
+/languages/view_en-it.mo -> detects english because '_' will be used before '-'
+/languages/view-en_it.mo -> detects italian because '_' will be used before '-'
+/languages/view_en.it.mo -> detects italian because '.' will be used before '_'
+]]></programlisting>
+            </section>
+        </section>
+
+        <section xml:id="zend.translator.additional.detection.ignore"><info><title>Ignoring special files and directories</title></info>
+
+
+            <para>
+                Sometimes it is useful to exclude files or even directories from being added
+                automatically. Therefor you can use the <property>ignore</property> option which
+                accepts 3 possible usages.
+            </para>
+
+            <section xml:id="zend.translator.additional.detection.ignore.string"><info><title>Ignore a special directory or file</title></info>
+
+
+                <para>
+                    Per default <classname>Zend_Translator</classname> is set to ignore all
+                    files and directories beginning with
+                    <emphasis>'<filename>/.</filename>'</emphasis>. This means that
+                    all <acronym>SVN</acronym> files will be ignored.
+                </para>
+
+                <para>
+                    You can set your own syntax by giving a string for the
+                    <property>ignore</property> option. The directory separator will be attached
+                    automatically and has to be omitted.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$options   = array('ignore' => 'test');
+$translate = new Zend_Translator(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => 'test'
+    )
+);
+]]></programlisting>
+
+                <para>
+                    The above example will ignore all files and directories beginning with
+                    <emphasis>test</emphasis>. This means for example
+                    <filename>/test/en.mo</filename>, <filename>/testing/en.mo</filename> and
+                    <filename>/dir/test_en.mo</filename>. But it would still add
+                    <filename>/mytest/en.mo</filename> or <filename>/dir/atest.mo</filename>.
+                </para>
+
+                <note><info><title>Prevent SVN files from being searched</title></info>
+
+
+                    <para>
+                        When you set this option, then the default
+                        <emphasis>'<filename>/.</filename>'</emphasis> will
+                        be erased. This means that <classname>Zend_Translator</classname> will then
+                        add all files from the hidden <acronym>SVN</acronym> directories. When you
+                        are working with <acronym>SVN</acronym>, then you should use the array
+                        syntax described in the next section.
+                    </para>
+                </note>
+            </section>
+
+            <section xml:id="zend.translator.additional.detection.ignore.array.files"><info><title>Ignore several directories or files</title></info>
+
+
+                <para>
+                    You can also ignore several files and directories. Instead of a string,
+                    you can simply give an array with all wished names which will be ignored.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$options = array('ignore' => array('.', 'test', 'old'));
+$translate = new Zend_Translator(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('.', 'test', 'old')
+    )
+);
+]]></programlisting>
+
+                <para>
+                    In the above case all 3 syntax will be ignored. But still they have to
+                    begin with the syntax to be detected and ignored.
+                </para>
+            </section>
+
+            <section xml:id="zend.translator.additional.detection.ignore.array.names"><info><title>Ignore specific names</title></info>
+
+
+                <para>
+                    To ignore files and directories which are not beginning with a defined syntax
+                    but have a special syntax anywhere within their name you can use a regular
+                    expression.
+                </para>
+
+                <para>
+                    To use a regular expression the array key of the <property>ignore</property>
+                    option has to begin with <emphasis>regex</emphasis>.
+                </para>
+
+                <programlisting language="php"><![CDATA[
+$options = array(
+    'ignore' => array(
+        'regex' => '/test/u',
+        'regex_2' => '/deleted$/u'
+    )
+);
+$translate = new Zend_Translator(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'ignore'  => array('regex' => '/test/u', 'regex_2' => '/deleted$/u')
+    )
+);
+]]></programlisting>
+
+                <para>
+                    In the above case we defined 2 regular expressions. The files and directories
+                    will always being searched with all given regular expressions. In our example
+                    this means that any files which contains <emphasis>test</emphasis> anywhere in
+                    their name will be ignored. Additionally all files and directories which end
+                    with <emphasis>deleted</emphasis> will not be added as translation.
+                </para>
+            </section>
+        </section>
+    </section>
+
+    <section xml:id="zend.translator.additional.rerouting"><info><title>Routing for translations</title></info>
+
+
+        <para>
+            Not every message ID can be translated. But sometimes is can be useful to output the
+            translation from another language instead of returning the message ID itself. You can
+            archive this by using the <property>route</property> option.
+        </para>
+
+        <para>
+            You can add one route for every language. See the following example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => $adapter,
+        'content' => $content,
+        'locale'  => $locale,
+        'route'   => array('fr' => 'en', 'de' => 'fr')
+    )
+);
+]]></programlisting>
+
+        <para>
+            The above returns a english translation for all messages which can not be translated to
+            french. And it returns a french translation for all messages which can not be translated
+            to german. It will even return an english translation for all messages which can wether
+            be translated to german nor to french. So you can even define a complete translation
+            chain.
+        </para>
+
+        <para>
+            Per default the option <property>routeHttp</property> is set. This option defines that
+            the users HTTP language header will be used to set the routing. Manually set routings
+            will be added to the browsers routing when the option <property>route</property> is given
+            additionally.
+        </para>
+
+        <para>
+             When you don't want to use the browsers HTTP language header simply set the option
+             <property>routeHttp</property> to <emphasis>false</emphasis>.
+        </para>
+
+        <para>
+            These features seems not be interesting for anyone. But be aware that returning
+            translations for wrong or other languages can be problematic when the user does not
+            understand this language. So you should always use this feature sparingly.
+        </para>
+    </section>
+
+    <section xml:id="zend.translator.additional.combination"><info><title>Combining multiple translation sources</title></info>
+
+
+        <para>
+            When you are working with multiple translations you may come into a situation where you
+            want to use different source types. For example the resource files which are provided
+            by the framework and your own translations which are available by using the gettext
+            adapter.
+        </para>
+
+        <para>
+            By combining multiple translation adapters you can use them within one instance. See
+            the following example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '\path\to\translation.mo',
+        'locale'  => 'en'
+    )
+);
+
+$translate_second = new Zend_Translator(
+    array(
+        'adapter' => 'array',
+        'content' => '\resources\languages\en\Zend_Validate.php',
+        'locale'  => 'en'
+    )
+);
+
+$translate->addTranslation(array('content' => $translate_second));
+]]></programlisting>
+
+        <para>
+            Now the first instance holds all translations from the second instance and you can use
+            it within the application even if you used different source types.
+        </para>
+
+        <note><info><title>Memory savings</title></info>
+
+
+            <para>
+                As you may have noted the second instance is no longer used as soon as it has been
+                added to the first instance. To save some memory you may want to unset it.
+            </para>
+        </note>
+
+        <para>
+            When you are scanning for directories you may additionally want to use only one defined
+            language. The predefined resources for example are available in more than 10 languages.
+            But your application is not available in all of those language. Therefor you can also
+            add only one language from the second adapter.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$translate->addTranslation(
+    array(
+        'content' => $translate_second,
+        'locale'  => 'en'
+    )
+);
+]]></programlisting>
+
+        <para>
+            This allows you still to scan through the directories and still add only those languages
+            which are relevant for your application.
+        </para>
+    </section>
+
+    <section xml:id="zend.translator.additional.istranslated"><info><title>Checking for translations</title></info>
+
+
+        <para>
+            Normally text will be translated without any computation. But sometimes it is necessary
+            to know if a text is translated or not, therefor the
+            <methodname>isTranslated()</methodname> method can be used.
+        </para>
+
+        <para>
+            <methodname>isTranslated($messageId, $original = false, $locale = null)</methodname>
+            takes the text you want to check as its first parameter, and as optional third parameter
+            the locale for which you want to do the check. The optional second parameter declares
+            whether translation is fixed to the declared language or a lower set of translations
+            can be used. If you have a text which can be returned for 'en' but not for 'en_US' you
+            will normally get the translation returned, but by setting <varname>$original</varname>
+            to <constant>TRUE</constant>, <methodname>isTranslated()</methodname> will return
+            <constant>FALSE</constant>.
+        </para>
+
+        <example xml:id="zend.translator.additional.istranslated.example"><info><title>Checking if a text is translatable</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+$english = array(
+    'message1' => 'Nachricht 1',
+    'message2' => 'Nachricht 2',
+    'message3' => 'Nachricht 3');
+
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'array',
+        'content' => $english,
+        'locale' => 'de_AT'
+    )
+);
+
+if ($translate->isTranslated('message1')) {
+    print "'message1' can be translated";
+}
+
+if (!($translate->isTranslated('message1', true, 'de'))) {
+    print "'message1' can not be translated to 'de'"
+        . " as it's available only in 'de_AT'";
+}
+
+if ($translate->isTranslated('message1', false, 'de')) {
+    print "'message1' can be translated in 'de_AT' as it falls back to 'de'";
+}
+]]></programlisting>
+        </example>
+    </section>
+
+    <section xml:id="zend.translator.additional.logging"><info><title>How to log not found translations</title></info>
+
+
+        <para>
+            When you have a bigger site or you are creating the translation files manually, you
+            often have the problem that some messages are not translated. But there is an easy
+            solution for you when you are using <classname>Zend_Translator</classname>.
+        </para>
+
+        <para>
+            You have to follow two or three simple steps. First, you have to create an instance of
+            <classname>Zend_Log</classname>. Then you have to attach this instance to
+            <classname>Zend_Translator</classname>. See the following example:
+        </para>
+
+        <example xml:id="zend.translator.additional.logging.example"><info><title>Log translations</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale' => 'de'
+    )
+);
+
+// Create a log instance
+$writer = new Zend_Log_Writer_Stream('/path/to/file.log');
+$log    = new Zend_Log($writer);
+
+// Attach it to the translation instance
+$translate->setOptions(
+    array(
+        'log'             => $log,
+        'logUntranslated' => true
+    )
+);
+
+$translate->translate('unknown string');
+]]></programlisting>
+        </example>
+
+        <para>
+            Now you will have a new notice in the log:
+            <emphasis>Untranslated message within 'de': unknown string</emphasis>.
+        </para>
+
+        <note>
+            <para>
+                You should note that any translation which can not be found will be logged. This
+                means all translations when a user requests a language which is not supported. Also
+                every request for a message which can not be translated will be logged. Be aware,
+                that 100 people requesting the same translation, will result 100 logged notices.
+            </para>
+        </note>
+
+        <para>
+            This feature can not only be used to log messages but also to attach this untranslated
+            messages into an empty translation file. To do so you will have to write your own log
+            writer which writes the format you want to have and strips the prepending "Untranslated
+            message".
+        </para>
+
+        <para>
+            You can also set the '<property>logMessage</property>' option when you want to have your
+            own log message. Use the '<emphasis>%message%</emphasis>' token for placing the
+            messageId within your log message, and the '<emphasis>%locale%</emphasis>' token for the
+            requested locale. See the following example for a self defined log message:
+        </para>
+
+        <example xml:id="zend.translator.additional.logging.example2"><info><title>Self defined log messages</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de'
+    )
+);
+
+// Create a log instance
+$writer = new Zend_Log_Writer_Stream('/path/to/file.log');
+$log    = new Zend_Log($writer);
+
+// Attach it to the translation instance
+$translate->setOptions(
+    array(
+        'log'             => $log,
+        'logMessage'      => "Missing '%message%' within locale '%locale%'",
+        'logUntranslated' => true
+    )
+);
+
+$translate->translate('unknown string');
+]]></programlisting>
+        </example>
+
+        <para>
+            Additionally you are also able to change the priority which is used to write the message
+            into the log. Per default the priority <emphasis>Zend_Log::NOTICE</emphasis> is used.
+            It equals with <emphasis>5</emphasis>. When you want to change the priority you can use
+            any of <classname>Zend_Log</classname>'s priorities. See the following example:
+        </para>
+
+        <example xml:id="zend.translator.additional.logging.example3"><info><title>Self defined log priority</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+// Create a log instance
+$writer = new Zend_Log_Writer_Stream('/path/to/file.log');
+$log    = new Zend_Log($writer);
+
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => $path,
+        'locale'  => 'de',
+        'log'             => $log,
+        'logMessage'      => "Missing '%message%' within locale '%locale%'",
+        'logPriority'     => Zend_Log::ALERT,
+        'logUntranslated' => true
+    )
+);
+
+$translate->translate('unknown string');
+]]></programlisting>
+        </example>
+    </section>
+
+    <section xml:id="zend.translator.additional.sourcedata"><info><title>Accessing source data</title></info>
+
+
+        <para>
+            Sometimes it is useful to have access to the translation source data. Therefor
+            the following two functions are provided.
+        </para>
+
+        <para>
+            The <methodname>getMessageIds($locale = null)</methodname> method returns all known
+            message IDs as array.
+        </para>
+
+        <para>
+            When you want to know the message ID for a given translation then you can use the
+            <methodname>getMessageId()</methodname> method.
+        </para>
+
+        <para>
+            The <methodname>getMessages($locale = null)</methodname> method returns the complete
+            translation source as an array. The message ID is used as key and the translation data
+            as value.
+        </para>
+
+        <para>
+            Both methods accept an optional parameter <varname>$locale</varname> which, if set,
+            returns the translation data for the specified language. If this parameter is not given,
+            the actual set language will be used. Keep in mind that normally all translations should
+            be available in all languages. Which means that in a normal situation you will not have
+            to set this parameter.
+        </para>
+
+        <para>
+            Additionally the <methodname>getMessages()</methodname> method can be used to return the
+            complete translation dictionary using the pseudo-locale 'all'. This will return all
+            available translation data for each added locale.
+        </para>
+
+        <note>
+            <para>
+                Attention: the returned array can be <emphasis>very big</emphasis>,
+                depending on the number of added locales and the amount of translation data.
+            </para>
+        </note>
+
+        <example xml:id="zend.translator.additional.sourcedata.example"><info><title>Handling languages with adapters</title></info>
+
+
+            <programlisting language="php"><![CDATA[
+// returns all known message IDs
+$messageIds = $translate->getMessageIds();
+print_r($messageIds);
+
+// or just for the specified language
+$messageIds = $translate->getMessageIds('en_US');
+print_r($messageIds);
+
+// returns all the complete translation data
+$source = $translate->getMessages();
+print_r($source);
+]]></programlisting>
+        </example>
+    </section>
+</section>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Creando un personalizado marcado de formulario usando
         Zend_Form_Decorator</title></info>
-    
+
 
     <para>
         Representar un objeto form es completamente opcional -- no está
@@ -57,7 +57,7 @@
     </para>
 
     <section xml:id="zend.form.decorators.operation"><info><title>Operación</title></info>
-        
+
 
         <para>
             Para configurar un decorador, pase un array de opciones o un
@@ -194,7 +194,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.standard"><info><title>Decoradores estándar</title></info>
-        
+
 
         <para>
             <classname>Zend_Form</classname>
@@ -207,7 +207,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.custom"><info><title>Decoradores personalizados</title></info>
-        
+
 
         <para>Si encuentra que sus necesidades son complejas o necesita una
             enorme personalización,
@@ -332,7 +332,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
                 . $input
                 . $errors
                 . $desc
-                . '</div>'
+                . '</div>';
 
         switch ($placement) {
             case (self::PREPEND):
@@ -427,7 +427,7 @@ class My_Decorator_Errors
     </section>
 
     <section xml:id="zend.form.decorators.individual"><info><title>Generando decoradores individuales</title></info>
-        
+
 
         <para>Desde que los decoradores pueden capturar distintos metadatos del
             elemento o formulario

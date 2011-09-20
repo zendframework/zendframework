@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.using"><info><title>翻訳アダプタの使用法</title></info>
+
+    
+
+    <para>
+        次は、アダプタをコード内で使用する方法です。
+    </para>
+
+    <example xml:id="zend.translator.using.example1"><info><title>単一言語の PHP コードの例</title></info>
+        
+
+        <programlisting language="php"><![CDATA[
+print "Example\n";
+print "=======\n";
+print "Here is line one\n";
+print "Today is the " . date("d.m.Y") . "\n";
+print "\n";
+print "Here is line two\n";
+]]></programlisting>
+    </example>
+
+    <para>
+        上の例の出力は、翻訳に対応していません。
+        おそらく実際はあなたの母国語でコードを書くでしょう。
+        翻訳しなければならないのは、普通は出力内容だけではありません。
+        たとえばエラーメッセージやログメッセージなども対象となります。
+    </para>
+
+    <para>
+        次のステップは、既存のコードに <classname>Zend_Translator</classname> を組み込むことです。
+        もちろん、あとからコードを変更するよりも
+        最初から翻訳を意識したコードを書くほうがずっと簡単です。
+    </para>
+
+    <example xml:id="zend.translator.using.example2"><info><title>多言語対応の PHP コードの例</title></info>
+        
+        <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/my/path/source-de.mo',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '/path/to/translation/fr-source.mo',
+        'locale'  => 'fr'
+    )
+);
+
+print $translate->_("Example") . "\n";
+print "=======\n";
+print $translate->_("Here is line one") . "\n";
+printf($translate->_("Today is the %1\$s") . "\n", date('d.m.Y'));
+print "\n";
+
+$translate->setLocale('fr');
+print $translate->_("Here is line two") . "\n";
+]]></programlisting>
+    </example>
+
+    <para>
+        では、何が起こっているのか、そしてどうやって
+        <classname>Zend_Translator</classname> をコードに組み込むのかについて
+        もうすこし詳しく見ていきましょう。
+    </para>
+
+    <para>
+        新しい <classname>Zend_Translator</classname> オブジェクトを作成し、もととなるアダプタを定義します。
+
+        <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
+);
+]]></programlisting>
+
+        この例では、
+        <emphasis>Gettext アダプタ</emphasis>
+        を使うことにしました。
+        <emphasis>source-de.mo</emphasis> というファイルを
+        <emphasis>/path/to/translation</emphasis> に置いています。
+        この gettext ファイルにはドイツ語の翻訳が含まれています。
+        また、その後で別途フランス語のファイルも追加しています。
+    </para>
+
+    <para>
+        次に行うのは、翻訳対象の文字列をすべてラップすることです。
+        一番シンプルな手法は、このように文字列や文章を囲むことです。
+
+        <programlisting language="php"><![CDATA[
+print $translate->_("Example") . "\n";
+print "=======\n";
+print $translate->_("Here is line one") . "\n";
+]]></programlisting>
+
+        中には翻訳する必要のない文字列もあるでしょう。
+        区切り線などは、たとえ言語が何であっても同じです。
+    </para>
+
+    <para>
+        データの値を翻訳文字列に組み込むこともできます。
+        この場合は埋め込みパラメータを使用します。
+
+        <programlisting language="php"><![CDATA[
+printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
+]]></programlisting>
+
+        <methodname>print()</methodname> の代わりに <methodname>printf()</methodname> 関数を使用し、
+        すべてのパラメータを <code>%1\$s</code> のように置き換えます。
+        最初のパラメータが <code>%1\$s</code>、その次が <code>%2\$s</code>、
+        といったようになります。
+        これにより、実際の値を知らなくても翻訳を進めることができます。
+        今回の例では、日付は常に今日の日付になります。
+        しかし、文字列を翻訳する際には、実際の日付が何であるかを知る必要はありません。
+    </para>
+
+    <para>
+        各文字列は、メッセージ ID によって識別します。
+        文字列の代わりに、コード内でメッセージ ID を指定することもできます。
+        その場合は、このようになります。
+
+        <programlisting language="php"><![CDATA[
+print $translate->_(1) . "\n";
+print "=======\n";
+print $translate->_(2) . "\n";
+]]></programlisting>
+
+        しかし、この方法にはいくつか欠点があります。
+    </para>
+
+    <para>
+        コードを見ただけでは、そこでどんな内容が出力されるのかがわかりません。
+    </para>
+
+    <para>
+        また、文字列の一部が翻訳されていない場合にも問題が起こるでしょう。
+        翻訳の動作原理について考えてみましょう。
+        まず <classname>Zend_Translator</classname> は、指定した ID あるいは文字列に対応する翻訳が
+        その言語に存在するかどうかを探します。
+        翻訳文字列が見つからない場合は、<classname>Zend_Locale</classname>
+        で定義されているその次の言語の翻訳を探します。
+        つまり "<emphasis>de_AT</emphasis>" の場合は
+        "<emphasis>de</emphasis>" のみで探します。
+        "<emphasis>de</emphasis>" の翻訳も見つからない場合は、
+        もとのメッセージをそのまま返します。
+        このようにして、たとえ翻訳文字列がなくても何らかの出力を得ることになっています。
+        <classname>Zend_Translator</classname> は、文字列の翻訳の際に
+        エラーや例外を発生させることはありません。
+    </para>
+
+    <section xml:id="zend.translator.using.structure"><info><title>翻訳ソースの構造</title></info>
+
+        
+
+        <para>
+            次に行うのは、翻訳したい言語用の翻訳ソースを作成することです。
+            それぞれのアダプタには個別の方法があるので、それをここで説明します。
+            その前に、すべてのアダプタに共通する一般的な事項について説明しておきます。
+        </para>
+
+        <para>
+            どこに翻訳ソースファイルを保存すべきなのかを知っておきましょう。
+            <classname>Zend_Translator</classname> では特に制限はありませんが、
+            以下のような構造を推奨します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    単一構造のソース
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/languages/
+/languages/lang.en
+/languages/lang.de
+/library/
+]]></programlisting>
+
+                <para>
+                    利点: すべての言語のソースファイルを同じディレクトリに配置できます。
+                    関連するファイルを分割する必要がありません。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    言語ごとに分けた構造
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/languages/
+/languages/en/
+/languages/en/first.en
+/languages/en/second.en
+/languages/de/
+/languages/de/first.de
+/languages/de/second.de
+/library
+]]></programlisting>
+
+                <para>
+                    利点: すべての言語がひとつのディレクトリにまとめられます。
+                    各言語のチームは、ひとつのディレクトリを翻訳するだけですみます。
+                    また、複数のファイルを透過的に使用できます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    アプリケーションごとに分けた構造
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/application/languages/
+/application/languages/first.en
+/application/languages/first.de
+/application/languages/second.en
+/application/languages/second.de
+/library/
+]]></programlisting>
+
+                <para>
+                    利点: すべての言語のソースファイルを同じディレクトリに配置できます。
+                    関連するファイルを分割する必要がありません。
+                </para>
+
+                <para>
+                    欠点: 同じ言語で複数のファイルを使用する場合に問題が発生します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Gettext 形式の構造
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/languages/
+/languages/de/
+/languages/de/LC_MESSAGES/
+/languages/de/LC_MESSAGES/first.mo
+/languages/de/LC_MESSAGES/second.mo
+/languages/en/
+/languages/en/LC_MESSAGES/
+/languages/en/LC_MESSAGES/first.mo
+/languages/en/LC_MESSAGES/second.mo
+/library/
+]]></programlisting>
+
+                <para>
+                    利点: 以前から使っている gettext 形式のソースを、
+                    そのままの形式で使用できます。
+                </para>
+
+                <para>
+                    欠点: これまでに gettext を使ったことがない人たちにとって、
+                    サブディレクトリの中にまたサブディレクトリという構造は不可解でしょう。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                   ファイル構造のソース
+                </para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/application/models/
+/application/models/MyModel.php
+/application/models/MyModel.de
+/application/models/MyModel.en
+/application/controllers/
+/application/controllers/MyController.php
+/application/controllers/MyController.de
+/application/controllers/MyController.en
+/library/
+]]></programlisting>
+                <para>
+                    利点: すべてのファイルについて、翻訳ソースを関連付けられます。
+                </para>
+
+                <para>
+                    欠点: 小さな翻訳ファイルがあちこちに散らばってしまうので、翻訳が面倒です。
+                    また、すべてのファイルに対して翻訳ソースを追加する必要があります。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            <classname>Zend_Translator</classname> で最も便利なのは、単一構造か
+            言語ごとに分けた構造でしょう。
+        </para>
+
+        <para>
+            さあ、これでどんな構造でいくかが決まりました。
+            次に翻訳ソースファイルを作っていきましょう。
+        </para>
+
+    </section>
+
+</section>

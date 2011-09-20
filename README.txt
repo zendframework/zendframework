@@ -2,7 +2,7 @@ Welcome to the Zend Framework 2.0.0 Release!
 
 RELEASE INFORMATION
 ---------------
-Zend Framework 2.0.0dev3
+Zend Framework 2.0.0dev4
 
 THIS RELEASE IS A DEVELOPMENT RELEASE AND NOT INTENDED FOR PRODUCTION USE.
 PLEASE USE AT YOUR OWN RISK.
@@ -10,11 +10,49 @@ PLEASE USE AT YOUR OWN RISK.
 NEW FEATURES
 ------------
 
-This release contains the following:
+This snapshot includes:
 
- - EventManager component (Zend\EventManager)
- - Initial prototype/development of a comprehensive Dependency Injection
-   component (Zend\Di)
+ - The "Dispatchable" and related interfaces (Zend\Stdlib\Dispatchable,
+   MessageDescription, RequestDescription, and ResponseDescription)
+
+ - A fully refactored HTTP component
+   - Rewritten URI component, with better and more extensible support
+     for an array of different URI schemas, as well as more flexible
+     path and parameter decomposition and serialization.
+
+   - Adds HTTP versions of the Stdlib Request and Response interfaces,
+     along with full-fledged support for standard HTTP headers.
+
+   - A rewritten HTTP client that consumes Http\Request objects and
+     produces Http\Response objects.
+
+   - Two additional HTTP client implementations that provide a
+     convenience API around the base HTTP client. One is static, and
+     allows for simple one-off requests:
+
+         $response = ClientStatic::get($uri);
+         $response = ClientStatic::post(
+            $uri, 
+            array('foo' => 'bar'), 
+            array('Content-Type' => ClientStatic::ENC_URENCODED)
+         );
+
+     The other largely mimics the Zend Framework 1.X HTTP client, and
+     proxies functionality to the Request object when appropriate.
+
+ - Updated all docbook sources to DocBook 5 formatting standards.
+
+ - Merging of more than 50 pull requests made by community members,
+   ranging from one-liner documentation changes to sweeping fixes to the
+   testing repository (including fixing most assertions deprecated in
+   PHPUnit 3.5.0).
+
+We will be refactoring all components using the HTTP client in an
+upcoming milestone to ensure they continue to work, and will also
+post a blog entry and documentation page containing tips.
+
+This snapshot should NOT be used in production, as it is considered
+pre-pre alpha quality.
 
 SYSTEM REQUIREMENTS
 -------------------

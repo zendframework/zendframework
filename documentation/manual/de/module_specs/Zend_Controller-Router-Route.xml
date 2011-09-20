@@ -191,14 +191,14 @@ $router->addRoute('archive', $route);
 
         <para>
             Die Standardroute unterstützt übersetzte Segmente. Um dieses Feature zu verwenden muß
-            zumindest ein Übersetzer (eine Instanz von <classname>Zend_Translate</classname>) auf
+            zumindest ein Übersetzer (eine Instanz von <classname>Zend_Translator</classname>) auf
             einem der folgenden Wege definiert werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    In die Registry mit dem Schlüssel <classname>Zend_Translate</classname> geben.
+                    In die Registry mit dem Schlüssel <classname>Zend_Translator</classname> geben.
                 </para>
             </listitem>
 
@@ -219,7 +219,7 @@ $router->addRoute('archive', $route);
 
         <para>
             Standardmäßig wird das Gebietsschema verwendet das in der Instanz von
-            <classname>Zend_Translate</classname> verwendet wird. Um es zu überschreiben, kann es
+            <classname>Zend_Translator</classname> verwendet wird. Um es zu überschreiben, kann es
             (als Instanz von <classname>Zend_Locale</classname> oder einem Gebietsschema-String) auf
             einem der folgenden Wege gesetzt werden:
         </para>
@@ -280,7 +280,7 @@ $router->addRoute('archive', $route);
 
         <programlisting language="php"><![CDATA[
 // Den Übersetzer vorbereiten
-$translator = new Zend_Translate(
+$translator = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(),

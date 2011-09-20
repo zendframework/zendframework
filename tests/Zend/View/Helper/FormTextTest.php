@@ -123,7 +123,7 @@ class FormTextTest extends \PHPUnit_Framework_TestCase
 
     public function testCanRendersAsXHtml()
     {
-        $this->view->broker('doctype')->direct('XHTML1_STRICT');
+        $this->view->plugin('doctype')->direct('XHTML1_STRICT');
         $test = $this->helper->direct('foo', 'bar');
         $this->assertContains(' />', $test);
     }

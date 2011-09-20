@@ -48,7 +48,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
     public function testSelect()
     {
         $select = $this->_select();
-        $this->assertType('Zend\Db\Select', $select,
+        $this->assertInstanceOf('Zend\Db\Select', $select,
             'Expecting object of type Zend_Db_Select, got ' . get_class($select));
         $stmt = $this->_db->query($select);
         $row = $stmt->fetch();
@@ -69,7 +69,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
     public function testSelectQuery()
     {
         $select = $this->_select();
-        $this->assertType('Zend\Db\Select', $select,
+        $this->assertInstanceOf('Zend\Db\Select', $select,
             'Expecting object of type Zend_Db_Select, got ' . get_class($select));
         $stmt = $select->query();
         $row = $stmt->fetch();
@@ -89,7 +89,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         $select = $this->_select()->where("$product_id = :product_id")
                                   ->bind(array(':product_id' => 1));
 
-        $this->assertType('Zend\Db\Select', $select,
+        $this->assertInstanceOf('Zend\Db\Select', $select,
             'Expecting object of type Zend_Db_Select, got ' . get_class($select));
         $stmt = $select->query();
         $row = $stmt->fetch();
@@ -336,7 +336,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
                    ->columns('product_id');
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Select\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("No table has been specified for the FROM clause", $e->getMessage());
         }
@@ -624,7 +624,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $select->foo();
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Select\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("Unrecognized method 'foo()'", $e->getMessage());
         }
@@ -670,7 +670,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $select->joinFooUsing();
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Select\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("Unrecognized method 'joinFooUsing()'", $e->getMessage());
         }
@@ -696,7 +696,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
             $select->joinCrossUsing("zfbugs_products", "$product_id");
             $this->fail('Expected exception of type "Zend_Db_Select_Exception"');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Select\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Select\Exception', $e,
                               'Expected exception of type "Zend_Db_Select_Exception", got ' . get_class($e));
             $this->assertEquals("Cannot perform a joinUsing with method 'joinCrossUsing()'", $e->getMessage());
         }
@@ -1689,7 +1689,7 @@ abstract class AbstractTest extends \ZendTest\Db\TestSetup
         /* checks if the adapter has effectively gotten serialized,
            no exceptions are thrown here, so it's all right */
         $serialize = serialize($this->_select());
-        $this->assertType('string',$serialize);
+        $this->assertInternalType('string',$serialize);
     }
 
 }

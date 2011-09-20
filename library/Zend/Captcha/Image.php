@@ -624,7 +624,7 @@ class Image extends Word
      * @param mixed $element
      * @return string
      */
-    public function render(\Zend\View\ViewEngine $view = null, $element = null)
+    public function render(\Zend\View\Renderer $view = null, $element = null)
     {
         return '<img width="' . $this->getWidth() . '" height="' . $this->getHeight() . '" alt="' . $this->getImgAlt()
              . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '" />';

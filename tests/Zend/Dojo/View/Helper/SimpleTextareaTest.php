@@ -83,12 +83,18 @@ class SimpleTextareaTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<textarea[^>]*(dojoType="dijit.form.SimpleTextarea")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
     }
 
     public function testPassingIdAsAttributeShouldOverrideUsingNameAsId()
     {
         $html = $this->helper->direct('foo[bar]', '', array(), array('id' => 'foo-bar'));
         $this->assertContains('id="foo-bar"', $html);
+    }
+    
+    public function testGeneratedMarkupShouldNotIncludeTypeAttribute()
+    {
+        $html = $this->getElement();
+        $this->assertNotRegexp('/type="text/', $html, $html);
     }
 }

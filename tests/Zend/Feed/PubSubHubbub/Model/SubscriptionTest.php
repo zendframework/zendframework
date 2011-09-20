@@ -48,7 +48,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($subscription->hasSubscription($id));
         $dataSubscription = $subscription->getSubscription($id);
-        $this->assertType('array', $dataSubscription);
+        $this->assertInternalType('array', $dataSubscription);
         $keys = array('id', 'topic_url', 'hub_url',
                       'created_time', 'lease_seconds',
                       'verify_token', 'secret',

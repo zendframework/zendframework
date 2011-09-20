@@ -37,6 +37,14 @@ namespace Zend\View\Helper;
 class FormText extends FormElement
 {
     /**
+     * Form field 'type' attribute
+     *
+     * Extending classes can override this value to render HTML5 style form
+     * input fields such as 'url', 'email', etc.
+     */
+    protected $inputType = 'text';
+
+    /**
      * Generates a 'text' element.
      *
      * @access public
@@ -56,11 +64,18 @@ class FormText extends FormElement
         if ($name == null) {
             throw new \InvalidArgumentException('FormText: missing argument. $name is required in formText($name, $value = null, $attribs = null)');
         }
-        
+
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
 
         // build the element
+        if (isset($attribs['type'])) {
+            $inputType = $attribs['type'];
+            unset($attribs['type']);
+        } else {
+            $inputType = $this->inputType;
+        }
+
         $disabled = '';
         if ($disable) {
             // disabled
@@ -69,11 +84,12 @@ class FormText extends FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (method_exists($this->view, 'broker') && !$this->view->broker('doctype')->isXhtml()) {
+        if ($this->view instanceof \Zend\Loader\Pluggable && !$this->view->plugin('doctype')->isXhtml()) {
             $endTag= '>';
         }
 
-        $xhtml = '<input type="text"'
+        $xhtml = '<input'
+                . ' type="' .  $this->view->vars()->escape($inputType) . '"'
                 . ' name="' . $this->view->vars()->escape($name) . '"'
                 . ' id="' . $this->view->vars()->escape($id) . '"'
                 . ' value="' . $this->view->vars()->escape($value) . '"'

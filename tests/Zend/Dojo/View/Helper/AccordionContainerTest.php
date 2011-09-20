@@ -69,7 +69,7 @@ class AccordionContainerTest extends \PHPUnit_Framework_TestCase
             $id      = 'pane' . $i;
             $title   = 'Pane ' . $i;
             $content = 'This is the content of pane ' . $i;
-            $html   .= $this->view->broker('accordionPane')->direct($id, $content, array('title' => $title));
+            $html   .= $this->view->plugin('accordionPane')->direct($id, $content, array('title' => $title));
         }
         return $this->helper->direct('container', $html, array(), array('style' => 'height: 200px; width: 100px;'));
     }
@@ -85,19 +85,19 @@ class AccordionContainerTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getContainer();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.layout.AccordionContainer")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('container'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('container'));
     }
 
     public function testShouldAllowCapturingNestedContent()
     {
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
-        $this->view->broker('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
+        $this->view->plugin('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
         echo "Captured content started\n";
-        $this->view->broker('accordionPane')->captureStart('baz', array('title' => 'Nested Pane'));
+        $this->view->plugin('accordionPane')->captureStart('baz', array('title' => 'Nested Pane'));
         echo 'Nested Content';
-        echo $this->view->broker('accordionPane')->captureEnd('baz');
+        echo $this->view->plugin('accordionPane')->captureEnd('baz');
         echo "Captured content ended\n";
-        echo $this->view->broker('accordionPane')->captureEnd('bar');
+        echo $this->view->plugin('accordionPane')->captureEnd('bar');
         $html = $this->helper->captureEnd('foo');
         $this->assertRegexp('/<div[^>]*(id="bar")/', $html);
         $this->assertRegexp('/<div[^>]*(id="baz")/', $html);
@@ -112,10 +112,10 @@ class AccordionContainerTest extends \PHPUnit_Framework_TestCase
     public function testCapturingShouldRaiseErrorWhenDuplicateIdDiscovered()
     {
         $this->helper->captureStart('foo', array(), array('style' => 'height: 200px; width: 100px;'));
-        $this->view->broker('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
+        $this->view->plugin('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
         
         $this->setExpectedException('Zend\Dojo\View\Exception\RuntimeException', 'Lock already exists for id ');
-        $this->view->broker('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
+        $this->view->plugin('accordionPane')->captureStart('bar', array('title' => 'Captured Pane'));
     }
 
     public function testCapturingShouldRaiseErrorWhenNonexistentIdPassedToEnd()

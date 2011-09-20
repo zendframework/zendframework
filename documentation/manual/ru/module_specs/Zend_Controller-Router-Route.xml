@@ -201,14 +201,14 @@ $router->addRoute('archive', $route);
         <para>
             Стандартный маршрут поддерживает переводимые сегменты. Для того,
             чтобы использовать эту возможность, нужно как минимум указать,
-            какой переводчик (экземпляр <classname>Zend_Translate</classname>)
+            какой переводчик (экземпляр <classname>Zend_Translator</classname>)
             должен использоваться - одним из следующих способов:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Поместить его в реестр с ключом <code>Zend_Translate</code>.
+                    Поместить его в реестр с ключом <code>Zend_Translator</code>.
                 </para>
             </listitem>
             <listitem>
@@ -226,7 +226,7 @@ $router->addRoute('archive', $route);
 
         <para>
             По умолчанию используется локаль, указанная в экземпляре
-            <classname>Zend_Translate</classname>. Для того, чтобы
+            <classname>Zend_Translator</classname>. Для того, чтобы
             переопределить ее, вы можете установить ее значение (экземпляр
             <classname>Zend_Locale</classname> или строка с локалью)
             одним из следующих способов:
@@ -291,7 +291,7 @@ $router->addRoute('archive', $route);
 
         <programlisting language="php"><![CDATA[
 // Подготовка переводчика
-$translator = new Zend_Translate('array', array(), 'en');
+$translator = new Zend_Translator('array', array(), 'en');
 $translator->addTranslation(array('archive' => 'archiv',
                                   'year'    => 'jahr',
                                   'month'   => 'monat',

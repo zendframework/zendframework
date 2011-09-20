@@ -60,27 +60,23 @@ if (is_readable($zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
     require_once $zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 
-if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true &&
-    version_compare(PHPUnit_Runner_Version::id(), '3.1.6', '>=')) {
-
+if (defined('TESTS_GENERATE_REPORT') 
+    && TESTS_GENERATE_REPORT === true 
+    && version_compare(PHPUnit_Runner_Version::id(), '3.1.6', '>=')
+) {
     $codeCoverageFilter = PHP_CodeCoverage_Filter::getInstance();
         
-    /*
-     * Add Zend Framework library/ directory to the PHPUnit code coverage
-     * whitelist. This has the effect that only production code source files
-     * appear in the code coverage report and that all production code source
-     * files, even those that are not covered by a test yet, are processed.
-     */
-    //$codeCoverageFilter->addDirectoryToWhitelist($zfCoreLibrary);
-
     /*
      * Omit from code coverage reports the contents of the tests directory
      */
     foreach (array('.php', '.phtml', '.csv', '.inc') as $suffix) {
         $codeCoverageFilter->addDirectoryToBlacklist($zfCoreTests, $suffix);
     }
+
     $codeCoverageFilter->addDirectoryToBlacklist(PEAR_INSTALL_DIR);
     $codeCoverageFilter->addDirectoryToBlacklist(PHP_LIBDIR);
+
+    unset($codeCoverageFilter);
 }
 
 

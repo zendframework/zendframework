@@ -77,12 +77,25 @@ class Uri extends AbstractPage
 
     /**
      * Returns href for this page
+     * 
+     * Includes the fragment identifier if it is set.
      *
      * @return string
      */
     public function getHref()
     {
-        return $this->getUri();
+        $uri = $this->getUri();
+        
+        $fragment = $this->getFragment();       
+        if (null !== $fragment) {
+            if ('#' == substr($uri, -1)) {
+                return $uri . $fragment;
+            } else {                
+                return $uri . '#' . $fragment;
+            }
+        }
+        
+        return $uri;
     }
 
     // Public methods:

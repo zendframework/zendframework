@@ -55,13 +55,13 @@ class ValidatorChain extends EventManager
         $validators = $storage->getMetadata('_VALID');
         if ($validators) {
             foreach ($validators as $validator => $data) {
-                $this->connect('session.validate', new $validator($data), 'isValid');
+                $this->attach('session.validate', new $validator($data), 'isValid');
             }
         }
     }
 
     /**
-     * Attach a handler to the session validator chain
+     * Attach a listener to the session validator chain
      * 
      * @param  string $event
      * @param  callback $context 
@@ -86,8 +86,8 @@ class ValidatorChain extends EventManager
             $this->getStorage()->setMetadata('_VALID', array($name => $data));
         }
 
-        $handle = parent::connect($event, $callback, $priority);
-        return $handle;
+        $listener = parent::attach($event, $callback, $priority);
+        return $listener;
     }
 
     /**

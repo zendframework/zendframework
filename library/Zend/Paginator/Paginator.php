@@ -880,7 +880,7 @@ class Paginator implements \Countable, \IteratorAggregate
 
         $view = $this->getView();
 
-        return $view->broker('paginationControl')->direct($this);
+        return $view->plugin('paginationControl')->direct($this);
     }
 
     /**

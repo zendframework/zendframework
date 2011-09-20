@@ -566,13 +566,13 @@
                     <row>
                         <entry morerows="2" valign="middle"><emphasis role="strong"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.xml.php"><code>xml</code></link></emphasis></entry>
                         <entry morerows="2" valign="middle">Hard</entry>
-                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Qt</code></link></entry>
+                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Qt</code></link></entry>
                     </row>
                     <row>
-                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Tmx</code></link></entry>
+                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Tmx</code></link></entry>
                     </row>
                     <row>
-                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Xliff</code></link></entry>
+                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Xliff</code></link></entry>
                     </row>
                     <row>
                         <entry><emphasis role="strong"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.xmlreader.php"><code>XMLReader</code></link></emphasis></entry>
@@ -1104,17 +1104,17 @@
                         <entry>---</entry>
                     </row>
                     <row>
-                        <entry morerows="2" valign="middle"><emphasis role="strong"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.html"><code>Zend_Translate</code></link></emphasis></entry>
+                        <entry morerows="2" valign="middle"><emphasis role="strong"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.html"><code>Zend_Translator</code></link></emphasis></entry>
                         <entry morerows="2" valign="middle">Hard</entry>
-                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Qt</code></link></entry>
+                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Qt</code></link></entry>
                         <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.xml.php"><code>xml</code></link></entry>
                     </row>
                     <row>
-                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Tmx</code></link></entry>
+                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Tmx</code></link></entry>
                         <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.xml.php"><code>xml</code></link></entry>
                     </row>
                     <row>
-                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.adapter.html"><code>Zend_Translate_Adapter_Xliff</code></link></entry>
+                        <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.adapter.html"><code>Zend_Translator_Adapter_Xliff</code></link></entry>
                         <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.php.net/manual/en/ref.xml.php"><code>xml</code></link></entry>
                     </row>
                     <row>
@@ -1718,7 +1718,7 @@
                         <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.loader.html"><code>Zend_Loader</code></link></entry>
                     </row>
                     <row>
-                        <entry morerows="2" valign="middle"><emphasis role="strong"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translate.html"><code>Zend_Translate</code></link></emphasis></entry>
+                        <entry morerows="2" valign="middle"><emphasis role="strong"><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.translator.html"><code>Zend_Translator</code></link></emphasis></entry>
                         <entry morerows="2" valign="middle">Hard</entry>
                         <entry><link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/manual/en/zend.exception.html"><code>Zend_Exception</code></link></entry>
                     </row>

@@ -22,7 +22,8 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Alnum as AlnumFilter,
-    Zend\Locale\Locale;
+    Zend\Locale\Locale,
+    Zend\Registry;
 
 /**
  * @category   Zend
@@ -153,7 +154,9 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
                 "\n"      => "\n",
                 " \t "    => " \t "
                 );
-        } if (self::$_meansEnglishAlphabet) {
+        }
+
+        if (self::$_meansEnglishAlphabet) {
             //The Alphabet means english alphabet.
             $valuesExpected = array(
                 'a B ４5'  => 'a B 5',
@@ -172,6 +175,36 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
             );
         }
         $filter = $this->_filter;
+        foreach ($valuesExpected as $input => $output) {
+            $this->assertEquals(
+                $output,
+                $result = $filter($input),
+                "Expected '$input' to filter to '$output', but received '$result' instead"
+                );
+        }
+    }
+
+    /**
+     * @group ZF-11631
+     */
+    public function testRegistryLocale()
+    {
+        $locale = new Locale('ja');
+        \Zend\Registry::set('Zend_Locale', $locale);
+
+        if (!self::$_unicodeEnabled) {
+            $this->markTestSkipped('Unicode not enabled');
+        }
+
+        $valuesExpected = array(
+            'aＡBｂ3４5６'  => 'aB35',
+            'z７ Ｙ8　x９'  => 'z8x',
+            '，s1.2r３#:q,' => 's12rq',
+        );
+
+        $filter = new AlnumFilter();
+        $this->assertEquals('ja', (string) $filter->getLocale());
+
         foreach ($valuesExpected as $input => $output) {
             $this->assertEquals(
                 $output,

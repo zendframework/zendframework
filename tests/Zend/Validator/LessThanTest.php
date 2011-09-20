@@ -61,8 +61,13 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
             array(100, true, array(-1, 0, 0.01, 1, 99.999)),
             array(100, false, array(100, 100.0, 100.01)),
             array('a', false, array('a', 'b', 'c', 'd')),
-            array('z', true, array('x', 'y'))
-            );
+            array('z', true, array('x', 'y')),
+            array(array('max' => 100, 'inclusive' => true), true, array(-1, 0, 0.01, 1, 99.999, 100, 100.0)),
+            array(array('max' => 100, 'inclusive' => true), false, array(100.01)),
+            array(array('max' => 100, 'inclusive' => false), true, array(-1, 0, 0.01, 1, 99.999)),
+            array(array('max' => 100, 'inclusive' => false), false, array(100, 100.0, 100.01))
+        );
+
         foreach ($valuesExpected as $element) {
             $validator = new Validator\LessThan($element[0]);
             foreach ($element[2] as $input) {
@@ -91,5 +96,16 @@ class LessThanTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator\LessThan(10);
         $this->assertEquals(10, $validator->getMax());
+    }
+
+    /**
+     * Ensures that getInclusive() returns expected default value
+     *
+     * @return void
+     */
+    public function testGetInclusive()
+    {
+        $validator = new Validator\LessThan(10);
+        $this->assertEquals(false, $validator->getInclusive());
     }
 }

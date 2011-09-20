@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -30,16 +30,16 @@ use Zend\Cache;
 use Zend\Cache\Frontend;
 
 /**
- * Zend_Translate_Adapter_Array
+ * Zend_Translator_Adapter_Array
  */
 
 /**
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
+ * @group      Zend_Translator
  */
 class ArrayTest extends \PHPUnit_Framework_TestCase
 {
@@ -286,6 +286,8 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($cache instanceof Frontend\Core);
         unset ($adapter);
 
+        Adapter\ArrayAdapter::setCache($cache);
+        $this->assertTrue(Adapter\ArrayAdapter::hasCache());
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
         $this->assertTrue($cache instanceof Frontend\Core);

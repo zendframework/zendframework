@@ -134,12 +134,12 @@ class DijitContainerTest extends \PHPUnit_Framework_TestCase
     public function testRenderingShouldEnableDojo()
     {
         $html = $this->decorator->render('');
-        $this->assertTrue($this->view->broker('dojo')->isEnabled());
+        $this->assertTrue($this->view->plugin('dojo')->isEnabled());
     }
 
     public function testRenderingShouldTriggerErrorWhenDuplicateDijitDetected()
     {
-        $this->view->broker('dojo')->addDijit('foo-ContentPane', array('dojoType' => 'dijit.layout.ContentPane'));
+        $this->view->plugin('dojo')->addDijit('foo-ContentPane', array('dojoType' => 'dijit.layout.ContentPane'));
 
         $handler = set_error_handler(array($this, 'handleError'));
         $html = $this->decorator->render('');

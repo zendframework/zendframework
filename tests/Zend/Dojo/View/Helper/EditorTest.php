@@ -87,7 +87,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldRegisterDijitModule()
     {
         $html = $this->helper->direct('foo');
-        $modules = $this->view->broker('dojo')->getModules();
+        $modules = $this->view->plugin('dojo')->getModules();
         $this->assertContains('dijit.Editor', $modules);
     }
 
@@ -112,10 +112,10 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldCreateJavascriptToConnectEditorToHiddenValue()
     {
         $this->helper->direct('foo');
-        $onLoadActions = $this->view->broker('dojo')->getOnLoadActions();
+        $onLoadActions = $this->view->plugin('dojo')->getOnLoadActions();
         $found = false;
         foreach ($onLoadActions as $action) {
-            if (strstr($action, "dojo.byId('foo').value = dijit.byId('foo-Editor').getValue(false);")) {
+            if (strstr($action, "value = dijit.byId('foo-Editor').getValue(false);")) {
                 $found = true;
                 break;
             }
@@ -126,7 +126,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldCreateJavascriptToFindParentForm()
     {
         $this->helper->direct('foo');
-        $javascript = $this->view->broker('dojo')->getJavascript();
+        $javascript = $this->view->plugin('dojo')->getJavascript();
         $found = false;
         foreach ($javascript as $action) {
             if (strstr($action, "zend.findParentForm = function")) {
@@ -140,7 +140,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     public function testHelperShouldNotRegisterDojoStylesheet()
     {
         $this->helper->direct('foo');
-        $this->assertFalse($this->view->broker('dojo')->registerDojoStylesheet());
+        $this->assertFalse($this->view->plugin('dojo')->registerDojoStylesheet());
     }
 
     /**
@@ -154,7 +154,7 @@ class EditorTest extends \PHPUnit_Framework_TestCase
         );
         $html = $this->helper->direct('foo', '', array('plugins' => array_keys($plugins)));
 
-        $dojo = $this->view->broker('dojo')->__toString();
+        $dojo = $this->view->plugin('dojo')->__toString();
         foreach (array_values($plugins) as $plugin) {
             $this->assertContains('dojo.require("dijit._editor.plugins.' . $plugin . '")', $dojo, $dojo);
         }
@@ -178,5 +178,24 @@ class EditorTest extends \PHPUnit_Framework_TestCase
     {
         $html = $this->helper->direct('foo');
         $this->assertRegexp('#<noscript><textarea[^>]*>#', $html, $html);
+    }
+    
+    /**
+     * @group ZF-11315
+     */
+    public function testHiddenInputShouldBeRenderedLast()
+    {
+        $html = $this->helper->direct('foo');
+        $this->assertRegexp('#</noscript><input#', $html, $html);
+    }
+
+    /** @group ZF-5711 */
+    public function testHelperShouldJsonifyExtraPlugins()
+    {
+        $extraPlugins = array('copy', 'cut', 'paste');
+        $html = $this->helper->direct('foo', '', array('extraPlugins' => $extraPlugins));
+        $pluginsString = Json::encode($extraPlugins);
+        $pluginsString = str_replace('"', "'", $pluginsString);
+        $this->assertContains('extraPlugins="' . $pluginsString . '"', $html);
     }
 }

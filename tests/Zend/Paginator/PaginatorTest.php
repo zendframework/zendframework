@@ -147,14 +147,14 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testFactoryReturnsArrayAdapter()
     {
         $paginator = Paginator\Paginator::factory($this->_testCollection);
-        $this->assertType('Zend\Paginator\Adapter\ArrayAdapter', $paginator->getAdapter());
+        $this->assertInstanceOf('Zend\\Paginator\\Adapter\\ArrayAdapter', $paginator->getAdapter());
     }
 
     public function testFactoryReturnsDbSelectAdapter()
     {
         $paginator = Paginator\Paginator::factory($this->_query);
 
-        $this->assertType('Zend\Paginator\Adapter\DbSelect', $paginator->getAdapter());
+        $this->assertInstanceOf('Zend\\Paginator\\Adapter\\DbSelect', $paginator->getAdapter());
     }
 
     /**
@@ -166,30 +166,30 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
 
         $paginator = Paginator\Paginator::factory($table->select());
 
-        $this->assertType('Zend\Paginator\Adapter\DbSelect', $paginator->getAdapter());
+        $this->assertInstanceOf('Zend\\Paginator\\Adapter\\DbSelect', $paginator->getAdapter());
     }
 
     public function testFactoryReturnsIteratorAdapter()
     {
         $paginator = Paginator\Paginator::factory(new \ArrayIterator($this->_testCollection));
-        $this->assertType('Zend\Paginator\Adapter\Iterator', $paginator->getAdapter());
+        $this->assertInstanceOf('Zend\\Paginator\\Adapter\\Iterator', $paginator->getAdapter());
     }
 
     public function testFactoryReturnsNullAdapter()
     {
         $paginator = Paginator\Paginator::factory(101);
-        $this->assertType('Zend\Paginator\Adapter\Null', $paginator->getAdapter());
+        $this->assertInstanceOf('Zend\\Paginator\\Adapter\\Null', $paginator->getAdapter());
     }
 
     public function testFactoryThrowsInvalidClassExceptionAdapter()
     {
-        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'No adapter for type stdClass');
+        $this->setExpectedException('Zend\\Paginator\\Exception\\InvalidArgumentException', 'No adapter for type stdClass');
         $paginator = Paginator\Paginator::factory(new \stdClass());
     }
 
     public function testFactoryThrowsInvalidTypeExceptionAdapter()
     {
-        $this->setExpectedException('Zend\Paginator\Exception\InvalidArgumentException', 'No adapter for type string');
+        $this->setExpectedException('Zend\\Paginator\\Exception\\InvalidArgumentException', 'No adapter for type string');
         $paginator = Paginator\Paginator::factory('invalid argument');
     }
 
@@ -219,10 +219,10 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Scrolling', Paginator\Paginator::getDefaultScrollingStyle());
 
         $broker = Paginator\Paginator::getScrollingStyleBroker();
-        $this->assertType('ZendTest\Paginator\TestAsset\ScrollingStyleBroker', $broker);
+        $this->assertInstanceOf('ZendTest\\Paginator\\TestAsset\\ScrollingStyleBroker', $broker);
 
         $broker = Paginator\Paginator::getAdapterBroker();
-        $this->assertType('ZendTest\Paginator\TestAsset\AdapterBroker', $broker);
+        $this->assertInstanceOf('ZendTest\\Paginator\\TestAsset\\AdapterBroker', $broker);
 
         $paginator = Paginator\Paginator::factory(range(1, 101));
         $this->assertEquals(3, $paginator->getItemCountPerPage());
@@ -369,7 +369,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testGetsCurrentItems()
     {
         $items = $this->_paginator->getCurrentItems();
-        $this->assertType('ArrayIterator', $items);
+        $this->assertInstanceOf('ArrayIterator', $items);
 
         $count = 0;
 
@@ -383,7 +383,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testGetsIterator()
     {
         $items = $this->_paginator->getIterator();
-        $this->assertType('ArrayIterator', $items);
+        $this->assertInstanceOf('ArrayIterator', $items);
 
         $count = 0;
 
@@ -520,23 +520,23 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $viewRenderer = $this->broker->load('viewRenderer');
         $viewRenderer->setView(new View\PhpRenderer());
 
-        $this->assertType('Zend\View\Renderer', $this->_paginator->getView());
+        $this->assertInstanceOf('Zend\\View\\Renderer', $this->_paginator->getView());
     }
 
     public function testGeneratesViewIfNonexistent()
     {
-        $this->assertType('Zend\View\Renderer', $this->_paginator->getView());
+        $this->assertInstanceOf('Zend\\View\\Renderer', $this->_paginator->getView());
     }
 
     public function testGetsAndSetsView()
     {
         $this->_paginator->setView(new View\PhpRenderer());
-        $this->assertType('Zend\View\Renderer', $this->_paginator->getView());
+        $this->assertInstanceOf('Zend\\View\\Renderer', $this->_paginator->getView());
     }
 
     public function testRenders()
     {
-        $this->setExpectedException('Zend\View\Exception', 'view partial');
+        $this->setExpectedException('Zend\\View\\Exception', 'view partial');
         $this->_paginator->render(new View\PhpRenderer());
     }
 
@@ -598,7 +598,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
     public function testAcceptsTraversableInstanceFromAdapter()
     {
         $paginator = new Paginator\Paginator(new \ZendTest\Paginator\TestAsset\TestAdapter());
-        $this->assertType('ArrayObject', $paginator->getCurrentItems());
+        $this->assertInstanceOf('ArrayObject', $paginator->getCurrentItems());
     }
 
     public function testCachedItem()
@@ -759,7 +759,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $p = Paginator\Paginator::factory(new TestArrayAggregate());
 
         $this->assertEquals(1, count($p));
-        $this->assertType('Zend\Paginator\Adapter\ArrayAdapter', $p->getAdapter());
+        $this->assertInstanceOf('Zend\\Paginator\\Adapter\\ArrayAdapter', $p->getAdapter());
         $this->assertEquals(4, count($p->getAdapter()));
     }
 
@@ -771,7 +771,7 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $p = new Paginator\Paginator(new TestArrayAggregate());
 
         $this->assertEquals(1, count($p));
-        $this->assertType('Zend\Paginator\Adapter\ArrayAdapter', $p->getAdapter());
+        $this->assertInstanceOf('Zend\\Paginator\\Adapter\\ArrayAdapter', $p->getAdapter());
         $this->assertEquals(4, count($p->getAdapter()));
     }
 

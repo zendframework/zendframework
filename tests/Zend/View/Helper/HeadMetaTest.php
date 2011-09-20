@@ -69,7 +69,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
         }
         $this->basePath = __DIR__ . '/_files/modules';
         $this->view     = new View();
-        $this->view->broker('doctype')->direct('XHTML1_STRICT');
+        $this->view->plugin('doctype')->direct('XHTML1_STRICT');
         $this->helper   = new Helper\HeadMeta();
         $this->helper->setView($this->view);
     }
@@ -329,7 +329,7 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 
     public function testStringRepresentationReflectsDoctype()
     {
-        $this->view->broker('doctype')->direct('HTML4_STRICT');
+        $this->view->plugin('doctype')->direct('HTML4_STRICT');
         $this->helper->direct('some content', 'foo');
         $test = $this->helper->toString();
         $this->assertNotContains('/>', $test);
@@ -343,14 +343,14 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function testSetNameDoesntClobber()
     {
         $view = new View();
-        $view->broker('headMeta')->setName('keywords', 'foo');
-        $view->broker('headMeta')->appendHttpEquiv('pragma', 'bar');
-        $view->broker('headMeta')->appendHttpEquiv('Cache-control', 'baz');
-        $view->broker('headMeta')->setName('keywords', 'bat');
+        $view->plugin('headMeta')->setName('keywords', 'foo');
+        $view->plugin('headMeta')->appendHttpEquiv('pragma', 'bar');
+        $view->plugin('headMeta')->appendHttpEquiv('Cache-control', 'baz');
+        $view->plugin('headMeta')->setName('keywords', 'bat');
 
         $this->assertEquals(
             '<meta http-equiv="pragma" content="bar" />' . PHP_EOL . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL . '<meta name="keywords" content="bat" />',
-            $view->broker('headMeta')->toString()
+            $view->plugin('headMeta')->toString()
             );
     }
 
@@ -360,15 +360,15 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function testSetNameDoesntClobberPart2()
     {
         $view = new View();
-        $view->broker('headMeta')->setName('keywords', 'foo');
-        $view->broker('headMeta')->setName('description', 'foo');
-        $view->broker('headMeta')->appendHttpEquiv('pragma', 'baz');
-        $view->broker('headMeta')->appendHttpEquiv('Cache-control', 'baz');
-        $view->broker('headMeta')->setName('keywords', 'bar');
+        $view->plugin('headMeta')->setName('keywords', 'foo');
+        $view->plugin('headMeta')->setName('description', 'foo');
+        $view->plugin('headMeta')->appendHttpEquiv('pragma', 'baz');
+        $view->plugin('headMeta')->appendHttpEquiv('Cache-control', 'baz');
+        $view->plugin('headMeta')->setName('keywords', 'bar');
 
         $this->assertEquals(
             '<meta name="description" content="foo" />' . PHP_EOL . '<meta http-equiv="pragma" content="baz" />' . PHP_EOL . '<meta http-equiv="Cache-control" content="baz" />' . PHP_EOL . '<meta name="keywords" content="bar" />',
-            $view->broker('headMeta')->toString()
+            $view->plugin('headMeta')->toString()
             );
     }
 
@@ -379,12 +379,12 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function testPlacesMetaTagsInProperOrder()
     {
         $view = new View();
-        $view->broker('headMeta')->setName('keywords', 'foo');
-        $view->broker('headMeta')->direct('some content', 'bar', 'name', array(), \Zend\View\Helper\Placeholder\Container\AbstractContainer::PREPEND);
+        $view->plugin('headMeta')->setName('keywords', 'foo');
+        $view->plugin('headMeta')->direct('some content', 'bar', 'name', array(), \Zend\View\Helper\Placeholder\Container\AbstractContainer::PREPEND);
 
         $this->assertEquals(
             '<meta name="bar" content="some content" />' . PHP_EOL . '<meta name="keywords" content="foo" />',
-            $view->broker('headMeta')->toString()
+            $view->plugin('headMeta')->toString()
             );
     }
 
@@ -415,10 +415,10 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
 	public function testCharsetValidateFail()
 	{
 		$view = new View();
-		$view->broker('doctype')->direct('HTML4_STRICT');
+		$view->plugin('doctype')->direct('HTML4_STRICT');
 
         $this->setExpectedException('Zend\View\Exception');
-        $view->broker('headMeta')->setCharset('utf-8');
+        $view->plugin('headMeta')->setCharset('utf-8');
 	}
 
 	/**
@@ -427,18 +427,18 @@ class HeadMetaTest extends \PHPUnit_Framework_TestCase
     public function testCharset() 
     {
 		$view = new View();
-		$view->broker('doctype')->direct('HTML5');
+		$view->plugin('doctype')->direct('HTML5');
 
-		$view->broker('headMeta')->setCharset('utf-8');
+		$view->plugin('headMeta')->setCharset('utf-8');
 		$this->assertEquals(
 			'<meta charset="utf-8">',
-			$view->broker('headMeta')->toString());
+			$view->plugin('headMeta')->toString());
 
-		$view->broker('doctype')->direct('XHTML5');
+		$view->plugin('doctype')->direct('XHTML5');
 
 		$this->assertEquals(
 			'<meta charset="utf-8"/>',
-			$view->broker('headMeta')->toString());
+			$view->plugin('headMeta')->toString());
 	}
 
 }

@@ -362,9 +362,9 @@ function() {
     public function testHelperStorageShouldPersistBetweenViewObjects()
     {
         $view1 = $this->getView();
-        $dojo1 = $view1->broker('dojo');
+        $dojo1 = $view1->plugin('dojo');
         $view2 = $this->getView();
-        $dojo2 = $view1->broker('dojo');
+        $dojo2 = $view1->plugin('dojo');
         $this->assertSame($dojo1, $dojo2);
     }
 
@@ -415,7 +415,7 @@ function() {
     public function testStringSerializationShouldBeDoctypeAware()
     {
         $view = $this->getView();
-        $view->broker('doctype')->direct('HTML4_LOOSE');
+        $view->plugin('doctype')->direct('HTML4_LOOSE');
         $this->helper->setView($view);
         $this->setupDojo();
         $html = $this->helper->__toString();
@@ -423,7 +423,7 @@ function() {
         $this->assertRegexp('|<script [^>]*>[\r\n]+\s*//<!--|', $html);
 
         $this->helper = new DojoHelper();
-        $view->broker('doctype')->direct('XHTML1_STRICT');
+        $view->plugin('doctype')->direct('XHTML1_STRICT');
         $this->helper->setView($view);
         $this->setupDojo();
         $html = $this->helper->__toString();
@@ -441,7 +441,7 @@ function() {
 
         $view = $this->getView();
         $this->assertNotSame($this->view, $view);
-        $helper = $view->broker('dojo')->direct();
+        $helper = $view->plugin('dojo')->direct();
         $this->assertSame($this->helper, $helper);
     }
 
@@ -798,7 +798,7 @@ function() {
     public function testZendDijitOnLoadMarkupShouldPrecedeAllOtherOnLoadEvents()
     {
         $this->helper->addOnLoad('zend.custom');
-        $this->view->broker('textbox')->direct('foo', 'bar');
+        $this->view->plugin('textbox')->direct('foo', 'bar');
         $test = $this->helper->__toString();
         $this->assertRegexp('/zendDijits.*?(zend\.custom)/s', $test, 'Generated markup: ' . $test);
     }
@@ -858,6 +858,16 @@ function() {
         $this->assertFalse($helper->registerDojoStylesheet());
     }
 
+    public function testJsonExpressionRenders()
+    {
+        $this->helper->addDijit('foo',
+                array('dojoType' => 'dijit.form.TextBox',
+                      'onChange' => new \Zend\Json\Expr('function(){alert(\'foo\');}'),
+                      ));
+        $output = $this->helper->dijitsToJson();
+        $this->assertRegexp('#(function\\(\\){alert\\(\'foo\'\\);})#', $output);
+    }
+    
     public function setupDojo()
     {
         $this->helper->requireModule('dijit.layout.ContentPane')

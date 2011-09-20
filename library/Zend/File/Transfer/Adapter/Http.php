@@ -139,7 +139,8 @@ class Http extends AbstractAdapter
                 'name'  => $files,
                 'error' => 1));
             $validator = $this->_validators['Zend\Validator\File\Upload'];
-            $validator->setFiles($temp)
+            $validator->setTranslator($this->getTranslator())
+                      ->setFiles($temp)
                       ->isValid($files, null);
             $this->_messages += $validator->getMessages();
             return false;

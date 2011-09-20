@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.adapter"><info><title>Adapter für Zend_Translator</title></info>
+    
+
+    <para>
+        <classname>Zend_Translator</classname> kann unterschiedliche Adapter für die Übersetzung
+        verwenden. Jeder Adapter hat seine eigenen Vor- und Nachteile. Hier ist eine kurze
+        Liste aller unterstützten Adapter für Übersetzungsquelldateien.
+    </para>
+
+    <table xml:id="zend.translator.adapter.table"><info><title>Adapter für Zend_Translator</title></info>
+        
+
+        <tgroup cols="3">
+            <thead>
+                <row>
+                    <entry>Adapter</entry>
+                    <entry>Beschreibung</entry>
+                    <entry>Benutzung</entry>
+                </row>
+            </thead>
+
+            <tbody>
+                <row>
+                    <entry>Array</entry>
+                    <entry>Für <acronym>PHP</acronym> Arrays</entry>
+                    <entry>Kleine Seiten; Einfachste Handhabung; nur für Programmierer</entry>
+                </row>
+
+                <row>
+                    <entry>Csv</entry>
+                    <entry>Für kommagetrennte (*.csv/*.txt) Dateien</entry>
+
+                    <entry>
+                        Einfaches Textdatei Format; schnell; mögliche Probleme bei der Verwendung
+                        von Unicode Zeichen
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>Gettext</entry>
+                    <entry>Für binäre Gettext (*.mo) Dateien</entry>
+
+                    <entry>
+                        GNU Standard für Linux; Threadsicher; benötigt Tools für die Übersetzung
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>Ini</entry>
+                    <entry>Für einfache <acronym>INI</acronym> (*.ini) Dateien</entry>
+
+                    <entry>
+                        Einfaches Testdatei Format; schnell; mögliche Probleme mit Unicode Zeichen
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>Tbx</entry>
+                    <entry>Für termbase exchange (*.tbx/*.xml) Dateien</entry>
+
+                    <entry>
+                        Industriestandard für anwendungsübergreifende Fachbegriffe;
+                        <acronym>XML</acronym> Format
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>Tmx</entry>
+                    <entry>Für TMX (*.tmx/*.xml) Dateien</entry>
+
+                    <entry>
+                        Industriestandard für anwendungsübergreifende Übersetzungen;
+                        <acronym>XML</acronym> Format, menschenlesbar
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>Qt</entry>
+                    <entry>Für qt Linguist (*.ts) Dateien</entry>
+
+                    <entry>
+                        Plattformübergreifendes Anwendungs-Framework; <acronym>XML</acronym>
+                        Format, menschenlesbar
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>Xliff</entry>
+                    <entry>Für XLIFF (*.xliff/*.xml) Dateien</entry>
+
+                    <entry>
+                        Ein einfacheres Format als <acronym>TMX</acronym> aber vergleichbar;
+                        <acronym>XML</acronym> Format; menschenlesbar
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>XmlTm</entry>
+                    <entry>Für xmltm (*.xml) Dateien</entry>
+
+                    <entry>
+                        Industriestandard für <acronym>XML</acronym> basierende
+                        Übersetzungsspeicher; <acronym>XML</acronym> Format; menschenlesbar
+                    </entry>
+                </row>
+
+                <row>
+                    <entry>Andere</entry>
+                    <entry>*.sql</entry>
+                    <entry>Verschiedene andere Adapter werden in Zukunft noch implementiert</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <section xml:id="zend.translator.adapter.decision"><info><title>Wie man entscheidet welchen Adapter man benutzen soll</title></info>
+        
+
+        <para>
+            Zuerst muss man die Entscheidung treffen welchen der Adapter man für
+            <classname>Zend_Translator</classname> benutzen soll. Oft sind externe Kriterien wie die
+            Vorgaben durch ein Projekt oder durch einen Kunden dafür ausschlaggebend. Aber
+            wenn die Entscheidungsgewalt in den eigenen Händen liegt, werden die folgenden
+            Hinweise die Entscheidung vereinfachen.
+        </para>
+
+        <note>
+            <para>
+                Wenn man den Adapter auswählt, sollte man auch auf das verwendete Encoding achten.
+                Selbst wenn Zend Framework UTF-8 als Standard-Encoding definiert, besteht manchmal
+                die Notwendigkeit, andere Encodings zu verwenden.
+                <classname>Zend_Translator</classname> ändert kein Encoding, welches in Quelldateien
+                definiert ist: wenn nun eine Gettext-Quelle das Encoding
+                ISO-8859-1 verwendet, werden die Strings auch in diesem Encoding
+                zurückgegeben, ohne dass diese konvertiert werden. Es gibt nur eine
+                Einschränkung:
+            </para>
+
+            <para>
+                Wenn <acronym>XML</acronym> basierende Quellformate wie TMX oder XLIFF verwendet
+                werden, muß das Encoding in den <acronym>XML</acronym> Dateiheadern definiert
+                werden, weil <acronym>XML</acronym> Dateien ohne definiertes Encoding durch jeden
+                Parser standardmäßig als UTF-8 angesehen werden. Man sollte auch darauf achten, dass
+                das Encoding von <acronym>XML</acronym> Dateien zur Zeit auf die Encodings limitiert
+                ist welche durch <acronym>PHP</acronym> unterstützt werden. Das sind UTF-8,
+                ISO-8859-1 und US-ASCII.
+            </para>
+        </note>
+
+        <section xml:id="zend.translator.adapter.array"><info><title>Zend_Translator_Adapter_Array</title></info>
+            
+
+            <para>
+                Der Array-Adapter ist der Adapter, welcher für Programmierer am einfachsten
+                zu verwenden ist.
+                Aber wenn viele Strings oder viele Sprachen zu übersetzen sind, sollte über
+                einen anderen Adapter nachgedacht werden. Wenn z.B. über 5000 Strings zu
+                übersetzen sind wird, ist der Array-Adapter nicht die beste Wahl.
+            </para>
+
+            <para>
+                Dieser Adapter sollte nur für kleine Seiten mit einer Handvoll Sprachen
+                verwendet werden und wenn man selbst oder das eigene Team die Übersetzungen
+                erstellen kann.
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.csv"><info><title>Zend_Translator_Adapter_Csv</title></info>
+            
+
+            <para>
+                Der CSV-Adapter ist der Adapter, der am einfachsten für Kunden zu benutzen ist.
+                CSV-Dateien sind mit Standardtexteditoren lesbar, allerdings unterstützen diese
+                Editoren oft keine UTF8 Zeichensätze.
+            </para>
+
+            <para>
+                Man sollte diesen Adapter nur benutzen, wenn der Kunde die Übersetzungen
+                selbst durchführen will.
+            </para>
+
+            <note>
+                <para>
+                    Es ist zu beachten, dass der CSV-Adapter Probleme hat, wenn die CSV-Dateien anders
+                    kodiert sind als die Gebietsschemaeinstellung der Umgebung. Die Ursache ist ein
+                    Bug von <acronym>PHP</acronym> selbst, der nicht vor <acronym>PHP</acronym> 6.0
+                    behoben sein wird (http://bugs.php.net/bug.php?id=38471). Deshalb sollte man
+                    sich darüber im klaren sein, dass der CSV-Adapter wegen Einschränkungen durch
+                    <acronym>PHP</acronym> nicht unabhängig vom Gebietsschema ist.
+                </para>
+            </note>
+        </section>
+
+        <section xml:id="zend.translator.adapter.gettext"><info><title>Zend_Translator_Adapter_Gettext</title></info>
+            
+
+            <para>
+                Der Gettext-Adapter ist der Adapter, der am meisten verwendet wird.
+                Gettext ist ein Übersetzungsformat, welches durch GNU eingeführt wurde
+                und jetzt weltweit Verwendung findet.
+                Es ist nicht menschenlesbar, allerdings existieren einige kostenlose
+                Freeware Tools (zum Beispiel, <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link>),
+                welche sehr nützlich sind. Der <classname>Zend_Translator</classname> Gettext-Adapter
+                ist nicht mit Hilfe von <acronym>PHP</acronym>s Gettext-Erweiterung realisiert
+                worden. Der Gettext-Adapter kann also verwendet werden, selbst wenn
+                <acronym>PHP</acronym>s Gettext-Erweiterung nicht verfügbar ist.
+                Ausserdem ist der Adapter im Gegensatz zu <acronym>PHP</acronym>s
+                Gettext-Erweiterung threadsicher.
+            </para>
+
+            <para>
+                Die meisten werden diesen Adapter benutzen.
+                Mit den vorhandenen Tools ist eine professionelle Übersetzung sehr einfach.
+                Aber Gettext-Dateien werden in einem machinenlesbaren Format gespeichert
+                und sind nicht ohne Tools lesbar.
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.ini"><info><title>Zend_Translator_Adapter_Ini</title></info>
+            
+
+            <para>
+                Der <acronym>INI</acronym> Adapter ist ein sehr einfacher Adapter, welcher sogar
+                direkt von Kunden verwendet werden kann. <acronym>INI</acronym> Dateien sind von
+                standardmäßigen Texteditoren lesbar, allerdings unterstützen manche Texteditoren
+                keine UTF8 Zeichensätze.
+            </para>
+
+            <para>
+                Dieser Adapter sollte nur dann verwendet werden, wenn ein Kunde Übersetzungen selbst
+                machen will. Verwenden Sie diesen Adapter nicht als generelle Übersetzungsquelle.
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.tbx"><info><title>Zend_Translator_Adapter_Tbx</title></info>
+            
+
+            <para>
+                Der TBX Adapter ist ein Adapter, der von Kunden benutzt wird, die bereits das TBX
+                Format für ihre internen Übersetzungssysteme verwenden. TBX ist kein standardmäßiges
+                Übersetzungsformat sondern eher eine Sammlung von bereits übersetzten und
+                vorübersetzten Quell-Strings. Wenn dieser Adapter verwendet wird, muß sichergestellt
+                werden, dass alle benötigten Quell-Strings übersetzt sind. TBX ist ein dateibasiertes
+                und komplett neues <acronym>XML</acronym> Format. <acronym>XML</acronym> Dateien
+                sind menschenlesbar, aber das Lesen der Dateien ist nicht so schnell wie mit
+                Gettext-Dateien.
+            </para>
+
+            <para>
+                Dieser Adapter ist perfekt für Firmen, die bereits vorübersetzte Quelldateien
+                verwenden. Die Dateien sind menschenlesbar und unabhängig vom Betriebsystem.
+            </para>
+
+            <warning><info><title>Rückschritt in PHP 5.3</title></info>
+                
+
+                <para>
+                    Vor <acronym>PHP</acronym> 5.3 haben <methodname>parse_ini_file()</methodname>
+                    und <methodname>parse_ini_string()</methodname> nicht ASCII Zeichen in
+                    <acronym>INI</acronym> Optionsschlüsseln ohne Probleme behandelt. Aber beginnend
+                    mit <acronym>PHP</acronym> 5.3 werden derartige Schlüssel im zurückgegebenen Array
+                    von beiden Funktionen stillschweigend entfernt. Wenn man Schlüssel hatte
+                    die UTF-8 oder Latin-1 Zeichen verwenden, werden die eigenen Übersetzungen nicht
+                    mehr funktionieren, wenn der <acronym>INI</acronym> Adapter verwendet wird. Wenn
+                    das der Fall ist, wird empfohlen einen anderen Adapter zu verwenden.
+                </para>
+            </warning>
+        </section>
+
+        <section xml:id="zend.translator.adapter.tmx"><info><title>Zend_Translator_Adapter_Tmx</title></info>
+            
+
+            <para>
+                Der TMX-Adapter wird meistens benutzt, wenn Kunden
+                mehrere Systeme haben, welche alle auf die gleichen Übersetzungen
+                zugreifen oder wenn die Übersetzungen systemunabhängig sein müssen.
+                TMX ist ein <acronym>XML</acronym> Dateiformat, welches als der kommende
+                Industriestandard gehandelt wird. <acronym>XML</acronym> Dateien sind menschenlesbar,
+                aber das Lesen der Dateien ist nicht so schnell wie mit Gettext-Dateien.
+            </para>
+
+            <para>
+                Die meisten mittleren Firmen und Großfirmen werden diesen Adapter benutzen.
+                Die Dateien sind menschenlesbar und systemunabhängig.
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.qt"><info><title>Zend_Translator_Adapter_Qt</title></info>
+            
+
+            <para>
+                Der Qt-Adapter ist der Adapter für alle Kunden, welche TS-Dateien
+                als Übersetzungsquelle haben, die von QtLinguist erstellt wurden.
+                QT ist ein <acronym>XML</acronym> basiertes Format.
+                <acronym>XML</acronym> Dateien sind menschenlesbar, aber das Lesen der Dateien
+                ist nicht so schnell wie mit Gettext-Dateien.
+            </para>
+
+            <para>
+                Einige "Big Player" haben Ihre Software auf dem QT Framework ausgebaut.
+                Die Dateien sind menschenlesbar und betriebsystemunabhängig.
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.xliff"><info><title>Zend_Translator_Adapter_Xliff</title></info>
+            
+
+            <para>
+                Der XLIFF Adapter wird meistens von Kunden benutzt,
+                die zwar <acronym>XML</acronym> Dateien haben wollen, aber keine Tools für TMX
+                zur Verfügung haben.
+                XLIFF ist ein <acronym>XML</acronym> Dateiformat, welches ähnlich zu TMX ist, aber
+                etwas einfacher im Aufbau. Es unterstützt aber nicht alle Möglichkeiten von
+                TMX. <acronym>XML</acronym> Dateien sind menschenlesbar, aber das Lesen der
+                Dateien ist nicht so schnell wie mit Gettext-Dateien.
+            </para>
+
+            <para>
+                Die meisten Mittelständigen Unternehmen werden diesen Adapter benutzen.
+                Die Dateien sind menschenlesbar und systemunabhängig.
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.xmltm"><info><title>Zend_Translator_Adapter_XmlTm</title></info>
+            
+
+            <para>
+                Der XmlTm Adapter ist ein Adapter der von Kunden verwendet wird, die das Layout
+                selbst ändern wollen. XmlTm ist ein Format, das es erlaubt den kompletten
+                <acronym>HTML</acronym> Code in die Übersetzungsquelle zu inkludieren, so dass die
+                Übersetzung mit dem Layout verknüpft ist. XmlTm ist ein <acronym>XML</acronym>
+                Dateibasiertes Format, welches ähnlich wie XLIFF, aber nicht so einfach lesbar ist.
+            </para>
+
+            <para>
+                Dieser Adapter sollte nur verwendet werden, wenn bereits Quelldateien dieses Formats
+                existieren. Die Dateien sind menschenlesbar und systemunabhängig.
+            </para>
+        </section>
+    </section>
+
+    <section xml:id="zend.translator.adapter.selfwritten"><info><title>Selbst geschriebene Adapter integrieren</title></info>
+        
+
+        <para>
+            <classname>Zend_Translator</classname> erlaubt es, selbst geschriebene Adapterklassen zu
+            integrieren und zu verwenden. Diese können wie die Standardadapterklassen verwendet
+            werden, welche bereits in <classname>Zend_Translator</classname> enthalten sind.
+        </para>
+
+        <para>
+            Jede Adapter Klasse, die mit <classname>Zend_Translator</classname> verwendet werden soll,
+            muß eine Subklasse von <classname>Zend_Translator_Adapter</classname> sein.
+            <classname>Zend_Translator_Adapter</classname> ist eine abstrakte Klasse, welche bereits
+            alles definiert, was für eine Übersetzung notwendig ist. Nun muß lediglich noch die
+            Definition der Lesemethode für die Übersetzungsdaten geschrieben werden.
+        </para>
+
+        <para>
+            Die Verwendung des Prefixes "Zend" sollte dem Zend Framework vorbehalten sein. Wenn
+            <classname>Zend_Translator</classname> mit einem eigenen Adapter erweitert wird, sollte
+            er etwa "Firma_Translator_Adapter_MeinFormat" heißen. Der folgende Code zeigt ein
+            Beispiel, wie eine selbst geschriebene Adapter Klasse implementiert werden sollte:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+try {
+    $translate = new Zend_Translator(
+        array(
+            'adapter' => 'Firma_Translator_Adapter_MeinFormat',
+            'content' => '/path/to/translate.xx',
+            'locale'  => 'en',
+            'meineoption' => 'myvalue'
+        )
+    );
+} catch (Exception $e) {
+    // Datei nicht gefunden, keine Adapter Klasse...
+    // Genereller Fehler
+}
+]]></programlisting>
+    </section>
+
+    <section xml:id="zend.translator.adapter.caching"><info><title>Alle Adapter beschleunigen</title></info>
+        
+
+        <para>
+            <classname>Zend_Translator</classname> erlaubt intern die Verwendung von
+            <classname>Zend_Cache</classname>, um das Laden von Übersetzungsquellen zu
+            beschleunigen. Das kann sehr nützlich sein, wenn viele Übersetzungsquellen oder
+            aufwändige Quellformate wie <acronym>XML</acronym> basierte Dateien verwendet werden.
+        </para>
+
+        <para>
+            Um das Caching zu verwenden, muß nur ein Cache-Objekt an die
+            <methodname>Zend_Translator::setCache()</methodname> Methode übergeben werden. Diese
+            nimmt eine Instanz von <classname>Zend_Cache</classname> als einzigen Parameter. Auch
+            wenn irgendein Adapter direkt verwendet wird, kann die
+            <methodname>setCache()</methodname> Methode verwendet werden. Der Bequemlichkeit halber
+            gibt es die statischen Methoden <methodname>getCache()</methodname>,
+            <methodname>hasCache()</methodname>, <methodname>clearCache()</methodname> und
+            <methodname>removeCache()</methodname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en'
+    )
+);
+
+// um den Cache irgendwo später im Code zu löschen
+Zend_Translator::clearCache();
+]]></programlisting>
+
+        <note>
+            <para>
+                Der Cache muß <emphasis>vor</emphasis> Verwendung oder Initialisierung eines
+                Adapters oder einer Instanz von <classname>Zend_Translator</classname> gesetzt werden.
+                Andernfalls wird die Übersetzungsquelle nicht gecached, bis eine neue Quelle mit der
+                <methodname>addTranslation()</methodname> Methode hinzugefügt wird.
+            </para>
+        </note>
+
+        <para>
+            Wenn der angehängte Cache Tags unterstützt kann man einen eigenen Tag Strin durch
+            Verwendung der Option <property>tag</property> setzen. Das erlaubt es nur den Cache von
+            dieser einzelnen Instanz von <classname>Zend_Translator</classname> zu löschen. Wenn man
+            diese Option nicht verwendet wird das Standardtag <classname>Zend_Translator</classname>
+            verwendet.
+        </para>
+
+        <para>
+            Bei Verwendung der Option <property>tag</property> muss man das verwendete Tag an
+            <methodname>clearCache()</methodname> übergeben um zu deklarieren welches Tag man
+            löschen will.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en',
+        'tag'     => 'MyTag'
+    )
+);
+
+// irgendwo später im Code
+Zend_Translator::clearCache('MyTag');
+]]></programlisting>
+    </section>
+</section>

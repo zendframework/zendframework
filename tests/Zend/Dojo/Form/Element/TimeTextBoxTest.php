@@ -145,4 +145,16 @@ class TimeTextBoxTest extends \PHPUnit_Framework_TestCase
         $html = $this->element->render();
         $this->assertContains('dojoType="dijit.form.TimeTextBox"', $html);
     }
+
+    /**
+     * @group ZF-7813
+     */
+    public function testCanSetValue()
+    {
+        $this->element->setValue('T08:00');
+        $html = $this->element->render();
+        
+        $this->assertSame('T08:00', $this->element->getValue());
+        $this->assertContains('value="T08:00"', $html);
+    }
 }

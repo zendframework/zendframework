@@ -505,15 +505,15 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
          </section>
     </section>
 
-    <section xml:id="migration.17.zend.translate"><info><title>Zend_Translate</title></info>
+    <section xml:id="migration.17.zend.translator"><info><title>Zend_Translator</title></info>
         
 
-        <section xml:id="migration.17.zend.translate.languages"><info><title>Setzen von Sprachen</title></info>
+        <section xml:id="migration.17.zend.translator.languages"><info><title>Setzen von Sprachen</title></info>
             
 
             <para>
                 Wenn man die automatische Erkennung von Sprachen verwendet, oder Sprachen manuell
-                auf <classname>Zend_Translate</classname> setzt kann es sein das man von Zeit zu
+                auf <classname>Zend_Translator</classname> setzt kann es sein das man von Zeit zu
                 Zeit eine Notiz geworfen bekommen die über nicht hinzugefügte oder leere
                 Übersetzungen schreibt. In einigen vorhergehenden Releases wurde in einigen Fällen
                 auch eine Exception geworfen.
@@ -539,7 +539,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 <constant>TRUE</constant> setzen. Der Standardwert ist <constant>FALSE</constant>.
             </para>
 
-            <example xml:id="migration.17.zend.translate.example"><info><title>Setzen von Sprachen ohne das man Notizen erhält</title></info>
+            <example xml:id="migration.17.zend.translator.example"><info><title>Setzen von Sprachen ohne das man Notizen erhält</title></info>
                 
 
                 <para>
@@ -548,7 +548,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$language = new Zend_Translate('gettext',
+$language = new Zend_Translator('gettext',
                                '/path/to/translations',
                                'auto');
 ]]></programlisting>
@@ -560,7 +560,7 @@ $language = new Zend_Translate('gettext',
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$language = new Zend_Translate('gettext',
+$language = new Zend_Translator('gettext',
                                '/path/to/translations',
                                'auto',
                                array('disableNotices' => true));

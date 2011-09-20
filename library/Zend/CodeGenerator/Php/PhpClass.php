@@ -80,6 +80,11 @@ class PhpClass extends AbstractPhp
     protected $_properties = null;
 
     /**
+     * @var array Array of constants
+     */
+    protected $_constants = null;
+
+    /**
      * @var array Array of methods
      */
     protected $_methods = null;
@@ -328,6 +333,21 @@ class PhpClass extends AbstractPhp
     }
 
     /**
+     * setConstants()
+     *
+     * @param array $constants
+     * @return \Zend\CodeGenerator\Php\Class
+     */
+    public function setConstants(Array $constants)
+    {
+        foreach ($constants as $const) {
+            $this->setConstant($const);
+        }
+
+        return $this;
+    }
+
+    /**
      * setProperty()
      *
      * @param array|\Zend\CodeGenerator\Php\PhpProperty $property
@@ -342,11 +362,42 @@ class PhpClass extends AbstractPhp
         }
         $propertyName = $property->getName();
 
+        if ($property->isConst()) {
+            return $this->setConstant($property);
+        }
         if (isset($this->_properties[$propertyName])) {
             throw new Exception\InvalidArgumentException('A property by name ' . $propertyName . ' already exists in this class.');
         }
 
         $this->_properties[$propertyName] = $property;
+        return $this;
+    }
+
+    /**
+     * setConstant()
+     *
+     * @param array|\Zend\CodeGenerator\Php\PhpProperty $const
+     * @return Zend\CodeGenerator\Php\PhpClass
+     */
+    public function setConstant($const)
+    {
+        if (is_array($const)) {
+            $const = new PhpProperty($const);
+            $constName = $const->getName();
+        } elseif ($const instanceof PhpProperty) {
+            $constName = $const->getName();
+        } else {
+            throw new Exception\InvalidArgumentException('setConstant() expects either an array of property options or an instance of Zend_CodeGenerator_Php_Property');
+        }
+
+        if (!$const->isConst()) {
+            throw new Exception\InvalidArgumentException('setProperty() expects argument to define a constant');
+        }
+        if (isset($this->_constants[$constName])) {
+            throw new Exception\InvalidArgumentException('A constant by name ' . $constName . ' already exists in this class.');
+        }
+
+        $this->_constants[$constName] = $const;
         return $this;
     }
 
@@ -361,6 +412,16 @@ class PhpClass extends AbstractPhp
     }
 
     /**
+     * getConstants()
+     *
+     * @return array
+     */
+    public function getConstants()
+    {
+        return $this->_constants;
+    }
+
+    /**
      * getProperty()
      *
      * @param string $propertyName
@@ -371,6 +432,22 @@ class PhpClass extends AbstractPhp
         foreach ($this->_properties as $property) {
             if ($property->getName() == $propertyName) {
                 return $property;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * getConstant()
+     *
+     * @param string $constName
+     * @return \Zend\CodeGenerator\Php\PhpProperty
+     */
+    public function getConstant($constName)
+    {
+        foreach ($this->_constants as $const) {
+            if ($const->getName() == $constName) {
+                return $const;
             }
         }
         return false;
@@ -399,6 +476,17 @@ class PhpClass extends AbstractPhp
             $this->setMethod($method);
         }
         return $this;
+    }
+
+    /**
+     * hasConstant()
+     *
+     * @param string $constName
+     * @return bool
+     */
+    public function hasConstant($constName)
+    {
+        return isset($this->_constants[$constName]);
     }
 
     /**
@@ -478,6 +566,12 @@ class PhpClass extends AbstractPhp
             }
         }
 
+        foreach ($this->_constants as $constant) {
+            if ($constant->isSourceDirty()) {
+                return true;
+            }
+        }
+
         foreach ($this->_methods as $method) {
             if ($method->isSourceDirty()) {
                 return true;
@@ -530,6 +624,13 @@ class PhpClass extends AbstractPhp
 
         $output .= self::LINE_FEED . '{' . self::LINE_FEED . self::LINE_FEED;
 
+        $constants = $this->getConstants();
+        if (!empty($constants)) {
+            foreach ($constants as $const) {
+                $output .= $const->generate() . self::LINE_FEED . self::LINE_FEED;
+            }
+        }
+
         $properties = $this->getProperties();
         if (!empty($properties)) {
             foreach ($properties as $property) {
@@ -556,6 +657,7 @@ class PhpClass extends AbstractPhp
     protected function _init()
     {
         $this->_properties = new PhpMember\MemberContainer(PhpMember\MemberContainer::TYPE_PROPERTY);
+        $this->_constants = new PhpMember\MemberContainer(PhpMember\MemberContainer::TYPE_PROPERTY);
         $this->_methods = new PhpMember\MemberContainer(PhpMember\MemberContainer::TYPE_METHOD);
     }
 

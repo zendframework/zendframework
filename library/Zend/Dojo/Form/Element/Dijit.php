@@ -184,9 +184,9 @@ abstract class Dijit extends \Zend\Form\Element
     public function setView(View $view = null)
     {
         if (null !== $view) {
-            if(false === $view->broker()->isLoaded('dojo')) {
+            if(false === $view->getBroker()->isLoaded('dojo')) {
                 $loader = new \Zend\Dojo\View\HelperLoader();
-                $view->broker()->getClassLoader()->registerPlugins($loader);
+                $view->getBroker()->getClassLoader()->registerPlugins($loader);
             }
         }
         return parent::setView($view);

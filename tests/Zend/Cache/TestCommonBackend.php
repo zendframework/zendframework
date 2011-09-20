@@ -34,19 +34,31 @@ use Zend\Cache;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-abstract class TestCommonBackend extends \PHPUnit_Framework_TestCase 
+abstract class TestCommonBackend extends \PHPUnit_Framework_TestCase
 {
 
     protected $_instance;
     protected $_className;
     protected $_root;
 
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
         $this->_className = $name;
         $this->_root = __DIR__;
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('UTC');
         parent::__construct($name, $data, $dataName);
+    }
+
+    public function __destruct()
+    {
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     public function setUp($notag = false)

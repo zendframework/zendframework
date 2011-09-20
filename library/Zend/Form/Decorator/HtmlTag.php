@@ -90,8 +90,9 @@ class HtmlTag extends AbstractDecorator
             $key = htmlspecialchars($key, ENT_COMPAT, $enc);
             if (is_array($val)) {
                 if (array_key_exists('callback', $val)
-                    && is_callable($val['callback'])) {
-                    $val = $val['callback']($this);
+                    && is_callable($val['callback'])
+                ) {
+                    $val = call_user_func($val['callback'], $this);
                 } else {
                     $val = implode(' ', $val);
                 }

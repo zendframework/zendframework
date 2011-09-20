@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,23 +24,22 @@
  */
 namespace ZendTest\Controller\Router\Route;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Config,
-    Zend\Controller,
-    Zend\Controller\Router,
+use Zend\Config,
     Zend\Controller\Router\Route,
-    Zend\Uri;
+    Zend\Controller\Router,
+    Zend\Controller,
+    Zend\Uri\UriFactory;
 
 /**
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class ChainTest extends TestCase
+class ChainTest extends \PHPUnit_Framework_TestCase
 {
 
 
@@ -645,7 +644,7 @@ class Request extends \Zend\Controller\Request\Http
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        $uri = Uri\UriFactory::factory($uri);
+        $uri = UriFactory::factory($uri, 'http');
         $this->_host = $uri->getHost();
         $this->_port = $uri->getPort();
 

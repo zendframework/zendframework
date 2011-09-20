@@ -54,9 +54,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function clearRegistry()
     {
-        if (Registry::isRegistered('Zend_Translate')) {
+        if (Registry::isRegistered('Zend_Translator')) {
             $registry = Registry::getInstance();
-            unset($registry['Zend_Translate']);
+            unset($registry['Zend_Translator']);
         }
     }
 
@@ -291,9 +291,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
         foreach (array('element', 'decorator') as $type) {
             $loader = $this->form->getPluginLoader($type);
             $paths = $loader->getPaths('Zend\\Foo\\' . ucfirst($type));
-            $this->assertTrue(is_array($paths), "Failed for type $type: " . var_export($paths, 1));
-            $this->assertFalse(empty($paths));
-            $this->assertContains('Foo', $paths[0]);
+            $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths, "Failed for type $type: " . var_export($paths, 1));
+            $this->assertTrue(0 < count($paths));
+            $this->assertContains('Foo', $paths->top());
         }
     }
 
@@ -307,9 +307,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $loader = $this->form->getPluginLoader('element');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertFalse(empty($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertTrue(0 < count($paths));
+        $this->assertContains('Foo', $paths->top());
     }
 
     public function testSetOptionsSetsIndividualPrefixPathsFromUnKeyedArrays()
@@ -322,9 +322,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $loader = $this->form->getPluginLoader('decorator');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertFalse(empty($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertTrue(0 < count($paths));
+        $this->assertContains('Foo', $paths->top());
     }
 
     public function testSetOptionsSetsDisplayGroups()
@@ -637,10 +637,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $loader = $this->form->getPluginLoader('decorator');
         $this->assertTrue($loader instanceof PrefixPathLoader);
         $paths = $loader->getPaths('Zend\Form\Decorator');
-        $this->assertTrue(is_array($paths), var_export($loader, 1));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
         $this->assertTrue(0 < count($paths));
-        $this->assertContains('Form', $paths[0]);
-        $this->assertContains('Decorator', $paths[0]);
+        $this->assertContains('Form', $paths->top());
+        $this->assertContains('Decorator', $paths->top());
     }
 
     public function testPassingInvalidTypeToSetPluginLoaderThrowsException()
@@ -675,8 +675,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $loader = $this->form->getPluginLoader('decorator');
         $this->form->addPrefixPath('Zend\Foo', 'Zend/Foo/', 'decorator');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertContains('Foo', $paths->top());
     }
 
     public function testUpdatedDecoratorPrefixPathUsedForNewElements()
@@ -687,15 +687,15 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->addElement($foo);
         $loader = $foo->getPluginLoader('decorator');
         $paths  = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertContains('Foo', $paths->top());
 
         $this->form->addElement('text', 'bar');
         $bar = $this->form->bar;
         $loader = $bar->getPluginLoader('decorator');
         $paths  = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertContains('Foo', $paths->top());
     }
 
     public function testUpdatedDecoratorPrefixPathUsedForNewDisplayGroups()
@@ -703,11 +703,13 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $loader = $this->form->getPluginLoader('decorator');
         $this->form->addPrefixPath('Zend\Foo', 'Zend/Foo/', 'decorator');
         $this->setupElements();
-        $foo    = $this->form->foo;
-        $loader = $foo->getPluginLoader('decorator');
+        $this->form->addDisplayGroup(array('foo'), 'dg');
+        $dg     = $this->form->dg;
+        $loader = $dg->getPluginLoader('decorator');
         $paths  = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertTrue(0 < count($paths));
+        $this->assertContains('Foo', $paths->top());
     }
 
     public function testUpdatedPrefixPathUsedForNewSubForms()
@@ -717,8 +719,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->setupSubForm();
         $loader = $this->form->sub->getPluginLoader('decorator');
         $paths  = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertContains('Foo', $paths->top());
     }
 
     public function testGetPluginLoaderRetrievesDefaultElementPluginLoader()
@@ -726,10 +728,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $loader = $this->form->getPluginLoader('element');
         $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\Form\Element');
-        $this->assertTrue(is_array($paths), var_export($loader, 1));
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
         $this->assertTrue(0 < count($paths));
-        $this->assertContains('Form', $paths[0]);
-        $this->assertContains('Element', $paths[0]);
+        $this->assertContains('Form', $paths->top());
+        $this->assertContains('Element', $paths->top());
     }
 
     public function testCanSetCustomDecoratorElementLoader()
@@ -745,8 +747,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $loader = $this->form->getPluginLoader('element');
         $this->form->addPrefixPath('Zend\Foo', 'Zend/Foo/', 'element');
         $paths = $loader->getPaths('Zend\Foo');
-        $this->assertTrue(is_array($paths));
-        $this->assertContains('Foo', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertContains('Foo', $paths->top());
     }
 
     public function testAddAllPluginLoaderPrefixPathsSimultaneously()
@@ -758,12 +760,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
                    ->addPrefixPath('Zend', 'Zend/');
 
         $paths = $decoratorLoader->getPaths('Zend\Decorator');
-        $this->assertTrue(is_array($paths), var_export($paths, 1));
-        $this->assertContains('Decorator', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths, var_export($paths, 1));
+        $this->assertContains('Decorator', $paths->top());
 
         $paths = $elementLoader->getPaths('Zend\Element');
-        $this->assertTrue(is_array($paths), var_export($paths, 1));
-        $this->assertContains('Element', $paths[0]);
+        $this->assertInstanceOf('Zend\Stdlib\SplStack', $paths);
+        $this->assertContains('Element', $paths->top());
     }
 
     // Elements:
@@ -2406,7 +2408,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElements();
         $data = array('foo' => '123456', 'bar' => 'abcdef', 'baz' => 'abc-123');
-        $return = Json::decode($this->form->processAjax($data));
+        $return = Json::decode($this->form->processAjax($data), Json::TYPE_ARRAY);
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return));
     }
@@ -2415,7 +2417,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupElements();
         $data = array('baz' => 'abc-123');
-        $return = Json::decode($this->form->processAjax($data));
+        $return = Json::decode($this->form->processAjax($data), Json::TYPE_ARRAY);
         $this->assertTrue(is_array($return));
         $this->assertEquals(array_keys($data), array_keys($return), var_export($return, 1));
     }
@@ -2672,7 +2674,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
             'foo' => '',
         );
         $return = $this->form->processAjax($data);
-        $messages = Json::decode($return);
+        $messages = Json::decode($return, Json::TYPE_ARRAY);
         $this->assertTrue(is_array($messages));
 
         $this->assertTrue(isset($messages['foo']));
@@ -3262,7 +3264,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->form->getTranslator());
         $translator = new Translator('ArrayAdapter', array('foo' => 'bar'));
-        Registry::set('Zend_Translate', $translator);
+        Registry::set('Zend_Translator', $translator);
 
         $received = Form::getDefaultTranslator();
         $this->assertSame($translator->getAdapter(), $received);
@@ -4071,7 +4073,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testElementTranslatorNotOverriddenbyGlobalTranslatorDuringValidation()
     {
         $translator = new Translator('ArrayAdapter', array('foo' => 'bar'));
-        Registry::set('Zend_Translate', $translator);
+        Registry::set('Zend_Translator', $translator);
 
         $this->form->addElement('text', 'foo');
         $this->form->isValid(array());
@@ -4086,7 +4088,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testZendValidateDefaultTranslatorOverridesZendTranslateDefaultTranslatorAtElementLevel()
     {
         $translate = new Translator('ArrayAdapter', array('isEmpty' => 'translate'));
-        Registry::set('Zend_Translate', $translate);
+        Registry::set('Zend_Translator', $translate);
 
         $translateValidate = new Translator('ArrayAdapter', array('isEmpty' => 'validate'));
         \Zend\Validator\AbstractValidator::setDefaultTranslator($translateValidate);
@@ -4166,7 +4168,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $formTranslate = new Translator('ArrayAdapter', $formTranslations);
         $elementTranslate = new Translator('ArrayAdapter', $elementTranslations);
         
-        Registry::set('Zend_Translate', $defaultTranslate);
+        Registry::set('Zend_Translator', $defaultTranslate);
         $this->form->setTranslator($formTranslate);        
         $this->form->addElement('text', 'foo', array('required'=>true, 'translator'=>$elementTranslate));
         $this->form->addElement('text', 'bar', array('required'=>true));
@@ -4195,7 +4197,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $defaultTranslate = new Translator('ArrayAdapter', $defaultTranslations);
         $subformTranslate = new Translator('ArrayAdapter', $subformTranslations);
         
-        Registry::set('Zend_Translate', $defaultTranslate);
+        Registry::set('Zend_Translator', $defaultTranslate);
         $this->form->addSubForm(new SubForm(), 'subform');
         $this->form->subform->setTranslator($subformTranslate);
         $this->form->subform->addElement('text', 'foo', array('required'=>true));

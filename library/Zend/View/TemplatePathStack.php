@@ -63,7 +63,7 @@ class TemplatePathStack implements TemplateResolver
      */
     public function __construct($options = null)
     {
-        $this->useViewStream = (bool) ini_get('short_open_tag') ? false : true;
+        $this->useViewStream = (bool) ini_get('short_open_tag');
         if ($this->useViewStream) {
             if (!in_array('zend.view', stream_get_wrappers())) {
                 stream_wrapper_register('zend.view', 'Zend\View\Stream');
@@ -257,7 +257,13 @@ class TemplatePathStack implements TemplateResolver
             $file = new SplFileInfo($path . $name);
             if ($file->isReadable()) {
                 // Found! Return it.
-                $filePath = $file->getRealPath();
+                if (($filePath = $file->getRealPath()) === false && substr($path, 0, 7) === 'phar://') {
+                    // Do not try to expand phar paths (realpath + phars == fail)
+                    $filePath = $path . $name;
+                    if (!file_exists($filePath)) {
+                        break;
+                    }
+                } 
                 if ($this->useStreamWrapper()) {
                     // If using a stream wrapper, prepend the spec to the path
                     $filePath = 'zend.view://' . $filePath;

@@ -186,4 +186,15 @@ class NotExistsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('temp,gif,jpg,to,zip,ti', $validator->getDirectory());
         $this->assertEquals(array('temp', 'gif', 'jpg', 'to', 'zip', 'ti'), $validator->getDirectory(true));
     }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\NotExists();
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
+        $this->assertTrue(array_key_exists('fileNotExistsDoesExist', $validator->getMessages()));
+        $this->assertContains("'testsize.mo'", current($validator->getMessages()));
+    }
 }

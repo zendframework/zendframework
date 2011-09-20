@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction.staticfilter"><info><title>Using the StaticFilter</title></info>
+
+    <para>
+        If it is inconvenient to load a given filter class and create an
+        instance of the filter, you can use <classname>StaticFilter</classname> with it's method
+        <methodname>execute()</methodname> as an alternative invocation style.
+        The first argument of this method is a data input value, that you
+        would pass to the <methodname>filter()</methodname> method. The second
+        argument is a string, which corresponds to the basename of the
+        filter class, relative to the <classname>Zend_Filter</classname> namespace. The
+        <methodname>execute()</methodname> method automatically loads the class, creates
+        an instance, and applies the <methodname>filter()</methodname> method to the data
+        input.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+echo StaticFilter::execute('&', 'HtmlEntities');
+]]></programlisting>
+
+    <para>
+        You can also pass an array of constructor arguments, if they
+        are needed for the filter class.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+echo StaticFilter::execute('"',
+                           'HtmlEntities',
+                           array('quotestyle' => ENT_QUOTES));
+]]></programlisting>
+
+    <para>
+        The static usage can be convenient for invoking a filter ad hoc,
+        but if you have the need to run a filter for multiple inputs,
+        it's more efficient to follow the first example above,
+        creating an instance of the filter object and calling its
+        <methodname>filter()</methodname> method.
+    </para>
+
+    <para>
+        Also, the <classname>FilterChain</classname> class allows you to instantiate and
+        run multiple filter and validator classes on demand to process
+        sets of input data. See <link linkend="zend.filter.chain">FilterChain</link>.
+    </para>
+</section>

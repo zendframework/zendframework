@@ -23,7 +23,7 @@ namespace ZendTest\Form;
 
 use Zend\Form\Form,
     Zend\Form\SubForm,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * @category   Zend

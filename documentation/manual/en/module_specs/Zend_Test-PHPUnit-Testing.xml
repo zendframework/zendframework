@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>Testing your Controllers and MVC Applications</title></info>
-    
+
 
     <para>
         Once you have your bootstrap in place, you can begin testing. Testing
@@ -60,7 +60,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         ));
 
         // Set headers, even:
-        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
+        $this->request->setHeader('X-Requested-With', 'XMLHttpRequest');
 
         // Set the request method:
         $this->request->setMethod('POST');
@@ -78,7 +78,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     </para>
 
     <section xml:id="zend.test.phpunit.testing.redirector"><info><title>Controller Tests and the Redirector Action Helper</title></info>
-        
+
 
         <important>
             <para>

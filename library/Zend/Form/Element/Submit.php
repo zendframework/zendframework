@@ -54,7 +54,7 @@ class Submit extends Xhtml
         if (is_string($spec) && ((null !== $options) && is_string($options))) {
             $options = array('label' => $options);
         }
-        
+
         if (!isset($options['ignore'])) {
             $options['ignore'] = true;
         }
@@ -110,7 +110,7 @@ class Submit extends Xhtml
      *
      * Uses only 'Submit' and 'DtDdWrapper' decorators by default.
      *
-     * @return void
+     * @return \Zend\Form\Element\Submit
      */
     public function loadDefaultDecorators()
     {

@@ -122,51 +122,23 @@ class Stream extends Response
         return $this;
     }
 
-
     /**
-     * HTTP response constructor
+     * Create a new Zend\Http\Response\Stream object from a string
      *
-     * In most cases, you would use Zend_Http_Response::fromString to parse an HTTP
-     * response string and create a new Zend_Http_Response object.
-     *
-     * NOTE: The constructor no longer accepts nulls or empty values for the code and
-     * headers and will throw an exception if the passed values do not form a valid HTTP
-     * responses.
-     *
-     * If no message is passed, the message will be guessed according to the response code.
-     *
-     * @param int $code Response code (200, 404, ...)
-     * @param array $headers Headers array
-     * @param string $body Response body
-     * @param string $version HTTP version
-     * @param string $message Response code as text
-     * @throws \Zend\Http\Exception
-     */
-    public function __construct($code, $headers, $body = null, $version = '1.1', $message = null)
-    {
-
-        if(is_resource($body)) {
-            $this->setStream($body);
-            $body = '';
-        }
-        parent::__construct($code, $headers, $body, $version, $message);
-    }
-
-    /**
-     * Create a new Zend_Http_Response_Stream object from a string
-     *
-     * @param string $response_str
-     * @param resource $stream
-     * @return \Zend\Http\Response\Stream
+     * @param  string $response_str
+     * @param  resource $stream
+     * @return Stream
      */
     public static function fromStream($response_str, $stream)
     {
-        $code    = self::extractCode($response_str);
-        $headers = self::extractHeaders($response_str);
-        $version = self::extractVersion($response_str);
-        $message = self::extractMessage($response_str);
-
-        return new self($code, $headers, $stream, $version, $message);
+        $response= new static();
+        
+        $response::fromString($response_str);
+        if (is_resource($stream)) {
+            $response->setStream($stream);
+        }
+        
+        return $response;
     }
 
     /**

@@ -62,7 +62,7 @@ class DumbTest extends \PHPUnit_Framework_TestCase
     {
         $id   = $this->captcha->generate('test');
         $word = $this->captcha->getWord();
-        $html = $this->captcha->render(new \Zend\View\View);
+        $html = $this->captcha->render(new \Zend\View\PhpRenderer);
         $this->assertContains(strrev($word), $html);
         $this->assertNotContains($word, $html);
     }

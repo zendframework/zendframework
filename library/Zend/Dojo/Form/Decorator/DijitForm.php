@@ -58,6 +58,6 @@ class DijitForm extends DijitContainer
         $dijitParams = $this->getDijitParams();
         $attribs     = array_merge($this->getAttribs(), $this->getOptions());
 
-        return $view->broker('form')->direct($element->getName(), $attribs, $content);
+        return $view->plugin('dojoform')->direct($element->getName(), $attribs, $content);
     }
 }

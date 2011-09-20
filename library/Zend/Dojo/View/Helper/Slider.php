@@ -80,7 +80,7 @@ abstract class Slider extends Dijit
         }
 
         $content = '';
-        $params['value'] = $value;
+        $attribs['value'] = $value;
 
         if (!array_key_exists('onChange', $attribs)) {
             $attribs['onChange'] = "dojo.byId('" . $id . "').value = arguments[0];";
@@ -248,6 +248,6 @@ abstract class Slider extends Dijit
         $dijit = 'dijit.form.' . ucfirst($this->_sliderType) . 'RuleLabels';
         $attribs = $this->_prepareDijit($attribs, $params, 'layout', $dijit);
 
-        return $this->view->broker('htmlList')->direct($labels, true, $attribs);
+        return $this->view->plugin('htmlList')->direct($labels, true, $attribs);
     }
 }

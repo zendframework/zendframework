@@ -93,7 +93,7 @@
             
 
             <para>
-                A la fois <classname>Zend_Translate</classname> et
+                A la fois <classname>Zend_Translator</classname> et
                 <classname>Zend_Locale</classname> implémente une fonctionnalité de mise en cache
                 qui peuvent considérablement améliorer les performances. Dans chacun des cas, le
                 goulot principal est typiquement la lecture des fichiers, pas la réelle
@@ -109,8 +109,8 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.translate.adapter.caching">Mise en cache pour
-                        <classname>Zend_Translate</classname></link>
+                        <link linkend="zend.translator.adapter.caching">Mise en cache pour
+                        <classname>Zend_Translator</classname></link>
                     </para>
                 </listitem>
 

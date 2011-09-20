@@ -24,6 +24,9 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\FormErrors;
+
 /**
  * Test class for Zend_View_Helper_FormErrors
  *
@@ -46,8 +49,8 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->view   = new \Zend\View\View();
-        $this->helper = new \Zend\View\Helper\FormErrors();
+        $this->view   = new View();
+        $this->helper = new FormErrors();
         $this->helper->setView($this->view);
         ob_start();
     }

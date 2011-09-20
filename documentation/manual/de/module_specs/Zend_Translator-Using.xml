@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.using"><info><title>Verwendung der Übersetzungsadapter</title></info>
+    
+
+    <para>
+        Der nächste Schritt ist die Benutzung des Adapters im eigenen Code.
+    </para>
+
+    <example xml:id="zend.translator.using.example1"><info><title>Beispiel eines einsprachigen PHP Codes</title></info>
+        
+
+        <programlisting language="php"><![CDATA[
+print "Beispiel\n";
+print "========\n";
+print "Hier steht Zeile eins\n";
+print "Heute ist der " . date("d.m.Y") . "\n";
+print "\n";
+print "Hier ist Zeile zwei\n";
+]]></programlisting>
+    </example>
+
+    <para>
+        Das obige Beispiel zeigt eine Ausgabe ohne Unterstützung für Übersetzungen. Der Code wird
+        üblicherweise in der eigenen Muttersprache geschrieben. Üblicherweise muß nicht nur die
+        Ausgabe übersetzt werden, sondern auch Fehler- und Logmeldungen.
+    </para>
+
+    <para>
+        Der nächste Schritt ist also die Integration von <classname>Zend_Translator</classname> in
+        den eigenen Code. Natürlich ist es viel einfacher, wenn bei der Erstellung des Codes bereits
+        an die Übersetzung gedacht wurde, anstatt ihn im Nachhinein dafür zu ändern.
+    </para>
+
+    <example xml:id="zend.translator.using.example2"><info><title>Beispiel für mehrsprachigen PHP Code</title></info>
+        
+
+        <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
+);
+$translate->addTranslation(
+    array(
+        'content' => '//my/path/fr-source.mo',
+        'locale   => 'fr'
+    )
+);
+
+print $translate->_("Beispiel") . "\n";
+print "========\n";
+print $translate->_("Hier steht Zeile eins") . "\n";
+printf($translate->_("Heute ist der %1\$s") . "\n", date('d.m.Y'));
+print "\n";
+
+$translate->setLocale('fr');
+print $translate->_("Hier ist Zeile zwei") . "\n";
+]]></programlisting>
+    </example>
+
+    <para>
+        Jetzt schauen wir uns genauer an, was getan wurde und wie
+        <classname>Zend_Translator</classname> in den eigenen Code integriert wird.
+    </para>
+
+    <para>
+        Erstelle ein neues <classname>Zend_Translator</classname> Objekt und definiere den
+        Basisadapter:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translation/source-de.mo',
+        'locale'  => 'de'
+    )
+);
+]]></programlisting>
+
+    <para>
+        In diesem Beispiel haben wir den <emphasis>Gettext-Adapter</emphasis>
+        ausgewählt. Die Übersetzungsdatei <emphasis>source-de.mo</emphasis> wird im
+        Verzeichnis <emphasis>/path/to/translation</emphasis> platziert. Diese
+        Gettext-Datei beinhaltet eine deutsche Übersetzung und es steht auch eine zweite
+        Sprachquelle für Französisch zur Verfügung.
+    </para>
+
+    <para>
+        Der nächste Schritt besteht darin, alle Strings zu ummanteln, die übersetzt werden sollen.
+        Die einfachste Möglichkeit besteht, wenn nur einfache Strings oder Sätze vorhanden sind
+        wie zum Beispiel:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+print $translate->_("Beispiel") . "\n";
+print "========\n";
+print $translate->_("Hier ist die Zeile Eins") . "\n";
+]]></programlisting>
+
+    <para>
+        Einige Strings müssen nicht übersetzt werden. Die Trennlinie wird immer eine Trennlinie
+        sein, auch in den anderen Sprachen.
+    </para>
+
+    <para>
+        Die Verwendung von variablen Werten in einer Übersetzung wird durch die Verwendung
+        von eingebetteten Parametern auch unterstützt.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+printf($translate->_("Today is the %1\$s") . "\n", date("d.m.Y"));
+]]></programlisting>
+
+    <para>
+        Statt <methodname>print()</methodname> wird die <methodname>printf()</methodname> Funktion
+        benutzt und alle variablen Parameter mit <emphasis>%1\$s</emphasis> Blöcken ersetzt.
+        Der erste ist <emphasis>%1\$s</emphasis>, der zweite ist <emphasis>%2\$s</emphasis>, und so
+        weiter. Auf diesen Weg kann übersetzt werden, ohne den exakten Wert zu wissen. In unserem
+        Beispiel ist das Datum immer der aktuelle Tag, aber der String kann übersetzt
+        werden, ohne über den aktuellen Tag Bescheid zu wissen.
+    </para>
+
+    <para>
+        Jeder String wird im Übersetzungsspeicher durch seine Message ID identifiziert.
+        Man könnte diese Message IDs statt des Strings im Code wie folgt verwenden:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+print $translate->_(1) . "\n";
+print "=======\n";
+print $translate->_(2) . "\n";
+]]></programlisting>
+
+    <para>
+        Allerdings hat dies mehrere Nachteile:
+    </para>
+
+    <para>
+        Es ist nicht erkennbar, was der Code ausgeben sollte, wenn man ihn betrachtet.
+    </para>
+
+    <para>
+        Es werden auch Probleme auftreten, wenn einige Strings nicht übersetzt worden sind. Man muß
+        sich immer vor Augen halten, wie Übersetzungen funktionieren. Zuerst prüft
+        <classname>Zend_Translator</classname> ob in der gesetzten Sprache für die angegebene
+        Message ID oder den String eine Übersetzung vorhanden ist. Wenn keine Übersetzung gefunden
+        wurde, wird in der nächsten tiefer gelegenen Sprache gesucht wie in
+        <classname>Zend_Locale</classname> definiert. "<emphasis>de_AT</emphasis>" wird also zu
+        "<emphasis>de</emphasis>". Wenn auch hier keine Übersetzung in der Sprache
+        "<emphasis>de</emphasis>" gefunden wurde, wird der Original-String zurück
+        gegeben. Das bedeutet also, dass immer eine Ausgabe existiert, selbst wenn für eine Message
+        ID keine Übersetzung in der Quelle vorhanden ist. <classname>Zend_Translator</classname> wird
+        niemals eine Exception oder einen Fehler ausgeben, wenn ein String übersetzt werden soll.
+    </para>
+
+    <section xml:id="zend.translator.using.structure"><info><title>Strukturen für Übersetzungdateien</title></info>
+        
+
+        <para>
+            Der nächste Schritt besteht in der Erstellung der Übersetzungsdateien für die
+            verschiedenen Sprachen, welche übersetzt werden sollen. Jeder Adapter wird,
+            wie hier beschrieben, auf seine eigene Weise erstellt, aber es gibt ein
+            paar allgemeine Features, die für alle Adapter relevant sind.
+        </para>
+
+        <para>
+            Zuerst muß entschieden werden, wo die Übersetzungsdateien zu speichern sind. Bei der
+            Verwendung von <classname>Zend_Translator</classname> gibt es keinerlei Einschränkungen.
+            Die folgenden Strukturen sind vorzuziehen:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Einzeln strukturierte Quellen</para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/languages/
+/languages/lang.en
+/languages/lang.de
+/library/
+]]></programlisting>
+
+                <para>
+                    Positiv: Alle Quelldateien, für jede Sprache, werden in einem einzelnen
+                    Verzeichnis gespeichert. Keine Aufteilung der betreffenden Dateien.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>Sprachlich stukturierte Quellen</para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/languages/
+/languages/en/
+/languages/en/first.en
+/languages/en/second.en
+/languages/de/
+/languages/de/first.de
+/languages/de/second.de
+/library/
+]]></programlisting>
+
+                <para>
+                    Positiv: Jede Sprache wird in ihrem eigenen Verzeichnis gespeichert. Einfache
+                    Übersetzung, da jedes Übersetzungsteam nur ein einzelnes Verzeichnis zu
+                    übersetzen hat. Auch die Verwendung von mehreren Dateien ist
+                    transparent.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>Anwendungsstrukturierte Quellen</para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/application/languages/
+/application/languages/first.en
+/application/languages/first.de
+/application/languages/second.en
+/application/languages/second.de
+/library/
+]]></programlisting>
+
+                <para>
+                    Positiv: Alle Quelldateien, für jede Sprache, werden in einem einzelnen
+                    Verzeichnis gespeichert. Keine Aufteilung der betreffenden Dateien.
+                </para>
+
+                <para>
+                    Negativ: Die Benutzung von mehreren Dateien für dieselbe Sprache kann
+                    problematisch sein.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>Gettext strukturierte Quellen</para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/languages/
+/languages/de/
+/languages/de/LC_MESSAGES/
+/languages/de/LC_MESSAGES/first.mo
+/languages/de/LC_MESSAGES/second.mo
+/languages/en/
+/languages/en/LC_MESSAGES/
+/languages/en/LC_MESSAGES/first.mo
+/languages/en/LC_MESSAGES/second.mo
+/library/
+]]></programlisting>
+
+                <para>
+                    Positiv: Bestehende Gettext-Quellen können ohne Veränderung der Struktur
+                    benutzt werden.
+                </para>
+
+                <para>
+                    Negativ: Die Benutzung von Unterunterverzeichnissen ist für Personen verwirrend,
+                    die Gettext noch nie benutzt haben.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>Datei strukturierte Quellen</para>
+
+                <programlisting language="txt"><![CDATA[
+/application/
+/application/models/
+/application/models/MyModel.php
+/application/models/MyModel.de
+/application/models/MyModel.en
+/application/controllers/
+/application/controllers/MyController.php
+/application/controllers/MyController.de
+/application/controllers/MyController.en
+/library/
+]]></programlisting>
+
+                <para>
+                    Positiv: Übersetzungsdateien sind in der Nähe ihrer Quelle zu finden.
+                </para>
+
+                <para>
+                    Negativ: Zu viele und auch kleine Übersetzungsdateien führen zu einer
+                    schwierigen und langwierigen Übersetzung. Es muß auch jede Datei als
+                    Übersetzungsquelle hinzugefügt werden.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Einzeln strukturierte und sprachlich strukturierte Quelldateien sind
+            für <classname>Zend_Translator</classname> am besten benutzbar.
+        </para>
+
+        <para>
+            Da jetzt bekannt ist, welche Struktur verwendet wird,
+            sollten nun die einzelnen Übersetzungsdateien erstellt werden.
+        </para>
+    </section>
+</section>

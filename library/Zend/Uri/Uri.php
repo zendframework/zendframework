@@ -242,7 +242,7 @@ class Uri
                 $port = substr($authority, $colonPos + 1);
                 if ($port) {
                     $this->setPort((int) $port);
-                }
+                } 
                 $authority = substr($authority, 0, $colonPos);
             }
 
@@ -1063,7 +1063,7 @@ class Uri
      */
     public static function merge($baseUri, $relativeUri)
     {
-        $uri = new self($relativeUri);
+        $uri = new static($relativeUri);
         return $uri->resolve($baseUri);
     }
 

@@ -22,7 +22,9 @@
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator,
+
+use Zend\Loader,
+    Zend\Validator,
     Zend\Validator\Exception;
 
 /**
@@ -150,8 +152,12 @@ class Hash extends Validator\AbstractValidator
      */
     public function isValid($value, $file = null)
     {
+        if ($file === null) {
+            $file = array('name' => basename($value));
+        }
+
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_FOUND);
         }
 
@@ -183,7 +189,13 @@ class Hash extends Validator\AbstractValidator
     protected function _throw($file, $errorType)
     {
         if ($file !== null) {
-            $this->_value = $file['name'];
+            if (is_array($file)) {
+                if(array_key_exists('name', $file)) {
+                    $this->_value = $file['name'];
+                }
+            } else if (is_string($file)) {
+                $this->_value = $file;
+            }
         }
 
         $this->_error($errorType);

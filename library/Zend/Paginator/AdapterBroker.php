@@ -38,6 +38,11 @@ class AdapterBroker extends PluginBroker
     protected $defaultClassLoader = 'Zend\Paginator\AdapterLoader';
 
     /**
+     * @var boolean Adapters must not be registred on load
+     */
+    protected $registerPluginsOnLoad = false;
+
+    /**
      * Determine if we have a valid adapter
      * 
      * @param  mixed $plugin 

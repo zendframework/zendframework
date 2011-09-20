@@ -24,6 +24,8 @@
  */
 namespace ZendTest\View\Helper\Placeholder;
 
+use Zend\View\PhpRenderer as View;
+
 /**
  * Test class for Zend_View_Helper_Placeholder_StandaloneContainer.
  *
@@ -68,9 +70,9 @@ class StandaloneContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testViewAccessorWorks()
     {
-        $view = new \Zend\View\View();
+        $view = new View();
         $this->helper->setView($view);
-        $this->assertSame($view, $this->helper->view);
+        $this->assertSame($view, $this->helper->getView());
     }
 
     public function testContainersPersistBetweenInstances()

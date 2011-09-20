@@ -65,7 +65,7 @@ class Translator
      * Generates the standard translation object
      *
      * @param  array|\Zend\Config $options Options to use
-     * @throws \Zend\Translate\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -98,7 +98,7 @@ class Translator
      * Sets a new adapter
      *
      * @param  array|\Zend\Config $options Options to use
-     * @throws \Zend\Translate\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
      */
     public function setAdapter($options = array())
     {
@@ -144,7 +144,7 @@ class Translator
         unset($options['adapter']);
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Adapter) {
-            throw new InvalidArgumentException("Adapter " . $adapter . " does not extend Zend\Translate\Adapter");
+            throw new InvalidArgumentException("Adapter " . $adapter . " does not extend Zend\Translator\Adapter");
         }
     }
 
@@ -169,7 +169,7 @@ class Translator
     }
 
     /**
-     * Sets a cache for all instances of Zend_Translate
+     * Sets a cache for all instances of Zend_Translator
      *
      * @param  \Zend\Cache\Frontend $cache Cache to store to
      * @return void

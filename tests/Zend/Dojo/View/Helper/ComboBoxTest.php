@@ -110,7 +110,7 @@ class ComboBoxTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElementAsSelect();
         $this->assertNotRegexp('/<select[^>]*(dojoType="dijit.form.ComboBox")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
     }
 
     public function testShouldAllowDeclarativeDijitCreationAsRemoter()
@@ -128,12 +128,12 @@ class ComboBoxTest extends \PHPUnit_Framework_TestCase
         $html = $this->getElementAsRemoter();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.ComboBox")/', $html);
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
 
         $found = false;
-        $this->assertContains('var stateStore;', $this->view->broker('dojo')->getJavascript());
+        $this->assertContains('var stateStore;', $this->view->plugin('dojo')->getJavascript());
 
-        $scripts = $this->view->broker('dojo')->_getZendLoadActions();
+        $scripts = $this->view->plugin('dojo')->_getZendLoadActions();
         foreach ($scripts as $js) {
             if (strstr($js, 'stateStore = new ')) {
                 $found = true;
@@ -174,10 +174,10 @@ class ComboBoxTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic(true);
         $html = $this->getElementAsRemoter();
 
-        $js   = $this->view->broker('dojo')->getJavascript();
+        $js   = $this->view->plugin('dojo')->getJavascript();
         $this->assertContains('var stateStore;', $js);
 
-        $onLoad = $this->view->broker('dojo')->_getZendLoadActions();
+        $onLoad = $this->view->plugin('dojo')->_getZendLoadActions();
         $storeDeclarationFound = false;
         foreach ($onLoad as $statement) {
             if (strstr($statement, 'stateStore = new ')) {

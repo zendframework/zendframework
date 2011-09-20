@@ -85,9 +85,9 @@ class SubForm extends \Zend\Form\SubForm
     {
         $view = parent::getView();
         if (!$this->_dojoViewPathRegistered) {
-            if(false === $view->broker()->isLoaded('dojo')) {
+            if(false === $view->getBroker()->isLoaded('dojo')) {
                 $loader = new \Zend\Dojo\View\HelperLoader();
-                $view->broker()->getClassLoader()->registerPlugins($loader);
+                $view->getBroker()->getClassLoader()->registerPlugins($loader);
             }
             $this->_dojoViewPathRegistered = true;
         }

@@ -3,11 +3,11 @@
     
 
     <para>
-        开发者日益需要制作网站内容支持多种语言和地区。Zend_Form 把这样的任务变得简单并利用 <link linkend="zend.translate">Zend_Translate</link> 和 <link linkend="zend.validate">Zend_Validate</link> 来完成。
+        开发者日益需要制作网站内容支持多种语言和地区。Zend_Form 把这样的任务变得简单并利用 <link linkend="zend.translator">Zend_Translator</link> 和 <link linkend="zend.validate">Zend_Validate</link> 来完成。
     </para>
 
     <para>
-        缺省地，<code>Zend_Form</code> 不支持国际化（I18n）。要打开在 <code>Zend_Form</code> 中的 I18n 功能，需要带适当的适配器实例化一个 <code>Zend_Translate</code> 对象，并把它附加到 <code>Zend_Form</code> 和/或 <code>Zend_Validate</code> 中。参见 <link linkend="zend.translate">Zend_Translate 文档 </link> 有更多关于生成翻译对象和翻译文件的信息。
+        缺省地，<code>Zend_Form</code> 不支持国际化（I18n）。要打开在 <code>Zend_Form</code> 中的 I18n 功能，需要带适当的适配器实例化一个 <code>Zend_Translator</code> 对象，并把它附加到 <code>Zend_Form</code> 和/或 <code>Zend_Validate</code> 中。参见 <link linkend="zend.translator">Zend_Translator 文档 </link> 有更多关于生成翻译对象和翻译文件的信息。
     </para>
 
     <note><info><title> 可以对每个元素关闭翻译 </title></info>
@@ -22,22 +22,22 @@
         
 
         <para>
-            要在表单中初始化 I18n，你需要或者 <code>Zend_Translate</code> 对象或者 <code>Zend_Translate_Adapter</code> 对象，详细请见 <code>Zend_Translate</code> 文档。一旦你有一个翻译对象，你将有若干选项：
+            要在表单中初始化 I18n，你需要或者 <code>Zend_Translator</code> 对象或者 <code>Zend_Translator_Adapter</code> 对象，详细请见 <code>Zend_Translator</code> 文档。一旦你有一个翻译对象，你将有若干选项：
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Easiest:</emphasis> 添加它到注册表。Zend Framework 中所有 I18n 相关的组件将自动发现一个翻译对象（这个对象在注册表中在 'Zend_Translate' 键之下）并用它翻译和/或本地化：
+                    <emphasis>Easiest:</emphasis> 添加它到注册表。Zend Framework 中所有 I18n 相关的组件将自动发现一个翻译对象（这个对象在注册表中在 'Zend_Translator' 键之下）并用它翻译和/或本地化：
                 </para>
 
                 <programlisting role="php"><![CDATA[<?php
-// use the 'Zend_Translate' key; $translate is a Zend_Translate object:
-Zend_Registry::set('Zend_Translate', $translate);
+// use the 'Zend_Translator' key; $translate is a Zend_Translator object:
+Zend_Registry::set('Zend_Translator', $translate);
 ?>]]></programlisting>
 
                 <para>
-                    这将由 <code>Zend_Form</code>、<code>Zend_Validate</code> 和 <code>Zend_View_Helper_Translate</code> 来获得。
+                    这将由 <code>Zend_Form</code>、<code>Zend_Validate</code> 和 <code>Zend_View_Helper_Translator</code> 来获得。
                 </para>
             </listitem>
 

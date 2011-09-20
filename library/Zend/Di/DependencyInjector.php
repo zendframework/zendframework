@@ -5,12 +5,12 @@ namespace Zend\Di;
 class DependencyInjector implements DependencyInjection
 {
     /**
-     * @var Zend\Di\Definition
+     * @var Definition
      */
     protected $definition = null;
     
     /**
-     * @var Zend\Di\InstanceManager
+     * @var InstanceManager
      */
     protected $instanceManager = null;
 
@@ -32,9 +32,10 @@ class DependencyInjector implements DependencyInjection
      * @var array 
      */
     protected $references = array();
-    
+
     /**
-     * @param Zend\DI\Configuration $config
+     * @param null|Configuration $config
+     * @return \Zend\Di\DependencyInjector
      */
     public function __construct(Configuration $config = null)
     {
@@ -42,22 +43,33 @@ class DependencyInjector implements DependencyInjection
             $this->configure($config);
         }
     }
-    
+
+    /**
+     * Provide a configuration object to configure this instance
+     *
+     * @param Configuration $config
+     * @return void
+     */
     public function configure(Configuration $config)
     {
         $config->configure($this);
     }
-    
+
+    /**
+     * @param Definition $definition
+     * @return DependencyInjector
+     */
     public function setDefinition(Definition $definition)
     {
         $this->definition = $definition;
         return $this;
     }
-    
+
     /**
      * Definition Factory
-     * 
+     *
      * @param string $class
+     * @return Definition
      */
     public function createDefinition($class)
     {
@@ -70,12 +82,22 @@ class DependencyInjector implements DependencyInjection
         }
         return $definition;
     }
-    
+
+    /**
+     * If this DependencyInjector has a definition currently attached
+     *
+     * @return bool
+     */
     public function hasDefinition()
     {
         return ($this->definition !== null);
     }
-    
+
+    /**
+     * Return a definition, if one doesn't already exist, a Definition\RuntimeDefinition is created
+     *
+     * @return Definition
+     */
     public function getDefinition()
     {
         if ($this->definition == null) {
@@ -91,39 +113,27 @@ class DependencyInjector implements DependencyInjection
     {
         return ($this->instanceManager !== null);
     }
-    
-    public function setInstanceManager(InstanceCollection $instanceManager)
+
+    /**
+     * Set the instance manager
+     *
+     * @param InstanceManager $instanceManager
+     * @return DependencyInjector
+     */
+    public function setInstanceManager(InstanceManager $instanceManager)
     {
         $this->instanceManager = $instanceManager;
         return $this;
     }
-    
-    /**
-     * InstanceManager factory
-     * 
-     * @param string $class
-     * @return Zend\Di\InstanceManager
-     */
-    public function createInstanceManager($class)
-    {
-        $instanceManager = new $class();
-        if (!$instanceManager instanceof InstanceManager) {
-            throw new Exception\InvalidArgumentException(
-                'The class provided to the InstanceManager factory ' . $class 
-                . ' does not implement the InstanceCollection interface'
-            );
-        }
-        return $instanceManager;
-    }
-    
+
     /**
      * 
-     * @return Zend\Di\InstanceManager
+     * @return InstanceManager
      */
     public function getInstanceManager()
     {
         if ($this->instanceManager == null) {
-            $this->instanceManager = $this->createInstanceManager('Zend\Di\InstanceManager');
+            $this->instanceManager = new InstanceManager();
         }
         return $this->instanceManager;
     }
@@ -160,15 +170,16 @@ class DependencyInjector implements DependencyInjection
         array_pop($this->instanceContext);
         return $instance;
     }
-    
+
     /**
      * Retrieve a new instance of a class
      *
      * Forces retrieval of a discrete instance of the given class, using the
      * constructor parameters provided.
-     * 
-     * @param  mixed $name Class name or service alias
-     * @param  array $params Parameters to pass to the constructor
+     *
+     * @param mixed $name Class name or service alias
+     * @param array $params Parameters to pass to the constructor
+     * @param bool $isShared
      * @return object|null
      */
     public function newInstance($name, array $params = array(), $isShared = true)
@@ -203,7 +214,7 @@ class DependencyInjector implements DependencyInjection
                 unset($injectionMethods[array_search('__construct', $injectionMethods)]);
             }
         } elseif (is_callable($instantiator)) {
-            $object = $this->createInstanceViaCallback($instantiator, $params);
+            $object = $this->createInstanceViaCallback($instantiator, $params, $alias);
             // @todo make sure we can create via a real object factory
             throw new \Exception('incomplete implementation');
         } else {
@@ -249,16 +260,17 @@ class DependencyInjector implements DependencyInjection
     // {
     //     
     // }
-    
+
     /**
      * Retrieve a class instance based on class name
      *
-     * Any parameters provided will be used as constructor arguments. If any 
+     * Any parameters provided will be used as constructor arguments. If any
      * given parameter is a DependencyReference object, it will be fetched
      * from the container so that the instance may be injected.
-     * 
-     * @param  string $class 
-     * @param  array $params 
+     *
+     * @param string $class
+     * @param array $params
+     * @param string|null $alias
      * @return object
      */
     protected function createInstanceViaConstructor($class, $params, $alias = null)
@@ -277,23 +289,23 @@ class DependencyInjector implements DependencyInjection
             case 2:
                 return new $class($callParameters[0], $callParameters[1]);
             case 3:
-                return new $class($callParameters[0], $callParameters[1], $callParameters[3]);
+                return new $class($callParameters[0], $callParameters[1], $callParameters[2]);
             default:
                 $r = new \ReflectionClass($class);
                 return $r->newInstanceArgs($callParameters);
         }
     }
-    
-    
+
     /**
      * Get an object instance from the defined callback
-     * 
-     * @param  callback $callback 
-     * @param  array $params 
+     *
+     * @param callback $callback
+     * @param array $params
+     * @param string $alias
      * @return object
      * @throws Exception\InvalidCallbackException
      */
-    protected function createInstanceViaCallback($callback, $params)
+    protected function createInstanceViaCallback($callback, $params, $alias)
     {
         if (!is_callable($callback)) {
             throw new Exception\InvalidCallbackException('An invalid constructor callback was provided');
@@ -306,18 +318,19 @@ class DependencyInjector implements DependencyInjection
 
         $callParameters = array();
         if ($this->definition->hasInjectionMethod($class, $method)) {
-            $callParameters = $this->resolveMethodParameters($class, $method, $params, true);
+            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias);
         }
         return call_user_func_array($callback, $callParameters); 
     }
-    
+
     /**
      * This parameter will handle any injection methods and resolution of
-     * dependencies for such methods 
-     * 
+     * dependencies for such methods
+     *
      * @param object $object
      * @param string $method
      * @param array $params
+     * @param string $alias
      */
     protected function handleInjectionMethodForObject($object, $method, $params, $alias)
     {
@@ -327,17 +340,22 @@ class DependencyInjector implements DependencyInjection
             call_user_func_array(array($object, $method), $callParameters);
         }
     }
-    
+
     /**
      * Resolve parameters referencing other services
-     * 
-     * @param  array $params 
+     *
+     * @param string $class
+     * @param string $method
+     * @param array $callTimeUserParams
+     * @param bool $isInstantiator
+     * @param string $alias
      * @return array
      */
     protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $isInstantiator, $alias)
     {
+        /* @var $isSubclassFunc Closure */
         static $isSubclassFunc = null;
-        static $isSubclassFuncCache = null;
+        static $isSubclassFuncCache = null; // null as unset, array when set
 
         $isSubclassFunc = function($class, $type) use (&$isSubclassFuncCache) {
             /* @see https://bugs.php.net/bug.php?id=53727 */

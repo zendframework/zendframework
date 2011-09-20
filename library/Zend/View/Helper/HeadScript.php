@@ -110,11 +110,11 @@ class HeadScript extends Placeholder\Container\Standalone
      * Returns headScript helper object; optionally, allows specifying a script
      * or script file to include.
      *
-     * @param  string $mode Script or file
-     * @param  string $spec Script/url
+     * @param  string $mode      Script or file
+     * @param  string $spec      Script/url
      * @param  string $placement Append, prepend, or set
-     * @param  array $attrs Array of script attributes
-     * @param  string $type Script type and/or array of script attributes
+     * @param  array  $attrs     Array of script attributes
+     * @param  string $type      Script type and/or array of script attributes
      * @return \Zend\View\Helper\HeadScript
      */
     public function direct($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
@@ -141,8 +141,9 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Start capture action
      *
-     * @param  mixed $captureType
-     * @param  string $typeOrAttrs
+     * @param  mixed  $captureType Type of capture
+     * @param  string $type        Type of script
+     * @param  array  $attrs       Attributes of capture
      * @return void
      */
     public function captureStart($captureType = Placeholder\Container\AbstractContainer::APPEND, $type = 'text/javascript', $attrs = array())
@@ -200,8 +201,8 @@ class HeadScript extends Placeholder\Container\Standalone
      * - prependScript($script, $type = 'text/javascript', $attrs = array())
      * - setScript($script, $type = 'text/javascript', $attrs = array())
      *
-     * @param  string $method
-     * @param  array $args
+     * @param  string $method Method to call
+     * @param  array  $args   Arguments of method
      * @return \Zend\View\Helper\HeadScript
      * @throws \Zend\View\Exception if too few arguments or invalid method
      */
@@ -269,7 +270,7 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Is the file specified a duplicate?
      *
-     * @param  string $file
+     * @param  string $file Name of file to check
      * @return bool
      */
     protected function _isDuplicate($file)
@@ -288,8 +289,7 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Is the script provided valid?
      *
-     * @param  mixed $value
-     * @param  string $method
+     * @param  mixed  $value  Is the given script valid?
      * @return bool
      */
     protected function _isValid($value)
@@ -307,7 +307,7 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Override append
      *
-     * @param  string $value
+     * @param  string $value Append script or file
      * @return void
      */
     public function append($value)
@@ -324,7 +324,7 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Override prepend
      *
-     * @param  string $value
+     * @param  string $value Prepend script or file
      * @return void
      */
     public function prepend($value)
@@ -341,7 +341,7 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Override set
      *
-     * @param  string $value
+     * @param  string $value Set script or file
      * @return void
      */
     public function set($value)
@@ -358,8 +358,8 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Override offsetSet
      *
-     * @param  string|int $index
-     * @param  mixed $value
+     * @param  string|int $index Set script of file offset
+     * @param  mixed      $value
      * @return void
      */
     public function offsetSet($index, $value)
@@ -377,7 +377,7 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Set flag indicating if arbitrary attributes are allowed
      *
-     * @param  bool $flag
+     * @param  bool $flag Set flag
      * @return \Zend\View\Helper\HeadScript
      */
     public function setAllowArbitraryAttributes($flag)
@@ -399,10 +399,10 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Create script HTML
      *
-     * @param  string $type
-     * @param  array $attributes
-     * @param  string $content
-     * @param  string|int $indent
+     * @param  mixed  $item        Item to convert
+     * @param  string $indent      String to add before the item
+     * @param  string $escapeStart Starting sequence
+     * @param  string $escapeEnd   Ending sequence
      * @return string
      */
     public function itemToString($item, $indent, $escapeStart, $escapeEnd)
@@ -444,7 +444,7 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Retrieve string representation
      *
-     * @param  string|int $indent
+     * @param  string|int $indent Amount of whitespaces or string to use for indention
      * @return string
      */
     public function toString($indent = null)
@@ -454,7 +454,7 @@ class HeadScript extends Placeholder\Container\Standalone
                 : $this->getIndent();
 
         if ($this->view) {
-            $useCdata = $this->view->broker('doctype')->isXhtml() ? true : false;
+            $useCdata = $this->view->plugin('doctype')->isXhtml() ? true : false;
         } else {
             $useCdata = $this->useCdata ? true : false;
         }
@@ -478,9 +478,9 @@ class HeadScript extends Placeholder\Container\Standalone
     /**
      * Create data item containing all necessary components of script
      *
-     * @param  string $type
-     * @param  array $attributes
-     * @param  string $content
+     * @param  string $type       Type of data
+     * @param  array  $attributes Attributes of data
+     * @param  string $content    Content of data
      * @return stdClass
      */
     public function createData($type, array $attributes, $content = null)

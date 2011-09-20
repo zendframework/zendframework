@@ -32,7 +32,7 @@ namespace Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlQuicktime extends HtmlObject
+class HtmlQuicktime extends HtmlElement
 {
     /**
      * Default file type for a movie applet
@@ -81,6 +81,6 @@ class HtmlQuicktime extends HtmlObject
         // Params
         $params = array_merge(array('src' => $data), $params);
 
-        return parent::direct($data, self::TYPE, $attribs, $params, $content);
+        return $this->getView()->plugin('htmlObject')->direct($data, self::TYPE, $attribs, $params, $content);
     }
 }

@@ -137,7 +137,7 @@ class Image extends AbstractDecorator
         $attribs       = $this->getAttribs();
         $attribs['id'] = $element->getId();
 
-        $image = $view->formImage($name, $element->getImageValue(), $attribs);
+        $image = $view->plugin('formImage')->direct($name, $element->getImageValue(), $attribs);
 
         if (null !== $tag) {
             $decorator = new HtmlTag();

@@ -42,6 +42,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $this->application = new Application\Application('testing');
 
         $this->bootstrap = new Application\Bootstrap($this->application);
+        $this->bootstrap->getBroker()->registerSpec('view');
 
         FrontController::getInstance()->resetInstance();
     }
@@ -52,8 +53,6 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testInitializationInitializesDojoContainer()
     {
-        $this->markTestSkipped('DojoResource has fatal error - skip this test now.');
-        return;
         $resource = new DojoResource(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
@@ -62,8 +61,6 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testInitializationReturnsDojoContainer()
     {
-        $this->markTestSkipped('DojoResource has fatal error - skip this test now.');
-        return;
         $resource = new DojoResource(array());
         $resource->setBootstrap($this->bootstrap);
         $test = $resource->init();
@@ -72,8 +69,6 @@ class DojoTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionsPassedToResourceAreUsedToSetDojosContainerState()
     {
-        $this->markTestSkipped('DojoResource has fatal error - skip this test now.');
-        return;
         $options = array(
             'requireModules'     => array('DojoTest'),
             'localPath'          => '/ofc/ZF/Rules/',
@@ -83,7 +78,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $resource->getBootstrap()->bootstrap('view');
-        $dojo = $resource->getBootstrap()->view->dojo();
+        $dojo = $resource->getBootstrap()->view->broker('dojo')->direct();
 
         $test = array(
             'requireModules' => $dojo->getModules(),

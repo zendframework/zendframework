@@ -57,7 +57,7 @@ class Image extends Xhtml
     /**
      * Load default decorators
      *
-     * @return void
+     * @return \Zend\Form\Element\Image
      */
     public function loadDefaultDecorators()
     {

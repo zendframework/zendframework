@@ -24,6 +24,7 @@
 namespace Zend\View;
 
 use Zend\Filter\FilterChain,
+    Zend\Loader\Pluggable,
     ArrayAccess;
 
 /**
@@ -35,7 +36,7 @@ use Zend\Filter\FilterChain,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpRenderer implements Renderer
+class PhpRenderer implements Renderer, Pluggable
 {
     /**
      * Template resolver
@@ -172,6 +173,16 @@ class PhpRenderer implements Renderer
                 (is_object($variables) ? get_class($variables) : gettype($variables))
             ));
         }
+        
+        // Enforce a Variables container
+        if (!$variables instanceof Variables) {
+            $variablesAsArray = array();
+            foreach ($variables as $key => $value) {
+                $variablesAsArray[$key] = $value;
+            }
+            $variables = new Variables($variablesAsArray);
+        }
+        
         $this->vars = $variables;
         return $this;
     }
@@ -195,7 +206,7 @@ class PhpRenderer implements Renderer
     }
 
     /**
-     * Set helper broker instance
+     * Set plugin broker instance
      * 
      * @param  string|HelperBroker $broker 
      * @return Zend\View\Abstract
@@ -222,21 +233,28 @@ class PhpRenderer implements Renderer
     }
 
     /**
-     * Get helper broker instance
+     * Get plugin broker instance
      * 
-     * @param  null|string $helper Helper name to return
-     * @param  null|array $options Options to pass to helper constructor (if not already instantiated)
-     * @return HelperBroker|Helper
+     * @return HelperBroker
      */
-    public function broker($helper = null, array $options = null)
+    public function getBroker()
     {
         if (null === $this->helperBroker) {
             $this->setBroker(new HelperBroker());
         }
-        if (null === $helper) {
-            return $this->helperBroker;
-        }
-        return $this->helperBroker->load($helper, $options);
+        return $this->helperBroker;
+    }
+    
+    /**
+     * Get plugin instance
+     * 
+     * @param  string     $plugin  Name of plugin to return
+     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @return Helper
+     */
+    public function plugin($name, array $options = null)
+    {
+        return $this->getBroker()->load($name, $options);
     }
 
     /**

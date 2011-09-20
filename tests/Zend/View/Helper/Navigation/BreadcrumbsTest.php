@@ -35,8 +35,7 @@ namespace ZendTest\View\Helper\Navigation;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class BreadcrumbsTest
-    extends TestAbstract
+class BreadcrumbsTest extends AbstractTest
 {
     /**
      * Class name for view helper to test
@@ -185,17 +184,17 @@ class BreadcrumbsTest
 
     public function testTranslationFromTranslatorInRegistry()
     {
-        $oldReg = \Zend\Registry::isRegistered('Zend_Translate')
-                ? \Zend\Registry::get('Zend_Translate')
+        $oldReg = \Zend\Registry::isRegistered('Zend_Translator')
+                ? \Zend\Registry::get('Zend_Translator')
                 : null;
 
         $translator = $this->_getTranslator();
-        \Zend\Registry::set('Zend_Translate', $translator);
+        \Zend\Registry::set('Zend_Translator', $translator);
 
         $expected = $this->_getExpected('bc/translated.html');
         $actual = $this->_helper->render();
 
-        \Zend\Registry::set('Zend_Translate', $oldReg);
+        \Zend\Registry::set('Zend_Translator', $oldReg);
 
         $this->assertEquals($expected, $actual);
     }

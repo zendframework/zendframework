@@ -1,10 +1,10 @@
 <?php
 
-namespace Zend\Module;
+namespace Zf2Module;
 
 // use Zend\StdLib\Options;
 
-class ManagerOptions
+class ModuleManagerOptions
     // extends Options
 {
     /**
@@ -31,7 +31,7 @@ class ManagerOptions
      * Set cacheConfig.
      *
      * @param bool $cacheConfig the value to be set
-     * @return ManagerConfig
+     * @return ModuleManagerConfig
      */
     public function setCacheConfig($cacheConfig)
     {
@@ -53,7 +53,7 @@ class ManagerOptions
      * Set cacheDir.
      *
      * @param string $cacheDir the value to be set
-     * @return ManagerConfig
+     * @return ModuleManagerConfig
      */
     public function setCacheDir($cacheDir)
     {

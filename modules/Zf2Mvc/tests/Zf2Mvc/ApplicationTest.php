@@ -363,4 +363,29 @@ class ApplicationTest extends TestCase
         $this->assertTrue(isset($storage['locator']));
         $this->assertSame($locator, $storage['locator']);
     }
+
+    public function testCanDisableDefaultEventListeners()
+    {
+        $app = $this->setupActionController();
+        $app->setDisableDefaultEventListenersFlag(true);
+
+        $listener = function($e) {
+            $name     = $e->getName();
+            $target   = $e->getTarget();
+            $response = $e->getResponse();
+            $content  = $response->getContent();
+            $content  = (empty($content) ? $name : $content . '::' . $name);
+            $response->setContent($content);
+        };
+        $events = StaticEventManager::getInstance();
+        $events->attach('Zf2Mvc\Controller\TestAsset\SampleController', 'dispatch.pre', $listener);
+        $events->attach('Zf2Mvc\Controller\TestAsset\SampleController', 'dispatch.post', $listener);
+
+        $app->run();
+        $response = $app->getResponse();
+        $content  = $response->getContent();
+
+        $this->assertNotContains('dispatch.pre', $content);
+        $this->assertNotContains('dispatch.post', $content);
+    }
 }

@@ -30,6 +30,8 @@ class Application implements AppContext
     const ERROR_CONTROLLER_INVALID   = 500;
 
     protected $events;
+    protected $defaultListeners = array();
+    protected $disableDefaultEventListeners = false;
     protected $locator;
     protected $request;
     protected $response;
@@ -43,8 +45,7 @@ class Application implements AppContext
      */
     public function setEventManager(EventCollection $events)
     {
-        $events->attach('route', array($this, 'route'));
-        $events->attach('dispatch', array($this, 'dispatch'));
+        $this->attachDefaultListeners($events);
         $this->events = $events;
         return $this;
     }
@@ -187,10 +188,43 @@ class Application implements AppContext
     }
 
     /**
+     * Set flag indicating whether or not to disable the default event listeners
+     * 
+     * @param mixed $flag 
+     * @return Application
+     */
+    public function setDisableDefaultEventListenersFlag($flag)
+    {
+        $this->disableDefaultEventListeners = (bool) $flag;
+        $this->detachDefaultListeners();
+        return $this;
+    }
+
+    /**
+     * Should we disable the default event listeners?
+     * 
+     * @return bool
+     */
+    public function disableDefaultEventListeners()
+    {
+        return $this->disableDefaultEventListeners;
+    }
+
+    /**
      * Run the application
      * 
-     * @events route.pre, route.post, dispatch.pre, dispatch.post, dispatch.error
-     * @return Response
+     * @triggers route(MvcEvent)
+     *           Routes the request, and sets the RouteMatch object in the event.
+     * @triggers dispatch(MvcEvent)
+     *           Dispatches a request, using the discovered RouteMatch and 
+     *           provided request.
+     * @triggers dispatch.error(MvcEvent)
+     *           On errors (controller not found, action not supported, etc.), 
+     *           populates the event with information about the error type, 
+     *           discovered controller, and controller class (if known). 
+     *           Typically, a handler should return a populated Response object
+     *           that can be returned immediately.
+     * @return SendableResponse
      */
     public function run()
     {
@@ -227,7 +261,7 @@ class Application implements AppContext
     /**
      * Route the request
      * 
-     * @events route.pre, route.post
+     * @param  MvcEvent $e 
      * @return Router\RouteMatch
      */
     public function route(MvcEvent $e)
@@ -253,8 +287,7 @@ class Application implements AppContext
     /**
      * Dispatch the matched route
      * 
-     * @events dispatch.pre, dispatch.post, dispatch.error
-     * @param  Router\RouteMatch $routeMatch 
+     * @param  MvcEvent $e 
      * @return mixed
      */
     public function dispatch(MvcEvent $e)
@@ -315,5 +348,38 @@ class Application implements AppContext
         }
         $e->setResult($return);
         return $return;
+    }
+
+    /**
+     * Attach default listeners for route and dispatch events
+     * 
+     * @param  EventCollection $events 
+     * @return void
+     */
+    protected function attachDefaultListeners(EventCollection $events)
+    {
+        if ($this->disableDefaultEventListeners()) {
+            return;
+        }
+        $this->defaultListeners[] = $events->attach('route', array($this, 'route'));
+        $this->defaultListeners[] = $events->attach('dispatch', array($this, 'dispatch'));
+    }
+
+    /**
+     * Detach the default listeners for the route and dispatch events, if attached
+     * 
+     * @return void
+     */
+    protected function detachDefaultListeners()
+    {
+        if (!$this->disableDefaultEventListeners || empty($this->defaultListeners)) {
+            return;
+        }
+
+        $events = $this->events();
+        foreach ($this->defaultListeners as $key => $listener) {
+            $events->detach($listener);
+            unset($this->defaultListeners[$key]);
+        }
     }
 }

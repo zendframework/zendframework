@@ -1,31 +1,95 @@
 <?php
 
-namespace Zf2Module;
+namespace Zend\Loader;
 
 use SplFileInfo,
+    Zend\Loader\SplAutoloader, // @TODO: Remove once ported to the _real_ Zend\Loader namespace
     Traversable;
 
-class ModuleLoader implements ModuleResolver
+class ModuleAutoloader implements SplAutoloader
 {
-
     /**
      * @var array An array of module paths to scan
      */
     protected $paths = array();
 
     /**
-     * @var array An array of Module class names of loaded modules
+     * Constructor
+     *
+     * Allow configuration of the autoloader via the constructor.
+     * 
+     * @param  null|array|Traversable $options 
+     * @return void
      */
-    protected $loadedModules = array();
+    public function __construct($options = null)
+    {
+        if (null !== $options) {
+            $this->setOptions($options);
+        }
+    }
 
     /**
-     * __construct 
+     * Configure the autoloader
+     *
+     * In most cases, $options should be either an associative array or 
+     * Traversable object.
      * 
-     * @param array|Traversable $paths 
+     * @param  array|Traversable $options 
+     * @return SplAutoloader
      */
-    public function __construct($paths = null)
+    public function setOptions($options)
     {
-        $this->registerPaths($paths);
+        $this->registerPaths($options);
+    }
+
+    /**
+     * Autoload a class
+     *
+     * @param   $class
+     * @return  mixed
+     *          False [if unable to load $class]
+     *          get_class($class) [if $class is successfully loaded]
+     */
+    public function autoload($class)
+    {
+        // Limit scope of this autoloader
+        if (substr($class, -7) !== '\Module') {
+            return false;
+        }
+        $moduleClassPath = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+
+        foreach ($this->paths as $path) {
+            $file = new SplFileInfo($path . $moduleClassPath);
+            if ($file->isReadable()) {
+                // Found directory with Module.php in it
+                require_once $file->getRealPath();
+                return $class;
+            } 
+            // No directory with Module.php, searching for phars
+            $moduleName = substr($class, 0, strpos($class, '\\'));
+            $matches = glob($path . $moduleName . '.*phar*');
+            if (count($matches) == 0) {
+                continue;
+            }
+            foreach ($matches as $phar) {
+                $file = new SplFileInfo($phar);
+                if ($file->isReadable() && $file->isFile()) {
+                    require_once $file->getRealPath();
+                    return $class;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Register the autoloader with spl_autoload registry
+     * 
+     * @return void
+     */
+    public function register()
+    {
+        spl_autoload_register(array($this, 'autoload'));
     }
 
     /**
@@ -42,8 +106,8 @@ class ModuleLoader implements ModuleResolver
             } 
         } else {
             throw new \InvalidArgumentException(
-                'Parameter to \\Zf2Module\\ModuleLoader\'s '
-                . 'registerPaths methos must be an array or '
+                'Parameter to \\Zend\\Loader\\ModuleAutoloader\'s '
+                . 'registerPaths method must be an array or '
                 . 'implement the \\Traversable interface'
             );
         }
@@ -69,46 +133,6 @@ class ModuleLoader implements ModuleResolver
     }
 
     /**
-     * Resolves and loads a module based on name, ensures that it's 
-     * Module.php file has been included/required, and returns
-     * the full class name of the module's Module class.
-     * 
-     * @param string $moduleName 
-     * @return string The Module class name, which is now loaded
-     */
-    public function load($moduleName)
-    {
-        if (!isset($this->loadedModules[$moduleName])) {
-            $moduleClass = null;
-            foreach ($this->paths as $path) {
-                $file = new SplFileInfo($path . $moduleName . '/Module.php');
-                if ($file->isReadable()) {
-                    require_once $file->getRealPath();
-                    $moduleClass = $moduleName . '\Module';
-                } else {
-                    $file = new SplFileInfo($path . $moduleName);
-                    if ($file->isReadable() && $file->isFile()) {
-                        require_once $file->getRealPath();
-                        if (strstr($moduleName, '.') !== false) {
-                            $moduleName = explode('.', $moduleName);
-                            $moduleName = array_shift($moduleName);
-                        }
-                        $moduleClass = $moduleName . '\Module';
-                    }
-                }
-            }
-            if (!class_exists($moduleClass)) {
-                throw new \Exception(sprintf(
-                    'Unable to load module \'%s\' from module path (%s)',
-                    $moduleName, implode(':', $this->paths)
-                ));
-            }
-            $this->loadedModules[$moduleName] = $moduleClass;
-        }
-        return $this->loadedModules[$moduleName];
-    }
-
-    /**
      * Normalize a path for insertion in the stack
      * 
      * @param  string $path 
@@ -121,5 +145,4 @@ class ModuleLoader implements ModuleResolver
         $path .= DIRECTORY_SEPARATOR;
         return $path;
     }
-
 }

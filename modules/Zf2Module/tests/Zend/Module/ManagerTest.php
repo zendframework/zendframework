@@ -1,14 +1,16 @@
 <?php
 
-namespace Zf2Module;
+namespace ZendTest\Module;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Module\Manager,
+    Zend\Module\ManagerOptions;
 
-class ModuleManagerTest extends TestCase
+class ManagerTest extends TestCase
 {
-    public function testDefaultModuleLoader()
+    public function testDefaultManagerOptions()
     {
-        $collection = new ModuleManager;
-        $this->assertInstanceOf('Zf2Module\ModuleLoader', $collection->getLoader());
+        $moduleManager = new Manager(array());
+        $this->assertInstanceOf('Zend\Module\ManagerOptions', $moduleManager->getOptions());
     }
 }

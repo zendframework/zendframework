@@ -1,13 +1,13 @@
 <?php
 
-namespace Zf2Module;
+namespace Zend\Module;
 
 use Traversable,
     Zend\Config\Config,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
-class ModuleManager
+class Manager
 {
     /**
      * @var ModuleResolver
@@ -25,26 +25,24 @@ class ModuleManager
     protected $events;
 
     /**
-     * @var ModuleManagerOptions
+     * @var ManagerOptions
      */
     protected $options;
 
     /**
      * __construct 
      * 
-     * @param ModuleLoader $loader 
      * @param array|Traversable $modules 
-     * @param ModuleManagerOptions $options 
+     * @param ManagerOptions $options 
      * @return void
      */
-    public function __construct(ModuleLoader $loader, $modules, ModuleManagerOptions $options = null)
+    public function __construct($modules, ManagerOptions $options = null)
     {
         if ($options === null) {
-            $this->setOptions(new ModuleManagerOptions);
+            $this->setOptions(new ManagerOptions);
         } else {
             $this->setOptions($options);
         }
-        $this->setLoader($loader);
         $this->loadModules($modules);
     }
 
@@ -65,7 +63,7 @@ class ModuleManager
      * setLoader 
      * 
      * @param ModuleResolver $loader 
-     * @return ModuleManager
+     * @return Manager
      */
     public function setLoader(ModuleResolver $loader)
     {
@@ -77,7 +75,7 @@ class ModuleManager
      * loadModules 
      * 
      * @param array|Traversable $modules 
-     * @return ModuleManager
+     * @return Manager
      */
     public function loadModules($modules)
     {
@@ -87,7 +85,7 @@ class ModuleManager
             }
         } else {
             throw new \InvalidArgumentException(
-                'Parameter to \\Zf2Module\\ModuleManager\'s '
+                'Parameter to \\Zf2Module\\Manager\'s '
                 . 'loadModules method must be an array or '
                 . 'implement the \\Traversable interface'
             );
@@ -100,13 +98,13 @@ class ModuleManager
      * loadModule 
      * 
      * @param string $moduleName 
-     * @return mixed Module's information class
+     * @return mixed Module's Module class
      */
     public function loadModule($moduleName)
     {
         if (!isset($this->loadedModules[$moduleName])) {
-            $infoClass = $this->getLoader()->load($moduleName);
-            $module = new $infoClass;
+            $class = $moduleName . '\Module';
+            $module = new $class;
             if (is_callable(array($module, 'init'))) {
                 $module->init($this->events());
             }
@@ -120,7 +118,7 @@ class ModuleManager
      * Set the event manager instance used by this context
      * 
      * @param  EventCollection $events 
-     * @return ModuleManager
+     * @return Manager
      */
     public function setEventManager(EventCollection $events)
     {
@@ -146,7 +144,7 @@ class ModuleManager
     /**
      * Get options.
      *
-     * @return ModuleManagerOptions
+     * @return ManagerOptions
      */
     public function getOptions()
     {
@@ -156,10 +154,10 @@ class ModuleManager
     /**
      * Set options 
      * 
-     * @param ModuleManagerOptions $options 
-     * @return ModuleManager
+     * @param ManagerOptions $options 
+     * @return Manager
      */
-    public function setOptions(ModuleManagerOptions $options)
+    public function setOptions(ManagerOptions $options)
     {
         $this->options = $options;
         return $this;

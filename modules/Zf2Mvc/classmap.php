@@ -16,6 +16,7 @@ return array (
   'Zf2Mvc\\Controller\\RestfulController' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . 'RestfulController.php',
   'Zf2Mvc\\Application' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Application.php',
   'Zf2Mvc\\MvcEvent' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'MvcEvent.php',
+  'Zf2Mvc\\LocatorAware' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'LocatorAware.php',
   'Zf2Mvc\\Exception' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'Exception.php',
   'Zf2Mvc\\PhpEnvironment\\GetContainer' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'PhpEnvironment' . DIRECTORY_SEPARATOR . 'GetContainer.php',
   'Zf2Mvc\\PhpEnvironment\\PostContainer' => __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Zf2Mvc' . DIRECTORY_SEPARATOR . 'PhpEnvironment' . DIRECTORY_SEPARATOR . 'PostContainer.php',

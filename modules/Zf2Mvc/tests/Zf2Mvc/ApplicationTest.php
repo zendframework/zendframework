@@ -2,16 +2,23 @@
 
 namespace Zf2Mvc;
 
-use PHPUnit_Framework_TestCase as TestCase,
+use ArrayObject,
+    PHPUnit_Framework_TestCase as TestCase,
     stdClass,
     Zend\Di\DependencyInjector,
     Zend\Di\ServiceLocator,
+    Zend\EventManager\StaticEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Uri\UriFactory;
 
 class ApplicationTest extends TestCase
 {
+    public function setUp()
+    {
+        StaticEventManager::resetInstance();
+    }
+
     public function testEventManagerIsLazyLoaded()
     {
         $app = new Application();
@@ -317,5 +324,43 @@ class ApplicationTest extends TestCase
         $response = json_decode($response->getContent());
         $this->assertTrue(isset($response->foo), var_export($response, 1));
         $this->assertEquals('bar', $response->foo);
+    }
+
+    public function testDispatchingInjectsLocatorInLocatorAwareControllers()
+    {
+        $app = new Application();
+
+        $request = new Request();
+        $uri     = UriFactory::factory('http://example.local/locator-aware');
+        $request->setUri($uri);
+        $app->setRequest($request);
+
+        $route = new Router\Http\Literal(array(
+            'route'    => '/locator-aware',
+            'defaults' => array(
+                'controller' => 'locator-aware',
+            ),
+        ));
+        $router  = $app->getRouter();
+        $router->addRoute('locator-aware', $route);
+
+        $locator = new TestAsset\Locator();
+        $locator->add('locator-aware', function() {
+            return new TestAsset\LocatorAwareController;
+        });
+        $app->setLocator($locator);
+
+        $storage = new ArrayObject();
+        $events  = StaticEventManager::getInstance();
+        $events->attach('Zf2Mvc\TestAsset\LocatorAwareController', 'dispatch.pre', function ($e) use ($storage) {
+            $controller = $e->getTarget();
+            $storage['locator'] = $controller->getLocator();
+            return $e->getResponse();
+        }, 100);
+
+        $app->run();
+
+        $this->assertTrue(isset($storage['locator']));
+        $this->assertSame($locator, $storage['locator']);
     }
 }

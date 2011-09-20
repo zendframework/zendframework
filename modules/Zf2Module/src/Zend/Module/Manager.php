@@ -10,11 +10,6 @@ use Traversable,
 class Manager
 {
     /**
-     * @var ModuleResolver
-     */
-    protected $loader;
-
-    /**
      * @var array An array of Module classes of loaded modules
      */
     protected $loadedModules = array();
@@ -44,31 +39,6 @@ class Manager
             $this->setOptions($options);
         }
         $this->loadModules($modules);
-    }
-
-    /**
-     * getLoader 
-     * 
-     * @return ModuleResolver
-     */
-    public function getLoader()
-    {
-        if (!$this->loader instanceof ModuleResolver) {
-            $this->setLoader(new ModuleLoader);
-        }
-        return $this->loader;
-    }
-
-    /**
-     * setLoader 
-     * 
-     * @param ModuleResolver $loader 
-     * @return Manager
-     */
-    public function setLoader(ModuleResolver $loader)
-    {
-        $this->loader = $loader;
-        return $this;
     }
 
     /**

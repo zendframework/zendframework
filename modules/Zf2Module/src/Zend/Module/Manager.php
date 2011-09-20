@@ -177,7 +177,7 @@ class Manager
         $config = new Config(array(), true);
         foreach ($this->loadedModules as $module) {
             if (is_callable(array($module, 'getConfig'))) {
-                $config->merge($module->getConfig(defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL));
+                $config->merge($module->getConfig($this->getOptions()->getApplicationEnv()));
             }
         }
         $config->setReadOnly();

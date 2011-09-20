@@ -38,7 +38,7 @@ class ManagerOptions
         $this->cacheConfig = $cacheConfig;
         return $this;
     }
- 
+
     /**
      * Get cacheDir.
      *
@@ -71,7 +71,12 @@ class ManagerOptions
      */
     public function getCacheFilePath()
     {
-        return $this->getCacheDir() . '/merged-module-config.php';
+        return $this->getCacheDir() . '/module-config-cache.'.$this->getApplicationEnv().'.php';
+    }
+
+    public function getApplicationEnv()
+    {
+        return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;
     }
 
     /**
@@ -162,4 +167,5 @@ class ManagerOptions
             );
         }
     }
+ 
 }

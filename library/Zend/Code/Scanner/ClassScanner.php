@@ -103,7 +103,7 @@ class ClassScanner implements Scanner
         }
         
         // T_ABSTRACT & T_FINAL will have been bypassed if no class name, and 
-        // will alwasy be 2 tokens behind T_CLASS
+        // will always be 2 tokens behind T_CLASS
         $this->isAbstract = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_ABSTRACT));
         $this->isFinal    = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_FINAL));
         
@@ -159,7 +159,11 @@ class ClassScanner implements Scanner
 
         if ($this->shortInterfaces) {
             $this->interfaces = $this->shortInterfaces;
-            array_walk($this->interfaces, array($this->nameInformation, 'resolveName'));
+            if ($this->nameInformation) {
+                foreach ($this->interfaces as $iIndex => $interface) {
+                    $this->interfaces[$iIndex] = $this->nameInformation->resolveName($interface);
+                }
+            }
         }
         
         if ($this->shortParentClass) {

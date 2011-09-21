@@ -7,6 +7,9 @@ use PHPUnit_Framework_TestCase;
 class AggregateDirectoryScannerTest extends PHPUnit_Framework_TestCase
 {
     
-    // @todo 
+    public function testAggregationOfDirectories()
+    {
+        $this->markTestIncomplete('This test needs to be filled out');
+    }
     
 }

@@ -116,7 +116,7 @@ class StaticEventManager implements StaticEventCollection
      * @param  int $priority Priority at which listener should execute
      * @return void
      */
-    public function attach($id, $event, $callback, $priority = 1000)
+    public function attach($id, $event, $callback, $priority = 1)
     {
         $ids = (array) $id;
         foreach ($ids as $id) {

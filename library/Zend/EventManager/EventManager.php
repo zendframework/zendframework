@@ -26,7 +26,9 @@ namespace Zend\EventManager;
 use Zend\Stdlib\CallbackHandler,
     Zend\Stdlib\Exception\InvalidCallbackException,
     Zend\Stdlib\PriorityQueue,
-    ArrayObject;
+    ArrayObject,
+    SplPriorityQueue,
+    Traversable;
 
 /**
  * Event manager: notification system
@@ -345,9 +347,22 @@ class EventManager implements EventCollection
     {
         $responses = new ResponseCollection;
 
-        $listeners = $this->getListeners($event);
+        $listeners       = clone $this->getListeners($event);
+        $staticListeners = $this->getStaticListeners($event);
+        if (!empty($staticListeners)) {
+            foreach ($staticListeners as $listener) {
+                $priority = $listener->getOption('priority');
+                if (null === $priority) {
+                    $priority = 1;
+                } elseif (is_array($priority)) {
+                    $priority = array_shift($priority);
+                }
+                $listeners->insert($listener, $priority);
+            }
+        }
+
         if ($listeners->isEmpty()) {
-            return $this->triggerStaticListeners($callback, $e, $responses);
+            return $responses;
         }
 
         foreach ($listeners as $listener) {
@@ -362,45 +377,42 @@ class EventManager implements EventCollection
             }
         }
 
-        if (!$responses->stopped()) {
-            $this->triggerStaticListeners($callback, $e, $responses);
-        }
         return $responses;
     }
 
     /**
-     * Emit listeners matching the current identifier found in the static listener
-     *
-     * @param  callback $callback
-     * @param  Event $event
-     * @param  ResponseCollection $responses
-     * @return ResponseCollection
+     * Get list of all listeners attached to the static collection for 
+     * identifiers registered by this instance
+     * 
+     * @param  string $event 
+     * @return array
      */
-    protected function triggerStaticListeners($callback, Event $event, ResponseCollection $responses)
+    protected function getStaticListeners($event)
     {
         if (!$staticConnections = $this->getStaticConnections()) {
-            return $responses;
+            return array();
         }
 
-        $identifiers = (array) $this->identifier;
+        $identifiers     = (array) $this->identifier;
+        $staticListeners = array();
 
         foreach ($identifiers as $id) {
-            if (!$listeners = $staticConnections->getListeners($id, $event->getName())) {
+            if (!$listeners = $staticConnections->getListeners($id, $event)) {
                 continue;
             }
+
+            if (!is_array($listeners) && !($listeners instanceof Traversable)) {
+                continue;
+            }
+
             foreach ($listeners as $listener) {
-                $responses->push(call_user_func($listener->getCallback(), $event));
-                if ($event->propagationIsStopped()) {
-                    $responses->setStopped(true);
-                    break;
+                if (!$listener instanceof CallbackHandler) {
+                    continue;
                 }
-                if (call_user_func($callback, $responses->last())) {
-                    $responses->setStopped(true);
-                    break;
-                }
+                $staticListeners[] = $listener;
             }
         }
 
-        return $responses;
+        return $staticListeners;
     }
 }

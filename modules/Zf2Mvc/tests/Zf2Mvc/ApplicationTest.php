@@ -7,6 +7,7 @@ use ArrayObject,
     stdClass,
     Zend\Di\DependencyInjector,
     Zend\Di\ServiceLocator,
+    Zend\EventManager\EventManager,
     Zend\EventManager\StaticEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
@@ -364,10 +365,11 @@ class ApplicationTest extends TestCase
         $this->assertSame($locator, $storage['locator']);
     }
 
-    public function testCanDisableDefaultEventListeners()
+    public function testCanProvideAlternateEventManagerToDisableDefaultRouteAndDispatchEventListeners()
     {
-        $app = $this->setupActionController();
-        $app->setDisableDefaultEventListenersFlag(true);
+        $app    = $this->setupActionController();
+        $events = new EventManager();
+        $app->setEventManager($events);
 
         $listener = function($e) {
             $name     = $e->getName();

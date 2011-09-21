@@ -30,8 +30,6 @@ class Application implements AppContext
     const ERROR_CONTROLLER_INVALID   = 500;
 
     protected $events;
-    protected $defaultListeners = array();
-    protected $disableDefaultEventListeners = false;
     protected $locator;
     protected $request;
     protected $response;
@@ -45,7 +43,6 @@ class Application implements AppContext
      */
     public function setEventManager(EventCollection $events)
     {
-        $this->attachDefaultListeners($events);
         $this->events = $events;
         return $this;
     }
@@ -183,31 +180,9 @@ class Application implements AppContext
     {
         if (!$this->events instanceof EventCollection) {
             $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
+            $this->attachDefaultListeners();
         }
         return $this->events;
-    }
-
-    /**
-     * Set flag indicating whether or not to disable the default event listeners
-     * 
-     * @param mixed $flag 
-     * @return Application
-     */
-    public function setDisableDefaultEventListenersFlag($flag)
-    {
-        $this->disableDefaultEventListeners = (bool) $flag;
-        $this->detachDefaultListeners();
-        return $this;
-    }
-
-    /**
-     * Should we disable the default event listeners?
-     * 
-     * @return bool
-     */
-    public function disableDefaultEventListeners()
-    {
-        return $this->disableDefaultEventListeners;
     }
 
     /**
@@ -356,30 +331,10 @@ class Application implements AppContext
      * @param  EventCollection $events 
      * @return void
      */
-    protected function attachDefaultListeners(EventCollection $events)
+    protected function attachDefaultListeners()
     {
-        if ($this->disableDefaultEventListeners()) {
-            return;
-        }
-        $this->defaultListeners[] = $events->attach('route', array($this, 'route'));
-        $this->defaultListeners[] = $events->attach('dispatch', array($this, 'dispatch'));
-    }
-
-    /**
-     * Detach the default listeners for the route and dispatch events, if attached
-     * 
-     * @return void
-     */
-    protected function detachDefaultListeners()
-    {
-        if (!$this->disableDefaultEventListeners || empty($this->defaultListeners)) {
-            return;
-        }
-
         $events = $this->events();
-        foreach ($this->defaultListeners as $key => $listener) {
-            $events->detach($listener);
-            unset($this->defaultListeners[$key]);
-        }
+        $events->attach('route', array($this, 'route'));
+        $events->attach('dispatch', array($this, 'dispatch'));
     }
 }

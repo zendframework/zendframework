@@ -3,6 +3,7 @@
 namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
+    Zend\Code\NameInformation,
     Zend\Code\Exception;
 
 class TokenArrayScanner implements Scanner
@@ -147,8 +148,7 @@ class TokenArrayScanner implements Scanner
         // Static for performance purposes
         static $statementTemplate = array(
             'use'        => null,
-            'as'         => null,
-            'asComputed' => null,
+            'as'         => null
         );
         
         // skip current token T_USE and following T_WHITESPACE
@@ -189,12 +189,6 @@ class TokenArrayScanner implements Scanner
             $tokenLookahead = $this->tokens[$tokenIndex+1];
             
             if (is_string($tokenLookahead) && ($tokenLookahead == ',' || $tokenLookahead == ';')) {
-                if (!$hasAs) {
-                    $statement['asComputed'] = substr(
-                        $statement['use'],
-                        (strpos($statement['use'],'\\') ? (strrpos($statement['use'],'\\')+1) : 0)
-                    );
-                }
                 $info['statements'][$sCount] = $statement;
                 $sCount++;
                 $statement = $statementTemplate;
@@ -423,30 +417,12 @@ class TokenArrayScanner implements Scanner
      * 
      * Enter description here ...
      * @param string|int $classNameOrInfoIndex
-     * @param string $returnScannerClass
      * @return Zend\Code\Scanner\ClassScanner
      */
-    public function getClass($classNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\ClassScanner')
+    public function getClass($classNameOrInfoIndex)
     {
         $this->scan();
-        
-        // Process the class requested
-        // Static for performance reasons
-        static $baseScannerClass = 'Zend\Code\Scanner\ClassScanner';
-        if ($returnScannerClass !== $baseScannerClass) {
-            if (!is_string($returnScannerClass)) {
-                $returnScannerClass = $baseScannerClass;
-            }
-            $returnScannerClass = ltrim($returnScannerClass, '\\');
-            if ($returnScannerClass !== $baseScannerClass 
-                && !is_subclass_of($returnScannerClass, $baseScannerClass)
-            ) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Class must be or extend "%s"', $baseScannerClass
-                ));
-            }
-        }
-        
+
         if (is_int($classNameOrInfoIndex)) {
             $info = $this->infos[$classNameOrInfoIndex];
             if ($info['type'] != 'class') {
@@ -464,33 +440,35 @@ class TokenArrayScanner implements Scanner
                 return false;
             }
         }
-        
+
         $uses = array();
         for ($u = 0; $u < count($this->infos); $u++) {
             if ($this->infos[$u]['type'] == 'use') {
                 foreach ($this->infos[$u]['statements'] as $useStatement) {
-                    $useKey        = ($useStatement['as']) ?: $useStatement['asComputed'];
-                    $uses[$useKey] = $useStatement['use'];
+                    if ($useStatement['as'] === null) {
+                        $uses[] = $useStatement['use'];
+                    } else {
+                        $uses[$useStatement['use']] = $useStatement['as'];
+                    }
                 }
             }
         }
         
-        return new $returnScannerClass(
+        return new ClassScanner(
             array_slice(
                 $this->tokens, 
                 $info['tokenStart'], 
                 ($info['tokenEnd'] - $info['tokenStart'] + 1)
             ), // zero indexed array
-            $info['namespace'],
-            $uses
+            new NameInformation($info['namespace'], $uses)
         );
     }
     
-    public function getFunctions($returnScannerClass = false)
+    public function getFunctions($returnInfo = false)
     {
         $this->scan();
         
-        if (!$returnScannerClass) {
+        if (!$returnInfo) {
             $functions = array();
             foreach ($this->infos as $info) {
                 if ($info['type'] == 'function') {
@@ -499,15 +477,13 @@ class TokenArrayScanner implements Scanner
             }
             return $functions;
         } else {
-            if ($returnScannerClass === true) {
-                $returnScannerClass = 'Zend\Code\Scanner\FunctionScanner';
-            }
-            $scannerClass = new $returnScannerClass;
+            $scannerClass = new FunctionScanner();
             // @todo
+            return $scannerClass;
         }
     }
     
-    public static function export()
+    public static function export($tokens)
     {
         // @todo
     }

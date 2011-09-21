@@ -29,8 +29,7 @@ class DerivedClassScanner extends ClassScanner
         $currentScannerClass = $classScanner;
         
         while ($currentScannerClass && $currentScannerClass->hasParentClass()) {
-            $currentParentClassName = $currentScannerClass->getParentClass(); 
-            //$this->parentClassScanners[$currentParentClassName] = null;
+            $currentParentClassName = $currentScannerClass->getParentClass();
             if ($directoryScanner->hasClass($currentParentClassName)) {
                 $currentParentClass = $directoryScanner->getClass($currentParentClassName);
                 $this->parentClassScanners[$currentParentClassName] = $currentParentClass;
@@ -45,8 +44,6 @@ class DerivedClassScanner extends ClassScanner
                 $this->interfaceClassScanners[$iName] = $directoryScanner->getClass($iName);
             }
         }
-        
-        
     }
     
     public function getName()
@@ -134,14 +131,14 @@ class DerivedClassScanner extends ClassScanner
         return $methods;
     }
     
-    public function getMethod($methodNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\MethodScanner')
+    public function getMethod($methodNameOrInfoIndex)
     {
         if ($this->classScanner->hasMethod($methodNameOrInfoIndex)) {
-            return $this->classScanner->getMethod($methodNameOrInfoIndex, $returnScannerClass);
+            return $this->classScanner->getMethod($methodNameOrInfoIndex);
         }
         foreach ($this->parentClassScanners as $pClassScanner) {
             if ($pClassScanner->hasMethod($methodNameOrInfoIndex)) {
-                return $pClassScanner->getMethod($methodNameOrInfoIndex, $returnScannerClass);
+                return $pClassScanner->getMethod($methodNameOrInfoIndex);
             }
         }
         throw new Exception\InvalidArgumentException(sprintf(
@@ -163,16 +160,5 @@ class DerivedClassScanner extends ClassScanner
         }
         return false;
     }
-    
-    public static function export()
-    {
-        // @todo
-    }
-    
-    public function __toString()
-    {
-        // @todo
-    }
 
-    
 }

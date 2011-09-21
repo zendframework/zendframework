@@ -47,7 +47,8 @@ class FileScanner extends TokenArrayScanner implements Scanner
         $this->setTokens(token_get_all(file_get_contents($this->file)));
         parent::scan();
     }
-    
+
+    /*
     public static function export()
     {
         // @todo
@@ -57,6 +58,7 @@ class FileScanner extends TokenArrayScanner implements Scanner
     {
         // @todo
     }
+    */
     
     
 }

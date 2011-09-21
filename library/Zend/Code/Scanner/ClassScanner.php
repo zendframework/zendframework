@@ -3,14 +3,13 @@
 namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
+    Zend\Code\NameInformation,
     Zend\Code\Exception;
 
 class ClassScanner implements Scanner
 {
     protected $isScanned        = false;
 
-    protected $namespace        = null;
-    protected $uses             = array();
     protected $name             = null;
     protected $shortName        = null;
     protected $isFinal          = false;
@@ -24,13 +23,13 @@ class ClassScanner implements Scanner
     protected $shortInterfaces  = array();
 
     protected $tokens           = array();
+    protected $nameInformation  = null;
     protected $infos            = array();
     
-    public function __construct(array $classTokens, $namespace = null, array $uses = array())
+    public function __construct(array $classTokens, NameInformation $nameInformation = null)
     {
-        $this->tokens    = $classTokens;
-        $this->namespace = $namespace;
-        $this->uses      = $uses;
+        $this->tokens          = $classTokens;
+        $this->nameInformation = $nameInformation;
     }
     
     protected function scan()
@@ -110,7 +109,13 @@ class ClassScanner implements Scanner
         
         $this->isInterface = (is_array($this->tokens[$tokenIndex]) && $this->tokens[$tokenIndex][0] == T_INTERFACE);
         $this->shortName   = $this->tokens[$tokenIndex+2][1];
-        $this->name        = (($this->namespace) ? $this->namespace . '\\' : '') . $this->shortName;
+
+        // create name
+        $this->name = $this->nameInformation->getNamespace();
+        if ($this->name) {
+            $this->name .= '\\';
+        }
+        $this->name .= $this->shortName;
         
         
         $context        = null;
@@ -151,15 +156,10 @@ class ClassScanner implements Scanner
             }
 
         }
-        
-        $data = (object) array(
-            'namespace' => $this->namespace,
-            'uses'      => $this->uses,
-        );
 
         if ($this->shortInterfaces) {
             $this->interfaces = $this->shortInterfaces;
-            array_walk($this->interfaces, array('Zend\Code\Scanner\Util', 'resolveImports'), $data);
+            array_walk($this->interfaces, array($this->nameInformation, 'resolveName'));
         }
         
         if ($this->shortParentClass) {
@@ -387,7 +387,7 @@ class ClassScanner implements Scanner
             if (!$returnScannerProperty) {
                 $return[] = $info['name'];
             } else {
-                $return[] = $this->getClass($info['name'], $returnScannerProperty);
+                $return[] = $this->getProperty($info['name']);
             }
         }
         return $return;
@@ -407,7 +407,7 @@ class ClassScanner implements Scanner
             if (!$returnScannerMethod) {
                 $return[] = $info['name'];
             } else {
-                $return[] = $this->getMethod($info['name'], $returnScannerMethod);
+                $return[] = $this->getMethod($info['name']);
             }
         }
         return $return;
@@ -415,30 +415,12 @@ class ClassScanner implements Scanner
     
     /**
      * @param string|int $methodNameOrInfoIndex
-     * @param string $returnScannerClass
-     * @return Zend\Code\Scanner\MethodScanner
+     * @return MethodScanner
      */
-    public function getMethod($methodNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\MethodScanner')
+    public function getMethod($methodNameOrInfoIndex)
     {
         $this->scan();
-        
-        // process the class requested
-        // Static for performance reasons
-        static $baseScannerClass = 'Zend\Code\Scanner\MethodScanner';
-        if ($returnScannerClass !== $baseScannerClass) {
-            if (!is_string($returnScannerClass)) {
-                $returnScannerClass = $baseScannerClass;
-            }
-            $returnScannerClass = ltrim($returnScannerClass, '\\');
-            if ($returnScannerClass !== $baseScannerClass 
-                && !is_subclass_of($returnScannerClass, $baseScannerClass)
-            ) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Class must be or extend "%s"', $baseScannerClass
-                ));
-            }
-        }
-        
+
         if (is_int($methodNameOrInfoIndex)) {
             $info = $this->infos[$methodNameOrInfoIndex];
             if ($info['type'] != 'method') {
@@ -457,12 +439,12 @@ class ClassScanner implements Scanner
             }
         }
         if (!isset($info)) {
-            die();
+            // @todo find a way to test this
+            die('Massive Failure, test this');
         }
-        $m = new $returnScannerClass(
+        $m = new MethodScanner(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
-            $this->namespace,
-            $this->uses
+            $this->nameInformation
             );
         $m->setClass($this->name);
         $m->setScannerClass($this);

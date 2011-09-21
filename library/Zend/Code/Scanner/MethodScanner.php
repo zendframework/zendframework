@@ -3,6 +3,7 @@
 namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
+    Zend\Code\NameInformation,
     Zend\Code\Exception;
 
 class MethodScanner implements Scanner
@@ -11,8 +12,6 @@ class MethodScanner implements Scanner
 
     protected $scannerClass = null;
     protected $class        = null;
-    protected $namespace    = null;
-    protected $uses         = array();
     protected $name         = null;
     protected $isFinal      = false;
     protected $isAbstract   = false;
@@ -22,13 +21,13 @@ class MethodScanner implements Scanner
     protected $isStatic     = false;
 
     protected $tokens       = array();
+    protected $nameInformation = null;
     protected $infos        = array();
     
-    public function __construct(array $methodTokens, $namespace = null, array $uses = array())
+    public function __construct(array $methodTokens, NameInformation $nameInformation = null)
     {
         $this->tokens = $methodTokens;
-        $this->namespace = $namespace;
-        $this->uses = $uses;
+        $this->nameInformation = $nameInformation;
     }
     
     public function setClass($class)
@@ -266,27 +265,10 @@ class MethodScanner implements Scanner
         return $return;
     }
     
-    public function getParameter($parameterNameOrInfoIndex, $returnScanner = 'Zend\Code\Scanner\ParameterScanner')
+    public function getParameter($parameterNameOrInfoIndex)
     {
         $this->scan();
-        
-        // process the class requested
-        // Static for performance reasons
-        static $baseScannerClass = 'Zend\Code\Scanner\ParameterScanner';
-        if ($returnScanner !== $baseScannerClass) {
-            if (!is_string($returnScanner)) {
-                $returnScanner = $baseScannerClass;
-            }
-            $returnScanner = ltrim($returnScanner, '\\');
-            if ($returnScanner !== $baseScannerClass 
-                && !is_subclass_of($returnScanner, $baseScannerClass)
-            ) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Class must be or extend "%s"', $baseScannerClass
-                ));
-            }
-        }
-        
+
         if (is_int($parameterNameOrInfoIndex)) {
             $info = $this->infos[$parameterNameOrInfoIndex];
             if ($info['type'] != 'parameter') {
@@ -305,10 +287,9 @@ class MethodScanner implements Scanner
             }
         }
         
-        $p = new $returnScanner(
+        $p = new ParameterScanner(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
-            $this->namespace,
-            $this->uses
+            $this->nameInformation
             );
         $p->setDeclaringFunction($this->name);
         $p->setDeclaringScannerFunction($this);

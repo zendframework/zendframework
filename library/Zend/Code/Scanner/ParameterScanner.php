@@ -2,6 +2,8 @@
 
 namespace Zend\Code\Scanner;
 
+use Zend\Code\NameInformation;
+
 class ParameterScanner
 {
     protected $isScanned                = false;
@@ -20,14 +22,12 @@ class ParameterScanner
     protected $isPassedByReference      = false;
 
     protected $tokens                   = null;
-    protected $namespace                = null;
-    protected $uses                     = array();
-    
-    public function __construct(array $parameterTokens, $namespace = null, array $uses = array())
+    protected $nameInformation          = null;
+
+    public function __construct(array $parameterTokens, NameInformation $nameInformation = null)
     {
         $this->tokens = $parameterTokens;
-        $this->namespace = $namespace;
-        $this->uses   = $uses;
+        $this->nameInformation = $nameInformation;
     }
     
     public function setDeclaringClass($class)
@@ -78,32 +78,9 @@ class ParameterScanner
             $this->isArray = true;
             $this->class = null;
         } elseif ($this->class !== null) {
-            
-            $data = (object) array(
-                'namespace' => $this->namespace,
-                'uses'      => $this->uses,
-            );
-            
-            Util::resolveImports($this->class, null, $data);
-            
-            /*
-            $namespace = (($decClassLastSlash = strrpos($this->declaringClass, '\\')) !== false) 
-                       ? substr($this->declaringClass, 0, $decClassLastSlash) 
-                       : null;
-            if ((!$this->uses && !$namespace) || strlen($this->class) <= 0 || $this->class{0} == '\\') {
-                $this->class = ltrim($this->class, '\\');
-            } else {
-                if ($namespace || $this->uses) {
-                    $firstPartEnd = (strpos($this->class, '\\')) ?: strlen($this->class-1);
-                    $firstPart = substr($this->class, 0, $firstPartEnd);
-                    if (array_key_exists($firstPart, $this->uses)) {
-                        $this->class = substr_replace($this->class, $this->uses[$firstPart], 0, $firstPartEnd);
-                    } elseif ($namespace) {
-                        $this->class = $namespace . '\\' . $this->class;
-                    }
-                }
+            if ($this->nameInformation) {
+                $this->class = $this->nameInformation->resolveName($this->class);
             }
-            */
         }
         
         if ($token[0] == T_WHITESPACE) {
@@ -162,17 +139,6 @@ class ParameterScanner
                    ? $this->tokens[$tokenIndex] 
                    : false;
         } while ($token);
-        
-        if ($this->class) {
-            /*
-            $uses = $this->uses;
-            if ($this->shortInterfaces) {
-                $this->interfaces = $this->shortInterfaces;
-                $data = (object) array('namespace' => $namespace, 'uses' => $uses);
-                array_walk($this->interfaces, array('Zend\Code\Scanner\Util', 'resolveImports'), $data);
-            }
-            */
-        }
         
         $this->isScanned = true;
     }

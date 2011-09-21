@@ -34,7 +34,7 @@ use Zend\GData\GApps;
  * required.
  *
  * For information on submitting queries to a server, see the Google Apps
- * service class, Zend_Gdata_Gapps.
+ * service class, \Zend\Gdata\Gapps.
  *
  * @category   Zend
  * @package    Zend_Gdata
@@ -209,8 +209,8 @@ class GroupQuery extends \Zend\GData\Query
     public function getQueryUrl()
     {
 
-        $uri  = Zend_Gdata_Gapps::APPS_BASE_FEED_URI;
-        $uri .= Zend_Gdata_Gapps::APPS_GROUP_PATH;
+        $uri  = \Zend\Gdata\Gapps::APPS_BASE_FEED_URI;
+        $uri .= \Zend\Gdata\Gapps::APPS_GROUP_PATH;
         $uri .= '/' . $this->_domain;
 
         if ($this->_groupId !== null) {

@@ -164,7 +164,9 @@ class ClassScanner implements Scanner
         
         if ($this->shortParentClass) {
             $this->parentClass = $this->shortParentClass;
-            Util::resolveImports($this->parentClass, null, $data);
+            if ($this->nameInformation) {
+                $this->parentClass = $this->nameInformation->resolveName($this->parentClass);
+            }
         }
 
     }

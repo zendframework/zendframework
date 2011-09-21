@@ -10,11 +10,6 @@ use Traversable,
 class Manager
 {
     /**
-     * @var ModuleResolver
-     */
-    protected $loader;
-
-    /**
      * @var array An array of Module classes of loaded modules
      */
     protected $loadedModules = array();
@@ -30,6 +25,16 @@ class Manager
     protected $options;
 
     /**
+     * @var Zend\Config\Config
+     */
+    protected $mergedConfig;
+
+    /**
+     * @var bool
+     */
+    protected $skipConfig = false;
+
+    /**
      * __construct 
      * 
      * @param array|Traversable $modules 
@@ -43,32 +48,13 @@ class Manager
         } else {
             $this->setOptions($options);
         }
-        $this->loadModules($modules);
-    }
-
-    /**
-     * getLoader 
-     * 
-     * @return ModuleResolver
-     */
-    public function getLoader()
-    {
-        if (!$this->loader instanceof ModuleResolver) {
-            $this->setLoader(new ModuleLoader);
+        if ($this->hasCachedConfig()) {
+            $this->skipConfig = true;
+            $this->setMergedConfig($this->getCachedConfig());
         }
-        return $this->loader;
-    }
-
-    /**
-     * setLoader 
-     * 
-     * @param ModuleResolver $loader 
-     * @return Manager
-     */
-    public function setLoader(ModuleResolver $loader)
-    {
-        $this->loader = $loader;
-        return $this;
+        $this->loadModules($modules);
+        $this->updateCache();
+        $this->events()->trigger('init.post', $this);
     }
 
     /**
@@ -90,7 +76,6 @@ class Manager
                 . 'implement the \\Traversable interface'
             );
         }
-        $this->events()->trigger('init.post', $this);
         return $this;
     }
 
@@ -105,9 +90,8 @@ class Manager
         if (!isset($this->loadedModules[$moduleName])) {
             $class = $moduleName . '\Module';
             $module = new $class;
-            if (is_callable(array($module, 'init'))) {
-                $module->init($this->events());
-            }
+            $this->runModuleInit($module);
+            $this->mergeModuleConfig($module);
             $this->loadedModules[$moduleName] = $module;
         }
         return $this->loadedModules[$moduleName];
@@ -169,30 +153,59 @@ class Manager
      * 
      * @return Zend\Config\Config
      */
-    public function getMergedConfig()
+    public function getMergedConfig($readOnly = true)
     {
-        if (($config = $this->getCachedConfig()) !== false) {
-            return $config;
+        if (null === $this->mergedConfig) {
+            $this->setMergedConfig(new Config(array(), true));
         }
-        $config = new Config(array(), true);
-        foreach ($this->loadedModules as $module) {
-            if (is_callable(array($module, 'getConfig'))) {
-                $config->merge($module->getConfig(defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL));
-            }
+        if (true === $readOnly) {
+            $this->mergedConfig->setReadOnly();
         }
-        $config->setReadOnly();
-        if ($this->getOptions()->getCacheConfig()) {
-            $this->saveConfigCache($config);
+        return $this->mergedConfig;
+    }
+
+    /**
+     * setMergedConfig 
+     * 
+     * @param Config $config 
+     * @return Manager
+     */
+    public function setMergedConfig(Config $config)
+    {
+        $this->mergedConfig = $config;
+        return $this;
+    }
+
+    /**
+     * mergeModuleConfig 
+     * 
+     * @param mixed $module 
+     * @return Manager
+     */
+    public function mergeModuleConfig($module)
+    {
+        if ((false === $this->skipConfig)
+            && (is_callable(array($module, 'getConfig')))
+        ) {
+            $this->getMergedConfig(false)->merge($module->getConfig($this->getOptions()->getApplicationEnv()));
         }
-        return $config;
+        return $this;
+    }
+
+    protected function runModuleInit($module)
+    {
+        if (is_callable(array($module, 'init'))) {
+            $module->init($this);
+        }
+        return $this;
     }
 
     protected function hasCachedConfig()
     {
-        if($this->getOptions()->getCacheConfig()) {
-            if (file_exists($this->getOptions()->getCacheFilePath())) {
-                return true;
-            }
+        if (($this->getOptions()->getCacheConfig())
+            && (file_exists($this->getOptions()->getCacheFilePath()))
+        ) {
+            return true;
         }
         return false;
     }
@@ -203,6 +216,16 @@ class Manager
             return new Config(include $this->getOptions()->getCacheFilePath());
         }
         return false; 
+    }
+
+    protected function updateCache()
+    {
+        if (($this->getOptions()->getCacheConfig())
+            && (false === $this->skipConfig)
+        ) {
+            $this->saveConfigCache($this->getMergedConfig());
+        }
+        return $this;
     }
 
     protected function saveConfigCache($config)

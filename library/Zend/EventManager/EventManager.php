@@ -347,18 +347,17 @@ class EventManager implements EventCollection
     {
         $responses = new ResponseCollection;
 
-        $listeners       = clone $this->getListeners($event);
-        $staticListeners = $this->getStaticListeners($event);
-        if (!empty($staticListeners)) {
-            foreach ($staticListeners as $listener) {
-                $priority = $listener->getOption('priority');
-                if (null === $priority) {
-                    $priority = 1;
-                } elseif (is_array($priority)) {
-                    $priority = array_shift($priority);
-                }
-                $listeners->insert($listener, $priority);
+        $listeners = clone $this->getListeners($event);
+        foreach ($this->getStaticListeners($event) as $listener) {
+            $priority = $listener->getOption('priority');
+            if (null === $priority) {
+                $priority = 1;
+            } elseif (is_array($priority)) {
+                // If we have an array, likely using PriorityQueue. Grab first
+                // element of the array, as that's the actual priority.
+                $priority = array_shift($priority);
             }
+            $listeners->insert($listener, $priority);
         }
 
         if ($listeners->isEmpty()) {

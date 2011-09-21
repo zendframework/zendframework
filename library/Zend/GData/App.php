@@ -209,7 +209,7 @@ class App
     }
 
     /**
-     * Get the Zend_Http_Client object used for communication
+     * Get the \Zend\Http\Client object used for communication
      *
      * @return \Zend\Http\Client
      */
@@ -219,7 +219,7 @@ class App
     }
 
     /**
-     * Set the Zend_Http_Client object used for communication
+     * Set the \Zend\Http\Client object used for communication
      *
      * @param \Zend\Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
@@ -262,7 +262,7 @@ class App
 
 
     /**
-     * Gets the HTTP client object. If none is set, a new Zend_Http_Client will be used.
+     * Gets the HTTP client object. If none is set, a new \Zend\Http\Client will be used.
      *
      * @return \Zend\Http\Client
      */
@@ -385,7 +385,7 @@ class App
 
     /**
      * Set the major protocol version that should be used. Values < 1 will
-     * cause a Zend_Gdata_App_InvalidArgumentException to be thrown.
+     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
      *
      * @see _majorProtocolVersion
      * @param int $value The major protocol version to use.
@@ -414,7 +414,7 @@ class App
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a Zend_Gdata_App_InvalidArgumentException to be thrown.
+     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.

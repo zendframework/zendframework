@@ -175,6 +175,11 @@ abstract class ActionController implements Dispatchable
         return $this->events;
     }
 
+    /**
+     * Register the default events for this controller
+     * 
+     * @return void
+     */
     protected function registerDefaultEvents()
     {
         $events = $this->events();

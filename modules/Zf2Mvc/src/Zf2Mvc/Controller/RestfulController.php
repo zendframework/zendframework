@@ -96,10 +96,7 @@ abstract class RestfulController implements Dispatchable
         }
         $this->response = $response;
 
-        $routeMatch = false;
-        if ($e instanceof MvcEvent) {
-            $routeMatch = $e->getRouteMatch();
-        } elseif ($e instanceof Event) {
+        if ($e instanceof Event && !($e instanceof MvcEvent)) {
             $eventParams = $e->getParams();
             $e = new MvcEvent();
             $e->setParams($eventParams);
@@ -112,17 +109,19 @@ abstract class RestfulController implements Dispatchable
           ->setResponse($response)
           ->setTarget($this);
 
-        // Emit pre-dispatch signal, passing:
-        // - request, response
-        // If a listener returns a response object, return it immediately
-        $events = $this->events();
-        $result = $events->triggerUntil('dispatch.pre', $e, function($result) {
-            return ($result instanceof Response);
+        $result = $this->events()->trigger('dispatch', $e, function($test) {
+            return ($test instanceof Response);
         });
         if ($result->stopped()) {
             return $result->last();
         }
 
+        return $e->getResult();
+    }
+
+    public function execute(MvcEvent $e)
+    {
+        $routeMatch = $e->getRouteMatch();
         if (!$routeMatch) {
             /**
              * @todo Determine requirements for when route match is missing.
@@ -130,7 +129,9 @@ abstract class RestfulController implements Dispatchable
              */
             throw new \DomainException('Missing route matches; unsure how to retrieve action');
         }
-        $action = $routeMatch->getParam('action', false);
+
+        $request = $e->getRequest();
+        $action  = $routeMatch->getParam('action', false);
         if ($action) {
             // Handle arbitrary methods, ending in Action
             $method = static::getMethodFromAction($action);
@@ -182,14 +183,7 @@ abstract class RestfulController implements Dispatchable
         // - return from method, request, response
         // If a listener returns a response object, return it immediately
         $e->setResult($return);
-        $result = $events->triggerUntil(__FUNCTION__ . '.post', $e, function($result) {
-            return ($result instanceof Response);
-        });
-        if ($result->stopped()) {
-            return $result->last();
-        }
-
-        return $e->getResult();
+        return $return;
     }
 
     /**
@@ -245,10 +239,22 @@ abstract class RestfulController implements Dispatchable
                 __CLASS__,
                 get_called_class(),
             )));
+            $this->registerDefaultEvents();
         }
         return $this->events;
     }
     
+    /**
+     * Register the default events for this controller
+     * 
+     * @return void
+     */
+    protected function registerDefaultEvents()
+    {
+        $events = $this->events();
+        $events->attach('dispatch', array($this, 'execute'));
+    }
+
     /**
      * Transform an "action" token into a method name
      * 

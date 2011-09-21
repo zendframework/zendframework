@@ -64,9 +64,9 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->events()->attach('dispatch.pre', function($e) use ($response) {
+        $this->controller->events()->attach('dispatch', function($e) use ($response) {
             return $response;
-        });
+        }, 100);
         $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
@@ -75,9 +75,9 @@ class ActionControllerTest extends TestCase
     {
         $response = new Response();
         $response->setContent('short circuited!');
-        $this->controller->events()->attach('dispatch.post', function($e) use ($response) {
+        $this->controller->events()->attach('dispatch', function($e) use ($response) {
             return $response;
-        });
+        }, -10);
         $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
@@ -87,9 +87,9 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = StaticEventManager::getInstance();
-        $events->attach('Zend\Stdlib\Dispatchable', 'dispatch.pre', function($e) use ($response) {
+        $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
             return $response;
-        });
+        }, 10);
         $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
@@ -99,9 +99,9 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = StaticEventManager::getInstance();
-        $events->attach('Zf2Mvc\Controller\ActionController', 'dispatch.pre', function($e) use ($response) {
+        $events->attach('Zf2Mvc\Controller\ActionController', 'dispatch', function($e) use ($response) {
             return $response;
-        });
+        }, 10);
         $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
@@ -111,9 +111,9 @@ class ActionControllerTest extends TestCase
         $response = new Response();
         $response->setContent('short circuited!');
         $events = StaticEventManager::getInstance();
-        $events->attach(get_class($this->controller), 'dispatch.pre', function($e) use ($response) {
+        $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
             return $response;
-        });
+        }, 10);
         $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }

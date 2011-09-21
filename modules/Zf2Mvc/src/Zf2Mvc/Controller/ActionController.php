@@ -60,10 +60,7 @@ abstract class ActionController implements Dispatchable
         }
         $this->response = $response;
 
-        $routeMatch = false;
-        if ($e instanceof MvcEvent) {
-            $routeMatch = $e->getRouteMatch();
-        } elseif ($e instanceof Event) {
+        if ($e instanceof Event && !$e instanceof MvcEvent) {
             $eventParams = $e->getParams();
             $e = new MvcEvent();
             $e->setParams($eventParams);
@@ -77,13 +74,25 @@ abstract class ActionController implements Dispatchable
           ->setTarget($this);
 
         $events = $this->events();
-        $result = $events->trigger('dispatch.pre', $e, function($test) {
+        $result = $events->trigger('dispatch', $e, function($test) {
             return ($test instanceof Response);
         });
+
         if ($result->stopped()) {
             return $result->last();
         }
+        return $e->getResult();
+    }
 
+    /**
+     * Execute the request
+     * 
+     * @param  MvcEvent $e 
+     * @return mixed
+     */
+    public function execute(MvcEvent $e)
+    {
+        $routeMatch = $e->getRouteMatch();
         if (!$routeMatch) {
             /**
              * @todo Determine requirements for when route match is missing.
@@ -108,14 +117,7 @@ abstract class ActionController implements Dispatchable
         }
 
         $e->setResult($actionResponse);
-        $result = $events->triggerUntil('dispatch.post', $e, function($test) {
-            return ($test instanceof Response);
-        });
-        if ($result->stopped()) {
-            return $result->last();
-        }
-
-        return $e->getResult();
+        return $actionResponse;
     }
 
     /**
@@ -168,8 +170,15 @@ abstract class ActionController implements Dispatchable
                 __CLASS__, 
                 get_called_class()
             )));
+            $this->registerDefaultEvents();
         }
         return $this->events;
+    }
+
+    protected function registerDefaultEvents()
+    {
+        $events = $this->events();
+        $events->attach('dispatch', array($this, 'execute'));
     }
 
     /**

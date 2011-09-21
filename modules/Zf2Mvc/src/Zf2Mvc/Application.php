@@ -216,11 +216,9 @@ class Application implements AppContext
         $event->setRequest($this->getRequest())
               ->setRouter($this->getRouter());
 
-        $event->setName('route');
-        $events->trigger($event);
+        $events->trigger('route', $event);
 
-        $event->setName('dispatch');
-        $result = $events->trigger($event, function ($r) {
+        $result = $events->trigger('dispatch', $event, function ($r) {
             return ($r instanceof Response);
         });
 

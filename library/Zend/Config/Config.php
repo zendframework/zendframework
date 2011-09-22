@@ -491,22 +491,9 @@ class Config implements \Countable, \Iterator, \ArrayAccess
     protected function _arrayMergeRecursive($firstArray, $secondArray)
     {
         if (is_array($firstArray) && is_array($secondArray)) {
-            foreach ($secondArray as $key => $value) {
-                if (isset($firstArray[$key])) {
-                    $firstArray[$key] = $this->_arrayMergeRecursive($firstArray[$key], $value);
-                } else {
-                    if($key === 0) {
-                        $firstArray= array(0=>$this->_arrayMergeRecursive($firstArray, $value));
-                    } else {
-                        $firstArray[$key] = $value;
-                    }
-                }
-            }
-        } else {
-            $firstArray = $secondArray;
+            return array_replace_recursive($firstArray, $secondArray);
         }
-
-        return $firstArray;
+        return $secondArray;
     }
 
     /**

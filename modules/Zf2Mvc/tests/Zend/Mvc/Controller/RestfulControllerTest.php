@@ -165,4 +165,12 @@ class RestfulControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response, $this->event);
         $this->assertSame($response, $result);
     }
+
+    public function testDispatchInjectsEventIntoController()
+    {
+        $this->controller->dispatch($this->request, $this->response, $this->event);
+        $event = $this->controller->getEvent();
+        $this->assertNotNull($event);
+        $this->assertSame($this->event, $event);
+    }
 }

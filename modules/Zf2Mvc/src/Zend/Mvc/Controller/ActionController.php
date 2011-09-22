@@ -18,6 +18,7 @@ use ArrayObject,
  */
 abstract class ActionController implements Dispatchable
 {
+    protected $event;
     protected $events;
     protected $request;
     protected $response;
@@ -72,9 +73,9 @@ abstract class ActionController implements Dispatchable
         $e->setRequest($request)
           ->setResponse($response)
           ->setTarget($this);
+        $this->event = $e;
 
-        $events = $this->events();
-        $result = $events->trigger('dispatch', $e, function($test) {
+        $result = $this->events()->trigger('dispatch', $e, function($test) {
             return ($test instanceof Response);
         });
 
@@ -141,6 +142,16 @@ abstract class ActionController implements Dispatchable
             $this->response = new HttpResponse();
         }
         return $this->response;
+    }
+
+    /**
+     * Retrieve event passed to or created in dispatch()
+     * 
+     * @return null|MvcEvent
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 
     /**

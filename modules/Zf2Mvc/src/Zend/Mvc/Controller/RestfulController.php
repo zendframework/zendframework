@@ -19,6 +19,7 @@ abstract class RestfulController implements Dispatchable
 {
     protected $request;
     protected $response;
+    protected $event;
     protected $events;
 
     /**
@@ -108,6 +109,7 @@ abstract class RestfulController implements Dispatchable
         $e->setRequest($request)
           ->setResponse($response)
           ->setTarget($this);
+        $this->event = $e;
 
         $result = $this->events()->trigger('dispatch', $e, function($test) {
             return ($test instanceof Response);
@@ -210,6 +212,16 @@ abstract class RestfulController implements Dispatchable
             $this->setResponse(new HttpResponse());
         }
         return $this->response;
+    }
+
+    /**
+     * Retrieve event passed to or created in dispatch()
+     * 
+     * @return null|MvcEvent
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 
     /**

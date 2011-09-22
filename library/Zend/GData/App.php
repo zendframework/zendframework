@@ -161,6 +161,16 @@ class App
         $this->setHttpClient($client, $applicationId);
         // Set default protocol version. Subclasses should override this as
         // needed once a given service supports a new version.
+        $this->applyDefaults();
+    }
+    
+    /**
+     * Applys defaults to the Gdata object.
+     * We may want to fire off multiple requests with different protocol versions
+     * so after every request we should should apply the defaults.
+     */
+    public function applyDefaults()
+    {
         $this->setMajorProtocolVersion(self::DEFAULT_MAJOR_PROTOCOL_VERSION);
         $this->setMinorProtocolVersion(self::DEFAULT_MINOR_PROTOCOL_VERSION);
     }
@@ -677,7 +687,7 @@ class App
         }
         if (!$response->isSuccess()) {
             $exceptionMessage = 'Expected response code 200, got ' .
-                $response->getStatus();
+                $response->getStatusCode();
             if (self::getVerboseExceptionMessages()) {
                 $exceptionMessage .= "\n" . $response->getBody();
             }
@@ -685,6 +695,10 @@ class App
             $exception->setResponse($response);
             throw $exception;
         }
+        
+        //Apply defaults in case of later requests.
+        $this->applyDefaults();
+        
         return $response;
     }
 

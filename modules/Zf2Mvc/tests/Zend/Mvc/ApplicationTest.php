@@ -102,6 +102,20 @@ class ApplicationTest extends TestCase
     {
         $app = new Application();
 
+        $request = new Request();
+        $uri     = UriFactory::factory('http://example.local/path');
+        $request->setUri($uri);
+        $app->setRequest($request);
+
+        $route = new Router\Http\Literal(array(
+            'route'    => '/path',
+            'defaults' => array(
+                'controller' => 'path',
+            ),
+        ));
+        $router  = $app->getRouter();
+        $router->addRoute('path', $route);
+
         $this->setExpectedException('RuntimeException');
         $app->run();
     }

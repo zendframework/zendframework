@@ -203,13 +203,6 @@ class Application implements AppContext
      */
     public function run()
     {
-        $locator = $this->getLocator();
-        if (!$locator) {
-            throw new Exception\MissingLocatorException(
-                'Cannot run application without a locator'
-            );
-        }
-
         $events = $this->events();
         $event  = new MvcEvent();
         $event->setTarget($this);
@@ -265,11 +258,17 @@ class Application implements AppContext
      */
     public function dispatch(MvcEvent $e)
     {
+        $locator = $this->getLocator();
+        if (!$locator) {
+            throw new Exception\MissingLocatorException(
+                'Cannot dispatch without a locator'
+            );
+        }
+
         $events     = $this->events();
         $routeMatch = $e->getRouteMatch();
 
         $controllerName = $routeMatch->getParam('controller', 'not-found');
-        $locator        = $this->getLocator();
 
         try {
             $controller = $locator->get($controllerName);

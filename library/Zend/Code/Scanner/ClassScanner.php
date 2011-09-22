@@ -10,6 +10,7 @@ class ClassScanner implements Scanner
 {
     protected $isScanned        = false;
 
+    protected $docComment       = null;
     protected $name             = null;
     protected $shortName        = null;
     protected $isFinal          = false;
@@ -41,9 +42,20 @@ class ClassScanner implements Scanner
         if (!$this->tokens) {
             throw new Exception\RuntimeException('No tokens were provided');
         }
-        
+
+        $currentDocCommentIndex = false;
+        $docCommentTokenWhitelist = array(
+            T_WHITESPACE, T_FINAL, T_ABSTRACT, T_CLASS, T_INTERFACE, T_PUBLIC,
+            T_PROTECTED, T_PRIVATE, T_FUNCTION, T_VAR, T_STATIC, T_CONST
+        );
+
         for ($tokenIndex = 0; $tokenIndex < count($this->tokens); $tokenIndex++) {
             $token = $this->tokens[$tokenIndex];
+
+            // track docblocks through whitespace tokens (they might belong to something)
+            if ($currentDocCommentIndex !== false && is_array($token) && !in_array($token[0], $docCommentTokenWhitelist)) {
+                $currentDocCommentIndex = false;
+            }
 
             if (is_string($token)) {
                 continue;
@@ -52,18 +64,24 @@ class ClassScanner implements Scanner
             // tokens with some value are arrays (will have a token identifier, & line num)
             $fastForward = 0;
             switch ($token[0]) {
+                case T_DOC_COMMENT:
+                    $currentDocCommentIndex = $tokenIndex;
+                    break;
+                
                 case T_CLASS:
                 case T_INTERFACE:
-                    $this->scanClassInfo($tokenIndex, $fastForward);
+                    $this->scanClassInfo(($currentDocCommentIndex !== false) ? $currentDocCommentIndex : $tokenIndex, $fastForward);
                     break;
                 
                 case T_CONST:
-                    $this->scanConstant($tokenIndex, $fastForward);
+                    $this->scanConstant(($currentDocCommentIndex !== false) ? $currentDocCommentIndex : $tokenIndex, $fastForward);
                     break;
 
                 case T_FINAL:
                 case T_ABSTRACT:
+                    // are we talking about a class or a class member?
                     if (!$this->name) {
+                        $this->scanClassInfo(($currentDocCommentIndex !== false) ? $currentDocCommentIndex : $tokenIndex, $fastForward);
                         break;
                     }
                 case T_PUBLIC:
@@ -80,16 +98,18 @@ class ClassScanner implements Scanner
                     );
 
                     if (is_array($subToken)) {
-                        $this->scanMethod($tokenIndex, $fastForward);
+                        $this->scanMethod(($currentDocCommentIndex !== false) ? $currentDocCommentIndex : $tokenIndex, $fastForward);
                     } else {
-                        $this->scanProperty($tokenIndex, $fastForward);
+                        $this->scanProperty(($currentDocCommentIndex !== false) ? $currentDocCommentIndex : $tokenIndex, $fastForward);
                     }
+                    $currentDocCommentIndex = false;
                     
                     break;
             }
 
             if ($fastForward) {
                 $tokenIndex += $fastForward - 1;
+                $currentDocCommentIndex = false; // automatically clear doc comment index
             }
         }
 
@@ -98,64 +118,86 @@ class ClassScanner implements Scanner
     
     protected function scanClassInfo($tokenIndex, &$fastForward)
     {
-        if (isset($this->tokens[$tokenIndex-2]) && is_array($this->tokens[$tokenIndex-2])) {
-            $tokenTwoBack = $this->tokens[$tokenIndex-2];
-        }
-        
-        // T_ABSTRACT & T_FINAL will have been bypassed if no class name, and 
-        // will always be 2 tokens behind T_CLASS
-        $this->isAbstract = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_ABSTRACT));
-        $this->isFinal    = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_FINAL));
-        
-        $this->isInterface = (is_array($this->tokens[$tokenIndex]) && $this->tokens[$tokenIndex][0] == T_INTERFACE);
-        $this->shortName   = $this->tokens[$tokenIndex+2][1];
-
-        // create name
-        $this->name = $this->nameInformation->getNamespace();
-        if ($this->name) {
-            $this->name .= '\\';
-        }
-        $this->name .= $this->shortName;
-        
-        
         $context        = null;
         $interfaceIndex = 0;
 
-        while (true) {
-            $fastForward++;
-            $tokenIndex++;
+        /**
+         * TOKEN SCANNER START
+         */
+
+        TOKEN_CLASS_SCANNER_TOP:
+
             $token = $this->tokens[$tokenIndex];
-            
+
             // BREAK ON
             if (is_string($token) && $token == '{') {
-                break;
+                goto TOKEN_CLASS_SCANNER_EXIT;
             }
             
             // ANALYZE
+
+            // when token is a string
             if (is_string($token) && $context == T_IMPLEMENTS && $token == ',') {
                 $interfaceIndex++;
                 $this->shortInterfaces[$interfaceIndex] = '';
             }
-            
+
+            // when token is an array
             if (is_array($token)) {
-                if ($token[0] == T_NS_SEPARATOR || $token[0] == T_STRING) {
-                    if ($context == T_EXTENDS) {
-                        $this->shortParentClass .= $token[1];
-                    } elseif ($context == T_IMPLEMENTS) {
-                        $this->shortInterfaces[$interfaceIndex] .= $token[1];
-                    }
-                }
-                if ($token[0] == T_EXTENDS && !$this->isInterface) {
-                    $context = T_EXTENDS;
-                    $this->shortParentClass = '';
-                }
-                if ($token[0] == T_IMPLEMENTS || ($this->isInterface && $token[0] == T_EXTENDS)) {
-                    $context = T_IMPLEMENTS;
-                    $this->shortInterfaces[$interfaceIndex] = '';
+                switch ($token[0]) {
+                    case T_INTERFACE:
+                    case T_CLASS:
+                        $this->shortName = $this->tokens[$tokenIndex+2][1];
+                        if ($this->nameInformation && $this->nameInformation->hasNamespace()) {
+                            $this->name = $this->nameInformation->getNamespace() . '\\' . $this->shortName;
+                        } else {
+                            $this->name = $this->shortName;
+                        }
+                        break;
+                    case T_DOC_COMMENT:
+                        $this->docComment = $token[1];
+                        break;
+                    case T_INTERFACE:
+                        $this->isInterface = true;
+                        break;
+                    case T_ABSTRACT:
+                        $this->isAbstract = true;
+                        break;
+                    case T_FINAL:
+                        $this->isFinal = true;
+                        break;
+                    case T_NS_SEPARATOR:
+                    case T_STRING:
+                        switch ($context) {
+                            case T_EXTENDS:
+                                $this->shortParentClass .= $token[1];
+                                break;
+                            case T_IMPLEMENTS:
+                                $this->shortInterfaces[$interfaceIndex] .= $token[1];
+                                break;
+                        }
+                        break;
+                    case T_EXTENDS:
+                    case T_IMPLEMENTS:
+                        $context = $token[0];
+                        if (($this->isInterface && $context === T_EXTENDS) || $context === T_IMPLEMENTS) {
+                            $this->shortInterfaces[$interfaceIndex] = '';
+                        } elseif (!$this->isInterface && $context === T_EXTENDS) {
+                            $this->shortParentClass = '';
+                        }
+                        break;
                 }
             }
 
-        }
+            $fastForward++;
+            $tokenIndex++;
+            goto TOKEN_CLASS_SCANNER_TOP;
+
+        TOKEN_CLASS_SCANNER_EXIT:
+
+        /**
+         * TOKEN SCANNER END
+         */
 
         if ($this->shortInterfaces) {
             $this->interfaces = $this->shortInterfaces;
@@ -309,7 +351,13 @@ class ClassScanner implements Scanner
         $info['tokenEnd'] = $index;
         $this->infos[]    = $info;
     }
-    
+
+    public function getDocComment()
+    {
+        $this->scan();
+        return $this->docComment;
+    }
+
     public function getName()
     {
         $this->scan();

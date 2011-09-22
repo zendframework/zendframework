@@ -46,6 +46,11 @@ class NameInformation
         return $this->namespace;
     }
 
+    public function hasNamespace()
+    {
+        return ($this->namespace != null);
+    }
+
     public function setUses(array $uses)
     {
         $this->uses = array();

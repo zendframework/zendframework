@@ -454,4 +454,25 @@ class ApplicationTest extends TestCase
         $app->run();
         $this->assertContains('Raised an exception', $response->getContent());
     }
+
+    /**
+     * @group error-handling
+     */
+    public function testInabilityToRetrieveControllerShouldTriggerDispatchError()
+    {
+        $app      = $this->setupBadController();
+        $app->getLocator()->remove('bad');
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('dispatch.error', function ($e) use ($response) {
+            $error      = $e->getError();
+            $controller = $e->getController();
+            $response->setContent("Code: " . $error . '; Controller: ' . $controller);
+            return $response;
+        });
+
+        $app->run();
+        $this->assertContains('404', $response->getContent());
+        $this->assertContains('bad', $response->getContent());
+    }
 }

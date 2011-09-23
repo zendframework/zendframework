@@ -112,6 +112,16 @@ class ModuleAutoloader implements SplAutoloader
     }
 
     /**
+     * Unregister the autoloader with spl_autoload registry
+     * 
+     * @return void
+     */
+    public function unregister()
+    {
+        $test = spl_autoload_unregister(array($this, 'autoload'));
+    }
+
+    /**
      * registerPaths 
      * 
      * @param array|Traversable $paths 

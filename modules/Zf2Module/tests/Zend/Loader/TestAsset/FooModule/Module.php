@@ -3,5 +3,4 @@ namespace FooModule;
 
 class Module
 {
-
 }

@@ -128,7 +128,25 @@ class CallbackHandler
             throw new Exception\InvalidCallbackException('Invalid callback provided; not callable');
         }
 
-        return $this->callback;
+        $callback = $this->callback;
+        if (is_string($callback)) {
+            return $callback;
+        }
+
+        if ($callback instanceof WeakRef) {
+            return $callback->get();
+        }
+
+        if (is_object($callback)) {
+            return $callback;
+        }
+
+        list($target, $method) = $callback;
+        if ($target instanceof WeakRef) {
+            return array($target->get(), $method);
+        }
+
+        return $callback;
     }
 
     /**

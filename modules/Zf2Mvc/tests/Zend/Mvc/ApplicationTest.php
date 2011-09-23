@@ -176,6 +176,34 @@ class ApplicationTest extends TestCase
         return $app;
     }
 
+    public function setupBadController()
+    {
+        $app = new Application();
+
+        $request = new Request();
+        $uri     = UriFactory::factory('http://example.local/bad');
+        $request->setUri($uri);
+        $app->setRequest($request);
+
+        $route = new Router\Http\Literal(array(
+            'route'    => '/bad',
+            'defaults' => array(
+                'controller' => 'bad',
+                'action'     => 'test',
+            ),
+        ));
+        $router  = $app->getRouter();
+        $router->addRoute('bad', $route);
+
+        $locator = new TestAsset\Locator();
+        $locator->add('bad', function() {
+            return new Controller\TestAsset\BadController;
+        });
+        $app->setLocator($locator);
+
+        return $app;
+    }
+
     public function testRoutingIsExecutedDuringRun()
     {
         $app = $this->setupPathController();
@@ -407,5 +435,23 @@ class ApplicationTest extends TestCase
 
         $this->assertNotContains('listener1', $content);
         $this->assertNotContains('listener2', $content);
+    }
+
+    /**
+     * @group error-handling
+     */
+    public function testExceptionsRaisedInDispatchableShouldRaiseDispatchErrorEvent()
+    {
+        $app      = $this->setupBadController();
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('dispatch.error', function ($e) use ($response) {
+            $exception = $e->getParam('exception');
+            $response->setContent($exception->getMessage());
+            return $response;
+        });
+
+        $app->run();
+        $this->assertContains('Raised an exception', $response->getContent());
     }
 }

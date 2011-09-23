@@ -74,6 +74,11 @@ class MvcEvent extends Event
         return $this;
     }
 
+    public function getError()
+    {
+        return $this->getParam('error', '');
+    }
+
     public function getController()
     {
         return $this->getParam('controller');

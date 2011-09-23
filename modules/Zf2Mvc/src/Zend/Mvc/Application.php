@@ -272,7 +272,7 @@ class Application implements AppContext
 
         try {
             $controller = $locator->get($controllerName);
-        } catch (ClassNotFoundException $e) {
+        } catch (ClassNotFoundException $exception) {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_NOT_FOUND)
                   ->setController($controllerName)

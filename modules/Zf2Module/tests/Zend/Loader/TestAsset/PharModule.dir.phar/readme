@@ -1,0 +1,2 @@
+This directory is just here to confirm that the autoloader prefers Phar files
+over directories that match the glob.

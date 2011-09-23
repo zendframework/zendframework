@@ -54,17 +54,17 @@ class ManagerTest extends TestCase
         $loader = new ModuleAutoloader;
         $loader->registerPath(__DIR__ . '/TestAsset/');
         $loader->register();
-        $this->assertSame(true, class_exists('PharModule\Module'));
-        $this->assertSame(true, class_exists('PharModuleGz\Module'));
-        $this->assertSame(true, class_exists('PharModuleBz2\Module'));
-        $this->assertSame(true, class_exists('PharModulePharTar\Module'));
-        $this->assertSame(true, class_exists('PharModulePharTarGz\Module'));
-        $this->assertSame(true, class_exists('PharModulePharTarBz2\Module'));
-        $this->assertSame(true, class_exists('PharModulePharZip\Module'));
-        $this->assertSame(true, class_exists('PharModuleTar\Module'));
-        $this->assertSame(true, class_exists('PharModuleTarGz\Module'));
-        $this->assertSame(true, class_exists('PharModuleTarBz2\Module'));
-        $this->assertSame(true, class_exists('PharModuleZip\Module'));
+        $this->assertTrue(class_exists('PharModule\Module'));
+        $this->assertTrue(class_exists('PharModuleGz\Module'));
+        $this->assertTrue(class_exists('PharModuleBz2\Module'));
+        $this->assertTrue(class_exists('PharModulePharTar\Module'));
+        $this->assertTrue(class_exists('PharModulePharTarGz\Module'));
+        $this->assertTrue(class_exists('PharModulePharTarBz2\Module'));
+        $this->assertTrue(class_exists('PharModulePharZip\Module'));
+        $this->assertTrue(class_exists('PharModuleTar\Module'));
+        $this->assertTrue(class_exists('PharModuleTarGz\Module'));
+        $this->assertTrue(class_exists('PharModuleTarBz2\Module'));
+        $this->assertTrue(class_exists('PharModuleZip\Module'));
     }
 
     public function testProvidesFluidInterface()
@@ -80,7 +80,7 @@ class ManagerTest extends TestCase
         $loader = new ModuleAutoloader;
         $loader->registerPath(__DIR__ . '/TestAsset/');
         $moduleClass = $loader->autoload('FooModule\NotModule');
-        $this->assertSame(false, $moduleClass);
+        $this->assertFalse($moduleClass);
     }
 
     public function testReturnsFalseForNonExistantModuleClass()
@@ -88,7 +88,7 @@ class ManagerTest extends TestCase
         $loader = new ModuleAutoloader;
         $loader->registerPath(__DIR__ . '/TestAsset/');
         $moduleClass = $loader->autoload('NonExistantModule\Module');
-        $this->assertSame(false, $moduleClass);
+        $this->assertFalse($moduleClass);
     }
 
 

@@ -365,6 +365,10 @@ class EventManager implements EventCollection
         }
 
         foreach ($listeners as $listener) {
+            if (!$listener->isValid()) {
+                $this->detach($listener);
+                continue;
+            }
             $responses->push(call_user_func($listener->getCallback(), $e));
             if ($e->propagationIsStopped()) {
                 $responses->setStopped(true);

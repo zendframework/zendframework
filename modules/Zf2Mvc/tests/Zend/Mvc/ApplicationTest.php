@@ -475,4 +475,29 @@ class ApplicationTest extends TestCase
         $this->assertContains('404', $response->getContent());
         $this->assertContains('bad', $response->getContent());
     }
+
+    /**
+     * @group error-handling
+     */
+    public function testInvalidControllerTypeShouldTriggerDispatchError()
+    {
+        $app      = $this->setupBadController();
+        $app->getLocator()->add('bad', function() {
+            return new stdClass;
+        });
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('dispatch.error', function ($e) use ($response) {
+            $error      = $e->getError();
+            $controller = $e->getController();
+            $class      = $e->getControllerClass();
+            $response->setContent("Code: " . $error . '; Controller: ' . $controller . '; Class: ' . $class);
+            return $response;
+        });
+
+        $app->run();
+        $this->assertContains('404', $response->getContent());
+        $this->assertContains('bad', $response->getContent());
+        $this->assertContains('stdClass', $response->getContent());
+    }
 }

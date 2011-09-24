@@ -365,15 +365,24 @@ class EventManager implements EventCollection
         }
 
         foreach ($listeners as $listener) {
+            // If we have an invalid listener, detach it, and move on to the next
             if (!$listener->isValid()) {
                 $this->detach($listener);
                 continue;
             }
+
+            // Trigger the listener's callback, and push its result onto the 
+            // response collection
             $responses->push(call_user_func($listener->getCallback(), $e));
+
+            // If the event was asked to stop propagating, do so
             if ($e->propagationIsStopped()) {
                 $responses->setStopped(true);
                 break;
             }
+
+            // If the result causes our validation callback to return true, 
+            // stop propagation
             if (call_user_func($callback, $responses->last())) {
                 $responses->setStopped(true);
                 break;

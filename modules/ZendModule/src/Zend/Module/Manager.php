@@ -71,7 +71,7 @@ class Manager
             }
         } else {
             throw new \InvalidArgumentException(
-                'Parameter to \\Zf2Module\\Manager\'s '
+                'Parameter to \\ZendModule\\Manager\'s '
                 . 'loadModules method must be an array or '
                 . 'implement the \\Traversable interface'
             );

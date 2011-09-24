@@ -1,6 +1,6 @@
 <?php
 
-namespace Zf2Module;
+namespace ZendModule;
 
 class Module
 {

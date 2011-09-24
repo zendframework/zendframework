@@ -106,7 +106,7 @@ class ManagerOptions
             $this->{$setter}($value);
         }
     }
-
+    
     protected function assembleSetterNameFromConfigKey($key)
     {
         $parts = explode('_', $key);

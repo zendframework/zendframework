@@ -148,6 +148,16 @@ class Manager
     }
 
     /**
+     * Get loadedModules.
+     *
+     * @return array
+     */
+    public function getLoadedModules()
+    {
+        return $this->loadedModules;
+    }
+
+    /**
      * getMergedConfig
      * Build a merged config object for all loaded modules
      * 
@@ -212,10 +222,7 @@ class Manager
 
     protected function getCachedConfig()
     {
-        if ($this->hasCachedConfig()) {
-            return new Config(include $this->getOptions()->getCacheFilePath());
-        }
-        return false; 
+        return new Config(include $this->getOptions()->getCacheFilePath());
     }
 
     protected function updateCache()

@@ -16,7 +16,7 @@ class ManagerOptionsTest extends TestCase
             'cache_config' => true,
         ));
         $this->assertSame($options->getCacheDir(), __DIR__);
-        $this->assertTrue($options->getCacheConfig(), true);
+        $this->assertTrue($options->getCacheConfig());
         $this->assertNotNull(strstr($options->getCacheFilePath(), __DIR__));
         $this->assertNotNull(strstr($options->getCacheFilePath(), '.php'));
     }
@@ -28,14 +28,16 @@ class ManagerOptionsTest extends TestCase
             'cache_config' => true,
         ));
         $this->assertSame($options->cache_dir, __DIR__);
-        $this->assertTrue($options->cache_config, true);
+        $this->assertTrue($options->cache_config);
         $options->cache_dir = 'foo';
-        $options->cache_config = false;
         $this->assertSame($options->cache_dir, 'foo');
-        $this->assertFalse($options->cache_config, false);
-        $this->assertTrue(isset($options->cache_config));
+        $options->cache_config = false;
+        $this->assertFalse($options->cache_config);
+        $this->assertTrue(isset($options->cache_dir));
+        unset($options->cache_dir);
+        $this->assertFalse(isset($options->cache_dir));
+        $this->setExpectedException('InvalidArgumentException');
         unset($options->cache_config);
-        $this->assertFalse(isset($options->cache_config));
     }
 
     public function testContructorThrowsInvalidArgumentException()

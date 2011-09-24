@@ -125,6 +125,13 @@ class ManagerTest extends TestCase
         $this->assertFalse($moduleClass);
     }
 
+    public function testReturnsFalseForNonModulePhar()
+    {
+        $loader = new ModuleAutoloader;
+        $loader->registerPath(__DIR__ . '/TestAsset/');
+        $moduleClass = $loader->autoload('PharModuleFake\Module');
+        $this->assertFalse($moduleClass);
+    }
 
     public function testInvalidPathThrowsException()
     {

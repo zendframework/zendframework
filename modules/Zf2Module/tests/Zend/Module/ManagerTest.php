@@ -29,7 +29,6 @@ class ManagerTest extends TestCase
 
         $autoloader = new ModuleAutoloader(array(
             __DIR__ . '/TestAsset',
-            __DIR__ . '/../Loader/TestAsset',
         ));
         $autoloader->register();
     }
@@ -68,11 +67,13 @@ class ManagerTest extends TestCase
         $this->assertSame(__DIR__, $moduleManager->getOptions()->cache_dir);
     }
 
-    public function testCanLoadFooModule()
+    public function testCanLoadSomeModule()
     {
-        $moduleManager = new Manager(array('FooModule'));
+        $moduleManager = new Manager(array('SomeModule'));
         $loadedModules = $moduleManager->getLoadedModules();
-        $this->assertInstanceOf('FooModule\Module', $loadedModules['FooModule']);
+        $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
+        $config = $moduleManager->getMergedConfig();
+        $this->assertSame($config->some, 'thing');
     }
 
     public function testCanLoadMultipleModules()
@@ -108,6 +109,6 @@ class ManagerTest extends TestCase
     public function testConstructorThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $moduleManager = new Manager('foo');
+        $moduleManager = new Manager('stringShouldBeArray');
     }
 }

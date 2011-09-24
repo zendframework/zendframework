@@ -1,3 +1,0 @@
-<?php
-// This is here just to make sure the autoloader skips past non-phar files that
-// match the glob().

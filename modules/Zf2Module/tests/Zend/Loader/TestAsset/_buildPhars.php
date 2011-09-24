@@ -1,4 +1,6 @@
 <?php
+ini_set('phar.readonly', '0');
+
 // Executable
 // .phar
 buildModulePhar('PharModule');
@@ -25,15 +27,27 @@ buildModulePhar('PharModuleTarBz2', Phar::TAR, Phar::BZ2, false);
 // .zip
 buildModulePhar('PharModuleZip', Phar::ZIP, Phar::NONE, false);
 
+// Fake Module
+buildModulePhar('PharModuleFake', Phar::ZIP, Phar::NONE, false, true);
 
-function buildModulePhar($name, $format = Phar::PHAR, $compression = Phar::NONE, $executable = true)
+function buildModulePhar($name, $format = Phar::PHAR, $compression = Phar::NONE, $executable = true, $fake = false)
 {
     echo "Building {$name}...\t";
     $glob = glob($name.'.*');
-    if (count($glob) && !is_dir($glob[0])) unlink($glob[0]);
+    if (count($glob) > 0) {
+        foreach ($glob as $file) {
+            if (!is_dir($file)) {
+                unlink($file);
+            }   
+        }
+    }
     $filename = $name . '.phar';
     $phar = new Phar($filename);
-    $phar['Module.php'] = "<?php \n\nnamespace $name;\n\nclass Module\n{}";
+    if ($fake) {
+        $phar['Module.php'] = '<?php //no class here';
+    } else {
+        $phar['Module.php'] = "<?php \n\nnamespace $name;\n\nclass Module\n{}";
+    }
     if (false === $executable) {
         $phar->convertToData($format, $compression);
     } else {

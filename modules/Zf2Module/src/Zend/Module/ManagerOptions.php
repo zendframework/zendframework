@@ -35,6 +35,12 @@ class ManagerOptions
      */
     public function setCacheConfig($cacheConfig)
     {
+        if (!is_bool($cacheConfig)) {
+            throw new \InvalidArgumentException(
+                'Parameter to \\Zend\\Module\\ManagerOption\'s '
+                . 'setCacheConfig method must be boolean.'
+            );
+        }
         $this->cacheConfig = $cacheConfig;
         return $this;
     }
@@ -57,7 +63,11 @@ class ManagerOptions
      */
     public function setCacheDir($cacheDir)
     {
-        $this->cacheDir = rtrim(rtrim($cacheDir, '/'), '\\');
+        if (null === $cacheDir) {
+            $this->cacheDir = $cacheDir;
+        } else {
+            $this->cacheDir = rtrim(rtrim($cacheDir, '/'), '\\');
+        }
         return $this;
     }
 

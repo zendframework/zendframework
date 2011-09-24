@@ -28,7 +28,8 @@ class ManagerTest extends TestCase
         $this->includePath = get_include_path();
 
         $autoloader = new ModuleAutoloader(array(
-            __DIR__ . '/TestAsset'
+            __DIR__ . '/TestAsset',
+            __DIR__ . '/../Loader/TestAsset',
         ));
         $autoloader->register();
     }

@@ -27,7 +27,8 @@ use ArrayObject,
 class Application implements AppContext
 {
     const ERROR_CONTROLLER_NOT_FOUND = 404;
-    const ERROR_CONTROLLER_INVALID   = 500;
+    const ERROR_CONTROLLER_INVALID   = 404;
+    const ERROR_EXCEPTION            = 500;
 
     protected $events;
     protected $locator;
@@ -275,10 +276,9 @@ class Application implements AppContext
         } catch (ClassNotFoundException $exception) {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_NOT_FOUND)
-                  ->setController($controllerName)
-                  ->setName('dispatch.error');
+                  ->setController($controllerName);
 
-            $results = $events->trigger($error);
+            $results = $events->trigger('dispatch.error', $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -291,9 +291,8 @@ class Application implements AppContext
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_INVALID)
                   ->setController($controllerName)
-                  ->setControllerClass(get_class($controller))
-                  ->setName('dispatch.error');
-            $results = $events->trigger($error);
+                  ->setControllerClass(get_class($controller));
+            $results = $events->trigger('dispatch.error', $error);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -309,7 +308,22 @@ class Application implements AppContext
         $request  = $e->getRequest();
         $response = $this->getResponse();
         $event    = clone $e;
-        $return   = $controller->dispatch($request, $response, $e);
+
+        try {
+            $return   = $controller->dispatch($request, $response, $e);
+        } catch (\Exception $ex) {
+            $error = clone $e;
+            $error->setError(static::ERROR_EXCEPTION)
+                  ->setController($controllerName)
+                  ->setControllerClass(get_class($controller))
+                  ->setParam('exception', $ex);
+            $results = $events->trigger('dispatch.error', $error);
+            if (count($results)) {
+                $return  = $results->last();
+            } else {
+                $return = $error->getParams();
+            }
+        }
 
         complete:
 

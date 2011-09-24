@@ -40,6 +40,7 @@ class ModuleAutoloader implements SplAutoloader
     public function setOptions($options)
     {
         $this->registerPaths($options);
+        return $this;
     }
 
     /**
@@ -67,15 +68,33 @@ class ModuleAutoloader implements SplAutoloader
             } 
             // No directory with Module.php, searching for phars
             $moduleName = substr($class, 0, strpos($class, '\\'));
-            $matches = glob($path . $moduleName . '.*phar*');
+
+            // Find executable phars
+            $matches = glob($path . $moduleName . '.{phar,phar.gz,phar.bz2,phar.tar,phar.tar.gz,phar.tar.bz2,phar.zip}', GLOB_BRACE);
+            $executable = true;
             if (count($matches) == 0) {
-                continue;
+                $matches = glob($path . $moduleName . '.{tar,tar.gz,tar.bz2,zip}', GLOB_BRACE);
+                $executable = false;
             }
             foreach ($matches as $phar) {
                 $file = new SplFileInfo($phar);
                 if ($file->isReadable() && $file->isFile()) {
-                    require_once $file->getRealPath();
-                    return $class;
+                    if ($executable) {
+                        // First see if the stub makes the Module class available
+                        require_once $file->getRealPath();
+                        if (class_exists($class)) {
+                            return $class;
+                        }
+                    }
+                    // No stub, or stub did not provide Module class; try Module.php directly
+                    $moduleClassFile = 'phar://' . $file->getRealPath() . '/Module.php';
+                    $file = new SplFileInfo($moduleClassFile);
+                    if ($file->isReadable() && $file->isFile()) {
+                        require_once $moduleClassFile;
+                        if (class_exists($class)) {
+                            return $class;
+                        }
+                    }
                 }
             }
         }
@@ -90,6 +109,16 @@ class ModuleAutoloader implements SplAutoloader
     public function register()
     {
         spl_autoload_register(array($this, 'autoload'));
+    }
+
+    /**
+     * Unregister the autoloader with spl_autoload registry
+     * 
+     * @return void
+     */
+    public function unregister()
+    {
+        $test = spl_autoload_unregister(array($this, 'autoload'));
     }
 
     /**
@@ -123,13 +152,25 @@ class ModuleAutoloader implements SplAutoloader
     public function registerPath($path)
     {
         if (!is_string($path)) {
-            throw new \Exception(sprintf(
+            throw new \InvalidArgumentException(sprintf(
                 'Invalid path provided; must be a string, received %s',
                 gettype($path)
             ));
         }
         $this->paths[] = static::normalizePath($path);
         return $this;
+    }
+
+    /**
+     * getPaths 
+     *
+     * This is primarily for unit testing, but could have other uses.
+     * 
+     * @return array
+     */
+    public function getPaths()
+    {
+        return $this->paths;
     }
 
     /**

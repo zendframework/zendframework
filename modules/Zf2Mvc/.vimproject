@@ -58,6 +58,7 @@ zf2-mvc=/home/matthew/git/zf2/modules/Zf2Mvc CD=. filter="*.php *.xml .htaccess 
     ActionControllerTest.php
     RestfulControllerTest.php
     TestAsset=TestAsset {
+     BadController.php
      RestfulTestController.php
      SampleController.php
     }

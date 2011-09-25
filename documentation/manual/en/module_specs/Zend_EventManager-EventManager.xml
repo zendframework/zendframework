@@ -32,9 +32,9 @@
         </itemizedlist>
 
         <para>
-            The basic architecture allows you to attach and detach handlers to named events, both on
+            The basic architecture allows you to attach and detach listeners to named events, both on
             a per-instance basis as well as statically; trigger events; and interrupt execution of
-            handlers.
+            listeners.
         </para>
     </section>
  
@@ -400,7 +400,7 @@ $foo->bar('baz', 'bat');
                     <methodsynopsis>
                         <methodname>attachAggregate</methodname>
                         <methodparam>
-                            <funcparams>string|HandlerAggregate $aggregate</funcparams>
+                            <funcparams>string|ListenerAggregate $aggregate</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
@@ -414,7 +414,7 @@ $foo->bar('baz', 'bat');
                     </para>
 
                     <para>
-                        The <classname>HandlerAggregate</classname> instance is returned.
+                        The <classname>ListenerAggregate</classname> instance is returned.
                     </para>
                 </listitem>
             </varlistentry>
@@ -424,14 +424,14 @@ $foo->bar('baz', 'bat');
                     <methodsynopsis>
                         <methodname>detach</methodname>
                         <methodparam>
-                            <funcparams>CallbackHandler $handler</funcparams>
+                            <funcparams>CallbackHandler $listener</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
  
                 <listitem>
                     <para>
-                        Scans all listeners, and detaches any that match <varname>$handler</varname>
+                        Scans all listeners, and detaches any that match <varname>$listener</varname>
                         so that they will no longer be triggered.
                     </para>
 
@@ -448,15 +448,15 @@ $foo->bar('baz', 'bat');
                     <methodsynopsis>
                         <methodname>detachAggregate</methodname>
                         <methodparam>
-                            <funcparams>HandlerAggregate $aggregate</funcparams>
+                            <funcparams>ListenerAggregate $aggregate</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
  
                 <listitem>
                     <para>
-                        Loops through all handlers of all events to identify handlers that are
-                        represented by the aggregate; for all matches, the handlers will be removed.
+                        Loops through all listeners of all events to identify listeners that are
+                        represented by the aggregate; for all matches, the listeners will be removed.
 
                     </para>
 
@@ -482,10 +482,10 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.event-manager.event-manager.methods.get-handlers">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.get-listeners">
                 <term>
                     <methodsynopsis>
-                        <methodname>getHandlers</methodname>
+                        <methodname>getListeners</methodname>
 
                         <methodparam>
                             <funcparams>string $event</funcparams>
@@ -501,10 +501,10 @@ $foo->bar('baz', 'bat');
                 </listitem>
             </varlistentry>
 
-            <varlistentry xml:id="zend.event-manager.event-manager.methods.clear-handlers">
+            <varlistentry xml:id="zend.event-manager.event-manager.methods.clear-listeners">
                 <term>
                     <methodsynopsis>
-                        <methodname>clearHandlers</methodname>
+                        <methodname>clearListeners</methodname>
 
                         <methodparam>
                             <funcparams>string $event</funcparams>
@@ -611,7 +611,7 @@ $v->inject(array(
             </para>
 
             <programlisting language="php"><![CDATA[
-$handler = function($e) {
+$listener = function($e) {
     // do some work
     
     // Stop propagation and return a response
@@ -721,16 +721,16 @@ class SomeValueObject
 ]]></programlisting>
 
             <para>
-                Now, let's create a <interfacename>HandlerAggregate</interfacename> that can handle
+                Now, let's create a <interfacename>ListenerAggregate</interfacename> that can handle
                 caching for us:
             </para>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\Cache,
     Zend\EventManager\EventCollection,
-    Zend\EventManager\HandlerAggregate;
+    Zend\EventManager\ListenerAggregate;
 
-class CacheListener implements HandlerAggregate
+class CacheListener implements ListenerAggregate
 {
     protected $cache;
 

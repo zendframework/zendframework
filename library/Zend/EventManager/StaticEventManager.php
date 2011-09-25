@@ -88,7 +88,7 @@ class StaticEventManager implements StaticEventCollection
     }
 
     /**
-     * Attach a handler to an event
+     * Attach a listener to an event
      *
      * Allows attaching a callback to an event offerred by one or more 
      * identifying components. As an example, the following connects to the 
@@ -113,10 +113,10 @@ class StaticEventManager implements StaticEventCollection
      * @param  string|array $id Identifier(s) for event emitting component(s)
      * @param  string $event 
      * @param  callback $callback PHP Callback
-     * @param  int $priority Priority at which handler should execute
+     * @param  int $priority Priority at which listener should execute
      * @return void
      */
-    public function attach($id, $event, $callback, $priority = 1000)
+    public function attach($id, $event, $callback, $priority = 1)
     {
         $ids = (array) $id;
         foreach ($ids as $id) {
@@ -128,18 +128,18 @@ class StaticEventManager implements StaticEventCollection
     }
 
     /**
-     * Detach a handler from an event offered by a given resource
+     * Detach a listener from an event offered by a given resource
      * 
      * @param  string|int $id
-     * @param  CallbackHandler $handler 
-     * @return bool Returns true if event and handler found, and unsubscribed; returns false if either event or handler not found
+     * @param  CallbackHandler $listener 
+     * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
      */
-    public function detach($id, CallbackHandler $handler)
+    public function detach($id, CallbackHandler $listener)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
-        return $this->identifiers[$id]->detach($handler);
+        return $this->identifiers[$id]->detach($listener);
     }
 
     /**
@@ -157,28 +157,28 @@ class StaticEventManager implements StaticEventCollection
     }
 
     /**
-     * Retrieve all handlers for a given identifier and event
+     * Retrieve all listeners for a given identifier and event
      * 
      * @param  string|int $id
      * @param  string|int $event 
      * @return false|\Zend\Stdlib\PriorityQueue
      */
-    public function getHandlers($id, $event)
+    public function getListeners($id, $event)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
         }
-        return $this->identifiers[$id]->getHandlers($event);
+        return $this->identifiers[$id]->getListeners($event);
     }
 
     /**
-     * Clear all handlers for a given identifier, optionally for a specific event
+     * Clear all listeners for a given identifier, optionally for a specific event
      * 
      * @param  string|int $id 
      * @param  null|string $event 
      * @return bool
      */
-    public function clearHandlers($id, $event = null)
+    public function clearListeners($id, $event = null)
     {
         if (!array_key_exists($id, $this->identifiers)) {
             return false;
@@ -189,6 +189,6 @@ class StaticEventManager implements StaticEventCollection
             return true;
         }
 
-        return $this->identifiers[$id]->clearHandlers($event);
+        return $this->identifiers[$id]->clearListeners($event);
     }
 }

@@ -83,7 +83,7 @@ class GlobalEventManager
     }
 
     /**
-     * Trigger handlers until return value of one causes a callback to evaluate 
+     * Trigger listeenrs until return value of one causes a callback to evaluate 
      * to true.
      * 
      * @param  string $event 
@@ -98,7 +98,7 @@ class GlobalEventManager
     }
 
     /**
-     * Attach a handler to an event
+     * Attach a listener to an event
      * 
      * @param  string $event 
      * @param  callback $callback 
@@ -111,14 +111,14 @@ class GlobalEventManager
     }
 
     /**
-     * Detach a callback from a handler
+     * Detach a callback from a listener
      * 
-     * @param  CallbackHandler $handler 
+     * @param  CallbackHandler $listener 
      * @return bool
      */
-    public static function detach(CallbackHandler $handler)
+    public static function detach(CallbackHandler $listener)
     {
-        return static::getEventCollection()->detach($handler);
+        return static::getEventCollection()->detach($listener);
     }
 
     /**
@@ -132,24 +132,24 @@ class GlobalEventManager
     }
 
     /**
-     * Retrieve all handlers for a given event
+     * Retrieve all listeners for a given event
      * 
      * @param  string $event 
      * @return PriorityQueue|array
      */
-    public static function getHandlers($event)
+    public static function getListeners($event)
     {
-        return static::getEventCollection()->getHandlers($event);
+        return static::getEventCollection()->getListeners($event);
     }
 
     /**
-     * Clear all handlers for a given event
+     * Clear all listeners for a given event
      * 
      * @param  string $event 
      * @return void
      */
-    public static function clearHandlers($event)
+    public static function clearListeners($event)
     {
-        return static::getEventCollection()->clearHandlers($event);
+        return static::getEventCollection()->clearListeners($event);
     }
 }

@@ -178,7 +178,6 @@ class Response
     {
         if ($this->isError()) {
             $response = array(
-                'result' => null,
                 'error'  => $this->getError()->toArray(),
                 'id'     => $this->getId(),
             );
@@ -186,7 +185,6 @@ class Response
             $response = array(
                 'result' => $this->getResult(),
                 'id'     => $this->getId(),
-                'error'  => null,
             );
         }
 

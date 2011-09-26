@@ -1,0 +1,7 @@
+GET /v1/test?enabled_only=1&format=json HTTP/1.1
+Host: cdn2.clouddrive.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+X-Auth-Token: 0f0223cd-f157-4d04-bb2d-ccda1a5643af
+

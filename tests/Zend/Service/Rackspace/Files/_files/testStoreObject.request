@@ -1,0 +1,14 @@
+PUT /v1/test/zf-unit-test/zf-object-test?format=json HTTP/1.1
+Host: storage101.ord1.clouddrive.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+Content-Type: application/json
+Content-Length: 15
+X-Object-Meta-foo: bar
+X-Object-Meta-foo2: bar2
+Etag: 702edca0b2181c15d457eacac39de39b
+Content-length: 15
+X-Auth-Token: 0f0223cd-f157-4d04-bb2d-ccda1a5643af
+
+This is a test!

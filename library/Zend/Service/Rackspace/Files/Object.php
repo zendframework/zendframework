@@ -21,8 +21,7 @@
 
 namespace Zend\Service\Rackspace\Files;
 
-use Zend\Service\Rackspace\Files as RackspaceFiles,
-        Zend\Service\Rackspace\Exception\InvalidArgumentException;;
+use Zend\Service\Rackspace\Files as RackspaceFiles;
 
 class Object
 {
@@ -67,25 +66,13 @@ class Object
      *
      * @var string
      */
-    protected $file;
+    protected $content;
     /**
      * Name of the container where the object is stored
      *
      * @var string
      */
     protected $container;
-    /**
-     * If it's true means we called the getMetadata API
-     *
-     * @var boolean
-     */
-    protected $getMetadata = false;
-    /**
-     * Metadata 
-     * 
-     * @var array 
-     */
-    protected $metadata= array();
     /**
      * Constructor
      * 
@@ -98,7 +85,7 @@ class Object
      * bytes= size in bytes of the object's content
      * content_type= content type of the object's content
      * last_modified= date of the last modified of the object
-     * file= content of the object
+     * content= content of the object
      * 
      * @param RackspaceFiles $service
      * @param array $data 
@@ -106,25 +93,25 @@ class Object
     public function __construct(RackspaceFiles $service,$data)
     {
         if (!($service instanceof RackspaceFiles) || !is_array($data)) {
-             throw new InvalidArgumentException("You must pass a RackspaceFiles and an array");
+             throw new Exception\InvalidArgumentException("You must pass a RackspaceFiles and an array");
         }
         if (!array_key_exists('name', $data)) {
-             throw new InvalidArgumentException("You must pass the name of the object in the array (name)");
+             throw new Exception\InvalidArgumentException("You must pass the name of the object in the array (name)");
         }
         if (!array_key_exists('container', $data)) {
-             throw new InvalidArgumentException("You must pass the container of the object in the array (container)");
+             throw new Exception\InvalidArgumentException("You must pass the container of the object in the array (container)");
         }
         if (!array_key_exists('hash', $data)) {
-             throw new InvalidArgumentException("You must pass the hash of the object in the array (hash)");
+             throw new Exception\InvalidArgumentException("You must pass the hash of the object in the array (hash)");
         }
         if (!array_key_exists('bytes', $data)) {
-             throw new InvalidArgumentException("You must pass the byte size of the object in the array (bytes)");
+             throw new Exception\InvalidArgumentException("You must pass the byte size of the object in the array (bytes)");
         }
         if (!array_key_exists('content_type', $data)) {
-             throw new InvalidArgumentException("You must pass the content type of the object in the array (content_type)");
+             throw new Exception\InvalidArgumentException("You must pass the content type of the object in the array (content_type)");
         }
         if (!array_key_exists('last_modified', $data)) {
-             throw new InvalidArgumentException("You must pass the last modified data of the object in the array (last_modified)");
+             throw new Exception\InvalidArgumentException("You must pass the last modified data of the object in the array (last_modified)");
         }
         $this->name= $data['name'];
         $this->container= $data['container'];
@@ -132,8 +119,8 @@ class Object
         $this->size= $data['bytes'];
         $this->contentType= $data['content_type'];
         $this->lastModified= $data['last_modified'];
-        if (!empty($data['file'])) {
-            $this->file= $data['file'];
+        if (!empty($data['content'])) {
+            $this->content= $data['content'];
         }
         $this->service= $service;
     }
@@ -158,16 +145,16 @@ class Object
     /**
      * Get the MD5 of the object's content
      *
-     * @return string
+     * @return string|boolean
      */
     public function getHash() 
     {
         return $this->hash;
     }
     /**
-     * Get the size of the object's content
+     * Get the size (in bytes) of the object's content
      *
-     * @return integer
+     * @return integer|boolean
      */
     public function getSize() 
     {
@@ -196,36 +183,29 @@ class Object
      *
      * @return string
      */
-    public function getFile() 
+    public function getContent() 
     {
-        return $this->file;
+        return $this->content;
     }
     /**
      * Get the metadata of the object
      * If you don't pass the $key it returns the entire array of metadata value
      *
      * @param string $key
-     * @return string|array
+     * @return string|array|boolean
      */
     public function getMetadata($key=null) 
     {
-        if (empty($this->metadata) && (!$this->getMetadata)) {
-            $result= $this->service->getMetadataObject($this->container,$this->name);
-            if (!empty($result)) {
-                $this->hash= $data['hash'];
-                $this->size= $data['bytes'];
-                $this->contentType= $data['content_type'];
-                $this->lastModified= $data['last_modified'];
-                if (!empty($result['metadata'])) {
-                    $this->metadata= $result['metadata'];
-                }
+        $result= $this->service->getMetadataObject($this->container,$this->name);
+        if (!empty($result)) {
+            if (empty($key)) {
+                return $result['metadata'];
             }
-            $this->getMetadata= true;
+            if (isset($result['metadata'][$key])) {
+                return $result['metadata'][$key];
+            }
         }
-        if (!empty($this->metadata[$key])) {
-            return $this->metadata[$key];
-        }
-        return $this->metadata;
+        return false;
     }
     /**
      * Set the metadata value

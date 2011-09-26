@@ -98,16 +98,8 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED')) {
-            self::markTestSkipped('Zend\Service\Rackspace\Servers online tests are not enabled');
-        }
-        if(!defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER') || !defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY')) {
-            self::markTestSkipped('Constants User and Key have to be set.');
-        }
-
-        $this->rackspace = new Servers(TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER,
-                                       TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY);
-
+        $this->rackspace= new Servers('foo','bar');
+        
         $this->httpClientAdapterTest = new HttpTest();
 
         $this->rackspace->getHttpClient()

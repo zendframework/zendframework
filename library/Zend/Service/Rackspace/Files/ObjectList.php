@@ -25,10 +25,7 @@
 namespace Zend\Service\Rackspace\Files;
 
 use Zend\Service\Rackspace\Files\Object,
-        Zend\Service\Rackspace\Files as RackspaceFiles,
-        Zend\Service\Rackspace\Exception,
-        Zend\Service\Rackspace\Exception\InvalidArgumentException,
-        Zend\Service\Rackspace\Exception\OutOfBoundsException;
+        Zend\Service\Rackspace\Files as RackspaceFiles;
 
 /**
  * List of servers retrived from the GoGrid web service
@@ -73,13 +70,13 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
     public function __construct(RackspaceFiles $service,$list,$container)
     {
         if (!($service instanceof RackspaceFiles)) {
-            throw new InvalidArgumentException("You must pass a RackspaceFiles object");
+            throw new Exception\InvalidArgumentException("You must pass a RackspaceFiles object");
         }
         if (empty($list)) {
-            throw new InvalidArgumentException("You must pass an array of data objects");
+            throw new Exception\InvalidArgumentException("You must pass an array of data objects");
         }
         if (empty($container)) {
-            throw new InvalidArgumentException("You must pass the container of the object list");
+            throw new Exception\InvalidArgumentException("You must pass the container of the object list");
         }
         $this->service= $service;
         $this->container= $container;
@@ -206,7 +203,7 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
         if ($this->offsetExists($offset)) {
             return $this->objects[$offset];
         } else {
-            throw new OutOfBoundsException('Illegal index');
+            throw new Exception\OutOfBoundsException('Illegal index');
         }
     }
 

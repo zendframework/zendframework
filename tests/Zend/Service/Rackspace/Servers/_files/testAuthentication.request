@@ -1,0 +1,8 @@
+GET /v1.0?format=json HTTP/1.1
+Host: auth.api.rackspacecloud.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+X-Auth-User: ezimuel
+X-Auth-Key: c322b5c41f6047c83dd51e6980562912
+

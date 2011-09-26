@@ -1,0 +1,11 @@
+HTTP/1.1 204 No Content
+Server: Apache-Coyote/1.1
+vary: Accept, Accept-Encoding, X-Auth-Token
+Cache-Control: no-cache
+Content-Length: 0
+Date: Mon, 26 Sep 2011 08:36:12 GMT
+X-Varnish: 1908642493
+Age: 0
+Via: 1.1 varnish
+Connection: close
+

@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Date: Fri, 23 Sep 2011 10:31:50 GMT
+Server: Apache
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: application/json
+
+1f0
+[{"cdn_streaming_uri": "http://c555003.r3.stream.cf2.rackcdn.com", "cdn_uri": "http://c555003.r3.cf2.rackcdn.com", "cdn_ssl_uri": "https://c555003.ssl.cf2.rackcdn.com", "cdn_enabled": true, "ttl": 86400, "log_retention": true, "name": "test"}, {"cdn_streaming_uri": "http://c754396.r96.stream.cf2.rackcdn.com", "cdn_uri": "http://c754396.r96.cf2.rackcdn.com", "cdn_ssl_uri": "https://c754396.ssl.cf2.rackcdn.com", "cdn_enabled": false, "ttl": 900, "log_retention": false, "name": "zf-unit-test"}]
+0
+

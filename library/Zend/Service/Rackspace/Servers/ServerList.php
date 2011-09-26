@@ -24,8 +24,7 @@
  */
 namespace Zend\Service\Rackspace\Servers;
 
-use Zend\Service\Rackspace\Exception,
-    Zend\Service\Rackspace\Servers as RackspaceServers;
+use Zend\Service\Rackspace\Servers as RackspaceServers;
 
 /**
  * List of servers of Rackspace
@@ -203,7 +202,7 @@ class ServerList implements \Countable, \Iterator, \ArrayAccess
         if ($this->offsetExists($offset)) {
             return $this->servers[$offset];
         } else {
-            throw new OutOfBoundsException('Illegal index');
+            throw new Exception\OutOfBoundsException('Illegal index');
         }
     }
 

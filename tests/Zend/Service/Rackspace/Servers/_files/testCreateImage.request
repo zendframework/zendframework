@@ -1,0 +1,10 @@
+POST /v1.0/583923/images?format=json HTTP/1.1
+Host: servers.api.rackspacecloud.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+Content-Type: application/json
+Content-Length: 56
+X-Auth-Token: ed355855-8bfa-4716-b613-c04b606cdd8c
+
+{"image":{"serverId":20247478,"name":"ZFunitTestImage"}}

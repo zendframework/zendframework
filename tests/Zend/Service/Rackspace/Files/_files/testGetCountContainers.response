@@ -1,0 +1,10 @@
+HTTP/1.1 204 No Content
+Date: Fri, 23 Sep 2011 10:31:19 GMT
+X-Account-Container-Count: 1
+Accept-Ranges: bytes
+X-Trans-Id: tx705290d7f73f4aaa821eba6b71251e43
+Connection: close
+X-Account-Object-Count: 0
+X-Account-Bytes-Used: 0
+Content-Length: 0
+

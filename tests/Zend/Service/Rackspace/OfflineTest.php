@@ -68,7 +68,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_files = new RackspaceFiles(TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER,TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY);
+        $this->_files = new RackspaceFiles('foo','bar');
         $this->_filesPath   = __DIR__ . '/_files';
         $this->_httpClientAdapterTest = new HttpTest();
     }
@@ -93,7 +93,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'Zend\Service\Rackspace\Exception\InvalidArgumentException',
             'The user cannot be empty'
         );
-        $file= new RackspaceFiles(null,TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY);
+        $file= new RackspaceFiles(null,'bar');
     }
     /**
      * Ensures that __construct() throws an exception when given an empty secret attribute
@@ -106,7 +106,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'Zend\Service\Rackspace\Exception\InvalidArgumentException',
             'The key cannot be empty'
         );
-        $file= new RackspaceFiles(TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER,null);
+        $file= new RackspaceFiles('foo',null);
     }
     /**
      * Test the default authentication URL

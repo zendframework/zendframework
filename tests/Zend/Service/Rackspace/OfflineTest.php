@@ -167,8 +167,8 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_files->authenticate(),'Authentication failed');
         $this->assertTrue($this->_files->isSuccessful(),'Authentication call failed');
         $this->assertEquals($this->_files->getToken(),'0f0223cd-f157-4d04-bb2d-ccda1a5643af','The token is not valid');
-        $this->assertEquals($this->_files->getStorageUrl(),'https://storage101.ord1.clouddrive.com/v1/MossoCloudFS_2abf18d2-f3f8-45fd-940e-a7b38a195023','The storage URL is not valid');
-        $this->assertEquals($this->_files->getCdnUrl(),'https://cdn2.clouddrive.com/v1/MossoCloudFS_2abf18d2-f3f8-45fd-940e-a7b38a195023','The CDN URL is not valid');
+        $this->assertEquals($this->_files->getStorageUrl(),'https://storage101.ord1.clouddrive.com/v1/test','The storage URL is not valid');
+        $this->assertEquals($this->_files->getCdnUrl(),'https://cdn2.clouddrive.com/v1/test','The CDN URL is not valid');
     }
     /**
      * Test the authentication error (401 Unauthorized - Bad username or password)

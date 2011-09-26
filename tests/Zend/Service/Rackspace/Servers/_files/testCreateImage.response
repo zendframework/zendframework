@@ -1,0 +1,14 @@
+HTTP/1.1 202 Accepted
+Server: Apache-Coyote/1.1
+vary: Accept, Accept-Encoding, X-Auth-Token
+Vary: Accept-Encoding
+Cache-Control: no-cache
+Content-Type: application/json
+Content-Length: 131
+Date: Mon, 26 Sep 2011 08:37:44 GMT
+X-Varnish: 1908652628
+Age: 0
+Via: 1.1 varnish
+Connection: close
+
+{"image":{"id":14253092,"status":"QUEUED","updated":"2011-09-26T03:37:43-05:00","name":"ZFunitTestImage","serverId":20247478}}

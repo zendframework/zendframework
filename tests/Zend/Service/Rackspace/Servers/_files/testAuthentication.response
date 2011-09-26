@@ -1,0 +1,14 @@
+HTTP/1.1 204 No Content
+Date: Mon, 26 Sep 2011 08:35:03 GMT
+Server: Apache/2.2.3 (Mosso Engineering)
+vary: X-Auth-Token,X-Auth-Key,X-Storage-User,X-Storage-Pass
+X-Auth-Token: ed355855-8bfa-4716-b613-c04b606cdd8c
+X-Server-Management-Url: https://servers.api.rackspacecloud.com/v1.0/583923
+X-Storage-Url: https://storage101.ord1.clouddrive.com/v1/MossoCloudFS_2abf18d2-f3f8-45fd-940e-a7b38a195041
+X-Storage-Token: ed355855-8bfa-4716-b613-c04b606cdd8c
+X-CDN-Management-Url: https://cdn2.clouddrive.com/v1/MossoCloudFS_2abf18d2-f3f8-45fd-940e-a7b38a195041
+Cache-Control: s-maxage=86399
+Content-Length: 0
+Connection: close
+Content-Type: text/xml
+

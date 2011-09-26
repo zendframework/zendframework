@@ -121,6 +121,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         // terms of use compliance: safe delay between each test
         sleep(2);
     }
+    
     /**
      * Wait n seconds for status change
      * 
@@ -133,7 +134,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $info['status']= null;
         $i=0;
         while ((strtoupper($info['status'])!==strtoupper($status)) && ($i<$timeout)) {
-            $info= self::$rackspace->getServerInfo(self::$serverId);
+            $info= self::$rackspace->getServer(self::$serverId)->toArray();
             $i+=5;
             sleep(5);
         }
@@ -153,6 +154,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthentication()
     {
+        $this->filename= __METHOD__;
         $this->assertTrue(self::$rackspace->authenticate());
     }
     /**
@@ -164,12 +166,6 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
             'name'     => TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME,
             'imageId'  => TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID,
             'flavorId' => TESTS_ZEND_SERVICE_RACKSPACE_SERVER_FLAVORID
-        );
-        $metadata = array(
-            'foo' => 'bar'
-        );
-        $files = array (
-            '/root/test' => realpath('_files/test.txt')
         );
         $server= self::$rackspace->createServer($data);
         $this->assertTrue($server!==false);
@@ -201,6 +197,12 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
     public function testChangeServerName()
     {
         $this->assertTrue(self::$rackspace->changeServerName(self::$serverId,TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME.'_renamed'));
+    }
+    /**
+     * Test rechange server name
+     */
+    public function testRechangeServerName()
+    {
         $this->assertTrue(self::$rackspace->changeServerName(self::$serverId,TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME));
     }
     /**
@@ -323,7 +325,7 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetImageInfo()
     {
-        $image= self::$rackspace->getImageInfo(self::$images[0]->getId());
+        $image= self::$rackspace->getImage(self::$images[0]->getId())->toArray();
         $this->assertTrue(is_array($image) && !empty($image));
         $this->assertEquals($image['id'],self::$images[0]->getId());
     }

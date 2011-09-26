@@ -45,68 +45,70 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      * @var Zend\Service\Rackspace\Servers
      */
     protected $rackspace;
+
     /**
      * Check if the resize was successfully done
      * 
      * @var boolean 
      */
     protected static $resize;
+
     /**
      * List of flavors available
      * 
      * @var array
      */
     protected static $flavors;
+
     /**
      * List of images available
      * 
      * @var Zend\Service\Rackspace\Servers\ImageList 
      */
     protected static $images;
+
     /**
      * Id of the image created
      * 
      * @var string
      */
     protected static $imageId;
+
     /**
      * Server id of testing
      * 
      * @var integer 
      */
     protected static $serverId;
+
     /**
      * Admin password of the server
      * 
      * @var string 
      */
     protected static $adminPass;
+
     /**
      * Shared Ip group
      * 
      * @var Zend\Service\Rackspace\Servers\SharedIpGroup
      */
     protected static $sharedIpGroup;
+
     /**
      * Socket based HTTP client adapter
      *
      * @var Zend\Http\Client\Adapter\Test
      */
     protected $httpClientAdapterTest;
+
     /**
-     * SetUpBerofeClass
+     * @todo are the dummy values for user and key okay?
      */
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED')) {
-            self::markTestSkipped('Zend\Service\Rackspace\Servers online tests are not enabled');
-        }
-        if(!defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER') || !defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY')) {
-            self::markTestSkipped('Constants User and Key have to be set.');
-        }
-
-        $this->rackspace = new Servers(TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER,
-                                       TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY);
+        $this->rackspace = new Servers('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER',
+                                       'TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY');
 
         $this->httpClientAdapterTest = new HttpTest();
 
@@ -121,6 +123,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->httpClientAdapterTest->setResponse($this->loadResponse($this->getName()));   
        
     }
+
     /**
      * Utility method for returning a string HTTP response, which is loaded from a file
      *
@@ -141,6 +144,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5,Servers::LIMIT_NUM_FILE);
         $this->assertEquals('json',Servers::API_FORMAT);
     }
+
     /**
      * Test create server
      */
@@ -158,6 +162,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME,$server->getName());
         $this->assertEquals(self::$serverId,20247478);
     }
+
     /**
      * Test Get Server
      */
@@ -167,6 +172,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($server!==false);
         $this->assertEquals(TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME,$server->getName());
     }
+
     /**
      * Test list servers
      */
@@ -175,6 +181,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $servers= $this->rackspace->listServers();
         $this->assertTrue($servers!==false);
     }
+
     /**
      * Test change server name
      */
@@ -182,6 +189,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->rackspace->changeServerName(self::$serverId,TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME.'_renamed'));
     }
+
     /**
      * Test rechange server name
      */
@@ -189,6 +197,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->rackspace->changeServerName(self::$serverId,TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME));
     }
+
     /**
      * Test change admin password
      */
@@ -197,6 +206,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         self::$adminPass= md5(time().rand());
         $this->assertTrue($this->rackspace->changeServerPassword(self::$serverId,self::$adminPass));
     }
+
     /**
      * Test get server IP
      */
@@ -206,6 +216,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(!empty($addresses['public']) && is_array($addresses['public']));
         $this->assertTrue(!empty($addresses['private']) && is_array($addresses['private']));
     }
+
     /**
      * Test get server public IP
      */
@@ -214,6 +225,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $public= $this->rackspace->getServerPublicIp(self::$serverId);
         $this->assertTrue(!empty($public) && is_array($public));
     }
+
     /**
      * Test get server private IP
      */
@@ -222,6 +234,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $private= $this->rackspace->getServerPrivateIp(self::$serverId);
         $this->assertTrue(!empty($private) && is_array($private));
     }
+
     /**
      * Test reboot the server
      */
@@ -229,6 +242,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->rackspace->rebootServer(self::$serverId));
     }
+
     /**
      * Test hard reboot the server
      */
@@ -236,6 +250,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->rackspace->rebootServer(self::$serverId,true));
     }
+
     /**
      * Test rebuild the server image
      */
@@ -243,6 +258,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->rackspace->rebuildServer(self::$serverId,TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NEW_IMAGEID));
     }
+
     /**
      * Test resize server
      */
@@ -250,6 +266,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
          $this->markTestSkipped('Resize server skipped');
     }
+
     /**
      * Test confirm resize server
      */
@@ -257,6 +274,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Confirm resize server skipped');
     }
+
     /**
      * Test revert resize server
      */
@@ -264,6 +282,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Revert resize server skipped');
     }
+
     /**
      * Test list flavors
      */
@@ -273,6 +292,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array(self::$flavors) && !empty(self::$flavors));
         $this->assertTrue(isset(self::$flavors[0]['id']));
     }
+
     /**
      * Test get flavor
      */
@@ -282,6 +302,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($flavor) && !empty($flavor));
         $this->assertEquals($flavor['id'],self::$flavors[0]['id']);
     }
+
     /**
      * Test list images
      */
@@ -293,6 +314,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $imageId= $image->getId();
         $this->assertTrue(!empty($imageId));
     }
+
     /**
      * Test get image
      */
@@ -302,6 +324,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $getImage= $this->rackspace->getImage($image->getId());
         $this->assertEquals($getImage->getId(),$image->getId());
     }
+
     /**
      * Test get image info
      */
@@ -311,6 +334,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($image) && !empty($image));
         $this->assertEquals($image['id'],self::$images[0]->getId());
     }
+
     /**
      * Test create image
      */
@@ -323,6 +347,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($image!==false);
         $this->assertEquals($image->getName(),TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGE_NAME);
     }
+
     /**
      * Test delete image
      */
@@ -334,6 +359,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Delete image skipped because the new image has not been created');
         }
     }
+
     /**
      * Test get backup schedule
      */
@@ -341,6 +367,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Get backup schedule skipped');
     }
+
     /**
      * Test change backup schedule
      */
@@ -348,6 +375,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Change backup schedule skipped');
     }
+
     /**
      * Test disable backup schedule
      */
@@ -355,6 +383,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestSkipped('Disable backup schedule skipped');
     }
+
     /**
      * Test create shared Ip group
      */
@@ -364,6 +393,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(self::$sharedIpGroup!==false);
         $this->assertEquals(self::$sharedIpGroup->getName(),TESTS_ZEND_SERVICE_RACKSPACE_SERVER_SHARED_IP_GROUP_NAME);
     }
+
     /**
      * Test list shared ip groups
      */
@@ -372,6 +402,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $groups= $this->rackspace->listSharedIpGroups(true);
         $this->assertTrue($groups!==false);
     }
+
     /**
      * Test get shared IP group 
      */
@@ -382,6 +413,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($group!==false);
         $this->assertEquals($group->getId(), $groupId);   
     }
+
     /**
      * Test delete shared ip group
      */
@@ -389,6 +421,7 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue($this->rackspace->deleteSharedIpGroup(self::$sharedIpGroup->getId())); 
     }
+
     /**
      * Test delete server
      */

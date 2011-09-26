@@ -1,4 +1,4 @@
-zf2-mvc=/home/matthew/git/zf2/modules/Zf2Mvc CD=. filter="*.php *.xml .htaccess *.json" {
+zf2-mvc=/home/matthew/git/zf2/modules/ZendMvc CD=. filter="*.php *.xml .htaccess *.json" {
  Module.php
  autoload_classmap.php
  autoload_function.php

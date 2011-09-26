@@ -1,6 +1,6 @@
 <?php
 
-namespace Zf2Mvc;
+namespace ZendMvc;
 
 use Zend\Loader\AutoLoaderFactory;
 

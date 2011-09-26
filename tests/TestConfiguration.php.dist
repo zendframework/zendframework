@@ -580,8 +580,9 @@ define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
  * Zend_service_GoGrid offline tests
  */
 
-define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY','Enter GoGrid key here');
-define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET','Enter GoGrid secret here');
+define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_ENABLED', false);
+define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_KEY','Enter key here');
+define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SECRET','Enter secret here');
 
 /**
  * Zend_Service_LiveDocx configuration
@@ -606,10 +607,12 @@ define('TESTS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL',     false);
  * Zend_Service_Rackspace tests
  */
 define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED', false);
-define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER', 'insertUserName');
-define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY', 'insertKey');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER', 'Enter key here');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY', 'Enter secret here');
 define ('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_REGION', 'USA');
-define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME', 'insertServerName');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_CONTAINER_NAME', 'zf-unit-test');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_OBJECT_NAME','zf-object-test');
+define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NAME', 'zf-unit-test');
 define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_IMAGEID', '49');
 define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_NEW_IMAGEID', '49');
 define ('TESTS_ZEND_SERVICE_RACKSPACE_SERVER_FLAVORID', '1');

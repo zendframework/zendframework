@@ -107,9 +107,8 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->rackspace = new Servers('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER',
-                                       'TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY');
-
+        $this->rackspace= new Servers('foo','bar');
+        
         $this->httpClientAdapterTest = new HttpTest();
 
         $this->rackspace->getHttpClient()

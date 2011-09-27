@@ -23,6 +23,7 @@
 */
 namespace Zend\Feed\Reader\Entry;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Exception;
 
 /**
 * @uses \Zend\Feed\Reader\Exception

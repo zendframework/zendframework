@@ -19,6 +19,11 @@ class TokenArrayScanner implements Scanner
     protected $tokens = array();
 
     /**
+     * @var null
+     */
+    protected $docComment = null;
+
+    /**
      * @var NameInformation
      */
     protected $nameInformation = null;
@@ -50,6 +55,11 @@ class TokenArrayScanner implements Scanner
         $this->reset();
     }
 
+    public function getDocComment()
+    {
+        return null;
+    }
+
     public function getNamespaces()
     {
         $this->scan();
@@ -67,13 +77,16 @@ class TokenArrayScanner implements Scanner
     {
         $this->scan();
 
-        $namespaces = array();
+        $uses = array();
         foreach ($this->infos as $info) {
-            if ($info['type'] == 'uses') {
-                $namespaces[] = $info['uses'];
+            if ($info['type'] == 'use') {
+                foreach ($info['statements'] as $statement) {
+                    $uses[] = $statement;
+                }
+
             }
         }
-        return $namespaces;
+        return $uses;
     }
     
     public function getIncludes()
@@ -197,8 +210,6 @@ class TokenArrayScanner implements Scanner
          * Variables & Setup
          */
 
-        static $MACROS = null;
-
         $tokens          = &$this->tokens; // localize
         $infos           = &$this->infos;  // localize
         $tokenIndex      = null;
@@ -214,80 +225,76 @@ class TokenArrayScanner implements Scanner
          * MACRO creation
          */
 
-        if ($MACROS === null) {
-            $MACROS = array(
-                'TOKEN_ADVANCE' => function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
-                    $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex+1;
-                    if (!isset($tokens[$tokenIndex])) {
-                        $token        = false;
-                        $tokenContent = false;
-                        $tokenType    = false;
-                        $tokenLine    = false;
-                        return;
-                    }
-                    $token = $tokens[$tokenIndex];
-                    if (is_string($token)) {
-                        $tokenType = null;
-                        $tokenContent = $token;
-                    } else {
-                        list($tokenType, $tokenContent, $tokenLine) = $token;
-                    }
-                    return $tokenIndex;
-                },
-                'TOKEN_LOGICAL_START_INDEX' => function() use (&$tokenIndex, &$docCommentIndex) {;
-                    return ($docCommentIndex === false) ? $tokenIndex : $docCommentIndex;
-                },
-                'DOC_COMMENT_START' => function() use (&$tokenIndex, &$docCommentIndex) {
-                    $docCommentIndex = $tokenIndex;
-                    return $docCommentIndex;
-                },
-                'DOC_COMMENT_VALIDATE' => function() use (&$tokenType, &$docCommentIndex) {
-                    static $validTrailingTokens = null;
-                    if ($validTrailingTokens === null) {
-                        $validTrailingTokens = array(T_WHITESPACE, T_FINAL, T_ABSTRACT, T_INTERFACE, T_CLASS, T_FUNCTION);
-                    }
-                    if ($docCommentIndex !== false && !in_array($tokenType, $validTrailingTokens)) {
-                        $docCommentIndex = false;
-                    }
-                    return $docCommentIndex;
-                },
-                'INFO_ADVANCE' => function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
-                    $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
-                    $infos[$infoIndex]['lineEnd'] = $tokenLine;
-                    $infoIndex++;
-                    return $infoIndex;
-                }
-            );
-        }
+        $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+            $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex+1;
+            if (!isset($tokens[$tokenIndex])) {
+                $token        = false;
+                $tokenContent = false;
+                $tokenType    = false;
+                $tokenLine    = false;
+                return false;
+            }
+            $token = $tokens[$tokenIndex];
+            if (is_string($token)) {
+                $tokenType = null;
+                $tokenContent = $token;
+            } else {
+                list($tokenType, $tokenContent, $tokenLine) = $token;
+            }
+            return $tokenIndex;
+        };
+        $MACRO_TOKEN_LOGICAL_START_INDEX = function() use (&$tokenIndex, &$docCommentIndex) {;
+            return ($docCommentIndex === false) ? $tokenIndex : $docCommentIndex;
+        };
+        $MACRO_DOC_COMMENT_START = function() use (&$tokenIndex, &$docCommentIndex) {
+            $docCommentIndex = $tokenIndex;
+            return $docCommentIndex;
+        };
+        $MACRO_DOC_COMMENT_VALIDATE = function() use (&$tokenType, &$docCommentIndex) {
+            static $validTrailingTokens = null;
+            if ($validTrailingTokens === null) {
+                $validTrailingTokens = array(T_WHITESPACE, T_FINAL, T_ABSTRACT, T_INTERFACE, T_CLASS, T_FUNCTION);
+            }
+            if ($docCommentIndex !== false && !in_array($tokenType, $validTrailingTokens)) {
+                $docCommentIndex = false;
+            }
+            return $docCommentIndex;
+        };
+        $MACRO_INFO_ADVANCE = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
+            $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
+            $infos[$infoIndex]['lineEnd'] = $tokenLine;
+            $infoIndex++;
+            return $infoIndex;
+        };
 
         /**
          * START FINITE STATE MACHINE FOR SCANNING TOKENS
          */
 
         // Initialize token
-        $MACROS['TOKEN_ADVANCE']();
+        $MACRO_TOKEN_ADVANCE();
 
-        TOKEN_SCANNER_TOP:
+        SCANNER_TOP:
 
             if ($token === false) {
-                goto TOKEN_SCANNER_END;
+                goto SCANNER_END;
             }
 
             // Validate current doc comment index
-            $MACROS['DOC_COMMENT_VALIDATE']();
+            $MACRO_DOC_COMMENT_VALIDATE();
 
             switch ($tokenType) {
 
                 case T_DOC_COMMENT:
 
-                    $MACROS['DOC_COMMENT_START']();
-                    goto TOKEN_SCANNER_CONTINUE;
+                    $MACRO_DOC_COMMENT_START();
+                    goto SCANNER_CONTINUE;
 
                 case T_NAMESPACE:
 
                     $infos[$infoIndex] = array(
                         'type'       => 'namespace',
-                        'tokenStart' => $MACROS['TOKEN_LOGICAL_START_INDEX'](),
+                        'tokenStart' => $MACRO_TOKEN_LOGICAL_START_INDEX(),
                         'tokenEnd'   => null,
                         'lineStart'  => $token[2],
                         'lineEnd'    => null,
@@ -295,16 +302,18 @@ class TokenArrayScanner implements Scanner
                     );
 
                     // start processing with next token
-                    $MACROS['TOKEN_ADVANCE']();
+                    if ($MACRO_TOKEN_ADVANCE() === false) {
+                        goto SCANNER_END;
+                    }
 
-                    TOKEN_SCANNER_NAMESPACE_TOP:
+                    SCANNER_NAMESPACE_TOP:
 
                         if ($tokenType === null && $tokenContent === ';') {
-                            goto TOKEN_SCANNER_NAMESPACE_END;
+                            goto SCANNER_NAMESPACE_END;
                         }
 
                         if ($tokenType === T_WHITESPACE) {
-                            goto TOKEN_SCANNER_NAMESPACE_CONTINUE;
+                            goto SCANNER_NAMESPACE_CONTINUE;
                         }
                         
                         if ($tokenType === T_NS_SEPARATOR || $tokenType === T_STRING) {
@@ -312,21 +321,23 @@ class TokenArrayScanner implements Scanner
                             $namespace = $infos[$infoIndex]['namespace'];
                         }
 
-                    TOKEN_SCANNER_NAMESPACE_CONTINUE:
+                    SCANNER_NAMESPACE_CONTINUE:
 
-                        $MACROS['TOKEN_ADVANCE']();
-                        goto TOKEN_SCANNER_NAMESPACE_TOP;
+                        if ($MACRO_TOKEN_ADVANCE() === false) {
+                            goto SCANNER_END;
+                        }
+                        goto SCANNER_NAMESPACE_TOP;
 
-                    TOKEN_SCANNER_NAMESPACE_END:
+                    SCANNER_NAMESPACE_END:
 
-                        $MACROS['INFO_ADVANCE']();
-                        goto TOKEN_SCANNER_CONTINUE;
+                        $MACRO_INFO_ADVANCE();
+                        goto SCANNER_CONTINUE;
 
                 case T_USE:
 
                     $infos[$infoIndex] = array(
                         'type'       => 'use',
-                        'tokenStart' => $MACROS['TOKEN_LOGICAL_START_INDEX'](),
+                        'tokenStart' => $MACRO_TOKEN_LOGICAL_START_INDEX(),
                         'tokenEnd'   => null,
                         'lineStart'  => $tokens[$tokenIndex][2],
                         'lineEnd'    => null,
@@ -337,13 +348,15 @@ class TokenArrayScanner implements Scanner
                     $useAsContext = false;
 
                     // start processing with next token
-                    $MACROS['TOKEN_ADVANCE']();
+                    if ($MACRO_TOKEN_ADVANCE() === false) {
+                        goto SCANNER_END;
+                    }
 
-                    TOKEN_SCANNER_USE_TOP:
+                    SCANNER_USE_TOP:
 
                         if ($tokenType === null) {
                             if ($tokenContent === ';') {
-                                goto TOKEN_SCANNER_USE_END;
+                                goto SCANNER_USE_END;
                             } elseif ($tokenContent === ',') {
                                 $useAsContext = false;
                                 $useStatementIndex++;
@@ -356,7 +369,7 @@ class TokenArrayScanner implements Scanner
 
                             if ($tokenType == T_AS) {
                                 $useAsContext = true;
-                                goto TOKEN_SCANNER_USE_CONTINUE;
+                                goto SCANNER_USE_CONTINUE;
                             }
 
                             if ($tokenType == T_NS_SEPARATOR || $tokenType == T_STRING) {
@@ -369,15 +382,17 @@ class TokenArrayScanner implements Scanner
 
                         }
 
-                    TOKEN_SCANNER_USE_CONTINUE:
+                    SCANNER_USE_CONTINUE:
 
-                        $MACROS['TOKEN_ADVANCE']();
-                        goto TOKEN_SCANNER_USE_TOP;
+                        if ($MACRO_TOKEN_ADVANCE() === false) {
+                            goto SCANNER_END;
+                        }
+                        goto SCANNER_USE_TOP;
 
-                    TOKEN_SCANNER_USE_END:
+                    SCANNER_USE_END:
 
-                        $MACROS['INFO_ADVANCE']();
-                        goto TOKEN_SCANNER_CONTINUE;
+                        $MACRO_INFO_ADVANCE();
+                        goto SCANNER_CONTINUE;
 
                 case T_INCLUDE:
                 case T_INCLUDE_ONCE:
@@ -394,7 +409,7 @@ class TokenArrayScanner implements Scanner
 
                     $infos[$infoIndex] = array(
                         'type'        => 'include',
-                        'tokenStart'  => $MACROS['TOKEN_LOGICAL_START_INDEX'](),
+                        'tokenStart'  => $MACRO_TOKEN_LOGICAL_START_INDEX(),
                         'tokenEnd'    => null,
                         'lineStart'   => $tokens[$tokenIndex][2],
                         'lineEnd'     => null,
@@ -403,25 +418,29 @@ class TokenArrayScanner implements Scanner
                     );
 
                     // start processing with next token
-                    $MACROS['TOKEN_ADVANCE']();
+                    if ($MACRO_TOKEN_ADVANCE() === false) {
+                        goto SCANNER_END;
+                    }
 
-                    TOKEN_SCANNER_INCLUDE_TOP:
+                    SCANNER_INCLUDE_TOP:
 
-                        if ($tokenType === null && $token === ';') {
-                            goto TOKEN_SCANNER_INCLUDE_END;
+                        if ($tokenType === null && $tokenContent === ';') {
+                            goto SCANNER_INCLUDE_END;
                         }
 
                         $infos[$infoIndex]['path'] .= $tokenContent;
 
-                    TOKEN_SCANNER_INCLUDE_CONTINUE:
+                    SCANNER_INCLUDE_CONTINUE:
 
-                        $MACROS['TOKEN_ADVANCE']();
-                        goto TOKEN_SCANNER_INCLUDE_TOP;
+                        if ($MACRO_TOKEN_ADVANCE() === false) {
+                            goto SCANNER_END;
+                        }
+                        goto SCANNER_INCLUDE_TOP;
 
-                    TOKEN_SCANNER_INCLUDE_END:
+                    SCANNER_INCLUDE_END:
 
-                        $MACROS['INFO_ADVANCE']();
-                        goto TOKEN_SCANNER_CONTINUE;
+                        $MACRO_INFO_ADVANCE();
+                        goto SCANNER_CONTINUE;
 
                 case T_FUNCTION:
                 case T_FINAL:
@@ -431,7 +450,7 @@ class TokenArrayScanner implements Scanner
 
                     $infos[$infoIndex] = array(
                         'type'        => ($tokenType === T_FUNCTION) ? 'function' : 'class',
-                        'tokenStart'  => $MACROS['TOKEN_LOGICAL_START_INDEX'](),
+                        'tokenStart'  => $MACRO_TOKEN_LOGICAL_START_INDEX(),
                         'tokenEnd'    => null,
                         'lineStart'   => $tokens[$tokenIndex][2],
                         'lineEnd'     => null,
@@ -444,21 +463,19 @@ class TokenArrayScanner implements Scanner
 
                     // start processing with current token
 
-                    TOKEN_SCANNER_CLASS_TOP:
+                    SCANNER_CLASS_TOP:
 
                         if ($tokenType === null && $tokenContent == '}' && $classBraceCount == 1) {
-                            goto TOKEN_SCANNER_CLASS_END;
+                            goto SCANNER_CLASS_END;
                         }
 
                         // process the name
-                        if ($tokenType === T_CLASS || $tokenType === T_INTERFACE ||
-                            ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function')
+                        if (($tokenType === T_CLASS || $tokenType === T_INTERFACE) && $infos[$infoIndex]['type'] === 'class'
+                            || ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function')
                         ) {
                             $infos[$infoIndex]['shortName'] = $tokens[$tokenIndex+2][1];
                             $infos[$infoIndex]['name'] = (($namespace) ? $namespace . '\\' : '') . $infos[$infoIndex]['shortName'];
                         }
-
-
 
                         if ($tokenType === null) {
                             if ($tokenContent == '{') {
@@ -469,24 +486,28 @@ class TokenArrayScanner implements Scanner
                             }
                         }
 
-                    TOKEN_SCANNER_CLASS_CONTINUE:
+                    SCANNER_CLASS_CONTINUE:
 
-                        $MACROS['TOKEN_ADVANCE']();
-                        goto TOKEN_SCANNER_CLASS_TOP;
+                        if ($MACRO_TOKEN_ADVANCE() === false) {
+                            goto SCANNER_END;
+                        }
+                        goto SCANNER_CLASS_TOP;
 
-                    TOKEN_SCANNER_CLASS_END:
+                    SCANNER_CLASS_END:
 
-                        $MACROS['INFO_ADVANCE']();
-                        goto TOKEN_SCANNER_CONTINUE;
+                        $MACRO_INFO_ADVANCE();
+                        goto SCANNER_CONTINUE;
 
             }
 
-        TOKEN_SCANNER_CONTINUE:
+        SCANNER_CONTINUE:
 
-            $MACROS['TOKEN_ADVANCE']();
-            goto TOKEN_SCANNER_TOP;
+            if ($MACRO_TOKEN_ADVANCE() === false) {
+                goto SCANNER_END;
+            }
+            goto SCANNER_TOP;
 
-        TOKEN_SCANNER_END:
+        SCANNER_END:
 
         /**
          * END FINITE STATE MACHINE FOR SCANNING TOKENS

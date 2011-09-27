@@ -60,86 +60,52 @@ class ParameterScanner
         if ($this->isScanned) {
             return;
         }
-        
-        $tokenIndex = 0;
-        $token = $this->tokens[$tokenIndex];
-        
-        if ($token[0] !== T_VARIABLE) {
-            while (true) {
-                if ($token[0] == T_WHITESPACE) {
-                    break;
+
+        $tokens = &$this->tokens;
+
+        reset($tokens);
+
+        SCANNER_TOP:
+
+            $token = current($tokens);
+
+            if (is_string($token)) {
+                // check pass by ref
+                if ($token === '&') {
+                    $this->isPassedByReference = true;
+                    goto SCANNER_CONTINUE;
                 }
-                $this->class .= $token[1];
-                $token = $this->tokens[++$tokenIndex];
+                if ($token === '=') {
+                    $this->isOptional = true;
+                    $this->isDefaultValueAvailable = true;
+                    goto SCANNER_CONTINUE;
+                }
+            } else {
+                if ($this->name === null && ($token[0] === T_STRING || $token[0] === T_NS_SEPARATOR)) {
+                    $this->class .= $token[1];
+                    goto SCANNER_CONTINUE;
+                }
+                if ($token[0] === T_VARIABLE) {
+                    $this->name = ltrim($token[1], '$');
+                    goto SCANNER_CONTINUE;
+                }
+
             }
-        }
-        
-        if (strtolower($this->class) == 'array') {
-            $this->isArray = true;
-            $this->class = null;
-        } elseif ($this->class !== null) {
-            if ($this->nameInformation) {
-                $this->class = $this->nameInformation->resolveName($this->class);
+
+            if ($this->name !== null) {
+                $this->defaultValue .= (is_string($token)) ? $token : $token[1];
             }
-        }
-        
-        if ($token[0] == T_WHITESPACE) {
-            $token = $this->tokens[++$tokenIndex];
-        }
-        
-        if (is_string($token) && $token == '&') {
-            $this->isPassedByReference = true;
-            $token = $this->tokens[++$tokenIndex];
-        }
-        
-        // next token is sure a T_VARIABLE
-        $this->name = ltrim($token[1], '$');
-        $token = (isset($this->tokens[++$tokenIndex])) 
-               ? $this->tokens[$tokenIndex] 
-               : null;
-        
-        if (!$token) {
-            $this->isScanned = true;
-            return;
-        }
-        
-        // move past whitespace if it exist
-        if ($token[0] == T_WHITESPACE) {
-            $token = (isset($this->tokens[++$tokenIndex])) 
-                   ? $this->tokens[$tokenIndex] 
-                   : null;
-        }
-        
-        if (!$token) {
-            $this->isScanned = true;
-            return;
-        }
-        
-        if (!(is_string($token) && $token == '=')) {
-            $this->isScanned = true;
-            return;
-        }
-        
-        // get past =
-        $token = $this->tokens[++$tokenIndex];
-        
-        // move past whitespace if it exist
-        if ($token[0] == T_WHITESPACE) {
-            $token = (isset($this->tokens[++$tokenIndex])) 
-                   ? $this->tokens[$tokenIndex] 
-                   : null;
-        }
-        
-        $this->isOptional              = true;
-        $this->isDefaultValueAvailable = true;
-        
-        do {
-            $this->defaultValue .= ((is_array($token)) ? $token[1] : $token);
-            $token = (isset($this->tokens[++$tokenIndex])) 
-                   ? $this->tokens[$tokenIndex] 
-                   : false;
-        } while ($token);
-        
+
+
+        SCANNER_CONTINUE:
+
+            if (next($this->tokens) === false) {
+                goto SCANNER_END;
+            }
+            goto SCANNER_TOP;
+
+        SCANNER_END:
+
         $this->isScanned = true;
     }
 	/**

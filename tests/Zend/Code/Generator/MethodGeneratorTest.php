@@ -26,7 +26,7 @@ namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\MethodGenerator,
     Zend\Code\Generator\ParameterGenerator,
     Zend\Code\Generator\ValueGenerator,
-    Zend\Code\Reflection\ReflectionMethod;
+    Zend\Code\Reflection\MethodReflection;
 
 /**
  * @category   Zend
@@ -77,7 +77,7 @@ class PhpMethodTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodFromReflection()
     {
-        $ref = new ReflectionMethod('ZendTest\Code\Generator\TestAsset\TestSampleSingleClass', 'someMethod');
+        $ref = new MethodReflection('ZendTest\Code\Generator\TestAsset\TestSampleSingleClass', 'someMethod');
 
         $methodGenerator = MethodGenerator::fromReflection($ref);
         $target = <<<EOS

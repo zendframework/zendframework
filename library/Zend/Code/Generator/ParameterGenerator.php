@@ -24,7 +24,7 @@
  */
 namespace Zend\Code\Generator;
 
-use Zend\Code\Reflection\ReflectionParameter;
+use Zend\Code\Reflection\ParameterReflection;
 
 /**
  *
@@ -73,7 +73,7 @@ class ParameterGenerator extends AbstractGenerator
      * @param ReflectionParameter $reflectionParameter
      * @return ParameterGenerator
      */
-    public static function fromReflection(ReflectionParameter $reflectionParameter)
+    public static function fromReflection(ParameterReflection $reflectionParameter)
     {
         $param = new ParameterGenerator();
         $param->setName($reflectionParameter->getName());

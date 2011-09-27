@@ -82,8 +82,8 @@ class ReflectionDocblockTag implements Reflection
     /**
      * Constructor
      *
-     * @param  string $tagDocblockLine
-     * @return void
+     * @param string $tagDocblockLine
+     * @return ReflectionDocblockTag
      */
     public function __construct($tagDocblockLine)
     {

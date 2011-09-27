@@ -24,7 +24,7 @@
  */
 namespace Zend\Code\Generator;
 
-use Zend\Code\Reflection\ReflectionClass;
+use Zend\Code\Reflection\ClassReflection;
 
 /**
  * @uses       \Zend\Code\Generator\AbstractPhp
@@ -92,34 +92,34 @@ class ClassGenerator extends AbstractGenerator
     /**
      * fromReflection() - build a Code Generation Php Object from a Class Reflection
      *
-     * @param ReflectionClass $reflectionClass
+     * @param ReflectionClass $classReflection
      * @return ClassGenerator
      */
-    public static function fromReflection(ReflectionClass $reflectionClass)
+    public static function fromReflection(ClassReflection $classReflection)
     {
         // class generator
-        $cg = new static($reflectionClass->getName());
+        $cg = new static($classReflection->getName());
 
         $cg->setSourceContent($cg->getSourceContent());
         $cg->setSourceDirty(false);
 
-        if ($reflectionClass->getDocComment() != '') {
-            $cg->setDocblock(DocblockGenerator::fromReflection($reflectionClass->getDocblock()));
+        if ($classReflection->getDocComment() != '') {
+            $cg->setDocblock(DocblockGenerator::fromReflection($classReflection->getDocblock()));
         }
 
-        $cg->setAbstract($reflectionClass->isAbstract());
+        $cg->setAbstract($classReflection->isAbstract());
 
         // set the namespace
-        if ($reflectionClass->inNamespace()) {
-            $cg->setNamespaceName($reflectionClass->getNamespaceName());
+        if ($classReflection->inNamespace()) {
+            $cg->setNamespaceName($classReflection->getNamespaceName());
         }
 
         /* @var $parentClass \Zend\Code\Reflection\ReflectionClass */
-        if ($parentClass = $reflectionClass->getParentClass()) {
+        if ($parentClass = $classReflection->getParentClass()) {
             $cg->setExtendedClass($parentClass->getName());
-            $interfaces = array_diff($reflectionClass->getInterfaces(), $parentClass->getInterfaces());
+            $interfaces = array_diff($classReflection->getInterfaces(), $parentClass->getInterfaces());
         } else {
-            $interfaces = $reflectionClass->getInterfaces();
+            $interfaces = $classReflection->getInterfaces();
         }
 
         $interfaceNames = array();
@@ -131,8 +131,8 @@ class ClassGenerator extends AbstractGenerator
         $cg->setImplementedInterfaces($interfaceNames);
 
         $properties = array();
-        foreach ($reflectionClass->getProperties() as $reflectionProperty) {
-            /* @var $reflectionProperty \Zend\Code\Reflection\ReflectionProperty */
+        foreach ($classReflection->getProperties() as $reflectionProperty) {
+            /* @var $reflectionProperty \PropertyReflection\Code\Reflection\ReflectionProperty */
             if ($reflectionProperty->getDeclaringClass()->getName() == $cg->getName()) {
                 $properties[] = PropertyGenerator::fromReflection($reflectionProperty);
             }
@@ -140,8 +140,8 @@ class ClassGenerator extends AbstractGenerator
         $cg->setProperties($properties);
 
         $methods = array();
-        foreach ($reflectionClass->getMethods() as $reflectionMethod) {
-            /* @var $reflectionMethod \Zend\Code\Reflection\ReflectionMethod */
+        foreach ($classReflection->getMethods() as $reflectionMethod) {
+            /* @var $reflectionMethod \MethodReflection\Code\Reflection\ReflectionMethod */
             if ($reflectionMethod->getDeclaringClass()->getName() == $cg->getName()) {
                 $methods[] = MethodGenerator::fromReflection($reflectionMethod);
             }
@@ -212,10 +212,11 @@ class ClassGenerator extends AbstractGenerator
         return $cg;
     }
 
-    public function __construct($name, $namespaceName = null, $flags = null, $extends = null, $interfaces = array(), $properties = array(), $methods = array(), $docblock = null)
+    public function __construct($name = null, $namespaceName = null, $flags = null, $extends = null, $interfaces = array(), $properties = array(), $methods = array(), $docblock = null)
     {
-        $this->setName($name);
-
+        if ($name !== null) {
+            $this->setName($name);
+        }
         if ($namespaceName !== null) {
             $this->setNamespaceName($namespaceName);
         }

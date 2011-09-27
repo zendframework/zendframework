@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Code\Reflection;
-use Zend\Code\Reflection;
+use Zend\Code\Reflection\MethodReflection;
 
 /**
  * @category   Zend
@@ -34,28 +34,28 @@ use Zend\Code\Reflection;
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Method
  */
-class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
+class MethodReflectionTest extends \PHPUnit_Framework_TestCase
 {
    public function testDeclaringClassReturn()
     {
-        $method = new Reflection\ReflectionMethod('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp1');
-        $this->assertEquals(get_class($method->getDeclaringClass()), 'Zend\Code\Reflection\ReflectionClass');
+        $method = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp1');
+        $this->assertInstanceOf('Zend\Code\Reflection\ClassReflection', $method->getDeclaringClass());
     }
 
     public function testParemeterReturn()
     {
-        $method = new Reflection\ReflectionMethod('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp2');
+        $method = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass2', 'getProp2');
         $parameters = $method->getParameters();
-        $this->assertEquals(count($parameters), 2);
-        $this->assertEquals(get_class(array_shift($parameters)), 'Zend\Code\Reflection\ReflectionParameter');
+        $this->assertEquals(2, count($parameters));
+        $this->assertInstanceOf('Zend\Code\Reflection\ParameterReflection', array_shift($parameters));
     }
 
     public function testStartLine()
     {
-        $reflectionMethod = new Reflection\ReflectionMethod('ZendTest\Code\Reflection\TestAsset\TestSampleClass5', 'doSomething');
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5', 'doSomething');
 
-        $this->assertEquals($reflectionMethod->getStartLine(), 35);
-        $this->assertEquals($reflectionMethod->getStartLine(true), 19);
+        $this->assertEquals(35, $reflectionMethod->getStartLine());
+        $this->assertEquals(19, $reflectionMethod->getStartLine(true));
     }
 
     public function testGetBodyReturnsCorrectBody()
@@ -64,13 +64,13 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
         $assigned = 1;
         $alsoAssigined = 2;
         return \'mixedValue\';';
-        $reflectionMethod = new Reflection\ReflectionMethod('ZendTest\Code\Reflection\TestAsset\TestSampleClass6', 'doSomething');
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass6', 'doSomething');
         $this->assertEquals($body, $reflectionMethod->getBody());
     }
 
     public function testGetContentsReturnsCorrectContent()
     {
-        $reflectionMethod = new Reflection\ReflectionMethod('ZendTest\Code\Reflection\TestAsset\TestSampleClass5', 'doSomething');
+        $reflectionMethod = new MethodReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5', 'doSomething');
         $this->assertEquals("    {\n\n        return 'mixedValue';\n\n    }\n", $reflectionMethod->getContents(false));
     }
 

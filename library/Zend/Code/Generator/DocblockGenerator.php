@@ -24,7 +24,7 @@
  */
 namespace Zend\Code\Generator;
 
-use Zend\Code\Reflection\ReflectionDocblock;
+use Zend\Code\Reflection\DocBlockReflection;
 
 /**
  * @uses       \Zend\Code\Generator\AbstractPhp
@@ -63,7 +63,7 @@ class DocblockGenerator extends AbstractGenerator
      * @param ReflectionDocblock $reflectionDocblock
      * @return DocblockGenerator
      */
-    public static function fromReflection(ReflectionDocblock $reflectionDocblock)
+    public static function fromReflection(DocBlockReflection $reflectionDocblock)
     {
         $docblock = new self();
 

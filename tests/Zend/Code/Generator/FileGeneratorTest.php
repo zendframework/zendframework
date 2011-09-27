@@ -24,7 +24,7 @@
  */
 namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\FileGenerator,
-    Zend\Code\Reflection\ReflectionFile;
+    Zend\Code\Reflection\FileReflection;
 
 /**
  * @category   Zend
@@ -105,7 +105,7 @@ EOS;
 
         require_once $tempFile;
 
-        $fileGenerator = FileGenerator::fromReflection(new ReflectionFile($tempFile));
+        $fileGenerator = FileGenerator::fromReflection(new FileReflection($tempFile));
 
         unlink($tempFile);
 
@@ -114,13 +114,13 @@ EOS;
 
     }
 
-    public function testFromReflectionFile()
+    public function testFromFileReflection()
     {
         //$this->markTestSkipped('Must support namespaces');
         $file = __DIR__ . '/TestAsset/TestSampleSingleClass.php';
         require_once $file;
 
-        $codeGenFileFromDisk = FileGenerator::fromReflection(new ReflectionFile($file));
+        $codeGenFileFromDisk = FileGenerator::fromReflection(new FileReflection($file));
 
         $codeGenFileFromDisk->getClass()->setMethod(array('name' => 'foobar'));
 

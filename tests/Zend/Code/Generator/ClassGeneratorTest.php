@@ -27,7 +27,7 @@ namespace ZendTest\Code\Generator;
 use Zend\Code\Generator\ClassGenerator,
     Zend\Code\Generator\PropertyGenerator,
     Zend\Code\Generator\MethodGenerator,
-    Zend\Code\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection;
 
 /**
  * @category   Zend
@@ -94,10 +94,10 @@ class ClassGeneratorTest extends \PHPUnit_Framework_TestCase
 
         $properties = $classGenerator->getProperties();
         $this->assertEquals(count($properties), 2);
-        $this->isInstanceOf(current($properties), 'Zend_CodeGenerator_Php_Property');
+        $this->assertInstanceOf('PropertyGenerator', current($properties));
 
         $property = $classGenerator->getProperty('propTwo');
-        $this->isInstanceOf($property, 'Zend_CodeGenerator_Php_Property');
+        $this->assertInstanceOf('PropertyGenerator', $property);
         $this->assertEquals($property->getName(), 'propTwo');
 
         // add a new property
@@ -249,7 +249,7 @@ EOS;
      */
     public function testClassFromReflectionThatImplementsInterfaces()
     {
-        $reflClass = new ReflectionClass('ZendTest\Code\Generator\TestAsset\ClassWithInterface');
+        $reflClass = new ClassReflection('ZendTest\Code\Generator\TestAsset\ClassWithInterface');
 
         $classGenerator = ClassGenerator::fromReflection($reflClass);
         $classGenerator->setSourceDirty(true);
@@ -267,7 +267,7 @@ EOS;
      */
     public function testClassFromReflectionDiscardParentImplementedInterfaces()
     {
-        $reflClass = new ReflectionClass('\ZendTest\Code\Generator\TestAsset\NewClassWithInterface');
+        $reflClass = new ClassReflection('\ZendTest\Code\Generator\TestAsset\NewClassWithInterface');
 
         $classGenerator = ClassGenerator::fromReflection($reflClass);
         $classGenerator->setSourceDirty(true);
@@ -325,7 +325,7 @@ CODE;
      */
     public function testCodeGenerationShouldTakeIntoAccountNamespacesFromReflection()
     {
-        $reflClass = new ReflectionClass('ZendTest\Code\Generator\TestAsset\ClassWithNamespace');
+        $reflClass = new ClassReflection('ZendTest\Code\Generator\TestAsset\ClassWithNamespace');
         $classGenerator = ClassGenerator::fromReflection($reflClass);
         $this->assertEquals('ZendTest\Code\Generator\TestAsset', $classGenerator->getNamespaceName());
         $this->assertEquals('ClassWithNamespace', $classGenerator->getName());

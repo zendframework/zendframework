@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace ZendTest\Code\Reflection;
-use Zend\Code\Reflection;
+use Zend\Code\Reflection\FunctionReflection;
 
 /**
  * @category   Zend
@@ -34,20 +34,20 @@ use Zend\Code\Reflection;
  * @group      Zend_Reflection
  * @group      Zend_Reflection_Function
  */
-class ReflectionFunctionTest extends \PHPUnit_Framework_TestCase
+class FunctionReflectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testParemeterReturn()
     {
-        $function = new Reflection\ReflectionFunction('array_splice');
+        $function = new FunctionReflection('array_splice');
         $parameters = $function->getParameters();
         $this->assertEquals(count($parameters), 4);
-        $this->assertEquals(get_class(array_shift($parameters)), 'Zend\Code\Reflection\ReflectionParameter');
+        $this->assertInstanceOf('Zend\Code\Reflection\ParameterReflection', array_shift($parameters));
     }
 
     public function testFunctionDocblockReturn()
     {
         require_once __DIR__ . '/TestAsset/functions.php';
-        $function = new Reflection\ReflectionFunction('ZendTest\Code\Reflection\TestAsset\function6');
-        $this->assertEquals(get_class($function->getDocblock()), 'Zend\Code\Reflection\ReflectionDocblock');
+        $function = new FunctionReflection('ZendTest\Code\Reflection\TestAsset\function6');
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlockReflection', $function->getDocblock());
     }
 }

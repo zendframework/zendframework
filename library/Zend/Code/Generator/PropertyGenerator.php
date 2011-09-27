@@ -24,7 +24,7 @@
  */
 namespace Zend\Code\Generator;
 
-use Zend\Code\Reflection\ReflectionProperty;
+use Zend\Code\Reflection\PropertyReflection;
 
 /**
  * @uses       \Zend\Code\Generator\Exception
@@ -56,7 +56,7 @@ class PropertyGenerator extends AbstractMemberGenerator
      * @param ReflectionProperty $reflectionProperty
      * @return PropertyGenerator
      */
-    public static function fromReflection(ReflectionProperty $reflectionProperty)
+    public static function fromReflection(PropertyReflection $reflectionProperty)
     {
         $property = new self();
 

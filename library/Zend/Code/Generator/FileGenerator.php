@@ -23,7 +23,7 @@
  * @namespace
  */
 namespace Zend\Code\Generator;
-use Zend\Code\Reflection\ReflectionFile;
+use Zend\Code\Reflection\FileReflection;
 
 /**
  * @uses       \Zend\Code\Generator\AbstractPhp
@@ -85,7 +85,7 @@ class FileGenerator extends AbstractGenerator
         $realpath = realpath($filePath);
 
         if ($realpath === false) {
-            if ( ($realpath = ReflectionFile::findRealpathInIncludePath($filePath)) === false) {
+            if ( ($realpath = FileReflection::findRealpathInIncludePath($filePath)) === false) {
                 throw new Exception\InvalidArgumentException('No file for ' . $realpath . ' was found.');
             }
         }
@@ -94,7 +94,7 @@ class FileGenerator extends AbstractGenerator
             include $realpath;
         }
 
-        $codeGenerator = self::fromReflection(($fileReflector = new ReflectionFile($realpath)));
+        $codeGenerator = self::fromReflection(($fileReflector = new FileReflection($realpath)));
 
         return $codeGenerator;
     }
@@ -102,19 +102,19 @@ class FileGenerator extends AbstractGenerator
     /**
      * fromReflection()
      *
-     * @param ReflectionFile $reflectionFile
+     * @param FileReflection $fileReflection
      * @return FileGenerator
      */
-    public static function fromReflection(ReflectionFile $reflectionFile)
+    public static function fromReflection(FileReflection $fileReflection)
     {
         $file = new self();
 
-        $file->setSourceContent($reflectionFile->getContents());
+        $file->setSourceContent($fileReflection->getContents());
         $file->setSourceDirty(false);
 
-        $body = $reflectionFile->getContents();
+        $body = $fileReflection->getContents();
 
-        foreach ($reflectionFile->getClasses() as $class) {
+        foreach ($fileReflection->getClasses() as $class) {
             /* @var $class \Zend\Code\Reflection\ReflectionClass */
             $phpClass = ClassGenerator::fromReflection($class);
             $phpClass->setContainingFileGenerator($file);
@@ -142,19 +142,19 @@ class FileGenerator extends AbstractGenerator
             unset($bodyLines, $bodyReturn, $classStartLine, $classEndLine);
         }
 
-        $namespace = $reflectionFile->getNamespace();
+        $namespace = $fileReflection->getNamespace();
         if ($namespace != '') {
-            $file->setNamespace($reflectionFile->getNamespace());
+            $file->setNamespace($fileReflection->getNamespace());
         }
 
-        $uses = $reflectionFile->getUses();
+        $uses = $fileReflection->getUses();
         if ($uses) {
             $file->setUses($uses);
         }
 
-        if (($reflectionFile->getDocComment() != '')) {
-            /* @var $docblock \Zend\Code\Reflection\ReflectionDocblock */
-            $docblock = $reflectionFile->getDocblock();
+        if (($fileReflection->getDocComment() != '')) {
+            /* @var $docblock \DocBlockReflection\Code\Reflection\ReflectionDocblock */
+            $docblock = $fileReflection->getDocblock();
             $file->setDocblock(DocblockGenerator::fromReflection($docblock));
 
             $bodyLines = explode("\n", $body);

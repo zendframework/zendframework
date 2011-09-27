@@ -175,7 +175,7 @@ class ParameterGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     protected function getFirstReflectionParameter($method)
     {
-        $reflectionClass = new \Zend\Code\Reflection\ReflectionClass('ZendTest\Code\Generator\TestAsset\ParameterClass');
+        $reflectionClass = new \Zend\Code\Reflection\ClassReflection('ZendTest\Code\Generator\TestAsset\ParameterClass');
         $method = $reflectionClass->getMethod($method);
 
         $params = $method->getParameters();

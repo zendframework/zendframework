@@ -24,7 +24,7 @@
  */
 namespace Zend\Code\Generator;
 
-use Zend\Code\Reflection\ReflectionMethod;
+use Zend\Code\Reflection\MethodReflection;
 
 /**
  * @uses       \Zend\Code\GeneratorDocblock
@@ -64,7 +64,7 @@ class MethodGenerator extends AbstractMemberGenerator
      * @param \Zend\Reflection\ReflectionMethod $reflectionMethod
      * @return \MethodGenerator\Code\Generator\PhpMethod
      */
-    public static function fromReflection(ReflectionMethod $reflectionMethod)
+    public static function fromReflection(MethodReflection $reflectionMethod)
     {
         $method = new self();
 

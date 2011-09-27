@@ -35,21 +35,17 @@ use ReflectionProperty as PhpReflectionProperty,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReflectionProperty extends PhpReflectionProperty implements Reflection
+class PropertyReflection extends PhpReflectionProperty implements Reflection
 {
     /**
      * Get declaring class reflection object
      *
-     * @param string $reflectionClass
-     * @return ReflectionClass
+     * @return ClassReflection
      */
-    public function getDeclaringClass($reflectionClass = 'Zend\Code\Reflection\ReflectionClass')
+    public function getDeclaringClass()
     {
         $phpReflection  = parent::getDeclaringClass();
-        $zendReflection = new $reflectionClass($phpReflection->getName());
-        if (!$zendReflection instanceof ReflectionClass) {
-            throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Code\Reflection\ReflectionClass');
-        }
+        $zendReflection = new ClassReflection($phpReflection->getName());
         unset($phpReflection);
         return $zendReflection;
     }
@@ -57,20 +53,22 @@ class ReflectionProperty extends PhpReflectionProperty implements Reflection
     /**
      * Get docblock comment
      *
-     * @param  string $reflectionClass
-     * @return Zend_Reflection_Docblock|false False if no docblock defined
+     * @return string|false False if no docblock defined
      */
-    public function getDocComment($reflectionClass = 'Zend\Code\Reflection\ReflectionDocblock')
+    public function getDocComment()
     {
-        $docblock = parent::getDocComment();
-        if (!$docblock) {
+        return parent::getDocComment();
+    }
+
+    /**
+     * @return false|DocBlockReflection
+     */
+    public function getDocBlock()
+    {
+        if (!($docComment = $this->getDocComment())) {
             return false;
         }
-
-        $r = new $reflectionClass($docblock);
-        if (!$r instanceof ReflectionDocblock) {
-            throw new Exception\InvalidArgumentException('Invalid reflection class provided; must extend Zend\Code\Reflection\ReflectionDocblock');
-        }
+        $r = new DocBlockReflection($docComment);
         return $r;
     }
 

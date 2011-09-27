@@ -24,8 +24,7 @@
 namespace Zend\Feed\Reader;
 
 use Zend\Http,
-    Zend\Loader,
-    Zend\Http\Headers;
+    Zend\Loader;
 
 /**
 * @category Zend
@@ -212,7 +211,7 @@ class Reader
         $responseXml = '';
         $client      = self::getHttpClient();
         $client->resetParameters();
-        $headers = new Headers();
+        $headers = new Http\Headers();
         $client->setHeaders($headers);
         $client->setUri($uri);
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);

@@ -24,7 +24,8 @@
 namespace Zend\Feed\Reader;
 
 use Zend\Http,
-    Zend\Loader;
+    Zend\Loader,
+    Zend\Http\Headers;
 
 /**
 * @category Zend
@@ -211,8 +212,8 @@ class Reader
         $responseXml = '';
         $client      = self::getHttpClient();
         $client->resetParameters();
-        $client->setHeaders('If-None-Match', null);
-        $client->setHeaders('If-Modified-Since', null);
+        $headers = new Headers();
+        $client->setHeaders($headers);
         $client->setUri($uri);
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);
 
@@ -226,17 +227,17 @@ class Reader
                     $lastModified = $cache->load($cacheId.'_lastmodified');;
                 }
                 if ($etag) {
-                    $client->setHeaders('If-None-Match', $etag);
+                    $headers->addHeaderLine('If-None-Match', $etag);
                 }
                 if ($lastModified) {
-                    $client->setHeaders('If-Modified-Since', $lastModified);
+                    $headers->addHeaderLine('If-Modified-Since', $lastModified);
                 }
             }
-            $response = $client->request('GET');
-            if ($response->getStatus() !== 200 && $response->getStatus() !== 304) {
-                throw new Exception('Feed failed to load, got response code ' . $response->getStatus());
+            $response = $client->send();
+            if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
+                throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
             }
-            if ($response->getStatus() == 304) {
+            if ($response->getStatusCode() == 304) {
                 $responseXml = $data;
             } else {
                 $responseXml = $response->getBody();
@@ -254,17 +255,17 @@ class Reader
             if ($data !== false) {
                 return self::importString($data);
             }
-            $response = $client->request('GET');
-            if ($response->getStatus() !== 200) {
-                throw new Exception('Feed failed to load, got response code ' . $response->getStatus());
+            $response = $client->send();
+            if ((int)$response->getStatusCode() !== 200) {
+                throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $responseXml = $response->getBody();
             $cache->save($responseXml, $cacheId);
             return self::importString($responseXml);
         } else {
-            $response = $client->request('GET');
-            if ($response->getStatus() !== 200) {
-                throw new Exception('Feed failed to load, got response code ' . $response->getStatus());
+            $response = $client->send();
+            if ((int)$response->getStatusCode() !== 200) {
+                throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $reader = self::importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
@@ -335,9 +336,9 @@ class Reader
     {
         $client = self::getHttpClient();
         $client->setUri($uri);
-        $response = $client->request();
-        if ($response->getStatus() !== 200) {
-            throw new Exception("Failed to access $uri, got response code " . $response->getStatus());
+        $response = $client->send();
+        if ($response->getStatusCode() !== 200) {
+            throw new Exception("Failed to access $uri, got response code " . $response->getStatusCode());
         }
         $responseHtml = $response->getBody();
         $libxml_errflag = libxml_use_internal_errors(true);

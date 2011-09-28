@@ -1,0 +1,6 @@
+GET /api/grid/server/power?format=json&api_key=1234567890&sig=92764b9722fc64a2622edf0a7c361479&v=1.8&server=test-zf&power=start HTTP/1.1
+Host: api.gogrid.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+

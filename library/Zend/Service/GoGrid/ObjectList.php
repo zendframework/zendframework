@@ -255,9 +255,14 @@ class ObjectList implements \Countable, \Iterator, \ArrayAccess
      * 
      * @return boolen
      */
-    public function isSuccessful() {
+    public function isSuccess() {
         return ($this->_error===false);
     }
+    /**
+     * Get the error masg
+     * 
+     * @return string 
+     */
     public function getError() {
         return $this->_errorMsg;
     }

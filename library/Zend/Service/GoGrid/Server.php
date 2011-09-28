@@ -22,33 +22,35 @@
 namespace Zend\Service\GoGrid;
 
 use Zend\Service\GoGrid\GoGrid as GoGridAbstract,
-        Zend\Service\GoGrid\Object as GoGridObject,
-        Zend\Service\GoGrid\ObjectList as GoGridObjectList;
+    Zend\Service\GoGrid\Object as GoGridObject,
+    Zend\Service\GoGrid\ObjectList as GoGridObjectList;
 
 class Server extends GoGridAbstract
 {
-    const API_GRID_SERVER_LIST = 'grid/server/list';
-    const API_GRID_SERVER_GET = 'grid/server/get';
-    const API_GRID_SERVER_ADD = 'grid/server/add';
-    const API_GRID_SERVER_EDIT = 'grid/server/edit';
+    const API_GRID_SERVER_LIST   = 'grid/server/list';
+    const API_GRID_SERVER_GET    = 'grid/server/get';
+    const API_GRID_SERVER_ADD    = 'grid/server/add';
+    const API_GRID_SERVER_EDIT   = 'grid/server/edit';
     const API_GRID_SERVER_DELETE = 'grid/server/delete';
-    const API_GRID_SERVER_POWER = 'grid/server/power';
-    const API_POWER_START= 'start';
-    const API_POWER_STOP= 'stop';
-    const API_POWER_RESTART= 'restart';
+    const API_GRID_SERVER_POWER  = 'grid/server/power';
+    const API_POWER_START        = 'start';
+    const API_POWER_STOP         = 'stop';
+    const API_POWER_RESTART      = 'restart';
     /**
-     * Get server list API
+     * Get Server List
+     * 
      * This call will list all the servers in the system.
      *
      * @param array $options
      * @return Zend\Service\GoGrid\ObjectList
      */
     public function getList($options=array()) {
-        $result= parent::_call(self::API_GRID_SERVER_LIST, $options);
+        $result = parent::_call(self::API_GRID_SERVER_LIST, $options);
         return new GoGridObjectList($result);
     }
     /**
-     * Get server API
+     * Get Server
+     * 
      * This call will retrieve one or many server objects from your list of servers
      *
      * @param string|array $server
@@ -65,7 +67,8 @@ class Server extends GoGridAbstract
         return new GoGridObjectList($result);
     }
     /**
-     * Add server API
+     * Add Server
+     * 
      * This call will add a single server object to your grid.
      * To create an image sandbox pass the optional isSandbox parameter to true.
      * If isSandbox is set to true, the request parameter server.ram is ignored and non-mandatory.
@@ -99,7 +102,8 @@ class Server extends GoGridAbstract
         return new GoGridObjectList($result);
     }
     /**
-     * Edit server API
+     * Edit Server
+     * 
      * This call will edit a single server object in your grid.
      * You can use this call to edit a server's:
      * RAM (Upgrade RAM)
@@ -119,7 +123,8 @@ class Server extends GoGridAbstract
         return new GoGridObjectList($result);
     }
     /**
-     * Power server API
+     * Power Server
+     * 
      * This call will issue a power command to a server object in your grid.
      * Supported power commands are: start, stop, and restart
      *
@@ -167,5 +172,20 @@ class Server extends GoGridAbstract
      */
     public function restart($server) {
        return $this->power($server,self::API_POWER_RESTART);
+    }
+    /**
+     * Delete a server
+     * 
+     * @param string $server 
+     * @return GoGridObjectList
+     */
+    public function delete($server) {
+        if (empty($server)) {
+            throw new Exception\InvalidArgumentException("The server.delete API needs an id/name server parameter");
+        }
+        $options=array();
+        $options['server']= $server;
+        $result= $this->_call(self::API_GRID_SERVER_DELETE, $options);
+        return new GoGridObjectList($result);
     }
 }

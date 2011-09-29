@@ -223,6 +223,6 @@ class HTTPClient32874 extends \Zend\Http\Client
 {
     public function getRawData()
     {
-        return $this->getRequest()->getRawBody();
+        return $this->getRequest()->getContent();
     }
 }

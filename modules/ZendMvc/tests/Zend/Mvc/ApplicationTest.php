@@ -413,8 +413,7 @@ class ApplicationTest extends TestCase
         $app->events()->attach('finish', function($e) {
             return $e->getResponse()->setContent($e->getResponse()->getBody() . 'foobar');
         });
-        $response = $app->run();
-        $this->assertNotNull(strstr($response->getResponse()->getBody(), 'foobar'));
+        $this->assertContains('foobar', $app->run()->getResponse()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
     }
 
     public function testCanProvideAlternateEventManagerToDisableDefaultRouteAndDispatchEventListeners()

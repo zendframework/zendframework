@@ -1,9 +1,9 @@
-ZF2 Module Manager Prototype
-============================
+ZF2 Module Manager
+==================
 
 Description
 -----------
-This is a prototype of how a module loader and manager for ZF2 might work.
+This is a module loader and manager for ZF2.
 
 Currently Implemented
 ---------------------
@@ -53,8 +53,8 @@ Currently Implemented
     behaviors.
 
 
-Stuff that still needs figured out:
------------------------------------
+Stuff that still needs work:
+----------------------------
 
 * How to expire the merged config cache in production and/or development.
 * Ability for modules to cleanly "share" resources? For example, you have 5 module which all use a database connection (or maybe two: master for writes, slave for reads).

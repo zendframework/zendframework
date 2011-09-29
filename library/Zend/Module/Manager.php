@@ -97,6 +97,69 @@ class Manager
         return $this->loadedModules[$moduleName];
     }
 
+    /**
+     * Loop through loaded modules and verify that all dependencies are met 
+     *
+     * @TODO: 
+     *  - This could probably be much more efficient (do not check satisfied 
+     *  deps again, etc)
+     *  - Do more isset() checking on the dep arrays
+     * 
+     * @return array An array of unsatisfied, optional dependencies
+     */
+    public function resolveDependencies()
+    {
+        foreach ($this->getLoadedModules() as $moduleName => $module) {
+            if (!is_callable(array($module, 'getDependencies'))) {
+                continue;
+            }
+            $unsatisfiedDeps = array();
+            foreach ($module->getDependencies() as $dep => $depInfo) {
+                preg_match('/(<|lt|<=|le|>|gt|>=|ge|==|=|eq|!=|<>|ne)?(\d.*)/',$depInfo['version'], $matches, PREG_OFFSET_CAPTURE);
+                if ($dep === 'php') {
+                    if (!version_compare(PHP_VERSION, $matches[2][0], $matches[1][0] ?: '>=')) {
+                        if ($depInfo['required'] == true) {
+                            throw new \RuntimeException("Required dependency unsatisfied: {$dep} {$depInfo['version']}");
+                        } else {
+                            $unsatifiedDeps[$moduleName][$dep] = $depInfo;
+                        }
+                    }
+                } elseif (substr($dep, 0, 4) === 'ext/') {
+                    $extName = substr($dep, 4);
+                    if (!version_compare(phpversion($extName), $matches[2][0], $matches[1][0] ?: '>=')) {
+                        if ($depInfo['required'] == true) {
+                            throw new \RuntimeException("Required dependency unsatisfied: {$dep} {$depInfo['version']}");
+                        } else {
+                            $unsatifiedDeps[$moduleName][$dep] = $depInfo;
+                        }
+                    }
+                } else {
+                    $satisfied = false;
+                    foreach ($this->getLoadedModules() as $depModuleName => $depModule) {
+                        if (!is_callable(array($depModule, 'getProvides'))) {
+                            continue;
+                        }
+                        $provides = $depModule->getProvides();
+                        if ($provides['name'] !== $dep) {
+                            continue;
+                        }
+                        if (version_compare($provides['version'], $matches[2][0], $matches[1][0] ?: '>=')) {
+                            $satisfied = true;
+                            break;
+                        }
+                    }
+                    if (!$satisfied) {
+                        if ($depInfo['required'] == true) {
+                            throw new \RuntimeException("Required dependency unsatisfied: {$dep} {$depInfo['version']}");
+                        } else {
+                            $unsatifiedDeps[$moduleName][$dep] = $depInfo;
+                        }
+                    }
+                }
+            }
+        }
+        return $unsatisfiedDeps;
+    }
 
     /**
      * Set the event manager instance used by this context

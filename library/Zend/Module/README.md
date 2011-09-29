@@ -11,7 +11,7 @@ Currently Implemented
 * **Phar support:** 
   Modules can be packaged, distributed, installed, and ran as phar archives. 
   Supports both executable and non-executable archives; with and without a stub.
-  Module class must be made available by either Module.php in the root of the
+  `Module` class must be made available by either Module.php in the root of the
   phar or in the stub if it is an executable phar. Below is a list of phar 
   archive/compression formats that are supported and their respective extensions, 
   as detected by the module loader:
@@ -39,14 +39,14 @@ Currently Implemented
     configuration as an array via `var_export()`. Subsequent requests will bypass
     the entire configuration loading/merging process, nearly eliminating any
     configuration-induced overhead.
-* **Module init()**
+* **Module init():**
     The module manager calls on the `init()` method on the `Module` class of
     each enabled module, passing itself as the only parameter. This gives
     modules a chance to register their own autoloaders or perform any other
     initial setup required. **Warning:** The `init()` method is called for every
     enabled module for every single request. The work it performs should be kept
     to an absolute minimum (such as registering a simple classmap autoloader).
-* **100% unit test coverage**
+* **100% unit test coverage:**
     Much effort has been put into extensive unit testing of the module loader
     and manager. In addition to covering every line of code, further effort was
     made to test other use-cases such as nested/sub-modules and various other 

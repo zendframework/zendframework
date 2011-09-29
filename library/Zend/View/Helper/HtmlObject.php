@@ -35,6 +35,19 @@ namespace Zend\View\Helper;
 class HtmlObject extends HtmlElement
 {
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Output an object set
      *
      * @param string $data The data file
@@ -44,7 +57,7 @@ class HtmlObject extends HtmlElement
      * @param string $content Alternative content for object
      * @return string
      */
-    public function direct($data = null, $type = null, array $attribs = array(), array $params = array(), $content = null)
+    public function __invoke($data = null, $type = null, array $attribs = array(), array $params = array(), $content = null)
     {
         if ($data == null || $type == null) {
             throw new \InvalidArgumentException('HTMLObject: missing argument. $data and $type are required in htmlObject($data, $type, array $attribs = array(), array $params = array(), $content = null)');

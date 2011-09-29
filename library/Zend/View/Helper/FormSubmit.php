@@ -37,6 +37,19 @@ namespace Zend\View\Helper;
 class FormSubmit extends FormElement
 {
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Generates a 'submit' button.
      *
      * @access public
@@ -51,7 +64,7 @@ class FormSubmit extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = null, $value = null, $attribs = null)
+    public function __invoke($name = null, $value = null, $attribs = null)
     {
         if ($name == null) {
             throw new \InvalidArgumentException('FormSubmit: missing argument. $name is required in formSubmit($name, $value = null, $attribs = null)');

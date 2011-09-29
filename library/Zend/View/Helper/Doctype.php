@@ -105,12 +105,25 @@ class Doctype extends AbstractHelper
     }
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Set or retrieve doctype
      *
      * @param  string $doctype
      * @return \Zend\View\Helper\Doctype
      */
-    public function direct($doctype = null)
+    public function __invoke($doctype = null)
     {
         if (null !== $doctype) {
             switch ($doctype) {

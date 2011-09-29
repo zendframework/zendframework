@@ -62,6 +62,19 @@ class PaginationControl extends AbstractHelper
     }
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Render the provided pages.  This checks if $view->paginator is set and,
      * if so, uses that.  Also, if no scrolling style or partial are specified,
      * the defaults will be used (if set).
@@ -73,7 +86,7 @@ class PaginationControl extends AbstractHelper
      * @return string
      * @throws \Zend\View\Exception
      */
-    public function direct(Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
+    public function __invoke(Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
     {
         if ($paginator === null) {
             if (isset($this->view->paginator) and $this->view->paginator !== null and $this->view->paginator instanceof Paginator\Paginator) {

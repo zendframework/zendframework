@@ -64,13 +64,26 @@ class Cycle extends AbstractHelper implements \Iterator
     protected $_name = self::DEFAULT_NAME;
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Add elements to alternate
      *
      * @param array $data
      * @param string $name
      * @return \Zend\View\Helper\Cycle
      */
-    public function direct(array $data = array(), $name = self::DEFAULT_NAME)
+    public function __invoke(array $data = array(), $name = self::DEFAULT_NAME)
     {
         if(!empty($data))
            $this->_data[$name] = $data;

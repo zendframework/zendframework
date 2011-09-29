@@ -37,6 +37,19 @@ namespace Zend\View\Helper;
 class FormPassword extends FormElement
 {
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Generates a 'password' element.
      *
      * @access public
@@ -51,7 +64,7 @@ class FormPassword extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = null, $value = null, $attribs = null)
+    public function __invoke($name = null, $value = null, $attribs = null)
     {
         if ($name == null) {
             throw new \InvalidArgumentException('FormPassword: missing argument. $name is required in formPassword($name, $value = null, $attribs = null)');

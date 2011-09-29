@@ -39,6 +39,19 @@ use Zend\Controller\Front as FrontController;
 class Url extends AbstractHelper
 {
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Generates an url given the name of a route.
      *
      * @access public
@@ -48,7 +61,7 @@ class Url extends AbstractHelper
      * @param  bool $reset Whether or not to reset the route defaults with those provided
      * @return string Url for the link href attribute.
      */
-    public function direct(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function __invoke(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
     {
         $router = FrontController::getInstance()->getRouter();
         return $router->assemble($urlOptions, $name, $reset, $encode);

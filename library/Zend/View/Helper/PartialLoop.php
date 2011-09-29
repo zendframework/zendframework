@@ -45,6 +45,19 @@ class PartialLoop extends Partial
     protected $partialCounter = 0;
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Renders a template fragment within a variable scope distinct from the
      * calling View object.
      *
@@ -58,7 +71,7 @@ class PartialLoop extends Partial
      * @param  array $model Variables to populate in the view
      * @return string
      */
-    public function direct($name = null, $module = null, $model = null)
+    public function __invoke($name = null, $module = null, $model = null)
     {
         if (0 == func_num_args()) {
             return $this;

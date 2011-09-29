@@ -36,6 +36,19 @@ namespace Zend\View\Helper;
 class Fieldset extends FormElement
 {
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Render HTML form
      *
      * @param  string $name Form name
@@ -43,7 +56,7 @@ class Fieldset extends FormElement
      * @param  array $attribs HTML form attributes
      * @return string
      */
-    public function direct($name = null, $content = null, $attribs = null)
+    public function __invoke($name = null, $content = null, $attribs = null)
     {
         $info = $this->_getInfo($name, $content, $attribs);
         $escape = $id = null;

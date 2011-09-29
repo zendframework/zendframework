@@ -112,6 +112,19 @@ class Links extends AbstractHelper
     protected $_root;
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
@@ -120,7 +133,7 @@ class Links extends AbstractHelper
      * @return \Zend\View\Helper\Navigation\Links     fluent interface, returns
      *                                               self
      */
-    public function direct(Navigation\Container $container = null)
+    public function __invoke(Navigation\Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);

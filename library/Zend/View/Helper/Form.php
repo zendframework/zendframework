@@ -36,6 +36,19 @@ namespace Zend\View\Helper;
 class Form extends FormElement
 {
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Render HTML form
      *
      * @param  string $name Form name
@@ -43,7 +56,7 @@ class Form extends FormElement
      * @param  false|string $content Form content
      * @return string
      */
-    public function direct($name = null, $attribs = null, $content = false)
+    public function __invoke($name = null, $attribs = null, $content = false)
     {
         $info = $this->_getInfo($name, $content, $attribs);
         $id = null;

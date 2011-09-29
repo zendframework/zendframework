@@ -55,10 +55,10 @@ class EventManager implements EventCollection
     protected $eventClass = 'Zend\EventManager\Event';
 
     /**
-     * Identifier, used to pull static signals from StaticEventManager
-     * @var null|string
+     * Identifiers, used to pull static signals from StaticEventManager
+     * @var array
      */
-    protected $identifier;
+    protected $identifiers = array();
 
     /**
      * Static connections
@@ -69,15 +69,15 @@ class EventManager implements EventCollection
     /**
      * Constructor
      *
-     * Allows optionally specifying an identifier to use to pull signals from a
+     * Allows optionally specifying identifier(s) to use to pull signals from a
      * StaticEventManager.
      *
-     * @param  null|string|int $identifier
+     * @param  null|string|int|array $identifiers
      * @return void
      */
-    public function __construct($identifier = null)
+    public function __construct($identifiers = null)
     {
-        $this->identifier = $identifier;
+        $this->setIdentifiers($identifiers);
     }
 
     /**
@@ -119,6 +119,48 @@ class EventManager implements EventCollection
             $this->setStaticConnections(StaticEventManager::getInstance());
         }
         return $this->staticConnections;
+    }
+
+    /**
+     * Get the identifier(s) for this EventManager 
+     * 
+     * @return null|string|int|array
+     */
+    public function getIdentifiers()
+    {
+        return $this->identifiers;
+    }
+
+    /**
+     * Set the identifiers (overrides any currently set identifiers) 
+     * 
+     * @param string|int|array $identifiers 
+     * @return ModuleManager
+     */
+    public function setIdentifiers($identifiers)
+    {
+        if (is_array($identifiers)) {
+            $this->identifiers = array_unique($identifiers);
+        } elseif ($identifiers !== null) {
+            $this->identifiers = array($identifiers);
+        }
+        return $this;
+    }
+
+    /**
+     * Add some identifier(s) (appends to any currently set identifiers) 
+     * 
+     * @param string|int|array $identifiers 
+     * @return ModuleManager
+     */
+    public function addIdentifiers($identifiers)
+    {
+        if (is_array($identifiers)) {
+            $this->identifiers = array_unique($this->identifiers + $identifiers);
+        } elseif ($identifiers !== null) {
+            $this->identifiers = array_unique($this->identifiers + array($identifiers));
+        }
+        return $this;
     }
 
     /**
@@ -405,7 +447,7 @@ class EventManager implements EventCollection
             return array();
         }
 
-        $identifiers     = (array) $this->identifier;
+        $identifiers     = $this->getIdentifiers();
         $staticListeners = array();
 
         foreach ($identifiers as $id) {

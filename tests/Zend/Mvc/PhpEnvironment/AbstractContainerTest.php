@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Mvc\PhpEnvironment;
+namespace ZendTest\Mvc\PhpEnvironment;
 
 use PHPUnit_Framework_TestCase as TestCase;
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace Zend\Mvc\PhpEnvironment;
+namespace ZendTest\Mvc\PhpEnvironment;
+
+use Zend\Mvc\PhpEnvironment\PostContainer;
 
 class PostContainerTest extends AbstractContainerTest
 {

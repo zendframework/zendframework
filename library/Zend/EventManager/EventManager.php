@@ -124,7 +124,7 @@ class EventManager implements EventCollection
     /**
      * Get the identifier(s) for this EventManager 
      * 
-     * @return null|string|int|array
+     * @return array
      */
     public function getIdentifiers()
     {

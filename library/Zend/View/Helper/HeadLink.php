@@ -65,6 +65,19 @@ class HeadLink extends Placeholder\Container\Standalone
     }
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * headLink() - View Helper Method
      *
      * Returns current object instance. Optionally, allows passing array of
@@ -72,7 +85,7 @@ class HeadLink extends Placeholder\Container\Standalone
      *
      * @return \Zend\View\Helper\HeadLink
      */
-    public function direct(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
+    public function __invoke(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
         if (null !== $attributes) {
             $item = $this->createData($attributes);

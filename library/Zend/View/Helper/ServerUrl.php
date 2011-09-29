@@ -79,6 +79,19 @@ class ServerUrl extends AbstractHelper
     }
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * View helper entry point:
      * Returns the current host's URL like http://site.com
      *
@@ -89,7 +102,7 @@ class ServerUrl extends AbstractHelper
      *                                     is to not append any path.
      * @return string                      server url
      */
-    public function direct($requestUri = null)
+    public function __invoke($requestUri = null)
     {
         if ($requestUri === true) {
             $path = $_SERVER['REQUEST_URI'];

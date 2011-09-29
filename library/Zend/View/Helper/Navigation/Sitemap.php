@@ -94,6 +94,19 @@ class Sitemap extends AbstractHelper
     protected $_serverUrl;
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
@@ -102,7 +115,7 @@ class Sitemap extends AbstractHelper
      * @return \Zend\View\Helper\Navigation\Sitemap   fluent interface, returns
      *                                               self
      */
-    public function direct(Container $container = null)
+    public function __invoke(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);

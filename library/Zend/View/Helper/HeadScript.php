@@ -105,6 +105,19 @@ class HeadScript extends Placeholder\Container\Standalone
     }
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Return headScript object
      *
      * Returns headScript helper object; optionally, allows specifying a script
@@ -117,7 +130,7 @@ class HeadScript extends Placeholder\Container\Standalone
      * @param  string $type      Script type and/or array of script attributes
      * @return \Zend\View\Helper\HeadScript
      */
-    public function direct($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+    public function __invoke($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
         if ((null !== $spec) && is_string($spec)) {
             $action    = ucfirst(strtolower($mode));

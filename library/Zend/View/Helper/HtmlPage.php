@@ -54,6 +54,19 @@ class HtmlPage extends HtmlElement
     protected $_attribs = array('classid' => self::ATTRIB_CLASSID);
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Output a html object tag
      *
      * @param string $data The html url
@@ -62,7 +75,7 @@ class HtmlPage extends HtmlElement
      * @param string $content Alternative content
      * @return string
      */
-    public function direct($data = null, array $attribs = array(), array $params = array(), $content = null)
+    public function __invoke($data = null, array $attribs = array(), array $params = array(), $content = null)
     {
         if ($data == null) {
             throw new \InvalidArgumentException('HTMLPage: missing argument. $data is required in htmlObject($data, array $attribs = array(), array $params = array(), $content = null)');

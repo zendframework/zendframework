@@ -50,6 +50,19 @@ class FormRadio extends FormElement
     protected $_isArray = false;
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Generates a set of radio button elements.
      *
      * @access public
@@ -67,7 +80,7 @@ class FormRadio extends FormElement
      *
      * @return string The radio buttons XHTML.
      */
-    public function direct($name = null, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
+    public function __invoke($name = null, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
     {
         if ($name == null) {
             throw new \InvalidArgumentException('FormRadio: missing argument. $name is required in formRadio($name, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")');

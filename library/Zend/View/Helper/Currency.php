@@ -65,13 +65,26 @@ class Currency extends AbstractHelper
     }
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Output a formatted currency
      *
      * @param  integer|float                    $value    Currency value to output
      * @param  string|Zend_Locale|\Zend\Currency\Currency $currency OPTIONAL Currency to use for this call
      * @return string Formatted currency
      */
-    public function direct($value = null, $currency = null)
+    public function __invoke($value = null, $currency = null)
     {
         if ($value === null) {
             return $this;

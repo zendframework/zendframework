@@ -206,6 +206,31 @@ class PhpRenderer implements Renderer, Pluggable
     }
 
     /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        $vars = $this->vars();
+        return $vars[$name];
+    }
+
+    /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @param  mixed $value 
+     * @return void
+     */
+    public function __set($name, $value)
+    {
+        $vars = $this->vars();
+        $vars[$name] = $value;
+    }
+
+    /**
      * Set plugin broker instance
      * 
      * @param  string|HelperBroker $broker 
@@ -255,6 +280,28 @@ class PhpRenderer implements Renderer, Pluggable
     public function plugin($name, array $options = null)
     {
         return $this->getBroker()->load($name, $options);
+    }
+
+    /**
+     * Overloading: proxy to helpers
+     *
+     * Proxies to the attached plugin broker to retrieve, return, and potentially
+     * execute helpers.
+     *
+     * * If the helper does not define __invoke, it will be returned
+     * * If the helper does define __invoke, it will be called as a functor
+     * 
+     * @param  string $method 
+     * @param  array $argv 
+     * @return mixed
+     */
+    public function __call($method, $argv)
+    {
+        $helper = $this->plugin($method);
+        if (is_callable($helper)) {
+            return call_user_func_array($helper, $argv);
+        }
+        return $helper;
     }
 
     /**

@@ -93,6 +93,19 @@ class HeadStyle extends Placeholder\Container\Standalone
     }
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Return headStyle object
      *
      * Returns headStyle helper object; optionally, allows specifying
@@ -102,7 +115,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      * @param  string|array $attributes Optional attributes to utilize
      * @return \Zend\View\Helper\HeadStyle
      */
-    public function direct($content = null, $placement = 'APPEND', $attributes = array())
+    public function __invoke($content = null, $placement = 'APPEND', $attributes = array())
     {
         if ((null !== $content) && is_string($content)) {
             switch (strtoupper($placement)) {

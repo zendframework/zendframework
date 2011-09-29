@@ -45,6 +45,19 @@ class FormText extends FormElement
     protected $inputType = 'text';
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Generates a 'text' element.
      *
      * @access public
@@ -59,7 +72,7 @@ class FormText extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = null, $value = null, $attribs = null)
+    public function __invoke($name = null, $value = null, $attribs = null)
     {
         if ($name == null) {
             throw new \InvalidArgumentException('FormText: missing argument. $name is required in formText($name, $value = null, $attribs = null)');

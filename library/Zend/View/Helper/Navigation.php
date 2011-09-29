@@ -91,6 +91,19 @@ class Navigation extends AbstractNavigationHelper
     protected $_injectTranslator = true;
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Helper entry point
      *
      * @param  \Zend\Navigation\Container $container  [optional] container to
@@ -98,7 +111,7 @@ class Navigation extends AbstractNavigationHelper
      * @return \Zend\View\Helper\Navigation           fluent interface, returns
      *                                               self
      */
-    public function direct(Container $container = null)
+    public function __invoke(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);

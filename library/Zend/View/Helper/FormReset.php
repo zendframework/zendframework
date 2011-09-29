@@ -37,6 +37,19 @@ namespace Zend\View\Helper;
 class FormReset extends FormElement
 {
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Generates a 'reset' button.
      *
      * @access public
@@ -51,7 +64,7 @@ class FormReset extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = '', $value = 'Reset', $attribs = null)
+    public function __invoke($name = '', $value = 'Reset', $attribs = null)
     {
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable

@@ -36,6 +36,18 @@ namespace Zend\View\Helper;
  */
 class RenderToPlaceholder extends AbstractHelper
 {
+    /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
 
     /**
      * Renders a template and stores the rendered output as a placeholder
@@ -45,7 +57,7 @@ class RenderToPlaceholder extends AbstractHelper
      * @param $placeholder The placeholder variable name in which to store the rendered output
      * @return void
      */
-    public function direct($script = null, $placeholder = null)
+    public function __invoke($script = null, $placeholder = null)
     {
         if ($script == null || $placeholder == null) {
             throw new \InvalidArgumentException('Action: missing argument. $script and $placeholder are required in renderToPlaceholder($script, $placeholder)');

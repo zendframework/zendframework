@@ -49,6 +49,19 @@ class FormMultiCheckbox extends FormRadio
     protected $_isArray = true;
 
     /**
+     * Deprecated: invoke the default functionality of the helper
+     *
+     * Proxies to __invoke()
+     * 
+     * @deprecated
+     * @return mixed
+     */
+    public function direct()
+    {
+        return call_user_func_array($this, func_get_args());
+    }
+
+    /**
      * Generates a set of checkbox button elements.
      *
      * @access public
@@ -66,7 +79,7 @@ class FormMultiCheckbox extends FormRadio
      *
      * @return string The radio buttons XHTML.
      */
-    public function direct($name = null, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
+    public function __invoke($name = null, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
     {
         if ($name == null) {
             throw new \InvalidArgumentException('FormMultiCheckbox: missing argument. $name is required in formMultiCheckbox($name, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")');

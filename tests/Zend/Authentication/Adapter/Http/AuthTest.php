@@ -25,7 +25,9 @@
 namespace ZendTest\Auth\Adapter\Http;
 
 use Zend\Authentication\Adapter\Http,
-    Zend\Controller\Response\Http as HTTPResponse;
+    Zend\Http\Request as HTTPRequest,
+    Zend\Http\Response as HTTPResponse,
+    Zend\Stdlib\Parameters;
 
 /**
  * @category   Zend
@@ -152,12 +154,28 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         // Verify the status code and the presence of both challenges
         $this->assertEquals(401, $status);
+        $this->assertTrue($headers->has('Www-Authenticate'));
+        $wwwAuthenticate = $headers->get('Www-Authenticate');
+        $this->assertInstanceOf('Iterator', $wwwAuthenticate, $headers->toString());
+        $this->assertEquals(2, count($wwwAuthenticate));
         $this->assertEquals('Www-Authenticate', $headers[0]['name']);
         $this->assertEquals('Www-Authenticate', $headers[1]['name']);
 
         // Check to see if the expected challenges match the actual
-        $this->assertEquals($basic,  $headers[0]['value']);
-        $this->assertEquals($digest, $headers[1]['value']);
+        $i = 0;
+        foreach ($wwwAuthenticate as $header) {
+            switch ($i) {
+                case 0:
+                    $this->assertEquals($basic, $header->getFieldValue());
+                    break;
+                case 1:
+                    $this->assertEquals($digest, $header->getFieldValue());
+                    break;
+                default:
+                    break;
+            }
+            $i++;
+        }
     }
 
     public function testBasicAuthValidCreds()
@@ -310,24 +328,17 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     protected function _doAuth($clientHeader, $scheme)
     {
         // Set up stub request and response objects
-        $request  = $this->getMock('Zend\Controller\Request\Http');
+        $request  = new HTTPRequest;
         $response = new HTTPResponse;
-        $response->setHttpResponseCode(200);
-        $response->headersSentThrowsException = false;
+        $response->setStatusCode(200);
 
         // Set stub method return values
-        $request->expects($this->any())
-                ->method('getRequestUri')
-                ->will($this->returnValue('/'));
-        $request->expects($this->any())
-                ->method('getMethod')
-                ->will($this->returnValue('GET'));
-        $request->expects($this->any())
-                ->method('getServer')
-                ->will($this->returnValue('PHPUnit'));
-        $request->expects($this->any())
-                ->method('getHeader')
-                ->will($this->returnValue($clientHeader));
+        $request->setUri('/');
+        $request->setMethod('GET');
+        $request->setServer(new Parameters);
+        $headers = $request->headers();
+        $headers->addHeaderLine('Proxy-Authorization', $clientHeader);
+        $headers->addHeaderLine('Authorization', $clientHeader);
 
         // Select an Authentication scheme
         switch ($scheme) {
@@ -354,8 +365,8 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         $return = array(
             'result'  => $result,
-            'status'  => $response->getHttpResponseCode(),
-            'headers' => $response->getHeaders()
+            'status'  => $response->getStatusCode(),
+            'headers' => $response->headers(),
         );
         return $return;
     }
@@ -427,10 +438,18 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 
         // Verify the status code and the presence of the challenge
         $this->assertEquals(401, $status);
-        $this->assertEquals('Www-Authenticate', $headers[0]['name']);
+        $this->assertTrue($headers->has('Www-Authenticate'));
 
         // Check to see if the expected challenge matches the actual
-        $this->assertEquals($expected, $headers[0]['value']);
+        $header = $headers->get('Www-Authenticate');
+        if ($header instanceof \Iterator) {
+echo "We have multiple www-authenticate headers!\n";
+            foreach ($header as $h) {
+                $header = $h;
+                break;
+            }
+        }
+        $this->assertEquals($expected, $header->getFieldValue(), $headers->toString());
     }
 
     /**

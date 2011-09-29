@@ -25,7 +25,8 @@ namespace Zend\Code\Reflection;
 
 use Zend\Code\Reflection,
     ReflectionClass,
-    Zend\Code\Reflection\ReflectionFile;
+    Zend\Code\Reflection\ReflectionFile,
+    Zend\Code\Annotation\AnnotationManager;
 
 /**
  * @uses       ReflectionClass
@@ -40,6 +41,17 @@ use Zend\Code\Reflection,
  */
 class ClassReflection extends ReflectionClass implements Reflection
 {
+
+    /**
+     * @var AnnotationManager
+     */
+    protected $annotationManager = null;
+
+    public function setAnnotationManager(AnnotationManager $annotationManager)
+    {
+        $this->annotationManager = $annotationManager;
+    }
+
     /**
      * Return the reflection file of the declaring file.
      *
@@ -54,16 +66,19 @@ class ClassReflection extends ReflectionClass implements Reflection
     /**
      * Return the classes Docblock reflection object
      *
-     * @return Zend_Reflection_Docblock
+     * @return DocBlockReflection
      * @throws \Zend\Code\Reflection\Exception for missing docblock or invalid reflection class
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         if ('' == $this->getDocComment()) {
             throw new Exception\RuntimeException($this->getName() . ' does not have a docblock');
         }
 
         $instance = new DocBlockReflection($this->getDocComment());
+        if ($this->annotationManager) {
+            $instance->setAnnotationManager($this->annotationManager);
+        }
         return $instance;
     }
 
@@ -124,29 +139,30 @@ class ClassReflection extends ReflectionClass implements Reflection
      */
     public function getMethod($name)
     {
-        $phpReflection  = parent::getMethod($name);
-        $zendReflection = new MethodReflection($this->getName(), $phpReflection->getName());
-        unset($phpReflection);
-        return $zendReflection;
+        $method = new MethodReflection($this->getName(), parent::getMethod($name)->getName());
+        if ($this->annotationManager) {
+            $method->setAnnotationManager($this->annotationManager);
+        }
+        return $method;
     }
 
     /**
      * Get reflection objects of all methods
      *
      * @param  string $filter
-     * @return array Array of \Zend\Code\Reflection\ReflectionMethod objects
+     * @return MethodReflection[]
      */
     public function getMethods($filter = -1)
     {
-        $phpReflections  = parent::getMethods($filter);
-        $zendReflections = array();
-        while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
-            $instance = new MethodReflection($this->getName(), $phpReflection->getName());
-            $zendReflections[] = $instance;
-            unset($phpReflection);
+        $methods = array();
+        foreach (parent::getMethods($filter) as $method) {
+            $instance = new MethodReflection($this->getName(), $method->getName());
+            if ($this->annotationManager) {
+                $instance->setAnnotationManager($this->annotationManager);
+            }
+            $methods[] = $instance;
         }
-        unset($phpReflections);
-        return $zendReflections;
+        return $methods;
     }
 
     /**

@@ -23,7 +23,9 @@
  */
 namespace Zend\Code\Reflection;
 
-use Zend\Code\Reflection;
+use Zend\Code\Reflection,
+    Zend\Code\Scanner\DocBlockScanner,
+    Zend\Code\Annotation\AnnotationManager;
 
 /**
  * @uses       Reflector
@@ -39,6 +41,11 @@ class DocBlockReflection implements Reflection
      * @var Reflector
      */
     protected $reflector = null;
+
+    /**
+     * @var AnnotationManager
+     */
+    protected $annotationManager = null;
 
     /**#@+
      * @var int
@@ -73,6 +80,13 @@ class DocBlockReflection implements Reflection
     protected $tags = array();
 
     /**
+     * @var bool
+     */
+    protected $isReflected = false;
+
+    protected $annotations = array();
+
+    /**
      * Export reflection
      *
      * Reqired by the Reflector interface.
@@ -89,33 +103,51 @@ class DocBlockReflection implements Reflection
      * Constructor
      *
      * @param Reflector|string $commentOrReflector
+     * @param AnnotationManager|null $annotationManager
+     * @return \Zend\Code\Reflection\DocBlockReflection
      */
-    public function __construct($commentOrReflector)
+    public function __construct($commentOrReflector, AnnotationManager $annotationManager = null)
     {
         if ($commentOrReflector instanceof \Reflector) {
             $this->reflector = $commentOrReflector;
             if (!method_exists($commentOrReflector, 'getDocComment')) {
                 throw new Exception\InvalidArgumentException('Reflector must contain method "getDocComment"');
             }
-            $docComment = $commentOrReflector->getDocComment();
+            $this->docComment = $commentOrReflector->getDocComment();
 
-            $lineCount = substr_count($docComment, "\n");
+            $lineCount = substr_count($this->docComment, "\n");
 
             $this->startLine = $this->reflector->getStartLine() - $lineCount - 1;
             $this->endLine   = $this->reflector->getStartLine() - 1;
-
         } elseif (is_string($commentOrReflector)) {
-            $docComment = $commentOrReflector;
+            $this->docComment = $commentOrReflector;
         } else {
             throw new Exception\InvalidArgumentException(get_class($this) . ' must have a (string) DocComment or a Reflector in the constructor');
         }
 
-        if ($docComment == '') {
+        if ($this->docComment == '') {
             throw new Exception\InvalidArgumentException('DocComment cannot be empty');
         }
 
-        $this->docComment = $docComment;
-        $this->_parse();
+        $this->annotationManager = $annotationManager;
+    }
+
+    /**
+     * @param AnnotationManager $annotationManager
+     * @return DocBlockReflection
+     */
+    public function setAnnotationManager(AnnotationManager $annotationManager)
+    {
+        $this->annotationManager = $annotationManager;
+        return $this;
+    }
+
+    /**
+     * @return AnnotationManager
+     */
+    public function getAnnotationManager()
+    {
+        return $this->annotationManager;
     }
 
     /**
@@ -125,6 +157,7 @@ class DocBlockReflection implements Reflection
      */
     public function getContents()
     {
+        $this->reflect();
         return $this->cleanDocComment;
     }
 
@@ -135,6 +168,7 @@ class DocBlockReflection implements Reflection
      */
     public function getStartLine()
     {
+        $this->reflect();
         return $this->startLine;
     }
 
@@ -145,6 +179,7 @@ class DocBlockReflection implements Reflection
      */
     public function getEndLine()
     {
+        $this->reflect();
         return $this->endLine;
     }
 
@@ -155,6 +190,7 @@ class DocBlockReflection implements Reflection
      */
     public function getShortDescription()
     {
+        $this->reflect();
         return $this->shortDescription;
     }
 
@@ -165,6 +201,7 @@ class DocBlockReflection implements Reflection
      */
     public function getLongDescription()
     {
+        $this->reflect();
         return $this->longDescription;
     }
 
@@ -176,6 +213,7 @@ class DocBlockReflection implements Reflection
      */
     public function hasTag($name)
     {
+        $this->reflect();
         foreach ($this->tags as $tag) {
             if ($tag->getName() == $name) {
                 return true;
@@ -192,6 +230,7 @@ class DocBlockReflection implements Reflection
      */
     public function getTag($name)
     {
+        $this->reflect();
         foreach ($this->tags as $tag) {
             if ($tag->getName() == $name) {
                 return $tag;
@@ -209,6 +248,7 @@ class DocBlockReflection implements Reflection
      */
     public function getTags($filter = null)
     {
+        $this->reflect();
         if ($filter === null || !is_string($filter)) {
             return $this->tags;
         }
@@ -222,64 +262,68 @@ class DocBlockReflection implements Reflection
         return $returnTags;
     }
 
+    public function hasAnnotation($name)
+    {
+        $this->reflect();
+        foreach ($this->annotations as $annotation) {
+            if ($annotation->getName() == $name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getAnnotation($name)
+    {
+        $this->reflect();
+        return $this->annotations;
+    }
+
+    public function getAnnotations($filter = null)
+    {
+        $this->reflect();
+        return $this->annotations;
+    }
+
     /**
      * Parse the docblock
      *
      * @return void
      */
-    protected function _parse()
+    protected function reflect()
     {
-        $docComment = $this->docComment;
+        if ($this->isReflected) {
+            return;
+        }
+
+        $docComment = $this->docComment; // localize variable
 
         // First remove doc block line starters
         $docComment = preg_replace('#[ \t]*(?:\/\*\*|\*\/|\*)?[ ]{0,1}(.*)?#', '$1', $docComment);
         $docComment = ltrim($docComment, "\r\n"); // @todo should be changed to remove first and last empty line
-
         $this->cleanDocComment = $docComment;
 
-        // Next parse out the tags and descriptions
-        $parsedDocComment = $docComment;
-        $lineNumber = $firstBlandLineEncountered = 0;
-        while (($newlinePos = strpos($parsedDocComment, "\n")) !== false) {
-            $lineNumber++;
-            $line = substr($parsedDocComment, 0, $newlinePos);
-
-            $matches = array();
-
-            if ((strpos($line, '@') === 0) && (preg_match('#^(@\w+.*?)(\n)(?:@|\r?\n|$)#s', $parsedDocComment, $matches))) {
-                $this->tags[] = new ReflectionDocblockTag($matches[1]);
-                $parsedDocComment = str_replace($matches[1] . $matches[2], '', $parsedDocComment);
-            } else {
-                if ($lineNumber < 3 && !$firstBlandLineEncountered) {
-                    $this->shortDescription .= $line . "\n";
-                } else {
-                    $this->longDescription .= $line . "\n";
-                }
-
-                if ($line == '') {
-                    $firstBlandLineEncountered = true;
-                }
-
-                $parsedDocComment = substr($parsedDocComment, $newlinePos + 1);
-            }
-
+        $scanner = new DocBlockScanner($docComment, $this->annotationManager);
+        $this->shortDescription = $scanner->getShortDescription();
+        $this->longDescription  = $scanner->getLongDescription();
+        $this->tags             = $scanner->getTags();
+        if ($this->annotationManager) {
+            $this->annotations = $scanner->getAnnotations();
         }
-
-        $this->shortDescription = rtrim($this->shortDescription);
-        $this->longDescription  = rtrim($this->longDescription);
+        $this->isReflected = true;
     }
 
     public function toString()
     {
-        $str = "Docblock [ /* Docblock */ ] {".PHP_EOL.PHP_EOL;
-        $str .= "  - Tags [".count($this->tags)."] {".PHP_EOL;
+        $str = "Docblock [ /* Docblock */ ] {" . PHP_EOL . PHP_EOL;
+        $str .= "  - Tags [" . count($this->tags) . "] {" . PHP_EOL;
 
         foreach($this->tags AS $tag) {
-            $str .= "    ".$tag;
+            $str .= "    " . $tag;
         }
 
-        $str .= "  }".PHP_EOL;
-        $str .= "}".PHP_EOL;
+        $str .= "  }" . PHP_EOL;
+        $str .= "}" . PHP_EOL;
 
         return $str;
     }

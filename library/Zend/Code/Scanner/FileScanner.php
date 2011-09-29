@@ -3,18 +3,28 @@
 namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
-    Zend\Code\Exception;
+    Zend\Code\Exception,
+    Zend\Code\Annotation\AnnotationManager;
 
 class FileScanner extends TokenArrayScanner implements Scanner
 {
+    /**
+     * @var bool
+     */
     protected $isScanned = false;
-    
-    protected $file      = null;
-    
-    public function __construct($file = null, $options = null)
+
+    /**
+     * @var string
+     */
+    protected $file = null;
+
+    public function __construct($file = null, AnnotationManager $annotationManager = null)
     {
         if ($file) {
             $this->setFile($file);
+        }
+        if ($annotationManager) {
+            $this->setAnnotationManager($annotationManager);
         }
     }
     
@@ -33,7 +43,9 @@ class FileScanner extends TokenArrayScanner implements Scanner
     {
         return $this->file;
     }
-    
+
+
+
     protected function scan()
     {
         if ($this->isScanned) {

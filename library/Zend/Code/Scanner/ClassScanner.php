@@ -4,33 +4,92 @@ namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
     Zend\Code\NameInformation,
+    Zend\Code\Annotation\AnnotationManager,
     Zend\Code\Exception;
 
 class ClassScanner implements Scanner
 {
-    protected $isScanned        = false;
+    /**
+     * @var bool
+     */
+    protected $isScanned = false;
 
-    protected $docComment       = null;
-    protected $name             = null;
-    protected $shortName        = null;
-    protected $isFinal          = false;
-    protected $isAbstract       = false;
-    protected $isInterface      = false;
+    /**
+     * @var string
+     */
+    protected $docComment = null;
 
-    protected $parentClass      = null;
+    /**
+     * @var string
+     */
+    protected $name = null;
+
+    /**
+     * @var string
+     */
+    protected $shortName = null;
+
+    /**
+     * @var bool
+     */
+    protected $isFinal = false;
+
+    /**
+     * @var bool
+     */
+    protected $isAbstract = false;
+
+    /**
+     * @var bool
+     */
+    protected $isInterface = false;
+
+    /**
+     * @var string
+     */
+    protected $parentClass = null;
+
+    /**
+     * @var string
+     */
     protected $shortParentClass = null;
 
-    protected $interfaces       = array();
-    protected $shortInterfaces  = array();
+    /**
+     * @var string[]
+     */
+    protected $interfaces = array();
 
-    protected $tokens           = array();
-    protected $nameInformation  = null;
-    protected $infos            = array();
-    
-    public function __construct(array $classTokens, NameInformation $nameInformation = null)
+    /**
+     * @var string[]
+     */
+    protected $shortInterfaces = array();
+
+    /**
+     * @var array
+     */
+    protected $tokens = array();
+
+    /**
+     * @var NameInformation
+     */
+    protected $nameInformation = null;
+
+    /**
+     * @var array[]
+     */
+    protected $infos = array();
+
+    /**
+     * @param array $classTokens
+     * @param NameInformation|null $nameInformation
+     * @param AnnotationManager|null $annotationManager
+     * @return ClassScanner
+     */
+    public function __construct(array $classTokens, NameInformation $nameInformation = null, AnnotationManager $annotationManager = null)
     {
-        $this->tokens          = $classTokens;
-        $this->nameInformation = $nameInformation;
+        $this->tokens            = $classTokens;
+        $this->nameInformation   = $nameInformation;
+        $this->annotationManager = $annotationManager;
     }
     
     protected function scan()

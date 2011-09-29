@@ -4,7 +4,8 @@ namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
     Zend\Code\NameInformation,
-    Zend\Code\Exception;
+    Zend\Code\Exception,
+    Zend\Code\Annotation\AnnotationManager;
 
 class TokenArrayScanner implements Scanner
 {
@@ -34,9 +35,14 @@ class TokenArrayScanner implements Scanner
     protected $infos = array();
 
     /**
+     * @var AnnotationManager
+     */
+    protected $annotationManager = null;
+
+    /**
      * @param null|array $tokens
      */
-    public function __construct($tokens = null)
+    public function __construct($tokens = null, AnnotationManager $annotationManager = null)
     {
         if ($tokens) {
             $this->setTokens($tokens);
@@ -53,6 +59,16 @@ class TokenArrayScanner implements Scanner
     {
         $this->tokens = $tokens;
         $this->reset();
+    }
+
+    public function getAnnotationManager()
+    {
+        return $this->annotationManager;
+    }
+
+    public function setAnnotationManager(AnnotationManager $annotationManager)
+    {
+        $this->annotationManager = $annotationManager;
     }
 
     public function getDocComment()

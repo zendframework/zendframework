@@ -2,14 +2,18 @@
 
 namespace Zend\Di\Definition;
 
+use Zend\Code\Annotation\AnnotationManager;
+
 class IntrospectionRuleset
 {
     const TYPE_GENERAL = 'general';
     const TYPE_CONSTRUCTOR = 'constructor';
     const TYPE_SETTER = 'setter';
     const TYPE_INTERFACE = 'interface';
+    const TYPE_ANNOTATION = 'annotation';
     
     protected $generalRules = array(
+        'useAnnotations' => true,
         'excludedClassPatterns' => array('/[\w\\\\]*Exception\w*/')
         );
     
@@ -26,7 +30,7 @@ class IntrospectionRuleset
         'excludedClasses'     => array('ArrayObject'),
         'methodMaximumParams' => 1,
         'paramCanBeOptional'  => true,
-        );
+    );
     
     protected $interfaceRules = array(
         'enabled'            => true,
@@ -34,7 +38,12 @@ class IntrospectionRuleset
         'includedInterfaces' => array(),
         'excludedInterfaces' => array()
         );
-    
+
+    /**
+     * @var AnnotationManager
+     */
+    protected $annotationManager = null;
+
     public function __construct($config = null)
     {
         
@@ -133,6 +142,20 @@ class IntrospectionRuleset
     public function getInterfaceRules()
     {
         return $this->interfaceRules;
+    }
+
+    public function useAnnotations()
+    {
+        return $this->generalRules['useAnnotations'];
+    }
+
+    public function getAnnotationManager()
+    {
+        if ($this->annotationManager === null) {
+            $this->annotationManager = new AnnotationManager;
+            $this->annotationManager->registerAnnotation(new Annotation\InjectAnnotation());
+        }
+        return $this->annotationManager;
     }
     
 }

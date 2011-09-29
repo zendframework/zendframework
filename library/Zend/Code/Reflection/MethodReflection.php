@@ -24,7 +24,8 @@
 namespace Zend\Code\Reflection;
 
 use ReflectionMethod,
-    Zend\Code\Reflection;
+    Zend\Code\Reflection,
+    Zend\Code\Annotation\AnnotationManager;
 
 /**
  * @uses       ReflectionMethod
@@ -39,19 +40,37 @@ use ReflectionMethod,
  */
 class MethodReflection extends ReflectionMethod implements Reflection
 {
+
+    /**
+     * @var AnnotationManager
+     */
+    protected $annotationManager = null;
+
+    /**
+     * @param AnnotationManager $annotationManager
+     * @return DocBlockReflection
+     */
+    public function setAnnotationManager(AnnotationManager $annotationManager)
+    {
+        $this->annotationManager = $annotationManager;
+        return $this;
+    }
+
     /**
      * Retrieve method docblock reflection
      *
-     * @return Zend_Reflection_Docblock
-     * @throws \Zend\Code\Reflection\Exception
+     * @return DocBlockReflection
      */
-    public function getDocblock()
+    public function getDocBlock()
     {
         if ('' == $this->getDocComment()) {
             throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
         }
 
         $instance = new DocBlockReflection($this);
+        if ($this->annotationManager) {
+            $instance->setAnnotationManager($this->annotationManager);
+        }
         return $instance;
     }
 

@@ -19,12 +19,6 @@ class AggregateDirectoryScanner extends DirectoryScanner
     
     public function addScanner(DirectoryScanner $scanner)
     {
-        /*
-        if (!$scanner instanceof DirectoryScanner && !$scanner instanceof TokenArrayScanner) {
-            throw new Exception\InvalidArgumentException('Not a valid scanner to aggregate');
-        }
-        */
-        
         $this->scanners[] = $scanner;
         
         if ($this->isScanned) {

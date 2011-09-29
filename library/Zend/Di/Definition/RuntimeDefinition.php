@@ -2,21 +2,12 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition;
+use Zend\Di\Definition,
+    Zend\Code\Annotation\AnnotationManager,
+    Zend\Code\Reflection;
 
 class RuntimeDefinition implements Definition
 {
-    /**@#+
-     * @const string Lookup Type
-     */
-    const LOOKUP_TYPE_IMPLICIT = 'implicit';
-    const LOOKUP_TYPE_EXPLICIT = 'explicit';
-
-    /**
-     * @var string Initial lookup type
-     */
-    protected $lookupType = self::LOOKUP_TYPE_IMPLICIT;
-
     /**
      * @var IntrospectionRuleset
      */
@@ -31,13 +22,16 @@ class RuntimeDefinition implements Definition
      * @var array
      */
     protected $injectionMethodCache = array();
+    protected $methodAnnotationCache = array();
 
     /**
-     * @param string $lookupType
+     *
      */
-    public function __construct($lookupType = self::LOOKUP_TYPE_IMPLICIT)
+    public function __construct(IntrospectionRuleset $introspectionRuleset = null)
     {
-        $this->lookupType = $lookupType;
+        if ($introspectionRuleset === null) {
+            $this->introspectionRuleset = $introspectionRuleset;
+        }
     }
 
     /**
@@ -69,17 +63,7 @@ class RuntimeDefinition implements Definition
     {
         return array();
     }
-    
-    /**
-     * Set the Lookup Type
-     * 
-     * @param string $lookupType
-     */
-    public function setLookupType($lookupType)
-    {
-        $this->lookupType = $lookupType;
-    }
-    
+
     /**
      * Track classes when using EXPLICIT lookups
      * @param string $class
@@ -119,7 +103,7 @@ class RuntimeDefinition implements Definition
      */
     public function getInstantiator($class)
     {
-        $class = new \ReflectionClass($class);
+        $class = new Reflection\ClassReflection($class);
         if ($class->isInstantiable()) {
             return '__construct';
         }
@@ -163,13 +147,33 @@ class RuntimeDefinition implements Definition
 
         // setup
         $methods = array();
-        $c = new \ReflectionClass($class);
+        $c = new Reflection\ClassReflection($class);
+        if ($this->introspectionRuleset->useAnnotations()) {
+            $c->setAnnotationManager($this->introspectionRuleset->getAnnotationManager());
+        }
         $className = $c->getName();
         
         if (array_key_exists($className, $this->injectionMethodCache)) {
             return array_keys($this->injectionMethodCache[$className]);
         }
-        
+
+        /***
+         * PROCESS ANNOTATIONS
+         */
+        if ($this->introspectionRuleset->useAnnotations()) {
+            foreach ($c->getMethods() as $method) {
+                if (($db = $method->getDocBlock()) !== false) {
+                    if ($db->hasAnnotation('inject')) {
+                        if (!isset($this->methodAnnotationCache[$c->getName()])) {
+                            $this->methodAnnotationCache[$c->getName()] = array();
+                        }
+                        $this->methodAnnotationCache[$c->getName()][$method->getName()] = $db->getAnnotations();
+                        $methods[$method->getName()] = IntrospectionRuleset::TYPE_ANNOTATION;
+                    }
+                }
+            }
+        }
+
         // constructor injection
         $cRules = $introspectionRuleset->getConstructorRules();
 

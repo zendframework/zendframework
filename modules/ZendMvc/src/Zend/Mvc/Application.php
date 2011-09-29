@@ -219,7 +219,10 @@ class Application implements AppContext
         $response = $result->last();
         if (!$response instanceof Response) {
             $response = $this->getResponse();
+            $event->setResponse($response);
         }
+
+        $events->trigger('finish', $event);
 
         $response = new SendableResponse($response);
         return $response;

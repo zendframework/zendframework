@@ -72,7 +72,7 @@ class EventManager implements EventCollection
      * Allows optionally specifying identifier(s) to use to pull signals from a
      * StaticEventManager.
      *
-     * @param  null|string|int|array $identifiers
+     * @param  null|string|int|array|Traversable $identifiers
      * @return void
      */
     public function __construct($identifiers = null)
@@ -134,13 +134,13 @@ class EventManager implements EventCollection
     /**
      * Set the identifiers (overrides any currently set identifiers) 
      * 
-     * @param string|int|array $identifiers 
+     * @param string|int|array|Traversable $identifiers 
      * @return ModuleManager
      */
     public function setIdentifiers($identifiers)
     {
-        if (is_array($identifiers)) {
-            $this->identifiers = array_unique($identifiers);
+        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+            $this->identifiers = array_unique((array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array($identifiers);
         }
@@ -150,13 +150,13 @@ class EventManager implements EventCollection
     /**
      * Add some identifier(s) (appends to any currently set identifiers) 
      * 
-     * @param string|int|array $identifiers 
+     * @param string|int|array|Traversable $identifiers 
      * @return ModuleManager
      */
     public function addIdentifiers($identifiers)
     {
-        if (is_array($identifiers)) {
-            $this->identifiers = array_unique($this->identifiers + $identifiers);
+        if (is_array($identifiers) || $identifiers instanceof \Traversable) {
+            $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
         } elseif ($identifiers !== null) {
             $this->identifiers = array_unique($this->identifiers + array($identifiers));
         }

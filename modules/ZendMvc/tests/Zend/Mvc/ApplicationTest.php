@@ -407,6 +407,16 @@ class ApplicationTest extends TestCase
         $this->assertSame($locator, $storage['locator']);
     }
 
+    public function testFinishEventIsTriggeredAfterDispatching()
+    {
+        $app = $this->setupActionController();
+        $app->events()->attach('finish', function($e) {
+            return $e->getResponse()->setContent($e->getResponse()->getBody() . 'foobar');
+        });
+        $response = $app->run();
+        $this->assertNotNull(strstr($response->getResponse()->getBody(), 'foobar'));
+    }
+
     public function testCanProvideAlternateEventManagerToDisableDefaultRouteAndDispatchEventListeners()
     {
         $app    = $this->setupActionController();

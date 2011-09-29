@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Mvc;
+namespace ZendTest\Mvc;
 
 use ArrayObject,
     PHPUnit_Framework_TestCase as TestCase,
@@ -11,6 +11,8 @@ use ArrayObject,
     Zend\EventManager\StaticEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
+    Zend\Mvc\Application,
+    Zend\Mvc\Router,
     Zend\Uri\UriFactory;
 
 class ApplicationTest extends TestCase
@@ -395,7 +397,7 @@ class ApplicationTest extends TestCase
 
         $storage = new ArrayObject();
         $events  = StaticEventManager::getInstance();
-        $events->attach('Zend\Mvc\TestAsset\LocatorAwareController', 'dispatch', function ($e) use ($storage) {
+        $events->attach('ZendTest\Mvc\TestAsset\LocatorAwareController', 'dispatch', function ($e) use ($storage) {
             $controller = $e->getTarget();
             $storage['locator'] = $controller->getLocator();
             return $e->getResponse();
@@ -426,8 +428,8 @@ class ApplicationTest extends TestCase
             $response->setContent($content);
         };
         $events = StaticEventManager::getInstance();
-        $events->attach('Zend\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener1, 10);
-        $events->attach('Zend\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener2, -10);
+        $events->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener1, 10);
+        $events->attach('ZendTest\Mvc\Controller\TestAsset\SampleController', 'dispatch', $listener2, -10);
 
         $app->run();
         $response = $app->getResponse();

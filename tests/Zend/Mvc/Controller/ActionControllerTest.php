@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Mvc\Controller;
+namespace ZendTest\Mvc\Controller;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\StaticEventManager,

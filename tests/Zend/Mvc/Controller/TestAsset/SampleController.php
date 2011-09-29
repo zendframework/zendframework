@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Mvc\Controller\TestAsset;
+namespace ZendTest\Mvc\Controller\TestAsset;
 
 use Zend\Mvc\Controller\ActionController;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Mvc\TestAsset;
+namespace ZendTest\Mvc\TestAsset;
 
 use Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,

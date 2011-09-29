@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Mvc\TestAsset;
+namespace ZendTest\Mvc\TestAsset;
 
 use Zend\Di\Locator as LocatorDefinition,
     Zend\Di\Exception\ClassNotFoundException;

@@ -63,7 +63,7 @@ class HtmlQuicktimeTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlQuicktime()
     {
-        $htmlQuicktime = $this->helper->direct('/path/to/quicktime.mov');
+        $htmlQuicktime = $this->helper->__invoke('/path/to/quicktime.mov');
 
         $objectStartElement = '<object data="/path/to/quicktime.mov"'
                             . ' type="video/quicktime"'

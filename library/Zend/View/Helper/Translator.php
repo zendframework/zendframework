@@ -60,19 +60,6 @@ class Translator extends AbstractHelper
     }
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Translate a message
      * You can give multiple params or an array of params.
      * If you want to output another locale just set it as last single parameter

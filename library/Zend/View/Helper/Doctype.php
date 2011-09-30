@@ -105,19 +105,6 @@ class Doctype extends AbstractHelper
     }
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Set or retrieve doctype
      *
      * @param  string $doctype
@@ -207,7 +194,7 @@ class Doctype extends AbstractHelper
 	 * @return booleean
 	 */
 	public function isHtml5() {
-		return (stristr($this->direct(), '<!DOCTYPE html>') ? true : false);
+		return (stristr($this->__invoke(), '<!DOCTYPE html>') ? true : false);
 	}
 
     /**

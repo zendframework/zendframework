@@ -63,7 +63,7 @@ class HtmlPageTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlPage()
     {
-        $htmlPage = $this->helper->direct('/path/to/page.html');
+        $htmlPage = $this->helper->__invoke('/path/to/page.html');
 
         $objectStartElement = '<object data="/path/to/page.html"'
                             . ' type="text/html"'

@@ -43,19 +43,6 @@ class InlineScript extends HeadScript
     protected $_regKey = 'Zend_View_Helper_InlineScript';
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Return InlineScript object
      *
      * Returns InlineScript helper object; optionally, allows specifying a
@@ -70,6 +57,6 @@ class InlineScript extends HeadScript
      */
     public function __invoke($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
-        return parent::direct($mode, $spec, $placement, $attrs, $type);
+        return parent::__invoke($mode, $spec, $placement, $attrs, $type);
     }
 }

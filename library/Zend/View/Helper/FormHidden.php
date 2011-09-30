@@ -37,19 +37,6 @@ namespace Zend\View\Helper;
 class FormHidden extends FormElement
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Generates a 'hidden' element.
      *
      * @access public
@@ -61,12 +48,8 @@ class FormHidden extends FormElement
      * @param array $attribs Attributes for the element tag.
      * @return string The element XHTML.
      */
-    public function __invoke($name = null, $value = null, array $attribs = null)
+    public function __invoke($name, $value = null, array $attribs = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormHidden: missing argument. $name is required in formHidden($name, $value = null, array $attribs = null)');
-        }
-        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
         if (isset($id)) {

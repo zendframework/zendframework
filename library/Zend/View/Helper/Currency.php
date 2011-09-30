@@ -65,19 +65,6 @@ class Currency extends AbstractHelper
     }
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Output a formatted currency
      *
      * @param  integer|float                    $value    Currency value to output

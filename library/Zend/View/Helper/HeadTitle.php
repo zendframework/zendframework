@@ -66,19 +66,6 @@ class HeadTitle extends Placeholder\Container\Standalone
     protected $_defaultAttachOrder = null;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Retrieve placeholder for title element and optionally set state
      *
      * @param  string $title

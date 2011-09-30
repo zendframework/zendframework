@@ -91,19 +91,6 @@ class Navigation extends AbstractNavigationHelper
     protected $_injectTranslator = true;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Helper entry point
      *
      * @param  \Zend\Navigation\Container $container  [optional] container to
@@ -149,7 +136,7 @@ class Navigation extends AbstractNavigationHelper
     {
         // check if call should proxy to another helper
         if ($helper = $this->findHelper($method, false)) {
-            return call_user_func_array(array($helper, 'direct'), $arguments);
+            return call_user_func_array($helper, $arguments);
         }
 
         // default behaviour: proxy call to container

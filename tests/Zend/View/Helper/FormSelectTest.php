@@ -64,7 +64,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testFormSelectWithNameOnlyCreatesEmptySelect()
     {
-        $html = $this->helper->direct('foo');
+        $html = $this->helper->__invoke('foo');
         $this->assertRegExp('#<select[^>]+name="foo"#', $html);
         $this->assertContains('</select>', $html);
         $this->assertNotContains('<option', $html);
@@ -72,7 +72,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testFormSelectWithOptionsCreatesPopulatedSelect()
     {
-        $html = $this->helper->direct('foo', null, null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->__invoke('foo', null, null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<select[^>]+name="foo"#', $html);
         $this->assertContains('</select>', $html);
         $this->assertRegExp('#<option[^>]+value="foo".*?>Foobar</option>#', $html);
@@ -82,20 +82,20 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testFormSelectWithOptionsAndValueSelectsAppropriateValue()
     {
-        $html = $this->helper->direct('foo', 'baz', null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->__invoke('foo', 'baz', null, array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
     }
 
     public function testFormSelectWithMultipleAttributeCreatesMultiSelect()
     {
-        $html = $this->helper->direct('foo', null, array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->__invoke('foo', null, array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<select[^>]+name="foo\[\]"#', $html);
         $this->assertRegExp('#<select[^>]+multiple="multiple"#', $html);
     }
 
     public function testFormSelectWithMultipleAttributeAndValuesCreatesMultiSelectWithSelectedValues()
     {
-        $html = $this->helper->direct('foo', array('foo', 'baz'), array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
+        $html = $this->helper->__invoke('foo', array('foo', 'baz'), array('multiple' => true), array('foo' => 'Foobar', 'baz' => 'Bazbat'));
         $this->assertRegExp('#<option[^>]+value="foo"[^>]*selected.*?>Foobar</option>#', $html);
         $this->assertRegExp('#<option[^>]+value="baz"[^>]*selected.*?>Bazbat</option>#', $html);
     }
@@ -106,7 +106,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormSelectWithZeroValueSelectsValue()
     {
-        $html = $this->helper->direct('foo', 0, null, array('foo' => 'Foobar', 0 => 'Bazbat'));
+        $html = $this->helper->__invoke('foo', 0, null, array('foo' => 'Foobar', 0 => 'Bazbat'));
         $this->assertRegExp('#<option[^>]+value="0"[^>]*selected.*?>Bazbat</option>#', $html);
     }
 
@@ -115,7 +115,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableEntireSelect()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -134,7 +134,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableIndividualSelectOptionsOnly()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -147,7 +147,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
         $this->assertNotRegexp('/<select[^>]*?disabled/', $html, $html);
         $this->assertRegexp('/<option value="bar"[^>]*?disabled="disabled"/', $html, $html);
 
-        $html = $this->helper->direct(
+        $html = $this->helper->__invoke(
             'baz',
             'foo',
             array(
@@ -167,7 +167,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableMultipleSelectOptions()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -188,7 +188,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableOptGroups()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -213,7 +213,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableOptGroupOptions()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -235,7 +235,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSpecifySelectMultipleThroughAttribute()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -251,7 +251,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testSpecifyingSelectMultipleThroughAttributeAppendsNameWithBrackets()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz',
             'options' => array(
                 'foo' => 'Foo',
@@ -267,7 +267,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSpecifySelectMultipleThroughName()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz[]',
             'options' => array(
                 'foo' => 'Foo',
@@ -283,7 +283,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function testNameCanContainBracketsButNotBeMultiple()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'baz[]',
             'options' => array(
                 'foo' => 'Foo',

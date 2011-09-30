@@ -62,19 +62,6 @@ class PaginationControl extends AbstractHelper
     }
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Render the provided pages.  This checks if $view->paginator is set and,
      * if so, uses that.  Also, if no scrolling style or partial are specified,
      * the defaults will be used (if set).
@@ -122,12 +109,14 @@ class PaginationControl extends AbstractHelper
             }
 
             if ($partial[1] !== null) {
-                return $this->view->plugin('partial')->direct($partial[0], $partial[1], $pages);
+                $partialHelper = $this->view->plugin('partial');
+                return $partialHelper($partial[0], $partial[1], $pages);
             }
 
             $partial = $partial[0];
         }
 
-        return $this->view->plugin('partial')->direct($partial, $pages);
+        $partialHelper = $this->view->plugin('partial');
+        return $partialHelper($partial, $pages);
     }
 }

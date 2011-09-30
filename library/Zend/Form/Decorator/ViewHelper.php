@@ -247,7 +247,8 @@ class ViewHelper extends AbstractDecorator
             $helperObject->setTranslator($element->getTranslator());
         }
 
-        $elementContent = $view->plugin($helper)->direct($name, $value, $attribs, $element->options);
+        $helper         = $view->plugin($helper);
+        $elementContent = $helper($name, $value, $attribs, $element->options);
         switch ($this->getPlacement()) {
             case self::APPEND:
                 return $content . $separator . $elementContent;

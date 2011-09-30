@@ -147,13 +147,13 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testActionReturnsContentFromDefaultModule()
     {
-        $value = $this->helper->direct('bar', 'action-foo');
+        $value = $this->helper->__invoke('bar', 'action-foo');
         $this->assertContains('In default module, FooController::barAction()', $value);
     }
 
     public function testActionReturnsContentFromSpecifiedModule()
     {
-        $value = $this->helper->direct('bar', 'foo', 'foo');
+        $value = $this->helper->__invoke('bar', 'foo', 'foo');
         $this->assertContains('In foo module, Foo_FooController::barAction()', $value);
     }
 
@@ -162,7 +162,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testActionReturnsContentReflectingPassedParams()
     {
-        $value = $this->helper->direct('baz', 'action-foo', null, array('bat' => 'This is my message'));
+        $value = $this->helper->__invoke('baz', 'action-foo', null, array('bat' => 'This is my message'));
         $this->assertNotContains('BOGUS', $value, var_export($this->helper->request->getUserParams(), 1));
         $this->assertContains('This is my message', $value);
     }
@@ -172,7 +172,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testActionReturnsEmptyStringWhenForwardDetected()
     {
-        $value = $this->helper->direct('forward', 'action-foo');
+        $value = $this->helper->__invoke('forward', 'action-foo');
         $this->assertEquals('', $value);
     }
 
@@ -181,7 +181,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testActionReturnsEmptyStringWhenRedirectDetected()
     {
-        $value = $this->helper->direct('redirect', 'action-foo');
+        $value = $this->helper->__invoke('redirect', 'action-foo');
         $this->assertEquals('', $value);
     }
 
@@ -237,14 +237,14 @@ class ActionTest extends \PHPUnit_Framework_TestCase
 
     public function testViewObjectRemainsUnchangedAfterAction()
     {
-        $value = $this->helper->direct('bar', 'foo', 'foo');
+        $value = $this->helper->__invoke('bar', 'foo', 'foo');
         $this->assertContains('In foo module, Foo_FooController::barAction()', $value);
         $this->assertNull($this->view->vars()->bar);
     }
 
     public function testNestingActionsDoesNotBreakPlaceholderHelpers()
     {
-        $html = $this->helper->direct('nest', 'foo', 'foo');
+        $html = $this->helper->__invoke('nest', 'foo', 'foo');
         $title = $this->view->plugin('headTitle')->toString();
         $this->assertContains(' - ', $title, $title);
         $this->assertContains('Foo Nest', $title);
@@ -264,7 +264,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         $broker = $front->getHelperBroker();
         $broker->load('viewRenderer')->view = $this->view;
 
-        $partial->direct('partialActionCall.phtml');
+        $partial->__invoke('partialActionCall.phtml');
 
         $this->assertSame($this->view, $broker->load('viewRenderer')->view);
 
@@ -287,7 +287,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
         // make sure noRender is false
         $this->assertFalse($viewRenderer->getNoRender());
 
-        $value = $this->helper->direct('bar', 'action-foo');
+        $value = $this->helper->__invoke('bar', 'action-foo');
 
         $viewRendererPostAction = $broker->load('viewRenderer');
 
@@ -304,7 +304,7 @@ class ActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testActionCalledWithinActionResetsResponseState()
     {
-        $value = $this->helper->direct('bar-one', 'baz', 'foo');
+        $value = $this->helper->__invoke('bar-one', 'baz', 'foo');
         $this->assertRegexp('/Baz-Three-View-Script\s+Baz-Two-View-Script\s+Baz-One-View-Script/s', $value);
     }
 }

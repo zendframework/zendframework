@@ -36,19 +36,6 @@ namespace Zend\View\Helper;
 class FormImage extends FormElement
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Generates an 'image' element.
      *
      * @access public
@@ -63,12 +50,8 @@ class FormImage extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function __invoke($name = null, $value = null, $attribs = null)
+    public function __invoke($name, $value = null, $attribs = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormImage: missing argument. $name is required in formImage($name, $value = null, $attribs = null)');
-        }
-        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
 

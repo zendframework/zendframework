@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper;
 
+use Traversable;
+
 /**
  * Helper for rendering a template fragment in its own variable scope; iterates
  * over data provided and renders for each iteration.
@@ -43,19 +45,6 @@ class PartialLoop extends Partial
      * @var integer
      */
     protected $partialCounter = 0;
-
-    /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
 
     /**
      * Renders a template fragment within a variable scope distinct from the
@@ -83,7 +72,7 @@ class PartialLoop extends Partial
         }
 
         if (!is_array($model)
-            && (!$model instanceof \Traversable)
+            && (!$model instanceof Traversable)
             && (is_object($model) && !method_exists($model, 'toArray'))
         ) {
             $e = new Partial\Exception('PartialLoop helper requires iterable data');
@@ -92,7 +81,7 @@ class PartialLoop extends Partial
         }
 
         if (is_object($model)
-            && (!$model instanceof \Traversable)
+            && (!$model instanceof Traversable)
             && method_exists($model, 'toArray')
         ) {
             $model = $model->toArray();
@@ -105,7 +94,7 @@ class PartialLoop extends Partial
             // increment the counter variable
             $this->partialCounter++;
 
-            $content .= parent::direct($name, $module, $item);
+            $content .= parent::__invoke($name, $module, $item);
         }
 
         return $content;

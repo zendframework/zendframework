@@ -231,6 +231,33 @@ class PhpRenderer implements Renderer, Pluggable
     }
 
     /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        $vars = $this->vars();
+        return isset($vars[$name]);
+    }
+
+    /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @return void
+     */
+    public function __unset($name)
+    {
+        $vars = $this->vars();
+        if (!isset($vars[$name])) {
+            return;
+        }
+        unset($vars[$name]);
+    }
+
+    /**
      * Set plugin broker instance
      * 
      * @param  string|HelperBroker $broker 

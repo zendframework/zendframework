@@ -65,7 +65,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('one', 'two', 'three');
 
-        $list = $this->helper->direct($items);
+        $list = $this->helper->__invoke($items);
 
         $this->assertContains('<ul>', $list);
         $this->assertContains('</ul>', $list);
@@ -78,7 +78,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('one', 'two', 'three');
 
-        $list = $this->helper->direct($items, true);
+        $list = $this->helper->__invoke($items, true);
 
         $this->assertContains('<ol>', $list);
         $this->assertContains('</ol>', $list);
@@ -92,7 +92,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $items = array('one', 'two', 'three');
         $attribs = array('class' => 'selected', 'name' => 'list');
 
-        $list = $this->helper->direct($items, false, $attribs);
+        $list = $this->helper->__invoke($items, false, $attribs);
 
         $this->assertContains('<ul', $list);
         $this->assertContains('class="selected"', $list);
@@ -108,7 +108,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
         $items = array('one', 'two', 'three');
         $attribs = array('class' => 'selected', 'name' => 'list');
 
-        $list = $this->helper->direct($items, true, $attribs);
+        $list = $this->helper->__invoke($items, true, $attribs);
 
         $this->assertContains('<ol', $list);
         $this->assertContains('class="selected"', $list);
@@ -126,7 +126,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('one', array('four', 'five', 'six'), 'two', 'three');
 
-        $list = $this->helper->direct($items);
+        $list = $this->helper->__invoke($items);
 
         $this->assertContains('<ul>' . Helper\HtmlList::EOL, $list);
         $this->assertContains('</ul>' . Helper\HtmlList::EOL, $list);
@@ -142,7 +142,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('one', array('four', array('six', 'seven', 'eight'), 'five'), 'two', 'three');
 
-        $list = $this->helper->direct($items);
+        $list = $this->helper->__invoke($items);
 
         $this->assertContains('<ul>' . Helper\HtmlList::EOL, $list);
         $this->assertContains('</ul>' . Helper\HtmlList::EOL, $list);
@@ -156,7 +156,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('one <small> test', 'second & third', 'And \'some\' "final" test');
 
-        $list = $this->helper->direct($items);
+        $list = $this->helper->__invoke($items);
 
         $this->assertContains('<ul>', $list);
         $this->assertContains('</ul>', $list);
@@ -170,7 +170,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('one <b>small</b> test');
 
-        $list = $this->helper->direct($items, false, false, false);
+        $list = $this->helper->__invoke($items, false, false, false);
 
         $this->assertContains('<ul>', $list);
         $this->assertContains('</ul>', $list);
@@ -185,7 +185,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('<b>one</b>', array('<b>four</b>', '<b>five</b>', '<b>six</b>'), '<b>two</b>', '<b>three</b>');
 
-        $list = $this->helper->direct($items, false, false, false);
+        $list = $this->helper->__invoke($items, false, false, false);
 
         foreach ($items[1] as $item) {
             $this->assertContains($item, $list);
@@ -200,7 +200,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
     {
         $items = array('one', array('four', 'five', 'six'), 'two', 'three');
 
-        $list = $this->helper->direct($items, false, array('class' => 'foo'));
+        $list = $this->helper->__invoke($items, false, array('class' => 'foo'));
 
         foreach ($items[1] as $item) {
             $this->assertRegexp('#<ul[^>]*?class="foo"[^>]*>.*?(<li>' . $item . ')#s', $list);
@@ -226,7 +226,7 @@ class HtmlListTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $list = $this->helper->direct($items, false, false, false);
+        $list = $this->helper->__invoke($items, false, false, false);
 
         $this->assertContains('<ul>', $list);
         $this->assertContains('</ul>', $list);

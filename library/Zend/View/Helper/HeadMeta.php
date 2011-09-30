@@ -67,19 +67,6 @@ class HeadMeta extends Placeholder\Container\Standalone
     }
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Retrieve object instance; optionally add meta tag
      *
      * @param  string $content

@@ -67,7 +67,7 @@ class CycleTest extends \PHPUnit_Framework_TestCase
 
     public function testCycleMethodReturnsObjectInstance()
     {
-        $cycle = $this->helper->direct();
+        $cycle = $this->helper->__invoke();
         $this->assertTrue($cycle instanceof Helper\Cycle);
     }
 
@@ -79,13 +79,13 @@ class CycleTest extends \PHPUnit_Framework_TestCase
 
     public function testCycleMethod()
     {
-        $this->helper->direct(array('a', 1, 'asd'));
+        $this->helper->__invoke(array('a', 1, 'asd'));
         $this->assertEquals(array('a', 1, 'asd'), $this->helper->getAll());
     }
 
     public function testToString()
     {
-        $this->helper->direct(array('a', 1, 'asd'));
+        $this->helper->__invoke(array('a', 1, 'asd'));
         $this->assertEquals('a', (string) $this->helper->toString());
     }
 
@@ -132,8 +132,8 @@ class CycleTest extends \PHPUnit_Framework_TestCase
     {
         $this->helper->assign(array(5, 8, 3));
         $this->assertEquals(5, (string) $this->helper->next());
-        $this->assertEquals(2, (string) $this->helper->direct(array(2,38,1),'cycle2')->next());
-        $this->assertEquals(8, (string) $this->helper->direct()->next());
+        $this->assertEquals(2, (string) $this->helper->__invoke(array(2,38,1),'cycle2')->next());
+        $this->assertEquals(8, (string) $this->helper->__invoke()->next());
         $this->assertEquals(38, (string) $this->helper->setName('cycle2')->next());
     }
 
@@ -142,8 +142,8 @@ class CycleTest extends \PHPUnit_Framework_TestCase
         $expected = array(5,4,2,3);
         $expected2 = array(7,34,8,6);
         for($i=0;$i<4;$i++) {
-          $this->assertEquals($expected[$i], (string) $this->helper->direct($expected)->next());
-          $this->assertEquals($expected2[$i], (string) $this->helper->direct($expected2,'cycle2')->next());
+          $this->assertEquals($expected[$i], (string) $this->helper->__invoke($expected)->next());
+          $this->assertEquals($expected2[$i], (string) $this->helper->__invoke($expected2,'cycle2')->next());
         }
     }
 

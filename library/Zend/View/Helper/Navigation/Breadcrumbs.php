@@ -70,19 +70,6 @@ class Breadcrumbs extends AbstractHelper
     protected $_partial;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
@@ -316,10 +303,12 @@ class Breadcrumbs extends AbstractHelper
                 throw $e;
             }
 
-            return $this->view->plugin('partial')->direct($partial[0], $partial[1], $model);
+            $partialHelper = $this->view->plugin('partial');
+            return $partialHelper($partial[0], $partial[1], $model);
         }
 
-        return $this->view->plugin('partial')->direct($partial, null, $model);
+        $partialHelper = $this->view->plugin('partial');
+        return $partialHelper($partial, null, $model);
     }
 
     // Zend\View\Helper\Navigation\Helper:

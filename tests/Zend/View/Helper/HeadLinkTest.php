@@ -96,7 +96,7 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testHeadLinkReturnsObjectInstance()
     {
-        $placeholder = $this->helper->direct();
+        $placeholder = $this->helper->__invoke();
         $this->assertTrue($placeholder instanceof Helper\HeadLink);
     }
 
@@ -131,9 +131,9 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
             'link2' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'bar'),
             'link3' => array('rel' => 'stylesheet', 'type' => 'text/css', 'href' => 'baz'),
         );
-        $this->helper->direct($links['link1'])
-                     ->direct($links['link2'], 'PREPEND')
-                     ->direct($links['link3']);
+        $this->helper->__invoke($links['link1'])
+                     ->__invoke($links['link2'], 'PREPEND')
+                     ->__invoke($links['link3']);
 
         $string = $this->helper->toString();
         $lines  = substr_count($string, PHP_EOL);
@@ -334,9 +334,9 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
 
     public function testLinkRendersAsPlainHtmlIfDoctypeNotXhtml()
     {
-        $this->view->plugin('doctype')->direct('HTML4_STRICT');
-        $this->helper->direct(array('rel' => 'icon', 'src' => '/foo/bar'))
-                     ->direct(array('rel' => 'foo', 'href' => '/bar/baz'));
+        $this->view->plugin('doctype')->__invoke('HTML4_STRICT');
+        $this->helper->__invoke(array('rel' => 'icon', 'src' => '/foo/bar'))
+                     ->__invoke(array('rel' => 'foo', 'href' => '/bar/baz'));
         $test = $this->helper->toString();
         $this->assertNotContains(' />', $test);
     }
@@ -406,10 +406,10 @@ class HeadLinkTest extends \PHPUnit_Framework_TestCase
      */
     public function testContainerMaintainsCorrectOrderOfItems()
     {
-        $this->helper->direct()->offsetSetStylesheet(1,'/test1.css');
-        $this->helper->direct()->offsetSetStylesheet(10,'/test2.css');
-        $this->helper->direct()->offsetSetStylesheet(20,'/test3.css');
-        $this->helper->direct()->offsetSetStylesheet(5,'/test4.css');
+        $this->helper->__invoke()->offsetSetStylesheet(1,'/test1.css');
+        $this->helper->__invoke()->offsetSetStylesheet(10,'/test2.css');
+        $this->helper->__invoke()->offsetSetStylesheet(20,'/test3.css');
+        $this->helper->__invoke()->offsetSetStylesheet(5,'/test4.css');
 
         $test = $this->helper->toString();
 

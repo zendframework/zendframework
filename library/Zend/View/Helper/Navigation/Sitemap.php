@@ -94,19 +94,6 @@ class Sitemap extends AbstractHelper
     protected $_serverUrl;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
@@ -262,7 +249,8 @@ class Sitemap extends AbstractHelper
     public function getServerUrl()
     {
         if (!isset($this->_serverUrl)) {
-            $this->_serverUrl = $this->getView()->plugin('serverUrl')->direct();
+            $serverUrlHelper  = $this->getView()->plugin('serverUrl');
+            $this->_serverUrl = $serverUrlHelper();
         }
 
         return $this->_serverUrl;
@@ -311,11 +299,12 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $curDoc = $this->getView()->plugin('url')->direct();
-            $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
-            $url = rtrim($this->getServerUrl(), '/') . '/'
-                 . $curDoc
-                 . (empty($curDoc) ? '' : '/') . $href;
+            $urlHelper = $this->getView()->plugin('url');
+            $curDoc    = $urlHelper();
+            $curDoc    = ('/' == $curDoc) ? '' : trim($curDoc, '/');
+            $url       = rtrim($this->getServerUrl(), '/') . '/'
+                       . $curDoc
+                       . (empty($curDoc) ? '' : '/') . $href;
         }
 
         return $this->_xmlEscape($url);

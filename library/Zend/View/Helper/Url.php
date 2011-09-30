@@ -39,19 +39,6 @@ use Zend\Controller\Front as FrontController;
 class Url extends AbstractHelper
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Generates an url given the name of a route.
      *
      * @access public

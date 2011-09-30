@@ -44,19 +44,6 @@ class Partial extends AbstractHelper
     protected $_objectKey;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Renders a template fragment within a variable scope distinct from the
      * calling View object.
      *

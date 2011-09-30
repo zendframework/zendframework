@@ -37,19 +37,6 @@ namespace Zend\View\Helper;
 class FormSelect extends FormElement
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Generates 'select' list of options.
      *
      * @access public
@@ -72,12 +59,8 @@ class FormSelect extends FormElement
      *
      * @return string The select tag and options XHTML.
      */
-    public function __invoke($name = null, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
+    public function __invoke($name, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormSelect: missing argument. $name is required in formSelect($name, $value = null, $attribs = null, $options = null, $listsep = "<br />\n")');
-        }
-        
         $info = $this->_getInfo($name, $value, $attribs, $options, $listsep);
         extract($info); // name, id, value, attribs, options, listsep, disable
 

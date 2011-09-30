@@ -114,19 +114,6 @@ class Action extends AbstractHelper
     }
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Retrieve rendered contents of a controller action
      *
      * If the action results in a forward or redirect, returns empty string.
@@ -137,12 +124,8 @@ class Action extends AbstractHelper
      * @param  array $params
      * @return string
      */
-    public function __invoke($action = null, $controller = null, $module = null, array $params = array())
+    public function __invoke($action, $controller, $module = null, array $params = array())
     {
-        if ($action == null || $controller == null) {
-            throw new \InvalidArgumentException('Action: missing argument. $action and $controller are required in action($action, $controller, $module = null, array $params = array())');
-        }
-
         $this->resetObjects();
         if (null === $module) {
             $module = $this->defaultModule;

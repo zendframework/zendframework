@@ -152,6 +152,6 @@ class Fieldset extends AbstractDecorator
             }
         }
 
-        return $view->plugin('fieldset')->direct($name, $content, $attribs);
+        return $view->fieldset($name, $content, $attribs);
     }
 }

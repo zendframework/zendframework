@@ -129,7 +129,7 @@ class ViewScript extends AbstractDecorator
         $vars['content']   = $content;
         $vars['decorator'] = $this;
 
-        $renderedContent = $view->plugin('partial')->direct($viewScript, $vars);
+        $renderedContent = $view->partial($viewScript, $vars);
 
         // Get placement again to see if it has changed
         $placement = $this->getPlacement();

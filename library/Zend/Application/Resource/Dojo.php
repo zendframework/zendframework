@@ -66,8 +66,9 @@ class Dojo extends AbstractResource
             $view = $this->getBootstrap()->view;
 
             DojoConfigurator::enableView($view);
-            $dojoContainer = $view->plugin('dojo')->direct()
-                ->setOptions($this->getOptions());
+            $dojo          = $view->plugin('dojo');
+            $dojoContainer = $dojo();
+            $dojoContainer->setOptions($this->getOptions());
 
             $this->_dojo = $dojoContainer;
         }

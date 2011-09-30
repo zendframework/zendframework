@@ -56,7 +56,7 @@ class CustomDijit extends DijitContainer
      * @param  array $attribs
      * @return string|\Zend\Dojo\View\Helper\CustomDijit
      */
-    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
+    public function __invoke($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         if (null === $id) {
             return $this;

@@ -64,7 +64,7 @@ class AccordionPaneTest extends \PHPUnit_Framework_TestCase
 
     public function getContainer()
     {
-        return $this->view->plugin('accordionPane')->direct('pane1', 'This is the pane content', array('title' => 'Pane 1'));
+        return $this->view->plugin('accordionPane')->__invoke('pane1', 'This is the pane content', array('title' => 'Pane 1'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()

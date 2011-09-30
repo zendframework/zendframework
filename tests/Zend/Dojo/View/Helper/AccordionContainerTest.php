@@ -69,9 +69,9 @@ class AccordionContainerTest extends \PHPUnit_Framework_TestCase
             $id      = 'pane' . $i;
             $title   = 'Pane ' . $i;
             $content = 'This is the content of pane ' . $i;
-            $html   .= $this->view->plugin('accordionPane')->direct($id, $content, array('title' => $title));
+            $html   .= $this->view->plugin('accordionPane')->__invoke($id, $content, array('title' => $title));
         }
-        return $this->helper->direct('container', $html, array(), array('style' => 'height: 200px; width: 100px;'));
+        return $this->helper->__invoke('container', $html, array(), array('style' => 'height: 200px; width: 100px;'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()

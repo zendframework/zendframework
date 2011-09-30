@@ -222,11 +222,34 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\View\TestAsset\Uninvokable', $helper);
     }
 
+    /**
+     * @group convenience-api
+     */
     public function testMethodOverloadingShouldInvokeHelperIfInvokable()
     {
         $broker = $this->renderer->getBroker();
         $broker->getClassLoader()->registerPlugin('invokable', 'ZendTest\View\TestAsset\Invokable');
         $return = $this->renderer->invokable('it works!');
         $this->assertEquals('ZendTest\View\TestAsset\Invokable::__invoke: it works!', $return);
+    }
+
+    /**
+     * @group convenience-api
+     */
+    public function testGetMethodShouldRetrieveVariableFromVariableContainer()
+    {
+        $this->renderer->foo = '<p>Bar</p>';
+        $foo = $this->renderer->get('foo');
+        $this->assertSame($this->renderer->vars()->foo, $foo);
+    }
+
+    /**
+     * @group convenience-api
+     */
+    public function testRawMethodShouldRetrieveRawVariableFromVariableContainer()
+    {
+        $this->renderer->foo = '<p>Bar</p>';
+        $foo = $this->renderer->raw('foo');
+        $this->assertSame($this->renderer->vars()->getRawValue('foo'), $foo);
     }
 }

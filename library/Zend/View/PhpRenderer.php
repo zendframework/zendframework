@@ -206,6 +206,43 @@ class PhpRenderer implements Renderer, Pluggable
     }
 
     /**
+     * Get a single variable
+     * 
+     * @param  mixed $key 
+     * @return mixed
+     */
+    public function get($key)
+    {
+        if (null === $this->vars) {
+            $this->setVars(new Variables());
+        }
+
+        return $this->vars[$key];
+    }
+
+    /**
+     * Get a single raw (unescaped) value
+     * 
+     * @param  mixed $key 
+     * @return mixed
+     */
+    public function raw($key)
+    {
+        if (null === $this->vars) {
+            $this->setVars(new Variables());
+        }
+
+        if (!$this->vars instanceof Variables) {
+            if (isset($this->vars[$key])) {
+                return $this->vars[$key];
+            }
+            return null;
+        }
+
+        return $this->vars->getRawValue($key);
+    }
+
+    /**
      * Overloading: proxy to Variables container
      * 
      * @param  string $name 

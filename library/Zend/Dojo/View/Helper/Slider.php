@@ -248,6 +248,6 @@ abstract class Slider extends Dijit
         $dijit = 'dijit.form.' . ucfirst($this->_sliderType) . 'RuleLabels';
         $attribs = $this->_prepareDijit($attribs, $params, 'layout', $dijit);
 
-        return $this->view->plugin('htmlList')->direct($labels, true, $attribs);
+        return $this->view->htmlList($labels, true, $attribs);
     }
 }

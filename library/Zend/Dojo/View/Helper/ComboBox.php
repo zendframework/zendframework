@@ -66,7 +66,7 @@ class ComboBox extends Dijit
      * @param  array|null $options Select options
      * @return string
      */
-    public function direct($id = null, $value = null, array $params = array(), array $attribs = array(), array $options = null)
+    public function __invoke($id = null, $value = null, array $params = array(), array $attribs = array(), array $options = null)
     {
         $html = '';
         if (!array_key_exists('id', $attribs)) {
@@ -110,7 +110,7 @@ class ComboBox extends Dijit
         }
         // do as normal select
         $attribs = $this->_prepareDijit($attribs, $params, 'element');
-        return $this->view->plugin('formSelect')->direct($id, $value, $attribs, $options);
+        return $this->view->formSelect($id, $value, $attribs, $options);
     }
 
     /**

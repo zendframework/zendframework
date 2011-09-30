@@ -66,7 +66,7 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
 
     public function getElement()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             '',
             array(
@@ -195,7 +195,7 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowPassingLabelParametersViaDecorationParameters()
     {
-        $html = $this->helper->direct(
+        $html = $this->helper->__invoke(
             'elementId',
             '',
             array(

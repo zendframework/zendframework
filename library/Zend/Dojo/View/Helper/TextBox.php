@@ -62,7 +62,7 @@ class TextBox extends Dijit
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
+    public function __invoke($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         return $this->_createFormElement($id, $value, $params, $attribs);
     }

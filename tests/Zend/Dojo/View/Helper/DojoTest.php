@@ -356,7 +356,7 @@ function() {
     public function testDirectMethodShouldReturnContainer()
     {
         $helper = new DojoHelper();
-        $this->assertSame($this->helper, $helper->direct());
+        $this->assertSame($this->helper, $helper->__invoke());
     }
 
     public function testHelperStorageShouldPersistBetweenViewObjects()
@@ -415,7 +415,7 @@ function() {
     public function testStringSerializationShouldBeDoctypeAware()
     {
         $view = $this->getView();
-        $view->plugin('doctype')->direct('HTML4_LOOSE');
+        $view->plugin('doctype')->__invoke('HTML4_LOOSE');
         $this->helper->setView($view);
         $this->setupDojo();
         $html = $this->helper->__toString();
@@ -423,7 +423,7 @@ function() {
         $this->assertRegexp('|<script [^>]*>[\r\n]+\s*//<!--|', $html);
 
         $this->helper = new DojoHelper();
-        $view->plugin('doctype')->direct('XHTML1_STRICT');
+        $view->plugin('doctype')->__invoke('XHTML1_STRICT');
         $this->helper->setView($view);
         $this->setupDojo();
         $html = $this->helper->__toString();
@@ -441,7 +441,7 @@ function() {
 
         $view = $this->getView();
         $this->assertNotSame($this->view, $view);
-        $helper = $view->plugin('dojo')->direct();
+        $helper = $view->plugin('dojo')->__invoke();
         $this->assertSame($this->helper, $helper);
     }
 
@@ -798,7 +798,7 @@ function() {
     public function testZendDijitOnLoadMarkupShouldPrecedeAllOtherOnLoadEvents()
     {
         $this->helper->addOnLoad('zend.custom');
-        $this->view->plugin('textbox')->direct('foo', 'bar');
+        $this->view->plugin('textbox')->__invoke('foo', 'bar');
         $test = $this->helper->__toString();
         $this->assertRegexp('/zendDijits.*?(zend\.custom)/s', $test, 'Generated markup: ' . $test);
     }

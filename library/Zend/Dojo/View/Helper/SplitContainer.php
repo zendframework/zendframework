@@ -56,7 +56,7 @@ class SplitContainer extends DijitContainer
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function direct($id = null, $content = '', array $params = array(), array $attribs = array())
+    public function __invoke($id = null, $content = '', array $params = array(), array $attribs = array())
     {
         if (0 === func_num_args()) {
             return $this;

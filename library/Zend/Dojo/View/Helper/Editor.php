@@ -80,7 +80,7 @@ class Editor extends Dijit
      * @param  array $attribs
      * @return string
      */
-    public function direct($id = null, $value = null, $params = array(), $attribs = array())
+    public function __invoke($id = null, $value = null, $params = array(), $attribs = array())
     {
         if (isset($params['plugins'])) {
             foreach ($this->_getRequiredModules($params['plugins']) as $module) {
@@ -126,7 +126,7 @@ class Editor extends Dijit
         // Embed a textarea in a <noscript> tag to allow for graceful 
         // degradation
         $html .= '<noscript>'
-               . $this->view->plugin('formTextarea')->direct($hiddenId, $value, $attribs)
+               . $this->view->formTextarea($hiddenId, $value, $attribs)
                . '</noscript>';
 
         $html  .= '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();

@@ -68,9 +68,9 @@ class BorderContainerTest extends \PHPUnit_Framework_TestCase
         foreach (array('top', 'bottom', 'center', 'left', 'right') as $pane) {
             $id      = $pane . 'Pane';
             $content = 'This is the content of pane ' . $pane;
-            $html   .= $this->view->plugin('contentPane')->direct($id, $content, array('region' => $pane));
+            $html   .= $this->view->plugin('contentPane')->__invoke($id, $content, array('region' => $pane));
         }
-        return $this->helper->direct('container', $html, array('design' => 'headline'));
+        return $this->helper->__invoke('container', $html, array('design' => 'headline'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()

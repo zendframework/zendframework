@@ -56,7 +56,7 @@ class HorizontalSlider extends Slider
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
+    public function __invoke($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         return $this->prepareSlider($id, $value, $params, $attribs);
     }

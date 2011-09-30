@@ -78,7 +78,7 @@ class DojoTest extends \PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
         $resource->getBootstrap()->bootstrap('view');
-        $dojo = $resource->getBootstrap()->view->plugin('dojo')->direct();
+        $dojo = $resource->getBootstrap()->view->dojo();
 
         $test = array(
             'requireModules' => $dojo->getModules(),

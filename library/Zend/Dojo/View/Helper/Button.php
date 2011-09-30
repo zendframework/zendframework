@@ -56,7 +56,7 @@ class Button extends Dijit
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
+    public function __invoke($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         $attribs['name'] = $id;
         if (!array_key_exists('id', $attribs)) {
@@ -64,6 +64,6 @@ class Button extends Dijit
         }
         $attribs = $this->_prepareDijit($attribs, $params, 'element');
 
-        return $this->view->plugin('formButton')->direct($id, $value, $attribs);
+        return $this->view->formButton($id, $value, $attribs);
     }
 }

@@ -62,7 +62,7 @@ class NumberSpinner extends Dijit
      * @param  array $attribs HTML attributes
      * @return string
      */
-    public function direct($id = null, $value = null, array $params = array(), array $attribs = array())
+    public function __invoke($id = null, $value = null, array $params = array(), array $attribs = array())
     {
         // Get constraints and serialize to JSON if necessary
         if (array_key_exists('constraints', $params)) {

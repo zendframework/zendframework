@@ -103,7 +103,7 @@ class Dojo extends AbstractViewHelper
      *
      * @return \Zend\Dojo\View\Helper\Dojo\Container
      */
-    public function direct()
+    public function __invoke()
     {
         return $this->_container;
     }

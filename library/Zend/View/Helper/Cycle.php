@@ -64,19 +64,6 @@ class Cycle extends AbstractHelper implements \Iterator
     protected $_name = self::DEFAULT_NAME;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Add elements to alternate
      *
      * @param array $data

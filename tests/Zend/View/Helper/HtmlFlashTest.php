@@ -63,7 +63,7 @@ class HtmlFlashTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlFlash()
     {
-        $htmlFlash = $this->helper->direct('/path/to/flash.swf');
+        $htmlFlash = $this->helper->__invoke('/path/to/flash.swf');
 
         $objectStartElement = '<object data="/path/to/flash.swf" type="application/x-shockwave-flash">';
 

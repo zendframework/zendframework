@@ -58,13 +58,13 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultEmpty()
     {
-        $url = $this->helper->direct();
+        $url = $this->helper->__invoke();
         $this->assertEquals('/', $url);
     }
 
     public function testDefault()
     {
-        $url = $this->helper->direct(array('controller' => 'ctrl', 'action' => 'act'));
+        $url = $this->helper->__invoke(array('controller' => 'ctrl', 'action' => 'act'));
         $this->assertEquals('/ctrl/act', $url);
     }
 

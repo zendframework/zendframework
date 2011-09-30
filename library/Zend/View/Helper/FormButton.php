@@ -37,19 +37,6 @@ namespace Zend\View\Helper;
 class FormButton extends FormElement
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Generates a 'button' element.
      *
      * @access public
@@ -67,8 +54,7 @@ class FormButton extends FormElement
     public function __invoke($name = null, $value = null, $attribs = null)
     {
         $info = $this->_getInfo($name, $value, $attribs);
-
-        $id = $disable = $escape = null;
+        $id   = $disable = $escape = null;
 
         extract($info); // name, id, value, attribs, options, listsep, disable
 

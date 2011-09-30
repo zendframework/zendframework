@@ -42,19 +42,6 @@ class DeclareVars extends AbstractHelper
     public $view;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Declare template vars to set default values and avoid notices when using strictVars
      *
      * Primarily for use when using {@link Zend_View_Abstract::strictVars() Zend_View strictVars()},

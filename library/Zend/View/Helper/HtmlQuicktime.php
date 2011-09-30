@@ -61,19 +61,6 @@ class HtmlQuicktime extends HtmlElement
                                 'codebase' => self::ATTRIB_CODEBASE);
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Output a quicktime movie object tag
      *
      * @param string $data The quicktime file
@@ -82,18 +69,15 @@ class HtmlQuicktime extends HtmlElement
      * @param string $content Alternative content
      * @return string
      */
-    public function __invoke($data = null, array $attribs = array(), array $params = array(), $content = null)
+    public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)
     {
-        if ($data == null) {
-            throw new \InvalidArgumentException('HTMLQuicktime: missing argument. $data is required in htmlQuicktime($data, array $attribs = array(), array $params = array(), $content = null)');
-        }
-        
         // Attrs
         $attribs = array_merge($this->_attribs, $attribs);
 
         // Params
         $params = array_merge(array('src' => $data), $params);
 
-        return $this->getView()->plugin('htmlObject')->direct($data, self::TYPE, $attribs, $params, $content);
+        $htmlObject = $this->getView()->plugin('htmlObject');
+        return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

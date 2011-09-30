@@ -44,19 +44,6 @@ class BaseUrl extends AbstractHelper
     protected $_baseUrl;
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Returns site's base url, or file with base url prepended
      *
      * $file is appended to the base url for simplicity

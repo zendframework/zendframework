@@ -40,19 +40,6 @@ use Zend\Layout\Layout as LayoutManager;
 class Json extends AbstractHelper
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Encode data as JSON, disable layouts, and set response header
      *
      * If $keepLayouts is true, does not disable layouts.
@@ -65,12 +52,8 @@ class Json extends AbstractHelper
      *         that will not be passed to Zend_Json::encode method but will be used here
      * @return string|void
      */
-    public function __invoke($data = null, $keepLayouts = false)
+    public function __invoke($data, $keepLayouts = false)
     {
-        if ($data == null) {
-            throw new \InvalidArgumentException('JSON: missing argument. $data is required in json($data, $keepLayouts = false)');
-        }
-        
         $options = array();
         if (is_array($keepLayouts))
         {

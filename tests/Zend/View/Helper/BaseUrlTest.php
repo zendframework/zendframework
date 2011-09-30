@@ -82,7 +82,7 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
             Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
 
-            $this->assertEquals(rtrim($baseUrl, '/\\'), $helper->direct());
+            $this->assertEquals(rtrim($baseUrl, '/\\'), $helper->__invoke());
         }
     }
 
@@ -102,7 +102,7 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
             Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->direct('file.js'));
+            $this->assertEquals($val, $helper->__invoke('file.js'));
         }
     }
 
@@ -122,7 +122,7 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
             Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->direct('/file.js'));
+            $this->assertEquals($val, $helper->__invoke('/file.js'));
         }
     }
 
@@ -142,7 +142,7 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
             Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->direct('/path/bar'));
+            $this->assertEquals($val, $helper->__invoke('/path/bar'));
         }
     }
 
@@ -161,7 +161,7 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
             Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
 
-            $this->assertEquals($val, $helper->direct('/'));
+            $this->assertEquals($val, $helper->__invoke('/'));
         }
     }
 

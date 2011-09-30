@@ -105,7 +105,7 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
     public function testFormErrorsRendersUnorderedListByDefault()
     {
         $errors = array('foo', 'bar', 'baz');
-        $html = $this->helper->direct($errors);
+        $html = $this->helper->__invoke($errors);
         $this->assertContains('<ul', $html);
         foreach ($errors as $error) {
             $this->assertContains('<li>' . $error . '</li>', $html);
@@ -119,7 +119,7 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
                      ->setElementSeparator('</dt><dt>')
                      ->setElementEnd('</dt></dl>');
         $errors = array('foo', 'bar', 'baz');
-        $html = $this->helper->direct($errors);
+        $html = $this->helper->__invoke($errors);
         $this->assertContains('<dl>', $html);
         foreach ($errors as $error) {
             $this->assertContains('<dt>' . $error . '</dt>', $html);
@@ -132,7 +132,7 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
         $errors = array(
             'bad' => '\"><script>alert("xss");</script>',
         );
-        $html = $this->helper->direct($errors);
+        $html = $this->helper->__invoke($errors);
         $this->assertNotContains($errors['bad'], $html);
         $this->assertContains('&', $html);
     }
@@ -143,7 +143,7 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
             'foo' => '<b>Field is required</b>',
             'bar' => '<a href="/help">Please click here for more information</a>'
         );
-        $html = $this->helper->direct($errors, array('escape' => false));
+        $html = $this->helper->__invoke($errors, array('escape' => false));
         $this->assertContains($errors['foo'], $html);
         $this->assertContains($errors['bar'], $html);
     }
@@ -155,7 +155,7 @@ class FormErrorsTest extends \PHPUnit_Framework_TestCase
     public function testCanSetClassAttribute()
     {
         $options = array('class' => 'custom-class');
-        $acutallHtml = $this->helper->direct(array(), $options);
+        $acutallHtml = $this->helper->__invoke(array(), $options);
         $this->assertEquals('<ul class="custom-class"><li></li></ul>', $acutallHtml);
     }
 }

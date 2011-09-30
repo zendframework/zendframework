@@ -92,7 +92,7 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     public function testHeadScriptReturnsObjectInstance()
     {
-        $placeholder = $this->helper->direct();
+        $placeholder = $this->helper->__invoke();
         $this->assertTrue($placeholder instanceof Helper\HeadScript);
     }
 
@@ -258,9 +258,9 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     public function testHeadScriptAppropriatelySetsScriptItems()
     {
-        $this->helper->direct('FILE', 'foo', 'set')
-                     ->direct('SCRIPT', 'bar', 'prepend')
-                     ->direct('SCRIPT', 'baz', 'append');
+        $this->helper->__invoke('FILE', 'foo', 'set')
+                     ->__invoke('SCRIPT', 'bar', 'prepend')
+                     ->__invoke('SCRIPT', 'baz', 'append');
         $items = $this->helper->getArrayCopy();
         for ($i = 0; $i < 3; ++$i) {
             $item = $items[$i];
@@ -284,9 +284,9 @@ class HeadScriptTest extends \PHPUnit_Framework_TestCase
 
     public function testToStringRendersValidHtml()
     {
-        $this->helper->direct('FILE', 'foo', 'set')
-                     ->direct('SCRIPT', 'bar', 'prepend')
-                     ->direct('SCRIPT', 'baz', 'append');
+        $this->helper->__invoke('FILE', 'foo', 'set')
+                     ->__invoke('SCRIPT', 'bar', 'prepend')
+                     ->__invoke('SCRIPT', 'baz', 'append');
         $string = $this->helper->toString();
 
         $scripts = substr_count($string, '<script ');
@@ -339,53 +339,53 @@ document.write(bar.strlen());');
 
     public function testDoesNotAllowDuplicateFiles()
     {
-        $this->helper->direct('FILE', '/js/prototype.js');
-        $this->helper->direct('FILE', '/js/prototype.js');
+        $this->helper->__invoke('FILE', '/js/prototype.js');
+        $this->helper->__invoke('FILE', '/js/prototype.js');
         $this->assertEquals(1, count($this->helper));
     }
 
     public function testRenderingDoesNotRenderArbitraryAttributesByDefault()
     {
-        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'));
-        $test = $this->helper->direct()->toString();
+        $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'));
+        $test = $this->helper->__invoke()->toString();
         $this->assertNotContains('bogus="deferred"', $test);
     }
 
     public function testCanRenderArbitraryAttributesOnRequest()
     {
-        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'))
+        $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('bogus' => 'deferred'))
              ->setAllowArbitraryAttributes(true);
-        $test = $this->helper->direct()->toString();
+        $test = $this->helper->__invoke()->toString();
         $this->assertContains('bogus="deferred"', $test);
     }
 
     public function testCanPerformMultipleSerialCaptures()
     {
-        $this->helper->direct()->captureStart();
+        $this->helper->__invoke()->captureStart();
         echo "this is something captured";
-        $this->helper->direct()->captureEnd();
+        $this->helper->__invoke()->captureEnd();
         try {
-            $this->helper->direct()->captureStart();
+            $this->helper->__invoke()->captureStart();
         } catch (View\Exception $e) {
             $this->fail('Serial captures should be allowed');
         }
         echo "this is something else captured";
-        $this->helper->direct()->captureEnd();
+        $this->helper->__invoke()->captureEnd();
     }
 
     public function testCannotNestCaptures()
     {
-        $this->helper->direct()->captureStart();
+        $this->helper->__invoke()->captureStart();
         echo "this is something captured";
         try {
-            $this->helper->direct()->captureStart();
-            $this->helper->direct()->captureEnd();
+            $this->helper->__invoke()->captureStart();
+            $this->helper->__invoke()->captureEnd();
             $this->fail('Should not be able to nest captures');
         } catch (View\Exception $e) {
-            $this->helper->direct()->captureEnd();
+            $this->helper->__invoke()->captureEnd();
             $this->assertContains('Cannot nest', $e->getMessage());
         }
-        $this->helper->direct()->captureEnd();
+        $this->helper->__invoke()->captureEnd();
     }
 
     /**
@@ -400,16 +400,16 @@ document.write(bar.strlen());');
 
     public function testConditionalScript()
     {
-        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
-        $test = $this->helper->direct()->toString();
+        $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
+        $test = $this->helper->__invoke()->toString();
         $this->assertContains('<!--[if lt IE 7]>', $test);
     }
 
     public function testConditionalScriptWidthIndentation()
     {
-        $this->helper->direct()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
-        $this->helper->direct()->setIndent(4);
-        $test = $this->helper->direct()->toString();
+        $this->helper->__invoke()->appendFile('/js/foo.js', 'text/javascript', array('conditional' => 'lt IE 7'));
+        $this->helper->__invoke()->setIndent(4);
+        $test = $this->helper->__invoke()->toString();
         $this->assertContains('    <!--[if lt IE 7]>', $test);
     }
 

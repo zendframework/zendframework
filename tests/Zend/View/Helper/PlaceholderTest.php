@@ -106,7 +106,7 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
      */
     public function testPlaceholderRetrievesContainer()
     {
-        $container = $this->placeholder->direct('foo');
+        $container = $this->placeholder->__invoke('foo');
         $this->assertInstanceOf('Zend\View\Helper\Placeholder\Container\AbstractContainer', $container);
     }
 
@@ -115,8 +115,8 @@ class PlaceholderTest extends \PHPUnit_Framework_TestCase
      */
     public function testPlaceholderRetrievesSameContainerOnSubsequentCalls()
     {
-        $container1 = $this->placeholder->direct('foo');
-        $container2 = $this->placeholder->direct('foo');
+        $container1 = $this->placeholder->__invoke('foo');
+        $container2 = $this->placeholder->__invoke('foo');
         $this->assertSame($container1, $container2);
     }
 }

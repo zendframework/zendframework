@@ -37,19 +37,6 @@ namespace Zend\View\Helper;
 class FormNote extends FormElement
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
     * Helper to show a "note" based on a hidden value.
      *
      * @access public
@@ -63,12 +50,8 @@ class FormNote extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function __invoke($name = null, $value = null)
+    public function __invoke($name, $value = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormNote: missing argument. $name is required in formNote($name, $value = null)');
-        }
-        
         $info = $this->_getInfo($name, $value);
         extract($info); // name, value, attribs, options, listsep, disable
         return $value;

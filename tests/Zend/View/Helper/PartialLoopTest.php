@@ -93,7 +93,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoop.phtml', $data);
+        $result = $this->helper->__invoke('partialLoop.phtml', $data);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
             $this->assertContains($string, $result);
@@ -117,7 +117,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoop.phtml', $o);
+        $result = $this->helper->__invoke('partialLoop.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
             $this->assertContains($string, $result);
@@ -141,7 +141,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoop.phtml', $rIterator);
+        $result = $this->helper->__invoke('partialLoop.phtml', $rIterator);
         foreach ($rIterator as $item) {
             foreach ($item as $key => $value) {
                 $this->assertContains($value, $result, var_export($value, 1));
@@ -167,7 +167,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $this->helper->setView($view);
 
         try {
-            $result = $this->helper->direct('partialLoop.phtml', $o);
+            $result = $this->helper->__invoke('partialLoop.phtml', $o);
             $this->fail('PartialLoop should only work with arrays and iterators');
         } catch (\Exception $e) {
         }
@@ -190,7 +190,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoop.phtml', 'foo', $data);
+        $result = $this->helper->__invoke('partialLoop.phtml', 'foo', $data);
         foreach ($data as $item) {
             $string = 'This is an iteration in the foo module: ' . $item['message'];
             $this->assertContains($string, $result);
@@ -199,7 +199,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingNoArgsReturnsHelperInstance()
     {
-        $test = $this->helper->direct();
+        $test = $this->helper->__invoke();
         $this->assertSame($this->helper, $test);
     }
 
@@ -217,7 +217,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoop.phtml', $o);
+        $result = $this->helper->__invoke('partialLoop.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
             $this->assertContains($string, $result);
@@ -238,7 +238,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoop.phtml', $o);
+        $result = $this->helper->__invoke('partialLoop.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item['message'];
             $this->assertContains($string, $result, $result);
@@ -264,7 +264,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $this->helper->setView($view);
         $this->helper->setObjectKey('obj');
 
-        $result = $this->helper->direct('partialLoopObject.phtml', $o);
+        $result = $this->helper->__invoke('partialLoopObject.phtml', $o);
         foreach ($data as $item) {
             $string = 'This is an iteration: ' . $item->message;
             $this->assertContains($string, $result, $result);
@@ -281,13 +281,13 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $this->helper->setView($view);
 
         try {
-            $result = $this->helper->direct('partialLoop.phtml', array());
+            $result = $this->helper->__invoke('partialLoop.phtml', array());
         } catch (\Exception $e) {
             $this->fail('Empty array should not cause partialLoop to throw exception');
         }
 
         try {
-            $result = $this->helper->direct('partialLoop.phtml', null, array());
+            $result = $this->helper->__invoke('partialLoop.phtml', null, array());
         } catch (\Exception $e) {
             $this->fail('Empty array should not cause partialLoop to throw exception');
         }
@@ -309,7 +309,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoopCouter.phtml', $data);
+        $result = $this->helper->__invoke('partialLoopCouter.phtml', $data);
         foreach ($data as $key => $item) {
             $string = sprintf(
                 'This is an iteration: %s, pointer at %d',
@@ -336,13 +336,13 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
         $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
 
-        $result = $this->helper->direct('partialLoopCouter.phtml', $data);
+        $result = $this->helper->__invoke('partialLoopCouter.phtml', $data);
         foreach ($data as $key=>$item) {
             $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
             $this->assertContains($string, $result);
         }
 
-        $result = $this->helper->direct('partialLoopCouter.phtml', $data);
+        $result = $this->helper->__invoke('partialLoopCouter.phtml', $data);
         foreach ($data as $key=>$item) {
             $string = 'This is an iteration: ' . $item['message'] . ', pointer at ' . ($key+1);
             $this->assertContains($string, $result);

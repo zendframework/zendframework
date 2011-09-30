@@ -92,8 +92,8 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $curr = new Currency\Currency('de_AT');
 
         $helper = new Helper\Currency($curr);
-        $this->assertEquals('€ 1.234,56', $helper->direct(1234.56));
-        $this->assertEquals('€ 0,12', $helper->direct(0.123));
+        $this->assertEquals('€ 1.234,56', $helper->__invoke(1234.56));
+        $this->assertEquals('€ 0,12', $helper->__invoke(0.123));
     }
 
     public function testLocalCurrencyObjectUsedWhenPresent()
@@ -101,15 +101,15 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $curr = new Currency\Currency('de_AT');
 
         $this->helper->setCurrency($curr);
-        $this->assertEquals('€ 1.234,56', $this->helper->direct(1234.56));
-        $this->assertEquals('€ 0,12', $this->helper->direct(0.123));
+        $this->assertEquals('€ 1.234,56', $this->helper->__invoke(1234.56));
+        $this->assertEquals('€ 0,12', $this->helper->__invoke(0.123));
     }
 
     public function testCurrencyObjectInRegistryUsedInAbsenceOfLocalCurrencyObject()
     {
         $curr = new Currency\Currency('de_AT');
         \Zend\Registry::set('Zend_Currency', $curr);
-        $this->assertEquals('€ 1.234,56', $this->helper->direct(1234.56));
+        $this->assertEquals('€ 1.234,56', $this->helper->__invoke(1234.56));
     }
 
     public function testPassingNonNullNonCurrencyObjectToConstructorThrowsException()
@@ -143,7 +143,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $curr = new Currency\Currency('de_AT');
 
         $this->helper->setCurrency($curr);
-        $this->assertEquals("€ 1.234,56", $this->helper->direct(1234.56, "de_AT"));
+        $this->assertEquals("€ 1.234,56", $this->helper->__invoke(1234.56, "de_AT"));
     }
 
     public function testCurrencyObjectNullByDefault()
@@ -167,12 +167,12 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperObjectReturnedWhenNoArgumentsPassed()
     {
-        $helper = $this->helper->direct();
+        $helper = $this->helper->__invoke();
         $this->assertSame($this->helper, $helper);
 
         $currLoc = new Currency\Currency('de_AT');
         $this->helper->setCurrency($currLoc);
-        $helper = $this->helper->direct();
+        $helper = $this->helper->__invoke();
         $this->assertSame($this->helper, $helper);
     }
 }

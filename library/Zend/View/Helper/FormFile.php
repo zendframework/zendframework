@@ -37,19 +37,6 @@ namespace Zend\View\Helper;
 class FormFile extends FormElement
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Generates a 'file' element.
      *
      * @access public
@@ -62,12 +49,8 @@ class FormFile extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function __invoke($name = null, $attribs = null)
+    public function __invoke($name, $attribs = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormFile: missing argument. $name is required in formFile($name, $attribs = null)');
-        }
-        
         $info = $this->_getInfo($name, null, $attribs);
         extract($info); // name, id, value, attribs, options, listsep, disable
 

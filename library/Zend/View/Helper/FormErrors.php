@@ -50,31 +50,14 @@ class FormErrors extends FormElement
     /**#@-*/
 
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Render form errors
      *
      * @param  string|array $errors Error(s) to render
      * @param  array $options
      * @return string
      */
-    public function __invoke($errors = null, array $options = null)
+    public function __invoke($errors, array $options = null)
     {
-        if ($errors === null) { // can be empty array()
-            throw new \InvalidArgumentException('FormErrors: missing argument. $errors is required in form($errors, array $options = null)');
-        }
-        
         $escape = true;
         if (isset($options['escape'])) {
             $escape = (bool) $options['escape'];

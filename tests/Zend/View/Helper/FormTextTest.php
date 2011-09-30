@@ -62,28 +62,28 @@ class FormTextTest extends \PHPUnit_Framework_TestCase
 
     public function testIdSetFromName()
     {
-        $element = $this->helper->direct('foo');
+        $element = $this->helper->__invoke('foo');
         $this->assertContains('name="foo"', $element);
         $this->assertContains('id="foo"', $element);
     }
 
     public function testSetIdFromAttribs()
     {
-        $element = $this->helper->direct('foo', null, array('id' => 'bar'));
+        $element = $this->helper->__invoke('foo', null, array('id' => 'bar'));
         $this->assertContains('name="foo"', $element);
         $this->assertContains('id="bar"', $element);
     }
 
     public function testSetValue()
     {
-        $element = $this->helper->direct('foo', 'bar');
+        $element = $this->helper->__invoke('foo', 'bar');
         $this->assertContains('name="foo"', $element);
         $this->assertContains('value="bar"', $element);
     }
 
     public function testReadOnlyAttribute()
     {
-        $element = $this->helper->direct('foo', null, array('readonly' => 'readonly'));
+        $element = $this->helper->__invoke('foo', null, array('readonly' => 'readonly'));
         $this->assertContains('readonly="readonly"', $element);
     }
 
@@ -92,7 +92,7 @@ class FormTextTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -106,7 +106,7 @@ class FormTextTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -117,14 +117,14 @@ class FormTextTest extends \PHPUnit_Framework_TestCase
 
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->direct('foo', 'bar');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertNotContains(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
-        $this->view->plugin('doctype')->direct('XHTML1_STRICT');
-        $test = $this->helper->direct('foo', 'bar');
+        $this->view->doctype('XHTML1_STRICT');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertContains(' />', $test);
     }
 }

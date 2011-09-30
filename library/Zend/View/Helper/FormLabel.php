@@ -37,19 +37,6 @@ namespace Zend\View\Helper;
 class FormLabel extends FormElement
 {
     /**
-     * Deprecated: invoke the default functionality of the helper
-     *
-     * Proxies to __invoke()
-     * 
-     * @deprecated
-     * @return mixed
-     */
-    public function direct()
-    {
-        return call_user_func_array($this, func_get_args());
-    }
-
-    /**
      * Generates a 'label' element.
      *
      * @param  string $name The form element name for which the label is being generated
@@ -57,12 +44,8 @@ class FormLabel extends FormElement
      * @param  array $attribs Form element attributes (used to determine if disabled)
      * @return string The element XHTML.
      */
-    public function __invoke($name = null, $value = null, array $attribs = null)
+    public function __invoke($name, $value = null, array $attribs = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormLabel: missing argument. $name is required in formLabel($name, $value = null, array $attribs = array())');
-        }
-        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable, escape
 

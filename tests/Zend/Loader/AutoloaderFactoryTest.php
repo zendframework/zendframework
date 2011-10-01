@@ -32,7 +32,7 @@ use Zend\Loader\AutoloaderFactory;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Loader
  */
-class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
+class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

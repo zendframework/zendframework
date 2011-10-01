@@ -42,8 +42,8 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
     public function testUsesEmptyPluginClassLoaderByDefault()
     {
         $loader = $this->broker->getClassLoader();
-        $this->assertType('Zend\Loader\ShortNameLocator', $loader);
-        $this->assertType('Zend\Loader\PluginClassLoader', $loader);
+        $this->assertInstanceOf('Zend\Loader\ShortNameLocator', $loader);
+        $this->assertInstanceOf('Zend\Loader\PluginClassLoader', $loader);
         $this->assertEquals(array(), $loader->getRegisteredPlugins());
     }
 
@@ -65,7 +65,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $loader = $this->broker->getClassLoader();
         $loader->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
         $plugin = $this->broker->load('sample');
-        $this->assertType('ZendTest\Loader\TestAsset\SamplePlugin', $plugin);
+        $this->assertInstanceOf('ZendTest\Loader\TestAsset\SamplePlugin', $plugin);
     }
 
     public function testLoadInstantiatesPluginWithPassedOptionsWhenFound()
@@ -73,7 +73,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         $loader = $this->broker->getClassLoader();
         $loader->registerPlugin('sample', 'ZendTest\Loader\TestAsset\SamplePlugin');
         $plugin = $this->broker->load('sample', array('foo'));
-        $this->assertType('ZendTest\Loader\TestAsset\SamplePlugin', $plugin);
+        $this->assertInstanceOf('ZendTest\Loader\TestAsset\SamplePlugin', $plugin);
         $this->assertEquals('foo', $plugin->options);
     }
 
@@ -142,7 +142,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
             return ($plugin instanceof TestAsset\SamplePlugin);
         });
         $test = $this->broker->register('sample', new TestAsset\SamplePlugin());
-        $this->assertType('Zend\Loader\PluginBroker', $test);
+        $this->assertInstanceOf('Zend\Loader\PluginBroker', $test);
     }
 
     public function testLoadingPluginSucceedsWhenPassesValidatorCriteria()
@@ -153,7 +153,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
             return ($plugin instanceof TestAsset\SamplePlugin);
         });
         $test = $this->broker->load('sample');
-        $this->assertType('ZendTest\Loader\TestAsset\SamplePlugin', $test);
+        $this->assertInstanceOf('ZendTest\Loader\TestAsset\SamplePlugin', $test);
     }
 
     public function testPluginNamesAreCaseInsensitive()
@@ -262,7 +262,7 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         ));
 
         $loader = $broker->getClassLoader();
-        $this->assertType('Zend\Loader\PrefixPathLoader', $loader);
+        $this->assertInstanceOf('Zend\Loader\PrefixPathLoader', $loader);
         $this->assertEquals('ZendTest\UnusualNamespace\ClassMappedClass', $loader->load('ClassMappedClass'));
 
         $this->assertTrue($broker->isLoaded('test'));
@@ -272,6 +272,6 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
             'class_loader' => 'ZendTest\Loader\TestAsset\CustomClassLoader',
         ));
         $loader = $broker->getClassLoader();
-        $this->assertType('ZendTest\Loader\TestAsset\CustomClassLoader', $loader);
+        $this->assertInstanceOf('ZendTest\Loader\TestAsset\CustomClassLoader', $loader);
     }
 }

@@ -265,7 +265,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
         <para>
             <classname>Zend_Locale</classname> provides three additional locales. These locales do
             not belong to any language or region. They are "automatic" locales which means that they
-            have the same effect as the method <methodname>getDefault()</methodname> but without the
+            have the same effect as the method <methodname>getFallback()</methodname> but without the
             negative effects like creating an instance. These "automatic" locales can be used
             anywhere, where also a standard locale and also the definition of a locale, its string
             representation, can be used. This offers simplicity for situations like working with
@@ -380,9 +380,9 @@ $date = new Zend_Date($locale);
 
         <para>
             Since Zend Framework Release 1.5 there is a much better way to handle this. You can set
-            a default locale which the static <methodname>setDefault()</methodname> method. Of
+            a default locale which the static <methodname>setFallback()</methodname> method. Of
             course, every unknown or not fully qualified locale will also throw an exception.
-            <methodname>setDefault()</methodname> should be the first call before you initiate any
+            <methodname>setFallback()</methodname> should be the first call before you initiate any
             class using <classname>Zend_Locale</classname>. See the following example for details:
         </para>
 
@@ -391,7 +391,7 @@ $date = new Zend_Date($locale);
 
             <programlisting language="php"><![CDATA[
 // within the bootstrap file
-Zend_Locale::setDefault('de');
+Zend_Locale::setFallback('de');
 
 // within your model/controller
 $date = new Zend_Date();

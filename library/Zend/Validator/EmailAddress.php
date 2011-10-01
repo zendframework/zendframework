@@ -78,6 +78,13 @@ class EmailAddress extends AbstractValidator
     protected $_localPart;
 
     /**
+     * Returns the found mx record informations
+     *
+     * @var array
+     */
+    protected $_mxRecord;
+
+    /**
      * Internal options array
      */
     protected $_options = array(
@@ -303,7 +310,7 @@ class EmailAddress extends AbstractValidator
      * @param string $host
      * @return boolean Returns false when minimal one of the given addresses is not reserved
      */
-    private function _isReserved($host){
+    protected function isReserved($host){
         if (!preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $host)) {
             $host = gethostbynamel($host);
         } else {
@@ -337,7 +344,7 @@ class EmailAddress extends AbstractValidator
      *
      * @return boolean
      */
-    private function _validateLocalPart()
+    protected function validateLocalPart()
     {
         // First try to match the local part on the common dot-atom format
         $result = false;
@@ -370,21 +377,35 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
+     * Returns the found MX Record information after validation including weight for further processing
+     *
+     * @return array
+     */
+    public function getMXRecord()
+    {
+        return $this->_mxRecord;
+    }
+
+    /**
      * Internal method to validate the servers MX records
      *
      * @return boolean
      */
-    private function _validateMXRecords()
+    protected function validateMXRecords()
     {
         $mxHosts = array();
-        $result = getmxrr($this->_hostname, $mxHosts);
+        $weight  = array();
+        $result = getmxrr($this->_hostname, $mxHosts, $weight);
+        $this->_mxRecord = array_combine($mxHosts, $weight);
+        arsort($this->_mxRecord);
+
         if (!$result) {
             $this->_error(self::INVALID_MX_RECORD);
         } else if ($this->_options['deep']) {
             $validAddress = false;
             $reserved     = true;
-            foreach ($mxHosts as $hostname) {
-                $res = $this->_isReserved($hostname);
+            foreach ($this->_mxRecord as $hostname => $weight) {
+                $res = $this->isReserved($hostname);
                 if (!$res) {
                     $reserved = false;
                 }
@@ -416,7 +437,7 @@ class EmailAddress extends AbstractValidator
      *
      * @return boolean
      */
-    private function _validateHostnamePart()
+    protected function validateHostnamePart()
     {
         $hostname = $this->_options['hostname']->setTranslator($this->getTranslator())
                          ->isValid($this->_hostname);
@@ -433,10 +454,29 @@ class EmailAddress extends AbstractValidator
             }
         } else if ($this->_options['mx']) {
             // MX check on hostname
-            $hostname = $this->_validateMXRecords();
+            $hostname = $this->validateMXRecords();
         }
 
         return $hostname;
+    }
+
+    /**
+     * Splits the given value in hostname and local part of the email adress
+     *
+     * @param string $value Email adress to be split
+     * @return bool Returns false when the email can not be split
+     */
+    protected function splitEmailParts($value)
+    {
+        // Split email address up and disallow '..'
+        if ((strpos($value, '..') !== false) or
+            (!preg_match('/^(.+)@([^@]+)$/', $value, $matches))) {
+            return false;
+        }
+
+        $this->_localPart = $matches[1];
+        $this->_hostname  = $matches[2];
+        return true;
     }
 
     /**
@@ -462,14 +502,10 @@ class EmailAddress extends AbstractValidator
         $this->_setValue($value);
 
         // Split email address up and disallow '..'
-        if ((strpos($value, '..') !== false) or
-            (!preg_match('/^(.+)@([^@]+)$/', $value, $matches))) {
+        if (!$this->splitEmailParts($value)) {
             $this->_error(self::INVALID_FORMAT);
             return false;
         }
-
-        $this->_localPart = $matches[1];
-        $this->_hostname  = $matches[2];
 
         if ((strlen($this->_localPart) > 64) || (strlen($this->_hostname) > 255)) {
             $length = false;
@@ -478,10 +514,10 @@ class EmailAddress extends AbstractValidator
 
         // Match hostname part
         if ($this->_options['domain']) {
-            $hostname = $this->_validateHostnamePart();
+            $hostname = $this->validateHostnamePart();
         }
 
-        $local = $this->_validateLocalPart();
+        $local = $this->validateLocalPart();
 
         // If both parts valid, return true
         if ($local && $length) {

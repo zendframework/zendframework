@@ -567,4 +567,15 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $hostname = $this->_validator->getHostnameValidator();
         $this->assertTrue($hostname instanceof Validator\Hostname);
     }
+
+    /**
+     * Test getMXRecord
+     */
+    public function testGetMXRecord()
+    {
+        $validator = new Validator\EmailAddress(array('mx' => true, 'allow' => Hostname::ALLOW_ALL));
+        $this->assertTrue($validator->isValid('john.doe@gmail.com'));
+        $result = $validator->getMXRecord();
+        $this->assertTrue(!empty($result));
+    }
 }

@@ -35,9 +35,6 @@ class ManagerOptions
      */
     public function setEnableConfigCache($enabled)
     {
-        if (is_string($enabled) && strtolower(trim($enabled)) === 'false') {
-            $enabled = false;
-        }
         $this->enableConfigCache = (bool) $enabled;
         return $this;
     }

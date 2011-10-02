@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Fri, 23 Sep 2011 10:31:39 GMT
+X-Container-Meta-Foo: bar
+X-Container-Meta-Foo2: bar2
+X-Container-Bytes-Used: 30
+X-Container-Object-Count: 2
+Accept-Ranges: bytes
+X-Trans-Id: tx990e3e7b061547e893430be682ad1e14
+Connection: close
+Content-Length: 341
+
+[{"name":"zf-object-test","hash":"702edca0b2181c15d457eacac39de39b","bytes":15,"content_type":"application/json", "last_modified":"2011-09-23T10:31:33.748950"},{"name":"zf-object-test-copy","hash":"702edca0b2181c15d457eacac39de39b","bytes":15,"content_type":"application/x-www-form-urlencoded", "last_modified":"2011-09-23T10:31:37.545410"}]

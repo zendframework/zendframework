@@ -36,18 +36,24 @@ class DependencyInjectorProxy extends DependencyInjector
      */
     public function get($name, array $params = array())
     {
+        array_push($this->instanceContext, array('GET', $name));
+        
         $im = $this->getInstanceManager();
 
         if ($params) {
             if (($fastHash = $im->hasSharedInstanceWithParameters($name, $params, true))) {
+                array_pop($this->instanceContext);
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         } else {
             if ($im->hasSharedInstance($name, $params)) {
+                array_pop($this->instanceContext);
                 return $im->getSharedInstance($name, $params);
             }
         }
-        return $this->newInstance($name, $params);
+        $instance = $this->newInstance($name, $params);
+        array_pop($this->instanceContext);
+        return $instance;
     }
 
     /**
@@ -127,6 +133,7 @@ class DependencyInjectorProxy extends DependencyInjector
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
+        // localize dependencies (this also will serve as poka-yoke)
         $definition      = $this->getDefinition();
         $instanceManager = $this->getInstanceManager();
 
@@ -138,9 +145,13 @@ class DependencyInjectorProxy extends DependencyInjector
             $alias = null;
         }
 
+        array_push($this->instanceContext, array('NEW', $class, $alias));
+        
         if (!$definition->hasClass($class)) {
             $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
-            throw new Exception\ClassNotFoundException('Class ' . $aliasMsg . $class . ' could not be located in provided definition.');
+            throw new Exception\ClassNotFoundException(
+                'Class ' . $aliasMsg . $class . ' could not be located in provided definition.'
+            );
         }
 
         $instantiator     = $definition->getInstantiator($class);
@@ -159,21 +170,33 @@ class DependencyInjectorProxy extends DependencyInjector
         }
 
         if ($injectionMethods) {
-            $methodMetadata = array();
             foreach ($injectionMethods as $injectionMethod) {
-                $methodMetadata[] = $this->handleInjectionMethodForObject($class, $injectionMethod, $params, $alias);
+                $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias);
             }
-            $object->setMethods($methodMetadata);
         }
 
+        // Methods for which we have configuration
+        $iConfig = ($instanceManager->hasAlias($alias) && $instanceManager->hasConfiguration($alias))
+            ? $instanceManager->getConfiguration($alias)
+            : $instanceManager->getConfiguration(get_class($object));
+
+        if ($iConfig['methods']) {
+            foreach ($iConfig['methods'] as $iConfigMethod => $iConfigMethodParams) {
+                // skip methods processed by handleInjectionMethodForObject
+                if (in_array($iConfigMethod, $injectionMethods) && $iConfigMethod !== '__construct') continue; 
+                call_user_func_array(array($object, $iConfigMethod), array_values($iConfigMethodParams));
+            }
+        }
+        
         if ($isShared) {
             if ($params) {
-                $instanceManager->addSharedInstanceWithParameters($object, $name, $params);
+                $this->getInstanceManager()->addSharedInstanceWithParameters($object, $name, $params);
             } else {
-                $instanceManager->addSharedInstance($object, $name);
+                $this->getInstanceManager()->addSharedInstance($object, $name);
             }
         }
-
+        
+        array_pop($this->instanceContext);
         return $object;
     }
 }

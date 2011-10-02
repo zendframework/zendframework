@@ -55,7 +55,7 @@ class StaticIntegrationTest extends TestCase
         $this->assertEquals(1, $counter->count);
     }
 
-    public function testLocalHandlersAreExecutedPriorToStaticHandlers()
+    public function testLocalHandlersAreExecutedPriorToStaticHandlersWhenSetWithSamePriority()
     {
         $test = (object) array('results' => array());
         StaticEventManager::getInstance()->attach(
@@ -73,7 +73,7 @@ class StaticIntegrationTest extends TestCase
         $this->assertEquals(array('local', 'static'), $test->results);
     }
 
-    public function testLocalHandlersAreExecutedPriorToStaticHandlersRegardlessOfPriority()
+    public function testLocalHandlersAreExecutedInPriorityOrderRegardlessOfStaticOrLocalRegistration()
     {
         $test = (object) array('results' => array());
         StaticEventManager::getInstance()->attach(
@@ -95,7 +95,7 @@ class StaticIntegrationTest extends TestCase
             $test->results[] = 'local3';
         }, 15000); // highest priority
         $class->foo();
-        $this->assertEquals(array('local3', 'local2', 'local', 'static'), $test->results);
+        $this->assertEquals(array('local3', 'static', 'local2', 'local'), $test->results);
     }
 
     public function testPassingNullValueToSetStaticConnectionsDisablesStaticConnections()
@@ -130,5 +130,24 @@ class StaticIntegrationTest extends TestCase
         $this->assertSame($mockStaticEvents, $class->events()->getStaticConnections());
         $class->foo();
         $this->assertEquals(0, $counter->count);
+    }
+
+    public function testTriggerMergesPrioritiesOfStaticAndInstanceListeners()
+    {
+        $test = (object) array('results' => array());
+        StaticEventManager::getInstance()->attach(
+            'ZendTest\EventManager\TestAsset\ClassWithEvents', 
+            'foo', 
+            function ($e) use ($test) {
+                $test->results[] = 'static';
+            },
+            100
+        );
+        $class = new TestAsset\ClassWithEvents();
+        $class->events()->attach('foo', function ($e) use ($test) {
+            $test->results[] = 'local';
+        }, -100);
+        $class->foo();
+        $this->assertEquals(array('static', 'local'), $test->results);
     }
 }

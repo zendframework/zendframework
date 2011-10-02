@@ -1,0 +1,7 @@
+GET /api/grid/server/list?format=json&api_key=1234567890&sig=9baf18ee31e91b9a564478868bb85a43&v=1.8 HTTP/1.1
+Host: api.gogrid.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+Cookie: JSESSIONID=D4F9CB6EA1F7EEA72D083741BFED3B99
+

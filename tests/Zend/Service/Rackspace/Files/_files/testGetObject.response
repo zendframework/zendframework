@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Fri, 23 Sep 2011 10:31:35 GMT
+Accept-Ranges: bytes
+Etag: 702edca0b2181c15d457eacac39de39b
+X-Trans-Id: txf1550b683c804e49a65927b876b50d89
+Connection: close
+Last-Modified: Fri, 23 Sep 2011 10:31:33 GMT
+X-Object-Meta-Foo: bar
+X-Object-Meta-Foo2: bar2
+Content-Length: 15
+
+This is a test!

@@ -225,17 +225,18 @@ class DependencyInjector implements DependencyInjection
             foreach ($injectionMethods as $injectionMethod) {
                 $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias);
             }
+        }
 
-            $iConfig = ($instanceManager->hasAlias($alias) && $instanceManager->hasConfiguration($alias))
-                ? $instanceManager->getConfiguration($alias)
-                : $instanceManager->getConfiguration(get_class($object));
+        // Methods for which we have configuration
+        $iConfig = ($instanceManager->hasAlias($alias) && $instanceManager->hasConfiguration($alias))
+            ? $instanceManager->getConfiguration($alias)
+            : $instanceManager->getConfiguration(get_class($object));
 
-            if ($iConfig['methods']) {
-                foreach ($iConfig['methods'] as $iConfigMethod => $iConfigMethodParams) {
-                    // skip methods processed by handleInjectionMethodForObject
-                    if (in_array($iConfigMethod, $injectionMethods) && $iConfigMethod !== '__construct') continue; 
-                    call_user_func_array(array($object, $iConfigMethod), array_values($iConfigMethodParams));
-                }
+        if ($iConfig['methods']) {
+            foreach ($iConfig['methods'] as $iConfigMethod => $iConfigMethodParams) {
+                // skip methods processed by handleInjectionMethodForObject
+                if (in_array($iConfigMethod, $injectionMethods) && $iConfigMethod !== '__construct') continue; 
+                call_user_func_array(array($object, $iConfigMethod), array_values($iConfigMethodParams));
             }
         }
         

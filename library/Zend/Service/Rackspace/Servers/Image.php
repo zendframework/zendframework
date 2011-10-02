@@ -22,8 +22,7 @@
 
 namespace Zend\Service\Rackspace\Servers;
 
-use Zend\Service\Rackspace\Servers as RackspaceServers,
-    Zend\Service\Rackspace\Exception as Exception;
+use Zend\Service\Rackspace\Servers as RackspaceServers;
 
 class Image 
 {

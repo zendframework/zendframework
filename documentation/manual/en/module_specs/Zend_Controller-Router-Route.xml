@@ -328,7 +328,7 @@ $router->addRoute('archive', $route);
 $route->assemble(array());
 
 // Assemble the URL in german: archiv
-$route->assemble(array());
+$route->assemble(array('@locale' => 'de'));
 ]]></programlisting>
 
         <para>
@@ -351,7 +351,7 @@ $router->addRoute('archive', $route);
 $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
 
 // Assemble the URL in german: archiv/uebersicht/foo/bar
-$route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
+$route->assemble(array('controller' => 'archive', 'foo' => 'bar', '@locale' => 'de'));
 ]]></programlisting>
 
         <para>

@@ -275,7 +275,7 @@ class Manager
 
     protected function hasCachedConfig()
     {
-        if (($this->getOptions()->getCacheConfig())
+        if (($this->getOptions()->getEnableConfigCache())
             && (file_exists($this->getOptions()->getCacheFilePath()))
         ) {
             return true;
@@ -290,7 +290,7 @@ class Manager
 
     protected function updateCache()
     {
-        if (($this->getOptions()->getCacheConfig())
+        if (($this->getOptions()->getEnableConfigCache())
             && (false === $this->skipConfig)
         ) {
             $this->saveConfigCache($this->getMergedConfig());

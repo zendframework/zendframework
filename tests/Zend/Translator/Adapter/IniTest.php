@@ -49,14 +49,16 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini');
         $this->assertTrue($adapter instanceof Adapter\Ini);
+    }
 
-        try {
-            $adapter = new Adapter\Ini(__DIR__ . '/_files/nofile.ini', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('not found', $e->getMessage());
-        }
+    public function testCreate2()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/nofile.ini', 'en');
+    }
 
+    public function testCreate3()
+    {
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter = new Adapter\Ini(__DIR__ . '/_files/failed.ini', 'en');
         restore_error_handler();
@@ -100,14 +102,18 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message_2', $adapter->translate('Message_2', 'ru'));
         $this->assertEquals('Message_1', $adapter->translate('Message_1', 'xx'));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message_1', 'en_US'));
+    }
 
-        try {
-            $adapter->addTranslation(__DIR__ . '/_files/translation_en.ini', 'xx');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('The given Language', $e->getMessage());
-        }
+    public function testLoadTranslationData2()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en.ini', 'xx');
+    }
 
+    public function testLoadTranslationData3()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
         $adapter->addTranslation(__DIR__ . '/_files/translation_en2.ini', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message_1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message_8'));
@@ -158,14 +164,18 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
         $this->assertEquals('en', $adapter->getLocale());
+    }
 
-        try {
-            $adapter->setLocale('nolocale');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('The given Language', $e->getMessage());
-        }
+    public function testLocale2()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->setLocale('nolocale');
+    }
 
+    public function testLocale3()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter->setLocale('de');
         restore_error_handler();

@@ -23,19 +23,19 @@
  */
 namespace Zend\Translator\Adapter;
 
-use Zend\Translator\Adapter as TranslationAdapter,
-    Zend\Translator\Adapter\Exception\InvalidArgumentException;
+use Zend\Translator\Adapter\AbstractAdapter,
+    Zend\Translator\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Adapter\Exception\InvalidArgumentException
+ * @uses       \Zend\Translator\Adapter\AbstractAdapter
+ * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ini extends TranslationAdapter
+class Ini extends AbstractAdapter
 {
     /**
      * Load translation data
@@ -44,7 +44,7 @@ class Ini extends TranslationAdapter
      * @param  string        $locale  Locale/Language to add data for, identical with locale identifier,
      *                                see Zend_Locale for more information
      * @param  array         $options OPTIONAL Options to use
-     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException when Ini file not found
+     * @throws \Zend\Translator\Exception\InvalidArgumentException when Ini file not found
      * @return array
      */
     protected function _loadTranslationData($data, $locale, array $options = array())

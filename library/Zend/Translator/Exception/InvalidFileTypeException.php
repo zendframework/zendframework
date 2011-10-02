@@ -21,7 +21,7 @@
 /**
  * @namespace
  */
-namespace Zend\Translator\Adapter\Exception;
+namespace Zend\Translator\Exception;
 
 /**
  * @category   Zend
@@ -29,7 +29,6 @@ namespace Zend\Translator\Adapter\Exception;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException
-	extends \InvalidArgumentException
-	implements \Zend\Translator\Adapter\Exception
+class InvalidFileTypeException
+    extends InvalidArgumentException
 {}

@@ -50,20 +50,19 @@ class TmxTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $this->assertTrue($adapter instanceof Adapter\Tmx);
+    }
 
-        try {
-            $adapter = new Adapter\Tmx(__DIR__ . '/_files/nofile.tmx', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('is not readable', $e->getMessage());
-        }
+    public function testCreate2()
+    {
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/nofile.tmx', 'en');
+    }
 
-        try {
-            $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidFileTypeException $e) {
-            $this->assertContains('Mismatched tag at line', $e->getMessage());
-        }
+    public function testCreate3()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidFileTypeException');
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/failed.tmx', 'en');
     }
 
     public function testToString()
@@ -100,14 +99,18 @@ class TmxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
         $this->assertEquals('Message 1', $adapter->translate('Message 1', 'xx'));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'en_US'));
+    }
 
-        try {
-            $adapter->addTranslation(__DIR__ . '/_files/translation_en.tmx', 'xx');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+    public function testLoadTranslationData2()
+    {
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en.tmx', 'xx');
+    }
 
+    public function testLoadTranslationData3()
+    {
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tmx', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
@@ -158,14 +161,18 @@ class TmxTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
         $this->assertEquals('en', $adapter->getLocale());
+    }
 
-        try {
-            $adapter->setLocale('nolocale');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+    public function testLocale2()
+    {
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->setLocale('nolocale');
+    }
 
+    public function testLocale3()
+    {
+        $adapter = new Adapter\Tmx(__DIR__ . '/_files/translation_en.tmx', 'en');
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter->setLocale('it');
         restore_error_handler();

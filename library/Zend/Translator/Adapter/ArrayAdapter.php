@@ -23,19 +23,19 @@
  */
 namespace Zend\Translator\Adapter;
 
-use Zend\Translator\Adapter as TranslationAdapter,
-    Zend\Translator\Adapter\Exception\InvalidArgumentException;
+use Zend\Translator\Adapter\AbstractAdapter,
+    Zend\Translator\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Translator\Adapter\Adapter
+ * @uses       \Zend\Translator\Adapter\AbstractAdapter
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ArrayAdapter extends TranslationAdapter
+class ArrayAdapter extends AbstractAdapter
 {
     /**
      * Load translation data

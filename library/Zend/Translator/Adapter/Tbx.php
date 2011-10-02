@@ -22,22 +22,22 @@
  * @namespace
  */
 namespace Zend\Translator\Adapter;
-use Zend\Translator\Adapter as TranslationAdapter,
+use Zend\Translator\Adapter\AbstractAdapter,
     Zend\Translator,
-    Zend\Translator\Adapter\Exception\InvalidArgumentException,
-    Zend\Translator\Adapter\Exception\InvalidFileTypeException;
+    Zend\Translator\Exception\InvalidArgumentException,
+    Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
  * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Translator\Adapter\Adapter
- * @uses       \Zend\Translator\Adapter\Exception\InvalidArgumentException
- * @uses       \Zend\Translator\Adapter\Exception\InvalidFileTypeException
+ * @uses       \Zend\Translator\Adapter\AbstractAdapter
+ * @uses       \Zend\Translator\Exception\InvalidArgumentException
+ * @uses       \Zend\Translator\Exception\InvalidFileTypeException
  * @category   Zend
  * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Tbx extends TranslationAdapter
+class Tbx extends AbstractAdapter
 {
     // Internal variables
     private $_file        = false;
@@ -55,8 +55,8 @@ class Tbx extends TranslationAdapter
      * @param  string  $locale    Locale has no effect for TBX because TBX defines all languages within
      *                            the source file
      * @param  array   $option    OPTIONAL Options to use
-     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException
-     * @throws \Zend\Translator\Adapter\Exception\InvalidFileTypeException
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Exception\InvalidFileTypeException
      * @return array
      */
     protected function _loadTranslationData($filename, $locale, array $options = array())

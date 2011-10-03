@@ -83,9 +83,16 @@ class MimeType extends Validator\AbstractValidator
     /**
      * Magicfile to use
      *
-     * @var string|null
+     * @var string|null|false
      */
     protected $_magicfile;
+
+    /**
+     * Disable usage of magicfile
+     *
+     * @var boolean
+     */
+    protected $_disableMagicFile = false;
 
     /**
      * Finfo object to use
@@ -121,6 +128,9 @@ class MimeType extends Validator\AbstractValidator
      * Sets validator options
      *
      * Mimetype to accept
+     * - NULL means default PHP usage by using the environment variable 'magic'
+     * - FALSE means disabling searching for mimetype, shoule be used for PHP 5.3
+     * - A string is the mimetype file to use
      *
      * @param  string|array $mimetype MimeType
      * @return void
@@ -185,6 +195,7 @@ class MimeType extends Validator\AbstractValidator
      * Sets the magicfile to use
      * if null, the MAGIC constant from php is used
      * if the MAGIC file is errorous, no file will be set
+     * if false, the default MAGIC file from PHP will be used
      *
      * @param  string $file
      * @throws \Zend\Validator\Exception When finfo can not read the magicfile
@@ -213,6 +224,28 @@ class MimeType extends Validator\AbstractValidator
         }
 
         return $this;
+    }
+
+    /**
+     * Disables usage of MagicFile
+     *
+     * @param $disable boolean False disables usage of magic file
+     * @return \Zend\Validator\File\MimeType Provides fluid interface
+     */
+    public function disableMagicFile($disable)
+    {
+        $this->_disableMagicFile = (bool) $disable;
+        return $this;
+    }
+
+    /**
+     * Is usage of MagicFile disabled?
+     *
+     * @return boolean
+     */
+    public function isMagicFileDisabled()
+    {
+        return $this->_disableMagicFile;
     }
 
     /**
@@ -336,7 +369,7 @@ class MimeType extends Validator\AbstractValidator
         $mimefile = $this->getMagicFile();
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-            if (!empty($mimefile) && empty($this->_finfo)) {
+            if (!$this->isMagicFileDisabled() && (!empty($mimefile) && empty($this->_finfo))) {
                 $this->_finfo = @finfo_open($const, $mimefile);
             }
 

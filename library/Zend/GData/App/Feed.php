@@ -308,7 +308,7 @@ class Feed extends FeedSourceParent
 
     /**
      * Set the major protocol version that should be used. Values < 1 will
-     * cause a Zend_Gdata_App_InvalidArgumentException to be thrown.
+     * cause a \Zend_Gdata\App\InvalidArgumentException to be thrown.
      *
      * This value will be propogated to all child entries.
      *
@@ -327,7 +327,7 @@ class Feed extends FeedSourceParent
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a Zend_Gdata_App_InvalidArgumentException to be thrown.
+     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
      *
      * This value will be propogated to all child entries.
      *

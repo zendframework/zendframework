@@ -91,7 +91,7 @@ class GApps extends GData
     protected $_domain = null;
 
     /**
-     * Namespaces used for Zend_Gdata_GApps
+     * Namespaces used for \Zend\Gdata\GApps
      *
      * @var array
      */
@@ -100,7 +100,7 @@ class GApps extends GData
     );
 
     /**
-     * Create Gdata_GApps object
+     * Create \Gdata\GApps object
      *
      * @param \Zend\Http\Client $client (optional) The HTTP client to use when
      *          when communicating with the Google Apps servers.
@@ -113,7 +113,7 @@ class GApps extends GData
         $this->registerPackage('Zend\GData\GApps');
         $this->registerPackage('Zend\GData\GApps\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
         $this->_domain = $domain;
     }
 
@@ -122,7 +122,7 @@ class GApps extends GData
      * XML document is contained within the original exception's HTTP
      * response. If conversion fails, throw the original error.
      *
-     * @param Zend_Gdata_Exception $e The exception to convert.
+     * @param \Zend\Gdata\Exception $e The exception to convert.
      * @throws \Zend\GData\GApps\ServiceException
      * @throws mixed
      */
@@ -154,8 +154,8 @@ class GApps extends GData
 
     /**
      * Imports a feed located at $uri.
-     * This method overrides the default behavior of Zend_Gdata_App,
-     * providing support for Zend_Gdata_GApps_ServiceException.
+     * This method overrides the default behavior of \Zend\Gdata\App,
+     * providing support for \Zend\Gdata\GApps\ServiceException.
      *
      * @param  string $uri
      * @param  \Zend\Http\Client $client (optional) The client used for
@@ -178,8 +178,8 @@ class GApps extends GData
 
     /**
      * GET a URI using client object.
-     * This method overrides the default behavior of Zend_Gdata_App,
-     * providing support for Zend_Gdata_GApps_ServiceException.
+     * This method overrides the default behavior of \Zend\Gdata\App,
+     * providing support for \Zend\Gdata\GApps\ServiceException.
      *
      * @param string $uri GET URI
      * @param array $extraHeaders Extra headers to add to the request, as an
@@ -199,8 +199,8 @@ class GApps extends GData
 
     /**
      * POST data with client object.
-     * This method overrides the default behavior of Zend_Gdata_App,
-     * providing support for Zend_Gdata_GApps_ServiceException.
+     * This method overrides the default behavior of \Zend\Gdata\App,
+     * providing support for \Zend\Gdata\GApps\ServiceException.
      *
      * @param mixed $data The \Zend\GData\App\Entry or XML to post
      * @param string $uri (optional) POST URI
@@ -224,8 +224,8 @@ class GApps extends GData
 
     /**
      * PUT data with client object
-     * This method overrides the default behavior of Zend_Gdata_App,
-     * providing support for Zend_Gdata_GApps_ServiceException.
+     * This method overrides the default behavior of \Zend\Gdata\App,
+     * providing support for \Zend\Gdata\GApps\ServiceException.
      *
      * @param mixed $data The \Zend\GData\App\Entry or XML to post
      * @param string $uri (optional) PUT URI
@@ -249,8 +249,8 @@ class GApps extends GData
 
     /**
      * DELETE entry with client object
-     * This method overrides the default behavior of Zend_Gdata_App,
-     * providing support for Zend_Gdata_GApps_ServiceException.
+     * This method overrides the default behavior of \Zend\Gdata\App,
+     * providing support for \Zend\Gdata\GApps\ServiceException.
      *
      * @param mixed $data The \Zend\GData\App\Entry or URL to delete
      * @param integer $remainingRedirects (optional)
@@ -801,13 +801,13 @@ class GApps extends GData
     /**
      * Provides a magic factory method to instantiate new objects with
      * shorter syntax than would otherwise be required by the Zend Framework
-     * naming conventions. For more information, see Zend_Gdata_App::__call().
+     * naming conventions. For more information, see \Zend\Gdata\App::__call().
      *
      * This overrides the default behavior of __call() so that query classes
      * do not need to have their domain manually set when created with
      * a magic factory method.
      *
-     * @see Zend_Gdata_App::__call()
+     * @see \Zend\Gdata\App::__call()
      * @param string $method The method name being called
      * @param array $args The arguments passed to the call
      * @throws \Zend\GData\App\Exception

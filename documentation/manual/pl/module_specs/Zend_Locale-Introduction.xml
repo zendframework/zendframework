@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.introduction"><info><title>Wprowadzenie</title></info>
-    
+
 
     <para>
         <classname>Zend_Locale</classname> to odpowiedź frameworka na pytanie: "Jak jedna aplikacja
@@ -28,7 +28,7 @@
     </para>
 
     <tip><info><title>Zend_Locale i setlocale()</title></info>
-        
+
 
         <para>
             W <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/setlocale">dokumentacji PHP</link> można przeczytać, że
@@ -45,9 +45,9 @@
             <acronym>PHP</acronym> <methodname>setlocale()</methodname>.
         </para>
     </tip>
-    
+
     <section xml:id="zend.locale.whatislocalization"><info><title>Co to jest lokalizacja</title></info>
-        
+
 
         <para>
             Lokalizacja oznacza, że aplikacja (lub strona) może być używana przez różnych
@@ -113,7 +113,7 @@
     </section>
 
     <section xml:id="zend.locale.whatis"><info><title>Czym jest locale</title></info>
-        
+
 
         <para>
             Każdy użytkownik komputera używa locale, nawet wtedy gdy o tym nie myśli. Aplikacje
@@ -133,7 +133,7 @@
     </section>
 
     <section xml:id="zend.locale.representation"><info><title>Jak locale są reprezentowane</title></info>
-        
+
 
         <para>
             Identyfikatory locale składają się z informacji dotyczących języka użytkownika oraz
@@ -167,7 +167,7 @@
         </para>
 
         <example xml:id="zend.locale.representation.example-1"><info><title>Wybranie konkretnego locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_DE'); // Język niemiecki _ Niemcy
@@ -201,7 +201,7 @@ $locale = new Zend_Locale('de_DE'); // Język niemiecki _ Niemcy
     </section>
 
     <section xml:id="zend.locale.selection"><info><title>Wybranie odpowiedniego locale</title></info>
-        
+
 
         <para>
             W większości przypadków <code>new Zend_Locale()</code> automatycznie wybierze poprawne
@@ -212,7 +212,7 @@ $locale = new Zend_Locale('de_DE'); // Język niemiecki _ Niemcy
         </para>
 
         <example xml:id="zend.locale.selection.example-1"><info><title>Automatyczny wybór locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale  = new Zend_Locale();
@@ -272,12 +272,12 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
     </section>
 
     <section xml:id="zend.locale.selection.automatic"><info><title>Użycie automatycznego locale</title></info>
-        
+
 
         <para>
             <classname>Zend_Locale</classname> oferuje trzy dodatkowe locale. Nie należą one
             do żadnego języka ani regionu. Są to locale "automatyczne" co oznacza, że działają
-            na podobnej zasadzie co metoda <methodname>getDefault()</methodname> ale bez potrzeby
+            na podobnej zasadzie co metoda <methodname>getFallback()</methodname> ale bez potrzeby
             tworzenia instancji. Locale "automatyczne" mogą być użyte w każdym momencie, w którym
             możliwe byłoby zdefiniowanie locale w standardowy sposób. Dzięki temu można ich używać
             w łatwy sposób np. w sytuacji pracy z locale udostępnianym przez przeglądarkę.
@@ -336,7 +336,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
         </para>
 
         <example xml:id="zend.locale.selection.automatic.example-1"><info><title>Użycie automatycznego locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 // bez automatycznej detekcji
@@ -350,7 +350,7 @@ $date = new Zend_Date('auto');
     </section>
 
     <section xml:id="zend.locale.defaultlocale"><info><title>Użycie domyślnego locale</title></info>
-        
+
 
         <para>
             W niektórych środowiskach automatyczna detekcja locale nie jest możliwa. Można się tego
@@ -367,7 +367,7 @@ $date = new Zend_Date('auto');
         </para>
 
         <example xml:id="zend.locale.defaultlocale.example-1"><info><title>Obsługa wyjątków locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 // w pliku bootstrap
@@ -391,18 +391,18 @@ $date = new Zend_Date($locale);
         <para>
             Od Zend Framework 1.5 istnieje o wiele lepszy sposób na obsługę takiej sytuacji.
             Można ustawić domyślne locale za pomocą statycznej metody
-            <methodname>setDefault()</methodname>. Oczywiście każde nieznane lub źle sformułowane
-            locale również spowoduje rzucenie wyjątku. <methodname>setDefault()</methodname>
+            <methodname>setFallback()</methodname>. Oczywiście każde nieznane lub źle sformułowane
+            locale również spowoduje rzucenie wyjątku. <methodname>setFallback()</methodname>
             powinna być wywołana przed uruchomieniem dowolnej klasy używającej
             <classname>Zend_Locale</classname>. Tak jak w poniższym przykładzie:
         </para>
 
         <example xml:id="zend.locale.defaultlocale.example-2"><info><title>Ustawienie domyślnego locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 // w pliku bootstrap
-Zend_Locale::setDefault('de');
+Zend_Locale::setFallback('de');
 
 // w modelu/kontrolerze
 $date = new Zend_Date();
@@ -416,7 +416,7 @@ $date = new Zend_Date();
     </section>
 
     <section xml:id="zend.locale.interoperate"><info><title>Klasy ZF "świadome" locale</title></info>
-        
+
 
         <para>
             Klasy, które są "świadome" locale w Zend Framework polegają na
@@ -427,7 +427,7 @@ $date = new Zend_Date();
         </para>
 
         <example xml:id="zend.locale.interoperate.example-1"><info><title>Format daty domyślnie dostosowuje się do przeglądarki</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date('2006',Zend_Date::YEAR);
@@ -441,7 +441,7 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
         </para>
 
         <example xml:id="zend.locale.interoperate.example-2"><info><title>Zmiana domyślnego wykrywania locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $usLocale = new Zend_Locale('en_US');
@@ -459,7 +459,7 @@ $temp = new Zend_Measure_Temperature('100,10',
         </para>
 
         <example xml:id="zend.locale.interoperate.example-3"><info><title>Optymalizacja wydajności dzięki określeniu locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -472,7 +472,7 @@ $temp = new Zend_Measure_Temperature('100,10',
     </section>
 
     <section xml:id="zend.locale.frameworkwidelocale"><info><title>Locale obowiązujące w całej aplikacji</title></info>
-        
+
 
         <para>
             Zend Framework umożliwia zdefiniowanie locale obowiązującego w całej aplikacji.
@@ -485,7 +485,7 @@ $temp = new Zend_Measure_Temperature('100,10',
         </para>
 
         <example xml:id="zend.locale.frameworkwidelocale.example"><info><title>Użycie locale obowiązującego w całej aplikacji</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 // w pliku bootstrap
@@ -501,7 +501,7 @@ echo $date->getDate();
     </section>
 
     <section xml:id="zend.locale.formatoptions"><info><title>Zend_Locale_Format::setOptions(array $options)</title></info>
-        
+
 
         <para>
             Opcja 'precision' służy do obcięcia lub wydłużenia liczby. Wartość '-1' wyłącza
@@ -523,7 +523,7 @@ echo $date->getDate();
         </para>
 
         <example xml:id="zend.locale.formatoptions.example-1"><info><title>Daty przyjmują domyślny format przeglądarki</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
@@ -543,7 +543,7 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
         </para>
 
         <example xml:id="zend.locale.formatoptions.example-2"><info><title>Użycie standardowych definicji w metodzie setOptions()</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
@@ -561,7 +561,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
     </section>
 
     <section xml:id="zend.locale.cache"><info><title>Przyspieszenie Zend_Locale i jej klas pochodnych</title></info>
-        
+
 
         <para>
             Można przyspieszyć działanie klasy <classname>Zend_Locale</classname> i jej klas

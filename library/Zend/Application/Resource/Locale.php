@@ -72,7 +72,7 @@ class Locale extends AbstractResource
                      (bool) $options['force'] == false)
             {
                 // Don't force any locale, just go for auto detection
-                SystemLocale\Locale::setDefault($options['default']);
+                SystemLocale\Locale::setFallback($options['default']);
                 $this->_locale = new SystemLocale\Locale();
             } else {
                 $this->_locale = new SystemLocale\Locale($options['default']);

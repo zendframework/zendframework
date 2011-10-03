@@ -264,7 +264,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             'magicfile' => false,
         );
 
-        $validator = new File\MimeType(array('image/jpeg', 'image/jpeg; charset=binary'));
+        $validator = new File\MimeType($files);
         $this->assertFalse($validator->getMagicFile());
     }
 }

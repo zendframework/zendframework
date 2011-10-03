@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Router\Http;
+namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Config\Config,

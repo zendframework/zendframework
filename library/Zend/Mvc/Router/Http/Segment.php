@@ -28,8 +28,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Http\Request,
     Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route,
-    Zend\Mvc\Router\RouteMatch;
+    Zend\Mvc\Router\Route;
 
 /**
  * Segment route.
@@ -253,6 +252,8 @@ class Segment implements Route
             return null;
         }
         
+        $matchedLength = strlen($matches[0]);
+        
         foreach ($matches as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
                 unset($matches[$key]);
@@ -260,7 +261,7 @@ class Segment implements Route
         }
 
         $matches = array_merge($this->defaults, $matches);
-        return new RouteMatch($matches, $this);
+        return new PartRouteMatch($matches, $this, $matchedLength);
     }
 
     /**

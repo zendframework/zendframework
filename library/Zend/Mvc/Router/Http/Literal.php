@@ -28,8 +28,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Http\Request,
     Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route,
-    Zend\Mvc\Router\RouteMatch;
+    Zend\Mvc\Router\Route;
 
 /**
  * Literal route.
@@ -101,11 +100,11 @@ class Literal implements Route
         
         if ($pathOffset !== null) {
             if (strpos($path, $this->route) === $pathOffset) {
-                return new RouteMatch($this->defaults, $this);
+                return new PartRouteMatch($this->defaults, $this, strlen($this->route));
             }
         } else {
             if ($path === $this->route) {
-                return new RouteMatch($this->defaults, $this);
+                return new PartRouteMatch($this->defaults, $this, strlen($this->route));
             }
         }
 

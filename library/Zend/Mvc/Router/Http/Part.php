@@ -125,20 +125,21 @@ class Part extends TreeRouteStack
                 $this->childRoutes = null;
             }
             
-            $nextOffset = $pathOffset + $match->getInternalParameter('length');
+            $nextOffset = $pathOffset + $match->getLength();
+            
+            $uri  = $request->uri();
+            $path = $uri->getPath();
+            
+            if ($this->mayTerminate && $nextOffset === strlen($path)) {
+                return $match;
+            }
             
             foreach ($this->children as $name => $route) {
-                $subMatch = $route->match($match, $pathOffset);
+                $subMatch = $route->match($match, $nextOffset);
 
                 if ($subMatch !== null) {
                     return $match->merge($subMatch);
                 }
-            }
-
-            $uri  = $request->uri();
-            $path = $uri->getPath();
-            if ($this->mayTerminate && $nextOffset === strlen($path)) {
-                return $match;
             }
         }
 

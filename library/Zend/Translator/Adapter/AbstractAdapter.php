@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Translator;
+namespace Zend\Translator\Adapter;
 
 use RecursiveDirectoryIterator,
     RecursiveIteratorIterator,
@@ -30,10 +30,13 @@ use RecursiveDirectoryIterator,
     Zend\Cache,
     Zend\Config\Config,
     Zend\Log,
-    Zend\Locale;
+    Zend\Locale,
+    Zend\Translator,
+    Zend\Translator\Plural,
+    Zend\Translator\Exception;
 
 /**
- * Basic adapter class for each translation source adapter
+ * Abstract adapter class for each translation source adapter
  *
  * @category   Zend
  * @package    Zend_Translator
@@ -41,7 +44,7 @@ use RecursiveDirectoryIterator,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Adapter
+abstract class AbstractAdapter
 {
     /**
      * Shows if locale detection is in automatic level
@@ -217,7 +220,7 @@ abstract class Adapter
      *
      * @param  array|Zend_Config $options Options and translations to be added
      * @throws \Zend\Translator\Exception\InvalidArgumentException
-     * @return \Zend\Translator\Adapter Provides fluent interface
+     * @return \Zend\Translator\Adapter\AbstractAdapter Provides fluent interface
      */
     public function addTranslation($options = array())
     {
@@ -254,7 +257,7 @@ abstract class Adapter
         }
 
         try {
-            if (!($options['content'] instanceof Translator) && !($options['content'] instanceof Adapter)) {
+            if (!($options['content'] instanceof Translator\Translator) && !($options['content'] instanceof AbstractAdapter)) {
                 if (empty($options['locale'])) {
                     $options['locale'] = null;
                 }
@@ -392,7 +395,7 @@ abstract class Adapter
      *
      * @param  array $options Adapter options
      * @throws \Zend\Translator\Exception\InvalidArgumentException
-     * @return \Zend\Translator\Adapter\Adapter Provides fluent interface
+     * @return \Zend\Translator\Adapter\AbstractAdapter Provides fluent interface
      */
     public function setOptions(array $options = array())
     {
@@ -490,7 +493,7 @@ abstract class Adapter
      *
      * @param  string|\Zend\Locale\Locale $locale Locale to set
      * @throws \Zend\Translator\Exception\InvalidArgumentException
-     * @return \Zend\Translator\Adapter\Adapter Provides fluent interface
+     * @return \Zend\Translator\Adapter\AbstractAdapter Provides fluent interface
      */
     public function setLocale($locale)
     {
@@ -652,7 +655,7 @@ abstract class Adapter
      * @see    Zend_Locale
      * @param  array|\Zend\Config $content Translation data to add
      * @throws \Zend\Translator\Exception\InvalidArgumentException
-     * @return \Zend\Translator\Adapter Provides fluent interface
+     * @return \Zend\Translator\Adapter\AbstractAdapter Provides fluent interface
      */
     private function _addTranslationData($options = array())
     {
@@ -671,7 +674,7 @@ abstract class Adapter
             }
         }
 
-        if (($options['content'] instanceof Translator) || ($options['content'] instanceof Adapter)) {
+        if (($options['content'] instanceof Translator\Translator) || ($options['content'] instanceof AbstractAdapter)) {
             $options['usetranslateadapter'] = true;
             $content = $options['content'];
             if (empty($options['locale']) || ($options['locale'] == 'auto')) {
@@ -997,7 +1000,7 @@ abstract class Adapter
     }
 
     /**
-     * Sets a cache for all Zend_Translator_Adapters
+     * Sets a cache for all Zend_Translator_Adapter's
      *
      * @param \Zend\Cache\Frontend $cache Cache to store to
      */

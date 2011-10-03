@@ -124,13 +124,13 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , __DIR__ . '/Adapter/_files/translation_en.mo', 'en');
         $lang->setAdapter(Translator\Translator::AN_ARRAY, array('de' => 'de'));
         $this->assertTrue($lang->getAdapter() instanceof Adapter\ArrayAdapter);
+    }
 
-        try {
-            $lang->xxxFunction();
-            $this->fail("exception expected");
-        } catch (Translator\Exception\BadMethodCallException $e) {
-            // success
-        }
+    public function testSetAdapter2()
+    {
+        $lang = new Translator\Translator(Translator\Translator::AN_GETTEXT , __DIR__ . '/Adapter/_files/translation_en.mo', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\BadMethodCallException');
+        $lang->xxxFunction();
     }
 
     public function testAddTranslation()
@@ -269,12 +269,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function testExceptionWhenNoAdapterClassWasSet()
     {
-        try {
-            $lang = new Translator\Translator('Zend\Locale', __DIR__ . '/../_files/test2', null, array('scan' => Translator\Translator::LOCALE_FILENAME));
-            $this->fail('Exception due to false adapter class expected');
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist and cannot be loaded', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $lang = new Translator\Translator('Zend\Locale', __DIR__ . '/../_files/test2', null, array('scan' => Translator\Translator::LOCALE_FILENAME));
     }
 
     public function testZF3679()
@@ -364,13 +360,8 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     public function testSettingNoLogAsLog()
     {
         $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
-
-        try {
-            $lang->setOptions(array('log' => 'nolog'));
-            $this->fail();
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('Instance of Zend_Log expected', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $lang->setOptions(array('log' => 'nolog'));
     }
 
     public function testSettingUnknownLocaleWritingToSelfDefinedLog()

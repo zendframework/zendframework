@@ -187,8 +187,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             // Good, it threw an exception
         }
 
-        $request  = $this->getMock('Zend\Controller\Request\Http');
-        $response = $this->getMock('Zend\Controller\Response\Http');
+        $request  = $this->getMock('Zend\Http\Request');
+        $response = $this->getMock('Zend\Http\Response');
 
         // If this throws an exception, it fails
         $a->setRequest($request)
@@ -198,8 +198,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testNoResolvers()
     {
-        $request  = $this->getMock('Zend\Controller\Request\Http');
-        $response = $this->getMock('Zend\Controller\Response\Http');
+        $request  = $this->getMock('Zend\Http\Request');
+        $response = $this->getMock('Zend\Http\Response');
 
         // Stub request for Basic auth
         $request->expects($this->any())
@@ -219,7 +219,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         }
 
         // Stub request for Digest auth, must be reseted (recreated)
-        $request  = $this->getMock('Zend\Controller\Request\Http');
+        $request  = $this->getMock('Zend\Http\Request');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('Digest <followed by a space caracter'));
@@ -239,8 +239,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testWrongResolverUsed()
     {
-        $response = $this->getMock('Zend\Controller\Response\Http');
-        $request  = $this->getMock('Zend\Controller\Request\Http');
+        $response = $this->getMock('Zend\Http\Response');
+        $request  = $this->getMock('Zend\Http\Request');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('Basic <followed by a space caracter')); // A basic Header will be provided by that request
@@ -256,8 +256,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsupportedScheme()
     {
-        $response = $this->getMock('Zend\Controller\Response\Http');
-        $request  = $this->getMock('Zend\Controller\Request\Http');
+        $response = $this->getMock('Zend\Http\Response');
+        $request  = $this->getMock('Zend\Http\Request');
         $request->expects($this->any())
                 ->method('getHeader')
                 ->will($this->returnValue('NotSupportedScheme <followed by a space caracter'));

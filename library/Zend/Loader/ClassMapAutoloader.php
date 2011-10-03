@@ -150,7 +150,7 @@ class ClassMapAutoloader implements SplAutoloader
     public function autoload($class)
     {
         if (isset($this->map[$class])) {
-            include $this->map[$class];
+            require_once $this->map[$class];
         }
     }
 

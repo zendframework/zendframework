@@ -3,7 +3,6 @@
 namespace Zend\Loader;
 
 use SplFileInfo,
-    Zend\Loader\SplAutoloader, // @TODO: Remove once ported to the _real_ Zend\Loader namespace
     Traversable;
 
 class ModuleAutoloader implements SplAutoloader

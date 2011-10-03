@@ -28,8 +28,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Http\Request,
     Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route,
-    Zend\Mvc\Router\RouteMatch;
+    Zend\Mvc\Router\Route;
 
 /**
  * Regex route.
@@ -121,6 +120,8 @@ class Regex implements Route
         if (!$result) {
             return null;
         }
+        
+        $matchedLength = strlen($match[0]);
 
         foreach ($match as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
@@ -130,7 +131,7 @@ class Regex implements Route
 
         $matches       = array_merge($this->defaults, $match);
         $this->matches = $matches;
-        return new RouteMatch($matches, $this);
+        return new PartRouteMatch($matches, $this, $matchedLength);
     }
 
     /**

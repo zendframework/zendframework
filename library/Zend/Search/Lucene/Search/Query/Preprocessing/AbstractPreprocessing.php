@@ -59,7 +59,7 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      * Optimize query in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
-     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     public function optimize(Lucene\SearchIndex $index)
@@ -71,7 +71,7 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      * Constructs an appropriate Weight implementation for this query.
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
-     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return \Zend\Search\Lucene\Search\Weight\Weight
      */
     public function createWeight(Lucene\SearchIndex $reader)
@@ -85,7 +85,7 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      *
      * @param \Zend\Search\Lucene\SearchIndex $reader
      * @param \Zend\Search\Lucene\Index\DocsFilter|null $docsFilter
-     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      */
     public function execute(Lucene\SearchIndex $reader, $docsFilter = null)
     {
@@ -97,7 +97,7 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      *
      * It's an array with document ids as keys (performance considerations)
      *
-     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return array
      */
     public function matchedDocs()
@@ -110,7 +110,7 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
      *
      * @param integer $docId
      * @param \Zend\Search\Lucene\SearchIndex $reader
-     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return float
      */
     public function score($docId, Lucene\SearchIndex $reader)
@@ -121,7 +121,7 @@ abstract class AbstractPreprocessing extends Query\AbstractQuery
     /**
      * Return query terms
      *
-     * @throws \Zend\Search\Lucence\Exception\UnsupportedMethodCallException
+     * @throws \Zend\Search\Lucene\Exception\UnsupportedMethodCallException
      * @return array
      */
     public function getQueryTerms()

@@ -26,10 +26,9 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Config\Config,
-    Zend\Http\Request,
+    Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route,
-    Zend\Mvc\Router\RouteMatch;
+    Zend\Mvc\Router\Route;
 
 /**
  * Regex route.
@@ -109,6 +108,10 @@ class Regex implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
+        if (!method_exists($request, 'uri')) {
+            return null;
+        }
+
         $uri  = $request->uri();
         $path = $uri->getPath();
 
@@ -121,6 +124,8 @@ class Regex implements Route
         if (!$result) {
             return null;
         }
+        
+        $matchedLength = strlen($match[0]);
 
         foreach ($match as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
@@ -130,7 +135,7 @@ class Regex implements Route
 
         $matches       = array_merge($this->defaults, $match);
         $this->matches = $matches;
-        return new RouteMatch($matches, $this);
+        return new PartRouteMatch($matches, $this, $matchedLength);
     }
 
     /**

@@ -25,7 +25,6 @@
 namespace Zend\Mvc\Router\Http;
 
 use Zend\Loader\PluginSpecBroker,
-    Zend\Http\Request,
     Zend\Mvc\Router\SimpleRouteStack;
 
 /**

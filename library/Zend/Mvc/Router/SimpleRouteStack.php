@@ -26,7 +26,7 @@ namespace Zend\Mvc\Router;
 use ArrayAccess,
     ArrayIterator,
     Traversable,
-    Zend\Http\Request,
+    Zend\Stdlib\RequestDescription as Request,
     Zend\Loader\PluginBroker;
 
 /**

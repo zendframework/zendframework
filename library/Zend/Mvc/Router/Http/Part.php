@@ -26,7 +26,7 @@ namespace Zend\Mvc\Router\Http;
 
 use Traversable,
     Zend\Config\Config,
-    Zend\Http\Request,
+    Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception;
 
 /**
@@ -119,7 +119,7 @@ class Part extends TreeRouteStack
     {
         $match = $this->route->match($request, $pathOffset);
 
-        if ($match !== null) {
+        if ($match !== null && method_exists($request, 'uri')) {
             if ($this->childRoutes !== null) {
                 $this->addRoutes($this->childRoutes);
                 $this->childRoutes = null;

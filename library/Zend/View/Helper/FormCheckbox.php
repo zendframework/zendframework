@@ -57,12 +57,8 @@ class FormCheckbox extends FormElement
      * @param array $attribs Attributes for the element tag.
      * @return string The element XHTML.
      */
-    public function direct($name = null, $value = null, $attribs = null, array $checkedOptions = null)
+    public function __invoke($name, $value = null, $attribs = null, array $checkedOptions = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('Action: missing argument. $name is required in formCheckbox($name, $value = null, $attribs = null, array $checkedOptions = null)');
-        }
-        
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, id, value, attribs, options, listsep, disable
 

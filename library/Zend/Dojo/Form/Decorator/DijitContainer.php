@@ -198,6 +198,7 @@ abstract class DijitContainer extends \Zend\Form\Decorator\AbstractDecorator
             } while ($view->plugin('dojo')->hasDijit($id));
         }
 
-        return $view->plugin($helper)->direct($id, $content, $dijitParams, $attribs);
+        $helper = $view->plugin($helper);
+        return $helper($id, $content, $dijitParams, $attribs);
     }
 }

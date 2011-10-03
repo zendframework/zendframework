@@ -21,19 +21,18 @@
 
 namespace Zend\Service\GoGrid;
 
-use Zend\Service\GoGrid\Exception,
- Zend\Http\Client as HttpClient;
+use Zend\Http\Client as HttpClient;
 
 abstract class GoGrid
 {
-    const URL_API= 'https://api.gogrid.com/api/';
-    const FORMAT_API= 'json';
-    const VERSION_API= '1.8';
-    const ILLEGAL_ARGUMENT_ERROR= 400;
-    const UNHAUTHORIZED_ERROR= 401;
-    const AUTHENTICATION_FAILED= 403;
-    const NOT_FOUND_ERROR= 404;
-    const UNEXPECTED_ERROR= 500;
+    const URL_API                = 'https://api.gogrid.com/api/';
+    const FORMAT_API             = 'json';
+    const VERSION_API            = '1.8';
+    const ILLEGAL_ARGUMENT_ERROR = 400;
+    const UNHAUTHORIZED_ERROR    = 401;
+    const AUTHENTICATION_FAILED  = 403;
+    const NOT_FOUND_ERROR        = 404;
+    const UNEXPECTED_ERROR       = 500;
     /**
      * GoGrid API key
      *
@@ -61,7 +60,7 @@ abstract class GoGrid
      */
     protected $_lastResponse;
     /**
-     * __construct
+     * Construct
      *
      * @param string $key
      * @param string $secret
@@ -155,10 +154,14 @@ abstract class GoGrid
             throw new Exception\InvalidArgumentException("The options must be an array");
         }
         $client = $this->getHttpClient();
-        $client->setParameterGet('format', self::FORMAT_API);
-        $client->setParameterGet('api_key', $this->_apiKey);
-        $client->setParameterGet('sig', $this->_computeSignature());
-        $client->setParameterGet('v', $this->_apiVersion);
+        
+        $paramGet= array (
+            'format'  => self::FORMAT_API,
+            'api_key' => $this->_apiKey,
+            'sig'     => $this->_computeSignature(),
+            'v'       => $this->_apiVersion
+        );
+        
         if (!empty($options)) {
             $get='';
             foreach ($options as $key=>$value) {
@@ -167,16 +170,19 @@ abstract class GoGrid
                         $get.= $key.'='.urlencode($val).'&';
                     }
                 } else {
-                    $client->setParameterGet($key, $value);
+                    $paramGet[$key]= $value;
                 }
             }
         }
+        $client->setParameterGet($paramGet);
+        
         if (!empty($get)) {
             $client->setUri(self::URL_API . $method.'?'.$get);
         } else {
             $client->setUri(self::URL_API . $method);
         }
-        $this->_lastResponse = $client->request();
+        
+        $this->_lastResponse = $client->send();
         return json_decode($this->_lastResponse->getBody(), true);
     }
     /**
@@ -186,7 +192,7 @@ abstract class GoGrid
      */
     public function getLastResponse()
     {
-        return $this->getHttpClient()->getLastResponse();
+        return $this->getHttpClient()->getLastRawResponse();
     }
     /**
      * Get the last HTTP request
@@ -195,7 +201,7 @@ abstract class GoGrid
      */
     public function getLastRequest()
     {
-        return $this->getHttpClient()->getLastRequest();
+        return $this->getHttpClient()->getLastRawRequest();
     }
     /**
      * Get the last error type
@@ -204,6 +210,6 @@ abstract class GoGrid
      */
     public function getHttpStatus()
     {
-        return $this->_lastResponse->getStatus();
+        return $this->_lastResponse->getStatusCode();
     }
 }

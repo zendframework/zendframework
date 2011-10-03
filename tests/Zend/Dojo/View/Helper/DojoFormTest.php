@@ -64,7 +64,7 @@ class DojoFormTest extends \PHPUnit_Framework_TestCase
 
     public function getForm()
     {
-        return $this->helper->direct('myForm', array('action' => '/foo'), '');
+        return $this->helper->__invoke('myForm', array('action' => '/foo'), '');
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -84,26 +84,26 @@ class DojoFormTest extends \PHPUnit_Framework_TestCase
     public function testOnlyIdShouldBeNecessary()
     {
         DojoHelper::setUseDeclarative();
-        $html = $this->view->plugin('dojoform')->direct('foo');
+        $html = $this->view->plugin('dojoform')->__invoke('foo');
         $this->assertRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html, $html);
         $this->assertRegexp('/<form[^>]*(id="foo")/', $html, $html);
     }
 
     public function testShouldNotRenderIdAsHtmlIdWhenIdPassedAsAttrib()
     {
-        $html = $this->helper->direct('foo', array('id' => 'bar'));
+        $html = $this->helper->__invoke('foo', array('id' => 'bar'));
         $this->assertRegexp('/<form[^>]*(id="bar")/', $html);
     }
     
     public function testShouldNotRenderClosingTagIfContentIsFalse()
     {
-        $html = $this->helper->direct('foo');
+        $html = $this->helper->__invoke('foo');
         $this->assertNotRegexp('/<\/form>/', $html);
     }
 
     public function testShouldNotUseDojoIfRegularZendFormIsUsed()
     {
-        $html = $this->view->plugin('form')->direct('foo');
+        $html = $this->view->plugin('form')->__invoke('foo');
         $this->assertNotRegexp('/<form[^>]*(dojoType="dijit.form.Form")/', $html);
     }
 }

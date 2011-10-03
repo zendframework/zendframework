@@ -70,7 +70,7 @@ class Cycle extends AbstractHelper implements \Iterator
      * @param string $name
      * @return \Zend\View\Helper\Cycle
      */
-    public function direct(array $data = array(), $name = self::DEFAULT_NAME)
+    public function __invoke(array $data = array(), $name = self::DEFAULT_NAME)
     {
         if(!empty($data))
            $this->_data[$name] = $data;

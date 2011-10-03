@@ -64,13 +64,13 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
 
     public function testFormLabelWithSaneInput()
     {
-        $label = $this->helper->direct('foo', 'bar');
+        $label = $this->helper->__invoke('foo', 'bar');
         $this->assertEquals('<label for="foo">bar</label>', $label);
     }
 
     public function testFormLabelWithInputNeedingEscapesUsesViewEscaping()
     {
-        $label = $this->helper->direct('<&foo', '</bar>');
+        $label = $this->helper->__invoke('<&foo', '</bar>');
         $expected = '<label for="' . $this->view->vars()->escape('<&foo') . '">' . $this->view->vars()->escape('</bar>') . '</label>';
         $this->assertEquals($expected, $label);
     }
@@ -84,13 +84,13 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
 
     public function testAttribsAreSet()
     {
-        $label = $this->helper->direct('foo', 'bar', array('class' => 'baz'));
+        $label = $this->helper->__invoke('foo', 'bar', array('class' => 'baz'));
         $this->assertEquals('<label for="foo" class="baz">bar</label>', $label);
     }
 
     public function testNameAndIdForZF2154()
     {
-        $label = $this->helper->direct('name', 'value', array('id' => 'id'));
+        $label = $this->helper->__invoke('name', 'value', array('id' => 'id'));
         $this->assertEquals('<label for="id">value</label>', $label);
     }
 
@@ -99,11 +99,11 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableEscapingLabelValue()
     {
-        $label = $this->helper->direct('foo', '<b>Label This!</b>', array('escape' => false));
+        $label = $this->helper->__invoke('foo', '<b>Label This!</b>', array('escape' => false));
         $this->assertContains('<b>Label This!</b>', $label);
-        $label = $this->helper->direct(array('name' => 'foo', 'value' => '<b>Label This!</b>', 'escape' => false));
+        $label = $this->helper->__invoke(array('name' => 'foo', 'value' => '<b>Label This!</b>', 'escape' => false));
         $this->assertContains('<b>Label This!</b>', $label);
-        $label = $this->helper->direct(array('name' => 'foo', 'value' => '<b>Label This!</b>', 'attribs' => array('escape' => false)));
+        $label = $this->helper->__invoke(array('name' => 'foo', 'value' => '<b>Label This!</b>', 'attribs' => array('escape' => false)));
         $this->assertContains('<b>Label This!</b>', $label);
     }
 
@@ -112,7 +112,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
      */
     public function testHelperShouldAllowSuppressionOfForAttribute()
     {
-        $label = $this->helper->direct('foo', 'bar', array('disableFor' => true));
+        $label = $this->helper->__invoke('foo', 'bar', array('disableFor' => true));
         $this->assertNotContains('for="foo"', $label);
     }
 
@@ -121,7 +121,7 @@ class FormLabelTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldNotRenderDisableForAttributeIfForIsSuppressed()
     {
-        $label = $this->helper->direct('foo', 'bar', array('disableFor' => true));
+        $label = $this->helper->__invoke('foo', 'bar', array('disableFor' => true));
         $this->assertNotContains('disableFor=', $label, 'Output contains disableFor attribute!');
     }
 }

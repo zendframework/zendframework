@@ -61,7 +61,7 @@ class RadioButton extends Dijit
      * @param  string $listsep String with which to separate options
      * @return string
      */
-    public function direct(
+    public function __invoke(
         $id = null,
         $value = null,
         array $params = array(),
@@ -87,6 +87,6 @@ class RadioButton extends Dijit
             }
         }
 
-        return $this->view->plugin('formRadio')->direct($id, $value, $attribs, $options, $listsep);
+        return $this->view->formRadio($id, $value, $attribs, $options, $listsep);
     }
 }

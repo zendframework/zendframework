@@ -50,12 +50,8 @@ class FormNote extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = null, $value = null)
+    public function __invoke($name, $value = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormNote: missing argument. $name is required in formNote($name, $value = null)');
-        }
-        
         $info = $this->_getInfo($name, $value);
         extract($info); // name, value, attribs, options, listsep, disable
         return $value;

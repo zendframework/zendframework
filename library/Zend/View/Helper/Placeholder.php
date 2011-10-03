@@ -62,14 +62,13 @@ class Placeholder extends AbstractHelper
         $this->_registry = Placeholder\Registry::getRegistry();
     }
 
-
     /**
      * Placeholder helper
      *
      * @param  string $name
      * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
      */
-    public function direct($name = null)
+    public function __invoke($name = null)
     {
         if ($name == null) {
             throw new \InvalidArgumentException('Placeholder: missing argument.  $name is required by placeholder($name)');

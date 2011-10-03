@@ -64,7 +64,7 @@ class ButtonTest extends \PHPUnit_Framework_TestCase
 
     public function getElement()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'foo',
             array(),

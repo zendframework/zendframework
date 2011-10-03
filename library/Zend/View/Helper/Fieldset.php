@@ -43,9 +43,9 @@ class Fieldset extends FormElement
      * @param  array $attribs HTML form attributes
      * @return string
      */
-    public function direct($name = null, $content = null, $attribs = null)
+    public function __invoke($name = null, $content = null, $attribs = null)
     {
-        $info = $this->_getInfo($name, $content, $attribs);
+        $info   = $this->_getInfo($name, $content, $attribs);
         $escape = $id = null;
         extract($info);
 

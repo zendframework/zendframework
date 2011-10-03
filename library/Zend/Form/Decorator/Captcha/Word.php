@@ -67,8 +67,8 @@ class Word extends AbstractDecorator
         $placement = $this->getPlacement();
         $separator = $this->getSeparator();
 
-        $hidden = $view->plugin('formHidden')->direct($hiddenName, $element->getValue(), $element->getAttribs());
-        $text   = $view->plugin('formText')->direct($textName, '', $element->getAttribs());
+        $hidden = $view->formHidden($hiddenName, $element->getValue(), $element->getAttribs());
+        $text   = $view->formText($textName, '', $element->getAttribs());
         switch ($placement) {
             case 'PREPEND':
                 $content = $hidden . $separator . $text . $separator . $content;

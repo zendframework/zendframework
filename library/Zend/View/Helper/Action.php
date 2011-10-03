@@ -124,12 +124,8 @@ class Action extends AbstractHelper
      * @param  array $params
      * @return string
      */
-    public function direct($action = null, $controller = null, $module = null, array $params = array())
+    public function __invoke($action, $controller, $module = null, array $params = array())
     {
-        if ($action == null || $controller == null) {
-            throw new \InvalidArgumentException('Action: missing argument. $action and $controller are required in action($action, $controller, $module = null, array $params = array())');
-        }
-
         $this->resetObjects();
         if (null === $module) {
             $module = $this->defaultModule;

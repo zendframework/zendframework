@@ -76,7 +76,7 @@ class HeadMeta extends Placeholder\Container\Standalone
      * @param  string $placement
      * @return \Zend\View\Helper\HeadMeta
      */
-    public function direct($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = Placeholder\Container\AbstractContainer::APPEND)
+    public function __invoke($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
         if ((null !== $content) && (null !== $keyValue)) {
             $item   = $this->createData($keyType, $keyValue, $content, $modifiers);

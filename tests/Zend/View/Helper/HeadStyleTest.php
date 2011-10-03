@@ -91,7 +91,7 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
 
     public function testHeadStyleReturnsObjectInstance()
     {
-        $placeholder = $this->helper->direct();
+        $placeholder = $this->helper->__invoke();
         $this->assertTrue($placeholder instanceof Helper\HeadStyle);
     }
 
@@ -231,9 +231,9 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $style2 = 'a {}' . PHP_EOL . 'h1 {}';
         $style3 = 'a {}' . PHP_EOL . 'h2 {}';
 
-        $this->helper->direct($style1, 'SET')
-                     ->direct($style2, 'PREPEND')
-                     ->direct($style3, 'APPEND');
+        $this->helper->__invoke($style1, 'SET')
+                     ->__invoke($style2, 'PREPEND')
+                     ->__invoke($style3, 'APPEND');
         $this->assertEquals(3, count($this->helper));
         $values = $this->helper->getArrayCopy();
         $this->assertTrue((strstr($values[0]->content, $style2)) ? true : false);
@@ -247,9 +247,9 @@ class HeadStyleTest extends \PHPUnit_Framework_TestCase
         $style2 = 'body {}' . PHP_EOL . 'h1 {}';
         $style3 = 'div {}' . PHP_EOL . 'li {}';
 
-        $this->helper->direct($style1, 'SET')
-                     ->direct($style2, 'PREPEND')
-                     ->direct($style3, 'APPEND');
+        $this->helper->__invoke($style1, 'SET')
+                     ->__invoke($style2, 'PREPEND')
+                     ->__invoke($style3, 'APPEND');
         $html = $this->helper->toString();
         $doc  = new \DOMDocument;
         $dom  = $doc->loadHtml($html);
@@ -326,31 +326,31 @@ h1 {
 
     public function testSerialCapturingWorks()
     {
-        $this->helper->direct()->captureStart();
+        $this->helper->__invoke()->captureStart();
         echo "Captured text";
-        $this->helper->direct()->captureEnd();
+        $this->helper->__invoke()->captureEnd();
 
         try {
-            $this->helper->direct()->captureStart();
+            $this->helper->__invoke()->captureStart();
         } catch (View\Exception $e) {
             $this->fail('Serial capturing should work');
         }
-        $this->helper->direct()->captureEnd();
+        $this->helper->__invoke()->captureEnd();
     }
 
     public function testNestedCapturingFails()
     {
-        $this->helper->direct()->captureStart();
+        $this->helper->__invoke()->captureStart();
         echo "Captured text";
             try {
-                $this->helper->direct()->captureStart();
-                $this->helper->direct()->captureEnd();
+                $this->helper->__invoke()->captureStart();
+                $this->helper->__invoke()->captureEnd();
                 $this->fail('Nested capturing should fail');
             } catch (View\Exception $e) {
-                $this->helper->direct()->captureEnd();
+                $this->helper->__invoke()->captureEnd();
                 $this->assertContains('Cannot nest', $e->getMessage());
             }
-        $this->helper->direct()->captureEnd();
+        $this->helper->__invoke()->captureEnd();
     }
 
     public function testMediaAttributeAsArray()

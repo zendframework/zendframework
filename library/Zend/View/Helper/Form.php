@@ -43,10 +43,10 @@ class Form extends FormElement
      * @param  false|string $content Form content
      * @return string
      */
-    public function direct($name = null, $attribs = null, $content = false)
+    public function __invoke($name = null, $attribs = null, $content = false)
     {
         $info = $this->_getInfo($name, $content, $attribs);
-        $id = null;
+        $id   = null;
         extract($info);
 
         if (!empty($id)) {

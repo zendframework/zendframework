@@ -8,7 +8,7 @@ use Zend\Di\DependencyInjector,
     Zend\Di\Definition\Builder,
     PHPUnit_Framework_TestCase as TestCase;
 
-class ContainerBuilderTest extends TestCase
+class GeneratorTest extends TestCase
 {
     public $tmpFile = false;
 
@@ -70,14 +70,12 @@ class ContainerBuilderTest extends TestCase
                     'inspect'  => array('inspect'),
                     'struct'   => array('struct'),
                 ),
-                'properties' => array(
-                    'ZendTest\Di\TestAsset\InspectedClass' => array(
-                        'baz' => 'BAZ',
-                    ),
-                    'ZendTest\Di\TestAsset\Struct' => array(
-                        'param1' => 'foo',
-                    ),
-                ),
+                'ZendTest\Di\TestAsset\InspectedClass' => array( 'parameters' => array(
+                    'baz' => 'BAZ',
+                )),
+                'ZendTest\Di\TestAsset\Struct' => array( 'parameters' => array(
+                    'param1' => 'foo',
+                )),
             ),
         );
         $configuration = new Configuration($data);
@@ -93,6 +91,9 @@ class ContainerBuilderTest extends TestCase
         $this->assertFileExists($this->tmpFile);
     }
 
+    /**
+     * @group one
+     */
     public function testCreatesContainerClassFromConfiguredDependencyInjector()
     {
         $this->buildContainerClass();

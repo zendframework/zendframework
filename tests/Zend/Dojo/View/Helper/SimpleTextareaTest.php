@@ -64,7 +64,7 @@ class SimpleTextareaTest extends \PHPUnit_Framework_TestCase
 
     public function getElement()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'some content',
             array(),
@@ -88,7 +88,7 @@ class SimpleTextareaTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingIdAsAttributeShouldOverrideUsingNameAsId()
     {
-        $html = $this->helper->direct('foo[bar]', '', array(), array('id' => 'foo-bar'));
+        $html = $this->helper->__invoke('foo[bar]', '', array(), array('id' => 'foo-bar'));
         $this->assertContains('id="foo-bar"', $html);
     }
     

@@ -51,7 +51,7 @@ class FormReset extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = '', $value = 'Reset', $attribs = null)
+    public function __invoke($name = '', $value = 'Reset', $attribs = null)
     {
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable

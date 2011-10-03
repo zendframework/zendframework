@@ -54,7 +54,7 @@ class DeclareVarsTest extends \PHPUnit_Framework_TestCase
 
     protected function _declareVars()
     {
-        $this->view->plugin('declareVars')->direct(
+        $this->view->plugin('declareVars')->__invoke(
             'varName1',
             'varName2',
             array(

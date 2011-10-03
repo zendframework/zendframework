@@ -49,16 +49,13 @@ class HtmlFlash extends HtmlElement
      * @param string $content Alternative content
      * @return string
      */
-    public function direct($data = null, array $attribs = array(), array $params = array(), $content = null)
+    public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)
     {
-        if ($data == null) {
-            throw new \InvalidArgumentException('HTMLFlash: missing argument. $data is required in htmlFlash($data, array $attribs = array(), array $params = array(), $content = null)');
-        }
-        
         // Params
         $params = array_merge(array('movie'   => $data,
                                     'quality' => 'high'), $params);
 
-        return $this->getView()->plugin('htmlObject')->direct($data, self::TYPE, $attribs, $params, $content);
+        $htmlObject = $this->getView()->plugin('htmlObject');
+        return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

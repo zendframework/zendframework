@@ -63,7 +63,7 @@ class Json extends AbstractHelper
     public function encodeJson($data, $keepLayouts = false)
     {
         $jsonHelper = new \Zend\View\Helper\Json();
-        $data = $jsonHelper->direct($data, $keepLayouts);
+        $data = $jsonHelper($data, $keepLayouts);
 
         if (!$keepLayouts) {
             $this->getBroker()->load('viewRenderer')->setNoRender(true);

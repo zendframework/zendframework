@@ -49,12 +49,8 @@ class FormFile extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = null, $attribs = null)
+    public function __invoke($name, $attribs = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormFile: missing argument. $name is required in formFile($name, $attribs = null)');
-        }
-        
         $info = $this->_getInfo($name, null, $attribs);
         extract($info); // name, id, value, attribs, options, listsep, disable
 

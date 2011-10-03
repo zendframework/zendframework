@@ -51,11 +51,10 @@ class FormButton extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = null, $value = null, $attribs = null)
+    public function __invoke($name = null, $value = null, $attribs = null)
     {
         $info = $this->_getInfo($name, $value, $attribs);
-
-        $id = $disable = $escape = null;
+        $id   = $disable = $escape = null;
 
         extract($info); // name, id, value, attribs, options, listsep, disable
 

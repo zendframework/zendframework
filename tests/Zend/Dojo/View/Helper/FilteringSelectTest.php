@@ -64,7 +64,7 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
 
     public function getElementAsSelect()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'someCombo',
             array(),
@@ -82,7 +82,7 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
 
     public function getElementAsRemoter()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'someCombo',
             array(

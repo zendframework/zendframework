@@ -401,54 +401,49 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
 
     /**
      * testing testRedirect
-     *
+     * @outputBuffering enabled
      */
     public function testRedirect()
     {
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/", null, $response, 'GET');
-        $this->assertSame( 302, $response->getHttpResponseCode() );
-        $this->assertSame( array(), $response->getRawHeaders() );
-        $headers = $response->getHeaders();
-        $this->assertTrue( is_array($headers) );
-        $this->assertSame( 1, count($headers) );
-        $this->assertTrue( is_array($headers[0]) );
-        $this->assertSame( 3, count($headers[0]) );
-        $this->assertSame( 'Location', $headers[0]['name'] );
-        $this->assertSame( 'http://www.test.com/', $headers[0]['value'] );
-        $this->assertSame( true, $headers[0]['replace'] );
-        $this->assertSame( '', $response->getBody() );
+        $this->assertSame( 302, $response->getStatusCode() );
+
+        $headers = $response->headers();
+        $this->assertTrue(1 <= count($headers));
+        $this->assertTrue($headers->has('Location'));
+        $location = $headers->get('Location');
+        $url      = $location->getFieldValue();
+        $this->assertSame( 'http://www.test.com/', $url );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php?a=b", null, $response, 'GET');
-        $headers = $response->getHeaders();
-        $this->assertSame( 'http://www.test.com/test.php?a=b', $headers[0]['value'] );
+        $location = $response->headers()->get('Location');
+        $this->assertSame( 'http://www.test.com/test.php?a=b', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'b'), $response, 'GET');
-        $headers = $response->getHeaders();
-        $this->assertSame( 'http://www.test.com/test.php?a=b', $headers[0]['value'] );
+        $location = $response->headers()->get('Location');
+        $this->assertSame( 'http://www.test.com/test.php?a=b', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'b', 'c'=>'d'), $response, 'GET');
-        $headers = $response->getHeaders();
-        $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $headers[0]['value'] );
+        $location = $response->headers()->get('Location');
+        $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php?a=b", array('c'=>'d'), $response, 'GET');
-        $headers = $response->getHeaders();
-        $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $headers[0]['value'] );
+        $location = $response->headers()->get('Location');
+        $this->assertSame( 'http://www.test.com/test.php?a=b&c=d', $location->getFieldValue() );
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/test.php", array('a'=>'x y'), $response, 'GET');
-        $headers = $response->getHeaders();
-        $this->assertSame( 'http://www.test.com/test.php?a=x+y', $headers[0]['value'] );
+        $location = $response->headers()->get('Location');
+        $this->assertSame( 'http://www.test.com/test.php?a=x+y', $location->getFieldValue() );
 
         $response = new ResponseHelper(false);
         OpenId::redirect("http://www.test.com/", null, $response, 'GET');
-        $this->assertSame( 200, $response->getHttpResponseCode() );
-        $this->assertSame( array(), $response->getRawHeaders() );
-        $this->assertSame( array(), $response->getHeaders() );
+        $this->assertSame( 302, $response->getStatusCode() );
         $this->assertSame(
             "<script language=\"JavaScript\" type=\"text/javascript\">window.location='http://www.test.com/';</script>",
             $response->getBody() );
@@ -485,9 +480,7 @@ class OpenIdTest extends \PHPUnit_Framework_TestCase
 
         $response = new ResponseHelper(true);
         OpenId::redirect("http://www.test.com/", null, $response, 'POST');
-        $this->assertSame( 200, $response->getHttpResponseCode() );
-        $this->assertSame( array(), $response->getRawHeaders() );
-        $this->assertSame( array(), $response->getHeaders() );
+        $this->assertSame( 302, $response->getStatusCode() );
         $this->assertSame(
             "<html><body onLoad=\"document.forms[0].submit();\">\n" .
             "<form method=\"POST\" action=\"http://www.test.com/\">\n" .

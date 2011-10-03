@@ -437,4 +437,15 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->isValid('::FFFF:129.144.52.38'));
         $this->assertTrue($validator->isValid('2010:836B:4179::836B:4179'));
     }
+
+    /**
+     * Test extended greek charset
+     *
+     * @group ZF-11751
+     */
+    public function testExtendedGreek()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+        $this->assertEquals(true, $validator->isValid('ῆὧὰῧῲ.com'));
+    }
 }

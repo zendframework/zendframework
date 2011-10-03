@@ -57,8 +57,8 @@ class FilteringSelect extends ComboBox
      * @param  array|null $options Select options
      * @return string
      */
-    public function direct($id = null, $value = null, array $params = array(), array $attribs = array(), array $options = null)
+    public function __invoke($id = null, $value = null, array $params = array(), array $attribs = array(), array $options = null)
     {
-        return parent::direct($id, $value, $params, $attribs, $options);
+        return parent::__invoke($id, $value, $params, $attribs, $options);
     }
 }

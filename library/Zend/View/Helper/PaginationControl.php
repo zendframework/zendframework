@@ -73,7 +73,7 @@ class PaginationControl extends AbstractHelper
      * @return string
      * @throws \Zend\View\Exception
      */
-    public function direct(Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
+    public function __invoke(Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
     {
         if ($paginator === null) {
             if (isset($this->view->paginator) and $this->view->paginator !== null and $this->view->paginator instanceof Paginator\Paginator) {
@@ -109,12 +109,14 @@ class PaginationControl extends AbstractHelper
             }
 
             if ($partial[1] !== null) {
-                return $this->view->plugin('partial')->direct($partial[0], $partial[1], $pages);
+                $partialHelper = $this->view->plugin('partial');
+                return $partialHelper($partial[0], $partial[1], $pages);
             }
 
             $partial = $partial[0];
         }
 
-        return $this->view->plugin('partial')->direct($partial, $pages);
+        $partialHelper = $this->view->plugin('partial');
+        return $partialHelper($partial, $pages);
     }
 }

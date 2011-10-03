@@ -64,7 +64,7 @@ class ContentPaneTest extends \PHPUnit_Framework_TestCase
 
     public function getContainer()
     {
-        return $this->view->plugin('contentPane')->direct('pane1', 'This is the pane content', array('title' => 'Pane 1'));
+        return $this->view->plugin('contentPane')->__invoke('pane1', 'This is the pane content', array('title' => 'Pane 1'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -86,11 +86,11 @@ class ContentPaneTest extends \PHPUnit_Framework_TestCase
      */
     public function testContentPaneMarkupShouldNotContainNameAttribute()
     {
-        $html = $this->view->plugin('contentPane')->direct('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
+        $html = $this->view->plugin('contentPane')->__invoke('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
         $this->assertNotContains('name="/', $html, $html);
 
         DojoHelper::setUseProgrammatic();
-        $html = $this->view->plugin('contentPane')->direct('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
+        $html = $this->view->plugin('contentPane')->__invoke('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
         $this->assertNotContains('name="/', $html, $html);
     }
 

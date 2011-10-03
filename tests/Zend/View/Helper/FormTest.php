@@ -63,7 +63,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testFormWithSaneInput()
     {
-        $form = $this->helper->direct('foo', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->__invoke('foo', array('action' => '/foo', 'method' => 'get'));
         $this->assertRegexp('/<form[^>]*(id="foo")/', $form);
         $this->assertRegexp('/<form[^>]*(action="\/foo")/', $form);
         $this->assertRegexp('/<form[^>]*(method="get")/', $form);
@@ -71,13 +71,13 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testFormWithInputNeedingEscapesUsesViewEscaping()
     {
-        $form = $this->helper->direct('<&foo');
+        $form = $this->helper->__invoke('<&foo');
         $this->assertContains($this->view->vars()->escape('<&foo'), $form);
     }
 
     public function testPassingIdAsAttributeShouldRenderIdAttribAndNotName()
     {
-        $form = $this->helper->direct('foo', array('action' => '/foo', 'method' => 'get', 'id' => 'bar'));
+        $form = $this->helper->__invoke('foo', array('action' => '/foo', 'method' => 'get', 'id' => 'bar'));
         $this->assertRegexp('/<form[^>]*(id="bar")/', $form);
         $this->assertNotRegexp('/<form[^>]*(name="foo")/', $form);
     }
@@ -87,9 +87,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testEmptyIdShouldNotRenderIdAttribute()
     {
-        $form = $this->helper->direct('', array('action' => '/foo', 'method' => 'get'));
+        $form = $this->helper->__invoke('', array('action' => '/foo', 'method' => 'get'));
         $this->assertNotRegexp('/<form[^>]*(id="")/', $form);
-        $form = $this->helper->direct('', array('action' => '/foo', 'method' => 'get', 'id' => null));
+        $form = $this->helper->__invoke('', array('action' => '/foo', 'method' => 'get', 'id' => null));
         $this->assertNotRegexp('/<form[^>]*(id="")/', $form);
     }
 }

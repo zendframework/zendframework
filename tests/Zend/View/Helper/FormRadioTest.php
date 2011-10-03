@@ -55,7 +55,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -73,7 +73,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -83,7 +83,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             $this->assertRegexp('#<label.*?>.*?<input .*?' . $value . '</label>#', $html, $html);
         }
 
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -102,7 +102,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'bar' => 'Bar',
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -120,7 +120,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -140,7 +140,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -162,7 +162,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -184,7 +184,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -206,7 +206,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -226,7 +226,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'bar' => '<b>Bar</b>',
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'options' => $options,
         ));
@@ -240,7 +240,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'bar' => '<b>Bar</b>',
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'options' => $options,
             'attribs' => array('escape' => false)
@@ -259,7 +259,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'options' => $options,
         ));
@@ -274,7 +274,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -293,7 +293,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => array('foo', 'baz'),
             'options' => $options,
@@ -314,7 +314,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar baz' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo[]',
             'value'   => 'bar',
             'options' => $options,
@@ -334,7 +334,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar baz' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo[bar]',
             'value'   => 'bar',
             'attribs' => array('id' => 'foo-bar'),
@@ -358,7 +358,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'options' => $options,
@@ -373,7 +373,7 @@ class FormRadioTest extends \PHPUnit_Framework_TestCase
             'bar baz' => 'Bar',
             'baz' => 'Baz'
         );
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo[bar]',
             'value'   => 'bar',
             'options' => $options,

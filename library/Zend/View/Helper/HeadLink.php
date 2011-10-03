@@ -72,7 +72,7 @@ class HeadLink extends Placeholder\Container\Standalone
      *
      * @return \Zend\View\Helper\HeadLink
      */
-    public function direct(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
+    public function __invoke(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
         if (null !== $attributes) {
             $item = $this->createData($attributes);

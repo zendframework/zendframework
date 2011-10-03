@@ -62,7 +62,7 @@ class FormFileTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'attribs' => array('disable' => true)
         ));
@@ -75,7 +75,7 @@ class FormFileTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'attribs' => array('disable' => true)
         ));
@@ -86,7 +86,7 @@ class FormFileTest extends \PHPUnit_Framework_TestCase
 
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->direct(array(
+        $test = $this->helper->__invoke(array(
             'name'    => 'foo',
         ));
         $this->assertNotContains(' />', $test);
@@ -94,8 +94,8 @@ class FormFileTest extends \PHPUnit_Framework_TestCase
 
     public function testCanRendersAsXHtml()
     {
-        $this->view->plugin('doctype')->direct('XHTML1_STRICT');
-        $test = $this->helper->direct(array(
+        $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
+        $test = $this->helper->__invoke(array(
             'name'    => 'foo',
         ));
         $this->assertContains(' />', $test);

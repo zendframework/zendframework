@@ -55,8 +55,8 @@ class InlineScript extends HeadScript
      * @param  string $type Script type and/or array of script attributes
      * @return \Zend\View\Helper\InlineScript
      */
-    public function direct($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
+    public function __invoke($mode = HeadScript::FILE, $spec = null, $placement = 'APPEND', array $attrs = array(), $type = 'text/javascript')
     {
-        return parent::direct($mode, $spec, $placement, $attrs, $type);
+        return parent::__invoke($mode, $spec, $placement, $attrs, $type);
     }
 }

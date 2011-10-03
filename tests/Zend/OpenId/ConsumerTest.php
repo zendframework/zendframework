@@ -22,17 +22,19 @@
 /**
  * @namespace
  */
-namespace ZendTest\OpenId\Consumer;
+namespace ZendTest\OpenId;
 
-use Zend\OpenId\OpenId,
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Http,
+    Zend\OpenId\OpenId,
     Zend\OpenId\Consumer\GenericConsumer as Consumer,
     Zend\OpenId\Consumer\Storage,
-    Zend\OpenId\Extension,
-    ZendTest\OpenId as OpenIDTest,
-    Zend\Http;
+    Zend\OpenId\Extension;
 
 
 /**
+ * @outputBuffering enabled
+ *
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage UnitTests
@@ -40,7 +42,7 @@ use Zend\OpenId\OpenId,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_OpenId
  */
-class ConsumerTest extends \PHPUnit_Framework_TestCase
+class ConsumerTest extends TestCase
 {
     const ID       = "http://id.myopenid.com/";
     const REAL_ID  = "http://real_id.myopenid.com/";
@@ -65,19 +67,17 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $storage->delAssociation(self::SERVER);
         $this->assertTrue( $storage->addAssociation(self::SERVER, self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
 
-        $response = new OpenIDTest\ResponseHelper(true);
+        $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, null, null, null, $response) );
-        $headers = $response->getHeaders();
-        $this->assertSame( '', $response->getBody() );
-        $this->assertTrue( is_array($headers) );
-        $this->assertSame( 1, count($headers) );
-        $this->assertTrue( is_array($headers[0]) );
-        $this->assertSame( 3, count($headers[0]) );
-        $this->assertSame( 'Location', $headers[0]['name'] );
-        $this->assertSame( true, $headers[0]['replace'] );
-        $url = $headers[0]['value'];
-        $url = parse_url($url);
+        $headers = $response->headers();
+
+        $this->assertTrue(1 <= count($headers));
+        $this->assertTrue($headers->has('Location'));
+
+        $location = $headers->get('Location');
+        $url      = $location->getFieldValue();
+        $url      = parse_url($url);
         $this->assertSame( "http", $url['scheme'] );
         $this->assertSame( "www.myopenid.com", $url['host'] );
         $this->assertSame( "/", $url['path'] );
@@ -98,12 +98,14 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame( 'http%3A%2F%2Fwww.zf-test.com', $query['openid.trust_root'] );
 
         // Test user defined return_to and trust_root
-        $response = new OpenIDTest\ResponseHelper(true);
+        $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers = $response->getHeaders();
-        $url = $headers[0]['value'];
-        $url = parse_url($url);
+        $headers  = $response->headers();
+        $location = $headers->get('Location');
+        $url      = $location->getFieldValue();
+        $url      = parse_url($url);
+
         $q = explode("&", $url['query']);
         $query = array();
         foreach($q as $var) {
@@ -124,12 +126,14 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 2.0, $expiresIn) );
 
         // Test login with OpenID 2.0
-        $response = new OpenIDTest\ResponseHelper(true);
+        $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers = $response->getHeaders();
-        $url = $headers[0]['value'];
-        $url = parse_url($url);
+        $headers  = $response->headers();
+        $location = $headers->get('Location');
+        $url      = $location->getFieldValue();
+        $url      = parse_url($url);
+
         $q = explode("&", $url['query']);
         $query = array();
         foreach($q as $var) {
@@ -149,12 +153,14 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 
         // Test login with SREG extension
         $ext = new Extension\Sreg(array("nickname"=>true,"email"=>false));
-        $response = new OpenIDTest\ResponseHelper(true);
+        $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", $ext, $response) );
-        $headers = $response->getHeaders();
-        $url = $headers[0]['value'];
-        $url = parse_url($url);
+        $headers  = $response->headers();
+        $location = $headers->get('Location');
+        $url      = $location->getFieldValue();
+        $url      = parse_url($url);
+
         $q = explode("&", $url['query']);
         $query = array();
         foreach($q as $var) {
@@ -176,12 +182,14 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 
         // Test login in dumb mode
         $storage->delAssociation(self::SERVER);
-        $response = new OpenIDTest\ResponseHelper(true);
+        $response = new ResponseHelper(true);
         $consumer = new Consumer($storage, true);
         $this->assertTrue( $consumer->login(self::ID, "http://www.zf-test.com/return.php", "http://www.zf-test.com/trust.php", null, $response) );
-        $headers = $response->getHeaders();
-        $url = $headers[0]['value'];
-        $url = parse_url($url);
+        $headers  = $response->headers();
+        $location = $headers->get('Location');
+        $url      = $location->getFieldValue();
+        $url      = parse_url($url);
+
         $q = explode("&", $url['query']);
         $query = array();
         foreach($q as $var) {
@@ -216,19 +224,17 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $storage->delAssociation(self::SERVER);
         $this->assertTrue( $storage->addAssociation(self::SERVER, self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
 
-        $response = new OpenIDTest\ResponseHelper(true);
+        $response = new ResponseHelper(true);
         $consumer = new Consumer($storage);
         $this->assertTrue( $consumer->check(self::ID, null, null, null, $response) );
-        $headers = $response->getHeaders();
-        $this->assertSame( '', $response->getBody() );
-        $this->assertTrue( is_array($headers) );
-        $this->assertSame( 1, count($headers) );
-        $this->assertTrue( is_array($headers[0]) );
-        $this->assertSame( 3, count($headers[0]) );
-        $this->assertSame( 'Location', $headers[0]['name'] );
-        $this->assertSame( true, $headers[0]['replace'] );
-        $url = $headers[0]['value'];
-        $url = parse_url($url);
+        $headers = $response->headers();
+
+        $this->assertTrue(1 <= count($headers));
+        $this->assertTrue($headers->has('Location'));
+
+        $location = $headers->get('Location');
+        $url      = $location->getFieldValue();
+        $url      = parse_url($url);
         $this->assertSame( "http", $url['scheme'] );
         $this->assertSame( "www.myopenid.com", $url['host'] );
         $this->assertSame( "/", $url['path'] );
@@ -262,7 +268,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
 
         $storage = new Storage\File(__DIR__."/_files/consumer");
         $storage->delAssociation(self::SERVER);
-        $consumer = new ConsumerHelper($storage);
+        $consumer = new TestAsset\ConsumerHelper($storage);
         $this->assertFalse( $consumer->getAssociation(self::SERVER, $handle, $macFunc, $secret, $expires) );
         $this->assertTrue( $storage->addAssociation(self::SERVER, self::HANDLE, self::MAC_FUNC, self::SECRET, $expiresIn) );
         $this->assertTrue( $consumer->getAssociation(self::SERVER, $handle, $macFunc, $secret, $expires) );
@@ -284,7 +290,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpRequest()
     {
-        $consumer = new ConsumerHelper(new Storage\File(__DIR__."/_files/consumer"));
+        $consumer = new TestAsset\ConsumerHelper(new Storage\File(__DIR__."/_files/consumer"));
         $http = new Http\Client(null,
             array(
                 'maxredirects' => 4,
@@ -293,8 +299,8 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
             ));
         $test = new Http\Client\Adapter\Test();
         $http->setAdapter($test);
-        $consumer->SetHttpClient($http);
-        $this->assertSame( $http, $consumer->GetHttpClient() );
+        $consumer->setHttpClient($http);
+        $this->assertSame( $http, $consumer->getHttpClient() );
         $this->assertFalse( $consumer->httpRequest(self::SERVER) );
 
         $test->setResponse("HTTP/1.1 200 OK\r\n\r\nok\n");
@@ -306,7 +312,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "Connection: close\r\n" .
                            "Accept-encoding: gzip, deflate\r\n" .
                            "User-Agent: Zend_OpenId\r\n\r\n",
-                           $http->getLastRequest() );
+                           $http->getLastRawRequest() );
 
         // Test POST request without parameters
         $this->assertSame( "ok\n", $consumer->httpRequest(self::SERVER, 'POST') );
@@ -314,10 +320,9 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "Host: www.myopenid.com\r\n" .
                            "Connection: close\r\n" .
                            "Accept-encoding: gzip, deflate\r\n" .
-                           "Content-Type: application/x-www-form-urlencoded\r\n" .
                            "User-Agent: Zend_OpenId\r\n" .
-                           "Content-Length: 0\r\n\r\n",
-                           $http->getLastRequest() );
+                           "Content-Type: application/x-www-form-urlencoded\r\n\r\n",
+                           $http->getLastRawRequest() );
 
         // Test GET request with parameters
         $this->assertSame( "ok\n", $consumer->httpRequest(self::SERVER . 'test.php', 'GET', array('a'=>'b','c'=>'d')) );
@@ -326,7 +331,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "Connection: close\r\n" .
                            "Accept-encoding: gzip, deflate\r\n" .
                            "User-Agent: Zend_OpenId\r\n\r\n",
-                           $http->getLastRequest() );
+                           $http->getLastRawRequest() );
 
         // Test POST request with parameters
         $this->assertSame( "ok\n", $consumer->httpRequest(self::SERVER . 'test.php', 'POST', array('a'=>'b','c'=>'d')) );
@@ -338,7 +343,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "Content-Type: application/x-www-form-urlencoded\r\n" .
                            "Content-Length: 7\r\n\r\n" .
                            "a=b&c=d",
-                           $http->getLastRequest() );
+                           $http->getLastRawRequest() );
 
         // Test GET parameters combination
         $this->assertSame( "ok\n", $consumer->httpRequest(self::SERVER . 'test.php?a=b', 'GET', array('c'=>'x y')) );
@@ -347,7 +352,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "Connection: close\r\n" .
                            "Accept-encoding: gzip, deflate\r\n" .
                            "User-Agent: Zend_OpenId\r\n\r\n",
-                           $http->getLastRequest() );
+                           $http->getLastRawRequest() );
 
         // Test GET and POST parameters combination
         $this->assertSame( "ok\n", $consumer->httpRequest(self::SERVER . 'test.php?a=b', 'POST', array('c'=>'x y')) );
@@ -359,7 +364,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "Content-Type: application/x-www-form-urlencoded\r\n" .
                            "Content-Length: 5\r\n\r\n" .
                            "c=x+y",
-                           $http->getLastRequest() );
+                           $http->getLastRawRequest() );
     }
 
     /**
@@ -371,7 +376,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         try {
             $storage = new Storage\File(__DIR__."/_files/consumer");
             $storage->delAssociation(self::SERVER);
-            $consumer = new ConsumerHelper($storage);
+            $consumer = new TestAsset\ConsumerHelper($storage);
             $http = new Http\Client(null,
                 array(
                     'maxredirects' => 4,
@@ -398,7 +403,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                                "openid.dh_modulus=ANz5OguIOXLsDhmYmsWizjEOHTdxfo2Vcbt2I3MYZuYe91ouJ4mLBX%2BYkcLiemOcPym2CBRYHNOyyjmG0mg3BVd9RcLn5S3IHHoXGHblzqdLFEi%2F368Ygo79JRnxTkXjgmY0rxlJ5bU1zIKaSDuKdiI%2BXUkKJX8Fvf8W8vsixYOr&" .
                                "openid.dh_gen=Ag%3D%3D&" .
                                "openid.dh_consumer_public=GaLlROlBGgSopPzo1ewYISnnT4BUFBfIKlgDPoS9U41t5eQb8QYqgcw7%2BW3dSF1VlWcvJGR0UbZIEhJ3UrCs6p69q6sgl%2FOZ7P%2B17rme7OynqszA3pqD6MJoQVZ5Ht%2FR%2BjmMjK08ajcgYEZU1GG4U5k8eYbcFnje00%2FTGfjKY0I%3D",
-                               $http->getLastRequest() );
+                               $http->getLastRawRequest() );
 
             // Test OpenID 2.0 association request with DH-SHA256
             $consumer->clearAssociation();
@@ -417,7 +422,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                                "openid.dh_modulus=ANz5OguIOXLsDhmYmsWizjEOHTdxfo2Vcbt2I3MYZuYe91ouJ4mLBX%2BYkcLiemOcPym2CBRYHNOyyjmG0mg3BVd9RcLn5S3IHHoXGHblzqdLFEi%2F368Ygo79JRnxTkXjgmY0rxlJ5bU1zIKaSDuKdiI%2BXUkKJX8Fvf8W8vsixYOr&" .
                                "openid.dh_gen=Ag%3D%3D&" .
                                "openid.dh_consumer_public=GaLlROlBGgSopPzo1ewYISnnT4BUFBfIKlgDPoS9U41t5eQb8QYqgcw7%2BW3dSF1VlWcvJGR0UbZIEhJ3UrCs6p69q6sgl%2FOZ7P%2B17rme7OynqszA3pqD6MJoQVZ5Ht%2FR%2BjmMjK08ajcgYEZU1GG4U5k8eYbcFnje00%2FTGfjKY0I%3D",
-                               $http->getLastRequest() );
+                               $http->getLastRawRequest() );
 
             // Test OpenID 1.1 association response with DH-SHA1
             $consumer->clearAssociation();
@@ -546,7 +551,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
     public function testDiscovery()
     {
         $storage = new Storage\File(__DIR__."/_files/consumer");
-        $consumer = new ConsumerHelper($storage);
+        $consumer = new TestAsset\ConsumerHelper($storage);
         $http = new Http\Client(null,
             array(
                 'maxredirects' => 4,
@@ -727,7 +732,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $expiresIn = time() + 600;
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
         $storage = new Storage\File(__DIR__."/_files/consumer");
-        $consumer = new ConsumerHelper($storage);
+        $consumer = new TestAsset\ConsumerHelper($storage);
 
         $storage->addDiscoveryInfo(self::ID, self::REAL_ID, self::SERVER, 1.1, $expiresIn);
 
@@ -845,7 +850,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $expiresIn = time() + 600;
         $_SERVER['SCRIPT_URI'] = "http://www.zf-test.com/test.php";
         $storage = new Storage\File(__DIR__."/_files/consumer");
-        $consumer = new ConsumerHelper($storage);
+        $consumer = new TestAsset\ConsumerHelper($storage);
         $http = new Http\Client(null,
             array(
                 'maxredirects' => 4,
@@ -904,7 +909,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "openid.mode=check_authentication&" .
                            "openid.signed=assoc_handle%2Creturn_to%2Cclaimed_id%2Cidentity%2Cresponse_nonce%2Cmode%2Csigned&" .
                            "openid.sig=h%2F5AFD25NpzSok5tzHEGCVUkQSw%3D",
-                           $http->getLastRequest() );
+                           $http->getLastRawRequest() );
 
         $test->setResponse("HTTP/1.1 200 OK\r\n\r\nis_valid:true");
         $consumer->clearAssociation();
@@ -962,7 +967,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
                            "openid.sreg.nickname=test&" .
                            "openid.signed=ns%2Cassoc_handle%2Creturn_to%2Cclaimed_id%2Cidentity%2Cresponse_nonce%2Cmode%2Cns.sreg%2Csreg.nickname%2Csigned&" .
                            "openid.sig=h%2F5AFD25NpzSok5tzHEGCVUkQSw%3D",
-                           $http->getLastRequest() );
+                           $http->getLastRawRequest() );
 
         // invalidate_handle
         $test->setResponse("HTTP/1.1 200 OK\r\n\r\nis_valid:false\ninvalidate_handle:".self::HANDLE."1"."\n");
@@ -985,38 +990,4 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse( $consumer->verify($params) );
         $this->assertFalse( $storage->getAssociation(self::SERVER."1", $handle, $func, $secret, $expires) );
     }
-}
-
-class ConsumerHelper extends Consumer {
-
-    public function addAssociation($url, $handle, $macFunc, $secret, $expires)
-    {
-        return $this->_addAssociation($url, $handle, $macFunc, $secret, $expires);
-    }
-
-    public function getAssociation($url, &$handle, &$macFunc, &$secret, &$expires)
-    {
-        return $this->_getAssociation($url, $handle, $macFunc, $secret, $expires);
-    }
-
-    public function clearAssociation()
-    {
-        $this->_cache = array();
-    }
-
-    public function httpRequest($url, $method = 'GET', array $params = array())
-    {
-        return $this->_httpRequest($url, $method, $params);
-    }
-
-    public function associate($url, $version, $priv_key = null)
-    {
-        return $this->_associate($url, $version, $priv_key);
-    }
-
-    public function discovery(&$id, &$server, &$version)
-    {
-        return $this->_discovery($id, $server, $version);
-    }
-
 }

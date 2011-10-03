@@ -47,6 +47,7 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->_nonReadableConfig = __DIR__ . '/_files/nonreadable.ini';
         $this->_iniFileNoSectionsConfig = __DIR__ . '/_files/nosections.ini';
         $this->_iniFileInvalid = __DIR__ . '/_files/invalid.ini';
+        $this->_iniFileBooleans = __DIR__ . '/_files/booleans.ini';
     }
 
     public function testLoadSingleSection()
@@ -315,6 +316,15 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $config = new Ini($filename, 'all');
         $this->assertEquals(true, isset($config->{1002}));
 
+    }
+
+    public function testBooleans()
+    {
+        $config = new Ini($this->_iniFileBooleans, 'all');
+        $this->assertEquals(true, (bool)$config->trueValue);
+        $this->assertEquals(false, (bool)$config->falseValue);
+        $this->assertEquals(true, (bool)$config->trueString);
+        $this->assertEquals(false, (bool)$config->falseString);
     }
 
 }

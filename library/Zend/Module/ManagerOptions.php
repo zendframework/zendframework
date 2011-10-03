@@ -10,7 +10,7 @@ class ManagerOptions
     /**
      * @var bool
      */
-    protected $cacheConfig = false;
+    protected $enableConfigCache = false;
 
     /**
      * @var string
@@ -18,30 +18,24 @@ class ManagerOptions
     protected $cacheDir = NULL;
  
     /**
-     * Get cacheConfig.
+     * Check if the config cache is enabled
      *
      * @return bool
      */
-    public function getCacheConfig()
+    public function getEnableConfigCache()
     {
-        return $this->cacheConfig;
+        return $this->enableConfigCache;
     }
  
     /**
-     * Set cacheConfig.
+     * Set configCacheEnabled.
      *
-     * @param bool $cacheConfig the value to be set
+     * @param bool $enabled the value to be set
      * @return ManagerConfig
      */
-    public function setCacheConfig($cacheConfig)
+    public function setEnableConfigCache($enabled)
     {
-        if (!is_bool($cacheConfig)) {
-            throw new \InvalidArgumentException(
-                'Parameter to \\Zend\\Module\\ManagerOption\'s '
-                . 'setCacheConfig method must be boolean.'
-            );
-        }
-        $this->cacheConfig = $cacheConfig;
+        $this->enableConfigCache = (bool) $enabled;
         return $this;
     }
 

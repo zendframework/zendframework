@@ -107,7 +107,6 @@ abstract class AutoloaderFactory
         return static::$loaders;
     }
 
-
     /**
      * Retrieves an autoloader by class name 
      * 
@@ -136,6 +135,24 @@ abstract class AutoloaderFactory
             spl_autoload_unregister(array($autoloader, 'autoload'));
             unset(static::$loaders[$class]);
         }
+    }
+
+    /**
+     * Unregister a single autoloader by class name
+     * 
+     * @param  string $autoloaderClass 
+     * @return bool
+     */
+    public static function unregisterAutoloader($autoloaderClass)
+    {
+        if (!isset(static::$loaders[$autoloaderClass])) {
+            return false;
+        }
+
+        $autoloader = static::$loaders[$autoloaderClass];
+        spl_autoload_unregister(array($autoloader, 'autoload'));
+        unset(static::$loaders[$autoloaderClass]);
+        return true;
     }
 
     /**

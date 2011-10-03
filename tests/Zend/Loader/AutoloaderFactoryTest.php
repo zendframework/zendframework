@@ -116,6 +116,19 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, count(AutoloaderFactory::getRegisteredAutoloaders()));
     }
 
+    public function testCanUnregisterAutoloadersByClassName()
+    {
+        AutoloaderFactory::factory(array(
+            'Zend\Loader\StandardAutoloader' => array(
+                'namespaces' => array(
+                    'TestNamespace' => __DIR__ . '/TestAsset/TestNamespace',
+                ),
+            ),
+        ));
+        AutoloaderFactory::unregisterAutoloader('Zend\Loader\StandardAutoloader');
+        $this->assertEquals(0, count(AutoloaderFactory::getRegisteredAutoloaders()));
+    }
+
     public function testCanGetValidRegisteredAutoloader()
     {
         AutoloaderFactory::factory(array(

@@ -43,11 +43,18 @@ use Traversable,
 class Segment implements Route
 {
     /**
-     * Route to match.
+     * Parts of the route.
+     * 
+     * @var array
+     */
+    protected $parts;
+    
+    /**
+     * Regex used for matching the route.
      * 
      * @var string
      */
-    protected $route;
+    protected $string;
 
     /**
      * Default values.
@@ -82,15 +89,10 @@ class Segment implements Route
         if (!isset($options['defaults']) || !is_array($options['defaults'])) {
             throw new Exception\InvalidArgumentException('Defaults not defined nor not an array');
         }
-        
-        $this->route    = $options['route'];
-        $this->defaults = $options['defaults'];
-        
-        $this->parts = $this->parseRouteDefinition($options['route']);
-        $this->regex = $this->buildRegex($this->parts);
-        
-        var_dump($this->parts);
-        var_dump($this->regex);
+
+        $this->defaults = $options['defaults'];        
+        $this->parts    = $this->parseRouteDefinition($options['route']);
+        $this->regex    = $this->buildRegex($this->parts);
     }
     
     /**
@@ -183,7 +185,7 @@ class Segment implements Route
                 
                 case 'parameter':
                 case 'translated-parameter':
-                    $regex .= '(?<' . $part[1] . '>.*?)';
+                    $regex .= '(?<' . $part[1] . '>.+?)';
                     break;
                 
                 case 'optional':
@@ -193,6 +195,40 @@ class Segment implements Route
         }
         
         return $regex;
+    }
+    
+    /**
+     * Build a path.
+     * 
+     * @return string
+     */
+    protected function buildPath(array $parts, array $params)
+    {
+        $path = '';
+        
+        foreach ($parts as $part) {
+            switch ($part[0]) {
+                case 'literal':
+                case 'translated-literal':
+                    $path .= $part[1];
+                    break;
+                
+                case 'parameter':
+                case 'translated-parameter':
+                    if (!isset($params[$part[1]])) {
+                        return null;
+                    }
+                    
+                    $path .= $params[$part[1]];
+                    break;
+                
+                case 'optional':
+                    $path .= $this->buildPath($part[1], $params);
+                    break;
+            }
+        }
+        
+        return $path;
     }
 
     /**
@@ -208,16 +244,23 @@ class Segment implements Route
         $path = $uri->getPath();
         
         if ($pathOffset !== null) {
-            if (strpos($path, $this->route) === $pathOffset) {
-                return new RouteMatch($this->defaults, $this);
-            }
+            $result = preg_match('#\G' . $this->regex . '#i', $path, $matches, null, $pathOffset);
         } else {
-            if ($path === $this->route) {
-                return new RouteMatch($this->defaults, $this);
+            $result = preg_match('#^' . $this->regex . '$#i', $path, $matches);
+        }
+       
+        if (!$result) {
+            return null;
+        }
+        
+        foreach ($matches as $key => $value) {
+            if (is_numeric($key) || is_int($key)) {
+                unset($matches[$key]);
             }
         }
 
-        return null;
+        $matches = array_merge($this->defaults, $matches);
+        return new RouteMatch($matches, $this);
     }
 
     /**
@@ -230,6 +273,12 @@ class Segment implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
-        return $this->route;
+        $path = $this->buildPath($this->parts, array_merge($this->defaults, $params));
+        
+        if ($path === null) {
+            throw new Exception\InvalidArgumentException('Parameters missing');
+        }
+        
+        return $path;
     }
 }

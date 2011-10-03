@@ -29,7 +29,7 @@ require_once __DIR__ . '/SplAutoloader.php';
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AutoloaderFactory
+abstract class AutoloaderFactory
 {
     /**
      * @var array All autoloaders registered using the factory
@@ -41,18 +41,6 @@ class AutoloaderFactory
      * autoloader classes via the include_path
      */
     protected static $standardAutoloader;
-
-    // @codeCoverageIgnoreStart
-    /**
-     * Not meant to be instantiable
-     * 
-     * @return void
-     */
-    private function __construct()
-    {
-    }
-    // @codeCoverageIgnoreEnd
-
 
     /**
      * Factory for autoloaders

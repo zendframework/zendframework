@@ -22,7 +22,8 @@
 
 namespace ZendTest\Loader;
 
-use Zend\Loader\AutoloaderFactory;
+use ReflectionClass,
+    Zend\Loader\AutoloaderFactory;
 
 /**
  * @category   Zend
@@ -148,8 +149,8 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCannotBeInstantiatedViaConstructor()
     {
-        $reflection = new \ReflectionClass('Zend\Loader\AutoloaderFactory');
+        $reflection = new ReflectionClass('Zend\Loader\AutoloaderFactory');
         $constructor = $reflection->getConstructor();
-        $this->assertTrue($constructor->isPrivate());
+        $this->assertNull($constructor);
     }
 }

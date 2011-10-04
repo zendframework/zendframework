@@ -160,10 +160,18 @@ class InstanceManager /* implements InstanceCollection */
      */
     public function getClassFromAlias($alias)
     {
-        if (isset($this->aliases[$alias])) {
-            return $this->aliases[$alias];
+        if (!isset($this->aliases[$alias])) {
+            return false;
         }
-        return false;
+        $r = 0;
+        while (isset($this->aliases[$alias])) {
+            $alias = $this->aliases[$alias];
+            $r++;
+            if ($r > 100) {
+                throw new Exception\RuntimeException('Possible infinite recursion in DI alias! Max recursion of 100 levels reached.'); 
+            }
+        }
+        return $alias;
     }
     
 

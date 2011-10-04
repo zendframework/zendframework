@@ -341,6 +341,22 @@ abstract class RestfulController implements Dispatchable, EventAware, LocatorAwa
     }
 
     /**
+     * Method overloading: return plugins
+     * 
+     * @param mixed $method 
+     * @param mixed $params 
+     * @return void
+     */
+    public function __call($method, $params)
+    {
+        $options = null;
+        if (0 < count($params)) {
+            $options = array_shift($params);
+        }
+        return $this->plugin($method, $options);
+    }
+
+    /**
      * Register the default events for this controller
      * 
      * @return void

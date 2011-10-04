@@ -164,4 +164,10 @@ class ActionControllerTest extends TestCase
         $this->assertSame($this->controller, $broker->getController());
         $this->assertSame($broker, $this->controller->getBroker());
     }
+
+    public function testMethodOverloadingShouldReturnPluginWhenFound()
+    {
+        $plugin = $this->controller->url();
+        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Url', $plugin);
+    }
 }

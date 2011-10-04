@@ -189,4 +189,10 @@ class RestfulControllerTest extends TestCase
     {
         $this->assertInstanceOf('Zend\Loader\Pluggable', $this->controller);
     }
+
+    public function testMethodOverloadingShouldReturnPluginWhenFound()
+    {
+        $plugin = $this->controller->url();
+        $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Url', $plugin);
+    }
 }

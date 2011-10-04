@@ -61,5 +61,13 @@ class InstanceManagerTest extends TestCase
         $class = $im->getClassFromAlias('foo');
     }
 
-    
+    public function testInstanceManagerResolvesRecursiveAliasesForConfiguration()
+    {
+        $config = array('parameters' => array('foo' => 'bar'), 'methods' => array());
+        $im = new InstanceManager;
+        $im->addAlias('bar', 'baz');
+        $im->addAlias('foo', 'bar');
+        $im->setConfiguration('bar', $config); 
+        $this->assertEquals($im->getConfiguration('foo'), $config);
+    }
 }

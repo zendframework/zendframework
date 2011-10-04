@@ -412,6 +412,8 @@ class PhpRenderer implements Renderer, Pluggable
 
         unset($vars); // remove $vars from local scope
 
+        extract($this->vars()->getArrayCopy());
+        
         ob_start();
         include $this->file;
         $content = ob_get_clean();

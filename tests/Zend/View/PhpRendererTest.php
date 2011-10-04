@@ -252,4 +252,13 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $foo = $this->renderer->raw('foo');
         $this->assertSame($this->renderer->vars()->getRawValue('foo'), $foo);
     }
+    
+    public function testRenderingLocalVariables()
+    {
+        $expected = '10 &gt; 9';
+        $this->renderer->vars()->assign(array('foo' => '10 > 9'));
+        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $test = $this->renderer->render('testLocalVars.phtml');
+        $this->assertContains($expected, $test);
+    }    
 }

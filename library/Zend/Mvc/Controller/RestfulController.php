@@ -8,6 +8,8 @@ use Zend\Di\Locator,
     Zend\EventManager\EventManager,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
+    Zend\Loader\Broker,
+    Zend\Loader\Pluggable,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
@@ -18,8 +20,9 @@ use Zend\Di\Locator,
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements Dispatchable, EventAware, LocatorAware
+abstract class RestfulController implements Dispatchable, EventAware, LocatorAware, Pluggable
 {
+    protected $broker;
     protected $request;
     protected $response;
     protected $event;
@@ -292,6 +295,45 @@ abstract class RestfulController implements Dispatchable, EventAware, LocatorAwa
     public function getLocator()
     {
         return $this->locator;
+    }
+
+    /**
+     * Get plugin broker instance
+     *
+     * @return Zend\Loader\Broker
+     */
+    public function getBroker()
+    {
+        if (!$this->broker) {
+            $this->setBroker(new PluginBroker());
+        }
+        return $this->broker;
+    }
+
+    /**
+     * Set plugin broker instance
+     *
+     * @param  string|Broker $broker Plugin broker to load plugins
+     * @return Zend\Loader\Pluggable
+     */
+    public function setBroker($broker)
+    {
+        if (!$broker instanceof Broker) {
+            throw new Exception\InvalidArgumentException('Broker must implement Zend\Loader\Broker');
+        }
+        $this->broker = $broker;
+    }
+
+    /**
+     * Get plugin instance
+     *
+     * @param  string     $plugin  Name of plugin to return
+     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @return mixed
+     */
+    public function plugin($name, array $options = null)
+    {
+        return $this->getBroker()->load($name, $options);
     }
 
     /**

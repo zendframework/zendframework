@@ -8,6 +8,8 @@ use ArrayObject,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
     Zend\Http\Response as HttpResponse,
+    Zend\Loader\Broker,
+    Zend\Loader\Pluggable,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\RequestDescription as Request,
@@ -19,8 +21,9 @@ use ArrayObject,
 /**
  * Basic action controller
  */
-abstract class ActionController implements Dispatchable, EventAware, LocatorAware
+abstract class ActionController implements Dispatchable, EventAware, LocatorAware, Pluggable
 {
+    protected $broker;
     protected $event;
     protected $events;
     protected $locator;
@@ -223,6 +226,45 @@ abstract class ActionController implements Dispatchable, EventAware, LocatorAwar
     public function getLocator()
     {
         return $this->locator;
+    }
+
+    /**
+     * Get plugin broker instance
+     *
+     * @return Zend\Loader\Broker
+     */
+    public function getBroker()
+    {
+        if (!$this->broker) {
+            $this->setBroker(new PluginBroker());
+        }
+        return $this->broker;
+    }
+
+    /**
+     * Set plugin broker instance
+     *
+     * @param  string|Broker $broker Plugin broker to load plugins
+     * @return Zend\Loader\Pluggable
+     */
+    public function setBroker($broker)
+    {
+        if (!$broker instanceof Broker) {
+            throw new Exception\InvalidArgumentException('Broker must implement Zend\Loader\Broker');
+        }
+        $this->broker = $broker;
+    }
+
+    /**
+     * Get plugin instance
+     *
+     * @param  string     $plugin  Name of plugin to return
+     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @return mixed
+     */
+    public function plugin($name, array $options = null)
+    {
+        return $this->getBroker()->load($name, $options);
     }
 
     /**

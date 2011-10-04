@@ -136,4 +136,9 @@ class ActionControllerTest extends TestCase
     {
         $this->assertInstanceOf('Zend\Mvc\EventAware', $this->controller);
     }
+
+    public function testControllerIsPluggable()
+    {
+        $this->assertInstanceOf('Zend\Loader\Pluggable', $this->controller);
+    }
 }

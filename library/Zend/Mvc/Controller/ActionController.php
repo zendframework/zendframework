@@ -3,6 +3,7 @@
 namespace Zend\Mvc\Controller;
 
 use ArrayObject,
+    Zend\Di\Locator,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
@@ -11,15 +12,17 @@ use ArrayObject,
     Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
+    Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent;
 
 /**
  * Basic action controller
  */
-abstract class ActionController implements Dispatchable
+abstract class ActionController implements Dispatchable, LocatorAware
 {
     protected $event;
     protected $events;
+    protected $locator;
     protected $request;
     protected $response;
 
@@ -184,6 +187,27 @@ abstract class ActionController implements Dispatchable
             $this->registerDefaultEvents();
         }
         return $this->events;
+    }
+
+    /**
+     * Set locator instance
+     * 
+     * @param  Locator $locator 
+     * @return void
+     */
+    public function setLocator(Locator $locator)
+    {
+        $this->locator = $locator;
+    }
+
+    /**
+     * Retrieve locator instance
+     * 
+     * @return Locator
+     */
+    public function getLocator()
+    {
+        return $this->locator;
     }
 
     /**

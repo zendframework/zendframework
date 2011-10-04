@@ -2,7 +2,8 @@
 
 namespace Zend\Mvc\Controller;
 
-use Zend\EventManager\EventCollection,
+use Zend\Di\Locator,
+    Zend\EventManager\EventCollection,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
     Zend\Http\Request as HttpRequest,
@@ -10,12 +11,13 @@ use Zend\EventManager\EventCollection,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
+    Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent;
 
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements Dispatchable
+abstract class RestfulController implements Dispatchable, LocatorAware
 {
     protected $request;
     protected $response;
@@ -256,6 +258,27 @@ abstract class RestfulController implements Dispatchable
         return $this->events;
     }
     
+    /**
+     * Set locator instance
+     * 
+     * @param  Locator $locator 
+     * @return void
+     */
+    public function setLocator(Locator $locator)
+    {
+        $this->locator = $locator;
+    }
+
+    /**
+     * Retrieve locator instance
+     * 
+     * @return Locator
+     */
+    public function getLocator()
+    {
+        return $this->locator;
+    }
+
     /**
      * Register the default events for this controller
      * 

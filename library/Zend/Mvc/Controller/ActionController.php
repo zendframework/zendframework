@@ -253,6 +253,10 @@ abstract class ActionController implements Dispatchable, EventAware, LocatorAwar
             throw new Exception\InvalidArgumentException('Broker must implement Zend\Loader\Broker');
         }
         $this->broker = $broker;
+        if (method_exists($broker, 'setController')) {
+            $this->broker->setController($this);
+        }
+        return $this;
     }
 
     /**

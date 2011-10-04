@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\StaticEventManager,
     Zend\Http\Request,
     Zend\Http\Response,
+    Zend\Mvc\Controller\PluginBroker,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch;
 
@@ -140,5 +141,27 @@ class ActionControllerTest extends TestCase
     public function testControllerIsPluggable()
     {
         $this->assertInstanceOf('Zend\Loader\Pluggable', $this->controller);
+    }
+
+    public function testComposesPluginBrokerByDefault()
+    {
+        $broker = $this->controller->getBroker();
+        $this->assertInstanceOf('Zend\Mvc\Controller\PluginBroker', $broker);
+    }
+
+    public function testPluginBrokerComposesController()
+    {
+        $broker = $this->controller->getBroker();
+        $controller = $broker->getController();
+        $this->assertSame($this->controller, $controller);
+    }
+
+    public function testInjectingBrokerSetsControllerWhenPossible()
+    {
+        $broker = new PluginBroker();
+        $this->assertNull($broker->getController());
+        $this->controller->setBroker($broker);
+        $this->assertSame($this->controller, $broker->getController());
+        $this->assertSame($broker, $this->controller->getBroker());
     }
 }

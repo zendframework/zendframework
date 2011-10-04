@@ -26,7 +26,10 @@ namespace ZendTest\Auth\Adapter\Http;
 
 use Zend\Authentication\Adapter\Http,
     Zend\Authentication\Adapter,
-    Zend\Authentication;
+    Zend\Authentication,
+    Zend\Http\Headers,
+    Zend\Http\Request,
+    Zend\Http\Response;
 
 /**
  * @category   Zend
@@ -187,8 +190,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
             // Good, it threw an exception
         }
 
-        $request  = $this->getMock('Zend\Controller\Request\Http');
-        $response = $this->getMock('Zend\Controller\Response\Http');
+        $request  = new Request;
+        $response = new Response;
 
         // If this throws an exception, it fails
         $a->setRequest($request)
@@ -198,13 +201,12 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testNoResolvers()
     {
-        $request  = $this->getMock('Zend\Controller\Request\Http');
-        $response = $this->getMock('Zend\Controller\Response\Http');
-
         // Stub request for Basic auth
-        $request->expects($this->any())
-                ->method('getHeader')
-                ->will($this->returnValue('Basic <followed by a space caracter'));
+        $headers  = new Headers;
+        $headers->addHeaderLine('Authorization', 'Basic <followed by a space character');
+        $request  = new Request;
+        $request->setHeaders($headers);
+        $response = new Response;
 
         // Once for Basic
         try {
@@ -219,10 +221,10 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         }
 
         // Stub request for Digest auth, must be reseted (recreated)
-        $request  = $this->getMock('Zend\Controller\Request\Http');
-        $request->expects($this->any())
-                ->method('getHeader')
-                ->will($this->returnValue('Digest <followed by a space caracter'));
+        $headers  = new Headers;
+        $headers->addHeaderLine('Authorization', 'Digest <followed by a space character');
+        $request  = new Request;
+        $request->setHeaders($headers);
 
         // Once for Digest
         try {
@@ -239,11 +241,12 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testWrongResolverUsed()
     {
-        $response = $this->getMock('Zend\Controller\Response\Http');
-        $request  = $this->getMock('Zend\Controller\Request\Http');
-        $request->expects($this->any())
-                ->method('getHeader')
-                ->will($this->returnValue('Basic <followed by a space caracter')); // A basic Header will be provided by that request
+        $response = new Response();
+        $headers  = new Headers();
+        $request  = new Request();
+
+        $headers->addHeaderLine('Authorization', 'Basic <followed by a space character');
+        $request->setHeaders($headers);
 
         // Test a Digest auth process while the request is containing a Basic auth header
         $a = new Adapter\Http($this->_digestConfig);
@@ -256,11 +259,11 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testUnsupportedScheme()
     {
-        $response = $this->getMock('Zend\Controller\Response\Http');
-        $request  = $this->getMock('Zend\Controller\Request\Http');
-        $request->expects($this->any())
-                ->method('getHeader')
-                ->will($this->returnValue('NotSupportedScheme <followed by a space caracter'));
+        $response = new Response();
+        $headers  = new Headers();
+        $request  = new Request();
+        $headers->addHeaderLine('Authorization', 'NotSupportedScheme <followed by a space character');
+        $request->setHeaders($headers);
 
         $a = new Adapter\Http($this->_digestConfig);
         $a->setDigestResolver($this->_digestResolver)

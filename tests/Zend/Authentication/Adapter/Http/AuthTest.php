@@ -25,8 +25,9 @@
 namespace ZendTest\Auth\Adapter\Http;
 
 use Zend\Authentication\Adapter\Http,
-    Zend\Http\Request as HTTPRequest,
-    Zend\Http\Response as HTTPResponse,
+    Zend\Http\Headers,
+    Zend\Http\Request,
+    Zend\Http\Response,
     Zend\Stdlib\Parameters;
 
 /**
@@ -116,7 +117,10 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         // false result.
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_bothConfig['realm'] . '"';
+        $basic = array(
+            'type'   => 'Basic ',
+            'realm'  => 'realm="' . $this->_bothConfig['realm'] . '"',
+        );
 
         $data = $this->_doAuth('', 'basic');
         $this->_checkUnauthorized($data, $basic);
@@ -156,26 +160,21 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(401, $status);
         $this->assertTrue($headers->has('Www-Authenticate'));
         $wwwAuthenticate = $headers->get('Www-Authenticate');
-        $this->assertInstanceOf('Iterator', $wwwAuthenticate, $headers->toString());
         $this->assertEquals(2, count($wwwAuthenticate));
-        $this->assertEquals('Www-Authenticate', $headers[0]['name']);
-        $this->assertEquals('Www-Authenticate', $headers[1]['name']);
 
         // Check to see if the expected challenges match the actual
-        $i = 0;
+        $basicFound = $digestFound = false;
         foreach ($wwwAuthenticate as $header) {
-            switch ($i) {
-                case 0:
-                    $this->assertEquals($basic, $header->getFieldValue());
-                    break;
-                case 1:
-                    $this->assertEquals($digest, $header->getFieldValue());
-                    break;
-                default:
-                    break;
+            $value = $header->getFieldValue();
+            if (preg_match('/^Basic/', $value)) {
+                $basicFound = true;
             }
-            $i++;
+            if (preg_match('/^Digest/', $value)) {
+                $digestFound = true;
+            }
         }
+        $this->assertTrue($basicFound);
+        $this->assertTrue($digestFound);
     }
 
     public function testBasicAuthValidCreds()
@@ -192,7 +191,10 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         // a bad username or password.
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_basicConfig['realm'] . '"';
+        $basic = array(
+            'type'   => 'Basic ',
+            'realm'  => 'realm="' . $this->_basicConfig['realm'] . '"',
+        );
 
         $data = $this->_doAuth('Basic ' . base64_encode("Bad\tChars:In:Creds"), 'basic');
         $this->_checkUnauthorized($data, $basic);
@@ -204,7 +206,10 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         // password
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_basicConfig['realm'] . '"';
+        $basic = array(
+            'type'   => 'Basic ',
+            'realm'  => 'realm="' . $this->_basicConfig['realm'] . '"',
+        );
 
         $data = $this->_doAuth('Basic ' . base64_encode('Nobody:NotValid'), 'basic');
         $this->_checkUnauthorized($data, $basic);
@@ -216,7 +221,10 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         // password
 
         // The expected Basic Www-Authenticate header value
-        $basic = 'Basic realm="' . $this->_basicConfig['realm'] . '"';
+        $basic = array(
+            'type'   => 'Basic ',
+            'realm'  => 'realm="' . $this->_basicConfig['realm'] . '"',
+        );
 
         $data = $this->_doAuth('Basic ' . base64_encode('Bryce:Invalid'), 'basic');
         $this->_checkUnauthorized($data, $basic);
@@ -328,16 +336,15 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     protected function _doAuth($clientHeader, $scheme)
     {
         // Set up stub request and response objects
-        $request  = new HTTPRequest;
-        $response = new HTTPResponse;
+        $request  = new Request;
+        $response = new Response;
         $response->setStatusCode(200);
 
         // Set stub method return values
-        $request->setUri('/');
+        $request->setUri('http://localhost/');
         $request->setMethod('GET');
-        $request->setServer(new Parameters);
+        $request->setServer(new Parameters(array('HTTP_USER_AGENT' => 'PHPUnit')));
         $headers = $request->headers();
-        $headers->addHeaderLine('Proxy-Authorization', $clientHeader);
         $headers->addHeaderLine('Authorization', $clientHeader);
 
         // Select an Authentication scheme
@@ -378,18 +385,11 @@ class AuthTest extends \PHPUnit_Framework_TestCase
      */
     protected function _digestChallenge()
     {
-        $timeout = ceil(time() / 300) * 300;
-        $nonce   = md5($timeout . ':PHPUnit:Zend\\Authentication\\Adapter\\Http');
-        $opaque  = md5('Opaque Data:Zend\\Authentication\\Adapter\\Http');
-        $wwwauth = 'Digest '
-                 . 'realm="' . $this->_digestConfig['realm'] . '", '
-                 . 'domain="' . $this->_digestConfig['digest_domains'] . '", '
-                 . 'nonce="' . $nonce . '", '
-                 . 'opaque="' . $opaque . '", '
-                 . 'algorithm="MD5", '
-                 . 'qop="auth"';
-
-        return $wwwauth;
+        return array(
+            'type'   => 'Digest ',
+            'realm'  => 'realm="' . $this->_digestConfig['realm'] . '"',
+            'domain' => 'domain="' . $this->_bothConfig['digest_domains'] . '"',
+        );
     }
 
     /**
@@ -441,15 +441,19 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($headers->has('Www-Authenticate'));
 
         // Check to see if the expected challenge matches the actual
-        $header = $headers->get('Www-Authenticate');
-        if ($header instanceof \Iterator) {
-echo "We have multiple www-authenticate headers!\n";
-            foreach ($header as $h) {
-                $header = $h;
-                break;
-            }
+        $headers = $headers->get('Www-Authenticate');
+        $this->assertTrue($headers instanceof \ArrayIterator);
+        $this->assertEquals(1, count($headers));
+        $header = $headers[0]->getFieldValue();
+        $this->assertContains($expected['type'], $header, $header);
+        $this->assertContains($expected['realm'], $header, $header);
+        if (isset($expected['domain'])) {
+            $this->assertContains($expected['domain'], $header, $header);
+            $this->assertContains('algorithm="MD5"', $header, $header);
+            $this->assertContains('qop="auth"', $header, $header);
+            $this->assertRegExp('/nonce="[a-fA-F0-9]{32}"/', $header, $header);
+            $this->assertRegExp('/opaque="[a-fA-F0-9]{32}"/', $header, $header);
         }
-        $this->assertEquals($expected, $header->getFieldValue(), $headers->toString());
     }
 
     /**

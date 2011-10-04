@@ -23,7 +23,8 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Router\Route,
+    Zend\Mvc\Router\RouteMatch;
 
 /**
  * Part route match.

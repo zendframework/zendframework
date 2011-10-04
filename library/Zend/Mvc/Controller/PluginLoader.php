@@ -10,5 +10,6 @@ class PluginLoader extends PluginClassLoader
      * @var array Pre-aliased plugins
      */
     protected $plugins = array(
+        'url' => 'Zend\Mvc\Controller\Plugin\Url',
     );
 }

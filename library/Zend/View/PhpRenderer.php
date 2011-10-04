@@ -410,9 +410,14 @@ class PhpRenderer implements Renderer, Pluggable
             $this->setVars($vars);
         }
 
-        unset($vars); // remove $vars from local scope
+        // extract all assigned vars (pre-escaped), but not 'this'
+        $vars = $this->vars()->getArrayCopy();
+        if (array_key_exists('this', $vars)) {
+            unset($vars['this']);
+        }
+        extract($vars);
 
-        extract($this->vars()->getArrayCopy());
+        unset($vars); // remove $vars from local scope
         
         ob_start();
         include $this->file;

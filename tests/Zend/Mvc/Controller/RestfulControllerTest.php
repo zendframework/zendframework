@@ -25,6 +25,7 @@ class RestfulControllerTest extends TestCase
         $this->routeMatch = new RouteMatch(array('controller' => 'controller-restful'));
         $this->event      = new MvcEvent;
         $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
 
         StaticEventManager::resetInstance();
     }
@@ -37,7 +38,7 @@ class RestfulControllerTest extends TestCase
             new stdClass,
         );
         $this->controller->entities = $entities;
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entities', $result);
         $this->assertEquals($entities, $result['entities']);
     }
@@ -47,7 +48,7 @@ class RestfulControllerTest extends TestCase
         $entity = new stdClass;
         $this->controller->entity = $entity;
         $this->routeMatch->setParam('id', 1);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);
         $this->assertEquals($entity, $result['entity']);
     }
@@ -58,7 +59,7 @@ class RestfulControllerTest extends TestCase
         $this->request->setMethod('POST');
         $post = $this->request->post();
         $post->fromArray($entity);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);
         $this->assertEquals($entity, $result['entity']);
     }
@@ -70,7 +71,7 @@ class RestfulControllerTest extends TestCase
         $this->request->setMethod('PUT')
                       ->setContent($string);
         $this->routeMatch->setParam('id', 1);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('entity', $result);
         $test = $result['entity'];
         $this->assertArrayHasKey('id', $test);
@@ -85,7 +86,7 @@ class RestfulControllerTest extends TestCase
         $this->controller->entity = $entity;
         $this->request->setMethod('DELETE');
         $this->routeMatch->setParam('id', 1);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertEquals(array(), $result);
         $this->assertEquals(array(), $this->controller->entity);
     }
@@ -93,7 +94,7 @@ class RestfulControllerTest extends TestCase
     public function testDispatchCallsActionMethodBasedOnNormalizingAction()
     {
         $this->routeMatch->setParam('action', 'test.some-strangely_separated.words');
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertArrayHasKey('content', $result);
         $this->assertContains('Test Some Strangely Separated Words', $result['content']);
     }
@@ -101,7 +102,7 @@ class RestfulControllerTest extends TestCase
     public function testDispatchCallsNotFoundActionWhenActionPassedThatCannotBeMatched()
     {
         $this->routeMatch->setParam('action', 'test-some-made-up-action');
-        $result   = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result   = $this->controller->dispatch($this->request, $this->response);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertArrayHasKey('content', $result);
@@ -115,7 +116,7 @@ class RestfulControllerTest extends TestCase
         $this->controller->events()->attach('dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -126,7 +127,7 @@ class RestfulControllerTest extends TestCase
         $this->controller->events()->attach('dispatch', function($e) use ($response) {
             return $response;
         }, -10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -138,7 +139,7 @@ class RestfulControllerTest extends TestCase
         $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -150,7 +151,7 @@ class RestfulControllerTest extends TestCase
         $events->attach('Zend\Mvc\Controller\RestfulController', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -162,13 +163,13 @@ class RestfulControllerTest extends TestCase
         $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
     public function testDispatchInjectsEventIntoController()
     {
-        $this->controller->dispatch($this->request, $this->response, $this->event);
+        $this->controller->dispatch($this->request, $this->response);
         $event = $this->controller->getEvent();
         $this->assertNotNull($event);
         $this->assertSame($this->event, $event);
@@ -177,5 +178,10 @@ class RestfulControllerTest extends TestCase
     public function testControllerIsLocatorAware()
     {
         $this->assertInstanceOf('Zend\Mvc\LocatorAware', $this->controller);
+    }
+
+    public function testControllerIsEventAware()
+    {
+        $this->assertInstanceOf('Zend\Mvc\EventAware', $this->controller);
     }
 }

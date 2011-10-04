@@ -8,6 +8,12 @@ use Zend\EventManager\Event,
 
 class MvcEvent extends Event
 {
+    protected $request;
+    protected $response;
+    protected $result;
+    protected $router;
+    protected $routeMatch;
+
     public function getRouter()
     {
         return $this->getParam('router');
@@ -16,6 +22,7 @@ class MvcEvent extends Event
     public function setRouter(Router\RouteStack $router)
     {
         $this->setParam('router', $router);
+        $this->router = $router;
         return $this;
     }
 
@@ -27,6 +34,7 @@ class MvcEvent extends Event
     public function setRouteMatch(Router\RouteMatch $matches)
     {
         $this->setParam('route-match', $matches);
+        $this->routeMatch = $matches;
         return $this;
     }
 
@@ -38,6 +46,7 @@ class MvcEvent extends Event
     public function setRequest(Request $request)
     {
         $this->setParam('request', $request);
+        $this->request = $request;
         return $this;
     }
 
@@ -49,6 +58,7 @@ class MvcEvent extends Event
     public function setResponse(Response $response)
     {
         $this->setParam('response', $response);
+        $this->response = $response;
         return $this;
     }
 
@@ -60,6 +70,7 @@ class MvcEvent extends Event
     public function setResult($result)
     {
         $this->setParam('__RESULT__', $result);
+        $this->result = $result;
         return $this;
     }
 

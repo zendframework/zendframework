@@ -23,13 +23,14 @@ class ActionControllerTest extends TestCase
         $this->routeMatch = new RouteMatch(array('controller' => 'controller-sample'));
         $this->event      = new MvcEvent();
         $this->event->setRouteMatch($this->routeMatch);
+        $this->controller->setEvent($this->event);
 
         StaticEventManager::resetInstance();
     }
 
     public function testDispatchInvokesIndexActionWhenNoActionPresentInRouteMatch()
     {
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertTrue(isset($result['content']));
         $this->assertContains('Placeholder page', $result['content']);
     }
@@ -37,7 +38,7 @@ class ActionControllerTest extends TestCase
     public function testDispatchInvokesNotFoundActionWhenInvalidActionPresentInRouteMatch()
     {
         $this->routeMatch->setParam('action', 'totally-made-up-action');
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
         $this->assertTrue(isset($result['content']));
@@ -47,7 +48,7 @@ class ActionControllerTest extends TestCase
     public function testDispatchInvokesProvidedActionWhenMethodExists()
     {
         $this->routeMatch->setParam('action', 'test');
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertTrue(isset($result['content']));
         $this->assertContains('test', $result['content']);
     }
@@ -55,7 +56,7 @@ class ActionControllerTest extends TestCase
     public function testDispatchCallsActionMethodBasedOnNormalizingAction()
     {
         $this->routeMatch->setParam('action', 'test.some-strangely_separated.words');
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertTrue(isset($result['content']));
         $this->assertContains('Test Some Strangely Separated Words', $result['content']);
     }
@@ -67,7 +68,7 @@ class ActionControllerTest extends TestCase
         $this->controller->events()->attach('dispatch', function($e) use ($response) {
             return $response;
         }, 100);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -78,7 +79,7 @@ class ActionControllerTest extends TestCase
         $this->controller->events()->attach('dispatch', function($e) use ($response) {
             return $response;
         }, -10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -90,7 +91,7 @@ class ActionControllerTest extends TestCase
         $events->attach('Zend\Stdlib\Dispatchable', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -102,7 +103,7 @@ class ActionControllerTest extends TestCase
         $events->attach('Zend\Mvc\Controller\ActionController', 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
@@ -114,13 +115,13 @@ class ActionControllerTest extends TestCase
         $events->attach(get_class($this->controller), 'dispatch', function($e) use ($response) {
             return $response;
         }, 10);
-        $result = $this->controller->dispatch($this->request, $this->response, $this->event);
+        $result = $this->controller->dispatch($this->request, $this->response);
         $this->assertSame($response, $result);
     }
 
     public function testDispatchInjectsEventIntoController()
     {
-        $this->controller->dispatch($this->request, $this->response, $this->event);
+        $this->controller->dispatch($this->request, $this->response);
         $event = $this->controller->getEvent();
         $this->assertNotNull($event);
         $this->assertSame($this->event, $event);
@@ -129,5 +130,10 @@ class ActionControllerTest extends TestCase
     public function testControllerIsLocatorAware()
     {
         $this->assertInstanceOf('Zend\Mvc\LocatorAware', $this->controller);
+    }
+
+    public function testControllerIsEventAware()
+    {
+        $this->assertInstanceOf('Zend\Mvc\EventAware', $this->controller);
     }
 }

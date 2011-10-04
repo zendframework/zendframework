@@ -11,13 +11,14 @@ use Zend\Di\Locator,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
+    Zend\Mvc\EventAware,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent;
 
 /**
  * Abstract RESTful controller
  */
-abstract class RestfulController implements Dispatchable, LocatorAware
+abstract class RestfulController implements Dispatchable, EventAware, LocatorAware
 {
     protected $request;
     protected $response;
@@ -85,10 +86,9 @@ abstract class RestfulController implements Dispatchable, LocatorAware
      * @events dispatch.pre, dispatch.post
      * @param  Request $request 
      * @param  null|Response $response 
-     * @param  null|Event $event 
      * @return mixed|Response
      */
-    public function dispatch(Request $request, Response $response = null, Event $e = null)
+    public function dispatch(Request $request, Response $response = null)
     {
         if (!$request instanceof HttpRequest) {
             throw new \InvalidArgumentException('Expected an HTTP request');
@@ -99,19 +99,10 @@ abstract class RestfulController implements Dispatchable, LocatorAware
         }
         $this->response = $response;
 
-        if ($e instanceof Event && !($e instanceof MvcEvent)) {
-            $eventParams = $e->getParams();
-            $e = new MvcEvent();
-            $e->setParams($eventParams);
-            unset($eventParams);
-        }
-        if (null === $e) {
-            $e = new MvcEvent();
-        }
+        $e = $this->getEvent();
         $e->setRequest($request)
           ->setResponse($response)
           ->setTarget($this);
-        $this->event = $e;
 
         $result = $this->events()->trigger('dispatch', $e, function($test) {
             return ($test instanceof Response);
@@ -217,16 +208,6 @@ abstract class RestfulController implements Dispatchable, LocatorAware
     }
 
     /**
-     * Retrieve event passed to or created in dispatch()
-     * 
-     * @return null|MvcEvent
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
      * Set the event manager instance used by this context
      * 
      * @param  EventCollection $events 
@@ -258,6 +239,40 @@ abstract class RestfulController implements Dispatchable, LocatorAware
         return $this->events;
     }
     
+    /**
+     * Set an event to use during dispatch
+     *
+     * By default, will re-cast to MvcEvent if another event type is provided.
+     * 
+     * @param  Event $e 
+     * @return void
+     */
+    public function setEvent(Event $e)
+    {
+        if ($e instanceof Event && !$e instanceof MvcEvent) {
+            $eventParams = $e->getParams();
+            $e = new MvcEvent();
+            $e->setParams($eventParams);
+            unset($eventParams);
+        }
+        $this->event = $e;
+    }
+
+    /**
+     * Get the attached event
+     *
+     * Will create a new MvcEvent if none provided.
+     * 
+     * @return Event
+     */
+    public function getEvent()
+    {
+        if (!$this->event) {
+            $this->setEvent(new MvcEvent());
+        }
+        return $this->event;
+    }
+
     /**
      * Set locator instance
      * 

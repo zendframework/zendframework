@@ -12,13 +12,14 @@ use ArrayObject,
     Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
+    Zend\Mvc\EventAware,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent;
 
 /**
  * Basic action controller
  */
-abstract class ActionController implements Dispatchable, LocatorAware
+abstract class ActionController implements Dispatchable, EventAware, LocatorAware
 {
     protected $event;
     protected $events;
@@ -53,10 +54,9 @@ abstract class ActionController implements Dispatchable, LocatorAware
      * @events dispatch.pre, dispatch.post
      * @param  Request $request 
      * @param  null|Response $response 
-     * @param  null|Event $e
      * @return Response|mixed
      */
-    public function dispatch(Request $request, Response $response = null, Event $e = null)
+    public function dispatch(Request $request, Response $response = null)
     {
         $this->request = $request;
         if (!$response) {
@@ -64,19 +64,10 @@ abstract class ActionController implements Dispatchable, LocatorAware
         }
         $this->response = $response;
 
-        if ($e instanceof Event && !$e instanceof MvcEvent) {
-            $eventParams = $e->getParams();
-            $e = new MvcEvent();
-            $e->setParams($eventParams);
-            unset($eventParams);
-        }
-        if (null === $e) {
-            $e = new MvcEvent();
-        }
+        $e = $this->getEvent();
         $e->setRequest($request)
           ->setResponse($response)
           ->setTarget($this);
-        $this->event = $e;
 
         $result = $this->events()->trigger('dispatch', $e, function($test) {
             return ($test instanceof Response);
@@ -148,16 +139,6 @@ abstract class ActionController implements Dispatchable, LocatorAware
     }
 
     /**
-     * Retrieve event passed to or created in dispatch()
-     * 
-     * @return null|MvcEvent
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
      * Set the event manager instance used by this context
      * 
      * @param  EventCollection $events 
@@ -187,6 +168,40 @@ abstract class ActionController implements Dispatchable, LocatorAware
             $this->registerDefaultEvents();
         }
         return $this->events;
+    }
+
+    /**
+     * Set an event to use during dispatch
+     *
+     * By default, will re-cast to MvcEvent if another event type is provided.
+     * 
+     * @param  Event $e 
+     * @return void
+     */
+    public function setEvent(Event $e)
+    {
+        if ($e instanceof Event && !$e instanceof MvcEvent) {
+            $eventParams = $e->getParams();
+            $e = new MvcEvent();
+            $e->setParams($eventParams);
+            unset($eventParams);
+        }
+        $this->event = $e;
+    }
+
+    /**
+     * Get the attached event
+     *
+     * Will create a new MvcEvent if none provided.
+     * 
+     * @return Event
+     */
+    public function getEvent()
+    {
+        if (!$this->event) {
+            $this->setEvent(new MvcEvent());
+        }
+        return $this->event;
     }
 
     /**

@@ -310,10 +310,13 @@ class Application implements AppContext
 
         $request  = $e->getRequest();
         $response = $this->getResponse();
-        $event    = clone $e;
+
+        if ($controller instanceof EventAware) {
+            $controller->setEvent($e);
+        }
 
         try {
-            $return   = $controller->dispatch($request, $response, $e);
+            $return   = $controller->dispatch($request, $response);
         } catch (\Exception $ex) {
             $error = clone $e;
             $error->setError(static::ERROR_EXCEPTION)

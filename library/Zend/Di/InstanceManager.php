@@ -168,7 +168,9 @@ class InstanceManager /* implements InstanceCollection */
             $alias = $this->aliases[$alias];
             $r++;
             if ($r > 100) {
-                throw new Exception\RuntimeException('Possible infinite recursion in DI alias! Max recursion of 100 levels reached.'); 
+                throw new Exception\RuntimeException(
+                    sprintf('Possible infinite recursion in DI alias! Max recursion of 100 levels reached at alias "%s".', $alias)
+                ); 
             }
         }
         return $alias;

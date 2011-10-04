@@ -52,6 +52,14 @@ class InstanceManagerTest extends TestCase
         $this->assertEquals('baz', $class);
     }
     
+    public function testInstanceManagerThrowsExceptionForRecursiveAliases()
+    {
+        $this->setExpectedException('Zend\Di\Exception\RuntimeException');
+        $im = new InstanceManager;
+        $im->addAlias('bar', 'foo');
+        $im->addAlias('foo', 'bar');
+        $class = $im->getClassFromAlias('foo');
+    }
 
     
 }

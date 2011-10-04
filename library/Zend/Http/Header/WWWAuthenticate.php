@@ -6,7 +6,7 @@ namespace Zend\Http\Header;
  * @throws Exception\InvalidArgumentException
  * @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.47
  */
-class WWWAuthenticate implements HeaderDescription
+class WWWAuthenticate implements MultipleHeaderDescription
 {
 
     public static function fromString($headerLine)
@@ -41,4 +41,17 @@ class WWWAuthenticate implements HeaderDescription
         return 'WWW-Authenticate: ' . $this->getFieldValue();
     }
     
+    public function toStringMultipleHeaders(array $headers)
+    {
+        $strings = array($this->toString());
+        foreach ($headers as $header) {
+            if (!$header instanceof WWWAuthenticate) {
+                throw new Exception\RuntimeException(
+                    'The WWWAuthenticate multiple header implementation can only accept an array of WWWAuthenticate headers'
+                );
+            }
+            $strings[] = $header->toString();
+        }
+        return implode("\r\n", $strings);
+    }
 }

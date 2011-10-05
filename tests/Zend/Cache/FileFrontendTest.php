@@ -214,8 +214,8 @@ class FileFrontendTest extends \PHPUnit_Framework_TestCase {
 
     public function testGetOptions()
     {
-        $this->assertTrue(is_array($this->_instance->getOption()));
-        $this->assertTrue(is_boolean($this->_instance->getOption('file_locking')));
+        $this->assertTrue(is_array($this->_instance1->getOption()));
+        $this->assertTrue(is_bool($this->_instance1->getOption('write_control')));
     }
 }
 

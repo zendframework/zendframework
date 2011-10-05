@@ -253,6 +253,9 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->renderer->vars()->getRawValue('foo'), $foo);
     }
     
+    /**
+     * @group convenience-api
+     */
     public function testRenderingLocalVariables()
     {
         $expected = '10 &gt; 9';

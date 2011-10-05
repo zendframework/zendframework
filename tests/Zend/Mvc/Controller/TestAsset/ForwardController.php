@@ -10,4 +10,10 @@ class ForwardController extends ActionController
     {
         return array('content' => __METHOD__);
     }
+
+    public function testMatchesAction()
+    {
+        $e = $this->getEvent();
+        return $e->getRouteMatch()->getParams();
+    }
 }

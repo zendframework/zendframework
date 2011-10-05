@@ -80,4 +80,32 @@ class ForwardTest extends TestCase
         $result = $result->getArrayCopy();
         $this->assertEquals(array('content' => 'ZendTest\Mvc\Controller\TestAsset\ForwardController::testAction'), $result);
     }
+
+    public function testDispatchWillSeedRouteMatchWithPassedParameters()
+    {
+        $result = $this->plugin->dispatch('forward', array(
+            'action' => 'test-matches',
+            'param1' => 'foobar',
+        ));
+        $this->assertInstanceOf('ArrayObject', $result);
+        $this->assertTrue(isset($result['action']));
+        $this->assertEquals('test-matches', $result['action']);
+        $this->assertTrue(isset($result['param1']));
+        $this->assertEquals('foobar', $result['param1']);
+    }
+
+    public function testRouteMatchObjectRemainsSameFollowingForwardDispatch()
+    {
+        $routeMatch  = $this->controller->getEvent()->getRouteMatch();
+        $matchParams = $routeMatch->getParams();
+        $result = $this->plugin->dispatch('forward', array(
+            'action' => 'test-matches',
+            'param1' => 'foobar',
+        ));
+        $test       = $this->controller->getEvent()->getRouteMatch();
+        $testParams = $test->getParams();
+
+        $this->assertSame($routeMatch, $test);
+        $this->assertEquals($matchParams, $testParams);
+    }
 }

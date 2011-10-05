@@ -7,6 +7,7 @@ use Zend\Di\Locator,
     Zend\Mvc\Exception,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent,
+    Zend\Mvc\Router\RouteMatch,
     Zend\Stdlib\Dispatchable;
 
 class Forward extends AbstractPlugin
@@ -18,11 +19,12 @@ class Forward extends AbstractPlugin
      * Dispatch another controller
      * 
      * @param  string $name Controller name; either a class name or an alias used in the DI container or service locator
+     * @param  null|array $params Parameters with which to seed a custom RouteMatch object for the new controller
      * @return mixed
      * @throws Exception\DomainException if composed controller is not EventAware 
      *         or Locator aware; or if the discovered controller is not dispatchable
      */
-    public function dispatch($name)
+    public function dispatch($name, array $params = null)
     {
         $event   = $this->getEvent();
         $locator = $this->getLocator();
@@ -38,7 +40,21 @@ class Forward extends AbstractPlugin
             $controller->setLocator($locator);
         }
 
-        return $controller->dispatch($event->getRequest(), $event->getResponse());
+        // Allow passing parameters to seed the RouteMatch with
+        $cachedMatches = false;
+        if ($params) {
+            $matches       = new RouteMatch($params);
+            $cachedMatches = $event->getRouteMatch();
+            $event->setRouteMatch($matches);
+        }
+
+        $return = $controller->dispatch($event->getRequest(), $event->getResponse());
+
+        if ($cachedMatches) {
+            $event->setRouteMatch($cachedMatches);
+        }
+
+        return $return;
     }
 
     /**

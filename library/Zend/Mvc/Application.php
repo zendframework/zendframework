@@ -210,7 +210,12 @@ class Application implements AppContext
         $event->setRequest($this->getRequest())
               ->setRouter($this->getRouter());
 
-        $events->trigger('route', $event);
+        $result = $events->trigger('route', $event, function ($r) {
+            return ($r instanceof Response);
+        });
+        if ($result->stopped()) {
+            return $result->last();
+        }
 
         $result = $events->trigger('dispatch', $event, function ($r) {
             return ($r instanceof Response);
@@ -242,12 +247,16 @@ class Application implements AppContext
         $routeMatch = $router->match($request);
 
         if (!$routeMatch instanceof Router\RouteMatch) {
-            /**
-             * @todo handle failed routing
-             *
-             * This might be something we can do via an event
-             */
-            throw new \Exception('UNIMPLEMENTED: Handling of failed routing');
+            $error = clone $e;
+            $error->setError(static::ERROR_CONTROLLER_NOT_FOUND);
+
+            $results = $this->events()->trigger('dispatch.error', $error);
+            if (count($results)) {
+                $return  = $results->last();
+            } else {
+                $return = $error->getParams();
+            }
+            return $return;
         }
 
         $e->setRouteMatch($routeMatch);

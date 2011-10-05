@@ -511,4 +511,25 @@ class ApplicationTest extends TestCase
         $this->assertContains('bad', $response->getContent());
         $this->assertContains('stdClass', $response->getContent());
     }
+
+    /**
+     * @group error-handling
+     */
+    public function testRoutingFailureShouldTriggerDispatchError()
+    {
+        $app    = $this->setupBadController();
+        $router = new Router\SimpleRouteStack();
+        $app->setRouter($router);
+
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('dispatch.error', function ($e) use ($response) {
+            $error      = $e->getError();
+            $response->setContent("Code: " . $error);
+            return $response;
+        });
+
+        $app->run();
+        $this->assertContains('404', $response->getContent());
+    }
 }

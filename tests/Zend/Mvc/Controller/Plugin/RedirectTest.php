@@ -10,7 +10,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\Router\SimpleRouteStack,
     ZendTest\Mvc\Controller\TestAsset\SampleController;
 
-class UrlTest extends TestCase
+class RedirectTest extends TestCase
 {
     public function setUp()
     {

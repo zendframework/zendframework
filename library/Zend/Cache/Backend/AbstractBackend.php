@@ -101,6 +101,27 @@ abstract class AbstractBackend
     }
 
     /**
+     * Returns an option, when name is empty all options are returned
+     *
+     * @param string $name Optional, the options name to return
+     * @throws Zend_Cache_Exceptions
+     * @return mixed
+     */
+    public function getOption($name = array())
+    {
+        if (is_string($name)) {
+            $name = strtolower($name);
+            if (array_key_exists($name, $this->_options)) {
+                return $this->_options[$name];
+            }
+
+            Cache\Cache::throwException("Incorrect option name : $name");
+        }
+
+        return $this->_options;
+    }
+
+    /**
      * Set an option
      *
      * @param  string $name

@@ -296,6 +296,10 @@ abstract class TestCommonBackend extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_instance->test('bar3'));
     }
 
+    public function testGetOptions()
+    {
+        $this->assertTrue(is_array($this->_instance->getOption(null)));
+    }
 }
 
 

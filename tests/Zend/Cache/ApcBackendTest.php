@@ -30,7 +30,7 @@ use Zend\Cache;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class ApcBackendTest extends \ZendTest\Cache\TestCommonExtendedBackend 
+class ApcBackendTest extends \ZendTest\Cache\TestCommonExtendedBackend
 {
 
     protected $_instance;
@@ -121,7 +121,6 @@ class ApcBackendTest extends \ZendTest\Cache\TestCommonExtendedBackend
     {
         parent::testGetMetadatas($notag);
     }
-
 }
 
 

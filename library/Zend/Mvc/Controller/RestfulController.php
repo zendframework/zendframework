@@ -237,7 +237,7 @@ abstract class RestfulController implements Dispatchable, EventAware, LocatorAwa
                 __CLASS__,
                 get_called_class(),
             )));
-            $this->registerDefaultEvents();
+            $this->attachDefaultListeners();
         }
         return $this->events;
     }
@@ -361,7 +361,7 @@ abstract class RestfulController implements Dispatchable, EventAware, LocatorAwa
      * 
      * @return void
      */
-    protected function registerDefaultEvents()
+    protected function attachDefaultListeners()
     {
         $events = $this->events();
         $events->attach('dispatch', array($this, 'execute'));

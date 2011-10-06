@@ -62,6 +62,7 @@ class HelperLoader extends PluginClassLoader
         'formtextarea'        => 'Zend\View\Helper\FormTextarea',
         'formtext'            => 'Zend\View\Helper\FormText',
         'form'                => 'Zend\View\Helper\Form',
+        'gravatar'            => 'Zend\View\Helper\Gravatar',
         'headlink'            => 'Zend\View\Helper\HeadLink',
         'headmeta'            => 'Zend\View\Helper\HeadMeta',
         'headscript'          => 'Zend\View\Helper\HeadScript',

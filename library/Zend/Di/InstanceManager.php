@@ -241,14 +241,7 @@ class InstanceManager /* implements InstanceCollection */
             'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
             'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
         );
-        $configuration = array_replace_recursive($this->configurations[$key], $configuration);
-        if (count($configuration['parameters']) === 0) {
-            unset($configuration['parameters']);
-        }
-        if (count($configuration['injections']) === 0) {
-            unset($configuration['injections']);
-        }
-        $this->configurations[$key] = $configuration;
+        $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }
 
     public function getClasses()

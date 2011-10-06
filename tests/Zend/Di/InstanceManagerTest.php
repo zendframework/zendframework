@@ -69,6 +69,8 @@ class InstanceManagerTest extends TestCase
         $im->addAlias('bar-alias', 'Some\Class');
         $im->addAlias('foo-alias', 'bar-alias');
         $im->setConfiguration('bar-alias', $config);
+
+        $config['injections'] = array();
         
         $this->assertEquals($config, $im->getConfiguration('foo-alias'));
     }

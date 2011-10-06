@@ -397,7 +397,7 @@ class Element implements Validator
     {
         if (null === $translator) {
             $this->_translator = null;
-        } elseif ($translator instanceof \Zend\Translator\Adapter) {
+        } elseif ($translator instanceof \Zend\Translator\Adapter\AbstractAdapter) {
             $this->_translator = $translator;
         } elseif ($translator instanceof \Zend\Translator\Translator) {
             $this->_translator = $translator->getAdapter();
@@ -1339,7 +1339,7 @@ class Element implements Validator
         // Find the correct translator. Zend\Validator\AbstractValidator::getDefaultTranslator()
         // will get either the static translator attached to Zend\Validator\AbstractValidator
         // or the 'Zend_Translator' from Zend\Registry.
-        if (AbstractValidator::hasDefaultTranslator() 
+        if (AbstractValidator::hasDefaultTranslator()
             && !Form::hasDefaultTranslator())
         {
             $translator = AbstractValidator::getDefaultTranslator();

@@ -129,7 +129,7 @@ class HeadTitle extends Placeholder\Container\Standalone
      */
     public function setTranslator($translate)
     {
-        if ($translate instanceof \Zend\Translator\Adapter) {
+        if ($translate instanceof \Zend\Translator\Adapter\AbstractAdapter) {
             $this->_translator = $translate;
         } elseif ($translate instanceof \Zend\Translator\Translator) {
             $this->_translator = $translate->getAdapter();

@@ -295,7 +295,7 @@ abstract class AbstractHelper
     public function setTranslator($translator = null)
     {
         if (null == $translator ||
-            $translator instanceof \Zend\Translator\Adapter) {
+            $translator instanceof \Zend\Translator\Adapter\AbstractAdapter) {
             $this->_translator = $translator;
         } elseif ($translator instanceof \Zend\Translator\Translator) {
             $this->_translator = $translator->getAdapter();

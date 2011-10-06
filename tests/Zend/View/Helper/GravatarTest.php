@@ -136,7 +136,7 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
         $imgSizesRight = array(1, 500, "600");
         foreach ($imgSizesRight as $value) {
             $this->_object->setImgSize($value);
-            $this->assertType('int', $this->_object->getImgSize());
+            $this->assertInternalType('int', $this->_object->getImgSize());
         }
     }
 
@@ -163,7 +163,7 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
         $values = array("true", "false", "text", $this->_view, 100, true, "", null, 0, false);
         foreach ($values as $value) {
             $this->_object->setSecure($value);
-            $this->assertType('bool', $this->_object->getSecure());
+            $this->assertInternalType('bool', $this->_object->getSecure());
         }
     }
 
@@ -255,7 +255,7 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnThisObject()
     {
-        $this->assertType('Zend\View\Helper\Gravatar', $this->_object->__invoke());
+        $this->assertInstanceOf('Zend\View\Helper\Gravatar', $this->_object->__invoke());
     }
 
     public function testInvalidKeyPassedToSetOptionsMethod()

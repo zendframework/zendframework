@@ -448,4 +448,18 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         $validator = new Hostname(Hostname::ALLOW_ALL);
         $this->assertEquals(true, $validator->isValid('ῆὧὰῧῲ.com'));
     }
+
+    /**
+     * @group ZF-11796
+     */
+    public function testIDNSI()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        $this->assertTrue($validator->isValid('Test123.si'));
+        $this->assertTrue($validator->isValid('țest123.si'));
+        $this->assertTrue($validator->isValid('tĕst123.si'));
+        $this->assertTrue($validator->isValid('tàrø.si'));
+        $this->assertFalse($validator->isValid('رات.si'));
+    }
 }

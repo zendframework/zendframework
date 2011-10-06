@@ -38,6 +38,13 @@ use Zend\Loader\PluginSpecBroker,
 class TreeRouteStack extends SimpleRouteStack
 {
     /**
+     * Base URL.
+     * 
+     * @var string
+     */
+    protected $baseUrl = '';
+    
+    /**
      * init(): defined by SimpleRouteStack.
      * 
      * @see    SimpleRouteStack::init()
@@ -76,5 +83,47 @@ class TreeRouteStack extends SimpleRouteStack
         }
 
         return $route;
+    }
+    
+    /**
+     * match(): defined by Route interface.
+     *
+     * @see    Route::match()
+     * @param  Request $request
+     * @return RouteMatch
+     */
+    public function match(Request $request)
+    {
+        $baseUrlLength = strlen($this->baseUrl) ?: null;
+        
+        foreach ($this->routes as $route) {
+            if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch) {
+                return $match;
+            }
+        }
+
+        return null;
+    }
+    
+    /**
+     * Set the base URL.
+     * 
+     * @param  string $baseUrl
+     * @return self
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = rtrim($baseUrl, '/');
+        return $this;
+    }
+
+    /**
+     * Get the base URL.
+     * 
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl();
     }
 }

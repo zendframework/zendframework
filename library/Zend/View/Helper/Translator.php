@@ -111,7 +111,7 @@ class Translator extends AbstractHelper
      */
     public function setTranslator($translate)
     {
-        if ($translate instanceof \Zend\Translator\Adapter\Adapter) {
+        if ($translate instanceof \Zend\Translator\Adapter\AbstractAdapter) {
             $this->_translator = $translate;
         } else if ($translate instanceof \Zend\Translator\Translator) {
             $this->_translator = $translate->getAdapter();

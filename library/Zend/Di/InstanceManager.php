@@ -176,12 +176,11 @@ class InstanceManager /* implements InstanceCollection */
         return $alias;
     }
     
-    public function getBaseAlias($alias)
+    protected function getBaseAlias($alias)
     {
         if (!$this->hasAlias($alias)) {
             return false;
         }
-
         $lastAlias = false;
         $r = 0;
         while (isset($this->aliases[$alias])) {
@@ -237,14 +236,19 @@ class InstanceManager /* implements InstanceCollection */
         if (!isset($this->configurations[$key]) || !$append) {
             $this->configurations[$key] = $this->configurationTemplate;
         }
-
         // Ignore anything but 'parameters' and 'injections'
         $configuration = array(
-            'parameters' => $configuration['parameters'],
-            'injections' => $configuration['injections'],
+            'parameters' => isset($configuration['parameters']) ? $configuration['parameters'] : array(),
+            'injections' => isset($configuration['injections']) ? $configuration['injections'] : array(),
         );
-
-        $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
+        $configuration = array_replace_recursive($this->configurations[$key], $configuration);
+        if (count($configuration['parameters']) === 0) {
+            unset($configuration['parameters']);
+        }
+        if (count($configuration['injections']) === 0) {
+            unset($configuration['injections']);
+        }
+        $this->configurations[$key] = $configuration;
     }
 
     public function getClasses()

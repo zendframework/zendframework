@@ -91,7 +91,7 @@ class InlineScriptTest extends \PHPUnit_Framework_TestCase
 
     public function testInlineScriptReturnsObjectInstance()
     {
-        $placeholder = $this->helper->direct();
+        $placeholder = $this->helper->__invoke();
         $this->assertTrue($placeholder instanceof Helper\InlineScript);
     }
 }

@@ -65,7 +65,7 @@ class Partial extends AbstractHelper
      * @param  array $model Variables to populate in the view
      * @return string|\Zend\View\Helper\Partial\Partial
      */
-    public function direct($name = null, $module = null, $model = null)
+    public function __invoke($name = null, $module = null, $model = null)
     {
         if (0 == func_num_args()) {
             return $this;

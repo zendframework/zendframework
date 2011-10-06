@@ -1,0 +1,6 @@
+GET /api/grid/server/add?format=json&api_key=1234567890&sig=75237b57377f972111ee92eeb9a49280&v=1.8&name=test-zf&image=centos5.5_32_base&server.ram=512MB&ip=173.204.195.244 HTTP/1.1
+Host: api.gogrid.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+

@@ -1,8 +1,11 @@
 HTTP/1.1 204 No Content
-Date: Wed, 11 May 2011 10:03:17 GMT
-X-container-meta-foo: bar
-X-container-meta-foo2: bar2
-X-container-bytes-used: 9756
-X-container-object-count: 2
+Date: Fri, 23 Sep 2011 10:31:21 GMT
+X-Container-Meta-Foo: bar
+X-Container-Meta-Foo2: bar2
+X-Container-Bytes-Used: 0
+X-Container-Object-Count: 0
+Accept-Ranges: bytes
+X-Trans-Id: tx7e0f8074f11540cc90ef594f60faa6c5
 Connection: close
-Content-length: 0
+Content-Length: 0
+

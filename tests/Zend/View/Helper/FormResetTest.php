@@ -68,7 +68,7 @@ class FormResetTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldRenderResetInput()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'Reset',
         ));
@@ -80,7 +80,7 @@ class FormResetTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldAllowDisabling()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'Reset',
             'attribs' => array('disable' => true)
@@ -90,14 +90,14 @@ class FormResetTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldRenderAsHtmlByDefault()
     {
-        $test = $this->helper->direct('foo', 'bar');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertNotContains(' />', $test);
     }
 
     public function testShouldAllowRenderingAsXHtml()
     {
-        $this->view->plugin('doctype')->direct('XHTML1_STRICT');
-        $test = $this->helper->direct('foo', 'bar');
+        $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertContains(' />', $test);
     }
 }

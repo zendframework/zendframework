@@ -212,6 +212,11 @@ class FileFrontendTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('foo', $this->_instance1->load('cache_id', true));
     }
 
+    public function testGetOptions()
+    {
+        $this->assertTrue(is_array($this->_instance1->getOption()));
+        $this->assertTrue(is_bool($this->_instance1->getOption('write_control')));
+    }
 }
 
 

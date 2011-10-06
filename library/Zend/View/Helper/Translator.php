@@ -69,7 +69,7 @@ class Translator extends AbstractHelper
      * @param  string $messageid Id of the message to be translated
      * @return string|\Zend\View\Helper\Translator Translated message
      */
-    public function direct($messageid = null)
+    public function __invoke($messageid = null)
     {
         if ($messageid === null) {
             return $this;

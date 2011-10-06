@@ -52,12 +52,8 @@ class Json extends AbstractHelper
      *         that will not be passed to Zend_Json::encode method but will be used here
      * @return string|void
      */
-    public function direct($data = null, $keepLayouts = false)
+    public function __invoke($data, $keepLayouts = false)
     {
-        if ($data == null) {
-            throw new \InvalidArgumentException('JSON: missing argument. $data is required in json($data, $keepLayouts = false)');
-        }
-        
         $options = array();
         if (is_array($keepLayouts))
         {

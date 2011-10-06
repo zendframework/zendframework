@@ -65,7 +65,7 @@ class DeclareVars extends AbstractHelper
      * @param string|array variable number of arguments, all string names of variables to test
      * @return void
      */
-    public function direct()
+    public function __invoke()
     {
         $view = $this->getView();
         $args = func_get_args();

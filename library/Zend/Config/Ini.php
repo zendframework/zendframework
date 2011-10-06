@@ -261,6 +261,11 @@ class Ini extends Config
                 throw new Exception\RuntimeException("Invalid key '$key'");
             }
         } else {
+            if(strtolower(trim($value)) === 'true') {
+                $value = '1';
+            } elseif(strtolower(trim($value)) === 'false') {
+                $value = '';
+            }
             $config[$key] = $value;
         }
         return $config;

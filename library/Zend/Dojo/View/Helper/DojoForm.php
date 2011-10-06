@@ -63,7 +63,7 @@ class DojoForm extends Dijit
      * @param  false|string $content
      * @return string
      */
-    public function direct($id = null, $attribs = null, $content = false)
+    public function __invoke($id = null, $attribs = null, $content = false)
     {
         if (!is_array($attribs)) {
             $attribs = (array) $attribs;
@@ -76,7 +76,8 @@ class DojoForm extends Dijit
 
         $attribs = $this->_prepareDijit($attribs, array(), 'layout');
 
-        return $this->getFormHelper()->direct($id, $attribs, $content);
+        $formHelper = $this->getFormHelper();
+        return $formHelper($id, $attribs, $content);
     }
 
     /**

@@ -26,8 +26,9 @@ namespace Zend\Authentication\Adapter;
 
 use Zend\Authentication\Adapter as AuthenticationAdapter,
     Zend\Authentication,
-    Zend\Controller\Request\Http as HTTPRequest,
-    Zend\Controller\Response\Http as HTTPResponse;
+    Zend\Http\Request as HTTPRequest,
+    Zend\Http\Response as HTTPResponse,
+    Zend\Uri\UriFactory;
 
 /**
  * HTTP Authentication Adapter
@@ -50,14 +51,14 @@ class Http implements AuthenticationAdapter
     /**
      * Reference to the HTTP Request object
      *
-     * @var Zend_Controller_Request_Http
+     * @var HTTPRequest
      */
     protected $_request;
 
     /**
      * Reference to the HTTP Response object
      *
-     * @var Zend_Controller_Response_Http
+     * @var HTTPResponse
      */
     protected $_response;
 
@@ -292,8 +293,8 @@ class Http implements AuthenticationAdapter
     /**
      * Setter for the Request object
      *
-     * @param  Zend_Controller_Request_Http $request
-     * @return Zend\Authentication\Adapter\Http Provides a fluent interface
+     * @param  HTTPRequest $request
+     * @return Http Provides a fluent interface
      */
     public function setRequest(HTTPRequest $request)
     {
@@ -305,7 +306,7 @@ class Http implements AuthenticationAdapter
     /**
      * Getter for the Request object
      *
-     * @return Zend_Controller_Request_Http
+     * @return HTTPRequest
      */
     public function getRequest()
     {
@@ -315,8 +316,8 @@ class Http implements AuthenticationAdapter
     /**
      * Setter for the Response object
      *
-     * @param  Zend_Controller_Response_Http $response
-     * @return Zend\Authentication\Adapter\Http Provides a fluent interface
+     * @param  HTTPResponse $response
+     * @return Http Provides a fluent interface
      */
     public function setResponse(HTTPResponse $response)
     {
@@ -328,7 +329,7 @@ class Http implements AuthenticationAdapter
     /**
      * Getter for the Response object
      *
-     * @return Zend_Controller_Response_Http
+     * @return HTTPResponse
      */
     public function getResponse()
     {
@@ -343,8 +344,7 @@ class Http implements AuthenticationAdapter
      */
     public function authenticate()
     {
-        if (empty($this->_request) ||
-            empty($this->_response)) {
+        if (empty($this->_request) || empty($this->_response)) {
             throw new Exception\RuntimeException('Request and Response objects must be set before calling '
                                                 . 'authenticate()');
         }
@@ -355,7 +355,11 @@ class Http implements AuthenticationAdapter
             $getHeader = 'Authorization';
         }
 
-        $authHeader = $this->_request->getHeader($getHeader);
+        $headers = $this->_request->headers();
+        if (!$headers->has($getHeader)) {
+            return $this->_challengeClient();
+        }
+        $authHeader = $headers->get($getHeader)->getFieldValue();
         if (!$authHeader) {
             return $this->_challengeClient();
         }
@@ -366,7 +370,7 @@ class Http implements AuthenticationAdapter
         // The server can issue multiple challenges, but the client should
         // answer with only the selected auth scheme.
         if (!in_array($clientScheme, $this->_supportedSchemes)) {
-            $this->_response->setHttpResponseCode(400);
+            $this->_response->setStatusCode(400);
             return new Authentication\Result(
                 Authentication\Result::FAILURE_UNCATEGORIZED,
                 array(),
@@ -412,14 +416,15 @@ class Http implements AuthenticationAdapter
             $headerName = 'WWW-Authenticate';
         }
 
-        $this->_response->setHttpResponseCode($statusCode);
+        $this->_response->setStatusCode($statusCode);
 
         // Send a challenge in each acceptable authentication scheme
+        $headers = $this->_response->headers();
         if (in_array('basic', $this->_acceptSchemes)) {
-            $this->_response->setHeader($headerName, $this->_basicHeader());
+            $headers->addHeaderLine($headerName, $this->_basicHeader());
         }
         if (in_array('digest', $this->_acceptSchemes)) {
-            $this->_response->setHeader($headerName, $this->_digestHeader());
+            $headers->addHeaderLine($headerName, $this->_digestHeader());
         }
         return new Authentication\Result(
             Authentication\Result::FAILURE_CREDENTIAL_INVALID,
@@ -525,7 +530,7 @@ class Http implements AuthenticationAdapter
 
         $data = $this->_parseDigestAuth($header);
         if ($data === false) {
-            $this->_response->setHttpResponseCode(400);
+            $this->_response->setStatusCode(400);
             return new Authentication\Result(
                 Authentication\Result::FAILURE_UNCATEGORIZED,
                 array(),
@@ -615,7 +620,7 @@ class Http implements AuthenticationAdapter
         // would be surprising if the user just logged in.
         $timeout = ceil(time() / $this->_nonceTimeout) * $this->_nonceTimeout;
 
-        $nonce = hash('md5', $timeout . ':' . $this->_request->getServer('HTTP_USER_AGENT') . ':' . __CLASS__);
+        $nonce = hash('md5', $timeout . ':' . $this->_request->server()->get('HTTP_USER_AGENT') . ':' . __CLASS__);
         return $nonce;
     }
 
@@ -689,21 +694,19 @@ class Http implements AuthenticationAdapter
         // Section 3.2.2.5 in RFC 2617 says the authenticating server must
         // verify that the URI field in the Authorization header is for the
         // same resource requested in the Request Line.
-        $rUri = @parse_url($this->_request->getRequestUri());
-        $cUri = @parse_url($temp[1]);
-        if (false === $rUri || false === $cUri) {
+        $rUri = $this->_request->uri();
+        $cUri = UriFactory::factory($temp[1]);
+
+        // Make sure the path portion of both URIs is the same
+        if ($rUri->getPath() != $cUri->getPath()) {
             return false;
-        } else {
-            // Make sure the path portion of both URIs is the same
-            if ($rUri['path'] != $cUri['path']) {
-                return false;
-            }
-            // Section 3.2.2.5 seems to suggest that the value of the URI
-            // Authorization field should be made into an absolute URI if the
-            // Request URI is absolute, but it's vague, and that's a bunch of
-            // code I don't want to write right now.
-            $data['uri'] = $temp[1];
         }
+
+        // Section 3.2.2.5 seems to suggest that the value of the URI
+        // Authorization field should be made into an absolute URI if the
+        // Request URI is absolute, but it's vague, and that's a bunch of
+        // code I don't want to write right now.
+        $data['uri'] = $temp[1];
         $temp = null;
 
         $ret = preg_match('/response="([^"]+)"/', $header, $temp);
@@ -747,13 +750,19 @@ class Http implements AuthenticationAdapter
             if (!$ret || empty($temp[1])) {
 
                 // Big surprise: IE isn't RFC 2617-compliant.
-                if (false !== strpos($this->_request->getHeader('User-Agent'), 'MSIE')) {
-                    $temp[1] = '';
-                    $this->_ieNoOpaque = true;
-                } else {
+                $headers = $this->_request->headers();
+                if (!$headers->has('User-Agent')) {
                     return false;
                 }
+                $userAgent = $headers->get('User-Agent')->getFieldValue();
+                if (false === strpos($userAgent, 'MSIE')) {
+                    return false;
+                }
+
+                $temp[1] = '';
+                $this->_ieNoOpaque = true;
             }
+
             // This implementation only sends MD5 hex strings in the opaque value
             if (!$this->_ieNoOpaque &&
                 (32 != strlen($temp[1]) || !ctype_xdigit($temp[1]))) {

@@ -55,7 +55,7 @@ class OAuthTest extends \PHPUnit_Framework_TestCase
         OAuth\OAuth::setHttpClient($client);
         $resetClient = OAuth\OAuth::getHttpClient();
         $resetClient->setUri('http://www.example.com');
-        $this->assertEquals('http://www.example.com:80', (string) $resetClient->getUri(true));
+        $this->assertEquals('http://www.example.com', (string) $resetClient->getUri(true));
     }
 
     public function testGetHttpClientResetsAuthorizationHeader()

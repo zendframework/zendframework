@@ -232,4 +232,39 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('fileMimeTypeNotReadable', $validator->getMessages()));
         $this->assertContains("'nofile.mo'", current($validator->getMessages()));
     }
+
+    public function testDisableMagicFile()
+    {
+        $validator = new File\MimeType('image/gif');
+        $magic     = getenv('magic');
+        if (!empty($magic)) {
+            $mimetype  = $validator->getMagicFile();
+            $this->assertEquals($magic, $mimetype);
+        }
+
+        $validator->disableMagicFile(true);
+        $this->assertTrue($validator->isMagicFileDisabled());
+
+        if (!empty($magic)) {
+            $mimetype  = $validator->getMagicFile();
+            $this->assertEquals($magic, $mimetype);
+        }
+    }
+
+    /**
+     * @group ZF-10461
+     */
+    public function testDisablingMagicFileByConstructor()
+    {
+        $files = array(
+            'name'     => 'picture.jpg',
+            'size'     => 200,
+            'tmp_name' => dirname(__FILE__) . '/_files/picture.jpg',
+            'error'    => 0,
+            'magicfile' => false,
+        );
+
+        $validator = new File\MimeType($files);
+        $this->assertFalse($validator->getMagicFile());
+    }
 }

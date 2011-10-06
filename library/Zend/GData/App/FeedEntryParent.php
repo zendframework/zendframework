@@ -336,16 +336,16 @@ abstract class FeedEntryParent extends Base
 
     /**
      * Given a particular 'rel' value, this method returns a matching
-     * Zend_Gdata_App_Extension_Link element.  If the 'rel' value
-     * is not provided, the full array of Zend_Gdata_App_Extension_Link
+     * \Zend\Gdata\App\Extension\Link element.  If the 'rel' value
+     * is not provided, the full array of \Zend\Gdata\App\Extension\Link
      * elements is returned.  In an atom feed, each link is represented
      * by an atom:link element.  The 'rel' value passed to this function
      * is the atom:link/@rel attribute.  Example rel values include 'self',
      * 'edit', and 'alternate'.
      *
      * @param string $rel The rel value of the link to be found.  If null,
-     *     the array of Zend_Gdata_App_Extension_link elements is returned
-     * @return mixed Either a single Zend_Gdata_App_Extension_link element,
+     *     the array of \Zend\Gdata\App\Extension\link elements is returned
+     * @return mixed Either a single \Zend\Gdata\App\Extension\link element,
      *     an array of the same or null is returned depending on the rel value
      *     supplied as the argument to this function
      */
@@ -364,7 +364,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the Zend_Gdata_App_Extension_Link element which represents
+     * Returns the \Zend\Gdata\App\Extension\Link element which represents
      * the URL used to edit this resource.  This link is in the atom feed/entry
      * as an atom:link with a rel attribute value of 'edit'.
      *
@@ -376,7 +376,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the Zend_Gdata_App_Extension_Link element which represents
+     * Returns the \Zend\Gdata\App\Extension\Link element which represents
      * the URL used to retrieve the next chunk of results when paging through
      * a feed.  This link is in the atom feed as an atom:link with a
      * rel attribute value of 'next'.
@@ -389,7 +389,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the Zend_Gdata_App_Extension_Link element which represents
+     * Returns the \Zend\Gdata\App\Extension\Link element which represents
      * the URL used to retrieve the previous chunk of results when paging
      * through a feed.  This link is in the atom feed as an atom:link with a
      * rel attribute value of 'previous'.
@@ -410,7 +410,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the Zend_Gdata_App_Extension_Link element which represents
+     * Returns the \Zend\Gdata\App\Extension\Link element which represents
      * the URL used to retrieve the entry or feed represented by this object
      * This link is in the atom feed/entry as an atom:link with a
      * rel attribute value of 'self'.
@@ -423,11 +423,11 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * Returns the Zend_Gdata_App_Extension_Link element which represents
+     * Returns the \Zend\Gdata\App\Extension\Link element which represents
      * the URL for an alternate view of the data represented by this feed or
      * entry.  This alternate view is commonly a user-facing webpage, blog
      * post, etc.  The MIME type for the data at the URL is available from the
-     * returned Zend_Gdata_App_Extension_Link element.
+     * returned \Zend\Gdata\App\Extension\Link element.
      * This link is in the atom feed/entry as an atom:link with a
      * rel attribute value of 'self'.
      *
@@ -449,7 +449,7 @@ abstract class FeedEntryParent extends Base
     }
 
     /**
-     * @return Zend_Gdata_AppExtension_Rights
+     * @return \Zend\Gdata\AppExtension\Rights
      */
     public function getRights()
     {
@@ -549,7 +549,7 @@ abstract class FeedEntryParent extends Base
 
     /**
      * Set the major protocol version that should be used. Values < 1
-     * (excluding NULL) will cause a Zend_Gdata_App_InvalidArgumentException
+     * (excluding NULL) will cause a \Zend\Gdata\App\InvalidArgumentException
      * to be thrown.
      *
      * @see _majorProtocolVersion
@@ -579,7 +579,7 @@ abstract class FeedEntryParent extends Base
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a Zend_Gdata_App_InvalidArgumentException to be thrown.
+     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.

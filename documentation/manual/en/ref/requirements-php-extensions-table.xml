@@ -41,10 +41,16 @@
                 </entry>
             </row>
             <row>
-                <entry>
+                <entry morerows="1" valign="middle">
                     <emphasis>
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&php.manual.link;/ref.bc.php">bcmath</link>
                     </emphasis>
+                </entry>
+                <entry>&requirements.hard;</entry>
+                <entry>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.openid.html">
+                        <classname>Zend_OpenId</classname>
+                    </link>
                 </entry>
                 <entry>&requirements.soft;</entry>
                 <entry>
@@ -390,8 +396,12 @@
                         <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&php.manual.link;/ref.gmp.php">gmp</link>
                     </emphasis>
                 </entry>
-                <entry>---</entry>
-                <entry>---</entry>
+                <entry>&requirements.hard;</entry>
+                <entry>
+                    <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="&zf.manual.link;/zend.openid.html">
+                        <classname>Zend_OpenId</classname>
+                    </link>
+                </entry>
             </row>
             <row>
                 <entry>

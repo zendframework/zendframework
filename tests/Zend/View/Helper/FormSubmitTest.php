@@ -68,7 +68,7 @@ class FormSubmitTest extends \PHPUnit_Framework_TestCase
 
     public function testRendersSubmitInput()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'Submit!',
         ));
@@ -80,7 +80,7 @@ class FormSubmitTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableSubmitButton()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'Submit!',
             'attribs' => array('disable' => true)
@@ -93,7 +93,7 @@ class FormSubmitTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueAttributeIsAlwaysRendered()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => '',
         ));
@@ -102,14 +102,14 @@ class FormSubmitTest extends \PHPUnit_Framework_TestCase
 
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->direct('foo', 'bar');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertNotContains(' />', $test);
     }
 
     public function testCanRendersAsXHtml()
     {
-        $this->view->plugin('doctype')->direct('XHTML1_STRICT');
-        $test = $this->helper->direct('foo', 'bar');
+        $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertContains(' />', $test);
     }
 }

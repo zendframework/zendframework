@@ -51,7 +51,7 @@ class BaseUrl extends AbstractHelper
      * @param  string|null $file
      * @return string
      */
-    public function direct($file = null)
+    public function __invoke($file = null)
     {
         // Get baseUrl
         $baseUrl = $this->getBaseUrl();

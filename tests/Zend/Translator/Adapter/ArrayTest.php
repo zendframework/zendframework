@@ -72,20 +72,18 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         $adapter = new Adapter\ArrayAdapter(array());
         restore_error_handler();
         $this->assertTrue($adapter instanceof Adapter\ArrayAdapter);
+    }
 
-        try {
-            $adapter = new Adapter\ArrayAdapter('hastofail', 'en');
-            $this->fail('Exception expected');
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('Error including array or file', $e->getMessage());
-        }
+    public function testCreate2()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\ArrayAdapter('hastofail', 'en');
+    }
 
-        try {
-            $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/failed.php', 'en');
-            $this->fail('Exception expected');
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('Error including array or file', $e->getMessage());
-        }
+    public function testCreate3()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/failed.php', 'en');
     }
 
     public function testToString()
@@ -127,13 +125,13 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1', $adapter->translate('Message 1', 'xx'));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'en_US'));
 
-        try {
-            $adapter->addTranslation(__DIR__ . '/_files/translation_en.php', 'xx');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en.php', 'xx');
+    }
 
+    public function testLoadTranslationData2()
+    {
+        $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $adapter->addTranslation(__DIR__ . '/_files/translation_en2.php', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
@@ -185,14 +183,18 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
         $this->assertEquals('en', $adapter->getLocale());
+    }
 
-        try {
-            $adapter->setLocale('nolocale');
-            $this->fail("exception expected");
-        } catch (Translator\Exception $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+    public function testLocale2()
+    {
+        $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
+        $this->setExpectedException('Zend\Translator\Exception');
+        $adapter->setLocale('nolocale');
+    }
 
+    public function testLocale3()
+    {
+        $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter->setLocale('de');
         restore_error_handler();

@@ -24,9 +24,13 @@
  * @namespace
  */
 namespace Zend\OpenId\Consumer;
-use Zend\Controller\Response;
-use Zend\OpenId;
-use Zend\OpenId\Extension;
+
+use Zend\Http\Client as HttpClient,
+    Zend\Http\Request,
+    Zend\Http\Response,
+    Zend\OpenId,
+    Zend\OpenId\Extension,
+    Zend\Session\Container as SessionContainer;
 
 /**
  * OpenID consumer implementation
@@ -71,14 +75,14 @@ class GenericConsumer
     /**
      * HTTP client to make HTTP requests
      *
-     * @var Zend\Http\Client $_httpClient
+     * @var HttpClient $_httpClient
      */
     private $_httpClient = null;
 
     /**
      * HTTP session to store climed_id between requests
      *
-     * @var Zend\Session\Container $_session
+     * @var SessionContainer $_session
      */
     private $_session = null;
 
@@ -121,12 +125,12 @@ class GenericConsumer
      * @param string $returnTo URL to redirect response from server to
      * @param string $root HTTP URL to identify consumer on server
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend\Controller\Response\AbstractResponse $response an optional response
+     * @param Response $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */
     public function login($id, $returnTo = null, $root = null, $extensions = null,
-                          Response\AbstractResponse $response = null)
+                          Response $response = null)
     {
         return $this->_checkId(
             false,
@@ -148,12 +152,12 @@ class GenericConsumer
      * @param string $returnTo HTTP URL to redirect response from server to
      * @param string $root HTTP URL to identify consumer on server
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend\Controller\Response\AbstractResponse $response an optional response
+     * @param Response $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */
     public function check($id, $returnTo=null, $root=null, $extensions = null,
-                          Response\AbstractResponse $response = null)
+                          Response $response = null)
 
     {
         return $this->_checkId(
@@ -201,14 +205,14 @@ class GenericConsumer
                 if ($this->_session->identity === $identity) {
                     $identity = $this->_session->claimed_id;
                 }
-            } else if (defined('SID')) {
+            } elseif (defined('SID')) {
                 if (isset($_SESSION["zend_openid"]["identity"]) &&
                     isset($_SESSION["zend_openid"]["claimed_id"]) &&
                     $_SESSION["zend_openid"]["identity"] === $identity) {
                     $identity = $_SESSION["zend_openid"]["claimed_id"];
                 }
             } else {
-                $this->_session = new \Zend\Session\Container("zend_openid");
+                $this->_session = new SessionContainer("zend_openid");
                 if ($this->_session->identity === $identity) {
                     $identity = $this->_session->claimed_id;
                 }
@@ -471,7 +475,7 @@ class GenericConsumer
     {
         $client = $this->_httpClient;
         if ($client === null) {
-            $client = new \Zend\Http\Client(
+            $client = new HttpClient(
                     $url,
                     array(
                         'maxredirects' => 4,
@@ -484,22 +488,22 @@ class GenericConsumer
         }
 
         $client->resetParameters();
-        if ($method == 'POST') {
-            $client->setMethod(\Zend\Http\Client::POST);
+        if ($method == Request::METHOD_POST) {
+            $client->setMethod(Request::METHOD_POST);
             $client->setParameterPost($params);
         } else {
-            $client->setMethod(\Zend\Http\Client::GET);
+            $client->setMethod(Request::METHOD_GET);
             $client->setParameterGet($params);
         }
 
         try {
-            $response = $client->request();
+            $response = $client->send();
         } catch (\Exception $e) {
             $this->_setError('HTTP Request failed: ' . $e->getMessage());
             return false;
         }
-        $status = $response->getStatus();
-        $body = $response->getBody();
+        $status = $response->getStatusCode();
+        $body   = $response->getBody();
         if ($status == 200 || ($status == 400 && !empty($body))) {
             return $body;
         }else{
@@ -799,12 +803,11 @@ class GenericConsumer
      * @param string $returnTo HTTP URL to redirect response from server to
      * @param string $root HTTP URL to identify consumer on server
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend\Controller\Response\AbstractResponse $response an optional response
-     *  object to perform HTTP or HTML form redirection
+     * @param Response $response an optional response object to perform HTTP or HTML form redirection
      * @return bool
      */
     protected function _checkId($immediate, $id, $returnTo=null, $root=null,
-        $extensions=null, Response\AbstractResponse $response = null)
+        $extensions=null, Response $response = null)
     {
         $this->_setError('');
 
@@ -855,8 +858,8 @@ class GenericConsumer
                 $_SESSION["zend_openid"] = array(
                     "identity" => $id,
                     "claimed_id" => $claimedId);
-            } else {
-                $this->_session = new \Zend\Session\Container("zend_openid");
+            } elseif (!headers_sent()) {
+                $this->_session = new SessionContainer("zend_openid");
                 $this->_session->identity = $id;
                 $this->_session->claimed_id = $claimedId;
             }
@@ -892,27 +895,29 @@ class GenericConsumer
     /**
      * Sets HTTP client object to make HTTP requests
      *
-     * @param Zend\Http\Client $client HTTP client object to be used
+     * @param HttpClient $client HTTP client object to be used
      */
-    public function setHttpClient($client) {
+    public function setHttpClient($client) 
+    {
         $this->_httpClient = $client;
     }
 
     /**
      * Returns HTTP client object that will be used to make HTTP requests
      *
-     * @return Zend\Http\Client
+     * @return HttpClient
      */
-    public function getHttpClient() {
+    public function getHttpClient() 
+    {
         return $this->_httpClient;
     }
 
     /**
      * Sets session object to store climed_id
      *
-     * @param Zend\Session\Container $session HTTP client object to be used
+     * @param SessionContainer $session HTTP client object to be used
      */
-    public function setSession(\Zend\Session\Container $session) 
+    public function setSession(SessionContainer $session) 
     {
         $this->_session = $session;
     }

@@ -69,7 +69,7 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
     public function testStackIsEmptyByDefault()
     {
         $paths = $this->loader->getPaths();
-        $this->assertType('Zend\Stdlib\ArrayStack', $paths);
+        $this->assertInstanceOf('Zend\Stdlib\ArrayStack', $paths);
         $this->assertSame(0, count($paths));
     }
 
@@ -95,7 +95,7 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
     {
         $this->loader->addPrefixPath('foo', __DIR__);
         $paths = $this->loader->getPaths('foo');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $found = false;
         foreach ($paths as $path) {
             if (rtrim(__DIR__, DIRECTORY_SEPARATOR) == rtrim($path, DIRECTORY_SEPARATOR)) {
@@ -110,7 +110,7 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
         $this->loader->addPrefixPath('foo', __DIR__)
                      ->addPrefixPath('foo', __DIR__ . '/TestAsset');
         $paths = $this->loader->getPaths('foo');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $this->assertEquals(2, count($paths));
 
         $expected = array(
@@ -214,7 +214,7 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
                      ->addPrefixPath('bar', __DIR__)
                      ->addPrefixPath('bar', __DIR__ . '/TestAsset');
         $paths = $this->loader->getPaths('foo');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $this->assertEquals(1, count($paths));
     }
 
@@ -267,7 +267,7 @@ class PrefixPathLoaderTest extends \PHPUnit_Framework_TestCase
                      ->addPrefixPath('foo', __DIR__ . '/TestAsset');
         $this->assertTrue($this->loader->removePrefixPath('foo', __DIR__));
         $paths = $this->loader->getPaths('foo');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
         $this->assertEquals(1, count($paths));
         foreach ($paths as $path) {
             $this->assertContains('TestAsset', $path);

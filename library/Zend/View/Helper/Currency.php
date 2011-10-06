@@ -71,7 +71,7 @@ class Currency extends AbstractHelper
      * @param  string|Zend_Locale|\Zend\Currency\Currency $currency OPTIONAL Currency to use for this call
      * @return string Formatted currency
      */
-    public function direct($value = null, $currency = null)
+    public function __invoke($value = null, $currency = null)
     {
         if ($value === null) {
             return $this;

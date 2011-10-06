@@ -73,7 +73,7 @@ class HeadTitle extends Placeholder\Container\Standalone
      * @param  string $separator
      * @return \Zend\View\Helper\HeadTitle
      */
-    public function direct($title = null, $setType = null)
+    public function __invoke($title = null, $setType = null)
     {
         if ($setType === null && is_null($this->getDefaultAttachOrder())) {
             $setType = Placeholder\Container\AbstractContainer::APPEND;

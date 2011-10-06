@@ -89,7 +89,7 @@ class ServerUrl extends AbstractHelper
      *                                     is to not append any path.
      * @return string                      server url
      */
-    public function direct($requestUri = null)
+    public function __invoke($requestUri = null)
     {
         if ($requestUri === true) {
             $path = $_SERVER['REQUEST_URI'];

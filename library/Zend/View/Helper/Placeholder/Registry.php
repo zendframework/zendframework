@@ -59,9 +59,9 @@ class Registry
     protected $_items = array();
 
     /**
-     * Retrieve or create registry instnace
+     * Retrieve or create registry instance
      *
-     * @return void
+     * @return mixed
      */
     public static function getRegistry()
     {
@@ -164,7 +164,7 @@ class Registry
             \Zend\Loader::loadClass($name);
         }
 
-        
+
         if (!in_array('Zend\View\Helper\Placeholder\Container\AbstractContainer', class_parents($name))) {
             $e = new Container\Exception('Invalid Container class specified');
             throw $e;

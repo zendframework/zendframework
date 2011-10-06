@@ -102,7 +102,7 @@ class MediaEntry extends Entry
             $this->_mediaSource = $value;
         } else {
             throw new InvalidArgumentException(
-                    'You must specify the media data as a class that conforms to Zend_Gdata_App_MediaSource.');
+                    'You must specify the media data as a class that conforms to \Zend\Gdata\App\MediaSource.');
         }
         return $this;
     }

@@ -161,6 +161,16 @@ class App
         $this->setHttpClient($client, $applicationId);
         // Set default protocol version. Subclasses should override this as
         // needed once a given service supports a new version.
+        $this->applyDefaults();
+    }
+    
+    /**
+     * Applys defaults to the Gdata object.
+     * We may want to fire off multiple requests with different protocol versions
+     * so after every request we should should apply the defaults.
+     */
+    public function applyDefaults()
+    {
         $this->setMajorProtocolVersion(self::DEFAULT_MAJOR_PROTOCOL_VERSION);
         $this->setMinorProtocolVersion(self::DEFAULT_MINOR_PROTOCOL_VERSION);
     }
@@ -209,7 +219,7 @@ class App
     }
 
     /**
-     * Get the Zend_Http_Client object used for communication
+     * Get the \Zend\Http\Client object used for communication
      *
      * @return \Zend\Http\Client
      */
@@ -219,7 +229,7 @@ class App
     }
 
     /**
-     * Set the Zend_Http_Client object used for communication
+     * Set the \Zend\Http\Client object used for communication
      *
      * @param \Zend\Http\Client $client The client to use for communication
      * @throws \Zend\GData\App\HttpException
@@ -262,7 +272,7 @@ class App
 
 
     /**
-     * Gets the HTTP client object. If none is set, a new Zend_Http_Client will be used.
+     * Gets the HTTP client object. If none is set, a new \Zend\Http\Client will be used.
      *
      * @return \Zend\Http\Client
      */
@@ -385,7 +395,7 @@ class App
 
     /**
      * Set the major protocol version that should be used. Values < 1 will
-     * cause a Zend_Gdata_App_InvalidArgumentException to be thrown.
+     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
      *
      * @see _majorProtocolVersion
      * @param int $value The major protocol version to use.
@@ -414,7 +424,7 @@ class App
     /**
      * Set the minor protocol version that should be used. If set to NULL, no
      * minor protocol version will be sent to the server. Values < 0 will
-     * cause a Zend_Gdata_App_InvalidArgumentException to be thrown.
+     * cause a \Zend\Gdata\App\InvalidArgumentException to be thrown.
      *
      * @see _minorProtocolVersion
      * @param (int|NULL) $value The minor protocol version to use.
@@ -542,8 +552,6 @@ class App
         if ($method != 'POST' && $method != 'GET' && self::getHttpMethodOverride()) {
             $headers['x-http-method-override'] = $method;
             $method = 'POST';
-        } else {
-            $headers['x-http-method-override'] = null;
         }
 
         if ($contentTypeOverride != null) {
@@ -579,6 +587,7 @@ class App
         if ($headers === null) {
             $headers = array();
         }
+        
         // Append a Gdata version header if protocol v2 or higher is in use.
         // (Protocol v1 does not use this header.)
         $major = $this->getMajorProtocolVersion();
@@ -617,7 +626,7 @@ class App
         // In addition to standard headers to reset via resetParameters(),
         // also reset the Slug and If-Match headers
         $this->_httpClient->resetParameters();
-        $this->_httpClient->setHeaders(array('Slug', 'If-Match'));
+        $this->_httpClient->setHeaders(array('Slug' => 'If-Match'));
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);
@@ -648,11 +657,12 @@ class App
             }
             $this->_httpClient->setAdapter($newAdapter);
         } else {
-            $this->_httpClient->setRawData($body, $contentType);
+            $this->_httpClient->setRawBody($body);
         }
 
         try {
-            $response = $this->_httpClient->request($method);
+            $this->_httpClient->setMethod($method);
+            $response = $this->_httpClient->send();
             // reset adapter
             if ($usingMimeStream) {
                 $this->_httpClient->setAdapter($oldHttpAdapter);
@@ -675,9 +685,9 @@ class App
                         'Number of redirects exceeds maximum', null, $response);
             }
         }
-        if (!$response->isSuccessful()) {
+        if (!$response->isSuccess()) {
             $exceptionMessage = 'Expected response code 200, got ' .
-                $response->getStatus();
+                $response->getStatusCode();
             if (self::getVerboseExceptionMessages()) {
                 $exceptionMessage .= "\n" . $response->getBody();
             }
@@ -685,6 +695,10 @@ class App
             $exception->setResponse($response);
             throw $exception;
         }
+        
+        //Apply defaults in case of later requests.
+        $this->applyDefaults();
+        
         return $response;
     }
 
@@ -947,7 +961,7 @@ class App
         $returnEntry = new $className($response->getBody());
         $returnEntry->setHttpClient(self::getstaticHttpClient());
 
-        $etag = $response->getHeader('ETag');
+        $etag = $response->headers()->get('ETag');
         if ($etag !== null) {
             $returnEntry->setEtag($etag);
         }

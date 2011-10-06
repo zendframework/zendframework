@@ -94,19 +94,15 @@ class StaticBackend extends AbstractBackend implements Backend
      * @param  string $name
      * @return mixed
      */
-    public function getOption($name)
+    public function getOption($name = array())
     {
         if ($name == 'tag_cache') {
             return $this->getInnerCache();
-        } else {
-            if (in_array($name, $this->_options)) {
-                return $this->_options[$name];
-            }
-            if ($name == 'lifetime') {
-                return parent::getLifetime();
-            }
-            return null;
+        } else if ($name == 'lifetime') {
+            return parent::getLifetime();
         }
+
+        return parent::getOption($name);
     }
 
     /**

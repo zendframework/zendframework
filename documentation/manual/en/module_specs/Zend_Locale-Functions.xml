@@ -70,7 +70,7 @@ if ($locale->equals($mylocale)) {
 
 
         <para>
-            The method <methodname>getDefault()</methodname> returns an array of relevant locales
+            The method <methodname>getFallback()</methodname> returns an array of relevant locales
             using information from the user's web browser (if available), information from the
             environment of the host server, and Zend Framework settings. As with the constructor
             for <classname>Zend_Locale</classname>, the first parameter selects a preference of
@@ -88,11 +88,11 @@ if ($locale->equals($mylocale)) {
 $locale = new Zend_Locale();
 
 // Return all default locales
-$found = $locale->getDefault();
+$found = $locale->getFallback();
 print_r($found);
 
 // Return only browser locales
-$found2 = $locale->getDefault(Zend_Locale::BROWSER,TRUE);
+$found2 = $locale->getFallback(Zend_Locale::BROWSER,TRUE);
 print_r($found2);
 ]]></programlisting>
         </example>

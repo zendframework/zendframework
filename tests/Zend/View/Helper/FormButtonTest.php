@@ -63,7 +63,7 @@ class FormButtonTest extends \PHPUnit_Framework_TestCase
 
     public function testFormButtonRendersButtonXhtml()
     {
-        $button = $this->helper->direct('foo', 'bar');
+        $button = $this->helper->__invoke('foo', 'bar');
         $this->assertRegexp('/<button[^>]*?value="bar"/', $button);
         $this->assertRegexp('/<button[^>]*?name="foo"/', $button);
         $this->assertRegexp('/<button[^>]*?id="foo"/', $button);
@@ -72,7 +72,7 @@ class FormButtonTest extends \PHPUnit_Framework_TestCase
 
     public function testCanPassContentViaContentAttribKey()
     {
-        $button = $this->helper->direct('foo', 'bar', array('content' => 'Display this'));
+        $button = $this->helper->__invoke('foo', 'bar', array('content' => 'Display this'));
         $this->assertContains('>Display this<', $button);
         $this->assertContains('<button', $button);
         $this->assertContains('</button>', $button);
@@ -80,13 +80,13 @@ class FormButtonTest extends \PHPUnit_Framework_TestCase
 
     public function testCanDisableContentEscaping()
     {
-        $button = $this->helper->direct('foo', 'bar', array('content' => '<b>Display this</b>', 'escape' => false));
+        $button = $this->helper->__invoke('foo', 'bar', array('content' => '<b>Display this</b>', 'escape' => false));
         $this->assertContains('><b>Display this</b><', $button);
 
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('content' => '<b>Display this</b>', 'escape' => false)));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('content' => '<b>Display this</b>', 'escape' => false)));
         $this->assertContains('><b>Display this</b><', $button);
 
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => array('content' => '<b>Display this</b>')));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar', 'escape' => false, 'attribs' => array('content' => '<b>Display this</b>')));
         $this->assertContains('><b>Display this</b><', $button);
         $this->assertContains('<button', $button);
         $this->assertContains('</button>', $button);
@@ -94,25 +94,25 @@ class FormButtonTest extends \PHPUnit_Framework_TestCase
 
     public function testValueUsedForContentWhenNoContentProvided()
     {
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar'));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar'));
         $this->assertRegexp('#<button[^>]*?value="bar"[^>]*>bar</button>#', $button);
     }
 
     public function testButtonTypeIsButtonByDefault()
     {
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar'));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar'));
         $this->assertContains('type="button"', $button);
     }
 
     public function testButtonTypeMayOnlyBeValidXhtmlButtonType()
     {
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'submit')));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'submit')));
         $this->assertContains('type="submit"', $button);
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'reset')));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'reset')));
         $this->assertContains('type="reset"', $button);
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'button')));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'button')));
         $this->assertContains('type="button"', $button);
-        $button = $this->helper->direct(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'bogus')));
+        $button = $this->helper->__invoke(array('name' => 'foo', 'value' => 'bar', 'attribs' => array('type' => 'bogus')));
         $this->assertContains('type="button"', $button);
     }
 }

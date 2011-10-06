@@ -37,7 +37,6 @@ namespace Zend\View\Helper;
  */
 class HtmlList extends FormElement
 {
-
     /**
      * Generates a 'List' element.
      *
@@ -46,18 +45,8 @@ class HtmlList extends FormElement
      * @param array   $attribs Attributes for the ol/ul tag.
      * @return string The list XHTML.
      */
-    public function direct(array $items = null, $ordered = false, $attribs = false, $escape = true)
+    public function __invoke(array $items, $ordered = false, $attribs = false, $escape = true)
     {
-        if ($items == null) {
-            throw new \InvalidArgumentException('HTMLList: missing argument. $items is required in htmlList(array $items, $ordered = false, $attribs = false, $escape = true)');
-        }
-        
-        if (!is_array($items)) {
-            $e = new \Zend\View\Exception('First param must be an array');
-            $e->setView($this->view);
-            throw $e;
-        }
-
         $list = '';
 
         foreach ($items as $item) {
@@ -69,9 +58,9 @@ class HtmlList extends FormElement
             } else {
                 if (6 < strlen($list)) {
                     $list = substr($list, 0, strlen($list) - 6)
-                     . $this->direct($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                     . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 } else {
-                    $list .= '<li>' . $this->direct($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
+                    $list .= '<li>' . $this($item, $ordered, $attribs, $escape) . '</li>' . self::EOL;
                 }
             }
         }

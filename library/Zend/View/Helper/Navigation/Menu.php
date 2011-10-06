@@ -79,7 +79,7 @@ class Menu extends AbstractHelper
      * @return \Zend\View\Helper\Navigation\Menu      fluent interface,
      *                                               returns self
      */
-    public function direct(Container $container = null)
+    public function __invoke(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -613,10 +613,12 @@ class Menu extends AbstractHelper
                 throw $e;
             }
 
-            return $this->view->plugin('partial')->direct($partial[0], $partial[1], $model);
+            $partialHelper = $this->view->plugin('partial');
+            return $partialHelper($partial[0], $partial[1], $model);
         }
 
-        return $this->view->plugin('partial')->direct($partial, null, $model);
+        $partialHelper = $this->view->plugin('partial');
+        return $partialHelper($partial, null, $model);
     }
 
     // Zend\View\Helper\Navigation\Helper:

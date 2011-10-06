@@ -185,7 +185,8 @@ class DijitElement extends ViewHelperDecorator
                $options = $attribs['options'];
         }
 
-        $elementContent = $view->plugin($helper)->direct($name, $value, $dijitParams, $attribs, $options);
+        $helper = $view->plugin($helper);
+        $elementContent = $helper($name, $value, $dijitParams, $attribs, $options);
         switch ($this->getPlacement()) {
             case self::APPEND:
                 return $content . $separator . $elementContent;

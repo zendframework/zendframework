@@ -29,81 +29,80 @@ class Configuration
         $this->data = $data;
     }
     
-    public function configure(DependencyInjector $di)
+    public function configure(Di $di)
     {
         if (isset($this->data['definition'])) {
             $this->configureDefinition($di, $this->data['definition']);
         }
-        
-        if (isset($this->data['definitions'])) {
-            $this->configureDefinitions($di, $this->data['definitions']);
-        }
-        
-        /*
-        if (isset($this->data['compiler'])) {
-            $this->configureCompiler($di, $this->data['compiler']);
-        }
-        */
-        
+
         if (isset($this->data['instance'])) {
             $this->configureInstance($di, $this->data['instance']);
         }
         
     }
-    
-    public function configureDefinitions(DependencyInjector $di, $definitionsData)
+
+    public function configureDefinition(Di $di, $definition)
     {
-        if ($di->hasDefinition()) {
-            if (!$di->getDefinition() instanceof Definition\AggregateDefinition) {
-                throw new Exception\InvalidArgumentException(
-                    'In order to configure multiple definitions, the primary definition must not be set, '
-                    . 'or must be of type AggregateDefintion'
-                );
+        foreach ($definition as $definitionType => $definitionData) {
+            switch ($definitionType) {
+                case 'class':
+                    foreach ($definitionData as $className => $classDefinitionData) {
+                        $classDefinitions = $di->definitions()->getDefinitionsByType('Zend\Di\Definition\ClassDefinition');
+                        foreach ($classDefinitions as $classDefinition) {
+                            if (!$classDefinition->hasClass($className)) {
+                                unset($classDefinition);
+                            }
+                        }
+                        if (!isset($classDefinition)) {
+                            $classDefinition = new Definition\ClassDefinition($className);
+                            $di->definitions()->addDefinition($classDefinition);
+                        }
+                        foreach ($classDefinitionData as $classDefKey => $classDefData) {
+                            switch ($classDefKey) {
+                                case 'instatiator':
+                                    $classDefinition->setInstantiator($classDefData);
+                                    break;
+                                case 'supertypes':
+                                    $classDefinition->setSupertypes($classDefData);
+                                    break;
+                                case 'methods':
+                                case 'method':
+                                    foreach ($classDefData as $methodName => $methodInfo) {
+                                        if (isset($methodInfo['required'])) {
+                                            $classDefinition->addMethod($methodName, $methodInfo['required']);
+                                            unset($methodInfo['required']);
+                                        }
+                                        foreach ($methodInfo as $paramName => $paramInfo) {
+                                            $classDefinition->addMethodParameter($methodName, $paramName, $paramInfo);
+                                        }
+                                    }
+                                default:
+                                    $methodName = $classDefKey;
+                                    $methodInfo = $classDefData;
+                                    if (isset($classDefData['required'])) {
+                                        $classDefinition->addMethod($methodName, $methodInfo['required']);
+                                        unset($methodInfo['required']);
+                                    }
+                                    foreach ($methodInfo as $paramName => $paramInfo) {
+                                        $classDefinition->addMethodParameter($methodName, $paramName, $paramInfo);
+                                    }
+                            }
+                        }
+                    }
+                    break;
+                case 'compiler':
+                    // @todo
+                case 'runtime':
+                    // @todo
             }
-        } else {
-            $di->setDefinition($di->createDefinition('Zend\Di\Definition\AggregateDefinition'));
+
         }
 
-        foreach ($definitionsData as $definitionData) {
-            $this->configureDefinition($di, $definitionData);
-        }
     }
     
-    public function configureDefinition(DependencyInjector $di, $definitionData)
+    public function configureInstance(Di $di, $instanceData)
     {
-        if ($di->hasDefinition()) {
-            $aggregateDef = $di->getDefinition();
-            if (!$aggregateDef instanceof Definition\AggregateDefinition) {
-                throw new Exception\InvalidArgumentException(
-                    'In order to configure multiple definitions, the primary definition must not be set, '
-                    . 'or must be of type AggregateDefintion'
-                );
-            }
-        } /* else {
-            $aggregateDef = $di->createDefinition('Zend\Di\Definition\AggregateDefinition');
-            $di->setDefinition($aggregateDef);
-        } */
-        
-        if (isset($definitionData['class'])) {
-            $definition = $di->createDefinition($definitionData['class']);
-            unset($definitionData['class']);
-            if ($definition instanceof Definition\BuilderDefinition) {
-                $definition->createClassesFromArray($definitionData);
-            } else {
-                // @todo other types
-            }
-        }
-        
-        if (isset($aggregateDef)) {
-            $aggregateDef->addDefinition($definition);
-        } else {
-            $di->setDefinition($definition);
-        }
-    }
-    
-    public function configureInstance(DependencyInjector $di, $instanceData)
-    {
-        $im = $di->getInstanceManager();
+        $im = $di->instanceManager();
         
         foreach ($instanceData as $target => $data) {
             switch (strtolower($target)) {
@@ -132,9 +131,9 @@ class Configuration
                             case 'parameter':
                                 $im->setParameters($target, $v);
                                 break;
-                            case 'methods':
-                            case 'method':
-                                $im->setMethods($target, $v);
+                            case 'injections':
+                            case 'injection':
+                                $im->setInjections($target, $v);
                                 break;
                         }
                     }

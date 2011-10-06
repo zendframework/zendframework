@@ -12,7 +12,7 @@ class BuilderDefinitionTest extends TestCase
     public function testBuilderImplementsDefinition()
     {
         $builder = new BuilderDefinition();
-        $this->assertInstanceOf('Zend\Di\Definition', $builder);
+        $this->assertInstanceOf('Zend\Di\Definition\Definition', $builder);
     }
     
     public function testBuilderCanBuildClassWithMethods()
@@ -33,10 +33,10 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($definition->hasClass('Foo'));
         $this->assertEquals('__construct', $definition->getInstantiator('Foo'));
         $this->assertContains('Parent', $definition->getClassSupertypes('Foo'));
-        $this->assertTrue($definition->hasInjectionMethods('Foo'));
-        $this->assertTrue($definition->hasInjectionMethod('Foo', 'injectBar'));
-        $this->assertContains('injectBar', $definition->getInjectionMethods('Foo'));
-        $this->assertEquals(array('bar' => array('Bar', false, true)), $definition->getInjectionMethodParameters('Foo', 'injectBar'));
+        $this->assertTrue($definition->hasMethods('Foo'));
+        $this->assertTrue($definition->hasMethod('Foo', 'injectBar'));
+        $this->assertContains('injectBar', $definition->getMethods('Foo'));
+        $this->assertEquals(array('bar' => 'Bar'), $definition->getMethodParameters('Foo', 'injectBar'));
     }
     
     public function testBuilderCanBuildFromArray()
@@ -52,22 +52,22 @@ class BuilderDefinitionTest extends TestCase
         $this->assertTrue($definition->hasClass('My\DbAdapter'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\DbAdapter'));
         $this->assertEquals(
-            array('username' => array(null, false, null), 'password' => array(null, false, null)),
-            $definition->getInjectionMethodParameters('My\DbAdapter', '__construct')
+            array('username' => null, 'password' => null),
+            $definition->getMethodParameters('My\DbAdapter', '__construct')
             );
         
         $this->assertTrue($definition->hasClass('My\Mapper'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Mapper'));
         $this->assertEquals(
-            array('dbAdapter' => array('My\DbAdapter', false, true)),
-            $definition->getInjectionMethodParameters('My\Mapper', '__construct')
+            array('dbAdapter' => 'My\DbAdapter'),
+            $definition->getMethodParameters('My\Mapper', '__construct')
             );
         
         $this->assertTrue($definition->hasClass('My\Repository'));
         $this->assertEquals('__construct', $definition->getInstantiator('My\Repository'));
         $this->assertEquals(
-            array('mapper' => array('My\Mapper', false, true)),
-            $definition->getInjectionMethodParameters('My\Repository', '__construct')
+            array('mapper' => 'My\Mapper'),
+            $definition->getMethodParameters('My\Repository', '__construct')
             );
         
     }
@@ -91,11 +91,11 @@ class BuilderDefinitionTest extends TestCase
             ->addParameter('config', null);
 
         $this->assertTrue($builder->hasClass('Foo'));
-        $this->assertTrue($builder->hasInjectionMethod('Foo', 'setBar'));
-        $this->assertTrue($builder->hasInjectionMethod('Foo', 'setConfig'));
+        $this->assertTrue($builder->hasMethod('Foo', 'setBar'));
+        $this->assertTrue($builder->hasMethod('Foo', 'setConfig'));
 
-        $this->assertEquals(array('bar' => array('Bar', false, true)), $builder->getInjectionMethodParameters('Foo', 'setBar'));
-        $this->assertEquals(array('config' => array(null, false, null)), $builder->getInjectionMethodParameters('Foo', 'setConfig'));
+        $this->assertEquals(array('bar' => 'Bar'), $builder->getMethodParameters('Foo', 'setBar'));
+        $this->assertEquals(array('config' => null), $builder->getMethodParameters('Foo', 'setConfig'));
     }
 
     public function testBuilderCanSpecifyClassToUseWithCreateClass()

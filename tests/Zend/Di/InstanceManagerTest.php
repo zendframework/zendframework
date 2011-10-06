@@ -42,7 +42,32 @@ class InstanceManagerTest extends TestCase
         $this->assertTrue($im->hasProperty('ZendTest\Di\TestAsset\BasicClass', 'foo'));
         $this->assertEquals('bar', $im->getProperty('ZendTest\Di\TestAsset\BasicClass', 'foo')); 
     }
-    
 
+    public function testInstanceManagerCanResolveRecursiveAliases()
+    {
+        $im = new InstanceManager;
+        $im->addAlias('bar', 'baz');
+        $im->addAlias('foo', 'bar');
+        $class = $im->getClassFromAlias('foo');
+        $this->assertEquals('baz', $class);
+    }
     
+    public function testInstanceManagerThrowsExceptionForRecursiveAliases()
+    {
+        $this->setExpectedException('Zend\Di\Exception\RuntimeException');
+        $im = new InstanceManager;
+        $im->addAlias('bar', 'foo');
+        $im->addAlias('foo', 'bar');
+        $class = $im->getClassFromAlias('foo');
+    }
+
+    public function testInstanceManagerResolvesRecursiveAliasesForConfiguration()
+    {
+        $config = array('parameters' => array('foo' => 'bar'), 'methods' => array());
+        $im = new InstanceManager;
+        $im->addAlias('bar', 'baz');
+        $im->addAlias('foo', 'bar');
+        $im->setConfiguration('bar', $config); 
+        $this->assertEquals($im->getConfiguration('foo'), $config);
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace Zend\Code\Scanner;
 
+use Zend\Code\NameInformation;
+
 class ParameterScanner
 {
     protected $isScanned                = false;
@@ -20,14 +22,12 @@ class ParameterScanner
     protected $isPassedByReference      = false;
 
     protected $tokens                   = null;
-    protected $namespace                = null;
-    protected $uses                     = array();
-    
-    public function __construct(array $parameterTokens, $namespace = null, array $uses = array())
+    protected $nameInformation          = null;
+
+    public function __construct(array $parameterTokens, NameInformation $nameInformation = null)
     {
         $this->tokens = $parameterTokens;
-        $this->namespace = $namespace;
-        $this->uses   = $uses;
+        $this->nameInformation = $nameInformation;
     }
     
     public function setDeclaringClass($class)
@@ -60,120 +60,56 @@ class ParameterScanner
         if ($this->isScanned) {
             return;
         }
-        
-        $tokenIndex = 0;
-        $token = $this->tokens[$tokenIndex];
-        
-        if ($token[0] !== T_VARIABLE) {
-            while (true) {
-                if ($token[0] == T_WHITESPACE) {
-                    break;
+
+        $tokens = &$this->tokens;
+
+        reset($tokens);
+
+        SCANNER_TOP:
+
+            $token = current($tokens);
+
+            if (is_string($token)) {
+                // check pass by ref
+                if ($token === '&') {
+                    $this->isPassedByReference = true;
+                    goto SCANNER_CONTINUE;
                 }
-                $this->class .= $token[1];
-                $token = $this->tokens[++$tokenIndex];
-            }
-        }
-        
-        if (strtolower($this->class) == 'array') {
-            $this->isArray = true;
-            $this->class = null;
-        } elseif ($this->class !== null) {
-            
-            $data = (object) array(
-                'namespace' => $this->namespace,
-                'uses'      => $this->uses,
-            );
-            
-            Util::resolveImports($this->class, null, $data);
-            
-            /*
-            $namespace = (($decClassLastSlash = strrpos($this->declaringClass, '\\')) !== false) 
-                       ? substr($this->declaringClass, 0, $decClassLastSlash) 
-                       : null;
-            if ((!$this->uses && !$namespace) || strlen($this->class) <= 0 || $this->class{0} == '\\') {
-                $this->class = ltrim($this->class, '\\');
+                if ($token === '=') {
+                    $this->isOptional = true;
+                    $this->isDefaultValueAvailable = true;
+                    goto SCANNER_CONTINUE;
+                }
             } else {
-                if ($namespace || $this->uses) {
-                    $firstPartEnd = (strpos($this->class, '\\')) ?: strlen($this->class-1);
-                    $firstPart = substr($this->class, 0, $firstPartEnd);
-                    if (array_key_exists($firstPart, $this->uses)) {
-                        $this->class = substr_replace($this->class, $this->uses[$firstPart], 0, $firstPartEnd);
-                    } elseif ($namespace) {
-                        $this->class = $namespace . '\\' . $this->class;
-                    }
+                if ($this->name === null && ($token[0] === T_STRING || $token[0] === T_NS_SEPARATOR)) {
+                    $this->class .= $token[1];
+                    goto SCANNER_CONTINUE;
                 }
+                if ($token[0] === T_VARIABLE) {
+                    $this->name = ltrim($token[1], '$');
+                    goto SCANNER_CONTINUE;
+                }
+
             }
-            */
-        }
-        
-        if ($token[0] == T_WHITESPACE) {
-            $token = $this->tokens[++$tokenIndex];
-        }
-        
-        if (is_string($token) && $token == '&') {
-            $this->isPassedByReference = true;
-            $token = $this->tokens[++$tokenIndex];
-        }
-        
-        // next token is sure a T_VARIABLE
-        $this->name = ltrim($token[1], '$');
-        $token = (isset($this->tokens[++$tokenIndex])) 
-               ? $this->tokens[$tokenIndex] 
-               : null;
-        
-        if (!$token) {
-            $this->isScanned = true;
-            return;
-        }
-        
-        // move past whitespace if it exist
-        if ($token[0] == T_WHITESPACE) {
-            $token = (isset($this->tokens[++$tokenIndex])) 
-                   ? $this->tokens[$tokenIndex] 
-                   : null;
-        }
-        
-        if (!$token) {
-            $this->isScanned = true;
-            return;
-        }
-        
-        if (!(is_string($token) && $token == '=')) {
-            $this->isScanned = true;
-            return;
-        }
-        
-        // get past =
-        $token = $this->tokens[++$tokenIndex];
-        
-        // move past whitespace if it exist
-        if ($token[0] == T_WHITESPACE) {
-            $token = (isset($this->tokens[++$tokenIndex])) 
-                   ? $this->tokens[$tokenIndex] 
-                   : null;
-        }
-        
-        $this->isOptional              = true;
-        $this->isDefaultValueAvailable = true;
-        
-        do {
-            $this->defaultValue .= ((is_array($token)) ? $token[1] : $token);
-            $token = (isset($this->tokens[++$tokenIndex])) 
-                   ? $this->tokens[$tokenIndex] 
-                   : false;
-        } while ($token);
-        
-        if ($this->class) {
-            /*
-            $uses = $this->uses;
-            if ($this->shortInterfaces) {
-                $this->interfaces = $this->shortInterfaces;
-                $data = (object) array('namespace' => $namespace, 'uses' => $uses);
-                array_walk($this->interfaces, array('Zend\Code\Scanner\Util', 'resolveImports'), $data);
+
+            if ($this->name !== null) {
+                $this->defaultValue .= (is_string($token)) ? $token : $token[1];
             }
-            */
+
+
+        SCANNER_CONTINUE:
+
+            if (next($this->tokens) === false) {
+                goto SCANNER_END;
+            }
+            goto SCANNER_TOP;
+
+        SCANNER_END:
+
+        if ($this->class && $this->nameInformation) {
+            $this->class = $this->nameInformation->resolveName($this->class);
         }
-        
+
         $this->isScanned = true;
     }
 	/**

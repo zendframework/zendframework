@@ -11,14 +11,14 @@ class AggregateDirectoryScanner extends DirectoryScanner
 {
     
     protected $isScanned = false;
+
+    /**
+     * @var DirectoryScanner[]
+     */
     protected $scanners = array();
     
-    public function addScanner(Scanner $scanner)
+    public function addScanner(DirectoryScanner $scanner)
     {
-        if (!$scanner instanceof DirectoryScanner && !$scanner instanceof TokenArrayScanner) {
-            throw new Exception\InvalidArgumentException('Not a valid scanner to aggregate');
-        }
-        
         $this->scanners[] = $scanner;
         
         if ($this->isScanned) {
@@ -37,11 +37,16 @@ class AggregateDirectoryScanner extends DirectoryScanner
     public function getIncludes($returnScannerClass = false)
     {}
     
-    public function getClasses($returnScannerClass = false)
+    public function getClasses($returnScannerClass = false, $returnDerivedScannerClass = false)
     {
         $classes = array();
         foreach ($this->scanners as $scanner) {
             $classes += $scanner->getClasses();
+        }
+        if ($returnScannerClass) {
+            foreach ($classes as $index => $class) {
+                $classes[$index] = $this->getClass($class, $returnScannerClass, $returnDerivedScannerClass);
+            }
         }
         return $classes;
     }
@@ -59,7 +64,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
         return (isset($scanner));
     }
     
-    public function getClass($class, $returnScannerClass = 'Zend\Code\Scanner\ClassScanner')
+    public function getClass($class, $returnScannerClass = true, $returnDerivedScannerClass = false)
     {
         foreach ($this->scanners as $scanner) {
             if ($scanner->hasClass($class)) {
@@ -90,15 +95,12 @@ class AggregateDirectoryScanner extends DirectoryScanner
                 }
             }
             return $functions;
-        } else {
-            if ($returnScannerClass === true) {
-                $returnScannerClass = 'Zend\Code\Scanner\FunctionScanner';
-            }
-            $scannerClass = new $returnScannerClass;
-            // @todo
         }
+        $scannerClass = new FunctionScanner();
+        // @todo
     }
-    
+
+    /*
     public static function export()
     {
         // @todo
@@ -108,5 +110,6 @@ class AggregateDirectoryScanner extends DirectoryScanner
     {
         // @todo
     }
+    */
     
 }

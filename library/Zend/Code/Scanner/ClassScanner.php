@@ -3,319 +3,125 @@
 namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
+    Zend\Code\NameInformation,
+    Zend\Code\Annotation\AnnotationManager,
     Zend\Code\Exception;
 
 class ClassScanner implements Scanner
 {
-    protected $isScanned        = false;
+    /**
+     * @var bool
+     */
+    protected $isScanned = false;
 
-    protected $namespace        = null;
-    protected $uses             = array();
-    protected $name             = null;
-    protected $shortName        = null;
-    protected $isFinal          = false;
-    protected $isAbstract       = false;
-    protected $isInterface      = false;
+    /**
+     * @var string
+     */
+    protected $docComment = null;
 
-    protected $parentClass      = null;
+    /**
+     * @var string
+     */
+    protected $name = null;
+
+    /**
+     * @var string
+     */
+    protected $shortName = null;
+
+    /**
+     * @var bool
+     */
+    protected $isFinal = false;
+
+    /**
+     * @var bool
+     */
+    protected $isAbstract = false;
+
+    /**
+     * @var bool
+     */
+    protected $isInterface = false;
+
+    /**
+     * @var string
+     */
+    protected $parentClass = null;
+
+    /**
+     * @var string
+     */
     protected $shortParentClass = null;
 
-    protected $interfaces       = array();
-    protected $shortInterfaces  = array();
+    /**
+     * @var string[]
+     */
+    protected $interfaces = array();
 
-    protected $tokens           = array();
-    protected $infos            = array();
-    
-    public function __construct(array $classTokens, $namespace = null, array $uses = array())
+    /**
+     * @var string[]
+     */
+    protected $shortInterfaces = array();
+
+    /**
+     * @var array
+     */
+    protected $tokens = array();
+
+    /**
+     * @var NameInformation
+     */
+    protected $nameInformation = null;
+
+    /**
+     * @var array[]
+     */
+    protected $infos = array();
+
+    /**
+     * @param array $classTokens
+     * @param NameInformation|null $nameInformation
+     * @param AnnotationManager|null $annotationManager
+     * @return ClassScanner
+     */
+    public function __construct(array $classTokens, NameInformation $nameInformation = null)
     {
-        $this->tokens    = $classTokens;
-        $this->namespace = $namespace;
-        $this->uses      = $uses;
+        $this->tokens            = $classTokens;
+        $this->nameInformation   = $nameInformation;
     }
-    
-    protected function scan()
+
+    public function getAnnotations()
     {
-        if ($this->isScanned) {
-            return;
-        }
-        
-        if (!$this->tokens) {
-            throw new Exception\RuntimeException('No tokens were provided');
-        }
-        
-        for ($tokenIndex = 0; $tokenIndex < count($this->tokens); $tokenIndex++) {
-            $token = $this->tokens[$tokenIndex];
-
-            if (is_string($token)) {
-                continue;
-            }
-            
-            // tokens with some value are arrays (will have a token identifier, & line num)
-            $fastForward = 0;
-            switch ($token[0]) {
-                case T_CLASS:
-                case T_INTERFACE:
-                    $this->scanClassInfo($tokenIndex, $fastForward);
-                    break;
-                
-                case T_CONST:
-                    $this->scanConstant($tokenIndex, $fastForward);
-                    break;
-
-                case T_FINAL:
-                case T_ABSTRACT:
-                    if (!$this->name) {
-                        break;
-                    }
-                case T_PUBLIC:
-                case T_PROTECTED:
-                case T_PRIVATE:
-                case T_STATIC:
-                case T_FUNCTION:
-                case T_VAR:
-                    $subTokenIndex = $tokenIndex;
-                    do {
-                        $subToken = $this->tokens[$subTokenIndex++];
-                    } while (!(is_array($subToken) && $subToken[0] == T_FUNCTION) 
-                             && !(is_string($subToken) && $subToken == ';')
-                    );
-
-                    if (is_array($subToken)) {
-                        $this->scanMethod($tokenIndex, $fastForward);
-                    } else {
-                        $this->scanProperty($tokenIndex, $fastForward);
-                    }
-                    
-                    break;
-            }
-
-            if ($fastForward) {
-                $tokenIndex += $fastForward - 1;
-            }
-        }
-
-        $this->isScanned = true;
+        return array();
     }
-    
-    protected function scanClassInfo($tokenIndex, &$fastForward)
+
+    public function getDocComment()
     {
-        if (isset($this->tokens[$tokenIndex-2]) && is_array($this->tokens[$tokenIndex-2])) {
-            $tokenTwoBack = $this->tokens[$tokenIndex-2];
-        }
-        
-        // T_ABSTRACT & T_FINAL will have been bypassed if no class name, and 
-        // will alwasy be 2 tokens behind T_CLASS
-        $this->isAbstract = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_ABSTRACT));
-        $this->isFinal    = (isset($tokenTwoBack) && ($tokenTwoBack[0] === T_FINAL));
-        
-        $this->isInterface = (is_array($this->tokens[$tokenIndex]) && $this->tokens[$tokenIndex][0] == T_INTERFACE);
-        $this->shortName   = $this->tokens[$tokenIndex+2][1];
-        $this->name        = (($this->namespace) ? $this->namespace . '\\' : '') . $this->shortName;
-        
-        
-        $context        = null;
-        $interfaceIndex = 0;
-
-        while (true) {
-            $fastForward++;
-            $tokenIndex++;
-            $token = $this->tokens[$tokenIndex];
-            
-            // BREAK ON
-            if (is_string($token) && $token == '{') {
-                break;
-            }
-            
-            // ANALYZE
-            if (is_string($token) && $context == T_IMPLEMENTS && $token == ',') {
-                $interfaceIndex++;
-                $this->shortInterfaces[$interfaceIndex] = '';
-            }
-            
-            if (is_array($token)) {
-                if ($token[0] == T_NS_SEPARATOR || $token[0] == T_STRING) {
-                    if ($context == T_EXTENDS) {
-                        $this->shortParentClass .= $token[1];
-                    } elseif ($context == T_IMPLEMENTS) {
-                        $this->shortInterfaces[$interfaceIndex] .= $token[1];
-                    }
-                }
-                if ($token[0] == T_EXTENDS && !$this->isInterface) {
-                    $context = T_EXTENDS;
-                    $this->shortParentClass = '';
-                }
-                if ($token[0] == T_IMPLEMENTS || ($this->isInterface && $token[0] == T_EXTENDS)) {
-                    $context = T_IMPLEMENTS;
-                    $this->shortInterfaces[$interfaceIndex] = '';
-                }
-            }
-
-        }
-        
-        $data = (object) array(
-            'namespace' => $this->namespace,
-            'uses'      => $this->uses,
-        );
-
-        if ($this->shortInterfaces) {
-            $this->interfaces = $this->shortInterfaces;
-            array_walk($this->interfaces, array('Zend\Code\Scanner\Util', 'resolveImports'), $data);
-        }
-        
-        if ($this->shortParentClass) {
-            $this->parentClass = $this->shortParentClass;
-            Util::resolveImports($this->parentClass, null, $data);
-        }
-
+        $this->scan();
+        return $this->docComment;
     }
-    
-    protected function scanConstant($tokenIndex, &$fastForward)
+
+    public function getDocBlock()
     {
-        $info = array(
-            'type'       => 'constant',
-            'tokenStart' => $tokenIndex,
-            'tokenEnd'   => null,
-            'lineStart'  => $this->tokens[$tokenIndex][2],
-            'lineEnd'    => null,
-            'name'       => null,
-            'value'	     => null,
-        );
-            
-        while (true) {
-            $fastForward++;
-            $tokenIndex++;
-            $token = $this->tokens[$tokenIndex];
-            
-            // BREAK ON
-            if (is_string($token) && $token == ';') {
-                break;
-            }
-            
-            if ((is_array($token) && $token[0] == T_WHITESPACE) 
-                || (is_string($token) && $token == '=')
-            ) {
-                continue;
-            }
+        if (!$docComment = $this->getDocComment()) {
+            return false;
+        }
+        return new DocBlockScanner($docComment);
+    }
 
-            $info['value'] .= (is_array($token)) ? $token[1] : $token;
-            
-            if (is_array($token)) {
-                $info['lineEnd'] = $token[2];
-            }
-            
-        }
-        
-        $info['tokenEnd'] = $tokenIndex;
-        $this->infos[] = $info;
-    }
-    
-    protected function scanMethod($tokenIndex, &$fastForward)
-    {
-        $info = array(
-        	'type'        => 'method',
-            'tokenStart'  => $tokenIndex,
-            'tokenEnd'    => null,
-            'lineStart'   => $this->tokens[$tokenIndex][2],
-            'lineEnd'     => null,
-            'name'        => null,
-        );
-        
-        // start on first token, not second
-        $fastForward--;
-        $tokenIndex--;
-            
-        $braceCount = 0;
-        while (true) {
-            
-            $fastForward++;
-            $tokenIndex++;
-            if (!isset($this->tokens[$tokenIndex])) {
-                break;
-            }
-            $token = $this->tokens[$tokenIndex];
-            
-            // BREAK ON
-            if (is_string($token) && $token == '}' && $braceCount == 1) {
-                break;
-            }
-            
-            // ANALYZE
-            if (is_string($token)) {
-                if ($token == '{') {
-                    $braceCount++;
-                }
-                if ($token == '}') {
-                    $braceCount--;
-                }
-            }
-            
-            if ($info['name'] === null && $token[0] === T_FUNCTION) {
-                // next token after T_WHITESPACE is name
-                $info['name'] = $this->tokens[$tokenIndex+2][1];
-                continue;
-            }
-            
-            if (is_array($token)) {
-                $info['lineEnd'] = $token[2];
-            }
-            
-        }
-        
-        $info['tokenEnd'] = $tokenIndex;
-        $this->infos[]    = $info;
-    }
-    
-    protected function scanProperty($tokenIndex, &$fastForward)
-    {
-        $info = array(
-        	'type'        => 'property',
-            'tokenStart'  => $tokenIndex,
-            'tokenEnd'    => null,
-            'lineStart'   => $this->tokens[$tokenIndex][2],
-            'lineEnd'     => null,
-            'name'        => null,
-        );
-        
-        $index = $tokenIndex;
-
-        while (true) {
-            $fastForward++;
-            $tokenIndex++;
-            $token = $this->tokens[$tokenIndex];
-            
-            // BREAK ON
-            if (is_string($token) && $token = ';') {
-                break;
-            }
-            
-            // ANALYZE
-            if ($token[0] === T_VARIABLE) {
-                $info['name'] = ltrim($token[1], '$');
-                continue;
-            }
-            
-            if (is_array($token)) {
-                $info['lineEnd'] = $token[2];
-            }
-            
-        }
-        
-        $info['tokenEnd'] = $index;
-        $this->infos[]    = $info;
-    }
-    
     public function getName()
     {
         $this->scan();
         return $this->name;
     }
-    
+
     public function getShortName()
     {
         $this->scan();
         return $this->shortName;
     }
-    
+
     public function isFinal()
     {
         $this->scan();
@@ -327,13 +133,13 @@ class ClassScanner implements Scanner
         $this->scan();
         return (!$this->isAbstract && !$this->isInterface);
     }
-    
+
     public function isAbstract()
     {
         $this->scan();
         return $this->isAbstract;
     }
-    
+
     public function isInterface()
     {
         $this->scan();
@@ -345,25 +151,25 @@ class ClassScanner implements Scanner
         $this->scan();
         return ($this->parentClass != null);
     }
-    
+
     public function getParentClass()
     {
         $this->scan();
         return $this->parentClass;
     }
-    
+
     public function getInterfaces()
     {
         $this->scan();
         return $this->interfaces;
     }
-    
+
     public function getConstants()
     {
         $this->scan();
-        
+
         $return = array();
-        
+
         foreach ($this->infos as $info) {
             if ($info['type'] != 'constant') {
                 continue;
@@ -372,13 +178,13 @@ class ClassScanner implements Scanner
         }
         return $return;
     }
-    
+
     public function getProperties($returnScannerProperty = false)
     {
         $this->scan();
-        
+
         $return = array();
-        
+
         foreach ($this->infos as $info) {
             if ($info['type'] != 'property') {
                 continue;
@@ -387,18 +193,18 @@ class ClassScanner implements Scanner
             if (!$returnScannerProperty) {
                 $return[] = $info['name'];
             } else {
-                $return[] = $this->getClass($info['name'], $returnScannerProperty);
+                $return[] = $this->getProperty($info['name']);
             }
         }
         return $return;
     }
-    
+
     public function getMethods($returnScannerMethod = false)
     {
         $this->scan();
-        
+
         $return = array();
-        
+
         foreach ($this->infos as $info) {
             if ($info['type'] != 'method') {
                 continue;
@@ -407,38 +213,20 @@ class ClassScanner implements Scanner
             if (!$returnScannerMethod) {
                 $return[] = $info['name'];
             } else {
-                $return[] = $this->getMethod($info['name'], $returnScannerMethod);
+                $return[] = $this->getMethod($info['name']);
             }
         }
         return $return;
     }
-    
+
     /**
      * @param string|int $methodNameOrInfoIndex
-     * @param string $returnScannerClass
-     * @return Zend\Code\Scanner\MethodScanner
+     * @return MethodScanner
      */
-    public function getMethod($methodNameOrInfoIndex, $returnScannerClass = 'Zend\Code\Scanner\MethodScanner')
+    public function getMethod($methodNameOrInfoIndex)
     {
         $this->scan();
-        
-        // process the class requested
-        // Static for performance reasons
-        static $baseScannerClass = 'Zend\Code\Scanner\MethodScanner';
-        if ($returnScannerClass !== $baseScannerClass) {
-            if (!is_string($returnScannerClass)) {
-                $returnScannerClass = $baseScannerClass;
-            }
-            $returnScannerClass = ltrim($returnScannerClass, '\\');
-            if ($returnScannerClass !== $baseScannerClass 
-                && !is_subclass_of($returnScannerClass, $baseScannerClass)
-            ) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Class must be or extend "%s"', $baseScannerClass
-                ));
-            }
-        }
-        
+
         if (is_int($methodNameOrInfoIndex)) {
             $info = $this->infos[$methodNameOrInfoIndex];
             if ($info['type'] != 'method') {
@@ -457,22 +245,22 @@ class ClassScanner implements Scanner
             }
         }
         if (!isset($info)) {
-            die();
+            // @todo find a way to test this
+            die('Massive Failure, test this');
         }
-        $m = new $returnScannerClass(
+        $m = new MethodScanner(
             array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
-            $this->namespace,
-            $this->uses
+            $this->nameInformation
             );
         $m->setClass($this->name);
         $m->setScannerClass($this);
         return $m;
     }
-    
+
     public function hasMethod($name)
     {
         $this->scan();
-        
+
         foreach ($this->infos as $infoIndex => $info) {
             if ($info['type'] === 'method' && $info['name'] === $name) {
                 return true;
@@ -480,15 +268,348 @@ class ClassScanner implements Scanner
         }
         return false;
     }
-    
+
     public static function export()
     {
         // @todo
     }
-    
+
     public function __toString()
     {
         // @todo
     }
-    
+
+    protected function scan()
+    {
+        if ($this->isScanned) {
+            return;
+        }
+
+        if (!$this->tokens) {
+            throw new Exception\RuntimeException('No tokens were provided');
+        }
+
+        /**
+         * Variables & Setup
+         */
+
+        $tokens          = &$this->tokens; // localize
+        $infos           = &$this->infos;  // localize
+        $tokenIndex      = null;
+        $token           = null;
+        $tokenType       = null;
+        $tokenContent    = null;
+        $tokenLine       = null;
+        $namespace       = null;
+        $infoIndex       = 0;
+        $braceCount      = 0;
+
+        /**
+         * MACRO creation
+         */
+
+        $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+            $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex+1;
+            if (!isset($tokens[$tokenIndex])) {
+                $token        = false;
+                $tokenContent = false;
+                $tokenType    = false;
+                $tokenLine    = false;
+                return false;
+            }
+            $token = $tokens[$tokenIndex];
+            if (is_string($token)) {
+                $tokenType = null;
+                $tokenContent = $token;
+            } else {
+                list($tokenType, $tokenContent, $tokenLine) = $token;
+            }
+            return $tokenIndex;
+        };
+        $MACRO_INFO_ADVANCE = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
+            $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
+            $infos[$infoIndex]['lineEnd'] = $tokenLine;
+            $infoIndex++;
+            return $infoIndex;
+        };
+
+
+        /**
+         * START FINITE STATE MACHINE FOR SCANNING TOKENS
+         */
+
+        // Initialize token
+        $MACRO_TOKEN_ADVANCE();
+
+        SCANNER_TOP:
+
+            switch ($tokenType) {
+
+                case T_DOC_COMMENT:
+
+                    $this->docComment = $tokenContent;
+                    goto SCANNER_CONTINUE;
+
+                case T_FINAL:
+                case T_ABSTRACT:
+                case T_CLASS:
+                case T_INTERFACE:
+
+                    // CLASS INFORMATION
+
+                    $classContext = null;
+                    $classInterfaceIndex = 0;
+
+                    SCANNER_CLASS_INFO_TOP:
+
+                        if (is_string($tokens[$tokenIndex+1]) && $tokens[$tokenIndex+1] === '{') {
+                            goto SCANNER_CLASS_INFO_END;
+                        }
+
+                        switch ($tokenType) {
+
+                            case T_FINAL:
+                                $this->isFinal = true;
+                                goto SCANNER_CLASS_INFO_CONTINUE;
+
+                            case T_ABSTRACT:
+                                $this->isAbstract = true;
+                                goto SCANNER_CLASS_INFO_CONTINUE;
+
+                            case T_INTERFACE:
+                                $this->isInterface = true;
+                            case T_CLASS:
+                                $this->shortName = $tokens[$tokenIndex+2][1];
+                                if ($this->nameInformation && $this->nameInformation->hasNamespace()) {
+                                    $this->name = $this->nameInformation->getNamespace() . '\\' . $this->shortName;
+                                } else {
+                                    $this->name = $this->shortName;
+                                }
+                                goto SCANNER_CLASS_INFO_CONTINUE;
+
+                            case T_NS_SEPARATOR:
+                            case T_STRING:
+                                switch ($classContext) {
+                                    case T_EXTENDS:
+                                        $this->shortParentClass .= $tokenContent;
+                                        break;
+                                    case T_IMPLEMENTS:
+                                        $this->shortInterfaces[$classInterfaceIndex] .= $tokenContent;
+                                        break;
+                                }
+                                goto SCANNER_CLASS_INFO_CONTINUE;
+
+                            case T_EXTENDS:
+                            case T_IMPLEMENTS:
+                                $classContext = $tokenType;
+                                if (($this->isInterface && $classContext === T_EXTENDS) || $classContext === T_IMPLEMENTS) {
+                                    $this->shortInterfaces[$classInterfaceIndex] = '';
+                                } elseif (!$this->isInterface && $classContext === T_EXTENDS) {
+                                    $this->shortParentClass = '';
+                                }
+                                goto SCANNER_CLASS_INFO_CONTINUE;
+
+                            case null:
+                                if ($classContext == T_IMPLEMENTS && $tokenContent == ',') {
+                                    $classInterfaceIndex++;
+                                    $this->shortInterfaces[$classInterfaceIndex] = '';
+                                }
+
+                        }
+
+                    SCANNER_CLASS_INFO_CONTINUE:
+
+                        if ($MACRO_TOKEN_ADVANCE() === false) {
+                            goto SCANNER_END;
+                        }
+                        goto SCANNER_CLASS_INFO_TOP;
+
+                    SCANNER_CLASS_INFO_END:
+
+                        goto SCANNER_CONTINUE;
+
+            }
+
+            if ($tokenType === null && $tokenContent === '{' && $braceCount === 0) {
+
+                $braceCount++;
+                if ($MACRO_TOKEN_ADVANCE() === false) {
+                    goto SCANNER_END;
+                }
+
+                SCANNER_CLASS_BODY_TOP:
+
+                    if ($braceCount === 0) {
+                        goto SCANNER_CLASS_BODY_END;
+                    }
+
+                    switch ($tokenType) {
+
+                        case T_CONST:
+
+                            $infos[$infoIndex] = array(
+                                'type'       => 'constant',
+                                'tokenStart' => $tokenIndex,
+                                'tokenEnd'   => null,
+                                'lineStart'  => $tokenLine,
+                                'lineEnd'    => null,
+                                'name'       => null,
+                                'value'	     => null,
+                            );
+
+                            SCANNER_CLASS_BODY_CONST_TOP:
+
+                                if ($tokenContent === ';') {
+                                    goto SCANNER_CLASS_BODY_CONST_END;
+                                }
+                                
+                                if ($tokenType === T_STRING) {
+                                    $infos[$infoIndex]['name'] = $tokenContent;
+                                }
+
+                            SCANNER_CLASS_BODY_CONST_CONTINUE:
+
+                                if ($MACRO_TOKEN_ADVANCE() === false) {
+                                    goto SCANNER_END;
+                                }
+                                goto SCANNER_CLASS_BODY_CONST_TOP;
+
+                            SCANNER_CLASS_BODY_CONST_END:
+
+                                $MACRO_INFO_ADVANCE();
+                                goto SCANNER_CLASS_BODY_CONTINUE;
+
+                        case T_DOC_COMMENT:
+                        case T_PUBLIC:
+                        case T_PROTECTED:
+                        case T_PRIVATE:
+                        case T_ABSTRACT:
+                        case T_FINAL:
+                        case T_VAR:
+                        case T_FUNCTION:
+
+                            $infos[$infoIndex] = array(
+                                'type'        => null,
+                                'tokenStart'  => $tokenIndex,
+                                'tokenEnd'    => null,
+                                'lineStart'   => $tokenLine,
+                                'lineEnd'     => null,
+                                'name'        => null,
+                            );
+
+                            $memberContext = null;
+                            $methodBodyStarted = false;
+
+                            SCANNER_CLASS_BODY_MEMBER_TOP:
+
+                                if ($memberContext === 'method') {
+                                    switch ($tokenContent) {
+                                        case '{':
+                                            $methodBodyStarted = true;
+                                            $braceCount++;
+                                            goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
+                                        case '}':
+                                            $braceCount--;
+                                            goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
+                                    }
+                                }
+
+                                if ($memberContext !== null) {
+                                    if (
+                                        ($memberContext === 'property' && $tokenContent === ';')
+                                        || ($memberContext === 'method' && $methodBodyStarted && $braceCount === 1)
+                                        || ($memberContext === 'method' && $this->isInterface && $tokenContent === ';')
+                                    ) {
+                                        goto SCANNER_CLASS_BODY_MEMBER_END;
+                                    }
+                                }
+
+                                switch ($tokenType) {
+
+                                    case T_VARIABLE:
+                                        if ($memberContext === null) {
+                                            $memberContext = 'property';
+                                            $infos[$infoIndex]['type'] = 'property';
+                                            $infos[$infoIndex]['name'] = ltrim($tokenContent, '$');
+                                        }
+                                        goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
+
+                                    case T_FUNCTION:
+                                        $memberContext = 'method';
+                                        $infos[$infoIndex]['type'] = 'method';
+                                        goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
+
+                                    case T_STRING:
+                                        if ($memberContext === 'method' && $infos[$infoIndex]['name'] === null) {
+                                            $infos[$infoIndex]['name'] = $tokenContent;
+                                        }
+                                        goto SCANNER_CLASS_BODY_MEMBER_CONTINUE;
+                                }
+
+                            SCANNER_CLASS_BODY_MEMBER_CONTINUE:
+
+                                if ($MACRO_TOKEN_ADVANCE() === false) {
+                                    goto SCANNER_END;
+                                }
+                                goto SCANNER_CLASS_BODY_MEMBER_TOP;
+
+                            SCANNER_CLASS_BODY_MEMBER_END:
+
+                                $MACRO_INFO_ADVANCE();
+                                goto SCANNER_CLASS_BODY_CONTINUE;
+
+                        case null: // no type, is a string
+                            
+                            switch ($tokenContent) {
+                                case '{':
+                                    $braceCount++;
+                                    goto SCANNER_CLASS_BODY_CONTINUE;
+                                case '}':
+                                    $braceCount--;
+                                    goto SCANNER_CLASS_BODY_CONTINUE;
+                            }
+                    }
+
+                SCANNER_CLASS_BODY_CONTINUE:
+
+                    if ($MACRO_TOKEN_ADVANCE() === false) {
+                        goto SCANNER_END;
+                    }
+                    goto SCANNER_CLASS_BODY_TOP;
+
+                SCANNER_CLASS_BODY_END:
+
+                    goto SCANNER_CONTINUE;
+
+            }
+
+        SCANNER_CONTINUE:
+        
+            if ($MACRO_TOKEN_ADVANCE() === false) {
+                goto SCANNER_END;
+            }
+            goto SCANNER_TOP;
+
+        SCANNER_END:
+
+
+        // process short names
+        if ($this->nameInformation) {
+            if ($this->shortParentClass) {
+                $this->parentClass = $this->nameInformation->resolveName($this->shortParentClass);
+            }
+            if ($this->shortInterfaces) {
+                foreach ($this->shortInterfaces as $siIndex => $si) {
+                    $this->interfaces[$siIndex] = $this->nameInformation->resolveName($si);
+                }
+            }
+        } else {
+            $this->parentClass = $this->shortParentClass;
+            $this->interfaces = $this->shortInterfaces;
+        }
+
+        $this->isScanned = true;
+        return;
+    }
+
 }

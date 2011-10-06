@@ -2,10 +2,10 @@
 
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Di\DependencyInjector,
+use Zend\Di\Di,
     Zend\Di\Exception;
 
-class DependencyInjectorProxy extends DependencyInjector
+class DependencyInjectorProxy extends Di
 {
     /**
      * @var DependencyInjector
@@ -16,7 +16,7 @@ class DependencyInjectorProxy extends DependencyInjector
      * @param DependencyInjector $di 
      * @return void
      */
-    public function __construct(DependencyInjector $di)
+    public function __construct(Di $di)
     {
         $this->di              = $di;
         $this->definition      = $di->getDefinition();

@@ -3,16 +3,17 @@
 namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
-    Zend\Code\Exception;
+    Zend\Code\NameInformation,
+    Zend\Code\Exception,
+    Zend\Code\Annotation;
 
 class MethodScanner implements Scanner
 {
     protected $isScanned    = false;
 
+    protected $docComment   = null;
     protected $scannerClass = null;
     protected $class        = null;
-    protected $namespace    = null;
-    protected $uses         = array();
     protected $name         = null;
     protected $isFinal      = false;
     protected $isAbstract   = false;
@@ -22,13 +23,13 @@ class MethodScanner implements Scanner
     protected $isStatic     = false;
 
     protected $tokens       = array();
+    protected $nameInformation = null;
     protected $infos        = array();
     
-    public function __construct(array $methodTokens, $namespace = null, array $uses = array())
+    public function __construct(array $methodTokens, NameInformation $nameInformation = null)
     {
         $this->tokens = $methodTokens;
-        $this->namespace = $namespace;
-        $this->uses = $uses;
+        $this->nameInformation = $nameInformation;
     }
     
     public function setClass($class)
@@ -46,165 +47,30 @@ class MethodScanner implements Scanner
         return $this->scannerClass;
     }
     
-    protected function scan()
-    {
-        if ($this->isScanned) {
-            return;
-        }
-
-        if (!$this->tokens) {
-            throw new Exception\RuntimeException('No tokens were provided');
-        }
-
-        $fastForward = 0;
-        $tokenIndex  = 0;
-
-        $this->scanMethodInfo($tokenIndex, $fastForward);
-
-        if ($fastForward) {
-            $tokenIndex += $fastForward - 1;
-            $fastForward = 0;
-        }
-        
-        // advance to first paren
-        while ($this->tokens[$tokenIndex] != '(') {
-            $tokenIndex++;
-        }
-        
-        $this->scanParameters($tokenIndex, $fastForward);
-        
-        $this->isScanned = true;
-    }
-    
-    protected function scanMethodInfo($tokenIndex, &$fastForward)
-    {
-        while (true) {
-            $token = $this->tokens[$tokenIndex];
-            
-            // BREAK ON
-            if (is_string($token) && $token == '(') {
-                break;
-            }
-            
-            // ANALYZE
-            if (is_string($token)) {
-                continue;
-            }
-            
-            switch ($token[0]) {
-                case T_FINAL:
-                    $this->isFinal = true;
-                    continue;
-
-                case T_ABSTRACT:
-                    $this->isAbstract = true;
-                    continue;
-
-                case T_PUBLIC:
-                    continue;
-
-                case T_PROTECTED:
-                    $this->isProtected = true;
-                    $this->isPublic = false;
-                    continue;
-
-                case T_PRIVATE:
-                    $this->isPrivate = true;
-                    $this->isPublic = false;
-                    continue;
-
-                case T_STATIC:
-                    $this->isStatic = true;
-                    continue;
-
-                case T_STRING:
-                    $this->name = $token[1];
-                    continue;
-            }
-            
-            $fastForward++;
-            $tokenIndex++;
-        }
-    }
-    
-    protected function scanParameters($tokenIndex, &$fastForward)
-    {
-        // first token is paren let loop increase
-        $parenCount = 1;
-        $info       = null;
-        $position   = 0;
-        
-        while (true) {
-            $tokenIndex++;
-            $fastForward++;
-            $token = $this->tokens[$tokenIndex];
-            
-            // BREAK ON
-            if ($parenCount == 1 && is_string($token) && $token == ')') {
-                if ($info) {
-                    $info['tokenEnd'] = $tokenIndex - 1;
-                    $this->infos[] = $info;
-                }
-                break;
-            }
-            
-            // ANALYZE
-                    
-            // gather line information if we can
-            if (!isset($info)) {
-                $info = array(
-                	'type'        => 'parameter',
-                    'tokenStart'  => $tokenIndex,
-                    'tokenEnd'    => null,
-                    'lineStart'   => $token[2],
-                    'lineEnd'     => $token[2],
-                    'name'        => null,
-                    'position'    => ++$position,
-                );
-            }
-            
-            if (is_array($token) && isset($info)) {
-                $info['lineEnd'] = $token[2];
-            }
-            
-            if (is_array($token) && $token[0] === T_WHITESPACE) {
-                continue;
-            }
-            
-            if (is_string($token)) {
-                if ($token == '(') {
-                    $parenCount++;
-                }
-                if ($token == ')') {
-                    $parenCount--;
-                }
-                
-                if ($parenCount !== 1) {
-                    continue;
-                }
-                
-            }
-            
-            if (isset($info) && is_string($token) && $token == ',') {
-                $info['tokenEnd'] = $tokenIndex - 1;
-                $this->infos[]    = $info;
-                unset($info);
-            }
-
-            if (is_array($token) && $token[0] === T_VARIABLE) {
-                $info['name'] = ltrim($token[1], '$');
-            }
-            
-        }
-        
-    }
-    
     public function getName()
     {
         $this->scan();
         return $this->name;
     }
-    
+
+    public function getDocComment()
+    {
+        $this->scan();
+        return $this->docComment;
+    }
+
+    /**
+     * @return AnnotationCollection
+     */
+    public function getAnnotations(Annotation\AnnotationManager $annotationManager)
+    {
+        if (($docComment = $this->getDocComment()) == '') {
+            return false;
+        }
+
+        return new AnnotationScanner($annotationManager, $docComment, $this->nameInformation);
+    }
+
     public function isFinal()
     {
         $this->scan();
@@ -249,7 +115,7 @@ class MethodScanner implements Scanner
     public function getParameters($returnScanner = false)
     {
         $this->scan();
-        
+
         $return = array();
 
         foreach ($this->infos as $info) {
@@ -260,55 +126,36 @@ class MethodScanner implements Scanner
             if (!$returnScanner) {
                 $return[] = $info['name'];
             } else {
-                $return[] = $this->getParameter($info['name'], $returnScanner);
+                $return[] = $this->getParameter($info['name']);
             }
         }
         return $return;
     }
     
-    public function getParameter($parameterNameOrInfoIndex, $returnScanner = 'Zend\Code\Scanner\ParameterScanner')
+    public function getParameter($parameterNameOrInfoIndex)
     {
         $this->scan();
-        
-        // process the class requested
-        // Static for performance reasons
-        static $baseScannerClass = 'Zend\Code\Scanner\ParameterScanner';
-        if ($returnScanner !== $baseScannerClass) {
-            if (!is_string($returnScanner)) {
-                $returnScanner = $baseScannerClass;
-            }
-            $returnScanner = ltrim($returnScanner, '\\');
-            if ($returnScanner !== $baseScannerClass 
-                && !is_subclass_of($returnScanner, $baseScannerClass)
-            ) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Class must be or extend "%s"', $baseScannerClass
-                ));
-            }
-        }
-        
+
         if (is_int($parameterNameOrInfoIndex)) {
             $info = $this->infos[$parameterNameOrInfoIndex];
             if ($info['type'] != 'parameter') {
                 throw new Exception\InvalidArgumentException('Index of info offset is not about a parameter');
             }
         } elseif (is_string($parameterNameOrInfoIndex)) {
-            $methodFound = false;
             foreach ($this->infos as $infoIndex => $info) {
                 if ($info['type'] === 'parameter' && $info['name'] === $parameterNameOrInfoIndex) {
-                    $methodFound = true;
                     break;
                 }
+                unset($info);
             }
-            if (!$methodFound) {
-                return false;
+            if (!isset($info)){
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a parameter');
             }
         }
-        
-        $p = new $returnScanner(
-            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
-            $this->namespace,
-            $this->uses
+
+        $p = new ParameterScanner(
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart']),
+            $this->nameInformation
             );
         $p->setDeclaringFunction($this->name);
         $p->setDeclaringScannerFunction($this);
@@ -328,5 +175,168 @@ class MethodScanner implements Scanner
         $this->scan();
         return var_export($this, true);
     }
-    
+
+    protected function scan()
+    {
+        if ($this->isScanned) {
+            return;
+        }
+
+        if (!$this->tokens) {
+            throw new Exception\RuntimeException('No tokens were provided');
+        }
+
+        /**
+         * Variables & Setup
+         */
+
+        $tokens          = &$this->tokens; // localize
+        $infos           = &$this->infos;  // localize
+        $tokenIndex      = null;
+        $token           = null;
+        $tokenType       = null;
+        $tokenContent    = null;
+        $tokenLine       = null;
+        $infoIndex       = 0;
+        $parenCount      = 0;
+
+        /**
+         * MACRO creation
+         */
+
+        $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+            $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex+1;
+            if (!isset($tokens[$tokenIndex])) {
+                $token        = false;
+                $tokenContent = false;
+                $tokenType    = false;
+                $tokenLine    = false;
+                return false;
+            }
+            $token = $tokens[$tokenIndex];
+            if (is_string($token)) {
+                $tokenType = null;
+                $tokenContent = $token;
+            } else {
+                list($tokenType, $tokenContent, $tokenLine) = $token;
+            }
+            return $tokenIndex;
+        };
+        $MACRO_INFO_START = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
+            $infos[$infoIndex] = array(
+                'type'        => 'parameter',
+                'tokenStart'  => $tokenIndex,
+                'tokenEnd'    => null,
+                'lineStart'   => $tokenLine,
+                'lineEnd'     => $tokenLine,
+                'name'        => null,
+                'position'    => $infoIndex + 1, // position is +1 of infoIndex
+            );
+        };
+        $MACRO_INFO_ADVANCE = function() use (&$infoIndex, &$infos, &$tokenIndex, &$tokenLine) {
+            $infos[$infoIndex]['tokenEnd'] = $tokenIndex;
+            $infos[$infoIndex]['lineEnd'] = $tokenLine;
+            $infoIndex++;
+            return $infoIndex;
+        };
+
+        /**
+         * START FINITE STATE MACHINE FOR SCANNING TOKENS
+         */
+
+        // Initialize token
+        $MACRO_TOKEN_ADVANCE();
+
+        SCANNER_TOP:
+
+            switch ($tokenType) {
+                case T_DOC_COMMENT:
+                    if ($this->docComment === null && $this->name === null) {
+                        $this->docComment = $tokenContent;
+                    }
+                    goto SCANNER_CONTINUE;
+
+                case T_FINAL:
+                    $this->isFinal = true;
+                    goto SCANNER_CONTINUE;
+
+                case T_ABSTRACT:
+                    $this->isAbstract = true;
+                    goto SCANNER_CONTINUE;
+
+                case T_PUBLIC:
+                    // use defaults
+                    goto SCANNER_CONTINUE;
+
+                case T_PROTECTED:
+                    $this->isProtected = true;
+                    $this->isPublic = false;
+                    goto SCANNER_CONTINUE;
+
+                case T_PRIVATE:
+                    $this->isPrivate = true;
+                    $this->isPublic = false;
+                    goto SCANNER_CONTINUE;
+
+                case T_STATIC:
+                    $this->isStatic = true;
+                    goto SCANNER_CONTINUE;
+
+                case T_VARIABLE:
+                case T_STRING:
+
+                    if ($tokenType === T_STRING && $parenCount === 0) {
+                        $this->name = $tokenContent;
+                    }
+                    
+                    if ($parenCount === 1) {
+                        if (!isset($infos[$infoIndex])) {
+                            $MACRO_INFO_START();
+                        }
+                        if ($tokenType === T_VARIABLE) {
+                            $infos[$infoIndex]['name'] = ltrim($tokenContent, '$');
+                        }
+                    }
+
+                    goto SCANNER_CONTINUE;
+
+                case null:
+
+                    switch ($tokenContent) {
+                        case '&':
+                            if (!isset($infos[$infoIndex])) {
+                                $MACRO_INFO_START();
+                            }
+                            goto SCANNER_CONTINUE;
+                        case '(':
+                            $parenCount++;
+                            goto SCANNER_CONTINUE;
+                        case ')':
+                            $parenCount--;
+                            if ($parenCount === 0) {
+                                $MACRO_INFO_ADVANCE();
+                                goto SCANNER_END;
+                            }
+                            goto SCANNER_CONTINUE;
+                        case ',':
+                            if ($parenCount === 1) {
+                                $MACRO_INFO_ADVANCE();
+                            }
+                            goto SCANNER_CONTINUE;
+                    }
+            }
+
+        SCANNER_CONTINUE:
+
+            if ($MACRO_TOKEN_ADVANCE() === false) {
+                goto SCANNER_END;
+            }
+            goto SCANNER_TOP;
+
+        SCANNER_END:
+
+        $this->isScanned = true;
+        return;
+    }
+
 }

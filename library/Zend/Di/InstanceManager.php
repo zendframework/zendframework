@@ -160,10 +160,20 @@ class InstanceManager /* implements InstanceCollection */
      */
     public function getClassFromAlias($alias)
     {
-        if (isset($this->aliases[$alias])) {
-            return $this->aliases[$alias];
+        if (!isset($this->aliases[$alias])) {
+            return false;
         }
-        return false;
+        $r = 0;
+        while (isset($this->aliases[$alias])) {
+            $alias = $this->aliases[$alias];
+            $r++;
+            if ($r > 100) {
+                throw new Exception\RuntimeException(
+                    sprintf('Possible infinite recursion in DI alias! Max recursion of 100 levels reached at alias "%s".', $alias)
+                );
+            }
+        }
+        return $alias;
     }
     
 
@@ -191,7 +201,7 @@ class InstanceManager /* implements InstanceCollection */
     
     public function hasConfiguration($aliasOrClass)
     {
-        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $aliasOrClass : $aliasOrClass;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (!isset($this->configurations[$key])) {
             return false;
         }
@@ -203,22 +213,19 @@ class InstanceManager /* implements InstanceCollection */
     
     public function setConfiguration($aliasOrClass, array $configuration, $append = false)
     {
-        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $aliasOrClass : $aliasOrClass;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
+        
         if (!isset($this->configurations[$key])) {
             $this->configurations[$key] = $this->configurationTemplate;
         }
-        if (isset($configuration['parameters'])) {
-            if (!$append && $this->configurations[$key]['parameters']) {
-                $this->configurations[$key]['parameters'] = array();
-            }
-            $this->configurations[$key]['parameters'] += $configuration['parameters'];
-        }
-        if (isset($configuration['injections'])) {
-            if (!$append && $this->configurations[$key]['injections']) {
-                $this->configurations[$key]['injections'] = array();
-            }
-            $this->configurations[$key]['injections'] += $configuration['injections'];
-        }
+
+        // Ignore anything but 'parameters' and 'injections'
+        $configuration = array(
+            'parameters' => $configuration['parameters'],
+            'injections' => $configuration['injections'],
+        );
+
+        $this->configurations[$key] = array_replace_recursive($this->configurations[$key], $configuration);
     }
 
     public function getClasses()
@@ -233,7 +240,7 @@ class InstanceManager /* implements InstanceCollection */
 
     public function getConfiguration($aliasOrClass)
     {
-        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $aliasOrClass : $aliasOrClass;
+        $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $this->getBaseAlias($aliasOrClass) : $aliasOrClass;
         if (isset($this->configurations[$key])) {
             return $this->configurations[$key];            
         } else {
@@ -346,6 +353,27 @@ class InstanceManager /* implements InstanceCollection */
             }
         }
         return $hashValue;
+    }
+
+    public function getBaseAlias($alias)
+    {
+        if (!$this->hasAlias($alias)) {
+            return false;
+        }
+
+        $lastAlias = false;
+        $r = 0;
+        while (isset($this->aliases[$alias])) {
+            $lastAlias = $alias;
+            $alias = $this->aliases[$alias];
+            $r++;
+            if ($r > 100) {
+                throw new Exception\RuntimeException(
+                    sprintf('Possible infinite recursion in DI alias! Max recursion of 100 levels reached at alias "%s".', $alias)
+                );
+            }
+        }
+        return $lastAlias;
     }
     
 }

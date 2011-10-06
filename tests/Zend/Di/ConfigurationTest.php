@@ -12,9 +12,10 @@ class ConfigurationTest extends TestCase
     {
         $ini = new \Zend\Config\Ini(__DIR__ . '/_files/sample.ini', 'section-a');
         $config = new Configuration($ini->di);
-        $di = new Di($config);
-        
-        $im = $di->getInstanceManager();
+        $di = new Di();
+        $di->configure($config);
+
+        $im = $di->instanceManager();
         
         $this->assertTrue($im->hasAlias('my-repository'));
         $this->assertEquals('My\RepositoryA', $im->getClassFromAlias('my-repository'));
@@ -30,18 +31,19 @@ class ConfigurationTest extends TestCase
         
         $this->assertTrue($im->hasTypePreferences('my-mapper'));
         $this->assertContains('my-dbAdapter', $im->getTypePreferences('my-mapper'));
-        
+
         $this->assertTrue($im->hasConfiguration('My\DbAdapter'));
-        $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'methods' => array());
+        $expected = array('parameters' => array('username' => 'readonly', 'password' => 'mypassword'), 'injections' => array());
         $this->assertEquals($expected, $im->getConfiguration('My\DbAdapter'));
         
         $this->assertTrue($im->hasConfiguration('my-dbAdapter'));
-        $expected = array('parameters' => array('username' => 'readwrite'), 'methods' => array());
+        $expected = array('parameters' => array('username' => 'readwrite'), 'injections' => array());
         $this->assertEquals($expected, $im->getConfiguration('my-dbAdapter'));
     }
     
     public function testConfigurationCanConfigureBuilderDefinitionFromIni()
     {
+        $this->markTestIncomplete('Builder not updated to new DI yet');
         $ini = new \Zend\Config\Ini(__DIR__ . '/_files/sample.ini', 'section-b');
         $config = new Configuration($ini->di);
         $di = new Di($config);

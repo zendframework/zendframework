@@ -511,7 +511,7 @@ class Di
                 // detect circular dependencies! (they can only happen in instantiators)
                 if ($isInstantiator && in_array($computedParams['required'][$fqName][1], $this->currentDependencies)) {
                     throw new Exception\CircularDependencyException(
-                        "Circular dependency detected: $class depends on {$value[0]} and viceversa"
+                        "Circular dependency detected: $class depends on {$value[1]} and viceversa"
                     );
                 }
                 array_push($this->currentDependencies, $class);

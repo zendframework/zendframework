@@ -2,8 +2,7 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition,
-    Zend\Di\Exception;
+use Zend\Di\Exception;
 
 class BuilderDefinition implements Definition
 {
@@ -180,6 +179,29 @@ class BuilderDefinition implements Definition
         }
         return false;
     }
+
+    /**
+     * @param $class
+     * @param $method
+     * @return bool
+     */
+    public function hasMethodParameters($class, $method)
+    {
+        $class = $this->getClass($class);
+        if ($class === false) {
+            return false;
+        }
+        $methods = $class->getInjectionMethods();
+        foreach ($methods as $methodObj) {
+            if ($methodObj->getName() === $method) {
+                $method = $methodObj;
+            }
+        }
+        if (!$method instanceof Builder\InjectionMethod) {
+            return false;
+        }
+        return (count($method->getParameters()) > 0);
+    }
     
     public function getMethodParameters($class, $method)
     {
@@ -198,4 +220,6 @@ class BuilderDefinition implements Definition
         }
         return $method->getParameters();
     }
+
+
 }

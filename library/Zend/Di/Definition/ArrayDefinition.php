@@ -90,7 +90,17 @@ class ArrayDefinition implements Definition
         
         return array_keys($this->dataArray[$class]['injectionMethods']);
     }
-    
+
+    /**
+     * @param $class
+     * @param $method
+     * @return bool
+     */
+    public function hasMethodParameters($class, $method)
+    {
+        return isset($this->dataArray[$class]['injectionMethods'][$method]);
+    }
+
     public function getMethodParameters($class, $method)
     {
         if (!isset($this->dataArray[$class])) {
@@ -112,5 +122,5 @@ class ArrayDefinition implements Definition
     {
         return $this->dataArray;
     }
-    
+
 }

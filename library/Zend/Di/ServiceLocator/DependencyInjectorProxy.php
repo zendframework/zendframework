@@ -19,8 +19,8 @@ class DependencyInjectorProxy extends Di
     public function __construct(Di $di)
     {
         $this->di              = $di;
-        $this->definition      = $di->getDefinition();
-        $this->instanceManager = $di->getInstanceManager();
+        $this->definitions     = $di->definitions();
+        $this->instanceManager = $di->instanceManager();
     }
 
     /**
@@ -36,24 +36,18 @@ class DependencyInjectorProxy extends Di
      */
     public function get($name, array $params = array())
     {
-        array_push($this->instanceContext, array('GET', $name));
-        
-        $im = $this->getInstanceManager();
+        $im = $this->instanceManager();
 
         if ($params) {
             if (($fastHash = $im->hasSharedInstanceWithParameters($name, $params, true))) {
-                array_pop($this->instanceContext);
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         } else {
             if ($im->hasSharedInstance($name, $params)) {
-                array_pop($this->instanceContext);
                 return $im->getSharedInstance($name, $params);
             }
         }
-        $instance = $this->newInstance($name, $params);
-        array_pop($this->instanceContext);
-        return $instance;
+        return $this->newInstance($name, $params);
     }
 
     /**
@@ -69,9 +63,11 @@ class DependencyInjectorProxy extends Di
     public function createInstanceViaConstructor($class, $params, $alias = null)
     {
         $callParameters = array();
-        if ($this->di->definition->hasInjectionMethod($class, '__construct')) {
+        if ($this->di->definitions->hasMethod($class, '__construct')
+            && (count($this->di->definitions->getMethodParameters($class, '__construct')) > 0)
+        ) {
             $callParameters = $this->resolveMethodParameters(
-                $class, '__construct', $params, true, $alias
+                $class, '__construct', $params, true, $alias, true
             );
         }
         return new GeneratorInstance($class, '__construct', $callParameters);
@@ -98,8 +94,8 @@ class DependencyInjectorProxy extends Di
         $method = $callback[1];
 
         $callParameters = array();
-        if ($this->di->definition->hasInjectionMethod($class, $method)) {
-            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias);
+        if ($this->di->definitions->hasMethod($class, $method)) {
+            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias, true);
         }
 
         return new GeneratorInstance(null, $callback, $callParameters);
@@ -114,9 +110,9 @@ class DependencyInjectorProxy extends Di
      * @param  string $alias 
      * @return array
      */
-    public function handleInjectionMethodForObject($class, $method, $params, $alias)
+    public function handleInjectionMethodForObject($class, $method, $params, $alias, $isRequired)
     {
-        $callParameters = $this->resolveMethodParameters($class, $method, $params, false, $alias);
+        $callParameters = $this->resolveMethodParameters($class, $method, $params, false, $alias, $isRequired);
         return array(
             'method' => $method,
             'params' => $callParameters,
@@ -133,9 +129,8 @@ class DependencyInjectorProxy extends Di
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
-        // localize dependencies (this also will serve as poka-yoke)
-        $definition      = $this->getDefinition();
-        $instanceManager = $this->getInstanceManager();
+        $definition      = $this->definitions();
+        $instanceManager = $this->instanceManager();
 
         if ($instanceManager->hasAlias($name)) {
             $class = $instanceManager->getClassFromAlias($name);
@@ -145,8 +140,6 @@ class DependencyInjectorProxy extends Di
             $alias = null;
         }
 
-        array_push($this->instanceContext, array('NEW', $class, $alias));
-        
         if (!$definition->hasClass($class)) {
             $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
             throw new Exception\ClassNotFoundException(
@@ -155,7 +148,7 @@ class DependencyInjectorProxy extends Di
         }
 
         $instantiator     = $definition->getInstantiator($class);
-        $injectionMethods = $definition->getInjectionMethods($class);
+        $injectionMethods = $definition->getMethods($class);
 
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params, $alias);
@@ -171,32 +164,18 @@ class DependencyInjectorProxy extends Di
 
         if ($injectionMethods) {
             foreach ($injectionMethods as $injectionMethod) {
-                $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias);
+                $methodMetadata[] = $this->handleInjectionMethodForObject($class, $injectionMethod, $params, $alias);
             }
         }
 
-        // Methods for which we have configuration
-        $iConfig = ($instanceManager->hasAlias($alias) && $instanceManager->hasConfiguration($alias))
-            ? $instanceManager->getConfiguration($alias)
-            : $instanceManager->getConfiguration(get_class($object));
-
-        if ($iConfig['methods']) {
-            foreach ($iConfig['methods'] as $iConfigMethod => $iConfigMethodParams) {
-                // skip methods processed by handleInjectionMethodForObject
-                if (in_array($iConfigMethod, $injectionMethods) && $iConfigMethod !== '__construct') continue; 
-                call_user_func_array(array($object, $iConfigMethod), array_values($iConfigMethodParams));
-            }
-        }
-        
         if ($isShared) {
             if ($params) {
-                $this->getInstanceManager()->addSharedInstanceWithParameters($object, $name, $params);
+                $instanceManager->addSharedInstanceWithParameters($object, $name, $params);
             } else {
-                $this->getInstanceManager()->addSharedInstance($object, $name);
+                $instanceManager->addSharedInstance($object, $name);
             }
         }
-        
-        array_pop($this->instanceContext);
+
         return $object;
     }
 }

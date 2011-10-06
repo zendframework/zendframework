@@ -20,15 +20,13 @@ class InjectionMethod
         return $this->name;
     }
     
-    public function addParameter($name, $class = null, $paramIsOptional = false, $classIsInstantiable = null)
+    public function addParameter($name, $class = null, $position = self::PARAMETER_POSTION_NEXT)
     {
-        $this->parameters[$name] = array(
-            $class,
-            $paramIsOptional,
-            (($classIsInstantiable === null && $class !== null)
-                ? (($classIsInstantiable === null) ? true : (bool) $classIsInstantiable)
-                : null)
-        );
+        if ($position == self::PARAMETER_POSTION_NEXT) {
+            $this->parameters[$name] = $class;
+        } else {
+            throw new \Exception('Implementation for parameter placement is incomplete');
+        }
         return $this;
     }
     

@@ -8,18 +8,13 @@ use Zend\Di\Di,
     Zend\Di\Definition\Builder,
     PHPUnit_Framework_TestCase as TestCase;
 
-class GeneratorTest extends TestCase
+class ContainerBuilderTest extends TestCase
 {
-    protected $tmpFile = false;
-
-    /**
-     * @var \Zend\Di\Di
-     */
-    protected $di = null;
+    public $tmpFile = false;
 
     public function setUp()
     {
-        $this->markTestIncomplete('Generator must be refactored to current di.');
+        $this->markTestIncomplete('Needs to be updated to latest di.');
         $this->tmpFile = false;
         $this->di = new Di;
     }
@@ -62,7 +57,7 @@ class GeneratorTest extends TestCase
         $definition->addClass($inspect)
                    ->addClass($composed)
                    ->addClass($struct);
-        $this->di->definitions()->unshift($definition);
+        $this->di->setDefinition($definition);
 
         $data = array(
             'instance' => array(
@@ -112,7 +107,7 @@ class GeneratorTest extends TestCase
             if (is_string($token)) {
                 continue;
             }
-            if (T_CLASS == $token[0]) {
+            if ("T_CLASS" == token_name($token[0])) {
                 $found = true;
                 $value = false;
                 do {
@@ -123,7 +118,7 @@ class GeneratorTest extends TestCase
                     } else {
                         list($id, $value) = $token;
                     }
-                } while (($i < $count) && ($id != T_STRING));
+                } while (($i < $count) && (token_name($id) != 'T_STRING'));
                 break;
             }
         }

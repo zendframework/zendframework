@@ -19,8 +19,8 @@ class DependencyInjectorProxy extends Di
     public function __construct(Di $di)
     {
         $this->di              = $di;
-        $this->definitions     = $di->definitions();
-        $this->instanceManager = $di->instanceManager();
+        $this->definition      = $di->getDefinition();
+        $this->instanceManager = $di->getInstanceManager();
     }
 
     /**
@@ -36,7 +36,7 @@ class DependencyInjectorProxy extends Di
      */
     public function get($name, array $params = array())
     {
-        $im = $this->instanceManager();
+        $im = $this->getInstanceManager();
 
         if ($params) {
             if (($fastHash = $im->hasSharedInstanceWithParameters($name, $params, true))) {
@@ -63,11 +63,9 @@ class DependencyInjectorProxy extends Di
     public function createInstanceViaConstructor($class, $params, $alias = null)
     {
         $callParameters = array();
-        if ($this->di->definitions->hasMethod($class, '__construct')
-            && (count($this->di->definitions->getMethodParameters($class, '__construct')) > 0)) {
-var_dump($this->di->definitions->getMethodParameters($class, '__construct'));
+        if ($this->di->definition->hasInjectionMethod($class, '__construct')) {
             $callParameters = $this->resolveMethodParameters(
-                $class, '__construct', $params, true, $alias, true
+                $class, '__construct', $params, true, $alias
             );
         }
         return new GeneratorInstance($class, '__construct', $callParameters);
@@ -94,8 +92,8 @@ var_dump($this->di->definitions->getMethodParameters($class, '__construct'));
         $method = $callback[1];
 
         $callParameters = array();
-        if ($this->di->definitions->hasMethod($class, $method)) {
-            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias, true);
+        if ($this->di->definition->hasInjectionMethod($class, $method)) {
+            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias);
         }
 
         return new GeneratorInstance(null, $callback, $callParameters);
@@ -110,9 +108,9 @@ var_dump($this->di->definitions->getMethodParameters($class, '__construct'));
      * @param  string $alias 
      * @return array
      */
-    public function handleInjectionMethodForObject($class, $method, $params, $alias, $isRequired)
+    public function handleInjectionMethodForObject($class, $method, $params, $alias)
     {
-        $callParameters = $this->resolveMethodParameters($class, $method, $params, false, $alias, $isRequired);
+        $callParameters = $this->resolveMethodParameters($class, $method, $params, false, $alias);
         return array(
             'method' => $method,
             'params' => $callParameters,
@@ -129,8 +127,8 @@ var_dump($this->di->definitions->getMethodParameters($class, '__construct'));
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
-        $definition      = $this->definitions();
-        $instanceManager = $this->instanceManager();
+        $definition      = $this->getDefinition();
+        $instanceManager = $this->getInstanceManager();
 
         if ($instanceManager->hasAlias($name)) {
             $class = $instanceManager->getClassFromAlias($name);
@@ -146,7 +144,7 @@ var_dump($this->di->definitions->getMethodParameters($class, '__construct'));
         }
 
         $instantiator     = $definition->getInstantiator($class);
-        $injectionMethods = $definition->getMethods($class);
+        $injectionMethods = $definition->getInjectionMethods($class);
 
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params, $alias);

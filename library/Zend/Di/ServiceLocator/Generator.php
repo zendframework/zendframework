@@ -2,8 +2,7 @@
 // @todo refactor to use new Definition interface
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Di\Di,
-    Zend\CodeGenerator\Php as CodeGen,
+use Zend\CodeGenerator\Php as CodeGen,
     Zend\Di\DependencyInjection,
     Zend\Di\Exception;
 
@@ -23,7 +22,7 @@ class Generator
      * @param  DependencyInjection $injector 
      * @return void
      */
-    public function __construct(Di $injector)
+    public function __construct(DependencyInjection $injector)
     {
         $this->injector = new DependencyInjectorProxy($injector);
     }
@@ -64,14 +63,14 @@ class Generator
     public function getCodeGenerator($filename = null)
     {
         $injector       = $this->injector;
-        $im             = $injector->instanceManager();
+        $im             = $injector->getInstanceManager();
         $indent         = '    ';
         $aliases        = $this->reduceAliases($im->getAliases());
         $caseStatements = array();
         $getters        = array();
-        $definitions    = $injector->definitions();
+        $definition     = $injector->getDefinition();
 
-        foreach ($definitions->getClasses() as $name) {
+        foreach ($definition->getClasses() as $name) {
             $getter = $this->normalizeAlias($name);
             $meta   = $injector->get($name);
             $params = $meta->getParams();

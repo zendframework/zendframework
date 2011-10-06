@@ -43,6 +43,7 @@ class HelperLoader extends PluginClassLoader
         'cycle'               => 'Zend\View\Helper\Cycle',
         'declarevars'         => 'Zend\View\Helper\DeclareVars',
         'doctype'             => 'Zend\View\Helper\Doctype',
+        'escape'              => 'Zend\View\Helper\Escape',
         'fieldset'            => 'Zend\View\Helper\Fieldset',
         'formbutton'          => 'Zend\View\Helper\FormButton',
         'formcheckbox'        => 'Zend\View\Helper\FormCheckbox',

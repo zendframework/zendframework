@@ -182,6 +182,15 @@ class PhpRenderer implements Renderer, Pluggable
             }
             $variables = new Variables($variablesAsArray);
         }
+
+        $broker = $this->getBroker();
+        $loader = $broker->getClassLoader();
+        if ($loader->isLoaded('escape')) {
+            $escaper = $broker->load('escape');
+            if (is_callable($escaper)) {
+                $variables->setEscapeCallback($escaper);
+            }
+        }
         
         $this->vars = $variables;
         return $this;

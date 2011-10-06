@@ -264,4 +264,13 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $test = $this->renderer->render('testLocalVars.phtml');
         $this->assertContains($expected, $test);
     }    
+
+    public function testInjectsVariablesContainerWithEscapeHelperAsEscapeCallbackWhenPresent()
+    {
+        if (!$this->renderer->getBroker()->getClassLoader()->isLoaded('escape')) {
+            $this->markTestSkipped('Cannot test as escape helper is not loaded');
+        }
+        $escapeHelper = $this->renderer->plugin('escape');
+        $this->assertSame($escapeHelper, $this->renderer->vars()->getEscapeCallback());
+    }
 }

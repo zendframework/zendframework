@@ -38,7 +38,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Part extends TreeRouteStack
+class Part extends TreeRouteStack implements Route
 {
     /**
      * Route to match.

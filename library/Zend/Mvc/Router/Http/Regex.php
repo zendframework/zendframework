@@ -27,8 +27,7 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Config\Config,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route;
+    Zend\Mvc\Router\Exception;
 
 /**
  * Regex route.
@@ -135,7 +134,7 @@ class Regex implements Route
 
         $matches       = array_merge($this->defaults, $match);
         $this->matches = $matches;
-        return new PartRouteMatch($matches, $this, $matchedLength);
+        return new RouteMatch($matches, $this, $matchedLength);
     }
 
     /**

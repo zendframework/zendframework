@@ -24,7 +24,8 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Loader\PluginSpecBroker,
+use Zend\Mvc\Router\Exception,
+    Zend\Loader\PluginSpecBroker,
     Zend\Mvc\Router\SimpleRouteStack;
 
 /**
@@ -37,6 +38,13 @@ use Zend\Loader\PluginSpecBroker,
  */
 class TreeRouteStack extends SimpleRouteStack
 {
+    /**
+     * Base URL.
+     * 
+     * @var string
+     */
+    protected $baseUrl = '';
+    
     /**
      * init(): defined by SimpleRouteStack.
      * 
@@ -54,6 +62,26 @@ class TreeRouteStack extends SimpleRouteStack
     }
     
     /**
+     * addRoute(): defined by RouteStack interface.
+     *
+     * @see    Route::addRoute()
+     * @param  string  $name
+     * @param  mixed   $route
+     * @param  integer $priority
+     * @return RouteStack
+     */
+    public function addRoute($name, $route, $priority = null)
+    {
+        if (!$route instanceof Route) {
+            $route = $this->routeFromArray($route);
+        }
+        
+        $this->routes->insert($name, $route, $priority);
+
+        return $this;
+    }
+    
+    /**
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
@@ -63,6 +91,10 @@ class TreeRouteStack extends SimpleRouteStack
     protected function routeFromArray($specs)
     {
         $route = parent::routeFromArray($specs);
+        
+        if (!$route instanceof Route) {
+            throw new Exception\RuntimeException('Given route does not implement HTTP route interface');
+        }
         
         if (isset($specs['routes'])) {      
             $options = array(
@@ -76,5 +108,57 @@ class TreeRouteStack extends SimpleRouteStack
         }
 
         return $route;
+    }
+    
+    /**
+     * match(): defined by Route interface.
+     *
+     * @see    Route::match()
+     * @param  Request $request
+     * @return RouteMatch
+     */
+    public function match(Request $request)
+    {
+        if (!method_exists($request, 'uri')) {
+            return null;
+        }
+        
+        $baseUrlLength = strlen($this->baseUrl) ?: null;
+
+        if ($baseUrlLength !== null) {
+            $pathLength = strlen($request->uri()->getPath());
+            
+            foreach ($this->routes as $route) {
+                if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
+                    return $match;
+                }
+            }
+        } else {
+            return parent::match($request);
+        }
+
+        return null;
+    }
+    
+    /**
+     * Set the base URL.
+     * 
+     * @param  string $baseUrl
+     * @return self
+     */
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = rtrim($baseUrl, '/');
+        return $this;
+    }
+
+    /**
+     * Get the base URL.
+     * 
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl();
     }
 }

@@ -27,8 +27,7 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Config\Config,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route;
+    Zend\Mvc\Router\Exception;
 
 /**
  * Segment route.
@@ -265,7 +264,7 @@ class Segment implements Route
         }
 
         $matches = array_merge($this->defaults, $matches);
-        return new PartRouteMatch($matches, $this, $matchedLength);
+        return new RouteMatch($matches, $this, $matchedLength);
     }
 
     /**

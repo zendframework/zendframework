@@ -2933,7 +2933,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     {
         if (null === $translator) {
             $this->_translator = null;
-        } elseif ($translator instanceof Translator\Adapter) {
+        } elseif ($translator instanceof Translator\Adapter\AbstractAdapter) {
             $this->_translator = $translator;
         } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();
@@ -2954,7 +2954,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
     {
         if (null === $translator) {
             self::$_translatorDefault = null;
-        } elseif ($translator instanceof Translator\Adapter) {
+        } elseif ($translator instanceof Translator\Adapter\AbstractAdapter) {
             self::$_translatorDefault = $translator;
         } elseif ($translator instanceof Translator\Translator) {
             self::$_translatorDefault = $translator->getAdapter();
@@ -3001,7 +3001,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         if (null === self::$_translatorDefault) {
             if (Registry::isRegistered('Zend_Translator')) {
                 $translator = Registry::get('Zend_Translator');
-                if ($translator instanceof Translator\Adapter) {
+                if ($translator instanceof Translator\Adapter\AbstractAdapter) {
                     return $translator;
                 } elseif ($translator instanceof Translator\Translator) {
                     return $translator->getAdapter();
@@ -3371,7 +3371,7 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
      * Get a normalized list of decorator prefix paths
      *
      * Returns a list in the form of prefix => path[] pairs.
-     * 
+     *
      * @return array
      */
     protected function getDecoratorPrefixPaths()

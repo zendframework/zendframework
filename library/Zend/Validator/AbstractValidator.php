@@ -327,12 +327,12 @@ abstract class AbstractValidator implements Validator
     /**
      * Set translation object
      *
-     * @param  Zend_Translator|\Zend\Translator\Adapter\Adapter|null $translator
+     * @param  Zend_Translator|\Zend\Translator\Adapter\AbstractAdapter|null $translator
      * @return \Zend\Validator\AbstractValidator
      */
     public function setTranslator($translator = null)
     {
-        if ((null === $translator) || ($translator instanceof Translator\Adapter)) {
+        if ((null === $translator) || ($translator instanceof Translator\Adapter\AbstractAdapter)) {
             $this->_translator = $translator;
         } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();
@@ -378,7 +378,7 @@ abstract class AbstractValidator implements Validator
      */
     public static function setDefaultTranslator($translator = null)
     {
-        if ((null === $translator) || ($translator instanceof Translator\Adapter)) {
+        if ((null === $translator) || ($translator instanceof Translator\Adapter\AbstractAdapter)) {
             self::$_defaultTranslator = $translator;
         } elseif ($translator instanceof Translator\Translator) {
             self::$_defaultTranslator = $translator->getAdapter();
@@ -397,7 +397,7 @@ abstract class AbstractValidator implements Validator
         if (null === self::$_defaultTranslator) {
             if (\Zend\Registry::isRegistered('Zend_Translator')) {
                 $translator = \Zend\Registry::get('Zend_Translator');
-                if ($translator instanceof Translator\Adapter) {
+                if ($translator instanceof Translator\Adapter\AbstractAdapter) {
                     return $translator;
                 } elseif ($translator instanceof Translator\Translator) {
                     return $translator->getAdapter();

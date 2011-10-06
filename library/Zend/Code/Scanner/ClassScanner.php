@@ -327,8 +327,10 @@ class ClassScanner implements Scanner
                                 }
 
                                 if ($memberContext !== null) {
-                                    if (($memberContext === 'property' && $tokenContent === ';')
+                                    if (
+                                        ($memberContext === 'property' && $tokenContent === ';')
                                         || ($memberContext === 'method' && $methodBodyStarted && $braceCount === 1)
+                                        || ($memberContext === 'method' && $this->isInterface && $tokenContent === ';')
                                     ) {
                                         goto SCANNER_CLASS_BODY_MEMBER_END;
                                     }

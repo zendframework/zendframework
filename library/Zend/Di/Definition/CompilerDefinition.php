@@ -71,13 +71,17 @@ class CompilerDefinition implements Definition
             $this->processClass($class);
         }
 
-
         //return new ArrayDefinition($data);
     }
 
     public function processClass($className)
     {
+        $strategy = $this->introspectionStrategy;
         $sClass = $this->directoryScanner->getClass($className, true, true);
+
+        if (!$sClass->isInstantiable()) {
+            return;
+        }
 
         // determine supertypes
         $superTypes = array();
@@ -108,7 +112,7 @@ class CompilerDefinition implements Definition
             $mScanner = $sClass->getMethod('__construct');
             if ($mScanner->isPublic() && $mScanner->getNumberOfParameters() > 0) {
                 $def['methods']['__construct'] = true;
-                $this->processParameters($def, $sClass, $mScanner);
+                $this->processParams($def, $sClass, $mScanner);
             }
         }
 
@@ -116,14 +120,64 @@ class CompilerDefinition implements Definition
             if (!$mScanner->isPublic()) {
                 continue;
             }
-            
+
+            $methodName = $mScanner->getName();
+
+            if ($mScanner->getName() === '__construct') {
+                continue;
+            }
+
+            /*
+            if ($strategy->getUseAnnotations() == true) {
+                $annotations = $mScanner->getAnnotations($strategy->getAnnotationManager());
+
+                if (($annotations instanceof AnnotationCollection)
+                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')) {
+
+                    $def['methods'][$methodName] = true;
+                    $this->processParams($def, $sClass, $mScanner);
+                    continue;
+                }
+            }
+            */
+
+            $methodPatterns = $this->introspectionStrategy->getMethodNameInclusionPatterns();
+
+            // matches a method injection pattern?
+            foreach ($methodPatterns as $methodInjectorPattern) {
+                preg_match($methodInjectorPattern, $methodName, $matches);
+                if ($matches) {
+                    $def['methods'][$methodName] = false; // check ot see if this is required?
+                    $this->processParams($def, $sClass, $mScanner);
+                    continue 2;
+                }
+            }
+
         }
 
+        $interfaceInjectorPatterns = $this->introspectionStrategy->getInterfaceInjectionInclusionPatterns();
 
-        var_dump($this->classes);
+        // matches the interface injection pattern
+        /** @var $sInterface \Zend\Code\Scanner\ClassScanner */
+        foreach ($sClass->getInterfaces(true) as $sInterface) {
+            foreach ($interfaceInjectorPatterns as $interfaceInjectorPattern) {
+                preg_match($interfaceInjectorPattern, $sInterface->getName(), $matches);
+                if ($matches) {
+                    foreach ($sInterface->getMethods(true) as $sMethod) {
+                        if ($sMethod->getName() === '__construct') { // ctor not allowed in ifaces
+                            continue;
+                        }
+                        $def['methods'][$sMethod->getName()] = true;
+                        $this->processParams($def, $sClass, $sMethod);
+                    }
+                    continue 2;
+                }
+            }
+        }
+
     }
 
-    public function processParameters(&$def, DerivedClassScanner $sClass, MethodScanner $sMethod)
+    protected function processParams(&$def, DerivedClassScanner $sClass, MethodScanner $sMethod)
     {
         if (count($sMethod->getParameters()) === 0) {
             return;
@@ -133,14 +187,14 @@ class CompilerDefinition implements Definition
 
         $def['parameters'][$methodName] = array();
 
-        foreach ($sMethod->getParameters(true) as $p) {
+        foreach ($sMethod->getParameters(true) as $position => $p) {
 
             /** @var $p \Zend\Code\Scanner\ParameterScanner  */
             $actualParamName = $p->getName();
 
             $paramName = $this->createDistinctParameterName($actualParamName, $sClass->getName());
 
-            $fqName = $sClass->getName() . '::' . $sMethod->getName() . ':' . $p->getPosition();
+            $fqName = $sClass->getName() . '::' . $sMethod->getName() . ':' . $position;
 
             $def['parameters'][$methodName][$fqName] = array();
 

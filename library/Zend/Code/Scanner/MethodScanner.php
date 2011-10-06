@@ -107,7 +107,7 @@ class MethodScanner implements Scanner
             if (!$returnScanner) {
                 $return[] = $info['name'];
             } else {
-                $return[] = $this->getParameter($info['name'], $returnScanner);
+                $return[] = $this->getParameter($info['name']);
             }
         }
         return $return;
@@ -123,15 +123,14 @@ class MethodScanner implements Scanner
                 throw new Exception\InvalidArgumentException('Index of info offset is not about a parameter');
             }
         } elseif (is_string($parameterNameOrInfoIndex)) {
-            $methodFound = false;
             foreach ($this->infos as $infoIndex => $info) {
                 if ($info['type'] === 'parameter' && $info['name'] === $parameterNameOrInfoIndex) {
-                    $methodFound = true;
                     break;
                 }
+                unset($info);
             }
-            if (!$methodFound) {
-                return false;
+            if (!isset($info)){
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a parameter');
             }
         }
 

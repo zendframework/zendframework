@@ -78,6 +78,9 @@ class SessionManager extends AbstractManager
         if ($sid !== false && $this->getId()) {
             return true;
         }
+        if (headers_sent()) {
+            return true;
+        }
         return false;
     }
 

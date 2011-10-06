@@ -23,7 +23,8 @@
  */
 namespace Zend\Session\Storage;
 
-use Zend\Session\Storage as Storable,
+use ArrayObject,
+    Zend\Session\Storage as Storable,
     Zend\Session\Exception;
 
 /**
@@ -38,7 +39,7 @@ use Zend\Session\Storage as Storable,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ArrayStorage extends \ArrayObject implements Storable
+class ArrayStorage extends ArrayObject implements Storable
 {
     /**
      * Is storage marked immutable?

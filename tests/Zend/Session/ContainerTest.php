@@ -68,12 +68,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      * @see    http://matthewturland.com/2010/08/19/process-isolation-in-phpunit/
      * @param  PHPUnit_Framework_TestResult $result 
      * @return void
+     */
     public function run(\PHPUnit_Framework_TestResult $result = NULL)
     {
         $this->setPreserveGlobalState(false);
         return parent::run($result);
     }
-     */
 
     public function testInstantiationStartsSession()
     {

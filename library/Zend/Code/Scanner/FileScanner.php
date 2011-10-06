@@ -18,11 +18,9 @@ class FileScanner extends TokenArrayScanner implements Scanner
      */
     protected $file = null;
 
-    public function __construct($file = null, AnnotationManager $annotationManager = null)
+    public function __construct($file, AnnotationManager $annotationManager = null)
     {
-        if ($file) {
-            $this->setFile($file);
-        }
+        $this->setFile($file);
         if ($annotationManager) {
             $this->setAnnotationManager($annotationManager);
         }
@@ -50,10 +48,6 @@ class FileScanner extends TokenArrayScanner implements Scanner
     {
         if ($this->isScanned) {
             return;
-        }
-
-        if (!$this->file) {
-            throw new Exception\RuntimeException('File was not provided');
         }
 
         $this->setTokens(token_get_all(file_get_contents($this->file)));

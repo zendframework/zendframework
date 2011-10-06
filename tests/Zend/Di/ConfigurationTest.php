@@ -3,7 +3,7 @@
 namespace ZendTest\Di;
 
 use Zend\Di\Configuration,
-    Zend\Di\DependencyInjector,
+    Zend\Di\Di,
     PHPUnit_Framework_TestCase as TestCase;
 
 class ConfigurationTest extends TestCase
@@ -12,7 +12,7 @@ class ConfigurationTest extends TestCase
     {
         $ini = new \Zend\Config\Ini(__DIR__ . '/_files/sample.ini', 'section-a');
         $config = new Configuration($ini->di);
-        $di = new DependencyInjector($config);
+        $di = new Di($config);
         
         $im = $di->getInstanceManager();
         
@@ -44,7 +44,7 @@ class ConfigurationTest extends TestCase
     {
         $ini = new \Zend\Config\Ini(__DIR__ . '/_files/sample.ini', 'section-b');
         $config = new Configuration($ini->di);
-        $di = new DependencyInjector($config);
+        $di = new Di($config);
         $definition = $di->getDefinition();
         
         $this->assertTrue($definition->hasClass('My\DbAdapter'));

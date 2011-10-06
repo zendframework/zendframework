@@ -9,7 +9,11 @@ class InstanceManager /* implements InstanceCollection */
      * @var array
      */
     protected $sharedInstances = array();
-    
+
+    /**
+     * Array of shared instances with params
+     * @var array
+     */
     protected $sharedInstancesWithParams = array('hashShort' => array(), 'hashLong' => array());
     
     /**
@@ -30,9 +34,9 @@ class InstanceManager /* implements InstanceCollection */
          */
         'parameters' => array(),
         /**
-         * method name => array of ordered method params
+         * injection type => array of ordered method params
          */
-        'methods' => array(),
+        'injections' => array(),
         );
 
     /**
@@ -49,6 +53,7 @@ class InstanceManager /* implements InstanceCollection */
     
     /**
      * Does this instance manager have this shared instance
+     * @return bool
      */
     public function hasSharedInstance($classOrAlias)
     {
@@ -74,7 +79,15 @@ class InstanceManager /* implements InstanceCollection */
 
         $this->sharedInstances[$classOrAlias] = $instance;
     }
-    
+
+    /**
+     * hasSharedInstanceWithParameters()
+     *
+     * @param string $classOrAlias
+     * @param array $params
+     * @param bool $returnFashHashLookupKey
+     * @return bool|string
+     */
     public function hasSharedInstanceWithParameters($classOrAlias, array $params, $returnFashHashLookupKey = false)
     {
         ksort($params);
@@ -87,7 +100,15 @@ class InstanceManager /* implements InstanceCollection */
         }
         return false;
     }
-    
+
+    /**
+     * addSharedInstanceWithParameters()
+     *
+     * @param object $instance
+     * @param string $classOrAlias
+     * @param array $params
+     * @return void
+     */
     public function addSharedInstanceWithParameters($instance, $classOrAlias, array $params)
     {
         ksort($params);
@@ -133,6 +154,9 @@ class InstanceManager /* implements InstanceCollection */
     
     /**
      * getClassFromAlias()
+     *
+     * @param string
+     * @return bool
      */
     public function getClassFromAlias($alias)
     {
@@ -142,8 +166,15 @@ class InstanceManager /* implements InstanceCollection */
         return false;
     }
     
+
     /**
-     * 
+     * addAlias()
+     *
+     * @throws Exception\InvalidArgumentException
+     * @param $alias
+     * @param $class
+     * @param array $parameters
+     * @return void
      */
     public function addAlias($alias, $class, array $parameters = array())
     {
@@ -182,14 +213,24 @@ class InstanceManager /* implements InstanceCollection */
             }
             $this->configurations[$key]['parameters'] += $configuration['parameters'];
         }
-        if (isset($configuration['methods'])) {
-            if (!$append && $this->configurations[$key]['methods']) {
-                $this->configurations[$key]['methods'] = array();
+        if (isset($configuration['injections'])) {
+            if (!$append && $this->configurations[$key]['injections']) {
+                $this->configurations[$key]['injections'] = array();
             }
-            $this->configurations[$key]['methods'] += $configuration['methods'];
+            $this->configurations[$key]['injections'] += $configuration['injections'];
         }
     }
-    
+
+    public function getClasses()
+    {
+        $classes = array();
+        foreach ($this->configurations as $name => $data) {
+            if (strpos($name, 'alias') === 0) continue;
+            $classes[] = $name;
+        }
+        return $classes;
+    }
+
     public function getConfiguration($aliasOrClass)
     {
         $key = ($this->hasAlias($aliasOrClass)) ? 'alias:' . $aliasOrClass : $aliasOrClass;
@@ -201,7 +242,7 @@ class InstanceManager /* implements InstanceCollection */
     }
     
     /**
-     * setParameters() is a convienence method for:
+     * setParameters() is a convenience method for:
      *    setConfiguration($type, array('parameters' => array(...)), true);
      *     
      * @param string $type Alias or Class
@@ -213,15 +254,15 @@ class InstanceManager /* implements InstanceCollection */
     }
     
     /**
-     * setMethods() is a convienence method for:
-     *    setConfiguration($type, array('methods' => array(...)), true);
+     * setInjections() is a convenience method for:
+     *    setConfiguration($type, array('injections' => array(...)), true);
      *     
      * @param string $type Alias or Class
      * @param array $methods Multi-dim array of methods and their parameters
      */
-    public function setMethods($aliasOrClass, array $methods)
+    public function setInjections($aliasOrClass, array $injections)
     {
-        return $this->setConfiguration($aliasOrClass, array('methods' => $methods), true);
+        return $this->setConfiguration($aliasOrClass, array('injections' => $injections), true);
     }
     
 
@@ -268,10 +309,10 @@ class InstanceManager /* implements InstanceCollection */
     public function removeTypePreference($interfaceOrAbstract, $preferredType)
     {
         $key = ($this->hasAlias($interfaceOrAbstract)) ? 'alias:' . $interfaceOrAbstract : $interfaceOrAbstract;
-        if (!isset($this->generalTypePreferences[$key]) || !in_array($preferredType, $this->typePreferences[$key])) {
+        if (!isset($this->typePreferences[$key]) || !in_array($preferredType, $this->typePreferences[$key])) {
             return false;
         }
-        unset($this->typePreference[$key][array_search($key, $this->typePreferences)]);
+        unset($this->typePreferences[$key][array_search($key, $this->typePreferences)]);
         return $this;
     }
 

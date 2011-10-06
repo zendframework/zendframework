@@ -122,6 +122,10 @@ class DerivedClassScanner extends ClassScanner
         return $properties;
     }
 
+    /**
+     * @param bool $returnScannerMethod
+     * @return MethodScanner[]
+     */
     public function getMethods($returnScannerMethod = false)
     {
         $methods = $this->classScanner->getMethods($returnScannerMethod);

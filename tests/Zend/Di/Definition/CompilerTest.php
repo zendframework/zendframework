@@ -32,12 +32,12 @@ class CompilerTest extends TestCase
         // $this->assertContains('ZendTest\Di\TestAsset\CompilerClasses\C', $definition->getClassSupertypes('ZendTest\Di\TestAsset\CompilerClasses\D'));
         
         $this->assertEquals('__construct', $definition->getInstantiator('ZendTest\Di\TestAsset\CompilerClasses\A'));
-        $this->assertTrue($definition->hasInjectionMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
+        $this->assertTrue($definition->hasMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
         
         
-        $this->assertContains('setB', $definition->getInjectionMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
-        $this->assertTrue($definition->hasInjectionMethod('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB'));
+        $this->assertContains('setB', $definition->getMethods('ZendTest\Di\TestAsset\CompilerClasses\C'));
+        $this->assertTrue($definition->hasMethod('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB'));
         
-        $this->assertEquals(array('b' => 'ZendTest\Di\TestAsset\CompilerClasses\B'), $definition->getInjectionMethodParameters('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB'));
+        $this->assertEquals(array('b' => 'ZendTest\Di\TestAsset\CompilerClasses\B'), $definition->getMethodParameters('ZendTest\Di\TestAsset\CompilerClasses\C', 'setB'));
     }
 }

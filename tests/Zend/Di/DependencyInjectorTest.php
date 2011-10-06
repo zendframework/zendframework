@@ -4,7 +4,7 @@ namespace ZendTest\Di;
 
 use Zend\Debug;
 
-use Zend\Di\DependencyInjector,
+use Zend\Di\Di,
     PHPUnit_Framework_TestCase as TestCase;
 
 class DependencyInjectorTest extends TestCase
@@ -12,7 +12,7 @@ class DependencyInjectorTest extends TestCase
 
     public function testDependencyInjectorHasBuiltInImplementations()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $this->assertInstanceOf('Zend\Di\InstanceManager', $di->getInstanceManager());
         $this->assertInstanceOf('Zend\Di\Definition', $di->getDefinition());
         $this->assertInstanceOf('Zend\Di\Definition\RuntimeDefinition', $di->getDefinition());
@@ -20,7 +20,7 @@ class DependencyInjectorTest extends TestCase
     
     public function testPassingInvalidDefinitionRaisesException()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         
         $this->setExpectedException('PHPUnit_Framework_Error');
         $di->setDefinition(array('foo'));
@@ -28,14 +28,14 @@ class DependencyInjectorTest extends TestCase
     
     public function testGetRetrievesObjectWithMatchingClassDefinition()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $obj = $di->get('ZendTest\Di\TestAsset\BasicClass');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj);
     }
     
     public function testGetRetrievesSameInstanceOnSubsequentCalls()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClass');
         $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
@@ -45,7 +45,7 @@ class DependencyInjectorTest extends TestCase
     
     public function testGetThrowsExceptionWhenUnknownClassIsUsed()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         
         $this->setExpectedException('Zend\Di\Exception\ClassNotFoundException', 'could not be located in');
         $obj1 = $di->get('ZendTest\Di\TestAsset\NonExistentClass');
@@ -53,7 +53,7 @@ class DependencyInjectorTest extends TestCase
     
     public function testGetThrowsExceptionWhenMissingParametersAreEncountered()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         
         $this->setExpectedException('Zend\Di\Exception\MissingPropertyException', 'Missing parameter named ');
         $obj1 = $di->get('ZendTest\Di\TestAsset\BasicClassWithParam');
@@ -61,7 +61,7 @@ class DependencyInjectorTest extends TestCase
     
     public function testNewInstanceReturnsDifferentInstances()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $obj1 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass');
         $obj2 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
@@ -71,7 +71,7 @@ class DependencyInjectorTest extends TestCase
     
     public function testNewInstanceReturnsInstanceThatIsSharedWithGet()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $obj1 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass');
         $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
@@ -81,7 +81,7 @@ class DependencyInjectorTest extends TestCase
     
     public function testNewInstanceReturnsInstanceThatIsNotSharedWithGet()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $obj1 = $di->newInstance('ZendTest\Di\TestAsset\BasicClass', array(), false);
         $obj2 = $di->get('ZendTest\Di\TestAsset\BasicClass');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj1);
@@ -94,7 +94,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testGetWillResolveConstructorInjectionDependencies()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $b = $di->get('ZendTest\Di\TestAsset\ConstructorInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\A', $b->a);
@@ -105,7 +105,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testGetWillResolveConstructorInjectionDependenciesAndInstanceAreTheSame()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $b = $di->get('ZendTest\Di\TestAsset\ConstructorInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\A', $b->a);
@@ -123,7 +123,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceWillResolveConstructorInjectionDependencies()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $b = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\ConstructorInjection\A', $b->a);
@@ -134,7 +134,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceWillResolveConstructorInjectionDependenciesWithProperties()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         
         $im = $di->getInstanceManager();
         $im->setParameters('ZendTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
@@ -149,7 +149,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceWillThrowExceptionOnConstructorInjectionDependencyWithMissingParameter()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         
         $this->setExpectedException('Zend\Di\Exception\MissingPropertyException', 'Missing parameter named one');
         $b = $di->newInstance('ZendTest\Di\TestAsset\ConstructorInjection\X');
@@ -160,7 +160,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceWillResolveConstructorInjectionDependenciesWithMoreThan2Dependencies()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         
         $im = $di->getInstanceManager();
         $im->setParameters('ZendTest\Di\TestAsset\ConstructorInjection\X', array('one' => 1, 'two' => 2));
@@ -175,7 +175,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testGetWillResolveSetterInjectionDependencies()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $b = $di->get('ZendTest\Di\TestAsset\SetterInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
@@ -186,7 +186,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testGetWillResolveSetterInjectionDependenciesAndInstanceAreTheSame()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $b = $di->get('ZendTest\Di\TestAsset\SetterInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
@@ -204,7 +204,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceWillResolveSetterInjectionDependencies()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $b = $di->newInstance('ZendTest\Di\TestAsset\SetterInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
@@ -215,7 +215,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceWillResolveSetterInjectionDependenciesWithProperties()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         
         $im = $di->getInstanceManager();
         $im->setParameters('ZendTest\Di\TestAsset\SetterInjection\X', array('one' => 1, 'two' => 2));
@@ -233,7 +233,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceThrowsExceptionOnBasicCircularDependency()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
 
         $this->setExpectedException('Zend\Di\Exception\CircularDependencyException');
         $di->newInstance('ZendTest\Di\TestAsset\CircularClasses\A');
@@ -247,7 +247,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceThrowsExceptionOnThreeLevelCircularDependency()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
 
         $this->setExpectedException(
             'Zend\Di\Exception\CircularDependencyException',
@@ -264,7 +264,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceThrowsExceptionWhenEnteringInMiddleOfCircularDependency()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
 
         $this->setExpectedException(
             'Zend\Di\Exception\CircularDependencyException',
@@ -280,7 +280,7 @@ class DependencyInjectorTest extends TestCase
      */
     public function testNewInstanceWillUsePreferredClassForInterfaceHints()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $di->getInstanceManager()->addTypePreference(
             'ZendTest\Di\TestAsset\PreferredImplClasses\A',
             'ZendTest\Di\TestAsset\PreferredImplClasses\BofA'
@@ -295,7 +295,7 @@ class DependencyInjectorTest extends TestCase
     
     public function testNewInstanceWillRunArbitraryMethodsAccordingToConfiguration()
     {
-        $di = new DependencyInjector();
+        $di = new Di();
         $im = $di->getInstanceManager();
         $im->setMethods('ZendTest\Di\TestAsset\ConfigParameter\A', array(
             'setSomeInt' => array('value' => 5),

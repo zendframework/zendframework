@@ -2,15 +2,13 @@
 
 namespace Zend\Code\Annotation;
 
+use Zend\Code\Exception;
+
 class AnnotationManager
 {
-    /**
-     * @var bool
-     */
-    protected $useGenericAnnotation = false;
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $annotationNames = array();
 
@@ -19,69 +17,46 @@ class AnnotationManager
      */
     protected $annotations = array();
 
-    public function __construct($useGenericAnnotation = false)
+    public function __construct(array $annotations = array())
     {
-        $this->useGenericAnnotation = (bool) $useGenericAnnotation;
+        if ($annotations) {
+            foreach ($annotations as $annotation) {
+                $this->registerAnnotation($annotation);
+            }
+        }
     }
 
     public function registerAnnotation(Annotation $annotation)
     {
-        $name  = strtolower($annotation->getName());
         $class = get_class($annotation);
 
-        if (array_key_exists($name, $this->annotationNames)) {
-            throw new InvalidArgumentException('An annotation for this name ' . $name . ' already exists');
-        }
-
-        if (array_key_exists($class, $this->annotationNames)) {
-            throw new InvalidArgumentException('An annotation for this class ' . $class . ' already exists');
+        if (in_array($class, $this->annotationNames)) {
+            throw new Exception\InvalidArgumentException('An annotation for this class ' . $class . ' already exists');
         }
 
         $this->annotations[] = $annotation;
-        end($this->annotations);
-        $key = key($this->annotations);
-
-        $this->annotationNames[$name] = $key;
-        $this->annotationNames[$class] = $key;
+        $this->annotationNames[] = $class;
     }
 
-    public function hasAnnotationName($name)
+    public function hasAnnotation($class)
     {
-        if (strpos($name, '\\') !== false) {
-            // check for FQ class name first
-            if (array_key_exists($name, $this->annotationNames)) {
-                return true;
-            }
-            return (class_exists($name));
-        }
-
-        // if generic and its a short name, true
-        if ($this->useGenericAnnotation) {
-            return true;
-        }
-
         // otherwise, only if its name exists as a key
-        return array_key_exists($name, $this->annotationNames);
+        return in_array($class, $this->annotationNames);
     }
 
-    public function createAnnotation($name, $content)
+    public function createAnnotation($class, $content = null)
     {
-        if (!$this->hasAnnotationName($name) && $this->useGenericAnnotation === false) {
-            throw new RuntimeException('This annotation name is not supported by this manager');
+        if (!$this->hasAnnotation($class)) {
+            throw new Exception\RuntimeException('This annotation class is not supported by this annotation manager');
         }
 
-        if (strpos($name, '\\') !== false && !array_key_exists($name, $this->annotationNames)) {
-            $annotation = new $name;
-            if (!$annotation instanceof Annotation) {
-                throw new RuntimeException('The dynamically loaded annotation ' . $name . ' does not implement the annotation interface');
-            }
-        } else {
-            $key = $this->annotationNames[$name];
-            $annotation = $this->annotations[$key];
-        }
+        $index = array_search($class, $this->annotationNames);
+        $annotation = $this->annotations[$index];
 
         $newAnnotation = clone $annotation;
-        $newAnnotation->createAnnotation($content);
+        if ($content) {
+            $newAnnotation->initialize($content);
+        }
         return $newAnnotation;
     }
 }

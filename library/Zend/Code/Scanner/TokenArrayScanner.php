@@ -89,20 +89,10 @@ class TokenArrayScanner implements Scanner
         return $namespaces;
     }
     
-    public function getUses()
+    public function getUses($namespace = null)
     {
         $this->scan();
-
-        $uses = array();
-        foreach ($this->infos as $info) {
-            if ($info['type'] == 'use') {
-                foreach ($info['statements'] as $statement) {
-                    $uses[] = $statement;
-                }
-
-            }
-        }
-        return $uses;
+        return $this->getNamespaceUsesNoScan($namespace);
     }
     
     public function getIncludes()
@@ -160,18 +150,14 @@ class TokenArrayScanner implements Scanner
         }
 
         $uses = array();
-        for ($u = 0; $u < count($this->infos); $u++) {
-            if ($this->infos[$u]['type'] == 'use') {
-                foreach ($this->infos[$u]['statements'] as $useStatement) {
-                    if ($useStatement['as'] === null) {
-                        $uses[] = $useStatement['use'];
-                    } else {
-                        $uses[$useStatement['use']] = $useStatement['as'];
-                    }
-                }
+        foreach ($info['uses'] as $useStatement) {
+            if ($useStatement['as'] === null) {
+                $uses[] = $useStatement['use'];
+            } else {
+                $uses[$useStatement['use']] = $useStatement['as'];
             }
         }
-        
+
         return new ClassScanner(
             array_slice(
                 $this->tokens, 
@@ -181,7 +167,35 @@ class TokenArrayScanner implements Scanner
             new NameInformation($info['namespace'], $uses)
         );
     }
-    
+
+    public function getClassNameInformation($className)
+    {
+        $this->scan();
+
+        $classFound = false;
+        foreach ($this->infos as $infoIndex => $info) {
+            if ($info['type'] === 'class' && $info['name'] === $className) {
+                $classFound = true;
+                break;
+            }
+        }
+        if (!$classFound) {
+            return false;
+        }
+
+
+        $uses = array();
+        foreach ($info['uses'] as $useStatement) {
+            if ($useStatement['as'] === null) {
+                $uses[] = $useStatement['use'];
+            } else {
+                $uses[$useStatement['use']] = $useStatement['as'];
+            }
+        }
+
+        return new NameInformation($info['namespace'], $uses);
+    }
+
     public function getFunctions($returnInfo = false)
     {
         $this->scan();
@@ -205,12 +219,11 @@ class TokenArrayScanner implements Scanner
     {
         // @todo
     }
-    
+
     public function __toString()
     {
         // @todo
     }
-
 
     protected function scan()
     {
@@ -324,7 +337,7 @@ class TokenArrayScanner implements Scanner
 
                     SCANNER_NAMESPACE_TOP:
 
-                        if ($tokenType === null && $tokenContent === ';') {
+                        if ($tokenType === null && $tokenContent === ';' || $tokenContent === '{') {
                             goto SCANNER_NAMESPACE_END;
                         }
 
@@ -334,7 +347,6 @@ class TokenArrayScanner implements Scanner
                         
                         if ($tokenType === T_NS_SEPARATOR || $tokenType === T_STRING) {
                             $infos[$infoIndex]['namespace'] .= $tokenContent;
-                            $namespace = $infos[$infoIndex]['namespace'];
                         }
 
                     SCANNER_NAMESPACE_CONTINUE:
@@ -345,6 +357,11 @@ class TokenArrayScanner implements Scanner
                         goto SCANNER_NAMESPACE_TOP;
 
                     SCANNER_NAMESPACE_END:
+
+                        if ($infos[$infoIndex]['namespace'] === null) {
+                            $infos[$infoIndex]['namespace'] = '-GLOBAL-';
+                        }
+                        $namespace = $infos[$infoIndex]['namespace'];
 
                         $MACRO_INFO_ADVANCE();
                         goto SCANNER_CONTINUE;
@@ -357,6 +374,7 @@ class TokenArrayScanner implements Scanner
                         'tokenEnd'   => null,
                         'lineStart'  => $tokens[$tokenIndex][2],
                         'lineEnd'    => null,
+                        'namespace'  => $namespace,
                         'statements' => array(0 => array('use' => null, 'as' => null)),
                     );
 
@@ -406,6 +424,8 @@ class TokenArrayScanner implements Scanner
                         goto SCANNER_USE_TOP;
 
                     SCANNER_USE_END:
+
+
 
                         $MACRO_INFO_ADVANCE();
                         goto SCANNER_CONTINUE;
@@ -471,6 +491,7 @@ class TokenArrayScanner implements Scanner
                         'lineStart'   => $tokens[$tokenIndex][2],
                         'lineEnd'     => null,
                         'namespace'   => $namespace,
+                        'uses'        => $this->getNamespaceUsesNoScan($namespace),
                         'name'        => null,
                         'shortName'   => null,
                     );
@@ -490,7 +511,7 @@ class TokenArrayScanner implements Scanner
                             || ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function')
                         ) {
                             $infos[$infoIndex]['shortName'] = $tokens[$tokenIndex+2][1];
-                            $infos[$infoIndex]['name'] = (($namespace) ? $namespace . '\\' : '') . $infos[$infoIndex]['shortName'];
+                            $infos[$infoIndex]['name'] = (($namespace != '-GLOBAL-') ? $namespace . '\\' : '') . $infos[$infoIndex]['shortName'];
                         }
 
                         if ($tokenType === null) {
@@ -533,5 +554,40 @@ class TokenArrayScanner implements Scanner
     }
 
     // @todo hasNamespace(), getNamespace()
+
+    protected function getNamespaceUsesNoScan($namespace)
+    {
+        $namespaces = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] == 'namespace') {
+                $namespaces[] = $info['namespace'];
+            }
+        }
+
+        if (!$namespaces) {
+            return null;
+        }
+
+        if ($namespace === null) {
+            $namespace = array_shift($namespaces);
+        } elseif (!is_string($namespace)) {
+            throw new Exception\InvalidArgumentException('Invalid namespace provided');
+        } elseif (!in_array($namespace, $namespaces)) {
+            return null;
+        }
+
+        $uses = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] !== 'use') {
+                continue;
+            }
+            foreach ($info['statements'] as $statement) {
+                if ($info['namespace'] == $namespace) {
+                    $uses[] = $statement;
+                }
+            }
+        }
+        return $uses;
+    }
 
 }

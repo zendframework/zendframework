@@ -2,8 +2,6 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition;
-
 class ArrayDefinition implements Definition
 {
     
@@ -50,7 +48,7 @@ class ArrayDefinition implements Definition
         return $this->dataArray[$class]['instantiator'];
     }
     
-    public function hasInjectionMethods($class)
+    public function hasMethods($class)
     {
         if (!isset($this->dataArray[$class])) {
             return array();
@@ -63,7 +61,7 @@ class ArrayDefinition implements Definition
         return (count($this->dataArray[$class]['injectionMethods']) > 0);
     }
     
-    public function hasInjectionMethod($class, $method)
+    public function hasMethod($class, $method)
     {
         if (!isset($this->dataArray[$class])) {
             return array();
@@ -80,7 +78,7 @@ class ArrayDefinition implements Definition
         return array_key_exists($method, $this->dataArray[$class]['injectionMethods']);
     }
     
-    public function getInjectionMethods($class)
+    public function getMethods($class)
     {
         if (!isset($this->dataArray[$class])) {
             return array();
@@ -93,7 +91,7 @@ class ArrayDefinition implements Definition
         return array_keys($this->dataArray[$class]['injectionMethods']);
     }
     
-    public function getInjectionMethodParameters($class, $method)
+    public function getMethodParameters($class, $method)
     {
         if (!isset($this->dataArray[$class])) {
             return array();

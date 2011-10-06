@@ -279,7 +279,7 @@ class DocBlockReflection implements Reflection
         return $this->annotations;
     }
 
-    public function getAnnotations($filter = null)
+    public function getAnnotations(/*$filter = null*/)
     {
         $this->reflect();
         return $this->annotations;

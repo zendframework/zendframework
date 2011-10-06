@@ -106,6 +106,10 @@ class ParameterScanner
 
         SCANNER_END:
 
+        if ($this->class && $this->nameInformation) {
+            $this->class = $this->nameInformation->resolveName($this->class);
+        }
+
         $this->isScanned = true;
     }
 	/**

@@ -43,6 +43,11 @@ class AggregateDirectoryScanner extends DirectoryScanner
         foreach ($this->scanners as $scanner) {
             $classes += $scanner->getClasses();
         }
+        if ($returnScannerClass) {
+            foreach ($classes as $index => $class) {
+                $classes[$index] = $this->getClass($class, $returnScannerClass, $returnDerivedScannerClass);
+            }
+        }
         return $classes;
     }
     

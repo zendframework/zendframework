@@ -25,7 +25,9 @@ namespace Zend\Code\Reflection;
 
 use ReflectionMethod,
     Zend\Code\Reflection,
-    Zend\Code\Annotation\AnnotationManager;
+    Zend\Code\Annotation,
+    Zend\Code\Scanner\FileScanner,
+    Zend\Code\Scanner\AnnotationScanner;
 
 /**
  * @uses       ReflectionMethod
@@ -42,19 +44,9 @@ class MethodReflection extends ReflectionMethod implements Reflection
 {
 
     /**
-     * @var AnnotationManager
+     * @var AnnotationCollection
      */
-    protected $annotationManager = null;
-
-    /**
-     * @param AnnotationManager $annotationManager
-     * @return DocBlockReflection
-     */
-    public function setAnnotationManager(AnnotationManager $annotationManager)
-    {
-        $this->annotationManager = $annotationManager;
-        return $this;
-    }
+    protected $annotations = null;
 
     /**
      * Retrieve method docblock reflection
@@ -64,7 +56,8 @@ class MethodReflection extends ReflectionMethod implements Reflection
     public function getDocBlock()
     {
         if ('' == $this->getDocComment()) {
-            throw new Exception\InvalidArgumentException($this->getName() . ' does not have a docblock');
+            return false;
+            //throw new Exception\InvalidArgumentException($this->getName() . ' does not have a DocComment');
         }
 
         $instance = new DocBlockReflection($this);
@@ -72,6 +65,21 @@ class MethodReflection extends ReflectionMethod implements Reflection
             $instance->setAnnotationManager($this->annotationManager);
         }
         return $instance;
+    }
+
+    /**
+     * @return AnnotationCollection
+     */
+    public function getAnnotations(Annotation\AnnotationManager $annotationManager)
+    {
+        if (($docComment = $this->getDocComment()) == '') {
+            return false;
+        }
+
+        $fileScanner = new FileScanner($this->getFileName());
+        $nameInformation = $fileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
+
+        return new AnnotationScanner($annotationManager, $docComment, $nameInformation);
     }
 
     /**
@@ -95,7 +103,7 @@ class MethodReflection extends ReflectionMethod implements Reflection
      * Get reflection of declaring class
      *
      * @param  string $reflectionClass Name of reflection class to use
-     * @return \Zend\Code\Reflection\ReflectionClass
+     * @return ClassReflection
      */
     public function getDeclaringClass()
     {

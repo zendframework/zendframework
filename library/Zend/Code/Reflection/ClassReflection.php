@@ -72,7 +72,7 @@ class ClassReflection extends ReflectionClass implements Reflection
     public function getDocBlock()
     {
         if ('' == $this->getDocComment()) {
-            throw new Exception\RuntimeException($this->getName() . ' does not have a docblock');
+            return false;
         }
 
         $instance = new DocBlockReflection($this->getDocComment());
@@ -80,6 +80,13 @@ class ClassReflection extends ReflectionClass implements Reflection
             $instance->setAnnotationManager($this->annotationManager);
         }
         return $instance;
+    }
+
+    /**
+     * @return AnnotationCollection
+     */
+    public function getAnnotations() {
+
     }
 
     /**

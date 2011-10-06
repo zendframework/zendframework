@@ -296,6 +296,7 @@ class MethodScanner implements Scanner
                         case ')':
                             $parenCount--;
                             if ($parenCount === 0) {
+                                $MACRO_INFO_ADVANCE();
                                 goto SCANNER_END;
                             }
                             goto SCANNER_CONTINUE;

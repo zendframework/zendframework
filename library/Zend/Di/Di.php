@@ -2,15 +2,15 @@
 
 namespace Zend\Di;
 
-class DependencyInjector implements DependencyInjection
+class Di
 {
     /**
-     * @var Zend\Di\Definition
+     * @var DefinitionList
      */
-    protected $definition = null;
+    protected $definitions = null;
     
     /**
-     * @var Zend\Di\InstanceManager
+     * @var InstanceManager
      */
     protected $instanceManager = null;
 
@@ -35,10 +35,13 @@ class DependencyInjector implements DependencyInjection
 
     /**
      * @param null|Configuration $config
-     * @return \Zend\Di\DependencyInjector
+     * @return \Di\Di\DependencyInjector
      */
-    public function __construct(Configuration $config = null)
+    public function __construct(DefinitionList $definitions = null, InstanceManager $instanceManager = null, Configuration $config = null)
     {
+        $this->definitions = ($definitions) ?: new DefinitionList(new Definition\RuntimeDefinition());
+        $this->instanceManager = ($instanceManager) ?: new InstanceManager();
+
         if ($config) {
             $this->configure($config);
         }
@@ -57,68 +60,27 @@ class DependencyInjector implements DependencyInjection
 
     /**
      * @param Definition $definition
-     * @return DependencyInjector
+     * @return Di
      */
-    public function setDefinition(Definition $definition)
+    public function setDefinitionList(DefinitionList $definitions)
     {
-        $this->definition = $definition;
+        $this->definitions = $definitions;
         return $this;
     }
 
     /**
-     * Definition Factory
-     *
-     * @param string $class
-     * @return Definition
+     * @return DefinitionList
      */
-    public function createDefinition($class)
+    public function definitions()
     {
-        $definition = new $class();
-        if (!$definition instanceof Definition) {
-            throw new Exception\InvalidArgumentException(
-                'The class provided to the Definition factory ' . $class 
-                . ' does not implement the Definition interface'
-            );
-        }
-        return $definition;
-    }
-
-    /**
-     * If this DependencyInjector has a definition currently attached
-     *
-     * @return bool
-     */
-    public function hasDefinition()
-    {
-        return ($this->definition !== null);
-    }
-
-    /**
-     * Return a definition, if one doesn't already exist, a Definition\RuntimeDefinition is created
-     *
-     * @return Definition
-     */
-    public function getDefinition()
-    {
-        if ($this->definition == null) {
-            $this->definition = $this->createDefinition('Zend\Di\Definition\RuntimeDefinition');
-        }
-        return $this->definition;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function hasInstanceManager()
-    {
-        return ($this->instanceManager !== null);
+        return $this->definitions;
     }
 
     /**
      * Set the instance manager
      *
      * @param InstanceManager $instanceManager
-     * @return DependencyInjector
+     * @return Di
      */
     public function setInstanceManager(InstanceManager $instanceManager)
     {
@@ -130,13 +92,11 @@ class DependencyInjector implements DependencyInjection
      * 
      * @return InstanceManager
      */
-    public function getInstanceManager()
+    public function instanceManager()
     {
-        if ($this->instanceManager == null) {
-            $this->instanceManager = new InstanceManager();
-        }
         return $this->instanceManager;
     }
+
 
     /**
      * Lazy-load a class
@@ -153,7 +113,7 @@ class DependencyInjector implements DependencyInjection
     {
         array_push($this->instanceContext, array('GET', $name));
         
-        $im = $this->getInstanceManager();
+        $im = $this->instanceManager;
         
         if ($params) {
             if (($fastHash = $im->hasSharedInstanceWithParameters($name, $params, true))) {
@@ -185,8 +145,8 @@ class DependencyInjector implements DependencyInjection
     public function newInstance($name, array $params = array(), $isShared = true)
     {
         // localize dependencies (this also will serve as poka-yoke)
-        $definition      = $this->getDefinition();
-        $instanceManager = $this->getInstanceManager();
+        $definitions      = $this->definitions;
+        $instanceManager = $this->instanceManager();
         
         if ($instanceManager->hasAlias($name)) {
             $class = $instanceManager->getClassFromAlias($name);
@@ -198,20 +158,20 @@ class DependencyInjector implements DependencyInjection
 
         array_push($this->instanceContext, array('NEW', $class, $alias));
         
-        if (!$definition->hasClass($class)) {
+        if (!$definitions->hasClass($class)) {
             $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
             throw new Exception\ClassNotFoundException(
                 'Class ' . $aliasMsg . $class . ' could not be located in provided definition.'
             );
         }
         
-        $instantiator     = $definition->getInstantiator($class);
-        $injectionMethods = $definition->getInjectionMethods($class);
+        $instantiator     = $definitions->getInstantiator($class);
+        $injectionMethods = $definitions->getMethods($class);
 
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params, $alias);
-            if (in_array('__construct', $injectionMethods)) {
-                unset($injectionMethods[array_search('__construct', $injectionMethods)]);
+            if (array_key_exists('__construct', $injectionMethods)) {
+                unset($injectionMethods['__construct']);
             }
         } elseif (is_callable($instantiator)) {
             $object = $this->createInstanceViaCallback($instantiator, $params, $alias);
@@ -222,28 +182,51 @@ class DependencyInjector implements DependencyInjection
         }
 
         if ($injectionMethods) {
-            foreach ($injectionMethods as $injectionMethod) {
-                $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias);
+            foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
+                $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias, $methodIsRequired);
             }
 
-            $iConfig = ($instanceManager->hasAlias($alias) && $instanceManager->hasConfiguration($alias))
-                ? $instanceManager->getConfiguration($alias)
-                : $instanceManager->getConfiguration(get_class($object));
+            $instanceConfiguration = $instanceManager->getConfiguration($name);
 
-            if ($iConfig['methods']) {
-                foreach ($iConfig['methods'] as $iConfigMethod => $iConfigMethodParams) {
-                    // skip methods processed by handleInjectionMethodForObject
-                    if (in_array($iConfigMethod, $injectionMethods) && $iConfigMethod !== '__construct') continue; 
-                    call_user_func_array(array($object, $iConfigMethod), array_values($iConfigMethodParams));
+            if ($instanceConfiguration['injections']) {
+                $objectsToInject = array();
+                foreach ($instanceConfiguration['injections'] as $classAliasToInject) {
+                    $objectsToInject[] = $this->get($classAliasToInject, $params);
+                }
+                if ($objectsToInject) {
+                    // @todo this needs to be optimized
+                    foreach ($objectsToInject as $objectToInject) {
+                        foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
+                            if ($methodParams = $definitions->getMethodParameters($class, $injectionMethod)) {
+                                foreach ($methodParams as $methodParam) {
+                                    if ($this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
+                                        $callParams = $this->resolveMethodParameters(get_class($object), $injectionMethod,
+                                            array($methodParam[0] => $objectToInject), false, $alias, true
+                                        );
+                                        if ($callParams) {
+                                            call_user_func_array(array($object, $injectionMethod), $callParams);
+                                        }
+                                        continue 3;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
+
+
         }
+
+
+
+        
         
         if ($isShared) {
             if ($params) {
-                $this->getInstanceManager()->addSharedInstanceWithParameters($object, $name, $params);
+                $this->instanceManager->addSharedInstanceWithParameters($object, $name, $params);
             } else {
-                $this->getInstanceManager()->addSharedInstance($object, $name);
+                $this->instanceManager->addSharedInstance($object, $name);
             }
         }
         
@@ -253,13 +236,23 @@ class DependencyInjector implements DependencyInjection
     
     /**
      * @todo 
-     * Enter description here ...
      * @param unknown_type $object
      */
-    // public function resolveObjectDependencies($object)
-    // {
-    //     
-    // }
+     public function injectObjects($targetObject, array $objects = array())
+     {
+         if ($objects === array()) {
+             throw new \Exception('Not yet implmeneted');
+         }
+
+         $targetClass = get_class($targetObject);
+         if (!$this->definitions()->hasClass($targetClass)) {
+             throw new Exception\RuntimeException('A definition for this object type cannot be found');
+         }
+
+         foreach ($objects as $objectToInject) {
+
+         }
+     }
 
     /**
      * Retrieve a class instance based on class name
@@ -276,8 +269,8 @@ class DependencyInjector implements DependencyInjection
     protected function createInstanceViaConstructor($class, $params, $alias = null)
     {
         $callParameters = array();
-        if ($this->definition->hasInjectionMethod($class, '__construct')) {
-            $callParameters = $this->resolveMethodParameters($class, '__construct', $params, true, $alias);
+        if ($this->definitions->hasMethod($class, '__construct')) {
+            $callParameters = $this->resolveMethodParameters($class, '__construct', $params, true, $alias, true);
         }
 
         // Hack to avoid Reflection in most common use cases
@@ -314,11 +307,13 @@ class DependencyInjector implements DependencyInjection
         if (is_array($callback)) {
             $class = (is_object($callback[0])) ? get_class($callback[0]) : $callback[0];
             $method = $callback[1];
+        } else {
+            throw new Exception\RuntimeException('Invalid callback type provided to ' . __METHOD__);
         }
 
         $callParameters = array();
-        if ($this->definition->hasInjectionMethod($class, $method)) {
-            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias);
+        if ($this->definitions->hasMethod($class, $method)) {
+            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias, true);
         }
         return call_user_func_array($callback, $callParameters); 
     }
@@ -332,10 +327,13 @@ class DependencyInjector implements DependencyInjection
      * @param array $params
      * @param string $alias
      */
-    protected function handleInjectionMethodForObject($object, $method, $params, $alias)
+    protected function handleInjectionMethodForObject($object, $method, $params, $alias, $methodIsRequired)
     {
         // @todo make sure to resolve the supertypes for both the object & definition
-        $callParameters = $this->resolveMethodParameters(get_class($object), $method, $params, false, $alias);
+        $callParameters = $this->resolveMethodParameters(get_class($object), $method, $params, false, $alias, $methodIsRequired);
+        if ($callParameters === false) {
+            return;
+        }
         if ($callParameters !== array_fill(0, count($callParameters), null)) {
             call_user_func_array(array($object, $method), $callParameters);
         }
@@ -351,33 +349,18 @@ class DependencyInjector implements DependencyInjection
      * @param string $alias
      * @return array
      */
-    protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $isInstantiator, $alias)
+    protected function resolveMethodParameters($class, $method, array $callTimeUserParams, $isInstantiator, $alias, $methodIsRequired)
     {
-        /* @var $isSubclassFunc Closure */
-        static $isSubclassFunc = null;
-        static $isSubclassFuncCache = null; // null as unset, array when set
-
-        $isSubclassFunc = function($class, $type) use (&$isSubclassFuncCache) {
-            /* @see https://bugs.php.net/bug.php?id=53727 */
-            if ($isSubclassFuncCache === null) {
-                $isSubclassFuncCache = array();
-            }
-            if (!array_key_exists($class, $isSubclassFuncCache)) {
-                $isSubclassFuncCache[$class] = class_parents($class, true) + class_implements($class, true);
-            }
-            return (isset($isSubclassFuncCache[$class][$type]));
-        };
-        
         // parameters for this method, in proper order, to be returned
         $resolvedParams = array();
         
         // parameter requirements from the definition
-        $injectionMethodParameters = $this->definition->getInjectionMethodParameters($class, $method);
-        
+        $injectionMethodParameters = $this->definitions->getMethodParameters($class, $method);
+
         // computed parameters array
         $computedParams = array(
             'value'    => array(),
-            'lookup'   => array(),
+            'required' => array(),
             'optional' => array()
         );
         
@@ -410,32 +393,36 @@ class DependencyInjector implements DependencyInjection
         // This is a 2 pass system for resolving parameters
         // first pass will find the sources, the second pass will order them and resolve lookups if they exist
         // MOST methods will only have a single parameters to resolve, so this should be fast
-        
-        foreach ($injectionMethodParameters as $name => $info) {
-            list($type, $isOptional, $isTypeInstantiable) = $info;
+
+        foreach ($injectionMethodParameters as $fqName => $info) {
+            list($name, $type, $isRequired) = $info;
 
             // PRIORITY 1 - consult user provided parameters
-            if (isset($callTimeUserParams[$name])) {
+            if (isset($callTimeUserParams[$fqName]) || isset($callTimeUserParams[$name])) {
+
+                // @todo FQ Name in call time params
+                if (isset($callTimeUserParams[$fqName])) throw \Exception('Implementation incomplete for fq names');
+
                 if (is_string($callTimeUserParams[$name])) {
                     if ($this->instanceManager->hasAlias($callTimeUserParams[$name])) {
                         // was an alias provided?
-                        $computedParams['lookup'][$name] = array(
+                        $computedParams['required'][$fqName] = array(
                             $callTimeUserParams[$name],
                             $this->instanceManager->getClassFromAlias($callTimeUserParams[$name])
                         );    
-                    } elseif ($this->definition->hasClass($callTimeUserParams[$name])) {
+                    } elseif ($this->definitions->hasClass($callTimeUserParams[$name])) {
                         // was a known class provided?
-                        $computedParams['lookup'][$name] = array(
+                        $computedParams['required'][$fqName] = array(
                             $callTimeUserParams[$name],
                             $callTimeUserParams[$name]
                         );
                     } else {
                         // must be a value
-                        $computedParams['value'][$name] = $callTimeUserParams[$name]; 
+                        $computedParams['value'][$fqName] = $callTimeUserParams[$name];
                     }
                 } else {
                     // int, float, null, object, etc
-                    $computedParams['value'][$name] = $callTimeUserParams[$name];
+                    $computedParams['value'][$fqName] = $callTimeUserParams[$name];
                 }
                 continue;
             }
@@ -447,44 +434,29 @@ class DependencyInjector implements DependencyInjection
             
             foreach (array('thisAlias', 'thisClass', 'requestedAlias', 'requestedClass') as $thisIndex) {
                 // check the provided parameters config
-                if (isset($iConfig[$thisIndex]['parameters'][$name])) {
+                if (isset($iConfig[$thisIndex]['parameters'][$fqName]) || isset($iConfig[$thisIndex]['parameters'][$name])) {
+
+                    // @todo FQ Name in config parameters
+                    if (isset($iConfig[$thisIndex]['parameters'][$fqName])) throw \Exception('Implementation incomplete for fq names');
+
                     if (is_string($iConfig[$thisIndex]['parameters'][$name])
                         && isset($aliases[$iConfig[$thisIndex]['parameters'][$name]])) {
-                        $computedParams['lookup'][$name] = array(
+                        $computedParams['required'][$fqName] = array(
                             $iConfig[$thisIndex]['parameters'][$name],
                             $this->instanceManager->getClassFromAlias($iConfig[$thisIndex]['parameters'][$name])
                         );
                     } elseif (is_string($iConfig[$thisIndex]['parameters'][$name])
-                        && $this->definition->hasClass($iConfig[$thisIndex]['parameters'][$name])) {
-                        $computedParams['lookup'][$name] = array(
+                        && $this->definitions->hasClass($iConfig[$thisIndex]['parameters'][$name])) {
+                        $computedParams['required'][$fqName] = array(
                             $iConfig[$thisIndex]['parameters'][$name],
                             $iConfig[$thisIndex]['parameters'][$name]
                         );
                     } else {
-                        $computedParams['value'][$name] = $iConfig[$thisIndex]['parameters'][$name];
+                        $computedParams['value'][$fqName] = $iConfig[$thisIndex]['parameters'][$name];
                     }
                     continue 2;
                 }
-                // check the provided method config
-                if (isset($iConfig[$thisIndex]['methods'][$method][$name])) {
-                    if (is_string(is_string($iConfig[$thisIndex]['methods'][$method][$name]))
-                        && isset($aliases[$iConfig[$thisIndex]['methods'][$method][$name]])) {
-                        $computedParams['lookup'][$name] = array(
-                            $iConfig[$thisIndex]['methods'][$method][$name],
-                            $this->instanceManager->getClassFromAlias($iConfig[$thisIndex]['methods'][$method][$name])
-                        );
-                    } elseif (is_string(is_string($iConfig[$thisIndex]['methods'][$method][$name]))
-                        && $this->definition->hasClass($iConfig[$thisIndex]['methods'][$method][$name])) {
-                        $computedParams['lookup'][$name] = array(
-                            $iConfig[$thisIndex]['methods'][$method][$name],
-                            $iConfig[$thisIndex]['methods'][$method][$name]
-                        );
-                    } else {
-                        $computedParams['value'][$name] = $iConfig[$thisIndex]['methods'][$method][$name];
-                    }
-                    continue 2;
-                }
-            
+
             }
             
             // PRIORITY 6 - globally preferred implementations
@@ -495,8 +467,8 @@ class DependencyInjector implements DependencyInjection
                 foreach ($pInstances as $pInstance) {
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || $isSubclassFunc($pInstanceClass, $type)) {
-                        $computedParams['lookup'][$name] = array($pInstance, $pInstanceClass);
+                    if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
+                        $computedParams['required'][$fqName] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
@@ -508,41 +480,57 @@ class DependencyInjector implements DependencyInjection
                 foreach ($pInstances as $pInstance) {
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
-                    if ($pInstanceClass === $type || $isSubclassFunc($pInstanceClass, $type)) {
-                        $computedParams['lookup'][$name] = array($pInstance, $pInstanceClass);
+                    if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
+                        $computedParams['required'][$fqName] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
             }
 
-            if ($isOptional) {
-                $computedParams['optional'][$name] = true;
+            if (!$isRequired) {
+                $computedParams['optional'][$fqName] = true;
             }
-            
-            if ($type && $isTypeInstantiable === true && !$isOptional) {
-                $computedParams['lookup'][$name] = array($type, $type);
+
+            if ($type && $isRequired && $methodIsRequired) {
+                $computedParams['required'][$fqName] = array($type, $type);
             }
             
         }
 
         $index = 0;
-        foreach ($injectionMethodParameters as $name => $value) {
+        foreach ($injectionMethodParameters as $fqName => $value) {
+            $name = $value[0];
 
-            if (isset($computedParams['value'][$name])) {
-                $resolvedParams[$index] = $computedParams['value'][$name];
-            } elseif (isset($computedParams['lookup'][$name])) {
-                if ($isInstantiator && in_array($computedParams['lookup'][$name][1], $this->currentDependencies)) {
+            if (isset($computedParams['value'][$fqName])) {
+
+                // if there is a value supplied, use it
+                $resolvedParams[$index] = $computedParams['value'][$fqName];
+
+            } elseif (isset($computedParams['required'][$fqName])) {
+
+                // detect circular dependencies! (they can only happen in instantiators)
+                if ($isInstantiator && in_array($computedParams['required'][$fqName][1], $this->currentDependencies)) {
                     throw new Exception\CircularDependencyException(
                         "Circular dependency detected: $class depends on {$value[0]} and viceversa"
                     );
                 }
                 array_push($this->currentDependencies, $class);
-                $resolvedParams[$index] = $this->get($computedParams['lookup'][$name][0], $callTimeUserParams);
+                $resolvedParams[$index] = $this->get($computedParams['required'][$fqName][0], $callTimeUserParams);
                 array_pop($this->currentDependencies);
-            } elseif (!array_key_exists($name, $computedParams['optional'])) {
-                throw new Exception\MissingPropertyException(
-                    'Missing parameter named ' . $name . ' for ' . $class . '::' . $method
-                );
+
+            } elseif (!array_key_exists($fqName, $computedParams['optional'])) {
+
+                if ($methodIsRequired) {
+                    // if this item was not marked as optional,
+                    // plus it cannot be resolve, and no value exist, bail out
+                    throw new Exception\MissingPropertyException(sprintf(
+                        'Missing %s for parameter ' . $name . ' for ' . $class . '::' . $method,
+                        (($value[0] === null) ? 'value' : 'instance/object' )
+                    ));
+                } else {
+                    return false;
+                }
+
             } else {
                 $resolvedParams[$index] = null;
             }
@@ -550,7 +538,29 @@ class DependencyInjector implements DependencyInjection
             $index++;
         }
 
-        return $resolvedParams;
+        return $resolvedParams; // return ordered list of parameters
+    }
+
+    /**
+     * @see https://bugs.php.net/bug.php?id=53727
+     *
+     * @param $class
+     * @param $type
+     * @return bool
+     */
+    protected function isSubclassOf($class, $type)
+    {
+        /* @var $isSubclassFunc Closure */
+        static $isSubclassFuncCache = null; // null as unset, array when set
+
+        if ($isSubclassFuncCache === null) {
+            $isSubclassFuncCache = array();
+        }
+
+        if (!array_key_exists($class, $isSubclassFuncCache)) {
+            $isSubclassFuncCache[$class] = class_parents($class, true) + class_implements($class, true);
+        }
+        return (isset($isSubclassFuncCache[$class][$type]));
     }
 
 }

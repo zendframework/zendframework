@@ -85,13 +85,200 @@ class ClassScanner implements Scanner
      * @param AnnotationManager|null $annotationManager
      * @return ClassScanner
      */
-    public function __construct(array $classTokens, NameInformation $nameInformation = null, AnnotationManager $annotationManager = null)
+    public function __construct(array $classTokens, NameInformation $nameInformation = null)
     {
         $this->tokens            = $classTokens;
         $this->nameInformation   = $nameInformation;
-        $this->annotationManager = $annotationManager;
     }
-    
+
+    public function getAnnotations()
+    {
+        return array();
+    }
+
+    public function getDocComment()
+    {
+        $this->scan();
+        return $this->docComment;
+    }
+
+    public function getDocBlock()
+    {
+        if (!$docComment = $this->getDocComment()) {
+            return false;
+        }
+        return new DocBlockScanner($docComment);
+    }
+
+    public function getName()
+    {
+        $this->scan();
+        return $this->name;
+    }
+
+    public function getShortName()
+    {
+        $this->scan();
+        return $this->shortName;
+    }
+
+    public function isFinal()
+    {
+        $this->scan();
+        return $this->isFinal;
+    }
+
+    public function isInstantiable()
+    {
+        $this->scan();
+        return (!$this->isAbstract && !$this->isInterface);
+    }
+
+    public function isAbstract()
+    {
+        $this->scan();
+        return $this->isAbstract;
+    }
+
+    public function isInterface()
+    {
+        $this->scan();
+        return $this->isInterface;
+    }
+
+    public function hasParentClass()
+    {
+        $this->scan();
+        return ($this->parentClass != null);
+    }
+
+    public function getParentClass()
+    {
+        $this->scan();
+        return $this->parentClass;
+    }
+
+    public function getInterfaces()
+    {
+        $this->scan();
+        return $this->interfaces;
+    }
+
+    public function getConstants()
+    {
+        $this->scan();
+
+        $return = array();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'constant') {
+                continue;
+            }
+            $return[] = $info['name'];
+        }
+        return $return;
+    }
+
+    public function getProperties($returnScannerProperty = false)
+    {
+        $this->scan();
+
+        $return = array();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'property') {
+                continue;
+            }
+
+            if (!$returnScannerProperty) {
+                $return[] = $info['name'];
+            } else {
+                $return[] = $this->getProperty($info['name']);
+            }
+        }
+        return $return;
+    }
+
+    public function getMethods($returnScannerMethod = false)
+    {
+        $this->scan();
+
+        $return = array();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'method') {
+                continue;
+            }
+
+            if (!$returnScannerMethod) {
+                $return[] = $info['name'];
+            } else {
+                $return[] = $this->getMethod($info['name']);
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * @param string|int $methodNameOrInfoIndex
+     * @return MethodScanner
+     */
+    public function getMethod($methodNameOrInfoIndex)
+    {
+        $this->scan();
+
+        if (is_int($methodNameOrInfoIndex)) {
+            $info = $this->infos[$methodNameOrInfoIndex];
+            if ($info['type'] != 'method') {
+                throw new Exception\InvalidArgumentException('Index of info offset is not about a method');
+            }
+        } elseif (is_string($methodNameOrInfoIndex)) {
+            $methodFound = false;
+            foreach ($this->infos as $infoIndex => $info) {
+                if ($info['type'] === 'method' && $info['name'] === $methodNameOrInfoIndex) {
+                    $methodFound = true;
+                    break;
+                }
+            }
+            if (!$methodFound) {
+                return false;
+            }
+        }
+        if (!isset($info)) {
+            // @todo find a way to test this
+            die('Massive Failure, test this');
+        }
+        $m = new MethodScanner(
+            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
+            $this->nameInformation
+            );
+        $m->setClass($this->name);
+        $m->setScannerClass($this);
+        return $m;
+    }
+
+    public function hasMethod($name)
+    {
+        $this->scan();
+
+        foreach ($this->infos as $infoIndex => $info) {
+            if ($info['type'] === 'method' && $info['name'] === $name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static function export()
+    {
+        // @todo
+    }
+
+    public function __toString()
+    {
+        // @todo
+    }
+
     protected function scan()
     {
         if ($this->isScanned) {
@@ -292,6 +479,7 @@ class ClassScanner implements Scanner
                                 $MACRO_INFO_ADVANCE();
                                 goto SCANNER_CLASS_BODY_CONTINUE;
 
+                        case T_DOC_COMMENT:
                         case T_PUBLIC:
                         case T_PROTECTED:
                         case T_PRIVATE:
@@ -424,187 +612,4 @@ class ClassScanner implements Scanner
         return;
     }
 
-    public function getDocComment()
-    {
-        $this->scan();
-        return $this->docComment;
-    }
-
-    public function getDocBlock()
-    {
-        if (!$docComment = $this->getDocComment()) {
-            return false;
-        }
-        return new DocBlockScanner($docComment);
-    }
-
-    public function getName()
-    {
-        $this->scan();
-        return $this->name;
-    }
-    
-    public function getShortName()
-    {
-        $this->scan();
-        return $this->shortName;
-    }
-    
-    public function isFinal()
-    {
-        $this->scan();
-        return $this->isFinal;
-    }
-
-    public function isInstantiable()
-    {
-        $this->scan();
-        return (!$this->isAbstract && !$this->isInterface);
-    }
-    
-    public function isAbstract()
-    {
-        $this->scan();
-        return $this->isAbstract;
-    }
-    
-    public function isInterface()
-    {
-        $this->scan();
-        return $this->isInterface;
-    }
-
-    public function hasParentClass()
-    {
-        $this->scan();
-        return ($this->parentClass != null);
-    }
-    
-    public function getParentClass()
-    {
-        $this->scan();
-        return $this->parentClass;
-    }
-    
-    public function getInterfaces()
-    {
-        $this->scan();
-        return $this->interfaces;
-    }
-    
-    public function getConstants()
-    {
-        $this->scan();
-        
-        $return = array();
-        
-        foreach ($this->infos as $info) {
-            if ($info['type'] != 'constant') {
-                continue;
-            }
-            $return[] = $info['name'];
-        }
-        return $return;
-    }
-    
-    public function getProperties($returnScannerProperty = false)
-    {
-        $this->scan();
-        
-        $return = array();
-        
-        foreach ($this->infos as $info) {
-            if ($info['type'] != 'property') {
-                continue;
-            }
-
-            if (!$returnScannerProperty) {
-                $return[] = $info['name'];
-            } else {
-                $return[] = $this->getProperty($info['name']);
-            }
-        }
-        return $return;
-    }
-    
-    public function getMethods($returnScannerMethod = false)
-    {
-        $this->scan();
-        
-        $return = array();
-        
-        foreach ($this->infos as $info) {
-            if ($info['type'] != 'method') {
-                continue;
-            }
-
-            if (!$returnScannerMethod) {
-                $return[] = $info['name'];
-            } else {
-                $return[] = $this->getMethod($info['name']);
-            }
-        }
-        return $return;
-    }
-    
-    /**
-     * @param string|int $methodNameOrInfoIndex
-     * @return MethodScanner
-     */
-    public function getMethod($methodNameOrInfoIndex)
-    {
-        $this->scan();
-
-        if (is_int($methodNameOrInfoIndex)) {
-            $info = $this->infos[$methodNameOrInfoIndex];
-            if ($info['type'] != 'method') {
-                throw new Exception\InvalidArgumentException('Index of info offset is not about a method');
-            }
-        } elseif (is_string($methodNameOrInfoIndex)) {
-            $methodFound = false;
-            foreach ($this->infos as $infoIndex => $info) {
-                if ($info['type'] === 'method' && $info['name'] === $methodNameOrInfoIndex) {
-                    $methodFound = true;
-                    break;
-                }
-            }
-            if (!$methodFound) {
-                return false;
-            }
-        }
-        if (!isset($info)) {
-            // @todo find a way to test this
-            die('Massive Failure, test this');
-        }
-        $m = new MethodScanner(
-            array_slice($this->tokens, $info['tokenStart'], $info['tokenEnd'] - $info['tokenStart'] + 1),
-            $this->nameInformation
-            );
-        $m->setClass($this->name);
-        $m->setScannerClass($this);
-        return $m;
-    }
-    
-    public function hasMethod($name)
-    {
-        $this->scan();
-        
-        foreach ($this->infos as $infoIndex => $info) {
-            if ($info['type'] === 'method' && $info['name'] === $name) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    public static function export()
-    {
-        // @todo
-    }
-    
-    public function __toString()
-    {
-        // @todo
-    }
-    
 }

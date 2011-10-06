@@ -6,7 +6,8 @@ use Zend\Code\Scanner\DerivedClassScanner,
     Zend\Code\Scanner\AggregateDirectoryScanner,
     Zend\Code\Scanner\DirectoryScanner,
     Zend\Code\Scanner\FileScanner,
-    Zend\Code\Scanner\MethodScanner;
+    Zend\Code\Scanner\MethodScanner,
+    Zend\Code\Annotation\AnnotationCollection;
 
 class CompilerDefinition implements Definition
 {
@@ -127,8 +128,8 @@ class CompilerDefinition implements Definition
                 continue;
             }
 
-            /*
             if ($strategy->getUseAnnotations() == true) {
+
                 $annotations = $mScanner->getAnnotations($strategy->getAnnotationManager());
 
                 if (($annotations instanceof AnnotationCollection)
@@ -139,7 +140,6 @@ class CompilerDefinition implements Definition
                     continue;
                 }
             }
-            */
 
             $methodPatterns = $this->introspectionStrategy->getMethodNameInclusionPatterns();
 

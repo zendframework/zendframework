@@ -4,7 +4,8 @@ namespace Zend\Code\Scanner;
 
 use Zend\Code\Scanner,
     Zend\Code\NameInformation,
-    Zend\Code\Exception;
+    Zend\Code\Exception,
+    Zend\Code\Annotation;
 
 class MethodScanner implements Scanner
 {
@@ -51,7 +52,25 @@ class MethodScanner implements Scanner
         $this->scan();
         return $this->name;
     }
-    
+
+    public function getDocComment()
+    {
+        $this->scan();
+        return $this->docComment;
+    }
+
+    /**
+     * @return AnnotationCollection
+     */
+    public function getAnnotations(Annotation\AnnotationManager $annotationManager)
+    {
+        if (($docComment = $this->getDocComment()) == '') {
+            return false;
+        }
+
+        return new AnnotationScanner($annotationManager, $docComment, $this->nameInformation);
+    }
+
     public function isFinal()
     {
         $this->scan();

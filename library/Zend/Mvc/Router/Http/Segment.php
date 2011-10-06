@@ -265,7 +265,7 @@ class Segment implements Route
         }
 
         $matches = array_merge($this->defaults, $matches);
-        return new PartRouteMatch($matches, $this, $matchedLength);
+        return new RouteMatch($matches, $this, $matchedLength);
     }
 
     /**

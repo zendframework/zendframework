@@ -135,7 +135,7 @@ class Regex implements Route
 
         $matches       = array_merge($this->defaults, $match);
         $this->matches = $matches;
-        return new PartRouteMatch($matches, $this, $matchedLength);
+        return new RouteMatch($matches, $this, $matchedLength);
     }
 
     /**

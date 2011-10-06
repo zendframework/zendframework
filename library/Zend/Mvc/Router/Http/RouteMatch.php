@@ -24,7 +24,7 @@
 namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Route,
-    Zend\Mvc\Router\RouteMatch;
+    Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
 
 /**
  * Part route match.
@@ -33,21 +33,8 @@ use Zend\Mvc\Router\Route,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PartRouteMatch extends RouteMatch
+class RouteMatch extends BaseRouteMatch
 {
-    /**
-     * Match parameters.
-     * 
-     * @var array
-     */
-    protected $params = array();
-
-    /**
-     * Route that provided the match (if any)
-     * @var Route|null
-     */
-    protected $route;
-    
     /**
      * Length of the matched path.
      * 
@@ -56,7 +43,7 @@ class PartRouteMatch extends RouteMatch
     protected $length;
     
     /**
-     * Create a RouteMatch with given parameters.
+     * Create a part RouteMatch with given parameters and length.
      * 
      * @param  array      $params
      * @param  null|Route $route
@@ -65,70 +52,23 @@ class PartRouteMatch extends RouteMatch
      */
     public function __construct(array $params, Route $route = null, $length = 0)
     {
-        $this->params = $params;
-        $this->route  = $route;
-        $this->length = $length;
-    }
-       
-    /**
-     * Set a parameter.
-     * 
-     * @param  string $name
-     * @param  mixed  $value 
-     * @return void
-     */
-    public function setParam($name, $value)
-    {
-        $this->params[$name] = $value;
-    }
-    
-    /**
-     * Get all parameters.
-     * 
-     * @return array
-     */
-    public function getParams()
-    {
-        return $this->params;
-    }
-    
-    /**
-     * Get a specific parameter.
-     * 
-     * @param  string $name
-     * @param  mixed $default
-     * @return mixed
-     */
-    public function getParam($name, $default = null)
-    {
-        if (array_key_exists($name, $this->params)) {
-            return $this->params[$name];
-        }
+        parent::RouteMatch($params, $route);
         
-        return $default;
+        $this->length = $length;
     }
     
     /**
      * Merge parameters from another match.
      * 
-     * @param  RouteMatch $match
+     * @param  self $match
      * @return void
      */
     public function merge(self $match)
     {
-        $this->params = array_merge($this->params, $match->getParams());
+        $this->params  = array_merge($this->params, $match->getParams());
+        $this->length += $match->getLength();
     }
 
-    /**
-     * Get the route that matched and provided these parameters
-     * 
-     * @return null|Route
-     */
-    public function getRoute()
-    {
-        return $this->route;
-    }
-    
     /**
      * Get the matched path length.
      * 

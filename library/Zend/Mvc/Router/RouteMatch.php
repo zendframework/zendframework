@@ -99,7 +99,7 @@ class RouteMatch
     /**
      * Merge parameters from another match.
      * 
-     * @param  RouteMatch $match
+     * @param  self $match
      * @return void
      */
     public function merge(self $match)

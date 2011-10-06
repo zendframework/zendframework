@@ -24,7 +24,8 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Loader\PluginSpecBroker,
+use Zend\Mvc\Router\Exception,
+    Zend\Loader\PluginSpecBroker,
     Zend\Mvc\Router\SimpleRouteStack;
 
 /**
@@ -61,6 +62,26 @@ class TreeRouteStack extends SimpleRouteStack
     }
     
     /**
+     * addRoute(): defined by RouteStack interface.
+     *
+     * @see    Route::addRoute()
+     * @param  string  $name
+     * @param  mixed   $route
+     * @param  integer $priority
+     * @return RouteStack
+     */
+    public function addRoute($name, $route, $priority = null)
+    {
+        if (!$route instanceof Route) {
+            $route = $this->routeFromArray($route);
+        }
+        
+        $this->routes->insert($name, $route, $priority);
+
+        return $this;
+    }
+    
+    /**
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
@@ -70,6 +91,10 @@ class TreeRouteStack extends SimpleRouteStack
     protected function routeFromArray($specs)
     {
         $route = parent::routeFromArray($specs);
+        
+        if (!$route instanceof Route) {
+            throw new Exception\RuntimeException('Given route does not implement HTTP route interface');
+        }
         
         if (isset($specs['routes'])) {      
             $options = array(
@@ -94,12 +119,22 @@ class TreeRouteStack extends SimpleRouteStack
      */
     public function match(Request $request)
     {
-        $baseUrlLength = strlen($this->baseUrl) ?: null;
+        if (!method_exists($request, 'uri')) {
+            return null;
+        }
         
-        foreach ($this->routes as $route) {
-            if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch) {
-                return $match;
+        $baseUrlLength = strlen($this->baseUrl) ?: null;
+
+        if ($baseUrlLength !== null) {
+            $pathLength = strlen($request->uri()->getPath());
+            
+            foreach ($this->routes as $route) {
+                if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
+                    return $match;
+                }
             }
+        } else {
+            return parent::match($request);
         }
 
         return null;

@@ -170,7 +170,7 @@ class InstanceManager /* implements InstanceCollection */
             if ($r > 100) {
                 throw new Exception\RuntimeException(
                     sprintf('Possible infinite recursion in DI alias! Max recursion of 100 levels reached at alias "%s".', $alias)
-                ); 
+                );
             }
         }
         return $alias;
@@ -373,5 +373,4 @@ class InstanceManager /* implements InstanceCollection */
         }
         return $hashValue;
     }
-    
 }

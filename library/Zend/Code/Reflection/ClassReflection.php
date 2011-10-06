@@ -25,8 +25,10 @@ namespace Zend\Code\Reflection;
 
 use Zend\Code\Reflection,
     ReflectionClass,
-    Zend\Code\Reflection\ReflectionFile,
-    Zend\Code\Annotation\AnnotationManager;
+    Zend\Code\Reflection\FileReflection,
+    Zend\Code\Scanner\FileScanner,
+    Zend\Code\Annotation,
+    Zend\Code\Scanner\AnnotationScanner;
 
 /**
  * @uses       ReflectionClass
@@ -43,14 +45,10 @@ class ClassReflection extends ReflectionClass implements Reflection
 {
 
     /**
-     * @var AnnotationManager
+     * @var Annotation\AnnotationCollection
      */
-    protected $annotationManager = null;
+    protected $annotations = null;
 
-    public function setAnnotationManager(AnnotationManager $annotationManager)
-    {
-        $this->annotationManager = $annotationManager;
-    }
 
     /**
      * Return the reflection file of the declaring file.
@@ -76,17 +74,25 @@ class ClassReflection extends ReflectionClass implements Reflection
         }
 
         $instance = new DocBlockReflection($this->getDocComment());
-        if ($this->annotationManager) {
-            $instance->setAnnotationManager($this->annotationManager);
-        }
         return $instance;
     }
 
     /**
      * @return AnnotationCollection
      */
-    public function getAnnotations() {
+    public function getAnnotations(Annotation\AnnotationManager $annotationManager)
+    {
+        if (($docComment = $this->getDocComment()) == '') {
+            return false;
+        }
 
+        if (!$this->annotations) {
+            $fileScanner = new FileScanner($this->getFileName());
+            $nameInformation = $fileScanner->getClassNameInformation($this->getName());
+            $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+        }
+
+        return $this->annotations;
     }
 
     /**
@@ -147,9 +153,6 @@ class ClassReflection extends ReflectionClass implements Reflection
     public function getMethod($name)
     {
         $method = new MethodReflection($this->getName(), parent::getMethod($name)->getName());
-        if ($this->annotationManager) {
-            $method->setAnnotationManager($this->annotationManager);
-        }
         return $method;
     }
 
@@ -164,9 +167,6 @@ class ClassReflection extends ReflectionClass implements Reflection
         $methods = array();
         foreach (parent::getMethods($filter) as $method) {
             $instance = new MethodReflection($this->getName(), $method->getName());
-            if ($this->annotationManager) {
-                $instance->setAnnotationManager($this->annotationManager);
-            }
             $methods[] = $instance;
         }
         return $methods;

@@ -76,10 +76,14 @@ class MethodReflection extends ReflectionMethod implements Reflection
             return false;
         }
 
-        $fileScanner = new FileScanner($this->getFileName());
-        $nameInformation = $fileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
+        if (!$this->annotations) {
+            $fileScanner = new FileScanner($this->getFileName());
+            $nameInformation = $fileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
 
-        return new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+            $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
+        }
+
+        return $this->annotations;
     }
 
     /**

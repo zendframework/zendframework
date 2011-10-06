@@ -216,11 +216,12 @@ class RuntimeDefinition implements Definition
         $def = &$this->classes[$className]; // localize for brevity
 
         // class annotations?
-        if (($rClassDocBlock = $rClass->getDocComment()) !== false) {
-            foreach ($rClassDocBlock->getAnnotations() as $aClass) {
-                if ($aClass instanceof Annotation\Instantiator) {
-                    $def['instantiator'] = $aClass->getMethod();
-                }
+        if ($strategy->getUseAnnotations() == true) {
+            $annotations = $rClass->getAnnotations($strategy->getAnnotationManager());
+
+            if (($annotations instanceof AnnotationCollection)
+                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')) {
+                // @todo Instnatiator support in annotations
             }
         }
 

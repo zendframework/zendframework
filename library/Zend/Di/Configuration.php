@@ -59,7 +59,7 @@ class Configuration
                         }
                         foreach ($classDefinitionData as $classDefKey => $classDefData) {
                             switch ($classDefKey) {
-                                case 'instatiator':
+                                case 'instantiator':
                                     $classDefinition->setInstantiator($classDefData);
                                     break;
                                 case 'supertypes':

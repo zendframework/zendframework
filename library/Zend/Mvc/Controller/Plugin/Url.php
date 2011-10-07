@@ -2,7 +2,7 @@
 
 namespace Zend\Mvc\Controller\Plugin;
 
-use Zend\Mvc\EventAware,
+use Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\Exception,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteStack;
@@ -16,14 +16,14 @@ class Url extends AbstractPlugin
      * @param  array $params Parameters to use in url generation, if any
      * @param  array $options Route-specific options to use in url generation, if any
      * @return string
-     * @throws Exception\DomainException if composed controller is not EventAware, or 
+     * @throws Exception\DomainException if composed controller does not implement InjectApplicationEvent, or 
      *         router cannot be found in controller event
      */
     public function fromRoute($route, array $params = array(), array $options = array())
     {
         $controller = $this->getController();
-        if (!$controller instanceof EventAware) {
-            throw new Exception\DomainException('Url plugin requires a controller that is EventAware');
+        if (!$controller instanceof InjectApplicationEvent) {
+            throw new Exception\DomainException('Url plugin requires a controller that implements InjectApplicationEvent');
         }
 
         $event  = $controller->getEvent();

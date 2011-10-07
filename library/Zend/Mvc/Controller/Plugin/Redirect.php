@@ -3,7 +3,7 @@
 namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Http\Response,
-    Zend\Mvc\EventAware,
+    Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\Exception,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteStack;
@@ -24,7 +24,7 @@ class Redirect extends AbstractPlugin
      * @param  array $params Parameters to use in url generation, if any
      * @param  array $options Route-specific options to use in url generation, if any
      * @return Response
-     * @throws Exception\DomainException if composed controller is not EventAware, or 
+     * @throws Exception\DomainException if composed controller does not implement InjectApplicationEvent, or 
      *         router cannot be found in controller event
      */
     public function toRoute($route, array $params = array(), array $options = array())
@@ -108,8 +108,8 @@ class Redirect extends AbstractPlugin
         }
 
         $controller = $this->getController();
-        if (!$controller instanceof EventAware) {
-            throw new Exception\DomainException('Redirect plugin requires a controller that is EventAware');
+        if (!$controller instanceof InjectApplicationEvent) {
+            throw new Exception\DomainException('Redirect plugin requires a controller that implements InjectApplicationEvent');
         }
 
         $event = $controller->getEvent();

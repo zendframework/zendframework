@@ -3,12 +3,12 @@
 namespace ZendTest\Mvc\Controller\TestAsset;
 
 use Zend\EventManager\EventDescription as Event,
-    Zend\Mvc\EventAware,
+    Zend\Mvc\InjectApplicationEvent,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
-class UnlocatableEventfulController implements Dispatchable, EventAware
+class UnlocatableEventfulController implements Dispatchable, InjectApplicationEvent
 {
     protected $event;
 

@@ -3,7 +3,7 @@
 namespace Zend\Mvc\Controller\Plugin;
 
 use Zend\Di\Locator,
-    Zend\Mvc\EventAware,
+    Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\Exception,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent,
@@ -21,7 +21,7 @@ class Forward extends AbstractPlugin
      * @param  string $name Controller name; either a class name or an alias used in the DI container or service locator
      * @param  null|array $params Parameters with which to seed a custom RouteMatch object for the new controller
      * @return mixed
-     * @throws Exception\DomainException if composed controller is not EventAware 
+     * @throws Exception\DomainException if composed controller does not define InjectApplicationEvent
      *         or Locator aware; or if the discovered controller is not dispatchable
      */
     public function dispatch($name, array $params = null)
@@ -33,7 +33,7 @@ class Forward extends AbstractPlugin
         if (!$controller instanceof Dispatchable) {
             throw new Exception\DomainException('Can only forward to Dispatchable classes; class of type ' . get_class($controller) . ' received');
         }
-        if ($controller instanceof EventAware) {
+        if ($controller instanceof InjectApplicationEvent) {
             $controller->setEvent($event);
         }
         if ($controller instanceof LocatorAware) {
@@ -95,8 +95,8 @@ class Forward extends AbstractPlugin
         }
 
         $controller = $this->getController();
-        if (!$controller instanceof EventAware) {
-            throw new Exception\DomainException('Redirect plugin requires a controller that is EventAware');
+        if (!$controller instanceof InjectApplicationEvent) {
+            throw new Exception\DomainException('Redirect plugin requires a controller that implements InjectApplicationEvent');
         }
 
         $event = $controller->getEvent();

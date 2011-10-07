@@ -320,7 +320,7 @@ class Application implements AppContext
         $request  = $e->getRequest();
         $response = $this->getResponse();
 
-        if ($controller instanceof EventAware) {
+        if ($controller instanceof InjectApplicationEvent) {
             $controller->setEvent($e);
         }
 

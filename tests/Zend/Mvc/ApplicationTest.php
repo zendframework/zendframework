@@ -5,7 +5,7 @@ namespace ZendTest\Mvc;
 use ArrayObject,
     PHPUnit_Framework_TestCase as TestCase,
     stdClass,
-    Zend\Di\DependencyInjector,
+    Zend\Di\Di as DependencyInjector,
     Zend\Di\ServiceLocator,
     Zend\EventManager\EventManager,
     Zend\EventManager\StaticEventManager,

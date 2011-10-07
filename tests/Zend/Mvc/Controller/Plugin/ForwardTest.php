@@ -41,7 +41,7 @@ class ForwardTest extends TestCase
         $controller = new UneventfulController();
         $plugin     = new ForwardPlugin();
         $plugin->setController($controller);
-        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'EventAware');
+        $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'InjectApplicationEvent');
         $plugin->dispatch('forward');
     }
 

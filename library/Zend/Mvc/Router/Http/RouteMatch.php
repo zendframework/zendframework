@@ -52,7 +52,7 @@ class RouteMatch extends BaseRouteMatch
      */
     public function __construct(array $params, Route $route = null, $length = 0)
     {
-        parent::RouteMatch($params, $route);
+        parent::__construct($params, $route);
         
         $this->length = $length;
     }

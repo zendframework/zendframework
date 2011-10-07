@@ -21,7 +21,7 @@
 /**
  * @namespace
  */
-namespace Zend\Mvc\Router;
+namespace Zend\Mvc\Router\Http;
 
 use Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Route as BaseRoute;

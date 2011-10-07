@@ -6,6 +6,12 @@ use Zend\Di\Di;
 class Console
 {
 
+    public static function export(Di $di)
+    {
+        $console = new static;
+        $console->render($di);
+    }
+
     public function render(Di $di)
     {
 

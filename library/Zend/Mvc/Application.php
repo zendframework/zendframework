@@ -214,7 +214,8 @@ class Application implements AppContext
             return ($r instanceof Response);
         });
         if ($result->stopped()) {
-            return $result->last();
+            $response = new SendableResponse($result->last());
+            return $response;
         }
 
         $result = $events->trigger('dispatch', $event, function ($r) {

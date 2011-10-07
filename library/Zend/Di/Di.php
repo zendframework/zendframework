@@ -459,6 +459,10 @@ class Di implements DependencyInjection
             if ($alias && $this->instanceManager->hasTypePreferences($alias)) {
                 $pInstances = $this->instanceManager->getTypePreferences($alias);
                 foreach ($pInstances as $pInstance) {
+                    if (is_object($pInstance)) {
+                        $computedParams['value'][$fqName] = $pInstance;
+                        continue 2;
+                    }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
@@ -472,6 +476,10 @@ class Di implements DependencyInjection
             if ($type && $this->instanceManager->hasTypePreferences($type)) {
                 $pInstances = $this->instanceManager->getTypePreferences($type);
                 foreach ($pInstances as $pInstance) {
+                    if (is_object($pInstance)) {
+                        $computedParams['value'][$fqName] = $pInstance;
+                        continue 2;
+                    }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {

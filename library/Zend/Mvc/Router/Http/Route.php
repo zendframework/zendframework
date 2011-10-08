@@ -42,5 +42,5 @@ interface Route extends BaseRoute
      * @param  integer $pathOffset
      * @return RouteMatch
      */
-    public function match(Request $request, $pathOffset = null);
+    //public function match(Request $request, $pathOffset = null);
 }

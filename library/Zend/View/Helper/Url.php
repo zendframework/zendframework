@@ -38,6 +38,8 @@ use Zend\Controller\Front as FrontController;
  */
 class Url extends AbstractHelper
 {
+    protected $router = null;
+
     /**
      * Generates an url given the name of a route.
      *
@@ -50,7 +52,12 @@ class Url extends AbstractHelper
      */
     public function __invoke(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
     {
-        $router = FrontController::getInstance()->getRouter();
-        return $router->assemble($urlOptions, $name, $reset, $encode);
+        //$router = FrontController::getInstance()->getRouter();
+        return $this->router->assemble($urlOptions, $name, $reset, $encode);
+    }
+
+    public function setRouter($router)
+    {
+        $this->router = $router;
     }
 }

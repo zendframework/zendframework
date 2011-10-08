@@ -591,7 +591,7 @@ class ClassScanner implements Scanner
             goto SCANNER_TOP;
 
         SCANNER_END:
-
+//var_dump($this->tokens[$tokenIndex], $this->tokens);
 
         // process short names
         if ($this->nameInformation) {

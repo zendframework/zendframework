@@ -23,8 +23,7 @@
  */
 namespace Zend\Stdlib\Exception;
 
-use Zend\Stdlib\Exception,
-    DomainException;
+use Zend\Stdlib\Exception;
 
 /**
  * Invalid callback exception

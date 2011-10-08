@@ -325,7 +325,7 @@ class Di implements DependencyInjection
     {
         // @todo make sure to resolve the supertypes for both the object & definition
         $callParameters = $this->resolveMethodParameters(get_class($object), $method, $params, false, $alias, $methodIsRequired);
-        if ($callParameters === false) {
+        if ($callParameters == false) {
             return;
         }
         if ($callParameters !== array_fill(0, count($callParameters), null)) {

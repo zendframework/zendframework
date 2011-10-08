@@ -28,7 +28,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route;
+    Zend\Mvc\Router\Route as BaseRoute;
 
 /**
  * Segment route.
@@ -39,7 +39,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Segment implements Route
+class Segment implements BaseRoute
 {
     /**
      * Parts of the route.

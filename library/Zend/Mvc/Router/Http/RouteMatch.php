@@ -23,7 +23,7 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Mvc\Router\Route,
+use Zend\Mvc\Router\Route as BaseRoute,
     Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
 
 /**
@@ -50,7 +50,7 @@ class RouteMatch extends BaseRouteMatch
      * @param  integer    $length
      * @return void
      */
-    public function __construct(array $params, Route $route = null, $length = 0)
+    public function __construct(array $params, BaseRoute $route = null, $length = 0)
     {
         parent::__construct($params, $route);
         

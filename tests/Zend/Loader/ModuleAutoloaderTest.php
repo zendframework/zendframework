@@ -146,4 +146,15 @@ class ManagerTest extends TestCase
         $this->setExpectedException('InvalidArgumentException');
         $loader->registerPaths(123);
     }
+
+    public function testCanLoadModulesFromExplicitLocation()
+    {
+        $loader = new ModuleAutoloader(array(
+            'My\NonmatchingModule' => __DIR__ . '/_files/NonmatchingModule',
+            'PharModule' => __DIR__ . '/_files/PharModule.phar',
+        ));
+        $loader->register();
+        $this->assertTrue(class_exists('My\NonmatchingModule\Module'));
+        $this->assertTrue(class_exists('PharModule\Module'));
+    }
 }

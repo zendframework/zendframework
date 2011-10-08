@@ -51,6 +51,11 @@ Currently Implemented
     and manager. In addition to covering every line of code, further effort was
     made to test other use-cases such as nested/sub-modules and various other 
     behaviors.
+* **Module Dependancy**
+    Refectored to now allow self resolution of dependencies. Now provides better access 
+    to all provisions & dependencies within an application.
+* **Module Versioning
+	Added version number checking for module dependency checks
 
 
 Stuff that still needs work:

@@ -161,6 +161,6 @@ class TreeRouteStack extends SimpleRouteStack
      */
     public function getBaseUrl()
     {
-        return $this->baseUrl();
+        return $this->baseUrl;
     }
 }

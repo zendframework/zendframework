@@ -90,7 +90,7 @@ class ManagerTest extends TestCase
     public function testCanCacheMerchedConfig()
     {
         $options = new ManagerOptions(array(
-            'cache_config' => true,
+            'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
         ));
         // build the cache
@@ -111,4 +111,121 @@ class ManagerTest extends TestCase
         $this->setExpectedException('InvalidArgumentException');
         $moduleManager = new Manager('stringShouldBeArray');
     }
+    
+    public function testDoubleProvisionException()
+    {
+    	 $this->setExpectedException('RuntimeException');
+    	 $options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('BarModule', 'DoubleModule'), $options);
+        $config = $moduleManager->getMergedConfig();
+        var_dump($moduleManager->getDependencies());
+    }
+    
+    public function testGetOfDependanciesPostLoad()
+    {
+    	 $options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('BarModule'), $options);
+        $dependencies = $moduleManager->getDependencies();
+        $this->assertInternalType('array', $dependencies);
+        $this->assertArrayHasKey('php', $dependencies);
+    }
+
+	public function testGetOfProvisionsPostLoad()
+    {
+    	 $options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('BarModule'), $options);
+        $provisions = $moduleManager->getProvisions();
+        $this->assertInternalType('array', $provisions);
+        $this->assertArrayHasKey('BarModule', $provisions);
+    }
+    
+    public function testResolutionOfMinimumPhpVersion()
+    {
+    	$this->setExpectedException('RuntimeException');
+    	$options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('ImpossibleModule', 'BarModule'), $options);
+        $dependencies = $moduleManager->getDependencies();
+		
+    }
+    
+    public function testForDissatisfactionForPhpVersion()
+    {
+    	$options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
+        $dependencies = $moduleManager->getDependencies();
+        $this->assertInternalType('array', $dependencies);
+        $this->assertFalse($dependencies['php']['satisfied']);
+    }
+    
+	public function testForDissatisfactionForExtension()
+    {
+    	$options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
+        $dependencies = $moduleManager->getDependencies();
+        $this->assertInternalType('array', $dependencies);
+        $this->assertFalse($dependencies['php']['satisfied']);
+    }
+    
+	public function testResolutionOnInvalidExtension()
+    {
+    	$this->setExpectedException('RuntimeException');
+    	$options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('BooModule', 'BorModule'), $options);
+        $dependencies = $moduleManager->getDependencies();
+    }
+    
+	public function testResolutionOnInvalidModule()
+    {
+    	$this->setExpectedException('RuntimeException');
+    	$options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('BafModule'), $options);
+        $dependencies = $moduleManager->getDependencies();
+    }
+    
+	public function testForDissatisfactionForModule()
+    {
+    	$options = new ManagerOptions(array(
+            'enable_config_cache' => true,
+            'cache_dir' => $this->tmpdir,
+        ));
+        // build the cache
+        $moduleManager = new Manager(array('BamModule'), $options);
+        $dependencies = $moduleManager->getDependencies();
+        $this->assertInternalType('array', $dependencies);
+        $this->assertFalse($dependencies['BooModule']['satisfied']);
+    }
+    
+    
 }

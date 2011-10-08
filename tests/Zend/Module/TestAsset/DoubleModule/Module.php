@@ -1,6 +1,6 @@
 <?php
 
-namespace BarModule;
+namespace DoubleModule;
 
 use Zend\Config\Config;
 
@@ -26,7 +26,7 @@ class Module
 	public function getProvides()
     {
     	return array(
-    		__NAMESPACE__ => array(
+    		'BarModule' => array(
     	 		'version' => $this->version,
     		),
     	);
@@ -37,8 +37,7 @@ class Module
     	return array(
 			'php' => array(
     			'version' => '5.3.0',
-    			'required' => true,
-    		),  	
+    		)   	
     	);
     }
 }

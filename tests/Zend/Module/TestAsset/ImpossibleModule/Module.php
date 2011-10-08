@@ -1,6 +1,6 @@
 <?php
 
-namespace BarModule;
+namespace ImpossibleModule;
 
 use Zend\Config\Config;
 
@@ -36,9 +36,9 @@ class Module
     {
     	return array(
 			'php' => array(
-    			'version' => '5.3.0',
-    			'required' => true,
-    		),  	
+    			'version' => '99.3.0',
+    		),
+    		'BarModule' => true, 	
     	);
     }
 }

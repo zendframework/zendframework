@@ -184,11 +184,18 @@ class Manager
         			$this->dependencies[$dep] = $depInfo; 	
         		} else { // dep already present
         			if (is_array($depInfo)) { // if is array need to check versions
-        				if (version_compare($this->dependencies[$dep]['version'], $depInfo['version']) < 0) {
-        					$depInfo['version'] = $this->dependencies[$dep]['version'];// set to highest version
+        				if (isset($this->dependencies[$dep]['version']) && isset($depInfo)) {
+	        				if (version_compare($this->dependencies[$dep]['version'], $depInfo['version']) >= 0) {
+	        					$depInfo['version'] = $this->dependencies[$dep]['version'];// set to highest version
+	        				}
         				}
-        			} 
-        			$this->dependencies[$moduleName] = array_merge($this->dependencies[$moduleName], $depInfo);
+        				if (!is_array($this->dependencies[$dep])) { 
+        					$this->dependencies[$dep] = $depInfo;
+        				} else {
+        					$this->dependencies[$dep] = array_merge($this->dependencies[$dep], $depInfo);
+        				}
+        			}
+        			
         		}
         	}
         }
@@ -231,10 +238,18 @@ class Manager
     public function resolveDependencies()
     {
         foreach ($this->getDependencies() as $dep => $depInfo) {
-            preg_match($this->operators,$depInfo['version'], $matches, PREG_OFFSET_CAPTURE);
+        	if (isset($depInfo['version'])) {
+        		preg_match($this->operators,$depInfo['version'], $matches, PREG_OFFSET_CAPTURE);
+        		$version = $matches[2][0];
+        		$operator = $matches[1][0] ?: '>=';
+        	} else {
+        		$version = 0;
+        		$operator = '>=';
+        	}
+            
             if ($dep === 'php') { // is php version requirement
             	$this->dependencies[$dep]['satisfied'] = true;
-                if (!version_compare(PHP_VERSION, $matches[2][0], $matches[1][0] ?: '>=')) {
+                if (!version_compare(PHP_VERSION, $version, $operator)) {
                     if (isset($depInfo['required']) && $depInfo['required'] == true) {
                         throw new \RuntimeException("Required dependency unsatisfied: {$dep} {$depInfo['version']}");
                     } else {
@@ -244,7 +259,7 @@ class Manager
             } elseif (substr($dep, 0, 4) === 'ext/') { // is php extension requirement
                 $extName = substr($dep, 4);
                 $this->dependencies[$dep]['satisfied'] = true;
-                if (!version_compare(phpversion($extName), $matches[2][0], $matches[1][0] ?: '>=')) {
+                if (!version_compare(phpversion($extName), $version, $operator ?: '>=')) {
                     if (isset($depInfo['required']) && $depInfo['required'] == true) {
                         throw new \RuntimeException("Required dependency unsatisfied: {$dep} {$depInfo['version']}");
                     } else {
@@ -256,11 +271,14 @@ class Manager
             
             
             } else { // is module requirement
+            	if (is_scalar($this->dependencies[$dep])) {
+            		$this->dependencies[$dep] = array();
+            	}
              	if (!isset($depInfo['satisfied'])) {
-               		$this->dependencies[$dep]['satisfied'] = false;
+             		$this->dependencies[$dep]['satisfied'] = false;
 	                if (isset($this->provided[$dep])) { // if provided set satisfaction
 	                  	if (isset($depInfo['version'])){ // if dep have version requirement
-	                   		if (version_compare($this->provided[$dep]['version'], $matches[2][0], $matches[1][0] ?: '>=') <= 0) {
+	                   		if (version_compare($this->provided[$dep]['version'], $version, $operator) >= 0) {
 			                   	$this->dependencies[$dep]['satisfied'] = true;
 			                }
 	                  	} else {
@@ -270,7 +288,7 @@ class Manager
                	}
                 if (!$this->dependencies[$dep]['satisfied']) {
                     if (isset($depInfo['required']) && $depInfo['required'] == true ) {
-                        throw new \RuntimeException("Required dependency unsatisfied: {$dep} {$depInfo['version']}");
+                        throw new \RuntimeException("Required dependency unsatisfied: {$dep} " . (isset($depInfo['version']) ?: ''));
                     }
                 }
             }

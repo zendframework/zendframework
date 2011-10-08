@@ -67,6 +67,7 @@ class RouteMatch extends BaseRouteMatch
     {
         $this->params  = array_merge($this->params, $match->getParams());
         $this->length += $match->getLength();
+        return $this;
     }
 
     /**

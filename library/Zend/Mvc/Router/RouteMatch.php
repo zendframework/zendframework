@@ -105,6 +105,7 @@ class RouteMatch
     public function merge(self $match)
     {
         $this->params = array_merge($this->params, $match->getParams());
+        return $this;
     }
 
     /**

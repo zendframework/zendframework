@@ -26,7 +26,9 @@ namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Exception,
     Zend\Loader\PluginSpecBroker,
-    Zend\Mvc\Router\SimpleRouteStack;
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Mvc\Router\SimpleRouteStack,
+    Zend\Mvc\Router\Route;
 
 /**
  * Tree search implementation.

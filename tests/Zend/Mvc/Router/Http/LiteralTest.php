@@ -9,55 +9,7 @@ use PHPUnit_Framework_TestCase as TestCase,
 class LiteralTest extends TestCase
 {
     
-    public function testRoot()
-    {
-        $route = new Literal(array(
-            'route'    => '/',
-            'defaults' => array()
-        ));
-        
-        $request = new Request();
-        
-        $i = 1;
-        $request->setUri('http://test.net/');
-        $match = $route->match($request);
-        $this->assertTrue($match instanceof Match, "assert №".$i);
-        
-        $i++;
-        $request->setUri('http://test.net//');
-        $match = $route->match($request);
-        $this->assertTrue($match === Null, "assert №".$i);
-        
-        $i++;
-        $request->setUri('http://test.net'); // Request not valid
-        $match = $route->match($request);
-        $this->assertTrue($match === Null, "assert №".$i);
-        
-        $i++;
-        $request->setUri('http://test.net/page/');
-        $match = $route->match($request);
-        $this->assertTrue($match === Null, "assert №".$i);
-        
-        $i++;
-        $request->setUri('http://test.net/page/');
-        $match = $route->match($request, 0 );
-        $this->assertTrue($match instanceof Match, "assert №".$i);
-        
-        $i++;
-        $request->setUri('http://test.net/page/p1');
-        $match = $route->match($request, 5 );
-        $this->assertTrue($match instanceof Match, "assert №".$i);
-        
-        $i++;
-        $request->setUri('http://test.net/');
-        $match = $route->match($request, 0);
-        $this->assertTrue($match instanceof Match, "assert №".$i);
-        
-        
-        
-    }
-    
-    public function testFoundRoute()
+    public function testMatch()
     {
         $RouteForTest = array(
             0 => array(
@@ -100,6 +52,12 @@ class LiteralTest extends TestCase
                 'route' => '/blog',
                 'uri'       => 'http://test.net/blog/',
                 'offset'    => -1,
+                'match'     => false
+            ),
+            7 => array(
+                'route' => '/',
+                'uri'       => 'http://test.net',  // Request not valid
+                'offset'    => null,
                 'match'     => false
             ),
         );

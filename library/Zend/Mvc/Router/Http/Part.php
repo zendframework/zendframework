@@ -129,17 +129,18 @@ class Part extends TreeRouteStack implements Route
             $nextOffset = $pathOffset + $match->getLength();
             
             $uri  = $request->uri();
-            $path = $uri->getPath();
+            $pathLength = strlen($uri->getPath());
             
-            if ($this->mayTerminate && $nextOffset === strlen($path)) {
+            if ($this->mayTerminate && $nextOffset === $pathLength) {
                 return $match;
             }
             
-            foreach ($this->children as $name => $route) {
-                $subMatch = $route->match($match, $nextOffset);
-
-                if ($subMatch !== null) {
-                    return $match->merge($subMatch);
+            foreach ($this->routes as $name => $route) {
+                if (($subMatch = $route->match($request, $nextOffset)) instanceof RouteMatch) {
+                    $match->merge($subMatch);
+                    if ($match->getLength() + $pathOffset === $pathLength) {
+                        return $match;
+                    }
                 }
             }
         }

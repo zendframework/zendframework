@@ -71,14 +71,6 @@ abstract class AbstractValidator implements Validator
     protected $_obscureValue = false;
 
     /**
-     * Array of validation failure message codes
-     *
-     * @var array
-     * @deprecated Since 1.5.0
-     */
-    protected $_errors = array();
-
-    /**
      * Translation object
      * @var \Zend\Translator\Translator
      */
@@ -273,7 +265,6 @@ abstract class AbstractValidator implements Validator
         if ($value === null) {
             $value = $this->_value;
         }
-        $this->_errors[]              = $messageKey;
         $this->_messages[$messageKey] = $this->_createMessage($messageKey, $value);
     }
 
@@ -287,18 +278,6 @@ abstract class AbstractValidator implements Validator
     {
         $this->_value    = $value;
         $this->_messages = array();
-        $this->_errors   = array();
-    }
-
-    /**
-     * Returns array of validation failure message codes
-     *
-     * @return array
-     * @deprecated Since 1.5.0
-     */
-    public function getErrors()
-    {
-        return $this->_errors;
     }
 
     /**

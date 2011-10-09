@@ -18,6 +18,11 @@ class ManagerOptions
     protected $cacheDir = NULL;
  
     /**
+     * @var string
+     */
+    protected $manifestDir = NULL;
+
+    /**
      * Check if the config cache is enabled
      *
      * @return bool
@@ -61,6 +66,32 @@ class ManagerOptions
             $this->cacheDir = $cacheDir;
         } else {
             $this->cacheDir = rtrim(rtrim($cacheDir, '/'), '\\');
+        }
+        return $this;
+    }
+
+    /**
+     * Get manifestDir.
+     *
+     * @return string
+     */
+    public function getManifestDir()
+    {
+        return $this->manifestDir;
+    }
+ 
+    /**
+     * Set manifestDir.
+     *
+     * @param string $manifestDir the value to be set
+     * @return ManagerConfig
+     */
+    public function setManifestDir($manifestDir)
+    {
+        if (null === $manifestDir) {
+            $this->manifestDir = $manifestDir;
+        } else {
+            $this->manifestDir = rtrim(rtrim($manifestDir, '/'), '\\');
         }
         return $this;
     }

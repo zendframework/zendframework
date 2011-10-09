@@ -4,6 +4,8 @@ namespace Zend\Module;
 
 use Traversable,
     Zend\Config\Config,
+    Zend\Config\Writer\ArrayWriter,
+    Zend\Module\Installable,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
@@ -53,6 +55,13 @@ class Manager
     protected $operators = '/(<|lt|<=|le|>|gt|>=|ge|==|=|eq|!=|<>|ne)?(\d.*)/';
 
     /**
+     * The manifest of installed modules
+     * 
+     * @var array
+     */
+    protected $manifest = array();
+
+    /**
      * __construct 
      * 
      * @param array|Traversable $modules 
@@ -70,7 +79,9 @@ class Manager
             $this->skipConfig = true;
             $this->setMergedConfig($this->getCachedConfig());
         }
+        $this->loadInstallationManifest();
         $this->loadModules($modules);
+        $this->saveInstallationManifest();
         $this->updateCache();
         $this->events()->trigger('init.post', $this);
     }
@@ -113,11 +124,78 @@ class Manager
 
             $this->addProvision($module);
             $this->addDependency($module);
+            $this->installModule($module);
             $this->runModuleInit($module);
             $this->mergeModuleConfig($module);
             $this->loadedModules[$moduleName] = $module;
         }
         return $this->loadedModules[$moduleName];
+    }
+    
+    /**
+     * Check if module requires self installation
+     * 
+     * If installation required then set up installation
+     * manifest to allow version tracking
+     * 
+     * Method will create/update manifest file in data directory
+     * 
+     * Installation method does not concern itself with what or how 
+     * it is to be installed just that it requires installation
+     * 
+     * @param Module $module
+     */
+    public function installModule($module)
+    {
+        if ($module instanceof Installable) {
+            // check "manifest"
+            foreach ($module->getProvides() as $moduleName => $data) { 
+                if (!isset($this->manifest->{$moduleName})) { // if doesnt exist in manifest
+                    if ($module->install()) {
+                        $this->manifest->{$moduleName} = $data;
+                        $this->manifest->{'_dirty'} = true;
+                    } else { // if $result is false then throw Exception
+                        throw new \RuntimeException("Self installation for {$moduleName} failed");
+                    }
+                } elseif (isset($this->manifest->{$moduleName}) && // does exists in manifest
+                          version_compare($this->manifest->{$moduleName}->version,$data['version']) < 0 // and manifest version is less than current version
+                  ){
+                    if ($module->upgrade()) {
+                        $this->manifest->{$moduleName} = $data;
+                        $this->manifest->{'_dirty'} = true;
+                    } else { // if $result is false then throw Exception
+                        throw new \RuntimeException("Self upgrade for {$moduleName} failed");
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * get manifest of currently installed modules
+     * 
+     * @return Config
+     */
+    public function loadInstallationManifest()
+    {
+        $path = $this->getOptions()->getManifestDir() . '/manifest.php';
+        if (file_exists($path)) {
+            $this->manifest = new Config(include $path, true);
+        } else {
+            $this->manifest = new Config(array(), true);
+        }
+        return $this;
+    }
+    
+    public function saveInstallationManifest()
+    {
+        if ($this->manifest->get('_dirty', false)) {
+            unset($this->manifest->{'_dirty'});
+            $path = $this->getOptions()->getManifestDir() . '/manifest.php';
+            $writer = new ArrayWriter();
+            $writer->write($path, $this->manifest);
+        }
+        return $this;
     }
 
     /**

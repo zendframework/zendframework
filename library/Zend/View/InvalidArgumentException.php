@@ -2,6 +2,6 @@
 
 namespace Zend\View;
 
-class InvalidHelperException extends \InvalidArgumentException
+class InvalidArgumentException extends \InvalidArgumentException
 {
 }

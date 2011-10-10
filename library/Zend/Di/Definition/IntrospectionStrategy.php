@@ -9,7 +9,7 @@ class IntrospectionStrategy
     /**
      * @var bool
      */
-    protected $useAnnotations = true;
+    protected $useAnnotations = false;
 
     /**
      * @var string[]

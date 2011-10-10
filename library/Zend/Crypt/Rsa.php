@@ -248,15 +248,14 @@ class Rsa
      */
     public function setHashAlgorithm($name)
     {
-       switch (strtolower($name)) {
+        switch (strtolower($name)) {
             case 'md2':
                 // check if md2 digest is enabled on openssl just for backwards compatibility
                 $digests = openssl_get_md_methods();
-                if (in_array($name, $digests)) {
-                    $this->_hashAlgorithm = OPENSSL_ALGO_MD2;
-                } else {
+                if (!in_array(strtoupper($name), $digests)) {
                     throw new Zend\Crypt\Exception('Openssl md2 digest is not enabled  (deprecated)');
                 }
+                $this->_hashAlgorithm = OPENSSL_ALGO_MD2;
                 break;
             case 'md4':
                 $this->_hashAlgorithm = OPENSSL_ALGO_MD4;

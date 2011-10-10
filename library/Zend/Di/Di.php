@@ -181,6 +181,14 @@ class Di implements DependencyInjection
             throw new Exception\RuntimeException('Invalid instantiator');
         }
 
+        if ($isShared) {
+            if ($params) {
+                $this->instanceManager->addSharedInstanceWithParameters($object, $name, $params);
+            } else {
+                $this->instanceManager->addSharedInstance($object, $name);
+            }
+        }
+
         if ($injectionMethods) {
             foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
                 $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias, $methodIsRequired);
@@ -216,13 +224,7 @@ class Di implements DependencyInjection
             }
         }
         
-        if ($isShared) {
-            if ($params) {
-                $this->instanceManager->addSharedInstanceWithParameters($object, $name, $params);
-            } else {
-                $this->instanceManager->addSharedInstance($object, $name);
-            }
-        }
+
         
         array_pop($this->instanceContext);
         return $object;
@@ -434,6 +436,9 @@ class Di implements DependencyInjection
                     if (isset($iConfig[$thisIndex]['parameters'][$fqName])) throw \Exception('Implementation incomplete for fq names');
 
                     if (is_string($iConfig[$thisIndex]['parameters'][$name])
+                        && $type === false) {
+                        $computedParams['value'][$fqName] = $iConfig[$thisIndex]['parameters'][$name];
+                    } elseif (is_string($iConfig[$thisIndex]['parameters'][$name])
                         && isset($aliases[$iConfig[$thisIndex]['parameters'][$name]])) {
                         $computedParams['required'][$fqName] = array(
                             $iConfig[$thisIndex]['parameters'][$name],

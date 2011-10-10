@@ -230,7 +230,7 @@ class Manager
     public function addProvision($module)
     {
          // check for and load provides
-        if (method_exists($module, 'getProvides')) {
+        if (is_callable(array($module, 'getProvides'))) {
             $provision = $module->getProvides();
                foreach ($provision AS $name => $info) {
                 if (isset($this->provisions[$name])) {
@@ -267,7 +267,7 @@ class Manager
     public function addDependency($module)
     {
         // check for an load dependencies required
-        if (method_exists($module, 'getDependencies')) {
+        if (is_callable(array($module, 'getDependencies'))) {
             // iterate over dependencies to evaluate min required version
             foreach ($module->getDependencies() AS $dep => $depInfo) {
                 if (!isset($this->dependencies[$dep])) { // if the dep isnt present just add it

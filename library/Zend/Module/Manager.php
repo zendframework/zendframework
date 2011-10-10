@@ -5,7 +5,6 @@ namespace Zend\Module;
 use Traversable,
     Zend\Config\Config,
     Zend\Config\Writer\ArrayWriter,
-    Zend\Module\Installable,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
@@ -80,15 +79,7 @@ class Manager
             $this->skipConfig = true;
             $this->setMergedConfig($this->getCachedConfig());
         }
-        
-        $install = $options->getEnableSelfInstallation();
-        
-        if ($install) $this->loadInstallationManifest();
-        
         $this->loadModules($modules);
-        
-        if ($install) $this->saveInstallationManifest();
-        
         $this->updateCache();
         $this->events()->trigger('init.post', $this);
     }
@@ -135,6 +126,9 @@ class Manager
                 $this->addProvision($module);
                 $this->addDependency($module);
             }
+            if ($this->getOptions()->getEnableSelfInstallation()) {
+                $this->installModule($module);
+            }
             $this->runModuleInit($module);
             $this->mergeModuleConfig($module);
             $this->loadedModules[$moduleName] = $module;
@@ -158,6 +152,7 @@ class Manager
     public function installModule($module)
     {
         if (is_callable(array($module, 'getProvides'))) {
+            $this->loadInstallationManifest();
             foreach ($module->getProvides() as $moduleName => $data) { 
                 if (!isset($this->manifest->{$moduleName})) { // if doesnt exist in manifest
                     if (is_callable(array($module, 'install'))) {
@@ -181,6 +176,7 @@ class Manager
                     }
                 }
             }
+            $this->saveInstallationManifest();
         }
     }
     

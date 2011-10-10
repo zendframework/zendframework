@@ -247,14 +247,6 @@ class ManagerOptions
     public function __unset($key)
     {
         $setter = $this->assembleSetterNameFromConfigKey($key);
-        try {
-            $this->{$setter}(null);
-        } catch(\InvalidArgumentException $e) {
-            throw new \InvalidArgumentException(
-                'The class property $' . $key . ' cannot be unset as'
-                . ' NULL is an invalid value for it: ' . $e->getMessage()
-            );
-        }
+        $this->{$setter}(null);
     }
- 
 }

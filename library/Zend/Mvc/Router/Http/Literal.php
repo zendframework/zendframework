@@ -43,7 +43,7 @@ class Literal implements Route
 {
     /**
      * Route to match.
-     * 
+     *
      * @var string
      */
     protected $route;
@@ -77,11 +77,11 @@ class Literal implements Route
         if (!isset($options['route']) || !is_string($options['route'])) {
             throw new Exception\InvalidArgumentException('Route not defined nor not a string');
         }
-        
+
         if (!isset($options['defaults']) || !is_array($options['defaults'])) {
             throw new Exception\InvalidArgumentException('Defaults not defined nor not an array');
         }
-        
+
         $this->route    = $options['route'];
         $this->defaults = $options['defaults'];
     }
@@ -101,9 +101,9 @@ class Literal implements Route
 
         $uri  = $request->uri();
         $path = $uri->getPath();
-        
+
         if ($pathOffset !== null) {
-            if (strpos($path, $this->route) === $pathOffset) {
+            if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
                 return new RouteMatch($this->defaults, $this, strlen($this->route));
             }
         } else {

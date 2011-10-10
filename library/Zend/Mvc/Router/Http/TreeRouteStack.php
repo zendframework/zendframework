@@ -27,7 +27,8 @@ namespace Zend\Mvc\Router\Http;
 use Zend\Mvc\Router\Exception,
     Zend\Loader\PluginSpecBroker,
     Zend\Mvc\Router\SimpleRouteStack,
-    Zend\Stdlib\RequestDescription as Request;
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Mvc\Router\Route;
 
 /**
  * Tree search implementation.
@@ -41,14 +42,14 @@ class TreeRouteStack extends SimpleRouteStack
 {
     /**
      * Base URL.
-     * 
+     *
      * @var string
      */
     protected $baseUrl = '';
-    
+
     /**
      * init(): defined by SimpleRouteStack.
-     * 
+     *
      * @see    SimpleRouteStack::init()
      * @return void
      */
@@ -61,7 +62,7 @@ class TreeRouteStack extends SimpleRouteStack
             'part'    => __NAMESPACE__ . '\Part',
         ));
     }
-    
+
     /**
      * addRoute(): defined by RouteStack interface.
      *
@@ -76,12 +77,12 @@ class TreeRouteStack extends SimpleRouteStack
         if (!$route instanceof Route) {
             $route = $this->routeFromArray($route);
         }
-        
+
         $this->routes->insert($name, $route, $priority);
 
         return $this;
     }
-    
+
     /**
      * routeFromArray(): defined by SimpleRouteStack.
      *
@@ -92,12 +93,12 @@ class TreeRouteStack extends SimpleRouteStack
     protected function routeFromArray($specs)
     {
         $route = parent::routeFromArray($specs);
-        
+
         if (!$route instanceof Route) {
             throw new Exception\RuntimeException('Given route does not implement HTTP route interface');
         }
-        
-        if (isset($specs['routes'])) {      
+
+        if (isset($specs['routes'])) {
             $options = array(
                 'route'         => $route,
                 'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate']),
@@ -110,7 +111,7 @@ class TreeRouteStack extends SimpleRouteStack
 
         return $route;
     }
-    
+
     /**
      * match(): defined by Route interface.
      *
@@ -123,12 +124,12 @@ class TreeRouteStack extends SimpleRouteStack
         if (!method_exists($request, 'uri')) {
             return null;
         }
-        
+
         $baseUrlLength = strlen($this->baseUrl) ?: null;
 
         if ($baseUrlLength !== null) {
-            $pathLength = strlen($request->uri()->getPath());
-            
+            $pathLength = strlen($request->uri()->getPath()) - $baseUrlLength;
+
             foreach ($this->routes as $route) {
                 if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
                     return $match;
@@ -140,10 +141,10 @@ class TreeRouteStack extends SimpleRouteStack
 
         return null;
     }
-    
+
     /**
      * Set the base URL.
-     * 
+     *
      * @param  string $baseUrl
      * @return self
      */
@@ -155,11 +156,11 @@ class TreeRouteStack extends SimpleRouteStack
 
     /**
      * Get the base URL.
-     * 
+     *
      * @return string
      */
     public function getBaseUrl()
     {
-        return $this->baseUrl();
+        return $this->baseUrl;
     }
 }

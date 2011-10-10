@@ -44,10 +44,10 @@ class SimpleRouteStack implements RouteStack
      * @var PriorityList
      */
     protected $routes;
-    
+
     /**
      * Plugin broker to load routes.
-     * 
+     *
      * @var PluginBroker
      */
     protected $pluginBroker;
@@ -66,19 +66,19 @@ class SimpleRouteStack implements RouteStack
         if ($options !== null) {
             $this->setOptions($options);
         }
-        
+
         if ($this->pluginBroker === null) {
             $this->pluginBroker = new PluginBroker(array(
                 'register_plugins_on_load' => false
-            ));            
+            ));
         }
-        
+
         $this->init();
     }
-    
+
     /**
      * Init method for extending classes.
-     * 
+     *
      * @return void
      */
     protected function init()
@@ -104,20 +104,20 @@ class SimpleRouteStack implements RouteStack
                 case 'routes':
                     $this->addRoutes($value);
                     break;
-                
+
                 case 'plugin_broker':
                     $this->setPluginBroker($value);
                     break;
-                
+
                 default:
                     break;
             }
         }
     }
-    
+
     /**
      * Set the plugin broker.
-     * 
+     *
      * @param  PluginBroker $broker
      * @return SimpleRouteStack
      */
@@ -126,10 +126,10 @@ class SimpleRouteStack implements RouteStack
         $this->pluginBroker = $broker;
         return $this;
     }
-    
+
     /**
      * Get the plugin broker.
-     * 
+     *
      * @return PluginBroker
      */
     public function getPluginBroker()
@@ -151,9 +151,9 @@ class SimpleRouteStack implements RouteStack
         } elseif (!$routes instanceof Traversable) {
             throw new Exception\InvalidArgumentException('Routes provided are invalid; must be traversable');
         }
-        
+
         $routeStack = $this;
-        
+
         iterator_apply($routes, function() use ($routeStack, $routes) {
             $routeStack->addRoute($routes->key(), $routes->current());
             return true;
@@ -210,13 +210,13 @@ class SimpleRouteStack implements RouteStack
                 (is_object($specs) ? get_class($specs) : gettype($specs))
             ));
         }
-    
+
         if (!isset($specs['type'])) {
             throw new Exception\InvalidArgumentException('Missing "type" option');
         } elseif (!isset($specs['options'])) {
             throw new Exception\InvalidArgumentException('Missing "name" option');
         }
-        
+
         $route = $this->pluginBroker->load($specs['type'], $specs['options']);
 
         return $route;
@@ -252,13 +252,13 @@ class SimpleRouteStack implements RouteStack
     {
         if (!isset($options['name'])) {
             throw new Exception\InvalidArgumentException('Missing "name" option');
-        } 
+        }
 
         $route = $this->routes->get($options['name']);
         if (!$route) {
             throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
         }
-        
+
         unset($options['name']);
 
         return $route->assemble($params, $options);

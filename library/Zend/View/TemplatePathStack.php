@@ -57,8 +57,8 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Constructor
-     * 
-     * @param  null|array|Traversable $options 
+     *
+     * @param  null|array|Traversable $options
      * @return void
      */
     public function __construct($options = null)
@@ -78,8 +78,8 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Configure object
-     * 
-     * @param  array|Traversable $options 
+     *
+     * @param  array|Traversable $options
      * @return void
      */
     public function setOptions($options)
@@ -110,8 +110,8 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Add many paths to the stack at once
-     * 
-     * @param  array $paths 
+     *
+     * @param  array $paths
      * @return TemplatePathStack
      */
     public function addPaths(array $paths)
@@ -124,21 +124,30 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Rest the path stack to the paths provided
-     * 
-     * @param  array $paths 
+     *
+     * @param  SplStack|array $paths
      * @return TemplatePathStack
      */
-    public function setPaths(array $paths)
+    public function setPaths($paths)
     {
-        $this->clearPaths();
-        $this->addPaths($paths);
+        if ($paths instanceof SplStack) {
+            $this->paths = $paths;
+        } elseif (is_array($paths)) {
+            $this->clearPaths();
+            $this->addPaths($paths);
+        } else {
+            throw new InvalidArgumentException(
+                "Invalid argument provided for \$paths, expecting either an array or SplStack object"
+            );
+        }
+
         return $this;
     }
 
     /**
      * Normalize a path for insertion in the stack
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
      * @return string
      */
     public static function normalizePath($path)
@@ -151,8 +160,8 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Add a single path to the stack
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
      * @return TemplatePathStack
      */
     public function addPath($path)
@@ -169,7 +178,7 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Clear all paths
-     * 
+     *
      * @return void
      */
     public function clearPaths()
@@ -179,7 +188,7 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Returns stack of paths
-     * 
+     *
      * @return SplStack
      */
     public function getPaths()
@@ -236,8 +245,8 @@ class TemplatePathStack implements TemplateResolver
 
     /**
      * Retrieve the filesystem path to a view script
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return string
      */
     public function getScriptPath($name)

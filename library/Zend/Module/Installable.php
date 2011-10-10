@@ -27,8 +27,9 @@ interface Installable
     /**
      * run an inremental upgrade
      * 
+     * @param float the version currently in the manifest
      * @return bool if upgrade was sucessful
      **/
-    public function upgrade();
+    public function upgrade($current);
 
 }

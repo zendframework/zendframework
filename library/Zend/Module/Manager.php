@@ -160,7 +160,7 @@ class Manager
                 } elseif (isset($this->manifest->{$moduleName}) && // does exists in manifest
                           version_compare($this->manifest->{$moduleName}->version,$data['version']) < 0 // and manifest version is less than current version
                   ){
-                    if ($module->upgrade()) {
+                    if ($module->upgrade($this->manifest->{$moduleName}->version)) {
                         $this->manifest->{$moduleName} = $data;
                         $this->manifest->{'_dirty'} = true;
                     } else { // if $result is false then throw Exception

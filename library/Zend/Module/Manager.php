@@ -71,7 +71,8 @@ class Manager
     public function __construct($modules, ManagerOptions $options = null)
     {
         if ($options === null) {
-            $this->setOptions(new ManagerOptions);
+            $options = new ManagerOptions();
+            $this->setOptions($options);
         } else {
             $this->setOptions($options);
         }

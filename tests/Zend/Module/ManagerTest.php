@@ -160,6 +160,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BarModule'), $options);
+        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
 		
     }
@@ -172,6 +173,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
+        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['php']['satisfied']);
@@ -185,6 +187,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
+        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['php']['satisfied']);
@@ -199,6 +202,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BooModule', 'BorModule'), $options);
+        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
     }
     
@@ -211,6 +215,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BafModule'), $options);
+        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
     }
     
@@ -222,6 +227,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BamModule'), $options);
+        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['BooModule']['satisfied']);

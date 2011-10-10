@@ -24,11 +24,11 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Mvc\Router\Exception,
-    Zend\Loader\PluginSpecBroker,
+use Zend\Loader\PluginSpecBroker,
+    Zend\Mvc\Router\Exception,
+    Zend\Mvc\Router\Route,
     Zend\Mvc\Router\SimpleRouteStack,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Route;
+    Zend\Stdlib\RequestDescription as Request;
 
 /**
  * Tree search implementation.

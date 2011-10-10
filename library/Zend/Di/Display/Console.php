@@ -58,8 +58,8 @@ class Console
         if ($this->runtimeClasses)
         echo '  Runtime classes:' . PHP_EOL;
 
-        $unKnownRuntimeClasses = array_diff($this->runtimeClasses, $knownClasses);
-        foreach ($unKnownRuntimeClasses as $runtimeClass) {
+        $unknownRuntimeClasses = array_diff($this->runtimeClasses, $knownClasses);
+        foreach ($unknownRuntimeClasses as $runtimeClass) {
             //$definition = $this->di->definitions()->getDefinitionForClass($runtimeClass);
             $this->renderClassDefinition($runtimeClass);
         }

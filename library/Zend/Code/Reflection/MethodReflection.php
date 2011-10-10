@@ -61,9 +61,6 @@ class MethodReflection extends ReflectionMethod implements Reflection
         }
 
         $instance = new DocBlockReflection($this);
-        if ($this->annotationManager) {
-            $instance->setAnnotationManager($this->annotationManager);
-        }
         return $instance;
     }
 

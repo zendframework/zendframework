@@ -70,7 +70,7 @@ class Manager
     public function __construct($modules, ManagerOptions $options = null)
     {
         if ($options === null) {
-            $options = new ManagerOptions();
+            $options = new ManagerOptions;
             $this->setOptions($options);
         } else {
             $this->setOptions($options);
@@ -98,8 +98,8 @@ class Manager
             }
         } else {
             throw new \InvalidArgumentException(
-                'Parameter to \\ZendModule\\Manager\'s '
-                . 'loadModules method must be an array or '
+                'Parameter to ' . __CLASS__ . '\'s '
+                . __METHOD__ . ' method must be an array or '
                 . 'implement the \\Traversable interface'
             );
         }
@@ -164,7 +164,7 @@ class Manager
                         }
                     }
                 } elseif (isset($this->manifest->{$moduleName}) && // does exists in manifest
-                          version_compare($this->manifest->{$moduleName}->version,$data['version']) < 0 // and manifest version is less than current version
+                          version_compare($this->manifest->{$moduleName}->version, $data['version']) < 0 // and manifest version is less than current version
                   ){
                     if (is_callable(array($module, 'upgrade'))) {
                         if ($module->upgrade($this->manifest->{$moduleName}->version)) {
@@ -230,7 +230,7 @@ class Manager
          // check for and load provides
         if (is_callable(array($module, 'getProvides'))) {
             $provision = $module->getProvides();
-               foreach ($provision AS $name => $info) {
+               foreach ($provision as $name => $info) {
                 if (isset($this->provisions[$name])) {
                     throw new \RuntimeException("Double provision has occured for: {$name} {$info['version']}");
                 }
@@ -267,7 +267,7 @@ class Manager
         // check for an load dependencies required
         if (is_callable(array($module, 'getDependencies'))) {
             // iterate over dependencies to evaluate min required version
-            foreach ($module->getDependencies() AS $dep => $depInfo) {
+            foreach ($module->getDependencies() as $dep => $depInfo) {
                 if (!isset($this->dependencies[$dep])) { // if the dep isnt present just add it
                     $this->dependencies[$dep] = $depInfo; 	
                 } else { // dep already present

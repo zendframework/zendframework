@@ -16,11 +16,21 @@ class ManagerOptions
      * @var string
      */
     protected $cacheDir = NULL;
- 
+
     /**
      * @var string
      */
     protected $manifestDir = NULL;
+
+    /**
+     * @var bool
+     */
+    protected $enableDependencycheck = false;
+
+    /**
+     * @var bool
+     */
+    protected $enableSelfInstallation = false;
 
     /**
      * Check if the config cache is enabled
@@ -109,6 +119,50 @@ class ManagerOptions
         return $this->getCacheDir() . '/module-config-cache.'.$this->getApplicationEnv().'.php';
     }
 
+    /**
+     * set if dependency checking should be enabled
+     * 
+     * @param bool $bool
+     * @return Manager
+     */
+    public function setEnableDependencyCheck($bool)
+    {
+        $this->enableDependencycheck = (bool) $bool;
+        return $this;
+    }
+    
+    /**
+     * get if dependency checking is enabled
+     * 
+     * @return bool
+     */
+    public function getEnableDependencyCheck()
+    {
+        return $this->enableDependencycheck;
+    }
+    
+    /**
+     * set if self installation is enabled
+     * 
+     * @param bool $bool
+     * @return Manager
+     */
+    public function setEnableSelfInstallation($bool)
+    {
+        $this->enableSelfInstallation = (bool) $bool;
+        return $this;
+    }
+    
+    /**
+     * gets if self installation is enabled
+     * 
+     * @return bool
+     */
+    public function getEnableSelfInstallation()
+    {
+        return $this->enableSelfInstallation;
+    }
+    
     public function getApplicationEnv()
     {
         return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;

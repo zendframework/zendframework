@@ -79,9 +79,15 @@ class Manager
             $this->skipConfig = true;
             $this->setMergedConfig($this->getCachedConfig());
         }
-        $this->loadInstallationManifest();
+        
+        $install = $options->getEnableSelfInstallation();
+        
+        if ($install) $this->loadInstallationManifest();
+        
         $this->loadModules($modules);
-        $this->saveInstallationManifest();
+        
+        if ($install) $this->saveInstallationManifest();
+        
         $this->updateCache();
         $this->events()->trigger('init.post', $this);
     }
@@ -106,7 +112,10 @@ class Manager
             );
         }
         
-        $this->resolveDependencies();
+        if ($this->getOptions()->getEnableDependencyCheck()) {
+            $this->resolveDependencies();
+        }
+        
         return $this;
     }
 

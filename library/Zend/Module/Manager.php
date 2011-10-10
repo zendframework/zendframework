@@ -37,10 +37,10 @@ class Manager
     protected $skipConfig = false;
 
     /**
-     * An array containing all of the provided data for modules
+     * An array containing all of the provisions for modules
      * @var array
      */
-    protected $provided = array();
+    protected $provisions = array();
 
     /**
      * An array containing all of the dependencies for modules
@@ -131,9 +131,10 @@ class Manager
         if (!isset($this->loadedModules[$moduleName])) {
             $class = $moduleName . '\Module';
             $module = new $class;
-
-            $this->addProvision($module);
-            $this->addDependency($module);
+            if ($this->getOptions()->getEnableDependencyCheck()) {
+                $this->addProvision($module);
+                $this->addDependency($module);
+            }
             $this->installModule($module);
             $this->runModuleInit($module);
             $this->mergeModuleConfig($module);
@@ -232,10 +233,10 @@ class Manager
         if (method_exists($module, 'getProvides')) {
             $provision = $module->getProvides();
                foreach ($provision AS $name => $info) {
-                if (isset($this->provided[$name])) {
+                if (isset($this->provisions[$name])) {
                     throw new \RuntimeException("Double provision has occured for: {$name} {$info['version']}");
                 }
-                $this->provided[$name] = $info;	
+                $this->provisions[$name] = $info;	
         	}
         }
     	return $this;
@@ -297,6 +298,9 @@ class Manager
      */
     public function getDependencies()
     {
+        if (!$this->getOptions()->getEnableDependencyCheck()) {
+            throw new \RuntimeException('Module manager option "enable_dependency_check" must be true before running ' . __CLASS__ . '::' . __METHOD__ .'()');
+        }
         return $this->dependencies;
     }
 
@@ -307,7 +311,10 @@ class Manager
      */
     public function getProvisions()
     {
-        return $this->provided;
+        if (!$this->getOptions()->getEnableDependencyCheck()) {
+            throw new \RuntimeException('Module manager option "enable_dependency_check" must be true before running ' . __CLASS__ . '::' . __METHOD__ .'()');
+        }
+        return $this->provisions;
     }
     
     /**
@@ -363,9 +370,9 @@ class Manager
                 }
                 if (!isset($depInfo['satisfied'])) {
                     $this->dependencies[$dep]['satisfied'] = false;
-                    if (isset($this->provided[$dep])) { // if provided set satisfaction
+                    if (isset($this->provisions[$dep])) { // if provisions set satisfaction
                         if (isset($depInfo['version'])){ // if dep have version requirement
-                            if (version_compare($this->provided[$dep]['version'], $version, $operator) >= 0) {
+                            if (version_compare($this->provisions[$dep]['version'], $version, $operator) >= 0) {
                                 $this->dependencies[$dep]['satisfied'] = true;
                             }
                         } else {

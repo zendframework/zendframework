@@ -118,11 +118,12 @@ class ManagerTest extends TestCase
     	 $options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('BarModule', 'DoubleModule'), $options);
         $config = $moduleManager->getMergedConfig();
-        var_dump($moduleManager->getDependencies());
+        $moduleManager->getDependencies();
     }
     
     public function testGetOfDependanciesPostLoad()
@@ -130,6 +131,7 @@ class ManagerTest extends TestCase
     	 $options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('BarModule'), $options);
@@ -143,6 +145,7 @@ class ManagerTest extends TestCase
     	 $options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('BarModule'), $options);
@@ -157,10 +160,10 @@ class ManagerTest extends TestCase
     	$options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BarModule'), $options);
-        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
 		
     }
@@ -170,10 +173,10 @@ class ManagerTest extends TestCase
     	$options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
-        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['php']['satisfied']);
@@ -184,10 +187,10 @@ class ManagerTest extends TestCase
     	$options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
-        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['php']['satisfied']);
@@ -199,10 +202,10 @@ class ManagerTest extends TestCase
     	$options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('BooModule', 'BorModule'), $options);
-        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
     }
     
@@ -212,10 +215,10 @@ class ManagerTest extends TestCase
     	$options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('BafModule'), $options);
-        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
     }
     
@@ -224,14 +227,26 @@ class ManagerTest extends TestCase
     	$options = new ManagerOptions(array(
             'enable_config_cache' => true,
             'cache_dir' => $this->tmpdir,
+            'enable_dependency_check' => true,
         ));
         // build the cache
         $moduleManager = new Manager(array('BamModule'), $options);
-        $moduleManager->resolveDependencies();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['BooModule']['satisfied']);
     }
     
-    
+	public function testThrowsExceptionIfGetDependenciesCalledAndEnableDependencyCheckIsFalse()
+    {
+    	$this->setExpectedException('RuntimeException');
+        $moduleManager = new Manager(array('BooModule', 'BorModule'));
+        $moduleManager->getDependencies();
+    }
+
+	public function testThrowsExceptionIfGetProvisionsCalledAndEnableDependencyCheckIsFalse()
+    {
+    	$this->setExpectedException('RuntimeException');
+        $moduleManager = new Manager(array('BooModule', 'BorModule'));
+        $moduleManager->getProvisions();
+    }
 }

@@ -16,7 +16,22 @@ class ManagerOptions
      * @var string
      */
     protected $cacheDir = NULL;
- 
+
+    /**
+     * @var string
+     */
+    protected $manifestDir = NULL;
+
+    /**
+     * @var bool
+     */
+    protected $enableDependencycheck = false;
+
+    /**
+     * @var bool
+     */
+    protected $enableSelfInstallation = false;
+
     /**
      * Check if the config cache is enabled
      *
@@ -66,6 +81,32 @@ class ManagerOptions
     }
 
     /**
+     * Get manifestDir.
+     *
+     * @return string
+     */
+    public function getManifestDir()
+    {
+        return $this->manifestDir;
+    }
+ 
+    /**
+     * Set manifestDir.
+     *
+     * @param string $manifestDir the value to be set
+     * @return ManagerConfig
+     */
+    public function setManifestDir($manifestDir)
+    {
+        if (null === $manifestDir) {
+            $this->manifestDir = $manifestDir;
+        } else {
+            $this->manifestDir = rtrim(rtrim($manifestDir, '/'), '\\');
+        }
+        return $this;
+    }
+
+    /**
      * getCacheFilePath 
      * 
      * Should this be an option, or should the dir option include the 
@@ -78,6 +119,50 @@ class ManagerOptions
         return $this->getCacheDir() . '/module-config-cache.'.$this->getApplicationEnv().'.php';
     }
 
+    /**
+     * set if dependency checking should be enabled
+     * 
+     * @param bool $bool
+     * @return Manager
+     */
+    public function setEnableDependencyCheck($bool)
+    {
+        $this->enableDependencycheck = (bool) $bool;
+        return $this;
+    }
+    
+    /**
+     * get if dependency checking is enabled
+     * 
+     * @return bool
+     */
+    public function getEnableDependencyCheck()
+    {
+        return $this->enableDependencycheck;
+    }
+    
+    /**
+     * set if self installation is enabled
+     * 
+     * @param bool $bool
+     * @return Manager
+     */
+    public function setEnableSelfInstallation($bool)
+    {
+        $this->enableSelfInstallation = (bool) $bool;
+        return $this;
+    }
+    
+    /**
+     * gets if self installation is enabled
+     * 
+     * @return bool
+     */
+    public function getEnableSelfInstallation()
+    {
+        return $this->enableSelfInstallation;
+    }
+    
     public function getApplicationEnv()
     {
         return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;
@@ -162,14 +247,6 @@ class ManagerOptions
     public function __unset($key)
     {
         $setter = $this->assembleSetterNameFromConfigKey($key);
-        try {
-            $this->{$setter}(null);
-        } catch(\InvalidArgumentException $e) {
-            throw new \InvalidArgumentException(
-                'The class property $' . $key . ' cannot be unset as'
-                . ' NULL is an invalid value for it: ' . $e->getMessage()
-            );
-        }
+        $this->{$setter}(null);
     }
- 
 }

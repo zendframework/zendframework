@@ -1,6 +1,6 @@
 <?php
 
-namespace BarModule;
+namespace BooModule;
 
 use Zend\Config\Config;
 
@@ -37,8 +37,12 @@ class Module
     	return array(
 			'php' => array(
     			'version' => '5.3.0',
-    			'required' => true,
-    		),  	
+    		),
+    		'ext/monkey' => array(
+    			'version' => '0.1',
+    		),
+    		'BarModule' => array(
+    		)
     	);
     }
 }

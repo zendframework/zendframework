@@ -25,13 +25,13 @@
 namespace Zend\Code\Generator\Docblock\Tag;
 
 /**
- * @uses       \Zend\Code\Generator\PhpDocblockTag
+ * @uses       \Zend\Code\Generator\Docblock\Tag
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class LicenseTag extends \Zend\Code\Generator\PhpDocblockTag
+class LicenseTag extends \Zend\Code\Generator\Docblock\Tag
 {
 
     /**
@@ -42,10 +42,10 @@ class LicenseTag extends \Zend\Code\Generator\PhpDocblockTag
     /**
      * fromReflection()
      *
-     * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTagReturn
+     * @param \Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagReturn
      * @return \Zend\Code\Generator\Docblock\Tag\LicenseTag
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionDocblockTag $reflectionTagLicense)
+    public static function fromReflection(\Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagLicense)
     {
         $returnTag = new self();
 
@@ -86,7 +86,7 @@ class LicenseTag extends \Zend\Code\Generator\PhpDocblockTag
      */
     public function generate()
     {
-        $output = '@license ' . $this->_url . ' ' . $this->_description . self::LINE_FEED;
+        $output = '@license ' . $this->_url . ' ' . $this->description . self::LINE_FEED;
         return $output;
     }
 

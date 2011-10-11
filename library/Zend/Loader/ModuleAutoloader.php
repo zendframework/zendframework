@@ -18,6 +18,23 @@ class ModuleAutoloader implements SplAutoloader
     protected $explicitPaths = array();
 
     /**
+     * @var array An array of supported phar formats
+     */
+    protected $pharExtensions = array(
+        'phar',
+        'phar.gz',
+        'phar.bz2',
+        'phar.tar',
+        'phar.tar.gz',
+        'phar.tar.bz2',
+        'phar.zip',
+        'tar',
+        'tar.gz',
+        'tar.bz2',
+        'zip',
+    );
+
+    /**
      * Constructor
      *
      * Allow configuration of the autoloader via the constructor.
@@ -81,7 +98,7 @@ class ModuleAutoloader implements SplAutoloader
             //$moduleName = substr($class, 0, strpos($class, '\\'));
 
             // Find executable phars
-            $matches = glob($path . '.{phar,phar.gz,phar.bz2,phar.tar,phar.tar.gz,phar.tar.bz2,phar.zip,tar,tar.gz,tar.bz2,zip}', GLOB_BRACE);
+            $matches = glob($path . '.{' . implode($this->pharExtensions, ',') . '}', GLOB_BRACE);
             if (count($matches) == 0) {
                 return false;
             }
@@ -131,6 +148,7 @@ class ModuleAutoloader implements SplAutoloader
         if (!$file->isReadable() || !$file->isFile()) {
             return false;
         }
+        // Phase 0: Check for executable phar with Module class in stub
         if (strpos($file->getRealPath(), '.phar') !== false) {
             // First see if the stub makes the Module class available
             require_once $file->getRealPath();
@@ -138,10 +156,22 @@ class ModuleAutoloader implements SplAutoloader
                 return $class;
             }
         }
-        // No stub, or stub did not provide Module class; try Module.php directly
+        // Phase 1: Not executable phar, no stub, or stub did not provide Module class; try Module.php directly
         $moduleClassFile = 'phar://' . $file->getRealPath() . '/Module.php';
-        $file = new SplFileInfo($moduleClassFile);
-        if ($file->isReadable() && $file->isFile()) {
+        $moduleFile = new SplFileInfo($moduleClassFile);
+        if ($moduleFile->isReadable() && $moduleFile->isFile()) {
+            require_once $moduleClassFile;
+            if (class_exists($class)) {
+                return $class;
+            }
+        }
+        // Phase 2: Check for nested module directory within archive
+        // Checks for /path/to/MyModule.tar/MyModule/Module.php 
+        // (shell-integrated zip/tar utilities wrap directories like this)
+        $pharBaseName = $this->pharFileToModuleName($file->getRealPath());
+        $moduleClassFile = 'phar://' . $file->getRealPath() . '/' . $pharBaseName  . '/Module.php';
+        $moduleFile = new SplFileInfo($moduleClassFile);
+        if ($moduleFile->isReadable() && $moduleFile->isFile()) {
             require_once $moduleClassFile;
             if (class_exists($class)) {
                 return $class;
@@ -229,6 +259,21 @@ class ModuleAutoloader implements SplAutoloader
     public function getPaths()
     {
         return $this->paths;
+    }
+
+    /**
+     * Returns the base module name from the path to a phar
+     * 
+     * @param string $pharPath 
+     * @return string
+     */
+    protected function pharFileToModuleName($pharPath)
+    {
+        do {
+            $pathinfo = pathinfo($pharPath);
+            $pharPath = $pathinfo['filename'];
+        } while (isset($pathinfo['extension']));
+        return $pathinfo['filename'];
     }
 
     /**

@@ -98,6 +98,7 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('PharModuleTarGz\Module'));
         $this->assertTrue(class_exists('PharModuleTarBz2\Module'));
         $this->assertTrue(class_exists('PharModuleZip\Module'));
+        $this->assertTrue(class_exists('PharModuleNested\Module'));
         $loader->unregister();
     }
 

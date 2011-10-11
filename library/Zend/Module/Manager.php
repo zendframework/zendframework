@@ -159,7 +159,7 @@ class Manager
             foreach ($module->getProvides() as $moduleName => $data) { 
                 if (!isset($this->manifest->{$moduleName})) { // if doesnt exist in manifest
                     if (is_callable(array($module, 'autoInstall'))) {
-                        if ($module->install()) {
+                        if ($module->autoInstall()) {
                             $this->manifest->{$moduleName} = $data;
                             $this->manifest->{'_dirty'} = true;
                         } else { // if $result is false then throw Exception
@@ -170,7 +170,7 @@ class Manager
                           version_compare($this->manifest->{$moduleName}->version, $data['version']) < 0 // and manifest version is less than current version
                   ){
                     if (is_callable(array($module, 'autoUpgrade'))) {
-                        if ($module->upgrade($this->manifest->{$moduleName}->version)) {
+                        if ($module->autoUpgrade($this->manifest->{$moduleName}->version)) {
                             $this->manifest->{$moduleName} = $data;
                             $this->manifest->{'_dirty'} = true;
                         } else { // if $result is false then throw Exception

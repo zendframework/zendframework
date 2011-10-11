@@ -179,7 +179,7 @@ class ManagerOptions
      */
     public function getAutoInstallWhitelist()
     {
-        return $this->selfInstallWhitelist;
+        return $this->autoInstallWhitelist;
     }
 
     /**
@@ -190,7 +190,7 @@ class ManagerOptions
      */
     public function setAutoInstallWhitelist($list)
     {
-        $this->selfInstallWhitelist = $list;
+        $this->autoInstallWhitelist = $list;
         return $this;
     }
     

@@ -42,25 +42,25 @@ class Bootstrap
     protected function setupLocator(Application $app)
     {
         /**
-            * Instantiate and configure a DependencyInjector instance, or 
-            * a ServiceLocator, and return it.
-            */
+         * Instantiate and configure a DependencyInjector instance, or 
+         * a ServiceLocator, and return it.
+         */
     }
 
     protected function setupRoutes(Application $app)
     {
         /**
-            * Pull the routing table from configuration, and pass it to the
-            * router composed in the Application instance.
-            */
+         * Pull the routing table from configuration, and pass it to the
+         * router composed in the Application instance.
+         */
     }
 
     protected function setupEvents(Application $app)
     {
         /**
-            * Wire events into the Application's EventManager, and/or setup
-            * static listeners for events that may be invoked.
-            */
+         * Wire events into the Application's EventManager, and/or setup
+         * static listeners for events that may be invoked.
+         */
     }
 }
 ]]></programlisting>
@@ -155,7 +155,7 @@ use Zend\Mvc\Router\Http\LiteralRoute;
 $route = new LiteralRoute(array(
     'route'    => '/hello',
     'defaults' => array(
-        'controller' => 'controller.hello-world.hello',
+        'controller' => 'hello_world-hello',
     ),
 ));
 $app->getRouter()->addRoute('hello', $route);
@@ -172,7 +172,7 @@ $config = new Configuration(array(
     'di' => array(
         'instance' => array(
             'alias' => array(
-                'controller.hello-world.hello' => 'HelloWorld\Controller\HelloController',
+                'hello_world-hello' => 'HelloWorld\Controller\HelloController',
             ),
         ),
     ),

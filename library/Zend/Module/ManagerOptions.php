@@ -169,14 +169,14 @@ class ManagerOptions
     {
         return $this->selfInstallWhitelist;
     }
-    
-/**
+
+    /**
      * set if self installation is enabled
      * 
      * @param bool $bool
      * @return Manager
      */
-    public function setSelfInstallWhitelist(array $list)
+    public function setSelfInstallWhitelist($list)
     {
         $this->selfInstallWhitelist = $list;
         return $this;

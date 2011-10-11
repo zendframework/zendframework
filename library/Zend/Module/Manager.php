@@ -129,7 +129,7 @@ class Manager
                 $this->addDependency($module);
             }
             if ($this->getOptions()->getEnableSelfInstallation() && 
-                in_array($this->getOptions()->getSelfInstallWhitelist(), $moduleName)) {
+                in_array($moduleName,$this->getOptions()->getSelfInstallWhitelist()->toArray())) {
                 $this->installModule($module);
             }
             $this->runModuleInit($module);

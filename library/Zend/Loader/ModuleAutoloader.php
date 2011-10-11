@@ -144,6 +144,7 @@ class ModuleAutoloader implements SplAutoloader
      */
     protected function loadModuleFromPhar($pharPath, $class)
     {
+        $pharPath = static::normalizePath($pharPath, false);
         $file = new SplFileInfo($pharPath);
         if (!$file->isReadable() || !$file->isFile()) {
             return false;
@@ -282,11 +283,13 @@ class ModuleAutoloader implements SplAutoloader
      * @param  string $path 
      * @return string
      */
-    public static function normalizePath($path)
+    public static function normalizePath($path, $trailingSlash = true)
     {
         $path = rtrim($path, '/');
         $path = rtrim($path, '\\');
-        $path .= DIRECTORY_SEPARATOR;
+        if ($trailingSlash) {
+            $path .= DIRECTORY_SEPARATOR;
+        }
         return $path;
     }
 }

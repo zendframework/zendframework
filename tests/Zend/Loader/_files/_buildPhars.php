@@ -28,9 +28,12 @@ buildModulePhar('PharModuleTarBz2', Phar::TAR, Phar::BZ2, false);
 buildModulePhar('PharModuleZip', Phar::ZIP, Phar::NONE, false);
 
 // Fake Module
-//buildModulePhar('PharModuleFake', Phar::ZIP, Phar::NONE, false, 'fake');
+buildModulePhar('PharModuleFake', Phar::ZIP, Phar::NONE, false, 'fake');
+buildModulePhar('PharModuleNestedFake', Phar::TAR, Phar::GZ, false, 'nestedfake');
 // Nested Module
 buildModulePhar('PharModuleNested', Phar::TAR, Phar::GZ, false, 'nested');
+// Explicitly loaded phar
+buildModulePhar('PharModuleExplicit');
 
 function buildModulePhar($name, $format = Phar::PHAR, $compression = Phar::NONE, $executable = true, $mode = 'normal')
 {
@@ -47,12 +50,16 @@ function buildModulePhar($name, $format = Phar::PHAR, $compression = Phar::NONE,
     $phar = new Phar($filename);
     switch ($mode) {
         case 'normal':
-            $phar['Module.php'] = "<?php \n\nnamespace $name;\n\nclass Module\n{}";
+            $phar['Module.php'] = "<?php \n\nnamespace {$name};\n\nclass Module\n{}";
+            break;
         case 'fake': 
             $phar['Module.php'] = '<?php //no class here';
             break;
         case 'nested':
-            $phar[$name . '/Module.php'] = "<?php \n\nnamespace $name;\n\nclass Module\n{}";
+            $phar[$name . '/Module.php'] = "<?php \n\nnamespace {$name};\n\nclass Module\n{}";
+            break;
+        case 'nestedfake':
+            $phar[$name . '/Module.php'] = '<?php // no class here';
             break;
     }
     if (false === $executable) {

@@ -30,14 +30,14 @@ class ManagerOptions
     /**
      * @var bool
      */
-    protected $enableSelfInstallation = false;
+    protected $enableAutoInstallation = false;
     
     /**
-     * array of modules that have been whitelisted to allow self installation
+     * array of modules that have been whitelisted to allow auto installation
      * 
      * @var array
      */
-    protected $selfInstallWhiteList = array();
+    protected $autoInstallWhiteList = array();
 
     /**
      * Check if the config cache is enabled
@@ -50,9 +50,9 @@ class ManagerOptions
     }
  
     /**
-     * Set configCacheEnabled.
+     * Set if the config cache should be enabled or not
      *
-     * @param bool $enabled the value to be set
+     * @param bool $enabled
      * @return ManagerConfig
      */
     public function setEnableConfigCache($enabled)
@@ -62,7 +62,7 @@ class ManagerOptions
     }
 
     /**
-     * Get cacheDir.
+     * Get the path where cache file(s) are stored
      *
      * @return string
      */
@@ -72,7 +72,7 @@ class ManagerOptions
     }
  
     /**
-     * Set cacheDir.
+     * Set the path where cache files can be stored
      *
      * @param string $cacheDir the value to be set
      * @return ManagerConfig
@@ -82,7 +82,7 @@ class ManagerOptions
         if (null === $cacheDir) {
             $this->cacheDir = $cacheDir;
         } else {
-            $this->cacheDir = rtrim(rtrim($cacheDir, '/'), '\\');
+            $this->cacheDir = static::normalizePath($cacheDir);
         }
         return $this;
     }
@@ -108,13 +108,13 @@ class ManagerOptions
         if (null === $manifestDir) {
             $this->manifestDir = $manifestDir;
         } else {
-            $this->manifestDir = rtrim(rtrim($manifestDir, '/'), '\\');
+            $this->manifestDir = static::normalizePath($manifestDir);
         }
         return $this;
     }
 
     /**
-     * getCacheFilePath 
+     * Get the path to the config cache 
      * 
      * Should this be an option, or should the dir option include the 
      * filename, or should it simply remain hard-coded? Thoughts?
@@ -127,19 +127,7 @@ class ManagerOptions
     }
 
     /**
-     * set if dependency checking should be enabled
-     * 
-     * @param bool $bool
-     * @return Manager
-     */
-    public function setEnableDependencyCheck($bool)
-    {
-        $this->enableDependencycheck = (bool) $bool;
-        return $this;
-    }
-    
-    /**
-     * get if dependency checking is enabled
+     * Check if dependency checking is enabled
      * 
      * @return bool
      */
@@ -147,54 +135,81 @@ class ManagerOptions
     {
         return $this->enableDependencycheck;
     }
-    
+
     /**
-     * set if self installation is enabled
+     * Set if dependency checking is enabled
      * 
-     * @param bool $bool
+     * @param bool $enabled
      * @return Manager
      */
-    public function setEnableSelfInstallation($bool)
+    public function setEnableDependencyCheck($enabled)
     {
-        $this->enableSelfInstallation = (bool) $bool;
+        $this->enableDependencycheck = (bool) $enabled;
         return $this;
     }
     
     /**
-     * gets if self installation is enabled
+     * Check if auto installation is enabled
      * 
      * @return bool
      */
-    public function getSelfInstallWhitelist()
+    public function getEnableAutoInstallation()
+    {
+        return $this->enableAutoInstallation;
+    }
+
+    /**
+     * Set if auto installation is enabled application-wide. If this is 
+     * disabled, no auto install/upgrades will be ran; even if the modules are 
+     * in the whitelist.
+     * 
+     * @param bool $enabled
+     * @return Manager
+     */
+    public function setEnableAutoInstallation($enabled)
+    {
+        $this->enableAutoInstallation = (bool) $enabled;
+        return $this;
+    }
+    
+    /**
+     * Get the array of modules enabled for auto install or upgrade
+     * 
+     * @return array
+     */
+    public function getAutoInstallWhitelist()
     {
         return $this->selfInstallWhitelist;
     }
 
     /**
-     * set if self installation is enabled
+     * Set auto installation whitelist
      * 
-     * @param bool $bool
+     * @param array $list An array of module names which to allow auto install or upgrade
      * @return Manager
      */
-    public function setSelfInstallWhitelist($list)
+    public function setAutoInstallWhitelist($list)
     {
         $this->selfInstallWhitelist = $list;
         return $this;
     }
     
-    /**
-     * gets if self installation is enabled
-     * 
-     * @return bool
-     */
-    public function getEnableSelfInstallation()
-    {
-        return $this->enableSelfInstallation;
-    }
-    
     public function getApplicationEnv()
     {
         return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;
+    }
+
+    /**
+     * Normalize a path for insertion in the stack
+     * 
+     * @param  string $path 
+     * @return string
+     */
+    public static function normalizePath($path)
+    {
+        $path = rtrim($path, '/');
+        $path = rtrim($path, '\\');
+        return $path;
     }
 
     /**

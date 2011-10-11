@@ -27,8 +27,7 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Config\Config,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route;
+    Zend\Mvc\Router\Exception;
 
 /**
  * Route part.
@@ -39,7 +38,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Part extends TreeRouteStack implements Route
+class Part extends TreeRouteStack
 {
     /**
      * Route to match.
@@ -63,50 +62,43 @@ class Part extends TreeRouteStack implements Route
     protected $childRoutes;
 
     /**
-     * __construct(): defined by Route interface.
-     *
-     * @see    Route::__construct()
-     * @param  mixed $options
+     * Create a new part route.
+     * 
+     * @param  string  $route
+     * @param  boolean $mayTerminate
+     * @param  array   $childRoutes
      * @return void
      */
-    public function __construct($options = null)
+    public function __construct($route, $mayTerminate, array $childRoutes = null)
     {
-        parent::__construct($options);
-        
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
-        }
-
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected an array or Traversable; received "%s"',
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-        
-        if (!isset($options['route']) || !$options['route'] instanceof Route) {
-            throw new Exception\InvalidArgumentException('Route not defined or not an instance of Route');
-        }
-
-        $this->route        = $options['route'];
-        $this->mayTerminate = (isset($options['may_terminate']) && $options['may_terminate']);
-        
-        if (isset($options['child_routes'])) {
-            $this->childRoutes = $options['child_routes'];
-        }
+        $this->route        = $route;
+        $this->mayTerminate = $mayTerminate;
+        $this->childRoutes  = $childRoutes;
+        $this->routes       = new PriorityList();
     }
     
     /**
-     * init(): defined by SimpleRouteStack.
-     * 
-     * @see    SimpleRouteStack::init()
+     * factory(): defined by Route interface.
+     *
+     * @see    Route::factory()
+     * @param  mixed $options
      * @return void
      */
-    protected function init()
+    public static function factory(array $options = array())
     {
-        // Don't register HTTP plugins again.
+        if (!isset($options['route'])) {
+            throw new Exception\InvalidArgumentException('Missing "route" in options array');
+        }
+
+        if (!isset($options['may_terminate'])) {
+            $options['may_terminate'] = false;
+        }
+        
+        if (!isset($options['child_routes']) || !$options['child_routes']) {
+            $options['child_routes'] = null;
+        }
+
+        return new static($options['route'], $options['may_terminate'], $options['child_routes']);
     }
 
     /**

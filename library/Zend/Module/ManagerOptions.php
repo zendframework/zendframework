@@ -31,6 +31,13 @@ class ManagerOptions
      * @var bool
      */
     protected $enableSelfInstallation = false;
+    
+    /**
+     * array of modules that have been whitelisted to allow self installation
+     * 
+     * @var array
+     */
+    protected $selfInstallWhiteList = array();
 
     /**
      * Check if the config cache is enabled
@@ -150,6 +157,28 @@ class ManagerOptions
     public function setEnableSelfInstallation($bool)
     {
         $this->enableSelfInstallation = (bool) $bool;
+        return $this;
+    }
+    
+    /**
+     * gets if self installation is enabled
+     * 
+     * @return bool
+     */
+    public function getSelfInstallWhitelist()
+    {
+        return $this->selfInstallWhitelist;
+    }
+    
+/**
+     * set if self installation is enabled
+     * 
+     * @param bool $bool
+     * @return Manager
+     */
+    public function setSelfInstallWhitelist(array $list)
+    {
+        $this->selfInstallWhitelist = $list;
         return $this;
     }
     

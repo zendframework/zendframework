@@ -2,6 +2,8 @@
 
 namespace Zend\Module;
 
+use Zend\Service\Amazon\Authentication\V1;
+
 use Traversable,
     Zend\Config\Config,
     Zend\Config\Writer\ArrayWriter,
@@ -126,7 +128,8 @@ class Manager
                 $this->addProvision($module);
                 $this->addDependency($module);
             }
-            if ($this->getOptions()->getEnableSelfInstallation()) {
+            if ($this->getOptions()->getEnableSelfInstallation() && 
+                in_array($this->getOptions()->getSelfInstallWhitelist(), $moduleName)) {
                 $this->installModule($module);
             }
             $this->runModuleInit($module);
@@ -155,7 +158,7 @@ class Manager
             $this->loadInstallationManifest();
             foreach ($module->getProvides() as $moduleName => $data) { 
                 if (!isset($this->manifest->{$moduleName})) { // if doesnt exist in manifest
-                    if (is_callable(array($module, 'install'))) {
+                    if (is_callable(array($module, 'autoInstall'))) {
                         if ($module->install()) {
                             $this->manifest->{$moduleName} = $data;
                             $this->manifest->{'_dirty'} = true;
@@ -166,7 +169,7 @@ class Manager
                 } elseif (isset($this->manifest->{$moduleName}) && // does exists in manifest
                           version_compare($this->manifest->{$moduleName}->version, $data['version']) < 0 // and manifest version is less than current version
                   ){
-                    if (is_callable(array($module, 'upgrade'))) {
+                    if (is_callable(array($module, 'autoUpgrade'))) {
                         if ($module->upgrade($this->manifest->{$moduleName}->version)) {
                             $this->manifest->{$moduleName} = $data;
                             $this->manifest->{'_dirty'} = true;

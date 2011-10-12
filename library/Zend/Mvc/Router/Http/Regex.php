@@ -74,12 +74,12 @@ class Regex implements Route
     /**
      * Create a new regex route.
      * 
-     * @param  string $route
+     * @param  string $regex
      * @param  string $spec
      * @param  array  $defaults 
      * @return void
      */
-    public function __construct($route, $spec, array $defaults = array())
+    public function __construct($regex, $spec, array $defaults = array())
     {
         $this->regex    = $regex;
         $this->spec     = $spec;

@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,17 +24,15 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Config\Config,
-    Zend\Stdlib\RequestDescription as Request,
+use Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\PriorityList;
 
 /**
  * Route part.
  *
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
@@ -121,7 +119,7 @@ class Part extends TreeRouteStack
             
             $nextOffset = $pathOffset + $match->getLength();
             
-            $uri  = $request->uri();
+            $uri        = $request->uri();
             $pathLength = strlen($uri->getPath());
             
             if ($this->mayTerminate && $nextOffset === $pathLength) {

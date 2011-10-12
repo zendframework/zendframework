@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,17 +24,17 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Loader\PluginSpecBroker,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route,
+use Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\SimpleRouteStack,
-    Zend\Stdlib\RequestDescription as Request;
+    Zend\Mvc\Router\Route,
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Uri\Http as HttpUri;
 
 /**
  * Tree search implementation.
  *
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -46,6 +46,13 @@ class TreeRouteStack extends SimpleRouteStack
      * @var string
      */
     protected $baseUrl = '';
+    
+    /**
+     * Request URI.
+     * 
+     * @var HttpUri
+     */
+    protected $requestUri;
 
     /**
      * init(): defined by SimpleRouteStack.
@@ -87,10 +94,10 @@ class TreeRouteStack extends SimpleRouteStack
      * routeFromArray(): defined by SimpleRouteStack.
      *
      * @see    SimpleRouteStack::routeFromArray()
-     * @param  mixed $specs
+     * @param  array $specs
      * @return Route
      */
-    protected function routeFromArray($specs)
+    protected function routeFromArray(array $specs)
     {
         $route = parent::routeFromArray($specs);
 
@@ -124,11 +131,16 @@ class TreeRouteStack extends SimpleRouteStack
         if (!method_exists($request, 'uri')) {
             return null;
         }
-
+        
+        $uri           = $request->uri();
         $baseUrlLength = strlen($this->baseUrl) ?: null;
+        
+        if ($this->requestUri === null) {
+            $this->setRequestUri($uri);
+        }
 
         if ($baseUrlLength !== null) {
-            $pathLength = strlen($request->uri()->getPath()) - $baseUrlLength;
+            $pathLength = strlen($uri->getPath()) - $baseUrlLength;
 
             foreach ($this->routes as $route) {
                 if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
@@ -168,8 +180,42 @@ class TreeRouteStack extends SimpleRouteStack
         } else {
             unset($options['name']);
         }
-
-        return $route->assemble($params, $options);
+        
+        if (!isset($options['uri'])) {       
+            $uri = new HttpUri();
+            
+            if (isset($options['absolute']) && $options['absolute']) {
+                if ($this->requestUri === null) {
+                    throw new Exception\RuntimeException('Request URI has not been set');
+                }
+            
+                $uri->setScheme($this->requestUri->getScheme())
+                    ->setHost($this->requestUri->getHost())
+                    ->setPort($this->requestUri->getPort());
+            }
+            
+            $options['uri'] = $uri;
+        }
+        
+        $path = $route->assemble($params, $options);
+        
+        if (isset($uri)) {
+            if (isset($options['absolute']) && $options['absolute']) {
+                return $uri->setPath($path)->toString();
+            } elseif ($uri->getHost() !== null) {
+                if ($uri->scheme !== null) {
+                    if ($this->requestUri === null) {
+                        throw new Exception\RuntimeException('Request URI has not been set');
+                    }
+                    
+                    $uri->setScheme($this->requestUri->getScheme());
+                }
+                
+                return $uri->setPath($path)->toString();
+            }
+        }
+        
+        return $path;
     }
     
     /**
@@ -192,5 +238,27 @@ class TreeRouteStack extends SimpleRouteStack
     public function getBaseUrl()
     {
         return $this->baseUrl;
+    }
+    
+    /**
+     * Set the request URI.
+     * 
+     * @param  HttpUri $uri
+     * @return self
+     */
+    public function setRequestUri(HttpUri $uri)
+    {
+        $this->requestUri = $uri;
+        return $this;
+    }
+    
+    /**
+     * Get the request URI.
+     * 
+     * @return HttpUri
+     */
+    public function getRequestUri()
+    {
+        return $this->requestUri;
     }
 }

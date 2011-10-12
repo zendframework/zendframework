@@ -154,7 +154,7 @@ class Security
 
         $transformed_xml_binhash = pack("H*", sha1($transformed_xml));
 
-        if($transformed_xml_binhash != $dValue) {
+        if (!$this->_secureStringCompare($transformed_xml_binhash, $dValue)) {
             throw new Security\Exception\RuntimeException("Locally Transformed XML does not match XML Document. Cannot Verify Signature");
         }
 
@@ -275,5 +275,27 @@ class Security
         }
 
         throw new Security\Exception\RuntimeException("Invalid code path");
+    }
+
+    /**
+     * Securely compare two strings for equality while avoided C level memcmp()
+     * optimisations capable of leaking timing information useful to an attacker
+     * attempting to iteratively guess the unknown string (e.g. password) being
+     * compared against.
+     *
+     * @param string $a
+     * @param string $b
+     * @return bool
+     */
+    static protected function _secureStringCompare($a, $b)
+    {
+        if (strlen($a) !== strlen($b)) {
+            return false;
+        }
+        $result = 0;
+        for ($i = 0; $i < strlen($a); $i++) {
+            $result |= ord($a[$i]) ^ ord($b[$i]);
+        }
+        return $result == 0;
     }
 }

@@ -770,12 +770,34 @@ class GenericProvider
                 $data .= $params['openid_' . strtr($key,'.','_')]."\n";
             }
         }
-        if (base64_decode($params['openid_sig']) ===
-            OpenId\OpenId::hashHmac($macFunc, $data, $secret)) {
+        if ($this->_secureStringCompare(base64_decode($params['openid_sig']),
+            OpenId\OpenId::hashHmac($macFunc, $data, $secret))) {
             $ret['is_valid'] = 'true';
         } else {
             $ret['is_valid'] = 'false';
         }
         return $ret;
+    }
+
+    /**
+     * Securely compare two strings for equality while avoided C level memcmp()
+     * optimisations capable of leaking timing information useful to an attacker
+     * attempting to iteratively guess the unknown string (e.g. password) being
+     * compared against.
+     *
+     * @param string $a
+     * @param string $b
+     * @return bool
+     */
+    protected function _secureStringCompare($a, $b)
+    {
+        if (strlen($a) !== strlen($b)) {
+            return false;
+        }
+        $result = 0;
+        for ($i = 0; $i < strlen($a); $i++) {
+            $result |= ord($a[$i]) ^ ord($b[$i]);
+        }
+        return $result == 0;
     }
 }

@@ -31,7 +31,7 @@ use Traversable,
     Zend\Mvc\Router\Route;
 
 /**
- * Literal route.
+ * Hostname route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Route
@@ -39,15 +39,22 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Literal implements Route
+class Hostname implements Route
 {
     /**
      * Route to match.
      *
-     * @var string
+     * @var array
      */
     protected $route;
 
+    /**
+     * Constraints for parameters.
+     * 
+     * @var array
+     */
+    protected $constraints;
+    
     /**
      * Default values.
      *
@@ -56,16 +63,18 @@ class Literal implements Route
     protected $defaults;
 
     /**
-     * Create a new literal route.
+     * Create a new hostname route.
      * 
      * @param  string $route
+     * @param  array  $constraints
      * @param  array  $defaults 
      * @return void
      */
-    public function __construct($route, array $defaults = array())
+    public function __construct($route, array $constraints = array(), array $defaults = array())
     {
-        $this->route    = $route;
-        $this->defaults = $defaults;
+        $this->route       = explode('.', $route);
+        $this->constraints = $constraints;
+        $this->defaults    = $defaults;
     }
     
     /**
@@ -81,11 +90,15 @@ class Literal implements Route
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
+        if (!isset($options['constraints'])) {
+            $options['constraints'] = array();
+        }
+        
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
 
-        return new static($options['route'], $options['defaults']);
+        return new static($options['route'], $options['constraints'], $options['defaults']);
     }
 
     /**
@@ -95,30 +108,33 @@ class Literal implements Route
      * @param  Request $request
      * @return RouteMatch
      */
-    public function match(Request $request, $pathOffset = null)
+    public function match(Request $request)
     {
         if (!method_exists($request, 'uri')) {
             return null;
         }
 
-        $uri  = $request->uri();
-        $path = $uri->getPath();
+        $uri      = $request->uri();
+        $hostname = explode('.', $uri->getHost());
+        $params   = array();
 
-        if ($pathOffset !== null) {
-            if ($pathOffset >= 0 && strlen($path) >= $pathOffset) {
-                if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
-                    return new RouteMatch($this->defaults, $this, strlen($this->route));
-                }
-            }
-            
+        if (count($hostname) !== count($this->route)) {
             return null;
         }
-
-        if ($path === $this->route) {
-            return new RouteMatch($this->defaults, $this, strlen($this->route));
+        
+        foreach ($this->route as $index => $routePart) {
+            if (preg_match('(^:(?<name>.+)$)', $routePart, $matches)) {
+                if (isset($this->constraints[$matches['name']]) && !preg_match('(^' . $this->constraints[$matches['name']] . '$)', $hostname[$index])) {
+                    return null;
+                }
+                
+                $params[$matches['name']] = $hostname[$index];
+            } elseif ($hostname[$index] !== $routePart) {
+                return null;
+            }
         }
-
-        return null;
+        
+        return new RouteMatch(array_merge($this->defaults, $params), $this);
     }
 
     /**
@@ -131,6 +147,25 @@ class Literal implements Route
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        return $this->route;
+        if (isset($options['uri'])) {
+            $parts = array();
+            
+            foreach ($this->route as $index => $routePart) {
+                if (preg_match('(^:(?<name>.+)$)', $routePart, $matches)) {
+                    if (!isset($params[$matches['name']])) {
+                        throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $matches['name']));
+                    }
+                    
+                    $parts[] = $params[$matches['name']];
+                } else {
+                    $parts[] = $routePart;
+                }
+            }
+            
+            $options['uri']->setHost(implode('.', $parts));
+        }
+        
+        // A hostname does not contribute to the path, thus nothing is returned.
+        return '';
     }
 }

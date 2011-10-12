@@ -31,7 +31,7 @@ use Traversable,
     Zend\Mvc\Router\Route;
 
 /**
- * Literal route.
+ * Scheme route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Route
@@ -39,15 +39,15 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Literal implements Route
+class Scheme implements Route
 {
     /**
-     * Route to match.
+     * Scheme to match.
      *
-     * @var string
+     * @var array
      */
-    protected $route;
-
+    protected $scheme;
+    
     /**
      * Default values.
      *
@@ -56,15 +56,15 @@ class Literal implements Route
     protected $defaults;
 
     /**
-     * Create a new literal route.
+     * Create a new scheme route.
      * 
-     * @param  string $route
+     * @param  string $scheme
      * @param  array  $defaults 
      * @return void
      */
-    public function __construct($route, array $defaults = array())
+    public function __construct($scheme, array $defaults = array())
     {
-        $this->route    = $route;
+        $this->scheme   = $scheme;
         $this->defaults = $defaults;
     }
     
@@ -77,15 +77,15 @@ class Literal implements Route
      */
     public static function factory(array $options = array())
     {
-        if (!isset($options['route'])) {
-            throw new Exception\InvalidArgumentException('Missing "route" in options array');
+        if (!isset($options['scheme'])) {
+            throw new Exception\InvalidArgumentException('Missing "scheme" in options array');
         }
-
+        
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
 
-        return new static($options['route'], $options['defaults']);
+        return new static($options['scheme'], $options['defaults']);
     }
 
     /**
@@ -95,30 +95,20 @@ class Literal implements Route
      * @param  Request $request
      * @return RouteMatch
      */
-    public function match(Request $request, $pathOffset = null)
+    public function match(Request $request)
     {
         if (!method_exists($request, 'uri')) {
             return null;
         }
 
-        $uri  = $request->uri();
-        $path = $uri->getPath();
+        $uri    = $request->uri();
+        $scheme = $uri->getScheme();
 
-        if ($pathOffset !== null) {
-            if ($pathOffset >= 0 && strlen($path) >= $pathOffset) {
-                if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
-                    return new RouteMatch($this->defaults, $this, strlen($this->route));
-                }
-            }
-            
+        if ($scheme !== $this->scheme) {
             return null;
         }
-
-        if ($path === $this->route) {
-            return new RouteMatch($this->defaults, $this, strlen($this->route));
-        }
-
-        return null;
+        
+        return new RouteMatch($this->defaults, $this);
     }
 
     /**
@@ -131,6 +121,11 @@ class Literal implements Route
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        return $this->route;
+        if (isset($options['uri'])) {
+            $options['uri']->setScheme($this->scheme);
+        }
+        
+        // A scheme does not contribute to the path, thus nothing is returned.
+        return '';
     }
 }

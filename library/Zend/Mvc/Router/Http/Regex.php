@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @subpackage Route
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -33,7 +33,7 @@ use Traversable,
 /**
  * Regex route.
  *
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @subpackage Route
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -120,9 +120,9 @@ class Regex implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->regex . ')', $path, $match, null, $pathOffset);
+            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
         } else {
-            $result = preg_match('(^' . $this->regex . '$)', $path, $match);
+            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
         }
 
         if (!$result) {
@@ -131,14 +131,13 @@ class Regex implements Route
         
         $matchedLength = strlen($match[0]);
 
-        foreach ($match as $key => $value) {
+        foreach ($matches as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
                 unset($match[$key]);
             }
         }
 
-        $matches = array_merge($this->defaults, $match);
-        return new RouteMatch($matches, $this, $matchedLength);
+        return new RouteMatch(array_merge($this->defaults, $matches), $this, $matchedLength);
     }
 
     /**

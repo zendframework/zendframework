@@ -175,8 +175,6 @@ class Di implements DependencyInjection
             }
         } elseif (is_callable($instantiator)) {
             $object = $this->createInstanceViaCallback($instantiator, $params, $alias);
-            // @todo make sure we can create via a real object factory
-            throw new \Exception('incomplete implementation');
         } else {
             throw new Exception\RuntimeException('Invalid instantiator');
         }
@@ -191,7 +189,9 @@ class Di implements DependencyInjection
 
         if ($injectionMethods) {
             foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
-                $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias, $methodIsRequired);
+                if ($injectionMethod !== '__construct'){
+                    $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias, $methodIsRequired);
+                }
             }
 
             $instanceConfiguration = $instanceManager->getConfiguration($name);

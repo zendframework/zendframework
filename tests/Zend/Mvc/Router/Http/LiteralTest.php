@@ -3,81 +3,83 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Mvc\Router\Http\RouteMatch as Match,
     Zend\Mvc\Router\Http\Literal;
 
 class LiteralTest extends TestCase
 {
-    
-    public function testMatch()
+    public static function matchProvider()
     {
-        $RouteForTest = array(
-            0 => array(
-                'route' => '/blog',
-                'uri'       => 'http://test.net/blog/',
-                'offset'    => null,
-                'match'     => false
-            ),
-            1 => array(
-                'route' => '/blog',
-                'uri'       => 'http://test.net/blog/',
-                'offset'    => 0,
-                'match'     => true
-            ),
-            2 => array(
-                'route' => '/blog',
-                'uri'       => 'http://test.net/blog/blog',
-                'offset'    => 5,
-                'match'     => true
-            ),
-            3 => array(
-                'route' => 'page',
-                'uri'       => 'http://test.net/blog/page',
-                'offset'    => null,
-                'match'     => false
-            ),
-            4 => array(
-                'route' => '/blog',
-                'uri'       => 'http://test.net/blog/',
-                'offset'    => 7,
-                'match'     => false
-            ),
-            5 => array(
-                'route' => '/',
-                'uri'       => 'http://test.net/blog/',
-                'offset'    => 5,
-                'match'     => true
-            ),
-            6 => array(
-                'route' => '/blog',
-                'uri'       => 'http://test.net/blog/',
-                'offset'    => -1,
-                'match'     => false
-            ),
-            7 => array(
-                'route' => '/',
-                'uri'       => 'http://test.net',  // Request not valid
-                'offset'    => null,
-                'match'     => false
-            ),
+        return array(
+            array(array(
+                'route'  => '/blog',
+                'uri'    => 'http://test.net/blog/',
+                'offset' => null,
+                'match'  => false,
+            )),
+            array(array(
+                'route'  => '/blog',
+                'uri'    => 'http://test.net/blog/',
+                'offset' => 0,
+                'match'  => true,
+            )),
+            array(array(
+                'route'  => '/blog',
+                'uri'    => 'http://test.net/blog/blog',
+                'offset' => 5,
+                'match'  => true,
+            )),
+            array(array(
+                'route'  => 'page',
+                'uri'    => 'http://test.net/blog/page',
+                'offset' => null,
+                'match'  => false,
+            )),
+            array(array(
+                'route'  => '/blog',
+                'uri'    => 'http://test.net/blog/',
+                'offset' => 7,
+                'match'  => false,
+            )),
+            array(array(
+                'route'  => '/',
+                'uri'    => 'http://test.net/blog/',
+                'offset' => 5,
+                'match'  => true,
+            )),
+            array(array(
+                'route'  => '/blog',
+                'uri'    => 'http://test.net/blog/',
+                'offset' => -1,
+                'match'  => false,
+            )),
+            array(array(
+                'route'  => '/',
+                'uri'    => 'http://test.net',
+                'offset' => null,
+                'match'  => false,
+            )),
         );
-        
-        $request = new Request();
-        foreach($RouteForTest as $key => $params) {
-            $route = new Literal(array(
-                'route'    => $params['route'],
-                'defaults' => array()
-            ));
-            
-            $request->setUri($params['uri']);
-            $match = $route->match($request,$params['offset']);
-            if ($params['match']) {
-                $this->assertTrue($match instanceof Match, "assert №".$key);
-            } else {
-                $this->assertNull($match, "assert №".$key);
-            }
-        }
     }
     
+    /**
+     * @dataProvider matchProvider
+     */
+    public function testMatch(array $params)
+    {
+        $request = new Request();
+        $route   = Literal::factory(array(
+            'route'    => $params['route'],
+            'defaults' => array(),
+        ));
+
+        $request->setUri($params['uri']);
+        $match = $route->match($request, $params['offset']);
+        
+        if ($params['match'] === false) {
+            $this->assertNull($match);
+        } else {
+            $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
+        }
+    }
 }
 

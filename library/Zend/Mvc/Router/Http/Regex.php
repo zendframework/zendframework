@@ -42,61 +42,65 @@ use Traversable,
 class Regex implements Route
 {
     /**
-     * Regex to match
+     * Regex to match.
      * 
      * @var string
      */
     protected $regex;
 
     /**
-     * Default values
+     * Default values.
      *
      * @var array
      */
     protected $defaults;
 
     /**
-     * Matches
-     * 
-     * @var array
-     */
-    protected $matches = array();
-
-    /**
-     * Specification for URL assembly
+     * Specification for URL assembly.
      *
      * Parameters accepting subsitutions should be denoted as "%key%"
      * 
      * @var string
      */
     protected $spec;
-
+    
     /**
-     * __construct(): defined by Route interface.
+     * Create a new regex route.
+     * 
+     * @param  string $regex
+     * @param  string $spec
+     * @param  array  $defaults 
+     * @return void
+     */
+    public function __construct($regex, $spec, array $defaults = array())
+    {
+        $this->regex    = $regex;
+        $this->spec     = $spec;
+        $this->defaults = $defaults;
+    }
+    
+    /**
+     * factory(): defined by Route interface.
      *
-     * @see    Route::__construct()
+     * @see    Route::factory()
      * @param  mixed $options
      * @return void
      */
-    public function __construct($options = null)
+    public static function factory(array $options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
-        }
-
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
-        }
-
-        if (!isset($options['regex']) || !is_string($options['regex'])) {
-            throw new Exception\InvalidArgumentException('Regex not defined nor not a string');
+        if (!isset($options['regex'])) {
+            throw new Exception\InvalidArgumentException('Missing "regex" in options array');
         }
         
-        $this->regex    = $options['regex'];
-        $this->defaults = isset($options['defaults']) ? $options['defaults'] : array();
-        $this->spec     = isset($options['spec']) ? $options['spec'] : "%s";
+        if (!isset($options['spec'])) {
+            throw new Exception\InvalidArgumentException('Missing "spec" in options array');
+        }
+
+        if (!isset($options['defaults'])) {
+            $options['defaults'] = array();
+        }
+
+        return new static($options['regex'], $options['spec'], $options['defaults']);
     }
 
     /**
@@ -116,9 +120,9 @@ class Regex implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('#\G' . $this->regex . '#i', $path, $match, null, $pathOffset);
+            $result = preg_match('(\G' . $this->regex . ')', $path, $match, null, $pathOffset);
         } else {
-            $result = preg_match('#^' . $this->regex . '$#i', $path, $match);
+            $result = preg_match('(^' . $this->regex . '$)', $path, $match);
         }
 
         if (!$result) {
@@ -133,8 +137,7 @@ class Regex implements Route
             }
         }
 
-        $matches       = array_merge($this->defaults, $match);
-        $this->matches = $matches;
+        $matches = array_merge($this->defaults, $match);
         return new RouteMatch($matches, $this, $matchedLength);
     }
 
@@ -146,18 +149,19 @@ class Regex implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
-        $params  = (array) $params;
-        $values  = array_merge($this->matches, $params);
-
-        $url = $this->spec;
-        foreach ($values as $key => $value) {
+        $url    = $this->spec;
+        $params = array_merge($this->defaults, $params);
+        
+        foreach ($params as $key => $value) {
             $spec = '%' . $key . '%';
-            if (strstr($url, $spec)) {
+            
+            if (strstr($url, $spec) !== false) {
                 $url = str_replace($spec, urlencode($value), $url);
             }
         }
+        
         return $url;
     }
 }

@@ -56,34 +56,36 @@ class Literal implements Route
     protected $defaults;
 
     /**
-     * __construct(): defined by Route interface.
+     * Create a new literal route.
+     * 
+     * @param  string $route
+     * @param  array  $defaults 
+     * @return void
+     */
+    public function __construct($route, array $defaults = array())
+    {
+        $this->route    = $route;
+        $this->defaults = $defaults;
+    }
+    
+    /**
+     * factory(): defined by Route interface.
      *
-     * @see    Route::__construct()
+     * @see    Route::factory()
      * @param  mixed $options
      * @return void
      */
-    public function __construct($options = null)
+    public static function factory(array $options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
+        if (!isset($options['route'])) {
+            throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
+        if (!isset($options['defaults'])) {
+            $options['defaults'] = array();
         }
 
-        if (!isset($options['route']) || !is_string($options['route'])) {
-            throw new Exception\InvalidArgumentException('Route not defined nor not a string');
-        }
-
-        if (!isset($options['defaults']) || !is_array($options['defaults'])) {
-            throw new Exception\InvalidArgumentException('Defaults not defined nor not an array');
-        }
-
-        $this->route    = $options['route'];
-        $this->defaults = $options['defaults'];
+        return new static($options['route'], $options['defaults']);
     }
 
     /**
@@ -103,13 +105,17 @@ class Literal implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            if ($pathOffset >= 0 && $pathOffset <= strlen($path) && strpos($path, $this->route, $pathOffset) === $pathOffset) {
-                return new RouteMatch($this->defaults, $this, strlen($this->route));
+            if ($pathOffset >= 0 && strlen($path) >= $pathOffset) {
+                if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
+                    return new RouteMatch($this->defaults, $this, strlen($this->route));
+                }
             }
-        } else {
-            if ($path === $this->route) {
-                return new RouteMatch($this->defaults, $this, strlen($this->route));
-            }
+            
+            return null;
+        }
+
+        if ($path === $this->route) {
+            return new RouteMatch($this->defaults, $this, strlen($this->route));
         }
 
         return null;
@@ -123,7 +129,7 @@ class Literal implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
         return $this->route;
     }

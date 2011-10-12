@@ -143,6 +143,36 @@ class TreeRouteStack extends SimpleRouteStack
     }
 
     /**
+     * assemble(): defined by Route interface.
+     *
+     * @see    Route::assemble()
+     * @param  array $params
+     * @param  array $options
+     * @return mixed
+     */
+    public function assemble(array $params = array(), array $options = array())
+    {
+        if (!isset($options['name'])) {
+            throw new Exception\InvalidArgumentException('Missing "name" option');
+        }
+        
+        $names = explode('/', $options['name'], 2);
+        $route = $this->routes->get($names[0]);
+        
+        if (!$route) {
+            throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $names[0]));
+        }
+        
+        if (isset($names[1])) {
+            $options['name'] = $names[1];
+        } else {
+            unset($options['name']);
+        }
+
+        return $route->assemble($params, $options);
+    }
+    
+    /**
      * Set the base URL.
      *
      * @param  string $baseUrl

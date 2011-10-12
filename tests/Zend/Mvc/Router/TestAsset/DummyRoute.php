@@ -73,4 +73,15 @@ class DummyRoute implements Route
     {
         return '';
     }
+
+    /**
+     * factory(): defined by Route interface
+     * 
+     * @param  array $options 
+     * @return DummyRoute
+     */
+    public static function factory(array $options = array())
+    {
+        return new static();
+    }
 }

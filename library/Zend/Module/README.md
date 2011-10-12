@@ -53,19 +53,18 @@ Currently Implemented
     behaviors.
 * **Module Dependancy**
     Refectored to now allow self resolution of dependencies. Now provides better access 
-    to all provisions & dependencies within an application.
-* **Module Versioning
-	Added version number checking for module dependency checks
-
+    to all provisions & dependencies within an application. This is opt-in with
+    the enable_dependency_check option. Modules can declare dependencies on
+    other modules (and versions of the required modules).
 
 Stuff that still needs work:
 ----------------------------
 
 * How to expire the merged config cache in production and/or development.
-* Ability for modules to cleanly "share" resources? For example, you have 5 module which all use a database connection (or maybe two: master for writes, slave for reads).
+* ~~Ability for modules to cleanly "share" resources? For example, you have 5 module which all use a database connection (or maybe two: master for writes, slave for reads).~~ Update: see [this thread](http://zend-framework-community.634137.n4.nabble.com/Sharing-resources-across-3rd-party-modules-td3875023.html) on the zf-contributor mailing list.
 * How can modules use varying view templating types? For example, one module uses twig, another uses smarty, another mustache, and yet another uses phtml. Does it make sense to have modules for each template library or system, then modules can just declare the respective one as a dependency?
 * How to handle static assets such as images, js, and css files ([assetic](https://github.com/kriswallsmith/assetic) has been suggested).
-* Should dependencies also be resolved outside of the distribution channel (such as pyrus) to better handle manual / alternate installation methods?
+* ~~Should dependencies also be resolved outside of the distribution channel (such as pyrus) to better handle manual / alternate installation methods?~~ [SOLVED]
 * Should we, and if so, how would we handle DB schemas for installation, update/migrations, and uninstallation of modules?
 * When a module is uninstalled, what's removed, what should stay? Do we put the responsibility of uninstallation in the hands of each module developer?
 * When a module is uninstalled, should it check for other modules that are still depending on it? How much is too much, and when do we just leave it up to the developers?

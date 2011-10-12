@@ -128,9 +128,9 @@ class Manager
                 $this->addProvision($module);
                 $this->addDependency($module);
             }
-            if ($this->getOptions()->getEnableSelfInstallation() && 
-                in_array($moduleName,$this->getOptions()->getSelfInstallWhitelist()->toArray())) {
-                $this->installModule($module);
+            if ($this->getOptions()->getEnableAutoInstallation() 
+                && in_array($moduleName, $this->getOptions()->getAutoInstallWhitelist())) {
+                $this->autoInstallModule($module);
             }
             $this->runModuleInit($module);
             $this->mergeModuleConfig($module);
@@ -152,29 +152,29 @@ class Manager
      * 
      * @param Module $module
      */
-    public function installModule($module)
+    public function autoInstallModule($module)
     {
         if (is_callable(array($module, 'getProvides'))) {
             $this->loadInstallationManifest();
             foreach ($module->getProvides() as $moduleName => $data) { 
                 if (!isset($this->manifest->{$moduleName})) { // if doesnt exist in manifest
                     if (is_callable(array($module, 'autoInstall'))) {
-                        if ($module->install()) {
+                        if ($module->autoInstall()) {
                             $this->manifest->{$moduleName} = $data;
                             $this->manifest->{'_dirty'} = true;
                         } else { // if $result is false then throw Exception
-                            throw new \RuntimeException("Self installation for {$moduleName} failed");
+                            throw new \RuntimeException("Auto installation for {$moduleName} failed");
                         }
                     }
                 } elseif (isset($this->manifest->{$moduleName}) && // does exists in manifest
                           version_compare($this->manifest->{$moduleName}->version, $data['version']) < 0 // and manifest version is less than current version
                   ){
                     if (is_callable(array($module, 'autoUpgrade'))) {
-                        if ($module->upgrade($this->manifest->{$moduleName}->version)) {
+                        if ($module->autoUpgrade($this->manifest->{$moduleName}->version)) {
                             $this->manifest->{$moduleName} = $data;
                             $this->manifest->{'_dirty'} = true;
                         } else { // if $result is false then throw Exception
-                            throw new \RuntimeException("Self upgrade for {$moduleName} failed");
+                            throw new \RuntimeException("Auto upgrade for {$moduleName} failed");
                         }
                     }
                 }

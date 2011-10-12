@@ -9,128 +9,158 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class PartTest extends TestCase
 {
-        
-    public function testMatch() // Maybe hard for debug...
+    public static function matchProvider()
     {
-         $HomePageRoute = new Literal(array(
-            'route'=> '/',
+        return array(
+            array(array(
+                'uri'    => 'http://test.net/',
+                'offset' => 0,
+                'match'  => array(
+                    'controller' => 'ItsHomePage',
+                ),
+            )),
+            array(array(
+                'uri'    => 'http://test.net/blog',
+                'offset' => 0,
+                'match'  => array(
+                    'controller' => 'ItsBlog',
+                ),
+            )),
+            array(array(
+                'uri'    => 'http://test.net/forum',
+                'offset' => 0,
+                'match'  => array(
+                    'controller' => 'ItsForum',
+                ),
+            )),
+            array(array(
+                'uri'    => 'http://test.net/blog/rss',
+                'offset' => 0,
+                'match'  => null
+            )),
+            array(array(
+                'uri'    => 'http://test.net/notfound',
+                'offset' => 0,
+                'match'  => null,
+            )),
+            array(array(
+                'uri'    => 'http://test.net/blog/',
+                'offset' => 0,
+                'match'  => null,
+            )),
+            array(array(
+                'uri'    => 'http://test.net/forum/notfound',
+                'offset' => 0,
+                'match'  => null,
+            )),
+            array(array(
+                'uri'    => 'http://test.net/blog/rss/sub',
+                'offset' => 0,
+                'match'  => array(
+                    'controller' => 'ItsRssBlog',
+                    'action'     => 'ItsSubRss',
+                ),
+            )),
+        );
+    }
+
+    public function getRoute()
+    {
+        $homePageRoute = Literal::factory(array(
+            'route'    => '/',
             'defaults' => array(
-                'controller' => 'ItsHomePage'
-                )
+                'controller' => 'ItsHomePage',
+            ),
         ));
-        $RssBlogRoute = new Literal(array(
-            'route'=> '/rss',
+        $rssBlogRoute = Literal::factory(array(
+            'route'    => '/rss',
             'defaults' => array(
-                'controller' => 'ItsRssBlog'
-                )
+                'controller' => 'ItsRssBlog',
+            ),
         ));
-        $SubRssRoute = new Literal(array(
-            'route'=> '/sub',
+        $subRssRoute = Literal::factory(array(
+            'route'    => '/sub',
             'defaults' => array(
-                'controller' => 'ItsSubRss'
-                )
+                'action' => 'ItsSubRss',
+            ),
         ));
-        $BlogRoute = new Literal(array(
-            'route'=> 'blog',
+        $blogRoute = Literal::factory(array(
+            'route'    => 'blog',
             'defaults' => array(
-                'controller' => 'ItsBlog'
-                )
+                'controller' => 'ItsBlog',
+            ),
         ));
-        $ForumRoute = new Literal(array(
-            'route'=> 'forum',
+        $forumRoute = Literal::factory(array(
+            'route'    => 'forum',
             'defaults' => array(
-                'controller' => 'ItsForum'
-                )
+                'controller' => 'ItsForum',
+            ),
         ));
         
-        $route = new Part(array(
-            'route'      => $HomePageRoute,
+        $route = Part::factory(array(
+            'route'         => $homePageRoute,
             'may_terminate' => true,
-            'child_routes'   => array(
-                new Part(array (
-                    'route'      => $BlogRoute,
+            'child_routes'  => array(
+                'blog' => Part::factory(array(
+                    'route'         => $blogRoute,
                     'may_terminate' => true,
-                    'child_routes'   => array(
-                        new Part(array (
-                            'route'      => $RssBlogRoute,
-                            'may_terminate' => true,
-                            'child_routes'   => array(
-                                $SubRssRoute
-                             )
-                        ))
-                    )
+                    'child_routes'  => array(
+                        'rss' => Part::factory(array(
+                            'route'         => $rssBlogRoute,
+                            'child_routes'  => array(
+                                'sub' => $subRssRoute,
+                            ),
+                        )),
+                    ),
                 )),
-                $ForumRoute
-            )
+                $forumRoute,
+            ),
         ));
+
+        return $route;
+    }
+
+    /**
+     * @dataProvider matchProvider
+     */
+    public function testMatch(array $params)
+    {
+        $route   = $this->getRoute();
         $request = new Request();
         
-        
-        $UriForTest = array(
-            0 => array(
-                'uri' => 'http://test.net/',
-                'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsHomePage'
-                    )
-            ),
-            1 => array(
-                'uri' => 'http://test.net/blog',
-                'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsBlog'
-                    )
-            ),
-            2 => array(
-                'uri' => 'http://test.net/forum',
-                'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsForum'
-                    )
-            ),
-            3 => array(
-                'uri' => 'http://test.net/blog/rss',
-                'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsRssBlog'
-                    )
-            ),
-            4 => array(
-                'uri' => 'http://test.net/notfound',
-                'offset' => 0,
-                'match' => null
-            ),
-            5 => array(
-                'uri' => 'http://test.net/blog/', //http://test.net/blog/ and http://test.net/blog - Its Not Same!
-                'offset' => 0,
-                'match' => null
-            ),
-            6 => array(
-                'uri' => 'http://test.net/forum/notfound',
-                'offset' => 0,
-                'match' => null
-            ),
-            7 => array(
-                'uri' => 'http://test.net/blog/rss/sub',
-                'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsSubRss'
-                    )
-            ),
-        );
-        
-        foreach($UriForTest as $index => $params) {
-            $request->setUri($params['uri']);
-            $match = $route->match($request,$params['offset']);
-            if ($params['match'] == null) {
-                $this->assertNull($match, "assert №".$index);
-            } elseif(is_array($params['match'])) {
-                $this->assertNotNull($match, "assert №".$index);
-                foreach($params['match'] as $key=>$value) {
-                    $this->assertEquals($match->getParam($key), $value, "assert №".$index);
-                }
+        $request->setUri($params['uri']);
+        $match = $route->match($request, $params['offset']);
+
+        if ($params['match'] === null) {
+            $this->assertNull($match);
+        } else {
+            $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
+            
+            foreach ($params['match'] as $key => $value) {
+                $this->assertEquals($match->getParam($key), $value);
             }
         }
     }
     
+    public function testAssembleCompleteRoute()
+    {
+        $uri = $this->getRoute()->assemble(array(), array('name' => 'blog/rss/sub'));
+        
+        $this->assertEquals('/blog/rss/sub', $uri);
+    }
+    
+    public function testAssembleTerminatedRoute()
+    {
+        $uri = $this->getRoute()->assemble(array(), array('name' => 'blog'));
+        
+        $this->assertEquals('/blog', $uri);
+    }
+    
+    /**
+     * @expectedException Zend\Mvc\Router\Exception\RuntimeException
+     */
+    public function testAssembleNonTerminatedRoute()
+    {
+        $this->getRoute()->assemble(array(), array('name' => 'blog/rss'));
+    }
 }

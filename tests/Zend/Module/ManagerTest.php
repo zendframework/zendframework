@@ -31,6 +31,8 @@ class ManagerTest extends TestCase
             __DIR__ . '/TestAsset',
         ));
         $autoloader->register();
+        \AutoInstallModule\Module::$RESPONSE = true;
+        \AutoInstallModule\Module::$VERSION = '1.0.0';
     }
 
     public function tearDown()
@@ -116,8 +118,6 @@ class ManagerTest extends TestCase
     {
     	 $this->setExpectedException('RuntimeException');
     	 $options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -129,8 +129,6 @@ class ManagerTest extends TestCase
     public function testGetOfDependanciesPostLoad()
     {
     	 $options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -143,8 +141,6 @@ class ManagerTest extends TestCase
 	public function testGetOfProvisionsPostLoad()
     {
     	 $options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -158,8 +154,6 @@ class ManagerTest extends TestCase
     {
     	$this->setExpectedException('RuntimeException');
     	$options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -171,8 +165,6 @@ class ManagerTest extends TestCase
     public function testForDissatisfactionForPhpVersion()
     {
     	$options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -185,8 +177,6 @@ class ManagerTest extends TestCase
 	public function testForDissatisfactionForExtension()
     {
     	$options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -200,8 +190,6 @@ class ManagerTest extends TestCase
     {
     	$this->setExpectedException('RuntimeException');
     	$options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -213,8 +201,6 @@ class ManagerTest extends TestCase
     {
     	$this->setExpectedException('RuntimeException');
     	$options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -225,8 +211,6 @@ class ManagerTest extends TestCase
 	public function testForDissatisfactionForModule()
     {
     	$options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
             'enable_dependency_check' => true,
         ));
         // build the cache
@@ -248,5 +232,48 @@ class ManagerTest extends TestCase
     	$this->setExpectedException('RuntimeException');
         $moduleManager = new Manager(array('BooModule', 'BorModule'));
         $moduleManager->getProvisions();
+    }
+
+    public function testAutoInstallationAndUpgradeUpdatesManifest()
+    {
+    	$options = new ManagerOptions(array(
+            'enable_auto_installation' => true,
+            'auto_install_whitelist' => array('AutoInstallModule'),
+            'manifest_dir' => $this->tmpdir,
+        ));
+        $moduleManager = new Manager(array('AutoInstallModule'), $options);
+        $manifest = include $this->tmpdir . DIRECTORY_SEPARATOR . '/manifest.php';
+        $this->assertEquals($manifest['AutoInstallModule']['version'], '1.0.0');
+        // Now test a fake upgrade
+        \AutoInstallModule\Module::$VERSION = '1.0.1';
+        $moduleManager = new Manager(array('AutoInstallModule'), $options);
+        $manifest = include $this->tmpdir . DIRECTORY_SEPARATOR . '/manifest.php';
+        $this->assertEquals($manifest['AutoInstallModule']['version'], '1.0.1');
+    }
+
+    public function testAutoInstallationThrowsExceptionOnFailedInstall()
+    {
+    	$this->setExpectedException('RuntimeException');
+    	$options = new ManagerOptions(array(
+            'enable_auto_installation' => true,
+            'auto_install_whitelist' => array('AutoInstallModule'),
+            'manifest_dir' => $this->tmpdir,
+        ));
+        \AutoInstallModule\Module::$RESPONSE = false;
+        $moduleManager = new Manager(array('AutoInstallModule'), $options);
+    }
+
+    public function testAutoUpgradeThrowsExceptionOnFailedUpgrade()
+    {
+    	$this->setExpectedException('RuntimeException');
+    	$options = new ManagerOptions(array(
+            'enable_auto_installation' => true,
+            'auto_install_whitelist' => array('AutoInstallModule'),
+            'manifest_dir' => $this->tmpdir,
+        ));
+        $moduleManager = new Manager(array('AutoInstallModule'), $options);
+        \AutoInstallModule\Module::$RESPONSE = false;
+        \AutoInstallModule\Module::$VERSION = '1.0.1';
+        $moduleManager = new Manager(array('AutoInstallModule'), $options);
     }
 }

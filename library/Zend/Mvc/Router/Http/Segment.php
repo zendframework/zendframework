@@ -267,9 +267,9 @@ class Segment implements BaseRoute
         $path = $uri->getPath();
         
         if ($pathOffset !== null) {
-            $result = preg_match('#\G' . $this->regex . '#i', $path, $matches, null, $pathOffset);
+            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
         } else {
-            $result = preg_match('#^' . $this->regex . '$#i', $path, $matches);
+            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
         }
        
         if (!$result) {
@@ -296,7 +296,7 @@ class Segment implements BaseRoute
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
         $path = $this->buildPath($this->parts, array_merge($this->defaults, $params));
         

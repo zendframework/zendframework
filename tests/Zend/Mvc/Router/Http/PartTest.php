@@ -12,54 +12,53 @@ class PartTest extends TestCase
     public static function matchProvider()
     {
         return array(
-            array(0, array(
+            array(array(
                 'uri'    => 'http://test.net/',
                 'offset' => 0,
                 'match'  => array(
                     'controller' => 'ItsHomePage',
                 ),
             )),
-            array(1, array(
+            array(array(
                 'uri'    => 'http://test.net/blog',
                 'offset' => 0,
                 'match'  => array(
                     'controller' => 'ItsBlog',
                 ),
             )),
-            array(2, array(
+            array(array(
                 'uri'    => 'http://test.net/forum',
                 'offset' => 0,
                 'match'  => array(
                     'controller' => 'ItsForum',
                 ),
             )),
-            array(3, array(
+            array(array(
                 'uri'    => 'http://test.net/blog/rss',
                 'offset' => 0,
-                'match'  => array(
-                    'controller' => 'ItsRssBlog',
-                ),
+                'match'  => null
             )),
-            array(4, array(
+            array(array(
                 'uri'    => 'http://test.net/notfound',
                 'offset' => 0,
                 'match'  => null,
             )),
-            array(5, array(
-                'uri'    => 'http://test.net/blog/', //http://test.net/blog/ and http://test.net/blog - Its Not Same!
+            array(array(
+                'uri'    => 'http://test.net/blog/',
                 'offset' => 0,
                 'match'  => null,
             )),
-            array(6, array(
+            array(array(
                 'uri'    => 'http://test.net/forum/notfound',
                 'offset' => 0,
                 'match'  => null,
             )),
-            array(7, array(
+            array(array(
                 'uri'    => 'http://test.net/blog/rss/sub',
                 'offset' => 0,
                 'match'  => array(
-                    'controller' => 'ItsSubRss',
+                    'controller' => 'ItsRssBlog',
+                    'action'     => 'ItsSubRss',
                 ),
             )),
         );
@@ -67,31 +66,31 @@ class PartTest extends TestCase
 
     public function getRoute()
     {
-        $HomePageRoute = Literal::factory(array(
+        $homePageRoute = Literal::factory(array(
             'route'    => '/',
             'defaults' => array(
                 'controller' => 'ItsHomePage',
             ),
         ));
-        $RssBlogRoute = Literal::factory(array(
+        $rssBlogRoute = Literal::factory(array(
             'route'    => '/rss',
             'defaults' => array(
                 'controller' => 'ItsRssBlog',
             ),
         ));
-        $SubRssRoute = Literal::factory(array(
+        $subRssRoute = Literal::factory(array(
             'route'    => '/sub',
             'defaults' => array(
-                'controller' => 'ItsSubRss',
+                'action' => 'ItsSubRss',
             ),
         ));
-        $BlogRoute = Literal::factory(array(
+        $blogRoute = Literal::factory(array(
             'route'    => 'blog',
             'defaults' => array(
                 'controller' => 'ItsBlog',
             ),
         ));
-        $ForumRoute = Literal::factory(array(
+        $forumRoute = Literal::factory(array(
             'route'    => 'forum',
             'defaults' => array(
                 'controller' => 'ItsForum',
@@ -99,23 +98,22 @@ class PartTest extends TestCase
         ));
         
         $route = Part::factory(array(
-            'route'         => $HomePageRoute,
+            'route'         => $homePageRoute,
             'may_terminate' => true,
             'child_routes'  => array(
-                Part::factory(array(
-                    'route'         => $BlogRoute,
+                'blog' => Part::factory(array(
+                    'route'         => $blogRoute,
                     'may_terminate' => true,
                     'child_routes'  => array(
-                        Part::factory(array(
-                            'route'         => $RssBlogRoute,
-                            'may_terminate' => true,
+                        'rss' => Part::factory(array(
+                            'route'         => $rssBlogRoute,
                             'child_routes'  => array(
-                                $SubRssRoute,
+                                'sub' => $subRssRoute,
                             ),
                         )),
                     ),
                 )),
-                $ForumRoute,
+                $forumRoute,
             ),
         ));
 
@@ -125,22 +123,44 @@ class PartTest extends TestCase
     /**
      * @dataProvider matchProvider
      */
-    public function testMatch($index, $params)
+    public function testMatch(array $params)
     {
         $route   = $this->getRoute();
         $request = new Request();
+        
         $request->setUri($params['uri']);
         $match = $route->match($request, $params['offset']);
 
         if ($params['match'] === null) {
-            $this->assertNull($match, "assertion " . $index);
-            return;
-        } 
-
-        $this->assertNotNull($match, "assertion " . $index);
-        foreach ($params['match'] as $key => $value) {
-            $this->assertEquals($match->getParam($key), $value, "assertion " . $index);
+            $this->assertNull($match);
+        } else {
+            $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
+            
+            foreach ($params['match'] as $key => $value) {
+                $this->assertEquals($match->getParam($key), $value);
+            }
         }
     }
     
+    public function testAssembleCompleteRoute()
+    {
+        $uri = $this->getRoute()->assemble(array(), array('name' => 'blog/rss/sub'));
+        
+        $this->assertEquals('/blog/rss/sub', $uri);
+    }
+    
+    public function testAssembleTerminatedRoute()
+    {
+        $uri = $this->getRoute()->assemble(array(), array('name' => 'blog'));
+        
+        $this->assertEquals('/blog', $uri);
+    }
+    
+    /**
+     * @expectedException Zend\Mvc\Router\Exception\RuntimeException
+     */
+    public function testAssembleNonTerminatedRoute()
+    {
+        $this->getRoute()->assemble(array(), array('name' => 'blog/rss'));
+    }
 }

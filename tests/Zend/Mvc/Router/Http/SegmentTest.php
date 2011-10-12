@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class SegmentTest extends TestCase
 {
-    public static function routesForTestMatch()
+    public static function matchProvider()
     {
         return array(
             array(array(
@@ -86,9 +86,9 @@ class SegmentTest extends TestCase
     }
     
     /**
-     * @dataProvider routesForTestMatch
+     * @dataProvider matchProvider
      */
-    public function testMatch($params) 
+    public function testMatch(array $params) 
     {
         $request = new Request();
         $route   = new Segment($params['route'], array(), $params['defaults']);
@@ -96,7 +96,7 @@ class SegmentTest extends TestCase
         $request->setUri($params['uri']);
         $match = $route->match($request, $params['offset']);
         
-        if ($params['match'] == null) {
+        if ($params['match'] === null) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);

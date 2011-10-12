@@ -56,13 +56,6 @@ class Regex implements Route
     protected $defaults;
 
     /**
-     * Matches.
-     * 
-     * @var array
-     */
-    protected $matches = array();
-
-    /**
      * Specification for URL assembly.
      *
      * Parameters accepting subsitutions should be denoted as "%key%"
@@ -127,9 +120,9 @@ class Regex implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('#\G' . $this->regex . '#i', $path, $match, null, $pathOffset);
+            $result = preg_match('(\G' . $this->regex . ')', $path, $match, null, $pathOffset);
         } else {
-            $result = preg_match('#^' . $this->regex . '$#i', $path, $match);
+            $result = preg_match('(^' . $this->regex . '$)', $path, $match);
         }
 
         if (!$result) {
@@ -144,8 +137,7 @@ class Regex implements Route
             }
         }
 
-        $matches       = array_merge($this->defaults, $match);
-        $this->matches = $matches;
+        $matches = array_merge($this->defaults, $match);
         return new RouteMatch($matches, $this, $matchedLength);
     }
 
@@ -157,18 +149,19 @@ class Regex implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
-        $params  = (array) $params;
-        $values  = array_merge($this->matches, $params);
-
-        $url = $this->spec;
-        foreach ($values as $key => $value) {
+        $url    = $this->spec;
+        $params = array_merge($this->defaults, $params);
+        
+        foreach ($params as $key => $value) {
             $spec = '%' . $key . '%';
-            if (strstr($url, $spec)) {
+            
+            if (strstr($url, $spec) !== false) {
                 $url = str_replace($spec, urlencode($value), $url);
             }
         }
+        
         return $url;
     }
 }

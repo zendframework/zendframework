@@ -3,7 +3,6 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Mvc\Router\Http\RouteMatch as Match,
     Zend\Mvc\Router\Http\Literal;
 
 class LiteralTest extends TestCase
@@ -11,51 +10,51 @@ class LiteralTest extends TestCase
     public static function matchProvider()
     {
         return array(
-            array(0, array(
+            array(array(
                 'route'  => '/blog',
                 'uri'    => 'http://test.net/blog/',
                 'offset' => null,
                 'match'  => false,
             )),
-            array(1, array(
+            array(array(
                 'route'  => '/blog',
                 'uri'    => 'http://test.net/blog/',
                 'offset' => 0,
                 'match'  => true,
             )),
-            array(2, array(
+            array(array(
                 'route'  => '/blog',
                 'uri'    => 'http://test.net/blog/blog',
                 'offset' => 5,
                 'match'  => true,
             )),
-            array(3, array(
+            array(array(
                 'route'  => 'page',
                 'uri'    => 'http://test.net/blog/page',
                 'offset' => null,
                 'match'  => false,
             )),
-            array(4, array(
+            array(array(
                 'route'  => '/blog',
                 'uri'    => 'http://test.net/blog/',
                 'offset' => 7,
                 'match'  => false,
             )),
-            array(5, array(
+            array(array(
                 'route'  => '/',
                 'uri'    => 'http://test.net/blog/',
                 'offset' => 5,
                 'match'  => true,
             )),
-            array(6, array(
+            array(array(
                 'route'  => '/blog',
                 'uri'    => 'http://test.net/blog/',
                 'offset' => -1,
                 'match'  => false,
             )),
-            array(7, array(
+            array(array(
                 'route'  => '/',
-                'uri'    => 'http://test.net',  // Request not valid
+                'uri'    => 'http://test.net',
                 'offset' => null,
                 'match'  => false,
             )),
@@ -65,7 +64,7 @@ class LiteralTest extends TestCase
     /**
      * @dataProvider matchProvider
      */
-    public function testMatch($index, $params)
+    public function testMatch(array $params)
     {
         $request = new Request();
         $route   = Literal::factory(array(
@@ -74,14 +73,13 @@ class LiteralTest extends TestCase
         ));
 
         $request->setUri($params['uri']);
-        $match = $route->match($request ,$params['offset']);
-        if ($params['match']) {
-            $this->assertTrue($match instanceof Match, "assertion " . $index);
-            return;
+        $match = $route->match($request, $params['offset']);
+        
+        if ($params['match'] === false) {
+            $this->assertNull($match);
+        } else {
+            $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
         }
-
-        $this->assertNull($match, "assertion " . $index);
     }
-    
 }
 

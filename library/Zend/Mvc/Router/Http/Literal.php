@@ -105,11 +105,12 @@ class Literal implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            if (($pathOffset >= 0) && strlen($path) >= abs($pathOffset)) {
+            if ($pathOffset >= 0 && strlen($path) >= $pathOffset) {
                 if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
                     return new RouteMatch($this->defaults, $this, strlen($this->route));
                 }
             }
+            
             return null;
         }
 
@@ -128,7 +129,7 @@ class Literal implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
         return $this->route;
     }

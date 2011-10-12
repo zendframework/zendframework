@@ -148,15 +148,24 @@ class Part extends TreeRouteStack
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
        if ($this->childRoutes !== null) {
             $this->addRoutes($this->childRoutes);
             $this->childRoutes = null;
         }
         
-        $uri = $this->route->assemble($params, $options)
-             . parent::assemble($params, $options);
+        $uri = $this->route->assemble($params, $options);
+        
+        if (!isset($options['name'])) {
+            if (!$this->mayTerminate) {
+                throw new Exception\RuntimeException('Part route may not terminate');
+            } else {
+                return $uri;
+            }
+        }
+        
+        $uri .= parent::assemble($params, $options);
         
         return $uri;
     }

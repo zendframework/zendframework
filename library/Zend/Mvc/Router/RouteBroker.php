@@ -22,6 +22,7 @@ namespace Zend\Mvc\Router;
 
 use Zend\Loader\Broker,
     Zend\Loader\PluginClassLoader,
+    Zend\Loader\ShortNameLocator,
     Zend\Mvc\Router\Exception;
 
 /**

@@ -154,7 +154,7 @@ class Security
 
         $transformed_xml_binhash = pack("H*", sha1($transformed_xml));
 
-        if (!$this->_secureStringCompare($transformed_xml_binhash, $dValue)) {
+        if (!static::_secureStringCompare($transformed_xml_binhash, $dValue)) {
             throw new Security\Exception\RuntimeException("Locally Transformed XML does not match XML Document. Cannot Verify Signature");
         }
 

@@ -17,7 +17,7 @@ class RedirectTest extends TestCase
         $this->response = new Response();
 
         $router = new SimpleRouteStack;
-        $router->addRoute('home', new LiteralRoute(array(
+        $router->addRoute('home', LiteralRoute::factory(array(
             'route'    => '/',
             'defaults' => array(
                 'controller' => 'ZendTest\Mvc\Controller\TestAsset\SampleController',

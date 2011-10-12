@@ -109,7 +109,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/path',
             'defaults' => array(
                 'controller' => 'path',
@@ -131,7 +131,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/path',
             'defaults' => array(
                 'controller' => 'path',
@@ -159,7 +159,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/sample',
             'defaults' => array(
                 'controller' => 'sample',
@@ -187,7 +187,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/bad',
             'defaults' => array(
                 'controller' => 'bad',
@@ -380,7 +380,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/locator-aware',
             'defaults' => array(
                 'controller' => 'locator-aware',

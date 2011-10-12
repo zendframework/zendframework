@@ -87,28 +87,6 @@ class SimpleRouteStack implements RouteStack
     }
     
     /**
-     * __construct(): defined by Route interface.
-     *
-     * @see    Route::__construct()
-     * @param  mixed $options
-     * @return void
-     */
-    public function __construct($options = null)
-    {
-        $this->routes = new PriorityList();
-
-        if ($options !== null) {
-            $this->setOptions($options);
-        }
-
-        if ($this->routeBroker === null) {
-            $this->routeBroker = new RouteBroker();
-        }
-
-        $this->init();
-    }
-
-    /**
      * Init method for extending classes.
      *
      * @return void

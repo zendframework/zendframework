@@ -99,7 +99,7 @@ class SegmentTest extends TestCase
         if ($params['match'] == null) {
             $this->assertNull($match);
         } else {
-            $this->assertType('Zend\Mvc\Router\Http\RouteMatch', $match);
+            $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
             
             foreach($params['match'] as $key => $value) {
                 $this->assertEquals($match->getParam($key), $value);

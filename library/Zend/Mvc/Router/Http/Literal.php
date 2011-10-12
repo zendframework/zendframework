@@ -105,13 +105,16 @@ class Literal implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
-                return new RouteMatch($this->defaults, $this, strlen($this->route));
+            if (($pathOffset >= 0) && strlen($path) >= abs($pathOffset)) {
+                if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
+                    return new RouteMatch($this->defaults, $this, strlen($this->route));
+                }
             }
-        } else {
-            if ($path === $this->route) {
-                return new RouteMatch($this->defaults, $this, strlen($this->route));
-            }
+            return null;
+        }
+
+        if ($path === $this->route) {
+            return new RouteMatch($this->defaults, $this, strlen($this->route));
         }
 
         return null;

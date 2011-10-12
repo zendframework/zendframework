@@ -9,127 +9,137 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class PartTest extends TestCase
 {
-        
-    public function testMatch() // Maybe hard for debug...
+    public static function matchProvider()
     {
-         $HomePageRoute = new Literal(array(
-            'route'=> '/',
-            'defaults' => array(
-                'controller' => 'ItsHomePage'
-                )
-        ));
-        $RssBlogRoute = new Literal(array(
-            'route'=> '/rss',
-            'defaults' => array(
-                'controller' => 'ItsRssBlog'
-                )
-        ));
-        $SubRssRoute = new Literal(array(
-            'route'=> '/sub',
-            'defaults' => array(
-                'controller' => 'ItsSubRss'
-                )
-        ));
-        $BlogRoute = new Literal(array(
-            'route'=> 'blog',
-            'defaults' => array(
-                'controller' => 'ItsBlog'
-                )
-        ));
-        $ForumRoute = new Literal(array(
-            'route'=> 'forum',
-            'defaults' => array(
-                'controller' => 'ItsForum'
-                )
-        ));
-        
-        $route = new Part(array(
-            'route'      => $HomePageRoute,
-            'may_terminate' => true,
-            'child_routes'   => array(
-                new Part(array (
-                    'route'      => $BlogRoute,
-                    'may_terminate' => true,
-                    'child_routes'   => array(
-                        new Part(array (
-                            'route'      => $RssBlogRoute,
-                            'may_terminate' => true,
-                            'child_routes'   => array(
-                                $SubRssRoute
-                             )
-                        ))
-                    )
-                )),
-                $ForumRoute
-            )
-        ));
-        $request = new Request();
-        
-        
-        $UriForTest = array(
-            0 => array(
-                'uri' => 'http://test.net/',
+        return array(
+            array(0, array(
+                'uri'    => 'http://test.net/',
                 'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsHomePage'
-                    )
-            ),
-            1 => array(
-                'uri' => 'http://test.net/blog',
+                'match'  => array(
+                    'controller' => 'ItsHomePage',
+                ),
+            )),
+            array(1, array(
+                'uri'    => 'http://test.net/blog',
                 'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsBlog'
-                    )
-            ),
-            2 => array(
-                'uri' => 'http://test.net/forum',
+                'match'  => array(
+                    'controller' => 'ItsBlog',
+                ),
+            )),
+            array(2, array(
+                'uri'    => 'http://test.net/forum',
                 'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsForum'
-                    )
-            ),
-            3 => array(
-                'uri' => 'http://test.net/blog/rss',
+                'match'  => array(
+                    'controller' => 'ItsForum',
+                ),
+            )),
+            array(3, array(
+                'uri'    => 'http://test.net/blog/rss',
                 'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsRssBlog'
-                    )
-            ),
-            4 => array(
-                'uri' => 'http://test.net/notfound',
+                'match'  => array(
+                    'controller' => 'ItsRssBlog',
+                ),
+            )),
+            array(4, array(
+                'uri'    => 'http://test.net/notfound',
                 'offset' => 0,
-                'match' => null
-            ),
-            5 => array(
-                'uri' => 'http://test.net/blog/', //http://test.net/blog/ and http://test.net/blog - Its Not Same!
+                'match'  => null,
+            )),
+            array(5, array(
+                'uri'    => 'http://test.net/blog/', //http://test.net/blog/ and http://test.net/blog - Its Not Same!
                 'offset' => 0,
-                'match' => null
-            ),
-            6 => array(
-                'uri' => 'http://test.net/forum/notfound',
+                'match'  => null,
+            )),
+            array(6, array(
+                'uri'    => 'http://test.net/forum/notfound',
                 'offset' => 0,
-                'match' => null
-            ),
-            7 => array(
-                'uri' => 'http://test.net/blog/rss/sub',
+                'match'  => null,
+            )),
+            array(7, array(
+                'uri'    => 'http://test.net/blog/rss/sub',
                 'offset' => 0,
-                'match' => array(
-                    'controller' => 'ItsSubRss'
-                    )
-            ),
+                'match'  => array(
+                    'controller' => 'ItsSubRss',
+                ),
+            )),
         );
+    }
+
+    public function getRoute()
+    {
+        $HomePageRoute = Literal::factory(array(
+            'route'    => '/',
+            'defaults' => array(
+                'controller' => 'ItsHomePage',
+            ),
+        ));
+        $RssBlogRoute = Literal::factory(array(
+            'route'    => '/rss',
+            'defaults' => array(
+                'controller' => 'ItsRssBlog',
+            ),
+        ));
+        $SubRssRoute = Literal::factory(array(
+            'route'    => '/sub',
+            'defaults' => array(
+                'controller' => 'ItsSubRss',
+            ),
+        ));
+        $BlogRoute = Literal::factory(array(
+            'route'    => 'blog',
+            'defaults' => array(
+                'controller' => 'ItsBlog',
+            ),
+        ));
+        $ForumRoute = Literal::factory(array(
+            'route'    => 'forum',
+            'defaults' => array(
+                'controller' => 'ItsForum',
+            ),
+        ));
         
-        foreach($UriForTest as $index => $params) {
-            $request->setUri($params['uri']);
-            $match = $route->match($request,$params['offset']);
-            if ($params['match'] == null) {
-                $this->assertNull($match, "assert №".$index);
-            } elseif(is_array($params['match'])) {
-                $this->assertNotNull($match, "assert №".$index);
-                foreach($params['match'] as $key=>$value) {
-                    $this->assertEquals($match->getParam($key), $value, "assert №".$index);
-                }
-            }
+        $route = Part::factory(array(
+            'route'         => $HomePageRoute,
+            'may_terminate' => true,
+            'child_routes'  => array(
+                Part::factory(array(
+                    'route'         => $BlogRoute,
+                    'may_terminate' => true,
+                    'child_routes'  => array(
+                        Part::factory(array(
+                            'route'         => $RssBlogRoute,
+                            'may_terminate' => true,
+                            'child_routes'  => array(
+                                $SubRssRoute,
+                            ),
+                        )),
+                    ),
+                )),
+                $ForumRoute,
+            ),
+        ));
+
+        return $route;
+    }
+
+    /**
+     * @dataProvider matchProvider
+     */
+    public function testMatch($index, $params)
+    {
+        $route   = $this->getRoute();
+        $request = new Request();
+        $request->setUri($params['uri']);
+        $match = $route->match($request, $params['offset']);
+
+        if ($params['match'] === null) {
+            $this->assertNull($match, "assertion " . $index);
+            return;
+        } 
+
+        $this->assertNotNull($match, "assertion " . $index);
+        foreach ($params['match'] as $key => $value) {
+            $this->assertEquals($match->getParam($key), $value, "assertion " . $index);
         }
     }
     

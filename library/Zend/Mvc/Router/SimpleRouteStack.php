@@ -26,8 +26,7 @@ namespace Zend\Mvc\Router;
 use ArrayAccess,
     ArrayIterator,
     Traversable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Loader\PluginBroker;
+    Zend\Stdlib\RequestDescription as Request;
 
 /**
  * Simple route stack implementation.
@@ -48,10 +47,45 @@ class SimpleRouteStack implements RouteStack
     /**
      * Plugin broker to load routes.
      *
-     * @var PluginBroker
+     * @var RouteBroker
      */
-    protected $pluginBroker;
+    protected $routeBroker;
 
+    /**
+     * Create a new simple route stack.
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->routes      = new PriorityList();
+        $this->routeBroker = new RouteBroker();
+        
+        $this->init();
+    }
+    
+    /**
+     * factory(): defined by Route interface.
+     *
+     * @see    Route::factory()
+     * @param  mixed $options
+     * @return void
+     */
+    public static function factory(array $options = array())
+    {
+        $instance = new static();
+        
+        if (isset($options['route_broker'])) {
+            $instance->setRouteBroker($options['route_broker']);
+        }
+        
+        if (isset($options['routes'])) {
+            $instance->setRoutes($options['routes']);
+        }
+
+        return $instance;
+    }
+    
     /**
      * __construct(): defined by Route interface.
      *
@@ -67,10 +101,8 @@ class SimpleRouteStack implements RouteStack
             $this->setOptions($options);
         }
 
-        if ($this->pluginBroker === null) {
-            $this->pluginBroker = new PluginBroker(array(
-                'register_plugins_on_load' => false
-            ));
+        if ($this->routeBroker === null) {
+            $this->routeBroker = new RouteBroker();
         }
 
         $this->init();
@@ -105,8 +137,8 @@ class SimpleRouteStack implements RouteStack
                     $this->addRoutes($value);
                     break;
 
-                case 'plugin_broker':
-                    $this->setPluginBroker($value);
+                case 'route_broker':
+                    $this->setRouteBroker($value);
                     break;
 
                 default:
@@ -116,25 +148,25 @@ class SimpleRouteStack implements RouteStack
     }
 
     /**
-     * Set the plugin broker.
+     * Set the route broker.
      *
-     * @param  PluginBroker $broker
+     * @param  RouteBroker $broker
      * @return SimpleRouteStack
      */
-    public function setPluginBroker(PluginBroker $broker)
+    public function setRouteBroker(RouteBroker $broker)
     {
-        $this->pluginBroker = $broker;
+        $this->routeBroker = $broker;
         return $this;
     }
 
     /**
-     * Get the plugin broker.
+     * Get the route broker.
      *
-     * @return PluginBroker
+     * @return RouteBroker
      */
-    public function getPluginBroker()
+    public function routeBroker()
     {
-        return $this->pluginBroker;
+        return $this->routeBroker;
     }
 
     /**
@@ -217,7 +249,7 @@ class SimpleRouteStack implements RouteStack
             throw new Exception\InvalidArgumentException('Missing "name" option');
         }
 
-        $route = $this->pluginBroker->load($specs['type'], $specs['options']);
+        $route = $this->routeBroker()->load($specs['type'], $specs['options']);
 
         return $route;
     }

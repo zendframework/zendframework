@@ -63,35 +63,42 @@ class Segment implements BaseRoute
     protected $defaults;
 
     /**
-     * __construct(): defined by Route interface.
+     * Create a new regex route.
+     * 
+     * @param  string $route
+     * @param  array  $constraints 
+     * @param  array  $defaults 
+     * @return void
+     */
+    public function __construct($route, array $constraints = array(), array $defaults = array())
+    {
+        $this->defaults = $defaults;
+        $this->parts    = $this->parseRouteDefinition($route);
+        $this->regex    = $this->buildRegex($this->parts, $constraints) . '(?:/|$)?';
+    }
+    
+    /**
+     * factory(): defined by Route interface.
      *
-     * @see    Route::__construct()
+     * @see    Route::factory()
      * @param  mixed $options
      * @return void
      */
-    public function __construct($options = null)
+    public static function factory(array $options = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
+        if (!isset($options['route'])) {
+            throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
-        }
-
-        if (!isset($options['route']) || !is_string($options['route'])) {
-            throw new Exception\InvalidArgumentException('Route not defined nor not a string');
+        if (!isset($options['constraints'])) {
+            $options['constraints'] = array();
         }
         
-        if (!isset($options['defaults']) || !is_array($options['defaults'])) {
-            throw new Exception\InvalidArgumentException('Defaults not defined nor not an array');
+        if (!isset($options['defaults'])) {
+            $options['defaults'] = array();
         }
 
-        $this->defaults = $options['defaults'];        
-        $this->parts    = $this->parseRouteDefinition($options['route']);
-        $this->regex    = $this->buildRegex($this->parts);
+        return new static($options['route'], $options['constraints'], $options['defaults']);
     }
     
     /**
@@ -125,11 +132,11 @@ class Segment implements BaseRoute
                     
                     $levelParts[$level][] = array('translated-parameter', $matches['name']);
                 } else {
-                    if (!preg_match('(\G(?<name>[^:/\[\]]+):?)', $def, $matches, 0, $currentPos)) {
+                    if (!preg_match('(\G(?<name>[^:/{\[\]]+)(?:{(?<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
                         throw new Exception\RuntimeException('Found empty parameter name');
                     }
                     
-                    $levelParts[$level][] = array('parameter', $matches['name']);                                    
+                    $levelParts[$level][] = array('parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null);
                 }
                 
                 $currentPos += strlen($matches[0]);
@@ -169,26 +176,39 @@ class Segment implements BaseRoute
      * Build the matching regex from parsed parts.
      * 
      * @param  array $parts
+     * @param  array $constraints
      * @return string
      */
-    protected function buildRegex(array $parts)
+    protected function buildRegex(array $parts, array $constraints)
     {
         $regex = '';
         
         foreach ($parts as $part) {
             switch ($part[0]) {
                 case 'literal':
-                case 'translated-literal':
                     $regex .= preg_quote($part[1]);
                     break;
-                
+                               
                 case 'parameter':
-                case 'translated-parameter':
-                    $regex .= '(?<' . $part[1] . '>.+?)';
+                    if (isset($constraints[$part[1]])) {
+                        $regex .= '(?<' . $part[1] . '>' . $constraints[$part[1]] . ')';
+                    } elseif ($part[2] === null) {
+                        $regex .= '(?<' . $part[1] . '>[^/]+)';
+                    } else {
+                        $regex .= '(?<' . $part[1] . '>[^' . $part[2] . ']+)';
+                    }
                     break;
                 
                 case 'optional':
-                    $regex .= '(?:' . $this->buildRegex($part[1]) . ')?';
+                    $regex .= '(?:' . $this->buildRegex($part[1], $constraints) . ')?';
+                    break;
+                
+                case 'translated-literal':
+                    throw new Exception\RuntimeException('Translated literals are not implemented yet');
+                    break;
+                
+                case 'translated-parameter':
+                    throw new Exception\RuntimeException('Translated parameters are not implemented yet');
                     break;
             }
         }

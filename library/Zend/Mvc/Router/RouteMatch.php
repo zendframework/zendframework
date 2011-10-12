@@ -49,13 +49,11 @@ class RouteMatch
      * Create a RouteMatch with given parameters.
      * 
      * @param  array $params
-     * @param  null|Route $route
      * @return void
      */
-    public function __construct(array $params, Route $route = null)
+    public function __construct(array $params)
     {
         $this->params = $params;
-        $this->route  = $route;
     }
        
     /**
@@ -111,7 +109,7 @@ class RouteMatch
     /**
      * Get the route that matched and provided these parameters
      * 
-     * @return null|Route
+     * @return Route
      */
     public function getRoute()
     {

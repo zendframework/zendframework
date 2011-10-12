@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,9 +24,7 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Config\Config,
-    Zend\Stdlib\RequestDescription as Request,
+use Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\Route;
 
@@ -34,7 +32,7 @@ use Traversable,
  * Literal route.
  *
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
@@ -107,7 +105,7 @@ class Literal implements Route
         if ($pathOffset !== null) {
             if ($pathOffset >= 0 && strlen($path) >= $pathOffset) {
                 if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
-                    return new RouteMatch($this->defaults, $this, strlen($this->route));
+                    return new RouteMatch($this->defaults, strlen($this->route));
                 }
             }
             
@@ -115,7 +113,7 @@ class Literal implements Route
         }
 
         if ($path === $this->route) {
-            return new RouteMatch($this->defaults, $this, strlen($this->route));
+            return new RouteMatch($this->defaults, strlen($this->route));
         }
 
         return null;

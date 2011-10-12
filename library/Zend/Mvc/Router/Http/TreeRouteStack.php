@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,10 +24,9 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Loader\PluginSpecBroker,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route,
+use Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\SimpleRouteStack,
+    Zend\Mvc\Router\Route,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Uri\Http as HttpUri;
 
@@ -35,7 +34,7 @@ use Zend\Loader\PluginSpecBroker,
  * Tree search implementation.
  *
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

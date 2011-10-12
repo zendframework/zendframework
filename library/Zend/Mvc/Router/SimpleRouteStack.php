@@ -23,9 +23,7 @@
  */
 namespace Zend\Mvc\Router;
 
-use ArrayAccess,
-    ArrayIterator,
-    Traversable,
+use ArrayIterator,
     Zend\Stdlib\RequestDescription as Request;
 
 /**

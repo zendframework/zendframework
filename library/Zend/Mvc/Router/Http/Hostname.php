@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,9 +24,7 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Config\Config,
-    Zend\Stdlib\RequestDescription as Request,
+use Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\Route;
 
@@ -34,7 +32,7 @@ use Traversable,
  * Hostname route.
  *
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
@@ -134,7 +132,7 @@ class Hostname implements Route
             }
         }
         
-        return new RouteMatch(array_merge($this->defaults, $params), $this);
+        return new RouteMatch(array_merge($this->defaults, $params));
     }
 
     /**

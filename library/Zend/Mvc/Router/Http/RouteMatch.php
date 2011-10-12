@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -23,13 +24,13 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Mvc\Router\Route as BaseRoute,
-    Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
+use Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
 
 /**
  * Part route match.
  *
  * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -45,14 +46,13 @@ class RouteMatch extends BaseRouteMatch
     /**
      * Create a part RouteMatch with given parameters and length.
      * 
-     * @param  array      $params
-     * @param  null|Route $route
-     * @param  integer    $length
+     * @param  array   $params
+     * @param  integer $length
      * @return void
      */
-    public function __construct(array $params, BaseRoute $route = null, $length = 0)
+    public function __construct(array $params, $length = 0)
     {
-        parent::__construct($params, $route);
+        parent::__construct($params);
         
         $this->length = $length;
     }

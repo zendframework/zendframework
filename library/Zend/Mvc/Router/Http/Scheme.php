@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,9 +24,7 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Config\Config,
-    Zend\Stdlib\RequestDescription as Request,
+use Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\Route;
 
@@ -34,7 +32,7 @@ use Traversable,
  * Scheme route.
  *
  * @package    Zend_Mvc_Router
- * @subpackage Route
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
@@ -108,7 +106,7 @@ class Scheme implements Route
             return null;
         }
         
-        return new RouteMatch($this->defaults, $this);
+        return new RouteMatch($this->defaults);
     }
 
     /**

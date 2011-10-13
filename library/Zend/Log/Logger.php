@@ -34,7 +34,7 @@ use DateTime,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Logger
+class Logger implements Loggable
 {
     /**#@+
      * @const int defined from the BSD Syslog message severities
@@ -90,8 +90,8 @@ class Logger
     /**
      * Constructor
      *
-     * @todo support configuration (writers, dateTimeFormat)
-     * @return void
+     * @todo support configuration (writers, dateTimeFormat, and broker)
+     * @return Logger
      */
     public function __construct()
     {
@@ -181,7 +181,7 @@ class Logger
     /**
      * Add a message as a log entry
      *
-     * @todo implement if stack of writers is empty (exception or default writer)
+     * @todo implement if stack of writers is empty (exception or null writer)
      * @param int $priority
      * @param string $message
      * @param array|null $extra
@@ -210,5 +210,85 @@ class Logger
         }
 
         return $this;
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function emerg($message, array $extra = null)
+    {
+        return $this->log(self::EMERG, $message, $extra);
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function alert($message, array $extra = null)
+    {
+        return $this->log(self::ALERT, $message, $extra);
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function crit($message, array $extra = null)
+    {
+        return $this->log(self::CRIT, $message, $extra);
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function err($message, array $extra = null)
+    {
+        return $this->log(self::ERR, $message, $extra);
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function warn($message, array $extra = null)
+    {
+        return $this->log(self::WARN, $message, $extra);
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function notice($message, array $extra = null)
+    {
+        return $this->log(self::NOTICE, $message, $extra);
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function info($message, array $extra = null)
+    {
+        return $this->log(self::INFO, $message, $extra);
+    }
+
+    /**
+     * @param string $message
+     * @param array|null $extra
+     * @return Logger
+     */
+    public function debug($message, array $extra = null)
+    {
+        return $this->log(self::DEBUG, $message, $extra);
     }
 }

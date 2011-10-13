@@ -62,7 +62,7 @@ class TreeRouteStack extends SimpleRouteStack
      */
     protected function init()
     {
-        $this->pluginBroker->getClassLoader()->registerPlugins(array(
+        $this->routeBroker->getClassLoader()->registerPlugins(array(
             'literal' => __NAMESPACE__ . '\Literal',
             'regex'   => __NAMESPACE__ . '\Regex',
             'segment' => __NAMESPACE__ . '\Segment',
@@ -110,10 +110,10 @@ class TreeRouteStack extends SimpleRouteStack
                 'route'         => $route,
                 'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate']),
                 'child_routes'  => $specs['routes'],
-                'plugin_broker' => $this->pluginBroker,
+                'plugin_broker' => $this->routeBroker,
             );
 
-            $route = $this->pluginBroker->load('part', $options);
+            $route = $this->routeBroker->load('part', $options);
         }
 
         return $route;

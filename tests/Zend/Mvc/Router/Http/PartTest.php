@@ -3,9 +3,9 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Mvc\Router\Http\RouteMatch as Match,
     Zend\Mvc\Router\Http\Literal,
-    Zend\Mvc\Router\Http\Part;
+    Zend\Mvc\Router\Http\Part,
+    Zend\Mvc\Router\RouteBroker;
 
 class PartTest extends TestCase
 {
@@ -66,54 +66,74 @@ class PartTest extends TestCase
 
     public function getRoute()
     {
-        $homePageRoute = Literal::factory(array(
-            'route'    => '/',
-            'defaults' => array(
-                'controller' => 'ItsHomePage',
-            ),
+        $routeBroker = new RouteBroker();
+        $routeBroker->getClassLoader()->registerPlugins(array(
+            'literal' => 'Zend\Mvc\Router\Http\Literal',
+            'regex'   => 'Zend\Mvc\Router\Http\Regex',
+            'segment' => 'Zend\Mvc\Router\Http\Segment',
+            'part'    => 'Zend\Mvc\Router\Http\Part',
         ));
-        $rssBlogRoute = Literal::factory(array(
-            'route'    => '/rss',
-            'defaults' => array(
-                'controller' => 'ItsRssBlog',
-            ),
-        ));
-        $subRssRoute = Literal::factory(array(
-            'route'    => '/sub',
-            'defaults' => array(
-                'action' => 'ItsSubRss',
-            ),
-        ));
-        $blogRoute = Literal::factory(array(
-            'route'    => 'blog',
-            'defaults' => array(
-                'controller' => 'ItsBlog',
-            ),
-        ));
-        $forumRoute = Literal::factory(array(
-            'route'    => 'forum',
-            'defaults' => array(
-                'controller' => 'ItsForum',
-            ),
-        ));
-        
+
         $route = Part::factory(array(
-            'route'         => $homePageRoute,
+            'route' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/',
+                    'defaults' => array(
+                        'controller' => 'ItsHomePage',
+                    ),
+                )
+            ),
             'may_terminate' => true,
+            'route_broker'  => $routeBroker,
             'child_routes'  => array(
                 'blog' => Part::factory(array(
-                    'route'         => $blogRoute,
+                    'route' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route'    => 'blog',
+                            'defaults' => array(
+                                'controller' => 'ItsBlog',
+                            ),
+                        ),
+                    ),
                     'may_terminate' => true,
+                    'route_broker'  => $routeBroker,
                     'child_routes'  => array(
                         'rss' => Part::factory(array(
-                            'route'         => $rssBlogRoute,
+                            'route' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route'    => '/rss',
+                                    'defaults' => array(
+                                        'controller' => 'ItsRssBlog',
+                                    ),
+                                ),
+                            ),
+                            'route_broker'  => $routeBroker,
                             'child_routes'  => array(
-                                'sub' => $subRssRoute,
+                                'sub' => array(
+                                    'type'    => 'literal',
+                                    'options' => array(
+                                        'route'    => '/sub',
+                                        'defaults' => array(
+                                            'action' => 'ItsSubRss',
+                                        ),
+                                    )
+                                ),
                             ),
                         )),
                     ),
                 )),
-                $forumRoute,
+                'forum' => array(
+                    'type'    => 'literal',
+                    'options' => array(
+                        'route'    => 'forum',
+                        'defaults' => array(
+                            'controller' => 'ItsForum',
+                        ),
+                    ),
+                ),
             ),
         ));
 

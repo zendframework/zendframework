@@ -154,7 +154,7 @@ class RouteBroker implements Broker
         } else {
             // Unqualified class names are then passed to the class loader
             $class = $this->getClassLoader()->load($route);
-            
+
             if (empty($class)) {
                 throw new Exception\RuntimeException('Unable to locate class associated with "' . $routeName . '"');
             }

@@ -137,8 +137,7 @@ $l = new \Zend\File\ClassFileLocator($path);
 // classname => filename, where the filename is relative to the library path
 $map    = new \stdClass;
 $strip .= DIRECTORY_SEPARATOR;
-iterator_apply($l, function() use ($l, $map, $strip, $relativePathForClassmap){
-    $file      = $l->current();
+foreach ($l as $file) {
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
     $filename  = str_replace($strip, '', $file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename());
 
@@ -149,9 +148,7 @@ iterator_apply($l, function() use ($l, $map, $strip, $relativePathForClassmap){
     $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);
 
     $map->{$namespace . $file->classname} = $filename;
-
-    return true;
-});
+}
 
 if ($appending) {
 

@@ -139,16 +139,10 @@ class SimpleRouteStack implements RouteStack
         if (!is_array($routes) && !$routes instanceof Traversable) {
             throw new Exception\InvalidArgumentException('addRoutes expects an array or Traversable set of routes');
         }
-        if (is_array($routes)) {
-            $routes = new ArrayIterator($routes);
+
+        foreach($routes as $name => $route) {
+            $this->addRoute($name, $route);
         }
-
-        $routeStack = $this;
-
-        iterator_apply($routes, function() use ($routeStack, $routes) {
-            $routeStack->addRoute($routes->key(), $routes->current());
-            return true;
-        });
 
         return $this;
     }

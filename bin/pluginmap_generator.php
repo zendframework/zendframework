@@ -126,16 +126,13 @@ $l = new \Zend\File\ClassFileLocator($path);
 
 // Iterate over each element in the path, and create a map of pluginname => classname 
 $map    = new \stdClass;
-iterator_apply($l, function() use ($l, $map){
-    $file      = $l->current();
+foreach($l as $file) {
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
-    $plugin = strtolower($file->classname);
-    $class  = $namespace . $file->classname;
+    $plugin    = strtolower($file->classname);
+    $class     = $namespace . $file->classname;
 
     $map->{$plugin} = $class;
-
-    return true;
-});
+}
 
 if ($appending) {
 

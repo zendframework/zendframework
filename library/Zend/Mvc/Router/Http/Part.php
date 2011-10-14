@@ -24,7 +24,9 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Zend\Stdlib\RequestDescription as Request,
+use Traversable,
+    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Route,
     Zend\Mvc\Router\RouteBroker,
     Zend\Mvc\Router\Exception,
@@ -92,8 +94,17 @@ class Part extends TreeRouteStack
      * @param  mixed $options
      * @return void
      */
-    public static function factory(array $options = array())
+    public static function factory($options = array())
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+        }
+
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
+        }
+
         if (!isset($options['route'])) {
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }

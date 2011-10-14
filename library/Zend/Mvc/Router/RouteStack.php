@@ -43,10 +43,10 @@ interface RouteStack extends Route
     /**
      * Add multiple routes to the stack.
      * 
-     * @param  array $routes
+     * @param  array|Traversable $routes
      * @return RouteStack
      */
-    public function addRoutes(array $routes);
+    public function addRoutes($routes);
     
     /**
      * Remove a route from the stack.

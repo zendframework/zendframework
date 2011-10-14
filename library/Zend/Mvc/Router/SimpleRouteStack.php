@@ -23,7 +23,10 @@
  */
 namespace Zend\Mvc\Router;
 
-use ArrayIterator,
+use ArrayAccess,
+    ArrayIterator,
+    Traversable,
+    Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request;
 
 /**
@@ -66,11 +69,20 @@ class SimpleRouteStack implements RouteStack
      * factory(): defined by Route interface.
      *
      * @see    Route::factory()
-     * @param  mixed $options
+     * @param  array|Traversable $options
      * @return void
      */
-    public static function factory(array $options = array())
+    public static function factory($options = array())
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+        }
+
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
+        }
+
         $instance = new static();
         
         if (isset($options['route_broker'])) {
@@ -78,7 +90,7 @@ class SimpleRouteStack implements RouteStack
         }
         
         if (isset($options['routes'])) {
-            $instance->setRoutes($options['routes']);
+            $instance->addRoutes($options['routes']);
         }
 
         return $instance;
@@ -90,7 +102,8 @@ class SimpleRouteStack implements RouteStack
      * @return void
      */
     protected function init()
-    {}
+    {
+    }
 
     /**
      * Set the route broker.
@@ -118,12 +131,18 @@ class SimpleRouteStack implements RouteStack
      * addRoutes(): defined by RouteStack interface.
      *
      * @see    Route::addRoutes()
-     * @param  array $routes
+     * @param  array|Traversable $routes
      * @return RouteStack
      */
-    public function addRoutes(array $routes)
+    public function addRoutes($routes)
     {
-        $routes     = new ArrayIterator($routes);
+        if (!is_array($routes) && !$routes instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('addRoutes expects an array or Traversable set of routes');
+        }
+        if (is_array($routes)) {
+            $routes = new ArrayIterator($routes);
+        }
+
         $routeStack = $this;
 
         iterator_apply($routes, function() use ($routeStack, $routes) {
@@ -171,11 +190,19 @@ class SimpleRouteStack implements RouteStack
     /**
      * Create a route from array specifications.
      *
-     * @param  array $specs
+     * @param  array|Traversable $specs
      * @return SimpleRouteStack
      */
-    protected function routeFromArray(array $specs)
+    protected function routeFromArray($specs)
     {
+        if (!is_array($specs) && !$specs instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
+        }
+
+        if ($specs instanceof Traversable) {
+            $specs = IteratorToArray::convert($options);
+        }
+
         if (!isset($specs['type'])) {
             throw new Exception\InvalidArgumentException('Missing "type" option');
         } elseif (!isset($specs['options'])) {

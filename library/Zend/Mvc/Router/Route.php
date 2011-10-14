@@ -37,10 +37,10 @@ interface Route
     /**
      * Create a new route with given options.
      * 
-     * @param  array $options
+     * @param  array|Traversable $options
      * @return void
      */
-    public static function factory(array $options = array());
+    public static function factory($options = array());
     
     /**
      * Match a given request.

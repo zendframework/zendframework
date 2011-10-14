@@ -123,13 +123,9 @@ class SimpleRouteStack implements RouteStack
      */
     public function addRoutes(array $routes)
     {
-        $routes     = new ArrayIterator($routes);
-        $routeStack = $this;
-
-        iterator_apply($routes, function() use ($routeStack, $routes) {
-            $routeStack->addRoute($routes->key(), $routes->current());
-            return true;
-        });
+        foreach($routes as $name => $route) {
+            $this->addRoute($name, $route);
+        }
 
         return $this;
     }

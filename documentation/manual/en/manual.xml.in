@@ -1503,6 +1503,42 @@
         <chapter xml:id="zend.mvc">
             <info><title>Zend\Mvc</title></info>
             
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Intro.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mvc-Intro.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-QuickStart.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mvc-QuickStart.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Routing.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mvc-Routing.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-MvcEvent.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mvc-MvcEvent.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Controllers.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mvc-Controllers.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Plugins.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Mvc-Plugins.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mvc-Examples.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Mvc-Examples.xml" parse="xml"/>

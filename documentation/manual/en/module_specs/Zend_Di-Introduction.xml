@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.di.intro">
+    <info><title>Introduction to Zend\Di</title></info>
+
+    <section xml:id="zend.di.intro.di">
+        <info><title>Dependency Injection</title></info>
+        <para>
+            Dependency Injection (here-in called DI) is a concept that has
+            been talked about in numerous places over the web. Simply put,
+            we'll explain the act of injecting dependencies simply with
+            this below code:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$b = new MovieLister(new MovieFinder));
+]]></programlisting>
+
+        <para>
+            Above, MovieFinder is a dependency of MovieLister, and MovieFinder was injected into MovieLister. If you
+            are not familiar with the concept of DI, here are a couple of
+            great reads: <link xlink:href="http://weierophinney.net/matthew/archives/260-Dependency-Injection-An-analogy.html">Matthew
+            Weier O'Phinney's Analogy</link>,
+            <link xlink:href="http://ralphschindler.com/2011/05/18/learning-about-dependency-injection-and-php">Ralph
+            Schindler's Learning DI</link>, or
+            <link xlink:href="http://fabien.potencier.org/article/11/what-is-dependency-injection">Fabien
+            Potencier's Series</link> on DI.
+        </para>
+    </section>
+
+
+    <section xml:id="zend.di.intro.dic">
+        <info><title>Dependency Injection Containers</title></info>
+
+        <para>
+            When your code is written in such a way that all your dependencies
+            are injected into consuming objects, you might find that the simple
+            act of wiring an object has gotten more complex.  When this becomes
+            the case, and you find that this wiring is creating more boilerplate
+            code, this makes for an excellent opportunity to utilize a
+            Dependency Injection Container.
+        </para>
+
+        <para>
+            In it's simplest form, a Dependency Injection Container (here-in
+            called a DiC for brevity), is an object that is capable of creating
+            objects on request and managing the "wiring", or the injection of
+            required dependencies, for those requested objects.  Since the
+            patterns that developers employ in writing DI capable code vary,
+            DiC's are generally either in the form of smallish objects that
+            suit a very specific pattern, or larger DiC frameworks.
+        </para>
+
+        <para>
+            Zend\Di is a DiC framework.  While for the simplest code there
+            is no configuration needed, and the use cases are quite simple; for
+            more complex code, Zend\Di is capable of being configured to wire
+            these complex use cases
+        </para>
+
+    </section>
+
+</section>

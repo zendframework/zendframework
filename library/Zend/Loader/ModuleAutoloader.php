@@ -99,9 +99,6 @@ class ModuleAutoloader implements SplAutoloader
 
             // Find executable phars
             $matches = glob($path . '.{' . implode($this->pharExtensions, ',') . '}', GLOB_BRACE);
-            if (count($matches) == 0) {
-                return false;
-            }
             foreach ($matches as $phar) {
                 if ($classLoaded = $this->loadModuleFromPhar($phar, $class)) {
                     return $classLoaded;

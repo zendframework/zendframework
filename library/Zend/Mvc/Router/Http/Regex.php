@@ -127,11 +127,11 @@ class Regex implements Route
             return null;
         }
         
-        $matchedLength = strlen($match[0]);
+        $matchedLength = strlen($matches[0]);
 
         foreach ($matches as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
-                unset($match[$key]);
+                unset($matches[$key]);
             }
         }
 

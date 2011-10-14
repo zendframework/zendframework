@@ -85,7 +85,7 @@ class Bootstrap implements Bootstrapper
      * @param Application $application 
      * @return void
      */
-    public function bootstrap(Application $application)
+    public function bootstrap(AppContext $application)
     {
         $this->setupLocator($application);
         $this->setupRouter($application);

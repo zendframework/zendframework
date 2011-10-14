@@ -307,54 +307,32 @@ class Module
     </para>
 
     <para>
-      We recommend creating a "bootstrap" class that manages
-      configuration and uses it to instantiate and configure your router
-      and locator. These can then either be pulled and passed into the
-      <classname>Application</classname> instance, or you may want to define
-      a method that accepts the <classname>Application</classname> instance.
-      As an example:
+      Zend Framework ships a default bootstrap implementation in
+      <classname>Zend\Mvc\Bootstrap</classname>. This class accepts a
+      <classname>Zend\Module\Manager</classname> instance to its constructor;
+      once you have an instance, you then call its
+      <methodname>bootstrap()</methodname> method, passing it the
+      <classname>Application</classname> instance. It will then configure
+      your locator (using <classname>Zend\Di\Di</classname> by default) and
+      your router (using
+      <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname> by default).
     </para>
 
-    <programlisting language="php"><![CDATA[
-use Zend\Config\Config,
-    Zend\Mvc\Application;
-
-class Bootstrap
-{
-    protected $config;
-
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
-
-    public function bootstrap(Application $app)
-    {
-        $this->setupRoutes($app);
-        $this->setupLocator($app);
-    }
-
-    protected function setupRoutes(Application $app)
-    {
-        // ... setup the router ...
-        $app->setRouter($router);
-    }
-
-    protected function setupLocator(Application $app)
-    {
-        // ... setup the locator ...
-        $app->setLocator($locator);
-    }
-}
-]]></programlisting>
+    <para>
+      Once those two tasks are accomplished, it then triggers a "bootstrap"
+      event on its attached <classname>EventManager</classname> instance. This
+      allows your modules to attach listeners, and thus perform additional, 
+      module-specific, bootstrapping tasks (which might include registering
+      ACLs, setting up cache or log listeners, etc.).
+    </para>
 
     <para>
       Usage would then be as follows:
     </para>
 
     <programlisting language="php"><![CDATA[
-// Assuming $config has been created:
-$bootstrap   = new Bootstrap($config);
+// Assuming $modules is a Zend\Module\Manager
+$bootstrap   = new Bootstrap($modules);
 $application = new Application();
 $bootstrap->bootstrap($application);
 ]]></programlisting>
@@ -480,7 +458,7 @@ return new \Zend\Config\Config(array(
       <programlisting language="php"><![CDATA[
 $moduleConfig = include __DIR__ . '/../configs/application.config.php';
 $moduleLoader = new \Zend\Loader\ModuleAutoloader(
-    $moduleConfig->module_paths
+    $moduleConfig['module_paths']
 );
 $moduleLoader->register();
 ]]></programlisting>
@@ -492,7 +470,7 @@ $moduleLoader->register();
 
       <programlisting language="php"><![CDATA[
 $moduleManager = new \Zend\Module\Manager(
-    $moduleConfig->modules
+    $moduleConfig['modules']
 );
 ]]></programlisting>
 
@@ -524,35 +502,6 @@ class Module
 }
 ]]></programlisting>
     </section>
-
-    <section xml:id="zend.mvc.intro.bootstrapping-a-modular-application.getting-merged-module-configuration">
-      <info><title>Getting Merged Module Configuration</title></info>
-
-      <para>
-        So, now that the module manager is configured and ready to go, we
-        can get our merged configuration. This is a simple one-liner:
-      </para>
-
-      <programlisting language="php"><![CDATA[
-$config = $moduleManager->getMergedConfig();
-]]></programlisting>
-
-      <para>
-        We can then pass that to our bootstrap.
-      </para>
-
-      <programlisting language="php"><![CDATA[
-$bootstrap = new Bootstrap($config);
-]]></programlisting>
-
-      <para>
-        We recommend writing your <classname>Bootstrap</classname> class to
-        allow passing the module manager instance. This can allow you to
-        loop over modules to perform additional tasks later if desired (for
-        example, setting up module-specific event listeners).
-      </para>
-    </section>
-  </section>
 
   <section xml:id="zend.mvc.intro.conclusion">
     <info><title>Conclusion</title></info>

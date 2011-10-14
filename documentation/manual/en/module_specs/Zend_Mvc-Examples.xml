@@ -110,104 +110,66 @@ $matches = $event->getRouteMatch();
       </para>
 
       <para>
-        One convention being used is as follows:
+        Each <classname>Module</classname> class can have an optional
+        <methodname>init()</methodname> method. Typically, you'll setup
+        autoloading for your module here, but you can perform arbitrary tasks.
       </para>
 
-      <itemizedlist>
-        <listitem>
-          <para>
-            If your module needs to register listeners with the
-            <classname>Application</classname> event manager instance, define a
-            "registerApplicationListeners" method that accepts the
-            <classname>Application</classname> as an argument.
-          </para>
-        </listitem>
-
-        <listitem>
-          <para>
-            If your module needs to register arbitrary listeners statically,
-            define a "registerStaticListeners" method that accepts a
-            <classname>StaticEventCollection</classname> implementation and Locator
-            instance.
-          </para>
-        </listitem>
-      </itemizedlist>
+      <para>
+        The base <classname>Bootstrap</classname> class shipped with the
+        framework has an <classname>EventManager</classname> associated with it,
+        and once the locator and router instances are initialized, it triggers a
+        "bootstrap" event, with "application" and "modules" parameters.
+      </para>
 
       <para>
-        Then, in your bootstrap, setup something like the following:
+        So, one way to accomplish module-specific listeners is to listen to that
+        event, and register listeners at that time. As an example:
       </para>
 
       <programlisting language="php"><![CDATA[
-use Zend\Mvc\Application,
-    Zend\Module\Manager,
-    Zend\EventManager\StaticEventManager;
+namespace SomeCustomModule;
 
-class Bootstrap
+use Zend\EventManager\StaticEventManager;
+
+class Module
 {
-    protected $config;
-    protected $manager;
-
-    public function __construct(Manager $manager)
+    public function init()
     {
-        $this->manager = $manager;
-        $this->config  = $manager->getMergedConfig();
+        // setup autoloading, etc..
+
+        // Now, register listeners:
+        $events = StaticEventManager::getInstance();
+        $events->attach('bootstrap', 'bootstrap', array($this, 'registerListeners'));
     }
 
-    public function bootstrap(Application $app)
+    public function registerListeners($e)
     {
-        $this->setupLocator($app);
-        $this->setupEvents($app);
+        $application = $e->getParam('application');
+        $modules     = $e->getParam('modules');
+        $config      = $modules->getMergedConfig();
+        $view        = $application->getLocator()->get('view');
+        $view->headTitle($config->view->base_title);
 
-        // anything else you need to do...
-    }
-
-    public function setupLocator(Application $app)
-    {
-        /* ... */
-    }
-
-    public function setupEvents(Application $app)
-    {
-        $locator      = $app->getLocator();
-        $events       = $app->events();
-        $staticEvents = StaticEventManager::getInstance();
-
-        foreach ($this->manager->getLoadedModules() as $name => $module) {
-            if (method_exists($module, 'registerApplicationListeners')) {
-                $module->registerApplicationListeners($events, $locator, $this->config);
-            }
-
-            if (method_exists($module, 'registerStaticListeners')) {
-                $module->registerStaticListeners($staticEvents, $locator, $this->config);
-            }
-        }
+        $listeners   = new Listeners\ViewListener();
+        $listeners->setView($view);
+        $application->events()->attach($listeners);
     }
 }
 ]]></programlisting>
 
       <para>
-        The above makes the assumption that your
-        <filename>public/index.php</filename> script will do the following:
-      </para>
-
-      <programlisting language="php"><![CDATA[
-// assume module manager is configured
-$bootstrap = new Bootstrap($manager);
-$bootstrap->bootstrap($application);
-]]></programlisting>
-
-      <para>
-        Basically, the bootstrap accepts the module manager, and pulls the
-        merged config from it. As part of bootstrapping, it attempts to
-        setup events. It does this by looping over the registered modules,
-        looking for any that define either the
-        <methodname>registerApplicationListeners</methodname> or
-        <methodname>registerStaticListeners</methodname> methods, and calling
-        them if found.
-      </para>
-
-      <para>
-        A module can then define these, and register events as necessary.
+        The above demonstrates several things. First, it shows registering a
+        callback on the bootstrap's "bootstrap" event (within the
+        <methodname>init()</methodname> method). Second, it demonstrates that 
+        listener, and how it can be used to register listeners with the
+        application. It grabs the <classname>Application</classname> instance,
+        as well as the module manager instance. From the
+        <classname>Application</classname>, it is able to grab the attached 
+        locator, and from the <classname>Managar</classname>, it grabs
+        configuration. These are then used to retrieve the view, configure some
+        helpers, and then register a listener aggregate with the application
+        event manager.
       </para>
     </section>
   </section>

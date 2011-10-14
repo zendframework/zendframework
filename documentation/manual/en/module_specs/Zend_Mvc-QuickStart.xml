@@ -90,12 +90,6 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
     <itemizedlist>
       <listitem>
         <para>
-          A basic bootstrap for your application
-        </para>
-      </listitem>
-
-      <listitem>
-        <para>
           A view listener that will render views based on the selected
           controller, and inject it into a site layout.
         </para>
@@ -287,7 +281,7 @@ class Module
           <listitem>
             <para>
               <varname>GET</varname> will call either the
-              <methodname>getList()</classname> method, or, if an "id" was
+              <methodname>getList()</methodname> method, or, if an "id" was
               matched during routing, the <methodname>get()</methodname> method (with
               that identifer value).
             </para>
@@ -407,7 +401,7 @@ class HelloController extends ActionController
 
     <para>
       Create the directory
-      <filename>views/<module name>-hello</filename>, where
+      <filename>views/&lt;module name&gt;-hello</filename>, where
       <varname>&lt;module name&gt;</varname> is a lowercase,
       dash-separated version of the module's namespace -- e.g., namespace
       <classname>ZendUser</classname> would translate to
@@ -487,7 +481,7 @@ return array(
 ]]></programlisting>
 
     <para>
-      As before, <varname><module-name></varname> should be the
+      As before, <varname>&lt;module-name&gt;</varname> should be the
       lowercased, dash-separated version of the module namespace.
     </para>
 
@@ -569,7 +563,7 @@ return array(
         via constructor or setter injection. This will make your code
         self-documenting and easier to debug.
       </para>
-    </blockquote>
+    </note>
   </section>
 
   <section xml:id="zend.mvc.quick-start.tell-the-application-about-our-module">

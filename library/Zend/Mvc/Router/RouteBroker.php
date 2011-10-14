@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -29,7 +29,7 @@ use Zend\Loader\Broker,
  * Route broker.
  *
  * @category   Zend
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -154,7 +154,7 @@ class RouteBroker implements Broker
         } else {
             // Unqualified class names are then passed to the class loader
             $class = $this->getClassLoader()->load($route);
-            
+
             if (empty($class)) {
                 throw new Exception\RuntimeException('Unable to locate class associated with "' . $routeName . '"');
             }

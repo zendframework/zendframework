@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,17 +24,17 @@
  */
 namespace Zend\Mvc\Router\Http;
 
-use Traversable,
-    Zend\Config\Config,
-    Zend\Stdlib\RequestDescription as Request,
+use Zend\Stdlib\RequestDescription as Request,
+    Zend\Mvc\Router\Route,
+    Zend\Mvc\Router\RouteBroker,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\PriorityList;
 
 /**
  * Route part.
  *
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
@@ -65,13 +65,20 @@ class Part extends TreeRouteStack
     /**
      * Create a new part route.
      * 
-     * @param  string  $route
-     * @param  boolean $mayTerminate
-     * @param  array   $childRoutes
+     * @param  mixed       $route
+     * @param  boolean     $mayTerminate
+     * @param  RouteBroker $routeBroker
+     * @param  array       $childRoutes
      * @return void
      */
-    public function __construct($route, $mayTerminate, array $childRoutes = null)
+    public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
     {
+        $this->routeBroker = $routeBroker;
+        
+        if (!$route instanceof Route) {
+            $route = $this->routeFromArray($route);
+        }
+        
         $this->route        = $route;
         $this->mayTerminate = $mayTerminate;
         $this->childRoutes  = $childRoutes;
@@ -90,6 +97,10 @@ class Part extends TreeRouteStack
         if (!isset($options['route'])) {
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
+        
+        if (!isset($options['route_broker'])) {
+            throw new Exception\InvalidArgumentException('Missing "route_broker" in options array');
+        }
 
         if (!isset($options['may_terminate'])) {
             $options['may_terminate'] = false;
@@ -99,7 +110,7 @@ class Part extends TreeRouteStack
             $options['child_routes'] = null;
         }
 
-        return new static($options['route'], $options['may_terminate'], $options['child_routes']);
+        return new static($options['route'], $options['may_terminate'], $options['route_broker'], $options['child_routes']);
     }
 
     /**
@@ -121,7 +132,7 @@ class Part extends TreeRouteStack
             
             $nextOffset = $pathOffset + $match->getLength();
             
-            $uri  = $request->uri();
+            $uri        = $request->uri();
             $pathLength = strlen($uri->getPath());
             
             if ($this->mayTerminate && $nextOffset === $pathLength) {

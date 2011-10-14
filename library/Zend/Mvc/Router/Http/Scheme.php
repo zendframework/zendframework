@@ -29,7 +29,7 @@ use Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Route;
 
 /**
- * Regex route.
+ * Scheme route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
@@ -37,15 +37,15 @@ use Zend\Stdlib\RequestDescription as Request,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Regex implements Route
+class Scheme implements Route
 {
     /**
-     * Regex to match.
-     * 
-     * @var string
+     * Scheme to match.
+     *
+     * @var array
      */
-    protected $regex;
-
+    protected $scheme;
+    
     /**
      * Default values.
      *
@@ -54,26 +54,15 @@ class Regex implements Route
     protected $defaults;
 
     /**
-     * Specification for URL assembly.
-     *
-     * Parameters accepting subsitutions should be denoted as "%key%"
+     * Create a new scheme route.
      * 
-     * @var string
-     */
-    protected $spec;
-    
-    /**
-     * Create a new regex route.
-     * 
-     * @param  string $regex
-     * @param  string $spec
+     * @param  string $scheme
      * @param  array  $defaults 
      * @return void
      */
-    public function __construct($regex, $spec, array $defaults = array())
+    public function __construct($scheme, array $defaults = array())
     {
-        $this->regex    = $regex;
-        $this->spec     = $spec;
+        $this->scheme   = $scheme;
         $this->defaults = $defaults;
     }
     
@@ -86,19 +75,15 @@ class Regex implements Route
      */
     public static function factory(array $options = array())
     {
-        if (!isset($options['regex'])) {
-            throw new Exception\InvalidArgumentException('Missing "regex" in options array');
+        if (!isset($options['scheme'])) {
+            throw new Exception\InvalidArgumentException('Missing "scheme" in options array');
         }
         
-        if (!isset($options['spec'])) {
-            throw new Exception\InvalidArgumentException('Missing "spec" in options array');
-        }
-
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
 
-        return new static($options['regex'], $options['spec'], $options['defaults']);
+        return new static($options['scheme'], $options['defaults']);
     }
 
     /**
@@ -108,34 +93,20 @@ class Regex implements Route
      * @param  Request $request
      * @return RouteMatch
      */
-    public function match(Request $request, $pathOffset = null)
+    public function match(Request $request)
     {
         if (!method_exists($request, 'uri')) {
             return null;
         }
 
-        $uri  = $request->uri();
-        $path = $uri->getPath();
+        $uri    = $request->uri();
+        $scheme = $uri->getScheme();
 
-        if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
-        } else {
-            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
-        }
-
-        if (!$result) {
+        if ($scheme !== $this->scheme) {
             return null;
         }
         
-        $matchedLength = strlen($match[0]);
-
-        foreach ($matches as $key => $value) {
-            if (is_numeric($key) || is_int($key)) {
-                unset($match[$key]);
-            }
-        }
-
-        return new RouteMatch(array_merge($this->defaults, $matches), $matchedLength);
+        return new RouteMatch($this->defaults);
     }
 
     /**
@@ -148,17 +119,11 @@ class Regex implements Route
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $url    = $this->spec;
-        $params = array_merge($this->defaults, $params);
-        
-        foreach ($params as $key => $value) {
-            $spec = '%' . $key . '%';
-            
-            if (strstr($url, $spec) !== false) {
-                $url = str_replace($spec, urlencode($value), $url);
-            }
+        if (isset($options['uri'])) {
+            $options['uri']->setScheme($this->scheme);
         }
         
-        return $url;
+        // A scheme does not contribute to the path, thus nothing is returned.
+        return '';
     }
 }

@@ -110,10 +110,10 @@ class TreeRouteStack extends SimpleRouteStack
                 'route'         => $route,
                 'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate']),
                 'child_routes'  => $specs['routes'],
-                'route_broker'  => $this->routeBroker(),
+                'route_broker'  => $this->routeBroker,
             );
 
-            $route = $this->pluginBroker->load('part', $options);
+            $route = $this->routeBroker->load('part', $options);
         }
 
         return $route;

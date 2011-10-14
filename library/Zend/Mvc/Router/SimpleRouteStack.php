@@ -200,7 +200,7 @@ class SimpleRouteStack implements RouteStack
         }
 
         if ($specs instanceof Traversable) {
-            $specs = IteratorToArray::convert($options);
+            $specs = IteratorToArray::convert($specs);
         }
 
         if (!isset($specs['type'])) {

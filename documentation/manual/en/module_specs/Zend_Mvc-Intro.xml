@@ -502,6 +502,7 @@ class Module
 }
 ]]></programlisting>
     </section>
+  </section>
 
   <section xml:id="zend.mvc.intro.conclusion">
     <info><title>Conclusion</title></info>

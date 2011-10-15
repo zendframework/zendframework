@@ -358,6 +358,14 @@ $moduleLoader->register();
             xml:id="zend.module.intro.example.module-loading-nonstandard-paths">
             <info><title>Registering a Non-Standard / Explicit Module Path</title></info>
 
+            <para>
+                In this example, the autoloader will first check for
+                <classname>MyModule\Module</classname> in
+                <filename>/path/to/mymoduledir/Module.php</filename>. If it's
+                not found, then it will fall back to searching any other
+                registered module paths.
+            </para>
+
             <programlisting language="php"><![CDATA[
 $moduleLoader = new \Zend\Loader\ModuleAutoloader(array(
 realpath(__DIR__ . '/../modules'),
@@ -368,9 +376,7 @@ $moduleLoader->register();
         </example>
 
         <para>
-            When loading <classname>MyModule\Module</classname>, the autoloader
-            will first check for
-            <filename>/path/to/mymoduledir/Module.php</filename>.
+            This same method works if you provide the path to a phar archive.
         </para>
     </section>
 
@@ -425,11 +431,13 @@ $moduleLoader->register();
         <info><title>Packaging Modules with Phar</title></info>
 
         <para>
-            If you prefer, you may easily package your module as a phar
-            archive. Supported phar extensions are: .phar, .phar.gz, .phar.bz2,
-            .phar.tar, .phar.tar.gz, .phar.tar.bz2, .phar.zip, .tar, .tar.gz,
-            .tar.bz2, and .zip. The module autoloader is able to discover
-            modules with these extensions.
+            If you prefer, you may easily package your module as a <link
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="http://php.net/phar">phar archive</link>. Supported
+            phar extensions are: .phar, .phar.gz, .phar.bz2, .phar.tar,
+            .phar.tar.gz, .phar.tar.bz2, .phar.zip, .tar, .tar.gz, .tar.bz2,
+            and .zip. The module autoloader is able to discover modules with
+            these extensions.
         </para>
 
         <para>

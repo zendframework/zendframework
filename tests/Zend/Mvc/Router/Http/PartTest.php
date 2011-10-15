@@ -87,30 +87,24 @@ class PartTest extends TestCase
             'may_terminate' => true,
             'route_broker'  => $routeBroker,
             'child_routes'  => array(
-                'blog' => Part::factory(array(
-                    'route' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route'    => 'blog',
-                            'defaults' => array(
-                                'controller' => 'ItsBlog',
-                            ),
+                'blog' => array(
+                    'type'    => 'literal',
+                    'options' => array(
+                        'route'    => 'blog',
+                        'defaults' => array(
+                            'controller' => 'ItsBlog',
                         ),
                     ),
                     'may_terminate' => true,
-                    'route_broker'  => $routeBroker,
                     'child_routes'  => array(
-                        'rss' => Part::factory(array(
-                            'route' => array(
-                                'type' => 'literal',
-                                'options' => array(
-                                    'route'    => '/rss',
-                                    'defaults' => array(
-                                        'controller' => 'ItsRssBlog',
-                                    ),
+                        'rss' => array(
+                            'type'    => 'literal',
+                            'options' => array(
+                                'route'    => '/rss',
+                                'defaults' => array(
+                                    'controller' => 'ItsRssBlog',
                                 ),
                             ),
-                            'route_broker'  => $routeBroker,
                             'child_routes'  => array(
                                 'sub' => array(
                                     'type'    => 'literal',
@@ -122,9 +116,9 @@ class PartTest extends TestCase
                                     )
                                 ),
                             ),
-                        )),
+                        ),
                     ),
-                )),
+                ),
                 'forum' => array(
                     'type'    => 'literal',
                     'options' => array(
@@ -161,7 +155,7 @@ class PartTest extends TestCase
             }
         }
     }
-    
+
     public function testAssembleCompleteRoute()
     {
         $uri = $this->getRoute()->assemble(array(), array('name' => 'blog/rss/sub'));
@@ -175,7 +169,7 @@ class PartTest extends TestCase
         
         $this->assertEquals('/blog', $uri);
     }
-    
+
     /**
      * @expectedException Zend\Mvc\Router\Exception\RuntimeException
      */

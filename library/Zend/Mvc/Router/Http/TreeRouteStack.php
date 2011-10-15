@@ -105,11 +105,11 @@ class TreeRouteStack extends SimpleRouteStack
             throw new Exception\RuntimeException('Given route does not implement HTTP route interface');
         }
 
-        if (isset($specs['routes'])) {
+        if (isset($specs['child_routes'])) {
             $options = array(
                 'route'         => $route,
                 'may_terminate' => (isset($specs['may_terminate']) && $specs['may_terminate']),
-                'child_routes'  => $specs['routes'],
+                'child_routes'  => $specs['child_routes'],
                 'route_broker'  => $this->routeBroker,
             );
 

@@ -322,6 +322,7 @@ class AutoDiscover implements \Zend\Server\Server
      *
      * @param string $function Function Name
      * @param string $namespace Function namespace - Not Used
+     * @return \Zend\Soap\AutoDiscover
      */
     public function addFunction($function, $namespace = '')
     {
@@ -357,6 +358,8 @@ class AutoDiscover implements \Zend\Server\Server
             $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
         $this->_wsdl = $wsdl;
+
+        return $this;
     }
 
     /**

@@ -2,62 +2,63 @@ Welcome to the Zend Framework 2.0.0 Release!
 
 RELEASE INFORMATION
 ---------------
-Zend Framework 2.0.0dev4
+Zend Framework 2.0.0beta1
 
 THIS RELEASE IS A DEVELOPMENT RELEASE AND NOT INTENDED FOR PRODUCTION USE.
 PLEASE USE AT YOUR OWN RISK.
 
+This is the first in a series of planned beta releases. The beta release
+cycle will follow the "gmail" style of betas, whereby new features will
+be added in each new release, and BC will not be guaranteed; beta
+releases will happen no less than every six weeks. 
+
+Once the established milestones have been reached and the featureset has
+reached maturity and reasonable stability, we will freeze the API and
+prepare for Release Candidate status.
+
 NEW FEATURES
 ------------
 
-This snapshot includes:
-
- - The "Dispatchable" and related interfaces (Zend\Stdlib\Dispatchable,
-   MessageDescription, RequestDescription, and ResponseDescription)
-
- - A fully refactored HTTP component
-   - Rewritten URI component, with better and more extensible support
-     for an array of different URI schemas, as well as more flexible
-     path and parameter decomposition and serialization.
-
-   - Adds HTTP versions of the Stdlib Request and Response interfaces,
-     along with full-fledged support for standard HTTP headers.
-
-   - A rewritten HTTP client that consumes Http\Request objects and
-     produces Http\Response objects.
-
-   - Two additional HTTP client implementations that provide a
-     convenience API around the base HTTP client. One is static, and
-     allows for simple one-off requests:
-
-         $response = ClientStatic::get($uri);
-         $response = ClientStatic::post(
-            $uri, 
-            array('foo' => 'bar'), 
-            array('Content-Type' => ClientStatic::ENC_URENCODED)
-         );
-
-     The other largely mimics the Zend Framework 1.X HTTP client, and
-     proxies functionality to the Request object when appropriate.
-
- - Updated all docbook sources to DocBook 5 formatting standards.
-
- - Merging of more than 50 pull requests made by community members,
-   ranging from one-liner documentation changes to sweeping fixes to the
-   testing repository (including fixing most assertions deprecated in
-   PHPUnit 3.5.0).
-
-We will be refactoring all components using the HTTP client in an
-upcoming milestone to ensure they continue to work, and will also
-post a blog entry and documentation page containing tips.
-
-This snapshot should NOT be used in production, as it is considered
-pre-pre alpha quality.
+- New and refactored autoloaders:
+  - Zend\Loader\StandardAutoloader
+  - Zend\Loader\ClassMapAutoloader
+  - Zend\Loader\AutoloaderFactory
+- New plugin broker strategy
+  - Zend\Loader\Broker and Zend\Loader\PluginBroker
+- Reworked Exception system
+  - Allow catching by specific Exception type
+  - Allow catching by component Exception type
+  - Allow catching by SPL Exception type
+  - Allow catching by base Exception type
+- Rewritten Session component
+- Refactored View component
+  - Split helpers into a PluginBroker
+  - Split variables into a Variables container
+  - Split script paths into a TemplateResolver
+  - Renamed base View class "PhpRenderer"
+  - Refactored helpers to utilize __invoke() when possible
+- Refactored HTTP component
+- New Zend\Cloud\Infrastructure component
+- New EventManager component
+- New Dependency Injection (Zend\Di) component
+- New Code component
+  - Incorporates refactored versions of former Reflection and
+    CodeGenerator components.
+  - Introduces Scanner component.
+  - Introduces annotation system.
+- New MVC layer
+  - Zend\Module, for developing modular application architectures.
+  - Zend\Mvc, a completely reworked MVC layer built on top of HTTP,
+    EventManager, and Di.
+- Introduces new packaging system, allowing the usage of Pyrus
+  (http://pear2.php.net) to install individual components and/or groups
+  of components.
 
 SYSTEM REQUIREMENTS
 -------------------
 
-Zend Framework 2 requires PHP 5.3 or later. 
+Zend Framework 2 requires PHP 5.3 or later; we recommend using the
+latest PHP version whenever possible.
 
 INSTALLATION
 ------------

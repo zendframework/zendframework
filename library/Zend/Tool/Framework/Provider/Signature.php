@@ -90,7 +90,7 @@ class Signature implements RegistryEnabled
     public function __construct(Provider $provider)
     {
         $this->_provider = $provider;
-        $this->_providerReflection = new \Zend\Reflection\ReflectionClass($provider);
+        $this->_providerReflection = new \ReflectionClass($provider);
     }
 
     /**

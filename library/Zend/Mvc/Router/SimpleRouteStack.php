@@ -161,6 +161,10 @@ class SimpleRouteStack implements RouteStack
         if (!$route instanceof Route) {
             $route = $this->routeFromArray($route);
         }
+        
+        if ($priority !== null && isset($route->priority)) {
+            $priority = $route->priority;
+        }
 
         $this->routes->insert($name, $route, $priority);
 
@@ -205,6 +209,10 @@ class SimpleRouteStack implements RouteStack
 
         $route = $this->routeBroker()->load($specs['type'], $specs['options']);
 
+        if (isset($specs['priority'])) {
+            $route->priority = $specs['priority'];
+        }
+        
         return $route;
     }
 

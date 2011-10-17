@@ -35,6 +35,13 @@ use Zend\Stdlib\RequestDescription as Request;
 interface Route
 {
     /**
+     * Priority used for route stacks.
+     * 
+     * @var integer
+     */
+    public $priority;
+    
+    /**
      * Create a new route with given options.
      * 
      * @param  array|Traversable $options

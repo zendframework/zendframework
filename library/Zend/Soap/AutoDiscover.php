@@ -108,13 +108,13 @@ class AutoDiscover implements \Zend\Server\Server
     /**
      * Set the location at which the WSDL file will be availabe.
      *
-     * @throws \Zend\Soap\AutoDiscover\Exception
      * @param  Uri\Uri|string $uri
      * @return \Zend\Soap\AutoDiscover
+     * @throws \Zend\Soap\Exception\InvalidArgumentException
      */
     public function setUri($uri)
     {
-        if(!is_string($uri) && !($uri instanceof Uri\Uri)) {
+        if (!is_string($uri) && !($uri instanceof Uri\Uri)) {
             throw new Exception\InvalidArgumentException(
                 'No uri given to \Zend\Soap\AutoDiscover::setUri as string or \Zend\Uri\Uri instance.'
             );
@@ -122,7 +122,7 @@ class AutoDiscover implements \Zend\Server\Server
         $this->_uri = $uri;
 
         // change uri in WSDL file also if existant
-        if($this->_wsdl instanceof Wsdl) {
+        if ($this->_wsdl instanceof Wsdl) {
             $this->_wsdl->setUri($uri);
         }
 
@@ -151,13 +151,13 @@ class AutoDiscover implements \Zend\Server\Server
     /**
      * Set the name of the WSDL handling class.
      *
-     * @throws \Zend\Soap\AutoDiscover\Exception
      * @param  string $wsdlClass
      * @return \Zend\Soap\AutoDiscover
+     * @throws \Zend\Soap\Exception\InvalidArgumentException
      */
     public function setWsdlClass($wsdlClass)
     {
-        if(!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend\Soap\Wsdl')) {
+        if (!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend\Soap\Wsdl')) {
             throw new Exception\InvalidArgumentException(
                 'No \Zend\Soap\Wsdl subclass given to Zend\Soap\AutoDiscover::setWsdlClass as string.'
             );
@@ -185,6 +185,7 @@ class AutoDiscover implements \Zend\Server\Server
      *
      * @param  array $operationStyle
      * @return \Zend\Soap\AutoDiscover
+     * @throws \Zend\Soap\Exception\InvalidArgumentException
      */
     public function setOperationBodyStyle(array $operationStyle=array())
     {
@@ -288,6 +289,7 @@ class AutoDiscover implements \Zend\Server\Server
      * @param string $class Class Name
      * @param string $namespace Class Namspace - Not Used
      * @param array $argv Arguments to instantiate the class - Not Used
+     * @return \Zend\Soap\AutoDiscover
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
@@ -311,6 +313,8 @@ class AutoDiscover implements \Zend\Server\Server
             $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
         $this->_wsdl = $wsdl;
+
+        return $this;
     }
 
     /**
@@ -472,6 +476,7 @@ class AutoDiscover implements \Zend\Server\Server
      *
      * @param string $fault
      * @param string|int $code
+     * @throws \Zend\Soap\Exception\UnexpectedValueException
      */
     public function fault($fault = null, $code = null)
     {
@@ -495,6 +500,8 @@ class AutoDiscover implements \Zend\Server\Server
      * Proxy to WSDL dump function
      *
      * @param string $filename
+     * @return boolean
+     * @throws \Zend\Soap\Exception\RuntimeException
      */
     public function dump($filename)
     {
@@ -507,6 +514,9 @@ class AutoDiscover implements \Zend\Server\Server
 
     /**
      * Proxy to WSDL toXml() function
+     *
+     * @return string
+     * @throws \Zend\Soap\Exception\RuntimeException
      */
     public function toXml()
     {
@@ -531,6 +541,7 @@ class AutoDiscover implements \Zend\Server\Server
      * Load Functions
      *
      * @param unknown_type $definition
+     * @throws \Zend\Soap\Exception\RuntimeException
      */
     public function loadFunctions($definition)
     {
@@ -541,6 +552,7 @@ class AutoDiscover implements \Zend\Server\Server
      * Set Persistance
      *
      * @param int $mode
+     * @throws \Zend\Soap\Exception\RuntimeException
      */
     public function setPersistence($mode)
     {

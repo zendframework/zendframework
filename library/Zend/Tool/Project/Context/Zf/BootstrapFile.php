@@ -97,14 +97,11 @@ class BootstrapFile extends \Zend\Tool\Project\Context\Filesystem\File
     public function getContents()
     {
 
-        $codeGenFile = new \Zend\CodeGenerator\Php\PhpFile(array(
+        $codeGenFile = new \Zend\Code\Generator\FileGenerator(array(
             'classes' => array(
-                new \Zend\CodeGenerator\Php\PhpClass(array(
-                    'name' => 'Bootstrap',
-                    'extendedClass' => '\Zend\Application\Bootstrap',
-                    )),
-                )
-            ));
+                new \Zend\Code\Generator\ClassGenerator('Bootstrap', null, null, '\Zend\Application\Bootstrap'),
+            )
+        ));
 
         return $codeGenFile->generate();
     }

@@ -62,8 +62,8 @@ class PublicIndexFile extends \Zend\Tool\Project\Context\Filesystem\File
      */
     public function getContents()
     {
-        $codeGenerator = new \Zend\CodeGenerator\Php\PhpFile(array(
-            'body' => <<<'EOS'
+        $codeGenerator = new \Zend\Code\Generator\FileGenerator();
+        $codeGenerator->setBody( <<<'EOS'
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
@@ -90,7 +90,7 @@ $application->bootstrap()
             ->run();
 
 EOS
-            ));
+            );
         return $codeGenerator->generate();
     }
 

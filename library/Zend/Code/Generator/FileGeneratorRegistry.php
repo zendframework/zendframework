@@ -2,10 +2,27 @@
 
 namespace Zend\Code\Generator;
 
+use Zend\Code\Generator\Exception\RuntimeException;
+
 class FileGeneratorRegistry
 {
-    /**
-     * @todo Complete this when Zend\Tool get's refractored as it is the only 
-     *       piece that cares if its "double reflecting" file generators
-     */
+	static private $_fileCodeGenerators = array();
+	
+    public static function registerFileCodeGenerator(FileGenerator $fileCodeGenerator, $fileName = null)
+    {
+        if ($fileName == null) {
+            $fileName = $fileCodeGenerator->getFilename();
+        }
+
+        if ($fileName == '') {
+            throw new RuntimeException('FileName does not exist.');
+        }
+
+        // cannot use realpath since the file might not exist, but we do need to have the index
+        // in the same DIRECTORY_SEPARATOR that realpath would use:
+        $fileName = str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $fileName);
+
+        self::$_fileCodeGenerators[$fileName] = $fileCodeGenerator;
+
+    }
 }

@@ -24,7 +24,17 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 
-use Zend\CodeGenerator\Php;
+use Zend\Debug;
+
+use Zend\Code\Generator\FileGeneratorRegistry;
+
+use Zend\Code\Generator\MethodGenerator;
+
+use Zend\Code\Generator\ClassGenerator;
+
+use Zend\Code\Generator\FileGenerator;
+
+use Zend\Code\Generator;
 
 /**
  * This class is the front most class for utilizing Zend\Tool\Project
@@ -112,35 +122,19 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
         $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '\\' : '';
         $className .= ucfirst($this->_controllerName) . 'Controller';
         
-        $codeGenFile = new Php\PhpFile(array(
-            'fileName' => $this->getPath(),
-            'classes' => array(
-                new Php\PhpClass(array(
-                    'name' => $className,
-                    'extendedClass' => '\Zend\Controller\Action',
-                    'methods' => array(
-                        new Php\PhpMethod(array(
-                            'name' => 'init',
-                            'body' => '/* Initialize action controller here */',
-                        	))
-                    	)
-                	))
-            	)
-        	));
-
-
+        $codeGenFile = new FileGenerator();
+        $codeGenFile->setFilename($this->getPath());
+        $cg = new ClassGenerator($className);
+        $cg->setMethod(new MethodGenerator('init', array(), null, '/* Initialize action controller here */'));
+        $codeGenFile->setClass($cg);
+        
         if ($className == 'ErrorController') {
-
-            $codeGenFile = new Php\PhpFile(array(
-                'fileName' => $this->getPath(),
-                'classes' => array(
-                    new Php\PhpClass(array(
-                        'name' => $className,
-                        'extendedClass' => 'Zend\Controller\Action',
-                        'methods' => array(
-                            new Php\PhpMethod(array(
-                                'name' => 'errorAction',
-                                'body' => <<<'EOS'
+        	
+        	$codeGenFile = new FileGenerator();
+            $codeGenFile->setFilename($this->getPath());
+            $cg = new ClassGenerator($className);
+            
+            $cg->setMethods(array(new MethodGenerator('errorAction', array(), null, <<<'EOS'
 $errors = $this->_getParam('error_handler');
 
 if (!$errors || !$errors instanceof \ArrayObject) {
@@ -178,10 +172,7 @@ if ($this->getInvokeArg('displayExceptions') == true) {
 
 $this->view->vars()->request = $errors->request;
 EOS
-                                )),
-                            new Php\PhpMethod(array(
-                                'name' => 'getLog',
-                                'body' => <<<'EOS'
+                    ), new MethodGenerator('getLog', array(), null, <<<'EOS'
 /* @var $bootstrap Zend\Application\Bootstrap */
 $bootstrap = $this->getInvokeArg('bootstrap');
 if (!$bootstrap->getBroker()->hasPlugin('Log')) {
@@ -190,16 +181,13 @@ if (!$bootstrap->getBroker()->hasPlugin('Log')) {
 $log = $bootstrap->getResource('Log');
 return $log;
 EOS
-                                )),
-                            )
-                        ))
                     )
-                ));
-
+                )
+            );
         }
 
         // store the generator into the registry so that the addAction command can use the same object later
-        Php\PhpFile::registerFileCodeGenerator($codeGenFile); // REQUIRES filename to be set
+        FileGeneratorRegistry::registerFileCodeGenerator($codeGenFile); // REQUIRES filename to be set
         return $codeGenFile->generate();
     }
 
@@ -211,18 +199,18 @@ EOS
     public function addAction($actionName)
     {
         $classCodeGen = $this->getCodeGenerator();
-        $classCodeGen->setMethod(array('name' => $actionName . 'Action', 'body' => '        // action body here'));
+        $classCodeGen->setMethod(new MethodGenerator($actionName . 'Action', array(), null, '        // action body here'));
         file_put_contents($this->getPath(), $classCodeGen->generate());
     }
 
     /**
      * getCodeGenerator()
      *
-     * @return \Zend\CodeGenerator\Php\PhpClass
+     * @return \Zend\Code\Generator\FileGenerator
      */
     public function getCodeGenerator()
     {
-        $codeGenFile = Php\PhpFile::fromReflectedFileName($this->getPath());
+        $codeGenFile = FileGenerator::fromReflectedFileName($this->getPath());
         $codeGenFileClasses = $codeGenFile->getClasses();
         $class = array_shift($codeGenFileClasses);
         return $class;

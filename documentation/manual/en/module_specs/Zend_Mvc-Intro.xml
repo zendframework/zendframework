@@ -214,7 +214,7 @@ class Module
     </para>
 
     <para>
-      The three <filename>autoload_*.php</filename> filees are not
+      The three <filename>autoload_*.php</filename> files are not
       required, but recommended. They provide the following:
     </para>
 
@@ -248,7 +248,7 @@ class Module
     </itemizedlist>
 
     <para>
-      The point of these three classes is to provide reasonable default
+      The point of these three files is to provide reasonable default
       mechanisms for autoloading the classes contained in the module,
       thus providing a trivial way to consume the module without
       requiring <classname>Zend\Module</classname> (e.g., for use outside a

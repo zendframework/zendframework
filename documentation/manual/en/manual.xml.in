@@ -1541,6 +1541,16 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
+        <chapter xml:id="zend.module">
+            <info><title>Zend\Module</title></info>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Intro.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Module-Intro.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
         <chapter xml:id="zend.mvc">
             <info><title>Zend\Mvc</title></info>
             

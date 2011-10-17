@@ -35,9 +35,9 @@ use Zend\Code\Generator\FileGeneratorRegistry,
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpClass
- * @uses       \Zend\CodeGenerator\Php\PhpFile
- * @uses       \Zend\CodeGenerator\Php\PhpMethod
+ * @uses       \Zend\Code\Generator\ClassGenerator
+ * @uses       \Zend\Code\Generator\FileGenerator
+ * @uses       \Zend\Code\Generator\MethodGenerator
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

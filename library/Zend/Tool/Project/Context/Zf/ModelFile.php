@@ -30,8 +30,8 @@ namespace Zend\Tool\Project\Context\Zf;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpClass
- * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\Code\Generator\ClassGenerator
+ * @uses       \Zend\Code\Generator\FileGenerator
  * @uses       \Zend\Tool\Project\Context\Zf\AbstractClassFile
  * @category   Zend
  * @package    Zend_Tool
@@ -94,14 +94,10 @@ class ModelFile extends AbstractClassFile
         
         $className = $this->getFullClassName($this->_modelName, 'Model');
         
-        $codeGenFile = new \Zend\CodeGenerator\Php\PhpFile(array(
-            'fileName' => $this->getPath(),
-            'classes' => array(
-                new \Zend\CodeGenerator\Php\PhpClass(array(
-                    'name' => $className,
-                    ))
-                )
-            ));
+        $codeGenFile = new \Zend\Code\Generator\FileGenerator();
+        $codeGenFile->setFilename($this->getPath());
+        $codeGenFile->setClass(new \Zend\Code\Generator\ClassGenerator($className));
+        
         return $codeGenFile->generate();
     }
     

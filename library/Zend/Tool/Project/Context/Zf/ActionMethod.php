@@ -25,7 +25,6 @@
 namespace Zend\Tool\Project\Context\Zf;
 
 use Zend\Tool\Project\Context\Context,
-    Zend\CodeGenerator\Php,
     Zend\Tool\Project\Context\Exception,
     Zend\Tool\Project\Profile\Resource\Resource,
     Zend\Code\Generator\FileGenerator,
@@ -39,7 +38,7 @@ use Zend\Tool\Project\Context\Context,
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\Code\Generator\ClassGenerator
  * @uses       \Zend\Reflection\ReflectionFile
  * @uses       \Zend\Tool\Project\Context\Exception
  * @uses       \Zend\Tool\Project\Context

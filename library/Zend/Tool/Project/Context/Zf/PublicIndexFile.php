@@ -30,7 +30,7 @@ namespace Zend\Tool\Project\Context\Zf;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\Code\Generator\FileGenerator
  * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
  * @package    Zend_Tool

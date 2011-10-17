@@ -24,7 +24,7 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 use Zend\Code\Generator\MethodGenerator,
-	\Zend\Code\Generator\ClassGenerator;
+	Zend\Code\Generator\ClassGenerator;
 
 /**
  * This class is the front most class for utilizing Zend\Tool\Project

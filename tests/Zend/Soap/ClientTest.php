@@ -204,6 +204,49 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayNotHasKey('user_agent', $options);
     }
 
+    /**
+     * @group ZF-10542
+     */
+    public function testAllowNumericZeroAsValueForCacheWsdlOption()
+    {
+        $client = new Client();
+        $this->assertNull($client->getWsdlCache());
+        $options = $client->getOptions();
+        $this->assertArrayNotHasKey('cache_wsdl', $options);
+
+        $client->setWsdlCache(WSDL_CACHE_NONE);
+        $this->assertSame(WSDL_CACHE_NONE, $client->getWsdlCache());
+        $options = $client->getOptions();
+        $this->assertSame(WSDL_CACHE_NONE, $options['cache_wsdl']);
+
+        $client->setWsdlCache(null);
+        $this->assertNull($client->getWsdlCache());
+        $options = $client->getOptions();
+        $this->assertArrayNotHasKey('cache_wsdl', $options);
+    }
+
+    /**
+     * @group ZF-10542
+     */
+    public function testAllowNumericZeroAsValueForCompressionOptions()
+    {
+        $client = new Client();
+        $this->assertNull($client->getCompressionOptions());
+        $options = $client->getOptions();
+        $this->assertArrayNotHasKey('compression', $options);
+
+        $client->setCompressionOptions(SOAP_COMPRESSION_GZIP);
+        $this->assertSame(SOAP_COMPRESSION_GZIP, $client->getCompressionOptions());
+        $options = $client->getOptions();
+        $this->assertSame(SOAP_COMPRESSION_GZIP, $options['compression']);
+
+        $client->setCompressionOptions(null);
+        $this->assertNull($client->getCompressionOptions());
+        $options = $client->getOptions();
+        $this->assertArrayNotHasKey('compression', $options);
+    }
+
+
     public function testGetFunctions()
     {
         $server = new Server(__DIR__ . '/TestAsset/wsdl_example.wsdl');

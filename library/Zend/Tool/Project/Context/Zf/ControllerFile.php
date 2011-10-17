@@ -24,17 +24,10 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 
-use Zend\Debug;
-
-use Zend\Code\Generator\FileGeneratorRegistry;
-
-use Zend\Code\Generator\MethodGenerator;
-
-use Zend\Code\Generator\ClassGenerator;
-
-use Zend\Code\Generator\FileGenerator;
-
-use Zend\Code\Generator;
+use Zend\Code\Generator\FileGeneratorRegistry,
+    Zend\Code\Generator\MethodGenerator,
+    Zend\Code\Generator\ClassGenerator,
+    Zend\Code\Generator\FileGenerator;
 
 /**
  * This class is the front most class for utilizing Zend\Tool\Project

@@ -24,17 +24,13 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 
-use Zend\Code\Generator\MethodGenerator;
-
-use Zend\Code\Generator\ClassGenerator;
-
-use Zend\Debug;
-
 use Zend\Tool\Project\Context\Context,
     Zend\CodeGenerator\Php,
     Zend\Tool\Project\Context\Exception,
     Zend\Tool\Project\Profile\Resource\Resource,
-    Zend\Code\Generator\FileGenerator;
+    Zend\Code\Generator\FileGenerator,
+    Zend\Code\Generator\ClassGenerator,
+    Zend\Code\Generator\MethodGenerator;
 
    
 /**

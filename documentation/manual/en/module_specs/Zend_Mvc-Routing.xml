@@ -152,7 +152,9 @@ $router->addRoutes(array(
         should be registered last, and least common routes first.
         Additionally, you will need to ensure that routes that potentially
         overlap are registered such that the most specific match will match
-        first (i.e., register later).
+        first (i.e., register later). Alternatively, you can set priorities by
+        giving the priority as third parameter to the
+        <methodname>addRoute()</methodname> method.
       </para>
     </section>
 
@@ -356,30 +358,24 @@ $route = Part::factory(array(
     'may_terminate' => true,
     'route_broker'  => $routeBroker,
     'child_routes'  => array(
-        'blog' => Part::factory(array(
-            'route' => array(
-                'type' => 'literal',
-                'options' => array(
-                    'route'    => 'blog',
-                    'defaults' => array(
-                        'controller' => 'ItsBlog',
-                    ),
+        'blog' => array(
+            'type'    => 'literal',
+            'options' => array(
+                'route'    => 'blog',
+                'defaults' => array(
+                    'controller' => 'ItsBlog',
                 ),
             ),
             'may_terminate' => true,
-            'route_broker'  => $routeBroker,
             'child_routes'  => array(
-                'rss' => Part::factory(array(
-                    'route' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route'    => '/rss',
-                            'defaults' => array(
-                                'controller' => 'ItsRssBlog',
-                            ),
+                'rss' => array(
+                    'type'    => 'literal',
+                    'options' => array(
+                        'route'    => '/rss',
+                        'defaults' => array(
+                            'controller' => 'ItsRssBlog',
                         ),
                     ),
-                    'route_broker'  => $routeBroker,
                     'child_routes'  => array(
                         'sub' => array(
                             'type'    => 'literal',
@@ -391,9 +387,9 @@ $route = Part::factory(array(
                             )
                         ),
                     ),
-                )),
+                ),
             ),
-        )),
+        ),
         'forum' => array(
             'type'    => 'literal',
             'options' => array(
@@ -541,7 +537,9 @@ $route = Scheme::factory(array(
 
       <para>
         The separation between literal and named segments can be anything.
-        For example, the above could be done as "/:foo[-:bar] as well.
+        For example, the above could be done as "/:foo{-}[-:bar] as well. The
+        {-} after the :foo parameter indicateds a set of one or more delimiters,
+        after which matching of the parameter itself ends.
       </para>
 
       <para>
@@ -563,8 +561,8 @@ $route = Scheme::factory(array(
 $route = Segment::factory(array(
     'route' => '/:controller[/:action]',
     'constraints' => array(
-        'controller' => '([a-zA-Z][a-ZA-Z0-9_]+)',
-        'action'     => '([a-zA-Z][a-ZA-Z0-9_]+)',
+        'controller' => '[a-zA-Z][a-ZA-Z0-9_-]+',
+        'action'     => '[a-zA-Z][a-ZA-Z0-9_-]+',
     ),
     'defaults' => array(
         'controller' => 'application-index',

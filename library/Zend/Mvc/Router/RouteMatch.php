@@ -38,12 +38,6 @@ class RouteMatch
      * @var array
      */
     protected $params = array();
-
-    /**
-     * Route that provided the match (if any)
-     * @var Route|null
-     */
-    protected $route;
     
     /**
      * Create a RouteMatch with given parameters.
@@ -104,15 +98,5 @@ class RouteMatch
     {
         $this->params = array_merge($this->params, $match->getParams());
         return $this;
-    }
-
-    /**
-     * Get the route that matched and provided these parameters
-     * 
-     * @return Route
-     */
-    public function getRoute()
-    {
-        return $this->route;
     }
 }

@@ -154,7 +154,9 @@ $router->addRoutes(array(
         overlap are registered such that the most specific match will match
         first (i.e., register later). Alternatively, you can set priorities by
         giving the priority as third parameter to the
-        <methodname>addRoute()</methodname> method.
+        <methodname>addRoute()</methodname> method, specifying the priority
+        in the route specifications or setting the priority property within
+        a route instance before adding it to the route stack.
       </para>
     </section>
 

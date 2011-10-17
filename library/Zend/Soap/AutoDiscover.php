@@ -467,7 +467,11 @@ class AutoDiscover implements \Zend\Server\Server
         }
 
         // Add the binding operation
-        $operation = $wsdl->addBindingOperation($binding, $functionName,  $this->_operationBodyStyle, $this->_operationBodyStyle);
+        if($isOneWayMessage == false) {
+            $operation = $wsdl->addBindingOperation($binding, $functionName,  $this->_operationBodyStyle, $this->_operationBodyStyle);
+        } else {
+            $operation = $wsdl->addBindingOperation($binding, $functionName,  $this->_operationBodyStyle);
+        }
         $wsdl->addSoapOperation($operation, $uri . '#' . $functionName);
 
         // Add the function name to the list

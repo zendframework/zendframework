@@ -204,7 +204,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                    'operation3',
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"),
                                    array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/"),
-                                   array('use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
+                                   array('name' => 'MyFault','use' => 'encoded', 'encodingStyle' => "http://schemas.xmlsoap.org/soap/encoding/")
                                    );
 
         $this->assertEquals($this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
@@ -234,8 +234,8 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                .     '<output>'
                                .       '<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
                                .     '</output>'
-                               .     '<fault>'
-                               .       '<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
+                               .     '<fault name="MyFault">'
+                               .       '<soap:fault name="MyFault" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>'
                                .     '</fault>'
                                .   '</operation>'
                                . '</binding>'

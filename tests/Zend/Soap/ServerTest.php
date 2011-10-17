@@ -851,4 +851,14 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(isset($options['cache_wsdl']));
         $this->assertEquals(100, $options['cache_wsdl']);
     }
+
+    /**
+     * @group ZF-11411
+     */
+    public function testHandleUsesProperRequestParameter()
+    {
+        $server = new \ZendTest\Soap\TestAsset\MockServer();
+        $r = $server->handle(new \DOMDocument('1.0', 'UTF-8'));
+        $this->assertTrue(is_string($server->mockSoapServer->handle[0]));
+    }
 }

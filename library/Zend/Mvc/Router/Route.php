@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -28,7 +28,7 @@ use Zend\Stdlib\RequestDescription as Request;
 /**
  * Route interface.
  * 
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -37,10 +37,10 @@ interface Route
     /**
      * Create a new route with given options.
      * 
-     * @param  mixed $options
+     * @param  array|Traversable $options
      * @return void
      */
-    public function __construct($options = null);
+    public static function factory($options = array());
     
     /**
      * Match a given request.

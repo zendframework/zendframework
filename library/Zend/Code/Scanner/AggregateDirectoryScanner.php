@@ -78,7 +78,6 @@ class AggregateDirectoryScanner extends DirectoryScanner
             throw new Exception\RuntimeException('Class by that name was not found.');
         }
         
-        
         $classScanner = $scanner->getClass($class);
         return new DerivedClassScanner($classScanner, $this);
     }

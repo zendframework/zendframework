@@ -13,16 +13,16 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
             $definitions = array($definitions);
         }
         foreach ($definitions as $definition) {
-            $this->unshift($definition);
+            $this->push($definition);
         }
     }
     
-    public function addDefinition(Definition\Definition $definition, $addToTopOfList = true)
+    public function addDefinition(Definition\Definition $definition, $addToBackOfList = true)
     {
-        if ($addToTopOfList) {
-            $this->unshift($definition);
-        } else {
+        if ($addToBackOfList) {
             $this->push($definition);
+        } else {
+            $this->unshift($definition);
         }
     }
 
@@ -175,12 +175,8 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     public function getMethodParameters($class, $method)
     {
         /** @var $definition Definition\Definition */
-        $methodParameters = array();
         foreach ($this as $definition) {
-            if ($definition->hasClass($class) && $definition->hasMethod($class, $method)) {
-                if ($definition instanceof Definition\PartialMarker && $definition->hasMethodParameters($class, $method) === false) {
-                    continue;
-                }
+            if ($definition->hasClass($class) && $definition->hasMethod($class, $method) && $definition->hasMethodParameters($class, $method)) {
                 return $definition->getMethodParameters($class, $method);
             }
         }

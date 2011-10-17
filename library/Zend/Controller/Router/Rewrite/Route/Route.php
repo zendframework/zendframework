@@ -43,7 +43,7 @@ interface Route
      * @param  array $options
      * @return void
      */
-    public function __construct(array $options);
+    //public function __construct(array $options);
 
     /**
      * Match a request

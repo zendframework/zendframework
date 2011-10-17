@@ -773,11 +773,13 @@ class InputFilter
                     if (is_array($rule)) {
                         $keys = array_keys($rule);
                         $classKey = array_shift($keys);
-                        $ruleClass = $rule[$classKey];
-                        if ($ruleClass === 'NotEmpty') {
-                            $foundNotEmptyValidator = true;
-                            // field may not be empty, we are ready
-                            break 1;
+                        if (isset($rule[$classKey])) {
+                            $ruleClass = $rule[$classKey];
+                            if ($ruleClass === 'NotEmpty') {
+                                $foundNotEmptyValidator = true;
+                                // field may not be empty, we are ready
+                                break 1;
+                            }
                         }
                     }
 

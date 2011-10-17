@@ -98,6 +98,7 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('PharModuleTarGz\Module'));
         $this->assertTrue(class_exists('PharModuleTarBz2\Module'));
         $this->assertTrue(class_exists('PharModuleZip\Module'));
+        $this->assertTrue(class_exists('PharModuleNested\Module'));
         $loader->unregister();
     }
 
@@ -123,6 +124,11 @@ class ManagerTest extends TestCase
         $loader->registerPath(__DIR__ . '/_files/');
         $moduleClass = $loader->autoload('NonExistantModule\Module');
         $this->assertFalse($moduleClass);
+        $loader->registerPath(__DIR__ . '/_files/NonExistantModule', 'NonExistantModule');
+        $moduleClass = $loader->autoload('NonExistantModule\Module');
+        $this->assertFalse($moduleClass);
+        $moduleClass = $loader->autoload('NoModuleClassModule\Module');
+        $this->assertFalse($moduleClass);
     }
 
     public function testReturnsFalseForNonModulePhar()
@@ -130,6 +136,7 @@ class ManagerTest extends TestCase
         $loader = new ModuleAutoloader;
         $loader->registerPath(__DIR__ . '/_files/');
         $moduleClass = $loader->autoload('PharModuleFake\Module');
+        $moduleClass = $loader->autoload('PharModuleNestedFake\Module');
         $this->assertFalse($moduleClass);
     }
 
@@ -145,5 +152,16 @@ class ManagerTest extends TestCase
         $loader = new ModuleAutoloader;
         $this->setExpectedException('InvalidArgumentException');
         $loader->registerPaths(123);
+    }
+
+    public function testCanLoadModulesFromExplicitLocation()
+    {
+        $loader = new ModuleAutoloader(array(
+            'My\NonmatchingModule' => __DIR__ . '/_files/NonmatchingModule',
+            'PharModuleExplicit' => __DIR__ . '/_files/PharModuleExplicit.phar',
+        ));
+        $loader->register();
+        $this->assertTrue(class_exists('My\NonmatchingModule\Module'));
+        $this->assertTrue(class_exists('PharModuleExplicit\Module'));
     }
 }

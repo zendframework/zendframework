@@ -175,4 +175,12 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
         $test = array_pop($loaders);
         $this->assertEquals(array($loader, 'autoload'), $test);
     }
+
+    public function testAutoloadsNamespacedClassesWithUnderscores()
+    {
+        $loader = new StandardAutoloader();
+        $loader->registerNamespace('ZendTest\UnusualNamespace', __DIR__ . '/TestAsset');
+        $loader->autoload('ZendTest\UnusualNamespace\Name_Space\Namespaced_Class');
+        $this->assertTrue(class_exists('ZendTest\UnusualNamespace\Name_Space\Namespaced_Class', false));
+    }
 }

@@ -1995,6 +1995,23 @@ class InputFilterTest extends \PHPUnit_Framework_TestCase
         $messages = $input->getMessages();
         $this->assertSame($messages['field1']['isEmpty'], $customMessage, 'For the NotEmpty validator the custom message is not used');
     }
+    
+    /**
+     * This test doesn't include any assertions as it's purpose is to 
+     * ensure that passing an empty array value into a $validators rule 
+     * doesn't cause a notice to be emitted
+     *  
+     * @group ZF-11819
+     */
+    public function testValidatorRuleCanHaveEmptyArrayAsMetacommandValue()
+    {
+        $validators = array(
+            'perms' => array('Int', 'default' => array()),
+        );
+
+        $validate = new InputFilter(NULL, $validators);
+        $validate->isValid();
+    }
 }
 
 } // end namespace declaration

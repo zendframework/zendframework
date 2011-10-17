@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -25,7 +25,7 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Config\Config,
+    Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\Route;
@@ -33,8 +33,8 @@ use Traversable,
 /**
  * Literal route.
  *
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
@@ -43,7 +43,7 @@ class Literal implements Route
 {
     /**
      * Route to match.
-     * 
+     *
      * @var string
      */
     protected $route;
@@ -56,34 +56,45 @@ class Literal implements Route
     protected $defaults;
 
     /**
-     * __construct(): defined by Route interface.
-     *
-     * @see    Route::__construct()
-     * @param  mixed $options
+     * Create a new literal route.
+     * 
+     * @param  string $route
+     * @param  array  $defaults 
      * @return void
      */
-    public function __construct($options = null)
+    public function __construct($route, array $defaults = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
+        $this->route    = $route;
+        $this->defaults = $defaults;
+    }
+    
+    /**
+     * factory(): defined by Route interface.
+     *
+     * @see    Route::factory()
+     * @param  array|Traversable $options
+     * @return void
+     */
+    public static function factory($options = array())
+    {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
         }
 
-        if (!isset($options['route']) || !is_string($options['route'])) {
-            throw new Exception\InvalidArgumentException('Route not defined nor not a string');
+        if (!isset($options['route'])) {
+            throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
-        
-        if (!isset($options['defaults']) || !is_array($options['defaults'])) {
-            throw new Exception\InvalidArgumentException('Defaults not defined nor not an array');
+
+        if (!isset($options['defaults'])) {
+            $options['defaults'] = array();
         }
-        
-        $this->route    = $options['route'];
-        $this->defaults = $options['defaults'];
+
+        return new static($options['route'], $options['defaults']);
     }
 
     /**
@@ -101,15 +112,19 @@ class Literal implements Route
 
         $uri  = $request->uri();
         $path = $uri->getPath();
-        
+
         if ($pathOffset !== null) {
-            if (strpos($path, $this->route) === $pathOffset) {
-                return new RouteMatch($this->defaults, $this, strlen($this->route));
+            if ($pathOffset >= 0 && strlen($path) >= $pathOffset) {
+                if (strpos($path, $this->route, $pathOffset) === $pathOffset) {
+                    return new RouteMatch($this->defaults, strlen($this->route));
+                }
             }
-        } else {
-            if ($path === $this->route) {
-                return new RouteMatch($this->defaults, $this, strlen($this->route));
-            }
+            
+            return null;
+        }
+
+        if ($path === $this->route) {
+            return new RouteMatch($this->defaults, strlen($this->route));
         }
 
         return null;
@@ -123,7 +138,7 @@ class Literal implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
         return $this->route;
     }

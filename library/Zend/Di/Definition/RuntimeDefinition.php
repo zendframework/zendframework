@@ -173,7 +173,7 @@ class RuntimeDefinition implements Definition
         if (!isset($this->classes[$class])) {
             return false;
         }
-        return (array_key_exists($method, $this->classes[$class]));
+        return (array_key_exists($method, $this->classes[$class]['parameters']));
     }
 
     /**

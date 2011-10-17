@@ -175,15 +175,23 @@ class Di implements DependencyInjection
             }
         } elseif (is_callable($instantiator)) {
             $object = $this->createInstanceViaCallback($instantiator, $params, $alias);
-            // @todo make sure we can create via a real object factory
-            throw new \Exception('incomplete implementation');
         } else {
             throw new Exception\RuntimeException('Invalid instantiator');
         }
 
+        if ($isShared) {
+            if ($params) {
+                $this->instanceManager->addSharedInstanceWithParameters($object, $name, $params);
+            } else {
+                $this->instanceManager->addSharedInstance($object, $name);
+            }
+        }
+
         if ($injectionMethods) {
             foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
-                $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias, $methodIsRequired);
+                if ($injectionMethod !== '__construct'){
+                    $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias, $methodIsRequired);
+                }
             }
 
             $instanceConfiguration = $instanceManager->getConfiguration($name);
@@ -216,13 +224,7 @@ class Di implements DependencyInjection
             }
         }
         
-        if ($isShared) {
-            if ($params) {
-                $this->instanceManager->addSharedInstanceWithParameters($object, $name, $params);
-            } else {
-                $this->instanceManager->addSharedInstance($object, $name);
-            }
-        }
+
         
         array_pop($this->instanceContext);
         return $object;
@@ -325,7 +327,7 @@ class Di implements DependencyInjection
     {
         // @todo make sure to resolve the supertypes for both the object & definition
         $callParameters = $this->resolveMethodParameters(get_class($object), $method, $params, false, $alias, $methodIsRequired);
-        if ($callParameters === false) {
+        if ($callParameters == false) {
             return;
         }
         if ($callParameters !== array_fill(0, count($callParameters), null)) {
@@ -434,6 +436,9 @@ class Di implements DependencyInjection
                     if (isset($iConfig[$thisIndex]['parameters'][$fqName])) throw \Exception('Implementation incomplete for fq names');
 
                     if (is_string($iConfig[$thisIndex]['parameters'][$name])
+                        && $type === false) {
+                        $computedParams['value'][$fqName] = $iConfig[$thisIndex]['parameters'][$name];
+                    } elseif (is_string($iConfig[$thisIndex]['parameters'][$name])
                         && isset($aliases[$iConfig[$thisIndex]['parameters'][$name]])) {
                         $computedParams['required'][$fqName] = array(
                             $iConfig[$thisIndex]['parameters'][$name],

@@ -27,15 +27,18 @@ class ClassDefinition implements Definition, PartialMarker
         $this->supertypes = $supertypes;
     }
 
-    public function addMethod($method, $isRequired = false)
+    public function addMethod($method, $isRequired = null)
     {
+        if ($isRequired === null) {
+            $isRequired = ($method === '__construct') ? true : false;
+        }
         $this->methods[$method] = (bool) $isRequired;
     }
 
     public function addMethodParameter($method, $parameterName, array $parameterInfo)
     {
         if (!array_key_exists($method, $this->methods)) {
-            $this->methods[$method] = false;
+            $this->methods[$method] = ($method === '__construct') ? true : false;
         }
 
         if (!array_key_exists($method, $this->methodParameters)) {

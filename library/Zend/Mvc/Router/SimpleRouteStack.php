@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -26,13 +26,13 @@ namespace Zend\Mvc\Router;
 use ArrayAccess,
     ArrayIterator,
     Traversable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Loader\PluginBroker;
+    Zend\Stdlib\IteratorToArray,
+    Zend\Stdlib\RequestDescription as Request;
 
 /**
  * Simple route stack implementation.
  *
- * @package    Zend_Router
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -44,120 +44,105 @@ class SimpleRouteStack implements RouteStack
      * @var PriorityList
      */
     protected $routes;
-    
+
     /**
      * Plugin broker to load routes.
-     * 
-     * @var PluginBroker
+     *
+     * @var RouteBroker
      */
-    protected $pluginBroker;
+    protected $routeBroker;
 
     /**
-     * __construct(): defined by Route interface.
-     *
-     * @see    Route::__construct()
-     * @param  mixed $options
+     * Create a new simple route stack.
+     * 
      * @return void
      */
-    public function __construct($options = null)
+    public function __construct()
     {
-        $this->routes = new PriorityList();
-
-        if ($options !== null) {
-            $this->setOptions($options);
-        }
-        
-        if ($this->pluginBroker === null) {
-            $this->pluginBroker = new PluginBroker(array(
-                'register_plugins_on_load' => false
-            ));            
-        }
+        $this->routes      = new PriorityList();
+        $this->routeBroker = new RouteBroker();
         
         $this->init();
     }
     
     /**
+     * factory(): defined by Route interface.
+     *
+     * @see    Route::factory()
+     * @param  array|Traversable $options
+     * @return void
+     */
+    public static function factory($options = array())
+    {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+        }
+
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
+        }
+
+        $instance = new static();
+        
+        if (isset($options['route_broker'])) {
+            $instance->setRouteBroker($options['route_broker']);
+        }
+        
+        if (isset($options['routes'])) {
+            $instance->addRoutes($options['routes']);
+        }
+
+        return $instance;
+    }
+    
+    /**
      * Init method for extending classes.
-     * 
+     *
      * @return void
      */
     protected function init()
-    {}
-
-    /**
-     * Set options of the route stack.
-     *
-     * @param  mixed $options
-     * @return RouteStack
-     */
-    public function setOptions($options)
     {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected an array or Traversable object; received "%s"',
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
-        foreach ($options as $key => $value) {
-            switch (strtolower($key)) {
-                case 'routes':
-                    $this->addRoutes($value);
-                    break;
-                
-                case 'plugin_broker':
-                    $this->setPluginBroker($value);
-                    break;
-                
-                default:
-                    break;
-            }
-        }
     }
-    
+
     /**
-     * Set the plugin broker.
-     * 
-     * @param  PluginBroker $broker
+     * Set the route broker.
+     *
+     * @param  RouteBroker $broker
      * @return SimpleRouteStack
      */
-    public function setPluginBroker(PluginBroker $broker)
+    public function setRouteBroker(RouteBroker $broker)
     {
-        $this->pluginBroker = $broker;
+        $this->routeBroker = $broker;
         return $this;
     }
-    
+
     /**
-     * Get the plugin broker.
-     * 
-     * @return PluginBroker
+     * Get the route broker.
+     *
+     * @return RouteBroker
      */
-    public function getPluginBroker()
+    public function routeBroker()
     {
-        return $this->pluginBroker;
+        return $this->routeBroker;
     }
 
     /**
      * addRoutes(): defined by RouteStack interface.
      *
      * @see    Route::addRoutes()
-     * @param  mixed $routes
+     * @param  array|Traversable $routes
      * @return RouteStack
      */
     public function addRoutes($routes)
     {
-        if (is_array($routes)) {
-            $routes = new ArrayIterator($routes);
-        } elseif (!$routes instanceof Traversable) {
-            throw new Exception\InvalidArgumentException('Routes provided are invalid; must be traversable');
+        if (!is_array($routes) && !$routes instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('addRoutes expects an array or Traversable set of routes');
         }
-        
-        $routeStack = $this;
-        
-        iterator_apply($routes, function() use ($routeStack, $routes) {
-            $routeStack->addRoute($routes->key(), $routes->current());
-            return true;
-        });
+
+        foreach($routes as $name => $route) {
+            $this->addRoute($name, $route);
+        }
 
         return $this;
     }
@@ -199,25 +184,26 @@ class SimpleRouteStack implements RouteStack
     /**
      * Create a route from array specifications.
      *
-     * @param  mixed $specs
+     * @param  array|Traversable $specs
      * @return SimpleRouteStack
      */
     protected function routeFromArray($specs)
     {
-        if (!is_array($specs) && !$specs instanceof ArrayAccess) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected an array or ArrayAccess; received "%s"',
-                (is_object($specs) ? get_class($specs) : gettype($specs))
-            ));
+        if (!is_array($specs) && !$specs instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
-    
+
+        if ($specs instanceof Traversable) {
+            $specs = IteratorToArray::convert($specs);
+        }
+
         if (!isset($specs['type'])) {
             throw new Exception\InvalidArgumentException('Missing "type" option');
         } elseif (!isset($specs['options'])) {
             throw new Exception\InvalidArgumentException('Missing "name" option');
         }
-        
-        $route = $this->pluginBroker->load($specs['type'], $specs['options']);
+
+        $route = $this->routeBroker()->load($specs['type'], $specs['options']);
 
         return $route;
     }
@@ -248,17 +234,18 @@ class SimpleRouteStack implements RouteStack
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
         if (!isset($options['name'])) {
             throw new Exception\InvalidArgumentException('Missing "name" option');
-        } 
+        }
 
         $route = $this->routes->get($options['name']);
+        
         if (!$route) {
             throw new Exception\RuntimeException(sprintf('Route with name "%s" not found', $options['name']));
         }
-        
+
         unset($options['name']);
 
         return $route->assemble($params, $options);

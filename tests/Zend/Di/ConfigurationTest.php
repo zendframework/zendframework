@@ -72,5 +72,52 @@ class ConfigurationTest extends TestCase
         
     }
     
+    public function testCanSetInstantiatorToStaticFactory()
+    {
+        $config = new Configuration(array(
+            'definition' => array(
+                'class' => array(
+                    'ZendTest\Di\TestAsset\DummyParams' => array(
+                        'instantiator' => array('ZendTest\Di\TestAsset\StaticFactory', 'factory'),
+                    ),
+                    'ZendTest\Di\TestAsset\StaticFactory' => array(
+                        'methods' => array(
+                            'factory' => array(
+                                'struct' => array(
+                                    'type' => 'ZendTest\Di\TestAsset\Struct',
+                                    'required' => true,
+                                ),
+                                'params' => array(
+                                    'required' => true,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'instance' => array(
+                'ZendTest\Di\TestAsset\DummyParams' => array(
+                    'parameters' => array(
+                        'struct' => 'ZendTest\Di\TestAsset\Struct',
+                        'params' => array(
+                            'foo' => 'bar',
+                        ),
+                    ),
+                ),
+                'ZendTest\Di\TestAsset\Struct' => array(
+                    'parameters' => array(
+                        'param1' => 'hello',
+                        'param2' => 'world',
+                    ),
+                ),
+            ),
+        ));
+        $di = new Di();
+        $di->configure($config);
+        $dummyParams = $di->get('ZendTest\Di\TestAsset\DummyParams');
+        $this->assertEquals($dummyParams->params['param1'], 'hello');
+        $this->assertEquals($dummyParams->params['param2'], 'world');
+        $this->assertEquals($dummyParams->params['foo'], 'bar');
+    }
     
 }

@@ -13,34 +13,23 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
+ * @package    Loader
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
-/**
- * @namespace
- */
-namespace Zend\Mvc\Router\Http;
-
-use Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Route as BaseRoute;
+namespace ZendTest\UnusualNamespace\Name_Space;
 
 /**
- * Part route interface.
- * 
- * @package    Zend_Router
+ * @category   Zend
+ * @package    Loader
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Loader
  */
-interface Route extends BaseRoute
+class Namespaced_Class
 {
-    /**
-     * Match a given request at a given path offset.
-     * 
-     * @param  Request $request
-     * @param  integer $pathOffset
-     * @return RouteMatch
-     */
-    public function match(Request $request, $pathOffset = null);
 }

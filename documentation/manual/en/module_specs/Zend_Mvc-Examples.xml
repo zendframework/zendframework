@@ -1,355 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.mvc.examples">
-    <info><title>Zend\Mvc Examples</title></info>
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.mvc.examples">
+  <info><title>Examples</title></info>
 
-    <example xml:id="zend.mvc.examples.bootstrapping">
-        <info><title>Example 1: Bootstrapping</title></info>
+  <section xml:id="zend.mvc.examples.controllers">
+    <info><title>Controllers</title></info>
 
-        <para>
-            While the <classname>Application</classname> class will actually perform execution of
-            the application, you still need to provide some configuration -- for instance, setting
-            up the Dependency Injector or Service Locator instance you plan to use, and providing
-            routes to the router.
-        </para>
+    <section xml:id="zend.mvc.examples.controllers.accessing-the-request-and-response">
+      <info><title>Accessing the Request and Response</title></info>
 
-        <para>
-            The best way to accomplish this is via composition. Consider the following
-            <classname>Bootstrap</classname> class. It accepts an <classname>Application</classname>
-            instance to its <methodname>bootstrap()</methodname> method and configures it.
-        </para>
+      <para>
+        When using <classname>ActionController</classname> or
+        <classname>RestfulController</classname>, the request and response
+        object are composed directly into the controller as soon as
+        <methodname>dispatch()</methodname> is called. You may access them in the
+        following ways:
+      </para>
 
-        <programlisting language="php"><![CDATA[
-use Zend\Config\Config,
-    Zend\Mvc\Application;
+      <programlisting language="php"><![CDATA[
+$request  = $this->getRequest();
+$response = $this->getResponse();
 
-class Bootstrap
+$request  = $this->request;
+$response = $this->response;
+]]></programlisting>
+
+      <para>
+        Additionally, if your controller implements
+        <classname>InjectApplicationEvent</classname> (as both
+        <classname>ActionController</classname> and
+        <classname>RestfulController</classname> do), you can access these
+        objects from the attached <classname>MvcEvent</classname>:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$event    = $this->getEvent();
+$request  = $event->getRequest();
+$response = $event->getResponse();
+]]></programlisting>
+
+      <para>
+        The above can be useful when composing event listeners into your
+        controller.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.examples.controllers.accessing-routing-parameters">
+      <info><title>Accessing routing parameters</title></info>
+
+      <para>
+        The parameters returned when routing completes are wrapped in a
+        <classname>Zend\Mvc\Router\RouteMatch</classname> object. This object
+        is detailed in the section on routing.
+      </para>
+
+      <para>
+        Within your controller, if you implement
+        <classname>InjectApplicationEvent</classname> (as both
+        <classname>ActionController</classname> and
+        <classname>RestfulController</classname> do), you can access this
+        object from the attached <classname>MvcEvent</classname>:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$event   = $this->getEvent();
+$matches = $event->getRouteMatch();
+]]></programlisting>
+
+      <para>
+        Once you have the <classname>RouteMatch</classname> object, you can
+        pull parameters from it.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.examples.controllers.returning-early">
+      <info><title>Returning early</title></info>
+
+      <para>
+        You can effectively short-circuit execution of the application at
+        any point by returning a <classname>Response</classname> from your
+        controller or any event. When such a value is discovered, it halts
+        further execution of the event manager, bubbling up to the
+        <classname>Application</classname> instance, where it is immediately
+        returned.
+      </para>
+
+      <para>
+        As an example, the <classname>Redirect</classname> plugin returns a
+        <classname>Response</classname>, which can be returned immediately so
+        as to complete the request as quickly as possible. Other use cases
+        might be for returning JSON or XML results from web service
+        endpoints, returning "401 Forbidden" results, etc.
+      </para>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.examples.bootstrapping">
+    <info><title>Bootstrapping</title></info>
+
+    <section xml:id="registering-module-specific-listeners">
+      <info><title>Registering module-specific listeners</title></info>
+
+      <para>
+        Often you may want module-specific listeners. As an example, this
+        would be a simple and effective way to introduce authorization,
+        logging, or caching into your application.
+      </para>
+
+      <para>
+        Each <classname>Module</classname> class can have an optional
+        <methodname>init()</methodname> method. Typically, you'll setup
+        autoloading for your module here, but you can perform arbitrary tasks.
+      </para>
+
+      <para>
+        The base <classname>Bootstrap</classname> class shipped with the
+        framework has an <classname>EventManager</classname> associated with it,
+        and once the locator and router instances are initialized, it triggers a
+        "bootstrap" event, with "application" and "modules" parameters.
+      </para>
+
+      <para>
+        So, one way to accomplish module-specific listeners is to listen to that
+        event, and register listeners at that time. As an example:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+namespace SomeCustomModule;
+
+use Zend\EventManager\StaticEventManager;
+
+class Module
 {
-    protected $config;
-
-    public function __construct(Config $config)
+    public function init()
     {
-        $this->config = $config;
+        // setup autoloading, etc..
+
+        // Now, register listeners:
+        $events = StaticEventManager::getInstance();
+        $events->attach('bootstrap', 'bootstrap', array($this, 'registerListeners'));
     }
 
-    public function bootstrap(Application $app)
+    public function registerListeners($e)
     {
-        $this->setupLocator($app);
-        $this->setupRoutes($app);
-        $this->setupEvents($app);
-    }
+        $application = $e->getParam('application');
+        $modules     = $e->getParam('modules');
+        $config      = $modules->getMergedConfig();
+        $view        = $application->getLocator()->get('view');
+        $view->headTitle($config->view->base_title);
 
-    protected function setupLocator(Application $app)
-    {
-        /**
-            * Instantiate and configure a DependencyInjector instance, or 
-            * a ServiceLocator, and return it.
-            */
-    }
-
-    protected function setupRoutes(Application $app)
-    {
-        /**
-            * Pull the routing table from configuration, and pass it to the
-            * router composed in the Application instance.
-            */
-    }
-
-    protected function setupEvents(Application $app)
-    {
-        /**
-            * Wire events into the Application's EventManager, and/or setup
-            * static listeners for events that may be invoked.
-            */
+        $listeners   = new Listeners\ViewListener();
+        $listeners->setView($view);
+        $application->events()->attach($listeners);
     }
 }
 ]]></programlisting>
 
-        <para>
-            From here, the gateway script, <filename>public/index.php</filename> might look like
-            this:
-        </para>
-
-        <programlisting language="php"><![CDATA[
-// Assume autoloading is configured
-
-$env = getenv('APPLICATION_ENV');
-if (!$env) {
-    $env = 'production';
-}
-
-$config    = Zend\Config\Factory::factory(
-    __DIR__ . '/../configs/' . $env . '.config.xml'
-);
-$app       = new Zend\Mvc\Application();
-$bootstrap = new Bootstrap();
-$bootstrap->bootstrap($app);
-
-$response = $app->run();
-$response->send();
-]]></programlisting>
-    </example>
-
-    <example xml:id="zend.mvc.examples.controllers">
-        <info><title>Example 2: Controllers</title></info>
-
-        <para>
-            Controllers are simply classes that implement
-            <classname>Zend\Stdlib\Dispatchable</classname>. As such, it's up to the developer to
-            determine how they handle a request.
-        </para>
-
-        <para>
-            To hand off the request to the controller requires two wirings:
-        </para>
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    A route that, when matched, returns a controller name.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    A DI manager that composes a definition that includes that controller name, or
-                    composes configuration that aliases the controller name to a valid class in the
-                    composed DI definition.
-                </para>
-            </listitem>
-        </itemizedlist>
-
-        <para>
-            Let's assume we have a "Hello" controller:
-        </para>
-
-        <programlisting language="php"><![CDATA[
-namespace HelloWorld\Controller;
-
-use Zend\Http\Response as HttpResponse,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
-
-class HelloController implements Dispatchable
-{
-    public function dispatch(Request $request, Response $response = null)
-    {
-        if (null === $response) {
-            $response = new HttpResponse();
-        }
-        $response->setContent('<h1>Hello, world!</h1>');
-        return $response;
-    }
-}
-]]></programlisting>
-
-        <para>
-            Let's now create a route:
-        </para>
-
-        <programlisting language="php"><![CDATA[
-use Zend\Mvc\Router\Http\LiteralRoute;
-
-// Assume this is likely in some bootstrap
-$route = new LiteralRoute(array(
-    'route'    => '/hello',
-    'defaults' => array(
-        'controller' => 'controller.hello-world.hello',
-    ),
-));
-$app->getRouter()->addRoute('hello', $route);
-]]></programlisting>
-
-        <para>
-            Finally, our DI configuration needs to know about the controller.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-use Zend\Di\Configuration;
-
-$config = new Configuration(array(
-    'di' => array(
-        'instance' => array(
-            'alias' => array(
-                'controller.hello-world.hello' => 'HelloWorld\Controller\HelloController',
-            ),
-        ),
-    ),
-));
-$config->configure($di); // assuming we've created it previously
-]]></programlisting>
-
-        <para>
-            Once these are in place, when navigating to the url "/hello", we'll now execute our
-            controller's <methodname>dispatch()</methodname> method.
-        </para>
-
-        <para>
-            While this approach is portable and allows you to handle any request, we doubt you'll
-            want to write <methodname>dispatch()</methodname> logic for each and every controller
-            you write, much less each and every action. As such, this module also includes two base
-            controllers you can extend, the <classname>ActionController</classname> and the
-            <classname>RestfulController</classname>.
-        </para>
-
-        <section xml:id="zend.mvc.examples.controllers.action-controller">
-            <info><title>The ActionController</title></info>
-
-            <para>
-                <classname>Zend\Mvc\Controller\ActionController</classname> is very similar to
-                <classname>Zend_Controller_Action</classname> in the Zend Framework 1.X series. It
-                checks for a matched "action" token in the returned array from a router, and then
-                maps this to a corresponding "Action" method. As some examples:
-            </para>
-
-            <itemizedlist>
-                <listitem><para>Action "foo" maps to method "fooAction"</para></listitem>
-                <listitem><para>Action "foo-bar" maps to method "fooBarAction"</para></listitem>
-                <listitem><para>Action "bar.baz" maps to method "barBazAction"</para></listitem>
-                <listitem><para>Action "baz\_.bat" maps to method "bazBatAction"</para></listitem>
-            </itemizedlist>
-
-            <para>
-                As you can see, the simple rule is that "-", ".", and "\_" all become word
-                separators, and the individual words are camelCased and appended with the word
-                "Action".
-            </para>
-
-            <para>
-                The "action" token is something your route will discover. For instance given a
-                standard route of:
-            </para>
-
-            <literallayout>
-/:controller/:action
-            </literallayout>
-
-            <para>
-                and the invoked URL:
-            </para>
-
-            <literallayout>
-/foo/bar
-            </literallayout>
-
-            <para>
-                the assumption is that the controller name is "foo" and will map to a
-                <classname>Dispatchable</classname> class, and the action name is "bar". These
-                values are returned by the router as members of an instance of
-                <classname>Zend\Mvc\Router\RouteMatch</classname>. That class allows you to pull
-                such members using the method <methodparam>getParam()</methodparam>, which also
-                allows you to specify a default value to return if the parameter is not found.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-$action = $routeMatch->getParam('action', false);
-if (!$action) {
-    // No action found!
-    // ...
-}
-]]></programlisting>
-
-            <para>
-                Two special actions are defined by default, "index" and "not-found". The former is
-                used whenever an <classname>ActionControlle</classname>r is invoked without an
-                "action" parameter in the route match. The latter is invoked if the discovered
-                action does not map to an existing method in the controller. 
-            </para>
-
-            <para>
-                Normal development using an <classname>ActionController</classname> is very
-                straight-forward: you identify needed functionality, and simply create an action
-                method for that endpoint. As an example, let's return to the "/foo/bar" URL from
-                earlier:
-            </para>
-
-            <programlisting language="php"><![CDATA[
-namespace SomeModule\Controller;
-
-use Zend\Mvc\Controller\ActionController;
-
-class FooController extends ActionController
-{
-    public function barAction()
-    {
-        // do some stuff
-    }
-}
-]]></programlisting>
-
-            <para>
-                It is up to you as a developer what you will return from an action method. We
-                suggest returning either an associative array, or a value object of some kind.  This
-                can then easily be passed to some sort of renderer during the execution chain in
-                order to generate a response payload.
-            </para>
-
-            <para>
-                Alternately, you could return a response object from your method. This allows you to
-                essentially return as early as possible from execution.
-            </para>
-        </section>
-
-        <section xml:id="zend.mvc.examples.controllers.restful-controller">
-            <info><title>RestfulController</title></info>
-
-            <para>
-                <classname>Zend\Mvc\Controller\RestfulController</classname> is a somewhat naive
-                interpretation of the REST paradigm. It operates primarily as a CRUD
-                (Create-Read-Update-Delete)-style controller, but uses HTTP verbs in order to
-                determine what to do.
-            </para>
-
-            <itemizedlist>
-                <listitem>
-                    <para>GET can return either a list of resources, or a single resource.</para>
-
-                    <itemizedlist>
-                        <listitem>
-                            <para>
-                                With no identifier provided, a list of resources is returned.
-                            </para>
-                        </listitem>
-
-                        <listitem>
-                            <para>
-                                With an identifier provided -- perhaps by the query string,
-                                potentially via routing -- a single resource is returned.
-                            </para>
-                        </listitem>
-                    </itemizedlist>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        POST creates a new resource. Ideally, you will return it, as well as a
-                        Location header indicating the new URI to the resource, and a 201 HTTP
-                        response code.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        PUT requires an identifier, and uses the data provided to update the
-                        specified resource, assuming it exists.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        DELETE requires an identifier, and should delete the given resource;
-                        typically, a 204 response code should be returned.
-                    </para>
-                </listitem>
-            </itemizedlist>
-
-            <para>
-                Additionally, you can define "action" methods like you would with a standard
-                <classname>ActionController</classname>. If an "action" token is found in the route
-                match, it will look for a matching action method and execute it, or a "not-found"
-                action if no match exists.
-            </para>
-        </section>
-    </example>
+      <para>
+        The above demonstrates several things. First, it shows registering a
+        callback on the bootstrap's "bootstrap" event (within the
+        <methodname>init()</methodname> method). Second, it demonstrates that 
+        listener, and how it can be used to register listeners with the
+        application. It grabs the <classname>Application</classname> instance,
+        as well as the module manager instance. From the
+        <classname>Application</classname>, it is able to grab the attached 
+        locator, and from the <classname>Managar</classname>, it grabs
+        configuration. These are then used to retrieve the view, configure some
+        helpers, and then register a listener aggregate with the application
+        event manager.
+      </para>
+    </section>
+  </section>
 </section>

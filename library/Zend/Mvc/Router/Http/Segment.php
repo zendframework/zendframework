@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -25,21 +25,21 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Config\Config,
+    Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route;
+    Zend\Mvc\Router\Route as BaseRoute;
 
 /**
  * Segment route.
  *
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Segment implements Route
+class Segment implements BaseRoute
 {
     /**
      * Parts of the route.
@@ -63,35 +63,51 @@ class Segment implements Route
     protected $defaults;
 
     /**
-     * __construct(): defined by Route interface.
-     *
-     * @see    Route::__construct()
-     * @param  mixed $options
+     * Create a new regex route.
+     * 
+     * @param  string $route
+     * @param  array  $constraints 
+     * @param  array  $defaults 
      * @return void
      */
-    public function __construct($options = null)
+    public function __construct($route, array $constraints = array(), array $defaults = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
+        $this->defaults = $defaults;
+        $this->parts    = $this->parseRouteDefinition($route);
+        $this->regex    = $this->buildRegex($this->parts, $constraints) . '(?:/|$)?';
+    }
+    
+    /**
+     * factory(): defined by Route interface.
+     *
+     * @see    Route::factory()
+     * @param  array|Traversable $options
+     * @return void
+     */
+    public static function factory($options = array())
+    {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
         }
 
-        if (!isset($options['route']) || !is_string($options['route'])) {
-            throw new Exception\InvalidArgumentException('Route not defined nor not a string');
+        if (!isset($options['route'])) {
+            throw new Exception\InvalidArgumentException('Missing "route" in options array');
+        }
+
+        if (!isset($options['constraints'])) {
+            $options['constraints'] = array();
         }
         
-        if (!isset($options['defaults']) || !is_array($options['defaults'])) {
-            throw new Exception\InvalidArgumentException('Defaults not defined nor not an array');
+        if (!isset($options['defaults'])) {
+            $options['defaults'] = array();
         }
 
-        $this->defaults = $options['defaults'];        
-        $this->parts    = $this->parseRouteDefinition($options['route']);
-        $this->regex    = $this->buildRegex($this->parts);
+        return new static($options['route'], $options['constraints'], $options['defaults']);
     }
     
     /**
@@ -125,11 +141,11 @@ class Segment implements Route
                     
                     $levelParts[$level][] = array('translated-parameter', $matches['name']);
                 } else {
-                    if (!preg_match('(\G(?<name>[^:/\[\]]+):?)', $def, $matches, 0, $currentPos)) {
+                    if (!preg_match('(\G(?<name>[^:/{\[\]]+)(?:{(?<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
                         throw new Exception\RuntimeException('Found empty parameter name');
                     }
                     
-                    $levelParts[$level][] = array('parameter', $matches['name']);                                    
+                    $levelParts[$level][] = array('parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null);
                 }
                 
                 $currentPos += strlen($matches[0]);
@@ -169,26 +185,39 @@ class Segment implements Route
      * Build the matching regex from parsed parts.
      * 
      * @param  array $parts
+     * @param  array $constraints
      * @return string
      */
-    protected function buildRegex(array $parts)
+    protected function buildRegex(array $parts, array $constraints)
     {
         $regex = '';
         
         foreach ($parts as $part) {
             switch ($part[0]) {
                 case 'literal':
-                case 'translated-literal':
                     $regex .= preg_quote($part[1]);
                     break;
-                
+                               
                 case 'parameter':
-                case 'translated-parameter':
-                    $regex .= '(?<' . $part[1] . '>.+?)';
+                    if (isset($constraints[$part[1]])) {
+                        $regex .= '(?<' . $part[1] . '>' . $constraints[$part[1]] . ')';
+                    } elseif ($part[2] === null) {
+                        $regex .= '(?<' . $part[1] . '>[^/]+)';
+                    } else {
+                        $regex .= '(?<' . $part[1] . '>[^' . $part[2] . ']+)';
+                    }
                     break;
                 
                 case 'optional':
-                    $regex .= '(?:' . $this->buildRegex($part[1]) . ')?';
+                    $regex .= '(?:' . $this->buildRegex($part[1], $constraints) . ')?';
+                    break;
+                
+                case 'translated-literal':
+                    throw new Exception\RuntimeException('Translated literals are not implemented yet');
+                    break;
+                
+                case 'translated-parameter':
+                    throw new Exception\RuntimeException('Translated parameters are not implemented yet');
                     break;
             }
         }
@@ -247,9 +276,9 @@ class Segment implements Route
         $path = $uri->getPath();
         
         if ($pathOffset !== null) {
-            $result = preg_match('#\G' . $this->regex . '#i', $path, $matches, null, $pathOffset);
+            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
         } else {
-            $result = preg_match('#^' . $this->regex . '$#i', $path, $matches);
+            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
         }
        
         if (!$result) {
@@ -264,8 +293,7 @@ class Segment implements Route
             }
         }
 
-        $matches = array_merge($this->defaults, $matches);
-        return new RouteMatch($matches, $this, $matchedLength);
+        return new RouteMatch(array_merge($this->defaults, $matches), $matchedLength);
     }
 
     /**
@@ -276,7 +304,7 @@ class Segment implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
         $path = $this->buildPath($this->parts, array_merge($this->defaults, $params));
         

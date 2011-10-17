@@ -28,9 +28,9 @@ if (empty($output)) {
 }
 
 $command = 'xsltproc --xinclude ' . $tempDir . '/phd/db4-upgrade.xsl '
-    . $topDir . '/documentation/manual/en/manual2.xml.in > '
-    . $tempDir . '/manual2.full.xml | tee -a '
-    . $tempDir . '/manual2-err.txt';
+    . $topDir . '/documentation/manual/en/manual.xml.in > '
+    . $tempDir . '/manual.full.xml | tee -a '
+    . $tempDir . '/manual-err.txt';
 colorPrint('Running: ' . $command, 'green');
 nl();
 system($command);
@@ -38,7 +38,7 @@ nl();
 
 
 $command = $tempDir . '/phd/pear/phd -g \'phpdotnet\phd\Highlighter_GeSHi\' --xinclude -f zfpackage -d '
-    . $tempDir . '/manual2.full.xml -o ' . $tempDir . '/manual-html';
+    . $tempDir . '/manual.full.xml -o ' . $tempDir . '/manual-html';
 colorPrint('Running: ' . $command, 'green');
 nl();
 system($command);

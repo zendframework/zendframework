@@ -263,12 +263,17 @@ class TokenArrayScanner implements Scanner
                 $tokenLine    = false;
                 return false;
             }
+            if (is_string($tokens[$tokenIndex]) && $tokens[$tokenIndex] === '"') {
+                do {
+                    $tokenIndex++;
+                } while (!(is_string($tokens[$tokenIndex]) && $tokens[$tokenIndex] === '"'));
+            }
             $token = $tokens[$tokenIndex];
-            if (is_string($token)) {
+            if (is_array($token)) {
+                list($tokenType, $tokenContent, $tokenLine) = $token;
+            } else {
                 $tokenType = null;
                 $tokenContent = $token;
-            } else {
-                list($tokenType, $tokenContent, $tokenLine) = $token;
             }
             return $tokenIndex;
         };
@@ -502,13 +507,10 @@ class TokenArrayScanner implements Scanner
 
                     SCANNER_CLASS_TOP:
 
-                        if ($tokenType === null && $tokenContent == '}' && $classBraceCount == 1) {
-                            goto SCANNER_CLASS_END;
-                        }
-
                         // process the name
-                        if (($tokenType === T_CLASS || $tokenType === T_INTERFACE) && $infos[$infoIndex]['type'] === 'class'
-                            || ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function')
+                        if ($infos[$infoIndex]['shortName'] == ''
+                            && (($tokenType === T_CLASS || $tokenType === T_INTERFACE)&& $infos[$infoIndex]['type'] === 'class'
+                                || ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function'))
                         ) {
                             $infos[$infoIndex]['shortName'] = $tokens[$tokenIndex+2][1];
                             $infos[$infoIndex]['name'] = (($namespace != '-GLOBAL-') ? $namespace . '\\' : '') . $infos[$infoIndex]['shortName'];
@@ -520,8 +522,16 @@ class TokenArrayScanner implements Scanner
                             }
                             if ($tokenContent == '}') {
                                 $classBraceCount--;
+                                if ($classBraceCount === 0) {
+                                    goto SCANNER_CLASS_END;
+                                }
                             }
                         }
+
+//                        if ($tokenType === null && $tokenContent == '}' && $classBraceCount == 1) {
+//                            echo 'BREAKING OUT of ' . $infos[$infoIndex]['name'] . ' on ' . $tokenIndex . PHP_EOL;
+//                            goto SCANNER_CLASS_END;
+//                        }
 
                     SCANNER_CLASS_CONTINUE:
 

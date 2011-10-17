@@ -170,7 +170,7 @@ $bugs = new Bugs();
 $rowset = $bugs->fetchAll();
 
 // retrieve the 9th element immediately:
-$row9->getRow(8);
+$row9 = $rowset->getRow(8);
 
 // and use it:
 $row9->assigned_to = 'mmouse';

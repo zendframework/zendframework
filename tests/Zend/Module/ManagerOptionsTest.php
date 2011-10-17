@@ -12,32 +12,40 @@ class ManagerOptionsTest extends TestCase
     public function testCanConfigureWithArrayInConstructor()
     {
         $options = new ManagerOptions(array(
-            'cache_dir' => __DIR__,
-            'cache_config' => true,
+            'cache_dir'           => __DIR__,
+            'enable_config_cache' => true,
+            'manifest_dir'        => __DIR__,
         ));
         $this->assertSame($options->getCacheDir(), __DIR__);
-        $this->assertTrue($options->getCacheConfig());
+        $this->assertTrue($options->getEnableConfigCache());
         $this->assertNotNull(strstr($options->getCacheFilePath(), __DIR__));
         $this->assertNotNull(strstr($options->getCacheFilePath(), '.php'));
+        $this->assertSame($options->getManifestDir(), __DIR__);
     }
 
     public function testCanAccessKeysAsProperties()
     {
         $options = new ManagerOptions(array(
-            'cache_dir' => __DIR__,
-            'cache_config' => true,
+            'cache_dir'           => __DIR__,
+            'enable_config_cache' => true,
+            'manifest_dir'        => __DIR__,
         ));
         $this->assertSame($options->cache_dir, __DIR__);
-        $this->assertTrue($options->cache_config);
         $options->cache_dir = 'foo';
         $this->assertSame($options->cache_dir, 'foo');
-        $options->cache_config = false;
-        $this->assertFalse($options->cache_config);
         $this->assertTrue(isset($options->cache_dir));
         unset($options->cache_dir);
         $this->assertFalse(isset($options->cache_dir));
-        $this->setExpectedException('InvalidArgumentException');
-        unset($options->cache_config);
+
+        $this->assertTrue($options->enable_config_cache);
+        $options->enable_config_cache = false;
+        $this->assertFalse($options->enable_config_cache);
+
+        $this->assertSame($options->manifest_dir, __DIR__);
+        $options->manifest_dir = 'foo';
+        $this->assertSame($options->manifest_dir, 'foo');
+        unset($options->manifest_dir);
+        $this->assertFalse(isset($options->manifest_dir));
     }
 
     public function testContructorThrowsInvalidArgumentException()

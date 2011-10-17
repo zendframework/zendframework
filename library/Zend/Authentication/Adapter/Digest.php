@@ -206,7 +206,7 @@ class Digest implements AuthenticationAdapter
 
         while ($line = trim(fgets($fileHandle))) {
             if (substr($line, 0, $idLength) === $id) {
-                if (substr($line, -32) === md5("$this->_username:$this->_realm:$this->_password")) {
+                if ($this->_secureStringCompare(substr($line, -32), md5("$this->_username:$this->_realm:$this->_password"))) {
                     $result['code'] = AuthenticationResult::SUCCESS;
                 } else {
                     $result['code'] = AuthenticationResult::FAILURE_CREDENTIAL_INVALID;
@@ -219,5 +219,27 @@ class Digest implements AuthenticationAdapter
         $result['code'] = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
         $result['messages'][] = "Username '$this->_username' and realm '$this->_realm' combination not found";
         return new AuthenticationResult($result['code'], $result['identity'], $result['messages']);
+    }
+
+    /**
+     * Securely compare two strings for equality while avoided C level memcmp()
+     * optimisations capable of leaking timing information useful to an attacker
+     * attempting to iteratively guess the unknown string (e.g. password) being
+     * compared against.
+     *
+     * @param string $a
+     * @param string $b
+     * @return bool
+     */
+    protected function _secureStringCompare($a, $b)
+    {
+        if (strlen($a) !== strlen($b)) {
+            return false;
+        }
+        $result = 0;
+        for ($i = 0; $i < strlen($a); $i++) {
+            $result |= ord($a[$i]) ^ ord($b[$i]);
+        }
+        return $result == 0;
     }
 }

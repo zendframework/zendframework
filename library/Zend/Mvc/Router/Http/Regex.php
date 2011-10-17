@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -25,7 +25,7 @@
 namespace Zend\Mvc\Router\Http;
 
 use Traversable,
-    Zend\Config\Config,
+    Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\Route;
@@ -33,8 +33,8 @@ use Traversable,
 /**
  * Regex route.
  *
- * @package    Zend_Router
- * @subpackage Route
+ * @package    Zend_Mvc_Router
+ * @subpackage Http
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
@@ -42,61 +42,74 @@ use Traversable,
 class Regex implements Route
 {
     /**
-     * Regex to match
+     * Regex to match.
      * 
      * @var string
      */
     protected $regex;
 
     /**
-     * Default values
+     * Default values.
      *
      * @var array
      */
     protected $defaults;
 
     /**
-     * Matches
-     * 
-     * @var array
-     */
-    protected $matches = array();
-
-    /**
-     * Specification for URL assembly
+     * Specification for URL assembly.
      *
      * Parameters accepting subsitutions should be denoted as "%key%"
      * 
      * @var string
      */
     protected $spec;
-
+    
     /**
-     * __construct(): defined by Route interface.
-     *
-     * @see    Route::__construct()
-     * @param  mixed $options
+     * Create a new regex route.
+     * 
+     * @param  string $regex
+     * @param  string $spec
+     * @param  array  $defaults 
      * @return void
      */
-    public function __construct($options = null)
+    public function __construct($regex, $spec, array $defaults = array())
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif ($options instanceof Traversable) {
-            $options = iterator_to_array($options);
+        $this->regex    = $regex;
+        $this->spec     = $spec;
+        $this->defaults = $defaults;
+    }
+    
+    /**
+     * factory(): defined by Route interface.
+     *
+     * @see    Route::factory()
+     * @param  array|Traversable $options
+     * @return void
+     */
+    public static function factory($options = array())
+    {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
-        if (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Options must either be an array or a Traversable object');
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
         }
 
-        if (!isset($options['regex']) || !is_string($options['regex'])) {
-            throw new Exception\InvalidArgumentException('Regex not defined nor not a string');
+        if (!isset($options['regex'])) {
+            throw new Exception\InvalidArgumentException('Missing "regex" in options array');
         }
         
-        $this->regex    = $options['regex'];
-        $this->defaults = isset($options['defaults']) ? $options['defaults'] : array();
-        $this->spec     = isset($options['spec']) ? $options['spec'] : "%s";
+        if (!isset($options['spec'])) {
+            throw new Exception\InvalidArgumentException('Missing "spec" in options array');
+        }
+
+        if (!isset($options['defaults'])) {
+            $options['defaults'] = array();
+        }
+
+        return new static($options['regex'], $options['spec'], $options['defaults']);
     }
 
     /**
@@ -116,26 +129,24 @@ class Regex implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('#\G' . $this->regex . '#i', $path, $match, null, $pathOffset);
+            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
         } else {
-            $result = preg_match('#^' . $this->regex . '$#i', $path, $match);
+            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
         }
 
         if (!$result) {
             return null;
         }
         
-        $matchedLength = strlen($match[0]);
+        $matchedLength = strlen($matches[0]);
 
-        foreach ($match as $key => $value) {
+        foreach ($matches as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
-                unset($match[$key]);
+                unset($matches[$key]);
             }
         }
 
-        $matches       = array_merge($this->defaults, $match);
-        $this->matches = $matches;
-        return new RouteMatch($matches, $this, $matchedLength);
+        return new RouteMatch(array_merge($this->defaults, $matches), $matchedLength);
     }
 
     /**
@@ -146,18 +157,19 @@ class Regex implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = null, array $options = null)
+    public function assemble(array $params = array(), array $options = array())
     {
-        $params  = (array) $params;
-        $values  = array_merge($this->matches, $params);
-
-        $url = $this->spec;
-        foreach ($values as $key => $value) {
+        $url    = $this->spec;
+        $params = array_merge($this->defaults, $params);
+        
+        foreach ($params as $key => $value) {
             $spec = '%' . $key . '%';
-            if (strstr($url, $spec)) {
+            
+            if (strstr($url, $spec) !== false) {
                 $url = str_replace($spec, urlencode($value), $url);
             }
         }
+        
         return $url;
     }
 }

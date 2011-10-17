@@ -27,8 +27,8 @@ namespace Zend\Code\Generator;
 use Zend\Code\Reflection\DocBlockReflection;
 
 /**
- * @uses       \Zend\Code\Generator\AbstractPhp
- * @uses       \Zend\Code\Generator\PhpDocblockTag
+ * @uses       \Zend\Code\Generator\AbstractGenerator
+ * @uses       \Zend\Code\Generator\Docblock\Tag
  * @uses       \Zend\Code\Generator\Exception
  * @category   Zend
  * @package    Zend_CodeGenerator
@@ -156,7 +156,7 @@ class DocblockGenerator extends AbstractGenerator
     /**
      * setTag()
      *
-     * @param array|\Zend\Code\Generator\PhpDocblockTag $tag
+     * @param array|\Zend\Code\Generator\Docblock\Tag $tag
      * @return \Zend\Code\GeneratorDocblock
      */
     public function setTag($tag)
@@ -166,7 +166,7 @@ class DocblockGenerator extends AbstractGenerator
         } elseif (!$tag instanceof Docblock\Tag) {
             throw new Exception\InvalidArgumentException(
                 'setTag() expects either an array of method options or an '
-                . 'instance of Zend_CodeGenerator_Php_Docblock_Tag'
+                . 'instance of Zend\\Code\\Generator\\Docblock\\Tag'
                 );
         }
 

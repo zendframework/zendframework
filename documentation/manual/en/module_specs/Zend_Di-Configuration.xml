@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.di.configuration">
+    <info><title>Zend\Di Configuration</title></info>
+
+    <para>
+        Most of the configuration for both the setup of
+        Definitions as well as the setup of the Instance Manager
+        can be attained by a configuration file.  This file will
+        produce an array (typically) and have a particular
+        iterable structure.
+    </para>
+
+    <para>
+        The top two keys are 'definition' and 'instance', each
+        specifying values for respectively, definition setup and
+        instance manager setup.
+    </para>
+
+    <para>
+        The definition section expects the following information
+        expressed as a PHP array:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$config = array(
+    'definition' => array(
+        'compiler' => array(/* @todo compiler information */),
+        'runtime'  => array(/* @todo runtime information */),
+        'class' => array(
+            'instantiator' => '', // the name of the instantiator, by default this is __construct
+            'supertypes    => array(), // an array of supertypes the class implements
+            'methods'      => array(
+                'setSomeParameter' => array( // a method name
+                    'parameterName' => array(
+                        'name',       // string parameter name
+                        'type',       // type or null
+                        'is-required' // bool
+                    )
+                )
+
+            )
+        )
+    )
+);
+]]></programlisting>
+
+</section>

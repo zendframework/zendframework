@@ -45,8 +45,12 @@ class Configuration
     {
         foreach ($definition as $definitionType => $definitionData) {
             switch ($definitionType) {
+                case 'compiler':
+                    // @todo
+                case 'runtime':
+                    // @todo
                 case 'class':
-                    foreach ($definitionData as $className => $classDefinitionData) {
+                    foreach ($definitionData as $className => $classData) {
                         $classDefinitions = $di->definitions()->getDefinitionsByType('Zend\Di\Definition\ClassDefinition');
                         foreach ($classDefinitions as $classDefinition) {
                             if (!$classDefinition->hasClass($className)) {
@@ -55,9 +59,9 @@ class Configuration
                         }
                         if (!isset($classDefinition)) {
                             $classDefinition = new Definition\ClassDefinition($className);
-                            $di->definitions()->addDefinition($classDefinition);
+                            $di->definitions()->addDefinition($classDefinition, false);
                         }
-                        foreach ($classDefinitionData as $classDefKey => $classDefData) {
+                        foreach ($classData as $classDefKey => $classDefData) {
                             switch ($classDefKey) {
                                 case 'instantiator':
                                     $classDefinition->setInstantiator($classDefData);
@@ -89,11 +93,6 @@ class Configuration
                             }
                         }
                     }
-                    break;
-                case 'compiler':
-                    // @todo
-                case 'runtime':
-                    // @todo
             }
 
         }
@@ -141,5 +140,6 @@ class Configuration
         }
 
     }
+
     
 }

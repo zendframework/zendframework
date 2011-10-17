@@ -61,7 +61,7 @@ class MethodGenerator extends AbstractMemberGenerator
     /**
      * fromReflection()
      *
-     * @param \Zend\Reflection\ReflectionMethod $reflectionMethod
+     * @param \Zend\Code\Reflection\MethodReflection $reflectionMethod
      * @return \MethodGenerator\Code\Generator\PhpMethod
      */
     public static function fromReflection(MethodReflection $reflectionMethod)

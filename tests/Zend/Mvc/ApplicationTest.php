@@ -109,7 +109,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/path',
             'defaults' => array(
                 'controller' => 'path',
@@ -131,7 +131,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/path',
             'defaults' => array(
                 'controller' => 'path',
@@ -159,7 +159,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/sample',
             'defaults' => array(
                 'controller' => 'sample',
@@ -187,7 +187,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/bad',
             'defaults' => array(
                 'controller' => 'bad',
@@ -222,6 +222,19 @@ class ApplicationTest extends TestCase
         $app->run();
         $this->assertArrayHasKey('route-match', $log);
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $log['route-match']);
+    }
+
+    public function testAllowsReturningEarlyFromRouting()
+    {
+        $app = $this->setupPathController();
+        $response = new Response();
+
+        $app->events()->attach('route', function($e) use ($response) {
+            return $response;
+        });
+
+        $result = $app->run();
+        $this->assertSame($response, $result->getResponse());
     }
 
     public function testControllerIsDispatchedDuringRun()
@@ -380,7 +393,7 @@ class ApplicationTest extends TestCase
         $request->setUri($uri);
         $app->setRequest($request);
 
-        $route = new Router\Http\Literal(array(
+        $route = Router\Http\Literal::factory(array(
             'route'    => '/locator-aware',
             'defaults' => array(
                 'controller' => 'locator-aware',
@@ -531,5 +544,23 @@ class ApplicationTest extends TestCase
 
         $app->run();
         $this->assertContains('404', $response->getContent());
+    }
+
+    /**
+     * @group error-handling
+     */
+    public function testLocatorExceptionShouldTriggerDispatchError()
+    {
+        $app     = $this->setupPathController();
+        $locator = new TestAsset\Locator();
+        $app->setLocator($locator);
+
+        $response = new Response();
+        $app->events()->attach('dispatch.error', function($e) use ($response) {
+            return $response;
+        });
+
+        $result = $app->run();
+        $this->assertSame($response, $result->getResponse());
     }
 }

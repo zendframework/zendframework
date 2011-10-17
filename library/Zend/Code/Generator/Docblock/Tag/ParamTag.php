@@ -25,13 +25,13 @@
 namespace Zend\Code\Generator\Docblock\Tag;
 
 /**
- * @uses       \Zend\Code\Generator\PhpDocblockTag
+ * @uses       \Zend\Code\Generator\Docblock\Tag
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ParamTag extends \Zend\Code\Generator\PhpDocblockTag
+class ParamTag extends \Zend\Code\Generator\Docblock\Tag
 {
 
     /**
@@ -47,10 +47,10 @@ class ParamTag extends \Zend\Code\Generator\PhpDocblockTag
     /**
      * fromReflection()
      *
-     * @param \Zend\Reflection\ReflectionDocblockTag $reflectionTagParam
+     * @param \Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagParam
      * @return \Zend\Code\Generator\Docblock\Tag\ParamTag
      */
-    public static function fromReflection(\Zend\Reflection\ReflectionDocblockTag $reflectionTagParam)
+    public static function fromReflection(\Zend\Code\Reflection\ReflectionDocblockTag $reflectionTagParam)
     {
         $paramTag = new self();
 
@@ -116,7 +116,7 @@ class ParamTag extends \Zend\Code\Generator\PhpDocblockTag
         $output = '@param '
             . (($this->_datatype  != null) ? $this->_datatype : 'unknown')
             . (($this->_paramName != null) ? ' $' . $this->_paramName : '')
-            . (($this->_description != null) ? ' ' . $this->_description : '');
+            . (($this->description != null) ? ' ' . $this->description : '');
         return $output;
     }
 

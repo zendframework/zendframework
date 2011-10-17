@@ -16,7 +16,29 @@ class ManagerOptions
      * @var string
      */
     protected $cacheDir = NULL;
- 
+
+    /**
+     * @var string
+     */
+    protected $manifestDir = NULL;
+
+    /**
+     * @var bool
+     */
+    protected $enableDependencycheck = false;
+
+    /**
+     * @var bool
+     */
+    protected $enableAutoInstallation = false;
+    
+    /**
+     * array of modules that have been whitelisted to allow auto installation
+     * 
+     * @var array
+     */
+    protected $autoInstallWhiteList = array();
+
     /**
      * Check if the config cache is enabled
      *
@@ -28,9 +50,9 @@ class ManagerOptions
     }
  
     /**
-     * Set configCacheEnabled.
+     * Set if the config cache should be enabled or not
      *
-     * @param bool $enabled the value to be set
+     * @param bool $enabled
      * @return ManagerConfig
      */
     public function setEnableConfigCache($enabled)
@@ -40,7 +62,7 @@ class ManagerOptions
     }
 
     /**
-     * Get cacheDir.
+     * Get the path where cache file(s) are stored
      *
      * @return string
      */
@@ -50,7 +72,7 @@ class ManagerOptions
     }
  
     /**
-     * Set cacheDir.
+     * Set the path where cache files can be stored
      *
      * @param string $cacheDir the value to be set
      * @return ManagerConfig
@@ -60,13 +82,39 @@ class ManagerOptions
         if (null === $cacheDir) {
             $this->cacheDir = $cacheDir;
         } else {
-            $this->cacheDir = rtrim(rtrim($cacheDir, '/'), '\\');
+            $this->cacheDir = static::normalizePath($cacheDir);
         }
         return $this;
     }
 
     /**
-     * getCacheFilePath 
+     * Get manifestDir.
+     *
+     * @return string
+     */
+    public function getManifestDir()
+    {
+        return $this->manifestDir;
+    }
+ 
+    /**
+     * Set manifestDir.
+     *
+     * @param string $manifestDir the value to be set
+     * @return ManagerConfig
+     */
+    public function setManifestDir($manifestDir)
+    {
+        if (null === $manifestDir) {
+            $this->manifestDir = $manifestDir;
+        } else {
+            $this->manifestDir = static::normalizePath($manifestDir);
+        }
+        return $this;
+    }
+
+    /**
+     * Get the path to the config cache 
      * 
      * Should this be an option, or should the dir option include the 
      * filename, or should it simply remain hard-coded? Thoughts?
@@ -78,9 +126,90 @@ class ManagerOptions
         return $this->getCacheDir() . '/module-config-cache.'.$this->getApplicationEnv().'.php';
     }
 
+    /**
+     * Check if dependency checking is enabled
+     * 
+     * @return bool
+     */
+    public function getEnableDependencyCheck()
+    {
+        return $this->enableDependencycheck;
+    }
+
+    /**
+     * Set if dependency checking is enabled
+     * 
+     * @param bool $enabled
+     * @return Manager
+     */
+    public function setEnableDependencyCheck($enabled)
+    {
+        $this->enableDependencycheck = (bool) $enabled;
+        return $this;
+    }
+    
+    /**
+     * Check if auto installation is enabled
+     * 
+     * @return bool
+     */
+    public function getEnableAutoInstallation()
+    {
+        return $this->enableAutoInstallation;
+    }
+
+    /**
+     * Set if auto installation is enabled application-wide. If this is 
+     * disabled, no auto install/upgrades will be ran; even if the modules are 
+     * in the whitelist.
+     * 
+     * @param bool $enabled
+     * @return Manager
+     */
+    public function setEnableAutoInstallation($enabled)
+    {
+        $this->enableAutoInstallation = (bool) $enabled;
+        return $this;
+    }
+    
+    /**
+     * Get the array of modules enabled for auto install or upgrade
+     * 
+     * @return array
+     */
+    public function getAutoInstallWhitelist()
+    {
+        return $this->autoInstallWhitelist;
+    }
+
+    /**
+     * Set auto installation whitelist
+     * 
+     * @param array $list An array of module names which to allow auto install or upgrade
+     * @return Manager
+     */
+    public function setAutoInstallWhitelist($list)
+    {
+        $this->autoInstallWhitelist = $list;
+        return $this;
+    }
+    
     public function getApplicationEnv()
     {
         return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;
+    }
+
+    /**
+     * Normalize a path for insertion in the stack
+     * 
+     * @param  string $path 
+     * @return string
+     */
+    public static function normalizePath($path)
+    {
+        $path = rtrim($path, '/');
+        $path = rtrim($path, '\\');
+        return $path;
     }
 
     /**
@@ -162,14 +291,6 @@ class ManagerOptions
     public function __unset($key)
     {
         $setter = $this->assembleSetterNameFromConfigKey($key);
-        try {
-            $this->{$setter}(null);
-        } catch(\InvalidArgumentException $e) {
-            throw new \InvalidArgumentException(
-                'The class property $' . $key . ' cannot be unset as'
-                . ' NULL is an invalid value for it: ' . $e->getMessage()
-            );
-        }
+        $this->{$setter}(null);
     }
- 
 }

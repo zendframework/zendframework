@@ -27,7 +27,7 @@ use Zend\View\Renderer,
     Zend\View\Exception;
 
 /**
- * Exception for Zend_View class.
+ * Runtime exception
  *
  * @uses       \RuntimeException
  * @category   Zend

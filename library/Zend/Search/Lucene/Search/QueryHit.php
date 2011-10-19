@@ -73,7 +73,18 @@ class QueryHit
     {
         $this->_index = $index;
     }
-
+    
+    /**
+     * Magic method for checking the existence of a field
+     *
+     * @param string $offset
+     * @return boolean TRUE if the field exists else FALSE
+     */
+    public function __isset($offset)
+    {
+        return isset($this->getDocument()->$offset);
+    }
+    
 
     /**
      * Convenience function for getting fields from the document

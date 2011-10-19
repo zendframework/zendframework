@@ -19,12 +19,12 @@ class Redirect extends AbstractPlugin
 
     /**
      * Generates a URL based on a route
-     * 
+     *
      * @param  string $route Route name
      * @param  array $params Parameters to use in url generation, if any
      * @param  array $options Route-specific options to use in url generation, if any
      * @return Response
-     * @throws Exception\DomainException if composed controller does not implement InjectApplicationEvent, or 
+     * @throws Exception\DomainException if composed controller does not implement InjectApplicationEvent, or
      *         router cannot be found in controller event
      */
     public function toRoute($route, array $params = array(), array $options = array())
@@ -41,8 +41,8 @@ class Redirect extends AbstractPlugin
 
     /**
      * Redirect to the given URL
-     * 
-     * @param  string $url 
+     *
+     * @param  string $url
      * @return Response
      */
     public function toUrl($url)
@@ -55,7 +55,7 @@ class Redirect extends AbstractPlugin
 
     /**
      * Get the router
-     * 
+     *
      * @return RouteStack
      * @throws Exception\DomainException if unable to find router
      */
@@ -76,7 +76,7 @@ class Redirect extends AbstractPlugin
 
     /**
      * Get the response
-     * 
+     *
      * @return Response
      * @throws Exception\DomainException if unable to find response
      */
@@ -97,7 +97,7 @@ class Redirect extends AbstractPlugin
 
     /**
      * Get the event
-     * 
+     *
      * @return MvcEvent
      * @throws Exception\DomainException if unable to find event
      */

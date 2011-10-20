@@ -154,18 +154,22 @@ class Hostname implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = array(), array $options = array())
+    public function assemble(array &$params = array(), array $options = array())
     {
+        $mergedParams = array_merge($this->defaults, $params);
+        
         if (isset($options['uri'])) {
             $parts = array();
             
             foreach ($this->route as $index => $routePart) {
                 if (preg_match('(^:(?<name>.+)$)', $routePart, $matches)) {
-                    if (!isset($params[$matches['name']])) {
+                    if (!isset($mergedParams[$matches['name']])) {
                         throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $matches['name']));
                     }
                     
-                    $parts[] = $params[$matches['name']];
+                    $parts[] = $mergedParams[$matches['name']];
+                    
+                    unset($params[$matches['name']]);
                 } else {
                     $parts[] = $routePart;
                 }

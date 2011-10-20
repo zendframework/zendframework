@@ -159,16 +159,18 @@ class Regex implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = array(), array $options = array())
+    public function assemble(array &$params = array(), array $options = array())
     {
-        $url    = $this->spec;
-        $params = array_merge($this->defaults, $params);
+        $url          = $this->spec;
+        $mergedParams = array_merge($this->defaults, $params);
         
-        foreach ($params as $key => $value) {
+        foreach ($mergedParams as $key => $value) {
             $spec = '%' . $key . '%';
             
             if (strpos($url, $spec) !== false) {
                 $url = str_replace($spec, urlencode($value), $url);
+                
+                unset($params[$key]);
             }
         }
         

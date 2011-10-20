@@ -228,9 +228,12 @@ class Segment implements BaseRoute
     /**
      * Build a path.
      * 
+     * @param  array $parts
+     * @param  array $mergedParams
+     * @param  array $params
      * @return string
      */
-    protected function buildPath(array $parts, array $params)
+    protected function buildPath(array $parts, array $mergedParams, array &$params)
     {
         $path = '';
         
@@ -241,15 +244,17 @@ class Segment implements BaseRoute
                     break;
                 
                 case 'parameter':
-                    if (!isset($params[$part[1]])) {
+                    if (!isset($mergedParams[$part[1]])) {
                         return null;
                     }
                     
-                    $path .= urlencode($params[$part[1]]);
+                    $path .= urlencode($mergedParams[$part[1]]);
+                    
+                    unset($params[$part[1]]);
                     break;
                 
                 case 'optional':
-                    $path .= $this->buildPath($part[1], $params);
+                    $path .= $this->buildPath($part[1], $mergedParams, $param);
                     break;
                 
                 case 'translated-literal':
@@ -312,7 +317,7 @@ class Segment implements BaseRoute
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array $params = array(), array $options = array())
+    public function assemble(array &$params = array(), array $options = array())
     {
         $path = $this->buildPath($this->parts, array_merge($this->defaults, $params));
         

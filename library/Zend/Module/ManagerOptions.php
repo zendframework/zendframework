@@ -58,7 +58,7 @@ class ManagerOptions
      * Set if the config cache should be enabled or not
      *
      * @param bool $enabled
-     * @return ManagerConfig
+     * @return ManagerOptions
      */
     public function setEnableConfigCache($enabled)
     {
@@ -80,7 +80,7 @@ class ManagerOptions
      * Set the path where cache files can be stored
      *
      * @param string $cacheDir the value to be set
-     * @return ManagerConfig
+     * @return ManagerOptions
      */
     public function setCacheDir($cacheDir)
     {
@@ -129,7 +129,7 @@ class ManagerOptions
      * Set manifestDir.
      *
      * @param string $manifestDir the value to be set
-     * @return ManagerConfig
+     * @return ManagerOptions
      */
     public function setManifestDir($manifestDir)
     {

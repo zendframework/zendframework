@@ -5,14 +5,14 @@
     <para>
         De plus en plus de développeurs ont besoin de fournir des applications multilingues.
         <classname>Zend_Form</classname> propose des moyens simples dans ce but, et gère cette
-        responsabilité en tandem avec <link linkend="zend.translate">Zend_Translate</link> et <link linkend="zend.validate">Zend_Validate</link>.
+        responsabilité en tandem avec <link linkend="zend.translator">Zend_Translator</link> et <link linkend="zend.validate">Zend_Validate</link>.
     </para>
 
     <para>
         Par défaut, aucune internationalisation (i18n) n'est effectuée. Pour l'activer dans
         <classname>Zend_Form</classname>, vous devrez instancier un objet
-        <classname>Zend_Translate</classname> avec un adaptateur et l'attacher à
-        <classname>Zend_Form</classname> et/ou <classname>Zend_Validate</classname>. Voyez la <link linkend="zend.translate">documentation de Zend_Translate</link> pour plus d'informations sur
+        <classname>Zend_Translator</classname> avec un adaptateur et l'attacher à
+        <classname>Zend_Form</classname> et/ou <classname>Zend_Validate</classname>. Voyez la <link linkend="zend.translator">documentation de Zend_Translator</link> pour plus d'informations sur
         la création de son objet et de ses adaptateurs.
     </para>
 
@@ -33,9 +33,9 @@
 
         <para>
             Pour activer les traductions dans vos formulaires, vous avez besoin soit d'un
-            objet <classname>Zend_Translate</classname> complet, ou alors d'un objet
-            <classname>Zend_Translate_Adapter</classname> , comme ceci est détaillé dans la
-            documentation de <classname>Zend_Translate</classname>. Une fois un objet d'i18n en
+            objet <classname>Zend_Translator</classname> complet, ou alors d'un objet
+            <classname>Zend_Translator_Adapter</classname> , comme ceci est détaillé dans la
+            documentation de <classname>Zend_Translator</classname>. Une fois un objet d'i18n en
             votre possession, plusieurs choix s'offrent à vous :
         </para>
 
@@ -45,19 +45,19 @@
                     <emphasis>Le plus simple</emphasis> : ajoutez l'objet d'i18n dans le
                     registre. Tout composant utilisant l'i18n dans Zend Framework a la capacité de
                     découvrir de lui-même un objet de traduction si celui-ci est enregistré dans le
-                    registre à la clé "Zend_Translate" :
+                    registre à la clé "Zend_Translator" :
                 </para>
 
                 <programlisting language="php"><![CDATA[
-// utilisez la clé registre 'Zend_Translate' ;
-// $translate est un objet Zend_Translate :
-Zend_Registry::set('Zend_Translate', $translate);
+// utilisez la clé registre 'Zend_Translator' ;
+// $translate est un objet Zend_Translator :
+Zend_Registry::set('Zend_Translator', $translate);
 ]]></programlisting>
 
                 <para>
                     Cet objet sera cherché par <classname>Zend_Form</classname>,
                     <classname>Zend_Validate</classname>, et
-                    <classname>Zend_View_Helper_Translate</classname>.
+                    <classname>Zend_View_Helper_Translator</classname>.
                 </para>
             </listitem>
 

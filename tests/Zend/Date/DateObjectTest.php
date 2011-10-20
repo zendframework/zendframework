@@ -37,9 +37,15 @@ use Zend\Date\Date,
 class DateObjectTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     public function setUp()
     {
-        $this->originalTimezone = date_default_timezone_get();
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');
         $this->_cache = Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
@@ -49,7 +55,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        date_default_timezone_set($this->originalTimezone);
+        date_default_timezone_set($this->_originaltimezone);
         $this->_cache->clean(Cache::CLEANING_MODE_ALL);
     }
 

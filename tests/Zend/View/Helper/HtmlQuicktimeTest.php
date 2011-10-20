@@ -24,6 +24,9 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\HtmlQuicktime;
+
 /**
  * @category   Zend
  * @package    Zend_View
@@ -48,8 +51,8 @@ class HtmlQuicktimeTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\View();
-        $this->helper = new \Zend\View\Helper\HtmlQuicktime();
+        $this->view   = new View();
+        $this->helper = new HtmlQuicktime();
         $this->helper->setView($this->view);
     }
 
@@ -60,7 +63,7 @@ class HtmlQuicktimeTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlQuicktime()
     {
-        $htmlQuicktime = $this->helper->direct('/path/to/quicktime.mov');
+        $htmlQuicktime = $this->helper->__invoke('/path/to/quicktime.mov');
 
         $objectStartElement = '<object data="/path/to/quicktime.mov"'
                             . ' type="video/quicktime"'

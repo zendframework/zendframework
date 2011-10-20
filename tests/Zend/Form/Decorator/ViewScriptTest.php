@@ -23,7 +23,7 @@ namespace ZendTest\Form\Decorator;
 
 use Zend\Form\Decorator\ViewScript as ViewScriptDecorator,
     Zend\Form\Element\Text as TextElement,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_ViewScript
@@ -51,7 +51,7 @@ class ViewScriptTest extends \PHPUnit_Framework_TestCase
     public function getView()
     {
         $view = new View();
-        $view->addScriptPath(__DIR__ . '/../TestAsset/views/');
+        $view->resolver()->addPath(__DIR__ . '/../TestAsset/views/');
         return $view;
     }
 

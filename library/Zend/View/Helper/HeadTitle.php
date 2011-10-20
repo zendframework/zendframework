@@ -73,7 +73,7 @@ class HeadTitle extends Placeholder\Container\Standalone
      * @param  string $separator
      * @return \Zend\View\Helper\HeadTitle
      */
-    public function direct($title = null, $setType = null)
+    public function __invoke($title = null, $setType = null)
     {
         if ($setType === null && is_null($this->getDefaultAttachOrder())) {
             $setType = Placeholder\Container\AbstractContainer::APPEND;
@@ -124,17 +124,17 @@ class HeadTitle extends Placeholder\Container\Standalone
     /**
      * Sets a translation Adapter for translation
      *
-     * @param  Zend_Translate|\Zend\Translator\Adapter\Adapter $translate
+     * @param  Zend_Translator|\Zend\Translator\Adapter\Adapter $translate
      * @return \Zend\View\Helper\HeadTitle
      */
     public function setTranslator($translate)
     {
-        if ($translate instanceof \Zend\Translator\Adapter) {
+        if ($translate instanceof \Zend\Translator\Adapter\AbstractAdapter) {
             $this->_translator = $translate;
         } elseif ($translate instanceof \Zend\Translator\Translator) {
             $this->_translator = $translate->getAdapter();
         } else {
-            $e = new \Zend\View\Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
+            $e = new \Zend\View\Exception("You must set an instance of Zend_Translator or Zend_Translator_Adapter");
             $e->setView($this->view);
             throw $e;
         }
@@ -145,15 +145,15 @@ class HeadTitle extends Placeholder\Container\Standalone
      * Retrieve translation object
      *
      * If none is currently registered, attempts to pull it from the registry
-     * using the key 'Zend_Translate'.
+     * using the key 'Zend_Translator'.
      *
-     * @return Zend_Translate_Adapter|null
+     * @return Zend_Translator_Adapter|null
      */
     public function getTranslator()
     {
         if (null === $this->_translator) {
-            if (\Zend\Registry::isRegistered('Zend_Translate')) {
-                $this->setTranslator(\Zend\Registry::get('Zend_Translate'));
+            if (\Zend\Registry::isRegistered('Zend_Translator')) {
+                $this->setTranslator(\Zend\Registry::get('Zend_Translator'));
             }
         }
         return $this->_translator;

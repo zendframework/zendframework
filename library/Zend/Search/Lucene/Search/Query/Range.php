@@ -27,10 +27,10 @@ namespace Zend\Search\Lucene\Search\Query;
 use Zend\Search\Lucene,
 	Zend\Search\Lucene\Index,
 	Zend\Search\Lucene\Search\Highlighter,
-	Zend\Search\Lucence\Exception\UnsupportedMethodCallException,
-	Zend\Search\Lucence\Exception\InvalidArgumentException,
-	Zend\Search\Lucence\Exception\RuntimeException,
-	Zend\Search\Lucence\Exception\OutOfBoundsException;
+	Zend\Search\Lucene\Exception\UnsupportedMethodCallException,
+	Zend\Search\Lucene\Exception\InvalidArgumentException,
+	Zend\Search\Lucene\Exception\RuntimeException,
+	Zend\Search\Lucene\Exception\OutOfBoundsException;
 
 /**
  * @uses       \Zend\Search\Lucene\Index

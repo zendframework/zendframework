@@ -120,7 +120,7 @@ class Links extends AbstractHelper
      * @return \Zend\View\Helper\Navigation\Links     fluent interface, returns
      *                                               self
      */
-    public function direct(Navigation\Container $container = null)
+    public function __invoke(Navigation\Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);

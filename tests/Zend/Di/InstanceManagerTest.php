@@ -32,17 +32,47 @@ class InstanceManagerTest extends TestCase
         $this->assertSame($obj2, $im->getSharedInstanceWithParameters('foo', array('foo' => 'bar')));
         $this->assertSame($obj3, $im->getSharedInstanceWithParameters('foo', array('foo' => 'baz')));
     }
-    
-    public function testInstanceManagerCanPersistParameters()
-    {
-        $this->markTestSkipped('Skipped');
-        $im = new InstanceManager();
-        $im->setProperty('ZendTest\Di\TestAsset\BasicClass', 'foo', 'bar');
-        $this->assertTrue($im->hasProperties('ZendTest\Di\TestAsset\BasicClass'));
-        $this->assertTrue($im->hasProperty('ZendTest\Di\TestAsset\BasicClass', 'foo'));
-        $this->assertEquals('bar', $im->getProperty('ZendTest\Di\TestAsset\BasicClass', 'foo')); 
-    }
-    
 
-    
+    /**
+     * @group AliasAlias
+     */
+    public function testInstanceManagerCanResolveRecursiveAliases()
+    {
+        $im = new InstanceManager;
+        $im->addAlias('bar-alias', 'Some\Class');
+        $im->addAlias('foo-alias', 'bar-alias');
+        $class = $im->getClassFromAlias('foo-alias');
+        $this->assertEquals('Some\Class', $class);
+    }
+
+    /**
+     * @group AliasAlias
+     */
+    public function testInstanceManagerThrowsExceptionForRecursiveAliases()
+    {
+        $im = new InstanceManager;
+        $im->addAlias('bar-alias', 'foo-alias');
+        $im->addAlias('foo-alias', 'bar-alias');
+
+        $this->setExpectedException('Zend\Di\Exception\RuntimeException', 'recursion');
+        $im->getClassFromAlias('foo-alias');
+    }
+
+    /**
+     * @group AliasAlias
+     */
+    public function testInstanceManagerResolvesRecursiveAliasesForConfiguration()
+    {
+        $config = array('parameters' => array('username' => 'my-username'));
+
+        $im = new InstanceManager;
+        $im->addAlias('bar-alias', 'Some\Class');
+        $im->addAlias('foo-alias', 'bar-alias');
+        $im->setConfiguration('bar-alias', $config);
+
+        $config['injections'] = array();
+        
+        $this->assertEquals($config, $im->getConfiguration('foo-alias'));
+    }
+
 }

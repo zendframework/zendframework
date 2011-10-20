@@ -49,7 +49,7 @@ class ResourceLoader extends PluginClassLoader
         'navigation'      => 'Zend\Application\Resource\Navigation',
         'router'          => 'Zend\Application\Resource\Router',
         'session'         => 'Zend\Application\Resource\Session',
-        'translate'       => 'Zend\Application\Resource\Translate',
+        'translator'      => 'Zend\Application\Resource\Translator',
         'view'            => 'Zend\Application\Resource\View',
     );
 }

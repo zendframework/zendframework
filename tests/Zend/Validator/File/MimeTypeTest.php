@@ -147,9 +147,10 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetMagicFile()
     {
         $validator = new File\MimeType('image/gif');
-        if (!empty($_ENV['MAGIC'])) {
+        $magic     = getenv('magic');
+        if (!empty($magic)) {
             $mimetype  = $validator->getMagicFile();
-            $this->assertEquals($_ENV['MAGIC'], $mimetype);
+            $this->assertEquals($magic, $mimetype);
         }
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'can not be');
@@ -158,6 +159,10 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testSetMagicFileWithinConstructor()
     {
+        if (!extension_loaded('fileinfo')) {
+            $this->markTestSkipped('This PHP Version has no finfo installed');
+        }
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'The given magicfile is not accepted by finfo');
         $validator = new File\MimeType(array('image/gif', 'magicfile' => __FILE__));
     }
@@ -212,5 +217,54 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
                 . "\nMessages: " . var_export($validator->getMessages(), 1)
             );
         }
+    }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\MimeType(array(
+            'image/gif',
+            'image/jpg',
+            'headerCheck' => true));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertTrue(array_key_exists('fileMimeTypeNotReadable', $validator->getMessages()));
+        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+    }
+
+    public function testDisableMagicFile()
+    {
+        $validator = new File\MimeType('image/gif');
+        $magic     = getenv('magic');
+        if (!empty($magic)) {
+            $mimetype  = $validator->getMagicFile();
+            $this->assertEquals($magic, $mimetype);
+        }
+
+        $validator->disableMagicFile(true);
+        $this->assertTrue($validator->isMagicFileDisabled());
+
+        if (!empty($magic)) {
+            $mimetype  = $validator->getMagicFile();
+            $this->assertEquals($magic, $mimetype);
+        }
+    }
+
+    /**
+     * @group ZF-10461
+     */
+    public function testDisablingMagicFileByConstructor()
+    {
+        $files = array(
+            'name'     => 'picture.jpg',
+            'size'     => 200,
+            'tmp_name' => dirname(__FILE__) . '/_files/picture.jpg',
+            'error'    => 0,
+            'magicfile' => false,
+        );
+
+        $validator = new File\MimeType($files);
+        $this->assertFalse($validator->getMagicFile());
     }
 }

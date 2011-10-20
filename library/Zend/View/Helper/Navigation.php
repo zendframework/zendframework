@@ -98,7 +98,7 @@ class Navigation extends AbstractNavigationHelper
      * @return \Zend\View\Helper\Navigation           fluent interface, returns
      *                                               self
      */
-    public function direct(Container $container = null)
+    public function __invoke(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -136,7 +136,7 @@ class Navigation extends AbstractNavigationHelper
     {
         // check if call should proxy to another helper
         if ($helper = $this->findHelper($method, false)) {
-            return call_user_func_array(array($helper, 'direct'), $arguments);
+            return call_user_func_array($helper, $arguments);
         }
 
         // default behaviour: proxy call to container

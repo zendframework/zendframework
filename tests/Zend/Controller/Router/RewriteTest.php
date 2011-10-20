@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,23 +24,22 @@
  */
 namespace ZendTest\Controller\Router;
 
-use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Config,
+use Zend\Config,
     Zend\Controller,
-    Zend\Controller\Router,
     Zend\Controller\Router\Route,
-    Zend\Uri;
+    Zend\Controller\Router,
+    Zend\Uri\UriFactory;
 
 /**
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
  */
-class RewriteTest extends TestCase
+class RewriteTest extends \PHPUnit_Framework_TestCase
 {
     protected $_router;
 
@@ -517,79 +516,6 @@ class RewriteTest extends TestCase
         $this->assertNull($token->getParam('bogus'));
     }
 
-
-	/**
-	 * @group ZF2-41
-	 * @depends testRouteWithHostnameChain
-	 */
-	public function testHostnameChainWithEmptyStaticRoute()
-	{
-		$host  = new Route\Hostname('www.zend.com', array('module' => 'www-bla'));
-		$empty = new Route\StaticRoute('', array('controller' => 'foo', 'action' => 'main'));
-		$bar   = new Route\StaticRoute('bar', array('controller' => 'foo', 'action' => 'bar'));
-
-		$emptyChain = new Route\Chain();
-		$emptyChain ->addChain($host)->addChain($empty);
-
-		$barChain = new Route\Chain();
-		$barChain->addChain($host)->addChain($bar);
-
-		$this->_router->removeDefaultRoutes();
-		$this->_router->addRoute('host-empty',   $emptyChain);
-		$this->_router->addRoute('host-bar', 	$barChain);
-
-		$request = new Request('http://www.zend.com/bar');
-		$token   = $this->_router->route($request);
-
-		$this->assertEquals('www-bla', $token->getModuleName());
-		$this->assertEquals('foo', $token->getControllerName());
-		$this->assertEquals('bar', $token->getActionName());
-		$this->assertNull($token->getParam('bogus'));
-
-		$request = new Request('http://www.zend.com/');
-		$token = $this->_router->route($request);
-
-		$this->assertEquals('www-bla', $token->getModuleName());
-		$this->assertEquals('foo', $token->getControllerName());
-		$this->assertEquals('main', $token->getActionName());
-		$this->assertNull($token->getParam('bogus'));
-	}
-
-	 /**
-	  * @group ZF2-41
-	  * @depends testHostnameChainWithEmptyStaticRoute
-	  */
-	public function testHostnameChainWithEmptyStaticRouteAndCatchall()
-	{
-		$host     = new Route\Hostname('www.zend.com', array('module' => 'www-bla'));
-		$catchall = new Route\Route('*', array('controller' => 'error', 'action' => 'pagenotfound'));
-		$empty    = new Route\StaticRoute('', array('controller' => 'foo', 'action' => 'main'));
-		$bar      = new Route\StaticRoute('bar', array('controller' => 'foo', 'action' => 'bar'));
-
-		$catchallChain = new Route\Chain();
-		$catchallChain->addChain($host)->addChain($catchall);
-
-		$emptyChain = new Route\Chain();
-		$emptyChain ->addChain($host)->addChain($empty);
-
-		$barChain = new Route\Chain();
-		$barChain->addChain($host)->addChain($bar);
-
-		$this->_router->removeDefaultRoutes();
-		$this->_router->addRoute('host-catchall',$catchallChain);
-		$this->_router->addRoute('host-empty',   $emptyChain);
-		$this->_router->addRoute('host-bar', 	$barChain);
-
-		$request = new Request('http://www.zend.com/somenonexistentaddress');
-		$token   = $this->_router->route($request);
-
-		$this->assertEquals('www-bla', $token->getModuleName());
-		$this->assertEquals('error', $token->getControllerName());
-		$this->assertEquals('pagenotfound', $token->getActionName());
-		$this->assertNull($token->getParam('bogus'));
-	}
-
-
     public function testAssemblingWithHostnameHttp()
     {
         $route = new Route\Hostname('www.zend.com');
@@ -653,7 +579,7 @@ class RewriteTest extends TestCase
     }
 
     /**
-     * @group ZF-3922
+     * @see ZF-3922
      */
     public function testRouteShouldMatchEvenWithTrailingSlash()
     {
@@ -764,7 +690,7 @@ class RewriteTest extends TestCase
 
         $this->assertEquals('/articles/777', $url);
     }
-
+    
 
     /**
      * Test that it is possible to generate a URL with a numerical key
@@ -776,7 +702,7 @@ class RewriteTest extends TestCase
     public function testCanGenerateNumericKeyUri()
     {
         $this->_router->addRoute(
-            'application',
+            'application', 
             new Route\Route(
                 ':controller/:action/*',
                 array('controller' => 'index', 'action' => 'index')
@@ -814,7 +740,7 @@ class Request extends \Zend\Controller\Request\Http
             $uri = 'http://localhost/foo/bar/baz/2';
         }
 
-        $url = Uri\UriFactory::factory($uri);
+        $url = UriFactory::factory($uri, 'http');
         $this->_host = $url->getHost();
         $this->_port = $url->getPort();
 

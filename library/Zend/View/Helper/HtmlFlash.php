@@ -32,7 +32,7 @@ namespace Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlFlash extends HtmlObject
+class HtmlFlash extends HtmlElement
 {
     /**
      * Default file type for a flash applet
@@ -49,16 +49,13 @@ class HtmlFlash extends HtmlObject
      * @param string $content Alternative content
      * @return string
      */
-    public function direct($data = null, array $attribs = array(), array $params = array(), $content = null)
+    public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)
     {
-        if ($data == null) {
-            throw new \InvalidArgumentException('HTMLFlash: missing argument. $data is required in htmlFlash($data, array $attribs = array(), array $params = array(), $content = null)');
-        }
-        
         // Params
         $params = array_merge(array('movie'   => $data,
                                     'quality' => 'high'), $params);
 
-        return parent::direct($data, self::TYPE, $attribs, $params, $content);
+        $htmlObject = $this->getView()->plugin('htmlObject');
+        return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

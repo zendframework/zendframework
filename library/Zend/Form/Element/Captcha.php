@@ -24,9 +24,10 @@
  */
 namespace Zend\Form\Element;
 
-use Zend\Captcha\Adapter as CaptchaAdapter,
-    Zend\View\ViewEngine as View,
-    Zend\Loader\PluginLoader;
+use ReflectionClass,
+    Zend\Captcha\Adapter as CaptchaAdapter,
+    Zend\View\Renderer as View,
+    Zend\Loader\PrefixPathLoader as PluginLoader;
 
 /**
  * Generic captcha element
@@ -37,10 +38,6 @@ use Zend\Captcha\Adapter as CaptchaAdapter,
  *
  * @see http://en.wikipedia.org/wiki/Captcha
  *
- * @uses       ReflectionClass
- * @uses       \Zend\Captcha\Adapter
- * @uses       \Zend\Form\Element\Xhtml
- * @uses       \Zend\Loader\PluginLoader
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -98,7 +95,7 @@ class Captcha extends Xhtml
             if (empty($options)) {
                 $instance = new $name;
             } else {
-                $r = new \ReflectionClass($name);
+                $r = new ReflectionClass($name);
                 if ($r->hasMethod('__construct')) {
                     $instance = $r->newInstanceArgs(array($options));
                 } else {
@@ -176,7 +173,7 @@ class Captcha extends Xhtml
     /**
      * Render form element
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     public function render(View $view = null)
@@ -258,7 +255,7 @@ class Captcha extends Xhtml
     /**
      * Load default decorators
      *
-     * @return void
+     * @return \Zend\Form\Element\Captcha
      */
     public function loadDefaultDecorators()
     {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>Tester vos contrôleurs et vos applications MVC</title></info>
-    
+
 
     <para>
         Une fois , votre fichier d'amorçage en place, vous pouvez commencer à tester. Tester
@@ -60,7 +60,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         ));
 
         // Ajouter des en-têtes :
-        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
+        $this->request->setHeader('X-Requested-With', 'XMLHttpRequest');
 
         // Définir le type de requête :
         $this->request->setMethod('POST');
@@ -76,7 +76,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     <para>Maintenant que la requête est construite, il est temps de créer des assertions.</para>
 
     <section xml:id="zend.test.phpunit.testing.redirector"><info><title>Controller Tests and the Redirector Action Helper</title></info>
-        
+
 
         <important>
             <para>

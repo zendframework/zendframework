@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator;
 
+use Zend\Config\Config;
+
 /**
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception
@@ -33,16 +35,22 @@ namespace Zend\Validator;
  */
 class LessThan extends AbstractValidator
 {
-    const NOT_LESS = 'notLessThan';
+    const NOT_LESS           = 'notLessThan';
+    const NOT_LESS_INCLUSIVE = 'notLessThanInclusive';
 
     /**
+     * Validation failure message template definitions
+     *
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_LESS => "'%value%' is not less than '%max%'"
+        self::NOT_LESS           => "'%value%' is not less than '%max%'",
+        self::NOT_LESS_INCLUSIVE => "'%value%' is not less or equal than '%max%'"
     );
 
     /**
+     * Additional variables available for validation failure messages
+     *
      * @var array
      */
     protected $_messageVariables = array(
@@ -57,26 +65,46 @@ class LessThan extends AbstractValidator
     protected $_max;
 
     /**
+     * Whether to do inclusive comparisons, allowing equivalence to max
+     *
+     * If false, then strict comparisons are done, and the value may equal
+     * the max option
+     *
+     * @var boolean
+     */
+    protected $_inclusive;
+
+    /**
      * Sets validator options
      *
-     * @param  mixed|\Zend\Config\Config $max
+     * @param  mixed|array|Config $options
      * @return void
      */
-    public function __construct($max)
+    public function __construct($options)
     {
-        if ($max instanceof \Zend\Config\Config) {
-            $max = $max->toArray();
-        }
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            $options = func_get_args();
+            $temp['max'] = array_shift($options);
 
-        if (is_array($max)) {
-            if (array_key_exists('max', $max)) {
-                $max = $max['max'];
-            } else {
-                throw new Exception\InvalidArgumentException("Missing option 'max'");
+            if (!empty($options)) {
+                $temp['inclusive'] = array_shift($options);
             }
+
+            $options = $temp;
         }
 
-        $this->setMax($max);
+        if (!array_key_exists('max', $options)) {
+            throw new Exception\InvalidArgumentException("Missing option 'max'");
+        }
+
+        if (!array_key_exists('inclusive', $options)) {
+            $options['inclusive'] = false;
+        }
+
+        $this->setMax($options['max'])
+             ->setInclusive($options['inclusive']);
     }
 
     /**
@@ -102,7 +130,30 @@ class LessThan extends AbstractValidator
     }
 
     /**
-     * Returns true if and only if $value is less than max option
+     * Returns the inclusive option
+     *
+     * @return boolean
+     */
+    public function getInclusive()
+    {
+        return $this->_inclusive;
+    }
+
+    /**
+     * Sets the inclusive option
+     *
+     * @param  boolean $inclusive
+     * @return \Zend\Validator\LessThan Provides a fluent interface
+     */
+    public function setInclusive($inclusive)
+    {
+        $this->_inclusive = $inclusive;
+        return $this;
+    }
+
+    /**
+     * Returns true if and only if $value is less than max option, inclusively
+     * when the inclusive option is true
      *
      * @param  mixed $value
      * @return boolean
@@ -110,11 +161,19 @@ class LessThan extends AbstractValidator
     public function isValid($value)
     {
         $this->_setValue($value);
-        if ($this->_max <= $value) {
-            $this->_error(self::NOT_LESS);
-            return false;
+
+        if ($this->_inclusive) {
+            if ($value > $this->_max) {
+                $this->_error(self::NOT_LESS_INCLUSIVE);
+                return false;
+            }
+        } else {
+            if ($value >= $this->_max) {
+                $this->_error(self::NOT_LESS);
+                return false;
+            }
         }
+
         return true;
     }
-
 }

@@ -141,7 +141,7 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     public function testInvalidAdapter()
     {
         $barcode = new Barcode('Ean13');
-        
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'does not implement');
         require_once __DIR__ . "/_files/MyBarcode5.php";
         $barcode->setAdapter('MyBarcode5');
@@ -428,5 +428,45 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
         $message = $barcode->getMessages();
         $this->assertTrue(array_key_exists('barcodeInvalidLength', $message));
         $this->assertContains("length of 7/8 characters", $message['barcodeInvalidLength']);
+    }
+
+    /**
+     * @group ZF-8673
+     */
+    public function testCODABAR()
+    {
+        $barcode = new Barcode('codabar');
+        $this->assertTrue($barcode->isValid('123456789'));
+        $this->assertTrue($barcode->isValid('A123A'));
+        $this->assertTrue($barcode->isValid('A123C'));
+        $this->assertFalse($barcode->isValid('A123E'));
+        $this->assertFalse($barcode->isValid('A1A23C'));
+        $this->assertTrue($barcode->isValid('T123*'));
+        $this->assertFalse($barcode->isValid('*123A'));
+    }
+
+    /**
+     * @group ZF-11532
+     */
+    public function testIssnWithMod0()
+    {
+        $barcode = new Barcode('issn');
+        $this->assertTrue($barcode->isValid('18710360'));
+    }
+
+    /**
+     * @group ZF-8674
+     */
+    public function testCODE128()
+    {
+        $barcode = new Barcode('code128');
+        $this->assertTrue($barcode->isValid('ˆCODE128:Š'));
+        $this->assertTrue($barcode->isValid('‡01231[Š'));
+
+        $barcode->setChecksum(false);
+        $this->assertTrue($barcode->isValid('012345'));
+        $this->assertTrue($barcode->isValid('ABCDEF'));
+        $this->assertFalse($barcode->isValid('01234Ê'));
+
     }
 }

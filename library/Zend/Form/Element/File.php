@@ -80,7 +80,7 @@ class File extends Xhtml
     /**
      * Load default decorators
      *
-     * @return void
+     * @return \Zend\Form\Element\File
      */
     public function loadDefaultDecorators()
     {
@@ -422,7 +422,7 @@ class File extends Xhtml
      */
     public function isValid($value, $context = null)
     {
-        if ($this->_validated) {
+        if (($this->_validated) || ($this->isValueDisabled())) {
             return true;
         }
 
@@ -458,9 +458,15 @@ class File extends Xhtml
     public function receive()
     {
         if (!$this->_validated) {
+            $disabled = $this->isValueDisabled();
+            $this->setValueDisabled(false);
+            
             if (!$this->isValid($this->getName())) {
+                $this->setValueDisabled($disabled);
                 return false;
             }
+            
+            $this->setValueDisabled($disabled);
         }
 
         $adapter = $this->getTransferAdapter();
@@ -584,7 +590,7 @@ class File extends Xhtml
     }
 
     /**
-     * Sets the maximum file size of the form
+     * Gets the maximum file size of the form
      *
      * @return integer
      */
@@ -873,7 +879,7 @@ class File extends Xhtml
      * Render form element
      * Checks for decorator interface to prevent errors
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return string
      */
     public function render(View $view = null)

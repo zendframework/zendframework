@@ -24,6 +24,9 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\Fieldset;
+
 /**
  * Test class for Zend_View_Helper_Fieldset
  *
@@ -46,8 +49,8 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->view   = new \Zend\View\View();
-        $this->helper = new \Zend\View\Helper\Fieldset();
+        $this->view   = new View();
+        $this->helper = new Fieldset();
         $this->helper->setView($this->view);
         ob_start();
     }
@@ -65,7 +68,7 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
 
     public function testFieldsetHelperCreatesFieldsetWithProvidedContent()
     {
-        $html = $this->helper->direct('foo', 'foobar');
+        $html = $this->helper->__invoke('foo', 'foobar');
         $this->assertRegexp('#<fieldset[^>]+id="foo".*?>#', $html);
         $this->assertContains('</fieldset>', $html);
         $this->assertContains('foobar', $html);
@@ -73,7 +76,7 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
 
     public function testProvidingLegendOptionToFieldsetCreatesLegendTag()
     {
-        $html = $this->helper->direct('foo', 'foobar', array('legend' => 'Great Scott!'));
+        $html = $this->helper->__invoke('foo', 'foobar', array('legend' => 'Great Scott!'));
         $this->assertRegexp('#<legend>Great Scott!</legend>#', $html);
     }
 
@@ -83,7 +86,7 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
     public function testEmptyLegendShouldNotRenderLegendTag()
     {
         foreach (array(null, '', ' ', false) as $legend) {
-            $html = $this->helper->direct('foo', 'foobar', array('legend' => $legend));
+            $html = $this->helper->__invoke('foo', 'foobar', array('legend' => $legend));
             $this->assertNotContains('<legend>', $html, 'Failed with value ' . var_export($legend, 1) . ': ' . $html);
         }
     }
@@ -93,7 +96,7 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
      */
     public function testHelperShouldAllowDisablingEscapingOfLegend()
     {
-        $html = $this->helper->direct('foo', 'foobar', array('legend' => '<b>Great Scott!</b>', 'escape' => false));
+        $html = $this->helper->__invoke('foo', 'foobar', array('legend' => '<b>Great Scott!</b>', 'escape' => false));
         $this->assertRegexp('#<legend><b>Great Scott!</b></legend>#', $html, $html);
     }
 }

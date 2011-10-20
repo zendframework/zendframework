@@ -44,7 +44,7 @@ class HttpException extends Exception
     protected $_response = null;
 
     /**
-     * Create a new Zend_Gdata_App_HttpException
+     * Create a new \Zend\Gdata\App\HttpException
      *
      * @param  string $message Optionally set a message
      * @param \Zend\Http\Client\Exception Optionally pass in a \Zend\Http\Client\Exception

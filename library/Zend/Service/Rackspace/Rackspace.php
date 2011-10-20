@@ -296,26 +296,26 @@ abstract class Rackspace
     protected function httpCall($url,$method,$headers=array(),$data=array(),$body=null)
     {
         $client = $this->getHttpClient();
-        $client->resetParameters(true);
+        $client->resetParameters();
         if (empty($headers[self::AUTHUSER_HEADER])) {
             $headers[self::AUTHTOKEN]= $this->getToken();
         } 
         $client->setMethod($method);
-        if (empty($get['format'])) {
-            $get['format']= self::API_FORMAT;
+        if (empty($data['format'])) {
+            $data['format']= self::API_FORMAT;
         }
         $client->setParameterGet($data);    
         if (!empty($body)) {
-            $client->setRawData($body);
-            if (!isset($headers[HttpClient::CONTENT_TYPE])) {
-                $headers[HttpClient::CONTENT_TYPE]= 'application/json';
+            $client->setRawBody($body);
+            if (!isset($headers['Content-Type'])) {
+                $headers['Content-Type']= 'application/json';
             }
         }
         $client->setHeaders($headers);
         $client->setUri($url);
         $this->errorMsg='';
         $this->errorCode='';
-        return $client->request();
+        return $client->send();
     }
     /**
      * Authentication
@@ -324,20 +324,20 @@ abstract class Rackspace
      */
     public function authenticate()
     {
-        $headers= array (
+        $headers = array (
             self::AUTHUSER_HEADER => $this->user,
             self::AUTHKEY_HEADER => $this->key
         );
-        $result= $this->httpCall($this->authUrl.'/'.self::VERSION,HttpClient::GET, $headers);
-        if ($result->getStatus()==204) {
-            $this->token= $result->getHeader(self::AUTHTOKEN);
-            $this->storageUrl= $result->getHeader(self::STORAGE_URL);
-            $this->cdnUrl= $result->getHeader(self::CDNM_URL);
-            $this->managementUrl= $result->getHeader(self::MANAGEMENT_URL);
+        $result = $this->httpCall($this->authUrl.'/'.self::VERSION,'GET', $headers);
+        if ($result->getStatusCode()==204) {
+            $this->token = $result->headers()->get(self::AUTHTOKEN)->getFieldValue();
+            $this->storageUrl = $result->headers()->get(self::STORAGE_URL)->getFieldValue();
+            $this->cdnUrl = $result->headers()->get(self::CDNM_URL)->getFieldValue();
+            $this->managementUrl = $result->headers()->get(self::MANAGEMENT_URL)->getFieldValue();
             return true;
         }
-        $this->errorMsg= $result->getBody();
-        $this->errorCode= $result->getStatus();
+        $this->errorMsg = $result->getBody();
+        $this->errorCode = $result->getStatusCode();
         return false;
     } 
 }

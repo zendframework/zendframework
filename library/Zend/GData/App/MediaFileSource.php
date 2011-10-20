@@ -28,7 +28,7 @@ namespace Zend\GData\App;
  * Concrete class to use a file handle as an attachment within a MediaEntry.
  *
  * @uses       \Zend\GData\App\IOException
- * @uses       Zend_Gdata_App_MediaData
+ * @uses       \Zend\Gdata\App\MediaData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -52,7 +52,7 @@ class MediaFileSource extends BaseMediaSource
     protected $_contentType = null;
 
     /**
-     * Create a new Zend_Gdata_App_MediaFileSource object.
+     * Create a new \Zend\Gdata\App\MediaFileSource object.
      *
      * @param string $filename The name of the file to read from.
      */

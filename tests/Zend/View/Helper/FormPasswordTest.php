@@ -62,7 +62,7 @@ class FormPasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableElement()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -76,7 +76,7 @@ class FormPasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisablingElementDoesNotRenderHiddenElements()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'    => 'foo',
             'value'   => 'bar',
             'attribs' => array('disable' => true)
@@ -87,20 +87,20 @@ class FormPasswordTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldRenderAsHtmlByDefault()
     {
-        $test = $this->helper->direct('foo', 'bar');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertNotContains(' />', $test);
     }
 
     public function testShouldAllowRenderingAsXhtml()
     {
-        $this->view->broker('doctype')->direct('XHTML1_STRICT');
-        $test = $this->helper->direct('foo', 'bar');
+        $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertContains(' />', $test);
     }
 
     public function testShouldNotRenderValueByDefault()
     {
-        $test = $this->helper->direct('foo', 'bar');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertNotContains('bar', $test);
     }
 
@@ -109,7 +109,7 @@ class FormPasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldRenderValueWhenRenderPasswordFlagPresentAndTrue()
     {
-        $test = $this->helper->direct('foo', 'bar', array('renderPassword' => true));
+        $test = $this->helper->__invoke('foo', 'bar', array('renderPassword' => true));
         $this->assertContains('value="bar"', $test);
     }
 
@@ -118,9 +118,9 @@ class FormPasswordTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderPasswordAttribShouldNeverBeRendered()
     {
-        $test = $this->helper->direct('foo', 'bar', array('renderPassword' => true));
+        $test = $this->helper->__invoke('foo', 'bar', array('renderPassword' => true));
         $this->assertNotContains('renderPassword', $test);
-        $test = $this->helper->direct('foo', 'bar', array('renderPassword' => false));
+        $test = $this->helper->__invoke('foo', 'bar', array('renderPassword' => false));
         $this->assertNotContains('renderPassword', $test);
     }
 }

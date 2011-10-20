@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.introduction"><info><title>Introduction</title></info>
-    
+
 
     <para>
         The <classname>Zend_Filter</classname> component provides a set of commonly needed data
@@ -10,7 +10,7 @@
     </para>
 
     <section xml:id="zend.filter.introduction.definition"><info><title>What is a filter?</title></info>
-        
+
 
         <para>
             In the physical world, a filter is typically used for removing
@@ -44,7 +44,7 @@
     </section>
 
     <section xml:id="zend.filter.introduction.using"><info><title>Basic usage of filters</title></info>
-        
+
 
         <para>
             Having this filter definition established provides the foundation
@@ -67,124 +67,10 @@ echo $htmlEntities->filter('"'); // "
 ]]></programlisting>
     </section>
 
-    <section xml:id="zend.filter.introduction.static"><info><title>Using the static staticFilter() method</title></info>
-        
-
-        <para>
-            If it is inconvenient to load a given filter class and create an
-            instance of the filter, you can use the static method
-            <methodname>Zend_Filter::filterStatic()</methodname> as an alternative invocation style.
-            The first argument of this method is a data input value, that you
-            would pass to the <methodname>filter()</methodname> method. The second
-            argument is a string, which corresponds to the basename of the
-            filter class, relative to the <classname>Zend_Filter</classname> namespace. The
-            <methodname>staticFilter()</methodname> method automatically loads the class, creates
-            an instance, and applies the <methodname>filter()</methodname> method to the data
-            input.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-echo Zend_Filter::filterStatic('&', 'HtmlEntities');
-]]></programlisting>
-
-        <para>
-            You can also pass an array of constructor arguments, if they
-            are needed for the filter class.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-echo Zend_Filter::filterStatic('"',
-                               'HtmlEntities',
-                               array('quotestyle' => ENT_QUOTES));
-]]></programlisting>
-
-        <para>
-            The static usage can be convenient for invoking a filter ad hoc,
-            but if you have the need to run a filter for multiple inputs,
-            it's more efficient to follow the first example above,
-            creating an instance of the filter object and calling its
-            <methodname>filter()</methodname> method.
-        </para>
-
-        <para>
-            Also, the <classname>Zend_Filter_Input</classname> class allows you to instantiate and
-            run multiple filter and validator classes on demand to process
-            sets of input data. See <link linkend="zend.filter.input">Zend_Filter_Input</link>.
-        </para>
-
-        <section xml:id="zend.filter.introduction.static.namespaces"><info><title>Namespaces</title></info>
-            
-
-            <para>
-                When working with self defined filters you can give a fourth parameter
-                to <methodname>Zend_Filter::filterStatic()</methodname> which is the namespace
-                where your filter can be found.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-echo Zend_Filter::filterStatic(
-    '"',
-    'MyFilter',
-    array($parameters),
-    array('FirstNamespace', 'SecondNamespace')
-);
-]]></programlisting>
-
-            <para>
-                <classname>Zend_Filter</classname> allows also to set namespaces as default.
-                This means that you can set them once in your bootstrap and have not to give
-                them again for each call of <methodname>Zend_Filter::filterStatic()</methodname>.
-                The following code snippet is identical to the above one.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-Zend_Filter::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
-echo Zend_Filter::filterStatic('"', 'MyFilter', array($parameters));
-echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
-]]></programlisting>
-
-            <para>
-                For your convenience there are following methods which allow the handling of
-                namespaces:
-            </para>
-
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        <emphasis><methodname>Zend_Filter::getDefaultNamespaces()</methodname></emphasis>:
-                        Returns all set default namespaces as array.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <emphasis><methodname>Zend_Filter::setDefaultNamespaces()</methodname></emphasis>:
-                        Sets new default namespaces and overrides any previous set. It accepts
-                        either a string for a single namespace of an array for multiple namespaces.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <emphasis><methodname>Zend_Filter::addDefaultNamespaces()</methodname></emphasis>:
-                        Adds additional namespaces to already set ones. It accepts either a string
-                        for a single namespace of an array for multiple namespaces.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <emphasis><methodname>Zend_Filter::hasDefaultNamespaces()</methodname></emphasis>:
-                        Returns <constant>TRUE</constant> when one or more default namespaces are
-                        set, and <constant>FALSE</constant> when no default namespaces are set.
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </section>
-    </section>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_Filter-StaticFilter.xml"/>
 
     <section xml:id="zend.filter.introduction.caveats"><info><title>Double filtering</title></info>
-        
+
 
         <para>
             When using two filters after each other you have to keep in mind that it is often not

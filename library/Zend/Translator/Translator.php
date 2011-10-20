@@ -23,7 +23,8 @@
  */
 namespace Zend\Translator;
 
-use Zend\Translator\Exception\InvalidArgumentException,
+use Zend\Translator\Adapter,
+    Zend\Translator\Exception\InvalidArgumentException,
     Zend\Translator\Exception\BadMethodCallException;
 
 /**
@@ -57,7 +58,7 @@ class Translator
     /**
      * Adapter
      *
-     * @var \Zend\Translator\Adapter
+     * @var \Zend\Translator\Adapter\AbstractAdapter
      */
     private $_adapter;
 
@@ -65,7 +66,7 @@ class Translator
      * Generates the standard translation object
      *
      * @param  array|\Zend\Config $options Options to use
-     * @throws \Zend\Translate\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
@@ -98,7 +99,7 @@ class Translator
      * Sets a new adapter
      *
      * @param  array|\Zend\Config $options Options to use
-     * @throws \Zend\Translate\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
      */
     public function setAdapter($options = array())
     {
@@ -137,21 +138,21 @@ class Translator
         }
 
         if (array_key_exists('cache', $options)) {
-            Adapter::setCache($options['cache']);
+            Adapter\AbstractAdapter::setCache($options['cache']);
         }
 
         $adapter = $options['adapter'];
         unset($options['adapter']);
         $this->_adapter = new $adapter($options);
-        if (!$this->_adapter instanceof Adapter) {
-            throw new InvalidArgumentException("Adapter " . $adapter . " does not extend Zend\Translate\Adapter");
+        if (!$this->_adapter instanceof Adapter\AbstractAdapter) {
+            throw new InvalidArgumentException("Adapter " . $adapter . " does not extend Zend\Translator\Adapter\AbstractAdapter");
         }
     }
 
     /**
      * Returns the adapters name and it's options
      *
-     * @return \Zend\Translator\Adapter
+     * @return \Zend\Translator\Adapter\AbstractAdapter
      */
     public function getAdapter()
     {
@@ -165,18 +166,18 @@ class Translator
      */
     public static function getCache()
     {
-        return Adapter::getCache();
+        return Adapter\AbstractAdapter::getCache();
     }
 
     /**
-     * Sets a cache for all instances of Zend_Translate
+     * Sets a cache for all instances of Zend_Translator
      *
      * @param  \Zend\Cache\Frontend $cache Cache to store to
      * @return void
      */
     public static function setCache(\Zend\Cache\Frontend $cache)
     {
-        Adapter::setCache($cache);
+        Adapter\AbstractAdapter::setCache($cache);
     }
 
     /**
@@ -186,7 +187,7 @@ class Translator
      */
     public static function hasCache()
     {
-        return Adapter::hasCache();
+        return Adapter\AbstractAdapter::hasCache();
     }
 
     /**
@@ -196,7 +197,7 @@ class Translator
      */
     public static function removeCache()
     {
-        Adapter::removeCache();
+        Adapter\AbstractAdapter::removeCache();
     }
 
     /**
@@ -207,7 +208,7 @@ class Translator
      */
     public static function clearCache($tag = null)
     {
-        Adapter::clearCache($tag);
+        Adapter\AbstractAdapter::clearCache($tag);
     }
 
     /**
@@ -219,6 +220,7 @@ class Translator
         if (method_exists($this->_adapter, $method)) {
             return call_user_func_array(array($this->_adapter, $method), $options);
         }
+
         throw new BadMethodCallException("Unknown method '" . $method . "' called!");
     }
 }

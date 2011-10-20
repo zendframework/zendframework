@@ -64,7 +64,7 @@ class CheckBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getElement()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'foo',
             array(),
@@ -87,7 +87,7 @@ class CheckBoxTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.CheckBox")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
     }
 
     public function testShouldCreateHiddenElementWithUncheckedValue()
@@ -113,7 +113,7 @@ class CheckBoxTest extends \PHPUnit_Framework_TestCase
      */
     public function testElementShouldUseCheckedValueForCheckboxInput()
     {
-        $html = $this->helper->direct('foo', '0', array(), array(), array(
+        $html = $this->helper->__invoke('foo', '0', array(), array(), array(
             'checkedValue'   => '1',
             'unCheckedValue' => '0',
         ));
@@ -129,7 +129,7 @@ class CheckBoxTest extends \PHPUnit_Framework_TestCase
      */
     public function testElementShouldCreateAppropriateIdWhenNameIncludesArrayNotation()
     {
-        $html = $this->helper->direct('foo[bar]', '0');
+        $html = $this->helper->__invoke('foo[bar]', '0');
         $this->assertContains('id="foo-bar"', $html);
     }
 }

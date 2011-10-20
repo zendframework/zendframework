@@ -24,9 +24,10 @@
  * @namespace
  */
 namespace Zend\OpenId\Provider;
-use Zend\OpenId;
-use Zend\OpenId\Extension;
-use Zend\Controller\Response;
+
+use Zend\Http\Response,
+    Zend\OpenId,
+    Zend\OpenId\Extension;
 
 /**
  * OpenID provider (server) implementation
@@ -328,12 +329,12 @@ class GenericProvider
      *  or set to null, then $_GET or $_POST superglobal variable is used
      *  according to REQUEST_METHOD.
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend\Controller\Response\AbstractResponse $response an optional response
+     * @param Response $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return mixed
      */
     public function handle($params=null, $extensions=null,
-                           Response\AbstractResponse $response = null)
+                           Response $response = null)
     {
         if ($params === null) {
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -507,11 +508,11 @@ class GenericProvider
      * @param array $params GET or POST request variables
      * @param bool $immediate enables or disables interaction with user
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend\Controller\Response\AbstractResponse $response
+     * @param Response $response
      * @return array
      */
     protected function _checkId($version, $params, $immediate, $extensions=null,
-        Response\AbstractResponse $response = null)
+        Response $response = null)
     {
         $ret = array();
 
@@ -637,12 +638,12 @@ class GenericProvider
      *
      * @param array $params GET or POST request variables
      * @param mixed $extensions extension object or array of extensions objects
-     * @param Zend\Controller\Response\Abstract $response an optional response
+     * @param Response $response an optional response
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */
     public function respondToConsumer($params, $extensions=null,
-                           Response\AbstractResponse $response = null)
+                           Response $response = null)
     {
         $version = 1.1;
         if (isset($params['openid_ns']) &&
@@ -769,12 +770,34 @@ class GenericProvider
                 $data .= $params['openid_' . strtr($key,'.','_')]."\n";
             }
         }
-        if (base64_decode($params['openid_sig']) ===
-            OpenId\OpenId::hashHmac($macFunc, $data, $secret)) {
+        if ($this->_secureStringCompare(base64_decode($params['openid_sig']),
+            OpenId\OpenId::hashHmac($macFunc, $data, $secret))) {
             $ret['is_valid'] = 'true';
         } else {
             $ret['is_valid'] = 'false';
         }
         return $ret;
+    }
+
+    /**
+     * Securely compare two strings for equality while avoided C level memcmp()
+     * optimisations capable of leaking timing information useful to an attacker
+     * attempting to iteratively guess the unknown string (e.g. password) being
+     * compared against.
+     *
+     * @param string $a
+     * @param string $b
+     * @return bool
+     */
+    protected function _secureStringCompare($a, $b)
+    {
+        if (strlen($a) !== strlen($b)) {
+            return false;
+        }
+        $result = 0;
+        for ($i = 0; $i < strlen($a); $i++) {
+            $result |= ord($a[$i]) ^ ord($b[$i]);
+        }
+        return $result == 0;
     }
 }

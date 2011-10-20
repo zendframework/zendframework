@@ -421,4 +421,45 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    /**
+     * @group ZF-11334
+     */
+    public function testSupportsIpv6AddressesWhichContainHexDigitF()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        $this->assertTrue($validator->isValid('FEDC:BA98:7654:3210:FEDC:BA98:7654:3210'));
+        $this->assertTrue($validator->isValid('1080:0:0:0:8:800:200C:417A'));
+        $this->assertTrue($validator->isValid('3ffe:2a00:100:7031::1'));
+        $this->assertTrue($validator->isValid('1080::8:800:200C:417A'));
+        $this->assertTrue($validator->isValid('::192.9.5.5'));
+        $this->assertTrue($validator->isValid('::FFFF:129.144.52.38'));
+        $this->assertTrue($validator->isValid('2010:836B:4179::836B:4179'));
+    }
+
+    /**
+     * Test extended greek charset
+     *
+     * @group ZF-11751
+     */
+    public function testExtendedGreek()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+        $this->assertEquals(true, $validator->isValid('ῆὧὰῧῲ.com'));
+    }
+
+    /**
+     * @group ZF-11796
+     */
+    public function testIDNSI()
+    {
+        $validator = new Hostname(Hostname::ALLOW_ALL);
+
+        $this->assertTrue($validator->isValid('Test123.si'));
+        $this->assertTrue($validator->isValid('țest123.si'));
+        $this->assertTrue($validator->isValid('tĕst123.si'));
+        $this->assertTrue($validator->isValid('tàrø.si'));
+        $this->assertFalse($validator->isValid('رات.si'));
+    }
 }

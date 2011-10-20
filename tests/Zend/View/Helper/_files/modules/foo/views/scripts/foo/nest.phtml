@@ -1,5 +1,5 @@
 <?php 
-$headTitle = $this->broker('headTitle');
-$headTitle->direct('Foo Nest');
+$headTitle = $this->plugin('headTitle');
+$headTitle('Foo Nest');
 $headTitle->setSeparator(' - '); 
-$this->broker('action')->direct('nested', 'foo', 'foo');
+$this->action('nested', 'foo', 'foo');

@@ -1,0 +1,18 @@
+HTTP/1.1 201 Created
+X-Copied-From-Last-Modified: Fri, 23 Sep 2011 10:31:33 GMT
+Content-Type: text/html; charset=UTF-8
+Date: Fri, 23 Sep 2011 10:31:37 GMT
+Etag: 702edca0b2181c15d457eacac39de39b
+X-Trans-Id: txd96aa5fe584e4217bfe85216e62727c3
+Connection: close
+X-Copied-From: zf-unit-test/zf-object-test
+Last-Modified: Fri, 23 Sep 2011 10:31:37 GMT
+X-Object-Meta-Foo: bar
+Content-Length: 18
+X-Object-Meta-Foo2: bar2
+
+201 Created
+
+
+
+   

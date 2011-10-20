@@ -38,7 +38,8 @@ class Null extends AbstractFilter
     const EMPTY_ARRAY  = 4;
     const STRING       = 8;
     const ZERO         = 16;
-    const ALL          = 31;
+    const FLOAT        = 32;
+    const ALL          = 63;
 
     protected $_constants = array(
         self::BOOLEAN     => 'boolean',
@@ -46,6 +47,7 @@ class Null extends AbstractFilter
         self::EMPTY_ARRAY => 'array',
         self::STRING      => 'string',
         self::ZERO        => 'zero',
+        self::FLOAT       => 'float',
         self::ALL         => 'all',
     );
 
@@ -137,6 +139,14 @@ class Null extends AbstractFilter
     public function filter($value)
     {
         $type = $this->getType();
+
+        // FLOAT (0.0)
+        if ($type >= self::FLOAT) {
+            $type -= self::FLOAT;
+            if (is_float($value) && ($value == 0.0)) {
+                return null;
+            }
+        }
 
         // STRING ZERO ('0')
         if ($type >= self::ZERO) {

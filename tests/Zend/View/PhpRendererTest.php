@@ -23,6 +23,7 @@ namespace ZendTest\View;
 
 use Zend\View\PhpRenderer,
     Zend\View\TemplatePathStack,
+    Zend\View\Variables,
     Zend\Filter\FilterChain;
 
 /**
@@ -73,14 +74,14 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $a = new \ArrayObject;
         $this->renderer->setVars($a);
-        $this->assertSame($a, $this->renderer->vars());
+        $this->assertSame($a->getArrayCopy(), $this->renderer->vars()->getArrayCopy());
     }
 
     public function testCanSpecifyArrayForVars()
     {
         $vars = array('foo' => 'bar');
         $this->renderer->setVars($vars);
-        $this->assertEquals($vars, $this->renderer->vars());
+        $this->assertEquals($vars, $this->renderer->vars()->getArrayCopy());
     }
 
     public function testPassingArgumentToVarsReturnsValueFromThatKey()
@@ -91,12 +92,12 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesHelperBrokerByDefault()
     {
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
     }
 
     public function testPassingArgumentToBrokerReturnsHelperByThatName()
     {
-        $helper = $this->renderer->broker('doctype');
+        $helper = $this->renderer->plugin('doctype');
         $this->assertInstanceOf('Zend\View\Helper\Doctype', $helper);
     }
 
@@ -109,7 +110,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testPassingValidStringClassToSetBrokerCreatesBroker()
     {
         $this->renderer->setBroker('Zend\View\HelperBroker');
-        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->broker());
+        $this->assertInstanceOf('Zend\View\HelperBroker', $this->renderer->getBroker());
     }
 
     public function invalidBrokers()
@@ -134,7 +135,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testInjectsSelfIntoHelperBroker()
     {
-        $broker = $this->renderer->broker();
+        $broker = $this->renderer->getBroker();
         $this->assertSame($this->renderer, $broker->getView());
     }
 
@@ -162,7 +163,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     public function testRenderingFiltersContentWithFilterChain()
     {
         $expected = 'foo bar baz';
-        $this->renderer->getFilterChain()->connect(function($content) {
+        $this->renderer->getFilterChain()->attach(function($content) {
             return str_replace('INJECT', 'bar', $content);
         });
         $this->renderer->vars()->assign(array('bar' => 'INJECT'));
@@ -178,5 +179,98 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         foreach (array('foo', 'bar', 'baz') as $value) {
             $this->assertContains("<li>$value</li>", $content);
         }
+    }
+    
+    /**
+     * @group ZF2-68
+     */
+    public function testCanSpecifyArrayForVarsAndGetAlwaysArrayObject()
+    {
+        $vars = array('foo' => 'bar');
+        $this->renderer->setVars($vars);       
+        $this->assertTrue($this->renderer->vars() instanceof Variables);
+    }
+
+    /**
+     * @group ZF2-68
+     */
+    public function testPassingVariablesObjectToSetVarsShouldUseItDirectoy()
+    {
+        $vars = new Variables(array('foo' => '<p>Bar</p>'));
+        $this->renderer->setVars($vars);
+        $this->assertSame($vars, $this->renderer->vars());
+    }
+
+    /**
+     * @group convenience-api
+     */
+    public function testPropertyOverloadingShouldProxyToVariablesContainer()
+    {
+        $this->renderer->foo = '<p>Bar</p>';
+        $this->assertEquals($this->renderer->vars('foo'), $this->renderer->foo);
+        $this->assertSame('<p>Bar</p>', $this->renderer->vars()->getRawValue('foo'));
+    }
+
+    /**
+     * @group convenience-api
+     */
+    public function testMethodOverloadingShouldReturnHelperInstanceIfNotInvokable()
+    {
+        $broker = $this->renderer->getBroker();
+        $broker->getClassLoader()->registerPlugin('uninvokable', 'ZendTest\View\TestAsset\Uninvokable');
+        $helper = $this->renderer->uninvokable();
+        $this->assertInstanceOf('ZendTest\View\TestAsset\Uninvokable', $helper);
+    }
+
+    /**
+     * @group convenience-api
+     */
+    public function testMethodOverloadingShouldInvokeHelperIfInvokable()
+    {
+        $broker = $this->renderer->getBroker();
+        $broker->getClassLoader()->registerPlugin('invokable', 'ZendTest\View\TestAsset\Invokable');
+        $return = $this->renderer->invokable('it works!');
+        $this->assertEquals('ZendTest\View\TestAsset\Invokable::__invoke: it works!', $return);
+    }
+
+    /**
+     * @group convenience-api
+     */
+    public function testGetMethodShouldRetrieveVariableFromVariableContainer()
+    {
+        $this->renderer->foo = '<p>Bar</p>';
+        $foo = $this->renderer->get('foo');
+        $this->assertSame($this->renderer->vars()->foo, $foo);
+    }
+
+    /**
+     * @group convenience-api
+     */
+    public function testRawMethodShouldRetrieveRawVariableFromVariableContainer()
+    {
+        $this->renderer->foo = '<p>Bar</p>';
+        $foo = $this->renderer->raw('foo');
+        $this->assertSame($this->renderer->vars()->getRawValue('foo'), $foo);
+    }
+    
+    /**
+     * @group convenience-api
+     */
+    public function testRenderingLocalVariables()
+    {
+        $expected = '10 &gt; 9';
+        $this->renderer->vars()->assign(array('foo' => '10 > 9'));
+        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $test = $this->renderer->render('testLocalVars.phtml');
+        $this->assertContains($expected, $test);
+    }    
+
+    public function testInjectsVariablesContainerWithEscapeHelperAsEscapeCallbackWhenPresent()
+    {
+        if (!$this->renderer->getBroker()->getClassLoader()->isLoaded('escape')) {
+            $this->markTestSkipped('Cannot test as escape helper is not loaded');
+        }
+        $escapeHelper = $this->renderer->plugin('escape');
+        $this->assertSame($escapeHelper, $this->renderer->vars()->getEscapeCallback());
     }
 }

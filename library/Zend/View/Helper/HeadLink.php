@@ -72,7 +72,7 @@ class HeadLink extends Placeholder\Container\Standalone
      *
      * @return \Zend\View\Helper\HeadLink
      */
-    public function direct(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
+    public function __invoke(array $attributes = null, $placement = Placeholder\Container\AbstractContainer::APPEND)
     {
         if (null !== $attributes) {
             $item = $this->createData($attributes);
@@ -284,8 +284,8 @@ class HeadLink extends Placeholder\Container\Standalone
             }
         }
 
-        if (method_exists($this->view, 'broker')) {
-            $link .= ($this->view->broker('doctype')->isXhtml()) ? '/>' : '>';
+        if ($this->view instanceof \Zend\Loader\Pluggable) {
+            $link .= ($this->view->plugin('doctype')->isXhtml()) ? '/>' : '>';
         } else {
             $link .= '/>';
         }

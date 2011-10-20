@@ -24,6 +24,8 @@
  */
 namespace Zend\Application\Resource;
 
+use Zend\Dojo\Dojo as DojoConfigurator;
+
 /**
  * Resource for settings Dojo options
  *
@@ -63,10 +65,12 @@ class Dojo extends AbstractResource
             $this->getBootstrap()->bootstrap('view');
             $view = $this->getBootstrap()->view;
 
-            \Zend\Dojo\Dojo::enableView($view);
-            $view->dojo()->setOptions($this->getOptions());
+            DojoConfigurator::enableView($view);
+            $dojo          = $view->plugin('dojo');
+            $dojoContainer = $dojo();
+            $dojoContainer->setOptions($this->getOptions());
 
-            $this->_dojo = $view->dojo();
+            $this->_dojo = $dojoContainer;
         }
 
         return $this->_dojo;

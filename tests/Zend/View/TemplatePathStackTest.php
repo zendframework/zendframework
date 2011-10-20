@@ -215,7 +215,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->stack->setOptions($arg);
         $this->assertFalse($this->stack->isLfiProtectionOn());
 
-        $expected = (bool) ini_get('short_open_tag') ? false : true;
+        $expected = (bool) ini_get('short_open_tag');
         $this->assertSame($expected, $this->stack->useStreamWrapper());
 
         $this->assertEquals(array_reverse($this->paths), $this->stack->getPaths()->toArray());
@@ -230,9 +230,17 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $stack = new TemplatePathStack($arg);
         $this->assertFalse($stack->isLfiProtectionOn());
 
-        $expected = (bool) ini_get('short_open_tag') ? false : true;
+        $expected = (bool) ini_get('short_open_tag');
         $this->assertSame($expected, $stack->useStreamWrapper());
 
         $this->assertEquals(array_reverse($this->paths), $stack->getPaths()->toArray());
+    }
+
+    public function testAllowsRelativePharPath()
+    {
+        $path = 'phar://' . __DIR__ . '/_templates/view.phar/start/../views';
+        $this->stack->addPath($path);
+        $test = $this->stack->getScriptPath('foo/hello.phtml');
+        $this->assertEquals($path . '/foo/hello.phtml', $test);
     }
 }

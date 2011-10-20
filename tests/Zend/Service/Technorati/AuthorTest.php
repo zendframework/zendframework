@@ -55,19 +55,19 @@ class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCas
     {
         $author = new Zend_Service_Technorati_Author($this->domElement);
 
-        $this->assertType('string', $author->getFirstName());
+        $this->assertInternalType('string', $author->getFirstName());
         $this->assertEquals('Cesare', $author->getFirstName());
 
-        $this->assertType('string', $author->getLastName());
+        $this->assertInternalType('string', $author->getLastName());
         $this->assertEquals('Lamanna', $author->getLastName());
 
-        $this->assertType('string', $author->getUsername());
+        $this->assertInternalType('string', $author->getUsername());
         $this->assertEquals('cesarehtml', $author->getUsername());
 
-        $this->assertType('string', $author->getDescription());
+        $this->assertInternalType('string', $author->getDescription());
         $this->assertEquals('This is a description.', $author->getDescription());
 
-        $this->assertType('string', $author->getFirstName());
+        $this->assertInternalType('string', $author->getFirstName());
         $this->assertEquals('This is a bio.', $author->getBio());
 
         $this->assertType('Zend_Uri_Http', $author->getThumbnailPicture());
@@ -81,31 +81,31 @@ class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCas
         // check first name
         $set = 'first';
         $get = $author->setFirstName($set)->getFirstName();
-        $this->assertType('string', $get);
+        $this->assertInternalType('string', $get);
         $this->assertEquals($set, $get);
 
         // check last name
         $set = 'last';
         $get = $author->setLastName($set)->getLastName();
-        $this->assertType('string', $get);
+        $this->assertInternalType('string', $get);
         $this->assertEquals($set, $get);
 
         // check username
         $set = 'user';
         $get = $author->setUsername($set)->getUsername();
-        $this->assertType('string', $get);
+        $this->assertInternalType('string', $get);
         $this->assertEquals($set, $get);
 
         // check description
         $set = 'desc';
         $get = $author->setUsername($set)->getUsername();
-        $this->assertType('string', $get);
+        $this->assertInternalType('string', $get);
         $this->assertEquals($set, $get);
 
         // check bio
         $set = 'biography';
         $get = $author->setBio($set)->getBio();
-        $this->assertType('string', $get);
+        $this->assertInternalType('string', $get);
         $this->assertEquals($set, $get);
 
         // check thubmnail picture

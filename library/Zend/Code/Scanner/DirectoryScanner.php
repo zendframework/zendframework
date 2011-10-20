@@ -11,7 +11,6 @@ class DirectoryScanner implements Scanner
 {
     protected $isScanned            = false;
     protected $directories          = array();
-    protected $fileScannerFileClass = 'Zend\Code\Scanner\FileScanner';
     protected $fileScanners         = array();
     protected $classToFileScanner   = null;
     
@@ -26,11 +25,6 @@ class DirectoryScanner implements Scanner
                 }
             }
         }
-    }
-    
-    public function setFileScannerClass($fileScannerClass)
-    {
-        $this->fileScannerClass = $fileScannerClass;
     }
     
     public function addDirectory($directory)
@@ -91,7 +85,19 @@ class DirectoryScanner implements Scanner
     public function getNamespaces()
     {
     }
-    
+
+    public function getFiles($returnFileScanners = false)
+    {
+        $this->scan();
+
+        $return = array();
+        foreach ($this->fileScanners as $fileScanner) {
+            $return[] = ($returnFileScanners) ? $fileScanner : $fileScanner->getFile();
+        }
+
+        return $return;
+    }
+
     public function getClasses($returnScannerClass = false, $returnDerivedScannerClass = false)
     {
         $this->scan();

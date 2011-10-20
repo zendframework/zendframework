@@ -65,7 +65,7 @@ class Partial extends AbstractHelper
      * @param  array $model Variables to populate in the view
      * @return string|\Zend\View\Helper\Partial\Partial
      */
-    public function direct($name = null, $module = null, $model = null)
+    public function __invoke($name = null, $module = null, $model = null)
     {
         if (0 == func_num_args()) {
             return $this;
@@ -95,7 +95,7 @@ class Partial extends AbstractHelper
                 $view->vars()->assign($model);
             } elseif (is_object($model)) {
                 if (null !== ($objectKey = $this->getObjectKey())) {
-                    $view->vars()->assign($objectKey, $model);
+                    $view->vars()->offsetSet($objectKey, $model);
                 } elseif (method_exists($model, 'toArray')) {
                     $view->vars()->assign($model->toArray());
                 } else {
@@ -110,7 +110,7 @@ class Partial extends AbstractHelper
     /**
      * Clone the current View
      *
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      */
     public function cloneView()
     {

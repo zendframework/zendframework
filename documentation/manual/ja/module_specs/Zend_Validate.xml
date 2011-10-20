@@ -310,14 +310,14 @@ iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12))
 
         <para>
             Validate クラスには <methodname>setTranslator()</methodname> メソッドがあり、
-            <classname>Zend_Translate</classname> のインスタンスを指定できます。
+            <classname>Zend_Translator</classname> のインスタンスを指定できます。
             これが、検証に失敗したときのメッセージを翻訳します。
             <methodname>getTranslator()</methodname> メソッドは、設定されているインスタンスを返します。
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(
@@ -332,14 +332,14 @@ $validator->setTranslator($translate);
 
         <para>
             静的メソッド <methodname>setDefaultTranslator()</methodname> で
-            <classname>Zend_Translate</classname> のインスタンスを設定すると、
+            <classname>Zend_Translator</classname> のインスタンスを設定すると、
             それをすべての検証クラスで使用できます。この設定内容を取得するのが
             <methodname>getDefaultTranslator()</methodname> です。これを使用すると、
             個々のバリデータクラスで手動で翻訳器を設定せずに済むのでコードがシンプルになります。
         </para>
 
         <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate(
+$translate = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => array(

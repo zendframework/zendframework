@@ -29,7 +29,7 @@ use Zend\Form\Element\Multiselect as MultiselectElement,
     Zend\Config\Xml as XMLConfig,
     Zend\Config\Ini as INIConfig,
     Zend\Translator\Translator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Multiselect

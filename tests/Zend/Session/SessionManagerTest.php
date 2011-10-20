@@ -395,7 +395,7 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $storage = $this->manager->getStorage();
         $storage['foo'] = 'bar';
         $this->manager->destroy();
-        $this->manager->start();
+        $this->assertTrue(isset($storage['foo']));
         $this->assertEquals('bar', $storage['foo']);
     }
 
@@ -622,10 +622,16 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
     public function testStartingSessionThatFailsAValidatorShouldRaiseException()
     {
         $chain = $this->manager->getValidatorChain();
-        $chain->connect('session.validate', function() {
-             return false;
-        });
-        $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'xxx');
+        $chain->attach('session.validate', array($this, 'validateSession'));
+        $this->setExpectedException('Zend\Session\Exception\RuntimeException', 'failed');
         $this->manager->start();
+    }
+
+    /**
+     * @see testStartingSessionThatFailsAValidatorShouldRaiseException()
+     */
+    public static function validateSession()
+    {
+        return false;
     }
 }

@@ -65,15 +65,16 @@ class DeclareVars extends AbstractHelper
      * @param string|array variable number of arguments, all string names of variables to test
      * @return void
      */
-    public function direct()
+    public function __invoke()
     {
+        $view = $this->getView();
         $args = func_get_args();
         foreach($args as $key) {
             if (is_array($key)) {
                 foreach ($key as $name => $value) {
                     $this->_declareVar($name, $value);
                 }
-            } else if (!isset($view->$key)) {
+            } else if (!isset($view->vars()->$key)) {
                 $this->_declareVar($key);
             }
         }
@@ -90,8 +91,10 @@ class DeclareVars extends AbstractHelper
      */
     protected function _declareVar($key, $value = '')
     {
-        if (!isset($this->view->$key)) {
-            $this->view->$key = $value;
+        $view = $this->getView();
+        $vars = $view->vars();
+        if (!isset($vars->$key)) {
+            $vars->$key = $value;
         }
     }
 }

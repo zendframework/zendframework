@@ -2,42 +2,76 @@
 
 namespace Zend\Di\Definition;
 
-use Zend\Di\Definition;
+use Zend\Di\Definition\Annotation,
+    Zend\Code\Annotation\AnnotationManager,
+    Zend\Code\Annotation\AnnotationCollection,
+    Zend\Code\Reflection;
 
 class RuntimeDefinition implements Definition
 {
-    const LOOKUP_TYPE_IMPLICIT = 'implicit';
-    const LOOKUP_TYPE_EXPLICIT = 'explicit';
 
-    protected $lookupType = self::LOOKUP_TYPE_IMPLICIT;
-    
-    protected $introspectionRuleset = null;
-    
+    /**
+     * @var array
+     */
     protected $classes = array();
-    
-    protected $injectionMethodCache = array();
-    
-    public function __construct($lookupType = self::LOOKUP_TYPE_IMPLICIT)
+
+    /**
+     * @var bool
+     */
+    protected $explicitLookups = false;
+
+    /**
+     * @var IntrospectionStrategy
+     */
+    protected $introspectionStrategy = null;
+
+    /**
+     * @var array
+     */
+    protected $injectionMethods = array();
+
+    /**
+     *
+     */
+    public function __construct(IntrospectionStrategy $introspectionStrategy = null, array $explicitClasses = null)
     {
-        $this->lookupType = $lookupType;
+        $this->introspectionStrategy = ($introspectionStrategy) ?: new IntrospectionStrategy();
+        if ($explicitClasses) {
+            $this->setExplicitClasses($explicitClasses);
+        }
     }
-    
-    public function setIntrospectionRuleset(IntrospectionRuleset $introspectionRuleset)
+
+    /**
+     * @param IntrospectionStrategy $introspectionStrategy
+     * @return void
+     */
+    public function setIntrospectionStrategy(IntrospectionStrategy $introspectionStrategy)
     {
-        $this->introspectionRuleset = $introspectionRuleset;
+        $this->introspectionStrategy = $introspectionStrategy;
     }
     
     /**
-     * @return Zend\Di\Definition\IntrospectionRuleset
+     * @return IntrospectionStrategy
      */
-    public function getIntrospectionRuleset()
+    public function getIntrospectionStrategy()
     {
-        if ($this->introspectionRuleset == null) {
-            $this->introspectionRuleset = new IntrospectionRuleset();
-        }
-        return $this->introspectionRuleset;
+        return $this->introspectionStrategy;
     }
-    
+
+    public function setExplicitClasses(array $explicitClasses)
+    {
+        $this->explicitLookups = true;
+        foreach ($explicitClasses as $eClass) {
+            $this->classes[$eClass] = true;
+        }
+        $this->classes = $explicitClasses;
+    }
+
+    public function forceLoadClass($class)
+    {
+        $this->processClass($class);
+    }
+
     /**
      * Return nothing
      * 
@@ -45,243 +79,281 @@ class RuntimeDefinition implements Definition
      */
     public function getClasses()
     {
-        return array();
-    }
-    
-    /**
-     * Set the Lookup Type
-     * 
-     * @param string $lookupType
-     */
-    public function setLookupType($lookupType)
-    {
-        $this->lookupType = $lookupType;
-    }
-    
-    /**
-     * Track classes when using EXPLICIT lookups
-     * @param unknown_type $class
-     */
-    public function addClass($class)
-    {
-        $this->classes[] = $class;
+        return array_keys($this->classes);
     }
 
     /**
      * Return whether the class exists
-     * 
+     *
+     * @param string $class
      * @return bool
      */
     public function hasClass($class)
     {
+        if ($this->explicitLookups === true) {
+            return (array_key_exists($class, $this->classes));
+        }
+        
         return class_exists($class, true);
     }
 
     /**
      * Return the supertypes for this class
-     * 
+     *
+     * @param string $class
      * @return array of types
      */
     public function getClassSupertypes($class)
     {
-        return class_parents($class) + class_implements($class);
+        if (!array_key_exists($class, $this->classes[$class])) {
+            $this->processClass($class);
+        }
+        return $this->classes[$class]['supertypes'];
     }
 
     /**
-     * Get the instiatiator
+     * Get the instantiator
+     *
+     * @param string $class
      * @return string|callable
      */
     public function getInstantiator($class)
     {
-        $class = new \ReflectionClass($class);
-        if ($class->isInstantiable()) {
-            return '__construct';
+        if (!array_key_exists($class, $this->classes)) {
+            $this->processClass($class);
         }
-        return false;
+        return $this->classes[$class]['instantiator'];
     }
 
     /**
      * Return if there are injection methods
-     * 
+     *
+     * @param string $class
      * @return bool
      */
-    public function hasInjectionMethods($class)
+    public function hasMethods($class)
     {
-        $methods = $this->getInjectionMethods($class);
-        return (count($methods) > 0);
+        if (!array_key_exists($class, $this->classes)) {
+            $this->processClass($class);
+        }
+        return (count($this->classes[$class]['methods']) > 0);
     }
 
     /**
      * Return injection methods
-     * 
+     *
+     * @param string $class
+     * @param string $method
      * @return bool
      */
-    public function hasInjectionMethod($class, $method)
+    public function hasMethod($class, $method)
     {
-        $injectionMethods = $this->getInjectionMethods($class);
-        return (in_array($method, $injectionMethods));
+        if (!array_key_exists($class, $this->classes)) {
+            $this->processClass($class);
+        }
+        return isset($this->classes[$class]['methods'][$method]);
     }
 
     /**
      * Return an array of the injection methods
-     * 
+     *
+     * @param string $class
      * @return array
      */
-    public function getInjectionMethods($class)
+    public function getMethods($class)
     {
-        $introspectionRuleset = $this->getIntrospectionRuleset();
-
-        // setup
-        $methods = array();
-        $c = new \ReflectionClass($class);
-        $className = $c->getName();
-        
-        if (array_key_exists($className, $this->injectionMethodCache)) {
-            return array_keys($this->injectionMethodCache[$className]);
+        if (!array_key_exists($class, $this->classes)) {
+            $this->processClass($class);
         }
-        
-        // constructor injection
-        $cRules = $introspectionRuleset->getConstructorRules();
+        return $this->classes[$class]['methods'];
+    }
 
-        if ($cRules['enabled']) {
-            $m = ($c->hasMethod('__construct')) ? $c->getMethod('__construct') : null;
-            if ($m && $m->isPublic() && $m->getNumberOfParameters() > 0) {
-                do {
-                    // explicity in included classes
-                    if ($cRules['includedClasses'] && !in_array($className, $cRules['includedClasses'])) {
-                        break;
-                    }
-                    // explicity NOT in excluded classes
-                    if ($cRules['excludedClasses'] && in_array($className, $cRules['excludedClasses'])) {
-                        break;
-                    }
-                    $methods['__construct'] = IntrospectionRuleset::TYPE_CONSTRUCTOR;
-                } while (false);
-            }
+    public function hasMethodParameters($class, $method)
+    {
+        if (!isset($this->classes[$class])) {
+            return false;
         }
-
-        // setter injection
-        $sRules = $introspectionRuleset->getSetterRules();
-        
-        if ($sRules['enabled']) {
-            /* @var $m ReflectionMethod */
-            foreach ($c->getMethods() as $m) {
-                $declaringClassName = $m->getDeclaringClass()->getName();
-                
-                if (!$m->isPublic() || $m->getNumberOfParameters() == 0) {
-                    continue;
-                }
-                
-                // explicitly in the include classes
-                if ($sRules['includedClasses'] && !in_array($className, $sRules['includedClasses'])) {
-                    continue;
-                }
-
-                // explicity NOT in excluded classes
-                if ($sRules['excludedClasses']
-                    && (in_array($className, $sRules['excludedClasses'])
-                        || in_array($declaringClassName, $sRules['excludedClasses']))) {
-                    continue;
-                }
-                
-                // declaring class 
-                
-                // if there is a pattern & it does not match
-                if ($sRules['pattern'] && !preg_match('/' . $sRules['pattern'] . '/', $m->getName())) {
-                    continue;
-                }
-                // if there are more than methodsMaxParameters, continue
-                if ($sRules['methodMaximumParams'] && ($m->getNumberOfParameters() > $sRules['methodMaximumParams'])) {
-                    continue;
-                }
-                $methods[$m->getName()] = IntrospectionRuleset::TYPE_SETTER;
-            }
-        }
-
-        // interface injection
-        $iRules = $introspectionRuleset->getInterfaceRules();
-        
-        if ($iRules['enabled']) {
-            foreach ($c->getInterfaces() as $i) {
-                // explicitly in the include interfaces
-                if ($iRules['includedInterfaces'] && !in_array($i->getName(), $iRules['includedInterfaces'])) {
-                    continue;
-                }
-                // explicity NOT in excluded classes
-                if ($iRules['excludedInterfaces'] && in_array($i->getName(), $iRules['excludedInterfaces'])) {
-                    continue;
-                }
-                // if there is a pattern, and it does not match, continue
-                if ($iRules['pattern'] && !preg_match('#' . preg_quote($iRules['pattern'], '#') . '#', $i->getName())) {
-                    continue;
-                }
-                foreach ($i->getMethods() as $m) {
-                    $methods[$m->getName()] = IntrospectionRuleset::TYPE_INTERFACE;
-                }
-            }
-        }
-
-        $this->injectionMethodCache[$className] = $methods;
-
-        return array_keys($this->injectionMethodCache[$className]);
+        return (array_key_exists($method, $this->classes[$class]['parameters']));
     }
 
     /**
      * Return the parameters for a method
-     * 
+     *
      * 3 item array:
      *     #1 - Class name, string if it exists, else null
      *     #2 - Optional?, boolean
      *     #3 - Instantiable, boolean if class exists, otherwise null
-     * 
-     * @return array 
+     *
+     * @param string $class
+     * @param string $method
+     * @return array
      */
-    public function getInjectionMethodParameters($class, $method)
+    public function getMethodParameters($class, $method)
     {
-        $params = array();
-
-        if (!$this->hasClass($class)) {
-            throw new \Exception('Class not found');
+        if (!is_array($this->classes[$class])) {
+            $this->processClass($class);
         }
+        return $this->classes[$class]['parameters'][$method];
+    }
 
-        $c = new \ReflectionClass($class);
-        $class = $c->getName(); // normalize provided name
-        
-        $injectionMethods = $this->getInjectionMethods($class);
+    protected function processClass($class)
+    {
+        $strategy = $this->introspectionStrategy; // localize for readability
 
-        if (!in_array($method, $injectionMethods)) {
-            throw new \Exception('Injectible method was not found.');
-        }
-        $m = $c->getMethod($method);
-        
-        $introspectionType = $this->injectionMethodCache[$class][$m->getName()];
-        $rules = $this->getIntrospectionRuleset()->getRules($introspectionType);
-        
-        foreach ($m->getParameters() as $p) {
-            /* @var $p ReflectionParameter */
-            $pc = $p->getClass();
-            $paramName = $p->getName();
-            
-            $params[$paramName] = array();
-            
-            // set the clas name, if it exists
-            $params[$paramName][] = ($pc !== null) ? $pc->getName() : null;
+        /** @var $rClass \Zend\Code\Reflection\ClassReflection */
+        $rClass = new Reflection\ClassReflection($class);
+        $className = $rClass->getName();
+        $matches = null; // used for regex below
 
-            // optional?
-            if ($introspectionType == IntrospectionRuleset::TYPE_SETTER && $rules['paramCanBeOptional']) {
-                $params[$paramName][] = true;
-            } else {
-                $params[$paramName][] = $p->isOptional(); 
-            }
-            
-            // instantiable?
-            if ($pc !== null) {
-                $params[$paramName][] = ($pc->isInstantiable()) ? true : false;
-            } else {
-                $params[$paramName][] = null;
+        // setup the key in classes
+        $this->classes[$className] = array(
+            'supertypes'   => array(),
+            'instantiator' => null,
+            'methods'      => array(),
+            'parameters'   => array()
+        );
+
+        $def = &$this->classes[$className]; // localize for brevity
+
+        // class annotations?
+        if ($strategy->getUseAnnotations() == true) {
+            $annotations = $rClass->getAnnotations($strategy->getAnnotationManager());
+
+            if (($annotations instanceof AnnotationCollection)
+                && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Instantiator')) {
+                // @todo Instnatiator support in annotations
             }
         }
-        return $params;
+
+        if ($def['instantiator'] == null) {
+            if ($rClass->isInstantiable()) {
+                $def['instantiator'] = '__construct';
+            }
+        }
+
+        if ($rClass->hasMethod('__construct')) {
+            $def['methods']['__construct'] = true; // required
+            $this->processParams($def, $rClass, $rClass->getMethod('__construct'));
+        }
+
+
+        foreach ($rClass->getMethods(Reflection\MethodReflection::IS_PUBLIC) as $rMethod) {
+
+            $methodName = $rMethod->getName();
+
+            if ($rMethod->getName() === '__construct') {
+                continue;
+            }
+
+            if ($strategy->getUseAnnotations() == true) {
+                $annotations = $rMethod->getAnnotations($strategy->getAnnotationManager());
+
+                if (($annotations instanceof AnnotationCollection)
+                    && $annotations->hasAnnotation('Zend\Di\Definition\Annotation\Inject')) {
+
+                    $def['methods'][$methodName] = true;
+                    $this->processParams($def, $rClass, $rMethod);
+                    continue;
+                }
+            }
+
+            $methodPatterns = $this->introspectionStrategy->getMethodNameInclusionPatterns();
+
+            // matches a method injection pattern?
+            foreach ($methodPatterns as $methodInjectorPattern) {
+                preg_match($methodInjectorPattern, $methodName, $matches);
+                if ($matches) {
+                    $def['methods'][$methodName] = false; // check ot see if this is required?
+                    $this->processParams($def, $rClass, $rMethod);
+                    continue 2;
+                }
+            }
+
+
+            // method
+            // by annotation
+            // by setter pattern,
+            // by interface
+
+        }
+
+        $interfaceInjectorPatterns = $this->introspectionStrategy->getInterfaceInjectionInclusionPatterns();
+
+        // matches the interface injection pattern
+        /** @var $rIface \ReflectionClass */
+        foreach ($rClass->getInterfaces() as $rIface) {
+            foreach ($interfaceInjectorPatterns as $interfaceInjectorPattern) {
+                preg_match($interfaceInjectorPattern, $rIface->getName(), $matches);
+                if ($matches) {
+                    foreach ($rIface->getMethods() as $rMethod) {
+                        if ($rMethod->getName() === '__construct') { // ctor not allowed in ifaces
+                            continue;
+                        }
+                        $def['methods'][$rMethod->getName()] = true;
+                        $this->processParams($def, $rClass, $rMethod);
+                    }
+                    continue 2;
+                }
+            }
+        }
+
+
+        //var_dump($this->classes);
+    }
+
+    protected function processParams(&$def, Reflection\ClassReflection $rClass, Reflection\MethodReflection $rMethod)
+    {
+        if (count($rMethod->getParameters()) === 0) {
+            return;
+        }
+
+        $methodName = $rMethod->getName();
+
+        // @todo annotations here for alternate names?
+
+        $def['parameters'][$methodName] = array();
+
+        foreach ($rMethod->getParameters() as $p) {
+
+            /** @var $p \ReflectionParameter  */
+            $actualParamName = $p->getName();
+
+            $paramName = $this->createDistinctParameterName($actualParamName, $rClass->getName());
+
+            $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();
+
+            $def['parameters'][$methodName][$fqName] = array();
+
+            // set the class name, if it exists
+            $def['parameters'][$methodName][$fqName][] = $actualParamName;
+            $def['parameters'][$methodName][$fqName][] = ($p->getClass() !== null) ? $p->getClass()->getName() : null;
+            $def['parameters'][$methodName][$fqName][] = !$p->isOptional();
+        }
+
+    }
+
+    protected function createDistinctParameterName($paramName, $class)
+    {
+        $currentParams = array();
+        if ($this->classes[$class]['parameters'] === array()) {
+            return $paramName;
+        }
+        foreach ($this->classes as $cdata) {
+            foreach ($cdata['parameters'] as $mdata) {
+                $currentParams = array_merge($currentParams, array_keys($mdata));
+            }
+        }
+
+        if (!in_array($paramName, $currentParams)) {
+            return $paramName;
+        }
+
+        $alt = 2;
+        while (in_array($paramName . (string) $alt, $currentParams)) {
+            $alt++;
+        }
+
+        return $paramName . (string) $alt;
     }
     
 }

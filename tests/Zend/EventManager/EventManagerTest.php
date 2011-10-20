@@ -20,7 +20,10 @@
  */
 
 namespace ZendTest\EventManager;
-use Zend\EventManager\EventManager,
+
+use Zend\EventManager\Event,
+    Zend\EventManager\EventDescription,
+    Zend\EventManager\EventManager,
     Zend\EventManager\ResponseCollection,
     Zend\Stdlib\CallbackHandler;
 
@@ -44,67 +47,67 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testAttachShouldReturnCallbackHandler()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $this->assertTrue($handle instanceof CallbackHandler);
+        $listener = $this->events->attach('test', array($this, __METHOD__));
+        $this->assertTrue($listener instanceof CallbackHandler);
     }
 
-    public function testAttachShouldAddHandlerToEvent()
+    public function testAttachShouldAddListenerToEvent()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $handles = $this->events->getHandlers('test');
-        $this->assertEquals(1, count($handles));
-        $this->assertContains($handle, $handles);
+        $listener  = $this->events->attach('test', array($this, __METHOD__));
+        $listeners = $this->events->getListeners('test');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listener, $listeners);
     }
 
     public function testAttachShouldAddEventIfItDoesNotExist()
     {
         $events = $this->events->getEvents();
         $this->assertTrue(empty($events), var_export($events, 1));
-        $handle  = $this->events->attach('test', array($this, __METHOD__));
+        $listener = $this->events->attach('test', array($this, __METHOD__));
         $events = $this->events->getEvents();
         $this->assertFalse(empty($events));
         $this->assertContains('test', $events);
     }
 
-    public function testDetachShouldRemoveHandlerFromEvent()
+    public function testDetachShouldRemoveListenerFromEvent()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $handles = $this->events->getHandlers('test');
-        $this->assertContains($handle, $handles);
-        $this->events->detach($handle);
-        $handles = $this->events->getHandlers('test');
-        $this->assertNotContains($handle, $handles);
+        $listener  = $this->events->attach('test', array($this, __METHOD__));
+        $listeners = $this->events->getListeners('test');
+        $this->assertContains($listener, $listeners);
+        $this->events->detach($listener);
+        $listeners = $this->events->getListeners('test');
+        $this->assertNotContains($listener, $listeners);
     }
 
     public function testDetachShouldReturnFalseIfEventDoesNotExist()
     {
-        $handle = $this->events->attach('test', array($this, __METHOD__));
-        $this->events->clearHandlers('test');
-        $this->assertFalse($this->events->detach($handle));
+        $listener = $this->events->attach('test', array($this, __METHOD__));
+        $this->events->clearListeners('test');
+        $this->assertFalse($this->events->detach($listener));
     }
 
-    public function testDetachShouldReturnFalseIfHandlerDoesNotExist()
+    public function testDetachShouldReturnFalseIfListenerDoesNotExist()
     {
-        $handle1 = $this->events->attach('test', array($this, __METHOD__));
-        $this->events->clearHandlers('test');
-        $handle2 = $this->events->attach('test', array($this, 'handleTestEvent'));
-        $this->assertFalse($this->events->detach($handle1));
+        $listener1 = $this->events->attach('test', array($this, __METHOD__));
+        $this->events->clearListeners('test');
+        $listener2 = $this->events->attach('test', array($this, 'handleTestEvent'));
+        $this->assertFalse($this->events->detach($listener1));
     }
 
-    public function testRetrievingAttachedHandlersShouldReturnEmptyArrayWhenEventDoesNotExist()
+    public function testRetrievingAttachedListenersShouldReturnEmptyArrayWhenEventDoesNotExist()
     {
-        $handles = $this->events->getHandlers('test');
-        $this->assertEquals(0, count($handles));
+        $listeners = $this->events->getListeners('test');
+        $this->assertEquals(0, count($listeners));
     }
 
-    public function testTriggerShouldTriggerAttachedHandlers()
+    public function testTriggerShouldTriggerAttachedListeners()
     {
-        $handle = $this->events->attach('test', array($this, 'handleTestEvent'));
+        $listener = $this->events->attach('test', array($this, 'handleTestEvent'));
         $this->events->trigger('test', $this, array('message' => 'test message'));
         $this->assertEquals('test message', $this->message);
     }
 
-    public function testTriggerShouldReturnAllHandlerReturnValues()
+    public function testTriggerShouldReturnAllListenerReturnValues()
     {
         $this->events->attach('string.transform', function ($e) {
             $string = $e->getParam('string', '__NOT_FOUND__');
@@ -186,7 +189,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($responses->contains('zero'));
     }
 
-    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastHandler()
+    public function testTriggerUntilShouldMarkResponseCollectionStoppedWhenConditionMetByLastListener()
     {
         $this->events->attach('foo.bar', function () { return 'bogus'; });
         $this->events->attach('foo.bar', function () { return 'nada'; });
@@ -214,7 +217,7 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('zero', $responses->last());
     }
 
-    public function testCanAttachAggregateInstances()
+    public function testCanAttachListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
@@ -224,35 +227,20 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testHandlerAggregateReturnedByAttachAggregate()
+    public function testAttachAggregateReturnsAttachOfListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
-        $test      = $this->events->attachAggregate($aggregate);
-        $this->assertSame($aggregate, $test);
+        $method    = $this->events->attachAggregate($aggregate);
+        $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::attach', $method);
     }
 
-    public function testAttachAggregateAllowsPassingAHandlerAggregateClassName()
+    public function testCanDetachListenerAggregates()
     {
-        $this->events->attachAggregate('ZendTest\EventManager\TestAsset\MockAggregate');
-        $events = $this->events->getEvents();
-        foreach (array('foo.bar', 'foo.baz') as $event) {
-            $this->assertContains($event, $events);
-        }
-    }
-
-    public function testPassingClassNameToAttachAggregateReturnsHandlerAggregateInstance()
-    {
-        $test = $this->events->attachAggregate('ZendTest\EventManager\TestAsset\MockAggregate');
-        $this->assertInstanceOf('ZendTest\EventManager\TestAsset\MockAggregate', $test);
-    }
-
-    public function testCanDetachHandlerAggregates()
-    {
-        // setup some other event handlers, to ensure appropriate items are detached
-        $handlerFooBar1 = $this->events->attach('foo.bar', function(){ return true; });
-        $handlerFooBar2 = $this->events->attach('foo.bar', function(){ return true; });
-        $handlerFooBaz1 = $this->events->attach('foo.baz', function(){ return true; });
-        $handlerOther   = $this->events->attach('other', function(){ return true; });
+        // setup some other event listeners, to ensure appropriate items are detached
+        $listenerFooBar1 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBar2 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBaz1 = $this->events->attach('foo.baz', function(){ return true; });
+        $listenerOther   = $this->events->attach('other', function(){ return true; });
 
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
@@ -262,18 +250,26 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
             $this->assertContains($event, $events);
         }
 
-        $handlers = $this->events->getHandlers('foo.bar');
-        $this->assertEquals(2, count($handlers));
-        $this->assertContains($handlerFooBar1, $handlers);
-        $this->assertContains($handlerFooBar2, $handlers);
+        $listeners = $this->events->getListeners('foo.bar');
+        $this->assertEquals(2, count($listeners));
+        $this->assertContains($listenerFooBar1, $listeners);
+        $this->assertContains($listenerFooBar2, $listeners);
 
-        $handlers = $this->events->getHandlers('foo.baz');
-        $this->assertEquals(1, count($handlers));
-        $this->assertContains($handlerFooBaz1, $handlers);
+        $listeners = $this->events->getListeners('foo.baz');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerFooBaz1, $listeners);
 
-        $handlers = $this->events->getHandlers('other');
-        $this->assertEquals(1, count($handlers));
-        $this->assertContains($handlerOther, $handlers);
+        $listeners = $this->events->getListeners('other');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerOther, $listeners);
+    }
+
+    public function testDetachAggregateReturnsDetachOfListenerAggregate()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attachAggregate($aggregate);
+        $method = $this->events->detachAggregate($aggregate);
+        $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::detach', $method);
     }
 
     public function testCallingEventsStopPropagationMethodHaltsEventEmission()
@@ -323,5 +319,177 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $responses = $this->events->trigger('foo.bar', $this, $params);
         $this->assertEquals('FOO', $params->foo);
         $this->assertEquals('BAR', $params->bar);
+    }
+
+    public function testCanPassEventObjectAsSoleArgumentToTrigger()
+    {
+        $event = new Event();
+        $event->setName(__FUNCTION__);
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->trigger($event);
+        $this->assertSame($event, $responses->last());
+    }
+
+    public function testCanPassEventNameAndEventObjectAsSoleArgumentsToTrigger()
+    {
+        $event = new Event();
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->trigger(__FUNCTION__, $event);
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+    }
+
+    public function testCanPassEventObjectAsArgvToTrigger()
+    {
+        $event = new Event();
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->trigger(__FUNCTION__, $this, $event);
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+        $this->assertSame($this, $event->getTarget());
+    }
+
+    public function testCanPassEventObjectAndCallbackAsSoleArgumentsToTriggerUntil()
+    {
+        $event = new Event();
+        $event->setName(__FUNCTION__);
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->triggerUntil($event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+        $this->assertSame($event, $responses->last());
+    }
+
+    public function testCanPassEventNameAndEventObjectAndCallbackAsSoleArgumentsToTriggerUntil()
+    {
+        $event = new Event();
+        $event->setTarget($this);
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->triggerUntil(__FUNCTION__, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+    }
+
+    public function testCanPassEventObjectAsArgvToTriggerUntil()
+    {
+        $event = new Event();
+        $event->setParams(array('foo' => 'bar'));
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+        $responses = $this->events->triggerUntil(__FUNCTION__, $this, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+        $this->assertSame($event, $responses->last());
+        $this->assertEquals(__FUNCTION__, $event->getName());
+        $this->assertSame($this, $event->getTarget());
+    }
+
+    public function testTriggerCanTakeAnOptionalCallbackArgumentToEmulateTriggerUntil()
+    {
+        $this->events->attach(__FUNCTION__, function ($e) {
+            return $e;
+        });
+
+        // Four scenarios:
+        // First: normal signature:
+        $responses = $this->events->trigger(__FUNCTION__, $this, array(), function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+
+        // Second: Event as $argv parameter:
+        $event = new Event();
+        $responses = $this->events->trigger(__FUNCTION__, $this, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+
+        // Third: Event as $target parameter:
+        $event = new Event();
+        $event->setTarget($this);
+        $responses = $this->events->trigger(__FUNCTION__, $event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+
+        // Fourth: Event as $event parameter:
+        $event = new Event();
+        $event->setTarget($this);
+        $event->setName(__FUNCTION__);
+        $responses = $this->events->trigger($event, function ($r) {
+            return ($r instanceof EventDescription);
+        });
+        $this->assertTrue($responses->stopped());
+    }
+
+    public function testWeakRefsAreHonoredWhenTriggering()
+    {
+        if (!class_exists('WeakRef', false)) {
+            $this->markTestSkipped('Requires pecl/weakref');
+        }
+
+        $functor = new TestAsset\Functor;
+        $this->events->attach('test', $functor);
+
+        unset($functor);
+
+        $result = $this->events->trigger('test', $this, array());
+        $message = $result->last();
+        $this->assertNull($message);
+    }
+
+    public function testDuplicateIdentifiersAreNotRegistered()
+    {
+        $events = new EventManager(array(__CLASS__, get_class($this)));
+        $identifiers = $events->getIdentifiers();
+        $this->assertSame(count($identifiers), 1);
+        $this->assertSame($identifiers[0], __CLASS__);
+        $events->addIdentifiers(__CLASS__);
+        $this->assertSame(count($identifiers), 1);
+        $this->assertSame($identifiers[0], __CLASS__);
+    }
+
+    public function testIdentifierGetterSettersWorkWithArrays()
+    {
+        $identifiers = array('foo', 'bar');
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
+        $this->assertSame($this->events->getIdentifiers(), $identifiers);
+        $identifiers[] = 'baz';
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
+        $this->assertSame($this->events->getIdentifiers(), $identifiers);
+    }
+
+    public function testIdentifierGetterSettersWorkWithTraversables()
+    {
+        $identifiers = new \ArrayIterator(array('foo', 'bar'));
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->setIdentifiers($identifiers));
+        $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
+        $identifiers = new \ArrayIterator(array('foo', 'bar', 'baz'));
+        $this->assertInstanceOf('Zend\EventManager\EventManager', $this->events->addIdentifiers($identifiers));
+        $this->assertSame($this->events->getIdentifiers(), (array) $identifiers);
     }
 }

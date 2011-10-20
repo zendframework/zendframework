@@ -39,7 +39,7 @@ use Zend\View;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class NavigationTest extends TestAbstract
+class NavigationTest extends AbstractTest
 {
     /**
      * Class name for view helper to test
@@ -57,14 +57,14 @@ class NavigationTest extends TestAbstract
 
     public function testHelperEntryPointWithoutAnyParams()
     {
-        $returned = $this->_helper->direct();
+        $returned = $this->_helper->__invoke();
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav1, $returned->getContainer());
     }
 
     public function testHelperEntryPointWithContainerParam()
     {
-        $returned = $this->_helper->direct($this->_nav2);
+        $returned = $this->_helper->__invoke($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }

@@ -60,9 +60,9 @@ class Zend_Service_Technorati_DailyCountsResultSetTest extends Zend_Service_Tech
         $object = new Zend_Service_Technorati_DailyCountsResultSet($this->dom);
 
         // check counts
-        $this->assertType('integer', $object->totalResults());
+        $this->assertInternalType('integer', $object->totalResults());
         $this->assertEquals(5, $object->totalResults());
-        $this->assertType('integer', $object->totalResultsAvailable());
+        $this->assertInternalType('integer', $object->totalResultsAvailable());
         $this->assertEquals(5, $object->totalResultsAvailable());
 
         // check properties

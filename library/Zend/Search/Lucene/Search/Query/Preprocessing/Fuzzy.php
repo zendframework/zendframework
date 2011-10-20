@@ -30,7 +30,7 @@ use Zend\Search\Lucene,
 	Zend\Search\Lucene\Search,
 	Zend\Search\Lucene\Analysis\Analyzer,
 	Zend\Search\Lucene\Search\Highlighter,
-	Zend\Search\Lucence\Search\Exception\QueryParserException;
+	Zend\Search\Lucene\Search\Exception\QueryParserException;
 
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
@@ -107,7 +107,7 @@ class Fuzzy extends AbstractPreprocessing
      * Re-write query into primitive queries in the context of specified index
      *
      * @param \Zend\Search\Lucene\SearchIndex $index
-     * @throws \Zend\Search\Lucence\Search\Exception\QueryParserException
+     * @throws \Zend\Search\Lucene\Search\Exception\QueryParserException
      * @return \Zend\Search\Lucene\Search\Query\AbstractQuery
      */
     public function rewrite(Lucene\SearchIndex $index)

@@ -553,12 +553,12 @@
       <newFullyQualifiedName>Zend\Application\Resource\Session</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Application/Resource/Translate.php</originalRelativeFilePath>
-      <originalClassName>Zend_Application_Resource_Translate</originalClassName>
-      <newRelativeFilePath>Zend/Application/Resource/Translate.php</newRelativeFilePath>
+      <originalRelativeFilePath>Zend/Application/Resource/Translator.php</originalRelativeFilePath>
+      <originalClassName>Zend_Application_Resource_Translator</originalClassName>
+      <newRelativeFilePath>Zend/Application/Resource/Translator.php</newRelativeFilePath>
       <newNamespace>Zend\Application\Resource</newNamespace>
-      <newClassName>Translate</newClassName>
-      <newFullyQualifiedName>Zend\Application\Resource\Translate</newFullyQualifiedName>
+      <newClassName>Translator</newClassName>
+      <newFullyQualifiedName>Zend\Application\Resource\Translator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/Application/Resource/View.php</originalRelativeFilePath>
@@ -16065,104 +16065,104 @@
       <newFullyQualifiedName>Zend\Tool\Project\Provider\View</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Array.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Array</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Array.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Array</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/ArrayAdapter.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\AdapterAdapter</newNamespace>
       <newClassName>ArrayAdapter</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\ArrayAdapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Csv.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Csv</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Csv.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Csv</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Csv.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Csv</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Csv</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Gettext.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Gettext</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Gettext.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Gettext</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Gettext.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Gettext</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Gettext</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Ini.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Ini</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Ini.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Ini</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Ini.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Ini</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Ini</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Qt.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Qt</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Qt.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Qt</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Qt.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Qt</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Qt</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Tbx.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Tbx</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Tbx.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Tbx</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Tbx.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Tbx</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Tbx</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Tmx.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Tmx</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Tmx.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Tmx</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Tmx.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Tmx</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Tmx</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/Xliff.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_Xliff</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/Xliff.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_Xliff</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Xliff.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Xliff</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Xliff</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter/XmlTm.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter_XmlTm</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter/XmlTm.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter_XmlTm</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/XmlTm.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>XmlTm</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\XmlTm</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Adapter.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Adapter</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Adapter.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Adapter</originalClassName>
       <newRelativeFilePath>Zend/Translator/Adapter/Adapter.php</newRelativeFilePath>
       <newNamespace>Zend\Translator\Adapter</newNamespace>
       <newClassName>Adapter</newClassName>
       <newFullyQualifiedName>Zend\Translator\Adapter\Adapter</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Exception.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Exception</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Exception.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Exception</originalClassName>
       <newRelativeFilePath>Zend/Translator/Exception.php</newRelativeFilePath>
       <newNamespace>Zend\Translator</newNamespace>
       <newClassName>Exception</newClassName>
       <newFullyQualifiedName>Zend\Translator\Exception</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate/Plural.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate_Plural</originalClassName>
+      <originalRelativeFilePath>Zend/Translator/Plural.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator_Plural</originalClassName>
       <newRelativeFilePath>Zend/Translator/Plural.php</newRelativeFilePath>
       <newNamespace>Zend\Translator</newNamespace>
       <newClassName>Plural</newClassName>
       <newFullyQualifiedName>Zend\Translator\Plural</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/Translate.php</originalRelativeFilePath>
-      <originalClassName>Zend_Translate</originalClassName>
+      <originalRelativeFilePath>Zend/Translator.php</originalRelativeFilePath>
+      <originalClassName>Zend_Translator</originalClassName>
       <newRelativeFilePath>Zend/Translator/Translator.php</newRelativeFilePath>
       <newNamespace>Zend\Translator</newNamespace>
       <newClassName>Translator</newClassName>
@@ -17401,12 +17401,12 @@
       <newFullyQualifiedName>Zend\View\Helper\ServerUrl</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
-      <originalRelativeFilePath>Zend/View/Helper/Translate.php</originalRelativeFilePath>
-      <originalClassName>Zend_View_Helper_Translate</originalClassName>
-      <newRelativeFilePath>Zend/View/Helper/Translate.php</newRelativeFilePath>
+      <originalRelativeFilePath>Zend/View/Helper/Translator.php</originalRelativeFilePath>
+      <originalClassName>Zend_View_Helper_Translator</originalClassName>
+      <newRelativeFilePath>Zend/View/Helper/Translator.php</newRelativeFilePath>
       <newNamespace>Zend\View\Helper</newNamespace>
-      <newClassName>Translate</newClassName>
-      <newFullyQualifiedName>Zend\View\Helper\Translate</newFullyQualifiedName>
+      <newClassName>Translator</newClassName>
+      <newFullyQualifiedName>Zend\View\Helper\Translator</newFullyQualifiedName>
    </mappedClass>
    <mappedClass>
       <originalRelativeFilePath>Zend/View/Helper/Url.php</originalRelativeFilePath>

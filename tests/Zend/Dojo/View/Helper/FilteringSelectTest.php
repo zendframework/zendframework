@@ -64,7 +64,7 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
 
     public function getElementAsSelect()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'someCombo',
             array(),
@@ -82,7 +82,7 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
 
     public function getElementAsRemoter()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'someCombo',
             array(
@@ -110,7 +110,7 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElementAsSelect();
         $this->assertNotRegexp('/<select[^>]*(dojoType="dijit.form.FilteringSelect")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
     }
 
     public function testShouldAllowDeclarativeDijitCreationAsRemoter()
@@ -128,12 +128,12 @@ class FilteringSelectTest extends \PHPUnit_Framework_TestCase
         $html = $this->getElementAsRemoter();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.FilteringSelect")/', $html);
         $this->assertRegexp('/<input[^>]*(type="text")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
 
-        $this->assertContains('var stateStore;', $this->view->broker('dojo')->getJavascript());
+        $this->assertContains('var stateStore;', $this->view->plugin('dojo')->getJavascript());
 
         $found = false;
-        $scripts = $this->view->broker('dojo')->_getZendLoadActions();
+        $scripts = $this->view->plugin('dojo')->_getZendLoadActions();
         foreach ($scripts as $js) {
             if (strstr($js, 'stateStore = new ')) {
                 $found = true;

@@ -37,6 +37,28 @@ use Zend\Mail;
  */
 class MimeTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
+    /**
+     * Setup environment
+     */
+    public function setUp()
+    {
+        $this->_originaltimezone = date_default_timezone_get();
+    }
+
+    /**
+     * Teardown environment
+     */
+    public function tearDown()
+    {
+        date_default_timezone_set($this->_originaltimezone);
+    }
+
     public function testBoundary()
     {
         // check boundary for uniqueness

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.phpunit.testing"><info><title>בדיקת המערכות שלך</title></info>
-    
+
 
     <para>
         ברגע שכבר הגדרת את קובץ ה bootstrap שלך, תוכל להתחיל בשלב הבדיקות.
@@ -57,7 +57,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
         ));
 
         // Set headers, even:
-        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
+        $this->request->setHeader('X-Requested-With', 'XMLHttpRequest');
 
         // Set the request method:
         $this->request->setMethod('POST');

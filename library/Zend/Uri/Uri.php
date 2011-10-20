@@ -1063,7 +1063,7 @@ class Uri
      */
     public static function merge($baseUri, $relativeUri)
     {
-        $uri = new self($relativeUri);
+        $uri = new static($relativeUri);
         return $uri->resolve($baseUri);
     }
 

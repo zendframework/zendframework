@@ -221,10 +221,10 @@ $authors = $feed->getAuthors()->getValues();
         </para>
     </section>
 
-    <section xml:id="migration.110.zend.translate"><info><title>Zend_Translate</title></info>
+    <section xml:id="migration.110.zend.translator"><info><title>Zend_Translator</title></info>
         
 
-        <section xml:id="migration.110.zend.translate.xliff"><info><title>Xliff adapter</title></info>
+        <section xml:id="migration.110.zend.translator.xliff"><info><title>Xliff adapter</title></info>
             
 
             <para>
@@ -239,7 +239,7 @@ $authors = $feed->getAuthors()->getValues();
             </para>
 
             <programlisting language="php"><![CDATA[
-$trans = new Zend_Translate(
+$trans = new Zend_Translator(
     'xliff', '/path/to/source', $locale, array('useId' => false)
 );
 ]]></programlisting>

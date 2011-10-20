@@ -110,7 +110,7 @@ class Doctype extends AbstractHelper
      * @param  string $doctype
      * @return \Zend\View\Helper\Doctype
      */
-    public function direct($doctype = null)
+    public function __invoke($doctype = null)
     {
         if (null !== $doctype) {
             switch ($doctype) {
@@ -194,7 +194,7 @@ class Doctype extends AbstractHelper
 	 * @return booleean
 	 */
 	public function isHtml5() {
-		return (stristr($this->direct(), '<!DOCTYPE html>') ? true : false);
+		return (stristr($this->__invoke(), '<!DOCTYPE html>') ? true : false);
 	}
 
     /**

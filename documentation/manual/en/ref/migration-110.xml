@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="migration.110"><info><title>Zend Framework 1.10</title></info>
-    
+
 
     <para>
         When upgrading from a previous release to Zend Framework 1.10 or higher you
@@ -8,7 +8,7 @@
     </para>
 
     <section xml:id="migration.110.zend.controller.front"><info><title>Zend_Controller_Front</title></info>
-        
+
 
         <para>
             A wrong behaviour was fixed, when there was no module route and no route
@@ -50,7 +50,7 @@
     </section>
 
     <section xml:id="migration.110.zend.feed.reader"><info><title>Zend_Feed_Reader</title></info>
-        
+
 
         <para>
             With the introduction of Zend Framework 1.10, <classname>Zend_Feed_Reader</classname>'s
@@ -109,10 +109,10 @@ $authors = $feed->getAuthors()->getValues();
     </section>
 
     <section xml:id="migration.110.zend.file.transfer"><info><title>Zend_File_Transfer</title></info>
-        
+
 
         <section xml:id="migration.110.zend.file.transfer.files"><info><title>Security change</title></info>
-            
+
 
             <para>
                 For security reasons <classname>Zend_File_Transfer</classname> does no longer store
@@ -135,7 +135,7 @@ $authors = $feed->getAuthors()->getValues();
         </section>
 
         <section xml:id="migration.110.zend.file.transfer.count"><info><title>Count validation</title></info>
-            
+
 
             <para>
                 Before release 1.10 the <classname>MimeType</classname> validator used a wrong
@@ -143,7 +143,7 @@ $authors = $feed->getAuthors()->getValues();
             </para>
 
             <table xml:id="migration.110.zend.file.transfer.count.table"><info><title>Changed Validation Messages</title></info>
-                
+
 
                 <tgroup cols="4">
                     <thead>
@@ -185,7 +185,7 @@ $authors = $feed->getAuthors()->getValues();
     </section>
 
     <section xml:id="migration.110.zend.filter.html-entities"><info><title>Zend_Filter_HtmlEntities</title></info>
-        
+
 
         <para>
             In order to default to a more secure character encoding,
@@ -206,7 +206,7 @@ $authors = $feed->getAuthors()->getValues();
     </section>
 
     <section xml:id="migration.110.zend.filter.strip-tags"><info><title>Zend_Filter_StripTags</title></info>
-        
+
 
         <para>
             <classname>Zend_Filter_StripTags</classname> contains a flag,
@@ -223,11 +223,11 @@ $authors = $feed->getAuthors()->getValues();
         </para>
     </section>
 
-    <section xml:id="migration.110.zend.translate"><info><title>Zend_Translate</title></info>
-        
+    <section xml:id="migration.110.zend.translator"><info><title>Zend_Translator</title></info>
 
-        <section xml:id="migration.110.zend.translate.xliff"><info><title>Xliff adapter</title></info>
-            
+
+        <section xml:id="migration.110.zend.translator.xliff"><info><title>Xliff adapter</title></info>
+
 
             <para>
                 In past the Xliff adapter used the source string as message Id. According to the
@@ -241,7 +241,7 @@ $authors = $feed->getAuthors()->getValues();
             </para>
 
             <programlisting language="php"><![CDATA[
-$trans = new Zend_Translate(
+$trans = new Zend_Translator(
     'xliff', '/path/to/source', $locale, array('useId' => false)
 );
 ]]></programlisting>
@@ -249,10 +249,10 @@ $trans = new Zend_Translate(
     </section>
 
     <section xml:id="migration.110.zend.validate"><info><title>Zend_Validate</title></info>
-        
+
 
         <section xml:id="migration.110.zend.validate.selfwritten"><info><title>Self written validators</title></info>
-            
+
 
             <para>
                 When setting returning a error from within a self written validator you have to
@@ -299,7 +299,7 @@ My_Validator extends Zend_Validate_Abstract
         </section>
 
         <section xml:id="migration.110.zend.validate.datevalidator"><info><title>Simplification in date validator</title></info>
-            
+
 
             <para>
                 Before Zend Framework 1.10 2 identical messages were thrown within the date
@@ -311,7 +311,7 @@ My_Validator extends Zend_Validate_Abstract
         </section>
 
         <section xml:id="migration.110.zend.validate.barcodevalidator"><info><title>Fixes in Alpha, Alnum and Barcode validator</title></info>
-            
+
 
             <para>
                 Before Zend Framework 1.10 the messages within the 2 barcode adapters, the Alpha
@@ -327,7 +327,7 @@ My_Validator extends Zend_Validate_Abstract
             </para>
 
             <table xml:id="migration.110.zend.validate.barcodevalidator.table"><info><title>Available Validation Messages</title></info>
-                
+
 
                 <tgroup cols="3">
                     <thead>

@@ -22,7 +22,10 @@
  * @namespace
  */
 namespace Zend\Validator\File;
-use Zend\Validator,
+
+use Zend\Config\Config,
+    Zend\Loader,
+    Zend\Validator,
     Zend\Validator\Exception;
 
 /**
@@ -80,9 +83,16 @@ class MimeType extends Validator\AbstractValidator
     /**
      * Magicfile to use
      *
-     * @var string|null
+     * @var string|null|false
      */
     protected $_magicfile;
+
+    /**
+     * Disable usage of magicfile
+     *
+     * @var boolean
+     */
+    protected $_disableMagicFile = false;
 
     /**
      * Finfo object to use
@@ -92,7 +102,7 @@ class MimeType extends Validator\AbstractValidator
     protected $_finfo;
 
     /**
-     * If no $_ENV['MAGIC'] is set, try and autodiscover it based on common locations
+     * If no environment variable 'MAGIC' is set, try and autodiscover it based on common locations
      * @var array
      */
     protected $_magicFiles = array(
@@ -118,13 +128,16 @@ class MimeType extends Validator\AbstractValidator
      * Sets validator options
      *
      * Mimetype to accept
+     * - NULL means default PHP usage by using the environment variable 'magic'
+     * - FALSE means disabling searching for mimetype, shoule be used for PHP 5.3
+     * - A string is the mimetype file to use
      *
      * @param  string|array $mimetype MimeType
      * @return void
      */
     public function __construct($mimetype)
     {
-        if ($mimetype instanceof \Zend\Config\Config) {
+        if ($mimetype instanceof Config) {
             $mimetype = $mimetype->toArray();
         } elseif (is_string($mimetype)) {
             $mimetype = explode(',', $mimetype);
@@ -153,8 +166,9 @@ class MimeType extends Validator\AbstractValidator
     public function getMagicFile()
     {
         if (null === $this->_magicfile) {
-            if (!empty($_ENV['MAGIC'])) {
-                $this->setMagicFile($_ENV['MAGIC']);
+            $magic = getenv('magic');
+            if (!empty($magic)) {
+                $this->setMagicFile($magic);
             } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
                 foreach ($this->_magicFiles as $file) {
                     // supressing errors which are thrown due to openbase_dir restrictions
@@ -181,6 +195,7 @@ class MimeType extends Validator\AbstractValidator
      * Sets the magicfile to use
      * if null, the MAGIC constant from php is used
      * if the MAGIC file is errorous, no file will be set
+     * if false, the default MAGIC file from PHP will be used
      *
      * @param  string $file
      * @throws \Zend\Validator\Exception When finfo can not read the magicfile
@@ -188,7 +203,9 @@ class MimeType extends Validator\AbstractValidator
      */
     public function setMagicFile($file)
     {
-        if (empty($file)) {
+        if ($file === false) {
+            $this->_magicfile = false;
+        } else if (empty($file)) {
             $this->_magicfile = null;
         } else if (!(class_exists('finfo', false))) {
             $this->_magicfile = null;
@@ -207,6 +224,28 @@ class MimeType extends Validator\AbstractValidator
         }
 
         return $this;
+    }
+
+    /**
+     * Disables usage of MagicFile
+     *
+     * @param $disable boolean False disables usage of magic file
+     * @return \Zend\Validator\File\MimeType Provides fluid interface
+     */
+    public function disableMagicFile($disable)
+    {
+        $this->_disableMagicFile = (bool) $disable;
+        return $this;
+    }
+
+    /**
+     * Is usage of MagicFile disabled?
+     *
+     * @return boolean
+     */
+    public function isMagicFileDisabled()
+    {
+        return $this->_disableMagicFile;
     }
 
     /**
@@ -240,7 +279,7 @@ class MimeType extends Validator\AbstractValidator
      */
     public function getMimeType($asArray = false)
     {
-        $asArray   = (bool) $asArray;
+        $asArray  = (bool) $asArray;
         $mimetype = (string) $this->_mimetype;
         if ($asArray) {
             $mimetype = explode(',', $mimetype);
@@ -323,14 +362,14 @@ class MimeType extends Validator\AbstractValidator
         }
 
         // Is file readable ?
-        if (!\Zend\Loader::isReadable($value)) {
+        if (!Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }
 
         $mimefile = $this->getMagicFile();
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-            if (!empty($mimefile) && empty($this->_finfo)) {
+            if (!$this->isMagicFileDisabled() && (!empty($mimefile) && empty($this->_finfo))) {
                 $this->_finfo = @finfo_open($const, $mimefile);
             }
 
@@ -383,7 +422,16 @@ class MimeType extends Validator\AbstractValidator
      */
     protected function _throw($file, $errorType)
     {
-        $this->_value = $file['name'];
+        if ($file !== null) {
+            if (is_array($file)) {
+                if(array_key_exists('name', $file)) {
+                    $this->_value = basename($file['name']);
+                }
+            } else if (is_string($file)) {
+                $this->_value = basename($file);
+            }
+        }
+
         $this->_error($errorType);
         return false;
     }

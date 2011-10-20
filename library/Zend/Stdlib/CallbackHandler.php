@@ -23,6 +23,9 @@
  */
 namespace Zend\Stdlib;
 
+use Closure,
+    WeakRef;
+
 /**
  * CallbackHandler
  *
@@ -63,15 +66,65 @@ class CallbackHandler
      * Constructor
      * 
      * @param  string $event Event to which slot is subscribed
-     * @param  string|array|object $callback PHP callback (first element may be )
+     * @param  string|array|object $callback PHP callback 
      * @param  array $options Options used by the callback handler (e.g., priority)
      * @return void
      */
     public function __construct($event, $callback, array $options = array())
     {
         $this->event    = $event;
-        $this->callback = $callback;
         $this->options  = $options;
+        $this->registerCallback($callback);
+    }
+
+    /**
+     * Registers the callback provided in the constructor
+     *
+     * If you have pecl/weakref {@see http://pecl.php.net/weakref} installed, 
+     * this method provides additional behavior.
+     *
+     * If a callback is a functor, or an array callback composing an object 
+     * instance, this method will pass the object to a WeakRef instance prior
+     * to registering the callback. See {@link isValid()} for more information
+     * on how this affects execution.
+     * 
+     * @param  callback $callback 
+     * @return void
+     */
+    protected function registerCallback($callback)
+    {
+        // If pecl/weakref is not installed, simply register it
+        if (!class_exists('WeakRef', false)) {
+            $this->callback = $callback;
+            return;
+        }
+
+        // If we have a non-closure object, pass it to WeakRef, and then
+        // register it.
+        if (is_object($callback) && !$callback instanceof Closure) {
+            $this->callback = new WeakRef($callback);
+            return;
+        }
+
+        // If we have a string or closure, register as-is
+        if (!is_array($callback)) {
+            $this->callback = $callback;
+            return;
+        }
+
+        list($target, $method) = $callback;
+
+        // If we have an array callback, and the first argument is not an 
+        // object, register as-is
+        if (!is_object($target)) {
+            $this->callback = $callback;
+            return;
+        }
+
+        // We have an array callback with an object as the first argument;
+        // pass it to WeakRef, and then register the new callback
+        $target = new WeakRef($target);
+        $this->callback = array($target, $method);
     }
 
     /**
@@ -88,26 +141,33 @@ class CallbackHandler
      * Retrieve registered callback
      * 
      * @return Callback
-     * @throws Exception\InvalidCallbackException
+     * @throws Exception\InvalidCallbackException If callback is invalid
      */
     public function getCallback()
     {
-        if ($this->isValidCallback) {
-            return $this->callback;
+        if (!$this->isValid()) {
+            throw new Exception\InvalidCallbackException('Invalid callback provided; not callable');
         }
 
         $callback = $this->callback;
         if (is_string($callback)) {
-            return $this->validateStringCallback($callback);
-        }
-        if (is_array($callback)) {
-            return $this->validateArrayCallback($callback);
-        }
-        if (is_callable($callback)) {
-            $this->isValidCallback = true;
             return $callback;
         }
-        throw new Exception\InvalidCallbackException('Invalid callback provided; not callable');
+
+        if ($callback instanceof WeakRef) {
+            return $callback->get();
+        }
+
+        if (is_object($callback)) {
+            return $callback;
+        }
+
+        list($target, $method) = $callback;
+        if ($target instanceof WeakRef) {
+            return array($target->get(), $method);
+        }
+
+        return $callback;
     }
 
     /**
@@ -147,43 +207,105 @@ class CallbackHandler
     }
 
     /**
+     * Is the composed callback valid?
+     *
+     * Typically, this method simply checks to see if we have a valid callback. 
+     * In a few situations, it does more.
+     *
+     * * If we have a string callback, we pass execution to 
+     *   {@link validateStringCallback()}.
+     * * If we have an object callback, we test to see if that object is a 
+     *   WeakRef {@see http://pecl.php.net/weakref}. If so, we return the value
+     *   of its valid() method. Otherwise, we return the result of is_callable().
+     * * If we have a callback array with a string in the first position, we 
+     *   pass execution to {@link validateArrayCallback()}.
+     * * If we have a callback array with an object in the first position, we 
+     *   test to see if that object is a WeakRef (@see http://pecl.php.net/weakref).
+     *   If so, we return the value of its valid() method. Otherwise, we return 
+     *   the result of is_callable() on the callback.
+     *
+     * WeakRef is used to allow listeners to go out of scope. This functionality
+     * is turn-key if you have pecl/weakref installed; otherwise, you will have
+     * to manually remove listeners before destroying an object referenced in a
+     * listener.
+     *
+     * @return bool
+     */
+    public function isValid()
+    {
+        // If we've already tested this, we can move on. Note: if a callback
+        // composes a WeakRef, this will never get set, and thus result in
+        // validation on each call.
+        if ($this->isValidCallback) {
+            return $this->callback;
+        }
+
+        $callback = $this->callback;
+
+        if (is_string($callback)) {
+            return $this->validateStringCallback($callback);
+        }
+
+        if ($callback instanceof WeakRef) {
+            return $callback->valid();
+        }
+
+        if (is_object($callback) && is_callable($callback)) {
+            $this->isValidCallback = true;
+            return true;
+        }
+
+        if (!is_array($callback)) {
+            return false;
+        }
+
+        list($target, $method) = $callback;
+        if ($target instanceof WeakRef) {
+            if (!$target->valid()) {
+                return false;
+            }
+            $target = $target->get();
+            return is_callable(array($target, $method));
+        }
+        return $this->validateArrayCallback($callback);
+    }
+
+    /**
      * Validate a string callback
      *
      * Check first if the string provided is callable. If not see if it is a 
      * valid class name; if so, determine if the object is invokable.
      * 
      * @param  string $callback 
-     * @return Callback
-     * @throws Exception\InvalidCallbackException
+     * @return bool
      */
     protected function validateStringCallback($callback)
     {
         if (is_callable($callback)) {
             $this->isValidCallback = true;
-            return $callback;
+            return true;
         }
 
         if (!class_exists($callback)) {
-            throw new Exception\InvalidCallbackException('Provided callback is not a function or a class');
+            return false;
         }
 
         // check __invoke before instantiating
         if (!method_exists($callback, '__invoke')) {
-            throw new Exception\InvalidCallbackException('Class provided as a callback does not implement __invoke');
+            return false;
         }
         $object = new $callback();
 
         $this->callback        = $object;
         $this->isValidCallback = true;
-        return $object;
+        return true;
     }
 
     /**
      * Validate an array callback
      * 
      * @param  array $callback 
-     * @return callback
-     * @throws Exception\InvalidCallbackException
+     * @return bool
      */
     protected function validateArrayCallback(array $callback)
     {
@@ -194,7 +316,7 @@ class CallbackHandler
             // Dealing with a class/method callback, and class provided is a string classname
             
             if (!class_exists($context)) {
-                throw new Exception\InvalidCallbackException('Class provided in callback does not exist');
+                return false;
             }
 
             // We need to determine if we need to instantiate the class first
@@ -202,7 +324,7 @@ class CallbackHandler
             if (!$r->hasMethod($method)) {
                 // Explicit method does not exist
                 if (!$r->hasMethod('__callStatic') && !$r->hasMethod('__call')) {
-                    throw new Exception\InvalidCallbackException('Class provided in callback does not define the method requested');
+                    return false;
                 }
 
                 if ($r->hasMethod('__callStatic')) {
@@ -238,7 +360,6 @@ class CallbackHandler
             return $callback;
         }
 
-
-        throw new Exception\InvalidCallbackException('Method provided in callback does not exist in object');
+        return false;
     }
 }

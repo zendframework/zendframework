@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.paginator.together"><info><title>Alles zusammenfügen</title></info>
-    
+
 
     <para>
         Wir haben gesehen wie ein Paginator Objekt erstellt wurd, wie die Elemente der aktuellen
@@ -37,7 +37,7 @@ class IndexController extends Zend_Controller_Action
 
         // Erstellt ein Select Objekt welches Blog Posts holt, und absteigend
         // anhand des Erstellungsdatums sortiert
-        $select = $db->select()->from('posts')->sort('date_created DESC');
+        $select = $db->select()->from('posts')->order('date_created DESC');
 
         // Erstellt einen Paginator für die Abfrage der Blog Posts
         $paginator = Zend_Paginator::factory($select);
@@ -64,7 +64,7 @@ class IndexController extends Zend_Controller_Action
 // Den Titel jedes Eintrags für die aktuelle Seite
 // in einem Listen-Element darstellen
 foreach ($this->paginator as $item) {
-    echo '<li>' . $item->title . '</li>';
+    echo '<li>' . $item["title"] . '</li>';
 }
 ?>
 </ul>

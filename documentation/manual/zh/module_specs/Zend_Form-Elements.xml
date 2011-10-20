@@ -342,7 +342,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
             </para>
 
             <para>
-                稍好的选择是在表单中使用 <code>Zend_Translate_Adapter</code>。错误代码通过缺省的错误装饰器自动传递给适配器，然后你可以通过为你的校验器的各种错误代码设置翻译来指定自己的错误消息字符串。
+                稍好的选择是在表单中使用 <code>Zend_Translator_Adapter</code>。错误代码通过缺省的错误装饰器自动传递给适配器，然后你可以通过为你的校验器的各种错误代码设置翻译来指定自己的错误消息字符串。
             </para>
         </note>
 
@@ -858,7 +858,7 @@ $element->class = 'text;
 
             <listitem><para>I18n:</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                    <listitem><para><code>setTranslator(Zend_Translator_Adapter $translator = null)</code></para></listitem>
                     <listitem><para><code>getTranslator()</code></para></listitem>
                     <listitem><para><code>setDisableTranslator($flag)</code></para></listitem>
                     <listitem><para><code>translatorIsDisabled()</code></para></listitem>

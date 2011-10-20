@@ -23,6 +23,8 @@
  */
 namespace Zend\Filter\Word;
 
+use Zend\Filter\PregReplace as PregReplaceFilter;
+
 /**
  * @uses       \Zend\Filter\Exception
  * @uses       \Zend\Filter\PregReplace
@@ -32,7 +34,7 @@ namespace Zend\Filter\Word;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractSeparator extends \Zend\Filter\PregReplace
+abstract class AbstractSeparator extends PregReplaceFilter
 {
 
     protected $_separator = null;

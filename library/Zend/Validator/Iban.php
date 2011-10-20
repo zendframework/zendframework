@@ -128,7 +128,7 @@ class Iban extends AbstractValidator
             }
         }
 
-        if (empty($locale)) {
+        if (empty($locale) && ($locale !== false)) {
             if (\Zend\Registry::isRegistered('Zend_Locale')) {
                 $locale = \Zend\Registry::get('Zend_Locale');
             }

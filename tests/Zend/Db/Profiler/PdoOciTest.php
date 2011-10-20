@@ -65,7 +65,7 @@ class PdoOciTest extends AbstractTest
         $this->_db->query("UPDATE $bugs SET $bug_status = :status", array(':status'=>'FIXED'));
 
         $qps = $prof->getQueryProfiles();
-        $this->assertType('array', $qps, 'Expecting some query profiles, got none');
+        $this->assertInternalType('array', $qps, 'Expecting some query profiles, got none');
         foreach ($qps as $qp) {
             $qtype = $qp->getQueryType();
             $this->assertEquals($queryType, $qtype,

@@ -172,4 +172,22 @@ class Http extends Uri
         $this->setUser($user);
         $this->setPassword($password);
     }
+
+    /**
+     * Return the URI port
+     *
+     * If no port is set, will return the default port according to the scheme
+     *
+     * @return integer
+     * @see    Zend\Uri\Uri::getPort()
+     */
+    public function getPort()
+    {
+        if (empty($this->port)) {
+            if (array_key_exists($this->scheme, self::$defaultPorts)) {
+                return self::$defaultPorts[$this->scheme];
+            }
+        }
+        return $this->port;
+    }
 }

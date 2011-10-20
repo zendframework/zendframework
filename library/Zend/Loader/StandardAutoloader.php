@@ -261,7 +261,20 @@ class StandardAutoloader implements SplAutoloader
      */
     protected function transformClassNameToFilename($class, $directory)
     {
+        // $class may contain a namespace portion, in  which case we need
+        // to preserve any underscores in that portion.
+        $ns  = '';
+        $pos = strrpos($class, self::NS_SEPARATOR);
+        if ($pos) {
+            $ns = substr($class, 0, $pos);
+            $class = substr($class, $pos);
+        }
         return $directory
+            . str_replace(
+                self::NS_SEPARATOR,
+                DIRECTORY_SEPARATOR,
+                $ns
+            )
             . str_replace(
                 array(self::NS_SEPARATOR, self::PREFIX_SEPARATOR),
                 DIRECTORY_SEPARATOR,

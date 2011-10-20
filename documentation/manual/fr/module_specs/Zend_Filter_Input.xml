@@ -368,7 +368,7 @@ $input->setOptions($options);
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate_Adapter_Array(array(
+$translate = new Zend_Translator_Adapter_Array(array(
     'content' => array(
         Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
     )

@@ -22,7 +22,7 @@
 namespace ZendTest\EventManager\TestAsset;
 
 use Zend\EventManager\EventCollection,
-    Zend\EventManager\HandlerAggregate;
+    Zend\EventManager\ListenerAggregate;
 
 /**
  * @category   Zend
@@ -32,12 +32,29 @@ use Zend\EventManager\EventCollection,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MockAggregate implements HandlerAggregate
+class MockAggregate implements ListenerAggregate
 {
+
+    protected $listeners = array();
+
     public function attach(EventCollection $events)
     {
-        $events->attach('foo.bar', array( $this, 'fooBar' ));
-        $events->attach('foo.baz', array( $this, 'fooBaz' ));
+        $listeners = array();
+        $listeners[] = $events->attach('foo.bar', array( $this, 'fooBar' ));
+        $listeners[] = $events->attach('foo.baz', array( $this, 'fooBaz' ));
+
+        $this->listeners[ \spl_object_hash($events) ] = $listeners;
+
+        return __METHOD__;
+    }
+
+    public function detach(EventCollection $events)
+    {
+        foreach ($this->listeners[ \spl_object_hash($events) ] as $listener) {
+            $events->detach($listener);
+        }
+
+        return __METHOD__;
     }
 
     public function fooBar()

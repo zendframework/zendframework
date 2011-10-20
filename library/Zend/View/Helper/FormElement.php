@@ -62,7 +62,7 @@ abstract class FormElement extends HtmlElement
     {
         if (null === $translator) {
             $this->_translator = null;
-        } elseif ($translator instanceof \Zend\Translator\Adapter) {
+        } elseif ($translator instanceof \Zend\Translator\Adapter\AbstractAdapter) {
             $this->_translator = $translator;
         } elseif ($translator instanceof \Zend\Translator\Translator) {
             $this->_translator = $translator->getAdapter();
@@ -115,7 +115,7 @@ abstract class FormElement extends HtmlElement
                 }
             }
 
-            // If all helper options are passed as an array, attribs may have 
+            // If all helper options are passed as an array, attribs may have
             // been as well
             if (null === $attribs) {
                 $attribs = $info['attribs'];

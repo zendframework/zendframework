@@ -28,7 +28,7 @@ use Zend\Translator;
 use Zend\View;
 
 /**
- * Test class for Zend_View_Helper_Translate.
+ * Test class for Zend_View_Helper_Translator.
  *
  * @category   Zend
  * @package    Zend_View
@@ -41,7 +41,7 @@ use Zend\View;
 class TranslateTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend_View_Helper_Translate
+     * @var Zend_View_Helper_Translator
      */
     public $helper;
 
@@ -53,7 +53,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function clearRegistry()
     {
-        $regKey = 'Zend_Translate';
+        $regKey = 'Zend_Translator';
         if (\Zend\Registry::isRegistered($regKey)) {
             $registry = \Zend\Registry::getInstance();
             unset($registry[$regKey]);
@@ -69,7 +69,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->clearRegistry();
-        $this->helper = new Helper\Translate();
+        $this->helper = new Helper\Translator();
     }
 
     /**
@@ -88,9 +88,9 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         $trans = new Translator\Translator('arrayAdapter', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
 
-        $helper = new Helper\Translate($trans);
-        $this->assertEquals('eins', $helper->direct('one'));
-        $this->assertEquals('three', $helper->direct('three'));
+        $helper = new Helper\Translator($trans);
+        $this->assertEquals('eins', $helper->__invoke('one'));
+        $this->assertEquals('three', $helper->__invoke('three'));
     }
 
     public function testLocalTranslationObjectUsedForTranslationsWhenPresent()
@@ -98,29 +98,29 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $trans = new Translator\Translator('arrayAdapter', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
 
         $this->helper->setTranslator($trans);
-        $this->assertEquals('eins', $this->helper->direct('one'));
-        $this->assertEquals('three', $this->helper->direct('three'));
+        $this->assertEquals('eins', $this->helper->__invoke('one'));
+        $this->assertEquals('three', $this->helper->__invoke('three'));
     }
 
     public function testTranslationObjectInRegistryUsedForTranslationsInAbsenceOfLocalTranslationObject()
     {
         $trans = new Translator\Translator('arrayAdapter', array('one' => 'eins', 'two %1\$s' => 'zwei %1\$s'), 'de');
-        \Zend\Registry::set('Zend_Translate', $trans);
-        $this->assertEquals('eins', $this->helper->direct('one'));
+        \Zend\Registry::set('Zend_Translator', $trans);
+        $this->assertEquals('eins', $this->helper->__invoke('one'));
     }
 
     public function testOriginalMessagesAreReturnedWhenNoTranslationObjectPresent()
     {
-        $this->assertEquals('one', $this->helper->direct('one'));
-        $this->assertEquals('three', $this->helper->direct('three'));
+        $this->assertEquals('one', $this->helper->__invoke('one'));
+        $this->assertEquals('three', $this->helper->__invoke('three'));
     }
 
     public function testPassingNonNullNonTranslationObjectToConstructorThrowsException()
     {
         try {
-            $helper = new Helper\Translate('something');
+            $helper = new Helper\Translator('something');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setTranslator('something');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->getLocale();
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
         }
     }
 
@@ -147,7 +147,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setLocale('de');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translate', $e->getMessage());
+            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
         }
     }
 
@@ -158,11 +158,11 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $trans->setLocale('de');
 
         $this->helper->setTranslator($trans);
-        $this->assertEquals('eins', $this->helper->direct('one'));
+        $this->assertEquals('eins', $this->helper->__invoke('one'));
         $new = $this->helper->setLocale('it');
-        $this->assertTrue($new instanceof Helper\Translate);
+        $this->assertTrue($new instanceof Helper\Translator);
         $this->assertEquals('it', $new->getLocale());
-        $this->assertEquals('uno', $this->helper->direct('one'));
+        $this->assertEquals('uno', $this->helper->__invoke('one'));
     }
 
     public function testHelperImplementsFluentInterface()
@@ -171,7 +171,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $trans->addTranslation(array('one' => 'uno', 'two %1\$s' => 'duo %2\$s'), 'it');
         $trans->setLocale('de');
 
-        $locale = $this->helper->direct()->setTranslator($trans)->getLocale();
+        $locale = $this->helper->__invoke()->setTranslator($trans)->getLocale();
 
         $this->assertEquals('de', $locale);
     }
@@ -185,10 +185,10 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $trans->setLocale('de');
 
         $this->helper->setTranslator($trans);
-        $this->assertEquals("drei 100 200", $this->helper->direct("three %1\$s %2\$s", "100", "200"));
-        $this->assertEquals("tre 100 200", $this->helper->direct("three %1\$s %2\$s", "100", "200", 'it'));
-        $this->assertEquals("drei 100 200", $this->helper->direct("three %1\$s %2\$s", array("100", "200")));
-        $this->assertEquals("tre 100 200", $this->helper->direct("three %1\$s %2\$s", array("100", "200"), 'it'));
+        $this->assertEquals("drei 100 200", $this->helper->__invoke("three %1\$s %2\$s", "100", "200"));
+        $this->assertEquals("tre 100 200", $this->helper->__invoke("three %1\$s %2\$s", "100", "200", 'it'));
+        $this->assertEquals("drei 100 200", $this->helper->__invoke("three %1\$s %2\$s", array("100", "200")));
+        $this->assertEquals("tre 100 200", $this->helper->__invoke("three %1\$s %2\$s", array("100", "200"), 'it'));
     }
 
     public function testTranslationObjectNullByDefault()
@@ -199,7 +199,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     public function testLocalTranslationObjectIsPreferredOverRegistry()
     {
         $transReg = new Translator\Translator('arrayAdapter', array('one' => 'eins'));
-        \Zend\Registry::set('Zend_Translate', $transReg);
+        \Zend\Registry::set('Zend_Translator', $transReg);
 
         $this->assertSame($transReg->getAdapter(), $this->helper->getTranslator());
 
@@ -211,12 +211,12 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperObjectReturnedWhenNoArgumentsPassed()
     {
-        $helper = $this->helper->direct();
+        $helper = $this->helper->__invoke();
         $this->assertSame($this->helper, $helper);
 
         $transLoc = new Translator\Translator('arrayAdapter', array('one' => 'eins'));
         $this->helper->setTranslator($transLoc);
-        $helper = $this->helper->direct();
+        $helper = $this->helper->__invoke();
         $this->assertSame($this->helper, $helper);
     }
 
@@ -230,8 +230,8 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $trans->setLocale('de');
 
         $this->helper->setTranslator($trans);
-        $this->assertEquals("four%", $this->helper->direct("vier%ig"));
-        $this->assertEquals("zwei 100", $this->helper->direct("two %1\$s", "100"));
+        $this->assertEquals("four%", $this->helper->__invoke("vier%ig"));
+        $this->assertEquals("zwei 100", $this->helper->__invoke("two %1\$s", "100"));
     }
 
     /**
@@ -239,8 +239,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
      */
     public function testTranslationWithoutTranslator()
     {
-        $result = $this->helper->direct("test %1\$s", "100");
+        $result = $this->helper->__invoke("test %1\$s", "100");
         $this->assertEquals('test 100', $result);
     }
 }
-    

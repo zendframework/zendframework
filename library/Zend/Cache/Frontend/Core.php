@@ -243,7 +243,7 @@ class Core implements Frontend
      * @throws \Zend\Cache\Exception
      * @return mixed option value
      */
-    public function getOption($name)
+    public function getOption($name = array())
     {
         if (is_string($name)) {
             $name = strtolower($name);
@@ -251,12 +251,16 @@ class Core implements Frontend
                 // This is a Core option
                 return $this->_options[$name];
             }
+
             if (array_key_exists($name, $this->_specificOptions)) {
                 // This a specic option of this frontend
                 return $this->_specificOptions[$name];
             }
+
+            Cache::throwException("Incorrect option name : $name");
         }
-        Cache::throwException("Incorrect option name : $name");
+
+        return array_merge($this->_options, $this->_specificOptions);
     }
 
     /**

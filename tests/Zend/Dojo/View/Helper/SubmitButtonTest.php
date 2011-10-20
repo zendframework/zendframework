@@ -64,7 +64,7 @@ class SubmitButtonTest extends \PHPUnit_Framework_TestCase
 
     public function getElement()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             'foo',
             array(),
@@ -85,7 +85,7 @@ class SubmitButtonTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<input[^>]*(dojoType="dijit.form.Button")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId'));
     }
 
     /**
@@ -93,7 +93,7 @@ class SubmitButtonTest extends \PHPUnit_Framework_TestCase
      */
     public function testHelperShouldRenderContentKeyAsLabelWhenPassed()
     {
-        $html = $this->helper->direct('foo', '', array('content' => 'Label'));
+        $html = $this->helper->__invoke('foo', '', array('content' => 'Label'));
         $this->assertRegexp('/<input[^>]*(value="Label")/', $html, $html);
     }
 }

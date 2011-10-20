@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,13 +23,15 @@
  * @namespace
  */
 namespace ZendTest\Controller\Router\Route;
-use Zend\Controller\Router\Route;
+
+use Zend\Config\Config,
+    Zend\Controller\Router\Route;
 
 /**
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Controller
  * @group      Zend_Controller_Router
@@ -397,7 +399,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
             )
         */
 
-        $config = new \Zend\Config\Config($routeConf);
+        $config = new Config($routeConf);
         $route = Route\Regex::getInstance($config);
 
         $this->assertInstanceOf('Zend\Controller\Router\Route\Regex', $route);

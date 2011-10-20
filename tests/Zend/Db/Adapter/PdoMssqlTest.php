@@ -313,7 +313,7 @@ class PdoMssqlTest extends AbstractPdoTest
         $rowsAffected = $this->_db->insert('zfbugs', $row);
         $this->assertEquals(1, $rowsAffected);
         $lastInsertId = $this->_db->lastInsertId();
-        $this->assertType('integer', $lastInsertId);
+        $this->assertInternalType('integer', $lastInsertId);
         $this->assertEquals('5', (string) $lastInsertId,
             'Expected new id to be 5');
     }

@@ -87,13 +87,13 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function testJsonHelperSetsResponseHeader()
     {
-        $json = $this->helper->direct('foobar');
+        $json = $this->helper->__invoke('foobar');
         $this->verifyJsonHeader();
     }
 
     public function testJsonHelperReturnsJsonEncodedString()
     {
-        $data = $this->helper->direct('foobar');
+        $data = $this->helper->__invoke('foobar');
         $this->assertTrue(is_string($data));
         $this->assertEquals('foobar', \Zend\Json\Json::decode($data));
     }
@@ -111,7 +111,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $layout = Layout\Layout::startMvc();
         $this->assertTrue($layout->isEnabled());
         
-        $data = $this->helper->direct(array('foobar'), true);
+        $data = $this->helper->__invoke(array('foobar'), true);
         $this->assertTrue($layout->isEnabled());
     }
 }

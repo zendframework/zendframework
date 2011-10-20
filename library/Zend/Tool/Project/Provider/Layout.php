@@ -25,6 +25,7 @@
 namespace Zend\Tool\Project\Provider;
 
 use Zend\Tool\Project\Profile\Profile as ProjectProfile;
+use Zend\Tool\Project\Exception\RuntimeException as ProjectRuntimeException;
 
 /**
  * @uses       \Zend\Tool\Framework\Provider\Pretendable
@@ -39,6 +40,11 @@ class Layout
     extends AbstractProvider 
     implements \Zend\Tool\Framework\Provider\Pretendable
 {
+    /**
+     * @var string Layout path
+     */
+    protected $_layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
+
     
     public static function createResource(ProjectProfile $profile, $layoutName = 'layout')
     {
@@ -81,12 +87,10 @@ class Layout
             return;
         }
         
-        $layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
-        
         if ($this->_registry->getRequest()->isPretend()) {
             $this->_registry->getResponse()->appendContent('Would add "resources.layout.layoutPath" key to the application config file.');
         } else {
-            $applicationConfigResource->addStringItem('resources.layout.layoutPath', $layoutPath, 'production', false);
+            $applicationConfigResource->addStringItem('resources.layout.layoutPath', $this->_layoutPath, 'production', false);
             $applicationConfigResource->create(); 
             
             $layoutScriptFile = self::createResource($profile);
@@ -99,6 +103,7 @@ class Layout
                 );
                 
             $this->_registry->getResponse()->appendContent('A layout entry has been added to the application config file.');
+            $this->_storeProfile();
         }
         
        
@@ -107,9 +112,46 @@ class Layout
     
     public function disable()
     {
-        // @todo
+        $profile = $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
+
+        $applicationConfigResource = $this->_getApplicationConfigResource($profile);
+        $zc = $applicationConfigResource->getAsZendConfig();
+
+        if (isset($zc->resources) && !isset($zc->resources->layout)) {
+            $this->_registry->getResponse()->appendContent('No layout configuration exists in application config file.');
+            return;
+        }
+
+        if ($this->_registry->getRequest()->isPretend()) {
+            $this->_registry->getResponse()->appendContent('Would remove "resources.layout.layoutPath" key from the application config file.');
+        } else {
+
+            // Remove the resources.layout.layoutPath directive from application config
+            $applicationConfigResource->removeStringItem('resources.layout.layoutPath', $this->_layoutPath, 'production', false);
+            $applicationConfigResource->create();
+
+            // Delete layoutsDirectory entry from .zfproject.xml
+            $applicationDirectory = $profile->search('applicationDirectory');
+            $layoutDirectory = $applicationDirectory->search('layoutsDirectory');
+            if ($layoutDirectory !== false) {
+                $layoutDirectory->setDeleted();
+            }
+
+            // Tell the user about the good work we've done
+            $this->_registry->getResponse()->appendContent('Layout entry has been removed from the application config file.');
+
+            $this->_storeProfile();
+        }
+     }
+
+    protected function _getApplicationConfigResource(ProjectProfile $profile)
+    {
+        $applicationConfigResource = $profile->search('ApplicationConfigFile');
+        if (!$applicationConfigResource) {
+            throw new ProjectRuntimeException('A project with an application config file is required to use this provider.');
+        }
+
+        return $applicationConfigResource;
     }
-    
-    
-    
 }
+

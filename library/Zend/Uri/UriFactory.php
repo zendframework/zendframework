@@ -70,7 +70,7 @@ abstract class UriFactory
     static public function registerScheme($scheme, $class)
     {
         $scheme = strtolower($scheme);
-        static::$_schemeClasses[$scheme] = $class;
+        static::$schemeClasses[$scheme] = $class;
     }
 
     /**

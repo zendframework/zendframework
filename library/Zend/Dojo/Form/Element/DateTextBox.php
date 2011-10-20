@@ -30,7 +30,7 @@ use Zend\Form,
  * DateTextBox dijit
  *
  * @uses       \Zend\Dojo\Form\Element\ValidationTextBox
- * @uses       \Zend\Form\ElementException
+ * @uses       \Zend\Form\Element\Exception
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

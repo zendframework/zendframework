@@ -140,7 +140,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptShouldReturnValidLayerMarkup()
     {
-        $this->view->broker('dojo')->requireModule('dijit.form.Form')
+        $this->view->plugin('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button');
         $build = new BuildLayer(array(
@@ -158,7 +158,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithOnLoadsEnabledShouldReturnValidLayerMarkup()
     {
-        $this->view->broker('dojo')->requireModule('dijit.form.Form')
+        $this->view->plugin('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addOnLoad('custom.callback');
@@ -178,7 +178,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithOnLoadsDisabledShouldNotRenderOnLoadEvents()
     {
-        $this->view->broker('dojo')->requireModule('dijit.form.Form')
+        $this->view->plugin('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addOnLoad('custom.callback');
@@ -197,7 +197,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithJavascriptsEnabledShouldReturnValidLayerMarkup()
     {
-        $this->view->broker('dojo')->requireModule('dijit.form.Form')
+        $this->view->plugin('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addJavascript('custom.callback();');
@@ -217,7 +217,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratingLayerScriptWithJavascriptsDisabledShouldNotRenderJavascripts()
     {
-        $this->view->broker('dojo')->requireModule('dijit.form.Form')
+        $this->view->plugin('dojo')->requireModule('dijit.form.Form')
                            ->requireModule('dijit.form.TextBox')
                            ->requireModule('dijit.form.Button')
                            ->addJavascript('custom.callback();');
@@ -288,7 +288,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testProfilePrefixesShouldIncludePrefixesOfAllRequiredModules()
     {
-        $this->view->broker('dojo')->requireModule('dijit.layout.TabContainer')
+        $this->view->plugin('dojo')->requireModule('dijit.layout.TabContainer')
                            ->requireModule('dojox.layout.ContentPane');
         $build = new BuildLayer(array('view' => $this->view));
 
@@ -320,7 +320,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratedDojoBuildProfileWithLayerDependencies()
     {
-        $this->view->broker('dojo')->requireModule('dijit.layout.BorderContainer')
+        $this->view->plugin('dojo')->requireModule('dijit.layout.BorderContainer')
                            ->requireModule('dojox.layout.ContentPane');
         $build = new BuildLayer(array(
             'view' => $this->view,

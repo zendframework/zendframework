@@ -396,84 +396,6 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that a comment IS removed when comments are flagged as allowed
-     *
-     * @group ZF-8473
-     * @return void
-     */
-    public function testSpecifyingCommentsAllowedStillStripsComments()
-    {
-        $filter = $this->_filter;
-        $input    = '<!-- a comment -->';
-        $expected = '';
-        $this->_filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $filter($input));
-    }
-
-    /**
-     * Ensures that a comment containing tags is untouched when comments are allowed
-     *
-     * @group ZF-8473
-     * @return void
-     */
-    public function testSpecifyingCommentsAllowedStripsCommentsContainingTags()
-    {
-        $filter = $this->_filter;
-        $input    = '<!-- a comment <br /> <h1>SuperLarge</h1> -->';
-        $expected = '';
-        $filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $filter($input));
-    }
-
-    /**
-     * Ensures expected behavior when comments are marked as allowed (in our
-     * case, this should have no effect) and a comment contains tags and
-     * linebreaks
-     *
-     * @group ZF-8473
-     * @return void
-     */
-    public function testSpecifyingCommentsAllowedFiltersCommentsContainingTagsAndLinebreaks()
-    {
-        $filter = $this->_filter;
-        $input    = "<br> test <p> text </p> with <!-- comments --> and <!-- hidd\n\nen <br> -->";
-        $expected = " test  text  with  and ";
-        $filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $filter($input));
-    }
-
-    /**
-     * Ensures expected behavior when comments are allowed but nested
-     *
-     * @group ZF-8473
-     * @return void
-     */
-    public function testSpecifyingCommentsAllowedShouldStillStripNestedComments()
-    {
-        $filter = $this->_filter;
-        $input    = '<a> <!-- <b> <!-- <c> --> <d> --> <e>';
-        $expected = '  ';
-        $filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $filter($input));
-    }
-
-    /**
-     * Ensures that space between double-hyphen and closing bracket still matches as a comment delimiter
-     *
-     * @group ZF-8473
-     * @see    http://www.w3.org/TR/1999/REC-html401-19991224/intro/sgmltut.html#h-3.2.4
-     * @return void
-     */
-    public function testFilterCommentsAllowedDelimiterEndingWhiteSpace()
-    {
-        $filter = $this->_filter;
-        $input    = '<a> <!-- <b> --  > <c>';
-        $expected = '  ';
-        $filter->setCommentsAllowed(true);
-        $this->assertEquals($expected, $filter($input));
-    }
-
-    /**
      * Ensures that a closing angle bracket in an allowed attribute does not break the parser
      *
      * @return void
@@ -613,6 +535,20 @@ class StripTagsTest extends \PHPUnit_Framework_TestCase
     {
         $input    = 'text<!-- not closed comment at the end';;
         $expected =  'text';
+        $this->assertEquals($expected, $this->_filter->filter($input));
+    }
+
+    /**
+     * @group ZF-11617
+     */
+    public function testFilterCanAllowHyphenatedAttributeNames()
+    {
+        $input     = '<li data-disallowed="no!" data-name="Test User" data-id="11223"></li>';
+        $expected  = '<li data-name="Test User" data-id="11223"></li>';
+
+        $this->_filter->setTagsAllowed('li');
+        $this->_filter->setAttributesAllowed(array('data-id','data-name'));
+
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
 }

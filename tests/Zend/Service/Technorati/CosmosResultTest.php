@@ -71,7 +71,7 @@ class Zend_Service_Technorati_CosmosResultTest extends Zend_Service_Technorati_T
         $this->assertType('Zend_Uri_Http', $object->getNearestPermalink());
         $this->assertEquals(Zend_Uri::factory('http://gioxx.org/2007/11/05/il-passaggio-a-mac-le-11-risposte/'), $object->getNearestPermalink());
 
-        $this->assertType('string', $object->getExcerpt());
+        $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('Ho intenzione di prendere il modello bianco', $object->getExcerpt());
 
         $this->assertType('Zend_Date', $object->getLinkCreated());

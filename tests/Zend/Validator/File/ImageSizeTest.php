@@ -202,4 +202,15 @@ class ImageSizeTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'less than or equal');
         $validator->setImageHeight(array('minheight' => 20000, 'maxheight' => 200));
     }
+
+    /**
+     * @group ZF-11258
+     */
+    public function testZF11258()
+    {
+        $validator = new File\ImageSize(array('minwidth' => 100, 'minheight' => 1000, 'maxwidth' => 10000, 'maxheight' => 100000));
+        $this->assertFalse($validator->isValid(__DIR__ . '/_files/nofile.mo'));
+        $this->assertTrue(array_key_exists('fileImageSizeNotReadable', $validator->getMessages()));
+        $this->assertContains("'nofile.mo'", current($validator->getMessages()));
+    }
 }

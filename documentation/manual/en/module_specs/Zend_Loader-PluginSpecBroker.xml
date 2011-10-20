@@ -67,6 +67,7 @@ $router = $broker->load('router');
                     </para>
                 </listitem>
             </varlistentry>
+        </variablelist>
     </section>
 
     <section xml:id="zend.loader.plugin-spec-broker.methods">

@@ -23,9 +23,10 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\View;
-use Zend\View\Helper;
-use Zend\Paginator;
+
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper,
+    Zend\Paginator;
 
 /**
  * @category   Zend
@@ -53,10 +54,8 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->markTestSkipped('Skipped until Zend\Paginator is completed');
-        
-        $view = new View\View();
-        $view->addBasePath(__DIR__ . '/_files');
+        $view = new View();
+        $view->resolver()->addPath(__DIR__ . '/_files/scripts');
 
         Helper\PaginationControl::setDefaultViewPartial(null);
         $this->_viewHelper = new Helper\PaginationControl();
@@ -72,11 +71,11 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAndSetsView()
     {
-        $view   = new View\View();
+        $view   = new View();
         $helper = new Helper\PaginationControl();
-        $this->assertNull($helper->view);
+        $this->assertNull($helper->getView());
         $helper->setView($view);
-        $this->assertType('Zend_View_Interface', $helper->view);
+        $this->assertInstanceOf('Zend\View\Renderer', $helper->getView());
     }
 
     public function testGetsAndSetsDefaultViewPartial()
@@ -90,7 +89,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     public function testUsesDefaultViewPartialIfNoneSupplied()
     {
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
-        $output = $this->_viewHelper->paginationControl($this->_paginator);
+        $output = $this->_viewHelper->__invoke($this->_paginator);
         $this->assertContains('pagination control', $output, $output);
         Helper\PaginationControl::setDefaultViewPartial(null);
     }
@@ -98,9 +97,9 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     public function testThrowsExceptionIfNoViewPartialFound()
     {
         try {
-            $this->_viewHelper->paginationControl($this->_paginator);
+            $this->_viewHelper->__invoke($this->_paginator);
         } catch (\Exception $e) {
-            $this->assertType('Zend_View_Exception', $e);
+            $this->assertInstanceOf('Zend\View\Exception', $e);
             $this->assertEquals('No view partial provided and no default set', $e->getMessage());
         }
     }
@@ -111,15 +110,15 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     public function testUsesDefaultScrollingStyleIfNoneSupplied()
     {
         // First we'll make sure the base case works
-        $output = $this->_viewHelper->paginationControl($this->_paginator, 'All', 'testPagination.phtml');
+        $output = $this->_viewHelper->__invoke($this->_paginator, 'All', 'testPagination.phtml');
         $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
 
         Paginator\Paginator::setDefaultScrollingStyle('All');
-        $output = $this->_viewHelper->paginationControl($this->_paginator, null, 'testPagination.phtml');
+        $output = $this->_viewHelper->__invoke($this->_paginator, null, 'testPagination.phtml');
         $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
 
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
-        $output = $this->_viewHelper->paginationControl($this->_paginator);
+        $output = $this->_viewHelper->__invoke($this->_paginator);
         $this->assertContains('page count (11) equals pages in range (11)', $output, $output);
     }
 
@@ -128,11 +127,11 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsesPaginatorFromViewIfNoneSupplied()
     {
-        $this->_viewHelper->view->paginator = $this->_paginator;
+        $this->_viewHelper->getView()->paginator = $this->_paginator;
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
 
         try {
-            $output = $this->_viewHelper->paginationControl();
+            $output = $this->_viewHelper->__invoke();
         } catch (View\Exception $e) {
             $this->fail('Could not find paginator in the view instance');
         }
@@ -148,9 +147,9 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
 
         try {
-            $output = $this->_viewHelper->paginationControl();
+            $output = $this->_viewHelper->__invoke();
         } catch (\Exception $e) {
-            $this->assertType('Zend_View_Exception', $e);
+            $this->assertInstanceOf('Zend\View\Exception', $e);
             $this->assertEquals('No paginator instance provided or incorrect type', $e->getMessage());
         }
     }
@@ -161,12 +160,12 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
     public function testAcceptsViewPartialInOtherModule()
     {
         try {
-            $this->_viewHelper->paginationControl($this->_paginator, null, array('partial.phtml', 'test'));
+            $this->_viewHelper->__invoke($this->_paginator, null, array('partial.phtml', 'test'));
         } catch (\Exception $e) {
             /* We don't care whether or not the module exists--we just want to
              * make sure it gets to Zend_View_Helper_Partial and it's recognized
              * as a module. */
-            $this->assertType('Zend_View_Helper_Partial_Exception', $e);
+            $this->assertInstanceOf('Zend\View\Helper\Partial\Exception', $e);
             $this->assertEquals('Cannot render partial; module does not exist', $e->getMessage());
         }
     }
@@ -176,11 +175,11 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
      */
     public function testUsesPaginatorFromViewOnlyIfNoneSupplied()
     {
-        $this->_viewHelper->view->paginator  = $this->_paginator;
+        $this->_viewHelper->getView()->vars()->paginator  = $this->_paginator;
         $paginator = Paginator\Paginator::factory(range(1, 30));
         Helper\PaginationControl::setDefaultViewPartial('testPagination.phtml');
 
-        $output = $this->_viewHelper->paginationControl($paginator);
+        $output = $this->_viewHelper->__invoke($paginator);
         $this->assertContains('page count (3)', $output, $output);
     }
 
@@ -189,10 +188,10 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanUseObjectForScrollingStyle()
     {
-        $all = new \Zend\Paginator\ScrollingStyle\All();
+        $all = new Paginator\ScrollingStyle\All();
 
         try {
-            $output = $this->_viewHelper->paginationControl($this->_paginator, $all, 'testPagination.phtml');
+            $output = $this->_viewHelper->__invoke($this->_paginator, $all, 'testPagination.phtml');
         } catch (\Exception $e) {
             $this->fail('Could not use object for sliding style');
         }

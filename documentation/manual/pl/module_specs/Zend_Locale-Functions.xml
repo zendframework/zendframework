@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.functions"><info><title>Użycie Zend_Locale</title></info>
-    
+
 
     <para>
         <classname>Zend_Locale</classname> udostępnia zlokalizowane informacje o innych locale.
@@ -8,7 +8,7 @@
     </para>
 
     <section xml:id="zend.locale.copying"><info><title>Kopiowanie, klonowanie oraz serializowanie obiektów locale</title></info>
-        
+
 
         <para>
             Aby pomyślnie zduplikować obiekt locale należy użyć
@@ -18,7 +18,7 @@
         </para>
 
         <example xml:id="zend.locale.copying.example-1"><info><title>Klonowanie</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('ar');
@@ -43,7 +43,7 @@ print "copied: ", $copiedLocale;
     </section>
 
     <section xml:id="zend.locale.equals"><info><title>Równość</title></info>
-        
+
 
         <para>
             <classname>Zend_Locale</classname> udostępnia wygodną funkcję służącą do porównania
@@ -51,7 +51,7 @@ print "copied: ", $copiedLocale;
         </para>
 
         <example xml:id="zend.locale.equals.example-1"><info><title>Sprawdzenie równoważnych locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -66,10 +66,10 @@ if ($locale->equals($mylocale)) {
     </section>
 
     <section xml:id="zend.locale.getdefault"><info><title>Domyślne locale</title></info>
-        
+
 
         <para>
-            Metoda <methodname>getDefault()</methodname> zwraca tablicę identyfikatorów locale
+            Metoda <methodname>getFallback()</methodname> zwraca tablicę identyfikatorów locale
             na podstawie informacji udostępnianych przez przeglądarkę użytkownika (jeśli
             jest dostępna), informacji pochodzących ze środowiska serwera hostingowego lub z
             ustawień Zend Framework. Pierwszy parametr określa preferencję źródła
@@ -81,17 +81,17 @@ if ($locale->equals($mylocale)) {
         </para>
 
         <example xml:id="zend.locale.getdefault.example-1"><info><title>Zwrócenie domyślnego locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 
 // Zwrócenie wszystkich domyślnych locale
-$found = $locale->getDefault();
+$found = $locale->getFallback();
 print_r($found);
 
 // Zwrócenie jedynie locale domyślnego dla przeglądarki
-$found2 = $locale->getDefault(Zend_Locale::BROWSER,TRUE);
+$found2 = $locale->getFallback(Zend_Locale::BROWSER,TRUE);
 print_r($found2);
 ]]></programlisting>
         </example>
@@ -120,7 +120,7 @@ print_r($found2);
     </section>
 
     <section xml:id="zend.locale.setlocale"><info><title>Ustawienie nowego locale</title></info>
-        
+
 
         <para>
             Nowe locale może zostać ustawione za pomocą metody <methodname>setLocale()</methodname>.
@@ -133,7 +133,7 @@ print_r($found2);
         </para>
 
         <example xml:id="zend.locale.setlocale.example-1"><info><title>Metoda setLocale()</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -149,7 +149,7 @@ print $locale->toString();
     </section>
 
     <section xml:id="zend.locale.getlocale"><info><title>Zwrócenie języka i regionu</title></info>
-        
+
 
         <para>
             Aby uzyskać skrót języka z identyfikatora locale należy skorzystać z metody
@@ -158,7 +158,7 @@ print $locale->toString();
         </para>
 
         <example xml:id="zend.locale.getlocale.example-1"><info><title>getLanguage oraz getRegion</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -173,7 +173,7 @@ print $locale->getRegion();
     </section>
 
     <section xml:id="zend.locale.getdata"><info><title>Uzyskanie zlokalizowanych łańcuchów znaków</title></info>
-        
+
 
         <para>
             Metoda <methodname>getTranslationList()</methodname> umożliwia dostęp do zlokalizowanych
@@ -190,7 +190,7 @@ print $locale->getRegion();
         </para>
 
         <example xml:id="zend.locale.getdata.example-1"><info><title>getTranslationList</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getTranslationList('language', 'de_AT');
@@ -217,7 +217,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         <table xml:id="zend.locale.getdata.table-1"><info><title>
             Szczegóły użycia metody getTranslationList($type = null, $locale = null, $value = null)
             </title></info>
-            
+
 
             <tgroup cols="2">
                 <thead>
@@ -243,7 +243,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 
                         <entry>
                             Zwraca zlokalizowaną listę systemów pisma. Identyfikator systemu
-                            zwracany jest w kluczu, przetłumaczona nazwa - w wartości 
+                            zwracany jest w kluczu, przetłumaczona nazwa - w wartości
                         </entry>
                     </row>
 
@@ -286,7 +286,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Zwraca zlokalizowaną listę typów kluczy. Są to rodzaje kalendarzy oraz
                             porządków sortowania. Jeśli poda się parametr 'collation' to zostanie
-                            zwrócona lista porządków sortowania. Dla parametru 'calendar' - 
+                            zwrócona lista porządków sortowania. Dla parametru 'calendar' -
                             rodzajów kalendarzy. Jeśli parametr nie zostanie podany to lista
                             zwrotna będzie zawierała oba rodzaje danych. Rodzaj jest podany w
                             kluczu a przetłumaczona nazwa w wartości
@@ -365,7 +365,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Zwraca zlokalizowaną listę dni tygodnia. Bez podania parametru zwracana
                             jest zwykła lista pełnych nazw dni tygodnia wg. kalendarza
                             gregoriańskiego ze skrótem angielskiej nazwy dnia tygodnia w kluczu
-                            i przetłumaczoną pełną nazwą dnia w wartości. 
+                            i przetłumaczoną pełną nazwą dnia w wartości.
                             Można uzyskać nazwy dni z innego kalendarza
                             jeśli poda się tablicę w parametrze. Pierwszą wartością tej tablicy
                             powinna być nazwa kalendarza, drugą - kontekst, trzecią - szerokość
@@ -373,7 +373,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link>
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><emphasis>Week</emphasis></entry>
                         <entry>
@@ -387,7 +387,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Zwraca zlokalizowaną listę wszystkich nazw kwartałów dla podanego
                             locale. Istnieje szereg różnych zestawów nazw kwartałów - każdy z nich
-                            zwracany jest w osobnej tablicy zagnieżdżonej.                            
+                            zwracany jest w osobnej tablicy zagnieżdżonej.
                             Jeśli w parametrze nie zostanie podana wartość to zwrócona
                             lista będzie dotyczyć kalandarza gregoriańskiego. Można uzyskać
                             listę dla innego systemu kalendarza jeśli przekaże się jego nazwę w
@@ -579,7 +579,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             kod regionu <constant>ISO3166</constant> - w wartości. Jeśli dana
                             waluta jest używana w wielu regionach to są one oddzielone spacją.
                             Dla uproszczenia można używać
-                            <link linkend="zend.currency.introduction">Zend_Currency</link> 
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
                         </entry>
                     </row>
                     <row>
@@ -643,7 +643,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Zwraca listę stref czasowych Windows i odpowiadających im stref
                             czasowych <acronym>ISO</acronym>. Strefa Windows jest umieszczona w
-                            kluczu a strefa <acronym>ISO</acronym> - w wartości. 
+                            kluczu a strefa <acronym>ISO</acronym> - w wartości.
                         </entry>
                     </row>
                     <row>
@@ -806,7 +806,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         <table xml:id="zend.locale.getdata.table-2"><info><title>
                 Szczegóły użycia metody getTranslation($value = null, $type = null, $locale = null)
             </title></info>
-            
+
 
             <tgroup cols="2">
                 <thead>
@@ -830,7 +830,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Script</emphasis></entry>
 
                         <entry>
-                            Zwraca tłumaczenie nazwy systemu pisma. Aby uzyskać żądane 
+                            Zwraca tłumaczenie nazwy systemu pisma. Aby uzyskać żądane
                             tłumaczenie należy w parametrze wartości przekazać kod systemu pisma
                         </entry>
                     </row>
@@ -851,7 +851,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>Variant</emphasis></entry>
 
                         <entry>
-                            Zwraca tłumaczenie nazwy odmiany systemu pisma. Aby uzyskać żądane 
+                            Zwraca tłumaczenie nazwy odmiany systemu pisma. Aby uzyskać żądane
                             tłumaczenie należy w parametrze wartości przekazać kod żądanej odmiany
                         </entry>
                     </row>
@@ -955,8 +955,8 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link>
                         </entry>
                     </row>
-                    
-                    
+
+
                     <row>
                         <entry><emphasis>Quarter</emphasis></entry>
 
@@ -1244,13 +1244,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                             Zwraca listę regionów, gdzie dana waluta jest używana. Kod waluty
                             musi być podany w formie łańcucha znaków <constant>ISO4217</constant>.
-                            Np.: 'EUR' dla Euro. Jeśli waluta jest używana w wielu regionach to 
+                            Np.: 'EUR' dla Euro. Jeśli waluta jest używana w wielu regionach to
                             zostaną one oddzielone spacją.
                             Dla uproszczenia można korzystać z
                             <link linkend="zend.date.introduction">Zend_Currency</link>
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><emphasis>RegionToTerritory</emphasis></entry>
 
@@ -1443,7 +1443,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry><emphasis>NumberingSystem</emphasis></entry>
 
                         <entry>
-                            Zwraca znaki oznaczające cyfry w ramach podanego systemu pisma 
+                            Zwraca znaki oznaczające cyfry w ramach podanego systemu pisma
                         </entry>
                     </row>
 
@@ -1497,7 +1497,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </note>
 
         <table xml:id="zend.locale.getdata.table-3"><info><title>Różnica pomiędzy Zend Framework 1.0 oraz 1.5</title></info>
-            
+
 
             <tgroup cols="2">
                 <thead>
@@ -1591,7 +1591,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </para>
 
         <example xml:id="zend.locale.getdata.example-3"><info><title>getTranslationList</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 // wyświetla nazwy wszystkich krajów w języku niemieckim
@@ -1605,7 +1605,7 @@ print_r(Zend_Locale::getTranslationList('country', 'de'));
         </para>
 
         <example xml:id="zend.locale.getdata.example-4"><info><title>Zamiana nazwy kraju z jednego języka na drugi</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $code2name = Zend_Locale::getLanguageTranslationList('en_US');
@@ -1630,7 +1630,7 @@ echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
         </para>
 
         <example xml:id="zend.locale.getdata.example-6"><info><title>Nazwy wszystkich języków w oryginalnym brzmieniu</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getLanguageTranslationList('auto');
@@ -1650,7 +1650,7 @@ foreach($list as $language => $content) {
     </section>
 
     <section xml:id="zend.locale.getquestion"><info><title>Uzyskanie tłumaczenia dla "yes" oraz "no"</title></info>
-        
+
 
         <para>
             Często może dochodzić do sytuacji, w której niezbędne jest uzyskanie od użytkownika
@@ -1688,7 +1688,7 @@ foreach($list as $language => $content) {
         </para>
 
         <example xml:id="zend.locale.getquestion.example-1"><info><title>getQuestion()</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -1728,7 +1728,7 @@ Array
         </note>
     </section>
     <section xml:id="zend.locale.getlocalelist"><info><title>Uzyskanie listy wszystkich znanych locale</title></info>
-        
+
 
         <para>
             Może nastąpić sytuacja w której niezbędne okaże się uzyskanie listy wszystkich znanych
@@ -1737,7 +1737,7 @@ Array
         </para>
 
         <example xml:id="zend.locale.getlocalelist.example-1"><info><title>getLocaleList()</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $localelist = Zend_Locale::getLocaleList();
@@ -1753,7 +1753,7 @@ $localelist = Zend_Locale::getLocaleList();
     </section>
 
     <section xml:id="zend.locale.detection"><info><title>Rozpoznanie locale</title></info>
-        
+
 
         <para>
             Jeśli zaistnieje potrzeba rozpoznania czy dana zmienna, niezależnie z jakiego źródła
@@ -1763,7 +1763,7 @@ $localelist = Zend_Locale::getLocaleList();
         </para>
 
         <example xml:id="zend.locale.detection.example-1"><info><title>Proste rozpoznanie locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $input = 'to_RU';
@@ -1800,7 +1800,7 @@ if (Zend_Locale::isLocale($input)) {
         </para>
 
         <example xml:id="zend.locale.detection.example-2"><info><title>Ścisłe rozpoznanie locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $input = 'to_RU';
@@ -1816,11 +1816,11 @@ if (Zend_Locale::isLocale($input, true)) {
             Teraz, kiedy możliwe jest rozpoznanie czy określony łańcuch znaków jest poprawnym
             locale, nic nie stoi na przeszkodzie aby samemu tworzyć klasy świadome locale. Jednak
             wprowadzając podobne rozwiązanie szybko dochodzi się do wniosku, że implementacja
-            będzie stanowiła bardzo podobne 15 linijek kodu. Przykładowo: 
+            będzie stanowiła bardzo podobne 15 linijek kodu. Przykładowo:
         </para>
 
         <example xml:id="zend.locale.detection.example-3"><info><title>Implementacja kodu świadomego locale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 if ($locale === null) {
@@ -1899,7 +1899,7 @@ if ($locale instanceof Zend_Locale) {
         </para>
 
         <example xml:id="zend.locale.detection.example-4"><info><title>Implementacja kodu świadomego locale z Zend Framework 1.8</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);

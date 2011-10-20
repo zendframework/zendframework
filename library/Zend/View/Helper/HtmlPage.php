@@ -32,7 +32,7 @@ namespace Zend\View\Helper;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HtmlPage extends HtmlObject
+class HtmlPage extends HtmlElement
 {
     /**
      * Default file type for html
@@ -62,18 +62,15 @@ class HtmlPage extends HtmlObject
      * @param string $content Alternative content
      * @return string
      */
-    public function direct($data = null, array $attribs = array(), array $params = array(), $content = null)
+    public function __invoke($data, array $attribs = array(), array $params = array(), $content = null)
     {
-        if ($data == null) {
-            throw new \InvalidArgumentException('HTMLPage: missing argument. $data is required in htmlObject($data, array $attribs = array(), array $params = array(), $content = null)');
-        }
-        
         // Attrs
         $attribs = array_merge($this->_attribs, $attribs);
 
         // Params
         $params = array_merge(array('data' => $data), $params);
 
-        return parent::direct($data, self::TYPE, $attribs, $params, $content);
+        $htmlObject = $this->getView()->plugin('htmlObject');
+        return $htmlObject($data, self::TYPE, $attribs, $params, $content);
     }
 }

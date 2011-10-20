@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -29,11 +29,11 @@ use Zend\Locale;
 
 /**
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
+ * @group      Zend_Translator
  */
 class GettextTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,20 +48,18 @@ class GettextTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo');
         $this->assertTrue($adapter instanceof Adapter\Gettext);
+    }
 
-        try {
-            $adapter = new Adapter\Gettext(__DIR__ . '/_files/nofile.mo', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('Error opening translation file', $e->getMessage());
-        }
+    public function testCreate2()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/nofile.mo', 'en');
+    }
 
-        try {
-            $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed.mo', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidFileTypeException $e) {
-            $this->assertContains('is not a gettext file', $e->getMessage());
-        }
+    public function testCreate3()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidFileTypeException');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed.mo', 'en');
     }
 
     public function testToString()
@@ -98,14 +96,18 @@ class GettextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
         $this->assertEquals('Message 1', $adapter->translate('Message 1', 'xx'));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1', 'en_US'));
+    }
 
-        try {
-            $adapter->addTranslation(__DIR__ . '/_files/translation_en2.mo', 'xx');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+    public function testLoadTranslationData2()
+    {
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en2.mo', 'xx');
+    }
 
+    public function testLoadTranslationData3()
+    {
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         $adapter->addTranslation(__DIR__ . '/_files/translation_en2.mo', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
@@ -156,14 +158,18 @@ class GettextTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
         $this->assertEquals('en', $adapter->getLocale());
+    }
 
-        try {
-            $adapter->setLocale('nolocale');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+    public function testLocale2()
+    {
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->setLocale('nolocale');
+    }
 
+    public function testLocale3()
+    {
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/translation_en.mo', 'en');
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter->setLocale('de');
         restore_error_handler();
@@ -228,12 +234,8 @@ class GettextTest extends \PHPUnit_Framework_TestCase
 
     public function testFailedFile()
     {
-        try {
-            $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed2.mo', 'en');
-            $this->fail('Exception expected');
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('is not a gettext file', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\Gettext(__DIR__ . '/_files/failed2.mo', 'en');
     }
 
     public function testMissingAdapterInfo()

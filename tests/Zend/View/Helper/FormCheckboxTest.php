@@ -53,14 +53,14 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
 
     public function testIdSetFromName()
     {
-        $element = $this->helper->direct('foo');
+        $element = $this->helper->__invoke('foo');
         $this->assertContains('name="foo"', $element);
         $this->assertContains('id="foo"', $element);
     }
 
     public function testSetIdFromAttribs()
     {
-        $element = $this->helper->direct('foo', null, array('id' => 'bar'));
+        $element = $this->helper->__invoke('foo', null, array('id' => 'bar'));
         $this->assertContains('name="foo"', $element);
         $this->assertContains('id="bar"', $element);
     }
@@ -70,7 +70,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanDisableCheckbox()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'   => 'foo',
             'value'  => 'bar',
             'attribs'=> array('disable' => true)
@@ -83,7 +83,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckboxNotDisabled()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'   => 'foo',
             'value'  => 'bar',
             'attribs'=> array('disable' => false)
@@ -93,7 +93,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSelectCheckbox()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'   => 'foo',
             'value'  => 'bar',
             'attribs'=> array('checked' => true)
@@ -108,19 +108,19 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testNameBracketsStrippedWhenCreatingId()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'  => 'foo[]',
             'value' => 'bar'
         ));
         $this->assertRegexp('/<input[^>]*?(id="foo")/', $html);
 
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'  => 'foo[bar]',
             'value' => 'bar'
         ));
         $this->assertRegexp('/<input[^>]*?(id="foo-bar")/', $html);
 
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'  => 'foo[bar][baz]',
             'value' => 'bar'
         ));
@@ -132,7 +132,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testDoesNotRenderHiddenElementsForCheckboxArray()
     {
-        $html = $this->helper->direct(array(
+        $html = $this->helper->__invoke(array(
             'name'  => 'foo[]',
             'value' => 'bar'
         ));
@@ -144,7 +144,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldRenderHiddenElementShowingUncheckedOptionForNonArrayNames()
     {
-        $html1 = $this->helper->direct(
+        $html1 = $this->helper->__invoke(
             'foo',
             'bar',
             array('checked' => true),
@@ -153,7 +153,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
                 'unChecked' => 'baz'
             )
         );
-        $html2 = $this->helper->direct(
+        $html2 = $this->helper->__invoke(
             'foo',
             'bar',
             array('checked' => true),
@@ -162,7 +162,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
                 'baz'
             )
         );
-        $html3 = $this->helper->direct(
+        $html3 = $this->helper->__invoke(
             'foo',
             'bar',
             array('checked' => false),
@@ -171,7 +171,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
                 'unChecked' => 'baz'
             )
         );
-        $html4 = $this->helper->direct(
+        $html4 = $this->helper->__invoke(
             'foo',
             'bar',
             array('checked' => false),
@@ -201,13 +201,13 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testCheckedAttributeNotRenderedIfItEvaluatesToFalse()
     {
-        $test = $this->helper->direct('foo', 'value', array('checked' => false));
+        $test = $this->helper->__invoke('foo', 'value', array('checked' => false));
         $this->assertNotContains('checked', $test);
     }
 
     public function testCanSpecifyValue()
     {
-        $test = $this->helper->direct('foo', 'bar');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertContains('value="bar"', $test);
     }
 
@@ -216,11 +216,11 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldCheckValueIfValueMatchesCheckedOption()
     {
-        $test = $this->helper->direct('foo', 'bar', array(), array('bar', 'baz'));
+        $test = $this->helper->__invoke('foo', 'bar', array(), array('bar', 'baz'));
         $this->assertContains('value="bar"', $test);
         $this->assertContains('checked', $test);
 
-        $test = $this->helper->direct('foo', 'bar', array(), array('checked' => 'bar', 'unChecked' => 'baz'));
+        $test = $this->helper->__invoke('foo', 'bar', array(), array('checked' => 'bar', 'unChecked' => 'baz'));
         $this->assertContains('value="bar"', $test);
         $this->assertContains('checked', $test);
     }
@@ -230,7 +230,7 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldOnlySetValueIfValueMatchesCheckedOption()
     {
-        $test = $this->helper->direct('foo', 'baz', array(), array('bar', 'baz'));
+        $test = $this->helper->__invoke('foo', 'baz', array(), array('bar', 'baz'));
         $this->assertContains('value="bar"', $test);
     }
 
@@ -239,21 +239,21 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
      */
     public function testShouldNotCheckValueIfValueDoesNotMatchCheckedOption()
     {
-        $test = $this->helper->direct('foo', 'baz', array(), array('bar', 'baz'));
+        $test = $this->helper->__invoke('foo', 'baz', array(), array('bar', 'baz'));
         $this->assertContains('value="bar"', $test);
         $this->assertNotContains('checked', $test);
     }
 
     public function testRendersAsHtmlByDefault()
     {
-        $test = $this->helper->direct('foo', 'bar');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertNotContains(' />', $test, $test);
     }
 
     public function testCanRendersAsXHtml()
     {
-        $this->view->broker('doctype')->direct('XHTML1_STRICT');
-        $test = $this->helper->direct('foo', 'bar');
+        $this->view->plugin('doctype')->__invoke('XHTML1_STRICT');
+        $test = $this->helper->__invoke('foo', 'bar');
         $this->assertContains(' />', $test);
     }
 
@@ -262,28 +262,28 @@ class FormCheckboxTest extends \PHPUnit_Framework_TestCase
     */
    public function testShouldNotShowHiddenFieldIfDisableIsTrue()
    {
-       $test = $this->helper->direct('foo', 'bar', array('disable' => true));
+       $test = $this->helper->__invoke('foo', 'bar', array('disable' => true));
        $this->assertNotContains('type="hidden"', $test);
    }
 
    public function testIntValueIsChecked()
    {
-       $test = $this->helper->direct('foo', '1', array(), array('checked'=>1, 'unchecked'=>0));
+       $test = $this->helper->__invoke('foo', '1', array(), array('checked'=>1, 'unchecked'=>0));
        $this->assertContains('checked="checked"', $test);
 
-       $test = $this->helper->direct('foo', '1', array(), array(1,0));
+       $test = $this->helper->__invoke('foo', '1', array(), array(1,0));
        $this->assertContains('checked="checked"', $test);
 
-       $test = $this->helper->direct('foo', 1, array(), array('checked'=>1, 'unchecked'=>0));
+       $test = $this->helper->__invoke('foo', 1, array(), array('checked'=>1, 'unchecked'=>0));
        $this->assertContains('checked="checked"', $test);
 
-       $test = $this->helper->direct('foo', 1, array(), array(1,0));
+       $test = $this->helper->__invoke('foo', 1, array(), array(1,0));
        $this->assertContains('checked="checked"', $test);
 
-       $test = $this->helper->direct('foo', 0, array(), array('checked'=>1, 'unchecked'=>0));
+       $test = $this->helper->__invoke('foo', 0, array(), array('checked'=>1, 'unchecked'=>0));
        $this->assertNotContains('checked="checked"', $test);
 
-       $test = $this->helper->direct('foo', 0, array(), array(1,0));
+       $test = $this->helper->__invoke('foo', 0, array(), array(1,0));
        $this->assertNotContains('checked="checked"', $test);
    }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.functions"><info><title>Zend_Locale verwenden</title></info>
-    
+
 
     <para>
         <classname>Zend_Locale</classname> liefert auch lokalisierte Informationen über
@@ -9,7 +9,7 @@
     </para>
 
     <section xml:id="zend.locale.copying"><info><title>Kopieren, Klonen und Serialisieren von Gebietsschema Objekten</title></info>
-        
+
 
         <para>
             Verwende <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/language.oop5.cloning">Klonen von Objekten</link>
@@ -19,7 +19,7 @@
         </para>
 
         <example xml:id="zend.locale.copying.example-1"><info><title>Klonen</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('ar');
@@ -44,7 +44,7 @@ print "copied: ", $copiedLocale;
     </section>
 
     <section xml:id="zend.locale.equals"><info><title>Gleichheit</title></info>
-        
+
 
         <para>
             <classname>Zend_Locale</classname> bietet auch eine erwartete Funktion zum Vergleichen
@@ -53,7 +53,7 @@ print "copied: ", $copiedLocale;
         </para>
 
         <example xml:id="zend.locale.equals.example-1"><info><title>Prüfung auf gleiche Gebietsschemata</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -68,10 +68,10 @@ if ($locale->equals($mylocale)) {
     </section>
 
     <section xml:id="zend.locale.getdefault"><info><title>Standard Gebietsschemata</title></info>
-        
+
 
         <para>
-            Die Methode <methodname>getDefault()</methodname> gibt ein Array mit relevanten
+            Die Methode <methodname>getFallback()</methodname> gibt ein Array mit relevanten
             Gebietsschemata zurück wobei Informationen vom Web Browser des Benutzers (wenn
             vorhanden), Informationen vom Betriebsystem des Host Servers und Zend Framework
             Einstellungen benutzt werden. Wie beim Konstruktor von
@@ -85,17 +85,17 @@ if ($locale->equals($mylocale)) {
         </para>
 
         <example xml:id="zend.locale.getdefault.example-1"><info><title>Das Standard Gebietsschema erhalten</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 
 // Alle Standard Gebietsschema zurückgeben
-$found = $locale->getDefault();
+$found = $locale->getFallback();
 print_r($found);
 
 // Nur die Gebietsschema des Browsers zurück geben
-$found2 = $locale->getDefault(Zend_Locale::BROWSER,TRUE);
+$found2 = $locale->getFallback(Zend_Locale::BROWSER,TRUE);
 print_r($found2);
 ]]></programlisting>
         </example>
@@ -114,7 +114,7 @@ print_r($found2);
     </section>
 
     <section xml:id="zend.locale.setlocale"><info><title>Ein neues Gebietsschema setzen</title></info>
-        
+
 
         <para>
             Ein neues Gebietsschema kann mit der Funktion <methodname>setLocale()</methodname>
@@ -123,7 +123,7 @@ print_r($found2);
         </para>
 
         <example xml:id="zend.locale.setlocale.example-1"><info><title>setLocale</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -139,7 +139,7 @@ print $locale->toString();
     </section>
 
     <section xml:id="zend.locale.getlocale"><info><title>Auslesen von Sprache und Region</title></info>
-        
+
 
         <para>
             <methodname>getLanguage()</methodname> gibt eine Zeichenkette zurück welche den
@@ -149,7 +149,7 @@ print $locale->toString();
         </para>
 
         <example xml:id="zend.locale.getlocale.example-1"><info><title>getLanguage and getRegion</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -164,7 +164,7 @@ print $locale->getRegion();
     </section>
 
     <section xml:id="zend.locale.getlocaletoterritory"><info><title>Ein Gebietsschema durch die Angabe eines Territoriums erhalten</title></info>
-        
+
 
         <para>
             Wenn man nur ein Territorium oder ein Land hat, dann ist es auch möglich aus diesen
@@ -176,7 +176,7 @@ print $locale->getRegion();
         </para>
 
         <example xml:id="zend.locale.getlocaletoterritory.example-1"><info><title>getLocaleToTerritory</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::getLocaleToTerritory('US');
@@ -185,7 +185,7 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
         </example>
 
         <note><info><title>Großgeschriebene Territorien</title></info>
-            
+
 
             <para>
                 Wenn man weiß dass man ein Territorium verwendet dann sollte es großgeschrieben
@@ -205,7 +205,7 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
     </section>
 
     <section xml:id="zend.locale.getdata"><info><title>Lokalisierte Zeichenketten beschaffen</title></info>
-        
+
 
         <para>
             <methodname>getTranslationList()</methodname> gibt Zugriff auf viele Arten von
@@ -221,7 +221,7 @@ $locale = Zend_Locale::getLocaleToTerritory('US');
         </para>
 
         <example xml:id="zend.locale.getdata.example-1"><info><title>getTranslationList</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getTranslationList('language', 'de_AT');
@@ -248,7 +248,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         <table xml:id="zend.locale.getdata.table-1"><info><title>
                 Details für getTranslationList($type = null, $locale = null, $value = null)
             </title></info>
-            
+
 
             <tgroup cols="2">
                 <thead>
@@ -973,7 +973,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </para>
 
         <table xml:id="zend.locale.getdata.table-2"><info><title>Details für getTranslation($value = null, $type = null, $locale = null)</title></info>
-            
+
 
             <tgroup cols="2">
                 <thead>
@@ -1692,7 +1692,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </note>
 
         <table xml:id="zend.locale.getdata.table-3"><info><title>Unterschiede zwischen Zend Framework 1.0 und 1.5</title></info>
-            
+
 
             <tgroup cols="2">
                 <thead>
@@ -1787,7 +1787,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         </para>
 
         <example xml:id="zend.locale.getdata.example-3"><info><title>getTranslationList</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en_US');
@@ -1802,7 +1802,7 @@ print_r(Zend_Locale::getTranslationList('country', 'fr'));
         </para>
 
         <example xml:id="zend.locale.getdata.example-4"><info><title>Konvertierung des Ländernamens von einer Sprache in eine andere Sprache</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en_US');
@@ -1828,7 +1828,7 @@ echo $locale->getTranslation($frenchCode, 'language', 'es');
         </para>
 
         <example xml:id="zend.locale.getdata.example-6"><info><title>Alle Sprachen geschrieben in Ihrer Muttersprache</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $list = Zend_Locale::getTranslationList('language', 'auto');
@@ -1848,7 +1848,7 @@ foreach($list as $language => $content) {
     </section>
 
     <section xml:id="zend.locale.getquestion"><info><title>Übersetzungen für "Ja" und "Nein" erhalten</title></info>
-        
+
 
         <para>
             Oft müssen Programme eine "Ja" oder "Nein" Rückmeldung eines Benutzers erkennen.
@@ -1886,7 +1886,7 @@ foreach($list as $language => $content) {
         </para>
 
         <example xml:id="zend.locale.getquestion.example-1"><info><title>getQuestion()</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
@@ -1909,7 +1909,7 @@ Array
     </section>
 
     <section xml:id="zend.locale.getlocalelist"><info><title>Eine Liste aller bekannten Gebietsschemata erhalten</title></info>
-        
+
 
         <para>
             Manchmal will man eine Liste aller bekannten Gebietsschemata erhalten. Das kann für die
@@ -1919,7 +1919,7 @@ Array
         </para>
 
         <example xml:id="zend.locale.getlocalelist.example-1"><info><title>getLocaleList()</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $localelist = Zend_Locale::getLocaleList();
@@ -1935,7 +1935,7 @@ $localelist = Zend_Locale::getLocaleList();
     </section>
 
     <section xml:id="zend.locale.detection"><info><title>Erkennen von Gebietsschemata</title></info>
-        
+
 
         <para>
             Wenn man erkennen will ob eine vorhandene Eingabe. unabhängig von Ihrer Quelle, ein
@@ -1944,7 +1944,7 @@ $localelist = Zend_Locale::getLocaleList();
         </para>
 
         <example xml:id="zend.locale.detection.example-1"><info><title>Einfache Erkennung des Gebietsschemas</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $input = 'to_RU';
@@ -1983,7 +1983,7 @@ if (Zend_Locale::isLocale($input)) {
         </para>
 
         <example xml:id="zend.locale.detection.example-2"><info><title>Strikte Erkennung des Gebietsschemas</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $input = 'to_RU';
@@ -2003,7 +2003,7 @@ if (Zend_Locale::isLocale($input, true)) {
         </para>
 
         <example xml:id="zend.locale.detection.example-3"><info><title>Implementierung von Gebietsschema bezogenem Verhalten</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 if ($locale === null) {
@@ -2091,7 +2091,7 @@ if ($locale instanceof Zend_Locale) {
         </para>
 
         <example xml:id="zend.locale.detection.example-4"><info><title>Gebietsschema bezogenes Verhalten mit Zend Framework 1.8</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);

@@ -90,40 +90,40 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     public function testHeadTitleReturnsObjectInstance()
     {
-        $placeholder = $this->helper->direct();
+        $placeholder = $this->helper->__invoke();
         $this->assertTrue($placeholder instanceof Helper\HeadTitle);
     }
 
     public function testCanSetTitleViaHeadTitle()
     {
-        $placeholder = $this->helper->direct('Foo Bar', 'SET');
+        $placeholder = $this->helper->__invoke('Foo Bar', 'SET');
         $this->assertContains('Foo Bar', $placeholder->toString());
     }
 
     public function testCanAppendTitleViaHeadTitle()
     {
-        $placeholder = $this->helper->direct('Foo');
-        $placeholder = $this->helper->direct('Bar');
+        $placeholder = $this->helper->__invoke('Foo');
+        $placeholder = $this->helper->__invoke('Bar');
         $this->assertContains('FooBar', $placeholder->toString());
     }
 
     public function testCanPrependTitleViaHeadTitle()
     {
-        $placeholder = $this->helper->direct('Foo');
-        $placeholder = $this->helper->direct('Bar', 'PREPEND');
+        $placeholder = $this->helper->__invoke('Foo');
+        $placeholder = $this->helper->__invoke('Bar', 'PREPEND');
         $this->assertContains('BarFoo', $placeholder->toString());
     }
 
     public function testReturnedPlaceholderToStringContainsFullTitleElement()
     {
-        $placeholder = $this->helper->direct('Foo');
-        $placeholder = $this->helper->direct('Bar', 'APPEND')->setSeparator(' :: ');
+        $placeholder = $this->helper->__invoke('Foo');
+        $placeholder = $this->helper->__invoke('Bar', 'APPEND')->setSeparator(' :: ');
         $this->assertEquals('<title>Foo :: Bar</title>', $placeholder->toString());
     }
 
     public function testToStringEscapesEntries()
     {
-        $this->helper->direct('<script type="text/javascript">alert("foo");</script>');
+        $this->helper->__invoke('<script type="text/javascript">alert("foo");</script>');
         $string = $this->helper->toString();
         $this->assertNotContains('<script', $string);
         $this->assertNotContains('</script>', $string);
@@ -131,8 +131,8 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     public function testToStringEscapesSeparator()
     {
-        $this->helper->direct('Foo')
-                     ->direct('Bar')
+        $this->helper->__invoke('Foo')
+                     ->__invoke('Bar')
                      ->setSeparator(' <br /> ');
         $string = $this->helper->toString();
         $this->assertNotContains('<br />', $string);
@@ -144,7 +144,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testIndentationIsHonored()
     {
         $this->helper->setIndent(4);
-        $this->helper->direct('foo');
+        $this->helper->__invoke('foo');
         $string = $this->helper->toString();
 
         $this->assertContains('    <title>', $string);
@@ -152,12 +152,12 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
 
     public function testAutoEscapeIsHonored()
     {
-        $this->helper->direct('Some Title &copyright;');
+        $this->helper->__invoke('Some Title &copyright;');
         $this->assertEquals('<title>Some Title &amp;copyright;</title>', $this->helper->toString());
 
-        $this->assertTrue($this->helper->direct()->getAutoEscape());
-        $this->helper->direct()->setAutoEscape(false);
-        $this->assertFalse($this->helper->direct()->getAutoEscape());
+        $this->assertTrue($this->helper->__invoke()->getAutoEscape());
+        $this->helper->__invoke()->setAutoEscape(false);
+        $this->assertFalse($this->helper->__invoke()->getAutoEscape());
 
 
         $this->assertEquals('<title>Some Title &copyright;</title>', $this->helper->toString());
@@ -169,7 +169,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
      */
     public function testZF2918()
     {
-        $this->helper->direct('Some Title');
+        $this->helper->__invoke('Some Title');
         $this->helper->setPrefix('Prefix: ');
         $this->helper->setPostfix(' :Postfix');
 
@@ -183,7 +183,7 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testZF3577()
     {
         $this->helper->setAutoEscape(true);
-        $this->helper->direct('Some Title');
+        $this->helper->__invoke('Some Title');
         $this->helper->setPrefix('Prefix & ');
         $this->helper->setPostfix(' & Postfix');
 
@@ -193,9 +193,9 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     public function testCanTranslateTitle()
     {
         $adapter = new \Zend\Translator\Adapter\Ini(__DIR__ . '/../../Translator/Adapter/_files/translation_en.ini', 'en');
-        \Zend\Registry::set('Zend_Translate', $adapter);
+        \Zend\Registry::set('Zend_Translator', $adapter);
         $this->helper->enableTranslation();
-        $this->helper->direct('Message_1');
+        $this->helper->__invoke('Message_1');
         $this->assertEquals('<title>Message 1 (en)</title>', $this->helper->toString());
     }
 
@@ -204,15 +204,15 @@ class HeadTitleTest extends \PHPUnit_Framework_TestCase
     */
     public function testHeadTitleZero()
     {
-        $this->helper->direct('0');
+        $this->helper->__invoke('0');
         $this->assertEquals('<title>0</title>', $this->helper->toString());
     }
 
     public function testCanPrependTitlesUsingDefaultAttachOrder()
     {
         $this->helper->setDefaultAttachOrder('PREPEND');
-        $placeholder = $this->helper->direct('Foo');
-        $placeholder = $this->helper->direct('Bar');
+        $placeholder = $this->helper->__invoke('Foo');
+        $placeholder = $this->helper->__invoke('Bar');
         $this->assertContains('BarFoo', $placeholder->toString());
     }
 }

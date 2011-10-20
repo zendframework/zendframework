@@ -46,8 +46,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $renderer = Markup\Markup::factory('MockParser', 'MockRenderer');
 
-        $this->assertType('ZendTest\Markup\TestAsset\Renderer\MockRenderer', $renderer);
-        $this->assertType('ZendTest\Markup\TestAsset\Parser\MockParser', $renderer->getParser());
+        $this->assertInstanceOf('ZendTest\\Markup\\TestAsset\\Renderer\\MockRenderer', $renderer);
+        $this->assertInstanceOf('ZendTest\\Markup\\TestAsset\\Parser\\MockParser', $renderer->getParser());
     }
 
 }

@@ -64,7 +64,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $loader = $this->element->getPluginLoader('decorator');
         $paths = $loader->getPaths('Zend\Form\Decorator');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
 
         $loader = new PrefixPathLoader;
         $this->element->setPluginLoader($loader, 'decorator');
@@ -77,7 +77,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->element->addPrefixPath('Foo\Decorator', 'Foo/Decorator/', 'decorator');
         $loader = $this->element->getPluginLoader('decorator');
         $paths = $loader->getPaths('Foo\Decorator');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testElementShouldAddToAllPluginLoadersWhenAddingNullPrefixPath()
@@ -90,7 +90,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
             $string = str_replace(' ', '\\', $string);
             $prefix = 'Foo\\' . $string;
             $paths  = $loader->getPaths($prefix);
-            $this->assertType('SplStack', $paths);
+            $this->assertInstanceOf('SplStack', $paths);
             $this->assertNotEquals(0, count($paths));
         }
     }
@@ -120,7 +120,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $loader = $this->element->getPluginLoader('transfer\\adapter');
         $this->assertTrue($loader instanceof PrefixPathMapper);
         $paths = $loader->getPaths('Zend\File\Transfer\Adapter');
-        $this->assertType('SplStack', $paths);
+        $this->assertInstanceOf('SplStack', $paths);
     }
 
     public function testElementShouldAllowSpecifyingAdapterUsingPluginLoader()

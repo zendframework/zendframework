@@ -26,7 +26,7 @@ use Zend\Form\Decorator\ViewHelper as ViewHelperDecorator,
     Zend\Form\Element\Select as SelectElement,
     Zend\Form\Element\Text as TextElement,
     Zend\Translator\Translator,
-    Zend\View\View;
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_ViewHelper

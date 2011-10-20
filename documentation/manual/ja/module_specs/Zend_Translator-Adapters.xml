@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.adapter"><info><title>Zend_Translator のアダプタ</title></info>
+    
+
+    <para>
+        <classname>Zend_Translator</classname> は、さまざまなアダプタを使用して翻訳を行えます。
+        それぞれのアダプタによって利点や欠点があります。
+        以下に、翻訳の入力ファイルとしてサポートしているすべてのアダプタについてまとめます。
+    </para>
+
+    <table xml:id="zend.translator.adapter.table"><info><title><classname>Zend_Translator</classname> のアダプタ</title></info>
+        
+
+        <tgroup cols="3">
+            <thead>
+                <row>
+                    <entry>アダプタ</entry>
+                    <entry>説明</entry>
+                    <entry>備考</entry>
+                </row>
+            </thead>
+
+            <tbody>
+                <row>
+                    <entry>Array</entry>
+                    <entry><acronym>PHP</acronym> の配列</entry>
+                    <entry>小さめのページ。簡単に使用できる。プログラマしかさわれない。</entry>
+                </row>
+
+                <row>
+                    <entry>Csv</entry>
+                    <entry>カンマ区切りファイル (*.csv/*.txt)</entry>
+                    <entry>シンプルなテキスト形式。高速。Unicode 文字で問題が発生する可能性がある。</entry>
+                </row>
+
+                <row>
+                    <entry>Gettext</entry>
+                    <entry>gettext のバイナリファイル (*.mo)</entry>
+                    <entry>linux における GNU の標準形式。スレッドセーフ。翻訳用ツールが必要。</entry>
+                </row>
+
+                <row>
+                    <entry>Ini</entry>
+                    <entry>シンプルな <acronym>INI</acronym> ファイル (*.ini)</entry>
+                    <entry>シンプルなテキスト形式。高速。Unicode 文字で問題が発生する可能性がある。</entry>
+                </row>
+
+                <row>
+                    <entry>Tbx</entry>
+                    <entry>termbase 変換ファイル (*.tbx/*.xml)</entry>
+                    <entry>アプリケーション間で専門用語を変換するための業界標準。<acronym>XML</acronym> フォーマット。</entry>
+                </row>
+
+                <row>
+                    <entry>Tmx</entry>
+                    <entry>tmx ファイル (*.tmx/*.xml)</entry>
+                    <entry>アプリケーション間での翻訳の業界標準。<acronym>XML</acronym> フォーマット。可読形式。</entry>
+                </row>
+
+                <row>
+                    <entry>Qt</entry>
+                    <entry>qt 言語ファイル (*.ts)</entry>
+                    <entry>クロスプラットフォームなアプリケーションフレームワーク。<acronym>XML</acronym> フォーマット。可読形式。</entry>
+                </row>
+
+                <row>
+                    <entry>Xliff</entry>
+                    <entry>xliff ファイル (*.xliff/*.xml)</entry>
+                    <entry><acronym>TMX</acronym> に似ているが、よりシンプル。<acronym>XML</acronym> フォーマット。可読形式。</entry>
+                </row>
+
+                <row>
+                    <entry>XmlTm</entry>
+                    <entry>xmltm ファイル (*.xml)</entry>
+                    <entry><acronym>XML</acronym> ドキュメントの翻訳メモリの業界標準。<acronym>XML</acronym> フォーマット。可読形式。</entry>
+                </row>
+
+                <row>
+                    <entry>その他</entry>
+                    <entry>*.sql</entry>
+                    <entry>今後、その他さまざまなアダプタを実装する予定です。</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <section xml:id="zend.translator.adapter.decision"><info><title>使用するアダプタを決める方法</title></info>
+        
+
+        <para>
+            <classname>Zend_Translator</classname> でどのアダプタを使用するのかを決める必要があります。
+            プロジェクトの制約や顧客からの要望などの外的要因でアダプタが決まることもよくありますが、
+            もしあなたに決定権があるのなら、以下のヒントを参考にしてください。
+        </para>
+
+        <note>
+            <para>
+                使用するアダプタを決めるにあたっては、
+                使用するエンコーディングを考慮しなければなりません。
+                Zend Framework では UTF-8 をデフォルトのエンコーディングとしていますが、
+                時には他のエンコーディングを使わなければならないこともあるでしょう。
+                <classname>Zend_Translator</classname> は、
+                ソースファイル内で定義されているエンコーディングを変更しません。
+                つまり、もし Gettext のソースが ISO-8859-1 で作られている場合は、
+                それをそのままのエンコーディングで返します。
+                ただ、ひとつだけ制限があります。
+            </para>
+
+            <para>
+                TMX や XLIFF といった <acronym>XML</acronym> ベースのソース形式を使用する場合は、
+                そのエンコーディングを <acronym>XML</acronym> ファイルのヘッダで定義しなければなりません。
+                エンコーディングの定義がない <acronym>XML</acronym> ファイルは、
+                デフォルトでは UTF-8 として扱われるからです。
+                また、もうひとつ注意すべき点は、<acronym>XML</acronym>
+                ファイルのエンコーディングとして使用できるのは <acronym>PHP</acronym>
+                がサポートしているエンコーディングのみであること、
+                つまり UTF-8、ISO-8859-1 および US-ASCII だけであるということです。
+            </para>
+        </note>
+
+        <section xml:id="zend.translator.adapter.array"><info><title>Zend_Translator_Adapter_Array</title></info>
+            
+
+            <para>
+                Array アダプタは、プログラマにとっては
+                一番シンプルに使えるアダプタです。
+                しかし、翻訳する文字列が大量にある場合や
+                多くの言語に翻訳する必要がある場合は、別のアダプタを使うようにしましょう。
+                たとえば、翻訳文字列が 5000 ほどある場合は
+                Array アダプタは選択しないほうがいいでしょう。
+            </para>
+
+            <para>
+                このアダプタを使うのは、小さめのサイトで少なめの言語を扱い、
+                かつプログラマ自身で翻訳も行う場合だけにしましょう。
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.csv"><info><title>Zend_Translator_Adapter_Csv</title></info>
+            
+
+            <para>
+                Csv アダプタは、顧客にとっては最もシンプルに使えるアダプタです。
+                CSV ファイルは標準的なテキストエディタで読むことができますが、
+                エディタによっては utf8 文字セットをサポートしていないものもあります。
+            </para>
+
+            <para>
+                このアダプタを使うのは、
+                顧客が自分で翻訳を行いたいという場合だけにしましょう。
+            </para>
+
+            <note>
+                <para>
+                    Csv ファイルのエンコードがあなたの環境のロケール設定と異なる場合、
+                    Csv アダプタで問題が発生することに注意しましょう。
+                    これは <acronym>PHP</acronym> 自体のバグによるもので、このバグは <acronym>PHP</acronym> 6.0
+                    で修正される予定です (http://bugs.php.net/bug.php?id=38471)。
+                    したがって、Csv アダプタを使用する場合は
+                    (<acronym>PHP</acronym> の制約のせいで) それがロケール対応でないということに注意しなければなりません。
+                </para>
+            </note>
+        </section>
+
+        <section xml:id="zend.translator.adapter.gettext"><info><title>Zend_Translator_Adapter_Gettext</title></info>
+            
+
+            <para>
+                Gettext アダプタは、最もよく用いられるアダプタです。
+                Gettext は GNU が提供している翻訳フォーマットで、世界中で使用されています。
+                可読形式ではありませんが、便利なフリーウェア
+                (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://sourceforge.net/projects/poedit/">POEdit</link> など)
+                が公開されています。
+                <classname>Zend_Translator</classname> の Gettext アダプタは、<acronym>PHP</acronym> の gettext
+                拡張モジュールを使わずに実装しています。
+                <acronym>PHP</acronym> の gettext 拡張モジュールをインストールしていなくても
+                Gettext アダプタを使用することが可能です。
+                また、このアダプタはスレッドセーフですが、<acronym>PHP</acronym> の gettext
+                拡張モジュールは現状ではスレッドセーフでありません。
+            </para>
+
+            <para>
+                ほとんどの人たちは、このアダプタを使うことになるでしょう。
+                便利なツールを使用することで、高品質な翻訳が簡単に作成できます。
+                しかし、gettext のデータは機械が読める形式で保存されるので、
+                何らかのツールがないと人間が読むことはできません。
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.ini"><info><title>Zend_Translator_Adapter_Ini</title></info>
+            
+
+            <para>
+                Ini アダプタは非常にシンプルなアダプタであり、
+                顧客が直接触ることができます。
+                <acronym>INI</acronym> ファイルは標準的なテキストエディタで読むことができますが、
+                エディタによっては utf8 文字セットをサポートしていないものもあります。
+            </para>
+
+            <para>
+                このアダプタを使うのは、
+                顧客が自分で翻訳を行いたいという場合だけにしましょう。
+                汎用的な翻訳ソースとしては使用しないようにしましょう。
+            </para>
+
+            <warning><info><title>PHP 5.3 でのリグレッション</title></info>
+                
+
+                <para>
+                    <acronym>PHP</acronym> 5.3 より前のバージョンでは、<methodname>parse_ini_file()</methodname>
+                    および <methodname>parse_ini_string()</methodname> で
+                    <acronym>INI</acronym> オプションのキーに非 ASCII 文字を問題なく使用できました。
+                    しかし <acronym>PHP</acronym> 5.3 以降では、
+                    非 ASCII 文字のキーはどちらの関数の返す配列からも黙って抜け落ちてしまいます。
+                    UTF-8 や Latin-1 の文字をキーに使用している場合は、
+                    <acronym>INI</acronym> アダプタを使うと翻訳が正しく機能しなくなってしまいました。
+                    そのような場合は別のアダプタを使用することを推奨します。
+                </para>
+            </warning>
+        </section>
+
+        <section xml:id="zend.translator.adapter.tbx"><info><title>Zend_Translator_Adapter_Tbx</title></info>
+            
+
+            <para>
+                Tbx アダプタは、内部ですでに TBX フォーマットの翻訳システムを使用している顧客などが使用します。
+                Tbx は標準の翻訳フォーマットではありませんが、
+                すでに多くの翻訳や翻訳済み文字列が存在します。
+                このアダプタを使用する場合は、
+                必要な文字列をすべて翻訳しなければならないことに気をつけましょう。
+                TBX は、まったく新しく作られた <acronym>XML</acronym> ベースのフォーマットです。
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
+                パース速度は gettext ファイルより遅くなります。
+            </para>
+
+            <para>
+                このアダプタは、すでにこの形式の翻訳ファイルを持っている企業に最適です。
+                ファイルは可読形式で、システムに依存しない形式になります。
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.tmx"><info><title>Zend_Translator_Adapter_Tmx</title></info>
+            
+
+            <para>
+                Tmx アダプタは、複数のシステムで同一の翻訳ソースを使用している顧客などが使用します。
+                また、翻訳ソースをシステムに依存しない形式にしたい場合にも使用します。
+                TMX は <acronym>XML</acronym> 形式のフォーマットで、業界標準になるといわれています。
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
+                パース速度は gettext ファイルより遅くなります。
+            </para>
+
+            <para>
+                中規模から大規模の会社はこのアダプタを使用します。
+                ファイルは可読形式で、システムに依存しない形式になります。
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.qt"><info><title>Zend_Translator_Adapter_Qt</title></info>
+            
+
+            <para>
+                Qt アダプタは、QtLinguist で作成した TS
+                ファイル形式の翻訳を使用している顧客が使用します。
+                QT は <acronym>XML</acronym> 形式のフォーマットです。
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
+                パース速度は gettext ファイルより遅くなります。
+            </para>
+
+            <para>
+                大手企業の中には QT フレームワークを使用したソフトウェアを作成しているところがあります。
+                ファイルは可読形式で、システムに依存しない形式になります。
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.xliff"><info><title>Zend_Translator_Adapter_Xliff</title></info>
+            
+
+            <para>
+                Xliff アダプタは、<acronym>XML</acronym> ファイルを使用したいけれど
+                TMX 用のツールを持っていないという顧客などが使用します。
+                XLIFF は <acronym>XML</acronym> 形式のフォーマットで、
+                TMX と関連していますがもうすこしシンプルです。機能も一部限定されています。
+                <acronym>XML</acronym> ファイルは人間が読むことも可能ですが、
+                パース速度は gettext ファイルより遅くなります。
+            </para>
+
+            <para>
+                中規模の会社はこのアダプタを使用します。
+                ファイルは可読形式で、システムに依存しない形式になります。
+            </para>
+        </section>
+
+        <section xml:id="zend.translator.adapter.xmltm"><info><title>Zend_Translator_Adapter_XmlTm</title></info>
+            
+
+            <para>
+                XmlTm アダプタは、すでにこのレイアウトを採用している顧客が使用するアダプタです。
+                XmlTm は、 <acronym>HTML</acronym> ソース全体を翻訳ソースに含めることのできるフォーマットで、
+                翻訳とレイアウトがひとつにまとまります。
+                XLIFF は <acronym>XML</acronym> ベースのフォーマットです。XLIFF
+                と関連していますが、それほど読みやすくはありません。
+            </para>
+
+            <para>
+                このアダプタは、すでにソースファイルが存在する場合にのみ使用するようにしましょう。
+                ファイルは可読形式で、システムに依存しない形式になります。
+            </para>
+        </section>
+
+    </section>
+
+    <section xml:id="zend.translator.adapter.selfwritten"><info><title>自作のアダプタの組み込み</title></info>
+        
+
+        <para>
+            <classname>Zend_Translator</classname> に、自作のアダプタクラスを組み込むこともできます。
+            これは、<classname>Zend_Translator</classname> に組み込まれている標準のアダプタクラスと同様に使用できます。
+        </para>
+
+        <para>
+            <classname>Zend_Translator</classname> で使用するアダプタクラスは、
+            <classname>Zend_Translator_Adapter</classname> のサブクラスでなければなりません。
+            <classname>Zend_Translator_Adapter</classname> は抽象クラスであり、翻訳に必要なものをすべて定義しています。
+            あなたがすべきことは、翻訳データの読み込み方法を定義することだけです。
+        </para>
+
+        <para>
+            名前の先頭に "Zend" をつけることができるのは Zend_Framework
+            内のパッケージだけです。<classname>Zend_Translator</classname> で使うためのアダプタを自作する場合は、
+            その名前はたとえば "Company_Translator_Adapter_MyFormat" のようにする必要があります。
+            次のコードは、独自のアダプタクラスを実装する例を示すものです。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+try {
+    $translate = new Zend_Translator(
+        array(
+            'adapter' => 'Company_Translator_Adapter_MyFormat',
+            'content' => '/path/to/translate.xx',
+            'locale'  => 'en',
+            'myoption' => 'myvalue'
+        )
+    );
+} catch (Exception $e) {
+    // ファイルが見つからない、アダプタクラスが存在しない、……
+    // などの一般的なエラー
+}
+]]></programlisting>
+
+    </section>
+
+    <section xml:id="zend.translator.adapter.caching"><info><title>全アダプタの高速化</title></info>
+        
+
+        <para>
+            <classname>Zend_Translator</classname> では、内部的に <classname>Zend_Cache</classname>
+            を使用して翻訳ソースの読み込みを高速化できます。
+            これは、多数の翻訳ソースを使用していたり
+            <acronym>XML</acronym> ベースの複雑なソース形式を使用していたりする場合に非常に便利です。
+        </para>
+
+        <para>
+            キャッシュ機能を使用するには、キャッシュオブジェクトを
+            <methodname>Zend_Translator::setCache()</methodname> メソッドで渡します。
+            このメソッドの唯一のパラメータには
+            <classname>Zend_Cache</classname> のインスタンスを指定します。
+            また、任意のアダプタを直接使用するには
+            <methodname>setCache()</methodname> メソッドを使用します。
+            利便性を考慮して、静的メソッド
+            <methodname>getCache()</methodname>、<methodname>hasCache()</methodname>、<methodname>clearCache()</methodname> および
+            <methodname>removeCache()</methodname> も用意されています。
+        </para>
+
+        <!-- TODO : to be translated -->
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en'
+    )
+);
+
+// to clear the cache somewhere later in your code
+Zend_Translator::clearCache();
+]]></programlisting>
+
+        <note>
+            <para>
+                キャッシュの設定は、アダプタや
+                <classname>Zend_Translator</classname> のインスタンスを使用したり初期化したりする
+                <emphasis>前</emphasis> に行わなければなりません。
+                さもないと、新たなソースを
+                <methodname>addTranslation()</methodname> メソッドで追加するまで
+                翻訳ソースのキャッシュは行われません。
+            </para>
+        </note>
+
+        <para>
+            When the attached cache supports tagging you can set a own tag string by using the
+            option <property>tag</property>. This allows you do delete only the cache from this
+            single instance of <classname>Zend_Translator</classname>. When you are not using this
+            option the default tag <classname>Zend_Translator</classname> is used.
+        </para>
+
+        <para>
+            Using the option <property>tag</property> you must give the used tag to
+            <methodname>clearCache()</methodname> to declare which tag you want to delete.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+Zend_Translator::setCache($cache);
+$translate = new Zend_Translator(
+    array(
+        'adapter' => 'gettext',
+        'content' => '/path/to/translate.mo',
+        'locale'  => 'en',
+        'tag'     => 'MyTag'
+    )
+);
+
+// somewhere later in your code
+Zend_Translator::clearCache('MyTag');
+]]></programlisting>
+    </section>
+</section>

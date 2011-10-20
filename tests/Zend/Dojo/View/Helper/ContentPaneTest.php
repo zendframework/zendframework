@@ -64,7 +64,7 @@ class ContentPaneTest extends \PHPUnit_Framework_TestCase
 
     public function getContainer()
     {
-        return $this->view->broker('contentPane')->direct('pane1', 'This is the pane content', array('title' => 'Pane 1'));
+        return $this->view->plugin('contentPane')->__invoke('pane1', 'This is the pane content', array('title' => 'Pane 1'));
     }
 
     public function testShouldAllowDeclarativeDijitCreation()
@@ -78,7 +78,7 @@ class ContentPaneTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getContainer();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.layout.ContentPane")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('pane1'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('pane1'));
     }
 
     /**
@@ -86,11 +86,11 @@ class ContentPaneTest extends \PHPUnit_Framework_TestCase
      */
     public function testContentPaneMarkupShouldNotContainNameAttribute()
     {
-        $html = $this->view->broker('contentPane')->direct('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
+        $html = $this->view->plugin('contentPane')->__invoke('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
         $this->assertNotContains('name="/', $html, $html);
 
         DojoHelper::setUseProgrammatic();
-        $html = $this->view->broker('contentPane')->direct('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
+        $html = $this->view->plugin('contentPane')->__invoke('pane1', 'This is the pane content', array('id' => 'pane', 'title' => 'Pane 1'));
         $this->assertNotContains('name="/', $html, $html);
     }
 
@@ -99,8 +99,8 @@ class ContentPaneTest extends \PHPUnit_Framework_TestCase
      */
     public function testCaptureStartShouldReturnVoid()
     {
-        $test = $this->view->broker('contentPane')->captureStart('pane1');
-        $this->view->broker('contentPane')->captureEnd('pane1');
+        $test = $this->view->plugin('contentPane')->captureStart('pane1');
+        $this->view->plugin('contentPane')->captureEnd('pane1');
         $this->assertNull($test);
     }
 }

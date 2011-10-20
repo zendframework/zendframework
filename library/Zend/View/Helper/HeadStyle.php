@@ -102,7 +102,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      * @param  string|array $attributes Optional attributes to utilize
      * @return \Zend\View\Helper\HeadStyle
      */
-    public function direct($content = null, $placement = 'APPEND', $attributes = array())
+    public function __invoke($content = null, $placement = 'APPEND', $attributes = array())
     {
         if ((null !== $content) && is_string($content)) {
             switch (strtoupper($placement)) {
@@ -324,7 +324,7 @@ class HeadStyle extends Placeholder\Container\Standalone
         $attrString = '';
         if (!empty($item->attributes)) {
             $enc = 'UTF-8';
-            if ($this->view instanceof View\ViewEngine
+            if ($this->view instanceof View\Renderer
                 && method_exists($this->view, 'getEncoding')
             ) {
                 $enc = $this->view->getEncoding();

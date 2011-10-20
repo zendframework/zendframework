@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.filter.input"><info><title>Zend_Filter_Input</title></info>
-    
+
 
     <para>
         <classname>Zend_Filter_Input</classname> provides a declarative interface to associate
@@ -94,7 +94,7 @@
 
     <section xml:id="zend.filter.input.declaring"><info><title>Declaring Filter and Validator Rules</title></info>
 
-        
+
 
         <para>
             Before creating an instance of <classname>Zend_Filter_Input</classname>, declare an
@@ -209,7 +209,7 @@ $filters = array(
     </section>
 
     <section xml:id="zend.filter.input.running"><info><title>Creating the Filter and Validator Processor</title></info>
-        
+
 
         <para>
             After declaring the filters and validators arrays, use them as
@@ -257,7 +257,7 @@ $input->setData($newData);
     </section>
 
     <section xml:id="zend.filter.input.results"><info><title>Retrieving Validated Fields and other Reports</title></info>
-        
+
 
         <para>
             After you have declared filters and validators and created the
@@ -267,7 +267,7 @@ $input->setData($newData);
         </para>
 
         <section xml:id="zend.filter.input.results.isvalid"><info><title>Querying if the input is valid</title></info>
-            
+
 
             <para>
                 If all input data pass the validation rules, the
@@ -297,7 +297,7 @@ if ($input->isValid('month')) {
         </section>
 
         <section xml:id="zend.filter.input.results.reports"><info><title>Getting Invalid, Missing, or Unknown Fields</title></info>
-            
+
 
             <itemizedlist>
                 <listitem>
@@ -401,7 +401,7 @@ $input->setOptions($options);
             </para>
 
             <programlisting language="php"><![CDATA[
-$translate = new Zend_Translate_Adapter_Array(array(
+$translate = new Zend_Translator_Adapter_Array(array(
     'content' => array(
         Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
     )
@@ -427,7 +427,7 @@ $input->setTranslator($translate);
         </section>
 
         <section xml:id="zend.filter.input.results.escaping"><info><title>Getting Valid Fields</title></info>
-            
+
 
             <para>
                 All fields that are neither invalid, missing, nor unknown are
@@ -460,7 +460,7 @@ $m = $input->getUnescaped('month'); // not escaped
             </note>
 
             <warning><info><title>Escaping unvalidated fields</title></info>
-                
+
 
                 <para>
                     As mentioned before <methodname>getEscaped()</methodname> returns only validated
@@ -534,7 +534,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
     </section>
 
     <section xml:id="zend.filter.input.metacommands"><info><title>Using Metacommands to Control Filter or Validator Rules</title></info>
-        
+
 
         <para>
             In addition to declaring the mapping from fields to filters
@@ -545,7 +545,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
         </para>
 
         <section xml:id="zend.filter.input.metacommands.fields"><info><title>The FIELDS metacommand</title></info>
-            
+
 
             <para>
                 If the rule name for a filter or validator is different than
@@ -616,7 +616,7 @@ $validators = array(
         </section>
 
         <section xml:id="zend.filter.input.metacommands.presence"><info><title>The PRESENCE metacommand</title></info>
-            
+
 
             <para>
                 Each entry in the validator array may have a metacommand called
@@ -646,7 +646,7 @@ $validators = array(
         </section>
 
         <section xml:id="zend.filter.input.metacommands.default"><info><title>The DEFAULT_VALUE metacommand</title></info>
-            
+
 
             <para>
                 If a field is not present in the input data, and you specify a
@@ -701,7 +701,7 @@ echo $input->month; // echoes 1
         </section>
 
         <section xml:id="zend.filter.input.metacommands.allow-empty"><info><title>The ALLOW_EMPTY metacommand</title></info>
-            
+
 
             <para>
                 By default, if a field exists in the input data, then
@@ -765,7 +765,7 @@ $input->setOptions($options);
         </section>
 
         <section xml:id="zend.filter.input.metacommands.break-chain"><info><title>The BREAK_CHAIN metacommand</title></info>
-            
+
 
             <para>
                 By default if a rule has more than one validator, all
@@ -834,7 +834,7 @@ $input = new Zend_Filter_Input(null, $validators);
         </section>
 
         <section xml:id="zend.filter.input.metacommands.messages"><info><title>The MESSAGES metacommand</title></info>
-            
+
 
             <para>
                 You can specify error messages for each validator in a rule
@@ -952,7 +952,7 @@ $validators = array(
         </section>
 
         <section xml:id="zend.filter.input.metacommands.global"><info><title>Using options to set metacommands for all rules</title></info>
-            
+
 
             <para>
                 The default value for 'allowEmpty', 'breakChainOnFailure', and
@@ -987,7 +987,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
     </section>
 
     <section xml:id="zend.filter.input.namespaces"><info><title>Adding Filter Class Namespaces</title></info>
-        
+
 
         <para>
             By default, when you declare a filter or validator as a string,

@@ -370,13 +370,15 @@ class StandardConfig implements OAuthConfig
     /**
      * Set callback URL
      *
-     * @param  string $url
+     * @param  string $url Valid URI or Out-Of-Band constant 'oob'
      * @return \Zend\OAuth\Config
      * @throws \Zend\OAuth\Exception for invalid URLs
      */
     public function setCallbackUrl($url)
     {
-        $this->_validateUrl($url);
+        if ($url !== 'oob') {
+            $this->_validateUrl($url);
+        }
         $this->_callbackUrl = $url;
         return $this;
     }

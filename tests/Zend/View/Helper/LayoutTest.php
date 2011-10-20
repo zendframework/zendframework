@@ -106,7 +106,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $layout = Layout\Layout::startMvc();
         $helper = new Helper\Layout();
 
-        $received = $helper->direct();
+        $received = $helper->__invoke();
         $this->assertSame($layout, $received);
     }
 }

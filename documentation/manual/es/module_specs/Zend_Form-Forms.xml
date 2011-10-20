@@ -1079,7 +1079,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <methodname>setTranslator(Zend_Translate_Adapter
+                                <methodname>setTranslator(Zend_Translator_Adapter
                                     $translator = null)</methodname>
                             </para>
                         </listitem>
@@ -2218,7 +2218,7 @@ $validValues = $form->getValidValues($_POST);
                 <itemizedlist>
                     <listitem>
                         <para>
-                            <methodname>setTranslator(Zend_Translate_Adapter
+                            <methodname>setTranslator(Zend_Translator_Adapter
                                 $translator = null)</methodname>
                         </para>
                     </listitem>

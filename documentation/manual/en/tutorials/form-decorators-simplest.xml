@@ -171,8 +171,7 @@ class TextPerson
         <programlisting language="php"><![CDATA[
 class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 {
-    protected $_format = '<label for="%s">%s</label>'
-                       . '<input id="%s" name="%s" type="text" value="%s"/>';
+    protected $_format = '<label for="%s">%s</label><input id="%s" name="%s" type="text" value="%s"/>';
 
     public function render($content)
     {

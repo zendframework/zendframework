@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -28,7 +28,7 @@ use Zend\Translator;
 use Zend\Locale;
 
 /**
- * Zend_Translate_Adapter_Ini
+ * Zend_Translator_Adapter_Ini
  */
 
 /**
@@ -37,11 +37,11 @@ use Zend\Locale;
 
 /**
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
+ * @group      Zend_Translator
  */
 class IniTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,14 +49,16 @@ class IniTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini');
         $this->assertTrue($adapter instanceof Adapter\Ini);
+    }
 
-        try {
-            $adapter = new Adapter\Ini(__DIR__ . '/_files/nofile.ini', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('not found', $e->getMessage());
-        }
+    public function testCreate2()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/nofile.ini', 'en');
+    }
 
+    public function testCreate3()
+    {
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter = new Adapter\Ini(__DIR__ . '/_files/failed.ini', 'en');
         restore_error_handler();
@@ -75,10 +77,10 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (en)', $adapter->_('Message_1'));
         $this->assertEquals('Message_6', $adapter->translate('Message_6'));
         $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking_furniture'));
-        if (0 > version_compare(PHP_VERSION, '5.3.0')) {
+        if (version_compare(PHP_VERSION, '5.3.0', '<>')) {
             $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen_Möbel'), var_export($adapter->getMessages('en'), 1));
         } else {
-            $this->markTestSkipped('PHP 5.3 cannot utilize non-ASCII characters for INI option keys');
+            $this->markTestSkipped('PHP 5.3.0 cannot utilize non-ASCII characters for INI option keys. This PHP bug has been fixed with PHP 5.3.1');
         }
     }
 
@@ -100,14 +102,18 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message_2', $adapter->translate('Message_2', 'ru'));
         $this->assertEquals('Message_1', $adapter->translate('Message_1', 'xx'));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message_1', 'en_US'));
+    }
 
-        try {
-            $adapter->addTranslation(__DIR__ . '/_files/translation_en.ini', 'xx');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('The given Language', $e->getMessage());
-        }
+    public function testLoadTranslationData2()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en.ini', 'xx');
+    }
 
+    public function testLoadTranslationData3()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
         $adapter->addTranslation(__DIR__ . '/_files/translation_en2.ini', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message_1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message_8'));
@@ -158,14 +164,18 @@ class IniTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale\Locale('en');
         $adapter->setLocale($locale);
         $this->assertEquals('en', $adapter->getLocale());
+    }
 
-        try {
-            $adapter->setLocale('nolocale');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('The given Language', $e->getMessage());
-        }
+    public function testLocale2()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->setLocale('nolocale');
+    }
 
+    public function testLocale3()
+    {
+        $adapter = new Adapter\Ini(__DIR__ . '/_files/translation_en.ini', 'en');
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter->setLocale('de');
         restore_error_handler();

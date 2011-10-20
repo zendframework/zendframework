@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.translator.migration"><info><title>עדכון מגרסאות קודמות</title></info>
+
+    
+
+    <para>
+        ה API של <code>Zend_Translator</code> השתנה מדי פעם.
+        אם התחלת להשתמש ב <code>Zend_Translator</code> ותתי הרכיבים שלו בגרסאות קודמות עקוב אחר ההוראות הבאות כדי לעדכן את הקוד שלך ל API החדש.
+    </para>
+
+    <section xml:id="zend.translator.migration.fromonesixtooneseven"><info><title>עדכון מגרסא 1.6 ל 1.7 ומעלה</title></info>
+        
+        <section xml:id="zend.translator.migration.fromonesixtooneseven.languages"><info><title>הגדרת שפות</title></info>
+            
+
+            <para>
+                כשנעשה שימוש בזיהוי אוטומטי של שפות, או הגדרת שפות ידנית ישירות אל <code>Zend_Translator</code> יכול להיות ששמתה לב להערה שנזרקה על שפות שלא נוספו או שפות ריקות.
+                בגרסאות קודמות נזרקה שגיאה על ידי חריג במקרים מסויימים.
+            </para>
+
+            <para>
+                הסיבה היא, כשמשתמש מבקש שפה שהיא לא קיימת, אין לך דרך לדעת כיצד לאתר מה בידיוק משתבש. לכן הוספנו את ההערות הללו שמתווספות ללוג שלך ומודיעות לך שהמשתמש ביקש שפה שאינך תומך בה.
+                למרות שגם עם ההערה, הקוד עדיין עובד כמו שצריך ללא בעיות.
+            </para>
+
+            <para>
+                   אבל כשמשתמשים במחלקה אשר מטפלת בשגיאות מותאמת אישית, כמו xdebug, כל ההערות יוחזור, גם אם זה לא מה שבקשת.
+                הסיבה לכך היא שהמחלקות הללו דורסות את כל ההגדרות של PHP.
+            </para>
+
+            <para>
+                כדי להפטר מהערות אלו תוכל פשוט להגדיר את ההגדרה החדשה 'disableNotices' ל true. כברירת מחדל היא נמצאת תחת false.
+            </para>
+
+            <example xml:id="zend.translator.migration.fromonesixtooneseven.example"><info><title>הגדרת שפות ללא קבלת הערות</title></info>
+                
+
+                <para>
+                    נניח ויש לנו תמיכה בשפה אנגלית והמשתמש מבקש תמיכה בשפה הצרפתית שהיא לא נתמכת במערכת שלנו.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$language = new Zend_Translator('gettext',
+                               '/path/to/translations',
+                               'auto');
+
+                ]]></programlisting>
+
+                <para>
+                    במקרה הזה תוצג הערה אודות שפה שלא נתמכת.
+                    בישביל להפטר מהערה זו פשוט הוסיפו את הפרמטר הרבעי כדי לבטל אותן.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$language = new Zend_Translator('gettext',
+                               '/path/to/translations',
+                               'auto',
+                               array('disableNotices' => true));
+
+                ]]></programlisting>
+
+            </example>
+
+        </section>
+    </section>
+</section>

@@ -585,7 +585,7 @@ class FrontTest extends \PHPUnit_Framework_TestCase
             $this->_controller->addModuleDirectory($moduleDir);
             $this->fail('Exception expected but not thrown');
         }catch(\Exception $e){
-            $this->assertType('Zend\Exception',$e);
+            $this->assertInstanceOf('Zend\Exception',$e);
             $this->assertRegExp('/Directory \w+ not readable/',$e->getMessage());
         }
     }

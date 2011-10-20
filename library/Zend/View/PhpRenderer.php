@@ -24,6 +24,7 @@
 namespace Zend\View;
 
 use Zend\Filter\FilterChain,
+    Zend\Loader\Pluggable,
     ArrayAccess;
 
 /**
@@ -35,7 +36,7 @@ use Zend\Filter\FilterChain,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpRenderer implements Renderer
+class PhpRenderer implements Renderer, Pluggable
 {
     /**
      * Template resolver
@@ -172,6 +173,25 @@ class PhpRenderer implements Renderer
                 (is_object($variables) ? get_class($variables) : gettype($variables))
             ));
         }
+        
+        // Enforce a Variables container
+        if (!$variables instanceof Variables) {
+            $variablesAsArray = array();
+            foreach ($variables as $key => $value) {
+                $variablesAsArray[$key] = $value;
+            }
+            $variables = new Variables($variablesAsArray);
+        }
+
+        $broker = $this->getBroker();
+        $loader = $broker->getClassLoader();
+        if ($loader->isLoaded('escape')) {
+            $escaper = $broker->load('escape');
+            if (is_callable($escaper)) {
+                $variables->setEscapeCallback($escaper);
+            }
+        }
+        
         $this->vars = $variables;
         return $this;
     }
@@ -195,7 +215,96 @@ class PhpRenderer implements Renderer
     }
 
     /**
-     * Set helper broker instance
+     * Get a single variable
+     * 
+     * @param  mixed $key 
+     * @return mixed
+     */
+    public function get($key)
+    {
+        if (null === $this->vars) {
+            $this->setVars(new Variables());
+        }
+
+        return $this->vars[$key];
+    }
+
+    /**
+     * Get a single raw (unescaped) value
+     * 
+     * @param  mixed $key 
+     * @return mixed
+     */
+    public function raw($key)
+    {
+        if (null === $this->vars) {
+            $this->setVars(new Variables());
+        }
+
+        if (!$this->vars instanceof Variables) {
+            if (isset($this->vars[$key])) {
+                return $this->vars[$key];
+            }
+            return null;
+        }
+
+        return $this->vars->getRawValue($key);
+    }
+
+    /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        $vars = $this->vars();
+        return $vars[$name];
+    }
+
+    /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @param  mixed $value 
+     * @return void
+     */
+    public function __set($name, $value)
+    {
+        $vars = $this->vars();
+        $vars[$name] = $value;
+    }
+
+    /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        $vars = $this->vars();
+        return isset($vars[$name]);
+    }
+
+    /**
+     * Overloading: proxy to Variables container
+     * 
+     * @param  string $name 
+     * @return void
+     */
+    public function __unset($name)
+    {
+        $vars = $this->vars();
+        if (!isset($vars[$name])) {
+            return;
+        }
+        unset($vars[$name]);
+    }
+
+    /**
+     * Set plugin broker instance
      * 
      * @param  string|HelperBroker $broker 
      * @return Zend\View\Abstract
@@ -222,21 +331,50 @@ class PhpRenderer implements Renderer
     }
 
     /**
-     * Get helper broker instance
+     * Get plugin broker instance
      * 
-     * @param  null|string $helper Helper name to return
-     * @param  null|array $options Options to pass to helper constructor (if not already instantiated)
-     * @return HelperBroker|Helper
+     * @return HelperBroker
      */
-    public function broker($helper = null, array $options = null)
+    public function getBroker()
     {
         if (null === $this->helperBroker) {
             $this->setBroker(new HelperBroker());
         }
-        if (null === $helper) {
-            return $this->helperBroker;
+        return $this->helperBroker;
+    }
+    
+    /**
+     * Get plugin instance
+     * 
+     * @param  string     $plugin  Name of plugin to return
+     * @param  null|array $options Options to pass to plugin constructor (if not already instantiated)
+     * @return Helper
+     */
+    public function plugin($name, array $options = null)
+    {
+        return $this->getBroker()->load($name, $options);
+    }
+
+    /**
+     * Overloading: proxy to helpers
+     *
+     * Proxies to the attached plugin broker to retrieve, return, and potentially
+     * execute helpers.
+     *
+     * * If the helper does not define __invoke, it will be returned
+     * * If the helper does define __invoke, it will be called as a functor
+     * 
+     * @param  string $method 
+     * @param  array $argv 
+     * @return mixed
+     */
+    public function __call($method, $argv)
+    {
+        $helper = $this->plugin($method);
+        if (is_callable($helper)) {
+            return call_user_func_array($helper, $argv);
         }
-        return $this->helperBroker->load($helper, $options);
+        return $helper;
     }
 
     /**
@@ -280,9 +418,17 @@ class PhpRenderer implements Renderer
             $this->varsCache = $this->vars();
             $this->setVars($vars);
         }
+        unset($vars);
 
-        unset($vars); // remove $vars from local scope
-
+        // extract all assigned vars (pre-escaped), but not 'this'.
+        // assigns to a double-underscored variable, to prevent naming collisions
+        $__vars = $this->vars()->getArrayCopy();
+        if (array_key_exists('this', $__vars)) {
+            unset($__vars['this']);
+        }
+        extract($__vars);
+        unset($__vars); // remove $__vars from local scope
+        
         ob_start();
         include $this->file;
         $content = ob_get_clean();

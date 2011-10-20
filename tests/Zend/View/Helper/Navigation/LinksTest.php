@@ -44,7 +44,7 @@ use Zend\Navigation\AbstractPage,
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class LinksTest extends TestAbstract
+class LinksTest extends AbstractTest
 {
     /**
      * Class name for view helper to test
@@ -68,7 +68,7 @@ class LinksTest extends TestAbstract
         parent::setUp();
 
         // doctype fix (someone forgot to clean up after their unit tests)
-        $this->_doctypeHelper = $this->_helper->getView()->broker('doctype');
+        $this->_doctypeHelper = $this->_helper->getView()->plugin('doctype');
         $this->_oldDoctype = $this->_doctypeHelper->getDoctype();
         $this->_doctypeHelper->setDoctype(
                 \Zend\View\Helper\Doctype::HTML4_LOOSE);
@@ -87,14 +87,14 @@ class LinksTest extends TestAbstract
 
     public function testHelperEntryPointWithoutAnyParams()
     {
-        $returned = $this->_helper->direct();
+        $returned = $this->_helper->__invoke();
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav1, $returned->getContainer());
     }
 
     public function testHelperEntryPointWithContainerParam()
     {
-        $returned = $this->_helper->direct($this->_nav2);
+        $returned = $this->_helper->__invoke($this->_nav2);
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }

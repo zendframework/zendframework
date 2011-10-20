@@ -23,8 +23,9 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Controller;
-use Zend\View;
+
+use Zend\Controller,
+    Zend\View\PhpRenderer as View;
 
 
 /**
@@ -79,11 +80,10 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartialRendersScript()
     {
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
-        $return = $this->helper->direct('partialOne.phtml');
+        $return = $this->helper->__invoke('partialOne.phtml');
         $this->assertContains('This is the first test partial', $return);
     }
 
@@ -92,13 +92,12 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testPartialRendersScriptWithVars()
     {
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
-        $view->message = 'This should never be read';
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
+        $view->vars()->message = 'This should never be read';
         $this->helper->setView($view);
-        $return = $this->helper->direct('partialThree.phtml', array('message' => 'This message should be read'));
-        $this->assertNotContains($view->message, $return);
+        $return = $this->helper->__invoke('partialThree.phtml', array('message' => 'This message should be read'));
+        $this->assertNotContains('This should never be read', $return);
         $this->assertContains('This message should be read', $return, $return);
     }
 
@@ -108,11 +107,11 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     public function testPartialRendersScriptInDifferentModuleWhenRequested()
     {
         Controller\Front::getInstance()->addModuleDirectory($this->basePath);
-        $view = new View\View(array(
+        $view = new View(array(
             'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
-        $return = $this->helper->direct('partialTwo.phtml', 'foo');
+        $return = $this->helper->__invoke('partialTwo.phtml', 'foo');
         $this->assertContains('This is the second partial', $return, $return);
     }
 
@@ -122,13 +121,13 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     public function testPartialThrowsExceptionWithInvalidModule()
     {
         Controller\Front::getInstance()->addModuleDirectory($this->basePath);
-        $view = new View\View(array(
+        $view = new View(array(
             'scriptPath' => $this->basePath . '/application/views/scripts'
         ));
         $this->helper->setView($view);
 
         try {
-            $return = $this->helper->direct('partialTwo.phtml', 'barbazbat');
+            $return = $this->helper->__invoke('partialTwo.phtml', 'barbazbat');
             $this->fail('Partial should throw exception if module does not exist');
         } catch (\Exception $e) {
         }
@@ -139,9 +138,9 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetViewSetsViewProperty()
     {
-        $view = new View\View();
+        $view = new View();
         $this->helper->setView($view);
-        $this->assertSame($view, $this->helper->view);
+        $this->assertSame($view, $this->helper->getView());
     }
 
     /**
@@ -149,11 +148,11 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testCloneViewReturnsDifferentViewInstance()
     {
-        $view = new View\View();
+        $view = new View();
         $this->helper->setView($view);
         $clone = $this->helper->cloneView();
         $this->assertNotSame($view, $clone);
-        $this->assertTrue($clone instanceof View\View);
+        $this->assertTrue($clone instanceof View);
     }
 
     /**
@@ -161,15 +160,15 @@ class PartialTest extends \PHPUnit_Framework_TestCase
      */
     public function testCloneViewClearsViewVariables()
     {
-        $view = new View\View();
+        $view = new View();
         $view->foo = 'bar';
         $this->helper->setView($view);
 
         $clone = $this->helper->cloneView();
-        $clonedVars = $clone->getVars();
+        $clonedVars = $clone->vars();
 
-        $this->assertTrue(empty($clonedVars));
-        $this->assertNull($clone->foo);
+        $this->assertEquals(0, count($clonedVars));
+        $this->assertNull($clone->vars()->foo);
     }
 
     public function testObjectModelWithPublicPropertiesSetsViewVariables()
@@ -178,11 +177,10 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $model->foo = 'bar';
         $model->bar = 'baz';
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
-        $return = $this->helper->direct('partialVars.phtml', $model);
+        $return = $this->helper->__invoke('partialVars.phtml', $model);
 
         foreach (get_object_vars($model) as $key => $value) {
             $string = sprintf('%s: %s', $key, $value);
@@ -194,11 +192,10 @@ class PartialTest extends \PHPUnit_Framework_TestCase
     {
         $model = new Aggregate();
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View();
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
-        $return = $this->helper->direct('partialVars.phtml', $model);
+        $return = $this->helper->__invoke('partialVars.phtml', $model);
 
         foreach ($model->toArray() as $key => $value) {
             $string = sprintf('%s: %s', $key, $value);
@@ -213,11 +210,10 @@ class PartialTest extends \PHPUnit_Framework_TestCase
         $model->footest = 'bar';
         $model->bartest = 'baz';
 
-        $view = new View\View(array(
-            'scriptPath' => $this->basePath . '/application/views/scripts'
-        ));
+        $view = new View;
+        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
         $this->helper->setView($view);
-        $return = $this->helper->direct('partialObj.phtml', $model);
+        $return = $this->helper->__invoke('partialObj.phtml', $model);
 
         $this->assertNotContains('No object model passed', $return);
 
@@ -229,7 +225,7 @@ class PartialTest extends \PHPUnit_Framework_TestCase
 
     public function testPassingNoArgsReturnsHelperInstance()
     {
-        $test = $this->helper->direct();
+        $test = $this->helper->__invoke();
         $this->assertSame($this->helper, $test);
     }
 

@@ -80,7 +80,7 @@ class PdoSqliteTest extends AbstractPdoTest
             $stmt = $this->_db->query($select);
             $result2 = $stmt->fetchAll();
         } catch (\Exception $e) {
-            $this->assertType('Zend_Db_Statement_Exception', $e,
+            $this->assertInstanceOf('Zend_Db_Statement_Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->fail('Unexpected exception '.get_class($e).' received: '.$e->getMessage());
         }

@@ -56,9 +56,15 @@ class DateTest extends \PHPUnit_Framework_TestCase
     private $_cache = null;
     private $_orig  = array();
 
+    /**
+     * Stores the original set timezone
+     * @var string
+     */
+    private $_originaltimezone;
+
     public function setUp()
     {
-        $this->originalTimezone = date_default_timezone_get();
+        $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
         $this->_cache = Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
@@ -75,7 +81,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         Date::setOptions($this->_orig);
         $this->_cache->clean(Cache::CLEANING_MODE_ALL);
-        date_default_timezone_set($this->originalTimezone);
+        date_default_timezone_set($this->_originaltimezone);
     }
 
     /**
@@ -5660,8 +5666,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
      */
     public function testChineseFullDates()
     {
-      $date = new Zend_Date(array('year' => 2008, 'month' => 10, 'day' => 12));
-      $this->assertEquals('2008年10月12日', $date->get(Zend_Date::DATE_LONG, 'zh'));
+      $date = new Date(array('year' => 2008, 'month' => 10, 'day' => 12));
+      $this->assertEquals('2008年10月12日', $date->get(Date::DATE_LONG, 'zh'));
     }
 }
 

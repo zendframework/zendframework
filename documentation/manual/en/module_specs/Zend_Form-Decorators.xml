@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.decorators"><info><title>Creating Custom Form Markup Using Zend_Form_Decorator</title></info>
-    
+
 
     <para>
         Rendering a form object is completely optional -- you do not need to use
@@ -37,7 +37,7 @@
     </para>
 
     <section xml:id="zend.form.decorators.operation"><info><title>Operation</title></info>
-        
+
 
         <para>
             To configure a decorator, pass an array of options or a
@@ -134,7 +134,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.standard"><info><title>Standard Decorators</title></info>
-        
+
 
         <para>
             <classname>Zend_Form</classname> ships with many standard decorators; see
@@ -144,7 +144,7 @@
     </section>
 
     <section xml:id="zend.form.decorators.custom"><info><title>Custom Decorators</title></info>
-        
+
 
         <para>
             If you find your rendering needs are complex or need heavy
@@ -261,7 +261,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
                 . $input
                 . $errors
                 . $desc
-                . '</div>'
+                . '</div>';
 
         switch ($placement) {
             case (self::PREPEND):
@@ -351,7 +351,7 @@ class My_Decorator_Errors
     </section>
 
     <section xml:id="zend.form.decorators.individual"><info><title>Rendering Individual Decorators</title></info>
-        
+
 
         <para>
             Since decorators can target distinct metadata of the element or form

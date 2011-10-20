@@ -62,7 +62,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     public function testGetsItemsAtOffsetZero()
     {
         $actual = $this->_adapter->getItems(0, 10);
-        $this->assertType('LimitIterator', $actual);
+        $this->assertInstanceOf('LimitIterator', $actual);
 
         $i = 1;
         foreach ($actual as $item) {
@@ -74,7 +74,7 @@ class IteratorTest extends \PHPUnit_Framework_TestCase
     public function testGetsItemsAtOffsetTen()
     {
         $actual = $this->_adapter->getItems(10, 10);
-        $this->assertType('LimitIterator', $actual);
+        $this->assertInstanceOf('LimitIterator', $actual);
 
         $i = 11;
         foreach ($actual as $item) {

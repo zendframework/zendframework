@@ -49,12 +49,8 @@ class FormFile extends FormElement
      *
      * @return string The element XHTML.
      */
-    public function direct($name = null, $attribs = null)
+    public function __invoke($name, $attribs = null)
     {
-        if ($name == null) {
-            throw new \InvalidArgumentException('FormFile: missing argument. $name is required in formFile($name, $attribs = null)');
-        }
-        
         $info = $this->_getInfo($name, null, $attribs);
         extract($info); // name, id, value, attribs, options, listsep, disable
 
@@ -66,7 +62,7 @@ class FormFile extends FormElement
 
         // XHTML or HTML end tag?
         $endTag = ' />';
-        if (($this->view instanceof \Zend\View\PhpRenderer) && !$this->view->broker('doctype')->isXhtml()) {
+        if ($this->view instanceof \Zend\Loader\Pluggable && !$this->view->plugin('doctype')->isXhtml()) {
             $endTag= '>';
         }
 

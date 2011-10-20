@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -28,7 +28,7 @@ use Zend\Translator;
 use Zend\Locale;
 
 /**
- * Zend_Translate_Adapter_Tbx
+ * Zend_Translator_Adapter_Tbx
  */
 
 /**
@@ -37,11 +37,11 @@ use Zend\Locale;
 
 /**
  * @category   Zend
- * @package    Zend_Translate
+ * @package    Zend_Translator
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Translate
+ * @group      Zend_Translator
  */
 class TbxTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,20 +49,18 @@ class TbxTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'en');
         $this->assertTrue($adapter instanceof Adapter\Tbx);
+    }
 
-        try {
-            $adapter = new Adapter\Tbx(__DIR__ . '/_files/nofile.tbx', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidArgumentException $e) {
-            $this->assertContains('is not readable', $e->getMessage());
-        }
+    public function testCreate2()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/nofile.tbx', 'en');
+    }
 
-        try {
-            $adapter = new Adapter\Tbx(__DIR__ . '/_files/failed.tbx', 'en');
-            $this->fail("exception expected");
-        } catch (Translator\Adapter\Exception\InvalidFileTypeException $e) {
-            $this->assertContains('Mismatched tag at line', $e->getMessage());
-        }
+    public function testCreate3()
+    {
+        $this->setExpectedException('Zend\Translator\Exception\InvalidFileTypeException');
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/failed.tbx', 'en');
     }
 
     public function testToString()
@@ -98,14 +96,18 @@ class TbxTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Message 4 (en)', $adapter->translate('Message 4'));
         $this->assertEquals('Message 2', $adapter->translate('Message 2', 'ru'));
         $this->assertEquals('Message 1', $adapter->translate('Message 1', 'xx'));
+    }
 
-        try {
-            $adapter->addTranslation(__DIR__ . '/_files/translation_en.tbx', 'xx');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+    public function testLoadTranslationData2()
+    {
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->addTranslation(__DIR__ . '/_files/translation_en.tbx', 'xx');
+    }
 
+    public function testLoadTranslationData3()
+    {
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
         $adapter->addTranslation(__DIR__ . '/_files/translation_en2.tbx', 'de', array('clear' => true));
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
@@ -156,14 +158,18 @@ class TbxTest extends \PHPUnit_Framework_TestCase
         $locale = new Locale\Locale('fr');
         $adapter->setLocale($locale);
         $this->assertEquals('fr', $adapter->getLocale());
+    }
 
-        try {
-            $adapter->setLocale('nolocale');
-            $this->fail("exception expected");
-        } catch (Translator\Exception\InvalidArgumentException $e) {
-            $this->assertContains('does not exist', $e->getMessage());
-        }
+    public function testLocale2()
+    {
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
+        $this->setExpectedException('Zend\Translator\Exception\InvalidArgumentException');
+        $adapter->setLocale('nolocale');
+    }
 
+    public function testLocale3()
+    {
+        $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');
         set_error_handler(array($this, 'errorHandlerIgnore'));
         $adapter->setLocale('ru');
         restore_error_handler();

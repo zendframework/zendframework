@@ -35,7 +35,7 @@ namespace Zend\GData\Calendar\Extension;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class WebContent extends \Zend\GData\App\Extension
+class WebContent extends \Zend\GData\Extension
 {
 
     protected $_rootNamespace = 'gCal';

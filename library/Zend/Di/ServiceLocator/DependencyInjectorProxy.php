@@ -2,10 +2,10 @@
 
 namespace Zend\Di\ServiceLocator;
 
-use Zend\Di\DependencyInjector,
+use Zend\Di\Di,
     Zend\Di\Exception;
 
-class DependencyInjectorProxy extends DependencyInjector
+class DependencyInjectorProxy extends Di
 {
     /**
      * @var DependencyInjector
@@ -16,11 +16,11 @@ class DependencyInjectorProxy extends DependencyInjector
      * @param DependencyInjector $di 
      * @return void
      */
-    public function __construct(DependencyInjector $di)
+    public function __construct(Di $di)
     {
         $this->di              = $di;
-        $this->definition      = $di->getDefinition();
-        $this->instanceManager = $di->getInstanceManager();
+        $this->definitions     = $di->definitions();
+        $this->instanceManager = $di->instanceManager();
     }
 
     /**
@@ -36,7 +36,7 @@ class DependencyInjectorProxy extends DependencyInjector
      */
     public function get($name, array $params = array())
     {
-        $im = $this->getInstanceManager();
+        $im = $this->instanceManager();
 
         if ($params) {
             if (($fastHash = $im->hasSharedInstanceWithParameters($name, $params, true))) {
@@ -63,9 +63,11 @@ class DependencyInjectorProxy extends DependencyInjector
     public function createInstanceViaConstructor($class, $params, $alias = null)
     {
         $callParameters = array();
-        if ($this->di->definition->hasInjectionMethod($class, '__construct')) {
+        if ($this->di->definitions->hasMethod($class, '__construct')
+            && (count($this->di->definitions->getMethodParameters($class, '__construct')) > 0)
+        ) {
             $callParameters = $this->resolveMethodParameters(
-                $class, '__construct', $params, true, $alias
+                $class, '__construct', $params, true, $alias, true
             );
         }
         return new GeneratorInstance($class, '__construct', $callParameters);
@@ -92,8 +94,8 @@ class DependencyInjectorProxy extends DependencyInjector
         $method = $callback[1];
 
         $callParameters = array();
-        if ($this->di->definition->hasInjectionMethod($class, $method)) {
-            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias);
+        if ($this->di->definitions->hasMethod($class, $method)) {
+            $callParameters = $this->resolveMethodParameters($class, $method, $params, true, $alias, true);
         }
 
         return new GeneratorInstance(null, $callback, $callParameters);
@@ -108,9 +110,9 @@ class DependencyInjectorProxy extends DependencyInjector
      * @param  string $alias 
      * @return array
      */
-    public function handleInjectionMethodForObject($class, $method, $params, $alias)
+    public function handleInjectionMethodForObject($class, $method, $params, $alias, $isRequired)
     {
-        $callParameters = $this->resolveMethodParameters($class, $method, $params, false, $alias);
+        $callParameters = $this->resolveMethodParameters($class, $method, $params, false, $alias, $isRequired);
         return array(
             'method' => $method,
             'params' => $callParameters,
@@ -127,8 +129,8 @@ class DependencyInjectorProxy extends DependencyInjector
      */
     public function newInstance($name, array $params = array(), $isShared = true)
     {
-        $definition      = $this->getDefinition();
-        $instanceManager = $this->getInstanceManager();
+        $definition      = $this->definitions();
+        $instanceManager = $this->instanceManager();
 
         if ($instanceManager->hasAlias($name)) {
             $class = $instanceManager->getClassFromAlias($name);
@@ -140,11 +142,13 @@ class DependencyInjectorProxy extends DependencyInjector
 
         if (!$definition->hasClass($class)) {
             $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
-            throw new Exception\ClassNotFoundException('Class ' . $aliasMsg . $class . ' could not be located in provided definition.');
+            throw new Exception\ClassNotFoundException(
+                'Class ' . $aliasMsg . $class . ' could not be located in provided definition.'
+            );
         }
 
         $instantiator     = $definition->getInstantiator($class);
-        $injectionMethods = $definition->getInjectionMethods($class);
+        $injectionMethods = $definition->getMethods($class);
 
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params, $alias);
@@ -159,11 +163,9 @@ class DependencyInjectorProxy extends DependencyInjector
         }
 
         if ($injectionMethods) {
-            $methodMetadata = array();
             foreach ($injectionMethods as $injectionMethod) {
                 $methodMetadata[] = $this->handleInjectionMethodForObject($class, $injectionMethod, $params, $alias);
             }
-            $object->setMethods($methodMetadata);
         }
 
         if ($isShared) {

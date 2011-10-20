@@ -206,7 +206,7 @@ class SocketTest extends CommonHttpTests
         $start = microtime(true);
 
         try {
-            $this->client->request();
+            $this->client->send();
             $this->fail("Expected a timeout Zend\Http\Client\Adapter\Exception");
         } catch (Adapter\Exception $e) {
             $this->assertEquals(Adapter\Exception\TimeoutException::READ_TIMEOUT, $e->getCode());
@@ -231,7 +231,7 @@ class SocketTest extends CommonHttpTests
     {
         $md5 = '7667818873302f9995be3798d503d8d3';
 
-        $response = $this->client->request();
+        $response = $this->client->send();
         $this->assertEquals($md5, md5($response->getBody()));
     }
 

@@ -100,8 +100,23 @@ class NotEmpty extends AbstractValidator
             $options = $temp;
         }
 
-        if (is_array($options) && array_key_exists('type', $options)) {
-            $this->setType($options['type']);
+        if (is_array($options)) {
+            if (array_key_exists('type', $options)) {
+                $this->setType($options['type']);
+            } else {
+                $detected = 0;
+                $found    = false;
+                foreach ($options as $option) {
+                    if (in_array($option, $this->_constants)) {
+                        $found = true;
+                        $detected += array_search($option, $this->_constants);
+                    }
+                }
+
+                if ($found) {
+                    $this->setType($detected);
+                }
+            }
         }
     }
 

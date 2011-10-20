@@ -60,30 +60,6 @@ class EmailAddress extends AbstractValidator
     );
 
     /**
-     * @see http://en.wikipedia.org/wiki/IPv4
-     * @var array
-     */
-    protected $_invalidIp = array(
-        '0'   => '0.0.0.0/8',
-        '10'  => '10.0.0.0/8',
-        '127' => '127.0.0.0/8',
-        '128' => '128.0.0.0/16',
-        '169' => '169.254.0.0/16',
-        '172' => '172.16.0.0/12',
-        '191' => '191.255.0.0/16',
-        '192' => array(
-            '192.0.0.0/24',
-            '192.0.2.0/24',
-            '192.88.99.0/24',
-            '192.168.0.0/16'
-        ),
-        '198' => '198.18.0.0/15',
-        '223' => '223.255.255.0/24',
-        '224' => '224.0.0.0/4',
-        '240' => '240.0.0.0/4'
-    );
-
-    /**
      * @var array
      */
     protected $_messageVariables = array(
@@ -100,6 +76,13 @@ class EmailAddress extends AbstractValidator
      * @var string
      */
     protected $_localPart;
+
+    /**
+     * Returns the found mx record informations
+     *
+     * @var array
+     */
+    protected $_mxRecord;
 
     /**
      * Internal options array
@@ -174,6 +157,8 @@ class EmailAddress extends AbstractValidator
             } else {
                 $this->setHostnameValidator($options['hostname']);
             }
+        } elseif ($this->_options['hostname'] === null) {
+            $this->setHostnameValidator();
         }
 
         if (array_key_exists('mx', $options)) {
@@ -314,67 +299,44 @@ class EmailAddress extends AbstractValidator
     /**
      * Returns if the given host is reserved
      *
+     * The following addresses are seen as reserved
+     * '0.0.0.0/8', '10.0.0.0/8', '127.0.0.0/8'
+     * '172.16.0.0/12'
+     * '198.18.0.0/15'
+     * '128.0.0.0/16', '169.254.0.0/16', '191.255.0.0/16', '192.168.0.0/16'
+     * '192.0.0.0/24', '192.0.2.0/24', '192.88.99.0/24', '198.51.100.0/24', '203.0.113.0/24', '223.255.255.0/24'
+     * '224.0.0.0/4', '240.0.0.0/4'
+     *
      * @param string $host
-     * @return boolean
+     * @return boolean Returns false when minimal one of the given addresses is not reserved
      */
-    private function _isReserved($host){
+    protected function isReserved($host){
         if (!preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$/', $host)) {
-            $host = gethostbyname($host);
+            $host = gethostbynamel($host);
+        } else {
+            $host = array($host);
         }
 
-        $octet = explode('.',$host);
-        if ((int)$octet[0] >= 224) {
-            return true;
-        } else if (array_key_exists($octet[0], $this->_invalidIp)) {
-            foreach ((array)$this->_invalidIp[$octet[0]] as $subnetData) {
-                // we skip the first loop as we already know that octet matches
-                for ($i = 1; $i < 4; $i++) {
-                    if (strpos($subnetData, $octet[$i]) !== $i * 4) {
-                        break;
-                    }
-                }
-
-                $host       = explode("/", $subnetData);
-                $binaryHost = "";
-                $tmp        = explode(".", $host[0]);
-                for ($i = 0; $i < 4 ; $i++) {
-                    $binaryHost .= str_pad(decbin($tmp[$i]), 8, "0", STR_PAD_LEFT);
-                }
-
-                $segmentData = array(
-                    'network'   => (int)$this->_toIp(str_pad(substr($binaryHost, 0, $host[1]), 32, 0)),
-                    'broadcast' => (int)$this->_toIp(str_pad(substr($binaryHost, 0, $host[1]), 32, 1))
-                );
-
-                for ($j = $i; $j < 4; $j++) {
-                    if ((int)$octet[$j] < $segmentData['network'][$j] ||
-                        (int)$octet[$j] > $segmentData['broadcast'][$j]) {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        } else {
+        if (empty($host)) {
             return false;
         }
-    }
 
-    /**
-     * Converts a binary string to an IP address
-     *
-     * @param string $binary
-     * @return mixed
-     */
-    private function _toIp($binary)
-    {
-        $ip  = array();
-        $tmp = explode(".", chunk_split($binary, 8, "."));
-        for ($i = 0; $i < 4 ; $i++) {
-            $ip[$i] = bindec($tmp[$i]);
+        foreach ($host as $server) {
+                 // Search for 0.0.0.0/8, 10.0.0.0/8, 127.0.0.0/8
+            if (!preg_match('/^(0|10|127)(\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))){3}$/', $host) &&
+                // Search for 172.16.0.0.12
+                !preg_match('/^172\.(1[6-9]|2[0-9]|3[0-1])(\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))){2}$/', $host) &&
+                // Search for 198.18.0.0/15
+                !preg_match('/^198\.(1[8-9])(\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))){2}$/', $host) &&
+                // Search for 128.0.0.0/16, 169.254.0.0/16, 191.255.0.0/16, 192.168.0.0/16
+                !preg_match('/^(128\.0|169\.254|191\.255|192\.168)(\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))){2}$/', $host) &&
+                // Search for 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 198.51.100.0/24, 203.0.113.0/24, 223.255.255.0/24
+                !preg_match('/^(192\.0\.(0|2)|192\.88\.99|198\.51\.100|203\.0\.113|223\.255\.255)\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))$/', $host) &&
+                // Search for 224.0.0.0/4, 240.0.0.0/4
+                !preg_match('/^(2(2[4-9]|[3-4][0-9]|5[0-5]))(\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))){3}$/', $host)) {
+                return false;
+            }
         }
-
-        return $ip;
     }
 
     /**
@@ -382,7 +344,7 @@ class EmailAddress extends AbstractValidator
      *
      * @return boolean
      */
-    private function _validateLocalPart()
+    protected function validateLocalPart()
     {
         // First try to match the local part on the common dot-atom format
         $result = false;
@@ -415,21 +377,35 @@ class EmailAddress extends AbstractValidator
     }
 
     /**
+     * Returns the found MX Record information after validation including weight for further processing
+     *
+     * @return array
+     */
+    public function getMXRecord()
+    {
+        return $this->_mxRecord;
+    }
+
+    /**
      * Internal method to validate the servers MX records
      *
      * @return boolean
      */
-    private function _validateMXRecords()
+    protected function validateMXRecords()
     {
         $mxHosts = array();
-        $result = getmxrr($this->_hostname, $mxHosts);
+        $weight  = array();
+        $result = getmxrr($this->_hostname, $mxHosts, $weight);
+        $this->_mxRecord = array_combine($mxHosts, $weight);
+        arsort($this->_mxRecord);
+
         if (!$result) {
             $this->_error(self::INVALID_MX_RECORD);
         } else if ($this->_options['deep']) {
             $validAddress = false;
             $reserved     = true;
-            foreach ($mxHosts as $hostname) {
-                $res = $this->_isReserved($hostname);
+            foreach ($this->_mxRecord as $hostname => $weight) {
+                $res = $this->isReserved($hostname);
                 if (!$res) {
                     $reserved = false;
                 }
@@ -461,7 +437,7 @@ class EmailAddress extends AbstractValidator
      *
      * @return boolean
      */
-    private function _validateHostnamePart()
+    protected function validateHostnamePart()
     {
         $hostname = $this->_options['hostname']->setTranslator($this->getTranslator())
                          ->isValid($this->_hostname);
@@ -478,10 +454,29 @@ class EmailAddress extends AbstractValidator
             }
         } else if ($this->_options['mx']) {
             // MX check on hostname
-            $hostname = $this->_validateMXRecords();
+            $hostname = $this->validateMXRecords();
         }
 
         return $hostname;
+    }
+
+    /**
+     * Splits the given value in hostname and local part of the email adress
+     *
+     * @param string $value Email adress to be split
+     * @return bool Returns false when the email can not be split
+     */
+    protected function splitEmailParts($value)
+    {
+        // Split email address up and disallow '..'
+        if ((strpos($value, '..') !== false) or
+            (!preg_match('/^(.+)@([^@]+)$/', $value, $matches))) {
+            return false;
+        }
+
+        $this->_localPart = $matches[1];
+        $this->_hostname  = $matches[2];
+        return true;
     }
 
     /**
@@ -507,14 +502,10 @@ class EmailAddress extends AbstractValidator
         $this->_setValue($value);
 
         // Split email address up and disallow '..'
-        if ((strpos($value, '..') !== false) or
-            (!preg_match('/^(.+)@([^@]+)$/', $value, $matches))) {
+        if (!$this->splitEmailParts($value)) {
             $this->_error(self::INVALID_FORMAT);
             return false;
         }
-
-        $this->_localPart = $matches[1];
-        $this->_hostname  = $matches[2];
 
         if ((strlen($this->_localPart) > 64) || (strlen($this->_hostname) > 255)) {
             $length = false;
@@ -523,10 +514,10 @@ class EmailAddress extends AbstractValidator
 
         // Match hostname part
         if ($this->_options['domain']) {
-            $hostname = $this->_validateHostnamePart();
+            $hostname = $this->validateHostnamePart();
         }
 
-        $local = $this->_validateLocalPart();
+        $local = $this->validateLocalPart();
 
         // If both parts valid, return true
         if ($local && $length) {

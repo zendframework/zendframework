@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+vary: Accept, Accept-Encoding, X-Auth-Token
+Vary: Accept-Encoding
+Last-Modified: Mon, 26 Sep 2011 08:36:17 GMT
+X-PURGE-KEY: /583923/servers/20247478
+Cache-Control: s-maxage=1800
+Content-Type: application/json
+Content-Length: 204
+Date: Mon, 26 Sep 2011 08:37:04 GMT
+X-Varnish: 1908648305
+Age: 0
+Via: 1.1 varnish
+Connection: close
+
+{"server":{"progress":100,"id":20247478,"imageId":49,"flavorId":1,"status":"ACTIVE","name":"zf-unit-test","hostId":"ad9f86d14056f403153b2ee347c7ddf5","addresses":{"public":["50.57.86.26"],"private":["10.182.40.105"]},"metadata":{}}}

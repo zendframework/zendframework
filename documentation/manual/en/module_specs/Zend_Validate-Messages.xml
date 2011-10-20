@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.messages"><info><title>Validation Messages</title></info>
-    
+
 
     <para>
         Each validator which is based on <classname>Zend_Validate</classname> provides
@@ -55,7 +55,7 @@ $validator->setMessage(
     </para>
 
     <section xml:id="zend.validate.messages.pretranslated"><info><title>Using pre-translated validation messages</title></info>
-        
+
 
         <para>
             Zend Framework is shipped with more than 45 different validators with more than 200
@@ -66,7 +66,7 @@ $validator->setMessage(
         </para>
 
         <note><info><title>Used path</title></info>
-            
+
 
             <para>
                 The resource files are outside of the library path because all of your translations
@@ -80,19 +80,19 @@ $validator->setMessage(
         </para>
 
         <programlisting language="php"><![CDATA[
-$translator = new Zend_Translate(
+$translator = new Zend_Translator(
     array(
         'adapter' => 'array',
         'content' => '/resources/languages',
         'locale'  => $language,
-        'scan' => Zend_Translate::LOCALE_DIRECTORY
+        'scan' => Zend_Translator::LOCALE_DIRECTORY
     )
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>
 
         <note><info><title>Used translation adapter</title></info>
-            
+
 
             <para>
                 As translation adapter Zend Framework chose the array adapter. It is simple to
@@ -101,7 +101,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
         </note>
 
         <note><info><title>Supported languages</title></info>
-            
+
 
             <para>
                 This feature is very young, so the amount of supported languages may not be
@@ -117,7 +117,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translator);
     </section>
 
     <section xml:id="zend.validate.messages.limitation"><info><title>Limit the size of a validation message</title></info>
-        
+
 
         <para>
             Sometimes it is necessary to limit the maximum size a validation message can have.
@@ -145,7 +145,7 @@ Zend_Validate::setMessageLength(100);
 ]]></programlisting>
 
         <note><info><title>Where is this parameter used?</title></info>
-            
+
 
             <para>
                 The set message length is used for all validators, even for self defined ones,

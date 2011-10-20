@@ -44,7 +44,6 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
-        $this->markTestSkipped('skipped until finfo issues can be researched');
         $valuesExpected = array(
             array('image/gif', false),
             array('image', false),

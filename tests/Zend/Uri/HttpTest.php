@@ -199,5 +199,32 @@ class HttpTest extends TestCase
         $this->assertEquals('example.com', $uri->getHost());
     }
 
+    public function testGetPortReturnsDefaultPortHttp()
+    {
+        $uri = new HttpUri('http://www.example.com/');
+        $this->assertEquals(80, $uri->getPort());
+    }
+
+    public function testGetPortReturnsDefaultPortHttps()
+    {
+        $uri = new HttpUri('https://www.example.com/');
+        $this->assertEquals(443, $uri->getPort());
+    }
+
+    public function testGetPortDoesntModifyUrlHttp()
+    {
+        $origUri = 'http://www.example.com/foo';
+        $uri = new HttpUri($origUri);
+        $uri->getPort();
+        $this->assertEquals($origUri, $uri->toString());
+    }
+
+    public function testGetPortDoesntModifyUrlHttps()
+    {
+        $origUri = 'https://www.example.com/foo';
+        $uri = new HttpUri($origUri);
+        $uri->getPort();
+        $this->assertEquals($origUri, $uri->toString());
+    }
 }
 

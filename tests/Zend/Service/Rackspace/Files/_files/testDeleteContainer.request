@@ -1,0 +1,8 @@
+DELETE /v1/test/zf-unit-test?format=json HTTP/1.1
+Host: storage101.ord1.clouddrive.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend\Http\Client
+Content-Type: application/x-www-form-urlencoded
+X-Auth-Token: 0f0223cd-f157-4d04-bb2d-ccda1a5643af
+

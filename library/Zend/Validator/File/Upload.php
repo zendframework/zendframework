@@ -158,7 +158,7 @@ class Upload extends \Zend\Validator\AbstractValidator
      */
     public function isValid($value, $file = null)
     {
-        $this->_messages = null;
+        $this->_setValue($value);
         if (array_key_exists($value, $this->_files)) {
             $files[$value] = $this->_files[$value];
         } else {
@@ -237,8 +237,12 @@ class Upload extends \Zend\Validator\AbstractValidator
     protected function _throw($file, $errorType)
     {
         if ($file !== null) {
-            if (is_array($file) and !empty($file['name'])) {
-                $this->_value = $file['name'];
+            if (is_array($file)) {
+                if(array_key_exists('name', $file)) {
+                    $this->_value = $file['name'];
+                }
+            } else if (is_string($file)) {
+                $this->_value = $file;
             }
         }
 

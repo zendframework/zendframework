@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.locale.introduction"><info><title>導入</title></info>
 
-    
+
 
     <para>
         <classname>Zend_Locale</classname> は、
@@ -27,12 +27,12 @@
         <code>L10n</code> と <code>I18n</code> は、お互い補完しあうものです。
         Zend Framework では、いくつかのコンポーネントを組み合わせることで
         これらのサポートを提供しています。たとえば <classname>Zend_Locale</classname>、<classname>Zend_Date</classname>、
-        <classname>Zend_Measure</classname>、<classname>Zend_Translate</classname>、<classname>Zend_Currency</classname>
+        <classname>Zend_Measure</classname>、<classname>Zend_Translator</classname>、<classname>Zend_Currency</classname>
         そして <classname>Zend_TimeSync</classname> といったコンポーネントがあります。
     </para>
 
     <tip><info><title>Zend_Locale と setLocale()</title></info>
-        
+
         <para>
             <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://php.net/setlocale">PHP のドキュメント</link>
             には、<methodname>setlocale()</methodname> はプロセス単位で動作するのでスレッドセーフではないと書かれています。
@@ -49,7 +49,7 @@
 
     <section xml:id="zend.locale.whatislocalization"><info><title>地域化とは</title></info>
 
-        
+
 
         <para>
             地域化とは、あるアプリケーション (あるいはホームページ)
@@ -67,7 +67,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Translate</classname> - 文字列を翻訳します。
+                    <classname>Zend_Translator</classname> - 文字列を翻訳します。
                 </para>
             </listitem>
             <listitem>
@@ -110,7 +110,7 @@
 
     <section xml:id="zend.locale.whatis"><info><title>ロケールとは?</title></info>
 
-        
+
 
         <para>
             コンピュータのユーザは皆、(気づいていないかもしれませんが) ロケールを使用しています。
@@ -132,7 +132,7 @@
 
     <section xml:id="zend.locale.representation"><info><title>ロケールの表現方法は?</title></info>
 
-        
+
 
         <para>
             ロケール識別子に含まれる情報は、ユーザの言語と
@@ -164,7 +164,7 @@
         </para>
 
         <example xml:id="zend.locale.representation.example-1"><info><title>特定のロケールの選択</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_DE'); // ドイツ語 _ ドイツ
 ]]></programlisting>
@@ -204,7 +204,7 @@ $locale = new Zend_Locale('de_DE'); // ドイツ語 _ ドイツ
 
     <section xml:id="zend.locale.selection"><info><title>正しいロケールの選択</title></info>
 
-        
+
 
         <para>
             たいていの場合は、<methodname>new Zend_Locale()</methodname>
@@ -215,7 +215,7 @@ $locale = new Zend_Locale('de_DE'); // ドイツ語 _ ドイツ
         </para>
 
         <example xml:id="zend.locale.selection.example-1"><info><title>ロケールの自動選択</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 $locale  = new Zend_Locale();
 
@@ -271,13 +271,13 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
 
     <section xml:id="zend.locale.selection.automatic"><info><title>自動ロケールの使用法</title></info>
 
-        
+
 
         <para>
             <classname>Zend_Locale</classname> では、さらに 3 つのロケールを用意しています。
             これらのロケールは、どこか特定の言語や地域を表すものではありません。
             これらは "自動" ロケール、つまり
-            <methodname>getDefault()</methodname> メソッドと同じような働きをするものです。
+            <methodname>getFallback()</methodname> メソッドと同じような働きをするものです。
             しかし、インスタンスを作成したりといった余計な作業が不要になります。
             これらの "自動" ロケールは、標準のロケールを使用できるところなら
             どこででも使用可能で、文字列で指定することになります。
@@ -334,7 +334,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
         </para>
 
         <example xml:id="zend.locale.selection.automatic.example-1"><info><title>自動ロケールの使用法</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 // 自動検出なし
 //$locale = new Zend_Locale(Zend_Locale::BROWSER);
@@ -349,7 +349,7 @@ $date = new Zend_Date('auto');
 
     <section xml:id="zend.locale.defaultlocale"><info><title>デフォルトのロケールの使用</title></info>
 
-        
+
 
         <para>
             環境によっては、ロケールの自動検出ができないこともあります。
@@ -367,7 +367,7 @@ $date = new Zend_Date('auto');
         </para>
 
         <example xml:id="zend.locale.defaultlocale.example-1"><info><title>ロケールの例外処理</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 // 起動ファイル内で
 try {
@@ -389,18 +389,18 @@ $date = new Zend_Date($locale);
 
         <para>
             Zend Framework リリース 1.5 以降では、もっとうまいやりかたが用意されています。
-            デフォルトのロケールを、静的メソッド <methodname>setDefault()</methodname> で設定できるのです。
+            デフォルトのロケールを、静的メソッド <methodname>setFallback()</methodname> で設定できるのです。
             もちろん、未知のロケールや不完全なロケールが指定された場合も例外をスローします。
-            <methodname>setDefault()</methodname> は、<classname>Zend_Locale</classname>
+            <methodname>setFallback()</methodname> は、<classname>Zend_Locale</classname>
             を使用するクラスのインスタンスを作成する前に最初にコールする必要があります。
             詳細は、次の例を参照ください。
         </para>
 
         <example xml:id="zend.locale.defaultlocale.example-2"><info><title>デフォルトのロケールの設定</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 // 起動ファイル内で
-Zend_Locale::setDefault('de');
+Zend_Locale::setFallback('de');
 
 // モデル/コントローラ内で
 $date = new Zend_Date();
@@ -417,7 +417,7 @@ $date = new Zend_Date();
 
     <section xml:id="zend.locale.interoperate"><info><title>ZF のロケール対応のクラス</title></info>
 
-        
+
 
         <para>
             Zend Framework では、ロケール対応のクラスは <classname>Zend_Locale</classname>
@@ -428,7 +428,7 @@ $date = new Zend_Date();
         </para>
 
         <example xml:id="zend.locale.interoperate.example-1"><info><title>日付のデフォルトが、ウェブのユーザのロケールになる例</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date('2006',Zend_Date::YEAR);
 ]]></programlisting>
@@ -441,7 +441,7 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
         </para>
 
         <example xml:id="zend.locale.interoperate.example-2"><info><title>デフォルトのロケール選択のオーバーライド</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 $usLocale = new Zend_Locale('en_US');
 $date = new Zend_Date('2006',Zend_Date::YEAR, $usLocale);
@@ -458,7 +458,7 @@ $temp = new Zend_Measure_Temperature('100,10',
         </para>
 
         <example xml:id="zend.locale.interoperate.example-3"><info><title>デフォルトのロケールを使用する際のパフォーマンスの最適化</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 $date = new Zend_Date('2006', Zend_Date::YEAR, $locale);
@@ -472,7 +472,7 @@ $temp = new Zend_Measure_Temperature('100,10',
 
     <section xml:id="zend.locale.frameworkwidelocale"><info><title>アプリケーション単位のロケール</title></info>
 
-        
+
 
         <para>
             Zend Framework ではアプリケーション単位でのロケールの使用も可能です。
@@ -486,7 +486,7 @@ $temp = new Zend_Measure_Temperature('100,10',
         </para>
 
         <example xml:id="zend.locale.frameworkwidelocale.example"><info><title>アプリケーション単位のロケールの使用例</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 // 起動ファイルで
 $locale = new Zend_Locale('de_AT');
@@ -503,7 +503,7 @@ echo $date->getDate();
 
     <section xml:id="zend.locale.formatoptions"><info><title>Zend_Locale_Format::setOptions(array $options)</title></info>
 
-        
+
 
         <para>
             オプション 'precision' の値を使用して、桁数の切り詰めあるいは拡張を行います。
@@ -526,7 +526,7 @@ echo $date->getDate();
         </para>
 
         <example xml:id="zend.locale.formatoptions.example-1"><info><title>日付のデフォルトを、ウェブユーザの正しいロケールに設定する</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
                                      'fix_date' => true,
@@ -543,7 +543,7 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
         </para>
 
         <example xml:id="zend.locale.formatoptions.example-2"><info><title>setOptions() での STANDARD の使用</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
                                      'date_format' => 'dd.MMMM.YYYY'));
@@ -562,7 +562,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
 
     <section xml:id="zend.locale.cache"><info><title>Zend_Locale とそのサブクラスの高速化</title></info>
 
-        
+
 
         <para>
             <classname>Zend_Locale</classname> およびそのサブクラスを高速化するには、

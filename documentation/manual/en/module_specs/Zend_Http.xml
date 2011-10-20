@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.http.overview">
+    <info><title>Zend\Http</title></info>
+
+    <section xml:id="zend.http.overview.intro">
+        <info><title>Overview</title></info>
+        
+        <para>
+            <classname>Zend\Http</classname> is a primary foundational component of Zend Framework.
+            Since much of what PHP does is web-based, specifically HTTP, it makes sense to have a
+            performant, extensible, concise and consistent API to do all things HTTP.  In nutshell,
+            there are several parts of <classname>Zend\Http:</classname>
+        </para>
+        
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Context-less <classname>Request</classname> and <classname>Response</classname>
+                    classes that expose a fluent API for introspecting several aspects of HTTP
+                    messages:
+                </para>
+                
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Request line information and response status information
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Parameters, such as those found in <acronym>POST</acronym> and
+                            <acronym>GET</acronym>
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>Message Body</para>
+                    </listitem>
+
+                    <listitem>
+                        <para>Headers</para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    A Client implementation with various adapters that allow for sending requests
+                    and introspecting responses.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+
+    <section xml:id="zend.http.overview.request-response-and-headers">
+        <info><title>Zend\Http Request, Response and Headers</title></info>
+    
+        <para>
+            The Request, Response and Headers portion of the <classname>Zend\Http</classname>
+            component provides a fluent, object-oriented interface for introspecting information
+            from all the various parts of an HTTP request or HTTP response.  The two main objects
+            are <classname>Zend\Http\Request</classname> and
+            <classname>Zend\Http\Response</classname>.  These two classes are "context-less",
+            meaning that they model a request or response in the same way whether it is presented by
+            a client (to <emphasis>send</emphasis> a request and <emphasis>receive</emphasis> a
+            response) or by a server (to <emphasis>receive</emphasis> a request and
+            <emphasis>send</emphasis> a response).  In other words, regardless of the context, the
+            API remains the same for introspecting their various respective parts. Each attempts to
+            fully model a request or response so that a developer can create these objects from a
+            factory, or create and populate them manually.
+        </para>
+    </section>
+</section>

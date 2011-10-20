@@ -64,7 +64,7 @@ class Zend_Service_DeveloperGarden_IpLocationTest extends PHPUnit_Framework_Test
     {
         try {
             $result = $this->service->locateIP('217.7.192.1');
-            $this->assertType('array', $result->getIpAddressLocation());
+            $this->assertInternalType('array', $result->getIpAddressLocation());
         } catch (Exception $e) {
             if ($e->getMessage() != 'quotas have exceeded') {
                 throw $e;

@@ -102,7 +102,7 @@ class Sitemap extends AbstractHelper
      * @return \Zend\View\Helper\Navigation\Sitemap   fluent interface, returns
      *                                               self
      */
-    public function direct(Container $container = null)
+    public function __invoke(Container $container = null)
     {
         if (null !== $container) {
             $this->setContainer($container);
@@ -249,7 +249,8 @@ class Sitemap extends AbstractHelper
     public function getServerUrl()
     {
         if (!isset($this->_serverUrl)) {
-            $this->_serverUrl = $this->view->serverUrl();
+            $serverUrlHelper  = $this->getView()->plugin('serverUrl');
+            $this->_serverUrl = $serverUrlHelper();
         }
 
         return $this->_serverUrl;
@@ -266,7 +267,7 @@ class Sitemap extends AbstractHelper
     protected function _xmlEscape($string)
     {
         $enc = 'UTF-8';
-        if ($this->view instanceof View\ViewEngine
+        if ($this->view instanceof View\Renderer
             && method_exists($this->view, 'getEncoding')
         ) {
             $enc = $this->view->getEncoding();
@@ -298,11 +299,12 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $curDoc = $this->getView()->broker('url')->direct();
-            $curDoc = ('/' == $curDoc) ? '' : trim($curDoc, '/');
-            $url = rtrim($this->getServerUrl(), '/') . '/'
-                 . $curDoc
-                 . (empty($curDoc) ? '' : '/') . $href;
+            $urlHelper = $this->getView()->plugin('url');
+            $curDoc    = $urlHelper();
+            $curDoc    = ('/' == $curDoc) ? '' : trim($curDoc, '/');
+            $url       = rtrim($this->getServerUrl(), '/') . '/'
+                       . $curDoc
+                       . (empty($curDoc) ? '' : '/') . $href;
         }
 
         return $this->_xmlEscape($url);
@@ -368,7 +370,7 @@ class Sitemap extends AbstractHelper
             }
 
             // get absolute url from page
-            if (!$url = $this->getView()->broker('url')->direct($page->toArray())) {
+            if (!$url = $this->url($page)) {
                 // skip page if it has no url (rare case)
                 continue;
             }

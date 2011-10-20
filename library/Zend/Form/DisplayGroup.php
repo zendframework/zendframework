@@ -111,7 +111,7 @@ class DisplayGroup implements \Iterator,\Countable
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -623,7 +623,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Load default decorators
      *
-     * @return void
+     * @return \Zend\Form\DisplayGroup
      */
     public function loadDefaultDecorators()
     {
@@ -842,7 +842,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set view
      *
-     * @param  \Zend\View\ViewEngine $view
+     * @param  \Zend\View\Renderer $view
      * @return \Zend\Form\DisplayGroup
      */
     public function setView(View $view = null)
@@ -854,7 +854,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve view
      *
-     * @return \Zend\View\ViewEngine
+     * @return \Zend\View\Renderer
      */
     public function getView()
     {
@@ -904,12 +904,12 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set translator object
      *
-     * @param  Zend_Translate|\Zend\Translator\Adapter\Adapter|null $translator
+     * @param  Zend_Translator|\Zend\Translator\Adapter\AbstractAdapter|null $translator
      * @return \Zend\Form\DisplayGroup
      */
     public function setTranslator($translator = null)
     {
-        if ((null === $translator) || ($translator instanceof Translator\Adapter)) {
+        if ((null === $translator) || ($translator instanceof Translator\Adapter\AbstractAdapter)) {
             $this->_translator = $translator;
         } elseif ($translator instanceof Translator\Translator) {
             $this->_translator = $translator->getAdapter();

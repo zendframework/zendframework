@@ -23,21 +23,21 @@
  */
 namespace Zend\Translator\Adapter;
 
-use Zend\Translator\Adapter as TranslationAdapter,
+use Zend\Translator\Adapter\AbstractAdapter,
     Zend\Translator,
-    Zend\Translator\Adapter\Exception\InvalidArgumentException,
-    Zend\Translator\Adapter\Exception\InvalidFileTypeException;
+    Zend\Translator\Exception\InvalidArgumentException,
+    Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
  * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Translator\Adapter\Adapter
+ * @uses       \Zend\Translator\Adapter\AbstractAdapter
  * @uses       \Zend\Translator\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Translator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Gettext extends TranslationAdapter
+class Gettext extends AbstractAdapter
 {
     // Internal variables
     private $_bigEndian   = false;
@@ -65,8 +65,8 @@ class Gettext extends TranslationAdapter
      * @param  string  $locale    New Locale/Language to set, identical with locale identifier,
      *                            see Zend_Locale for more information
      * @param  array   $option    OPTIONAL Options to use
-     * @throws \Zend\Translator\Adapter\Exception\InvalidArgumentException
-     * @throws \Zend\Translator\Adapter\Exception\InvalidFileTypeException
+     * @throws \Zend\Translator\Exception\InvalidArgumentException
+     * @throws \Zend\Translator\Exception\InvalidFileTypeException
      * @return array
      */
     protected function _loadTranslationData($filename, $locale, array $options = array())
@@ -78,6 +78,7 @@ class Gettext extends TranslationAdapter
             throw new InvalidArgumentException('Error opening translation file \'' . $filename . '\'.');
         }
         if (@filesize($filename) < 10) {
+            @fclose($this->_file);
             throw new InvalidFileTypeException('\'' . $filename . '\' is not a gettext file');
         }
 
@@ -88,6 +89,7 @@ class Gettext extends TranslationAdapter
         } else if (strtolower(substr(dechex($input[1]), -8)) == "de120495") {
             $this->_bigEndian = true;
         } else {
+            @fclose($this->_file);
             throw new InvalidFileTypeException('\'' . $filename . '\' is not a gettext file');
         }
         // read revision - not supported for now
@@ -136,6 +138,7 @@ class Gettext extends TranslationAdapter
             }
         }
 
+        @fclose($this->_file);
         $result[$locale][''] = trim($result[$locale]['']);
         if (empty($result[$locale][''])) {
             $this->_adapterInfo[$filename] = 'No adapter information available';

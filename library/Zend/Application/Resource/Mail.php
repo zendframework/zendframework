@@ -24,18 +24,11 @@
  */
 namespace Zend\Application\Resource;
 
-use Zend\Loader,
-    Zend\Application\ResourceException;
+use Zend\Application\ResourceException;
 
 /**
  * Resource for setting up Mail Transport and default From & ReplyTo addresses
  *
- * @uses       \Zend\Application\ResourceException
- * @uses       \Zend\Application\Resource\AbstractResource
- * @uses       \Zend\Loader\Autoloader
- * @uses       \Zend\Mail\Mail
- * @uses       \Zend\Mail\Transport\Sendmail
- * @uses       \Zend\Mail\Transport\Smtp
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -52,14 +45,14 @@ class Mail extends AbstractResource
 
     /**
      * Initialize mail resource
-     * 
+     *
      * @return \Zend\Mail\AbstractTransport
      */
-    public function init() 
+    public function init()
     {
         return $this->getMail();
     }
-    
+
     /**
      * @return \Zend\Mail\AbstractTransport|null
      */
@@ -68,7 +61,7 @@ class Mail extends AbstractResource
         if (null === $this->_transport) {
             $options = $this->getOptions();
             foreach($options as $key => $option) {
-                $options[strtolower($key)] = $option;         
+                $options[strtolower($key)] = $option;
             }
             $this->setOptions($options);
 
@@ -85,21 +78,21 @@ class Mail extends AbstractResource
                     \Zend\Mail\Mail::setDefaultTransport($this->_transport);
                 }
             }
-            
+
             $this->_setDefaults('from');
             $this->_setDefaults('replyTo');
         }
 
         return $this->_transport;
     }
-    
+
     /**
      * Set transport/message defaults
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return void
      */
-    protected function _setDefaults($type) 
+    protected function _setDefaults($type)
     {
         $key = strtolower('default' . $type);
         $options = $this->getOptions();
@@ -117,11 +110,11 @@ class Mail extends AbstractResource
             }
         }
     }
-    
+
     /**
      * Setup mail transport
-     * 
-     * @param  array $options 
+     *
+     * @param  array $options
      * @return void
      */
     protected function _setupTransport(array $options)
@@ -129,35 +122,31 @@ class Mail extends AbstractResource
     	if(!isset($options['type'])) {
     		$options['type'] = 'sendmail';
     	}
-    	
-        $transportName = $options['type'];
-        if(!Loader\Autoloader::autoload($transportName)) {
-            $transportName = ucfirst(strtolower($transportName));
 
-            if(!Loader\Autoloader::autoload($transportName)) {
-                $transportName = 'Zend\\Mail\\Transport\\' . $transportName;
-                if(!Loader\Autoloader::autoload($transportName)) {
-                    throw new Exception\InitializationException(
-                        "Specified Mail Transport '{$transportName}'"
-                        . 'could not be found'
-                    );
-                }
+        $transportName = ucfirst($options['type']);
+        if (!class_exists($options['type'])) {
+            $qualifiedTransportName = 'Zend\Mail\Transport\\' . $transportName;
+            if (!class_exists($qualifiedTransportName)) {
+                throw new Exception\InitializationException(
+                    "Specified Mail Transport '{$transportName}' could not be found"
+                );
             }
+            $transportName = $qualifiedTransportName;
         }
-        
+
         unset($options['type']);
-        
+
         switch($transportName) {
-            case 'Zend\\Mail\\Transport\\Smtp':
+            case 'Zend\Mail\Transport\Smtp':
                 if(!isset($options['host'])) {
                     throw new Exception\InitializationException(
                         'A host is necessary for smtp transport,'
                         .' but none was given');
                 }
-                
+
                 $transport = new $transportName($options['host'], $options);
                 break;
-            case 'Zend\\Mail\\Transport\\Sendmail':
+            case 'Zend\Mail\Transport\Sendmail':
             default:
                 $transport = new $transportName($options);
                 break;

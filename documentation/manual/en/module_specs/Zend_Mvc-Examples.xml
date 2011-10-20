@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xml:id="zend.mvc.examples">
+  <info><title>Examples</title></info>
+
+  <section xml:id="zend.mvc.examples.controllers">
+    <info><title>Controllers</title></info>
+
+    <section xml:id="zend.mvc.examples.controllers.accessing-the-request-and-response">
+      <info><title>Accessing the Request and Response</title></info>
+
+      <para>
+        When using <classname>ActionController</classname> or
+        <classname>RestfulController</classname>, the request and response
+        object are composed directly into the controller as soon as
+        <methodname>dispatch()</methodname> is called. You may access them in the
+        following ways:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$request  = $this->getRequest();
+$response = $this->getResponse();
+
+$request  = $this->request;
+$response = $this->response;
+]]></programlisting>
+
+      <para>
+        Additionally, if your controller implements
+        <classname>InjectApplicationEvent</classname> (as both
+        <classname>ActionController</classname> and
+        <classname>RestfulController</classname> do), you can access these
+        objects from the attached <classname>MvcEvent</classname>:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$event    = $this->getEvent();
+$request  = $event->getRequest();
+$response = $event->getResponse();
+]]></programlisting>
+
+      <para>
+        The above can be useful when composing event listeners into your
+        controller.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.examples.controllers.accessing-routing-parameters">
+      <info><title>Accessing routing parameters</title></info>
+
+      <para>
+        The parameters returned when routing completes are wrapped in a
+        <classname>Zend\Mvc\Router\RouteMatch</classname> object. This object
+        is detailed in the section on routing.
+      </para>
+
+      <para>
+        Within your controller, if you implement
+        <classname>InjectApplicationEvent</classname> (as both
+        <classname>ActionController</classname> and
+        <classname>RestfulController</classname> do), you can access this
+        object from the attached <classname>MvcEvent</classname>:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+$event   = $this->getEvent();
+$matches = $event->getRouteMatch();
+]]></programlisting>
+
+      <para>
+        Once you have the <classname>RouteMatch</classname> object, you can
+        pull parameters from it.
+      </para>
+    </section>
+
+    <section xml:id="zend.mvc.examples.controllers.returning-early">
+      <info><title>Returning early</title></info>
+
+      <para>
+        You can effectively short-circuit execution of the application at
+        any point by returning a <classname>Response</classname> from your
+        controller or any event. When such a value is discovered, it halts
+        further execution of the event manager, bubbling up to the
+        <classname>Application</classname> instance, where it is immediately
+        returned.
+      </para>
+
+      <para>
+        As an example, the <classname>Redirect</classname> plugin returns a
+        <classname>Response</classname>, which can be returned immediately so
+        as to complete the request as quickly as possible. Other use cases
+        might be for returning JSON or XML results from web service
+        endpoints, returning "401 Forbidden" results, etc.
+      </para>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.examples.bootstrapping">
+    <info><title>Bootstrapping</title></info>
+
+    <section xml:id="registering-module-specific-listeners">
+      <info><title>Registering module-specific listeners</title></info>
+
+      <para>
+        Often you may want module-specific listeners. As an example, this
+        would be a simple and effective way to introduce authorization,
+        logging, or caching into your application.
+      </para>
+
+      <para>
+        Each <classname>Module</classname> class can have an optional
+        <methodname>init()</methodname> method. Typically, you'll setup
+        autoloading for your module here, but you can perform arbitrary tasks.
+      </para>
+
+      <para>
+        The base <classname>Bootstrap</classname> class shipped with the
+        framework has an <classname>EventManager</classname> associated with it,
+        and once the locator and router instances are initialized, it triggers a
+        "bootstrap" event, with "application" and "modules" parameters.
+      </para>
+
+      <para>
+        So, one way to accomplish module-specific listeners is to listen to that
+        event, and register listeners at that time. As an example:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+namespace SomeCustomModule;
+
+use Zend\EventManager\StaticEventManager;
+
+class Module
+{
+    public function init()
+    {
+        // setup autoloading, etc..
+
+        // Now, register listeners:
+        $events = StaticEventManager::getInstance();
+        $events->attach('bootstrap', 'bootstrap', array($this, 'registerListeners'));
+    }
+
+    public function registerListeners($e)
+    {
+        $application = $e->getParam('application');
+        $modules     = $e->getParam('modules');
+        $config      = $modules->getMergedConfig();
+        $view        = $application->getLocator()->get('view');
+        $view->headTitle($config->view->base_title);
+
+        $listeners   = new Listeners\ViewListener();
+        $listeners->setView($view);
+        $application->events()->attach($listeners);
+    }
+}
+]]></programlisting>
+
+      <para>
+        The above demonstrates several things. First, it shows registering a
+        callback on the bootstrap's "bootstrap" event (within the
+        <methodname>init()</methodname> method). Second, it demonstrates that 
+        listener, and how it can be used to register listeners with the
+        application. It grabs the <classname>Application</classname> instance,
+        as well as the module manager instance. From the
+        <classname>Application</classname>, it is able to grab the attached 
+        locator, and from the <classname>Managar</classname>, it grabs
+        configuration. These are then used to retrieve the view, configure some
+        helpers, and then register a listener aggregate with the application
+        event manager.
+      </para>
+    </section>
+  </section>
+</section>

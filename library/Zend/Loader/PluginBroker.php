@@ -40,6 +40,11 @@ class PluginBroker implements Broker
      * @var ShortNameLocator Plugin class loader used by this instance
      */
     protected $classLoader;
+    
+    /**
+     * @var boolean Whether plugins should be registered on load
+     */
+    protected $registerPluginsOnLoad = true;
 
     /**
      * @var array Cache of loaded plugin instances
@@ -139,6 +144,9 @@ class PluginBroker implements Broker
                     // been registered
                     $plugins = $value;
                     break;
+                case 'register_plugins_on_load':
+                    $this->setRegisterPluginsOnLoad($value);
+                    break;
                 case 'validator':
                     $this->setValidator($value);
                     break;
@@ -191,7 +199,10 @@ class PluginBroker implements Broker
             $instance = $r->newInstanceArgs($options);
         }
 
-        $this->register($pluginName, $instance);
+        if ($this->getRegisterPluginsOnLoad()) {
+            $this->register($pluginName, $instance);
+        }
+        
         return $instance;
     }
 
@@ -279,6 +290,28 @@ class PluginBroker implements Broker
             $this->setClassLoader(new $loaderClass());
         }
         return $this->classLoader;
+    }
+    
+    /**
+     * Set if plugins should be registered on load.
+     * 
+     * @param  boolean $flag
+     * @return PluginBroker
+     */
+    public function setRegisterPluginsOnLoad($flag)
+    {
+        $this->registerPluginsOnLoad = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Retrieve if plugins are registered on load.
+     * 
+     * @return boolean
+     */
+    public function getRegisterPluginsOnLoad()
+    {
+        return $this->registerPluginsOnLoad;
     }
 
     /**

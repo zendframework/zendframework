@@ -56,7 +56,7 @@
     <para>
         Alle eingebauten Helfer erweitern
         <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, welches die Integration
-        von <link linkend="zend.acl">ACL</link> und <link linkend="zend.translate">Übersetzung</link> hinzufügt. Die abstrakte Klasse
+        von <link linkend="zend.acl">ACL</link> und <link linkend="zend.translator">Übersetzung</link> hinzufügt. Die abstrakte Klasse
         implementiert das Interface <classname>Zend_View_Helper_Navigation_Helper</classname>
         welches die folgenden Methoden definiert:
     </para>
@@ -251,12 +251,12 @@ $this->navigation()->addPage(array(
 
         <para>
             Der Navigations Helfer unterstützt die Übersetzung von SeitenLabels und Überschriften.
-            Man kann einen Übersetzer vom Typ <classname>Zend_Translate</classname> oder
-            <classname>Zend_Translate_Adapter</classname> im Helfer setzen indem
+            Man kann einen Übersetzer vom Typ <classname>Zend_Translator</classname> oder
+            <classname>Zend_Translator_Adapter</classname> im Helfer setzen indem
             <command>$helper-&gt;setTranslator($translator)</command> verwendet wird, oder wie in allen
             anderen I18n-fähigen Komponenten; durch das Hinzufügen des Übersetzers in
             <link linkend="zend.registry">die Registry</link> indem der Schlüssel
-            <classname>Zend_Translate</classname> verwendet wird.
+            <classname>Zend_Translator</classname> verwendet wird.
         </para>
 
         <para>

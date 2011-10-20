@@ -23,7 +23,10 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\View\Helper;
+
+use Zend\View\PhpRenderer as View,
+    Zend\View\Helper\Doctype,
+    Zend\View\Helper\HtmlObject;
 
 /**
  * @category   Zend
@@ -49,8 +52,8 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->view = new \Zend\View\View();
-        $this->helper = new Helper\HtmlObject();
+        $this->view   = new View();
+        $this->helper = new HtmlObject();
         $this->helper->setView($this->view);
     }
 
@@ -61,12 +64,12 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testViewObjectIsSet()
     {
-        $this->assertType('Zend\View\ViewEngine', $this->helper->view);
+        $this->assertInstanceof('Zend\View\Renderer', $this->helper->getView());
     }
 
     public function testMakeHtmlObjectWithoutAttribsWithoutParams()
     {
-        $htmlObject = $this->helper->direct('datastring', 'typestring');
+        $htmlObject = $this->helper->__invoke('datastring', 'typestring');
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -77,7 +80,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
         $attribs = array('attribkey1' => 'attribvalue1',
                          'attribkey2' => 'attribvalue2');
 
-        $htmlObject = $this->helper->direct('datastring', 'typestring', $attribs);
+        $htmlObject = $this->helper->__invoke('datastring', 'typestring', $attribs);
 
         $this->assertContains('<object data="datastring" type="typestring" attribkey1="attribvalue1" attribkey2="attribvalue2">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -85,12 +88,12 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsHtml()
     {
-        $this->view->broker('doctype')->direct(Helper\Doctype::HTML4_STRICT);
+        $this->view->plugin('doctype')->__invoke(Doctype::HTML4_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');
 
-        $htmlObject = $this->helper->direct('datastring', 'typestring', array(), $params);
+        $htmlObject = $this->helper->__invoke('datastring', 'typestring', array(), $params);
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -104,12 +107,12 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithoutAttribsWithParamsXhtml()
     {
-        $this->view->broker('doctype')->direct(Helper\Doctype::XHTML1_STRICT);
+        $this->view->plugin('doctype')->__invoke(Doctype::XHTML1_STRICT);
 
         $params = array('paramname1' => 'paramvalue1',
                         'paramname2' => 'paramvalue2');
 
-        $htmlObject = $this->helper->direct('datastring', 'typestring', array(), $params);
+        $htmlObject = $this->helper->__invoke('datastring', 'typestring', array(), $params);
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('</object>', $htmlObject);
@@ -123,7 +126,7 @@ class HtmlObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testMakeHtmlObjectWithContent()
     {
-        $htmlObject = $this->helper->direct('datastring', 'typestring', array(), array(), 'testcontent');
+        $htmlObject = $this->helper->__invoke('datastring', 'typestring', array(), array(), 'testcontent');
 
         $this->assertContains('<object data="datastring" type="typestring">', $htmlObject);
         $this->assertContains('testcontent', $htmlObject);

@@ -89,6 +89,6 @@ class SubFormTest extends \PHPUnit_Framework_TestCase
     {
         $view = $this->form->getView();
         
-        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->broker('dojo'));
+        $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }
 }

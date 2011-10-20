@@ -47,7 +47,7 @@ class Radio extends Multi
      *
      * Disables "for" attribute of label if label decorator enabled.
      *
-     * @return void
+     * @return \Zend\Form\Element\Radio
      */
     public function loadDefaultDecorators()
     {

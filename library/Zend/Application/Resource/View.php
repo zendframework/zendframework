@@ -38,7 +38,7 @@ use Zend\Controller\Action\Helper\ViewRenderer;
 class View extends AbstractResource
 {
     /**
-     * @var \Zend\View\ViewEngine
+     * @var \Zend\View\Renderer
      */
     protected $_view;
 
@@ -77,7 +77,7 @@ class View extends AbstractResource
             $this->_view = new \Zend\View\PhpRenderer($options);
 
             if(isset($options['doctype'])) {
-                $this->_view->broker('doctype')->setDoctype(strtoupper($options['doctype']));
+                $this->_view->plugin('doctype')->setDoctype(strtoupper($options['doctype']));
             }
         }
         return $this->_view;

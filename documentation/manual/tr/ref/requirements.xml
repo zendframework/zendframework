@@ -449,7 +449,7 @@
                     <row>
                         <entry>xml</entry>
                         <entry>Bağımlı</entry>
-                        <entry>Zend_Translate_Adapter_Qt, Zend_Translate_Adapter_Tmx, Zend_Translate_Adapter_Xliff</entry>
+                        <entry>Zend_Translator_Adapter_Qt, Zend_Translator_Adapter_Tmx, Zend_Translator_Adapter_Xliff</entry>
                     </row>
                     <row>
                         <entry>XMLReader</entry>

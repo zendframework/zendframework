@@ -23,6 +23,7 @@
 */
 namespace Zend\Feed\Reader\Entry;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Exception;
 
 /**
 * @uses \Zend\Feed\Reader\Exception
@@ -219,7 +220,7 @@ abstract class AbstractEntry
             }
         }
         throw new Exception('Method: ' . $method
-            . 'does not exist and could not be located on a registered Extension');
+            . ' does not exist and could not be located on a registered Extension');
     }
 
     /**

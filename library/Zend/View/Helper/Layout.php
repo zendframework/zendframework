@@ -76,7 +76,7 @@ class Layout extends AbstractHelper
      *
      * @return \Zend\Layout\Layout
      */
-    public function direct()
+    public function __invoke()
     {
         return $this->getLayout();
     }

@@ -66,7 +66,7 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
 
     public function getElement()
     {
-        return $this->helper->direct(
+        return $this->helper->__invoke(
             'elementId',
             '',
             array(
@@ -152,7 +152,7 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
         DojoHelper::setUseProgrammatic();
         $html = $this->getElement();
         $this->assertNotRegexp('/<div[^>]*(dojoType="dijit.form.HorizontalSlider")/', $html);
-        $this->assertNotNull($this->view->broker('dojo')->getDijit('elementId-slider'));
+        $this->assertNotNull($this->view->plugin('dojo')->getDijit('elementId-slider'));
     }
 
     public function testShouldCreateOnChangeAttributeByDefault()
@@ -195,7 +195,7 @@ class HorizontalSliderTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAllowPassingLabelParametersViaDecorationParameters()
     {
-        $html = $this->helper->direct(
+        $html = $this->helper->__invoke(
             'elementId',
             '',
             array(

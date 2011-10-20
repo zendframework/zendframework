@@ -41,9 +41,8 @@ class Alpha extends AbstractValidator
      * Whether to allow white space characters; off by default
      *
      * @var boolean
-     * @deprecated
      */
-    public $allowWhiteSpace;
+    protected $allowWhiteSpace;
 
     /**
      * Alphabetic filter used for validation
@@ -132,7 +131,7 @@ class Alpha extends AbstractValidator
             self::$_filter = new \Zend\Filter\Alpha();
         }
 
-        self::$_filter->allowWhiteSpace = $this->allowWhiteSpace;
+        self::$_filter->setAllowWhiteSpace($this->allowWhiteSpace);
 
         if ($value !== self::$_filter->filter($value)) {
             $this->_error(self::NOT_ALPHA);

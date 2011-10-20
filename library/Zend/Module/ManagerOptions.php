@@ -20,6 +20,11 @@ class ManagerOptions
     /**
      * @var string
      */
+    protected $cacheKey = NULL;
+
+    /**
+     * @var string
+     */
     protected $manifestDir = NULL;
 
     /**
@@ -88,6 +93,29 @@ class ManagerOptions
     }
 
     /**
+     * Get key used to create the cache file name
+     *
+     * @return string
+     */
+    public function getCacheKey() {
+        if ($this->cacheKey !== null) {
+            return $this->cacheKey;
+        }
+        return $this->getApplicationEnv();
+    }
+
+    /**
+     * Set key used to create the cache file name
+     *
+     * @param string $cacheKey the value to be set
+     * @return ManagerOptions
+     */
+    public function setCacheKey($cacheKey) {
+        $this->cacheKey = $cacheKey;
+        return $this;
+    }
+
+    /**
      * Get manifestDir.
      *
      * @return string
@@ -123,7 +151,7 @@ class ManagerOptions
      */
     public function getCacheFilePath()
     {
-        return $this->getCacheDir() . '/module-config-cache.'.$this->getApplicationEnv().'.php';
+        return $this->getCacheDir() . '/module-config-cache.'.$this->getCacheKey().'.php';
     }
 
     /**

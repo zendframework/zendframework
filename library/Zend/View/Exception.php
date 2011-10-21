@@ -21,32 +21,13 @@
 /**
  * @namespace
  */
-namespace Zend\View\Exception;
-
-use Zend\View\Renderer,
-    Zend\View\Exception;
+namespace Zend\View;
 
 /**
- * Exception for Zend_View class.
- *
- * @uses       \RuntimeException
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException extends \RuntimeException implements Exception
-{
-    protected $view = null;
-
-    public function setView(Renderer $view = null)
-    {
-        $this->view = $view;
-        return $this;
-    }
-
-    public function getView()
-    {
-        return $this->view;
-    }
-}
+interface Exception
+{}

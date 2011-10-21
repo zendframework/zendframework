@@ -20,7 +20,7 @@ class ManagerOptions
     /**
      * @var string
      */
-    protected $cacheKey = NULL;
+    protected $configCacheKey = NULL;
 
     /**
      * @var string
@@ -97,9 +97,9 @@ class ManagerOptions
      *
      * @return string
      */
-    public function getCacheKey() {
-        if ($this->cacheKey !== null) {
-            return $this->cacheKey;
+    public function getConfigCacheKey() {
+        if ($this->configCacheKey !== null) {
+            return $this->configCacheKey;
         }
         return $this->getApplicationEnv();
     }
@@ -107,11 +107,11 @@ class ManagerOptions
     /**
      * Set key used to create the cache file name
      *
-     * @param string $cacheKey the value to be set
+     * @param string $configCacheKey the value to be set
      * @return ManagerOptions
      */
-    public function setCacheKey($cacheKey) {
-        $this->cacheKey = $cacheKey;
+    public function setConfigCacheKey($configCacheKey) {
+        $this->configCacheKey = $configCacheKey;
         return $this;
     }
 
@@ -151,7 +151,7 @@ class ManagerOptions
      */
     public function getCacheFilePath()
     {
-        return $this->getCacheDir() . '/module-config-cache.'.$this->getCacheKey().'.php';
+        return $this->getCacheDir() . '/module-config-cache.'.$this->getConfigCacheKey().'.php';
     }
 
     /**

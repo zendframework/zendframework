@@ -28,7 +28,8 @@ use Zend\Loader\ShortNameLocator,
     Zend\Loader\PluginClassLoader,
     Zend\Navigation\Container,
     Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper,
-    Zend\View\Helper\Navigation\Helper as NavigationHelper;
+    Zend\View\Helper\Navigation\Helper as NavigationHelper,
+    Zend\View\Exception;
 
 /**
  * Proxy helper for retrieving navigational helpers and forwarding calls
@@ -184,10 +185,9 @@ class Navigation extends AbstractNavigationHelper
      *                                             wrong. Default is true.
      * @return \Zend\View\Helper\Navigation\Helper  helper instance
      * @throws \Zend\Loader\PluginLoader\Exception  if $strict is true and
-     *                                             helper cannot be found
-     * @throws \Zend\View\Exception                 if $strict is true and
-     *                                             helper does not implement
-     *                                             the specified interface
+     *         helper cannot be found
+     * @throws Exception\InvalidArgumentException if $strict is true and
+     *         helper does not implement the specified interface
      */
     public function findHelper($proxy, $strict = true)
     {
@@ -211,12 +211,11 @@ class Navigation extends AbstractNavigationHelper
 
         if (!$helper instanceof AbstractNavigationHelper) {
             if ($strict) {
-                $e = new \Zend\View\Exception(sprintf(
+                throw new Exception\InvalidArgumentException(sprintf(
                         'Proxy helper "%s" is not an instance of ' .
                         'Zend\View\Helper\Navigation\Helper',
-                        get_class($helper)));
-                $e->setView($this->view);
-                throw $e;
+                        get_class($helper)
+                ));
             }
 
             return null;

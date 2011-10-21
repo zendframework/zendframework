@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper;
 
+use Zend\View\Exception;
+
 /**
  * Helper for retrieving avatars from gravatar.com
  *
@@ -189,7 +191,7 @@ class Gravatar extends HtmlElement
      *
      * @param string $rating Value for rating. Allowed values are: g, px, r,x
      * @link http://pl.gravatar.com/site/implement/url More information about rating.
-     * @throws \Zend\View\Exception
+     * @throws Exception\DomainException
      */
     public function setRating($rating)
     {
@@ -201,7 +203,7 @@ class Gravatar extends HtmlElement
                 $this->options['rating'] = $rating;
                 break;
             default:
-                throw new \Zend\View\Exception(sprintf(
+                throw new Exception\DomainException(sprintf(
                     'The rating value "%s" is not allowed',
                     $rating
                 ));

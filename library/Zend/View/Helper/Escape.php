@@ -82,12 +82,12 @@ class Escape extends AbstractHelper
      * 
      * @param  callback $callback 
      * @return Escape
-     * @throws Exception if provided callback is not callable
+     * @throws Exception\InvalidArgumentException if provided callback is not callable
      */
     public function setCallback($callback)
     {
         if (!is_callable($callback)) {
-            throw new Exception('Invalid callback provided to ' . get_called_class());
+            throw new Exception\InvalidArgumentException('Invalid callback provided to ' . get_called_class());
         }
         $this->callback = $callback;
         return $this;
@@ -119,6 +119,7 @@ class Escape extends AbstractHelper
      * @param  mixed $value 
      * @param  int $recurse Expects one of the recursion constants; used to decide whether or not to recurse the given value when escaping
      * @return mixed Given a scalar, a scalar value is returned. Given an object, with the $recurse flag not allowing object recursion, returns a string. Otherwise, returns an array.
+     * @throws Exception\InvalidArgumentException
      */
     public function __invoke($value, $recurse = self::RECURSE_NONE)
     {
@@ -128,7 +129,9 @@ class Escape extends AbstractHelper
         }
         if (is_array($value)) {
             if (!(self::RECURSE_ARRAY & $recurse)) {
-                throw new Exception('Array provided to Escape helper, but flags do not allow recursion');
+                throw new Exception\InvalidArgumentException(
+                    'Array provided to Escape helper, but flags do not allow recursion'
+                );
             }
             foreach ($value as $k => $v) {
                 $value[$k] = $this->__invoke($v, $recurse);
@@ -143,7 +146,9 @@ class Escape extends AbstractHelper
                     return call_user_func($callback, (string) $value);
                 }
 
-                throw new Exception('Object provided to Escape helper, but flags do not allow recursion');
+                throw new Exception\InvalidArgumentException(
+                    'Object provided to Escape helper, but flags do not allow recursion'
+                );
             }
             if (method_exists($value, 'toArray')) {
                 return $this->__invoke($value->toArray(), $recurse | self::RECURSE_ARRAY);

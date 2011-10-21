@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend\View;
+
+use Zend\View,
+    Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving stylesheets
@@ -135,7 +137,7 @@ class HeadStyle extends Placeholder\Container\Standalone
      * @param  string $method
      * @param  array $args
      * @return void
-     * @throws \Zend\View\Exception When no $content provided or invalid method
+     * @throws Exception\BadMethodCallException When no $content provided or invalid method
      */
     public function __call($method, $args)
     {
@@ -152,9 +154,10 @@ class HeadStyle extends Placeholder\Container\Standalone
             }
 
             if (1 > $argc) {
-                $e = new View\Exception(sprintf('Method "%s" requires minimally content for the stylesheet', $method));
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Method "%s" requires minimally content for the stylesheet',
+                    $method
+                ));
             }
 
             $content = $args[0];
@@ -201,13 +204,14 @@ class HeadStyle extends Placeholder\Container\Standalone
      *
      * @param  mixed $value
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function append($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid value passed to append; please use appendStyle()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid value passed to append; please use appendStyle()'
+            );
         }
 
         return $this->getContainer()->append($value);
@@ -219,13 +223,14 @@ class HeadStyle extends Placeholder\Container\Standalone
      * @param  string|int $index
      * @param  mixed $value
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function offsetSet($index, $value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid value passed to offsetSet; please use offsetSetStyle()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid value passed to offsetSet; please use offsetSetStyle()'
+            );
         }
 
         return $this->getContainer()->offsetSet($index, $value);
@@ -236,13 +241,14 @@ class HeadStyle extends Placeholder\Container\Standalone
      *
      * @param  mixed $value
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function prepend($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid value passed to prepend; please use prependStyle()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid value passed to prepend; please use prependStyle()'
+            );
         }
 
         return $this->getContainer()->prepend($value);
@@ -253,13 +259,12 @@ class HeadStyle extends Placeholder\Container\Standalone
      *
      * @param  mixed $value
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function set($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid value passed to set; please use setStyle()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException('Invalid value passed to set; please use setStyle()');
         }
 
         return $this->getContainer()->set($value);
@@ -271,11 +276,12 @@ class HeadStyle extends Placeholder\Container\Standalone
      * @param  mixed $captureType
      * @param  string $typeOrAttrs
      * @return void
+     * @throws Exception\RuntimeException
      */
     public function captureStart($type = Placeholder\Container\AbstractContainer::APPEND, $attrs = null)
     {
         if ($this->_captureLock) {
-            $e = new Placeholder\Container\Exception('Cannot nest headStyle captures');
+            $e = new Exception\RuntimeException('Cannot nest headStyle captures');
             $e->setView($this->view);
             throw $e;
         }

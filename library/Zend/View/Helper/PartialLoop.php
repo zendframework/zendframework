@@ -24,14 +24,15 @@
  */
 namespace Zend\View\Helper;
 
-use Traversable;
+use Traversable,
+    Zend\View\Exception;
 
 /**
  * Helper for rendering a template fragment in its own variable scope; iterates
  * over data provided and renders for each iteration.
  *
  * @uses       \Zend\View\Helper\Partial\Partial
- * @uses       \Zend\View\Helper\Partial\Exception
+ * @uses       \Zend\View\Exception\InvalidArgumentException
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -59,6 +60,7 @@ class PartialLoop extends Partial
      *                              partial resides
      * @param  array $model Variables to populate in the view
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public function __invoke($name = null, $module = null, $model = null)
     {
@@ -75,9 +77,7 @@ class PartialLoop extends Partial
             && (!$model instanceof Traversable)
             && (is_object($model) && !method_exists($model, 'toArray'))
         ) {
-            $e = new Partial\Exception('PartialLoop helper requires iterable data');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException('PartialLoop helper requires iterable data');
         }
 
         if (is_object($model)

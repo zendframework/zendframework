@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend;
+
+use Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving title element for HTML head
@@ -98,6 +99,8 @@ class HeadTitle extends Placeholder\Container\Standalone
      * Set a default order to add titles
      *
      * @param string $setType
+     * @return void
+     * @throws Exception\DomainException
      */
     public function setDefaultAttachOrder($setType)
     {
@@ -106,7 +109,9 @@ class HeadTitle extends Placeholder\Container\Standalone
             Placeholder\Container\AbstractContainer::SET,
             Placeholder\Container\AbstractContainer::PREPEND
         ))) {
-            throw new Zend\View\Exception("You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'");
+            throw new Exception\DomainException(
+                "You must use a valid attach order: 'PREPEND', 'APPEND' or 'SET'"
+            );
         }
         $this->_defaultAttachOrder = $setType;
     }
@@ -126,6 +131,7 @@ class HeadTitle extends Placeholder\Container\Standalone
      *
      * @param  Zend_Translator|\Zend\Translator\Adapter\Adapter $translate
      * @return \Zend\View\Helper\HeadTitle
+     * @throws Exception\InvalidArgumentException
      */
     public function setTranslator($translate)
     {
@@ -134,9 +140,9 @@ class HeadTitle extends Placeholder\Container\Standalone
         } elseif ($translate instanceof \Zend\Translator\Translator) {
             $this->_translator = $translate->getAdapter();
         } else {
-            $e = new \Zend\View\Exception("You must set an instance of Zend_Translator or Zend_Translator_Adapter");
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                "You must set an instance of Zend_Translator or Zend_Translator_Adapter"
+            );
         }
         return $this;
     }

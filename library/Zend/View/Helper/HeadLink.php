@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend\View;
+
+use Zend\View,
+    Zend\View\Exception;
 
 /**
  * Zend_Layout_View_Helper_HeadLink
@@ -126,6 +128,7 @@ class HeadLink extends Placeholder\Container\Standalone
      * @param mixed $method
      * @param mixed $args
      * @return void
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $args)
     {
@@ -143,9 +146,10 @@ class HeadLink extends Placeholder\Container\Standalone
             }
 
             if (1 > $argc) {
-                $e =  new View\Exception(sprintf('%s requires at least one argument', $method));
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\BadMethodCallException(sprintf(
+                    '%s requires at least one argument',
+                    $method
+                 ));
             }
 
             if (is_array($args[0])) {
@@ -196,13 +200,14 @@ class HeadLink extends Placeholder\Container\Standalone
      *
      * @param  array $value
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function append($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('append() expects a data token; please use one of the custom append*() methods');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'append() expects a data token; please use one of the custom append*() methods'
+            );
         }
 
         return $this->getContainer()->append($value);
@@ -214,13 +219,14 @@ class HeadLink extends Placeholder\Container\Standalone
      * @param  string|int $index
      * @param  array $value
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function offsetSet($index, $value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('offsetSet() expects a data token; please use one of the custom offsetSet*() methods');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'offsetSet() expects a data token; please use one of the custom offsetSet*() methods'
+            );
         }
 
         return $this->getContainer()->offsetSet($index, $value);
@@ -231,13 +237,14 @@ class HeadLink extends Placeholder\Container\Standalone
      *
      * @param  array $value
      * @return Zend_Layout_ViewHelper_HeadLink
+     * @throws Exception\InvalidArgumentException
      */
     public function prepend($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('prepend() expects a data token; please use one of the custom prepend*() methods');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'prepend() expects a data token; please use one of the custom prepend*() methods'
+            );
         }
 
         return $this->getContainer()->prepend($value);
@@ -248,13 +255,14 @@ class HeadLink extends Placeholder\Container\Standalone
      *
      * @param  array $value
      * @return Zend_Layout_ViewHelper_HeadLink
+     * @throws Exception\InvalidArgumentException
      */
     public function set($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('set() expects a data token; please use one of the custom set*() methods');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'set() expects a data token; please use one of the custom set*() methods'
+            );
         }
 
         return $this->getContainer()->set($value);
@@ -402,13 +410,15 @@ class HeadLink extends Placeholder\Container\Standalone
      *
      * @param  array $args
      * @return stdClass
+     * @throws Exception\InvalidArgumentException
      */
     public function createDataAlternate(array $args)
     {
         if (3 > count($args)) {
-            $e = new View\Exception(sprintf('Alternate tags require 3 arguments; %s provided', count($args)));
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Alternate tags require 3 arguments; %s provided',
+                count($args)
+            ));
         }
 
         $rel   = 'alternate';

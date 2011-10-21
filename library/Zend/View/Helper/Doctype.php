@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper;
 
+use Zend\View\Exception;
+
 /**
  * Helper for setting and retrieving the doctype
  *
@@ -109,6 +111,7 @@ class Doctype extends AbstractHelper
      *
      * @param  string $doctype
      * @return \Zend\View\Helper\Doctype
+     * @throws Exception\DomainException
      */
     public function __invoke($doctype = null)
     {
@@ -128,9 +131,7 @@ class Doctype extends AbstractHelper
                     break;
                 default:
                     if (substr($doctype, 0, 9) != '<!DOCTYPE') {
-                        $e = new \Zend\View\Exception('The specified doctype is malformed');
-                        $e->setView($this->view);
-                        throw $e;
+                        throw new Exception\DomainException('The specified doctype is malformed');
                     }
                     if (stristr($doctype, 'xhtml')) {
                         $type = self::CUSTOM_XHTML;

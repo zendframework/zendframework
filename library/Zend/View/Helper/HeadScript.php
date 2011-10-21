@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend\View;
+
+use Zend\View,
+    Zend\View\Exception;
 
 /**
  * Helper for setting and retrieving script elements for HTML head section
@@ -145,11 +147,12 @@ class HeadScript extends Placeholder\Container\Standalone
      * @param  string $type        Type of script
      * @param  array  $attrs       Attributes of capture
      * @return void
+     * @throws Exception\RuntimeException
      */
     public function captureStart($captureType = Placeholder\Container\AbstractContainer::APPEND, $type = 'text/javascript', $attrs = array())
     {
         if ($this->_captureLock) {
-            $e = new Placeholder\Container\Exception('Cannot nest headScript captures');
+            $e = new Exception\RuntimeException('Cannot nest headScript captures');
             $e->setView($this->view);
             throw $e;
         }
@@ -204,15 +207,16 @@ class HeadScript extends Placeholder\Container\Standalone
      * @param  string $method Method to call
      * @param  array  $args   Arguments of method
      * @return \Zend\View\Helper\HeadScript
-     * @throws \Zend\View\Exception if too few arguments or invalid method
+     * @throws Exception\BadMethodCallException if too few arguments or invalid method
      */
     public function __call($method, $args)
     {
         if (preg_match('/^(?P<action>set|(ap|pre)pend|offsetSet)(?P<mode>File|Script)$/', $method, $matches)) {
             if (1 > count($args)) {
-                $e = new View\Exception(sprintf('Method "%s" requires at least one argument', $method));
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Method "%s" requires at least one argument',
+                    $method
+                ));
             }
 
             $action  = $matches['action'];
@@ -223,9 +227,10 @@ class HeadScript extends Placeholder\Container\Standalone
             if ('offsetSet' == $action) {
                 $index = array_shift($args);
                 if (1 > count($args)) {
-                    $e = new View\Exception(sprintf('Method "%s" requires at least two arguments, an index and source', $method));
-                    $e->setView($this->view);
-                    throw $e;
+                    throw new Exception\BadMethodCallException(sprintf(
+                        'Method "%s" requires at least two arguments, an index and source',
+                        $method
+                    ));
                 }
             }
 
@@ -309,13 +314,14 @@ class HeadScript extends Placeholder\Container\Standalone
      *
      * @param  string $value Append script or file
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function append($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid argument passed to append(); please use one of the helper methods, appendScript() or appendFile()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid argument passed to append(); please use one of the helper methods, appendScript() or appendFile()'
+            );
         }
 
         return $this->getContainer()->append($value);
@@ -326,13 +332,14 @@ class HeadScript extends Placeholder\Container\Standalone
      *
      * @param  string $value Prepend script or file
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function prepend($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid argument passed to prepend(); please use one of the helper methods, prependScript() or prependFile()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid argument passed to prepend(); please use one of the helper methods, prependScript() or prependFile()'
+            );
         }
 
         return $this->getContainer()->prepend($value);
@@ -343,13 +350,14 @@ class HeadScript extends Placeholder\Container\Standalone
      *
      * @param  string $value Set script or file
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function set($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid argument passed to set(); please use one of the helper methods, setScript() or setFile()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid argument passed to set(); please use one of the helper methods, setScript() or setFile()'
+            );
         }
 
         return $this->getContainer()->set($value);
@@ -361,13 +369,14 @@ class HeadScript extends Placeholder\Container\Standalone
      * @param  string|int $index Set script of file offset
      * @param  mixed      $value
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function offsetSet($index, $value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid argument passed to offsetSet(); please use one of the helper methods, offsetSetScript() or offsetSetFile()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid argument passed to offsetSet(); please use one of the helper methods, offsetSetScript() or offsetSetFile()'
+            );
         }
 
         $this->_isValid($value);

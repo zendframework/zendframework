@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend\View;
+
+use Zend\View,
+    Zend\View\Exception;
 
 /**
  * Zend_Layout_View_Helper_HeadMeta
@@ -96,6 +98,13 @@ class HeadMeta extends Placeholder\Container\Standalone
         return $this;
     }
 
+    /**
+     * Normalize type attribut of meta
+     *
+     * @param $type type in CamelCase
+     * @return string
+     * @throws Exception\DomainException
+     */
     protected function _normalizeType($type)
     {
         switch ($type) {
@@ -104,9 +113,10 @@ class HeadMeta extends Placeholder\Container\Standalone
             case 'HttpEquiv':
                 return 'http-equiv';
             default:
-                $e = new View\Exception(sprintf('Invalid type "%s" passed to _normalizeType', $type));
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\DomainException(sprintf(
+                    'Invalid type "%s" passed to _normalizeType',
+                    $type
+                ));
         }
     }
 
@@ -126,6 +136,7 @@ class HeadMeta extends Placeholder\Container\Standalone
      * @param  string $method
      * @param  array $args
      * @return \Zend\View\Helper\HeadMeta
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $args)
     {
@@ -143,9 +154,9 @@ class HeadMeta extends Placeholder\Container\Standalone
             }
 
             if (2 > $argc) {
-                $e = new View\Exception('Too few arguments provided; requires key value, and content');
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\BadMethodCallException(
+                    'Too few arguments provided; requires key value, and content'
+                );
             }
 
             if (3 > $argc) {
@@ -213,14 +224,14 @@ class HeadMeta extends Placeholder\Container\Standalone
      *
      * @param  string $value
      * @return void
-     * @throws \Zend\View\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function append($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid value passed to append; please use appendMeta()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid value passed to append; please use appendMeta()'
+            );
         }
 
         return $this->getContainer()->append($value);
@@ -232,14 +243,14 @@ class HeadMeta extends Placeholder\Container\Standalone
      * @param  string|int $index
      * @param  string $value
      * @return void
-     * @throws \Zend\View\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function offsetSet($index, $value)
     {
         if (!$this->_isValid($value)) {
-            $e =  new View\Exception('Invalid value passed to offsetSet; please use offsetSetName() or offsetSetHttpEquiv()');
-            $e->setView($this->view);
-            throw $e;
+            throw  new Exception\InvalidArgumentException(
+                'Invalid value passed to offsetSet; please use offsetSetName() or offsetSetHttpEquiv()'
+            );
         }
 
         return $this->getContainer()->offsetSet($index, $value);
@@ -250,14 +261,12 @@ class HeadMeta extends Placeholder\Container\Standalone
      *
      * @param  string|int $index
      * @return void
-     * @throws \Zend\View\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function offsetUnset($index)
     {
         if (!in_array($index, $this->getContainer()->getKeys())) {
-            $e = new View\Exception('Invalid index passed to offsetUnset()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException('Invalid index passed to offsetUnset()');
         }
 
         return $this->getContainer()->offsetUnset($index);
@@ -268,14 +277,14 @@ class HeadMeta extends Placeholder\Container\Standalone
      *
      * @param  string $value
      * @return void
-     * @throws \Zend\View\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function prepend($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid value passed to prepend; please use prependMeta()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(
+                'Invalid value passed to prepend; please use prependMeta()'
+            );
         }
 
         return $this->getContainer()->prepend($value);
@@ -286,14 +295,12 @@ class HeadMeta extends Placeholder\Container\Standalone
      *
      * @param  string $value
      * @return void
-     * @throws \Zend\View\Exception
+     * @throws Exception\InvalidArgumentException
      */
     public function set($value)
     {
         if (!$this->_isValid($value)) {
-            $e = new View\Exception('Invalid value passed to set; please use setMeta()');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException('Invalid value passed to set; please use setMeta()');
         }
 
         $container = $this->getContainer();
@@ -314,22 +321,26 @@ class HeadMeta extends Placeholder\Container\Standalone
      * @param  string $content
      * @param  array $modifiers
      * @return string
+     * @throws Exception\InvalidArgumentException
      */
     public function itemToString(\stdClass $item)
     {
         if (!in_array($item->type, $this->_typeKeys)) {
-            $e = new View\Exception(sprintf('Invalid type "%s" provided for meta', $item->type));
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid type "%s" provided for meta',
+                $item->type
+            ));
         }
         $type = $item->type;
 
         $modifiersString = '';
         foreach ($item->modifiers as $key => $value) {
             if ($this->view->plugin('doctype')->isHtml5()
-            && $key == 'scheme') {
-                throw new View\Exception('Invalid modifier '
-                . '"scheme" provided; not supported by HTML5');
+                && $key == 'scheme'
+            ) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid modifier "scheme" provided; not supported by HTML5'
+                );
             }
             if (!in_array($key, $this->_modifierKeys)) {
                 continue;
@@ -339,7 +350,8 @@ class HeadMeta extends Placeholder\Container\Standalone
 
         if ($this->view instanceof \Zend\Loader\Pluggable) {
             if ($this->view->plugin('doctype')->isHtml5()
-            && $type == 'charset') {
+                && $type == 'charset'
+            ) {
 				$tpl = ($this->view->plugin('doctype')->isXhtml())
 					? '<meta %s="%s"/>'
 					: '<meta %s="%s">';
@@ -380,7 +392,7 @@ class HeadMeta extends Placeholder\Container\Standalone
             foreach ($this as $item) {
                 $items[] = $this->itemToString($item);
             }
-        } catch (View\Exception $e) {
+        } catch (Exception\InvalidArgumentException $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);
             return '';
         }

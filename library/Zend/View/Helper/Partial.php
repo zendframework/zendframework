@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper;
 
+use Zend\View\Exception;
+
 /**
  * Helper for rendering a template fragment in its own variable scope.
  *
@@ -64,6 +66,7 @@ class Partial extends AbstractHelper
      *                              partial resides
      * @param  array $model Variables to populate in the view
      * @return string|\Zend\View\Helper\Partial\Partial
+     * @throws Exception\RuntimeException
      */
     public function __invoke($name = null, $module = null, $model = null)
     {
@@ -78,7 +81,7 @@ class Partial extends AbstractHelper
         if ((null !== $module) && is_string($module)) {
             $moduleDir = \Zend\Controller\Front::getInstance()->getControllerDirectory($module);
             if (null === $moduleDir) {
-                $e = new Partial\Exception('Cannot render partial; module does not exist');
+                $e = new Exception\RuntimeException('Cannot render partial; module does not exist');
                 $e->setView($this->view);
                 throw $e;
             }

@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper;
 
+use Zend\View\Exception\InvalidArgumentException;
+
 /**
  * Helper for passing data between otherwise segregated Views. It's called
  * Placeholder to make its typical usage obvious, but can be used just as easily
@@ -67,13 +69,14 @@ class Placeholder extends AbstractHelper
      *
      * @param  string $name
      * @return \Zend\View\Helper\Placeholder\Container\AbstractContainer
+     * @throws InvalidArgumentException
      */
     public function __invoke($name = null)
     {
         if ($name == null) {
-            throw new \InvalidArgumentException('Placeholder: missing argument.  $name is required by placeholder($name)');
+            throw new InvalidArgumentException('Placeholder: missing argument.  $name is required by placeholder($name)');
         }
-        
+
         $name = (string) $name;
         return $this->_registry->getContainer($name);
     }

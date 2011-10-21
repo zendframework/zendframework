@@ -22,8 +22,10 @@
  * @namespace
  */
 namespace Zend\View\Helper;
-use Zend\Paginator;
-use Zend\View;
+
+use Zend\Paginator,
+    Zend\View,
+    Zend\View\Exception;
 
 /**
  * @uses       \Zend\View\Exception
@@ -71,7 +73,8 @@ class PaginationControl extends AbstractHelper
      * @param  string $partial (Optional) View partial
      * @param  array|string $params (Optional) params to pass to the partial
      * @return string
-     * @throws \Zend\View\Exception
+     * @throws Exception\RuntimeException if no paginator or no view partial provided
+     * @throws Exception\InvalidArgumentException if partial is invalid array
      */
     public function __invoke(Paginator\Paginator $paginator = null, $scrollingStyle = null, $partial = null, $params = null)
     {
@@ -79,7 +82,7 @@ class PaginationControl extends AbstractHelper
             if (isset($this->view->paginator) and $this->view->paginator !== null and $this->view->paginator instanceof Paginator\Paginator) {
                 $paginator = $this->view->paginator;
             } else {
-                $e = new View\Exception('No paginator instance provided or incorrect type');
+                $e = new Exception\RuntimeException('No paginator instance provided or incorrect type');
                 $e->setView($this->view);
                 throw $e;
             }
@@ -87,7 +90,7 @@ class PaginationControl extends AbstractHelper
 
         if ($partial === null) {
             if (self::$_defaultViewPartial === null) {
-                $e = new View\Exception('No view partial provided and no default set');
+                $e = new Exception\RuntimeException('No view partial provided and no default set');
                 $e->setView($this->view);
                 throw $e;
             }
@@ -103,9 +106,9 @@ class PaginationControl extends AbstractHelper
 
         if (is_array($partial)) {
             if (count($partial) != 2) {
-                $e = new View\Exception('A view partial supplied as an array must contain two values: the filename and its module');
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\InvalidArgumentException(
+                    'A view partial supplied as an array must contain two values: the filename and its module'
+                );
             }
 
             if ($partial[1] !== null) {

@@ -29,7 +29,8 @@ use DOMDocument,
     Zend\Navigation\AbstractPage,
     Zend\Navigation\Container,
     Zend\Uri,
-    Zend\View;
+    Zend\View,
+    Zend\View\Exception;
 
 /**
  * Helper for printing sitemaps
@@ -319,7 +320,7 @@ class Sitemap extends AbstractHelper
      *                                               helper
      * @return DOMDocument                           DOM representation of the
      *                                               container
-     * @throws \Zend\View\Exception                   if schema validation is on
+     * @throws Exception\RuntimeException            if schema validation is on
      *                                               and the sitemap is invalid
      *                                               according to the sitemap
      *                                               schema, or if sitemap
@@ -379,13 +380,13 @@ class Sitemap extends AbstractHelper
             $urlNode = $dom->createElementNS(self::SITEMAP_NS, 'url');
             $urlSet->appendChild($urlNode);
 
-            if ($this->getUseSitemapValidators() &&
-                !$locValidator->isValid($url)) {
-                $e = new View\Exception(sprintf(
+            if ($this->getUseSitemapValidators()
+                && !$locValidator->isValid($url)
+            ) {
+                throw new Exception\RuntimeException(sprintf(
                         'Encountered an invalid URL for Sitemap XML: "%s"',
-                        $url));
-                $e->setView($this->view);
-                throw $e;
+                        $url
+                ));
             }
 
             // put url in 'loc' element
@@ -438,11 +439,10 @@ class Sitemap extends AbstractHelper
         // validate using schema if specified
         if ($this->getUseSchemaValidation()) {
             if (!@$dom->schemaValidate(self::SITEMAP_XSD)) {
-                $e = new View\Exception(sprintf(
+                throw new Exception\RuntimeException(sprintf(
                         'Sitemap is invalid according to XML Schema at "%s"',
-                        self::SITEMAP_XSD));
-                $e->setView($this->view);
-                throw $e;
+                        self::SITEMAP_XSD
+                ));
             }
         }
 

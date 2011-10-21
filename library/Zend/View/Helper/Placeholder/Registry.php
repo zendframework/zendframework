@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper\Placeholder;
 
+use Zend\View\Exception;
+
 /**
  * Registry for placeholder containers
  *
@@ -157,6 +159,7 @@ class Registry
      *
      * @param  string $name
      * @return \Zend\View\Helper\Placeholder\Registry
+     * @throws Exception\InvalidArgumentException
      */
     public function setContainerClass($name)
     {
@@ -166,8 +169,7 @@ class Registry
 
 
         if (!in_array('Zend\View\Helper\Placeholder\Container\AbstractContainer', class_parents($name))) {
-            $e = new Container\Exception('Invalid Container class specified');
-            throw $e;
+            throw new Exception\InvalidArgumentException('Invalid Container class specified');
         }
 
         $this->_containerClass = $name;

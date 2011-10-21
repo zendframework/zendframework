@@ -23,11 +23,12 @@
  * @namespace
  */
 namespace Zend\View\Helper\Navigation;
+
 use Zend\Navigation,
     Zend\Navigation\AbstractPage,
-    Zend,
     Zend\Acl,
-    Zend\View;
+    Zend\View,
+    Zend\View\Exception;
 
 /**
  * Base class for navigational helpers
@@ -367,23 +368,22 @@ abstract class AbstractHelper
      *                                                     or null. Default is
      *                                                     null, which will set
      *                                                     no role.
-     * @throws \Zend\View\Exception                         if $role is invalid
      * @return \Zend\View\Helper\Navigation\AbstractHelper  fluent interface,
      *                                                     returns self
+     * @throws Exception\InvalidArgumentException if $role is invalid
      */
     public function setRole($role = null)
     {
         if (null === $role || is_string($role) ||
-            $role instanceof Acl\Role) {
+            $role instanceof Acl\Role
+        ) {
             $this->_role = $role;
         } else {
-            $e = new View\Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 '$role must be a string, null, or an instance of ' 
                 .  'Zend_Acl_Role_Interface; %s given',
                 gettype($role)
             ));
-            $e->setView($this->view);
-            throw $e;
         }
 
         return $this;
@@ -837,17 +837,18 @@ abstract class AbstractHelper
      *                                   {@link Zend_Acl_Role_Interface}.
      *                                   Default is null, which sets no default
      *                                   role.
-     * @throws \Zend\View\Exception       if role is invalid
      * @return void
+     * @throws Exception\InvalidArgumentException if role is invalid
      */
     public static function setDefaultRole($role = null)
     {
         if (null === $role ||
             is_string($role) ||
-            $role instanceof Acl\Role) {
+            $role instanceof Acl\Role
+        ) {
             self::$_defaultRole = $role;
         } else {
-            throw new View\Exception(
+            throw new Exception\InvalidArgumentException(
                 '$role must be null|string|Zend_Acl_Role_Interface'
             );
         }

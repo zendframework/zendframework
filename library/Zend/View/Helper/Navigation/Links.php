@@ -26,7 +26,8 @@ namespace Zend\View\Helper\Navigation;
 
 use Zend\Navigation,
     Zend\Navigation\AbstractPage,
-    Zend\View;
+    Zend\View,
+    Zend\View\Exception;
 
 /**
  * Helper for printing <link> elements
@@ -271,16 +272,15 @@ class Links extends AbstractHelper
      * @param  string              $rel         relation, "rel" or "rev"
      * @param  string              $type        link type, e.g. 'start', 'next'
      * @return Zend_Navigaiton_Page|array|null  page(s), or null if not found
-     * @throws \Zend\View\Exception              if $rel is not "rel" or "rev"
+     * @throws Exception\DomainException if $rel is not "rel" or "rev"
      */
     public function findRelation(AbstractPage $page, $rel, $type)
     {
         if (!in_array($rel, array('rel', 'rev'))) {
-            $e = new View\Exception(sprintf(
+            throw new Exception\DomainException(sprintf(
                 'Invalid argument: $rel must be "rel" or "rev"; "%s" given',
-                $rel));
-            $e->setView($this->view);
-            throw $e;
+                $rel
+            ));
         }
 
         if (!$result = $this->_findFromProperty($page, $rel, $type)) {
@@ -709,16 +709,15 @@ class Links extends AbstractHelper
      *                                         prev, section, start, stylesheet,
      *                                         subsection
      * @return string                          rendered link element
-     * @throws \Zend\View\Exception             if $attrib is invalid
+     * @throws Exception\DomainException if $attrib is invalid
      */
     public function renderLink(AbstractPage $page, $attrib, $relation)
     {
         if (!in_array($attrib, array('rel', 'rev'))) {
-            $e = new View\Exception(sprintf(
-                    'Invalid relation attribute "%s", must be "rel" or "rev"',
-                    $attrib));
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\DomainException(sprintf(
+                'Invalid relation attribute "%s", must be "rel" or "rev"',
+                $attrib
+            ));
         }
 
         if (!$href = $page->getHref()) {

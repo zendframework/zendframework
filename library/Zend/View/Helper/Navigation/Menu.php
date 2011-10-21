@@ -26,7 +26,8 @@ namespace Zend\View\Helper\Navigation;
 
 use Zend\Navigation\Container,
     Zend\Navigation\AbstractPage,
-    Zend\View;
+    Zend\View,
+    Zend\View\Exception;
 
 /**
  * Helper for rendering menus from navigation containers
@@ -578,6 +579,8 @@ class Menu extends AbstractHelper
      *                                               and the module where the
      *                                               script can be found.
      * @return string                                helper output
+     * @throws Exception\RuntimeException if no partial provided
+     * @throw Exception\InvalidArgumentException if partial is invalid array
      */
     public function renderPartial(Container $container = null,
                                   $partial = null)
@@ -591,7 +594,7 @@ class Menu extends AbstractHelper
         }
 
         if (empty($partial)) {
-            $e = new View\Exception(
+            $e = new Exception\RuntimeException(
                 'Unable to render menu: No partial view script provided'
             );
             $e->setView($this->view);
@@ -604,13 +607,11 @@ class Menu extends AbstractHelper
 
         if (is_array($partial)) {
             if (count($partial) != 2) {
-                $e = new View\Exception(
+                throw new Exception\InvalidArgumentException(
                     'Unable to render menu: A view partial supplied as ' 
                     .  'an array must contain two values: partial view ' 
                     .  'script and module where script can be found'
                 );
-                $e->setView($this->view);
-                throw $e;
             }
 
             $partialHelper = $this->view->plugin('partial');

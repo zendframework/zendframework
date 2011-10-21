@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\View\Helper\Placeholder\Container;
-use Zend\View\Helper\Placeholder\Registry;
+
+use Zend\View\Helper\Placeholder\Registry,
+    Zend\View\Exception;
 
 /**
  * Base class for targetted placeholder helpers
@@ -224,6 +226,7 @@ abstract class Standalone
      * @param  string $method
      * @param  array $args
      * @return mixed
+     * @throws Exception\BadMethodCallException
      */
     public function __call($method, $args)
     {
@@ -237,9 +240,7 @@ abstract class Standalone
             return $return;
         }
 
-        $e = new \Zend\View\Exception('Method "' . $method . '" does not exist');
-        $e->setView($this->view);
-        throw $e;
+        throw new Exception\BadMethodCallException('Method "' . $method . '" does not exist');
     }
 
     /**

@@ -4243,21 +4243,23 @@ class FormTest extends \PHPUnit_Framework_TestCase
      */
     public function testElementsOfSubFormReceiveCorrectDefaultTranslator()
     {
+        $isEmptyKey = \Zend\Validator\NotEmpty::IS_EMPTY;
+        
         // Global default translator
-        $trDefault = new \Zend\Translator\Translator(array(
+        $trDefault = new Translator(array(
             'adapter' => 'arrayAdapter',
             'content' => array(
-                \Zend\Validator\NotEmpty::IS_EMPTY => 'Default'
+                $isEmptyKey => 'Default'
             ),
             'locale' => 'en'
         ));
-        \Zend\Registry::set('Zend_Translate', $trDefault);
+        Registry::set('Zend_Translate', $trDefault);
         
         // Translator to use for elements
-        $trElement = new \Zend\Translator\Translator(array(
+        $trElement = new Translator(array(
             'adapter' => 'arrayAdapter',
             'content' => array(
-                \Zend\Validator\NotEmpty::IS_EMPTY =>'Element'
+                $isEmptyKey =>'Element'
             ),
             'locale' => 'en'
         ));
@@ -4283,12 +4285,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $messages = $form->getMessages();
         $this->assertEquals(
             'Element', 
-            @$messages['foo'][\Zend\Validator\NotEmpty::IS_EMPTY], 
+            @$messages['foo'][$isEmptyKey], 
             'Form element received wrong validator'
         );
         $this->assertEquals(
             'Element', 
-            @$messages['Test1']['foosub'][\Zend\Validator\NotEmpty::IS_EMPTY], 
+            @$messages['Test1']['foosub'][$isEmptyKey], 
             'SubForm element received wrong validator'
         );        
     }

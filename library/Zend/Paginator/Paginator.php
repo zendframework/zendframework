@@ -1004,6 +1004,7 @@ class Paginator implements \Countable, \IteratorAggregate
      *
      * @param string $scrollingStyle
      * @return \Zend\Paginator\ScrollingStyle
+     * @throws Exception\InvalidArgumentException
      */
     protected function _loadScrollingStyle($scrollingStyle = null)
     {
@@ -1014,8 +1015,9 @@ class Paginator implements \Countable, \IteratorAggregate
         switch (strtolower(gettype($scrollingStyle))) {
             case 'object':
                 if (!$scrollingStyle instanceof ScrollingStyle) {
-                    throw new View\Exception('Scrolling style must implement ' .
-                        'Zend_Paginator_ScrollingStyle_Interface');
+                    throw new Exception\InvalidArgumentException(
+                        'Scrolling style must implement Zend_Paginator_ScrollingStyle_Interface'
+                    );
                 }
 
                 return $scrollingStyle;
@@ -1027,8 +1029,10 @@ class Paginator implements \Countable, \IteratorAggregate
                 // Fall through to default case
 
             default:
-                throw new View\Exception('Scrolling style must be a class ' .
-                    'name or object implementing Zend\Paginator\ScrollingStyle');
+                throw new Exception\InvalidArgumentException(
+                    'Scrolling style must be a class ' .
+                    'name or object implementing Zend\Paginator\ScrollingStyle'
+                );
         }
     }
 }

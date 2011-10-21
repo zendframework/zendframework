@@ -163,11 +163,12 @@ class Variables extends ArrayObject
      * 
      * @param  callback $spec 
      * @return Variables
+     * @throws Exception\InvalidArgumentException
      */
     public function setEscapeCallback($spec)
     {
         if (!is_callable($spec)) {
-            throw new Exception('Escape callback must be callable');
+            throw new Exception\InvalidArgumentException('Escape callback must be callable');
         }
         $this->escapeCallback = $spec;
     }
@@ -211,6 +212,7 @@ class Variables extends ArrayObject
      * 
      * @param  array|object $spec 
      * @return Variables
+     * @throws Exception\InvalidArgumentException
      */
     public function assign($spec)
     {
@@ -222,7 +224,7 @@ class Variables extends ArrayObject
             }
         }
         if (!is_array($spec)) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'assign() expects either an array or an object as an argument; received "%s"',
                 gettype($spec)
             ));

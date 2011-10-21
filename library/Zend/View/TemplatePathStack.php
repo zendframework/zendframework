@@ -81,11 +81,12 @@ class TemplatePathStack implements TemplateResolver
      *
      * @param  array|Traversable $options
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function setOptions($options)
     {
         if (!is_array($options) && !$options instanceof \Traversable) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Expected array or Traversable object; received "%s"',
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
@@ -127,6 +128,7 @@ class TemplatePathStack implements TemplateResolver
      *
      * @param  SplStack|array $paths
      * @return TemplatePathStack
+     * @throws Exception\InvalidArgumentException
      */
     public function setPaths($paths)
     {
@@ -136,7 +138,7 @@ class TemplatePathStack implements TemplateResolver
             $this->clearPaths();
             $this->addPaths($paths);
         } else {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 "Invalid argument provided for \$paths, expecting either an array or SplStack object"
             );
         }
@@ -163,11 +165,12 @@ class TemplatePathStack implements TemplateResolver
      *
      * @param  string $path
      * @return TemplatePathStack
+     * @throws Exception\InvalidArgumentException
      */
     public function addPath($path)
     {
         if (!is_string($path)) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid path provided; must be a string, received %s',
                 gettype($path)
             ));
@@ -248,16 +251,21 @@ class TemplatePathStack implements TemplateResolver
      *
      * @param  string $name
      * @return string
+     * @throws Exception\RuntimeException
      */
     public function getScriptPath($name)
     {
         if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name)) {
-            $e = new Exception('Requested scripts may not include parent directory traversal ("../", "..\\" notation)');
+            $e = new Exception\DomainException(
+                'Requested scripts may not include parent directory traversal ("../", "..\\" notation)'
+            );
             throw $e;
         }
 
         if (!count($this->paths)) {
-            $e = new Exception('No view script directory set; unable to determine location for view script');
+            $e = new Exception\RuntimeException(
+                'No view script directory set; unable to determine location for view script'
+            );
             throw $e;
         }
 
@@ -282,7 +290,7 @@ class TemplatePathStack implements TemplateResolver
             $paths .= $path . PATH_SEPARATOR;
         }
 
-        $e = new Exception(sprintf(
+        $e = new Exception\RuntimeException(sprintf(
             'Script "%s" not found in path (%s)',
             $name, trim($paths, PATH_SEPARATOR)
         ));

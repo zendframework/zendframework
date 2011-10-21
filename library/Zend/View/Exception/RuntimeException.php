@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,18 +21,20 @@
 /**
  * @namespace
  */
-namespace Zend\View;
+namespace Zend\View\Exception;
+
+use Zend\View\Renderer;
 
 /**
  * Exception for Zend_View class.
  *
- * @uses       \Exception
+ * @uses       \RuntimeException
  * @category   Zend
- * @package    Zend_Date
+ * @package    Zend_View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \Exception
+class RuntimeException extends \RuntimeException
 {
     protected $view = null;
 

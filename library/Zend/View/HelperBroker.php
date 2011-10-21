@@ -90,12 +90,12 @@ class HelperBroker extends PluginBroker
      * 
      * @param  mixed $plugin 
      * @return true
-     * @throws InvalidHelperException
+     * @throws Exception\InvalidHelperException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Helper) {
-            throw new InvalidHelperException('View helpers must implement Zend\View\Helper');
+            throw new Exception\InvalidHelperException('View helpers must implement Zend\View\Helper');
         }
         return true;
     }

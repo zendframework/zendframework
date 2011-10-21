@@ -72,14 +72,14 @@ class ViewTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisteringInvalidHelperRaisesException()
     {
-        $this->setExpectedException('Zend\View\InvalidHelperException');
+        $this->setExpectedException('Zend\View\Exception\InvalidHelperException');
         $this->broker->register('test', $this);
     }
 
     public function testLoadingInvalidHelperRaisesException()
     {
         $this->broker->getClassLoader()->registerPlugin('test', get_class($this));
-        $this->setExpectedException('Zend\View\InvalidHelperException');
+        $this->setExpectedException('Zend\View\Exception\InvalidHelperException');
         $this->broker->register('test', $this);
     }
 }

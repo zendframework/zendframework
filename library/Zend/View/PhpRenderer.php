@@ -119,17 +119,18 @@ class PhpRenderer implements Renderer, Pluggable
      * @param  string|TemplateResolver $resolver 
      * @param  mixed $options 
      * @return PhpRenderer
+     * @throws Exception\InvalidArgumentException
      */
     public function setResolver($resolver, $options = null)
     {
         if (is_string($resolver)) {
             if (!class_exists($resolver)) {
-                throw new Exception('Class passed as resolver could not be found');
+                throw new Exception\InvalidArgumentException('Class passed as resolver could not be found');
             }
             $resolver = new $resolver($options);
         }
         if (!$resolver instanceof TemplateResolver) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Expected resolver to implement TemplateResolver; received "%s"',
                 (is_object($resolver) ? get_class($resolver) : gettype($resolver))
             ));
@@ -164,11 +165,12 @@ class PhpRenderer implements Renderer, Pluggable
      * 
      * @param  array|ArrayAccess $variables 
      * @return PhpRenderer
+     * @throws Exception\InvalidArgumentException
      */
     public function setVars($variables)
     {
         if (!is_array($variables) && !$variables instanceof ArrayAccess) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Expected array or ArrayAccess object; received "%s"',
                 (is_object($variables) ? get_class($variables) : gettype($variables))
             ));
@@ -308,12 +310,13 @@ class PhpRenderer implements Renderer, Pluggable
      * 
      * @param  string|HelperBroker $broker 
      * @return Zend\View\Abstract
+     * @throws Exception\InvalidArgumentException
      */
     public function setBroker($broker)
     {
         if (is_string($broker)) {
             if (!class_exists($broker)) {
-                throw new Exception(sprintf(
+                throw new Exception\InvalidArgumentException(sprintf(
                     'Invalid helper broker class provided (%s)',
                     $broker
                 ));
@@ -321,7 +324,7 @@ class PhpRenderer implements Renderer, Pluggable
             $broker = new $broker();
         }
         if (!$broker instanceof HelperBroker) {
-            throw new Exception(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Helper broker must extend Zend\View\HelperBroker; got type "%s" instead',
                 (is_object($broker) ? get_class($broker) : gettype($broker))
             ));

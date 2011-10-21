@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\View;
+namespace Zend\View\Exception;
 
 class InvalidHelperException extends Exception
 {

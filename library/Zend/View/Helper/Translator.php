@@ -60,6 +60,19 @@ class Translator extends AbstractHelper
     }
 
     /**
+     * Mock __invoke for manual call
+     *
+     * @see __invoke
+     * @param  string $messageid Id of the message to be translated
+     * @return string|\Zend\View\Helper\Translator Translated message
+     */
+    public function translate($messageid = null)
+    {
+        $options = func_get_args();
+        return call_user_func_array(array($this, '__invoke'), $options);
+    }
+
+    /**
      * Translate a message
      * You can give multiple params or an array of params.
      * If you want to output another locale just set it as last single parameter
@@ -83,7 +96,10 @@ class Translator extends AbstractHelper
         $locale = null;
         if ($count > 0) {
             if (\Zend\Locale\Locale::isLocale($options[($count - 1)]) !== false) {
-                $locale = array_pop($options);
+                // Don't treat last option as the locale if doing so will result in an error
+                if (is_array($options[0]) || @vsprintf($messageid, array_slice($options, 0, -1)) !== false) {
+                    $locale = array_pop($options);
+                }
             }
         }
 

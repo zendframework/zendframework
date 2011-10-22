@@ -187,6 +187,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $this->helper->setTranslator($trans);
         $this->assertEquals("drei 100 200", $this->helper->__invoke("three %1\$s %2\$s", "100", "200"));
         $this->assertEquals("tre 100 200", $this->helper->__invoke("three %1\$s %2\$s", "100", "200", 'it'));
+        $this->assertEquals("drei 100 it", $this->helper->translate("three %1\$s %2\$s", "100", "it"));
         $this->assertEquals("drei 100 200", $this->helper->__invoke("three %1\$s %2\$s", array("100", "200")));
         $this->assertEquals("tre 100 200", $this->helper->__invoke("three %1\$s %2\$s", array("100", "200"), 'it'));
     }

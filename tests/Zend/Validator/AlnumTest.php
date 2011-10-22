@@ -139,20 +139,6 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @return void
-     * @deprecated Since 1.5.0
-     */
-    public function testEmptyStringValueResultsInProperValidationFailureErrors()
-    {
-        $this->assertFalse($this->_validator->isValid(''));
-        $errors = $this->_validator->getErrors();
-        $arrayExpected = array(
-            Validator\Alnum::STRING_EMPTY
-            );
-        $this->assertThat($errors, $this->identicalTo($arrayExpected));
-    }
-
-    /**
-     * @return void
      */
     public function testInvalidValueResultsInProperValidationFailureMessages()
     {
@@ -162,20 +148,6 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
             Validator\Alnum::NOT_ALNUM => '\'#\' contains characters which are non alphabetic and no digits'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
-    }
-
-    /**
-     * @return void
-     * @deprecated Since 1.5.0
-     */
-    public function testInvalidValueResultsInProperValidationFailureErrors()
-    {
-        $this->assertFalse($this->_validator->isValid('#'));
-        $errors = $this->_validator->getErrors();
-        $arrayExpected = array(
-            Validator\Alnum::NOT_ALNUM
-            );
-        $this->assertThat($errors, $this->identicalTo($arrayExpected));
     }
 
     /**

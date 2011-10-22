@@ -150,7 +150,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         }
 
         // Check no IDN matching
-        $validator->setValidateIdn(false);
+        $validator->useIdnCheck(false);
         $valuesExpected = array(
             array(false, array('bürger.de', 'hãllo.de', 'hållo.se'))
             );
@@ -194,7 +194,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         }
 
         // Check no IDN matching
-        $validator->setValidateIdn(false);
+        $validator->useIdnCheck(false);
         $valuesExpected = array(
             array(false, array('bürger.com', 'hãllo.com', 'hållo.com'))
             );
@@ -237,7 +237,7 @@ class HostnameTest extends \PHPUnit_Framework_TestCase
         }
 
         // Check no TLD matching
-        $validator->setValidateTld(false);
+        $validator->useTldCheck(false);
         $valuesExpected = array(
             array(true, array('domain.xx', 'domain.zz', 'domain.madeup'))
             );

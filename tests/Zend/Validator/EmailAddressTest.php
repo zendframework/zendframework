@@ -292,14 +292,14 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         if (!defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
             || !constant('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
         ) {
-            $this->markTestSkipped('Testing MX records only works when a valid internet connection is available');
+            $this->markTestSkipped('Testing MX records has been disabled');
             return;
         }
 
         $validator = new Validator\EmailAddress(Hostname::ALLOW_DNS, true);
 
         // Are MX checks supported by this system?
-        if (!$validator->validateMxSupported()) {
+        if (!$validator->isMxSupported()) {
             $this->markTestSkipped('Testing MX records is not supported with this configuration');
             return;
         }
@@ -317,7 +317,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         // Try a check via setting the option via a method
         unset($validator);
         $validator = new Validator\EmailAddress();
-        $validator->setValidateMx(true);
+        $validator->useMxCheck(true);
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {
                 $this->assertEquals($element[0], $validator->isValid($input), implode("\n", $validator->getMessages()));
@@ -335,7 +335,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator\EmailAddress();
 
         // Check no IDN matching
-        $validator->getHostnameValidator()->setValidateIdn(false);
+        $validator->getHostnameValidator()->useIdnCheck(false);
         $valuesExpected = array(
             array(false, array('name@b�rger.de', 'name@h�llo.de', 'name@h�llo.se'))
             );
@@ -346,7 +346,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         }
 
         // Check no TLD matching
-        $validator->getHostnameValidator()->setValidateTld(false);
+        $validator->getHostnameValidator()->useTldCheck(false);
         $valuesExpected = array(
             array(true, array('name@domain.xx', 'name@domain.zz', 'name@domain.madeup'))
             );
@@ -462,14 +462,14 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $options   = $validator->getOptions();
 
         $this->assertEquals(Hostname::ALLOW_DNS, $options['allow']);
-        $this->assertFalse($options['mx']);
+        $this->assertFalse($options['useMxCheck']);
 
         try {
             $validator = new Validator\EmailAddress(Hostname::ALLOW_ALL, true, new Hostname(Hostname::ALLOW_ALL));
             $options   = $validator->getOptions();
 
             $this->assertEquals(Hostname::ALLOW_ALL, $options['allow']);
-            $this->assertTrue($options['mx']);
+            $this->assertTrue($options['useMxCheck']);
             set_error_handler($handler);
         } catch (\Zend\Validator\Exception\InvalidArgumentException $e) {
             $this->markTestSkipped('MX not available on this system');
@@ -486,7 +486,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('TestMessage', $messages[Validator\EmailAddress::INVALID]);
 
         $oldHostname = $this->_validator->getHostnameValidator();
-        $this->_validator->setOptions(array('hostname' => new Hostname(Hostname::ALLOW_ALL)));
+        $this->_validator->setOptions(array('hostnameValidator' => new Hostname(Hostname::ALLOW_ALL)));
         $hostname = $this->_validator->getHostnameValidator();
         $this->assertNotEquals($oldHostname, $hostname);
     }
@@ -508,7 +508,7 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetValidateMx()
     {
-        $this->assertFalse($this->_validator->getValidateMx());
+        $this->assertFalse($this->_validator->getMxCheck());
     }
 
     /**
@@ -573,7 +573,20 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMXRecord()
     {
-        $validator = new Validator\EmailAddress(array('mx' => true, 'allow' => Hostname::ALLOW_ALL));
+        if (!defined('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_VALIDATE_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('Testing MX records has been disabled');
+            return;
+        }
+
+        $validator = new Validator\EmailAddress(array('useMxCheck' => true, 'allow' => Hostname::ALLOW_ALL));
+
+        if (!$validator->isMxSupported()) {
+            $this->markTestSkipped('Testing MX records is not supported with this configuration');
+            return;
+        }
+
         $this->assertTrue($validator->isValid('john.doe@gmail.com'));
         $result = $validator->getMXRecord();
         $this->assertTrue(!empty($result));

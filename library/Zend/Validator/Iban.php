@@ -177,7 +177,7 @@ class Iban extends AbstractValidator
     public function isValid($value)
     {
         $value = strtoupper($value);
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if (empty($this->_locale)) {
             $region = substr($value, 0, 2);
@@ -187,13 +187,13 @@ class Iban extends AbstractValidator
         }
 
         if (!array_key_exists($region, $this->_ibanregex)) {
-            $this->_setValue($region);
-            $this->_error(self::NOTSUPPORTED);
+            $this->setValue($region);
+            $this->error(self::NOTSUPPORTED);
             return false;
         }
 
         if (!preg_match($this->_ibanregex[$region], $value)) {
-            $this->_error(self::FALSEFORMAT);
+            $this->error(self::FALSEFORMAT);
             return false;
         }
 
@@ -214,7 +214,7 @@ class Iban extends AbstractValidator
         }
 
         if ($temp != 1) {
-            $this->_error(self::CHECKFAILED);
+            $this->error(self::CHECKFAILED);
             return false;
         }
 

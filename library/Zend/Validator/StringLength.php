@@ -50,32 +50,15 @@ class StringLength extends AbstractValidator
      * @var array
      */
     protected $_messageVariables = array(
-        'min' => '_min',
-        'max' => '_max'
+        'min' => array('options' => 'min'),
+        'max' => array('options' => 'max'),
     );
 
-    /**
-     * Minimum length
-     *
-     * @var integer
-     */
-    protected $_min;
-
-    /**
-     * Maximum length
-     *
-     * If null, there is no maximum length
-     *
-     * @var integer|null
-     */
-    protected $_max;
-
-    /**
-     * Encoding to use
-     *
-     * @var string|null
-     */
-    protected $_encoding;
+    protected $options = array(
+        'min'      => 0, // Minimum length
+        'max'      => null, // Maximum length, null if there is no length limitation
+        'encoding' => null, // Encoding to use
+    );
 
     /**
      * Sets validator options
@@ -85,9 +68,7 @@ class StringLength extends AbstractValidator
      */
     public function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } else if (!is_array($options)) {
+        if (!is_array($options)) {
             $options     = func_get_args();
             $temp['min'] = array_shift($options);
             if (!empty($options)) {
@@ -101,18 +82,7 @@ class StringLength extends AbstractValidator
             $options = $temp;
         }
 
-        if (!array_key_exists('min', $options)) {
-            $options['min'] = 0;
-        }
-
-        $this->setMin($options['min']);
-        if (array_key_exists('max', $options)) {
-            $this->setMax($options['max']);
-        }
-
-        if (array_key_exists('encoding', $options)) {
-            $this->setEncoding($options['encoding']);
-        }
+        parent::__construct($options);
     }
 
     /**
@@ -122,7 +92,7 @@ class StringLength extends AbstractValidator
      */
     public function getMin()
     {
-        return $this->_min;
+        return $this->options['min'];
     }
 
     /**
@@ -134,11 +104,12 @@ class StringLength extends AbstractValidator
      */
     public function setMin($min)
     {
-        if (null !== $this->_max && $min > $this->_max) {
+        if (null !== $this->getMax() && $min > $this->getMax()) {
             throw new Exception\InvalidArgumentException("The minimum must be less than or equal to the maximum length, but $min >"
-                                            . " $this->_max");
+                                            . " " . $this->getMax());
         }
-        $this->_min = max(0, (integer) $min);
+
+        $this->options['min'] = max(0, (integer) $min);
         return $this;
     }
 
@@ -149,7 +120,7 @@ class StringLength extends AbstractValidator
      */
     public function getMax()
     {
-        return $this->_max;
+        return $this->options['max'];
     }
 
     /**
@@ -162,12 +133,12 @@ class StringLength extends AbstractValidator
     public function setMax($max)
     {
         if (null === $max) {
-            $this->_max = null;
-        } else if ($max < $this->_min) {
+            $this->options['max'] = null;
+        } else if ($max < $this->getMin()) {
             throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum length, but "
-                                            . "$max < $this->_min");
+                                            . "$max < " . $this->getMin());
         } else {
-            $this->_max = (integer) $max;
+            $this->options['max'] = (integer) $max;
         }
 
         return $this;
@@ -180,7 +151,7 @@ class StringLength extends AbstractValidator
      */
     public function getEncoding()
     {
-        return $this->_encoding;
+        return $this->options['encoding'];
     }
 
     /**
@@ -201,7 +172,7 @@ class StringLength extends AbstractValidator
             iconv_set_encoding('internal_encoding', $orig);
         }
 
-        $this->_encoding = $encoding;
+        $this->options['encoding'] = $encoding;
         return $this;
     }
 
@@ -215,26 +186,26 @@ class StringLength extends AbstractValidator
     public function isValid($value)
     {
         if (!is_string($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
-        $this->_setValue($value);
-        if ($this->_encoding !== null) {
-            $length = iconv_strlen($value, $this->_encoding);
+        $this->setValue($value);
+        if ($this->getEncoding() !== null) {
+            $length = iconv_strlen($value, $this->getEncoding());
         } else {
             $length = iconv_strlen($value);
         }
 
-        if ($length < $this->_min) {
-            $this->_error(self::TOO_SHORT);
+        if ($length < $this->getMin()) {
+            $this->error(self::TOO_SHORT);
         }
 
-        if (null !== $this->_max && $this->_max < $length) {
-            $this->_error(self::TOO_LONG);
+        if (null !== $this->getMax() && $this->getMax() < $length) {
+            $this->error(self::TOO_LONG);
         }
 
-        if (count($this->_messages)) {
+        if (count($this->getMessages())) {
             return false;
         } else {
             return true;

@@ -56,15 +56,10 @@ class IsCompressed extends MimeType
      * @param  string|array|\Zend\Config\Config $compression
      * @return void
      */
-    public function __construct($mimetype = array())
+    public function __construct($options = array())
     {
-        if ($mimetype instanceof \Zend\Config\Config) {
-            $mimetype = $mimetype->toArray();
-        }
-
-        $temp    = array();
         // http://de.wikipedia.org/wiki/Liste_von_Dateiendungen
-            $default = array(
+        $default = array(
             'application/arj',
             'application/gnutar',
             'application/lha',
@@ -98,26 +93,29 @@ class IsCompressed extends MimeType
             'multipart/x-gzip',
         );
 
-        if (is_array($mimetype)) {
-            $temp = $mimetype;
-            if (array_key_exists('magicfile', $temp)) {
-                unset($temp['magicfile']);
-            }
-
-            if (array_key_exists('headerCheck', $temp)) {
-                unset($temp['headerCheck']);
-            }
-
-            if (empty($temp)) {
-                $mimetype += $default;
-            }
+        if (is_array($options) && array_key_exists('magicFile', $options)) {
+            $this->setMagicFile($options['magicFile']);
+            unset($options['magicFile']);
         }
 
-        if (empty($mimetype)) {
-            $mimetype = $default;
+        if (is_array($options) && array_key_exists('enableHeaderCheck', $options)) {
+            $this->enableHeaderCheck($options['enableHeaderCheck']);
+            unset($options['enableHeaderCheck']);
         }
 
-        parent::__construct($mimetype);
+        if (is_array($options) && !array_key_exists('mimeType', $options)) {
+            $options['mimeType'] = $options;
+        }
+
+        if (empty($options)) {
+            $options = array('mimeType' => $default);
+        }
+
+        if (!is_array($options)) {
+            $options = array('mimeType' => $options);
+        }
+
+        parent::__construct($options);
     }
 
     /**
@@ -133,10 +131,10 @@ class IsCompressed extends MimeType
         if ($file !== null) {
             if (is_array($file)) {
                 if(array_key_exists('name', $file)) {
-                    $this->_value = basename($file['name']);
+                    $this->value = basename($file['name']);
                 }
             } else if (is_string($file)) {
-                $this->_value = basename($file);
+                $this->value = basename($file);
             }
         }
 
@@ -152,7 +150,7 @@ class IsCompressed extends MimeType
                 break;
         }
 
-        $this->_error($errorType);
+        $this->error($errorType);
         return false;
     }
 }

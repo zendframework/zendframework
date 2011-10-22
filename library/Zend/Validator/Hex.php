@@ -54,13 +54,13 @@ class Hex extends AbstractValidator
     public function isValid($value)
     {
         if (!is_string($value) && !is_int($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
-        $this->_setValue($value);
+        $this->setValue($value);
         if (!ctype_xdigit((string) $value)) {
-            $this->_error(self::NOT_HEX);
+            $this->error(self::NOT_HEX);
             return false;
         }
 

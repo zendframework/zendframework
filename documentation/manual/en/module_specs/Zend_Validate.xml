@@ -359,7 +359,7 @@ Zend_Validate::setDefaultTranslator($translate);
         <para>
             Sometimes it is necessary to disable the translator within a validator.
             To archive this you can use the <methodname>setDisableTranslator()</methodname> method,
-            which accepts a boolean parameter, and <methodname>translatorIsDisabled()</methodname>
+            which accepts a boolean parameter, and <methodname>isTranslatorDisabled()</methodname>
             to get the set value.
         </para>
 

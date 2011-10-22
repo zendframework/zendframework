@@ -56,28 +56,10 @@ class Count extends Validator\AbstractValidator
      * @var array Error message template variables
      */
     protected $_messageVariables = array(
-        'min'   => '_min',
-        'max'   => '_max',
+        'min'   => array('options' => 'min'),
+        'max'   => array('options' => 'max'),
         'count' => '_count'
     );
-
-    /**
-     * Minimum file count
-     *
-     * If null, there is no minimum file count
-     *
-     * @var integer
-     */
-    protected $_min;
-
-    /**
-     * Maximum file count
-     *
-     * If null, there is no maximum file count
-     *
-     * @var integer|null
-     */
-    protected $_max;
 
     /**
      * Actual filecount
@@ -93,6 +75,16 @@ class Count extends Validator\AbstractValidator
     protected $_files;
 
     /**
+     * Options for this validator
+     *
+     * @var array
+     */
+    protected $options = array(
+        'min' => null,  // Minimum file count, if null there is no minimum file count
+        'max' => null,  // Maximum file count, if null there is no maximum file count
+    );
+
+    /**
      * Sets validator options
      *
      * Min limits the file count, when used with max=null it is the maximum file count
@@ -106,14 +98,10 @@ class Count extends Validator\AbstractValidator
      * @param  integer|array|\Zend\Config\Config $options Options for the adapter
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } elseif (is_string($options) || is_numeric($options)) {
+        if (is_string($options) || is_numeric($options)) {
             $options = array('max' => $options);
-        } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
         }
 
         if (1 < func_num_args()) {
@@ -121,13 +109,7 @@ class Count extends Validator\AbstractValidator
             $options['max'] = func_get_arg(1);
         }
 
-        if (isset($options['min'])) {
-            $this->setMin($options);
-        }
-
-        if (isset($options['max'])) {
-            $this->setMax($options);
-        }
+        parent::__construct($options);
     }
 
     /**
@@ -137,7 +119,7 @@ class Count extends Validator\AbstractValidator
      */
     public function getMin()
     {
-        return $this->_min;
+        return $this->options['min'];
     }
 
     /**
@@ -158,12 +140,12 @@ class Count extends Validator\AbstractValidator
         }
 
         $min = (integer) $min;
-        if (($this->_max !== null) && ($min > $this->_max)) {
+        if (($this->getMax() !== null) && ($min > $this->getMax())) {
             throw new Exception\InvalidArgumentException("The minimum must be less than or equal to the maximum file count, but $min >"
-                                            . " {$this->_max}");
+                                            . " {$this->getMax()}");
         }
 
-        $this->_min = $min;
+        $this->options['min'] = $min;
         return $this;
     }
 
@@ -174,7 +156,7 @@ class Count extends Validator\AbstractValidator
      */
     public function getMax()
     {
-        return $this->_max;
+        return $this->options['max'];
     }
 
     /**
@@ -195,12 +177,12 @@ class Count extends Validator\AbstractValidator
         }
 
         $max = (integer) $max;
-        if (($this->_min !== null) && ($max < $this->_min)) {
+        if (($this->getMin() !== null) && ($max < $this->getMin())) {
             throw new Exception\InvalidArgumentException("The maximum must be greater than or equal to the minimum file count, but "
-                                            . "$max < {$this->_min}");
+                                            . "$max < {$this->getMin()}");
         }
 
-        $this->_max = $max;
+        $this->options['max'] = $max;
         return $this;
     }
 
@@ -250,11 +232,11 @@ class Count extends Validator\AbstractValidator
         }
 
         $this->_count = count($this->_files);
-        if (($this->_max !== null) && ($this->_count > $this->_max)) {
+        if (($this->getMax() !== null) && ($this->_count > $this->getMax())) {
             return $this->_throw($file, self::TOO_MANY);
         }
 
-        if (($this->_min !== null) && ($this->_count < $this->_min)) {
+        if (($this->getMin() !== null) && ($this->_count < $this->getMin())) {
             return $this->_throw($file, self::TOO_FEW);
         }
 
@@ -273,14 +255,14 @@ class Count extends Validator\AbstractValidator
         if ($file !== null) {
             if (is_array($file)) {
                 if(array_key_exists('name', $file)) {
-                    $this->_value = $file['name'];
+                    $this->value = $file['name'];
                 }
             } else if (is_string($file)) {
-                $this->_value = $file;
+                $this->value = $file;
             }
         }
 
-        $this->_error($errorType);
+        $this->error($errorType);
         return false;
     }
 }

@@ -33,18 +33,6 @@ namespace Zend\Validator\Barcode;
 class Ean5 extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = 5;
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
-
-    /**
      * Constructor
      *
      * Sets check flag to false.
@@ -53,6 +41,8 @@ class Ean5 extends AbstractAdapter
      */
     public function __construct()
     {
-        $this->setCheck(false);
+        $this->setLength(5);
+        $this->setCharacters('0123456789');
+        $this->useChecksum(false);
     }
 }

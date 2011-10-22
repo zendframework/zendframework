@@ -37,12 +37,12 @@ class RecordExists extends AbstractDb
     public function isValid($value)
     {
         $valid = true;
-        $this->_setValue($value);
+        $this->setValue($value);
 
         $result = $this->_query($value);
         if (!$result) {
             $valid = false;
-            $this->_error(self::ERROR_NO_RECORD_FOUND);
+            $this->error(self::ERROR_NO_RECORD_FOUND);
         }
 
         return $valid;

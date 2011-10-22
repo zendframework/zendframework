@@ -22,7 +22,8 @@
  * @namespace
  */
 namespace Zend\Validator;
-use Zend\Translator;
+use Zend\Translator,
+    Zend\Validator\Exception\InvalidArgumentException;
 
 /**
  * @uses       \Zend\Registry
@@ -40,41 +41,7 @@ abstract class AbstractValidator implements Validator
      *
      * @var mixed
      */
-    protected $_value;
-
-    /**
-     * Additional variables available for validation failure messages
-     *
-     * @var array
-     */
-    protected $_messageVariables = array();
-
-    /**
-     * Validation failure message template definitions
-     *
-     * @var array
-     */
-    protected $_messageTemplates = array();
-
-    /**
-     * Array of validation failure messages
-     *
-     * @var array
-     */
-    protected $_messages = array();
-
-    /**
-     * Flag indidcating whether or not value should be obfuscated in error
-     * messages
-     * @var bool
-     */
-    protected $_obscureValue = false;
-
-    /**
-     * Translation object
-     * @var \Zend\Translator\Translator
-     */
-    protected $_translator;
+    protected $value;
 
     /**
      * Default translation object for all validate objects
@@ -83,17 +50,111 @@ abstract class AbstractValidator implements Validator
     protected static $_defaultTranslator;
 
     /**
-     * Is translation disabled?
-     * @var Boolean
-     */
-    protected $_translatorDisabled = false;
-
-    /**
      * Limits the maximum returned length of a error message
      *
      * @var Integer
      */
     protected static $_messageLength = -1;
+
+    protected $abstractOptions = array(
+        'messages'           => array(),  // Array of validation failure messages
+        'messageTemplates'   => array(),  // Array of validation failure message templates
+        'messageVariables'   => array(),  // Array of additional variables available for validation failure messages
+        'translator'         => null,     // Translation object to used -> \Zend\Translator\Translator
+        'translatorDisabled' => false,    // Is translation disabled?
+        'valueObscured'      => false,    // Flag indidcating whether or not value should be obfuscated in error messages
+    );
+
+    /**
+     * Abstract constructor for all validators
+     * A validator should accept following parameters:
+     *  - nothing f.e. Validator()
+     *  - one or multiple scalar values f.e. Validator($first, $second, $third)
+     *  - an array f.e. Validator(array($first => 'first', $second => 'second', $third => 'third'))
+     *  - an instance of Zend_Config f.e. Validator($config_instance)
+     *
+     * @param mixed $options
+     */
+    public function __construct($options = null)
+    {
+        // The abstract constructor allows no scalar values
+        if ($options instanceof \Zend\Config\Config) {
+            $options = $options->toArray();
+        }
+
+        if (isset($this->_messageTemplates)) {
+            $this->abstractOptions['messageTemplates'] = $this->_messageTemplates;
+        }
+
+        if (isset($this->_messageVariables)) {
+            $this->abstractOptions['messageVariables'] = $this->_messageVariables;
+        }
+
+        if (is_array($options)) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
+     * Returns an option
+     *
+     * @param string $option Option to be returned
+     * @throws \Zend\Validator\Exception\InvalidArgumentException
+     * @return mixed Returned option
+     */
+    public function getOption($option)
+    {
+        if (array_key_exists($option, $this->abstractOptions)) {
+            return $this->abstractOptions[$option];
+        }
+
+        if (isset($this->options) && array_key_exists($option, $this->options)) {
+            return $this->options[$options];
+        }
+
+        throw new InvalidArgumentException("Invalid option '$option'");
+    }
+
+    /**
+     * Returns all available options
+     *
+     * @return array Array with all available options
+     */
+    public function getOptions()
+    {
+        $result = $this->abstractOptions;
+        if (isset($this->options)) {
+            $result += $this->options;
+        }
+        return $result;
+    }
+
+    /**
+     * Sets one or multiple options
+     *
+     * @param  array $options Options to set
+     * @return \Zend\Validator\AbstractValidator Provides fluid interface
+     */
+    public function setOptions(array $options = array())
+    {
+        foreach ($options as $name => $option) {
+            $fname = 'set' . ucfirst($name);
+            $fname2 = 'is' . ucfirst($name);
+            if (($name != 'setOptions') && method_exists($this, $name)) {
+                $this->{$name}($option);
+            } else if (($fname != 'setOptions') && method_exists($this, $fname)) {
+                $this->{$fname}($option);
+            } else if (($fname2 != 'setOptions') && method_exists($this, $fname2)) {
+                $this->{$fname2}($option);
+            } else if (isset($this->options)) {
+                $this->options[$name] = $options;
+            } else {
+                $this->abstractOptions[$name] = $options;
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * Returns array of validation failure messages
@@ -102,7 +163,7 @@ abstract class AbstractValidator implements Validator
      */
     public function getMessages()
     {
-        return $this->_messages;
+        return $this->abstractOptions['messages'];
     }
 
     /**
@@ -123,7 +184,7 @@ abstract class AbstractValidator implements Validator
      */
     public function getMessageVariables()
     {
-        return array_keys($this->_messageVariables);
+        return array_keys($this->abstractOptions['messageVariables']);
     }
 
     /**
@@ -133,7 +194,7 @@ abstract class AbstractValidator implements Validator
      */
     public function getMessageTemplates()
     {
-        return $this->_messageTemplates;
+        return $this->abstractOptions['messageTemplates'];
     }
 
     /**
@@ -147,18 +208,18 @@ abstract class AbstractValidator implements Validator
     public function setMessage($messageString, $messageKey = null)
     {
         if ($messageKey === null) {
-            $keys = array_keys($this->_messageTemplates);
+            $keys = array_keys($this->abstractOptions['messageTemplates']);
             foreach($keys as $key) {
                 $this->setMessage($messageString, $key);
             }
             return $this;
         }
 
-        if (!isset($this->_messageTemplates[$messageKey])) {
-            throw new Exception\InvalidArgumentException("No message template exists for key '$messageKey'");
+        if (!isset($this->abstractOptions['messageTemplates'][$messageKey])) {
+            throw new InvalidArgumentException("No message template exists for key '$messageKey'");
         }
 
-        $this->_messageTemplates[$messageKey] = $messageString;
+        $this->abstractOptions['messageTemplates'][$messageKey] = $messageString;
         return $this;
     }
 
@@ -188,12 +249,30 @@ abstract class AbstractValidator implements Validator
     public function __get($property)
     {
         if ($property == 'value') {
-            return $this->_value;
+            return $this->value;
         }
-        if (array_key_exists($property, $this->_messageVariables)) {
-            return $this->{$this->_messageVariables[$property]};
+
+        if (array_key_exists($property, $this->abstractOptions['messageVariables'])) {
+            $result = $this->abstractOptions['messageVariables'][$property];
+            if (is_array($result)) {
+                $result = $this->{key($result)}[current($result)];
+            } else {
+                $result = $this->{$result};
+            }
+            return $result;
         }
-        throw new Exception\InvalidArgumentException("No property exists by the name '$property'");
+
+        if (isset($this->_messageVariables) && array_key_exists($property, $this->_messageVariables)) {
+            $result = $this->{$this->_messageVariables[$property]};
+            if (is_array($result)) {
+                $result = $this->{key($result)}[current($result)];
+            } else {
+                $result = $this->{$result};
+            }
+            return $result;
+        }
+
+        throw new InvalidArgumentException("No property exists by the name '$property'");
     }
 
     /**
@@ -208,13 +287,13 @@ abstract class AbstractValidator implements Validator
      * @param  string $value
      * @return string
      */
-    protected function _createMessage($messageKey, $value)
+    protected function createMessage($messageKey, $value)
     {
-        if (!isset($this->_messageTemplates[$messageKey])) {
+        if (!isset($this->abstractOptions['messageTemplates'][$messageKey])) {
             return null;
         }
 
-        $message = $this->_messageTemplates[$messageKey];
+        $message = $this->abstractOptions['messageTemplates'][$messageKey];
 
         if (null !== ($translator = $this->getTranslator())) {
             if ($translator->isTranslated($messageKey)) {
@@ -234,13 +313,17 @@ abstract class AbstractValidator implements Validator
             $value = (string)$value;
         }
 
-        if ($this->getObscureValue()) {
+        if ($this->isValueObscured()) {
             $value = str_repeat('*', strlen($value));
         }
 
         $message = str_replace('%value%', (string) $value, $message);
-        foreach ($this->_messageVariables as $ident => $property) {
-            $message = str_replace("%$ident%", (string) $this->$property, $message);
+        foreach ($this->abstractOptions['messageVariables'] as $ident => $property) {
+            if (is_array($property)) {
+                $message = str_replace("%$ident%", (string) $this->{key($property)}[current($property)], $message);
+            } else {
+                $message = str_replace("%$ident%", (string) $this->$property, $message);
+            }
         }
 
         $length = self::getMessageLength();
@@ -256,16 +339,28 @@ abstract class AbstractValidator implements Validator
      * @param  string $value      OPTIONAL
      * @return void
      */
-    protected function _error($messageKey, $value = null)
+    protected function error($messageKey, $value = null)
     {
         if ($messageKey === null) {
-            $keys = array_keys($this->_messageTemplates);
+            $keys = array_keys($this->abstractOptions['messageTemplates']);
             $messageKey = current($keys);
         }
+
         if ($value === null) {
-            $value = $this->_value;
+            $value = $this->value;
         }
-        $this->_messages[$messageKey] = $this->_createMessage($messageKey, $value);
+
+        $this->abstractOptions['messages'][$messageKey] = $this->createMessage($messageKey, $value);
+    }
+
+    /**
+     * Returns the validation value
+     *
+     * @return mixed Value to be validated
+     */
+    protected function getValue()
+    {
+        return $this->value;
     }
 
     /**
@@ -274,10 +369,10 @@ abstract class AbstractValidator implements Validator
      * @param  mixed $value
      * @return void
      */
-    protected function _setValue($value)
+    protected function setValue($value)
     {
-        $this->_value    = $value;
-        $this->_messages = array();
+        $this->value               = $value;
+        $this->abstractOptions['messages'] = array();
     }
 
     /**
@@ -286,9 +381,9 @@ abstract class AbstractValidator implements Validator
      * @param  bool $flag
      * @return \Zend\Validator\AbstractValidator
      */
-    public function setObscureValue($flag)
+    public function setValueObscured($flag)
     {
-        $this->_obscureValue = (bool) $flag;
+        $this->abstractOptions['valueObscured'] = (bool) $flag;
         return $this;
     }
 
@@ -298,9 +393,9 @@ abstract class AbstractValidator implements Validator
      *
      * @return bool
      */
-    public function getObscureValue()
+    public function isValueObscured()
     {
-        return $this->_obscureValue;
+        return $this->abstractOptions['valueObscured'];
     }
 
     /**
@@ -312,12 +407,13 @@ abstract class AbstractValidator implements Validator
     public function setTranslator($translator = null)
     {
         if ((null === $translator) || ($translator instanceof Translator\Adapter\AbstractAdapter)) {
-            $this->_translator = $translator;
+            $this->abstractOptions['translator'] = $translator;
         } elseif ($translator instanceof Translator\Translator) {
-            $this->_translator = $translator->getAdapter();
+            $this->abstractOptions['translator'] = $translator->getAdapter();
         } else {
-            throw new Exception\InvalidArgumentException('Invalid translator specified');
+            throw new InvalidArgumentException('Invalid translator specified');
         }
+
         return $this;
     }
 
@@ -328,15 +424,15 @@ abstract class AbstractValidator implements Validator
      */
     public function getTranslator()
     {
-        if ($this->translatorIsDisabled()) {
+        if ($this->isTranslatorDisabled()) {
             return null;
         }
 
-        if (null === $this->_translator) {
+        if (null === $this->abstractOptions['translator']) {
             return self::getDefaultTranslator();
         }
 
-        return $this->_translator;
+        return $this->abstractOptions['translator'];
     }
 
     /**
@@ -346,7 +442,7 @@ abstract class AbstractValidator implements Validator
      */
     public function hasTranslator()
     {
-        return (bool)$this->_translator;
+        return (bool)$this->abstractOptions['translator'];
     }
 
     /**
@@ -362,7 +458,7 @@ abstract class AbstractValidator implements Validator
         } elseif ($translator instanceof Translator\Translator) {
             self::$_defaultTranslator = $translator->getAdapter();
         } else {
-            throw new Exception\InvalidArgumentException('Invalid translator specified');
+            throw new InvalidArgumentException('Invalid translator specified');
         }
     }
 
@@ -403,9 +499,9 @@ abstract class AbstractValidator implements Validator
      * @param  bool $flag
      * @return \Zend\Validator\AbstractValidator
      */
-    public function setDisableTranslator($flag)
+    public function setTranslatorDisabled($flag)
     {
-        $this->_translatorDisabled = (bool) $flag;
+        $this->abstractOptions['translatorDisabled'] = (bool) $flag;
         return $this;
     }
 
@@ -414,9 +510,9 @@ abstract class AbstractValidator implements Validator
      *
      * @return bool
      */
-    public function translatorIsDisabled()
+    public function isTranslatorDisabled()
     {
-        return $this->_translatorDisabled;
+        return $this->abstractOptions['translatorDisabled'];
     }
 
     /**

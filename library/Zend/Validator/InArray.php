@@ -71,7 +71,7 @@ class InArray extends AbstractValidator
      * @param  array|\Zend\Config\Config $haystack
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
@@ -180,7 +180,7 @@ class InArray extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
         if ($this->getRecursive()) {
             $iterator = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($this->_haystack));
             foreach($iterator as $element) {
@@ -198,7 +198,7 @@ class InArray extends AbstractValidator
             }
         }
 
-        $this->_error(self::NOT_IN_ARRAY);
+        $this->error(self::NOT_IN_ARRAY);
         return false;
     }
 }

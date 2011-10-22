@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><info><title>Zend Framework に同梱されている標準のフォーム要素</title></info>
-    
+
 
     <para>
         Zend Framework には標準でいくつかの具象要素クラスが組み込まれており、
@@ -11,7 +11,7 @@
     </para>
 
     <section xml:id="zend.form.standardElements.button"><info><title>Zend_Form_Element_Button</title></info>
-        
+
 
         <para>
             HTML の button 要素を作成する際に使用します。
@@ -41,7 +41,7 @@
     </section>
 
     <section xml:id="zend.form.standardElements.captcha"><info><title>Zend_Form_Element_Captcha</title></info>
-        
+
 
         <para>
             CAPTCHAs は、ボットやその他の自動処理プロセスからの自動送信を防ぐための仕組みです。
@@ -126,7 +126,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
     </section>
 
     <section xml:id="zend.form.standardElements.checkbox"><info><title>Zend_Form_Element_Checkbox</title></info>
-        
+
 
         <para>
             HTML のチェックボックスは指定した値を返すことができます。
@@ -168,7 +168,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
     </section>
 
     <section xml:id="zend.form.standardElements.file"><info><title>Zend_Form_Element_File</title></info>
-        
+
 
         <para>
             File フォーム要素は、ファイルアップロード用のフィールドをフォームに用意します。
@@ -187,7 +187,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
 
         <example xml:id="zend.form.standardElements.file.usage"><info><title>File フォーム要素の使用法</title></info>
-            
+
 
             <para>
                 上の説明だけでは File フォーム要素を使うのが難しく感じられるかもしれません。
@@ -238,7 +238,7 @@ $location = $form->foo->getFileName();
         </example>
 
         <note><info><title>デフォルトのアップロード先</title></info>
-            
+
 
             <para>
                 デフォルトでは、システムの
@@ -247,7 +247,7 @@ $location = $form->foo->getFileName();
         </note>
 
         <note><info><title>File の値</title></info>
-            
+
 
             <para>
                 <acronym>HTTP</acronym> 内で、file 要素は値を持ちません。
@@ -284,7 +284,7 @@ $form->getValues();
         </para>
 
         <example xml:id="zend.form.standardElements.file.retrievement"><info><title>明示的なファイルの取得</title></info>
-            
+
 
             <para>
                 まずは <methodname>setValueDisabled(true)</methodname> をコールします。
@@ -342,7 +342,7 @@ if ($form->isValid($form->getPost())) {
         </itemizedlist>
 
         <example xml:id="zend.form.standardElements.file.isuploaded"><info><title>オプションのファイルがアップロードされたかどうかの確認</title></info>
-            
+
 
             <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
@@ -367,7 +367,7 @@ if ($form->foo->isUploaded()) {
         </para>
 
         <example xml:id="zend.form.standardElements.file.multiusage"><info><title>複数のファイルの設定</title></info>
-            
+
 
             <para>
                 複数の要素を作成する方法は、単一の要素を作成する場合と同じで、
@@ -398,7 +398,7 @@ $form->addElement($element, 'foo');
         </example>
 
         <note><info><title>サブフォームにおける File 要素</title></info>
-            
+
 
             <para>
                 file 要素をサブフォーム内で使う場合は、一意な名前を設定する必要があります。
@@ -437,7 +437,7 @@ $form->addElement($element, 'foo');
 ]]></programlisting>
 
         <note><info><title>複数の file 要素がある場合の MaxFileSize</title></info>
-            
+
 
             <para>
                 複数の file 要素をフォームで使用する場合は、
@@ -452,7 +452,7 @@ $form->addElement($element, 'foo');
     </section>
 
     <section xml:id="zend.form.standardElements.hidden"><info><title>Zend_Form_Element_Hidden</title></info>
-        
+
 
         <para>
             Hidden 要素はただ単にデータを送信するだけのもので、
@@ -463,7 +463,7 @@ $form->addElement($element, 'foo');
     </section>
 
     <section xml:id="zend.form.standardElements.hash"><info><title>Zend_Form_Element_Hash</title></info>
-        
+
 
         <para>
             この要素は CSRF 攻撃からフォームを保護するものです。
@@ -503,7 +503,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
     </section>
 
     <section xml:id="zend.form.standardElements.Image"><info><title>Zend_Form_Element_Image</title></info>
-        
+
 
         <para>
             画像もフォーム要素として使用できます。
@@ -534,7 +534,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
     </section>
 
     <section xml:id="zend.form.standardElements.multiCheckbox"><info><title>Zend_Form_Element_MultiCheckbox</title></info>
-        
+
 
         <para>
             関連する複数のチェックボックスをひとまとめにし、
@@ -610,7 +610,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.multiselect"><info><title>Zend_Form_Element_Multiselect</title></info>
-        
+
 
         <para>
             <acronym>XHTML</acronym> の <code>select</code> 要素には 'multiple'
@@ -658,7 +658,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.password"><info><title>Zend_Form_Element_Password</title></info>
-        
+
 
         <para>
             Password 要素は、基本的には通常の text 要素と同じです。
@@ -668,7 +668,7 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             <classname>Zend_Form_Element_Password</classname> は、これを実現するために
-            各バリデータ上で <methodname>setObscureValue(true)</methodname>
+            各バリデータ上で <methodname>setValueObscured(true)</methodname>
             (検証エラーの際のメッセージでパスワードを表示させない)
             をコールし、'formPassword' ビューヘルパー (渡された値を表示しない)
             を使用します。
@@ -676,7 +676,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.radio"><info><title>Zend_Form_Element_Radio</title></info>
-        
+
 
         <para>
             Radio 要素は、いくつかの選択肢を指定してその中から
@@ -722,7 +722,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.reset"><info><title>Zend_Form_Element_Reset</title></info>
-        
+
 
         <para>
             Reset ボタンはフォームの入力内容をクリアするために使用します。
@@ -741,7 +741,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.select"><info><title>Zend_Form_Element_Select</title></info>
-        
+
 
         <para>
             セレクトボックスは、指定したデータの中から選択させたいときに使用するものです。
@@ -789,7 +789,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.submit"><info><title>Zend_Form_Element_Submit</title></info>
-        
+
 
         <para>
             Submit ボタンはフォームの内容を送信するための要素です。
@@ -820,7 +820,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.text"><info><title>Zend_Form_Element_Text</title></info>
-        
+
 
         <para>
             最もよく用いられているフォーム要素は text 要素です。
@@ -831,7 +831,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.textarea"><info><title>Zend_Form_Element_Textarea</title></info>
-        
+
 
         <para>
             Textarea は大量のテキストを入力させるために使用します。

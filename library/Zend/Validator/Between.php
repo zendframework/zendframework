@@ -52,33 +52,20 @@ class Between extends AbstractValidator
      * @var array
      */
     protected $_messageVariables = array(
-        'min' => '_min',
-        'max' => '_max'
+        'min' => array('options' => 'min'),
+        'max' => array('options' => 'max'),
     );
 
     /**
-     * Minimum value
+     * Options for the between validator
      *
-     * @var mixed
+     * @var array
      */
-    protected $_min;
-
-    /**
-     * Maximum value
-     *
-     * @var mixed
-     */
-    protected $_max;
-
-    /**
-     * Whether to do inclusive comparisons, allowing equivalence to min and/or max
-     *
-     * If false, then strict comparisons are done, and the value may equal neither
-     * the min nor max options
-     *
-     * @var boolean
-     */
-    protected $_inclusive;
+    protected $options = array(
+        'inclusive' => true,  // Whether to do inclusive comparisons, allowing equivalence to min and/or max
+        'min'       => 0,
+        'max'       => PHP_INT_MAX,
+    );
 
     /**
      * Sets validator options
@@ -90,7 +77,7 @@ class Between extends AbstractValidator
      * @param  array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
@@ -109,16 +96,10 @@ class Between extends AbstractValidator
         }
 
         if (!array_key_exists('min', $options) || !array_key_exists('max', $options)) {
-            throw new Exception\InvalidArgumentException("Missing option. 'min' and 'max' has to be given");
+//            throw new Exception\InvalidArgumentException("Missing option. 'min' and 'max' has to be given");
         }
 
-        if (!array_key_exists('inclusive', $options)) {
-            $options['inclusive'] = true;
-        }
-
-        $this->setMin($options['min'])
-             ->setMax($options['max'])
-             ->setInclusive($options['inclusive']);
+        parent::__construct($options);
     }
 
     /**
@@ -128,7 +109,7 @@ class Between extends AbstractValidator
      */
     public function getMin()
     {
-        return $this->_min;
+        return $this->options['min'];
     }
 
     /**
@@ -139,7 +120,7 @@ class Between extends AbstractValidator
      */
     public function setMin($min)
     {
-        $this->_min = $min;
+        $this->options['min'] = $min;
         return $this;
     }
 
@@ -150,7 +131,7 @@ class Between extends AbstractValidator
      */
     public function getMax()
     {
-        return $this->_max;
+        return $this->options['max'];
     }
 
     /**
@@ -161,7 +142,7 @@ class Between extends AbstractValidator
      */
     public function setMax($max)
     {
-        $this->_max = $max;
+        $this->options['max'] = $max;
         return $this;
     }
 
@@ -172,7 +153,7 @@ class Between extends AbstractValidator
      */
     public function getInclusive()
     {
-        return $this->_inclusive;
+        return $this->options['inclusive'];
     }
 
     /**
@@ -183,7 +164,7 @@ class Between extends AbstractValidator
      */
     public function setInclusive($inclusive)
     {
-        $this->_inclusive = $inclusive;
+        $this->options['inclusive'] = $inclusive;
         return $this;
     }
 
@@ -196,19 +177,20 @@ class Between extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
-        if ($this->_inclusive) {
-            if ($this->_min > $value || $value > $this->_max) {
-                $this->_error(self::NOT_BETWEEN);
+        if ($this->getInclusive()) {
+            if ($this->getMin() > $value || $value > $this->getMax()) {
+                $this->error(self::NOT_BETWEEN);
                 return false;
             }
         } else {
-            if ($this->_min >= $value || $value >= $this->_max) {
-                $this->_error(self::NOT_BETWEEN_STRICT);
+            if ($this->getMin() >= $value || $value >= $this->getMax()) {
+                $this->error(self::NOT_BETWEEN_STRICT);
                 return false;
             }
         }
+
         return true;
     }
 }

@@ -48,42 +48,38 @@ class Float extends AbstractValidator
         self::NOT_FLOAT => "'%value%' does not appear to be a float",
     );
 
-    protected $_locale;
+    /**
+     * Options for this validator
+     *
+     * @var array
+     */
+    protected $options = array(
+        'locale' => null,
+    );
 
     /**
-     * Constructor for the float validator
+     * Constructor
      *
-     * @param string|Zend_Config|\Zend\Locale\Locale $locale
+     * @param array $options
+     * @return \Zend\Validator\Float
      */
-    public function __construct($locale = null)
+    public function __construct($options = null)
     {
-        if ($locale instanceof \Zend\Config\Config) {
-            $locale = $locale->toArray();
+        if (!is_array($options)) {
+            $options = array('locale' => $options);
         }
 
-        if (is_array($locale)) {
-            if (array_key_exists('locale', $locale)) {
-                $locale = $locale['locale'];
-            } else {
-                $locale = null;
-            }
-        }
-
-        if (empty($locale)) {
-            if (\Zend\Registry::isRegistered('Zend_Locale')) {
-                $locale = \Zend\Registry::get('Zend_Locale');
-            }
-        }
-
-        $this->setLocale($locale);
+        parent::__construct($options);
     }
 
     /**
      * Returns the set locale
+     *
+     * @return \Zend\Locale
      */
     public function getLocale()
     {
-        return $this->_locale;
+        return $this->options['locale'];
     }
 
     /**
@@ -93,7 +89,7 @@ class Float extends AbstractValidator
      */
     public function setLocale($locale = null)
     {
-        $this->_locale = Locale\Locale::findLocale($locale);
+        $this->options['locale'] = Locale\Locale::findLocale($locale);
         return $this;
     }
 
@@ -106,7 +102,7 @@ class Float extends AbstractValidator
     public function isValid($value)
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
@@ -114,14 +110,14 @@ class Float extends AbstractValidator
             return true;
         }
 
-        $this->_setValue($value);
+        $this->setValue($value);
         try {
-            if (!Locale\Format::isFloat($value, array('locale' => $this->_locale))) {
-                $this->_error(self::NOT_FLOAT);
+            if (!Locale\Format::isFloat($value, array('locale' => $this->options['locale']))) {
+                $this->error(self::NOT_FLOAT);
                 return false;
             }
         } catch (Locale\Exception $e) {
-            $this->_error(self::NOT_FLOAT);
+            $this->error(self::NOT_FLOAT);
             return false;
         }
 

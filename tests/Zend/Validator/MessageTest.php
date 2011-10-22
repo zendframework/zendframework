@@ -92,7 +92,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('abc'));
         $messages = $this->_validator->getMessages();
         $this->assertEquals('Your value is too short', current($messages));
-        $errors = $this->_validator->getErrors();
+        $errors = array_keys($this->_validator->getMessages());
         $this->assertEquals(Validator\StringLength::TOO_SHORT, current($errors));
     }
 
@@ -165,7 +165,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testSetMessageExceptionInvalidKey()
     {
         $keyInvalid = 'invalidKey';
-        
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'No message template exists for key');
         $this->_validator->setMessage(
             'Your value is too long',
@@ -243,24 +243,6 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'No property exists by the name ');
         $property = $this->_validator->unknownProperty;
-    }
-
-    /**
-     * Ensures that the getError() function returns an array of
-     * message key values corresponding to the messages.
-     *
-     * @return void
-     */
-    public function testGetErrors()
-    {
-        $inputInvalid = 'abcdefghij';
-        $this->assertFalse($this->_validator->isValid($inputInvalid));
-
-        $messages = $this->_validator->getMessages();
-        $this->assertEquals("'$inputInvalid' is more than 8 characters long", current($messages));
-
-        $errors = $this->_validator->getErrors();
-        $this->assertEquals(Validator\StringLength::TOO_LONG, current($errors));
     }
 
     /**

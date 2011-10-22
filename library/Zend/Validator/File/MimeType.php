@@ -72,29 +72,6 @@ class MimeType extends Validator\AbstractValidator
     protected $_type;
 
     /**
-     * Mimetypes
-     *
-     * If null, there is no mimetype
-     *
-     * @var string|null
-     */
-    protected $_mimetype;
-
-    /**
-     * Magicfile to use
-     *
-     * @var string|null|false
-     */
-    protected $_magicfile;
-
-    /**
-     * Disable usage of magicfile
-     *
-     * @var boolean
-     */
-    protected $_disableMagicFile = false;
-
-    /**
      * Finfo object to use
      *
      * @var resource
@@ -118,11 +95,16 @@ class MimeType extends Validator\AbstractValidator
     );
 
     /**
-     * Option to allow header check
+     * Options for this validator
      *
-     * @var boolean
+     * @var array
      */
-    protected $_headerCheck = false;
+    protected $options = array(
+        'enableHeaderCheck' => false,  // Allow header check
+        'disableMagicFile'  => false,  // Disable usage of magicfile
+        'magicFile'         => null,   // Magicfile to use
+        'mimeType'          => null,   // Mimetype to allow
+    );
 
     /**
      * Sets validator options
@@ -132,30 +114,32 @@ class MimeType extends Validator\AbstractValidator
      * - FALSE means disabling searching for mimetype, shoule be used for PHP 5.3
      * - A string is the mimetype file to use
      *
-     * @param  string|array $mimetype MimeType
+     * @param  string|array $options
      * @return void
      */
-    public function __construct($mimetype)
+    public function __construct($options = null)
     {
-        if ($mimetype instanceof Config) {
-            $mimetype = $mimetype->toArray();
-        } elseif (is_string($mimetype)) {
-            $mimetype = explode(',', $mimetype);
-        } elseif (!is_array($mimetype)) {
-            throw new Exception\InvalidArgumentException("Invalid options to validator provided");
+        if ($options instanceof Config) {
+            $options = $options->toArray();
+        } else if (is_string($options)) {
+            $options = explode(',', $options);
         }
 
-        if (isset($mimetype['magicfile'])) {
-            $this->setMagicFile($mimetype['magicfile']);
-            unset($mimetype['magicfile']);
+        if (isset($options['magicFile'])) {
+            $this->setMagicFile($options['magicFile']);
+            unset($options['magicFile']);
         }
 
-        if (isset($mimetype['headerCheck'])) {
-            $this->enableHeaderCheck($mimetype['headerCheck']);
-            unset($mimetype['headerCheck']);
+        if (isset($options['enableHeaderCheck'])) {
+            $this->enableHeaderCheck($options['enableHeaderCheck']);
+            unset($options['enableHeaderCheck']);
         }
 
-        $this->setMimeType($mimetype);
+        if (!array_key_exists('mimeType', $options)) {
+            $options = array('mimeType' => $options);
+        }
+
+        parent::__construct($options);
     }
 
     /**
@@ -165,7 +149,7 @@ class MimeType extends Validator\AbstractValidator
      */
     public function getMagicFile()
     {
-        if (null === $this->_magicfile) {
+        if (null === $this->options['magicFile']) {
             $magic = getenv('magic');
             if (!empty($magic)) {
                 $this->setMagicFile($magic);
@@ -174,7 +158,7 @@ class MimeType extends Validator\AbstractValidator
                     // supressing errors which are thrown due to openbase_dir restrictions
                     try {
                         $this->setMagicFile($file);
-                        if ($this->_magicfile !== null) {
+                        if ($this->options['magicFile'] !== null) {
                             break;
                         }
                     } catch (Validator\Exception $e) {
@@ -183,12 +167,12 @@ class MimeType extends Validator\AbstractValidator
                 }
             }
 
-            if ($this->_magicfile === null) {
-                $this->_magicfile = false;
+            if ($this->options['magicFile'] === null) {
+                $this->options['magicFile'] = false;
             }
         }
 
-        return $this->_magicfile;
+        return $this->options['magicFile'];
     }
 
     /**
@@ -204,11 +188,11 @@ class MimeType extends Validator\AbstractValidator
     public function setMagicFile($file)
     {
         if ($file === false) {
-            $this->_magicfile = false;
+            $this->options['magicFile'] = false;
         } else if (empty($file)) {
-            $this->_magicfile = null;
+            $this->options['magicFile'] = null;
         } else if (!(class_exists('finfo', false))) {
-            $this->_magicfile = null;
+            $this->options['magicFile'] = null;
             throw new Exception\InvalidArgumentException('Magicfile can not be set. There is no finfo extension installed');
         } else if (!is_file($file) || !is_readable($file)) {
             throw new Exception\InvalidArgumentException('The given magicfile can not be read');
@@ -219,7 +203,7 @@ class MimeType extends Validator\AbstractValidator
                 $this->_finfo = null;
                 throw new Exception\InvalidArgumentException('The given magicfile is not accepted by finfo');
             } else {
-                $this->_magicfile = $file;
+                $this->options['magicFile'] = $file;
             }
         }
 
@@ -234,7 +218,7 @@ class MimeType extends Validator\AbstractValidator
      */
     public function disableMagicFile($disable)
     {
-        $this->_disableMagicFile = (bool) $disable;
+        $this->options['disableMagicFile'] = (bool) $disable;
         return $this;
     }
 
@@ -245,7 +229,7 @@ class MimeType extends Validator\AbstractValidator
      */
     public function isMagicFileDisabled()
     {
-        return $this->_disableMagicFile;
+        return $this->options['disableMagicFile'];
     }
 
     /**
@@ -255,19 +239,19 @@ class MimeType extends Validator\AbstractValidator
      */
     public function getHeaderCheck()
     {
-        return $this->_headerCheck;
+        return $this->options['enableHeaderCheck'];
     }
 
     /**
      * Defines if the http header should be used
      * Note that this is unsave and therefor the default value is false
      *
-     * @param  boolean $checkHeader
+     * @param  boolean $headerCheck
      * @return \Zend\Validator\File\MimeType Provides fluid interface
      */
     public function enableHeaderCheck($headerCheck = true)
     {
-        $this->_headerCheck = (boolean) $headerCheck;
+        $this->options['enableHeaderCheck'] = (boolean) $headerCheck;
         return $this;
     }
 
@@ -280,7 +264,7 @@ class MimeType extends Validator\AbstractValidator
     public function getMimeType($asArray = false)
     {
         $asArray  = (bool) $asArray;
-        $mimetype = (string) $this->_mimetype;
+        $mimetype = (string) $this->options['mimeType'];
         if ($asArray) {
             $mimetype = explode(',', $mimetype);
         }
@@ -296,7 +280,7 @@ class MimeType extends Validator\AbstractValidator
      */
     public function setMimeType($mimetype)
     {
-        $this->_mimetype = null;
+        $this->options['mimeType'] = null;
         $this->addMimeType($mimetype);
         return $this;
     }
@@ -317,8 +301,8 @@ class MimeType extends Validator\AbstractValidator
             throw new Exception\InvalidArgumentException("Invalid options to validator provided");
         }
 
-        if (isset($mimetype['magicfile'])) {
-            unset($mimetype['magicfile']);
+        if (isset($mimetype['magicFile'])) {
+            unset($mimetype['magicFile']);
         }
 
         foreach ($mimetype as $content) {
@@ -336,7 +320,7 @@ class MimeType extends Validator\AbstractValidator
             }
         }
 
-        $this->_mimetype = implode(',', $mimetypes);
+        $this->options['mimeType'] = implode(',', $mimetypes);
 
         return $this;
     }
@@ -357,7 +341,7 @@ class MimeType extends Validator\AbstractValidator
         if ($file === null) {
             $file = array(
                 'type' => null,
-                'name' => $value
+                'name' => $value,
             );
         }
 
@@ -388,7 +372,7 @@ class MimeType extends Validator\AbstractValidator
                 $this->_type = mime_content_type($value);
         }
 
-        if (empty($this->_type) && $this->_headerCheck) {
+        if (empty($this->_type) && $this->getHeaderCheck()) {
             $this->_type = $file['type'];
         }
 
@@ -425,14 +409,14 @@ class MimeType extends Validator\AbstractValidator
         if ($file !== null) {
             if (is_array($file)) {
                 if(array_key_exists('name', $file)) {
-                    $this->_value = basename($file['name']);
+                    $this->value = basename($file['name']);
                 }
             } else if (is_string($file)) {
-                $this->_value = basename($file);
+                $this->value = basename($file);
             }
         }
 
-        $this->_error($errorType);
+        $this->error($errorType);
         return false;
     }
 }

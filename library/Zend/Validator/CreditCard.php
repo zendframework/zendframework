@@ -76,6 +76,25 @@ class CreditCard extends AbstractValidator
     );
 
     /**
+     * List of CCV names
+     *
+     * @var array
+     */
+    protected $_cardName = array(
+        0  => self::AMERICAN_EXPRESS,
+        1  => self::DINERS_CLUB,
+        2  => self::DINERS_CLUB_US,
+        3  => self::DISCOVER,
+        4  => self::JCB,
+        5  => self::LASER,
+        6  => self::MAESTRO,
+        7  => self::MASTERCARD,
+        8  => self::SOLO,
+        9  => self::UNIONPAY,
+        10 => self::VISA,
+    );
+
+    /**
      * List of allowed CCV lengths
      *
      * @var array
@@ -122,18 +141,14 @@ class CreditCard extends AbstractValidator
     );
 
     /**
-     * CCIs which are accepted by validation
+     * Options for this validator
      *
      * @var array
      */
-    protected $_type = array();
-
-    /**
-     * Service callback for additional validation
-     *
-     * @var callback
-     */
-    protected $_service;
+    protected $options = array(
+        'service' => null,     // Service callback for additional validation
+        'type'    => array(),  // CCIs which are accepted by validation
+    );
 
     /**
      * Constructor
@@ -162,6 +177,8 @@ class CreditCard extends AbstractValidator
         if (array_key_exists('service', $options)) {
             $this->setService($options['service']);
         }
+
+        parent::__construct();
     }
 
     /**
@@ -218,7 +235,7 @@ class CreditCard extends AbstractValidator
      */
     public function getService()
     {
-        return $this->_service;
+        return $this->options['service'];
     }
 
     /**
@@ -232,7 +249,7 @@ class CreditCard extends AbstractValidator
             throw new Exception\InvalidArgumentException('Invalid callback given');
         }
 
-        $this->_service = $service;
+        $this->options['service'] = $service;
         return $this;
     }
 
@@ -244,15 +261,15 @@ class CreditCard extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if (!is_string($value)) {
-            $this->_error(self::INVALID, $value);
+            $this->error(self::INVALID, $value);
             return false;
         }
 
         if (!ctype_digit($value)) {
-            $this->_error(self::CONTENT, $value);
+            $this->error(self::CONTENT, $value);
             return false;
         }
 
@@ -273,12 +290,12 @@ class CreditCard extends AbstractValidator
         }
 
         if ($foundp == false){
-            $this->_error(self::PREFIX, $value);
+            $this->error(self::PREFIX, $value);
             return false;
         }
 
         if ($foundl == false) {
-            $this->_error(self::LENGTH, $value);
+            $this->error(self::LENGTH, $value);
             return false;
         }
 
@@ -292,20 +309,21 @@ class CreditCard extends AbstractValidator
         }
 
         if ((10 - $sum % 10) % 10 != $value[$length - 1]) {
-            $this->_error(self::CHECKSUM, $value);
+            $this->error(self::CHECKSUM, $value);
             return false;
         }
 
-        if (!empty($this->_service)) {
+        $service = $this->getService();
+        if (!empty($service)) {
             try {
-                $callback = new Callback($this->_service);
-                $callback->setOptions($this->_type);
+                $callback = new Callback($service);
+                $callback->setOptions($this->getType());
                 if (!$callback->isValid($value)) {
-                    $this->_error(self::SERVICE, $value);
+                    $this->error(self::SERVICE, $value);
                     return false;
                 }
             } catch (\Exception $e) {
-                $this->_error(self::SERVICEFAILURE, $value);
+                $this->error(self::SERVICEFAILURE, $value);
                 return false;
             }
         }

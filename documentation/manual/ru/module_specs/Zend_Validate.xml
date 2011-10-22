@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Введение</title></info>
 
-    
+
 
     <para>
         Компонента <classname>Zend_Validate</classname> предоставляет набор наиболее часто
@@ -12,9 +12,9 @@
     </para>
 
     <section xml:id="zend.validate.introduction.definition"><info><title>Что такое валидатор?</title></info>
-    
-        
-    
+
+
+
         <para>
             Валидатор проверяет входные данные на предмет соответствия
             требованиям и возвращает результат булевого типа. Если входные
@@ -22,7 +22,7 @@
             предоставить информацию о том, какому требованию (требованиям)
             не соответствуют входные данные.
         </para>
-    
+
         <para>
             Например, веб-приложение может требовать, чтобы имя пользователя
             было длиной от 6 до 12 символов и содержало только
@@ -33,12 +33,12 @@
             то будет также полезно знать, каким именно требованиям не
             соответствует имя пользователя.
         </para>
-    
+
     </section>
 
     <section xml:id="zend.validate.introduction.using"><info><title>Базовое использование валидаторов</title></info>
 
-        
+
 
         <para>
             Такое определение валидации дает основу для
@@ -48,7 +48,7 @@
             значения, возвращая <constant>TRUE</constant> тогда и только тогда, когда
             значение прошло проверку по критериям валидации.
         </para>
-        
+
         <para>
             Если <code>isValid()</code> возвращает <constant>FALSE</constant>, то
             <code>getMessages()</code> возвращает массив
@@ -77,7 +77,7 @@
 
         <para>
             Следующий пример демонстрирует проверку адреса e-mail:
-    
+
             <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
@@ -90,14 +90,14 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-    
+
         </para>
 
     </section>
 
     <section xml:id="zend.validate.introduction.messages"><info><title>Установка собственных сообщений от ошибках</title></info>
 
-        
+
 
         <para>
             Классы валидации предоставляют метод <code>setMessage()</code>,
@@ -198,7 +198,7 @@ if (!validator->isValid('слово')) {
 
     <section xml:id="zend.validate.introduction.static"><info><title>Использование статического метода is()</title></info>
 
-        
+
 
         <para>
             Если неудобно каждый раз загружать требуемый класс валидации и
@@ -259,7 +259,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
 
     <section xml:id="zend.validate.introduction.translation"><info><title>Перевод сообщений</title></info>
 
-        
+
 
         <para>
             Классы валидации предоставляют метод <code>setTranslator()</code>,
@@ -312,7 +312,7 @@ Zend_Validate::setDefaultTranslator($translate);
             Иногда бывает необходимым отключить переводчика в валидаторе.
             Для этого используйте метод <code>setDisableTranslator()</code>,
             который принимает булево значение. Для получения установленного
-            значения используйте <code>translatorIsDisabled()</code>.
+            значения используйте <code>isTranslatorDisabled</code>.
         </para>
 
         <programlisting language="php"><![CDATA[

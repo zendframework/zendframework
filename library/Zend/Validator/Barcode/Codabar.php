@@ -33,35 +33,22 @@ namespace Zend\Validator\Barcode;
 class Codabar extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = -1;
-
-    /**
-     * Allowed barcode characters
-     * Note: The first and last character can be A, B, C or D
-     * @var string
-     */
-    protected $_characters = '0123456789-$:/.+ABCDTN*E';
-
-    /**
-     * Constructor
-     *
-     * Sets check flag to false.
+     * Constructor for this barcode adapter
      *
      * @return void
      */
     public function __construct()
     {
-        $this->setCheck(false);
+        $this->setLength(-1);
+        $this->setCharacters('0123456789-$:/.+ABCDTN*E');
+        $this->useChecksum(false);
     }
 
     /**
      * Checks for allowed characters
      * @see Zend\Validator\Barcode.AbstractAdapter::checkChars()
      */
-    public function checkChars($value)
+    public function hasValidCharacters($value)
     {
         $first = $value[0];
         if (strpbrk($value, 'ABCD')) {
@@ -94,10 +81,10 @@ class Codabar extends AbstractAdapter
             $value = substr($value, 1, -1);
         }
 
-        $chars             = $this->_characters;
-        $this->_characters = '0123456789-$:/.+';
-        $result            = parent::checkChars($value);
-        $this->_characters = $chars;
+        $chars  = $this->getCharacters();
+        $this->setCharacters('0123456789-$:/.+');
+        $result = parent::hasValidCharacters($value);
+        $this->setCharacters($chars);
         return $result;
     }
 }

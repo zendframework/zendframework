@@ -32,18 +32,6 @@ namespace Zend\Validator\Barcode;
  */
 class Royalmail extends AbstractAdapter
 {
-    /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = -1;
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
     protected $_rows = array(
         '0' => 1, '1' => 1, '2' => 1, '3' => 1, '4' => 1, '5' => 1,
         '6' => 2, '7' => 2, '8' => 2, '9' => 2, 'A' => 2, 'B' => 2,
@@ -63,10 +51,16 @@ class Royalmail extends AbstractAdapter
     );
 
     /**
-     * Checksum function
-     * @var string
+     * Constructor for this barcode adapter
+     *
+     * @return void
      */
-    protected $_checksum = '_royalmail';
+    public function __construct()
+    {
+        $this->setLength(-1);
+        $this->setCharacters('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $this->setChecksum('_royalmail');
+    }
 
     /**
      * Validates the checksum ()
@@ -105,7 +99,7 @@ class Royalmail extends AbstractAdapter
      * @param  string $value The barcode to check for allowed characters
      * @return boolean
      */
-    public function checkChars($value)
+    public function hasValidCharacters($value)
     {
         if ($value[0] == '(') {
             $value = substr($value, 1);
@@ -117,6 +111,6 @@ class Royalmail extends AbstractAdapter
             }
         }
 
-        return parent::checkChars($value);
+        return parent::hasValidCharacters($value);
     }
 }

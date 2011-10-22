@@ -164,7 +164,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'The given magicfile is not accepted by finfo');
-        $validator = new File\MimeType(array('image/gif', 'magicfile' => __FILE__));
+        $validator = new File\MimeType(array('image/gif', 'magicFile' => __FILE__));
     }
 
     public function testOptionsAtConstructor()
@@ -172,7 +172,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\MimeType(array(
             'image/gif',
             'image/jpg',
-            'headerCheck' => true));
+            'enableHeaderCheck' => true));
 
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
@@ -261,7 +261,7 @@ class MimeTypeTest extends \PHPUnit_Framework_TestCase
             'size'     => 200,
             'tmp_name' => dirname(__FILE__) . '/_files/picture.jpg',
             'error'    => 0,
-            'magicfile' => false,
+            'magicFile' => false,
         );
 
         $validator = new File\MimeType($files);

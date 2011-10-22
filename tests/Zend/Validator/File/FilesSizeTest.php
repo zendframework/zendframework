@@ -101,7 +101,7 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
 
         $validator = new File\FilesSize(array('min' => 1, 'max' => 100));
         $this->assertEquals('1B', $validator->getMin());
-        
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
         $validator = new File\FilesSize(array('min' => 100, 'max' => 1));
     }
@@ -135,10 +135,10 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('97.66kB', $validator->getMax());
 
         $validator = new File\FilesSize(2000);
-        $validator->setUseByteString(false);
+        $validator->useByteString(false);
         $test = $validator->getMax();
         $this->assertEquals('2000', $test);
-        
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
         $validator = new File\FilesSize(array('min' => 100, 'max' => 1));
     }
@@ -182,7 +182,7 @@ class FilesSizeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('9.76kB', current($messages));
         $this->assertContains('1.55kB', current($messages));
 
-        $validator = new File\FilesSize(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
+        $validator = new File\FilesSize(array('min' => 9999, 'max' => 10000, 'useByteString' => false));
         $this->assertFalse($validator->isValid(array(
             __DIR__ . '/_files/testsize.mo',
             __DIR__ . '/_files/testsize.mo',

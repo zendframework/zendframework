@@ -24,7 +24,7 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 
-use Zend\CodeGenerator\Php\PhpFile,
+use Zend\Code\Generator\FileGenerator,
     Zend\Tool\Project\Context\Filesystem\File as FileContext;
 
 /**
@@ -59,8 +59,8 @@ class TestPHPUnitBootstrapFile extends FileContext
      */
     public function getContents()
     {
-        $codeGenerator = new PhpFile(array(
-            'body' => <<<EOS
+        $codeGenerator = new FileGenerator();
+        $codeGenerator->setBody( <<<EOS
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
@@ -82,7 +82,7 @@ require_once 'Zend/Loader/StandardAutoloader.php';
 \$loader->register();
 
 EOS
-            ));
+            );
         return $codeGenerator->generate();
     }
 

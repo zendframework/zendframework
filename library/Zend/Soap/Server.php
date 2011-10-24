@@ -809,7 +809,7 @@ class Server implements \Zend\Server\Server
             $soap->fault("Sender", $setRequestException->getMessage());
         } else {
             try {
-                $soap->handle($request);
+                $soap->handle($this->_request);
             } catch (\Exception $e) {
                 $fault = $this->fault($e);
                 $soap->fault($fault->faultcode, $fault->faultstring);

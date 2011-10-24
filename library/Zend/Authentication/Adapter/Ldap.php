@@ -365,7 +365,7 @@ class Ldap implements AuthenticationAdapter
                 } else {
                     $line = $zle->getLine();
                     $messages[] = $zle->getFile() . "($line): " . $zle->getMessage();
-                    $messages[] = str_replace($password, '*****', $zle->getTraceAsString());
+                    $messages[] = preg_replace('/\b'.preg_quote($password, '/').'\b/', '*****', $zle->getTraceAsString());
                     $messages[0] = 'An unexpected failure occurred';
                 }
                 $messages[1] = $zle->getMessage();

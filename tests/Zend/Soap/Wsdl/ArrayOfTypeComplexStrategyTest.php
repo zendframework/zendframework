@@ -127,7 +127,7 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertContains(
-            '<xsd:complexType name="ZendTest.Soap.TestAsset.ComplexObjectWithObjectStructure"><xsd:all><xsd:element name="object" type="tns:ZendTest.Soap.TestAsset.ComplexTest"/></xsd:all></xsd:complexType>',
+            '<xsd:complexType name="ZendTest.Soap.TestAsset.ComplexObjectWithObjectStructure"><xsd:all><xsd:element name="object" type="tns:ZendTest.Soap.TestAsset.ComplexTest" nillable="true"/></xsd:all></xsd:complexType>',
             $wsdl,
             $wsdl
         );

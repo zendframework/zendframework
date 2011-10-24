@@ -314,8 +314,8 @@ class Wsdl
             if (isset($fault['name'])) {
                 $node->setAttribute('name', $fault['name']);
             }
-            $soap_node = $this->_dom->createElement('soap:body');
-            foreach ($output as $name => $value) {
+            $soap_node = $this->_dom->createElement('soap:fault');
+            foreach ($fault as $name => $value) {
                 $soap_node->setAttribute($name, $value);
             }
             $node->appendChild($soap_node);

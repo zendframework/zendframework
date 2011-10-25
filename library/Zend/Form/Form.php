@@ -2232,8 +2232,10 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         }
         $context = $data;
         foreach ($this->getElements() as $key => $element) {
-            if (null !== $translator && $this->hasTranslator()
-                    && !$element->hasTranslator()) {
+            if (null !== $translator 
+                && $this->hasTranslator()
+                && !$element->hasTranslator()
+            ) {
                 $element->setTranslator($translator);
             }
             $check = $data;

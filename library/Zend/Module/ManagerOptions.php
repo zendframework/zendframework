@@ -97,7 +97,8 @@ class ManagerOptions
      *
      * @return string
      */
-    public function getConfigCacheKey() {
+    public function getConfigCacheKey() 
+    {
         if ($this->configCacheKey !== null) {
             return $this->configCacheKey;
         }
@@ -110,7 +111,8 @@ class ManagerOptions
      * @param string $configCacheKey the value to be set
      * @return ManagerOptions
      */
-    public function setConfigCacheKey($configCacheKey) {
+    public function setConfigCacheKey($configCacheKey) 
+    {
         $this->configCacheKey = $configCacheKey;
         return $this;
     }

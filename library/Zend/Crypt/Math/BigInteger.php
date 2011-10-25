@@ -228,7 +228,7 @@ class BigInteger implements BigInteger\BigIntegerCapable
         }
         if($extension == 'gmp' && extension_loaded('gmp')) {
             $this->_math = new BigInteger\Gmp();
-        } elseif ($extension == 'bcmath') {
+        } elseif ($extension == 'bcmath' && extension_loaded('bcmath')) {
             $this->_math = new BigInteger\Bcmath();
         } else {
             throw new BigInteger\Exception($extension . ' big integer precision math support not detected');

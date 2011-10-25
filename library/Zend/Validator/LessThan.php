@@ -80,7 +80,7 @@ class LessThan extends AbstractValidator
      * @param  mixed|array|Config $options
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if ($options instanceof Config) {
             $options = $options->toArray();
@@ -160,16 +160,16 @@ class LessThan extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if ($this->_inclusive) {
             if ($value > $this->_max) {
-                $this->_error(self::NOT_LESS_INCLUSIVE);
+                $this->error(self::NOT_LESS_INCLUSIVE);
                 return false;
             }
         } else {
             if ($value >= $this->_max) {
-                $this->_error(self::NOT_LESS);
+                $this->error(self::NOT_LESS);
                 return false;
             }
         }

@@ -2,7 +2,10 @@
 namespace Zend\Validator\Barcode;
 class MyBarcode4 extends \Zend\Validator\Barcode\AbstractAdapter
 {
-    protected $_length     = 'odd';
-    protected $_characters = 128;
-    protected $_checksum   = '_mod10';
+    public function __construct()
+    {
+        $this->setLength('odd');
+        $this->setCharacters(128);
+        $this->setChecksum('_mod10');
+    }
 }

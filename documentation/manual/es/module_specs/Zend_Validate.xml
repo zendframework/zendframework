@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>Introducción</title></info>
 
-    
+
 
     <para> Cuando se necesita validar algún tipo de dato, el componente
             <classname>Zend_Validate</classname> ofrece un conjunto de
@@ -11,7 +11,7 @@
 
     <section xml:id="zend.validate.introduction.definition"><info><title>¿Qué es un validador?</title></info>
 
-        
+
 
         <para> Un validador examina su entrada con respecto a algunos
             requerimientos y produce un resultado booleano si la entrada valida
@@ -30,7 +30,7 @@
 
     <section xml:id="zend.validate.introduction.using"><info><title>Uso básico de validadores</title></info>
 
-        
+
 
         <para> Habiendo definido la validación de esta manera, Zend Framework
             nos proporciona el fundamento para
@@ -84,7 +84,7 @@ if ($validator->isValid($email)) {
 
     <section xml:id="zend.validate.introduction.messages"><info><title>Personalizar los mensajes</title></info>
 
-        
+
 
         <para> Para validar las clases se proporciona un método
                 <methodname>setMessage()</methodname> con el que se puede
@@ -172,7 +172,7 @@ if (!validator->isValid('word')) {
 
     <section xml:id="zend.validate.introduction.static"><info><title> Utilizando el método estático is() </title></info>
 
-        
+
 
         <para> Si es inconveniente cargar una clase de validación y crear una
             instancia del validador, puede usar el método estático
@@ -216,7 +216,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
             Ver <xref linkend="zend.filter.input"/> . </para>
         <section xml:id="zend.validate.introduction.static.namespaces"><info><title>Namespaces</title></info>
 
-            
+
 
             <para> When working with self defined validators you can give a
                 forth parameter to <methodname>Zend_Validate::is()</methodname>
@@ -292,7 +292,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
     </section>
     <section xml:id="zend.validate.introduction.translation"><info><title>Translating messages</title></info>
 
-        
+
 
         <para> Validate classes provide a
                 <methodname>setTranslator()</methodname> method with which you
@@ -339,7 +339,7 @@ Zend_Validate::setDefaultTranslator($translate);
             validator. To archive this you can use the
                 <methodname>setDisableTranslator()</methodname> method, which
             accepts a boolean parameter, and
-                <methodname>translatorIsDisabled()</methodname> to get the set
+                <methodname>isTranslatorDisabled()</methodname> to get the set
             value. </para>
 
         <programlisting language="php"><![CDATA[

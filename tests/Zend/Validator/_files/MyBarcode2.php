@@ -2,7 +2,10 @@
 namespace Zend\Validator\Barcode;
 class MyBarcode2 extends \Zend\Validator\Barcode\AbstractAdapter
 {
-    protected $_length     = array(1,3,6);
-    protected $_characters = 128;
-    protected $_checksum   = '_mod10';
+    public function __construct()
+    {
+        $this->setLength(array(1, 3, 6));
+        $this->setCharacters(128);
+        $this->setChecksum('_mod10');
+    }
 }

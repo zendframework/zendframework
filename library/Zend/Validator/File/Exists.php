@@ -50,35 +50,38 @@ class Exists extends Validator\AbstractValidator
     );
 
     /**
-     * Internal list of directories
-     * @var string
+     * Options for this validator
+     *
+     * @var array
      */
-    protected $_directory = '';
+    protected $options = array(
+        'directory' => null,  // internal list of directories
+    );
 
     /**
      * @var array Error message template variables
      */
     protected $_messageVariables = array(
-        'directory' => '_directory'
+        'directory' => array('options' => 'directory'),
     );
 
     /**
      * Sets validator options
      *
-     * @param  string|array|\Zend\Config\Config $directory
+     * @param  string|array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($directory = array())
+    public function __construct($options = null)
     {
-        if ($directory instanceof \Zend\Config\Config) {
-            $directory = $directory->toArray();
-        } else if (is_string($directory)) {
-            $directory = explode(',', $directory);
-        } else if (!is_array($directory)) {
-            throw new Exception\InvalidArgumentException('Invalid options to validator provided');
+        if (is_string($options)) {
+            $options = explode(',', $options);
         }
 
-        $this->setDirectory($directory);
+        if (is_array($options) && !array_key_exists('directory', $options)) {
+            $options = array('directory' => $options);
+        }
+
+        parent::__construct($options);
     }
 
     /**
@@ -90,7 +93,7 @@ class Exists extends Validator\AbstractValidator
     public function getDirectory($asArray = false)
     {
         $asArray   = (bool) $asArray;
-        $directory = (string) $this->_directory;
+        $directory = (string) $this->options['directory'];
         if ($asArray) {
             $directory = explode(',', $directory);
         }
@@ -106,7 +109,7 @@ class Exists extends Validator\AbstractValidator
      */
     public function setDirectory($directory)
     {
-        $this->_directory = null;
+        $this->options['directory'] = null;
         $this->addDirectory($directory);
         return $this;
     }
@@ -143,7 +146,7 @@ class Exists extends Validator\AbstractValidator
             }
         }
 
-        $this->_directory = implode(',', $directories);
+        $this->options['directory'] = implode(',', $directories);
 
         return $this;
     }
@@ -195,14 +198,14 @@ class Exists extends Validator\AbstractValidator
         if ($file !== null) {
             if (is_array($file)) {
                 if(array_key_exists('name', $file)) {
-                    $this->_value = basename($file['name']);
+                    $this->value = basename($file['name']);
                 }
             } else if (is_string($file)) {
-                $this->_value = basename($file);
+                $this->value = basename($file);
             }
         }
 
-        $this->_error($errorType);
+        $this->error($errorType);
         return false;
     }
 }

@@ -105,7 +105,7 @@ abstract class AbstractDb extends AbstractValidator
      *
      * @param array|Config $options Options to use for this validator
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if ($options instanceof DBSelect) {
             $this->setSelect($options);

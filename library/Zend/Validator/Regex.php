@@ -122,20 +122,20 @@ class Regex extends AbstractValidator
     public function isValid($value)
     {
         if (!is_string($value) && !is_int($value) && !is_float($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
-        $this->_setValue($value);
+        $this->setValue($value);
 
         $status = @preg_match($this->_pattern, $value);
         if (false === $status) {
-            $this->_error(self::ERROROUS);
+            $this->error(self::ERROROUS);
             return false;
         }
 
         if (!$status) {
-            $this->_error(self::NOT_MATCH);
+            $this->error(self::NOT_MATCH);
             return false;
         }
 

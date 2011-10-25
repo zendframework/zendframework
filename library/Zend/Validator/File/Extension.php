@@ -52,23 +52,20 @@ class Extension extends \Zend\Validator\AbstractValidator
     );
 
     /**
-     * Internal list of extensions
-     * @var string
-     */
-    protected $_extension = '';
-
-    /**
-     * Validate case sensitive
+     * Options for this valdiator
      *
-     * @var boolean
+     * @var array
      */
-    protected $_case = false;
+    protected $options = array(
+        'case' => false,   // Validate case sensitive
+        'extension' => '', // List of extensions
+    );
 
     /**
      * @var array Error message template variables
      */
     protected $_messageVariables = array(
-        'extension' => '_extension'
+        'extension' => array('options' => 'extension'),
     );
 
     /**
@@ -77,23 +74,35 @@ class Extension extends \Zend\Validator\AbstractValidator
      * @param  string|array|\Zend\Config\Config $options
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
+        $case = null;
         if (1 < func_num_args()) {
             $case = func_get_arg(1);
-            $this->setCase($case);
         }
 
-        if (is_array($options) and isset($options['case'])) {
-            $this->setCase($options['case']);
-            unset($options['case']);
+        if (is_array($options)) {
+            if (isset($options['case'])) {
+                $case = $options['case'];
+                unset($options['case']);
+            }
+
+            if (!array_key_exists('extension', $options)) {
+                $options = array('extension' => $options);
+            }
+        } else {
+            $options = array('extension' => $options);
         }
 
-        $this->setExtension($options);
+        if ($case !== null) {
+            $options['case'] = $case;
+        }
+
+        parent::__construct($options);
     }
 
     /**
@@ -103,7 +112,7 @@ class Extension extends \Zend\Validator\AbstractValidator
      */
     public function getCase()
     {
-        return $this->_case;
+        return $this->options['case'];
     }
 
     /**
@@ -114,7 +123,7 @@ class Extension extends \Zend\Validator\AbstractValidator
      */
     public function setCase($case)
     {
-        $this->_case = (boolean) $case;
+        $this->options['case'] = (boolean) $case;
         return $this;
     }
 
@@ -125,7 +134,7 @@ class Extension extends \Zend\Validator\AbstractValidator
      */
     public function getExtension()
     {
-        $extension = explode(',', $this->_extension);
+        $extension = explode(',', $this->options['extension']);
 
         return $extension;
     }
@@ -138,7 +147,7 @@ class Extension extends \Zend\Validator\AbstractValidator
      */
     public function setExtension($extension)
     {
-        $this->_extension = null;
+        $this->options['extension'] = null;
         $this->addExtension($extension);
         return $this;
     }
@@ -163,6 +172,7 @@ class Extension extends \Zend\Validator\AbstractValidator
 
             $extensions[] = trim($content);
         }
+
         $extensions = array_unique($extensions);
 
         // Sanity check to ensure no empty values
@@ -172,8 +182,7 @@ class Extension extends \Zend\Validator\AbstractValidator
             }
         }
 
-        $this->_extension = implode(',', $extensions);
-
+        $this->options['extension'] = implode(',', $extensions);
         return $this;
     }
 
@@ -204,7 +213,7 @@ class Extension extends \Zend\Validator\AbstractValidator
 
         $extensions = $this->getExtension();
 
-        if ($this->_case && (in_array($info['extension'], $extensions))) {
+        if ($this->getCase() && (in_array($info['extension'], $extensions))) {
             return true;
         } else if (!$this->getCase()) {
             foreach ($extensions as $extension) {
@@ -229,14 +238,14 @@ class Extension extends \Zend\Validator\AbstractValidator
         if ($file !== null) {
             if (is_array($file)) {
                 if(array_key_exists('name', $file)) {
-                    $this->_value = $file['name'];
+                    $this->value = $file['name'];
                 }
             } else if (is_string($file)) {
-                $this->_value = $file;
+                $this->value = $file;
             }
         }
 
-        $this->_error($errorType);
+        $this->error($errorType);
         return false;
     }
 }

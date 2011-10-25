@@ -659,7 +659,7 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             <classname>Zend_Form_Element_Password</classname> ermöglicht das durch den Aufruf von
-            <methodname>setObscureValue(true)</methodname> auf jeder Prüfung (und stellt sicher das
+            <methodname>setValueObscured(true)</methodname> auf jeder Prüfung (und stellt sicher das
             das Passwort in der Prüfungs Fehlermeldung verschleiert wird), und verwendet den
             'formPassword' View Helfer (welcher den an Ihn übergebenen Wert nicht anzeigt).
         </para>

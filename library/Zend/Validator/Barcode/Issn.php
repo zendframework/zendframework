@@ -33,22 +33,16 @@ namespace Zend\Validator\Barcode;
 class Issn extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
+     * Constructor for this barcode adapter
+     *
+     * @return void
      */
-    protected $_length = array(8, 13);
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789X';
-
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_gtin';
+    public function __construct()
+    {
+        $this->setLength(array(8, 13));
+        $this->setCharacters('0123456789X');
+        $this->setChecksum('_gtin');
+    }
 
     /**
      * Allows X on length of 8 chars
@@ -56,7 +50,7 @@ class Issn extends AbstractAdapter
      * @param  string $value The barcode to check for allowed characters
      * @return boolean
      */
-    public function checkChars($value)
+    public function hasValidCharacters($value)
     {
         if (strlen($value) != 8) {
             if (strpos($value, 'X') !== false) {
@@ -64,7 +58,7 @@ class Issn extends AbstractAdapter
             }
         }
 
-        return parent::checkChars($value);
+        return parent::hasValidCharacters($value);
     }
 
     /**
@@ -73,15 +67,15 @@ class Issn extends AbstractAdapter
      * @param  string $value The barcode to check the checksum for
      * @return boolean
      */
-    public function checksum($value)
+    public function hasValidChecksum($value)
     {
         if (strlen($value) == 8) {
-            $this->_checksum = '_issn';
+            $this->setChecksum('_issn');
         } else {
-            $this->_checksum = '_gtin';
+            $this->setChecksum('_gtin');
         }
 
-        return parent::checksum($value);
+        return parent::hasValidChecksum($value);
     }
 
     /**

@@ -33,20 +33,14 @@ namespace Zend\Validator\Barcode;
 class Upca extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
+     * Constructor for this barcode adapter
+     *
+     * @return void
      */
-    protected $_length = 12;
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
-
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_gtin';
+    public function __construct()
+    {
+        $this->setLength(12);
+        $this->setCharacters('0123456789');
+        $this->setChecksum('_gtin');
+    }
 }

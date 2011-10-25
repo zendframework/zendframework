@@ -97,7 +97,7 @@ class FloatTest extends \PHPUnit_Framework_TestCase
             array('not a float', false),
             );
         foreach ($valuesExpected as $element) {
-            $this->assertEquals($element[1], $this->_validator->isValid($element[0]));
+            $this->assertEquals($element[1], $this->_validator->isValid($element[0]), 'Failed expecting ' . $element[0] . ' being ' . ($element[1] ? 'true' : 'false'));
         }
     }
 

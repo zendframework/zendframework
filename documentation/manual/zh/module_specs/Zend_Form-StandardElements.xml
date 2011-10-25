@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><info><title>Zend Framework 带有的标准表单元素 </title></info>
-    
+
 
     <para>
         Zend Framework 带有的具体元素类涵盖了大部分的 HTML 表单元素。其中大部分当装饰元素时，指定了特定的视图助手来用，但有一些还提供了另外的功能。下面是这些类的列表，还有它们提供的功能的描述。
     </para>
 
     <section xml:id="zend.form.standardElements.button"><info><title>Zend_Form_Element_Button</title></info>
-        
+
 
         <para>
             用来生成 HTML 按钮元素， <code>Zend_Form_Element_Button</code> 继承 <link linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link>，并派生它的定制功能。它为装饰指定 'formButton' 视图助手。
@@ -27,7 +27,7 @@
     </section>
 
     <section xml:id="zend.form.standardElements.checkbox"><info><title>Zend_Form_Element_Checkbox</title></info>
-        
+
 
         <para>
             HTML checkboxes 让你返回一个特定的值，但基本上以布尔来操作：当它被 check，值就被提交；当没有 check，什么都不提交。在内部，<code>Zend_Form_Element_Checkbox</code> 强制这个状态。
@@ -47,7 +47,7 @@
     </section>
 
     <section xml:id="zend.form.standardElements.hidden"><info><title>Zend_Form_Element_Hidden</title></info>
-        
+
 
         <para>
             隐藏元素的数据只提交，用户不用处理。 <code>Zend_Form_Element_Hidden</code> 使用 'formHidden' 视图助手来完成它。
@@ -55,7 +55,7 @@
     </section>
 
     <section xml:id="zend.form.standardElements.hash"><info><title>Zend_Form_Element_Hash</title></info>
-        
+
 
         <para>
             该元素提供保护以防止 CSRF 攻击表单，确保提交的数据来自于用户的会话，而不是流氓脚本。保护是通过添加一个哈希（hash）元素给表单并在表单提交时校验它来达成的。
@@ -83,7 +83,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
     </section>
 
     <section xml:id="zend.form.standardElements.Image"><info><title>Zend_Form_Element_Image</title></info>
-        
+
 
         <para>
             图像也可以用作表单元素，并允许你指定图形元素作为表单按钮。
@@ -99,7 +99,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
     </section>
 
     <section xml:id="zend.form.standardElements.multiCheckbox"><info><title>Zend_Form_Element_MultiCheckbox</title></info>
-        
+
 
         <para>
             你经常会有一组相关的 checkboxes，并且想把结果组成组，这个很像 <link linkend="zend.form.standardElements.multiselect">Multiselect</link>，但是这个不是下拉列表，而是需要显示 checkbox/值对。
@@ -153,7 +153,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.multiselect"><info><title>Zend_Form_Element_Multiselect</title></info>
-        
+
 
         <para>
             XHTML <code>select</code> 元素允许一个 'multiple' 属性，表明可以提交多重选项，而不是一个。<code>Zend_Form_Element_Multiselect</code> 继承 <link linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link> 并设置 <code>multiple</code> 属性为 'multiple' 。像其它从 <code>Zend_Form_Element_Multi</code> 基础类继承的类一样，你可以使用下列函数来处理选项的选择：
@@ -182,19 +182,19 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.password"><info><title>Zend_Form_Element_Password</title></info>
-        
+
 
         <para>
             密码元素基本上是普通的文本元素 －－ 除了你不想它以错误消息的形式显示或重新显示表单的时候显示出来。
         </para>
 
         <para>
-            <code>Zend_Form_Element_Password</code> 在每个校验器（确保密码在校验器错误消息上是不透明的）通过调用 <code>setObscureValue(true)</code> 和使用 'formPassword' 视图助手（它不显示传递给它的值）来完成它。
+            <code>Zend_Form_Element_Password</code> 在每个校验器（确保密码在校验器错误消息上是不透明的）通过调用 <code>setValueObscured(true)</code> 和使用 'formPassword' 视图助手（它不显示传递给它的值）来完成它。
         </para>
     </section>
 
     <section xml:id="zend.form.standardElements.radio"><info><title>Zend_Form_Element_Radio</title></info>
-        
+
 
         <para>
             Radio 元素让你指定若干选项，而你只需要一个返回值。<code>Zend_Form_Element_Radio</code> 继承基础类  <code>Zend_Form_Element_Multi</code>，让你指定若干选项并使用 <code>formRadio</code> 视图助手来显示。
@@ -223,7 +223,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.reset"><info><title>Zend_Form_Element_Reset</title></info>
-        
+
 
         <para>
             Reset 按钮一般用于清理表单，而不是要提交的数据。然而，因为它们用于显示，所以它们属于标准元素。
@@ -235,7 +235,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.select"><info><title>Zend_Form_Element_Select</title></info>
-        
+
 
         <para>
             Select boxes 是限定从给定数据里选择的一个通用的办法。<code>Zend_Form_Element_Select</code> 让你迅速简便地完成它。
@@ -268,7 +268,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.submit"><info><title>Zend_Form_Element_Submit</title></info>
-        
+
 
         <para>
             提交按钮用于提交表单。你可以使用多个提交按钮，你可以使用按钮提交表单来决定哪个动作处理提交的数据。<code>Zend_Form_Element_Submit</code> 通过添加 <code>isChecked()</code>方法使决定变得容易。因为只有一个按钮由表单来提交，在处理和校验表单之后，你可以在每个提交按钮上调用这个方法来确定使用了哪个。
@@ -284,7 +284,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.text"><info><title>Zend_Form_Element_Text</title></info>
-        
+
 
         <para>
             到目前为止，大部分流行的表单元素是文本元素，对于有限的文本输入，对大部分数据输入来说是个理想的元素。<code>Zend_Form_Element_Text</code> 使用 'formText' 视图助手来显示元素。
@@ -292,7 +292,7 @@ $element->setValue(array('bar', 'bat'));
     </section>
 
     <section xml:id="zend.form.standardElements.textarea"><info><title>Zend_Form_Element_Textarea</title></info>
-        
+
 
         <para>
             Textareas 用于大量的文本处理，对提交的文本的长度没有限制（除非你的服务器或PHP有限制）。<code>Zend_Form_Element_Textarea</code> 使用 'textArea' 视图助手来显示元素，值就是元素的内容。

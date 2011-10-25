@@ -76,17 +76,17 @@ class Changefreq extends \Zend\Validator\AbstractValidator
     public function isValid($value)
     {
         if (!is_string($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
-        $this->_setValue($value);
+        $this->setValue($value);
         if (!is_string($value)) {
             return false;
         }
 
         if (!in_array($value, $this->_changeFreqs, true)) {
-            $this->_error(self::NOT_VALID);
+            $this->error(self::NOT_VALID);
             return false;
         }
 

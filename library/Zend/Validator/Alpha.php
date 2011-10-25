@@ -116,14 +116,14 @@ class Alpha extends AbstractValidator
     public function isValid($value)
     {
         if (!is_string($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if ('' === $value) {
-            $this->_error(self::STRING_EMPTY);
+            $this->error(self::STRING_EMPTY);
             return false;
         }
 
@@ -134,7 +134,7 @@ class Alpha extends AbstractValidator
         self::$_filter->setAllowWhiteSpace($this->allowWhiteSpace);
 
         if ($value !== self::$_filter->filter($value)) {
-            $this->_error(self::NOT_ALPHA);
+            $this->error(self::NOT_ALPHA);
             return false;
         }
 

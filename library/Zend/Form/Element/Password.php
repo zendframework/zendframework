@@ -84,7 +84,7 @@ class Password extends Xhtml
     {
         foreach ($this->getValidators() as $validator) {
             if ($validator instanceof AbstractValidator) {
-                $validator->setObscureValue(true);
+                $validator->setValueObscured(true);
             }
         }
         return parent::isValid($value, $context);

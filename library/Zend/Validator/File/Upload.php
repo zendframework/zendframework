@@ -35,7 +35,7 @@ namespace Zend\Validator\File;
  */
 class Upload extends \Zend\Validator\AbstractValidator
 {
-    /**@#+
+    /**
      * @const string Error constants
      */
     const INI_SIZE       = 'fileUploadErrorIniSize';
@@ -48,7 +48,6 @@ class Upload extends \Zend\Validator\AbstractValidator
     const ATTACK         = 'fileUploadErrorAttack';
     const FILE_NOT_FOUND = 'fileUploadErrorFileNotFound';
     const UNKNOWN        = 'fileUploadErrorUnknown';
-    /**@#-*/
 
     /**
      * @var array Error message templates
@@ -66,11 +65,9 @@ class Upload extends \Zend\Validator\AbstractValidator
         self::UNKNOWN        => "Unknown error while uploading file '%value%'"
     );
 
-    /**
-     * Internal array of files
-     * @var array
-     */
-    protected $_files = array();
+    protected $options = array(
+        'files' => array(),
+    );
 
     /**
      * Sets validator options
@@ -79,16 +76,16 @@ class Upload extends \Zend\Validator\AbstractValidator
      * If no files are given the $_FILES array will be used automatically.
      * NOTE: This validator will only work with HTTP POST uploads!
      *
-     * @param  array|Zend_Config $files Array of files in syntax of \Zend\File\Transfer\Transfer
+     * @param  array|Zend_Config $options Array of files in syntax of \Zend\File\Transfer\Transfer
      * @return void
      */
-    public function __construct($files = array())
+    public function __construct($options = array())
     {
-        if ($files instanceof \Zend\Config\Config) {
-            $files = $files->toArray();
+        if (!array_key_exists('files', $options)) {
+            $options = array('files' => $options);
         }
 
-        $this->setFiles($files);
+        parent::__construct($options);
     }
 
     /**
@@ -102,13 +99,13 @@ class Upload extends \Zend\Validator\AbstractValidator
     {
         if ($file !== null) {
             $return = array();
-            foreach ($this->_files as $name => $content) {
+            foreach ($this->options['files'] as $name => $content) {
                 if ($name === $file) {
-                    $return[$file] = $this->_files[$name];
+                    $return[$file] = $this->options['files'][$name];
                 }
 
                 if ($content['name'] === $file) {
-                    $return[$name] = $this->_files[$name];
+                    $return[$name] = $this->options['files'][$name];
                 }
             }
 
@@ -119,7 +116,7 @@ class Upload extends \Zend\Validator\AbstractValidator
             return $return;
         }
 
-        return $this->_files;
+        return $this->options['files'];
     }
 
     /**
@@ -131,18 +128,18 @@ class Upload extends \Zend\Validator\AbstractValidator
     public function setFiles($files = array())
     {
         if (count($files) === 0) {
-            $this->_files = $_FILES;
+            $this->options['files'] = $_FILES;
         } else {
-            $this->_files = $files;
+            $this->options['files'] = $files;
         }
 
-        if ($this->_files === NULL) {
-            $this->_files = array();
+        if ($this->options['files'] === NULL) {
+            $this->options['files'] = array();
         }
 
-        foreach($this->_files as $file => $content) {
+        foreach($this->options['files'] as $file => $content) {
             if (!isset($content['error'])) {
-                unset($this->_files[$file]);
+                unset($this->options['files'][$file]);
             }
         }
 
@@ -158,17 +155,18 @@ class Upload extends \Zend\Validator\AbstractValidator
      */
     public function isValid($value, $file = null)
     {
-        $this->_setValue($value);
-        if (array_key_exists($value, $this->_files)) {
-            $files[$value] = $this->_files[$value];
+        $files = array();
+        $this->setValue($value);
+        if (array_key_exists($value, $this->getFiles())) {
+            $files = array_merge($files, $this->getFiles($value));
         } else {
-            foreach ($this->_files as $file => $content) {
+            foreach ($this->getFiles() as $file => $content) {
                 if (isset($content['name']) && ($content['name'] === $value)) {
-                    $files[$file] = $this->_files[$file];
+                    $files = array_merge($files, $this->getFiles($file));
                 }
 
                 if (isset($content['tmp_name']) && ($content['tmp_name'] === $value)) {
-                    $files[$file] = $this->_files[$file];
+                    $files = array_merge($files, $this->getFiles($file));
                 }
             }
         }
@@ -220,7 +218,7 @@ class Upload extends \Zend\Validator\AbstractValidator
             }
         }
 
-        if (count($this->_messages) > 0) {
+        if (count($this->getMessages()) > 0) {
             return false;
         } else {
             return true;
@@ -246,7 +244,7 @@ class Upload extends \Zend\Validator\AbstractValidator
             }
         }
 
-        $this->_error($errorType);
+        $this->error($errorType);
         return false;
     }
 }

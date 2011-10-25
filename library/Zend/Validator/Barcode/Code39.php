@@ -33,24 +33,6 @@ namespace Zend\Validator\Barcode;
 class Code39 extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = -1;
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ -.$/+%';
-
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_code39';
-
-    /**
      * @var array
      */
     protected $_check = array(
@@ -64,15 +46,16 @@ class Code39 extends AbstractAdapter
     );
 
     /**
-     * Constructor
-     *
-     * Sets check flag to false.
+     * Constructor for this barcode adapter
      *
      * @return void
      */
     public function __construct()
     {
-        $this->setCheck(false);
+        $this->setLength(-1);
+        $this->setCharacters('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ -.$/+%');
+        $this->setChecksum('_code39');
+        $this->useChecksum(false);
     }
 
     /**

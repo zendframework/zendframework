@@ -50,18 +50,14 @@ class PostCode extends AbstractValidator
     );
 
     /**
-     * Locale to use
+     * Options for this validator
      *
-     * @var string
+     * @var array
      */
-    protected $_locale;
-
-    /**
-     * Manual postal code format
-     *
-     * @var unknown_type
-     */
-    protected $_format;
+    protected $options = array(
+        'format' => null, // Manual postal code format
+        'locale' => null, // Locale to use
+    );
 
     /**
      * Constructor for the integer validator
@@ -74,28 +70,16 @@ class PostCode extends AbstractValidator
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        }
-
         if (empty($options)) {
             if (\Zend\Registry::isRegistered('Zend_Locale')) {
                 $this->setLocale(\Zend\Registry::get('Zend_Locale'));
-            }
-        } elseif (is_array($options)) {
-            // Received
-            if (array_key_exists('locale', $options)) {
-                $this->setLocale($options['locale']);
-            }
-
-            if (array_key_exists('format', $options)) {
-                $this->setFormat($options['format']);
             }
         } elseif ($options instanceof Locale\Locale || is_string($options)) {
             // Received Locale object or string locale
             $this->setLocale($options);
         }
 
+        parent::__construct($options);
         $format = $this->getFormat();
         if (empty($format)) {
             throw new Exception\InvalidArgumentException("A postcode-format string has to be given for validation");
@@ -109,7 +93,7 @@ class PostCode extends AbstractValidator
      */
     public function getLocale()
     {
-        return $this->_locale;
+        return $this->options['locale'];
     }
 
     /**
@@ -122,9 +106,9 @@ class PostCode extends AbstractValidator
      */
     public function setLocale($locale = null)
     {
-        $this->_locale = Locale\Locale::findLocale($locale);
-        $locale        = new Locale\Locale($this->_locale);
-        $region        = $locale->getRegion();
+        $this->options['locale'] = Locale\Locale::findLocale($locale);
+        $locale                  = new Locale\Locale($this->getLocale());
+        $region                  = $locale->getRegion();
         if (empty($region)) {
             throw new Exception\InvalidArgumentException("Unable to detect a region for the locale '$locale'");
         }
@@ -132,7 +116,7 @@ class PostCode extends AbstractValidator
         $format = Locale\Locale::getTranslation(
             $locale->getRegion(),
             'postaltoterritory',
-            $this->_locale
+            $this->getLocale()
         );
 
         if (empty($format)) {
@@ -150,7 +134,7 @@ class PostCode extends AbstractValidator
      */
     public function getFormat()
     {
-        return $this->_format;
+        return $this->options['format'];
     }
 
     /**
@@ -174,7 +158,7 @@ class PostCode extends AbstractValidator
             $format .= '$/';
         }
 
-        $this->_format = $format;
+        $this->options['format'] = $format;
         return $this;
     }
 
@@ -186,15 +170,15 @@ class PostCode extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
         if (!is_string($value) && !is_int($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
         $format = $this->getFormat();
         if (!preg_match($format, $value)) {
-            $this->_error(self::NO_MATCH);
+            $this->error(self::NO_MATCH);
             return false;
         }
 

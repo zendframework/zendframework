@@ -179,8 +179,8 @@ class IsCompressedTest extends \PHPUnit_Framework_TestCase
         $validator = new File\IsCompressed(array(
             'image/gif',
             'image/jpg',
-            'magicfile'   => $magicFile,
-            'headerCheck' => true));
+            'magicFile'   => $magicFile,
+            'enableHeaderCheck' => true));
 
         $this->assertEquals($magicFile, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());

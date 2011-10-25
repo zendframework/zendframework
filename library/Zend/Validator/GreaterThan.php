@@ -78,7 +78,7 @@ class GreaterThan extends AbstractValidator
      * @param  mixed|array|Config $options
      * @return void
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if ($options instanceof Config) {
             $options = $options->toArray();
@@ -157,16 +157,16 @@ class GreaterThan extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
         if ($this->_inclusive) {
             if ($this->_min > $value) {
-                $this->_error(self::NOT_GREATER_INCLUSIVE);
+                $this->error(self::NOT_GREATER_INCLUSIVE);
                 return false;
             }
         } else {
             if ($this->_min >= $value) {
-                $this->_error(self::NOT_GREATER);
+                $this->error(self::NOT_GREATER);
                 return false;
             }
         }

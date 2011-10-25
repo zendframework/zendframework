@@ -109,20 +109,6 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @return void
-     * @deprecated Since 1.5.0
-     */
-    public function testEmptyStringValueResultsInProperValidationFailureErrors()
-    {
-        $this->assertFalse($this->_validator->isValid(''));
-        $errors = $this->_validator->getErrors();
-        $arrayExpected = array(
-            Validator\Digits::STRING_EMPTY
-            );
-        $this->assertThat($errors, $this->identicalTo($arrayExpected));
-    }
-
-    /**
-     * @return void
      */
     public function testInvalidValueResultsInProperValidationFailureMessages()
     {
@@ -132,20 +118,6 @@ class DigitsTest extends \PHPUnit_Framework_TestCase
             Validator\Digits::NOT_DIGITS => '\'#\' must contain only digits'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
-    }
-
-    /**
-     * @return void
-     * @deprecated Since 1.5.0
-     */
-    public function testInvalidValueResultsInProperValidationFailureErrors()
-    {
-        $this->assertFalse($this->_validator->isValid('#'));
-        $errors = $this->_validator->getErrors();
-        $arrayExpected = array(
-            Validator\Digits::NOT_DIGITS
-            );
-        $this->assertThat($errors, $this->identicalTo($arrayExpected));
     }
 
     /**

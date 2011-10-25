@@ -33,17 +33,14 @@ namespace Zend\Validator\Barcode;
 class Code128 extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
+     * Constructor for this barcode adapter
+     *
+     * @return void
      */
-    protected $_length = -1;
-
-    /**
-     * Allowed barcode characters
-     * Not needed for validation
-     * @var string
-     */
-    protected $_characters = array(
+    public function __construct()
+    {
+        $this->setLength(-1);
+        $this->setCharacters(array(
         'A' => array(
              0 => ' ',  1 => '!',  2 => '"',  3 => '#',  4 => '$',  5 => '%',  6 => '&',  7 => "'",
              8 => '(',  9 => ')', 10 => '*', 11 => '+', 12 => ',', 13 => '-', 14 => '.', 15 => '/',
@@ -88,13 +85,10 @@ class Code128 extends AbstractAdapter
             80 => '80', 81 => '81', 82 => '82', 83 => '83', 84 => '84', 85 => '85', 86 => '86', 87 => '87',
             88 => '88', 89 => '89', 90 => '90', 91 => '91', 92 => '92', 93 => '93', 94 => '94', 95 => '95',
             96 => '96', 97 => '97', 98 => '98', 99 => '99',100 => 'ä', 101 => 'à', 102 => 'å', 103 => '‡',
-           104 => 'ˆ', 105 => '‰', 106 => 'Š'));
+           104 => 'ˆ', 105 => '‰', 106 => 'Š')));
+        $this->setChecksum('_code128');
 
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_code128';
+    }
 
     /**
      * Checks for allowed characters within the barcode
@@ -102,7 +96,7 @@ class Code128 extends AbstractAdapter
      * @param  string $value The barcode to check for allowed characters
      * @return boolean
      */
-    public function checkChars($value)
+    public function hasValidCharacters($value)
     {
         if (!is_string($value)) {
             return false;
@@ -196,7 +190,7 @@ class Code128 extends AbstractAdapter
         $pos        = 1;
         $set        = $this->_getCodingSet($value);
         $read       = $set;
-        $hascheck   = $this->_hasChecksum;
+        $usecheck   = $this->useChecksum(null);
         $char       = iconv_substr($value, 0, 1, 'UTF-8');
         if ($char == '‡') {
             $sum = 103;
@@ -204,7 +198,7 @@ class Code128 extends AbstractAdapter
             $sum = 104;
         } else if ($char == '‰') {
             $sum = 105;
-        } else if ($hascheck == true) {
+        } else if ($usecheck == true) {
             // no start value, unable to detect an proper checksum
             return false;
         }
@@ -281,7 +275,7 @@ class Code128 extends AbstractAdapter
 
         if ((iconv_strpos($value, 'Š', 0, 'UTF-8') != 1) || (iconv_strlen($value, 'UTF-8') != 2)) {
             // return false if checksum is not readable and true if no startvalue is detected
-            return (!$hascheck);
+            return (!$usecheck);
         }
 
         $mod = $sum % 103;

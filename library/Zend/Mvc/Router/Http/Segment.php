@@ -237,21 +237,27 @@ class Segment implements BaseRoute
         foreach ($parts as $part) {
             switch ($part[0]) {
                 case 'literal':
-                case 'translated-literal':
                     $path .= $part[1];
                     break;
                 
                 case 'parameter':
-                case 'translated-parameter':
                     if (!isset($params[$part[1]])) {
                         return null;
                     }
                     
-                    $path .= $params[$part[1]];
+                    $path .= urlencode($params[$part[1]]);
                     break;
                 
                 case 'optional':
                     $path .= $this->buildPath($part[1], $params);
+                    break;
+                
+                case 'translated-literal':
+                    throw new Exception\RuntimeException('Translated literals are not implemented yet');
+                    break;
+                
+                case 'translated-parameter':
+                    throw new Exception\RuntimeException('Translated parameters are not implemented yet');
                     break;
             }
         }
@@ -290,6 +296,8 @@ class Segment implements BaseRoute
         foreach ($matches as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
                 unset($matches[$key]);
+            } else {
+                $matches[$key] = urldecode($matches[$key]);
             }
         }
 

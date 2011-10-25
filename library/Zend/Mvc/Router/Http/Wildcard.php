@@ -31,7 +31,7 @@ use Traversable,
     Zend\Mvc\Router\Route;
 
 /**
- * Regex route.
+ * Wildcard route.
  *
  * @package    Zend_Mvc_Router
  * @subpackage Http
@@ -39,44 +39,33 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Regex implements Route
+class Wildcard implements Route
 {
     /**
-     * Regex to match.
-     * 
+     * Delimiter between keys and values.
+     *
      * @var string
      */
-    protected $regex;
+    protected $keyValueDelimiter;
 
     /**
-     * Default values.
+     * Delimtier before parameters.
      *
      * @var array
      */
-    protected $defaults;
+    protected $paramDelimiter;
 
     /**
-     * Specification for URL assembly.
-     *
-     * Parameters accepting subsitutions should be denoted as "%key%"
+     * Create a new wildcard route.
      * 
-     * @var string
-     */
-    protected $spec;
-    
-    /**
-     * Create a new regex route.
-     * 
-     * @param  string $regex
-     * @param  string $spec
-     * @param  array  $defaults 
+     * @param  string $keyValueDelimiter
+     * @param  string $paramDelimiter
      * @return void
      */
-    public function __construct($regex, $spec, array $defaults = array())
+    public function __construct($keyValueDelimiter = '/', $paramDelimiter = '/')
     {
-        $this->regex    = $regex;
-        $this->spec     = $spec;
-        $this->defaults = $defaults;
+        $this->keyValueDelimiter = $keyValueDelimiter;
+        $this->paramDelimiter    = $paramDelimiter;
     }
     
     /**
@@ -97,19 +86,15 @@ class Regex implements Route
             $options = IteratorToArray::convert($options);
         }
 
-        if (!isset($options['regex'])) {
-            throw new Exception\InvalidArgumentException('Missing "regex" in options array');
-        }
-        
-        if (!isset($options['spec'])) {
-            throw new Exception\InvalidArgumentException('Missing "spec" in options array');
+        if (!isset($options['key_value_delimiter'])) {
+            $options['key_value_delimiter'] = '/';
         }
 
-        if (!isset($options['defaults'])) {
-            $options['defaults'] = array();
+        if (!isset($options['param_delimiter'])) {
+            $options['param_delimiter'] = '/';
         }
 
-        return new static($options['regex'], $options['spec'], $options['defaults']);
+        return new static($options['key_value_delimiter'], $options['param_delimiter']);
     }
 
     /**
@@ -129,26 +114,27 @@ class Regex implements Route
         $path = $uri->getPath();
 
         if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
-        } else {
-            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
+            $path = substr($path, $pathOffset);
         }
 
-        if (!$result) {
-            return null;
-        }
-        
-        $matchedLength = strlen($matches[0]);
+        $matches = array();
+        $params  = explode($this->paramDelimiter, $path);
 
-        foreach ($matches as $key => $value) {
-            if (is_numeric($key) || is_int($key)) {
-                unset($matches[$key]);
-            } else {
-                $matches[$key] = urldecode($matches[$key]);
+        if ($params) {
+            if ($params[0] !== '') {
+                return null;
+            }
+
+            array_shift($params);
+
+            $count = count($params);
+
+            for ($i = 0; $i < $count; $i += 2) {
+                $matches[urldecode($params[$i])] = (isset($params[$i + 1]) ? urldecode($params[$i + 1]) : null);
             }
         }
 
-        return new RouteMatch(array_merge($this->defaults, $matches), $matchedLength);
+        return new RouteMatch($matches, strlen($path));
     }
 
     /**
@@ -161,17 +147,12 @@ class Regex implements Route
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $url    = $this->spec;
-        $params = array_merge($this->defaults, $params);
-        
+        $elements = array();
+
         foreach ($params as $key => $value) {
-            $spec = '%' . $key . '%';
-            
-            if (strpos($url, $spec) !== false) {
-                $url = str_replace($spec, urlencode($value), $url);
-            }
+            $elements[] = urlencode($key) . $this->keyValueDelimiter . urlencode($value);
         }
-        
-        return $url;
+
+        return $this->paramDelimiter . implode($this->paramDelimiter, $elements);
     }
 }

@@ -4237,4 +4237,61 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $t2 = $this->form->getDecorators();
         $this->assertEquals($t1, $t2);
     }
+    
+    /**
+     * @group ZF-11831
+     */
+    public function testElementsOfSubFormReceiveCorrectDefaultTranslator()
+    {
+        $isEmptyKey = \Zend\Validator\NotEmpty::IS_EMPTY;
+        
+        // Global default translator
+        $trDefault = new Translator(array(
+            'adapter' => 'arrayAdapter',
+            'content' => array(
+                $isEmptyKey => 'Default'
+            ),
+            'locale' => 'en'
+        ));
+        Registry::set('Zend_Translate', $trDefault);
+        
+        // Translator to use for elements
+        $trElement = new Translator(array(
+            'adapter' => 'arrayAdapter',
+            'content' => array(
+                $isEmptyKey =>'Element'
+            ),
+            'locale' => 'en'
+        ));
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($trElement);
+        
+        // Change the form's translator
+        $form = new Form();
+        $form->addElement(new \Zend\Form\Element\Text('foo', array(
+            'required'   => true,
+            'validators' => array('NotEmpty')
+        )));
+        
+        // Create a subform with it's own validator
+        $sf1 = new SubForm();
+        $sf1->addElement(new \Zend\Form\Element\Text('foosub', array(
+            'required'   => true,
+            'validators' => array('NotEmpty')
+        )));
+        $form->addSubForm($sf1, 'Test1');
+        
+        $form->isValid(array());
+
+        $messages = $form->getMessages();
+        $this->assertEquals(
+            'Element', 
+            @$messages['foo'][$isEmptyKey], 
+            'Form element received wrong validator'
+        );
+        $this->assertEquals(
+            'Element', 
+            @$messages['Test1']['foosub'][$isEmptyKey], 
+            'SubForm element received wrong validator'
+        );        
+    }
 }

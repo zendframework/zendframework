@@ -15,12 +15,14 @@ class ManagerOptionsTest extends TestCase
             'cache_dir'           => __DIR__,
             'enable_config_cache' => true,
             'manifest_dir'        => __DIR__,
+            'config_cache_key'    => 'foo',
         ));
         $this->assertSame($options->getCacheDir(), __DIR__);
         $this->assertTrue($options->getEnableConfigCache());
         $this->assertNotNull(strstr($options->getCacheFilePath(), __DIR__));
         $this->assertNotNull(strstr($options->getCacheFilePath(), '.php'));
         $this->assertSame($options->getManifestDir(), __DIR__);
+        $this->assertSame($options->getConfigCacheKey(), 'foo');
     }
 
     public function testCanAccessKeysAsProperties()

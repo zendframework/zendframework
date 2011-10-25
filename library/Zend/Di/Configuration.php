@@ -80,6 +80,7 @@ class Configuration
                                             $classDefinition->addMethodParameter($methodName, $paramName, $paramInfo);
                                         }
                                     }
+                                    break;
                                 default:
                                     $methodName = $classDefKey;
                                     $methodInfo = $classDefData;

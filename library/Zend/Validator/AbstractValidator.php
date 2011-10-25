@@ -22,7 +22,10 @@
  * @namespace
  */
 namespace Zend\Validator;
-use Zend\Translator,
+
+use Traversable,
+    Zend\Stdlib\IteratorToArray,
+    Zend\Translator,
     Zend\Validator\Exception\InvalidArgumentException;
 
 /**
@@ -78,8 +81,8 @@ abstract class AbstractValidator implements Validator
     public function __construct($options = null)
     {
         // The abstract constructor allows no scalar values
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
         }
 
         if (isset($this->_messageTemplates)) {
@@ -328,7 +331,7 @@ abstract class AbstractValidator implements Validator
 
         $length = self::getMessageLength();
         if (($length > -1) && (strlen($message) > $length)) {
-            $message = substr($message, 0, (self::getMessageLength() - 3)) . '...';
+            $message = substr($message, 0, ($length - 3)) . '...';
         }
 
         return $message;

@@ -23,9 +23,9 @@
  */
 namespace Zend\Validator;
 
+use Zend\Filter\Alpha as AlphaFilter;
+
 /**
- * @uses       \Zend\Filter\Alpha
- * @uses       \Zend\Validator\AbstractValidator
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -47,9 +47,9 @@ class Alpha extends AbstractValidator
     /**
      * Alphabetic filter used for validation
      *
-     * @var \Zend\Filter\Alpha
+     * @var AlphaFilter
      */
-    protected static $_filter = null;
+    protected static $filter = null;
 
     /**
      * Validation failure message template definitions
@@ -70,19 +70,11 @@ class Alpha extends AbstractValidator
      */
     public function __construct($allowWhiteSpace = false)
     {
-        if ($allowWhiteSpace instanceof \Zend\Config\Config) {
-            $allowWhiteSpace = $allowWhiteSpace->toArray();
-        }
+        parent::__construct(is_array($allowWhiteSpace) ? $allowWhiteSpace : null);
 
-        if (is_array($allowWhiteSpace)) {
-            if (array_key_exists('allowWhiteSpace', $allowWhiteSpace)) {
-                $allowWhiteSpace = $allowWhiteSpace['allowWhiteSpace'];
-            } else {
-                $allowWhiteSpace = false;
-            }
+        if (is_scalar($allowWhiteSpace)) {
+            $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
         }
-
-        $this->allowWhiteSpace = (boolean) $allowWhiteSpace;
     }
 
     /**
@@ -127,13 +119,13 @@ class Alpha extends AbstractValidator
             return false;
         }
 
-        if (null === self::$_filter) {
-            self::$_filter = new \Zend\Filter\Alpha();
+        if (null === self::$filter) {
+            self::$filter = new AlphaFilter();
         }
 
-        self::$_filter->setAllowWhiteSpace($this->allowWhiteSpace);
+        self::$filter->setAllowWhiteSpace($this->allowWhiteSpace);
 
-        if ($value !== self::$_filter->filter($value)) {
+        if ($value !== self::$filter->filter($value)) {
             $this->error(self::NOT_ALPHA);
             return false;
         }

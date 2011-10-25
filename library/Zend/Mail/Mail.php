@@ -157,11 +157,17 @@ class Mail extends Mime\Message
     /**#@-*/
 
     /**
+     * Mail transport object
+     *
+     * @var \Zend\Mail\AbstractTransport
+     */
+    protected $transport = null;
+
+    /**
      * Flag: whether or not email has attachments
      * @var boolean
      */
     public $hasAttachments = false;
-
 
     /**
      * Sets the default mail transport for all following uses of
@@ -185,6 +191,10 @@ class Mail extends Mime\Message
      */
     public static function getDefaultTransport()
     {
+        if (! self::$_defaultTransport instanceof AbstractTransport) {
+            $transport = new Transport\Sendmail();
+        }
+
         return self::$_defaultTransport;
     }
 
@@ -207,6 +217,35 @@ class Mail extends Mime\Message
         if ($charset != null) {
             $this->_charset = $charset;
         }
+    }
+
+    /**
+     * Set the transport object
+     *
+     * @param  AbstractTransport $transport
+     * @return \Zend\Mail\Mail
+     */
+    public function setTransport(AbstractTransport $transport)
+    {
+        $this->transport = $transport;
+        return $this;
+    }
+
+    /**
+     * Get transport object
+     *
+     * If no transport object is set, will set and return the global default
+     * transport object
+     *
+     * @return \Zend\Mail\AbstractTransport
+     */
+    public function getTransport()
+    {
+        if (! $this->transport) {
+            $this->transport = self::getDefaultTransport();
+        }
+
+        return $this->transport;
     }
 
     /**
@@ -1086,11 +1125,7 @@ class Mail extends Mime\Message
     public function send($transport = null)
     {
         if ($transport === null) {
-            if (! self::$_defaultTransport instanceof AbstractTransport) {
-                $transport = new Transport\Sendmail();
-            } else {
-                $transport = self::$_defaultTransport;
-            }
+            $transport = $this->getTransport();
         }
 
         if ($this->_date === null) {

@@ -120,7 +120,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $helper = new Helper\Translator('something');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setTranslator('something');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->getLocale();
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 
@@ -147,7 +147,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setLocale('de');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 

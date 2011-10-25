@@ -124,10 +124,10 @@ class File extends AbstractDecorator implements FileDecorator
             for ($i = 0; $i < $count; ++$i) {
                 $htmlAttribs        = $attribs;
                 $htmlAttribs['id'] .= '-' . $i;
-                $markup[] = $view->formFile($name, null, $htmlAttribs);
+                $markup[] = $view->formFile($name, $htmlAttribs);
             }
         } else {
-            $markup[] = $view->formFile($name, null, $attribs);
+            $markup[] = $view->formFile($name, $attribs);
         }
 
         $markup = implode($separator, $markup);

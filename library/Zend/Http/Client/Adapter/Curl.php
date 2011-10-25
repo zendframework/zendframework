@@ -99,7 +99,7 @@ class Curl implements HttpAdapter, Stream
         $this->invalidOverwritableCurlOptions = array(
             CURLOPT_HTTPGET,
             CURLOPT_POST,
-            CURLOPT_PUT,
+            CURLOPT_UPLOAD,
             CURLOPT_CUSTOMREQUEST,
             CURLOPT_HEADER,
             CURLOPT_RETURNTRANSFER,
@@ -306,7 +306,7 @@ class Curl implements HttpAdapter, Stream
                         $body = '';
                     }
 
-                    $curlMethod = CURLOPT_PUT;
+                    $curlMethod = CURLOPT_UPLOAD;
                 } else {
                     $curlMethod = CURLOPT_CUSTOMREQUEST;
                     $curlValue = "PUT";
@@ -338,7 +338,7 @@ class Curl implements HttpAdapter, Stream
                 throw new AdapterException\InvalidArgumentException("Method currently not supported");
         }
 
-        if(is_resource($body) && $curlMethod != CURLOPT_PUT) {
+        if(is_resource($body) && $curlMethod != CURLOPT_UPLOAD) {
             throw new AdapterException\RuntimeException("Streaming requests are allowed only with PUT");
         }
 
@@ -373,7 +373,7 @@ class Curl implements HttpAdapter, Stream
          */
         if ($method == 'POST') {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
-        } elseif ($curlMethod == CURLOPT_PUT) {
+        } elseif ($curlMethod == CURLOPT_UPLOAD) {
             // this covers a PUT by file-handle:
             // Make the setting of this options explicit (rather than setting it through the loop following a bit lower)
             // to group common functionality together.

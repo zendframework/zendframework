@@ -81,7 +81,7 @@ if (array_key_exists('PWD', $_SERVER)) {
 $relativePathForClassmap = '';
 if (isset($opts->l)) {
     $libraryPath = $opts->l;
-    $libraryPath = rtrim($libraryPath, '/\\') . '/';
+    $libraryPath = str_replace('\\', '/', rtrim($libraryPath, '/\\')) . '/';
     if (!is_dir($libraryPath)) {
         echo "Invalid library directory provided" . PHP_EOL . PHP_EOL;
         echo $opts->getUsageMessage();
@@ -92,7 +92,49 @@ if (isset($opts->l)) {
     // If -o has been used, then we need to add the $libraryPath into the relative 
     // path that is created in the classmap file.
     if ($opts->o != '') {
-        $relativePathForClassmap = $libraryPath;
+        // If both library path and classmap path are absolute, we have to make
+        // it relative to the classmap file.
+        $libraryPathCompare  = rtrim(str_replace('\\', '/', realpath($libraryPath)), '/');
+        $classmapPathCompare = rtrim(str_replace('\\', '/', realpath($opts->o)), '/');
+        
+        if (is_file($libraryPathCompare)) {
+            $libraryPathCompare = str_replace('\\', '/', dirname($libraryPathCompare));
+        }
+        
+        if (is_file($classmapPathCompare)) {
+            $classmapPathCompare = str_replace('\\', '/', dirname($classmapPathCompare));
+        }
+
+        // Simple case: $libraryPathCompare is in $classmapPathCompare
+        if (strpos($libraryPathCompare, $classmapPathCompare) === 0) {
+            $relativePathForClassmap = substr($libraryPathCompare, strlen($classmapPathCompare) + 1) . '/';
+        } else {
+            $relative          = array();
+            $libraryPathParts  = explode('/', $libraryPathCompare);
+            $classmapPathParts = explode('/', $classmapPathCompare);
+
+            foreach ($classmapPathParts as $index => $part) {
+                var_dump($libraryPathParts[$index]);
+                var_dump($part);
+                var_dump(1);
+                
+                if (isset($libraryPathParts[$index]) && $libraryPathParts[$index] == $part) {
+                    continue;
+                }
+
+                $relative[] = '..';
+            }
+
+            foreach ($libraryPathParts as $index => $part ) {
+                if (isset($classmapPathParts[$index]) && $classmapPathParts[$index] == $part) {
+                    continue;
+                }
+
+                $relative[] = $part;
+            }
+
+            $relativePathForClassmap = implode('/', $relative) . '/';
+        }
     }
 }
 

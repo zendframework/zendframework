@@ -498,8 +498,8 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $this->client->setConfig(array('maxredirects' => 1));
 
         // Get the host and port part of our baseuri
-        $uri = $this->client->getUri()->getScheme() . '://' . $this->client->getUri()->getHost() . ':' .
-            $this->client->getUri()->getPort();
+        $port = ($this->client->getUri()->getPort() == 80) ? '' : ':' .$this->client->getUri()->getPort(); 
+        $uri = $this->client->getUri()->getScheme() . '://' . $this->client->getUri()->getHost() . $port;
         
         $res = $this->client->send();
         
@@ -915,6 +915,28 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expect, strlen($response->getBody()));
     }
+
+
+    /**
+     * @group ZF2-78
+     * @dataProvider parameterArrayProvider
+     */
+    public function testContentTypeAdditionlInfo($params)
+    {
+        $this->client->setUri($this->baseuri . 'testPostData.php');
+        $this->client->setHeaders(array(
+                 'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8' // throw  RuntimeException
+        ));
+        $this->client->setMethod(\Zend\Http\Request::METHOD_POST);
+
+        $this->client->setParameterPost($params);
+        
+        $this->client->send();
+
+        $res = $this->client->send();
+        $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
+    }
+    
 
     /**
      * Internal helpder function to get the contents of test files

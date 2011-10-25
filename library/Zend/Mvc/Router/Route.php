@@ -38,8 +38,8 @@ interface Route
      * Priority used for route stacks.
      * 
      * @var integer
+     * public $priority;
      */
-    public $priority;
     
     /**
      * Create a new route with given options.

@@ -1094,4 +1094,19 @@ class FormatTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('4,00', \Zend\Locale\Format::toNumber(3.999, $options));
         $this->assertEquals('4,00', \Zend\Locale\Format::toNumber(4, $options));
     }
+
+    /**
+     * @group ZF-11837
+     */
+    public function testCheckDateFormatDoesNotEmitNoticeWhenNoOptionsAreNotProvided()
+    {
+        try {
+            setlocale(LC_ALL, 'en_US'); // test setup
+            Format::setOptions(array('date_format' => 'yyyy-MM-dd'));
+
+            $this->assertTrue(Format::checkDateFormat('2011-10-21', array()));
+        } catch ( \PHPUnit_Framework_Error_Notice $ex ) {
+            $this->fail('Zend_Locale_Format::checkDateFormat emitted unexpected E_NOTICE');
+        }
+    }
 }

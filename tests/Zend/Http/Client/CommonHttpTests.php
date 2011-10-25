@@ -925,7 +925,7 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
     {
         $this->client->setUri($this->baseuri . 'testPostData.php');
         $this->client->setHeaders(array(
-                 'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8' // throw  RuntimeException
+            'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8' 
         ));
         $this->client->setMethod(\Zend\Http\Request::METHOD_POST);
 
@@ -936,7 +936,6 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
         $res = $this->client->send();
         $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
     }
-    
 
     /**
      * Internal helpder function to get the contents of test files

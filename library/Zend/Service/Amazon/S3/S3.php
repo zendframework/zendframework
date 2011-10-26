@@ -459,7 +459,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         }
 
         if(!isset($meta['Content-MD5'])) {
-            $headers['Content-MD5'] = base64_encode(md5_file($path, true));
+            $meta['Content-MD5'] = base64_encode(md5_file($path, true));
         }
 
         return $this->putObject($object, $data, $meta);

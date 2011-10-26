@@ -118,6 +118,7 @@ class ConfigurationTest extends TestCase
         $this->assertEquals($dummyParams->params['param1'], 'hello');
         $this->assertEquals($dummyParams->params['param2'], 'world');
         $this->assertEquals($dummyParams->params['foo'], 'bar');
+        $this->assertArrayNotHasKey('methods', $di->definitions()->hasMethods('ZendTest\Di\TestAsset\StaticFactory'));
     }
     
 }

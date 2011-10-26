@@ -216,11 +216,9 @@ class Sitemap extends AbstractHelper
      *
      * E.g. http://www.example.com
      *
-     * @param  string $serverUrl                    server URL to set (only
-     *                                              scheme and host)
-     * @throws Uri\Exception                   if invalid server URL
-     * @return Sitemap  fluent interface, returns
-     *                                              self
+     * @param  string $serverUrl server URL to set (only scheme and host)
+     * @return Sitemap fluent interface, returns self
+     * @throws Exception\InvalidArgumentException if invalid server URL
      */
     public function setServerUrl($serverUrl)
     {
@@ -232,11 +230,10 @@ class Sitemap extends AbstractHelper
         if ($uri->isValid()) {
             $this->_serverUrl = $uri->toString();
         } else {
-            $e = new Uri\Exception\InvalidUriException(sprintf(
-                    'Invalid server URL: "%s"',
-                    $serverUrl));
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid server URL: "%s"',
+                $serverUrl
+            ));
         }
 
         return $this;

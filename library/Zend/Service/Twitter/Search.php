@@ -118,7 +118,7 @@ class Search extends Rest\Client\RestClient
      *
      * @throws Zend_Http_Client_Exception
      */
-    public function search($query, array $params = array())
+    public function execute($query, array $params = array())
     {
 
         $_query = array();

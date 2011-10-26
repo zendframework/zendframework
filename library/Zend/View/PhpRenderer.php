@@ -70,9 +70,9 @@ class PhpRenderer implements Renderer, Pluggable
     private $vars;
 
     /**
-     * @var ArrayAccess|array Temporary variable cache; used when variables passed to render()
+     * @var array Temporary variable stack; used when variables passed to render()
      */
-    private $varsCache;
+    private $varsCache = array();
 
     /**
      * Constructor.
@@ -414,8 +414,9 @@ class PhpRenderer implements Renderer, Pluggable
         $this->file = $this->resolver($name);
         unset($name); // remove $name from local scope
 
+        $this->varsCache[] = $this->vars();
+
         if (null !== $vars) {
-            $this->varsCache = $this->vars();
             $this->setVars($vars);
         }
         unset($vars);
@@ -428,15 +429,12 @@ class PhpRenderer implements Renderer, Pluggable
         }
         extract($__vars);
         unset($__vars); // remove $__vars from local scope
-        
+
         ob_start();
         include $this->file;
         $content = ob_get_clean();
 
-        if (null !== $this->varsCache) {
-            $this->setVars($this->varsCache);
-            $this->varsCache = null;
-        }
+        $this->setVars(array_pop($this->varsCache));
 
         return $this->getFilterChain()->filter($content); // filter output
     }

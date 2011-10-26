@@ -202,6 +202,17 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF2-86
+     */
+    public function testNestedRenderingRestoresVariablesCorrectly()
+    {
+        $expected = "inner\n<p>content</p>";
+        $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
+        $test = $this->renderer->render('testNestedOuter.phtml', array('content' => '<p>content</p>'));
+        $this->assertEquals($expected, $test);
+    }
+
+    /**
      * @group convenience-api
      */
     public function testPropertyOverloadingShouldProxyToVariablesContainer()

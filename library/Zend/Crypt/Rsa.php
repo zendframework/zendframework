@@ -81,7 +81,7 @@ class Rsa
         if (isset($options['passPhrase'])) {
             $this->_passPhrase = $options['passPhrase'];
         }
-        foreach ($options as $option=>$value) {
+        foreach ($options as $option => $value) {
             switch ($option) {
                 case 'pemString':
                     $this->setPemString($value);
@@ -196,8 +196,9 @@ class Rsa
 
     public function generateKeys(array $configargs = null)
     {
-        $config = null;
-        $passPhrase = null;
+        $config     = array();
+        $passPhrase = $this->_passPhrase;
+        $private    = $this->getPrivateKey();
         if ($configargs !== null) {
             if (isset($configargs['passPhrase'])) {
                 $passPhrase = $configargs['passPhrase'];

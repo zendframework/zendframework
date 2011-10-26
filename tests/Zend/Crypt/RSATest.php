@@ -43,6 +43,16 @@ class RSATest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $openSslConf = false;
+        if (isset($_ENV['OPENSSL_CONF'])) {
+            $openSslConf = $_ENV['OPENSSL_CONF'];
+        } elseif (isset($_ENV['SSLEAY_CONF'])) {
+            $openSslConf = $_ENV['SSLEAY_CONF'];
+        } elseif (constant('TESTS_ZEND_CRYPT_OPENSSL_CONF')) {
+            $openSslConf = constant('TESTS_ZEND_CRYPT_OPENSSL_CONF');
+        }
+        $this->openSslConf = $openSslConf;
+
         try {
             $math = new \Zend\Crypt\Rsa();
         } catch (\Zend\Crypt\Rsa\Exception $e) {
@@ -272,37 +282,59 @@ CERT;
 
     public function testKeyGenerationCreatesArrayObjectResult()
     {
-        $rsa = new RSA;
-        $keys = $rsa->generateKeys(array('private_key_bits'=>512));
+        if (!$this->openSslConf) {
+            $this->markTestSkipped('No openssl.cnf found or defined; cannot generate keys');
+        }
+        $rsa  = new RSA;
+        $keys = $rsa->generateKeys(array(
+            'config'           => $this->openSslConf,
+            'private_key_bits' => 512,
+        ));
         $this->assertInstanceOf('ArrayObject', $keys);
     }
 
     public function testKeyGenerationCreatesPrivateKeyInArrayObject()
     {
+        if (!$this->openSslConf) {
+            $this->markTestSkipped('No openssl.cnf found or defined; cannot generate keys');
+        }
         $rsa = new RSA;
-        $keys = $rsa->generateKeys(array('private_key_bits'=>512));
+        $keys = $rsa->generateKeys(array(
+            'config'           => $this->openSslConf,
+            'private_key_bits' => 512,
+        ));
         $this->assertInstanceOf('Zend\\Crypt\\RSA\\PrivateKey', $keys->privateKey);
     }
 
     public function testKeyGenerationCreatesPublicKeyInArrayObject()
     {
+        if (!$this->openSslConf) {
+            $this->markTestSkipped('No openssl.cnf found or defined; cannot generate keys');
+        }
         $rsa = new RSA;
-        $keys = $rsa->generateKeys(array('privateKeyBits'=>512));
+        $keys = $rsa->generateKeys(array(
+            'config'         => $this->openSslConf,
+            'privateKeyBits' => 512,
+        ));
         $this->assertInstanceOf('Zend\\Crypt\\RSA\\PublicKey', $keys->publicKey);
     }
 
     public function testKeyGenerationCreatesPassphrasedPrivateKey()
     {
+        if (!$this->openSslConf) {
+            $this->markTestSkipped('No openssl.cnf found or defined; cannot generate keys');
+        }
         $rsa = new RSA;
         $config = array(
+            'config'         => $this->openSslConf,
             'privateKeyBits' => 512,
-            'passPhrase' => '0987654321'
+            'passPhrase'     => '0987654321'
         );
         $keys = $rsa->generateKeys($config);
         try {
             $rsa = new RSA(array(
-                'passPhrase'=>'1234567890',
-                'pemString'=>$keys->privateKey->toString()
+                'passPhrase' => '1234567890',
+                'pemString'  => $keys->privateKey->toString()
             ));
             $this->fail('Expected exception not thrown');
         } catch (Crypt\Exception $e) {
@@ -311,16 +343,20 @@ CERT;
 
     public function testConstructorLoadsPassphrasedKeys()
     {
+        if (!$this->openSslConf) {
+            $this->markTestSkipped('No openssl.cnf found or defined; cannot generate keys');
+        }
         $rsa = new RSA;
         $config = array(
+            'config'         => $this->openSslConf,
             'privateKeyBits' => 512,
-            'passPhrase' => '0987654321'
+            'passPhrase'     => '0987654321'
         );
         $keys = $rsa->generateKeys($config);
         try {
             $rsa = new RSA(array(
-                'passPhrase'=>'0987654321',
-                'pemString'=>$keys->privateKey->toString()
+                'passPhrase' => '0987654321',
+                'pemString'  => $keys->privateKey->toString()
             ));
         } catch (Crypt\Exception $e) {
             $this->fail('Passphrase loading failed of a private key');

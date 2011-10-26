@@ -256,17 +256,15 @@ class TemplatePathStack implements TemplateResolver
     public function getScriptPath($name)
     {
         if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name)) {
-            $e = new Exception\DomainException(
+            throw new Exception\DomainException(
                 'Requested scripts may not include parent directory traversal ("../", "..\\" notation)'
             );
-            throw $e;
         }
 
         if (!count($this->paths)) {
-            $e = new Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'No view script directory set; unable to determine location for view script'
             );
-            throw $e;
         }
 
         $paths   = PATH_SEPARATOR;
@@ -290,10 +288,9 @@ class TemplatePathStack implements TemplateResolver
             $paths .= $path . PATH_SEPARATOR;
         }
 
-        $e = new Exception\RuntimeException(sprintf(
+        throw new Exception\RuntimeException(sprintf(
             'Script "%s" not found in path (%s)',
             $name, trim($paths, PATH_SEPARATOR)
         ));
-        throw $e;
     }
 }

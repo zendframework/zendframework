@@ -76,11 +76,9 @@ class Action extends AbstractHelper
         $front   = $this->front = \Zend\Controller\Front::getInstance();
         $modules = $front->getControllerDirectory();
         if (empty($modules)) {
-            $e = new Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'Action helper depends on valid front controller instance'
             );
-            $e->setView($this->view);
-            throw $e;
         }
 
         $request  = $front->getRequest();
@@ -88,11 +86,9 @@ class Action extends AbstractHelper
         $broker   = $front->getHelperBroker();
 
         if (empty($request) || empty($response)) {
-            $e = new Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'Action view helper requires both a registered request and response object in the front controller instance'
             );
-            $e->setView($this->view);
-            throw $e;
         }
 
         $this->request       = clone $request;

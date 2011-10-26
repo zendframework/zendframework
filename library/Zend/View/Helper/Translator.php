@@ -172,11 +172,9 @@ class Translator extends AbstractHelper
     {
         $translator = $this->getTranslator();
         if ($translator === null) {
-            $e = new Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'You must set an instance of Zend\Translator\Translator or Zend\Translator\Adapter'
             );
-            $e->setView($this->view);
-            throw $e;
         }
 
         $translator->setLocale($locale);
@@ -194,11 +192,9 @@ class Translator extends AbstractHelper
     {
         $translator = $this->getTranslator();
         if ($translator === null) {
-            $e = new Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'You must set an instance of Zend\Translator\Translator or Zend\Translator\Adapter'
             );
-            $e->setView($this->view);
-            throw $e;
         }
 
         return $translator->getLocale();

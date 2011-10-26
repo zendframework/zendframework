@@ -281,9 +281,7 @@ class HeadStyle extends Placeholder\Container\Standalone
     public function captureStart($type = Placeholder\Container\AbstractContainer::APPEND, $attrs = null)
     {
         if ($this->_captureLock) {
-            $e = new Exception\RuntimeException('Cannot nest headStyle captures');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\RuntimeException('Cannot nest headStyle captures');
         }
 
         $this->_captureLock        = true;

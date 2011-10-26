@@ -267,11 +267,9 @@ abstract class AbstractContainer extends \ArrayObject
     public function captureStart($type = AbstractContainer::APPEND, $key = null)
     {
         if ($this->_captureLock) {
-            $e = new Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'Cannot nest placeholder captures for the same placeholder'
             );
-            $e->setView($this->view);
-            throw $e;
         }
 
         $this->_captureLock = true;

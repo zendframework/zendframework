@@ -594,11 +594,9 @@ class Menu extends AbstractHelper
         }
 
         if (empty($partial)) {
-            $e = new Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'Unable to render menu: No partial view script provided'
             );
-            $e->setView($this->view);
-            throw $e;
         }
 
         $model = array(

@@ -82,17 +82,13 @@ class PaginationControl extends AbstractHelper
             if (isset($this->view->paginator) and $this->view->paginator !== null and $this->view->paginator instanceof Paginator\Paginator) {
                 $paginator = $this->view->paginator;
             } else {
-                $e = new Exception\RuntimeException('No paginator instance provided or incorrect type');
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\RuntimeException('No paginator instance provided or incorrect type');
             }
         }
 
         if ($partial === null) {
             if (self::$_defaultViewPartial === null) {
-                $e = new Exception\RuntimeException('No view partial provided and no default set');
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\RuntimeException('No view partial provided and no default set');
             }
 
             $partial = self::$_defaultViewPartial;

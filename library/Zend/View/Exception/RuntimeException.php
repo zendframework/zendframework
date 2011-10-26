@@ -23,8 +23,7 @@
  */
 namespace Zend\View\Exception;
 
-use Zend\View\Renderer,
-    Zend\View\Exception;
+use Zend\View\Exception;
 
 /**
  * Runtime exception
@@ -37,16 +36,4 @@ use Zend\View\Renderer,
  */
 class RuntimeException extends \RuntimeException implements Exception
 {
-    protected $view = null;
-
-    public function setView(Renderer $view = null)
-    {
-        $this->view = $view;
-        return $this;
-    }
-
-    public function getView()
-    {
-        return $this->view;
-    }
 }

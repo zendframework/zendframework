@@ -81,9 +81,7 @@ class Partial extends AbstractHelper
         if ((null !== $module) && is_string($module)) {
             $moduleDir = \Zend\Controller\Front::getInstance()->getControllerDirectory($module);
             if (null === $moduleDir) {
-                $e = new Exception\RuntimeException('Cannot render partial; module does not exist');
-                $e->setView($this->view);
-                throw $e;
+                throw new Exception\RuntimeException('Cannot render partial; module does not exist');
             }
             $viewsDir = dirname($moduleDir) . '/views';
             $view->resolver()->addPath($viewsDir . '/scripts');

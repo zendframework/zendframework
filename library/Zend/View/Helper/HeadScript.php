@@ -152,9 +152,7 @@ class HeadScript extends Placeholder\Container\Standalone
     public function captureStart($captureType = Placeholder\Container\AbstractContainer::APPEND, $type = 'text/javascript', $attrs = array())
     {
         if ($this->_captureLock) {
-            $e = new Exception\RuntimeException('Cannot nest headScript captures');
-            $e->setView($this->view);
-            throw $e;
+            throw new Exception\RuntimeException('Cannot nest headScript captures');
         }
 
         $this->_captureLock        = true;

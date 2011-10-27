@@ -99,7 +99,7 @@ $validator->isValid('May');  // Gibt false zurück
         </para>
 
         <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Date(array('format' => 'yyyy MMMM', 'locale' => 'de));
+$validator = new Zend_Validate_Date(array('format' => 'yyyy MMMM', 'locale' => 'de'));
 
 $validator->isValid('2010 Dezember'); // Gibt true zurück
 $validator->isValid('2010 June');     // Gibt false zurück

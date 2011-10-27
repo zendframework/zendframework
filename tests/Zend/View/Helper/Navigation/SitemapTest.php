@@ -39,9 +39,6 @@ use Zend\View;
  */
 class SitemapTest extends AbstractTest
 {
-    protected $_front;
-    protected $_oldRequest;
-    protected $_oldRouter;
     protected $_oldServer = array();
 
     /**
@@ -85,14 +82,6 @@ class SitemapTest extends AbstractTest
         $_SERVER['SERVER_PORT'] = 80;
         $_SERVER['REQUEST_URI'] = '/';
 
-        $this->_front = \Zend\Controller\Front::getInstance();
-        $this->_oldRequest = $this->_front->getRequest();
-        $this->_oldRouter = $this->_front->getRouter();
-
-        $this->_front->resetInstance();
-        $this->_front->setRequest(new Request\Http());
-        $this->_front->getRouter()->addDefaultRoutes();
-
         parent::setUp();
 
         $this->_helper->setFormatOutput(true);
@@ -100,13 +89,6 @@ class SitemapTest extends AbstractTest
 
     protected function tearDown()
     {
-        if (null !== $this->_oldRequest) {
-            $this->_front->setRequest($this->_oldRequest);
-        } else {
-            $this->_front->setRequest(new Request\Http());
-        }
-        $this->_front->setRouter($this->_oldRouter);
-
         foreach ($this->_oldServer as $key => $value) {
             $_SERVER[$key] = $value;
         }

@@ -710,9 +710,10 @@ class Client implements Dispatchable
         }
         return $response;
     }
+
     /**
      * Reset all the HTTP parameters (auth,cookies,request, response, etc)
-     * 
+     * @return Client
      */
     public function resetParameters()
     {   
@@ -726,6 +727,8 @@ class Client implements Dispatchable
         $this->response   = null;
         
         $this->setUri($uri);
+
+        return $this;
     }
 
     /**

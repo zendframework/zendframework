@@ -1133,7 +1133,6 @@ class Client implements Dispatchable
 
         // If we have POST parameters or files, encode and add them to the body
         if (count($this->getRequest()->post()->toArray()) > 0 || $totalFiles > 0) {
-
             if (stripos($this->getEncType(), self::ENC_FORMDATA) === 0) {
                 $boundary = '---ZENDHTTPCLIENT-' . md5(microtime());
                 $this->setEncType(self::ENC_FORMDATA, $boundary);
@@ -1150,13 +1149,10 @@ class Client implements Dispatchable
                     $body .= $this->encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
                 }
                 $body .= "--{$boundary}--\r\n";
-            } else if(stripos($this->getEncType(), self::ENC_URLENCODED) === 0) {
+            } elseif (stripos($this->getEncType(), self::ENC_URLENCODED) === 0) {
                 // Encode body as application/x-www-form-urlencoded
                 $body = http_build_query($this->getRequest()->post()->toArray());
             } else {
-                if (isset($mbIntEnc)) {
-                    mb_internal_encoding($mbIntEnc);
-                }
                 throw new Exception\RuntimeException("Cannot handle content type '{$this->encType}' automatically");
             }
 

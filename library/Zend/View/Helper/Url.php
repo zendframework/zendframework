@@ -57,20 +57,20 @@ class Url extends AbstractHelper
      * Generates an url given the name of a route.
      *
      * @see Zend\Mvc\Router\Route::assemble()
-     * @param array $urlParams Parameters for the link
+     * @param array $params Parameters for the link
      * @param string $name Name of the route
-     * @param array $urlOptions Options for the route
+     * @param array $options Options for the route
      * @return string Url for the link href attribute
      * @throws Exception\RuntimeException If no router provided
      */
-    public function __invoke(array $urlParams, $name, array $urlOptions = array())
+    public function __invoke(array $params, $name, array $options = array())
     {
         if (null === $this->router) {
             throw new Exception\RuntimeException('no router instance provided');
         }
 
-        $urlOptions['name'] = $name;
+        $options['name'] = $name;
 
-        return $this->router->assemble($urlParams, $urlOptions);
+        return $this->router->assemble($params, $options);
     }
 }

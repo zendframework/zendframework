@@ -2,8 +2,6 @@
 
 namespace Zend\Module;
 
-use Zend\Service\Amazon\Authentication\V1;
-
 use Traversable,
     Zend\Config\Config,
     Zend\Config\Writer\ArrayWriter,

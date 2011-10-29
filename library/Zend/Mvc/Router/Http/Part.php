@@ -133,6 +133,10 @@ class Part extends TreeRouteStack
      */
     public function match(Request $request, $pathOffset = null)
     {
+        if ($pathOffset === null) {
+            $pathOffset = 0;
+        }
+        
         $match = $this->route->match($request, $pathOffset);
 
         if ($match !== null && method_exists($request, 'uri')) {

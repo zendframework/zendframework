@@ -84,8 +84,7 @@ class Local extends SOAPClient
         // Perform request as is
         ob_start();
         $this->_server->handle($request);
-        $response = ob_get_contents();
-        ob_end_clean();
+        $response = ob_get_clean();
 
         return $response;
     }

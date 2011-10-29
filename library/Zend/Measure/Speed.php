@@ -99,7 +99,7 @@ class Speed extends AbstractMeasure
     const LIGHTSPEED_ICE                 = 'LIGHTSPEED_ICE';
     const LIGHTSPEED_VACUUM              = 'LIGHTSPEED_VACUUM';
     const LIGHTSPEED_WATER               = 'LIGHTSPEED_WATER';
-    const SOUNDSPEED_AIR                 = 'SOUNDSPEED_AIT';
+    const SOUNDSPEED_AIR                 = 'SOUNDSPEED_AIR';
     const SOUNDSPEED_METAL               = 'SOUNDSPEED_METAL';
     const SOUNDSPEED_WATER               = 'SOUNDSPEED_WATER';
     const YARD_PER_DAY                   = 'YARD_PER_DAY';
@@ -176,7 +176,7 @@ class Speed extends AbstractMeasure
         'LIGHTSPEED_ICE'                 => array('228849204',                             'speed of light (ice)'),
         'LIGHTSPEED_VACUUM'              => array('299792458',                             'speed of light (vacuum)'),
         'LIGHTSPEED_WATER'               => array('225407863',                             'speed of light (water)'),
-        'SOUNDSPEED_AIT'                 => array('340.29',                                'speed of sound (air)'),
+        'SOUNDSPEED_AIR'                 => array('340.29',                                'speed of sound (air)'),
         'SOUNDSPEED_METAL'               => array('5000',                                  'speed of sound (metal)'),
         'SOUNDSPEED_WATER'               => array('1500',                                  'speed of sound (water)'),
         'YARD_PER_DAY'                   => array(array('' => '0.9144', '/' => '86400'),     'yd/day'),

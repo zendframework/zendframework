@@ -140,7 +140,7 @@ class Identical extends AbstractValidator
      */
     public function isValid($value, $context = null)
     {
-        $this->_setValue((string) $value);
+        $this->setValue((string) $value);
 
         if (($context !== null) && isset($context) && array_key_exists($this->getToken(), $context)) {
             $token = $context[$this->getToken()];
@@ -149,13 +149,13 @@ class Identical extends AbstractValidator
         }
 
         if ($token === null) {
-            $this->_error(self::MISSING_TOKEN);
+            $this->error(self::MISSING_TOKEN);
             return false;
         }
 
         $strict = $this->getStrict();
         if (($strict && ($value !== $token)) || (!$strict && ($value != $token))) {
-            $this->_error(self::NOT_SAME);
+            $this->error(self::NOT_SAME);
             return false;
         }
 

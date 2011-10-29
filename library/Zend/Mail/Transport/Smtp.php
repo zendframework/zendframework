@@ -115,6 +115,21 @@ class Smtp extends AbstractTransport
      */
     public function __construct($host = '127.0.0.1', Array $config = array())
     {
+        if ($host) {
+            $config['host'] = $host;
+        }
+
+        $this->setConfig($config);
+    }
+
+    /**
+     * Set configuration
+     *
+     * @param  array $config
+     * @return \Zend\Mail\Transport\Smtp
+     */
+    public function setConfig(array $config)
+    {
         if (isset($config['name'])) {
             $this->_name = $config['name'];
         }
@@ -124,11 +139,14 @@ class Smtp extends AbstractTransport
         if (isset($config['auth'])) {
             $this->_auth = $config['auth'];
         }
+        if (isset($config['host'])) {
+            $this->_host = $config['host'];
+        }
 
-        $this->_host = $host;
         $this->_config = $config;
-    }
 
+        return $this;
+    }
 
     /**
      * Class destructor to ensure all open connections are closed

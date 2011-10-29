@@ -33,32 +33,15 @@ namespace Zend\Validator\Barcode;
 class Code25 extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = -1;
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
-
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_code25';
-
-    /**
-     * Constructor
-     *
-     * Sets check flag to false.
+     * Constructor for this barcode adapter
      *
      * @return void
      */
     public function __construct()
     {
-        $this->setCheck(false);
+        $this->setLength(-1);
+        $this->setCharacters('0123456789');
+        $this->setChecksum('_code25');
+        $this->useChecksum(false);
     }
 }

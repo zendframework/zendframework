@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.validate.introduction"><info><title>導入</title></info>
 
-    
+
 
     <para>
         <classname>Zend_Validate</classname> コンポーネントは、一般的に必要となるバリデータを提供します。
@@ -11,7 +11,7 @@
 
     <section xml:id="zend.validate.introduction.definition"><info><title>バリデータとは?</title></info>
 
-        
+
 
         <para>
             バリデータは、入力が何らかの要件を満たしているかどうかを調べ、
@@ -34,7 +34,7 @@
 
     <section xml:id="zend.validate.introduction.using"><info><title>バリデータの基本的な使用法</title></info>
 
-        
+
 
         <para>
             ここで考えたバリデータについての定義をもとにして
@@ -90,7 +90,7 @@ if ($validator->isValid($email)) {
 
     <section xml:id="zend.validate.introduction.messages"><info><title>メッセージのカスタマイズ</title></info>
 
-        
+
 
         <para>
             バリデータクラスの <methodname>setMessage()</methodname> メソッドを使用すると、
@@ -177,7 +177,7 @@ if (!validator->isValid('word')) {
 
     <section xml:id="zend.validate.introduction.static"><info><title>静的メソッド is() の使用法</title></info>
 
-        
+
 
         <para>
             指定したバリデーションクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
@@ -232,7 +232,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
 
         <section xml:id="zend.validate.introduction.static.namespaces"><info><title>名前空間</title></info>
 
-            
+
 
             <para>
                 自分で定義したバリデータを使う際に、
@@ -306,7 +306,7 @@ iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12))
 
     <section xml:id="zend.validate.introduction.translation"><info><title>メッセージの翻訳</title></info>
 
-        
+
 
         <para>
             Validate クラスには <methodname>setTranslator()</methodname> メソッドがあり、
@@ -361,7 +361,7 @@ Zend_Validate::setDefaultTranslator($translate);
         <para>
             時には、検証時に翻訳器を無効にしなければならないこともあるでしょう。
             そんな場合は <methodname>setDisableTranslator()</methodname> メソッドを使用します。
-            このメソッドには boolean パラメータを指定します。また <methodname>translatorIsDisabled()</methodname>
+            このメソッドには boolean パラメータを指定します。また <methodname>isTranslatorDisabled()</methodname>
             で現在の値を取得できます。
         </para>
 

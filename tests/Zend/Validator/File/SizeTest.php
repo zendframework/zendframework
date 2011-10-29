@@ -77,7 +77,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $validator = new File\Size(array('min' => 1, 'max' => 100));
         $this->assertEquals('1B', $validator->getMin());
 
-        $validator = new File\Size(array('min' => 1, 'max' => 100, 'bytestring' => false));
+        $validator = new File\Size(array('min' => 1, 'max' => 100, 'useByteString' => false));
         $this->assertEquals(1, $validator->getMin());
 
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'greater than or equal');
@@ -95,7 +95,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $validator->setMin(100);
         $this->assertEquals('100B', $validator->getMin());
 
-        $validator = new File\Size(array('min' => 1000, 'max' => 10000, 'bytestring' => false));
+        $validator = new File\Size(array('min' => 1000, 'max' => 10000, 'useByteString' => false));
         $validator->setMin(100);
         $this->assertEquals(100, $validator->getMin());
 
@@ -110,7 +110,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMax()
     {
-        $validator = new File\Size(array('min' => 1, 'max' => 100, 'bytestring' => false));
+        $validator = new File\Size(array('min' => 1, 'max' => 100, 'useByteString' => false));
         $this->assertEquals(100, $validator->getMax());
 
         $validator = new File\Size(array('min' => 1, 'max' => 100000));
@@ -130,7 +130,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMax()
     {
-        $validator = new File\Size(array('max' => 0, 'bytestring' => true));
+        $validator = new File\Size(array('max' => 0, 'useByteString' => true));
         $this->assertEquals('0B', $validator->getMax());
 
         $validator->setMax(1000000);
@@ -180,7 +180,7 @@ class SizeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('9.76kB', current($messages));
         $this->assertContains('794B', current($messages));
 
-        $validator = new File\Size(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
+        $validator = new File\Size(array('min' => 9999, 'max' => 10000, 'useByteString' => false));
         $this->assertFalse($validator->isValid(__DIR__ . '/_files/testsize.mo'));
         $messages = $validator->getMessages();
         $this->assertContains('9999', current($messages));

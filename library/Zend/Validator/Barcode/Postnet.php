@@ -33,20 +33,14 @@ namespace Zend\Validator\Barcode;
 class Postnet extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
+     * Constructor for this barcode adapter
+     *
+     * @return void
      */
-    protected $_length = array(6, 7, 10, 12);
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
-
-    /**
-     * Checksum function
-     * @var string
-     */
-    protected $_checksum = '_postnet';
+    public function __construct()
+    {
+        $this->setLength(array(6, 7, 10, 12));
+        $this->setCharacters('0123456789');
+        $this->setChecksum('_postnet');
+    }
 }

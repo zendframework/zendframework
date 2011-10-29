@@ -2,7 +2,10 @@
 namespace Zend\Validator\Barcode;
 class MyBarcode5
 {
-    protected $_length     = 'odd';
-    protected $_characters = 128;
-    protected $_checksum   = '_mod10';
+    public function __construct()
+    {
+        $setLength = 'odd';
+        $setCharacters = 128;
+        $setChecksum = '_mod10';
+    }
 }

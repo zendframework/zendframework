@@ -24,15 +24,18 @@
  */
 namespace Zend\Tool\Project\Context\Zf;
 
+use Zend\Code\Generator\ClassGenerator,
+    Zend\Code\Generator\MethodGenerator;
+
 /**
  * This class is the front most class for utilizing Zend\Tool\Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpClass
- * @uses       \Zend\CodeGenerator\Php\PhpFile
- * @uses       \Zend\CodeGenerator\Php\PhpMethod
+ * @uses       \Zend\Code\Generator\ClassGenerator
+ * @uses       \Zend\Code\Generator\FileGenerator
+ * @uses       \Zend\Code\Generator\MethodGenerator
  * @uses       \Zend\Filter\Word\DashToCamelCase
  * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @category   Zend
@@ -120,26 +123,19 @@ class ProjectProviderFile extends \Zend\Tool\Project\Context\Filesystem\File
 
         $className = $filter->filter($this->_projectProviderName) . 'Provider';
 
-        $class = new \Zend\CodeGenerator\Php\PhpClass(array(
-            'name' => $className,
-            'extendedClass' => '\Zend\Tool\Project\Provider\AbstractProvider'
-            ));
+        $class = new ClassGenerator($className, null, null, '\Zend\Tool\Project\Provider\AbstractProvider');
 
         $methods = array();
         foreach ($this->_actionNames as $actionName) {
-            $methods[] = new \Zend\CodeGenerator\Php\PhpMethod(array(
-                'name' => $actionName,
-                'body' => '        /** @todo Implementation */'
-                ));
+            $methods[] = new MethodGenerator($actionName, array(), MethodGenerator::FLAG_PUBLIC,  '        /** @todo Implementation */');
         }
 
         if ($methods) {
             $class->setMethods($methods);
         }
 
-        $codeGenFile = new \Zend\CodeGenerator\Php\PhpFile(array(
-            'classes' => array($class)
-            ));
+        $codeGenFile = new \Zend\Code\Generator\FileGenerator();
+        $codeGenFile->setClass($class);
 
         return $codeGenFile->generate();
     }

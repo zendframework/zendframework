@@ -13,7 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Crypt
+ * @subpackage Math
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,26 +22,15 @@
 /**
  * @namespace
  */
-namespace Zend\Validator\Barcode;
+namespace Zend\Crypt\Rsa;
 
 /**
- * @uses       \Zend\Validator\Barcode\AbstractAdapter
+ * @uses       \Zend\Crypt\Exception
  * @category   Zend
- * @package    Zend_Validate
+ * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Gtin13 extends AbstractAdapter
+class Exception extends \Zend\Crypt\Exception
 {
-    /**
-     * Constructor for this barcode adapter
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setLength(13);
-        $this->setCharacters('0123456789');
-        $this->setChecksum('_gtin');
-    }
 }

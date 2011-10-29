@@ -24,8 +24,8 @@
  */
 namespace Zend\Tool\Project\Context\Content\Engine;
 
-use Zend\CodeGenerator\AbstractCodeGenerator,
-    Zend\CodeGenerator\Php as PhpCodeGenerator,
+use Zend\Code\Generator\AbstractGenerator,
+    Zend\Code\Generator\FileGenerator,
     Zend\Tool\Framework\Client\Storage,
     Zend\Tool\Project\Context,
     Zend\Tool\Project\Exception;
@@ -92,12 +92,12 @@ class CodeGenerator
         if (method_exists($context, 'getCodeGenerator')) {
             $codeGenerator = $context->getCodeGenerator();
         } else {
-            $codeGenerator = new PhpCodeGenerator\PhpFile();
+            $codeGenerator = new FileGenerator();
         }
 
         $codeGenerator = include $streamUri;
 
-        if (!$codeGenerator instanceof AbstractCodeGenerator) {
+        if (!$codeGenerator instanceof AbstractGenerator) {
             throw new Exception\RuntimeException('Custom file at ' . $streamUri . ' did not return the $codeGenerator object.');
         }
 

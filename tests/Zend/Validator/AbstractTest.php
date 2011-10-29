@@ -113,21 +113,21 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testObscureValueFlagFalseByDefault()
     {
-        $this->assertFalse($this->validator->getObscureValue());
+        $this->assertFalse($this->validator->isValueObscured());
     }
 
-    public function testCanSetObscureValueFlag()
+    public function testCanSetValueObscuredFlag()
     {
         $this->testObscureValueFlagFalseByDefault();
-        $this->validator->setObscureValue(true);
-        $this->assertTrue($this->validator->getObscureValue());
-        $this->validator->setObscureValue(false);
-        $this->assertFalse($this->validator->getObscureValue());
+        $this->validator->setValueObscured(true);
+        $this->assertTrue($this->validator->isValueObscured());
+        $this->validator->setValueObscured(false);
+        $this->assertFalse($this->validator->isValueObscured());
     }
 
     public function testValueIsObfuscatedWheObscureValueFlagIsTrue()
     {
-        $this->validator->setObscureValue(true);
+        $this->validator->setValueObscured(true);
         $this->assertFalse($this->validator->isValid('foobar'));
         $messages = $this->validator->getMessages();
         $this->assertTrue(isset($messages['fooMessage']));
@@ -152,7 +152,7 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $translator = new Translator\Translator('ArrayAdapter', array(), 'en');
         restore_error_handler();
         $this->validator->setTranslator($translator);
-        $this->assertFalse($this->validator->translatorIsDisabled());
+        $this->assertFalse($this->validator->isTranslatorDisabled());
     }
 
     public function testCanDisableTranslator()
@@ -172,8 +172,8 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('bar', $messages['fooMessage']);
         $this->assertContains('This is the translated message for ', $messages['fooMessage']);
 
-        $this->validator->setDisableTranslator(true);
-        $this->assertTrue($this->validator->translatorIsDisabled());
+        $this->validator->setTranslatorDisabled(true);
+        $this->assertTrue($this->validator->isTranslatorDisabled());
 
         $this->assertFalse($this->validator->isValid('bar'));
         $messages = $this->validator->getMessages();
@@ -227,8 +227,8 @@ class Concrete extends Validator\AbstractValidator
 
     public function isValid($value)
     {
-        $this->_setValue($value);
-        $this->_error(self::FOO_MESSAGE);
+        $this->setValue($value);
+        $this->error(self::FOO_MESSAGE);
         return false;
     }
 }

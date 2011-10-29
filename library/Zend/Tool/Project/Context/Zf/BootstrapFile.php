@@ -32,8 +32,8 @@ use Zend\Tool\Project\Context\Exception;
  * items within a specific project.
  *
  * @uses       \Zend\Application\Application
- * @uses       \Zend\CodeGenerator\Php\PhpClass
- * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\Code\Generator\ClassGenerator
+ * @uses       \Zend\Code\Generator\FileGenerator
  * @uses       \Zend\Tool\Project\Context\Filesystem\File
  * @uses       \Zend\Tool\Project\Exception
  * @category   Zend
@@ -97,14 +97,11 @@ class BootstrapFile extends \Zend\Tool\Project\Context\Filesystem\File
     public function getContents()
     {
 
-        $codeGenFile = new \Zend\CodeGenerator\Php\PhpFile(array(
+        $codeGenFile = new \Zend\Code\Generator\FileGenerator(array(
             'classes' => array(
-                new \Zend\CodeGenerator\Php\PhpClass(array(
-                    'name' => 'Bootstrap',
-                    'extendedClass' => '\Zend\Application\Bootstrap',
-                    )),
-                )
-            ));
+                new \Zend\Code\Generator\ClassGenerator('Bootstrap', null, null, '\Zend\Application\Bootstrap'),
+            )
+        ));
 
         return $codeGenFile->generate();
     }

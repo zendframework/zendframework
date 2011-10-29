@@ -244,4 +244,45 @@ EOF;
         $results = $this->query->execute('input[type="hidden"][value="0"]');
         $this->assertEquals(1, count($results));
     }
+
+    /**
+     * @group ZF-3938
+     */
+    public function testAllowsSpecifyingEncodingAtConstruction()
+    {
+        $doc = new Query($this->getHtml(), 'iso-8859-1');
+        $this->assertEquals('iso-8859-1', $doc->getEncoding());
+    }
+   
+    /**
+     * @group ZF-3938
+     */
+    public function testAllowsSpecifyingEncodingWhenSettingDocument()
+    {
+        $this->query->setDocument($this->getHtml(), 'iso-8859-1');
+        $this->assertEquals('iso-8859-1', $this->query->getEncoding());
+    }
+   
+    /**
+     * @group ZF-3938
+     */
+    public function testAllowsSpecifyingEncodingViaSetter()
+    {
+        $this->query->setEncoding('iso-8859-1');
+        $this->assertEquals('iso-8859-1', $this->query->getEncoding());
+    }
+
+    /**
+     * @group ZF-3938
+     */
+    public function testSpecifyingEncodingSetsEncodingOnDomDocument()
+    {  
+        $this->query->setDocument($this->getHtml(), 'utf-8');
+        $test = $this->query->execute('.foo');
+        $this->assertInstanceof('\\Zend\\Dom\\NodeList', $test);
+        $doc  = $test->getDocument();
+        $this->assertInstanceof('\\DOMDocument', $doc);
+        $this->assertEquals('utf-8', $doc->encoding);
+    }
+
 }

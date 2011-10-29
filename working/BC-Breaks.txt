@@ -234,3 +234,5 @@ Zend_Queue:
  * 'adapterNamespace' \Zend\Queue\Queue option and adapter name \Zend\Queue\Queue constructor parameter are case sensitive now
  * 'Array' adapter becomes 'ArrayAdapter'
 
+Zend_Service_Twitter:
+ * In the Search class, the method for searching has been renamed for search() to execute(). Method signature is still the same

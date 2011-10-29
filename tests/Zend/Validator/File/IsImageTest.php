@@ -169,8 +169,8 @@ class IsImageTest extends \PHPUnit_Framework_TestCase
         $validator = new File\IsImage(array(
             'image/gif',
             'image/jpg',
-            'magicfile'   => __DIR__ . '/_files/magic.mime',
-            'headerCheck' => true));
+            'magicFile'   => __DIR__ . '/_files/magic.mime',
+            'enableHeaderCheck' => true));
 
         $this->assertEquals(__DIR__ . '/_files/magic.mime', $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());

@@ -26,6 +26,7 @@ namespace ZendTest\Mail;
 use Zend\Mail\Message;
 use Zend\Mime;
 use Zend\Mail\Storage;
+use Zend\Mail\Exception;
 
 /**
  * @category   Zend
@@ -173,7 +174,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $message = new Message(array('handler' => 1));
-        } catch (\Zend\Mime\Exception $e) {
+        } catch (Exception\InvalidArgumentException $e) {
             return; // ok
         }
 
@@ -187,7 +188,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $message = new Message(array('handler' => $mail));
-        } catch (\Zend\Mime\Exception $e) {
+        } catch (Exception\InvalidArgumentException $e) {
             return; // ok
         }
 
@@ -268,7 +269,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $message->getContent();
-        } catch (\Zend\Mime\Exception $e) {
+        } catch (Exception\RuntimeException $e) {
             return; // ok
         }
 
@@ -284,7 +285,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $subject = null;
         try {
             $subject = $message->subject;
-        } catch (\Zend\Mime\Exception $e) {
+        } catch (Exception\InvalidArgumentException $e) {
             // ok
         }
         if ($subject) {
@@ -298,7 +299,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $part = null;
         try {
             $part = $message->getPart(1);
-        } catch (\Zend\Mime\Exception $e) {
+        } catch (Exception\RuntimeException $e) {
             // ok
         }
         if ($part) {
@@ -329,7 +330,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         try {
             $message->getPart(1);
-        } catch (\Zend\Mime\Exception $e) {
+        } catch (Exception\RuntimeException $e) {
             return; // ok
         }
         $this->fail('no exception raised while getting part from message without boundary');

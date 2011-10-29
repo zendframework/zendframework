@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Tool\Project\Context\Zf;
-use Zend\CodeGenerator\Php;
+use Zend\Code\Generator\FileGenerator,
+    Zend\Code\Generator\ClassGenerator,
+    Zend\Code\Generator\PropertyGenerator;
 
 /**
  * This class is the front most class for utilizing Zend\Tool\Project
@@ -31,9 +33,9 @@ use Zend\CodeGenerator\Php;
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpClass
- * @uses       \Zend\CodeGenerator\Php\PhpFile
- * @uses       \Zend\CodeGenerator\Php\PhpProperty
+ * @uses       \Zend\Code\Generator\ClassGenerator
+ * @uses       \Zend\Code\Generator\FileGenerator
+ * @uses       \Zend\Code\Generator\PropertyGenerator
  * @uses       \Zend\Tool\Project\Context\Zf\AbstractClassFile
  * @category   Zend
  * @package    Zend_Tool
@@ -78,23 +80,12 @@ class DbTableFile extends AbstractClassFile
     {
         $className = $this->getFullClassName($this->_dbTableName, 'Model\DbTable');
         
-        $codeGenFile = new Php\PhpFile(array(
-            'fileName' => $this->getPath(),
-            'classes' => array(
-                new Php\PhpClass(array(
-                    'name' => $className,
-                    'extendedClass' => '\Zend\Db\Table\AbstractTable',
-                    'properties' => array(
-                        new Php\PhpProperty(array(
-                            'name' => '_name',
-                            'visibility' => Php\PhpProperty::VISIBILITY_PROTECTED,
-                            'defaultValue' => $this->_actualTableName
-                            ))
-                        ),
-                
-                    ))
+        $codeGenFile = new FileGenerator($this->getPath());
+        $codeGenFile->setClass(new ClassGenerator($className, null, null, '\Zend\Db\Table\AbstractTable', null, array(
+                    new PropertyGenerator('_name', $this->_actualTableName, PropertyGenerator::FLAG_PROTECTED),
                 )
             ));
+                
         return $codeGenFile->generate();
     }
     

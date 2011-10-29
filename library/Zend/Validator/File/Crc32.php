@@ -55,30 +55,14 @@ class Crc32 extends Hash
     );
 
     /**
-     * Hash of the file
+     * Options for this validator
      *
      * @var string
      */
-    protected $_hash;
-
-    /**
-     * Sets validator options
-     *
-     * @param  string|array|\Zend\Config\Config $options
-     * @return void
-     */
-    public function __construct($options)
-    {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        } elseif (is_scalar($options)) {
-            $options = array('hash1' => $options);
-        } elseif (!is_array($options)) {
-            throw new \Zend\Validator\Exception\InvalidArgumentException('Invalid options to validator provided');
-        }
-
-        $this->setCrc32($options);
-    }
+    protected $options = array(
+        'algorithm' => 'crc32',
+        'hash'      => null,
+    );
 
     /**
      * Returns all set crc32 hashes
@@ -96,43 +80,9 @@ class Crc32 extends Hash
      * @param  string|array $options
      * @return \Zend\Validator\File\Hash Provides a fluent interface
      */
-    public function setHash($options)
-    {
-        if (!is_array($options)) {
-            $options = array($options);
-        }
-
-        $options['algorithm'] = 'crc32';
-        parent::setHash($options);
-        return $this;
-    }
-
-    /**
-     * Sets the crc32 hash for one or multiple files
-     *
-     * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
-     */
     public function setCrc32($options)
     {
         $this->setHash($options);
-        return $this;
-    }
-
-    /**
-     * Adds the crc32 hash for one or multiple files
-     *
-     * @param  string|array $options
-     * @return \Zend\Validator\File\Hash Provides a fluent interface
-     */
-    public function addHash($options)
-    {
-        if (!is_array($options)) {
-            $options = array($options);
-        }
-
-        $options['algorithm'] = 'crc32';
-        parent::addHash($options);
         return $this;
     }
 
@@ -166,7 +116,7 @@ class Crc32 extends Hash
             return $this->_throw($file, self::NOT_FOUND);
         }
 
-        $hashes = array_unique(array_keys($this->_hash));
+        $hashes = array_unique(array_keys($this->getHash()));
         $filehash = hash_file('crc32', $value);
         if ($filehash === false) {
             return $this->_throw($file, self::NOT_DETECTED);

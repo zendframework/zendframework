@@ -499,7 +499,6 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '<operation name="ZendTest.Soap.TestAsset.TestFunc2">'.
                 '<soap:operation soapAction="' . $scriptUri . '#ZendTest.Soap.TestAsset.TestFunc2"/>'.
                 '<input><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></input>'.
-                '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'.
                 '</operation>'.
                 '<operation name="ZendTest.Soap.TestAsset.TestFunc3">'.
                 '<soap:operation soapAction="' . $scriptUri . '#ZendTest.Soap.TestAsset.TestFunc3"/>'.

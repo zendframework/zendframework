@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.standardElements"><info><title>Les éléments standards fournis avec Zend Framework</title></info>
-    
+
     <para>
         Zend Framework est fournis avec des classes d'éléments couvrant la
         plupart des éléments de formulaire HTML. La plupart spécifie un helper de
@@ -10,7 +10,7 @@
         fonctionnalités offertes.
     </para>
     <section xml:id="zend.form.standardElements.button"><info><title>Zend_Form_Element_Button</title></info>
-        
+
         <para>
             Utilisé pour créer des éléments boutons,
             <classname>Zend_Form_Element_Button</classname> étend <link linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link>,
@@ -35,7 +35,7 @@
         </para>
     </section>
     <section xml:id="zend.form.standardElements.captcha"><info><title>Zend_Form_Element_Captcha</title></info>
-        
+
         <para>
             Les CAPTCHAs sont utilisé pour empêcher la soumission automatique des
             formulaires par des bots et autre processus automatisés.
@@ -107,7 +107,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
     </section>
     <section xml:id="zend.form.standardElements.checkbox"><info><title>Zend_Form_Element_Checkbox</title></info>
-        
+
         <para>
             Les cases à cocher HTML vous permettent de retourner une valeur spécifique,
             mais elles fonctionnent essentiellement comme des booléens. Lorsque elle
@@ -139,7 +139,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
     </section>
     <section xml:id="zend.form.standardElements.file"><info><title>Zend_Form_Element_File</title></info>
-        
+
         <para>
             L'élément de formulaire File fournit un mécanisme pour fournir des champs
             d'upload de fichier à votre formulaire. Il utilise <link linkend="zend.file.transfer.introduction">Zend_File_Transfer</link>
@@ -154,7 +154,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             au formulaire sont à leur tour attachés à l'adapteur de transfert.
         </para>
         <example xml:id="zend.form.standardElements.file.usage"><info><title>Utilisation de l'élément de formulaire File</title></info>
-            
+
             <para>
                 L'explication d'utilisation de l'élément de formulaire File ci-dessous
                 peut sembler ésotérique, mais l'usage est en fait relativement trivial :
@@ -197,14 +197,14 @@ $location = $form->foo->getFileName();
 ]]></programlisting>
         </example>
         <note><info><title>Emplacement d'upload par défaut</title></info>
-            
+
             <para>
                 Par défaut, les fichiers sont uploadés dans le répertoire temp
                 du système.
             </para>
         </note>
         <note><info><title>Valeur de fichier</title></info>
-            
+
             <para>
                 Au sein du <acronym>HTTP</acronym> un élément fichier n'a aucune valeur.
                 Pour cette raison et pour des raisons de sécurité
@@ -237,7 +237,7 @@ $form->getValues();
             ce flag vous pouvez appeller <methodname>isValueDisabled()</methodname>.
         </para>
         <example xml:id="zend.form.standardElements.file.retrievement"><info><title>Récupération explicite de fichier</title></info>
-            
+
             <para>
                 Tout d'abord appellez<methodname>setValueDisabled(true)</methodname>.
             </para>
@@ -287,7 +287,7 @@ if ($form->isValid($form->getPost())) {
             </listitem>
         </itemizedlist>
         <example xml:id="zend.form.standardElements.file.isuploaded"><info><title>Vérifier si un fichier optionnel a été uploadé</title></info>
-            
+
             <programlisting language="php"><![CDATA[
 $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Uploader une image:')
@@ -308,7 +308,7 @@ if ($form->foo->isUploaded()) {
             réglages plusieurs fois.
         </para>
         <example xml:id="zend.form.standardElements.file.multiusage"><info><title>Définir plusieurs fichiers</title></info>
-            
+
             <para>
                 Créer un élément multifichier est identique à la création d'un élément unique.
                 Appellez simplement <methodname>setMultiFile()</methodname> après que l'élément soit créé:
@@ -335,7 +335,7 @@ $form->addElement($element, 'foo');
             </para>
         </example>
         <note><info><title>Eléments de fichier dans un sous formulaire</title></info>
-            
+
             <para>
                 Quand vous l'utilisez dans des sous formulaires, vous devez définir
                 des noms uniques.
@@ -368,7 +368,7 @@ $element->setLabel('Uploadez une image:')
 $form->addElement($element, 'foo');
 ]]></programlisting>
         <note><info><title>MaxFileSize et Eléments fichier multiple</title></info>
-            
+
             <para>
                 Quand vous utilisez des éléments fichiers multiples dans votre formulaire
                 vous devez définir <constant>MAX_FILE_SIZE</constant> seulement une fois.
@@ -380,7 +380,7 @@ $form->addElement($element, 'foo');
         </note>
     </section>
     <section xml:id="zend.form.standardElements.hidden"><info><title>Zend_Form_Element_Hidden</title></info>
-        
+
         <para>
             Les éléments cachés injectent des données qui doivent être soumises, mais pas manipulées
             par l'utilisateur. <classname>Zend_Form_Element_Hidden</classname> remplit cette tâche
@@ -388,7 +388,7 @@ $form->addElement($element, 'foo');
         </para>
     </section>
     <section xml:id="zend.form.standardElements.hash"><info><title>Zend_Form_Element_Hash</title></info>
-        
+
         <para>
             Cette élément fournit une proctection contre les attaques CSRF sur les formulaires,
             en s'assurant que les données sont soumises par la session utilisateur qui a
@@ -419,7 +419,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.Image"><info><title>Zend_Form_Element_Image</title></info>
-        
+
         <para>
             Des images peuvent être utilisées comme éléments de formulaires, et vous
             pouvez utiliser ces images en tant qu'éléments graphiques sur les
@@ -441,7 +441,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.multiCheckbox"><info><title>Zend_Form_Element_MultiCheckbox</title></info>
-        
+
         <para>
             Souvent, vous pouvez avoir un ensemble de case à cocher apparenté, et vous
             souhaitez grouper ces résultat. Cela ressemble beaucoup à <link linkend="zend.form.standardElements.multiselect"> Multiselect</link>,
@@ -506,7 +506,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.multiselect"><info><title>Zend_Form_Element_Multiselect</title></info>
-        
+
         <para>
             Les éléments <code>select</code> <acronym>XHTML</acronym>  autorisent un attribut
             'multiple', indiquant que plusieurs options peuvent être sélectionné pour la soumission
@@ -551,7 +551,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.password"><info><title>Zend_Form_Element_Password</title></info>
-        
+
         <para>
             Les éléments mot de passe sont fondamentalement des éléments texte normaux
             -- à l'exception du fait que vous ne voulez pas que le mot de passe soumis
@@ -560,14 +560,14 @@ $element->setValue(array('bar', 'bat'));
         </para>
         <para>
             <classname>Zend_Form_Element_Password</classname> effectue cela en appellant
-            <methodname>setObscureValue(true)</methodname> sur chaque validateur (s'assurant
+            <methodname>setValueObscured(true)</methodname> sur chaque validateur (s'assurant
             ainsi que le mot de passe est dissimulé dans les messages d'erreur de validation),
             et utilise le helper de vue 'formPassword' qui n'affiche pas la valeur qui lui est
             passé).
         </para>
     </section>
     <section xml:id="zend.form.standardElements.radio"><info><title>Zend_Form_Element_Radio</title></info>
-        
+
         <para>
             Les éléments radio vous permettend de spécifier plusieurs options, parmi
             lesquelles vous n'avez besoin que d'une seule. <classname>Zend_Form_Element_Radio</classname>
@@ -607,7 +607,7 @@ $element->setValue(array('bar', 'bat'));
         </itemizedlist>
     </section>
     <section xml:id="zend.form.standardElements.reset"><info><title>Zend_Form_Element_Reset</title></info>
-        
+
         <para>
             Les boutons de mise à zéro sont typiquement utilisé pour vider un formulaire,
             et ne font pas partie des données soumises. Cela dit, comme ils remplissent un rôle
@@ -622,7 +622,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.select"><info><title>Zend_Form_Element_Select</title></info>
-        
+
         <para>
             Les listes d'options sont une manière habituelle de limiter des choix spécifiques.
             <classname>Zend_Form_Element_Select</classname> vous permet de les générer
@@ -664,7 +664,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.submit"><info><title>Zend_Form_Element_Submit</title></info>
-        
+
         <para>
             Les boutons Submit sont utilisé pour soumettre un formulaire. Vous pouvez
             utiliser plusieurs boutons submit ; vous pouvez utiliser le bouton utilisé
@@ -691,7 +691,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.text"><info><title>Zend_Form_Element_Text</title></info>
-        
+
         <para>
             De loin le type d'élément de formulaire le plus répandu est l'élément text,
             celui ci autorise des saisies de texte limité ; c'est un élément idéal pour
@@ -700,7 +700,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </section>
     <section xml:id="zend.form.standardElements.textarea"><info><title>Zend_Form_Element_Textarea</title></info>
-        
+
         <para>
             Les Textareas sont utilisé lorsque de grandes quantités de texte sont
             attendues, et ne limite pas la quantité de texte soumise (si ce n'est la

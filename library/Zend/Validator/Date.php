@@ -164,27 +164,27 @@ class Date extends AbstractValidator
     {
         if (!is_string($value) && !is_int($value) && !is_float($value) &&
             !is_array($value) && !($value instanceof ZendDate\Date)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
-        $this->_setValue($value);
+        $this->setValue($value);
 
-        if (($this->_format !== null) || ($this->_locale !== null) 
+        if (($this->_format !== null) || ($this->_locale !== null)
             || is_array($value) || $value instanceof Date\Date
         ) {
             if (!ZendDate\Date::isDate($value, $this->_format, $this->_locale)) {
                 if ($this->_checkFormat($value) === false) {
-                    $this->_error(self::FALSEFORMAT);
+                    $this->error(self::FALSEFORMAT);
                 } else {
-                    $this->_error(self::INVALID_DATE);
+                    $this->error(self::INVALID_DATE);
                 }
                 return false;
             }
         } else {
             if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) {
                 $this->_format = 'yyyy-MM-dd';
-                $this->_error(self::FALSEFORMAT);
+                $this->error(self::FALSEFORMAT);
                 $this->_format = null;
                 return false;
             }
@@ -192,7 +192,7 @@ class Date extends AbstractValidator
             list($year, $month, $day) = sscanf($value, '%d-%d-%d');
 
             if (!checkdate($month, $day, $year)) {
-                $this->_error(self::INVALID_DATE);
+                $this->error(self::INVALID_DATE);
                 return false;
             }
         }

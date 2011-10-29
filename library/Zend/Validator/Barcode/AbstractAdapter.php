@@ -33,28 +33,15 @@ namespace Zend\Validator\Barcode;
 abstract class AbstractAdapter implements Adapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer|array|string
+     * Allowed options for this adapter
+     * @var array
      */
-    protected $_length;
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters;
-
-    /**
-     * Callback to checksum function
-     * @var string|array
-     */
-    protected $_checksum;
-
-    /**
-     * Is a checksum value included?
-     * @var boolean
-     */
-    protected $_hasChecksum = true;
+    protected $options = array(
+        'length'     => null,   // Allowed barcode lengths, integer, array, string
+        'characters' => null,   // Allowed barcode characters
+        'checksum'   => null,   // Callback to checksum function
+        'useChecksum' => true,  // Is a checksum value included?, boolean
+    );
 
     /**
      * Checks the length of a barcode
@@ -62,7 +49,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $value The barcode to check for proper length
      * @return boolean
      */
-    public function checkLength($value)
+    public function hasValidLength($value)
     {
         if (!is_string($value)) {
             return false;
@@ -102,7 +89,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $value The barcode to check for allowed characters
      * @return boolean
      */
-    public function checkChars($value)
+    public function hasValidCharacters($value)
     {
         if (!is_string($value)) {
             return false;
@@ -133,7 +120,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  string $value The barcode to check the checksum for
      * @return boolean
      */
-    public function checksum($value)
+    public function hasValidChecksum($value)
     {
         $checksum = $this->getChecksum();
         if (!empty($checksum)) {
@@ -152,17 +139,17 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getLength()
     {
-        return $this->_length;
+        return $this->options['length'];
     }
 
     /**
      * Returns the allowed characters
      *
-     * @return integer|string
+     * @return integer|string|array
      */
     public function getCharacters()
     {
-        return $this->_characters;
+        return $this->options['characters'];
     }
 
     /**
@@ -171,28 +158,58 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getChecksum()
     {
-        return $this->_checksum;
+        return $this->options['checksum'];
     }
 
     /**
-     * Returns if barcode uses checksum
+     * Sets the checksum validation method
      *
-     * @return boolean
-     */
-    public function getCheck()
-    {
-        return $this->_hasChecksum;
-    }
-
-    /**
-     * Sets the checksum validation
-     *
-     * @param  boolean $check
+     * @param callback $checksum Checksum method to call
      * @return \Zend\Validator\Barcode\AbstractAdapter
      */
-    public function setCheck($check)
+    protected function setChecksum($checksum)
     {
-        $this->_hasChecksum = (boolean) $check;
+        $this->options['checksum'] = $checksum;
+        return $this;
+    }
+
+    /**
+     * Sets the checksum validation, if no value is given, the actual setting is returned
+     *
+     * @param  boolean $check
+     * @return \Zend\Validator\Barcode\AbstractAdapter|boolean
+     */
+    public function useChecksum($check = null)
+    {
+        if ($check === null) {
+            return $this->options['useChecksum'];
+        }
+
+        $this->options['useChecksum'] = (boolean) $check;
+        return $this;
+    }
+
+    /**
+     * Sets the length of this barcode
+     *
+     * @param integer $length
+     * @return \Zend\Validator\Barcode\AbstractAdapter
+     */
+    protected function setLength($length)
+    {
+        $this->options['length'] = $length;
+        return $this;
+    }
+
+    /**
+     * Sets the allowed characters of this barcode
+     *
+     * @param integer $characters
+     * @return \Zend\Validator\Barcode\AbstractAdapter
+     */
+    protected function setCharacters($characters)
+    {
+        $this->options['characters'] = $characters;
         return $this;
     }
 

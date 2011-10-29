@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.form.elements"><info><title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title></info>
-    
+
 
     <para>
         Ein Formular ist aus Elementen gemacht, die typischerweise mit einer <acronym>HTML</acronym>
@@ -49,7 +49,7 @@
     </para>
 
     <section xml:id="zend.form.elements.loaders"><info><title>Plugin Loader</title></info>
-        
+
 
         <para>
             <classname>Zend_Form_Element</classname> verwendet
@@ -115,7 +115,7 @@
         </para>
 
         <example xml:id="zend.form.elements.loaders.customLabel"><info><title>Eigenes Label</title></info>
-            
+
 
             <para>
                 Ein üblicher Verwendungszweck ist es Ersetzungen für Standardklassen anzubieten.
@@ -200,7 +200,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
     </section>
 
     <section xml:id="zend.form.elements.filters"><info><title>Filter</title></info>
-        
+
 
         <para>
             Es ist oft nützlich und/oder notwendig einige Normalisierungen an Eingaben vorzunehmen,
@@ -254,7 +254,7 @@ $element->addFilter('alnum');
         </para>
 
         <note><info><title>Eigene Filterklassen verwenden</title></info>
-            
+
 
             <para>
                 Wenn man sein eigenes Set an Filterklassen hat, kann man
@@ -333,7 +333,7 @@ $unfiltered = $element->getUnfilteredValue();
     </section>
 
     <section xml:id="zend.form.elements.validators"><info><title>Prüfungen</title></info>
-        
+
 
         <para>
             Wenn man das Sicherheits-Mantra von "Eingabe filtern, Ausgabe escapen" unterschreibt
@@ -376,7 +376,7 @@ $element->addValidator('alnum');
         </para>
 
         <note><info><title>Eigene Prüfklassen verwenden</title></info>
-            
+
 
             <para>
                 Wenn man sein eigenes Set an Prüfklassen hat, kann man
@@ -429,7 +429,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
 ]]></programlisting>
 
         <note><info><title>Eigene Fehlermeldungen für Prüfungen anbieten</title></info>
-            
+
 
             <para>
                 Einige Entwickler wollen eigene Fehlermeldungen für eine Prüfung anbieten.
@@ -515,7 +515,7 @@ if ($element->isValid($value)) {
 ]]></programlisting>
 
         <note><info><title>Die Prüfung findet an gefilterten Werte statt</title></info>
-            
+
 
             <para>
                 <methodname>Zend_Form_Element::isValid()</methodname> filtert Werte durch die
@@ -526,7 +526,7 @@ if ($element->isValid($value)) {
         </note>
 
         <note><info><title>Prüfungskontext</title></info>
-            
+
 
             <para>
                 <methodname>Zend_Form_Element::isValid()</methodname> unterstützt ein zusätzliches
@@ -651,7 +651,7 @@ $messages = $element->getMessages();
         </para>
 
         <note><info><title>Verwenden von Zend_Form_Elements als generell-eingesetzte Prüfung</title></info>
-            
+
 
             <para>
                 <classname>Zend_Form_Element</classname> implementiert
@@ -661,7 +661,7 @@ $messages = $element->getMessages();
         </note>
 
         <note><info><title>Wann wird ein Element als leer erkannt?</title></info>
-            
+
 
             <para>
                 Wie erwähnt wird der 'NotEmpty' Prüfer verwendet um zu erkennen ob ein Element leer
@@ -755,7 +755,7 @@ $messages = $element->getMessages();
         </itemizedlist>
 
         <section xml:id="zend.form.elements.validators.errors"><info><title>Eigene Fehlermeldungen</title></info>
-            
+
 
             <para>
                 Von Zeit zu Zeit ist es gewünscht ein oder mehrere spezielle Fehlermeldungen zu
@@ -852,7 +852,7 @@ $messages = $element->getMessages();
     </section>
 
     <section xml:id="zend.form.elements.decorators"><info><title>Dekoratoren</title></info>
-        
+
 
         <para>
             Ein möglicher Schmerzpunkt für viele Webentwickler, ist die Erstellung von
@@ -920,7 +920,7 @@ $messages = $element->getMessages();
         </itemizedlist>
 
         <note><info><title>Standard Dekoratoren müssen nicht geladen werden</title></info>
-            
+
 
             <para>
                 Standardmäßig werden die Standarddekoratoren während der Initialisierung des Objekts
@@ -992,7 +992,7 @@ $this->addDecorators(array(
         </para>
 
         <note><info><title>Mehrere Dekoratoren des gleichen Typs verwenden</title></info>
-            
+
 
             <para>
                 Intern verwendet <classname>Zend_Form_Element</classname> eine Dekoratorklasse als
@@ -1114,7 +1114,7 @@ echo $element->renderHtmlTag("Das ist der Inhalt des HTML Tags");
     </section>
 
     <section xml:id="zend.form.elements.metadata"><info><title>Metadaten und Attribute</title></info>
-        
+
 
         <para>
             <classname>Zend_Form_Element</classname> behandelt eine Vielzahl von Attributen und
@@ -1251,7 +1251,7 @@ $element->class = 'text;
     </section>
 
     <section xml:id="zend.form.elements.standard"><info><title>Standard Elemente</title></info>
-        
+
 
         <para>
             <classname>Zend_Form</classname> wird mit einer Anzahl an Standardelementen
@@ -1262,7 +1262,7 @@ $element->class = 'text;
     </section>
 
     <section xml:id="zend.form.elements.methods"><info><title>Zend_Form_Element Methoden</title></info>
-        
+
 
         <para>
             <classname>Zend_Form_Element</classname> hat viele, viele Methoden. Was folgt, ist eine
@@ -1493,7 +1493,7 @@ $element->class = 'text;
     </section>
 
     <section xml:id="zend.form.elements.config"><info><title>Konfiguration</title></info>
-        
+
 
         <para>
             Der Konstruktor von <classname>Zend_Form_Element</classname> akzeptiert entweder einen
@@ -1586,7 +1586,7 @@ decorators.label.decorator = "Label"
     </section>
 
     <section xml:id="zend.form.elements.custom"><info><title>Eigene Elemente</title></info>
-        
+
 
         <para>
             Es können eigene Elemente durch die Erweiterung der

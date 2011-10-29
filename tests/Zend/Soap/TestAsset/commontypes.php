@@ -549,6 +549,24 @@ class TestData2 {
      public $property2;
 }
 
+class MockSoapServer {
+    public $handle = null;
+    public function handle()
+    {
+        $this->handle = func_get_args();
+    }
+    public function __call($name, $args) {}
+}
+
+class MockServer extends \Zend\Soap\Server {
+    public $mockSoapServer = null;
+    protected function _getSoap() {
+        $this->mockSoapServer = new MockSoapServer();
+        return $this->mockSoapServer;
+    }
+}
+
+
 /** Server test classes */
 class ServerTestClass
 {

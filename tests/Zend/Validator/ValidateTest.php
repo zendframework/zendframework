@@ -217,9 +217,13 @@ class ValidatorTrue extends Validator\AbstractValidator
  */
 class ValidatorFalse extends Validator\AbstractValidator
 {
+    protected $_messageTemplates = array(
+        'error' => 'validation failed',
+    );
+
     public function isValid($value)
     {
-        $this->_messages = array('error' => 'validation failed');
+        $this->error('error');
         return false;
     }
 }

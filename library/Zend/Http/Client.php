@@ -710,9 +710,10 @@ class Client implements Dispatchable
         }
         return $response;
     }
+
     /**
      * Reset all the HTTP parameters (auth,cookies,request, response, etc)
-     * 
+     * @return Client
      */
     public function resetParameters()
     {   
@@ -726,6 +727,8 @@ class Client implements Dispatchable
         $this->response   = null;
         
         $this->setUri($uri);
+
+        return $this;
     }
 
     /**
@@ -1133,41 +1136,29 @@ class Client implements Dispatchable
 
         // If we have POST parameters or files, encode and add them to the body
         if (count($this->getRequest()->post()->toArray()) > 0 || $totalFiles > 0) {
+            if (stripos($this->getEncType(), self::ENC_FORMDATA) === 0) {
+                $boundary = '---ZENDHTTPCLIENT-' . md5(microtime());
+                $this->setEncType(self::ENC_FORMDATA, $boundary);
+                  
+                // Get POST parameters and encode them
+                $params = self::flattenParametersArray($this->getRequest()->post()->toArray());
+                foreach ($params as $pp) {
+                    $body .= $this->encodeFormData($boundary, $pp[0], $pp[1]);
+                }
 
-            switch($this->getEncType()) {
-                case self::ENC_FORMDATA:
-                    // Encode body as multipart/form-data
-                    $boundary = '---ZENDHTTPCLIENT-' . md5(microtime());
-                    $this->setEncType(self::ENC_FORMDATA, $boundary);
-                    
-                    // Get POST parameters and encode them
-                    $params = self::flattenParametersArray($this->getRequest()->post()->toArray());
-                    foreach ($params as $pp) {
-                        $body .= $this->encodeFormData($boundary, $pp[0], $pp[1]);
-                    }
-
-                    // Encode files
-                    foreach ($this->getRequest()->file()->toArray() as $key => $file) {
-                        $fhead = array('Content-Type' => $file['ctype']);
-                        $body .= $this->encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
-                    }
-
-                    $body .= "--{$boundary}--\r\n";
-                    break;
-
-                case self::ENC_URLENCODED:
-                    // Encode body as application/x-www-form-urlencoded
-                    $body = http_build_query($this->getRequest()->post()->toArray());
-                    break;
-
-                default:
-                    if (isset($mbIntEnc)) {
-                        mb_internal_encoding($mbIntEnc);
-                    }
-
-                    throw new Exception\RuntimeException("Cannot handle content type '{$this->encType}' automatically");
-                    break;
+                // Encode files
+                foreach ($this->getRequest()->file()->toArray() as $key => $file) {
+                    $fhead = array('Content-Type' => $file['ctype']);
+                    $body .= $this->encodeFormData($boundary, $file['formname'], $file['data'], $file['filename'], $fhead);
+                }
+                $body .= "--{$boundary}--\r\n";
+            } elseif (stripos($this->getEncType(), self::ENC_URLENCODED) === 0) {
+                // Encode body as application/x-www-form-urlencoded
+                $body = http_build_query($this->getRequest()->post()->toArray());
+            } else {
+                throw new Exception\RuntimeException("Cannot handle content type '{$this->encType}' automatically");
             }
+
         }
 
         if (isset($mbIntEnc)) {

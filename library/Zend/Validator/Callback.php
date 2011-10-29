@@ -54,43 +54,27 @@ class Callback extends AbstractValidator
     );
 
     /**
-     * Callback in a call_user_func format
-     *
-     * @var string|array
-     */
-    protected $_callback = null;
-
-    /**
-     * Default options to set for the filter
+     * Default options to set for the validator
      *
      * @var mixed
      */
-    protected $_options = array();
+    protected $options = array(
+        'callback'         => null,     // Callback in a call_user_func format, string || array
+        'callbackOptions'  => array(),  // Options for the callback
+    );
 
     /**
-     * Sets validator options
+     * Constructor
      *
-     * @param  string|array $callback
-     * @param  mixed   $max
-     * @param  boolean $inclusive
-     * @return void
+     * @param array $options
      */
-    public function __construct($callback = null)
+    public function __construct($options = null)
     {
-        if (is_callable($callback)) {
-            $this->setCallback($callback);
-        } elseif (is_array($callback)) {
-            if (isset($callback['callback'])) {
-                $this->setCallback($callback['callback']);
-            }
-            if (isset($callback['options'])) {
-                $this->setOptions($callback['options']);
-            }
+        if (is_callable($options)) {
+            $options = array('callback' => $options);
         }
 
-        if (null === ($initializedCallack = $this->getCallback())) {
-            throw new Exception\InvalidArgumentException('No callback registered');
-        }
+        parent::__construct($options);
     }
 
     /**
@@ -100,7 +84,7 @@ class Callback extends AbstractValidator
      */
     public function getCallback()
     {
-        return $this->_callback;
+        return $this->options['callback'];
     }
 
     /**
@@ -114,7 +98,8 @@ class Callback extends AbstractValidator
         if (!is_callable($callback)) {
             throw new Exception\InvalidArgumentException('Invalid callback given');
         }
-        $this->_callback = $callback;
+
+        $this->options['callback'] = $callback;
         return $this;
     }
 
@@ -123,9 +108,9 @@ class Callback extends AbstractValidator
      *
      * @return mixed
      */
-    public function getOptions()
+    public function getCallbackOptions()
     {
-        return $this->_options;
+        return $this->options['callbackOptions'];
     }
 
     /**
@@ -134,9 +119,9 @@ class Callback extends AbstractValidator
      * @param  mixed $max
      * @return \Zend\Validator\Callback Provides a fluent interface
      */
-    public function setOptions($options)
+    public function setCallbackOptions($options)
     {
-        $this->_options = (array) $options;
+        $this->options['callbackOptions'] = (array) $options;
         return $this;
     }
 
@@ -149,20 +134,24 @@ class Callback extends AbstractValidator
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        $this->setValue($value);
 
-        $options  = $this->getOptions();
+        $options  = $this->getCallbackOptions();
         $callback = $this->getCallback();
+        if (empty($callback)) {
+            throw new Exception\InvalidArgumentException('No callback given');
+        }
+
         $args     = func_get_args();
         $options  = array_merge($args, $options);
 
         try {
             if (!call_user_func_array($callback, $options)) {
-                $this->_error(self::INVALID_VALUE);
+                $this->error(self::INVALID_VALUE);
                 return false;
             }
         } catch (\Exception $e) {
-            $this->_error(self::INVALID_CALLBACK);
+            $this->error(self::INVALID_CALLBACK);
             return false;
         }
 

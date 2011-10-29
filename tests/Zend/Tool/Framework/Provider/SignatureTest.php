@@ -23,8 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Tool\Framework\Provider;
-use Zend\Tool\Framework\Provider;
-use Zend\Tool\Framework\Action;
+use Zend\Tool\Framework\Provider,
+    Zend\Tool\Framework\Action;
 
 /**
  * @category   Zend
@@ -92,7 +92,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $signature = new Provider\Signature(new \ZendTest\Tool\Framework\Provider\TestAsset\ProviderOne());
         $signature->setRegistry($this->_registry);
         $signature->process();
-        $this->assertTrue($signature->getProviderReflection() instanceof \Zend\Reflection\ReflectionClass);
+        $this->assertTrue($signature->getProviderReflection() instanceof \Zend\Code\Reflection\ClassReflection);
     }
 
     public function testGetSpecialtiesReturnsParsedSpecialties()

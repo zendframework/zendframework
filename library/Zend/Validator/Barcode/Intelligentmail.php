@@ -33,18 +33,6 @@ namespace Zend\Validator\Barcode;
 class Intelligentmail extends AbstractAdapter
 {
     /**
-     * Allowed barcode lengths
-     * @var integer
-     */
-    protected $_length = array(20, 25, 29, 31);
-
-    /**
-     * Allowed barcode characters
-     * @var string
-     */
-    protected $_characters = '0123456789';
-
-    /**
      * Constructor
      *
      * Sets check flag to false.
@@ -53,6 +41,8 @@ class Intelligentmail extends AbstractAdapter
      */
     public function __construct()
     {
-        $this->setCheck(false);
+        $this->setLength(array(20, 25, 29, 31));
+        $this->setCharacters('0123456789');
+        $this->useChecksum(false);
     }
 }

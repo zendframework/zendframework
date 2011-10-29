@@ -25,17 +25,20 @@
 namespace Zend\Tool\Project\Context\Zf;
 
 use Zend\Tool\Project\Context\Context,
-    Zend\CodeGenerator\Php,
     Zend\Tool\Project\Context\Exception,
-    Zend\Tool\Project\Profile\Resource\Resource;
+    Zend\Tool\Project\Profile\Resource\Resource,
+    Zend\Code\Generator\FileGenerator,
+    Zend\Code\Generator\ClassGenerator,
+    Zend\Code\Generator\MethodGenerator;
 
+   
 /**
  * This class is the front most class for utilizing Zend\Tool\Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
- * @uses       \Zend\CodeGenerator\Php\PhpFile
+ * @uses       \Zend\Code\Generator\ClassGenerator
  * @uses       \Zend\Reflection\ReflectionFile
  * @uses       \Zend\Tool\Project\Context\Exception
  * @uses       \Zend\Tool\Project\Context
@@ -186,11 +189,9 @@ class ActionMethod implements Context
             return false;
         }
 
-        $controllerCodeGenFile = Php\PhpFile::fromReflectedFileName($controllerPath, true, true);
-        $controllerCodeGenFile->getClass()->setMethod(array(
-            'name' => $actionName . 'Action',
-            'body' => $body
-            ));
+        $controllerCodeGenFile = FileGenerator::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile->setClass(new ClassGenerator(basename($controllerPath, '.php')));
+        $controllerCodeGenFile->getClass()->setMethod(new MethodGenerator($actionName . 'Action', array(), MethodGenerator::FLAG_PUBLIC, $body));
 
         file_put_contents($controllerPath, $controllerCodeGenFile->generate());
         return true;
@@ -209,7 +210,7 @@ class ActionMethod implements Context
             return false;
         }
 
-        $controllerCodeGenFile = Php\PhpFile::fromReflectedFileName($controllerPath, true, true);
+        $controllerCodeGenFile = FileGenerator::fromReflectedFileName($controllerPath, true, true);
         return $controllerCodeGenFile->getClass()->hasMethod($actionName . 'Action');
     }
 

@@ -82,6 +82,14 @@ define('TESTS_ZEND_CACHE_MEMCACHED_PERSISTENT', true);
 define('TESTS_ZEND_CONTROLLER_DISPATCHER_OB', false);
 
 /**
+ * Zend_Crypt related constantes
+ *
+ * TESTS_ZEND_CRYPT_OPENSSL_CONF => location of an openssl.cnf file for use 
+ *     with RSA encryption
+ */
+define('TESTS_ZEND_CRYPT_OPENSSL_CONF', false);
+
+/**
  * Zend_Db_Adapter_Pdo_Mysql and Zend_Db_Adapter_Mysqli
  *
  * There are separate properties to enable tests for the PDO_MYSQL adapter and
@@ -569,7 +577,7 @@ define('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED', false);
 define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_ENABLED', false);
 define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_LOGIN', 'ZF_Username');
 define('TESTS_ZEND_SERVICE_DEVELOPERGARDEN_ONLINE_PASSWORD', 'ZF_Password');
- 
+
 /**
  * Zend_Service_Flickr online tests
  */

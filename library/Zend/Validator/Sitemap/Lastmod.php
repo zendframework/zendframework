@@ -72,14 +72,14 @@ class Lastmod extends \Zend\Validator\AbstractValidator
     public function isValid($value)
     {
         if (!is_string($value)) {
-            $this->_error(self::INVALID);
+            $this->error(self::INVALID);
             return false;
         }
 
-        $this->_setValue($value);
+        $this->setValue($value);
         $result = @preg_match(self::LASTMOD_REGEX, $value);
         if ($result != 1) {
-            $this->_error(self::NOT_VALID);
+            $this->error(self::NOT_VALID);
             return false;
         }
 

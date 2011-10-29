@@ -27,7 +27,7 @@ namespace Zend\Crypt\Math\BigInteger;
 /**
  * Support for arbitrary precision mathematics in PHP.
  *
- * Zend_Crypt_Math_BigInteger_Bcmath is a wrapper across the PHP BCMath
+ * \Zend\Crypt\Math\BigInteger\Gmp is a wrapper across the PHP BCMath
  * extension.
  *
  * @uses       Zend\Crypt\Math\BigInteger\BigIntegerCapable

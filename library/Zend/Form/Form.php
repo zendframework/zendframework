@@ -2232,8 +2232,10 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
         }
         $context = $data;
         foreach ($this->getElements() as $key => $element) {
-            if (null !== $translator && $this->hasTranslator()
-                    && !$element->hasTranslator()) {
+            if (null !== $translator 
+                && $this->hasTranslator()
+                && !$element->hasTranslator()
+            ) {
                 $element->setTranslator($translator);
             }
             $check = $data;
@@ -2248,7 +2250,8 @@ class Form implements \Iterator, \Countable, \Zend\Validator\Validator
             }
         }
         foreach ($this->getSubForms() as $key => $form) {
-            if (null !== $translator && !$form->hasTranslator()) {
+            if (null !== $translator && $this->hasTranslator()
+                    && !$form->hasTranslator()) {
                 $form->setTranslator($translator);
             }
             if (isset($data[$key]) && !$form->isArray()) {

@@ -78,9 +78,9 @@ class ExcludeExtension extends Extension
 
         $extensions = $this->getExtension();
 
-        if ($this->_case and (!in_array($info['extension'], $extensions))) {
+        if ($this->getCase() and (!in_array($info['extension'], $extensions))) {
             return true;
-        } else if (!$this->_case) {
+        } else if (!$this->getCase()) {
             $found = false;
             foreach ($extensions as $extension) {
                 if (strtolower($extension) == strtolower($info['extension'])) {

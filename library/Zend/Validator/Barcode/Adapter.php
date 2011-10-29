@@ -37,7 +37,7 @@ interface Adapter
      * @param  string $value  The barcode to check for proper length
      * @return boolean
      */
-    public function checkLength($value);
+    public function hasValidLength($value);
 
     /**
      * Checks for allowed characters within the barcode
@@ -45,7 +45,7 @@ interface Adapter
      * @param  string $value The barcode to check for allowed characters
      * @return boolean
      */
-    public function checkChars($value);
+    public function hasValidCharacters($value);
 
     /**
      * Validates the checksum
@@ -53,20 +53,34 @@ interface Adapter
      * @param string $value The barcode to check the checksum for
      * @return boolean
      */
-    public function checksum($value);
+    public function hasValidChecksum($value);
+
+    /**
+     * Returns the allowed barcode length
+     *
+     * @return integer
+     */
+    public function getLength();
+
+    /**
+     * Returns the allowed characters
+     *
+     * @return integer|string|array
+     */
+    public function getCharacters();
 
     /**
      * Returns if barcode uses a checksum
      *
      * @return boolean
      */
-    public function getCheck();
+    public function getChecksum();
 
     /**
-     * Sets the checksum validation
+     * Sets the checksum validation, if no value is given, the actual setting is returned
      *
      * @param  boolean $check
-     * @return Zend\Validate\Barcode\Adapter Provides fluid interface
+     * @return \Zend\Validator\Barcode\AbstractAdapter|boolean
      */
-    public function setCheck($check);
+    public function useChecksum($check = null);
 }

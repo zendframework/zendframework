@@ -120,7 +120,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $helper = new Helper\Translator('something');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setTranslator('something');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 
@@ -138,7 +138,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->getLocale();
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 
@@ -147,7 +147,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         try {
             $this->helper->setLocale('de');
         } catch (View\Exception $e) {
-            $this->assertContains('must set an instance of Zend_Translator', $e->getMessage());
+            $this->assertContains('must set an instance of Zend\Translator', $e->getMessage());
         }
     }
 
@@ -187,6 +187,7 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $this->helper->setTranslator($trans);
         $this->assertEquals("drei 100 200", $this->helper->__invoke("three %1\$s %2\$s", "100", "200"));
         $this->assertEquals("tre 100 200", $this->helper->__invoke("three %1\$s %2\$s", "100", "200", 'it'));
+        $this->assertEquals("drei 100 it", $this->helper->translate("three %1\$s %2\$s", "100", "it"));
         $this->assertEquals("drei 100 200", $this->helper->__invoke("three %1\$s %2\$s", array("100", "200")));
         $this->assertEquals("tre 100 200", $this->helper->__invoke("three %1\$s %2\$s", array("100", "200"), 'it'));
     }

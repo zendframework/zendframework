@@ -57,15 +57,15 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testSettingDefaultOptionsAfterwards()
     {
         $valid = new Validator\Callback(array($this, 'objectCallback'));
-        $valid->setOptions('options');
-        $this->assertEquals(array('options'), $valid->getOptions());
+        $valid->setCallbackOptions('options');
+        $this->assertEquals(array('options'), $valid->getCallbackOptions());
         $this->assertTrue($valid->isValid('test'));
     }
 
     public function testSettingDefaultOptions()
     {
-        $valid = new Validator\Callback(array('callback' => array($this, 'objectCallback'), 'options' => 'options'));
-        $this->assertEquals(array('options'), $valid->getOptions());
+        $valid = new Validator\Callback(array('callback' => array($this, 'objectCallback'), 'callbackOptions' => 'options'));
+        $this->assertEquals(array('options'), $valid->getCallbackOptions());
         $this->assertTrue($valid->isValid('test'));
     }
 
@@ -78,15 +78,15 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testInvalidCallback()
     {
         $valid = new Validator\Callback(array($this, 'objectCallback'));
-        
+
         $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Invalid callback given');
         $valid->setCallback('invalidcallback');
     }
 
     public function testAddingValueOptions()
     {
-        $valid = new Validator\Callback(array('callback' => array($this, 'optionsCallback'), 'options' => 'options'));
-        $this->assertEquals(array('options'), $valid->getOptions());
+        $valid = new Validator\Callback(array('callback' => array($this, 'optionsCallback'), 'callbackOptions' => 'options'));
+        $this->assertEquals(array('options'), $valid->getCallbackOptions());
         $this->assertTrue($valid->isValid('test', 'something'));
     }
 

@@ -61,6 +61,14 @@ class PartTest extends TestCase
                     'action'     => 'ItsSubRss',
                 ),
             )),
+            array(array(
+                'uri'    => 'http://test.net/blog/rss/sub',
+                'offset' => null,
+                'match'  => array(
+                    'controller' => 'ItsRssBlog',
+                    'action'     => 'ItsSubRss',
+                ),
+            )),
         );
     }
 

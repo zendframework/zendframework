@@ -30,7 +30,7 @@ use Zend\Tool\Framework\Provider,
  * The purpose of Zend\Tool\Framework\Provider\Signature is to derive
  * callable signatures from the provided provider.
  *
- * @uses       \Zend\Reflection\ReflectionClass
+ * @uses       \Zend\Code\Reflection\ClassReflection
  * @uses       \Zend\Tool\Framework\Action\Base
  * @uses       \Zend\Tool\Framework\Provider\Exception
  * @uses       \Zend\Tool\Framework\RegistryEnabled
@@ -73,7 +73,7 @@ class Signature implements RegistryEnabled
     protected $_actions = array();
 
     /**
-     * @var \Zend\Reflection\ReflectionClass
+     * @var \Zend\Code\Reflection\ClassReflection
      */
     protected $_providerReflection = null;
 
@@ -90,7 +90,7 @@ class Signature implements RegistryEnabled
     public function __construct(Provider $provider)
     {
         $this->_provider = $provider;
-        $this->_providerReflection = new \Zend\Reflection\ReflectionClass($provider);
+        $this->_providerReflection = new \Zend\Code\Reflection\ClassReflection($provider);
     }
 
     /**
@@ -117,7 +117,7 @@ class Signature implements RegistryEnabled
     /**
      * getName() of the provider
      *
-     * @return unknown
+     * @return string
      */
     public function getName()
     {
@@ -137,7 +137,7 @@ class Signature implements RegistryEnabled
     /**
      * getProviderReflection()
      *
-     * @return \Zend\Reflection\ReflectionClass
+     * @return \Zend\Code\Reflection\ClassReflection
      */
     public function getProviderReflection()
     {

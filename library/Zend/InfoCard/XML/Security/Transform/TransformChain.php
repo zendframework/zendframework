@@ -102,7 +102,7 @@ class TransformChain
     {
         foreach($this->_transformList as $transform) {
             if (!class_exists($transform['class'])) {
-                \Zend\Loader::loadClass($transform['class']);
+                throw new Security\Exception\InvalidArgumentException('Transform Class not exist');
             }
 
             $transformer = new $transform['class'];

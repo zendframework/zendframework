@@ -23,9 +23,10 @@
  * @namespace
  */
 namespace ZendTest\InfoCard;
-use Zend\InfoCard\XML\EncryptedData;
-use Zend\InfoCard\XML\KeyInfo;
-use Zend\InfoCard\XML;
+use Zend\InfoCard\XML\EncryptedData,
+    Zend\InfoCard\XML\KeyInfo,
+    Zend\InfoCard\XML,
+    Zend\InfoCard\XML\Exception;
 
 
 /**
@@ -110,6 +111,18 @@ class XmlParsingTest extends \PHPUnit_Framework_TestCase
         $sxe = KeyInfo\XMLDSig::convertToObject($dom, 'Zend\InfoCard\XML\KeyInfo\XMLDSig');
 
         $this->assertTrue($sxe instanceof KeyInfo\XMLDSig);
+    }
+
+    public function testConvertObjectClassLoad()
+    {
+        $encryptedData = EncryptedData\Factory::getInstance($this->_xmlDocument);
+        $keyInfo = $encryptedData->getKeyInfo();
+        $dom = KeyInfo\XMLDSig::convertToDOM($keyInfo);
+
+        try {
+            $sxe = KeyInfo\XMLDSig::convertToObject($dom, '\ZendTest\InfoCard\XML\KeyInfo\InvalidClassName');
+        } catch (Exception\InvalidArgumentException $e) {
+        }
     }
 
     public function testEncryptedDataKeyInfo()

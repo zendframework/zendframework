@@ -29,15 +29,13 @@ class Bootstrap implements Bootstrapper
     /**
      * Constructor
      *
-     * Populates $config from the $modules "getMergedConfig" method.
-     * 
      * @param  ModuleManager $modules 
      * @return void
      */
     public function __construct(ModuleManager $modules)
     {
         $this->modules = $modules; 
-        $this->config  = $modules->getMergedConfig();
+        $this->setupModules();
     }
 
     /**
@@ -92,6 +90,7 @@ class Bootstrap implements Bootstrapper
         $this->setupEvents($application);
     }
 
+
     /**
      * Sets up the locator based on the configuration provided
      * 
@@ -138,5 +137,17 @@ class Bootstrap implements Bootstrapper
             'modules'     => $this->modules,
         );
         $this->events()->trigger('bootstrap', $this, $params);
+    }
+
+    /**
+     * Load modules and pull merged config
+     *
+     * @access protected
+     * @return void
+     */
+    protected function setupModules()
+    {
+        $this->modules->loadModules();
+        $this->config  = $this->modules->getMergedConfig();
     }
 }

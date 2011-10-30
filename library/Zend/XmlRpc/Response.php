@@ -207,7 +207,7 @@ class Response
             }
             $valueXml = $xml->params->param->value->asXML();
             $value = Value::getXmlRpcValue($valueXml, Value::XML_STRING);
-        } catch (Value\Exception $e) {
+        } catch (Exception\ValueException $e) {
             $this->_fault = new Fault(653);
             $this->_fault->setEncoding($this->getEncoding());
             return false;

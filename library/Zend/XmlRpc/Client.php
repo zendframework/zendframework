@@ -232,7 +232,7 @@ class Client
         iconv_set_encoding('internal_encoding', 'UTF-8');
 
         $http = $this->getHttpClient();
-        if($http->getUri() === null) {
+        if($http->getRequest()->getUri() === null) {
             $http->setUri($this->_serverAddress);
         }
 
@@ -246,10 +246,10 @@ class Client
         }
 
         $xml = $this->_lastRequest->__toString();
-        $http->setRawData($xml);
-        $httpResponse = $http->request(Http\Client::POST);
+        $http->setRawBody($xml);
+        $httpResponse = $http->setMethod('post')->send();
 
-        if (! $httpResponse->isSuccessful()) {
+        if (! $httpResponse->isSuccess()) {
             /**
              * Exception thrown when an HTTP error occurs
              */
@@ -316,7 +316,7 @@ class Client
 
                         if (isset($signature['parameters'][$key])) {
                             $type = $signature['parameters'][$key];
-                            $type = in_array($type, $validTypes) ? $type : Value\Value::AUTO_DETECT_TYPE;
+                            $type = in_array($type, $validTypes) ? $type : Value::AUTO_DETECT_TYPE;
                         }
                     }
 

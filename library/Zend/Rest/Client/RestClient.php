@@ -129,8 +129,10 @@ class RestClient extends \Zend\Service\AbstractService
     {
         $this->_prepareRest($path);
         $client = $this->getHttpClient();
-        $client->setParameterGet($query);
-        return $client->request('GET');
+        if (is_array($query)) {
+            $client->setParameterGet($query);
+        }
+        return $client->setMethod('GET')->send();
     }
 
     /**
@@ -147,12 +149,15 @@ class RestClient extends \Zend\Service\AbstractService
     protected function _performPost($method, $data = null)
     {
         $client = $this->getHttpClient();
+        $client->setMethod($method);
+
+        $request = $client->getRequest();
         if (is_string($data)) {
-            $client->setRawData($data);
+            $request->setContent($data);
         } elseif (is_array($data) || is_object($data)) {
-            $client->setParameterPost((array) $data);
+            $request->post()->fromArray((array) $data);
         }
-        return $client->request($method);
+        return $client->send($request);
     }
 
     /**
@@ -193,7 +198,7 @@ class RestClient extends \Zend\Service\AbstractService
     final public function restDelete($path)
     {
         $this->_prepareRest($path);
-        return $this->getHttpClient()->request('DELETE');
+        return $this->getHttpClient()->setMethod('DELETE')->send();
     }
 
     /**

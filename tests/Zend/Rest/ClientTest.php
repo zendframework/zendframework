@@ -152,7 +152,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RestClient::getDefaultHttpClient()->getLastRequest();
+        $request = Client\RestClient::getDefaultHttpClient()->getLastRawRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 
@@ -175,7 +175,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RestClient::getDefaultHttpClient()->getLastRequest();
+        $request = Client\RestClient::getDefaultHttpClient()->getLastRawRequest();
         $this->assertContains('foo=bar&baz=bat', $request, $request);
     }
 
@@ -199,7 +199,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RestClient::getDefaultHttpClient()->getLastRequest();
+        $request = Client\RestClient::getDefaultHttpClient()->getLastRawRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 

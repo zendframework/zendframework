@@ -1279,7 +1279,7 @@ class Client implements Dispatchable
     {
         if (function_exists('mb_internal_encoding') &&
             (((int)ini_get('mbstring.func_overload')) & 2)) {
-            return mb_strlen($str, 'ASCII');
+            return mb_strlen($str, '8bit');
         } else {
             return strlen($str);
         }

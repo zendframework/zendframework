@@ -64,7 +64,7 @@ class ValidatorChain extends EventManager
      * Attach a listener to the session validator chain
      * 
      * @param  string $event
-     * @param  callback $context 
+     * @param  callback $callback
      * @param  int $priority 
      * @return Zend\Stdlib\CallbackHandler
      */

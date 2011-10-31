@@ -9,7 +9,7 @@ use ArrayObject,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
     Zend\Http\PhpEnvironment\Request as PhpHttpRequest,
-    Zend\Http\Response as HttpResponse,
+    Zend\Http\PhpEnvironment\Response as PhpHttpResponse,
     Zend\Uri\Http as HttpUri,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\IsAssocArray,
@@ -130,7 +130,7 @@ class Application implements AppContext
     public function getResponse()
     {
         if (!$this->response instanceof Response) {
-            $this->setResponse(new HttpResponse());
+            $this->setResponse(new PhpHttpResponse());
         }
         return $this->response;
     }
@@ -192,7 +192,7 @@ class Application implements AppContext
             return ($r instanceof Response);
         });
         if ($result->stopped()) {
-            $response = new SendableResponse($result->last());
+            $response = $result->last();
             return $response;
         }
 
@@ -208,7 +208,7 @@ class Application implements AppContext
 
         $events->trigger('finish', $event);
 
-        $response = new SendableResponse($response);
+        $response = $response;
         return $response;
     }
 

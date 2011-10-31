@@ -10,7 +10,7 @@ use ArrayObject,
     Zend\EventManager\EventManager,
     Zend\EventManager\StaticEventManager,
     Zend\Http\Request,
-    Zend\Http\Response,
+    Zend\Http\PhpEnvironment\Response,
     Zend\Mvc\Application,
     Zend\Mvc\Router,
     Zend\Uri\UriFactory;
@@ -234,16 +234,16 @@ class ApplicationTest extends TestCase
         });
 
         $result = $app->run();
-        $this->assertSame($response, $result->getResponse());
+        $this->assertSame($response, $result);
     }
 
     public function testControllerIsDispatchedDuringRun()
     {
         $app = $this->setupPathController();
 
-        $response = $app->run()->getResponse();
+        $response = $app->run();
         $this->assertContains('PathController', $response->getContent());
-        $this->assertContains('dispatch', $response->getContent());
+        $this->assertContains('dispatch', $response->toString());
     }
 
     public function testDefaultRequestObjectContainsPhpEnvironmentContainers()
@@ -251,9 +251,9 @@ class ApplicationTest extends TestCase
         $app = new Application();
         $request = $app->getRequest();
         $query = $request->query();
-        $this->assertInstanceOf('Zend\Mvc\PhpEnvironment\GetContainer', $query);
+        $this->assertInstanceOf('Zend\Stdlib\Parameters', $query);
         $post = $request->post();
-        $this->assertInstanceOf('Zend\Mvc\PhpEnvironment\PostContainer', $post);
+        $this->assertInstanceOf('Zend\Stdlib\Parameters', $post);
     }
 
     public function testDefaultRequestObjectMirrorsEnvSuperglobal()
@@ -344,7 +344,10 @@ class ApplicationTest extends TestCase
 
     public function testDefaultRequestObjectContainsUriCreatedFromServerRequestUri()
     {
-        $_SERVER['REQUEST_URI'] = 'http://framework.zend.com/api/zf-version?test=this';
+        $_SERVER['HTTP_HOST'] = 'framework.zend.com';
+        $_SERVER['REQUEST_URI'] = '/api/zf-version?test=this';
+        $_SERVER['QUERY_STRING'] = 'test=this';
+
         $app = new Application();
         $req = $app->getRequest();
 
@@ -378,7 +381,7 @@ class ApplicationTest extends TestCase
             return $response;
         });
 
-        $response = $app->run()->getResponse();
+        $response = $app->run();
         $response = json_decode($response->getContent());
         $this->assertTrue(isset($response->foo), var_export($response, 1));
         $this->assertEquals('bar', $response->foo);
@@ -428,7 +431,7 @@ class ApplicationTest extends TestCase
         $app->events()->attach('finish', function($e) {
             return $e->getResponse()->setContent($e->getResponse()->getBody() . 'foobar');
         });
-        $this->assertContains('foobar', $app->run()->getResponse()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
+        $this->assertContains('foobar', $app->run()->getBody(), 'The "finish" event was not triggered ("foobar" not in response)');
     }
 
     public function testCanProvideAlternateEventManagerToDisableDefaultRouteAndDispatchEventListeners()
@@ -561,6 +564,6 @@ class ApplicationTest extends TestCase
         });
 
         $result = $app->run();
-        $this->assertSame($response, $result->getResponse());
+        $this->assertSame($response, $result);
     }
 }

@@ -4,6 +4,7 @@ namespace Zend\Http\PhpEnvironment;
 
 use Zend\Http\Request as HttpRequest,
     Zend\Uri\Http as HttpUri,
+    Zend\Http\Header\Cookie,
     Zend\Stdlib\Parameters,
     Zend\Stdlib\ParametersDescription;
 
@@ -16,11 +17,17 @@ class Request extends HttpRequest
         $this->setQuery(new Parameters($_GET));
         $this->setServer(new Parameters($_SERVER));
         if ($_COOKIE) {
-            $this->setCookies(new Parameters($_COOKIE));
+            $this->setCookies($_COOKIE);
         }
         if ($_FILES) {
-            $this->setFiles(new Parameters($_FILES));
+            $this->setFile(new Parameters($_FILES));
         }
+    }
+
+    public function setCookies($cookie)
+    {
+        $this->headers()->addHeader(new Cookie((array) $cookie));
+        return $this;
     }
 
     /**

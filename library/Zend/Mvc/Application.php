@@ -8,7 +8,7 @@ use ArrayObject,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
-    Zend\Http\Request as HttpRequest,
+    Zend\Http\PhpEnvironment\Request as PhpHttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\Uri\Http as HttpUri,
     Zend\Stdlib\Dispatchable,
@@ -117,76 +117,9 @@ class Application implements AppContext
     public function getRequest()
     {
         if (!$this->request instanceof Request) {
-            $request = new HttpRequest();
-
-            $request->setQuery(new PhpEnvironment\GetContainer())
-                    ->setPost(new PhpEnvironment\PostContainer())
-                    ->setEnv(new Parameters($_ENV))
-                    ->setServer(new Parameters($_SERVER));
-
-            $request->headers()->addHeaders(static::serverToHeaders($_SERVER));
-
-            if ($_COOKIE) {
-                $request->headers()->addHeader(new Cookie($_COOKIE));
-            }
-
-            if ($_FILES) {
-                $request->setFile(new Parameters($_FILES));
-            }
-
-            if (isset($_SERVER['REQUEST_METHOD'])) {
-                $request->setMethod($_SERVER['REQUEST_METHOD']);
-            }
-
-            if (isset($_SERVER['SERVER_PROTOCOL']) 
-                && strpos($_SERVER['SERVER_PROTOCOL'], '1.0') !== false) {
-                $this->setVersion('1.0');
-            }
-
-            $uri = new HttpUri();
-
-            if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') { 
-                $uri->setScheme('https');
-            } else {
-                $uri->setScheme('http');
-            }
-
-            if (isset($_SERVER['QUERY_STRING'])) {
-                $uri->setQuery($_SERVER['QUERY_STRING']);
-            }
-
-            if (isset($_SERVER['REQUEST_URI'])) {
-                $uri->setPath(substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?') ?: strlen($_SERVER['REQUEST_URI'])));
-            }
-
-            if ($request->headers()->get('host')) {
-                $uri->setHost($request->headers()->get('host')->getFieldValue());
-            } elseif (isset($_SERVER['SERVER_NAME'])) {
-                $uri->setHost($_SERVER['SERVER_NAME']);
-            }
-
-            $request->setUri($uri);
-
-            $this->setRequest($request);
+            $this->setRequest(new PhpHttpRequest);
         }
         return $this->request;
-    }
-
-    static public function serverToHeaders($server)
-    {
-        $headers = array();
-        foreach ($server as $key => $value) {
-            if (strpos($key, 'HTTP_') === 0 && $value) {
-                $header = substr($key, 5);
-                $headers[substr($key, 5)] = $value;
-            } elseif (in_array($key, array('CONTENT_LENGTH', 'CONTENT_MD5', 'CONTENT_TYPE')) && $value) {
-                $header = $key;
-            } else {
-                continue;
-            }
-            $headers[$header] = $server[$key];
-        }
-        return $headers;
     }
 
     /**

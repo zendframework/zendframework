@@ -72,6 +72,7 @@ class ManagerTest extends TestCase
     public function testCanLoadSomeModule()
     {
         $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
         $config = $moduleManager->getMergedConfig();
@@ -81,6 +82,7 @@ class ManagerTest extends TestCase
     public function testCanLoadMultipleModules()
     {
         $moduleManager = new Manager(array('BarModule', 'BazModule'));
+        $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
         $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
@@ -97,12 +99,14 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BarModule', 'BazModule'), $options);
+        $moduleManager->loadModules();
         $config = $moduleManager->getMergedConfig();
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);
 
         // use the cache
         $moduleManager = new Manager(array('BarModule', 'BazModule'), $options);
+        $moduleManager->loadModules();
         $config = $moduleManager->getMergedConfig();
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);
@@ -122,6 +126,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BarModule', 'DoubleModule'), $options);
+        $moduleManager->loadModules();
         $config = $moduleManager->getMergedConfig();
         $moduleManager->getDependencies();
     }
@@ -133,6 +138,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BarModule'), $options);
+        $moduleManager->loadModules();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertArrayHasKey('php', $dependencies);
@@ -145,6 +151,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BarModule'), $options);
+        $moduleManager->loadModules();
         $provisions = $moduleManager->getProvisions();
         $this->assertInternalType('array', $provisions);
         $this->assertArrayHasKey('BarModule', $provisions);
@@ -158,6 +165,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BarModule'), $options);
+        $moduleManager->loadModules();
         $dependencies = $moduleManager->getDependencies();
 		
     }
@@ -169,6 +177,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
+        $moduleManager->loadModules();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['php']['satisfied']);
@@ -181,6 +190,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('ImpossibleModule', 'BooModule'), $options);
+        $moduleManager->loadModules();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['php']['satisfied']);
@@ -194,6 +204,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BooModule', 'BorModule'), $options);
+        $moduleManager->loadModules();
         $dependencies = $moduleManager->getDependencies();
     }
     
@@ -205,6 +216,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BafModule'), $options);
+        $moduleManager->loadModules();
         $dependencies = $moduleManager->getDependencies();
     }
     
@@ -215,6 +227,7 @@ class ManagerTest extends TestCase
         ));
         // build the cache
         $moduleManager = new Manager(array('BamModule'), $options);
+        $moduleManager->loadModules();
         $dependencies = $moduleManager->getDependencies();
         $this->assertInternalType('array', $dependencies);
         $this->assertFalse($dependencies['BooModule']['satisfied']);
@@ -224,6 +237,7 @@ class ManagerTest extends TestCase
     {
     	$this->setExpectedException('RuntimeException');
         $moduleManager = new Manager(array('BooModule', 'BorModule'));
+        $moduleManager->loadModules();
         $moduleManager->getDependencies();
     }
 
@@ -231,6 +245,7 @@ class ManagerTest extends TestCase
     {
     	$this->setExpectedException('RuntimeException');
         $moduleManager = new Manager(array('BooModule', 'BorModule'));
+        $moduleManager->loadModules();
         $moduleManager->getProvisions();
     }
 
@@ -242,11 +257,13 @@ class ManagerTest extends TestCase
             'manifest_dir' => $this->tmpdir,
         ));
         $moduleManager = new Manager(array('AutoInstallModule'), $options);
+        $moduleManager->loadModules();
         $manifest = include $this->tmpdir . DIRECTORY_SEPARATOR . '/manifest.php';
         $this->assertEquals($manifest['AutoInstallModule']['version'], '1.0.0');
         // Now test a fake upgrade
         \AutoInstallModule\Module::$VERSION = '1.0.1';
         $moduleManager = new Manager(array('AutoInstallModule'), $options);
+        $moduleManager->loadModules();
         $manifest = include $this->tmpdir . DIRECTORY_SEPARATOR . '/manifest.php';
         $this->assertEquals($manifest['AutoInstallModule']['version'], '1.0.1');
     }
@@ -261,6 +278,7 @@ class ManagerTest extends TestCase
         ));
         \AutoInstallModule\Module::$RESPONSE = false;
         $moduleManager = new Manager(array('AutoInstallModule'), $options);
+        $moduleManager->loadModules();
     }
 
     public function testAutoUpgradeThrowsExceptionOnFailedUpgrade()
@@ -275,5 +293,6 @@ class ManagerTest extends TestCase
         \AutoInstallModule\Module::$RESPONSE = false;
         \AutoInstallModule\Module::$VERSION = '1.0.1';
         $moduleManager = new Manager(array('AutoInstallModule'), $options);
+        $moduleManager->loadModules();
     }
 }

@@ -18,6 +18,7 @@ class PartTest extends TestCase
                 'match'  => array(
                     'controller' => 'ItsHomePage',
                 ),
+                'name'   => null,
             )),
             array(array(
                 'uri'    => 'http://test.net/blog',
@@ -25,6 +26,7 @@ class PartTest extends TestCase
                 'match'  => array(
                     'controller' => 'ItsBlog',
                 ),
+                'name'   => 'blog',
             )),
             array(array(
                 'uri'    => 'http://test.net/forum',
@@ -32,26 +34,31 @@ class PartTest extends TestCase
                 'match'  => array(
                     'controller' => 'ItsForum',
                 ),
+                'name'   => 'forum',
             )),
             array(array(
                 'uri'    => 'http://test.net/blog/rss',
                 'offset' => 0,
-                'match'  => null
+                'match'  => null,
+                'name'   => 'blog/rss',
             )),
             array(array(
                 'uri'    => 'http://test.net/notfound',
                 'offset' => 0,
                 'match'  => null,
+                'name'   => null
             )),
             array(array(
                 'uri'    => 'http://test.net/blog/',
                 'offset' => 0,
                 'match'  => null,
+                'name'   => null,
             )),
             array(array(
                 'uri'    => 'http://test.net/forum/notfound',
                 'offset' => 0,
                 'match'  => null,
+                'name'   => null,
             )),
             array(array(
                 'uri'    => 'http://test.net/blog/rss/sub',
@@ -60,6 +67,7 @@ class PartTest extends TestCase
                     'controller' => 'ItsRssBlog',
                     'action'     => 'ItsSubRss',
                 ),
+                'name'   => 'blog/rss/sub',
             )),
             array(array(
                 'uri'    => 'http://test.net/blog/rss/sub',
@@ -68,6 +76,7 @@ class PartTest extends TestCase
                     'controller' => 'ItsRssBlog',
                     'action'     => 'ItsSubRss',
                 ),
+                'name'   => 'blog/rss/sub',
             )),
         );
     }
@@ -178,6 +187,8 @@ class PartTest extends TestCase
             foreach ($params['match'] as $key => $value) {
                 $this->assertEquals($value, $match->getParam($key));
             }
+            
+            $this->assertEquals($params['name'], $match->getMatchedRouteName());
         }
     }
 

@@ -225,8 +225,10 @@ class SimpleRouteStack implements RouteStack
      */
     public function match(Request $request)
     {
-        foreach ($this->routes as $route) {
+        foreach ($this->routes as $name => $route) {
             if (($match = $route->match($request)) instanceof RouteMatch) {
+                $match->setMatchedRouteName($name);
+                
                 return $match;
             }
         }

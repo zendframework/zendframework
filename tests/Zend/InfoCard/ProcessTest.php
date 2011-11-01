@@ -226,6 +226,14 @@ class ProcessTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($trans->getTransformList()));
     }
 
+    public function testTransformsClassLoad()
+    {
+        $trans = new \ZendTest\InfoCard\TestAsset\UserTransformChain();
+        $trans->addTransform('http://www.w3.org/2000/09/xmldsig#enveloped-signature');
+        $this->setExpectedException('Zend\InfoCard\XML\Security\Exception\InvalidArgumentException', 'Transform Class not exist');
+        $trans->applyTransforms('');
+    }
+
     public function testTransformsThrowsExceptionOnInvalidInput()
     {
         $trans = new \Zend\InfoCard\XML\Security\Transform\TransformChain();

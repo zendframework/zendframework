@@ -82,7 +82,7 @@ abstract class AbstractElement extends \SimpleXMLElement implements Element
     static public function convertToObject(\DOMElement $e, $classname)
     {
         if (!class_exists($classname)) {
-            \Zend\Loader::loadClass($classname);
+            throw new Exception\InvalidArgumentException('Class provided for converting does not exist');
         }
 
         if(!is_subclass_of($classname, 'Zend\InfoCard\XML\Element')) {

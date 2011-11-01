@@ -100,7 +100,7 @@ $bbcode = Zend_Markup::factory('Bbcode');
 // Markup
 $bbcode->addMarkup(
     'upper',
-    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+    Zend_Markup_Renderer_RendererAbstract::TYPE_CALLBACK,
     array(
         'callback' => new My_Markup_Renderer_Html_Upper(),
         'group'    => 'inline'

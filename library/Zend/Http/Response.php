@@ -323,7 +323,7 @@ class Response extends Message implements ResponseDescription
                 $code
             ));
         }
-        $this->statusCode = $code;
+        $this->statusCode = (int) $code;
         return $this;
     }
 

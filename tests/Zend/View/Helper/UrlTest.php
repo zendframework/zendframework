@@ -24,6 +24,9 @@
  */
 namespace ZendTest\View\Helper;
 
+use Zend\View\Helper\Url as UrlHelper,
+    Zend\Mvc\Router\SimpleRouteStack as Router;
+
 /**
  * Zend_View_Helper_UrlTest
  *
@@ -39,33 +42,46 @@ namespace ZendTest\View\Helper;
  */
 class UrlTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @access protected
      */
     protected function setUp()
     {
-        $this->front = \Zend\Controller\Front::getInstance();
-        $this->front->getRouter()->addDefaultRoutes();
+        $router = new Router();
+        $router->addRoute('home', array(
+            'type' => 'Zend\Mvc\Router\Http\Literal',
+            'options' => array(
+                'route' => '/',
+            )
+        ));
+        $router->addRoute('default', array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/:controller[/:action]',
+                )
+        ));
 
-        // $this->view = new Zend_View();
-        $this->helper = new \Zend\View\Helper\Url();
-        // $this->helper->setView($this->view);
+        $this->url = new UrlHelper;
+        $this->url->setRouter($router);
     }
 
-    public function testDefaultEmpty()
+    public function testHelperHasHardDependencyWithRouter()
     {
-        $url = $this->helper->__invoke();
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'no router');
+        $url = new UrlHelper;
+        $url(array(), 'home');
+    }
+
+    public function testHomeRoute()
+    {
+        $url = $this->url->__invoke(array(), 'home');
         $this->assertEquals('/', $url);
     }
 
-    public function testDefault()
+    public function testModuleRoute()
     {
-        $url = $this->helper->__invoke(array('controller' => 'ctrl', 'action' => 'act'));
+        $url = $this->url->__invoke(array('controller' => 'ctrl', 'action' => 'act'), 'default');
         $this->assertEquals('/ctrl/act', $url);
     }
-
 }

@@ -24,13 +24,12 @@
  */
 namespace Zend\View\Helper;
 
-use Zend\Controller\Front as FrontController,
-    Zend\Controller\Router\Rewrite as Router;
+use Zend\Mvc\Router\RouteStack,
+    Zend\View\Exception;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router
  *
- * @uses       \Zend\Controller\Front
  * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
@@ -39,52 +38,39 @@ use Zend\Controller\Front as FrontController,
  */
 class Url extends AbstractHelper
 {
-    protected $router = null;
+    /**
+     * @var RouteStack
+     */
+    protected $router;
 
     /**
-     * Get router
-     * 
-     * @return Router
+     * @param RouteStack $router
+     * @return Url
      */
-    public function getRouter()
+    public function setRouter(RouteStack $router)
     {
-        if (null !== $this->router) {
-            return $this->router;
-        }
-
-        $this->setRouter(FrontController::getInstance()->getRouter());
-
-        if (null === $this->router) {
-            $this->setRouter(new Router());
-        }
-
-        return $this->router;
+        $this->router = $router;
+        return $this;
     }
 
     /**
      * Generates an url given the name of a route.
      *
-     * @access public
-     *
-     * @param  array $urlOptions Options passed to the assemble method of the Route object.
-     * @param  mixed $name The name of a Route to use. If null it will use the current Route
-     * @param  bool $reset Whether or not to reset the route defaults with those provided
-     * @return string Url for the link href attribute.
+     * @see Zend\Mvc\Router\Route::assemble()
+     * @param array $params Parameters for the link
+     * @param string $name Name of the route
+     * @param array $options Options for the route
+     * @return string Url for the link href attribute
+     * @throws Exception\RuntimeException If no router provided
      */
-    public function __invoke(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function __invoke(array $params, $name, array $options = array())
     {
-        $router = $this->getRouter();
-        return $router->assemble($urlOptions, $name, $reset, $encode);
-    }
+        if (null === $this->router) {
+            throw new Exception\RuntimeException('no router instance provided');
+        }
 
-    /**
-     * Set router instance
-     * 
-     * @param  Router $router 
-     * @return void
-     */
-    public function setRouter($router)
-    {
-        $this->router = $router;
+        $options['name'] = $name;
+
+        return $this->router->assemble($params, $options);
     }
 }

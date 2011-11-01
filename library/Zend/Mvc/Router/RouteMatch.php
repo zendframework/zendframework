@@ -40,6 +40,13 @@ class RouteMatch
     protected $params = array();
     
     /**
+     * Matched route name.
+     * 
+     * @var string
+     */
+    protected $matchedRouteName;
+    
+    /**
      * Create a RouteMatch with given parameters.
      * 
      * @param  array $params
@@ -49,17 +56,40 @@ class RouteMatch
     {
         $this->params = $params;
     }
+    
+    /**
+     * Set name of matched route.
+     * 
+     * @param  string $name
+     * @return self
+     */
+    public function setMatchedRouteName($name)
+    {
+        $this->matchedRouteName = $name;
+        return $this;
+    }
+    
+    /**
+     * Get name of matched route.
+     * 
+     * @return string
+     */
+    public function getMatchedRouteName()
+    {
+        return $this->matchedRouteName;
+    }
        
     /**
      * Set a parameter.
      * 
      * @param  string $name
      * @param  mixed  $value 
-     * @return void
+     * @return self
      */
     public function setParam($name, $value)
     {
         $this->params[$name] = $value;
+        return $this;
     }
     
     /**
@@ -86,17 +116,5 @@ class RouteMatch
         }
         
         return $default;
-    }
-    
-    /**
-     * Merge parameters from another match.
-     * 
-     * @param  self $match
-     * @return void
-     */
-    public function merge(self $match)
-    {
-        $this->params = array_merge($this->params, $match->getParams());
-        return $this;
     }
 }

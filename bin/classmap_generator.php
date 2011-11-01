@@ -87,7 +87,7 @@ if (isset($opts->l)) {
         echo $opts->getUsageMessage();
         exit(2);
     }
-    $path = realpath($libraryPath);
+    $path = str_replace('\\', '/', realpath($libraryPath));
     
     // If -o has been used, then we need to add the $libraryPath into the relative 
     // path that is created in the classmap file.
@@ -181,7 +181,7 @@ $map    = new \stdClass;
 $strip .= '/';
 foreach ($l as $file) {
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
-    $filename  = str_replace($strip, '', $file->getPath() . '/' . $file->getFilename());
+    $filename  = str_replace($strip, '', str_replace('\\', '/', $file->getPath()) . '/' . $file->getFilename());
 
     // Add in relative path to library
     $filename  = $relativePathForClassmap . $filename;

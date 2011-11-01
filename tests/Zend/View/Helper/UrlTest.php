@@ -68,20 +68,20 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
     public function testHelperHasHardDependencyWithRouter()
     {
-        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'no router');
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'No RouteStack instance provided');
         $url = new UrlHelper;
-        $url(array(), 'home');
+        $url('home');
     }
 
     public function testHomeRoute()
     {
-        $url = $this->url->__invoke(array(), 'home');
+        $url = $this->url->__invoke('home');
         $this->assertEquals('/', $url);
     }
 
     public function testModuleRoute()
     {
-        $url = $this->url->__invoke(array('controller' => 'ctrl', 'action' => 'act'), 'default');
+        $url = $this->url->__invoke('default', array('controller' => 'ctrl', 'action' => 'act'));
         $this->assertEquals('/ctrl/act', $url);
     }
 }

@@ -81,7 +81,7 @@ if (array_key_exists('PWD', $_SERVER)) {
 $relativePathForClassmap = '';
 if (isset($opts->l)) {
     $libraryPath = $opts->l;
-    $libraryPath = rtrim($libraryPath, '/\\') . DIRECTORY_SEPARATOR;
+    $libraryPath = str_replace('\\', '/', rtrim($libraryPath, '/\\')) . '/';
     if (!is_dir($libraryPath)) {
         echo "Invalid library directory provided" . PHP_EOL . PHP_EOL;
         echo $opts->getUsageMessage();
@@ -92,13 +92,55 @@ if (isset($opts->l)) {
     // If -o has been used, then we need to add the $libraryPath into the relative 
     // path that is created in the classmap file.
     if ($opts->o != '') {
-        $relativePathForClassmap = $libraryPath;
+        // If both library path and classmap path are absolute, we have to make
+        // it relative to the classmap file.
+        $libraryPathCompare  = rtrim(str_replace('\\', '/', realpath($libraryPath)), '/');
+        $classmapPathCompare = rtrim(str_replace('\\', '/', realpath($opts->o)), '/');
+        
+        if (is_file($libraryPathCompare)) {
+            $libraryPathCompare = str_replace('\\', '/', dirname($libraryPathCompare));
+        }
+        
+        if (is_file($classmapPathCompare)) {
+            $classmapPathCompare = str_replace('\\', '/', dirname($classmapPathCompare));
+        }
+
+        // Simple case: $libraryPathCompare is in $classmapPathCompare
+        if (strpos($libraryPathCompare, $classmapPathCompare) === 0) {
+            $relativePathForClassmap = substr($libraryPathCompare, strlen($classmapPathCompare) + 1) . '/';
+        } else {
+            $relative          = array();
+            $libraryPathParts  = explode('/', $libraryPathCompare);
+            $classmapPathParts = explode('/', $classmapPathCompare);
+
+            foreach ($classmapPathParts as $index => $part) {
+                var_dump($libraryPathParts[$index]);
+                var_dump($part);
+                var_dump(1);
+                
+                if (isset($libraryPathParts[$index]) && $libraryPathParts[$index] == $part) {
+                    continue;
+                }
+
+                $relative[] = '..';
+            }
+
+            foreach ($libraryPathParts as $index => $part ) {
+                if (isset($classmapPathParts[$index]) && $classmapPathParts[$index] == $part) {
+                    continue;
+                }
+
+                $relative[] = $part;
+            }
+
+            $relativePathForClassmap = implode('/', $relative) . '/';
+        }
     }
 }
 
 $usingStdout = false;
 $appending = $opts->getOption('a');
-$output = $path . DIRECTORY_SEPARATOR . 'autoload_classmap.php';
+$output = $path . '/autoload_classmap.php';
 if (isset($opts->o)) {
     $output = $opts->o;
     if ('-' == $output) {
@@ -136,26 +178,25 @@ $l = new \Zend\File\ClassFileLocator($path);
 // Iterate over each element in the path, and create a map of 
 // classname => filename, where the filename is relative to the library path
 $map    = new \stdClass;
-$strip .= DIRECTORY_SEPARATOR;
+$strip .= '/';
 foreach ($l as $file) {
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
-    $filename  = str_replace($strip, '', $file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename());
+    $filename  = str_replace($strip, '', $file->getPath() . '/' . $file->getFilename());
 
     // Add in relative path to library
     $filename  = $relativePathForClassmap . $filename;
 
-    // Replace directory separators with constant
-    $filename  = str_replace(array('/', '\\'), "' . DIRECTORY_SEPARATOR . '", $filename);
+    // Replace directory separators with forward slash
+    $filename  = str_replace(array('/', '\\'), '/', $filename);
 
     $map->{$namespace . $file->classname} = $filename;
 }
 
 if ($appending) {
-
     $content = var_export((array) $map, true) . ';';
 
     // Prefix with __DIR__; modify the generated content
-    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+    $content = preg_replace("#(=> ')#", "=> __DIR__ . '/", $content);
 
     // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
     $content = str_replace("\\'", "'", $content);
@@ -177,11 +218,14 @@ if ($appending) {
              . 'return ' . var_export((array) $map, true) . ';';
 
     // Prefix with __DIR__; modify the generated content
-    $content = preg_replace('#(=> )#', '$1__DIR__ . DIRECTORY_SEPARATOR . ', $content);
+    $content = preg_replace("#(=> ')#", "=> __DIR__ . '/", $content);
 
     // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
     $content = str_replace("\\'", "'", $content);
 }
+
+// Remove unnecessary double-backslashes
+$content = str_replace('\\\\', '\\', $content);
 
 // Write the contents to disk
 file_put_contents($output, $content);

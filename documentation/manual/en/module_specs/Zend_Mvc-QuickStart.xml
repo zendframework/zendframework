@@ -327,7 +327,7 @@ class Module
 <?php
 namespace <module name>\Controller;
 
-use Zend\Controller\ActionController;
+use Zend\Mvc\Controller\ActionController;
 
 class HelloController extends ActionController
 {

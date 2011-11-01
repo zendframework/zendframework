@@ -18,7 +18,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Request::METHOD_GET, $request->getMethod());
         $this->assertEquals('/foo', $request->getUri());
         $this->assertEquals(Request::VERSION_11, $request->getVersion());
-        $this->assertEquals('Some Content', $request->getRawBody());
+        $this->assertEquals('Some Content', $request->getContent());
     }
 
     public function testRequestUsesParametersContainerByDefault()
@@ -51,8 +51,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testRequestPersistsRawBody()
     {
         $request = new Request();
-        $request->setRawBody('foo');
-        $this->assertEquals('foo', $request->getRawBody());
+        $request->setContent('foo');
+        $this->assertEquals('foo', $request->getContent());
     }
 
     public function testRequestUsesHeadersContainerByDefault()

@@ -8,8 +8,9 @@ use ArrayObject,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager,
     Zend\Http\Header\Cookie,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
+    Zend\Http\PhpEnvironment\Request as PhpHttpRequest,
+    Zend\Http\PhpEnvironment\Response as PhpHttpResponse,
+    Zend\Uri\Http as HttpUri,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\Parameters,
@@ -116,30 +117,7 @@ class Application implements AppContext
     public function getRequest()
     {
         if (!$this->request instanceof Request) {
-            $request = new HttpRequest();
-
-            $request->setQuery(new PhpEnvironment\GetContainer())
-                    ->setPost(new PhpEnvironment\PostContainer())
-                    ->setEnv(new Parameters($_ENV))
-                    ->setServer(new Parameters($_SERVER));
-
-            if ($_COOKIE) {
-                $request->headers()->addHeader(new Cookie($_COOKIE));
-            }
-
-            if ($_FILES) {
-                $request->setFile(new Parameters($_FILES));
-            }
-
-            if (isset($_SERVER['REQUEST_METHOD'])) {
-                $request->setMethod($_SERVER['REQUEST_METHOD']);
-            }
-
-            if (isset($_SERVER['REQUEST_URI'])) {
-                $request->setUri($_SERVER['REQUEST_URI']);
-            }
-
-            $this->setRequest($request);
+            $this->setRequest(new PhpHttpRequest);
         }
         return $this->request;
     }
@@ -152,7 +130,7 @@ class Application implements AppContext
     public function getResponse()
     {
         if (!$this->response instanceof Response) {
-            $this->setResponse(new HttpResponse());
+            $this->setResponse(new PhpHttpResponse());
         }
         return $this->response;
     }
@@ -214,7 +192,7 @@ class Application implements AppContext
             return ($r instanceof Response);
         });
         if ($result->stopped()) {
-            $response = new SendableResponse($result->last());
+            $response = $result->last();
             return $response;
         }
 
@@ -230,7 +208,7 @@ class Application implements AppContext
 
         $events->trigger('finish', $event);
 
-        $response = new SendableResponse($response);
+        $response = $response;
         return $response;
     }
 

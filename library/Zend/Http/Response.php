@@ -48,12 +48,17 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_416 = 416;
     const STATUS_CODE_417 = 417;
     const STATUS_CODE_418 = 418;
+    const STATUS_CODE_428 = 428;
+    const STATUS_CODE_429 = 429;
+    const STATUS_CODE_431 = 431;
     const STATUS_CODE_500 = 500;
     const STATUS_CODE_501 = 501;
     const STATUS_CODE_502 = 502;
     const STATUS_CODE_503 = 503;
     const STATUS_CODE_504 = 504;
     const STATUS_CODE_505 = 505;
+    const STATUS_CODE_511 = 511;
+    
     /**#@-*/
 
     /**#@+
@@ -112,6 +117,9 @@ class Response extends Message implements ResponseDescription
         416 => 'Requested range not satisfiable',
         417 => 'Expectation Failed',
         418 => 'I\'m a teapot',
+        428 => 'Precondition Required',
+        429 => 'Too Many Requests',
+        431 => 'Request Header Fields Too Large',
         // SERVER ERROR
         500 => 'Internal Server Error',
         501 => 'Not Implemented',
@@ -119,6 +127,7 @@ class Response extends Message implements ResponseDescription
         503 => 'Service Unavailable',
         504 => 'Gateway Time-out',
         505 => 'HTTP Version not supported',
+        511 => 'Network Authentication Required',
     );
 
     /**

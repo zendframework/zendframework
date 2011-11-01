@@ -1080,7 +1080,7 @@ class Client implements Dispatchable
                 $fstat = fstat($body);
                 $headers['Content-Length'] = $fstat['size'];
             } else {
-                $headers['Content-Length'] = strlen($body);
+                $headers['Content-Length'] = static::strlen($body);
             }    
         }
         
@@ -1106,19 +1106,8 @@ class Client implements Dispatchable
             return '';
         }
         
-        // If mbstring overloads substr and strlen functions, we have to
-        // override it's internal encoding
-        if (function_exists('mb_internal_encoding') &&
-           ((int) ini_get('mbstring.func_overload')) & 2) {
-            $mbIntEnc = mb_internal_encoding();
-            mb_internal_encoding('ASCII');
-        }
-        
         $rawBody = $this->getRequest()->getContent();
         if (!empty($rawBody)) {
-            if (isset($mbIntEnc)) {
-                mb_internal_encoding($mbIntEnc);
-            }
             return $rawBody;
         }
 
@@ -1158,11 +1147,6 @@ class Client implements Dispatchable
             } else {
                 throw new Exception\RuntimeException("Cannot handle content type '{$this->encType}' automatically");
             }
-
-        }
-
-        if (isset($mbIntEnc)) {
-            mb_internal_encoding($mbIntEnc);
         }
 
         return $body;
@@ -1238,6 +1222,7 @@ class Client implements Dispatchable
 
         return $ret;
     }
+
     /**
      * Convert an array of parameters into a flat array of (key, value) pairs
      *
@@ -1282,5 +1267,21 @@ class Client implements Dispatchable
         }
 
         return $parameters;
+    }
+    
+    /**
+     * Returns length of binary string in bytes
+     *
+     * @param string $str
+     * @return int the string length
+     */
+    static public function strlen($str)
+    {
+        if (function_exists('mb_internal_encoding') &&
+            (((int)ini_get('mbstring.func_overload')) & 2)) {
+            return mb_strlen($str, '8bit');
+        } else {
+            return strlen($str);
+        }
     }
 }

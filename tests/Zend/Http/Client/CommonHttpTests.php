@@ -923,18 +923,20 @@ abstract class CommonHttpTests extends \PHPUnit_Framework_TestCase
      */
     public function testContentTypeAdditionlInfo($params)
     {
+        $content_type = 'application/x-www-form-urlencoded; charset=UTF-8';
+
         $this->client->setUri($this->baseuri . 'testPostData.php');
         $this->client->setHeaders(array(
-            'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8' 
+            'Content-Type' => $content_type
         ));
         $this->client->setMethod(\Zend\Http\Request::METHOD_POST);
 
         $this->client->setParameterPost($params);
         
         $this->client->send();
-
-        $res = $this->client->send();
-        $this->assertEquals(serialize($params), $res->getBody(), "POST data integrity test failed");
+        $request = Request::fromString($this->client->getLastRawRequest());
+        $this->assertEquals($content_type, 
+                            $request->headers()->get('Content-Type')->getFieldValue());
     }
 
     /**

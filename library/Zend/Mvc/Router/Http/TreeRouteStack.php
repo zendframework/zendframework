@@ -64,13 +64,13 @@ class TreeRouteStack extends SimpleRouteStack
     protected function init()
     {
         $this->routeBroker->getClassLoader()->registerPlugins(array(
+            'hostname' => __NAMESPACE__ . '\Hostname',
             'literal'  => __NAMESPACE__ . '\Literal',
+            'part'     => __NAMESPACE__ . '\Part',
             'regex'    => __NAMESPACE__ . '\Regex',
+            'scheme'   => __NAMESPACE__ . '\Scheme',
             'segment'  => __NAMESPACE__ . '\Segment',
             'wildcard' => __NAMESPACE__ . '\Wildcard',
-            'hostname' => __NAMESPACE__ . '\Hostname',
-            'scheme'   => __NAMESPACE__ . '\Scheme',
-            'part'     => __NAMESPACE__ . '\Part',
         ));
     }
 

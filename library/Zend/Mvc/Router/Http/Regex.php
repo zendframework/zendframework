@@ -65,6 +65,13 @@ class Regex implements Route
     protected $spec;
     
     /**
+     * List of assembled parameters.
+     * 
+     * @var array
+     */
+    protected $assembledParams = array();
+    
+    /**
      * Create a new regex route.
      * 
      * @param  string $regex
@@ -161,17 +168,31 @@ class Regex implements Route
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $url    = $this->spec;
-        $params = array_merge($this->defaults, $params);
+        $url                   = $this->spec;
+        $mergedParams          = array_merge($this->defaults, $params);
+        $this->assembledParams = array();
         
-        foreach ($params as $key => $value) {
+        foreach ($mergedParams as $key => $value) {
             $spec = '%' . $key . '%';
             
             if (strpos($url, $spec) !== false) {
                 $url = str_replace($spec, urlencode($value), $url);
+                
+                $this->assembledParams[] = $key;
             }
         }
         
         return $url;
+    }
+    
+    /**
+     * getAssembledParams(): defined by Route interface.
+     * 
+     * @see    Route::getAssembledParams
+     * @return array
+     */
+    public function getAssembledParams()
+    {
+        return $this->assembledParams;
     }
 }

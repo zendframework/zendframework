@@ -27,7 +27,6 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Route,
     Zend\Mvc\Router\RouteBroker,
     Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\PriorityList;
@@ -41,7 +40,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Part extends TreeRouteStack
+class Part extends TreeRouteStack implements Route
 {
     /**
      * Route to match.
@@ -79,6 +78,10 @@ class Part extends TreeRouteStack
         
         if (!$route instanceof Route) {
             $route = $this->routeFromArray($route);
+        }
+        
+        if ($route instanceof self) {
+            throw new Exception\InvalidArgumentException('Base route may not be a part route');
         }
         
         $this->route        = $route;
@@ -133,6 +136,10 @@ class Part extends TreeRouteStack
      */
     public function match(Request $request, $pathOffset = null)
     {
+        if ($pathOffset === null) {
+            $pathOffset = 0;
+        }
+        
         $match = $this->route->match($request, $pathOffset);
 
         if ($match !== null && method_exists($request, 'uri')) {
@@ -177,8 +184,9 @@ class Part extends TreeRouteStack
             $this->childRoutes = null;
         }
         
-        $uri = $this->route->assemble($params, $options);
-        
+        $uri    = $this->route->assemble($params, $options);
+        $params = array_diff_key($params, array_flip($this->route->getAssembledParams()));
+
         if (!isset($options['name'])) {
             if (!$this->mayTerminate) {
                 throw new Exception\RuntimeException('Part route may not terminate');
@@ -190,5 +198,18 @@ class Part extends TreeRouteStack
         $uri .= parent::assemble($params, $options);
         
         return $uri;
+    }
+    
+    /**
+     * getAssembledParams(): defined by Route interface.
+     * 
+     * @see    Route::getAssembledParams
+     * @return array
+     */
+    public function getAssembledParams()
+    {
+        // Part routes may not occur as base route of other part routes, so we
+        // don't have to return anything here.
+        return array();
     }
 }

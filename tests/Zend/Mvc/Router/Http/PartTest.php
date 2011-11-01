@@ -61,6 +61,14 @@ class PartTest extends TestCase
                     'action'     => 'ItsSubRss',
                 ),
             )),
+            array(array(
+                'uri'    => 'http://test.net/blog/rss/sub',
+                'offset' => null,
+                'match'  => array(
+                    'controller' => 'ItsRssBlog',
+                    'action'     => 'ItsSubRss',
+                ),
+            )),
         );
     }
 
@@ -68,10 +76,13 @@ class PartTest extends TestCase
     {
         $routeBroker = new RouteBroker();
         $routeBroker->getClassLoader()->registerPlugins(array(
-            'literal' => 'Zend\Mvc\Router\Http\Literal',
-            'regex'   => 'Zend\Mvc\Router\Http\Regex',
-            'segment' => 'Zend\Mvc\Router\Http\Segment',
-            'part'    => 'Zend\Mvc\Router\Http\Part',
+            'literal'  => 'Zend\Mvc\Router\Http\Literal',
+            'regex'    => 'Zend\Mvc\Router\Http\Regex',
+            'segment'  => 'Zend\Mvc\Router\Http\Segment',
+            'wildcard' => 'Zend\Mvc\Router\Http\Wildcard',
+            'hostname' => 'Zend\Mvc\Router\Http\Hostname',
+            'scheme'   => 'Zend\Mvc\Router\Http\Scheme',
+            'part'     => 'Zend\Mvc\Router\Http\Part',
         ));
 
         $route = Part::factory(array(
@@ -128,6 +139,20 @@ class PartTest extends TestCase
                         ),
                     ),
                 ),
+                'foo' => array(
+                    'type'    => 'segment',
+                    'options' => array(
+                        'route'    => 'foo/:foo',
+                        'defaults' => array(
+                            'controller' => 'ItsFoo',
+                        )
+                    ),
+                    'child_routes' => array(
+                        'wildcard' => array(
+                            'type' => 'wildcard'
+                        ),
+                    ),
+                ),
             ),
         ));
 
@@ -151,7 +176,7 @@ class PartTest extends TestCase
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
             
             foreach ($params['match'] as $key => $value) {
-                $this->assertEquals($match->getParam($key), $value);
+                $this->assertEquals($value, $match->getParam($key));
             }
         }
     }
@@ -176,5 +201,19 @@ class PartTest extends TestCase
     public function testAssembleNonTerminatedRoute()
     {
         $this->getRoute()->assemble(array(), array('name' => 'blog/rss'));
+    }
+    
+    public function testRemoveAssembledParameters()
+    {
+        $uri = $this->getRoute()->assemble(array('foo' => 'bar'), array('name' => 'foo/wildcard'));
+        
+        $this->assertEquals('/foo/bar', $uri);
+    }
+    
+    public function testRemoveAssembledParametersWithAdditionalParameter()
+    {
+        $uri = $this->getRoute()->assemble(array('foo' => 'bar', 'bar' => 'baz'), array('name' => 'foo/wildcard'));
+        
+        $this->assertEquals('/foo/bar/bar/baz', $uri);
     }
 }

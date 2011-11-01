@@ -27,8 +27,7 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route as BaseRoute;
+    Zend\Mvc\Router\Exception;
 
 /**
  * Segment route.
@@ -39,7 +38,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Segment implements BaseRoute
+class Segment implements Route
 {
     /**
      * Parts of the route.
@@ -61,6 +60,13 @@ class Segment implements BaseRoute
      * @var array
      */
     protected $defaults;
+    
+    /**
+     * List of assembled parameters.
+     * 
+     * @var array
+     */
+    protected $assembledParams = array();
 
     /**
      * Create a new regex route.
@@ -228,9 +234,12 @@ class Segment implements BaseRoute
     /**
      * Build a path.
      * 
+     * @param  array $parts
+     * @param  array $mergedParams
+     * @param  array $params
      * @return string
      */
-    protected function buildPath(array $parts, array $params)
+    protected function buildPath(array $parts, array $mergedParams)
     {
         $path = '';
         
@@ -241,15 +250,17 @@ class Segment implements BaseRoute
                     break;
                 
                 case 'parameter':
-                    if (!isset($params[$part[1]])) {
+                    if (!isset($mergedParams[$part[1]])) {
                         return null;
                     }
                     
-                    $path .= urlencode($params[$part[1]]);
+                    $path .= urlencode($mergedParams[$part[1]]);
+                    
+                    $this->assembledParams[] = $part[1];
                     break;
                 
                 case 'optional':
-                    $path .= $this->buildPath($part[1], $params);
+                    $path .= $this->buildPath($part[1], $mergedParams);
                     break;
                 
                 case 'translated-literal':
@@ -314,12 +325,24 @@ class Segment implements BaseRoute
      */
     public function assemble(array $params = array(), array $options = array())
     {
-        $path = $this->buildPath($this->parts, array_merge($this->defaults, $params));
+        $this->assembledParams = array();
+        $path                  = $this->buildPath($this->parts, array_merge($this->defaults, $params));
         
         if ($path === null) {
             throw new Exception\InvalidArgumentException('Parameters missing');
         }
         
         return $path;
+    }
+    
+    /**
+     * getAssembledParams(): defined by Route interface.
+     * 
+     * @see    Route::getAssembledParams
+     * @return array
+     */
+    public function getAssembledParams()
+    {
+        return $this->assembledParams;
     }
 }

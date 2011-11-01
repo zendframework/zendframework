@@ -53,7 +53,7 @@ class Request extends HttpRequest
 
         $uri = new HttpUri();
 
-        if (isset($this->serverParams['HTTPS']) && $this->serverParams['HTTPS'] == 'on') { 
+        if (isset($this->serverParams['HTTPS']) && $this->serverParams['HTTPS'] === 'on') { 
             $uri->setScheme('https');
         } else {
             $uri->setScheme('http');

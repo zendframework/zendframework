@@ -434,11 +434,21 @@ class Response extends Message implements ResponseDescription
         return (200 <= $code && 300 > $code);
     }
 
+    /**
+     * Render the response line string
+     * 
+     * @return string
+     */
     public function renderResponseLine()
     {
         return 'HTTP/' . $this->getVersion() . ' ' . $this->getStatusCode() . ' ' . $this->getReasonPhrase();
     }
     
+    /**
+     * Render entire response as HTTP response string
+     * 
+     * @return string
+     */
     public function toString()
     {
         $str = $this->renderResponseLine() . "\r\n";

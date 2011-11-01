@@ -94,7 +94,7 @@ class ServerProxy
      */
     public function __call($method, $args)
     {
-        $method = ltrim("$this->_namespace.$method", '.');
+        $method = ltrim("{$this->_namespace}.{$method}", '.');
         return $this->_client->call($method, $args);
     }
 }

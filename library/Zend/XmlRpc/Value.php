@@ -135,10 +135,10 @@ abstract class Value
     /**
      * Sets XML generator instance
      *
-     * @param Zend\XmlRpc\Generator $generator
+     * @param  null|Generator $generator
      * @return void
      */
-    public static function setGenerator(Generator $generator)
+    public static function setGenerator(Generator $generator = null)
     {
         self::$_generator = $generator;
     }

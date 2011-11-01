@@ -231,37 +231,40 @@ class Client
         iconv_set_encoding('output_encoding', 'UTF-8');
         iconv_set_encoding('internal_encoding', 'UTF-8');
 
-        $http = $this->getHttpClient();
-        if($http->getRequest()->getUri() === null) {
+        $http        = $this->getHttpClient();
+        $httpRequest = $http->getRequest();
+        if ($httpRequest->getUri() === null) {
             $http->setUri($this->_serverAddress);
         }
 
-        $http->setHeaders(array(
+        $headers = $httpRequest->headers();
+        $headers->addHeaders(array(
             'Content-Type: text/xml; charset=utf-8',
             'Accept: text/xml',
         ));
 
-        if ($http->getHeader('user-agent') === null) {
-            $http->setHeaders(array('User-Agent: Zend_XmlRpc_Client'));
+        if (!$headers->get('user-agent')) {
+            $headers->addHeaderLine('user-agent', 'Zend_XmlRpc_Client');
         }
 
         $xml = $this->_lastRequest->__toString();
         $http->setRawBody($xml);
         $httpResponse = $http->setMethod('post')->send();
 
-        if (! $httpResponse->isSuccess()) {
+        if (!$httpResponse->isSuccess()) {
             /**
              * Exception thrown when an HTTP error occurs
              */
             throw new Client\Exception\HttpException(
-                $httpResponse->getMessage(),
-                $httpResponse->getStatus()
+                $httpResponse->getReasonPhrase(),
+                $httpResponse->getStatusCode()
             );
         }
 
         if ($response === null) {
             $response = new Response();
         }
+
         $this->_lastResponse = $response;
         $this->_lastResponse->loadXml($httpResponse->getBody());
     }

@@ -194,10 +194,10 @@ class Test implements HttpAdapter
     public function setResponse($response)
     {
         if ($response instanceof Response) {
-            $response = $response->asString("\r\n");
+            $response = $response->toString();
         }
 
-        $this->responses = (array)$response;
+        $this->responses = (array) $response;
         $this->responseIndex = 0;
     }
 

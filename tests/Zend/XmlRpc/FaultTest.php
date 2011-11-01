@@ -50,6 +50,7 @@ class FaultTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        Value::setGenerator(null);
         $this->_fault = new XmlRpc\Fault();
     }
 

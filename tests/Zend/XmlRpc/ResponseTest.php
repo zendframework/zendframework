@@ -227,28 +227,34 @@ EOD;
         $this->assertEquals('ISO-8859-1', Value::getGenerator()->getEncoding());
     }
 
-    public function testLoadXmlThrowsExceptionWithMissingNodes()
+    public function testLoadXmlCreatesFaultWithMissingNodes()
     {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params><param>foo</param></params></methodResponse>');
         
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Missing XML-RPC value in XML');
-        $this->_response->loadXml($sxl->asXML());
+        $this->assertFalse($this->_response->loadXml($sxl->asXML()));
+        $this->assertTrue($this->_response->isFault());
+        $fault = $this->_response->getFault();
+        $this->assertEquals(653, $fault->getCode());
     }
     
-    public function testLoadXmlThrowsExceptionWithMissingNodes2()
+    public function testLoadXmlCreatesFaultWithMissingNodes2()
     {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><params>foo</params></methodResponse>');
         
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Missing XML-RPC value in XML');
-        $this->_response->loadXml($sxl->asXML());
+        $this->assertFalse($this->_response->loadXml($sxl->asXML()));
+        $this->assertTrue($this->_response->isFault());
+        $fault = $this->_response->getFault();
+        $this->assertEquals(653, $fault->getCode());
     }
     
     public function testLoadXmlThrowsExceptionWithMissingNodes3()
     {
         $sxl = new \SimpleXMLElement('<?xml version="1.0"?><methodResponse><bar>foo</bar></methodResponse>');
         
-        $this->setExpectedException('Zend\XmlRpc\Exception\ValueException', 'Missing XML-RPC value in XML');
-        $this->_response->loadXml($sxl->asXML());
+        $this->assertFalse($this->_response->loadXml($sxl->asXML()));
+        $this->assertTrue($this->_response->isFault());
+        $fault = $this->_response->getFault();
+        $this->assertEquals(652, $fault->getCode());
     }
 
 

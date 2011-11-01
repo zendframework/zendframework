@@ -24,7 +24,8 @@
  */
 namespace Zend\View\Helper;
 
-use Zend\Controller\Front as FrontController;
+use Zend\Controller\Front as FrontController,
+    Zend\Controller\Router\Rewrite as Router;
 
 /**
  * Helper for making easy links and getting urls that depend on the routes and router
@@ -41,6 +42,26 @@ class Url extends AbstractHelper
     protected $router = null;
 
     /**
+     * Get router
+     * 
+     * @return Router
+     */
+    public function getRouter()
+    {
+        if (null !== $this->router) {
+            return $this->router;
+        }
+
+        $this->setRouter(FrontController::getInstance()->getRouter());
+
+        if (null === $this->router) {
+            $this->setRouter(new Router());
+        }
+
+        return $this->router;
+    }
+
+    /**
      * Generates an url given the name of a route.
      *
      * @access public
@@ -52,10 +73,16 @@ class Url extends AbstractHelper
      */
     public function __invoke(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
     {
-        //$router = FrontController::getInstance()->getRouter();
-        return $this->router->assemble($urlOptions, $name, $reset, $encode);
+        $router = $this->getRouter();
+        return $router->assemble($urlOptions, $name, $reset, $encode);
     }
 
+    /**
+     * Set router instance
+     * 
+     * @param  Router $router 
+     * @return void
+     */
     public function setRouter($router)
     {
         $this->router = $router;

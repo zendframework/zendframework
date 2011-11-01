@@ -458,10 +458,14 @@ class Manager
     /**
      * Get loadedModules.
      *
+     * @param bool $loadModules 
      * @return array
      */
-    public function getLoadedModules()
+    public function getLoadedModules($loadModules = false)
     {
+        if ($loadModules === true) {
+            $this->loadModules();
+        }
         return $this->loadedModules;
     }
 

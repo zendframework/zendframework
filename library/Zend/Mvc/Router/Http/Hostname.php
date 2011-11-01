@@ -27,8 +27,7 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route;
+    Zend\Mvc\Router\Exception;
 
 /**
  * Hostname route.
@@ -61,6 +60,13 @@ class Hostname implements Route
      * @var array
      */
     protected $defaults;
+    
+    /**
+     * List of assembled parameters.
+     * 
+     * @var array
+     */
+    protected $assembledParams = array();
 
     /**
      * Create a new hostname route.
@@ -154,9 +160,10 @@ class Hostname implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array &$params = array(), array $options = array())
+    public function assemble(array $params = array(), array $options = array())
     {
-        $mergedParams = array_merge($this->defaults, $params);
+        $mergedParams          = array_merge($this->defaults, $params);
+        $this->assembledParams = array();
         
         if (isset($options['uri'])) {
             $parts = array();
@@ -169,7 +176,7 @@ class Hostname implements Route
                     
                     $parts[] = $mergedParams[$matches['name']];
                     
-                    unset($params[$matches['name']]);
+                    $this->assembledParams[] = $matches['name'];
                 } else {
                     $parts[] = $routePart;
                 }
@@ -180,5 +187,16 @@ class Hostname implements Route
         
         // A hostname does not contribute to the path, thus nothing is returned.
         return '';
+    }
+    
+    /**
+     * getAssembledParams(): defined by Route interface.
+     * 
+     * @see    Route::getAssembledParams
+     * @return array
+     */
+    public function getAssembledParams()
+    {
+        return $this->assembledParams;
     }
 }

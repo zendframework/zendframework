@@ -137,4 +137,15 @@ class Scheme implements Route
         // A scheme does not contribute to the path, thus nothing is returned.
         return '';
     }
+    
+    /**
+     * getAssembledParams(): defined by Route interface.
+     * 
+     * @see    Route::getAssembledParams
+     * @return array
+     */
+    public function getAssembledParams()
+    {
+        return array();
+    }
 }

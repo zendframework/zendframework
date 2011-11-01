@@ -26,7 +26,8 @@ namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Exception,
     Zend\Mvc\Router\SimpleRouteStack,
-    Zend\Mvc\Router\Route,
+    Zend\Mvc\Router\Route as BaseRoute,
+    Zend\Mvc\Router\Http\Route,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Uri\Http as HttpUri;
 
@@ -63,17 +64,20 @@ class TreeRouteStack extends SimpleRouteStack
     protected function init()
     {
         $this->routeBroker->getClassLoader()->registerPlugins(array(
-            'literal' => __NAMESPACE__ . '\Literal',
-            'regex'   => __NAMESPACE__ . '\Regex',
-            'segment' => __NAMESPACE__ . '\Segment',
-            'part'    => __NAMESPACE__ . '\Part',
+            'literal'  => __NAMESPACE__ . '\Literal',
+            'regex'    => __NAMESPACE__ . '\Regex',
+            'segment'  => __NAMESPACE__ . '\Segment',
+            'wildcard' => __NAMESPACE__ . '\Wildcard',
+            'hostname' => __NAMESPACE__ . '\Hostname',
+            'scheme'   => __NAMESPACE__ . '\Scheme',
+            'part'     => __NAMESPACE__ . '\Part',
         ));
     }
 
     /**
      * addRoute(): defined by RouteStack interface.
      *
-     * @see    Route::addRoute()
+     * @see    RouteStack::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
@@ -120,9 +124,9 @@ class TreeRouteStack extends SimpleRouteStack
     }
 
     /**
-     * match(): defined by Route interface.
+     * match(): defined by BaseRoute interface.
      *
-     * @see    Route::match()
+     * @see    BaseRoute::match()
      * @param  Request $request
      * @return RouteMatch
      */
@@ -157,7 +161,7 @@ class TreeRouteStack extends SimpleRouteStack
     /**
      * assemble(): defined by Route interface.
      *
-     * @see    Route::assemble()
+     * @see    BaseRoute::assemble()
      * @param  array $params
      * @param  array $options
      * @return mixed

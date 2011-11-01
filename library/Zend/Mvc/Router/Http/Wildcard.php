@@ -27,8 +27,7 @@ namespace Zend\Mvc\Router\Http;
 use Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception,
-    Zend\Mvc\Router\Route;
+    Zend\Mvc\Router\Exception;
 
 /**
  * Wildcard route.
@@ -54,6 +53,13 @@ class Wildcard implements Route
      * @var array
      */
     protected $paramDelimiter;
+    
+    /**
+     * List of assembled parameters.
+     * 
+     * @var array
+     */
+    protected $assembledParams = array();
 
     /**
      * Create a new wildcard route.
@@ -159,16 +165,32 @@ class Wildcard implements Route
      * @param  array $options
      * @return mixed
      */
-    public function assemble(array &$params = array(), array $options = array())
+    public function assemble(array $params = array(), array $options = array())
     {
-        $elements = array();
+        $elements              = array();
+        $this->assembledParams = array();
 
-        foreach ($params as $key => $value) {
-            $elements[] = urlencode($key) . $this->keyValueDelimiter . urlencode($value);
-            
-            unset($params[$key]);
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $elements[] = urlencode($key) . $this->keyValueDelimiter . urlencode($value);
+
+                $this->assembledParams[] = $key;
+            }
+
+            return $this->paramDelimiter . implode($this->paramDelimiter, $elements);
         }
-
-        return $this->paramDelimiter . implode($this->paramDelimiter, $elements);
+        
+        return '';
+    }
+    
+    /**
+     * getAssembledParams(): defined by Route interface.
+     * 
+     * @see    Route::getAssembledParams
+     * @return array
+     */
+    public function getAssembledParams()
+    {
+        return $this->assembledParams;
     }
 }

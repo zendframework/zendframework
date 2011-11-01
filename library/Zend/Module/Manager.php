@@ -68,6 +68,13 @@ class Manager
     protected $modules = array();
 
     /**
+     * True if modules have already been loaded
+     *
+     * @var boolean
+     */
+    protected $modulesLoaded = false;
+
+    /**
      * __construct 
      * 
      * @param array|Traversable $modules 
@@ -96,6 +103,9 @@ class Manager
      */
     public function loadModules()
     {
+        if ($this->modulesLoaded === true) {
+            return $this;
+        }
         foreach ($this->getModules() as $moduleName) {
             $this->loadModule($moduleName);
         }
@@ -104,7 +114,18 @@ class Manager
         }
         $this->updateCache();
         $this->events()->trigger('init.post', $this);
+        $this->modulesLoaded = true;
         return $this;
+    }
+
+    /**
+     * Returns boolean representing if modules have been loaded yet 
+     * 
+     * @return Manager
+     */
+    public function modulesLoaded()
+    {
+        return $this->modulesLoaded;
     }
 
     /**

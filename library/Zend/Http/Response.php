@@ -47,6 +47,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_415 = 415;
     const STATUS_CODE_416 = 416;
     const STATUS_CODE_417 = 417;
+    const STATUS_CODE_418 = 418;
     const STATUS_CODE_500 = 500;
     const STATUS_CODE_501 = 501;
     const STATUS_CODE_502 = 502;
@@ -110,6 +111,7 @@ class Response extends Message implements ResponseDescription
         415 => 'Unsupported Media Type',
         416 => 'Requested range not satisfiable',
         417 => 'Expectation Failed',
+        418 => 'I\'m a teapot',
         // SERVER ERROR
         500 => 'Internal Server Error',
         501 => 'Not Implemented',

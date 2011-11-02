@@ -315,6 +315,3 @@ class AdvancedManager extends Manager
         return $this;
     }
 }
-/**
- *  
- */

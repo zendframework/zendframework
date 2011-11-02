@@ -26,9 +26,14 @@ class Manager
     protected $options;
 
     /**
-     * @var Zend\Config\Config
+     * @var array
      */
-    protected $mergedConfig;
+    protected $mergedConfig = array();
+
+    /**
+     * @var Config
+     */
+    protected $mergedConfigObject;
 
     /**
      * @var bool
@@ -85,10 +90,8 @@ class Manager
     {
         if ($options === null) {
             $options = new ManagerOptions;
-            $this->setOptions($options);
-        } else {
-            $this->setOptions($options);
         }
+        $this->setOptions($options);
         if ($this->hasCachedConfig()) {
             $this->skipConfig = true;
             $this->setMergedConfig($this->getCachedConfig());
@@ -471,28 +474,28 @@ class Manager
 
     /**
      * getMergedConfig
-     * Build a merged config object for all loaded modules
      * 
-     * @return Zend\Config\Config
+     * @return array|Zend\Config\Config
      */
-    public function getMergedConfig($readOnly = true)
+    public function getMergedConfig($configObject = true)
     {
-        if (null === $this->mergedConfig) {
-            $this->setMergedConfig(new Config(array(), true));
+        if ($configObject === true) {
+            if ($this->mergedConfigObject === null) {
+                $this->mergedConfigObject = new Config($this->mergedConfig);
+            }
+            return $this->mergedConfigObject;
+        } else {
+            return $this->mergedConfig;
         }
-        if (true === $readOnly) {
-            $this->mergedConfig->setReadOnly();
-        }
-        return $this->mergedConfig;
     }
 
     /**
      * setMergedConfig 
      * 
-     * @param Config $config 
+     * @param array $config 
      * @return Manager
      */
-    protected function setMergedConfig(Config $config)
+    protected function setMergedConfig($config)
     {
         $this->mergedConfig = $config;
         return $this;
@@ -509,7 +512,17 @@ class Manager
         if ((false === $this->skipConfig)
             && (is_callable(array($module, 'getConfig')))
         ) {
-            $this->getMergedConfig(false)->merge($module->getConfig($this->getOptions()->getApplicationEnv()));
+            $config = $module->getConfig($this->getOptions()->getApplicationEnv());
+            if ($config instanceof Config) {
+                $config = $config->toArray();
+            }
+            if (!is_array($config)) {
+                throw new \InvalidArgumentException(
+                    sprintf('getConfig() method of %s must be an array or '
+                    . 'instance of Zend\Config\Config', get_class($module))
+                );
+            }
+            $this->mergedConfig = array_replace_recursive($this->mergedConfig, $config);
         }
         return $this;
     }
@@ -534,7 +547,7 @@ class Manager
 
     protected function getCachedConfig()
     {
-        return new Config(include $this->getOptions()->getCacheFilePath());
+        return include $this->getOptions()->getCacheFilePath();
     }
 
     protected function updateCache()
@@ -549,7 +562,7 @@ class Manager
 
     protected function saveConfigCache($config)
     {
-        $content = "<?php\nreturn " . var_export($config->toArray(), 1) . ';';
+        $content = "<?php\nreturn " . var_export($config, 1) . ';';
         file_put_contents($this->getOptions()->getCacheFilePath(), $content);
         return $this;
     }

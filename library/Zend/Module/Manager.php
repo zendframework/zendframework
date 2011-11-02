@@ -476,9 +476,10 @@ class Manager
     /**
      * getMergedConfig
      * 
-     * @return array|Zend\Config\Config
+     * @param array $returnConfigAsObject 
+     * @return mixed
      */
-    public function getMergedConfig($configObject = true)
+    public function getMergedConfig($returnConfigAsObject = true)
     {
         if ($configObject === true) {
             if ($this->mergedConfigObject === null) {

@@ -201,7 +201,7 @@ if ($appending) {
     // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
     $content = str_replace("\\'", "'", $content);
 
-    // Convert to an array and remove the first "array ("
+    // Convert to an array and remove the first "array("
     $content = explode(PHP_EOL, $content);
     array_shift($content);
 
@@ -226,6 +226,19 @@ if ($appending) {
 
 // Remove unnecessary double-backslashes
 $content = str_replace('\\\\', '\\', $content);
+
+// Exchange "array (" width "array("
+$content = str_replace('array (', 'array(', $content);
+
+// Allign "=>" operators to match coding standard
+preg_match_all('(\n\s+([^=]+)=>)', $content, $matches, PREG_SET_ORDER);
+$maxWidth = 0;
+
+foreach ($matches as $match) {
+    $maxWidth = max($maxWidth, strlen($match[1]));
+}
+
+$content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', " . $maxWidth . " - strlen('\\1')) . '=>'", $content);
 
 // Write the contents to disk
 file_put_contents($output, $content);

@@ -135,7 +135,7 @@ abstract class AbstractAdapter extends \Zend\Validator\AbstractValidator impleme
      * @param  array $options
      * @return Zend_Form_Element
      */
-    public function setOptions($options = null)
+    public function setOptions(array $options = null)
     {
         foreach ($options as $key => $value) {
             $this->setOption($key, $value);

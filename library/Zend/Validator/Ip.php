@@ -91,11 +91,15 @@ class Ip extends AbstractValidator
     /**
      * Sets the options for this validator
      *
-     * @param array $options
+     * @param array|Traversable $options
      * @return \Zend\Validator\Ip
      */
-    public function setOptions(array $options = array())
+    public function setOptions($options = array())
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');
+        }
+
         if (array_key_exists('allowipv6', $options)) {
             $this->_options['allowipv6'] = (boolean) $options['allowipv6'];
         }

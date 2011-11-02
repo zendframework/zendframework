@@ -135,11 +135,15 @@ abstract class AbstractValidator implements Validator
     /**
      * Sets one or multiple options
      *
-     * @param  array $options Options to set
+     * @param  array|Traversable $options Options to set
      * @return \Zend\Validator\AbstractValidator Provides fluid interface
      */
-    public function setOptions(array $options = array())
+    public function setOptions($options = array())
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable');
+        }
+
         foreach ($options as $name => $option) {
             $fname = 'set' . ucfirst($name);
             $fname2 = 'is' . ucfirst($name);

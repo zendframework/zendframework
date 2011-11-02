@@ -23,6 +23,7 @@ namespace ZendTest\Config\Reader;
 
 use \Zend\Config\Reader\Xml;
 
+
 /**
  * @category   Zend
  * @package    Zend_Config
@@ -31,57 +32,21 @@ use \Zend\Config\Reader\Xml;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class XmlTest extends \PHPUnit_Framework_TestCase
+class XmlTest extends AbstractReaderTestCase
 {
-    /**
-     * @var Xml
-     */
-    protected $reader;
-    
-    protected $_xmlFileConfig;
-    protected $_xmlFileAllSectionsConfig;
-    protected $_xmlFileCircularConfig;
-    protected $_xmlFileInvalid;
-
     public function setUp()
     {
         $this->reader = new Xml();
     }
-
-    public function testConstants()
+    
+    /**
+     * getTestAssetPath(): defined by AbstractReaderTestCase.
+     * 
+     * @see    AbstractReaderTestCase::getTestAssetPath()
+     * @return string
+     */
+    protected function getTestAssetPath($name)
     {
-        if (!defined('ZEND_CONFIG_XML_TEST_CONSTANT')) {
-            define('ZEND_CONFIG_XML_TEST_CONSTANT', 'test');
-        }
-
-        $string = <<<EOT
-<?xml version="1.0"?>
-<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
-    <all>
-        <foo>foo-<zf:const zf:name="ZEND_CONFIG_XML_TEST_CONSTANT"/>-bar-<zf:const zf:name="ZEND_CONFIG_XML_TEST_CONSTANT"/></foo>
-        <bar><const name="ZEND_CONFIG_XML_TEST_CONSTANT"/></bar>
-    </all>
-</config>
-EOT;
-
-        $config = $this->reader->readString($string)->all;
-
-        $this->assertEquals('foo-test-bar-test', $config->foo);
-        $this->assertEquals('ZEND_CONFIG_XML_TEST_CONSTANT', $config->bar->const->name);
-    }
-
-    public function testNonExistentConstant()
-    {
-        $string = <<<EOT
-<?xml version="1.0"?>
-<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
-    <all>
-        <foo>foo-<zf:const zf:name="ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT"/></foo>
-    </all>
-</config>
-EOT;
-
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Constant with name "ZEND_CONFIG_XML_TEST_NON_EXISTENT_CONSTANT" was not defined');
-        $config = $this->reader->readString($string);
+        return __DIR__ . '/TestAssets/Xml/' . $name . '.xml';
     }
 }

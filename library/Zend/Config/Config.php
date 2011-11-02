@@ -23,13 +23,17 @@
  */
 namespace Zend\Config;
 
+use \Countable,
+    \Iterator,
+    \ArrayAccess;
+
 /**
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Config implements \Countable, \Iterator, \ArrayAccess
+class Config implements Countable, Iterator, ArrayAccess
 {
     /**
      * Whether modifications to configuration data are allowed.
@@ -339,7 +343,7 @@ class Config implements \Countable, \Iterator, \ArrayAccess
     }
     
     /**
-     * Merge another Zend_Config with this one.
+     * Merge another Config with this one.
      * 
      * The items in $merge will override the same named items in the current
      * config.
@@ -351,16 +355,16 @@ class Config implements \Countable, \Iterator, \ArrayAccess
     {
         foreach ($merge as $key => $item) {
             if (array_key_exists($key, $this->data)) {
-                if ($item instanceof self && $this->$key instanceof self) {
-                    $this->$key = $this->$key->merge(new self($item->toArray(), $this->allowModifications));
+                if ($item instanceof self && $this->data[$key] instanceof self) {
+                    $this->data[$key] = $this->data[$key]->merge(new self($item->toArray(), $this->allowModifications));
                 } else {
-                    $this->$key = $item;
+                    $this->data[$key] = $item;
                 }
             } else {
                 if ($item instanceof self) {
-                    $this->$key = new self($item->toArray(), $this->allowModifications);
+                    $this->data[$key] = new self($item->toArray(), $this->allowModifications);
                 } else {
-                    $this->$key = $item;
+                    $this->data[$key] = $item;
                 }
             }
         }
@@ -371,7 +375,7 @@ class Config implements \Countable, \Iterator, \ArrayAccess
     /**
      * Prevent any more modifications being made to this instance.
      * 
-     * Useful after merge() has been used to merge multiple Zend_Config objects
+     * Useful after merge() has been used to merge multiple Config objects
      * into one object which should then not be modified again.
      *
      * @return void
@@ -388,7 +392,7 @@ class Config implements \Countable, \Iterator, \ArrayAccess
     }
 
     /**
-     * Returns if this Config object is read only or not.
+     * Returns whether this Config object is read only or not.
      *
      * @return boolean
      */

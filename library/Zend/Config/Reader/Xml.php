@@ -68,7 +68,7 @@ class Xml extends AbstractReader
     protected function processFile($filename)
     {
         $this->reader = new XMLReader();
-        $this->reader->open($filename);
+        $this->reader->open($filename, null, LIBXML_XINCLUDE);
         
         return $this->process();
     }
@@ -83,7 +83,7 @@ class Xml extends AbstractReader
     protected function processString($data)
     {
         $this->reader = new XMLReader();
-        $this->reader->xml($data);
+        $this->reader->xml($data, null, LIBXML_XINCLUDE);
 
         return $this->process();
     }
@@ -128,11 +128,11 @@ class Xml extends AbstractReader
                 if ($this->reader->namespaceURI === self::XML_NAMESPACE) {
                     switch ($this->reader->localName) {
                         case 'const':
-                            if (!isset($attributes['zf']['name'])) {
-                                throw new Exception\RuntimeException('Misssing "name" attribute in "const" node');
+                            if (!isset($attributes['default']['name'])) {
+                                throw new Exception\RuntimeException('Misssing "name" attribute in "zf:const" node');
                             }
     
-                            $constantName = $attributes['zf']['name'];
+                            $constantName = $attributes['default']['name'];
     
                             if (!defined($constantName)) {
                                 throw new Exception\RuntimeException(sprintf('Constant with name "%s" was not defined', $constantName));
@@ -142,7 +142,7 @@ class Xml extends AbstractReader
                             break;
     
                         default:
-                            throw new Exception\RuntimeException(sprintf('Unknown node with name "%s" found', $name));
+                            throw new Exception\RuntimeException(sprintf('Unknown zf:node with name "%s" found', $name));
                     }
                 } else {
                     if (isset($attributes['zf']['value'])) {

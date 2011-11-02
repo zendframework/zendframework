@@ -388,20 +388,20 @@ abstract class Word extends AbstractAdapter
         }
 
         if (!isset($value['input'])) {
-            $this->_error(self::MISSING_VALUE);
+            $this->error(self::MISSING_VALUE);
             return false;
         }
         $input = strtolower($value['input']);
-        $this->_setValue($input);
+        $this->setValue($input);
 
         if (!isset($value['id'])) {
-            $this->_error(self::MISSING_ID);
+            $this->error(self::MISSING_ID);
             return false;
         }
 
         $this->_id = $value['id'];
         if ($input !== $this->getWord()) {
-            $this->_error(self::BAD_CAPTCHA);
+            $this->error(self::BAD_CAPTCHA);
             return false;
         }
 

@@ -31,11 +31,6 @@ use Zend\Config\Config,
 /**
  * Zend_Service_ReCaptcha
  *
- * @uses       \Zend\Http\Client
- * @uses       \Zend\Json\Json
- * @uses       Zend\Service\AbstractService
- * @uses       \Zend\Service\ReCaptcha\Exception
- * @uses       \Zend\Service\ReCaptcha\Response
  * @category   Zend
  * @package    Zend_Service
  * @subpackage ReCaptcha

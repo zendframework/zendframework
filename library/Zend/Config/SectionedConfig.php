@@ -32,16 +32,6 @@ namespace Zend\Config;
 class SectionedConfig extends Config
 {
     /**
-     * Contains which config sections were loaded.
-     * 
-     * This is null if all sections were loaded, a string name if one section is
-     * loaded and an array of string names if multiple sections were loaded.
-     *
-     * @var mixed
-     */
-    protected $loadedSection;
-
-    /**
      * This is used to track section inheritance.
      * 
      * The keys are names of sections that extend other sections, and the values
@@ -50,30 +40,6 @@ class SectionedConfig extends Config
      * @var array
      */
     protected $extends = array();
-    
-    /**
-     * Returns the section name(s) loaded.
-     *
-     * @return mixed
-     */
-    public function getSectionName()
-    {
-        if (is_array($this->loadedSection) && count($this->_loadedSection) === 1) {
-            $this->loadedSection = $this->loadedSection[0];
-        }
-        
-        return $this->loadedSection;
-    }
-
-    /**
-     * Returns true if all sections were loaded
-     *
-     * @return boolean
-     */
-    public function areAllSectionsLoaded()
-    {
-        return $this->loadedSection === null;
-    }
     
     /**
      * Get the current extends.
@@ -99,31 +65,5 @@ class SectionedConfig extends Config
         } else if ($extendedSection !== null) {
             $this->extends[$extendingSection] = $extendedSection;
         }
-    }
-
-    /**
-     * Throws an exception if $extendingSection may not extend $extendedSection,
-     * and tracks the section extension if it is valid.
-     *
-     * @param  string $extendingSection
-     * @param  string $extendedSection
-     * @throws \Zend\Config\Exception
-     * @return void
-     */
-    protected function assertValidExtend($extendingSection, $extendedSection)
-    {
-        // Detect circular section inheritance
-        $currentExtendedSection = $extendedSection;
-        
-        while (array_key_exists($currentExtendedSection, $this->extends)) {
-            if ($this->extends[$currentExtendedSection] == $extendingSection) {
-                throw new Exception\RuntimeException('Illegal circular inheritance detected');
-            }
-            
-            $currentExtendedSection = $this->_extends[$currentExtendedSection];
-        }
-        
-        // Remember that this section extends another section
-        $this->_extends[$extendingSection] = $extendedSection;
     }
 }

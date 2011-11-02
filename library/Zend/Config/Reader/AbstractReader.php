@@ -65,10 +65,16 @@ abstract class AbstractReader implements Reader
     public function readFile($filename)
     {
         $this->extends = array();
+
+        $config = new SectionedConfig(
+            $this->processAllExtends($this->processFile($filename))
+        );
         
-        $data = $this->processAllExtends($this->processFile($filename));
+        foreach (($this->extends ?: $this->processedExtends) as $extendingSection => $extendedSection) {
+            $config->setExtend($extendingSection, $extendedSection);
+        }
         
-        return new SectionedConfig($data);
+        return $config;
     }
        
     /**
@@ -81,9 +87,15 @@ abstract class AbstractReader implements Reader
     {
         $this->extends = array();
         
-        $data = $this->processAllExtends($this->processString($string));
+        $config = new SectionedConfig(
+            $this->processAllExtends($this->processString($string))
+        );
 
-        return new SectionedConfig($data);
+        foreach (($this->extends ?: $this->processedExtends) as $extendingSection => $extendedSection) {
+            $config->setExtend($extendingSection, $extendedSection);
+        }
+        
+        return $config;
     }
     
     /**
@@ -109,14 +121,14 @@ abstract class AbstractReader implements Reader
      */
     protected function processAllExtends(array $data)
     {
+        $this->processedExtends = array();
+        
         if (!$this->shouldProcessExtends()) {
             return $data;
         }
         
         // Check for circular extends
-        $this->processedExtends = array();
-        $extends                = $this->extends;
-        $processedExtends       = array();
+        $extends = $this->extends;
         
         foreach ($extends as $extendingSection => $extendedSection) {
             if (!isset($data[$extendedSection])) {

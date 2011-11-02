@@ -24,7 +24,9 @@
  */
 namespace Zend\Service\ReCaptcha;
 
-use Zend\Config\Config;
+use Zend\Config\Config,
+    Zend\Http\Request,
+    Zend\Service\AbstractService;
 
 /**
  * Zend_Service_ReCaptcha
@@ -40,7 +42,7 @@ use Zend\Config\Config;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReCaptcha extends \Zend\Service\AbstractService
+class ReCaptcha extends AbstractService
 {
     /**
      * URI to the regular API
@@ -466,7 +468,8 @@ HTML;
         /* Make the POST and return the response */
         return $httpClient->setUri(self::VERIFY_SERVER)
                           ->setParameterPost($postParams)
-                          ->request(\Zend\Http\Client::POST);
+                          ->setMethod(Request::METHOD_POST)
+                          ->send();
     }
 
     /**

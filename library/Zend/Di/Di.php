@@ -197,12 +197,29 @@ class Di implements DependencyInjection
             $instanceConfiguration = $instanceManager->getConfiguration($name);
 
             if ($instanceConfiguration['injections']) {
-                $objectsToInject = array();
-                foreach ($instanceConfiguration['injections'] as $classAliasToInject) {
-                    $objectsToInject[] = $this->get($classAliasToInject, $params);
+                $objectsToInject = $methodsToCall = array();
+                foreach ($instanceConfiguration['injections'] as $injectName => $injectValue) {
+                    if (is_int($injectName) && is_string($injectValue)) {
+                        $objectsToInject[] = $this->get($injectValue, $params);
+                    } elseif (is_string($injectName) && is_array($injectValue)) {
+                        if (is_string(key($injectValue))) {
+                            $methodsToCall[] = array('method' => $injectName, 'args' => $injectValue);
+                        } else {
+                            foreach ($injectValue as $methodCallArgs) {
+                                $methodsToCall[] = array('method' => $injectName, 'args' => $methodCallArgs);
+                            }
+                        }
+                    } elseif (is_object($injectValue)) {
+                        $objectsToInject[] = $injectValue;
+                    } elseif (is_int($injectName) && is_array($injectValue)) {
+                        // @todo must find method name somehow
+                        throw new Exception\RuntimeException(
+                            'An injection was provided with a keyed index and an array of data, try using'
+                            . ' the name of a particular method as a key for your injection data.'
+                        );
+                    }
                 }
                 if ($objectsToInject) {
-                    // @todo this needs to be optimized
                     foreach ($objectsToInject as $objectToInject) {
                         foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
                             if ($methodParams = $definitions->getMethodParameters($class, $injectionMethod)) {
@@ -221,6 +238,14 @@ class Di implements DependencyInjection
                         }
                     }
                 }
+                if ($methodsToCall) {
+                    foreach ($methodsToCall as $methodInfo) {
+                        $callParams = $this->resolveMethodParameters(get_class($object), $methodInfo['method'],
+                            $methodInfo['args'], false, $alias, true
+                        );
+                        call_user_func_array(array($object, $methodInfo['method']), $callParams);
+                    }
+                }
             }
         }
         
@@ -234,21 +259,21 @@ class Di implements DependencyInjection
      * @todo 
      * @param unknown_type $object
      */
-     public function injectObjects($targetObject, array $objects = array())
-     {
-         if ($objects === array()) {
-             throw new \Exception('Not yet implmeneted');
-         }
+    public function injectObjects($targetObject, array $objects = array())
+    {
+        if ($objects === array()) {
+            throw new \Exception('Not yet implmeneted');
+        }
 
-         $targetClass = get_class($targetObject);
-         if (!$this->definitions()->hasClass($targetClass)) {
-             throw new Exception\RuntimeException('A definition for this object type cannot be found');
-         }
+        $targetClass = get_class($targetObject);
+        if (!$this->definitions()->hasClass($targetClass)) {
+            throw new Exception\RuntimeException('A definition for this object type cannot be found');
+        }
 
-         foreach ($objects as $objectToInject) {
+        foreach ($objects as $objectToInject) {
 
-         }
-     }
+        }
+    }
 
     /**
      * Retrieve a class instance based on class name
@@ -397,29 +422,34 @@ class Di implements DependencyInjection
             if (isset($callTimeUserParams[$fqName]) || isset($callTimeUserParams[$name])) {
 
                 // @todo FQ Name in call time params
-                if (isset($callTimeUserParams[$fqName])) throw \Exception('Implementation incomplete for fq names');
+                if (isset($callTimeUserParams[$fqName])) {
+                    $callTimeCurValue =& $callTimeUserParams[$fqName];
+                } else {
+                    $callTimeCurValue =& $callTimeUserParams[$name];
+                }
 
-                if (is_string($callTimeUserParams[$name])) {
-                    if ($this->instanceManager->hasAlias($callTimeUserParams[$name])) {
+                if (is_string($callTimeCurValue)) {
+                    if ($this->instanceManager->hasAlias($callTimeCurValue)) {
                         // was an alias provided?
                         $computedParams['required'][$fqName] = array(
                             $callTimeUserParams[$name],
-                            $this->instanceManager->getClassFromAlias($callTimeUserParams[$name])
+                            $this->instanceManager->getClassFromAlias($callTimeCurValue)
                         );    
                     } elseif ($this->definitions->hasClass($callTimeUserParams[$name])) {
                         // was a known class provided?
                         $computedParams['required'][$fqName] = array(
-                            $callTimeUserParams[$name],
-                            $callTimeUserParams[$name]
+                            $callTimeCurValue,
+                            $callTimeCurValue
                         );
                     } else {
                         // must be a value
-                        $computedParams['value'][$fqName] = $callTimeUserParams[$name];
+                        $computedParams['value'][$fqName] = $callTimeCurValue;
                     }
                 } else {
                     // int, float, null, object, etc
-                    $computedParams['value'][$fqName] = $callTimeUserParams[$name];
+                    $computedParams['value'][$fqName] = $callTimeCurValue;
                 }
+                unset($callTimeCurValue);
                 continue;
             }
             
@@ -433,26 +463,35 @@ class Di implements DependencyInjection
                 if (isset($iConfig[$thisIndex]['parameters'][$fqName]) || isset($iConfig[$thisIndex]['parameters'][$name])) {
 
                     // @todo FQ Name in config parameters
-                    if (isset($iConfig[$thisIndex]['parameters'][$fqName])) throw \Exception('Implementation incomplete for fq names');
-
-                    if (is_string($iConfig[$thisIndex]['parameters'][$name])
-                        && $type === false) {
-                        $computedParams['value'][$fqName] = $iConfig[$thisIndex]['parameters'][$name];
-                    } elseif (is_string($iConfig[$thisIndex]['parameters'][$name])
-                        && isset($aliases[$iConfig[$thisIndex]['parameters'][$name]])) {
-                        $computedParams['required'][$fqName] = array(
-                            $iConfig[$thisIndex]['parameters'][$name],
-                            $this->instanceManager->getClassFromAlias($iConfig[$thisIndex]['parameters'][$name])
-                        );
-                    } elseif (is_string($iConfig[$thisIndex]['parameters'][$name])
-                        && $this->definitions->hasClass($iConfig[$thisIndex]['parameters'][$name])) {
-                        $computedParams['required'][$fqName] = array(
-                            $iConfig[$thisIndex]['parameters'][$name],
-                            $iConfig[$thisIndex]['parameters'][$name]
-                        );
+                    if (isset($iConfig[$thisIndex]['parameters'][$fqName])) {
+                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqName];
                     } else {
-                        $computedParams['value'][$fqName] = $iConfig[$thisIndex]['parameters'][$name];
+                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$name];
                     }
+
+                    if (is_string($iConfigCurValue)
+                        && $type === false) {
+                        $computedParams['value'][$fqName] = $iConfigCurValue;
+                    } elseif (is_string($iConfigCurValue)
+                        && isset($aliases[$iConfigCurValue])) {
+                        $computedParams['required'][$fqName] = array(
+                            $iConfig[$thisIndex]['parameters'][$name],
+                            $this->instanceManager->getClassFromAlias($iConfigCurValue)
+                        );
+                    } elseif (is_string($iConfigCurValue)
+                        && $this->definitions->hasClass($iConfigCurValue)) {
+                        $computedParams['required'][$fqName] = array(
+                            $iConfigCurValue,
+                            $iConfigCurValue
+                        );
+                    } elseif (is_object($iConfigCurValue)
+                        && $iConfigCurValue instanceof \Closure
+                        && $type !== 'Closure') {
+                        $computedParams['value'][$fqName] = $iConfigCurValue();
+                    } else {
+                        $computedParams['value'][$fqName] = $iConfigCurValue;
+                    }
+                    unset($iConfigCurValue);
                     continue 2;
                 }
 

@@ -5,6 +5,7 @@ namespace Zend\Module;
 use Traversable,
     Zend\Config\Config,
     Zend\Config\Writer\ArrayWriter,
+    Zend\Stdlib\IteratorToArray,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
@@ -515,10 +516,13 @@ class Manager
             $config = $module->getConfig($this->getOptions()->getApplicationEnv());
             if ($config instanceof Config) {
                 $config = $config->toArray();
+            } elseif ($config instanceof Traversable) {
+                $config = IteratorToArray::convert($config);
             }
             if (!is_array($config)) {
                 throw new \InvalidArgumentException(
-                    sprintf('getConfig() method of %s must be an array or '
+                    sprintf('getConfig() method of %s must be an array, '
+                    . 'implement the \Traversable interface, or be an '
                     . 'instance of Zend\Config\Config', get_class($module))
                 );
             }

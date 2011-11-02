@@ -87,7 +87,7 @@ if (isset($opts->l)) {
         echo $opts->getUsageMessage();
         exit(2);
     }
-    $path = realpath($libraryPath);
+    $path = str_replace('\\', '/', realpath($libraryPath));
     
     // If -o has been used, then we need to add the $libraryPath into the relative 
     // path that is created in the classmap file.
@@ -181,7 +181,7 @@ $map    = new \stdClass;
 $strip .= '/';
 foreach ($l as $file) {
     $namespace = empty($file->namespace) ? '' : $file->namespace . '\\';
-    $filename  = str_replace($strip, '', $file->getPath() . '/' . $file->getFilename());
+    $filename  = str_replace($strip, '', str_replace('\\', '/', $file->getPath()) . '/' . $file->getFilename());
 
     // Add in relative path to library
     $filename  = $relativePathForClassmap . $filename;
@@ -201,7 +201,7 @@ if ($appending) {
     // Fix \' strings from injected DIRECTORY_SEPARATOR usage in iterator_apply op
     $content = str_replace("\\'", "'", $content);
 
-    // Convert to an array and remove the first "array ("
+    // Convert to an array and remove the first "array("
     $content = explode(PHP_EOL, $content);
     array_shift($content);
 
@@ -226,6 +226,19 @@ if ($appending) {
 
 // Remove unnecessary double-backslashes
 $content = str_replace('\\\\', '\\', $content);
+
+// Exchange "array (" width "array("
+$content = str_replace('array (', 'array(', $content);
+
+// Allign "=>" operators to match coding standard
+preg_match_all('(\n\s+([^=]+)=>)', $content, $matches, PREG_SET_ORDER);
+$maxWidth = 0;
+
+foreach ($matches as $match) {
+    $maxWidth = max($maxWidth, strlen($match[1]));
+}
+
+$content = preg_replace('(\n\s+([^=]+)=>)e', "'\n    \\1' . str_repeat(' ', " . $maxWidth . " - strlen('\\1')) . '=>'", $content);
 
 // Write the contents to disk
 file_put_contents($output, $content);

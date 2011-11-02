@@ -514,9 +514,7 @@ class Manager
             && (is_callable(array($module, 'getConfig')))
         ) {
             $config = $module->getConfig($this->getOptions()->getApplicationEnv());
-            if ($config instanceof Config) {
-                $config = $config->toArray();
-            } elseif ($config instanceof Traversable) {
+            if ($config instanceof Traversable) {
                 $config = IteratorToArray::convert($config);
             }
             if (!is_array($config)) {
@@ -559,7 +557,7 @@ class Manager
         if (($this->getOptions()->getEnableConfigCache())
             && (false === $this->skipConfig)
         ) {
-            $this->saveConfigCache($this->getMergedConfig());
+            $this->saveConfigCache($this->getMergedConfig(false));
         }
         return $this;
     }

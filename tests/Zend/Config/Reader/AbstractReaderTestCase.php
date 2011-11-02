@@ -22,7 +22,8 @@
 namespace ZendTest\Config\Reader;
 
 use \PHPUnit_Framework_TestCase as TestCase,
-    \Zend\Config\Reader\Reader;
+    \Zend\Config\Reader\Reader,
+    \ReflectionClass;
 
 /**
  * @category   Zend
@@ -50,6 +51,21 @@ abstract class AbstractReaderTestCase extends TestCase
     {
         $config = $this->reader->readFile($this->getTestAssetPath('include-base'));
         $this->assertEquals('foo', $config->base->foo);
+    }
+  
+    public function testCurrentDirInFile()
+    {
+        $config = $this->reader->readFile($this->getTestAssetPath('current-dir'));
+
+        $this->assertEquals(dirname($this->getTestAssetPath('current-dir')), $config->base->foo);
+    }
+    
+    public function testCurrentDirInString()
+    {
+        $config          = $this->reader->readString(file_get_contents($this->getTestAssetPath('current-dir')));
+        $reflectionClass = new ReflectionClass($this->reader);
+
+        $this->assertEquals(dirname($reflectionClass->getFileName()), $config->base->foo);
     }
     
     public function testConstants()

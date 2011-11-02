@@ -49,6 +49,13 @@ class Xml extends AbstractReader
     protected $reader;
 
     /**
+     * Filename of the file to process.
+     * 
+     * @var string
+     */
+    protected $filename;
+    
+    /**
      * Nodes to handle as plain text.
      * 
      * @var array
@@ -70,6 +77,8 @@ class Xml extends AbstractReader
         $this->reader = new XMLReader();
         $this->reader->open($filename, null, LIBXML_XINCLUDE);
         
+        $this->filename = $filename;
+        
         return $this->process();
     }
     
@@ -85,6 +94,8 @@ class Xml extends AbstractReader
         $this->reader = new XMLReader();
         $this->reader->xml($data, null, LIBXML_XINCLUDE);
 
+        $this->filename = null;
+        
         return $this->process();
     }
     
@@ -139,6 +150,14 @@ class Xml extends AbstractReader
                             }
         
                             $text .= constant($constantName);
+                            break;
+                            
+                        case 'dir':
+                            if ($this->filename !== null) {
+                                $text .= dirname($this->filename);
+                            } else {
+                                $text .= __DIR__;
+                            }
                             break;
     
                         default:

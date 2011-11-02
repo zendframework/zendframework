@@ -1,4 +1,9 @@
 <?php
+/**
+ *  THIS IS AN EXTENDED, **EXPERIMENTAL** VERSION OF THE MODULE MANAGER.
+ *  Please do not depend on this code yet, as it will likely be moved and 
+ *  durastically change before the final ZF2 release.
+ */
 
 namespace Zend\Module;
 
@@ -310,3 +315,6 @@ class AdvancedManager extends Manager
         return $this;
     }
 }
+/**
+ *  
+ */

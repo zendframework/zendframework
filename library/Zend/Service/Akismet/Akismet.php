@@ -233,8 +233,8 @@ class Akismet extends \Zend\Service\AbstractService
         ));
         $client->setParameterPost($params);
 
-        $client->setMethod(Http\Client::POST);
-        return $client->request();
+        $client->setMethod(Http\Request::METHOD_POST);
+        return $client->send();
     }
 
     /**

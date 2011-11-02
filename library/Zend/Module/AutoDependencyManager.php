@@ -14,7 +14,7 @@ use Traversable,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
-class AdvancedManager extends Manager
+class AutoDependencyManager extends Manager
 {
     /**
      * An array containing all of the provisions for modules

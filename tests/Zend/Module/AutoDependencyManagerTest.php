@@ -4,11 +4,11 @@ namespace ZendTest\Module;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
-    Zend\Module\AdvancedManager as Manager,
+    Zend\Module\AutoDependencyManager as Manager,
     Zend\Module\ManagerOptions,
     InvalidArgumentException;
 
-class AdvancedManagerTest extends TestCase
+class AutoDependencyManagerTest extends TestCase
 {
     public function setUp()
     {

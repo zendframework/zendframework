@@ -97,6 +97,9 @@ class ClassFileLocator extends FilterIterator
                     $done      = false;
                     do {
                         ++$i;
+                        if (!array_key_exists($i, $tokens)) {
+                            break;
+                        }
                         $token = $tokens[$i];
                         if (is_string($token)) {
                             if (';' === $token) {

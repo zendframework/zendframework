@@ -167,7 +167,7 @@ class Di implements DependencyInjection
         
         $instantiator     = $definitions->getInstantiator($class);
         $injectionMethods = $definitions->getMethods($class);
-
+        
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params, $alias);
             if (array_key_exists('__construct', $injectionMethods)) {
@@ -176,7 +176,16 @@ class Di implements DependencyInjection
         } elseif (is_callable($instantiator)) {
             $object = $this->createInstanceViaCallback($instantiator, $params, $alias);
         } else {
-            throw new Exception\RuntimeException('Invalid instantiator');
+            if (is_array($instantiator)) {
+                $msg = sprintf(
+                    'Invalid instantiator: %s::%s() is not callable.',
+                    isset($instantiator[0]) ? $instantiator[0] : 'NoClassGiven',
+                    isset($instantiator[1]) ? $instantiator[1] : 'NoMethodGiven'
+                );
+            } else {
+                $msg = 'Invalid instantiator';
+            }
+            throw new \RuntimeException($msg);  
         }
 
         if ($isShared) {

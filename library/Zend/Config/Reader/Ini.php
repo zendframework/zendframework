@@ -57,6 +57,50 @@ class Ini extends AbstractReader
     protected $directory;
 
     /**
+     * Set nest separator.
+     * 
+     * @param  stirng $separator
+     * @return self
+     */
+    public function setNestSeparator($separator)
+    {
+        $this->nestSeparator = $separator;
+        return $this;
+    }
+    
+    /**
+     * Get nest separator.
+     * 
+     * @return string
+     */
+    public function getNestSeparator()
+    {
+        return $this->nestSeparator;
+    }
+    
+    /**
+     * Set section separator.
+     * 
+     * @param  string $separator
+     * @return self
+     */
+    public function setSectionSeparator($separator)
+    {
+        $this->sectionSeparator = $separator;
+        return $this;
+    }
+    
+    /**
+     * Get section separator.
+     * 
+     * @return string
+     */
+    public function getSectionSeparator()
+    {
+        return $this->sectionSeparator;
+    }
+    
+    /**
      * processFile(): defined by AbstractReader.
      * 
      * @see    AbstractReader::processFile()

@@ -35,6 +35,11 @@ class ClassDefinition implements Definition, PartialMarker
         $this->methods[$method] = (bool) $isRequired;
     }
 
+    /**
+     * @param $method
+     * @param $parameterName
+     * @param array $parameterInfo (keys: required, type)
+     */
     public function addMethodParameter($method, $parameterName, array $parameterInfo)
     {
         if (!array_key_exists($method, $this->methods)) {

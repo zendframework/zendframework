@@ -173,10 +173,19 @@ class Di implements DependencyInjection
             if (array_key_exists('__construct', $injectionMethods)) {
                 unset($injectionMethods['__construct']);
             }
-        } elseif (is_callable($instantiator)) {
+        } elseif (is_callable($instantiator, false)) {
             $object = $this->createInstanceViaCallback($instantiator, $params, $alias);
         } else {
-            throw new Exception\RuntimeException('Invalid instantiator');
+            if (is_array($instantiator)) {
+                $msg = sprintf(
+                    'Invalid instantiator: %s::%s() is not callable.',
+                    isset($instantiator[0]) ? $instantiator[0] : 'NoClassGiven',
+                    isset($instantiator[1]) ? $instantiator[1] : 'NoMethodGiven'
+                );
+            } else {
+                $msg = 'Invalid instantiator: ' . $instantiator;
+            }
+            throw new \RuntimeException($msg);
         }
 
         if ($isShared) {
@@ -224,7 +233,8 @@ class Di implements DependencyInjection
                         foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
                             if ($methodParams = $definitions->getMethodParameters($class, $injectionMethod)) {
                                 foreach ($methodParams as $methodParam) {
-                                    if ($this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
+                                    if (get_class($objectToInject) == $methodParam[1] ||
+                                        $this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
                                         $callParams = $this->resolveMethodParameters(get_class($object), $injectionMethod,
                                             array($methodParam[0] => $objectToInject), false, $alias, true
                                         );
@@ -259,6 +269,7 @@ class Di implements DependencyInjection
      * @todo 
      * @param unknown_type $object
      */
+    /*
     public function injectObjects($targetObject, array $objects = array())
     {
         if ($objects === array()) {
@@ -274,6 +285,7 @@ class Di implements DependencyInjection
 
         }
     }
+    */
 
     /**
      * Retrieve a class instance based on class name
@@ -328,6 +340,8 @@ class Di implements DependencyInjection
         if (is_array($callback)) {
             $class = (is_object($callback[0])) ? get_class($callback[0]) : $callback[0];
             $method = $callback[1];
+        } elseif (is_string($callback) && strpos($callback, '::') !== false) {
+            list($class, $method) = explode('::', $callback, 2);
         } else {
             throw new Exception\RuntimeException('Invalid callback type provided to ' . __METHOD__);
         }

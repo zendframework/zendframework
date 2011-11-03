@@ -79,10 +79,4 @@ abstract class AbstractReaderTestCase extends TestCase
         $this->assertEquals('foo-test-bar-test', $config->base->foo);
         $this->assertEquals('ZEND_CONFIG_TEST_CONSTANT', $config->base->bar->const->name);
     }
-
-    public function testNonExistentConstant()
-    {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Constant with name "ZEND_CONFIG_TEST_NON_EXISTENT_CONSTANT" was not defined');
-        $config = $this->reader->readFile($this->getTestAssetPath('non-existent-constant'));
-    }
 }

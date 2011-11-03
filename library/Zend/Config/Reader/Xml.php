@@ -49,11 +49,11 @@ class Xml extends AbstractReader
     protected $reader;
 
     /**
-     * Filename of the file to process.
+     * Directory of the file to process.
      * 
      * @var string
      */
-    protected $filename;
+    protected $directory;
     
     /**
      * Nodes to handle as plain text.
@@ -66,35 +66,35 @@ class Xml extends AbstractReader
     );
 
     /**
-     * processFile(): defined by Reader interface.
+     * processFile(): defined by AbstractReader.
      * 
-     * @see    Reader::processFile()
+     * @see    AbstractReader::processFile()
      * @param  string $filename
-     * @return Config
+     * @return array
      */
     protected function processFile($filename)
     {
         $this->reader = new XMLReader();
         $this->reader->open($filename, null, LIBXML_XINCLUDE);
         
-        $this->filename = $filename;
+        $this->directory = dirname($filename);
         
         return $this->process();
     }
     
     /**
-     * processString(): defined by Reader interface.
+     * processString(): defined by AbstractReader.
      * 
-     * @see    Reader::processString()
-     * @param  string $data
-     * @return Config
+     * @see    AbstractReader::processString()
+     * @param  string $string
+     * @return array
      */
-    protected function processString($data)
+    protected function processString($string)
     {
         $this->reader = new XMLReader();
-        $this->reader->xml($data, null, LIBXML_XINCLUDE);
+        $this->reader->xml($string, null, LIBXML_XINCLUDE);
 
-        $this->filename = null;
+        $this->directory = __DIR__;
         
         return $this->process();
     }
@@ -102,12 +102,11 @@ class Xml extends AbstractReader
     /**
      * Process data from the created XMLReader.
      * 
-     * @return Config
+     * @return array
      */
     protected function process()
     {
         $this->extends = array();
-        $this->depth   = 0;
         
         return $this->processNextElement();
     }
@@ -153,11 +152,7 @@ class Xml extends AbstractReader
                             break;
                             
                         case 'dir':
-                            if ($this->filename !== null) {
-                                $text .= dirname($this->filename);
-                            } else {
-                                $text .= __DIR__;
-                            }
+                            $text .= $this->directory;
                             break;
     
                         default:

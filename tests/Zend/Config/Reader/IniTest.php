@@ -21,8 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use \Zend\Config\Reader\Xml;
-
+use \Zend\Config\Reader\Ini;
 
 /**
  * @category   Zend
@@ -32,11 +31,11 @@ use \Zend\Config\Reader\Xml;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class XmlTest extends AbstractReaderTestCase
+class IniTest extends AbstractReaderTestCase
 {
     public function setUp()
     {
-        $this->reader = new Xml();
+        $this->reader = new Ini();
     }
     
     /**
@@ -47,13 +46,13 @@ class XmlTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Xml/' . $name . '.xml';
+        return __DIR__ . '/TestAssets/Ini/' . $name . '.ini';
     }
     
     public function testNonExistentConstant()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Constant with name "ZEND_CONFIG_TEST_NON_EXISTENT_CONSTANT" was not defined');
         $config = $this->reader->readFile($this->getTestAssetPath('non-existent-constant'));
-        var_dump($config);
+        
+        $this->assertEquals('foo-ZEND_CONFIG_TEST_NON_EXISTENT_CONSTANT', $config->base->foo);
     }
 }

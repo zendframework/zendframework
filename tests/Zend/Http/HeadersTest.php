@@ -223,5 +223,36 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('Foo' => 'bar', 'Baz' => 'baz'), $headers->toArray());
     }
 
+    public function testCastingToArrayReturnsMultiHeadersAsArrays()
+    {
+        $headers = new Headers();
+        $cookie1 = new Header\SetCookie('foo', 'bar');
+        $cookie2 = new Header\SetCookie('bar', 'baz');
+        $headers->addHeader($cookie1);
+        $headers->addHeader($cookie2);
+        $array   = $headers->toArray();
+        $expected = array(
+            'Set-Cookie' => array(
+                $cookie1->getFieldValue(),
+                $cookie2->getFieldValue(),
+            ),
+        );
+        $this->assertEquals($expected, $array);
+    }
 
+    public function testCastingToStringReturnsAllMultiHeaderValues()
+    {
+        $headers = new Headers();
+        $cookie1 = new Header\SetCookie('foo', 'bar');
+        $cookie2 = new Header\SetCookie('bar', 'baz');
+        $headers->addHeader($cookie1);
+        $headers->addHeader($cookie2);
+        $string  = $headers->toString();
+        $expected = array(
+            'Set-Cookie: ' . $cookie1->getFieldValue(),
+            'Set-Cookie: ' . $cookie2->getFieldValue(),
+        );
+        $expected = implode("\r\n", $expected) . "\r\n";
+        $this->assertEquals($expected, $string);
+    }
 }

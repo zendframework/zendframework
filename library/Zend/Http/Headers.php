@@ -400,8 +400,15 @@ class Headers implements Iterator, Countable
     public function toString()
     {
         $headers = '';
-        /* @var $header Header\HeaderDescription */
         foreach ($this->toArray() as $fieldName => $fieldValue) {
+            if (is_array($fieldValue)) {
+                // Handle multi-value headers
+                foreach ($fieldValue as $value) {
+                    $headers .= $fieldName . ': ' . $value . "\r\n";
+                }
+                continue;
+            }
+            // Handle single-value headers
             $headers .= $fieldName . ': ' . $fieldValue . "\r\n";
         }
         return $headers;
@@ -418,7 +425,13 @@ class Headers implements Iterator, Countable
         $headers = array();
         /* @var $header Header\HeaderDescription */
         foreach ($this->headers as $header) {
-            if ($header instanceof Header\HeaderDescription) {
+            if ($header instanceof Header\MultipleHeaderDescription) {
+                $name = $header->getFieldName();
+                if (!isset($headers[$name])) {
+                    $headers[$name] = array();
+                }
+                $headers[$name][] = $header->getFieldValue();
+            } elseif ($header instanceof Header\HeaderDescription) {
                 $headers[$header->getFieldName()] = $header->getFieldValue();
             } else {
                 $matches = null;

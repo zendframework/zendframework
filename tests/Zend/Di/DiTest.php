@@ -2,15 +2,17 @@
 
 namespace ZendTest\Di;
 
-use Zend\Debug;
-
 use Zend\Di\Di,
-    PHPUnit_Framework_TestCase as TestCase;
+    Zend\Di\DefinitionList,
+    Zend\Di\InstanceManager,
+    Zend\Di\Configuration,
+    Zend\Di\Definition;
 
-class DiTest extends TestCase
+
+class DiTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testDependencyInjectorHasBuiltInImplementations()
+    public function testDiHasBuiltInImplementations()
     {
         $di = new Di();
         $this->assertInstanceOf('Zend\Di\InstanceManager', $di->instanceManager());
@@ -20,7 +22,24 @@ class DiTest extends TestCase
         $this->assertInstanceOf('Zend\Di\DefinitionList', $definitions);
         $this->assertInstanceOf('Zend\Di\Definition\RuntimeDefinition', $definitions->top());
     }
-    
+
+    public function testDiConstructorCanTakeDependencies()
+    {
+        $dl = new DefinitionList(array());
+        $im = new InstanceManager();
+        $cg = new Configuration(array());
+        $di = new Di($dl, $im, $cg);
+
+        $this->assertSame($dl, $di->definitions());
+        $this->assertSame($im, $di->instanceManager());
+
+        $di->setDefinitionList($dl);
+        $di->setInstanceManager($im);
+
+        $this->assertSame($dl, $di->definitions());
+        $this->assertSame($im, $di->instanceManager());
+    }
+
     public function testPassingInvalidDefinitionRaisesException()
     {
         $di = new Di();
@@ -91,7 +110,90 @@ class DiTest extends TestCase
         $this->assertInstanceOf('ZendTest\Di\TestAsset\BasicClass', $obj2);
         $this->assertNotSame($obj1, $obj2);
     }
-    
+
+    public function testNewInstanceCanHandleClassesCreatedByCallback()
+    {
+        $definitionList = new DefinitionList(array(
+            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\CallbackClasses\A'),
+            new Definition\RuntimeDefinition()
+        ));
+        $classdef->setInstantiator('ZendTest\Di\TestAsset\CallbackClasses\A::factory');
+
+        $di = new Di($definitionList);
+        $a = $di->get('ZendTest\Di\TestAsset\CallbackClasses\A');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\A', $a);
+    }
+
+    public function testNewInstanceCanHandleComplexCallback()
+    {
+        $definitionList = new DefinitionList(array(
+            $classdefB = new Definition\ClassDefinition('ZendTest\Di\TestAsset\CallbackClasses\B'),
+            $classdefC = new Definition\ClassDefinition('ZendTest\Di\TestAsset\CallbackClasses\C'),
+            new Definition\RuntimeDefinition()
+        ));
+
+        $classdefB->setInstantiator('ZendTest\Di\TestAsset\CallbackClasses\B::factory');
+        $classdefB->addMethod('factory', true);
+        $classdefB->addMethodParameter('factory', 'c', array('type' => 'ZendTest\Di\TestAsset\CallbackClasses\C', 'required' => true));
+        $classdefB->addMethodParameter('factory', 'params', array('type' => 'Array', 'required'=>false));
+
+        $di = new Di($definitionList);
+        $b = $di->get('ZendTest\Di\TestAsset\CallbackClasses\B', array('params'=>array('foo' => 'bar')));
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\B', $b);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\CallbackClasses\C', $b->c);
+        $this->assertEquals(array('foo' => 'bar'), $b->params);
+    }
+
+
+//    public function testCanSetInstantiatorToStaticFactory()
+//    {
+//        $config = new Configuration(array(
+//            'definition' => array(
+//                'class' => array(
+//                    'ZendTest\Di\TestAsset\DummyParams' => array(
+//                        'instantiator' => array('ZendTest\Di\TestAsset\StaticFactory', 'factory'),
+//                    ),
+//                    'ZendTest\Di\TestAsset\StaticFactory' => array(
+//                        'methods' => array(
+//                            'factory' => array(
+//                                'struct' => array(
+//                                    'type' => 'ZendTest\Di\TestAsset\Struct',
+//                                    'required' => true,
+//                                ),
+//                                'params' => array(
+//                                    'required' => true,
+//                                ),
+//                            ),
+//                        ),
+//                    ),
+//                ),
+//            ),
+//            'instance' => array(
+//                'ZendTest\Di\TestAsset\DummyParams' => array(
+//                    'parameters' => array(
+//                        'struct' => 'ZendTest\Di\TestAsset\Struct',
+//                        'params' => array(
+//                            'foo' => 'bar',
+//                        ),
+//                    ),
+//                ),
+//                'ZendTest\Di\TestAsset\Struct' => array(
+//                    'parameters' => array(
+//                        'param1' => 'hello',
+//                        'param2' => 'world',
+//                    ),
+//                ),
+//            ),
+//        ));
+//        $di = new Di();
+//        $di->configure($config);
+//        $dummyParams = $di->get('ZendTest\Di\TestAsset\DummyParams');
+//        $this->assertEquals($dummyParams->params['param1'], 'hello');
+//        $this->assertEquals($dummyParams->params['param2'], 'world');
+//        $this->assertEquals($dummyParams->params['foo'], 'bar');
+//        $this->assertArrayNotHasKey('methods', $di->definitions()->hasMethods('ZendTest\Di\TestAsset\StaticFactory'));
+//    }
+
     /**
      * @group ConstructorInjection
      */
@@ -300,19 +402,114 @@ class DiTest extends TestCase
         $this->assertSame($a, $d->a);
     }
 
-    /*
-    public function testNewInstanceWillRunArbitraryMethodsAccordingToConfiguration()
+    public function testInjectionInstancesCanBeInjectedMultipleTimes()
     {
-        $di = new Di();
-        $im = $di->instanceManager();
-        $im->setMethods('ZendTest\Di\TestAsset\ConfigParameter\A', array(
-            'setSomeInt' => array('value' => 5),
-            'injectM' => array('m' => 10)
+        $definitionList = new DefinitionList(array(
+            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            new Definition\RuntimeDefinition()
         ));
-        $b = $di->newInstance('ZendTest\Di\TestAsset\ConfigParameter\B');
-        $this->assertEquals(5, $b->a->someInt);
-        $this->assertEquals(10, $b->a->m);
+        $classdef->addMethod('addB');
+        $classdef->addMethodParameter('addB', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+
+        $di = new Di($definitionList);
+        $di->instanceManager()->setInjections(
+            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            array(
+                'ZendTest\Di\TestAsset\InjectionClasses\B'
+            )
+        );
+        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+
+        $di = new Di($definitionList);
+        $di->instanceManager()->addAlias('my-b1', 'ZendTest\Di\TestAsset\InjectionClasses\B');
+        $di->instanceManager()->addAlias('my-b2', 'ZendTest\Di\TestAsset\InjectionClasses\B');
+
+        $di->instanceManager()->setInjections(
+            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            array(
+                'my-b1',
+                'my-b2'
+            )
+        );
+        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
+
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
+        $this->assertNotSame(
+            $a->bs[0],
+            $a->bs[1]
+        );
     }
-    */
+
+    public function testInjectionCanHandleDisambiguation()
+    {
+        $definitionList = new DefinitionList(array(
+            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            new Definition\RuntimeDefinition()
+        ));
+        $classdef->addMethod('injectBOnce');
+        $classdef->addMethod('injectBTwice');
+        $classdef->addMethodParameter('injectBOnce', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectBTwice', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+
+        $di = new Di($definitionList);
+        $di->instanceManager()->setInjections(
+            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            array(
+                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBOnce:0' => new \ZendTest\Di\TestAsset\InjectionClasses\B('once'),
+                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBTwice:0' => new \ZendTest\Di\TestAsset\InjectionClasses\B('twice')
+            )
+        );
+        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $this->assertEquals('once', $a->bs[0]->id);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
+        $this->assertEquals('twice', $a->bs[1]->id);
+    }
+
+    public function testInjectionCanHandleMultipleInjectionsWithMultipleArguments()
+    {
+        $definitionList = new DefinitionList(array(
+            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            new Definition\RuntimeDefinition()
+        ));
+        $classdef->addMethod('injectSplitDependency');
+        $classdef->addMethodParameter('injectSplitDependency', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectSplitDependency', 'somestring', array('required' => true, 'type' => null));
+
+        /**
+         * First test that this works with a single call
+         */
+        $di = new Di($definitionList);
+        $di->instanceManager()->setInjections(
+            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            array(
+                'injectSplitDependency' => array('b' => 'ZendTest\Di\TestAsset\InjectionClasses\B', 'somestring' => 'bs-id')
+            )
+        );
+        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $this->assertEquals('bs-id', $a->bs[0]->id);
+
+        /**
+         * Next test that this works with multiple calls
+         */
+        $di = new Di($definitionList);
+        $di->instanceManager()->setInjections(
+            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            array(
+                'injectSplitDependency' => array(
+                    array('b' => 'ZendTest\Di\TestAsset\InjectionClasses\B', 'somestring' => 'bs-id'),
+                    array('b' => 'ZendTest\Di\TestAsset\InjectionClasses\C', 'somestring' => 'bs-id-for-c')
+                )
+            )
+        );
+        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $this->assertEquals('bs-id', $a->bs[0]->id);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\C', $a->bs[1]);
+        $this->assertEquals('bs-id-for-c', $a->bs[1]->id);
+    }
     
 }

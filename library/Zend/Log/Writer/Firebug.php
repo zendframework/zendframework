@@ -23,8 +23,10 @@
  * @namespace
  */
 namespace Zend\Log\Writer;
-use Zend\Log;
-use Zend\Wildfire\Plugin\FirePhp;
+
+use Zend\Log\Logger,
+    Zend\Log\Formatter,
+    Zend\Wildfire\Plugin\FirePhp;
 
 /**
  * Writes log messages to the Firebug Console via FirePHP.
@@ -46,14 +48,16 @@ class Firebug extends AbstractWriter
      *
      * @var array
      */
-    protected $_priorityStyles = array(Log\Logger::EMERG  => FirePhp::ERROR,
-                                       Log\Logger::ALERT  => FirePhp::ERROR,
-                                       Log\Logger::CRIT   => FirePhp::ERROR,
-                                       Log\Logger::ERR    => FirePhp::ERROR,
-                                       Log\Logger::WARN   => FirePhp::WARN,
-                                       Log\Logger::NOTICE => FirePhp::INFO,
-                                       Log\Logger::INFO   => FirePhp::INFO,
-                                       Log\Logger::DEBUG  => FirePhp::LOG);
+    protected $_priorityStyles = array(
+        Logger::EMERG  => FirePhp::ERROR,
+        Logger::ALERT  => FirePhp::ERROR,
+        Logger::CRIT   => FirePhp::ERROR,
+        Logger::ERR    => FirePhp::ERROR,
+        Logger::WARN   => FirePhp::WARN,
+        Logger::NOTICE => FirePhp::INFO,
+        Logger::INFO   => FirePhp::INFO,
+        Logger::DEBUG  => FirePhp::LOG
+    );
 
     /**
      * The default logging style for un-mapped priorities
@@ -80,7 +84,7 @@ class Firebug extends AbstractWriter
             $this->setEnabled(false);
         }
 
-        $this->_formatter = new Log\Formatter\Firebug();
+        $this->_formatter = new Formatter\Firebug();
     }
 
     /**

@@ -24,8 +24,12 @@
  */
 namespace Zend\Log\Writer;
 
-use \Zend\Log\Factory,
-    \Zend\Log\Writer;
+use Zend\Log\Factory,
+    Zend\Log\Writer,
+    Zend\Log\Filter,
+    Zend\Log\Formatter,
+    Zend\Log\Exception,
+    Zend\Config\Config;
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
@@ -40,32 +44,32 @@ use \Zend\Log\Factory,
 abstract class AbstractWriter implements Writer, Factory
 {
     /**
-     * @var array of \Zend\Log\Filter
+     * @var array of Filter
      */
     protected $_filters = array();
 
     /**
      * Formats the log message before writing.
      *
-     * @var \Zend\Log\Formatter
+     * @var Formatter
      */
     protected $_formatter;
 
     /**
      * Add a filter specific to this writer.
      *
-     * @param  \Zend\Log\Filter  $filter
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Writer\AbstractWriter
+     * @param  Filter|int  $filter
+     * @throws Exception\InvalidArgumentException
+     * @return self
      */
     public function addFilter($filter)
     {
         if (is_int($filter)) {
-            $filter = new \Zend\Log\Filter\Priority($filter);
+            $filter = new Filter\Priority($filter);
         }
 
-        if (!$filter instanceof \Zend\Log\Filter) {
-            throw new \Zend\Log\Exception\InvalidArgumentException('Invalid filter provided');
+        if (!$filter instanceof Filter) {
+            throw new Exception\InvalidArgumentException('Invalid filter provided');
         }
 
         $this->_filters[] = $filter;
@@ -93,10 +97,10 @@ abstract class AbstractWriter implements Writer, Factory
     /**
      * Set a new formatter for this writer
      *
-     * @param  \Zend\Log\Formatter $formatter
-     * @return \Zend\Log\Writer\AbstractWriter
+     * @param  Formatter $formatter
+     * @return self
      */
-    public function setFormatter(\Zend\Log\Formatter $formatter)
+    public function setFormatter(Formatter $formatter)
     {
         $this->_formatter = $formatter;
         return $this;
@@ -121,18 +125,18 @@ abstract class AbstractWriter implements Writer, Factory
     /**
      * Validate and optionally convert the config to array
      *
-     * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
+     * @param  array|Config $config Config or Array
      * @return array
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     static protected function _parseConfig($config)
     {
-        if ($config instanceof \Zend\Config\Config) {
+        if ($config instanceof Config) {
             $config = $config->toArray();
         }
 
         if (!is_array($config)) {
-            throw new \Zend\Log\Exception\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Configuration must be an array or instance of Zend\Config\Config'
             );
         }

@@ -23,7 +23,10 @@
  * @namespace
  */
 namespace Zend\Log\Writer;
-use Zend\Log;
+
+use Zend\Log\Formatter,
+    Zend\Log\Exception,
+    Zend\Db\Adapter\AbstractAdapter as DbAdapter;
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
@@ -40,7 +43,7 @@ class Db extends AbstractWriter
     /**
      * Database adapter instance
      *
-     * @var Zend_Db_Adapter
+     * @var DbAdapter
      */
     protected $_db;
 
@@ -61,7 +64,7 @@ class Db extends AbstractWriter
     /**
      * Class constructor
      *
-     * @param Zend_Db_Adapter $db   Database adapter instance
+     * @param DbAdapter $db   Database adapter instance
      * @param string $table         Log table in database
      * @param array $columnMap
      * @return void
@@ -77,7 +80,7 @@ class Db extends AbstractWriter
      * Create a new instance of Zend_Log_Writer_Db
      *
      * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Db
+     * @return self
      */
     static public function factory($config = array())
     {
@@ -102,12 +105,12 @@ class Db extends AbstractWriter
     /**
      * Formatting is not possible on this writer
      *
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setFormatter(\Zend\Log\Formatter $formatter)
+    public function setFormatter(Formatter $formatter)
     {
-        throw new Log\Exception\InvalidArgumentException(get_class() . ' does not support formatting');
+        throw new Exception\InvalidArgumentException(get_class() . ' does not support formatting');
     }
 
     /**
@@ -124,13 +127,13 @@ class Db extends AbstractWriter
      * Write a message to the log.
      *
      * @param  array  $event  event data
-     * @throws \Zend\Log\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      * @return void
      */
     protected function _write($event)
     {
         if ($this->_db === null) {
-            throw new Log\Exception\RuntimeException('Database adapter is null');
+            throw new Exception\RuntimeException('Database adapter is null');
         }
 
         if ($this->_columnMap === null) {

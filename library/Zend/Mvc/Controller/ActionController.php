@@ -23,6 +23,8 @@ use ArrayObject,
  */
 abstract class ActionController implements Dispatchable, InjectApplicationEvent, LocatorAware, Pluggable
 {
+    //use \Zend\EventManager\ProvidesEvents;
+
     protected $broker;
     protected $event;
     protected $events;

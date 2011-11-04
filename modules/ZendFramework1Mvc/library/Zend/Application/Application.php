@@ -37,6 +37,8 @@ use Traversable,
  */
 class Application
 {
+    //use \Zend\EventManager\ProvidesEvents;
+
     /**
      * Autoloader to use
      *

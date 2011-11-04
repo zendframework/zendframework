@@ -31,11 +31,11 @@ namespace ZendTest\Navigation\TestAsset;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class UrlHelper extends \Zend\Controller\Action\Helper\Url
+class UrlHelper extends \Zend\View\Helper\Url
 {
     const RETURN_URL = 'spotify:track:2nd6CTjR9zjHGT0QtpfLHe';
 
-    public function __invoke($urlOptions = array(), $name = null, $reset = false, $encode = true)
+    public function __invoke($name = null, array $params = array(), array $options = array(), $reuseMatchedParams = false)
     {
         return self::RETURN_URL;
     }

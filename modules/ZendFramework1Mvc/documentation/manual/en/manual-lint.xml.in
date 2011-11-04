@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE book [
+    <!-- Add translated specific definitions and snippets -->
+    <!ENTITY % language-snippets SYSTEM "./ref/language-snippets.xml">
+    %language-snippets;
+
+    <!-- Fallback to English definitions and snippets (in case of missing translation) -->
+    <!ENTITY % language-snippets.default SYSTEM "../en/ref/language-snippets.xml">
+    %language-snippets.default;
+]>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="manual" xml:lang="&lang;">
+    <chapter>
+        <info><title>XMLLint</title></info>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="@XMLFILE@" parse="xml">
+            <xi:fallback>
+                Cannot find file "@XMLFILE@"
+            </xi:fallback>
+        </xi:include>
+    </chapter>
+</book>
+<!--
+vim:se ts=4 sw=4 et:
+-->

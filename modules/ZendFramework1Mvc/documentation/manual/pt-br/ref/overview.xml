@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>Resumo</title></info>
+    
+
+    <para>
+        Zend Framework é um framework de código aberto para o desenvolvimento de aplicações web e
+        web services com <acronym>PHP</acronym> 5. Zend Framework é implementado usando 100% de
+        código orientado a objeto. A estrutura dos componente do Zend Framework é um tanto original;
+        cada componente é projetado com poucas dependências em outros componentes. Essa arquitetura
+        flexível permite que os desenvolvedores utilizem os componentes individualmente. Costumamos
+        chamar isso de modelo "use à vontade".
+    </para>
+
+    <para>
+        Embora eles possam ser usados separadamente, os componentes da biblioteca padrão do
+        Zend Framework formam um poderoso e extensível framework para aplicações web quando
+        combinados. Zend Framework oferece uma implementação <acronym>MVC</acronym> robusta
+        e de alto desempenho, uma abstração de banco de dados que é simples de usar, e um
+        componente para formulários que implementa a renderização, validação e filtragem de
+        formulários em <acronym>HTML</acronym> de modo que os desenvolvedores possam combinar
+        todas estas operações utilizando uma interface orientada a objetos fácil de usar. Outros
+        componentes, tais como <classname>Zend_Auth</classname> e <classname>Zend_Acl</classname>,
+        fornecem autenticação e autorização de usuários junto à maioria das lojas credenciadas.
+        Outros, ainda, implementam bibliotecas de cliente para simplificar o acesso aos serviços
+        web mais populares. Quaisquer que sejam as necessidades de sua aplicação, você
+        provavelmente irá encontrar um componente do Zend Framework que poderá ser usado para
+        reduzir drasticamente o tempo de desenvolvimento com uma base testada exaustivamente.
+    </para>
+
+    <para>
+        A principal patrocinadora do projeto 'Zend Framework' é a
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">Zend Technologies</link>, mas muitas empresas têm
+        contribuído com componentes ou com características significativas para o framework.
+        Empresas como Google, Microsoft e StrikeIron mantêm parcerias com a Zend para fornecer
+        interfaces de web services e outras tecnologias que pretendam disponibilizar aos
+        desenvolvedores do Zend Framework.
+    </para>
+
+    <para>
+        Zend Framework não poderia distribuir e dar suporte a todos esses recursos sem a ajuda da
+        vibrante comunidade do Zend Framework. Os membros da comunidade, incluindo colaboradores,
+        se dispõem em <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">listas de discussão</link>,
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">canais IRC</link>, e outros fóruns. Seja qual for a sua
+        pergunta sobre o Zend Framework, a comunidade estará sempre disponível para lhe responder.
+    </para>
+</chapter>

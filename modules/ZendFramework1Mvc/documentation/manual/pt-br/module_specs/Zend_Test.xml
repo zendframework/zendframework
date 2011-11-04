@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.introduction"><info><title>Introdução</title></info>
+    
+
+    <para>
+        <classname>Zend_Test</classname> fornece ferramentas para facilitar os testes unitários de
+        suas aplicações Zend Framework. Neste momento, estamos propondo algumas facilidades que
+        permitem a análise de sua aplicação <acronym>MVC</acronym> em Zend Framework.
+    </para>
+</section>

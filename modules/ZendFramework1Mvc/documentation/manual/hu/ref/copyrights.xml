@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="copyrights"><info><title>Szerzői jog</title></info>
+
+    
+
+    <para>
+        A következő szerzői jogok vonatkoznak a Zend Framework egyes részeire.
+    </para>
+
+    <para>
+        Copyright © 2005-<?dbtimestamp format="Y"?>
+        Zend Technologies Inc. (<uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">http://www.zend.com</uri>)
+    </para>
+</appendix>

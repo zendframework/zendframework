@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 19995 -->
+<!-- Reviewed: no -->
+<!-- links -->
+<!ENTITY lang                                   'es'>
+<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/&lang;/'>
+<!ENTITY php.manual.link                        'http://www.php.net/manual/&lang;/'>
+
+<!-- manual.xml.in -->
+<!ENTITY book.title                             'Programmer&#39;s Guía de Referencia'>
+<!ENTITY book.pdf1.title                        'Programmer&#39;s Guía de Referencia: Volumen 1'>
+<!ENTITY book.pdf2.title                        'Programmer&#39;s Guía de Referencia: Volumen 2'>
+<!ENTITY book.subtitle                          'Zend Framework'>
+<!ENTITY book.edition                           'Guía de Referencia para Programadores de Zend Framework'>
+
+<!ENTITY chapter.introduction.title             'Introducción a  Zend Framework'>
+
+<!ENTITY part.learning.title                    'Aprendiendo Zend Framework'>
+<!ENTITY part.learning.quickstart.title         'Inicio Rápido con Zend Framework'>
+<!ENTITY part.learning.autoloading.title        'Autocarga o Carga automática en Zend Framework'>
+<!ENTITY part.learning.plugins.title            'Plugins en Zend Framework'>
+<!ENTITY part.learning.layout.title             'Primeros pasos con Zend_Layout'>
+<!ENTITY part.learning.view.placeholders.title  'Introducción a Zend_View Placeholders'>
+<!ENTITY part.learning.form.decorators.title    'Comprensión y uso de Zend Form Decorators'>
+<!ENTITY part.learning.multiuser.title          'Primeros pasos con Zend_Session, Zend_Auth, and Zend_Acl'>
+<!ENTITY part.learning.lucene.title             'Primeros pasos con Zend_Search_Lucene'>
+<!ENTITY part.learning.paginator.title          'Primeros pasos con Zend_Paginator'>
+
+<!ENTITY part.reference.title                   'Referencia de Zend Framework'>
+
+<!ENTITY appendix.migration.title               'Notas de Migración de Zend Framework'>
+
+<!ENTITY appendix.performance.title             'Guía de Rendimiento de Zend Framework'>

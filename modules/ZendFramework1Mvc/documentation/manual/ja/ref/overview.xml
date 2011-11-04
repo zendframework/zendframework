@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>概要</title></info>
+
+    
+
+    <para>
+        Zend Framework はオープンソースのフレームワークで、
+        ウェブアプリケーションやウェブサービスを <acronym>PHP</acronym> 5 で開発するためのものです。
+        Zend Framework は完全にオブジェクト指向なコードを用いて実装されています。
+        Zend Framework のコンポーネントの構造は少し変わっており、
+        個々のコンポーネントはできるだけ他のコンポーネントに依存しないよう設計されています。
+        このように疎結合のアーキテクチャを採用することで、
+        個々のコンポーネントを個別に使いやすくしているのです。
+        我々はこれを "use-at-will (使いたいように使ってくれ)" 方式と呼んでいます。
+    </para>
+
+    <para>
+        個別に使うこともできますが、
+        Zend Framework の標準ライブラリのコンポーネントを組み合わせて使用すると
+        強力で拡張性の高いウェブアプリケーションフレームワークとなります。
+        Zend Framework の提供する機能には、堅牢で高性能な <acronym>MVC</acronym> の実装や
+        シンプルで使いやすいデータベースの抽象化、
+        レンダリング・バリデーション・フィルタリングを実装した <acronym>HTML</acronym>
+        フォーム用の部品などがあります。
+        これらすべての機能を、オブジェクト指向のインターフェイスで簡単に使えるようになります。
+        <classname>Zend_Auth</classname> や <classname>Zend_Acl</classname> を使用すると、
+        共通の情報に基づいたユーザ認証や認可の処理を行うことができます。
+        また、著名なウェブサービスの多くに簡単にアクセスするためのクライアントライブラリも用意されています。
+        作成したいアプリケーションがどんなものであったとしても、
+        きっとあなたの要求を満たす Zend Framework のコンポーネントが存在することでしょう。
+        それを使用することで開発期間を大幅に短縮させることができ、
+        また十分にテスト済みの仕組みを使用できます。
+    </para>
+
+    <para>
+        Zend Framework プロジェクトの主なスポンサーは <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">
+        Zend Technologies</link> ですが、
+        それ以外にも多くの企業がコンポーネントを提供したり機能を追加したりしています。
+        Google や Microsoft そして StrikeIron といった企業は、
+        Zend と提携してウェブサービスへのインターフェイスやその他の技術を提供しています。
+        それにより、Zend Framework の開発者がより多くの機能を使用できるようになっています。
+    </para>
+
+    <para>
+        Zend Framework がこれらの仕組みを提供できるのもすべて、
+        活発な Zend Framework コミュニティのおかげです。コミュニティのメンバーは、
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://framework.zend.com/archives">メーリングリスト</link>や
+        <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zftalk.com">
+        IRC チャネル</link>、そしてその他の掲示板などで活動しています。
+        Zend Framework に対して何か質問がある方は、これらのいずれかに参加してみるといいでしょう。
+    </para>
+</chapter>

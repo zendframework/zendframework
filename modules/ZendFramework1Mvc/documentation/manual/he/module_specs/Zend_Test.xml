@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.test.introduction"><info><title>הקדמה</title></info>
+    
+
+    <para>
+        <code>Zend_Test</code> מספק כלים כדי לאפשר לך לבצע בדיקות שונות על גבי המערכות שהינך בונה בעזרת Zend Framework.
+         נכון לעכשיו, ניתן לבצע בדיקות על מנת לבדוק את המערכת הנבנות בעזרת Zend Framework בעזרת הטכנולוגיה של ה MVC.
+    </para>
+</section>

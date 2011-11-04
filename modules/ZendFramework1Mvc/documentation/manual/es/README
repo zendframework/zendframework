@@ -1,0 +1,50 @@
+Required software:
+
+- autoconf
+- make
+- xsltproc
+- xmllint
+
+On Windows, you should use Cygwin software or another port of GNU 
+development tools.
+
+How to build the DocBook documentation:
+
+- run "autoconf" in this dir
+- run "./configure" in this dir
+- run "make"
+
+The HTML files are rendered in the "html" dir.
+
+When developing content, you can verify your changes by running:
+
+  "make check"
+
+This verifies the XML for the whole manual is valid.
+
+You can verify your changes in a single file by running:
+
+  "make XMLFILE=filename.xml check1"
+
+The filename.xml is relative to the "module_specs" directory.
+
+DocBook resources:
+
+http://www.ibiblio.org/godoy/sgml/docbook/howto/index.html
+http://opensource.bureau-cornavin.com/crash-course/index.html
+http://ds9a.nl/docbook/
+http://www.sagehill.net/docbookxsl/index.html
+http://docbook.org/tdg/en/html/part2.html DocBook tag reference
+
+
+Also a CHM project file is prepared to create CHM help files on the fly.
+You need to install the MsHtmlHelpWorkshop.
+
+To build the CHM file from within the commandshell go to the directory
+where your html files are build by using make as described before.
+Then call:
+ "C:/path/to/workshop/hhc htmlhelp.hhp"
+where "C:/path/to/workshop/" is the path to you installation of MsHtmlHelpWorkshop
+
+This will build a "Zend_Framework_LANGUAGE.chm" file.
+Within the file you will find a index and in future also a table of content.

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="introduction.overview"><info><title>סקירה כוללת</title></info>
+
+    
+
+    <para>
+        Zend Framework היא מערכת קוד פתוח באיכות גבוהה עבור פיתוח יישומי אינטרנט
+        ושירותים מבוססים אינטרנט באמצעות PHP.
+    </para>
+
+    <para>
+        נבנתה ברוח האמיתית של PHP, ה- Zend Framework מספקת פונקציונליות קלה לשימוש וחזקה.
+        ה- Zend Framework מספקת פתרונות לבנייה של אתרים מודרניים, עמידים ומאובטחים.
+    </para>
+
+</section>

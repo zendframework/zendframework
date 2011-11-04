@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<appendix xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="copyrights"><info><title>מידע אודות זכויות יוצרים</title></info>
+    
+
+    <para>
+        זכויות היוצרים הבאים ישימים לחלקים של Zend Framework.
+    </para>
+
+    <para>
+        כל הזכויות שמורות © 2005-<?dbtimestamp format="Y"?> Zend Technologies Inc.
+       (<uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">http://www.zend.com</uri>)
+    </para>
+
+</appendix>

@@ -1,0 +1,63 @@
+AC_INIT(Makefile.in)
+AC_COPYRIGHT([Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)])
+
+FOP=fop
+XSLTPROC=xsltproc
+XMLLINT=xmllint
+
+AC_ARG_WITH(fop, [  --with-fop  Where to find Apache FOP],
+	[
+		if test "x$withval" != "xno"; then
+			FOP="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(FOP,  $FOP)
+
+AC_ARG_WITH(xsltproc, [  --with-xsltproc  Where to find xsltproc],
+	[
+		if test "x$withval" != "xno"; then
+			XSLTPROC="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(XSLTPROC,  $XSLTPROC)
+
+AC_ARG_WITH(xmllint, [  --with-xmllint  Where to find xmllint],
+	[
+		if test "x$withval" != "xno"; then
+			XMLLINT="$withval"
+		fi
+	]
+)
+AC_PATH_PROG(XMLLINT,  $XMLLINT)
+
+ECSRC=../trunk
+AC_ARG_WITH(ecsrc, [  --with-ecsrc  Where to find the ecelerity source],
+	[
+		if test "x$withval" != "xno"; then
+			ECSRC="$withval"
+		fi
+	]
+)
+
+AC_SUBST(FOP)
+AC_SUBST(XSLTPROC)
+AC_SUBST(XMLLINT)
+AC_SUBST(ECSRC)
+HERE=`pwd`
+AC_SUBST(HERE)
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
+
+cat > config.nice <<EOT
+#!/bin/sh
+./configure \
+    --with-ecsrc='$ECSRC' \
+    --with-xsltproc='$XSLTPROC' \
+    --with-xmllint='$XMLLINT' \
+    --with-fop='$FOP'
+
+EOT
+chmod +x config.nice
+

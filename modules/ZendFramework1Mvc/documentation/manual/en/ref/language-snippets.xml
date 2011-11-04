@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Reviewed: no -->
+
+<!-- links -->
+<!ENTITY lang                                   'en'>
+<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/en'>
+<!ENTITY php.manual.link                        'http://www.php.net/manual/en'>
+
+<!-- manual.xml.in -->
+<!ENTITY book.title                             'Zend Framework 2 - Legacy 1.0 MVC Programmer&#39;s Reference Guide'>
+<!ENTITY book.subtitle                          'Legacy MVC Guide'>
+<!ENTITY book.edition                           'Legacy 1.0 MVC Programmer&#39;s Reference Guide for Zend Framework'>
+
+<!ENTITY chapter.introduction.title             'Introduction to Zend Framework'>
+
+<!ENTITY part.learning.title                    'Learning Zend Framework'>
+<!ENTITY part.learning.di.title                 'Learning Dependency Injection'>
+<!ENTITY part.learning.quickstart.title         'Zend Framework Quick Start'>
+<!ENTITY part.learning.autoloading.title        'Autoloading in Zend Framework'>
+<!ENTITY part.learning.plugins.title            'Plugins in Zend Framework'>
+<!ENTITY part.learning.layout.title             'Getting Started with Zend_Layout'>
+<!ENTITY part.learning.view.placeholders.title  'Getting Started Zend_View Placeholders'>
+<!ENTITY part.learning.form.decorators.title    'Understanding and Using Zend Form Decorators'>
+<!ENTITY part.learning.multiuser.title          'Getting Started with Zend_Session, Zend_Auth, and Zend_Acl'>
+<!ENTITY part.learning.lucene.title             'Getting Started with Zend_Search_Lucene'>
+<!ENTITY part.learning.paginator.title          'Getting Started with Zend_Paginator'>
+
+<!ENTITY part.reference.title                   'Zend Framework Reference'>
+
+<!ENTITY appendix.migration.title               'Zend Framework Migration Notes'>
+
+<!ENTITY appendix.performance.title             'Zend Framework Performance Guide'>
+
+<!-- requirements table -->
+<!ENTITY requirements.extensions.table.title    'PHP Extensions Used in Zend Framework by Component'>
+<!ENTITY requirements.zendcomponents.table.title 'Zend Framework Components and the PHP Extensions they use'>
+<!ENTITY requirements.dependencies.table.title  'Zend Framework Components and their dependency to other Zend Framework Components'>
+
+<!ENTITY requirements.php.extensions            '<acronym>PHP</acronym> Extension'>
+<!ENTITY requirements.dependency.type           'Dependency Type'>
+<!ENTITY requirements.used.by.zf.components     'Used by Zend Framework Components'>
+<!ENTITY requirements.zf.component              'Zend Framework Component'>
+<!ENTITY requirements.dependent.zf.components   'Dependent Zend Framework Component'>
+
+<!ENTITY requirements.hard                      'Hard'>
+<!ENTITY requirements.soft                      'Soft'>
+<!ENTITY requirements.fix                       'Fix'>
+<!ENTITY requirements.sub                       'Sub'>
+
+<!ENTITY requirements.all.components            'All Components'>
+<!ENTITY requirements.virtually.all.components  'Virtually all components'>
+<!ENTITY requirements.all.pdo.adapters          'All <acronym>PDO</acronym> database adapters'>

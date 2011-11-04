@@ -69,6 +69,8 @@ trait ProvidesEvents
                     || ($this->eventIdentifier instanceof Traversable)
                 ) {
                     $identifiers = array_unique($identifiers + (array) $this->eventIdentifier);
+                } elseif (is_object($this->eventIdentifier)) {
+                    $identifiers[] = $this->eventIdentifier;
                 }
                 // silently ignore invalid eventIdentifier types
             }

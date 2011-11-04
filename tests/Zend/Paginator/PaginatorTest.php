@@ -24,8 +24,8 @@
  */
 namespace ZendTest\Paginator;
 
-use Zend\Paginator,
-    Zend\Controller\Front as FrontController,
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Paginator,
     Zend\View\Helper,
     Zend\View,
     Zend\Config,
@@ -41,7 +41,7 @@ use Zend\Paginator,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Paginator
  */
-class PaginatorTest extends \PHPUnit_Framework_TestCase
+class PaginatorTest extends TestCase
 {
     /**
      * Paginator instance
@@ -76,10 +76,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->_paginator = Paginator\Paginator::factory($this->_testCollection);
 
         $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
-        // get a fresh new copy of ViewRenderer in each tests
-        $this->front = FrontController::getInstance();
-        $this->front->resetInstance();
-        $this->broker = $this->front->getHelperBroker();
 
         $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
         $bO = array('cache_dir'=> $this->_getTmpDir());
@@ -515,14 +511,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(101, $this->_paginator->getItemCount($limitIterator));
     }
 
-    public function testGetsViewFromViewRenderer()
-    {
-        $viewRenderer = $this->broker->load('viewRenderer');
-        $viewRenderer->setView(new View\PhpRenderer());
-
-        $this->assertInstanceOf('Zend\\View\\Renderer', $this->_paginator->getView());
-    }
-
     public function testGeneratesViewIfNonexistent()
     {
         $this->assertInstanceOf('Zend\\View\\Renderer', $this->_paginator->getView());
@@ -803,7 +791,6 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($items[2]));
         $this->assertTrue(isset($items[1]));
         $this->assertFalse(isset($items[3]));
-        $this->assertEquals(0, $items->key());
     }
 }
 

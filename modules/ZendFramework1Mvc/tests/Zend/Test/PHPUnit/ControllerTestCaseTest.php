@@ -284,7 +284,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function testAssertQueryShouldDoNothingForValidResponseContent()
     {
-        $this->testCase->getFrontController()->setControllerDirectory(realpath(__DIR__) . '/_files/application/controllers', 'default');
+        $this->testCase->getFrontController()->setControllerDirectory(realpath(__DIR__) . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
         $body = $this->testCase->getResponse()->getBody();
         $this->testCase->assertQuery('div#foo legend.bar', $body);
@@ -529,7 +529,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
     {
         $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
-        $this->testCase->assertModule('default');
+        $this->testCase->assertModule('application');
         $this->testCase->assertNotModule('zend-test-php-unit-foo');
     }
 
@@ -580,7 +580,7 @@ class ControllerTestCaseTest extends \PHPUnit_Framework_TestCase
     {
         $this->testCase->getFrontController()->setControllerDirectory(__DIR__ . '/_files/application/controllers');
         $this->testCase->dispatch('/zend-test-php-unit-foo/baz');
-        $this->testCase->assertRoute('default');
+        $this->testCase->assertRoute('application');
         $this->testCase->assertNotRoute('zend-test-php-unit-foo');
     }
 

@@ -24,7 +24,9 @@
  */
 namespace Zend\Application\Module;
 
-use Zend\Application\Bootstrap as ApplicationBootstrap;
+use Zend\Application\Bootstrap as ApplicationBootstrap,
+    Zend\Loader\Broker,
+    Zend\Loader\LazyLoadingBroker;
 
 /**
  * Base bootstrap class for modules
@@ -55,10 +57,14 @@ abstract class Bootstrap
     public function __construct($application)
     {
         $this->setApplication($application);
+        $front = false;
 
         // Use same plugin broker as parent bootstrap
         if ($application instanceof \Zend\Application\ResourceBootstrapper) {
             $this->setBroker($application->getBroker());
+            if ($application->hasResource('frontcontroller')) {
+                $front = $application->getResource('frontcontroller');
+            }
         }
 
         $key = strtolower($this->getModuleName());
@@ -75,8 +81,21 @@ abstract class Bootstrap
         $this->initResourceLoader();
 
         $broker = $this->getBroker();
+        if ($broker->hasPlugin('modules')) {
+            if ($broker instanceof Broker) {
+                $broker->unregister('modules');
+            }
+            if ($broker instanceof LazyLoadingBroker) {
+                $broker->unregisterSpec('modules');
+            }
+        }
 
         // ZF-6545: ensure front controller resource is loaded
+        if ($front) {
+            $this->getContainer()->frontcontroller = $front;
+            return;
+        }
+
         if (!$broker->hasPlugin('frontcontroller')) {
             $broker->registerSpec('frontcontroller');
         }

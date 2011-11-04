@@ -144,9 +144,15 @@ class FrontcontrollerTest extends \PHPUnit_Framework_TestCase
             'baz'     => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                        . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
                        . 'baz' . DIRECTORY_SEPARATOR . 'controllers',
+            'zf2-30-module1' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'zf2-30-module1' . DIRECTORY_SEPARATOR . 'controllers',
+            'zf2-30-module2' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'zf2-30-module2' . DIRECTORY_SEPARATOR . 'controllers',
             'zfappbootstrap' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
-                              . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
-                              . 'zfappbootstrap' . DIRECTORY_SEPARATOR . 'controllers',
+                       . 'TestAsset' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR
+                       . 'zfappbootstrap' . DIRECTORY_SEPARATOR . 'controllers',
         );
         $this->assertEquals($expected, $dir);
     }

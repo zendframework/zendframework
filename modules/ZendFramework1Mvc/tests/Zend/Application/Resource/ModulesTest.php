@@ -122,11 +122,13 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
         $resource->init();
 
         $bootstraps = $resource->getExecutedBootstraps();
-        $this->assertEquals(4, count((array)$bootstraps));
+        $this->assertEquals(6, count((array)$bootstraps));
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
         $this->assertArrayHasKey('application', (array)$bootstraps);
+        $this->assertArrayHasKey('zf2-30-module1', (array)$bootstraps);
+        $this->assertArrayHasKey('zf2-30-module2', (array)$bootstraps);
     }
 
     /**
@@ -145,10 +147,12 @@ class ModulesTest extends \PHPUnit_Framework_TestCase
         $resource = new ModulesResource(array());
         $resource->setBootstrap($this->bootstrap);
         $bootstraps = $resource->init();
-        $this->assertEquals(4, count((array)$bootstraps));
+        $this->assertEquals(6, count((array)$bootstraps));
         $this->assertArrayHasKey('bar',     (array)$bootstraps);
         $this->assertArrayHasKey('foo-bar', (array)$bootstraps);
         $this->assertArrayHasKey('foo',     (array)$bootstraps);
         $this->assertArrayHasKey('application', (array)$bootstraps);
+        $this->assertArrayHasKey('zf2-30-module1', (array)$bootstraps);
+        $this->assertArrayHasKey('zf2-30-module2', (array)$bootstraps);
     }
 }

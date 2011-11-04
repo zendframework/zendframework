@@ -23,6 +23,12 @@
  */
 namespace Zend\Application;
 
+use Traversable,
+    Zend\Config,
+    Zend\Loader\SplAutoloader,
+    Zend\Loader\StandardAutoloader,
+    Zend\Stdlib\IteratorToArray;
+
 /**
  * @category   Zend
  * @package    Zend_Application
@@ -34,14 +40,14 @@ class Application
     /**
      * Autoloader to use
      *
-     * @var \Zend\Loader\SplAutoloader
+     * @var SplAutoloader
      */
     protected $_autoloader;
 
     /**
      * Bootstrap
      *
-     * @var \Zend\Application\AbstractBootstrap
+     * @var AbstractBootstrap
      */
     protected $_bootstrap;
 
@@ -73,8 +79,8 @@ class Application
      * settings, and bootstrap class.
      *
      * @param  string                   $environment
-     * @param  string|array|\Zend\Config\Config $options String path to configuration file, or array/\Zend\Config\Config of configuration options
-     * @throws \Zend\Application\Exception When invalid options are provided
+     * @param  string|array|Traversable $options String path to configuration file, or array/Traversable of configuration options
+     * @throws Exception When invalid options are provided
      * @return void
      */
     public function __construct($environment, $options = null)
@@ -84,16 +90,20 @@ class Application
         /**
          * @todo Make this configurable?
          */
-        require_once __DIR__ . '/../Loader/StandardAutoloader.php';
-        $autoloader = new \Zend\Loader\StandardAutoloader();
+        if (file_exists(__DIR__ . '/../../../../../library/Zend/Loader/StandardAutoloader.php')) {
+            require_once __DIR__ . '/../../../../../library/Zend/Loader/StandardAutoloader.php';
+        } else {
+            require_once 'Zend/Loader/StandardAutoloader.php';
+        }
+        $autoloader = new StandardAutoloader();
         $autoloader->register();
         $this->setAutoloader($autoloader);
 
         if (null !== $options) {
             if (is_string($options)) {
                 $options = $this->_loadConfig($options);
-            } elseif ($options instanceof \Zend\Config\Config) {
-                $options = $options->toArray();
+            } elseif ($options instanceof Traversable) {
+                $options = IteratorToArray::convert($options);
             } elseif (!is_array($options)) {
                 throw new Exception\InvalidArgumentException('Invalid options provided; must be location of config file, a config object, or an array');
             }
@@ -125,10 +135,10 @@ class Application
     /**
      * Set autoloader
      *
-     * @param  \Zend\Loader\SplAutoloader $autoloader
+     * @param  SplAutoloader $autoloader
      * @return Application
      */
-    public function setAutoloader(\Zend\Loader\SplAutoloader $autoloader)
+    public function setAutoloader(SplAutoloader $autoloader)
     {
         $this->_autoloader = $autoloader;
         return $this;
@@ -138,9 +148,9 @@ class Application
      * Set application options
      *
      * @param  array $options
-     * @throws \Zend\Application\Exception When no bootstrap path is provided
-     * @throws \Zend\Application\Exception When invalid bootstrap information are provided
-     * @return \Zend\Application\Application
+     * @throws Exception When no bootstrap path is provided
+     * @throws Exception When invalid bootstrap information are provided
+     * @return Application
      */
     public function setOptions(array $options)
     {
@@ -280,7 +290,7 @@ class Application
      *
      * @param  array $settings
      * @param  string $prefix Key prefix to prepend to array values (used to map . separated INI values)
-     * @return \Zend\Application\Application
+     * @return Application
      */
     public function setPhpSettings(array $settings, $prefix = '')
     {
@@ -300,7 +310,7 @@ class Application
      * Set include path
      *
      * @param  array $paths
-     * @return \Zend\Application\Application
+     * @return Application
      */
     public function setIncludePaths(array $paths)
     {
@@ -313,7 +323,7 @@ class Application
      * Set autoloader namespaces
      *
      * @param  array $namespaces
-     * @return \Zend\Application\Application
+     * @return Application
      */
     public function setAutoloaderNamespaces(array $namespaces)
     {
@@ -332,7 +342,7 @@ class Application
      * Set autoloader prefixes
      *
      * @param array $prefixes
-     * @return \Zend\Application\Application
+     * @return Application
      */
     public function setAutoloaderPrefixes(array $prefixes)
     {
@@ -352,7 +362,7 @@ class Application
      *
      * @param  string $path
      * @param  string $class
-     * @return \Zend\Application\Application
+     * @return Application
      */
     public function setBootstrap($path, $class = null)
     {
@@ -380,7 +390,7 @@ class Application
     /**
      * Get bootstrap object
      *
-     * @return \Zend\Application\AbstractBootstrap
+     * @return AbstractBootstrap
      */
     public function getBootstrap()
     {
@@ -394,7 +404,7 @@ class Application
      * Bootstrap application
      *
      * @param  null|string|array $resource
-     * @return \Zend\Application\Application
+     * @return Application
      */
     public function bootstrap($resource = null)
     {
@@ -416,7 +426,7 @@ class Application
      * Load configuration file of options
      *
      * @param  string $file
-     * @throws \Zend\Application\Exception When invalid configuration file is provided
+     * @throws Exception When invalid configuration file is provided
      * @return array
      */
     protected function _loadConfig($file)
@@ -429,20 +439,20 @@ class Application
 
         switch (strtolower($suffix)) {
             case 'ini':
-                $config = new \Zend\Config\Ini($file, $environment);
+                $config = new Config\Ini($file, $environment);
                 break;
 
             case 'xml':
-                $config = new \Zend\Config\Xml($file, $environment);
+                $config = new Config\Xml($file, $environment);
                 break;
 
             case 'json':
-                $config = new \Zend\Config\Json($file, $environment);
+                $config = new Config\Json($file, $environment);
                 break;
 
             case 'yaml':
             case 'yml':
-                $config = new \Zend\Config\Yaml($file, $environment);
+                $config = new Config\Yaml($file, $environment);
                 break;
 
             case 'php':

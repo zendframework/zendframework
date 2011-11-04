@@ -820,6 +820,11 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('car-bar/baz.phtml', $this->helper->getViewScript());
     }
 
+    /**
+     * Disabled, as not using prefix path autoloading by default any more
+     *
+     * @group disable
+     */
     public function testCorrectViewHelperPathShouldBePropagatedWhenSubControllerInvoked()
     {
         require_once $this->basePath . '/_files/modules/foo/controllers/Admin/IndexController.php';
@@ -834,6 +839,11 @@ class ViewRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('FooUseHelper invoked', $body, 'Received ' . $body);
     }
 
+    /**
+     * Disabled, as not using prefix path autoloading by default any more
+     *
+     * @group disable
+     */
     public function testCorrectViewHelperPathShouldBePropagatedWhenSubControllerInvokedInDefaultModule()
     {
         require_once $this->basePath . '/_files/modules/application/controllers/Admin/HelperController.php';

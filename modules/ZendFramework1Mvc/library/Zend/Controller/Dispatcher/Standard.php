@@ -187,7 +187,7 @@ class Standard extends AbstractDispatcher
      */
     public function classToFilename($class)
     {
-        return str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+        return str_replace(array('_', '\\'), DIRECTORY_SEPARATOR, $class) . '.php';
     }
 
     /**

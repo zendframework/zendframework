@@ -156,7 +156,7 @@ class ActionStackTest extends \PHPUnit_Framework_TestCase
         try{
             $helper->direct('baz', 'bar', 'foo');
             $this->fail('Zend_Controller_Action_Exception should be thrown');
-        }catch(\Zend\Exception $e){
+        }catch(\Zend\Controller\Exception $e){
             $this->assertInstanceOf('Zend\Controller\Action\Exception',
                    $e,
                    'Zend\Controller\Action\Exception expected, '.get_class($e).' caught');

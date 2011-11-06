@@ -1,0 +1,51 @@
+production:
+    usingLowerCasedYes:
+        - yes
+    usingTitleCasedYes:
+        - Yes
+    usingCapitalYes:
+        - YES
+    usingLowerY:
+        - y
+    usingUpperY:
+        - Y
+
+    usingLowerCasedNo:
+        - no
+    usingTitleCasedNo:
+        - No
+    usingCapitalNo:
+        - NO
+    usingLowerN:
+        - n
+    usingUpperN:
+        - N
+
+    usingLowerCasedTrue:
+        - true
+    usingTitleCasedTrue:
+        - True
+    usingCapitalTrue:
+        - TRUE
+
+    usingLowerCasedFalse:
+        - false
+    usingTitleCasedFalse:
+        - False
+    usingCapitalFalse:
+        - FALSE
+
+    usingLowerCasedOn:
+        - on
+    usingTitleCasedOn:
+        - On
+    usingCapitalOn:
+        - ON
+
+    usingLowerCasedOff:
+        - off
+    usingTitleCasedOff:
+        - Off
+    usingCapitalOff:
+        - OFF
+

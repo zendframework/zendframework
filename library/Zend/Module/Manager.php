@@ -117,6 +117,14 @@ class Manager
     {
         if (!isset($this->loadedModules[$moduleName])) {
             $class = $moduleName . '\Module';
+            
+            if (!class_exists($class)) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Module (%s) could not be initialized because Module.php could not be found.',
+                    $moduleName
+                ));
+            }
+            
             $module = new $class;
             $this->runModuleInit($module);
             $this->mergeModuleConfig($module);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paginator>
+    <default>
+        <itemcountperpage>10</itemcountperpage>
+        <pagerange>10</pagerange>
+    </default>
+    <testing>
+	    <scrolling_style>Scrolling</scrolling_style>
+        <scrolling_style_broker>ZendTest\Paginator\TestAsset\ScrollingStyleBroker</scrolling_style_broker>
+        <adapter_broker>ZendTest\Paginator\TestAsset\AdapterBroker</adapter_broker>
+	    <itemcountperpage>3</itemcountperpage>
+	    <pagerange>7</pagerange>
+    </testing>
+</paginator>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms>
+    <sitearea>
+        <test>
+            <displayGroups>
+                <DisplayGroup>
+                    <elements>
+                        <ElementName1>ElementName1</ElementName1>
+                        <ElementName2>ElementName2</ElementName2>
+                    </elements>
+                    <options>
+                        <name>login</name>
+                        <label>Test</label>
+                        <legend>Form 1</legend>
+                    </options>
+                </DisplayGroup>
+            </displayGroups>
+            <elements>
+                <ElementName1>
+                    <type>text</type>
+                    <name>ElementName1</name>
+                    <options>
+                        <label>Label 1</label>
+                    </options>
+                </ElementName1>
+                <ElementName2>
+                    <type>text</type>
+                    <name>ElementName2</name>
+                    <options>
+                        <label>Label 2</label>
+                    </options>
+                </ElementName2>
+                <ElementName3>
+                    <type>text</type>
+                    <name>ElementName3</name>
+                    <options>
+                        <label>Label 3</label>
+                    </options>
+                </ElementName3>
+                <ElementName4>
+                    <type>text</type>
+                    <name>ElementName4</name>
+                    <options>
+                        <label>Label 4</label>
+                    </options>
+                </ElementName4>
+            </elements>
+            <legend>Form 1</legend>
+            <method>post</method>
+        </test>
+    </sitearea>
+</forms>

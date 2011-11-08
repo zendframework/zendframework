@@ -1,15 +1,15 @@
 <?php
 
-namespace Zend\Module;
+namespace Zend\Module\Listener;
 
-use Zend\StdLib\Options;
+use Zend\Stdlib\Options;
 
-class ManagerOptions extends Options
+class ListenerOptions extends Options
 {
     /**
      * @var bool
      */
-    protected $enableConfigCache = false;
+    protected $configCacheEnabled = false;
 
     /**
      * @var string
@@ -20,7 +20,7 @@ class ManagerOptions extends Options
      * @var string
      */
     protected $configCacheKey = NULL;
-
+    
     /**
      * @var string
      */
@@ -29,7 +29,7 @@ class ManagerOptions extends Options
     /**
      * @var bool
      */
-    protected $enableDependencyCheck = false;
+    protected $enableDependencycheck = false;
 
     /**
      * @var bool
@@ -48,9 +48,9 @@ class ManagerOptions extends Options
      *
      * @return bool
      */
-    public function getEnableConfigCache()
+    public function getConfigCacheEnabled()
     {
-        return $this->enableConfigCache;
+        return $this->configCacheEnabled;
     }
  
     /**
@@ -59,9 +59,9 @@ class ManagerOptions extends Options
      * @param bool $enabled
      * @return ManagerOptions
      */
-    public function setEnableConfigCache($enabled)
+    public function setConfigCacheEnabled($enabled)
     {
-        $this->enableConfigCache = (bool) $enabled;
+        $this->configCacheEnabled = (bool) $enabled;
         return $this;
     }
 
@@ -162,7 +162,7 @@ class ManagerOptions extends Options
      */
     public function getEnableDependencyCheck()
     {
-        return $this->enableDependencyCheck;
+        return $this->enableDependencycheck;
     }
 
     /**
@@ -173,7 +173,7 @@ class ManagerOptions extends Options
      */
     public function setEnableDependencyCheck($enabled)
     {
-        $this->enableDependencyCheck = (bool) $enabled;
+        $this->enableDependencycheck = (bool) $enabled;
         return $this;
     }
     

@@ -34,8 +34,7 @@ use Zend\Form\Form,
     Zend\Json\Json,
     Zend\Translator\Translator,
     Zend\Validator\Validator,
-    Zend\View,
-    Zend\Controller\Front as FrontController;
+    Zend\View;
 
 /**
  * @category   Zend
@@ -62,10 +61,6 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $front = FrontController::getInstance();
-        $front->resetInstance();
-        $this->broker = $front->getHelperBroker();
-
         $this->clearRegistry();
         Form::setDefaultTranslator(null);
 
@@ -2833,24 +2828,17 @@ class FormTest extends \PHPUnit_Framework_TestCase
         return $view;
     }
 
-    public function testGetViewRetrievesFromViewRendererByDefault()
+    public function testGetViewLazyLoadsPhpRendererByDefault()
     {
-        $viewRenderer = $this->broker->load('viewRenderer');
-        $viewRenderer->initView();
-        $view = $viewRenderer->view;
         $test = $this->form->getView();
-        $this->assertSame($view, $test);
-    }
-
-    public function testGetViewReturnsNullWhenNoViewRegisteredWithViewRenderer()
-    {
-        $this->assertNull($this->form->getView());
+        $this->assertInstanceOf('Zend\View\PhpRenderer', $test);
     }
 
     public function testCanSetView()
     {
         $view = new View\PhpRenderer();
-        $this->assertNull($this->form->getView());
+        $test = $this->form->getView();
+        $this->assertNotSame($view, $test);
         $this->form->setView($view);
         $received = $this->form->getView();
         $this->assertSame($view, $received);

@@ -61,6 +61,10 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(AbstractDecorator::APPEND, $this->decorator->getPlacement());
     }
 
+    /**
+     * Test is obsolete as view is now lazy-loaded
+     * @group disable
+     */
     public function testRenderReturnsOriginalContentWhenNoViewPresentInElement()
     {
         $element = new Element('foo');

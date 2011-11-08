@@ -27,7 +27,6 @@ use Zend\Form\Element,
     Zend\Form\Element\Exception as ElementException,
     Zend\Form\Form,
     Zend\Config\Config,
-    Zend\Controller\Front as FrontController,
     Zend\Json\Json,
     Zend\Loader\PrefixPathLoader,
     Zend\Loader\PrefixPathMapper,
@@ -49,10 +48,6 @@ class ElementTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $front = FrontController::getInstance();
-        $front->resetInstance();
-        $this->broker = $front->getHelperBroker();
-
         Registry::_unsetInstance();
         Form::setDefaultTranslator(null);
 
@@ -1202,24 +1197,17 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetViewReturnsNullWithNoViewRenderer()
+    public function testGetViewLazyLoadsPhpRendererByDefault()
     {
-        $this->assertNull($this->element->getView());
-    }
-
-    public function testGetViewReturnsViewRendererViewInstanceIfViewRendererActive()
-    {
-        $viewRenderer = $this->broker->load('viewRenderer');
-        $viewRenderer->initView();
-        $view = $viewRenderer->view;
-        $test = $this->element->getView();
-        $this->assertSame($view, $test);
+        $view = $this->element->getView();
+        $this->assertInstanceOf('Zend\View\PhpRenderer', $view);
     }
 
     public function testCanSetView()
     {
         $view = new PhpRenderer();
-        $this->assertNull($this->element->getView());
+        $test = $this->element->getView();
+        $this->assertNotSame($view, $test);
         $this->element->setView($view);
         $received = $this->element->getView();
         $this->assertSame($view, $received);

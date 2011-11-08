@@ -28,7 +28,6 @@ use Zend\Form\Form,
     Zend\Config\Config,
     Zend\Loader\PrefixPathLoader as PluginLoader,
     Zend\Registry,
-    Zend\Controller\Front as FrontController,
     Zend\Translator\Translator,
     Zend\View\PhpRenderer as View;
 
@@ -50,10 +49,6 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
         if (isset($this->error)) {
             unset($this->error);
         }
-
-        $front = FrontController::getInstance();
-        $front->resetInstance();
-        $this->broker = $front->getHelperBroker();
 
         $this->loader = new PluginLoader(
             array('Zend\Form\Decorator' => 'Zend/Form/Decorator')
@@ -311,17 +306,6 @@ class DisplayGroupTest extends \PHPUnit_Framework_TestCase
         $decorator = $this->group->getDecorator('HtmlTag');
         $this->assertTrue($decorator instanceof Decorator\HtmlTag);
         $this->assertEquals('fieldset', $decorator->getOption('tag'));
-    }
-
-    /**
-     * @group ZF-3494
-     */
-    public function testGetViewShouldNotReturnNullWhenViewRendererIsActive()
-    {
-        $viewRenderer = $this->broker->load('ViewRenderer');
-        $viewRenderer->initView();
-        $view = $this->group->getView();
-        $this->assertSame($viewRenderer->view, $view);
     }
 
     public function testRetrievingNamedDecoratorShouldNotReorderDecorators()

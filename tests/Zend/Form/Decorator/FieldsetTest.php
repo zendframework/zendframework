@@ -61,6 +61,10 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->decorator->getPlacement());
     }
 
+    /**
+     * Test is obsolete as view is now lazy-loaded
+     * @group disable
+     */
     public function testRenderReturnsOriginalContentWhenNoViewPresentInElement()
     {
         $element = new Element('foo');

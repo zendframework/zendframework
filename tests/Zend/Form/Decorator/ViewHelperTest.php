@@ -105,6 +105,10 @@ class ViewHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expect, $name);
     }
 
+    /**
+     * This test is obsolete, as a view is always lazy loaded now
+     * @group disable
+     */
     public function testRenderThrowsExceptionIfNoViewSetInElement()
     {
         $element = $this->getElement();

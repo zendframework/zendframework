@@ -22,11 +22,14 @@
  * @namespace
  */
 namespace Zend\Form;
-use Zend\Loader\PluginLoader,
+
+use Traversable,
+    Zend\Loader\PluginLoader,
     Zend\Loader\PrefixPathMapper,
     Zend\Config\Config,
-    Zend\Controller\Front as FrontController,
+    Zend\Stdlib\IteratorToArray,
     Zend\Translator,
+    Zend\View\PhpRenderer,
     Zend\View\Renderer as View;
 
 /**
@@ -83,7 +86,7 @@ class DisplayGroup implements \Iterator,\Countable
 
     /**
      * Plugin loader for decorators
-     * @var \Zend\Loader\PrefixPathMapper
+     * @var PrefixPathMapper
      */
     protected $_loader;
 
@@ -100,7 +103,7 @@ class DisplayGroup implements \Iterator,\Countable
     protected $_order;
 
     /**
-     * @var \Zend\Translator\Translator
+     * @var Translator\Translator|Translator\Adapter
      */
     protected $_translator;
 
@@ -111,7 +114,7 @@ class DisplayGroup implements \Iterator,\Countable
     protected $_translatorDisabled = false;
 
     /**
-     * @var \Zend\View\Renderer
+     * @var View
      */
     protected $_view;
 
@@ -119,8 +122,8 @@ class DisplayGroup implements \Iterator,\Countable
      * Constructor
      *
      * @param  string $name
-     * @param  \Zend\Loader\PrefixPathMapper $loader
-     * @param  array|\Zend\Config\Config $options
+     * @param  PrefixPathMapper $loader
+     * @param  array|Config $options
      * @return void
      */
     public function __construct($name, PrefixPathMapper $loader, $options = null)
@@ -129,10 +132,11 @@ class DisplayGroup implements \Iterator,\Countable
 
         $this->setPluginLoader($loader);
 
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
+        }
         if (is_array($options)) {
             $this->setOptions($options);
-        } elseif ($options instanceof Config) {
-            $this->setConfig($options);
         }
 
         // Extensions...
@@ -154,7 +158,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Set options
      *
      * @param  array $options
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setOptions(array $options)
     {
@@ -182,8 +186,8 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set options from config object
      *
-     * @param  \Zend\Config\Config $config
-     * @return \Zend\Form\DisplayGroup
+     * @param  Config $config
+     * @return DisplayGroup
      */
     public function setConfig(Config $config)
     {
@@ -195,7 +199,7 @@ class DisplayGroup implements \Iterator,\Countable
      *
      * @param  string $key
      * @param  mixed $value
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setAttrib($key, $value)
     {
@@ -208,7 +212,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Add multiple form attributes at once
      *
      * @param  array $attribs
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function addAttribs(array $attribs)
     {
@@ -224,7 +228,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Overwrites any previously set attributes.
      *
      * @param  array $attribs
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setAttribs(array $attribs)
     {
@@ -277,7 +281,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Clear all form attributes
      *
-     * @return \Zend\Form\Form
+     * @return Form
      */
     public function clearAttribs()
     {
@@ -300,7 +304,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Set group name
      *
      * @param  string $name
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setName($name)
     {
@@ -368,7 +372,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Set group legend
      *
      * @param  string $legend
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setLegend($legend)
     {
@@ -389,7 +393,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Set description
      *
      * @param  string $value
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setDescription($value)
     {
@@ -411,7 +415,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Set group order
      *
      * @param  int $order
-     * @return \Zend\Form\Element
+     * @return Element
      */
     public function setOrder($order)
     {
@@ -434,8 +438,8 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Add element to stack
      *
-     * @param  \Zend\Form\Element $element
-     * @return \Zend\Form\DisplayGroup
+     * @param  Element $element
+     * @return DisplayGroup
      */
     public function addElement(Element $element)
     {
@@ -448,8 +452,8 @@ class DisplayGroup implements \Iterator,\Countable
      * Add multiple elements at once
      *
      * @param  array $elements
-     * @return \Zend\Form\DisplayGroup
-     * @throws Zend\Form\InvalidArgumentException if any element is not a \Zend\Form\Element
+     * @return DisplayGroup
+     * @throws Zend\Form\InvalidArgumentException if any element is not a Element
      */
     public function addElements(array $elements)
     {
@@ -466,7 +470,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Set multiple elements at once (overwrites)
      *
      * @param  array $elements
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setElements(array $elements)
     {
@@ -478,7 +482,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Retrieve element
      *
      * @param  string $name
-     * @return \Zend\Form\Element|null
+     * @return Element|null
      */
     public function getElement($name)
     {
@@ -520,7 +524,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Remove all elements
      *
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function clearElements()
     {
@@ -534,8 +538,8 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set plugin loader
      *
-     * @param  \Zend\Loader\PrefixPathMapper $loader
-     * @return \Zend\Form\DisplayGroup
+     * @param  PrefixPathMapper $loader
+     * @return DisplayGroup
      */
     public function setPluginLoader(PrefixPathMapper $loader)
     {
@@ -546,7 +550,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve plugin loader
      *
-     * @return \Zend\Loader\PrefixPathMapper
+     * @return PrefixPathMapper
      */
     public function getPluginLoader()
     {
@@ -558,7 +562,7 @@ class DisplayGroup implements \Iterator,\Countable
      *
      * @param  string $prefix
      * @param  string $path
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function addPrefixPath($prefix, $path)
     {
@@ -570,7 +574,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Add several prefix paths at once
      *
      * @param  array $spec
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function addPrefixPaths(array $spec)
     {
@@ -602,7 +606,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Set flag to disable loading default decorators
      *
      * @param  bool $flag
-     * @return \Zend\Form\Element
+     * @return Element
      */
     public function setDisableLoadDefaultDecorators($flag)
     {
@@ -623,7 +627,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Load default decorators
      *
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function loadDefaultDecorators()
     {
@@ -646,7 +650,7 @@ class DisplayGroup implements \Iterator,\Countable
      *
      * @param  string $name
      * @param  null|array $options
-     * @return \Zend\Form\Decorator
+     * @return Decorator
      */
     protected function _getDecorator($name, $options = null)
     {
@@ -663,9 +667,9 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Add a decorator for rendering the group
      *
-     * @param  string|\Zend\Form\Decorator $decorator
-     * @param  array|\Zend\Config\Config $options Options with which to initialize decorator
-     * @return \Zend\Form\DisplayGroup
+     * @param  string|Decorator $decorator
+     * @param  array|Traversable $options Options with which to initialize decorator
+     * @return DisplayGroup
      */
     public function addDecorator($decorator, $options = null)
     {
@@ -705,7 +709,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Add many decorators at once
      *
      * @param  array $decorators
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function addDecorators(array $decorators)
     {
@@ -751,7 +755,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Overwrite all decorators
      *
      * @param  array $decorators
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setDecorators(array $decorators)
     {
@@ -763,7 +767,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Retrieve a registered decorator
      *
      * @param  string $name
-     * @return false|\Zend\Form\Decorator\AbstractDecorator
+     * @return false|Decorator\AbstractDecorator
      */
     public function getDecorator($name)
     {
@@ -831,7 +835,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Clear all decorators
      *
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function clearDecorators()
     {
@@ -842,8 +846,8 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set view
      *
-     * @param  \Zend\View\Renderer $view
-     * @return \Zend\Form\DisplayGroup
+     * @param  View $view
+     * @return DisplayGroup
      */
     public function setView(View $view = null)
     {
@@ -854,14 +858,12 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve view
      *
-     * @return \Zend\View\Renderer
+     * @return View
      */
     public function getView()
     {
         if (null === $this->_view) {
-            $front = FrontController::getInstance();
-            $viewRenderer = $front->getHelperBroker()->load('viewRenderer');
-            $this->setView($viewRenderer->view);
+            $this->setView(new PhpRenderer());
         }
 
         return $this->_view;
@@ -904,8 +906,8 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Set translator object
      *
-     * @param  Zend_Translator|\Zend\Translator\Adapter\AbstractAdapter|null $translator
-     * @return \Zend\Form\DisplayGroup
+     * @param  Translator\Translator|Translator\Adapter|null $translator
+     * @return DisplayGroup
      */
     public function setTranslator($translator = null)
     {
@@ -922,7 +924,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Retrieve translator object
      *
-     * @return \Zend\Translator\Adapter|null
+     * @return Translator\Translator|Translator\Adapter|null
      */
     public function getTranslator()
     {
@@ -941,7 +943,7 @@ class DisplayGroup implements \Iterator,\Countable
      * Indicate whether or not translation should be disabled
      *
      * @param  bool $flag
-     * @return \Zend\Form\DisplayGroup
+     * @return DisplayGroup
      */
     public function setDisableTranslator($flag)
     {
@@ -967,7 +969,7 @@ class DisplayGroup implements \Iterator,\Countable
      * @param  string $method
      * @param  array $args
      * @return string
-     * @throws \Zend\Form\BadMethodCallException for invalid decorator or invalid method call
+     * @throws BadMethodCallException for invalid decorator or invalid method call
      */
     public function __call($method, $args)
     {
@@ -993,7 +995,7 @@ class DisplayGroup implements \Iterator,\Countable
     /**
      * Current element
      *
-     * @return \Zend\Form\Element
+     * @return Element
      */
     public function current()
     {
@@ -1096,7 +1098,7 @@ class DisplayGroup implements \Iterator,\Countable
      *
      * @param  array $decorator Decorator type and options
      * @param  mixed $name Decorator name or alias
-     * @return \Zend\Form\Decorator
+     * @return Decorator
      */
     protected function _loadDecorator(array $decorator, $name)
     {

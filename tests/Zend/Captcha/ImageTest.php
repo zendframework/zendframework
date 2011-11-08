@@ -312,6 +312,21 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->element->isValid($input));
     }
 
+    /**
+     * @group ZF-11483
+     */
+    public function testImageTagRenderedProperlyBasedUponDoctype()
+    {
+        $this->testCaptchaIsRendered();        
+        $view = new View();
+        
+        $view->plugin('doctype')->setDoctype('XHTML1_STRICT');      
+        $this->assertRegExp('#/>$#', $this->captcha->render($view));
+        
+        $view->plugin('doctype')->setDoctype('HTML4_STRICT');        
+        $this->assertRegExp('#[^/]>$#', $this->captcha->render($view));
+    }
+
     public function testNoFontProvidedWillThrowException()
     {
         $this->setExpectedException('Zend\Captcha\Exception\NoFontProvidedException');

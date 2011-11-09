@@ -27,8 +27,6 @@ namespace Zend\View\Helper;
 /**
  * Helper for retrieving the BaseUrl
  *
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +39,7 @@ class BaseUrl extends AbstractHelper
      *
      * @var string
      */
-    protected $_baseUrl;
+    protected $baseUrl = '';
 
     /**
      * Returns site's base url, or file with base url prepended
@@ -51,13 +49,13 @@ class BaseUrl extends AbstractHelper
      * @param  string|null $file
      * @return string
      */
-    public function __invoke($file = null)
+    public function __invoke($file = '')
     {
         // Get baseUrl
         $baseUrl = $this->getBaseUrl();
 
         // Remove trailing slashes
-        if (null !== $file) {
+        if (!empty($file)) {
             $file = '/' . ltrim($file, '/\\');
         }
 
@@ -68,11 +66,13 @@ class BaseUrl extends AbstractHelper
      * Set BaseUrl
      *
      * @param  string $base
-     * @return \Zend\View\Helper\BaseUrl
+     * @return BaseUrl
      */
-    public function setBaseUrl($base)
+    public function setBaseUrl($baseUrl)
     {
-        $this->_baseUrl = rtrim($base, '/\\');
+        $baseUrl = rtrim($baseUrl, '/\\');
+        $baseUrl = $this->removeScriptName($baseUrl);
+        $this->baseUrl = $baseUrl;
         return $this;
     }
 
@@ -83,16 +83,7 @@ class BaseUrl extends AbstractHelper
      */
     public function getBaseUrl()
     {
-        if ($this->_baseUrl === null) {
-            $baseUrl = \Zend\Controller\Front::getInstance()->getBaseUrl();
-
-            // Remove scriptname, eg. index.php from baseUrl
-            $baseUrl = $this->_removeScriptName($baseUrl);
-
-            $this->setBaseUrl($baseUrl);
-        }
-
-        return $this->_baseUrl;
+        return $this->baseUrl;
     }
 
     /**
@@ -101,7 +92,7 @@ class BaseUrl extends AbstractHelper
      * @param  string $url
      * @return string
      */
-    protected function _removeScriptName($url)
+    protected function removeScriptName($url)
     {
         if (!isset($_SERVER['SCRIPT_NAME'])) {
             // We can't do much now can we? (Well, we could parse out by ".")
@@ -109,7 +100,7 @@ class BaseUrl extends AbstractHelper
         }
 
         if (($pos = strripos($url, basename($_SERVER['SCRIPT_NAME']))) !== false) {
-            $url = substr($url, 0, $pos);
+            $url = substr($url, 0, $pos - 1);
         }
 
         return $url;

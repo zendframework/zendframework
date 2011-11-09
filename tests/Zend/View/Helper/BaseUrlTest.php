@@ -23,8 +23,9 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Controller;
-use Zend\View\Helper;
+
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\View\Helper;
 
 /**
  * @category   Zend
@@ -35,7 +36,7 @@ use Zend\View\Helper;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class BaseUrlTest extends \PHPUnit_Framework_TestCase
+class BaseUrlTest extends TestCase
 {
     /**
      * Previous baseUrl before changing
@@ -56,7 +57,6 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->_previousBaseUrl = Controller\Front::getInstance()->getBaseUrl();
         $this->_server = $_SERVER;
     }
 
@@ -65,25 +65,7 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        Controller\Front::getInstance()->setBaseUrl($this->_previousBaseUrl);
-        Controller\Front::getInstance()->resetInstance();
-
         $_SERVER = $this->_server;
-    }
-
-    /**
-     * Test and make sure base url returned is consistent with the FC
-     *
-     */
-    public function testBaseUrlIsSameAsFrontController()
-    {
-        $baseUrls = array('', '/subdir', '/subdir/', '/sub/sub/dir');
-        foreach ($baseUrls as $baseUrl) {
-            Controller\Front::getInstance()->setBaseUrl($baseUrl);
-            $helper = new Helper\BaseUrl();
-
-            $this->assertEquals(rtrim($baseUrl, '/\\'), $helper->__invoke());
-        }
     }
 
     /**
@@ -99,10 +81,10 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
+            $helper->setBaseUrl($baseUrl);
 
-            $this->assertEquals($val, $helper->__invoke('file.js'));
+            $this->assertEquals($val, $helper('file.js'));
         }
     }
 
@@ -119,10 +101,10 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
+            $helper->setBaseUrl($baseUrl);
 
-            $this->assertEquals($val, $helper->__invoke('/file.js'));
+            $this->assertEquals($val, $helper('/file.js'));
         }
     }
 
@@ -139,10 +121,10 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
+            $helper->setBaseUrl($baseUrl);
 
-            $this->assertEquals($val, $helper->__invoke('/path/bar'));
+            $this->assertEquals($val, $helper('/path/bar'));
         }
     }
 
@@ -158,10 +140,10 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($baseUrls as $baseUrl => $val) {
-            Controller\Front::getInstance()->setBaseUrl($baseUrl);
             $helper = new Helper\BaseUrl();
+            $helper->setBaseUrl($baseUrl);
 
-            $this->assertEquals($val, $helper->__invoke('/'));
+            $this->assertEquals($val, $helper('/'));
         }
     }
 
@@ -174,16 +156,16 @@ class BaseUrlTest extends \PHPUnit_Framework_TestCase
 
     public function testGetBaseUrlReturnsBaseUrl()
     {
-        Controller\Front::getInstance()->setBaseUrl('/mybar');
         $helper = new Helper\BaseUrl();
+        $helper->setBaseUrl('/mybar');
         $this->assertEquals('/mybar', $helper->getBaseUrl());
     }
 
     public function testGetBaseUrlReturnsBaseUrlWithoutScriptName()
     {
         $_SERVER['SCRIPT_NAME'] = '/foo/bar/bat/mybar/index.php';
-        Controller\Front::getInstance()->setBaseUrl('/mybar/index.php');
         $helper = new Helper\BaseUrl();
+        $helper->setBaseUrl('/mybar/index.php');
         $this->assertEquals('/mybar', $helper->getBaseUrl());
     }
 }

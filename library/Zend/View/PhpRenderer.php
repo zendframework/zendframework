@@ -441,4 +441,15 @@ class PhpRenderer implements Renderer, Pluggable
 
         return $this->getFilterChain()->filter($content); // filter output
     }
+
+    /**
+     * Make sure View variables are cloned when the view is cloned.
+     *
+     * @return PhpRenderer
+     */
+    public function __clone()
+    {
+        $this->vars() = clone $this->vars();
+    }
+
 }

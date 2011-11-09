@@ -278,6 +278,6 @@ class ReCaptcha extends AbstractAdapter
      */
     public function getDecorator()
     {
-        return "Captcha_ReCaptcha";
+        return "Captcha\ReCaptcha";
     }
 }

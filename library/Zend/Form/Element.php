@@ -2092,6 +2092,10 @@ class Element implements Validator
     {
         $origName = $validator['validator'];
         $name     = $this->getPluginLoader(self::VALIDATE)->load($validator['validator']);
+        
+        if (false === $name) {
+        	throw new ElementException\RunTimeException(sprintf('Failed to locate validator "%s" - did you register the prefix path?', $origName));
+        }
 
         if (array_key_exists($name, $this->_validators)) {
             throw new ElementException\RunTimeException(sprintf('Validator instance already exists for validator "%s"', $origName));

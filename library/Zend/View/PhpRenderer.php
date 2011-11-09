@@ -449,7 +449,7 @@ class PhpRenderer implements Renderer, Pluggable
      */
     public function __clone()
     {
-        $this->vars() = clone $this->vars();
+        $this->vars = clone $this->vars();
     }
 
 }

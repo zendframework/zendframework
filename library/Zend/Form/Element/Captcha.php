@@ -186,10 +186,9 @@ class Captcha extends Xhtml
         $decorator  = $captcha->getDecorator();
         if (!empty($decorator)) {
             array_unshift($decorators, $decorator);
+        } else {
+            $decorator = array('Captcha', array('captcha' => $captcha));
         }
-
-        $decorator = array('Captcha', array('captcha' => $captcha));
-        array_unshift($decorators, $decorator);
 
         $this->setDecorators($decorators);
 

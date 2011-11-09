@@ -270,4 +270,14 @@ class ReCaptcha extends AbstractAdapter
 
         return $this->getService()->getHTML($name);
     }
+
+    /**
+     * Get captcha decorator
+     *
+     * @return string
+     */
+    public function getDecorator()
+    {
+        return "Captcha_ReCaptcha";
+    }
 }

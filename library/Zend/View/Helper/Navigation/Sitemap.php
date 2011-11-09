@@ -297,12 +297,12 @@ class Sitemap extends AbstractHelper
             $url = (string) $href;
         } else {
             // href is relative to current document; use url helpers
-            $baseUrlHelper = $this->getView()->plugin('baseurl');
-            $curDoc    = $baseUrlHelper();
-            $curDoc    = ('/' == $curDoc) ? '' : trim($curDoc, '/');
-            $url       = rtrim($this->getServerUrl(), '/') . '/'
-                       . $curDoc
-                       . (empty($curDoc) ? '' : '/') . $href;
+            $basePathHelper = $this->getView()->plugin('basepath');
+            $curDoc         = $basePathHelper();
+            $curDoc         = ('/' == $curDoc) ? '' : trim($curDoc, '/');
+            $url            = rtrim($this->getServerUrl(), '/') . '/'
+                            . $curDoc
+                            . (empty($curDoc) ? '' : '/') . $href;
         }
 
         return $this->_xmlEscape($url);

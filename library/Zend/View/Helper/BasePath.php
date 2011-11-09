@@ -24,6 +24,8 @@
  */
 namespace Zend\View\Helper;
 
+use Zend\View\Exception;
+
 /**
  * Helper for retrieving the base path.
  *

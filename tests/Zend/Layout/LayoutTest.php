@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Layout;
-use Zend\Controller,
+
+use PHPUnit_Framework_TestCase as TestCase,
     Zend\Layout,
     Zend\Config,
     Zend\View;
@@ -38,7 +39,7 @@ use Zend\Controller,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Layout
  */
-class LayoutTest extends \PHPUnit_Framework_TestCase
+class LayoutTest extends TestCase
 {
 
     /**
@@ -49,18 +50,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        \Zend\Layout\Layout::resetMvcInstance();
-
-        $front = Controller\Front::getInstance();
-        $front->resetInstance();
-
-        $broker = $front->getHelperBroker();
-        if ($broker->hasPlugin('Layout')) {
-            $broker->unregister('Layout');
-        }
-        if ($broker->hasPlugin('viewRenderer')) {
-            $broker->unregister('viewRenderer');
-        }
     }
 
     /**
@@ -71,7 +60,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        Layout\Layout::resetMvcInstance();
     }
 
     public function testDefaultLayoutStatusAtInitialization()
@@ -82,23 +70,8 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($layout->isEnabled());
         $this->assertTrue($layout->inflectorEnabled());
         $this->assertNull($layout->getLayoutPath());
-        $this->assertFalse($layout->getMvcEnabled());
     }
 
-    public function testDefaultLayoutStatusAtInitializationWhenInitMvcFlagPassed()
-    {
-        $layout = new Layout\Layout(null, true);
-        $this->assertEquals('layout', $layout->getLayout());
-        $this->assertEquals('content', $layout->getContentKey());
-        $this->assertTrue($layout->isEnabled());
-        $this->assertTrue($layout->inflectorEnabled());
-        $this->assertNull($layout->getLayoutPath());
-        $this->assertTrue($layout->getMvcEnabled());
-    }
-
-    /**
-     * @return void
-     */
     public function testSetConfigModifiesAttributes()
     {
         $layout = new Layout\Layout();
@@ -107,18 +80,13 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
             'layout'           => 'foo',
             'contentKey'       => 'foo',
             'layoutPath'       => __DIR__,
-            'mvcEnabled'       => false,
         ));
         $layout->setConfig($config);
         $this->assertEquals('foo', $layout->getLayout());
         $this->assertEquals('foo', $layout->getContentKey());
         $this->assertEquals(__DIR__, $layout->getLayoutPath());
-        $this->assertFalse($layout->getMvcEnabled());
     }
 
-    /**
-     * @return void
-     */
     public function testSetOptionsWithConfigObjectModifiesAttributes()
     {
         $layout = new Layout\Layout();
@@ -127,18 +95,13 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
             'layout'           => 'foo',
             'contentKey'       => 'foo',
             'layoutPath'       => __DIR__,
-            'mvcEnabled'       => false,
         ));
         $layout->setOptions($config);
         $this->assertEquals('foo', $layout->getLayout());
         $this->assertEquals('foo', $layout->getContentKey());
         $this->assertEquals(__DIR__, $layout->getLayoutPath());
-        $this->assertFalse($layout->getMvcEnabled());
     }
 
-    /**
-     * @return void
-     */
     public function testLayoutAccessorsModifyAndRetrieveLayoutValue()
     {
         $layout = new Layout\Layout();
@@ -146,9 +109,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $layout->getLayout());
     }
 
-    /**
-     * @return void
-     */
     public function testSetLayoutEnablesLayouts()
     {
         $layout = new Layout\Layout();
@@ -158,9 +118,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($layout->isEnabled());
     }
 
-    /**
-     * @return void
-     */
     public function testDisableLayoutDisablesLayouts()
     {
         $layout = new Layout\Layout();
@@ -169,9 +126,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($layout->isEnabled());
     }
 
-    /**
-     * @return void
-     */
     public function testEnableLayoutEnablesLayouts()
     {
         $layout = new Layout\Layout();
@@ -182,9 +136,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($layout->isEnabled());
     }
 
-    /**
-     * @return void
-     */
     public function testLayoutPathAccessorsWork()
     {
         $layout = new Layout\Layout();
@@ -192,9 +143,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(__DIR__, $layout->getLayoutPath());
     }
 
-    /**
-     * @return void
-     */
     public function testContentKeyAccessorsWork()
     {
         $layout = new Layout\Layout();
@@ -202,48 +150,13 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $layout->getContentKey());
     }
 
-    /**
-     * @return void
-     */
-    public function testMvcEnabledFlagFalseAfterStandardInstantiation()
-    {
-        $layout = new Layout\Layout();
-        $this->assertFalse($layout->getMvcEnabled());
-    }
-
-    /**
-     * @return void
-     */
-    public function testMvcEnabledFlagTrueWhenInstantiatedViaStartMvcMethod()
-    {
-        $layout = Layout\Layout::startMvc();
-        $this->assertTrue($layout->getMvcEnabled());
-    }
-
-    /**
-     * @return void
-     */
     public function testGetViewRetrievesViewWhenNoneSet()
     {
         $layout = new Layout\Layout();
-        $view = $layout->getView();
+        $view   = $layout->getView();
         $this->assertTrue($view instanceof View\Renderer);
     }
 
-    /**
-     * @return void
-     */
-    public function testGetViewRetrievesViewFromViewRenderer()
-    {
-        $layout = new Layout\Layout();
-        $view   = $layout->getView();
-        $vr     = Controller\Front::getInstance()->getHelperBroker()->load('viewRenderer');
-        $this->assertSame($vr->view, $view);
-    }
-
-    /**
-     * @return void
-     */
     public function testViewAccessorsAllowSettingView()
     {
         $layout = new Layout\Layout();
@@ -253,9 +166,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($view, $received);
     }
 
-    /**
-     * @return void
-     */
     public function testInflectorAccessorsWork()
     {
         $layout = new Layout\Layout();
@@ -264,51 +174,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($inflector, $layout->getInflector());
     }
 
-    /**
-     * @return void
-     */
-    public function testPluginClassAccessorsSetState()
-    {
-        $layout = new Layout\Layout();
-        $layout->setPluginClass('Foo_Bar');
-        $this->assertEquals('Foo_Bar', $layout->getPluginClass());
-    }
-
-    /**
-     * @return void
-     */
-    public function testPluginClassPassedToStartMvcIsUsed()
-    {
-        $layout = Layout\Layout::startMvc(array('pluginClass' => 'ZendTest\Layout\TestAsset\MockControllerPlugin\Layout'));
-        $this->assertTrue(Controller\Front::getInstance()->hasPlugin('ZendTest\Layout\TestAsset\MockControllerPlugin\Layout'));
-    }
-
-    /**
-     * @return void
-     */
-    public function testHelperClassAccessorsSetState()
-    {
-        $layout = new Layout\Layout();
-        $layout->setHelperClass('Foo_Bar');
-        $this->assertEquals('Foo_Bar', $layout->getHelperClass());
-    }
-
-    /**
-     * @return void
-     */
-    public function testHelperClassPassedToStartMvcIsUsed()
-    {
-        $layout = Layout\Layout::startMvc(array('helperClass' => 'ZendTest\Layout\TestAsset\MockActionHelper\Layout'));
-        $front  = Controller\Front::getInstance();
-        $broker = $front->getHelperBroker();
-        $this->assertTrue($broker->hasPlugin('layout'));
-        $helper = $broker->load('layout');
-        $this->assertTrue($helper instanceof \ZendTest\Layout\TestAsset\MockActionHelper\Layout);
-    }
-
-    /**
-     * @return void
-     */
     public function testEnableInflector()
     {
         $layout = new Layout\Layout();
@@ -318,9 +183,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($layout->inflectorEnabled());
     }
 
-    /**
-     * @return void
-     */
     public function testDisableInflector()
     {
         $layout = new Layout\Layout();
@@ -328,9 +190,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($layout->inflectorEnabled());
     }
 
-    /**
-     * @return void
-     */
     public function testOverloadingAccessorsWork()
     {
         $layout = new Layout\Layout();
@@ -341,9 +200,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($layout->foo));
     }
 
-    /**
-     * @return void
-     */
     public function testAssignWithKeyValuePairPopulatesPropertyAccessibleViaOverloading()
     {
         $layout = new Layout\Layout();
@@ -351,9 +207,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $layout->foo);
     }
 
-    /**
-     * @return void
-     */
     public function testAssignWithArrayPopulatesPropertiesAccessibleViaOverloading()
     {
         $layout = new Layout\Layout();
@@ -365,9 +218,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $layout->bar);
     }
 
-    /**
-     * @return void
-     */
     public function testRenderWithNoInflection()
     {
         $layout = new Layout\Layout();
@@ -407,32 +257,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $received = $layout->render();
         $this->assertContains('Testing layouts with custom inflection:', $received);
         $this->assertContains($layout->message, $received);
-    }
-
-    public function testGetMvcInstanceReturnsNullWhenStartMvcHasNotBeenCalled()
-    {
-        $this->assertNull(Layout\Layout::getMvcInstance());
-    }
-
-    public function testGetMvcInstanceReturnsLayoutInstanceWhenStartMvcHasBeenCalled()
-    {
-        $layout = Layout\Layout::startMvc();
-        $received = Layout\Layout::getMvcInstance();
-        $this->assertSame($layout, $received);
-    }
-
-    public function testSubsequentCallsToStartMvcWithOptionsSetState()
-    {
-        $layout = Layout\Layout::startMvc();
-        $this->assertTrue($layout->getMvcSuccessfulActionOnly());
-        $this->assertEquals('content', $layout->getContentKey());
-
-        Layout\Layout::startMvc(array(
-            'mvcSuccessfulActionOnly' => false,
-            'contentKey'              => 'foobar'
-        ));
-        $this->assertFalse($layout->getMvcSuccessfulActionOnly());
-        $this->assertEquals('foobar', $layout->getContentKey());
     }
 
     public function testGetViewSuffixRetrievesDefaultValue()
@@ -497,47 +321,15 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foobar-helper-output', $layout->render());
     }
 
-    public function testResettingMvcInstanceUnregistersHelperAndPlugin()
-    {
-        $this->testGetMvcInstanceReturnsLayoutInstanceWhenStartMvcHasBeenCalled();
-        Layout\Layout::resetMvcInstance();
-        $front = Controller\Front::getInstance();
-        $this->assertFalse($front->hasPlugin('Zend_Layout_Controller_Plugin_Layout'), 'Plugin not unregistered');
-        $broker = $front->getHelperBroker();
-        $this->assertFalse($broker->hasPlugin('Layout'), 'Helper not unregistered');
-    }
-
-    public function testResettingMvcInstanceRemovesMvcSingleton()
-    {
-        $this->testGetMvcInstanceReturnsLayoutInstanceWhenStartMvcHasBeenCalled();
-        Layout\Layout::resetMvcInstance();
-        $this->assertNull(Layout\Layout::getMvcInstance());
-    }
-
     public function testMinimalViewObjectWorks()
     {
         $layout = new Layout\Layout(array(
-            'view' => new \ZendTest\Layout\TestAsset\MinimalCustomView(),
+            'view'           => new TestAsset\MinimalCustomView(),
             'ViewScriptPath' => 'some/path'
             ));
         $layout->render();
     }
 
-    /**
-     * @group ZF-5152
-     */
-    public function testCallingStartMvcTwiceDoesntGenerateAnyUnexpectedBehavior()
-    {
-        Layout\Layout::startMvc('/some/path');
-        $this->assertEquals(Layout\Layout::getMvcInstance()->getLayoutPath(),'/some/path');
-        Layout\Layout::startMvc('/some/other/path');
-        $this->assertEquals(Layout\Layout::getMvcInstance()->getLayoutPath(),'/some/other/path');
-        $this->assertTrue(Layout\Layout::getMvcInstance()->isEnabled());
-    }
-
-    /**
-     * @group ZF-5891
-     */
     public function testSetLayoutWithDisabledFlag()
     {
         $layout = new Layout\Layout();

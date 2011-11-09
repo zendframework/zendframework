@@ -21,15 +21,16 @@
 /**
  * @namespace
  */
-namespace Zend\Layout;
+namespace Zend\Layout\Exception;
+
+use Zend\Layout\Exception;
 
 /**
- * @uses       \Exception
  * @category   Zend
  * @package    Zend_Layout
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
 {}
 

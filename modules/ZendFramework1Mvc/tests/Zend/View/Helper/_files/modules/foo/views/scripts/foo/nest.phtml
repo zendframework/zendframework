@@ -1,0 +1,5 @@
+<?php 
+$headTitle = $this->plugin('headTitle');
+$headTitle('Foo Nest');
+$headTitle->setSeparator(' - '); 
+$this->action('nested', 'foo', 'foo');

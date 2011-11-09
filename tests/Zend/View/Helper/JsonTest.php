@@ -23,7 +23,12 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Layout;
+
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Http\Response,
+    Zend\Json\Json as JsonFormatter,
+    Zend\Layout\Layout,
+    Zend\View\Helper\Json as JsonHelper;
 
 /**
  * Test class for Zend_View_Helper_Json
@@ -36,7 +41,7 @@ use Zend\Layout;
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class JSONTest extends \PHPUnit_Framework_TestCase
+class JsonTest extends TestCase
 {
 
     /**
@@ -47,42 +52,19 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        \Zend\Layout\Layout::resetMvcInstance();
-
-        $this->response = new \Zend\Controller\Response\Http();
-        $this->response->headersSentThrowsException = false;
-
-        $front = \Zend\Controller\Front::getInstance();
-        $front->resetInstance();
-        $front->setResponse($this->response);
-
-        $this->helper = new \Zend\View\Helper\Json();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
+        $this->layout   = new Layout();
+        $this->response = new Response();
+        $this->helper   = new JsonHelper();
+        $this->helper->setLayout($this->layout)
+                     ->setResponse($this->response);
     }
 
     public function verifyJsonHeader()
     {
-        $headers = $this->response->getHeaders();
-
-        $found = false;
-        foreach ($headers as $header) {
-            if ('Content-Type' == $header['name']) {
-                $found = true;
-                $value = $header['value'];
-                break;
-            }
-        }
-        $this->assertTrue($found);
-        $this->assertEquals('application/json', $value);
+        $headers = $this->response->headers();
+        $this->assertTrue($headers->has('Content-Type'));
+        $header = $headers->get('Content-Type');
+        $this->assertEquals('application/json', $header->getFieldValue());
     }
 
     public function testJsonHelperSetsResponseHeader()
@@ -95,23 +77,21 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->helper->__invoke('foobar');
         $this->assertTrue(is_string($data));
-        $this->assertEquals('foobar', \Zend\Json\Json::decode($data));
+        $this->assertEquals('foobar', JsonFormatter::decode($data));
     }
 
     public function testJsonHelperDisablesLayoutsByDefault()
     {
-        $layout = Layout\Layout::startMvc();
-        $this->assertTrue($layout->isEnabled());
+        $this->assertTrue($this->layout->isEnabled());
         $this->testJsonHelperReturnsJsonEncodedString();
-        $this->assertFalse($layout->isEnabled());
+        $this->assertFalse($this->layout->isEnabled());
     }
 
     public function testJsonHelperDoesNotDisableLayoutsWhenKeepLayoutFlagTrue()
     {
-        $layout = Layout\Layout::startMvc();
-        $this->assertTrue($layout->isEnabled());
+        $this->assertTrue($this->layout->isEnabled());
         
         $data = $this->helper->__invoke(array('foobar'), true);
-        $this->assertTrue($layout->isEnabled());
+        $this->assertTrue($this->layout->isEnabled());
     }
 }

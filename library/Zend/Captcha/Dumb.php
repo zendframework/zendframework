@@ -41,7 +41,7 @@ class Dumb extends Word
     /**
      * Render the captcha
      *
-     * @param  Zend_View_Interface $view
+     * @param  \Zend\View\Renderer $view
      * @param  mixed $element
      * @return string
      */

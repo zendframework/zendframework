@@ -48,7 +48,7 @@ interface Adapter extends \Zend\Validator\Validator
     /**
      * Display the captcha
      *
-     * @param  Zend_View_Interface $view
+     * @param  \Zend\View\Renderer $view
      * @param  mixed $element
      * @return string
      */
@@ -72,7 +72,7 @@ interface Adapter extends \Zend\Validator\Validator
     /**
      * Get optional private decorator for this captcha type
      *
-     * @return \Zend_Form_Decorator_Interface|string
+     * @return \Zend\Form\Decorator|string
      */
     public function getDecorator();
 }

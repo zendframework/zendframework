@@ -30,7 +30,7 @@ class Request extends Message implements RequestDescription
     const VERSION_11 = '1.1';
     const VERSION_10 = '1.0';
     /**#@-*/
-    
+
     /**
      * @var string
      */
@@ -50,22 +50,22 @@ class Request extends Message implements RequestDescription
      * @var \Zend\Stdlib\ParametersDescription
      */
     protected $queryParams = null;
-    
+
     /**
      * @var \Zend\Stdlib\ParametersDescription
      */
     protected $postParams = null;
-    
+
     /**
      * @var \Zend\Stdlib\ParametersDescription
      */
     protected $fileParams = null;
-    
+
     /**
      * @var \Zend\Stdlib\ParametersDescription
      */
     protected $serverParams = null;
-    
+
     /**
      * @var \Zend\Stdlib\ParametersDescription
      */
@@ -145,7 +145,7 @@ class Request extends Message implements RequestDescription
      */
     public function setMethod($method)
     {
-        if (!defined('self::METHOD_'.strtoupper($method))) {
+        if (!defined('static::METHOD_'.strtoupper($method))) {
             throw new Exception\InvalidArgumentException('Invalid HTTP method passed');
         }
         $this->method = $method;
@@ -179,7 +179,7 @@ class Request extends Message implements RequestDescription
             throw new Exception\InvalidArgumentException('URI must be an instance of Zend\Uri\Http or a string');
         }
         $this->uri = $uri;
-        
+
         return $this;
     }
 
@@ -288,7 +288,7 @@ class Request extends Message implements RequestDescription
 
         return $this->postParams;
     }
-    
+
     /**
      * Return the Cookie header, this is the same as calling $request->headers()->get('Cookie');
      *
@@ -312,7 +312,7 @@ class Request extends Message implements RequestDescription
         $this->fileParams = $files;
         return $this;
     }
-    
+
     /**
      * Return the parameter container responsible for file parameters
      *

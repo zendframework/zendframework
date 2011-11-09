@@ -32,40 +32,24 @@ namespace ZendTest\Captcha;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Captcha
  */
-class DumbTest extends CommonWordTest
+abstract class CommonWordTest extends \PHPUnit_Framework_TestCase
 {
-    protected $wordClass = '\Zend\Captcha\Dumb';
-
     /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
+     * Word adapter class name
      *
-     * @return void
+     * @var string
      */
-    public function setUp()
+    protected $wordClass;
+
+    public function testLoadInvalidSessionClass()
     {
-        if (isset($this->word)) {
-            unset($this->word);
+        try {
+            $wordAdapter = new $this->wordClass;
+            $wordAdapter->setSessionClass('ZendTest\Captcha\InvalidClassName');
+            $wordAdapter->getSession();
+            $this->fail('Setting undefined class should fail');
+        } catch (\Zend\Captcha\Exception\InvalidArgumentException $e) {
+            $this->assertRegExp('/^Session class .* not found$/', $e->getMessage());
         }
-
-        $this->element = new \Zend\Form\Element\Captcha(
-            'captchaD',
-            array(
-                'captcha' => array(
-                    'Dumb',
-                    'sessionClass' => 'ZendTest\\Captcha\\TestAsset\\SessionContainer'
-                )
-            )
-        );
-        $this->captcha =  $this->element->getCaptcha();
-    }
-
-    public function testRendersWordInReverse()
-    {
-        $id   = $this->captcha->generate('test');
-        $word = $this->captcha->getWord();
-        $html = $this->captcha->render(new \Zend\View\PhpRenderer);
-        $this->assertContains(strrev($word), $html);
-        $this->assertNotContains($word, $html);
     }
 }

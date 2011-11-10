@@ -1379,7 +1379,14 @@ class Element implements Validator
             if ($isArray && is_array($value)) {
                 $messages = array();
                 $errors   = array();
-                foreach ($value as $val) {
+                if (empty($value)) {
+                    if ($this->isRequired()
+                        || (!$this->isRequired() && !$this->getAllowEmpty())
+                    ) {
+                        $value = '';
+                    }
+                }
+                foreach ((array)$value as $val) {
                     if (!$validator->isValid($val, $context)) {
                         $result = false;
                         if ($this->_hasErrorMessages()) {
@@ -1387,7 +1394,7 @@ class Element implements Validator
                             $errors   = $messages;
                         } else {
                             $messages = array_merge($messages, $validator->getMessages());
-                            $errors   = array_merge($errors,   $validator->getErrors());
+                            $errors   = $messages;
                         }
                     }
                 }

@@ -1130,7 +1130,7 @@ class MailMergeTest extends \PHPUnit_Framework_TestCase
             $this->mailMerge->deleteTemplate($template['filename']);
         }
 
-        $this->path = __DIR__ . DIRECTORY_SEPARATOR . 'MailMerge';
+        $this->path = __DIR__ . DIRECTORY_SEPARATOR . '_files';
 
         return true;
     }

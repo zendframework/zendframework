@@ -29,8 +29,6 @@ use Zend\View\Exception;
 /**
  * Helper for retrieving avatars from gravatar.com
  *
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend\View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -124,7 +122,7 @@ class Gravatar extends HtmlElement
      * Configure state
      *
      * @param  array $options
-     * @return Zend\View\Helper\Gravatar
+     * @return Gravatar
      */
     public function setOptions(array $options)
     {
@@ -151,7 +149,7 @@ class Gravatar extends HtmlElement
      * Set img size in pixels
      *
      * @param int $imgSize Size of img must be between 1 and 512
-     * @return Zend_View_Helper_Gravatar
+     * @return Gravatar
      */
     public function setImgSize($imgSize)
     {
@@ -174,9 +172,9 @@ class Gravatar extends HtmlElement
      *
      * Can be either an absolute URL to an image, or one of the DEFAULT_* constants
      *
-     * @param string $defaultImg
-     * @link http://pl.gravatar.com/site/implement/url More information about default image.
-     * @return Zend\View\Helper\Gravatar
+     * @link   http://pl.gravatar.com/site/implement/url More information about default image.
+     * @param  string $defaultImg
+     * @return Gravatar
      */
     public function setDefaultImg($defaultImg)
     {
@@ -189,8 +187,8 @@ class Gravatar extends HtmlElement
      *
      * Must be one of the RATING_* constants
      *
-     * @param string $rating Value for rating. Allowed values are: g, px, r,x
-     * @link http://pl.gravatar.com/site/implement/url More information about rating.
+     * @link   http://pl.gravatar.com/site/implement/url More information about rating.
+     * @param  string $rating Value for rating. Allowed values are: g, px, r,x
      * @throws Exception\DomainException
      */
     public function setRating($rating)
@@ -225,7 +223,7 @@ class Gravatar extends HtmlElement
      * Set email adress
      *
      * @param string $email
-     * @return Zend_View_Helper_Gravatar
+     * @return Gravatar
      */
     public function setEmail( $email )
     {
@@ -247,7 +245,7 @@ class Gravatar extends HtmlElement
      * Load from an SSL or No-SSL location?
      *
      * @param bool $flag
-     * @return Zend\View\Helper\Gravatar
+     * @return Gravatar
      */
     public function setSecure($flag)
     {
@@ -289,9 +287,9 @@ class Gravatar extends HtmlElement
      * Warning! You shouldn't set src attrib for image tag.
      * This attrib is overwritten in protected method setSrcAttribForImg().
      * This method(_setSrcAttribForImg) is called in public method getImgTag().
-
-     * @param array $attribs
-     * @return Zend\View\Helper\Gravatar
+     *
+     * @param  array $attribs
+     * @return Gravatar
      */
     public function setAttribs(array $attribs)
     {
@@ -330,7 +328,9 @@ class Gravatar extends HtmlElement
      * You shouldn't set a own url value!
      * It sets value, uses protected method getAvatarUrl.
      *
-     * If already exsist overwritten.
+     * If already exists, it will be overwritten.
+     *
+     * @return void
      */
     protected function setSrcAttribForImg()
     {
@@ -362,6 +362,5 @@ class Gravatar extends HtmlElement
     public function  __toString()
     {
         return $this->getImgTag();
-
     }
 }

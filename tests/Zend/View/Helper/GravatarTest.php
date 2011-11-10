@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_View
+ * @package    Zendview
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -23,43 +23,43 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Controller,
+
+use PHPUnit_Framework_TestCase as TestCase,
     Zend\View\PhpRenderer as View,
     Zend\View\Helper\Gravatar;
 
-
 /**
  * @category   Zend
- * @package    Zend_View
+ * @package    Zendview
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_View
- * @group      Zend_View_Helper
+ * @group      Zendview
+ * @group      Zendview_Helper
  */
-class GravatarTest extends \PHPUnit_Framework_TestCase
+class GravatarTest extends TestCase
 {
     /**
-     * @var Zend\View\Helper\Gravatar
+     * @var Gravatar
      */
-    protected $_object;
+    protected $helper;
 
     /**
-     * @var Zend\View
+     * @var View
      */
-    protected $_view;
+    protected $view;
 
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
-        $this->_object = new Gravatar();
-        $this->_view = new View();
-        $this->_view->doctype()->setDoctype(strtoupper("XHTML1_STRICT"));
-        $this->_object->setView($this->_view);
+        $this->helper = new Gravatar();
+        $this->view   = new View();
+        $this->view->doctype()->setDoctype(strtoupper("XHTML1_STRICT"));
+        $this->helper->setView($this->view);
 
-        if( isset($_SERVER['HTTPS'])) {
+        if (isset($_SERVER['HTTPS'])) {
             unset ($_SERVER['HTTPS']);
         }
     }
@@ -69,30 +69,34 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->_object, $this->_view);
+        unset($this->helper, $this->view);
     }
 
     /**
      * Test default options.
      */
-    public function testGravataXHTMLDoctype()
+    public function testGravatarXhtmlDoctype()
     {
-        $this->assertRegExp('/\/>$/',
-            $this->_object->__invoke('example@example.com')->__toString());
+        $this->assertRegExp(
+            '/\/>$/',
+            $this->helper->__invoke('example@example.com')->__toString()
+        );
     }
 
     /**
      * Test if doctype is HTML
      */
-    public function testGravatarHTMLDoctype()
+    public function testGravatarHtmlDoctype()
     {
         $object = new Gravatar();
         $view   = new View();
         $view->doctype()->setDoctype(strtoupper("HTML5"));
         $object->setView($view);
 
-        $this->assertRegExp('/[^\/]>$/',
-            $this->_object->__invoke('example@example.com')->__toString());
+        $this->assertRegExp(
+            '/[^\/]>$/',
+            $this->helper->__invoke('example@example.com')->__toString()
+        );
     }
 
     /**
@@ -101,23 +105,23 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
     public function testGetAndSetMethods()
     {
         $attribs = array('class' => 'gravatar', 'title' => 'avatar', 'id' => 'gravatar-1');
-        $this->_object->setDefaultImg('monsterid')
-             ->setImgSize(150)
-             ->setSecure(true)
-             ->setEmail("example@example.com")
-             ->setAttribs($attribs)
-             ->setRating('pg');
-        $this->assertEquals("monsterid", $this->_object->getDefaultImg());
-        $this->assertEquals("pg", $this->_object->getRating());
-        $this->assertEquals("example@example.com", $this->_object->getEmail());
-        $this->assertEquals($attribs, $this->_object->getAttribs());
-        $this->assertEquals(150, $this->_object->getImgSize());
-        $this->assertTrue($this->_object->getSecure());
+        $this->helper->setDefaultImg('monsterid')
+                     ->setImgSize(150)
+                     ->setSecure(true)
+                     ->setEmail("example@example.com")
+                     ->setAttribs($attribs)
+                     ->setRating('pg');
+        $this->assertEquals("monsterid", $this->helper->getDefaultImg());
+        $this->assertEquals("pg", $this->helper->getRating());
+        $this->assertEquals("example@example.com", $this->helper->getEmail());
+        $this->assertEquals($attribs, $this->helper->getAttribs());
+        $this->assertEquals(150, $this->helper->getImgSize());
+        $this->assertTrue($this->helper->getSecure());
     }
 
     public function tesSetDefaultImg()
     {
-        $this->_object->gravatar("example@example.com");
+        $this->helper->gravatar("example@example.com");
 
         $img = array(
             "wavatar",
@@ -126,8 +130,8 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
         );
 
         foreach ($img as $value) {
-            $this->_object->setDefaultImg($value);
-            $this->assertEquals(urlencode($value), $this->_object->getDefaultImg());
+            $this->helper->setDefaultImg($value);
+            $this->assertEquals(urlencode($value), $this->helper->getDefaultImg());
         }
     }
 
@@ -135,8 +139,8 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
     {
         $imgSizesRight = array(1, 500, "600");
         foreach ($imgSizesRight as $value) {
-            $this->_object->setImgSize($value);
-            $this->assertInternalType('int', $this->_object->getImgSize());
+            $this->helper->setImgSize($value);
+            $this->assertInternalType('int', $this->helper->getImgSize());
         }
     }
 
@@ -145,7 +149,7 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
         $ratingsWrong = array( 'a', 'cs', 456);
         $this->setExpectedException('Zend\View\Exception');
         foreach ($ratingsWrong as $value) {
-            $this->_object->setRating($value);
+            $this->helper->setRating($value);
         }
     }
 
@@ -153,17 +157,17 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
     {
         $ratingsRight = array( 'g', 'pg', 'r', 'x', Gravatar::RATING_R);
         foreach ($ratingsRight as $value) {
-            $this->_object->setRating($value);
-            $this->assertEquals($value, $this->_object->getRating());
+            $this->helper->setRating($value);
+            $this->assertEquals($value, $this->helper->getRating());
         }
     }
 
     public function testSetSecure()
     {
-        $values = array("true", "false", "text", $this->_view, 100, true, "", null, 0, false);
+        $values = array("true", "false", "text", $this->view, 100, true, "", null, 0, false);
         foreach ($values as $value) {
-            $this->_object->setSecure($value);
-            $this->assertInternalType('bool', $this->_object->getSecure());
+            $this->helper->setSecure($value);
+            $this->assertInternalType('bool', $this->helper->getSecure());
         }
     }
 
@@ -172,8 +176,10 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
      */
     public function testHttpsSource()
     {
-        $this->assertRegExp('/src="https:\/\/secure.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                $this->_object->__invoke("example@example.com", array('secure' => true))->__toString());
+        $this->assertRegExp(
+            '#src="https://secure.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+            $this->helper->__invoke("example@example.com", array('secure' => true))->__toString()
+        );
     }
 
     /**
@@ -181,10 +187,9 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
      */
     public function testImgAttribs()
     {
-        $this->assertRegExp('/class="gravatar" title="Gravatar"/',
-                $this->_object->__invoke("example@example.com", array(),
-                        array('class' => 'gravatar', 'title' => 'Gravatar'))
-                     ->__toString()
+        $this->assertRegExp(
+            '/class="gravatar" title="Gravatar"/',
+            $this->helper->__invoke("example@example.com", array(), array('class' => 'gravatar', 'title' => 'Gravatar'))->__toString()
         );
     }
 
@@ -193,11 +198,9 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
      */
     public function testGravatarOptions()
     {
-        $this->assertRegExp('/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}\?s=125&amp;d=wavatar&amp;r=pg"/',
-                $this->_object->__invoke("example@example.com",
-                        array('rating' => 'pg', 'imgSize' => 125, 'defaultImg' => 'wavatar',
-                            'secure' => false))
-                     ->__toString()
+        $this->assertRegExp(
+            '#src="http://www.gravatar.com/avatar/[a-z0-9]{32}\?s=125&amp;d=wavatar&amp;r=pg"#',
+            $this->helper->__invoke("example@example.com", array('rating' => 'pg', 'imgSize' => 125, 'defaultImg' => 'wavatar', 'secure' => false))->__toString()
         );
     }
 
@@ -211,8 +214,10 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
 
         foreach ($values as $value) {
             $_SERVER['HTTPS'] = $value;
-            $this->assertRegExp('/src="https:\/\/secure.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                    $this->_object->__invoke("example@example.com")->__toString());
+            $this->assertRegExp(
+                '#src="https://secure.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+                $this->helper->__invoke("example@example.com")->__toString()
+            );
         }
     }
 
@@ -223,39 +228,47 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
     {
         $_SERVER['HTTPS'] = "off";
 
-        $this->assertRegExp('/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                $this->_object->__invoke("example@example.com")->__toString());
+        $this->assertRegExp(
+            '/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
+            $this->helper->__invoke("example@example.com")->__toString()
+        );
     }
 
     public function testSetAttribsWithSrcKey()
     {
         $email = 'example@example.com';
-        $this->_object->setEmail($email);
-        $this->_object->setAttribs(array(
+        $this->helper->setEmail($email);
+        $this->helper->setAttribs(array(
             'class' => 'gravatar',
             'src'   => 'http://example.com',
             'id'    => 'gravatarID',
         ));
 
-        $this->assertRegExp('/src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+"/',
-                            $this->_object->getImgTag());
+        $this->assertRegExp(
+            '#src="http://www.gravatar.com/avatar/[a-z0-9]{32}.+"#',
+            $this->helper->getImgTag()
+        );
     }
 
     public function testForgottenEmailParameter()
     {
-        $this->assertRegExp('/(src="http:\/\/www.gravatar.com\/avatar\/[a-z0-9]{32}.+")/',
-                            $this->_object->getImgTag());
+        $this->assertRegExp(
+            '#(src="http://www.gravatar.com/avatar/[a-z0-9]{32}.+")#',
+            $this->helper->getImgTag()
+        );
     }
 
     public function testReturnImgTag()
     {
-        $this->assertRegExp("/^<img\s.+/",
-        $this->_object->__invoke("example@example.com")->__toString());
+        $this->assertRegExp(
+            "/^<img\s.+/",
+            $this->helper->__invoke("example@example.com")->__toString()
+        );
     }
 
     public function testReturnThisObject()
     {
-        $this->assertInstanceOf('Zend\View\Helper\Gravatar', $this->_object->__invoke());
+        $this->assertInstanceOf('Zend\View\Helper\Gravatar', $this->helper->__invoke());
     }
 
     public function testInvalidKeyPassedToSetOptionsMethod()
@@ -263,6 +276,6 @@ class GravatarTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'unknown' => array('val' => 1)
         );
-        $this->_object->__invoke()->setOptions($options);
+        $this->helper->__invoke()->setOptions($options);
     }
 }

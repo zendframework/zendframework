@@ -23,7 +23,9 @@
  * @namespace
  */
 namespace Zend\Log\Formatter;
-use \Zend\Log\Formatter;
+
+use Zend\Log\Formatter,
+    Zend\Config\Config;
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
@@ -66,14 +68,14 @@ class Simple extends AbstractFormatter
     /**
 	 * Factory for Zend_Log_Formatter_Simple classe
 	 *
-	 * @param array|\Zend\Config\Config $options
+	 * @param array|Config $options
 	 * @return \Zend\Log\Formatter\Simple
      */
     public static function factory($options = array())
     {
         $format = null;
         if (null !== $options) {
-            if ($options instanceof Zend\Config\Config) {
+            if ($options instanceof Config) {
                 $options = $options->toArray();
             }
 

@@ -23,8 +23,11 @@
  * @namespace
  */
 namespace Zend\Log\Filter;
+
 use Zend\Log\Factory,
-    Zend\Log\Filter;
+    Zend\Log\Filter,
+    Zend\Log\Exception,
+    Zend\Config\Config;
 
 /**
  * @uses       \Zend\Log\Exception\InvalidArgumentException
@@ -41,18 +44,18 @@ abstract class AbstractFilter implements Filter, Factory
     /**
      * Validate and optionally convert the config to array
      *
-     * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
+     * @param  array|Config $config Config or Array
      * @return array
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     static protected function _parseConfig($config)
     {
-        if ($config instanceof \Zend\Config\Config) {
+        if ($config instanceof Config) {
             $config = $config->toArray();
         }
 
         if (!is_array($config)) {
-            throw new \Zend\Log\Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\Config\Config');
+            throw new Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\Config\Config');
         }
 
         return $config;

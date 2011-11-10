@@ -23,7 +23,12 @@
  * @namespace
  */
 namespace Zend\Log\Writer;
-use Zend\Log;
+
+use Zend\Log\Formatter\Simple as SimpleFormatter,
+    Zend\Log\Formatter,
+    Zend\Log\Exception,
+    Zend\Mail\Mail as Mailer,
+    Zend\Layout\Layout;
 
 /**
  * Class used for writing log messages to email via Zend_Mail.
@@ -63,21 +68,21 @@ class Mail extends AbstractWriter
     /**
      * Zend_Mail instance to use
      *
-     * @var \Zend\Mail\Mail
+     * @var Mailer
      */
     protected $_mail;
 
     /**
      * Zend_Layout instance to use; optional.
      *
-     * @var \Zend\Layout\Layout
+     * @var Layout
      */
     protected $_layout;
 
     /**
      * Optional formatter for use when rendering with Zend_Layout.
      *
-     * @var \Zend\Log\Formatter
+     * @var Formatter
      */
     protected $_layoutFormatter;
 
@@ -100,7 +105,7 @@ class Mail extends AbstractWriter
     protected $_subjectPrependText;
 
     /**
-     * MethodMap for \Zend\Mail\Mail's headers
+     * MethodMap for Mail's headers
      *
      * @var array
      */
@@ -118,17 +123,17 @@ class Mail extends AbstractWriter
      * optional Zend_Layout instance.  If Zend_Layout is being used,
      * $this->_layout->events will be set for use in the layout template.
      *
-     * @param  \Zend\Mail\Mail $mail Mail instance
-     * @param  \Zend\Layout\Layout $layout Layout instance; optional
+     * @param  Mailer $mail Mail instance
+     * @param  Layout $layout Layout instance; optional
      * @return void
      */
-    public function __construct(\Zend\Mail\Mail $mail, \Zend\Layout\Layout $layout = null)
+    public function __construct(Mailer $mail, Layout $layout = null)
     {
         $this->_mail = $mail;
         if (null !== $layout) {
             $this->setLayout($layout);
         }
-        $this->_formatter = new Log\Formatter\Simple();
+        $this->_formatter = new SimpleFormatter();
     }
 
     /**
@@ -170,9 +175,8 @@ class Mail extends AbstractWriter
             $layout = $this->_constructLayoutFromConfig($layout);
         }
 
-        if (!$layout instanceof \Zend\Layout\Layout) {
-            require_once 'Zend/Log/Exception.php';
-            throw new Log\Exception\InvalidArgumentException(
+        if (!$layout instanceof Layout) {
+            throw new Exception\InvalidArgumentException(
                 'Mail must be an instance of \Zend\Layout\Layout or an array'
             );
         }
@@ -182,11 +186,11 @@ class Mail extends AbstractWriter
     }
 
     /**
-     * Construct a \Zend\Mail\Mail instance based on a configuration array
+     * Construct a Mail instance based on a configuration array
      *
      * @param array $config
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Mail\Mail
+     * @throws Exception\InvalidArgumentException
+     * @return Mailer
      */
     protected static function _constructMailFromConfig(array $config)
     {
@@ -199,8 +203,8 @@ class Mail extends AbstractWriter
             $config['charset'] = null;
         }
         $mail = new $mailClass($config['charset']);
-        if (!$mail instanceof \Zend\Mail\Mail) {
-            throw new Log\Exception\InvalidArgumentException($mail . 'must extend \Zend\Mail\Mail');
+        if (!$mail instanceof Mailer) {
+            throw new Exception\InvalidArgumentException($mail . 'must extend \Zend\Mail\Mail');
         }
 
         if (isset($config['subject'])) {
@@ -231,11 +235,11 @@ class Mail extends AbstractWriter
     }
 
     /**
-     * Construct a \Zend\Layout\Layout instance based on a configuration array
+     * Construct a Layout instance based on a configuration array
      *
      * @param array $config
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Layout\Layout
+     * @throws Exception\InvalidArgumentException
+     * @return Layout
      */
     protected function _constructLayoutFromConfig(array $config)
     {
@@ -246,8 +250,8 @@ class Mail extends AbstractWriter
 
         $layoutClass = $config['layout'];
         $layout = new $layoutClass($config['layoutOptions']);
-        if (!$layout instanceof \Zend\Layout\Layout) {
-            throw new Log\Exception\InvalidArgumentException(
+        if (!$layout instanceof Layout) {
+            throw new Exception\InvalidArgumentException(
                 $layout . 'must extend \Zend\Layout\Layout'
             );
         }
@@ -292,10 +296,10 @@ class Mail extends AbstractWriter
     }
 
     /**
-     * Gets instance of Zend_Log_Formatter_Instance used for formatting a
+     * Gets instance of Zend_Log_Formatter used for formatting a
      * message using Zend_Layout, if applicable.
      *
-     * @return \Zend\Log\Formatter|null The formatter, or null.
+     * @return Formatter|null The formatter, or null.
      */
     public function getLayoutFormatter()
     {
@@ -309,14 +313,14 @@ class Mail extends AbstractWriter
      * Zend_Layout.  In the event that Zend_Layout is not being used, this
      * formatter cannot be set, so an exception will be thrown.
      *
-     * @param  \Zend\Log\Formatter $formatter
+     * @param  Formatter $formatter
      * @return \Zend\Log\Writer\Mail
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
-    public function setLayoutFormatter(Log\Formatter $formatter)
+    public function setLayoutFormatter(Formatter $formatter)
     {
         if (!$this->_layout) {
-            throw new Log\Exception\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'cannot set formatter for layout; ' .
                     'a Zend\Layout\Layout instance is not in use');
         }
@@ -335,13 +339,13 @@ class Mail extends AbstractWriter
      * subject set.
      *
      * @param  string $subject Subject prepend text.
-     * @throws \Zend\Log\Exception\RuntimeException
+     * @throws Exception\RuntimeException
      * @return \Zend\Log\Writer\Mail
      */
     public function setSubjectPrependText($subject)
     {
         if ($this->_mail->getSubject()) {
-            throw new Log\Exception\RuntimeException(
+            throw new Exception\RuntimeException(
                 'subject already set on mail; ' .
                     'cannot set subject prepend text');
         }

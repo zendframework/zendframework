@@ -23,13 +23,10 @@
  */
 namespace Zend\Log;
 
-use Zend\Config\Config;
+use ReflectionClass,
+    Zend\Config\Config;
 
 /**
- * @uses       \Zend\Loader
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Exception\RuntimeException
- * @uses       \Zend\Log\Filter\Priority
  * @category   Zend
  * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -53,12 +50,12 @@ class Logger implements Factory
     protected $_priorities = array();
 
     /**
-     * @var array of \Zend\Log\Writer\AbstractWriter
+     * @var array of Writer
      */
     protected $_writers = array();
 
     /**
-     * @var array of \Zend\Log\Filter
+     * @var array of Filter
      */
     protected $_filters = array();
 
@@ -68,43 +65,36 @@ class Logger implements Factory
     protected $_extras = array();
 
     /**
-     *
      * @var string
      */
     protected $_defaultWriterNamespace = 'Zend\Log\Writer';
 
     /**
-     *
      * @var string
      */
     protected $_defaultFilterNamespace = 'Zend\Log\Filter';
 
     /**
-     *
      * @var string
      */
     protected $_defaultFormatterNamespace = 'Zend\Log\Formatter';
 
     /**
-     *
      * @var callback
      */
     protected $_origErrorHandler       = null;
 
     /**
-     *
      * @var boolean
      */
     protected $_registeredErrorHandler = false;
 
     /**
-     *
      * @var array|boolean
      */
     protected $_errorHandlerMap        = false;
 
     /**
-     *
      * @var string
      */
     protected $_timestampFormat        = 'c';
@@ -112,12 +102,12 @@ class Logger implements Factory
     /**
      * Class constructor.  Create a new logger
      *
-     * @param \Zend\Log\Writer\AbstractWriter|null  $writer  default writer
+     * @param Writer|null  $writer  default writer
      * @return void
      */
     public function __construct(Writer $writer = null)
     {
-        $r = new \ReflectionClass($this);
+        $r = new ReflectionClass($this);
         $this->_priorities = array_flip($r->getConstants());
 
         if ($writer !== null) {
@@ -129,9 +119,9 @@ class Logger implements Factory
      * Factory to construct the logger and one or more writers
      * based on the configuration array
      *
-     * @param  array|\Zend\Config\Config Array or instance of \Zend\Config\Config
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Logger
+     * @param  array|Config Array or instance of Config
+     * @throws Exception\InvalidArgumentException
+     * @return self
      */
     static public function factory($config = array())
     {
@@ -168,8 +158,8 @@ class Logger implements Factory
      * Construct a writer object based on a configuration array
      *
      * @param  array $spec config array with writer spec
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Writer\AbstractWriter
+     * @throws Exception\InvalidArgumentException
+     * @return Writer
      */
     protected function _constructWriterFromConfig($config)
     {
@@ -198,9 +188,9 @@ class Logger implements Factory
     /**
      * Construct filter object from configuration array or Zend_Config object
      *
-     * @param  array|\Zend\Config\Config $config \Zend\Config\Config or Array
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Filter
+     * @param  array|Config $config Config or Array
+     * @throws Exception\InvalidArgumentException
+     * @return Filter
      */
     protected function _constructFilterFromConfig($config)
     {
@@ -219,9 +209,9 @@ class Logger implements Factory
    /**
      * Construct formatter object from configuration array or Zend_Config object
      *
-     * @param  array|Zend\Config\Config $config \Zend\Config\Config or Array
-     * @return \Zend\Log\Formatter
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @param  array|Config $config Config or Array
+     * @return Formatter
+     * @throws Exception\InvalidArgumentException
      */
     protected function _constructFormatterFromConfig($config)
     {
@@ -241,9 +231,9 @@ class Logger implements Factory
      * Construct a filter or writer from config
      *
      * @param string $type 'writer' of 'filter'
-     * @param mixed $config \Zend\Config\Config or Array
+     * @param mixed $config Config or Array
      * @param string $namespace
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return object
      */
     protected function _constructFromConfig($type, $config, $namespace)
@@ -264,7 +254,7 @@ class Logger implements Factory
             \Zend\Loader::loadClass($className);
         }
 
-        $reflection = new \ReflectionClass($className);
+        $reflection = new ReflectionClass($className);
         if (!$reflection->implementsInterface('Zend\Log\Factory')) {
             throw new Exception\InvalidArgumentException(
                 $className . ' does not implement Zend\Log\Factory and can not be constructed from config.'
@@ -280,7 +270,7 @@ class Logger implements Factory
      * @param array $config
      * @param string $type filter|writer
      * @param string $defaultNamespace
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return string full classname
      */
     protected function getClassName($config, $type, $defaultNamespace)
@@ -339,7 +329,7 @@ class Logger implements Factory
      * @param  string  $method  priority name
      * @param  string  $params  message to log
      * @return void
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __call($method, $params)
     {
@@ -369,8 +359,8 @@ class Logger implements Factory
      * @param  string   $message   Message to log
      * @param  integer  $priority  Priority of message
      * @param  mixed    $extras    Extra information to log in event
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @throws \Zend\Log\Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function log($message, $priority, $extras = null)
@@ -424,8 +414,8 @@ class Logger implements Factory
      *
      * @param  string   $name      Name of priority
      * @param  integer  $priority  Numeric priority
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Logger
+     * @throws Exception\InvalidArgumentException
+     * @return self
      */
     public function addPriority($name, $priority)
     {
@@ -446,18 +436,16 @@ class Logger implements Factory
      * Before a message will be received by any of the writers, it
      * must be accepted by all filters added with this method.
      *
-     * @param  int|\Zend\Config\Config|\Zend\Log\Filter $filter
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Logger
+     * @param  int|Config|Filter $filter
+     * @throws Exception\InvalidArgumentException
+     * @return self
      */
     public function addFilter($filter)
     {
         if (is_int($filter)) {
             $filter = new Filter\Priority($filter);
-
         } elseif ($filter instanceof Config || is_array($filter)) {
             $filter = $this->_constructFilterFromConfig($filter);
-
         } elseif(! $filter instanceof Filter) {
             throw new Exception\InvalidArgumentException('Invalid filter provided');
         }
@@ -470,9 +458,9 @@ class Logger implements Factory
      * Add a writer.  A writer is responsible for taking a log
      * message and writing it out to storage.
      *
-     * @param  mixed $writer \Zend\Log\Writer\AbstractWriter or Config array
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Logger
+     * @param  array|Config|Writer $writer Writer or Config array
+     * @throws Exception\InvalidArgumentException
+     * @return self
      */
     public function addWriter($writer)
     {
@@ -496,7 +484,7 @@ class Logger implements Factory
      *
      * @param  string $name    Name of the field
      * @param  string $value   Value of the field
-     * @return \Zend\Log\Logger
+     * @return self
      */
     public function setEventItem($name, $value)
     {
@@ -517,7 +505,7 @@ class Logger implements Factory
      *
      * @link http://www.php.net/manual/en/function.set-error-handler.php Custom error handler
      *
-     * @return \Zend\Log\Logger
+     * @return self
      */
     public function registerErrorHandler()
     {
@@ -583,7 +571,7 @@ class Logger implements Factory
      * Set timestamp format for log entries.
      *
      * @param string $format
-     * @return \Zend\Log\Logger
+     * @return self
      */
     public function setTimestampFormat($format)
     {

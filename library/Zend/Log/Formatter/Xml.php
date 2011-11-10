@@ -24,8 +24,10 @@
  */
 namespace Zend\Log\Formatter;
 
-use \Zend\Log\Formatter,
-    \Zend\Config\Config;
+use Zend\Log\Formatter,
+    Zend\Config\Config,
+    DOMDocument,
+    DOMElement;
 
 /**
  * @uses       DOMDocument
@@ -58,7 +60,7 @@ class Xml extends AbstractFormatter
      * Class constructor
      * (the default encoding is UTF-8)
      *
-     * @param array|\Zend\Config\Config $options
+     * @param array|Config $options
      * @return void
      */
     public function __construct($options = array())
@@ -100,7 +102,7 @@ class Xml extends AbstractFormatter
     /**
 	 * Factory for Zend_Log_Formatter_Xml classe
 	 *
-	 * @param array|\Zend\Config\Config $options
+	 * @param array|Config $options
 	 * @return \Zend\Log\Formatter\Xml
      */
     public static function factory($options = array())
@@ -148,8 +150,8 @@ class Xml extends AbstractFormatter
         }
 
         $enc = $this->getEncoding();
-        $dom = new \DOMDocument('1.0', $enc);
-        $elt = $dom->appendChild(new \DOMElement($this->_rootElement));
+        $dom = new DOMDocument('1.0', $enc);
+        $elt = $dom->appendChild(new DOMElement($this->_rootElement));
 
         foreach ($dataToInsert as $key => $value) {
             if (empty($value)
@@ -159,7 +161,7 @@ class Xml extends AbstractFormatter
                 if($key == "message") {
                     $value = htmlspecialchars($value, ENT_COMPAT, $enc);
                 }
-                $elt->appendChild(new \DOMElement($key, (string)$value));
+                $elt->appendChild(new DOMElement($key, (string)$value));
             }
         }
 

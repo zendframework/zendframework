@@ -25,7 +25,7 @@ use Zend\Log\Logger,
     Zend\Log\Writer\Mail as MailWriter,
     Zend\Log\Formatter\Simple as SimpleFormatter,
     Zend\Mail\Transport\Exception\RuntimeException as TransportException,
-    Zend\View\Exception as ViewException;
+    Zend\View\Exception\RuntimeException as ViewException;
 
 /**
  * @category   Zend

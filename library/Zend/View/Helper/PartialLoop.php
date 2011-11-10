@@ -54,23 +54,14 @@ class PartialLoop extends Partial
      * If no arguments are provided, returns object instance.
      *
      * @param  string $name Name of view script
-     * @param  string|array $module If $model is empty, and $module is an array,
-     *                              these are the variables to populate in the
-     *                              view. Otherwise, the module in which the
-     *                              partial resides
      * @param  array $model Variables to populate in the view
      * @return string
      * @throws Exception\InvalidArgumentException
      */
-    public function __invoke($name = null, $module = null, $model = null)
+    public function __invoke($name = null, $model = null)
     {
         if (0 == func_num_args()) {
             return $this;
-        }
-
-        if ((null === $model) && (null !== $module)) {
-            $model  = $module;
-            $module = null;
         }
 
         if (!is_array($model)
@@ -94,7 +85,7 @@ class PartialLoop extends Partial
             // increment the counter variable
             $this->partialCounter++;
 
-            $content .= parent::__invoke($name, $module, $item);
+            $content .= parent::__invoke($name, $item);
         }
 
         return $content;

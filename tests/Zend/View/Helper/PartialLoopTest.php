@@ -26,9 +26,9 @@ namespace ZendTest\View\Helper;
 
 use ArrayObject,
     Iterator,
-    Zend\Controller\Front as FrontController,
-    Zend\View\PhpRenderer as View,
-    Zend\View\Helper\PartialLoop;
+    PHPUnit_Framework_TestCase as TestCase,
+    Zend\View\Helper\PartialLoop,
+    Zend\View\PhpRenderer as View;
 
 /**
  * Test class for Zend_View_Helper_PartialLoop.
@@ -41,10 +41,10 @@ use ArrayObject,
  * @group      Zend_View
  * @group      Zend_View_Helper
  */
-class PartialLoopTest extends \PHPUnit_Framework_TestCase
+class PartialLoopTest extends TestCase
 {
     /**
-     * @var Zend_View_Helper_PartialLoop
+     * @var PartialLoop
      */
     public $helper;
 
@@ -62,8 +62,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->basePath = __DIR__ . '/_files/modules';
-        $this->helper = new PartialLoop();
-        FrontController::getInstance()->resetInstance();
+        $this->helper   = new PartialLoop();
     }
 
     /**
@@ -86,7 +85,7 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             array('message' => 'foo'),
             array('message' => 'bar'),
             array('message' => 'baz'),
-            array('message' => 'bat')
+            array('message' => 'bat'),
         );
 
         $view = new View();
@@ -170,30 +169,6 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
             $result = $this->helper->__invoke('partialLoop.phtml', $o);
             $this->fail('PartialLoop should only work with arrays and iterators');
         } catch (\Exception $e) {
-        }
-    }
-
-    /**
-     * @return void
-     */
-    public function testPartialLoopFindsModule()
-    {
-        FrontController::getInstance()->addModuleDirectory($this->basePath);
-        $data = array(
-            array('message' => 'foo'),
-            array('message' => 'bar'),
-            array('message' => 'baz'),
-            array('message' => 'bat')
-        );
-
-        $view = new View();
-        $view->resolver()->addPath($this->basePath . '/application/views/scripts');
-        $this->helper->setView($view);
-
-        $result = $this->helper->__invoke('partialLoop.phtml', 'foo', $data);
-        foreach ($data as $item) {
-            $string = 'This is an iteration in the foo module: ' . $item['message'];
-            $this->assertContains($string, $result);
         }
     }
 
@@ -282,12 +257,6 @@ class PartialLoopTest extends \PHPUnit_Framework_TestCase
 
         try {
             $result = $this->helper->__invoke('partialLoop.phtml', array());
-        } catch (\Exception $e) {
-            $this->fail('Empty array should not cause partialLoop to throw exception');
-        }
-
-        try {
-            $result = $this->helper->__invoke('partialLoop.phtml', null, array());
         } catch (\Exception $e) {
             $this->fail('Empty array should not cause partialLoop to throw exception');
         }

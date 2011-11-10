@@ -115,6 +115,41 @@ class HelperBroker extends PluginSpecBroker implements \IteratorAggregate
 
         return $this;
     }
+    
+    /**
+     * Load and return a plugin instance
+     *
+     * If the plugin was previously loaded, returns that instance.
+     *
+     * If no options were passed, and we have no specification, load normally.
+     *
+     * If no options were passed, and we have a specification, use the
+     * specification to load an instance.
+     *
+     * Otherwise, simply try and load the plugin.
+     *
+     * @param  string $plugin
+     * @param  array|null $options
+     * @return object
+     * @throws Exception if plugin not found
+     */
+    public function load($plugin, array $options = null)
+    {
+        $pluginName = strtolower($plugin);
+        if (isset($this->plugins[$pluginName])) {
+            // If we've loaded it already, just return it
+            return $this->plugins[$pluginName];
+        }
+
+        $instance = parent::load($plugin, $options);
+
+        if (null !== $this->actionController) {
+            $instance->setActionController($this->actionController);
+            $instance->init();
+        }
+
+        return $instance;
+    }
 
     /**
      * Determine if we have a valid helper

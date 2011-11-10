@@ -41,6 +41,9 @@ abstract class CommonWordTest extends \PHPUnit_Framework_TestCase
      */
     protected $wordClass;
 
+    /**
+     * @group ZF2-91
+     */
     public function testLoadInvalidSessionClass()
     {
         try {

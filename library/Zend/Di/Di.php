@@ -167,7 +167,7 @@ class Di implements DependencyInjection
         
         $instantiator     = $definitions->getInstantiator($class);
         $injectionMethods = $definitions->getMethods($class);
-
+        
         if ($instantiator === '__construct') {
             $object = $this->createInstanceViaConstructor($class, $params, $alias);
             if (array_key_exists('__construct', $injectionMethods)) {
@@ -183,9 +183,9 @@ class Di implements DependencyInjection
                     isset($instantiator[1]) ? $instantiator[1] : 'NoMethodGiven'
                 );
             } else {
-                $msg = 'Invalid instantiator: ' . $instantiator;
+                $msg = 'Invalid instantiator';
             }
-            throw new \RuntimeException($msg);
+            throw new \RuntimeException($msg);  
         }
 
         if ($isShared) {

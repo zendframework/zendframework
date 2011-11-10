@@ -117,7 +117,7 @@ class ArrayOfTypeSequence extends DefaultComplexType
      */
     protected function _addSequenceType($arrayType, $childType, $phpArrayType)
     {
-        if (($soapType = $this->scanRegisteredTypes($phpArrayType)) !== null) {
+        if ($this->scanRegisteredTypes($phpArrayType) !== null) {
             return;
         }
 
@@ -135,8 +135,8 @@ class ArrayOfTypeSequence extends DefaultComplexType
         $sequence = $dom->createElement('xsd:sequence');
 
         $element = $dom->createElement('xsd:element');
-        $element->setAttribute('name',      'item');
-        $element->setAttribute('type',      $childType);
+        $element->setAttribute('name', 'item');
+        $element->setAttribute('type', $childType);
         $element->setAttribute('minOccurs', 0);
         $element->setAttribute('maxOccurs', 'unbounded');
         $sequence->appendChild($element);

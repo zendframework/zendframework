@@ -68,9 +68,19 @@ class Request extends HttpRequest
         }
 
         if ($this->headers()->get('host')) {
-            $uri->setHost($this->headers()->get('host')->getFieldValue());
+            //TODO handle IPv6 with port
+            if (preg_match('|^([^:]+):([^:]+)$|', $this->headers()->get('host')->getFieldValue(), $match)) {
+                $uri->setHost($match[1]);
+                $uri->setPort($match[2]);
+            }
+            else {
+                $uri->setHost($this->headers()->get('host')->getFieldValue());
+            }
         } elseif (isset($this->serverParams['SERVER_NAME'])) {
             $uri->setHost($this->serverParams['SERVER_NAME']);
+            if (isset($this->serverParams['SERVER_PORT'])) {
+                $uri->setPort($this->serverParams['SERVER_PORT']);
+            }
         }
 
         $this->setUri($uri);

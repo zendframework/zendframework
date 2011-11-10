@@ -29,9 +29,6 @@ use Zend\View\Exception;
 /**
  * Helper for rendering a template fragment in its own variable scope.
  *
- * @uses       \Zend\Controller\Front
- * @uses       \Zend\View\Helper\AbstractHelper
- * @uses       \Zend\View\Helper\Partial\Exception
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -60,15 +57,11 @@ class Partial extends AbstractHelper
      * get_object_vars() is passed.
      *
      * @param  string $name Name of view script
-     * @param  string|array $module If $model is empty, and $module is an array,
-     *                              these are the variables to populate in the
-     *                              view. Otherwise, the module in which the
-     *                              partial resides
      * @param  array $model Variables to populate in the view
-     * @return string|\Zend\View\Helper\Partial\Partial
+     * @return string|Partial
      * @throws Exception\RuntimeException
      */
-    public function __invoke($name = null, $module = null, $model = null)
+    public function __invoke($name = null, $model = null)
     {
         if (0 == func_num_args()) {
             return $this;
@@ -77,18 +70,6 @@ class Partial extends AbstractHelper
         $view = $this->cloneView();
         if (isset($this->partialCounter)) {
             $view->partialCounter = $this->partialCounter;
-        }
-        if ((null !== $module) && is_string($module)) {
-            $moduleDir = \Zend\Controller\Front::getInstance()->getControllerDirectory($module);
-            if (null === $moduleDir) {
-                throw new Exception\RuntimeException('Cannot render partial; module does not exist');
-            }
-            $viewsDir = dirname($moduleDir) . '/views';
-            $view->resolver()->addPath($viewsDir . '/scripts');
-        } elseif ((null == $model) && (null !== $module)
-            && (is_array($module) || is_object($module)))
-        {
-            $model = $module;
         }
 
         if (!empty($model)) {
@@ -124,7 +105,7 @@ class Partial extends AbstractHelper
      * Set object key
      *
      * @param  string $key
-     * @return \Zend\View\Helper\Partial\Partial
+     * @return Partial
      */
     public function setObjectKey($key)
     {

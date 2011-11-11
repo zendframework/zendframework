@@ -73,39 +73,8 @@ class Request extends HttpRequest
     public function getRequestUri()
     {
         if ($this->requestUri === null) {
-            if (($httpXRewriteUrl = $this->server()->get('HTTP_X_REWRITE_URL')) !== null) {
-                 // Check this first so IIS will catch.
-                $requestUri = $httpXRewriteUrl;
-            } elseif (
-                $this->server()->get('IIS_WasUrlRewritten') !== null
-                && $this->server()->get('IIS_WasUrlRewritten') == '1'
-                && ($unencodedUrl = $this->server()->get('UNENCODED_URL', '')) !== ''
-            ) {
-                // IIS7 with URL Rewrite: make sure we get the unencoded url
-                // (double slash problem).
-                $requestUri = $unencodedUrl;
-            } elseif (($requestUri = $this->server()->get('REQUEST_URI')) !== null) {
-                // HTTP proxy requests setup request URI with scheme and host
-                // [and port] + the URL path, only use URL path.
-                $schemeAndHttpHost = $this->uri()->getScheme() . '://' . $this->uri()->getHost();
-                
-                if (strpos($requestUri, $schemeAndHttpHost) === 0) {
-                    $requestUri = substr($requestUri, strlen($schemeAndHttpHost));
-                }
-            } elseif (($origPathInfo = $this->server()->get('ORIG_PATH_INFO')) !== null) {
-                 // IIS 5.0, PHP as CGI.
-                $requestUri = $origPathInfo;
-                
-                if (($queryString = $this->server()->get('QUERY_STRING', '')) !== '') {
-                    $requestUri .= '?' . $queryString;
-                }
-            } else {
-                $requestUri = '/';
-            }
-            
-            $this->requestUri = $requestUri;
+            $this->requestUri = $this->detectRequestUri();
         }
-
         return $this->requestUri;
     }
     
@@ -129,72 +98,8 @@ class Request extends HttpRequest
     public function getBaseUrl()
     {
         if ($this->baseUrl === null) {
-            $filename       = $this->server()->get('SCRIPT_FILENAME', '');
-            $scriptName     = $this->server()->get('SCRIPT_NAME');
-            $phpSelf        = $this->server()->get('PHP_SELF');
-            $origScriptName = $this->server()->get('ORIG_SCRIPT_NAME');
-
-            if ($scriptName !== null && basename($scriptName) === $filename) {
-                $baseUrl = $scriptName;
-            } elseif ($phpSelf !== null && basename($phpSelf) === $filename) {
-                $baseUrl = $phpSelf;
-            } elseif ($origScriptName !== null && basename($origScriptName) === $filename) {
-                // 1and1 shared hosting compatibility.
-                $baseUrl = $origScriptName;
-            } else {
-                // Backtrack up the SCRIPT_FILENAME to find the portion
-                // matching PHP_SELF.
-                $path     = $phpSelf ?: '';
-                $segments = array_reverse(explode('/', trim($filename, '/')));
-                $index    = 0;
-                $last     = count($segments);
-                $baseUrl  = '';
-
-                do {
-                    $segment  = $segments[$index];
-                    $baseUrl = '/' . $segment . $baseUrl;
-                    $index++;
-                } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);
-            }
-
-            // Does the base URL have anything in common with the request URI?
-            $requestUri = $this->getRequestUri();
-
-            if (0 === strpos($requestUri, $baseUrl)) {
-                // Full base URL matches.
-                return ($this->baseUrl = $baseUrl);
-            }
-
-            if (0 === strpos($requestUri, dirname($baseUrl))) {
-                // Directory portion of base path matches.
-                return ($this->baseUrl = rtrim(dirname($baseUrl), '/'));
-            }
-
-            $truncatedRequestUri = $requestUri;
-
-            if (false !== ($pos = strpos($requestUri, '?'))) {
-                $truncatedRequestUri = substr($requestUri, 0, $pos);
-            }
-
-            $basename = basename($baseUrl);
-
-            if (empty($basename) || false === strpos($truncatedRequestUri, $basename)) {
-                // No match whatsoever; set it blank.
-                return ($this->baseUrl = '');
-            }
-
-            // If using mod_rewrite or ISAPI_Rewrite strip the script filename
-            // out of the base path. $pos !== 0 makes sure it is not matching a
-            // value from PATH_INFO or QUERY_STRING.
-            if (strlen($requestUri) >= strlen($baseUrl)
-                && (false !== ($pos = strpos($requestUri, $baseUrl)) && $pos !== 0))
-            {
-                $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));
-            }
-
-            return ($this->baseUrl = rtrim($baseUrl, '/'));
+            $this->baseUrl = rtrim($this->detectBaseUrl(), '/');
         }
-        
         return $this->baseUrl;
     }
     
@@ -218,18 +123,7 @@ class Request extends HttpRequest
     public function getBasePath()
     {
         if ($this->basePath === null) {
-            $filename = basename($this->server()->get('SCRIPT_FILENAME', ''));
-            $baseUrl  = $this->getBaseUrl();
-
-            if ($baseUrl === '') {
-                $basePath = '';
-            } elseif (basename($baseUrl) === $filename) {
-                $basePath = dirname($baseUrl);
-            } else {
-                $basePath = $baseUrl;
-            }
-            
-            $this->basePath = rtrim($basePath, '/');
+            $this->basePath = rtrim($this->detectBasePath(), '/');
         }
         
         return $this->basePath;
@@ -309,5 +203,164 @@ class Request extends HttpRequest
         }
 
         return $headers;
+    }
+
+    /**
+     * Detect the base URI for the request
+     *
+     * Looks at a variety of criteria in order to attempt to autodetect a base
+     * URI, including rewrite URIs, proxy URIs, etc.
+     * 
+     * @return string
+     */
+    public function detectRequestUri()
+    {
+        $requestUri = null;
+
+        // Check this first so IIS will catch.
+        $httpXRewriteUrl = $this->server()->get('HTTP_X_REWRITE_URL');
+        if ($httpXRewriteUrl !== null) {
+            $requestUri = $httpXRewriteUrl;
+        }
+       
+        // IIS7 with URL Rewrite: make sure we get the unencoded url
+        // (double slash problem).
+        $iisUrlRewritten = $this->server()->get('IIS_WasUrlRewritten');
+        $unencodedUrl    = $this->server()->get('UNENCODED_URL', '');
+        if ('1' == $iisUrlRewritten && '' !== $unencodedUrl) {
+            return $unencodedUrl;
+        } 
+        
+        // HTTP proxy requests setup request URI with scheme and host
+        // [and port] + the URL path, only use URL path.
+        if (!$httpXRewriteUrl) {
+            $requestUri = $this->server()->get('REQUEST_URI');
+        }
+        if ($requestUri !== null) {
+            $schemeAndHttpHost = $this->uri()->getScheme() . '://' . $this->uri()->getHost();
+            
+            if (strpos($requestUri, $schemeAndHttpHost) === 0) {
+                $requestUri = substr($requestUri, strlen($schemeAndHttpHost));
+            }
+            return $requestUri;
+        } 
+        
+        // IIS 5.0, PHP as CGI.
+        $origPathInfo = $this->server()->get('ORIG_PATH_INFO');
+        if ($origPathInfo !== null) {
+            $queryString = $this->server()->get('QUERY_STRING', '');
+            if ($queryString !== '') {
+                $origPathInfo .= '?' . $queryString;
+            }
+            return $origPathInfo;
+        }
+
+        return '/';
+    }
+
+    /**
+     * Auto-detect the base path from the request environment
+     *
+     * Uses a variety of criteria in order to detect the base URL of the request
+     * (i.e., anything additional to the document root).
+     *
+     * The base URL includes the schema, host, and port, in addition to the path.
+     * 
+     * @return string
+     */
+    public function detectBaseUrl()
+    {
+        $baseUrl        = '';
+        $filename       = $this->server()->get('SCRIPT_FILENAME', '');
+        $scriptName     = $this->server()->get('SCRIPT_NAME');
+        $phpSelf        = $this->server()->get('PHP_SELF');
+        $origScriptName = $this->server()->get('ORIG_SCRIPT_NAME');
+
+        if ($scriptName !== null && basename($scriptName) === $filename) {
+            $baseUrl = $scriptName;
+        } elseif ($phpSelf !== null && basename($phpSelf) === $filename) {
+            $baseUrl = $phpSelf;
+        } elseif ($origScriptName !== null && basename($origScriptName) === $filename) {
+            // 1and1 shared hosting compatibility.
+            $baseUrl = $origScriptName;
+        } else {
+            // Backtrack up the SCRIPT_FILENAME to find the portion
+            // matching PHP_SELF.
+            $path     = $phpSelf ?: '';
+            $segments = array_reverse(explode('/', trim($filename, '/')));
+            $index    = 0;
+            $last     = count($segments);
+            $baseUrl  = '';
+
+            do {
+                $segment  = $segments[$index];
+                $baseUrl = '/' . $segment . $baseUrl;
+                $index++;
+            } while ($last > $index && false !== ($pos = strpos($path, $baseUrl)) && 0 !== $pos);
+        }
+
+        // Does the base URL have anything in common with the request URI?
+        $requestUri = $this->getRequestUri();
+
+        // Full base URL matches.
+        if (0 === strpos($requestUri, $baseUrl)) {
+            return $baseUrl;
+        }
+
+        // Directory portion of base path matches.
+        if (0 === strpos($requestUri, dirname($baseUrl))) {
+            $baseUrl = dirname($baseUrl);
+            return $baseUrl;
+        }
+
+        $truncatedRequestUri = $requestUri;
+
+        if (false !== ($pos = strpos($requestUri, '?'))) {
+            $truncatedRequestUri = substr($requestUri, 0, $pos);
+        }
+
+        $basename = basename($baseUrl);
+
+        // No match whatsoever
+        if (empty($basename) || false === strpos($truncatedRequestUri, $basename)) {
+            return '';
+        }
+
+        // If using mod_rewrite or ISAPI_Rewrite strip the script filename
+        // out of the base path. $pos !== 0 makes sure it is not matching a
+        // value from PATH_INFO or QUERY_STRING.
+        if (strlen($requestUri) >= strlen($baseUrl)
+            && (false !== ($pos = strpos($requestUri, $baseUrl)) && $pos !== 0)
+        ) {
+            $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));
+        }
+
+        return $baseUrl;
+    }
+
+    /**
+     * Autodetect the base path of the request
+     *
+     * Uses several crtieria to determine the base path of the request.
+     * 
+     * @return string
+     */
+    public function detectBasePath()
+    {
+        $filename = basename($this->server()->get('SCRIPT_FILENAME', ''));
+        $baseUrl  = $this->getBaseUrl();
+
+        // Empty base url detected
+        if ($baseUrl === '') {
+            return '';
+        } 
+        
+        // basename() matches the script filename; return the directory
+        if (basename($baseUrl) === $filename) {
+            return dirname($baseUrl);
+        }
+
+        // Base path is identical to base URL
+        return $baseUrl;
     }
 }

@@ -215,9 +215,7 @@ class Manager
     public function setMergedConfig(array $config)
     {
         $this->mergedConfig = $config;
-        if ($this->mergedConfigObject !== null) {
-            $this->mergedConfigObject = new Config($this->mergedConfig);
-        }
+        $this->mergedConfigObject = null; // will generate Config instance on-demand if required
         return $this;
     }
 

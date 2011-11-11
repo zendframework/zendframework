@@ -426,8 +426,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $result2 = $this->_adapter->authenticate();
         $this->assertFalse(in_array('More than one record matches the supplied identity.',
             $result->getMessages()));
-        $this->assertTrue($result->isValid());
-        $this->assertEquals('my_username', $result->getIdentity());
+        $this->assertTrue($result2->isValid());
+        $this->assertEquals('my_username', $result2->getIdentity());
     }
 
 

@@ -1,0 +1,4 @@
+resources:
+    #frontcontroller!
+    frontController:
+        controllerDirectory: APPLICATION_PATH/controllers

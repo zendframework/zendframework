@@ -46,6 +46,11 @@ class YamlTest extends \PHPUnit_Framework_TestCase
         $this->_badIndentationConfig      = __DIR__ . '/_files/badindentation.yaml';
         $this->_booleansConfig            = __DIR__ . '/_files/booleans.yaml';
         $this->_constantsConfig           = __DIR__ . '/_files/constants.yaml';
+        $this->_yamlInlineCommentsConfig  = dirname(__FILE__) . '/_files/inlinecomments.yaml';
+        $this->_yamlIndentedCommentsConfig  = dirname(__FILE__) . '/_files/indentedcomments.yaml';
+        $this->_yamlListConstantsConfig     = dirname(__FILE__) . '/_files/listconstants.yaml';
+        $this->_listBooleansConfig          = dirname(__FILE__) . '/_files/listbooleans.yaml';
+        
     }
 
     public function testLoadSingleSection()
@@ -337,4 +342,79 @@ class YamlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ZEND_CONFIG_YAML_ENV', $config->env);
         $this->assertEquals('ZEND_CONFIG_YAML_ENV_PATH/test/this', $config->path);
     }
+
+    /**
+     * @group ZF-11329
+     */
+    public function testAllowsInlineCommentsInValuesUsingHash()
+    {
+        $config = new YamlConfig($this->_yamlInlineCommentsConfig, null);
+        $this->assertSame(
+            'APPLICATION_PATH/controllers',
+            $config->resources->frontController->controllerDirectory
+        );
+    }
+    
+    /**
+     * @group ZF-11384
+     */
+    public function testAllowsIndentedCommentsUsingHash()
+    {
+        $config = new YamlConfig($this->_yamlIndentedCommentsConfig, null);
+        $this->assertSame(
+            'APPLICATION_PATH/controllers',
+            $config->resources->frontController->controllerDirectory
+        );
+    }
+    
+    /**
+     * @group ZF-11702
+     */
+    public function testAllowsConstantsInLists()
+    {
+        if (!defined('ZEND_CONFIG_YAML_TEST_PATH')) {
+            define('ZEND_CONFIG_YAML_TEST_PATH', 'testing');
+        }        
+        $config = new YamlConfig($this->_yamlListConstantsConfig, 'production');
+
+        $this->assertEquals(ZEND_CONFIG_YAML_TEST_PATH, $config->paths->{0});
+        $this->assertEquals(ZEND_CONFIG_YAML_TEST_PATH . '/library/test', $config->paths->{1});
+    }
+    
+    /**
+     * @group ZF-11702
+     */
+    public function testAllowsBooleansInLists()
+    {
+        $config = new YamlConfig($this->_listBooleansConfig, 'production');
+
+        $this->assertTrue($config->usingLowerCasedYes->{0});
+        $this->assertTrue($config->usingTitleCasedYes->{0});
+        $this->assertTrue($config->usingCapitalYes->{0});
+        $this->assertTrue($config->usingLowerY->{0});
+        $this->assertTrue($config->usingUpperY->{0});
+
+        $this->assertFalse($config->usingLowerCasedNo->{0});
+        $this->assertFalse($config->usingTitleCasedNo->{0});
+        $this->assertFalse($config->usingCapitalNo->{0});
+        $this->assertFalse($config->usingLowerN->{0});
+        $this->assertFalse($config->usingUpperN->{0});
+
+        $this->assertTrue($config->usingLowerCasedTrue->{0});
+        $this->assertTrue($config->usingTitleCasedTrue->{0});
+        $this->assertTrue($config->usingCapitalTrue->{0});
+
+        $this->assertFalse($config->usingLowerCasedFalse->{0});
+        $this->assertFalse($config->usingTitleCasedFalse->{0});
+        $this->assertFalse($config->usingCapitalFalse->{0});
+
+        $this->assertTrue($config->usingLowerCasedOn->{0});
+        $this->assertTrue($config->usingTitleCasedOn->{0});
+        $this->assertTrue($config->usingCapitalOn->{0});
+
+        $this->assertFalse($config->usingLowerCasedOff->{0});
+        $this->assertFalse($config->usingTitleCasedOff->{0});
+        $this->assertFalse($config->usingCapitalOff->{0});
+    }
+        
 }

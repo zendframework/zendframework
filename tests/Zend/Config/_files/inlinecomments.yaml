@@ -1,0 +1,3 @@
+resources:
+    frontController:
+        controllerDirectory: APPLICATION_PATH/controllers #heynow!

@@ -44,21 +44,21 @@ class ReCaptcha extends AbstractService
      *
      * @var string
      */
-    const API_SERVER = 'http://api.recaptcha.net';
+    const API_SERVER = 'http://www.google.com/recaptcha/api';
 
     /**
      * URI to the secure API
      *
      * @var string
      */
-    const API_SECURE_SERVER = 'https://api-secure.recaptcha.net';
+    const API_SECURE_SERVER = 'https://www.google.com/recaptcha/api';
 
     /**
      * URI to the verify server
      *
      * @var string
      */
-    const VERIFY_SERVER = 'http://api-verify.recaptcha.net/verify';
+    const VERIFY_SERVER = 'http://www.google.com/recaptcha/api/verify';
 
     /**
      * Public key used when displaying the captcha

@@ -64,7 +64,7 @@ class Alnum extends AbstractFilter
      * @param  boolean $allowWhiteSpace
      * @return void
      */
-    public function __construct($options = null)
+    public function __construct($options = false)
     {
         if ($options instanceof Config) {
             $options = $options->toArray();
@@ -72,7 +72,7 @@ class Alnum extends AbstractFilter
             $options = func_get_args();
             $temp    = array();
             if (!empty($options)) {
-                $temp['allowwhitespace'] = array_shift($options);
+                $temp['allowWhiteSpace'] = array_shift($options);
             }
 
             if (!empty($options)) {
@@ -86,8 +86,8 @@ class Alnum extends AbstractFilter
             self::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
 
-        if (array_key_exists('allowwhitespace', $options)) {
-            $this->setAllowWhiteSpace($options['allowwhitespace']);
+        if (array_key_exists('allowWhiteSpace', $options)) {
+            $this->setAllowWhiteSpace($options['allowWhiteSpace']);
         }
 
         if (!array_key_exists('locale', $options)) {
@@ -156,14 +156,14 @@ class Alnum extends AbstractFilter
         if (!self::$unicodeEnabled) {
             // POSIX named classes are not supported, use alternative a-zA-Z0-9 match
             $pattern = '/[^a-zA-Z0-9' . $whiteSpace . ']/';
-        } elseif (((string) $this->locale == 'ja') 
-                  || ((string) $this->locale == 'ko') 
+        } elseif (((string) $this->locale == 'ja')
+                  || ((string) $this->locale == 'ko')
                   || ((string) $this->locale == 'zh')
         ) {
-            // The Alphabet means english alphabet.
+            // Use english alphabeth
             $pattern = '/[^a-zA-Z0-9'  . $whiteSpace . ']/u';
         } else {
-            // The Alphabet means each language's alphabet.
+            // Use native language alphabeth
             $pattern = '/[^\p{L}\p{N}' . $whiteSpace . ']/u';
         }
 

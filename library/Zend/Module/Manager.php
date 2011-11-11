@@ -220,9 +220,10 @@ class Manager
      * @param array $config 
      * @return Manager
      */
-    protected function setMergedConfig($config)
+    public function setMergedConfig(array $config)
     {
         $this->mergedConfig = $config;
+        $this->mergedConfigObject = null; // will generate Config instance on-demand if required
         return $this;
     }
 

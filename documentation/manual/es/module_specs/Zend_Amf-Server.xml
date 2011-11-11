@@ -446,9 +446,9 @@ private function getContactHandler(event:ResultEvent):void {
         
 
         <para>
-            <classname>Zend_Amf</classname> provides tools for mapping resource
-            types returned by service classes into data consumable by
-            ActionScript. </para>
+ <classname>Zend_Amf</classname>  proporciona herramientas para el mapeo de los tipos 
+        de recursos  devueltos por las clases de servicio en los datos 
+        de consumo de ActionScript.</para>
 
         <para> In order to handle specific resource type, the user needs to
             create a plugin class named after the resource name, with words

@@ -22,7 +22,7 @@
 namespace ZendTest\Filter;
 
 use Zend\Filter\Alnum as AlnumFilter,
-    Zend\Locale\Locale,
+    Zend\Locale\Locale as ZendLocale,
     Zend\Registry;
 
 /**
@@ -75,7 +75,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
             self::$_unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
         }
         if (null === self::$_meansEnglishAlphabet) {
-            $this->_locale = new Locale('auto');
+            $this->_locale = new ZendLocale('auto');
             self::$_meansEnglishAlphabet = in_array($this->_locale->getLanguage(),
                                                     array('ja')
                                                     );
@@ -189,7 +189,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegistryLocale()
     {
-        $locale = new Locale('ja');
+        $locale = new ZendLocale('ja');
         \Zend\Registry::set('Zend_Locale', $locale);
 
         if (!self::$_unicodeEnabled) {

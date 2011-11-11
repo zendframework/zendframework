@@ -5,7 +5,6 @@ set_time_limit(0);
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
 use Zend\Version;
-use Zend\Http\Client as HttpClient;
 use Zend\Service\LiveDocx\MailMerge;
 use Zend\Service\LiveDocx\Helper;
 
@@ -18,16 +17,6 @@ define('MIN_PHP_VERSION',   '5.3');
 define('MIN_ZF_VERSION',    '2.0.0dev1');
 
 define('GEOIP_SERVICE_URI', 'http://api.ipinfodb.com/v2/ip_query.php?key=332bde528d94fe578455e18ad225a01cba8dd359ee915ee46b70ca5e67137252');
-
-// -----------------------------------------------------------------------------
-
-$httpClientOptions = array(
-    'maxredirects' => 3,
-         'timeout' => 5,  // seconds
-       'keepalive' => false
-);
-
-$httpClient = new HttpClient(null, $httpClientOptions);
 
 // -----------------------------------------------------------------------------
 
@@ -194,20 +183,16 @@ unset($version);
 
 // -----------------------------------------------------------------------------
 
-$httpClient->setUri(GEOIP_SERVICE_URI);
+$results = @file_get_contents(GEOIP_SERVICE_URI);
 
-$httpResponse = $httpClient->request();
-
-if ($httpResponse->isSuccessful()) {
-
+if (false != $results) {
     $keys = array(
                  'Ip' => 'IP address',
                'City' => 'city',
          'RegionName' => 'region',
         'CountryName' => 'country'
     );
-
-    $simplexml = new SimpleXMLElement($httpResponse->getBody());
+    $simplexml = new SimpleXMLElement($results);
     foreach ($keys as $key => $value) {
         Helper::printLineToc($counter, sprintf('Checking your %s (%s)', $keys[$key], $simplexml->$key), TEST_PASS);
         $counter++;
@@ -221,9 +206,9 @@ if ($httpResponse->isSuccessful()) {
 
 $microtime = microtime(true);
 
-$httpClient->setUri(MailMerge::WSDL);
+$results = @file_get_contents(MailMerge::WSDL);
 
-if ($httpClient->request()->isSuccessful()) {
+if (false != $results) {
     $duration = microtime(true) - $microtime;
     $result   = TEST_PASS;
 } else {
@@ -286,9 +271,9 @@ if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL') &&
 
     $microtime = microtime(true);
 
-    $httpClient->setUri(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
+    $results = @file_get_contents(DEMOS_ZEND_SERVICE_LIVEDOCX_PREMIUM_WSDL);
 
-    if ($httpClient->request()->isSuccessful()) {
+    if (false != $results) {
         $duration = microtime(true) - $microtime;
         $result   = TEST_PASS;
     } else {

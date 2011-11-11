@@ -93,6 +93,18 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $container->getName());
     }
 
+    public function testUsingOldZF1NameIsStillValid()
+    {
+        $container = new Container('Zend_Foo', $this->manager);
+        $this->assertEquals('Zend_Foo', $container->getName());
+    }
+    
+    public function testUsingNewZF2NamespaceIsValid()
+    {
+        $container = new Container('Zend\Foo', $this->manager);
+        $this->assertEquals('Zend\Foo', $container->getName());
+    }
+    
     public function testPassingInvalidNameToConstructorRaisesException()
     {
         $tries = array(
@@ -101,6 +113,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             '_foo',
             '__foo',
             '0foo',
+            '\foo',
+            '\\foo'
         );
         foreach ($tries as $try) {
             try {

@@ -30,7 +30,7 @@ class ManagerOptions
     /**
      * @var bool
      */
-    protected $enableDependencycheck = false;
+    protected $enableDependencyCheck = false;
 
     /**
      * @var bool
@@ -163,7 +163,7 @@ class ManagerOptions
      */
     public function getEnableDependencyCheck()
     {
-        return $this->enableDependencycheck;
+        return $this->enableDependencyCheck;
     }
 
     /**
@@ -174,7 +174,7 @@ class ManagerOptions
      */
     public function setEnableDependencyCheck($enabled)
     {
-        $this->enableDependencycheck = (bool) $enabled;
+        $this->enableDependencyCheck = (bool) $enabled;
         return $this;
     }
     

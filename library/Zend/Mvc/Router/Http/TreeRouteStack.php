@@ -46,7 +46,7 @@ class TreeRouteStack extends SimpleRouteStack
      *
      * @var string
      */
-    protected $baseUrl = '';
+    protected $baseUrl;
 
     /**
      * Request URI.
@@ -136,9 +136,13 @@ class TreeRouteStack extends SimpleRouteStack
             return null;
         }
 
+        if ($this->baseUrl !== null && method_exists($request, 'getBaseUrl')) {
+            $this->setBaseUrl($request->getBaseUrl);
+        }
+        
         $uri           = $request->uri();
         $baseUrlLength = strlen($this->baseUrl) ?: null;
-
+       
         if ($this->requestUri === null) {
             $this->setRequestUri($uri);
         }
@@ -146,7 +150,7 @@ class TreeRouteStack extends SimpleRouteStack
         if ($baseUrlLength !== null) {
             $pathLength = strlen($uri->getPath()) - $baseUrlLength;
 
-            foreach ($this->routes as $route) {
+            foreach ($this->routes as $name => $route) {
                 if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
                     $match->setMatchedRouteName($name);
                     

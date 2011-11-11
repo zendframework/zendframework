@@ -620,13 +620,20 @@ class Image extends Word
     /**
      * Display the captcha
      *
-     * @param Zend_View_Interface $view
+     * @param \Zend\View\Render $view
      * @param mixed $element
      * @return string
      */
     public function render(\Zend\View\Renderer $view = null, $element = null)
     {
+        $endTag = ' />';
+        if (($view instanceof \Zend\Loader\Pluggable) 
+            && $view->plugin('doctype')
+            && !$view->plugin('doctype')->isXhtml()) {
+            $endTag = '>';
+        }
+
         return '<img width="' . $this->getWidth() . '" height="' . $this->getHeight() . '" alt="' . $this->getImgAlt()
-             . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '" />';
+             . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '"' . $endTag;
     }
 }

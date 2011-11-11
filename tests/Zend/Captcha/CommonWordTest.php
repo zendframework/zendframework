@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Captcha
- * @subpackage Adapter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,33 +22,37 @@
 /**
  * @namespace
  */
-namespace Zend\Captcha;
+namespace ZendTest\Captcha;
 
 /**
- * Example dumb word-based captcha
- *
- * Note that only rendering is necessary for word-based captcha
- *
- * @uses       Zend\Captcha\Word
  * @category   Zend
  * @package    Zend_Captcha
- * @subpackage Adapter
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-*/
-class Dumb extends Word
+ * @group      Zend_Captcha
+ */
+abstract class CommonWordTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Render the captcha
+     * Word adapter class name
      *
-     * @param  \Zend\View\Renderer $view
-     * @param  mixed $element
-     * @return string
+     * @var string
      */
-    public function render(\Zend\View\Renderer $view = null, $element = null)
+    protected $wordClass;
+
+    /**
+     * @group ZF2-91
+     */
+    public function testLoadInvalidSessionClass()
     {
-        return 'Please type this word backwards: <b>'
-             . strrev($this->getWord())
-             . '</b>';
+        try {
+            $wordAdapter = new $this->wordClass;
+            $wordAdapter->setSessionClass('ZendTest\Captcha\InvalidClassName');
+            $wordAdapter->getSession();
+            $this->fail('Setting undefined class should fail');
+        } catch (\Zend\Captcha\Exception\InvalidArgumentException $e) {
+            $this->assertRegExp('/^Session class .* not found$/', $e->getMessage());
+        }
     }
 }

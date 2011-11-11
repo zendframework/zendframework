@@ -257,12 +257,27 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Render captcha
      *
-     * @param  Zend_View_Interface $view
+     * @param  Zend\View\Renderer $view
      * @param  mixed $element
      * @return string
      */
     public function render(\Zend\View\Renderer $view = null, $element = null)
     {
-        return $this->getService()->getHTML();
+        $name = null;
+        if ($element instanceof \Zend\Form\Element) {
+            $name = $element->getBelongsTo();
+        }
+
+        return $this->getService()->getHTML($name);
+    }
+
+    /**
+     * Get captcha decorator
+     *
+     * @return string
+     */
+    public function getDecorator()
+    {
+        return "Captcha\ReCaptcha";
     }
 }

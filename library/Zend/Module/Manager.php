@@ -28,9 +28,16 @@ class Manager
     /**
      * True if modules have already been loaded
      *
-     * @var boolean
+     * @var bool
      */
     protected $modulesLoaded = false;
+
+    /**
+     * If true, will not register the default config/init listeners 
+     * 
+     * @var bool
+     */
+    protected $disableLoadDefaultListeners = false;
 
     /**
      * __construct 
@@ -152,7 +159,44 @@ class Manager
     {
         if (!$this->events instanceof EventCollection) {
             $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
+            $this->setDefaultListeners();
         }
         return $this->events;
+    }
+
+    public function setDisableLoadDefaultListeners($flag)
+    {
+        $this->disableLoadDefaultListeners = (bool) $flag;
+        return $this;
+    }
+
+    public function loadDefaultListenersIsDisabled()
+    {
+        return $this->disableLoadDefaultListeners;
+    }
+
+    protected function setDefaultListeners()
+    {
+        if ($this->loadDefaultListenersIsDisabled()) {
+            return $this;
+        }
+        $init     = new Listener\InitTrigger;
+        $config   = new Listener\ConfigListener;
+        $autoload = new Listener\AutoloaderTrigger;
+        $this->events()->attach('loadModule', $init, 1000);
+        $this->events()->attach('loadModule', $config, 1000);
+        $this->events()->attach('loadModule', $autoload, 1000);
+    }
+
+    public function getMergedConfig($returnConfigAsObject = true)
+    {
+        $listeners = $this->events()->getListeners('loadModule');
+        foreach ($listeners as $listener) {
+            $listener = $listener->getCallback();
+            if ($listener instanceof Listener\ConfigListener) {
+                return $listener->getMergedConfig($returnConfigAsObject);
+            }
+        }
+        return false;
     }
 }

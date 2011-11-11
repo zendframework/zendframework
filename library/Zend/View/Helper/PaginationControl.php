@@ -109,7 +109,7 @@ class PaginationControl extends AbstractHelper
 
             if ($partial[1] !== null) {
                 $partialHelper = $this->view->plugin('partial');
-                return $partialHelper($partial[0], $partial[1], $pages);
+                return $partialHelper($partial[0], $pages);
             }
 
             $partial = $partial[0];

@@ -164,17 +164,54 @@ class Manager
         return $this->events;
     }
 
+    /**
+     * Returns the merged config after modules have been loaded. This requires a 
+     * Listener\ConfigListener to be registered.
+     *
+     * Before modules are loaded, or if no Listener\ConfigListeners, this will return false.
+     * 
+     * @param bool $returnConfigAsObject Set to false to return as plain array
+     * @return mixed
+     */
+    public function getMergedConfig($returnConfigAsObject = true)
+    {
+        $listeners = $this->events()->getListeners('loadModule');
+        foreach ($listeners as $listener) {
+            $listener = $listener->getCallback();
+            if ($listener instanceof Listener\ConfigListener) {
+                return $listener->getMergedConfig($returnConfigAsObject);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Set if the default listeners should be registered or not
+     * 
+     * @param bool $flag 
+     * @return Manager
+     */
     public function setDisableLoadDefaultListeners($flag)
     {
         $this->disableLoadDefaultListeners = (bool) $flag;
         return $this;
     }
 
+    /**
+     * Return if the default listeners are disabled or not
+     * 
+     * @return bool
+     */
     public function loadDefaultListenersIsDisabled()
     {
         return $this->disableLoadDefaultListeners;
     }
 
+    /**
+     * Internal method for attaching the default listeners
+     * 
+     * @return Manager
+     */
     protected function setDefaultListeners()
     {
         if ($this->loadDefaultListenersIsDisabled()) {
@@ -186,17 +223,6 @@ class Manager
         $this->events()->attach('loadModule', $init, 1000);
         $this->events()->attach('loadModule', $config, 1000);
         $this->events()->attach('loadModule', $autoload, 1000);
-    }
-
-    public function getMergedConfig($returnConfigAsObject = true)
-    {
-        $listeners = $this->events()->getListeners('loadModule');
-        foreach ($listeners as $listener) {
-            $listener = $listener->getCallback();
-            if ($listener instanceof Listener\ConfigListener) {
-                return $listener->getMergedConfig($returnConfigAsObject);
-            }
-        }
-        return false;
+        return $this;
     }
 }

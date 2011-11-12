@@ -3,7 +3,7 @@
 namespace Zend\Module\Listener;
 
 use Zend\Loader\AutoloaderFactory,
-    Consumer\AutoloaderProvider;
+    Zend\Module\Consumer\AutoloaderProvider;
 
 class AutoloaderTrigger extends AbstractListener
 {

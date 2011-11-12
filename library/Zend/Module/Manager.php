@@ -246,6 +246,9 @@ class Manager
      */
     public function getDefaultListenerOptions()
     {
+        if (null === $this->defaultListenerOptions) {
+            $this->defaultListenerOptions =  new ListenerOptions;
+        }
         return $this->defaultListenerOptions;
     }
  

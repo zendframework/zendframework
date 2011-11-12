@@ -66,6 +66,44 @@ class ListenerOptions extends Options
     }
 
     /**
+     * Get key used to create the cache file name
+     *
+     * @return string
+     */
+    public function getConfigCacheKey() 
+    {
+        if ($this->configCacheKey !== null) {
+            return $this->configCacheKey;
+        }
+        return $this->getApplicationEnv();
+    }
+
+    /**
+     * Set key used to create the cache file name
+     *
+     * @param string $configCacheKey the value to be set
+     * @return ManagerOptions
+     */
+    public function setConfigCacheKey($configCacheKey) 
+    {
+        $this->configCacheKey = $configCacheKey;
+        return $this;
+    }
+
+    /**
+     * Get the path to the config cache 
+     * 
+     * Should this be an option, or should the dir option include the 
+     * filename, or should it simply remain hard-coded? Thoughts?
+     *
+     * @return string
+     */
+    public function getConfigCacheFile()
+    {
+        return $this->getCacheDir() . '/module-config-cache.'.$this->getConfigCacheKey().'.php';
+    }
+
+    /**
      * Get the path where cache file(s) are stored
      *
      * @return string
@@ -88,31 +126,6 @@ class ListenerOptions extends Options
         } else {
             $this->cacheDir = static::normalizePath($cacheDir);
         }
-        return $this;
-    }
-
-    /**
-     * Get key used to create the cache file name
-     *
-     * @return string
-     */
-    public function getConfigCacheKey() 
-    {
-        if ($this->configCacheKey !== null) {
-            return $this->configCacheKey;
-        }
-        return $this->getApplicationEnv();
-    }
-
-    /**
-     * Set key used to create the cache file name
-     *
-     * @param string $configCacheKey the value to be set
-     * @return ManagerOptions
-     */
-    public function setConfigCacheKey($configCacheKey) 
-    {
-        $this->configCacheKey = $configCacheKey;
         return $this;
     }
 
@@ -140,19 +153,6 @@ class ListenerOptions extends Options
             $this->manifestDir = static::normalizePath($manifestDir);
         }
         return $this;
-    }
-
-    /**
-     * Get the path to the config cache 
-     * 
-     * Should this be an option, or should the dir option include the 
-     * filename, or should it simply remain hard-coded? Thoughts?
-     *
-     * @return string
-     */
-    public function getCacheFilePath()
-    {
-        return $this->getCacheDir() . '/module-config-cache.'.$this->getConfigCacheKey().'.php';
     }
 
     /**

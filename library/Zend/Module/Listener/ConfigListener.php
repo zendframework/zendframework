@@ -25,14 +25,23 @@ class ConfigListener extends AbstractListener
      */
     protected $skipConfig = false;
     
+    public function init()
+    {
+        if ($this->hasCachedConfig()) {
+            $this->skipConfig = true;
+            $this->setMergedConfig($this->getCachedConfig());
+        }
+    }
+
     public function __invoke($e)
     {
+        if (true === $this->skipConfig) {
+            return;
+        }
         $module = $e->getParam('module');
-        $this->mergeModuleConfig($module);
-        //if ($this->hasCachedConfig()) {
-        //    $this->skipConfig = true;
-        //    $this->setMergedConfig($this->getCachedConfig());
-        //}
+        if (is_callable(array($module, 'getConfig'))) {
+            $this->mergeModuleConfig($module);
+        }
     }
 
     /**
@@ -59,9 +68,10 @@ class ConfigListener extends AbstractListener
      * @param array $config 
      * @return Manager
      */
-    protected function setMergedConfig($config)
+    public function setMergedConfig($config)
     {
         $this->mergedConfig = $config;
+        $this->mergedConfigObject = null;
         return $this;
     }
 
@@ -94,8 +104,8 @@ class ConfigListener extends AbstractListener
     
     protected function hasCachedConfig()
     {
-        if (($this->getOptions()->getEnableConfigCache())
-            && (file_exists($this->getOptions()->getCacheFilePath()))
+        if (($this->getOptions()->getConfigCacheEnabled())
+            && (file_exists($this->getOptions()->getConfigCacheFile()))
         ) {
             return true;
         }
@@ -104,15 +114,16 @@ class ConfigListener extends AbstractListener
 
     protected function getCachedConfig()
     {
-        return include $this->getOptions()->getCacheFilePath();
+        return include $this->getOptions()->getConfigCacheFile();
     }
 
     protected function updateCache()
     {
-        if (($this->getOptions()->getEnableConfigCache())
+        if (($this->getOptions()->getConfigCacheEnabled())
             && (false === $this->skipConfig)
         ) {
-            $this->saveConfigCache($this->getMergedConfig(false));
+            $configFile = $this->getOptions()->getConfigCacheFile();
+            $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
         }
         return $this;
     }

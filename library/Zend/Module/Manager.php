@@ -230,7 +230,7 @@ class Manager
         $options  = $this->getDefaultListenerOptions();
         $this->events()->attach('loadModule', new InitTrigger($options), 1000);
         $this->events()->attach('loadModule', new ConfigListener($options), 1000);
-        $this->events()->attach('loadModule', new AutoloaderTrigger($options), 1000);
+        $this->events()->attach('loadModule', new AutoloaderTrigger($options), 2000); // Should be called before init
         return $this;
     }
  

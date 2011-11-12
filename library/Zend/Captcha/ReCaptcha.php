@@ -221,7 +221,7 @@ class ReCaptcha extends AbstractAdapter
     public function isValid($value, $context = null)
     {
         if (!is_array($value) && !is_array($context)) {
-            $this->_error(self::MISSING_VALUE);
+            $this->error(self::MISSING_VALUE);
             return false;
         }
 
@@ -230,7 +230,7 @@ class ReCaptcha extends AbstractAdapter
         }
 
         if (empty($value[$this->_CHALLENGE]) || empty($value[$this->_RESPONSE])) {
-            $this->_error(self::MISSING_VALUE);
+            $this->error(self::MISSING_VALUE);
             return false;
         }
 
@@ -239,12 +239,12 @@ class ReCaptcha extends AbstractAdapter
         $res = $service->verify($value[$this->_CHALLENGE], $value[$this->_RESPONSE]);
 
         if (!$res) {
-            $this->_error(self::ERR_CAPTCHA);
+            $this->error(self::ERR_CAPTCHA);
             return false;
         }
 
         if (!$res->isValid()) {
-            $this->_error(self::BAD_CAPTCHA, $res->getErrorCode());
+            $this->error(self::BAD_CAPTCHA, $res->getErrorCode());
             $service->setParam('error', $res->getErrorCode());
             return false;
         }

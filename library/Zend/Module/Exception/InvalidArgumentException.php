@@ -1,9 +1,10 @@
 <?php
+
 namespace Zend\Module\Exception;
 
 use Zend\Module\Exception;
 
-class RuntimeException 
-    extends \RuntimeException
+class InvalidArgumentException 
+    extends \InvalidArgumentException
     implements Exception
 {}

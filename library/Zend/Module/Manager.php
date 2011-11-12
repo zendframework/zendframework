@@ -3,8 +3,14 @@
 namespace Zend\Module;
 
 use Traversable,
+    Listener\ListenerOptions,
+    Listener\AutoloaderTrigger,
+    Listener\ConfigListener,
+    Listener\InitTrigger,
     Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager;
+    Zend\EventManager\EventManager,
+    Exception\InvalidArgumentException;
+    Exception\RuntimeException;
 
 class Manager
 {
@@ -30,7 +36,7 @@ class Manager
      *
      * @var bool
      */
-    protected $modulesLoaded = false;
+    protected $modulesAreLoaded = false;
 
     /**
      * If true, will not register the default config/init listeners 
@@ -38,6 +44,13 @@ class Manager
      * @var bool
      */
     protected $disableLoadDefaultListeners = false;
+
+    /**
+     * Options for the default listeners 
+     * 
+     * @var ListenerOptions
+     */
+    protected $defaultListenerOptions;
 
     /**
      * __construct 
@@ -57,14 +70,14 @@ class Manager
      */
     public function loadModules()
     {
-        if ($this->modulesLoaded === true) {
+        if ($this->modulesAreLoaded === true) {
             return $this;
         }
         foreach ($this->getModules() as $moduleName) {
             $this->loadModule($moduleName);
         }
         $this->events()->trigger('init.post', $this);
-        $this->modulesLoaded = true;
+        $this->modulesAreLoaded = true;
         return $this;
     }
 
@@ -80,7 +93,7 @@ class Manager
             $class = $moduleName . '\Module';
             
             if (!class_exists($class)) {
-                throw new Exception\RuntimeException(sprintf(
+                throw new RuntimeException(sprintf(
                     'Module (%s) could not be initialized because Module.php could not be found.',
                     $moduleName
                 ));
@@ -127,11 +140,10 @@ class Manager
         if (is_array($modules) || $modules instanceof Traversable) {
             $this->modules = $modules;
         } else {
-            throw new \InvalidArgumentException(
-                'Parameter to ' . __CLASS__ . '\'s '
-                . __METHOD__ . ' method must be an array or '
-                . 'implement the \\Traversable interface'
-            );
+            throw new InvalidArgumentException(sprintf(
+                'Parameter to %s\'s %s method must be an array or implement the \\Traversable interface',
+                __CLASS__, __METHOD__
+            ));
         }
         return $this;
     }
@@ -217,12 +229,35 @@ class Manager
         if ($this->loadDefaultListenersIsDisabled()) {
             return $this;
         }
-        $init     = new Listener\InitTrigger;
-        $config   = new Listener\ConfigListener;
-        $autoload = new Listener\AutoloaderTrigger;
+        $options  = $this->getDefaultListenerOptions();
+        $init     = new InitTrigger($options);
+        $config   = new ConfigListener($options);
+        $autoload = new AutoloaderTrigger($options);
         $this->events()->attach('loadModule', $init, 1000);
         $this->events()->attach('loadModule', $config, 1000);
         $this->events()->attach('loadModule', $autoload, 1000);
+        return $this;
+    }
+ 
+    /**
+     * Get the options for the default module listeners.
+     *
+     * @return ListenerOptions
+     */
+    public function getDefaultListenerOptions()
+    {
+        return $this->defaultListenerOptions;
+    }
+ 
+    /**
+     * Set the options for the default module listeners.
+     *
+     * @param ListenerOptions $defaultListenerOptions
+     * @return Manager
+     */
+    public function setDefaultListenerOptions(ListenerOptions $defaultListenerOptions)
+    {
+        $this->defaultListenerOptions = $defaultListenerOptions;
         return $this;
     }
 }

@@ -228,12 +228,9 @@ class Manager
             return $this;
         }
         $options  = $this->getDefaultListenerOptions();
-        $init     = new InitTrigger($options);
-        $config   = new ConfigListener($options);
-        $autoload = new AutoloaderTrigger($options);
-        $this->events()->attach('loadModule', $init, 1000);
-        $this->events()->attach('loadModule', $config, 1000);
-        $this->events()->attach('loadModule', $autoload, 1000);
+        $this->events()->attach('loadModule', new InitTrigger($options), 1000);
+        $this->events()->attach('loadModule', new ConfigListener($options), 1000);
+        $this->events()->attach('loadModule', new AutoloaderTrigger($options), 1000);
         return $this;
     }
  

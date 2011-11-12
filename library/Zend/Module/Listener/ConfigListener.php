@@ -6,7 +6,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Stdlib\IteratorToArray;
 
-class ConfigListener extends AbstractListener
+class ConfigListener extends AbstractListener implements ConfigMerger
 {
     /**
      * @var array

@@ -51,6 +51,13 @@ class Manager
     protected $defaultListenerOptions;
 
     /**
+     * Config listener 
+     * 
+     * @var mixed
+     */
+    protected $configListener;
+
+    /**
      * __construct 
      * 
      * @param array|Traversable $modules 
@@ -175,27 +182,6 @@ class Manager
     }
 
     /**
-     * Returns the merged config after modules have been loaded. This requires a 
-     * Listener\ConfigListener to be registered.
-     *
-     * Before modules are loaded, or if no Listener\ConfigListeners, this will return false.
-     * 
-     * @param bool $returnConfigAsObject Set to false to return as plain array
-     * @return mixed
-     */
-    public function getMergedConfig($returnConfigAsObject = true)
-    {
-        $listeners = $this->events()->getListeners('loadModule');
-        foreach ($listeners as $listener) {
-            $listener = $listener->getCallback();
-            if ($listener instanceof Listener\ConfigListener) {
-                return $listener->getMergedConfig($returnConfigAsObject);
-            }
-        }
-        return false;
-    }
-
-    /**
      * Set if the default listeners should be registered or not
      * 
      * @param bool $flag 
@@ -227,9 +213,12 @@ class Manager
         if ($this->loadDefaultListenersIsDisabled()) {
             return $this;
         }
-        $options  = $this->getDefaultListenerOptions();
+        $options = $this->getDefaultListenerOptions();
+        if (null === $this->getConfigListener()) {
+            $this->setConfigListener(new ConfigListener($options));
+        }
         $this->events()->attach('loadModule', new InitTrigger($options), 1000);
-        $this->events()->attach('loadModule', new ConfigListener($options), 1000);
+        $this->events()->attach('loadModule', $this->getConfigListener(), 1000);
         $this->events()->attach('loadModule', new AutoloaderTrigger($options), 2000); // Should be called before init
         return $this;
     }
@@ -256,6 +245,27 @@ class Manager
     public function setDefaultListenerOptions(ListenerOptions $defaultListenerOptions)
     {
         $this->defaultListenerOptions = $defaultListenerOptions;
+        return $this;
+    }
+ 
+    /**
+     * Get configListener.
+     *
+     * @return Listener\ConfigMerger
+     */
+    public function getConfigListener()
+    {
+        return $this->configListener;
+    }
+ 
+    /**
+     * Set the module config listener / merger that should be used.
+     *
+     * @param Listener\ConfigMerger $configListener The config listner to use
+     */
+    public function setConfigListener(Listener\ConfigMerger $configListener)
+    {
+        $this->configListener = $configListener;
         return $this;
     }
 }

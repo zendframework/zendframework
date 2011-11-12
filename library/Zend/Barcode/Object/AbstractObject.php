@@ -1232,7 +1232,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
 
         $validator = new BarcodeValidator(array(
             'adapter'  => $validatorName,
-            'checksum' => false,
+            'usechecksum' => false,
         ));
 
         $checksumCharacter = '';

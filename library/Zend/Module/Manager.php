@@ -3,14 +3,12 @@
 namespace Zend\Module;
 
 use Traversable,
-    Listener\ListenerOptions,
-    Listener\AutoloaderTrigger,
-    Listener\ConfigListener,
-    Listener\InitTrigger,
+    Zend\Module\Listener\ListenerOptions,
+    Zend\Module\Listener\AutoloaderTrigger,
+    Zend\Module\Listener\ConfigListener,
+    Zend\Module\Listener\InitTrigger,
     Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager,
-    Exception\InvalidArgumentException;
-    Exception\RuntimeException;
+    Zend\EventManager\EventManager;
 
 class Manager
 {
@@ -70,7 +68,7 @@ class Manager
      */
     public function loadModules()
     {
-        if ($this->modulesAreLoaded === true) {
+        if (true === $this->modulesAreLoaded) {
             return $this;
         }
         foreach ($this->getModules() as $moduleName) {
@@ -93,7 +91,7 @@ class Manager
             $class = $moduleName . '\Module';
             
             if (!class_exists($class)) {
-                throw new RuntimeException(sprintf(
+                throw new Exception\RuntimeException(sprintf(
                     'Module (%s) could not be initialized because Module.php could not be found.',
                     $moduleName
                 ));
@@ -114,7 +112,7 @@ class Manager
      */
     public function getLoadedModules($loadModules = false)
     {
-        if ($loadModules === true) {
+        if (true === $loadModules) {
             $this->loadModules();
         }
         return $this->loadedModules;
@@ -140,7 +138,7 @@ class Manager
         if (is_array($modules) || $modules instanceof Traversable) {
             $this->modules = $modules;
         } else {
-            throw new InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Parameter to %s\'s %s method must be an array or implement the \\Traversable interface',
                 __CLASS__, __METHOD__
             ));

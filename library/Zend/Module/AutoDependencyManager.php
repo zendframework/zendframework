@@ -73,6 +73,13 @@ class AutoDependencyManager extends Manager
      * 
      * Installation method does not concern itself with what or how 
      * it is to be installed just that it requires installation
+     *
+     * @TODO: This needs to all be re-worked. This loops through the 
+     * getProvides() array and calls either autoInstall() or autoUpgrade() on 
+     * the same module object multiple times if there are more multiple things 
+     * returned in the getProvides() array. I think we should really look at 
+     * re-working this whole manifest / auto-install / auto-upgrade concept 
+     * anyway. - Evan Coury
      * 
      * @param Module $module
      */

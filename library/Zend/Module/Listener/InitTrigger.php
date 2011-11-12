@@ -2,7 +2,7 @@
 
 namespace Zend\Module\Listener;
 
-class InitTrigger
+class InitTrigger extends AbstractListener
 {
     public function __invoke($e)
     {

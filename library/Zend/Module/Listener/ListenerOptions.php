@@ -14,34 +14,12 @@ class ListenerOptions extends Options
     /**
      * @var string
      */
-    protected $cacheDir = NULL;
-
-    /**
-     * @var string
-     */
     protected $configCacheKey = NULL;
-    
+
     /**
      * @var string
      */
-    protected $manifestDir = NULL;
-
-    /**
-     * @var bool
-     */
-    protected $enableDependencycheck = false;
-
-    /**
-     * @var bool
-     */
-    protected $enableAutoInstallation = false;
-    
-    /**
-     * array of modules that have been whitelisted to allow auto installation
-     * 
-     * @var array
-     */
-    protected $autoInstallWhitelist = array();
+    protected $cacheDir = NULL;
 
     /**
      * Check if the config cache is enabled
@@ -129,100 +107,6 @@ class ListenerOptions extends Options
         return $this;
     }
 
-    /**
-     * Get manifestDir.
-     *
-     * @return string
-     */
-    public function getManifestDir()
-    {
-        return $this->manifestDir;
-    }
- 
-    /**
-     * Set manifestDir.
-     *
-     * @param string $manifestDir the value to be set
-     * @return ManagerOptions
-     */
-    public function setManifestDir($manifestDir)
-    {
-        if (null === $manifestDir) {
-            $this->manifestDir = $manifestDir;
-        } else {
-            $this->manifestDir = static::normalizePath($manifestDir);
-        }
-        return $this;
-    }
-
-    /**
-     * Check if dependency checking is enabled
-     * 
-     * @return bool
-     */
-    public function getEnableDependencyCheck()
-    {
-        return $this->enableDependencycheck;
-    }
-
-    /**
-     * Set if dependency checking is enabled
-     * 
-     * @param bool $enabled
-     * @return Manager
-     */
-    public function setEnableDependencyCheck($enabled)
-    {
-        $this->enableDependencycheck = (bool) $enabled;
-        return $this;
-    }
-    
-    /**
-     * Check if auto installation is enabled
-     * 
-     * @return bool
-     */
-    public function getEnableAutoInstallation()
-    {
-        return $this->enableAutoInstallation;
-    }
-
-    /**
-     * Set if auto installation is enabled application-wide. If this is 
-     * disabled, no auto install/upgrades will be ran; even if the modules are 
-     * in the whitelist.
-     * 
-     * @param bool $enabled
-     * @return Manager
-     */
-    public function setEnableAutoInstallation($enabled)
-    {
-        $this->enableAutoInstallation = (bool) $enabled;
-        return $this;
-    }
-    
-    /**
-     * Get the array of modules enabled for auto install or upgrade
-     * 
-     * @return array
-     */
-    public function getAutoInstallWhitelist()
-    {
-        return $this->autoInstallWhitelist;
-    }
-
-    /**
-     * Set auto installation whitelist
-     * 
-     * @param array $list An array of module names which to allow auto install or upgrade
-     * @return Manager
-     */
-    public function setAutoInstallWhitelist($list)
-    {
-        $this->autoInstallWhitelist = $list;
-        return $this;
-    }
-    
     public function getApplicationEnv()
     {
         return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;

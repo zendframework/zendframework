@@ -5,7 +5,7 @@ namespace Zend\Module\Listener;
 use Zend\Loader\AutoloaderFactory,
     Consumer\AutoloaderProvider;
 
-class AutoloaderTrigger
+class AutoloaderTrigger extends AbstractListener
 {
     public function __invoke($e)
     {

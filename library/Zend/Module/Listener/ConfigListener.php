@@ -4,9 +4,7 @@ namespace Zend\Module\Listener;
 
 use Traversable,
     Zend\Config\Config,
-    Zend\Stdlib\IteratorToArray,
-    Zend\EventManager\EventCollection,
-    Zend\EventManager\EventManager;
+    Zend\Stdlib\IteratorToArray;
 
 class ConfigListener extends AbstractListener
 {
@@ -25,8 +23,15 @@ class ConfigListener extends AbstractListener
      */
     protected $skipConfig = false;
     
-    public function init()
+    /**
+     * __construct 
+     * 
+     * @param ListenerOptions $options 
+     * @return void
+     */
+    public function __construct(ListenerOptions $options = null)
     {
+        parent::__construct($options);
         if ($this->hasCachedConfig()) {
             $this->skipConfig = true;
             $this->setMergedConfig($this->getCachedConfig());
@@ -91,7 +96,7 @@ class ConfigListener extends AbstractListener
                 $config = IteratorToArray::convert($config);
             }
             if (!is_array($config)) {
-                throw new \InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                     sprintf('getConfig() method of %s must be an array, '
                     . 'implement the \Traversable interface, or be an '
                     . 'instance of Zend\Config\Config', get_class($module))

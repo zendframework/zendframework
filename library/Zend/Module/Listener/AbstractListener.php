@@ -2,24 +2,26 @@
 
 namespace Zend\Module\Listener;
 
-class AbstractListener
+abstract class AbstractListener
 {
     /**
      * @var ListenerOptions
      */
     protected $options;
 
-    public function __construct($options = null)
+    /**
+     * __construct 
+     * 
+     * @param ListenerOptions $options 
+     * @return void
+     */
+    public function __construct(ListenerOptions $options = null)
     {
         if (null === $options) {
             $this->setOptions(new ListenerOptions);
         } else {
             $this->setOptions($options);
         }
-    }
-
-    protected function init()
-    {
     }
  
     /**

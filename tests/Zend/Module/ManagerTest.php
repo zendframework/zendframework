@@ -5,7 +5,7 @@ namespace ZendTest\Module;
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
     Zend\Module\Manager,
-    Zend\Module\ManagerOptions,
+    Zend\Module\Listener\ListenerOptions,
     InvalidArgumentException;
 
 class ManagerTest extends TestCase
@@ -56,17 +56,18 @@ class ManagerTest extends TestCase
         set_include_path($this->includePath);
     }
 
-    public function testDefaultManagerOptions()
+    public function testDefaultListenerOptions()
     {
         $moduleManager = new Manager(array());
-        $this->assertInstanceOf('Zend\Module\ManagerOptions', $moduleManager->getOptions());
+        $this->assertInstanceOf('Zend\Module\Listener\ListenerOptions', $moduleManager->getDefaultListenerOptions());
     }
 
-    public function testCanSetManagerOptionsInConstructor()
+    public function testCanSetDefaultListenerOptions()
     {
-        $options = new ManagerOptions(array('cache_dir' => __DIR__));
-        $moduleManager = new Manager(array(), $options);
-        $this->assertSame(__DIR__, $moduleManager->getOptions()->cache_dir);
+        $options = new ListenerOptions(array('cache_dir' => __DIR__));
+        $moduleManager = new Manager(array());
+        $moduleManager->setDefaultListenerOptions($options);
+        $this->assertSame(__DIR__, $moduleManager->getDefaultListenerOptions()->cache_dir);
     }
 
     public function testCanLoadSomeModule()
@@ -93,12 +94,14 @@ class ManagerTest extends TestCase
 
     public function testCanCacheMerchedConfig()
     {
-        $options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
+        $moduleManager = new Manager(array('BarModule', 'BazModule'));
+        $options = new ListenerOptions(array(
+            'config_cache_enabled' => true,
+            'cache_dir'            => $this->tmpdir,
         ));
+        $moduleManager->setDefaultListenerOptions($options);
+
         // build the cache
-        $moduleManager = new Manager(array('BarModule', 'BazModule'), $options);
         $moduleManager->loadModules();
         $config = $moduleManager->getMergedConfig();
         $this->assertSame('foo', $config->bar);

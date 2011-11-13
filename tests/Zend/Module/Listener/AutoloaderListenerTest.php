@@ -4,10 +4,10 @@ namespace ZendTest\Module\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
-    Zend\Module\Listener\AutoloaderTrigger,
+    Zend\Module\Listener\AutoloaderListener,
     Zend\Module\Manager;
 
-class AutoloaderTriggerTest extends TestCase
+class AutoloaderListenerTest extends TestCase
 {
 
     public function setUp()
@@ -45,11 +45,11 @@ class AutoloaderTriggerTest extends TestCase
         set_include_path($this->includePath);
     }
 
-    public function testInitMethodCalledByInitTriggerListener()
+    public function testAutoloadersRegisteredByAutolaoderListener()
     {
         $moduleManager = new Manager(array('ListenerTestModule'));
         $moduleManager->setDisableLoadDefaultListeners(true);
-        $autoloaderListener = new AutoloaderTrigger();
+        $autoloaderListener = new AutoloaderListener();
         $moduleManager->events()->attach('loadModule', $autoloaderListener);
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();

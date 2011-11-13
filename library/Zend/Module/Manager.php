@@ -4,7 +4,7 @@ namespace Zend\Module;
 
 use Traversable,
     Zend\Module\Listener\ListenerOptions,
-    Zend\Module\Listener\AutoloaderTrigger,
+    Zend\Module\Listener\AutoloaderListener,
     Zend\Module\Listener\ConfigListener,
     Zend\Module\Listener\InitTrigger,
     Zend\Module\Listener\ConfigMerger,
@@ -243,7 +243,7 @@ class Manager implements ModuleHandler
         }
         $this->events()->attach('loadModule', new InitTrigger($options), 1000);
         $this->events()->attach('loadModule', $this->getConfigListener(), 1000);
-        $this->events()->attach('loadModule', new AutoloaderTrigger($options), 2000); // Should be called before init
+        $this->events()->attach('loadModule', new AutoloaderListener($options), 2000); // Should be called before init
         return $this;
     }
  

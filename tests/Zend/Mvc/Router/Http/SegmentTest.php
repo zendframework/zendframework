@@ -7,14 +7,14 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class SegmentTest extends TestCase
 {
-    public static function matchingProvider()
+    public static function routeProvider()
     {
         return array(
             'simple-match' => array(
                 '/:foo',
                 array(),
                 array(),
-                'http://example.com/bar',
+                '/bar',
                 null,
                 array(
                     'foo' => 'bar'
@@ -24,7 +24,7 @@ class SegmentTest extends TestCase
                 ':foo',
                 array(),
                 array(),
-                'http://example.com/bar/',
+                '/bar/',
                 null,
                 null
             ),
@@ -32,7 +32,7 @@ class SegmentTest extends TestCase
                 '/:foo',
                 array(),
                 array(),
-                'http://example.com/bar/',
+                '/bar/',
                 null,
                 null
             ),
@@ -40,7 +40,7 @@ class SegmentTest extends TestCase
                 ':foo',
                 array(),
                 array(),
-                'http://example.com/bar',
+                '/bar',
                 1,
                 array(
                     'foo' => 'bar'
@@ -50,7 +50,7 @@ class SegmentTest extends TestCase
                 '/:foo',
                 array(),
                 array(),
-                'http://example.com/bar/baz',
+                '/bar/baz',
                 0,
                 array(
                     'foo' => 'bar'
@@ -60,7 +60,7 @@ class SegmentTest extends TestCase
                 '/:foo',
                 array(),
                 array('foo' => 'baz'),
-                'http://example.com/bar',
+                '/bar',
                 null,
                 array(
                     'foo' => 'bar'
@@ -70,7 +70,7 @@ class SegmentTest extends TestCase
                 '/:foo',
                 array('foo' => '\d+'),
                 array(),
-                'http://example.com/bar',
+                '/bar',
                 null,
                 null
             ),
@@ -78,7 +78,7 @@ class SegmentTest extends TestCase
                 '/:foo',
                 array('foo' => '\d+'),
                 array(),
-                'http://example.com/123',
+                '/123',
                 null,
                 array(
                     'foo' => '123'
@@ -88,7 +88,7 @@ class SegmentTest extends TestCase
                 '/:foo{-}/bar',
                 array('foo' => '[^/]+'),
                 array(),
-                'http://example.com/foo-bar/bar',
+                '/foo-bar/bar',
                 null,
                 array(
                     'foo' => 'foo-bar'
@@ -98,7 +98,7 @@ class SegmentTest extends TestCase
                 '/:foo[/:bar]',
                 array(),
                 array(),
-                'http://example.com/bar',
+                '/bar',
                 null,
                 array(
                     'foo' => 'bar'
@@ -108,7 +108,7 @@ class SegmentTest extends TestCase
                 '/:foo[/:bar]',
                 array(),
                 array('bar' => 'baz'),
-                'http://example.com/bar',
+                array('/bar', '/bar/baz'),
                 null,
                 array(
                     'foo' => 'bar',
@@ -119,7 +119,7 @@ class SegmentTest extends TestCase
                 '/:foo[/:bar]',
                 array(),
                 array(),
-                'http://example.com/bar/baz',
+                '/bar/baz',
                 null,
                 array(
                     'foo' => 'bar',
@@ -130,7 +130,7 @@ class SegmentTest extends TestCase
                 '/foo-:bar',
                 array(),
                 array(),
-                'http://example.com/foo-baz',
+                '/foo-baz',
                 null,
                 array(
                     'bar' => 'baz'
@@ -140,7 +140,7 @@ class SegmentTest extends TestCase
                 '/:foo{-}-:bar',
                 array(),
                 array(),
-                'http://example.com/bar-baz',
+                '/bar-baz',
                 null,
                 array(
                     'foo' => 'bar',
@@ -151,7 +151,7 @@ class SegmentTest extends TestCase
                 '/:foo{-/}[-:bar]/:baz',
                 array(),
                 array(),
-                'http://example.com/bar-baz/bat',
+                '/bar-baz/bat',
                 null,
                 array(
                     'foo' => 'bar',
@@ -163,7 +163,7 @@ class SegmentTest extends TestCase
                 '/:foo{-/}[-:bar]/:baz',
                 array(),
                 array(),
-                'http://example.com/bar/bat',
+                '/bar/bat',
                 null,
                 array(
                     'foo' => 'bar',
@@ -174,20 +174,24 @@ class SegmentTest extends TestCase
     }
     
     /**
-     * @dataProvider matchingProvider
+     * @dataProvider routeProvider
      * @param        string  $route
      * @param        array   $constraints
      * @param        array   $defaults
-     * @param        string  $uri
+     * @param        mixed   $path
      * @param        integer $offset
      * @param        array   $params
      */
-    public function testMatching($route, array $constraints, array $defaults, $uri, $offset, array $params = null)
+    public function testMatching($route, array $constraints, array $defaults, $path, $offset, array $params = null)
     {
+        if (is_array($path)) {
+            $path = $path[0];
+        }
+        
         $request = new Request();
         $route   = new Segment($route, $constraints, $defaults);
         
-        $request->setUri($uri);
+        $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
         
         if ($params === null) {
@@ -198,6 +202,36 @@ class SegmentTest extends TestCase
             foreach($params as $key => $value) {
                 $this->assertEquals($value, $match->getParam($key));
             }
+        }
+    }
+    
+    /**
+     * @dataProvider routeProvider
+     * @param        string  $route
+     * @param        array   $constraints
+     * @param        array   $defaults
+     * @param        mixed   $path
+     * @param        integer $offset
+     * @param        array   $params
+     */
+    public function testAssembling($route, array $constraints, array $defaults, $path, $offset, array $params = null)
+    {
+        if ($params === null) {
+            // Data which will not match are not tested for assembling.
+            return;
+        }
+        
+        if (is_array($path)) {
+            $path = $path[1];
+        }
+        
+        $route  = new Segment($route, $constraints, $defaults);
+        $result = $route->assemble($params);
+        
+        if ($offset !== null) {
+            $this->assertEquals($offset, strpos($path, $result, $offset));
+        } else {
+            $this->assertEquals($path, $result);
         }
     }
 }

@@ -77,6 +77,8 @@ class ConfigListenerTest extends TestCase
         ));
         $moduleManager->setDefaultListenerOptions($options);
         $moduleManager->loadModules(); // This should cache the config
+        $modules = $moduleManager->getLoadedModules();
+        $this->assertTrue($modules['ListenerTestModule']->getConfigCalled);
 
         // Now we check to make sure it uses the config and doesn't hit 
         // the module objects getConfig() method(s)

@@ -24,9 +24,8 @@
  */
 namespace Zend\Barcode\Renderer;
 
-use Zend\Barcode\BarcodeRenderer,
-    Zend\Config\Config,
-    Zend\Barcode\BarcodeObject,
+use Zend\Config\Config,
+    Zend\Barcode\Object,
     Zend\Barcode,
     Zend\Barcode\Renderer\Exception\OutOfRangeException,
     Zend\Barcode\Renderer\Exception\UnexpectedValueException,
@@ -42,7 +41,7 @@ use Zend\Barcode\BarcodeRenderer,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRenderer implements BarcodeRenderer
+abstract class AbstractRenderer implements Barcode\Renderer
 {
     /**
      * Namespace of the renderer for autoloading
@@ -94,7 +93,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
 
     /**
      * Barcode object
-     * @var \Zend\Barcode\BarcodeObject
+     * @var \Zend\Barcode\Object
      */
     protected $_barcode;
 
@@ -331,12 +330,12 @@ abstract class AbstractRenderer implements BarcodeRenderer
 
     /**
      * Set the barcode object
-     * @param \Zend\Barcode\BarcodeObject $barcode
+     * @param \Zend\Barcode\Object $barcode
      * @return Zend_Barcode_Renderer
      */
     public function setBarcode($barcode)
     {
-        if (!$barcode instanceof BarcodeObject) {
+        if (!$barcode instanceof Object) {
             throw new InvalidArgumentException(
                 'Invalid barcode object provided to setBarcode()'
             );
@@ -347,7 +346,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
 
     /**
      * Retrieve the barcode object
-     * \Zend\Barcode\BarcodeObject
+     * \Zend\Barcode\Object
      */
     public function getBarcode()
     {

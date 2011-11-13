@@ -317,7 +317,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $loader = new PrefixPathLoader(array('ZendTest\Barcode\Renderer\TestAsset' => __DIR__ . '/Renderer/TestAsset'));
         Barcode\Barcode::setPluginLoader($loader, Barcode\Barcode::RENDERER);
         $renderer = Barcode\Barcode::makeRenderer('rendererNamespace');
-        $this->assertTrue($renderer instanceof \Zend\Barcode\BarcodeRenderer);
+        $this->assertTrue($renderer instanceof \Zend\Barcode\Renderer);
     }
 
     public function testBarcodeFactoryWithNamespaceButWithoutExtendingRendererAbstract()

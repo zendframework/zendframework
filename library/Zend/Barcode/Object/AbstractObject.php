@@ -42,7 +42,7 @@ use Zend\Barcode,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractObject implements Barcode\BarcodeObject
+abstract class AbstractObject implements Barcode\Object
 {
     /**
      * Namespace of the barcode for autoloading
@@ -252,7 +252,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set barcode state from options array
      * @param  array $options
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setOptions($options)
     {
@@ -268,7 +268,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set barcode state from config object
      * @param \Zend\Config\Config $config
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setConfig(Config $config)
     {
@@ -279,7 +279,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      * Set barcode namespace for autoloading
      *
      * @param string $namespace
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setBarcodeNamespace($namespace)
     {
@@ -309,7 +309,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set height of the barcode bar
      * @param integer $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setBarHeight($value)
@@ -335,7 +335,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set thickness of thin bar
      * @param integer $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setBarThinWidth($value)
@@ -361,7 +361,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set thickness of thick bar
      * @param integer $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setBarThickWidth($value)
@@ -388,7 +388,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      * Set factor applying to
      * thinBarWidth - thickBarWidth - barHeight - fontSize
      * @param float $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setFactor($value)
@@ -415,7 +415,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set color of the barcode and text
      * @param string $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setForeColor($value)
@@ -444,7 +444,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set the color of the background
      * @param integer $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setBackgroundColor($value)
@@ -473,7 +473,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Activate/deactivate drawing of the bar
      * @param boolean $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setWithBorder($value)
     {
@@ -512,7 +512,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
 
     /**
      * Allow fast inversion of font/bars color and background color
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setReverseColor()
     {
@@ -525,7 +525,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set orientation of barcode and text
      * @param float $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setOrientation($value)
@@ -546,7 +546,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set text to encode
      * @param string $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setText($value)
     {
@@ -615,7 +615,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Activate/deactivate drawing of text to encode
      * @param boolean $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setDrawText($value)
     {
@@ -636,7 +636,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      * Activate/deactivate the adjustment of the position
      * of the characters to the position of the bars
      * @param boolean $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setStretchText($value)
@@ -660,7 +660,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      * of the checksum character
      * added to the barcode text
      * @param boolean $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      */
     public function setWithChecksum($value)
     {
@@ -685,7 +685,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      * of the checksum character
      * added to the barcode text
      * @param boolean $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setWithChecksumInText($value)
@@ -711,7 +711,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
      *  - if integer between 1 and 5, use gd built-in fonts
      *  - if string, $value is assumed to be the path to a TTF font
      * @param integer|string $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setFont($value)
@@ -751,7 +751,7 @@ abstract class AbstractObject implements Barcode\BarcodeObject
     /**
      * Set the size of the font in case of TTF
      * @param float $value
-     * @return \Zend\Barcode\BarcodeObject
+     * @return \Zend\Barcode\Object
      * @throw \Zend\Barcode\Object\Exception
      */
     public function setFontSize($value)

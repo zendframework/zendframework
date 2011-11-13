@@ -80,7 +80,7 @@ class Segment implements Route
     {
         $this->defaults = $defaults;
         $this->parts    = $this->parseRouteDefinition($route);
-        $this->regex    = $this->buildRegex($this->parts, $constraints) . '(?:/|$)?';
+        $this->regex    = $this->buildRegex($this->parts, $constraints);
     }
     
     /**

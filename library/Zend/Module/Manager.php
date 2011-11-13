@@ -178,6 +178,19 @@ class Manager implements ModuleHandler
     }
 
     /**
+     * A convenience method that proxies through to:
+     *
+     * $this->getConfigListener()->getMergedConfig($returnConfigAsObject);
+     * 
+     * @param bool $returnConfigAsObject 
+     * @return mixed
+     */
+    public function getMergedConfig($returnConfigAsObject = true)
+    {
+        return $this->getConfigListener()->getMergedConfig($returnConfigAsObject);
+    }
+
+    /**
      * Set the event manager instance used by this module manager.
      * 
      * @param  EventCollection $events 

@@ -5,7 +5,7 @@ namespace Zend\Module;
 use Zend\EventManager\EventCollection,
     Zend\Module\Listener\ConfigMerger;
 
-interface ManagerHandler
+interface ModuleHandler
 {
     /**
      * Load the provided modules.

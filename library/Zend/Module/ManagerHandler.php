@@ -31,19 +31,19 @@ interface ManagerHandler
     public function getLoadedModules($loadModules);
 
     /**
-     * Get the array of modules that this manager should load.
+     * Get the array of module names that this manager should load.
      *
      * @return array
      */
     public function getModules();
  
     /**
-     * Set an array of module names that this module manager should load. 
+     * Set an array or Traversable of module names that this module manager should load. 
      *
-     * @param array $modules
+     * @param mixed $modules array or Traversable of module names
      * @return ModuleHandler
      */
-    public function setModules(array $modules);
+    public function setModules($modules);
 
     /**
      * Get the listener that's in charge of merging module configs.

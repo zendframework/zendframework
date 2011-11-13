@@ -7,10 +7,11 @@ use Traversable,
     Zend\Module\Listener\AutoloaderTrigger,
     Zend\Module\Listener\ConfigListener,
     Zend\Module\Listener\InitTrigger,
+    Zend\Module\Listener\ConfigMerger,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
-class Manager
+class Manager implements ModuleHandler
 {
     /**
      * @var array An array of Module classes of loaded modules
@@ -37,6 +38,13 @@ class Manager
     protected $modulesAreLoaded = false;
 
     /**
+     * Config listener 
+     * 
+     * @var mixed
+     */
+    protected $configListener;
+
+    /**
      * If true, will not register the default config/init listeners 
      * 
      * @var bool
@@ -51,13 +59,6 @@ class Manager
     protected $defaultListenerOptions;
 
     /**
-     * Config listener 
-     * 
-     * @var mixed
-     */
-    protected $configListener;
-
-    /**
      * __construct 
      * 
      * @param array|Traversable $modules 
@@ -69,9 +70,9 @@ class Manager
     }
 
     /**
-     * loadModules 
+     * Load the provided modules.
      * 
-     * @return Manager
+     * @return ManagerHandler
      */
     public function loadModules()
     {
@@ -87,7 +88,7 @@ class Manager
     }
 
     /**
-     * loadModule 
+     * Load a specific module by name.
      * 
      * @param string $moduleName 
      * @return mixed Module's Module class
@@ -112,10 +113,10 @@ class Manager
     }
 
     /**
-     * Get loadedModules.
+     * Get an array of the loaded modules.
      *
-     * @param bool $loadModules 
-     * @return array
+     * @param bool $loadModules If true, load modules if they're not already
+     * @return array An array of Module objects, keyed by module name
      */
     public function getLoadedModules($loadModules = false)
     {
@@ -126,9 +127,9 @@ class Manager
     }
 
     /**
-     * Get modules.
+     * Get the array of module names that this manager should load.
      *
-     * @return modules
+     * @return array
      */
     public function getModules()
     {
@@ -136,9 +137,10 @@ class Manager
     }
  
     /**
-     * Set modules.
+     * Set an array or Traversable of module names that this module manager should load. 
      *
-     * @param $modules the value to be set
+     * @param mixed $modules array or Traversable of module names
+     * @return ModuleHandler
      */
     public function setModules($modules)
     {
@@ -154,10 +156,32 @@ class Manager
     }
     
     /**
-     * Set the event manager instance used by this context
+     * Get the listener that's in charge of merging module configs.
+     *
+     * @return ConfigMerger
+     */
+    public function getConfigListener()
+    {
+        return $this->configListener;
+    }
+ 
+    /**
+     * Set the listener that's in charge of merging module configs.
+     *
+     * @param ConfigMerger $configListener
+     * @return ModuleHandler
+     */
+    public function setConfigListener(ConfigMerger $configListener)
+    {
+        $this->configListener = $configListener;
+        return $this;
+    }
+
+    /**
+     * Set the event manager instance used by this module manager.
      * 
      * @param  EventCollection $events 
-     * @return Manager
+     * @return ManagerHandler
      */
     public function setEventManager(EventCollection $events)
     {
@@ -248,24 +272,4 @@ class Manager
         return $this;
     }
  
-    /**
-     * Get configListener.
-     *
-     * @return Listener\ConfigMerger
-     */
-    public function getConfigListener()
-    {
-        return $this->configListener;
-    }
- 
-    /**
-     * Set the module config listener / merger that should be used.
-     *
-     * @param Listener\ConfigMerger $configListener The config listner to use
-     */
-    public function setConfigListener(Listener\ConfigMerger $configListener)
-    {
-        $this->configListener = $configListener;
-        return $this;
-    }
 }

@@ -92,7 +92,7 @@ class ManagerTest extends TestCase
         $this->assertSame('bar', $config->baz);
     }
 
-    public function testCanCacheMerchedConfig()
+    public function testCanCacheMergedConfig()
     {
         $moduleManager = new Manager(array('BarModule', 'BazModule'));
         $options = new ListenerOptions(array(

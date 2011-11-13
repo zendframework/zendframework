@@ -92,32 +92,44 @@ class ManagerTest extends TestCase
         $this->assertSame('bar', $config->baz);
     }
 
-    public function testCanCacheMergedConfig()
+    public function testDefaultModuleListenersAreLoaded()
     {
-        $moduleManager = new Manager(array('BarModule', 'BazModule'));
-        $options = new ListenerOptions(array(
-            'config_cache_enabled' => true,
-            'cache_dir'            => $this->tmpdir,
-        ));
-        $moduleManager->setDefaultListenerOptions($options);
+        $moduleManager = new Manager(array());
+        $listeners = $moduleManager->events()->getListeners('loadModule');
+        $this->assertSame(3, count($listeners));
+    }
 
-        // build the cache
-        $moduleManager->loadModules();
-        $config = $moduleManager->getConfigListener()->getMergedConfig();
-        $this->assertSame('foo', $config->bar);
-        $this->assertSame('bar', $config->baz);
+    public function testCanSkipDefaultModuleListeners()
+    {
+        $moduleManager = new Manager(array());
+        $moduleManager->setDisableLoadDefaultListeners(true);
+        $listeners = $moduleManager->events()->getListeners('loadModule');
+        $this->assertSame(0, count($listeners));
+    }
 
-        // use the cache
-        $moduleManager = new Manager(array('BarModule', 'BazModule'), $options);
-        $moduleManager->loadModules();
-        $config = $moduleManager->getConfigListener()->getMergedConfig();
-        $this->assertSame('foo', $config->bar);
-        $this->assertSame('bar', $config->baz);
+    public function testModuleLoadingBehavior()
+    {
+        $moduleManager = new Manager(array('BarModule'));
+        $modules = $moduleManager->getLoadedModules();
+        $this->assertSame(0, count($modules));
+        $modules = $moduleManager->getLoadedModules(true);
+        $this->assertSame(1, count($modules));
+        $moduleManager->loadModules(); // should not cause any problems
+        $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
+        $this->assertSame(1, count($modules));
+
     }
 
     public function testConstructorThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
         $moduleManager = new Manager('stringShouldBeArray');
+    }
+
+    public function testNotFoundModuleThrowsRuntimeException()
+    {
+        $this->setExpectedException('RuntimeException');
+        $moduleManager = new Manager(array('NotFoundModule'));
+        $moduleManager->loadModules();
     }
 }

@@ -103,6 +103,9 @@ class ConfigListener extends AbstractListener implements ConfigMerger
                 );
             }
             $this->mergedConfig = array_replace_recursive($this->mergedConfig, $config);
+            if ($this->getOptions()->getConfigCacheEnabled()) {
+                $this->updateCache();
+            }
         }
         return $this;
     }
@@ -130,13 +133,6 @@ class ConfigListener extends AbstractListener implements ConfigMerger
             $configFile = $this->getOptions()->getConfigCacheFile();
             $this->writeArrayToFile($configFile, $this->getMergedConfig(false));
         }
-        return $this;
-    }
-
-    protected function saveConfigCache($config)
-    {
-        $content = "<?php\nreturn " . var_export($config, 1) . ';';
-        file_put_contents($this->getOptions()->getCacheFilePath(), $content);
         return $this;
     }
 }

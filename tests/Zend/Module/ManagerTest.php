@@ -10,7 +10,6 @@ use PHPUnit_Framework_TestCase as TestCase,
 
 class ManagerTest extends TestCase
 {
-
     public function setUp()
     {
         $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';

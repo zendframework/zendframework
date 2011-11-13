@@ -76,7 +76,7 @@ class ManagerTest extends TestCase
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
-        $config = $moduleManager->getMergedConfig();
+        $config = $moduleManager->getConfigListener()->getMergedConfig();
         $this->assertSame($config->some, 'thing');
     }
 
@@ -87,7 +87,7 @@ class ManagerTest extends TestCase
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
         $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
-        $config = $moduleManager->getMergedConfig();
+        $config = $moduleManager->getConfigListener()->getMergedConfig();
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);
     }
@@ -103,14 +103,14 @@ class ManagerTest extends TestCase
 
         // build the cache
         $moduleManager->loadModules();
-        $config = $moduleManager->getMergedConfig();
+        $config = $moduleManager->getConfigListener()->getMergedConfig();
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);
 
         // use the cache
         $moduleManager = new Manager(array('BarModule', 'BazModule'), $options);
         $moduleManager->loadModules();
-        $config = $moduleManager->getMergedConfig();
+        $config = $moduleManager->getConfigListener()->getMergedConfig();
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);
     }

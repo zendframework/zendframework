@@ -52,7 +52,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
     /**
      * getMergedConfig
      * 
-     * @param array $returnConfigAsObject 
+     * @param bool $returnConfigAsObject 
      * @return mixed
      */
     public function getMergedConfig($returnConfigAsObject = true)
@@ -73,7 +73,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
      * @param array $config 
      * @return Manager
      */
-    public function setMergedConfig($config)
+    public function setMergedConfig(array $config)
     {
         $this->mergedConfig = $config;
         $this->mergedConfigObject = null;

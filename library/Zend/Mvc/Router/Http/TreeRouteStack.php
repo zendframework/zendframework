@@ -136,7 +136,7 @@ class TreeRouteStack extends SimpleRouteStack
             return null;
         }
 
-        if ($this->baseUrl !== null && method_exists($request, 'getBaseUrl')) {
+        if ($this->baseUrl === null && method_exists($request, 'getBaseUrl')) {
             $this->setBaseUrl($request->getBaseUrl);
         }
         

@@ -1,13 +1,13 @@
 <?php
 
-namespace ZendTest\Module;
+namespace ZendTest\Module\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
     Zend\Module\Listener\InitTrigger,
     Zend\Module\Manager;
 
-class ManagerTest extends TestCase
+class InitTriggerTest extends TestCase
 {
 
     public function setUp()

@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Module\Manager,
     Zend\Module\Listener\ConfigListener,
     Zend\Module\Listener\ListenerOptions,
+    Zend\Loader\AutoloaderFactory,
     InvalidArgumentException;
 
 class ConfigListenerTest extends TestCase
@@ -31,8 +32,6 @@ class ConfigListenerTest extends TestCase
             dirname(__DIR__) . '/TestAsset',
         ));
         $autoloader->register();
-        \AutoInstallModule\Module::$RESPONSE = true;
-        \AutoInstallModule\Module::$VERSION = '1.0.0';
     }
 
     public function tearDown()
@@ -41,6 +40,7 @@ class ConfigListenerTest extends TestCase
         @unlink($file[0]); // change this if there's ever > 1 file 
         @rmdir($this->tmpdir);
         // Restore original autoloaders
+        AutoloaderFactory::unregisterAutoloaders();
         $loaders = spl_autoload_functions();
         if (is_array($loaders)) {
             foreach ($loaders as $loader) {

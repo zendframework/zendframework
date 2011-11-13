@@ -4,6 +4,7 @@ namespace ZendTest\Module\Listener;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
+    Zend\Loader\AutoloaderFactory,
     Zend\Module\Listener\InitTrigger,
     Zend\Module\Manager;
 
@@ -30,6 +31,7 @@ class InitTriggerTest extends TestCase
     public function tearDown()
     {
         // Restore original autoloaders
+        AutoloaderFactory::unregisterAutoloaders();
         $loaders = spl_autoload_functions();
         if (is_array($loaders)) {
             foreach ($loaders as $loader) {

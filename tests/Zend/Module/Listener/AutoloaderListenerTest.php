@@ -45,7 +45,7 @@ class AutoloaderListenerTest extends TestCase
         set_include_path($this->includePath);
     }
 
-    public function testAutoloadersRegisteredByAutolaoderListener()
+    public function testAutoloadersRegisteredByAutoloaderListener()
     {
         $moduleManager = new Manager(array('ListenerTestModule'));
         $moduleManager->setDisableLoadDefaultListeners(true);

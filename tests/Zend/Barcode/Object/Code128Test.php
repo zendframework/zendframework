@@ -37,130 +37,130 @@ use Zend\Barcode;
 class Code128Test extends TestCommon
 {
 
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Code128($options);
     }
 
     public function testType()
     {
-        $this->assertSame('code128', $this->_object->getType());
+        $this->assertSame('code128', $this->object->getType());
     }
 
     public function testChecksum()
     {
-        $this->assertSame(33, $this->_object->getChecksum('BarCode 1'));
-    	$this->assertSame(47, $this->_object->getChecksum('CODE-128'));
-        $this->assertSame(32, $this->_object->getChecksum('FRAMEWORK-ZEND-COM'));
+        $this->assertSame(33, $this->object->getChecksum('BarCode 1'));
+    	$this->assertSame(47, $this->object->getChecksum('CODE-128'));
+        $this->assertSame(32, $this->object->getChecksum('FRAMEWORK-ZEND-COM'));
     }
 
     public function testKnownBarcodeConversion()
     {
     	$barcode = new TestAsset\Code128Test();
-    	$this->assertSame(array(104, 13, 17, 18, 19), $barcode->_convertToBarcodeChars(-123));
-    	$this->assertSame(array(104, 40, 41, 99, 34, 56, 78), $barcode->_convertToBarcodeChars('HI345678'));
+    	$this->assertSame(array(104, 13, 17, 18, 19), $barcode->convertToBarcodeChars(-123));
+    	$this->assertSame(array(104, 40, 41, 99, 34, 56, 78), $barcode->convertToBarcodeChars('HI345678'));
     }
 
     public function testSetText()
     {
-        $this->_object->setText('0123456789');
-        $this->assertSame('0123456789', $this->_object->getRawText());
-        $this->assertSame('0123456789', $this->_object->getText());
-        $this->assertSame('0123456789', $this->_object->getTextToDisplay());
+        $this->object->setText('0123456789');
+        $this->assertSame('0123456789', $this->object->getRawText());
+        $this->assertSame('0123456789', $this->object->getText());
+        $this->assertSame('0123456789', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithSpaces()
     {
-        $this->_object->setText(' 0123456789 ');
-        $this->assertSame(' 0123456789 ', $this->_object->getRawText());
-        $this->assertSame(' 0123456789 ', $this->_object->getText());
-        $this->assertSame(' 0123456789 ', $this->_object->getTextToDisplay());
+        $this->object->setText(' 0123456789 ');
+        $this->assertSame(' 0123456789 ', $this->object->getRawText());
+        $this->assertSame(' 0123456789 ', $this->object->getText());
+        $this->assertSame(' 0123456789 ', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithChecksum()
     {
-        $this->_object->setText('0123456789');
-        $this->_object->setWithChecksum(true);
-        $this->assertSame('0123456789', $this->_object->getRawText());
-        $this->assertSame('0123456789', $this->_object->getText());
-        $this->assertSame('0123456789', $this->_object->getTextToDisplay());
+        $this->object->setText('0123456789');
+        $this->object->setWithChecksum(true);
+        $this->assertSame('0123456789', $this->object->getRawText());
+        $this->assertSame('0123456789', $this->object->getText());
+        $this->assertSame('0123456789', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithChecksumDisplayed()
     {
-        $this->_object->setText('0123456789');
-        $this->_object->setWithChecksum(true);
-        $this->_object->setWithChecksumInText(true);
-        $this->assertSame('0123456789', $this->_object->getRawText());
-        $this->assertSame('0123456789', $this->_object->getText());
-        $this->assertSame('0123456789', $this->_object->getTextToDisplay());
+        $this->object->setText('0123456789');
+        $this->object->setWithChecksum(true);
+        $this->object->setWithChecksumInText(true);
+        $this->assertSame('0123456789', $this->object->getRawText());
+        $this->assertSame('0123456789', $this->object->getText());
+        $this->assertSame('0123456789', $this->object->getTextToDisplay());
     }
 
     public function testGetKnownWidthWithoutOrientation()
     {
-        $this->_object->setText('CODE-128');
-        $this->assertEquals(143, $this->_object->getWidth());
-        $this->_object->setWithQuietZones(false);
-        $this->assertEquals(123, $this->_object->getWidth(true));
+        $this->object->setText('CODE-128');
+        $this->assertEquals(143, $this->object->getWidth());
+        $this->object->setWithQuietZones(false);
+        $this->assertEquals(123, $this->object->getWidth(true));
     }
 
     public function testCompleteGeneration()
     {
-        $this->_object->setText('HI345678');
-        $this->_object->draw();
+        $this->object->setText('HI345678');
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile('Code128_HI345678_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithStretchText()
     {
-        $this->_object->setText('HI345678');
-        $this->_object->setStretchText(true);
-        $this->_object->draw();
+        $this->object->setText('HI345678');
+        $this->object->setStretchText(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Code128_HI345678_stretchtext_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorder()
     {
-        $this->_object->setText('HI345678');
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('HI345678');
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Code128_HI345678_border_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithOrientation()
     {
-        $this->_object->setText('HI345678');
-        $this->_object->setOrientation(60);
-        $this->_object->draw();
+        $this->object->setText('HI345678');
+        $this->object->setOrientation(60);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Code128_HI345678_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithStretchTextWithOrientation()
     {
-        $this->_object->setText('HI345678');
-        $this->_object->setOrientation(60);
-        $this->_object->setStretchText(true);
-        $this->_object->draw();
+        $this->object->setText('HI345678');
+        $this->object->setOrientation(60);
+        $this->object->setStretchText(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Code128_HI345678_stretchtext_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorderWithOrientation()
     {
-        $this->_object->setText('HI345678');
-        $this->_object->setOrientation(60);
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('HI345678');
+        $this->object->setOrientation(60);
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Code128_HI345678_border_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 }

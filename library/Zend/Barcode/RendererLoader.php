@@ -14,44 +14,30 @@
  *
  * @category   Zend
  * @package    Zend_Barcode
- * @subpackage Object
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Barcode\Object;
+namespace Zend\Barcode;
+
+use Zend\Loader\PluginClassLoader;
 
 /**
- * Class for generate Planet barcode
+ * Plugin Class Loader implementation for Barcodes.
  *
- * @uses       \Zend\Barcode\Object\Postnet
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Planet extends Postnet
+class RendererLoader extends PluginClassLoader
 {
-
     /**
-     * Coding map
-     * - 0 = half bar
-     * - 1 = complete bar
-     * @var array
+     * @var array Pre-aliased filter
      */
-    protected $codingMap = array(
-        0 => "00111",
-        1 => "11100",
-        2 => "11010",
-        3 => "11001",
-        4 => "10110",
-        5 => "10101",
-        6 => "10011",
-        7 => "01110",
-        8 => "01101",
-        9 => "01011"
+    protected $plugins = array(
+        'image' => 'Zend\Barcode\Renderer\Image',
+        'pdf'   => 'Zend\Barcode\Renderer\Pdf',
+        'svg'   => 'Zend\Barcode\Renderer\Svg'
     );
 }

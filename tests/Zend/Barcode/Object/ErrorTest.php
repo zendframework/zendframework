@@ -35,45 +35,45 @@ use Zend\Barcode;
  */
 class ErrorTest extends TestCommon
 {
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Error($options);
     }
 
     public function testType()
     {
-        $this->assertSame('error', $this->_object->getType());
+        $this->assertSame('error', $this->object->getType());
     }
 
     public function testSetText()
     {
-        $this->_object->setText('This is an error text');
-        $this->assertSame('This is an error text', $this->_object->getRawText());
-        $this->assertSame('This is an error text', $this->_object->getText());
-        $this->assertSame('This is an error text', $this->_object->getTextToDisplay());
+        $this->object->setText('This is an error text');
+        $this->assertSame('This is an error text', $this->object->getRawText());
+        $this->assertSame('This is an error text', $this->object->getText());
+        $this->assertSame('This is an error text', $this->object->getTextToDisplay());
     }
 
     public function testCheckGoodParams()
     {
-        $this->_object->setText('This is an error text');
-        $this->assertTrue($this->_object->checkParams());
+        $this->object->setText('This is an error text');
+        $this->assertTrue($this->object->checkParams());
     }
 
     public function testGetDefaultHeight()
     {
-        $this->assertEquals(40, $this->_object->getHeight());
+        $this->assertEquals(40, $this->object->getHeight());
     }
 
     public function testGetDefaultWidth()
     {
-        $this->assertEquals(400, $this->_object->getWidth());
+        $this->assertEquals(400, $this->object->getWidth());
     }
 
     public function testCompleteGeneration()
     {
-        $this->_object->setText('This is an error text');
-        $this->_object->draw();
+        $this->object->setText('This is an error text');
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile('Error_errortext_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 }

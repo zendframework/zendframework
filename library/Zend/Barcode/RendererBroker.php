@@ -14,44 +14,41 @@
  *
  * @category   Zend
  * @package    Zend_Barcode
- * @subpackage Object
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Barcode\Object;
+namespace Zend\Barcode;
+
+use Zend\Loader\PluginBroker;
 
 /**
- * Class for generate Planet barcode
+ * Broker for Barcode renderer instances
  *
- * @uses       \Zend\Barcode\Object\Postnet
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Planet extends Postnet
+class RendererBroker extends PluginBroker
 {
+    /**
+     * @var string Default plugin loading strategy
+     */
+    protected $defaultClassLoader = 'Zend\Barcode\RendererLoader';
 
     /**
-     * Coding map
-     * - 0 = half bar
-     * - 1 = complete bar
-     * @var array
+     * Determine if we have a valid renderer
+     *
+     * @param  mixed $plugin
+     * @return true
+     * @throws Exception
      */
-    protected $codingMap = array(
-        0 => "00111",
-        1 => "11100",
-        2 => "11010",
-        3 => "11001",
-        4 => "10110",
-        5 => "10101",
-        6 => "10011",
-        7 => "01110",
-        8 => "01101",
-        9 => "01011"
-    );
+    protected function validatePlugin($plugin)
+    {
+        if (!$plugin instanceof Renderer\AbstractRenderer) {
+            throw new Exception\InvalidArgumentException('Barcode renderers must extend Zend\Barcode\Renderer\AbstractRenderer');
+        }
+        return true;
+    }
 }

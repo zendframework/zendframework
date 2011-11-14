@@ -50,19 +50,19 @@ class Pdf extends AbstractRenderer
      * PDF resource
      * @var \Zend\Pdf\PdfDocument
      */
-    protected $_resource = null;
+    protected $resource = null;
 
     /**
      * Page number in PDF resource
      * @var integer
      */
-    protected $_page = 0;
+    protected $page = 0;
 
     /**
      * Module size rendering
      * @var float
      */
-    protected $_moduleSize = 0.5;
+    protected $moduleSize = 0.5;
 
     /**
      * Set an image resource to draw the barcode inside
@@ -78,12 +78,12 @@ class Pdf extends AbstractRenderer
             );
         }
 
-        $this->_resource = $pdf;
-        $this->_page     = intval($page);
+        $this->resource = $pdf;
+        $this->page     = intval($page);
 
-        if (!count($this->_resource->pages)) {
-            $this->_page = 0;
-            $this->_resource->pages[] = new Page(
+        if (!count($this->resource->pages)) {
+            $this->page = 0;
+            $this->resource->pages[] = new Page(
                 Zend\Pdf\Page::SIZE_A4
             );
         }
@@ -95,7 +95,7 @@ class Pdf extends AbstractRenderer
      *
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
     }
 
@@ -107,24 +107,24 @@ class Pdf extends AbstractRenderer
     {
         $this->draw();
         header("Content-Type: application/pdf");
-        echo $this->_resource->render();
+        echo $this->resource->render();
     }
 
     /**
      * Initialize the PDF resource
      * @return void
      */
-    protected function _initRenderer()
+    protected function initRenderer()
     {
-        if ($this->_resource === null) {
-            $this->_resource = new PdfDocument();
-            $this->_resource->pages[] = new Page(
+        if ($this->resource === null) {
+            $this->resource = new PdfDocument();
+            $this->resource->pages[] = new Page(
                 Page::SIZE_A4
             );
         }
 
-        $pdfPage = $this->_resource->pages[$this->_page];
-        $this->_adjustPosition($pdfPage->getHeight(), $pdfPage->getWidth());
+        $pdfPage = $this->resource->pages[$this->page];
+        $this->adjustPosition($pdfPage->getHeight(), $pdfPage->getWidth());
     }
 
     /**
@@ -133,21 +133,21 @@ class Pdf extends AbstractRenderer
      * @param integer $color
      * @param boolean $filled
      */
-    protected function _drawPolygon($points, $color, $filled = true)
+    protected function drawPolygon($points, $color, $filled = true)
     {
-        $page = $this->_resource->pages[$this->_page];
+        $page = $this->resource->pages[$this->page];
         foreach ($points as $point) {
-            $x[] = $point[0] * $this->_moduleSize + $this->_leftOffset;
-            $y[] = $page->getHeight() - $point[1] * $this->_moduleSize - $this->_topOffset;
+            $x[] = $point[0] * $this->moduleSize + $this->leftOffset;
+            $y[] = $page->getHeight() - $point[1] * $this->moduleSize - $this->topOffset;
         }
         if (count($y) == 4) {
             if ($x[0] != $x[3] && $y[0] == $y[3]) {
-                $y[0] -= ($this->_moduleSize / 2);
-                $y[3] -= ($this->_moduleSize / 2);
+                $y[0] -= ($this->moduleSize / 2);
+                $y[3] -= ($this->moduleSize / 2);
             }
             if ($x[1] != $x[2] && $y[1] == $y[2]) {
-                $y[1] += ($this->_moduleSize / 2);
-                $y[2] += ($this->_moduleSize / 2);
+                $y[1] += ($this->moduleSize / 2);
+                $y[2] += ($this->moduleSize / 2);
             }
         }
 
@@ -159,7 +159,7 @@ class Pdf extends AbstractRenderer
 
         $page->setLineColor($color);
         $page->setFillColor($color);
-        $page->setLineWidth($this->_moduleSize);
+        $page->setLineWidth($this->moduleSize);
 
         $fillType = ($filled)
                   ? Page::SHAPE_DRAW_FILL_AND_STROKE
@@ -178,7 +178,7 @@ class Pdf extends AbstractRenderer
      * @param string $alignment
      * @param float $orientation
      */
-    protected function _drawText(
+    protected function drawText(
         $text,
         $size,
         $position,
@@ -187,7 +187,7 @@ class Pdf extends AbstractRenderer
         $alignment = 'center',
         $orientation = 0
     ) {
-        $page  = $this->_resource->pages[$this->_page];
+        $page  = $this->resource->pages[$this->page];
         $color = new Color\Rgb(
             (($color & 0xFF0000) >> 16) / 255.0,
             (($color & 0x00FF00) >> 8) / 255.0,
@@ -196,17 +196,17 @@ class Pdf extends AbstractRenderer
 
         $page->setLineColor($color);
         $page->setFillColor($color);
-        $page->setFont(Font::fontWithPath($font), $size * $this->_moduleSize * 1.2);
+        $page->setFont(Font::fontWithPath($font), $size * $this->moduleSize * 1.2);
 
         $width = $this->widthForStringUsingFontSize(
             $text,
             Font::fontWithPath($font),
-            $size * $this->_moduleSize
+            $size * $this->moduleSize
         );
 
         $angle = pi() * $orientation / 180;
-        $left = $position[0] * $this->_moduleSize + $this->_leftOffset;
-        $top  = $page->getHeight() - $position[1] * $this->_moduleSize - $this->_topOffset;
+        $left = $position[0] * $this->moduleSize + $this->leftOffset;
+        $top  = $page->getHeight() - $position[1] * $this->moduleSize - $this->topOffset;
 
         switch ($alignment) {
             case 'center':

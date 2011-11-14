@@ -24,9 +24,8 @@
  */
 namespace Zend\Barcode\Renderer;
 
-use Zend\Barcode\BarcodeRenderer,
-    Zend\Config\Config,
-    Zend\Barcode\BarcodeObject,
+use Zend\Config\Config,
+    Zend\Barcode\Object,
     Zend\Barcode,
     Zend\Barcode\Renderer\Exception\OutOfRangeException,
     Zend\Barcode\Renderer\Exception\UnexpectedValueException,
@@ -42,66 +41,66 @@ use Zend\Barcode\BarcodeRenderer,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractRenderer implements BarcodeRenderer
+abstract class AbstractRenderer implements Barcode\Renderer
 {
     /**
      * Namespace of the renderer for autoloading
      * @var string
      */
-    protected $_rendererNamespace = 'Zend\Barcode\Renderer';
+    protected $rendererNamespace = 'Zend\Barcode\Renderer';
 
     /**
      * Renderer type
      * @var string
      */
-    protected $_type = null;
+    protected $type = null;
 
     /**
      * Activate/Deactivate the automatic rendering of exception
      * @var boolean
      */
-    protected $_automaticRenderError = false;
+    protected $automaticRenderError = false;
 
     /**
      * Offset of the barcode from the top of the rendering resource
      * @var integer
      */
-    protected $_topOffset = 0;
+    protected $topOffset = 0;
 
     /**
      * Offset of the barcode from the left of the rendering resource
      * @var integer
      */
-    protected $_leftOffset = 0;
+    protected $leftOffset = 0;
 
     /**
      * Horizontal position of the barcode in the rendering resource
      * @var integer
      */
-    protected $_horizontalPosition = 'left';
+    protected $horizontalPosition = 'left';
 
     /**
      * Vertical position of the barcode in the rendering resource
      * @var integer
      */
-    protected $_verticalPosition = 'top';
+    protected $verticalPosition = 'top';
 
     /**
      * Module size rendering
      * @var float
      */
-    protected $_moduleSize = 1;
+    protected $moduleSize = 1;
 
     /**
      * Barcode object
-     * @var \Zend\Barcode\BarcodeObject
+     * @var \Zend\Barcode\Object
      */
-    protected $_barcode;
+    protected $barcode;
 
     /**
      * Drawing resource
      */
-    protected $_resource;
+    protected $resource;
 
     /**
      * Constructor
@@ -116,9 +115,9 @@ abstract class AbstractRenderer implements BarcodeRenderer
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        $this->_type = strtolower(substr(
+        $this->type = strtolower(substr(
             get_class($this),
-            strlen($this->_rendererNamespace) + 1
+            strlen($this->rendererNamespace) + 1
         ));
     }
 
@@ -156,7 +155,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function setRendererNamespace($namespace)
     {
-        $this->_rendererNamespace = $namespace;
+        $this->rendererNamespace = $namespace;
         return $this;
     }
 
@@ -167,7 +166,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getRendererNamespace()
     {
-        return $this->_rendererNamespace;
+        return $this->rendererNamespace;
     }
 
     /**
@@ -176,7 +175,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -192,7 +191,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
                 'Vertical position must be greater than or equals 0'
             );
         }
-        $this->_topOffset = intval($value);
+        $this->topOffset = intval($value);
         return $this;
     }
 
@@ -202,7 +201,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getTopOffset()
     {
-        return $this->_topOffset;
+        return $this->topOffset;
     }
 
     /**
@@ -218,7 +217,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
                 'Horizontal position must be greater than or equals 0'
             );
         }
-        $this->_leftOffset = intval($value);
+        $this->leftOffset = intval($value);
         return $this;
     }
 
@@ -228,7 +227,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getLeftOffset()
     {
-        return $this->_leftOffset;
+        return $this->leftOffset;
     }
 
     /**
@@ -237,7 +236,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function setAutomaticRenderError($value)
     {
-        $this->_automaticRenderError = (bool) $value;
+        $this->automaticRenderError = (bool) $value;
         return $this;
     }
 
@@ -254,7 +253,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
                 "Invalid barcode position provided must be 'left', 'center' or 'right'"
             );
         }
-        $this->_horizontalPosition = $value;
+        $this->horizontalPosition = $value;
         return $this;
     }
 
@@ -264,7 +263,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getHorizontalPosition()
     {
-        return $this->_horizontalPosition;
+        return $this->horizontalPosition;
     }
 
     /**
@@ -280,7 +279,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
                 "Invalid barcode position provided must be 'top', 'middle' or 'bottom'"
             );
         }
-        $this->_verticalPosition = $value;
+        $this->verticalPosition = $value;
         return $this;
     }
 
@@ -290,7 +289,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getVerticalPosition()
     {
-        return $this->_verticalPosition;
+        return $this->verticalPosition;
     }
 
     /**
@@ -306,7 +305,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
                 'Float size must be greater than 0'
             );
         }
-        $this->_moduleSize = floatval($value);
+        $this->moduleSize = floatval($value);
         return $this;
     }
 
@@ -317,7 +316,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getModuleSize()
     {
-        return $this->_moduleSize;
+        return $this->moduleSize;
     }
 
     /**
@@ -326,32 +325,32 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function getAutomaticRenderError()
     {
-        return $this->_automaticRenderError;
+        return $this->automaticRenderError;
     }
 
     /**
      * Set the barcode object
-     * @param \Zend\Barcode\BarcodeObject $barcode
+     * @param \Zend\Barcode\Object $barcode
      * @return Zend_Barcode_Renderer
      */
     public function setBarcode($barcode)
     {
-        if (!$barcode instanceof BarcodeObject) {
+        if (!$barcode instanceof Object) {
             throw new InvalidArgumentException(
                 'Invalid barcode object provided to setBarcode()'
             );
         }
-        $this->_barcode = $barcode;
+        $this->barcode = $barcode;
         return $this;
     }
 
     /**
      * Retrieve the barcode object
-     * \Zend\Barcode\BarcodeObject
+     * \Zend\Barcode\Object
      */
     public function getBarcode()
     {
-        return $this->_barcode;
+        return $this->barcode;
     }
 
     /**
@@ -360,8 +359,8 @@ abstract class AbstractRenderer implements BarcodeRenderer
      */
     public function checkParams()
     {
-        $this->_checkBarcodeObject();
-        $this->_checkParams();
+        $this->checkBarcodeObject();
+        $this->checkSpecificParams();
         return true;
     }
 
@@ -370,9 +369,9 @@ abstract class AbstractRenderer implements BarcodeRenderer
      * @return void
      * @throw \Zend\Barcode\Renderer\Exception
      */
-    protected function _checkBarcodeObject()
+    protected function checkBarcodeObject()
     {
-        if ($this->_barcode === null) {
+        if ($this->barcode === null) {
             throw new RuntimeException(
                 'No barcode object provided'
             );
@@ -387,37 +386,37 @@ abstract class AbstractRenderer implements BarcodeRenderer
      * @param float $supportWidth
      * @return void
      */
-    protected function _adjustPosition($supportHeight, $supportWidth)
+    protected function adjustPosition($supportHeight, $supportWidth)
     {
-        $barcodeHeight = $this->_barcode->getHeight(true) * $this->_moduleSize;
-        if ($barcodeHeight != $supportHeight && $this->_topOffset == 0) {
-            switch ($this->_verticalPosition) {
+        $barcodeHeight = $this->barcode->getHeight(true) * $this->moduleSize;
+        if ($barcodeHeight != $supportHeight && $this->topOffset == 0) {
+            switch ($this->verticalPosition) {
                 case 'middle':
-                    $this->_topOffset = floor(
+                    $this->topOffset = floor(
                             ($supportHeight - $barcodeHeight) / 2);
                     break;
                 case 'bottom':
-                    $this->_topOffset = $supportHeight - $barcodeHeight;
+                    $this->topOffset = $supportHeight - $barcodeHeight;
                     break;
                 case 'top':
                 default:
-                    $this->_topOffset = 0;
+                    $this->topOffset = 0;
                     break;
             }
         }
-        $barcodeWidth = $this->_barcode->getWidth(true) * $this->_moduleSize;
-        if ($barcodeWidth != $supportWidth && $this->_leftOffset == 0) {
-            switch ($this->_horizontalPosition) {
+        $barcodeWidth = $this->barcode->getWidth(true) * $this->moduleSize;
+        if ($barcodeWidth != $supportWidth && $this->leftOffset == 0) {
+            switch ($this->horizontalPosition) {
                 case 'center':
-                    $this->_leftOffset = floor(
+                    $this->leftOffset = floor(
                             ($supportWidth - $barcodeWidth) / 2);
                     break;
                 case 'right':
-                    $this->_leftOffset = $supportWidth - $barcodeWidth;
+                    $this->leftOffset = $supportWidth - $barcodeWidth;
                     break;
                 case 'left':
                 default:
-                    $this->_leftOffset = 0;
+                    $this->leftOffset = 0;
                     break;
             }
         }
@@ -431,43 +430,43 @@ abstract class AbstractRenderer implements BarcodeRenderer
     {
         try {
             $this->checkParams();
-            $this->_initRenderer();
-            $this->_drawInstructionList();
+            $this->initRenderer();
+            $this->drawInstructionList();
         } catch (\Zend\Barcode\Exception $e) {
-            if ($this->_automaticRenderError && !($e instanceof RendererCreationException)) {
+            if ($this->automaticRenderError && !($e instanceof RendererCreationException)) {
                 $barcode = Barcode\Barcode::makeBarcode(
                     'error',
                     array('text' => $e->getMessage())
                 );
                 $this->setBarcode($barcode);
-                $this->_resource = null;
-                $this->_initRenderer();
-                $this->_drawInstructionList();
+                $this->resource = null;
+                $this->initRenderer();
+                $this->drawInstructionList();
             } else {
                 throw $e;
             }
         }
-        return $this->_resource;
+        return $this->resource;
     }
 
     /**
      * Sub process to draw the barcode instructions
      * Needed by the automatic error rendering
      */
-    private function _drawInstructionList()
+    private function drawInstructionList()
     {
-        $instructionList = $this->_barcode->draw();
+        $instructionList = $this->barcode->draw();
         foreach ($instructionList as $instruction) {
             switch ($instruction['type']) {
                 case 'polygon':
-                    $this->_drawPolygon(
+                    $this->drawPolygon(
                         $instruction['points'],
                         $instruction['color'],
                         $instruction['filled']
                     );
                     break;
                 case 'text': //$text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
-                    $this->_drawText(
+                    $this->drawText(
                         $instruction['text'],
                         $instruction['size'],
                         $instruction['position'],
@@ -489,13 +488,13 @@ abstract class AbstractRenderer implements BarcodeRenderer
      * Checking of parameters after all settings
      * @return void
      */
-    abstract protected function _checkParams();
+    abstract protected function checkSpecificParams();
 
     /**
      * Initialize the rendering resource
      * @return void
      */
-    abstract protected function _initRenderer();
+    abstract protected function initRenderer();
 
     /**
      * Draw a polygon in the rendering resource
@@ -503,7 +502,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      * @param integer $color
      * @param boolean $filled
      */
-    abstract protected function _drawPolygon($points, $color, $filled = true);
+    abstract protected function drawPolygon($points, $color, $filled = true);
 
     /**
      * Draw a polygon in the rendering resource
@@ -515,7 +514,7 @@ abstract class AbstractRenderer implements BarcodeRenderer
      * @param string $alignment
      * @param float $orientation
      */
-    abstract protected function _drawText(
+    abstract protected function drawText(
         $text,
         $size,
         $position,

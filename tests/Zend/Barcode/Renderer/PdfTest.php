@@ -37,27 +37,27 @@ use Zend\Barcode\Object;
  */
 class PdfTest extends TestCommon
 {
-    protected function _getRendererObject($options = null)
+    protected function getRendererObject($options = null)
     {
         return new \Zend\Barcode\Renderer\Pdf($options);
     }
 
     public function testType()
     {
-        $this->assertSame('pdf', $this->_renderer->getType());
+        $this->assertSame('pdf', $this->renderer->getType());
     }
 
     public function testGoodPdfResource()
     {
         $pdfResource = new Pdf\PdfDocument();
-        $this->_renderer->setResource($pdfResource, 10);
+        $this->renderer->setResource($pdfResource, 10);
     }
 
     public function testObjectPdfResource()
     {
         $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $pdfResource = new \StdClass();
-        $this->_renderer->setResource($pdfResource);
+        $this->renderer->setResource($pdfResource);
     }
 
     /**
@@ -67,8 +67,8 @@ class PdfTest extends TestCommon
     {
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
         $barcode = new Object\Code39(array('text' => '0123456789'));
-        $this->_renderer->setBarcode($barcode);
-        $resource = $this->_renderer->draw();
+        $this->renderer->setBarcode($barcode);
+        $resource = $this->renderer->draw();
         $this->assertTrue($resource instanceof Pdf\PdfDocument);
         Barcode\Barcode::setBarcodeFont('');
     }
@@ -77,25 +77,25 @@ class PdfTest extends TestCommon
     {
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
         $barcode = new Object\Code39(array('text' => '0123456789'));
-        $this->_renderer->setBarcode($barcode);
+        $this->renderer->setBarcode($barcode);
         $pdfResource = new Pdf\PdfDocument();
-        $this->_renderer->setResource($pdfResource);
-        $resource = $this->_renderer->draw();
+        $this->renderer->setResource($pdfResource);
+        $resource = $this->renderer->draw();
         $this->assertTrue($resource instanceof Pdf\PdfDocument);
         $this->assertSame($resource, $pdfResource);
         Barcode\Barcode::setBarcodeFont('');
     }
 
-    protected function _getRendererWithWidth500AndHeight300()
+    protected function getRendererWithWidth500AndHeight300()
     {
         $pdf = new Pdf\PdfDocument();
         $pdf->pages[] = new Pdf\Page('500:300:');
-        return $this->_renderer->setResource($pdf);
+        return $this->renderer->setResource($pdf);
     }
 
     public function testHorizontalPositionToCenter()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $renderer->setBarcode($barcode);
@@ -106,7 +106,7 @@ class PdfTest extends TestCommon
 
     public function testHorizontalPositionToRight()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $renderer->setBarcode($barcode);
@@ -117,7 +117,7 @@ class PdfTest extends TestCommon
 
     public function testVerticalPositionToMiddle()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);
@@ -128,7 +128,7 @@ class PdfTest extends TestCommon
 
     public function testVerticalPositionToBottom()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);

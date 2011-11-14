@@ -35,188 +35,188 @@ use Zend\Barcode;
  */
 class Itf14Test extends TestCommon
 {
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Itf14($options);
     }
 
     public function testType()
     {
-        $this->assertSame('itf14', $this->_object->getType());
+        $this->assertSame('itf14', $this->object->getType());
     }
 
     public function testChecksum()
     {
-        $this->assertSame(5, $this->_object->getChecksum('0000123456789'));
+        $this->assertSame(5, $this->object->getChecksum('0000123456789'));
     }
 
     public function testSetText()
     {
-        $this->_object->setText('0000123456789');
-        $this->assertSame('0000123456789', $this->_object->getRawText());
-        $this->assertSame('00001234567895', $this->_object->getText());
-        $this->assertSame('00001234567895', $this->_object->getTextToDisplay());
+        $this->object->setText('0000123456789');
+        $this->assertSame('0000123456789', $this->object->getRawText());
+        $this->assertSame('00001234567895', $this->object->getText());
+        $this->assertSame('00001234567895', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithout14Characters()
     {
-        $this->_object->setText('123456789');
-        $this->assertSame('123456789', $this->_object->getRawText());
-        $this->assertSame('00001234567895', $this->_object->getText());
-        $this->assertSame('00001234567895', $this->_object->getTextToDisplay());
+        $this->object->setText('123456789');
+        $this->assertSame('123456789', $this->object->getRawText());
+        $this->assertSame('00001234567895', $this->object->getText());
+        $this->assertSame('00001234567895', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithoutChecksumHasNoEffect()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setWithChecksum(false);
-        $this->assertSame('0000123456789', $this->_object->getRawText());
-        $this->assertSame('00001234567895', $this->_object->getText());
-        $this->assertSame('00001234567895', $this->_object->getTextToDisplay());
+        $this->object->setText('0000123456789');
+        $this->object->setWithChecksum(false);
+        $this->assertSame('0000123456789', $this->object->getRawText());
+        $this->assertSame('00001234567895', $this->object->getText());
+        $this->assertSame('00001234567895', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithSpaces()
     {
-        $this->_object->setText(' 0000123456789 ');
-        $this->assertSame('0000123456789', $this->_object->getRawText());
-        $this->assertSame('00001234567895', $this->_object->getText());
-        $this->assertSame('00001234567895', $this->_object->getTextToDisplay());
+        $this->object->setText(' 0000123456789 ');
+        $this->assertSame('0000123456789', $this->object->getRawText());
+        $this->assertSame('00001234567895', $this->object->getText());
+        $this->assertSame('00001234567895', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithChecksumNotDisplayed()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setWithChecksumInText(false);
-        $this->assertSame('0000123456789', $this->_object->getRawText());
-        $this->assertSame('00001234567895', $this->_object->getText());
-        $this->assertSame('00001234567895', $this->_object->getTextToDisplay());
+        $this->object->setText('0000123456789');
+        $this->object->setWithChecksumInText(false);
+        $this->assertSame('0000123456789', $this->object->getRawText());
+        $this->assertSame('00001234567895', $this->object->getText());
+        $this->assertSame('00001234567895', $this->object->getTextToDisplay());
     }
 
     public function testBadTextDetectedIfChecksumWished()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setText('a');
-        $this->_object->setWithChecksum(true);
-        $this->_object->getText();
+        $this->object->setText('a');
+        $this->object->setWithChecksum(true);
+        $this->object->getText();
     }
 
     public function testCheckGoodParams()
     {
-        $this->_object->setText('0000123456789');
-        $this->assertTrue($this->_object->checkParams());
+        $this->object->setText('0000123456789');
+        $this->assertTrue($this->object->checkParams());
     }
 
     public function testCheckParamsWithLowRatio()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setText('0000123456789');
-        $this->_object->setBarThinWidth(21);
-        $this->_object->setBarThickWidth(40);
-        $this->_object->checkParams();
+        $this->object->setText('0000123456789');
+        $this->object->setBarThinWidth(21);
+        $this->object->setBarThickWidth(40);
+        $this->object->checkParams();
     }
 
     public function testCheckParamsWithHighRatio()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setText('0000123456789');
-        $this->_object->setBarThinWidth(20);
-        $this->_object->setBarThickWidth(61);
-        $this->_object->checkParams();
+        $this->object->setText('0000123456789');
+        $this->object->setBarThinWidth(20);
+        $this->object->setBarThickWidth(61);
+        $this->object->checkParams();
     }
 
     public function testGetKnownWidthWithoutOrientation()
     {
-        $this->_object->setText('0000123456789');
-        $this->assertEquals(155, $this->_object->getWidth());
-        $this->_object->setWithQuietZones(false);
-        $this->assertEquals(135, $this->_object->getWidth(true));
+        $this->object->setText('0000123456789');
+        $this->assertEquals(155, $this->object->getWidth());
+        $this->object->setWithQuietZones(false);
+        $this->assertEquals(135, $this->object->getWidth(true));
     }
 
     public function testCompleteGeneration()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile('Itf14_0000123456789_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithStretchText()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setStretchText(true);
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->setStretchText(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Itf14_0000123456789_stretchtext_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorder()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Itf14_0000123456789_border_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBearerBars()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setWithBearerBars(true);
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->setWithBearerBars(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Itf14_0000123456789_bearerbar_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithOrientation()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setOrientation(60);
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->setOrientation(60);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Itf14_0000123456789_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithStretchTextWithOrientation()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setOrientation(60);
-        $this->_object->setStretchText(true);
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->setOrientation(60);
+        $this->object->setStretchText(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Itf14_0000123456789_stretchtext_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorderWithOrientation()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setOrientation(60);
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->setOrientation(60);
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Itf14_0000123456789_border_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBearerBarsWithOrientation()
     {
-        $this->_object->setText('0000123456789');
-        $this->_object->setOrientation(60);
-        $this->_object->setWithBearerBars(true);
-        $this->_object->draw();
+        $this->object->setText('0000123456789');
+        $this->object->setOrientation(60);
+        $this->object->setWithBearerBars(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Itf14_0000123456789_bearerbar_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testGetDefaultHeight()
     {
         // Checksum activated => text needed
-        $this->_object->setText('0000123456789');
-        $this->assertEquals(62, $this->_object->getHeight(true));
+        $this->object->setText('0000123456789');
+        $this->assertEquals(62, $this->object->getHeight(true));
     }
 }

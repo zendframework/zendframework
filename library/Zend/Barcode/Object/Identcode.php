@@ -40,10 +40,10 @@ class Identcode extends Code25interleaved
      * Default options for Identcode barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
-        $this->_barcodeLength = 12;
-        $this->_mandatoryChecksum = true;
+        $this->barcodeLength = 12;
+        $this->mandatoryChecksum = true;
     }
 
     /**
@@ -65,7 +65,7 @@ class Identcode extends Code25interleaved
      */
     public function validateText($value)
     {
-        $this->_validateText($value, array('validator' => $this->getType()));
+        $this->validateSpecificText($value, array('validator' => $this->getType()));
     }
 
     /**
@@ -76,7 +76,7 @@ class Identcode extends Code25interleaved
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $checksum = 0;
 
         for ($i = strlen($text); $i > 0; $i --) {

@@ -330,15 +330,4 @@ class Code128 extends AbstractObject
 
         return $checksum;
     }
-
-    /**
-     * Standard validation for most of barcode objects
-     * @param string $value
-     * @param array  $options
-     */
-    protected function validateSpecificText($value, $options = array())
-    {
-        // @TODO: add code128 validator
-        return true;
-    }
 }

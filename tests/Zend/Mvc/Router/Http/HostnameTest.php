@@ -16,6 +16,11 @@ class HostnameTest extends TestCase
                 'bar.example.com',
                 array('foo' => 'bar')
             ),
+            'no-match-on-different-hostname' => array(
+                new Hostname('foo.example.com'),
+                'bar.example.com',
+                null
+            ),
             'constraints-prevent-match' => array(
                 new Hostname(':foo.example.com', array('foo' => '\d+')),
                 'bar.example.com',

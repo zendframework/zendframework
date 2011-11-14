@@ -215,7 +215,7 @@ class SegmentTest extends TestCase
      * @param        integer $offset
      * @param        array   $params
      */
-    public function testAssembling($route, $path, $offset, array $params = null)
+    public function testAssembling(Segment $route, $path, $offset, array $params = null)
     {
         if ($params === null) {
             // Data which will not match are not tested for assembling.

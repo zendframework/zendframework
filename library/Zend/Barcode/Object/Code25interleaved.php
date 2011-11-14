@@ -39,7 +39,7 @@ class Code25interleaved extends Code25
      * Drawing of bearer bars
      * @var boolean
      */
-    private $_withBearerBars = false;
+    private $withBearerBars = false;
 
     /**
      * Default options for Code25interleaved barcode
@@ -47,7 +47,7 @@ class Code25interleaved extends Code25
      */
     protected function _getDefaultOptions()
     {
-        $this->_barcodeLength = 'even';
+        $this->barcodeLength = 'even';
     }
 
     /**
@@ -57,7 +57,7 @@ class Code25interleaved extends Code25
      */
     public function setWithBearerBars($value)
     {
-        $this->_withBearerBars = (bool) $value;
+        $this->withBearerBars = (bool) $value;
         return $this;
     }
 
@@ -67,7 +67,7 @@ class Code25interleaved extends Code25
      */
     public function getWithBearerBars()
     {
-        return $this->_withBearerBars;
+        return $this->withBearerBars;
     }
 
     /**
@@ -77,10 +77,10 @@ class Code25interleaved extends Code25
     protected function _calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
-        $startCharacter  = (4 * $this->_barThinWidth) * $this->_factor;
-        $characterLength = (3 * $this->_barThinWidth + 2 * $this->_barThickWidth) * $this->_factor;
+        $startCharacter  = (4 * $this->barThinWidth) * $this->factor;
+        $characterLength = (3 * $this->barThinWidth + 2 * $this->barThickWidth) * $this->factor;
         $encodedData     = strlen($this->getText()) * $characterLength;
-        $stopCharacter   = ($this->_barThickWidth + 2 * $this->_barThinWidth) * $this->_factor;
+        $stopCharacter   = ($this->barThickWidth + 2 * $this->barThinWidth) * $this->factor;
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -90,15 +90,15 @@ class Code25interleaved extends Code25
      */
     protected function _prepareBarcode()
     {
-        if ($this->_withBearerBars) {
-            $this->_withBorder = false;
+        if ($this->withBearerBars) {
+            $this->withBorder = false;
         }
 
         // Start character (0000)
-        $barcodeTable[] = array(1, $this->_barThinWidth, 0, 1);
-        $barcodeTable[] = array(0, $this->_barThinWidth, 0, 1);
-        $barcodeTable[] = array(1, $this->_barThinWidth, 0, 1);
-        $barcodeTable[] = array(0, $this->_barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(1, $this->barThinWidth, 0, 1);
+        $barcodeTable[] = array(0, $this->barThinWidth, 0, 1);
 
         // Encoded $text
         $text = $this->getText();
@@ -109,24 +109,24 @@ class Code25interleaved extends Code25
             // Interleave
             for ($ibar = 0; $ibar < 5; $ibar ++) {
                 // Draws char1 bar (fore color)
-                $barWidth = (substr($this->_codingMap[$char1], $ibar, 1))
-                          ? $this->_barThickWidth
-                          : $this->_barThinWidth;
+                $barWidth = (substr($this->codingMap[$char1], $ibar, 1))
+                          ? $this->barThickWidth
+                          : $this->barThinWidth;
 
                 $barcodeTable[] = array(1, $barWidth, 0, 1);
 
                 // Left space corresponding to char2 (background color)
-                $barWidth = (substr($this->_codingMap[$char2], $ibar, 1))
-                          ? $this->_barThickWidth
-                          : $this->_barThinWidth;
+                $barWidth = (substr($this->codingMap[$char2], $ibar, 1))
+                          ? $this->barThickWidth
+                          : $this->barThinWidth;
                 $barcodeTable[] = array(0, $barWidth, 0 , 1);
             }
         }
 
         // Stop character (100)
-        $barcodeTable[] = array(1 , $this->_barThickWidth, 0, 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth,  0, 1);
-        $barcodeTable[] = array(1 , $this->_barThinWidth,  0, 1);
+        $barcodeTable[] = array(1 , $this->barThickWidth, 0, 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth,  0, 1);
+        $barcodeTable[] = array(1 , $this->barThinWidth,  0, 1);
         return $barcodeTable;
     }
 
@@ -137,11 +137,11 @@ class Code25interleaved extends Code25
      */
     protected function _postDrawBarcode()
     {
-        if (!$this->_withBearerBars) {
+        if (!$this->withBearerBars) {
             return;
         }
 
-        $width  = $this->_barThickWidth * $this->_factor;
+        $width  = $this->barThickWidth * $this->factor;
         $point1 = $this->_rotate(-1, -1);
         $point2 = $this->_rotate($this->_calculateWidth() - 1, -1);
         $point3 = $this->_rotate($this->_calculateWidth() - 1, $width - 1);
@@ -154,19 +154,19 @@ class Code25interleaved extends Code25
         ));
         $point1 = $this->_rotate(
             0,
-            0 + $this->_barHeight * $this->_factor - 1
+            0 + $this->barHeight * $this->factor - 1
         );
         $point2 = $this->_rotate(
             $this->_calculateWidth() - 1,
-            0 + $this->_barHeight * $this->_factor - 1
+            0 + $this->barHeight * $this->factor - 1
         );
         $point3 = $this->_rotate(
             $this->_calculateWidth() - 1,
-            0 + $this->_barHeight * $this->_factor - $width
+            0 + $this->barHeight * $this->factor - $width
         );
         $point4 = $this->_rotate(
             0,
-            0 + $this->_barHeight * $this->_factor - $width
+            0 + $this->barHeight * $this->factor - $width
         );
         $this->_addPolygon(array(
             $point1,

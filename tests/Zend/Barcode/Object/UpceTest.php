@@ -42,129 +42,129 @@ class UpceTest extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('upce', $this->_object->getType());
+        $this->assertSame('upce', $this->object->getType());
     }
 
     public function testChecksum()
     {
-        $this->assertSame(9, $this->_object->getChecksum('3456789'));
+        $this->assertSame(9, $this->object->getChecksum('3456789'));
     }
 
     public function testSetText()
     {
-        $this->_object->setText('1234567');
-        $this->assertSame('1234567', $this->_object->getRawText());
-        $this->assertSame('12345670', $this->_object->getText());
-        $this->assertSame('12345670', $this->_object->getTextToDisplay());
+        $this->object->setText('1234567');
+        $this->assertSame('1234567', $this->object->getRawText());
+        $this->assertSame('12345670', $this->object->getText());
+        $this->assertSame('12345670', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithout8Characters()
     {
-        $this->_object->setText('12345');
-        $this->assertSame('12345', $this->_object->getRawText());
-        $this->assertSame('00123457', $this->_object->getText());
-        $this->assertSame('00123457', $this->_object->getTextToDisplay());
+        $this->object->setText('12345');
+        $this->assertSame('12345', $this->object->getRawText());
+        $this->assertSame('00123457', $this->object->getText());
+        $this->assertSame('00123457', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithout0or1AtBeginning()
     {
-        $this->_object->setText('3234567');
-        $this->assertSame('3234567', $this->_object->getRawText());
-        $this->assertSame('02345673', $this->_object->getText());
-        $this->assertSame('02345673', $this->_object->getTextToDisplay());
+        $this->object->setText('3234567');
+        $this->assertSame('3234567', $this->object->getRawText());
+        $this->assertSame('02345673', $this->object->getText());
+        $this->assertSame('02345673', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithoutChecksumHasNoEffect()
     {
-        $this->_object->setText('1234567');
-        $this->_object->setWithChecksum(false);
-        $this->assertSame('1234567', $this->_object->getRawText());
-        $this->assertSame('12345670', $this->_object->getText());
-        $this->assertSame('12345670', $this->_object->getTextToDisplay());
+        $this->object->setText('1234567');
+        $this->object->setWithChecksum(false);
+        $this->assertSame('1234567', $this->object->getRawText());
+        $this->assertSame('12345670', $this->object->getText());
+        $this->assertSame('12345670', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithSpaces()
     {
-        $this->_object->setText(' 1234567 ');
-        $this->assertSame('1234567', $this->_object->getRawText());
-        $this->assertSame('12345670', $this->_object->getText());
-        $this->assertSame('12345670', $this->_object->getTextToDisplay());
+        $this->object->setText(' 1234567 ');
+        $this->assertSame('1234567', $this->object->getRawText());
+        $this->assertSame('12345670', $this->object->getText());
+        $this->assertSame('12345670', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithChecksumNotDisplayed()
     {
-        $this->_object->setText('1234567');
-        $this->_object->setWithChecksumInText(false);
-        $this->assertSame('1234567', $this->_object->getRawText());
-        $this->assertSame('12345670', $this->_object->getText());
-        $this->assertSame('12345670', $this->_object->getTextToDisplay());
+        $this->object->setText('1234567');
+        $this->object->setWithChecksumInText(false);
+        $this->assertSame('1234567', $this->object->getRawText());
+        $this->assertSame('12345670', $this->object->getText());
+        $this->assertSame('12345670', $this->object->getTextToDisplay());
     }
 
     public function testBadTextDetectedIfChecksumWished()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setText('a');
-        $this->_object->setWithChecksum(true);
-        $this->_object->getText();
+        $this->object->setText('a');
+        $this->object->setWithChecksum(true);
+        $this->object->getText();
     }
 
     public function testCheckGoodParams()
     {
-        $this->_object->setText('1234567');
-        $this->assertTrue($this->_object->checkParams());
+        $this->object->setText('1234567');
+        $this->assertTrue($this->object->checkParams());
     }
 
     public function testGetKnownWidthWithoutOrientation()
     {
-        $this->_object->setText('1234567');
-        $this->assertEquals(71, $this->_object->getWidth());
-        $this->_object->setWithQuietZones(false);
-        $this->assertEquals(71, $this->_object->getWidth(true));
+        $this->object->setText('1234567');
+        $this->assertEquals(71, $this->object->getWidth());
+        $this->object->setWithQuietZones(false);
+        $this->assertEquals(71, $this->object->getWidth(true));
     }
 
     public function testCompleteGeneration()
     {
-        $this->_object->setText('1234567');
-        $this->_object->draw();
+        $this->object->setText('1234567');
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile('Upce_1234567_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorder()
     {
-        $this->_object->setText('1234567');
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('1234567');
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Upce_1234567_border_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithOrientation()
     {
-        $this->_object->setText('1234567');
-        $this->_object->setOrientation(60);
-        $this->_object->draw();
+        $this->object->setText('1234567');
+        $this->object->setOrientation(60);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Upce_1234567_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorderWithOrientation()
     {
-        $this->_object->setText('1234567');
-        $this->_object->setOrientation(60);
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('1234567');
+        $this->object->setOrientation(60);
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Upce_1234567_border_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testGetDefaultHeight()
     {
         // Checksum activated => text needed
-        $this->_object->setText('1234567');
-        $this->assertEquals(62, $this->_object->getHeight(true));
+        $this->object->setText('1234567');
+        $this->assertEquals(62, $this->object->getHeight(true));
     }
 }

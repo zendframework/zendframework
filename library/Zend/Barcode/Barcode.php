@@ -53,7 +53,7 @@ class Barcode
      *
      * @var string
      */
-    protected static $_staticFont = null;
+    protected static $staticFont = null;
 
     /**
      * The parser broker
@@ -308,7 +308,7 @@ class Barcode
      */
     public static function setBarcodeFont($font)
     {
-        self::$_staticFont = $font;
+        self::$staticFont = $font;
     }
 
     /**
@@ -318,6 +318,6 @@ class Barcode
      */
     public static function getBarcodeFont()
     {
-        return self::$_staticFont;
+        return self::$staticFont;
     }
 }

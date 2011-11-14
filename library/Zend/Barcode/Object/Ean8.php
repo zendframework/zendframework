@@ -46,8 +46,8 @@ class Ean8 extends Ean13
      */
     protected function _getDefaultOptions()
     {
-        $this->_barcodeLength = 8;
-        $this->_mandatoryChecksum = true;
+        $this->barcodeLength = 8;
+        $this->mandatoryChecksum = true;
     }
 
     /**
@@ -57,10 +57,10 @@ class Ean8 extends Ean13
     protected function _calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
-        $startCharacter  = (3 * $this->_barThinWidth) * $this->_factor;
-        $middleCharacter = (5 * $this->_barThinWidth) * $this->_factor;
-        $stopCharacter   = (3 * $this->_barThinWidth) * $this->_factor;
-        $encodedData     = (7 * $this->_barThinWidth) * $this->_factor * 8;
+        $startCharacter  = (3 * $this->barThinWidth) * $this->factor;
+        $middleCharacter = (5 * $this->barThinWidth) * $this->factor;
+        $stopCharacter   = (3 * $this->barThinWidth) * $this->factor;
+        $encodedData     = (7 * $this->barThinWidth) * $this->factor * 8;
         return $quietZone + $startCharacter + $middleCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -71,42 +71,42 @@ class Ean8 extends Ean13
     protected function _prepareBarcode()
     {
         $barcodeTable = array();
-        $height = ($this->_drawText) ? 1.1 : 1;
+        $height = ($this->drawText) ? 1.1 : 1;
 
         // Start character (101)
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
 
         $textTable = str_split($this->getText());
 
         // First part
         for ($i = 0; $i < 4; $i++) {
-            $bars = str_split($this->_codingMap['A'][$textTable[$i]]);
+            $bars = str_split($this->codingMap['A'][$textTable[$i]]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array($b , $this->_barThinWidth , 0 , 1);
+                $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
             }
         }
 
         // Middle character (01010)
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
 
         // Second part
         for ($i = 4; $i < 8; $i++) {
-            $bars = str_split($this->_codingMap['C'][$textTable[$i]]);
+            $bars = str_split($this->codingMap['C'][$textTable[$i]]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array($b , $this->_barThinWidth , 0 , 1);
+                $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
             }
         }
 
         // Stop character (101)
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
         return $barcodeTable;
     }
 
@@ -116,23 +116,23 @@ class Ean8 extends Ean13
      */
     protected function _drawText()
     {
-        if ($this->_drawText) {
+        if ($this->drawText) {
             $text = $this->getTextToDisplay();
-            $characterWidth = (7 * $this->_barThinWidth) * $this->_factor;
-            $leftPosition = $this->getQuietZone() + (3 * $this->_barThinWidth) * $this->_factor;
-            for ($i = 0; $i < $this->_barcodeLength; $i ++) {
+            $characterWidth = (7 * $this->barThinWidth) * $this->factor;
+            $leftPosition = $this->getQuietZone() + (3 * $this->barThinWidth) * $this->factor;
+            for ($i = 0; $i < $this->barcodeLength; $i ++) {
                 $this->_addText(
                     $text{$i},
-                    $this->_fontSize * $this->_factor,
+                    $this->fontSize * $this->factor,
                     $this->_rotate(
                         $leftPosition,
-                        (int) $this->_withBorder * 2
-                            + $this->_factor * ($this->_barHeight + $this->_fontSize) + 1
+                        (int) $this->withBorder * 2
+                            + $this->factor * ($this->barHeight + $this->fontSize) + 1
                     ),
-                    $this->_font,
-                    $this->_foreColor,
+                    $this->font,
+                    $this->foreColor,
                     'left',
-                    - $this->_orientation
+                    - $this->orientation
                 );
                 switch ($i) {
                     case 3:
@@ -141,7 +141,7 @@ class Ean8 extends Ean13
                     default:
                         $factor = 0;
                 }
-                $leftPosition = $leftPosition + $characterWidth + ($factor * $this->_barThinWidth * $this->_factor);
+                $leftPosition = $leftPosition + $characterWidth + ($factor * $this->barThinWidth * $this->factor);
             }
         }
     }

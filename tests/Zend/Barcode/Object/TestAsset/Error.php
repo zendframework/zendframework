@@ -5,6 +5,6 @@ class Error extends \Zend\Barcode\Object\Error
 {
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 }

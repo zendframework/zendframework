@@ -42,14 +42,14 @@ class Code128 extends AbstractObject
      * (even if it's sometime optional, most of time it's required)
      * @var boolean
      */
-    protected $_withChecksum = true;
+    protected $withChecksum = true;
 
     /**
      * @var array
      */
-    protected $_convertedText = array();
+    protected $convertedText = array();
 
-    protected $_codingMap = array(
+    protected $codingMap = array(
                  0 => "11011001100",   1 => "11001101100",   2 => "11001100110",
                  3 => "10010011000",   4 => "10010001100",   5 => "10001001100",
                  6 => "10011001000",   7 => "10011000100",   8 => "10001100100",
@@ -92,7 +92,7 @@ class Code128 extends AbstractObject
     * Character sets ABC
     * @var array
     */
-    protected $_charSets = array(
+    protected $charSets = array(
         'A' => array(
             ' ', '!', '"', '#', '$', '%', '&', "'",
             '(', ')', '*', '+', ',', '-', '.', '/',
@@ -144,14 +144,14 @@ class Code128 extends AbstractObject
     {
         $quietZone = $this->getQuietZone();
         // Each characters contain 11 bars...
-        $characterLength = 11 * $this->_barThinWidth * $this->_factor;
+        $characterLength = 11 * $this->barThinWidth * $this->factor;
         $convertedChars = count($this->_convertToBarcodeChars($this->getText()));
-        if ($this->_withChecksum) {
+        if ($this->withChecksum) {
             $convertedChars++;
         }
         $encodedData = $convertedChars * $characterLength;
         // ...except the STOP character (13)
-        $encodedData += $characterLength + 2 * $this->_barThinWidth * $this->_factor;
+        $encodedData += $characterLength + 2 * $this->barThinWidth * $this->factor;
         $width = $quietZone + $encodedData + $quietZone;
         return $width;
     }
@@ -174,7 +174,7 @@ class Code128 extends AbstractObject
 
         $convertedChars = $this->_convertToBarcodeChars($this->getText());
 
-        if ($this->_withChecksum) {
+        if ($this->withChecksum) {
             $convertedChars[] = $this->getChecksum($this->getText());
         }
 
@@ -182,9 +182,9 @@ class Code128 extends AbstractObject
         $convertedChars[] = 106;
 
         foreach ($convertedChars as $barcodeChar) {
-            $barcodePattern = $this->_codingMap[$barcodeChar];
+            $barcodePattern = $this->codingMap[$barcodeChar];
             foreach (str_split($barcodePattern) as $c) {
-                $barcodeTable[] = array($c, $this->_barThinWidth, 0, 1);
+                $barcodeTable[] = array($c, $this->barThinWidth, 0, 1);
             }
         }
         return $barcodeTable;
@@ -223,8 +223,8 @@ class Code128 extends AbstractObject
             return array();
         }
 
-        if (isset($this->_convertedText[md5($string)])) {
-            return $this->_convertedText[md5($string)];
+        if (isset($this->convertedText[md5($string)])) {
+            return $this->convertedText[md5($string)];
         }
 
         $currentCharset = null;
@@ -244,49 +244,49 @@ class Code128 extends AbstractObject
                  */
                 if ($currentCharset != 'C') {
                     if ($pos == 0) {
-                        $code = array_search("START C", $this->_charSets['C']);
+                        $code = array_search("START C", $this->charSets['C']);
                     } else {
-                        $code = array_search("Code C", $this->_charSets[$currentCharset]);
+                        $code = array_search("Code C", $this->charSets[$currentCharset]);
                     }
                     $result[] = $code;
                     $currentCharset = 'C';
                 }
-            } else if (in_array($char, $this->_charSets['B']) && $currentCharset != 'B'
-                  && !(in_array($char, $this->_charSets['A']) && $currentCharset == 'A')) {
+            } else if (in_array($char, $this->charSets['B']) && $currentCharset != 'B'
+                  && !(in_array($char, $this->charSets['A']) && $currentCharset == 'A')) {
                 /**
                  * Switch to B as B contains the char and B is not the current charset.
                  */
                 if ($pos == 0) {
-                    $code = array_search("START B", $this->_charSets['B']);
+                    $code = array_search("START B", $this->charSets['B']);
                 } else {
-                    $code = array_search("Code B", $this->_charSets[$currentCharset]);
+                    $code = array_search("Code B", $this->charSets[$currentCharset]);
                 }
                 $result[] = $code;
                 $currentCharset = 'B';
-            } else if (array_key_exists($char, $this->_charSets['A']) && $currentCharset != 'A'
-                  && !(array_key_exists($char, $this->_charSets['B']) && $currentCharset == 'B')) {
+            } else if (array_key_exists($char, $this->charSets['A']) && $currentCharset != 'A'
+                  && !(array_key_exists($char, $this->charSets['B']) && $currentCharset == 'B')) {
                 /**
                  * Switch to C as C contains the char and C is not the current charset.
                  */
                 if ($pos == 0) {
-                    $code = array_search("START A", $this->_charSets['A']);
+                    $code = array_search("START A", $this->charSets['A']);
                 } else {
-                    $code =array_search("Code A", $this->_charSets[$currentCharset]);
+                    $code =array_search("Code A", $this->charSets[$currentCharset]);
                 }
                 $result[] = $code;
                 $currentCharset = 'A';
             }
 
             if ($currentCharset == 'C') {
-                $code = array_search(substr($string, $pos, 2), $this->_charSets['C']);
+                $code = array_search(substr($string, $pos, 2), $this->charSets['C']);
                 $pos++; //Two chars from input
             } else {
-                $code = array_search($string[$pos], $this->_charSets[$currentCharset]);
+                $code = array_search($string[$pos], $this->charSets[$currentCharset]);
             }
             $result[] = $code;
         }
 
-        $this->_convertedText[md5($string)] = $result;
+        $this->convertedText[md5($string)] = $result;
         return $result;
     }
 
@@ -297,7 +297,7 @@ class Code128 extends AbstractObject
      */
     public function setText($value)
     {
-        $this->_text = $value;
+        $this->text = $value;
         return $this;
     }
 
@@ -307,7 +307,7 @@ class Code128 extends AbstractObject
      */
     public function getText()
     {
-        return $this->_text;
+        return $this->text;
     }
 
     /**

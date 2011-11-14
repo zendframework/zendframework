@@ -48,124 +48,124 @@ abstract class AbstractObject implements Barcode\Object
      * Namespace of the barcode for autoloading
      * @var string
      */
-    protected $_barcodeNamespace = 'Zend\Barcode\Object';
+    protected $barcodeNamespace = 'Zend\Barcode\Object';
 
     /**
      * Set of drawing instructions
      * @var array
      */
-    protected $_instructions = array();
+    protected $instructions = array();
 
     /**
      * Barcode type
      * @var string
      */
-    protected $_type = null;
+    protected $type = null;
 
     /**
      * Height of the object
      * @var integer
      */
-    protected $_height = null;
+    protected $height = null;
 
     /**
      * Width of the object
      * @var integer
      */
-    protected $_width = null;
+    protected $width = null;
 
     /**
      * Height of the bar
      * @var integer
      */
-    protected $_barHeight = 50;
+    protected $barHeight = 50;
 
     /**
      * Width of a thin bar
      * @var integer
      */
-    protected $_barThinWidth = 1;
+    protected $barThinWidth = 1;
 
     /**
      * Width of a thick bar
      * @var integer
      */
-    protected $_barThickWidth = 3;
+    protected $barThickWidth = 3;
 
     /**
      * Factor to multiply bar and font measure
      * (barHeight, barThinWidth, barThickWidth & fontSize)
      * @var integer
      */
-    protected $_factor = 1;
+    protected $factor = 1;
 
     /**
      * Font and bars color of the object
      * @var integer
      */
-    protected $_foreColor = 0x000000;
+    protected $foreColor = 0x000000;
 
     /**
      * Background color of the object
      * @var integer
      */
-    protected $_backgroundColor = 0xFFFFFF;
+    protected $backgroundColor = 0xFFFFFF;
 
     /**
      * Activate/deactivate border of the object
      * @var boolean
      */
-    protected $_withBorder = false;
+    protected $withBorder = false;
 
     /**
      * Activate/deactivate drawing of quiet zones
      * @var boolean
      */
-    protected $_withQuietZones = true;
+    protected $withQuietZones = true;
 
     /**
      * Force quiet zones even if
      * @var boolean
      */
-    protected $_mandatoryQuietZones = false;
+    protected $mandatoryQuietZones = false;
 
     /**
      * Orientation of the barcode in degrees
      * @var float
      */
-    protected $_orientation = 0;
+    protected $orientation = 0;
 
     /**
      * Offset from the top the object
      * (calculated from the orientation)
      * @var integer
      */
-    protected $_offsetTop = null;
+    protected $offsetTop = null;
 
     /**
      * Offset from the left the object
      * (calculated from the orientation)
      * @var integer
      */
-    protected $_offsetLeft = null;
+    protected $offsetLeft = null;
 
     /**
      * Text to display
      * @var string
      */
-    protected $_text = null;
+    protected $text = null;
 
     /**
      * Display (or not) human readable text
      * @var boolean
      */
-    protected $_drawText = true;
+    protected $drawText = true;
 
     /**
      * Adjust (or not) position of human readable characters with barcode
      * @var boolean
      */
-    protected $_stretchText = false;
+    protected $stretchText = false;
 
     /**
      * Font resource
@@ -173,51 +173,51 @@ abstract class AbstractObject implements Barcode\Object
      *  - string: corresponds to path of a TTF font
      * @var integer|string
      */
-    protected $_font = null;
+    protected $font = null;
 
     /**
      * Font size
      * @var float
      */
-    protected $_fontSize = 10;
+    protected $fontSize = 10;
 
     /**
      * Drawing of checksum
      * @var boolean
      */
-    protected $_withChecksum = false;
+    protected $withChecksum = false;
 
     /**
      * Drawing of checksum inside text
      * @var boolean
      */
-    protected $_withChecksumInText = false;
+    protected $withChecksumInText = false;
 
     /**
      * Fix barcode length (numeric or string like 'even')
      * @var $_barcodeLength integer | string
      */
-    protected $_barcodeLength = null;
+    protected $barcodeLength = null;
 
     /**
      * Activate automatic addition of leading zeros
      * if barcode length is fixed
      * @var $_addLeadingZeros boolean
      */
-    protected $_addLeadingZeros = true;
+    protected $addLeadingZeros = true;
 
     /**
      * Activation of mandatory checksum
      * to deactivate unauthorized modification
      * @var $_mandatoryChecksum boolean
      */
-    protected $_mandatoryChecksum = false;
+    protected $mandatoryChecksum = false;
 
     /**
      * Character used to substitute checksum character for validation
      * @var $_substituteChecksumCharacter mixed
      */
-    protected $_substituteChecksumCharacter = 0;
+    protected $substituteChecksumCharacter = 0;
 
     /**
      * Constructor
@@ -227,17 +227,17 @@ abstract class AbstractObject implements Barcode\Object
     public function __construct($options = null)
     {
         $this->_getDefaultOptions();
-        $this->_font = Barcode\Barcode::getBarcodeFont();
+        $this->font = Barcode\Barcode::getBarcodeFont();
         if ($options instanceof Config) {
             $options = $options->toArray();
         }
         if (is_array($options)) {
             $this->setOptions($options);
         }
-        $this->_type = strtolower(substr(get_class($this), strlen($this->_barcodeNamespace) + 1));
-        if ($this->_mandatoryChecksum) {
-            $this->_withChecksum = true;
-            $this->_withChecksumInText = true;
+        $this->type = strtolower(substr(get_class($this), strlen($this->barcodeNamespace) + 1));
+        if ($this->mandatoryChecksum) {
+            $this->withChecksum = true;
+            $this->withChecksumInText = true;
         }
     }
 
@@ -283,7 +283,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setBarcodeNamespace($namespace)
     {
-        $this->_barcodeNamespace = $namespace;
+        $this->barcodeNamespace = $namespace;
         return $this;
     }
 
@@ -294,7 +294,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getBarcodeNamespace()
     {
-        return $this->_barcodeNamespace;
+        return $this->barcodeNamespace;
     }
 
     /**
@@ -303,7 +303,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -319,7 +319,7 @@ abstract class AbstractObject implements Barcode\Object
                 'Bar height must be greater than 0'
             );
         }
-        $this->_barHeight = intval($value);
+        $this->barHeight = intval($value);
         return $this;
     }
 
@@ -329,7 +329,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getBarHeight()
     {
-        return $this->_barHeight;
+        return $this->barHeight;
     }
 
     /**
@@ -345,7 +345,7 @@ abstract class AbstractObject implements Barcode\Object
                 'Bar width must be greater than 0'
             );
         }
-        $this->_barThinWidth = intval($value);
+        $this->barThinWidth = intval($value);
         return $this;
     }
 
@@ -355,7 +355,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getBarThinWidth()
     {
-        return $this->_barThinWidth;
+        return $this->barThinWidth;
     }
 
     /**
@@ -371,7 +371,7 @@ abstract class AbstractObject implements Barcode\Object
                 'Bar width must be greater than 0'
             );
         }
-        $this->_barThickWidth = intval($value);
+        $this->barThickWidth = intval($value);
         return $this;
     }
 
@@ -381,7 +381,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getBarThickWidth()
     {
-        return $this->_barThickWidth;
+        return $this->barThickWidth;
     }
 
     /**
@@ -398,7 +398,7 @@ abstract class AbstractObject implements Barcode\Object
                 'Factor must be greater than 0'
             );
         }
-        $this->_factor = floatval($value);
+        $this->factor = floatval($value);
         return $this;
     }
 
@@ -409,7 +409,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getFactor()
     {
-        return $this->_factor;
+        return $this->factor;
     }
 
     /**
@@ -421,9 +421,9 @@ abstract class AbstractObject implements Barcode\Object
     public function setForeColor($value)
     {
         if (preg_match('`\#[0-9A-F]{6}`', $value)) {
-            $this->_foreColor = hexdec($value);
+            $this->foreColor = hexdec($value);
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
-            $this->_foreColor = intval($value);
+            $this->foreColor = intval($value);
         } else {
             throw new InvalidArgumentException(
                 'Text color must be set as #[0-9A-F]{6}'
@@ -438,7 +438,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getForeColor()
     {
-        return $this->_foreColor;
+        return $this->foreColor;
     }
 
     /**
@@ -450,9 +450,9 @@ abstract class AbstractObject implements Barcode\Object
     public function setBackgroundColor($value)
     {
         if (preg_match('`\#[0-9A-F]{6}`', $value)) {
-            $this->_backgroundColor = hexdec($value);
+            $this->backgroundColor = hexdec($value);
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
-            $this->_backgroundColor = intval($value);
+            $this->backgroundColor = intval($value);
         } else {
             throw new InvalidArgumentException(
                 'Background color must be set as #[0-9A-F]{6}'
@@ -467,7 +467,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getBackgroundColor()
     {
-        return $this->_backgroundColor;
+        return $this->backgroundColor;
     }
 
     /**
@@ -477,7 +477,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setWithBorder($value)
     {
-        $this->_withBorder = (bool) $value;
+        $this->withBorder = (bool) $value;
         return $this;
     }
 
@@ -487,7 +487,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getWithBorder()
     {
-        return $this->_withBorder;
+        return $this->withBorder;
     }
 
     /**
@@ -497,7 +497,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setWithQuietZones($value)
     {
-        $this->_withQuietZones = (bool) $value;
+        $this->withQuietZones = (bool) $value;
         return $this;
     }
 
@@ -507,7 +507,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getWithQuietZones()
     {
-        return $this->_withQuietZones;
+        return $this->withQuietZones;
     }
 
     /**
@@ -516,9 +516,9 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setReverseColor()
     {
-        $tmp                    = $this->_foreColor;
-        $this->_foreColor       = $this->_backgroundColor;
-        $this->_backgroundColor = $tmp;
+        $tmp                    = $this->foreColor;
+        $this->foreColor       = $this->backgroundColor;
+        $this->backgroundColor = $tmp;
         return $this;
     }
 
@@ -530,7 +530,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setOrientation($value)
     {
-        $this->_orientation = floatval($value) - floor(floatval($value) / 360) * 360;
+        $this->orientation = floatval($value) - floor(floatval($value) / 360) * 360;
         return $this;
     }
 
@@ -540,7 +540,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getOrientation()
     {
-        return $this->_orientation;
+        return $this->orientation;
     }
 
     /**
@@ -550,7 +550,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setText($value)
     {
-        $this->_text = trim($value);
+        $this->text = trim($value);
         return $this;
     }
 
@@ -560,9 +560,9 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getText()
     {
-        $text = $this->_text;
-        if ($this->_withChecksum) {
-            $text .= $this->getChecksum($this->_text);
+        $text = $this->text;
+        if ($this->withChecksum) {
+            $text .= $this->getChecksum($this->text);
         }
         return $this->_addLeadingZeros($text);
     }
@@ -574,15 +574,15 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _addLeadingZeros($text, $withoutChecksum = false)
     {
-        if ($this->_barcodeLength && $this->_addLeadingZeros) {
-            $omitChecksum = (int) ($this->_withChecksum && $withoutChecksum);
-            if (is_int($this->_barcodeLength)) {
-                $length = $this->_barcodeLength - $omitChecksum;
+        if ($this->barcodeLength && $this->addLeadingZeros) {
+            $omitChecksum = (int) ($this->withChecksum && $withoutChecksum);
+            if (is_int($this->barcodeLength)) {
+                $length = $this->barcodeLength - $omitChecksum;
                 if (strlen($text) < $length) {
                     $text = str_repeat('0', $length - strlen($text)) . $text;
                 }
             } else {
-                if ($this->_barcodeLength == 'even') {
+                if ($this->barcodeLength == 'even') {
                     $text = ((strlen($text) - $omitChecksum) % 2 ? '0' . $text : $text);
                 }
             }
@@ -596,7 +596,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getRawText()
     {
-        return $this->_text;
+        return $this->text;
     }
 
     /**
@@ -605,10 +605,10 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getTextToDisplay()
     {
-        if ($this->_withChecksumInText) {
+        if ($this->withChecksumInText) {
             return $this->getText();
         } else {
-            return $this->_addLeadingZeros($this->_text, true);
+            return $this->_addLeadingZeros($this->text, true);
         }
     }
 
@@ -619,7 +619,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setDrawText($value)
     {
-        $this->_drawText = (bool) $value;
+        $this->drawText = (bool) $value;
         return $this;
     }
 
@@ -629,7 +629,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getDrawText()
     {
-        return $this->_drawText;
+        return $this->drawText;
     }
 
     /**
@@ -641,7 +641,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setStretchText($value)
     {
-        $this->_stretchText = (bool) $value;
+        $this->stretchText = (bool) $value;
         return $this;
     }
 
@@ -652,7 +652,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getStretchText()
     {
-        return $this->_stretchText;
+        return $this->stretchText;
     }
 
     /**
@@ -664,8 +664,8 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setWithChecksum($value)
     {
-        if (!$this->_mandatoryChecksum) {
-            $this->_withChecksum = (bool) $value;
+        if (!$this->mandatoryChecksum) {
+            $this->withChecksum = (bool) $value;
         }
         return $this;
     }
@@ -677,7 +677,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getWithChecksum()
     {
-        return $this->_withChecksum;
+        return $this->withChecksum;
     }
 
     /**
@@ -690,8 +690,8 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setWithChecksumInText($value)
     {
-        if (!$this->_mandatoryChecksum) {
-            $this->_withChecksumInText = (bool) $value;
+        if (!$this->mandatoryChecksum) {
+            $this->withChecksumInText = (bool) $value;
         }
         return $this;
     }
@@ -703,7 +703,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getWithChecksumInText()
     {
-        return $this->_withChecksumInText;
+        return $this->withChecksumInText;
     }
 
     /**
@@ -724,12 +724,12 @@ abstract class AbstractObject implements Barcode\Object
             }
 
             // Case of numeric font with GD
-            $this->_font = $value;
+            $this->font = $value;
 
             // In this case font size is given by:
-            $this->_fontSize = imagefontheight($value);
+            $this->fontSize = imagefontheight($value);
         } elseif (is_string($value)) {
-            $this->_font = $value;
+            $this->font = $value;
         } else {
             throw new InvalidArgumentException(sprintf(
                 'Invalid font "%s" provided to setFont()',
@@ -745,7 +745,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getFont()
     {
-        return $this->_font;
+        return $this->font;
     }
 
     /**
@@ -756,7 +756,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function setFontSize($value)
     {
-        if (is_numeric($this->_font)) {
+        if (is_numeric($this->font)) {
             // Case of numeric font with GD
             return $this;
         }
@@ -767,7 +767,7 @@ abstract class AbstractObject implements Barcode\Object
             );
         }
 
-        $this->_fontSize = $value;
+        $this->fontSize = $value;
         return $this;
     }
 
@@ -777,7 +777,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getFontSize()
     {
-        return $this->_fontSize;
+        return $this->fontSize;
     }
 
     /**
@@ -787,8 +787,8 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getQuietZone()
     {
-        if ($this->_withQuietZones || $this->_mandatoryQuietZones) {
-            return 10 * $this->_barThinWidth * $this->_factor;
+        if ($this->withQuietZones || $this->mandatoryQuietZones) {
+            return 10 * $this->barThinWidth * $this->factor;
         } else {
             return 0;
         }
@@ -800,7 +800,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _addInstruction(array $instruction)
     {
-        $this->_instructions[] = $instruction;
+        $this->instructions[] = $instruction;
     }
 
     /**
@@ -809,7 +809,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getInstructions()
     {
-        return $this->_instructions;
+        return $this->instructions;
     }
 
     /**
@@ -821,7 +821,7 @@ abstract class AbstractObject implements Barcode\Object
     protected function _addPolygon(array $points, $color = null, $filled = true)
     {
         if ($color === null) {
-            $color = $this->_foreColor;
+            $color = $this->foreColor;
         }
         $this->_addInstruction(array(
             'type'   => 'polygon',
@@ -851,7 +851,7 @@ abstract class AbstractObject implements Barcode\Object
         $orientation = 0
     ) {
         if ($color === null) {
-            $color = $this->_foreColor;
+            $color = $this->foreColor;
         }
         $this->_addInstruction(array(
             'type'        => 'text',
@@ -885,7 +885,7 @@ abstract class AbstractObject implements Barcode\Object
     protected function _checkText($value = null)
     {
         if ($value === null) {
-            $value = $this->_text;
+            $value = $this->text;
         }
         if (!strlen($value)) {
             throw new RuntimeException(
@@ -904,7 +904,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _checkRatio($min = 2, $max = 3)
     {
-        $ratio = $this->_barThickWidth / $this->_barThinWidth;
+        $ratio = $this->barThickWidth / $this->barThinWidth;
         if (!($ratio >= $min && $ratio <= $max)) {
             throw new OutOfRangeException(sprintf(
                 'Ratio thick/thin bar must be between %0.1f and %0.1f (actual %0.3f)',
@@ -922,7 +922,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _checkFontAndOrientation()
     {
-        if (is_numeric($this->_font) && $this->_orientation != 0) {
+        if (is_numeric($this->font) && $this->orientation != 0) {
             throw new RuntimeException(
                 'Only drawing with TTF font allow orientation of the barcode.'
             );
@@ -936,9 +936,9 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _calculateWidth()
     {
-        return (int) $this->_withBorder
+        return (int) $this->withBorder
             + $this->_calculateBarcodeWidth()
-            + (int) $this->_withBorder;
+            + (int) $this->withBorder;
     }
 
     /**
@@ -953,9 +953,9 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _calculateHeight()
     {
-        return (int) $this->_withBorder * 2
+        return (int) $this->withBorder * 2
             + $this->_calculateBarcodeHeight()
-            + (int) $this->_withBorder * 2;
+            + (int) $this->withBorder * 2;
     }
 
     /**
@@ -966,11 +966,11 @@ abstract class AbstractObject implements Barcode\Object
     {
         $textHeight = 0;
         $extraHeight = 0;
-        if ($this->_drawText) {
-            $textHeight += $this->_fontSize;
+        if ($this->drawText) {
+            $textHeight += $this->fontSize;
             $extraHeight = 2;
         }
-        return ($this->_barHeight + $textHeight) * $this->_factor + $extraHeight;
+        return ($this->barHeight + $textHeight) * $this->factor + $extraHeight;
     }
 
     /**
@@ -979,12 +979,12 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getHeight($recalculate = false)
     {
-        if ($this->_height === null || $recalculate) {
-            $this->_height =
-                abs($this->_calculateHeight() * cos($this->_orientation / 180 * pi()))
-                + abs($this->_calculateWidth() * sin($this->_orientation / 180 * pi()));
+        if ($this->height === null || $recalculate) {
+            $this->height =
+                abs($this->_calculateHeight() * cos($this->orientation / 180 * pi()))
+                + abs($this->_calculateWidth() * sin($this->orientation / 180 * pi()));
         }
-        return $this->_height;
+        return $this->height;
     }
 
     /**
@@ -993,12 +993,12 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getWidth($recalculate = false)
     {
-        if ($this->_width === null || $recalculate) {
-            $this->_width =
-                abs($this->_calculateWidth() * cos($this->_orientation / 180 * pi()))
-                + abs($this->_calculateHeight() * sin($this->_orientation / 180 * pi()));
+        if ($this->width === null || $recalculate) {
+            $this->width =
+                abs($this->_calculateWidth() * cos($this->orientation / 180 * pi()))
+                + abs($this->_calculateHeight() * sin($this->orientation / 180 * pi()));
         }
-        return $this->_width;
+        return $this->width;
     }
 
     /**
@@ -1009,23 +1009,23 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getOffsetLeft($recalculate = false)
     {
-        if ($this->_offsetLeft === null || $recalculate) {
-            $this->_offsetLeft = - min(array(
+        if ($this->offsetLeft === null || $recalculate) {
+            $this->offsetLeft = - min(array(
                 0 * cos(
-                        $this->_orientation / 180 * pi()) - 0 * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) - 0 * sin(
+                        $this->orientation / 180 * pi()),
                 0 * cos(
-                        $this->_orientation / 180 * pi()) - $this->_calculateBarcodeHeight() * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) - $this->_calculateBarcodeHeight() * sin(
+                        $this->orientation / 180 * pi()),
                 $this->_calculateBarcodeWidth() * cos(
-                        $this->_orientation / 180 * pi()) - $this->_calculateBarcodeHeight() * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) - $this->_calculateBarcodeHeight() * sin(
+                        $this->orientation / 180 * pi()),
                 $this->_calculateBarcodeWidth() * cos(
-                        $this->_orientation / 180 * pi()) - 0 * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) - 0 * sin(
+                        $this->orientation / 180 * pi()),
             ));
         }
-        return $this->_offsetLeft;
+        return $this->offsetLeft;
     }
 
     /**
@@ -1036,23 +1036,23 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function getOffsetTop($recalculate = false)
     {
-        if ($this->_offsetTop === null || $recalculate) {
-            $this->_offsetTop = - min(array(
+        if ($this->offsetTop === null || $recalculate) {
+            $this->offsetTop = - min(array(
                 0 * cos(
-                        $this->_orientation / 180 * pi()) + 0 * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) + 0 * sin(
+                        $this->orientation / 180 * pi()),
                 $this->_calculateBarcodeHeight() * cos(
-                        $this->_orientation / 180 * pi()) + 0 * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) + 0 * sin(
+                        $this->orientation / 180 * pi()),
                 $this->_calculateBarcodeHeight() * cos(
-                        $this->_orientation / 180 * pi()) + $this->_calculateBarcodeWidth() * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) + $this->_calculateBarcodeWidth() * sin(
+                        $this->orientation / 180 * pi()),
                 0 * cos(
-                        $this->_orientation / 180 * pi()) + $this->_calculateBarcodeWidth() * sin(
-                        $this->_orientation / 180 * pi()),
+                        $this->orientation / 180 * pi()) + $this->_calculateBarcodeWidth() * sin(
+                        $this->orientation / 180 * pi()),
             ));
         }
-        return $this->_offsetTop;
+        return $this->offsetTop;
     }
 
     /**
@@ -1063,11 +1063,11 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _rotate($x1, $y1)
     {
-        $x2 = $x1 * cos($this->_orientation / 180 * pi())
-            - $y1 * sin($this->_orientation / 180 * pi())
+        $x2 = $x1 * cos($this->orientation / 180 * pi())
+            - $y1 * sin($this->orientation / 180 * pi())
             + $this->getOffsetLeft();
-        $y2 = $y1 * cos($this->_orientation / 180 * pi())
-            + $x1 * sin($this->_orientation / 180 * pi())
+        $y2 = $y1 * cos($this->orientation / 180 * pi())
+            + $x1 * sin($this->orientation / 180 * pi())
             + $this->getOffsetTop();
         return array(intval($x2) , intval($y2));
     }
@@ -1095,8 +1095,8 @@ abstract class AbstractObject implements Barcode\Object
 
         $this->_preDrawBarcode();
 
-        $xpos = (int) $this->_withBorder;
-        $ypos = (int) $this->_withBorder;
+        $xpos = (int) $this->withBorder;
+        $ypos = (int) $this->withBorder;
 
         $point1 = $this->_rotate(0, 0);
         $point2 = $this->_rotate(0, $this->_calculateHeight() - 1);
@@ -1111,13 +1111,13 @@ abstract class AbstractObject implements Barcode\Object
             $point2,
             $point3,
             $point4
-        ), $this->_backgroundColor);
+        ), $this->backgroundColor);
 
         $xpos     += $this->getQuietZone();
-        $barLength = $this->_barHeight * $this->_factor;
+        $barLength = $this->barHeight * $this->factor;
 
         foreach ($barcodeTable as $bar) {
-            $width = $bar[1] * $this->_factor;
+            $width = $bar[1] * $this->factor;
             if ($bar[0]) {
                 $point1 = $this->_rotate($xpos, $ypos + $bar[2] * $barLength);
                 $point2 = $this->_rotate($xpos, $ypos + $bar[3] * $barLength);
@@ -1148,7 +1148,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _drawBorder()
     {
-        if ($this->_withBorder) {
+        if ($this->withBorder) {
             $point1 = $this->_rotate(0, 0);
             $point2 = $this->_rotate($this->_calculateWidth() - 1, 0);
             $point3 = $this->_rotate(
@@ -1162,7 +1162,7 @@ abstract class AbstractObject implements Barcode\Object
                 $point3,
                 $point4,
                 $point1,
-            ), $this->_foreColor, false);
+            ), $this->foreColor, false);
         }
     }
 
@@ -1172,40 +1172,40 @@ abstract class AbstractObject implements Barcode\Object
      */
     protected function _drawText()
     {
-        if ($this->_drawText) {
+        if ($this->drawText) {
             $text = $this->getTextToDisplay();
-            if ($this->_stretchText) {
+            if ($this->stretchText) {
                 $textLength = strlen($text);
                 $space      = ($this->_calculateWidth() - 2 * $this->getQuietZone()) / $textLength;
                 for ($i = 0; $i < $textLength; $i ++) {
                     $leftPosition = $this->getQuietZone() + $space * ($i + 0.5);
                     $this->_addText(
                         $text{$i},
-                        $this->_fontSize * $this->_factor,
+                        $this->fontSize * $this->factor,
                         $this->_rotate(
                             $leftPosition,
-                            (int) $this->_withBorder * 2
-                                + $this->_factor * ($this->_barHeight + $this->_fontSize) + 1
+                            (int) $this->withBorder * 2
+                                + $this->factor * ($this->barHeight + $this->fontSize) + 1
                         ),
-                        $this->_font,
-                        $this->_foreColor,
+                        $this->font,
+                        $this->foreColor,
                         'center',
-                        - $this->_orientation
+                        - $this->orientation
                     );
                 }
             } else {
                 $this->_addText(
                     $text,
-                    $this->_fontSize * $this->_factor,
+                    $this->fontSize * $this->factor,
                     $this->_rotate(
                         $this->_calculateWidth() / 2,
-                        (int) $this->_withBorder * 2
-                            + $this->_factor * ($this->_barHeight + $this->_fontSize) + 1
+                        (int) $this->withBorder * 2
+                            + $this->factor * ($this->barHeight + $this->fontSize) + 1
                     ),
-                    $this->_font,
-                    $this->_foreColor,
+                    $this->font,
+                    $this->foreColor,
                     'center',
-                    - $this->_orientation
+                    - $this->orientation
                 );
             }
         }
@@ -1237,8 +1237,8 @@ abstract class AbstractObject implements Barcode\Object
 
         $checksumCharacter = '';
         $withChecksum = false;
-        if ($this->_mandatoryChecksum) {
-            $checksumCharacter = $this->_substituteChecksumCharacter;
+        if ($this->mandatoryChecksum) {
+            $checksumCharacter = $this->substituteChecksumCharacter;
             $withChecksum = true;
         }
 

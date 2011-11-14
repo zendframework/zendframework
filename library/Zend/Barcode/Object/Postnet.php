@@ -42,7 +42,7 @@ class Postnet extends AbstractObject
      * - 1 = complete bar
      * @var array
      */
-    protected $_codingMap = array(
+    protected $codingMap = array(
         0 => "11000",
         1 => "00011",
         2 => "00101",
@@ -61,11 +61,11 @@ class Postnet extends AbstractObject
      */
     protected function _getDefaultOptions()
     {
-        $this->_barThinWidth = 2;
-        $this->_barHeight = 20;
-        $this->_drawText = false;
-        $this->_stretchText = true;
-        $this->_mandatoryChecksum = true;
+        $this->barThinWidth = 2;
+        $this->barHeight = 20;
+        $this->drawText = false;
+        $this->stretchText = true;
+        $this->mandatoryChecksum = true;
     }
 
     /**
@@ -75,9 +75,9 @@ class Postnet extends AbstractObject
     protected function _calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
-        $startCharacter  = (2 * $this->_barThinWidth) * $this->_factor;
-        $stopCharacter   = (1 * $this->_barThinWidth) * $this->_factor;
-        $encodedData     = (10 * $this->_barThinWidth) * $this->_factor * strlen($this->getText());
+        $startCharacter  = (2 * $this->barThinWidth) * $this->factor;
+        $stopCharacter   = (1 * $this->barThinWidth) * $this->factor;
+        $encodedData     = (10 * $this->barThinWidth) * $this->factor * strlen($this->getText());
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -97,21 +97,21 @@ class Postnet extends AbstractObject
         $barcodeTable = array();
 
         // Start character (1)
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
 
         // Text to encode
         $textTable = str_split($this->getText());
         foreach ($textTable as $char) {
-            $bars = str_split($this->_codingMap[$char]);
+            $bars = str_split($this->codingMap[$char]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array(1 , $this->_barThinWidth , 0.5 - $b * 0.5 , 1);
-                $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
+                $barcodeTable[] = array(1 , $this->barThinWidth , 0.5 - $b * 0.5 , 1);
+                $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
             }
         }
 
         // Stop character (1)
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
         return $barcodeTable;
     }
 

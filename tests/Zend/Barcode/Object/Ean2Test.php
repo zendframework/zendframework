@@ -42,114 +42,114 @@ class Ean2Test extends TestCommon
 
     public function testType()
     {
-        $this->assertSame('ean2', $this->_object->getType());
+        $this->assertSame('ean2', $this->object->getType());
     }
 
     public function testChecksum()
     {
-        $this->assertSame(9, $this->_object->getChecksum('43'));
+        $this->assertSame(9, $this->object->getChecksum('43'));
     }
 
     public function testSetText()
     {
-        $this->_object->setText('43');
-        $this->assertSame('43', $this->_object->getRawText());
-        $this->assertSame('43', $this->_object->getText());
-        $this->assertSame('43', $this->_object->getTextToDisplay());
+        $this->object->setText('43');
+        $this->assertSame('43', $this->object->getRawText());
+        $this->assertSame('43', $this->object->getText());
+        $this->assertSame('43', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithout2Characters()
     {
-        $this->_object->setText('5');
-        $this->assertSame('5', $this->_object->getRawText());
-        $this->assertSame('05', $this->_object->getText());
-        $this->assertSame('05', $this->_object->getTextToDisplay());
+        $this->object->setText('5');
+        $this->assertSame('5', $this->object->getRawText());
+        $this->assertSame('05', $this->object->getText());
+        $this->assertSame('05', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithoutChecksumHasNoEffect()
     {
-        $this->_object->setText('43');
-        $this->_object->setWithChecksum(false);
-        $this->assertSame('43', $this->_object->getRawText());
-        $this->assertSame('43', $this->_object->getText());
-        $this->assertSame('43', $this->_object->getTextToDisplay());
+        $this->object->setText('43');
+        $this->object->setWithChecksum(false);
+        $this->assertSame('43', $this->object->getRawText());
+        $this->assertSame('43', $this->object->getText());
+        $this->assertSame('43', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithSpaces()
     {
-        $this->_object->setText(' 43 ');
-        $this->assertSame('43', $this->_object->getRawText());
-        $this->assertSame('43', $this->_object->getText());
-        $this->assertSame('43', $this->_object->getTextToDisplay());
+        $this->object->setText(' 43 ');
+        $this->assertSame('43', $this->object->getRawText());
+        $this->assertSame('43', $this->object->getText());
+        $this->assertSame('43', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithChecksumNotDisplayed()
     {
-        $this->_object->setText('43');
-        $this->_object->setWithChecksumInText(false);
-        $this->assertSame('43', $this->_object->getRawText());
-        $this->assertSame('43', $this->_object->getText());
-        $this->assertSame('43', $this->_object->getTextToDisplay());
+        $this->object->setText('43');
+        $this->object->setWithChecksumInText(false);
+        $this->assertSame('43', $this->object->getRawText());
+        $this->assertSame('43', $this->object->getText());
+        $this->assertSame('43', $this->object->getTextToDisplay());
     }
 
     public function testCheckGoodParams()
     {
-        $this->_object->setText('43');
-        $this->assertTrue($this->_object->checkParams());
+        $this->object->setText('43');
+        $this->assertTrue($this->object->checkParams());
     }
 
 
     public function testGetKnownWidthWithoutOrientation()
     {
-        $this->_object->setText('43');
-        $this->assertEquals(41, $this->_object->getWidth());
-        $this->_object->setWithQuietZones(false);
-        $this->assertEquals(21, $this->_object->getWidth(true));
+        $this->object->setText('43');
+        $this->assertEquals(41, $this->object->getWidth());
+        $this->object->setWithQuietZones(false);
+        $this->assertEquals(21, $this->object->getWidth(true));
     }
 
     public function testCompleteGeneration()
     {
-        $this->_object->setText('43');
-        $this->_object->draw();
+        $this->object->setText('43');
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile('Ean2_43_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorder()
     {
-        $this->_object->setText('43');
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('43');
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Ean2_43_border_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithOrientation()
     {
-        $this->_object->setText('43');
-        $this->_object->setOrientation(60);
-        $this->_object->draw();
+        $this->object->setText('43');
+        $this->object->setOrientation(60);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Ean2_43_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorderWithOrientation()
     {
-        $this->_object->setText('43');
-        $this->_object->setOrientation(60);
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('43');
+        $this->object->setOrientation(60);
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Ean2_43_border_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testGetDefaultHeight()
     {
         // Checksum activated => text needed
-        $this->_object->setText('43');
-        $this->assertEquals(62, $this->_object->getHeight(true));
+        $this->object->setText('43');
+        $this->assertEquals(62, $this->object->getHeight(true));
     }
 }

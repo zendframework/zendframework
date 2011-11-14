@@ -41,7 +41,7 @@ class Code25 extends AbstractObject
      * - 1 = wide bar
      * @var array
      */
-    protected $_codingMap = array(
+    protected $codingMap = array(
         '0' => '00110',
         '1' => '10001',
         '2' => '01001',
@@ -61,11 +61,11 @@ class Code25 extends AbstractObject
     protected function _calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
-        $startCharacter  = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
-        $characterLength = (3 * $this->_barThinWidth + 2 * $this->_barThickWidth + 5 * $this->_barThinWidth)
-                         * $this->_factor;
+        $startCharacter  = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
+        $characterLength = (3 * $this->barThinWidth + 2 * $this->barThickWidth + 5 * $this->barThinWidth)
+                         * $this->factor;
         $encodedData     = strlen($this->getText()) * $characterLength;
-        $stopCharacter   = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
+        $stopCharacter   = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -87,30 +87,30 @@ class Code25 extends AbstractObject
         $barcodeTable = array();
 
         // Start character (30301)
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth);
 
         $text = str_split($this->getText());
         foreach ($text as $char) {
-            $barcodeChar = str_split($this->_codingMap[$char]);
+            $barcodeChar = str_split($this->codingMap[$char]);
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
-                $width = $c ? $this->_barThickWidth : $this->_barThinWidth;
+                $width = $c ? $this->barThickWidth : $this->barThinWidth;
                 $barcodeTable[] = array(1 , $width , 0 , 1);
-                $barcodeTable[] = array(0 , $this->_barThinWidth);
+                $barcodeTable[] = array(0 , $this->barThinWidth);
             }
         }
 
         // Stop character (30103)
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
         return $barcodeTable;
     }
 

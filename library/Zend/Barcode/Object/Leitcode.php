@@ -42,8 +42,8 @@ class Leitcode extends Identcode
      */
     protected function _getDefaultOptions()
     {
-        $this->_barcodeLength = 14;
-        $this->_mandatoryChecksum = true;
+        $this->barcodeLength = 14;
+        $this->mandatoryChecksum = true;
     }
 
     /**

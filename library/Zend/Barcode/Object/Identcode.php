@@ -42,8 +42,8 @@ class Identcode extends Code25interleaved
      */
     protected function _getDefaultOptions()
     {
-        $this->_barcodeLength = 12;
-        $this->_mandatoryChecksum = true;
+        $this->barcodeLength = 12;
+        $this->mandatoryChecksum = true;
     }
 
     /**

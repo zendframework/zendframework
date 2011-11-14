@@ -21,6 +21,11 @@ class HostnameTest extends TestCase
                 'bar.example.com',
                 null
             ),
+            'match-overrides-default' => array(
+                new Hostname(':foo.example.com', array(), array('foo' => 'baz')),
+                'bat.example.com',
+                array('foo' => 'bat')
+            ),
             'constraints-prevent-match' => array(
                 new Hostname(':foo.example.com', array('foo' => '\d+')),
                 'bar.example.com',

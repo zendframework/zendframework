@@ -167,11 +167,6 @@ class Response extends Message implements ResponseDescription
         }
         
         $response->version = $matches['version'];
-
-        if (!defined(get_called_class() . '::STATUS_CODE_' . $matches['status'])) {
-            throw new Exception\InvalidArgumentException('Unknown status code found in provided string');
-        }
-
         $response->setStatusCode($matches['status']);
         $response->setReasonPhrase($matches['reason']);
 

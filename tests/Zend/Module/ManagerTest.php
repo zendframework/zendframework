@@ -4,13 +4,13 @@ namespace ZendTest\Module;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
+    Zend\Loader\AutoloaderFactory,
     Zend\Module\Manager,
-    Zend\Module\ManagerOptions,
+    Zend\Module\Listener\ListenerOptions,
     InvalidArgumentException;
 
 class ManagerTest extends TestCase
 {
-
     public function setUp()
     {
         $this->tmpdir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'zend_module_cache_dir';
@@ -31,8 +31,6 @@ class ManagerTest extends TestCase
             __DIR__ . '/TestAsset',
         ));
         $autoloader->register();
-        \AutoInstallModule\Module::$RESPONSE = true;
-        \AutoInstallModule\Module::$VERSION = '1.0.0';
     }
 
     public function tearDown()
@@ -41,6 +39,7 @@ class ManagerTest extends TestCase
         @unlink($file[0]); // change this if there's ever > 1 file 
         @rmdir($this->tmpdir);
         // Restore original autoloaders
+        AutoloaderFactory::unregisterAutoloaders();
         $loaders = spl_autoload_functions();
         if (is_array($loaders)) {
             foreach ($loaders as $loader) {
@@ -56,17 +55,18 @@ class ManagerTest extends TestCase
         set_include_path($this->includePath);
     }
 
-    public function testDefaultManagerOptions()
+    public function testDefaultListenerOptions()
     {
         $moduleManager = new Manager(array());
-        $this->assertInstanceOf('Zend\Module\ManagerOptions', $moduleManager->getOptions());
+        $this->assertInstanceOf('Zend\Module\Listener\ListenerOptions', $moduleManager->getDefaultListenerOptions());
     }
 
-    public function testCanSetManagerOptionsInConstructor()
+    public function testCanSetDefaultListenerOptions()
     {
-        $options = new ManagerOptions(array('cache_dir' => __DIR__));
-        $moduleManager = new Manager(array(), $options);
-        $this->assertSame(__DIR__, $moduleManager->getOptions()->cache_dir);
+        $options = new ListenerOptions(array('cache_dir' => __DIR__));
+        $moduleManager = new Manager(array());
+        $moduleManager->setDefaultListenerOptions($options);
+        $this->assertSame(__DIR__, $moduleManager->getDefaultListenerOptions()->cache_dir);
     }
 
     public function testCanLoadSomeModule()
@@ -75,7 +75,7 @@ class ManagerTest extends TestCase
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
-        $config = $moduleManager->getMergedConfig();
+        $config = $moduleManager->getConfigListener()->getMergedConfig();
         $this->assertSame($config->some, 'thing');
     }
 
@@ -86,35 +86,49 @@ class ManagerTest extends TestCase
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
         $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
-        $config = $moduleManager->getMergedConfig();
+        $config = $moduleManager->getMergedConfig(); // use convenience method
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);
     }
 
-    public function testCanCacheMerchedConfig()
+    public function testDefaultModuleListenersAreLoaded()
     {
-        $options = new ManagerOptions(array(
-            'enable_config_cache' => true,
-            'cache_dir' => $this->tmpdir,
-        ));
-        // build the cache
-        $moduleManager = new Manager(array('BarModule', 'BazModule'), $options);
-        $moduleManager->loadModules();
-        $config = $moduleManager->getMergedConfig();
-        $this->assertSame('foo', $config->bar);
-        $this->assertSame('bar', $config->baz);
+        $moduleManager = new Manager(array());
+        $listeners = $moduleManager->events()->getListeners('loadModule');
+        $this->assertSame(3, count($listeners));
+    }
 
-        // use the cache
-        $moduleManager = new Manager(array('BarModule', 'BazModule'), $options);
-        $moduleManager->loadModules();
-        $config = $moduleManager->getMergedConfig();
-        $this->assertSame('foo', $config->bar);
-        $this->assertSame('bar', $config->baz);
+    public function testCanSkipDefaultModuleListeners()
+    {
+        $moduleManager = new Manager(array());
+        $moduleManager->setDisableLoadDefaultListeners(true);
+        $listeners = $moduleManager->events()->getListeners('loadModule');
+        $this->assertSame(0, count($listeners));
+    }
+
+    public function testModuleLoadingBehavior()
+    {
+        $moduleManager = new Manager(array('BarModule'));
+        $modules = $moduleManager->getLoadedModules();
+        $this->assertSame(0, count($modules));
+        $modules = $moduleManager->getLoadedModules(true);
+        $this->assertSame(1, count($modules));
+        $moduleManager->loadModules(); // should not cause any problems
+        $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
+        $this->assertSame(1, count($modules));
+
     }
 
     public function testConstructorThrowsInvalidArgumentException()
     {
         $this->setExpectedException('InvalidArgumentException');
         $moduleManager = new Manager('stringShouldBeArray');
+    }
+
+    public function testNotFoundModuleThrowsRuntimeException()
+    {
+        $this->setExpectedException('RuntimeException');
+        $moduleManager = new Manager(array('NotFoundModule'));
+        $moduleManager->loadModules();
     }
 }

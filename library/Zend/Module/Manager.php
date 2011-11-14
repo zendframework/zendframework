@@ -3,13 +3,15 @@
 namespace Zend\Module;
 
 use Traversable,
-    Zend\Config\Config,
-    Zend\Config\Writer\ArrayWriter,
-    Zend\Stdlib\IteratorToArray,
+    Zend\Module\Listener\ListenerOptions,
+    Zend\Module\Listener\AutoloaderListener,
+    Zend\Module\Listener\ConfigListener,
+    Zend\Module\Listener\InitTrigger,
+    Zend\Module\Listener\ConfigMerger,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventManager;
 
-class Manager
+class Manager implements ModuleHandler
 {
     /**
      * @var array An array of Module classes of loaded modules
@@ -22,26 +24,6 @@ class Manager
     protected $events;
 
     /**
-     * @var ManagerOptions
-     */
-    protected $options;
-
-    /**
-     * @var array
-     */
-    protected $mergedConfig = array();
-
-    /**
-     * @var Config
-     */
-    protected $mergedConfigObject;
-
-    /**
-     * @var bool
-     */
-    protected $skipConfig = false;
-
-    /**
      * modules 
      * 
      * @var array|Traversable
@@ -51,64 +33,62 @@ class Manager
     /**
      * True if modules have already been loaded
      *
-     * @var boolean
+     * @var bool
      */
-    protected $modulesLoaded = false;
+    protected $modulesAreLoaded = false;
+
+    /**
+     * Config listener 
+     * 
+     * @var mixed
+     */
+    protected $configListener;
+
+    /**
+     * If true, will not register the default config/init listeners 
+     * 
+     * @var bool
+     */
+    protected $disableLoadDefaultListeners = false;
+
+    /**
+     * Options for the default listeners 
+     * 
+     * @var ListenerOptions
+     */
+    protected $defaultListenerOptions;
 
     /**
      * __construct 
      * 
      * @param array|Traversable $modules 
-     * @param ManagerOptions $options 
      * @return void
      */
-    public function __construct($modules, ManagerOptions $options = null)
+    public function __construct($modules)
     {
-        if ($options === null) {
-            $options = new ManagerOptions;
-        }
-        $this->setOptions($options);
-        if ($this->hasCachedConfig()) {
-            $this->skipConfig = true;
-            $this->setMergedConfig($this->getCachedConfig());
-        }
         $this->setModules($modules);
     }
 
     /**
-     * loadModules 
+     * Load the provided modules.
      * 
-     * @return Manager
+     * @return ManagerHandler
      */
     public function loadModules()
     {
-        if ($this->modulesLoaded === true) {
+        if (true === $this->modulesAreLoaded) {
             return $this;
         }
         foreach ($this->getModules() as $moduleName) {
             $this->loadModule($moduleName);
         }
-        if ($this->getOptions()->getEnableDependencyCheck()) {
-            $this->resolveDependencies();
-        }
-        $this->updateCache();
         $this->events()->trigger('init.post', $this);
-        $this->modulesLoaded = true;
+        $this->modulesAreLoaded = true;
         return $this;
     }
 
     /**
-     * Returns boolean representing if modules have been loaded yet 
-     * 
-     * @return Manager
-     */
-    public function modulesLoaded()
-    {
-        return $this->modulesLoaded;
-    }
-
-    /**
-     * loadModule 
+     * Load a specific module by name.
      * 
      * @param string $moduleName 
      * @return mixed Module's Module class
@@ -126,18 +106,95 @@ class Manager
             }
             
             $module = new $class;
-            $this->runModuleInit($module);
-            $this->mergeModuleConfig($module);
+            $this->events()->trigger(__FUNCTION__, $this, array('module' => $module));
             $this->loadedModules[$moduleName] = $module;
         }
         return $this->loadedModules[$moduleName];
     }
 
     /**
-     * Set the event manager instance used by this context
+     * Get an array of the loaded modules.
+     *
+     * @param bool $loadModules If true, load modules if they're not already
+     * @return array An array of Module objects, keyed by module name
+     */
+    public function getLoadedModules($loadModules = false)
+    {
+        if (true === $loadModules) {
+            $this->loadModules();
+        }
+        return $this->loadedModules;
+    }
+
+    /**
+     * Get the array of module names that this manager should load.
+     *
+     * @return array
+     */
+    public function getModules()
+    {
+        return $this->modules;
+    }
+ 
+    /**
+     * Set an array or Traversable of module names that this module manager should load. 
+     *
+     * @param mixed $modules array or Traversable of module names
+     * @return ModuleHandler
+     */
+    public function setModules($modules)
+    {
+        if (is_array($modules) || $modules instanceof Traversable) {
+            $this->modules = $modules;
+        } else {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Parameter to %s\'s %s method must be an array or implement the \\Traversable interface',
+                __CLASS__, __METHOD__
+            ));
+        }
+        return $this;
+    }
+    
+    /**
+     * Get the listener that's in charge of merging module configs.
+     *
+     * @return ConfigMerger
+     */
+    public function getConfigListener()
+    {
+        return $this->configListener;
+    }
+ 
+    /**
+     * Set the listener that's in charge of merging module configs.
+     *
+     * @param ConfigMerger $configListener
+     * @return ModuleHandler
+     */
+    public function setConfigListener(ConfigMerger $configListener)
+    {
+        $this->configListener = $configListener;
+        return $this;
+    }
+
+    /**
+     * A convenience method that proxies through to:
+     *
+     * $this->getConfigListener()->getMergedConfig($returnConfigAsObject);
+     * 
+     * @param bool $returnConfigAsObject 
+     * @return mixed
+     */
+    public function getMergedConfig($returnConfigAsObject = true)
+    {
+        return $this->getConfigListener()->getMergedConfig($returnConfigAsObject);
+    }
+
+    /**
+     * Set the event manager instance used by this module manager.
      * 
      * @param  EventCollection $events 
-     * @return Manager
+     * @return ManagerHandler
      */
     public function setEventManager(EventCollection $events)
     {
@@ -156,170 +213,76 @@ class Manager
     {
         if (!$this->events instanceof EventCollection) {
             $this->setEventManager(new EventManager(array(__CLASS__, get_class($this))));
+            $this->setDefaultListeners();
         }
         return $this->events;
     }
 
     /**
-     * Get options.
-     *
-     * @return ManagerOptions
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
- 
-    /**
-     * Set options 
+     * Set if the default listeners should be registered or not
      * 
-     * @param ManagerOptions $options 
+     * @param bool $flag 
      * @return Manager
      */
-    public function setOptions(ManagerOptions $options)
+    public function setDisableLoadDefaultListeners($flag)
     {
-        $this->options = $options;
+        $this->disableLoadDefaultListeners = (bool) $flag;
         return $this;
     }
 
     /**
-     * Get loadedModules.
-     *
-     * @param bool $loadModules 
-     * @return array
+     * Return if the default listeners are disabled or not
+     * 
+     * @return bool
      */
-    public function getLoadedModules($loadModules = false)
+    public function loadDefaultListenersIsDisabled()
     {
-        if ($loadModules === true) {
-            $this->loadModules();
-        }
-        return $this->loadedModules;
+        return $this->disableLoadDefaultListeners;
     }
 
     /**
-     * getMergedConfig
+     * Internal method for attaching the default listeners
      * 
-     * @param array $returnConfigAsObject 
-     * @return mixed
-     */
-    public function getMergedConfig($returnConfigAsObject = true)
-    {
-        if ($returnConfigAsObject === true) {
-            if ($this->mergedConfigObject === null) {
-                $this->mergedConfigObject = new Config($this->mergedConfig);
-            }
-            return $this->mergedConfigObject;
-        } else {
-            return $this->mergedConfig;
-        }
-    }
-
-    /**
-     * setMergedConfig 
-     * 
-     * @param array $config 
      * @return Manager
      */
-    public function setMergedConfig(array $config)
+    protected function setDefaultListeners()
     {
-        $this->mergedConfig = $config;
-        $this->mergedConfigObject = null; // will generate Config instance on-demand if required
-        return $this;
-    }
-
-    /**
-     * mergeModuleConfig 
-     * 
-     * @param mixed $module 
-     * @return Manager
-     */
-    protected function mergeModuleConfig($module)
-    {
-        if ((false === $this->skipConfig)
-            && (is_callable(array($module, 'getConfig')))
-        ) {
-            $config = $module->getConfig($this->getOptions()->getApplicationEnv());
-            if ($config instanceof Traversable) {
-                $config = IteratorToArray::convert($config);
-            }
-            if (!is_array($config)) {
-                throw new \InvalidArgumentException(
-                    sprintf('getConfig() method of %s must be an array, '
-                    . 'implement the \Traversable interface, or be an '
-                    . 'instance of Zend\Config\Config', get_class($module))
-                );
-            }
-            $this->mergedConfig = array_replace_recursive($this->mergedConfig, $config);
+        if ($this->loadDefaultListenersIsDisabled()) {
+            return $this;
         }
-        return $this;
-    }
-
-    protected function runModuleInit($module)
-    {
-        if (is_callable(array($module, 'init'))) {
-            $module->init($this);
+        $options = $this->getDefaultListenerOptions();
+        if (null === $this->getConfigListener()) {
+            $this->setConfigListener(new ConfigListener($options));
         }
-        return $this;
-    }
-
-    protected function hasCachedConfig()
-    {
-        if (($this->getOptions()->getEnableConfigCache())
-            && (file_exists($this->getOptions()->getCacheFilePath()))
-        ) {
-            return true;
-        }
-        return false;
-    }
-
-    protected function getCachedConfig()
-    {
-        return include $this->getOptions()->getCacheFilePath();
-    }
-
-    protected function updateCache()
-    {
-        if (($this->getOptions()->getEnableConfigCache())
-            && (false === $this->skipConfig)
-        ) {
-            $this->saveConfigCache($this->getMergedConfig(false));
-        }
-        return $this;
-    }
-
-    protected function saveConfigCache($config)
-    {
-        $content = "<?php\nreturn " . var_export($config, 1) . ';';
-        file_put_contents($this->getOptions()->getCacheFilePath(), $content);
+        $this->events()->attach('loadModule', new InitTrigger($options), 1000);
+        $this->events()->attach('loadModule', $this->getConfigListener(), 1000);
+        $this->events()->attach('loadModule', new AutoloaderListener($options), 2000); // Should be called before init
         return $this;
     }
  
     /**
-     * Get modules.
+     * Get the options for the default module listeners.
      *
-     * @return modules
+     * @return ListenerOptions
      */
-    public function getModules()
+    public function getDefaultListenerOptions()
     {
-        return $this->modules;
+        if (null === $this->defaultListenerOptions) {
+            $this->defaultListenerOptions =  new ListenerOptions;
+        }
+        return $this->defaultListenerOptions;
     }
  
     /**
-     * Set modules.
+     * Set the options for the default module listeners.
      *
-     * @param $modules the value to be set
+     * @param ListenerOptions $defaultListenerOptions
+     * @return Manager
      */
-    public function setModules($modules)
+    public function setDefaultListenerOptions(ListenerOptions $defaultListenerOptions)
     {
-        if (is_array($modules) || $modules instanceof Traversable) {
-            $this->modules = $modules;
-        } else {
-            throw new \InvalidArgumentException(
-                'Parameter to ' . __CLASS__ . '\'s '
-                . __METHOD__ . ' method must be an array or '
-                . 'implement the \\Traversable interface'
-            );
-        }
+        $this->defaultListenerOptions = $defaultListenerOptions;
         return $this;
     }
+ 
 }

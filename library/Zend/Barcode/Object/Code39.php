@@ -90,16 +90,16 @@ class Code39 extends AbstractObject
      * Partial check of Code39 barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
-        $this->_checkRatio();
+        $this->checkRatio();
     }
 
     /**
      * Width of the barcode (in pixels)
      * @return int
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $characterLength = (6 * $this->barThinWidth + 3 * $this->barThickWidth + 1) * $this->factor;
@@ -145,7 +145,7 @@ class Code39 extends AbstractObject
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $text         = str_split($this->getText());
         $barcodeTable = array();
@@ -171,7 +171,7 @@ class Code39 extends AbstractObject
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $text     = str_split($text);
         $charset  = array_flip(array_keys($this->codingMap));
         $checksum = 0;

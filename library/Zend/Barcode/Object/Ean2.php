@@ -47,12 +47,12 @@ class Ean2 extends Ean5
      * Default options for Ean2 barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barcodeLength = 2;
     }
 
-    protected function _getParity($i)
+    protected function getParity($i)
     {
         $modulo = $this->getText() % 4;
         return $this->parities[$modulo][$i];

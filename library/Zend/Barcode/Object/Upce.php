@@ -69,7 +69,7 @@ class Upce extends Ean13
      * Default options for Postnet barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barcodeLength = 8;
         $this->mandatoryChecksum = true;
@@ -93,7 +93,7 @@ class Upce extends Ean13
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (3 * $this->barThinWidth) * $this->factor;
@@ -106,7 +106,7 @@ class Upce extends Ean13
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
         $height = ($this->drawText) ? 1.1 : 1;
@@ -145,7 +145,7 @@ class Upce extends Ean13
      * Partial function to draw text
      * @return void
      */
-    protected function _drawText()
+    protected function drawText()
     {
         if ($this->drawText) {
             $text = $this->getTextToDisplay();
@@ -156,10 +156,10 @@ class Upce extends Ean13
                 if ($i == 0 || $i == 7) {
                     $fontSize *= 0.8;
                 }
-                $this->_addText(
+                $this->addText(
                     $text{$i},
                     $fontSize * $this->factor,
-                    $this->_rotate(
+                    $this->rotate(
                         $leftPosition,
                         (int) $this->withBorder * 2
                             + $this->factor * ($this->barHeight + $fontSize) + 1
@@ -190,14 +190,14 @@ class Upce extends Ean13
      * @param string $value
      * @param array  $options
      */
-    protected function _validateText($value, $options = array())
+    protected function validateSpecificText($value, $options = array())
     {
         $validator = new BarcodeValidator(array(
             'adapter'  => 'upce',
             'checksum' => false,
         ));
 
-        $value = $this->_addLeadingZeros($value, true);
+        $value = $this->addLeadingZeros($value, true);
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
@@ -213,7 +213,7 @@ class Upce extends Ean13
      */
     public function getChecksum($text)
     {
-        $text = $this->_addLeadingZeros($text, true);
+        $text = $this->addLeadingZeros($text, true);
         if ($text{0} != 1) {
             $text{0} = 0;
         }

@@ -226,7 +226,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function __construct($options = null)
     {
-        $this->_getDefaultOptions();
+        $this->getDefaultOptions();
         $this->font = Barcode\Barcode::getBarcodeFont();
         if ($options instanceof Config) {
             $options = $options->toArray();
@@ -245,7 +245,7 @@ abstract class AbstractObject implements Barcode\Object
      * Set default options for particular object
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
     }
 
@@ -564,7 +564,7 @@ abstract class AbstractObject implements Barcode\Object
         if ($this->withChecksum) {
             $text .= $this->getChecksum($this->text);
         }
-        return $this->_addLeadingZeros($text);
+        return $this->addLeadingZeros($text);
     }
 
     /**
@@ -572,7 +572,7 @@ abstract class AbstractObject implements Barcode\Object
      * @param string $text
      * @param boolean $withoutChecksum
      */
-    protected function _addLeadingZeros($text, $withoutChecksum = false)
+    protected function addLeadingZeros($text, $withoutChecksum = false)
     {
         if ($this->barcodeLength && $this->addLeadingZeros) {
             $omitChecksum = (int) ($this->withChecksum && $withoutChecksum);
@@ -608,7 +608,7 @@ abstract class AbstractObject implements Barcode\Object
         if ($this->withChecksumInText) {
             return $this->getText();
         } else {
-            return $this->_addLeadingZeros($this->text, true);
+            return $this->addLeadingZeros($this->text, true);
         }
     }
 
@@ -798,7 +798,7 @@ abstract class AbstractObject implements Barcode\Object
      * Add an instruction in the array of instructions
      * @param array $instruction
      */
-    protected function _addInstruction(array $instruction)
+    protected function addInstruction(array $instruction)
     {
         $this->instructions[] = $instruction;
     }
@@ -818,12 +818,12 @@ abstract class AbstractObject implements Barcode\Object
      * @param integer $color
      * @param boolean $filled
      */
-    protected function _addPolygon(array $points, $color = null, $filled = true)
+    protected function addPolygon(array $points, $color = null, $filled = true)
     {
         if ($color === null) {
             $color = $this->foreColor;
         }
-        $this->_addInstruction(array(
+        $this->addInstruction(array(
             'type'   => 'polygon',
             'points' => $points,
             'color'  => $color,
@@ -841,7 +841,7 @@ abstract class AbstractObject implements Barcode\Object
      * @param string $alignment
      * @param float $orientation
      */
-    protected function _addText(
+    protected function addText(
         $text,
         $size,
         $position,
@@ -853,7 +853,7 @@ abstract class AbstractObject implements Barcode\Object
         if ($color === null) {
             $color = $this->foreColor;
         }
-        $this->_addInstruction(array(
+        $this->addInstruction(array(
             'type'        => 'text',
             'text'        => $text,
             'size'        => $size,
@@ -871,9 +871,9 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function checkParams()
     {
-        $this->_checkText();
-        $this->_checkFontAndOrientation();
-        $this->_checkParams();
+        $this->checkText();
+        $this->checkFontAndOrientation();
+        $this->checkSpecificParams();
         return true;
     }
 
@@ -882,7 +882,7 @@ abstract class AbstractObject implements Barcode\Object
      * @return void
      * @throw \Zend\Barcode\Object\Exception
      */
-    protected function _checkText($value = null)
+    protected function checkText($value = null)
     {
         if ($value === null) {
             $value = $this->text;
@@ -902,7 +902,7 @@ abstract class AbstractObject implements Barcode\Object
      * @return void
      * @throw \Zend\Barcode\Object\Exception
      */
-    protected function _checkRatio($min = 2, $max = 3)
+    protected function checkRatio($min = 2, $max = 3)
     {
         $ratio = $this->barThickWidth / $this->barThinWidth;
         if (!($ratio >= $min && $ratio <= $max)) {
@@ -920,7 +920,7 @@ abstract class AbstractObject implements Barcode\Object
      * @return void
      * @throw \Zend\Barcode\Object\Exception
      */
-    protected function _checkFontAndOrientation()
+    protected function checkFontAndOrientation()
     {
         if (is_numeric($this->font) && $this->orientation != 0) {
             throw new RuntimeException(
@@ -934,10 +934,10 @@ abstract class AbstractObject implements Barcode\Object
      * (before any rotation)
      * @return integer
      */
-    protected function _calculateWidth()
+    protected function calculateWidth()
     {
         return (int) $this->withBorder
-            + $this->_calculateBarcodeWidth()
+            + $this->calculateBarcodeWidth()
             + (int) $this->withBorder;
     }
 
@@ -945,16 +945,16 @@ abstract class AbstractObject implements Barcode\Object
      * Calculate the width of the barcode
      * @return integer
      */
-    abstract protected function _calculateBarcodeWidth();
+    abstract protected function calculateBarcodeWidth();
 
     /**
      * Height of the result object
      * @return integer
      */
-    protected function _calculateHeight()
+    protected function calculateHeight()
     {
         return (int) $this->withBorder * 2
-            + $this->_calculateBarcodeHeight()
+            + $this->calculateBarcodeHeight()
             + (int) $this->withBorder * 2;
     }
 
@@ -962,7 +962,7 @@ abstract class AbstractObject implements Barcode\Object
      * Height of the barcode
      * @return integer
      */
-    protected function _calculateBarcodeHeight()
+    protected function calculateBarcodeHeight()
     {
         $textHeight = 0;
         $extraHeight = 0;
@@ -981,8 +981,8 @@ abstract class AbstractObject implements Barcode\Object
     {
         if ($this->height === null || $recalculate) {
             $this->height =
-                abs($this->_calculateHeight() * cos($this->orientation / 180 * pi()))
-                + abs($this->_calculateWidth() * sin($this->orientation / 180 * pi()));
+                abs($this->calculateHeight() * cos($this->orientation / 180 * pi()))
+                + abs($this->calculateWidth() * sin($this->orientation / 180 * pi()));
         }
         return $this->height;
     }
@@ -995,8 +995,8 @@ abstract class AbstractObject implements Barcode\Object
     {
         if ($this->width === null || $recalculate) {
             $this->width =
-                abs($this->_calculateWidth() * cos($this->orientation / 180 * pi()))
-                + abs($this->_calculateHeight() * sin($this->orientation / 180 * pi()));
+                abs($this->calculateWidth() * cos($this->orientation / 180 * pi()))
+                + abs($this->calculateHeight() * sin($this->orientation / 180 * pi()));
         }
         return $this->width;
     }
@@ -1015,12 +1015,12 @@ abstract class AbstractObject implements Barcode\Object
                         $this->orientation / 180 * pi()) - 0 * sin(
                         $this->orientation / 180 * pi()),
                 0 * cos(
-                        $this->orientation / 180 * pi()) - $this->_calculateBarcodeHeight() * sin(
+                        $this->orientation / 180 * pi()) - $this->calculateBarcodeHeight() * sin(
                         $this->orientation / 180 * pi()),
-                $this->_calculateBarcodeWidth() * cos(
-                        $this->orientation / 180 * pi()) - $this->_calculateBarcodeHeight() * sin(
+                $this->calculateBarcodeWidth() * cos(
+                        $this->orientation / 180 * pi()) - $this->calculateBarcodeHeight() * sin(
                         $this->orientation / 180 * pi()),
-                $this->_calculateBarcodeWidth() * cos(
+                $this->calculateBarcodeWidth() * cos(
                         $this->orientation / 180 * pi()) - 0 * sin(
                         $this->orientation / 180 * pi()),
             ));
@@ -1041,14 +1041,14 @@ abstract class AbstractObject implements Barcode\Object
                 0 * cos(
                         $this->orientation / 180 * pi()) + 0 * sin(
                         $this->orientation / 180 * pi()),
-                $this->_calculateBarcodeHeight() * cos(
+                $this->calculateBarcodeHeight() * cos(
                         $this->orientation / 180 * pi()) + 0 * sin(
                         $this->orientation / 180 * pi()),
-                $this->_calculateBarcodeHeight() * cos(
-                        $this->orientation / 180 * pi()) + $this->_calculateBarcodeWidth() * sin(
+                $this->calculateBarcodeHeight() * cos(
+                        $this->orientation / 180 * pi()) + $this->calculateBarcodeWidth() * sin(
                         $this->orientation / 180 * pi()),
                 0 * cos(
-                        $this->orientation / 180 * pi()) + $this->_calculateBarcodeWidth() * sin(
+                        $this->orientation / 180 * pi()) + $this->calculateBarcodeWidth() * sin(
                         $this->orientation / 180 * pi()),
             ));
         }
@@ -1061,7 +1061,7 @@ abstract class AbstractObject implements Barcode\Object
      * @param float $y1     y-position before rotation
      * @return array        Array of two elements corresponding to the new XY point
      */
-    protected function _rotate($x1, $y1)
+    protected function rotate($x1, $y1)
     {
         $x2 = $x1 * cos($this->orientation / 180 * pi())
             - $y1 * sin($this->orientation / 180 * pi())
@@ -1079,9 +1079,9 @@ abstract class AbstractObject implements Barcode\Object
     public function draw()
     {
         $this->checkParams();
-        $this->_drawBarcode();
-        $this->_drawBorder();
-        $this->_drawText();
+        $this->drawBarcode();
+        $this->drawBorder();
+        $this->drawText();
         return $this->getInstructions();
     }
 
@@ -1089,24 +1089,24 @@ abstract class AbstractObject implements Barcode\Object
      * Draw the barcode
      * @return void
      */
-    protected function _drawBarcode()
+    protected function drawBarcode()
     {
-        $barcodeTable = $this->_prepareBarcode();
+        $barcodeTable = $this->prepareBarcode();
 
-        $this->_preDrawBarcode();
+        $this->preDrawBarcode();
 
         $xpos = (int) $this->withBorder;
         $ypos = (int) $this->withBorder;
 
-        $point1 = $this->_rotate(0, 0);
-        $point2 = $this->_rotate(0, $this->_calculateHeight() - 1);
-        $point3 = $this->_rotate(
-            $this->_calculateWidth() - 1,
-            $this->_calculateHeight() - 1
+        $point1 = $this->rotate(0, 0);
+        $point2 = $this->rotate(0, $this->calculateHeight() - 1);
+        $point3 = $this->rotate(
+            $this->calculateWidth() - 1,
+            $this->calculateHeight() - 1
         );
-        $point4 = $this->_rotate($this->_calculateWidth() - 1, 0);
+        $point4 = $this->rotate($this->calculateWidth() - 1, 0);
 
-        $this->_addPolygon(array(
+        $this->addPolygon(array(
             $point1,
             $point2,
             $point3,
@@ -1119,17 +1119,17 @@ abstract class AbstractObject implements Barcode\Object
         foreach ($barcodeTable as $bar) {
             $width = $bar[1] * $this->factor;
             if ($bar[0]) {
-                $point1 = $this->_rotate($xpos, $ypos + $bar[2] * $barLength);
-                $point2 = $this->_rotate($xpos, $ypos + $bar[3] * $barLength);
-                $point3 = $this->_rotate(
+                $point1 = $this->rotate($xpos, $ypos + $bar[2] * $barLength);
+                $point2 = $this->rotate($xpos, $ypos + $bar[3] * $barLength);
+                $point3 = $this->rotate(
                     $xpos + $width - 1,
                     $ypos + $bar[3] * $barLength
                 );
-                $point4 = $this->_rotate(
+                $point4 = $this->rotate(
                     $xpos + $width - 1,
                     $ypos + $bar[2] * $barLength
                 );
-                $this->_addPolygon(array(
+                $this->addPolygon(array(
                     $point1,
                     $point2,
                     $point3,
@@ -1139,24 +1139,24 @@ abstract class AbstractObject implements Barcode\Object
             $xpos += $width;
         }
 
-        $this->_postDrawBarcode();
+        $this->postDrawBarcode();
     }
 
     /**
      * Partial function to draw border
      * @return void
      */
-    protected function _drawBorder()
+    protected function drawBorder()
     {
         if ($this->withBorder) {
-            $point1 = $this->_rotate(0, 0);
-            $point2 = $this->_rotate($this->_calculateWidth() - 1, 0);
-            $point3 = $this->_rotate(
-                $this->_calculateWidth() - 1,
-                $this->_calculateHeight() - 1
+            $point1 = $this->rotate(0, 0);
+            $point2 = $this->rotate($this->calculateWidth() - 1, 0);
+            $point3 = $this->rotate(
+                $this->calculateWidth() - 1,
+                $this->calculateHeight() - 1
             );
-            $point4 = $this->_rotate(0, $this->_calculateHeight() - 1);
-            $this->_addPolygon(array(
+            $point4 = $this->rotate(0, $this->calculateHeight() - 1);
+            $this->addPolygon(array(
                 $point1,
                 $point2,
                 $point3,
@@ -1170,19 +1170,19 @@ abstract class AbstractObject implements Barcode\Object
      * Partial function to draw text
      * @return void
      */
-    protected function _drawText()
+    protected function drawText()
     {
         if ($this->drawText) {
             $text = $this->getTextToDisplay();
             if ($this->stretchText) {
                 $textLength = strlen($text);
-                $space      = ($this->_calculateWidth() - 2 * $this->getQuietZone()) / $textLength;
+                $space      = ($this->calculateWidth() - 2 * $this->getQuietZone()) / $textLength;
                 for ($i = 0; $i < $textLength; $i ++) {
                     $leftPosition = $this->getQuietZone() + $space * ($i + 0.5);
-                    $this->_addText(
+                    $this->addText(
                         $text{$i},
                         $this->fontSize * $this->factor,
-                        $this->_rotate(
+                        $this->rotate(
                             $leftPosition,
                             (int) $this->withBorder * 2
                                 + $this->factor * ($this->barHeight + $this->fontSize) + 1
@@ -1194,11 +1194,11 @@ abstract class AbstractObject implements Barcode\Object
                     );
                 }
             } else {
-                $this->_addText(
+                $this->addText(
                     $text,
                     $this->fontSize * $this->factor,
-                    $this->_rotate(
-                        $this->_calculateWidth() / 2,
+                    $this->rotate(
+                        $this->calculateWidth() / 2,
                         (int) $this->withBorder * 2
                             + $this->factor * ($this->barHeight + $this->fontSize) + 1
                     ),
@@ -1218,7 +1218,7 @@ abstract class AbstractObject implements Barcode\Object
      */
     public function validateText($value)
     {
-        $this->_validateText($value);
+        $this->validateSpecificText($value);
     }
 
     /**
@@ -1226,7 +1226,7 @@ abstract class AbstractObject implements Barcode\Object
      * @param string $value
      * @param array  $options
      */
-    protected function _validateText($value, $options = array())
+    protected function validateSpecificText($value, $options = array())
     {
         $validatorName = (isset($options['validator'])) ? $options['validator'] : $this->getType();
 
@@ -1242,7 +1242,7 @@ abstract class AbstractObject implements Barcode\Object
             $withChecksum = true;
         }
 
-        $value = $this->_addLeadingZeros($value, $withChecksum) . $checksumCharacter;
+        $value = $this->addLeadingZeros($value, $withChecksum) . $checksumCharacter;
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
@@ -1264,21 +1264,21 @@ abstract class AbstractObject implements Barcode\Object
      *
      * @return array
      */
-    abstract protected function _prepareBarcode();
+    abstract protected function prepareBarcode();
 
     /**
      * Checking of parameters after all settings
      *
      * @return void
      */
-    abstract protected function _checkParams();
+    abstract protected function checkSpecificParams();
 
     /**
      * Allow each child to draw something else
      *
      * @return void
      */
-    protected function _preDrawBarcode()
+    protected function preDrawBarcode()
     {
     }
 
@@ -1288,7 +1288,7 @@ abstract class AbstractObject implements Barcode\Object
      *
      * @return void
      */
-    protected function _postDrawBarcode()
+    protected function postDrawBarcode()
     {
     }
 }

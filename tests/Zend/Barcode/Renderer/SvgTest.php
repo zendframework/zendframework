@@ -38,7 +38,7 @@ use Zend\Barcode\Object\Code39;
 class SvgTest extends TestCommon
 {
 
-    protected function _getRendererObject($options = null)
+    protected function getRendererObject($options = null)
     {
         return new Svg($options);
     }
@@ -120,7 +120,7 @@ class SvgTest extends TestCommon
         Barcode\Barcode::setBarcodeFont('');
     }
 
-    protected function _getRendererWithWidth500AndHeight300()
+    protected function getRendererWithWidth500AndHeight300()
     {
         $svg = new \DOMDocument();
         $rootElement = $svg->createElement('svg');

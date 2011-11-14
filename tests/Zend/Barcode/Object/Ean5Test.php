@@ -35,7 +35,7 @@ use Zend\Barcode;
  */
 class Ean5Test extends TestCommon
 {
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Ean5($options);
     }

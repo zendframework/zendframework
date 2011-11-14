@@ -73,7 +73,7 @@ class Ean13 extends AbstractObject
      * Default options for Postnet barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barcodeLength = 13;
         $this->mandatoryChecksum = true;
@@ -84,7 +84,7 @@ class Ean13 extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (3 * $this->barThinWidth) * $this->factor;
@@ -98,14 +98,14 @@ class Ean13 extends AbstractObject
      * Partial check of interleaved EAN/UPC barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {}
 
     /**
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
         $height = ($this->drawText) ? 1.1 : 1;
@@ -156,7 +156,7 @@ class Ean13 extends AbstractObject
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $factor   = 3;
         $checksum = 0;
 
@@ -174,26 +174,26 @@ class Ean13 extends AbstractObject
      * Partial function to draw text
      * @return void
      */
-    protected function _drawText()
+    protected function drawText()
     {
         if (get_class($this) == 'Zend\Barcode\Object\Ean13') {
-            $this->_drawEan13Text();
+            $this->drawEan13Text();
         } else {
-            parent::_drawText();
+            parent::drawText();
         }
     }
 
-    protected function _drawEan13Text()
+    protected function drawEan13Text()
     {
         if ($this->drawText) {
             $text = $this->getTextToDisplay();
             $characterWidth = (7 * $this->barThinWidth) * $this->factor;
             $leftPosition = $this->getQuietZone() - $characterWidth;
             for ($i = 0; $i < $this->barcodeLength; $i ++) {
-                $this->_addText(
+                $this->addText(
                     $text{$i},
                     $this->fontSize * $this->factor,
-                    $this->_rotate(
+                    $this->rotate(
                         $leftPosition,
                         (int) $this->withBorder * 2
                             + $this->factor * ($this->barHeight + $this->fontSize) + 1

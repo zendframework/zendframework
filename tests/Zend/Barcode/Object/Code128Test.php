@@ -37,7 +37,7 @@ use Zend\Barcode;
 class Code128Test extends TestCommon
 {
 
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Code128($options);
     }
@@ -57,8 +57,8 @@ class Code128Test extends TestCommon
     public function testKnownBarcodeConversion()
     {
     	$barcode = new TestAsset\Code128Test();
-    	$this->assertSame(array(104, 13, 17, 18, 19), $barcode->_convertToBarcodeChars(-123));
-    	$this->assertSame(array(104, 40, 41, 99, 34, 56, 78), $barcode->_convertToBarcodeChars('HI345678'));
+    	$this->assertSame(array(104, 13, 17, 18, 19), $barcode->convertToBarcodeChars(-123));
+    	$this->assertSame(array(104, 40, 41, 99, 34, 56, 78), $barcode->convertToBarcodeChars('HI345678'));
     }
 
     public function testSetText()

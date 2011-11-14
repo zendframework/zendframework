@@ -140,12 +140,12 @@ class Code128 extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone = $this->getQuietZone();
         // Each characters contain 11 bars...
         $characterLength = 11 * $this->barThinWidth * $this->factor;
-        $convertedChars = count($this->_convertToBarcodeChars($this->getText()));
+        $convertedChars = count($this->convertToBarcodeChars($this->getText()));
         if ($this->withChecksum) {
             $convertedChars++;
         }
@@ -160,7 +160,7 @@ class Code128 extends AbstractObject
      * Partial check of code128 barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
     }
 
@@ -168,11 +168,11 @@ class Code128 extends AbstractObject
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
 
-        $convertedChars = $this->_convertToBarcodeChars($this->getText());
+        $convertedChars = $this->convertToBarcodeChars($this->getText());
 
         if ($this->withChecksum) {
             $convertedChars[] = $this->getChecksum($this->getText());
@@ -216,7 +216,7 @@ class Code128 extends AbstractObject
      * Convert string to barcode string
      * @return array
      */
-    protected function _convertToBarcodeChars($string)
+    protected function convertToBarcodeChars($string)
     {
         $string = (string) $string;
         if (!strlen($string)) {
@@ -318,7 +318,7 @@ class Code128 extends AbstractObject
      */
     public function getChecksum($text)
     {
-        $tableOfChars = $this->_convertToBarcodeChars($text);
+        $tableOfChars = $this->convertToBarcodeChars($text);
 
         $sum = $tableOfChars[0];
         unset($tableOfChars[0]);
@@ -338,7 +338,7 @@ class Code128 extends AbstractObject
      * @param string $value
      * @param array  $options
      */
-    protected function _validateText($value, $options = array())
+    protected function validateSpecificText($value, $options = array())
     {
         // @TODO: add code128 validator
         return true;

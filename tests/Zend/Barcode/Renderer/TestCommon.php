@@ -50,7 +50,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
      */
     private $originaltimezone;
 
-    abstract protected function _getRendererObject($options = null);
+    abstract protected function getRendererObject($options = null);
 
     public function setUp()
     {
@@ -61,7 +61,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         date_default_timezone_set('GMT');
 
         Barcode\Barcode::setBarcodeFont(__DIR__ . '/../Object/_fonts/Vera.ttf');
-        $this->renderer = $this->_getRendererObject();
+        $this->renderer = $this->getRendererObject();
     }
 
     public function tearDown()
@@ -172,7 +172,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithArray()
     {
-        $renderer = $this->_getRendererObject(
+        $renderer = $this->getRendererObject(
                 array('automaticRenderError' => true ,
                         'unkownProperty' => 'aValue'));
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
@@ -183,7 +183,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $config = new Config\Config(
                 array('automaticRenderError' => true ,
                         'unkownProperty' => 'aValue'));
-        $renderer = $this->_getRendererObject($config);
+        $renderer = $this->getRendererObject($config);
         $this->assertEquals(true, $renderer->getAutomaticRenderError());
     }
 
@@ -217,7 +217,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\Zend\Barcode\Renderer\Exception');
         $object = new TestAsset\BarcodeTest();
         $object->setText('test');
-        $object->addInstruction(array('type' => 'unknown'));
+        $object->addTestInstruction(array('type' => 'unknown'));
         $this->renderer->setBarcode($object);
         $this->renderer->draw();
     }
@@ -232,11 +232,11 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     abstract public function testDrawWithExistantResourceReturnResource();
 
-    abstract protected function _getRendererWithWidth500AndHeight300();
+    abstract protected function getRendererWithWidth500AndHeight300();
 
     public function testHorizontalPositionToLeft()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
@@ -247,7 +247,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testHorizontalPositionToCenter()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
@@ -259,7 +259,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testHorizontalPositionToRight()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
@@ -271,7 +271,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testLeftOffsetOverrideHorizontalPosition()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
@@ -284,7 +284,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testVerticalPositionToTop()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
@@ -296,7 +296,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testVerticalPositionToMiddle()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
@@ -308,7 +308,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testVerticalPositionToBottom()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
@@ -320,7 +320,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testTopOffsetOverrideVerticalPosition()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());

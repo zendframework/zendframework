@@ -58,7 +58,7 @@ class Code25 extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
@@ -73,16 +73,16 @@ class Code25 extends AbstractObject
      * Partial check of interleaved 2 of 5 barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
-        $this->_checkRatio();
+        $this->checkRatio();
     }
 
     /**
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
 
@@ -122,7 +122,7 @@ class Code25 extends AbstractObject
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $factor   = 3;
         $checksum = 0;
 

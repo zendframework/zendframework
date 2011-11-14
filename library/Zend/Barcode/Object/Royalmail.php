@@ -75,7 +75,7 @@ class Royalmail extends AbstractObject
      * Default options for Postnet barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barThinWidth = 2;
         $this->barHeight = 20;
@@ -88,7 +88,7 @@ class Royalmail extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (2 * $this->barThinWidth) * $this->factor;
@@ -101,14 +101,14 @@ class Royalmail extends AbstractObject
      * Partial check of interleaved Postnet barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {}
 
     /**
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
 
@@ -139,7 +139,7 @@ class Royalmail extends AbstractObject
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $values   = str_split($text);
         $rowvalue = 0;
         $colvalue = 0;

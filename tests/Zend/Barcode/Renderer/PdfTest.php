@@ -37,7 +37,7 @@ use Zend\Barcode\Object;
  */
 class PdfTest extends TestCommon
 {
-    protected function _getRendererObject($options = null)
+    protected function getRendererObject($options = null)
     {
         return new \Zend\Barcode\Renderer\Pdf($options);
     }
@@ -86,7 +86,7 @@ class PdfTest extends TestCommon
         Barcode\Barcode::setBarcodeFont('');
     }
 
-    protected function _getRendererWithWidth500AndHeight300()
+    protected function getRendererWithWidth500AndHeight300()
     {
         $pdf = new Pdf\PdfDocument();
         $pdf->pages[] = new Pdf\Page('500:300:');
@@ -95,7 +95,7 @@ class PdfTest extends TestCommon
 
     public function testHorizontalPositionToCenter()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $renderer->setBarcode($barcode);
@@ -106,7 +106,7 @@ class PdfTest extends TestCommon
 
     public function testHorizontalPositionToRight()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $renderer->setBarcode($barcode);
@@ -117,7 +117,7 @@ class PdfTest extends TestCommon
 
     public function testVerticalPositionToMiddle()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);
@@ -128,7 +128,7 @@ class PdfTest extends TestCommon
 
     public function testVerticalPositionToBottom()
     {
-        $renderer = $this->_getRendererWithWidth500AndHeight300();
+        $renderer = $this->getRendererWithWidth500AndHeight300();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);

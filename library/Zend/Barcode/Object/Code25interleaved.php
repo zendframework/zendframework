@@ -45,7 +45,7 @@ class Code25interleaved extends Code25
      * Default options for Code25interleaved barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barcodeLength = 'even';
     }
@@ -74,7 +74,7 @@ class Code25interleaved extends Code25
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (4 * $this->barThinWidth) * $this->factor;
@@ -88,7 +88,7 @@ class Code25interleaved extends Code25
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         if ($this->withBearerBars) {
             $this->withBorder = false;
@@ -135,40 +135,40 @@ class Code25interleaved extends Code25
      *
      * @return void
      */
-    protected function _postDrawBarcode()
+    protected function postDrawBarcode()
     {
         if (!$this->withBearerBars) {
             return;
         }
 
         $width  = $this->barThickWidth * $this->factor;
-        $point1 = $this->_rotate(-1, -1);
-        $point2 = $this->_rotate($this->_calculateWidth() - 1, -1);
-        $point3 = $this->_rotate($this->_calculateWidth() - 1, $width - 1);
-        $point4 = $this->_rotate(-1, $width - 1);
-        $this->_addPolygon(array(
+        $point1 = $this->rotate(-1, -1);
+        $point2 = $this->rotate($this->calculateWidth() - 1, -1);
+        $point3 = $this->rotate($this->calculateWidth() - 1, $width - 1);
+        $point4 = $this->rotate(-1, $width - 1);
+        $this->addPolygon(array(
             $point1,
             $point2,
             $point3,
             $point4,
         ));
-        $point1 = $this->_rotate(
+        $point1 = $this->rotate(
             0,
             0 + $this->barHeight * $this->factor - 1
         );
-        $point2 = $this->_rotate(
-            $this->_calculateWidth() - 1,
+        $point2 = $this->rotate(
+            $this->calculateWidth() - 1,
             0 + $this->barHeight * $this->factor - 1
         );
-        $point3 = $this->_rotate(
-            $this->_calculateWidth() - 1,
+        $point3 = $this->rotate(
+            $this->calculateWidth() - 1,
             0 + $this->barHeight * $this->factor - $width
         );
-        $point4 = $this->_rotate(
+        $point4 = $this->rotate(
             0,
             0 + $this->barHeight * $this->factor - $width
         );
-        $this->_addPolygon(array(
+        $this->addPolygon(array(
             $point1,
             $point2,
             $point3,

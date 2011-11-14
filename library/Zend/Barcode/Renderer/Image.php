@@ -210,7 +210,7 @@ class Image extends AbstractRenderer
      *
      * @return void
      */
-    protected function _initRenderer()
+    protected function initRenderer()
     {
         $barcodeWidth  = $this->barcode->getWidth(true);
         $barcodeHeight = $this->barcode->getHeight(true);
@@ -259,7 +259,7 @@ class Image extends AbstractRenderer
             $white = imagecolorallocate($this->resource, 255, 255, 255);
             imagefilledrectangle($this->resource, 0, 0, $width - 1, $height - 1, $white);
         }
-        $this->_adjustPosition(imagesy($this->resource), imagesx($this->resource));
+        $this->adjustPosition(imagesy($this->resource), imagesx($this->resource));
         imagefilledrectangle($this->resource,
                              $this->leftOffset,
                              $this->topOffset,
@@ -273,9 +273,9 @@ class Image extends AbstractRenderer
      *
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
-        $this->_checkDimensions();
+        $this->checkDimensions();
     }
 
     /**
@@ -283,7 +283,7 @@ class Image extends AbstractRenderer
      *
      * @return void
      */
-    protected function _checkDimensions()
+    protected function checkDimensions()
     {
         if ($this->resource !== null) {
             if (imagesy($this->resource) < $this->barcode->getHeight(true)) {
@@ -344,7 +344,7 @@ class Image extends AbstractRenderer
      * @param integer $color
      * @param boolean $filled
      */
-    protected function _drawPolygon($points, $color, $filled = true)
+    protected function drawPolygon($points, $color, $filled = true)
     {
         $newPoints = array($points[0][0] + $this->leftOffset,
                            $points[0][1] + $this->topOffset,
@@ -378,7 +378,7 @@ class Image extends AbstractRenderer
      * @param string $alignment
      * @param float $orientation
      */
-    protected function _drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
+    protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
     {
         $allocatedColor = imagecolorallocate($this->resource,
                                              ($color & 0xFF0000) >> 16,

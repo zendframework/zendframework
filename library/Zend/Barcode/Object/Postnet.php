@@ -59,7 +59,7 @@ class Postnet extends AbstractObject
      * Default options for Postnet barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barThinWidth = 2;
         $this->barHeight = 20;
@@ -72,7 +72,7 @@ class Postnet extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (2 * $this->barThinWidth) * $this->factor;
@@ -85,14 +85,14 @@ class Postnet extends AbstractObject
      * Partial check of interleaved Postnet barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {}
 
     /**
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
 
@@ -123,7 +123,7 @@ class Postnet extends AbstractObject
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $sum = array_sum(str_split($text));
         $checksum = (10 - ($sum % 10)) % 10;
         return $checksum;

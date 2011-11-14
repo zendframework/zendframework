@@ -41,7 +41,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
      */
     protected $object = null;
 
-    abstract protected function _getBarcodeObject($options = null);
+    abstract protected function getBarcodeObject($options = null);
 
     protected function loadInstructionsFile($fileName)
     {
@@ -50,7 +50,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = $this->_getBarcodeObject();
+        $this->object = $this->getBarcodeObject();
     }
 
     public function tearDown()
@@ -62,7 +62,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         Barcode\Barcode::setBarcodeFont('my_static_font.ttf');
         $this->assertEquals('', $this->object->getFont());
-        $object = $this->_getBarcodeObject();
+        $object = $this->getBarcodeObject();
         $this->assertEquals('my_static_font.ttf', $object->getFont());
         Barcode\Barcode::setBarcodeFont(null);
     }
@@ -72,7 +72,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         for ($i = 1; $i < 5; $i++) {
             Barcode\Barcode::setBarcodeFont($i);
             $this->assertEquals('', $this->object->getFont());
-            $object = $this->_getBarcodeObject();
+            $object = $this->getBarcodeObject();
             $this->assertEquals($i, $object->getFont());
             Barcode\Barcode::setBarcodeFont('');
         }
@@ -80,7 +80,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithArray()
     {
-        $object = $this->_getBarcodeObject(
+        $object = $this->getBarcodeObject(
                 array('barHeight' => 150 ,
                         'unkownProperty' => 'aValue'));
         $this->assertEquals(150, $object->getBarHeight());
@@ -91,7 +91,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $config = new Config\Config(
                 array('barHeight' => 150 ,
                         'unkownProperty' => 'aValue'));
-        $object = $this->_getBarcodeObject($config);
+        $object = $this->getBarcodeObject($config);
         $this->assertEquals(150, $object->getBarHeight());
     }
 
@@ -383,7 +383,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'color' => '#123456' ,
                 'alignment' => 'center' ,
                 'orientation' => 45);
-        $object->addInstruction($instructions);
+        $object->addTestInstruction($instructions);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
@@ -395,7 +395,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $filled = false;
         $instructions = array('type' => 'polygon' , 'points' => $points ,
                 'color' => $color , 'filled' => $filled);
-        $object->addPolygon($points, $color, $filled);
+        $object->addTestPolygon($points, $color, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
@@ -408,7 +408,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $filled = false;
         $instructions = array('type' => 'polygon' , 'points' => $points ,
                 'color' => $color , 'filled' => $filled);
-        $object->addPolygon($points, null, $filled);
+        $object->addTestPolygon($points, null, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
@@ -427,7 +427,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'font' => $font , 'color' => $color ,
                 'alignment' => $alignment ,
                 'orientation' => $orientation);
-        $object->addText($text, $size, $position, $font, $color, $alignment,
+        $object->addTestText($text, $size, $position, $font, $color, $alignment,
                 $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -448,7 +448,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'font' => $font , 'color' => $color ,
                 'alignment' => $alignment ,
                 'orientation' => $orientation);
-        $object->addText($text, $size, $position, $font, null, $alignment, $orientation);
+        $object->addTestText($text, $size, $position, $font, null, $alignment, $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 

@@ -53,7 +53,7 @@ class Ean5 extends Ean13
      * Default options for Ean5 barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barcodeLength = 5;
     }
@@ -62,7 +62,7 @@ class Ean5 extends Ean13
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (5 * $this->barThinWidth) * $this->factor;
@@ -75,7 +75,7 @@ class Ean5 extends Ean13
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
 
@@ -98,7 +98,7 @@ class Ean5 extends Ean13
                 $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
                 $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
             }
-            $bars = str_split($this->codingMap[$this->_getParity($i)][$textTable[$i]]);
+            $bars = str_split($this->codingMap[$this->getParity($i)][$textTable[$i]]);
             foreach ($bars as $b) {
                 $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
             }
@@ -115,7 +115,7 @@ class Ean5 extends Ean13
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $checksum = 0;
 
         for ($i = 0 ; $i < $this->barcodeLength; $i ++) {
@@ -125,7 +125,7 @@ class Ean5 extends Ean13
         return ($checksum % 10);
     }
 
-    protected function _getParity($i)
+    protected function getParity($i)
     {
         $checksum = $this->getChecksum($this->getText());
         return $this->parities[$checksum][$i];
@@ -137,6 +137,6 @@ class Ean5 extends Ean13
      */
     public function getText()
     {
-        return $this->_addLeadingZeros($this->text);
+        return $this->addLeadingZeros($this->text);
     }
 }

@@ -35,7 +35,7 @@ use Zend\Barcode;
  */
 class LeitcodeTest extends TestCommon
 {
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Leitcode($options);
     }

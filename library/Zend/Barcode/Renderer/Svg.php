@@ -141,7 +141,7 @@ class Svg extends AbstractRenderer
      *
      * @return void
      */
-    protected function _initRenderer()
+    protected function initRenderer()
     {
         $barcodeWidth  = $this->barcode->getWidth(true);
         $barcodeHeight = $this->barcode->getHeight(true);
@@ -168,17 +168,17 @@ class Svg extends AbstractRenderer
             $this->rootElement->setAttribute('width', $width);
             $this->rootElement->setAttribute('height', $height);
 
-            $this->_appendRootElement('title',
+            $this->appendRootElement('title',
                                       array(),
                                       "Barcode " . strtoupper($this->barcode->getType()) . " " . $this->barcode->getText());
         } else {
-            $this->_readRootElement();
+            $this->readRootElement();
             $width = $this->rootElement->getAttribute('width');
             $height = $this->rootElement->getAttribute('height');
         }
-        $this->_adjustPosition($height, $width);
+        $this->adjustPosition($height, $width);
 
-        $this->_appendRootElement('rect',
+        $this->appendRootElement('rect',
                           array('x' => $this->leftOffset,
                                 'y' => $this->topOffset,
                                 'width' => ($this->leftOffset + $barcodeWidth - 1),
@@ -186,7 +186,7 @@ class Svg extends AbstractRenderer
                                 'fill' => $imageBackgroundColor));
     }
 
-    protected function _readRootElement()
+    protected function readRootElement()
     {
         if ($this->resource !== null) {
             $this->rootElement = $this->resource->documentElement;
@@ -200,9 +200,9 @@ class Svg extends AbstractRenderer
      * @param array $attributes
      * @param string $textContent
      */
-    protected function _appendRootElement($tagName, $attributes = array(), $textContent = null)
+    protected function appendRootElement($tagName, $attributes = array(), $textContent = null)
     {
-        $newElement = $this->_createElement($tagName, $attributes, $textContent);
+        $newElement = $this->createElement($tagName, $attributes, $textContent);
         $this->rootElement->appendChild($newElement);
     }
 
@@ -214,7 +214,7 @@ class Svg extends AbstractRenderer
      * @param string $textContent
      * @return DOMElement
      */
-    protected function _createElement($tagName, $attributes = array(), $textContent = null)
+    protected function createElement($tagName, $attributes = array(), $textContent = null)
     {
         $element = $this->resource->createElement($tagName);
         foreach ($attributes as $k =>$v) {
@@ -231,9 +231,9 @@ class Svg extends AbstractRenderer
      *
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
-        $this->_checkDimensions();
+        $this->checkDimensions();
     }
 
     /**
@@ -241,10 +241,10 @@ class Svg extends AbstractRenderer
      *
      * @return void
      */
-    protected function _checkDimensions()
+    protected function checkDimensions()
     {
         if ($this->resource !== null) {
-            $this->_readRootElement();
+            $this->readRootElement();
             $height = (float) $this->rootElement->getAttribute('height');
             if ($height < $this->barcode->getHeight(true)) {
                 throw new RuntimeException(
@@ -264,7 +264,7 @@ class Svg extends AbstractRenderer
             }
         }
         if ($this->resource !== null) {
-            $this->_readRootElement();
+            $this->readRootElement();
             $width = $this->rootElement->getAttribute('width');
             if ($width < $this->barcode->getWidth(true)) {
                 throw new RuntimeException(
@@ -315,7 +315,7 @@ class Svg extends AbstractRenderer
      * @param integer $color
      * @param boolean $filled
      */
-    protected function _drawPolygon($points, $color, $filled = true)
+    protected function drawPolygon($points, $color, $filled = true)
     {
         $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
@@ -334,7 +334,7 @@ class Svg extends AbstractRenderer
         $newPoints = implode(' ', $newPoints);
         $attributes['points'] = $newPoints;
         $attributes['fill'] = $color;
-        $this->_appendRootElement('polygon', $attributes);
+        $this->appendRootElement('polygon', $attributes);
     }
 
     /**
@@ -348,7 +348,7 @@ class Svg extends AbstractRenderer
      * @param string $alignment
      * @param float $orientation
      */
-    protected function _drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
+    protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
     {
         $color = 'rgb(' . implode(', ', array(($color & 0xFF0000) >> 16,
                                               ($color & 0x00FF00) >> 8,
@@ -376,6 +376,6 @@ class Svg extends AbstractRenderer
                                  . ($position[0] + $this->leftOffset)
                                  . ', ' . ($position[1] + $this->topOffset)
                                  . ')';
-        $this->_appendRootElement('text', $attributes, $text);
+        $this->appendRootElement('text', $attributes, $text);
     }
 }

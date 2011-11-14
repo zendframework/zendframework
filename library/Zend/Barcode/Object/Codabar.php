@@ -55,7 +55,7 @@ class Codabar extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $encodedData = 0;
@@ -73,14 +73,14 @@ class Codabar extends AbstractObject
      * Partial check of Codabar barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {}
 
     /**
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $text = str_split($this->getText());
         foreach ($text as $char) {

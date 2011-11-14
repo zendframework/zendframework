@@ -45,7 +45,7 @@ class ImageTest extends TestCommon
         parent::setUp();
     }
 
-    protected function _getRendererObject($options = null)
+    protected function getRendererObject($options = null)
     {
         return new RendererNS\Image($options);
     }
@@ -117,7 +117,7 @@ class ImageTest extends TestCommon
 
     public function testDrawReturnResource()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $resource = $this->renderer->draw();
@@ -127,7 +127,7 @@ class ImageTest extends TestCommon
 
     public function testDrawWithExistantResourceReturnResource()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
         $barcode = new Object\Code39(array('text' => '0123456789'));
         $this->renderer->setBarcode($barcode);
         $imageResource = imagecreatetruecolor(500, 500);
@@ -228,7 +228,7 @@ class ImageTest extends TestCommon
         $this->renderer->draw();
     }
 
-    protected function _getRendererWithWidth500AndHeight300()
+    protected function getRendererWithWidth500AndHeight300()
     {
         return $this->renderer->setHeight(300)->setWidth(500);
     }
@@ -241,61 +241,61 @@ class ImageTest extends TestCommon
 
     public function testHorizontalPositionToLeft()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testHorizontalPositionToLeft();
     }
 
     public function testHorizontalPositionToCenter()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testHorizontalPositionToCenter();
     }
 
     public function testHorizontalPositionToRight()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testHorizontalPositionToRight();
     }
 
     public function testVerticalPositionToTop()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testVerticalPositionToTop();
     }
 
     public function testVerticalPositionToMiddle()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testVerticalPositionToMiddle();
     }
 
     public function testVerticalPositionToBottom()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testVerticalPositionToBottom();
     }
 
     public function testLeftOffsetOverrideHorizontalPosition()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testLeftOffsetOverrideHorizontalPosition();
     }
 
     public function testTopOffsetOverrideVerticalPosition()
     {
-        $this->_checkTTFRequirement();
+        $this->checkTTFRequirement();
 
         parent::testTopOffsetOverrideVerticalPosition();
     }
 
-    protected function _checkTTFRequirement()
+    protected function checkTTFRequirement()
     {
         if (!function_exists('imagettfbbox')) {
             $this->markTestSkipped('TTF (FreeType) support is required in order to run this test');

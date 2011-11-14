@@ -35,7 +35,7 @@ use Zend\Barcode;
  */
 class Itf14Test extends TestCommon
 {
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Itf14($options);
     }

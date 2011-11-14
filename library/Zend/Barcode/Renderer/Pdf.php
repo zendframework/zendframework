@@ -95,7 +95,7 @@ class Pdf extends AbstractRenderer
      *
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
     }
 
@@ -114,7 +114,7 @@ class Pdf extends AbstractRenderer
      * Initialize the PDF resource
      * @return void
      */
-    protected function _initRenderer()
+    protected function initRenderer()
     {
         if ($this->resource === null) {
             $this->resource = new PdfDocument();
@@ -124,7 +124,7 @@ class Pdf extends AbstractRenderer
         }
 
         $pdfPage = $this->resource->pages[$this->page];
-        $this->_adjustPosition($pdfPage->getHeight(), $pdfPage->getWidth());
+        $this->adjustPosition($pdfPage->getHeight(), $pdfPage->getWidth());
     }
 
     /**
@@ -133,7 +133,7 @@ class Pdf extends AbstractRenderer
      * @param integer $color
      * @param boolean $filled
      */
-    protected function _drawPolygon($points, $color, $filled = true)
+    protected function drawPolygon($points, $color, $filled = true)
     {
         $page = $this->resource->pages[$this->page];
         foreach ($points as $point) {
@@ -178,7 +178,7 @@ class Pdf extends AbstractRenderer
      * @param string $alignment
      * @param float $orientation
      */
-    protected function _drawText(
+    protected function drawText(
         $text,
         $size,
         $position,

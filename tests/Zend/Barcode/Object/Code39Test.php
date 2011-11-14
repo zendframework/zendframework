@@ -35,7 +35,7 @@ use Zend\Barcode;
  */
 class Code39Test extends TestCommon
 {
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Code39($options);
     }

@@ -40,7 +40,7 @@ class Leitcode extends Identcode
      * Default options for Leitcode barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
         $this->barcodeLength = 14;
         $this->mandatoryChecksum = true;

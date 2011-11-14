@@ -359,8 +359,8 @@ abstract class AbstractRenderer implements Barcode\Renderer
      */
     public function checkParams()
     {
-        $this->_checkBarcodeObject();
-        $this->_checkParams();
+        $this->checkBarcodeObject();
+        $this->checkSpecificParams();
         return true;
     }
 
@@ -369,7 +369,7 @@ abstract class AbstractRenderer implements Barcode\Renderer
      * @return void
      * @throw \Zend\Barcode\Renderer\Exception
      */
-    protected function _checkBarcodeObject()
+    protected function checkBarcodeObject()
     {
         if ($this->barcode === null) {
             throw new RuntimeException(
@@ -386,7 +386,7 @@ abstract class AbstractRenderer implements Barcode\Renderer
      * @param float $supportWidth
      * @return void
      */
-    protected function _adjustPosition($supportHeight, $supportWidth)
+    protected function adjustPosition($supportHeight, $supportWidth)
     {
         $barcodeHeight = $this->barcode->getHeight(true) * $this->moduleSize;
         if ($barcodeHeight != $supportHeight && $this->topOffset == 0) {
@@ -430,8 +430,8 @@ abstract class AbstractRenderer implements Barcode\Renderer
     {
         try {
             $this->checkParams();
-            $this->_initRenderer();
-            $this->_drawInstructionList();
+            $this->initRenderer();
+            $this->drawInstructionList();
         } catch (\Zend\Barcode\Exception $e) {
             if ($this->automaticRenderError && !($e instanceof RendererCreationException)) {
                 $barcode = Barcode\Barcode::makeBarcode(
@@ -440,8 +440,8 @@ abstract class AbstractRenderer implements Barcode\Renderer
                 );
                 $this->setBarcode($barcode);
                 $this->resource = null;
-                $this->_initRenderer();
-                $this->_drawInstructionList();
+                $this->initRenderer();
+                $this->drawInstructionList();
             } else {
                 throw $e;
             }
@@ -453,20 +453,20 @@ abstract class AbstractRenderer implements Barcode\Renderer
      * Sub process to draw the barcode instructions
      * Needed by the automatic error rendering
      */
-    private function _drawInstructionList()
+    private function drawInstructionList()
     {
         $instructionList = $this->barcode->draw();
         foreach ($instructionList as $instruction) {
             switch ($instruction['type']) {
                 case 'polygon':
-                    $this->_drawPolygon(
+                    $this->drawPolygon(
                         $instruction['points'],
                         $instruction['color'],
                         $instruction['filled']
                     );
                     break;
                 case 'text': //$text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
-                    $this->_drawText(
+                    $this->drawText(
                         $instruction['text'],
                         $instruction['size'],
                         $instruction['position'],
@@ -488,13 +488,13 @@ abstract class AbstractRenderer implements Barcode\Renderer
      * Checking of parameters after all settings
      * @return void
      */
-    abstract protected function _checkParams();
+    abstract protected function checkSpecificParams();
 
     /**
      * Initialize the rendering resource
      * @return void
      */
-    abstract protected function _initRenderer();
+    abstract protected function initRenderer();
 
     /**
      * Draw a polygon in the rendering resource
@@ -502,7 +502,7 @@ abstract class AbstractRenderer implements Barcode\Renderer
      * @param integer $color
      * @param boolean $filled
      */
-    abstract protected function _drawPolygon($points, $color, $filled = true);
+    abstract protected function drawPolygon($points, $color, $filled = true);
 
     /**
      * Draw a polygon in the rendering resource
@@ -514,7 +514,7 @@ abstract class AbstractRenderer implements Barcode\Renderer
      * @param string $alignment
      * @param float $orientation
      */
-    abstract protected function _drawText(
+    abstract protected function drawText(
         $text,
         $size,
         $position,

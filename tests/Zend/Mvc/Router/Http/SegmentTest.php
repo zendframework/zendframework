@@ -11,9 +11,7 @@ class SegmentTest extends TestCase
     {
         return array(
             'simple-match' => array(
-                '/:foo',
-                array(),
-                array(),
+                new Segment('/:foo'),
                 '/bar',
                 null,
                 array(
@@ -21,25 +19,19 @@ class SegmentTest extends TestCase
                 )
             ),
             'no-match-without-leading-slash' => array(
-                ':foo',
-                array(),
-                array(),
+                new Segment(':foo'),
                 '/bar/',
                 null,
                 null
             ),
             'no-match-with-trailing-slash' => array(
-                '/:foo',
-                array(),
-                array(),
+                new Segment('/:foo'),
                 '/bar/',
                 null,
                 null
             ),
             'offset-skips-beginning' => array(
-                ':foo',
-                array(),
-                array(),
+                new Segment(':foo'),
                 '/bar',
                 1,
                 array(
@@ -47,9 +39,7 @@ class SegmentTest extends TestCase
                 )
             ),
             'offset-enables-partial-matching' => array(
-                '/:foo',
-                array(),
-                array(),
+                new Segment('/:foo'),
                 '/bar/baz',
                 0,
                 array(
@@ -57,9 +47,7 @@ class SegmentTest extends TestCase
                 )
             ),
             'match-overrides-default' => array(
-                '/:foo',
-                array(),
-                array('foo' => 'baz'),
+                new Segment('/:foo', array(), array('foo' => 'baz')),
                 '/bar',
                 null,
                 array(
@@ -67,17 +55,13 @@ class SegmentTest extends TestCase
                 )
             ),
             'constraints-prevent-match' => array(
-                '/:foo',
-                array('foo' => '\d+'),
-                array(),
+                new Segment('/:foo', array('foo' => '\d+')),
                 '/bar',
                 null,
                 null
             ),
             'constraints-allow-match' => array(
-                '/:foo',
-                array('foo' => '\d+'),
-                array(),
+                new Segment('/:foo', array('foo' => '\d+')),
                 '/123',
                 null,
                 array(
@@ -85,19 +69,23 @@ class SegmentTest extends TestCase
                 )
             ),
             'constraints-override-non-standard-delimiter' => array(
-                '/:foo{-}/bar',
-                array('foo' => '[^/]+'),
-                array(),
+                new Segment('/:foo{-}/bar', array('foo' => '[^/]+')),
                 '/foo-bar/bar',
                 null,
                 array(
                     'foo' => 'foo-bar'
                 )
             ),
+            'simple-match-with-optional-parameter' => array(
+                new Segment('/[:foo]', array(), array('foo' => 'bar')),
+                '/',
+                null,
+                array(
+                    'foo' => 'bar'
+                )
+            ),
             'optional-parameter-is-ignored' => array(
-                '/:foo[/:bar]',
-                array(),
-                array(),
+                new Segment('/:foo[/:bar]'),
                 '/bar',
                 null,
                 array(
@@ -105,10 +93,8 @@ class SegmentTest extends TestCase
                 )
             ),
             'optional-parameter-is-provided-with-default' => array(
-                '/:foo[/:bar]',
-                array(),
-                array('bar' => 'baz'),
-                array('/bar', '/bar/baz'),
+                new Segment('/:foo[/:bar]', array(), array('bar' => 'baz')),
+                '/bar',
                 null,
                 array(
                     'foo' => 'bar',
@@ -116,9 +102,7 @@ class SegmentTest extends TestCase
                 )
             ),
             'optional-parameter-is-consumed' => array(
-                '/:foo[/:bar]',
-                array(),
-                array(),
+                new Segment('/:foo[/:bar]'),
                 '/bar/baz',
                 null,
                 array(
@@ -127,9 +111,7 @@ class SegmentTest extends TestCase
                 )
             ),
             'non-standard-delimiter-before-parameter' => array(
-                '/foo-:bar',
-                array(),
-                array(),
+                new Segment('/foo-:bar'),
                 '/foo-baz',
                 null,
                 array(
@@ -137,9 +119,7 @@ class SegmentTest extends TestCase
                 )
             ),
             'non-standard-delimiter-between-parameters' => array(
-                '/:foo{-}-:bar',
-                array(),
-                array(),
+                new Segment('/:foo{-}-:bar'),
                 '/bar-baz',
                 null,
                 array(
@@ -148,9 +128,7 @@ class SegmentTest extends TestCase
                 )
             ),
             'non-standard-delimiter-before-optional-parameter' => array(
-                '/:foo{-/}[-:bar]/:baz',
-                array(),
-                array(),
+                new Segment('/:foo{-/}[-:bar]/:baz'),
                 '/bar-baz/bat',
                 null,
                 array(
@@ -160,9 +138,7 @@ class SegmentTest extends TestCase
                 )
             ),
             'non-standard-delimiter-before-ignored-optional-parameter' => array(
-                '/:foo{-/}[-:bar]/:baz',
-                array(),
-                array(),
+                new Segment('/:foo{-/}[-:bar]/:baz'),
                 '/bar/bat',
                 null,
                 array(
@@ -173,24 +149,47 @@ class SegmentTest extends TestCase
         );
     }
     
+    public static function parseExceptionsProvider()
+    {
+        return array(
+            'unbalanced-brackets' => array(
+                '[',
+                'Zend\Mvc\Router\Exception\RuntimeException',
+                'Found unbalanced brackets'
+            ),
+            'closing-bracket-without-opening-bracket' => array(
+                ']',
+                'Zend\Mvc\Router\Exception\RuntimeException',
+                'Found closing bracket without matching opening bracket'
+            ),
+            'empty-parameter-name' => array(
+                ':',
+                'Zend\Mvc\Router\Exception\RuntimeException',
+                'Found empty parameter name'
+            ),
+            'translated-literal-without-closing-backet' => array(
+                '{test',
+                'Zend\Mvc\Router\Exception\RuntimeException',
+                'Translated literal missing closing bracket'
+            ),
+            'translated-parameter-without-closing-backet' => array(
+                ':{test',
+                'Zend\Mvc\Router\Exception\RuntimeException',
+                'Translated parameter missing closing bracket'
+            ),
+        );
+    }
+    
     /**
      * @dataProvider routeProvider
-     * @param        string  $route
-     * @param        array   $constraints
-     * @param        array   $defaults
-     * @param        mixed   $path
+     * @param        Segment $route
+     * @param        string  $path
      * @param        integer $offset
      * @param        array   $params
      */
-    public function testMatching($route, array $constraints, array $defaults, $path, $offset, array $params = null)
+    public function testMatching(Segment $route, $path, $offset, array $params = null)
     {
-        if (is_array($path)) {
-            $path = $path[0];
-        }
-        
         $request = new Request();
-        $route   = new Segment($route, $constraints, $defaults);
-        
         $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
         
@@ -199,7 +198,11 @@ class SegmentTest extends TestCase
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
             
-            foreach($params as $key => $value) {
+            if ($offset === null) {
+                $this->assertEquals(strlen($path), $match->getLength());            
+            }
+            
+            foreach ($params as $key => $value) {
                 $this->assertEquals($value, $match->getParam($key));
             }
         }
@@ -207,25 +210,18 @@ class SegmentTest extends TestCase
     
     /**
      * @dataProvider routeProvider
-     * @param        string  $route
-     * @param        array   $constraints
-     * @param        array   $defaults
-     * @param        mixed   $path
+     * @param        Segment $route
+     * @param        string  $path
      * @param        integer $offset
      * @param        array   $params
      */
-    public function testAssembling($route, array $constraints, array $defaults, $path, $offset, array $params = null)
+    public function testAssembling($route, $path, $offset, array $params = null)
     {
         if ($params === null) {
             // Data which will not match are not tested for assembling.
             return;
         }
-        
-        if (is_array($path)) {
-            $path = $path[1];
-        }
-        
-        $route  = new Segment($route, $constraints, $defaults);
+                
         $result = $route->assemble($params);
         
         if ($offset !== null) {
@@ -233,5 +229,24 @@ class SegmentTest extends TestCase
         } else {
             $this->assertEquals($path, $result);
         }
+    }
+    
+    /**
+     * @dataProvider parseExceptionsProvider
+     * @param        string $route
+     * @param        string $exceptionName
+     * @param        string $exceptionMessage
+     */
+    public function testParseExceptions($route, $exceptionName, $exceptionMessage)
+    {
+        $this->setExpectedException($exceptionName, $exceptionMessage);
+        new Segment($route);
+    }
+    
+    public function testAssemblingWithMissingParameterInRoot()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Parameters missing');
+        $route = new Segment(':foo');
+        $route->assemble();
     }
 }

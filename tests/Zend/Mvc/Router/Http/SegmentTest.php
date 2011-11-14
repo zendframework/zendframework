@@ -110,6 +110,15 @@ class SegmentTest extends TestCase
                     'bar' => 'baz'
                 )
             ),
+            'optional-group-is-discared-with-missing-parameter' => array(
+                new Segment('/:foo[/:bar/:baz]', array(), array('bar' => 'baz')),
+                '/bar',
+                null,
+                array(
+                    'foo' => 'bar',
+                    'bar' => 'baz'
+                )
+            ),
             'non-standard-delimiter-before-parameter' => array(
                 new Segment('/foo-:bar'),
                 '/foo-baz',
@@ -245,7 +254,7 @@ class SegmentTest extends TestCase
     
     public function testAssemblingWithMissingParameterInRoot()
     {
-        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Parameters missing');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing parameter "foo"');
         $route = new Segment(':foo');
         $route->assemble();
     }

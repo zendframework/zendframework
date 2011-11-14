@@ -255,6 +255,10 @@ class Segment implements Route
                     $skippable = true;
                     
                     if (!isset($mergedParams[$part[1]])) {
+                        if ($isRoot) {
+                            throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $part[1]));
+                        }
+        
                         return null;
                     } elseif (!isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
                         $skip = false;
@@ -342,13 +346,8 @@ class Segment implements Route
     public function assemble(array $params = array(), array $options = array())
     {
         $this->assembledParams = array();
-        $path                  = $this->buildPath($this->parts, array_merge($this->defaults, $params), true);
         
-        if ($path === null) {
-            throw new Exception\InvalidArgumentException('Parameters missing');
-        }
-        
-        return $path;
+        return $this->buildPath($this->parts, array_merge($this->defaults, $params), true);
     }
     
     /**

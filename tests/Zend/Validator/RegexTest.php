@@ -110,4 +110,27 @@ class RegexTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator\Regex('/./');
         $this->assertFalse($validator->isValid(array(1 => 1)));
     }
+
+    /**
+     * @ZF-11863
+     */
+    public function testSpecialCharValidation()
+    {
+        /**
+         * The elements of each array are, in order:
+         *      - pattern
+         *      - expected validation result
+         *      - array of test input values
+         */
+        $valuesExpected = array(
+            array('/^[[:alpha:]\']+$/iu', true, array('test', 'òèùtestòò', 'testà', 'teààst', 'ààòòìùéé', 'èùòìiieeà')),
+            array('/^[[:alpha:]\']+$/iu', false, array('test99'))
+            );
+        foreach ($valuesExpected as $element) {
+            $validator = new Validator\Regex($element[0]);
+            foreach ($element[2] as $input) {
+                $this->assertEquals($element[1], $validator->isValid($input));
+            }
+        }
+    }
 }

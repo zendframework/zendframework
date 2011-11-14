@@ -78,12 +78,9 @@ if (defined('TESTS_GENERATE_REPORT')
     /*
      * Omit from code coverage reports the contents of the tests directory
      */
-    foreach (array('.php', '.phtml', '.csv', '.inc') as $suffix) {
-        $codeCoverageFilter->addDirectoryToBlacklist($zfCoreTests, $suffix);
-    }
-
-    $codeCoverageFilter->addDirectoryToBlacklist(PEAR_INSTALL_DIR);
-    $codeCoverageFilter->addDirectoryToBlacklist(PHP_LIBDIR);
+    $codeCoverageFilter->addDirectoryToBlacklist($zfCoreTests, '');
+    $codeCoverageFilter->addDirectoryToBlacklist(PEAR_INSTALL_DIR, '');
+    $codeCoverageFilter->addDirectoryToBlacklist(PHP_LIBDIR, '');
 
     unset($codeCoverageFilter);
 }

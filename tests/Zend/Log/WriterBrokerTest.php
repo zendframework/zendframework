@@ -45,7 +45,7 @@ class WriterBrokerTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisteringInvalidWriterRaisesException()
     {
-        $this->setExpectedException('Zend\Log\Exception\RuntimeException');
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must implement');
         $this->broker->register('test', $this);
     }
 }

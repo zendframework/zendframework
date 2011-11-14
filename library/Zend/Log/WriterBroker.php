@@ -44,12 +44,12 @@ class WriterBroker extends PluginBroker
      *
      * @param mixed $plugin
      * @return boolean
-     * @throws Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Writer) {
-            throw new Exception\RuntimeException('Writers must implement Zend\Log\Writer');
+            throw new Exception\InvalidArgumentException('Writer must implement Zend\Log\Writer');
         }
 
         return true;

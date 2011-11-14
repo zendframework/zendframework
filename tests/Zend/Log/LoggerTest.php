@@ -52,19 +52,45 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesWriterBrokerByDefault()
     {
-        $this->assertInstanceOf('Zend\Log\WriterBroker', $this->logger->broker());
+        $this->assertInstanceOf('Zend\Log\WriterBroker', $this->logger->getBroker());
     }
 
-    public function testPassingArgumentToBrokerReturnsWriterByThatName()
+    public function testPassingValidStringClassToSetBroker()
     {
-        $writer = $this->logger->broker('mock');
+        $this->logger->setBroker('Zend\Loader\PluginBroker');
+        $this->assertInstanceOf('Zend\Loader\PluginBroker', $this->logger->getBroker());
+    }
+
+    public static function provideInvalidArguments()
+    {
+        return array(
+          array('stdClass'),
+          array(new \stdClass()),
+        );
+    }
+
+    /**
+     * @dataProvider provideInvalidArguments
+     */
+    public function testPassingInvalidArgumentToSetBrokerRaisesException($broker)
+    {
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must implement');
+        $this->logger->setBroker($broker);
+    }
+
+    public function testPassingShortNameToBrokerReturnsWriterByThatName()
+    {
+        $writer = $this->logger->plugin('mock');
         $this->assertInstanceOf('Zend\Log\Writer\Mock', $writer);
     }
 
-    public function testPassingInvalidClassToAddWriterRaisesException()
+    /**
+     * @dataProvider provideInvalidArguments
+     */
+    public function testPassingInvalidArgumentToAddWriterRaisesException($writer)
     {
-        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must extend');
-        $this->logger->addWriter(new \stdClass());
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'must implement');
+        $this->logger->addWriter($writer);
     }
 
     public function testWriterShouldEmitMessage()
@@ -73,6 +99,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, 'tottakai');
 
+        $this->assertArrayHasKey(0, $writer->events);
         $this->assertContains('tottakai', $writer->events[0]);
     }
 }

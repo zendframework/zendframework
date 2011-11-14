@@ -24,7 +24,9 @@
 namespace Zend\Log;
 
 use DateTime,
-    SplStack;
+    SplStack,
+    Zend\Loader\Broker,
+    Zend\Loader\Pluggable;
 
 /**
  * Logging messages with a stack of backends
@@ -34,7 +36,7 @@ use DateTime,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Logger implements Loggable
+class Logger implements Loggable, Pluggable
 {
     /**#@+
      * @const int defined from the BSD Syslog message severities
@@ -133,28 +135,56 @@ class Logger implements Loggable
     public function setDateTimeFormat($format)
     {
         $this->dateTimeFormat = (string) $format;
-
         return $this;
     }
 
     /**
      * Get writer broker
      *
-     * @todo should support custom brokers
-     * @param string|null $writer
-     * @param array|null $options
-     * @return WriterBroker|Writer
+     * @see Pluggable::getBroker()
+     * @return Broker
      */
-    public function broker($writer = null, array $options = null)
+    public function getBroker()
     {
         if (null === $this->writerBroker) {
-            $this->writerBroker = new WriterBroker();
+            $this->setBroker(new WriterBroker());
         }
-        if (null === $writer) {
-            return $this->writerBroker;
+        return $this->writerBroker;
+    }
+
+    /**
+     * Set writer broker
+     *
+     * @param string|Broker $broker
+     * @return Logger
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setBroker($broker)
+    {
+        if (is_string($broker)) {
+            $broker = new $broker;
+        }
+        if (!$broker instanceof Broker) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Writer broker must implement Zend\Loader\Broker; received %s',
+                is_object($broker) ? get_class($broker) : gettype($broker)
+            ));
         }
 
-        return $this->writerBroker->load($writer, $options);
+        $this->writerBroker = $broker;
+        return $this;
+    }
+
+    /**
+     * Get writer instance
+     *
+     * @param string $name
+     * @param array|null $options
+     * @return Writer
+     */
+    public function plugin($name, array $options = null)
+    {
+        return $this->getBroker()->load($name, $options);
     }
 
     /**
@@ -162,14 +192,15 @@ class Logger implements Loggable
      *
      * @param string|Writer $writer
      * @return Logger
+     * @throws Exception\InvalidArgumentException
      */
     public function addWriter($writer)
     {
         if (is_string($writer)) {
-            $writer = $this->broker($writer);
+            $writer = $this->plugin($writer);
         } elseif (!$writer instanceof Writer) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '$writer must extend Writer; received "%s"',
+                'Writer must implement Zend\Log\Writer; received "%s"',
                 is_object($writer) ? get_class($writer) : gettype($writer)
             ));
         }

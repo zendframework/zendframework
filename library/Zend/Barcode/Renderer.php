@@ -24,8 +24,6 @@
  */
 namespace Zend\Barcode;
 
-use Zend\Config\Config;
-
 /**
  * Class for rendering the barcode
  *
@@ -38,7 +36,7 @@ interface Renderer
 {
     /**
      * Constructor
-     * @param array|\Zend\Config\Config $options
+     * @param array|Traversable $options
      * @return void
      */
     public function __construct($options = null);
@@ -46,22 +44,15 @@ interface Renderer
     /**
      * Set renderer state from options array
      * @param  array $options
-     * @return \Zend\Barcode\Renderer
+     * @return Renderer
      */
     public function setOptions($options);
-
-    /**
-     * Set renderer state from config object
-     * @param \Zend\Config\Config $config
-     * @return \Zend\Barcode\Renderer
-     */
-    public function setConfig(Config $config);
 
     /**
      * Set renderer namespace for autoloading
      *
      * @param string $namespace
-     * @return \Zend\Barcode\Renderer
+     * @return Renderer
      */
     public function setRendererNamespace($namespace);
 
@@ -81,7 +72,7 @@ interface Renderer
     /**
      * Manually adjust top position
      * @param integer $value
-     * @return \Zend\Barcode\Renderer
+     * @return Renderer
      */
     public function setTopOffset($value);
 
@@ -94,7 +85,7 @@ interface Renderer
     /**
      * Manually adjust left position
      * @param integer $value
-     * @return \Zend\Barcode\Renderer
+     * @return Renderer
      */
     public function setLeftOffset($value);
 
@@ -113,7 +104,7 @@ interface Renderer
     /**
      * Horizontal position of the barcode in the rendering resource
      * @param string $value
-     * @return \Zend\Barcode\Renderer
+     * @return Renderer
      */
     public function setHorizontalPosition($value);
 
@@ -126,7 +117,7 @@ interface Renderer
     /**
      * Vertical position of the barcode in the rendering resource
      * @param string $value
-     * @return \Zend\Barcode\Renderer
+     * @return Renderer
      */
     public function setVerticalPosition($value);
 
@@ -139,7 +130,7 @@ interface Renderer
     /**
      * Set the size of a module
      * @param float $value
-     * @return \Zend\Barcode\Renderer
+     * @return Renderer
      */
     public function setModuleSize($value);
 
@@ -157,14 +148,14 @@ interface Renderer
 
     /**
      * Set the barcode object
-     * @param \Zend\Barcode\Object $barcode
-     * @return \Zend\Barcode\Renderer
+     * @param  Object $barcode
+     * @return Renderer
      */
     public function setBarcode($barcode);
 
     /**
      * Retrieve the barcode object
-     * @return \Zend\Barcode\Object
+     * @return Object
      */
     public function getBarcode();
 

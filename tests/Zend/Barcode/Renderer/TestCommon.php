@@ -196,16 +196,6 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $this->renderer->getAutomaticRenderError());
     }
 
-    public function testSetConfig()
-    {
-        $this->assertEquals(false, $this->renderer->getAutomaticRenderError());
-        $config = new Config\Config(
-                array('automaticRenderError' => true ,
-                        'unkownProperty' => 'aValue'));
-        $this->renderer->setConfig($config);
-        $this->assertEquals(true, $this->renderer->getAutomaticRenderError());
-    }
-
     public function testRendererNamespace()
     {
         $this->renderer->setRendererNamespace('My_Namespace');

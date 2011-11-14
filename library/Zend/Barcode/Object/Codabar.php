@@ -27,7 +27,6 @@ namespace Zend\Barcode\Object;
 /**
  * Class for generate Codabar barcode
  *
- * @uses       \Zend\Barcode\Object\AbstractObject
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

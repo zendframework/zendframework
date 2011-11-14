@@ -27,7 +27,6 @@ namespace Zend\Barcode\Object;
 /**
  * Class for generate Ean2 barcode
  *
- * @uses       \Zend\Barcode\Object\Ean5
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

@@ -12,7 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       \Zend\Barcode\Object\Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @subpackage Object
@@ -25,14 +24,11 @@
  */
 namespace Zend\Barcode\Object;
 
-use Zend\Barcode,
-    Zend\Config\Config,
+use Traversable,
+    Zend\Barcode,
+    Zend\Barcode\Object\Exception,
     Zend\Validator\Barcode as BarcodeValidator,
-    Zend\Barcode\Object\Exception\RuntimeException,
-    Zend\Barcode\Object\Exception\InvalidArgumentException,
-    Zend\Barcode\Object\Exception\BarcodeValidationException,
-    Zend\Barcode\Object\Exception\OutOfRangeException,
-    Zend\Barcode\Object\Exception\ExtensionNotLoadedException;
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * Class for generate Barcode
@@ -221,15 +217,15 @@ abstract class AbstractObject implements Barcode\Object
 
     /**
      * Constructor
-     * @param array|\Zend\Config\Config $options
+     * @param array|Traversable $options
      * @return void
      */
     public function __construct($options = null)
     {
         $this->getDefaultOptions();
         $this->font = Barcode\Barcode::getBarcodeFont();
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
         }
         if (is_array($options)) {
             $this->setOptions($options);
@@ -263,16 +259,6 @@ abstract class AbstractObject implements Barcode\Object
             }
         }
         return $this;
-    }
-
-    /**
-     * Set barcode state from config object
-     * @param \Zend\Config\Config $config
-     * @return \Zend\Barcode\Object
-     */
-    public function setConfig(Config $config)
-    {
-        return $this->setOptions($config->toArray());
     }
 
     /**
@@ -315,7 +301,7 @@ abstract class AbstractObject implements Barcode\Object
     public function setBarHeight($value)
     {
         if (intval($value) <= 0) {
-            throw new OutOfRangeException(
+            throw new Exception\OutOfRangeException(
                 'Bar height must be greater than 0'
             );
         }
@@ -341,7 +327,7 @@ abstract class AbstractObject implements Barcode\Object
     public function setBarThinWidth($value)
     {
         if (intval($value) <= 0) {
-            throw new OutOfRangeException(
+            throw new Exception\OutOfRangeException(
                 'Bar width must be greater than 0'
             );
         }
@@ -367,7 +353,7 @@ abstract class AbstractObject implements Barcode\Object
     public function setBarThickWidth($value)
     {
         if (intval($value) <= 0) {
-            throw new OutOfRangeException(
+            throw new Exception\OutOfRangeException(
                 'Bar width must be greater than 0'
             );
         }
@@ -394,7 +380,7 @@ abstract class AbstractObject implements Barcode\Object
     public function setFactor($value)
     {
         if (floatval($value) <= 0) {
-            throw new OutOfRangeException(
+            throw new Exception\OutOfRangeException(
                 'Factor must be greater than 0'
             );
         }
@@ -425,7 +411,7 @@ abstract class AbstractObject implements Barcode\Object
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->foreColor = intval($value);
         } else {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Text color must be set as #[0-9A-F]{6}'
             );
         }
@@ -454,7 +440,7 @@ abstract class AbstractObject implements Barcode\Object
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->backgroundColor = intval($value);
         } else {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Background color must be set as #[0-9A-F]{6}'
             );
         }
@@ -718,7 +704,7 @@ abstract class AbstractObject implements Barcode\Object
     {
         if (is_int($value) && $value >= 1 && $value <= 5) {
             if (!extension_loaded('gd')) {
-                throw new ExtensionNotLoadedException(
+                throw new Exception\ExtensionNotLoadedException(
                     'GD extension is required to use numeric font'
                 );
             }
@@ -731,7 +717,7 @@ abstract class AbstractObject implements Barcode\Object
         } elseif (is_string($value)) {
             $this->font = $value;
         } else {
-            throw new InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid font "%s" provided to setFont()',
                 $value
             ));
@@ -762,7 +748,7 @@ abstract class AbstractObject implements Barcode\Object
         }
 
         if (!is_numeric($value)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Font size must be a numeric value'
             );
         }
@@ -888,7 +874,7 @@ abstract class AbstractObject implements Barcode\Object
             $value = $this->text;
         }
         if (!strlen($value)) {
-            throw new RuntimeException(
+            throw new Exception\RuntimeException(
                 'A text must be provide to Barcode before drawing'
             );
         }
@@ -906,7 +892,7 @@ abstract class AbstractObject implements Barcode\Object
     {
         $ratio = $this->barThickWidth / $this->barThinWidth;
         if (!($ratio >= $min && $ratio <= $max)) {
-            throw new OutOfRangeException(sprintf(
+            throw new Exception\OutOfRangeException(sprintf(
                 'Ratio thick/thin bar must be between %0.1f and %0.1f (actual %0.3f)',
                 $min,
                 $max,
@@ -923,7 +909,7 @@ abstract class AbstractObject implements Barcode\Object
     protected function checkFontAndOrientation()
     {
         if (is_numeric($this->font) && $this->orientation != 0) {
-            throw new RuntimeException(
+            throw new Exception\RuntimeException(
                 'Only drawing with TTF font allow orientation of the barcode.'
             );
         }
@@ -1246,7 +1232,7 @@ abstract class AbstractObject implements Barcode\Object
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
-            throw new BarcodeValidationException($message);
+            throw new Exception\BarcodeValidationException($message);
         }
     }
 

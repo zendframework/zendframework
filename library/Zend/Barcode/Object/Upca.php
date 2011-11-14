@@ -27,7 +27,6 @@ namespace Zend\Barcode\Object;
 /**
  * Class for generate UpcA barcode
  *
- * @uses       \Zend\Barcode\Object\Ean13
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

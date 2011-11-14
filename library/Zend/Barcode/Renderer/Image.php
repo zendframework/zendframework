@@ -23,17 +23,12 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
-use Zend\Barcode,
-    Zend\Barcode\Exception\RendererCreationException,
-    Zend\Barcode\Renderer\Exception\RuntimeException,
-    Zend\Barcode\Renderer\Exception\OutOfRangeException,
-    Zend\Barcode\Renderer\Exception\InvalidArgumentException;
+
+use Zend\Barcode\Exception\RendererCreationException;
 
 /**
  * Class for rendering the barcode as image
  *
- * @uses       \Zend\Barcode\Renderer\Exception
- * @uses       \Zend\Barcode\Renderer\AbstractRenderer
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -93,7 +88,7 @@ class Image extends AbstractRenderer
     public function __construct($options = null)
     {
         if (!function_exists('gd_info')) {
-            throw new RendererCreationException('\Zend\Barcode\Renderer\Image requires the GD extension');
+            throw new RendererCreationException(__CLASS__ . ' requires the GD extension');
         }
 
         parent::__construct($options);
@@ -102,13 +97,13 @@ class Image extends AbstractRenderer
     /**
      * Set height of the result image
      * @param null|integer $value
-     * @return \Zend\Barcode\Renderer
-     * @throw \Zend\Barcode\Renderer\Exception
+     * @return Image
+     * @throw  Exception
      */
     public function setHeight($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new OutOfRangeException(
+            throw new Exception\OutOfRangeException(
                 'Image height must be greater than or equals 0'
             );
         }
@@ -135,7 +130,7 @@ class Image extends AbstractRenderer
     public function setWidth($value)
     {
         if (!is_numeric($value) || intval($value) < 0) {
-            throw new OutOfRangeException(
+            throw new Exception\OutOfRangeException(
                 'Image width must be greater than or equals 0'
             );
         }
@@ -157,13 +152,13 @@ class Image extends AbstractRenderer
      * Set an image resource to draw the barcode inside
      *
      * @param resource $value
-     * @return \Zend\Barcode\Renderer
-     * @throw \Zend\Barcode\Renderer\Exception
+     * @return Image
+     * @throw  Exception
      */
     public function setResource($image)
     {
         if (gettype($image) != 'resource' || get_resource_type($image) != 'gd') {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid image resource provided to setResource()'
             );
         }
@@ -175,8 +170,8 @@ class Image extends AbstractRenderer
      * Set the image type to produce (png, jpeg, gif)
      *
      * @param string $value
-     * @return \Zend\Barcode\Renderer
-     * @throw \Zend\Barcode\Renderer\Exception
+     * @return Image
+     * @throw  Exception
      */
     public function setImageType($value)
     {
@@ -185,7 +180,7 @@ class Image extends AbstractRenderer
         }
 
         if (!in_array($value, $this->allowedImageType)) {
-            throw new InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid type "%s" provided to setImageType()',
                 $value
             ));
@@ -287,7 +282,7 @@ class Image extends AbstractRenderer
     {
         if ($this->resource !== null) {
             if (imagesy($this->resource) < $this->barcode->getHeight(true)) {
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     'Barcode is define outside the image (height)'
                 );
             }
@@ -295,7 +290,7 @@ class Image extends AbstractRenderer
             if ($this->userHeight) {
                 $height = $this->barcode->getHeight(true);
                 if ($this->userHeight < $height) {
-                    throw new RuntimeException(sprintf(
+                    throw new Exception\RuntimeException(sprintf(
                         "Barcode is define outside the image (calculated: '%d', provided: '%d')",
                         $height,
                         $this->userHeight
@@ -305,7 +300,7 @@ class Image extends AbstractRenderer
         }
         if ($this->resource !== null) {
             if (imagesx($this->resource) < $this->barcode->getWidth(true)) {
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     'Barcode is define outside the image (width)'
                 );
             }
@@ -313,7 +308,7 @@ class Image extends AbstractRenderer
             if ($this->userWidth) {
                 $width = $this->barcode->getWidth(true);
                 if ($this->userWidth < $width) {
-                    throw new RuntimeException(sprintf(
+                    throw new Exception\RuntimeException(sprintf(
                         "Barcode is define outside the image (calculated: '%d', provided: '%d')",
                         $width,
                         $this->userWidth
@@ -400,7 +395,7 @@ class Image extends AbstractRenderer
                  * to informe user of the problem instead of simply not drawing
                  * the text
                  */
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     'No orientation possible with GD internal font'
                 );
             }
@@ -421,7 +416,7 @@ class Image extends AbstractRenderer
         } else {
 
             if (!function_exists('imagettfbbox')) {
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     'A font was provided, but this instance of PHP does not have TTF (FreeType) support');
             }
 

@@ -23,22 +23,16 @@
  * @namespace
  */
 namespace Zend\Barcode\Renderer;
-use Zend\Pdf\Color,
-    Zend\Pdf\PdfDocument,
-    Zend\Pdf\Page,
+
+use Zend\Barcode\Renderer\Exception,
+    Zend\Pdf\Color,
     Zend\Pdf\Font,
-    Zend,
-    Zend\Barcode\Renderer\Exception\OutOfRangeException,
-    Zend\Barcode\Renderer\Exception\InvalidArgumentException;
+    Zend\Pdf\Page,
+    Zend\Pdf\PdfDocument;
 
 /**
  * Class for rendering the barcode in PDF resource
  *
- * @uses       \Zend\Barcode\Renderer\Exception
- * @uses       \Zend\Barcode\Renderer\AbstractRenderer
- * @uses       \Zend\Pdf\PdfDocument
- * @uses       \Zend\Pdf\Page
- * @uses       \Zend\Pdf\Color\Rgb
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -48,7 +42,7 @@ class Pdf extends AbstractRenderer
 {
     /**
      * PDF resource
-     * @var \Zend\Pdf\PdfDocument
+     * @var PdfDocument
      */
     protected $resource = null;
 
@@ -68,13 +62,13 @@ class Pdf extends AbstractRenderer
      * Set an image resource to draw the barcode inside
      * @param resource $value
      * @return \Zend\Barcode\Renderer
-     * @throw \Zend\Barcode\Renderer\Exception
+     * @throw  Exception
      */
     public function setResource($pdf, $page = 0)
     {
         if (!$pdf instanceof PdfDocument) {
-            throw new InvalidArgumentException(
-                'Invalid \Zend\Pdf\PdfDocument resource provided to setResource()'
+            throw new Exception\InvalidArgumentException(
+                'Invalid Zend\Pdf\PdfDocument resource provided to setResource()'
             );
         }
 
@@ -84,7 +78,7 @@ class Pdf extends AbstractRenderer
         if (!count($this->resource->pages)) {
             $this->page = 0;
             $this->resource->pages[] = new Page(
-                Zend\Pdf\Page::SIZE_A4
+                Page::SIZE_A4
             );
         }
         return $this;
@@ -226,7 +220,7 @@ class Pdf extends AbstractRenderer
      * Calculate the width of a string:
      * in case of using alignment parameter in drawText
      * @param string $text
-     * @param \Zend\Pdf\Font $font
+     * @param Font $font
      * @param float $fontSize
      * @return float
      */

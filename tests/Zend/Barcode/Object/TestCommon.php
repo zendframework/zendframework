@@ -103,15 +103,6 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $this->assertEquals(150, $this->object->getBarHeight());
     }
 
-    public function testSetConfig()
-    {
-        $config = new Config\Config(
-                array('barHeight' => 150 ,
-                        'unkownProperty' => 'aValue'));
-        $this->object->setConfig($config);
-        $this->assertEquals(150, $this->object->getBarHeight());
-    }
-
     public function testBarcodeNamespace()
     {
         $this->object->setBarcodeNamespace('My_Namespace');

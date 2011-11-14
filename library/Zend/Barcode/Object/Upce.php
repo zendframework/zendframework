@@ -23,15 +23,13 @@
  * @namespace
  */
 namespace Zend\Barcode\Object;
+
 use Zend\Validator\Barcode as BarcodeValidator,
-    Zend\Barcode\Object\Exception\BarcodeValidationException;
+    Zend\Barcode\Object\Exception;
 
 /**
  * Class for generate UpcA barcode
  *
- * @uses       \Zend\Barcode\Object\Ean13
- * @uses       \Zend\Barcode\Object\Exception
- * @uses       \Zend\Validator\Barcode\Barcode
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -201,7 +199,7 @@ class Upce extends Ean13
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
-            throw new BarcodeValidationException($message);
+            throw new Exception\BarcodeValidationException($message);
         }
     }
 

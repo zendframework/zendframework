@@ -4,6 +4,7 @@ namespace Zend\Module\Listener;
 
 use Traversable,
     Zend\Config\Config,
+    Zend\Module\ModuleEvent,
     Zend\Stdlib\IteratorToArray;
 
 class ConfigListener extends AbstractListener implements ConfigMerger
@@ -38,12 +39,12 @@ class ConfigListener extends AbstractListener implements ConfigMerger
         }
     }
 
-    public function __invoke($e)
+    public function __invoke(ModuleEvent $e)
     {
         if (true === $this->skipConfig) {
             return;
         }
-        $module = $e->getParam('module');
+        $module = $e->getModule();
         if (is_callable(array($module, 'getConfig'))) {
             $this->mergeModuleConfig($module);
         }

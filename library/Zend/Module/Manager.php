@@ -95,21 +95,25 @@ class Manager implements ModuleHandler
      */
     public function loadModule($moduleName)
     {
-        if (!isset($this->loadedModules[$moduleName])) {
-            $class = $moduleName . '\Module';
-            
-            if (!class_exists($class)) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Module (%s) could not be initialized because Module.php could not be found.',
-                    $moduleName
-                ));
-            }
-            
-            $module = new $class;
-            $this->events()->trigger(__FUNCTION__, $this, array('module' => $module));
-            $this->loadedModules[$moduleName] = $module;
+        if (isset($this->loadModules[$moduleName])) {
+            return $this->loadedModules[$moduleName];
         }
-        return $this->loadedModules[$moduleName];
+
+        $class = $moduleName . '\Module';
+        
+        if (!class_exists($class)) {
+            throw new Exception\RuntimeException(sprintf(
+                'Module (%s) could not be initialized because Module.php could not be found.',
+                $moduleName
+            ));
+        }
+        
+        $module = new $class;
+        $event  = new ModuleEvent();
+        $event->setModule($module);
+        $this->events()->trigger(__FUNCTION__, $this, $event);
+        $this->loadedModules[$moduleName] = $module;
+        return $module;
     }
 
     /**

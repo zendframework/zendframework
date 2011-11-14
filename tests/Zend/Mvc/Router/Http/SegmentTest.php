@@ -14,9 +14,7 @@ class SegmentTest extends TestCase
                 new Segment('/:foo'),
                 '/bar',
                 null,
-                array(
-                    'foo' => 'bar'
-                )
+                array('foo' => 'bar')
             ),
             'no-match-without-leading-slash' => array(
                 new Segment(':foo'),
@@ -34,25 +32,19 @@ class SegmentTest extends TestCase
                 new Segment(':foo'),
                 '/bar',
                 1,
-                array(
-                    'foo' => 'bar'
-                )
+                array('foo' => 'bar')
             ),
             'offset-enables-partial-matching' => array(
                 new Segment('/:foo'),
                 '/bar/baz',
                 0,
-                array(
-                    'foo' => 'bar'
-                )
+                array('foo' => 'bar')
             ),
             'match-overrides-default' => array(
                 new Segment('/:foo', array(), array('foo' => 'baz')),
                 '/bar',
                 null,
-                array(
-                    'foo' => 'bar'
-                )
+                array('foo' => 'bar')
             ),
             'constraints-prevent-match' => array(
                 new Segment('/:foo', array('foo' => '\d+')),
@@ -64,96 +56,67 @@ class SegmentTest extends TestCase
                 new Segment('/:foo', array('foo' => '\d+')),
                 '/123',
                 null,
-                array(
-                    'foo' => '123'
-                )
+                array('foo' => '123')
             ),
             'constraints-override-non-standard-delimiter' => array(
                 new Segment('/:foo{-}/bar', array('foo' => '[^/]+')),
                 '/foo-bar/bar',
                 null,
-                array(
-                    'foo' => 'foo-bar'
-                )
+                array('foo' => 'foo-bar')
             ),
             'simple-match-with-optional-parameter' => array(
                 new Segment('/[:foo]', array(), array('foo' => 'bar')),
                 '/',
                 null,
-                array(
-                    'foo' => 'bar'
-                )
+                array('foo' => 'bar')
             ),
             'optional-parameter-is-ignored' => array(
                 new Segment('/:foo[/:bar]'),
                 '/bar',
                 null,
-                array(
-                    'foo' => 'bar'
-                )
+                array('foo' => 'bar')
             ),
             'optional-parameter-is-provided-with-default' => array(
                 new Segment('/:foo[/:bar]', array(), array('bar' => 'baz')),
                 '/bar',
                 null,
-                array(
-                    'foo' => 'bar',
-                    'bar' => 'baz',
-                )
+                array('foo' => 'bar', 'bar' => 'baz')
             ),
             'optional-parameter-is-consumed' => array(
                 new Segment('/:foo[/:bar]'),
                 '/bar/baz',
                 null,
-                array(
-                    'foo' => 'bar',
-                    'bar' => 'baz'
-                )
+                array('foo' => 'bar', 'bar' => 'baz')
             ),
             'optional-group-is-discared-with-missing-parameter' => array(
                 new Segment('/:foo[/:bar/:baz]', array(), array('bar' => 'baz')),
                 '/bar',
                 null,
-                array(
-                    'foo' => 'bar',
-                    'bar' => 'baz'
-                )
+                array('foo' => 'bar', 'bar' => 'baz')
             ),
             'non-standard-delimiter-before-parameter' => array(
                 new Segment('/foo-:bar'),
                 '/foo-baz',
                 null,
-                array(
-                    'bar' => 'baz'
-                )
+                array('bar' => 'baz')
             ),
             'non-standard-delimiter-between-parameters' => array(
                 new Segment('/:foo{-}-:bar'),
                 '/bar-baz',
                 null,
-                array(
-                    'foo' => 'bar',
-                    'bar' => 'baz'
-                )
+                array('foo' => 'bar', 'bar' => 'baz')
             ),
             'non-standard-delimiter-before-optional-parameter' => array(
                 new Segment('/:foo{-/}[-:bar]/:baz'),
                 '/bar-baz/bat',
                 null,
-                array(
-                    'foo' => 'bar',
-                    'bar' => 'baz',
-                    'baz' => 'bat',
-                )
+                array('foo' => 'bar', 'bar' => 'baz', 'baz' => 'bat')
             ),
             'non-standard-delimiter-before-ignored-optional-parameter' => array(
                 new Segment('/:foo{-/}[-:bar]/:baz'),
                 '/bar/bat',
                 null,
-                array(
-                    'foo' => 'bar',
-                    'baz' => 'bat',
-                )
+                array('foo' => 'bar', 'baz' => 'bat')
             ),
         );
     }

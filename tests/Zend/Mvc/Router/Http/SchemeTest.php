@@ -21,7 +21,7 @@ class SchemeTest extends TestCase
     
     public function testAssembling()
     {
-        $uri   = new HttpUri();       
+        $uri   = new HttpUri();
         $route = new Scheme('https');
         $path  = $route->assemble(array(), array('uri' => $uri));
         

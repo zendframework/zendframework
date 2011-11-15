@@ -153,7 +153,9 @@ abstract class Options implements ParameterObject
         } catch(\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'
-                . ' NULL is an invalid value for it: ' . $e->getMessage()
+                    . ' NULL is an invalid value for it',
+                0,
+                $e
             );
         }
     }

@@ -21,38 +21,19 @@
 /**
  * @namespace
  */
-namespace Zend\Stdlib;
+namespace Zend\Stdlib\Exception;
+
+use Zend\Stdlib\Exception;
 
 /**
+ * Bad method call exception
+ *
  * @category   Zend
  * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface ParameterObject
+class BadMethodCallException extends \BadMethodCallException
+    implements Exception
 {
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @return void
-     */
-    public function __set($key, $value);
-
-    /**
-     * @param string $key
-     * @return mixed
-     */
-    public function __get($key);
-
-    /**
-     * @param string $key
-     * @return boolean
-     */
-    public function __isset($key);
-
-    /**
-     * @param string $key
-     * @return void
-     */
-    public function __unset($key);
 }

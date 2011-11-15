@@ -24,8 +24,8 @@
 namespace Zend\Amf\Adobe;
 
 use Zend\Amf\Exception,
-    Zend\Reflection\ReflectionClass,
-    Zend\Reflection\ReflectionProperty,
+    Zend\Code\Reflection\ClassReflection,
+    Zend\Code\Reflection\PropertyReflection,
     Zend\Server\Reflection,
     Zend\Server\Reflection\ReflectionClass as ServerReflectionClass,
     SplFileInfo;
@@ -145,7 +145,7 @@ class Introspector
             return;
         }
 
-        $rc = new ReflectionClass($typename);
+        $rc = new ClassReflection($typename);
         foreach ($rc->getProperties() as $prop) {
             if (!$prop->isPublic()) {
                 continue;
@@ -212,12 +212,12 @@ class Introspector
     /**
      * Extract type of the property from DocBlock
      *
-     * @param  \Zend\Reflection\ReflectionProperty $prop reflection property object
+     * @param  \Zend\Code\Reflection\PropertyReflection $prop reflection property object
      * @return string Property type
      */
-    protected function _getPropertyType(ReflectionProperty $prop)
+    protected function _getPropertyType(PropertyReflection $prop)
     {
-        $docBlock = $prop->getDocComment();
+        $docBlock = $prop->getDocBlock();
 
         if (!$docBlock) {
             return 'Unknown';
@@ -228,7 +228,7 @@ class Introspector
         }
 
         $tag = $docBlock->getTag('var');
-        return trim($tag->getDescription());
+        return trim($tag->getContent());
     }
 
     /**

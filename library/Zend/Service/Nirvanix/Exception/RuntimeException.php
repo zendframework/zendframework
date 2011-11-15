@@ -19,7 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Service\Nirvanix;
+namespace Zend\Service\Nirvanix\Exception;
+
+use Zend\Service\Nirvanix\Exception;
 
 /**
  * @category   Zend
@@ -28,5 +30,5 @@ namespace Zend\Service\Nirvanix;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException extends \RuntimeException implements Exception
 {}

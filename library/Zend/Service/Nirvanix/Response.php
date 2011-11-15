@@ -19,51 +19,53 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\Nirvanix;
+
 /**
  * This class decorates a SimpleXMLElement parsed from a Nirvanix web service
  * response.  It is primarily exists to provide a convenience feature that
  * throws an exception when <ResponseCode> contains an error.
  *
- * @uses       Zend_Service_Nirvanix_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Nirvanix
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Nirvanix_Response
+class Response
 {
     /**
      * SimpleXMLElement parsed from Nirvanix web service response.
      *
      * @var SimpleXMLElement
      */
-    protected $_sxml;
+    protected $sxml;
 
     /**
      * Class constructor.  Parse the XML response from a Nirvanix method
      * call into a decorated SimpleXMLElement element.
      *
      * @param string $xml  XML response string from Nirvanix
-     * @throws Zend_Service_Nirvanix_Exception
+     * @throws Exception\RuntimeException when unable to parse XML
+     * @throws Exception\DomainException when receiving invalid response element or xml contains error message
      */
     public function __construct($xml)
     {
-        $this->_sxml = @simplexml_load_string($xml);
+        $this->sxml = @simplexml_load_string($xml);
 
-        if (! $this->_sxml instanceof SimpleXMLElement) {
-            $this->_throwException("XML could not be parsed from response: $xml");
+        if (! $this->sxml instanceof SimpleXMLElement) {
+            throw new Exception\RuntimeException("XML could not be parsed from response: $xml");
         }
 
-        $name = $this->_sxml->getName();
+        $name = $this->sxml->getName();
         if ($name != 'Response') {
-            $this->_throwException("Expected XML element Response, got $name");
+            throw new Exception\DomainException("Expected XML element Response, got $name");
         }
 
-        $code = (int)$this->_sxml->ResponseCode;
+        $code = (int) $this->sxml->ResponseCode;
         if ($code != 0) {
-            $msg = (string)$this->_sxml->ErrorMessage;
-            $this->_throwException($msg, $code);
+            $msg = (string) $this->sxml->ErrorMessage;
+            throw new Exception\DomainException($msg, $code);
         }
     }
 
@@ -75,7 +77,7 @@ class Zend_Service_Nirvanix_Response
      */
     public function getSxml()
     {
-        return $this->_sxml;
+        return $this->sxml;
     }
 
     /**
@@ -86,7 +88,7 @@ class Zend_Service_Nirvanix_Response
      */
     public function __get($offset)
     {
-        return $this->_sxml->$offset;
+        return $this->sxml->$offset;
     }
 
     /**
@@ -98,21 +100,6 @@ class Zend_Service_Nirvanix_Response
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array($this->_sxml, $method), $args);
+        return call_user_func_array(array($this->sxml, $method), $args);
     }
-
-    /**
-     * Throw an exception.  This method exists to only contain the
-     * lazy-require() of the exception class.
-     *
-     * @param  string   $message  Error message
-     * @param  integer  $code     Error code
-     * @throws Zend_Service_Nirvanix_Exception
-     * @return void
-     */
-    protected function _throwException($message, $code = null)
-    {
-        throw new Zend_Service_Nirvanix_Exception($message, $code);
-    }
-
 }

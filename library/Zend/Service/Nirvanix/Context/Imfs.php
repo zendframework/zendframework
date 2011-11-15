@@ -19,19 +19,21 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\Nirvanix\Context;
+
+use Zend\Http\Request as HttpRequest,
+    Zend\Service\Nirvanix\Response;
+
 /**
  * Namespace proxy with additional convenience methods for the IMFS namespace.
  *
- * @uses       Zend_Http_Client
- * @uses       Zend_Service_Nirvanix_Namespace_Base
- * @uses       Zend_Service_Nirvanix_Response
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Nirvanix
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Nirvanix_Namespace_Imfs extends Zend_Service_Nirvanix_Namespace_Base
+class Imfs extends Base
 {
     /**
      * Convenience function to get the contents of a file on
@@ -45,15 +47,20 @@ class Zend_Service_Nirvanix_Namespace_Imfs extends Zend_Service_Nirvanix_Namespa
     public function getContents($filePath, $expiration = 3600)
     {
         // get url to download the file
-        $params = array('filePath'   => $filePath,
-                        'expiration' => $expiration);
+        $params = array(
+            'filePath'   => $filePath,
+            'expiration' => $expiration,
+        );
         $resp = $this->getOptimalUrls($params);
-        $url = (string)$resp->Download->DownloadURL;
+        $url  = (string)$resp->Download->DownloadURL;
 
         // download the file
-        $this->_httpClient->resetParameters();
-        $this->_httpClient->setUri($url);
-        $resp = $this->_httpClient->request(Zend\Http\Client::GET);
+        $client = $this->httpClient;
+        $client->resetParameters();
+        $client->setUri($url);
+        $client->setMethod(HttpRequest::METHOD_GET);
+
+        $resp = $client->send();
 
         return $resp->getBody();
     }
@@ -65,25 +72,29 @@ class Zend_Service_Nirvanix_Namespace_Imfs extends Zend_Service_Nirvanix_Namespa
      * @param  string  $filePath    Remote path and filename
      * @param  integer $data        Data to store in the file
      * @param  string  $mimeType    Mime type of data
-     * @return Zend_Service_Nirvanix_Response
+     * @return Response
      */
     public function putContents($filePath, $data, $mimeType = null)
     {
         // get storage node for upload
-        $params = array('sizeBytes' => strlen($data));
-        $resp = $this->getStorageNode($params);
-        $host        = (string)$resp->GetStorageNode->UploadHost;
-        $uploadToken = (string)$resp->GetStorageNode->UploadToken;
+        $params      = array('sizeBytes' => strlen($data));
+        $resp        = $this->getStorageNode($params);
+        $host        = (string) $resp->GetStorageNode->UploadHost;
+        $uploadToken = (string) $resp->GetStorageNode->UploadToken;
+        $client      = $this->httpClient;
 
         // http upload data into remote file
-        $this->_httpClient->resetParameters();
-        $this->_httpClient->setUri("http://{$host}/Upload.ashx");
-        $this->_httpClient->setParameterPost('uploadToken', $uploadToken);
-        $this->_httpClient->setParameterPost('destFolderPath', str_replace('\\', '/',dirname($filePath)));
-        $this->_httpClient->setFileUpload(basename($filePath), 'uploadFile', $data, $mimeType);
-        $response = $this->_httpClient->request(Zend\Http\Client::POST);
+        $client->resetParameters();
+        $client->setUri("http://{$host}/Upload.ashx");
+        $client->setMethod(HttpRequest::METHOD_POST);
+        $client->setParameterPost(array(
+            'uploadToken'    => $uploadToken,
+            'destFolderPath' => str_replace('\\', '/',dirname($filePath)),
+        ));
+        $client->setFileUpload(basename($filePath), 'uploadFile', $data, $mimeType);
+        $response = $client->send();
 
-        return new Zend_Service_Nirvanix_Response($response->getBody());
+        return new Response($response->getBody());
     }
 
     /**
@@ -91,12 +102,11 @@ class Zend_Service_Nirvanix_Namespace_Imfs extends Zend_Service_Nirvanix_Namespa
      * Analog to PHP's unlink().
      *
      * @param  string  $filePath  Remove path and filename
-     * @return Zend_Service_Nirvanix_Response
+     * @return Response
      */
     public function unlink($filePath)
     {
         $params = array('filePath' => $filePath);
         return $this->deleteFiles($params);
     }
-
 }

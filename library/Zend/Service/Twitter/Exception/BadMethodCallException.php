@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Service
+ * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,13 +22,16 @@
 /**
  * @namespace
  */
-namespace Zend\Service;
+namespace Zend\Service\Twitter\Exception;
+
+use Zend\Service\Twitter\Exception;
 
 /**
  * @category   Zend
  * @package    Zend_Service
+ * @subpackage Twitter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class BadMethodCallException extends \BadMethodCallException implements Exception
 {}

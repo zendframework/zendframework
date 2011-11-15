@@ -19,6 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Service\Nirvanix;
+
+use Zend\Http\Client as HttpClient;
+
 /**
  * This class allows Nirvanix authentication credentials to be specified
  * in one place and provides a factory for returning convenience wrappers
@@ -32,7 +36,7 @@
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Nirvanix
+class Nirvanix
 {
     /**
      * Options to pass to namespace proxies
@@ -53,7 +57,7 @@ class Zend_Service_Nirvanix
     {
         // merge options with default options
         $defaultOptions = array('defaults'   => array(),
-                                'httpClient' => new Zend\Http\Client(),
+                                'httpClient' => new HttpClient(),
                                 'host'       => 'http://services.nirvanix.com');
         $this->_options = array_merge($defaultOptions, $options);
 
@@ -68,24 +72,21 @@ class Zend_Service_Nirvanix
      * returns a preconfigured Zend_Service_Nirvanix_Namespace_Base proxy.
      *
      * @param  string  $namespace  Name of the namespace
-     * @return Zend_Service_Nirvanix_Namespace_Base
+     * @return Namespace\Base
      */
     public function getService($namespace, $options = array())
     {
         switch ($namespace) {
             case 'IMFS':
-                $class = 'Zend_Service_Nirvanix_Namespace_Imfs';
+                $class = 'Zend\Service\Nirvanix\Namespace\Imfs';
                 break;
             default:
-                $class = 'Zend_Service_Nirvanix_Namespace_Base';
+                $class = 'Zend\Service\Nirvanix\Namespace\Base';
         }
 
         $options['namespace'] = ucfirst($namespace);
         $options = array_merge($this->_options, $options);
 
-        if (!class_exists($class)) {
-            Zend_Loader::loadClass($class);
-        }
         return new $class($options);
     }
 
@@ -98,5 +99,4 @@ class Zend_Service_Nirvanix
     {
         return $this->_options;
     }
-
 }

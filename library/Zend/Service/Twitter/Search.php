@@ -31,10 +31,11 @@
  * @namespace
  */
 namespace Zend\Service\Twitter;
-use Zend\Http;
-use Zend\Rest;
-use Zend\Feed;
-use Zend\Json;
+
+use Zend\Feed,
+    Zend\Http,
+    Zend\Json,
+    Zend\Rest;
 
 class Search extends Rest\Client\RestClient
 {
@@ -56,7 +57,7 @@ class Search extends Rest\Client\RestClient
     /**
      * Uri Compoent
      *
-     * @var Zend_Uri_Http
+     * @var \Zend\Uri\Http
      */
     protected $_uri;
 
@@ -78,13 +79,13 @@ class Search extends Rest\Client\RestClient
      * set responseType
      *
      * @param string $responseType
-     * @throws Zend_Service_Twitter_Exception
-     * @return Zend_Service_Twitter_Search
+     * @throws Exception\InvalidArgumentException
+     * @return Search
      */
     public function setResponseType($responseType = 'json')
     {
-        if(!in_array($responseType, $this->_responseTypes, TRUE)) {
-            throw new Exception('Invalid Response Type');
+        if (!in_array($responseType, $this->_responseTypes, TRUE)) {
+            throw new Exception\InvalidArgumentException('Invalid Response Type');
         }
         $this->_responseType = $responseType;
         return $this;
@@ -103,7 +104,7 @@ class Search extends Rest\Client\RestClient
     /**
      * Get the current twitter trends.  Currnetly only supports json as the return.
      *
-     * @throws Zend_Http_Client_Exception
+     * @throws Http\Client\Exception
      * @return array
      */
     public function trends()
@@ -116,7 +117,7 @@ class Search extends Rest\Client\RestClient
     /**
      * Performs a Twitter search query.
      *
-     * @throws Zend_Http_Client_Exception
+     * @throws Http\Client\Exception
      */
     public function execute($query, array $params = array())
     {

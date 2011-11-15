@@ -19,11 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @todo: temporary fix because test autoloader doesn't load Zend_* classes
- * from test tree
- */
-require_once("Zend/Service/Nirvanix/FunctionalTestCase.php");
+namespace ZendTest\Service\Nirvanix\Context;
+
+use ZendTest\Service\Nirvanix\FunctionalTestCase;
 
 /**
  * @category   Zend
@@ -34,12 +32,11 @@ require_once("Zend/Service/Nirvanix/FunctionalTestCase.php");
  * @group      Zend_Service
  * @group      Zend_Service_Nirvanix
  */
-class Zend_Service_Nirvanix_Namespace_BaseTest extends Zend_Service_Nirvanix_FunctionalTestCase
+class BaseTest extends FunctionalTestCase
 {
     public function testGetHttpClient()
     {
         $foo = $this->nirvanix->getService('Foo');
         $this->assertSame($this->httpClient, $foo->getHttpClient());
     }
-
 }

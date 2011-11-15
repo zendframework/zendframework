@@ -26,6 +26,7 @@ use Traversable,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\Service\Nirvanix\Exception,
+    Zend\Service\Nirvanix\Response,
     Zend\Stdlib\IteratorToArray;
 
 /**
@@ -176,6 +177,6 @@ class Base
      */
     protected function wrapResponse(HttpResponse $httpResponse)
     {
-        return new self($httpResponse->getBody());
+        return new Response($httpResponse->getBody());
     }
 }

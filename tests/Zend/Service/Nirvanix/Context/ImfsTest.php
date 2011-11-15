@@ -19,15 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @see Zend_Service_Nirvanix_Namespace_Imfs
- */
+namespace ZendTest\Service\Nirvanix\Context;
+
+use Zend\Service\Nirvanix\Context\Imfs as ImfsContext,
+    ZendTest\Service\Nirvanix\FunctionalTestCase;
 
 /**
- * @see Zend_Service_Nirvanix_FunctionalTestCase
- */
-
-/**
+ * @see        Zend\Service\Nirvanix\Context\Imfs
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests
@@ -36,12 +34,12 @@
  * @group      Zend_Service
  * @group      Zend_Service_Nirvanix
  */
-class Zend_Service_Nirvanix_Namespace_ImfsTest extends Zend_Service_Nirvanix_FunctionalTestCase
+class ImfsTest extends FunctionalTestCase
 {
     public function testInheritsFromNirvanixBase()
     {
-        $imfs = new Zend_Service_Nirvanix_Namespace_Imfs();
-        $this->assertType('Zend_Service_Nirvanix_Namespace_Base', $imfs);
+        $imfs = new ImfsContext();
+        $this->assertInstanceOf('Zend\Service\Nirvanix\Context\Base', $imfs);
     }
 
     // putContents()
@@ -79,8 +77,8 @@ class Zend_Service_Nirvanix_Namespace_ImfsTest extends Zend_Service_Nirvanix_Fun
             $this->makeHttpResponseFrom('contents for foo')
         );
 
-        $actual = $imfs->getContents('/foo.txt');
-        $expected = $this->httpClient->getLastResponse()->getBody();
+        $actual   = $imfs->getContents('/foo.txt');
+        $expected = $this->httpClient->getResponse()->getBody();
         $this->assertEquals($expected, $actual);
     }
 
@@ -112,7 +110,7 @@ class Zend_Service_Nirvanix_Namespace_ImfsTest extends Zend_Service_Nirvanix_Fun
         );
         // little unix cheat to force a backslash into the IFS path
         $imfs->putContents('.\foo/bar', 'contents for foo');
-        $this->assertContains('./foo', $imfs->getHttpClient()->getLastRequest());
+        $this->assertContains('./foo', $imfs->getHttpClient()->getLastRawRequest());
     }
 
 }

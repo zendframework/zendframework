@@ -21,6 +21,8 @@
 
 namespace Zend\Service\Nirvanix;
 
+use SimpleXMLElement;
+
 /**
  * This class decorates a SimpleXMLElement parsed from a Nirvanix web service
  * response.  It is primarily exists to provide a convenience feature that

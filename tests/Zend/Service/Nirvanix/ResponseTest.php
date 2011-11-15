@@ -19,11 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @see Zend_Service_Nirvanix_Response
- */
+namespace ZendTest\Service\Nirvanix;
+
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Service\Nirvanix\Response;
 
 /**
+ * @see        Zend\Service\Nirvanix\Response
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests
@@ -32,29 +34,23 @@
  * @group      Zend_Service
  * @group      Zend_Service_Nirvanix
  */
-class Zend_Service_Nirvanix_ResponseTest extends PHPUnit_Framework_TestCase
+class ResponseTest extends TestCase
 {
     // Constructor
 
     public function testThrowsWhenInputStringIsNotXML()
     {
         $notXml = 'foo';
-        try {
-            new Zend_Service_Nirvanix_Response($notXml);
-        } catch (Zend_Service_Nirvanix_Exception $e) {
-            $this->assertRegExp('/xml could not be parsed/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\Nirvanix\Exception\RuntimeException', 'XML could not be parsed');
+        $response = new Response($notXml);
     }
 
     public function testThrowsWhenXmlElementNameIsNotResponse()
     {
         $xml = "<?xml version='1.0'?>
                   <foo></foo>";
-        try {
-            new Zend_Service_Nirvanix_Response($xml);
-        } catch (Zend_Service_Nirvanix_Exception $e) {
-            $this->assertRegExp('/expected xml element response/i', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\Nirvanix\Exception\DomainException', 'Expected XML element Response');
+        $response = new Response($xml);
     }
 
     public function testThrowsCodeAndMessageWhenResponseCodeIsNotZero()
@@ -64,12 +60,8 @@ class Zend_Service_Nirvanix_ResponseTest extends PHPUnit_Framework_TestCase
                     <ResponseCode>42</ResponseCode>
                     <ErrorMessage>foo</ErrorMessage>
                   </Response>";
-        try {
-            new Zend_Service_Nirvanix_Response($xml);
-        } catch (Zend_Service_Nirvanix_Exception $e) {
-            $this->assertEquals(42, $e->getCode());
-            $this->assertEquals('foo', $e->getMessage());
-        }
+        $this->setExpectedException('Zend\Service\Nirvanix\Exception\DomainException', 'foo', 42);
+        new Response($xml);
     }
 
     // getSxml()
@@ -82,8 +74,8 @@ class Zend_Service_Nirvanix_ResponseTest extends PHPUnit_Framework_TestCase
                     <foo>bar</foo>
                   </Response>";
 
-        $resp = new Zend_Service_Nirvanix_Response($xml);
-        $this->assertType('SimpleXMLElement', $resp->getSxml());
+        $resp = new Response($xml);
+        $this->assertInstanceOf('SimpleXMLElement', $resp->getSxml());
     }
 
     // __get()
@@ -95,7 +87,7 @@ class Zend_Service_Nirvanix_ResponseTest extends PHPUnit_Framework_TestCase
                     <ResponseCode>0</ResponseCode>
                     <foo>bar</foo>
                   </Response>";
-        $resp = new Zend_Service_Nirvanix_Response($xml);
+        $resp = new Response($xml);
         $this->assertEquals('bar', (string)$resp->foo);
     }
 
@@ -108,7 +100,7 @@ class Zend_Service_Nirvanix_ResponseTest extends PHPUnit_Framework_TestCase
                     <ResponseCode>0</ResponseCode>
                     <foo>bar</foo>
                   </Response>";
-        $resp = new Zend_Service_Nirvanix_Response($xml);
+        $resp = new Response($xml);
         $this->assertEquals('Response', $resp->getName());
     }
 

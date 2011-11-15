@@ -97,7 +97,7 @@ class ParameterReflection extends ReflectionParameter implements Reflection
      */
     public function getType()
     {
-        if ($docblock = $this->getDeclaringFunction()->getDocblock()) {
+        if ($docblock = $this->getDeclaringFunction()->getDocBlock()) {
             $params = $docblock->getTags('param');
 
             if (isset($params[$this->getPosition()])) {

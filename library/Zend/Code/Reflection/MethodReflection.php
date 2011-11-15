@@ -23,7 +23,7 @@
  */
 namespace Zend\Code\Reflection;
 
-use ReflectionMethod,
+use ReflectionMethod as PhpReflectionMethod,
     Zend\Code\Reflection,
     Zend\Code\Annotation,
     Zend\Code\Scanner\FileScanner,
@@ -40,7 +40,7 @@ use ReflectionMethod,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MethodReflection extends ReflectionMethod implements Reflection
+class MethodReflection extends PhpReflectionMethod implements Reflection
 {
 
     /**
@@ -51,13 +51,12 @@ class MethodReflection extends ReflectionMethod implements Reflection
     /**
      * Retrieve method docblock reflection
      *
-     * @return DocBlockReflection
+     * @return DocBlockReflection|false
      */
     public function getDocBlock()
     {
         if ('' == $this->getDocComment()) {
             return false;
-            //throw new Exception\InvalidArgumentException($this->getName() . ' does not have a DocComment');
         }
 
         $instance = new DocBlockReflection($this);
@@ -65,7 +64,8 @@ class MethodReflection extends ReflectionMethod implements Reflection
     }
 
     /**
-     * @return AnnotationCollection
+     * @param \Zend\Code\Annotation\AnnotationManager $annotationManager
+     * @return \Zend\Code\Annotation\AnnotationCollection
      */
     public function getAnnotations(Annotation\AnnotationManager $annotationManager)
     {

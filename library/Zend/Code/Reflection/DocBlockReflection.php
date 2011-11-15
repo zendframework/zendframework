@@ -43,9 +43,14 @@ class DocBlockReflection implements Reflection
     protected $reflector = null;
 
     /**
-     * @var AnnotationManager
+     * @var string
      */
-    protected $annotationManager = null;
+    protected $docComment = null;
+
+    /**
+     * @var DocBlock\TagManager
+     */
+    protected $tagManager = null;
 
     /**#@+
      * @var int
@@ -53,11 +58,6 @@ class DocBlockReflection implements Reflection
     protected $startLine = null;
     protected $endLine   = null;
     /**#@-*/
-
-    /**
-     * @var string
-     */
-    protected $docComment = null;
 
     /**
      * @var string
@@ -84,8 +84,6 @@ class DocBlockReflection implements Reflection
      */
     protected $isReflected = false;
 
-    protected $annotations = array();
-
     /**
      * Export reflection
      *
@@ -103,22 +101,25 @@ class DocBlockReflection implements Reflection
      * Constructor
      *
      * @param Reflector|string $commentOrReflector
-     * @param AnnotationManager|null $annotationManager
      * @return \Zend\Code\Reflection\DocBlockReflection
      */
-    public function __construct($commentOrReflector, AnnotationManager $annotationManager = null)
+    public function __construct($commentOrReflector, Docblock\TagManager $tagManager = null)
     {
+        $this->tagManager = $tagManager ?: new Docblock\TagManager(Docblock\TagManager::USE_DEFAULT_PROTOTYPES);
+
         if ($commentOrReflector instanceof \Reflector) {
             $this->reflector = $commentOrReflector;
             if (!method_exists($commentOrReflector, 'getDocComment')) {
                 throw new Exception\InvalidArgumentException('Reflector must contain method "getDocComment"');
             }
+            /* @var MethodReflection $commentOrReflector */
             $this->docComment = $commentOrReflector->getDocComment();
 
+            // determine line numbers
             $lineCount = substr_count($this->docComment, "\n");
-
             $this->startLine = $this->reflector->getStartLine() - $lineCount - 1;
             $this->endLine   = $this->reflector->getStartLine() - 1;
+
         } elseif (is_string($commentOrReflector)) {
             $this->docComment = $commentOrReflector;
         } else {
@@ -129,25 +130,7 @@ class DocBlockReflection implements Reflection
             throw new Exception\InvalidArgumentException('DocComment cannot be empty');
         }
 
-        $this->annotationManager = $annotationManager;
-    }
-
-    /**
-     * @param AnnotationManager $annotationManager
-     * @return DocBlockReflection
-     */
-    public function setAnnotationManager(AnnotationManager $annotationManager)
-    {
-        $this->annotationManager = $annotationManager;
-        return $this;
-    }
-
-    /**
-     * @return AnnotationManager
-     */
-    public function getAnnotationManager()
-    {
-        return $this->annotationManager;
+        $this->reflect();
     }
 
     /**
@@ -262,29 +245,6 @@ class DocBlockReflection implements Reflection
         return $returnTags;
     }
 
-    public function hasAnnotation($name)
-    {
-        $this->reflect();
-        foreach ($this->annotations as $annotation) {
-            if ($annotation->getName() == $name) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function getAnnotation($name)
-    {
-        $this->reflect();
-        return $this->annotations;
-    }
-
-    public function getAnnotations(/*$filter = null*/)
-    {
-        $this->reflect();
-        return $this->annotations;
-    }
-
     /**
      * Parse the docblock
      *
@@ -298,24 +258,22 @@ class DocBlockReflection implements Reflection
 
         $docComment = $this->docComment; // localize variable
 
-        // First remove doc block line starters
-        $docComment = preg_replace('#[ \t]*(?:\/\*\*|\*\/|\*)?[ ]{0,1}(.*)?#', '$1', $docComment);
-        $docComment = ltrim($docComment, "\r\n"); // @todo should be changed to remove first and last empty line
-        $this->cleanDocComment = $docComment;
+        // create a clean docComment
+        $this->cleanDocComment = preg_replace('#[ \t]*(?:\/\*\*|\*\/|\*)?[ ]{0,1}(.*)?#', '$1', $docComment);
+        $this->cleanDocComment = ltrim($this->cleanDocComment, "\r\n"); // @todo should be changed to remove first and last empty line
 
-        $scanner = new DocBlockScanner($docComment, $this->annotationManager);
-        $this->shortDescription = $scanner->getShortDescription();
-        $this->longDescription  = $scanner->getLongDescription();
-        $this->tags             = $scanner->getTags();
-        if ($this->annotationManager) {
-            $this->annotations = $scanner->getAnnotations();
+        $scanner = new DocBlockScanner($docComment);
+        $this->shortDescription = ltrim($scanner->getShortDescription());
+        $this->longDescription  = ltrim($scanner->getLongDescription());
+        foreach ($scanner->getTags() as $tag) {
+            $this->tags[] = $this->tagManager->createTag(ltrim($tag['name'], '@'), ltrim($tag['value']));
         }
         $this->isReflected = true;
     }
 
     public function toString()
     {
-        $str = "Docblock [ /* Docblock */ ] {" . PHP_EOL . PHP_EOL;
+        $str = "DocBlock [ /* DocBlock */ ] {" . PHP_EOL . PHP_EOL;
         $str .= "  - Tags [" . count($this->tags) . "] {" . PHP_EOL;
 
         foreach($this->tags AS $tag) {

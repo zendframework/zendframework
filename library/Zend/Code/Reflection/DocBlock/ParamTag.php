@@ -21,55 +21,86 @@
 /**
  * @namespace
  */
-namespace Zend\Code\Reflection\Docblock\Tag;
-use Zend\Code\Reflection,
-    Zend\Code\Reflection\Exception;
+namespace Zend\Code\Reflection\DocBlock;
+
+use Zend\Code\Reflection\Exception;
 
 /**
- * @uses       \Zend\Code\Reflection\Exception
  * @uses       \Zend\Code\Reflection\ReflectionDocblockTag
+ * @uses       \Zend\Code\Reflection\Exception
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ReturnTag extends Reflection\ReflectionDocblockTag
+class ParamTag implements Tag
 {
     /**
      * @var string
      */
-    protected $_type = null;
+    protected $type = null;
 
     /**
-     * Constructor
-     *
-     * @param  string $tagDocblockLine
-     * @return void
+     * @var string
      */
-    public function __construct($tagDocblockLine)
+    protected $variableName = null;
+
+    /**
+     * @var string
+     */
+    protected $description = null;
+
+    /**
+     * @return string
+     */
+    public function getName()
     {
-        if (!preg_match('#^@(\w+)\s+([\w|\\\]+)(?:\s+(.*))?#', $tagDocblockLine, $matches)) {
-            throw new Exception\InvalidArgumentException('Provided docblock line is does not contain a valid tag');
+        return 'param';
+    }
+
+    /**
+     * Initializer
+     *
+     * @param string $tagDocblockLine
+     */
+    public function initialize($tagDocblockLine)
+    {
+        $matches = array();
+        preg_match('#([\w|\\\]+)(?:\s+(\$\S+)){0,1}(?:\s+(.*))?#s', $tagDocblockLine, $matches);
+
+        $this->type = $matches[1];
+
+        if (isset($matches[2])) {
+            $this->variableName = $matches[2];
         }
 
-        if ($matches[1] != 'return') {
-            throw new Exception\InvalidArgumentException('Provided docblock line is does not contain a valid @return tag');
-        }
-
-        $this->_name = 'return';
-        $this->_type = $matches[2];
         if (isset($matches[3])) {
-            $this->_description = $matches[3];
+            $this->description = preg_replace('#\s+#', ' ', $matches[3]);
         }
     }
 
     /**
-     * Get return variable type
+     * Get parameter variable type
      *
      * @return string
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
+    }
+
+    /**
+     * Get parameter name
+     *
+     * @return string
+     */
+    public function getVariableName()
+    {
+        return $this->variableName;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

@@ -40,19 +40,14 @@ class DocBlockReflectionTest extends \PHPUnit_Framework_TestCase
     public function testDocblockShortDescription()
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
-        $this->assertEquals('TestSampleClass5 Docblock Short Desc', $classReflection->getDocblock()->getShortDescription());
+        $this->assertEquals('TestSampleClass5 DocBlock Short Desc', $classReflection->getDocblock()->getShortDescription());
     }
 
     public function testDocblockLongDescription()
     {
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
-        $expectedOutput =<<<EOS
-This is a long description for
-the docblock of this class, it
-should be longer than 3 lines.
-It indeed is longer than 3 lines
-now.
-EOS;
+        $expectedOutput = 'This is a long description for the docblock of this class, it should be longer than 3 lines. It indeed is longer than 3 lines now.';
+
 
         $this->assertEquals($expectedOutput, $classReflection->getDocblock()->getLongDescription());
 
@@ -70,13 +65,13 @@ EOS;
         $this->assertTrue($classReflection->getMethod('doSomething')->getDocblock()->hasTag('return'));
 
         $returnTag = $classReflection->getMethod('doSomething')->getDocblock()->getTag('return');
-        $this->assertInstanceOf('Zend\Code\Reflection\ReflectionDocblockTag', $returnTag);
+        $this->assertInstanceOf('Zend\Code\Reflection\DocBlock\Tag', $returnTag);
         $this->assertEquals('mixed', $returnTag->getType());
     }
 
     public function testDocblockLines()
     {
-        $this->markTestIncomplete('Line numbers incomplete');
+        //$this->markTestIncomplete('Line numbers incomplete');
 
         $classReflection = new ClassReflection('ZendTest\Code\Reflection\TestAsset\TestSampleClass5');
 
@@ -94,7 +89,7 @@ EOS;
         $classDocblock = $classReflection->getDocblock();
 
         $expectedContents = <<<EOS
-TestSampleClass5 Docblock Short Desc
+TestSampleClass5 DocBlock Short Desc
 
 This is a long description for
 the docblock of this class, it
@@ -116,10 +111,10 @@ EOS;
 
         $classDocblock = $classReflection->getDocblock();
 
-        $expectedString = 'Docblock [ /* Docblock */ ] {' . PHP_EOL
+        $expectedString = 'DocBlock [ /* DocBlock */ ] {' . PHP_EOL
                         . PHP_EOL
                         . '  - Tags [1] {' . PHP_EOL
-                        . '    Docblock Tag [ * @author ]' . PHP_EOL
+                        . '    DocBlock Tag [ * @author ]' . PHP_EOL
                         . '  }' . PHP_EOL
                         . '}' . PHP_EOL;
 

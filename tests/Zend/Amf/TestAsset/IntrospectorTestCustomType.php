@@ -12,7 +12,7 @@ class IntrospectorTestCustomType
     public $baz;
 
     /**
-     * Docblock without an annotation
+     * DocBlock without an annotation
      */
     public $bat;
 

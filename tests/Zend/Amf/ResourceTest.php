@@ -88,6 +88,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
      */
     public function testCtxLoader()
     {
+        $this->markTestSkipped('Plugin loader implementation needs to be revisited');
         Parser\TypeLoader::addResourceDirectory("Test\\Resource", __DIR__ . "/TestAsset/Resources");
         $resp = $this->_callService("returnCtx");
         $this->assertContains("Accept-language:", $resp->getResponse());
@@ -100,6 +101,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
      */
     public function testCtx()
     {
+        $this->markTestSkipped('Plugin loader implementation needs to be revisited');
         Parser\TypeLoader::setResourceLoader(new TestAsset\TestResourceLoader("2"));
         $resp = $this->_callService("returnCtx");
         $this->assertContains("Accept-language:", $resp->getResponse());
@@ -112,6 +114,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
      */
     public function testCtxNoParse()
     {
+        $this->markTestSkipped('Plugin loader implementation needs to be revisited');
         Parser\TypeLoader::setResourceLoader(new TestAsset\TestResourceLoader("3"));
         $this->setExpectedException('Zend\Amf\Exception\RuntimeException', 'Could not call parse()');
         $resp = $this->_callService("returnCtx");

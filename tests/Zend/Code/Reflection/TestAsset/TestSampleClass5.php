@@ -3,7 +3,7 @@
 namespace ZendTest\Code\Reflection\TestAsset;
 
 /**
- * TestSampleClass5 Docblock Short Desc
+ * TestSampleClass5 DocBlock Short Desc
  *
  * This is a long description for
  * the docblock of this class, it

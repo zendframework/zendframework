@@ -49,6 +49,7 @@ class ClassReflection extends ReflectionClass implements Reflection
      */
     protected $annotations = null;
 
+    protected $docBlock = null;
 
     /**
      * Return the reflection file of the declaring file.
@@ -62,19 +63,23 @@ class ClassReflection extends ReflectionClass implements Reflection
     }
 
     /**
-     * Return the classes Docblock reflection object
+     * Return the classes DocBlock reflection object
      *
      * @return DocBlockReflection
      * @throws \Zend\Code\Reflection\Exception for missing docblock or invalid reflection class
      */
     public function getDocBlock()
     {
+        if (isset($this->docBlock)) {
+            return $this->docBlock;
+        }
+
         if ('' == $this->getDocComment()) {
             return false;
         }
 
-        $instance = new DocBlockReflection($this->getDocComment());
-        return $instance;
+        $this->docBlock = new DocBlockReflection($this);
+        return $this->docBlock;
     }
 
     /**

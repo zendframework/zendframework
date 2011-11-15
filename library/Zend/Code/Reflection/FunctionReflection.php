@@ -110,7 +110,7 @@ class FunctionReflection extends ReflectionFunction implements Reflection
     /**
      * Get return type tag
      *
-     * @return \Zend\Code\Reflection\Docblock\Tag\Return
+     * @return \Zend\Code\Reflection\DocBlock\Tag\Return
      */
     public function getReturn()
     {

@@ -14,12 +14,17 @@ class ListenerOptions extends Options
     /**
      * @var string
      */
-    protected $configCacheKey = NULL;
+    protected $configCacheKey;
 
     /**
      * @var string
      */
-    protected $cacheDir = NULL;
+    protected $cacheDir;
+
+    /**
+     * @var string
+     */
+    protected $applicationEnvironment;
 
     /**
      * Check if the config cache is enabled
@@ -53,7 +58,7 @@ class ListenerOptions extends Options
         if ($this->configCacheKey !== null) {
             return $this->configCacheKey;
         }
-        return $this->getApplicationEnv();
+        return $this->getApplicationEnvironment();
     }
 
     /**
@@ -107,9 +112,25 @@ class ListenerOptions extends Options
         return $this;
     }
 
-    public function getApplicationEnv()
+    /**
+     * Get the application environment being used
+     *
+     * @return string
+     */
+    public function getApplicationEnvironment()
     {
-        return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;
+        return $this->applicationEnvironment ?: 'production';
+    }
+ 
+    /**
+     * Set the application environment to use
+     *
+     * @param string $applicationEnvironment the value to be set
+     */
+    public function setApplicationEnvironment($applicationEnvironment)
+    {
+        $this->applicationEnvironment = $applicationEnvironment;
+        return $this;
     }
 
     /**

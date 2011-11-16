@@ -92,7 +92,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
         if ((false === $this->skipConfig)
             && (is_callable(array($module, 'getConfig')))
         ) {
-            $config = $module->getConfig($this->getOptions()->getApplicationEnv());
+            $config = $module->getConfig($this->getOptions()->getApplicationEnvironment());
             if ($config instanceof Traversable) {
                 $config = IteratorToArray::convert($config);
             }

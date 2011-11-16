@@ -40,6 +40,6 @@ class ListenerOptionsTest extends TestCase
         $options->config_cache_enabled = false;
         $this->assertFalse($options->config_cache_enabled);
 
-        $this->assertNull($options->config_cache_key);
+        $this->assertEquals($options->application_environment, $options->config_cache_key);
     }
 }

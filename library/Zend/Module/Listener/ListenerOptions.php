@@ -14,12 +14,12 @@ class ListenerOptions extends Options
     /**
      * @var string
      */
-    protected $configCacheKey = NULL;
+    protected $configCacheKey = null;
 
     /**
      * @var string
      */
-    protected $cacheDir = NULL;
+    protected $cacheDir = null;
 
     /**
      * Check if the config cache is enabled
@@ -109,7 +109,7 @@ class ListenerOptions extends Options
 
     public function getApplicationEnv()
     {
-        return defined('APPLICATION_ENV') ? APPLICATION_ENV : NULL;
+        return defined('APPLICATION_ENV') ? APPLICATION_ENV : null;
     }
 
     /**

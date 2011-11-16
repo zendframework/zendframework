@@ -58,7 +58,7 @@ class ListenerOptions extends Options
         if ($this->configCacheKey !== null) {
             return $this->configCacheKey;
         }
-        return $this->getApplicationEnv();
+        return $this->getApplicationEnvironment();
     }
 
     /**

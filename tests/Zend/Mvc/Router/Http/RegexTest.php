@@ -3,60 +3,60 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Mvc\Router\Http\Literal;
+    Zend\Mvc\Router\Http\Regex;
 
-class LiteralTest extends TestCase
+class RegexTest extends TestCase
 {
     public static function routeProvider()
     {
         return array(
             'simple-match' => array(
-                new Literal('/foo'),
-                '/foo',
+                new Regex('/(?<foo>[^/]+)', '/%foo%'),
+                '/bar',
                 null,
-                true
+                array('foo' => 'bar')
             ),
             'no-match-without-leading-slash' => array(
-                new Literal('foo'),
-                '/foo',
+                new Regex('(?<foo>[^/]+)', '%foo%'),
+                '/bar',
                 null,
-                false
+                null
             ),
             'no-match-with-trailing-slash' => array(
-                new Literal('/foo'),
-                '/foo/',
+                new Regex('/(?<foo>[^/]+)', '/%foo%'),
+                '/bar/',
                 null,
-                false
+                null
             ),
             'offset-skips-beginning' => array(
-                new Literal('foo'),
-                '/foo',
+                new Regex('(?<foo>[^/]+)', '%foo%'),
+                '/bar',
                 1,
-                true
+                array('foo' => 'bar')
             ),
             'offset-enables-partial-matching' => array(
-                new Literal('/foo'),
-                '/foo/bar',
+                new Regex('/(?<foo>[^/]+)', '/%foo%'),
+                '/bar/baz',
                 0,
-                true
+                array('foo' => 'bar')
             ),
         );
     }
 
     /**
      * @dataProvider routeProvider
-     * @param        Literal $route
+     * @param        Regex   $route
      * @param        string  $path
      * @param        integer $offset
-     * @param        boolean $shouldMatch
+     * @param        array   $params
      */
-    public function testMatching(Literal $route, $path, $offset, $shouldMatch)
+    public function testMatching(Regex $route, $path, $offset, array $params = null)
     {
         $request = new Request();
         $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
         
-        if (!$shouldMatch) {
+        if ($params === null) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
@@ -64,24 +64,28 @@ class LiteralTest extends TestCase
             if ($offset === null) {
                 $this->assertEquals(strlen($path), $match->getLength());            
             }
+            
+            foreach ($params as $key => $value) {
+                $this->assertEquals($value, $match->getParam($key));
+            }
         }
     }
     
     /**
      * @dataProvider routeProvider
-     * @param        Literal $route
+     * @param        Regex   $route
      * @param        string  $path
      * @param        integer $offset
-     * @param        boolean $shouldMatch
+     * @param        array   $params
      */
-    public function testAssembling(Literal $route, $path, $offset, $shouldMatch)
+    public function testAssembling(Regex $route, $path, $offset, array $params = null)
     {
-        if (!$shouldMatch) {
+        if ($params === null) {
             // Data which will not match are not tested for assembling.
             return;
         }
                 
-        $result = $route->assemble();
+        $result = $route->assemble($params);
         
         if ($offset !== null) {
             $this->assertEquals($offset, strpos($path, $result, $offset));

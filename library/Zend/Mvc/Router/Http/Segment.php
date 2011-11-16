@@ -80,7 +80,7 @@ class Segment implements Route
     {
         $this->defaults = $defaults;
         $this->parts    = $this->parseRouteDefinition($route);
-        $this->regex    = $this->buildRegex($this->parts, $constraints) . '(?:/|$)?';
+        $this->regex    = $this->buildRegex($this->parts, $constraints);
     }
     
     /**
@@ -140,7 +140,7 @@ class Segment implements Route
             }
             
             if ($matches['token'] === ':') {                
-                if ($def[$currentPos] === '{') {
+                if (isset($def[$currentPos]) && $def[$currentPos] === '{') {
                     if (!preg_match('(\G\{(?<name>[^}]+)\}:?)', $def, $matches, 0, $currentPos)) {
                         throw new Exception\RuntimeException('Translated parameter missing closing bracket');
                     }
@@ -234,14 +234,16 @@ class Segment implements Route
     /**
      * Build a path.
      * 
-     * @param  array $parts
-     * @param  array $mergedParams
-     * @param  array $params
+     * @param  array   $parts
+     * @param  array   $mergedParams
+     * @param  boolean $isRoot
      * @return string
      */
-    protected function buildPath(array $parts, array $mergedParams)
+    protected function buildPath(array $parts, array $mergedParams, $isRoot)
     {
-        $path = '';
+        $path      = '';
+        $skip      = true;
+        $skippable = false;
         
         foreach ($parts as $part) {
             switch ($part[0]) {
@@ -250,8 +252,16 @@ class Segment implements Route
                     break;
                 
                 case 'parameter':
+                    $skippable = true;
+                    
                     if (!isset($mergedParams[$part[1]])) {
+                        if ($isRoot) {
+                            throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $part[1]));
+                        }
+        
                         return null;
+                    } elseif (!isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
+                        $skip = false;
                     }
                     
                     $path .= urlencode($mergedParams[$part[1]]);
@@ -260,7 +270,13 @@ class Segment implements Route
                     break;
                 
                 case 'optional':
-                    $path .= $this->buildPath($part[1], $mergedParams);
+                    $skippable    = true;
+                    $optionalPart = $this->buildPath($part[1], $mergedParams, false);
+                    
+                    if ($optionalPart !== null) {
+                        $path .= $optionalPart;
+                        $skip  = false;
+                    }
                     break;
                 
                 case 'translated-literal':
@@ -271,6 +287,10 @@ class Segment implements Route
                     throw new Exception\RuntimeException('Translated parameters are not implemented yet');
                     break;
             }
+        }
+        
+        if (!$isRoot && $skippable && $skip) {
+            return null;
         }
         
         return $path;
@@ -326,13 +346,8 @@ class Segment implements Route
     public function assemble(array $params = array(), array $options = array())
     {
         $this->assembledParams = array();
-        $path                  = $this->buildPath($this->parts, array_merge($this->defaults, $params));
         
-        if ($path === null) {
-            throw new Exception\InvalidArgumentException('Parameters missing');
-        }
-        
-        return $path;
+        return $this->buildPath($this->parts, array_merge($this->defaults, $params), true);
     }
     
     /**

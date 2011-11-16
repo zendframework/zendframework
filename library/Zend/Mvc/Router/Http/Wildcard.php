@@ -55,6 +55,13 @@ class Wildcard implements Route
     protected $paramDelimiter;
     
     /**
+     * Default values.
+     * 
+     * @var array
+     */
+    protected $defaults;
+    
+    /**
      * List of assembled parameters.
      * 
      * @var array
@@ -66,12 +73,14 @@ class Wildcard implements Route
      * 
      * @param  string $keyValueDelimiter
      * @param  string $paramDelimiter
+     * @param  array  $defaults
      * @return void
      */
-    public function __construct($keyValueDelimiter = '/', $paramDelimiter = '/')
+    public function __construct($keyValueDelimiter = '/', $paramDelimiter = '/', array $defaults = array())
     {
         $this->keyValueDelimiter = $keyValueDelimiter;
         $this->paramDelimiter    = $paramDelimiter;
+        $this->defaults          = $defaults;
     }
     
     /**
@@ -99,8 +108,12 @@ class Wildcard implements Route
         if (!isset($options['param_delimiter'])) {
             $options['param_delimiter'] = '/';
         }
+        
+        if (!isset($options['defaults'])) {
+            $options['defaults'] = array();
+        }
 
-        return new static($options['key_value_delimiter'], $options['param_delimiter']);
+        return new static($options['key_value_delimiter'], $options['param_delimiter'], $options['defaults']);
     }
 
     /**
@@ -126,7 +139,7 @@ class Wildcard implements Route
         $matches = array();
         $params  = explode($this->paramDelimiter, $path);
 
-        if ($params[0] !== '') {
+        if ($params[0] !== '' || end($params) === '') {
             return null;
         }
         
@@ -134,27 +147,23 @@ class Wildcard implements Route
             $count = count($params);
 
             for ($i = 1; $i < $count; $i += 2) {
-                $matches[urldecode($params[$i])] = (
-                    isset($params[$i + 1])
-                    ? urldecode($params[$i + 1])
-                    : null
-                );
+                if (isset($params[$i + 1])) {
+                    $matches[urldecode($params[$i])] = urldecode($params[$i + 1]);
+                }
             }
         } else {
             array_shift($params);
             
             foreach ($params as $param) {
                 $param = explode($this->keyValueDelimiter, $param, 2);
-                
-                $matches[urldecode($param[0])] = (
-                    isset($param[1])
-                    ? urldecode($param[1])
-                    : null
-                );
+      
+                if (isset($param[1])) {
+                    $matches[urldecode($param[0])] = urldecode($param[1]);
+                }
             }
         }
 
-        return new RouteMatch($matches, strlen($path));
+        return new RouteMatch(array_merge($this->defaults, $matches), strlen($path));
     }
 
     /**
@@ -168,10 +177,11 @@ class Wildcard implements Route
     public function assemble(array $params = array(), array $options = array())
     {
         $elements              = array();
+        $mergedParams          = array_merge($this->defaults, $params);
         $this->assembledParams = array();
 
-        if ($params) {
-            foreach ($params as $key => $value) {
+        if ($mergedParams) {
+            foreach ($mergedParams as $key => $value) {
                 $elements[] = urlencode($key) . $this->keyValueDelimiter . urlencode($value);
 
                 $this->assembledParams[] = $key;

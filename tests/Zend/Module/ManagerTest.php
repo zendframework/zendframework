@@ -114,6 +114,7 @@ class ManagerTest extends TestCase
         $modules = $moduleManager->getLoadedModules(true);
         $this->assertSame(1, count($modules));
         $moduleManager->loadModules(); // should not cause any problems
+        $moduleManager->loadModule('BarModule'); // should not cause any problems
         $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
         $this->assertSame(1, count($modules));
 

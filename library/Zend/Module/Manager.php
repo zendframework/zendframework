@@ -95,7 +95,7 @@ class Manager implements ModuleHandler
      */
     public function loadModule($moduleName)
     {
-        if (isset($this->loadModules[$moduleName])) {
+        if (isset($this->loadedModules[$moduleName])) {
             return $this->loadedModules[$moduleName];
         }
 

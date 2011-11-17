@@ -12,23 +12,27 @@ class ListenerOptionsTest extends TestCase
     public function testCanConfigureWithArrayInConstructor()
     {
         $options = new ListenerOptions(array(
-            'cache_dir'            => __DIR__,
-            'config_cache_enabled' => true,
-            'config_cache_key'     => 'foo',
+            'cache_dir'               => __DIR__,
+            'config_cache_enabled'    => true,
+            'config_cache_key'        => 'foo',
+            'application_environment' => 'development',
         ));
         $this->assertSame($options->getCacheDir(), __DIR__);
         $this->assertTrue($options->getConfigCacheEnabled());
         $this->assertNotNull(strstr($options->getConfigCacheFile(), __DIR__));
         $this->assertNotNull(strstr($options->getConfigCacheFile(), '.php'));
         $this->assertSame($options->getConfigCacheKey(), 'foo');
+        $this->assertSame($options->getApplicationEnvironment(), 'development');
     }
 
     public function testCanAccessKeysAsProperties()
     {
         $options = new ListenerOptions(array(
-            'cache_dir'            => __DIR__,
-            'config_cache_enabled' => true,
+            'cache_dir'               => __DIR__,
+            'config_cache_enabled'    => true,
+            'application_environment' => 'development',
         ));
+        $this->assertSame($options->application_environment, 'development');
         $this->assertSame($options->cache_dir, __DIR__);
         $options->cache_dir = 'foo';
         $this->assertSame($options->cache_dir, 'foo');

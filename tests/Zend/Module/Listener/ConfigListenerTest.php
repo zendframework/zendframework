@@ -95,4 +95,21 @@ class ConfigListenerTest extends TestCase
         $moduleManager = new Manager(array('BadConfigModule', 'SomeModule'));
         $moduleManager->loadModules();
     }
+
+    public function testBadConfigFileExtensionThrowsRuntimeException()
+    {
+        $this->setExpectedException('RuntimeException');
+        $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->loadModules();
+        $moduleManager->getConfigListener()->mergeGlobDirectory(dirname(__DIR__) . '/_files/*.{bad}');
+    }
+
+    public function testCanMergeConfigFromGlob()
+    {
+        $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->loadModules();
+        $moduleManager->getConfigListener()->mergeGlobDirectory(dirname(__DIR__) . '/_files/*.{ini,json,php,xml,yaml}');
+        $config = $moduleManager->getMergedConfig(false);
+        $this->assertTrue($config['php']);
+    }
 }

@@ -21,7 +21,8 @@
 
 namespace ZendTest\Loader;
 
-use Zend\Loader\PluginBroker,
+use stdClass,
+    Zend\Loader\PluginBroker,
     Zend\Loader\PluginClassLoader;
 
 /**
@@ -273,5 +274,19 @@ class PluginBrokerTest extends \PHPUnit_Framework_TestCase
         ));
         $loader = $broker->getClassLoader();
         $this->assertInstanceOf('ZendTest\Loader\TestAsset\CustomClassLoader', $loader);
+    }
+
+    public function testWillPullFromLocatorIfAttached()
+    {
+        $locator = new TestAsset\ServiceLocator();
+        $plugin  = new stdClass;
+        $locator->set('ZendTest\Loader\TestAsset\Foo', $plugin);
+
+        $loader = $this->broker->getClassLoader();
+        $loader->registerPlugin('foo', 'ZendTest\Loader\TestAsset\Foo');
+        $this->broker->setLocator($locator);
+
+        $test = $this->broker->load('foo');
+        $this->assertSame($plugin, $test);
     }
 }

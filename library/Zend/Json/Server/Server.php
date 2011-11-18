@@ -529,14 +529,12 @@ class Server extends \Zend\Server\AbstractServer
             $callback = $invocable->getCallback();
             if ('function' == $callback->getType()) {
                 $reflection = new \ReflectionFunction( $callback->getFunction() );
-                $refParams  = $reflection->getParameters();
             } else {
                 
                 $reflection = new \ReflectionMethod( 
                     $callback->getClass(),
                     $callback->getMethod()
                 );
-                $refParams = $reflection->getParameters();
             }
 
             $orderedParams = array();

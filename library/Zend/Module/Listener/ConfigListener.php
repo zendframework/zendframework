@@ -27,6 +27,11 @@ class ConfigListener extends AbstractListener implements ConfigMerger
      * @var bool
      */
     protected $skipConfig = false;
+
+    /**
+     * @var array
+     */
+    protected $globPaths = array();
     
     /**
      * __construct 
@@ -86,12 +91,73 @@ class ConfigListener extends AbstractListener implements ConfigMerger
     }
 
     /**
+     * Add a glob path of config files to merge after loading modules 
+     * 
+     * @param string $globPath 
+     * @return ConfigListener
+     */
+    public function addConfigGlobPath($globPath)
+    {
+        if (!is_string($globPath)) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Parameter to %s::%s() must be a string; %s given.', 
+                __CLASS__, __METHOD__, gettype($globPath))
+            );
+        }
+        $this->globPaths[] = $globPath;
+        return $this;
+    }
+
+    /**
+     * Add an array of glob paths of config files to merge after loading modules 
+     * 
+     * @param mixed $globPaths 
+     * @return ConfigListener
+     */
+    public function addConfigGlobPaths($globPaths)
+    {
+        if ($globPaths instanceof Traversable) {
+            $globPaths = IteratorToArray::convert($globPaths);
+        }
+
+        if (!is_array($globPaths)) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('Argument passed to %::%s() must be an array, '
+                . 'implement the \Traversable interface, or be an '
+                . 'instance of Zend\Config\Config. %s given.', 
+                __CLASS__, __METHOD__, gettype($globPaths))
+            );
+        }
+
+        foreach ($globPaths as $globPath) {
+            $this->addConfigGlobPath($globPath);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Merge all config files matched by the given glob()s 
+     *
+     * This should really only be called by the module manager.
+     * 
+     * @return ConfigListener
+     */
+    public function mergeConfigGlobPaths()
+    {
+        foreach ($this->globPaths as $globPath) {
+            $this->mergeGlobPath($globPath);
+        }
+        return $this;
+    }
+
+    /**
      * Merge all config files matching a glob 
      * 
      * @param mixed $globPath 
      * @return ConfigListener
      */
-    public function mergeGlobDirectory($globPath)
+    protected function mergeGlobPath($globPath)
     {
         foreach (glob($globPath, GLOB_BRACE) as $path) {
             $pathInfo = pathinfo($path);
@@ -127,6 +193,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
             }
             $this->mergeTraversableConfig($config);
         }
+        return $this;
     }
 
     /**

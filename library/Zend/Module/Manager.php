@@ -82,6 +82,9 @@ class Manager implements ModuleHandler
         foreach ($this->getModules() as $moduleName) {
             $this->loadModule($moduleName);
         }
+        if ($configListener = $this->getConfigListener()) {
+            $configListener->mergeConfigGlobPaths();
+        }
         $this->events()->trigger('init.post', $this);
         $this->modulesAreLoaded = true;
         return $this;
@@ -162,10 +165,14 @@ class Manager implements ModuleHandler
     /**
      * Get the listener that's in charge of merging module configs.
      *
+     * @param bool $autoInstantiate 
      * @return ConfigMerger
      */
-    public function getConfigListener()
+    public function getConfigListener($autoInstantiate = true)
     {
+        if (true === $autoInstantiate) {
+            $this->events();
+        }
         return $this->configListener;
     }
  
@@ -255,7 +262,7 @@ class Manager implements ModuleHandler
             return $this;
         }
         $options = $this->getDefaultListenerOptions();
-        if (null === $this->getConfigListener()) {
+        if (null === $this->getConfigListener(false)) {
             $this->setConfigListener(new ConfigListener($options));
         }
         $this->events()->attach('loadModule', new InitTrigger($options), 1000);

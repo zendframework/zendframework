@@ -95,32 +95,70 @@ class ConfigListenerTest extends TestCase
         $moduleManager = new Manager(array('BadConfigModule', 'SomeModule'));
         $moduleManager->loadModules();
     }
-
+    
     public function testBadConfigFileExtensionThrowsRuntimeException()
     {
         $this->setExpectedException('RuntimeException');
         $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->getConfigListener()->addConfigGlobPath(dirname(__DIR__) . '/_files/*.{bad}');
         $moduleManager->loadModules();
-        $moduleManager->getConfigListener()->mergeGlobDirectory(dirname(__DIR__) . '/_files/*.{bad}');
+    }
+
+    public function testBadGlobPathTrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->getConfigListener()->addConfigGlobPath(array('asd'));
+        $moduleManager->loadModules();
+    }
+
+    public function testBadGlobPathArrayTrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->getConfigListener()->addConfigGlobPaths('asd');
+        $moduleManager->loadModules();
     }
 
     public function testCanMergeConfigFromGlob()
     {
         $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->getConfigListener()->addConfigGlobPath(dirname(__DIR__) . '/_files/*.{ini,json,php,xml,yaml}');
         $moduleManager->loadModules();
-        $moduleManager->getMergedConfig(); // 'cache' the config object
-        $moduleManager->getConfigListener()->mergeGlobDirectory(dirname(__DIR__) . '/_files/*.{ini,json,php,xml,yaml}');
+        $moduleManager->getMergedConfig(); 
+        // Test as object
         $configObject = $moduleManager->getMergedConfig()->all;
         $this->assertSame('yes', $configObject->ini);
         $this->assertSame('yes', $configObject->php);
         $this->assertSame('yes', $configObject->json);
         $this->assertSame('yes', $configObject->xml);
         $this->assertTrue($configObject->yaml);
+        // Test as array
         $config = $moduleManager->getMergedConfig(false);
         $this->assertSame('yes', $config['all']['ini']);
         $this->assertSame('yes', $config['all']['json']);
         $this->assertSame('yes', $config['all']['php']);
         $this->assertSame('yes', $config['all']['xml']);
         $this->assertTrue($config['all']['yaml']); // stupid yaml
+    }
+
+    public function testCanMergeConfigFromArrayOfGlobs()
+    {
+        $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->getConfigListener()->addConfigGlobPaths(new \ArrayObject(array(
+            dirname(__DIR__) . '/_files/*.ini',
+            dirname(__DIR__) . '/_files/*.json',
+            dirname(__DIR__) . '/_files/*.php',
+            dirname(__DIR__) . '/_files/*.xml',
+            dirname(__DIR__) . '/_files/*.yaml',
+        )));
+        $moduleManager->loadModules();
+        // Test as object
+        $configObject = $moduleManager->getMergedConfig()->all;
+        $this->assertSame('yes', $configObject->ini);
+        $this->assertSame('yes', $configObject->php);
+        $this->assertSame('yes', $configObject->json);
+        $this->assertSame('yes', $configObject->xml);
+        $this->assertTrue($configObject->yaml);
     }
 }

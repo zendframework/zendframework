@@ -23,7 +23,9 @@
  */
 namespace Zend\Json\Server;
 use Zend\Server\Reflection,
-    Zend\Server\Method;
+    Zend\Server\Method,
+    Zend\Server\Exception\RuntimeException,
+    Zend\Server\Exception\InvalidArgumentException;
 
 /**
  * @uses       Zend\Json\Server\Error
@@ -97,11 +99,11 @@ class Server extends \Zend\Server\AbstractServer
     public function addFunction($function, $namespace = '')
     {
         if (!is_string($function) && (!is_array($function) || (2 > count($function)))) {
-            throw new Exception('Unable to attach function; invalid');
+            throw new InvalidArgumentException('Unable to attach function; invalid');
         }
 
         if (!is_callable($function)) {
-            throw new Exception('Unable to attach function; does not exist');
+            throw new InvalidArgumentException('Unable to attach function; does not exist');
         }
 
         $argv = null;
@@ -184,7 +186,7 @@ class Server extends \Zend\Server\AbstractServer
     public function handle($request = false)
     {
         if ((false !== $request) && (!$request instanceof Request)) {
-            throw new Exception('Invalid request type provided; cannot handle');
+            throw new InvalidArgumentException('Invalid request type provided; cannot handle');
         } elseif ($request) {
             $this->setRequest($request);
         }
@@ -214,7 +216,7 @@ class Server extends \Zend\Server\AbstractServer
     public function loadFunctions($definition)
     {
         if (!is_array($definition) && (!$definition instanceof \Zend\Server\Definition)) {
-            throw new Exception('Invalid definition provided to loadFunctions()');
+            throw new InvalidArgumentException('Invalid definition provided to loadFunctions()');
         }
 
         foreach ($definition as $key => $method) {
@@ -544,9 +546,9 @@ class Server extends \Zend\Server\AbstractServer
                 } elseif( $refParam->isOptional() ) {
                     $orderedParams[ $refParam->getName() ] = null;
                 } else {
-                    throw new Exception( 
-                        'Missing required parameter: ' . $refParam->getName() 
-                    ); 
+                    throw new RuntimeException(
+                        'Missing required parameter: ' . $refParam->getName()
+                    );
                 }
             }
             $params = $orderedParams;

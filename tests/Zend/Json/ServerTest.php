@@ -354,6 +354,23 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( 3, $result[2] );
     }
 
+    public function testHandleValidMethodWithTooFewRequiredParamsShouldReturnError()
+    {
+        $this->server->setClass('ZendTest\Json\Foo')
+                     ->setAutoEmitResponse( false );
+        $request = $this->server->getRequest();
+        $request->setMethod('bar')
+                ->setParams( array(
+                    'three' => 3,
+                    'two'   => 2,
+                 ) )
+                ->setId( 'foo' );
+        $response = $this->server->handle();
+        $result = $response->getResult();
+        print_r($result);die;
+        echo $result; die;
+    }
+
     public function testHandleRequestWithErrorsShouldReturnErrorResponse()
     {
         $this->server->setClass('ZendTest\Json\Foo')

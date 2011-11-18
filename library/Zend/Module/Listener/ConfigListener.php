@@ -171,7 +171,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
                 . 'instance of Zend\Config\Config. %s given.', gettype($config))
             );
         }
-        $this->mergedConfig = array_replace_recursive($this->mergedConfig, $config);
+        $this->setMergedConfig(array_replace_recursive($this->mergedConfig, $config));
     }
     
     protected function hasCachedConfig()

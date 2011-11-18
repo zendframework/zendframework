@@ -1,2 +1,2 @@
 all: 
-  yaml: 1
+  yaml: true

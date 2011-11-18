@@ -1,4 +1,6 @@
 <?php
 return array(
-    'php' => true
+    'all' => array(
+        'php' => 'yes'
+    ),
 );

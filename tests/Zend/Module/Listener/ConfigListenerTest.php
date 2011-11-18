@@ -108,8 +108,19 @@ class ConfigListenerTest extends TestCase
     {
         $moduleManager = new Manager(array('SomeModule'));
         $moduleManager->loadModules();
+        $moduleManager->getMergedConfig(); // 'cache' the config object
         $moduleManager->getConfigListener()->mergeGlobDirectory(dirname(__DIR__) . '/_files/*.{ini,json,php,xml,yaml}');
+        $configObject = $moduleManager->getMergedConfig()->all;
+        $this->assertSame('yes', $configObject->ini);
+        $this->assertSame('yes', $configObject->php);
+        $this->assertSame('yes', $configObject->json);
+        $this->assertSame('yes', $configObject->xml);
+        $this->assertTrue($configObject->yaml);
         $config = $moduleManager->getMergedConfig(false);
-        $this->assertTrue($config['php']);
+        $this->assertSame('yes', $config['all']['ini']);
+        $this->assertSame('yes', $config['all']['json']);
+        $this->assertSame('yes', $config['all']['php']);
+        $this->assertSame('yes', $config['all']['xml']);
+        $this->assertTrue($config['all']['yaml']); // stupid yaml
     }
 }

@@ -354,7 +354,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals( 3, $result[2] );
     }
 
-    public function testHandleValidMethodWithTooFewRequiredParamsShouldReturnError()
+    public function testHandleValidWithoutRequiredParamShouldReturnError()
     {
         $this->server->setClass('ZendTest\Json\Foo')
                      ->setAutoEmitResponse( false );
@@ -366,9 +366,10 @@ class ServerTest extends \PHPUnit_Framework_TestCase
                  ) )
                 ->setId( 'foo' );
         $response = $this->server->handle();
-        $result = $response->getResult();
-        print_r($result);die;
-        echo $result; die;
+
+        $this->assertTrue($response instanceof Response);
+        $this->assertTrue($response->isError());
+        $this->assertEquals(Server\Error::ERROR_INVALID_PARAMS, $response->getError()->getCode());
     }
 
     public function testHandleRequestWithErrorsShouldReturnErrorResponse()

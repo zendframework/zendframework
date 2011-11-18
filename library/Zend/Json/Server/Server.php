@@ -127,7 +127,7 @@ class Server extends \Zend\Server\AbstractServer
                 }
             }
             if (!$found) {
-                $this->fault('Method not found', -32601);
+                $this->fault('Method not found', Error::ERROR_INVALID_METHOD);
                 return $this;
             }
         }
@@ -503,16 +503,16 @@ class Server extends \Zend\Server\AbstractServer
         $request = $this->getRequest();
 
         if (!$request->isMethodError() && (null === $request->getMethod())) {
-            return $this->fault('Invalid Request', -32600);
+            return $this->fault('Invalid Request', Error::ERROR_INVALID_REQUEST);
         }
 
         if ($request->isMethodError()) {
-            return $this->fault('Invalid Request', -32600);
+            return $this->fault('Invalid Request', Error::ERROR_INVALID_REQUEST);
         }
 
         $method = $request->getMethod();
         if (!$this->_table->hasMethod($method)) {
-            return $this->fault('Method not found', -32601);
+            return $this->fault('Method not found', Error::ERROR_INVALID_METHOD);
         }
 
         $params        = $request->getParams();
@@ -546,9 +546,7 @@ class Server extends \Zend\Server\AbstractServer
                 } elseif( $refParam->isOptional() ) {
                     $orderedParams[ $refParam->getName() ] = null;
                 } else {
-                    throw new RuntimeException(
-                        'Missing required parameter: ' . $refParam->getName()
-                    );
+                    return $this->fault('Invalid params', Error::ERROR_INVALID_PARAMS);
                 }
             }
             $params = $orderedParams;

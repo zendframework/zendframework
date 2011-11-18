@@ -61,16 +61,16 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Loader\PluginBroker', $this->logger->getBroker());
     }
 
-    public static function provideInvalidArguments()
+    public static function provideInvalidClasses()
     {
         return array(
-          array('stdClass'),
-          array(new \stdClass()),
+            array('stdClass'),
+            array(new \stdClass()),
         );
     }
 
     /**
-     * @dataProvider provideInvalidArguments
+     * @dataProvider provideInvalidClasses
      */
     public function testPassingInvalidArgumentToSetBrokerRaisesException($broker)
     {
@@ -85,7 +85,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider provideInvalidArguments
+     * @dataProvider provideInvalidClasses
      */
     public function testPassingInvalidArgumentToAddWriterRaisesException($writer)
     {
@@ -93,13 +93,57 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
         $this->logger->addWriter($writer);
     }
 
-    public function testWriterShouldEmitMessage()
+    public function testLoggingEventDispatchesRecordInRelevantWriters()
     {
         $writer = new MockWriter;
         $this->logger->addWriter($writer);
         $this->logger->log(Logger::INFO, 'tottakai');
 
-        $this->assertArrayHasKey(0, $writer->events);
+        $this->assertEquals(count($writer->events), 1);
         $this->assertContains('tottakai', $writer->events[0]);
+    }
+
+    public static function provideAttributes()
+    {
+        return array(
+            array(array()),
+            array(array('user' => 'foo', 'ip' => '127.0.0.1')),
+            array(new \ArrayObject(array('id' => 42))),
+        );
+    }
+
+    /**
+     * @dataProvider provideAttributes
+     */
+    public function testLoggingCustomAttributesForUserContext($extra)
+    {
+        $writer = new MockWriter;
+        $this->logger->addWriter($writer);
+        $this->logger->log(Logger::ERR, 'tottakai', $extra);
+
+        $this->assertEquals(count($writer->events), 1);
+        $this->assertInternalType('array', $writer->events[0]['extra']);
+        $this->assertEquals(count($writer->events[0]['extra']), count($extra));
+    }
+
+    public static function provideInvalidArguments()
+    {
+        return array(
+            array(new \stdClass(), array('valid')),
+            array('valid', null),
+            array('valid', true),
+            array('valid', 10),
+            array('valid', 'invalid'),
+            array('valid', new \stdClass()),
+        );
+    }
+
+    /**
+     * @dataProvider provideInvalidArguments
+     */
+    public function testPassingInvalidArgumentToLogRaisesException($message, $extra)
+    {
+        $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException');
+        $this->logger->log(Logger::ERR, $message, $extra);
     }
 }

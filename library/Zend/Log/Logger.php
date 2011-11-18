@@ -25,8 +25,10 @@ namespace Zend\Log;
 
 use DateTime,
     SplStack,
+    Traversable,
     Zend\Loader\Broker,
-    Zend\Loader\Pluggable;
+    Zend\Loader\Pluggable,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * Logging messages with a stack of backends
@@ -215,16 +217,25 @@ class Logger implements Loggable, Pluggable
      * @todo implement if stack of writers is empty (exception or null writer)
      * @param int $priority
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      * @throws Exception\InvalidArgumentException if message can't be cast in string
+     * @throws Exception\InvalidArgumentException if extra can't be iterate
      */
-    public function log($priority, $message, array $extra = null)
+    public function log($priority, $message, $extra = array())
     {
         if (is_object($message) && !method_exists($message, '__toString')) {
             throw new Exception\InvalidArgumentException(
                 '$message must implement magic __toString() method'
             );
+        }
+
+        if (!is_array($extra) && !$extra instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(
+                '$extra must be an array or implement Traversable'
+            );
+        } elseif ($extra instanceof Traversable) {
+            $extra = IteratorToArray::convert($extra);
         }
 
         $date = new DateTime();
@@ -245,80 +256,80 @@ class Logger implements Loggable, Pluggable
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function emerg($message, array $extra = null)
+    public function emerg($message, $extra = array())
     {
         return $this->log(self::EMERG, $message, $extra);
     }
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function alert($message, array $extra = null)
+    public function alert($message, $extra = array())
     {
         return $this->log(self::ALERT, $message, $extra);
     }
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function crit($message, array $extra = null)
+    public function crit($message, $extra = array())
     {
         return $this->log(self::CRIT, $message, $extra);
     }
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function err($message, array $extra = null)
+    public function err($message, $extra = array())
     {
         return $this->log(self::ERR, $message, $extra);
     }
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function warn($message, array $extra = null)
+    public function warn($message, $extra = array())
     {
         return $this->log(self::WARN, $message, $extra);
     }
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function notice($message, array $extra = null)
+    public function notice($message, $extra = array())
     {
         return $this->log(self::NOTICE, $message, $extra);
     }
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function info($message, array $extra = null)
+    public function info($message, $extra = array())
     {
         return $this->log(self::INFO, $message, $extra);
     }
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Logger
      */
-    public function debug($message, array $extra = null)
+    public function debug($message, $extra = array())
     {
         return $this->log(self::DEBUG, $message, $extra);
     }

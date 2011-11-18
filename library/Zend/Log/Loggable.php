@@ -33,57 +33,57 @@ interface Loggable
 {
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function emerg($message, array $extra = null);
+    public function emerg($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function alert($message, array $extra = null);
+    public function alert($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function crit($message, array $extra = null);
+    public function crit($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function err($message, array $extra = null);
+    public function err($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function warn($message, array $extra = null);
+    public function warn($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function notice($message, array $extra = null);
+    public function notice($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function info($message, array $extra = null);
+    public function info($message, $extra = array());
 
     /**
      * @param string $message
-     * @param array|null $extra
+     * @param array|Traversable $extra
      * @return Loggabble
      */
-    public function debug($message, array $extra = null);
+    public function debug($message, $extra = array());
 }

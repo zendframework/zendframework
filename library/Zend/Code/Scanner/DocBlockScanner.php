@@ -97,13 +97,10 @@ class DocBlockScanner implements Scanner
             return;
         }
 
+        $mode = 1;
+
         $tokens = $this->tokenize();
         $tagIndex = null;
-        /*
-        $currentAnnotationName = null;
-        $currentAnnotationValue = '';
-        */
-
         reset($tokens);
 
         SCANNER_TOP:
@@ -112,57 +109,31 @@ class DocBlockScanner implements Scanner
             switch ($token[0]) {
 
                 case 'DOCBLOCK_NEWLINE':
-                    if ($this->shortDescription === null) {
-                        $this->shortDescription = '';
+                    if ($this->shortDescription != '' && $tagIndex === null) {
+                        $mode = 2;
+                    } else {
+                        $this->longDescription .= $token[1];
                     }
                     goto SCANNER_CONTINUE;
 
-                case 'DOCBKOCK_WHITESPACE':
-                    /*
-                    if ($currentAnnotationName === null) {
+                case 'DOCBLOCK_WHITESPACE':
+                case 'DOCBLOCK_TEXT':
+                    if ($tagIndex !== null) {
+                        $this->tags[$tagIndex]['value'] .= ($this->tags[$tagIndex]['value'] == '') ? $token[1] : ' ' . $token[1];
+                        goto SCANNER_CONTINUE;
+                    } elseif ($mode <= 2) {
+                        if ($mode == 1) {
+                            $this->shortDescription .= $token[1];
+                        } else {
+                            $this->longDescription .= $token[1];
+                        }
                         goto SCANNER_CONTINUE;
                     }
-                    */
-                /*
-                case 'DOCBLOCK_ANNOTATION_VALUE':
-                    if ($currentAnnotationName === null) {
-                        goto SCANNER_CONTINUE;
-                    }
-                    $currentAnnotationValue .= $token[1];
-                    goto SCANNER_CONTINUE;
-                */
                 case 'DOCBLOCK_TAG':
                     array_push($this->tags, array('name' => $token[1], 'value' => ''));
                     end($this->tags);
                     $tagIndex = key($this->tags);
-                    /*
-                    if (!$this->annotationManager || !$this->annotationManager->hasAnnotationName(ltrim($token[1], '@'))) {
-                        goto SCANNER_CONTINUE;
-                    }
-                    */
-                /*
-                case 'DOCBLOCK_ANNOTATION_NAME':
-                    if ($currentAnnotationName !== null) {
-                        $this->annotations[] = $this->annotationManager->createAnnotation($currentAnnotationName, $currentAnnotationValue);
-                        $currentAnnotationName = $currentAnnotationValue = null;
-                    }
-
-                    $currentAnnotationName = ltrim($token[1], '@');
-                    if (!$this->annotationManager->hasAnnotationName($currentAnnotationName)) {
-                        $currentAnnotationName = null;
-                    }
-                    goto SCANNER_CONTINUE;
-                */
-                case 'DOCBLOCK_TEXT':
-                    if ($tagIndex !== null) {
-                        $this->tags[$tagIndex]['value'] .= ($this->tags[$tagIndex]['value'] == '') ? $token[1] : ' ' . $token[1];
-                    } elseif ($this->shortDescription !== null) {
-                        if ($this->shortDescription === '') {
-                            $this->shortDescription = $token[1];
-                        } else {
-                            $this->longDescription .= $token[1];
-                        }
-                    }
+                    $mode = 3;
                     goto SCANNER_CONTINUE;
 
                 case 'DOCBLOCK_COMMENTEND':
@@ -178,12 +149,6 @@ class DocBlockScanner implements Scanner
 
         SCANNER_END:
 
-            /*
-            if ($currentAnnotationName !== null) {
-                $this->annotations[] = $this->annotationManager->createAnnotation($currentAnnotationName, $currentAnnotationValue);
-            }
-            */
-
         $this->shortDescription = rtrim($this->shortDescription);
         $this->longDescription  = rtrim($this->longDescription);
         $this->isScanned = true;
@@ -193,7 +158,6 @@ class DocBlockScanner implements Scanner
     {
         static $CONTEXT_INSIDE_DOCBLOCK = 0x01;
         static $CONTEXT_INSIDE_ASTERISK = 0x02;
-//        static $CONTEXT_INSIDE_ANNOTATION = 0x04;
 
         $context = 0x00;
         $stream = $this->docComment;
@@ -203,10 +167,6 @@ class DocBlockScanner implements Scanner
         $currentChar = null;
         $currentWord = null;
         $currentLine = null;
-
-//        $annotationMode = (isset($this->annotationManager));
-//        $annotationParenCount = 0;
-
 
         $MACRO_STREAM_ADVANCE_CHAR = function ($positionsForward = 1) use (&$stream, &$streamIndex, &$currentChar, &$currentWord, &$currentLine, &$annotationMode) {
             $positionsForward = ($positionsForward > 0) ? $positionsForward : 1;
@@ -307,35 +267,6 @@ class DocBlockScanner implements Scanner
                 }
                 goto TOKENIZER_TOP;
             }
-
-            /*
-            if ($currentChar === '@' && $annotationMode && ($startOfAnnotation = strpos($currentWord, '(')) !== false) {
-                $MACRO_TOKEN_SET_TYPE('DOCBLOCK_ANNOTATION_NAME');
-                $MACRO_TOKEN_APPEND_WORD_PARTIAL($startOfAnnotation);
-                $MACRO_TOKEN_ADVANCE();
-                $context |= $CONTEXT_INSIDE_ANNOTATION;
-                if ($MACRO_STREAM_ADVANCE_CHAR($startOfAnnotation) === false) {
-                    goto TOKENIZER_END;
-                }
-                goto TOKENIZER_TOP;
-            }
-            */
-
-            /*
-            if ($annotationMode && ($context && $CONTEXT_INSIDE_ANNOTATION) && ($context && $CONTEXT_INSIDE_ASTERISK)) {
-                $MACRO_TOKEN_SET_TYPE('DOCBLOCK_ANNOTATION_VALUE');
-                $MACRO_TOKEN_APPEND_WORD();
-                $MACRO_TOKEN_ADVANCE();
-                $annotationParenCount += substr_count($currentWord, '(') - substr_count($currentWord, ')');
-                if ($annotationParenCount === 0) {
-                    $context &= ~$CONTEXT_INSIDE_ANNOTATION;
-                }
-                if ($MACRO_STREAM_ADVANCE_WORD() === false) {
-                    goto TOKENIZER_END;
-                }
-                goto TOKENIZER_TOP;
-            }
-            */
 
             if ($currentChar === '@') {
                 $MACRO_TOKEN_SET_TYPE('DOCBLOCK_TAG');

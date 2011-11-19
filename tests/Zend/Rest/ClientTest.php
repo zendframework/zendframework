@@ -49,9 +49,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client        = new \Zend\Http\Client(null, array(
             'adapter' => $this->adapter
         ));
-        Client\RestClient::setDefaultHttpClient($client);
 
         $this->rest = new Client\RestClient('http://framework.zend.com/');
+        $this->rest->setHttpClient($client);
     }
 
     public function testUri()
@@ -107,10 +107,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setResponse($response);
 
         $rest = new Client\RestClient('http://framework.zend.com');
+        $rest->setHttpClient($this->rest->getHttpClient());
 
         $response = $rest->restGet('rest');
         $this->assertTrue($response instanceof Response);
-        $this->assertContains($expXml, $response->getBody());
+        $this->assertContains($expXml, $response->getBody(), $response->getBody());
     }
 
     public function testRestGet()
@@ -152,7 +153,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RestClient::getDefaultHttpClient()->getLastRawRequest();
+        $request = $this->rest->getHttpClient()->getLastRawRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 
@@ -175,7 +176,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RestClient::getDefaultHttpClient()->getLastRawRequest();
+        $request = $this->rest->getHttpClient()->getLastRawRequest();
         $this->assertContains('foo=bar&baz=bat', $request, $request);
     }
 
@@ -199,7 +200,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $body = $response->getBody();
         $this->assertContains($expXml, $response->getBody());
 
-        $request = Client\RestClient::getDefaultHttpClient()->getLastRawRequest();
+        $request = $this->rest->getHttpClient()->getLastRawRequest();
         $this->assertContains($reqXml, $request, $request);
     }
 

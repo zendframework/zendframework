@@ -23,12 +23,12 @@
  * @namespace
  */
 namespace Zend\Barcode\Exception;
+
 use Zend\Barcode\Exception;
 
 /**
  * Exception for Zend_Barcode component.
  *
- * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)

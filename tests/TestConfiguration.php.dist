@@ -597,7 +597,7 @@ define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_RAM','insert ram name here');
 define ('TESTS_ZEND_SERVICE_GOGRID_ONLINE_SERVER_IP','insert ip here');
 
 /**
- * Zend_Service_LiveDocx configuration
+ * Zend\Service\LiveDocx configuration
  *
  * Define username and password in order to run unit tests for LiveDocx web services.
  *
@@ -607,7 +607,7 @@ define('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME', false);
 define('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD', false);
 
 /**
- * Zend_Service_LiveDocx premium configuration
+ * Zend\Service\LiveDocx premium configuration
  *
  * Define username, password, WSDL in order to run unit tests for premium LiveDocx web services.
  */

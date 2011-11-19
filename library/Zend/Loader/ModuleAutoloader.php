@@ -2,6 +2,9 @@
 
 namespace Zend\Loader;
 
+// Grab SplAutoloader interface
+require_once __DIR__ . '/SplAutoloader.php';
+
 use SplFileInfo,
     Traversable;
 

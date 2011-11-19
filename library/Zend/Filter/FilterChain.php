@@ -128,7 +128,7 @@ class FilterChain extends AbstractFilter
     public function broker($name = null, $options = array())
     {
         if ($name instanceof Broker) {
-            $this->broker = $broker;
+            $this->broker = $name;
             return $this->broker;
         } 
 

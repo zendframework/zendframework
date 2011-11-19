@@ -25,6 +25,8 @@
 namespace Zend\Mvc\Router\Http;
 
 use Zend\Mvc\Router\Exception,
+    Traversable,
+    Zend\Stdlib\IteratorToArray,
     Zend\Mvc\Router\SimpleRouteStack,
     Zend\Mvc\Router\Route as BaseRoute,
     Zend\Mvc\Router\Http\Route,
@@ -46,7 +48,7 @@ class TreeRouteStack extends SimpleRouteStack
      *
      * @var string
      */
-    protected $baseUrl = '';
+    protected $baseUrl;
 
     /**
      * Request URI.
@@ -103,6 +105,14 @@ class TreeRouteStack extends SimpleRouteStack
      */
     protected function routeFromArray($specs)
     {
+        if (!is_array($specs) && !$specs instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
+        }
+
+        if ($specs instanceof Traversable) {
+            $specs = IteratorToArray::convert($specs);
+        }
+        
         $route = parent::routeFromArray($specs);
 
         if (!$route instanceof Route) {
@@ -136,9 +146,13 @@ class TreeRouteStack extends SimpleRouteStack
             return null;
         }
 
+        if ($this->baseUrl === null && method_exists($request, 'getBaseUrl')) {
+            $this->setBaseUrl($request->getBaseUrl());
+        }
+        
         $uri           = $request->uri();
         $baseUrlLength = strlen($this->baseUrl) ?: null;
-
+       
         if ($this->requestUri === null) {
             $this->setRequestUri($uri);
         }
@@ -146,7 +160,7 @@ class TreeRouteStack extends SimpleRouteStack
         if ($baseUrlLength !== null) {
             $pathLength = strlen($uri->getPath()) - $baseUrlLength;
 
-            foreach ($this->routes as $route) {
+            foreach ($this->routes as $name => $route) {
                 if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
                     $match->setMatchedRouteName($name);
                     

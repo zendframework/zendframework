@@ -261,7 +261,7 @@ abstract class AbstractLiveDocx
      */
     public function getFormat($filename)
     {
-        return strtolower(substr(strrchr($filename, '.'), 1));
+        return pathinfo($filename, PATHINFO_EXTENSION);
     }
 
     /**

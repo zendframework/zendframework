@@ -23,15 +23,13 @@
  * @namespace
  */
 namespace Zend\Barcode\Object;
+
 use Zend\Validator\Barcode as BarcodeValidator,
-    Zend\Barcode\Object\Exception\BarcodeValidationException;
+    Zend\Barcode\Object\Exception;
 
 /**
  * Class for generate UpcA barcode
  *
- * @uses       \Zend\Barcode\Object\Ean13
- * @uses       \Zend\Barcode\Object\Exception
- * @uses       \Zend\Validator\Barcode\Barcode
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,7 +38,7 @@ use Zend\Validator\Barcode as BarcodeValidator,
 class Upce extends Ean13
 {
 
-    protected $_parities = array(
+    protected $parities = array(
         0 => array(
             0 => array('B','B','B','A','A','A'),
             1 => array('B','B','A','B','A','A'),
@@ -69,11 +67,11 @@ class Upce extends Ean13
      * Default options for Postnet barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
-        $this->_barcodeLength = 8;
-        $this->_mandatoryChecksum = true;
-        $this->_mandatoryQuietZones = true;
+        $this->barcodeLength = 8;
+        $this->mandatoryChecksum = true;
+        $this->mandatoryQuietZones = true;
     }
 
     /**
@@ -93,12 +91,12 @@ class Upce extends Ean13
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
-        $startCharacter  = (3 * $this->_barThinWidth) * $this->_factor;
-        $stopCharacter   = (6 * $this->_barThinWidth) * $this->_factor;
-        $encodedData     = (7 * $this->_barThinWidth) * $this->_factor * 6;
+        $startCharacter  = (3 * $this->barThinWidth) * $this->factor;
+        $stopCharacter   = (6 * $this->barThinWidth) * $this->factor;
+        $encodedData     = (7 * $this->barThinWidth) * $this->factor * 6;
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -106,15 +104,15 @@ class Upce extends Ean13
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
-        $height = ($this->_drawText) ? 1.1 : 1;
+        $height = ($this->drawText) ? 1.1 : 1;
 
         // Start character (101)
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
 
         $textTable = str_split($this->getText());
         $system = 0;
@@ -122,22 +120,22 @@ class Upce extends Ean13
             $system = 1;
         }
         $checksum = $textTable[7];
-        $parity = $this->_parities[$system][$checksum];
+        $parity = $this->parities[$system][$checksum];
 
         for ($i = 1; $i < 7; $i++) {
-            $bars = str_split($this->_codingMap[$parity[$i - 1]][$textTable[$i]]);
+            $bars = str_split($this->codingMap[$parity[$i - 1]][$textTable[$i]]);
             foreach ($bars as $b) {
-                $barcodeTable[] = array($b , $this->_barThinWidth , 0 , 1);
+                $barcodeTable[] = array($b , $this->barThinWidth , 0 , 1);
             }
         }
 
         // Stop character (10101)
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , $height);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , $height);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , $height);
         return $barcodeTable;
     }
 
@@ -145,29 +143,29 @@ class Upce extends Ean13
      * Partial function to draw text
      * @return void
      */
-    protected function _drawText()
+    protected function drawText()
     {
-        if ($this->_drawText) {
+        if ($this->drawText) {
             $text = $this->getTextToDisplay();
-            $characterWidth = (7 * $this->_barThinWidth) * $this->_factor;
+            $characterWidth = (7 * $this->barThinWidth) * $this->factor;
             $leftPosition = $this->getQuietZone() - $characterWidth;
-            for ($i = 0; $i < $this->_barcodeLength; $i ++) {
-                $fontSize = $this->_fontSize;
+            for ($i = 0; $i < $this->barcodeLength; $i ++) {
+                $fontSize = $this->fontSize;
                 if ($i == 0 || $i == 7) {
                     $fontSize *= 0.8;
                 }
-                $this->_addText(
+                $this->addText(
                     $text{$i},
-                    $fontSize * $this->_factor,
-                    $this->_rotate(
+                    $fontSize * $this->factor,
+                    $this->rotate(
                         $leftPosition,
-                        (int) $this->_withBorder * 2
-                            + $this->_factor * ($this->_barHeight + $fontSize) + 1
+                        (int) $this->withBorder * 2
+                            + $this->factor * ($this->barHeight + $fontSize) + 1
                     ),
-                    $this->_font,
-                    $this->_foreColor,
+                    $this->font,
+                    $this->foreColor,
                     'left',
-                    - $this->_orientation
+                    - $this->orientation
                 );
                 switch ($i) {
                     case 0:
@@ -179,7 +177,7 @@ class Upce extends Ean13
                     default:
                         $factor = 0;
                 }
-                $leftPosition = $leftPosition + $characterWidth + ($factor * $this->_barThinWidth * $this->_factor);
+                $leftPosition = $leftPosition + $characterWidth + ($factor * $this->barThinWidth * $this->factor);
             }
         }
     }
@@ -190,18 +188,18 @@ class Upce extends Ean13
      * @param string $value
      * @param array  $options
      */
-    protected function _validateText($value, $options = array())
+    protected function validateSpecificText($value, $options = array())
     {
         $validator = new BarcodeValidator(array(
             'adapter'  => 'upce',
             'checksum' => false,
         ));
 
-        $value = $this->_addLeadingZeros($value, true);
+        $value = $this->addLeadingZeros($value, true);
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
-            throw new BarcodeValidationException($message);
+            throw new Exception\BarcodeValidationException($message);
         }
     }
 
@@ -213,7 +211,7 @@ class Upce extends Ean13
      */
     public function getChecksum($text)
     {
-        $text = $this->_addLeadingZeros($text, true);
+        $text = $this->addLeadingZeros($text, true);
         if ($text{0} != 1) {
             $text{0} = 0;
         }

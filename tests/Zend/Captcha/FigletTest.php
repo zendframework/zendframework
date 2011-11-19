@@ -33,8 +33,10 @@ use Zend\View\PhpRenderer as View;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Captcha
  */
-class FigletTest extends \PHPUnit_Framework_TestCase
+class FigletTest extends CommonWordTest
 {
+    protected $wordClass = '\Zend\Captcha\Figlet';
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.

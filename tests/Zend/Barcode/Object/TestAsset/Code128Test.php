@@ -31,8 +31,8 @@ namespace ZendTest\Barcode\Object\TestAsset;
  */
 class Code128Test extends \Zend\Barcode\Object\Code128
 {
-    public function _convertToBarcodeChars($string)
+    public function convertToBarcodeChars($string)
     {
-        return parent::_convertToBarcodeChars($string);
+        return parent::convertToBarcodeChars($string);
     }
 }

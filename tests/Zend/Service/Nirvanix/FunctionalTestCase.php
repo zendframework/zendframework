@@ -19,15 +19,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @see Zend_Service_Nirvanix
- */
+namespace ZendTest\Service\Nirvanix;
+
+use PHPUnit_Framework_TestCase as TestCase,
+    Zend\Http\Client as HttpClient,
+    Zend\Http\Client\Adapter\Test as TestAdapter,
+    Zend\Service\Nirvanix\Nirvanix;
 
 /**
- * @see Zend_Http_Client_Adapter_Test
- */
-
-/**
+ * @see        Zend\Service\Nirvanix\Nirvanix
  * @category   Zend
  * @package    Zend_Service_Nirvanix
  * @subpackage UnitTests
@@ -36,43 +36,50 @@
  * @group      Zend_Service
  * @group      Zend_Service_Nirvanix
  */
-class Zend_Service_Nirvanix_FunctionalTestCase extends PHPUnit_Framework_TestCase
+abstract class FunctionalTestCase extends TestCase
 {
     public function setUp()
     {
-        $this->httpAdapter = new Zend\Http\Client\Adapter\Test();
-        $this->httpClient = new Zend\Http\Client('http://foo',
-                                    array('adapter' => $this->httpAdapter));
+        $this->httpAdapter = new TestAdapter();
+        $this->httpClient  = new HttpClient(
+            'http://foo',
+            array('adapter' => $this->httpAdapter)
+        );
 
-        $this->auth = array('username' => 'foo', 'password' => 'bar', 'appKey' => 'baz');
+        $this->auth    = array('username' => 'foo', 'password' => 'bar', 'appKey' => 'baz');
         $this->options = array('httpClient' => $this->httpClient);
 
         // set first nirvanix response to successful login
         $this->httpAdapter->setResponse(
-            $this->makeNirvanixResponse(array('ResponseCode' => '0',
-                                              'SessionToken' => 'foo'))
+            $this->makeNirvanixResponse(array(
+                'ResponseCode' => '0',
+                'SessionToken' => 'foo',
+            ))
         );
 
-        $this->nirvanix = new Zend_Service_Nirvanix($this->auth, $this->options);
+        $this->nirvanix = new Nirvanix($this->auth, $this->options);
     }
 
     public function makeNirvanixResponse($hash)
     {
         $xml = "<?xml version='1.0'?><Response>";
-        foreach ($hash as $k => $v) { $xml .= "<$k>$v</$k>"; }
+        foreach ($hash as $k => $v) { 
+            $xml .= "<$k>$v</$k>"; 
+        }
         $xml .= "</Response>";
 
         $resp = $this->makeHttpResponseFrom($xml);
         return $resp;
     }
 
-    public function makeHttpResponseFrom($data, $status=200, $message='OK')
+    public function makeHttpResponseFrom($data, $status = 200, $message = 'OK')
     {
-        $headers = array("HTTP/1.1 $status $message",
-                         "Status: $status",
-                         'Content_Type: text/xml; charset=utf-8',
-                         'Content-Length: ' . strlen($data)
-                         );
+        $headers = array(
+            "HTTP/1.1 $status $message",
+            "Status: $status",
+            'Content_Type: text/xml; charset=utf-8',
+            'Content-Length: ' . strlen($data),
+        );
         return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
     }
 }

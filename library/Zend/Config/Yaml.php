@@ -278,6 +278,7 @@ class Yaml extends Config
         $inIndent = false;
         while (list($n, $line) = each($lines)) {
             $lineno = $n + 1;
+            $line = rtrim(preg_replace("/#.*$/", "", $line));
             if (strlen($line) == 0) {
                 continue;
             }
@@ -308,7 +309,7 @@ class Yaml extends Config
                 // key: value
                 if (strlen($m[2])) {
                     // simple key: value
-                    $value = $m[2];
+                    $value = rtrim(preg_replace("/#.*$/", "", $m[2]));
                     // Check for booleans and constants
                     if (preg_match('/^(t(rue)?|on|y(es)?)$/i', $value)) {
                         $value = true;
@@ -330,7 +331,15 @@ class Yaml extends Config
                 // item in the list:
                 // - FOO
                 if (strlen($line) > 2) {
-                    $config[] = substr($line, 2);
+                    $value = substr($line, 2);
+                    if (preg_match('/^(t(rue)?|on|y(es)?)$/i', $value)) {
+                        $value = true;
+                    } elseif (preg_match('/^(f(alse)?|off|n(o)?)$/i', $value)) {
+                        $value = false;
+                    } elseif (!self::$_ignoreConstants) {
+                         $value = self::_replaceConstants($value);
+                    }
+                    $config[] = $value;
                 } else {
                     $config[] = self::_decodeYaml($currentIndent + 1, $lines);
                 }

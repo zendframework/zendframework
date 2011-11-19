@@ -72,7 +72,7 @@ class Figlet extends Word
     /**
      * Display the captcha
      *
-     * @param Zend_View_Interface $view
+     * @param \Zend\View\Renderer $view
      * @param mixed $element
      * @return string
      */

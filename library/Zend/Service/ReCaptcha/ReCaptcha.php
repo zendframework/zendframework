@@ -44,21 +44,21 @@ class ReCaptcha extends AbstractService
      *
      * @var string
      */
-    const API_SERVER = 'http://api.recaptcha.net';
+    const API_SERVER = 'http://www.google.com/recaptcha/api';
 
     /**
      * URI to the secure API
      *
      * @var string
      */
-    const API_SECURE_SERVER = 'https://api-secure.recaptcha.net';
+    const API_SECURE_SERVER = 'https://www.google.com/recaptcha/api';
 
     /**
      * URI to the verify server
      *
      * @var string
      */
-    const VERIFY_SERVER = 'http://api-verify.recaptcha.net/verify';
+    const VERIFY_SERVER = 'http://www.google.com/recaptcha/api/verify';
 
     /**
      * Public key used when displaying the captcha
@@ -366,10 +366,11 @@ class ReCaptcha extends AbstractService
      *
      * This method uses the public key to fetch a recaptcha form.
      *
+     * @param null|string $name Base name for recaptcha form elements
      * @return string
      * @throws \Zend\Service\ReCaptcha\Exception
      */
-    public function getHtml()
+    public function getHtml($name = null)
     {
         if ($this->_publicKey === null) {
             throw new Exception('Missing public key');
@@ -405,6 +406,12 @@ class ReCaptcha extends AbstractService
 </script>
 SCRIPT;
         }
+        $challengeField = 'recaptcha_challenge_field';
+        $responseField  = 'recaptcha_response_field';
+        if (!empty($name)) {
+            $challengeField = $name . '[' . $challengeField . ']';
+            $responseField  = $name . '[' . $responseField . ']';
+        }
 
         $return = $reCaptchaOptions;
         $return .= <<<HTML
@@ -416,9 +423,9 @@ HTML;
 <noscript>
    <iframe src="{$host}/noscript?k={$this->_publicKey}{$errorPart}"
        height="300" width="500" frameborder="0"></iframe>{$htmlBreak}
-   <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+   <textarea name="{$challengeField}" rows="3" cols="40">
    </textarea>
-   <input type="hidden" name="recaptcha_response_field"
+   <input type="hidden" name="{$responseField}"
        value="manual_challenge"{$htmlInputClosing}
 </noscript>
 HTML;

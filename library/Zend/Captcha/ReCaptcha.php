@@ -24,7 +24,10 @@
  */
 namespace Zend\Captcha;
 
-use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
+use Traversable,
+    Zend\Form\Element,
+    Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService,
+    Zend\View\Renderer;
 
 /**
  * ReCaptcha adapter
@@ -33,8 +36,6 @@ use Zend\Service\ReCaptcha\ReCaptcha as ReCaptchaService;
  *
  * @see http://recaptcha.net/apidocs/captcha/
  *
- * @uses       Zend\Captcha\AbstractAdapter
- * @uses       Zend\Service\ReCaptcha\ReCaptcha
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -114,7 +115,7 @@ class ReCaptcha extends AbstractAdapter
      * Set ReCaptcha Private key
      *
      * @param string $privkey
-     * @return \Zend\Captcha\ReCaptcha
+     * @return ReCaptcha
      */
     public function setPrivkey($privkey)
     {
@@ -126,7 +127,7 @@ class ReCaptcha extends AbstractAdapter
      * Set ReCaptcha public key
      *
      * @param string $pubkey
-     * @return \Zend\Captcha\ReCaptcha
+     * @return ReCaptcha
      */
     public function setPubkey($pubkey)
     {
@@ -137,7 +138,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options
+     * @param  array|Config $options
      * @return void
      */
     public function __construct($options = null)
@@ -148,9 +149,6 @@ class ReCaptcha extends AbstractAdapter
 
         parent::__construct($options);
 
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
-        }
         if (!empty($options)) {
             $this->setOptions($options);
         }
@@ -159,8 +157,8 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Set service object
      *
-     * @param  Zend\Service\ReCaptcha\ReCaptcha $service
-     * @return Zend\Captcha\ReCaptcha
+     * @param  ReCaptchaService $service
+     * @return ReCaptcha
      */
     public function setService(ReCaptchaService $service)
     {
@@ -171,7 +169,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Retrieve ReCaptcha service object
      *
-     * @return Zend\Service\ReCaptcha\ReCaptcha
+     * @return ReCaptchaService
      */
     public function getService()
     {
@@ -186,7 +184,7 @@ class ReCaptcha extends AbstractAdapter
      *
      * @param  string $key
      * @param  mixed $value
-     * @return \Zend\Captcha\ReCaptcha
+     * @return ReCaptcha
      */
     public function setOption($key, $value)
     {
@@ -205,7 +203,7 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Generate captcha
      *
-     * @see Zend_Form_Captcha_Adapter::generate()
+     * @see AbstractAdapter::generate()
      * @return string
      */
     public function generate()
@@ -216,14 +214,14 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Validate captcha
      *
-     * @see    Zend\Validator::isValid()
+     * @see    \Zend\Validator\Validator::isValid()
      * @param  mixed $value
      * @return boolean
      */
     public function isValid($value, $context = null)
     {
         if (!is_array($value) && !is_array($context)) {
-            $this->_error(self::MISSING_VALUE);
+            $this->error(self::MISSING_VALUE);
             return false;
         }
 
@@ -232,7 +230,7 @@ class ReCaptcha extends AbstractAdapter
         }
 
         if (empty($value[$this->_CHALLENGE]) || empty($value[$this->_RESPONSE])) {
-            $this->_error(self::MISSING_VALUE);
+            $this->error(self::MISSING_VALUE);
             return false;
         }
 
@@ -241,12 +239,12 @@ class ReCaptcha extends AbstractAdapter
         $res = $service->verify($value[$this->_CHALLENGE], $value[$this->_RESPONSE]);
 
         if (!$res) {
-            $this->_error(self::ERR_CAPTCHA);
+            $this->error(self::ERR_CAPTCHA);
             return false;
         }
 
         if (!$res->isValid()) {
-            $this->_error(self::BAD_CAPTCHA, $res->getErrorCode());
+            $this->error(self::BAD_CAPTCHA, $res->getErrorCode());
             $service->setParam('error', $res->getErrorCode());
             return false;
         }
@@ -257,12 +255,27 @@ class ReCaptcha extends AbstractAdapter
     /**
      * Render captcha
      *
-     * @param  Zend_View_Interface $view
+     * @param  Renderer $view
      * @param  mixed $element
      * @return string
      */
-    public function render(\Zend\View\Renderer $view = null, $element = null)
+    public function render(Renderer $view = null, $element = null)
     {
-        return $this->getService()->getHTML();
+        $name = null;
+        if ($element instanceof Element) {
+            $name = $element->getBelongsTo();
+        }
+
+        return $this->getService()->getHTML($name);
+    }
+
+    /**
+     * Get captcha decorator
+     *
+     * @return string
+     */
+    public function getDecorator()
+    {
+        return "Captcha\ReCaptcha";
     }
 }

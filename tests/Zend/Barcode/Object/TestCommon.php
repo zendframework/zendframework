@@ -39,9 +39,9 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     /**
      * @var \Zend\Barcode\BarcodeObject
      */
-    protected $_object = null;
+    protected $object = null;
 
-    abstract protected function _getBarcodeObject($options = null);
+    abstract protected function getBarcodeObject($options = null);
 
     protected function loadInstructionsFile($fileName)
     {
@@ -50,19 +50,19 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_object = $this->_getBarcodeObject();
+        $this->object = $this->getBarcodeObject();
     }
 
     public function tearDown()
     {
-        $this->_object = null;
+        $this->object = null;
     }
 
     public function testStaticFontAsString()
     {
         Barcode\Barcode::setBarcodeFont('my_static_font.ttf');
-        $this->assertEquals('', $this->_object->getFont());
-        $object = $this->_getBarcodeObject();
+        $this->assertEquals('', $this->object->getFont());
+        $object = $this->getBarcodeObject();
         $this->assertEquals('my_static_font.ttf', $object->getFont());
         Barcode\Barcode::setBarcodeFont(null);
     }
@@ -71,8 +71,8 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
     {
         for ($i = 1; $i < 5; $i++) {
             Barcode\Barcode::setBarcodeFont($i);
-            $this->assertEquals('', $this->_object->getFont());
-            $object = $this->_getBarcodeObject();
+            $this->assertEquals('', $this->object->getFont());
+            $object = $this->getBarcodeObject();
             $this->assertEquals($i, $object->getFont());
             Barcode\Barcode::setBarcodeFont('');
         }
@@ -80,7 +80,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithArray()
     {
-        $object = $this->_getBarcodeObject(
+        $object = $this->getBarcodeObject(
                 array('barHeight' => 150 ,
                         'unkownProperty' => 'aValue'));
         $this->assertEquals(150, $object->getBarHeight());
@@ -91,208 +91,199 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $config = new Config\Config(
                 array('barHeight' => 150 ,
                         'unkownProperty' => 'aValue'));
-        $object = $this->_getBarcodeObject($config);
+        $object = $this->getBarcodeObject($config);
         $this->assertEquals(150, $object->getBarHeight());
     }
 
     public function testSetOptions()
     {
-        $this->_object->setOptions(
+        $this->object->setOptions(
                 array('barHeight' => 150 ,
                         'unkownProperty' => 'aValue'));
-        $this->assertEquals(150, $this->_object->getBarHeight());
-    }
-
-    public function testSetConfig()
-    {
-        $config = new Config\Config(
-                array('barHeight' => 150 ,
-                        'unkownProperty' => 'aValue'));
-        $this->_object->setConfig($config);
-        $this->assertEquals(150, $this->_object->getBarHeight());
+        $this->assertEquals(150, $this->object->getBarHeight());
     }
 
     public function testBarcodeNamespace()
     {
-        $this->_object->setBarcodeNamespace('My_Namespace');
-        $this->assertEquals('My_Namespace', $this->_object->getBarcodeNamespace());
+        $this->object->setBarcodeNamespace('My_Namespace');
+        $this->assertEquals('My_Namespace', $this->object->getBarcodeNamespace());
     }
 
     public function testBarHeight()
     {
-        $this->_object->setBarHeight(1);
-        $this->assertSame(1, $this->_object->getBarHeight());
-        $this->_object->setBarHeight(true);
-        $this->assertSame(1, $this->_object->getBarHeight());
-        $this->_object->setBarHeight('200a');
-        $this->assertSame(200, $this->_object->getBarHeight());
+        $this->object->setBarHeight(1);
+        $this->assertSame(1, $this->object->getBarHeight());
+        $this->object->setBarHeight(true);
+        $this->assertSame(1, $this->object->getBarHeight());
+        $this->object->setBarHeight('200a');
+        $this->assertSame(200, $this->object->getBarHeight());
     }
 
     public function testNegativeBarHeight()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setBarHeight(- 1);
+        $this->object->setBarHeight(- 1);
     }
 
     public function testBarThinWidth()
     {
-        $this->_object->setBarThinWidth(1);
-        $this->assertSame(1, $this->_object->getBarThinWidth());
-        $this->_object->setBarThinWidth(true);
-        $this->assertSame(1, $this->_object->getBarThinWidth());
-        $this->_object->setBarThinWidth('200a');
-        $this->assertSame(200, $this->_object->getBarThinWidth());
+        $this->object->setBarThinWidth(1);
+        $this->assertSame(1, $this->object->getBarThinWidth());
+        $this->object->setBarThinWidth(true);
+        $this->assertSame(1, $this->object->getBarThinWidth());
+        $this->object->setBarThinWidth('200a');
+        $this->assertSame(200, $this->object->getBarThinWidth());
     }
 
     public function testNegativeBarThinWidth()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setBarThinWidth(- 1);
+        $this->object->setBarThinWidth(- 1);
     }
 
     public function testBarThickWidth()
     {
-        $this->_object->setBarThickWidth(1);
-        $this->assertSame(1, $this->_object->getBarThickWidth());
-        $this->_object->setBarThickWidth(true);
-        $this->assertSame(1, $this->_object->getBarThickWidth());
-        $this->_object->setBarThickWidth('200a');
-        $this->assertSame(200, $this->_object->getBarThickWidth());
+        $this->object->setBarThickWidth(1);
+        $this->assertSame(1, $this->object->getBarThickWidth());
+        $this->object->setBarThickWidth(true);
+        $this->assertSame(1, $this->object->getBarThickWidth());
+        $this->object->setBarThickWidth('200a');
+        $this->assertSame(200, $this->object->getBarThickWidth());
     }
 
     public function testNegativeBarThickWidth()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setBarThickWidth(- 1);
+        $this->object->setBarThickWidth(- 1);
     }
 
     public function testFactor()
     {
-        $this->_object->setFactor(1);
-        $this->assertSame(1.0, $this->_object->getFactor());
-        $this->_object->setFactor(1.25);
-        $this->assertSame(1.25, $this->_object->getFactor());
-        $this->_object->setFactor(true);
-        $this->assertSame(1.0, $this->_object->getFactor());
-        $this->_object->setFactor('200a');
-        $this->assertSame(200.0, $this->_object->getFactor());
+        $this->object->setFactor(1);
+        $this->assertSame(1.0, $this->object->getFactor());
+        $this->object->setFactor(1.25);
+        $this->assertSame(1.25, $this->object->getFactor());
+        $this->object->setFactor(true);
+        $this->assertSame(1.0, $this->object->getFactor());
+        $this->object->setFactor('200a');
+        $this->assertSame(200.0, $this->object->getFactor());
     }
 
     public function testNegativeFactor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setFactor(- 1);
+        $this->object->setFactor(- 1);
     }
 
     public function testForeColor()
     {
-        $this->_object->setForeColor('#333333');
-        $this->assertSame(3355443, $this->_object->getForeColor());
-        $this->_object->setForeColor(1000);
-        $this->assertSame(1000, $this->_object->getForeColor());
+        $this->object->setForeColor('#333333');
+        $this->assertSame(3355443, $this->object->getForeColor());
+        $this->object->setForeColor(1000);
+        $this->assertSame(1000, $this->object->getForeColor());
     }
 
     public function testNegativeForeColor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setForeColor(- 1);
+        $this->object->setForeColor(- 1);
     }
 
     public function testTooHighForeColor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setForeColor(16777126);
+        $this->object->setForeColor(16777126);
     }
 
     public function testBackgroundColor()
     {
-        $this->_object->setBackgroundColor('#333333');
-        $this->assertSame(3355443, $this->_object->getBackgroundColor());
-        $this->_object->setBackgroundColor(1000);
-        $this->assertSame(1000, $this->_object->getBackgroundColor());
+        $this->object->setBackgroundColor('#333333');
+        $this->assertSame(3355443, $this->object->getBackgroundColor());
+        $this->object->setBackgroundColor(1000);
+        $this->assertSame(1000, $this->object->getBackgroundColor());
     }
 
     public function testNegativeBackgroundColor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setBackgroundColor(- 1);
+        $this->object->setBackgroundColor(- 1);
     }
 
     public function testTooHighBackgroundColor()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setBackgroundColor(16777126);
+        $this->object->setBackgroundColor(16777126);
     }
 
     public function testWithBorder()
     {
-        $this->_object->setWithBorder(1);
-        $this->assertSame(true, $this->_object->getWithBorder());
-        $this->_object->setWithBorder(true);
-        $this->assertSame(true, $this->_object->getWithBorder());
+        $this->object->setWithBorder(1);
+        $this->assertSame(true, $this->object->getWithBorder());
+        $this->object->setWithBorder(true);
+        $this->assertSame(true, $this->object->getWithBorder());
     }
 
     public function testReverseColor()
     {
-        $this->_object->setForeColor(11);
-        $this->_object->setBackgroundColor(111);
-        $this->_object->setReverseColor();
-        $this->assertSame(111, $this->_object->getForeColor());
-        $this->assertSame(11, $this->_object->getBackgroundColor());
+        $this->object->setForeColor(11);
+        $this->object->setBackgroundColor(111);
+        $this->object->setReverseColor();
+        $this->assertSame(111, $this->object->getForeColor());
+        $this->assertSame(11, $this->object->getBackgroundColor());
     }
 
     public function testOrientation()
     {
-        $this->_object->setOrientation(1);
-        $this->assertSame(1.0, $this->_object->getOrientation());
-        $this->_object->setOrientation(1.25);
-        $this->assertSame(1.25, $this->_object->getOrientation());
-        $this->_object->setOrientation(true);
-        $this->assertSame(1.0, $this->_object->getOrientation());
-        $this->_object->setOrientation('200a');
-        $this->assertSame(200.0, $this->_object->getOrientation());
-        $this->_object->setOrientation(360);
-        $this->assertSame(0.0, $this->_object->getOrientation());
+        $this->object->setOrientation(1);
+        $this->assertSame(1.0, $this->object->getOrientation());
+        $this->object->setOrientation(1.25);
+        $this->assertSame(1.25, $this->object->getOrientation());
+        $this->object->setOrientation(true);
+        $this->assertSame(1.0, $this->object->getOrientation());
+        $this->object->setOrientation('200a');
+        $this->assertSame(200.0, $this->object->getOrientation());
+        $this->object->setOrientation(360);
+        $this->assertSame(0.0, $this->object->getOrientation());
     }
 
     public function testDrawText()
     {
-        $this->_object->setDrawText(1);
-        $this->assertSame(true, $this->_object->getDrawText());
-        $this->_object->setDrawText(true);
-        $this->assertSame(true, $this->_object->getDrawText());
+        $this->object->setDrawText(1);
+        $this->assertSame(true, $this->object->getDrawText());
+        $this->object->setDrawText(true);
+        $this->assertSame(true, $this->object->getDrawText());
     }
 
     public function testStretchText()
     {
-        $this->_object->setStretchText(1);
-        $this->assertSame(true, $this->_object->getStretchText());
-        $this->_object->setStretchText(true);
-        $this->assertSame(true, $this->_object->getStretchText());
+        $this->object->setStretchText(1);
+        $this->assertSame(true, $this->object->getStretchText());
+        $this->object->setStretchText(true);
+        $this->assertSame(true, $this->object->getStretchText());
     }
 
     public function testWithChecksum()
     {
-        $this->_object->setWithChecksum(1);
-        $this->assertSame(true, $this->_object->getWithChecksum());
-        $this->_object->setWithChecksum(true);
-        $this->assertSame(true, $this->_object->getWithChecksum());
+        $this->object->setWithChecksum(1);
+        $this->assertSame(true, $this->object->getWithChecksum());
+        $this->object->setWithChecksum(true);
+        $this->assertSame(true, $this->object->getWithChecksum());
     }
 
     public function testWithChecksumInText()
     {
-        $this->_object->setWithChecksumInText(1);
-        $this->assertSame(true, $this->_object->getWithChecksumInText());
-        $this->_object->setWithChecksumInText(true);
-        $this->assertSame(true, $this->_object->getWithChecksumInText());
+        $this->object->setWithChecksumInText(1);
+        $this->assertSame(true, $this->object->getWithChecksumInText());
+        $this->object->setWithChecksumInText(true);
+        $this->assertSame(true, $this->object->getWithChecksumInText());
     }
 
     public function testWithoutQuietZones()
     {
-        $this->_object->setWithQuietZones(0);
-        $this->assertSame(false, $this->_object->getWithQuietZones());
-        $this->_object->setWithQuietZones(false);
-        $this->assertSame(false, $this->_object->getWithQuietZones());
+        $this->object->setWithQuietZones(0);
+        $this->assertSame(false, $this->object->getWithQuietZones());
+        $this->object->setWithQuietZones(false);
+        $this->assertSame(false, $this->object->getWithQuietZones());
     }
 
     public function testSetFontAsNumberForGdImage()
@@ -303,35 +294,35 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         }
         $gdFontSize = array(8 , 13 , 13 , 16 , 15);
         for ($i = 1; $i <= 5; $i ++) {
-            $this->_object->setFont($i);
-            $this->assertSame($i, $this->_object->getFont());
+            $this->object->setFont($i);
+            $this->assertSame($i, $this->object->getFont());
             $this->assertSame($gdFontSize[$i - 1],
-                    $this->_object->getFontSize());
+                    $this->object->getFontSize());
         }
     }
 
     public function testSetLowFontAsNumberForGdImage()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setFont(0);
+        $this->object->setFont(0);
     }
 
     public function testSetHighFontAsNumberForGdImage()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setFont(6);
+        $this->object->setFont(6);
     }
 
     public function testSetFontAsString()
     {
-        $this->_object->setFont('my_font.ttf');
-        $this->assertSame('my_font.ttf', $this->_object->getFont());
+        $this->object->setFont('my_font.ttf');
+        $this->assertSame('my_font.ttf', $this->object->getFont());
     }
 
     public function testSetFontAsBoolean()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setFont(true);
+        $this->object->setFont(true);
     }
 
     public function testFontAsNumberWithoutGd()
@@ -341,13 +332,13 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                     'GD extension must not be loaded to run this test');
         }
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setFont(1);
+        $this->object->setFont(1);
     }
 
     public function testFontSize()
     {
-        $this->_object->setFontSize(22);
-        $this->assertSame(22, $this->_object->getFontSize());
+        $this->object->setFontSize(22);
+        $this->assertSame(22, $this->object->getFontSize());
     }
 
     public function testFontSizeWithoutEffectWithGdInternalFont()
@@ -356,22 +347,22 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped(
                     'GD extension is required to run this test');
         }
-        $this->_object->setFont(1);
-        $this->_object->setFontSize(22);
-        $this->assertSame(8, $this->_object->getFontSize());
+        $this->object->setFont(1);
+        $this->object->setFontSize(22);
+        $this->assertSame(8, $this->object->getFontSize());
     }
 
     public function testStringFontSize()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setFontSize('22a');
+        $this->object->setFontSize('22a');
     }
 
     public function testStandardQuietZone()
     {
-        $this->_object->setBarThinWidth(3);
-        $this->_object->setFactor(4);
-        $this->assertSame(120.0, $this->_object->getQuietZone());
+        $this->object->setBarThinWidth(3);
+        $this->object->setFactor(4);
+        $this->assertSame(120.0, $this->object->getQuietZone());
     }
 
     public function testAddInstruction()
@@ -383,7 +374,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'color' => '#123456' ,
                 'alignment' => 'center' ,
                 'orientation' => 45);
-        $object->addInstruction($instructions);
+        $object->addTestInstruction($instructions);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
@@ -395,7 +386,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $filled = false;
         $instructions = array('type' => 'polygon' , 'points' => $points ,
                 'color' => $color , 'filled' => $filled);
-        $object->addPolygon($points, $color, $filled);
+        $object->addTestPolygon($points, $color, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
@@ -408,7 +399,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
         $filled = false;
         $instructions = array('type' => 'polygon' , 'points' => $points ,
                 'color' => $color , 'filled' => $filled);
-        $object->addPolygon($points, null, $filled);
+        $object->addTestPolygon($points, null, $filled);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
@@ -427,7 +418,7 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'font' => $font , 'color' => $color ,
                 'alignment' => $alignment ,
                 'orientation' => $orientation);
-        $object->addText($text, $size, $position, $font, $color, $alignment,
+        $object->addTestText($text, $size, $position, $font, $color, $alignment,
                 $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
@@ -448,21 +439,21 @@ abstract class TestCommon extends \PHPUnit_Framework_TestCase
                 'font' => $font , 'color' => $color ,
                 'alignment' => $alignment ,
                 'orientation' => $orientation);
-        $object->addText($text, $size, $position, $font, null, $alignment, $orientation);
+        $object->addTestText($text, $size, $position, $font, null, $alignment, $orientation);
         $this->assertSame(array($instructions), $object->getInstructions());
     }
 
     public function testCheckParamsFontWithOrientation()
     {
         $this->setExpectedException('\Zend\Barcode\Object\Exception');
-        $this->_object->setText('0');
-        $this->_object->setFont(1);
-        $this->_object->setOrientation(45);
-        $this->_object->checkParams();
+        $this->object->setText('0');
+        $this->object->setFont(1);
+        $this->object->setOrientation(45);
+        $this->object->checkParams();
     }
 
     public function testGetDefaultHeight()
     {
-        $this->assertEquals(62, $this->_object->getHeight());
+        $this->assertEquals(62, $this->object->getHeight());
     }
 }

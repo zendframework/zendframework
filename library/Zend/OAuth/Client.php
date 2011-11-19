@@ -23,6 +23,8 @@
  */
 namespace Zend\OAuth;
 
+use Zend\Http\Request;
+
 /**
  * @uses       Zend\Http\Client
  * @uses       Zend\OAuth\OAuth
@@ -143,8 +145,8 @@ class Client extends \Zend\Http\Client
     protected function _prepareBody()
     {
         if($this->_streamingRequest) {
-            $this->setHeaders(self::CONTENT_LENGTH,
-                $this->raw_post_data->getTotalSize());
+            $this->setHeaders(array('Content-Length' => 
+                $this->raw_post_data->getTotalSize()));
             return $this->raw_post_data;
         }
         else {
@@ -188,18 +190,18 @@ class Client extends \Zend\Http\Client
      * @param  string $method
      * @return Zend\Http\Client
      */
-    public function setMethod($method = self::GET)
+    public function setMethod($method = Request::METHOD_GET)
     {
-        if ($method == self::GET) {
-            $this->setRequestMethod(self::GET);
-        } elseif($method == self::POST) {
-            $this->setRequestMethod(self::POST);
-        } elseif($method == self::PUT) {
-            $this->setRequestMethod(self::PUT);
-        }  elseif($method == self::DELETE) {
-            $this->setRequestMethod(self::DELETE);
-        }   elseif($method == self::HEAD) {
-            $this->setRequestMethod(self::HEAD);
+        if ($method == Request::METHOD_GET) {
+            $this->setRequestMethod(Request::METHOD_GET);
+        } elseif($method == Request::METHOD_POST) {
+            $this->setRequestMethod(Request::METHOD_POST);
+        } elseif($method == Request::METHOD_PUT) {
+            $this->setRequestMethod(Request::METHOD_PUT);
+        }  elseif($method == Request::METHOD_DELETE) {
+            $this->setRequestMethod(Request::METHOD_DELETE);
+        }   elseif($method == Request::METHOD_HEAD) {
+            $this->setRequestMethod(Request::METHOD_HEAD);
         }
         return parent::setMethod($method);
     }
@@ -244,7 +246,7 @@ class Client extends \Zend\Http\Client
             );
             $this->setHeaders('Authorization', $oauthHeaderValue);
         } elseif ($requestScheme == OAuth::REQUEST_SCHEME_POSTBODY) {
-            if ($requestMethod == self::GET) {
+            if ($requestMethod == Request::METHOD_GET) {
                 throw new Exception(
                     'The client is configured to'
                     . ' pass OAuth parameters through a POST body but request method'

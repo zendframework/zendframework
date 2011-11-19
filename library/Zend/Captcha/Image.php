@@ -23,17 +23,16 @@
  * @namespace
  */
 namespace Zend\Captcha;
-use Zend\Captcha\Exception\NoFontProvidedException,
- Zend\Captcha\Exception\ExtensionNotLoadedException,
-    Zend\Captcha\Exception\ImageNotLoadableException;
+
+use Zend\Captcha\Exception,
+    Zend\Loader\Pluggable,
+    Zend\View\Renderer;
 
 /**
  * Image-based captcha element
  *
  * Generates image displaying random word
  *
- * @uses       \Zend\Captcha\Exception
- * @uses       \Zend\Captcha\Word
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -145,15 +144,15 @@ class Image extends Word
     public function __construct($options = null)
     {
         if (!extension_loaded("gd")) {
-            throw new ExtensionNotLoadedException("Image CAPTCHA requires GD extension");
+            throw new Exception\ExtensionNotLoadedException("Image CAPTCHA requires GD extension");
         }
 
         if (!function_exists("imagepng")) {
-            throw new ExtensionNotLoadedException("Image CAPTCHA requires PNG support");
+            throw new Exception\ExtensionNotLoadedException("Image CAPTCHA requires PNG support");
         }
 
         if (!function_exists("imageftbbox")) {
-            throw new ExtensionNotLoadedException("Image CAPTCHA requires FT fonts support");
+            throw new Exception\ExtensionNotLoadedException("Image CAPTCHA requires FT fonts support");
         }
 
         parent::__construct($options);
@@ -312,7 +311,7 @@ class Image extends Word
      * Set captcha expiration
      *
      * @param int $expiration
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setExpiration($expiration)
     {
@@ -324,7 +323,7 @@ class Image extends Word
      * Set garbage collection frequency
      *
      * @param int $gcFreq
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setGcFreq($gcFreq)
     {
@@ -336,7 +335,7 @@ class Image extends Word
      * Set captcha font
      *
      * @param  string $font
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setFont($font)
     {
@@ -348,7 +347,7 @@ class Image extends Word
      * Set captcha font size
      *
      * @param  int $fsize
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setFontSize($fsize)
     {
@@ -360,7 +359,7 @@ class Image extends Word
      * Set captcha image height
      *
      * @param  int $height
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setHeight($height)
     {
@@ -372,7 +371,7 @@ class Image extends Word
      * Set captcha image storage directory
      *
      * @param  string $imgDir
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setImgDir($imgDir)
     {
@@ -384,7 +383,7 @@ class Image extends Word
      * Set captcha image base URL
      *
      * @param  string $imgUrl
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setImgUrl($imgUrl)
     {
@@ -404,7 +403,7 @@ class Image extends Word
      * Set captch image filename suffix
      *
      * @param  string $suffix
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setSuffix($suffix)
     {
@@ -416,7 +415,7 @@ class Image extends Word
      * Set captcha image width
      *
      * @param  int $width
-     * @return \Zend\Captcha\Image
+     * @return Image
      */
     public function setWidth($width)
     {
@@ -491,7 +490,7 @@ class Image extends Word
         $font = $this->getFont();
 
         if (empty($font)) {
-            throw new NoFontProvidedException("Image CAPTCHA requires font");
+            throw new Exception\NoFontProvidedException("Image CAPTCHA requires font");
         }
 
         $w     = $this->getWidth();
@@ -505,7 +504,7 @@ class Image extends Word
             // Potential error is change to exception
             $img = @imagecreatefrompng($this->_startImage);
             if(!$img) {
-                throw new ImageNotLoadableException("Can not load start image");
+                throw new Exception\ImageNotLoadableException("Can not load start image");
             }
             $w = imagesx($img);
             $h = imagesy($img);
@@ -620,13 +619,24 @@ class Image extends Word
     /**
      * Display the captcha
      *
-     * @param Zend_View_Interface $view
+     * @param Renderer $view
      * @param mixed $element
      * @return string
      */
-    public function render(\Zend\View\Renderer $view = null, $element = null)
+    public function render(Renderer $view = null, $element = null)
     {
-        return '<img width="' . $this->getWidth() . '" height="' . $this->getHeight() . '" alt="' . $this->getImgAlt()
-             . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '" />';
+        $endTag = ' />';
+        if ($view instanceof Pluggable) {
+            $doctype = $view->plugin('doctype');
+            if ($doctype && !$doctype->isXhtml()) {
+                $endTag = '>';
+            }
+        }
+
+        return '<img width="' . $this->getWidth() 
+            . '" height="' . $this->getHeight() 
+            . '" alt="' . $this->getImgAlt()
+            . '" src="' . $this->getImgUrl() . $this->getId() . $this->getSuffix() . '"' 
+            . $endTag;
     }
 }

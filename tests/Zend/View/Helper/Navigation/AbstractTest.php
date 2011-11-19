@@ -24,10 +24,13 @@
  */
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Navigation,
-    Zend\Controller,
-    Zend\Acl\Role,
-    Zend\Acl\Resource;
+use Zend\Navigation\Navigation,
+    Zend\Acl\Acl,
+    Zend\Acl\Role\GenericRole,
+    Zend\Acl\Resource\GenericResource,
+    Zend\Config\Xml as XmlConfig,
+    Zend\Translator\Translator,
+    Zend\View\PhpRenderer;
 
 /**
  * Base class for navigation view helper tests
@@ -61,7 +64,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * View helper
      *
-     * @var Zend_View_Helper_Navigation_HelperAbstract
+     * @var Zend\View\Helper\Navigation\AbstractHelper
      */
     protected $_helper;
 
@@ -75,7 +78,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * The second container in the config file (_files/navigation.xml)
      *
-     * @var Zend_Navigation
+     * @var Navigation\Navigation
      */
     protected $_nav2;
 
@@ -91,20 +94,15 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // read navigation config
         $this->_files = $cwd . '/_files';
-        $config = new \Zend\Config\Xml($this->_files . '/navigation.xml');
+        $config = new XmlConfig($this->_files . '/navigation.xml');
 
         // setup containers from config
-        $this->_nav1 = new Navigation\Navigation($config->get('nav_test1'));
-        $this->_nav2 = new Navigation\Navigation($config->get('nav_test2'));
+        $this->_nav1 = new Navigation($config->get('nav_test1'));
+        $this->_nav2 = new Navigation($config->get('nav_test2'));
 
         // setup view
-        $view = new \Zend\View\PhpRenderer();
+        $view = new PhpRenderer();
         $view->resolver()->addPath($cwd . '/_files/mvc/views');
-
-        // setup front
-        $front = Controller\Front::getInstance();
-        $this->_oldControllerDir = $front->getControllerDirectory('test');
-        $front->setControllerDirectory($cwd . '/_files/mvc/controllers');
 
         // create helper
         $this->_helper = new $this->_helperName;
@@ -112,21 +110,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // set nav1 in helper as default
         $this->_helper->setContainer($this->_nav1);
-    }
-
-    /**
-     * Cleans up the environment after running a test
-     *
-     */
-    protected function tearDown()
-    {
-        $front = Controller\Front::getInstance();
-
-        if ($this->_oldControllerDir) {
-            $front->setControllerDirectory($this->_oldControllerDir, 'test');
-        } else {
-            $front->removeControllerDirectory('test');
-        }
     }
 
     /**
@@ -142,21 +125,21 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up ACL
      *
-     * @return Zend_Acl
+     * @return Acl
      */
     protected function _getAcl()
     {
-        $acl = new \Zend\Acl\Acl();
+        $acl = new Acl();
 
-        $acl->addRole(new Role\GenericRole('guest'));
-        $acl->addRole(new Role\GenericRole('member'), 'guest');
-        $acl->addRole(new Role\GenericRole('admin'), 'member');
-        $acl->addRole(new Role\GenericRole('special'), 'member');
+        $acl->addRole(new GenericRole('guest'));
+        $acl->addRole(new GenericRole('member'), 'guest');
+        $acl->addRole(new GenericRole('admin'), 'member');
+        $acl->addRole(new GenericRole('special'), 'member');
 
-        $acl->addResource(new Resource\GenericResource('guest_foo'));
-        $acl->addResource(new Resource\GenericResource('member_foo'), 'guest_foo');
-        $acl->addResource(new Resource\GenericResource('admin_foo', 'member_foo'));
-        $acl->addResource(new Resource\GenericResource('special_foo'), 'member_foo');
+        $acl->addResource(new GenericResource('guest_foo'));
+        $acl->addResource(new GenericResource('member_foo'), 'guest_foo');
+        $acl->addResource(new GenericResource('admin_foo', 'member_foo'));
+        $acl->addResource(new GenericResource('special_foo'), 'member_foo');
 
         $acl->allow('guest', 'guest_foo');
         $acl->allow('member', 'member_foo');
@@ -170,7 +153,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * Returns translator
      *
-     * @return Zend_Translator
+     * @return Translator
      */
     protected function _getTranslator()
     {
@@ -184,6 +167,6 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
             'Go home'      => 'Gå hjem'
         );
 
-        return new \Zend\Translator\Translator('ArrayAdapter', $data, 'nb_NO');
+        return new Translator('ArrayAdapter', $data, 'nb_NO');
     }
 }

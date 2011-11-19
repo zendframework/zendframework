@@ -71,8 +71,8 @@ class Container extends ArrayObject
      */
     public function __construct($name = 'Default', $manager = null)
     {
-        if (!preg_match('/^[a-z][a-z0-9_]+$/i', $name)) {
-            throw new Exception\InvalidArgumentException('Name passed to container is invalid; must consist of alphanumerics and underscores only');
+        if (!preg_match('/^[a-z][a-z0-9_\\\]+$/i', $name)) {
+            throw new Exception\InvalidArgumentException('Name passed to container is invalid; must consist of alphanumerics, backslashes and underscores only');
         }
         $this->_name = $name;
         $this->_setManager($manager);

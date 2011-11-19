@@ -27,7 +27,6 @@ namespace Zend\Barcode\Object;
 /**
  * Class for generate Interleaved 2 of 5 barcode
  *
- * @uses       \Zend\Barcode\Object\AbstractObject
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +40,7 @@ class Code25 extends AbstractObject
      * - 1 = wide bar
      * @var array
      */
-    protected $_codingMap = array(
+    protected $codingMap = array(
         '0' => '00110',
         '1' => '10001',
         '2' => '01001',
@@ -58,14 +57,14 @@ class Code25 extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
-        $startCharacter  = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
-        $characterLength = (3 * $this->_barThinWidth + 2 * $this->_barThickWidth + 5 * $this->_barThinWidth)
-                         * $this->_factor;
+        $startCharacter  = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
+        $characterLength = (3 * $this->barThinWidth + 2 * $this->barThickWidth + 5 * $this->barThinWidth)
+                         * $this->factor;
         $encodedData     = strlen($this->getText()) * $characterLength;
-        $stopCharacter   = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
+        $stopCharacter   = (2 * $this->barThickWidth + 4 * $this->barThinWidth) * $this->factor;
         return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
@@ -73,44 +72,44 @@ class Code25 extends AbstractObject
      * Partial check of interleaved 2 of 5 barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
-        $this->_checkRatio();
+        $this->checkRatio();
     }
 
     /**
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $barcodeTable = array();
 
         // Start character (30301)
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth);
 
         $text = str_split($this->getText());
         foreach ($text as $char) {
-            $barcodeChar = str_split($this->_codingMap[$char]);
+            $barcodeChar = str_split($this->codingMap[$char]);
             foreach ($barcodeChar as $c) {
                 /* visible, width, top, length */
-                $width = $c ? $this->_barThickWidth : $this->_barThinWidth;
+                $width = $c ? $this->barThickWidth : $this->barThinWidth;
                 $barcodeTable[] = array(1 , $width , 0 , 1);
-                $barcodeTable[] = array(0 , $this->_barThinWidth);
+                $barcodeTable[] = array(0 , $this->barThinWidth);
             }
         }
 
         // Stop character (30103)
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(0 , $this->_barThinWidth , 0 , 1);
-        $barcodeTable[] = array(1 , $this->_barThickWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(0 , $this->barThinWidth , 0 , 1);
+        $barcodeTable[] = array(1 , $this->barThickWidth , 0 , 1);
         return $barcodeTable;
     }
 
@@ -122,7 +121,7 @@ class Code25 extends AbstractObject
      */
     public function getChecksum($text)
     {
-        $this->_checkText($text);
+        $this->checkText($text);
         $factor   = 3;
         $checksum = 0;
 

@@ -12,10 +12,4 @@
             <group>Zend_Service_Technorati</group>
         </exclude>
     </groups>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../library/</directory>
-        </whitelist>
-    </filter>
 </phpunit>

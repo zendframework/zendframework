@@ -38,7 +38,7 @@ class HelperLoader extends PluginClassLoader
      */
     protected $plugins = array(
         'action'              => 'Zend\View\Helper\Action',
-        'baseurl'             => 'Zend\View\Helper\BaseUrl',
+        'basepath'            => 'Zend\View\Helper\BasePath',
         'currency'            => 'Zend\View\Helper\Currency',
         'cycle'               => 'Zend\View\Helper\Cycle',
         'declarevars'         => 'Zend\View\Helper\DeclareVars',

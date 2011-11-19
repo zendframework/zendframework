@@ -35,117 +35,117 @@ use Zend\Barcode;
  */
 class CodabarTest extends TestCommon
 {
-    protected function _getBarcodeObject($options = null)
+    protected function getBarcodeObject($options = null)
     {
         return new Barcode\Object\Codabar($options);
     }
 
     public function testType()
     {
-        $this->assertSame('codabar', $this->_object->getType());
+        $this->assertSame('codabar', $this->object->getType());
     }
 
     public function testSetText()
     {
-        $this->_object->setText('A0123456789B');
-        $this->assertSame('A0123456789B', $this->_object->getRawText());
-        $this->assertSame('A0123456789B', $this->_object->getText());
-        $this->assertSame('A0123456789B', $this->_object->getTextToDisplay());
+        $this->object->setText('A0123456789B');
+        $this->assertSame('A0123456789B', $this->object->getRawText());
+        $this->assertSame('A0123456789B', $this->object->getText());
+        $this->assertSame('A0123456789B', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithOddNumberOfCharacters()
     {
-        $this->_object->setText('A123456789B');
-        $this->assertSame('A123456789B', $this->_object->getRawText());
-        $this->assertSame('A123456789B', $this->_object->getText());
-        $this->assertSame('A123456789B', $this->_object->getTextToDisplay());
+        $this->object->setText('A123456789B');
+        $this->assertSame('A123456789B', $this->object->getRawText());
+        $this->assertSame('A123456789B', $this->object->getText());
+        $this->assertSame('A123456789B', $this->object->getTextToDisplay());
     }
 
     public function testSetTextWithSpaces()
     {
-        $this->_object->setText(' A0123456789B ');
-        $this->assertSame('A0123456789B', $this->_object->getRawText());
-        $this->assertSame('A0123456789B', $this->_object->getText());
-        $this->assertSame('A0123456789B', $this->_object->getTextToDisplay());
+        $this->object->setText(' A0123456789B ');
+        $this->assertSame('A0123456789B', $this->object->getRawText());
+        $this->assertSame('A0123456789B', $this->object->getText());
+        $this->assertSame('A0123456789B', $this->object->getTextToDisplay());
     }
 
     public function testBadTextAlwaysAllowed()
     {
-        $this->_object->setText('a');
-        $this->assertSame('a', $this->_object->getText());
+        $this->object->setText('a');
+        $this->assertSame('a', $this->object->getText());
     }
 
     public function testCheckGoodParams()
     {
-        $this->_object->setText('A0123456789B');
-        $this->assertTrue($this->_object->checkParams());
+        $this->object->setText('A0123456789B');
+        $this->assertTrue($this->object->checkParams());
     }
 
     public function testGetKnownWidthWithoutOrientation()
     {
-        $this->_object->setText('A0123456789B');
-        $this->assertEquals(141, $this->_object->getWidth());
-        $this->_object->setWithQuietZones(false);
-        $this->assertEquals(121, $this->_object->getWidth(true));
+        $this->object->setText('A0123456789B');
+        $this->assertEquals(141, $this->object->getWidth());
+        $this->object->setWithQuietZones(false);
+        $this->assertEquals(121, $this->object->getWidth(true));
     }
 
     public function testCompleteGeneration()
     {
-        $this->_object->setText('A0123456789B');
-        $this->_object->draw();
+        $this->object->setText('A0123456789B');
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile('Codabar_A0123456789B_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithStretchText()
     {
-        $this->_object->setText('A0123456789B');
-        $this->_object->setStretchText(true);
-        $this->_object->draw();
+        $this->object->setText('A0123456789B');
+        $this->object->setStretchText(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Codabar_A0123456789B_stretchtext_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorder()
     {
-        $this->_object->setText('A0123456789B');
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('A0123456789B');
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Codabar_A0123456789B_border_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithOrientation()
     {
-        $this->_object->setText('A0123456789B');
-        $this->_object->setOrientation(60);
-        $this->_object->draw();
+        $this->object->setText('A0123456789B');
+        $this->object->setOrientation(60);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Codabar_A0123456789B_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithStretchTextWithOrientation()
     {
-        $this->_object->setText('A0123456789B');
-        $this->_object->setOrientation(60);
-        $this->_object->setStretchText(true);
-        $this->_object->draw();
+        $this->object->setText('A0123456789B');
+        $this->object->setOrientation(60);
+        $this->object->setStretchText(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Codabar_A0123456789B_stretchtext_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 
     public function testCompleteGenerationWithBorderWithOrientation()
     {
-        $this->_object->setText('A0123456789B');
-        $this->_object->setOrientation(60);
-        $this->_object->setWithBorder(true);
-        $this->_object->draw();
+        $this->object->setText('A0123456789B');
+        $this->object->setOrientation(60);
+        $this->object->setWithBorder(true);
+        $this->object->draw();
         $instructions = $this->loadInstructionsFile(
                 'Codabar_A0123456789B_border_oriented_instructions');
-        $this->assertEquals($instructions, $this->_object->getInstructions());
+        $this->assertEquals($instructions, $this->object->getInstructions());
     }
 }

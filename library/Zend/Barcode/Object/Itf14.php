@@ -27,7 +27,6 @@ namespace Zend\Barcode\Object;
 /**
  * Class for generate Itf14 barcode
  *
- * @uses       \Zend\Barcode\Object\Code25interleaved
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,9 +39,9 @@ class Itf14 extends Code25interleaved
      * Default options for Identcode barcode
      * @return void
      */
-    protected function _getDefaultOptions()
+    protected function getDefaultOptions()
     {
-        $this->_barcodeLength = 14;
-        $this->_mandatoryChecksum = true;
+        $this->barcodeLength = 14;
+        $this->mandatoryChecksum = true;
     }
 }

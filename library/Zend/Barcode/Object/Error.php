@@ -27,7 +27,6 @@ namespace Zend\Barcode\Object;
 /**
  * Class for generate Barcode
  *
- * @uses       \Zend\Barcode\Object\AbstractObject
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -70,17 +69,17 @@ class Error extends AbstractObject
      */
     public function draw()
     {
-        $this->_instructions = array();
-        $this->_addText('ERROR:', 10, array(5 , 18), $this->_font, 0, 'left');
-        $this->_addText($this->_text, 10, array(5 , 32), $this->_font, 0, 'left');
-        return $this->_instructions;
+        $this->instructions = array();
+        $this->addText('ERROR:', 10, array(5 , 18), $this->font, 0, 'left');
+        $this->addText($this->text, 10, array(5 , 32), $this->font, 0, 'left');
+        return $this->instructions;
     }
 
     /**
      * For compatibility reason
      * @return void
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
     }
 
@@ -88,7 +87,7 @@ class Error extends AbstractObject
      * For compatibility reason
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {
     }
 
@@ -96,7 +95,7 @@ class Error extends AbstractObject
      * For compatibility reason
      * @return void
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
     }
 }

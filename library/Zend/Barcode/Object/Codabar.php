@@ -27,7 +27,6 @@ namespace Zend\Barcode\Object;
 /**
  * Class for generate Codabar barcode
  *
- * @uses       \Zend\Barcode\Object\AbstractObject
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,7 +40,7 @@ class Codabar extends AbstractObject
      * - 1 = bar
      * @var array
      */
-    protected $_codingMap = array(
+    protected $codingMap = array(
         '0' => "101010011",     '1' => "101011001",     '2' => "101001011",
         '3' => "110010101",     '4' => "101101001",     '5' => "110101001",
         '6' => "100101011",     '7' => "100101101",     '8' => "100110101",
@@ -55,17 +54,17 @@ class Codabar extends AbstractObject
      * Width of the barcode (in pixels)
      * @return integer
      */
-    protected function _calculateBarcodeWidth()
+    protected function calculateBarcodeWidth()
     {
         $quietZone       = $this->getQuietZone();
         $encodedData = 0;
         $barcodeChar = str_split($this->getText());
         if(count($barcodeChar) > 1) {
             foreach ($barcodeChar as $c) {
-                $encodedData += ((strlen($this->_codingMap[$c]) + 1) * $this->_barThinWidth) * $this->_factor;
+                $encodedData += ((strlen($this->codingMap[$c]) + 1) * $this->barThinWidth) * $this->factor;
             }
         }
-        $encodedData -= (1 * $this->_barThinWidth * $this->_factor);
+        $encodedData -= (1 * $this->barThinWidth * $this->factor);
         return $quietZone + $encodedData + $quietZone;
     }
 
@@ -73,23 +72,23 @@ class Codabar extends AbstractObject
      * Partial check of Codabar barcode
      * @return void
      */
-    protected function _checkParams()
+    protected function checkSpecificParams()
     {}
 
     /**
      * Prepare array to draw barcode
      * @return array
      */
-    protected function _prepareBarcode()
+    protected function prepareBarcode()
     {
         $text = str_split($this->getText());
         foreach ($text as $char) {
-            $barcodeChar = str_split($this->_codingMap[$char]);
+            $barcodeChar = str_split($this->codingMap[$char]);
             foreach ($barcodeChar as $c) {
                 // visible, width, top, length
-                $barcodeTable[] = array($c , $this->_barThinWidth , 0 , 1);
+                $barcodeTable[] = array($c , $this->barThinWidth , 0 , 1);
             }
-            $barcodeTable[] = array(0 , $this->_barThinWidth);
+            $barcodeTable[] = array(0 , $this->barThinWidth);
         }
         return $barcodeTable;
     }

@@ -147,8 +147,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         AutoloaderFactory::factory();
         $autoloader = AutoloaderFactory::getRegisteredAutoloader('Zend\Loader\StandardAutoloader');
         $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $autoloader);
-        $this->assertCount(1, AutoloaderFactory::getRegisteredAutoloaders());
-
+        $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
     }
 
     public function testGetInvalidAutoloaderThrowsException()

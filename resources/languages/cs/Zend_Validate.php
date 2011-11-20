@@ -14,13 +14,13 @@
  *
  * @category   Zend
  * @package    Zend_Translator
- * @subpackage Ressource
+ * @subpackage Resource
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
- * EN-Revision: 22668
+ * EN-Revision: 25.Jul.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -76,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' není platná e-mailová adresa ve formátu local-part@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' není platné hostname pro emailovou adresu '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' není platná e-mailová adresa ve formátu local-part@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' není platné hostname pro emailovou adresu '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' neobsahuje platný MX záznam pro e-mailovou adresu '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' není v směrovatelném úseku sítě. E-mailová adresa '%value%' by neměla být požadována z veřejné sítě",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' nemůže být porovnán proti dot-atom formátu",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' nemůže být porovnán proti quoted-string formátu",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' není platná 'local part' pro e-mailovou adresu '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' není platná 'local part' pro e-mailovou adresu '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' překročil dovolenou délku",
 
     // Zend_Validate_File_Count
@@ -223,7 +223,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given. String or integer expected" => "Chybný typ. Byl očekáván řetězec nebo celé číslo",
-    "'%value%' is no valid ISBN number" => "'%value%' není platné ISBN",
+    "'%value%' is not a valid ISBN number" => "'%value%' není platné ISBN",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' není méně než '%max%'",
@@ -242,19 +242,19 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Během zpracování šablony '%pattern%' došlo k interní chybě",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' není platné 'changefreq' pro sitemapu",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' není platné 'changefreq' pro sitemapu",
     "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' není platné 'lastmod' pro sitemapu",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' není platné 'lastmod' pro sitemapu",
     "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' není platná 'location' pro sitemapu",
+    "'%value%' is not a valid sitemap location" => "'%value%' není platná 'location' pro sitemapu",
     "Invalid type given. String expected" => "Chybný typ. Byl očekáván řetězec",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' není platná 'priority' pro sitemapu",
+    "'%value%' is not a valid sitemap priority" => "'%value%' není platná 'priority' pro sitemapu",
     "Invalid type given. Numeric string, integer or float expected" => "Chybný typ. Byl očekáván číselný řetězec, celé nebo desetinné číslo.",
 
     // Zend_Validate_StringLength

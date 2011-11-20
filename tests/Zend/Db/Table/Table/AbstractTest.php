@@ -1621,6 +1621,49 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $this->assertEquals(1, count($rowset));
         $this->_util->dropTable('thisisaveryverylongtablename');
     }
+    
+    
+     /**
+     * @group ZF2-66
+     */
+    public function testgetReferenceWihoutSlashAtTheBeginning()
+    {
+        $refReporter = array(
+            'columns'           => array('reported_by'),
+            'refTableClass'     => '\ZendTest\Db\Table\TestAsset\TableAccounts',
+            'refColumns'        => array('account_id')
+        );
+        $refEngineer = array(
+            'columns'           => array('assigned_to'),
+            'refTableClass'     => '\ZendTest\Db\Table\TestAsset\TableAccounts',
+            'refColumns'        => array('account_id')
+        );
+        $refMap = array(
+            'Reporter' => $refReporter,
+            'Engineer' => $refEngineer
+        );
+        $table = $this->_getTable('\ZendTest\Db\Table\TestAsset\TableBugs',array('referenceMap' => $refMap));
+        
+        $this->assertEquals($refReporter, $table->getReference('ZendTest\Db\Table\TestAsset\TableAccounts'));
+        $this->assertEquals($refReporter, $table->getReference('ZendTest\Db\Table\TestAsset\TableAccounts', 'Reporter'));
+        $this->assertEquals($refEngineer, $table->getReference('ZendTest\Db\Table\TestAsset\TableAccounts', 'Engineer'));
+        
+        $this->assertEquals(
+                $table->getReference('\ZendTest\Db\Table\TestAsset\TableAccounts'), 
+                $table->getReference('ZendTest\Db\Table\TestAsset\TableAccounts')
+        );
+        
+        $this->assertEquals(
+                $table->getReference('\ZendTest\Db\Table\TestAsset\TableAccounts', 'Reporter'),
+                $table->getReference('ZendTest\Db\Table\TestAsset\TableAccounts', 'Reporter')
+        );
+        
+        $this->assertEquals(
+                $table->getReference('\ZendTest\Db\Table\TestAsset\TableAccounts', 'Engineer'),
+                $table->getReference('ZendTest\Db\Table\TestAsset\TableAccounts', 'Engineer')
+        );
+    }
+    
 
     protected function _getRowForTableAndIdentityWithVeryLongName()
     {

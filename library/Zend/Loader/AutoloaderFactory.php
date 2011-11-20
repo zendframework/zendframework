@@ -37,7 +37,7 @@ abstract class AutoloaderFactory
     protected static $loaders = array();
 
     /**
-     * @var StandardAutoloader StandardAutoloader instance for resolving 
+     * @var StandardAutoloader StandardAutoloader instance for resolving
      * autoloader classes via the include_path
      */
     protected static $standardAutoloader;
@@ -52,27 +52,33 @@ abstract class AutoloaderFactory
      * )
      * </code>
      *
-     * The factory will then loop through and instantiate each autoloader with 
+     * The factory will then loop through and instantiate each autoloader with
      * the specified options, and register each with the spl_autoloader.
      *
-     * You may retrieve the concrete autoloader instances later using 
+     * You may retrieve the concrete autoloader instances later using
      * {@link getRegisteredAutoloaders()}.
      *
      * Note that the class names must be resolvable on the include_path or via
-     * the Zend library, using PSR-0 rules (unless the class has already been 
+     * the Zend library, using PSR-0 rules (unless the class has already been
      * loaded).
-     * 
-     * @param  array|Traversable $options 
+     *
+     * @param  array|Traversable $options (optional) options to use. Defaults to Zend\Loader\StandardAutoloader
      * @return void
      * @throws Exception\InvalidArgumentException for invalid options
      * @throws Exception\InvalidArgumentException for unloadable autoloader classes
      * @throws Exception\DomainException for autoloader classes not implementing SplAutoloader
      */
-    public static function factory($options)
+    public static function factory($options = null)
     {
+        if (null === $options) {
+            $options = array('Zend\Loader\StandardAutoloader' => array());
+        }
+
         if (!is_array($options) && !($options instanceof \Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Options provided must be an array or Traversable');
+            throw new Exception\InvalidArgumentException(
+                             'Options provided must be an array or Traversable'
+            );
         }
 
         foreach ($options as $class => $options) {
@@ -80,7 +86,9 @@ abstract class AutoloaderFactory
                 $autoloader = static::getStandardAutoloader();
                 if (!class_exists($class) && !$autoloader->autoload($class)) {
                     require_once 'Exception/InvalidArgumentException.php';
-                    throw new Exception\InvalidArgumentException(sprintf('Autoloader class "%s" not loaded', $class));
+                    throw new Exception\InvalidArgumentException(
+                                sprintf('Autoloader class "%s" not loaded', $class)
+                    );
                 }
                 if ($class === 'Zend\Loader\StandardAutoloader') {
                     $autoloader->setOptions($options);
@@ -99,7 +107,7 @@ abstract class AutoloaderFactory
      * Get an list of all autoloaders registered with the factory
      *
      * Returns an array of autoloader instances.
-     * 
+     *
      * @return array
      */
     public static function getRegisteredAutoloaders()
@@ -108,9 +116,9 @@ abstract class AutoloaderFactory
     }
 
     /**
-     * Retrieves an autoloader by class name 
-     * 
-     * @param string $class 
+     * Retrieves an autoloader by class name
+     *
+     * @param string $class
      * @return SplAutoloader
      * @throws Exception\InvalidArgumentException for non-registered class
      */
@@ -124,9 +132,9 @@ abstract class AutoloaderFactory
     }
 
     /**
-     * Unregisters all autoloaders that have been registered via the factory. 
+     * Unregisters all autoloaders that have been registered via the factory.
      * This will NOT unregister autoloaders registered outside of the fctory.
-     * 
+     *
      * @return void
      */
     public static function unregisterAutoloaders()
@@ -139,8 +147,8 @@ abstract class AutoloaderFactory
 
     /**
      * Unregister a single autoloader by class name
-     * 
-     * @param  string $autoloaderClass 
+     *
+     * @param  string $autoloaderClass
      * @return bool
      */
     public static function unregisterAutoloader($autoloaderClass)
@@ -158,10 +166,10 @@ abstract class AutoloaderFactory
     /**
      * Get an instance of the standard autoloader
      *
-     * Used to attempt to resolve autoloader classes, using the 
-     * StandardAutoloader. The instance is marked as a fallback autoloader, to 
+     * Used to attempt to resolve autoloader classes, using the
+     * StandardAutoloader. The instance is marked as a fallback autoloader, to
      * allow resolving autoloaders not under the "Zend" namespace.
-     * 
+     *
      * @return SplAutoloader
      */
     protected static function getStandardAutoloader()

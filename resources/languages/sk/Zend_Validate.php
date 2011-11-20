@@ -14,14 +14,13 @@
  *
  * @category   Zend
  * @package    Zend_Translator
- * @subpackage Ressource
+ * @subpackage Resource
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id:$
  */
 
 /**
- * EN-Revision: 22668
+ * EN-Revision: 25.Jul.2011
  */
 return array(
     // Zend_Validate_Alnum
@@ -67,7 +66,7 @@ return array(
     "'%value%' does not fit the date format '%format%'" => "'%value%' nezodpovedá formátu dátumu '%format%'",
 
     // Zend_Validate_Db_Abstract
-    "No record matching '%value%' was found" => "nebol nájdený žiadny záznam zodpovedajúci '%value%'",
+    "No record matching '%value%' was found" => "Nebol nájdený žiadny záznam zodpovedajúci '%value%'",
     "A record matching '%value%' was found" => "Bol nájdený záznam zodpovedajúci '%value%'",
 
     // Zend_Validate_Digits
@@ -77,13 +76,13 @@ return array(
 
     // Zend_Validate_EmailAddress
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",
-    "'%value%' is no valid email address in the basic format local-part@hostname" => "'%value%' nie je platná e-mailová adresa vo formáte local-part@hostname",
-    "'%hostname%' is no valid hostname for email address '%value%'" => "'%hostname%' nie je platný hostname pre emailovú adresu '%value%'",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' nie je platná e-mailová adresa vo formáte local-part@hostname",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' nie je platný hostname pre emailovú adresu '%value%'",
     "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' neobsahuje platný MX záznam pre e-mailovú adresu '%value%'",
     "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' nie je v smerovateľnom úseku sieťe. E-mailová adresa '%value%' by nemala byť požadovaná z verejnej siete",
     "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' nemôže byť porovnaný voči dot-atom formátu",
     "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' nemôže byť porovnaný voči quoted-string formátu",
-    "'%localPart%' is no valid local part for email address '%value%'" => "'%localPart%' nie je platná 'local part' pre e-mailovú adresu '%value%'",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' nie je platná 'local part' pre e-mailovú adresu '%value%'",
     "'%value%' exceeds the allowed length" => "'%value%' prekročil povolenú dĺžku",
 
     // Zend_Validate_File_Count
@@ -100,7 +99,7 @@ return array(
     "File '%value%' is not readable or does not exist" => "Súbor '%value%' buď nie je čitateľný, alebo neexistuje",
 
     // Zend_Validate_File_ExcludeMimeType
-    "File '%value%' has a false mimetype of '%type%'" => "Súbor '%value%' má nesprávny mimetyp '%type%'",
+    "File '%value%' has a false mimetype of '%type%'" => "File '%value%' has a false mimetype of '%type%'",
     "The mimetype of file '%value%' could not be detected" => "Mimetyp súboru '%value%' nebolo možné zistiť",
     "File '%value%' is not readable or does not exist" => "Súbor '%value%' buď nie je čitateľný, alebo neexistuje",
 
@@ -112,8 +111,8 @@ return array(
     "File '%value%' is not readable or does not exist" => "Súbor '%value%' buď nie je čitateľný, alebo neexistuje",
 
     // Zend_Validate_File_FilesSize
-    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "súčet veľkostí všetkých súborov by mal byť maximálne '%max%', ale je '%size%'",
-    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "súčet veľkostí všetkých súborov by mal byť najmenej '%min%', ale je '%size%'",
+    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Súčet veľkostí všetkých súborov by mal byť maximálne '%max%', ale je '%size%'",
+    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Súčet veľkostí všetkých súborov by mal byť najmenej '%min%', ale je '%size%'",
     "One or more files can not be read" => "Jeden, alebo viac súborov nie je možné načítať",
 
     // Zend_Validate_File_Hash
@@ -154,7 +153,7 @@ return array(
 
     // Zend_Validate_File_Sha1
     "File '%value%' does not match the given sha1 hashes" => "Súbor '%value%' nezodpovedá danému sha1 hashu",
-    "A sha1 hash could not be evaluated for the given file" => "sha1 hash nemohol byť pre daný súbor vypočítaný",
+    "A sha1 hash could not be evaluated for the given file" => "Sha1 hash nemohol byť pre daný súbor vypočítaný",
     "File '%value%' is not readable or does not exist" => "Súbor '%value%' buď nie je čitateľný, alebo neexistuje",
 
     // Zend_Validate_File_Size
@@ -188,7 +187,7 @@ return array(
 
     // Zend_Validate_Hex
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",
-    "'%value%' has not only hexadecimal digit characters" => "'%value%' neobsahuje len znaky hexadecimálnych čísel.",
+    "'%value%' has not only hexadecimal digit characters" => "'%value%' neobsahuje len znaky hexadecimálnych čísel",
 
     // Zend_Validate_Hostname
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",
@@ -201,6 +200,7 @@ return array(
     "'%value%' does not appear to be a valid local network name" => "'%value%' nevyzerá ako platné sieťové meno",
     "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' vyzerá ako hostname lokálnej siete, tie ale nie sú povolené",
     "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' vyzerá ako DNS hostname ale zadanú punycode notáciu nie je možné dekódovať",
+    "'%value%' does not appear to be a valid URI hostname" => "'%value%' nevyzerá ako platné URI hostname",
 
     // Zend_Validate_Iban
     "Unknown country within the IBAN '%value%'" => "Neznámý štát v IBAN '%value%'",
@@ -224,7 +224,7 @@ return array(
 
     // Zend_Validate_Isbn
     "Invalid type given. String or integer expected" => "Chybný typ. Bol očakávaný reťazec, alebo celé číslo",
-    "'%value%' is no valid ISBN number" => "'%value%' nie je platné ISBN",
+    "'%value%' is not a valid ISBN number" => "'%value%' nie je platné ISBN",
 
     // Zend_Validate_LessThan
     "'%value%' is not less than '%max%'" => "'%value%' nie je menej ako '%max%'",
@@ -243,20 +243,20 @@ return array(
     "There was an internal error while using the pattern '%pattern%'" => "Počas spracovania šablóny '%pattern%' došlo k internej chybe",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is no valid sitemap changefreq" => "'%value%' nie je platný 'changefreq' pre sitemapu",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' nie je platný 'changefreq' pre sitemapu",
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is no valid sitemap lastmod" => "'%value%' nie je platný 'lastmod' pre sitemapu",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' nie je platný 'lastmod' pre sitemapu",
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is no valid sitemap location" => "'%value%' nie je platná 'location' pre sitemapu",
+    "'%value%' is not a valid sitemap location" => "'%value%' nie je platná 'location' pre sitemapu",
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is no valid sitemap priority" => "'%value%' nie je platná 'priority' pre sitemapu",
-    "Invalid type given. Numeric string, integer or float expected" => "Chybný typ. Bol očakávaný číselný reťazec, celé alebo desatinné číslo.",
+    "'%value%' is not a valid sitemap priority" => "'%value%' nie je platná 'priority' pre sitemapu",
+    "Invalid type given. Numeric string, integer or float expected" => "Chybný typ. Bol očakávaný číselný reťazec, celé alebo desatinné číslo",
 
     // Zend_Validate_StringLength
     "Invalid type given. String expected" => "Chybný typ. Bol očakávaný reťazec",

@@ -38,15 +38,19 @@ use Zend\Locale;
  */
 class PostCode extends AbstractValidator
 {
-    const INVALID  = 'postcodeInvalid';
-    const NO_MATCH = 'postcodeNoMatch';
+    const INVALID        = 'postcodeInvalid';
+    const NO_MATCH       = 'postcodeNoMatch';
+    const SERVICE        = 'postcodeService';
+    const SERVICEFAILURE = 'postcodeServiceFailure';
 
     /**
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID  => "Invalid type given. String or integer expected",
-        self::NO_MATCH => "'%value%' does not appear to be a postal code",
+        self::INVALID        => "Invalid type given. String or integer expected",
+        self::NO_MATCH       => "'%value%' does not appear to be a postal code",
+        self::SERVICE        => "'%value%' does not appear to be a postal code",
+        self::SERVICEFAILURE => "An exception has been raised while validating '%value%'",
     );
 
     /**
@@ -55,6 +59,7 @@ class PostCode extends AbstractValidator
      * @var array
      */
     protected $options = array(
+        'service'=> null, // Service callback for additional validation
         'format' => null, // Manual postal code format
         'locale' => null, // Locale to use
     );
@@ -161,6 +166,31 @@ class PostCode extends AbstractValidator
         $this->options['format'] = $format;
         return $this;
     }
+    
+    /**
+     * Returns the actual set service
+     *
+     * @return callback
+     */
+    public function getService()
+    {
+        return $this->options['service'];
+    }
+
+    /**
+     * Sets a new callback for service validation
+     *
+     * @param string|array $service
+     */
+    public function setService($service)
+    {
+        if (!is_callable($service)) {
+            throw new Exception\InvalidArgumentException('Invalid callback given');
+        }
+
+        $this->options['service'] = $service;
+        return $this;
+    }
 
     /**
      * Returns true if and only if $value is a valid postalcode
@@ -176,6 +206,24 @@ class PostCode extends AbstractValidator
             return false;
         }
 
+        $service = $this->getService();
+        if (!empty($service)) {
+            try {
+                $callback = new Callback($service);
+                $callback->setOptions(array(
+                    'format' => $this->options['format'],
+                    'locale' => $this->options['locale'],
+                ));
+                if (!$callback->isValid($value)) {
+                    $this->error(self::SERVICE, $value);
+                    return false;
+                }
+            } catch (\Exception $e) {
+                $this->error(self::SERVICEFAILURE, $value);
+                return false;
+            }
+        }
+        
         $format = $this->getFormat();
         if (!preg_match($format, $value)) {
             $this->error(self::NO_MATCH);

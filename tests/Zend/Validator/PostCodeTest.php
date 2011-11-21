@@ -40,9 +40,9 @@ use Zend\Validator;
 class PostCodeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_Validator_PostCode object
+     * Zend\Validator\PostCode object
      *
-     * @var Zend_Validator_PostCode
+     * @var  Zend\Validator\PostCode
      */
     protected $_validator;
 
@@ -157,5 +157,46 @@ class PostCodeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('hello'));
         $message = $this->_validator->getMessages();
         $this->assertContains('not appear to be a postal code', $message['postcodeNoMatch']);
+    }
+    
+    
+     /**
+     * Test service class with invalid validation
+     *
+     * @group ZF2-44
+     */
+    public function testServiceClass()
+    {
+        $params = (object)array(
+            'serviceTrue'   => null,
+            'serviceFalse'  => null,
+        );
+        
+        $serviceTrue  = function($value) use ($params) {
+            $params->serviceTrue = $value;
+            return true;
+        };
+        
+        $serviceFalse = function($value) use ($params) {
+            $params->serviceFalse = $value;
+            return false;
+        };
+        
+        $this->assertEquals(null, $this->_validator->getService());
+        
+        
+        $this->_validator->setService($serviceTrue);
+        $this->assertEquals($this->_validator->getService(), $serviceTrue);
+        $this->assertTrue($this->_validator->isValid('2292'));
+        $this->assertEquals($params->serviceTrue, '2292');
+        
+        
+        $this->_validator->setService($serviceFalse);
+        $this->assertEquals($this->_validator->getService(), $serviceFalse);
+        $this->assertFalse($this->_validator->isValid('hello'));
+        $this->assertEquals($params->serviceFalse, 'hello');
+        
+        $message = $this->_validator->getMessages();
+        $this->assertContains('not appear to be a postal code', $message['postcodeService']);
     }
 }

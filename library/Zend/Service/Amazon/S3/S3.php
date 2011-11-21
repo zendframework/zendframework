@@ -299,7 +299,7 @@ class S3 extends \Zend\Service\Amazon\AbstractAmazon
         return $objects;
     }
     
-    /**
+	/**
 	 * List the objects and common prefixes in a bucket.
 	 *
 	 * Provides the list of object keys and common prefixes that are contained in the bucket.  Valid params include the following.

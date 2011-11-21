@@ -301,7 +301,6 @@ class Socket implements HttpAdapter, Stream
         // First, read headers only
         $response = '';
         $gotStatus = false;
-        $stream = !empty($this->config['stream']);
 
         while (($line = @fgets($this->socket)) !== false) {
             $gotStatus = $gotStatus || (strpos($line, 'HTTP') !== false);

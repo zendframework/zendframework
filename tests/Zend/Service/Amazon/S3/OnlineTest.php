@@ -540,6 +540,20 @@ class OnlineTest extends \PHPUnit_Framework_TestCase
         $this->_amazon->removeObject("testgetobjectparams1/zftest2", "testdata");
         $this->_amazon->removeBucket("testgetobjectparams1");
     }
+    
+    public function testCommonPrefixes()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $this->_amazon->putObject($this->_bucket.'/test-folder/test1','test');
+        $this->_amazon->putObject($this->_bucket.'/test-folder/test2-folder/','');
+        $params= array(
+                    'prefix' => 'test-folder/',
+                    'delimiter' => '/'
+                 );
+        $response= $this->_amazon->getObjectsAndPrefixesByBucket($this->_bucket,$params);
+        $this->assertEquals($response['objects'][0],'test-folder/test1');
+        $this->assertEquals($response['prefixes'][0],'test-folder/test2-folder/');
+    }
 
     public function tearDown()
     {

@@ -23,7 +23,9 @@
  */
 namespace Zend\Json\Server;
 use Zend\Server\Reflection,
-    Zend\Server\Method;
+    Zend\Server\Method,
+    Zend\Server\Exception\RuntimeException,
+    Zend\Server\Exception\InvalidArgumentException;
 
 /**
  * @uses       Zend\Json\Server\Error
@@ -97,11 +99,11 @@ class Server extends \Zend\Server\AbstractServer
     public function addFunction($function, $namespace = '')
     {
         if (!is_string($function) && (!is_array($function) || (2 > count($function)))) {
-            throw new Exception('Unable to attach function; invalid');
+            throw new InvalidArgumentException('Unable to attach function; invalid');
         }
 
         if (!is_callable($function)) {
-            throw new Exception('Unable to attach function; does not exist');
+            throw new InvalidArgumentException('Unable to attach function; does not exist');
         }
 
         $argv = null;
@@ -125,7 +127,7 @@ class Server extends \Zend\Server\AbstractServer
                 }
             }
             if (!$found) {
-                $this->fault('Method not found', -32601);
+                $this->fault('Method not found', Error::ERROR_INVALID_METHOD);
                 return $this;
             }
         }
@@ -184,7 +186,7 @@ class Server extends \Zend\Server\AbstractServer
     public function handle($request = false)
     {
         if ((false !== $request) && (!$request instanceof Request)) {
-            throw new Exception('Invalid request type provided; cannot handle');
+            throw new InvalidArgumentException('Invalid request type provided; cannot handle');
         } elseif ($request) {
             $this->setRequest($request);
         }
@@ -214,7 +216,7 @@ class Server extends \Zend\Server\AbstractServer
     public function loadFunctions($definition)
     {
         if (!is_array($definition) && (!$definition instanceof \Zend\Server\Definition)) {
-            throw new Exception('Invalid definition provided to loadFunctions()');
+            throw new InvalidArgumentException('Invalid definition provided to loadFunctions()');
         }
 
         foreach ($definition as $key => $method) {
@@ -501,16 +503,16 @@ class Server extends \Zend\Server\AbstractServer
         $request = $this->getRequest();
 
         if (!$request->isMethodError() && (null === $request->getMethod())) {
-            return $this->fault('Invalid Request', -32600);
+            return $this->fault('Invalid Request', Error::ERROR_INVALID_REQUEST);
         }
 
         if ($request->isMethodError()) {
-            return $this->fault('Invalid Request', -32600);
+            return $this->fault('Invalid Request', Error::ERROR_INVALID_REQUEST);
         }
 
         $method = $request->getMethod();
         if (!$this->_table->hasMethod($method)) {
-            return $this->fault('Method not found', -32601);
+            return $this->fault('Method not found', Error::ERROR_INVALID_METHOD);
         }
 
         $params        = $request->getParams();
@@ -529,14 +531,12 @@ class Server extends \Zend\Server\AbstractServer
             $callback = $invocable->getCallback();
             if ('function' == $callback->getType()) {
                 $reflection = new \ReflectionFunction( $callback->getFunction() );
-                $refParams  = $reflection->getParameters();
             } else {
                 
                 $reflection = new \ReflectionMethod( 
                     $callback->getClass(),
                     $callback->getMethod()
                 );
-                $refParams = $reflection->getParameters();
             }
 
             $orderedParams = array();
@@ -546,9 +546,7 @@ class Server extends \Zend\Server\AbstractServer
                 } elseif( $refParam->isOptional() ) {
                     $orderedParams[ $refParam->getName() ] = null;
                 } else {
-                    throw new Exception( 
-                        'Missing required parameter: ' . $refParam->getName() 
-                    ); 
+                    return $this->fault('Invalid params', Error::ERROR_INVALID_PARAMS);
                 }
             }
             $params = $orderedParams;

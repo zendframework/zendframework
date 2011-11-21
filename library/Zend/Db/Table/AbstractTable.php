@@ -457,6 +457,7 @@ abstract class AbstractTable
     public function getReference($tableClassname, $ruleKey = null)
     {
         $thisClass = get_class($this);
+        $tableClassname = '\\' . ltrim($tableClassname, '\\');
         if ($thisClass === 'Zend\Db\Table\Table') {
             $thisClass = $this->_definitionConfigName;
         }

@@ -22,25 +22,21 @@
  * @namespace
  */
 namespace Zend\Json\Server;
-use Zend\Server\Reflection,
+
+use ReflectionFunction,
+    ReflectionMethod,
+    Zend\Server\AbstractServer,
+    Zend\Server\Definition,
     Zend\Server\Method,
-    Zend\Server\Exception\RuntimeException,
-    Zend\Server\Exception\InvalidArgumentException;
+    Zend\Server\Reflection;
 
 /**
- * @uses       Zend\Json\Server\Error
- * @uses       Zend\Json\Server\Exception
- * @uses       Zend\Json\Server\Request\Http
- * @uses       Zend\Json\Server\Response\Http
- * @uses       Zend\Json\Server\Smd
- * @uses       Zend\Server\AbstractServer
- * @uses       Zend\Server\Reflection
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Server extends \Zend\Server\AbstractServer
+class Server extends AbstractServer
 {
     /**#@+
      * Version Constants
@@ -62,19 +58,19 @@ class Server extends \Zend\Server\AbstractServer
 
     /**
      * Request object
-     * @var Zend\Json\Server\Request
+     * @var Request
      */
     protected $_request;
 
     /**
      * Response object
-     * @var Zend\Json\Server\Response
+     * @var Response
      */
     protected $_response;
 
     /**
      * SMD object
-     * @var Zend\Json\Server\Smd
+     * @var Smd
      */
     protected $_serviceMap;
 
@@ -85,7 +81,7 @@ class Server extends \Zend\Server\AbstractServer
     protected $_smdMethods;
 
     /**
-     * @var Zend\Server\Description
+     * @var \Zend\Server\Description
      */
     protected $_table;
 
@@ -94,16 +90,16 @@ class Server extends \Zend\Server\AbstractServer
      *
      * @param  string|array $function Valid PHP callback
      * @param  string $namespace  Ignored
-     * @return Zend\Json\Server
+     * @return Server
      */
     public function addFunction($function, $namespace = '')
     {
         if (!is_string($function) && (!is_array($function) || (2 > count($function)))) {
-            throw new InvalidArgumentException('Unable to attach function; invalid');
+            throw new Exception\InvalidArgumentException('Unable to attach function; invalid');
         }
 
         if (!is_callable($function)) {
-            throw new InvalidArgumentException('Unable to attach function; does not exist');
+            throw new Exception\InvalidArgumentException('Unable to attach function; does not exist');
         }
 
         $argv = null;
@@ -144,7 +140,7 @@ class Server extends \Zend\Server\AbstractServer
      * @param  string $class
      * @param  string $namespace Ignored
      * @param  mixed $argv Ignored
-     * @return Zend\Json\Server
+     * @return Server
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
@@ -180,13 +176,13 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Handle request
      *
-     * @param  Zend\Json\Server\Request $request
-     * @return null|Zend\Json\Server\Response
+     * @param  Request $request
+     * @return null|Response
      */
     public function handle($request = false)
     {
         if ((false !== $request) && (!$request instanceof Request)) {
-            throw new InvalidArgumentException('Invalid request type provided; cannot handle');
+            throw new Exception\InvalidArgumentException('Invalid request type provided; cannot handle');
         } elseif ($request) {
             $this->setRequest($request);
         }
@@ -210,13 +206,13 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Load function definitions
      *
-     * @param  array|Zend\Server\Definition $definition
+     * @param  array|Definition $definition
      * @return void
      */
     public function loadFunctions($definition)
     {
-        if (!is_array($definition) && (!$definition instanceof \Zend\Server\Definition)) {
-            throw new InvalidArgumentException('Invalid definition provided to loadFunctions()');
+        if (!is_array($definition) && (!$definition instanceof Definition)) {
+            throw new Exception\InvalidArgumentException('Invalid definition provided to loadFunctions()');
         }
 
         foreach ($definition as $key => $method) {
@@ -232,8 +228,8 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Set request object
      *
-     * @param  \Zend\Json\Server\Request $request
-     * @return \Zend\Json\Server\Server
+     * @param  Request $request
+     * @return Server
      */
     public function setRequest(Request $request)
     {
@@ -244,7 +240,7 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Get JSON-RPC request object
      *
-     * @return \Zend\Json\Server\Request
+     * @return Request
      */
     public function getRequest()
     {
@@ -257,8 +253,8 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Set response object
      *
-     * @param  \Zend\Json\Server\Response $response
-     * @return \Zend\Json\Server\Server
+     * @param  Response $response
+     * @return Server
      */
     public function setResponse(Response $response)
     {
@@ -269,7 +265,7 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Get response object
      *
-     * @return \Zend\Json\Server\Response
+     * @return Response
      */
     public function getResponse()
     {
@@ -283,7 +279,7 @@ class Server extends \Zend\Server\AbstractServer
      * Set flag indicating whether or not to auto-emit response
      *
      * @param  bool $flag
-     * @return Zend\Json\Server\Server
+     * @return Server
      */
     public function setAutoEmitResponse($flag)
     {
@@ -328,7 +324,7 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Retrieve SMD object
      *
-     * @return Zend\Json\Server\Smd
+     * @return Smd
      */
     public function getServiceMap()
     {
@@ -341,7 +337,7 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Add service method to service map
      *
-     * @param  Zend\Server\Reflection\ReflectionFunction $method
+     * @param  Method\Definition $method
      * @return void
      */
     protected function _addMethodServiceMap(Method\Definition $method)
@@ -393,7 +389,7 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Get method param type
      *
-     * @param  Zend\Server\Reflection\AbstractFunction $method
+     * @param  Method\Definition $method
      * @return string|array
      */
     protected function _getParams(Method\Definition $method)
@@ -434,7 +430,7 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Set response state
      *
-     * @return Zend\Json\Server\Response
+     * @return Response
      */
     protected function _getReadyResponse()
     {
@@ -455,7 +451,7 @@ class Server extends \Zend\Server\AbstractServer
     /**
      * Get method return type
      *
-     * @param  \Zend\Server\Reflection\AbstractFunction $method
+     * @param  Method\Definition $method
      * @return string|array
      */
     protected function _getReturnType(Method\Definition $method)
@@ -530,10 +526,10 @@ class Server extends \Zend\Server\AbstractServer
 
             $callback = $invocable->getCallback();
             if ('function' == $callback->getType()) {
-                $reflection = new \ReflectionFunction( $callback->getFunction() );
+                $reflection = new ReflectionFunction( $callback->getFunction() );
             } else {
                 
-                $reflection = new \ReflectionMethod( 
+                $reflection = new ReflectionMethod( 
                     $callback->getClass(),
                     $callback->getMethod()
                 );

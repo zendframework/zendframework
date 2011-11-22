@@ -40,11 +40,19 @@ class Message
     {
     }
 
+    public function setFrom($emailOrAddressList, $name = null)
+    {
+    }
+
     public function addFrom($emailOrAddressOrList, $name = null)
     {
     }
 
     public function from()
+    {
+    }
+
+    public function setTo($emailOrAddressList, $name = null)
     {
     }
 
@@ -56,6 +64,10 @@ class Message
     {
     }
 
+    public function setCc($emailOrAddressList, $name = null)
+    {
+    }
+
     public function addCc($emailOrAddressOrList, $name = null)
     {
     }
@@ -64,11 +76,19 @@ class Message
     {
     }
 
+    public function setBcc($emailOrAddressList, $name = null)
+    {
+    }
+
     public function addBcc($emailOrAddressOrList, $name = null)
     {
     }
 
     public function bcc()
+    {
+    }
+
+    public function setReplyTo($emailOrAddressList, $name = null)
     {
     }
 

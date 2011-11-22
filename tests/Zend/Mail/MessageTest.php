@@ -25,6 +25,7 @@
 namespace ZendTest\Mail;
 
 use Zend\Mail\Address,
+    Zend\Mail\AddressList,
     Zend\Mail\Message;
 
 /**
@@ -192,27 +193,66 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function testCanAddFromAddressUsingName()
     {
-        $this->markTestIncomplete();
+        $this->message->addFrom('zf-devteam@zend.com', 'ZF DevTeam');
+        $addresses = $this->message->from();
+        $this->assertEquals(1, count($addresses));
+        $address = $addresses->current();
+        $this->assertEquals('zf-devteam@zend.com', $address->getEmail());
+        $this->assertEquals('ZF DevTeam', $address->getName());
     }
 
     public function testCanAddFromAddressUsingAddressObject()
     {
-        $this->markTestIncomplete();
+        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addFrom($address);
+
+        $addresses = $this->message->from();
+        $this->assertEquals(1, count($addresses));
+        $test = $addresses->current();
+        $this->assertSame($address, $test);
     }
 
     public function testCanAddManyFromAddressesUsingArray()
     {
-        $this->markTestIncomplete();
+        $addresses = array(
+            'zf-devteam@zend.com',
+            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
+        );
+        $this->message->addFrom($addresses);
+
+        $from = $this->message->from();
+        $this->assertEquals(3, count($from));
+
+        $this->assertTrue($from->has('zf-devteam@zend.com'));
+        $this->assertTrue($from->has('zf-contributors@lists.zend.com'));
+        $this->assertTrue($from->has('fw-announce@lists.zend.com'));
     }
 
     public function testCanAddManyFromAddressesUsingAddressListObject()
     {
-        $this->markTestIncomplete();
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addFrom('fw-announce@lists.zend.com');
+        $this->message->addFrom($list);
+        $from = $this->message->from();
+        $this->assertEquals(2, count($from));
+        $this->assertTrue($from->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($from->has('zf-devteam@zend.com'));
     }
 
     public function testCanSetFromListFromAddressList()
     {
-        $this->markTestIncomplete();
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addFrom('fw-announce@lists.zend.com');
+        $this->message->setFrom($list);
+        $from = $this->message->from();
+        $this->assertEquals(1, count($from));
+        $this->assertFalse($from->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($from->has('zf-devteam@zend.com'));
     }
 
     public function testCanAddCcAddressUsingName()

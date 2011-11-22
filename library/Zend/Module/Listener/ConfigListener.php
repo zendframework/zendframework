@@ -2,7 +2,8 @@
 
 namespace Zend\Module\Listener;
 
-use Traversable,
+use ArrayAccess,
+    Traversable,
     Zend\Config\Config,
     Zend\Config\Xml as XmlConfig,
     Zend\Config\Ini as IniConfig,
@@ -159,29 +160,45 @@ class ConfigListener extends AbstractListener implements ConfigMerger
      */
     protected function mergeGlobPath($globPath)
     {
+        $env = $this->getOptions()->getApplicationEnvironment();
         foreach (glob($globPath, GLOB_BRACE) as $path) {
             $pathInfo = pathinfo($path);
             switch (strtolower($pathInfo['extension'])) {
                 case 'php':
                 case 'inc':
                     $config = include $path;
+                    if (!is_array($config) && !$config instanceof ArrayAccess) {
+                        throw new Exception\RuntimeException(sprintf(
+                            'Invalid configuration type returned by file at "%s"; received "%s"',
+                            $path,
+                            (is_object($config) ? get_class($config) : gettype($config))
+                        ));
+                    }
+                    if (!isset($config[$env])) {
+                        throw new Exception\RuntimeException(sprintf(
+                            'Configuration returned by file "%s" does not contain an environment matching "%s"',
+                            $path,
+                            $env
+                        ));
+                    }
+                    $config = $config[$env];
                     break;
 
                 case 'xml':
-                    $config = new XmlConfig($path);
+                    $config = new XmlConfig($path, $env);
                     break;
 
                 case 'json':
-                    $config = new JsonConfig($path);
+                    $config = new JsonConfig($path, $env);
                     break;
 
                 case 'ini':
-                    $config = new IniConfig($path);
+                    $config = new IniConfig($path, $env);
                     break;
 
                 case 'yaml':
                 case 'yml':
-                    $config = new YamlConfig($path);
+                    $config = new YamlConfig($path, $env);
                     break;
 
                 default:

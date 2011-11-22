@@ -22,84 +22,89 @@
  * @namespace
  */
 namespace Zend\Mail;
-use Zend\Mail\Exception;
 
 /**
- * @uses       \Zend\Mail\Exception
- * @uses       \Zend\Mail\Message\MessageInterface
- * @uses       \Zend\Mail\Part
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Message extends Part implements MailMessage
+class Message
 {
-    /**
-     * flags for this message
-     * @var array
-     */
-    protected $_flags = array();
-
-    /**
-     * Public constructor
-     *
-     * In addition to the parameters of Zend_Mail_Part::__construct() this constructor supports:
-     * - file  filename or file handle of a file with raw message content
-     * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
-     *
-     * @param  string $rawMessage  full message with or without headers
-     * @throws \Zend\Mail\Exception
-     */
-    public function __construct(array $params)
+    public function isValid()
     {
-        if (isset($params['file'])) {
-            if (!is_resource($params['file'])) {
-                $params['raw'] = @file_get_contents($params['file']);
-                if ($params['raw'] === false) {
-                    throw new Exception\RuntimeException('could not open file');
-                }
-            } else {
-                $params['raw'] = stream_get_contents($params['file']);
-            }
-        }
-
-        if (!empty($params['flags'])) {
-            // set key and value to the same value for easy lookup
-            $this->_flags = array_combine($params['flags'], $params['flags']);
-        }
-
-        parent::__construct($params);
+        return true;
     }
 
-    /**
-     * return toplines as found after headers
-     *
-     * @return string toplines
-     */
-    public function getTopLines()
+    public function headers()
     {
-        return $this->_topLines;
     }
 
-    /**
-     * check if flag is set
-     *
-     * @param mixed $flag a flag name, use constants defined in \Zend\Mail\Storage\Storage
-     * @return bool true if set, otherwise false
-     */
-    public function hasFlag($flag)
+    public function addFrom($emailOrAddressOrList, $name = null)
     {
-        return isset($this->_flags[$flag]);
     }
 
-    /**
-     * get all set flags
-     *
-     * @return array array with flags, key and value are the same for easy lookup
-     */
-    public function getFlags()
+    public function from()
     {
-        return $this->_flags;
+    }
+
+    public function addTo($emailOrAddressOrList, $name = null)
+    {
+    }
+
+    public function to()
+    {
+    }
+
+    public function addCc($emailOrAddressOrList, $name = null)
+    {
+    }
+
+    public function cc()
+    {
+    }
+
+    public function addBcc($emailOrAddressOrList, $name = null)
+    {
+    }
+
+    public function bcc()
+    {
+    }
+
+    public function addReplyTo($emailOrAddressOrList, $name = null)
+    {
+    }
+
+    public function replyTo()
+    {
+    }
+
+    public function setSender($emailOrAddress, $name = null)
+    {
+    }
+
+    public function getSender()
+    {
+    }
+
+    public function setSubject($subject)
+    {
+    }
+
+    public function getSubject()
+    {
+    }
+
+    public function setBody($body)
+    {
+    }
+
+    public function getBody()
+    {
+    }
+
+    public function getBodyText()
+    {
     }
 }

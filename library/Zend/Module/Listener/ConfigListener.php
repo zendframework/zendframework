@@ -2,7 +2,8 @@
 
 namespace Zend\Module\Listener;
 
-use Traversable,
+use ArrayAccess,
+    Traversable,
     Zend\Config\Config,
     Zend\Config\Xml as XmlConfig,
     Zend\Config\Ini as IniConfig,
@@ -159,6 +160,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
      */
     protected function mergeGlobPath($globPath)
     {
+        $env = $this->getOptions()->getApplicationEnvironment();
         foreach (glob($globPath, GLOB_BRACE) as $path) {
             $pathInfo = pathinfo($path);
             switch (strtolower($pathInfo['extension'])) {
@@ -190,6 +192,11 @@ class ConfigListener extends AbstractListener implements ConfigMerger
                         $path
                     ));
                     break;
+            }
+            if (is_array($config) || $config instanceof ArrayAccess) {
+                if (isset($config[$env])) {
+                    $config = $config[$env];
+                }
             }
             $this->mergeTraversableConfig($config);
         }

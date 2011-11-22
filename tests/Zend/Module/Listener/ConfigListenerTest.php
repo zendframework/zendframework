@@ -2,13 +2,14 @@
 
 namespace ZendTest\Module\Listener;
 
-use PHPUnit_Framework_TestCase as TestCase,
+use ArrayObject,
+    InvalidArgumentException,
+    PHPUnit_Framework_TestCase as TestCase,
+    Zend\Loader\AutoloaderFactory,
     Zend\Loader\ModuleAutoloader,
-    Zend\Module\Manager,
     Zend\Module\Listener\ConfigListener,
     Zend\Module\Listener\ListenerOptions,
-    Zend\Loader\AutoloaderFactory,
-    InvalidArgumentException;
+    Zend\Module\Manager;
 
 class ConfigListenerTest extends TestCase
 {
@@ -145,7 +146,7 @@ class ConfigListenerTest extends TestCase
     public function testCanMergeConfigFromArrayOfGlobs()
     {
         $moduleManager = new Manager(array('SomeModule'));
-        $moduleManager->getConfigListener()->addConfigGlobPaths(new \ArrayObject(array(
+        $moduleManager->getConfigListener()->addConfigGlobPaths(new ArrayObject(array(
             dirname(__DIR__) . '/_files/*.ini',
             dirname(__DIR__) . '/_files/*.json',
             dirname(__DIR__) . '/_files/*.php',
@@ -160,5 +161,30 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('yes', $configObject->json);
         $this->assertSame('yes', $configObject->xml);
         $this->assertTrue($configObject->yaml);
+    }
+
+    public function testGlobMergingHonorsProvidedEnvironment()
+    {
+        $moduleManager = new Manager(array('SomeModule'));
+        $options = new ListenerOptions(array(
+            'application_environment' => 'testing',
+        ));
+        $moduleManager->setDefaultListenerOptions($options);
+        $configListener = $moduleManager->getConfigListener();
+        $configListener->addConfigGlobPaths(new ArrayObject(array(
+            __DIR__ . '/_files/*.ini',
+            __DIR__ . '/_files/*.json',
+            __DIR__ . '/_files/*.php',
+            __DIR__ . '/_files/*.xml',
+            __DIR__ . '/_files/*.yml',
+        )));
+        $moduleManager->loadModules();
+        // Test as object
+        $configObject = $moduleManager->getMergedConfig();
+        $this->assertSame('testing', $configObject->ini, var_export($configObject->toArray(), 1));
+        $this->assertSame('testing', $configObject->php);
+        $this->assertSame('testing', $configObject->json);
+        $this->assertSame('testing', $configObject->xml);
+        $this->assertSame('testing', $configObject->yml);
     }
 }

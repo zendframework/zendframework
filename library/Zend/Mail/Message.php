@@ -31,21 +31,73 @@ namespace Zend\Mail;
  */
 class Message
 {
+    protected $headers;
+
+    /**
+     * Is the message valid?
+     *
+     * If we don't any From addresses, we're invalid, according to RFC2822.
+     * 
+     * @return bool
+     */
     public function isValid()
     {
-        return true;
+        $from = $this->from();
+        if (!$from instanceof AddressList) {
+            return false;
+        }
+        return (bool) count($from);
+    }
+
+    /**
+     * Compose headers
+     * 
+     * @param  Headers $headers 
+     * @return Message
+     */
+    public function setHeaders(Headers $headers)
+    {
+        $this->headers = $headers;
+        return $this;
     }
 
     public function headers()
     {
+        if (null === $this->headers) {
+            $this->setHeaders(new Headers());
+            $this->headers->addHeaderLine('Orig-Date', date('r'));
+        }
+        return $this->headers;
     }
 
+    /**
+     * Set (overwrite) From addresses
+     * 
+     * @param  string|Address|AddressList $emailOrAddressList 
+     * @param  string|null $name 
+     * @return Message
+     */
     public function setFrom($emailOrAddressList, $name = null)
     {
+        $headers = $this->headers();
+        if ($headers->has('from')) {
+            $header = $headers->get('from');
+            $headers->removeHeader($header);
+        }
+
+        return $this->addFrom($emailOrAddressList, $name);
     }
 
+    /**
+     * Add a "From" address
+     * 
+     * @param  string|Address|AddressList $emailOrAddressOrList 
+     * @param  string|null $name 
+     * @return Message
+     */
     public function addFrom($emailOrAddressOrList, $name = null)
     {
+
     }
 
     public function from()

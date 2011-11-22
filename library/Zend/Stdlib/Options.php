@@ -34,31 +34,31 @@ use Traversable;
 abstract class Options implements ParameterObject
 {
     /**
-     * @param array|Traversable|null $config
+     * @param  array|Traversable|null $config
      * @return Options
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($config = null)
     {
-        if (!is_null($config)) {
-            if (is_array($config) || $config instanceof Traversable) {
-                $this->processArray($config);
-            } else {
-                throw new Exception\InvalidArgumentException(
-                    'Parameter to \Zend\Stdlib\Options\'s '
-                    . 'constructor must be an array or implement the '
-                    . 'Traversable interface'
-                );
-            }
+        if (is_null($config)) {
+            return;
         }
+        $this->processArray($config);
     }
 
     /**
-     * @param array $config
+     * @param  array|Traversable $config
      * @return void
      */
-    protected function processArray(array $config)
+    protected function processArray($config)
     {
+        if (!is_array($config) && !$config instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Parameter provided to %s must be an array or Traversable',
+                __METHOD__
+            ));
+        }
+
         foreach ($config as $key => $value) {
             $setter = $this->assembleSetterNameFromConfigKey($key);
             $this->{$setter}($value);

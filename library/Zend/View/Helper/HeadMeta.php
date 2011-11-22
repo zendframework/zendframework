@@ -371,6 +371,14 @@ class HeadMeta extends Placeholder\Container\Standalone
             $this->_escape($item->content),
             $modifiersString
         );
+
+        if (isset($item->modifiers['conditional'])
+            && !empty($item->modifiers['conditional'])
+            && is_string($item->modifiers['conditional']))
+        {
+            $meta = '<!--[if ' . $this->_escape($item->modifiers['conditional']) . ']>' . $meta . '<![endif]-->';
+        }
+
         return $meta;
     }
 

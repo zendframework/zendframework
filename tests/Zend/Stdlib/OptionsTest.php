@@ -2,7 +2,8 @@
 
 namespace ZendTest\Stdlib;
 
-use ZendTest\Stdlib\TestAsset\TestOptions,
+use ArrayObject,
+    ZendTest\Stdlib\TestAsset\TestOptions,
     ZendTest\Stdlib\TestAsset\TestTraversable,
     Zend\Stdlib\Exception\InvalidArgumentException;
 
@@ -17,7 +18,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     
     public function testConstructionWithTraversable()
     {
-        $config = new \ArrayObject(array('test_field' => 1));
+        $config = new ArrayObject(array('test_field' => 1));
         $options = new TestOptions($config);
         
         $this->assertEquals(1, $options->test_field);

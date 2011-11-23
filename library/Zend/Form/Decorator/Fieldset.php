@@ -61,6 +61,26 @@ class Fieldset extends AbstractDecorator
      * @var string
      */
     protected $_placement = null;
+    
+    /**
+     * Get option
+     *
+     * @param  string $key
+     * @return mixed
+     */
+    public function getOption($key)
+    {
+        if (null !== $this->_element) {
+            $this->getOptions();
+        }
+        
+        $key = (string) $key;
+        if (isset($this->_options[$key])) {
+            return $this->_options[$key];
+        }
+
+        return null;
+    }
 
     /**
      * Get options
@@ -74,7 +94,7 @@ class Fieldset extends AbstractDecorator
         $options = parent::getOptions();
         if (null !== ($element = $this->getElement())) {
             $attribs = $element->getAttribs();
-            $options = array_merge($options, $attribs);
+            $options = array_merge($attribs,$options);
             $this->setOptions($options);
         }
         return $options;

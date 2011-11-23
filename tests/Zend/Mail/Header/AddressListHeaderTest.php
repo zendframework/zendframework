@@ -87,4 +87,37 @@ class AddressListHeaderTest extends TestCase
         $expected = sprintf("%s: %s\r\n", $type, $this->getExpectedFieldValue());
         $this->assertEquals($expected, $header->toString());
     }
+
+    public function getStringHeaders()
+    {
+        $value = $this->getExpectedFieldValue();
+        return array(
+            array('Cc: ' . $value, 'Zend\Mail\Header\Cc'),
+            array('Bcc: ' . $value, 'Zend\Mail\Header\Bcc'),
+            array('From: ' . $value, 'Zend\Mail\Header\From'),
+            array('Reply-To: ' . $value, 'Zend\Mail\Header\ReplyTo'),
+            array('To: ' . $value, 'Zend\Mail\Header\To'),
+        );
+    }
+
+    /**
+     * @dataProvider getStringHeaders
+     */
+    public function testDeserializationFromString($headerLine, $class)
+    {
+        $callback = sprintf('%s::fromString', $class);
+        $header   = call_user_func($callback, $headerLine);
+        $this->assertInstanceOf($class, $header);
+        $list = $header->getAddressList();
+        $this->assertEquals(3, count($list));
+        $this->assertTrue($list->has('zf-devteam@zend.com'));
+        $this->assertTrue($list->has('zf-contributors@lists.zend.com'));
+        $this->assertTrue($list->has('fw-announce@lists.zend.com'));
+        $address = $list->get('zf-devteam@zend.com');
+        $this->assertEquals('ZF DevTeam', $address->getName());
+        $address = $list->get('zf-contributors@lists.zend.com');
+        $this->assertNull($address->getName());
+        $address = $list->get('fw-announce@lists.zend.com');
+        $this->assertEquals('ZF Announce List', $address->getName());
+    }
 }

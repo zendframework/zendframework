@@ -44,11 +44,11 @@ abstract class AbstractAddressList implements HeaderDescription
         $addressList = $header->getAddressList();
         foreach ($values as $address) {
             // split values into name/email
-            if (!preg_match('/^(?<name>.*?)<(?<email>[^>]+>)$/', $address, $matches)) {
+            if (!preg_match('/^(?<name>.*?)<(?<email>[^>]+)>$/', $address, $matches)) {
                 // Should we raise an exception here?
                 continue;
             }
-            $name  = $matches['name'];
+            $name  = trim($matches['name']);
             $email = $matches['email'];
             if (empty($name)) {
                 $name = null;

@@ -25,7 +25,8 @@
 namespace ZendTest\Validator\Db;
 
 use Zend\Db\Table\AbstractTable,
-    Zend\Validator\Db\RecordExists as RecordExistsValidator;
+    Zend\Validator\Db\RecordExists as RecordExistsValidator,
+    ReflectionClass;
 
 /**
  * @category   Zend
@@ -211,5 +212,41 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
         AbstractTable::setDefaultAdapter($this->_adapterHasResult);
         $validator = new RecordExistsValidator('users', 'field1', 'id != 1');
         $this->assertTrue($validator->isValid('value3'));
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = new RecordExistsValidator('users', 'field1');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = new RecordExistsValidator('users', 'field1');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

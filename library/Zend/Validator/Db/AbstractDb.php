@@ -107,6 +107,8 @@ abstract class AbstractDb extends AbstractValidator
      */
     public function __construct($options = null)
     {
+        parent::__construct();
+    
         if ($options instanceof DBSelect) {
             $this->setSelect($options);
             return;

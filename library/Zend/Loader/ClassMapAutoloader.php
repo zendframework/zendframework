@@ -182,15 +182,45 @@ class ClassMapAutoloader implements SplAutoloader
             throw new Exception\InvalidArgumentException('Map file provided does not exist');
         }
 
-        $location = realpath($location);
+        if (!$path = static::realPharPath($location)) {
+            $path = realpath($location);
+        }
 
-        if (in_array($location, $this->mapsLoaded)) {
+        if (in_array($path, $this->mapsLoaded)) {
             // Already loaded this map
             return $this;
         }
 
-        $map = include $location;
+        $map = include $path;
 
         return $map;
+    }
+
+    /**
+     * Resolve the real_path() to a file within a phar.
+     *
+     * @see https://bugs.php.net/bug.php?id=52769 
+     * @param string $path 
+     * @return string
+     */
+    public static function realPharPath($path)
+    {
+        if (strpos($path, 'phar:///') !== 0) {
+            return;
+        }
+        
+        $parts = explode('/', str_replace(array('/','\\'), '/', substr($path, 8)));
+        $parts = array_filter($parts, function($p) { return ($p !== '' && $p !== '.'); });
+
+        array_walk($parts, function ($value, $key) use(&$parts) {
+            if ($value === '..') {
+                unset($parts[$key]);
+                unset($parts[$key - 1]);
+            }
+        });
+
+        if (file_exists($realPath = 'phar:///' . implode('/', $parts))) {
+            return $realPath;
+        }
     }
 }

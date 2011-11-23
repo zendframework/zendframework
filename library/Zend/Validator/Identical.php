@@ -84,6 +84,8 @@ class Identical extends AbstractValidator
         } elseif (null !== $token) {
             $this->setToken($token);
         }
+        
+        parent::__construct();
     }
 
     /**

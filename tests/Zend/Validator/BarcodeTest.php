@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Validator;
-use Zend\Validator\Barcode;
+use Zend\Validator\Barcode,
+    ReflectionClass;
 
 /**
  * \Zend\Validator\Barcode
@@ -468,5 +469,41 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     {
         $barcode = new Barcode('ean13');
         $this->assertFalse($barcode->isValid('3RH1131-1BB40'));
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = new Barcode('code25');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = new Barcode('code25');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

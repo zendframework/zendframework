@@ -106,6 +106,8 @@ class Date extends AbstractValidator
         if (array_key_exists('locale', $options)) {
             $this->setLocale($options['locale']);
         }
+        
+        parent::__construct();
     }
 
     /**

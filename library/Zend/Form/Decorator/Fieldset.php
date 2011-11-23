@@ -74,12 +74,7 @@ class Fieldset extends AbstractDecorator
             $this->getOptions();
         }
         
-        $key = (string) $key;
-        if (isset($this->_options[$key])) {
-            return $this->_options[$key];
-        }
-
-        return null;
+        return parent::getOption($key);
     }
 
     /**

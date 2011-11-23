@@ -137,6 +137,8 @@ class Iban extends AbstractValidator
         if ($locale !== null) {
             $this->setLocale($locale);
         }
+        
+        parent::__construct();
     }
 
     /**

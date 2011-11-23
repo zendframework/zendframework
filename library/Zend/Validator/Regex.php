@@ -82,6 +82,8 @@ class Regex extends AbstractValidator
         }
 
         $this->setPattern($pattern);
+        
+        parent::__construct();
     }
 
     /**

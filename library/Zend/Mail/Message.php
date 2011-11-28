@@ -23,6 +23,8 @@
  */
 namespace Zend\Mail;
 
+use Traversable;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -91,17 +93,49 @@ class Message
     /**
      * Add a "From" address
      * 
-     * @param  string|Address|AddressList $emailOrAddressOrList 
+     * @param  string|Address|array|AddressList|Traversable $emailOrAddressOrList 
      * @param  string|null $name 
      * @return Message
      */
     public function addFrom($emailOrAddressOrList, $name = null)
     {
-
+        $addressList = $this->from();
+        if ($emailOrAddressOrList instanceof Traversable) {
+            foreach ($emailOrAddressOrList as $address) {
+                $addressList->add($address);
+            }
+            return $this;
+        }
+        if (is_array($emailOrAddressOrList)) {
+            $addressList->addMany($emailOrAddressOrList);
+            return $this;
+        }
+        if (!is_string($emailOrAddressOrList) && !$emailOrAddressOrList instanceof AddressDescription) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a string, AddressDescription, array, AddressList, or Traversable as its first argument; received "%s"',
+                __METHOD__,
+                (is_object($emailOrAddressOrList) ? get_class($emailOrAddressOrList) : gettype($emailOrAddressOrList))
+            ));
+        }
+        $addressList->add($emailOrAddressOrList, $name);
+        return $this;
     }
 
+    /**
+     * Retrieve list of From recipients
+     * 
+     * @return AddressList
+     */
     public function from()
     {
+        $headers = $this->headers();
+        if ($headers->has('from')) {
+            $header = $headers->get('from');
+        } else {
+            $header = new Header\From();
+            $headers->addHeader($header);
+        }
+        return $header->getAddressList();
     }
 
     public function setTo($emailOrAddressList, $name = null)

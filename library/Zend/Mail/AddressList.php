@@ -14,6 +14,13 @@ class AddressList implements Countable, Iterator
      */
     protected $addresses = array();
 
+    /**
+     * Add an address to the list
+     * 
+     * @param  string|AddressDescription $emailOrAddress 
+     * @param  null|string $name 
+     * @return AddressList
+     */
     public function add($emailOrAddress, $name = null)
     {
         if (is_string($emailOrAddress)) {
@@ -61,6 +68,20 @@ class AddressList implements Countable, Iterator
                     (is_object($key) ? get_class($key) : var_export($key, 1))
                 ));
             }
+        }
+        return $this;
+    }
+
+    /**
+     * Merge another address list into this one 
+     * 
+     * @param  AddressList $addressList 
+     * @return AddressList
+     */
+    public function merge(AddressList $addressList)
+    {
+        foreach ($addressList as $address) {
+            $this->add($address);
         }
         return $this;
     }

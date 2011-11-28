@@ -296,12 +296,38 @@ class Message
         return $header->getAddress();
     }
 
+    /**
+     * Set the message subject header value
+     * 
+     * @param  string $subject 
+     * @return Message
+     */
     public function setSubject($subject)
     {
+        $headers = $this->headers();
+        if (!$headers->has('subject')) {
+            $header = new Header\Subject();
+            $headers->addHeader($header);
+        } else {
+            $header = $headers->get('subject');
+        }
+        $header->setSubject($subject);
+        return $this;
     }
 
+    /**
+     * Get the message subject header value
+     * 
+     * @return null|string
+     */
     public function getSubject()
     {
+        $headers = $this->headers();
+        if (!$headers->has('subject')) {
+            return null;
+        }
+        $header = $headers->get('subject');
+        return $header->getFieldValue();
     }
 
     public function setBody($body)

@@ -249,7 +249,7 @@ class Client
 
         $xml = $this->_lastRequest->__toString();
         $http->setRawBody($xml);
-        $httpResponse = $http->setMethod('post')->send();
+        $httpResponse = $http->setMethod('POST')->send();
 
         if (!$httpResponse->isSuccess()) {
             /**

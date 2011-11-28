@@ -3,12 +3,8 @@
 namespace Zend\Mail\Header;
 
 use Zend\Mail\Address,
-    Zend\Mail\AddressDescription,
-    Zend\Mail\Exception;
+    Zend\Mail\AddressDescription;
 
-/**
- * @throws Exception\InvalidArgumentException
- */
 class Sender implements HeaderDescription
 {
     /**
@@ -16,16 +12,23 @@ class Sender implements HeaderDescription
      */
     protected $address;
 
+    /**
+     * Factory: create Sender header object from string
+     * 
+     * @param  string $headerLine 
+     * @return Sender
+     * @throws Exception\InvalidArgumentException on invalid header line
+     */
     public static function fromString($headerLine)
     {
-        $header = new static();
-
         list($name, $value) = preg_split('#: #', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'sender') {
             throw new Exception\InvalidArgumentException('Invalid header line for Sender string');
         }
+
+        $header = new static();
 
         // Check for address, and set if found
         if (preg_match('^(?<name>.*?)<(?<email>[^>]+)>$', $value, $matches)) {
@@ -35,11 +38,21 @@ class Sender implements HeaderDescription
         return $header;
     }
 
+    /**
+     * Get header name
+     * 
+     * @return string
+     */
     public function getFieldName()
     {
         return 'Sender';
     }
 
+    /**
+     * Get header value
+     * 
+     * @return string
+     */
     public function getFieldValue()
     {
         if (!$this->address instanceof AddressDescription) {
@@ -54,6 +67,11 @@ class Sender implements HeaderDescription
         return $email;
     }
 
+    /**
+     * Serialize to string
+     * 
+     * @return string
+     */
     public function toString()
     {
         return 'Sender: ' . $this->getFieldValue();

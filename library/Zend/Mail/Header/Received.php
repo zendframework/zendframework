@@ -3,43 +3,74 @@
 namespace Zend\Mail\Header;
 
 /**
- * @throws Exception\InvalidArgumentException
+ * @todo Allow setting date from DateTime, Zend\Date, or string
  */
 class Received implements MultipleHeaderDescription
 {
+    /**
+     * @var string
+     */
+    protected $value;
 
+    /**
+     * Factory: create Received header object from string
+     * 
+     * @param  string $headerLine 
+     * @return Received
+     * @throws Exception\InvalidArgumentException
+     */
     public static function fromString($headerLine)
     {
-        $header = new static();
 
         list($name, $value) = preg_split('#: #', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'received') {
-            throw new Exception\InvalidArgumentException('Invalid header line for received string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Received string');
         }
 
-        // @todo implementation details
+        $header = new static();
         $header->value= $value;
         
         return $header;
     }
 
+    /**
+     * Get header name
+     * 
+     * @return string
+     */
     public function getFieldName()
     {
         return 'Received';
     }
 
+    /**
+     * Get header value
+     * 
+     * @return string
+     */
     public function getFieldValue()
     {
         return $this->value;
     }
 
+    /**
+     * Serialize to string
+     * 
+     * @return string
+     */
     public function toString()
     {
         return 'Received: ' . $this->getFieldValue();
     }
     
+    /**
+     * Serialize collection of Received headers to string
+     * 
+     * @param  array $headers 
+     * @return string
+     */
     public function toStringMultipleHeaders(array $headers)
     {
         $strings = array($this->toString());

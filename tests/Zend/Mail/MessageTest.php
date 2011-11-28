@@ -27,6 +27,7 @@ namespace ZendTest\Mail;
 use stdClass,
     Zend\Mail\Address,
     Zend\Mail\AddressList,
+    Zend\Mail\Header,
     Zend\Mail\Message,
     Zend\Mime\Message as MimeMessage,
     Zend\Mime\Mime,
@@ -193,6 +194,15 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->message->setSender($sender);
         $test = $this->message->getSender();
         $this->assertSame($sender, $test);
+    }
+
+    public function testSenderAccessorsProxyToSenderHeader()
+    {
+        $header = new Header\Sender();
+        $this->message->headers()->addHeader($header);
+        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->setSender($address);
+        $this->assertSame($address, $header->getAddress());
     }
 
     public function testCanAddFromAddressUsingName()

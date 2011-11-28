@@ -33,6 +33,9 @@ use Traversable;
  */
 class Message
 {
+    /**
+     * @var Headers
+     */
     protected $headers;
 
     /**
@@ -268,12 +271,29 @@ class Message
         return $this->getAddressListFromHeader('reply-to', __NAMESPACE__ . '\Header\ReplyTo');
     }
 
+    /**
+     * setSender 
+     * 
+     * @param mixed $emailOrAddress 
+     * @param mixed $name 
+     * @return void
+     */
     public function setSender($emailOrAddress, $name = null)
     {
+        $header = $this->getHeader('sender', __NAMESPACE__ . '\Header\Sender');
+        $header->setAddress($emailOrAddress, $name);
+        return $this;
     }
 
+    /**
+     * Retrieve the sender address, if any
+     * 
+     * @return null|AddressDescription
+     */
     public function getSender()
     {
+        $header = $this->getHeader('sender', __NAMESPACE__ . '\Header\Sender');
+        return $header->getAddress();
     }
 
     public function setSubject($subject)
@@ -294,6 +314,27 @@ class Message
 
     public function getBodyText()
     {
+    }
+
+    /**
+     * Retrieve a header by name
+     *
+     * If not found, instantiates one based on $headerClass.
+     * 
+     * @param  string $headerName 
+     * @param  string $headerClass 
+     * @return HeaderDescription
+     */
+    protected function getHeader($headerName, $headerClass)
+    {
+        $headers = $this->headers();
+        if ($headers->has($headerName)) {
+            $header = $headers->get($headerName);
+        } else {
+            $header = new $headerClass();
+            $headers->addHeader($header);
+        }
+        return $header;
     }
 
     /**
@@ -323,12 +364,12 @@ class Message
      */
     protected function getAddressListFromHeader($headerName, $headerClass)
     {
-        $headers = $this->headers();
-        if ($headers->has($headerName)) {
-            $header = $headers->get($headerName);
-        } else {
-            $header = new $headerClass();
-            $headers->addHeader($header);
+        $header = $this->getHeader($headerName, $headerClass);
+        if (!$header instanceof Header\AbstractAddressList) {
+            throw new Exception\DomainException(sprintf(
+                'Cannot grab address list from header of type "%s"; not an AbstractAddressList implementation',
+                get_class($header)
+            ));
         }
         return $header->getAddressList();
     }

@@ -23,7 +23,8 @@
  */
 namespace Zend\Mail;
 
-use Traversable;
+use Traversable,
+    Zend\Mime\Message as MimeMessage;
 
 /**
  * @category   Zend
@@ -33,6 +34,13 @@ use Traversable;
  */
 class Message
 {
+    /**
+     * Content of the message
+     * 
+     * @var null|string|object
+     */
+    protected $body;
+
     /**
      * @var Headers
      */
@@ -330,12 +338,39 @@ class Message
         return $header->getFieldValue();
     }
 
+    /**
+     * Set the message body
+     * 
+     * @param  null|string|MimeMessage|object $body 
+     * @return Message
+     */
     public function setBody($body)
     {
+        if (!is_string($body) && !is_null($body)) {
+            if (!is_object($body)) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    '%s expects a string or object argument; received "%s"',
+                    __METHOD__,
+                    gettype($body)
+                ));
+            }
+            if (!$body instanceof MimeMessage) {
+                if (!method_exists($body, '__toString')) {
+                    throw new Exception\InvalidArgumentException(sprintf(
+                        '%s expects object arguments of type Zend\Mime\Message or implementing __toString(); object of type "%s" received',
+                        __METHOD__,
+                        get_class($body)
+                    ));
+                }
+            }
+        }
+        $this->body = $body;
+        return $this;
     }
 
     public function getBody()
     {
+        return $this->body;
     }
 
     public function getBodyText()

@@ -365,16 +365,40 @@ class Message
             }
         }
         $this->body = $body;
+
+        if ($this->body instanceof MimeMessage) {
+            /** @todo set headers */
+        }
+
         return $this;
     }
 
+    /**
+     * Return the currently set message body
+     * 
+     * @return null|object
+     */
     public function getBody()
     {
         return $this->body;
     }
 
+    /**
+     * Get the string-serialized message body text
+     * 
+     * @return string|null
+     */
     public function getBodyText()
     {
+        if (null === $this->body || is_string($this->body)) {
+            return $this->body;
+        }
+
+        if ($this->body instanceof MimeMessage) {
+            return $this->body->generateMessage();
+        }
+
+        return (string) $this->body;
     }
 
     /**

@@ -366,10 +366,28 @@ class Message
         }
         $this->body = $body;
 
-        if ($this->body instanceof MimeMessage) {
-            /** @todo set headers */
+        if (!$this->body instanceof MimeMessage) {
+            return $this;
         }
 
+        // Get headers, and set Mime-Version header
+        $headers = $this->headers();
+        $this->getHeader('mime-version', __NAMESPACE__ . '\Header\MimeVersion');
+
+        // Multipart content headers
+        if ($this->body->isMultiPart()) {
+            $mime   = $this->body->getMime();
+            $header = $this->getHeader('content-type', __NAMESPACE__ . '\Header\ContentType');
+            $header->setType(sprintf('multipart/mixed; boundary="%s"', $mime->boundary()));
+            return $this;
+        }
+
+        // MIME single part headers
+        $parts = $this->body->getParts();
+        if (!empty($parts)) {
+            $part = array_shift($parts);
+            $headers->addHeaders($part->getHeadersArray());
+        }
         return $this;
     }
 

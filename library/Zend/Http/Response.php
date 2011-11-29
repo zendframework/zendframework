@@ -54,6 +54,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_422 = 422;
     const STATUS_CODE_423 = 423;
     const STATUS_CODE_424 = 424;
+    const STATUS_CODE_425 = 425;
     const STATUS_CODE_428 = 428;
     const STATUS_CODE_429 = 429;
     const STATUS_CODE_431 = 431;
@@ -131,6 +132,7 @@ class Response extends Message implements ResponseDescription
         422 => 'Unprocessable Entity',
         423 => 'Locked',
         424 => 'Failed Dependency',
+        425 => 'Unordered Collection',
         428 => 'Precondition Required',
         429 => 'Too Many Requests',
         431 => 'Request Header Fields Too Large',

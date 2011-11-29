@@ -65,6 +65,11 @@ class Sendmail implements Transport
     protected $errstr;
 
     /**
+     * @var string
+     */
+    protected $operatingSystem;
+
+    /**
      * Constructor.
      *
      * @param  null|string|array|Traversable $parameters OPTIONAL (Default: null)
@@ -169,8 +174,13 @@ class Sendmail implements Transport
             throw new Exception\RuntimeException('Invalid "To" header; contains no addresses');
         }
 
-        $addresses = array();
+        // If not on Windows, return normal string
+        if (!$this->isWindowsOs()) {
+            return $to->getFieldValue();
+        }
 
+        // Otherwise, return list of emails
+        $addresses = array();
         foreach ($list as $address) {
             $addresses[] = $address->getEmail();
         }
@@ -209,7 +219,21 @@ class Sendmail implements Transport
     protected function prepareHeaders(Message $message)
     {
         $headers = $message->headers();
-        return $headers->toString();
+
+        // On Windows, simply return verbatim
+        if ($this->isWindowsOs()) {
+            return $headers->toString();
+        }
+
+        // On *nix platforms, strip the "to" header
+        $headersToSend = new Headers();
+        foreach ($headers as $header) {
+            if ('To' == $header->getFieldName()) {
+                continue;
+            }
+            $headersToSend->addHeader($header);
+        }
+        return $headersToSend->toString();
     }
 
     /**
@@ -287,4 +311,16 @@ class Sendmail implements Transport
         return true;
     }
 
+    /**
+     * Is this a windows OS?
+     * 
+     * @return bool
+     */
+    protected function isWindowsOs()
+    {
+        if (!$this->operatingSystem) {
+            $this->operatingSystem = strtoupper(substr(PHP_OS, 0, 3));
+        }
+        return ($this->operatingSystem == 'WIN');
+    }
 }

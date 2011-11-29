@@ -207,7 +207,15 @@ class Sendmail implements Transport
      */
     protected function prepareBody(Message $message)
     {
-        return $message->getBodyText();
+        if (!$this->isWindowsOs()) {
+            // *nix platforms can simply return the body text
+            return $message->getBodyText();
+        }
+
+        // On windows, lines beginning with a full stop need to be fixed
+        $text = $message->getBodyText();
+        $text = str_replace("\n.", "\n..", $text);
+        return $text;
     }
 
     /**

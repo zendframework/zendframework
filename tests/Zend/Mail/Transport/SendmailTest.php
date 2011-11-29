@@ -100,4 +100,16 @@ class SendmailTest extends TestCase
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $this->additional_headers);
         $this->assertNull($this->additional_parameters);
     }
+
+    public function testLinesStartingWithFullStopsArePreparedProperlyForWindows()
+    {
+        if ($this->operating_system != 'WIN') {
+            $this->markTestSkipped('This test is Windows-specific');
+        }
+
+        $message = $this->getMessage();
+        $message->setBody("This is the first line.\n. This is the second");
+        $this->transport->send($message);
+        $this->assertContains("line.\n.. This", trim($this->message));
+    }
 }

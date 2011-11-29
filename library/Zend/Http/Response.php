@@ -21,7 +21,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_204 = 204;
     const STATUS_CODE_205 = 205;
     const STATUS_CODE_206 = 206;
-    const STATUS_CODE_207 = 207
+    const STATUS_CODE_207 = 207;
     const STATUS_CODE_300 = 300;
     const STATUS_CODE_301 = 301;
     const STATUS_CODE_302 = 302;

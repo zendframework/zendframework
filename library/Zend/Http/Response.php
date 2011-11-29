@@ -22,6 +22,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_205 = 205;
     const STATUS_CODE_206 = 206;
     const STATUS_CODE_207 = 207;
+    const STATUS_CODE_208 = 208;
     const STATUS_CODE_300 = 300;
     const STATUS_CODE_301 = 301;
     const STATUS_CODE_302 = 302;
@@ -62,6 +63,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_504 = 504;
     const STATUS_CODE_505 = 505;
     const STATUS_CODE_507 = 507;
+    const STATUS_CODE_508 = 508;
     const STATUS_CODE_511 = 511;
     
     /**#@-*/
@@ -94,6 +96,7 @@ class Response extends Message implements ResponseDescription
         205 => 'Reset Content',
         206 => 'Partial Content',
         207 => 'Multi-status',
+        208 => 'Already Reported',
         // REDIRECTION CODES
         300 => 'Multiple Choices',
         301 => 'Moved Permanently',
@@ -137,6 +140,7 @@ class Response extends Message implements ResponseDescription
         504 => 'Gateway Time-out',
         505 => 'HTTP Version not supported',
         507 => 'Insufficient Storage',
+        508 => 'Loop Detected',
         511 => 'Network Authentication Required',
     );
 

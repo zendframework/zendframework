@@ -44,7 +44,7 @@ class SendmailTest extends TestCase
         $message = new Message();
         $message->addTo('zf-devteam@zend.com', 'ZF DevTeam')
                 ->addCc('matthew@zend.com')
-                ->addBcc('zf-crteam@lists.zend.com', 'ZF CR-Team')
+                ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
                 ->addFrom(array(
                     'zf-devteam@zend.com',
                     'Matthew' => 'matthew@zend.com',
@@ -73,7 +73,7 @@ class SendmailTest extends TestCase
         $this->assertEquals('This is only a test.', trim($this->message));
         $this->assertNotContains("To: ZF DevTeam <zf-devteam@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("Cc: matthew@zend.com\r\n", $this->additional_headers);
-        $this->assertContains("Bcc: ZF CR-Team <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("Bcc: \"CR-Team, ZF Project\" <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
         $this->assertContains("From: zf-devteam@zend.com, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $this->additional_headers);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $this->additional_headers);
@@ -94,7 +94,7 @@ class SendmailTest extends TestCase
         $this->assertEquals('This is only a test.', trim($this->message));
         $this->assertContains("To: ZF DevTeam <zf-devteam@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("Cc: matthew@zend.com\r\n", $this->additional_headers);
-        $this->assertContains("Bcc: ZF CR-Team <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("Bcc: \"CR-Team, ZF Project\" <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
         $this->assertContains("From: zf-devteam@zend.com, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $this->additional_headers);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $this->additional_headers);

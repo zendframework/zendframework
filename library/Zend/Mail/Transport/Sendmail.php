@@ -25,7 +25,9 @@
 namespace Zend\Mail\Transport;
 
 use Traversable,
+    Zend\Mail\AddressDescription,
     Zend\Mail\AddressList,
+    Zend\Mail\Exception,
     Zend\Mail\Header,
     Zend\Mail\Headers,
     Zend\Mail\Message,
@@ -55,17 +57,6 @@ class Sendmail implements Transport
      * @var callable
      */
     protected $callable;
-
-    /**
-     * Headers to omit due to being in the recipients list
-     * 
-     * @var array
-     */
-    protected $recipientHeaders = array(
-        'bcc',
-        'cc',
-        'to',
-    );
 
     /**
      * error information
@@ -153,8 +144,9 @@ class Sendmail implements Transport
         $subject = $this->prepareSubject($message);
         $body    = $this->prepareBody($message);
         $headers = $this->prepareHeaders($message);
+        $params  = $this->prepareParameters($message);
 
-        call_user_func($this->callable, $to, $subject, $body, $headers, $this->parameters);
+        call_user_func($this->callable, $to, $subject, $body, $headers, $params);
     }
 
     /**
@@ -165,25 +157,25 @@ class Sendmail implements Transport
      */
     protected function prepareRecipients(Message $message)
     {
-        $addressList = new AddressList();
-        $to = $message->to();
-        if (0 < count($to)) {
-            $addressList->merge($to);
+        $headers = $message->headers();
+
+        if (!$headers->has('to')) {
+            throw new Exception\RuntimeException('Invalid email; contains no "To" header');
         }
 
-        $cc = $message->cc();
-        if (0 < count($cc)) {
-            $addressList->merge($cc);
+        $to   = $headers->get('to');
+        $list = $to->getAddressList();
+        if (0 == count($list)) {
+            throw new Exception\RuntimeException('Invalid "To" header; contains no addresses');
         }
 
-        $bcc = $message->bcc();
-        if (0 < count($bcc)) {
-            $addressList->merge($bcc);
-        }
+        $addresses = array();
 
-        $header = new Header\To();
-        $header->setAddressList($addressList);
-        return $header->getFieldValue();
+        foreach ($list as $address) {
+            $addresses[] = $address->getEmail();
+        }
+        $addresses = implode(', ', $addresses);
+        return $addresses;
     }
 
     /**
@@ -217,16 +209,37 @@ class Sendmail implements Transport
     protected function prepareHeaders(Message $message)
     {
         $headers = $message->headers();
+        return $headers->toString();
+    }
 
-        $headersToSend = new Headers();
-        foreach ($headers as $header) {
-            if (in_array($header->getFieldName(), $this->recipientHeaders)) {
-                continue;
-            }
-            $headersToSend->addHeader($header);
+    /**
+     * Prepare additional_parameters argument
+     *
+     * Basically, overrides the MAIL FROM envelope with either the Sender or 
+     * From address.
+     * 
+     * @param  Message $message 
+     * @return string
+     */
+    protected function prepareParameters(Message $message)
+    {
+        $parameters = (string) $this->parameters;
+
+        $sender = $message->getSender();
+        if ($sender instanceof AddressDescription) {
+            $parameters .= ' -r ' . $sender->getEmail();
+            return $parameters;
         }
 
-        return $headersToSend->toString();
+        $from = $message->from();
+        if (count($from)) {
+            $from->rewind();
+            $sender      = $from->current();
+            $parameters .= ' -r ' . $sender->getEmail();
+            return $parameters;
+        }
+
+        return $parameters;
     }
 
     /**

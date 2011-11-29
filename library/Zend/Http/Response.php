@@ -14,6 +14,7 @@ class Response extends Message implements ResponseDescription
     const STATUS_CODE_CUSTOM = 0;
     const STATUS_CODE_100 = 100;
     const STATUS_CODE_101 = 101;
+    const STATUS_CODE_102 = 102;
     const STATUS_CODE_200 = 200;
     const STATUS_CODE_201 = 201;
     const STATUS_CODE_202 = 202;
@@ -87,6 +88,7 @@ class Response extends Message implements ResponseDescription
         // INFORMATIONAL CODES
         100 => 'Continue',
         101 => 'Switching Protocols',
+        102 => 'Processing',
         // SUCCESS CODES
         200 => 'OK',
         201 => 'Created',

@@ -72,9 +72,9 @@ class SendmailTest extends TestCase
         $this->assertEquals('Testing Zend\Mail\Transport\Sendmail', $this->subject);
         $this->assertEquals('This is only a test.', trim($this->message));
         $this->assertNotContains("To: ZF DevTeam <zf-devteam@zend.com>\r\n", $this->additional_headers);
-        $this->assertContains("Cc: <matthew@zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("Cc: matthew@zend.com\r\n", $this->additional_headers);
         $this->assertContains("Bcc: ZF CR-Team <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
-        $this->assertContains("From: <zf-devteam@zend.com>, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("From: zf-devteam@zend.com, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $this->additional_headers);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $this->additional_headers);
         $this->assertEquals('-R hdrs -r ralph.schindler@zend.com', $this->additional_parameters);
@@ -93,9 +93,9 @@ class SendmailTest extends TestCase
         $this->assertEquals('Testing Zend\Mail\Transport\Sendmail', $this->subject);
         $this->assertEquals('This is only a test.', trim($this->message));
         $this->assertContains("To: ZF DevTeam <zf-devteam@zend.com>\r\n", $this->additional_headers);
-        $this->assertContains("Cc: <matthew@zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("Cc: matthew@zend.com\r\n", $this->additional_headers);
         $this->assertContains("Bcc: ZF CR-Team <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
-        $this->assertContains("From: <zf-devteam@zend.com>, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("From: zf-devteam@zend.com, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $this->additional_headers);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $this->additional_headers);
         $this->assertNull($this->additional_parameters);

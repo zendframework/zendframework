@@ -70,12 +70,12 @@ abstract class AbstractAddressList implements HeaderDescription
     {
         $emails = array();
         foreach ($this->getAddressList() as $address) {
-            $email = sprintf('<%s>', $address->getEmail());
+            $email = $address->getEmail();
             $name  = $address->getName();
             if (empty($name)) {
                 $emails[] = $email;
             } else {
-                $emails[] = sprintf('%s %s', $name, $email);
+                $emails[] = sprintf('%s <%s>', $name, $email);
             }
         }
         $string = implode(', ', $emails);

@@ -3,228 +3,179 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Mvc\Router\Http\Literal,
-    Zend\Mvc\Router\Http\Part,
-    Zend\Mvc\Router\RouteBroker;
+    Zend\Mvc\Router\RouteBroker,
+    Zend\Mvc\Router\Http\Part;
 
 class PartTest extends TestCase
 {
-    public static function matchProvider()
-    {
-        return array(
-            array(array(
-                'uri'    => 'http://test.net/',
-                'offset' => 0,
-                'match'  => array(
-                    'controller' => 'ItsHomePage',
-                ),
-                'name'   => null,
-            )),
-            array(array(
-                'uri'    => 'http://test.net/blog',
-                'offset' => 0,
-                'match'  => array(
-                    'controller' => 'ItsBlog',
-                ),
-                'name'   => 'blog',
-            )),
-            array(array(
-                'uri'    => 'http://test.net/forum',
-                'offset' => 0,
-                'match'  => array(
-                    'controller' => 'ItsForum',
-                ),
-                'name'   => 'forum',
-            )),
-            array(array(
-                'uri'    => 'http://test.net/blog/rss',
-                'offset' => 0,
-                'match'  => null,
-                'name'   => 'blog/rss',
-            )),
-            array(array(
-                'uri'    => 'http://test.net/notfound',
-                'offset' => 0,
-                'match'  => null,
-                'name'   => null
-            )),
-            array(array(
-                'uri'    => 'http://test.net/blog/',
-                'offset' => 0,
-                'match'  => null,
-                'name'   => null,
-            )),
-            array(array(
-                'uri'    => 'http://test.net/forum/notfound',
-                'offset' => 0,
-                'match'  => null,
-                'name'   => null,
-            )),
-            array(array(
-                'uri'    => 'http://test.net/blog/rss/sub',
-                'offset' => 0,
-                'match'  => array(
-                    'controller' => 'ItsRssBlog',
-                    'action'     => 'ItsSubRss',
-                ),
-                'name'   => 'blog/rss/sub',
-            )),
-            array(array(
-                'uri'    => 'http://test.net/blog/rss/sub',
-                'offset' => null,
-                'match'  => array(
-                    'controller' => 'ItsRssBlog',
-                    'action'     => 'ItsSubRss',
-                ),
-                'name'   => 'blog/rss/sub',
-            )),
-        );
-    }
-
-    public function getRoute()
+    public static function getRoute()
     {
         $routeBroker = new RouteBroker();
         $routeBroker->getClassLoader()->registerPlugins(array(
-            'literal'  => 'Zend\Mvc\Router\Http\Literal',
-            'regex'    => 'Zend\Mvc\Router\Http\Regex',
-            'segment'  => 'Zend\Mvc\Router\Http\Segment',
-            'wildcard' => 'Zend\Mvc\Router\Http\Wildcard',
-            'hostname' => 'Zend\Mvc\Router\Http\Hostname',
-            'scheme'   => 'Zend\Mvc\Router\Http\Scheme',
-            'part'     => 'Zend\Mvc\Router\Http\Part',
+            'part' => 'Zend\Mvc\Router\Http\Part'
         ));
-
-        $route = Part::factory(array(
-            'route' => array(
-                'type'    => 'literal',
+        
+        return new Part(
+            array(
+                'type'    => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => '/foo',
                     'defaults' => array(
-                        'controller' => 'ItsHomePage',
-                    ),
+                        'controller' => 'foo'
+                    )
                 )
             ),
-            'may_terminate' => true,
-            'route_broker'  => $routeBroker,
-            'child_routes'  => array(
-                'blog' => array(
-                    'type'    => 'literal',
+            true,
+            $routeBroker,
+            array(
+                'bar' => array(
+                    'type'    => 'Zend\Mvc\Router\Http\Literal',
                     'options' => array(
-                        'route'    => 'blog',
+                        'route'    => '/bar',
                         'defaults' => array(
-                            'controller' => 'ItsBlog',
-                        ),
-                    ),
-                    'may_terminate' => true,
-                    'child_routes'  => array(
-                        'rss' => array(
-                            'type'    => 'literal',
-                            'options' => array(
-                                'route'    => '/rss',
-                                'defaults' => array(
-                                    'controller' => 'ItsRssBlog',
-                                ),
-                            ),
-                            'child_routes'  => array(
-                                'sub' => array(
-                                    'type'    => 'literal',
-                                    'options' => array(
-                                        'route'    => '/sub',
-                                        'defaults' => array(
-                                            'action' => 'ItsSubRss',
-                                        ),
-                                    )
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                'forum' => array(
-                    'type'    => 'literal',
-                    'options' => array(
-                        'route'    => 'forum',
-                        'defaults' => array(
-                            'controller' => 'ItsForum',
-                        ),
-                    ),
-                ),
-                'foo' => array(
-                    'type'    => 'segment',
-                    'options' => array(
-                        'route'    => 'foo/:foo',
-                        'defaults' => array(
-                            'controller' => 'ItsFoo',
+                            'controller' => 'bar'
                         )
+                    )
+                ),
+                'baz' => array(
+                    'type'    => 'Zend\Mvc\Router\Http\Literal',
+                    'options' => array(
+                        'route' => '/baz'
                     ),
                     'child_routes' => array(
-                        'wildcard' => array(
-                            'type' => 'wildcard'
-                        ),
-                    ),
-                ),
+                        'bat' => array(
+                            'type'    => 'Zend\Mvc\Router\Http\Segment',
+                            'options' => array(
+                                'route' => '/:controller'
+                            ),
+                            'may_terminate' => true,
+                            'child_routes'  => array(
+                                'wildcard' => array(
+                                    'type' => 'Zend\Mvc\Router\Http\Wildcard'
+                                )
+                            )
+                        )                   
+                    )
+                )
+            )
+        );
+    }
+    
+    public static function routeProvider()
+    {       
+        return array(
+            'simple-match' => array(
+                self::getRoute(),
+                '/foo',
+                null,
+                null,
+                array('controller' => 'foo')
             ),
-        ));
-
-        return $route;
+            'offset-skips-beginning' => array(
+                self::getRoute(),
+                '/bar/foo',
+                4,
+                null,
+                array('controller' => 'foo')
+            ),
+            'simple-child-match' => array(
+                self::getRoute(),
+                '/foo/bar',
+                null,
+                'bar',
+                array('controller' => 'bar')
+            ),
+            'offset-does-not-enable-partial-matching' => array(
+                self::getRoute(),
+                '/foo/foo',
+                0,
+                null,
+                null
+            ),
+            'non-terminating-part-does-not-match' => array(
+                self::getRoute(),
+                '/foo/bat',
+                null,
+                null,
+                null
+            ),
+            'child-of-non-terminating-part-does-match' => array(
+                self::getRoute(),
+                '/foo/baz/bat',
+                null,
+                'baz/bat',
+                array('controller' => 'bat')
+            ),
+            'parameters-are-used-only-once' => array(
+                self::getRoute(),
+                '/foo/baz/wildcard/foo/bar',
+                null,
+                'baz/bat/wildcard',
+                array('controller' => 'wildcard', 'foo' => 'bar')
+            ),
+        );
     }
 
     /**
-     * @dataProvider matchProvider
+     * @dataProvider routeProvider
+     * @param        Part    $route
+     * @param        string  $path
+     * @param        integer $offset
+     * @param        string  $routeName
+     * @param        array   $params
      */
-    public function testMatch(array $params)
+    public function testMatching(Part $route, $path, $offset, $routeName, array $params = null)
     {
-        $route   = $this->getRoute();
         $request = new Request();
+        $request->setUri('http://example.com' . $path);
+        $match = $route->match($request, $offset);
         
-        $request->setUri($params['uri']);
-        $match = $route->match($request, $params['offset']);
-
-        if ($params['match'] === null) {
+        if ($params === null) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
             
-            foreach ($params['match'] as $key => $value) {
-                $this->assertEquals($value, $match->getParam($key));
+            if ($offset === null) {
+                $this->assertEquals(strlen($path), $match->getLength());            
             }
             
-            $this->assertEquals($params['name'], $match->getMatchedRouteName());
+            $this->assertEquals($routeName, $match->getMatchedRouteName());
+            
+            foreach ($params as $key => $value) {
+                $this->assertEquals($value, $match->getParam($key));
+            }
         }
     }
-
-    public function testAssembleCompleteRoute()
+    
+    /**
+     * @dataProvider routeProvider
+     * @param        Part    $route
+     * @param        string  $path
+     * @param        integer $offset
+     * @param        string  $routeName
+     * @param        array   $params
+     */
+    public function testAssembling(Part $route, $path, $offset, $routeName, array $params = null)
     {
-        $uri = $this->getRoute()->assemble(array(), array('name' => 'blog/rss/sub'));
+        if ($params === null) {
+            // Data which will not match are not tested for assembling.
+            return;
+        }
+                
+        $result = $route->assemble($params, array('name' => $routeName));
         
-        $this->assertEquals('/blog/rss/sub', $uri);
+        if ($offset !== null) {
+            $this->assertEquals($offset, strpos($path, $result, $offset));
+        } else {
+            $this->assertEquals($path, $result);
+        }
     }
     
-    public function testAssembleTerminatedRoute()
-    {
-        $uri = $this->getRoute()->assemble(array(), array('name' => 'blog'));
-        
-        $this->assertEquals('/blog', $uri);
-    }
-
     /**
      * @expectedException Zend\Mvc\Router\Exception\RuntimeException
      */
     public function testAssembleNonTerminatedRoute()
     {
-        $this->getRoute()->assemble(array(), array('name' => 'blog/rss'));
-    }
-    
-    public function testRemoveAssembledParameters()
-    {
-        $uri = $this->getRoute()->assemble(array('foo' => 'bar'), array('name' => 'foo/wildcard'));
-        
-        $this->assertEquals('/foo/bar', $uri);
-    }
-    
-    public function testRemoveAssembledParametersWithAdditionalParameter()
-    {
-        $uri = $this->getRoute()->assemble(array('foo' => 'bar', 'bar' => 'baz'), array('name' => 'foo/wildcard'));
-        
-        $this->assertEquals('/foo/bar/bar/baz', $uri);
+        self::getRoute()->assemble(array(), array('name' => 'bat'));
     }
 }

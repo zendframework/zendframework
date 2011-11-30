@@ -3,7 +3,9 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request,
-    Zend\Mvc\Router\Http\Segment;
+    Zend\Stdlib\Request as BaseRequest,
+    Zend\Mvc\Router\Http\Segment,
+    ZendTest\Mvc\Router\FactoryTester;
 
 class SegmentTest extends TestCase
 {
@@ -218,7 +220,42 @@ class SegmentTest extends TestCase
     public function testAssemblingWithMissingParameterInRoot()
     {
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing parameter "foo"');
-        $route = new Segment(':foo');
+        $route = new Segment('/:foo');
         $route->assemble();
+    }
+    
+    public function testBuildTranslatedLiteral()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Translated literals are not implemented yet');
+        $route = new Segment('/{foo}');
+    }
+    
+    public function testBuildTranslatedParameter()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Translated parameters are not implemented yet');
+        $route = new Segment('/:{foo}');
+    }
+    
+    public function testNoMatchWithoutUriMethod()
+    {
+        $route   = new Segment('/foo');
+        $request = new BaseRequest();
+        
+        $this->assertNull($route->match($request));
+    }
+    
+    public function testFactory()
+    {
+        $tester = new FactoryTester($this);
+        $tester->testFactory(
+            '\Zend\Mvc\Router\Http\Segment',
+            array(
+                'route' => 'Missing "route" in options array'
+            ),
+            array(
+                'route'       => '/:foo[/:bar{-}]',
+                'constraints' => array('foo' => 'bar')
+            )
+        );
     }
 }

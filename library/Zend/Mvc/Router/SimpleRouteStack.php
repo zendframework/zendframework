@@ -74,13 +74,10 @@ class SimpleRouteStack implements RouteStack
      */
     public static function factory($options = array())
     {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
-        }
-
-        // Convert options to array if Traversable object not implementing ArrayAccess
-        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+        if ($options instanceof Traversable) {
             $options = IteratorToArray::convert($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
         $instance = new static();
@@ -162,7 +159,7 @@ class SimpleRouteStack implements RouteStack
             $route = $this->routeFromArray($route);
         }
         
-        if ($priority !== null && isset($route->priority)) {
+        if ($priority === null && isset($route->priority)) {
             $priority = $route->priority;
         }
 
@@ -181,7 +178,6 @@ class SimpleRouteStack implements RouteStack
     public function removeRoute($name)
     {
         $this->routes->remove($name);
-
         return $this;
     }
 
@@ -193,12 +189,10 @@ class SimpleRouteStack implements RouteStack
      */
     protected function routeFromArray($specs)
     {
-        if (!is_array($specs) && !$specs instanceof Traversable) {
-            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
-        }
-
         if ($specs instanceof Traversable) {
             $specs = IteratorToArray::convert($specs);
+        } elseif (!is_array($specs)) {
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
 
         if (!isset($specs['type'])) {

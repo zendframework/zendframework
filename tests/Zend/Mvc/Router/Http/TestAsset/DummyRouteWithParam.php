@@ -22,10 +22,10 @@
 /**
  * @namespace
  */
-namespace ZendTest\Mvc\Router\TestAsset;
+namespace ZendTest\Mvc\Router\Http\TestAsset;
 
-use Zend\Mvc\Router\Route,
-    Zend\Mvc\Router\RouteMatch,
+use Zend\Mvc\Router\Http\Route,
+    Zend\Mvc\Router\Http\RouteMatch,
     Zend\Stdlib\RequestDescription as Request;
 
 /**
@@ -48,7 +48,7 @@ class DummyRouteWithParam extends DummyRoute
      */
     public function match(Request $request)
     {
-        return new RouteMatch(array('foo' => 'bar'));
+        return new RouteMatch(array('foo' => 'bar'), -4);
     }
     
     /**

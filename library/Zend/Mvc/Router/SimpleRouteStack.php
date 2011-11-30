@@ -51,6 +51,13 @@ class SimpleRouteStack implements RouteStack
      * @var RouteBroker
      */
     protected $routeBroker;
+    
+    /**
+     * Default parameters.
+     * 
+     * @var array
+     */
+    protected $defaultParams = array();
 
     /**
      * Create a new simple route stack.
@@ -180,6 +187,19 @@ class SimpleRouteStack implements RouteStack
         $this->routes->remove($name);
         return $this;
     }
+    
+    /**
+     * Set a default parameter.
+     * 
+     * @param  string $name
+     * @param  mixed  $value 
+     * @return RouteStack
+     */
+    public function setDefaultParam($name, $value)
+    {
+        $this->defaultParams[$name] = $value;
+        return $this;
+    }
 
     /**
      * Create a route from array specifications.
@@ -252,6 +272,6 @@ class SimpleRouteStack implements RouteStack
 
         unset($options['name']);
 
-        return $route->assemble($params, $options);
+        return $route->assemble(array_merge($this->defaultParams, $params), $options);
     }
 }

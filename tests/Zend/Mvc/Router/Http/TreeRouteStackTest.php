@@ -161,6 +161,44 @@ class TreeRouteStackTest extends TestCase
         $stack->assemble(array(), array('name' => 'foo'));
     }
     
+    public function testDefaultParamIsAddedToMatch()
+    {
+        $stack = new TreeRouteStack();
+        $stack->setBaseUrl('/foo');
+        $stack->addRoute('foo', new TestAsset\DummyRoute());
+        $stack->setDefaultParam('foo', 'bar');
+        
+        $this->assertEquals('bar', $stack->match(new Request())->getParam('foo'));
+    }
+    
+    public function testDefaultParamDoesNotOverrideParam()
+    {
+        $stack = new TreeRouteStack();
+        $stack->setBaseUrl('/foo');
+        $stack->addRoute('foo', new TestAsset\DummyRouteWithParam());
+        $stack->setDefaultParam('foo', 'baz');
+        
+        $this->assertEquals('bar', $stack->match(new Request())->getParam('foo'));
+    }
+    
+    public function testDefaultParamIsUsedForAssembling()
+    {
+        $stack = new TreeRouteStack();
+        $stack->addRoute('foo', new TestAsset\DummyRouteWithParam());
+        $stack->setDefaultParam('foo', 'bar');
+        
+        $this->assertEquals('bar', $stack->assemble(array(), array('name' => 'foo')));
+    }
+    
+    public function testDefaultParamDoesNotOverrideParamForAssembling()
+    {
+        $stack = new TreeRouteStack();
+        $stack->addRoute('foo', new TestAsset\DummyRouteWithParam());
+        $stack->setDefaultParam('foo', 'baz');
+        
+        $this->assertEquals('bar', $stack->assemble(array('foo' => 'bar'), array('name' => 'foo')));
+    }
+    
     public function testSetBaseUrl()
     {
         $stack = new TreeRouteStack();

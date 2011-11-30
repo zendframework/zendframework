@@ -155,6 +155,42 @@ class SimpleRouteStackTest extends TestCase
         $stack->assemble(array(), array('name' => 'foo'));
     }
     
+    public function testDefaultParamIsAddedToMatch()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->addRoute('foo', new TestAsset\DummyRoute());
+        $stack->setDefaultParam('foo', 'bar');
+        
+        $this->assertEquals('bar', $stack->match(new Request())->getParam('foo'));
+    }
+    
+    public function testDefaultParamDoesNotOverrideParam()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->addRoute('foo', new TestAsset\DummyRouteWithParam());
+        $stack->setDefaultParam('foo', 'baz');
+        
+        $this->assertEquals('bar', $stack->match(new Request())->getParam('foo'));
+    }
+    
+    public function testDefaultParamIsUsedForAssembling()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->addRoute('foo', new TestAsset\DummyRouteWithParam());
+        $stack->setDefaultParam('foo', 'bar');
+        
+        $this->assertEquals('bar', $stack->assemble(array(), array('name' => 'foo')));
+    }
+    
+    public function testDefaultParamDoesNotOverrideParamForAssembling()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->addRoute('foo', new TestAsset\DummyRouteWithParam());
+        $stack->setDefaultParam('foo', 'baz');
+        
+        $this->assertEquals('bar', $stack->assemble(array('foo' => 'bar'), array('name' => 'foo')));
+    }
+    
     public function testFactory()
     {
         $tester = new FactoryTester($this);
@@ -162,8 +198,9 @@ class SimpleRouteStackTest extends TestCase
             '\Zend\Mvc\Router\SimpleRouteStack',
             array(),
             array(
-                'route_broker' => new RouteBroker(),
-                'routes'       => array()
+                'route_broker'   => new RouteBroker(),
+                'routes'         => array(),
+                'default_params' => array()
             )
         );
     }

@@ -96,6 +96,10 @@ class SimpleRouteStack implements RouteStack
         if (isset($options['routes'])) {
             $instance->addRoutes($options['routes']);
         }
+        
+        if (isset($options['default_params'])) {
+            $instance->setDefaultParams($options['default_params']);
+        }
 
         return $instance;
     }
@@ -187,6 +191,18 @@ class SimpleRouteStack implements RouteStack
         $this->routes->remove($name);
         return $this;
     }
+
+    /**
+     * Set a default parameters.
+     * 
+     * @param  array $params
+     * @return RouteStack
+     */
+    public function setDefaultParams(array $params)
+    {
+        $this->defaultParams = $params;
+        return $this;
+    }
     
     /**
      * Set a default parameter.
@@ -242,6 +258,12 @@ class SimpleRouteStack implements RouteStack
         foreach ($this->routes as $name => $route) {
             if (($match = $route->match($request)) instanceof RouteMatch) {
                 $match->setMatchedRouteName($name);
+                
+                foreach ($this->defaultParams as $name => $value) {
+                    if ($match->getParam($name) === null) {
+                        $match->setParam($name, $value);
+                    }
+                }
                 
                 return $match;
             }

@@ -218,7 +218,7 @@ class TreeRouteStack extends SimpleRouteStack
                 $uri = $options['uri'];
             }
 
-            $path = $this->baseUrl . $route->assemble($params, $options);
+            $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
 
             if ((isset($options['absolute']) && $options['absolute']) || $uri->getHost() !== null) {
                 if ($uri->getScheme() === null) {
@@ -233,7 +233,7 @@ class TreeRouteStack extends SimpleRouteStack
             }
         }
         
-        return $this->baseUrl . $route->assemble($params, $options);
+        return $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
     }
 
     /**

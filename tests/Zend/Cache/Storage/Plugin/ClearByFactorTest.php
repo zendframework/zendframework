@@ -81,7 +81,8 @@ class ClearByFactorTest extends \PHPUnit_Framework_TestCase
         $event = new PostEvent('setItem.post', $adapter, array(
             'options'  => array(),
         ));
-        $event->setResult(true);
+        $result = true;
+        $event->setResult($result);
         $this->_plugin->clearByFactor($event);
 
         $this->assertTrue($event->getResult());
@@ -103,7 +104,8 @@ class ClearByFactorTest extends \PHPUnit_Framework_TestCase
         $event = new PostEvent('setItem.post', $adapter, array(
             'options'  => array(),
         ));
-        $event->setResult(true);
+        $result = true;
+        $event->setResult($result);
         $this->_plugin->clearByFactor($event);
 
         $this->assertTrue($event->getResult());

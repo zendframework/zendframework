@@ -122,8 +122,8 @@ class ControllerFile extends \Zend\Tool\Project\Context\Filesystem\File
         $codeGenFile->setClass($cg);
         
         if ($className == 'ErrorController') {
-        	
-        	$codeGenFile = new FileGenerator();
+
+            $codeGenFile = new FileGenerator();
             $codeGenFile->setFilename($this->getPath());
             $cg = new ClassGenerator($className);
             

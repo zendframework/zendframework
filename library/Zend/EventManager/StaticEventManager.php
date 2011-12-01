@@ -67,7 +67,7 @@ class StaticEventManager implements StaticEventCollection
     /**
      * Retrieve instance
      * 
-     * @return EventManager
+     * @return StaticEventManager
      */
     public static function getInstance()
     {

@@ -23,31 +23,33 @@
  * @namespace
  */
 namespace Zend\Mail\Transport;
+
 use Zend\Mail\AbstractProtocol,
-    Zend\Mail\AbstractTransport,
-    Zend\Mail\Transport\Exception,
+    Zend\Mail\AddressDescription,
+    Zend\Mail\Headers,
+    Zend\Mail\Message,
+    Zend\Mail\Transport,
     Zend\Mail\Protocol\Smtp as SmtpProtocol,
-    Zend\Mail\Protocol,
-    Zend\Mime;
+    Zend\Mail\Protocol;
 
 /**
  * SMTP connection object
  *
  * Loads an instance of \Zend\Mail\Protocol\Smtp and forwards smtp transactions
  *
- * @uses       \Zend\Loader
- * @uses       \Zend\Mail\Protocol\Smtp
- * @uses       \Zend\Mail\AbstractTransport
- * @uses       \Zend\Mail\Transport\Exception
- * @uses       \Zend\Mime\Mime
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Smtp extends AbstractTransport
+class Smtp implements Transport
 {
+    /**
+     * @var SmtpOptions
+     */
+    protected $options;
+
     /**
      * EOL character string used by transport
      * @var string
@@ -56,96 +58,52 @@ class Smtp extends AbstractTransport
     public $EOL = "\n";
 
     /**
-     * Remote smtp hostname or i.p.
-     *
-     * @var string
-     */
-    protected $_host;
-
-
-    /**
-     * Port number
-     *
-     * @var integer|null
-     */
-    protected $_port;
-
-
-    /**
-     * Local client hostname or i.p.
-     *
-     * @var string
-     */
-    protected $_name = 'localhost';
-
-
-    /**
-     * Authentication type OPTIONAL
-     *
-     * @var string
-     */
-    protected $_auth;
-
-
-    /**
      * Config options for authentication
      *
      * @var array
      */
     protected $_config;
 
-
     /**
-     * Instance of \Zend\Mail\Protocol\Smtp
-     *
-     * @var \Zend\Mail\Protocol\Smtp
+     * @var SmtpProtocol
      */
-    protected $_connection;
+    protected $connection;
 
 
     /**
      * Constructor.
      *
-     * @param  string $host OPTIONAL (Default: 127.0.0.1)
-     * @param  array|null $config OPTIONAL (Default: null)
+     * @param  null|SmtpOptions $options
      * @return void
-     *
-     * @todo Someone please make this compatible
-     *       with the SendMail transport class.
      */
-    public function __construct($host = '127.0.0.1', Array $config = array())
+    public function __construct(SmtpOptions $options = null)
     {
-        if ($host) {
-            $config['host'] = $host;
+        if (!$options instanceof SmtpOptions) {
+            $options = new SmtpOptions();
         }
-
-        $this->setConfig($config);
+        $this->setOptions($options);
     }
 
     /**
-     * Set configuration
+     * Set options
      *
-     * @param  array $config
-     * @return \Zend\Mail\Transport\Smtp
+     * @param  SmtpOptions $options
+     * @return Smtp
      */
-    public function setConfig(array $config)
+    public function setOptions(SmtpOptions $options)
     {
-        if (isset($config['name'])) {
-            $this->_name = $config['name'];
-        }
-        if (isset($config['port'])) {
-            $this->_port = $config['port'];
-        }
-        if (isset($config['auth'])) {
-            $this->_auth = $config['auth'];
-        }
-        if (isset($config['host'])) {
-            $this->_host = $config['host'];
-        }
-
-        $this->_config = $config;
-
+        $this->options = $options;
         return $this;
+    }
+
+    /**
+     * Get options
+     * 
+     * @return SmtpOptions
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     /**
@@ -155,13 +113,13 @@ class Smtp extends AbstractTransport
      */
     public function __destruct()
     {
-        if ($this->_connection instanceof SmtpProtocol) {
+        if ($this->connection instanceof SmtpProtocol) {
             try {
-                $this->_connection->quit();
+                $this->connection->quit();
             } catch (Protocol\Exception $e) {
                 // ignore
             }
-            $this->_connection->disconnect();
+            $this->connection->disconnect();
         }
     }
 
@@ -169,24 +127,24 @@ class Smtp extends AbstractTransport
     /**
      * Sets the connection protocol instance
      *
-     * @param \Zend\Mail\Protocol\AbstractProtocol $client
+     * @param AbstractProtocol $client
      *
      * @return void
      */
     public function setConnection(AbstractProtocol $connection)
     {
-        $this->_connection = $connection;
+        $this->connection = $connection;
     }
 
 
     /**
      * Gets the connection protocol instance
      *
-     * @return \Zend\Mail\Protocol|null
+     * @return Protocol|null
      */
     public function getConnection()
     {
-        return $this->_connection;
+        return $this->connection;
     }
 
     /**
@@ -196,56 +154,132 @@ class Smtp extends AbstractTransport
      * developer to add a custom adapter if required before mail is sent.
      *
      * @return void
-     * @todo Rename this to sendMail, it's a public method...
      */
-    public function _sendMail()
+    public function send(Message $message)
     {
         // If sending multiple messages per session use existing adapter
-        if (!($this->_connection instanceof SmtpProtocol)) {
-            // Check if authentication is required and determine required class
-            $connectionClass = '\Zend\Mail\Protocol\Smtp';
-            if ($this->_auth) {
-                $connectionClass .= '\Auth\\' . ucwords($this->_auth);
-            }
-            $this->setConnection(new $connectionClass($this->_host, $this->_port, $this->_config));
-            $this->_connection->connect();
-            $this->_connection->helo($this->_name);
+        $connection = $this->getConnection();
+
+        if (!($connection instanceof SmtpProtocol)) {
+            // First time connecting
+            $connection = $this->lazyLoadConnection();
         } else {
             // Reset connection to ensure reliable transaction
-            $this->_connection->rset();
+            $connection->rset();
         }
 
+        // Prepare message
+        $from       = $this->prepareFromAddress($message);
+        $recipients = $this->prepareRecipients($message);
+        $headers    = $this->prepareHeaders($message);
+        $body       = $this->prepareBody($message);
+
         // Set sender email address
-        $this->_connection->mail($this->_mail->getFrom());
+        $connection->mail($from);
 
         // Set recipient forward paths
-        foreach ($this->_mail->getRecipients() as $recipient) {
-            $this->_connection->rcpt($recipient);
+        foreach ($recipients as $recipient) {
+            $connection->rcpt($recipient);
         }
 
         // Issue DATA command to client
-        $this->_connection->data($this->header . Mime\Mime::LINEEND . $this->body);
+        $connection->data($headers . "\r\n" . $body);
     }
 
     /**
-     * Format and fix headers
-     *
-     * Some SMTP servers do not strip BCC headers. Most clients do it themselves as do we.
-     *
-     * @access  protected
-     * @param   array $headers
-     * @return  void
-     * @throws  \Zend\Transport\Exception
+     * Retrieve email address for envelope FROM 
+     * 
+     * @param  Message $message 
+     * @return string
      */
-    protected function _prepareHeaders($headers)
+    protected function prepareFromAddress(Message $message)
     {
-        if (!$this->_mail) {
-            throw new Exception\RuntimeException('_prepareHeaders requires a registered \Zend\Mail\Mail object');
+        $sender = $message->getSender();
+        if ($sender instanceof AddressDescription) {
+            return $sender->getEmail();
         }
 
-        unset($headers['Bcc']);
+        $from = $message->from();
+        if (!count($from)) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s transport expects either a Sender or at least one From address in the Message; none provided',
+                __CLASS__
+            ));
+        }
 
-        // Prepare headers
-        parent::_prepareHeaders($headers);
+        $from->rewind();
+        $sender = $from->current();
+        return $sender->getEmail();
+    }
+
+    /**
+     * Prepare array of email address recipients
+     * 
+     * @param  Message $message 
+     * @return array
+     */
+    protected function prepareRecipients(Message $message)
+    {
+        $recipients = array();
+        foreach ($message->to() as $address) {
+            $recipients[] = $address->getEmail();
+        }
+        foreach ($message->cc() as $address) {
+            $recipients[] = $address->getEmail();
+        }
+        foreach ($message->bcc() as $address) {
+            $recipients[] = $address->getEmail();
+        }
+        $recipients = array_unique($recipients);
+        return $recipients;
+    }
+
+    /**
+     * Prepare header string from message
+     * 
+     * @param  Message $message 
+     * @return string
+     */
+    protected function prepareHeaders(Message $message)
+    {
+        $headers = new Headers();
+        foreach ($message->headers() as $header) {
+            if ('Bcc' == $header->getFieldName()) {
+                continue;
+            }
+            $headers->addHeader($header);
+        }
+        return $headers->toString();
+    }
+
+    /**
+     * Prepare body string from message
+     * 
+     * @param  Message $message 
+     * @return string
+     */
+    protected function prepareBody(Message $message)
+    {
+        return $message->getBodyText();
+    }
+
+    /**
+     * Lazy load the connection, and pass it helo
+     * 
+     * @return SmtpProtocol
+     */
+    protected function lazyLoadConnection()
+    {
+        // Check if authentication is required and determine required class
+        $options         = $this->getOptions();
+        $connectionClass = 'Zend\Mail\Protocol\Smtp';
+        $authClass       = $options->getAuth();
+        if ($authClass) {
+            $connectionClass .= '\Auth\\' . ucwords($authClass);
+        }
+        $this->setConnection(new $connectionClass($options->getHost(), $options->getPort(), $options->getConnectionConfig()));
+        $this->connection->connect();
+        $this->connection->helo($options->getName());
+        return $this->connection;
     }
 }

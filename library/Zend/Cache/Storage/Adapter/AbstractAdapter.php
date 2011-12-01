@@ -96,13 +96,6 @@ abstract class AbstractAdapter implements Adapter
     protected $_ignoreMissingItems = true;
 
     /**
-     * The last used key
-     *
-     * @var string|null
-     */
-    protected $_lastKey = null;
-
-    /**
      * Statement
      */
     protected $_stmtActive  = false;
@@ -355,10 +348,6 @@ abstract class AbstractAdapter implements Adapter
             if (@preg_match($pattern, '') === false) {
                 $err = error_get_last();
                 throw new InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
-
-            // validate lastKey
-            } elseif (($lk = $this->getLastKey()) !== null && !preg_match($pattern, $lk)) {
-                $this->_lastKey = null; // remove the last used key
             }
 
             $this->_keyPattern = $pattern;
@@ -540,7 +529,7 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
-    public function hasItem($key = null, array $options = array())
+    public function hasItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
             return false;
@@ -602,19 +591,18 @@ abstract class AbstractAdapter implements Adapter
 
         $ret = true;
         foreach ($keyValuePairs as $key => $value) {
-            $ret = $this->setItem($value, $key, $options) && $ret;
+            $ret = $this->setItem($key, $value, $options) && $ret;
         }
 
         return $ret;
     }
 
-    public function addItem($value, $key = null, array $options = array())
+    public function addItem($key, $value, array $options = array())
     {
         if ($this->hasItem($key, $options)) {
-            $key = $this->_key($key);
             throw new RuntimeException("Key '{$key}' already exists");
         }
-        return $this->setItem($value, $key, $options);
+        return $this->setItem($key, $value, $options);
     }
 
     public function addItems(array $keyValuePairs, array $options = array())
@@ -625,19 +613,18 @@ abstract class AbstractAdapter implements Adapter
 
         $ret = true;
         foreach ($keyValuePairs as $key => $value) {
-            $ret = $this->addItem($value, $key, $options) && $ret;
+            $ret = $this->addItem($key, $value, $options) && $ret;
         }
 
         return $ret;
     }
 
-    public function replaceItem($value, $key = null, array $options = array())
+    public function replaceItem($key, $value, array $options = array())
     {
         if (!$this->hasItem($key, $options)) {
-            $key = $this->_key($key);
             throw new ItemNotFoundException("Key '{$key}' doen't exists");
         }
-        return $this->setItem($value, $key, $options);
+        return $this->setItem($key, $value, $options);
     }
 
     public function replaceItems(array $keyValuePairs, array $options = array())
@@ -648,25 +635,23 @@ abstract class AbstractAdapter implements Adapter
 
         $ret = true;
         foreach ($keyValuePairs as $key => $value) {
-            $ret = $this->replaceItem($value, $key, $options) && $ret;
+            $ret = $this->replaceItem($key, $value, $options) && $ret;
         }
 
         return $ret;
     }
 
-    public function checkAndSetItem($token, $value, $key = null, array $options = array())
+    public function checkAndSetItem($token, $key, $value, array $options = array())
     {
-        $key = $this->_key($key);
-
         $oldValue = $this->getItem($key, $options);
         if ($oldValue != $token) {
             return false;
         }
 
-        return $this->setItem($value, $key, $options);
+        return $this->setItem($key, $value, $options);
     }
 
-    public function touchItem($key = null, array $options = array())
+    public function touchItem($key, array $options = array())
     {
         if (!$this->getWritable() || !$this->getReadable()) {
            return false;
@@ -678,7 +663,7 @@ abstract class AbstractAdapter implements Adapter
         $value = $this->getItem($key, $optsNoValidate);
         if ($value === false) {
             // add an empty item
-            return $this->addItem('', $key, $options);
+            return $this->addItem($key, '', $options);
         } else {
             // rewrite item to update mtime/ttl
             if (!isset($options['tags'])) {
@@ -689,7 +674,7 @@ abstract class AbstractAdapter implements Adapter
             }
 
             // rewrite item
-            return $this->replaceItem($value, $key, $options);
+            return $this->replaceItem($key, $value, $options);
         }
     }
 
@@ -729,7 +714,7 @@ abstract class AbstractAdapter implements Adapter
 
        $value = (int)$value;
        $get = (int)$this->getItem($key, $options);
-       $this->setItem($get + $value, $key, $options);
+       $this->setItem($key, $get + $value, $options);
        return $get + $value;
     }
 
@@ -742,7 +727,7 @@ abstract class AbstractAdapter implements Adapter
 
         $ret = true;
         foreach ($keyValuePairs as $key => $value) {
-            $ret = $this->incrementItems($value, $key, $options) && $ret;
+            $ret = $this->incrementItems($key, $value, $options) && $ret;
         }
         return $ret;
     }
@@ -755,7 +740,7 @@ abstract class AbstractAdapter implements Adapter
 
         $value = (int)$value;
         $get = (int)$this->getItem($key, $options);
-        $this->setItem($get - $value, $key, $options);
+        $this->setItem($key, $get - $value, $options);
         return $get - $value;
     }
 
@@ -768,7 +753,7 @@ abstract class AbstractAdapter implements Adapter
 
         $ret = true;
         foreach ($keyValuePairs as $key => $value) {
-            $ret = $this->decrementMulti($value, $key, $options) && $ret;
+            $ret = $this->decrementMulti($key, $value, $options) && $ret;
         }
         return $ret;
     }
@@ -922,11 +907,6 @@ abstract class AbstractAdapter implements Adapter
         return $this->_capabilities;
     }
 
-    public function getLastKey()
-    {
-        return $this->_lastKey;
-    }
-
     /* internal */
 
     /**
@@ -1068,25 +1048,18 @@ abstract class AbstractAdapter implements Adapter
 
     /**
      * Get, validate and normalize key.
-     * (If key is empty get the last used key)
      *
-     * @param string|null $key
+     * @param string $key
      * @return string
      * @throws Zend\Cache\InvalidArgumentException
      */
     protected function _key($key)
     {
-        if ( ($key = (string)$key) === '') {
-            if ($this->_lastKey === null) {
-                throw new MissingKeyException('Missing key');
-            }
-        } elseif (($p = $this->getKeyPattern()) && !preg_match($p, $key)) {
+        if (($p = $this->getKeyPattern()) && !preg_match($p, $key)) {
             throw new InvalidArgumentException("The key '{$key}' doesn't match agains pattern '{$p}'");
-        } else {
-            $this->_lastKey = $key;
         }
 
-        return $this->_lastKey;
+        return (string)$key;
     }
 
 }

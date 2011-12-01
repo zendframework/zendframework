@@ -113,6 +113,8 @@ class CallbackCacheTest extends CommonPatternTest
 
     public function testCallWithPredefinedCallbackAndArgumentKey()
     {
+        $this->markTestIncomplete();
+
         $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
         $args     = array('arg1', 2, 3.33, null);
         $options = array(
@@ -131,6 +133,8 @@ class CallbackCacheTest extends CommonPatternTest
 
     public function testGenerateKey()
     {
+        $this->markTestIncomplete();
+
         $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
         $args     = array('arg1', 2, 3.33, null);
 

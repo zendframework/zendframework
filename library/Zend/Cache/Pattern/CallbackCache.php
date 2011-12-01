@@ -141,7 +141,7 @@ class CallbackCache extends AbstractPattern
             $data = array($ret);
         }
 
-        $this->getStorage()->setItem($data, $key, $options);
+        $this->getStorage()->setItem($key, $data, $options);
 
         return $ret;
     }

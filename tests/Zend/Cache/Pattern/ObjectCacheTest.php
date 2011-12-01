@@ -111,6 +111,8 @@ class ObjectCacheTest extends CommonPatternTest
 
     public function testGenerateKey()
     {
+        $this->markTestIncomplete();
+
         $args = array('arg1', 2, 3.33, null);
         $this->_pattern->call('emptyMethod', $args);
         $this->assertEquals(

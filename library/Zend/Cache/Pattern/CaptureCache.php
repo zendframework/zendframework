@@ -348,7 +348,7 @@ class CaptureCache extends AbstractPattern
             }
 
             if ($tagIndex !== null) {
-                $this->getTagStorage()->setItem($tagIndex, $tagKey);
+                $this->getTagStorage()->setItem($tagKey, $tagIndex);
             }
         }
     }

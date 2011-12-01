@@ -31,7 +31,7 @@ class Memory extends AbstractAdapter
 
     /* reading */
 
-    public function getItem($key = null, array $options = array())
+    public function getItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
             return false;
@@ -62,7 +62,6 @@ class Memory extends AbstractAdapter
                 throw new ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
             }
             $result = false;
-            $args['_RESULT_'] = false;
         } else {
             $result = $this->_data[$ns][$key][0];
             if (array_key_exists('token', $options)) {
@@ -113,7 +112,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function hasItem($key = null, array $options = array())
+    public function hasItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
             return false;
@@ -137,7 +136,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function getMetadata($key = null, array $options = array())
+    public function getMetadata($key, array $options = array())
     {
         if (!$this->getReadable()) {
             return false;
@@ -176,7 +175,7 @@ class Memory extends AbstractAdapter
 
     /* writing */
 
-    public function setItem($value, $key = null, array $options = array())
+    public function setItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
             return false;
@@ -235,7 +234,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function addItem($value, $key = null, array $options = array())
+    public function addItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
             return false;
@@ -300,7 +299,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function replaceItem($value, $key = null, array $options = array())
+    public function replaceItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
             return false;
@@ -367,7 +366,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function touchItem($key = null, array $options = array())
+    public function touchItem($key, array $options = array())
     {
         if (!$this->getWritable()) {
             return false;
@@ -405,7 +404,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function removeItem($key = null, array $options = array())
+    public function removeItem($key, array $options = array())
     {
         if (!$this->getWritable()) {
             return false;
@@ -499,7 +498,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function incrementItem($value, $key = null, array $options = array())
+    public function incrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
             return false;
@@ -541,7 +540,7 @@ class Memory extends AbstractAdapter
         return $postEvent->getResult();
     }
 
-    public function decrementItem($value, $key = null, array $options = array())
+    public function decrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
             return false;

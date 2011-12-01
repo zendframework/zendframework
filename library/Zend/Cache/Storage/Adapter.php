@@ -95,7 +95,7 @@ interface Adapter
      * @return mixed Data on success and false on failure
      * @throws Zend\Cache\Exception
      */
-    public function getItem($key = null, array $options = array());
+    public function getItem($key, array $options = array());
 
     /**
      * Get multiple items.
@@ -115,7 +115,7 @@ interface Adapter
      * @return boolean
      * @throws Zend\Cache\Exception
      */
-    public function hasItem($key = null, array $options = array());
+    public function hasItem($key, array $options = array());
 
     /**
      * Test multiple items.
@@ -135,7 +135,7 @@ interface Adapter
      * @return array|boolean Metadata or false on failure
      * @throws Zend\Cache\Exception
      */
-    public function getMetadata($key = null, array $options = array());
+    public function getMetadata($key, array $options = array());
 
     /**
      * Get multiple metadata
@@ -152,13 +152,13 @@ interface Adapter
     /**
      * Store an item.
      *
-     * @param mixed $value
      * @param string $key
+     * @param mixed $value
      * @param array $options
      * @return boolean
      * @throws Zend\Cache\Exception
      */
-    public function setItem($value, $key = null, array $options = array());
+    public function setItem($key, $value, array $options = array());
 
     /**
      * Store multiple items.
@@ -173,13 +173,13 @@ interface Adapter
     /**
      * Add an item.
      *
-     * @param mixed  $value
      * @param string $key
+     * @param mixed  $value
      * @param array  $options
      * @return boolean
      * @throws Zend\Cache\Exception
      */
-    public function addItem($value, $key = null, array $options = array());
+    public function addItem($key, $value, array $options = array());
 
     /**
      * Add multiple items.
@@ -194,13 +194,13 @@ interface Adapter
     /**
      * Replace an item.
      *
-     * @param mixed  $value
      * @param string $key
+     * @param mixed  $value
      * @param array  $options
      * @return boolean
      * @throws Zend\Cache\Exception
      */
-    public function replaceItem($value, $key = null, array $options = array());
+    public function replaceItem($key, $value, array $options = array());
 
     /**
      * Replace multiple items.
@@ -216,13 +216,13 @@ interface Adapter
      * Set item only if token matches
      *
      * @param mixed       $token
-     * @param mixed       $value
      * @param string|null $key
+     * @param mixed       $value
      * @param array       $options
      * @return boolean
      * @throws Zend\Cache\Exception
      */
-    public function checkAndSetItem($token, $newValue, $key = null, array $options = array());
+    public function checkAndSetItem($token, $key, $value, array $options = array());
 
     /**
      * Reset lifetime of an item
@@ -232,7 +232,7 @@ interface Adapter
      * @return boolean True on success or false on failure
      * @throws Zend\Cache\Exception
      */
-    public function touchItem($key = null, array $options = array());
+    public function touchItem($key, array $options = array());
 
     /**
      * Reset lifetime of multiple items.
@@ -252,7 +252,7 @@ interface Adapter
      * @return boolean True on success or false on failure
      * @throws Zend\Cache\Exception
      */
-    public function removeItem($key = null, array $options = array());
+    public function removeItem($key, array $options = array());
 
     /**
      * Remove multiple items.
@@ -273,7 +273,7 @@ interface Adapter
      * @return boolean True on success or false on failure
      * @throws Zend\Cache\Exception
      */
-    public function incrementItem($value, $key = null, array $options = array());
+    public function incrementItem($key, $value, array $options = array());
 
     /**
      * Increment multiple items.
@@ -294,7 +294,7 @@ interface Adapter
      * @return boolean True on success or false on failure
      * @throws Zend\Cache\Exception
      */
-    public function decrementItem($value, $key = null, array $options = array());
+    public function decrementItem($key, $value, array $options = array());
 
     /**
      * Decrement multiple items.
@@ -392,12 +392,5 @@ interface Adapter
      * @throw Zend\Cache\Exception
      */
     public function getCapacity(array $options = array());
-
-    /**
-     * Get the last used key
-     *
-     * @return string|null
-     */
-    public function getLastKey();
 
 }

@@ -79,10 +79,10 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testPluginFactory()
     {
-        $cache = Cache\StorageFactory::pluginFactory('IgnoreUserAbort', array(
+        $cache = Cache\StorageFactory::pluginFactory('Serializer', array(
             'adapter' => Cache\StorageFactory::adapterFactory('Memory'),
         ));
-        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\IgnoreUserAbort', $cache);
+        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\Serializer', $cache);
     }
 
     public function testFactoryAdapterAsString()
@@ -106,7 +106,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithPlugins()
     {
         $adapter = 'Memory';
-        $plugins = array('Serialize', 'IgnoreUserAbort');
+        $plugins = array('Serialize', 'ClearByFactor');
 
         $cache = Cache\StorageFactory::factory(array(
             'adapter' => $adapter,
@@ -142,8 +142,8 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
             ),
             'plugins' => array(
                 'Serialize' => array(),
-                'IgnoreUserAbort' => array(
-                    'exit_on_abort' => true,
+                'ClearByFactor' => array(
+                    'clearing_factor' => 1,
                 ),
             ),
             'options' => array(
@@ -159,8 +159,8 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
             // test plugin options
             switch (get_class($storage)) {
-                case 'Zend\Cache\Storage\Plugin\IgnoreUserAbort':
-                    $this->assertSame($factory['plugins']['IgnoreUserAbort']['exit_on_abort'], $storage->getExitOnAbort());
+                case 'Zend\Cache\Storage\Plugin\ClearByFactor':
+                    $this->assertSame($factory['plugins']['ClearByFactor']['clearing_factor'], $storage->getClearingFactor());
                     break;
             }
 

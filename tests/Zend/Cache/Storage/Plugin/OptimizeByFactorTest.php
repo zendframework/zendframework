@@ -78,7 +78,8 @@ class OptimizeByFactorTest extends \PHPUnit_Framework_TestCase
         $event = new PostEvent('removeItem.post', $adapter, array(
             'options' => array()
         ));
-        $event->setResult(true);
+        $result = true;
+        $event->setResult($result);
         $this->_plugin->optimizeByFactor($event);
 
         $this->assertTrue($event->getResult());

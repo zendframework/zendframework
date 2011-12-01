@@ -164,13 +164,6 @@ class AbstractAdapterTest extends CommonStorageTest
         $this->_storage->setKeyPattern('#');
     }
 
-    public function testSetKeyPatternRemoveInvalidLastKey()
-    {
-        $this->_storage->hasItem('test');
-        $this->_storage->setKeyPattern('/[abc]/');
-        $this->assertNull($this->_storage->getLastKey());
-    }
-
     public function testSetIgnoreMissingItems()
     {
         $this->_storage->setIgnoreMissingItems(true);
@@ -364,7 +357,7 @@ class AbstractAdapterTest extends CommonStorageTest
 
         $this->_storage->expects($this->exactly(count($items)))
             ->method('setItem')
-            ->with($this->stringContains('value'), $this->stringContains('key'), $this->equalTo($options))
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
             ->will($this->returnValue(true));
 
         $this->assertTrue($this->_storage->setItems($items, $options));
@@ -381,7 +374,7 @@ class AbstractAdapterTest extends CommonStorageTest
 
         $this->_storage->expects($this->exactly(count($items)))
             ->method('setItem')
-            ->with($this->stringContains('value'), $this->stringContains('key'), $this->equalTo($options))
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
             ->will($this->returnValue(false));
 
         $this->assertFalse($this->_storage->setItems($items, $options));
@@ -402,7 +395,7 @@ class AbstractAdapterTest extends CommonStorageTest
             ->will($this->returnValue(false));
         $this->_storage->expects($this->exactly(count($items)))
             ->method('setItem')
-            ->with($this->stringContains('value'), $this->stringContains('key'), $this->equalTo($options))
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
             ->will($this->returnValue(true));
 
         $this->assertTrue($this->_storage->addItems($items, $options));
@@ -424,7 +417,7 @@ class AbstractAdapterTest extends CommonStorageTest
             ->will($this->returnValue(false));
         $this->_storage->expects($this->exactly(count($items)))
             ->method('setItem')
-            ->with($this->stringContains('value'), $this->stringContains('key'), $this->equalTo($options))
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
             ->will($this->returnValue(false));
 
         $this->assertFalse($this->_storage->addItems($items, $options));
@@ -445,7 +438,7 @@ class AbstractAdapterTest extends CommonStorageTest
             ->will($this->returnValue(true));
         $this->_storage->expects($this->exactly(count($items)))
             ->method('setItem')
-            ->with($this->stringContains('value'), $this->stringContains('key'), $this->equalTo($options))
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
             ->will($this->returnValue(true));
 
         $this->assertTrue($this->_storage->replaceItems($items, $options));
@@ -467,7 +460,7 @@ class AbstractAdapterTest extends CommonStorageTest
             ->will($this->returnValue(true));
         $this->_storage->expects($this->exactly(count($items)))
             ->method('setItem')
-            ->with($this->stringContains('value'), $this->stringContains('key'), $this->equalTo($options))
+            ->with($this->stringContains('key'), $this->stringContains('value'), $this->equalTo($options))
             ->will($this->returnValue(false));
 
         $this->assertFalse($this->_storage->replaceItems($items, $options));

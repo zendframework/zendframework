@@ -90,7 +90,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
         $ttl = $capabilities->getTtlPrecision();
         $this->_storage->setTtl($ttl);
 
-        $this->_storage->setItem('value', 'key');
+        $this->_storage->setItem('key', 'value');
 
         // wait until expired
         $wait = $ttl + $capabilities->getTtlPrecision();
@@ -104,13 +104,13 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         $this->_storage->setReadable(false);
 
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertFalse($this->_storage->getItem('key'));
     }
 
     public function testGetMetadata()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertInternalType('array', $this->_storage->getMetadata('key'));
     }
 
@@ -132,7 +132,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         $this->_storage->setReadable(false);
 
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertFalse($this->_storage->getMetadata('key'));
     }
 
@@ -157,7 +157,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         $this->_storage->setReadable(false);
 
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertEquals(array(), $this->_storage->getItems(array('key')));
     }
 
@@ -165,7 +165,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         $capabilities = $this->_storage->getCapabilities();
 
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         $metadata = $this->_storage->getMetadata('key');
         $this->assertInternalType('array', $metadata);
@@ -176,7 +176,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testSetGetHasAndRemoveItem()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertEquals('value', $this->_storage->getItem('key'));
         $this->assertTrue($this->_storage->hasItem('key'));
         $this->assertTrue($this->_storage->removeItem('key'));
@@ -231,11 +231,11 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         // write "key" to default namespace
         $this->_storage->setNamespace('defaultns1');
-        $this->assertTrue( $this->_storage->setItem('defaultns1', 'key') );
+        $this->assertTrue( $this->_storage->setItem('key', 'defaultns1') );
 
         // write "key" to an other default namespace
         $this->_storage->setNamespace('defaultns2');
-        $this->assertTrue( $this->_storage->setItem('defaultns2', 'key') );
+        $this->assertTrue( $this->_storage->setItem('key', 'defaultns2') );
 
         // test value of defaultns2
         $this->assertTrue($this->_storage->hasItem('key'));
@@ -310,13 +310,13 @@ abstract class CommonAdapterTest extends CommonStorageTest
         $this->_storage->setNamespace('defaultns');
 
         // write "key" without a namespace
-        $this->assertTrue( $this->_storage->setItem('nons', 'key'));
+        $this->assertTrue( $this->_storage->setItem('key', 'nons'));
 
         // write "key" with a default namespace
-        $this->assertTrue( $this->_storage->setItem('ns1', 'key', array('namespace' => 'ns1')));
+        $this->assertTrue( $this->_storage->setItem('key', 'ns1', array('namespace' => 'ns1')));
 
         // write "key" with an other default namespace
-        $this->assertTrue( $this->_storage->setItem('ns2', 'key', array('namespace' => 'ns2')));
+        $this->assertTrue( $this->_storage->setItem('key', 'ns2', array('namespace' => 'ns2')));
 
         // test value of ns2
         $this->assertEquals('ns2', $this->_storage->getItem('key', array('namespace' => 'ns2')));
@@ -394,7 +394,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
         $ttl = $capabilities->getTtlPrecision();
         $this->_storage->setTtl($ttl);
 
-        $this->_storage->setItem('value', 'key');
+        $this->_storage->setItem('key', 'value');
 
         // wait until expired
         $wait = $ttl + $capabilities->getTtlPrecision();
@@ -468,7 +468,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
             }
 
             $value = $types[$sourceType];
-            $this->assertTrue($this->_storage->setItem($value, 'key'), "Failed to set type '{$sourceType}'");
+            $this->assertTrue($this->_storage->setItem('key', $value), "Failed to set type '{$sourceType}'");
 
             if ($targetType === true) {
                 $this->assertSame($value, $this->_storage->getItem('key'));
@@ -483,51 +483,51 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         $this->_storage->setWritable(false);
 
-        $this->assertFalse($this->_storage->setItem('value', 'key'));
+        $this->assertFalse($this->_storage->setItem('key', 'value'));
         $this->assertFalse($this->_storage->hasItem('key'));
     }
 
     public function testAddNewItem()
     {
-        $this->assertTrue($this->_storage->addItem('value', 'key'));
+        $this->assertTrue($this->_storage->addItem('key', 'value'));
         $this->assertTrue($this->_storage->hasItem('key'));
     }
 
     public function testAddItemThrowsExceptionIfItemAlreadyExists()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         $this->setExpectedException('Zend\Cache\Exception');
-        $this->_storage->addItem('newValue', 'key');
+        $this->_storage->addItem('key', 'newValue');
     }
 
     public function testAddItemReturnsFalseIfNonWritable()
     {
         $this->_storage->setWritable(false);
 
-        $this->assertFalse($this->_storage->addItem('value', 'key'));
+        $this->assertFalse($this->_storage->addItem('key', 'value'));
         $this->assertFalse($this->_storage->hasItem('key'));
     }
 
     public function testReplaceExistingItem()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
-        $this->assertTrue($this->_storage->replaceItem('anOtherValue', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
+        $this->assertTrue($this->_storage->replaceItem('key', 'anOtherValue'));
         $this->assertEquals('anOtherValue', $this->_storage->getItem('key'));
     }
 
     public function testReplaceItemThrowsItemNotFoundException()
     {
         $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
-        $this->_storage->replaceItem('value', 'missingKey');
+        $this->_storage->replaceItem('missingKey', 'value');
     }
 
     public function testReplaceItemReturnsFalseIfNonWritable()
     {
-        $this->_storage->setItem('value', 'key');
+        $this->_storage->setItem('key', 'value');
         $this->_storage->setWritable(false);
 
-        $this->assertFalse($this->_storage->replaceItem('newvalue', 'key'));
+        $this->assertFalse($this->_storage->replaceItem('key', 'newvalue'));
         $this->assertEquals('value', $this->_storage->getItem('key'));
     }
 
@@ -549,7 +549,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
     public function testRemoveMissingItemsReturnsTrueIfIgnoreMissingItemsEnabled()
     {
         $this->_storage->setIgnoreMissingItems(true);
-        $this->_storage->setItem('value', 'key');
+        $this->_storage->setItem('key', 'value');
 
         $this->assertTrue($this->_storage->removeItems(array('key', 'missing')));
     }
@@ -557,7 +557,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
     public function testRemoveMissingItemsThrowsExceptionIfIgnoreMissingItemsDisabled()
     {
         $this->_storage->setIgnoreMissingItems(false);
-        $this->_storage->setItem('value', 'key');
+        $this->_storage->setItem('key', 'value');
 
         $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
         $this->_storage->removeItems(array('key', 'missing'));
@@ -565,14 +565,14 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testCheckAndSetItem()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         $token = null;
         $this->assertEquals('value', $this->_storage->getItem('key', array('token' => &$token)));
         $this->assertNotNull($token);
 
-        $this->assertTrue($this->_storage->checkAndSetItem($token, 'newValue', 'key'));
-        $this->assertFalse($this->_storage->checkAndSetItem($token, 'failedValue', 'key'));
+        $this->assertTrue($this->_storage->checkAndSetItem($token, 'key', 'newValue'));
+        $this->assertFalse($this->_storage->checkAndSetItem($token, 'key', 'failedValue'));
         $this->assertEquals('newValue', $this->_storage->getItem('key'));
     }
 
@@ -728,7 +728,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testGetDelayedThrowExceptionOnActiveStatement()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
         $this->assertTrue($this->_storage->getDelayed(array('key')));
 
         $this->setExpectedException('Zend\Cache\Exception');
@@ -737,8 +737,8 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testIncrementItem()
     {
-       $this->assertTrue($this->_storage->setItem(10, 'counter'));
-       $this->assertEquals(15, $this->_storage->incrementItem(5, 'counter'));
+       $this->assertTrue($this->_storage->setItem('counter', 10));
+       $this->assertEquals(15, $this->_storage->incrementItem('counter', 5));
        $this->assertEquals(15, $this->_storage->getItem('counter'));
     }
 
@@ -746,7 +746,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         $this->_storage->setIgnoreMissingItems(true);
 
-        $this->assertEquals(5, $this->_storage->incrementItem(5, 'counter'));
+        $this->assertEquals(5, $this->_storage->incrementItem('counter', 5));
         $this->assertEquals(5, $this->_storage->getItem('counter'));
     }
 
@@ -760,33 +760,33 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testIncrementItemReturnsFalseIfNonWritable()
     {
-        $this->_storage->setItem(10, 'key');
+        $this->_storage->setItem('key', 10);
         $this->_storage->setWritable(false);
 
-        $this->assertFalse($this->_storage->incrementItem(5, 'key'));
+        $this->assertFalse($this->_storage->incrementItem('key', 5));
         $this->assertEquals(10, $this->_storage->getItem('key'));
     }
 
     public function testIncrementItemsReturnsFalseIfNonWritable()
     {
-        $this->_storage->setItem(10, 'key');
+        $this->_storage->setItem('key', 10);
         $this->_storage->setWritable(false);
 
-        $this->assertFalse($this->_storage->incrementItem(array('key' => 5)));
+        $this->assertFalse($this->_storage->incrementItems(array('key' => 5)));
         $this->assertEquals(10, $this->_storage->getItem('key'));
     }
 
     public function testDecrementItem()
     {
-       $this->assertTrue($this->_storage->setItem(30, 'counter'));
-       $this->assertEquals(25, $this->_storage->decrementItem(5, 'counter'));
+       $this->assertTrue($this->_storage->setItem('counter', 30));
+       $this->assertEquals(25, $this->_storage->decrementItem('counter', 5));
        $this->assertEquals(25, $this->_storage->getItem('counter'));
     }
 
     public function testDecrmentInitialValue()
     {
         $this->_storage->setIgnoreMissingItems(true);
-        $this->assertEquals(-5, $this->_storage->decrementItem(5, 'counter'));
+        $this->assertEquals(-5, $this->_storage->decrementItem('counter', 5));
         $this->assertEquals(-5, $this->_storage->getItem('counter'));
     }
 
@@ -799,16 +799,16 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testDecrementItemReturnsFalseIfNonWritable()
     {
-        $this->_storage->setItem(10, 'key');
+        $this->_storage->setItem('key', 10);
         $this->_storage->setWritable(false);
 
-        $this->assertFalse($this->_storage->decrementItem(5, 'key'));
+        $this->assertFalse($this->_storage->decrementItem('key', 5));
         $this->assertEquals(10, $this->_storage->getItem('key'));
     }
 
     public function testDecrementItemsReturnsFalseIfNonWritable()
     {
-        $this->_storage->setItem(10, 'key');
+        $this->_storage->setItem('key', 10);
         $this->_storage->setWritable(false);
 
         $this->assertFalse($this->_storage->decrementItems(array('key' => 5)));
@@ -820,7 +820,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
         $capabilities = $this->_storage->getCapabilities();
         $this->_storage->setTtl(2 * $capabilities->getTtlPrecision());
 
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         // sleep 1 times before expire to touch the item
         usleep($capabilities->getTtlPrecision() * 1000000);
@@ -877,13 +877,13 @@ abstract class CommonAdapterTest extends CommonStorageTest
         $ttl = $capabilities->getTtlPrecision();
         $this->_storage->setTtl($ttl);
 
-        $this->assertTrue($this->_storage->setItem('value1', 'key1'));
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
 
         // wait until the first item expired
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 1000000);
 
-        $this->assertTrue($this->_storage->setItem('value2', 'key2'));
+        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
         $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_EXPIRED));
 
@@ -908,13 +908,13 @@ abstract class CommonAdapterTest extends CommonStorageTest
         $ttl = $capabilities->getTtlPrecision();
         $this->_storage->setTtl($ttl);
 
-        $this->assertTrue($this->_storage->setItem('value1', 'key1'));
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
 
         // wait until the first item expired
         $wait = $ttl + $capabilities->getTtlPrecision();
         usleep($wait * 1000000);
 
-        $this->assertTrue($this->_storage->setItem('value2', 'key2'));
+        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
         $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_ACTIVE));
 
@@ -943,7 +943,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
         foreach ($namespaces as $ns) {
             $this->_storage->setNamespace($ns);
             foreach ($items as $k => $v) {
-                $this->assertTrue($this->_storage->setItem($ns.$v, $ns.$k));
+                $this->assertTrue($this->_storage->setItem($ns.$k, $ns.$v));
             }
         }
 
@@ -985,7 +985,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
         foreach ($namespaces as $ns) {
             $this->_storage->setNamespace($ns);
             foreach ($items as $k => $v) {
-                $this->assertTrue($this->_storage->setItem($ns.$v, $ns.$k));
+                $this->assertTrue($this->_storage->setItem($ns.$k, $ns.$v));
             }
         }
 
@@ -1011,14 +1011,14 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
         $this->_storage->setTtl($capabilities->getTtlPrecision());
 
-        $this->assertTrue($this->_storage->setItem('value1', 'key1'));
-        $this->assertTrue($this->_storage->setItem('value2', 'key2'));
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
+        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
         // wait until first 2 items expired
         usleep(($capabilities->getTtlPrecision() * 1000000) + 1000000);
 
-        $this->assertTrue($this->_storage->setItem('value3', 'key3'));
-        $this->assertTrue($this->_storage->setItem('value4', 'key4'));
+        $this->assertTrue($this->_storage->setItem('key3', 'value3'));
+        $this->assertTrue($this->_storage->setItem('key4', 'value4'));
 
         $this->assertTrue($this->_storage->find(Adapter::MATCH_ACTIVE));
 
@@ -1058,14 +1058,14 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
         $this->_storage->setTtl($capabilities->getTtlPrecision());
 
-        $this->assertTrue($this->_storage->setItem('value1', 'key1'));
-        $this->assertTrue($this->_storage->setItem('value2', 'key2'));
+        $this->assertTrue($this->_storage->setItem('key1', 'value1'));
+        $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
         // wait until first 2 items expired
         usleep($capabilities->getTtlPrecision() * 1000000);
 
-        $this->assertTrue($this->_storage->setItem('value3', 'key3'));
-        $this->assertTrue($this->_storage->setItem('value4', 'key4'));
+        $this->assertTrue($this->_storage->setItem('key3', 'value3'));
+        $this->assertTrue($this->_storage->setItem('key4', 'value4'));
 
         $this->assertTrue($this->_storage->find(Adapter::MATCH_EXPIRED));
 
@@ -1094,7 +1094,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testHasItemWithNonReadable()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         $this->_storage->setReadable(false);
         $this->assertFalse($this->_storage->hasItem('key'));
@@ -1102,7 +1102,7 @@ abstract class CommonAdapterTest extends CommonStorageTest
 
     public function testHasItemsWithNonReadable()
     {
-        $this->assertTrue($this->_storage->setItem('value', 'key'));
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         $this->_storage->setReadable(false);
         $this->assertEquals(array(), $this->_storage->hasItems(array('key')));
@@ -1128,20 +1128,6 @@ abstract class CommonAdapterTest extends CommonStorageTest
     {
         $rs = $this->_storage->optimize();
         $this->assertTrue($rs);
-    }
-
-    public function testGetLastKey()
-    {
-        $this->_storage->hasItem('key'); // set the last key
-        $this->assertEquals('key', $this->_storage->getLastKey());
-
-        $this->assertTrue($this->_storage->setItem('value'));
-        $this->assertTrue($this->_storage->hasItem());
-        $this->assertEquals('value', $this->_storage->getItem());
-        $this->assertInternalType('array', $this->_storage->getMetadata());
-
-        $this->assertTrue($this->_storage->removeItem());
-        $this->assertFalse($this->_storage->hasItem());
     }
 
 }

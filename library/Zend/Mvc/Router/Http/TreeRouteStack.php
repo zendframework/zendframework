@@ -91,7 +91,9 @@ class TreeRouteStack extends SimpleRouteStack
             $route = $this->routeFromArray($route);
         }
 
-        return parent::addRoute($name, $route, $priority);
+        $this->routes->insert($name, $route, $priority);
+
+        return $this;
     }
 
     /**
@@ -103,10 +105,12 @@ class TreeRouteStack extends SimpleRouteStack
      */
     protected function routeFromArray($specs)
     {
+        if (!is_array($specs) && !$specs instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
+        }
+
         if ($specs instanceof Traversable) {
             $specs = IteratorToArray::convert($specs);
-        } elseif (!is_array($specs)) {
-            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
         
         $route = parent::routeFromArray($specs);
@@ -160,12 +164,6 @@ class TreeRouteStack extends SimpleRouteStack
                 if (($match = $route->match($request, $baseUrlLength)) instanceof RouteMatch && $match->getLength() === $pathLength) {
                     $match->setMatchedRouteName($name);
                     
-                    foreach ($this->defaultParams as $name => $value) {
-                        if ($match->getParam($name) === null) {
-                            $match->setParam($name, $value);
-                        }
-                    }
-                    
                     return $match;
                 }
             }
@@ -203,29 +201,29 @@ class TreeRouteStack extends SimpleRouteStack
             unset($options['name']);
         }
 
-        if (!isset($options['only_return_path']) || !$options['only_return_path']) {
-            if (!isset($options['uri'])) {
-                $uri = new HttpUri();
+        if (!isset($options['uri'])) {
+            $uri = new HttpUri();
 
-                if (isset($options['absolute']) && $options['absolute']) {
-                    if ($this->requestUri === null) {
-                        throw new Exception\RuntimeException('Request URI has not been set');
-                    }
-
-                    $uri->setScheme($this->requestUri->getScheme())
-                        ->setHost($this->requestUri->getHost())
-                        ->setPort($this->requestUri->getPort());
+            if (isset($options['absolute']) && $options['absolute']) {
+                if ($this->requestUri === null) {
+                    throw new Exception\RuntimeException('Request URI has not been set');
                 }
 
-                $options['uri'] = $uri;
-            } else {
-                $uri = $options['uri'];
+                $uri->setScheme($this->requestUri->getScheme())
+                    ->setHost($this->requestUri->getHost())
+                    ->setPort($this->requestUri->getPort());
             }
 
-            $path = $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
+            $options['uri'] = $uri;
+        }
 
-            if ((isset($options['absolute']) && $options['absolute']) || $uri->getHost() !== null) {
-                if ($uri->getScheme() === null) {
+        $path = $this->baseUrl . $route->assemble($params, $options);
+
+        if (isset($uri)) {
+            if (isset($options['absolute']) && $options['absolute']) {
+                return $uri->setPath($path)->toString();
+            } elseif ($uri->getHost() !== null) {
+                if ($uri->scheme !== null) {
                     if ($this->requestUri === null) {
                         throw new Exception\RuntimeException('Request URI has not been set');
                     }
@@ -236,8 +234,8 @@ class TreeRouteStack extends SimpleRouteStack
                 return $uri->setPath($path)->toString();
             }
         }
-        
-        return $this->baseUrl . $route->assemble(array_merge($this->defaultParams, $params), $options);
+
+        return $path;
     }
 
     /**

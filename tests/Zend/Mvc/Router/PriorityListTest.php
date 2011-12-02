@@ -70,11 +70,6 @@ class PriorityListTest extends TestCase
         $this->assertEquals(1, count($this->list));
     }
     
-    public function testRemovingNonExistentRouteDoesNotYieldError()
-    {
-        $this->list->remove('foo');
-    }
-    
     public function testGet()
     {
         $route = new TestAsset\DummyRoute();

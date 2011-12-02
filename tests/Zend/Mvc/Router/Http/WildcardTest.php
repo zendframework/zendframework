@@ -3,9 +3,7 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Mvc\Router\Http\Wildcard,
-    ZendTest\Mvc\Router\FactoryTester;
+    Zend\Mvc\Router\Http\Wildcard;
 
 class WildcardTest extends TestCase
 {
@@ -17,12 +15,6 @@ class WildcardTest extends TestCase
                 '/foo/bar/baz/bat',
                 null,
                 array('foo' => 'bar', 'baz' => 'bat')
-            ),
-            'empty-match' => array(
-                new Wildcard(),
-                '',
-                null,
-                array()
             ),
             'no-match-without-leading-delimiter' => array(
                 new Wildcard(),
@@ -120,32 +112,6 @@ class WildcardTest extends TestCase
         } else {
             $this->assertEquals($path, $result);
         }
-    }
-    
-    public function testNoMatchWithoutUriMethod()
-    {
-        $route   = new Wildcard();
-        $request = new BaseRequest();
-        
-        $this->assertNull($route->match($request));
-    }
-    
-    public function testGetAssembledParams()
-    {
-        $route = new Wildcard();
-        $route->assemble(array('foo' => 'bar'));
-        
-        $this->assertEquals(array('foo'), $route->getAssembledParams());
-    }
-    
-    public function testFactory()
-    {
-        $tester = new FactoryTester($this);
-        $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Wildcard',
-            array(),
-            array()
-        );
     }
 }
 

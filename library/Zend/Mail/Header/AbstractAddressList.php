@@ -24,6 +24,12 @@ abstract class AbstractAddressList implements HeaderDescription
      */
     protected static $type;
 
+    /**
+     * Parse string to create header object
+     * 
+     * @param  string $headerLine 
+     * @return AbstractAddressList
+     */
     public static function fromString($headerLine)
     {
         // split into name/value
@@ -38,7 +44,8 @@ abstract class AbstractAddressList implements HeaderDescription
         $header = new static();
 
         // split value on ","
-        $values = explode(',', $fieldValue);
+        $fieldValue = str_replace("\r\n ", " ", $fieldValue);
+        $values     = explode(',', $fieldValue);
         array_walk($values, 'trim');
 
         $addressList = $header->getAddressList();
@@ -61,11 +68,21 @@ abstract class AbstractAddressList implements HeaderDescription
         return $header;
     }
 
+    /**
+     * Get field name of this header
+     * 
+     * @return string
+     */
     public function getFieldName()
     {
         return $this->fieldName;
     }
 
+    /**
+     * Get field value of this header
+     * 
+     * @return string
+     */
     public function getFieldValue()
     {
         $emails = array();
@@ -82,15 +99,26 @@ abstract class AbstractAddressList implements HeaderDescription
                 $emails[] = sprintf('%s <%s>', $name, $email);
             }
         }
-        $string = implode(', ', $emails);
+        $string = implode(",\r\n ", $emails);
         return $string;
     }
 
+    /**
+     * Set address list for this header
+     * 
+     * @param  AddressList $addressList 
+     * @return void
+     */
     public function setAddressList(AddressList $addressList)
     {
         $this->addressList = $addressList;
     }
 
+    /**
+     * Get address list managed by this header
+     * 
+     * @return AddressList
+     */
     public function getAddressList()
     {
         if (null === $this->addressList) {
@@ -99,6 +127,11 @@ abstract class AbstractAddressList implements HeaderDescription
         return $this->addressList;
     }
 
+    /**
+     * Serialize to string
+     * 
+     * @return string
+     */
     public function toString()
     {
         $name  = $this->getFieldName();

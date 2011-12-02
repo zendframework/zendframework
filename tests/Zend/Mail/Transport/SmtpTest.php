@@ -54,7 +54,7 @@ class SmtpTest extends TestCase
         $this->assertContains("Cc: matthew@zend.com\r\n", $data);
         $this->assertNotContains("Bcc: \"CR-Team, ZF Project\" <zf-crteam@lists.zend.com>\r\n", $data);
         $this->assertNotContains("zf-crteam@lists.zend.com", $data);
-        $this->assertContains("From: zf-devteam@zend.com, Matthew <matthew@zend.com>\r\n", $data);
+        $this->assertContains("From: zf-devteam@zend.com,\r\n Matthew <matthew@zend.com>\r\n", $data);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $data);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $data);
         $this->assertContains("\r\n\r\nThis is only a test.", $data, $data);

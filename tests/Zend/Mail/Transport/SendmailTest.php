@@ -74,7 +74,7 @@ class SendmailTest extends TestCase
         $this->assertNotContains("To: ZF DevTeam <zf-devteam@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("Cc: matthew@zend.com\r\n", $this->additional_headers);
         $this->assertContains("Bcc: \"CR-Team, ZF Project\" <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
-        $this->assertContains("From: zf-devteam@zend.com, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("From: zf-devteam@zend.com,\r\n Matthew <matthew@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $this->additional_headers);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $this->additional_headers);
         $this->assertEquals('-R hdrs -r ralph.schindler@zend.com', $this->additional_parameters);
@@ -95,7 +95,7 @@ class SendmailTest extends TestCase
         $this->assertContains("To: ZF DevTeam <zf-devteam@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("Cc: matthew@zend.com\r\n", $this->additional_headers);
         $this->assertContains("Bcc: \"CR-Team, ZF Project\" <zf-crteam@lists.zend.com>\r\n", $this->additional_headers);
-        $this->assertContains("From: zf-devteam@zend.com, Matthew <matthew@zend.com>\r\n", $this->additional_headers);
+        $this->assertContains("From: zf-devteam@zend.com,\r\n Matthew <matthew@zend.com>\r\n", $this->additional_headers);
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $this->additional_headers);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $this->additional_headers);
         $this->assertNull($this->additional_parameters);

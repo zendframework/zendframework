@@ -9,7 +9,7 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testContentTypeFromStringCreatesValidContentTypeHeader()
     {
-        $contentTypeHeader = ContentType::fromString('Content-Type: xxx');
+        $contentTypeHeader = ContentType::fromString('Content-Type: xxx/yyy');
         $this->assertInstanceOf('Zend\Mail\Header\HeaderDescription', $contentTypeHeader);
         $this->assertInstanceOf('Zend\Mail\Header\ContentType', $contentTypeHeader);
     }
@@ -22,23 +22,28 @@ class ContentTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testContentTypeGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('ContentType needs to be completed');
-
         $contentTypeHeader = new ContentType();
-        $this->assertEquals('xxx', $contentTypeHeader->getFieldValue());
+        $contentTypeHeader->setType('foo/bar');
+        $this->assertEquals('foo/bar', $contentTypeHeader->getFieldValue());
     }
 
     public function testContentTypeToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('ContentType needs to be completed');
-
         $contentTypeHeader = new ContentType();
-
-        // @todo set some values, then test output
-        $this->assertEmpty('Content-Type: xxx', $contentTypeHeader->toString());
+        $contentTypeHeader->setType('foo/bar');
+        $this->assertEquals("Content-Type: foo/bar\r\n", $contentTypeHeader->toString());
     }
 
-    /** Implementation specific tests here */
+    public function testProvidingParametersIntroducesHeaderFolding()
+    {
+        $header = new ContentType();
+        $header->setType('application/x-unit-test');
+        $header->addParameter('charset', 'us-ascii');
+        $string = $header->toString();
+
+        $this->assertContains("Content-Type: application/x-unit-test;\r\n", $string);
+        $this->assertContains(";\r\n charset=\"us-ascii\"", $string);
+    }
     
 }
 

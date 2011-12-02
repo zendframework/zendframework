@@ -2,7 +2,7 @@
 
 namespace Zend\Mail\Header;
 
-class Subject implements HeaderDescription
+class Subject implements HeaderDescription, UnstructuredHeader
 {
     /**
      * @var string
@@ -47,7 +47,7 @@ class Subject implements HeaderDescription
      */
     public function getFieldValue()
     {
-        return $this->subject;
+        return HeaderWrap::wrap($this->subject, $this);
     }
 
     /**

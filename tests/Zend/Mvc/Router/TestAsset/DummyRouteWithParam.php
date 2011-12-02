@@ -37,7 +37,7 @@ use Zend\Mvc\Router\Route,
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DummyRoute implements Route
+class DummyRouteWithParam extends DummyRoute
 {
     /**
      * match(): defined by Route interface.
@@ -48,9 +48,9 @@ class DummyRoute implements Route
      */
     public function match(Request $request)
     {
-        return new RouteMatch(array());
+        return new RouteMatch(array('foo' => 'bar'));
     }
-
+    
     /**
      * assemble(): defined by Route interface.
      *
@@ -61,17 +61,10 @@ class DummyRoute implements Route
      */
     public function assemble(array $params = null, array $options = null)
     {
+        if (isset($params['foo'])) {
+            return $params['foo'];
+        }
+        
         return '';
-    }
-
-    /**
-     * factory(): defined by Route interface
-     * 
-     * @param  array|Traversable $options 
-     * @return DummyRoute
-     */
-    public static function factory($options = array())
-    {
-        return new static();
     }
 }

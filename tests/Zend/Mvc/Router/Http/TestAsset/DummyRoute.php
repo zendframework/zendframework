@@ -22,10 +22,10 @@
 /**
  * @namespace
  */
-namespace ZendTest\Mvc\Router\TestAsset;
+namespace ZendTest\Mvc\Router\Http\TestAsset;
 
-use Zend\Mvc\Router\Route,
-    Zend\Mvc\Router\RouteMatch,
+use Zend\Mvc\Router\Http\Route,
+    Zend\Mvc\Router\Http\RouteMatch,
     Zend\Stdlib\RequestDescription as Request;
 
 /**
@@ -44,11 +44,12 @@ class DummyRoute implements Route
      *
      * @see    Route::match()
      * @param  Request $request
+     * @param  integer $pathOffset
      * @return RouteMatch
      */
-    public function match(Request $request)
+    public function match(Request $request, $pathOffset = null)
     {
-        return new RouteMatch(array());
+        return new RouteMatch(array('offset' => $pathOffset), -4);
     }
 
     /**
@@ -73,5 +74,16 @@ class DummyRoute implements Route
     public static function factory($options = array())
     {
         return new static();
+    }
+    
+    /**
+     * getAssembledParams(): defined by Route interface.
+     * 
+     * @see    Route::getAssembledParams
+     * @return array
+     */
+    public function getAssembledParams()
+    {
+        return array();
     }
 }

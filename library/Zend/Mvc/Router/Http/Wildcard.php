@@ -92,10 +92,13 @@ class Wildcard implements Route
      */
     public static function factory($options = array())
     {
-        if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
-        } elseif (!is_array($options)) {
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+        }
+
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
         }
 
         if (!isset($options['key_value_delimiter'])) {
@@ -136,7 +139,7 @@ class Wildcard implements Route
         $matches = array();
         $params  = explode($this->paramDelimiter, $path);
 
-        if (count($params) > 1 && ($params[0] !== '' || end($params) === '')) {
+        if ($params[0] !== '' || end($params) === '') {
             return null;
         }
         

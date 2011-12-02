@@ -99,10 +99,13 @@ class Part extends TreeRouteStack implements Route
      */
     public static function factory($options = array())
     {
-        if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
-        } elseif (!is_array($options)) {
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+        }
+
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
         }
 
         if (!isset($options['route'])) {
@@ -181,21 +184,20 @@ class Part extends TreeRouteStack implements Route
             $this->childRoutes = null;
         }
         
-        $path   = $this->route->assemble($params, $options);
+        $uri    = $this->route->assemble($params, $options);
         $params = array_diff_key($params, array_flip($this->route->getAssembledParams()));
 
         if (!isset($options['name'])) {
             if (!$this->mayTerminate) {
                 throw new Exception\RuntimeException('Part route may not terminate');
             } else {
-                return $path;
+                return $uri;
             }
         }
         
-        $options['only_return_path'] = true;
-        $path .= parent::assemble($params, $options);
+        $uri .= parent::assemble($params, $options);
         
-        return $path;
+        return $uri;
     }
     
     /**

@@ -51,13 +51,6 @@ class SimpleRouteStack implements RouteStack
      * @var RouteBroker
      */
     protected $routeBroker;
-    
-    /**
-     * Default parameters.
-     * 
-     * @var array
-     */
-    protected $defaultParams = array();
 
     /**
      * Create a new simple route stack.
@@ -81,10 +74,13 @@ class SimpleRouteStack implements RouteStack
      */
     public static function factory($options = array())
     {
-        if ($options instanceof Traversable) {
-            $options = IteratorToArray::convert($options);
-        } elseif (!is_array($options)) {
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+        }
+
+        // Convert options to array if Traversable object not implementing ArrayAccess
+        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+            $options = IteratorToArray::convert($options);
         }
 
         $instance = new static();
@@ -95,10 +91,6 @@ class SimpleRouteStack implements RouteStack
         
         if (isset($options['routes'])) {
             $instance->addRoutes($options['routes']);
-        }
-        
-        if (isset($options['default_params'])) {
-            $instance->setDefaultParams($options['default_params']);
         }
 
         return $instance;
@@ -170,7 +162,7 @@ class SimpleRouteStack implements RouteStack
             $route = $this->routeFromArray($route);
         }
         
-        if ($priority === null && isset($route->priority)) {
+        if ($priority !== null && isset($route->priority)) {
             $priority = $route->priority;
         }
 
@@ -189,31 +181,7 @@ class SimpleRouteStack implements RouteStack
     public function removeRoute($name)
     {
         $this->routes->remove($name);
-        return $this;
-    }
 
-    /**
-     * Set a default parameters.
-     * 
-     * @param  array $params
-     * @return RouteStack
-     */
-    public function setDefaultParams(array $params)
-    {
-        $this->defaultParams = $params;
-        return $this;
-    }
-    
-    /**
-     * Set a default parameter.
-     * 
-     * @param  string $name
-     * @param  mixed  $value 
-     * @return RouteStack
-     */
-    public function setDefaultParam($name, $value)
-    {
-        $this->defaultParams[$name] = $value;
         return $this;
     }
 
@@ -225,10 +193,12 @@ class SimpleRouteStack implements RouteStack
      */
     protected function routeFromArray($specs)
     {
+        if (!is_array($specs) && !$specs instanceof Traversable) {
+            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
+        }
+
         if ($specs instanceof Traversable) {
             $specs = IteratorToArray::convert($specs);
-        } elseif (!is_array($specs)) {
-            throw new Exception\InvalidArgumentException('Route definition must be an array or Traversable object');
         }
 
         if (!isset($specs['type'])) {
@@ -259,12 +229,6 @@ class SimpleRouteStack implements RouteStack
             if (($match = $route->match($request)) instanceof RouteMatch) {
                 $match->setMatchedRouteName($name);
                 
-                foreach ($this->defaultParams as $name => $value) {
-                    if ($match->getParam($name) === null) {
-                        $match->setParam($name, $value);
-                    }
-                }
-                
                 return $match;
             }
         }
@@ -294,6 +258,6 @@ class SimpleRouteStack implements RouteStack
 
         unset($options['name']);
 
-        return $route->assemble(array_merge($this->defaultParams, $params), $options);
+        return $route->assemble($params, $options);
     }
 }

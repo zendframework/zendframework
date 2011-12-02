@@ -3,9 +3,7 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Stdlib\Request as BaseRequest,
-    Zend\Mvc\Router\Http\Literal,
-    ZendTest\Mvc\Router\FactoryTester;
+    Zend\Mvc\Router\Http\Literal;
 
 class LiteralTest extends TestCase
 {
@@ -90,36 +88,6 @@ class LiteralTest extends TestCase
         } else {
             $this->assertEquals($path, $result);
         }
-    }
-    
-    public function testNoMatchWithoutUriMethod()
-    {
-        $route   = new Literal('/foo');
-        $request = new BaseRequest();
-        
-        $this->assertNull($route->match($request));
-    }
-    
-    public function testGetAssembledParams()
-    {
-        $route = new Literal('/foo');
-        $route->assemble(array('foo' => 'bar'));
-        
-        $this->assertEquals(array(), $route->getAssembledParams());
-    }
-    
-    public function testFactory()
-    {
-        $tester = new FactoryTester($this);
-        $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Literal',
-            array(
-                'route' => 'Missing "route" in options array'
-            ),
-            array(
-                'route' => '/foo'
-            )
-        );
     }
 }
 

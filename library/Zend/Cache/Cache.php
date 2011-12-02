@@ -210,6 +210,9 @@ abstract class Cache
         throw new Exception($msg, 0, $e);
     }
 
+    /**
+     * @return \Zend\Filter\AbstractFilter
+     */
     protected static function _getCamelCaseFilter()
     {
         if (null === self::$_camelCaseFilter) {

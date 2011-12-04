@@ -21,11 +21,11 @@
  */
 
 namespace ZendTest\Cache\Storage\Plugin;
-
 use Zend\Cache,
     Zend\Cache\Storage\Event,
     Zend\Cache\Storage\PostEvent,
-    Zend\Serializer;
+    Zend\Serializer,
+    ArrayObject;
 
 /**
  * @category   Zend
@@ -112,8 +112,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeOnReadItem()
     {
         $value = serialize(123);
-        $event = new PostEvent('getItem.post', $this->_adapter, array());
-        $event->setResult($value);
+        $event = new PostEvent('getItem.post', $this->_adapter, new ArrayObject(), $value);
         $this->_plugin->onReadItemPost($event);
 
         $this->assertFalse($event->propagationIsStopped());
@@ -123,8 +122,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testUnserializeOnReadItems()
     {
         $values = array('key1' => serialize(123), 'key2' => serialize(456));
-        $event = new PostEvent('getItems.post', $this->_adapter, array());
-        $event->setResult($values);
+        $event = new PostEvent('getItems.post', $this->_adapter, new ArrayObject(), $values);
 
         $this->_plugin->onReadItemsPost($event);
 

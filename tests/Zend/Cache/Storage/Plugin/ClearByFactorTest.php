@@ -3,7 +3,8 @@
 namespace ZendTest\Cache\Storage\Plugin;
 use Zend\Cache,
     Zend\Cache\Storage\PostEvent,
-    ZendTest\Cache\Storage\TestAsset\MockAdapter;
+    ZendTest\Cache\Storage\TestAsset\MockAdapter,
+    ArrayObject;
 
 class ClearByFactorTest extends \PHPUnit_Framework_TestCase
 {
@@ -78,11 +79,11 @@ class ClearByFactorTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         // call event callback
-        $event = new PostEvent('setItem.post', $adapter, array(
-            'options'  => array(),
-        ));
         $result = true;
-        $event->setResult($result);
+        $event = new PostEvent('setItem.post', $adapter, new ArrayObject(array(
+            'options'  => array(),
+        )), $result);
+
         $this->_plugin->clearByFactor($event);
 
         $this->assertTrue($event->getResult());
@@ -101,11 +102,11 @@ class ClearByFactorTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         // call event callback
-        $event = new PostEvent('setItem.post', $adapter, array(
-            'options'  => array(),
-        ));
         $result = true;
-        $event->setResult($result);
+        $event = new PostEvent('setItem.post', $adapter, new ArrayObject(array(
+            'options'  => array(),
+        )), $result);
+
         $this->_plugin->clearByFactor($event);
 
         $this->assertTrue($event->getResult());

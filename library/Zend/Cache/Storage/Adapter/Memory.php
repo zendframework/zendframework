@@ -44,33 +44,36 @@ class Memory extends AbstractAdapter
             'options' => & $options
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns = $options['namespace'];
-        $exist = isset($this->_data[$ns][$key]);
-        if ($exist) {
-            if ($options['ttl'] && microtime(true) >= ($this->_data[$ns][$key][1] + $options['ttl']) ) {
-                $exist = false;
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-        }
 
-        if (!$exist) {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
+            $ns = $options['namespace'];
+            $exist = isset($this->_data[$ns][$key]);
+            if ($exist) {
+                if ($options['ttl'] && microtime(true) >= ($this->_data[$ns][$key][1] + $options['ttl']) ) {
+                    $exist = false;
+                }
             }
-            $result = false;
-        } else {
-            $result = $this->_data[$ns][$key][0];
-            if (array_key_exists('token', $options)) {
-                $options['token'] = $this->_data[$ns][$key][0];
-            }
-        }
 
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            if (!$exist) {
+                if (!$options['ignore_missing_items']) {
+                    throw new ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
+                }
+                $result = false;
+            } else {
+                $result = $this->_data[$ns][$key][0];
+                if (array_key_exists('token', $options)) {
+                    $options['token'] = $this->_data[$ns][$key][0];
+                }
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function getItems(array $keys, array $options = array())
@@ -85,31 +88,34 @@ class Memory extends AbstractAdapter
             'options' => & $options
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns = $options['namespace'];
-        if (!isset($this->_data[$ns])) {
-            $result = array();
-        } else {
-            $data = &$this->_data[$ns];
-
-            $keyValuePairs = array();
-            foreach ($keys as $key) {
-                if (isset($data[$key])) {
-                    if (!$options['ttl'] || microtime(true) < ($this->_data[$ns][$key][1] + $options['ttl']) ) {
-                        $keyValuePairs[$key] = $data[$key][0];
-                    }
-                }
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
 
-            $result = $keyValuePairs;
-        }
+            $ns = $options['namespace'];
+            if (!isset($this->_data[$ns])) {
+                $result = array();
+            } else {
+                $data = &$this->_data[$ns];
 
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+                $keyValuePairs = array();
+                foreach ($keys as $key) {
+                    if (isset($data[$key])) {
+                        if (!$options['ttl'] || microtime(true) < ($this->_data[$ns][$key][1] + $options['ttl']) ) {
+                            $keyValuePairs[$key] = $data[$key][0];
+                        }
+                    }
+                }
+
+                $result = $keyValuePairs;
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function hasItem($key, array $options = array())
@@ -125,15 +131,18 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $result = $this->_exists($key, $options);
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
         }
-
-        $result = $this->_exists($key, $options);
-
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
     }
 
     public function getMetadata($key, array $options = array())
@@ -149,28 +158,31 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
 
-        if (!$this->_exists($key, $options)) {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException(
-                    "Key '{$key}' not found on namespace '{$options['namespace']}'"
+            if (!$this->_exists($key, $options)) {
+                if (!$options['ignore_missing_items']) {
+                    throw new ItemNotFoundException(
+                        "Key '{$key}' not found on namespace '{$options['namespace']}'"
+                    );
+                }
+                $result = false;
+            } else {
+                $ns = $options['namespace'];
+                $result = array(
+                    'mtime' => $this->_data[$ns][$key][1],
+                    'tags'  => $this->_data[$ns][$key][2],
                 );
             }
-            $result = false;
-        } else {
-            $ns = $options['namespace'];
-            $result = array(
-                'mtime' => $this->_data[$ns][$key][1],
-                'tags'  => $this->_data[$ns][$key][2],
-            );
-        }
 
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     /* writing */
@@ -189,17 +201,20 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $ns = $options['namespace'];
+            $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
         }
-
-        $ns = $options['namespace'];
-        $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
-
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
     }
 
     public function setItems(array $keyValuePairs, array $options = array())
@@ -214,24 +229,27 @@ class Memory extends AbstractAdapter
             'options'       => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
 
-        $ns = $options['namespace'];
-        if (!isset($this->_data[$ns])) {
-            $this->_data[$ns] = array();
-        }
+            $ns = $options['namespace'];
+            if (!isset($this->_data[$ns])) {
+                $this->_data[$ns] = array();
+            }
 
-        $data = & $this->_data[$ns];
-        foreach ($keyValuePairs as $key => $value) {
-            $data[$key] = array($value, microtime(true), $options['tags']);
-        }
+            $data = & $this->_data[$ns];
+            foreach ($keyValuePairs as $key => $value) {
+                $data[$key] = array($value, microtime(true), $options['tags']);
+            }
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function addItem($key, $value, array $options = array())
@@ -248,20 +266,23 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
 
-        $ns = $options['namespace'];
-        if (isset($this->_data[$ns][$key])) {
-            throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
-        }
-        $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
+            $ns = $options['namespace'];
+            if (isset($this->_data[$ns][$key])) {
+                throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
+            }
+            $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function addItems(array $keyValuePairs, array $options = array())
@@ -276,27 +297,30 @@ class Memory extends AbstractAdapter
             'options'       => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns = $options['namespace'];
-        if (!isset($this->_data[$ns])) {
-            $this->_data[$ns] = array();
-        }
-
-        $data = & $this->_data[$ns];
-        foreach ($keyValuePairs as $key => $value) {
-            if (isset($data[$key])) {
-                throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-            $data[$key] = array($value, microtime(true), $options['tags']);
-        }
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            $ns = $options['namespace'];
+            if (!isset($this->_data[$ns])) {
+                $this->_data[$ns] = array();
+            }
+
+            $data = & $this->_data[$ns];
+            foreach ($keyValuePairs as $key => $value) {
+                if (isset($data[$key])) {
+                    throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
+                }
+                $data[$key] = array($value, microtime(true), $options['tags']);
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function replaceItem($key, $value, array $options = array())
@@ -313,20 +337,23 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
 
-        $ns = $options['namespace'];
-        if (!isset($this->_data[$ns][$key])) {
-            throw new ItemNotFoundException("Key '{$key}' doen't exists within namespace '$ns'");
-        }
-        $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
+            $ns = $options['namespace'];
+            if (!isset($this->_data[$ns][$key])) {
+                throw new ItemNotFoundException("Key '{$key}' doen't exists within namespace '$ns'");
+            }
+            $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function replaceItems(array $keyValuePairs, array $options = array())
@@ -341,29 +368,32 @@ class Memory extends AbstractAdapter
             'options'       => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns = $options['namespace'];
-        if (!isset($this->_data[$ns])) {
-            throw new ItemNotFoundException("Namespace '$ns' doesn't exist");
-        }
-
-        $data = & $this->_data[$ns];
-        foreach ($keyValuePairs as $key => $value) {
-            if (!isset($data[$key])) {
-                throw new ItemNotFoundException(
-                    "Key '{$key}' doen't exists within namespace '$ns'"
-                );
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-            $data[$key] = array($value, microtime(true), $options['tags']);
-        }
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            $ns = $options['namespace'];
+            if (!isset($this->_data[$ns])) {
+                throw new ItemNotFoundException("Namespace '$ns' doesn't exist");
+            }
+
+            $data = & $this->_data[$ns];
+            foreach ($keyValuePairs as $key => $value) {
+                if (!isset($data[$key])) {
+                    throw new ItemNotFoundException(
+                        "Key '{$key}' doen't exists within namespace '$ns'"
+                    );
+                }
+                $data[$key] = array($value, microtime(true), $options['tags']);
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function touchItem($key, array $options = array())
@@ -379,29 +409,32 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns = $options['namespace'];
-        if (isset($this->_data[$ns][$key])) {
-            // update mtime
-            $this->_data[$ns][$key][1] = microtime(true);
-        } else {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException(
-                    "Key '{$key}' not found within namespace '{$ns}'"
-                );
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
 
-            // add an empty item
-            $this->_data[$ns][$key] = array('', microtime(true), null);
-        }
+            $ns = $options['namespace'];
+            if (isset($this->_data[$ns][$key])) {
+                // update mtime
+                $this->_data[$ns][$key][1] = microtime(true);
+            } else {
+                if (!$options['ignore_missing_items']) {
+                    throw new ItemNotFoundException(
+                        "Key '{$key}' not found within namespace '{$ns}'"
+                    );
+                }
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+                // add an empty item
+                $this->_data[$ns][$key] = array('', microtime(true), null);
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function removeItem($key, array $options = array())
@@ -417,29 +450,32 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns = $options['namespace'];
-        if (isset($this->_data[$ns][$key])) {
-            unset($this->_data[$ns][$key]);
-
-            // remove empty namespace
-            if (!$this->_data[$ns]) {
-                unset($this->_data[$ns]);
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
 
-        } else {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
-            }
-        }
+            $ns = $options['namespace'];
+            if (isset($this->_data[$ns][$key])) {
+                unset($this->_data[$ns][$key]);
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+                // remove empty namespace
+                if (!$this->_data[$ns]) {
+                    unset($this->_data[$ns]);
+                }
+
+            } else {
+                if (!$options['ignore_missing_items']) {
+                    throw new ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
+                }
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function removeItems(array $keys, array $options = array())
@@ -454,48 +490,51 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns = $options['namespace'];
-        if ($options['ignore_missing_items'] === false) {
-            if (!isset($this->_data[$ns])) {
-                throw new ItemNotFoundException("Namespace '{$ns}' is empty");
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
 
-            $data = &$this->_data[$ns];
+            $ns = $options['namespace'];
+            if ($options['ignore_missing_items'] === false) {
+                if (!isset($this->_data[$ns])) {
+                    throw new ItemNotFoundException("Namespace '{$ns}' is empty");
+                }
 
-            $missingItems = null;
-            foreach ($keys as $key) {
-                if (isset($data[$key])) {
+                $data = &$this->_data[$ns];
+
+                $missingItems = null;
+                foreach ($keys as $key) {
+                    if (isset($data[$key])) {
+                        unset($data[$key]);
+                    } else {
+                        $missingItems[] = $key;
+                    }
+                }
+
+                if ($missingItems) {
+                    throw new ItemNotFoundException(
+                        "Keys '" . implode("','", $missingItems) . "' not found on namespace '{$ns}'"
+                    );
+                }
+            } elseif (isset($this->_data[$ns])) {
+                $data = & $this->_data[$ns];
+                foreach ($keys as $key) {
                     unset($data[$key]);
-                } else {
-                    $missingItems[] = $key;
+                }
+
+                // remove empty namespace
+                if (!$data) {
+                    unset($this->_data[$ns]);
                 }
             }
 
-            if ($missingItems) {
-                throw new ItemNotFoundException(
-                    "Keys '" . implode("','", $missingItems) . "' not found on namespace '{$ns}'"
-                );
-            }
-        } elseif (isset($this->_data[$ns])) {
-            $data = & $this->_data[$ns];
-            foreach ($keys as $key) {
-                unset($data[$key]);
-            }
-
-            // remove empty namespace
-            if (!$data) {
-                unset($this->_data[$ns]);
-            }
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
         }
-
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
     }
 
     public function incrementItem($key, $value, array $options = array())
@@ -513,31 +552,34 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns   = $options['namespace'];
-        $data = & $this->_data[$ns];
-        if (isset($data[$key])) {
-            $data[$key][0]+= $value;
-            $data[$key][1] = microtime(true);
-            $result = $data[$key][0];
-        } else {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException(
-                    "Key '{$key}' not found within namespace '{$ns}'"
-                );
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
 
-            // add a new item
-            $data[$key] = array($value, microtime(true), null);
-            $result = $value;
-        }
+            $ns   = $options['namespace'];
+            $data = & $this->_data[$ns];
+            if (isset($data[$key])) {
+                $data[$key][0]+= $value;
+                $data[$key][1] = microtime(true);
+                $result = $data[$key][0];
+            } else {
+                if (!$options['ignore_missing_items']) {
+                    throw new ItemNotFoundException(
+                        "Key '{$key}' not found within namespace '{$ns}'"
+                    );
+                }
 
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+                // add a new item
+                $data[$key] = array($value, microtime(true), null);
+                $result = $value;
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function decrementItem($key, $value, array $options = array())
@@ -555,31 +597,34 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $ns   = $options['namespace'];
-        $data = & $this->_data[$ns];
-        if (isset($data[$key])) {
-            $data[$key][0]-= $value;
-            $data[$key][1] = microtime(true);
-            $result = $data[$key][0];
-        } else {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException(
-                    "Key '{$key}' not found within namespace '{$ns}'"
-                );
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
 
-            // add a new item
-            $data[$key] = array(-$value, microtime(true), null);
-            $result = -$value;
-        }
+            $ns   = $options['namespace'];
+            $data = & $this->_data[$ns];
+            if (isset($data[$key])) {
+                $data[$key][0]-= $value;
+                $data[$key][1] = microtime(true);
+                $result = $data[$key][0];
+            } else {
+                if (!$options['ignore_missing_items']) {
+                    throw new ItemNotFoundException(
+                        "Key '{$key}' not found within namespace '{$ns}'"
+                    );
+                }
 
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+                // add a new item
+                $data[$key] = array(-$value, microtime(true), null);
+                $result = -$value;
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     /* non-blocking */
@@ -601,65 +646,68 @@ class Memory extends AbstractAdapter
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $tags = & $options['tags'];
-        $emptyTags = $keys = array();
-        foreach ($this->_data[ $options['namespace'] ] as $key => &$item) {
-
-            // compare expired / active
-            if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
-
-                // if MATCH_EXPIRED -> filter active items
-                if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
-                    if ($this->_exists($key, $options)) {
-                        continue;
-                    }
-
-                // if MATCH_ACTIVE -> filter expired items
-                } else {
-                    if (!$this->_exists($key, $options)) {
-                        continue;
-                    }
-                }
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
 
-            // compare tags
-            if ($tags !== null) {
-                $tagsStored = isset($item[2]) ? $item[2] : $emptyTags;
+            $tags = & $options['tags'];
+            $emptyTags = $keys = array();
+            foreach ($this->_data[ $options['namespace'] ] as $key => &$item) {
 
-                if ( ($mode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
-                    $matched = (count(array_diff($tags, $tagsStored)) != count($tags));
-                } elseif ( ($mode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
-                    $matched = (count(array_diff($tags, $tagsStored)) == 0);
+                // compare expired / active
+                if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
+
+                    // if MATCH_EXPIRED -> filter active items
+                    if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
+                        if ($this->_exists($key, $options)) {
+                            continue;
+                        }
+
+                    // if MATCH_ACTIVE -> filter expired items
+                    } else {
+                        if (!$this->_exists($key, $options)) {
+                            continue;
+                        }
+                    }
                 }
 
-                // negate
-                if ( ($mode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
-                    $matched = !$matched;
+                // compare tags
+                if ($tags !== null) {
+                    $tagsStored = isset($item[2]) ? $item[2] : $emptyTags;
+
+                    if ( ($mode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
+                        $matched = (count(array_diff($tags, $tagsStored)) != count($tags));
+                    } elseif ( ($mode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
+                        $matched = (count(array_diff($tags, $tagsStored)) == 0);
+                    }
+
+                    // negate
+                    if ( ($mode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
+                        $matched = !$matched;
+                    }
+
+                    if (!$matched) {
+                        continue;
+                    }
                 }
 
-                if (!$matched) {
-                    continue;
-                }
+                $keys[] = $key;
             }
 
-            $keys[] = $key;
+            // don't check expiry on fetch
+            $options['ttl'] = 0;
+
+            $this->_stmtKeys    = $keys;
+            $this->_stmtOptions = $options;
+            $this->_stmtActive  = true;
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
         }
-
-        // don't check expiry on fetch
-        $options['ttl'] = 0;
-
-        $this->_stmtKeys    = $keys;
-        $this->_stmtOptions = $options;
-        $this->_stmtActive  = true;
-
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
     }
 
     public function fetch()
@@ -668,57 +716,60 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $args = new \ArrayObject();
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $options = & $this->_stmtOptions;
-
-        // get the next valid item
-        do {
-            $key = array_shift($this->_stmtKeys);
-            if ($key === null) {
-                break;
+        try {
+            $args = new \ArrayObject();
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-            if (!$this->_exists($key, $options)) {
-                continue;
-            }
-            $ref = & $this->_data[ $options['namespace'] ][$key];
-            break;
-        } while (true);
 
-        // get item data
-        if ($key) {
-            $item = array();
-            foreach ($options['select'] as $select) {
-                if ($select == 'key') {
-                    $item['key'] = $key;
-                } elseif ($select == 'value') {
-                    $item['value'] = $ref[0];
-                } elseif ($select == 'mtime') {
-                    $item['mtime'] = $ref[1];
-                } elseif ($select == 'tags') {
-                    $item['tags'] = $ref[2];
-                } else {
-                    $item[$select] = null;
+            $options = & $this->_stmtOptions;
+
+            // get the next valid item
+            do {
+                $key = array_shift($this->_stmtKeys);
+                if ($key === null) {
+                    break;
                 }
+                if (!$this->_exists($key, $options)) {
+                    continue;
+                }
+                $ref = & $this->_data[ $options['namespace'] ][$key];
+                break;
+            } while (true);
+
+            // get item data
+            if ($key) {
+                $item = array();
+                foreach ($options['select'] as $select) {
+                    if ($select == 'key') {
+                        $item['key'] = $key;
+                    } elseif ($select == 'value') {
+                        $item['value'] = $ref[0];
+                    } elseif ($select == 'mtime') {
+                        $item['mtime'] = $ref[1];
+                    } elseif ($select == 'tags') {
+                        $item['tags'] = $ref[2];
+                    } else {
+                        $item[$select] = null;
+                    }
+                }
+
+                $result = $item;
+
+            } else {
+                // free statement after last item
+                $this->_stmtActive  = false;
+                $this->_stmtKeys    = null;
+                $this->_stmtOptions = null;
+
+                $result = false;
             }
 
-            $result = $item;
-
-        } else {
-            // free statement after last item
-            $this->_stmtActive  = false;
-            $this->_stmtKeys    = null;
-            $this->_stmtOptions = null;
-
-            $result = false;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
         }
-
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
     }
 
     /* cleaning */
@@ -731,28 +782,30 @@ class Memory extends AbstractAdapter
 
         $this->_normalizeOptions($options);
         $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
-            $this->_data = array();
-        } else {
-            foreach ($this->_data as &$data) {
-                $this->_clearNamespacedDataArray($data, $mode, $options);
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-        }
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
+                $this->_data = array();
+            } else {
+                foreach ($this->_data as &$data) {
+                    $this->_clearNamespacedDataArray($data, $mode, $options);
+                }
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
@@ -763,28 +816,30 @@ class Memory extends AbstractAdapter
 
         $this->_normalizeOptions($options);
         $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
         ));
 
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        if (isset($this->_data[ $options['namespace'] ])) {
-            if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
-                unset($this->_data[ $options['namespace'] ]);
-            } else {
-                $this->_clearNamespacedDataArray($this->_data[ $options['namespace'] ], $mode, $options);
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-        }
 
-        $result = true;
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+            if (isset($this->_data[ $options['namespace'] ])) {
+                if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
+                    unset($this->_data[ $options['namespace'] ]);
+                } else {
+                    $this->_clearNamespacedDataArray($this->_data[ $options['namespace'] ], $mode, $options);
+                }
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     protected function _clearNamespacedDataArray(array &$data, $mode, &$options)
@@ -878,8 +933,7 @@ class Memory extends AbstractAdapter
             );
         }
 
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $this->_capabilities);
-        return $postEvent->getResult();
+        return $this->triggerPost(__FUNCTION__, $args, $this->_capabilities);
     }
 
     public function getCapacity(array $options = array())
@@ -895,8 +949,7 @@ class Memory extends AbstractAdapter
 
         $result = Utils::getPhpMemoryCapacity();
 
-        $postEvent = $this->triggerPost(__FUNCTION__, $args, $result);
-        return $postEvent->getResult();
+        return $this->triggerPost(__FUNCTION__, $args, $result);
     }
 
     /* internal */

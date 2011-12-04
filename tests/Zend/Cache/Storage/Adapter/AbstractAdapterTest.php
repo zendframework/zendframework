@@ -22,7 +22,8 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 use ZendTest\Cache\Storage\CommonStorageTest,
-    Zend\Cache;
+    Zend\Cache,
+    Zend\Cache\Exception\RuntimeException;
 
 /**
  * @category   Zend
@@ -244,20 +245,39 @@ class AbstractAdapterTest extends CommonStorageTest
         // call protected method
         $method = new \ReflectionMethod(get_class($this->_storage), 'triggerPost');
         $method->setAccessible(true);
-        $returnedEvent = $method->invokeArgs($this->_storage, array('setItem', $params, &$result));
+        $result = $method->invokeArgs($this->_storage, array('setItem', $params, &$result));
 
         // test called event
         $calledEvents = $plugin->getCalledEvents();
         $this->assertEquals(1, count($calledEvents));
-
         $event = current($calledEvents);
-        $this->assertSame($returnedEvent, $event);
+
+        // return value of triggerPost and the called event should be the same
+        $this->assertSame($result, $event->getResult());
 
         $this->assertInstanceOf('Zend\Cache\Storage\PostEvent', $event);
         $this->assertEquals('setItem.post', $event->getName());
         $this->assertSame($this->_storage, $event->getTarget());
         $this->assertSame($params, $event->getParams());
         $this->assertSame($result, $event->getResult());
+    }
+
+    public function testInternalTriggerExceptionThrowRuntimeException()
+    {
+        $plugin = new \ZendTest\Cache\Storage\TestAsset\MockPlugin();
+        $this->_storage->addPlugin($plugin);
+
+        $params = new \ArrayObject(array(
+            'key'   => 'key1',
+            'value' => 'value1'
+        ));
+
+        // call protected method
+        $method = new \ReflectionMethod(get_class($this->_storage), 'triggerException');
+        $method->setAccessible(true);
+
+        $this->setExpectedException('Zend\Cache\Exception\RuntimeException', 'test');
+        $method->invokeArgs($this->_storage, array('setItem', $params, new RuntimeException('test')));
     }
 
     public function testGetItems()

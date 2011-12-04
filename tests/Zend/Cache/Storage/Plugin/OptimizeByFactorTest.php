@@ -3,7 +3,8 @@
 namespace ZendTest\Cache\Storage\Plugin;
 use Zend\Cache,
     Zend\Cache\Storage\PostEvent,
-    ZendTest\Cache\Storage\TestAsset\MockAdapter;
+    ZendTest\Cache\Storage\TestAsset\MockAdapter,
+    ArrayObject;
 
 class OptimizeByFactorTest extends \PHPUnit_Framework_TestCase
 {
@@ -75,11 +76,11 @@ class OptimizeByFactorTest extends \PHPUnit_Framework_TestCase
             ->method('optimize');
 
         // call event callback
-        $event = new PostEvent('removeItem.post', $adapter, array(
-            'options' => array()
-        ));
         $result = true;
-        $event->setResult($result);
+        $event = new PostEvent('removeItem.post', $adapter, new ArrayObject(array(
+            'options' => array()
+        )), $result);
+
         $this->_plugin->optimizeByFactor($event);
 
         $this->assertTrue($event->getResult());

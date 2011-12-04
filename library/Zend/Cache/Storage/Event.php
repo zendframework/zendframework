@@ -1,10 +1,27 @@
 <?php
 
 namespace Zend\Cache\Storage;
-use Zend\EventManager\Event as BaseEvent;
+use Zend\EventManager\Event as BaseEvent,
+    ArrayObject;
 
 class Event extends BaseEvent
 {
+
+    /**
+     * Constructor
+     *
+     * Accept a storage adapter and its parameters.
+     *
+     * @param  string $name Event name
+     * @param  Zend\Cache\Storage\Adapter $storage
+     * @param  ArrayObject $params
+     * @param  mixed $result
+     * @return void
+     */
+    public function __construct($name, Adapter $storage, ArrayObject $params)
+    {
+        parent::__construct($name, $storage, $params);
+    }
 
     /**
      * Set the event target/context

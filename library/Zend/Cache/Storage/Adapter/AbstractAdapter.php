@@ -1,11 +1,11 @@
 <?php
 
 namespace Zend\Cache\Storage\Adapter;
-
 use Zend\Cache\Storage\Adapter,
     Zend\Cache\Storage\Plugin,
     Zend\Cache\Storage\Event,
     Zend\Cache\Storage\PostEvent,
+    Zend\Cache\Storage\ExceptionEvent,
     Zend\Cache\Storage\Capabilities,
     Zend\Cache\Exception\RuntimeException,
     Zend\Cache\Exception\LogicException,
@@ -409,13 +409,13 @@ abstract class AbstractAdapter implements Adapter
     public function events()
     {
         if ($this->_events === null) {
-            $this->_events = new EventManager();
+            $this->_events = new EventManager(array(__CLASS__, get_class($this)));
         }
         return $this->_events;
     }
 
     /**
-     * Trigger an pre event
+     * Trigger an pre event and return the event response collection
      *
      * @param string $eventName
      * @param ArrayObject $args
@@ -427,23 +427,49 @@ abstract class AbstractAdapter implements Adapter
     }
 
     /**
-     * Trigger an post event
+     * Triggers the PostEvent and return the result value.
      *
      * @param string $eventName
      * @param ArrayObject $args
      * @param mixed $result
-     * @return Zend\Cache\Storage\PostEvent All handler return values
+     * @return mixed
      */
     protected function triggerPost($eventName, \ArrayObject $args, &$result)
     {
-        $postEvent = new PostEvent($eventName . '.post', $this, $args);
-        $postEvent->setResult($result);
+        $postEvent = new PostEvent($eventName . '.post', $this, $args, $result);
         $eventRs = $this->events()->trigger($postEvent);
         if ($eventRs->stopped()) {
-            $result = $eventRs->last();
-            $postEvent->setResult($result);
+            return $eventRs->last();
         }
-        return $postEvent;
+
+        return $postEvent->getResult();
+    }
+
+    /**
+     * Trigger an exception event
+     *
+     * If the ExceptionEvent has the flag "throwException" enabled throw the
+     * exception after trigger else return the result.
+     *
+     * @param string $eventName
+     * @param ArrayObject $args
+     * @param Exception $exception
+     * @return mixed
+     */
+    protected function triggerException($eventName, \ArrayObject $args, $exception)
+    {
+        $exceptionEvent = new ExceptionEvent($eventName . '.exception', $this, $args, $exception);
+        $eventRs = $this->events()->trigger($exceptionEvent);
+
+        if ($exceptionEvent->getThrowException()) {
+            throw $exceptionEvent->getException();
+        }
+
+        if ($eventRs->stopped()) {
+            return $eventRs->last();
+        }
+
+        return $exceptionEvent->getResult();
     }
 
     /**

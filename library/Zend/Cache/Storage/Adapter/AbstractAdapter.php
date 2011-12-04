@@ -732,7 +732,7 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
-    public function incrementItem($value, $key = null, array $options = array())
+    public function incrementItem($key, $value, array $options = array())
     {
        if (!$this->getWritable() || !$this->getReadable()) {
            return false;
@@ -758,7 +758,7 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
-    public function decrementItem($value, $key = null, array $options = array())
+    public function decrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable() || !$this->getReadable()) {
             return false;

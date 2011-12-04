@@ -27,6 +27,8 @@ class StorageFactory
      * This can instantiate storage adapters and plugins.
      *
      * @param array|\Zend\Config $cfg
+     * @return Zend\Cache\Storage\Adapter
+     * @throws Zend\Cache\RuntimeException
      */
     public static function factory($cfg)
     {
@@ -67,8 +69,7 @@ class StorageFactory
                 );
             }
 
-            $plugins = array_reverse($cfg['plugins']);
-            foreach ($plugins as $k => $v) {
+            foreach ($cfg['plugins'] as $k => $v) {
                 if (is_string($k)) {
                     $name = $k;
                     if (!is_array($v)) {
@@ -77,7 +78,6 @@ class StorageFactory
                         );
                     }
                     $options = $v;
-                    $options['storage'] = $adapter;
                 } elseif (is_array($v)) {
                     if (!isset($v['name'])) {
                         throw new InvalidArgumentException("Invalid plugins[{$k}] or missing plugins[{$k}].name");
@@ -85,16 +85,16 @@ class StorageFactory
                     $name = (string)$v['name'];
                     if (isset($v['options'])) {
                         $options = $v['options'];
-                        $options['storage'] = $adapter;
                     } else {
-                        $options = array('storage' => $adapter);
+                        $options = array();
                     }
                 } else {
                     $name    = $v;
-                    $options = array('storage' => $adapter);
+                    $options = array();
                 }
 
-                $adapter = self::pluginFactory($name, $options);
+                $plugin = self::pluginFactory($name, $options);
+                $adapter->addPlugin($plugin);
             }
         }
 

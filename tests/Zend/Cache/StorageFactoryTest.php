@@ -79,10 +79,8 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testPluginFactory()
     {
-        $cache = Cache\StorageFactory::pluginFactory('Serializer', array(
-            'adapter' => Cache\StorageFactory::adapterFactory('Memory'),
-        ));
-        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\Serializer', $cache);
+        $plugin = Cache\StorageFactory::pluginFactory('Serializer');
+        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\Serializer', $plugin);
     }
 
     public function testFactoryAdapterAsString()
@@ -106,28 +104,20 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryWithPlugins()
     {
         $adapter = 'Memory';
-        $plugins = array('Serialize', 'ClearByFactor');
+        $plugins = array('Serializer', 'ClearByFactor');
 
         $cache = Cache\StorageFactory::factory(array(
             'adapter' => $adapter,
             'plugins' => $plugins,
         ));
 
-        // test returned class
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter', $cache);
+        // test adapter
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cache);
 
         // test plugin structure
-        $i = 0;
-        $plugin = $cache;
-        do {
+        foreach ($cache->getPlugins() as $i => $plugin) {
             $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\' . $plugins[$i], $plugin);
-
-            $plugin = $plugin->getStorage();
-            $i++;
-        } while ($plugin instanceof Cache\Storage\Plugin);
-
-        // test adapter
-        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $plugin);
+        }
     }
 
     public function testFactoryWithPluginsAndOptionsArray()
@@ -141,7 +131,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
                  ),
             ),
             'plugins' => array(
-                'Serialize' => array(),
+                'Serializer',
                 'ClearByFactor' => array(
                     'clearing_factor' => 1,
                 ),
@@ -152,28 +142,28 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         );
         $storage = Cache\StorageFactory::factory($factory);
 
-        // test plugin structure
-        $i = 0;
-        do {
-            $this->assertInstanceOf('Zend\\Cache\Storage\Plugin', $storage);
-
-            // test plugin options
-            switch (get_class($storage)) {
-                case 'Zend\Cache\Storage\Plugin\ClearByFactor':
-                    $this->assertSame($factory['plugins']['ClearByFactor']['clearing_factor'], $storage->getClearingFactor());
-                    break;
-            }
-
-            $storage = $storage->getStorage();
-            $i++;
-        } while ($storage instanceof Cache\Storage\Plugin);
-
         // test adapter
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\\' . $factory['adapter']['name'], $storage);
-
-        // test adapter options
         $this->assertEquals(123, $storage->getTtl());
         $this->assertEquals('test', $storage->getNamespace());
+
+        // test plugin structure
+        foreach ($storage->getPlugins() as $i => $plugin) {
+
+            // test plugin options
+            $pluginClass = get_class($plugin);
+            switch ($pluginClass) {
+                case 'Zend\Cache\Storage\Plugin\ClearByFactor':
+                    $this->assertSame($factory['plugins']['ClearByFactor']['clearing_factor'], $plugin->getClearingFactor());
+                    break;
+                case 'Zend\Cache\Storage\Plugin\Serializer':
+                    break;
+                default:
+                    $this->fail("Unexpected plguin class '{$pluginClass}'");
+            }
+
+        }
+
     }
 
 }

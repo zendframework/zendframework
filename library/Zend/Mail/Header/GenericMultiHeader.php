@@ -14,8 +14,16 @@ class GenericMultiHeader implements MultipleHeaderDescription
      */
     protected $fieldValue = null;
 
+    /**
+     * Header encoding
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
     public static function fromString($headerLine)
     {
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
         list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
 
         if (strpos($fieldValue, ',')) {
@@ -109,6 +117,28 @@ class GenericMultiHeader implements MultipleHeaderDescription
     public function getFieldValue()
     {
         return $this->fieldValue;
+    }
+
+    /**
+     * Set header encoding
+     * 
+     * @param  string $encoding 
+     * @return GenericMultiHeader
+     */
+    public function setEncoding($encoding) 
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     * Get header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**

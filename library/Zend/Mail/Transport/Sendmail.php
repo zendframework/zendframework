@@ -255,6 +255,10 @@ class Sendmail implements Transport
      */
     protected function prepareParameters(Message $message)
     {
+        if ($this->isWindowsOs()) {
+            return null;
+        }
+
         $parameters = (string) $this->parameters;
 
         $sender = $message->getSender();

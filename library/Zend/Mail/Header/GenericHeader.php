@@ -15,6 +15,13 @@ class GenericHeader implements HeaderDescription
     protected $fieldValue = null;
 
     /**
+     * Header encoding
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * Factory to generate a header object from a string
      *
      * @static
@@ -23,6 +30,7 @@ class GenericHeader implements HeaderDescription
      */
     public static function fromString($headerLine)
     {
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
         list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
         $header = new static($fieldName, $fieldValue);
         return $header;
@@ -105,6 +113,28 @@ class GenericHeader implements HeaderDescription
     public function getFieldValue()
     {
         return $this->fieldValue;
+    }
+
+    /**
+     * Set header encoding
+     * 
+     * @param  string $encoding 
+     * @return GenericHeader
+     */
+    public function setEncoding($encoding) 
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     * Get header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**

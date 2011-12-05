@@ -48,6 +48,27 @@ class MimeVersion implements HeaderDescription
     }
 
     /**
+     * Set character encoding
+     * 
+     * @param  string $encoding 
+     * @return void
+     */
+    public function setEncoding($encoding)
+    {
+        // irrelevant to this implementation
+    }
+
+    /**
+     * Get character encoding
+     * 
+     * @return void
+     */
+    public function getEncoding()
+    {
+        // irrelevant to this implementation
+    }
+
+    /**
      * Serialize to string
      * 
      * @return string

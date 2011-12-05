@@ -13,6 +13,13 @@ class Received implements MultipleHeaderDescription
     protected $value;
 
     /**
+     * Header encoding
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * Factory: create Received header object from string
      * 
      * @param  string $headerLine 
@@ -53,6 +60,28 @@ class Received implements MultipleHeaderDescription
     public function getFieldValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set header encoding
+     * 
+     * @param  string $encoding 
+     * @return AbstractAddressList
+     */
+    public function setEncoding($encoding) 
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     * Get header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**

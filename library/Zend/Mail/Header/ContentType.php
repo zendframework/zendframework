@@ -5,6 +5,13 @@ namespace Zend\Mail\Header;
 class ContentType implements HeaderDescription
 {
     /**
+     * Header encoding
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * @var string
      */
     protected $type;
@@ -22,6 +29,7 @@ class ContentType implements HeaderDescription
      */
     public static function fromString($headerLine)
     {
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
         list($name, $value) = preg_split('#: #', $headerLine, 2);
 
         // check to ensure proper header type for this factory
@@ -29,7 +37,7 @@ class ContentType implements HeaderDescription
             throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string');
         }
 
-        $value  = str_replace("\r\n ", " ", $value)
+        $value  = str_replace("\r\n ", " ", $value);
         $values = preg_split('#\s*;\s*#', $value);
         $type   = array_shift($values);
 
@@ -75,6 +83,28 @@ class ContentType implements HeaderDescription
         }
         $value = implode(";\r\n ", $values);
         return $value;
+    }
+
+    /**
+     * Set header encoding
+     * 
+     * @param  string $encoding 
+     * @return ContentType
+     */
+    public function setEncoding($encoding) 
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     * Get header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**

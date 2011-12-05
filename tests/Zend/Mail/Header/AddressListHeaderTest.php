@@ -75,7 +75,7 @@ class AddressListHeaderTest extends TestCase
 
     public function getExpectedFieldValue()
     {
-        return 'ZF DevTeam <zf-devteam@zend.com>, <zf-contributors@lists.zend.com>, ZF Announce List <fw-announce@lists.zend.com>';
+        return "ZF DevTeam <zf-devteam@zend.com>,\r\n zf-contributors@lists.zend.com,\r\n ZF Announce List <fw-announce@lists.zend.com>";
     }
 
     /**

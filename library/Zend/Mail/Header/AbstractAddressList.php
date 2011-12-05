@@ -20,6 +20,13 @@ abstract class AbstractAddressList implements HeaderDescription
     protected $fieldName;
 
     /**
+     * Header encoding
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * @var string lowercased field name
      */
     protected static $type;
@@ -32,6 +39,8 @@ abstract class AbstractAddressList implements HeaderDescription
      */
     public static function fromString($headerLine)
     {
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+
         // split into name/value
         list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
 
@@ -51,15 +60,27 @@ abstract class AbstractAddressList implements HeaderDescription
         $addressList = $header->getAddressList();
         foreach ($values as $address) {
             // split values into name/email
-            if (!preg_match('/^(?<name>.*?)<(?<email>[^>]+)>$/', $address, $matches)) {
+            if (!preg_match('/^((?<name>.*?)<(?<namedEmail>[^>]+)>|(?<email>.+))$/', $address, $matches)) {
                 // Should we raise an exception here?
                 continue;
             }
-            $name  = trim($matches['name']);
-            $email = $matches['email'];
+            $name = null;
+            if (isset($matches['name'])) {
+                $name  = trim($matches['name']);
+            }
             if (empty($name)) {
                 $name = null;
+            } else {
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
             }
+
+            if (isset($matches['namedEmail'])) {
+                $email = $matches['namedEmail'];
+            }
+            if (isset($matches['email'])) {
+                $email = $matches['email'];
+            }
+            $email = trim($email); // we may have leading whitespace
 
             // populate address list
             $addressList->add($email, $name);
@@ -85,22 +106,49 @@ abstract class AbstractAddressList implements HeaderDescription
      */
     public function getFieldValue()
     {
-        $emails = array();
+        $emails   = array();
+        $encoding = $this->getEncoding();
         foreach ($this->getAddressList() as $address) {
             $email = $address->getEmail();
             $name  = $address->getName();
             if (empty($name)) {
                 $emails[] = $email;
             } else {
-                $name = str_replace(array('"', "'"), array('\\"', "'"), $name);
+                // $name = str_replace(array('"', "'"), array('\\"', "\\'"), $name);
                 if (false !== strstr($name, ',')) {
                     $name = sprintf('"%s"', $name);
+                }
+
+                if ('ASCII' !== $encoding) {
+                    $name = HeaderWrap::mimeEncodeValue($name, $encoding, false);
                 }
                 $emails[] = sprintf('%s <%s>', $name, $email);
             }
         }
         $string = implode(",\r\n ", $emails);
         return $string;
+    }
+
+    /**
+     * Set header encoding
+     * 
+     * @param  string $encoding 
+     * @return AbstractAddressList
+     */
+    public function setEncoding($encoding) 
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     * Get header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**

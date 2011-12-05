@@ -578,7 +578,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($headers->has('content-type'));
         $header = $headers->get('content-type');
-        $this->assertEquals('multipart/mixed; boundary="foo-bar"', $header->getFieldValue());
+        $this->assertEquals("multipart/mixed;\r\n boundary=\"foo-bar\"", $header->getFieldValue());
     }
 
     public function testRetrievingBodyTextFromMessageWithMultiPartMimeBodyReturnsMimeSerialization()
@@ -601,5 +601,66 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('--foo-bar--', $text);
         $this->assertContains('Content-Type: text/plain', $text);
         $this->assertContains('Content-Type: text/html', $text);
+    }
+
+    public function testEncodingIsAsciiByDefault()
+    {
+        $this->assertEquals('ASCII', $this->message->getEncoding());
+    }
+
+    public function testEncodingIsMutable()
+    {
+        $this->message->setEncoding('UTF-8');
+        $this->assertEquals('UTF-8', $this->message->getEncoding());
+    }
+
+    public function testSettingNonAsciiEncodingForcesMimeEncodingOfSomeHeaders()
+    {
+        if (!function_exists('iconv_mime_encode')) {
+            $this->markTestSkipped('Encoding relies on iconv extension');
+        }
+
+        $this->message->addTo('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addFrom('matthew@zend.com', "Matthew Weier O'Phinney");
+        $this->message->addCc('zf-contributors@lists.zend.com', 'ZF Contributors List');
+        $this->message->addBcc('zf-crteam@lists.zend.com', 'ZF CR Team');
+        $this->message->setSubject('This is a subject');
+        $this->message->setEncoding('UTF-8');
+
+        $test = $this->message->headers()->toString();
+
+        $expected = $this->encodeString('ZF DevTeam', 'UTF-8');
+        $this->assertContains($expected, $test);
+        $this->assertContains('<zf-devteam@zend.com>', $test);
+
+        $expected = $this->encodeString("Matthew Weier O'Phinney", 'UTF-8');
+        $this->assertContains($expected, $test, $test);
+        $this->assertContains('<matthew@zend.com>', $test);
+
+        $expected = $this->encodeString("ZF Contributors List", 'UTF-8');
+        $this->assertContains($expected, $test);
+        $this->assertContains('<zf-contributors@lists.zend.com>', $test);
+
+        $expected = $this->encodeString("ZF CR Team", 'UTF-8');
+        $this->assertContains($expected, $test);
+        $this->assertContains('<zf-crteam@lists.zend.com>', $test);
+
+        $self     = $this;
+        $words    = array_map(function($word) use ($self) {
+            return $self->encodeString($word, 'UTF-8');
+        }, explode(' ', 'This is a subject'));
+        $expected = 'Subject: ' . implode("\r\n ", $words);
+        $this->assertContains($expected, $test, $test);
+    }
+
+    public function encodeString($string, $charset)
+    {
+        $encoded = iconv_mime_encode('Header', $string, array(
+            'scheme'         => 'Q',
+            'output-charset' => $charset,
+            'line-length'    => 998,
+        ));
+        $encoded = str_replace('Header: ', '', $encoded);
+        return $encoded;
     }
 }

@@ -10,6 +10,13 @@ class Subject implements HeaderDescription, UnstructuredHeader
     protected $subject = '';
 
     /**
+     * Header encoding
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * Factory from header line
      * 
      * @param  string $headerLine 
@@ -17,6 +24,7 @@ class Subject implements HeaderDescription, UnstructuredHeader
      */
     public static function fromString($headerLine)
     {
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
         list($name, $value) = preg_split('#: #', $headerLine, 2);
 
         // check to ensure proper header type for this factory
@@ -47,7 +55,33 @@ class Subject implements HeaderDescription, UnstructuredHeader
      */
     public function getFieldValue()
     {
-        return HeaderWrap::wrap($this->subject, $this);
+        $encoding = $this->getEncoding();
+        if ($encoding == 'ASCII') {
+            return HeaderWrap::wrap($this->subject, $this);
+        }
+        return HeaderWrap::mimeEncodeValue($this->subject, $encoding, true);
+    }
+
+    /**
+     * Set header encoding
+     * 
+     * @param  string $encoding 
+     * @return Subject
+     */
+    public function setEncoding($encoding) 
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     * Get header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**

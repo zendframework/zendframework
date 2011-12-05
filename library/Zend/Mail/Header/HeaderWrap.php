@@ -57,4 +57,38 @@ abstract class HeaderWrap
         }
         return implode("\r\n ", $lines);
     }
+
+    /**
+     * MIME-encode a value
+     *
+     * Performs quoted-printable encoding on a value, setting maximum 
+     * line-length to 998. 
+     * 
+     * @param  string $value 
+     * @param  string $encoding 
+     * @param  bool $splitWords Whether or not to split the $value on whitespace 
+     *                          and encode each word separately.
+     * @return string
+     */
+    public static function mimeEncodeValue($value, $encoding, $splitWords = false)
+    {
+        if (!$splitWords) {
+            $header = iconv_mime_encode('Header', $value, array(
+                'scheme'         => 'Q',
+                'line-length'    => 998,
+                'output-charset' => $encoding,
+            ));
+            return str_replace('Header: ', '', $header);
+        }
+
+        $words = array_map(function($word) use ($encoding) {
+            $header = iconv_mime_encode('Header', $word, array(
+                'scheme'         => 'Q',
+                'line-length'    => 78,
+                'output-charset' => $encoding,
+            ));
+            return str_replace('Header: ', '', $header);
+        }, explode(' ', $value));
+        return implode("\r\n ", $words);
+    }
 }

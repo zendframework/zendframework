@@ -47,6 +47,15 @@ class Message
     protected $headers;
 
     /**
+     * Message encoding
+     *
+     * Used to determine whether or not to encode headers; defaults to ASCII.
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * Is the message valid?
      *
      * If we don't any From addresses, we're invalid, according to RFC2822.
@@ -63,6 +72,29 @@ class Message
     }
 
     /**
+     * Set the message encoding
+     * 
+     * @param  string $encoding 
+     * @return Message
+     */
+    public function setEncoding($encoding)
+    {
+        $this->encoding = $encoding;
+        $this->headers()->setEncoding($encoding);
+        return $this;
+    }
+
+    /**
+     * Get the message encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
+
+    /**
      * Compose headers
      * 
      * @param  Headers $headers 
@@ -71,6 +103,7 @@ class Message
     public function setHeaders(Headers $headers)
     {
         $this->headers = $headers;
+        $headers->setEncoding($this->getEncoding());
         return $this;
     }
 
@@ -378,7 +411,8 @@ class Message
         if ($this->body->isMultiPart()) {
             $mime   = $this->body->getMime();
             $header = $this->getHeader('content-type', __NAMESPACE__ . '\Header\ContentType');
-            $header->setType(sprintf('multipart/mixed; boundary="%s"', $mime->boundary()));
+            $header->setType('multipart/mixed');
+            $header->addParameter('boundary', $mime->boundary());
             return $this;
         }
 

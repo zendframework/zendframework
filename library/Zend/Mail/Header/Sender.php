@@ -13,6 +13,13 @@ class Sender implements HeaderDescription
     protected $address;
 
     /**
+     * Header encoding
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * Factory: create Sender header object from string
      * 
      * @param  string $headerLine 
@@ -21,6 +28,7 @@ class Sender implements HeaderDescription
      */
     public static function fromString($headerLine)
     {
+        $headerLine = iconv_mime_decode($headerLine, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
         list($name, $value) = preg_split('#: #', $headerLine, 2);
 
         // check to ensure proper header type for this factory
@@ -32,7 +40,13 @@ class Sender implements HeaderDescription
 
         // Check for address, and set if found
         if (preg_match('^(?<name>.*?)<(?<email>[^>]+)>$', $value, $matches)) {
-            $header->setAddress($matches['email'], $matches['name']);
+            $name = $matches['name'];
+            if (empty($name)) {
+                $name = null;
+            } else {
+                $name = iconv_mime_decode($name, ICONV_MIME_DECODE_CONTINUE_ON_ERROR);
+            }
+            $header->setAddress($matches['email'], $name);
         }
         
         return $header;
@@ -62,9 +76,35 @@ class Sender implements HeaderDescription
         $email = sprintf('<%s>', $this->address->getEmail());
         $name  = $this->address->getName();
         if (!empty($name)) {
+            $encoding = $this->getEncoding();
+            if ('ASCII' !== $encoding) {
+                $name  = HeaderWrap::mimeEncodeValue($name, $encoding, false);
+            }
             $email = sprintf('%s %s', $name, $email);
         }
         return $email;
+    }
+
+    /**
+     * Set header encoding
+     * 
+     * @param  string $encoding 
+     * @return Sender
+     */
+    public function setEncoding($encoding) 
+    {
+        $this->encoding = $encoding;
+        return $this;
+    }
+
+    /**
+     * Get header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**

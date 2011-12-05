@@ -32,6 +32,13 @@ class Headers implements Iterator, Countable
     protected $headers = array();
 
     /**
+     * Header encoding; defaults to ASCII
+     * 
+     * @var string
+     */
+    protected $encoding = 'ASCII';
+
+    /**
      * Populates headers from string representation
      *
      * Parses a string for headers, and aggregates them, in order, in the
@@ -109,6 +116,31 @@ class Headers implements Iterator, Countable
     }
 
     /**
+     * Set the header encoding
+     * 
+     * @param  string $encoding 
+     * @return Headers
+     */
+    public function setEncoding($encoding)
+    {
+        $this->encoding = $encoding;
+        foreach ($this as $header) {
+            $header->setEncoding($encoding);
+        }
+        return $this;
+    }
+
+    /**
+     * Get the header encoding
+     * 
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
+
+    /**
      * Add many headers at once
      *
      * Expects an array (or Traversable object) of type/value pairs.
@@ -160,21 +192,22 @@ class Headers implements Iterator, Countable
     {
         $matches = null;
         if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $headerFieldNameOrLine, $matches)
-            && $fieldValue === null) {
+            && $fieldValue === null
+        ) {
             // is a header
             $headerName = $matches['name'];
-            $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($matches['name']));
-            $line = $headerFieldNameOrLine;
+            $headerKey  = str_replace(array('-', '_', ' ', '.'), '', strtolower($matches['name']));
+            $line       = $headerFieldNameOrLine;
         } elseif ($fieldValue === null) {
             throw new Exception\InvalidArgumentException('A field name was provided without a field value');
         } else {
             $headerName = $headerFieldNameOrLine;
-            $headerKey = str_replace(array('-', '_', ' ', '.'), '', strtolower($headerFieldNameOrLine));
-            $line = $headerFieldNameOrLine . ': ' . $fieldValue;
+            $headerKey  = str_replace(array('-', '_', ' ', '.'), '', strtolower($headerFieldNameOrLine));
+            $line       = $headerFieldNameOrLine . ': ' . $fieldValue;
         }
 
         $this->headersKeys[] = $headerKey;
-        $this->headers[] = array('name' => $headerName, 'line' => $line);
+        $this->headers[]     = array('name' => $headerName, 'line' => $line);
         return $this;
     }
 
@@ -190,6 +223,7 @@ class Headers implements Iterator, Countable
 
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
+        $header->setEncoding($this->getEncoding());
         return $this;
     }
 
@@ -419,18 +453,23 @@ class Headers implements Iterator, Countable
         /* @var $class Header\HeaderDescription */
         $class = ($this->getPluginClassLoader()->load($key)) ?: 'Zend\Mail\Header\GenericHeader';
 
-        $headers = $class::fromString($current['line']);
+        $encoding = $this->getEncoding();
+        $headers  = $class::fromString($current['line']);
         if (is_array($headers)) {
-            $this->headers[$index] = $current = array_shift($headers);
+            $current = array_shift($headers);
+            $current->setEncoding($encoding);
+            $this->headers[$index] = $current;
             foreach ($headers as $header) {
+                $header->setEncoding($encoding);
                 $this->headersKeys[] = $key;
-                $this->headers[] = $header;
+                $this->headers[]     = $header;
             }
-            return $current;
-        } else {
-            $this->headers[$index] = $current = $headers;
             return $current;
         }
 
+        $current = $headers;
+        $current->setEncoding($encoding);
+        $this->headers[$index] = $current;
+        return $current;
     }
 }

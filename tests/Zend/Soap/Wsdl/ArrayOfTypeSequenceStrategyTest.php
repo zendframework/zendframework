@@ -41,7 +41,7 @@ class ArrayOfTypeSequenceStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->strategy = new \Zend\Soap\Wsdl\Strategy\ArrayOfTypeSequence();
+        $this->strategy = new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence();
         $this->wsdl = new \Zend\Soap\Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);
     }
 

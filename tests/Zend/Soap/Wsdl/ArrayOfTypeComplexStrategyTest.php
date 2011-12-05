@@ -45,7 +45,7 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->strategy = new \Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex();
+        $this->strategy = new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex();
         $this->wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);
     }
 
@@ -87,7 +87,7 @@ class ArrayOfTypeComplexStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $return = $this->wsdl->addComplexType('\ZendTest\Soap\TestAsset\ComplexTest[]');
         $this->assertEquals("tns:ArrayOfZendTest.Soap.TestAsset.ComplexTest", $return);
-        // $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof \Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplexStrategy);
+        // $this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplexStrategy);
 
         $wsdl = $this->wsdl->toXML();
     }

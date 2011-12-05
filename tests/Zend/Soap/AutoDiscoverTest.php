@@ -585,7 +585,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover(true, "http://example.com/service.php");
+        $server = new AutoDiscover(null, "http://example.com/service.php");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
         ob_start();
@@ -603,7 +603,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover(true);
+        $server = new AutoDiscover();
         $server->setUri("http://example.com/service.php");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
@@ -630,7 +630,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover(true);
+        $server = new AutoDiscover();
         $server->setUri("http://example.com/service.php");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
@@ -749,7 +749,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testComplexTypesThatAreUsedMultipleTimesAreRecoginzedOnce()
     {
-        $server = new AutoDiscover('Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex');
+        $server = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
         $server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
 
         ob_start();
@@ -828,7 +828,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArrayComplex()
     {
-        $autodiscover = new AutoDiscover('Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex');
+        $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyService');
         $wsdl = $autodiscover->toXml();
 
@@ -842,7 +842,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArraySequence()
     {
-        $autodiscover = new AutoDiscover('Zend\Soap\Wsdl\Strategy\ArrayOfTypeSequence');
+        $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyServiceSequence');
         $wsdl = $autodiscover->toXml();
 
@@ -903,7 +903,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testRecursiveWsdlDependencies()
     {
-        $autodiscover = new AutoDiscover('\Zend\Soap\Wsdl\Strategy\ArrayOfTypeComplex');
+        $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\Recursion');
         $wsdl = $autodiscover->toXml();
 

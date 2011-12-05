@@ -25,7 +25,8 @@
 namespace Zend\Soap;
 
 use Zend\Uri,
-    Zend\Soap\Wsdl;
+    Zend\Soap\Wsdl,
+    Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 /**
  * \Zend\Soap\AutoDiscover
@@ -87,17 +88,19 @@ class AutoDiscover implements \Zend\Server\Server
     /**
      * Constructor
      *
-     * @param boolean|string|\Zend\Soap\Wsdl\Strategy $strategy
-     * @param string|Uri\Uri $uri
+     * @param \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
+     * @param string|Uri\Uri $endpointUri
      * @param string $wsdlClass
      */
-    public function __construct($strategy = true, $uri=null, $wsdlClass=null)
+    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null)
     {
         $this->_reflection = new \Zend\Server\Reflection();
-        $this->setComplexTypeStrategy($strategy);
+        if ($strategy !== null) {
+            $this->setComplexTypeStrategy($strategy);
+        }
 
-        if($uri !== null) {
-            $this->setUri($uri);
+        if($endpointUri !== null) {
+            $this->setUri($endpointUri);
         }
 
         if($wsdlClass !== null) {
@@ -270,10 +273,10 @@ class AutoDiscover implements \Zend\Server\Server
     /**
      * Set the strategy that handles functions and classes that are added AFTER this call.
      *
-     * @param  boolean|string|\Zend\Soap\Wsdl\Strategy $strategy
+     * @param  \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
      * @return \Zend\Soap\AutoDiscover
      */
-    public function setComplexTypeStrategy($strategy)
+    public function setComplexTypeStrategy(ComplexTypeStrategy $strategy)
     {
         $this->_strategy = $strategy;
         if($this->_wsdl instanceof Wsdl) {

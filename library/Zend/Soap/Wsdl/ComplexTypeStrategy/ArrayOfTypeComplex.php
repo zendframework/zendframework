@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\Wsdl\Strategy;
+namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 use Zend\Soap;
 

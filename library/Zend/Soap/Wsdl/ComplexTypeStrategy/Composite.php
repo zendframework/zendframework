@@ -22,9 +22,9 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\Wsdl\Strategy;
+namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap\Wsdl\Strategy,
+use Zend\Soap\Wsdl\ComplexTypeStrategy,
     Zend\Soap\Exception,
     Zend\Soap\Wsdl;
 
@@ -39,7 +39,7 @@ use Zend\Soap\Wsdl\Strategy,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Composite implements Strategy
+class Composite implements ComplexTypeStrategy
 {
     /**
      * Typemap of Complex Type => Strategy pairs.
@@ -107,7 +107,7 @@ class Composite implements Strategy
         if(is_string($strategy) && class_exists($strategy)) {
             $strategy = new $strategy;
         }
-        if( !($strategy instanceof Strategy) ) {
+        if( !($strategy instanceof ComplexTypeStrategy) ) {
             throw new Exception\InvalidArgumentException(
                 'Default Strategy for Complex Types is not a valid strategy object.'
             );
@@ -132,7 +132,7 @@ class Composite implements Strategy
                 $strategy = new $strategy();
             }
 
-            if( !($strategy instanceof Strategy) ) {
+            if( !($strategy instanceof ComplexTypeStrategy) ) {
                 throw new Exception\InvalidArgumentException(
                     "Strategy for Complex Type '$type' is not a valid strategy object."
                 );

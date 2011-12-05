@@ -61,6 +61,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $server = new AutoDiscover();
         $server->setUri('http://localhost/my_script.php');
+        $server->setServiceName('TestService');
         return $server;
     }
 
@@ -77,10 +78,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
         $server = $this->createAutodiscoverService();
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
-        $dom = new \DOMDocument();
-        ob_start();
-        $server->generate();
-        $dom->loadXML(ob_get_clean());
+        $dom = $server->generate()->toDomDocument();
 
         $wsdl = '<?xml version="1.0"?>'
               . '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
@@ -89,12 +87,12 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .              'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
               .              'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
               .              'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-              .              'name="ZendTest.Soap.TestAsset.Test" '
+              .              'name="TestService" '
               .              'targetNamespace="' . $scriptUri . '">'
               .     '<types>'
               .         '<xsd:schema targetNamespace="' . $scriptUri . '"/>'
               .     '</types>'
-              .     '<portType name="ZendTest.Soap.TestAsset.TestPort">'
+              .     '<portType name="TestServicePort">'
               .         '<operation name="testFunc1">'
               .             '<documentation>Test Function 1</documentation>'
               .             '<input message="tns:testFunc1In"/>'
@@ -115,7 +113,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .             '<output message="tns:testFunc4Out"/>'
               .         '</operation>'
               .     '</portType>'
-              .     '<binding name="ZendTest.Soap.TestAsset.TestBinding" type="tns:ZendTest.Soap.TestAsset.TestPort">'
+              .     '<binding name="TestServiceBinding" type="tns:TestServicePort">'
               .         '<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>'
               .         '<operation name="testFunc1">'
               .             '<soap:operation soapAction="' . $scriptUri . '#testFunc1"/>'
@@ -138,8 +136,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .             '<output><soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="' . $scriptUri . '"/></output>'
               .         '</operation>'
               .     '</binding>'
-              .     '<service name="ZendTest.Soap.TestAsset.TestService">'
-              .         '<port name="ZendTest.Soap.TestAsset.TestPort" binding="tns:ZendTest.Soap.TestAsset.TestBinding">'
+              .     '<service name="TestServiceService">'
+              .         '<port name="TestServicePort" binding="tns:TestServiceBinding">'
               .             '<soap:address location="' . $scriptUri . '"/>'
               .         '</port>'
               .     '</service>'
@@ -168,10 +166,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setBindingStyle(array('style' => 'document', 'transport' => 'http://framework.zend.com'));
         $server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => 'http://framework.zend.com'));
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
-        $dom = new \DOMDocument();
-        ob_start();
-        $server->generate();
-        $dom->loadXML(ob_get_clean());
+        $dom = $server->generate()->toDomDocument();
 
         $wsdl = '<?xml version="1.0"?>'
               . '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
@@ -180,7 +175,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .              'xmlns:xsd="http://www.w3.org/2001/XMLSchema" '
               .              'xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" '
               .              'xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" '
-              .              'name="ZendTest.Soap.TestAsset.Test" '
+              .              'name="TestService" '
               .              'targetNamespace="' . $scriptUri . '">'
               .     '<types>'
               .         '<xsd:schema targetNamespace="' . $scriptUri . '">'
@@ -235,7 +230,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .           '</xsd:element>'
               .         '</xsd:schema>'
               .     '</types>'
-              .     '<portType name="ZendTest.Soap.TestAsset.TestPort">'
+              .     '<portType name="TestServicePort">'
               .         '<operation name="testFunc1">'
               .             '<documentation>Test Function 1</documentation>'
               .             '<input message="tns:testFunc1In"/>'
@@ -256,7 +251,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .             '<output message="tns:testFunc4Out"/>'
               .         '</operation>'
               .     '</portType>'
-              .     '<binding name="ZendTest.Soap.TestAsset.TestBinding" type="tns:ZendTest.Soap.TestAsset.TestPort">'
+              .     '<binding name="TestServiceBinding" type="tns:TestServicePort">'
               .         '<soap:binding style="document" transport="http://framework.zend.com"/>'
               .         '<operation name="testFunc1">'
               .             '<soap:operation soapAction="' . $scriptUri . '#testFunc1"/>'
@@ -279,8 +274,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .             '<output><soap:body use="literal" namespace="http://framework.zend.com"/></output>'
               .         '</operation>'
               .     '</binding>'
-              .     '<service name="ZendTest.Soap.TestAsset.TestService">'
-              .         '<port name="ZendTest.Soap.TestAsset.TestPort" binding="tns:ZendTest.Soap.TestAsset.TestBinding">'
+              .     '<service name="TestServiceService">'
+              .         '<port name="TestServicePort" binding="tns:TestServiceBinding">'
               .             '<soap:address location="' . $scriptUri . '"/>'
               .         '</port>'
               .     '</service>'
@@ -326,10 +321,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
         $server = $this->createAutodiscoverService();
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
-        $dom = new \DOMDocument();
-        ob_start();
-        $server->generate();
-        $dom->loadXML(ob_get_clean());
+        $dom = $server->generate()->toDomDocument();
 
         $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
         $this->assertContains('<message name="testFunc1Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
@@ -347,14 +339,12 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
         $server = $this->createAutodiscoverService();
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-        $dom = new \DOMDocument();
-        ob_start();
-        $server->generate();
-        $dom->loadXML(ob_get_clean());
+        
+        $dom = $server->generate()->toDomDocument();
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
 
-        $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
-        $name = $parts[0];
+        
+        $name = "TestService";
 
         $wsdl = '<?xml version="1.0"?>'.
                 '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
@@ -392,14 +382,12 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setBindingStyle(array('style' => 'document', 'transport' => 'http://framework.zend.com'));
         $server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => 'http://framework.zend.com'));
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-        $dom = new \DOMDocument();
-        ob_start();
-        $server->generate();
-        $dom->loadXML(ob_get_clean());
+        
+        $dom = $server->generate()->toDomDocument();
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
 
-        $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
-        $name = $parts[0];
+        
+        $name = "TestService";
 
         $wsdl = '<?xml version="1.0"?>'.
                 '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
@@ -443,14 +431,12 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
         $server = $this->createAutodiscoverService();
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-        $dom = new \DOMDocument();
-        ob_start();
-        $server->generate();
-        $dom->loadXML(ob_get_clean());
+        
+        $dom = $server->generate()->toDomDocument();
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
 
-        $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
-        $name = $parts[0];
+        
+        $name = "TestService";
 
         $wsdl = $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML());
         $this->assertContains('<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="return" type="xsd:string"/>', $wsdl);
@@ -473,15 +459,11 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc6');
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc7');
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc9');
-
-        $dom = new \DOMDocument();
-        ob_start();
-        $server->generate();
-        $dom->loadXML(ob_get_clean());
+        
+        $dom = $server->generate()->toDomDocument();
         $dom->save(__DIR__.'/TestAsset/addfunction2.wsdl');
 
-        $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
-        $name = $parts[0];
+        $name = "TestService";
 
         $wsdl = '<?xml version="1.0"?>'.
                 '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
@@ -562,8 +544,6 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Generated WSDL did not match expected XML");
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
-
-
         unlink(__DIR__.'/TestAsset/addfunction2.wsdl');
     }
 
@@ -575,11 +555,10 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $scriptUri = 'http://localhost/my_script.php';
 
         $server = new AutoDiscover(null, "http://example.com/service.php");
+        $server->setServiceName("TestService");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-
-        ob_start();
-        $server->generate();
-        $wsdlOutput = ob_get_clean();
+        
+        $wsdlOutput = $server->toXml();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
         $this->assertContains("http://example.com/service.php", $wsdlOutput);
@@ -595,10 +574,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server = $this->createAutodiscoverService();
         $server->setUri("http://example.com/service.php");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-
-        ob_start();
-        $server->generate();
-        $wsdlOutput = ob_get_clean();
+        
+        $wsdlOutput = $server->toXml();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
         $this->assertContains("http://example.com/service.php", $wsdlOutput);
@@ -622,19 +599,15 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server = $this->createAutodiscoverService();
         $server->setUri("http://example.com/service.php");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-
-        ob_start();
-        $server->generate();
-        $wsdlOutput = ob_get_clean();
+        
+        $wsdlOutput = $server->toXml();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
         $this->assertContains("http://example.com/service.php", $wsdlOutput);
 
         $server->setUri("http://example2.com/service2.php");
 
-        ob_start();
-        $server->generate();
-        $wsdlOutput = ob_get_clean();
+        $wsdlOutput = $server->toXml();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
         $this->assertNotContains("http://example.com/service.php", $wsdlOutput);
@@ -653,9 +626,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server = $this->createAutodiscoverService();
         $server->setClass('\ZendTest\Soap\TestAsset\TestFixingMultiplePrototypes');
 
-        ob_start();
-        $server->generate();
-        $wsdlOutput = ob_get_clean();
+        $wsdlOutput = $server->toXml();
 
         $this->assertEquals(1, substr_count($wsdlOutput, '<message name="testFuncIn">'));
         $this->assertEquals(1, substr_count($wsdlOutput, '<message name="testFuncOut">'));
@@ -670,9 +641,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
         $server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
 
-        ob_start();
-        $server->generate();
-        $wsdlOutput = ob_get_clean();
+        $wsdlOutput = $server->toXml();
 
         $this->assertEquals(1,
             substr_count($wsdlOutput, 'wsdl:arrayType="tns:ZendTest.Soap.TestAsset.AutoDiscoverTestClass1[]"'),
@@ -690,55 +659,6 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             substr_count($wsdlOutput, '<part name="test" type="tns:ZendTest.Soap.TestAsset.AutoDiscoverTestClass1"/>') >= 1,
             '\ZendTest\Soap\TestAsset\AutoDiscoverTestClass1 appears once or more than once in the message parts section.'
         );
-    }
-
-    /**
-     * @group ZF-5330
-     */
-    public function testDumpOrXmlOfAutoDiscover()
-    {
-        $server = $this->createAutodiscoverService();
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-
-        ob_start();
-        $server->generate();
-        $wsdlOutput = ob_get_clean();
-
-        $this->assertEquals(
-            $this->sanitizeWsdlXmlOutputForOsCompability($wsdlOutput),
-            $this->sanitizeWsdlXmlOutputForOsCompability($server->toXml())
-        );
-
-        ob_start();
-        $server->dump(false);
-        $wsdlOutput = ob_get_clean();
-
-        $this->assertEquals(
-            $this->sanitizeWsdlXmlOutputForOsCompability($wsdlOutput),
-            $this->sanitizeWsdlXmlOutputForOsCompability($server->toXml())
-        );
-    }
-
-    /**
-     * @group ZF-5330
-     */
-    public function testDumpOnlyAfterGeneratedAutoDiscoverWsdl()
-    {
-        $server = $this->createAutodiscoverService();
-        
-        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Cannot dump autodiscovered contents');
-        $server->dump(false);
-    }
-    
-    /**
-     * @group ZF-5330
-     */
-    public function testXmlOnlyAfterGeneratedAutoDiscoverWsdl()
-    {
-        $server = $this->createAutodiscoverService();
-        
-        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Cannot return autodiscovered contents');
-        $server->toXml();
     }
 
     /**
@@ -808,6 +728,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     public function testNoReturnIsOneWayCallInAddFunction()
     {
         $autodiscover = $this->createAutodiscoverService();
+        $autodiscover->setServiceName('TestService');
         $autodiscover->addFunction('\ZendTest\Soap\TestAsset\OneWay');
         $wsdl = $autodiscover->toXml();
 

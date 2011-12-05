@@ -38,6 +38,11 @@ use Zend\Uri,
 class AutoDiscover
 {
     /**
+     * @var string
+     */
+    protected $_serviceName;
+    
+    /**
      * @var \Zend\Soap\Wsdl
      */
     protected $_wsdl = null;
@@ -48,9 +53,18 @@ class AutoDiscover
     protected $_reflection = null;
 
     /**
+     * Service function names
+     * 
      * @var array
      */
     protected $_functions = array();
+    
+    /**
+     * Service class name
+     * 
+     * @var string 
+     */
+    protected $_class;
 
     /**
      * @var boolean
@@ -107,6 +121,40 @@ class AutoDiscover
             $this->setWsdlClass($wsdlClass);
         }
     }
+    
+    /**
+     * Set service name
+     * 
+     * @param string $serviceName
+     * @return AutoDiscover
+     */
+    public function setServiceName($serviceName)
+    {
+        $this->_serviceName = $serviceName;
+        return $this;
+    }
+    
+    /**
+     * Get service name
+     * 
+     * @return string
+     */
+    public function getServiceName()
+    {
+        if (!$this->_serviceName) {
+            if ($this->_class) {
+                return $this->_reflection->reflectClass($this->_class)
+                                         ->getShortName();
+            } else {
+                throw new Exception\RuntimeException(
+                    "No service name given. Call Autodiscover#setServiceName()."
+                );
+            }
+        }
+        
+        return $this->_serviceName;
+    }
+    
 
     /**
      * Set the location at which the WSDL file will be availabe.
@@ -236,33 +284,11 @@ class AutoDiscover
      * Set the Class the SOAP server will use
      *
      * @param string $class Class Name
-     * @param string $namespace Class Namspace - Not Used
-     * @param array $argv Arguments to instantiate the class - Not Used
      * @return \Zend\Soap\AutoDiscover
      */
-    public function setClass($class, $namespace = '', $argv = null)
+    public function setClass($class)
     {
-        $uri = $this->getUri();
-
-        $translatedClassName = Wsdl::translateType($class);
-
-        $wsdl = new $this->_wsdlClass($translatedClassName, $uri, $this->_strategy);
-
-        // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
-        $wsdl->addSchemaTypeSection();
-
-        $port = $wsdl->addPortType($translatedClassName . 'Port');
-        $binding = $wsdl->addBinding($translatedClassName . 'Binding', 'tns:' . $translatedClassName . 'Port');
-
-        $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
-        $wsdl->addService($translatedClassName . 'Service',
-                          $translatedClassName . 'Port',
-                          'tns:' . $translatedClassName . 'Binding', $uri);
-        foreach ($this->_reflection->reflectClass($class)->getMethods() as $method) {
-            $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
-        }
-        $this->_wsdl = $wsdl;
-
+        $this->_class = $class;
         return $this;
     }
 
@@ -270,39 +296,58 @@ class AutoDiscover
      * Add a Single or Multiple Functions to the WSDL
      *
      * @param string $function Function Name
-     * @param string $namespace Function namespace - Not Used
      * @return \Zend\Soap\AutoDiscover
      */
-    public function addFunction($function, $namespace = '')
+    public function addFunction($function)
     {
-        static $port;
-        static $operation;
-        static $binding;
-
-        if (!is_array($function)) {
-            $function = (array) $function;
-        }
-
+        $this->_functions[] = $function;
+        return $this;
+    }
+    
+    protected function generateClass()
+    {   
+        $class = $this->_class;
         $uri = $this->getUri();
 
-        if (!($this->_wsdl instanceof Wsdl)) {
-            $parts = explode('.', basename($_SERVER['SCRIPT_NAME']));
-            $name = $parts[0];
-            $wsdl = new Wsdl($name, $uri, $this->_strategy);
+        $serviceName = $this->getServiceName();
 
-            // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
-            $wsdl->addSchemaTypeSection();
+        $wsdl = new $this->_wsdlClass($serviceName, $uri, $this->_strategy);
 
-            $port = $wsdl->addPortType($name . 'Port');
-            $binding = $wsdl->addBinding($name . 'Binding', 'tns:' .$name. 'Port');
+        // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
+        $wsdl->addSchemaTypeSection();
 
-            $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
-            $wsdl->addService($name . 'Service', $name . 'Port', 'tns:' . $name . 'Binding', $uri);
-        } else {
-            $wsdl = $this->_wsdl;
+        $port = $wsdl->addPortType($serviceName . 'Port');
+        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' . $serviceName . 'Port');
+
+        $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
+        $wsdl->addService($serviceName . 'Service',
+                          $serviceName . 'Port',
+                          'tns:' . $serviceName . 'Binding', $uri);
+        foreach ($this->_reflection->reflectClass($class)->getMethods() as $method) {
+            $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
+        $this->_wsdl = $wsdl;
 
-        foreach ($function as $func) {
+        return $this;
+    }
+    
+    protected function generateFunctions()
+    {
+        $uri = $this->getUri();
+
+        $serviceName = $this->getServiceName();
+        $wsdl = new Wsdl($serviceName, $uri, $this->_strategy);
+
+        // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
+        $wsdl->addSchemaTypeSection();
+
+        $port = $wsdl->addPortType($serviceName . 'Port');
+        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' .$serviceName. 'Port');
+
+        $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
+        $wsdl->addService($serviceName . 'Service', $serviceName . 'Port', 'tns:' . $serviceName . 'Binding', $uri);
+
+        foreach ($this->_functions as $func) {
             $method = $this->_reflection->reflectFunction($func);
             $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
@@ -422,20 +467,26 @@ class AutoDiscover
             $operation = $wsdl->addBindingOperation($binding, $functionName,  $this->_operationBodyStyle);
         }
         $wsdl->addSoapOperation($operation, $uri . '#' . $functionName);
-
-        // Add the function name to the list
-        $this->_functions[] = $function->getName();
     }
 
     /**
      * Generate the WSDL file from the configured input.
+     * 
+     * @return Zend_Wsdl
      */
     public function generate()
     {
-        if (!headers_sent()) {
-            header('Content-Type: text/xml');
+        if ($this->_class && $this->_functions) {
+            throw new Exception\RuntimeException("Can either dump functions or a class as a service, not both.");
         }
-        $this->_wsdl->dump();
+        
+        if ($this->_class) {
+            $this->generateClass();
+        } else {
+            $this->generateFunctions();
+        }
+        
+        return $this->_wsdl;
     }
 
     /**
@@ -447,11 +498,7 @@ class AutoDiscover
      */
     public function dump($filename)
     {
-        if($this->_wsdl !== null) {
-            return $this->_wsdl->dump($filename);
-        } else {
-            throw new Exception\RuntimeException('Cannot dump autodiscovered contents, WSDL file has not been generated yet.');
-        }
+        return $this->generate()->dump($filename);
     }
 
     /**
@@ -462,11 +509,7 @@ class AutoDiscover
      */
     public function toXml()
     {
-        if($this->_wsdl !== null) {
-            return $this->_wsdl->toXml();
-        } else {
-            throw new Exception\RuntimeException('Cannot return autodiscovered contents, WSDL file has not been generated yet.');
-        }
+        return $this->generate()->toXml();
     }
 
     /**

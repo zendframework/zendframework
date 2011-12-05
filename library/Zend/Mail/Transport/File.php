@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Transport;
+
 use Zend\Config\Config,
     Zend\Mail\AbstractTransport;
 
@@ -31,8 +29,6 @@ use Zend\Config\Config,
  *
  * Class for saving outgoing emails in filesystem
  *
- * @uses       \Zend\Mail\AbstractTransport
- * @uses       \Zend\Mail\Transport\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport

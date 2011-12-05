@@ -56,6 +56,13 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $_SERVER['SCRIPT_NAME'] = '/my_script.php';
         $_SERVER['HTTPS'] = "off";
     }
+    
+    protected function createAutodiscoverService()
+    {
+        $server = new AutoDiscover();
+        $server->setUri('http://localhost/my_script.php');
+        return $server;
+    }
 
     protected function sanitizeWsdlXmlOutputForOsCompability($xmlstring)
     {
@@ -68,7 +75,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
         $dom = new \DOMDocument();
         ob_start();
@@ -157,7 +164,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->setBindingStyle(array('style' => 'document', 'transport' => 'http://framework.zend.com'));
         $server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => 'http://framework.zend.com'));
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
@@ -317,7 +324,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
         $dom = new \DOMDocument();
         ob_start();
@@ -338,7 +345,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $dom = new \DOMDocument();
         ob_start();
@@ -381,7 +388,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->setBindingStyle(array('style' => 'document', 'transport' => 'http://framework.zend.com'));
         $server->setOperationBodyStyle(array('use' => 'literal', 'namespace' => 'http://framework.zend.com'));
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
@@ -434,7 +441,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $dom = new \DOMDocument();
         ob_start();
@@ -457,7 +464,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc2');
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc3');
@@ -563,24 +570,6 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-4117
      */
-    public function testUseHttpsSchemaIfAccessedThroughHttps()
-    {
-        $_SERVER['HTTPS'] = "on";
-        $httpsScriptUri = 'https://localhost/my_script.php';
-
-        $server = new AutoDiscover();
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-
-        ob_start();
-        $server->handle();
-        $wsdlOutput = ob_get_clean();
-
-        $this->assertContains($httpsScriptUri, $wsdlOutput);
-    }
-
-    /**
-     * @group ZF-4117
-     */
     public function testChangeWsdlUriInConstructor()
     {
         $scriptUri = 'http://localhost/my_script.php';
@@ -603,7 +592,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->setUri("http://example.com/service.php");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
@@ -617,7 +606,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
     public function testSetNonStringNonZendUriUriThrowsException()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         
         $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'No uri given to');
         $server->setUri(array("bogus"));
@@ -630,7 +619,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->setUri("http://example.com/service.php");
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
@@ -661,7 +650,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     {
         $scriptUri = 'http://localhost/my_script.php';
 
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->setClass('\ZendTest\Soap\TestAsset\TestFixingMultiplePrototypes');
 
         ob_start();
@@ -674,7 +663,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
     public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnBadPersistence()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         
         $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Function has no use in AutoDiscover');
         $server->setPersistence("bogus");
@@ -683,7 +672,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     
     public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnFault()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         
         $this->setExpectedException('Zend\Soap\Exception\UnexpectedValueException', 'Function has no use in AutoDiscover');
         $server->fault();
@@ -691,7 +680,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
     
     public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnLoadFunctionsCall()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         
         $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Function has no use in AutoDiscover');
         $server->loadFunctions("bogus");
@@ -699,7 +688,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFunctions()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
 
@@ -709,47 +698,14 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
             $functions
         );
     }
-
-    /**
-     * @group ZF-4835
-     */
-    public function testUsingRequestUriWithoutParametersAsDefault()
-    {
-        // Apache
-        $_SERVER = array('REQUEST_URI' => '/my_script.php?wsdl', 'HTTP_HOST' => 'localhost');
-        $server = new AutoDiscover();
-        $uri = $server->getUri()->toString();
-        $this->assertNotContains("?wsdl", $uri);
-        $this->assertEquals("http://localhost/my_script.php", $uri);
-
-        // Apache plus SSL
-        $_SERVER = array('REQUEST_URI' => '/my_script.php?wsdl', 'HTTP_HOST' => 'localhost', 'HTTPS' => 'on');
-        $server = new AutoDiscover();
-        $uri = $server->getUri()->toString();
-        $this->assertNotContains("?wsdl", $uri);
-        $this->assertEquals("https://localhost/my_script.php", $uri);
-
-        // IIS 5 + PHP as FastCGI
-        $_SERVER = array('ORIG_PATH_INFO' => '/my_script.php?wsdl', 'SERVER_NAME' => 'localhost');
-        $server = new AutoDiscover();
-        $uri = $server->getUri()->toString();
-        $this->assertNotContains("?wsdl", $uri);
-        $this->assertEquals("http://localhost/my_script.php", $uri);
-
-        // IIS
-        $_SERVER = array('HTTP_X_REWRITE_URL' => '/my_script.php?wsdl', 'SERVER_NAME' => 'localhost');
-        $server = new AutoDiscover();
-        $uri = $server->getUri()->toString();
-        $this->assertNotContains("?wsdl", $uri);
-        $this->assertEquals("http://localhost/my_script.php", $uri);
-    }
-
+    
     /**
      * @group ZF-4937
      */
     public function testComplexTypesThatAreUsedMultipleTimesAreRecoginzedOnce()
     {
-        $server = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
+        $server = $this->createAutodiscoverService();
+        $server->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
         $server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
 
         ob_start();
@@ -779,7 +735,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testDumpOrXmlOfAutoDiscover()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
         ob_start();
@@ -806,7 +762,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testDumpOnlyAfterGeneratedAutoDiscoverWsdl()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         
         $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Cannot dump autodiscovered contents');
         $server->dump(false);
@@ -817,7 +773,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testXmlOnlyAfterGeneratedAutoDiscoverWsdl()
     {
-        $server = new AutoDiscover();
+        $server = $this->createAutodiscoverService();
         
         $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Cannot return autodiscovered contents');
         $server->toXml();
@@ -828,7 +784,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArrayComplex()
     {
-        $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
+        $autodiscover = $this->createAutodiscoverService();
+        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyService');
         $wsdl = $autodiscover->toXml();
 
@@ -842,7 +799,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnSameArrayOfObjectsResponseOnDifferentMethodsWhenArraySequence()
     {
-        $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
+        $autodiscover = $this->createAutodiscoverService();
+        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\MyServiceSequence');
         $wsdl = $autodiscover->toXml();
 
@@ -872,7 +830,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoReturnIsOneWayCallInSetClass()
     {
-        $autodiscover = new AutoDiscover();
+        $autodiscover = $this->createAutodiscoverService();
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\NoReturnType');
         $wsdl = $autodiscover->toXml();
 
@@ -887,7 +845,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testNoReturnIsOneWayCallInAddFunction()
     {
-        $autodiscover = new AutoDiscover();
+        $autodiscover = $this->createAutodiscoverService();
         $autodiscover->addFunction('\ZendTest\Soap\TestAsset\OneWay');
         $wsdl = $autodiscover->toXml();
 
@@ -903,7 +861,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
      */
     public function testRecursiveWsdlDependencies()
     {
-        $autodiscover = new AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeComplex);
+        $autodiscover = $this->createAutodiscoverService();
+        $autodiscover->setComplexTypeStrategy(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence);
         $autodiscover->setClass('\ZendTest\Soap\TestAsset\Recursion');
         $wsdl = $autodiscover->toXml();
 

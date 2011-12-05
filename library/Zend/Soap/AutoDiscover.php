@@ -139,16 +139,14 @@ class AutoDiscover implements \Zend\Server\Server
      */
     public function getUri()
     {
-        if($this->_uri !== null) {
-            $uri = $this->_uri;
-        } else {
-            $schema     = $this->getSchema();
-            $host       = $this->getHostName();
-            $scriptName = $this->getRequestUriWithoutParameters();
-            $uri = Uri\UriFactory::factory($schema . '://' . $host . $scriptName);
-            $this->setUri($uri);
+        if($this->_uri === null) {
+            throw new Exception\RuntimeException("Missing uri. You have to explicitly configure the Endpoint Uri by calling AutoDiscover#setUri().");
         }
-        return $uri;
+        if (is_string($this->_uri)) {
+            $this->_uri = Uri\UriFactory::factory($this->_uri);
+        }
+        
+        return $this->_uri;
     }
 
     /**
@@ -216,58 +214,6 @@ class AutoDiscover implements \Zend\Server\Server
             $this->_bindingStyle['transport'] = $bindingStyle['transport'];
         }
         return $this;
-    }
-
-    /**
-     * Detect and returns the current HTTP/HTTPS Schema
-     *
-     * @return string
-     */
-    protected function getSchema()
-    {
-        $schema = "http";
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
-            $schema = 'https';
-        }
-        return $schema;
-    }
-
-    /**
-     * Detect and return the current hostname
-     *
-     * @return string
-     */
-    protected function getHostName()
-    {
-        if(isset($_SERVER['HTTP_HOST'])) {
-            $host = $_SERVER['HTTP_HOST'];
-        } else {
-            $host = $_SERVER['SERVER_NAME'];
-        }
-        return $host;
-    }
-
-    /**
-     * Detect and return the current script name without parameters
-     *
-     * @return string
-     */
-    protected function getRequestUriWithoutParameters()
-    {
-        if (isset($_SERVER['HTTP_X_REWRITE_URL'])) { // check this first so IIS will catch
-            $requestUri = $_SERVER['HTTP_X_REWRITE_URL'];
-        } elseif (isset($_SERVER['REQUEST_URI'])) {
-            $requestUri = $_SERVER['REQUEST_URI'];
-        } elseif (isset($_SERVER['ORIG_PATH_INFO'])) { // IIS 5.0, PHP as CGI
-            $requestUri = $_SERVER['ORIG_PATH_INFO'];
-        } else {
-            $requestUri = $_SERVER['SCRIPT_NAME'];
-        }
-        if( ($pos = strpos($requestUri, "?")) !== false) {
-            $requestUri = substr($requestUri, 0, $pos);
-        }
-
-        return $requestUri;
     }
 
     /**

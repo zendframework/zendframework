@@ -7,7 +7,8 @@ use Zend\Cache\Storage,
     Zend\Cache\Utils,
     Zend\Cache\Exception\RuntimeException,
     Zend\Cache\Exception\InvalidArgumentException,
-    Zend\Cache\Exception\ItemNotFoundException;
+    Zend\Cache\Exception\ItemNotFoundException,
+    GlobIterator;
 
 class Filesystem extends AbstractAdapter
 {
@@ -1005,20 +1006,20 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            $prefix = $options['namespace'] . $this->getNamespaceSeparator();
-            $find = $options['cache_dir']
-                  . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options['dir_level'])
-                  . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-            $glob = glob($find, \GLOB_NOSORT | \GLOB_NOESCAPE);
-            if (!$glob) {
-                // On some systems glob returns false even on empty result
-                return true;
-            }
+            try {
+                $prefix = $options['namespace'] . $this->getNamespaceSeparator();
+                $find = $options['cache_dir']
+                    . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options['dir_level'])
+                    . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
+                $glob = new \GlobIterator($find);
 
-            $this->_stmtActive  = true;
-            $this->_stmtGlob    = $glob;
-            $this->_stmtMatch   = $mode;
-            $this->_stmtOptions = $options;
+                $this->_stmtActive  = true;
+                $this->_stmtGlob    = $glob;
+                $this->_stmtMatch   = $mode;
+                $this->_stmtOptions = $options;
+            } catch (\Exception $e) {
+                throw new RuntimeException('Instantiating glob iterator failed', 0, $e);
+            }
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -1055,7 +1056,6 @@ class Filesystem extends AbstractAdapter
                 $result = parent::fetch();
             }
 
-            $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1381,45 +1381,49 @@ class Filesystem extends AbstractAdapter
     protected function _fetchByGlob()
     {
         $options = $this->_stmtOptions;
-        $match   = $this->_stmtMatch;
+        $mode    = $this->_stmtMatch;
 
         $prefix  = $options['namespace'] . $this->getNamespaceSeparator();
         $prefixL = strlen($prefix);
 
         do {
-            $item = array();
-            $info = null;
-
-            $file = array_shift($this->_stmtGlob);
-            if ($file === null) {
+            try {
+                $valid = $this->_stmtGlob->valid();
+            } catch (\LogicException $e) {
+                // @link https://bugs.php.net/bug.php?id=55701
+                // GlobIterator throws LogicException with message
+                // 'The parent constructor was not called: the object is in an invalid state'
+                $valid = false;
+            }
+            if (!$valid) {
                 return false;
             }
 
-            $basename = basename($file);
+            $item = array();
+            $info = null;
 
+            $current = $this->_stmtGlob->current();
+            $this->_stmtGlob->next();
+
+            $filename = $current->getFilename();
             if ($prefix !== '') {
-                if (substr($basename, 0, $prefixL) != $prefix) {
+                if (substr($filename, 0, $prefixL) != $prefix) {
                     continue;
                 }
 
                 // remove prefix and suffix (.dat)
-                $key = substr($basename, $prefixL, -4);
+                $key = substr($filename, $prefixL, -4);
             } else {
                 // remove suffix (.dat)
-                $key = substr($basename, 0, -4);
+                $key = substr($filename, 0, -4);
             }
 
             // if MATCH_ALL mode do not check expired
-            if (($match & Adapter::MATCH_ALL) != Adapter::MATCH_ALL) {
-
-                $mtime = @filemtime($file);
-                if ($mtime === false) {
-                    // file already removed
-                    continue;
-                }
+            if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
+                $mtime = $current->getMTime();
 
                 // if MATCH_EXPIRED -> filter not expired items
-                if (($match & Adapter::MATCH_EXPIRED) == Adapter::MATCH_EXPIRED) {
+                if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
                     if ( time() < ($mtime + $options['ttl']) ) {
                         continue;
                     }
@@ -1433,24 +1437,24 @@ class Filesystem extends AbstractAdapter
             }
 
             // check tags only if one of the tag matching mode is selected
-            if (($match & 070) > 0) {
+            if (($mode & 070) > 0) {
 
                 $info = $this->_info($key, $options);
 
                 // if MATCHING_TAGS mode -> check if all given tags available in current cache
-                if (($match & Adapter::MATCHING_TAGS) == Adapter::MATCHING_TAGS ) {
+                if (($mode & self::MATCHING_TAGS) == self::MATCHING_TAGS ) {
                     if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) > 0) {
                         continue;
                     }
 
                 // if MATCHING_NO_TAGS mode -> check if no given tag available in current cache
-                } elseif( ($match & Adapter::MATCHING_NO_TAGS) == Adapter::MATCHING_NO_TAGS ) {
+                } elseif( ($mode & self::MATCHING_NO_TAGS) == self::MATCHING_NO_TAGS ) {
                     if (isset($info['tags']) && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])) {
                         continue;
                     }
 
                 // if MATCHING_ANY_TAGS mode -> check if any given tag available in current cache
-                } elseif ( ($match & Adapter::MATCHING_ANY_TAGS) == Adapter::MATCHING_ANY_TAGS ) {
+                } elseif ( ($mode & self::MATCHING_ANY_TAGS) == self::MATCHING_ANY_TAGS ) {
                     if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])) {
                         continue;
                     }
@@ -1462,7 +1466,7 @@ class Filesystem extends AbstractAdapter
                 if ($select == 'key') {
                     $item['key'] = $key;
                 } else if ($select == 'value') {
-                    $item['value'] = $this->_getFileContent($file);
+                    $item['value'] = $this->_getFileContent($current->getPathname());
                 } else if ($select != 'key') {
                     if ($info === null) {
                         $info = $this->_info($key, $options);
@@ -1487,28 +1491,23 @@ class Filesystem extends AbstractAdapter
             clearstatcache();
         }
 
-        $find = $this->getCacheDir()
-              . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $this->getDirLevel())
-              . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-        $glob = glob($find, \GLOB_NOSORT | \GLOB_NOESCAPE);
-        if (!$glob) {
-            // On some systems glob returns false even on empty result
-            return true;
+        try {
+            $find = $this->getCacheDir()
+                . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $this->getDirLevel())
+                . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
+            $glob = new \GlobIterator($find);
+        } catch (\Exception $e) {
+            throw new RuntimeException('Instantiating GlobIterator failed', 0, $e);
         }
 
         $time = time();
 
-        foreach ($glob as $file) {
+        foreach ($glob as $entry) {
 
             // if MATCH_ALL mode do not check expired
             if (($mode & Adapter::MATCH_ALL) != Adapter::MATCH_ALL) {
 
-                $mtime = @filemtime($file);
-                if ($mtime === false) {
-                    // file already removed
-                    continue;
-                }
-
+                $mtime = $entry->getMTime();
                 if (($mode & Adapter::MATCH_EXPIRED) == Adapter::MATCH_EXPIRED) {
                     if ( $time <= ($mtime + $ttl) ) {
                         continue;
@@ -1523,7 +1522,7 @@ class Filesystem extends AbstractAdapter
             }
 
             // remove file suffix (*.dat)
-            $filespec = substr($file, 0, -4);
+            $pathnameSpec = substr($entry->getPathname(), 0, -4);
 
             ////////////////////////////////////////
             // on this time all expire tests match
@@ -1559,8 +1558,8 @@ class Filesystem extends AbstractAdapter
             // on this time all tests match
             ////////////////////////////////////////
 
-            $this->_unlink($file);              // delete data file
-            $this->_unlink($filespec . '.ifo'); // delete info file
+            $this->_unlink($pathnameSpec . '.dat'); // delete data file
+            $this->_unlink($pathnameSpec . '.ifo'); // delete info file
         }
 
         return true;

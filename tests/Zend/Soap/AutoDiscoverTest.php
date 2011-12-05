@@ -79,7 +79,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
         $dom = new \DOMDocument();
         ob_start();
-        $server->handle();
+        $server->generate();
         $dom->loadXML(ob_get_clean());
 
         $wsdl = '<?xml version="1.0"?>'
@@ -170,7 +170,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
         $dom = new \DOMDocument();
         ob_start();
-        $server->handle();
+        $server->generate();
         $dom->loadXML(ob_get_clean());
 
         $wsdl = '<?xml version="1.0"?>'
@@ -328,7 +328,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\Test');
         $dom = new \DOMDocument();
         ob_start();
-        $server->handle();
+        $server->generate();
         $dom->loadXML(ob_get_clean());
 
         $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
@@ -349,7 +349,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $dom = new \DOMDocument();
         ob_start();
-        $server->handle();
+        $server->generate();
         $dom->loadXML(ob_get_clean());
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
 
@@ -394,7 +394,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $dom = new \DOMDocument();
         ob_start();
-        $server->handle();
+        $server->generate();
         $dom->loadXML(ob_get_clean());
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
 
@@ -445,7 +445,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         $dom = new \DOMDocument();
         ob_start();
-        $server->handle();
+        $server->generate();
         $dom->loadXML(ob_get_clean());
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
 
@@ -476,7 +476,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
 
         $dom = new \DOMDocument();
         ob_start();
-        $server->handle();
+        $server->generate();
         $dom->loadXML(ob_get_clean());
         $dom->save(__DIR__.'/TestAsset/addfunction2.wsdl');
 
@@ -578,7 +578,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
         ob_start();
-        $server->handle();
+        $server->generate();
         $wsdlOutput = ob_get_clean();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
@@ -597,7 +597,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
         ob_start();
-        $server->handle();
+        $server->generate();
         $wsdlOutput = ob_get_clean();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
@@ -624,7 +624,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
         ob_start();
-        $server->handle();
+        $server->generate();
         $wsdlOutput = ob_get_clean();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
@@ -633,7 +633,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setUri("http://example2.com/service2.php");
 
         ob_start();
-        $server->handle();
+        $server->generate();
         $wsdlOutput = ob_get_clean();
 
         $this->assertNotContains($scriptUri, $wsdlOutput);
@@ -654,49 +654,11 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\TestFixingMultiplePrototypes');
 
         ob_start();
-        $server->handle();
+        $server->generate();
         $wsdlOutput = ob_get_clean();
 
         $this->assertEquals(1, substr_count($wsdlOutput, '<message name="testFuncIn">'));
         $this->assertEquals(1, substr_count($wsdlOutput, '<message name="testFuncOut">'));
-    }
-
-    public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnBadPersistence()
-    {
-        $server = $this->createAutodiscoverService();
-        
-        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Function has no use in AutoDiscover');
-        $server->setPersistence("bogus");
-    }
-
-    
-    public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnFault()
-    {
-        $server = $this->createAutodiscoverService();
-        
-        $this->setExpectedException('Zend\Soap\Exception\UnexpectedValueException', 'Function has no use in AutoDiscover');
-        $server->fault();
-    }
-    
-    public function testUnusedFunctionsOfAutoDiscoverThrowExceptionOnLoadFunctionsCall()
-    {
-        $server = $this->createAutodiscoverService();
-        
-        $this->setExpectedException('Zend\Soap\Exception\RuntimeException', 'Function has no use in AutoDiscover');
-        $server->loadFunctions("bogus");
-    }
-
-    public function testGetFunctions()
-    {
-        $server = $this->createAutodiscoverService();
-        $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
-        $server->setClass('\ZendTest\Soap\TestAsset\Test');
-
-        $functions = $server->getFunctions();
-        $this->assertEquals(
-            array('ZendTest\Soap\TestAsset\TestFunc', 'testFunc1', 'testFunc2', 'testFunc3', 'testFunc4'),
-            $functions
-        );
     }
     
     /**
@@ -709,7 +671,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->setClass('\ZendTest\Soap\TestAsset\AutoDiscoverTestClass2');
 
         ob_start();
-        $server->handle();
+        $server->generate();
         $wsdlOutput = ob_get_clean();
 
         $this->assertEquals(1,
@@ -739,7 +701,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
 
         ob_start();
-        $server->handle();
+        $server->generate();
         $wsdlOutput = ob_get_clean();
 
         $this->assertEquals(

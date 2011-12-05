@@ -35,7 +35,7 @@ use Zend\Uri,
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */
-class AutoDiscover implements \Zend\Server\Server
+class AutoDiscover
 {
     /**
      * @var \Zend\Soap\Wsdl
@@ -428,23 +428,9 @@ class AutoDiscover implements \Zend\Server\Server
     }
 
     /**
-     * Action to take when an error occurs
-     *
-     * @param string $fault
-     * @param string|int $code
-     * @throws \Zend\Soap\Exception\UnexpectedValueException
+     * Generate the WSDL file from the configured input.
      */
-    public function fault($fault = null, $code = null)
-    {
-        throw new Exception\UnexpectedValueException('Function has no use in AutoDiscover.');
-    }
-
-    /**
-     * Handle the Request
-     *
-     * @param string $request A non-standard request - Not Used
-     */
-    public function handle($request = false)
+    public function generate()
     {
         if (!headers_sent()) {
             header('Content-Type: text/xml');
@@ -481,38 +467,6 @@ class AutoDiscover implements \Zend\Server\Server
         } else {
             throw new Exception\RuntimeException('Cannot return autodiscovered contents, WSDL file has not been generated yet.');
         }
-    }
-
-    /**
-     * Return an array of functions in the WSDL
-     *
-     * @return array
-     */
-    public function getFunctions()
-    {
-        return $this->_functions;
-    }
-
-    /**
-     * Load Functions
-     *
-     * @param unknown_type $definition
-     * @throws \Zend\Soap\Exception\RuntimeException
-     */
-    public function loadFunctions($definition)
-    {
-        throw new Exception\RuntimeException('Function has no use in AutoDiscover.');
-    }
-
-    /**
-     * Set Persistance
-     *
-     * @param int $mode
-     * @throws \Zend\Soap\Exception\RuntimeException
-     */
-    public function setPersistence($mode)
-    {
-        throw new Exception\RuntimeException('Function has no use in AutoDiscover.');
     }
 
     /**

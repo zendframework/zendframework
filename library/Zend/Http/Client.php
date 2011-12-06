@@ -355,7 +355,7 @@ class Client implements Dispatchable
      */
     public function setMethod($method)
     {
-        $this->getRequest()->setMethod($method);
+        $method = $this->getRequest()->setMethod($method)->getMethod();
         
         if (($method == Request::METHOD_POST || $method == Request::METHOD_PUT ||
              $method == Request::METHOD_DELETE) && empty($this->encType)) {

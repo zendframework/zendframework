@@ -19,7 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Mail\Header;
+namespace Zend\Mail;
 
 /**
  * @category   Zend
@@ -28,7 +28,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface HeaderDescription
+interface Header
 {
     public static function fromString($headerLine);
     public function getFieldName();

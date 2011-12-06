@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Header;
+
 /**
  * @todo       Add accessors for setting date from DateTime, Zend\Date, or a string
  * @category   Zend
@@ -29,7 +31,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OrigDate implements HeaderDescription
+class OrigDate implements Header
 {
     /**
      * @var string

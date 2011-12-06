@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Header;
+
 /**
  * Utility class used for creating wrapped or MIME-encoded versions of header
  * values.
@@ -37,10 +39,10 @@ abstract class HeaderWrap
      * Wrap a long header line
      * 
      * @param  string $value 
-     * @param  HeaderDescription $header 
+     * @param  Header $header 
      * @return string
      */
-    public static function wrap($value, HeaderDescription $header)
+    public static function wrap($value, Header $header)
     {
         if ($header instanceof UnstructuredHeader) {
             return static::wrapUnstructuredHeader($value);
@@ -67,10 +69,10 @@ abstract class HeaderWrap
      * Wrap a structured header line
      * 
      * @param  string $value 
-     * @param  HeaderDescription $header 
+     * @param  Header $header 
      * @return string
      */
-    protected static function wrapStructuredHeader($value, HeaderDescription $header)
+    protected static function wrapStructuredHeader($value, Header $header)
     {
         $delimiter = $header->getDelimiter();
 

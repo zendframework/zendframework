@@ -460,7 +460,7 @@ class Message
      * 
      * @param  string $headerName 
      * @param  string $headerClass 
-     * @return HeaderDescription
+     * @return Header
      */
     protected function getHeader($headerName, $headerClass)
     {

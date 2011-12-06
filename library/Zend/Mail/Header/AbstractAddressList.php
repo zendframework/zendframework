@@ -21,7 +21,8 @@
 
 namespace Zend\Mail\Header;
 
-use Zend\Mail\AddressList;
+use Zend\Mail\AddressList,
+    Zend\Mail\Header;
 
 /**
  * Base class for headers composing address lists (to, from, cc, bcc, reply-to)
@@ -32,7 +33,7 @@ use Zend\Mail\AddressList;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractAddressList implements HeaderDescription
+abstract class AbstractAddressList implements Header
 {
     /**
      * @var AddressList

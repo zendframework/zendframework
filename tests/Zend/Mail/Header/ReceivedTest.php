@@ -37,7 +37,7 @@ class ReceivedTest extends \PHPUnit_Framework_TestCase
     public function testFromStringCreatesValidReceivedHeader()
     {
         $receivedHeader = Received::fromString('Received: xxx');
-        $this->assertInstanceOf('Zend\Mail\Header\HeaderDescription', $receivedHeader);
+        $this->assertInstanceOf('Zend\Mail\Header', $receivedHeader);
         $this->assertInstanceOf('Zend\Mail\Header\Received', $receivedHeader);
     }
 

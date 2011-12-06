@@ -22,7 +22,8 @@
 namespace Zend\Mail\Header;
 
 use Zend\Mail\Address,
-    Zend\Mail\AddressDescription;
+    Zend\Mail\AddressDescription,
+    Zend\Mail\Header;
 
 /**
  * @category   Zend
@@ -31,7 +32,7 @@ use Zend\Mail\Address,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sender implements HeaderDescription
+class Sender implements Header
 {
     /**
      * @var AddressDescription|null

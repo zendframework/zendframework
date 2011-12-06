@@ -21,6 +21,8 @@
 
 namespace Zend\Mail\Header;
 
+use Zend\Mail\Header;
+
 /**
  * @category   Zend
  * @package    Zend_Mail
@@ -28,7 +30,7 @@ namespace Zend\Mail\Header;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ContentType implements HeaderDescription
+class ContentType implements Header
 {
     /**
      * Header encoding

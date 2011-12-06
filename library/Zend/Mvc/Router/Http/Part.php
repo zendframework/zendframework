@@ -44,7 +44,7 @@ class Part extends TreeRouteStack implements Route
 {
     /**
      * Route to match.
-     * 
+     *
      * @var Route
      */
     protected $route;
@@ -55,17 +55,17 @@ class Part extends TreeRouteStack implements Route
      * @var boolean
      */
     protected $mayTerminate;
-    
+
     /**
      * Child routes.
-     * 
+     *
      * @var mixed
      */
     protected $childRoutes;
 
     /**
      * Create a new part route.
-     * 
+     *
      * @param  mixed       $route
      * @param  boolean     $mayTerminate
      * @param  RouteBroker $routeBroker
@@ -75,21 +75,21 @@ class Part extends TreeRouteStack implements Route
     public function __construct($route, $mayTerminate, RouteBroker $routeBroker, array $childRoutes = null)
     {
         $this->routeBroker = $routeBroker;
-        
+
         if (!$route instanceof Route) {
             $route = $this->routeFromArray($route);
         }
-        
+
         if ($route instanceof self) {
             throw new Exception\InvalidArgumentException('Base route may not be a part route');
         }
-        
+
         $this->route        = $route;
         $this->mayTerminate = $mayTerminate;
         $this->childRoutes  = $childRoutes;
         $this->routes       = new PriorityList();
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
@@ -108,7 +108,7 @@ class Part extends TreeRouteStack implements Route
         if (!isset($options['route'])) {
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
-        
+
         if (!isset($options['route_broker'])) {
             throw new Exception\InvalidArgumentException('Missing "route_broker" in options array');
         }
@@ -116,7 +116,7 @@ class Part extends TreeRouteStack implements Route
         if (!isset($options['may_terminate'])) {
             $options['may_terminate'] = false;
         }
-        
+
         if (!isset($options['child_routes']) || !$options['child_routes']) {
             $options['child_routes'] = null;
         }
@@ -136,7 +136,7 @@ class Part extends TreeRouteStack implements Route
         if ($pathOffset === null) {
             $pathOffset = 0;
         }
-        
+
         $match = $this->route->match($request, $pathOffset);
 
         if ($match !== null && method_exists($request, 'uri')) {
@@ -144,16 +144,16 @@ class Part extends TreeRouteStack implements Route
                 $this->addRoutes($this->childRoutes);
                 $this->childRoutes = null;
             }
-            
+
             $nextOffset = $pathOffset + $match->getLength();
-            
+
             $uri        = $request->uri();
             $pathLength = strlen($uri->getPath());
-            
+
             if ($this->mayTerminate && $nextOffset === $pathLength) {
                 return $match;
             }
-            
+
             foreach ($this->routes as $name => $route) {
                 if (($subMatch = $route->match($request, $nextOffset)) instanceof RouteMatch) {
                     if ($match->getLength() + $subMatch->getLength() + $pathOffset === $pathLength) {
@@ -180,7 +180,9 @@ class Part extends TreeRouteStack implements Route
             $this->addRoutes($this->childRoutes);
             $this->childRoutes = null;
         }
-        
+
+        $options['has_child'] = (isset($options['name']));
+
         $path   = $this->route->assemble($params, $options);
         $params = array_diff_key($params, array_flip($this->route->getAssembledParams()));
 
@@ -191,16 +193,16 @@ class Part extends TreeRouteStack implements Route
                 return $path;
             }
         }
-        
+
         $options['only_return_path'] = true;
         $path .= parent::assemble($params, $options);
-        
+
         return $path;
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

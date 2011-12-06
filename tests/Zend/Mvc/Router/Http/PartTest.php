@@ -16,7 +16,7 @@ class PartTest extends TestCase
         $routeBroker->getClassLoader()->registerPlugins(array(
             'part' => 'Zend\Mvc\Router\Http\Part'
         ));
-        
+
         return new Part(
             array(
                 'type'    => 'Zend\Mvc\Router\Http\Literal',
@@ -56,15 +56,33 @@ class PartTest extends TestCase
                                     'type' => 'Zend\Mvc\Router\Http\Wildcard'
                                 )
                             )
-                        )                   
+                        )
+                    )
+                ),
+                'bat' => array(
+                    'type'    => 'Zend\Mvc\Router\Http\Segment',
+                    'options' => array(
+                        'route'    => '/bat[/:foo]',
+                        'defaults' => array(
+                            'foo' => 'bar'
+                        )
+                    ),
+                    'may_terminate' => true,
+                    'child_routes'  => array(
+                        'literal' => array(
+                            'type'   => 'Zend\Mvc\Router\Http\Literal',
+                            'options' => array(
+                                'route' => '/bar'
+                            )
+                        )
                     )
                 )
             )
         );
     }
-    
+
     public static function routeProvider()
-    {       
+    {
         return array(
             'simple-match' => array(
                 self::getRoute(),
@@ -122,6 +140,20 @@ class PartTest extends TestCase
                 'baz/bat/wildcard',
                 array('controller' => 'wildcard', 'foo' => 'bar')
             ),
+            'optional-parameters-are-dropped-without-child' => array(
+                self::getRoute(),
+                '/foo/bat',
+                null,
+                'bat',
+                array('foo' => 'bar')
+            ),
+            'optional-parameters-are-not-dropped-with-child' => array(
+                self::getRoute(),
+                '/foo/bat/bar/bar',
+                null,
+                'bat/literal',
+                array('foo' => 'bar')
+            ),
         );
     }
 
@@ -138,24 +170,24 @@ class PartTest extends TestCase
         $request = new Request();
         $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
-        
+
         if ($params === null) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
-            
+
             if ($offset === null) {
-                $this->assertEquals(strlen($path), $match->getLength());            
+                $this->assertEquals(strlen($path), $match->getLength());
             }
-            
+
             $this->assertEquals($routeName, $match->getMatchedRouteName());
-            
+
             foreach ($params as $key => $value) {
                 $this->assertEquals($value, $match->getParam($key));
             }
         }
     }
-    
+
     /**
      * @dataProvider routeProvider
      * @param        Part    $route
@@ -170,45 +202,45 @@ class PartTest extends TestCase
             // Data which will not match are not tested for assembling.
             return;
         }
-                
+
         $result = $route->assemble($params, array('name' => $routeName));
-        
+
         if ($offset !== null) {
             $this->assertEquals($offset, strpos($path, $result, $offset));
         } else {
             $this->assertEquals($path, $result);
         }
     }
-    
+
     public function testAssembleNonTerminatedRoute()
     {
         $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Part route may not terminate');
         self::getRoute()->assemble(array(), array('name' => 'baz'));
     }
-    
+
     public function testBaseRouteMayNotBePartRoute()
     {
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Base route may not be a part route');
-        
+
         $route = new Part(self::getRoute(), true, new RouteBroker());
     }
-    
+
     public function testNoMatchWithoutUriMethod()
     {
         $route   = self::getRoute();
         $request = new BaseRequest();
-        
+
         $this->assertNull($route->match($request));
     }
-    
+
     public function testGetAssembledParams()
     {
         $route = self::getRoute();
         $route->assemble(array('controller' => 'foo'), array('name' => 'baz/bat'));
-        
+
         $this->assertEquals(array(), $route->getAssembledParams());
     }
-    
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

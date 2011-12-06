@@ -21,8 +21,8 @@
 
 namespace Zend\Mail\Transport;
 
-use Zend\Config\Config,
-    Zend\Mail\AbstractTransport;
+use Zend\Mail\Message,
+    Zend\Mail\Transport;
 
 /**
  * File transport
@@ -35,61 +35,43 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends AbstractTransport
+class File implements Transport
 {
     /**
-     * Target directory for saving sent email messages
-     *
-     * @var string
+     * @var FileOptions
      */
-    protected $path;
+    protected $options;
 
     /**
-     * Callback function generating a file name
-     *
-     * @var string|array|Closure
+     * Last file written to
+     * 
+     * @var string
      */
-    protected $callback;
+    protected $lastFile;
 
     /**
      * Constructor
      *
-     * @param  array|\Zend\Config\Config $options OPTIONAL (Default: null)
+     * @param  null|FileOptions $options OPTIONAL (Default: null)
      * @return void
      */
-    public function __construct($options = null)
+    public function __construct(FileOptions $options = null)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
-        } elseif (!is_array($options)) {
-            $options = array();
+        if (!$options instanceof FileOptions) {
+            $options = new FileOptions();
         }
-
-        // Making sure we have some defaults to work with
-        if (!isset($options['path'])) {
-            $options['path'] = sys_get_temp_dir();
-        }
-        if (!isset($options['callback'])) {
-            $options['callback'] = $this->getDefaultCallback();
-        }
-
         $this->setOptions($options);
     }
 
     /**
      * Sets options
      *
-     * @param  array $options
+     * @param  FileOptions $options
      * @return void
      */
-    public function setOptions(array $options)
+    public function setOptions(FileOptions $options)
     {
-        if (isset($options['path'])) {
-            $this->path = $options['path'];
-        }
-        if (isset($options['callback'])) {
-            $this->callback = $options['callback'];
-        }
+        $this->options = $options;
     }
 
     /**
@@ -99,53 +81,30 @@ class File extends AbstractTransport
      * @throws \Zend\Mail\Transport\Exception on not writable target directory
      * @throws \Zend\Mail\Transport\Exception on file_put_contents() failure
      */
-    protected function _sendMail()
+    public function send(Message $message)
     {
-        $file = $this->getPath() . DIRECTORY_SEPARATOR . call_user_func($this->getCallback(), $this);
+        $options  = $this->options;
+        $filename = call_user_func($options->getCallback(), $this);
+        $file     = $options->getPath() . DIRECTORY_SEPARATOR . $filename;
+        $email    = $message->toString();
 
-        if (!is_writable(dirname($file))) {
+        if (false === file_put_contents($file, $email)) {
             throw new Exception\RuntimeException(sprintf(
-                'Target directory "%s" does not exist or is not writable',
-                dirname($file)
+                'Unable to write mail to file (directory "%s")',
+                $options->getPath()
             ));
         }
 
-        $email = $this->header . $this->EOL . $this->body;
-
-        if (!file_put_contents($file, $email)) {
-            throw new Exception\RuntimeException('Unable to send mail');
-        }
+        $this->lastFile = $file;
     }
 
     /**
-     * Returns the default callback for generating file names
-     *
-     * @return callback
-     */
-    public function getDefaultCallback()
-    {
-        return function($transport) {
-            return 'ZendMail_' . time() . '_' . mt_rand() . '.tmp';
-        };
-    }
-
-    /**
-     * Retrieve registered path
+     * Get the name of the last file written to
      * 
-     * @return string
+     * @return null|string
      */
-    public function getPath()
+    public function getLastFile()
     {
-        return $this->path;
-    }
-
-    /**
-     * Get the registered callback for generating file names
-     * 
-     * @return callback
-     */
-    public function getCallback()
-    {
-        return $this->callback;
+        return $this->lastFile;
     }
 }

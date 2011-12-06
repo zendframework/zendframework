@@ -543,4 +543,15 @@ class Message
         }
         $addressList->add($emailOrAddressOrList, $name);
     }
+
+    /**
+     * Serialize to string
+     * 
+     * @return string
+     */
+    public function toString()
+    {
+        $headers = $this->headers();
+        return $headers->toString() . "\r\n" . $this->getBodyText();
+    }
 }

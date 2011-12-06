@@ -24,12 +24,14 @@
  */
 namespace Zend\Mail\Transport;
 
-use Zend\Mail\AbstractProtocol,
+use Zend\Loader\Pluggable,
+    Zend\Mail\AbstractProtocol,
     Zend\Mail\AddressDescription,
     Zend\Mail\Headers,
     Zend\Mail\Message,
     Zend\Mail\Transport,
     Zend\Mail\Protocol\Smtp as SmtpProtocol,
+    Zend\Mail\Protocol\SmtpBroker,
     Zend\Mail\Protocol;
 
 /**
@@ -43,7 +45,7 @@ use Zend\Mail\AbstractProtocol,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Smtp implements Transport
+class Smtp implements Transport, Pluggable
 {
     /**
      * @var SmtpOptions
@@ -51,24 +53,14 @@ class Smtp implements Transport
     protected $options;
 
     /**
-     * EOL character string used by transport
-     * @var string
-     * @access public
-     */
-    public $EOL = "\n";
-
-    /**
-     * Config options for authentication
-     *
-     * @var array
-     */
-    protected $_config;
-
-    /**
      * @var SmtpProtocol
      */
     protected $connection;
 
+    /**
+     * @var SmtpBroker
+     */
+    protected $broker;
 
     /**
      * Constructor.
@@ -104,6 +96,50 @@ class Smtp implements Transport
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Set broker for obtaining SMTP protocol connection
+     *
+     * @param  SmtpBroker $value
+     * @return $this
+     */
+    public function setBroker($broker)
+    {
+        if (!$broker instanceof SmtpBroker) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an SmtpBroker argument; received "%s"',
+                __METHOD__,
+                (is_object($broker) ? get_class($broker) : gettype($broker))
+            ));
+        }
+        $this->broker = $broker;
+        return $this;
+    }
+    
+    /**
+     * Get broker for loading SMTP protocol connection
+     *
+     * @return SmtpBroker
+     */
+    public function getBroker()
+    {
+        if (null === $this->broker) {
+            $this->setBroker(new SmtpBroker());
+        }
+        return $this->broker;
+    }
+
+    /**
+     * Return an SMTP connection
+     * 
+     * @param  string $name 
+     * @param  array|null $options 
+     * @return \Zend\Mail\Protocol\Smtp
+     */
+    public function plugin($name, array $options = null)
+    {
+        return $this->getBroker()->load($name, $options);
     }
 
     /**
@@ -271,13 +307,9 @@ class Smtp implements Transport
     protected function lazyLoadConnection()
     {
         // Check if authentication is required and determine required class
-        $options         = $this->getOptions();
-        $connectionClass = 'Zend\Mail\Protocol\Smtp';
-        $authClass       = $options->getAuth();
-        if ($authClass) {
-            $connectionClass .= '\Auth\\' . ucwords($authClass);
-        }
-        $this->setConnection(new $connectionClass($options->getHost(), $options->getPort(), $options->getConnectionConfig()));
+        $options    = $this->getOptions();
+        $connection = $this->plugin($options->getConnectionClass(), $options->getConnectionConfig());
+        $this->connection = $connection;
         $this->connection->connect();
         $this->connection->helo($options->getName());
         return $this->connection;

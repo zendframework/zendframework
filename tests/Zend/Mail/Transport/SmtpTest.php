@@ -25,6 +25,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mail\Message,
     Zend\Mail\Transport,
     Zend\Mail\Transport\Smtp,
+    Zend\Mail\Transport\SmtpOptions,
     ZendTest\Mail\TestAsset\SmtpProtocolSpy;
 
 /**
@@ -85,5 +86,21 @@ class SmtpTest extends TestCase
         $this->assertContains("X-Foo-Bar: Matthew\r\n", $data);
         $this->assertContains("Sender: Ralph Schindler <ralph.schindler@zend.com>\r\n", $data);
         $this->assertContains("\r\n\r\nThis is only a test.", $data, $data);
+    }
+
+    public function testCanUseAuthenticationExtensionsViaPluginBroker()
+    {
+        $options    = new SmtpOptions(array(
+            'connection_class' => 'login',
+        ));
+        $transport  = new Smtp($options);
+        $connection = $transport->plugin($options->getConnectionClass(), array(array(
+            'username' => 'matthew',
+            'password' => 'password',
+            'host'     => 'localhost',
+        )));
+        $this->assertInstanceOf('Zend\Mail\Protocol\Smtp\Auth\Login', $connection);
+        $this->assertEquals('matthew', $connection->getUsername());
+        $this->assertEquals('password', $connection->getPassword());
     }
 }

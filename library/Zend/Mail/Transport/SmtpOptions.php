@@ -41,7 +41,7 @@ class SmtpOptions extends Options
     /**
      * @var string
      */
-    protected $auth;
+    protected $connectionClass = 'smtp';
 
     /**
      * Connection configuration (passed to the underlying Protocol class)
@@ -90,33 +90,34 @@ class SmtpOptions extends Options
     }
 
     /**
-     * Get authentication class
+     * Get connection class
      *
-     * This should be the classname of a class in the Zend\Mail\Protocol\Smtp\Auth 
+     * This should be either the class Zend\Mail\Protocol\Smtp or a class 
+     * extending it -- typically a class in the Zend\Mail\Protocol\Smtp\Auth
      * namespace.
      *
      * @return null|string
      */
-    public function getAuth() 
+    public function getConnectionClass() 
     {
-        return $this->auth;
+        return $this->connectionClass;
     }
 
     /**
-     * Set authentication class 
+     * Set connection class 
      *
-     * @param  string $authClass the value to be set
+     * @param  string $connectionClass the value to be set
      * @return SmtpOptions
      */
-    public function setAuth($authClass) 
+    public function setConnectionClass($connectionClass) 
     {
-        if (!is_string($credentials) && !is_null($credentials)) {
+        if (!is_string($connectionClass) && !is_null($connectionClass)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                'Authentication class must be a string or null; argument of type "%s" provided',
-                (is_object($authClass) ? get_class($authClass) : gettype($authClass))
+                'Connection class must be a string or null; argument of type "%s" provided',
+                (is_object($connectionClass) ? get_class($connectionClass) : gettype($connectionClass))
             ));
         }
-        $this->auth = $authClass;
+        $this->connectionClass = $connectionClass;
         return $this;
     }
 

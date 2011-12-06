@@ -23,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Mail\Protocol\Smtp\Auth;
+
 use Zend\Mail\Protocol\Smtp;
 
 /**
@@ -42,7 +43,7 @@ class Login extends Smtp
      *
      * @var string
      */
-    protected $_username;
+    protected $username;
 
 
     /**
@@ -50,7 +51,7 @@ class Login extends Smtp
      *
      * @var string
      */
-    protected $_password;
+    protected $password;
 
 
     /**
@@ -63,16 +64,28 @@ class Login extends Smtp
      */
     public function __construct($host = '127.0.0.1', $port = null, $config = null)
     {
-        if (is_array($config)) {
-            if (isset($config['username'])) {
-                $this->_username = $config['username'];
-            }
-            if (isset($config['password'])) {
-                $this->_password = $config['password'];
+        // Did we receive a configuration array?
+        $origConfig = $config;
+        if (is_array($host)) {
+            // Merge config array with principal array, if provided
+            if (is_array($config)) {
+                $config = array_replace_recursive($host, $config);
+            } else {
+                $config = $host;
             }
         }
 
-        parent::__construct($host, $port, $config);
+        if (is_array($config)) {
+            if (isset($config['username'])) {
+                $this->setUsername($config['username']);
+            }
+            if (isset($config['password'])) {
+                $this->setPassword($config['password']);
+            }
+        }
+
+        // Call parent with original arguments
+        parent::__construct($host, $port, $origConfig);
     }
 
 
@@ -88,10 +101,54 @@ class Login extends Smtp
 
         $this->_send('AUTH LOGIN');
         $this->_expect(334);
-        $this->_send(base64_encode($this->_username));
+        $this->_send(base64_encode($this->getUsername()));
         $this->_expect(334);
-        $this->_send(base64_encode($this->_password));
+        $this->_send(base64_encode($this->getPassword()));
         $this->_expect(235);
         $this->_auth = true;
+    }
+
+    /**
+     * Set value for username
+     *
+     * @param  string $value
+     * @return Login
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
+    
+    /**
+     * Get username
+     *
+     * @return null|string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set value for password
+     *
+     * @param  string $value
+     * @return Login
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+    
+    /**
+     * Get password
+     *
+     * @return null|string
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 }

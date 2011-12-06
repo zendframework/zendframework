@@ -78,6 +78,13 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('POST', $request->getMethod());
     }
 
+    public function testRequestCanAlwaysForcesUppecaseMethodName()
+    {
+        $request = new Request();
+        $request->setMethod('get');
+        $this->assertEquals('GET', $request->getMethod());
+    }
+
     public function testRequestCanSetAndRetrieveUri()
     {
         $request = new Request();

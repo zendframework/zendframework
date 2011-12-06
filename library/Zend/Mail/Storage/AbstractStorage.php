@@ -22,22 +22,21 @@
 /**
  * @namespace
  */
-namespace Zend\Mail;
-use Zend\Mail\Storage;
+namespace Zend\Mail\Storage;
+
+use ArrayAccess,
+    Countable,
+    SeekableIterator,
+    Zend\Mail\Storage;
 
 /**
- * @uses       ArrayAccess
- * @uses       Countable
- * @uses       OutOfBoundsException
- * @uses       SeekableIterator
- * @uses       \Zend\Mail\Storage\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIterator
+abstract class AbstractStorage implements Countable, ArrayAccess, SeekableIterator
 {
     /**
      * class capabilities with default values
@@ -66,7 +65,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      * used message class, change it in an extened class to extend the returned message class
      * @var string
      */
-    protected $_messageClass = '\Zend\Mail\Message';
+    protected $_messageClass = 'Zend\Mail\Storage\Message';
 
     /**
      * Getter for has-properties. The standard has properties
@@ -79,7 +78,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      *
      * @param  string $var  property name
      * @return bool         supported or not
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws Exception
      */
     public function __get($var)
     {
@@ -88,7 +87,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
             return isset($this->_has[$var]) ? $this->_has[$var] : null;
         }
 
-        throw new Storage\Exception\InvalidArgumentException($var . ' not found');
+        throw new Exception\InvalidArgumentException($var . ' not found');
     }
 
 
@@ -107,7 +106,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      * Count messages messages in current box/folder
      *
      * @return int number of messages
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws Exception
      */
     abstract public function countMessages();
 
@@ -125,7 +124,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      * Get a message with headers and body
      *
      * @param  $id int number of message
-     * @return \Zend\Mail\Message\Message
+     * @return Message
      */
     abstract public function getMessage($id);
 
@@ -153,7 +152,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      * Create instance with parameters
      *
      * @param  array $params mail reader specific parameters
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws Exception
      */
     abstract public function __construct($params);
 
@@ -197,7 +196,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      *
      * @param int|null $id message number
      * @return array|string message number for given message or all messages as array
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws Exception
      */
     abstract public function getUniqueId($id = null);
 
@@ -209,7 +208,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      *
      * @param string $id unique id
      * @return int message number
-     * @throws \Zend\Mail\Storage\Exception
+     * @throws Exception
      */
     abstract public function getNumberByUniqueId($id);
 
@@ -266,7 +265,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
       */
      public function offsetSet($id, $value)
      {
-        throw new Storage\Exception\RuntimeException('cannot write mail messages via array access');
+        throw new Exception\RuntimeException('cannot write mail messages via array access');
      }
 
 
@@ -301,7 +300,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
      /**
       * Iterator::current()
       *
-      * @return   \Zend\Mail\Message\Message current message
+      * @return   Message current message
       */
      public function current()
      {
@@ -350,7 +349,7 @@ abstract class AbstractStorage implements \Countable, \ArrayAccess, \SeekableIte
       *
       * @param  int $pos
       * @return void
-      * @throws OutOfBoundsException
+      * @throws Exception\OutOfBoundsException
       */
      public function seek($pos)
      {

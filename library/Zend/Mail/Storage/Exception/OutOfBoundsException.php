@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,8 +23,9 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Part\Exception;
-use Zend\Mail\Part\Exception;
+namespace Zend\Mail\Storage\Exception;
+
+use Zend\Mail\Storage\Exception;
 
 /**
  * Exception for Zend_Mail component.
@@ -31,11 +33,12 @@ use Zend\Mail\Part\Exception;
  * @uses       Zend\Exception
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
+class OutOfBoundsException
+    extends \OutOfBoundsException
     implements Exception
 {
 }

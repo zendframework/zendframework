@@ -25,18 +25,13 @@
  */
 namespace Zend\Mail\Protocol;
 
-use Zend\Mail\AbstractProtocol,
-    Zend\Mail\Protocol\Exception,
-    Zend\Mime\Mime;
+use Zend\Mime\Mime;
 
 /**
- * Smtp implementation of Zend_Mail_Protocol_Abstract
+ * Smtp implementation of Zend\Mail\Protocol\AbstractProtocol
  *
  * Minimum implementation according to RFC2821: EHLO, MAIL FROM, RCPT TO, DATA, RSET, NOOP, QUIT
  *
- * @uses       \Zend\Mail\Protocol\AbstractProtocol
- * @uses       \Zend\Mail\Protocol\Exception
- * @uses       \Zend\Mime\Mime
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol

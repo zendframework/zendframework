@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,23 +22,19 @@
 /**
  * @namespace
  */
-namespace Zend\Mail;
+namespace Zend\Mail\Storage;
 
-use Zend\Mime,
-    Zend\Mail\Exception;
+use RecursiveIterator,
+    Zend\Mime;
 
 /**
- * @uses       RecursiveIterator
- * @uses       \Zend\Mail\Exception
- * @uses       \Zend\Mail\MailPart
- * @uses       \Zend\Mime\Mime
- * @uses       \Zend\Mime\Decode
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Part implements \RecursiveIterator, MailPart
+class Part implements RecursiveIterator, MailPart
 {
     /**
      * headers of part as array
@@ -77,7 +74,7 @@ class Part implements \RecursiveIterator, MailPart
 
     /**
      * mail handler, if late fetch is active
-     * @var null|\Zend\Mail\AbstractStorage
+     * @var null|AbstractStorage
      */
     protected $_mail;
 
@@ -90,8 +87,8 @@ class Part implements \RecursiveIterator, MailPart
     /**
      * Public constructor
      *
-     * Zend_Mail_Part supports different sources for content. The possible params are:
-     * - handler    a instance of Zend_Mail_Storage_Abstract for late fetch
+     * Part supports different sources for content. The possible params are:
+     * - handler    an instance of AbstractStorage for late fetch
      * - id         number of message for handler
      * - raw        raw content with header and body as string
      * - headers    headers as array (name => value) or string, if a content part is found it's used as toplines
@@ -99,7 +96,7 @@ class Part implements \RecursiveIterator, MailPart
      * - content    content as string
      *
      * @param   array $params  full message with or without headers
-     * @throws  \Zend\Mail\Exception
+     * @throws  Exception
      */
     public function __construct(array $params)
     {
@@ -155,7 +152,7 @@ class Part implements \RecursiveIterator, MailPart
      * If part is multipart the raw content of this part with all sub parts is returned
      *
      * @return string body
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function getContent()
     {
@@ -177,7 +174,8 @@ class Part implements \RecursiveIterator, MailPart
      *
      * @return int size
      */
-    public function getSize() {
+    public function getSize() 
+    {
         return strlen($this->getContent());
     }
 
@@ -186,7 +184,7 @@ class Part implements \RecursiveIterator, MailPart
      * Cache content and split in parts if multipart
      *
      * @return null
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     protected function _cacheContent()
     {
@@ -218,8 +216,8 @@ class Part implements \RecursiveIterator, MailPart
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
-     * @return \Zend\Mail\Part wanted part
-     * @throws \Zend\Mail\Exception
+     * @return Part wanted part
+     * @throws Exception
      */
     public function getPart($num)
     {
@@ -300,12 +298,12 @@ class Part implements \RecursiveIterator, MailPart
      * Get a header in specificed format
      *
      * Internally headers that occur more than once are saved as array, all other as string. If $format
-     * is set to string implode is used to concat the values (with Zend_Mime::LINEEND as delim).
+     * is set to string implode is used to concat the values (with Mime::LINEEND as delim).
      *
      * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
      * @param  string $format change type of return value to 'string' or 'array'
      * @return string|array value of header in wanted or internal format
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function getHeader($name, $format = null)
     {
@@ -362,14 +360,14 @@ class Part implements \RecursiveIterator, MailPart
      * If the header occurs more than once, only the value from the first header
      * is returned.
      *
-     * Throws a Zend_Mail_Exception if the requested header does not exist. If
+     * Throws an Exception if the requested header does not exist. If
      * the specific header field does not exist, returns null.
      *
      * @param  string $name       name of header, like in getHeader()
      * @param  string $wantedPart the wanted part, default is first, if null an array with all parts is returned
      * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
-     * @throws Zend_Exception, \Zend\Mail\Exception
+     * @throws Exception
      */
     public function getHeaderField($name, $wantedPart = 0, $firstName = 0)
     {
@@ -380,13 +378,13 @@ class Part implements \RecursiveIterator, MailPart
     /**
      * Getter for mail headers - name is matched in lowercase
      *
-     * This getter is short for Zend_Mail_Part::getHeader($name, 'string')
+     * This getter is short for Part::getHeader($name, 'string')
      *
-     * @see \Zend\Mail\Part::getHeader()
+     * @see Part::getHeader()
      *
      * @param  string $name header name
      * @return string value of header
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function __get($name)
     {
@@ -396,9 +394,9 @@ class Part implements \RecursiveIterator, MailPart
     /**
      * Isset magic method proxy to hasHeader
      *
-     * This method is short syntax for Zend_Mail_Part::hasHeader($name);
+     * This method is short syntax for Part::hasHeader($name);
      *
-     * @see \Zend\Mail\Part::hasHeader
+     * @see Part::hasHeader
      *
      * @param  string
      * @return boolean
@@ -432,7 +430,7 @@ class Part implements \RecursiveIterator, MailPart
     /**
      * implements RecursiveIterator::getChildren()
      *
-     * @return \Zend\Mail\Part\Part same as self::current()
+     * @return Part same as self::current()
      */
     public function getChildren()
     {
@@ -475,7 +473,7 @@ class Part implements \RecursiveIterator, MailPart
     /**
      * implements Iterator::current()
      *
-     * @return \Zend\Mail\Part current part
+     * @return Part current part
      */
     public function current()
     {

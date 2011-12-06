@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,17 +22,15 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Part;
+namespace Zend\Mail\Storage\Part;
 
-use Zend\Mail\Part,
+use Zend\Mail\Storage\Part,
     Zend\Mime;
 
 /**
- * @uses       \Zend\Mail\Exception
- * @uses       \Zend\Mail\Part
- * @uses       \Zend\Mime\Decode
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -50,7 +49,7 @@ class File extends Part
      * - endPos   end position of message or part in file (default: end of file)
      *
      * @param   array $params  full message with or without headers
-     * @throws  \Zend\Mail\Exception
+     * @throws  Exception
      */
     public function __construct(array $params)
     {
@@ -134,7 +133,7 @@ class File extends Part
      * If part is multipart the raw content of this part with all sub parts is returned
      *
      * @return string body
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function getContent($stream = null)
     {
@@ -153,7 +152,8 @@ class File extends Part
      *
      * @return int size
      */
-    public function getSize() {
+    public function getSize() 
+    {
         return $this->_contentPos[1] - $this->_contentPos[0];
     }
 
@@ -161,8 +161,8 @@ class File extends Part
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
-     * @return \Zend\Mail\Part wanted part
-     * @throws \Zend\Mail\Exception
+     * @return Part wanted part
+     * @throws Exception
      */
     public function getPart($num)
     {

@@ -22,17 +22,18 @@
 /**
  * @namespace
  */
-namespace Zend\Mail;
+namespace Zend\Mail\Storage;
+
+use RecursiveIterator;
 
 /**
- * @uses       RecursiveIterator
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface MailPart extends \RecursiveIterator
+interface MailPart extends RecursiveIterator
 {
     /**
      * Check if part is a multipart message
@@ -48,7 +49,7 @@ interface MailPart extends \RecursiveIterator
      * If part is multipart the raw content of this part with all sub parts is returned
      *
      * @return string body
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function getContent();
 
@@ -63,8 +64,8 @@ interface MailPart extends \RecursiveIterator
      * Get part of multipart message
      *
      * @param  int $num number of part starting with 1 for first part
-     * @return \Zend\Mail\Part\Part wanted part
-     * @throws \Zend\Mail\Exception
+     * @return Part wanted part
+     * @throws Exception
      */
     public function getPart($num);
 
@@ -95,7 +96,7 @@ interface MailPart extends \RecursiveIterator
      * @param  string $name   name of header, matches case-insensitive, but camel-case is replaced with dashes
      * @param  string $format change type of return value to 'string' or 'array'
      * @return string|array value of header in wanted or internal format
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function getHeader($name, $format = null);
 
@@ -105,14 +106,14 @@ interface MailPart extends \RecursiveIterator
      * If the header occurs more than once, only the value from the first header
      * is returned.
      *
-     * Throws a Zend_Mail_Exception if the requested header does not exist. If
+     * Throws an Exception if the requested header does not exist. If
      * the specific header field does not exist, returns null.
      *
      * @param  string $name       name of header, like in getHeader()
      * @param  string $wantedPart the wanted part, default is first, if null an array with all parts is returned
      * @param  string $firstName  key name for the first part
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
-     * @throws Zend_Exception, \Zend\Mail\Exception
+     * @throws Exception
      */
     public function getHeaderField($name, $wantedPart = 0, $firstName = 0);
 
@@ -120,13 +121,13 @@ interface MailPart extends \RecursiveIterator
     /**
      * Getter for mail headers - name is matched in lowercase
      *
-     * This getter is short for Zend_Mail_Part::getHeader($name, 'string')
+     * This getter is short for Part::getHeader($name, 'string')
      *
-     * @see \Zend\Mail\Part::getHeader()
+     * @see Part::getHeader()
      *
      * @param  string $name header name
      * @return string value of header
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function __get($name);
 

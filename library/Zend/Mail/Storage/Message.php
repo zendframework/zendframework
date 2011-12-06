@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mail
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,20 +22,15 @@
 /**
  * @namespace
  */
-namespace Zend\Mail\Message;
-
-use Zend\Mail\MailMessage,
-    Zend\Mail\Part\File as FilePart;
+namespace Zend\Mail\Storage;
 
 /**
- * @uses       \Zend\Mail\MailMessage
- * @uses       \Zend\Mail\Part\File
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class File extends FilePart implements MailMessage
+class Message extends Part implements MailMessage
 {
     /**
      * flags for this message
@@ -45,14 +41,26 @@ class File extends FilePart implements MailMessage
     /**
      * Public constructor
      *
-     * In addition to the parameters of Zend_Mail_Part::__construct() this constructor supports:
-     * - flags array with flags for message, keys are ignored, use constants defined in Zend_Mail_Storage
+     * In addition to the parameters of Part::__construct() this constructor supports:
+     * - file  filename or file handle of a file with raw message content
+     * - flags array with flags for message, keys are ignored, use constants defined in \Zend\Mail\Storage
      *
      * @param  string $rawMessage  full message with or without headers
-     * @throws \Zend\Mail\Exception
+     * @throws Exception
      */
     public function __construct(array $params)
     {
+        if (isset($params['file'])) {
+            if (!is_resource($params['file'])) {
+                $params['raw'] = @file_get_contents($params['file']);
+                if ($params['raw'] === false) {
+                    throw new Exception\RuntimeException('could not open file');
+                }
+            } else {
+                $params['raw'] = stream_get_contents($params['file']);
+            }
+        }
+
         if (!empty($params['flags'])) {
             // set key and value to the same value for easy lookup
             $this->_flags = array_combine($params['flags'], $params['flags']);

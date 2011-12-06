@@ -25,14 +25,14 @@
 namespace Zend\Mail\Transport;
 
 use Zend\Loader\Pluggable,
-    Zend\Mail\AbstractProtocol,
     Zend\Mail\AddressDescription,
     Zend\Mail\Headers,
     Zend\Mail\Message,
     Zend\Mail\Transport,
+    Zend\Mail\Protocol,
+    Zend\Mail\Protocol\AbstractProtocol,
     Zend\Mail\Protocol\Smtp as SmtpProtocol,
-    Zend\Mail\Protocol\SmtpBroker,
-    Zend\Mail\Protocol;
+    Zend\Mail\Protocol\SmtpBroker;
 
 /**
  * SMTP connection object

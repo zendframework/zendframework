@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Mail;
+namespace Zend\Mail\Storage;
 
 /**
  * @category   Zend

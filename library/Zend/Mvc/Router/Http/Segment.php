@@ -42,14 +42,14 @@ class Segment implements Route
 {
     /**
      * Parts of the route.
-     * 
+     *
      * @var array
      */
     protected $parts;
-    
+
     /**
      * Regex used for matching the route.
-     * 
+     *
      * @var string
      */
     protected $string;
@@ -60,20 +60,20 @@ class Segment implements Route
      * @var array
      */
     protected $defaults;
-    
+
     /**
      * List of assembled parameters.
-     * 
+     *
      * @var array
      */
     protected $assembledParams = array();
 
     /**
      * Create a new regex route.
-     * 
+     *
      * @param  string $route
-     * @param  array  $constraints 
-     * @param  array  $defaults 
+     * @param  array  $constraints
+     * @param  array  $defaults
      * @return void
      */
     public function __construct($route, array $constraints = array(), array $defaults = array())
@@ -82,7 +82,7 @@ class Segment implements Route
         $this->parts    = $this->parseRouteDefinition($route);
         $this->regex    = $this->buildRegex($this->parts, $constraints);
     }
-    
+
     /**
      * factory(): defined by Route interface.
      *
@@ -92,13 +92,10 @@ class Segment implements Route
      */
     public static function factory($options = array())
     {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
-        }
-
-        // Convert options to array if Traversable object not implementing ArrayAccess
-        if ($options instanceof Traversable && !$options instanceof ArrayAccess) {
+        if ($options instanceof Traversable) {
             $options = IteratorToArray::convert($options);
+        } elseif (!is_array($options)) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
         }
 
         if (!isset($options['route'])) {
@@ -108,17 +105,17 @@ class Segment implements Route
         if (!isset($options['constraints'])) {
             $options['constraints'] = array();
         }
-        
+
         if (!isset($options['defaults'])) {
             $options['defaults'] = array();
         }
 
         return new static($options['route'], $options['constraints'], $options['defaults']);
     }
-    
+
     /**
      * Parse a route definition.
-     * 
+     *
      * @param  string $def
      * @return array
      */
@@ -129,49 +126,49 @@ class Segment implements Route
         $parts      = array();
         $levelParts = array(&$parts);
         $level      = 0;
-        
+
         while ($currentPos < $length) {
             preg_match('(\G(?<literal>[^:{\[\]]*)(?<token>[:{\[\]]|$))', $def, $matches, 0, $currentPos);
-            
+
             $currentPos += strlen($matches[0]);
-            
+
             if (!empty($matches['literal'])) {
                 $levelParts[$level][] = array('literal', $matches['literal']);
             }
-            
-            if ($matches['token'] === ':') {                
+
+            if ($matches['token'] === ':') {
                 if (isset($def[$currentPos]) && $def[$currentPos] === '{') {
                     if (!preg_match('(\G\{(?<name>[^}]+)\}:?)', $def, $matches, 0, $currentPos)) {
                         throw new Exception\RuntimeException('Translated parameter missing closing bracket');
                     }
-                    
+
                     $levelParts[$level][] = array('translated-parameter', $matches['name']);
                 } else {
                     if (!preg_match('(\G(?<name>[^:/{\[\]]+)(?:{(?<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
                         throw new Exception\RuntimeException('Found empty parameter name');
                     }
-                    
+
                     $levelParts[$level][] = array('parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null);
                 }
-                
+
                 $currentPos += strlen($matches[0]);
             } elseif ($matches['token'] === '{') {
                 if (!preg_match('(\G(?<literal>[^}]+)\})', $def, $matches, 0, $currentPos)) {
                     throw new Exception\RuntimeException('Translated literal missing closing bracket');
                 }
-                
+
                 $currentPos += strlen($matches[0]);
-                
-                $levelParts[$level][] = array('translated-literal', $matches['literal']); 
+
+                $levelParts[$level][] = array('translated-literal', $matches['literal']);
             } elseif ($matches['token'] === '[') {
                 $levelParts[$level][] = array('optional', array());
                 $levelParts[$level + 1] = &$levelParts[$level][count($levelParts[$level]) - 1][1];
-                
+
                 $level++;
             } elseif ($matches['token'] === ']') {
                 unset($levelParts[$level]);
                 $level--;
-                
+
                 if ($level < 0) {
                     throw new Exception\RuntimeException('Found closing bracket without matching opening bracket');
                 }
@@ -179,17 +176,17 @@ class Segment implements Route
                 break;
             }
         }
-        
+
         if ($level > 0) {
             throw new Exception\RuntimeException('Found unbalanced brackets');
         }
-        
+
         return $parts;
     }
-    
+
     /**
      * Build the matching regex from parsed parts.
-     * 
+     *
      * @param  array $parts
      * @param  array $constraints
      * @return string
@@ -197,13 +194,13 @@ class Segment implements Route
     protected function buildRegex(array $parts, array $constraints)
     {
         $regex = '';
-        
+
         foreach ($parts as $part) {
             switch ($part[0]) {
                 case 'literal':
                     $regex .= preg_quote($part[1]);
                     break;
-                               
+
                 case 'parameter':
                     if (isset($constraints[$part[1]])) {
                         $regex .= '(?<' . $part[1] . '>' . $constraints[$part[1]] . ')';
@@ -213,86 +210,91 @@ class Segment implements Route
                         $regex .= '(?<' . $part[1] . '>[^' . $part[2] . ']+)';
                     }
                     break;
-                
+
                 case 'optional':
                     $regex .= '(?:' . $this->buildRegex($part[1], $constraints) . ')?';
                     break;
-                
+
+                // @codeCoverageIgnoreStart
                 case 'translated-literal':
                     throw new Exception\RuntimeException('Translated literals are not implemented yet');
                     break;
-                
+
                 case 'translated-parameter':
                     throw new Exception\RuntimeException('Translated parameters are not implemented yet');
                     break;
+                // @codeCoverageIgnoreEnd
             }
         }
-        
+
         return $regex;
     }
-    
+
     /**
      * Build a path.
-     * 
+     *
      * @param  array   $parts
      * @param  array   $mergedParams
-     * @param  boolean $isRoot
+     * @param  boolean $isOptional
+     * @param  boolean $hasChild
      * @return string
      */
-    protected function buildPath(array $parts, array $mergedParams, $isRoot)
+    protected function buildPath(array $parts, array $mergedParams, $isOptional, $hasChild)
     {
         $path      = '';
         $skip      = true;
         $skippable = false;
-        
+
         foreach ($parts as $part) {
             switch ($part[0]) {
                 case 'literal':
                     $path .= $part[1];
                     break;
-                
+
                 case 'parameter':
                     $skippable = true;
-                    
+
                     if (!isset($mergedParams[$part[1]])) {
-                        if ($isRoot) {
+                        if (!$isOptional || $hasChild) {
                             throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $part[1]));
                         }
-        
-                        return null;
-                    } elseif (!isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
+
+                        return '';
+                    } elseif (!$isOptional || $hasChild || !isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
                         $skip = false;
                     }
-                    
+
                     $path .= urlencode($mergedParams[$part[1]]);
-                    
+
                     $this->assembledParams[] = $part[1];
                     break;
-                
+
                 case 'optional':
                     $skippable    = true;
-                    $optionalPart = $this->buildPath($part[1], $mergedParams, false);
-                    
+                    $optionalPart = $this->buildPath($part[1], $mergedParams, true, $hasChild);
+
                     if ($optionalPart !== null) {
                         $path .= $optionalPart;
                         $skip  = false;
                     }
                     break;
-                
+
+                // @codeCoverageIgnoreStart
                 case 'translated-literal':
                     throw new Exception\RuntimeException('Translated literals are not implemented yet');
                     break;
-                
+
                 case 'translated-parameter':
                     throw new Exception\RuntimeException('Translated parameters are not implemented yet');
                     break;
+                // @codeCoverageIgnoreEnd
             }
         }
-        
-        if (!$isRoot && $skippable && $skip) {
-            return null;
+
+        if ($isOptional && $skippable && $skip) {
+            return '';
         }
-        
+
         return $path;
     }
 
@@ -311,19 +313,19 @@ class Segment implements Route
 
         $uri  = $request->uri();
         $path = $uri->getPath();
-        
+
         if ($pathOffset !== null) {
             $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
         } else {
             $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
         }
-       
+
         if (!$result) {
             return null;
         }
-        
+
         $matchedLength = strlen($matches[0]);
-        
+
         foreach ($matches as $key => $value) {
             if (is_numeric($key) || is_int($key)) {
                 unset($matches[$key]);
@@ -346,13 +348,18 @@ class Segment implements Route
     public function assemble(array $params = array(), array $options = array())
     {
         $this->assembledParams = array();
-        
-        return $this->buildPath($this->parts, array_merge($this->defaults, $params), true);
+
+        return $this->buildPath(
+            $this->parts,
+            array_merge($this->defaults, $params),
+            false,
+            (isset($options['has_child']) ? $options['has_child'] : false)
+        );
     }
-    
+
     /**
      * getAssembledParams(): defined by Route interface.
-     * 
+     *
      * @see    Route::getAssembledParams
      * @return array
      */

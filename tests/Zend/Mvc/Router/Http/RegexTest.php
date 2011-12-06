@@ -3,7 +3,9 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
-    Zend\Mvc\Router\Http\Regex;
+    Zend\Stdlib\Request as BaseRequest,
+    Zend\Mvc\Router\Http\Regex,
+    ZendTest\Mvc\Router\FactoryTester;
 
 class RegexTest extends TestCase
 {
@@ -92,6 +94,38 @@ class RegexTest extends TestCase
         } else {
             $this->assertEquals($path, $result);
         }
+    }
+    
+    public function testNoMatchWithoutUriMethod()
+    {
+        $route   = new Regex('/foo', '/foo');
+        $request = new BaseRequest();
+        
+        $this->assertNull($route->match($request));
+    }
+    
+    public function testGetAssembledParams()
+    {
+        $route = new Regex('/(?<foo>.+)', '/%foo%');
+        $route->assemble(array('foo' => 'bar', 'baz' => 'bat'));
+        
+        $this->assertEquals(array('foo'), $route->getAssembledParams());
+    }
+    
+    public function testFactory()
+    {
+        $tester = new FactoryTester($this);
+        $tester->testFactory(
+            '\Zend\Mvc\Router\Http\Regex',
+            array(
+                'regex' => 'Missing "regex" in options array',
+                'spec'  => 'Missing "spec" in options array'
+            ),
+            array(
+                'regex' => '/foo',
+                'spec'  => '/foo'
+            )
+        );
     }
 }
 

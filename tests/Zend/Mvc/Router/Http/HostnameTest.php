@@ -3,8 +3,10 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
+    Zend\Stdlib\Request as BaseRequest,
     Zend\Uri\Http as HttpUri,
-    Zend\Mvc\Router\Http\Hostname;
+    Zend\Mvc\Router\Http\Hostname,
+    ZendTest\Mvc\Router\FactoryTester;
 
 class HostnameTest extends TestCase
 {
@@ -19,6 +21,11 @@ class HostnameTest extends TestCase
             'no-match-on-different-hostname' => array(
                 new Hostname('foo.example.com'),
                 'bar.example.com',
+                null
+            ),
+            'no-match-with-different-number-of-parts' => array(
+                new Hostname('foo.example.com'),
+                'example.com',
                 null
             ),
             'match-overrides-default' => array(
@@ -80,6 +87,46 @@ class HostnameTest extends TestCase
         
         $this->assertEquals('', $path);
         $this->assertEquals($hostname, $uri->getHost());
+    }
+   
+    public function testNoMatchWithoutUriMethod()
+    {
+        $route   = new Hostname('example.com');
+        $request = new BaseRequest();
+        
+        $this->assertNull($route->match($request));
+    }
+    
+    public function testAssemblingWithMissingParameter()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing parameter "foo"');
+        
+        $route = new Hostname(':foo.example.com');
+        $uri   = new HttpUri();
+        $route->assemble(array(), array('uri' => $uri));
+    }
+    
+    public function testGetAssembledParams()
+    {
+        $route = new Hostname(':foo.example.com');
+        $uri   = new HttpUri();
+        $route->assemble(array('foo' => 'bar', 'baz' => 'bat'), array('uri' => $uri));
+        
+        $this->assertEquals(array('foo'), $route->getAssembledParams());
+    }
+
+    public function testFactory()
+    {
+        $tester = new FactoryTester($this);
+        $tester->testFactory(
+            '\Zend\Mvc\Router\Http\Hostname',
+            array(
+                'route' => 'Missing "route" in options array'
+            ),
+            array(
+                'route' => 'example.com'
+            )
+        );
     }
 }
 

@@ -3,7 +3,9 @@ namespace ZendTest\Mvc\Router\Http;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request,
-    Zend\Mvc\Router\Http\Segment;
+    Zend\Stdlib\Request as BaseRequest,
+    Zend\Mvc\Router\Http\Segment,
+    ZendTest\Mvc\Router\FactoryTester;
 
 class SegmentTest extends TestCase
 {
@@ -120,7 +122,7 @@ class SegmentTest extends TestCase
             ),
         );
     }
-    
+
     public static function parseExceptionsProvider()
     {
         return array(
@@ -151,7 +153,7 @@ class SegmentTest extends TestCase
             ),
         );
     }
-    
+
     /**
      * @dataProvider routeProvider
      * @param        Segment $route
@@ -164,22 +166,22 @@ class SegmentTest extends TestCase
         $request = new Request();
         $request->setUri('http://example.com' . $path);
         $match = $route->match($request, $offset);
-        
+
         if ($params === null) {
             $this->assertNull($match);
         } else {
             $this->assertInstanceOf('Zend\Mvc\Router\Http\RouteMatch', $match);
-            
+
             if ($offset === null) {
-                $this->assertEquals(strlen($path), $match->getLength());            
+                $this->assertEquals(strlen($path), $match->getLength());
             }
-            
+
             foreach ($params as $key => $value) {
                 $this->assertEquals($value, $match->getParam($key));
             }
         }
     }
-    
+
     /**
      * @dataProvider routeProvider
      * @param        Segment $route
@@ -193,16 +195,16 @@ class SegmentTest extends TestCase
             // Data which will not match are not tested for assembling.
             return;
         }
-                
+
         $result = $route->assemble($params);
-        
+
         if ($offset !== null) {
             $this->assertEquals($offset, strpos($path, $result, $offset));
         } else {
             $this->assertEquals($path, $result);
         }
     }
-    
+
     /**
      * @dataProvider parseExceptionsProvider
      * @param        string $route
@@ -214,11 +216,54 @@ class SegmentTest extends TestCase
         $this->setExpectedException($exceptionName, $exceptionMessage);
         new Segment($route);
     }
-    
+
     public function testAssemblingWithMissingParameterInRoot()
     {
         $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Missing parameter "foo"');
-        $route = new Segment(':foo');
+        $route = new Segment('/:foo');
         $route->assemble();
+    }
+
+    public function testBuildTranslatedLiteral()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Translated literals are not implemented yet');
+        $route = new Segment('/{foo}');
+    }
+
+    public function testBuildTranslatedParameter()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Translated parameters are not implemented yet');
+        $route = new Segment('/:{foo}');
+    }
+
+    public function testNoMatchWithoutUriMethod()
+    {
+        $route   = new Segment('/foo');
+        $request = new BaseRequest();
+
+        $this->assertNull($route->match($request));
+    }
+
+    public function testAssemblingWithExistingChild()
+    {
+        $route = new Segment('/[:foo]', array(), array('foo' => 'bar'));
+        $path = $route->assemble(array(), array('has_child' => true));
+
+        $this->assertEquals('/bar', $path);
+    }
+
+    public function testFactory()
+    {
+        $tester = new FactoryTester($this);
+        $tester->testFactory(
+            '\Zend\Mvc\Router\Http\Segment',
+            array(
+                'route' => 'Missing "route" in options array'
+            ),
+            array(
+                'route'       => '/:foo[/:bar{-}]',
+                'constraints' => array('foo' => 'bar')
+            )
+        );
     }
 }

@@ -550,7 +550,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($wsdl->getComplexTypeStrategy() instanceof ComplexTypeStrategy\DefaultComplexType);
 
         $wsdl2 = new Wsdl('MyService', 'http://localhost/MyService.php', new \Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType);
-        $this->assertEquals('xsd:anyType',             $wsdl2->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
+        $this->assertEquals('xsd:anyType', $wsdl2->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
         $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof ComplexTypeStrategy\AnyType);
     }
 

@@ -26,7 +26,11 @@ namespace Zend\Soap;
 
 use Zend\Uri,
     Zend\Soap\Wsdl,
-    Zend\Soap\Wsdl\ComplexTypeStrategy;
+    Zend\Soap\Wsdl\ComplexTypeStrategy,
+    Zend\Server\Reflection\AbstractFunction,
+    Zend\Server\Reflection,
+    Zend\Server\Reflection\Prototype,
+    Zend\Server\Reflection\ReflectionParameter;
 
 /**
  * \Zend\Soap\AutoDiscover
@@ -103,7 +107,7 @@ class AutoDiscover
      */
     public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null)
     {
-        $this->_reflection = new \Zend\Server\Reflection();
+        $this->_reflection = new Reflection();
         if ($strategy !== null) {
             $this->setComplexTypeStrategy($strategy);
         }
@@ -343,6 +347,60 @@ class AutoDiscover
 
         return $wsdl;
     }
+    
+    /**
+     * Get the function parameters php type.
+     * 
+     * Default implementation assumes the default param doc-block tag.
+     * 
+     * @param ReflectionParameter $param
+     * @return string
+     */
+    protected function _getFunctionParameterType(ReflectionParameter $param)
+    {
+        return $param->getType();
+    }
+    
+    /**
+     * Get the functions return php type.
+     * 
+     * Default implementation assumes the value of the return doc-block tag.
+     * 
+     * @param AbstractFunction $function
+     * @param Prototype $prototype
+     * @return type 
+     */
+    protected function _getFunctionReturnType(AbstractFunction $function, Prototype $prototype)
+    {
+        return $prototype->getReturnType();
+    }
+    
+    /**
+     * Detect if the function is a one-way or two-way operation.
+     * 
+     * Default implementation assumes one-way, when return value is "void".
+     * 
+     * @param AbstractFunction $function
+     * @param Prototype $prototype
+     * @return type 
+     */
+    protected function _isFunctionOneWay(AbstractFunction $function, Prototype $prototype)
+    {
+        return $prototype->getReturnType() == 'void';
+    }
+    
+    /**
+     * Detect the functions documentation.
+     * 
+     * Default implementation uses docblock description.
+     * 
+     * @param AbstractFunction $function
+     * @return type 
+     */
+    protected function _getFunctionDocumentation(AbstractFunction $function)
+    {
+        return $function->getDescription();
+    }
 
     /**
      * Add a function to the WSDL document.
@@ -381,7 +439,7 @@ class AutoDiscover
             foreach ($prototype->getParameters() as $param) {
                 $sequenceElement = array(
                     'name' => $param->getName(),
-                    'type' => $wsdl->getType($param->getType())
+                    'type' => $wsdl->getType($this->_getFunctionParameterType($param))
                 );
                 if ($param->isOptional()) {
                     $sequenceElement['nillable'] = 'true';
@@ -397,15 +455,12 @@ class AutoDiscover
         } else {
             // RPC style: add each parameter as a typed part
             foreach ($prototype->getParameters() as $param) {
-                $args[$param->getName()] = array('type' => $wsdl->getType($param->getType()));
+                $args[$param->getName()] = array('type' => $wsdl->getType($this->_getFunctionParameterType($param)));
             }
         }
         $wsdl->addMessage($functionName . 'In', $args);
 
-        $isOneWayMessage = false;
-        if($prototype->getReturnType() == "void") {
-            $isOneWayMessage = true;
-        }
+        $isOneWayMessage = $this->_isFunctionOneWay($function, $prototype);
 
         if($isOneWayMessage == false) {
             // Add the output message (return value)
@@ -416,7 +471,7 @@ class AutoDiscover
                 if ($prototype->getReturnType() != "void") {
                     $sequence[] = array(
                         'name' => $functionName . 'Result',
-                        'type' => $wsdl->getType($prototype->getReturnType())
+                        'type' => $wsdl->getType($this->_getFunctionReturnType($function, $prototype))
                     );
                 }
                 $element = array(
@@ -427,7 +482,7 @@ class AutoDiscover
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
             } else if ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
-                $args['return'] = array('type' => $wsdl->getType($prototype->getReturnType()));
+                $args['return'] = array('type' => $wsdl->getType($this->_getFunctionReturnType($function, $prototype)));
             }
             $wsdl->addMessage($functionName . 'Out', $args);
         }
@@ -438,7 +493,7 @@ class AutoDiscover
         } else {
             $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', false);
         }
-        $desc = $function->getDescription();
+        $desc = $this->_getFunctionDocumentation($function);
         if (strlen($desc) > 0) {
             $wsdl->addDocumentation($portOperation, $desc);
         }

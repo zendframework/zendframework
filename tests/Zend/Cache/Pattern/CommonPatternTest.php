@@ -68,9 +68,9 @@ class CommonPatternTest extends \PHPUnit_Framework_TestCase
 
     public function testOptionsGetAndSetDefault()
     {
-        $options = $this->_storage->getOptions();
-        $this->_storage->setOptions($options);
-        $this->assertEquals($options, $this->_storage->getOptions());
+        $options = $this->_pattern->getOptions();
+        $this->_pattern->setOptions($options);
+        $this->assertEquals($options, $this->_pattern->getOptions());
     }
 
     public function testOptionsFluentInterface()
@@ -87,8 +87,8 @@ class CommonPatternTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertSame(
-            $this->_storage,
-            $this->_storage->setOptions(array()),
+            $this->_pattern,
+            $this->_pattern->setOptions(array()),
             "Method 'setOptions' doesn't implement the fluent interface"
         );
     }

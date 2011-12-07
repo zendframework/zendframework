@@ -173,7 +173,6 @@ class ConfigListener extends AbstractListener implements ConfigMerger
                             (is_object($config) ? get_class($config) : gettype($config))
                         ));
                     }
-                    $config = $config;
                     break;
 
                 case 'xml':

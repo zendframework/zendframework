@@ -22,9 +22,10 @@
 /**
  * @namespace
  */
-namespace ZendTest\Mail;
-use Zend\Mail\Storage;
-use Zend\Mail\Protocol;
+namespace ZendTest\Mail\Storage;
+
+use Zend\Mail\Protocol,
+    Zend\Mail\Storage;
 
 /**
  * @category   Zend
@@ -58,7 +59,7 @@ class Pop3Test extends \PHPUnit_Framework_TestCase
             }
 
             $this->_cleanDir(TESTS_ZEND_MAIL_SERVER_TESTDIR);
-            $this->_copyDir(__DIR__ . '/_files/test.' . TESTS_ZEND_MAIL_SERVER_FORMAT,
+            $this->_copyDir(__DIR__ . '/../_files/test.' . TESTS_ZEND_MAIL_SERVER_FORMAT,
                             TESTS_ZEND_MAIL_SERVER_TESTDIR);
         }
     }

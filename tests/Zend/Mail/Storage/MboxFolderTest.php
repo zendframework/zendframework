@@ -22,9 +22,9 @@
 /**
  * @namespace
  */
-namespace ZendTest\Mail;
-use Zend\Mail\Storage\Folder;
+namespace ZendTest\Mail\Storage;
 
+use Zend\Mail\Storage\Folder;
 
 /**
  * @category   Zend
@@ -34,28 +34,22 @@ use Zend\Mail\Storage\Folder;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
-class MaildirFolderTest extends \PHPUnit_Framework_TestCase
+class MboxFolderTest extends \PHPUnit_Framework_TestCase
 {
     protected $_params;
     protected $_originalDir;
     protected $_tmpdir;
-    protected $_subdirs = array('.', '.subfolder', '.subfolder.test');
+    protected $_subdirs = array('.', 'subfolder');
 
     public function setUp()
     {
-        $this->_originalDir = __DIR__ . '/_files/test.maildir/';
-
-        if (!is_dir($this->_originalDir . '/cur/')) {
-            $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
-                                 . 'directory before enabling the maildir tests');
-            return;
-        }
+        $this->_originalDir = __DIR__ . '/../_files/test.mbox/';
 
         if ($this->_tmpdir == null) {
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
+                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -74,47 +68,36 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
         $this->_params = array();
         $this->_params['dirname'] = $this->_tmpdir;
+        $this->_params['folder']  = 'INBOX';
 
         foreach ($this->_subdirs as $dir) {
             if ($dir != '.') {
                 mkdir($this->_tmpdir . $dir);
             }
-            foreach (array('cur', 'new') as $subdir) {
-                if (!file_exists($this->_originalDir . $dir . '/' . $subdir)) {
+            $dh = opendir($this->_originalDir . $dir);
+            while (($entry = readdir($dh)) !== false) {
+                $entry = $dir . '/' . $entry;
+                if (!is_file($this->_originalDir . $entry)) {
                     continue;
                 }
-                mkdir($this->_tmpdir . $dir . '/' . $subdir);
-                $dh = opendir($this->_originalDir . $dir . '/' . $subdir);
-                while (($entry = readdir($dh)) !== false) {
-                    $entry = $dir . '/' . $subdir . '/' . $entry;
-                    if (!is_file($this->_originalDir . $entry)) {
-                        continue;
-                    }
-                    copy($this->_originalDir . $entry, $this->_tmpdir . $entry);
-                }
-                closedir($dh);
+                copy($this->_originalDir . $entry, $this->_tmpdir . $entry);
             }
+            closedir($dh);
         }
     }
 
     public function tearDown()
     {
         foreach (array_reverse($this->_subdirs) as $dir) {
-            foreach (array('cur', 'new') as $subdir) {
-                if (!file_exists($this->_tmpdir . $dir . '/' . $subdir)) {
+            $dh = opendir($this->_tmpdir . $dir);
+            while (($entry = readdir($dh)) !== false) {
+                $entry = $this->_tmpdir . $dir . '/' . $entry;
+                if (!is_file($entry)) {
                     continue;
                 }
-                $dh = opendir($this->_tmpdir . $dir . '/' . $subdir);
-                while (($entry = readdir($dh)) !== false) {
-                    $entry = $this->_tmpdir . $dir . '/' . $subdir . '/' . $entry;
-                    if (!is_file($entry)) {
-                        continue;
-                    }
-                    unlink($entry);
-                }
-                closedir($dh);
-                rmdir($this->_tmpdir . $dir . '/' . $subdir);
+                unlink($entry);
             }
+            closedir($dh);
             if ($dir != '.') {
                 rmdir($this->_tmpdir . $dir);
             }
@@ -124,25 +107,25 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     public function testLoadOk()
     {
         try {
-            $mail = new Folder\Maildir($this->_params);
+            $mail = new Folder\Mbox($this->_params);
         } catch (\Exception $e) {
-            $this->fail('exception raised while loading Maildir folder');
+            $this->fail('exception raised while loading mbox folder');
         }
     }
 
     public function testLoadConfig()
     {
         try {
-            $mail = new Folder\Maildir(new \Zend\Config\Config($this->_params));
+            $mail = new Folder\Mbox(new \Zend\Config\Config($this->_params));
         } catch (\Exception $e) {
-            $this->fail('exception raised while loading Maildir folder');
+            $this->fail('exception raised while loading mbox folder');
         }
     }
 
     public function testNoParams()
     {
         try {
-            $mail = new Folder\Maildir(array());
+            $mail = new Folder\Mbox(array());
         } catch (\Exception $e) {
             return; // test ok
         }
@@ -150,10 +133,22 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         $this->fail('no exception raised with empty params');
     }
 
+    public function testFilenameParam()
+    {
+        try {
+            // filename is not allowed in this subclass
+            $mail = new Folder\Mbox(array('filename' => 'foobar'));
+        } catch (\Exception $e) {
+            return; // test ok
+        }
+
+        $this->fail('no exception raised with filename as param');
+    }
+
     public function testLoadFailure()
     {
         try {
-            $mail = new Folder\Maildir(array('dirname' => 'This/Folder/Does/Not/Exist'));
+            $mail = new Folder\Mbox(array('dirname' => 'This/Folder/Does/Not/Exist'));
         } catch (\Exception $e) {
             return; // test ok
         }
@@ -165,7 +160,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
     {
         $this->_params['folder'] = 'UnknownFolder';
         try {
-            $mail = new Folder\Maildir($this->_params);
+            $mail = new Folder\Mbox($this->_params);
         } catch (\Exception $e) {
             return; // test ok
         }
@@ -175,19 +170,31 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testChangeFolder()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         try {
-            $mail->selectFolder('subfolder.test');
+            $mail->selectFolder(DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test');
         } catch (\Exception $e) {
             $this->fail('exception raised while selecting existing folder');
         }
 
-        $this->assertEquals($mail->getCurrentFolder(), 'subfolder.test');
+        $this->assertEquals($mail->getCurrentFolder(), DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test');
+    }
+
+    public function testChangeFolderUnselectable()
+    {
+        $mail = new Folder\Mbox($this->_params);
+        try {
+            $mail->selectFolder(DIRECTORY_SEPARATOR . 'subfolder');
+        } catch (\Exception $e) {
+            return; // test ok
+        }
+
+        $this->fail('no exception raised while selecting unselectable folder');
     }
 
     public function testUnknownFolder()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         try {
             $mail->selectFolder('/Unknown/Folder/');
         } catch (\Exception $e) {
@@ -199,18 +206,18 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testGlobalName()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         try {
             // explicit call of __toString() needed for PHP < 5.2
-            $this->assertEquals($mail->getFolders()->subfolder->__toString(), 'subfolder');
-        } catch (\Exception $e) {
+            $this->assertEquals($mail->getFolders()->subfolder->__toString(), DIRECTORY_SEPARATOR . 'subfolder');
+        } catch (\Zend\Mail\Exception $e) {
             $this->fail('exception raised while selecting existing folder and getting global name');
         }
     }
 
     public function testLocalName()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         try {
             $this->assertEquals($mail->getFolders()->subfolder->key(), 'test');
         } catch (\Exception $e) {
@@ -220,12 +227,12 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testIterator()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume a order while iterating
-        $search_folders = array('subfolder'      => 'subfolder',
-                                'subfolder.test' => 'test',
-                                'INBOX'          => 'INBOX');
+        $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
+                                DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
+                                DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -242,32 +249,12 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testKeyLocalName()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
         // we search for this folder because we can't assume a order while iterating
-        $search_folders = array('subfolder'      => 'subfolder',
-                                'subfolder.test' => 'test',
-                                'INBOX'          => 'INBOX');
-        $found_folders = array();
-
-        foreach ($iterator as $localName => $folder) {
-            if (!isset($search_folders[$folder->getGlobalName()])) {
-                continue;
-            }
-
-            // explicit call of __toString() needed for PHP < 5.2
-            $found_folders[$folder->__toString()] = $localName;
-        }
-
-        $this->assertEquals($search_folders, $found_folders);
-    }
-
-    public function testInboxEquals()
-    {
-        $mail = new Folder\Maildir($this->_params);
-        $iterator = new \RecursiveIteratorIterator($mail->getFolders('INBOX.subfolder'), \RecursiveIteratorIterator::SELF_FIRST);
-        // we search for this folder because we can't assume a order while iterating
-        $search_folders = array('subfolder.test' => 'test');
+        $search_folders = array(DIRECTORY_SEPARATOR . 'subfolder'                                => 'subfolder',
+                                DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test' => 'test',
+                                DIRECTORY_SEPARATOR . 'INBOX'                                    => 'INBOX');
         $found_folders = array();
 
         foreach ($iterator as $localName => $folder) {
@@ -284,7 +271,7 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testSelectable()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         $iterator = new \RecursiveIteratorIterator($mail->getFolders(), \RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($iterator as $localName => $folder) {
@@ -295,103 +282,112 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testCount()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
 
         $count = $mail->countMessages();
-        $this->assertEquals(5, $count);
+        $this->assertEquals(7, $count);
 
-        $mail->selectFolder('subfolder.test');
+        $mail->selectFolder(DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test');
         $count = $mail->countMessages();
         $this->assertEquals(1, $count);
     }
 
     public function testSize()
     {
-        $mail = new Folder\Maildir($this->_params);
-        $shouldSizes = array(1 => 397, 89, 694, 452, 497);
+        $mail = new Folder\Mbox($this->_params);
+        $shouldSizes = array(1 => 397, 89, 694, 452, 497, 101, 139);
 
         $sizes = $mail->getSize();
         $this->assertEquals($shouldSizes, $sizes);
 
-        $mail->selectFolder('subfolder.test');
+        $mail->selectFolder(DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test');
         $sizes = $mail->getSize();
-        $this->assertEquals(array(1 => 467), $sizes);
+        $this->assertEquals(array(1 => 410), $sizes);
     }
 
     public function testFetchHeader()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
 
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Simple Message', $subject);
 
-        $mail->selectFolder('subfolder.test');
+        $mail->selectFolder(DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test');
         $subject = $mail->getMessage(1)->subject;
         $this->assertEquals('Message in subfolder', $subject);
     }
 
-    public function testNotReadableFolder()
+    public function testSleepWake()
     {
-        $stat = stat($this->_params['dirname'] . '.subfolder');
-        chmod($this->_params['dirname'] . '.subfolder', 0);
-        clearstatcache();
-        $statcheck = stat($this->_params['dirname'] . '.subfolder');
-        if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
-            chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
-            $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
-            return;
-        }
+        $mail = new Folder\Mbox($this->_params);
 
-        $check = false;
-        try {
-            $mail = new Folder\Maildir($this->_params);
-        } catch (\Exception $e) {
-            $check = true;
-            // test ok
-        }
+        $mail->selectFolder(DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test');
+        $count = $mail->countMessages();
+        $content = $mail->getMessage(1)->getContent();
 
-        chmod($this->_params['dirname'] . '.subfolder', $stat['mode']);
+        $serialzed = serialize($mail);
+        $mail = null;
+        $mail = unserialize($serialzed);
 
-        if (!$check) {
-           $this->fail('no exception while loading invalid dir with subfolder not readable');
-        }
+        $this->assertEquals($mail->countMessages(), $count);
+        $this->assertEquals($mail->getMessage(1)->getContent(), $content);
+
+        $mail->selectFolder(DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'test');
+        $this->assertEquals($mail->countMessages(), $count);
+        $this->assertEquals($mail->getMessage(1)->getContent(), $content);
     }
 
-    public function testNotReadableMaildir()
+    public function testNotMboxFile()
     {
-        $stat = stat($this->_params['dirname']);
-        chmod($this->_params['dirname'], 0);
+        touch($this->_params['dirname'] . 'foobar');
+        $mail = new Folder\Mbox($this->_params);
+
+        try {
+            $mail->getFolders()->foobar;
+        } catch (\Exception $e) {
+            return; // ok
+        }
+
+        $this->fail('file, which is not mbox, got parsed');
+    }
+
+    public function testNotReadableFolder()
+    {
+        $stat = stat($this->_params['dirname'] . 'subfolder');
+        chmod($this->_params['dirname'] . 'subfolder', 0);
         clearstatcache();
-        $statcheck = stat($this->_params['dirname']);
+        $statcheck = stat($this->_params['dirname'] . 'subfolder');
         if ($statcheck['mode'] % (8 * 8 * 8) !== 0) {
-            chmod($this->_params['dirname'], $stat['mode']);
+            chmod($this->_params['dirname'] . 'subfolder', $stat['mode']);
             $this->markTestSkipped('cannot remove read rights, which makes this test useless (maybe you are using Windows?)');
             return;
         }
 
         $check = false;
         try {
-            $mail = new Folder\Maildir($this->_params);
+            $mail = new Folder\Mbox($this->_params);
         } catch (\Exception $e) {
             $check = true;
             // test ok
         }
 
-        chmod($this->_params['dirname'], $stat['mode']);
+        chmod($this->_params['dirname'] . 'subfolder', $stat['mode']);
 
         if (!$check) {
-           $this->fail('no exception while loading not readable maildir');
+            if (function_exists('posix_getuid') && posix_getuid() === 0) {
+                $this->markTestSkipped('seems like you are root and we therefore cannot test the error handling');
+            }
+            $this->fail('no exception while loading invalid dir with subfolder not readable');
         }
     }
 
     public function testGetInvalidFolder()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
-
+        $root->foobar = new Folder('x', 'x');
         try {
-            $mail->selectFolder('foobar');
+            $mail->getFolders('foobar');
         } catch (\Exception $e) {
             return; // ok
         }
@@ -401,9 +397,9 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetVanishedFolder()
     {
-        $mail = new Folder\Maildir($this->_params);
+        $mail = new Folder\Mbox($this->_params);
         $root = $mail->getFolders();
-        $root->foobar = new Folder('foobar', 'foobar');
+        $root->foobar = new Folder('foobar', DIRECTORY_SEPARATOR . 'foobar');
 
         try {
             $mail->selectFolder('foobar');
@@ -412,33 +408,5 @@ class MaildirFolderTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->fail('no error while getting vanished folder');
-    }
-
-    public function testGetNotSelectableFolder()
-    {
-        $mail = new Folder\Maildir($this->_params);
-        $root = $mail->getFolders();
-        $root->foobar = new Folder('foobar', 'foobar', false);
-
-        try {
-            $mail->selectFolder('foobar');
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('no error while getting not selectable folder');
-    }
-
-    public function testWithAdditionalFolder()
-    {
-        mkdir($this->_params['dirname'] . '.xyyx');
-        mkdir($this->_params['dirname'] . '.xyyx/cur');
-
-        $mail = new Folder\Maildir($this->_params);
-        $mail->selectFolder('xyyx');
-        $this->assertEquals($mail->countMessages(), 0);
-
-        rmdir($this->_params['dirname'] . '.xyyx/cur');
-        rmdir($this->_params['dirname'] . '.xyyx');
     }
 }

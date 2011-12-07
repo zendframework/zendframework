@@ -22,7 +22,8 @@
 /**
  * @namespace
  */
-namespace ZendTest\Mail;
+namespace ZendTest\Mail\Storage;
+
 use Zend\Mail\Storage;
 
 /**
@@ -45,7 +46,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
+                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);
@@ -62,7 +63,7 @@ class MboxTest extends \PHPUnit_Framework_TestCase
             }
         }
 
-        $this->_mboxOriginalFile = __DIR__ . '/_files/test.mbox/INBOX';
+        $this->_mboxOriginalFile = __DIR__ . '/../_files/test.mbox/INBOX';
         $this->_mboxFile = $this->_tmpdir . 'INBOX';
 
         copy($this->_mboxOriginalFile, $this->_mboxFile);

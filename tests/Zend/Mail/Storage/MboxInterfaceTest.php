@@ -22,9 +22,9 @@
 /**
  * @namespace
  */
-namespace ZendTest\Mail;
-use Zend\Mail\Storage;
+namespace ZendTest\Mail\Storage;
 
+use Zend\Mail\Storage;
 
 /**
  * @category   Zend
@@ -40,7 +40,7 @@ class InterfaceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_mboxFile = __DIR__ . '/_files/test.mbox/INBOX';
+        $this->_mboxFile = __DIR__ . '/../_files/test.mbox/INBOX';
     }
 
     public function testCount()

@@ -22,9 +22,9 @@
 /**
  * @namespace
  */
-namespace ZendTest\Mail;
-use Zend\Mail\Storage;
+namespace ZendTest\Mail\Storage;
 
+use Zend\Mail\Storage;
 
 /**
  * @category   Zend
@@ -42,7 +42,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_originalMaildir = __DIR__ . '/_files/test.maildir/';
+        $this->_originalMaildir = __DIR__ . '/../_files/test.maildir/';
         if (!is_dir($this->_originalMaildir . '/cur/')) {
             $this->markTestSkipped('You have to unpack maildir.tar in Zend/Mail/_files/test.maildir/ '
                                  . 'directory before enabling the maildir tests');
@@ -53,7 +53,7 @@ class MaildirTest extends \PHPUnit_Framework_TestCase
             if (TESTS_ZEND_MAIL_TEMPDIR != null) {
                 $this->_tmpdir = TESTS_ZEND_MAIL_TEMPDIR;
             } else {
-                $this->_tmpdir = __DIR__ . '/_files/test.tmp/';
+                $this->_tmpdir = __DIR__ . '/../_files/test.tmp/';
             }
             if (!file_exists($this->_tmpdir)) {
                 mkdir($this->_tmpdir);

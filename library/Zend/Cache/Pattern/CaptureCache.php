@@ -54,11 +54,21 @@ class CaptureCache extends AbstractPattern
      */
     protected $_tags = array();
 
+    /**
+     * Constructor
+     *
+     * @param array|Traversable $options
+     */
     public function __construct($options = array())
     {
         parent::__construct($options);
     }
 
+    /**
+     * Get all pattern options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return array(
@@ -69,34 +79,67 @@ class CaptureCache extends AbstractPattern
         );
     }
 
+    /**
+     * Set public directory
+     *
+     * @param null|string $dir
+     * @return CaptureCache
+     */
     public function setPublicDir($dir)
     {
         $this->_publicDir = $dir;
         return $this;
     }
 
+    /**
+     * Get public directory
+     *
+     * @return null|string
+     */
     public function getPublicDir()
     {
         return $this->_publicDir;
     }
 
+    /**
+     * Set index filename
+     *
+     * @param string $filename
+     * @return CaptureCache
+     */
     public function setIndexFilename($filename)
     {
         $this->_indexFilename = (string)$filename;
         return $this;
     }
 
+    /**
+     * Get index filename
+     *
+     * @return string
+     */
     public function getIndexFilename()
     {
         return $this->_indexFilename;
     }
 
+    /**
+     * Set file locking
+     *
+     * @param bool $flag
+     * @return CaptureCache
+     */
     public function setFileLocking($flag)
     {
         $this->_fileLocking = (boolean)$flag;
         return $this;
     }
 
+    /**
+     * Get file locking
+     *
+     * @return bool
+     */
     public function getFileLocking()
     {
         return $this->_fileLocking;
@@ -106,7 +149,7 @@ class CaptureCache extends AbstractPattern
      * Set a storage for tagging
      *
      * @param \Zend\Cache\Storage\Adapter $storage
-     * @return \Zend\Cache\Pattern\CaptureCache
+     * @return CaptureCache
      */
     public function setTagStorage(Adapter $storage)
     {
@@ -128,7 +171,7 @@ class CaptureCache extends AbstractPattern
      * Set cache item key to store tags
      *
      * @param $tagKey string
-     * @return Zend\Cache\Pattern\CaptureCache
+     * @return CaptureCache
      */
     public function setTagKey($tagKey)
     {
@@ -154,7 +197,7 @@ class CaptureCache extends AbstractPattern
      * Set tags to store
      *
      * @param array $tags
-     * @return Zend\Cache\Pattern\CaptureCache
+     * @return CaptureCache
      */
     public function setTags(array $tags)
     {
@@ -205,6 +248,14 @@ class CaptureCache extends AbstractPattern
         return false;
     }
 
+    /**
+     * Get from cache
+     *
+     * @param null|string $pageId
+     * @param array $options
+     * @return bool|string
+     * @throws RuntimeException
+     */
     public function get($pageId = null, array $options = array())
     {
         if (($pageId = (string)$pageId) === '') {
@@ -226,6 +277,13 @@ class CaptureCache extends AbstractPattern
         return false;
     }
 
+    /**
+     * Checks if a cache with given id exists
+     *
+     * @param null|string $pageId
+     * @param array $options
+     * @return bool
+     */
     public function exists($pageId = null, array $options = array())
     {
         if (($pageId = (string)$pageId) === '') {
@@ -239,6 +297,14 @@ class CaptureCache extends AbstractPattern
         return file_exists($file);
     }
 
+    /**
+     * Remove from cache
+     *
+     * @param null|string $pageId
+     * @param array $options
+     * @throws RuntimeException
+     * @return void
+     */
     public function remove($pageId = null, array $options = array())
     {
         if (($pageId = (string)$pageId) === '') {
@@ -257,6 +323,9 @@ class CaptureCache extends AbstractPattern
         }
     }
 
+    /**
+     * Clear cache
+     */
     public function clear(/*TODO*/)
     {
         // TODO
@@ -272,6 +341,12 @@ class CaptureCache extends AbstractPattern
         return $_SERVER['REQUEST_URI'];
     }
 
+    /**
+     * Get filename for page id
+     *
+     * @param string $pageId
+     * @return string
+     */
     protected function _pageId2Filename($pageId)
     {
         $filename = basename($pageId);
@@ -283,6 +358,12 @@ class CaptureCache extends AbstractPattern
         return $filename;
     }
 
+    /**
+     * Get path for page id
+     *
+     * @param string $pageId
+     * @return string
+     */
     protected function _pageId2Path($pageId)
     {
         $path = rtrim(dirname($pageId), '/');
@@ -310,6 +391,12 @@ class CaptureCache extends AbstractPattern
         return false;
     }
 
+    /**
+     * Save the cache
+     *
+     * @param  $output
+     * @throws RuntimeException
+     */
     protected function _save($output)
     {
         $path     = $this->_pageId2Path($this->_pageId);

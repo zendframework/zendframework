@@ -17,8 +17,19 @@ class OutputCache extends AbstractPattern
      */
     protected $_storage;
 
+    /**
+     * The key stack
+     *
+     * @var array
+     */
     protected $_keyStack = array();
 
+    /**
+     * Constructor
+     *
+     * @param array|Traversable $options
+     * @throws InvalidArgumentException
+     */
     public function __construct($options = array())
     {
         parent::__construct($options);
@@ -28,6 +39,11 @@ class OutputCache extends AbstractPattern
         }
     }
 
+    /**
+     * Get all pattern options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         $options = parent::getOptions();

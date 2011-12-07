@@ -22,6 +22,12 @@ class CallbackCache extends AbstractPattern
      */
     protected $_cacheOutput = true;
 
+    /**
+     * Constructor
+     *
+     * @param array|Traversable $options
+     * @throws InvalidArgumentException
+     */
     public function __construct($options = array())
     {
         parent::__construct($options);
@@ -31,6 +37,11 @@ class CallbackCache extends AbstractPattern
         }
     }
 
+    /**
+     * Get all pattern options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         $options = parent::getOptions();
@@ -180,6 +191,17 @@ class CallbackCache extends AbstractPattern
         return $this->_generateKey($callback, $args, $options);
     }
 
+    /**
+     * Generate a unique key in base of a key representing the callback part
+     * and a key representing the arguments part merged using md5($callbackKey.$argumentsKey).
+     *
+     * @param  callback   $callback  A valid callback
+     * @param  array      $args      Callback arguments
+     * @param  array      $options   Options
+     * @return string
+     * @throws \Zend\Cache\Exception\InvalidArgumentException
+     * @throws \Zend\Cache\Exception\RuntimeException
+     */
     protected function _generateKey($callback, array $args, array $options)
     {
         $callbackKey = '';

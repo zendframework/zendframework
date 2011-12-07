@@ -15,13 +15,54 @@ class ObjectCache extends CallbackCache
      */
     protected $_storage;
 
+    /**
+     * The entity
+     *
+     * @var null|object
+     */
     protected $_entity               = null;
+
+    /**
+     * The entity key
+     *
+     * @var null|string
+     */
     protected $_entityKey            = null;
+
+    /**
+     * Cache by default
+     *
+     * @var bool
+     */
     protected $_cacheByDefault       = true;
+
+    /**
+     * Cache methods
+     *
+     * @var array
+     */
     protected $_cacheMethods         = array();
+
+    /**
+     * Non-cache methods
+     *
+     * @var array
+     */
     protected $_nonCacheMethods      = array('__tostring');
+
+    /**
+     * Cache magic properties
+     *
+     * @var bool
+     */
     protected $_cacheMagicProperties = false;
 
+    /**
+     * Constructor
+     *
+     * @param array|Traversable $options
+     * @throws InvalidArgumentException
+     */
     public function __construct($options = array())
     {
         parent::__construct($options);
@@ -33,6 +74,11 @@ class ObjectCache extends CallbackCache
         }
     }
 
+    /**
+     * Get all pattern options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         $options = parent::getOptions();

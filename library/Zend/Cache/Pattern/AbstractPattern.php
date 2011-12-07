@@ -7,11 +7,23 @@ use Zend\Cache,
 abstract class AbstractPattern implements Cache\Pattern
 {
 
+    /**
+     * Constructor
+     *
+     * @param array|Traversable $options
+     */
     public function __construct($options = array())
     {
         $this->setOptions($options);
     }
 
+    /**
+     * Set pattern options
+     *
+     * @param array|Traversable $options
+     * @return AbstractPattern
+     * @throws InvalidArgumentException
+     */
     public function setOptions($options)
     {
         if (!($options instanceof Traversable) && !is_array($options)) {
@@ -29,6 +41,11 @@ abstract class AbstractPattern implements Cache\Pattern
         return $this;
     }
 
+    /**
+     * Get all pattern options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return array();

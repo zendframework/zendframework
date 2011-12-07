@@ -16,14 +16,14 @@ interface Pattern
      * Set pattern options
      *
      * @param array|Traversable $options
-     * @return Zend\Cache\Pattern
+     * @return Pattern
      */
     public function setOptions($options);
 
     /**
      * Get all pattern options
      *
-     * return array
+     * @return array
      */
     public function getOptions();
 

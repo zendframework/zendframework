@@ -50,10 +50,7 @@ class ListenerOptions extends Options
      */
     public function getConfigCacheKey() 
     {
-        if ($this->configCacheKey !== null) {
-            return $this->configCacheKey;
-        }
-        return '';
+        return (string) $this->configCacheKey;
     }
 
     /**

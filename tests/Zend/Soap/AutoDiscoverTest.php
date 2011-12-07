@@ -151,10 +151,14 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .     '<message name="testFunc4Out"><part name="return" type="xsd:string"/></message>'
               . '</definitions>';
 
-        $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        
+        $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
+        
+        $dom = new \DOMDocument();
+        $dom->load(__DIR__.'/TestAsset/setclass.wsdl');
+        
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
-
         unlink(__DIR__.'/TestAsset/setclass.wsdl');
     }
 
@@ -306,6 +310,10 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               . '</definitions>';
 
         $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
+        
+        $dom = new \DOMDocument();
+        $dom->load(__DIR__.'/TestAsset/setclass.wsdl');
+        
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
@@ -342,7 +350,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         
         $dom = $server->generate()->toDomDocument();
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
-
+        $dom = new \DOMDocument();
+        $dom->load(__DIR__.'/TestAsset/addfunction.wsdl');
         
         $name = "TestService";
 
@@ -416,6 +425,10 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '<message name="ZendTest.Soap.TestAsset.TestFuncIn"><part name="parameters" element="tns:ZendTest.Soap.TestAsset.TestFunc"/></message>'.
                 '<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="parameters" element="tns:ZendTest.Soap.TestAsset.TestFuncResponse"/></message>'.
                 '</definitions>';
+        
+        $dom = new \DOMDocument();
+        $dom->load(__DIR__.'/TestAsset/addfunction.wsdl');
+        
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
         $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
 
@@ -434,7 +447,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         
         $dom = $server->generate()->toDomDocument();
         $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
-
+        $dom = new \DOMDocument();
+        $dom->load(__DIR__.'/TestAsset/addfunction.wsdl');
         
         $name = "TestService";
 
@@ -462,6 +476,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         
         $dom = $server->generate()->toDomDocument();
         $dom->save(__DIR__.'/TestAsset/addfunction2.wsdl');
+        $dom = new \DOMDocument();
+        $dom->load(__DIR__.'/TestAsset/addfunction2.wsdl');
 
         $name = "TestService";
 

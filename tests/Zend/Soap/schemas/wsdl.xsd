@@ -42,6 +42,7 @@ No other rights are granted by implication, estoppel or otherwise.
 
   <xs:complexType name="tDocumented" >
     <xs:annotation>
+
       <xs:documentation>
       This type is extended by  component types to allow them to be documented
       </xs:documentation>
@@ -52,6 +53,7 @@ No other rights are granted by implication, estoppel or otherwise.
   </xs:complexType>
 	 
   <xs:complexType name="tExtensibleAttributesDocumented" abstract="true" >
+
     <xs:complexContent>
       <xs:extension base="wsdl:tDocumented" >
         <xs:annotation>
@@ -62,6 +64,7 @@ No other rights are granted by implication, estoppel or otherwise.
         <xs:anyAttribute namespace="##other" processContents="lax" />    
       </xs:extension>
     </xs:complexContent>
+
   </xs:complexType>
 
   <xs:complexType name="tExtensibleDocumented" abstract="true" >
@@ -72,6 +75,7 @@ No other rights are granted by implication, estoppel or otherwise.
           This type is extended by component types to allow elements from other namespaces to be added.
           </xs:documentation>
         </xs:annotation>
+
         <xs:sequence>
           <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded" processContents="lax" />
         </xs:sequence>
@@ -81,6 +85,7 @@ No other rights are granted by implication, estoppel or otherwise.
 
   <xs:element name="definitions" type="wsdl:tDefinitions" >
     <xs:key name="message" >
+
       <xs:selector xpath="wsdl:message" />
       <xs:field xpath="@name" />
     </xs:key>
@@ -90,6 +95,7 @@ No other rights are granted by implication, estoppel or otherwise.
     </xs:key>
     <xs:key name="binding" >
       <xs:selector xpath="wsdl:binding" />
+
       <xs:field xpath="@name" />
     </xs:key>
     <xs:key name="service" >
@@ -99,6 +105,7 @@ No other rights are granted by implication, estoppel or otherwise.
     <xs:key name="import" >
       <xs:selector xpath="wsdl:import" />
       <xs:field xpath="@namespace" />
+
     </xs:key>
   </xs:element>
 
@@ -109,6 +116,7 @@ No other rights are granted by implication, estoppel or otherwise.
       </xs:documentation>
     </xs:annotation>
     <xs:choice>
+
       <xs:element name="import" type="wsdl:tImport" />
       <xs:element name="types" type="wsdl:tTypes" />                     
       <xs:element name="message"  type="wsdl:tMessage" >
@@ -118,6 +126,7 @@ No other rights are granted by implication, estoppel or otherwise.
         </xs:unique>
       </xs:element>
       <xs:element name="portType" type="wsdl:tPortType" />
+
       <xs:element name="binding"  type="wsdl:tBinding" />
       <xs:element name="service"  type="wsdl:tService" >
         <xs:unique name="port" >
@@ -136,6 +145,7 @@ No other rights are granted by implication, estoppel or otherwise.
         </xs:sequence>
         <xs:attribute name="targetNamespace" type="xs:anyURI" use="optional" />
         <xs:attribute name="name" type="xs:NCName" use="optional" />
+
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -146,6 +156,7 @@ No other rights are granted by implication, estoppel or otherwise.
         <xs:attribute name="namespace" type="xs:anyURI" use="required" />
         <xs:attribute name="location" type="xs:anyURI" use="required" />
       </xs:extension>
+
     </xs:complexContent>
   </xs:complexType>
    
@@ -158,6 +169,7 @@ No other rights are granted by implication, estoppel or otherwise.
   <xs:complexType name="tMessage" >
     <xs:complexContent>   
       <xs:extension base="wsdl:tExtensibleDocumented" >
+
         <xs:sequence>
           <xs:element name="part" type="wsdl:tPart" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
@@ -169,6 +181,7 @@ No other rights are granted by implication, estoppel or otherwise.
   <xs:complexType name="tPart" >
     <xs:complexContent>   
       <xs:extension base="wsdl:tExtensibleAttributesDocumented" >
+
         <xs:attribute name="name" type="xs:NCName" use="required" />
         <xs:attribute name="element" type="xs:QName" use="optional" />
         <xs:attribute name="type" type="xs:QName" use="optional" />    
@@ -180,6 +193,7 @@ No other rights are granted by implication, estoppel or otherwise.
     <xs:complexContent>   
       <xs:extension base="wsdl:tExtensibleAttributesDocumented" >
         <xs:sequence>
+
           <xs:element name="operation" type="wsdl:tOperation" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="name" type="xs:NCName" use="required" />
@@ -191,6 +205,7 @@ No other rights are granted by implication, estoppel or otherwise.
     <xs:complexContent>   
       <xs:extension base="wsdl:tExtensibleDocumented" >
 	    <xs:sequence>
+
           <xs:choice>
             <xs:group ref="wsdl:request-response-or-one-way-operation" />
             <xs:group ref="wsdl:solicit-response-or-notification-operation" />
@@ -201,6 +216,7 @@ No other rights are granted by implication, estoppel or otherwise.
       </xs:extension>
     </xs:complexContent>   
   </xs:complexType>
+
     
   <xs:group name="request-response-or-one-way-operation" >
     <xs:sequence>
@@ -220,6 +236,7 @@ No other rights are granted by implication, estoppel or otherwise.
 		<xs:element name="fault" type="wsdl:tFault" minOccurs="0" maxOccurs="unbounded" />
 	  </xs:sequence>
     </xs:sequence>
+
   </xs:group>
         
   <xs:complexType name="tParam" >
@@ -239,6 +256,7 @@ No other rights are granted by implication, estoppel or otherwise.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+
      
   <xs:complexType name="tBinding" >
     <xs:complexContent>
@@ -249,6 +267,7 @@ No other rights are granted by implication, estoppel or otherwise.
         <xs:attribute name="name" type="xs:NCName" use="required" />
         <xs:attribute name="type" type="xs:QName" use="required" />
       </xs:extension>
+
     </xs:complexContent>
   </xs:complexType>
     
@@ -259,6 +278,7 @@ No other rights are granted by implication, estoppel or otherwise.
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+
   
   <xs:complexType name="tBindingOperationFault" >
     <xs:complexContent>
@@ -269,6 +289,7 @@ No other rights are granted by implication, estoppel or otherwise.
   </xs:complexType>
 
   <xs:complexType name="tBindingOperation" >
+
     <xs:complexContent>
       <xs:extension base="wsdl:tExtensibleDocumented" >
         <xs:sequence>
@@ -278,6 +299,7 @@ No other rights are granted by implication, estoppel or otherwise.
         </xs:sequence>
         <xs:attribute name="name" type="xs:NCName" use="required" />
       </xs:extension>
+
     </xs:complexContent>
   </xs:complexType>
      
@@ -288,6 +310,7 @@ No other rights are granted by implication, estoppel or otherwise.
           <xs:element name="port" type="wsdl:tPort" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
         <xs:attribute name="name" type="xs:NCName" use="required" />
+
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -298,6 +321,7 @@ No other rights are granted by implication, estoppel or otherwise.
         <xs:attribute name="name" type="xs:NCName" use="required" />
         <xs:attribute name="binding" type="xs:QName" use="required" />
       </xs:extension>
+
     </xs:complexContent>
   </xs:complexType>
 

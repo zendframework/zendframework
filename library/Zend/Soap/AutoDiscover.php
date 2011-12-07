@@ -456,15 +456,16 @@ class AutoDiscover
         }
 
         // When using the RPC style, make sure the operation style includes a 'namespace' attribute (WS-I Basic Profile 1.1 R2717)
-        if ($this->_bindingStyle['style'] == 'rpc' && !isset($this->_operationBodyStyle['namespace'])) {
-            $this->_operationBodyStyle['namespace'] = ''.$uri;
+        $operationBodyStyle = $this->_operationBodyStyle;
+        if ($this->_bindingStyle['style'] == 'rpc' && !isset($operationBodyStyle['namespace'])) {
+            $operationBodyStyle['namespace'] = ''.$uri;
         }
 
         // Add the binding operation
         if($isOneWayMessage == false) {
-            $operation = $wsdl->addBindingOperation($binding, $functionName,  $this->_operationBodyStyle, $this->_operationBodyStyle);
+            $operation = $wsdl->addBindingOperation($binding, $functionName, $operationBodyStyle, $operationBodyStyle);
         } else {
-            $operation = $wsdl->addBindingOperation($binding, $functionName,  $this->_operationBodyStyle);
+            $operation = $wsdl->addBindingOperation($binding, $functionName, $operationBodyStyle);
         }
         $wsdl->addSoapOperation($operation, $uri . '#' . $functionName);
     }

@@ -978,7 +978,7 @@ class Filesystem extends AbstractAdapter
 
     /* non-blocking */
 
-    public function find($mode = Adapter::MATCH_ACTIVE, array $options = array())
+    public function find($mode = self::MATCH_ACTIVE, array $options = array())
     {
         if ($this->_stmtActive) {
             throw new RuntimeException('Statement already in use');
@@ -989,7 +989,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, Adapter::MATCH_ACTIVE, $options);
+        $this->_normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
         $options = array_merge($this->getOptions(), $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
@@ -1064,10 +1064,10 @@ class Filesystem extends AbstractAdapter
 
     /* cleaning */
 
-    public function clear($mode = Adapter::MATCH_EXPIRED, array $options = array())
+    public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
         $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, Adapter::MATCH_EXPIRED, $options);
+        $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options
@@ -1086,10 +1086,10 @@ class Filesystem extends AbstractAdapter
         }
     }
 
-    public function clearByNamespace($mode = Adapter::MATCH_EXPIRED, array $options = array())
+    public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
         $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, Adapter::MATCH_EXPIRED, $options);
+        $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options
@@ -1441,20 +1441,20 @@ class Filesystem extends AbstractAdapter
 
                 $info = $this->_info($key, $options);
 
-                // if MATCHING_TAGS mode -> check if all given tags available in current cache
-                if (($mode & self::MATCHING_TAGS) == self::MATCHING_TAGS ) {
+                // if MATCH_TAGS mode -> check if all given tags available in current cache
+                if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
                     if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) > 0) {
                         continue;
                     }
 
-                // if MATCHING_NO_TAGS mode -> check if no given tag available in current cache
-                } elseif( ($mode & self::MATCHING_NO_TAGS) == self::MATCHING_NO_TAGS ) {
+                // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
+                } elseif( ($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS ) {
                     if (isset($info['tags']) && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])) {
                         continue;
                     }
 
-                // if MATCHING_ANY_TAGS mode -> check if any given tag available in current cache
-                } elseif ( ($mode & self::MATCHING_ANY_TAGS) == self::MATCHING_ANY_TAGS ) {
+                // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
+                } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
                     if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])) {
                         continue;
                     }
@@ -1505,15 +1505,15 @@ class Filesystem extends AbstractAdapter
         foreach ($glob as $entry) {
 
             // if MATCH_ALL mode do not check expired
-            if (($mode & Adapter::MATCH_ALL) != Adapter::MATCH_ALL) {
+            if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
 
                 $mtime = $entry->getMTime();
-                if (($mode & Adapter::MATCH_EXPIRED) == Adapter::MATCH_EXPIRED) {
+                if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
                     if ( $time <= ($mtime + $ttl) ) {
                         continue;
                     }
 
-                // if Zend_Cache::MATCHING_ACTIVE mode selected do not remove expired data
+                // if Zend_Cache::MATCH_ACTIVE mode selected do not remove expired data
                 } else {
                     if ( $time >= ($mtime + $ttl) ) {
                         continue;
@@ -1533,20 +1533,20 @@ class Filesystem extends AbstractAdapter
 
                 $info = $this->_readInfoFile($filespec . '.ifo');
 
-                // if MATCHING_TAGS mode -> check if all given tags available in current cache
-                if (($mode & Adapter::MATCHING_TAGS) == Adapter::MATCHING_TAGS ) {
+                // if MATCH_TAGS mode -> check if all given tags available in current cache
+                if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
                     if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) > 0) {
                         continue;
                     }
 
-                // if MATCHING_NO_TAGS mode -> check if no given tag available in current cache
-                } elseif( ($mode & Adapter::MATCHING_NO_TAGS) == Adapter::MATCHING_NO_TAGS ) {
+                // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
+                } elseif( ($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS ) {
                     if (isset($info['tags']) && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])) {
                         continue;
                     }
 
-                // if MATCHING_ANY_TAGS mode -> check if any given tag available in current cache
-                } elseif ( ($mode & Adapter::MATCHING_ANY_TAGS) == Adapter::MATCHING_ANY_TAGS ) {
+                // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
+                } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
                     if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])) {
                         continue;
                     }

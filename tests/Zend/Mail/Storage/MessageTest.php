@@ -43,7 +43,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_file = __DIR__ . '/_files/mail.txt';
+        $this->_file = __DIR__ . '/../_files/mail.txt';
     }
 
     public function testInvalidFile()
@@ -185,7 +185,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function testMissingId()
     {
-        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/_files/test.mbox/INBOX'));
+        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/../_files/test.mbox/INBOX'));
 
         try {
             $message = new Message(array('handler' => $mail));
@@ -339,7 +339,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
 
     public function testLateFetch()
     {
-        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/_files/test.mbox/INBOX'));
+        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/../_files/test.mbox/INBOX'));
 
         $message = new Message(array('handler' => $mail, 'id' => 5));
         $this->assertEquals($message->countParts(), 2);

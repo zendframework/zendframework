@@ -30,6 +30,13 @@ class Serializer implements Plugin
         }
     }
 
+    public function getOptions()
+    {
+        return array(
+            'serializer' => $this->getSerializer(),
+        );
+    }
+
     public function setSerializer(SerializerAdapter $serializer)
     {
         $this->serializer = $serializer;

@@ -25,10 +25,9 @@ class ExceptionEvent extends Event
      * The result/return value
      * if the exception shouldn't throw
      *
-     *
      * @var mixed
      */
-    protected $result;
+    protected $result = false;
 
     /**
      * Constructor

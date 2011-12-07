@@ -83,7 +83,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
             return $soapType;
         }
 
-        $xsdComplexTypeName = 'ArrayOf' . Wsdl::translateType($singularType);
+        $xsdComplexTypeName = 'ArrayOf' . $this->getContext()->translateType($singularType);
         $xsdComplexType     = 'tns:' . $xsdComplexTypeName;
 
         // Register type here to avoid recursion
@@ -109,7 +109,7 @@ class ArrayOfTypeComplex extends DefaultComplexType
         $xsdAttribute = $dom->createElement('xsd:attribute');
         $xsdAttribute->setAttribute('ref', 'soap-enc:arrayType');
         $xsdAttribute->setAttribute('wsdl:arrayType',
-                                    'tns:' . Wsdl::translateType($singularType) . '[]');
+                                    'tns:' . $this->getContext()->translateType($singularType) . '[]');
         $xsdRestriction->appendChild($xsdAttribute);
 
         $this->getContext()->getSchema()->appendChild($complexType);

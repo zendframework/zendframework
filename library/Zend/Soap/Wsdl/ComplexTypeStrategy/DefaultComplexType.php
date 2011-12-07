@@ -64,7 +64,7 @@ class DefaultComplexType extends AbstractComplexTypeStrategy
         $dom = $this->getContext()->toDomDocument();
         $class = new \ReflectionClass($type);
 
-        $soapTypeName = Soap\Wsdl::translateType($type);
+        $soapTypeName = $this->getContext()->translateType($type);
         $soapType     = 'tns:' . $soapTypeName;
 
         // Register type here to avoid recursion

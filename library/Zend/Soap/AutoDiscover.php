@@ -429,7 +429,7 @@ class AutoDiscover
             throw new Exception\InvalidArgumentException("No prototypes could be found for the '" . $function->getName() . "' function");
         }
 
-        $functionName = Wsdl::translateType($function->getName());
+        $functionName = $wsdl->translateType($function->getName());
 
         // Add the input message (parameters)
         $args = array();

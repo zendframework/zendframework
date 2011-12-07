@@ -1,6 +1,7 @@
 <?php
 
 namespace Zend\Cache\Pattern;
+use Zend\Cache\Storage\Adapter as StorageAdapter;
 
 class CaptureCache extends AbstractPattern
 {
@@ -36,7 +37,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Storage for tagging
      *
-     * @var null|\Zend\Cache\Storage\Adapter
+     * @var null|StorageAdapter
      */
     protected $_tagStorage = null;
 
@@ -72,10 +73,10 @@ class CaptureCache extends AbstractPattern
     public function getOptions()
     {
         return array(
-            'publicDir'     => $this->getPublicDir(),
-            'fileExtension' => $this->getFileException(),
-            'fileLocking'   => $this->getFileLocking(),
-            'tagStorage'    => $this->getTagStorage(),
+            'public_dir'     => $this->getPublicDir(),
+            'file_locking'   => $this->getFileLocking(),
+            'tag_storage'    => $this->getTagStorage(),
+            'tag_key'        => $this->getTagKey(),
         );
     }
 
@@ -146,12 +147,12 @@ class CaptureCache extends AbstractPattern
     }
 
     /**
-     * Set a storage for tagging
+     * Set a storage for tagging or remove the storage
      *
-     * @param \Zend\Cache\Storage\Adapter $storage
+     * @param null|StorageAdapter $storage
      * @return CaptureCache
      */
-    public function setTagStorage(Adapter $storage)
+    public function setTagStorage(StorageAdapter $storage = null)
     {
         $this->_tagStorage = $storage;
         return $this;
@@ -160,7 +161,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Get the storage for tagging
      *
-     * @return null|\Zend\Cache\Storage\Adapter
+     * @return null|StorageAdapter
      */
     public function getTagStorage()
     {

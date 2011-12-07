@@ -160,7 +160,6 @@ class ConfigListener extends AbstractListener implements ConfigMerger
      */
     protected function mergeGlobPath($globPath)
     {
-        $env = $this->getOptions()->getApplicationEnvironment();
         foreach (glob($globPath, GLOB_BRACE) as $path) {
             $pathInfo = pathinfo($path);
             switch (strtolower($pathInfo['extension'])) {
@@ -174,31 +173,24 @@ class ConfigListener extends AbstractListener implements ConfigMerger
                             (is_object($config) ? get_class($config) : gettype($config))
                         ));
                     }
-                    if (!isset($config[$env])) {
-                        throw new Exception\RuntimeException(sprintf(
-                            'Configuration returned by file "%s" does not contain an environment matching "%s"',
-                            $path,
-                            $env
-                        ));
-                    }
-                    $config = $config[$env];
+                    $config = $config;
                     break;
 
                 case 'xml':
-                    $config = new XmlConfig($path, $env);
+                    $config = new XmlConfig($path);
                     break;
 
                 case 'json':
-                    $config = new JsonConfig($path, $env);
+                    $config = new JsonConfig($path);
                     break;
 
                 case 'ini':
-                    $config = new IniConfig($path, $env);
+                    $config = new IniConfig($path);
                     break;
 
                 case 'yaml':
                 case 'yml':
-                    $config = new YamlConfig($path, $env);
+                    $config = new YamlConfig($path);
                     break;
 
                 default:
@@ -224,7 +216,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
         if ((false === $this->skipConfig)
             && (is_callable(array($module, 'getConfig')))
         ) {
-            $config = $module->getConfig($this->getOptions()->getApplicationEnvironment());
+            $config = $module->getConfig();
             try {
                 $this->mergeTraversableConfig($config);
             } catch (Exception\InvalidArgumentException $e) {

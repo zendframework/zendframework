@@ -38,8 +38,8 @@ class ConfigListenerTest extends TestCase
     public function tearDown()
     {
         $file = glob($this->tmpdir . DIRECTORY_SEPARATOR . '*');
-        @unlink($file[0]); // change this if there's ever > 1 file 
-        @rmdir($this->tmpdir);
+        //@unlink($file[0]); // change this if there's ever > 1 file 
+        //@rmdir($this->tmpdir);
         // Restore original autoloaders
         AutoloaderFactory::unregisterAutoloaders();
         $loaders = spl_autoload_functions();
@@ -101,7 +101,7 @@ class ConfigListenerTest extends TestCase
     {
         $this->setExpectedException('RuntimeException');
         $moduleManager = new Manager(array('SomeModule'));
-        $moduleManager->getConfigListener()->addConfigGlobPath(dirname(__DIR__) . '/_files/*.{bad}');
+        $moduleManager->getConfigListener()->addConfigGlobPath(__DIR__ . '/_files/bad/*.badext');
         $moduleManager->loadModules();
     }
 
@@ -124,62 +124,33 @@ class ConfigListenerTest extends TestCase
     public function testCanMergeConfigFromGlob()
     {
         $moduleManager = new Manager(array('SomeModule'));
-        $options = new ListenerOptions(array(
-            'application_environment' => 'all',
-        ));
+        $options = new ListenerOptions;
         $moduleManager->setDefaultListenerOptions($options);
-        $moduleManager->getConfigListener()->addConfigGlobPath(dirname(__DIR__) . '/_files/*.{ini,json,php,xml,yaml}');
+        $moduleManager->getConfigListener()->addConfigGlobPath(__DIR__ . '/_files/good/*.{ini,json,php,xml,yml}');
         $moduleManager->loadModules();
         $moduleManager->getMergedConfig(); 
         // Test as object
         $configObject = $moduleManager->getMergedConfig();
-        $this->assertSame('yes', $configObject->ini);
-        $this->assertSame('yes', $configObject->php);
-        $this->assertSame('yes', $configObject->json);
-        $this->assertSame('yes', $configObject->xml);
-        $this->assertTrue($configObject->yaml);
+        $this->assertSame('loaded', $configObject->ini);
+        $this->assertSame('loaded', $configObject->php);
+        $this->assertSame('loaded', $configObject->json);
+        $this->assertSame('loaded', $configObject->xml);
+        $this->assertSame('loaded', $configObject->yml);
         // Test as array
         $config = $moduleManager->getMergedConfig(false);
-        $this->assertSame('yes', $config['ini']);
-        $this->assertSame('yes', $config['json']);
-        $this->assertSame('yes', $config['php']);
-        $this->assertSame('yes', $config['xml']);
-        $this->assertTrue($config['yaml']); // stupid yaml
+        $this->assertSame('loaded', $config['ini']);
+        $this->assertSame('loaded', $config['json']);
+        $this->assertSame('loaded', $config['php']);
+        $this->assertSame('loaded', $config['xml']);
+        $this->assertSame('loaded', $config['yml']);
     }
 
     public function testCanMergeConfigFromArrayOfGlobs()
     {
         $moduleManager = new Manager(array('SomeModule'));
-        $options = new ListenerOptions(array(
-            'application_environment' => 'all',
-        ));
+        $options = new ListenerOptions;
         $moduleManager->setDefaultListenerOptions($options);
         $moduleManager->getConfigListener()->addConfigGlobPaths(new ArrayObject(array(
-            dirname(__DIR__) . '/_files/*.ini',
-            dirname(__DIR__) . '/_files/*.json',
-            dirname(__DIR__) . '/_files/*.php',
-            dirname(__DIR__) . '/_files/*.xml',
-            dirname(__DIR__) . '/_files/*.yaml',
-        )));
-        $moduleManager->loadModules();
-        // Test as object
-        $configObject = $moduleManager->getMergedConfig();
-        $this->assertSame('yes', $configObject->ini);
-        $this->assertSame('yes', $configObject->php);
-        $this->assertSame('yes', $configObject->json);
-        $this->assertSame('yes', $configObject->xml);
-        $this->assertTrue($configObject->yaml);
-    }
-
-    public function testGlobMergingHonorsProvidedEnvironment()
-    {
-        $moduleManager = new Manager(array('SomeModule'));
-        $options = new ListenerOptions(array(
-            'application_environment' => 'testing',
-        ));
-        $moduleManager->setDefaultListenerOptions($options);
-        $configListener = $moduleManager->getConfigListener();
-        $configListener->addConfigGlobPaths(new ArrayObject(array(
             __DIR__ . '/_files/good/*.ini',
             __DIR__ . '/_files/good/*.json',
             __DIR__ . '/_files/good/*.php',
@@ -187,14 +158,13 @@ class ConfigListenerTest extends TestCase
             __DIR__ . '/_files/good/*.yml',
         )));
         $moduleManager->loadModules();
-
         // Test as object
         $configObject = $moduleManager->getMergedConfig();
-        $this->assertSame('testing', $configObject->ini);
-        $this->assertSame('testing', $configObject->php);
-        $this->assertSame('testing', $configObject->json);
-        $this->assertSame('testing', $configObject->xml);
-        $this->assertSame('testing', $configObject->yml);
+        $this->assertSame('loaded', $configObject->ini);
+        $this->assertSame('loaded', $configObject->php);
+        $this->assertSame('loaded', $configObject->json);
+        $this->assertSame('loaded', $configObject->xml);
+        $this->assertSame('loaded', $configObject->yml);
     }
 
     public function testPhpConfigFileReturningInvalidConfigRaisesException()
@@ -205,17 +175,6 @@ class ConfigListenerTest extends TestCase
             __DIR__ . '/_files/bad/*.php',
         )));
         $this->setExpectedException('Zend\Module\Listener\Exception\RuntimeException', 'Invalid configuration');
-        $moduleManager->loadModules();
-    }
-
-    public function testPhpConfigFileReturningConfigWithoutExpectedApplicationEnvironmentRaisesException()
-    {
-        $moduleManager  = new Manager(array('SomeModule'));
-        $configListener = $moduleManager->getConfigListener();
-        $configListener->addConfigGlobPaths(new ArrayObject(array(
-            __DIR__ . '/_files/bad/*.inc',
-        )));
-        $this->setExpectedException('Zend\Module\Listener\Exception\RuntimeException', 'environment');
         $moduleManager->loadModules();
     }
 }

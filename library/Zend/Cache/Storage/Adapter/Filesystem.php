@@ -45,7 +45,7 @@ class Filesystem extends AbstractAdapter
      *
      * @var int
      */
-    protected $_fileUmask = -433; // ~0660
+    protected $_fileUmask = 0117;
 
     /**
      * Lock files on writing
@@ -69,7 +69,7 @@ class Filesystem extends AbstractAdapter
      *
      * @var int
      */
-    protected $_dirUmask = -505; // ~0770
+    protected $_dirUmask = 0007;
 
     /**
      * How much sub-directaries should be created?

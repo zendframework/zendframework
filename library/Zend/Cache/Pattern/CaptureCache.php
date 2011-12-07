@@ -14,6 +14,20 @@ class CaptureCache extends AbstractPattern
     protected $_publicDir = null;
 
     /**
+     * Used umask on creating a cache directory
+     *
+     * @var int
+     */
+    protected $_dirUmask = 0007;
+
+    /**
+     * Used umask on creating a cache file
+     *
+     * @var int
+     */
+    protected $_fileUmask = 0117;
+
+    /**
      * Lock files on writing
      *
      * @var boolean
@@ -74,6 +88,10 @@ class CaptureCache extends AbstractPattern
     {
         return array(
             'public_dir'     => $this->getPublicDir(),
+            'dir_perm'       => $this->getDirPerm(),
+            'dir_umask'      => $this->getDirUmask(),
+            'file_perm'      => $this->getFilePerm(),
+            'file_umask'     => $this->getFileUmask(),
             'file_locking'   => $this->getFileLocking(),
             'tag_storage'    => $this->getTagStorage(),
             'tag_key'        => $this->getTagKey(),
@@ -103,25 +121,133 @@ class CaptureCache extends AbstractPattern
     }
 
     /**
-     * Set index filename
+     * Set directory permissions
      *
-     * @param string $filename
+     * @param int|string $perm Permissions as octal number
      * @return CaptureCache
      */
-    public function setIndexFilename($filename)
+    public function setDirPerm($perm)
     {
-        $this->_indexFilename = (string)$filename;
+        if (is_string($perm)) {
+            $perm = octdec($perm);
+        } else {
+            $perm = (int)$perm;
+        }
+
+        // use umask
+        return $this->setDirUmask(~$perm);
+    }
+
+    /**
+     * Get directory permissions
+     *
+     * @return int
+     */
+    public function getDirPerm()
+    {
+        return ~$this->getDirUmask();
+    }
+
+    /**
+     * Set directory umask
+     *
+     * @param int|string $umask Umask as octal number
+     * @return CaptureCache
+     */
+    public function setDirUmask($umask)
+    {
+        if (is_string($umask)) {
+            $umask = octdec($umask);
+        } else {
+            $umask = (int)$umask;
+        }
+
+        if ((~$umask & 0700) != 0700 ) {
+            throw new InvalidArgumentException(
+                'Invalid directory umask or directory permissions: '
+              . 'need permissions to execute, read and write directories by owner'
+            );
+        }
+
+        $this->_dirUmask = $umask;
         return $this;
     }
 
     /**
-     * Get index filename
+     * Get directory umask
      *
-     * @return string
+     * @return int
      */
-    public function getIndexFilename()
+    public function getDirUmask()
     {
-        return $this->_indexFilename;
+        return $this->_dirUmask;
+    }
+
+    /**
+     * Set file permissions
+     *
+     * @param int|string $perm Permissions as octal number
+     * @return CaptureCache
+     */
+    public function setFilePerm($perm)
+    {
+        if (is_string($perm)) {
+            $perm = octdec($perm);
+        } else {
+            $perm = (int)$perm;
+        }
+
+        // use umask
+        return $this->setFileUmask(~$perm);
+    }
+
+    /**
+     * Get file permissions
+     *
+     * @return int
+     */
+    public function getFilePerm()
+    {
+        return ~$this->getFileUmask();
+    }
+
+    /**
+     * Set file umask
+     *
+     * @param int|string $umask Umask as octal number
+     * @return CaptureCache
+     */
+    public function setFileUmask($umask)
+    {
+        if (is_string($umask)) {
+            $umask = octdec($umask);
+        } else {
+            $umask = (int)$umask;
+        }
+        if ((~$umask & 0600) != 0600 ) {
+            throw new InvalidArgumentException(
+                'Invalid file umask or file permission: '
+              . 'need permissions to read and write files by owner'
+            );
+        } elseif ((~$umask & 0111) > 0) {
+            throw new InvalidArgumentException(
+                'Invalid file umask or file permission: '
+              . 'executable cache files are not allowed'
+            );
+        }
+
+        $this->_fileUmask = $umask;
+        return $this;
+    }
+
+    /**
+     * Get file umask
+     *
+     * @return int
+     */
+    public function getFileUmask()
+    {
+        return $this->_fileUmask;
     }
 
     /**
@@ -144,6 +270,28 @@ class CaptureCache extends AbstractPattern
     public function getFileLocking()
     {
         return $this->_fileLocking;
+    }
+
+    /**
+     * Set index filename
+     *
+     * @param string $filename
+     * @return CaptureCache
+     */
+    public function setIndexFilename($filename)
+    {
+        $this->_indexFilename = (string)$filename;
+        return $this;
+    }
+
+    /**
+     * Get index filename
+     *
+     * @return string
+     */
+    public function getIndexFilename()
+    {
+        return $this->_indexFilename;
     }
 
     /**
@@ -403,7 +551,7 @@ class CaptureCache extends AbstractPattern
         $path     = $this->_pageId2Path($this->_pageId);
         $fullPath = $this->getPublicDir() . DIRECTORY_SEPARATOR . $path;
         if (!file_exists($fullPath)) {
-            $oldUmask = umask($this->getDirectoryUmask());
+            $oldUmask = umask($this->getDirUmask());
             if (!@mkdir($fullPath, 0777, true)) {
                 $lastErr = error_get_last();
                 throw new RuntimeException(

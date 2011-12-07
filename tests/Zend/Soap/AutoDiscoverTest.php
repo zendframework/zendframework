@@ -43,20 +43,7 @@ use Zend\Soap\AutoDiscover,
  * @group      Zend_Soap
  */
 class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
-{
-    public function setUp()
-    {
-        // This has to be done because some CLI setups don't have $_SERVER variables
-        // to simuulate that we have an actual webserver.
-        if(!isset($_SERVER) || !is_array($_SERVER)) {
-            $_SERVER = array();
-        }
-        $_SERVER['HTTP_HOST'] = 'localhost';
-        $_SERVER['REQUEST_URI'] = '/my_script.php?wsdl';
-        $_SERVER['SCRIPT_NAME'] = '/my_script.php';
-        $_SERVER['HTTPS'] = "off";
-    }
-    
+{    
     protected function createAutodiscoverService()
     {
         $server = new AutoDiscover();

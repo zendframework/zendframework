@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Mail;
+namespace Zend\Mail\Protocol;
 
 use Zend\Validator\Hostname as HostnameValidator,
     Zend\Validator;

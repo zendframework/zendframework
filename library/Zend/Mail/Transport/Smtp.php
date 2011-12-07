@@ -308,7 +308,10 @@ class Smtp implements Transport, Pluggable
     {
         // Check if authentication is required and determine required class
         $options    = $this->getOptions();
-        $connection = $this->plugin($options->getConnectionClass(), $options->getConnectionConfig());
+        $host       = $options->getHost();
+        $port       = $options->getPort();
+        $config     = $options->getConnectionConfig();
+        $connection = $this->plugin($options->getConnectionClass(), array($host, $port, $config));
         $this->connection = $connection;
         $this->connection->connect();
         $this->connection->helo($options->getName());

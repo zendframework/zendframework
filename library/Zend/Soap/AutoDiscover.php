@@ -41,11 +41,6 @@ class AutoDiscover
      * @var string
      */
     protected $_serviceName;
-    
-    /**
-     * @var \Zend\Soap\Wsdl
-     */
-    protected $_wsdl = null;
 
     /**
      * @var \Zend\Server\Reflection
@@ -172,11 +167,6 @@ class AutoDiscover
         }
         $this->_uri = $uri;
 
-        // change uri in WSDL file also if existant
-        if ($this->_wsdl instanceof Wsdl) {
-            $this->_wsdl->setUri($uri);
-        }
-
         return $this;
     }
 
@@ -273,9 +263,6 @@ class AutoDiscover
     public function setComplexTypeStrategy(ComplexTypeStrategy $strategy)
     {
         $this->_strategy = $strategy;
-        if($this->_wsdl instanceof Wsdl) {
-            $this->_wsdl->setComplexTypeStrategy($strategy);
-        }
 
         return $this;
     }
@@ -304,7 +291,12 @@ class AutoDiscover
         return $this;
     }
     
-    protected function generateClass()
+    /**
+     * Generate the WSDL for a service class.
+     * 
+     * @return Zend\Soap\Wsdl
+     */
+    protected function _generateClass()
     {   
         $class = $this->_class;
         $uri = $this->getUri();
@@ -326,12 +318,16 @@ class AutoDiscover
         foreach ($this->_reflection->reflectClass($class)->getMethods() as $method) {
             $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
-        $this->_wsdl = $wsdl;
-
-        return $this;
+        
+        return $wsdl;
     }
     
-    protected function generateFunctions()
+    /**
+     * Generate the WSDL for a set of functions.
+     * 
+     * @return Zend\Soap\Wsdl
+     */
+    protected function _generateFunctions()
     {
         $uri = $this->getUri();
 
@@ -347,13 +343,12 @@ class AutoDiscover
         $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
         $wsdl->addService($serviceName . 'Service', $serviceName . 'Port', 'tns:' . $serviceName . 'Binding', $uri);
 
-        foreach ($this->_functions as $func) {
+        foreach (array_unique($this->_functions) as $func) {
             $method = $this->_reflection->reflectFunction($func);
             $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
-        $this->_wsdl = $wsdl;
 
-        return $this;
+        return $wsdl;
     }
 
     /**
@@ -482,12 +477,12 @@ class AutoDiscover
         }
         
         if ($this->_class) {
-            $this->generateClass();
+            $wsdl = $this->_generateClass();
         } else {
-            $this->generateFunctions();
+            $wsdl = $this->_generateFunctions();
         }
         
-        return $this->_wsdl;
+        return $wsdl;
     }
 
     /**
@@ -511,23 +506,5 @@ class AutoDiscover
     public function toXml()
     {
         return $this->generate()->toXml();
-    }
-
-    /**
-     * Returns an XSD Type for the given PHP type
-     *
-     * @param string $type PHP Type to get the XSD type for
-     * @return string
-     */
-    public function getType($type)
-    {
-        if (!($this->_wsdl instanceof Wsdl)) {
-            /** @todo Exception throwing may be more correct */
-
-            // WSDL is not defined yet, so we can't recognize type in context of current service
-            return '';
-        } else {
-            return $this->_wsdl->getType($type);
-        }
     }
 }

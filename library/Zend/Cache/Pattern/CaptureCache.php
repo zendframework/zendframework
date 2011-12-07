@@ -267,8 +267,8 @@ class CaptureCache extends AbstractPattern
               . DIRECTORY_SEPARATOR . $this->_pageId2Filename($pageId);
 
         if (file_exists($file)) {
-            $content = @file_get_contents($file);
-            if ($content === false) {
+            if (($content = @file_get_contents($file)) === false) {
+                $lastErr = error_get_last();
                 throw new RuntimeException("Failed to read cached pageId '{$pageId}': {$lastErr['message']}");
             }
             return $content;

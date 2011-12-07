@@ -71,6 +71,27 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $xmlstring = preg_replace('/(>[\s]{1,}<)/', '', $xmlstring);
         return $xmlstring;
     }
+    
+    /**
+     * Assertion to validate DOMDocument is a valid WSDL file.
+     * 
+     * @param \DOMDocument $dom 
+     */
+    protected function assertValidWSDL(\DOMDocument $dom)
+    {
+        // this code is necessary to support some libxml stupidities.
+        $file = __DIR__.'/TestAsset/validate.wsdl';
+        if (file_exists($file)) {
+            unlink($file);
+        }
+        
+        $dom->save($file);
+        $dom = new \DOMDocument();
+        $dom->load($file);
+        
+        $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
+        unlink($file);
+    }
 
     function testSetClass()
     {
@@ -151,15 +172,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .     '<message name="testFunc4Out"><part name="return" type="xsd:string"/></message>'
               . '</definitions>';
 
-        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        
-        $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
-        
-        $dom = new \DOMDocument();
-        $dom->load(__DIR__.'/TestAsset/setclass.wsdl');
-        
-        $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
-        unlink(__DIR__.'/TestAsset/setclass.wsdl');
+        $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));        
+        $this->assertValidWSDL($dom);
     }
 
     function testSetClassWithDifferentStyles()
@@ -308,16 +322,9 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
               .       '<part name="parameters" element="tns:testFunc4Response"/>'
               .     '</message>'
               . '</definitions>';
-
-        $dom->save(__DIR__.'/TestAsset/setclass.wsdl');
-        
-        $dom = new \DOMDocument();
-        $dom->load(__DIR__.'/TestAsset/setclass.wsdl');
         
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
-
-        unlink(__DIR__.'/TestAsset/setclass.wsdl');
+        $this->assertValidWSDL($dom);
     }
 
     /**
@@ -349,10 +356,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         
         $dom = $server->generate()->toDomDocument();
-        $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
-        $dom = new \DOMDocument();
-        $dom->load(__DIR__.'/TestAsset/addfunction.wsdl');
-        
+
         $name = "TestService";
 
         $wsdl = '<?xml version="1.0"?>'.
@@ -378,9 +382,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="return" type="xsd:string"/></message>'.
                 '</definitions>';
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
-        $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
-
-        unlink(__DIR__.'/TestAsset/addfunction.wsdl');
+        $this->assertValidWSDL($dom);
     }
 
     function testAddFunctionSimpleWithDifferentStyle()
@@ -393,11 +395,8 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         
         $dom = $server->generate()->toDomDocument();
-        $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
-
         
         $name = "TestService";
-
         $wsdl = '<?xml version="1.0"?>'.
                 '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="' . $scriptUri . '" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="' .$name. '" targetNamespace="' . $scriptUri . '">'.
                 '<types>'.
@@ -424,15 +423,9 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '</service>'.
                 '<message name="ZendTest.Soap.TestAsset.TestFuncIn"><part name="parameters" element="tns:ZendTest.Soap.TestAsset.TestFunc"/></message>'.
                 '<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="parameters" element="tns:ZendTest.Soap.TestAsset.TestFuncResponse"/></message>'.
-                '</definitions>';
-        
-        $dom = new \DOMDocument();
-        $dom->load(__DIR__.'/TestAsset/addfunction.wsdl');
-        
+                '</definitions>';        
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Bad WSDL generated");
-        $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
-
-        unlink(__DIR__.'/TestAsset/addfunction.wsdl');
+        $this->assertValidWSDL($dom);
     }
 
     /**
@@ -446,18 +439,13 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc');
         
         $dom = $server->generate()->toDomDocument();
-        $dom->save(__DIR__.'/TestAsset/addfunction.wsdl');
-        $dom = new \DOMDocument();
-        $dom->load(__DIR__.'/TestAsset/addfunction.wsdl');
         
         $name = "TestService";
 
         $wsdl = $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML());
         $this->assertContains('<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="return" type="xsd:string"/>', $wsdl);
         $this->assertNotContains('<message name="ZendTest.Soap.TestAsset.TestFuncOut"><part name="ZendTest.Soap.TestAsset.TestFuncReturn"', $wsdl);
-        $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
-
-        unlink(__DIR__.'/TestAsset/addfunction.wsdl');
+        $this->assertValidWSDL($dom);
     }
 
     function testAddFunctionMultiple()
@@ -475,9 +463,6 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         $server->addFunction('\ZendTest\Soap\TestAsset\TestFunc9');
         
         $dom = $server->generate()->toDomDocument();
-        $dom->save(__DIR__.'/TestAsset/addfunction2.wsdl');
-        $dom = new \DOMDocument();
-        $dom->load(__DIR__.'/TestAsset/addfunction2.wsdl');
 
         $name = "TestService";
 
@@ -558,9 +543,7 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
                 '<message name="ZendTest.Soap.TestAsset.TestFunc9Out"><part name="return" type="xsd:string"/></message>'.
                 '</definitions>';
         $this->assertEquals($wsdl, $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()), "Generated WSDL did not match expected XML");
-        $this->assertTrue($dom->schemaValidate(__DIR__ .'/schemas/wsdl.xsd'), "WSDL Did not validate");
-
-        unlink(__DIR__.'/TestAsset/addfunction2.wsdl');
+        $this->assertValidWSDL($dom);
     }
 
     /**

@@ -298,28 +298,7 @@ class AutoDiscover
      */
     protected function _generateClass()
     {   
-        $class = $this->_class;
-        $uri = $this->getUri();
-
-        $serviceName = $this->getServiceName();
-
-        $wsdl = new $this->_wsdlClass($serviceName, $uri, $this->_strategy);
-
-        // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
-        $wsdl->addSchemaTypeSection();
-
-        $port = $wsdl->addPortType($serviceName . 'Port');
-        $binding = $wsdl->addBinding($serviceName . 'Binding', 'tns:' . $serviceName . 'Port');
-
-        $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
-        $wsdl->addService($serviceName . 'Service',
-                          $serviceName . 'Port',
-                          'tns:' . $serviceName . 'Binding', $uri);
-        foreach ($this->_reflection->reflectClass($class)->getMethods() as $method) {
-            $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
-        }
-        
-        return $wsdl;
+        return $this->_generateWsdl($this->_reflection->reflectClass($this->_class)->getMethods());
     }
     
     /**
@@ -329,10 +308,25 @@ class AutoDiscover
      */
     protected function _generateFunctions()
     {
+        $methods = array();
+        foreach (array_unique($this->_functions) as $func) {
+            $methods[] = $this->_reflection->reflectFunction($func);
+        }
+        
+        return $this->_generateWsdl($methods);
+    }
+    
+    /**
+     * Generate the WSDL for a set of reflection method instances.
+     * 
+     * @return Zend\Soap\Wsdl
+     */
+    protected function _generateWsdl(array $reflectionMethods)
+    {
         $uri = $this->getUri();
 
         $serviceName = $this->getServiceName();
-        $wsdl = new Wsdl($serviceName, $uri, $this->_strategy);
+        $wsdl = new $this->_wsdlClass($serviceName, $uri, $this->_strategy);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
         $wsdl->addSchemaTypeSection();
@@ -343,8 +337,7 @@ class AutoDiscover
         $wsdl->addSoapBinding($binding, $this->_bindingStyle['style'], $this->_bindingStyle['transport']);
         $wsdl->addService($serviceName . 'Service', $serviceName . 'Port', 'tns:' . $serviceName . 'Binding', $uri);
 
-        foreach (array_unique($this->_functions) as $func) {
-            $method = $this->_reflection->reflectFunction($func);
+        foreach ($reflectionMethods as $method) {
             $this->_addFunctionToWsdl($method, $wsdl, $port, $binding);
         }
 
@@ -489,7 +482,7 @@ class AutoDiscover
      * Proxy to WSDL dump function
      *
      * @param string $filename
-     * @return boolean
+     * @return bool
      * @throws \Zend\Soap\Exception\RuntimeException
      */
     public function dump($filename)

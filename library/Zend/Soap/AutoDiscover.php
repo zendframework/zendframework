@@ -30,7 +30,8 @@ use Zend\Uri,
     Zend\Server\Reflection\AbstractFunction,
     Zend\Server\Reflection,
     Zend\Server\Reflection\Prototype,
-    Zend\Server\Reflection\ReflectionParameter;
+    Zend\Server\Reflection\ReflectionParameter,
+    Zend\Soap\AutoDiscover\DiscoveryStrategy\ReflectionDiscovery;
 
 /**
  * \Zend\Soap\AutoDiscover
@@ -106,6 +107,13 @@ class AutoDiscover
     protected $_classMap = array();
 
     /**
+     * Discovery strategy for types and other method details.
+     *
+     * @var Zend\Soap\AutoDiscover\DiscoveryStrategy
+     */
+    protected $_discoveryStrategy;
+
+    /**
      * Constructor
      *
      * @param \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
@@ -115,6 +123,8 @@ class AutoDiscover
     public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null, array $classMap = array())
     {
         $this->_reflection = new Reflection();
+        $this->_discoveryStrategy = new ReflectionDiscovery();
+
         if ($strategy !== null) {
             $this->setComplexTypeStrategy($strategy);
         }
@@ -126,6 +136,26 @@ class AutoDiscover
         if($wsdlClass !== null) {
             $this->setWsdlClass($wsdlClass);
         }
+    }
+
+    /**
+     * Set the discovery strategy for method type and other information.
+     *
+     * @param  AutoDiscover\DiscoveryStrategy $discoveryStrategy
+     * @return Zend\Soap\AutoDiscover
+     */
+    public function setDiscoveryStrategy(DiscoveryStrategy $discoveryStrategy)
+    {
+        $this->_discoveryStrategy = $discoveryStrategy;
+        return $this;
+    }
+
+    /**
+     * @return AutoDiscover\DiscoveryStrategy
+     */
+    public function getDiscoveryStrategy()
+    {
+        return $this->_discoveryStrategy;
     }
 
     /**
@@ -144,6 +174,7 @@ class AutoDiscover
     public function setClassMap($classMap)
     {
         $this->_classMap = $classMap;
+        return $this;
     }
 
     /**
@@ -374,60 +405,6 @@ class AutoDiscover
     }
 
     /**
-     * Get the function parameters php type.
-     *
-     * Default implementation assumes the default param doc-block tag.
-     *
-     * @param ReflectionParameter $param
-     * @return string
-     */
-    protected function _getFunctionParameterType(ReflectionParameter $param)
-    {
-        return $param->getType();
-    }
-
-    /**
-     * Get the functions return php type.
-     *
-     * Default implementation assumes the value of the return doc-block tag.
-     *
-     * @param AbstractFunction $function
-     * @param Prototype $prototype
-     * @return type
-     */
-    protected function _getFunctionReturnType(AbstractFunction $function, Prototype $prototype)
-    {
-        return $prototype->getReturnType();
-    }
-
-    /**
-     * Detect if the function is a one-way or two-way operation.
-     *
-     * Default implementation assumes one-way, when return value is "void".
-     *
-     * @param AbstractFunction $function
-     * @param Prototype $prototype
-     * @return type
-     */
-    protected function _isFunctionOneWay(AbstractFunction $function, Prototype $prototype)
-    {
-        return $prototype->getReturnType() == 'void';
-    }
-
-    /**
-     * Detect the functions documentation.
-     *
-     * Default implementation uses docblock description.
-     *
-     * @param AbstractFunction $function
-     * @return type
-     */
-    protected function _getFunctionDocumentation(AbstractFunction $function)
-    {
-        return $function->getDescription();
-    }
-
-    /**
      * Add a function to the WSDL document.
      *
      * @param $function \Zend\Server\Reflection\AbstractFunction function to add
@@ -464,7 +441,7 @@ class AutoDiscover
             foreach ($prototype->getParameters() as $param) {
                 $sequenceElement = array(
                     'name' => $param->getName(),
-                    'type' => $wsdl->getType($this->_getFunctionParameterType($param))
+                    'type' => $wsdl->getType($this->_discoveryStrategy->getFunctionParameterType($param))
                 );
                 if ($param->isOptional()) {
                     $sequenceElement['nillable'] = 'true';
@@ -480,12 +457,12 @@ class AutoDiscover
         } else {
             // RPC style: add each parameter as a typed part
             foreach ($prototype->getParameters() as $param) {
-                $args[$param->getName()] = array('type' => $wsdl->getType($this->_getFunctionParameterType($param)));
+                $args[$param->getName()] = array('type' => $wsdl->getType($this->_discoveryStrategy->getFunctionParameterType($param)));
             }
         }
         $wsdl->addMessage($functionName . 'In', $args);
 
-        $isOneWayMessage = $this->_isFunctionOneWay($function, $prototype);
+        $isOneWayMessage = $this->_discoveryStrategy->isFunctionOneWay($function, $prototype);
 
         if($isOneWayMessage == false) {
             // Add the output message (return value)
@@ -496,7 +473,7 @@ class AutoDiscover
                 if ($prototype->getReturnType() != "void") {
                     $sequence[] = array(
                         'name' => $functionName . 'Result',
-                        'type' => $wsdl->getType($this->_getFunctionReturnType($function, $prototype))
+                        'type' => $wsdl->getType($this->_discoveryStrategy->getFunctionReturnType($function, $prototype))
                     );
                 }
                 $element = array(
@@ -507,7 +484,7 @@ class AutoDiscover
                 $args['parameters'] = array('element' => $wsdl->addElement($element));
             } else if ($prototype->getReturnType() != "void") {
                 // RPC style: add the return value as a typed part
-                $args['return'] = array('type' => $wsdl->getType($this->_getFunctionReturnType($function, $prototype)));
+                $args['return'] = array('type' => $wsdl->getType($this->_discoveryStrategy->getFunctionReturnType($function, $prototype)));
             }
             $wsdl->addMessage($functionName . 'Out', $args);
         }
@@ -518,7 +495,7 @@ class AutoDiscover
         } else {
             $portOperation = $wsdl->addPortOperation($port, $functionName, 'tns:' . $functionName . 'In', false);
         }
-        $desc = $this->_getFunctionDocumentation($function);
+        $desc = $this->_discoveryStrategy->getFunctionDocumentation($function);
         if (strlen($desc) > 0) {
             $wsdl->addDocumentation($portOperation, $desc);
         }

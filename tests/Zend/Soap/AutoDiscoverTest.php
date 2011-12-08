@@ -334,7 +334,6 @@ class AutoDiscoverTest extends \PHPUnit_Framework_TestCase
         unlink(__DIR__.'/TestAsset/setclass.wsdl');
     }
 
-
     function testAddFunctionSimple()
     {
         $scriptUri = 'http://localhost/my_script.php';

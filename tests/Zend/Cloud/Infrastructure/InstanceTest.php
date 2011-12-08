@@ -31,7 +31,7 @@ class InstanceTest extends TestCase
 {
     /**
      * Mock class for the Adapter (dummy methods)
-     * 
+     *
      * @var ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter
      */
     protected static $adapter;
@@ -55,7 +55,7 @@ class InstanceTest extends TestCase
             Instance::INSTANCE_CPU        => 'foo',
             Instance::INSTANCE_RAM        => 'foo',
             Instance::INSTANCE_STORAGE    => 'foo',
-            Instance::INSTANCE_STATUS     => 'foo',        
+            Instance::INSTANCE_STATUS     => 'foo',
             Instance::INSTANCE_ZONE       => 'foo',
         );
         self::$adapter = new TestAsset\MockAdapter();
@@ -98,7 +98,7 @@ class InstanceTest extends TestCase
     /**
      * Test construct with missing params
      */
-    public function testConstructExceptionMissingParams() 
+    public function testConstructExceptionMissingParams()
     {
         $this->setExpectedException(
             'Zend\Cloud\Infrastructure\Exception\InvalidArgumentException',

@@ -55,7 +55,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
     /**
      * Enter description here...
      *
-     * @return \Zend\Service\SlideShare
+     * @return \Zend\Service\SlideShare\SlideShare
      */
     protected function _getSSObject()
     {
@@ -73,7 +73,6 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-
         if(!defined("TESTS_ZEND_SERVICE_SLIDESHARE_APIKEY") ||
            !defined("TESTS_ZEND_SERVICE_SLIDESHARE_SHAREDSECRET") ||
            !defined("TESTS_ZEND_SERVICE_SLIDESHARE_USERNAME") ||
@@ -89,7 +88,6 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSlideShow()
     {
-
         if(!defined("TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID") ||
            (TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID <= 0)) {
                $this->markTestSkipped("You must provide a Slideshow ID to retrieve to perform this test");
@@ -108,7 +106,6 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSlideShowByTag()
     {
-
         $ss = $this->_getSSObject();
 
         try {
@@ -125,7 +122,6 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSlideShowByTags()
     {
-
         $ss = $this->_getSSObject();
 
         try {
@@ -144,7 +140,6 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSlideShowByUsername()
     {
-
         $ss = $this->_getSSObject();
 
         try {
@@ -162,7 +157,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 
     public function testUploadSlideShowInvalidFileException()
     {
-        $this->setExpectedException('\Zend\Service\SlideShare\Exception\InvalidArgumentException', 
+        $this->setExpectedException('\Zend\Service\SlideShare\Exception\InvalidArgumentException',
                     'Specified Slideshow for upload not found or unreadable');
 
         $ss = $this->_getSSObject();
@@ -194,7 +189,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
             $result = $ss->uploadSlideShow($show, false);
         } catch(Exception $e) {
 
-            if($e->getCode() == Zend_Service_SlideShare::SERVICE_ERROR_NOT_SOURCEOBJ) {
+            if($e->getCode() == SlideShareService::SERVICE_ERROR_NOT_SOURCEOBJ) {
                 // We ignore this exception, the web service sometimes throws this
                 // error code because it seems to be buggy. Unfortunately it seems
                 // to be sparatic so we can't code around it and have to call this
@@ -252,7 +247,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
 	public function testSlideShareObjectHandlesUnicodeCharactersWell()
 	{
         $slideShow = new SlideShare\SlideShow();
-		
+
 		$slideShow->setTitle('Unicode test: ஸ்றீனிவாஸ ராமானுஜன் ஐயங்கார்');
 
 		if (!extension_loaded('mbstring')) {

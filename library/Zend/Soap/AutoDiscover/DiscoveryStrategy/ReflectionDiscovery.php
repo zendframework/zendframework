@@ -22,10 +22,15 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\Wsdl;
+namespace Zend\Soap\AutoDiscover\DiscoveryStrategy;
+
+use Zend\Soap\AutoDiscover\DiscoveryStrategy,
+    Zend\Server\Reflection\AbstractFunction,
+    Zend\Server\Reflection\Prototype,
+    Zend\Server\Reflection\ReflectionParameter;
 
 /**
- * Interface for Zend_Soap_Wsdl_Strategy.
+ * Describes how types, return values and method details are detected during AutoDiscovery of a WSDL.
  *
  * @category   Zend
  * @package    Zend_Soap
@@ -33,20 +38,26 @@ namespace Zend\Soap\Wsdl;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Strategy
-{
-    /**
-     * Method accepts the current WSDL context file.
-     *
-     * @param <type> $context
-     */
-    public function setContext(\Zend\Soap\Wsdl $context);
 
-    /**
-     * Create a complex type based on a strategy
-     *
-     * @param  string $type
-     * @return string XSD type
-     */
-    public function addComplexType($type);
+class ReflectionDiscovery implements DiscoveryStrategy
+{
+    public function getFunctionDocumentation(AbstractFunction $function)
+    {
+        return $function->getDescription();
+    }
+
+    public function getFunctionParameterType(ReflectionParameter $param)
+    {
+        return $param->getType();
+    }
+
+    public function getFunctionReturnType(AbstractFunction $function, Prototype $prototype)
+    {
+        return $prototype->getReturnType();
+    }
+
+    public function isFunctionOneWay(AbstractFunction $function, Prototype $prototype)
+    {
+        return $prototype->getReturnType() == 'void';
+    }
 }

@@ -22,9 +22,9 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\Wsdl\Strategy;
+namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
-use Zend\Soap\Wsdl\Strategy;
+use Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 /**
  * Zend_Soap_Wsdl_Strategy_AnyType
@@ -36,7 +36,7 @@ use Zend\Soap\Wsdl\Strategy;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class AnyType implements Strategy
+class AnyType implements ComplexTypeStrategy
 {
     /**
      * Not needed in this strategy.

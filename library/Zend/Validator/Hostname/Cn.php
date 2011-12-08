@@ -24,7 +24,7 @@
 namespace Zend\Validator\Hostname;
 
 /**
- * Ressource file for chinese idn validation
+ * Resource file for chinese idn validation
  *
  * @category   Zend
  * @package    Zend_Validate

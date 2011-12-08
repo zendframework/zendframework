@@ -24,7 +24,7 @@
 namespace Zend\Validator\Hostname;
 
 /**
- * Ressource file for japanese idn validation
+ * Resource file for japanese idn validation
  *
  * @category   Zend
  * @package    Zend_Validate

@@ -11,63 +11,63 @@ class CaptureCache extends AbstractPattern
      *
      * @var string
      */
-    protected $_publicDir = null;
+    protected $publicDir = null;
 
     /**
      * Used umask on creating a cache directory
      *
      * @var int
      */
-    protected $_dirUmask = 0007;
+    protected $dirUmask = 0007;
 
     /**
      * Used umask on creating a cache file
      *
      * @var int
      */
-    protected $_fileUmask = 0117;
+    protected $fileUmask = 0117;
 
     /**
      * Lock files on writing
      *
      * @var boolean
      */
-    protected $_fileLocking = true;
+    protected $fileLocking = true;
 
     /**
      * The index filename
      *
      * @var string
      */
-    protected $_indexFilename = 'index.html';
+    protected $indexFilename = 'index.html';
 
     /**
      * Page identifier
      *
      * @var null|string
      */
-    protected $_pageId = null;
+    protected $pageId = null;
 
     /**
      * Storage for tagging
      *
      * @var null|StorageAdapter
      */
-    protected $_tagStorage = null;
+    protected $tagStorage = null;
 
     /**
      * Cache item key to store tags
      *
      * @var string
      */
-    protected $_tagKey = 'ZendCachePatternCaptureCache_Tags';
+    protected $tagKey = 'ZendCachePatternCaptureCache_Tags';
 
     /**
      * Tags
      *
      * @var array
      */
-    protected $_tags = array();
+    protected $tags = array();
 
     /**
      * Constructor
@@ -106,7 +106,7 @@ class CaptureCache extends AbstractPattern
      */
     public function setPublicDir($dir)
     {
-        $this->_publicDir = $dir;
+        $this->publicDir = $dir;
         return $this;
     }
 
@@ -117,7 +117,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getPublicDir()
     {
-        return $this->_publicDir;
+        return $this->publicDir;
     }
 
     /**
@@ -169,7 +169,7 @@ class CaptureCache extends AbstractPattern
             );
         }
 
-        $this->_dirUmask = $umask;
+        $this->dirUmask = $umask;
         return $this;
     }
 
@@ -180,7 +180,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getDirUmask()
     {
-        return $this->_dirUmask;
+        return $this->dirUmask;
     }
 
     /**
@@ -236,7 +236,7 @@ class CaptureCache extends AbstractPattern
             );
         }
 
-        $this->_fileUmask = $umask;
+        $this->fileUmask = $umask;
         return $this;
     }
 
@@ -247,7 +247,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getFileUmask()
     {
-        return $this->_fileUmask;
+        return $this->fileUmask;
     }
 
     /**
@@ -258,7 +258,7 @@ class CaptureCache extends AbstractPattern
      */
     public function setFileLocking($flag)
     {
-        $this->_fileLocking = (boolean)$flag;
+        $this->fileLocking = (boolean)$flag;
         return $this;
     }
 
@@ -269,7 +269,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getFileLocking()
     {
-        return $this->_fileLocking;
+        return $this->fileLocking;
     }
 
     /**
@@ -280,7 +280,7 @@ class CaptureCache extends AbstractPattern
      */
     public function setIndexFilename($filename)
     {
-        $this->_indexFilename = (string)$filename;
+        $this->indexFilename = (string)$filename;
         return $this;
     }
 
@@ -291,7 +291,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getIndexFilename()
     {
-        return $this->_indexFilename;
+        return $this->indexFilename;
     }
 
     /**
@@ -302,7 +302,7 @@ class CaptureCache extends AbstractPattern
      */
     public function setTagStorage(StorageAdapter $storage = null)
     {
-        $this->_tagStorage = $storage;
+        $this->tagStorage = $storage;
         return $this;
     }
 
@@ -313,7 +313,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getTagStorage()
     {
-        return $this->_tagStorage;
+        return $this->tagStorage;
     }
 
     /**
@@ -328,7 +328,7 @@ class CaptureCache extends AbstractPattern
             throw new InvalidArgumentException("Missing tag key '{$tagKey}'");
         }
 
-        $this->_tagKey = $tagKey;
+        $this->tagKey = $tagKey;
         return $this;
     }
 
@@ -339,7 +339,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getTagKey()
     {
-        return $this->_tagKey;
+        return $this->tagKey;
     }
 
     /**
@@ -350,7 +350,7 @@ class CaptureCache extends AbstractPattern
      */
     public function setTags(array $tags)
     {
-        $this->_tags = $tags;
+        $this->tags = $tags;
         return $this;
     }
 
@@ -361,7 +361,7 @@ class CaptureCache extends AbstractPattern
      */
     public function getTags()
     {
-        return $this->_tags;
+        return $this->tags;
     }
 
     /**
@@ -373,8 +373,8 @@ class CaptureCache extends AbstractPattern
      */
     public function start($pageId = null, array $options = array())
     {
-        if ($this->_pageId !== null) {
-            throw new RuntimeException("Capturing already stated with page id '{$this->_pageId}'");
+        if ($this->pageId !== null) {
+            throw new RuntimeException("Capturing already stated with page id '{$this->pageId}'");
         }
 
         if (isset($options['tags'])) {
@@ -387,12 +387,12 @@ class CaptureCache extends AbstractPattern
         }
 
         if (($pageId = (string)$pageId) === '') {
-            $pageId = $this->_detectPageId();
+            $pageId = $this->detectPageId();
         }
 
-        ob_start(array($this, '_flush'));
-        ob_implicit_flush(false);
-        $this->_pageId = $pageId;
+        ob_start(array($this, 'flush'));
+        ob_implicitflush(false);
+        $this->pageId = $pageId;
 
         return false;
     }
@@ -408,12 +408,12 @@ class CaptureCache extends AbstractPattern
     public function get($pageId = null, array $options = array())
     {
         if (($pageId = (string)$pageId) === '') {
-            $pageId = $this->_detectPageId();
+            $pageId = $this->detectPageId();
         }
 
         $file = $this->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->_pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->_pageId2Filename($pageId);
+              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             if (($content = @file_get_contents($file)) === false) {
@@ -436,12 +436,12 @@ class CaptureCache extends AbstractPattern
     public function exists($pageId = null, array $options = array())
     {
         if (($pageId = (string)$pageId) === '') {
-            $pageId = $this->_detectPageId();
+            $pageId = $this->detectPageId();
         }
 
         $file = $this->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->_pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->_pageId2Filename($pageId);
+              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         return file_exists($file);
     }
@@ -457,12 +457,12 @@ class CaptureCache extends AbstractPattern
     public function remove($pageId = null, array $options = array())
     {
         if (($pageId = (string)$pageId) === '') {
-            $pageId = $this->_detectPageId();
+            $pageId = $this->detectPageId();
         }
 
         $file = $this->getPublicDir()
-              . DIRECTORY_SEPARATOR . $this->_pageId2Path($pageId)
-              . DIRECTORY_SEPARATOR . $this->_pageId2Filename($pageId);
+              . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
+              . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
         if (file_exists($file)) {
             if (!@unlink($file)) {
@@ -485,7 +485,7 @@ class CaptureCache extends AbstractPattern
      *
      * @return string
      */
-    protected function _detectPageId()
+    protected function detectPageId()
     {
         return $_SERVER['REQUEST_URI'];
     }
@@ -496,7 +496,7 @@ class CaptureCache extends AbstractPattern
      * @param string $pageId
      * @return string
      */
-    protected function _pageId2Filename($pageId)
+    protected function pageId2Filename($pageId)
     {
         $filename = basename($pageId);
 
@@ -513,7 +513,7 @@ class CaptureCache extends AbstractPattern
      * @param string $pageId
      * @return string
      */
-    protected function _pageId2Path($pageId)
+    protected function pageId2Path($pageId)
     {
         $path = rtrim(dirname($pageId), '/');
 
@@ -531,9 +531,9 @@ class CaptureCache extends AbstractPattern
      * @param  string $output Buffered output
      * @return boolean FALSE means original input is sent to the browser.
      */
-    protected function _flush($output)
+    protected function flush($output)
     {
-        $this->_save($output);
+        $this->save($output);
 
         // http://php.net/manual/function.ob-start.php
         // -> If output_callback  returns FALSE original input is sent to the browser.
@@ -546,9 +546,9 @@ class CaptureCache extends AbstractPattern
      * @param  $output
      * @throws RuntimeException
      */
-    protected function _save($output)
+    protected function save($output)
     {
-        $path     = $this->_pageId2Path($this->_pageId);
+        $path     = $this->pageId2Path($this->pageId);
         $fullPath = $this->getPublicDir() . DIRECTORY_SEPARATOR . $path;
         if (!file_exists($fullPath)) {
             $oldUmask = umask($this->getDirUmask());
@@ -565,9 +565,9 @@ class CaptureCache extends AbstractPattern
         } else {
             $oldUmask = umask($this->getFileUmask());
         }
-        $file = $path . DIRECTORY_SEPARATOR . $this->_pageId2Filename($this->_pageId);
+        $file = $path . DIRECTORY_SEPARATOR . $this->pageId2Filename($this->pageId);
         $fullFile = $this->getPublicDir() . DIRECTORY_SEPARATOR . $file;
-        $this->_putFileContent($fullFile, $output);
+        $this->putFileContent($fullFile, $output);
 
         $tagStorage = $this->getTagStorage();
         if ($tagStorage) {
@@ -577,8 +577,8 @@ class CaptureCache extends AbstractPattern
                 $tagIndex = null;
             }
 
-            if ($this->_tags) {
-                $tagIndex[$file] = &$this->_tags;
+            if ($this->tags) {
+                $tagIndex[$file] = &$this->tags;
             } elseif ($tagIndex) {
                 unset($tagIndex[$file]);
             }
@@ -596,7 +596,7 @@ class CaptureCache extends AbstractPattern
      * @param  string $data  Data to write
      * @throws RuntimeException
      */
-    protected function _putFileContent($file, $data)
+    protected function putFileContent($file, $data)
     {
         $flags = FILE_BINARY; // since PHP 6 but defined as 0 in PHP 5.3
         if ($this->getFileLocking()) {

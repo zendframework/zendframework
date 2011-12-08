@@ -9,39 +9,32 @@ class ClassCache extends CallbackCache
 {
 
     /**
-     * The storage adapter
-     *
-     * @var Zend\Cache\Storage\Adapter
-     */
-    protected $_storage;
-
-    /**
      * The entity
      *
      * @var null|string
      */
-    protected $_entity               = null;
+    protected $entity = null;
 
     /**
      * Cache by default
      *
      * @var bool
      */
-    protected $_cacheByDefault       = true;
+    protected $cacheByDefault = true;
 
     /**
      * Cache methods
      *
      * @var array
      */
-    protected $_cacheMethods         = array();
+    protected $cacheMethods = array();
 
     /**
      * Non-cache methods
      *
      * @var array
      */
-    protected $_nonCacheMethods      = array();
+    protected $nonCacheMethods = array();
 
     /**
      * Constructor
@@ -68,46 +61,11 @@ class ClassCache extends CallbackCache
     public function getOptions()
     {
         $options = parent::getOptions();
-        $options['storage']           = $this->getStorage();
         $options['entity']            = $this->getEntity();
         $options['cache_by_default']  = $this->getCacheByDefault();
         $options['cache_methods']     = $this->getCacheMethods();
         $options['non_cache_methods'] = $this->getNonCacheMethods();
         return $options;
-    }
-
-    /**
-     * Get cache storage
-     *
-     * return Zend\Cache\Storage\Adapter
-     */
-    public function getStorage()
-    {
-        return $this->_storage;
-    }
-
-    /**
-     * Set cache storage
-     *
-     * @param Zend\Cache\Storage\Adapter|array|string $storage
-     * @return Zend\Cache\Pattern\PatternInterface
-     */
-    public function setStorage($storage)
-    {
-        if (is_array($storage)) {
-            $storage = Cache\StorageFactory::factory($storage);
-        } elseif (is_string($storage)) {
-            $storage = Cache\StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof Cache\Storage\Adapter) ) {
-            throw new InvalidArgumentException(
-                'The storage must be an instanceof Zend\Cache\Storage\Adapter '
-              . 'or an array passed to Zend\Cache\Storage::factory '
-              . 'or simply the name of the storage adapter'
-            );
-        }
-
-        $this->_storage = $storage;
-        return $this;
     }
 
     /**
@@ -121,7 +79,7 @@ class ClassCache extends CallbackCache
         if (!is_string($entity)) {
             throw new InvalidArgumentException('Invalid entity, must be a classname');
         }
-        $this->_entity = $entity;
+        $this->entity = $entity;
         return $this;
     }
 
@@ -132,7 +90,7 @@ class ClassCache extends CallbackCache
      */
     public function getEntity()
     {
-        return $this->_entity;
+        return $this->entity;
     }
 
     /**
@@ -143,7 +101,7 @@ class ClassCache extends CallbackCache
      */
     public function setCacheByDefault($flag)
     {
-        $this->_cacheByDefault = (bool)$flag;
+        $this->cacheByDefault = (bool)$flag;
         return $this;
     }
 
@@ -154,7 +112,7 @@ class ClassCache extends CallbackCache
      */
     public function getCacheByDefault()
     {
-        return $this->_cacheByDefault;
+        return $this->cacheByDefault;
     }
 
     /**
@@ -165,7 +123,7 @@ class ClassCache extends CallbackCache
      */
     public function setCacheMethods(array $methods)
     {
-        $this->_cacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->cacheMethods = array_values(array_unique(array_map(function ($method) {
             return strtolower($method);
         }, $methods)));
 
@@ -179,7 +137,7 @@ class ClassCache extends CallbackCache
      */
     public function getCacheMethods()
     {
-        return $this->_cacheMethods;
+        return $this->cacheMethods;
     }
 
     /**
@@ -190,7 +148,7 @@ class ClassCache extends CallbackCache
      */
     public function setNonCacheMethods(array $methods)
     {
-        $this->_nonCacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->nonCacheMethods = array_values(array_unique(array_map(function ($method) {
             return strtolower($method);
         }, $methods)));
 
@@ -204,7 +162,7 @@ class ClassCache extends CallbackCache
      */
     public function getNonCacheMethods()
     {
-        return $this->_nonCacheMethods;
+        return $this->nonCacheMethods;
     }
 
     /**

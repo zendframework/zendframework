@@ -9,53 +9,46 @@ class ObjectCache extends CallbackCache
 {
 
     /**
-     * The storage adapter
-     *
-     * @var Zend\Cache\Storage\Adapter
-     */
-    protected $_storage;
-
-    /**
      * The entity
      *
      * @var null|object
      */
-    protected $_entity               = null;
+    protected $entity = null;
 
     /**
      * The entity key
      *
      * @var null|string
      */
-    protected $_entityKey            = null;
+    protected $entityKey = null;
 
     /**
      * Cache by default
      *
      * @var bool
      */
-    protected $_cacheByDefault       = true;
+    protected $cacheByDefault = true;
 
     /**
      * Cache methods
      *
      * @var array
      */
-    protected $_cacheMethods         = array();
+    protected $cacheMethods = array();
 
     /**
      * Non-cache methods
      *
      * @var array
      */
-    protected $_nonCacheMethods      = array('__tostring');
+    protected $nonCacheMethods = array('__tostring');
 
     /**
      * Cache magic properties
      *
      * @var bool
      */
-    protected $_cacheMagicProperties = false;
+    protected $cacheMagicProperties = false;
 
     /**
      * Constructor
@@ -82,7 +75,6 @@ class ObjectCache extends CallbackCache
     public function getOptions()
     {
         $options = parent::getOptions();
-        $options['storage']                = $this->getStorage();
         $options['entity']                 = $this->getEntity();
         $options['entity_key']             = $this->getEntityKey();
         $options['cache_by_default']       = $this->getCacheByDefault();
@@ -90,40 +82,6 @@ class ObjectCache extends CallbackCache
         $options['non_cache_methods']      = $this->getNonCacheMethods();
         $options['cache_magic_properties'] = $this->getCacheMagicProperties();
         return $options;
-    }
-
-    /**
-     * Get cache storage
-     *
-     * return Zend\Cache\Storage\Adapter
-     */
-    public function getStorage()
-    {
-        return $this->_storage;
-    }
-
-    /**
-     * Set cache storage
-     *
-     * @param Zend\Cache\Storage\Adapter|array|string $storage
-     * @return Zend\Cache\Pattern\PatternInterface
-     */
-    public function setStorage($storage)
-    {
-        if (is_array($storage)) {
-            $storage = Cache\StorageFactory::factory($storage);
-        } elseif (is_string($storage)) {
-            $storage = Cache\StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof Cache\Storage\Adapter) ) {
-            throw new InvalidArgumentException(
-                'The storage must be an instanceof Zend\Cache\Storage\Adapter '
-              . 'or an array passed to Zend\Cache\Storage::factory '
-              . 'or simply the name of the storage adapter'
-            );
-        }
-
-        $this->_storage = $storage;
-        return $this;
     }
 
     /**
@@ -137,7 +95,7 @@ class ObjectCache extends CallbackCache
         if (!is_object($entity)) {
             throw new InvalidArgumentException('Invalid entity, must be an object');
         }
-        $this->_entity = $entity;
+        $this->entity = $entity;
         return $this;
     }
 
@@ -148,7 +106,7 @@ class ObjectCache extends CallbackCache
      */
     public function getEntity()
     {
-        return $this->_entity;
+        return $this->entity;
     }
 
     /**
@@ -166,9 +124,9 @@ class ObjectCache extends CallbackCache
     public function setEntityKey($key)
     {
         if ($key !== null) {
-            $this->_entityKey = (string)$key;
+            $this->entityKey = (string)$key;
         } else {
-            $this->_entityKey = null;
+            $this->entityKey = null;
         }
 
         return $this;
@@ -182,7 +140,7 @@ class ObjectCache extends CallbackCache
      */
     public function getEntityKey()
     {
-        return $this->_entityKey;
+        return $this->entityKey;
     }
 
     /**
@@ -193,7 +151,7 @@ class ObjectCache extends CallbackCache
      */
     public function setCacheByDefault($flag)
     {
-        $this->_cacheByDefault = (bool)$flag;
+        $this->cacheByDefault = (bool)$flag;
         return $this;
     }
 
@@ -204,7 +162,7 @@ class ObjectCache extends CallbackCache
      */
     public function getCacheByDefault()
     {
-        return $this->_cacheByDefault;
+        return $this->cacheByDefault;
     }
 
     /**
@@ -215,7 +173,7 @@ class ObjectCache extends CallbackCache
      */
     public function setCacheMethods(array $methods)
     {
-        $this->_cacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->cacheMethods = array_values(array_unique(array_map(function ($method) {
             $method = strtolower($method);
 
             switch ($method) {
@@ -241,7 +199,7 @@ class ObjectCache extends CallbackCache
      */
     public function getCacheMethods()
     {
-        return $this->_cacheMethods;
+        return $this->cacheMethods;
     }
 
     /**
@@ -252,7 +210,7 @@ class ObjectCache extends CallbackCache
      */
     public function setNonCacheMethods(array $methods)
     {
-        $this->_nonCacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->nonCacheMethods = array_values(array_unique(array_map(function ($method) {
             $method = strtolower($method);
 
             switch ($method) {
@@ -278,7 +236,7 @@ class ObjectCache extends CallbackCache
      */
     public function getNonCacheMethods()
     {
-        return $this->_nonCacheMethods;
+        return $this->nonCacheMethods;
     }
 
     /**
@@ -289,7 +247,7 @@ class ObjectCache extends CallbackCache
      */
     public function setCacheMagicProperties($flag)
     {
-        $this->_cacheMagicProperties = (bool)$flag;
+        $this->cacheMagicProperties = (bool)$flag;
         return $this;
     }
 
@@ -300,7 +258,7 @@ class ObjectCache extends CallbackCache
      */
     public function getCacheMagicProperties()
     {
-        return $this->_cacheMagicProperties;
+        return $this->cacheMagicProperties;
     }
 
     /**

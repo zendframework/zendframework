@@ -13,14 +13,14 @@ class CallbackCache extends AbstractPattern
      *
      * @var Zend\Cache\Storage\Adapter
      */
-    protected $_storage;
+    protected $storage;
 
     /**
      * Caching output stream
      *
      * @var boolean
      */
-    protected $_cacheOutput = true;
+    protected $cacheOutput = true;
 
     /**
      * Constructor
@@ -57,7 +57,7 @@ class CallbackCache extends AbstractPattern
      */
     public function getStorage()
     {
-        return $this->_storage;
+        return $this->storage;
     }
 
     /**
@@ -80,7 +80,7 @@ class CallbackCache extends AbstractPattern
             );
         }
 
-        $this->_storage = $storage;
+        $this->storage = $storage;
         return $this;
     }
 
@@ -91,7 +91,7 @@ class CallbackCache extends AbstractPattern
      */
     public function setCacheOutput($flag)
     {
-        $this->_cacheOutput = (bool)$flag;
+        $this->cacheOutput = (bool)$flag;
         return $this;
     }
 
@@ -102,7 +102,7 @@ class CallbackCache extends AbstractPattern
      */
     public function getCacheOutput()
     {
-        return $this->_cacheOutput;
+        return $this->cacheOutput;
     }
 
     /**

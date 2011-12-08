@@ -15,14 +15,14 @@ class OutputCache extends AbstractPattern
      *
      * @var Zend\Cache\Storage\Adapter
      */
-    protected $_storage;
+    protected $storage;
 
     /**
      * The key stack
      *
      * @var array
      */
-    protected $_keyStack = array();
+    protected $keyStack = array();
 
     /**
      * Constructor
@@ -58,7 +58,7 @@ class OutputCache extends AbstractPattern
      */
     public function getStorage()
     {
-        return $this->_storage;
+        return $this->storage;
     }
 
     /**
@@ -81,7 +81,7 @@ class OutputCache extends AbstractPattern
             );
         }
 
-        $this->_storage = $storage;
+        $this->storage = $storage;
         return $this;
     }
 
@@ -122,7 +122,7 @@ class OutputCache extends AbstractPattern
 
         ob_start();
         ob_implicit_flush(false);
-        $this->_keyStack[] = $key;
+        $this->keyStack[] = $key;
         return false;
     }
 
@@ -140,7 +140,7 @@ class OutputCache extends AbstractPattern
      */
     public function end(array $options = array())
     {
-        $key = array_pop($this->_keyStack);
+        $key = array_pop($this->keyStack);
         if ($key === null) {
             throw new RuntimeException('use of end() without a start()');
         }

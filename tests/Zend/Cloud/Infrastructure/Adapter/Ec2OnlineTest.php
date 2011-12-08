@@ -60,17 +60,15 @@ class Ec2OnlineTest extends TestCase
     protected static $instanceId;
     
     /**
-     * Sets up this test case
-     *
-     * @return void
+     * Setup for each test
      */
-    public static function setUpBeforeClass()
+    public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
-            self::markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Ec2 online tests are not enabled');
+            $this->markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Ec2 online tests are not enabled');
         }
         if(!defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
-            self::markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
+            $this->markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
         }
 
         self::$infrastructure = Factory::getAdapter(array( 
@@ -87,13 +85,6 @@ class Ec2OnlineTest extends TestCase
                              ->getHttpClient()
                              ->setAdapter(self::$httpClientAdapterSocket);
 
-    }
-
-    /**
-     * Setup for each test
-     */
-    public function setUp()
-    {
         // terms of use compliance: no more than two queries per second
         sleep(2);
     }

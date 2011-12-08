@@ -57,17 +57,15 @@ class RackspaceOnlineTest extends \PHPUnit_Framework_TestCase
     protected static $instanceId;
 
     /**
-     * Sets up this test case
-     *
-     * @return void
+     * Setup for each test
      */
-    public static function setUpBeforeClass()
+    public function setUp()
     {
         if (!constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED')) {
-            self::markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Rackspace online tests are not enabled');
+            $this->markTestSkipped('Zend\Cloud\Infrastructure\Adapter\Rackspace online tests are not enabled');
         }
         if(!defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_USER') || !defined('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_KEY')) {
-            self::markTestSkipped('Constants User and Key have to be set.');
+            $this->markTestSkipped('Constants User and Key have to be set.');
         }
 
         self::$infrastructure = \Zend\Cloud\Infrastructure\Factory::getAdapter(array(
@@ -83,13 +81,6 @@ class RackspaceOnlineTest extends \PHPUnit_Framework_TestCase
         self::$infrastructure->getAdapter()
                              ->getHttpClient()
                              ->setAdapter(self::$httpClientAdapterSocket);
-
-    }
-    /**
-     * Setup for each test
-     */
-    public function setUp()
-    {
         // terms of use compliance: no more than two queries per second
         sleep(2);
     }

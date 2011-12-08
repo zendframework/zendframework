@@ -13,14 +13,14 @@ class StorageFactory
      *
      * @var null|Zend\Loader\Broker
      */
-    protected static $_adapterBroker = null;
+    protected static $adapterBroker = null;
 
     /**
      * Broker for loading plugins
      *
      * @var null|Zend\Loader\Broker
      */
-    protected static $_pluginBroker = null;
+    protected static $pluginBroker = null;
 
     /**
      * The storage factory
@@ -138,10 +138,10 @@ class StorageFactory
      */
     public static function getAdapterBroker()
     {
-        if (self::$_adapterBroker === null) {
-            self::$_adapterBroker = new Storage\AdapterBroker();
+        if (self::$adapterBroker === null) {
+            self::$adapterBroker = new Storage\AdapterBroker();
         }
-        return self::$_adapterBroker;
+        return self::$adapterBroker;
     }
 
     /**
@@ -152,7 +152,7 @@ class StorageFactory
      */
     public static function setAdapterBroker(Broker $broker)
     {
-        self::$_adapterBroker = $broker;
+        self::$adapterBroker = $broker;
     }
 
     /**
@@ -160,7 +160,7 @@ class StorageFactory
      */
     public static function resetAdapterBroker()
     {
-        self::$_adapterBroker = new Storage\AdapterBroker();
+        self::$adapterBroker = new Storage\AdapterBroker();
     }
 
     /**
@@ -189,10 +189,10 @@ class StorageFactory
      */
     public static function getPluginBroker()
     {
-        if (self::$_pluginBroker === null) {
-            self::$_pluginBroker = new Storage\PluginBroker();
+        if (self::$pluginBroker === null) {
+            self::$pluginBroker = new Storage\PluginBroker();
         }
-        return self::$_pluginBroker;
+        return self::$pluginBroker;
     }
 
     /**
@@ -203,7 +203,7 @@ class StorageFactory
      */
     public static function setPluginBroker(Broker $broker)
     {
-        self::$_pluginBroker = $broker;
+        self::$pluginBroker = $broker;
     }
 
     /**
@@ -211,7 +211,7 @@ class StorageFactory
      */
     public static function resetPluginBroker()
     {
-        self::$_pluginBroker = new Storage\PluginBroker();
+        self::$pluginBroker = new Storage\PluginBroker();
     }
 
 }

@@ -41,7 +41,7 @@ class Utils
      */
     static public function getPhpMemoryCapacity()
     {
-        $memSize = (float)self::_bytesFromString(ini_get('memory_limit'));
+        $memSize = (float)self::bytesFromString(ini_get('memory_limit'));
         if ($memSize <= 0) {
             return self::getSystemMemoryCapacity();
         }
@@ -83,16 +83,16 @@ class Utils
         $memFree  = 0;
 
         if (isset($meminfoIndex['MemTotal'])) {
-            $memTotal+= self::_bytesFromString( $meminfoValues[ $meminfoIndex['MemTotal'] ] );
+            $memTotal+= self::bytesFromString( $meminfoValues[ $meminfoIndex['MemTotal'] ] );
         }
         if (isset($meminfoIndex['MemFree'])) {
-            $memFree+= self::_bytesFromString( $meminfoValues[ $meminfoIndex['MemFree'] ] );
+            $memFree+= self::bytesFromString( $meminfoValues[ $meminfoIndex['MemFree'] ] );
         }
         if (isset($meminfoIndex['Buffers'])) {
-            $memFree+= self::_bytesFromString( $meminfoValues[ $meminfoIndex['Buffers'] ] );
+            $memFree+= self::bytesFromString( $meminfoValues[ $meminfoIndex['Buffers'] ] );
         }
         if (isset($meminfoIndex['Cached'])) {
-            $memFree+= self::_bytesFromString( $meminfoValues[ $meminfoIndex['Cached'] ] );
+            $memFree+= self::bytesFromString( $meminfoValues[ $meminfoIndex['Cached'] ] );
         }
 
         return array(
@@ -201,7 +201,7 @@ class Utils
      * @return float
      * @throws Zend\Cache\Exception\RuntimeException
      */
-    static protected function _bytesFromString($memStr)
+    static protected function bytesFromString($memStr)
     {
         if (preg_match('/\s*([\-\+]?\d+)\s*(\w*)\s*/', $memStr, $matches)) {
             $value = (float)$matches[1];

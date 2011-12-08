@@ -12,7 +12,7 @@ class PatternFactory
      *
      * @var null|Zend\Loader\Broker
      */
-    protected static $_broker = null;
+    protected static $broker = null;
 
     /**
      * Instantiate a cache pattern
@@ -39,11 +39,11 @@ class PatternFactory
      */
     public static function getBroker()
     {
-        if (self::$_broker === null) {
-            self::$_broker = self::_getDefaultBroker();
+        if (self::$broker === null) {
+            self::$broker = self::_getDefaultBroker();
         }
 
-        return self::$_broker;
+        return self::$broker;
     }
 
     /**
@@ -54,7 +54,7 @@ class PatternFactory
      */
     public static function setBroker(Broker $broker)
     {
-        self::$_broker = $broker;
+        self::$broker = $broker;
     }
 
     /**
@@ -64,7 +64,7 @@ class PatternFactory
      */
     public static function resetBroker()
     {
-        self::$_broker = null;
+        self::$broker = null;
     }
 
     /**

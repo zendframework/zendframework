@@ -120,7 +120,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Loader::isReadable(__FILE__ . '.foobaar'));
 
         // test that a file in include_path gets loaded, see ZF-2985
-        $this->assertTrue(Loader::isReadable('Zend/Controller/Front.php'), get_include_path());
+        $this->assertTrue(Loader::isReadable('Zend/Version.php'), get_include_path());
     }
 
     /**

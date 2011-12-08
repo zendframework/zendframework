@@ -26,7 +26,8 @@ namespace ZendTest\Cloud\Infrastructure\Adapter\TestAssets;
 
 use Zend\Cloud\Infrastructure\Adapter\AbstractAdapter;
 
-class MockAdapter extends AbstractAdapter {
+class MockAdapter extends AbstractAdapter 
+{
     /**
      * Simulate waiting for status $status.
      * 

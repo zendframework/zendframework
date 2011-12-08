@@ -122,7 +122,7 @@ interface Adapter
      *
      * @param array $keys
      * @param array $options
-     * @return array Assoziative array of existing keys
+     * @return array Array of existing keys
      * @throws Zend\Cache\Exception
      */
     public function hasItems(array $keys, array $options = array());
@@ -215,12 +215,17 @@ interface Adapter
     /**
      * Set item only if token matches
      *
+     * It uses the token from received from getItem to
+     * check if the item has changed befor overwrite it.
+     *
      * @param mixed       $token
      * @param string|null $key
      * @param mixed       $value
      * @param array       $options
      * @return boolean
      * @throws Zend\Cache\Exception
+     * @see getItem()
+     * @see setItem()
      */
     public function checkAndSetItem($token, $key, $value, array $options = array());
 
@@ -229,7 +234,7 @@ interface Adapter
      *
      * @param string $key
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
      */
     public function touchItem($key, array $options = array());
@@ -239,7 +244,7 @@ interface Adapter
      *
      * @param array $keys
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
      */
     public function touchItems(array $keys, array $options = array());
@@ -249,7 +254,7 @@ interface Adapter
      *
      * @param string $key
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
      */
     public function removeItem($key, array $options = array());
@@ -259,7 +264,7 @@ interface Adapter
      *
      * @param array $keys
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
      */
     public function removeItems(array $keys, array $options = array());
@@ -270,7 +275,7 @@ interface Adapter
      * @param string $key
      * @param int $value
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return int|boolean The new value of false on failure
      * @throws Zend\Cache\Exception
      */
     public function incrementItem($key, $value, array $options = array());
@@ -280,7 +285,7 @@ interface Adapter
      *
      * @param array $keyValuePairs
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
      */
     public function incrementItems(array $keyValuePairs, array $options = array());
@@ -291,7 +296,7 @@ interface Adapter
      * @param string $key
      * @param int $value
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return int|boolean The new value or false or failure
      * @throws Zend\Cache\Exception
      */
     public function decrementItem($key, $value, array $options = array());
@@ -301,7 +306,7 @@ interface Adapter
      *
      * @param array $keyValuePairs
      * @param array $options
-     * @return boolean True on success or false on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
      */
     public function decrementItems(array $keyValuePairs, array $options = array());
@@ -313,18 +318,22 @@ interface Adapter
      *
      * @param array $keys
      * @param array $options
-     * @return boolean true on success or fale on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
+     * @see fetch()
+     * @see fetchAll()
      */
     public function getDelayed(array $keys, array $options = array());
 
     /**
      * Find items.
      *
-     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::*)
      * @param array $options
-     * @return boolean  true on success or fale on failure
-     * @throw Zend\Cache\Exception
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see fetch()
+     * @see fetchAll()
      */
     public function find($mode = self::MATCH_ACTIVE, array $options = array());
 
@@ -333,6 +342,7 @@ interface Adapter
      *
      * @return array|boolean The next item or false
      * @throws Zend\Cache\Exception
+     * @see fetchAll()
      */
     public function fetch();
 
@@ -341,6 +351,7 @@ interface Adapter
      *
      * @return array The result set as array containing all items
      * @throws Zend\Cache\Exception
+     * @see fetch()
      */
     public function fetchAll();
 
@@ -351,8 +362,9 @@ interface Adapter
      *
      * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
      * @param array $options
-     * @return boolean True on success or false on failure
-     * @throw Zend\Cache\Exception
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see clearByNamespace()
      */
     public function clear($mode = self::MATCH_EXPIRED, array $options = array());
 
@@ -361,8 +373,9 @@ interface Adapter
      *
      * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
      * @param array $options
-     * @return boolean True on success or false on failure
-     * @throw Zend\Cache\Exception
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see clear()
      */
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array());
 
@@ -370,7 +383,7 @@ interface Adapter
      * Optimize adapter storage.
      *
      * @param array $options
-     * @return boolean true on success or false on failure
+     * @return boolean
      * @throws Zend\Cache\Exception
      */
     public function optimize(array $options = array());
@@ -389,7 +402,7 @@ interface Adapter
      *
      * @param array $options
      * @return array|boolean Capacity as array or false on failure
-     * @throw Zend\Cache\Exception
+     * @throws Zend\Cache\Exception
      */
     public function getCapacity(array $options = array());
 

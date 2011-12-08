@@ -21,28 +21,28 @@ abstract class AbstractAdapter implements Adapter
     /**
      * The used EventManager if any
      *
-     * @var null|Zend\EventManager\EventManager
+     * @var null|EventManager
      */
     protected $_events = null;
 
     /**
      * The plugin registry
      *
-     * @var Zend\Cache\Storage\Plugin[]
+     * @var array Array of registered plugins
      */
     protected $_pluginRegistry = array();
 
     /**
      * Capabilities of this adapter
      *
-     * @var null|Zend\Cache\Storage\Capabilities
+     * @var null|Capabilities
      */
     protected $_capabilities = null;
 
     /**
      * Marker to change capabilities
      *
-     * @var null|stdClass
+     * @var null|object
      */
     protected $_capabilityMarker;
 
@@ -102,15 +102,25 @@ abstract class AbstractAdapter implements Adapter
     protected $_stmtKeys    = null;
     protected $_stmtOptions = null;
 
+    /**
+     * Constructor
+     *
+     * @param array|Traversable $options
+     * @see setOptions()
+     */
     public function __construct($options = array())
     {
         $this->setOptions($options);
     }
 
+    /**
+     * Destructor
+     *
+     * detach all registered plugins to free
+     * event handles of event manager
+     */
     public function __destruct()
     {
-        // detach all registered plugins to free
-        // event handles of internal event manager
         foreach ($this->getPlugins() as $plugin) {
             $this->removePlugin($plugin);
         }
@@ -121,10 +131,9 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Set options.
      *
-     * @see __constructor
-     * @see getOptions
-     * @param array@Traversable $options
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @param array|Traversable $options
+     * @return AbstractAdapter
+     * @see getOptions()
      */
     public function setOptions($options)
     {
@@ -146,8 +155,8 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Get options.
      *
-     * @see setOptions
      * @return array
+     * @see setOptions()
      */
     public function getOptions()
     {
@@ -167,7 +176,7 @@ abstract class AbstractAdapter implements Adapter
      * Enable/Disable writing data to cache.
      *
      * @param boolean $flag
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setWritable($flag)
     {
@@ -189,7 +198,7 @@ abstract class AbstractAdapter implements Adapter
      * Enable/Disable reading data from cache.
      *
      * @param boolean $flag
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setReadable($flag)
     {
@@ -214,7 +223,7 @@ abstract class AbstractAdapter implements Adapter
      * @see setWritable
      * @see setReadable
      * @param boolean $flag
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setCaching($flag)
     {
@@ -241,7 +250,7 @@ abstract class AbstractAdapter implements Adapter
      * Set time to life.
      *
      * @param int|float $ttl
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setTtl($ttl)
     {
@@ -264,7 +273,7 @@ abstract class AbstractAdapter implements Adapter
      * Set namespace.
      *
      * @param string $namespace
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setNamespace($namespace)
     {
@@ -297,7 +306,7 @@ abstract class AbstractAdapter implements Adapter
      * Set namespace pattern
      *
      * @param null|string $pattern
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setNamespacePattern($pattern)
     {
@@ -337,7 +346,7 @@ abstract class AbstractAdapter implements Adapter
      * Set key pattern
      *
      * @param null|string $pattern
-     * @return Zend\Cache\Storage\Adapter\AbstractAdapter
+     * @return AbstractAdapter
      */
     public function setKeyPattern($pattern)
     {
@@ -373,14 +382,14 @@ abstract class AbstractAdapter implements Adapter
      *   - getItem, getMetadata: return false
      *   - removeItem[s]: return true
      *   - incrementItem[s], decrementItem[s]: add a new item with 0 as base
-     *   - touchItem[s]: add new new empty item
+     *   - touchItem[s]: add new empty item
      *
      * - If disabled and a missing item was requested:
      *   - getItem, getMetadata, incrementItem[s], decrementItem[s], touchItem[s]
      *     throws ItemNotFoundException
      *
      * @param boolean $flag
-     * @return Zend\Cache\Storage\Adapter
+     * @return Adapter
      */
     public function setIgnoreMissingItems($flag)
     {
@@ -391,8 +400,8 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Ignore missing items
      *
-     * @see setIgnoreMissingItems to get more information
      * @return boolean
+     * @see setIgnoreMissingItems() to get more information
      */
     public function getIgnoreMissingItems()
     {
@@ -454,9 +463,10 @@ abstract class AbstractAdapter implements Adapter
      * @param string $eventName
      * @param ArrayObject $args
      * @param Exception $exception
+     * @throws Exception
      * @return mixed
      */
-    protected function triggerException($eventName, \ArrayObject $args, $exception)
+    protected function triggerException($eventName, \ArrayObject $args, \Exception $exception)
     {
         $exceptionEvent = new ExceptionEvent($eventName . '.exception', $this, $args, $exception);
         $eventRs = $this->events()->trigger($exceptionEvent);
@@ -487,7 +497,7 @@ abstract class AbstractAdapter implements Adapter
      * Register a plugin
      *
      * @param Plugin $plugin
-     * @return Zend\Cache\Storage\Adapter Fluent interface
+     * @return Adapter Fluent interface
      * @throws LogicException
      */
     public function addPlugin(Plugin $plugin)
@@ -506,7 +516,7 @@ abstract class AbstractAdapter implements Adapter
      * Unregister an already registered plugin
      *
      * @param Plugin $plugin
-     * @return Zend\Cache\Storage\Adapter Fluent interface
+     * @return Adapter Fluent interface
      * @throws LogicException
      */
     public function removePlugin(Plugin $plugin)
@@ -525,7 +535,7 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Get all registered plugins
      *
-     * @return Zend\Cache\Storage\Plugin[]
+     * @return array
      */
     public function getPlugins()
     {
@@ -922,7 +932,7 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Get capabilities of this adapter
      *
-     * @return Zend\Cache\Storage\Capabilities
+     * @return Capabilities
      */
     public function getCapabilities()
     {
@@ -982,7 +992,7 @@ abstract class AbstractAdapter implements Adapter
      * Validates and normalize a TTL.
      *
      * @param int|float $ttl
-     * @throws Zend\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function _normalizeTtl(&$ttl)
     {
@@ -1004,7 +1014,7 @@ abstract class AbstractAdapter implements Adapter
      * Validates and normalize a namespace.
      *
      * @param string $namespace
-     * @throws Zend\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function _normalizeNamespace(&$namespace)
     {
@@ -1050,9 +1060,9 @@ abstract class AbstractAdapter implements Adapter
     {
         if (!is_array($select)) {
             $select = array((string)$select);
+        } else {
+            $select = array_unique($select);
         }
-
-        $select = array_unique($select);
     }
 
     /**
@@ -1077,7 +1087,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param string $key
      * @return string
-     * @throws Zend\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function _key($key)
     {

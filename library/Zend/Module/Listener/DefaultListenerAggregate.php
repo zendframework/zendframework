@@ -3,7 +3,8 @@
 namespace Zend\Module\Listener;
 
 use Zend\EventManager\ListenerAggregate,
-    Zend\EventManager\EventCollection;
+    Zend\EventManager\EventCollection,
+    Zend\Loader\ModuleAutoloader;
 
 class DefaultListenerAggregate extends AbstractListener
     implements ListenerAggregate
@@ -28,6 +29,7 @@ class DefaultListenerAggregate extends AbstractListener
     {
         $options = $this->getOptions();
         $configListener = $this->getConfigListener();
+        $this->listeners[] = $events->attach('loadModules.pre', array(new ModuleAutoloader($options->getModulePaths()), 'register'), 1000);
         $this->listeners[] = $events->attach('loadModule.resolve', new ModuleResolverListener, 1000);
         $this->listeners[] = $events->attach('loadModule', new AutoloaderListener($options), 2000);
         $this->listeners[] = $events->attach('loadModule', new InitTrigger($options), 1000);

@@ -7,6 +7,11 @@ use Zend\Stdlib\Options;
 class ListenerOptions extends Options
 {
     /**
+     * @var array
+     */
+    protected $modulePaths = array();
+
+    /**
      * @var bool
      */
     protected $configCacheEnabled = false;
@@ -20,6 +25,28 @@ class ListenerOptions extends Options
      * @var string
      */
     protected $cacheDir;
+
+    /**
+     * Get an array of paths where modules reside 
+     * 
+     * @return array
+     */
+    public function getModulePaths()
+    {
+        return $this->modulePaths;
+    }
+
+    /**
+     * Set an array of paths where modules reside 
+     * 
+     * @param array $modulePaths 
+     * @return ListenerOptions
+     */
+    public function setModulePaths(array $modulePaths)
+    {
+        $this->modulePaths = $modulePaths;
+        return $this;
+    }
 
     /**
      * Check if the config cache is enabled

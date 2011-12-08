@@ -79,13 +79,14 @@ class Manager implements ModuleHandler
         if (true === $this->modulesAreLoaded) {
             return $this;
         }
+        $this->events()->trigger(__FUNCTION__ . '.pre', $this);
         foreach ($this->getModules() as $moduleName) {
             $this->loadModule($moduleName);
         }
         if ($configListener = $this->getConfigListener()) {
             $configListener->mergeConfigGlobPaths();
         }
-        $this->events()->trigger('init.post', $this);
+        $this->events()->trigger(__FUNCTION__ . '.post', $this);
         $this->modulesAreLoaded = true;
         return $this;
     }

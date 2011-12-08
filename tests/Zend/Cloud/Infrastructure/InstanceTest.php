@@ -25,14 +25,15 @@
 namespace ZendTest\Cloud\Infrastructure;
 
 use Zend\Cloud\Infrastructure\Instance,
-    PHPUnit_Framework_TestCase as TestCase;
+    PHPUnit_Framework_TestCase as TestCase,
+    ZendTest\Cloud\Infrastructure\Adapter\TestAssets\MockAdapter;
 
 class InstanceTest extends TestCase
 {
     /**
      * Mock class for the Adapter (dummy methods)
-     *
-     * @var ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter
+     * 
+     * @var MockAdapter
      */
     protected static $adapter;
 
@@ -58,7 +59,7 @@ class InstanceTest extends TestCase
             Instance::INSTANCE_STATUS     => 'foo',
             Instance::INSTANCE_ZONE       => 'foo',
         );
-        self::$adapter = new TestAsset\MockAdapter();
+        self::$adapter = new MockAdapter();
     }
 
     /**
@@ -102,9 +103,9 @@ class InstanceTest extends TestCase
     {
         $this->setExpectedException(
             'Zend\Cloud\Infrastructure\Exception\InvalidArgumentException',
-            'You must pass an array of params'
+            'You must pass an array of parameters'
         );
-        $instance = new Instance(self::$adapter,array());
+        $instance = new Instance(self::$adapter, array());
     }
 
     /**
@@ -116,7 +117,7 @@ class InstanceTest extends TestCase
             'Zend\Cloud\Infrastructure\Exception\InvalidArgumentException',
             'The param "'.Instance::INSTANCE_ID.'" is a required param for Zend\Cloud\Infrastructure\Instance'
         );
-        $instance = new Instance(self::$adapter,array('foo'=>'bar'));
+        $instance = new Instance(self::$adapter, array('foo'=>'bar'));
     }
 
     /**
@@ -125,8 +126,8 @@ class InstanceTest extends TestCase
     public function testGetId()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('foo',$instance->getId());
-        $this->assertEquals('foo',$instance->getAttribute(Instance::INSTANCE_ID));
+        $this->assertEquals('foo', $instance->getId());
+        $this->assertEquals('foo', $instance->getAttribute(Instance::INSTANCE_ID));
     }
 
     /**
@@ -135,8 +136,8 @@ class InstanceTest extends TestCase
     public function testGetImageId()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('foo',$instance->getImageId());
-        $this->assertEquals('foo',$instance->getAttribute(Instance::INSTANCE_IMAGEID));
+        $this->assertEquals('foo', $instance->getImageId());
+        $this->assertEquals('foo', $instance->getAttribute(Instance::INSTANCE_IMAGEID));
     }
 
     /**
@@ -145,8 +146,8 @@ class InstanceTest extends TestCase
     public function testGetName()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('foo',$instance->getName());
-        $this->assertEquals('foo',$instance->getAttribute(Instance::INSTANCE_NAME));
+        $this->assertEquals('foo', $instance->getName());
+        $this->assertEquals('foo', $instance->getAttribute(Instance::INSTANCE_NAME));
     }
 
     /**
@@ -155,8 +156,12 @@ class InstanceTest extends TestCase
     public function testGetStatus()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::statusInstance',$instance->getStatus());
-        $this->assertEquals('foo',$instance->getAttribute(Instance::INSTANCE_STATUS));
+        
+        $this->assertEquals(
+            self::$adapter->statusInstance($instance::INSTANCE_ID), 
+            $instance->getStatus()
+        );
+        $this->assertEquals('foo', $instance->getAttribute(Instance::INSTANCE_STATUS));
     }
 
     /**
@@ -164,9 +169,9 @@ class InstanceTest extends TestCase
      */
     public function testGetPublicDns()
     {
-        $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('foo',$instance->getPublicDns());
-        $this->assertEquals('foo',$instance->getAttribute(Instance::INSTANCE_PUBLICDNS));
+        $instance = new Instance(self::$adapter, self::$data);
+        $this->assertEquals('foo', $instance->getPublicDns());
+        $this->assertEquals('foo', $instance->getAttribute(Instance::INSTANCE_PUBLICDNS));
     }
 
     /**
@@ -175,8 +180,8 @@ class InstanceTest extends TestCase
     public function testGetCpu()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('foo',$instance->getCpu());
-        $this->assertEquals('foo',$instance->getAttribute(Instance::INSTANCE_CPU));
+        $this->assertEquals('foo', $instance->getCpu());
+        $this->assertEquals('foo', $instance->getAttribute(Instance::INSTANCE_CPU));
     }
 
     /**
@@ -225,7 +230,11 @@ class InstanceTest extends TestCase
     public function testReboot()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::rebootInstance',$instance->reboot());
+        
+        $this->assertEquals(
+            self::$adapter->rebootInstance($instance::INSTANCE_ID), 
+            $instance->reboot()
+        );
     }
 
     /**
@@ -234,7 +243,11 @@ class InstanceTest extends TestCase
     public function testStop()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::stopInstance',$instance->stop());
+        
+        $this->assertEquals(
+            self::$adapter->stopInstance($instance::INSTANCE_ID), 
+            $instance->stop()
+        );
     }
 
     /**
@@ -243,7 +256,11 @@ class InstanceTest extends TestCase
     public function testStart()
     {
         $instance= new Instance(self::$adapter,self::$data);
-        $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::startInstance',$instance->start());
+        
+        $this->assertEquals(
+            self::$adapter->startInstance($instance::INSTANCE_ID), 
+            $instance->start()
+        );
     }
 
     /**
@@ -251,8 +268,12 @@ class InstanceTest extends TestCase
      */
     public function testDestroy()
     {
-        $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::destroyInstance',$instance->destroy());
+        $instance = new Instance(self::$adapter, self::$data);
+        
+        $this->assertEquals(
+            self::$adapter->destroyInstance($instance::INSTANCE_ID),
+            $instance->destroy()
+        );
     }
 
     /**
@@ -261,7 +282,11 @@ class InstanceTest extends TestCase
     public function testMonitor()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::monitorInstance',$instance->monitor('foo'));
+        
+        $this->assertEquals(
+            self::$adapter->monitorInstance($instance::INSTANCE_ID, 'foo'), 
+            $instance->monitor('foo')
+        );
     }
 
     /**
@@ -270,6 +295,10 @@ class InstanceTest extends TestCase
     public function testDeploy()
     {
         $instance = new Instance(self::$adapter,self::$data);
-        $this->assertEquals('ZendTest\Cloud\Infrastructure\TestAsset\MockAdapter::deployInstance',$instance->deploy('foo','bar'));
+        
+        $this->assertEquals(
+            self::$adapter->deployInstance($instance::INSTANCE_ID, 'foo', 'bar'), 
+            $instance->deploy('foo','bar')
+        );
     }
 }

@@ -272,7 +272,7 @@ class Ec2OnlineTest extends TestCase
  * @group      Zend\Cloud\Infrastructure
  * @group      Zend\Cloud\Infrastructure\Adapter\Ec2
  */
-class Skip extends TestCase
+class SkipEc2OnlineTest extends TestCase
 {
     public function setUp()
     {

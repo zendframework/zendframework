@@ -36,9 +36,14 @@ require_once "PHPUnit/Framework/TestFailure.php";
  */
 class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
 {
+    protected function isEnabled()
+    {
+        return (bool)constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_ENABLED');
+    }
+    
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_ENABLED')) {
+        if (!$this->isEnabled()) {
             $this->markTestSkipped();
         }
 
@@ -49,7 +54,6 @@ class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
             // autoloaders registered...
             $this->loaders = array();
         }
-
         // Store original include_path
         $this->includePath = get_include_path();
 
@@ -64,12 +68,15 @@ class AutoloaderMultiVersionTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        if (!$this->isEnabled()) {
+            return;
+        }
         // Restore original autoloaders
         $loaders = spl_autoload_functions();
         foreach ($loaders as $loader) {
             spl_autoload_unregister($loader);
         }
-
+        
         foreach ($this->loaders as $loader) {
             spl_autoload_register($loader);
         }

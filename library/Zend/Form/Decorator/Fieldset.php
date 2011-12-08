@@ -89,7 +89,7 @@ class Fieldset extends AbstractDecorator
         $options = parent::getOptions();
         if (null !== ($element = $this->getElement())) {
             $attribs = $element->getAttribs();
-            $options = array_merge($attribs,$options);
+            $options = array_merge($attribs, $options);
             $this->setOptions($options);
         }
         return $options;

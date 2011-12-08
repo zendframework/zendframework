@@ -99,7 +99,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
             ),
         ));
         $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
-        $this->assertTrue(class_exists('TestNamespace\FallbackCase'));
+        $this->assertTrue(class_exists('TestNamespace\NoDuplicateAutoloadersCase'));
         $this->assertTrue(class_exists('ZendTest\Loader\TestAsset\TestPlugins\Foo'));
     }
 

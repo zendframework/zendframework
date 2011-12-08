@@ -158,8 +158,8 @@ class InstanceTest extends TestCase
         $instance = new Instance(self::$adapter,self::$data);
         
         $this->assertEquals(
-        	self::$adapter->statusInstance($instance::INSTANCE_ID), 
-        	$instance->getStatus()
+            self::$adapter->statusInstance($instance::INSTANCE_ID), 
+            $instance->getStatus()
         );
         $this->assertEquals('foo', $instance->getAttribute(Instance::INSTANCE_STATUS));
     }
@@ -232,8 +232,8 @@ class InstanceTest extends TestCase
         $instance = new Instance(self::$adapter,self::$data);
         
         $this->assertEquals(
-        	self::$adapter->rebootInstance($instance::INSTANCE_ID), 
-        	$instance->reboot()
+            self::$adapter->rebootInstance($instance::INSTANCE_ID), 
+            $instance->reboot()
         );
     }
 
@@ -245,8 +245,8 @@ class InstanceTest extends TestCase
         $instance = new Instance(self::$adapter,self::$data);
         
         $this->assertEquals(
-        	self::$adapter->stopInstance($instance::INSTANCE_ID), 
-        	$instance->stop()
+            self::$adapter->stopInstance($instance::INSTANCE_ID), 
+            $instance->stop()
         );
     }
 
@@ -258,8 +258,8 @@ class InstanceTest extends TestCase
         $instance= new Instance(self::$adapter,self::$data);
         
         $this->assertEquals(
-        	self::$adapter->startInstance($instance::INSTANCE_ID), 
-        	$instance->start()
+            self::$adapter->startInstance($instance::INSTANCE_ID), 
+            $instance->start()
         );
     }
 
@@ -271,8 +271,8 @@ class InstanceTest extends TestCase
         $instance = new Instance(self::$adapter, self::$data);
         
         $this->assertEquals(
-        	self::$adapter->destroyInstance($instance::INSTANCE_ID),
-        	$instance->destroy()
+            self::$adapter->destroyInstance($instance::INSTANCE_ID),
+            $instance->destroy()
         );
     }
 
@@ -284,8 +284,8 @@ class InstanceTest extends TestCase
         $instance = new Instance(self::$adapter,self::$data);
         
         $this->assertEquals(
-        	self::$adapter->monitorInstance($instance::INSTANCE_ID, 'foo'), 
-        	$instance->monitor('foo')
+            self::$adapter->monitorInstance($instance::INSTANCE_ID, 'foo'), 
+            $instance->monitor('foo')
         );
     }
 
@@ -297,8 +297,8 @@ class InstanceTest extends TestCase
         $instance = new Instance(self::$adapter,self::$data);
         
         $this->assertEquals(
-        	self::$adapter->deployInstance($instance::INSTANCE_ID, 'foo', 'bar'), 
-        	$instance->deploy('foo','bar')
+            self::$adapter->deployInstance($instance::INSTANCE_ID, 'foo', 'bar'), 
+            $instance->deploy('foo','bar')
         );
     }
 }

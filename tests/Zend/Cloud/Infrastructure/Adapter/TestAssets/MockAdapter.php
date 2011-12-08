@@ -27,7 +27,7 @@ namespace ZendTest\Cloud\Infrastructure\Adapter\TestAssets;
 use Zend\Cloud\Infrastructure\Adapter\AbstractAdapter;
 
 class MockAdapter extends AbstractAdapter {
-	/**
+    /**
      * Simulate waiting for status $status.
      * 
      * @param  string $id
@@ -52,7 +52,7 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function statusInstance($id) 
     {
-    	return 'status';
+        return 'status';
     }
     
     /**
@@ -63,7 +63,7 @@ class MockAdapter extends AbstractAdapter {
      */
     public function publicDnsInstance($id) 
     {
-    	return 'public-dns';
+        return 'public-dns';
     }
     
     /**
@@ -74,10 +74,10 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function rebootInstance($id) 
     {
-    	return true;
+        return true;
     }
     
-	/**
+    /**
      * Create a new instance
      *
      * @param  string $name
@@ -86,9 +86,9 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function createInstance($name, $options) 
     {
-    	return true;
+        return true;
     }
- 
+    
     
     /**
      * Stop the execution of an instance
@@ -98,7 +98,7 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function stopInstance($id) 
     {
-    	return true;
+        return true;
     }
     
     /**
@@ -109,7 +109,7 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function startInstance($id) 
     {
-    	return true;
+        return true;
     }
     
     /**
@@ -120,9 +120,9 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function destroyInstance($id) 
     {
-    	return true;
+        return true;
     }
- 
+    
     /**
      * Return all the available instances images
      *
@@ -130,7 +130,7 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function imagesInstance() 
     {
-    	return array();
+        return array();
     }
     
     /**
@@ -140,7 +140,7 @@ class MockAdapter extends AbstractAdapter {
      */
     public function zonesInstance() 
     {
-    	return array();
+        return array();
     }
     
     /**
@@ -153,7 +153,7 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function monitorInstance($id, $metric, $options = null)
     {
-    	return array();
+        return array();
     }     
     
     /**
@@ -166,7 +166,7 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function deployInstance($id, $params, $cmd) 
     {
-    	return 'result';
+        return 'result';
     }
     
     /**
@@ -176,7 +176,7 @@ class MockAdapter extends AbstractAdapter {
      */ 
     public function listInstances() 
     {
-    	return array();
+        return array();
     }
     
     /**
@@ -186,7 +186,7 @@ class MockAdapter extends AbstractAdapter {
      */
     public function getAdapter()
     {
-    	return $this;
+        return $this;
     }
     
     /**
@@ -196,7 +196,7 @@ class MockAdapter extends AbstractAdapter {
      */
     public function getAdapterResult() 
     {
-    	return array();
+        return array();
     }
     
     /**
@@ -206,7 +206,7 @@ class MockAdapter extends AbstractAdapter {
      */
     public function getLastHttpResponse()
     {
-    	return new \Zend\Http\Response();
+        return new \Zend\Http\Response();
     }
     
     /**
@@ -216,6 +216,6 @@ class MockAdapter extends AbstractAdapter {
      */
     public function getLastHttpRequest() 
     {
-    	return new \Zend\Http\Request();
+        return new \Zend\Http\Request();
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.soap.autodiscovery"><info><title>AutoDiscovery</title></info>
-    
+
 
     <section xml:id="zend.soap.autodiscovery.introduction"><info><title>AutoDiscovery Introduction</title></info>
-        
+
 
         <para>
             <acronym>SOAP</acronym> functionality implemented within Zend Framework is intended to
@@ -86,7 +86,7 @@
         </para>
 
         <para>
-            The<classname>Zend_Soap_AutoDiscover</classname> class also supports datatypes mapping
+            The<classname>Zend\Soap\AutoDiscover</classname> class also supports datatypes mapping
             from <acronym>PHP</acronym> to <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/xmlschema-2/">XSD types</link>.
         </para>
 
@@ -97,48 +97,37 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-class My_SoapServer_Class {
+class MySoapServerClass {
 ...
 }
 
-$autodiscover = new Zend_Soap_AutoDiscover();
-$autodiscover->setClass('My_SoapServer_Class');
-$autodiscover->handle();
+$autodiscover = new Zend\Soap\AutoDiscover();
+$autodiscover->setClass('MySoapServerClass')
+             ->setUri('http://localhost/server.php')
+             ->setServiceName('MySoapService');
+$wsdl = $autodiscover->generate();
+echo $wsdl->toXml();
+$wsdl->dump("/path/to/file.wsdl");
+$dom = $wsdl->toDomDocument();
 ]]></programlisting>
 
-        <para>
-            If you need access to the generated WSDL file either to save it to a file or as an
-            <acronym>XML</acronym> string you can use the <methodname>dump($filename)</methodname>
-            or <methodname>toXml()</methodname> functions the AutoDiscover class provides.
-        </para>
-
-        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend_Soap_Autodiscover is not a Soap Server</title></info>
-            
+        <note xml:id="zend.soap.autodiscovery.introduction.noserver"><info><title>Zend\Soap\Autodiscover is not a Soap Server</title></info>
 
             <para>
                 It is very important to note, that the class
-                <classname>Zend_Soap_AutoDiscover</classname> does not act as a
-                <acronym>SOAP</acronym> Server on its own. It only generates the WSDL and serves it
-                to anyone accessing the url it is listening on.
-            </para>
-
-            <para>
-                As the <acronym>SOAP</acronym> Endpoint Uri is uses the default
-                <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code>, but this
-                can be changed with the <methodname>setUri()</methodname> function or the
-                Constructor parameter of <classname>Zend_Soap_AutoDiscover</classname> class. The
-                endpoint has to provide a <classname>Zend_Soap_Server</classname> that listens to
-                requests.
+                <classname>Zend\Soap\AutoDiscover</classname> does not act as a
+                <acronym>SOAP</acronym> Server on its own.
             </para>
 
             <programlisting language="php"><![CDATA[
 if(isset($_GET['wsdl'])) {
-    $autodiscover = new Zend_Soap_AutoDiscover();
-    $autodiscover->setClass('HelloWorldService');
-    $autodiscover->handle();
+    $autodiscover = new Zend\Soap\AutoDiscover();
+    $autodiscover->setClass('HelloWorldService')
+                 ->setUri('http://example.com/soap.php');
+    echo $autodiscover->toXml();
 } else {
     // pointing to the current file here
-    $soap = new Zend_Soap_Server("http://example.com/soap.php?wsdl");
+    $soap = new Zend\Soap\Server("http://example.com/soap.php?wsdl");
     $soap->setClass('HelloWorldService');
     $soap->handle();
 }
@@ -147,17 +136,19 @@ if(isset($_GET['wsdl'])) {
     </section>
 
     <section xml:id="zend.soap.autodiscovery.class"><info><title>Class autodiscovering</title></info>
-        
+
 
         <para>
-            If class is used to provide SOAP server functionality, then the same class should be
-            provided to <classname>Zend_Soap_AutoDiscover</classname> for WSDL generation:
+            If a class is used to provide SOAP server functionality, then the same class should be
+            provided to <classname>Zend\Soap\AutoDiscover</classname> for WSDL generation:
         </para>
 
         <programlisting language="php"><![CDATA[
-$autodiscover = new Zend_Soap_AutoDiscover();
-$autodiscover->setClass('My_SoapServer_Class');
-$autodiscover->handle();
+$autodiscover = new Zend\Soap\AutoDiscover();
+$autodiscover->setClass('My_SoapServer_Class')
+             ->setUri('http://localhost/server.php')
+             ->setServiceName('MySoapService');
+$wsdl = $autodiscover->generate();
 ]]></programlisting>
 
         <para>
@@ -165,18 +156,26 @@ $autodiscover->handle();
 
             <itemizedlist>
                 <listitem>
-                    <para>Generated WSDL describes an RPC style Web Service.</para>
-                </listitem>
-
-                <listitem>
-                    <para>Class name is used as a name of the Web Service being described.</para>
+                    <para>
+                        Generated WSDL describes an RPC/Encoded style Web Service. If you want to use a document/literal
+                        server use the <methodname>setBindingStyle()</methodname> and
+                        <methodname>setOperationBodyStyle()</methodname> methods.
+                    </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is
-                        used as an <acronym>URI</acronym> where the WSDL is available by default but
-                        can be overwritten via <methodname>setUri()</methodname> method.
+                        Class name is used as a name of the Web Service being described unless
+                        <methodname>setServiceName()</methodname> is used explicitly to set the name.
+                        When only functions are used for generation the service name has to be set
+                        explicitly or an exception is thrown during generation of the WSDL document.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        You can set the endpoint of the actual SOAP Server via the <methodname>setUri()</methodname> method.
+                        This is a required option.
                     </para>
 
                     <para>
@@ -191,132 +190,59 @@ $autodiscover->handle();
                     </para>
 
                     <para>
-                        <code>$className . 'Port'</code> is used as Port Type name.
+                        <code>$serviceName . 'Port'</code> is used as Port Type name.
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para>Each class method is registered as a corresponding port operation.</para>
+                    <para>Each class method/function is registered as a corresponding port operation.</para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        Each method prototype generates corresponding Request/Response messages.
-                    </para>
-
-                    <para>
-                        Method may have several prototypes if some method parameters are optional.
+                        Only the "longest" available method prototype is used for generation of the WSDL.
                     </para>
                 </listitem>
+
+            <listitem>
+                <para>
+                    WSDL autodiscover utilizes the <acronym>PHP</acronym> docblocks provided by the
+                    developer to determine the parameter and return types. In fact, for scalar types,
+                    this is the only way to determine the parameter types, and for return types, this is
+                    the only way to determine them.
+                </para>
+
+                <para>
+                    That means, providing correct and fully detailed docblocks is not only best
+                    practice, but is required for discovered class.
+                </para>
+            </listitem>
             </itemizedlist>
         </para>
-
-        <note><info><title>Important!</title></info>
-            
-
-            <para>
-                WSDL autodiscovery utilizes the <acronym>PHP</acronym> docblocks provided by the
-                developer to determine the parameter and return types. In fact, for scalar types,
-                this is the only way to determine the parameter types, and for return types, this is
-                the only way to determine them.
-            </para>
-
-            <para>
-                That means, providing correct and fully detailed docblocks is not only best
-                practice, but is required for discovered class.
-            </para>
-        </note>
     </section>
 
     <section xml:id="zend.soap.autodiscovery.functions"><info><title>Functions autodiscovering</title></info>
-        
 
         <para>
             If set of functions are used to provide SOAP server functionality, then the same set
-            should be provided to <classname>Zend_Soap_AutoDiscovery</classname> for WSDL
+            should be provided to <classname>Zend\Soap\AutoDiscovery</classname> for WSDL
             generation:
         </para>
 
         <programlisting language="php"><![CDATA[
-$autodiscover = new Zend_Soap_AutoDiscover();
+$autodiscover = new Zend\Soap\AutoDiscover();
 $autodiscover->addFunction('function1');
 $autodiscover->addFunction('function2');
 $autodiscover->addFunction('function3');
 ...
-$autodiscover->handle();
+$wsdl = $autodiscover->generate();
 ]]></programlisting>
 
-        <para>
-            The following rules are used while WSDL generation:
-
-            <itemizedlist>
-                <listitem>
-                    <para>Generated WSDL describes an RPC style Web Service.</para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        Current script name is used as a name of the Web Service being described.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <code>'http://' .$_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']</code> is
-                        used as an <acronym>URI</acronym> where the WSDL is available.
-                    </para>
-
-                    <para>
-                         It's also used as a target namespace for all service related names
-                         (including described complex types).
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        Functions are joined into one <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.w3.org/TR/wsdl#_porttypes">Port Type</link>.
-                    </para>
-
-                    <para>
-                        <code>$functionName . 'Port'</code> is used as Port Type name.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>Each function is registered as a corresponding port operation.</para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        Each function prototype generates corresponding Request/Response messages.
-                    </para>
-
-                    <para>
-                        Function may have several prototypes if some method parameters are optional.
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
-
-        <note><info><title>Important!</title></info>
-            
-
-            <para>
-                WSDL autodiscovery utilizes the <acronym>PHP</acronym> docblocks provided by the
-                developer to determine the parameter and return types. In fact, for scalar types,
-                this is the only way to determine the parameter types, and for return types, this is
-                the only way to determine them.
-            </para>
-
-            <para>
-                That means, providing correct and fully detailed docblocks is not only best
-                practice, but is required for discovered class.
-            </para>
-        </note>
+        <para>The same rules apply to generation as described in the class audodiscover seection above.</para>
     </section>
 
     <section xml:id="zend.soap.autodiscovery.datatypes"><info><title>Autodiscovering Datatypes</title></info>
-        
+
 
         <para>
             Input/output datatypes are converted into network service types using the following
@@ -354,17 +280,15 @@ $autodiscover->handle();
 
                         <footnote>
                             <para>
-                                <classname>Zend_Soap_AutoDiscover</classname> will be created with
+                                <classname>Zend\Soap\AutoDiscover</classname> will be created with
                                 the
-                                <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
+                                <classname>Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType</classname>
                                 class as detection algorithm for complex types. The first parameter
                                 of the AutoDiscover constructor takes any complex type strategy
                                 implementing
-                                <classname>Zend_Soap_Wsdl_Strategy_Interface</classname> or a string
-                                with the name of the class. For backwards compatibility with
-                                <varname>$extractComplexType</varname> boolean variables are parsed
-                                exactly like in <classname>Zend_Soap_Wsdl</classname>. See the
-                                <link linkend="zend.soap.wsdl.types.add_complex"><classname>Zend_Soap_Wsdl</classname>
+                                <classname>Zend\Soap\Wsdl\ComplexTypeStrategy\Interface</classname> or a string
+                                with the name of the class. See the
+                                <link linkend="zend.soap.wsdl.types.add_complex"><classname>Zend\Soap\Wsdl</classname>
                                     manual on adding complex</link> types for more information.
                             </para>
                         </footnote>.
@@ -396,7 +320,7 @@ $autodiscover->handle();
     </section>
 
     <section xml:id="zend.soap.autodiscovery.wsdlstyles"><info><title>WSDL Binding Styles</title></info>
-        
+
 
         <para>
             WSDL offers different transport mechanisms and styles. This affects the
@@ -407,7 +331,7 @@ $autodiscover->handle();
         </para>
 
         <programlisting language="php"><![CDATA[
-$autodiscover = new Zend_Soap_AutoDiscover();
+$autodiscover = new Zend\Soap\AutoDiscover();
 // Default is 'use' => 'encoded' and
 // 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'
 $autodiscover->setOperationBodyStyle(
@@ -423,7 +347,7 @@ $autodiscover->setBindingStyle(
                 );
 ...
 $autodiscover->addFunction('myfunc1');
-$autodiscover->handle();
+$wsdl = $autodiscover->generate();
 ]]></programlisting>
     </section>
 </section>

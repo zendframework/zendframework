@@ -2,8 +2,7 @@
 
 namespace Zend\Module;
 
-use Zend\EventManager\EventCollection,
-    Zend\Module\Listener\ConfigMerger;
+use Zend\EventManager\EventCollection;
 
 interface ModuleHandler
 {
@@ -44,31 +43,6 @@ interface ModuleHandler
      * @return ModuleHandler
      */
     public function setModules($modules);
-
-    /**
-     * Get the listener that's in charge of merging module configs.
-     *
-     * @return ConfigMerger
-     */
-    public function getConfigListener();
- 
-    /**
-     * Set the listener that's in charge of merging module configs.
-     *
-     * @param ConfigMerger $configListener
-     * @return ModuleHandler
-     */
-    public function setConfigListener(ConfigMerger $configListener);
-
-    /**
-     * A convenience method that proxies through to:
-     *
-     * $this->getConfigListener()->getMergedConfig();
-     * 
-     * @param bool $returnConfigAsObject 
-     * @return mixed
-     */
-    public function getMergedConfig($returnConfigAsObject = true);
 
     /**
      * Set the event manager instance used by this module manager.

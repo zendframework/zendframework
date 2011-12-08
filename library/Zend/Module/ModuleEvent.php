@@ -15,6 +15,31 @@ use Zend\EventManager\Event;
 class ModuleEvent extends Event
 {
     /**
+     * Get the name of a given module 
+     * 
+     * @return string
+     */
+    public function getModuleName()
+    {
+        return $this->getParam('moduleName');
+    }
+
+    /**
+     * Set the name of a given module 
+     * 
+     * @param string $moduleName 
+     * @return ModuleEvent
+     */
+    public function setModuleName($moduleName)
+    {
+        if (!is_string($moduleName)) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects a string as an argument; ' . gettype($moduleName) . ' provided');
+        }
+        $this->setParam('moduleName', $moduleName);
+        return $this;
+    }
+
+    /**
      * Get module object
      * 
      * @return null|object

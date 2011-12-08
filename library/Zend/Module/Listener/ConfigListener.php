@@ -54,7 +54,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
         if (true === $this->skipConfig) {
             return;
         }
-        $module = $e->getModule();
+        $module = $e->getParam('module');
         if (is_callable(array($module, 'getConfig'))) {
             $this->mergeModuleConfig($module);
         }

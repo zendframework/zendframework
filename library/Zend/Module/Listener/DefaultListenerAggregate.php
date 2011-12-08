@@ -29,7 +29,9 @@ class DefaultListenerAggregate extends AbstractListener
     {
         $options = $this->getOptions();
         $configListener = $this->getConfigListener();
-        $this->listeners[] = $events->attach('loadModules.pre', array(new ModuleAutoloader($options->getModulePaths()), 'register'), 1000);
+        $moduleAutoloader = new ModuleAutoloader($options->getModulePaths());
+
+        $this->listeners[] = $events->attach('loadModules.pre', array($moduleAutoloader, 'register'), 1000);
         $this->listeners[] = $events->attach('loadModule.resolve', new ModuleResolverListener, 1000);
         $this->listeners[] = $events->attach('loadModule', new AutoloaderListener($options), 2000);
         $this->listeners[] = $events->attach('loadModule', new InitTrigger($options), 1000);
@@ -51,7 +53,7 @@ class DefaultListenerAggregate extends AbstractListener
         }
         $this->handlers = array();
     }
- 
+
     /**
      * Get the config merger.
      *
@@ -64,7 +66,7 @@ class DefaultListenerAggregate extends AbstractListener
         }
         return $this->configListener;
     }
- 
+
     /**
      * Set the config merger to use.
      *

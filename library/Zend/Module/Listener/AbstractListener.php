@@ -10,9 +10,9 @@ abstract class AbstractListener
     protected $options;
 
     /**
-     * __construct 
-     * 
-     * @param ListenerOptions $options 
+     * __construct
+     *
+     * @param ListenerOptions $options
      * @return void
      */
     public function __construct(ListenerOptions $options = null)
@@ -23,7 +23,7 @@ abstract class AbstractListener
             $this->setOptions($options);
         }
     }
- 
+
     /**
      * Get options.
      *
@@ -33,7 +33,7 @@ abstract class AbstractListener
     {
         return $this->options;
     }
- 
+
     /**
      * Set options.
      *
@@ -48,9 +48,9 @@ abstract class AbstractListener
 
     /**
      * Write a simple array of scalars to a file
-     * 
-     * @param string $filePath 
-     * @param array $array 
+     *
+     * @param string $filePath
+     * @param array $array
      * @return AbstractListener
      */
     protected function writeArrayToFile($filePath, $array)

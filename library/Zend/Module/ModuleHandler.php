@@ -8,15 +8,15 @@ interface ModuleHandler
 {
     /**
      * Load the provided modules.
-     * 
+     *
      * @return ManagerHandler
      */
     public function loadModules();
 
     /**
      * Load a specific module by name.
-     * 
-     * @param string $moduleName 
+     *
+     * @param string $moduleName
      * @return mixed Module's Module class
      */
     public function loadModule($moduleName);
@@ -35,9 +35,9 @@ interface ModuleHandler
      * @return array
      */
     public function getModules();
- 
+
     /**
-     * Set an array or Traversable of module names that this module manager should load. 
+     * Set an array or Traversable of module names that this module manager should load.
      *
      * @param mixed $modules array or Traversable of module names
      * @return ModuleHandler
@@ -46,17 +46,17 @@ interface ModuleHandler
 
     /**
      * Set the event manager instance used by this module manager.
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return ManagerHandler
      */
     public function setEventManager(EventCollection $events);
-    
+
     /**
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.
-     * 
+     *
      * @return EventCollection
      */
     public function events();

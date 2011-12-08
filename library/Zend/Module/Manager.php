@@ -24,8 +24,8 @@ class Manager implements ModuleHandler
     protected $event;
 
     /**
-     * modules 
-     * 
+     * modules
+     *
      * @var array|Traversable
      */
     protected $modules = array();
@@ -38,10 +38,10 @@ class Manager implements ModuleHandler
     protected $modulesAreLoaded = false;
 
     /**
-     * __construct 
-     * 
-     * @param array|Traversable $modules 
-     * @param EventCollection $eventManager 
+     * __construct
+     *
+     * @param array|Traversable $modules
+     * @param EventCollection $eventManager
      * @return void
      */
     public function __construct($modules, EventCollection $eventManager = null)
@@ -54,7 +54,7 @@ class Manager implements ModuleHandler
 
     /**
      * Load the provided modules.
-     * 
+     *
      * @triggers loadModules.pre
      * @triggers loadModules.post
      * @return ManagerHandler
@@ -79,8 +79,8 @@ class Manager implements ModuleHandler
 
     /**
      * Load a specific module by name.
-     * 
-     * @param string $moduleName 
+     *
+     * @param string $moduleName
      * @triggers loadModule.resolve
      * @triggers loadModule
      * @return mixed Module's Module class
@@ -90,7 +90,7 @@ class Manager implements ModuleHandler
         if (isset($this->loadedModules[$moduleName])) {
             return $this->loadedModules[$moduleName];
         }
-        
+
         $event = $this->getEvent();
         $event->setModuleName($moduleName);
 
@@ -136,9 +136,9 @@ class Manager implements ModuleHandler
     {
         return $this->modules;
     }
- 
+
     /**
-     * Set an array or Traversable of module names that this module manager should load. 
+     * Set an array or Traversable of module names that this module manager should load.
      *
      * @param mixed $modules array or Traversable of module names
      * @return ModuleHandler
@@ -157,8 +157,8 @@ class Manager implements ModuleHandler
     }
 
     /**
-     * Get the module event 
-     * 
+     * Get the module event
+     *
      * @return ModuleEvent
      */
     public function getEvent()
@@ -170,9 +170,9 @@ class Manager implements ModuleHandler
     }
 
     /**
-     * Set the module event 
-     * 
-     * @param ModuleEvent $event 
+     * Set the module event
+     *
+     * @param ModuleEvent $event
      * @return Manager
      */
     public function setEvent(ModuleEvent $event)
@@ -183,8 +183,8 @@ class Manager implements ModuleHandler
 
     /**
      * Set the event manager instance used by this module manager.
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return Manager
      */
     public function setEventManager(EventCollection $events)
@@ -197,7 +197,7 @@ class Manager implements ModuleHandler
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.
-     * 
+     *
      * @return EventCollection
      */
     public function events()

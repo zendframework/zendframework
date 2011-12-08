@@ -27,8 +27,8 @@ class ListenerOptions extends Options
     protected $cacheDir;
 
     /**
-     * Get an array of paths where modules reside 
-     * 
+     * Get an array of paths where modules reside
+     *
      * @return array
      */
     public function getModulePaths()
@@ -37,9 +37,9 @@ class ListenerOptions extends Options
     }
 
     /**
-     * Set an array of paths where modules reside 
-     * 
-     * @param array $modulePaths 
+     * Set an array of paths where modules reside
+     *
+     * @param array $modulePaths
      * @return ListenerOptions
      */
     public function setModulePaths(array $modulePaths)
@@ -57,7 +57,7 @@ class ListenerOptions extends Options
     {
         return $this->configCacheEnabled;
     }
- 
+
     /**
      * Set if the config cache should be enabled or not
      *
@@ -75,7 +75,7 @@ class ListenerOptions extends Options
      *
      * @return string
      */
-    public function getConfigCacheKey() 
+    public function getConfigCacheKey()
     {
         return (string) $this->configCacheKey;
     }
@@ -86,16 +86,16 @@ class ListenerOptions extends Options
      * @param string $configCacheKey the value to be set
      * @return ManagerOptions
      */
-    public function setConfigCacheKey($configCacheKey) 
+    public function setConfigCacheKey($configCacheKey)
     {
         $this->configCacheKey = $configCacheKey;
         return $this;
     }
 
     /**
-     * Get the path to the config cache 
-     * 
-     * Should this be an option, or should the dir option include the 
+     * Get the path to the config cache
+     *
+     * Should this be an option, or should the dir option include the
      * filename, or should it simply remain hard-coded? Thoughts?
      *
      * @return string
@@ -114,7 +114,7 @@ class ListenerOptions extends Options
     {
         return $this->cacheDir;
     }
- 
+
     /**
      * Set the path where cache files can be stored
      *
@@ -133,8 +133,8 @@ class ListenerOptions extends Options
 
     /**
      * Normalize a path for insertion in the stack
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
      * @return string
      */
     public static function normalizePath($path)

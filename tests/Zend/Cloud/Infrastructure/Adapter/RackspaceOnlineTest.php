@@ -247,7 +247,7 @@ class RackspaceOnlineTest extends \PHPUnit_Framework_TestCase
  * @group      Zend\Cloud\Infrastructure
  * @group      Zend\Cloud\Infrastructure\Adapter\Rackspace
  */
-class Skip extends \PHPUnit_Framework_TestCase
+class SkipRackspaceOnlineTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

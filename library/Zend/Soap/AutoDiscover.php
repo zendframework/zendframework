@@ -53,15 +53,15 @@ class AutoDiscover
 
     /**
      * Service function names
-     * 
+     *
      * @var array
      */
     protected $_functions = array();
-    
+
     /**
      * Service class name
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $_class;
 
@@ -99,13 +99,20 @@ class AutoDiscover
     protected $_wsdlClass = 'Zend\Soap\Wsdl';
 
     /**
+     * Class Map of PHP to WSDL types.
+     *
+     * @var array
+     */
+    protected $_classMap = array();
+
+    /**
      * Constructor
      *
      * @param \Zend\Soap\Wsdl\ComplexTypeStrategy $strategy
      * @param string|Uri\Uri $endpointUri
      * @param string $wsdlClass
      */
-    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null)
+    public function __construct(ComplexTypeStrategy $strategy = null, $endpointUri=null, $wsdlClass=null, array $classMap = array())
     {
         $this->_reflection = new Reflection();
         if ($strategy !== null) {
@@ -120,10 +127,28 @@ class AutoDiscover
             $this->setWsdlClass($wsdlClass);
         }
     }
-    
+
+    /**
+     * Get the class map of php to wsdl qname types.
+     *
+     * @return array
+     */
+    public function getClassMap()
+    {
+        return $this->_classMap;
+    }
+
+    /**
+     * Set the class map of php to wsdl qname types.
+     */
+    public function setClassMap($classMap)
+    {
+        $this->_classMap = $classMap;
+    }
+
     /**
      * Set service name
-     * 
+     *
      * @param string $serviceName
      * @return AutoDiscover
      */
@@ -132,10 +157,10 @@ class AutoDiscover
         $this->_serviceName = $serviceName;
         return $this;
     }
-    
+
     /**
      * Get service name
-     * 
+     *
      * @return string
      */
     public function getServiceName()
@@ -150,10 +175,10 @@ class AutoDiscover
                 );
             }
         }
-        
+
         return $this->_serviceName;
     }
-    
+
 
     /**
      * Set the location at which the WSDL file will be availabe.
@@ -187,7 +212,7 @@ class AutoDiscover
         if (is_string($this->_uri)) {
             $this->_uri = Uri\UriFactory::factory($this->_uri);
         }
-        
+
         return $this->_uri;
     }
 
@@ -294,20 +319,20 @@ class AutoDiscover
         $this->_functions[] = $function;
         return $this;
     }
-    
+
     /**
      * Generate the WSDL for a service class.
-     * 
+     *
      * @return Zend\Soap\Wsdl
      */
     protected function _generateClass()
-    {   
+    {
         return $this->_generateWsdl($this->_reflection->reflectClass($this->_class)->getMethods());
     }
-    
+
     /**
      * Generate the WSDL for a set of functions.
-     * 
+     *
      * @return Zend\Soap\Wsdl
      */
     protected function _generateFunctions()
@@ -316,13 +341,13 @@ class AutoDiscover
         foreach (array_unique($this->_functions) as $func) {
             $methods[] = $this->_reflection->reflectFunction($func);
         }
-        
+
         return $this->_generateWsdl($methods);
     }
-    
+
     /**
      * Generate the WSDL for a set of reflection method instances.
-     * 
+     *
      * @return Zend\Soap\Wsdl
      */
     protected function _generateWsdl(array $reflectionMethods)
@@ -330,7 +355,7 @@ class AutoDiscover
         $uri = $this->getUri();
 
         $serviceName = $this->getServiceName();
-        $wsdl = new $this->_wsdlClass($serviceName, $uri, $this->_strategy);
+        $wsdl = new $this->_wsdlClass($serviceName, $uri, $this->_strategy, $this->_classMap);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
         $wsdl->addSchemaTypeSection();
@@ -347,12 +372,12 @@ class AutoDiscover
 
         return $wsdl;
     }
-    
+
     /**
      * Get the function parameters php type.
-     * 
+     *
      * Default implementation assumes the default param doc-block tag.
-     * 
+     *
      * @param ReflectionParameter $param
      * @return string
      */
@@ -360,42 +385,42 @@ class AutoDiscover
     {
         return $param->getType();
     }
-    
+
     /**
      * Get the functions return php type.
-     * 
+     *
      * Default implementation assumes the value of the return doc-block tag.
-     * 
+     *
      * @param AbstractFunction $function
      * @param Prototype $prototype
-     * @return type 
+     * @return type
      */
     protected function _getFunctionReturnType(AbstractFunction $function, Prototype $prototype)
     {
         return $prototype->getReturnType();
     }
-    
+
     /**
      * Detect if the function is a one-way or two-way operation.
-     * 
+     *
      * Default implementation assumes one-way, when return value is "void".
-     * 
+     *
      * @param AbstractFunction $function
      * @param Prototype $prototype
-     * @return type 
+     * @return type
      */
     protected function _isFunctionOneWay(AbstractFunction $function, Prototype $prototype)
     {
         return $prototype->getReturnType() == 'void';
     }
-    
+
     /**
      * Detect the functions documentation.
-     * 
+     *
      * Default implementation uses docblock description.
-     * 
+     *
      * @param AbstractFunction $function
-     * @return type 
+     * @return type
      */
     protected function _getFunctionDocumentation(AbstractFunction $function)
     {
@@ -515,7 +540,7 @@ class AutoDiscover
 
     /**
      * Generate the WSDL file from the configured input.
-     * 
+     *
      * @return Zend_Wsdl
      */
     public function generate()
@@ -523,13 +548,13 @@ class AutoDiscover
         if ($this->_class && $this->_functions) {
             throw new Exception\RuntimeException("Can either dump functions or a class as a service, not both.");
         }
-        
+
         if ($this->_class) {
             $wsdl = $this->_generateClass();
         } else {
             $wsdl = $this->_generateFunctions();
         }
-        
+
         return $wsdl;
     }
 

@@ -535,7 +535,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     function testGetComplexTypeBasedOnStrategiesBackwardsCompabilityBoolean()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
-        $this->assertEquals('tns:ZendTest.Soap.TestAsset.WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
+        $this->assertEquals('tns:WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
         $this->assertTrue($wsdl->getComplexTypeStrategy() instanceof ComplexTypeStrategy\DefaultComplexType);
 
 //        $wsdl2 = new Wsdl('MyService', 'http://localhost/MyService.php', false);
@@ -546,7 +546,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
     function testGetComplexTypeBasedOnStrategiesStringNames()
     {
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php', new \Zend\Soap\Wsdl\ComplexTypeStrategy\DefaultComplexType);
-        $this->assertEquals('tns:ZendTest.Soap.TestAsset.WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
+        $this->assertEquals('tns:WsdlTestClass', $wsdl->getType('\ZendTest\Soap\TestAsset\WsdlTestClass'));
         $this->assertTrue($wsdl->getComplexTypeStrategy() instanceof ComplexTypeStrategy\DefaultComplexType);
 
         $wsdl2 = new Wsdl('MyService', 'http://localhost/MyService.php', new \Zend\Soap\Wsdl\ComplexTypeStrategy\AnyType);
@@ -570,12 +570,12 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $wsdl = new Wsdl('MyService', 'http://localhost/MyService.php');
         $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(array('\ZendTest\Soap\TestAsset\WsdlTestClass' =>
-                                     'tns:ZendTest.Soap.TestAsset.WsdlTestClass'),
+                                     'tns:WsdlTestClass'),
                             $wsdl->getTypes());
 
         $wsdl->addComplexType('\ZendTest\Soap\TestAsset\WsdlTestClass');
         $this->assertEquals(array('\ZendTest\Soap\TestAsset\WsdlTestClass' =>
-                                     'tns:ZendTest.Soap.TestAsset.WsdlTestClass'),
+                                     'tns:WsdlTestClass'),
                             $wsdl->getTypes());
     }
 
@@ -596,7 +596,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
                                . 'name="MyService" targetNamespace="http://localhost/MyService.php">'
                                . '<types>'
                                .   '<xsd:schema targetNamespace="http://localhost/MyService.php">'
-                               .     '<xsd:complexType name="ZendTest.Soap.TestAsset.WsdlTestClass">'
+                               .     '<xsd:complexType name="WsdlTestClass">'
                                .       '<xsd:all>'
                                .         '<xsd:element name="var1" type="xsd:int" nillable="true"/>'
                                .         '<xsd:element name="var2" type="xsd:string" nillable="true"/>'

@@ -68,10 +68,10 @@ class Wsdl
      * Strategy for detection of complex types
      */
     protected $_strategy = null;
-    
+
     /**
      * Map of PHP Class names to WSDL QNames.
-     * 
+     *
      * @var array
      */
     protected $_classMap = array();
@@ -112,10 +112,10 @@ class Wsdl
 
         $this->setComplexTypeStrategy($strategy ?: new Wsdl\ComplexTypeStrategy\DefaultComplexType);
     }
-    
+
     /**
      * Get the class map of php to wsdl qname types.
-     * 
+     *
      * @return array
      */
     public function getClassMap()
@@ -130,7 +130,7 @@ class Wsdl
     {
         $this->_classMap = $classMap;
     }
-    
+
     /**
      * Set a new uri for this WSDL
      *
@@ -598,14 +598,14 @@ class Wsdl
         if (isset($this->_classMap[$type])) {
             return $this->_classMap[$type];
         }
-        
+
         if ($type[0] == '\\') {
             $type = substr($type, 1);
         }
-        
-        /*if ($pos = strrpos($type, '\\')) {
+
+        if ($pos = strrpos($type, '\\')) {
             $type = substr($type, $pos+1);
-        }*/
+        }
 
         return str_replace('\\', '.', $type);
     }

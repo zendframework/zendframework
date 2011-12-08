@@ -77,7 +77,7 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
     public function testCompositeThrowsExceptionOnInvalidType()
     {
         $strategy = new ComplexTypeStrategy\Composite();
-        
+
         $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Invalid type given to Composite Type Map');
         $strategy->connectTypeToStrategy(array(), 'strategy');
     }
@@ -90,7 +90,7 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Strategy for Complex Type \'Book\' is not a valid strategy');
         $book = $strategy->getStrategyOfType('Book');
     }
-    
+
     public function testCompositeThrowsExceptionOnInvalidStrategyPart2()
     {
         $strategy = new ComplexTypeStrategy\Composite(array(), 'invalid');
@@ -99,8 +99,8 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Default Strategy for Complex Types is not a valid strategy object');
         $book = $strategy->getStrategyOfType('Anything');
     }
-    
-    
+
+
 
     public function testCompositeDelegatesAddingComplexTypesToSubStrategies()
     {
@@ -111,15 +111,15 @@ class CompositeStrategyTest extends \PHPUnit_Framework_TestCase
         $wsdl = new Wsdl('SomeService', 'http://example.com');
         $strategy->setContext($wsdl);
 
-        $this->assertEquals('tns:ZendTest.Soap.Wsdl.Book',   $strategy->addComplexType('\ZendTest\Soap\Wsdl\Book'));
-        $this->assertEquals('tns:ZendTest.Soap.Wsdl.Cookie', $strategy->addComplexType('\ZendTest\Soap\Wsdl\Cookie'));
+        $this->assertEquals('tns:Book',   $strategy->addComplexType('\ZendTest\Soap\Wsdl\Book'));
+        $this->assertEquals('tns:Cookie', $strategy->addComplexType('\ZendTest\Soap\Wsdl\Cookie'));
         $this->assertEquals('xsd:anyType', $strategy->addComplexType('\ZendTest\Soap\Wsdl\Anything'));
     }
 
     public function testCompositeRequiresContextForAddingComplexTypesOtherwiseThrowsException()
     {
         $strategy = new ComplexTypeStrategy\Composite();
-        
+
         $this->setExpectedException('Zend\Soap\Exception\InvalidArgumentException', 'Cannot add complex type \'Test\'');
         $strategy->addComplexType('Test');
     }

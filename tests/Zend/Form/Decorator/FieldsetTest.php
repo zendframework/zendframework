@@ -39,6 +39,12 @@ use Zend\Form\Decorator\Fieldset as FieldsetDecorator,
  */
 class FieldsetTest extends \PHPUnit_Framework_TestCase
 {
+ 
+    /**
+     * @var FieldsetDecorator
+     */
+    protected $decorator;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -192,5 +198,25 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
         $test = $this->decorator->render('content');
         $this->assertContains('<fieldset', $test, $test);
         $this->assertNotContains('helper="', $test);
+    }
+    
+    /**
+     * @group ZF2-104
+     */
+    public function testFieldSetOptionsShouldOverrideElementAttribs()
+    {
+        $form = new Form();
+        $form->setAction('/foo/bar')
+             ->setMethod('post')
+             ->setView($this->getView());
+        
+        $this->decorator->setElement($form);
+        $form->setAttrib('class', 'someclass');
+        
+        $this->assertEquals('someclass', $this->decorator->getOption('class'));
+        
+        $this->decorator->setOption('class', 'otherclass');
+        
+        $this->assertEquals('otherclass', $this->decorator->getOption('class'));
     }
 }

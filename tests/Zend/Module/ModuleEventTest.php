@@ -34,4 +34,26 @@ class ModuleEventTest extends TestCase
         $this->setExpectedException('Zend\Module\Exception\InvalidArgumentException');
         $this->event->setModule('foo');
     }
+
+    public function testSettingModuleNameProxiesToParameters()
+    {
+        $moduleName = 'MyModule';
+        $this->event->setModuleName($moduleName);
+        $test = $this->event->getParam('moduleName');
+        $this->assertSame($moduleName, $test);
+    }
+
+    public function testCanRetrieveModuleNameViaGetter()
+    {
+        $moduleName = 'MyModule';
+        $this->event->setModuleName($moduleName);
+        $test = $this->event->getModuleName();
+        $this->assertSame($moduleName, $test);
+    }
+
+    public function testPassingNonStringToSetModuleNameRaisesException()
+    {
+        $this->setExpectedException('Zend\Module\Exception\InvalidArgumentException');
+        $this->event->setModuleName(new StdClass);
+    }
 }

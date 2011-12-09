@@ -35,7 +35,7 @@ class ModuleEvent extends Event
         if (!is_string($moduleName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a string as an argument; %s provided'
-                ,__METHOD__, gettype($module)
+                ,__METHOD__, gettype($moduleName)
             ));
         }
         $this->setParam('moduleName', $moduleName);

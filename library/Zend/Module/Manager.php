@@ -101,7 +101,7 @@ class Manager implements ModuleHandler
         $module = $result->last();
 
         if (!is_object($module)) {
-            throw new \Exception(sprintf(
+            throw new Exception\RuntimeException(sprintf(
                 'Module (%s) could not be initialized.',
                 $moduleName
             ));
@@ -164,7 +164,7 @@ class Manager implements ModuleHandler
     public function getEvent()
     {
         if (!$this->event instanceof ModuleEvent) {
-            $this->event = new ModuleEvent;
+            $this->setEvent(new ModuleEvent);
         }
         return $this->event;
     }

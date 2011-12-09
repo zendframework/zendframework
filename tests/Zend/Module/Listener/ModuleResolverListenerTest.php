@@ -5,11 +5,10 @@ namespace ZendTest\Module\Listener;
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
     Zend\Loader\AutoloaderFactory,
-    Zend\Module\Listener\InitTrigger,
     Zend\Module\Listener\ModuleResolverListener,
-    Zend\Module\Manager;
+    Zend\Module\ModuleEvent;
 
-class InitTriggerTest extends TestCase
+class ModuleResolverListenerTest extends TestCase
 {
 
     public function setUp()
@@ -28,10 +27,6 @@ class InitTriggerTest extends TestCase
             dirname(__DIR__) . '/TestAsset',
         ));
         $autoloader->register();
-
-        $this->moduleManager = new Manager(array());
-        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
-        $this->moduleManager->events()->attach('loadModule', new InitTrigger, 2000);
     }
 
     public function tearDown()
@@ -53,12 +48,15 @@ class InitTriggerTest extends TestCase
         set_include_path($this->includePath);
     }
 
-    public function testInitMethodCalledByInitTriggerListener()
+    public function testModuleResolverListenerCanResolveModuleClasses()
     {
-        $moduleManager = $this->moduleManager;
-        $moduleManager->setModules(array('ListenerTestModule'));
-        $moduleManager->loadModules();
-        $modules = $moduleManager->getLoadedModules();
-        $this->assertTrue($modules['ListenerTestModule']->initCalled);
+        $moduleResolver = new ModuleResolverListener;
+        $e = new ModuleEvent;
+
+        $e->setModuleName('ListenerTestModule');
+        $this->assertInstanceOf('ListenerTestModule\Module', $moduleResolver($e));
+
+        $e->setModuleName('DoesNotExist');
+        $this->assertFalse($moduleResolver($e));
     }
 }

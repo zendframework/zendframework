@@ -7,6 +7,8 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\AutoloaderFactory,
     Zend\Module\Manager,
     Zend\Module\Listener\ListenerOptions,
+    Zend\EventManager\EventManager,
+    Zend\Module\Listener\DefaultListenerAggregate,
     InvalidArgumentException;
 
 class ManagerTest extends TestCase
@@ -27,10 +29,13 @@ class ManagerTest extends TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-        $autoloader = new ModuleAutoloader(array(
-            __DIR__ . '/TestAsset',
-        ));
-        $autoloader->register();
+        $this->defaultListeners = new DefaultListenerAggregate(
+            new ListenerOptions(array( 
+                'module_paths'         => array(
+                    realpath(__DIR__ . '/TestAsset'),
+                ),
+            ))
+        );
     }
 
     public function tearDown()
@@ -55,60 +60,36 @@ class ManagerTest extends TestCase
         set_include_path($this->includePath);
     }
 
-    public function testDefaultListenerOptions()
-    {
-        $moduleManager = new Manager(array());
-        $this->assertInstanceOf('Zend\Module\Listener\ListenerOptions', $moduleManager->getDefaultListenerOptions());
-    }
-
-    public function testCanSetDefaultListenerOptions()
-    {
-        $options = new ListenerOptions(array('cache_dir' => __DIR__));
-        $moduleManager = new Manager(array());
-        $moduleManager->setDefaultListenerOptions($options);
-        $this->assertSame(__DIR__, $moduleManager->getDefaultListenerOptions()->cache_dir);
-    }
-
     public function testCanLoadSomeModule()
     {
-        $moduleManager = new Manager(array('SomeModule'));
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new Manager(array('SomeModule'), new EventManager);
+        $moduleManager->events()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('SomeModule\Module', $loadedModules['SomeModule']);
-        $config = $moduleManager->getConfigListener()->getMergedConfig();
+        $config = $configListener->getMergedConfig();
         $this->assertSame($config->some, 'thing');
     }
 
     public function testCanLoadMultipleModules()
     {
-        $moduleManager = new Manager(array('BarModule', 'BazModule'));
+        $configListener = $this->defaultListeners->getConfigListener();
+        $moduleManager  = new Manager(array('BarModule', 'BazModule'));
+        $moduleManager->events()->attachAggregate($this->defaultListeners);
         $moduleManager->loadModules();
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
         $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
-        $config = $moduleManager->getMergedConfig(); // use convenience method
+        $config = $configListener->getMergedConfig();
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);
-    }
-
-    public function testDefaultModuleListenersAreLoaded()
-    {
-        $moduleManager = new Manager(array());
-        $listeners = $moduleManager->events()->getListeners('loadModule');
-        $this->assertSame(3, count($listeners));
-    }
-
-    public function testCanSkipDefaultModuleListeners()
-    {
-        $moduleManager = new Manager(array());
-        $moduleManager->setDisableLoadDefaultListeners(true);
-        $listeners = $moduleManager->events()->getListeners('loadModule');
-        $this->assertSame(0, count($listeners));
     }
 
     public function testModuleLoadingBehavior()
     {
         $moduleManager = new Manager(array('BarModule'));
+        $moduleManager->events()->attachAggregate($this->defaultListeners);
         $modules = $moduleManager->getLoadedModules();
         $this->assertSame(0, count($modules));
         $modules = $moduleManager->getLoadedModules(true);
@@ -117,7 +98,6 @@ class ManagerTest extends TestCase
         $moduleManager->loadModule('BarModule'); // should not cause any problems
         $modules = $moduleManager->getLoadedModules(true); // BarModule already loaded so nothing happens
         $this->assertSame(1, count($modules));
-
     }
 
     public function testConstructorThrowsInvalidArgumentException()

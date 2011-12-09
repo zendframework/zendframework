@@ -10,10 +10,18 @@ use ArrayAccess,
     Zend\Config\Yaml as YamlConfig,
     Zend\Config\Json as JsonConfig,
     Zend\Module\ModuleEvent,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\IteratorToArray,
+    Zend\EventManager\EventCollection,
+    Zend\EventManager\ListenerAggregate;
 
-class ConfigListener extends AbstractListener implements ConfigMerger
+class ConfigListener extends AbstractListener
+    implements ConfigMerger, ListenerAggregate
 {
+    /**
+     * @var array
+     */
+    protected $listeners = array();
+
     /**
      * @var array
      */
@@ -33,11 +41,11 @@ class ConfigListener extends AbstractListener implements ConfigMerger
      * @var array
      */
     protected $globPaths = array();
-    
+
     /**
-     * __construct 
-     * 
-     * @param ListenerOptions $options 
+     * __construct
+     *
+     * @param ListenerOptions $options
      * @return void
      */
     public function __construct(ListenerOptions $options = null)
@@ -54,16 +62,45 @@ class ConfigListener extends AbstractListener implements ConfigMerger
         if (true === $this->skipConfig) {
             return;
         }
-        $module = $e->getModule();
+        $module = $e->getParam('module');
         if (is_callable(array($module, 'getConfig'))) {
             $this->mergeModuleConfig($module);
         }
     }
 
     /**
+     * Attach one or more listeners
+     *
+     * @param EventCollection $events
+     * @return void
+     */
+    public function attach(EventCollection $events)
+    {
+        $this->listeners[] = $events->attach('loadModule', $this, 1000);
+        $this->listeners[] = $events->attach('loadModules.post', array($this, 'mergeConfigGlobPaths'), 9000);
+        return $this;
+    }
+
+    /**
+     * Detach all previously attached listeners
+     *
+     * @param EventCollection $events
+     * @return void
+     */
+    public function detach(EventCollection $events)
+    {
+        foreach ($this->listeners as $key => $listener) {
+            $events->detach($listener);
+            unset($this->listeners[$key]);
+        }
+        $this->listeners = array();
+        return $this;
+    }
+
+    /**
      * getMergedConfig
-     * 
-     * @param bool $returnConfigAsObject 
+     *
+     * @param bool $returnConfigAsObject
      * @return mixed
      */
     public function getMergedConfig($returnConfigAsObject = true)
@@ -79,9 +116,9 @@ class ConfigListener extends AbstractListener implements ConfigMerger
     }
 
     /**
-     * setMergedConfig 
-     * 
-     * @param array $config 
+     * setMergedConfig
+     *
+     * @param array $config
      * @return ConfigListener
      */
     public function setMergedConfig(array $config)
@@ -92,16 +129,16 @@ class ConfigListener extends AbstractListener implements ConfigMerger
     }
 
     /**
-     * Add a glob path of config files to merge after loading modules 
-     * 
-     * @param string $globPath 
+     * Add a glob path of config files to merge after loading modules
+     *
+     * @param string $globPath
      * @return ConfigListener
      */
     public function addConfigGlobPath($globPath)
     {
         if (!is_string($globPath)) {
             throw new Exception\InvalidArgumentException(
-                sprintf('Parameter to %s::%s() must be a string; %s given.', 
+                sprintf('Parameter to %s::%s() must be a string; %s given.',
                 __CLASS__, __METHOD__, gettype($globPath))
             );
         }
@@ -110,9 +147,9 @@ class ConfigListener extends AbstractListener implements ConfigMerger
     }
 
     /**
-     * Add an array of glob paths of config files to merge after loading modules 
-     * 
-     * @param mixed $globPaths 
+     * Add an array of glob paths of config files to merge after loading modules
+     *
+     * @param mixed $globPaths
      * @return ConfigListener
      */
     public function addConfigGlobPaths($globPaths)
@@ -125,7 +162,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
             throw new Exception\InvalidArgumentException(
                 sprintf('Argument passed to %::%s() must be an array, '
                 . 'implement the \Traversable interface, or be an '
-                . 'instance of Zend\Config\Config. %s given.', 
+                . 'instance of Zend\Config\Config. %s given.',
                 __CLASS__, __METHOD__, gettype($globPaths))
             );
         }
@@ -138,24 +175,28 @@ class ConfigListener extends AbstractListener implements ConfigMerger
     }
 
     /**
-     * Merge all config files matched by the given glob()s 
+     * Merge all config files matched by the given glob()s
      *
      * This should really only be called by the module manager.
-     * 
+     *
+     * @param mixed $e 
      * @return ConfigListener
      */
-    public function mergeConfigGlobPaths()
+    public function mergeConfigGlobPaths($e = null)
     {
         foreach ($this->globPaths as $globPath) {
             $this->mergeGlobPath($globPath);
+        }
+        if ($e instanceof ModuleEvent) {
+            $e->setConfigListener($this);
         }
         return $this;
     }
 
     /**
-     * Merge all config files matching a glob 
-     * 
-     * @param mixed $globPath 
+     * Merge all config files matching a glob
+     *
+     * @param mixed $globPath
      * @return ConfigListener
      */
     protected function mergeGlobPath($globPath)
@@ -205,9 +246,9 @@ class ConfigListener extends AbstractListener implements ConfigMerger
     }
 
     /**
-     * mergeModuleConfig 
-     * 
-     * @param mixed $module 
+     * mergeModuleConfig
+     *
+     * @param mixed $module
      * @return ConfigListener
      */
     protected function mergeModuleConfig($module)
@@ -223,7 +264,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
                 throw new Exception\InvalidArgumentException(
                     sprintf('getConfig() method of %s must be an array, '
                     . 'implement the \Traversable interface, or be an '
-                    . 'instance of Zend\Config\Config. %s given.', 
+                    . 'instance of Zend\Config\Config. %s given.',
                     get_class($module), gettype($config))
                 );
             }
@@ -248,7 +289,7 @@ class ConfigListener extends AbstractListener implements ConfigMerger
         }
         $this->setMergedConfig(array_replace_recursive($this->mergedConfig, $config));
     }
-    
+
     protected function hasCachedConfig()
     {
         if (($this->getOptions()->getConfigCacheEnabled())

@@ -47,7 +47,7 @@ class FilterBroker extends PluginSpecBroker
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Filter) {
-            throw new Exception('Filters must implement Zend\Filter\Filter');
+            throw new Exception\RuntimeException('Filters must implement Zend\Filter\Filter');
         }
         return true;
     }

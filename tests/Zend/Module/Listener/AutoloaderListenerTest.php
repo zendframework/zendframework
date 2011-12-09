@@ -6,6 +6,8 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
     Zend\Loader\AutoloaderFactory,
     Zend\Module\Listener\AutoloaderListener,
+    Zend\Module\Listener\ModuleResolverListener,
+    Zend\Module\Listener\ListenerOptions,
     Zend\Module\Manager;
 
 class AutoloaderListenerTest extends TestCase
@@ -22,10 +24,15 @@ class AutoloaderListenerTest extends TestCase
 
         // Store original include_path
         $this->includePath = get_include_path();
+
         $autoloader = new ModuleAutoloader(array(
             dirname(__DIR__) . '/TestAsset',
         ));
         $autoloader->register();
+
+        $this->moduleManager = new Manager(array());
+        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->events()->attach('loadModule', new AutoloaderListener, 2000);
     }
 
     public function tearDown()
@@ -49,13 +56,21 @@ class AutoloaderListenerTest extends TestCase
 
     public function testAutoloadersRegisteredByAutoloaderListener()
     {
-        $moduleManager = new Manager(array('ListenerTestModule'));
-        $moduleManager->setDisableLoadDefaultListeners(true);
-        $autoloaderListener = new AutoloaderListener();
-        $moduleManager->events()->attach('loadModule', $autoloaderListener);
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('ListenerTestModule'));
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
         $this->assertTrue($modules['ListenerTestModule']->getAutoloaderConfigCalled);
         $this->assertTrue(class_exists('Foo\Bar'));
+    }
+
+    public function testAutoloadersNotRegisteredIfModuleDoesNotInheritAutoloaderProviderInterface()
+    {
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('NotAutoloaderModule'));
+        $moduleManager->loadModules();
+        $modules = $moduleManager->getLoadedModules();
+        $this->assertFalse($modules['NotAutoloaderModule']->getAutoloaderConfigCalled);
+        $this->assertFalse(class_exists('Foo\Baz'));
     }
 }

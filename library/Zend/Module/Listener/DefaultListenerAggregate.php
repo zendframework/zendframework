@@ -48,7 +48,7 @@ class DefaultListenerAggregate extends AbstractListener
     public function detach(EventCollection $events)
     {
         foreach ($this->listeners as $key => $listener) {
-            $events->detach($handler);
+            $events->detach($listener);
             unset($this->listeners[$key]);
         }
         $this->handlers = array();

@@ -29,7 +29,6 @@ class ManagerTest extends TestCase
         // Store original include_path
         $this->includePath = get_include_path();
 
-
         $this->defaultListeners = new DefaultListenerAggregate(
             new ListenerOptions(array( 
                 'module_paths'         => array(
@@ -37,10 +36,6 @@ class ManagerTest extends TestCase
                 ),
             ))
         );
-        //$autoloader = new ModuleAutoloader(array(
-        //    __DIR__ . '/TestAsset',
-        //));
-        //$autoloader->register();
     }
 
     public function tearDown()

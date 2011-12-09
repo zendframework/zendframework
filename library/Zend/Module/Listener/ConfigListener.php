@@ -77,7 +77,7 @@ class ConfigListener extends AbstractListener
     public function attach(EventCollection $events)
     {
         $this->listeners[] = $events->attach('loadModule', $this, 1000);
-        $this->listeners[] = $events->attach('loadModules.post', array($this, 'mergeConfigGlobPaths'), 1000);
+        $this->listeners[] = $events->attach('loadModules.post', array($this, 'mergeConfigGlobPaths'), 9000);
         return $this;
     }
 
@@ -179,12 +179,16 @@ class ConfigListener extends AbstractListener
      *
      * This should really only be called by the module manager.
      *
+     * @param mixed $e 
      * @return ConfigListener
      */
-    public function mergeConfigGlobPaths()
+    public function mergeConfigGlobPaths($e = null)
     {
         foreach ($this->globPaths as $globPath) {
             $this->mergeGlobPath($globPath);
+        }
+        if ($e instanceof ModuleEvent) {
+            $e->setConfigListener($this);
         }
         return $this;
     }

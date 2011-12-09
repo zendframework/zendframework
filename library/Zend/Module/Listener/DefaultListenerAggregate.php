@@ -35,8 +35,8 @@ class DefaultListenerAggregate extends AbstractListener
         $this->listeners[] = $events->attach('loadModule.resolve', new ModuleResolverListener, 1000);
         $this->listeners[] = $events->attach('loadModule', new AutoloaderListener($options), 2000);
         $this->listeners[] = $events->attach('loadModule', new InitTrigger($options), 1000);
-        $this->listeners[] = $events->attach('loadModule', $configListener, 1000);
-        $this->listeners[] = $events->attach('loadModules.post', array($configListener, 'mergeConfigGlobPaths'), 1000);
+        $this->listeners[] = $events->attachAggregate($configListener);
+        return $this;
     }
 
     /**
@@ -48,10 +48,15 @@ class DefaultListenerAggregate extends AbstractListener
     public function detach(EventCollection $events)
     {
         foreach ($this->listeners as $key => $listener) {
-            $events->detach($listener);
+            if ($listener instanceof ListenerAggregate) {
+                $listener->detach($events);
+            } else {
+                $events->detach($listener);
+            }
             unset($this->listeners[$key]);
         }
-        $this->handlers = array();
+        $this->listeners = array();
+        return $this;
     }
 
     /**

@@ -153,8 +153,8 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attach('loadModule', $configListener);
-        $moduleManager->events()->attach('loadModules.post', array($configListener, 'mergeConfigGlobPaths'), 1000);
+        $moduleManager->events()->attachAggregate($configListener);
+
         $moduleManager->loadModules();
         $configObjectCheck = $configListener->getMergedConfig();
 
@@ -189,8 +189,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
 
-        $moduleManager->events()->attach('loadModule', $configListener);
-        $moduleManager->events()->attach('loadModules.post', array($configListener, 'mergeConfigGlobPaths'), 1000);
+        $moduleManager->events()->attachAggregate($configListener);
         $moduleManager->loadModules();
 
         // Test as object
@@ -200,6 +199,20 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('loaded', $configObject->json);
         $this->assertSame('loaded', $configObject->xml);
         $this->assertSame('loaded', $configObject->yml);
+    }
+
+    public function testConfigListenerFunctionsAsAggregateListener()
+    {
+        $configListener = new ConfigListener;
+
+        $moduleManager = $this->moduleManager;
+        $this->assertEquals(1, count($moduleManager->events()->getEvents()));
+
+        $configListener->attach($moduleManager->events());
+        $this->assertEquals(3, count($moduleManager->events()->getEvents()));
+
+        $configListener->detach($moduleManager->events());
+        $this->assertEquals(1, count($moduleManager->events()->getEvents()));
     }
 
     public function testPhpConfigFileReturningInvalidConfigRaisesException()

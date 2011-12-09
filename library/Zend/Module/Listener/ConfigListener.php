@@ -10,10 +10,18 @@ use ArrayAccess,
     Zend\Config\Yaml as YamlConfig,
     Zend\Config\Json as JsonConfig,
     Zend\Module\ModuleEvent,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Stdlib\IteratorToArray,
+    Zend\EventManager\EventCollection,
+    Zend\EventManager\ListenerAggregate;
 
-class ConfigListener extends AbstractListener implements ConfigMerger
+class ConfigListener extends AbstractListener
+    implements ConfigMerger, ListenerAggregate
 {
+    /**
+     * @var array
+     */
+    protected $listeners = array();
+
     /**
      * @var array
      */
@@ -58,6 +66,35 @@ class ConfigListener extends AbstractListener implements ConfigMerger
         if (is_callable(array($module, 'getConfig'))) {
             $this->mergeModuleConfig($module);
         }
+    }
+
+    /**
+     * Attach one or more listeners
+     *
+     * @param EventCollection $events
+     * @return void
+     */
+    public function attach(EventCollection $events)
+    {
+        $this->listeners[] = $events->attach('loadModule', $this, 1000);
+        $this->listeners[] = $events->attach('loadModules.post', array($this, 'mergeConfigGlobPaths'), 1000);
+        return $this;
+    }
+
+    /**
+     * Detach all previously attached listeners
+     *
+     * @param EventCollection $events
+     * @return void
+     */
+    public function detach(EventCollection $events)
+    {
+        foreach ($this->listeners as $key => $listener) {
+            $events->detach($listener);
+            unset($this->listeners[$key]);
+        }
+        $this->listeners = array();
+        return $this;
     }
 
     /**

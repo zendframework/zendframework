@@ -18,41 +18,41 @@ class Filesystem extends AbstractAdapter
      *
      * @var string
      */
-    protected $_namespacePattern = '/^[a-z0-9_\+\-]*$/Di';
+    protected $namespacePattern = '/^[a-z0-9_\+\-]*$/Di';
 
     /**
      * Namespace separator
      *
      * @var string
      */
-    protected $_namespaceSeparator = '-';
+    protected $namespaceSeparator = '-';
 
     /**
      * Overwrite default key pattern
      */
-    protected $_keyPattern = '/^[a-z0-9_\+\-]*$/Di';
+    protected $keyPattern = '/^[a-z0-9_\+\-]*$/Di';
 
     /**
-     * Directory where to store cache files
+     * Directory to store cache files
      *
      * @var null|string The cache directory
      *                  or NULL for the systems temporary directory
      */
-    protected $_cacheDir = null;
+    protected $cacheDir = null;
 
     /**
      * Used umask on creating a cache file
      *
      * @var int
      */
-    protected $_fileUmask = 0117;
+    protected $fileUmask = 0117;
 
     /**
      * Lock files on writing
      *
      * @var boolean
      */
-    protected $_fileLocking = true;
+    protected $fileLocking = true;
 
     /**
      * Block writing files until writing by another process finished.
@@ -62,35 +62,35 @@ class Filesystem extends AbstractAdapter
      *
      * @var boolean
      */
-    protected $_fileBlocking = true;
+    protected $fileBlocking = true;
 
     /**
      * Used umask on creating a cache directory
      *
      * @var int
      */
-    protected $_dirUmask = 0007;
+    protected $dirUmask = 0007;
 
     /**
      * How much sub-directaries should be created?
      *
      * @var int
      */
-    protected $_dirLevel = 1;
+    protected $dirLevel = 1;
 
     /**
      * Don't get 'fileatime' as 'atime' on metadata
      *
      * @var boolean
      */
-    protected $_noAtime = true;
+    protected $noAtime = true;
 
     /**
      * Don't get 'filectime' as 'ctime' on metadata
      *
      * @var boolean
      */
-    protected $_noCtime = true;
+    protected $noCtime = true;
 
     /**
      * Read control enabled ?
@@ -99,34 +99,34 @@ class Filesystem extends AbstractAdapter
      *
      * @var boolean
      */
-    protected $_readControl = false;
+    protected $readControl = false;
 
     /**
      * The used hash algorithm if read control is enabled
      *
      * @var string
      */
-    protected $_readControlAlgo = 'crc32';
+    protected $readControlAlgo = 'crc32';
 
     /**
      * Call clearstatcache enabled?
      *
      * @var boolean
      */
-    protected $_clearStatCache = true;
+    protected $clearStatCache = true;
 
     /**
      * Statement
      */
-    protected $_stmtGlob  = null;
-    protected $_stmtMatch = null;
+    protected $stmtGlob  = null;
+    protected $stmtMatch = null;
 
     /**
      * Buffer vars
      */
-    protected $_lastInfoId  = null;
-    protected $_lastInfoAll = null;
-    protected $_lastInfo    = null;
+    protected $lastInfoId  = null;
+    protected $lastInfoAll = null;
+    protected $lastInfo    = null;
 
     /* configuration */
 
@@ -152,14 +152,14 @@ class Filesystem extends AbstractAdapter
 
     public function setNamespaceSeparator($separator)
     {
-        $this->_namespaceSeparator = (string)$separator;
-        $this->_updateCapabilities();
+        $this->namespaceSeparator = (string)$separator;
+        $this->updateCapabilities();
         return $this;
     }
 
     public function getNamespaceSeparator()
     {
-        return $this->_namespaceSeparator;
+        return $this->namespaceSeparator;
     }
 
     public function setCacheDir($dir)
@@ -182,17 +182,17 @@ class Filesystem extends AbstractAdapter
             $dir = rtrim(realpath($dir), \DIRECTORY_SEPARATOR);
         }
 
-        $this->_cacheDir = $dir;
+        $this->cacheDir = $dir;
         return $this;
     }
 
     public function getCacheDir()
     {
-        if ($this->_cacheDir === null) {
+        if ($this->cacheDir === null) {
             $this->setCacheDir(sys_get_temp_dir());
         }
 
-        return $this->_cacheDir;
+        return $this->cacheDir;
     }
 
     public function setFilePerm($perm)
@@ -231,59 +231,59 @@ class Filesystem extends AbstractAdapter
             );
         }
 
-        $this->_fileUmask = $umask;
+        $this->fileUmask = $umask;
         return $this;
     }
 
     public function getFileUmask()
     {
-        return $this->_fileUmask;
+        return $this->fileUmask;
     }
 
     public function setFileLocking($flag)
     {
-        $this->_fileLocking = (bool)$flag;
+        $this->fileLocking = (bool)$flag;
         return $this;
     }
 
     public function getFileLocking()
     {
-        return $this->_fileLocking;
+        return $this->fileLocking;
     }
 
     public function setFileBlocking($flag)
     {
-        $this->_fileBlocking = (bool)$flag;
+        $this->fileBlocking = (bool)$flag;
         return $this;
     }
 
     public function getFileBlocking()
     {
-        return $this->_fileBlocking;
+        return $this->fileBlocking;
     }
 
     public function setNoAtime($flag)
     {
-        $this->_noAtime = (bool)$flag;
-        $this->_updateCapabilities();
+        $this->noAtime = (bool)$flag;
+        $this->updateCapabilities();
         return $this;
     }
 
     public function getNoAtime()
     {
-        return $this->_noAtime;
+        return $this->noAtime;
     }
 
     public function setNoCtime($flag)
     {
-        $this->_noCtime = (bool)$flag;
-        $this->_updateCapabilities();
+        $this->noCtime = (bool)$flag;
+        $this->updateCapabilities();
         return $this;
     }
 
     public function getNoCtime()
     {
-        return $this->_noCtime;
+        return $this->noCtime;
     }
 
     public function setDirPerm($perm)
@@ -318,13 +318,13 @@ class Filesystem extends AbstractAdapter
             );
         }
 
-        $this->_dirUmask = $umask;
+        $this->dirUmask = $umask;
         return $this;
     }
 
     public function getDirUmask()
     {
-        return $this->_dirUmask;
+        return $this->dirUmask;
     }
 
     public function setDirLevel($level)
@@ -335,24 +335,24 @@ class Filesystem extends AbstractAdapter
                 "Directory level '{$level}' have to be between 0 and 16"
             );
         }
-        $this->_dirLevel = $level;
+        $this->dirLevel = $level;
         return $this;
     }
 
     public function getDirLevel()
     {
-        return $this->_dirLevel;
+        return $this->dirLevel;
     }
 
     public function setReadControl($flag)
     {
-        $this->_readControl = (bool)$flag;
+        $this->readControl = (bool)$flag;
         return $this;
     }
 
     public function getReadControl()
     {
-        return $this->_readControl;
+        return $this->readControl;
     }
 
     public function setReadControlAlgo($algo)
@@ -363,24 +363,24 @@ class Filesystem extends AbstractAdapter
             throw new InvalidArgumentException("Unsupported hash algorithm '{$algo}");
         }
 
-        $this->_readControlAlgo = $algo;
+        $this->readControlAlgo = $algo;
         return $this;
     }
 
     public function getReadControlAlgo()
     {
-        return $this->_readControlAlgo;
+        return $this->readControlAlgo;
     }
 
     public function setClearStatCache($flag)
     {
-        $this->_clearStatCache = (bool)$flag;
+        $this->clearStatCache = (bool)$flag;
         return $this;
     }
 
     public function getClearStatCache()
     {
-        return $this->_clearStatCache;
+        return $this->clearStatCache;
     }
 
     /* reading */
@@ -391,8 +391,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -408,10 +408,10 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            $result = $this->_get($key, $options);
+            $result = $this->internalGetItem($key, $options);
             if (array_key_exists('token', $options)) {
                 // use filemtime + filesize as CAS token
-                $keyInfo = $this->_getKeyInfo($key, $options['namespace']);
+                $keyInfo = $this->getKeyInfo($key, $options['namespace']);
                 $options['token'] = $keyInfo['mtime'] . filesize($keyInfo['filespec'] . '.dat');
             }
 
@@ -427,7 +427,7 @@ class Filesystem extends AbstractAdapter
             return array();
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         // don't throw ItemNotFoundException on getItems
         $options['ignore_missing_items'] = true;
 
@@ -448,7 +448,7 @@ class Filesystem extends AbstractAdapter
 
             $result = array();
             foreach ($keys as $key) {
-                if ( ($rs = $this->_get($key, $options)) !== false) {
+                if ( ($rs = $this->internalGetItem($key, $options)) !== false) {
                     $result[$key] = $rs;
                 }
             }
@@ -465,8 +465,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -482,7 +482,7 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            $result = $this->_exists($key, $options);
+            $result = $this->internalHasItem($key, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -495,7 +495,7 @@ class Filesystem extends AbstractAdapter
             return array();
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keys'    => & $keys,
             'options' => & $options
@@ -513,7 +513,7 @@ class Filesystem extends AbstractAdapter
 
             $result = array();
             foreach ($keys as $key) {
-                if ( $this->_exists($key, $options) === true ) {
+                if ( $this->internalHasItem($key, $options) === true ) {
                     $result[] = $key;
                 }
             }
@@ -530,8 +530,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -548,11 +548,11 @@ class Filesystem extends AbstractAdapter
             }
 
             $lastInfoId = $options['namespace'] . $this->getNamespaceSeparator() . $key;
-            if ($this->_lastInfoId == $lastInfoId && $this->_lastInfoAll) {
-                return $this->_lastInfoAll;
+            if ($this->lastInfoId == $lastInfoId && $this->lastInfoAll) {
+                return $this->lastInfoAll;
             }
 
-            $this->_lastInfoAll = $result = $this->_info($key, $options);
+            $this->lastInfoAll = $result = $this->internalGetMetadata($key, $options);
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
@@ -566,7 +566,7 @@ class Filesystem extends AbstractAdapter
             return array();
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         // don't throw ItemNotFoundException on getMetadatas
         $options['ignore_missing_items'] = true;
 
@@ -587,8 +587,9 @@ class Filesystem extends AbstractAdapter
 
             $result = array();
             foreach ($keys as $key) {
-                if ( ($info = $this->_info($key, $options)) !== false ) {
-                    $result[$key] = $info;
+                $meta = $this->internalGetMetadata($key, $options);
+                if ($meta !== false ) {
+                    $result[$key] = $meta;
                 }
             }
 
@@ -606,8 +607,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -624,7 +625,7 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            $result = $this->_set($key, $value, $options);
+            $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -637,7 +638,7 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options
@@ -655,7 +656,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             foreach ($keyValuePairs as $key => $value) {
-                $result = $this->_set($key, $value, $options) && $result;
+                $result = $this->internalSetItem($key, $value, $options) && $result;
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -670,8 +671,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -688,11 +689,11 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            if ( !$this->_exists($key, $options) ) {
+            if ( !$this->internalHasItem($key, $options) ) {
                 throw new ItemNotFoundException("Key '{$key}' doesn't exist");
             }
 
-            $result = $this->_set($key, $value, $options);
+            $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -705,7 +706,7 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options
@@ -723,10 +724,10 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             foreach ($keyValuePairs as $key => $value) {
-                if ( !$this->_exists($key, $options) ) {
+                if ( !$this->internalHasItem($key, $options) ) {
                     throw new ItemNotFoundException("Key '{$key}' doesn't exist");
                 }
-                $result = $this->_set($key, $value, $options) && $result;
+                $result = $this->internalSetItem($key, $value, $options) && $result;
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -741,8 +742,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -759,11 +760,11 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            if ( $this->_exists($key, $options) ) {
+            if ( $this->internalHasItem($key, $options) ) {
                 throw new RuntimeException("Key '{$key}' already exist");
             }
 
-            $result = $this->_set($key, $value, $options);
+            $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -776,7 +777,7 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options
@@ -794,11 +795,11 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             foreach ($keyValuePairs as $key => $value) {
-                if ( $this->_exists($key, $options) ) {
+                if ( $this->internalHasItem($key, $options) ) {
                     throw new RuntimeException("Key '{$key}' already exist");
                 }
 
-                $result = $this->_set($key, $value, $options) && $result;
+                $result = $this->internalSetItem($key, $value, $options) && $result;
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -813,8 +814,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'token'   => & $token,
             'key'     => & $key,
@@ -832,7 +833,7 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            if ( !($keyInfo = $this->_getKeyInfo($key, $options['namespace'])) ) {
+            if ( !($keyInfo = $this->getKeyInfo($key, $options['namespace'])) ) {
                 if ($options['ignore_missing_items']) {
                     $result = false;
                 } else {
@@ -844,7 +845,7 @@ class Filesystem extends AbstractAdapter
                 if ($token != $check) {
                     $result = false;
                 } else {
-                    $result = $this->_set($key, $value, $options);
+                    $result = $this->internalSetItem($key, $value, $options);
                 }
             }
 
@@ -860,8 +861,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -877,8 +878,8 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            $this->_touch($key, $options);
-            $this->_lastInfoId = null;
+            $this->internalTouchItem($key, $options);
+            $this->lastInfoId = null;
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -893,7 +894,7 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keys'    => & $keys,
             'options' => & $options
@@ -906,9 +907,9 @@ class Filesystem extends AbstractAdapter
             }
 
             foreach ($keys as $key) {
-                $this->_touch($key, $options);
+                $this->internalTouchItem($key, $options);
             }
-            $this->_lastInfoId = null;
+            $this->lastInfoId = null;
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -923,8 +924,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -937,7 +938,7 @@ class Filesystem extends AbstractAdapter
             }
 
             // unlink is not affected by clearstatcache
-            $this->_remove($key, $options);
+            $this->internalRemoveItem($key, $options);
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -952,7 +953,7 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keys'    => & $keys,
             'options' => & $options
@@ -966,7 +967,7 @@ class Filesystem extends AbstractAdapter
 
             // unlink is not affected by clearstatcache
             foreach ($keys as $key) {
-                $this->_remove($key, $options);
+                $this->internalRemoveItem($key, $options);
             }
 
             $result = true;
@@ -980,7 +981,7 @@ class Filesystem extends AbstractAdapter
 
     public function find($mode = self::MATCH_ACTIVE, array $options = array())
     {
-        if ($this->_stmtActive) {
+        if ($this->stmtActive) {
             throw new RuntimeException('Statement already in use');
         }
 
@@ -988,8 +989,8 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
+        $this->normalizeOptions($options);
+        $this->normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
         $options = array_merge($this->getOptions(), $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
@@ -1013,10 +1014,10 @@ class Filesystem extends AbstractAdapter
                     . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
                 $glob = new \GlobIterator($find);
 
-                $this->_stmtActive  = true;
-                $this->_stmtGlob    = $glob;
-                $this->_stmtMatch   = $mode;
-                $this->_stmtOptions = $options;
+                $this->stmtActive  = true;
+                $this->stmtGlob    = $glob;
+                $this->stmtMatch   = $mode;
+                $this->stmtOptions = $options;
             } catch (\Exception $e) {
                 throw new RuntimeException('Instantiating glob iterator failed', 0, $e);
             }
@@ -1030,7 +1031,7 @@ class Filesystem extends AbstractAdapter
 
     public function fetch()
     {
-        if (!$this->_stmtActive) {
+        if (!$this->stmtActive) {
             return false;
         }
 
@@ -1042,15 +1043,15 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->_stmtGlob !== null) {
-                $result = $this->_fetchByGlob();
+            if ($this->stmtGlob !== null) {
+                $result = $this->fetchByGlob();
 
                 if ($result === false) {
                     // clear statement
-                    $this->_stmtActive  = false;
-                    $this->_stmtGlob    = null;
-                    $this->_stmtMatch   = null;
-                    $this->_stmtOptions = null;
+                    $this->stmtActive  = false;
+                    $this->stmtGlob    = null;
+                    $this->stmtMatch   = null;
+                    $this->stmtOptions = null;
                 }
             } else {
                 $result = parent::fetch();
@@ -1066,8 +1067,8 @@ class Filesystem extends AbstractAdapter
 
     public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
-        $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
+        $this->normalizeOptions($options);
+        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options
@@ -1079,7 +1080,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $result = $this->_clearByPrefix('', $mode, $options);
+            $result = $this->clearByPrefix('', $mode, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1088,8 +1089,8 @@ class Filesystem extends AbstractAdapter
 
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
-        $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
+        $this->normalizeOptions($options);
+        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options
@@ -1102,7 +1103,7 @@ class Filesystem extends AbstractAdapter
             }
 
             $prefix = $options['namespace'] . $this->getNamespaceSeparator();
-            $result = $this->_clearByPrefix($prefix, $mode, $options);
+            $result = $this->clearByPrefix($prefix, $mode, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1115,7 +1116,7 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'options' => & $options
         ));
@@ -1128,7 +1129,7 @@ class Filesystem extends AbstractAdapter
 
             if ( ($dirLevel = $this->getDirLevel()) ) {
                 // removes only empty directories
-                $this->_rmDir($this->getCacheDir(), $options['namespace'] . $this->getNamespaceSeparator());
+                $this->rmDir($this->getCacheDir(), $options['namespace'] . $this->getNamespaceSeparator());
             }
 
             $result = true;
@@ -1150,10 +1151,10 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->_capabilities === null) {
-                $this->_capabilityMarker = new \stdClass();
-                    $this->_capabilities = new Capabilities(
-                    $this->_capabilityMarker,
+            if ($this->capabilities === null) {
+                $this->capabilityMarker = new \stdClass();
+                    $this->capabilities = new Capabilities(
+                    $this->capabilityMarker,
                     array(
                         'supportedDatatypes' => array(
                             'NULL'     => 'string',
@@ -1180,10 +1181,10 @@ class Filesystem extends AbstractAdapter
                 );
 
                 // set dynamic capibilities
-                $this->_updateCapabilities();
+                $this->updateCapabilities();
             }
 
-            $result = $this->_capabilities;
+            $result = $this->capabilities;
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1209,16 +1210,16 @@ class Filesystem extends AbstractAdapter
 
     /* internal */
 
-    protected function _set($key, $value, array &$options)
+    protected function internalSetItem($key, $value, array &$options)
     {
         $oldUmask = null;
 
         $lastInfoId = $options['namespace'] . $this->getNamespaceSeparator() . $key;
-        if ($this->_lastInfoId == $lastInfoId) {
-            $filespec = $this->_lastInfo['filespec'];
+        if ($this->lastInfoId == $lastInfoId) {
+            $filespec = $this->lastInfo['filespec'];
             // if lastKeyInfo is available I'm sure that the cache directory exist
         } else {
-            $filespec = $this->_getKeyFileSpec($key, $options['namespace']);
+            $filespec = $this->getFileSpec($key, $options['namespace']);
             if ($this->getDirLevel() > 0) {
                 $path = dirname($filespec);
                 if (!file_exists($path)) {
@@ -1252,18 +1253,18 @@ class Filesystem extends AbstractAdapter
                 $oldUmask = umask($this->getFileUmask());
             }
 
-            $ret = $this->_putFileContent($filespec . '.dat', $value);
+            $ret = $this->putFileContent($filespec . '.dat', $value);
             if ($ret && $info) {
                 // Don't throw exception if writing of info file failed
                 // -> only return false
                 try {
-                    $ret = $this->_putFileContent($filespec . '.ifo', serialize($info));
+                    $ret = $this->putFileContent($filespec . '.ifo', serialize($info));
                 } catch (\Exception $e) {
                     $ret = false;
                 }
             }
 
-            $this->_lastInfoId = null;
+            $this->lastInfoId = null;
 
             // reset file_umask
             umask($oldUmask);
@@ -1277,40 +1278,44 @@ class Filesystem extends AbstractAdapter
         }
     }
 
-    protected function _remove($key, array &$options)
+    protected function internalRemoveItem($key, array &$options)
     {
-        $filespec = $this->_getKeyFileSpec($key, $options['namespace']);
+        $filespec = $this->getFileSpec($key, $options['namespace']);
 
         if (!$options['ignore_missing_items'] && !file_exists($filespec . '.dat')) {
             throw new ItemNotFoundException("Key '{$key}' with file '{$filespec}.dat' not found");
         }
 
-        $this->_unlink($filespec . '.dat');
-        $this->_unlink($filespec . '.ifo');
-        $this->_lastInfoId = null;
+        $this->unlink($filespec . '.dat');
+        $this->unlink($filespec . '.ifo');
+        $this->lastInfoId = null;
     }
 
-    protected function _get($key, array &$options)
+    protected function internalGetItem($key, array &$options)
     {
-        if ( !$this->_exists($key, $options)
-          || !($keyInfo=$this->_getKeyInfo($key, $options['namespace'])) ) {
+        if ( !$this->internalHasItem($key, $options)
+            || !($keyInfo=$this->getKeyInfo($key, $options['namespace']))
+        ) {
             if ($options['ignore_missing_items']) {
                 return false;
             } else {
-                throw new ItemNotFoundException("Key '{$key}' not found within namespace '{$options['namespace']}'");
+                throw new ItemNotFoundException(
+                    "Key '{$key}' not found within namespace '{$options['namespace']}'"
+                );
             }
         }
 
         try {
-            $data = $this->_getFileContent($keyInfo['filespec'] . '.dat');
+            $data = $this->getFileContent($keyInfo['filespec'] . '.dat');
 
             if ($this->getReadControl()) {
-                if ( ($info = $this->_readInfoFile($keyInfo['filespec'] . '.ifo'))
-                  && isset($info['hash'], $info['algo']) ) {
+                if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo'))
+                    && isset($info['hash'], $info['algo'])
+                ) {
                     $hashData = Utils::generateHash($info['algo'], $data, true);
                     if ($hashData != $info['hash']) {
                         throw new UnexpectedValueException(
-                            'readControl: Stored hash and computed hash don\'t match'
+                            'ReadControl: Stored hash and computed hash don\'t match'
                         );
                     }
                 }
@@ -1321,16 +1326,16 @@ class Filesystem extends AbstractAdapter
         } catch (\Exception $e) {
             try {
                 // remove cache file on exception
-                $this->_remove($key, $options);
+                $this->internalRemoveItem($key, $options);
             } catch (\Exception $tmp) {} // do not throw remove exception on this point
 
             throw $e;
         }
     }
 
-    protected function _exists($key, array &$options)
+    protected function internalHasItem($key, array &$options)
     {
-        $keyInfo = $this->_getKeyInfo($key, $options['namespace']);
+        $keyInfo = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
             return false; // missing or corrupted cache data
         }
@@ -1344,8 +1349,8 @@ class Filesystem extends AbstractAdapter
         return false;
     }
 
-    protected function _info($key, array &$options) {
-        $keyInfo = $this->_getKeyInfo($key, $options['namespace']);
+    protected function internalGetMetadata($key, array &$options) {
+        $keyInfo = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
             if ($options['ignore_missing_items']) {
                 return false;
@@ -1354,16 +1359,16 @@ class Filesystem extends AbstractAdapter
             }
         }
 
-        if ( ($info = $this->_readInfoFile($keyInfo['filespec'] . '.ifo')) ) {
+        if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo')) ) {
             return $keyInfo + $info;
         }
 
         return $keyInfo;
     }
 
-    protected function _touch($key, array &$options)
+    protected function internalTouchItem($key, array &$options)
     {
-        $keyInfo = $this->_getKeyInfo($key, $options['namespace']);
+        $keyInfo = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
             if ($options['ignore_missing_items']) {
                 return false;
@@ -1378,17 +1383,17 @@ class Filesystem extends AbstractAdapter
         }
     }
 
-    protected function _fetchByGlob()
+    protected function fetchByGlob()
     {
-        $options = $this->_stmtOptions;
-        $mode    = $this->_stmtMatch;
+        $options = $this->stmtOptions;
+        $mode    = $this->stmtMatch;
 
         $prefix  = $options['namespace'] . $this->getNamespaceSeparator();
         $prefixL = strlen($prefix);
 
         do {
             try {
-                $valid = $this->_stmtGlob->valid();
+                $valid = $this->stmtGlob->valid();
             } catch (\LogicException $e) {
                 // @link https://bugs.php.net/bug.php?id=55701
                 // GlobIterator throws LogicException with message
@@ -1400,10 +1405,10 @@ class Filesystem extends AbstractAdapter
             }
 
             $item = array();
-            $info = null;
+            $meta = null;
 
-            $current = $this->_stmtGlob->current();
-            $this->_stmtGlob->next();
+            $current = $this->stmtGlob->current();
+            $this->stmtGlob->next();
 
             $filename = $current->getFilename();
             if ($prefix !== '') {
@@ -1439,23 +1444,23 @@ class Filesystem extends AbstractAdapter
             // check tags only if one of the tag matching mode is selected
             if (($mode & 070) > 0) {
 
-                $info = $this->_info($key, $options);
+                $meta = $this->internalGetMetadata($key, $options);
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
                 if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
-                    if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) > 0) {
+                    if (!isset($meta['tags']) || count(array_diff($opts['tags'], $meta['tags'])) > 0) {
                         continue;
                     }
 
                 // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
                 } elseif( ($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS ) {
-                    if (isset($info['tags']) && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])) {
+                    if (isset($meta['tags']) && count(array_diff($opts['tags'], $meta['tags'])) != count($opts['tags'])) {
                         continue;
                     }
 
                 // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
                 } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
-                    if (!isset($info['tags']) || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])) {
+                    if (!isset($meta['tags']) || count(array_diff($opts['tags'], $meta['tags'])) == count($opts['tags'])) {
                         continue;
                     }
 
@@ -1466,12 +1471,12 @@ class Filesystem extends AbstractAdapter
                 if ($select == 'key') {
                     $item['key'] = $key;
                 } else if ($select == 'value') {
-                    $item['value'] = $this->_getFileContent($current->getPathname());
+                    $item['value'] = $this->getFileContent($current->getPathname());
                 } else if ($select != 'key') {
-                    if ($info === null) {
-                        $info = $this->_info($key, $options);
+                    if ($meta === null) {
+                        $meta = $this->internalGetMetadata($key, $options);
                     }
-                    $item[$select] = isset($info[$select]) ? $info[$select] : null;
+                    $item[$select] = isset($meta[$select]) ? $meta[$select] : null;
                 }
             }
 
@@ -1479,7 +1484,7 @@ class Filesystem extends AbstractAdapter
         } while (true);
     }
 
-    protected function _clearByPrefix($prefix, $mode, array &$opts)
+    protected function clearByPrefix($prefix, $mode, array &$opts)
     {
         if (!$this->getWritable()) {
             return false;
@@ -1531,7 +1536,7 @@ class Filesystem extends AbstractAdapter
             // check tags only if one of the tag matching mode is selected
             if (($mode & 070) > 0) {
 
-                $info = $this->_readInfoFile($filespec . '.ifo');
+                $info = $this->readInfoFile($filespec . '.ifo');
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
                 if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
@@ -1558,8 +1563,8 @@ class Filesystem extends AbstractAdapter
             // on this time all tests match
             ////////////////////////////////////////
 
-            $this->_unlink($pathnameSpec . '.dat'); // delete data file
-            $this->_unlink($pathnameSpec . '.ifo'); // delete info file
+            $this->unlink($pathnameSpec . '.dat'); // delete data file
+            $this->unlink($pathnameSpec . '.ifo'); // delete info file
         }
 
         return true;
@@ -1571,7 +1576,7 @@ class Filesystem extends AbstractAdapter
      * @param string $dir    Directory to delete
      * @param string $prefix Namespace + Separator
      */
-    protected function _rmDir($dir, $prefix)
+    protected function rmDir($dir, $prefix)
     {
         $glob = glob(
             $dir . \DIRECTORY_SEPARATOR . $prefix  . '*',
@@ -1586,7 +1591,7 @@ class Filesystem extends AbstractAdapter
         foreach ($glob as $subdir) {
             // ignore not empty directories
             // skip removing current directory if removing of sub-directory failed
-            $ret = $this->_rmDir($subdir, $prefix) && @rmdir($subdir);
+            $ret = $this->rmDir($subdir, $prefix) && @rmdir($subdir);
         }
         return $ret;
     }
@@ -1599,50 +1604,50 @@ class Filesystem extends AbstractAdapter
      * @param string $ns
      * @return array|boolean
      */
-    protected function _getKeyInfo($key, $ns)
+    protected function getKeyInfo($key, $ns)
     {
         $lastInfoId = $ns . $this->getNamespaceSeparator() . $key;
-        if ($this->_lastInfoId == $lastInfoId) {
-            return $this->_lastInfo;
+        if ($this->lastInfoId == $lastInfoId) {
+            return $this->lastInfo;
         }
 
-        $filespec = $this->_getKeyFileSpec($key, $ns);
+        $filespec = $this->getFileSpec($key, $ns);
 
         if ( ($filemtime = @filemtime($filespec . '.dat')) === false ) {
             return false;
         }
 
-        $this->_lastInfoId  = $lastInfoId;
-        $this->_lastInfoAll = null;
-        $this->_lastInfo    = array(
+        $this->lastInfoId  = $lastInfoId;
+        $this->lastInfoAll = null;
+        $this->lastInfo    = array(
             'filespec' => $filespec,
             'mtime'    => $filemtime
         );
 
         if (!$this->getNoCtime()) {
-            $this->_lastInfo['ctime'] = filectime($filespec . '.dat');
+            $this->lastInfo['ctime'] = filectime($filespec . '.dat');
         }
 
         if (!$this->getNoAtime()) {
-            $this->_lastInfo['atime'] = fileatime($filespec . '.dat');
+            $this->lastInfo['atime'] = fileatime($filespec . '.dat');
         }
 
-        return $this->_lastInfo;
+        return $this->lastInfo;
     }
 
     /**
-     * Get cache file spec
+     * Get file spec of the given key and namespace
      *
      * @param string $key
      * @param string $ns
      * @return string
      */
-    protected function _getKeyFileSpec($key, $ns)
+    protected function getFileSpec($key, $ns)
     {
         $prefix = $ns . $this->getNamespaceSeparator();
         $lastInfoId = $prefix . $key;
-        if ($this->_lastInfoId == $lastInfoId) {
-            return $this->_lastInfo['filespec'];
+        if ($this->lastInfoId == $lastInfoId) {
+            return $this->lastInfo['filespec'];
         }
 
         $path  = $this->getCacheDir();
@@ -1665,17 +1670,18 @@ class Filesystem extends AbstractAdapter
      * @return array|boolean The info array or false if file wasn't found
      * @throws RuntimeException
      */
-    protected function _readInfoFile($file) {
-        if ( file_exists($file) ) {
-            $info = @unserialize($this->_getFileContent($file));
-            if (!is_array($info)) {
-               $err = error_get_last();
-               throw new RuntimeException("Corrupted info file '{$file}': {$err['message']}");
-            }
-            return $info;
+    protected function readInfoFile($file) {
+        if (!file_exists($file)) {
+            return false;
         }
 
-        return false;
+        $info = @unserialize($this->getFileContent($file));
+        if (!is_array($info)) {
+           $err = error_get_last();
+           throw new RuntimeException("Corrupted info file '{$file}': {$err['message']}");
+        }
+
+        return $info;
     }
 
     /**
@@ -1684,7 +1690,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $file File complete path
      * @throws RuntimeException
      */
-    protected function _getFileContent($file)
+    protected function getFileContent($file)
     {
         // if file locking enabled -> file_get_contents can't be used
         if ($this->getFileLocking()) {
@@ -1729,7 +1735,7 @@ class Filesystem extends AbstractAdapter
      * @param  string $data  Data to write
      * @throws RuntimeException
      */
-    protected function _putFileContent($file, $data)
+    protected function putFileContent($file, $data)
     {
         $locking  = $this->getFileLocking();
         $blocking = $locking ? $this->getFileBlocking() : false;
@@ -1742,7 +1748,7 @@ class Filesystem extends AbstractAdapter
             }
 
             if(!flock($fp, \LOCK_EX | \LOCK_NB)) {
-                // file is locked by another process -> aborting writing
+                // file is locked by another process -> abort writing
                 fclose($fp);
                 return false;
             }
@@ -1780,7 +1786,7 @@ class Filesystem extends AbstractAdapter
      * @param string $file
      * @throw RuntimeException
      */
-    protected function _unlink($file) {
+    protected function unlink($file) {
         if (!@unlink($file)) {
             // only throw exception if file still exists after deleting
             if (file_exists($file)) {
@@ -1793,13 +1799,13 @@ class Filesystem extends AbstractAdapter
     /**
      * Update dynamic capabilities only if already created
      */
-    protected function _updateCapabilities()
+    protected function updateCapabilities()
     {
-        if ($this->_capabilities) {
+        if ($this->capabilities) {
 
             // update namespace separator
-            $this->_capabilities->setNamespaceSeparator(
-                $this->_capabilityMarker,
+            $this->capabilities->setNamespaceSeparator(
+                $this->capabilityMarker,
                 $this->getNamespaceSeparator()
             );
 
@@ -1814,8 +1820,8 @@ class Filesystem extends AbstractAdapter
                 $metadata[] = 'atime';
             }
 
-            $this->_capabilities->setSupportedMetadata(
-                $this->_capabilityMarker,
+            $this->capabilities->setSupportedMetadata(
+                $this->capabilityMarker,
                 $metadata
             );
         }

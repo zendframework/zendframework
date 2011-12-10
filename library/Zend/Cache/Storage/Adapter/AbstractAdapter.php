@@ -23,84 +23,84 @@ abstract class AbstractAdapter implements Adapter
      *
      * @var null|EventManager
      */
-    protected $_events = null;
+    protected $events = null;
 
     /**
      * The plugin registry
      *
      * @var array Array of registered plugins
      */
-    protected $_pluginRegistry = array();
+    protected $pluginRegistry = array();
 
     /**
      * Capabilities of this adapter
      *
      * @var null|Capabilities
      */
-    protected $_capabilities = null;
+    protected $capabilities = null;
 
     /**
      * Marker to change capabilities
      *
      * @var null|object
      */
-    protected $_capabilityMarker;
+    protected $capabilityMarker;
 
     /**
      * Writable option
      *
      * @var boolean
      */
-    protected $_writable = true;
+    protected $writable = true;
 
     /**
      * Readable option
      *
      * @var boolean
      */
-    protected $_readable = true;
+    protected $readable = true;
 
     /**
      * TTL option
      *
      * @var int|float 0 means infinite or maximum of adapter
      */
-    protected $_ttl = 0;
+    protected $ttl = 0;
 
     /**
      * Namespace option
      *
      * @var string
      */
-    protected $_namespace = 'zfcache';
+    protected $namespace = 'zfcache';
 
     /**
      * Validate namespace against pattern
      *
      * @var string
      */
-    protected $_namespacePattern = '';
+    protected $namespacePattern = '';
 
     /**
      * Validate key against pattern
      *
      * @var string
      */
-    protected $_keyPattern = '';
+    protected $keyPattern = '';
 
     /**
      * Ignore missing items
      *
      * @var boolean
      */
-    protected $_ignoreMissingItems = true;
+    protected $ignoreMissingItems = true;
 
     /**
      * Statement
      */
-    protected $_stmtActive  = false;
-    protected $_stmtKeys    = null;
-    protected $_stmtOptions = null;
+    protected $stmtActive  = false;
+    protected $stmtKeys    = null;
+    protected $stmtOptions = null;
 
     /**
      * Constructor
@@ -180,7 +180,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setWritable($flag)
     {
-        $this->_writable = (bool)$flag;
+        $this->writable = (bool)$flag;
         return $this;
     }
 
@@ -191,7 +191,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getWritable()
     {
-        return $this->_writable;
+        return $this->writable;
     }
 
     /**
@@ -202,7 +202,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setReadable($flag)
     {
-        $this->_readable = (bool)$flag;
+        $this->readable = (bool)$flag;
         return $this;
     }
 
@@ -213,7 +213,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getReadable()
     {
-        return $this->_readable;
+        return $this->readable;
     }
 
     /**
@@ -254,8 +254,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setTtl($ttl)
     {
-        $this->_normalizeTtl($ttl);
-        $this->_ttl = $ttl;
+        $this->normalizeTtl($ttl);
+        $this->ttl = $ttl;
         return $this;
     }
 
@@ -266,7 +266,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getTtl()
     {
-        return $this->_ttl;
+        return $this->ttl;
     }
 
     /**
@@ -288,7 +288,7 @@ abstract class AbstractAdapter implements Adapter
                 "The namespace '{$namespace}' doesn't match agains pattern '{$pattern}'"
             );
         }
-        $this->_namespace = (string)$namespace;
+        $this->namespace = (string)$namespace;
         return $this;
     }
 
@@ -299,7 +299,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getNamespace()
     {
-        return $this->_namespace;
+        return $this->namespace;
     }
 
     /**
@@ -311,7 +311,7 @@ abstract class AbstractAdapter implements Adapter
     public function setNamespacePattern($pattern)
     {
         if (($pattern = (string)$pattern) === '') {
-            $this->_namespacePattern = '';
+            $this->namespacePattern = '';
         } else {
             // validate pattern
             if (@preg_match($pattern, '') === false) {
@@ -326,7 +326,7 @@ abstract class AbstractAdapter implements Adapter
                 );
             }
 
-            $this->_namespacePattern = $pattern;
+            $this->namespacePattern = $pattern;
         }
 
         return $this;
@@ -339,7 +339,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getNamespacePattern()
     {
-        return $this->_namespacePattern;
+        return $this->namespacePattern;
     }
 
     /**
@@ -351,7 +351,7 @@ abstract class AbstractAdapter implements Adapter
     public function setKeyPattern($pattern)
     {
         if (($pattern = (string)$pattern) === '') {
-            $this->_keyPattern = '';
+            $this->keyPattern = '';
         } else {
             // validate pattern
             if (@preg_match($pattern, '') === false) {
@@ -359,7 +359,7 @@ abstract class AbstractAdapter implements Adapter
                 throw new InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
             }
 
-            $this->_keyPattern = $pattern;
+            $this->keyPattern = $pattern;
         }
 
         return $this;
@@ -372,7 +372,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getKeyPattern()
     {
-        return $this->_keyPattern;
+        return $this->keyPattern;
     }
 
     /**
@@ -393,7 +393,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setIgnoreMissingItems($flag)
     {
-        $this->_ignoreMissingItems = (bool)$flag;
+        $this->ignoreMissingItems = (bool)$flag;
         return $this;
     }
 
@@ -405,7 +405,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getIgnoreMissingItems()
     {
-        return $this->_ignoreMissingItems;
+        return $this->ignoreMissingItems;
     }
 
     /* Event/Plugin handling */
@@ -417,10 +417,10 @@ abstract class AbstractAdapter implements Adapter
      */
     public function events()
     {
-        if ($this->_events === null) {
-            $this->_events = new EventManager(array(__CLASS__, get_class($this)));
+        if ($this->events === null) {
+            $this->events = new EventManager(array(__CLASS__, get_class($this)));
         }
-        return $this->_events;
+        return $this->events;
     }
 
     /**
@@ -490,7 +490,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function hasPlugin(Plugin $plugin)
     {
-        return in_array($plugin, $this->_pluginRegistry, true);
+        return in_array($plugin, $this->pluginRegistry, true);
     }
 
     /**
@@ -502,12 +502,12 @@ abstract class AbstractAdapter implements Adapter
      */
     public function addPlugin(Plugin $plugin)
     {
-        if (in_array($plugin, $this->_pluginRegistry, true)) {
+        if (in_array($plugin, $this->pluginRegistry, true)) {
             throw new LogicException('Plugin already registered');
         }
 
         $plugin->attach($this->events());
-        $this->_pluginRegistry[] = $plugin;
+        $this->pluginRegistry[] = $plugin;
 
         return $this;
     }
@@ -521,13 +521,13 @@ abstract class AbstractAdapter implements Adapter
      */
     public function removePlugin(Plugin $plugin)
     {
-        $pluginRegistryIndex = array_search($plugin, $this->_pluginRegistry, true);
+        $pluginRegistryIndex = array_search($plugin, $this->pluginRegistry, true);
         if ($pluginRegistryIndex === false) {
             throw new LogicException('Plugin not registered');
         }
 
         $plugin->detach($this->events());
-        unset($this->_pluginRegistry[$pluginRegistryIndex]);
+        unset($this->pluginRegistry[$pluginRegistryIndex]);
 
         return $this;
     }
@@ -539,7 +539,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getPlugins()
     {
-        return $this->_pluginRegistry;
+        return $this->pluginRegistry;
     }
 
     /* reading */
@@ -798,7 +798,7 @@ abstract class AbstractAdapter implements Adapter
 
     public function getDelayed(array $keys, array $options = array())
     {
-        if ($this->_stmtActive) {
+        if ($this->stmtActive) {
             throw new RuntimeException('Statement already in use');
         }
 
@@ -809,16 +809,15 @@ abstract class AbstractAdapter implements Adapter
             return true;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
 
         if (!isset($options['select'])) {
             $options['select'] = array('key', 'value');
         }
 
-        $this->_stmtOptions = array_merge($this->getOptions(), $options);
-
-        $this->_stmtKeys    = $keys;
-        $this->_stmtActive  = true;
+        $this->stmtOptions = array_merge($this->getOptions(), $options);
+        $this->stmtKeys    = $keys;
+        $this->stmtActive  = true;
 
         if (isset($options['callback'])) {
             $callback = $options['callback'];
@@ -841,14 +840,14 @@ abstract class AbstractAdapter implements Adapter
 
     public function fetch()
     {
-        if (!$this->_stmtActive) {
+        if (!$this->stmtActive) {
             return false;
         }
 
-        $options = $this->_stmtOptions;
+        $options = $this->stmtOptions;
 
         do {
-            $key = array_shift($this->_stmtKeys);
+            $key = array_shift($this->stmtKeys);
             if ($key === null) {
                 break;
             }
@@ -890,9 +889,9 @@ abstract class AbstractAdapter implements Adapter
         } while (true);
 
         // clear statement
-        $this->_stmtActive  = false;
-        $this->_stmtKeys    = null;
-        $this->_stmtOptions = null;
+        $this->stmtActive  = false;
+        $this->stmtKeys    = null;
+        $this->stmtOptions = null;
 
         return false;
     }
@@ -936,11 +935,11 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getCapabilities()
     {
-        if ($this->_capabilities === null) {
-            $this->_capabilityMarker = new \stdClass();
-            $this->_capabilities = new Capabilities($this->_capabilityMarker);
+        if ($this->capabilities === null) {
+            $this->capabilityMarker = new \stdClass();
+            $this->capabilities = new Capabilities($this->capabilityMarker);
         }
-        return $this->_capabilities;
+        return $this->capabilities;
     }
 
     /* internal */
@@ -950,18 +949,18 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param array $options
      */
-    protected function _normalizeOptions(array &$options)
+    protected function normalizeOptions(array &$options)
     {
         // ttl
         if (isset($options['ttl'])) {
-            $this->_normalizeTtl($options['ttl']);
+            $this->normalizeTtl($options['ttl']);
         } else {
             $options['ttl'] = $this->getTtl();
         }
 
         // namespace
         if (isset($options['namespace'])) {
-            $this->_normalizeNamespace($options['namespace']);
+            $this->normalizeNamespace($options['namespace']);
         } else {
             $options['namespace'] = $this->getNamespace();
         }
@@ -975,14 +974,14 @@ abstract class AbstractAdapter implements Adapter
 
         // tags
         if (isset($options['tags'])) {
-            $this->_normalizeTags($options['tags']);
+            $this->normalizeTags($options['tags']);
         } else {
             $options['tags'] = null;
         }
 
         // select
         if (isset($options['select'])) {
-            $this->_normalizeSelect($options['select']);
+            $this->normalizeSelect($options['select']);
         } else {
             $options['select'] = array('key', 'value');
         }
@@ -994,7 +993,7 @@ abstract class AbstractAdapter implements Adapter
      * @param int|float $ttl
      * @throws InvalidArgumentException
      */
-    protected function _normalizeTtl(&$ttl)
+    protected function normalizeTtl(&$ttl)
     {
         if (!is_int($ttl)) {
             $ttl = (float)$ttl;
@@ -1016,7 +1015,7 @@ abstract class AbstractAdapter implements Adapter
      * @param string $namespace
      * @throws InvalidArgumentException
      */
-    protected function _normalizeNamespace(&$namespace)
+    protected function normalizeNamespace(&$namespace)
     {
         $namespace = (string)$namespace;
 
@@ -1035,7 +1034,7 @@ abstract class AbstractAdapter implements Adapter
      * @param array $tags
      * @throws Zend\Cache\InvalidArgumentException
      */
-    protected function _normalizeTags(&$tags)
+    protected function normalizeTags(&$tags)
     {
         if (!is_array($tags)) {
             throw new InvalidArgumentException('Tags have to be an array');
@@ -1056,7 +1055,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param string[]|string
      */
-    protected function _normalizeSelect(&$select)
+    protected function normalizeSelect(&$select)
     {
         if (!is_array($select)) {
             $select = array((string)$select);
@@ -1071,7 +1070,7 @@ abstract class AbstractAdapter implements Adapter
      * @param int $mode    Matching mode to normalize
      * @param int $default Default matching mode
      */
-    protected function _normalizeMatchingMode(&$mode, $default, array &$normalizedOptions)
+    protected function normalizeMatchingMode(&$mode, $default, array &$normalizedOptions)
     {
         $mode = (int)$mode;
         if ( ($mode & self::MATCH_EXPIRED) != self::MATCH_EXPIRED
@@ -1089,7 +1088,7 @@ abstract class AbstractAdapter implements Adapter
      * @return string
      * @throws InvalidArgumentException
      */
-    protected function _key($key)
+    protected function key($key)
     {
         if (($p = $this->getKeyPattern()) && !preg_match($p, $key)) {
             throw new InvalidArgumentException("The key '{$key}' doesn't match agains pattern '{$p}'");

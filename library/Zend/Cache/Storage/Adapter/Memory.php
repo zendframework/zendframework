@@ -56,8 +56,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key  = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key  = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -119,7 +119,7 @@ class Memory extends AbstractAdapter
             return array();
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keys'    => & $keys,
             'options' => & $options
@@ -179,8 +179,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key  = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key  = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -226,8 +226,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key  = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key  = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -287,8 +287,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key  = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key  = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -335,7 +335,7 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
@@ -389,8 +389,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key  = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key  = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -440,7 +440,7 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
@@ -497,8 +497,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key  = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key  = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -548,7 +548,7 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = \ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
@@ -606,8 +606,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key  = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key  = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -665,8 +665,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key = $this->key($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -724,7 +724,7 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $args = new \ArrayObject(array(
             'keys'    => & $keys,
             'options' => & $options,
@@ -802,8 +802,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $key   = $this->_key($key);
+        $this->normalizeOptions($options);
+        $key   = $this->key($key);
         $value = (int)$value;
         $args  = new \ArrayObject(array(
             'key'     => & $key,
@@ -866,9 +866,9 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
+        $this->normalizeOptions($options);
         $value = (int)$value;
-        $key   = $this->_key($key);
+        $key   = $this->key($key);
         $args  = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -936,12 +936,12 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        if ($this->_stmtActive) {
+        if ($this->stmtActive) {
             throw new RuntimeException('Statement already in use');
         }
 
-        $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
+        $this->normalizeOptions($options);
+        $this->normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
@@ -1000,9 +1000,9 @@ class Memory extends AbstractAdapter
             // don't check expiry on fetch
             $options['ttl'] = 0;
 
-            $this->_stmtKeys    = $keys;
-            $this->_stmtOptions = $options;
-            $this->_stmtActive  = true;
+            $this->stmtKeys    = $keys;
+            $this->stmtOptions = $options;
+            $this->stmtActive  = true;
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -1024,7 +1024,7 @@ class Memory extends AbstractAdapter
      */
     public function fetch()
     {
-        if (!$this->_stmtActive) {
+        if (!$this->stmtActive) {
             return false;
         }
 
@@ -1035,11 +1035,11 @@ class Memory extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $options = & $this->_stmtOptions;
+            $options = & $this->stmtOptions;
 
             // get the next valid item
             do {
-                $key = array_shift($this->_stmtKeys);
+                $key = array_shift($this->stmtKeys);
                 if ($key === null) {
                     break;
                 }
@@ -1071,9 +1071,9 @@ class Memory extends AbstractAdapter
 
             } else {
                 // free statement after last item
-                $this->_stmtActive  = false;
-                $this->_stmtKeys    = null;
-                $this->_stmtOptions = null;
+                $this->stmtActive  = false;
+                $this->stmtKeys    = null;
+                $this->stmtOptions = null;
 
                 $result = false;
             }
@@ -1112,8 +1112,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
+        $this->normalizeOptions($options);
+        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
@@ -1168,8 +1168,8 @@ class Memory extends AbstractAdapter
             return false;
         }
 
-        $this->_normalizeOptions($options);
-        $this->_normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
+        $this->normalizeOptions($options);
+        $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
         $args = new \ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
@@ -1216,10 +1216,10 @@ class Memory extends AbstractAdapter
             return $eventRs->last();
         }
 
-        if ($this->_capabilities === null) {
-            $this->_capabilityMarker = new \stdClass();
-                $this->_capabilities = new Capabilities(
-                $this->_capabilityMarker,
+        if ($this->capabilities === null) {
+            $this->capabilityMarker = new \stdClass();
+                $this->capabilities = new Capabilities(
+                $this->capabilityMarker,
                 array(
                     'supportedDatatypes' => array(
                         'NULL'     => true,
@@ -1248,7 +1248,7 @@ class Memory extends AbstractAdapter
             );
         }
 
-        return $this->triggerPost(__FUNCTION__, $args, $this->_capabilities);
+        return $this->triggerPost(__FUNCTION__, $args, $this->capabilities);
     }
 
     /**

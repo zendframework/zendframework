@@ -1,7 +1,6 @@
 <?php
 
 namespace Zend\Cache\Storage\Adapter;
-
 use Zend\Cache\Storage\Capabilities,
     Zend\Cache\Utils,
     Zend\Cache\Exception\RuntimeException,
@@ -27,10 +26,30 @@ class Memory extends AbstractAdapter
      *
      * @var array
      */
-    protected $_data = array();
+    protected $data = array();
 
     /* reading */
 
+    /**
+     * Get an item.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param string $key
+     * @param array $options
+     * @return mixed Value on success and false on failure
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers getItem.pre(PreEvent)
+     * @triggers getItem.post(PostEvent)
+     * @triggers getItem.exception(ExceptionEvent)
+     */
     public function getItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -51,9 +70,9 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            $exist = isset($this->_data[$ns][$key]);
+            $exist = isset($this->data[$ns][$key]);
             if ($exist) {
-                if ($options['ttl'] && microtime(true) >= ($this->_data[$ns][$key][1] + $options['ttl']) ) {
+                if ($options['ttl'] && microtime(true) >= ($this->data[$ns][$key][1] + $options['ttl']) ) {
                     $exist = false;
                 }
             }
@@ -64,9 +83,9 @@ class Memory extends AbstractAdapter
                 }
                 $result = false;
             } else {
-                $result = $this->_data[$ns][$key][0];
+                $result = $this->data[$ns][$key][0];
                 if (array_key_exists('token', $options)) {
-                    $options['token'] = $this->_data[$ns][$key][0];
+                    $options['token'] = $this->data[$ns][$key][0];
                 }
             }
 
@@ -76,6 +95,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Get multiple items.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array Assoziative array of existing keys and values or false on failure
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers getItems.pre(PreEvent)
+     * @triggers getItems.post(PostEvent)
+     * @triggers getItems.exception(ExceptionEvent)
+     */
     public function getItems(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -95,15 +132,15 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (!isset($this->_data[$ns])) {
+            if (!isset($this->data[$ns])) {
                 $result = array();
             } else {
-                $data = &$this->_data[$ns];
+                $data = &$this->data[$ns];
 
                 $keyValuePairs = array();
                 foreach ($keys as $key) {
                     if (isset($data[$key])) {
-                        if (!$options['ttl'] || microtime(true) < ($this->_data[$ns][$key][1] + $options['ttl']) ) {
+                        if (!$options['ttl'] || microtime(true) < ($this->data[$ns][$key][1] + $options['ttl']) ) {
                             $keyValuePairs[$key] = $data[$key][0];
                         }
                     }
@@ -118,6 +155,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Test if an item exists.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param string $key
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers hasItem.pre(PreEvent)
+     * @triggers hasItem.post(PostEvent)
+     * @triggers hasItem.exception(ExceptionEvent)
+     */
     public function hasItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -137,7 +192,7 @@ class Memory extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $result = $this->_exists($key, $options);
+            $result = $this->checkItem($key, $options);
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (Exception $e) {
@@ -145,6 +200,26 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Get metadata of an item.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param string $key
+     * @param array $options
+     * @return array|boolean Metadata or false on failure
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers getMetadata.pre(PreEvent)
+     * @triggers getMetadata.post(PostEvent)
+     * @triggers getMetadata.exception(ExceptionEvent)
+     */
     public function getMetadata($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -164,7 +239,7 @@ class Memory extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if (!$this->_exists($key, $options)) {
+            if (!$this->checkItem($key, $options)) {
                 if (!$options['ignore_missing_items']) {
                     throw new ItemNotFoundException(
                         "Key '{$key}' not found on namespace '{$options['namespace']}'"
@@ -174,8 +249,8 @@ class Memory extends AbstractAdapter
             } else {
                 $ns = $options['namespace'];
                 $result = array(
-                    'mtime' => $this->_data[$ns][$key][1],
-                    'tags'  => $this->_data[$ns][$key][2],
+                    'mtime' => $this->data[$ns][$key][1],
+                    'tags'  => $this->data[$ns][$key][2],
                 );
             }
 
@@ -187,6 +262,25 @@ class Memory extends AbstractAdapter
 
     /* writing */
 
+    /**
+     * Store an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param string $key
+     * @param mixed $value
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers setItem.pre(PreEvent)
+     * @triggers setItem.post(PostEvent)
+     * @triggers setItem.exception(ExceptionEvent)
+     */
     public function setItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -208,7 +302,7 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
+            $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -217,6 +311,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Store multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers setItems.pre(PreEvent)
+     * @triggers setItems.post(PostEvent)
+     * @triggers setItems.exception(ExceptionEvent)
+     */
     public function setItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -236,11 +348,11 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (!isset($this->_data[$ns])) {
-                $this->_data[$ns] = array();
+            if (!isset($this->data[$ns])) {
+                $this->data[$ns] = array();
             }
 
-            $data = & $this->_data[$ns];
+            $data = & $this->data[$ns];
             foreach ($keyValuePairs as $key => $value) {
                 $data[$key] = array($value, microtime(true), $options['tags']);
             }
@@ -252,6 +364,25 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Add an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param string $key
+     * @param mixed  $value
+     * @param array  $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers addItem.pre(PreEvent)
+     * @triggers addItem.post(PostEvent)
+     * @triggers addItem.exception(ExceptionEvent)
+     */
     public function addItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -273,10 +404,10 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (isset($this->_data[$ns][$key])) {
+            if (isset($this->data[$ns][$key])) {
                 throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
             }
-            $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
+            $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -285,6 +416,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Add multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers addItems.pre(PreEvent)
+     * @triggers addItems.post(PostEvent)
+     * @triggers addItems.exception(ExceptionEvent)
+     */
     public function addItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -304,11 +453,11 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (!isset($this->_data[$ns])) {
-                $this->_data[$ns] = array();
+            if (!isset($this->data[$ns])) {
+                $this->data[$ns] = array();
             }
 
-            $data = & $this->_data[$ns];
+            $data = & $this->data[$ns];
             foreach ($keyValuePairs as $key => $value) {
                 if (isset($data[$key])) {
                     throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
@@ -323,6 +472,25 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Replace an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param string $key
+     * @param mixed  $value
+     * @param array  $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers replaceItem.pre(PreEvent)
+     * @triggers replaceItem.post(PostEvent)
+     * @triggers replaceItem.exception(ExceptionEvent)
+     */
     public function replaceItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -344,10 +512,10 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (!isset($this->_data[$ns][$key])) {
+            if (!isset($this->data[$ns][$key])) {
                 throw new ItemNotFoundException("Key '{$key}' doen't exists within namespace '$ns'");
             }
-            $this->_data[$ns][$key] = array($value, microtime(true), $options['tags']);
+            $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -356,6 +524,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Replace multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers replaceItems.pre(PreEvent)
+     * @triggers replaceItems.post(PostEvent)
+     * @triggers replaceItems.exception(ExceptionEvent)
+     */
     public function replaceItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -375,11 +561,11 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (!isset($this->_data[$ns])) {
+            if (!isset($this->data[$ns])) {
                 throw new ItemNotFoundException("Namespace '$ns' doesn't exist");
             }
 
-            $data = & $this->_data[$ns];
+            $data = & $this->data[$ns];
             foreach ($keyValuePairs as $key => $value) {
                 if (!isset($data[$key])) {
                     throw new ItemNotFoundException(
@@ -396,6 +582,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Reset lifetime of an item
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param string $key
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers touchItem.pre(PreEvent)
+     * @triggers touchItem.post(PostEvent)
+     * @triggers touchItem.exception(ExceptionEvent)
+     */
     public function touchItem($key, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -416,9 +620,9 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (isset($this->_data[$ns][$key])) {
+            if (isset($this->data[$ns][$key])) {
                 // update mtime
-                $this->_data[$ns][$key][1] = microtime(true);
+                $this->data[$ns][$key][1] = microtime(true);
             } else {
                 if (!$options['ignore_missing_items']) {
                     throw new ItemNotFoundException(
@@ -427,7 +631,7 @@ class Memory extends AbstractAdapter
                 }
 
                 // add an empty item
-                $this->_data[$ns][$key] = array('', microtime(true), null);
+                $this->data[$ns][$key] = array('', microtime(true), null);
             }
 
             $result = true;
@@ -437,6 +641,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Remove an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param string $key
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers removeItem.pre(PreEvent)
+     * @triggers removeItem.post(PostEvent)
+     * @triggers removeItem.exception(ExceptionEvent)
+     */
     public function removeItem($key, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -457,12 +679,12 @@ class Memory extends AbstractAdapter
             }
 
             $ns = $options['namespace'];
-            if (isset($this->_data[$ns][$key])) {
-                unset($this->_data[$ns][$key]);
+            if (isset($this->data[$ns][$key])) {
+                unset($this->data[$ns][$key]);
 
                 // remove empty namespace
-                if (!$this->_data[$ns]) {
-                    unset($this->_data[$ns]);
+                if (!$this->data[$ns]) {
+                    unset($this->data[$ns]);
                 }
 
             } else {
@@ -478,6 +700,24 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Remove multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param array $keys
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers removeItems.pre(PreEvent)
+     * @triggers removeItems.post(PostEvent)
+     * @triggers removeItems.exception(ExceptionEvent)
+     */
     public function removeItems(array $keys, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -498,11 +738,11 @@ class Memory extends AbstractAdapter
 
             $ns = $options['namespace'];
             if ($options['ignore_missing_items'] === false) {
-                if (!isset($this->_data[$ns])) {
+                if (!isset($this->data[$ns])) {
                     throw new ItemNotFoundException("Namespace '{$ns}' is empty");
                 }
 
-                $data = &$this->_data[$ns];
+                $data = &$this->data[$ns];
 
                 $missingItems = null;
                 foreach ($keys as $key) {
@@ -518,15 +758,15 @@ class Memory extends AbstractAdapter
                         "Keys '" . implode("','", $missingItems) . "' not found on namespace '{$ns}'"
                     );
                 }
-            } elseif (isset($this->_data[$ns])) {
-                $data = & $this->_data[$ns];
+            } elseif (isset($this->data[$ns])) {
+                $data = & $this->data[$ns];
                 foreach ($keys as $key) {
                     unset($data[$key]);
                 }
 
                 // remove empty namespace
                 if (!$data) {
-                    unset($this->_data[$ns]);
+                    unset($this->data[$ns]);
                 }
             }
 
@@ -537,6 +777,25 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Increment an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param string $key
+     * @param int $value
+     * @param array $options
+     * @return int|boolean The new value of false on failure
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers incrementItem.pre(PreEvent)
+     * @triggers incrementItem.post(PostEvent)
+     * @triggers incrementItem.exception(ExceptionEvent)
+     */
     public function incrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -559,7 +818,7 @@ class Memory extends AbstractAdapter
             }
 
             $ns   = $options['namespace'];
-            $data = & $this->_data[$ns];
+            $data = & $this->data[$ns];
             if (isset($data[$key])) {
                 $data[$key][0]+= $value;
                 $data[$key][1] = microtime(true);
@@ -582,6 +841,25 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Decrement an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param string $key
+     * @param int $value
+     * @param array $options
+     * @return int|boolean The new value or false or failure
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers decrementItem.pre(PreEvent)
+     * @triggers decrementItem.post(PostEvent)
+     * @triggers decrementItem.exception(ExceptionEvent)
+     */
     public function decrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -604,7 +882,7 @@ class Memory extends AbstractAdapter
             }
 
             $ns   = $options['namespace'];
-            $data = & $this->_data[$ns];
+            $data = & $this->data[$ns];
             if (isset($data[$key])) {
                 $data[$key][0]-= $value;
                 $data[$key][1] = microtime(true);
@@ -629,6 +907,29 @@ class Memory extends AbstractAdapter
 
     /* non-blocking */
 
+    /**
+     * Find items.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - Tags to search for used with matching modes of
+     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *
+     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see fetch()
+     * @see fetchAll()
+     *
+     * @triggers find.pre(PreEvent)
+     * @triggers find.post(PostEvent)
+     * @triggers find.exception(ExceptionEvent)
+     */
     public function find($mode = self::MATCH_ACTIVE, array $options=array())
     {
         if (!$this->getReadable()) {
@@ -654,20 +955,20 @@ class Memory extends AbstractAdapter
 
             $tags = & $options['tags'];
             $emptyTags = $keys = array();
-            foreach ($this->_data[ $options['namespace'] ] as $key => &$item) {
+            foreach ($this->data[ $options['namespace'] ] as $key => &$item) {
 
                 // compare expired / active
                 if (($mode & self::MATCH_ALL) != self::MATCH_ALL) {
 
                     // if MATCH_EXPIRED -> filter active items
                     if (($mode & self::MATCH_EXPIRED) == self::MATCH_EXPIRED) {
-                        if ($this->_exists($key, $options)) {
+                        if ($this->checkItem($key, $options)) {
                             continue;
                         }
 
                     // if MATCH_ACTIVE -> filter expired items
                     } else {
-                        if (!$this->_exists($key, $options)) {
+                        if (!$this->checkItem($key, $options)) {
                             continue;
                         }
                     }
@@ -710,6 +1011,17 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Fetches the next item from result set
+     *
+     * @return array|boolean The next item or false
+     * @throws Zend\Cache\Exception
+     * @see fetchAll()
+     *
+     * @triggers fetch.pre(PreEvent)
+     * @triggers fetch.post(PostEvent)
+     * @triggers fetch.exception(ExceptionEvent)
+     */
     public function fetch()
     {
         if (!$this->_stmtActive) {
@@ -731,10 +1043,10 @@ class Memory extends AbstractAdapter
                 if ($key === null) {
                     break;
                 }
-                if (!$this->_exists($key, $options)) {
+                if (!$this->checkItem($key, $options)) {
                     continue;
                 }
-                $ref = & $this->_data[ $options['namespace'] ][$key];
+                $ref = & $this->data[ $options['namespace'] ][$key];
                 break;
             } while (true);
 
@@ -774,6 +1086,26 @@ class Memory extends AbstractAdapter
 
     /* cleaning */
 
+    /**
+     * Clear items off all namespaces.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - tags <array> optional
+     *    - Tags to search for used with matching modes of
+     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *
+     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see clearByNamespace()
+     *
+     * @triggers clear.pre(PreEvent)
+     * @triggers clear.post(PostEvent)
+     * @triggers clear.exception(ExceptionEvent)
+     */
     public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -794,10 +1126,10 @@ class Memory extends AbstractAdapter
             }
 
             if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
-                $this->_data = array();
+                $this->data = array();
             } else {
-                foreach ($this->_data as &$data) {
-                    $this->_clearNamespacedDataArray($data, $mode, $options);
+                foreach ($this->data as &$data) {
+                    $this->clearNamespacedDataArray($data, $mode, $options);
                 }
             }
 
@@ -808,6 +1140,28 @@ class Memory extends AbstractAdapter
         }
     }
 
+    /**
+     * Clear items by namespace.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - Tags to search for used with matching modes of
+     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *
+     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see clear()
+     *
+     * @triggers clearByNamespace.pre(PreEvent)
+     * @triggers clearByNamespace.post(PostEvent)
+     * @triggers clearByNamespace.exception(ExceptionEvent)
+     */
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -827,11 +1181,11 @@ class Memory extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if (isset($this->_data[ $options['namespace'] ])) {
+            if (isset($this->data[ $options['namespace'] ])) {
                 if (!$options['tags'] && ($mode & self::MATCH_ALL) == self::MATCH_ALL) {
-                    unset($this->_data[ $options['namespace'] ]);
+                    unset($this->data[ $options['namespace'] ]);
                 } else {
-                    $this->_clearNamespacedDataArray($this->_data[ $options['namespace'] ], $mode, $options);
+                    $this->clearNamespacedDataArray($this->data[ $options['namespace'] ], $mode, $options);
                 }
             }
 
@@ -842,7 +1196,130 @@ class Memory extends AbstractAdapter
         }
     }
 
-    protected function _clearNamespacedDataArray(array &$data, $mode, &$options)
+    /* status */
+
+    /**
+     * Get capabilities
+     *
+     * @return Capabilities
+     *
+     * @triggers getCapabilities.pre(PreEvent)
+     * @triggers getCapabilities.post(PostEvent)
+     * @triggers getCapabilities.exception(ExceptionEvent)
+     */
+    public function getCapabilities()
+    {
+        $args = new \ArrayObject();
+
+        $eventRs = $this->triggerPre(__FUNCTION__, $args);
+        if ($eventRs->stopped()) {
+            return $eventRs->last();
+        }
+
+        if ($this->_capabilities === null) {
+            $this->_capabilityMarker = new \stdClass();
+                $this->_capabilities = new Capabilities(
+                $this->_capabilityMarker,
+                array(
+                    'supportedDatatypes' => array(
+                        'NULL'     => true,
+                        'boolean'  => true,
+                        'integer'  => true,
+                        'double'   => true,
+                        'string'   => true,
+                        'array'    => true,
+                        'object'   => true,
+                        'resource' => true
+                    ),
+                    'supportedMetadata' => array(
+                        'mtime', 'tags'
+                    ),
+                    'maxTtl'             => PHP_INT_MAX,
+                    'staticTtl'          => false,
+                    'ttlPrecision'       => 0.05,
+                    'expiredRead'        => true,
+                    'maxKeyLength'       => 0,
+                    'namespaceIsPrefix'  => false,
+                    'namespaceSeparator' => '',
+                    'iterable'           => true,
+                    'clearAllNamespaces' => true,
+                    'clearByNamespace'   => true,
+                )
+            );
+        }
+
+        return $this->triggerPost(__FUNCTION__, $args, $this->_capabilities);
+    }
+
+    /**
+     * Get storage capacity.
+     *
+     * @param array $options
+     * @return array|boolean Capacity as array or false on failure
+     * @throws Zend\Cache\Exception
+     *
+     * @triggers getCapacity.pre(PreEvent)
+     * @triggers getCapacity.post(PostEvent)
+     * @triggers getCapacity.exception(ExceptionEvent)
+     */
+    public function getCapacity(array $options = array())
+    {
+        $args = new \ArrayObject(array(
+            'options' => & $options
+        ));
+
+        $eventRs = $this->triggerPre(__FUNCTION__, $args);
+        if ($eventRs->stopped()) {
+            return $eventRs->last();
+        }
+
+        $result = Utils::getPhpMemoryCapacity();
+
+        return $this->triggerPost(__FUNCTION__, $args, $result);
+    }
+
+    /* internal */
+
+    /**
+     * Internal method to check if an key exists
+     * and if it isn't expired.
+     *
+     * Options:
+     *  - namespace <string> required
+     *  - ttl       <int>    required
+     *
+     * @param string $key
+     * @param array $options
+     */
+    protected function checkItem($key, array &$options)
+    {
+        $ns = $options['namespace'];
+
+        if (!isset($this->data[$ns][$key])) {
+            return false;
+        }
+
+        // check if expired
+        if ($options['ttl'] && microtime(true) >= ($this->data[$ns][$key][1] + $options['ttl']) ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Internal method to run a clear command
+     * on a given data array which doesn't contain namespaces.
+     *
+     * Options:
+     *   - ttl  <float>  required
+     *   - tags <array>  required
+     *
+     * @param array $data
+     * @param int $mode
+     * @param array $options
+     */
+    protected function clearNamespacedDataArray(array &$data, $mode, array &$options)
     {
         $tags = &$options['tags'];
         $time = microtime(true);
@@ -888,108 +1365,6 @@ class Memory extends AbstractAdapter
 
             unset($data[$key]);
         }
-    }
-
-    /* status */
-
-    public function getCapabilities()
-    {
-        $args = new \ArrayObject();
-
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        if ($this->_capabilities === null) {
-            $this->_capabilityMarker = new \stdClass();
-                $this->_capabilities = new Capabilities(
-                $this->_capabilityMarker,
-                array(
-                    'supportedDatatypes' => array(
-                        'NULL'     => true,
-                        'boolean'  => true,
-                        'integer'  => true,
-                        'double'   => true,
-                        'string'   => true,
-                        'array'    => true,
-                        'object'   => true,
-                        'resource' => true
-                    ),
-                    'supportedMetadata' => array(
-                        'mtime', 'tags'
-                    ),
-                    'maxTtl'             => PHP_INT_MAX,
-                    'staticTtl'          => false,
-                    'ttlPrecision'       => 0.05,
-                    'expiredRead'        => true,
-                    'maxKeyLength'       => 0,
-                    'namespaceIsPrefix'  => false,
-                    'namespaceSeparator' => '',
-                    'iterable'           => true,
-                    'clearAllNamespaces' => true,
-                    'clearByNamespace'   => true,
-                )
-            );
-        }
-
-        return $this->triggerPost(__FUNCTION__, $args, $this->_capabilities);
-    }
-
-    public function getCapacity(array $options = array())
-    {
-        $args = new \ArrayObject(array(
-            'options' => & $options
-        ));
-
-        $eventRs = $this->triggerPre(__FUNCTION__, $args);
-        if ($eventRs->stopped()) {
-            return $eventRs->last();
-        }
-
-        $result = Utils::getPhpMemoryCapacity();
-
-        return $this->triggerPost(__FUNCTION__, $args, $result);
-    }
-
-    /* internal */
-
-    protected function _exists($key, array &$options)
-    {
-        $ns = $options['namespace'];
-
-        if (!isset($this->_data[$ns][$key])) {
-            return false;
-        }
-
-        // check if expired
-        if ($options['ttl'] && microtime(true) >= ($this->_data[$ns][$key][1] + $options['ttl']) ) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function _info($key, array &$options = array())
-    {
-        if (!$this->_exists($key, $options)) {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException(
-                    "Key '{$key}' not found on namespace '{$options['namespace']}'"
-                );
-
-            }
-            return false;
-        }
-
-        $ns    = $options['namespace'];
-        $mtime = $this->_data[$ns][$key][1];
-
-        return array(
-            'mtime' => $mtime,
-            'ttl'   => $mtime - microtime(true) + $options['ttl'],
-            'tags'  => $this->_data[$ns][$key][2]
-        );
     }
 
 }

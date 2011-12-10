@@ -25,7 +25,7 @@ class Capabilities
      */
     protected $_eventManager;
 
-   /**#@+
+   /**
     * Capability property
     *
     * If it's NULL the capability isn't set and the getter
@@ -34,19 +34,66 @@ class Capabilities
     * @var null|mixed
     */
     protected $_supportedDatatypes;
+
+    /**
+     * Supported metdata
+     */
     protected $_supportedMetadata;
+
+    /**
+     * Max ttl
+     */
     protected $_maxTtl;
+
+    /**
+     * Static ttl
+     */
     protected $_staticTtl;
+
+    /**
+     * Ttl precision
+     */
     protected $_ttlPrecision;
+
+    /**
+     * Use request time
+     */
     protected $_useRequestTime;
+
+    /**
+     * Expire read
+     */
     protected $_expiredRead;
+
+    /**
+     * Max key length
+     */
     protected $_maxKeyLength;
+
+    /**
+     * Namespace is prefix
+     */
     protected $_namespaceIsPrefix;
+
+    /**
+     * Namespace separator
+     */
     protected $_namespaceSeparator;
+
+    /**
+     * Iterable
+     */
     protected $_iterable;
+
+    /**
+     * Clear all namespaces
+     */
     protected $_clearAllNamespaces;
+
+    /**
+     * Clear by namespace
+     */
     protected $_clearByNamespace;
-    /**#@-*/
 
     /**
      * Base capabilities

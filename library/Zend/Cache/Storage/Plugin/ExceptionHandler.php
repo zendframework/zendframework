@@ -9,14 +9,35 @@ use Zend\Cache\Storage\Plugin,
 class ExceptionHandler implements Plugin
 {
 
+    /**
+     * Callback
+     */
     protected $_callback = null;
+
+    /**
+     * Throw exceptions
+     *
+     * @var bool
+     */
     protected $_throwExceptions  = true;
 
+    /**
+     * Constructor
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function __construct($options = array())
     {
         $this->setOptions($options);
     }
 
+    /**
+     * Set options
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function setOptions($options)
     {
         foreach ($options as $name => $value) {
@@ -25,6 +46,11 @@ class ExceptionHandler implements Plugin
         }
     }
 
+    /**
+     * Get options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         $options = parent::getOptions();
@@ -33,6 +59,12 @@ class ExceptionHandler implements Plugin
         return $options;
     }
 
+    /**
+     * Set callback
+     *
+     * @param $callback
+     * @throws InvalidArgumentException
+     */
     public function setCallback($callback)
     {
         if (!is_callable($callback, true)) {
@@ -41,21 +73,42 @@ class ExceptionHandler implements Plugin
         $this->_callback = $callback;
     }
 
+    /**
+     * Get callback
+     */
     public function getCallback()
     {
         return $this->_callback;
     }
 
+    /**
+     * Set throw exceptions
+     *
+     * @param bool $flag
+     * @return void
+     */
     public function setThrowExceptions($flag)
     {
         $this->_throwExceptions = (bool)$flag;
     }
 
+    /**
+     * Get throw exceptions
+     *
+     * @return bool
+     */
     public function getThrowExceptions()
     {
         return $this->_throwExceptions;
     }
 
+    /**
+     * Attach
+     *
+     * @param EventCollection $eventCollection
+     * @return ExceptionHandler
+     * @throws LogicException
+     */
     public function attach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -120,6 +173,13 @@ class ExceptionHandler implements Plugin
         return $this;
     }
 
+    /**
+     * Detach
+     *
+     * @param EventCollection $eventCollection
+     * @return ExceptionHandler
+     * @throws LogicException
+     */
     public function detach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -138,6 +198,12 @@ class ExceptionHandler implements Plugin
         return $this;
     }
 
+    /**
+     * On exception
+     *
+     * @param \ExceptionEvent $event
+     * @return void
+     */
     public function onException(ExceptionEvent $event)
     {
         if ( ($callback = $this->getCallback()) ) {

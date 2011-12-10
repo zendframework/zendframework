@@ -57,7 +57,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key  = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -180,7 +180,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key  = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -227,7 +227,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key  = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -288,7 +288,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key  = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -390,7 +390,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key  = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -498,7 +498,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key  = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -607,7 +607,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key  = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -666,7 +666,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
@@ -803,7 +803,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key   = $this->key($key);
+        $this->normalizeKey($key);
         $value = (int)$value;
         $args  = new \ArrayObject(array(
             'key'     => & $key,
@@ -867,8 +867,8 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
+        $this->normalizeKey($key);
         $value = (int)$value;
-        $key   = $this->key($key);
         $args  = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,

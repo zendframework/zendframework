@@ -581,7 +581,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -669,7 +669,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -748,7 +748,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -840,7 +840,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -920,7 +920,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -1008,7 +1008,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
@@ -1098,7 +1098,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'token'   => & $token,
             'key'     => & $key,
@@ -1152,7 +1152,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options
@@ -1229,7 +1229,7 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $key = $this->key($key);
+        $this->normalizeKey($key);
         $args = new \ArrayObject(array(
             'key'     => & $key,
             'options' => & $options

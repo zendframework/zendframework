@@ -652,9 +652,9 @@ abstract class AbstractAdapter implements Adapter
         $ret = array();
         foreach ($keys as $key) {
             try {
-                $info = $this->getMetadata($key, $options);
-                if ($info !== false) {
-                    $ret[$key] = $info;
+                $meta = $this->getMetadata($key, $options);
+                if ($meta !== false) {
+                    $ret[$key] = $meta;
                 }
             } catch (ItemNotFoundException $e) {
                 // ignore missing items
@@ -1273,19 +1273,19 @@ abstract class AbstractAdapter implements Adapter
     }
 
     /**
-     * Get, validate and normalize key.
+     * Validates and normalizes a key
      *
      * @param string $key
      * @return string
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException On an invalid key
      */
-    protected function key($key)
+    protected function normalizeKey(&$key)
     {
+        $key = (string)$key;
+
         if (($p = $this->getKeyPattern()) && !preg_match($p, $key)) {
             throw new InvalidArgumentException("The key '{$key}' doesn't match agains pattern '{$p}'");
         }
-
-        return (string)$key;
     }
 
 }

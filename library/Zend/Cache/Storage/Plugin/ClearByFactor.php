@@ -25,13 +25,30 @@ class ClearByFactor implements Plugin
      */
     protected $_clearByNamespace = true;
 
+    /**
+     * Handles
+     *
+     * @var array
+     */
     protected $handles = array();
 
+    /**
+     * Constructor
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function __construct($options = array())
     {
         $this->setOptions($options);
     }
 
+    /**
+     * Set options
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function setOptions($options)
     {
         foreach ($options as $name => $value) {
@@ -40,6 +57,11 @@ class ClearByFactor implements Plugin
         }
     }
 
+    /**
+     * Get options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return array(
@@ -63,6 +85,7 @@ class ClearByFactor implements Plugin
      *
      * @param int $factor
      * @return Zend\Cache\Storage\Plugin\ClearByFactor Fluent interface
+     * @throws InvalidArgumentException
      */
     public function setClearingFactor($factor)
     {
@@ -97,6 +120,13 @@ class ClearByFactor implements Plugin
         return $this;
     }
 
+    /**
+     * Attach
+     *
+     * @param EventCollection $eventCollection
+     * @return ClearByFactor
+     * @throws LogicException
+     */
     public function attach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -115,6 +145,13 @@ class ClearByFactor implements Plugin
         return $this;
     }
 
+    /**
+     * Detach
+     *
+     * @param EventCollection $eventCollection
+     * @return ClearByFactor
+     * @throws LogicException
+     */
     public function detach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -137,6 +174,7 @@ class ClearByFactor implements Plugin
      * Clear storage by factor on a success _RESULT_
      *
      * @param Zend\Cache\Storage\PostEvent $event
+     * @return void
      */
     public function clearByFactor(PostEvent $event)
     {

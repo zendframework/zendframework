@@ -10,7 +10,7 @@ use Zend\Cache\Storage\Adapter,
     Zend\Cache\Exception\RuntimeException,
     Zend\Cache\Exception\LogicException,
     Zend\Cache\Exception\InvalidArgumentException,
-    Zend\Cache\Exception\BadMethodCallException,
+    Zend\Cache\Exception\UnsupportedMethodCallException,
     Zend\Cache\Exception\ItemNotFoundException,
     Zend\Cache\Exception\MissingKeyException,
     Zend\EventManager\EventManager;
@@ -21,6 +21,7 @@ abstract class AbstractAdapter implements Adapter
     /**
      * The used EventManager if any
      *
+
      * @var null|EventManager
      */
     protected $_events = null;
@@ -97,9 +98,23 @@ abstract class AbstractAdapter implements Adapter
 
     /**
      * Statement
+     *
+     * @var bool
      */
     protected $_stmtActive  = false;
+
+    /**
+     * Statement keys
+     *
+     * @var null|array
+     */
     protected $_stmtKeys    = null;
+
+    /**
+     * Statement options
+     *
+     * @var null|array
+     */
     protected $_stmtOptions = null;
 
     /**
@@ -107,6 +122,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * @param array|Traversable $options
      * @see setOptions()
+     * @return void
      */
     public function __construct($options = array())
     {
@@ -118,6 +134,9 @@ abstract class AbstractAdapter implements Adapter
      *
      * detach all registered plugins to free
      * event handles of event manager
+     *
+     *
+     * @return void
      */
     public function __destruct()
     {
@@ -544,6 +563,13 @@ abstract class AbstractAdapter implements Adapter
 
     /* reading */
 
+    /**
+     * Get items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array
+     */
     public function getItems(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -565,6 +591,13 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Checks if adapter has an item
+     *
+     * @param string $key
+     * @param array $options
+     * @return bool
+     */
     public function hasItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -580,6 +613,13 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Checks if adapter has items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array
+     */
     public function hasItems(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -596,6 +636,13 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Get Metadatas
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array
+     */
     public function getMetadatas(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -619,6 +666,13 @@ abstract class AbstractAdapter implements Adapter
 
     /* writing */
 
+    /**
+     * Set items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool
+     */
     public function setItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -633,6 +687,15 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Add an item
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool
+     * @throws RuntimeException
+     */
     public function addItem($key, $value, array $options = array())
     {
         if ($this->hasItem($key, $options)) {
@@ -641,6 +704,13 @@ abstract class AbstractAdapter implements Adapter
         return $this->setItem($key, $value, $options);
     }
 
+    /**
+     * Add items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool
+     */
     public function addItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -655,6 +725,15 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Replace an item
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool
+     * @throws ItemNotFoundException
+     */
     public function replaceItem($key, $value, array $options = array())
     {
         if (!$this->hasItem($key, $options)) {
@@ -663,6 +742,13 @@ abstract class AbstractAdapter implements Adapter
         return $this->setItem($key, $value, $options);
     }
 
+    /**
+     * Replace items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool
+     */
     public function replaceItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -677,6 +763,15 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Check and set item
+     *
+     * @param $token
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool
+     */
     public function checkAndSetItem($token, $key, $value, array $options = array())
     {
         $oldValue = $this->getItem($key, $options);
@@ -687,6 +782,13 @@ abstract class AbstractAdapter implements Adapter
         return $this->setItem($key, $value, $options);
     }
 
+    /**
+     * Touch an item
+     *
+     * @param $key
+     * @param array $options
+     * @return bool
+     */
     public function touchItem($key, array $options = array())
     {
         if (!$this->getWritable() || !$this->getReadable()) {
@@ -714,6 +816,13 @@ abstract class AbstractAdapter implements Adapter
         }
     }
 
+    /**
+     * Touch items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return bool
+     */
     public function touchItems(array $keys, array $options = array())
     {
         // Don't check readable because not all adapters needs to read the item before
@@ -728,6 +837,13 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Remove items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return bool
+     */
     public function removeItems(array $keys, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -742,6 +858,14 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Increment an item
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool|int
+     */
     public function incrementItem($key, $value, array $options = array())
     {
        if (!$this->getWritable() || !$this->getReadable()) {
@@ -754,6 +878,13 @@ abstract class AbstractAdapter implements Adapter
        return $get + $value;
     }
 
+    /**
+     * Increment items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool
+     */
     public function incrementItems(array $keyValuePairs, array $options = array())
     {
         // Don't check readable because not all adapters needs read the value before
@@ -768,6 +899,14 @@ abstract class AbstractAdapter implements Adapter
         return $ret;
     }
 
+    /**
+     * Decrement an item
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool|int
+     */
     public function decrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable() || !$this->getReadable()) {
@@ -780,6 +919,13 @@ abstract class AbstractAdapter implements Adapter
         return $get - $value;
     }
 
+    /**
+     * Decrement items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool
+     */
     public function decrementItems(array $keyValuePairs, array $options = array())
     {
         // Don't check readable because not all adapters needs read the value before
@@ -796,6 +942,14 @@ abstract class AbstractAdapter implements Adapter
 
     /* non-blocking */
 
+    /**
+     * Get delayed
+     *
+     * @param array $keys
+     * @param array $options
+     * @return bool
+     * @throws InvalidArgumentException|RuntimeException
+     */
     public function getDelayed(array $keys, array $options = array())
     {
         if ($this->_stmtActive) {
@@ -834,11 +988,23 @@ abstract class AbstractAdapter implements Adapter
         return true;
     }
 
+    /**
+     * Find
+     *
+     * @param int $mode
+     * @param array $options
+     * @throws UnsupportedMethodCallException
+     */
     public function find($mode = self::MATCH_ACTIVE, array $options = array())
     {
-        throw new BadMethodCallException('find isn\'t supported by this adapter');
+        throw new UnsupportedMethodCallException('find isn\'t supported by this adapter');
     }
 
+    /**
+     * Fetch
+     *
+     * @return array|bool
+     */
     public function fetch()
     {
         if (!$this->_stmtActive) {
@@ -897,6 +1063,11 @@ abstract class AbstractAdapter implements Adapter
         return false;
     }
 
+    /**
+     * Fetch all
+     *
+     * @return array
+     */
     public function fetchAll()
     {
         $rs = array();
@@ -908,6 +1079,13 @@ abstract class AbstractAdapter implements Adapter
 
     /* cleaning */
 
+    /**
+     * Clear
+     *
+     * @param int $mode
+     * @param array $options
+     * @throws RuntimeException
+     */
     public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
         throw new RuntimeException(
@@ -915,6 +1093,13 @@ abstract class AbstractAdapter implements Adapter
         );
     }
 
+    /**
+     * Clear by namespace
+     *
+     * @param int $mode
+     * @param array $options
+     * @throws RuntimeException
+     */
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
         throw new RuntimeException(
@@ -922,6 +1107,12 @@ abstract class AbstractAdapter implements Adapter
         );
     }
 
+    /**
+     * Optimize
+     *
+     * @param array $options
+     * @return bool
+     */
     public function optimize(array $options = array())
     {
         return true;

@@ -33,7 +33,9 @@ use Zend\Loader\PluginClassLoader;
 class PluginLoader extends PluginClassLoader
 {
     /**
-     * @var array Pre-aliased adapters
+     * Pre-aliased adapters
+     *
+     * @var array
      */
     protected $plugins = array(
         'clear_by_factor'    => 'Zend\Cache\Storage\Plugin\ClearByFactor',

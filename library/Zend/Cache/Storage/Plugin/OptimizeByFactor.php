@@ -11,6 +11,11 @@ use Zend\Cache\Storage\Plugin,
 class OptimizeByFactor implements Plugin
 {
 
+    /**
+     * Handles
+     *
+     * @var array
+     */
     protected $handles = array();
 
     /**
@@ -20,11 +25,23 @@ class OptimizeByFactor implements Plugin
      */
     protected $_optimizingFactor = 0;
 
+    /**
+     * Constructor
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function __construct($options = array())
     {
         $this->setOptions($options);
     }
 
+    /**
+     * Set options
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function setOptions($options)
     {
         foreach ($options as $name => $value) {
@@ -33,6 +50,11 @@ class OptimizeByFactor implements Plugin
         }
     }
 
+    /**
+     * Get options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return array(
@@ -54,7 +76,8 @@ class OptimizeByFactor implements Plugin
      * Set automatic optimizing factor
      *
      * @param int $factor
-     * @return Zend\Cache\Storage\Plugin\AutomaticOptimize
+     * @return OptimizeByFactor
+     * @throws InvalidArgumentAxception
      */
     public function setOptimizingFactor($factor)
     {
@@ -67,6 +90,13 @@ class OptimizeByFactor implements Plugin
         return $this;
     }
 
+    /**
+     * Attach
+     *
+     * @param EventCollection $eventCollection
+     * @return OptimizeByFactor
+     * @throws LogicException
+     */
     public function attach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -85,6 +115,13 @@ class OptimizeByFactor implements Plugin
         return $this;
     }
 
+    /**
+     * Detach
+     *
+     * @param EventCollection $eventCollection
+     * @return OptimizeByFactor
+     * @throws LogicException
+     */
     public function detach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -106,7 +143,8 @@ class OptimizeByFactor implements Plugin
     /**
      * Optimize by factor on a success _RESULT_
      *
-     * @param Zend\Cache\Storage\PostEvent $event
+     * @param PostEvent $event
+     * @return void
      */
     public function optimizeByFactor(PostEvent $event)
     {

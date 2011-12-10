@@ -34,6 +34,8 @@ use Zend\Loader,
 class PluginBroker extends Loader\PluginBroker
 {
     /**
+     * Default class loader
+     *
      * @var string Default plugin loading strategy
      */
     protected $defaultClassLoader = 'Zend\Cache\Storage\PluginLoader';

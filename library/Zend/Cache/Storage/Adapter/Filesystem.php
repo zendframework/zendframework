@@ -116,20 +116,43 @@ class Filesystem extends AbstractAdapter
     protected $clearStatCache = true;
 
     /**
-     * Statement
+     * GlobIterator used as statement
+     *
+     * @var \GlobIterator|null
      */
-    protected $stmtGlob  = null;
+    protected $stmtGlob = null;
+
+    /**
+     * Matching mode of active statement
+     *
+     * @var integer|null
+     */
     protected $stmtMatch = null;
 
     /**
      * Buffer vars
+     *
+     * @var string|null
      */
-    protected $lastInfoId  = null;
+    protected $lastInfoId = null;
+
+    /**
+     * @var array|bool|null
+     */
     protected $lastInfoAll = null;
-    protected $lastInfo    = null;
+
+    /**
+     * @var array|null
+     */
+    protected $lastInfo = null;
 
     /* configuration */
 
+    /**
+     * Get options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         $options = parent::getOptions();
@@ -150,6 +173,12 @@ class Filesystem extends AbstractAdapter
         return $options;
     }
 
+    /**
+     * Set namespace separator
+     *
+     * @param string $separator
+     * @return Filesystem
+     */
     public function setNamespaceSeparator($separator)
     {
         $this->namespaceSeparator = (string)$separator;
@@ -157,11 +186,23 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get namespace separator
+     *
+     * @return string
+     */
     public function getNamespaceSeparator()
     {
         return $this->namespaceSeparator;
     }
 
+    /**
+     * Set cache dir
+     *
+     * @param string $dir
+     * @return Filesystem
+     * @throws InvalidArgumentException
+     */
     public function setCacheDir($dir)
     {
         if ($dir !== null) {
@@ -186,6 +227,11 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get cache dir
+     *
+     * @return null|string
+     */
     public function getCacheDir()
     {
         if ($this->cacheDir === null) {
@@ -195,6 +241,12 @@ class Filesystem extends AbstractAdapter
         return $this->cacheDir;
     }
 
+    /**
+     * Set file perm
+     *
+     * @param $perm
+     * @return Filesystem
+     */
     public function setFilePerm($perm)
     {
         if (is_string($perm)) {
@@ -207,11 +259,23 @@ class Filesystem extends AbstractAdapter
         return $this->setFileUmask(~$perm);
     }
 
+    /**
+     * Get file perm
+     *
+     * @return int
+     */
     public function getFilePerm()
     {
         return ~$this->getFileUmask();
     }
 
+    /**
+     * Set file umask
+     *
+     * @param $umask
+     * @return Filesystem
+     * @throws InvalidArgumentException
+     */
     public function setFileUmask($umask)
     {
         if (is_string($umask)) {
@@ -235,33 +299,66 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get file umask
+     *
+     * @return int
+     */
     public function getFileUmask()
     {
         return $this->fileUmask;
     }
 
+    /**
+     * Set file locking
+     *
+     * @param bool $flag
+     * @return Filesystem
+     */
     public function setFileLocking($flag)
     {
         $this->fileLocking = (bool)$flag;
         return $this;
     }
 
+    /**
+     * Get file locking
+     *
+     * @return bool
+     */
     public function getFileLocking()
     {
         return $this->fileLocking;
     }
 
+    /**
+     * Set file blocking
+     *
+     * @param bool $flag
+     * @return Filesystem
+     */
     public function setFileBlocking($flag)
     {
         $this->fileBlocking = (bool)$flag;
         return $this;
     }
 
+    /**
+     * Get file blocking
+     *
+     * @return bool
+     */
     public function getFileBlocking()
     {
         return $this->fileBlocking;
     }
 
+    /**
+     * Set no atime
+     *
+     * @param bool $flag
+     * @return Filesystem
+     */
     public function setNoAtime($flag)
     {
         $this->noAtime = (bool)$flag;
@@ -269,11 +366,22 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get no atime
+     *
+     * @return bool
+     */
     public function getNoAtime()
     {
         return $this->noAtime;
     }
 
+    /**
+     * Set no ctime
+     *
+     * @param bool $flag
+     * @return Filesystem
+     */
     public function setNoCtime($flag)
     {
         $this->noCtime = (bool)$flag;
@@ -281,11 +389,22 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get no ctime
+     *
+     * @return bool
+     */
     public function getNoCtime()
     {
         return $this->noCtime;
     }
 
+    /**
+     * Set dir perm
+     *
+     * @param string|integer $perm
+     * @return Filesystem
+     */
     public function setDirPerm($perm)
     {
         if (is_string($perm)) {
@@ -298,11 +417,23 @@ class Filesystem extends AbstractAdapter
         return $this->setDirUmask(~$perm);
     }
 
+    /**
+     * Get dir perm
+     *
+     * @return int
+     */
     public function getDirPerm()
     {
         return ~$this->getDirUmask();
     }
 
+    /**
+     * Set dir umask
+     *
+     * @param string|integer $umask
+     * @return Filesystem
+     * @throws InvalidArgumentException
+     */
     public function setDirUmask($umask)
     {
         if (is_string($umask)) {
@@ -322,11 +453,23 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get dir umask
+     *
+     * @return int
+     */
     public function getDirUmask()
     {
         return $this->dirUmask;
     }
 
+    /**
+     * Set dir level
+     *
+     * @param integer $level
+     * @return Filesystem
+     * @throws InvalidArgumentException
+     */
     public function setDirLevel($level)
     {
         $level = (int)$level;
@@ -339,22 +482,45 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get dir level
+     *
+     * @return int
+     */
     public function getDirLevel()
     {
         return $this->dirLevel;
     }
 
+    /**
+     * Set read control
+     *
+     * @param bool $flag
+     * @return Filesystem
+     */
     public function setReadControl($flag)
     {
         $this->readControl = (bool)$flag;
         return $this;
     }
 
+    /**
+     * Get read control
+     *
+     * @return bool
+     */
     public function getReadControl()
     {
         return $this->readControl;
     }
 
+    /**
+     * Set real control algo
+     *
+     * @param string $algo
+     * @return Filesystem
+     * @throws InvalidArgumentException
+     */
     public function setReadControlAlgo($algo)
     {
         $algo = strtolower($algo);
@@ -367,17 +533,33 @@ class Filesystem extends AbstractAdapter
         return $this;
     }
 
+    /**
+     * Get read control algo
+     *
+     * @return string
+     */
     public function getReadControlAlgo()
     {
         return $this->readControlAlgo;
     }
 
+    /**
+     * Set clear stat cache
+     *
+     * @param bool $flag
+     * @return Filesystem
+     */
     public function setClearStatCache($flag)
     {
         $this->clearStatCache = (bool)$flag;
         return $this;
     }
 
+    /**
+     * Get clear stat cache
+     *
+     * @return bool
+     */
     public function getClearStatCache()
     {
         return $this->clearStatCache;
@@ -385,6 +567,13 @@ class Filesystem extends AbstractAdapter
 
     /* reading */
 
+    /**
+     * Get item
+     *
+     * @param $key
+     * @param array $options
+     * @return bool|mixed
+     */
     public function getItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -421,6 +610,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Get items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array|mixed
+     */
     public function getItems(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -459,6 +655,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Check for an item
+     *
+     * @param $key
+     * @param array $options
+     * @return bool|mixed
+     */
     public function hasItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -489,6 +692,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Check for items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array|mixed
+     */
     public function hasItems(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -524,6 +734,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Get metadata
+     *
+     * @param $key
+     * @param array $options
+     * @return array|bool|mixed|null
+     */
     public function getMetadata($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -560,6 +777,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Get metadatas
+     *
+     * @param array $keys
+     * @param array $options
+     * @return array|mixed
+     */
     public function getMetadatas(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -601,6 +825,14 @@ class Filesystem extends AbstractAdapter
 
     /* writing */
 
+    /**
+     * Set item
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool|mixed
+     */
     public function setItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -632,6 +864,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Set items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool|mixed
+     */
     public function setItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -665,6 +904,15 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Replace an item
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool|mixed
+     * @throws ItemNotFoundException
+     */
     public function replaceItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -700,6 +948,14 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Replace items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool|mixed
+     * @throws ItemNotFoundException
+     */
     public function replaceItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -736,6 +992,15 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Add an item
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool|mixed
+     * @throws RuntimeException
+     */
     public function addItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -771,6 +1036,14 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Add items
+     *
+     * @param array $keyValuePairs
+     * @param array $options
+     * @return bool|mixed
+     * @throws RuntimeException
+     */
     public function addItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -808,6 +1081,16 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * check and set item
+     *
+     * @param $token
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool|mixed
+     * @throws ItemNotFoundException
+     */
     public function checkAndSetItem($token, $key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -855,6 +1138,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Touch an item
+     *
+     * @param $key
+     * @param array $options
+     * @return bool|mixed
+     */
     public function touchItem($key, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -888,6 +1178,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Touch items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return bool|mixed
+     */
     public function touchItems(array $keys, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -918,6 +1215,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Remove an item
+     *
+     * @param $key
+     * @param array $options
+     * @return bool|mixed
+     */
     public function removeItem($key, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -947,6 +1251,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Remove items
+     *
+     * @param array $keys
+     * @param array $options
+     * @return bool|mixed
+     */
     public function removeItems(array $keys, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -979,6 +1290,14 @@ class Filesystem extends AbstractAdapter
 
     /* non-blocking */
 
+    /**
+     * Find
+     *
+     * @param int $mode
+     * @param array $options
+     * @return bool|mixed
+     * @throws RuntimeException
+     */
     public function find($mode = self::MATCH_ACTIVE, array $options = array())
     {
         if ($this->stmtActive) {
@@ -1029,6 +1348,11 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Fetch
+     *
+     * @return bool|mixed
+     */
     public function fetch()
     {
         if (!$this->stmtActive) {
@@ -1065,6 +1389,13 @@ class Filesystem extends AbstractAdapter
 
     /* cleaning */
 
+    /**
+     * Clear
+     *
+     * @param int $mode
+     * @param array $options
+     * @return mixed
+     */
     public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
         $this->normalizeOptions($options);
@@ -1087,6 +1418,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Clear by namespace
+     *
+     * @param int $mode
+     * @param array $options
+     * @return mixed
+     */
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
         $this->normalizeOptions($options);
@@ -1110,6 +1448,12 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Optimize
+     *
+     * @param array $options
+     * @return bool|mixed
+     */
     public function optimize(array $options = array())
     {
         if (!$this->getWritable()) {
@@ -1141,6 +1485,11 @@ class Filesystem extends AbstractAdapter
 
     /* status */
 
+    /**
+     * Get capabilities
+     *
+     * @return mixed
+     */
     public function getCapabilities()
     {
         $args = new \ArrayObject();
@@ -1191,6 +1540,12 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Get capacity
+     *
+     * @param array $options
+     * @return mixed
+     */
     public function getCapacity(array $options = array())
     {
         $args = new \ArrayObject();
@@ -1210,6 +1565,15 @@ class Filesystem extends AbstractAdapter
 
     /* internal */
 
+    /**
+     * Set key value pair
+     *
+     * @param $key
+     * @param $value
+     * @param array $options
+     * @return bool
+     * @throws RuntimeException
+     */
     protected function internalSetItem($key, $value, array &$options)
     {
         $oldUmask = null;
@@ -1278,6 +1642,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Remove a key
+     *
+     * @param $key
+     * @param array $options
+     * @throws ItemNotFoundException
+     */
     protected function internalRemoveItem($key, array &$options)
     {
         $filespec = $this->getFileSpec($key, $options['namespace']);
@@ -1291,6 +1662,14 @@ class Filesystem extends AbstractAdapter
         $this->lastInfoId = null;
     }
 
+    /**
+     * Get by key
+     *
+     * @param $key
+     * @param array $options
+     * @return bool|string
+     * @throws \Exception|ItemNotFoundException|UnexpectedValueException
+     */
     protected function internalGetItem($key, array &$options)
     {
         if ( !$this->internalHasItem($key, $options)
@@ -1333,6 +1712,13 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Checks for a key
+     *
+     * @param $key
+     * @param array $options
+     * @return bool
+     */
     protected function internalHasItem($key, array &$options)
     {
         $keyInfo = $this->getKeyInfo($key, $options['namespace']);
@@ -1349,6 +1735,14 @@ class Filesystem extends AbstractAdapter
         return false;
     }
 
+    /**
+     * Get info by key
+     *
+     * @param $key
+     * @param array $options
+     * @return array|bool
+     * @throws ItemNotFoundException
+     */
     protected function internalGetMetadata($key, array &$options) {
         $keyInfo = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
@@ -1366,6 +1760,14 @@ class Filesystem extends AbstractAdapter
         return $keyInfo;
     }
 
+    /**
+     * Touch a key
+     *
+     * @param $key
+     * @param array $options
+     * @return bool
+     * @throws ItemNotFoundException|RuntimeException
+     */
     protected function internalTouchItem($key, array &$options)
     {
         $keyInfo = $this->getKeyInfo($key, $options['namespace']);
@@ -1383,6 +1785,11 @@ class Filesystem extends AbstractAdapter
         }
     }
 
+    /**
+     * Fetch by glob
+     *
+     * @return array|bool
+     */
     protected function fetchByGlob()
     {
         $options = $this->stmtOptions;
@@ -1484,6 +1891,15 @@ class Filesystem extends AbstractAdapter
         } while (true);
     }
 
+    /**
+     * Clear by prefix
+     *
+     * @param $prefix
+     * @param $mode
+     * @param array $opts
+     * @return bool
+     * @throws RuntimeException
+     */
     protected function clearByPrefix($prefix, $mode, array &$opts)
     {
         if (!$this->getWritable()) {
@@ -1575,6 +1991,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param string $dir    Directory to delete
      * @param string $prefix Namespace + Separator
+     * @return bool
      */
     protected function rmDir($dir, $prefix)
     {
@@ -1688,6 +2105,7 @@ class Filesystem extends AbstractAdapter
      * Read a complete file
      *
      * @param  string $file File complete path
+     * @return string
      * @throws RuntimeException
      */
     protected function getFileContent($file)
@@ -1733,6 +2151,7 @@ class Filesystem extends AbstractAdapter
      *
      * @param  string $file  File complete path
      * @param  string $data  Data to write
+     * @return bool
      * @throws RuntimeException
      */
     protected function putFileContent($file, $data)
@@ -1784,6 +2203,7 @@ class Filesystem extends AbstractAdapter
      * Unlink a file
      *
      * @param string $file
+     * @return void
      * @throw RuntimeException
      */
     protected function unlink($file) {
@@ -1798,6 +2218,8 @@ class Filesystem extends AbstractAdapter
 
     /**
      * Update dynamic capabilities only if already created
+     *
+     * @return void
      */
     protected function updateCapabilities()
     {

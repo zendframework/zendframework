@@ -13,15 +13,44 @@ use Zend\Cache\Storage\Plugin,
 class Serializer implements Plugin
 {
 
+    /**
+     * Serializer adapter
+     *
+     * @var SerializerAdapter
+     */
     protected $serializer;
+
+    /**
+     * Capabilities
+     *
+     * @var array
+     */
     protected $capabilities = array();
+
+    /**
+     * Handles
+     *
+     * @var array
+     */
     protected $handles = array();
 
+    /**
+     * Constructor
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function __construct($options = array())
     {
         $this->setOptions($options);
     }
 
+    /**
+     * Set options
+     *
+     * @param array|\Traversable $options
+     * @return void
+     */
     public function setOptions($options)
     {
         foreach ($options as $name => $value) {
@@ -30,6 +59,11 @@ class Serializer implements Plugin
         }
     }
 
+    /**
+     * Get options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return array(
@@ -37,12 +71,23 @@ class Serializer implements Plugin
         );
     }
 
+    /**
+     * Set serializer
+     *
+     * @param SerializerAdapter $serializer
+     * @return Serializer
+     */
     public function setSerializer(SerializerAdapter $serializer)
     {
         $this->serializer = $serializer;
         return $this;
     }
 
+    /**
+     * Get serializer
+     *
+     * @return SerializerAdapter
+     */
     public function getSerializer()
     {
         if (!$this->serializer) {
@@ -51,6 +96,13 @@ class Serializer implements Plugin
         return $this->serializer;
     }
 
+    /**
+     * Attach
+     *
+     * @param EventCollection $eventCollection
+     * @return Serializer
+     * @throws LogicException
+     */
     public function attach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -94,6 +146,13 @@ class Serializer implements Plugin
         return $this;
     }
 
+    /**
+     * Detach
+     *
+     * @param EventCollection $eventCollection
+     * @return Serializer
+     * @throws LogicException
+     */
     public function detach(EventCollection $eventCollection)
     {
         $index = \spl_object_hash($eventCollection);
@@ -112,6 +171,12 @@ class Serializer implements Plugin
         return $this;
     }
 
+    /**
+     * On read item post
+     *
+     * @param PostEvent $event
+     * @return void
+     */
     public function onReadItemPost(PostEvent $event)
     {
         $serializer = $this->getSerializer();
@@ -120,6 +185,12 @@ class Serializer implements Plugin
         $event->setResult($result);
     }
 
+    /**
+     * On read items post
+     *
+     * @param PostEvent $event
+     * @return void
+     */
     public function onReadItemsPost(PostEvent $event)
     {
         $serializer = $this->getSerializer();
@@ -130,6 +201,12 @@ class Serializer implements Plugin
         $event->setResult($result);
     }
 
+    /**
+     * On fetch post
+     *
+     * @param PostEvent $event
+     * @return void
+     */
     public function onFetchPost(PostEvent $event)
     {
         $item = $event->getResult();
@@ -139,6 +216,12 @@ class Serializer implements Plugin
         $event->setResult($item);
     }
 
+    /**
+     * On fetch all post
+     *
+     * @param PostEvent $event
+     * @return void
+     */
     public function onFetchAllPost(PostEvent $event)
     {
         $serializer = $this->getSerializer();
@@ -151,6 +234,12 @@ class Serializer implements Plugin
         $event->setResult($result);
     }
 
+    /**
+     * On write item pre
+     *
+     * @param Event $event
+     * @return void
+     */
     public function onWriteItemPre(Event $event)
     {
         $serializer = $this->getSerializer();
@@ -158,6 +247,12 @@ class Serializer implements Plugin
         $params['value'] = $serializer->serialize($params['value']);
     }
 
+    /**
+     * On write items pre
+     *
+     * @param Event $event
+     * @return void
+     */
     public function onWriteItemsPre(Event $event)
     {
         $serializer = $this->getSerializer();
@@ -167,6 +262,12 @@ class Serializer implements Plugin
         }
     }
 
+    /**
+     * On increment item pre
+     *
+     * @param Event $event
+     * @return mixed
+     */
     public function onIncrementItemPre(Event $event)
     {
         $event->stopPropagation(true);
@@ -178,6 +279,12 @@ class Serializer implements Plugin
         return $cache->checkAndSetItem($token, $oldValue + $params['value'], $params['key'], $params['options']);
     }
 
+    /**
+     * On increment items pre
+     *
+     * @param Event $event
+     * @return mixed
+     */
     public function onIncrementItemsPre(Event $event)
     {
         $event->stopPropagation(true);
@@ -195,6 +302,12 @@ class Serializer implements Plugin
         return $cache->setItems($keyValuePairs, $params['options']);
     }
 
+    /**
+     * On decrement item pre
+     *
+     * @param Event $event
+     * @return mixed
+     */
     public function onDecrementItemPre(Event $event)
     {
         $event->stopPropagation(true);
@@ -206,6 +319,12 @@ class Serializer implements Plugin
         return $cache->checkAndSetItem($token, $oldValue - $params['value'], $params['key'], $params['options']);
     }
 
+    /**
+     * On decrement items pre
+     *
+     * @param Event $event
+     * @return mixed
+     */
     public function onDecrementItemsPre(Event $event)
     {
         $event->stopPropagation(true);
@@ -223,6 +342,12 @@ class Serializer implements Plugin
         return $cache->setItems($keyValuePairs, $params['options']);
     }
 
+    /**
+     * On get capabilities
+     *
+     * @param PostEvent $event
+     * @return void
+     */
     public function onGetCapabilitiesPost(PostEvent $event)
     {
         $baseCapabilities = $event->getResult();

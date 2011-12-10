@@ -47,7 +47,7 @@ class ClearByFactor implements Plugin
      * Set options
      *
      * @param array|\Traversable $options
-     * @return void
+     * @return ClearByFactor
      */
     public function setOptions($options)
     {
@@ -55,6 +55,7 @@ class ClearByFactor implements Plugin
             $m = 'set' . str_replace('_', '', $name);
             $this->$m($value);
         }
+        return $this;
     }
 
     /**

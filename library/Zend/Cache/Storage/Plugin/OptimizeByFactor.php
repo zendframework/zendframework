@@ -40,7 +40,7 @@ class OptimizeByFactor implements Plugin
      * Set options
      *
      * @param array|\Traversable $options
-     * @return void
+     * @return OptimizeByFactor
      */
     public function setOptions($options)
     {
@@ -48,6 +48,7 @@ class OptimizeByFactor implements Plugin
             $m = 'set' . str_replace('_', '', $name);
             $this->$m($value);
         }
+        return $this;
     }
 
     /**

@@ -36,7 +36,7 @@ class ExceptionHandler implements Plugin
      * Set options
      *
      * @param array|\Traversable $options
-     * @return void
+     * @return ExceptionHandler
      */
     public function setOptions($options)
     {
@@ -44,6 +44,7 @@ class ExceptionHandler implements Plugin
             $m = 'set' . str_replace('_', '', $name);
             $this->$m($value);
         }
+        return $this;
     }
 
     /**

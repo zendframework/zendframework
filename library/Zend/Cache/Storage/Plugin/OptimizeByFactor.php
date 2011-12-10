@@ -23,7 +23,7 @@ class OptimizeByFactor implements Plugin
      *
      * @var int
      */
-    protected $_optimizingFactor = 0;
+    protected $optimizingFactor = 0;
 
     /**
      * Constructor
@@ -70,7 +70,7 @@ class OptimizeByFactor implements Plugin
      */
     public function getOptimizingFactor()
     {
-        return $this->_optimizingFactor;
+        return $this->optimizingFactor;
     }
 
     /**
@@ -86,7 +86,7 @@ class OptimizeByFactor implements Plugin
         if ($factor < 0) {
             throw new InvalidArgumentAxception("Invalid optimizing factor '{$factor}': must be greater or equal 0");
         }
-        $this->_optimizingFactor = $factor;
+        $this->optimizingFactor = $factor;
 
         return $this;
     }

@@ -12,14 +12,14 @@ class ExceptionHandler implements Plugin
     /**
      * Callback
      */
-    protected $_callback = null;
+    protected $callback = null;
 
     /**
      * Throw exceptions
      *
      * @var bool
      */
-    protected $_throwExceptions  = true;
+    protected $throwExceptions = true;
 
     /**
      * Handles
@@ -79,7 +79,7 @@ class ExceptionHandler implements Plugin
         if ($callback !== null && !is_callable($callback, true)) {
             throw new InvalidArgumentException('Not a valid callback');
         }
-        $this->_callback = $callback;
+        $this->callback = $callback;
         return $this;
     }
 
@@ -88,7 +88,7 @@ class ExceptionHandler implements Plugin
      */
     public function getCallback()
     {
-        return $this->_callback;
+        return $this->callback;
     }
 
     /**
@@ -100,7 +100,7 @@ class ExceptionHandler implements Plugin
      */
     public function setThrowExceptions($flag)
     {
-        $this->_throwExceptions = (bool)$flag;
+        $this->throwExceptions = (bool)$flag;
         return $this;
     }
 
@@ -111,7 +111,7 @@ class ExceptionHandler implements Plugin
      */
     public function getThrowExceptions()
     {
-        return $this->_throwExceptions;
+        return $this->throwExceptions;
     }
 
     /**

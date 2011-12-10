@@ -16,14 +16,14 @@ class ClearByFactor implements Plugin
      *
      * @var int
      */
-    protected $_clearingFactor = 0;
+    protected $clearingFactor = 0;
 
     /**
      * Flag to clear items by namespace
      *
      * @var boolean
      */
-    protected $_clearByNamespace = true;
+    protected $clearByNamespace = true;
 
     /**
      * Handles
@@ -78,7 +78,7 @@ class ClearByFactor implements Plugin
      */
     public function getClearingFactor()
     {
-        return $this->_clearingFactor;
+        return $this->clearingFactor;
     }
 
     /**
@@ -94,7 +94,7 @@ class ClearByFactor implements Plugin
         if ($factor < 0) {
             throw new InvalidArgumentAxception("Invalid clearing factor '{$factor}': must be greater or equal 0");
         }
-        $this->_clearingFactor = $factor;
+        $this->clearingFactor = $factor;
 
         return $this;
     }
@@ -106,7 +106,7 @@ class ClearByFactor implements Plugin
      */
     public function getClearByNamespace()
     {
-        return $this->_clearByNamespace;
+        return $this->clearByNamespace;
     }
 
     /**
@@ -117,7 +117,7 @@ class ClearByFactor implements Plugin
      */
     public function setClearByNamespace($flag)
     {
-        $this->_clearByNamespace = $flag;
+        $this->clearByNamespace = $flag;
         return $this;
     }
 

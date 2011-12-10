@@ -203,35 +203,35 @@ class Utils
      */
     static protected function bytesFromString($memStr)
     {
-        if (preg_match('/\s*([\-\+]?\d+)\s*(\w*)\s*/', $memStr, $matches)) {
-            $value = (float)$matches[1];
-            $unit  = strtolower($matches[2]);
-
-            switch ($unit) {
-                case '':
-                case 'b':
-                    break;
-
-                case 'k':
-                case 'kb':
-                    $value*= 1024;
-                    break;
-
-                case 'm':
-                case 'mb':
-                    $value*= 1048576; // 1024 * 1024
-                    break;
-
-                case 'g':
-                case 'gb':
-                    $value*= 1073741824; // 1024 * 1024 * 1024
-                    break;
-
-                default:
-                    throw new RuntimeException("Unknown unit '{$unit}'");
-            }
-        } else {
+        if (!preg_match('/\s*([\-\+]?\d+)\s*(\w*)\s*/', $memStr, $matches)) {
             throw new RuntimeException("Can't detect bytes of string '{$memStr}'");
+        }
+
+        $value = (float)$matches[1];
+        $unit  = strtolower($matches[2]);
+
+        switch ($unit) {
+            case 'g':
+            case 'gb':
+                $value*= 1024;
+                // Break intentionally omitted
+
+            case 'm':
+            case 'mb':
+                $value*= 1024;
+                // Break intentionally omitted
+
+            case 'k':
+            case 'kb':
+                $value*= 1024;
+                // Break intentionally omitted
+
+            case '':
+            case 'b':
+                break;
+
+            default:
+                throw new RuntimeException("Unknown unit '{$unit}'");
         }
 
         return $value;

@@ -28,7 +28,7 @@ class StorageFactory
      *
      * @param array|\Zend\Config $cfg
      * @return Zend\Cache\Storage\Adapter
-     * @throws Zend\Cache\RuntimeException
+     * @throws InvalidArgumentException
      */
     public static function factory($cfg)
     {
@@ -157,6 +157,8 @@ class StorageFactory
 
     /**
      * Resets the internal adapter broker
+     *
+     * @return void
      */
     public static function resetAdapterBroker()
     {
@@ -208,6 +210,8 @@ class StorageFactory
 
     /**
      * Resets the internal plugin broker
+     *
+     * @return void
      */
     public static function resetPluginBroker()
     {

@@ -26,8 +26,8 @@ class Event extends BaseEvent
     /**
      * Set the event target/context
      *
-     * @param Zend\Cache\Storage\Adapter $target
-     * @return Zend\Cache\Storage\Event
+     * @param Adapter $target
+     * @return Event
      * @see Zend\EventManager\Event::setTarget()
      */
     public function setTarget($target)
@@ -38,8 +38,8 @@ class Event extends BaseEvent
     /**
      * Alias of setTarget
      *
-     * @param Zend\Cache\Storage\Adapter $adapter
-     * @return Zend\Cache\Storage\Event
+     * @param Adapter $adapter
+     * @return Event
      * @see Zend\EventManager\Event::setTarget()
      */
     public function setStorage(Adapter $adapter)
@@ -51,7 +51,7 @@ class Event extends BaseEvent
     /**
      * Alias of getTarget
      *
-     * @return Zend\Cache\Storage\Adapter
+     * @return Adapter
      */
     public function getStorage()
     {

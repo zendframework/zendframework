@@ -19,7 +19,6 @@
  */
 
 namespace Zend\Cache;
-
 use Zend\Loader\PluginClassLoader;
 
 /**
@@ -33,7 +32,7 @@ use Zend\Loader\PluginClassLoader;
 class PatternLoader extends PluginClassLoader
 {
     /**
-     * @var array Pre-aliased adapters 
+     * @var array Pre-aliased adapters
      */
     protected $plugins = array(
         'callback' => 'Zend\Cache\Pattern\CallbackCache',

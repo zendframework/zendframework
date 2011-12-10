@@ -19,7 +19,7 @@ class PostEvent extends Event
      * Accept a target and its parameters.
      *
      * @param  string $name Event name
-     * @param  Zend\Cache\Storage\Adapter $storage
+     * @param  Adapter $storage
      * @param  ArrayObject $params
      * @param  mixed $result
      * @return void
@@ -34,7 +34,7 @@ class PostEvent extends Event
      * Set the result/return value
      *
      * @param mixed $value
-     * @return Zend\Cache\Storage\PostEvent
+     * @return PostEvent
      */
     public function setResult(&$value)
     {

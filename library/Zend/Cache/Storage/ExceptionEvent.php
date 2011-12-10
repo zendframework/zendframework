@@ -35,7 +35,7 @@ class ExceptionEvent extends Event
      * Accept a target and its parameters.
      *
      * @param  string $name Event name
-     * @param  Zend\Cache\Storage\Adapter $storage
+     * @param  Adapter $storage
      * @param  ArrayObject $params
      * @param  Exception $exception
      * @return void
@@ -50,6 +50,7 @@ class ExceptionEvent extends Event
      * Set the exception to be throw
      *
      * @param Exception $exception
+     * @return ExceptionEvent
      */
     public function setException(Exception $exception)
     {
@@ -71,6 +72,7 @@ class ExceptionEvent extends Event
      * Throw the exception or use the result
      *
      * @param boolean $flag
+     * @return ExceptionEvent
      */
     public function setThrowException($flag)
     {
@@ -92,7 +94,7 @@ class ExceptionEvent extends Event
      * Set the result/return value
      *
      * @param mixed $value
-     * @return Zend\Cache\Storage\PostEvent
+     * @return ExceptionEvent
      */
     public function setResult(&$value)
     {

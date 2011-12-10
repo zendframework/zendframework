@@ -19,7 +19,6 @@
  */
 
 namespace Zend\Cache\Storage;
-
 use Zend\Loader\PluginBroker,
     Zend\Cache\Exception\RuntimeException;
 
@@ -40,10 +39,10 @@ class AdapterBroker extends PluginBroker
 
     /**
      * Determine if we have a valid adapter
-     * 
-     * @param  mixed $plugin 
+     *
+     * @param  mixed $plugin
      * @return true
-     * @throws Exception
+     * @throws RuntimeException
      */
     protected function validatePlugin($plugin)
     {

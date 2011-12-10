@@ -11,7 +11,7 @@ class Utils
      *
      * @param string $path A directory of the filesystem or disk partition
      * @return array
-     * @throws Zend\Cache\Exception\RuntimeException
+     * @throws RuntimeException
      */
     static public function getDiskCapacity($path)
     {
@@ -37,7 +37,7 @@ class Utils
      * Get php memory capacity
      *
      * @return array
-     * @throws Zend\Cache\Exception\RuntimeException
+     * @throws RuntimeException
      */
     static public function getPhpMemoryCapacity()
     {
@@ -59,7 +59,7 @@ class Utils
      * Get system memory capacity
      *
      * @return array
-     * @throws Zend\Cache\Exception\RuntimeException
+     * @throws RuntimeException
      */
     static public function getSystemMemoryCapacity()
     {
@@ -105,7 +105,7 @@ class Utils
      * Get system memory capacity on windows systems
      *
      * @return array
-     * @throws Zend\Cache\Exception\RuntimeException
+     * @throws RuntimeException
      */
     static protected function _getSystemMemoryCapacityWin()
     {
@@ -160,7 +160,7 @@ class Utils
      * @param  string $data  Message to be hashed.
      * @param  bool   $raw   When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
      * @return string        Hash value
-     * @throws Zend\Cache\RuntimeException
+     * @throws RuntimeException
      */
     static public function generateHash($algo, $data, $raw = false)
     {
@@ -199,7 +199,7 @@ class Utils
      *
      * @param string $memStr
      * @return float
-     * @throws Zend\Cache\Exception\RuntimeException
+     * @throws RuntimeException
      */
     static protected function bytesFromString($memStr)
     {

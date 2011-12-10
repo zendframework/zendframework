@@ -21,8 +21,7 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
-use ZendTest\Cache\Storage\CommonStorageTest,
-    Zend\Cache,
+use Zend\Cache,
     Zend\Cache\Exception\RuntimeException;
 
 /**
@@ -33,8 +32,15 @@ use ZendTest\Cache\Storage\CommonStorageTest,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class AbstractAdapterTest extends CommonStorageTest
+class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * Mock of the abstract storage adapter
+     *
+     * @var Zend\Cache\Storage\Adapter\AbstractAdapter
+     */
+    protected $_storage;
 
     public function setUp()
     {

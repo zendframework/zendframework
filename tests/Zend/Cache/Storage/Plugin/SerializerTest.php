@@ -35,7 +35,7 @@ use Zend\Cache,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class SerializerTest extends \PHPUnit_Framework_TestCase
+class SerializerTest extends CommonPluginTest
 {
 
     /**
@@ -44,13 +44,6 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
      * @var Zend\Cache\Storage\Adapter\AbstractAdapter
      */
     protected $_adapter;
-
-    /**
-     * The serializer plugin
-     *
-     * @var Zend\Cache\Storage\Plugin\Serializer
-     */
-    protected $_plugin;
 
     public function setUp()
     {

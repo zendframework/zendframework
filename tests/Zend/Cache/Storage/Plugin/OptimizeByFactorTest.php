@@ -6,7 +6,7 @@ use Zend\Cache,
     ZendTest\Cache\Storage\TestAsset\MockAdapter,
     ArrayObject;
 
-class OptimizeByFactorTest extends \PHPUnit_Framework_TestCase
+class OptimizeByFactorTest extends CommonPluginTest
 {
 
     /**
@@ -15,13 +15,6 @@ class OptimizeByFactorTest extends \PHPUnit_Framework_TestCase
      * @var Zend\Cache\Storage\Adapter\AbstractAdapter
      */
     protected $_adapter;
-
-    /**
-     * The serializer plugin
-     *
-     * @var Zend\Cache\Storage\Plugin\OptimizeByFactor
-     */
-    protected $_plugin;
 
     public function setUp()
     {

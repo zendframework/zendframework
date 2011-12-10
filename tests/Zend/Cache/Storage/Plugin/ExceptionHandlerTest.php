@@ -6,7 +6,7 @@ use Zend\Cache,
     ZendTest\Cache\Storage\TestAsset\MockAdapter,
     ArrayObject;
 
-class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
+class ExceptionHandlerTest extends CommonPluginTest
 {
 
     /**
@@ -16,17 +16,12 @@ class ExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     protected $_adapter;
 
-    /**
-     * The serializer plugin
-     *
-     * @var Zend\Cache\Storage\Plugin\OptimizeByFactor
-     */
-    protected $_plugin;
-
     public function setUp()
     {
         $this->_adapter = new MockAdapter();
         $this->_plugin  = new Cache\Storage\Plugin\ExceptionHandler();
+
+        parent::setUp();
     }
 
     public function testAddPlugin()

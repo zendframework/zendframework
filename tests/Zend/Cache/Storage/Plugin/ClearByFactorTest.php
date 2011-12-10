@@ -6,7 +6,7 @@ use Zend\Cache,
     ZendTest\Cache\Storage\TestAsset\MockAdapter,
     ArrayObject;
 
-class ClearByFactorTest extends \PHPUnit_Framework_TestCase
+class ClearByFactorTest extends CommonPluginTest
 {
 
     /**
@@ -16,19 +16,14 @@ class ClearByFactorTest extends \PHPUnit_Framework_TestCase
      */
     protected $_adapter;
 
-    /**
-     * The serializer plugin
-     *
-     * @var Zend\Cache\Storage\Plugin\OptimizeByFactor
-     */
-    protected $_plugin;
-
     public function setUp()
     {
         $this->_adapter = new MockAdapter();
         $this->_plugin  = new Cache\Storage\Plugin\ClearByFactor(array(
             'clearing_factor' => 1,
         ));
+
+        parent::setUp();
     }
 
     public function testAddPlugin()

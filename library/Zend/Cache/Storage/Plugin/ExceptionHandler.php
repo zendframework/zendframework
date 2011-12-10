@@ -22,6 +22,13 @@ class ExceptionHandler implements Plugin
     protected $_throwExceptions  = true;
 
     /**
+     * Handles
+     *
+     * @var array
+     */
+    protected $handles = array();
+
+    /**
      * Constructor
      *
      * @param array|\Traversable $options
@@ -54,24 +61,26 @@ class ExceptionHandler implements Plugin
      */
     public function getOptions()
     {
-        $options = parent::getOptions();
-        $options['callback']         = $this->getExceptionHandler();
-        $options['throw_exceptions'] = $this->getThrowExceptions();
-        return $options;
+        return array(
+            'callback'         => $this->getCallback(),
+            'throw_exceptions' => $this->getThrowExceptions(),
+        );
     }
 
     /**
      * Set callback
      *
-     * @param $callback
+     * @param null|callback $callback
+     * @return ExceptionHandler
      * @throws InvalidArgumentException
      */
     public function setCallback($callback)
     {
-        if (!is_callable($callback, true)) {
+        if ($callback !== null && !is_callable($callback, true)) {
             throw new InvalidArgumentException('Not a valid callback');
         }
         $this->_callback = $callback;
+        return $this;
     }
 
     /**
@@ -86,11 +95,13 @@ class ExceptionHandler implements Plugin
      * Set throw exceptions
      *
      * @param bool $flag
+     * @return ExceptionHandler
      * @return void
      */
     public function setThrowExceptions($flag)
     {
         $this->_throwExceptions = (bool)$flag;
+        return $this;
     }
 
     /**

@@ -1,9 +1,6 @@
 <?php
 
 namespace Zend\Cache\Storage;
-
-use Zend\Cache\Exception\MissingKeyException;
-
 use Zend\EventManager\EventManager,
     Zend\Cache\Exception\InvalidArgumentException,
     Zend\Cache\Exception\MissingDependencyException;
@@ -16,14 +13,21 @@ class Capabilities
      *
      * @var stdClass
      */
-    protected $_marker;
+    protected $marker;
+
+    /**
+     * Base capabilities
+     *
+     * @var null|Capabilities
+     */
+    protected $baseCapabilities;
 
     /**
      * The event manager
      *
-     * @var null|Zend\EventManager\EventManager
+     * @var null|EventManager
      */
-    protected $_eventManager;
+    protected $eventManager;
 
    /**
     * Capability property
@@ -96,13 +100,6 @@ class Capabilities
     protected $_clearByNamespace;
 
     /**
-     * Base capabilities
-     *
-     * @var null|Zend\Cache\Storage\Capabilities
-     */
-    protected $_baseCapabilities;
-
-    /**
      * Constructor
      *
      * @param \stdClass $marker
@@ -114,10 +111,10 @@ class Capabilities
         array $capabilities = array(),
         Capabilities $baseCapabilities = null
     ) {
-        $this->_marker = $marker;
-        $this->_baseCapabilities = $baseCapabilities;
+        $this->marker = $marker;
+        $this->baseCapabilities = $baseCapabilities;
         foreach ($capabilities as $name => $value) {
-            $this->_setCapability($marker, $name, $value);
+            $this->setCapability($marker, $name, $value);
         }
     }
 
@@ -128,7 +125,7 @@ class Capabilities
      */
     public function hasEventManager()
     {
-        return ($this->_eventManager !== null || class_exists('Zend\EventManager\EventManager'));
+        return ($this->eventManager !== null || class_exists('Zend\EventManager\EventManager'));
     }
 
     /**
@@ -139,7 +136,7 @@ class Capabilities
      */
     public function getEventManager()
     {
-        if ($this->_eventManager === null) {
+        if ($this->eventManager === null) {
             if (!class_exists('Zend\EventManager\EventManager')) {
                 throw new MissingDependencyException('Zend\EventManager not found');
             }
@@ -148,17 +145,17 @@ class Capabilities
             $eventManager = new EventManager();
 
             // trigger change event on change of a base capability
-            if ($this->_baseCapabilities && $this->_baseCapabilities->hasEventManager()) {
+            if ($this->baseCapabilities && $this->baseCapabilities->hasEventManager()) {
                 $onChange = function ($event) use ($eventManager)  {
                     $eventManager->trigger('change', $event->getTarget(), $event->getParams());
                 };
-                $this->_baseCapabilities->getEventManager()->attach('change', $onChange);
+                $this->baseCapabilities->getEventManager()->attach('change', $onChange);
             }
 
             // register event manager
-            $this->_eventManager = $eventManager;
+            $this->eventManager = $eventManager;
         }
-        return $this->_eventManager;
+        return $this->eventManager;
     }
 
     /**
@@ -168,7 +165,7 @@ class Capabilities
      */
     public function getSupportedDatatypes()
     {
-        return $this->_getCapability('supportedDatatypes', array(
+        return $this->getCapability('supportedDatatypes', array(
             'NULL'     => false,
             'boolean'  => false,
             'integer'  => false,
@@ -216,7 +213,7 @@ class Capabilities
             $datatypes[type] = false;
         }
 
-        return $this->_setCapability($marker, 'supportedDatatypes', $datatypes);
+        return $this->setCapability($marker, 'supportedDatatypes', $datatypes);
     }
 
     /**
@@ -226,7 +223,7 @@ class Capabilities
      */
     public function getSupportedMetadata()
     {
-        return $this->_getCapability('supportedMetadata', array());
+        return $this->getCapability('supportedMetadata', array());
     }
 
     /**
@@ -243,7 +240,7 @@ class Capabilities
                 throw new InvalidArgumentException('$metadata must be an array of strings');
             }
         }
-        return $this->_setCapability($marker, 'supportedMetadata', $metadata);
+        return $this->setCapability($marker, 'supportedMetadata', $metadata);
     }
 
     /**
@@ -253,7 +250,7 @@ class Capabilities
      */
     public function getMaxTtl()
     {
-        return $this->_getCapability('maxTtl', 0);
+        return $this->getCapability('maxTtl', 0);
     }
 
     /**
@@ -269,7 +266,7 @@ class Capabilities
         if ($maxTtl < 0) {
             throw new InvalidArgumentException('$maxTtl must be greater or equal 0');
         }
-        return $this->_setCapability($marker, 'maxTtl', $maxTtl);
+        return $this->setCapability($marker, 'maxTtl', $maxTtl);
     }
 
     /**
@@ -280,7 +277,7 @@ class Capabilities
      */
     public function getStaticTtl()
     {
-        return $this->_getCapability('staticTtl', false);
+        return $this->getCapability('staticTtl', false);
     }
 
     /**
@@ -293,7 +290,7 @@ class Capabilities
      */
     public function setStaticTtl(\stdClass $marker, $flag)
     {
-        return $this->_setCapability($marker, 'staticTtl', (bool)$flag);
+        return $this->setCapability($marker, 'staticTtl', (bool)$flag);
     }
 
     /**
@@ -303,7 +300,7 @@ class Capabilities
      */
     public function getTtlPrecision()
     {
-        return $this->_getCapability('ttlPrecision', 1);
+        return $this->getCapability('ttlPrecision', 1);
     }
 
     /**
@@ -319,7 +316,7 @@ class Capabilities
         if ($ttlPrecision <= 0) {
             throw new InvalidArgumentException('$ttlPrecision must be greater than 0');
         }
-        return $this->_setCapability($marker, 'ttlPrecision', $ttlPrecision);
+        return $this->setCapability($marker, 'ttlPrecision', $ttlPrecision);
     }
 
     /**
@@ -329,7 +326,7 @@ class Capabilities
      */
     public function getUseRequestTime()
     {
-        return $this->_getCapability('useRequestTime', false);
+        return $this->getCapability('useRequestTime', false);
     }
 
     /**
@@ -341,7 +338,7 @@ class Capabilities
      */
     public function setUseRequestTime(\stdClass $marker, $flag)
     {
-        return $this->_setCapability($marker, 'useRequestTime', (bool)$flag);
+        return $this->setCapability($marker, 'useRequestTime', (bool)$flag);
     }
 
     /**
@@ -351,7 +348,7 @@ class Capabilities
      */
     public function getExpiredRead()
     {
-        return $this->_getCapability('expiredRead', false);
+        return $this->getCapability('expiredRead', false);
     }
 
     /**
@@ -363,7 +360,7 @@ class Capabilities
      */
     public function setExpiredRead(\stdClass $marker, $flag)
     {
-        return $this->_setCapability($marker, 'expiredRead', (bool)$flag);
+        return $this->setCapability($marker, 'expiredRead', (bool)$flag);
     }
 
     /**
@@ -373,7 +370,7 @@ class Capabilities
      */
     public function getMaxKeyLength()
     {
-        return $this->_getCapability('maxKeyLength', -1);
+        return $this->getCapability('maxKeyLength', -1);
     }
 
     /**
@@ -389,7 +386,7 @@ class Capabilities
         if ($maxKeyLength < -1) {
             throw new InvalidArgumentException('$maxKeyLength must be greater or equal than -1');
         }
-        return $this->_setCapability($marker, 'maxKeyLength', $maxKeyLength);
+        return $this->setCapability($marker, 'maxKeyLength', $maxKeyLength);
     }
 
     /**
@@ -399,7 +396,7 @@ class Capabilities
      */
     public function getNamespaceIsPrefix()
     {
-        return $this->_getCapability('namespaceIsPrefix', true);
+        return $this->getCapability('namespaceIsPrefix', true);
     }
 
     /**
@@ -411,7 +408,7 @@ class Capabilities
      */
     public function setNamespaceIsPrefix(\stdClass $marker, $flag)
     {
-        return $this->_setCapability($marker, 'namespaceIsPrefix', (bool)$flag);
+        return $this->setCapability($marker, 'namespaceIsPrefix', (bool)$flag);
     }
 
     /**
@@ -421,7 +418,7 @@ class Capabilities
      */
     public function getNamespaceSeparator()
     {
-        return $this->_getCapability('namespaceSeparator', '');
+        return $this->getCapability('namespaceSeparator', '');
     }
 
     /**
@@ -433,7 +430,7 @@ class Capabilities
      */
     public function setNamespaceSeparator(\stdClass $marker, $separator)
     {
-        return $this->_setCapability($marker, 'namespaceSeparator', (string)$separator);
+        return $this->setCapability($marker, 'namespaceSeparator', (string)$separator);
     }
 
     /**
@@ -443,7 +440,7 @@ class Capabilities
      */
     public function getIterable()
     {
-        return $this->_getCapability('iterable', false);
+        return $this->getCapability('iterable', false);
     }
 
     /**
@@ -455,7 +452,7 @@ class Capabilities
      */
     public function setIterable(\stdClass $marker, $flag)
     {
-        return $this->_setCapability($marker, 'iterable', (bool)$flag);
+        return $this->setCapability($marker, 'iterable', (bool)$flag);
     }
 
     /**
@@ -465,7 +462,7 @@ class Capabilities
      */
     public function getClearAllNamespaces()
     {
-        return $this->_getCapability('clearAllNamespaces', false);
+        return $this->getCapability('clearAllNamespaces', false);
     }
 
     /**
@@ -477,7 +474,7 @@ class Capabilities
      */
     public function setClearAllNamespaces(\stdClass $marker, $flag)
     {
-        return $this->_setCapability($marker, 'clearAllNamespaces', (bool)$flag);
+        return $this->setCapability($marker, 'clearAllNamespaces', (bool)$flag);
     }
 
     /**
@@ -487,7 +484,7 @@ class Capabilities
      */
     public function getClearByNamespace()
     {
-        return $this->_getCapability('clearByNamespace', false);
+        return $this->getCapability('clearByNamespace', false);
     }
 
     /**
@@ -499,7 +496,7 @@ class Capabilities
      */
     public function setClearByNamespace(\stdClass $marker, $flag)
     {
-        return $this->_setCapability($marker, 'clearByNamespace', (bool)$flag);
+        return $this->setCapability($marker, 'clearByNamespace', (bool)$flag);
     }
 
     /**
@@ -509,14 +506,14 @@ class Capabilities
      * @param mixed $default
      * @return mixed
      */
-    protected function _getCapability($name, $default = null)
+    protected function getCapability($name, $default = null)
     {
         $property = '_' . $name;
         if ($this->$property !== null) {
             return $this->$property;
-        } elseif ($this->_baseCapabilities) {
+        } elseif ($this->baseCapabilities) {
             $getMethod = 'get' . $name;
-            return $this->_baseCapabilities->$getMethod();
+            return $this->baseCapabilities->$getMethod();
         }
         return $default;
     }
@@ -530,9 +527,9 @@ class Capabilities
      * @return Zend\Cache\Storage\Capabilities Fluent interface
      * @throws InvalidArgumentException
      */
-    protected function _setCapability(\stdClass $marker, $name, $value)
+    protected function setCapability(\stdClass $marker, $name, $value)
     {
-        if ($this->_marker !== $marker) {
+        if ($this->marker !== $marker) {
             throw new InvalidArgumentException('Invalid marker');
         }
 

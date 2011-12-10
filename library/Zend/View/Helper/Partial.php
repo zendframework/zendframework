@@ -115,7 +115,7 @@ class Partial extends AbstractHelper
     public function cloneView()
     {
         $view = clone $this->view;
-        $view->vars()->clear();
+        $view->setVars(array());
         return $view;
     }
 

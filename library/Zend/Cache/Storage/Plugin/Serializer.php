@@ -49,7 +49,7 @@ class Serializer implements Plugin
      * Set options
      *
      * @param array|\Traversable $options
-     * @return void
+     * @return Serializer
      */
     public function setOptions($options)
     {
@@ -57,6 +57,7 @@ class Serializer implements Plugin
             $m = 'set' . $name;
             $this->$m($value);
         }
+        return $this;
     }
 
     /**

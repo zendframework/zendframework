@@ -1,11 +1,38 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Pattern;
-use Zend\Cache\Storage\Adapter as StorageAdapter;
 
+use Zend\Cache\Exception,
+    Zend\Cache\Storage\Adapter as StorageAdapter;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class CaptureCache extends AbstractPattern
 {
-
     /**
      * Public directory
      *
@@ -72,7 +99,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Constructor
      *
-     * @param array|Traversable $options
+     * @param array|\Traversable $options
      */
     public function __construct($options = array())
     {
@@ -101,7 +128,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Set public directory
      *
-     * @param null|string $dir
+     * @param  null|string $dir
      * @return CaptureCache
      */
     public function setPublicDir($dir)
@@ -123,7 +150,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Set directory permissions
      *
-     * @param int|string $perm Permissions as octal number
+     * @param  int|string $perm Permissions as octal number
      * @return CaptureCache
      */
     public function setDirPerm($perm)
@@ -131,7 +158,7 @@ class CaptureCache extends AbstractPattern
         if (is_string($perm)) {
             $perm = octdec($perm);
         } else {
-            $perm = (int)$perm;
+            $perm = (int) $perm;
         }
 
         // use umask
@@ -151,7 +178,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Set directory umask
      *
-     * @param int|string $umask Umask as octal number
+     * @param  int|string $umask Umask as octal number
      * @return CaptureCache
      */
     public function setDirUmask($umask)
@@ -163,7 +190,7 @@ class CaptureCache extends AbstractPattern
         }
 
         if ((~$umask & 0700) != 0700 ) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid directory umask or directory permissions: '
               . 'need permissions to execute, read and write directories by owner'
             );
@@ -186,7 +213,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Set file permissions
      *
-     * @param int|string $perm Permissions as octal number
+     * @param  int|string $perm Permissions as octal number
      * @return CaptureCache
      */
     public function setFilePerm($perm)
@@ -194,7 +221,7 @@ class CaptureCache extends AbstractPattern
         if (is_string($perm)) {
             $perm = octdec($perm);
         } else {
-            $perm = (int)$perm;
+            $perm = (int) $perm;
         }
 
         // use umask
@@ -214,7 +241,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Set file umask
      *
-     * @param int|string $umask Umask as octal number
+     * @param  int|string $umask Umask as octal number
      * @return CaptureCache
      */
     public function setFileUmask($umask)
@@ -222,15 +249,15 @@ class CaptureCache extends AbstractPattern
         if (is_string($umask)) {
             $umask = octdec($umask);
         } else {
-            $umask = (int)$umask;
+            $umask = (int) $umask;
         }
         if ((~$umask & 0600) != 0600 ) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid file umask or file permission: '
               . 'need permissions to read and write files by owner'
             );
         } elseif ((~$umask & 0111) > 0) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid file umask or file permission: '
               . 'executable cache files are not allowed'
             );
@@ -253,12 +280,12 @@ class CaptureCache extends AbstractPattern
     /**
      * Set file locking
      *
-     * @param bool $flag
+     * @param  bool $flag
      * @return CaptureCache
      */
     public function setFileLocking($flag)
     {
-        $this->fileLocking = (boolean)$flag;
+        $this->fileLocking = (bool) $flag;
         return $this;
     }
 
@@ -275,12 +302,12 @@ class CaptureCache extends AbstractPattern
     /**
      * Set index filename
      *
-     * @param string $filename
+     * @param  string $filename
      * @return CaptureCache
      */
     public function setIndexFilename($filename)
     {
-        $this->indexFilename = (string)$filename;
+        $this->indexFilename = (string) $filename;
         return $this;
     }
 
@@ -297,7 +324,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Set a storage for tagging or remove the storage
      *
-     * @param null|StorageAdapter $storage
+     * @param  null|StorageAdapter $storage
      * @return CaptureCache
      */
     public function setTagStorage(StorageAdapter $storage = null)
@@ -319,13 +346,13 @@ class CaptureCache extends AbstractPattern
     /**
      * Set cache item key to store tags
      *
-     * @param $tagKey string
+     * @param  $tagKey string
      * @return CaptureCache
      */
     public function setTagKey($tagKey)
     {
         if (($tagKey = (string)$tagKey) === '') {
-            throw new InvalidArgumentException("Missing tag key '{$tagKey}'");
+            throw new Exception\InvalidArgumentException("Missing tag key '{$tagKey}'");
         }
 
         $this->tagKey = $tagKey;
@@ -345,7 +372,7 @@ class CaptureCache extends AbstractPattern
     /**
      * Set tags to store
      *
-     * @param array $tags
+     * @param  array $tags
      * @return CaptureCache
      */
     public function setTags(array $tags)
@@ -367,14 +394,14 @@ class CaptureCache extends AbstractPattern
     /**
      * Start the cache
      *
-     * @param string $pageId  Page identifier
-     * @param array  $options Options
+     * @param  string $pageId  Page identifier
+     * @param  array  $options Options
      * @return boolean false
      */
     public function start($pageId = null, array $options = array())
     {
         if ($this->pageId !== null) {
-            throw new RuntimeException("Capturing already stated with page id '{$this->pageId}'");
+            throw new Exception\RuntimeException("Capturing already stated with page id '{$this->pageId}'");
         }
 
         if (isset($options['tags'])) {
@@ -383,7 +410,7 @@ class CaptureCache extends AbstractPattern
         }
 
         if ($this->getTags() && !$this->getTagStorage()) {
-            throw new RuntimeException('Tags are defined but missing a tag storage');
+            throw new Exception\RuntimeException('Tags are defined but missing a tag storage');
         }
 
         if (($pageId = (string)$pageId) === '') {
@@ -400,10 +427,10 @@ class CaptureCache extends AbstractPattern
     /**
      * Get from cache
      *
-     * @param null|string $pageId
-     * @param array $options
+     * @param  null|string $pageId
+     * @param  array $options
      * @return bool|string
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     public function get($pageId = null, array $options = array())
     {
@@ -418,7 +445,7 @@ class CaptureCache extends AbstractPattern
         if (file_exists($file)) {
             if (($content = @file_get_contents($file)) === false) {
                 $lastErr = error_get_last();
-                throw new RuntimeException("Failed to read cached pageId '{$pageId}': {$lastErr['message']}");
+                throw new Exception\RuntimeException("Failed to read cached pageId '{$pageId}': {$lastErr['message']}");
             }
             return $content;
         }
@@ -429,8 +456,8 @@ class CaptureCache extends AbstractPattern
     /**
      * Checks if a cache with given id exists
      *
-     * @param null|string $pageId
-     * @param array $options
+     * @param  null|string $pageId
+     * @param  array $options
      * @return bool
      */
     public function exists($pageId = null, array $options = array())
@@ -449,9 +476,9 @@ class CaptureCache extends AbstractPattern
     /**
      * Remove from cache
      *
-     * @param null|string $pageId
-     * @param array $options
-     * @throws RuntimeException
+     * @param  null|string $pageId
+     * @param  array $options
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function remove($pageId = null, array $options = array())
@@ -467,7 +494,7 @@ class CaptureCache extends AbstractPattern
         if (file_exists($file)) {
             if (!@unlink($file)) {
                 $lastErr = error_get_last();
-                throw new RuntimeException("Failed to remove cached pageId '{$pageId}': {$lastErr['message']}");
+                throw new Exception\RuntimeException("Failed to remove cached pageId '{$pageId}': {$lastErr['message']}");
             }
         }
     }
@@ -544,7 +571,7 @@ class CaptureCache extends AbstractPattern
      * Save the cache
      *
      * @param  $output
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function save($output)
     {
@@ -554,7 +581,7 @@ class CaptureCache extends AbstractPattern
             $oldUmask = umask($this->getDirUmask());
             if (!@mkdir($fullPath, 0777, true)) {
                 $lastErr = error_get_last();
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     "Can't create directory '{$fullPath}': {$lastErr['message']}"
                 );
             }
@@ -594,7 +621,7 @@ class CaptureCache extends AbstractPattern
      *
      * @param  string $file  File complete path
      * @param  string $data  Data to write
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function putFileContent($file, $data)
     {
@@ -607,8 +634,7 @@ class CaptureCache extends AbstractPattern
         if ( $put < strlen((binary)$data) ) {
             $lastErr = error_get_last();
             @unlink($file); // remove old or incomplete written file
-            throw new RuntimeException($lastErr['message']);
+            throw new Exception\RuntimeException($lastErr['message']);
         }
     }
-
 }

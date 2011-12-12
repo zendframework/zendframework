@@ -1,13 +1,37 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Pattern;
-use Zend\Cache,
-    Zend\Cache\Exception\RuntimeException,
-    Zend\Cache\Exception\InvalidArgumentException;
 
+use Zend\Cache\Exception;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class ObjectCache extends CallbackCache
 {
-
     /**
      * The entity
      *
@@ -53,17 +77,17 @@ class ObjectCache extends CallbackCache
     /**
      * Constructor
      *
-     * @param array|Traversable $options
-     * @throws InvalidArgumentException
+     * @param array|\Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
         parent::__construct($options);
 
         if (!$this->getEntity()) {
-            throw new InvalidArgumentException("Missing option 'entity'");
+            throw new Exception\InvalidArgumentException("Missing option 'entity'");
         } elseif (!$this->getStorage()) {
-            throw new InvalidArgumentException("Missing option 'storage'");
+            throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
     }
 
@@ -87,13 +111,13 @@ class ObjectCache extends CallbackCache
     /**
      * Set the entity to cache
      *
-     * @param object $entity
-     * @return Zend\Cache\Pattern\ObjectCache
+     * @param  object $entity
+     * @return ObjectCache
      */
     public function setEntity($entity)
     {
         if (!is_object($entity)) {
-            throw new InvalidArgumentException('Invalid entity, must be an object');
+            throw new Exception\InvalidArgumentException('Invalid entity, must be an object');
         }
         $this->entity = $entity;
         return $this;
@@ -117,14 +141,14 @@ class ObjectCache extends CallbackCache
      *
      * NOTE: This option has no effect if callback_key was given.
      *
-     * @param null|string $key The key part as string or NULL to auto-generate
-     * @return Zend\Cache\Pattern\ObjectCache
-     * @see generateKey
+     * @param  null|string $key The key part as string or NULL to auto-generate
+     * @return ObjectCache
+     * @see    generateKey()
      */
     public function setEntityKey($key)
     {
         if ($key !== null) {
-            $this->entityKey = (string)$key;
+            $this->entityKey = (string) $key;
         } else {
             $this->entityKey = null;
         }
@@ -136,7 +160,7 @@ class ObjectCache extends CallbackCache
      * Get the entity key part.
      *
      * @return null|string
-     * @see setEntityKey
+     * @see    setEntityKey()
      */
     public function getEntityKey()
     {
@@ -146,12 +170,12 @@ class ObjectCache extends CallbackCache
     /**
      * Enable or disable caching of methods by default.
      *
-     * @param boolean $flag
-     * @return Zend\Cache\Pattern\ObjectCache
+     * @param  boolean $flag
+     * @return ObjectCache
      */
     public function setCacheByDefault($flag)
     {
-        $this->cacheByDefault = (bool)$flag;
+        $this->cacheByDefault = (bool) $flag;
         return $this;
     }
 
@@ -168,12 +192,12 @@ class ObjectCache extends CallbackCache
     /**
      * Enable cache methods
      *
-     * @param string[] $methods
-     * @return Zend\Cache\Pattern\ObjectCache
+     * @param  string[] $methods
+     * @return ObjectCache
      */
     public function setCacheMethods(array $methods)
     {
-        $this->cacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->cacheMethods = array_values(array_unique(array_map(function($method) {
             $method = strtolower($method);
 
             switch ($method) {
@@ -181,7 +205,7 @@ class ObjectCache extends CallbackCache
                 case '__get':
                 case '__unset':
                 case '__isset':
-                    throw new InvalidArgumentException(
+                    throw new Exception\InvalidArgumentException(
                         "Magic properties are handled by option 'cache_magic_properties'"
                     );
             }
@@ -205,12 +229,12 @@ class ObjectCache extends CallbackCache
     /**
      * Disable cache methods
      *
-     * @param string[] $methods
-     * @return Zend\Cache\Pattern\ObjectCache
+     * @param  string[] $methods
+     * @return ObjectCache
      */
     public function setNonCacheMethods(array $methods)
     {
-        $this->nonCacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->nonCacheMethods = array_values(array_unique(array_map(function($method) {
             $method = strtolower($method);
 
             switch ($method) {
@@ -218,7 +242,7 @@ class ObjectCache extends CallbackCache
                 case '__get':
                 case '__unset':
                 case '__isset':
-                    throw new InvalidArgumentException(
+                    throw new Exception\InvalidArgumentException(
                         "Magic properties are handled by option 'cache_magic_properties'"
                     );
             }
@@ -242,12 +266,12 @@ class ObjectCache extends CallbackCache
     /**
      * Enable or disable caching of magic property calls
      *
-     * @param boolean $flag
-     * @return Zend\Cache\Pattern\ObjectCache
+     * @param  boolean $flag
+     * @return ObjectCache
      */
     public function setCacheMagicProperties($flag)
     {
-        $this->cacheMagicProperties = (bool)$flag;
+        $this->cacheMagicProperties = (bool) $flag;
         return $this;
     }
 
@@ -268,7 +292,7 @@ class ObjectCache extends CallbackCache
      * @param  array  $args    Method arguments
      * @param  array  $options Cache options
      * @return mixed
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function call($method, array $args = array(), array $options = array())
     {
@@ -283,8 +307,9 @@ class ObjectCache extends CallbackCache
 
                 $object->{$property} = $value;
 
-                if ( !$this->getCacheMagicProperties()
-                  || property_exists($object, $property) ) {
+                if (!$this->getCacheMagicProperties()
+                    || property_exists($object, $property) 
+                ) {
                     // no caching if property isn't magic
                     // or caching magic properties is disabled
                     return;
@@ -306,8 +331,9 @@ class ObjectCache extends CallbackCache
             case '__get':
                 $property = array_shift($args);
 
-                if ( !$this->getCacheMagicProperties()
-                  || property_exists($object, $property)) {
+                if (!$this->getCacheMagicProperties()
+                    || property_exists($object, $property)
+                ) {
                     // no caching if property isn't magic
                     // or caching magic properties is disabled
                     return $object->{$property};
@@ -316,8 +342,10 @@ class ObjectCache extends CallbackCache
                 array_unshift($args, $property);
 
                 if (!isset($options['callback_key'])) {
-                    if ( (isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
-                      || ($entityKey = $this->getEntityKey() !== null)) {
+                    if ((isset($options['entity_key']) 
+                        && ($entityKey = $options['entity_key']) !== null)
+                        || ($entityKey = $this->getEntityKey() !== null)
+                    ) {
                         $options['callback_key'] = $entityKey . '::' . strtolower($method);
                         unset($options['entity_key']);
                     }
@@ -328,16 +356,19 @@ class ObjectCache extends CallbackCache
            case '__isset':
                 $property = array_shift($args);
 
-                if ( !$this->getCacheMagicProperties()
-                  || property_exists($object, $property)) {
+                if (!$this->getCacheMagicProperties()
+                    || property_exists($object, $property)
+                ) {
                     // no caching if property isn't magic
                     // or caching magic properties is disabled
                     return isset($object->{$property});
                 }
 
                 if (!isset($options['callback_key'])) {
-                    if ( (isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
-                      || ($entityKey = $this->getEntityKey() !== null)) {
+                    if ((isset($options['entity_key']) 
+                        && ($entityKey = $options['entity_key']) !== null)
+                        || ($entityKey = $this->getEntityKey() !== null)
+                    ) {
                         $options['callback_key'] = $entityKey . '::' . strtolower($method);
                         unset($options['entity_key']);
                     }
@@ -350,8 +381,9 @@ class ObjectCache extends CallbackCache
 
                 unset($object->{$property});
 
-                if ( !$this->getCacheMagicProperties()
-                  || property_exists($object, $property)) {
+                if (!$this->getCacheMagicProperties()
+                    || property_exists($object, $property)
+                ) {
                     // no caching if property isn't magic
                     // or caching magic properties is disabled
                     return;
@@ -381,14 +413,14 @@ class ObjectCache extends CallbackCache
         if (!$cache) {
             if ($args) {
                 return call_user_func_array(array($object, $method), $args);
-            } else {
-                return $object->{$method}();
-            }
+            } 
+            return $object->{$method}();
         }
 
         if (!isset($options['callback_key'])) {
-            if ( (isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
-              || ($entityKey = $this->getEntityKey() !== null)) {
+            if ((isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
+                || ($entityKey = $this->getEntityKey() !== null)
+            ) {
                 $options['callback_key'] = $entityKey . '::' . strtolower($method);
                 unset($options['entity_key']);
             }
@@ -404,7 +436,7 @@ class ObjectCache extends CallbackCache
      * @param  array    $args    Method arguments
      * @param  array    $options Options
      * @return string
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function generateKey($method, array $args = array(), array $options = array())
     {
@@ -425,7 +457,7 @@ class ObjectCache extends CallbackCache
      * @param  string $method  Method name to call
      * @param  array  $args    Method arguments
      * @return mixed
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function __call($method, array $args)
     {
@@ -440,9 +472,10 @@ class ObjectCache extends CallbackCache
      * is enabled and the property doesn't exist in real. If so it calls __set
      * and removes cached data of previous __get and __isset calls.
      *
-     * @param string $name
-     * @param mixed  $value
-     * @see http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
+     * @param  string $name
+     * @param  mixed  $value
+     * @return void
+     * @see    http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
      */
     public function __set($name, $value)
     {
@@ -456,7 +489,7 @@ class ObjectCache extends CallbackCache
      * Magic properties will be cached too if the option cacheMagicProperties
      * is enabled and the property doesn't exist in real. If so it calls __get.
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      * @see http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
      */
@@ -472,9 +505,9 @@ class ObjectCache extends CallbackCache
      * Magic properties will be cached too if the option cacheMagicProperties
      * is enabled and the property doesn't exist in real. If so it calls __get.
      *
-     * @param string $name
+     * @param  string $name
      * @return bool
-     * @see http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
+     * @see    http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
      */
     public function __isset($name)
     {
@@ -489,8 +522,9 @@ class ObjectCache extends CallbackCache
      * is enabled and the property doesn't exist in real. If so it removes
      * previous cached __isset and __get calls.
      *
-     * @param string $name
-     * @see http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
+     * @param  string $name
+     * @return void
+     * @see    http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
      */
     public function __unset($name)
     {
@@ -501,7 +535,7 @@ class ObjectCache extends CallbackCache
      * Handle casting to string
      *
      * @return string
-     * @see http://php.net/manual/language.oop5.magic.php#language.oop5.magic.tostring
+     * @see    http://php.net/manual/language.oop5.magic.php#language.oop5.magic.tostring
      */
     public function __toString()
     {
@@ -512,10 +546,10 @@ class ObjectCache extends CallbackCache
      * Handle invoke calls
      *
      * @return mixed
-     * @see http://php.net/manual/language.oop5.magic.php#language.oop5.magic.invoke
+     * @see    http://php.net/manual/language.oop5.magic.php#language.oop5.magic.invoke
      */
-    public function __invoke() {
+    public function __invoke() 
+    {
         return $this->call('__invoke', func_get_args());
     }
-
 }

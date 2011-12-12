@@ -1,14 +1,40 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Storage;
-use Exception,
-    ArrayObject;
 
+use ArrayObject,
+    Exception;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class ExceptionEvent extends Event
 {
-
     /**
-     * The exception  to be throw
+     * The exception to be thrown
      *
      * @var Exception
      */
@@ -47,9 +73,9 @@ class ExceptionEvent extends Event
     }
 
     /**
-     * Set the exception to be throw
+     * Set the exception to be thrown
      *
-     * @param Exception $exception
+     * @param  Exception $exception
      * @return ExceptionEvent
      */
     public function setException(Exception $exception)
@@ -59,7 +85,7 @@ class ExceptionEvent extends Event
     }
 
     /**
-     * Get the exception to be throw
+     * Get the exception to be thrown
      *
      * @return Exception
      */
@@ -71,12 +97,12 @@ class ExceptionEvent extends Event
     /**
      * Throw the exception or use the result
      *
-     * @param boolean $flag
+     * @param  boolean $flag
      * @return ExceptionEvent
      */
     public function setThrowException($flag)
     {
-        $this->throwException = (bool)$flag;
+        $this->throwException = (bool) $flag;
         return $this;
     }
 
@@ -93,7 +119,7 @@ class ExceptionEvent extends Event
     /**
      * Set the result/return value
      *
-     * @param mixed $value
+     * @param  mixed $value
      * @return ExceptionEvent
      */
     public function setResult(&$value)
@@ -111,6 +137,4 @@ class ExceptionEvent extends Event
     {
         return $this->result;
     }
-
 }
-

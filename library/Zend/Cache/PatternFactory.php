@@ -1,26 +1,49 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache;
-use Zend\Cache\Exception\RuntimeException,
-    Zend\Loader\Broker;
 
+use Zend\Loader\Broker;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class PatternFactory
 {
-
     /**
      * The pattern broker
      *
-     * @var null|Zend\Loader\Broker
+     * @var null|Broker
      */
     protected static $broker = null;
 
     /**
      * Instantiate a cache pattern
      *
-     * @param string|Zend\Cache\Pattern $patternName
-     * @param array|Zend\Config $options
-     * @return Zend\Cache\Pattern
-     * @throws Zend\Cache\RuntimeException
+     * @param  string|Pattern $patternName
+     * @param  array|Traversable $options
+     * @return Pattern
+     * @throws Exception\RuntimeException
      */
     public static function factory($patternName, $options = array())
     {
@@ -29,32 +52,32 @@ class PatternFactory
             return $patternName;
         }
 
-        return self::getBroker()->load($patternName, $options);
+        return static::getBroker()->load($patternName, $options);
     }
 
     /**
      * Get the pattern broker
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     public static function getBroker()
     {
-        if (self::$broker === null) {
-            self::$broker = self::_getDefaultBroker();
+        if (static::$broker === null) {
+            static::$broker = static::getDefaultBroker();
         }
 
-        return self::$broker;
+        return static::$broker;
     }
 
     /**
      * Set the pattern broker
      *
-     * @param Zend\Loader\Broker $broker
+     * @param  Broker $broker
      * @return void
      */
     public static function setBroker(Broker $broker)
     {
-        self::$broker = $broker;
+        static::$broker = $broker;
     }
 
     /**
@@ -64,17 +87,16 @@ class PatternFactory
      */
     public static function resetBroker()
     {
-        self::$broker = null;
+        static::$broker = null;
     }
 
     /**
      * Get internal pattern broker
      *
-     * @return Zend\Loader\Broker
+     * @return PatternBroker
      */
-    protected static function _getDefaultBroker()
+    protected static function getDefaultBroker()
     {
         return new PatternBroker();
     }
-
 }

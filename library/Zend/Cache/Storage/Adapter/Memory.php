@@ -1,15 +1,41 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Storage\Adapter;
-use Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Utils,
-    Zend\Cache\Exception\RuntimeException,
-    Zend\Cache\Exception\InvalidArgumentException,
-    Zend\Cache\Exception\ItemNotFoundException;
 
+use ArrayObject,
+    stdClass,
+    Zend\Cache\Exception,
+    Zend\Cache\Storage\Capabilities,
+    Zend\Cache\Utils;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Memory extends AbstractAdapter
 {
-
     /**
      * Data Array
      *
@@ -41,10 +67,10 @@ class Memory extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param string $key
-     * @param array $options
+     * @param  string $key
+     * @param  array $options
      * @return mixed Value on success and false on failure
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers getItem.pre(PreEvent)
      * @triggers getItem.post(PostEvent)
@@ -58,9 +84,9 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
-            'options' => & $options
+            'options' => & $options,
         ));
 
         try {
@@ -79,7 +105,7 @@ class Memory extends AbstractAdapter
 
             if (!$exist) {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
+                    throw new Exception\ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
                 }
                 $result = false;
             } else {
@@ -90,7 +116,7 @@ class Memory extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -104,10 +130,10 @@ class Memory extends AbstractAdapter
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
-     * @param array $keys
-     * @param array $options
+     * @param  array $keys
+     * @param  array $options
      * @return array Assoziative array of existing keys and values or false on failure
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers getItems.pre(PreEvent)
      * @triggers getItems.post(PostEvent)
@@ -120,9 +146,9 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'keys'    => & $keys,
-            'options' => & $options
+            'options' => & $options,
         ));
 
         try {
@@ -150,7 +176,7 @@ class Memory extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -164,10 +190,10 @@ class Memory extends AbstractAdapter
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
-     * @param string $key
-     * @param array $options
+     * @param  string $key
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers hasItem.pre(PreEvent)
      * @triggers hasItem.post(PostEvent)
@@ -181,7 +207,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
         ));
@@ -195,7 +221,7 @@ class Memory extends AbstractAdapter
             $result = $this->checkItem($key, $options);
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -211,10 +237,10 @@ class Memory extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param string $key
-     * @param array $options
+     * @param  string $key
+     * @param  array $options
      * @return array|boolean Metadata or false on failure
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers getMetadata.pre(PreEvent)
      * @triggers getMetadata.post(PostEvent)
@@ -228,7 +254,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
         ));
@@ -241,7 +267,7 @@ class Memory extends AbstractAdapter
 
             if (!$this->checkItem($key, $options)) {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Key '{$key}' not found on namespace '{$options['namespace']}'"
                     );
                 }
@@ -255,7 +281,7 @@ class Memory extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -271,11 +297,11 @@ class Memory extends AbstractAdapter
      *  - tags <array> optional
      *    - An array of tags
      *
-     * @param string $key
-     * @param mixed $value
-     * @param array $options
+     * @param  string $key
+     * @param  mixed $value
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers setItem.pre(PreEvent)
      * @triggers setItem.post(PostEvent)
@@ -289,7 +315,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
             'options' => & $options,
@@ -306,7 +332,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -320,10 +346,10 @@ class Memory extends AbstractAdapter
      *  - tags <array> optional
      *    - An array of tags
      *
-     * @param array $keyValuePairs
-     * @param array $options
+     * @param  array $keyValuePairs
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers setItems.pre(PreEvent)
      * @triggers setItems.post(PostEvent)
@@ -336,7 +362,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
         ));
@@ -359,7 +385,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -373,11 +399,11 @@ class Memory extends AbstractAdapter
      *  - tags <array> optional
      *    - An array of tags
      *
-     * @param string $key
-     * @param mixed  $value
-     * @param array  $options
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers addItem.pre(PreEvent)
      * @triggers addItem.post(PostEvent)
@@ -391,7 +417,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
             'options' => & $options,
@@ -405,13 +431,13 @@ class Memory extends AbstractAdapter
 
             $ns = $options['namespace'];
             if (isset($this->data[$ns][$key])) {
-                throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
+                throw new Exception\RuntimeException("Key '{$key}' already exists within namespace '$ns'");
             }
             $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -425,10 +451,10 @@ class Memory extends AbstractAdapter
      *  - tags <array> optional
      *    - An array of tags
      *
-     * @param array $keyValuePairs
-     * @param array $options
+     * @param  array $keyValuePairs
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers addItems.pre(PreEvent)
      * @triggers addItems.post(PostEvent)
@@ -441,7 +467,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
         ));
@@ -460,14 +486,14 @@ class Memory extends AbstractAdapter
             $data = & $this->data[$ns];
             foreach ($keyValuePairs as $key => $value) {
                 if (isset($data[$key])) {
-                    throw new RuntimeException("Key '{$key}' already exists within namespace '$ns'");
+                    throw new Exception\RuntimeException("Key '{$key}' already exists within namespace '$ns'");
                 }
                 $data[$key] = array($value, microtime(true), $options['tags']);
             }
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -481,11 +507,11 @@ class Memory extends AbstractAdapter
      *  - tags <array> optional
      *    - An array of tags
      *
-     * @param string $key
-     * @param mixed  $value
-     * @param array  $options
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers replaceItem.pre(PreEvent)
      * @triggers replaceItem.post(PostEvent)
@@ -499,7 +525,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
             'options' => & $options,
@@ -513,13 +539,13 @@ class Memory extends AbstractAdapter
 
             $ns = $options['namespace'];
             if (!isset($this->data[$ns][$key])) {
-                throw new ItemNotFoundException("Key '{$key}' doen't exists within namespace '$ns'");
+                throw new Exception\ItemNotFoundException("Key '{$key}' doen't exists within namespace '$ns'");
             }
             $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -533,10 +559,10 @@ class Memory extends AbstractAdapter
      *  - tags <array> optional
      *    - An array of tags
      *
-     * @param array $keyValuePairs
-     * @param array $options
+     * @param  array $keyValuePairs
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers replaceItems.pre(PreEvent)
      * @triggers replaceItems.post(PostEvent)
@@ -549,7 +575,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = \ArrayObject(array(
+        $args = ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
         ));
@@ -562,13 +588,13 @@ class Memory extends AbstractAdapter
 
             $ns = $options['namespace'];
             if (!isset($this->data[$ns])) {
-                throw new ItemNotFoundException("Namespace '$ns' doesn't exist");
+                throw new Exception\ItemNotFoundException("Namespace '$ns' doesn't exist");
             }
 
             $data = & $this->data[$ns];
             foreach ($keyValuePairs as $key => $value) {
                 if (!isset($data[$key])) {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Key '{$key}' doen't exists within namespace '$ns'"
                     );
                 }
@@ -577,7 +603,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -591,10 +617,10 @@ class Memory extends AbstractAdapter
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
-     * @param string $key
-     * @param array $options
+     * @param  string $key
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers touchItem.pre(PreEvent)
      * @triggers touchItem.post(PostEvent)
@@ -608,7 +634,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
         ));
@@ -625,7 +651,7 @@ class Memory extends AbstractAdapter
                 $this->data[$ns][$key][1] = microtime(true);
             } else {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Key '{$key}' not found within namespace '{$ns}'"
                     );
                 }
@@ -636,7 +662,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -650,10 +676,10 @@ class Memory extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param string $key
-     * @param array $options
+     * @param  string $key
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers removeItem.pre(PreEvent)
      * @triggers removeItem.post(PostEvent)
@@ -667,7 +693,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
             'options' => & $options,
         ));
@@ -689,13 +715,13 @@ class Memory extends AbstractAdapter
 
             } else {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
+                    throw new Exception\ItemNotFoundException("Key '{$key}' not found on namespace '{$ns}'");
                 }
             }
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -709,10 +735,10 @@ class Memory extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param array $keys
-     * @param array $options
+     * @param  array $keys
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers removeItems.pre(PreEvent)
      * @triggers removeItems.post(PostEvent)
@@ -725,7 +751,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'keys'    => & $keys,
             'options' => & $options,
         ));
@@ -739,7 +765,7 @@ class Memory extends AbstractAdapter
             $ns = $options['namespace'];
             if ($options['ignore_missing_items'] === false) {
                 if (!isset($this->data[$ns])) {
-                    throw new ItemNotFoundException("Namespace '{$ns}' is empty");
+                    throw new Exception\ItemNotFoundException("Namespace '{$ns}' is empty");
                 }
 
                 $data = &$this->data[$ns];
@@ -754,7 +780,7 @@ class Memory extends AbstractAdapter
                 }
 
                 if ($missingItems) {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Keys '" . implode("','", $missingItems) . "' not found on namespace '{$ns}'"
                     );
                 }
@@ -772,7 +798,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -786,11 +812,11 @@ class Memory extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param string $key
-     * @param int $value
-     * @param array $options
+     * @param  string $key
+     * @param  int $value
+     * @param  array $options
      * @return int|boolean The new value of false on failure
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers incrementItem.pre(PreEvent)
      * @triggers incrementItem.post(PostEvent)
@@ -804,8 +830,8 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $value = (int)$value;
-        $args  = new \ArrayObject(array(
+        $value = (int) $value;
+        $args  = new ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
             'options' => & $options,
@@ -825,7 +851,7 @@ class Memory extends AbstractAdapter
                 $result = $data[$key][0];
             } else {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Key '{$key}' not found within namespace '{$ns}'"
                     );
                 }
@@ -836,7 +862,7 @@ class Memory extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -850,11 +876,11 @@ class Memory extends AbstractAdapter
      *  - ignore_missing_items <boolean> optional
      *    - Throw exception on missing item or return false
      *
-     * @param string $key
-     * @param int $value
-     * @param array $options
+     * @param  string $key
+     * @param  int $value
+     * @param  array $options
      * @return int|boolean The new value or false or failure
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers decrementItem.pre(PreEvent)
      * @triggers decrementItem.post(PostEvent)
@@ -868,8 +894,8 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $value = (int)$value;
-        $args  = new \ArrayObject(array(
+        $value = (int) $value;
+        $args  = new\ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
             'options' => & $options,
@@ -889,7 +915,7 @@ class Memory extends AbstractAdapter
                 $result = $data[$key][0];
             } else {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Key '{$key}' not found within namespace '{$ns}'"
                     );
                 }
@@ -900,7 +926,7 @@ class Memory extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -919,10 +945,10 @@ class Memory extends AbstractAdapter
      *    - Tags to search for used with matching modes of
      *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
      *
-     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param array $options
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      * @see fetch()
      * @see fetchAll()
      *
@@ -937,12 +963,12 @@ class Memory extends AbstractAdapter
         }
 
         if ($this->stmtActive) {
-            throw new RuntimeException('Statement already in use');
+            throw new Exception\RuntimeException('Statement already in use');
         }
 
         $this->normalizeOptions($options);
         $this->normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
         ));
@@ -953,7 +979,7 @@ class Memory extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $tags = & $options['tags'];
+            $tags      = & $options['tags'];
             $emptyTags = $keys = array();
             foreach ($this->data[ $options['namespace'] ] as $key => &$item) {
 
@@ -1006,7 +1032,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1015,7 +1041,7 @@ class Memory extends AbstractAdapter
      * Fetches the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      * @see fetchAll()
      *
      * @triggers fetch.pre(PreEvent)
@@ -1029,7 +1055,7 @@ class Memory extends AbstractAdapter
         }
 
         try {
-            $args = new \ArrayObject();
+            $args    = new ArrayObject();
             $eventRs = $this->triggerPre(__FUNCTION__, $args);
             if ($eventRs->stopped()) {
                 return $eventRs->last();
@@ -1079,7 +1105,7 @@ class Memory extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1096,10 +1122,10 @@ class Memory extends AbstractAdapter
      *    - Tags to search for used with matching modes of
      *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
      *
-     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param array $options
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
      * @return boolean
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      * @see clearByNamespace()
      *
      * @triggers clear.pre(PreEvent)
@@ -1114,7 +1140,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
         ));
@@ -1135,7 +1161,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1152,8 +1178,8 @@ class Memory extends AbstractAdapter
      *    - Tags to search for used with matching modes of
      *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
      *
-     * @param int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param array $options
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
      * @return boolean
      * @throws Zend\Cache\Exception
      * @see clear()
@@ -1170,7 +1196,7 @@ class Memory extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeMatchingMode($mode, self::MATCH_EXPIRED, $options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
         ));
@@ -1191,7 +1217,7 @@ class Memory extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1209,7 +1235,7 @@ class Memory extends AbstractAdapter
      */
     public function getCapabilities()
     {
-        $args = new \ArrayObject();
+        $args = new ArrayObject();
 
         $eventRs = $this->triggerPre(__FUNCTION__, $args);
         if ($eventRs->stopped()) {
@@ -1217,7 +1243,7 @@ class Memory extends AbstractAdapter
         }
 
         if ($this->capabilities === null) {
-            $this->capabilityMarker = new \stdClass();
+            $this->capabilityMarker = new stdClass();
                 $this->capabilities = new Capabilities(
                 $this->capabilityMarker,
                 array(
@@ -1229,10 +1255,11 @@ class Memory extends AbstractAdapter
                         'string'   => true,
                         'array'    => true,
                         'object'   => true,
-                        'resource' => true
+                        'resource' => true,
                     ),
                     'supportedMetadata' => array(
-                        'mtime', 'tags'
+                        'mtime', 
+                        'tags',
                     ),
                     'maxTtl'             => PHP_INT_MAX,
                     'staticTtl'          => false,
@@ -1254,9 +1281,9 @@ class Memory extends AbstractAdapter
     /**
      * Get storage capacity.
      *
-     * @param array $options
+     * @param  array $options
      * @return array|boolean Capacity as array or false on failure
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      *
      * @triggers getCapacity.pre(PreEvent)
      * @triggers getCapacity.post(PostEvent)
@@ -1264,8 +1291,8 @@ class Memory extends AbstractAdapter
      */
     public function getCapacity(array $options = array())
     {
-        $args = new \ArrayObject(array(
-            'options' => & $options
+        $args = new ArrayObject(array(
+            'options' => & $options,
         ));
 
         $eventRs = $this->triggerPre(__FUNCTION__, $args);

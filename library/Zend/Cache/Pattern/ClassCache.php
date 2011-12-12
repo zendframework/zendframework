@@ -1,13 +1,37 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Pattern;
-use Zend\Cache,
-    Zend\Cache\Exception\RuntimeException,
-    Zend\Cache\Exception\InvalidArgumentException;
 
+use Zend\Cache,
+    Zend\Cache\Exception;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class ClassCache extends CallbackCache
 {
-
     /**
      * The entity
      *
@@ -39,17 +63,17 @@ class ClassCache extends CallbackCache
     /**
      * Constructor
      *
-     * @param array|Traversable $options
-     * @throws InvalidArgumentException
+     * @param  array|\Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
         parent::__construct($options);
 
         if (!$this->getEntity()) {
-            throw new InvalidArgumentException("Missing option 'entity'");
+            throw new Exception\InvalidArgumentException("Missing option 'entity'");
         } elseif (!$this->getStorage()) {
-            throw new InvalidArgumentException("Missing option 'storage'");
+            throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
     }
 
@@ -71,13 +95,13 @@ class ClassCache extends CallbackCache
     /**
      * Set the entity to cache
      *
-     * @param string $entity The entity as classname
-     * @return Zend\Cache\Pattern\ClassCache
+     * @param  string $entity The entity as classname
+     * @return ClassCache
      */
     public function setEntity($entity)
     {
         if (!is_string($entity)) {
-            throw new InvalidArgumentException('Invalid entity, must be a classname');
+            throw new Exception\InvalidArgumentException('Invalid entity, must be a classname');
         }
         $this->entity = $entity;
         return $this;
@@ -96,12 +120,12 @@ class ClassCache extends CallbackCache
     /**
      * Enable or disable caching of methods by default.
      *
-     * @param boolean $flag
-     * @return Zend\Cache\Pattern\ClassCache
+     * @param  boolean $flag
+     * @return ClassCache
      */
     public function setCacheByDefault($flag)
     {
-        $this->cacheByDefault = (bool)$flag;
+        $this->cacheByDefault = (bool) $flag;
         return $this;
     }
 
@@ -118,12 +142,12 @@ class ClassCache extends CallbackCache
     /**
      * Enable cache methods
      *
-     * @param string[] $methods
-     * @return Zend\Cache\Pattern\ClassCache
+     * @param  string[] $methods
+     * @return ClassCache
      */
     public function setCacheMethods(array $methods)
     {
-        $this->cacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->cacheMethods = array_values(array_unique(array_map(function($method) {
             return strtolower($method);
         }, $methods)));
 
@@ -143,12 +167,12 @@ class ClassCache extends CallbackCache
     /**
      * Disable cache methods
      *
-     * @param string[] $methods
-     * @return Zend\Cache\Pattern\ClassCache
+     * @param  string[] $methods
+     * @return ClassCache
      */
     public function setNonCacheMethods(array $methods)
     {
-        $this->nonCacheMethods = array_values(array_unique(array_map(function ($method) {
+        $this->nonCacheMethods = array_values(array_unique(array_map(function($method) {
             return strtolower($method);
         }, $methods)));
 
@@ -172,7 +196,7 @@ class ClassCache extends CallbackCache
      * @param  array  $args    Method arguments
      * @param  array  $options Cache options
      * @return mixed
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function call($method, array $args = array(), array $options = array())
     {
@@ -209,7 +233,7 @@ class ClassCache extends CallbackCache
      * @param  string   $method  The method name
      * @param  array    $args    Method arguments
      * @return string
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function generateKey($method, array $args = array(), array $options = array())
     {
@@ -230,7 +254,7 @@ class ClassCache extends CallbackCache
      * @param  string $method  Method name to call
      * @param  array  $args    Method arguments
      * @return mixed
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function __call($method, array $args)
     {
@@ -240,9 +264,10 @@ class ClassCache extends CallbackCache
     /**
      * Set a static property
      *
-     * @param string $name
-     * @param mixed  $value
-     * @see http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
+     * @param  string $name
+     * @param  mixed  $value
+     * @return void
+     * @see   http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
      */
     public function __set($name, $value)
     {
@@ -253,9 +278,9 @@ class ClassCache extends CallbackCache
     /**
      * Get a static property
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
-     * @see http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
+     * @see    http://php.net/manual/language.oop5.overloading.php#language.oop5.overloading.members
      */
     public function __get($name)
     {
@@ -266,7 +291,7 @@ class ClassCache extends CallbackCache
     /**
      * Is a static property exists.
      *
-     * @param string $name
+     * @param  string $name
      * @return bool
      */
     public function __isset($name)
@@ -278,12 +303,12 @@ class ClassCache extends CallbackCache
     /**
      * Unset a static property
      *
-     * @param string $name
+     * @param  string $name
+     * @return void
      */
     public function __unset($name)
     {
         $class = $this->getEntity();
         unset($class::$name);
     }
-
 }

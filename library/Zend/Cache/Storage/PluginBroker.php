@@ -14,24 +14,26 @@
  *
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Cache\Storage;
 
-use Zend\Loader,
-    Zend\Cache\Exception\RuntimeException;
+use Zend\Cache\Exception,
+    Zend\Loader\PluginBroker as BasePluginBroker;
 
 /**
  * Broker for cache storage plugin instances
  *
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PluginBroker extends Loader\PluginBroker
+class PluginBroker extends BasePluginBroker
 {
     /**
      * Default class loader
@@ -50,7 +52,9 @@ class PluginBroker extends Loader\PluginBroker
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Plugin) {
-            throw new RuntimeException('Cache storage plugins must implement Zend\Cache\Storage\Plugin');
+            throw new Exception\RuntimeException(
+                'Cache storage plugins must implement Zend\Cache\Storage\Plugin'
+            );
         }
         return true;
     }

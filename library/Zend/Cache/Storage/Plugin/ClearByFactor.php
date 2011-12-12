@@ -1,16 +1,42 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Storage\Plugin;
 
-use Zend\Cache\Storage\Plugin,
+use Traversable,
+    Zend\EventManager\EventCollection,
+    Zend\Cache\Exception,
     Zend\Cache\Storage\Adapter,
-    Zend\Cache\Storage\PostEvent,
-    Zend\Cache\InvalidArgumentAxception,
-    Zend\EventManager\EventCollection;
+    Zend\Cache\Storage\Plugin,
+    Zend\Cache\Storage\PostEvent;
 
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class ClearByFactor implements Plugin
 {
-
     /**
      * Automatic clearing factor
      *
@@ -35,7 +61,7 @@ class ClearByFactor implements Plugin
     /**
      * Constructor
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      * @return void
      */
     public function __construct($options = array())
@@ -46,13 +72,24 @@ class ClearByFactor implements Plugin
     /**
      * Set options
      *
-     * @param array|\Traversable $options
+     * @param  array|Traversable $options
      * @return ClearByFactor
      */
     public function setOptions($options)
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
         foreach ($options as $name => $value) {
             $m = 'set' . str_replace('_', '', $name);
+            if (!method_exists($this, $m)) {
+                continue;
+            }
             $this->$m($value);
         }
         return $this;
@@ -84,15 +121,17 @@ class ClearByFactor implements Plugin
     /**
      * Set automatic clearing factor
      *
-     * @param int $factor
-     * @return Zend\Cache\Storage\Plugin\ClearByFactor Fluent interface
-     * @throws InvalidArgumentException
+     * @param  int $factor
+     * @return ClearByFactor Fluent interface
+     * @throws Exception\InvalidArgumentException
      */
     public function setClearingFactor($factor)
     {
-        $factor = (int)$factor;
+        $factor = (int) $factor;
         if ($factor < 0) {
-            throw new InvalidArgumentAxception("Invalid clearing factor '{$factor}': must be greater or equal 0");
+            throw new Exception\InvalidArgumentAxception(
+                "Invalid clearing factor '{$factor}': must be greater or equal 0"
+            );
         }
         $this->clearingFactor = $factor;
 
@@ -112,27 +151,27 @@ class ClearByFactor implements Plugin
     /**
      * Set flag to clear items by namespace
      *
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Plugin\ClearByFactor Fluent interface
+     * @param  boolean $flag
+     * @return ClearByFactor Fluent interface
      */
     public function setClearByNamespace($flag)
     {
-        $this->clearByNamespace = $flag;
+        $this->clearByNamespace = (bool) $flag;
         return $this;
     }
 
     /**
      * Attach
      *
-     * @param EventCollection $eventCollection
+     * @param  EventCollection $eventCollection
      * @return ClearByFactor
-     * @throws LogicException
+     * @throws Exception\LogicException
      */
     public function attach(EventCollection $eventCollection)
     {
-        $index = \spl_object_hash($eventCollection);
+        $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
-            throw new LogicException('Plugin already attached');
+            throw new Exception\LogicException('Plugin already attached');
         }
 
         $handles = array();
@@ -149,15 +188,15 @@ class ClearByFactor implements Plugin
     /**
      * Detach
      *
-     * @param EventCollection $eventCollection
+     * @param  EventCollection $eventCollection
      * @return ClearByFactor
-     * @throws LogicException
+     * @throws Exception\LogicException
      */
     public function detach(EventCollection $eventCollection)
     {
-        $index = \spl_object_hash($eventCollection);
+        $index = spl_object_hash($eventCollection);
         if (!isset($this->handles[$index])) {
-            throw new LogicException('Plugin not attached');
+            throw new Exception\LogicException('Plugin not attached');
         }
 
         // detach all handles of this index
@@ -174,7 +213,7 @@ class ClearByFactor implements Plugin
     /**
      * Clear storage by factor on a success _RESULT_
      *
-     * @param Zend\Cache\Storage\PostEvent $event
+     * @param  PostEvent $event
      * @return void
      */
     public function clearByFactor(PostEvent $event)
@@ -189,5 +228,4 @@ class ClearByFactor implements Plugin
             }
         }
     }
-
 }

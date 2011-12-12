@@ -14,20 +14,20 @@
  *
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Cache;
-use Zend\Loader\PluginBroker,
-    Zend\Cache\Exception\RuntimeException;
+
+use Zend\Loader\PluginBroker;
 
 /**
  * Broker for cache pattern instances
  *
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PatternBroker extends PluginBroker
@@ -42,12 +42,12 @@ class PatternBroker extends PluginBroker
      *
      * @param  mixed $plugin
      * @return true
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     protected function validatePlugin($plugin)
     {
         if (!$plugin instanceof Pattern) {
-            throw new RuntimeException('Cache pattern must implement Zend\Cache\Pattern');
+            throw new Exception\RuntimeException('Cache pattern must implement Zend\Cache\Pattern');
         }
         return true;
     }

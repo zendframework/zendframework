@@ -1,17 +1,43 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Pattern;
-use Zend\Cache,
-    Zend\Cache\Exception\RuntimeException,
-    Zend\Cache\Exception\InvalidArgumentException;
 
+use Zend\Cache\Exception,
+    Zend\Cache\StorageFactory,
+    Zend\Cache\Storage\Adapter as StorageAdapter;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class CallbackCache extends AbstractPattern
 {
-
     /**
      * The storage adapter
      *
-     * @var Zend\Cache\Storage\Adapter
+     * @var StorageAdapter
      */
     protected $storage;
 
@@ -25,15 +51,15 @@ class CallbackCache extends AbstractPattern
     /**
      * Constructor
      *
-     * @param array|Traversable $options
-     * @throws InvalidArgumentException
+     * @param  array|\Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
         parent::__construct($options);
 
         if (!$this->getStorage()) {
-            throw new InvalidArgumentException("Missing option 'storage'");
+            throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
     }
 
@@ -53,7 +79,7 @@ class CallbackCache extends AbstractPattern
     /**
      * Get cache storage
      *
-     * return Zend\Cache\Storage\Adapter
+     * return StorageAdapter
      */
     public function getStorage()
     {
@@ -63,17 +89,17 @@ class CallbackCache extends AbstractPattern
     /**
      * Set cache storage
      *
-     * @param Zend\Cache\Storage\Adapter|array|string $storage
-     * @return Zend\Cache\Pattern\PatternInterface
+     * @param  StorageAdapter|array|string $storage
+     * @return CallbackCache
      */
     public function setStorage($storage)
     {
         if (is_array($storage)) {
-            $storage = Cache\StorageFactory::factory($storage);
+            $storage = StorageFactory::factory($storage);
         } elseif (is_string($storage)) {
-            $storage = Cache\StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof Cache\Storage\Adapter) ) {
-            throw new InvalidArgumentException(
+            $storage = StorageFactory::adapterFactory($storage);
+        } elseif ( !($storage instanceof StorageAdapter) ) {
+            throw new Exception\InvalidArgumentException(
                 'The storage must be an instanceof Zend\Cache\Storage\Adapter '
               . 'or an array passed to Zend\Cache\Storage::factory '
               . 'or simply the name of the storage adapter'
@@ -91,7 +117,7 @@ class CallbackCache extends AbstractPattern
      */
     public function setCacheOutput($flag)
     {
-        $this->cacheOutput = (bool)$flag;
+        $this->cacheOutput = (bool) $flag;
         return $this;
     }
 
@@ -112,14 +138,14 @@ class CallbackCache extends AbstractPattern
      * @param  array      $args      Callback arguments
      * @param  array      $options   Options
      * @return mixed Result
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function call($callback, array $args = array(), array $options = array())
     {
         $key = $this->_generateKey($callback, $args, $options);
         if ( ($rs = $this->getStorage()->getItem($key, $options)) !== false ) {
             if (!isset($rs[0])) {
-                throw new RuntimeException("Invalid cached data for key '{$key}'");
+                throw new Exception\RuntimeException("Invalid cached data for key '{$key}'");
             }
 
             echo isset($rs[1]) ? $rs[1] : '';
@@ -163,7 +189,7 @@ class CallbackCache extends AbstractPattern
      * @param  string $function  Function name to call
      * @param  array  $args      Function arguments
      * @return mixed
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function __call($function, array $args)
     {
@@ -184,7 +210,7 @@ class CallbackCache extends AbstractPattern
      * @param  array      $args      Callback arguments
      * @param  array      $options   Options
      * @return string
-     * @throws Zend\Cache\Exception
+     * @throws Exception
      */
     public function generateKey($callback, array $args = array(), array $options = array())
     {
@@ -199,8 +225,8 @@ class CallbackCache extends AbstractPattern
      * @param  array      $args      Callback arguments
      * @param  array      $options   Options
      * @return string
-     * @throws \Zend\Cache\Exception\InvalidArgumentException
-     * @throws \Zend\Cache\Exception\RuntimeException
+     * @throws Exception\InvalidArgumentException
+     * @throws Exception\RuntimeException
      */
     protected function _generateKey($callback, array $args, array $options)
     {
@@ -212,11 +238,11 @@ class CallbackCache extends AbstractPattern
             $callbackKey = (string)$options['callback_key'];
 
             if (!is_callable($callback, false)) {
-                throw new InvalidArgumentException('Invalid callback');
+                throw new Exception\InvalidArgumentException('Invalid callback');
             }
         } else {
             if (!is_callable($callback, false, $callbackKey)) {
-                throw new InvalidArgumentException('Invalid callback');
+                throw new Exception\InvalidArgumentException('Invalid callback');
             }
 
             // functions, methods and classnames are case-insensitive
@@ -232,14 +258,14 @@ class CallbackCache extends AbstractPattern
                 try {
                     $serializedObject = @serialize($object);
                 } catch (\Exception $e) {
-                    throw new RuntimeException(
+                    throw new Exception\RuntimeException(
                         "Can't serialize callback: see previous exception"
                     , 0, $e);
                 }
 
                 if (!$serializedObject) {
                     $lastErr = error_get_last();
-                    throw new RuntimeException(
+                    throw new Exception\RuntimeException(
                         "Can't serialize callback: "
                         . $lastErr['message']
                     );
@@ -255,14 +281,14 @@ class CallbackCache extends AbstractPattern
             try {
                 $serializedArgs = @serialize(array_values($args));
             } catch (\Exception $e) {
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     "Can't serialize arguments: see previous exception"
                 , 0, $e);
             }
 
             if (!$serializedArgs) {
                 $lastErr = error_get_last();
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     "Can't serialize arguments: "
                     . $lastErr['message']
                 );
@@ -274,5 +300,4 @@ class CallbackCache extends AbstractPattern
         // merge and return the key parts
         return md5($callbackKey.$argumentKey);
     }
-
 }

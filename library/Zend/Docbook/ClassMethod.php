@@ -3,7 +3,8 @@
 namespace Zend\Docbook;
 
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Code\Reflection\MethodReflection as ReflectionMethod;
+    Zend\Code\Reflection\MethodReflection as ReflectionMethod,
+    Zend\Code\Scanner\Util as ScannerUtil;
 
 class ClassMethod
 {
@@ -201,36 +202,7 @@ class ClassMethod
                 continue;
             }
 
-            // Does it contain a namespace separator?
-            $pos = strpos($value, '\\');
-            if (false !== $pos) {
-                // Does it lead with a namespace separator?
-                if (0 === $pos) {
-                    $values[$index] = substr($value, 1);
-                    continue;
-                }
-
-                // Resolve class based on uses
-                $namespace = substr($value, 0, $pos);
-                $resolved  = $this->resolveClass($namespace);
-                if (false !== $resolved) {
-                    $values[$index] = $resolved . '\\' . substr($value, $pos);
-                    continue;
-                }
-
-                // Must be from current namespace
-                $values[$index] = $this->getNamespace() . '\\' . $value;
-                continue;
-            }
-
-            // Can we resolve it via an import?
-            $resolved = $this->resolveClass($value);
-            if (false !== $resolved) {
-                $values[$index] = $resolved;
-                continue;
-            }
-
-            // Otherwise, use as-is
+            $values[$index] = $this->resolveClass($value);
         }
 
         return implode('|', $values);
@@ -240,30 +212,67 @@ class ClassMethod
      * Attempt to resolve a class or namespace based on imports
      * 
      * @param  string $class 
-     * @return false|string False if unmatched, string namespace/classname on match
+     * @return string String namespace/classname
      */
     protected function resolveClass($class)
     {
-        $uses = $this->getUses();
-
-        foreach ($uses as $use) {
-            $namespace = $use['namespace'];
-
-            if (!empty($use['as'])) {
-                $as = $use['as'];
-            } else {
-                $as = $use['asResolved'];
-            }
-
-            if ($as && $class == $as) {
-                return $namespace;
-            }
-            if ($class == $namespace) {
-                return $namespace;
-            }
+        if ('\\' == substr($class, 0, 1)) {
+            return substr($class, 1);
         }
 
-        return false;
+        foreach ($this->getUses() as $import) {
+            // check for an "as". 
+            if (isset($import['as'])) {
+                $as = $import['as'];
+
+                // If it matches $class exactly, use the "use" value provided
+                if ($as == $class) {
+                    return $import['use'];
+                }
+
+                // If the first portion of $class matches, then resolve with 
+                // "use\\(classname - as)"
+                $initialSegment = substr($class, 0, (strlen($as) + 1));
+                if ($as . '\\' == $initialSegment) {
+                    return $import['use'] . '\\' . substr($class, (strlen($as) + 1));
+                }
+
+                // Otherwise, we know this is not a match
+                continue;
+            }
+
+            // get final segment of namespace provided in "use"
+            $use = $import['use'];
+            if (false === strstr($use, '\\')) {
+                $finalSegment = $use;
+            } else {
+                $finalSegment = substr($use, strrpos($use, '\\') + 1);
+            }
+            // if class === final segment, return full "use"
+            if ($class == $finalSegment) {
+                return $use;
+            }
+
+            // if initial segment of class === final segment, return use + (class - initial segment)
+            if (strstr($class, '\\')) {
+                $initialSegment = substr($class, 0, strpos($class, '\\'));
+                if ($finalSegment == $initialSegment) {
+                    return $use . '\\' . substr($class, strpos($class, '\\') + 1);
+                }
+            }
+
+            // Did not match... move to next
+        }
+
+        // check to see if a class by this name exists in the current namespace
+        // if so, resolve to "namespace\\classname"
+        $resolved = $this->getNamespace() . '\\' . $class;
+        if (class_exists($resolved)) {
+            return $resolved;
+        }
+
+        // Did not resolve; consider it fully resolved
+        return $class;
     }
 
     /**
@@ -321,6 +330,7 @@ class ClassMethod
         $rFile  = $rClass->getDeclaringFile();
 
         $this->uses = $rFile->getUses();
+
         return $this->uses;
     }
 

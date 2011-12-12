@@ -133,21 +133,34 @@ class Apc extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $args = new \ArrayObject(array(
+            'key'     => & $key,
+            'options' => & $options
+        ));
 
-        $value = apc_fetch($key, $success);
-        if (!$success) {
-            if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException("Key '{$key}' not found");
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-            return false;
-        }
 
-        if (array_key_exists('token', $options)) {
-            $options['token'] = $value;
-        }
+            $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            $result = apc_fetch($internalKey, $success);
+            if (!$success) {
+                if (!$options['ignore_missing_items']) {
+                    throw new ItemNotFoundException("Key '{$internalKey}' not found");
+                }
+                $result = false;
+            } else {
+                if (array_key_exists('token', $options)) {
+                    $options['token'] = $result;
+                }
+            }
 
-        return $value;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function getItems(array $keys, array $options = array())
@@ -157,27 +170,41 @@ class Apc extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        foreach ($keys as &$key) {
-            $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
-        }
+        $args = new \ArrayObject(array(
+            'keys'    => & $keys,
+            'options' => & $options
+        ));
 
-        $ret = apc_fetch($keys);
-
-        if (!$options['ignore_missing_items']) {
-            if (count($keys) != count($ret)) {
-                $missing = implode("', '", array_diff($keys, array_keys($ret)));
-                throw new ItemNotFoundException('Keys not found: ' . $missing);
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
             }
-        }
 
-        // remove namespace prefix
-        $nsl  = strlen($options['namespace']);
-        $ret2 = array();
-        foreach ($ret as $key => &$value) {
-            $ret2[ substr($key, $nsl+1) ] = $value;
-        }
+            $internalKeys = array();
+            foreach ($keys as $key) {
+                $internalKeys[] = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            }
 
-        return $ret2;
+            $fetch = apc_fetch($internalKeys);
+            if (!$options['ignore_missing_items']) {
+                if (count($keys) != count($fetch)) {
+                    $missing = implode("', '", array_diff($internalKeys, array_keys($fetch)));
+                    throw new ItemNotFoundException('Keys not found: ' . $missing);
+                }
+            }
+
+            // remove namespace prefix
+            $prefixL = strlen($options['namespace'] . $this->getNamespaceSeparator());
+            $result  = array();
+            foreach ($fetch as $internalKey => &$value) {
+                $result[ substr($internalKey, $prefixL) ] = $value;
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function hasItem($key, array $options = array())
@@ -188,9 +215,24 @@ class Apc extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $args = new \ArrayObject(array(
+            'key'     => & $key,
+            'options' => & $options
+        ));
 
-        return apc_exists($key);
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            $result = apc_exists($internalKey);
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function hasItems(array $keys, array $options = array())
@@ -200,11 +242,35 @@ class Apc extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        foreach ($keys as &$key) {
-            $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
-        }
+        $args = new \ArrayObject(array(
+            'keys'    => & $keys,
+            'options' => & $options
+        ));
 
-        return apc_exists($keys);
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $internalKeys = array();
+            foreach ($keys as $key) {
+                $internalKeys[] = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            }
+
+            $exists  = apc_exists($internalKeys);
+            $result  = array();
+            $prefixL = strlen($options['namespace'] . $this->getNamespaceSeparator());
+            foreach ($exists as $internalKey => $bool) {
+                if ($bool === true) {
+                    $result[] = substr($internalKey, $prefixL);
+                }
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     public function getMetadata($key, array $options = array())

@@ -38,7 +38,7 @@
 use Zend\Console\Getopt,
     Zend\Docbook\ClassParser,
     Zend\Docbook\SkeletonGenerator,
-    Zend\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection as ReflectionClass;
 
 $libPath = __DIR__ . '/../library';
 if (!is_dir($libPath)) {

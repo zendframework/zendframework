@@ -3,7 +3,7 @@
 namespace Zend\Docbook;
 
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Reflection\ReflectionMethod;
+    Zend\Code\Reflection\MethodReflection as ReflectionMethod;
 
 class ClassMethod
 {

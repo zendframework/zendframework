@@ -92,18 +92,21 @@ if ($validator->isValid($hostname)) {
             The <classname>Zend_Validate_Hostname</classname> constants are:
             <constant>ALLOW_DNS</constant> to allow only
             <acronym>DNS</acronym> hostnames, <constant>ALLOW_IP</constant> to allow IP addresses,
-            <constant>ALLOW_LOCAL</constant> to allow local network names, and
-            <constant>ALLOW_ALL</constant> to allow all three above types.
+            <constant>ALLOW_LOCAL</constant> to allow local network names,
+            <constant>ALLOW_URI</constant> to allow
+            <ulink url="http://tools.ietf.org/html/rfc3986">RFC3986</ulink>-compliant addresses,
+            and <constant>ALLOW_ALL</constant> to allow all four above types.
         </para>
 
-        <para>
-            Additionally there is <constant>ALLOW_URI</constant> which allows to check hostnames
-            according to <link linkend="http://tools.ietf.org/html/rfc3986">RFC3986</link>. These
-            are registered names which are used by <acronym>WINS</acronym>, NetInfo and also local
-            hostnames like those defined within your <filename>.hosts</filename> file. For security
-            reasons <constant>ALLOW_URI</constant> is not contained within
-            <constant>ALLOW_ALL</constant>.
-        </para>
+        <note>
+            <title>Additional Information on ALLOW_URI</title>
+            <para>
+                <constant>ALLOW_URI</constant> allows to check hostnames
+                according to <ulink url="http://tools.ietf.org/html/rfc3986">RFC3986</ulink>. These
+                are registered names which are used by <acronym>WINS</acronym>, NetInfo and also local
+                hostnames like those defined within your <filename>.hosts</filename> file.
+            </para>
+        </note>
 
         <para>
             To just check for IP addresses you can use the example below:

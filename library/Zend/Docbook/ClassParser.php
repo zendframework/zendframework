@@ -4,7 +4,7 @@ namespace Zend\Docbook;
 
 use ReflectionMethod,
     Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection as ReflectionClass;
 
 class ClassParser
 {

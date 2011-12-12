@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.storage.plugin">
+    <info>
+        <title>Zend\Cache\Storage\Plugin</title>
+    </info>
+
+    <section xml:id="zend.cache.storage.plugin.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <title/>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.storage.plugin.methods.__construct">
+                <term>
+                    <methodsynopsis>
+                        <methodname>__construct</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable $options = array (
+)</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Constructor</para>
+                    <para></para>
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.methods.set-options">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setOptions</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable $options</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set options</para>
+                    <para></para>
+                    <para>Returns Zend\Cache\Storage\Plugin</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.methods.get-options">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getOptions</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get options</para>
+                    <para></para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.event-manager.listener-aggregate.methods.attach">
+                <term>
+                    <methodsynopsis>
+                        <methodname>attach</methodname>
+                        <methodparam>
+                            <funcparams>EventCollection $events</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Attach one or more listeners</para>
+                    <para></para>
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.event-manager.listener-aggregate.methods.detach">
+                <term>
+                    <methodsynopsis>
+                        <methodname>detach</methodname>
+                        <methodparam>
+                            <funcparams>EventCollection $events</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Detach all previously attached listeners</para>
+                    <para></para>
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.storage.plugin.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+    </section>
+</section>

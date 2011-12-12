@@ -1,24 +1,50 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache;
-use Zend\Cache\Storage,
-    Zend\Cache\Exception\InvalidArgumentException,
-    Zend\Loader\Broker,
-    Zend\Config;
 
+use Traversable,
+    Zend\Loader\Broker,
+    Zend\Stdlib\IteratorToArray;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class StorageFactory
 {
     /**
      * Broker for loading adapters
      *
-     * @var null|Zend\Loader\Broker
+     * @var null|Broker
      */
     protected static $adapterBroker = null;
 
     /**
      * Broker for loading plugins
      *
-     * @var null|Zend\Loader\Broker
+     * @var null|Broker
      */
     protected static $pluginBroker = null;
 
@@ -26,29 +52,31 @@ class StorageFactory
      * The storage factory
      * This can instantiate storage adapters and plugins.
      *
-     * @param array|\Zend\Config $cfg
-     * @return Zend\Cache\Storage\Adapter
-     * @throws InvalidArgumentException
+     * @param array|Traversable $cfg
+     * @return Storage\Adapter
+     * @throws Exception\InvalidArgumentException
      */
     public static function factory($cfg)
     {
-        if ($cfg instanceof Config\Config) {
-            $cfg = $cfg->toArray();
-        } elseif (!is_array($cfg)) {
-            throw new InvalidArgumentException(
-                'The factory needs an instance of \Zend\Config\Config '
-              . 'or an associative array as argument'
+        if ($cfg instanceof Traversable) {
+            $cfg = IteratorToArray::convert($cfg);
+        }
+
+        if (!is_array($cfg)) {
+            throw new Exception\InvalidArgumentException(
+                'The factory needs an associative array '
+                . 'or a Traversable object as an argument'
             );
         }
 
         // instantiate the adapter
         if (!isset($cfg['adapter'])) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Missing "adapter"'
             );
         } elseif (is_array($cfg['adapter'])) {
             if (!isset($cfg['adapter']['name'])) {
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                     'Missing "adapter.name"'
                 );
             }
@@ -56,15 +84,15 @@ class StorageFactory
             $name    = $cfg['adapter']['name'];
             $options = isset($cfg['adapter']['options'])
                      ? $cfg['adapter']['options'] : array();
-            $adapter = self::adapterFactory($name, $options);
+            $adapter = static::adapterFactory($name, $options);
         } else {
-            $adapter = self::adapterFactory($cfg['adapter']);
+            $adapter = static::adapterFactory($cfg['adapter']);
         }
 
         // add plugins
         if (isset($cfg['plugins'])) {
             if (!is_array($cfg['plugins'])) {
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                     'Plugins needs to be an array'
                 );
             }
@@ -73,14 +101,14 @@ class StorageFactory
                 if (is_string($k)) {
                     $name = $k;
                     if (!is_array($v)) {
-                        throw new InvalidArgumentException(
+                        throw new Exception\InvalidArgumentException(
                             "'plugins.{$k}' needs to be an array"
                         );
                     }
                     $options = $v;
                 } elseif (is_array($v)) {
                     if (!isset($v['name'])) {
-                        throw new InvalidArgumentException("Invalid plugins[{$k}] or missing plugins[{$k}].name");
+                        throw new Exception\InvalidArgumentException("Invalid plugins[{$k}] or missing plugins[{$k}].name");
                     }
                     $name = (string)$v['name'];
                     if (isset($v['options'])) {
@@ -93,7 +121,7 @@ class StorageFactory
                     $options = array();
                 }
 
-                $plugin = self::pluginFactory($name, $options);
+                $plugin = static::pluginFactory($name, $options);
                 $adapter->addPlugin($plugin);
             }
         }
@@ -101,7 +129,7 @@ class StorageFactory
         // set adapter or plugin options
         if (isset($cfg['options'])) {
             if (!is_array($cfg['options'])) {
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                     'Options needs to be an array'
                 );
             }
@@ -115,10 +143,10 @@ class StorageFactory
     /**
      * Instantiate a storage adapter
      *
-     * @param string|Zend\Cache\Storage\Adapter $adapterName
-     * @param array|Zend\Config $options
-     * @return Zend\Cache\Storage\Adapter
-     * @throws Zend\Cache\RuntimeException
+     * @param string|Storage\Adapter $adapterName
+     * @param array|Traversable $options
+     * @return Storage\Adapter
+     * @throws Exception\RuntimeException
      */
     public static function adapterFactory($adapterName, $options = array())
     {
@@ -128,31 +156,31 @@ class StorageFactory
             return $adapterName;
         }
 
-        return self::getAdapterBroker()->load($adapterName, $options);
+        return static::getAdapterBroker()->load($adapterName, $options);
     }
 
     /**
      * Get the adapter broker
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     public static function getAdapterBroker()
     {
-        if (self::$adapterBroker === null) {
-            self::$adapterBroker = new Storage\AdapterBroker();
+        if (static::$adapterBroker === null) {
+            static::$adapterBroker = new Storage\AdapterBroker();
         }
-        return self::$adapterBroker;
+        return static::$adapterBroker;
     }
 
     /**
      * Change the adapter broker
      *
-     * @param  Zend\Loader\Broker $broker
+     * @param  Broker $broker
      * @return void
      */
     public static function setAdapterBroker(Broker $broker)
     {
-        self::$adapterBroker = $broker;
+        static::$adapterBroker = $broker;
     }
 
     /**
@@ -162,16 +190,16 @@ class StorageFactory
      */
     public static function resetAdapterBroker()
     {
-        self::$adapterBroker = new Storage\AdapterBroker();
+        static::$adapterBroker = new Storage\AdapterBroker();
     }
 
     /**
      * Instantiate a storage plugin
      *
-     * @param string|Zend\Cache\Storage\Plugin $pluginName
-     * @param array|Zend\Config $options
-     * @return Zend\Cache\Storage\Plugin
-     * @throws Zend\Cache\RuntimeException
+     * @param string|Storage\Plugin $pluginName
+     * @param array|Traversable $options
+     * @return Storage\Plugin
+     * @throws Exception\RuntimeException
      */
     public static function pluginFactory($pluginName, $options = array())
     {
@@ -181,31 +209,31 @@ class StorageFactory
             return $pluginName;
         }
 
-        return self::getPluginBroker()->load($pluginName, $options);
+        return static::getPluginBroker()->load($pluginName, $options);
     }
 
     /**
      * Get the plugin broker
      *
-     * @return Zend\Loader\Broker
+     * @return Broker
      */
     public static function getPluginBroker()
     {
-        if (self::$pluginBroker === null) {
-            self::$pluginBroker = new Storage\PluginBroker();
+        if (static::$pluginBroker === null) {
+            static::$pluginBroker = new Storage\PluginBroker();
         }
-        return self::$pluginBroker;
+        return static::$pluginBroker;
     }
 
     /**
      * Change the plugin broker
      *
-     * @param  Zend\Loader\Broker $broker
+     * @param  Broker $broker
      * @return void
      */
     public static function setPluginBroker(Broker $broker)
     {
-        self::$pluginBroker = $broker;
+        static::$pluginBroker = $broker;
     }
 
     /**
@@ -215,7 +243,6 @@ class StorageFactory
      */
     public static function resetPluginBroker()
     {
-        self::$pluginBroker = new Storage\PluginBroker();
+        static::$pluginBroker = new Storage\PluginBroker();
     }
-
 }

@@ -1,13 +1,39 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Storage;
-use Zend\EventManager\EventManager,
-    Zend\Cache\Exception\InvalidArgumentException,
-    Zend\Cache\Exception\MissingDependencyException;
 
+use stdClass,
+    Zend\Cache\Exception,
+    Zend\EventManager\EventManager;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Capabilities
 {
-
     /**
      * A marker to set/change capabilities
      *
@@ -102,12 +128,12 @@ class Capabilities
     /**
      * Constructor
      *
-     * @param \stdClass $marker
+     * @param stdClass $marker
      * @param array $capabilities
      * @param null|Zend\Cache\Storage\Capabilities $baseCapabilities
      */
     public function __construct(
-        \stdClass $marker,
+        stdClass $marker,
         array $capabilities = array(),
         Capabilities $baseCapabilities = null
     ) {
@@ -131,30 +157,33 @@ class Capabilities
     /**
      * Get the event manager
      *
-     * @return Zend\EventManager\EventManager
-     * @throws Zend\Cache\Exception\MissingDependencyException
+     * @return EventManager
+     * @throws Exception\MissingDependencyException
      */
     public function getEventManager()
     {
-        if ($this->eventManager === null) {
-            if (!class_exists('Zend\EventManager\EventManager')) {
-                throw new MissingDependencyException('Zend\EventManager not found');
-            }
-
-            // create a new event manager object
-            $eventManager = new EventManager();
-
-            // trigger change event on change of a base capability
-            if ($this->baseCapabilities && $this->baseCapabilities->hasEventManager()) {
-                $onChange = function ($event) use ($eventManager)  {
-                    $eventManager->trigger('change', $event->getTarget(), $event->getParams());
-                };
-                $this->baseCapabilities->getEventManager()->attach('change', $onChange);
-            }
-
-            // register event manager
-            $this->eventManager = $eventManager;
+        if ($this->eventManager instanceof EventManager) {
+            return $this->eventManager;
         }
+
+        if (!class_exists('Zend\EventManager\EventManager')) {
+            throw new Exception\MissingDependencyException('Zend\EventManager\EventManager not found');
+        }
+
+        // create a new event manager object
+        $eventManager = new EventManager();
+
+        // trigger change event on change of a base capability
+        if ($this->baseCapabilities && $this->baseCapabilities->hasEventManager()) {
+            $onChange = function ($event) use ($eventManager)  {
+                $eventManager->trigger('change', $event->getTarget(), $event->getParams());
+            };
+            $this->baseCapabilities->getEventManager()->attach('change', $onChange);
+        }
+
+        // register event manager
+        $this->eventManager = $eventManager;
+
         return $this->eventManager;
     }
 
@@ -173,37 +202,43 @@ class Capabilities
             'string'   => true,
             'array'    => false,
             'object'   => false,
-            'resource' => false
+            'resource' => false,
         ));
     }
 
     /**
      * Set supported datatypes
      *
-     * @param \stdClass $marker
-     * @param array $datatypes
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  array $datatypes
+     * @return Capabilities Fluent interface
      */
-    public function setSupportedDatatypes(\stdClass $marker, array $datatypes)
+    public function setSupportedDatatypes(stdClass $marker, array $datatypes)
     {
         $allTypes = array(
-            'NULL', 'boolean', 'integer', 'double',
-            'string', 'array', 'object', 'resource'
+            'array',
+            'boolean',
+            'double',
+            'integer',
+            'NULL',
+            'object',
+            'resource',
+            'string',
         );
 
         // check/normalize datatype values
         foreach ($datatypes as $type => &$toType) {
             if (!in_array($type, $allTypes)) {
-                throw new InvalidArgumentException("Unknown datatype '{$type}'");
+                throw new Exception\InvalidArgumentException("Unknown datatype '{$type}'");
             }
 
             if (is_string($toType)) {
                 $toType = strtolower($toType);
                 if (!in_array($toType, $allTypes)) {
-                    throw new InvalidArgumentException("Unknown datatype '{$toType}'");
+                    throw new Exception\InvalidArgumentException("Unknown datatype '{$toType}'");
                 }
             } else {
-                $toType = (bool)$toType;
+                $toType = (bool) $toType;
             }
         }
 
@@ -229,15 +264,15 @@ class Capabilities
     /**
      * Set supported metadata
      *
-     * @param \stdClass $marker
-     * @param string[] $metadata
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  string[] $metadata
+     * @return Capabilities Fluent interface
      */
-    public function setSupportedMetadata(\stdClass $marker, array $metadata)
+    public function setSupportedMetadata(stdClass $marker, array $metadata)
     {
         foreach ($metadata as $name) {
             if (!is_string($name)) {
-                throw new InvalidArgumentException('$metadata must be an array of strings');
+                throw new Exception\InvalidArgumentException('$metadata must be an array of strings');
             }
         }
         return $this->setCapability($marker, 'supportedMetadata', $metadata);
@@ -256,15 +291,15 @@ class Capabilities
     /**
      * Set maximum supported time-to-live
      *
-     * @param \stdClass $marker
-     * @param int $maxTtl
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  int $maxTtl
+     * @return Capabilities Fluent interface
      */
-    public function setMaxTtl(\stdClass $marker, $maxTtl)
+    public function setMaxTtl(stdClass $marker, $maxTtl)
     {
         $maxTtl = (int)$maxTtl;
         if ($maxTtl < 0) {
-            throw new InvalidArgumentException('$maxTtl must be greater or equal 0');
+            throw new Exception\InvalidArgumentException('$maxTtl must be greater or equal 0');
         }
         return $this->setCapability($marker, 'maxTtl', $maxTtl);
     }
@@ -281,14 +316,13 @@ class Capabilities
     }
 
     /**
-     * Set if the time-to-live handled static (on write)
-     * or dynamic (on read)
+     * Set if the time-to-live handled static (on write) or dynamic (on read)
      *
-     * @param \stdClass $marker
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  boolean $flag
+     * @return Capabilities Fluent interface
      */
-    public function setStaticTtl(\stdClass $marker, $flag)
+    public function setStaticTtl(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'staticTtl', (bool)$flag);
     }
@@ -306,15 +340,15 @@ class Capabilities
     /**
      * Set time-to-live precision
      *
-     * @param \stdClass $marker
-     * @param float $ttlPrecision
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  float $ttlPrecision
+     * @return Capabilities Fluent interface
      */
-    public function setTtlPrecision(\stdClass $marker, $ttlPrecision)
+    public function setTtlPrecision(stdClass $marker, $ttlPrecision)
     {
-        $ttlPrecision = (float)$ttlPrecision;
+        $ttlPrecision = (float) $ttlPrecision;
         if ($ttlPrecision <= 0) {
-            throw new InvalidArgumentException('$ttlPrecision must be greater than 0');
+            throw new Exception\InvalidArgumentException('$ttlPrecision must be greater than 0');
         }
         return $this->setCapability($marker, 'ttlPrecision', $ttlPrecision);
     }
@@ -332,11 +366,11 @@ class Capabilities
     /**
      * Set use request time
      *
-     * @param \stdClass $marker
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  boolean $flag
+     * @return Capabilities Fluent interface
      */
-    public function setUseRequestTime(\stdClass $marker, $flag)
+    public function setUseRequestTime(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'useRequestTime', (bool)$flag);
     }
@@ -354,11 +388,11 @@ class Capabilities
     /**
      * Set if expired items are readable
      *
-     * @param \stdClass $marker
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  boolean $flag
+     * @return Capabilities Fluent interface
      */
-    public function setExpiredRead(\stdClass $marker, $flag)
+    public function setExpiredRead(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'expiredRead', (bool)$flag);
     }
@@ -376,15 +410,15 @@ class Capabilities
     /**
      * Set maximum key lenth
      *
-     * @param \stdClass $marker
-     * @param int $maxKeyLength
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  int $maxKeyLength
+     * @return Capabilities Fluent interface
      */
-    public function setMaxKeyLength(\stdClass $marker, $maxKeyLength)
+    public function setMaxKeyLength(stdClass $marker, $maxKeyLength)
     {
-        $maxKeyLength = (int)$maxKeyLength;
+        $maxKeyLength = (int) $maxKeyLength;
         if ($maxKeyLength < -1) {
-            throw new InvalidArgumentException('$maxKeyLength must be greater or equal than -1');
+            throw new Exception\InvalidArgumentException('$maxKeyLength must be greater or equal than -1');
         }
         return $this->setCapability($marker, 'maxKeyLength', $maxKeyLength);
     }
@@ -402,11 +436,11 @@ class Capabilities
     /**
      * Set if namespace support is implemented as prefix
      *
-     * @param \stdClass $marker
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  boolean $flag
+     * @return Capabilities Fluent interface
      */
-    public function setNamespaceIsPrefix(\stdClass $marker, $flag)
+    public function setNamespaceIsPrefix(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'namespaceIsPrefix', (bool)$flag);
     }
@@ -424,13 +458,13 @@ class Capabilities
     /**
      * Set the namespace separator if namespace is implemented as prefix
      *
-     * @param \stdClass $marker
-     * @param string $separator
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  string $separator
+     * @return Capabilities Fluent interface
      */
-    public function setNamespaceSeparator(\stdClass $marker, $separator)
+    public function setNamespaceSeparator(stdClass $marker, $separator)
     {
-        return $this->setCapability($marker, 'namespaceSeparator', (string)$separator);
+        return $this->setCapability($marker, 'namespaceSeparator', (string) $separator);
     }
 
     /**
@@ -446,11 +480,11 @@ class Capabilities
     /**
      * Set if items are iterable
      *
-     * @param \stdClass $marker
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  boolean $flag
+     * @return Capabilities Fluent interface
      */
-    public function setIterable(\stdClass $marker, $flag)
+    public function setIterable(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'iterable', (bool)$flag);
     }
@@ -468,11 +502,11 @@ class Capabilities
     /**
      * Set support to clear items of all namespaces
      *
-     * @param \stdClass $marker
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  boolean $flag
+     * @return Capabilities Fluent interface
      */
-    public function setClearAllNamespaces(\stdClass $marker, $flag)
+    public function setClearAllNamespaces(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'clearAllNamespaces', (bool)$flag);
     }
@@ -490,11 +524,11 @@ class Capabilities
     /**
      * Set support to clear items by namespace
      *
-     * @param \stdClass $marker
-     * @param boolean $flag
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
+     * @param  stdClass $marker
+     * @param  boolean $flag
+     * @return Capabilities Fluent interface
      */
-    public function setClearByNamespace(\stdClass $marker, $flag)
+    public function setClearByNamespace(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'clearByNamespace', (bool)$flag);
     }
@@ -502,8 +536,8 @@ class Capabilities
     /**
      * Get a capability
      *
-     * @param string $name
-     * @param mixed $default
+     * @param  string $name
+     * @param  mixed $default
      * @return mixed
      */
     protected function getCapability($name, $default = null)
@@ -521,16 +555,16 @@ class Capabilities
     /**
      * Change a capability
      *
-     * @param \stdClass $marker
-     * @param string $name
-     * @param mixed $value
-     * @return Zend\Cache\Storage\Capabilities Fluent interface
-     * @throws InvalidArgumentException
+     * @param  stdClass $marker
+     * @param  string $name
+     * @param  mixed $value
+     * @return Capabilities Fluent interface
+     * @throws Exception\InvalidArgumentException
      */
-    protected function setCapability(\stdClass $marker, $name, $value)
+    protected function setCapability(stdClass $marker, $name, $value)
     {
         if ($this->marker !== $marker) {
-            throw new InvalidArgumentException('Invalid marker');
+            throw new Exception\InvalidArgumentException('Invalid marker');
         }
 
         $property = '_' . $name;
@@ -543,5 +577,4 @@ class Capabilities
 
         return $this;
     }
-
 }

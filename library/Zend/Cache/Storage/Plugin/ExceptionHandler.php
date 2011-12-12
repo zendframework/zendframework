@@ -1,14 +1,40 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Storage\Plugin;
-use Zend\Cache\Storage\Plugin,
-    Zend\Cache\Storage\ExceptionEvent,
-    Zend\EventManager\EventCollection,
-    Zend\Cache\Exception\InvalidArgumentException;
 
+use Traversable,
+    Zend\Cache\Exception,
+    Zend\Cache\Storage\ExceptionEvent,
+    Zend\Cache\Storage\Plugin,
+    Zend\EventManager\EventCollection;
+
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class ExceptionHandler implements Plugin
 {
-
     /**
      * Callback
      */
@@ -31,7 +57,7 @@ class ExceptionHandler implements Plugin
     /**
      * Constructor
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      * @return void
      */
     public function __construct($options = array())
@@ -42,13 +68,24 @@ class ExceptionHandler implements Plugin
     /**
      * Set options
      *
-     * @param array|\Traversable $options
+     * @param array|Traversable $options
      * @return ExceptionHandler
      */
     public function setOptions($options)
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
         foreach ($options as $name => $value) {
             $m = 'set' . str_replace('_', '', $name);
+            if (!method_exists($this, $m)) {
+                continue;
+            }
             $this->$m($value);
         }
         return $this;
@@ -70,14 +107,14 @@ class ExceptionHandler implements Plugin
     /**
      * Set callback
      *
-     * @param null|callback $callback
+     * @param  null|callable $callback
      * @return ExceptionHandler
-     * @throws InvalidArgumentException
+     * @throws ExceptionHandler\InvalidArgumentException
      */
     public function setCallback($callback)
     {
         if ($callback !== null && !is_callable($callback, true)) {
-            throw new InvalidArgumentException('Not a valid callback');
+            throw new ExceptionHandler\InvalidArgumentException('Not a valid callback');
         }
         $this->callback = $callback;
         return $this;
@@ -85,6 +122,8 @@ class ExceptionHandler implements Plugin
 
     /**
      * Get callback
+     *
+     * @return null|callable
      */
     public function getCallback()
     {
@@ -94,13 +133,12 @@ class ExceptionHandler implements Plugin
     /**
      * Set throw exceptions
      *
-     * @param bool $flag
+     * @param  bool $flag
      * @return ExceptionHandler
-     * @return void
      */
     public function setThrowExceptions($flag)
     {
-        $this->throwExceptions = (bool)$flag;
+        $this->throwExceptions = (bool) $flag;
         return $this;
     }
 
@@ -117,15 +155,15 @@ class ExceptionHandler implements Plugin
     /**
      * Attach
      *
-     * @param EventCollection $eventCollection
+     * @param  EventCollection $eventCollection
      * @return ExceptionHandler
-     * @throws LogicException
+     * @throws Exception\LogicException
      */
     public function attach(EventCollection $eventCollection)
     {
-        $index = \spl_object_hash($eventCollection);
+        $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
-            throw new LogicException('Plugin already attached');
+            throw new Exception\LogicException('Plugin already attached');
         }
 
         $callback = array($this, 'onException');
@@ -188,15 +226,15 @@ class ExceptionHandler implements Plugin
     /**
      * Detach
      *
-     * @param EventCollection $eventCollection
+     * @param  EventCollection $eventCollection
      * @return ExceptionHandler
-     * @throws LogicException
+     * @throws Exception\LogicException
      */
     public function detach(EventCollection $eventCollection)
     {
-        $index = \spl_object_hash($eventCollection);
+        $index = spl_object_hash($eventCollection);
         if (!isset($this->handles[$index])) {
-            throw new LogicException('Plugin not attached');
+            throw new Exception\LogicException('Plugin not attached');
         }
 
         // detach all handles of this index
@@ -213,16 +251,15 @@ class ExceptionHandler implements Plugin
     /**
      * On exception
      *
-     * @param \ExceptionEvent $event
+     * @param  ExceptionEvent $event
      * @return void
      */
     public function onException(ExceptionEvent $event)
     {
-        if ( ($callback = $this->getCallback()) ) {
-            $callback($event->getException());
+        if (($callback = $this->getCallback())) {
+            call_user_func($callback, $event->getException());
         }
 
-        $event->setThrowException( $this->getThrowExceptions() );
+        $event->setThrowException($this->getThrowExceptions());
     }
-
 }

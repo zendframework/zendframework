@@ -1,16 +1,41 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Storage\Plugin;
 
-use Zend\Cache\Storage\Plugin,
+use Traversable,
+    Zend\Cache\Exception,
+    Zend\Cache\Storage\Plugin,
     Zend\Cache\Storage\PostEvent,
-    Zend\Cache\InvalidArgumentAxception,
-    Zend\Cache\LogicException,
     Zend\EventManager\EventCollection;
 
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Storage
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class OptimizeByFactor implements Plugin
 {
-
     /**
      * Handles
      *
@@ -28,7 +53,7 @@ class OptimizeByFactor implements Plugin
     /**
      * Constructor
      *
-     * @param array|\Traversable $options
+     * @param  array|Traversable $options
      * @return void
      */
     public function __construct($options = array())
@@ -39,13 +64,24 @@ class OptimizeByFactor implements Plugin
     /**
      * Set options
      *
-     * @param array|\Traversable $options
+     * @param  array|Traversable $options
      * @return OptimizeByFactor
      */
     public function setOptions($options)
     {
+        if (!is_array($options) && !$options instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable object; received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
         foreach ($options as $name => $value) {
             $m = 'set' . str_replace('_', '', $name);
+            if (!method_exists($this, $m)) {
+                continue;
+            }
             $this->$m($value);
         }
         return $this;
@@ -59,7 +95,7 @@ class OptimizeByFactor implements Plugin
     public function getOptions()
     {
         return array(
-            'optimizing_factor' => $this->getOptimizingFactor()
+            'optimizing_factor' => $this->getOptimizingFactor(),
         );
     }
 
@@ -76,15 +112,17 @@ class OptimizeByFactor implements Plugin
     /**
      * Set automatic optimizing factor
      *
-     * @param int $factor
+     * @param  int $factor
      * @return OptimizeByFactor
-     * @throws InvalidArgumentAxception
+     * @throws Exception\InvalidArgumentAxception
      */
     public function setOptimizingFactor($factor)
     {
-        $factor = (int)$factor;
+        $factor = (int) $factor;
         if ($factor < 0) {
-            throw new InvalidArgumentAxception("Invalid optimizing factor '{$factor}': must be greater or equal 0");
+            throw new Exception\InvalidArgumentAxception(
+                "Invalid optimizing factor '{$factor}': must be greater or equal 0"
+            );
         }
         $this->optimizingFactor = $factor;
 
@@ -94,15 +132,15 @@ class OptimizeByFactor implements Plugin
     /**
      * Attach
      *
-     * @param EventCollection $eventCollection
+     * @param  EventCollection $eventCollection
      * @return OptimizeByFactor
-     * @throws LogicException
+     * @throws Exception\LogicException
      */
     public function attach(EventCollection $eventCollection)
     {
-        $index = \spl_object_hash($eventCollection);
+        $index = spl_object_hash($eventCollection);
         if (isset($this->handles[$index])) {
-            throw new LogicException('Plugin already attached');
+            throw new Exception\LogicException('Plugin already attached');
         }
 
         $handles = array();
@@ -119,15 +157,15 @@ class OptimizeByFactor implements Plugin
     /**
      * Detach
      *
-     * @param EventCollection $eventCollection
+     * @param  EventCollection $eventCollection
      * @return OptimizeByFactor
-     * @throws LogicException
+     * @throws Exception\LogicException
      */
     public function detach(EventCollection $eventCollection)
     {
-        $index = \spl_object_hash($eventCollection);
+        $index = spl_object_hash($eventCollection);
         if (!isset($this->handles[$index])) {
-            throw new LogicException('Plugin not attached');
+            throw new Exception\LogicException('Plugin not attached');
         }
 
         // detach all handles of this index
@@ -144,7 +182,7 @@ class OptimizeByFactor implements Plugin
     /**
      * Optimize by factor on a success _RESULT_
      *
-     * @param PostEvent $event
+     * @param  PostEvent $event
      * @return void
      */
     public function optimizeByFactor(PostEvent $event)
@@ -155,5 +193,4 @@ class OptimizeByFactor implements Plugin
             $event->getStorage()->optimize($params['options']);
         }
     }
-
 }

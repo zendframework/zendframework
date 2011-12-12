@@ -1,30 +1,52 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache;
-use Zend\Cache\Exception\RuntimeException;
 
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Utils
 {
-
     /**
      * Get disk capacity
      *
-     * @param string $path A directory of the filesystem or disk partition
+     * @param  string $path A directory of the filesystem or disk partition
      * @return array
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     static public function getDiskCapacity($path)
     {
         $total = @disk_total_space($path);
         if ($total === false) {
             $err = error_get_last();
-            throw new RuntimeException($err['message']);
+            throw new Exception\RuntimeException($err['message']);
         }
 
         $free = @disk_free_space($path);
         if ($free === false) {
             $err = error_get_last();
-            throw new RuntimeException($err['message']);
+            throw new Exception\RuntimeException($err['message']);
         }
 
         return array(
@@ -37,21 +59,21 @@ class Utils
      * Get php memory capacity
      *
      * @return array
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     static public function getPhpMemoryCapacity()
     {
-        $memSize = (float)self::bytesFromString(ini_get('memory_limit'));
+        $memSize = (float) self::bytesFromString(ini_get('memory_limit'));
         if ($memSize <= 0) {
             return self::getSystemMemoryCapacity();
         }
 
-        $memUsed = (float)memory_get_usage(true);
+        $memUsed = (float) memory_get_usage(true);
         $memFree = $memSize - $memUsed;
 
         return array(
             'total' => $memSize,
-            'free'  => $memFree
+            'free'  => $memFree,
         );
     }
 
@@ -59,21 +81,21 @@ class Utils
      * Get system memory capacity
      *
      * @return array
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     static public function getSystemMemoryCapacity()
     {
         // Windows
         if (substr(\PHP_OS, 0, 3) == 'WIN') {
-            return self::_getSystemMemoryCapacityWin();
+            return self::getSystemMemoryCapacityWin();
         }
 
         // *nix
-        if ( !($meminfo = @file_get_contents('/proc/meminfo')) ) {
+        if (false === ($meminfo = @file_get_contents('/proc/meminfo'))) {
             $lastErr = error_get_last();
-            throw new RuntimeException("Can't read '/proc/meminfo': {$lastErr['messagae']}");
+            throw new Exception\RuntimeException("Can't read '/proc/meminfo': {$lastErr['messagae']}");
         } elseif (!preg_match_all('/(\w+):\s*(\d+\s*\w*)[\r|\n]/i', $meminfo, $matches, PREG_PATTERN_ORDER)) {
-            throw new RuntimeException("Can't parse '/proc/meminfo'");
+            throw new Exception\RuntimeException("Can't parse '/proc/meminfo'");
         }
 
         $meminfoIndex  = array_flip($matches[1]);
@@ -97,7 +119,7 @@ class Utils
 
         return array(
             'total' => $memTotal,
-            'free'  => $memFree
+            'free'  => $memFree,
         );
     }
 
@@ -105,14 +127,14 @@ class Utils
      * Get system memory capacity on windows systems
      *
      * @return array
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
-    static protected function _getSystemMemoryCapacityWin()
+    static protected function getSystemMemoryCapacityWin()
     {
         if (function_exists('win32_ps_stat_mem')) {
             $memstat = win32_ps_stat_mem();
         } elseif (!function_exists('exec')) {
-            throw new RuntimeException(
+            throw new Exception\RuntimeException(
                 "Missing php extension 'win32ps' and the build-in function 'exec' is disabled"
             );
         } else {
@@ -126,41 +148,42 @@ class Utils
             $line = exec($cmd, $out, $ret);
             if ($ret) {
                 $out = implode("\n", $out);
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     "Command '{$cmd}' failed"
-                  . ", return: '{$ret}'"
-                  . ", output: '{$out}'"
+                    . ", return: '{$ret}'"
+                    . ", output: '{$out}'"
                 );
             } elseif (!($memstat = @unserialize($line)) ) {
                 $err = error_get_last();
                 $out = implode("\n", $out);
-                throw new RuntimeException(
+                throw new Exception\RuntimeException(
                     "Can't parse output of command '{$cmd}'"
-                  . ": {$err['message']}"
-                  . ", output: '{$out}'"
+                    . ": {$err['message']}"
+                    . ", output: '{$out}'"
                 );
             }
         }
 
         if (!isset($memstat['total_phys'], $memstat['avail_phys'])) {
-            throw new RuntimeException("Can't detect memory status");
+            throw new Exception\RuntimeException("Can't detect memory status");
         }
 
         return array(
             'total' => $memstat['total_phys'],
-            'free'  => $memstat['avail_phys']
+            'free'  => $memstat['avail_phys'],
         );
     }
 
     /**
      * Generate a hash value.
+     *
      * This helper adds the virtual hash algo "strlen".
      *
      * @param  string $data  Name of selected hashing algorithm
      * @param  string $data  Message to be hashed.
      * @param  bool   $raw   When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
      * @return string        Hash value
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     static public function generateHash($algo, $data, $raw = false)
     {
@@ -174,7 +197,7 @@ class Utils
         } else {
             $hash = hash($algo, $data, $raw);
             if ($hash === false) {
-                throw new RuntimeException("Hash generation failed for algo '{$algo}'");
+                throw new Exception\RuntimeException("Hash generation failed for algo '{$algo}'");
             }
         }
 
@@ -189,7 +212,7 @@ class Utils
      */
     static public function getHashAlgos()
     {
-        $algos = hash_algos();
+        $algos   = hash_algos();
         $algos[] = 'strlen';
         return $algos;
     }
@@ -199,12 +222,12 @@ class Utils
      *
      * @param string $memStr
      * @return float
-     * @throws RuntimeException
+     * @throws Exception\RuntimeException
      */
     static protected function bytesFromString($memStr)
     {
         if (!preg_match('/\s*([\-\+]?\d+)\s*(\w*)\s*/', $memStr, $matches)) {
-            throw new RuntimeException("Can't detect bytes of string '{$memStr}'");
+            throw new Exception\RuntimeException("Can't detect bytes of string '{$memStr}'");
         }
 
         $value = (float)$matches[1];
@@ -231,10 +254,9 @@ class Utils
                 break;
 
             default:
-                throw new RuntimeException("Unknown unit '{$unit}'");
+                throw new Exception\RuntimeException("Unknown unit '{$unit}'");
         }
 
         return $value;
     }
-
 }

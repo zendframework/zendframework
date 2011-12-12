@@ -14,33 +14,28 @@
  *
  * @category   Zend
  * @package    Zend_Cache
- * @subpackage Zend_Cache_Storage
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Cache\Storage\Adapter;
-use Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Exception\ExtensionNotLoadedException,
-    Zend\Cache\Exception\ItemNotFoundException,
-    Zend\Cache\Exception\RuntimeException,
-    APCIterator;
+
+use APCIterator,
+    ArrayObject,
+    stdClass,
+    Zend\Cache\Exception,
+    Zend\Cache\Storage\Capabilities;
 
 /**
- * @uses       \Zend\Cache\Cache
- * @uses       \Zend\Cache\Adapter
- * @uses       \Zend\Cache\Adapter\AbstractAdapter
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Storage
+ * @subpackage Storage
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Apc extends AbstractAdapter
 {
-
     /**
      * Map selected properties on getDelayed & find
      * to APCIterator selector
@@ -69,21 +64,22 @@ class Apc extends AbstractAdapter
      * Constructor
      *
      * @param  array $options Option
-     * @throws \Zend\Cache\Exception
+     * @throws Exception
      * @return void
      */
     public function __construct($options = array())
     {
         if (version_compare('3.1.6', phpversion('apc')) > 0) {
-            throw new ExtensionNotLoadedException("Missing ext/apc >= 3.1.6");
+            throw new Exception\ExtensionNotLoadedException("Missing ext/apc >= 3.1.6");
         }
 
         $enabled = ini_get('apc.enabled');
         if (PHP_SAPI == 'cli') {
-            $enabled = $enabled && (bool)ini_get('apc.enable_cli');
+            $enabled = $enabled && (bool) ini_get('apc.enable_cli');
         }
+
         if (!$enabled) {
-            throw new ExtensionNotLoadedException(
+            throw new Exception\ExtensionNotLoadedException(
                 "ext/apc is disabled - see 'apc.enabled' and 'apc.enable_cli'"
             );
         }
@@ -112,12 +108,23 @@ class Apc extends AbstractAdapter
 
     /* options */
 
+    /**
+     * Set namespace separator for keys
+     * 
+     * @param  string $separator 
+     * @return Apc
+     */
     public function setNamespaceSeparator($separator)
     {
-        $this->namespaceSeparator = (string)$separator;
+        $this->namespaceSeparator = (string) $separator;
         return $this;
     }
 
+    /**
+     * Get namespace separator for keys
+     * 
+     * @return string
+     */
     public function getNamespaceSeparator()
     {
         return $this->namespaceSeparator;
@@ -125,6 +132,26 @@ class Apc extends AbstractAdapter
 
     /* reading */
 
+    /**
+     * Get an item.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return mixed Value on success and false on failure
+     * @throws Exception
+     *
+     * @triggers getItem.pre(PreEvent)
+     * @triggers getItem.post(PostEvent)
+     * @triggers getItem.exception(ExceptionEvent)
+     */
     public function getItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -133,9 +160,9 @@ class Apc extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
-            'options' => & $options
+            'options' => & $options,
         ));
 
         try {
@@ -145,10 +172,10 @@ class Apc extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
-            $result = apc_fetch($internalKey, $success);
+            $result      = apc_fetch($internalKey, $success);
             if (!$success) {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException("Key '{$internalKey}' not found");
+                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
                 }
                 $result = false;
             } else {
@@ -163,6 +190,24 @@ class Apc extends AbstractAdapter
         }
     }
 
+    /**
+     * Get multiple items.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return array Assoziative array of existing keys and values or false on failure
+     * @throws Exception
+     *
+     * @triggers getItems.pre(PreEvent)
+     * @triggers getItems.post(PostEvent)
+     * @triggers getItems.exception(ExceptionEvent)
+     */
     public function getItems(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -170,9 +215,9 @@ class Apc extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'keys'    => & $keys,
-            'options' => & $options
+            'options' => & $options,
         ));
 
         try {
@@ -190,7 +235,7 @@ class Apc extends AbstractAdapter
             if (!$options['ignore_missing_items']) {
                 if (count($keys) != count($fetch)) {
                     $missing = implode("', '", array_diff($internalKeys, array_keys($fetch)));
-                    throw new ItemNotFoundException('Keys not found: ' . $missing);
+                    throw new Exception\ItemNotFoundException('Keys not found: ' . $missing);
                 }
             }
 
@@ -207,6 +252,24 @@ class Apc extends AbstractAdapter
         }
     }
 
+    /**
+     * Test if an item exists.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers hasItem.pre(PreEvent)
+     * @triggers hasItem.post(PostEvent)
+     * @triggers hasItem.exception(ExceptionEvent)
+     */
     public function hasItem($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -215,9 +278,9 @@ class Apc extends AbstractAdapter
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'key'     => & $key,
-            'options' => & $options
+            'options' => & $options,
         ));
 
         try {
@@ -227,7 +290,7 @@ class Apc extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
-            $result = apc_exists($internalKey);
+            $result      = apc_exists($internalKey);
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
@@ -235,6 +298,24 @@ class Apc extends AbstractAdapter
         }
     }
 
+    /**
+     * Test if an item exists.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers hasItems.pre(PreEvent)
+     * @triggers hasItems.post(PostEvent)
+     * @triggers hasItems.exception(ExceptionEvent)
+     */
     public function hasItems(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -242,9 +323,9 @@ class Apc extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = new \ArrayObject(array(
+        $args = new ArrayObject(array(
             'keys'    => & $keys,
-            'options' => & $options
+            'options' => & $options,
         ));
 
         try {
@@ -273,6 +354,22 @@ class Apc extends AbstractAdapter
         }
     }
 
+    /**
+     * Get metadata of an item.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return array|boolean Metadata or false on failure
+     * @throws Exception
+     */
     public function getMetadata($key, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -283,9 +380,9 @@ class Apc extends AbstractAdapter
         $this->normalizeKey($key);
         $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
 
-        $format = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
-        $regexp = '/^' . preg_quote($key, '/') . '$/';
-        $it = new APCIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
+        $format   = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
+        $regexp   = '/^' . preg_quote($key, '/') . '$/';
+        $it       = new APCIterator('user', $regexp, $format, 100, \APC_LIST_ACTIVE);
         $metadata = $it->current();
 
         // @see http://pecl.php.net/bugs/bug.php?id=22564
@@ -295,9 +392,7 @@ class Apc extends AbstractAdapter
 
         if (!$metadata) {
             if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException(
-                    "Key '{$key}' nout found"
-                );
+                throw new Exception\ItemNotFoundException("Key '{$key}' nout found");
             }
 
             return false;
@@ -307,6 +402,14 @@ class Apc extends AbstractAdapter
         return $metadata;
     }
 
+    /**
+     * Get all metadata for an item
+     * 
+     * @param  array $keys 
+     * @param  array $options 
+     * @return array
+     * @throws Exception\ItemNotFoundException
+     */
     public function getMetadatas(array $keys, array $options = array())
     {
         if (!$this->getReadable()) {
@@ -333,14 +436,15 @@ class Apc extends AbstractAdapter
             }
 
             $this->normalizeMetadata($metadata);
-            $key = substr($internalKey, strpos($internalKey, $this->getNamespaceSeparator()) + 1);
+
+            $key       = substr($internalKey, strpos($internalKey, $this->getNamespaceSeparator()) + 1);
             $ret[$key] = & $metadata;
         }
 
         if (!$options['ignore_missing_items']) {
             if (count($keys) != count($ret)) {
                 $missing = implode("', '", array_diff($keys, array_keys($ret)));
-                throw new ItemNotFoundException('Keys not found: ' . $missing);
+                throw new Exception\ItemNotFoundException('Keys not found: ' . $missing);
             }
         }
 
@@ -349,6 +453,21 @@ class Apc extends AbstractAdapter
 
     /* writing */
 
+    /**
+     * Store an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  string $key
+     * @param  mixed $value
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     */
     public function setItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -361,12 +480,26 @@ class Apc extends AbstractAdapter
 
         if (!apc_store($key, $value, $options['ttl'])) {
             $type = is_object($value) ? get_class($value) : gettype($value);
-            throw new RuntimeException("apc_store('{$key}', <{$type}>, {$options['ttl']}) failed");
+            throw new Exception\RuntimeException("apc_store('{$key}', <{$type}>, {$options['ttl']}) failed");
         }
 
         return true;
     }
 
+    /**
+     * Store multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  array $keyValuePairs
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     */
     public function setItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -383,7 +516,7 @@ class Apc extends AbstractAdapter
         $errKeys = apc_store($keyValuePairs2, null, $options['ttl']);
 
         if ($errKeys) {
-            throw new RuntimeException(
+            throw new Exception\RuntimeException(
                 "apc_store(<array>, null, {$options['ttl']}) failed for keys: "
                 . "'" . implode("','", $errKeys) . "'"
             );
@@ -392,6 +525,21 @@ class Apc extends AbstractAdapter
         return true;
     }
 
+    /**
+     * Add an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     */
     public function addItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -404,16 +552,30 @@ class Apc extends AbstractAdapter
 
         if (!apc_add($key, $value, $options['ttl'])) {
             if (apc_exists($key)) {
-                throw new RuntimeException("Key '{$key}' already exists");
+                throw new Exception\RuntimeException("Key '{$key}' already exists");
             }
 
             $type = is_object($value) ? get_class($value) : gettype($value);
-            throw new RuntimeException("apc_add('{$key}', <{$type}>, {$options['ttl']}) failed");
+            throw new Exception\RuntimeException("apc_add('{$key}', <{$type}>, {$options['ttl']}) failed");
         }
 
         return true;
     }
 
+    /**
+     * Add multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  array $keyValuePairs
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     */
     public function addItems(array $keyValuePairs, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -430,7 +592,7 @@ class Apc extends AbstractAdapter
         $errKeys = apc_add($keyValuePairs2, null, $options['ttl']);
 
         if ($errKeys) {
-            throw new RuntimeException(
+            throw new Exception\RuntimeException(
                 "apc_add(<array>, null, {$options['ttl']}) failed for keys: "
                 . "'" . implode("','", $errKeys) . "'"
             );
@@ -439,6 +601,21 @@ class Apc extends AbstractAdapter
         return true;
     }
 
+    /**
+     * Replace an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - An array of tags
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return boolean
+     * @throws Exception
+     */
     public function replaceItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -450,17 +627,31 @@ class Apc extends AbstractAdapter
         $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
 
         if (!apc_exists($key)) {
-            throw new ItemNotFoundException("Key '{$key}' doesn't exist");
+            throw new Exception\ItemNotFoundException("Key '{$key}' doesn't exist");
         }
 
         if (!apc_store($key, $value, $options['ttl'])) {
             $type = is_object($value) ? get_class($value) : gettype($value);
-            throw new RuntimeException("apc_store('{$key}', <{$type}>, {$options['ttl']}) failed");
+            throw new Exception\RuntimeException("apc_store('{$key}', <{$type}>, {$options['ttl']}) failed");
         }
 
         return true;
     }
 
+    /**
+     * Remove an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     */
     public function removeItem($key, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -473,13 +664,27 @@ class Apc extends AbstractAdapter
 
         if (!apc_delete($key)) {
             if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException("Key '{$key}' not found");
+                throw new Exception\ItemNotFoundException("Key '{$key}' not found");
             }
         }
 
         return true;
     }
 
+    /**
+     * Remove multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     */
     public function removeItems(array $keys, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -494,13 +699,28 @@ class Apc extends AbstractAdapter
         $errKeys = apc_delete($keys);
         if ($errKeys) {
             if (!$options['ignore_missing_items']) {
-                throw new ItemNotFoundException("Keys '" . implode("','", $errKeys) . "' not found");
+                throw new Exception\ItemNotFoundException("Keys '" . implode("','", $errKeys) . "' not found");
             }
         }
 
         return true;
     }
 
+    /**
+     * Increment an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  int $value
+     * @param  array $options
+     * @return int|boolean The new value of false on failure
+     * @throws Exception
+     */
     public function incrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -519,18 +739,33 @@ class Apc extends AbstractAdapter
                     $this->addItem($key, $value, $options);
                     $newValue = $value;
                 } else {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Key '{$internalKey}' not found"
                     );
                 }
             } else {
-                throw new RuntimeException("apc_inc('{$internalKey}', {$value}) failed");
+                throw new Exception\RuntimeException("apc_inc('{$internalKey}', {$value}) failed");
             }
         }
 
         return $newValue;
     }
 
+    /**
+     * Decrement an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  int $value
+     * @param  array $options
+     * @return int|boolean The new value or false or failure
+     * @throws Exception
+     */
     public function decrementItem($key, $value, array $options = array())
     {
         if (!$this->getWritable()) {
@@ -549,12 +784,12 @@ class Apc extends AbstractAdapter
                     $this->addItem($key, -$value, $options);
                     $newValue = -$value;
                 } else {
-                    throw new ItemNotFoundException(
+                    throw new Exception\ItemNotFoundException(
                         "Key '{$internalKey}' not found"
                     );
                 }
             } else {
-                throw new RuntimeException("apc_inc('{$internalKey}', {$value}) failed");
+                throw new Exception\RuntimeException("apc_inc('{$internalKey}', {$value}) failed");
             }
         }
 
@@ -563,10 +798,18 @@ class Apc extends AbstractAdapter
 
     /* non-blocking */
 
+    /**
+     * Get items that were marked to delay storage for purposes of removing blocking
+     * 
+     * @param  array $keys 
+     * @param  array $options 
+     * @return bool
+     * @throws Exception
+     */
     public function getDelayed(array $keys, array $options = array())
     {
         if ($this->stmtActive) {
-            throw new RuntimeException('Statement already in use');
+            throw new Exception\RuntimeException('Statement already in use');
         }
 
         if (!$this->getReadable()) {
@@ -605,10 +848,10 @@ class Apc extends AbstractAdapter
                 $this->stmtActive   = false;
                 $this->stmtIterator = null;
                 $this->stmtOptions  = null;
-                throw new InvalidArgumentException('Invalid callback');
+                throw new Exception\InvalidArgumentException('Invalid callback');
             }
 
-            while ( ($item = $this->fetch()) !== false) {
+            while (($item = $this->fetch()) !== false) {
                 call_user_func($callback, $item);
             }
         }
@@ -616,10 +859,29 @@ class Apc extends AbstractAdapter
         return true;
     }
 
+    /**
+     * Find items.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - Tags to search for used with matching modes of
+     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     * @see fetch()
+     * @see fetchAll()
+     */
     public function find($mode = self::MATCH_ACTIVE, array $options = array())
     {
         if ($this->stmtActive) {
-            throw new RuntimeException('Statement already in use');
+            throw new Exception\RuntimeException('Statement already in use');
         }
 
         if (!$this->getReadable()) {
@@ -650,6 +912,12 @@ class Apc extends AbstractAdapter
         return true;
     }
 
+    /**
+     * Fetches the next item from result set
+     *
+     * @return array|boolean The next item or false
+     * @see    fetchAll()
+     */
     public function fetch()
     {
         if (!$this->stmtActive) {
@@ -690,12 +958,46 @@ class Apc extends AbstractAdapter
 
     /* cleaning */
 
+    /**
+     * Clear items off all namespaces.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - tags <array> optional
+     *    - Tags to search for used with matching modes of
+     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     * @see clearByNamespace()
+     */
     public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
         $this->normalizeOptions($options);
         return $this->clearByRegEx('/.*/', $mode, $options);
     }
 
+    /**
+     * Clear items by namespace.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - Tags to search for used with matching modes of
+     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see clear()
+     */
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
         $this->normalizeOptions($options);
@@ -707,11 +1009,16 @@ class Apc extends AbstractAdapter
 
     /* status */
 
+    /**
+     * Get capabilities
+     *
+     * @return Capabilities
+     */
     public function getCapabilities()
     {
         if ($this->capabilities === null) {
-            $this->capabilityMarker = new \stdClass();
-            $this->capabilities = new Capabilities(
+            $this->capabilityMarker = new stdClass();
+            $this->capabilities     = new Capabilities(
                 $this->capabilityMarker,
                 array(
                     'supportedDatatypes' => array(
@@ -722,16 +1029,23 @@ class Apc extends AbstractAdapter
                         'string'   => true,
                         'array'    => true,
                         'object'   => 'object',
-                        'resource' => false
+                        'resource' => false,
                     ),
                     'supportedMetadata' => array(
-                        'mtime', 'ctime', 'atime', 'rtime', 'ttl',
-                        'num_hits', 'ref_count', 'mem_size', 'internal_key'
+                        'atime', 
+                        'ctime', 
+                        'internal_key',
+                        'mem_size', 
+                        'mtime', 
+                        'num_hits', 
+                        'ref_count', 
+                        'rtime', 
+                        'ttl',
                     ),
                     'maxTtl'             => 0,
                     'staticTtl'          => false,
                     'ttlPrecision'       => 1,
-                    'useRequestTime'     => (bool)ini_get('apc.use_request_time'),
+                    'useRequestTime'     => (bool) ini_get('apc.use_request_time'),
                     'expiredRead'        => false,
                     'maxKeyLength'       => 5182,
                     'namespaceIsPrefix'  => true,
@@ -746,6 +1060,12 @@ class Apc extends AbstractAdapter
         return $this->capabilities;
     }
 
+    /**
+     * Get storage capacity.
+     *
+     * @param  array $options
+     * @return array|boolean Capacity as array or false on failure
+     */
     public function getCapacity(array $options = array())
     {
         $mem = apc_sma_info(true);
@@ -758,6 +1078,14 @@ class Apc extends AbstractAdapter
 
     /* internal */
 
+    /**
+     * Clear cached items based on key regex
+     * 
+     * @param  string $regex 
+     * @param  int $mode 
+     * @param  array $options 
+     * @return bool
+     */
     protected function clearByRegEx($regex, $mode, array &$options)
     {
         if (!$this->getWritable()) {
@@ -773,6 +1101,12 @@ class Apc extends AbstractAdapter
         return apc_delete(new APCIterator('user', $regex, 0, 1, \APC_LIST_ACTIVE));
     }
 
+    /**
+     * Normalize metadata to work with APC
+     * 
+     * @param  array $metadata 
+     * @return void
+     */
     protected function normalizeMetadata(array &$metadata)
     {
         // rename
@@ -803,5 +1137,4 @@ class Apc extends AbstractAdapter
             unset($metadata['key']);
         }
     }
-
 }

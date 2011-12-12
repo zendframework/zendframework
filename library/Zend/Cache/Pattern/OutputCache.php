@@ -1,19 +1,43 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Cache\Pattern;
 
-use Zend\Cache,
-    Zend\Cache\Exception\InvalidArgumentException,
-    Zend\Cache\Exception\MissingKeyException,
-    Zend\Cache\Exception\RuntimeException;
+use Zend\Cache\Exception,
+    Zend\Cache\StorageFactory,
+    Zend\Cache\Storage\Adapter as StorageAdapter;
 
+/**
+ * @category   Zend
+ * @package    Zend_Cache
+ * @subpackage Pattern
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class OutputCache extends AbstractPattern
 {
-
     /**
      * The storage adapter
      *
-     * @var Zend\Cache\Storage\Adapter
+     * @var StorageAdapter
      */
     protected $storage;
 
@@ -27,15 +51,15 @@ class OutputCache extends AbstractPattern
     /**
      * Constructor
      *
-     * @param array|Traversable $options
-     * @throws InvalidArgumentException
+     * @param  array|\Traversable $options
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($options = array())
     {
         parent::__construct($options);
 
         if (!$this->getStorage()) {
-            throw new InvalidArgumentException("Missing option 'storage'");
+            throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
     }
 
@@ -54,7 +78,7 @@ class OutputCache extends AbstractPattern
     /**
      * Get cache storage
      *
-     * return Zend\Cache\Storage\Adapter
+     * return StorageAdapter
      */
     public function getStorage()
     {
@@ -64,17 +88,17 @@ class OutputCache extends AbstractPattern
     /**
      * Set cache storage
      *
-     * @param Zend\Cache\Storage\Adapter|array|string $storage
-     * @return Zend\Cache\Pattern\PatternInterface
+     * @param  StorageAdapter|array|string $storage
+     * @return OutputCache
      */
     public function setStorage($storage)
     {
         if (is_array($storage)) {
-            $storage = Cache\StorageFactory::factory($storage);
+            $storage = StorageFactory::factory($storage);
         } elseif (is_string($storage)) {
-            $storage = Cache\StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof Cache\Storage\Adapter) ) {
-            throw new InvalidArgumentException(
+            $storage = StorageFactory::adapterFactory($storage);
+        } elseif (!($storage instanceof StorageAdapter)) {
+            throw new Exception\InvalidArgumentException(
                 'The storage must be an instanceof Zend\Cache\Storage\Adapter '
               . 'or an array passed to Zend\Cache\Storage::factory '
               . 'or simply the name of the storage adapter'
@@ -96,17 +120,17 @@ class OutputCache extends AbstractPattern
      * @param  string  $key      Key
      * @param  array   $options  Output start options (ttl | validate | output)
      * @return boolean|string    True if the cache is hit or if output disabled the cached data, false else
-     * @throws Zend_Cache_Exception
+     * @throws Exception
      */
     public function start($key, array $options = array())
     {
-        if (($key = (string)$key) === '') {
-            throw new MissingKeyException('Missing key to read/write output from storage');
+        if (($key = (string) $key) === '') {
+            throw new Exception\MissingKeyException('Missing key to read/write output from storage');
         }
 
         $optOutput = true;
         if (isset($options['output'])) {
-            $optOutput = (bool)$options['output'];
+            $optOutput = (bool) $options['output'];
             unset($options['output']); // don't forword this option to storage
         }
 
@@ -115,9 +139,8 @@ class OutputCache extends AbstractPattern
             if ($optOutput) {
                 echo $data;
                 return true;
-            } else {
-                return (string)$data;
             }
+            return (string) $data;
         }
 
         ob_start();
@@ -136,13 +159,13 @@ class OutputCache extends AbstractPattern
      *
      * @param  array   $options
      * @return boolean
-     * @throws Zend_Cache_Exception
+     * @throws Exception
      */
     public function end(array $options = array())
     {
         $key = array_pop($this->keyStack);
         if ($key === null) {
-            throw new RuntimeException('use of end() without a start()');
+            throw new Exception\RuntimeException('use of end() without a start()');
         }
 
         $optOutput = true;
@@ -158,10 +181,9 @@ class OutputCache extends AbstractPattern
         }
 
         if ($data === false) {
-            throw new RuntimeException('Output buffering not active');
+            throw new Exception\RuntimeException('Output buffering not active');
         }
 
         return $this->getStorage()->setItem($key, $data, $options);
     }
-
 }

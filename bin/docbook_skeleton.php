@@ -38,7 +38,7 @@
 use Zend\Console\Getopt,
     Zend\Docbook\ClassParser,
     Zend\Docbook\SkeletonGenerator,
-    Zend\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection as ReflectionClass;
 
 $libPath = __DIR__ . '/../library';
 if (!is_dir($libPath)) {
@@ -93,7 +93,7 @@ if (!isset($opts->c)) {
 }
 // Valid class name?
 $class = $opts->c;
-if (!class_exists($class)) {
+if (!class_exists($class) && !interface_exists($class)) {
     // Invalid class name == no execution
     printf("Invalid class '%s' provided' class not found\n\n", $class);
     echo $opts->getUsageMessage();

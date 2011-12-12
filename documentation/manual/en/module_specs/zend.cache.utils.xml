@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.utils">
+    <info>
+        <title>Zend\Cache\Utils</title>
+    </info>
+
+    <section xml:id="zend.cache.utils.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.cache.utils.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.cache.utils.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <title/>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.utils.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.utils.methods.get-disk-capacity">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getDiskCapacity</methodname>
+                        <methodparam>
+                            <funcparams>string $path</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get disk capacity</para>
+                    <para></para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.get-php-memory-capacity">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getPhpMemoryCapacity</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get php memory capacity</para>
+                    <para></para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.get-system-memory-capacity">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getSystemMemoryCapacity</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get system memory capacity</para>
+                    <para></para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.generate-hash">
+                <term>
+                    <methodsynopsis>
+                        <methodname>generateHash</methodname>
+                        <methodparam>
+                            <funcparams>string $algo, string $data, bool $raw = false</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Generate a hash value.</para>
+                    <para>This helper adds the virtual hash algo "strlen".</para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.utils.methods.get-hash-algos">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getHashAlgos</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Return a list of registered hashing algorithms</para>
+                    <para>incl. the virtual hash algo "strlen".</para>
+                    <para>Returns string</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.utils.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+    </section>
+</section>

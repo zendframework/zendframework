@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.cache.pattern">
+    <info>
+        <title>Zend\Cache\Pattern</title>
+    </info>
+
+    <section xml:id="zend.cache.pattern.intro">
+        <info>
+            <title>Overview</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.cache.pattern.quick-start">
+        <info>
+            <title>Quick Start</title>
+        </info>
+
+    </section>
+
+    <section xml:id="zend.cache.pattern.options">
+        <info>
+            <title>Configuration Options</title>
+        </info>
+
+        <variablelist>
+            <title/>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.pattern.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
+        <variablelist>
+            <varlistentry xml:id="zend.cache.pattern.methods.__construct">
+                <term>
+                    <methodsynopsis>
+                        <methodname>__construct</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable $options = array (
+)</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Constructor</para>
+                    <para></para>
+                    <para>Returns void</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.methods.set-options">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setOptions</methodname>
+                        <methodparam>
+                            <funcparams>array|Traversable $options</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set pattern options</para>
+                    <para></para>
+                    <para>Returns Zend\Cache\Pattern</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.pattern.methods.get-options">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getOptions</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get all pattern options</para>
+                    <para></para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.cache.pattern.examples">
+        <info>
+            <title>Examples</title>
+        </info>
+
+    </section>
+</section>

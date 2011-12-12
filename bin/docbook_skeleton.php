@@ -93,7 +93,7 @@ if (!isset($opts->c)) {
 }
 // Valid class name?
 $class = $opts->c;
-if (!class_exists($class)) {
+if (!class_exists($class) && !interface_exists($class)) {
     // Invalid class name == no execution
     printf("Invalid class '%s' provided' class not found\n\n", $class);
     echo $opts->getUsageMessage();

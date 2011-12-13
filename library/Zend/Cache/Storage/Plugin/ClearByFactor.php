@@ -25,7 +25,6 @@ use Traversable,
     Zend\EventManager\EventCollection,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Adapter,
-    Zend\Cache\Storage\Plugin,
     Zend\Cache\Storage\PostEvent;
 
 /**
@@ -35,130 +34,14 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ClearByFactor implements Plugin
+class ClearByFactor extends AbstractPlugin
 {
-    /**
-     * Automatic clearing factor
-     *
-     * @var int
-     */
-    protected $clearingFactor = 0;
-
-    /**
-     * Flag to clear items by namespace
-     *
-     * @var boolean
-     */
-    protected $clearByNamespace = true;
-
     /**
      * Handles
      *
      * @var array
      */
     protected $handles = array();
-
-    /**
-     * Constructor
-     *
-     * @param array|Traversable $options
-     * @return void
-     */
-    public function __construct($options = array())
-    {
-        $this->setOptions($options);
-    }
-
-    /**
-     * Set options
-     *
-     * @param  array|Traversable $options
-     * @return ClearByFactor
-     */
-    public function setOptions($options)
-    {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array or Traversable object; received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
-        foreach ($options as $name => $value) {
-            $m = 'set' . str_replace('_', '', $name);
-            if (!method_exists($this, $m)) {
-                continue;
-            }
-            $this->$m($value);
-        }
-        return $this;
-    }
-
-    /**
-     * Get options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return array(
-            'clearing_factor'    => $this->getClearingFactor(),
-            'clear_by_namespace' => $this->getClearByNamespace(),
-        );
-    }
-
-    /**
-     * Get automatic clearing factor
-     *
-     * @return int
-     */
-    public function getClearingFactor()
-    {
-        return $this->clearingFactor;
-    }
-
-    /**
-     * Set automatic clearing factor
-     *
-     * @param  int $factor
-     * @return ClearByFactor Fluent interface
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setClearingFactor($factor)
-    {
-        $factor = (int) $factor;
-        if ($factor < 0) {
-            throw new Exception\InvalidArgumentAxception(
-                "Invalid clearing factor '{$factor}': must be greater or equal 0"
-            );
-        }
-        $this->clearingFactor = $factor;
-
-        return $this;
-    }
-
-    /**
-     * Get flag to cleat items by namespace
-     *
-     * @return boolean
-     */
-    public function getClearByNamespace()
-    {
-        return $this->clearByNamespace;
-    }
-
-    /**
-     * Set flag to clear items by namespace
-     *
-     * @param  boolean $flag
-     * @return ClearByFactor Fluent interface
-     */
-    public function setClearByNamespace($flag)
-    {
-        $this->clearByNamespace = (bool) $flag;
-        return $this;
-    }
 
     /**
      * Attach
@@ -218,10 +101,11 @@ class ClearByFactor implements Plugin
      */
     public function clearByFactor(PostEvent $event)
     {
-        $factor = $this->getClearingFactor();
+        $options = $this->getOptions();
+        $factor  = $options->getClearingFactor();
         if ($factor && $event->getResult() && mt_rand(1, $factor) == 1) {
             $params = $event->getParams();
-            if ($this->getClearByNamespace()) {
+            if ($options->getClearByNamespace()) {
                 $event->getStorage()->clearByNamespace(Adapter::MATCH_EXPIRED, $params['options']);
             } else {
                 $event->getStorage()->clear(Adapter::MATCH_EXPIRED, $params['options']);

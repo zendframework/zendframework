@@ -24,7 +24,6 @@ namespace Zend\Cache\Storage\Plugin;
 use Traversable,
     Zend\Cache\Exception,
     Zend\Cache\Storage\ExceptionEvent,
-    Zend\Cache\Storage\Plugin,
     Zend\EventManager\EventCollection;
 
 /**
@@ -33,124 +32,14 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ExceptionHandler implements Plugin
+class ExceptionHandler extends AbstractPlugin
 {
-    /**
-     * Callback
-     */
-    protected $callback = null;
-
-    /**
-     * Throw exceptions
-     *
-     * @var bool
-     */
-    protected $throwExceptions = true;
-
     /**
      * Handles
      *
      * @var array
      */
     protected $handles = array();
-
-    /**
-     * Constructor
-     *
-     * @param array|Traversable $options
-     * @return void
-     */
-    public function __construct($options = array())
-    {
-        $this->setOptions($options);
-    }
-
-    /**
-     * Set options
-     *
-     * @param array|Traversable $options
-     * @return ExceptionHandler
-     */
-    public function setOptions($options)
-    {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array or Traversable object; received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
-        foreach ($options as $name => $value) {
-            $m = 'set' . str_replace('_', '', $name);
-            if (!method_exists($this, $m)) {
-                continue;
-            }
-            $this->$m($value);
-        }
-        return $this;
-    }
-
-    /**
-     * Get options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return array(
-            'callback'         => $this->getCallback(),
-            'throw_exceptions' => $this->getThrowExceptions(),
-        );
-    }
-
-    /**
-     * Set callback
-     *
-     * @param  null|callable $callback
-     * @return ExceptionHandler
-     * @throws ExceptionHandler\InvalidArgumentException
-     */
-    public function setCallback($callback)
-    {
-        if ($callback !== null && !is_callable($callback, true)) {
-            throw new ExceptionHandler\InvalidArgumentException('Not a valid callback');
-        }
-        $this->callback = $callback;
-        return $this;
-    }
-
-    /**
-     * Get callback
-     *
-     * @return null|callable
-     */
-    public function getCallback()
-    {
-        return $this->callback;
-    }
-
-    /**
-     * Set throw exceptions
-     *
-     * @param  bool $flag
-     * @return ExceptionHandler
-     */
-    public function setThrowExceptions($flag)
-    {
-        $this->throwExceptions = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get throw exceptions
-     *
-     * @return bool
-     */
-    public function getThrowExceptions()
-    {
-        return $this->throwExceptions;
-    }
 
     /**
      * Attach
@@ -256,10 +145,11 @@ class ExceptionHandler implements Plugin
      */
     public function onException(ExceptionEvent $event)
     {
-        if (($callback = $this->getCallback())) {
+        $options = $this->getOptions();
+        if (($callback = $options->getExceptionCallback())) {
             call_user_func($callback, $event->getException());
         }
 
-        $event->setThrowException($this->getThrowExceptions());
+        $event->setThrowException($options->getThrowExceptions());
     }
 }

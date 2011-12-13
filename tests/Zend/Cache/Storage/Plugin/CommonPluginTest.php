@@ -44,62 +44,16 @@ abstract class CommonPluginTest extends \PHPUnit_Framework_TestCase
      */
     protected $_plugin;
 
-    public function testOptionNamesValid()
+    public function testOptionObjectAvailable()
     {
         $options = $this->_plugin->getOptions();
-        foreach ($options as $name => $value) {
-            $this->assertRegExp(
-                '/^[a-z]+[a-z0-9_]*[a-z0-9]+$/',
-                $name,
-                "Invalid option name '{$name}'"
-            );
-        }
-    }
-
-    public function testGettersAndSettersOfOptionsExists()
-    {
-        $options = $this->_plugin->getOptions();
-        foreach ($options as $option => $value) {
-            $method = ucwords(str_replace('_', ' ', $option));
-            $method = str_replace(' ', '', $method);
-
-            $this->assertTrue(
-                method_exists($this->_plugin, 'set' . $method),
-                "Missing method 'set'{$method}"
-            );
-
-            $this->assertTrue(
-                method_exists($this->_plugin, 'get' . $method),
-                "Missing method 'get'{$method}"
-            );
-        }
+        $this->assertInstanceOf('Zend\Cache\Storage\Plugin\PluginOptions', $options);
     }
 
     public function testOptionsGetAndSetDefault()
     {
         $options = $this->_plugin->getOptions();
         $this->_plugin->setOptions($options);
-        $this->assertEquals($options, $this->_plugin->getOptions());
+        $this->assertSame($options, $this->_plugin->getOptions());
     }
-
-    public function testOptionsFluentInterface()
-    {
-        $options = $this->_plugin->getOptions();
-        foreach ($options as $option => $value) {
-            $method = ucwords(str_replace('_', ' ', $option));
-            $method = 'set' . str_replace(' ', '', $method);
-            $this->assertSame(
-                $this->_plugin,
-                $this->_plugin->{$method}($value),
-                "Method '{$method}' doesn't implement the fluent interface"
-            );
-        }
-
-        $this->assertSame(
-            $this->_plugin,
-            $this->_plugin->setOptions(array()),
-            "Method 'setOptions' doesn't implement the fluent interface"
-        );
-    }
-
 }

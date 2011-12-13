@@ -45,68 +45,42 @@ class Db extends AbstractWriter
      *
      * @var DbAdapter
      */
-    protected $_db;
+    protected $db;
 
     /**
      * Name of the log table in the database
      *
      * @var string
      */
-    protected $_table;
+    protected $table;
 
     /**
      * Relates database columns names to log data field keys.
      *
      * @var null|array
      */
-    protected $_columnMap;
+    protected $columnMap;
 
     /**
-     * Class constructor
+     * Constructor
      *
-     * @param DbAdapter $db   Database adapter instance
-     * @param string $table         Log table in database
+     * @param DbAdapter $db Database adapter instance
+     * @param string $table Log table in database
      * @param array $columnMap
-     * @return void
+     * @return Db
      */
     public function __construct($db, $table, $columnMap = null)
     {
-        $this->_db        = $db;
-        $this->_table     = $table;
-        $this->_columnMap = $columnMap;
-    }
-
-    /**
-     * Create a new instance of Zend_Log_Writer_Db
-     *
-     * @param  array|\Zend\Config\Config $config
-     * @return self
-     */
-    static public function factory($config = array())
-    {
-        $config = self::_parseConfig($config);
-        $config = array_merge(array(
-            'db'        => null,
-            'table'     => null,
-            'columnMap' => null,
-        ), $config);
-
-        if (isset($config['columnmap'])) {
-            $config['columnMap'] = $config['columnmap'];
-        }
-
-        return new self(
-            $config['db'],
-            $config['table'],
-            $config['columnMap']
-        );
+        $this->db        = $db;
+        $this->table     = $table;
+        $this->columnMap = $columnMap;
     }
 
     /**
      * Formatting is not possible on this writer
      *
-     * @throws Exception\InvalidArgumentException
      * @return void
+     * @throws Exception\InvalidArgumentException
      */
     public function setFormatter(Formatter $formatter)
     {
@@ -120,31 +94,31 @@ class Db extends AbstractWriter
      */
     public function shutdown()
     {
-        $this->_db = null;
+        $this->db = null;
     }
 
     /**
      * Write a message to the log.
      *
-     * @param  array  $event  event data
-     * @throws Exception\RuntimeException
+     * @param array $event event data
      * @return void
+     * @throws Exception\RuntimeException
      */
-    protected function _write($event)
+    protected function doWrite(array $event)
     {
-        if ($this->_db === null) {
+        if (null === $this->db) {
             throw new Exception\RuntimeException('Database adapter is null');
         }
 
-        if ($this->_columnMap === null) {
+        if (null === $this->columnMap) {
             $dataToInsert = $event;
         } else {
             $dataToInsert = array();
-            foreach ($this->_columnMap as $columnName => $fieldKey) {
+            foreach ($this->columnMap as $columnName => $fieldKey) {
                 $dataToInsert[$columnName] = $event[$fieldKey];
             }
         }
 
-        $this->_db->insert($this->_table, $dataToInsert);
+        $this->db->insert($this->table, $dataToInsert);
     }
 }

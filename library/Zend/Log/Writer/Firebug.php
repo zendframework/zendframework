@@ -31,10 +31,6 @@ use Zend\Log\Logger,
 /**
  * Writes log messages to the Firebug Console via FirePHP.
  *
- * @uses       \Zend\Log\Logger
- * @uses       \Zend\Log\Formatter\Firebug
- * @uses       \Zend\Log\Writer\AbstractWriter
- * @uses       \Zend\Wildfire\Plugin\FirePhp
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -48,7 +44,7 @@ class Firebug extends AbstractWriter
      *
      * @var array
      */
-    protected $_priorityStyles = array(
+    protected $priorityStyles = array(
         Logger::EMERG  => FirePhp::ERROR,
         Logger::ALERT  => FirePhp::ERROR,
         Logger::CRIT   => FirePhp::ERROR,
@@ -64,17 +60,17 @@ class Firebug extends AbstractWriter
      *
      * @var string
      */
-    protected $_defaultPriorityStyle = FirePhp::LOG;
+    protected $defaultPriorityStyle = FirePhp::LOG;
 
     /**
      * Flag indicating whether the log writer is enabled
      *
      * @var boolean
      */
-    protected $_enabled = true;
+    protected $enabled = true;
 
     /**
-     * Class constructor
+     * Constructor
      *
      * @return void
      */
@@ -84,18 +80,7 @@ class Firebug extends AbstractWriter
             $this->setEnabled(false);
         }
 
-        $this->_formatter = new Formatter\Firebug();
-    }
-
-    /**
-     * Create a new instance of Zend_Log_Writer_Firebug
-     *
-     * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Firebug
-     */
-    static public function factory($config = array())
-    {
-        return new self();
+        $this->formatter = new Formatter\Firebug();
     }
 
     /**
@@ -106,8 +91,8 @@ class Firebug extends AbstractWriter
      */
     public function setEnabled($enabled)
     {
-        $previous = $this->_enabled;
-        $this->_enabled = $enabled;
+        $previous = $this->enabled;
+        $this->enabled = $enabled;
         return $previous;
     }
 
@@ -118,7 +103,7 @@ class Firebug extends AbstractWriter
      */
     public function getEnabled()
     {
-        return $this->_enabled;
+        return $this->enabled;
     }
 
     /**
@@ -129,8 +114,8 @@ class Firebug extends AbstractWriter
      */
     public function setDefaultPriorityStyle($style)
     {
-        $previous = $this->_defaultPriorityStyle;
-        $this->_defaultPriorityStyle = $style;
+        $previous = $this->defaultPriorityStyle;
+        $this->defaultPriorityStyle = $style;
         return $previous;
     }
 
@@ -141,7 +126,7 @@ class Firebug extends AbstractWriter
      */
     public function getDefaultPriorityStyle()
     {
-        return $this->_defaultPriorityStyle;
+        return $this->defaultPriorityStyle;
     }
 
     /**
@@ -154,10 +139,10 @@ class Firebug extends AbstractWriter
     public function setPriorityStyle($priority, $style)
     {
         $previous = true;
-        if (array_key_exists($priority,$this->_priorityStyles)) {
-            $previous = $this->_priorityStyles[$priority];
+        if (array_key_exists($priority,$this->priorityStyles)) {
+            $previous = $this->priorityStyles[$priority];
         }
-        $this->_priorityStyles[$priority] = $style;
+        $this->priorityStyles[$priority] = $style;
         return $previous;
     }
 
@@ -169,8 +154,8 @@ class Firebug extends AbstractWriter
      */
     public function getPriorityStyle($priority)
     {
-        if (array_key_exists($priority,$this->_priorityStyles)) {
-            return $this->_priorityStyles[$priority];
+        if (array_key_exists($priority, $this->priorityStyles)) {
+            return $this->priorityStyles[$priority];
         }
         return false;
     }
@@ -181,26 +166,27 @@ class Firebug extends AbstractWriter
      * @param array $event The event data
      * @return void
      */
-    protected function _write($event)
+    protected function doWrite(array $event)
     {
         if (!$this->getEnabled()) {
             return;
         }
 
-        if (array_key_exists($event['priority'],$this->_priorityStyles)) {
-            $type = $this->_priorityStyles[$event['priority']];
+        if (array_key_exists($event['priority'], $this->priorityStyles)) {
+            $type = $this->priorityStyles[$event['priority']];
         } else {
-            $type = $this->_defaultPriorityStyle;
+            $type = $this->defaultPriorityStyle;
         }
 
-        $message = $this->_formatter->format($event);
-
-        $label = isset($event['firebugLabel'])?$event['firebugLabel']:null;
+        $message = $this->formatter->format($event);
+        $label = isset($event['firebugLabel']) ? $event['firebugLabel'] : null;
 
         FirePhp::getInstance()->send($message,
                                      $label,
                                      $type,
-                                     array('traceOffset'=>4,
-                                           'fixZendLogOffsetIfApplicable'=>true));
+                                     array(
+                                         'traceOffset'=>4,
+                                         'fixZendLogOffsetIfApplicable' => true
+                                     ));
     }
 }

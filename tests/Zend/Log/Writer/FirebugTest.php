@@ -36,6 +36,7 @@ use Zend\Log\Writer\Firebug as FirebugWriter,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Log
+ * @group disable
  */
 class FirebugTest extends \PHPUnit_Framework_TestCase
 {

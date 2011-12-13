@@ -21,8 +21,8 @@
 
 namespace ZendTest\Log\Writer;
 
-use \Zend\Log\Writer\Null as NullWriter,
-    \Zend\Log\Logger;
+use Zend\Log\Writer\Null as NullWriter,
+    Zend\Log\Logger;
 
 /**
  * @category   Zend
@@ -38,15 +38,5 @@ class NullTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new NullWriter();
         $writer->write(array('message' => 'foo', 'priority' => 42));
-    }
-
-    public function testFactory()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName' => "Null"
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
     }
 }

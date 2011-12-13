@@ -22,8 +22,9 @@
 namespace ZendTest\Log\Writer;
 
 use ZendTest\Log\TestAsset\MockDbAdapter,
-    \Zend\Log\Writer\Db as DbWriter,
-    \Zend\Log\Logger;
+    Zend\Log\Writer\Db as DbWriter,
+    Zend\Log\Logger,
+    Zend\Log\Formatter\Simple as SimpleFormatter;
 
 /**
  * @category   Zend
@@ -46,14 +47,16 @@ class DbTest extends \PHPUnit_Framework_TestCase
     public function testFormattingIsNotSupported()
     {
         $this->setExpectedException('Zend\Log\Exception\InvalidArgumentException', 'does not support formatting');
-        $this->writer->setFormatter(new \Zend\Log\Formatter\Simple);
+        $this->writer->setFormatter(new SimpleFormatter);
     }
 
     public function testWriteWithDefaults()
     {
         // log to the mock db adapter
-        $fields = array('message'  => 'foo',
-                        'priority' => 42);
+        $fields = array(
+            'message'  => 'foo',
+            'priority' => 42
+        );
 
         $this->writer->write($fields);
 
@@ -62,32 +65,42 @@ class DbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
-        $binds = array('message'  => $fields['message'],
-                       'priority' => $fields['priority']);
+        $binds = array(
+            'message'  => $fields['message'],
+            'priority' => $fields['priority']
+        );
         $this->assertEquals(array($this->tableName, $binds),
                             $this->db->calls['insert'][0]);
     }
 
     public function testWriteUsesOptionalCustomColumnNames()
     {
-        $this->writer = new DbWriter($this->db, $this->tableName,
-                                                array('new-message-field' => 'message',
-                                                      'new-message-field' => 'priority'));
+        $this->writer = new DbWriter($this->db, $this->tableName, array(
+            'new-message-field' => 'message',
+            'new-message-field' => 'priority'
+        ));
 
         // log to the mock db adapter
         $message  = 'message-to-log';
         $priority = 2;
-        $this->writer->write(array('message' => $message, 'priority' => $priority));
+        $this->writer->write(array(
+            'message' => $message,
+            'priority' => $priority
+        ));
 
         // insert should be called once...
         $this->assertContains('insert', array_keys($this->db->calls));
         $this->assertEquals(1, count($this->db->calls['insert']));
 
         // ...with the correct table and binds for the database
-        $binds = array('new-message-field' => $message,
-                       'new-message-field' => $priority);
-        $this->assertEquals(array($this->tableName, $binds),
-                            $this->db->calls['insert'][0]);
+        $binds = array(
+            'new-message-field' => $message,
+            'new-message-field' => $priority
+        );
+        $this->assertEquals(array(
+            $this->tableName, $binds),
+            $this->db->calls['insert'][0]
+        );
     }
 
     public function testShutdownRemovesReferenceToDatabaseInstance()
@@ -97,20 +110,6 @@ class DbTest extends \PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Zend\Log\Exception\RuntimeException', 'Database adapter is null');
         $this->writer->write(array('message' => 'this should fail'));
-    }
-
-    public function testFactory()
-    {
-        $cfg = array('log' => array('memory' => array(
-            'writerName'   => "Db",
-            'writerParams' => array(
-                'db'    => $this->db,
-                'table' => $this->tableName,
-            ),
-        )));
-
-        $logger = Logger::factory($cfg['log']);
-        $this->assertTrue($logger instanceof Logger);
     }
 
     /**

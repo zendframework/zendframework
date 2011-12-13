@@ -37,10 +37,6 @@ use Zend\Log\Formatter\Simple as SimpleFormatter,
  * Zend_Mail object.  Note that this class only sends the email upon
  * completion, so any log entries accumulated are sent in a single email.
  *
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Exception\RuntimeException
- * @uses       \Zend\Log\Formatter\Simple
- * @uses       \Zend\Log\Writer\AbstractWriter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -54,7 +50,7 @@ class Mail extends AbstractWriter
      *
      * @var array
      */
-    protected $_eventsToMail = array();
+    protected $eventsToMail = array();
 
     /**
      * Array of formatted lines for use in an HTML email body; these events
@@ -63,35 +59,35 @@ class Mail extends AbstractWriter
      *
      * @var array
      */
-    protected $_layoutEventsToMail = array();
+    protected $layoutEventsToMail = array();
 
     /**
      * Zend_Mail instance to use
      *
      * @var Mailer
      */
-    protected $_mail;
+    protected $mail;
 
     /**
      * Zend_Layout instance to use; optional.
      *
      * @var Layout
      */
-    protected $_layout;
+    protected $layout;
 
     /**
      * Optional formatter for use when rendering with Zend_Layout.
      *
      * @var Formatter
      */
-    protected $_layoutFormatter;
+    protected $layoutFormatter;
 
     /**
      * Array keeping track of the number of entries per priority level.
      *
      * @var array
      */
-    protected $_numEntriesPerPriority = array();
+    protected $numEntriesPerPriority = array();
 
     /**
      * Subject prepend text.
@@ -102,161 +98,38 @@ class Mail extends AbstractWriter
      *
      * @var string|null
      */
-    protected $_subjectPrependText;
+    protected $subjectPrependText;
 
     /**
-     * MethodMap for Mail's headers
-     *
-     * @var array
-     */
-    protected static $_methodMapHeaders = array(
-        'from' => 'setFrom',
-        'to' => 'addTo',
-        'cc' => 'addCc',
-        'bcc' => 'addBcc',
-    );
-
-    /**
-     * Class constructor.
+     * Constructor
      *
      * Constructs the mail writer; requires a Zend_Mail instance, and takes an
      * optional Zend_Layout instance.  If Zend_Layout is being used,
-     * $this->_layout->events will be set for use in the layout template.
+     * $this->layout->events will be set for use in the layout template.
      *
-     * @param  Mailer $mail Mail instance
-     * @param  Layout $layout Layout instance; optional
-     * @return void
+     * @param Mailer $mail Mail instance
+     * @param Layout|null $layout Layout instance
+     * @return Mail
      */
     public function __construct(Mailer $mail, Layout $layout = null)
     {
-        $this->_mail = $mail;
+        $this->mail = $mail;
         if (null !== $layout) {
             $this->setLayout($layout);
         }
-        $this->_formatter = new SimpleFormatter();
-    }
-
-    /**
-     * Create a new instance of Zend_Log_Writer_Mail
-     *
-     * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Writer\Mail
-     */
-    static public function factory($config = array())
-    {
-        $config = self::_parseConfig($config);
-        $mail = self::_constructMailFromConfig($config);
-        $writer = new self($mail);
-
-        if (isset($config['layout']) || isset($config['layoutOptions'])) {
-            $writer->setLayout($config);
-        }
-        if (isset($config['layoutFormatter'])) {
-            $layoutFormatter = new $config['layoutFormatter'];
-            $writer->setLayoutFormatter($layoutFormatter);
-        }
-        if (isset($config['subjectPrependText'])) {
-            $writer->setSubjectPrependText($config['subjectPrependText']);
-        }
-
-        return $writer;
+        $this->formatter = new SimpleFormatter();
     }
 
     /**
      * Set the layout
      *
-     * @param \Zend\Layout\Layout|array $layout
-     * @throws \Zend\Log\Exception\InvalidArgumentException
-     * @return \Zend\Log\Writer\Mail
+     * @param Layout $layout
+     * @return Mail
      */
-    public function setLayout($layout)
+    public function setLayout(Layout $layout)
     {
-        if (is_array($layout)) {
-            $layout = $this->_constructLayoutFromConfig($layout);
-        }
-
-        if (!$layout instanceof Layout) {
-            throw new Exception\InvalidArgumentException(
-                'Mail must be an instance of \Zend\Layout\Layout or an array'
-            );
-        }
-        $this->_layout = $layout;
-
+        $this->layout = $layout;
         return $this;
-    }
-
-    /**
-     * Construct a Mail instance based on a configuration array
-     *
-     * @param array $config
-     * @throws Exception\InvalidArgumentException
-     * @return Mailer
-     */
-    protected static function _constructMailFromConfig(array $config)
-    {
-        $mailClass = 'Zend\Mail\Mail';
-        if (isset($config['mail'])) {
-            $mailClass = $config['mail'];
-        }
-
-        if (!array_key_exists('charset', $config)) {
-            $config['charset'] = null;
-        }
-        $mail = new $mailClass($config['charset']);
-        if (!$mail instanceof Mailer) {
-            throw new Exception\InvalidArgumentException($mail . 'must extend \Zend\Mail\Mail');
-        }
-
-        if (isset($config['subject'])) {
-            $mail->setSubject($config['subject']);
-        }
-
-        $headerAddresses = array_intersect_key($config, self::$_methodMapHeaders);
-        if (count($headerAddresses)) {
-            foreach ($headerAddresses as $header => $address) {
-                $method = self::$_methodMapHeaders[$header];
-                if (is_array($address) && isset($address['name'])
-                    && !is_numeric($address['name'])
-                ) {
-                    $params = array(
-                        $address['email'],
-                        $address['name']
-                    );
-                } else if (is_array($address) && isset($address['email'])) {
-                    $params = array($address['email']);
-                } else {
-                    $params = array($address);
-                }
-                call_user_func_array(array($mail, $method), $params);
-            }
-        }
-
-        return $mail;
-    }
-
-    /**
-     * Construct a Layout instance based on a configuration array
-     *
-     * @param array $config
-     * @throws Exception\InvalidArgumentException
-     * @return Layout
-     */
-    protected function _constructLayoutFromConfig(array $config)
-    {
-        $config = array_merge(array(
-            'layout' => 'Zend\Layout\Layout',
-            'layoutOptions' => null
-        ), $config);
-
-        $layoutClass = $config['layout'];
-        $layout = new $layoutClass($config['layoutOptions']);
-        if (!$layout instanceof Layout) {
-            throw new Exception\InvalidArgumentException(
-                $layout . 'must extend \Zend\Layout\Layout'
-            );
-        }
-
-        return $layout;
     }
 
     /**
@@ -265,32 +138,31 @@ class Mail extends AbstractWriter
      * Handles the formatting of both plaintext entries, as well as those
      * rendered with Zend_Layout.
      *
-     * @param  array $event Event data
+     * @param array $event Event data
      * @return void
      */
-    protected function _write($event)
+    protected function doWrite(array $event)
     {
         // Track the number of entries per priority level.
-        if (!isset($this->_numEntriesPerPriority[$event['priorityName']])) {
-            $this->_numEntriesPerPriority[$event['priorityName']] = 1;
+        if (!isset($this->numEntriesPerPriority[$event['priorityName']])) {
+            $this->numEntriesPerPriority[$event['priorityName']] = 1;
         } else {
-            $this->_numEntriesPerPriority[$event['priorityName']]++;
+            $this->numEntriesPerPriority[$event['priorityName']]++;
         }
 
-        $formattedEvent = $this->_formatter->format($event);
+        $formattedEvent = $this->formatter->format($event);
 
         // All plaintext events are to use the standard formatter.
-        $this->_eventsToMail[] = $formattedEvent;
+        $this->eventsToMail[] = $formattedEvent;
 
         // If we have a Zend_Layout instance, use a specific formatter for the
         // layout if one exists.  Otherwise, just use the event with its
         // default format.
-        if ($this->_layout) {
-            if ($this->_layoutFormatter) {
-                $this->_layoutEventsToMail[] =
-                    $this->_layoutFormatter->format($event);
+        if ($this->layout) {
+            if ($this->layoutFormatter) {
+                $this->layoutEventsToMail[] = $this->layoutFormatter->format($event);
             } else {
-                $this->_layoutEventsToMail[] = $formattedEvent;
+                $this->layoutEventsToMail[] = $formattedEvent;
             }
         }
     }
@@ -303,7 +175,7 @@ class Mail extends AbstractWriter
      */
     public function getLayoutFormatter()
     {
-        return $this->_layoutFormatter;
+        return $this->layoutFormatter;
     }
 
     /**
@@ -313,19 +185,20 @@ class Mail extends AbstractWriter
      * Zend_Layout.  In the event that Zend_Layout is not being used, this
      * formatter cannot be set, so an exception will be thrown.
      *
-     * @param  Formatter $formatter
-     * @return \Zend\Log\Writer\Mail
+     * @param Formatter $formatter
+     * @return Mail
      * @throws Exception\InvalidArgumentException
      */
     public function setLayoutFormatter(Formatter $formatter)
     {
-        if (!$this->_layout) {
+        if (!$this->layout) {
             throw new Exception\InvalidArgumentException(
-                'cannot set formatter for layout; ' .
-                    'a Zend\Layout\Layout instance is not in use');
+                'cannot set formatter for layout; '
+                    . 'a Zend\Layout\Layout instance is not in use'
+            );
         }
 
-        $this->_layoutFormatter = $formatter;
+        $this->layoutFormatter = $formatter;
         return $this;
     }
 
@@ -338,19 +211,19 @@ class Mail extends AbstractWriter
      * once, this method cannot be used if the Zend_Mail object already has a
      * subject set.
      *
-     * @param  string $subject Subject prepend text.
+     * @param string $subject Subject prepend text
+     * @return Mail
      * @throws Exception\RuntimeException
-     * @return \Zend\Log\Writer\Mail
      */
     public function setSubjectPrependText($subject)
     {
-        if ($this->_mail->getSubject()) {
+        if ($this->mail->getSubject()) {
             throw new Exception\RuntimeException(
-                'subject already set on mail; ' .
-                    'cannot set subject prepend text');
+                'subject already set on mail; cannot set subject prepend text'
+            );
         }
 
-        $this->_subjectPrependText = (string) $subject;
+        $this->subjectPrependText = (string) $subject;
         return $this;
     }
 
@@ -364,41 +237,38 @@ class Mail extends AbstractWriter
     {
         // If there are events to mail, use them as message body.  Otherwise,
         // there is no mail to be sent.
-        if (empty($this->_eventsToMail)) {
+        if (empty($this->eventsToMail)) {
             return;
         }
 
-        if ($this->_subjectPrependText !== null) {
+        if ($this->subjectPrependText !== null) {
             // Tack on the summary of entries per-priority to the subject
             // line and set it on the Zend_Mail object.
-            $numEntries = $this->_getFormattedNumEntriesPerPriority();
-            $this->_mail->setSubject(
-                "{$this->_subjectPrependText} ({$numEntries})");
+            $numEntries = $this->getFormattedNumEntriesPerPriority();
+            $this->mail->setSubject("{$this->subjectPrependText} ({$numEntries})");
         }
 
-
         // Always provide events to mail as plaintext.
-        $this->_mail->setBodyText(implode('', $this->_eventsToMail));
+        $this->mail->setBodyText(implode('', $this->eventsToMail));
 
         // If a Zend_Layout instance is being used, set its "events"
         // value to the lines formatted for use with the layout.
-        if ($this->_layout) {
+        if ($this->layout) {
             // Set the required "messages" value for the layout.  Here we
             // are assuming that the layout is for use with HTML.
-            $this->_layout->events =
-                implode('', $this->_layoutEventsToMail);
+            $this->layout->events = implode('', $this->layoutEventsToMail);
 
             // If an exception occurs during rendering, convert it to a notice
             // so we can avoid an exception thrown without a stack frame.
             try {
-                $this->_mail->setBodyHtml($this->_layout->render());
+                $this->mail->setBodyHtml($this->layout->render());
             } catch (\Exception $e) {
                 trigger_error(
-                    "exception occurred when rendering layout; " .
-                        "unable to set html body for message; " .
-                        "message = {$e->getMessage()}; " .
-                        "code = {$e->getCode()}; " .
-                        "exception class = " . get_class($e),
+                    "exception occurred when rendering layout; "
+                        . "unable to set html body for message; "
+                        . "message = {$e->getMessage()}; "
+                        . "code = {$e->getCode()}; "
+                        . "exception class = " . get_class($e),
                     E_USER_NOTICE);
             }
         }
@@ -407,7 +277,7 @@ class Mail extends AbstractWriter
         // warning-level message so we can avoid an exception thrown without a
         // stack frame.
         try {
-            $this->_mail->send();
+            $this->mail->send();
         } catch (\Exception $e) {
             trigger_error(
                 "unable to send log entries via email; " .
@@ -420,15 +290,15 @@ class Mail extends AbstractWriter
 
     /**
      * Gets a string of number of entries per-priority level that occurred, or
-     * an emptry string if none occurred.
+     * an empty string if none occurred.
      *
      * @return string
      */
-    protected function _getFormattedNumEntriesPerPriority()
+    protected function getFormattedNumEntriesPerPriority()
     {
         $strings = array();
 
-        foreach ($this->_numEntriesPerPriority as $priority => $numEntries) {
+        foreach ($this->numEntriesPerPriority as $priority => $numEntries) {
             $strings[] = "{$priority}={$numEntries}";
         }
 

@@ -73,10 +73,12 @@ class ObjectCacheTest extends CommonPatternTest
     {
         $class = __NAMESPACE__ . '\TestObjectCache';
         $this->_storage = new Cache\Storage\Adapter\Memory();
-        $this->_pattern = new Cache\Pattern\ObjectCache(array(
-            'entity'  => new $class(),
-            'storage' => $this->_storage
+        $this->_options = new Cache\Pattern\PatternOptions(array(
+            'object'  => new $class(),
+            'storage' => $this->_storage,
         ));
+        $this->_pattern = new Cache\Pattern\ObjectCache();
+        $this->_pattern->setOptions($this->_options);
 
         parent::setUp();
     }
@@ -96,7 +98,7 @@ class ObjectCacheTest extends CommonPatternTest
 
     public function testCallDisabledCacheOutput()
     {
-        $this->_pattern->setCacheOutput(false);
+        $this->_options->setCacheOutput(false);
         $this->_testCall(
             'bar',
             array('testCallDisabledCacheOutput', 'arg2')
@@ -105,7 +107,7 @@ class ObjectCacheTest extends CommonPatternTest
 
     public function testCallInvoke()
     {
-        $this->_pattern->setCacheOutput(false);
+        $this->_options->setCacheOutput(false);
         $this->_testCall('__invoke', array('arg1', 'arg2'));
     }
 
@@ -163,12 +165,12 @@ class ObjectCacheTest extends CommonPatternTest
     public function testSetProperty()
     {
         $this->_pattern->property = 'testSetProperty';
-        $this->assertEquals('testSetProperty', $this->_pattern->getEntity()->property);
+        $this->assertEquals('testSetProperty', $this->_options->getObject()->property);
     }
 
     public function testGetProperty()
     {
-        $this->assertEquals($this->_pattern->getEntity()->property, $this->_pattern->property);
+        $this->assertEquals($this->_options->getObject()->property, $this->_pattern->property);
     }
 
     public function testIssetProperty()
@@ -209,7 +211,7 @@ class ObjectCacheTest extends CommonPatternTest
         ob_end_clean();
 
         $this->assertEquals($returnSpec . $firstCounter, $return);
-        if ($this->_pattern->getCacheOutput()) {
+        if ($this->_options->getCacheOutput()) {
             $this->assertEquals($outputSpec . $firstCounter, $data);
         } else {
             $this->assertEquals('', $data);

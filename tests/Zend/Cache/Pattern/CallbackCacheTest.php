@@ -74,9 +74,11 @@ class CallbackCacheTest extends CommonPatternTest
     public function setUp()
     {
         $this->_storage = new Cache\Storage\Adapter\Memory();
-        $this->_pattern = new Cache\Pattern\CallbackCache(array(
-            'storage' => $this->_storage
+        $this->_options = new Cache\Pattern\PatternOptions(array(
+            'storage' => $this->_storage,
         ));
+        $this->_pattern = new Cache\Pattern\CallbackCache();
+        $this->_pattern->setOptions($this->_options);
 
         parent::setUp();
     }
@@ -96,7 +98,8 @@ class CallbackCacheTest extends CommonPatternTest
 
     public function testCallDisabledCacheOutput()
     {
-        $this->_pattern->setCacheOutput(false);
+        $options = $this->_pattern->getOptions();
+        $options->setCacheOutput(false);
         $this->_testCall(
             __NAMESPACE__ . '\TestCallbackCache::bar',
             array('testCallDisabledCacheOutput', 'arg2')
@@ -201,7 +204,8 @@ class CallbackCacheTest extends CommonPatternTest
         $data = ob_get_clean();
 
         $this->assertEquals($returnSpec . $firstCounter, $return);
-        if ($this->_pattern->getCacheOutput()) {
+        $options = $this->_pattern->getOptions();
+        if ($options->getCacheOutput()) {
             $this->assertEquals($outputSpec . $firstCounter, $data);
         } else {
             $this->assertEquals('', $data);

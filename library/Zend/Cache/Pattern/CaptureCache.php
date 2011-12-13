@@ -34,362 +34,11 @@ use Zend\Cache\Exception,
 class CaptureCache extends AbstractPattern
 {
     /**
-     * Public directory
-     *
-     * @var string
-     */
-    protected $publicDir = null;
-
-    /**
-     * Used umask on creating a cache directory
-     *
-     * @var int
-     */
-    protected $dirUmask = 0007;
-
-    /**
-     * Used umask on creating a cache file
-     *
-     * @var int
-     */
-    protected $fileUmask = 0117;
-
-    /**
-     * Lock files on writing
-     *
-     * @var boolean
-     */
-    protected $fileLocking = true;
-
-    /**
-     * The index filename
-     *
-     * @var string
-     */
-    protected $indexFilename = 'index.html';
-
-    /**
      * Page identifier
      *
      * @var null|string
      */
     protected $pageId = null;
-
-    /**
-     * Storage for tagging
-     *
-     * @var null|StorageAdapter
-     */
-    protected $tagStorage = null;
-
-    /**
-     * Cache item key to store tags
-     *
-     * @var string
-     */
-    protected $tagKey = 'ZendCachePatternCaptureCache_Tags';
-
-    /**
-     * Tags
-     *
-     * @var array
-     */
-    protected $tags = array();
-
-    /**
-     * Constructor
-     *
-     * @param array|\Traversable $options
-     */
-    public function __construct($options = array())
-    {
-        parent::__construct($options);
-    }
-
-    /**
-     * Get all pattern options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return array(
-            'public_dir'     => $this->getPublicDir(),
-            'dir_perm'       => $this->getDirPerm(),
-            'dir_umask'      => $this->getDirUmask(),
-            'file_perm'      => $this->getFilePerm(),
-            'file_umask'     => $this->getFileUmask(),
-            'file_locking'   => $this->getFileLocking(),
-            'tag_storage'    => $this->getTagStorage(),
-            'tag_key'        => $this->getTagKey(),
-        );
-    }
-
-    /**
-     * Set public directory
-     *
-     * @param  null|string $dir
-     * @return CaptureCache
-     */
-    public function setPublicDir($dir)
-    {
-        $this->publicDir = $dir;
-        return $this;
-    }
-
-    /**
-     * Get public directory
-     *
-     * @return null|string
-     */
-    public function getPublicDir()
-    {
-        return $this->publicDir;
-    }
-
-    /**
-     * Set directory permissions
-     *
-     * @param  int|string $perm Permissions as octal number
-     * @return CaptureCache
-     */
-    public function setDirPerm($perm)
-    {
-        if (is_string($perm)) {
-            $perm = octdec($perm);
-        } else {
-            $perm = (int) $perm;
-        }
-
-        // use umask
-        return $this->setDirUmask(~$perm);
-    }
-
-    /**
-     * Get directory permissions
-     *
-     * @return int
-     */
-    public function getDirPerm()
-    {
-        return ~$this->getDirUmask();
-    }
-
-    /**
-     * Set directory umask
-     *
-     * @param  int|string $umask Umask as octal number
-     * @return CaptureCache
-     */
-    public function setDirUmask($umask)
-    {
-        if (is_string($umask)) {
-            $umask = octdec($umask);
-        } else {
-            $umask = (int)$umask;
-        }
-
-        if ((~$umask & 0700) != 0700 ) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid directory umask or directory permissions: '
-              . 'need permissions to execute, read and write directories by owner'
-            );
-        }
-
-        $this->dirUmask = $umask;
-        return $this;
-    }
-
-    /**
-     * Get directory umask
-     *
-     * @return int
-     */
-    public function getDirUmask()
-    {
-        return $this->dirUmask;
-    }
-
-    /**
-     * Set file permissions
-     *
-     * @param  int|string $perm Permissions as octal number
-     * @return CaptureCache
-     */
-    public function setFilePerm($perm)
-    {
-        if (is_string($perm)) {
-            $perm = octdec($perm);
-        } else {
-            $perm = (int) $perm;
-        }
-
-        // use umask
-        return $this->setFileUmask(~$perm);
-    }
-
-    /**
-     * Get file permissions
-     *
-     * @return int
-     */
-    public function getFilePerm()
-    {
-        return ~$this->getFileUmask();
-    }
-
-    /**
-     * Set file umask
-     *
-     * @param  int|string $umask Umask as octal number
-     * @return CaptureCache
-     */
-    public function setFileUmask($umask)
-    {
-        if (is_string($umask)) {
-            $umask = octdec($umask);
-        } else {
-            $umask = (int) $umask;
-        }
-        if ((~$umask & 0600) != 0600 ) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid file umask or file permission: '
-              . 'need permissions to read and write files by owner'
-            );
-        } elseif ((~$umask & 0111) > 0) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid file umask or file permission: '
-              . 'executable cache files are not allowed'
-            );
-        }
-
-        $this->fileUmask = $umask;
-        return $this;
-    }
-
-    /**
-     * Get file umask
-     *
-     * @return int
-     */
-    public function getFileUmask()
-    {
-        return $this->fileUmask;
-    }
-
-    /**
-     * Set file locking
-     *
-     * @param  bool $flag
-     * @return CaptureCache
-     */
-    public function setFileLocking($flag)
-    {
-        $this->fileLocking = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get file locking
-     *
-     * @return bool
-     */
-    public function getFileLocking()
-    {
-        return $this->fileLocking;
-    }
-
-    /**
-     * Set index filename
-     *
-     * @param  string $filename
-     * @return CaptureCache
-     */
-    public function setIndexFilename($filename)
-    {
-        $this->indexFilename = (string) $filename;
-        return $this;
-    }
-
-    /**
-     * Get index filename
-     *
-     * @return string
-     */
-    public function getIndexFilename()
-    {
-        return $this->indexFilename;
-    }
-
-    /**
-     * Set a storage for tagging or remove the storage
-     *
-     * @param  null|StorageAdapter $storage
-     * @return CaptureCache
-     */
-    public function setTagStorage(StorageAdapter $storage = null)
-    {
-        $this->tagStorage = $storage;
-        return $this;
-    }
-
-    /**
-     * Get the storage for tagging
-     *
-     * @return null|StorageAdapter
-     */
-    public function getTagStorage()
-    {
-        return $this->tagStorage;
-    }
-
-    /**
-     * Set cache item key to store tags
-     *
-     * @param  $tagKey string
-     * @return CaptureCache
-     */
-    public function setTagKey($tagKey)
-    {
-        if (($tagKey = (string)$tagKey) === '') {
-            throw new Exception\InvalidArgumentException("Missing tag key '{$tagKey}'");
-        }
-
-        $this->tagKey = $tagKey;
-        return $this;
-    }
-
-    /**
-     * Get cache item key to store tags
-     *
-     * @return string
-     */
-    public function getTagKey()
-    {
-        return $this->tagKey;
-    }
-
-    /**
-     * Set tags to store
-     *
-     * @param  array $tags
-     * @return CaptureCache
-     */
-    public function setTags(array $tags)
-    {
-        $this->tags = $tags;
-        return $this;
-    }
-
-    /**
-     * Get tags to store
-     *
-     * @return array
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
 
     /**
      * Start the cache
@@ -404,16 +53,18 @@ class CaptureCache extends AbstractPattern
             throw new Exception\RuntimeException("Capturing already stated with page id '{$this->pageId}'");
         }
 
+        $classOptions = $this->getOptions();
+
         if (isset($options['tags'])) {
-            $this->setTags($options['tags']);
+            $classOptions->setTags($options['tags']);
             unset($options['tags']);
         }
 
-        if ($this->getTags() && !$this->getTagStorage()) {
+        if ($classOptions->getTags() && !$classOptions->getTagStorage()) {
             throw new Exception\RuntimeException('Tags are defined but missing a tag storage');
         }
 
-        if (($pageId = (string)$pageId) === '') {
+        if (($pageId = (string) $pageId) === '') {
             $pageId = $this->detectPageId();
         }
 
@@ -434,11 +85,11 @@ class CaptureCache extends AbstractPattern
      */
     public function get($pageId = null, array $options = array())
     {
-        if (($pageId = (string)$pageId) === '') {
+        if (($pageId = (string) $pageId) === '') {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getPublicDir()
+        $file = $this->getOptions()->getPublicDir()
               . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
               . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
@@ -462,11 +113,11 @@ class CaptureCache extends AbstractPattern
      */
     public function exists($pageId = null, array $options = array())
     {
-        if (($pageId = (string)$pageId) === '') {
+        if (($pageId = (string) $pageId) === '') {
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getPublicDir()
+        $file = $this->getOptions()->getPublicDir()
               . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
               . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
@@ -487,7 +138,7 @@ class CaptureCache extends AbstractPattern
             $pageId = $this->detectPageId();
         }
 
-        $file = $this->getPublicDir()
+        $file = $this->getOptions()->getPublicDir()
               . DIRECTORY_SEPARATOR . $this->pageId2Path($pageId)
               . DIRECTORY_SEPARATOR . $this->pageId2Filename($pageId);
 
@@ -528,7 +179,7 @@ class CaptureCache extends AbstractPattern
         $filename = basename($pageId);
 
         if ($filename === '') {
-            $filename = $this->getIndexFilename();
+            $filename = $this->getOptions()->getIndexFilename();
         }
 
         return $filename;
@@ -575,10 +226,11 @@ class CaptureCache extends AbstractPattern
      */
     protected function save($output)
     {
+        $options  = $this->getOptions();
         $path     = $this->pageId2Path($this->pageId);
-        $fullPath = $this->getPublicDir() . DIRECTORY_SEPARATOR . $path;
+        $fullPath = $options->getPublicDir() . DIRECTORY_SEPARATOR . $path;
         if (!file_exists($fullPath)) {
-            $oldUmask = umask($this->getDirUmask());
+            $oldUmask = umask($options->getDirUmask());
             if (!@mkdir($fullPath, 0777, true)) {
                 $lastErr = error_get_last();
                 throw new Exception\RuntimeException(
@@ -588,17 +240,17 @@ class CaptureCache extends AbstractPattern
         }
 
         if ($oldUmask !== null) { // $oldUmask could be set on create directory
-            umask($this->getFileUmask());
+            umask($options->getFileUmask());
         } else {
-            $oldUmask = umask($this->getFileUmask());
+            $oldUmask = umask($options->getFileUmask());
         }
-        $file = $path . DIRECTORY_SEPARATOR . $this->pageId2Filename($this->pageId);
-        $fullFile = $this->getPublicDir() . DIRECTORY_SEPARATOR . $file;
+        $file     = $path . DIRECTORY_SEPARATOR . $this->pageId2Filename($this->pageId);
+        $fullFile = $options->getPublicDir() . DIRECTORY_SEPARATOR . $file;
         $this->putFileContent($fullFile, $output);
 
-        $tagStorage = $this->getTagStorage();
+        $tagStorage = $options->getTagStorage();
         if ($tagStorage) {
-            $tagKey     = $this->getTagKey();
+            $tagKey     = $options->getTagKey();
             $tagIndex = $tagStorage->getTagStorage()->getItem($tagKey);
             if (!$tagIndex) {
                 $tagIndex = null;
@@ -611,7 +263,7 @@ class CaptureCache extends AbstractPattern
             }
 
             if ($tagIndex !== null) {
-                $this->getTagStorage()->setItem($tagKey, $tagIndex);
+                $tagStorage->setItem($tagKey, $tagIndex);
             }
         }
     }
@@ -626,7 +278,7 @@ class CaptureCache extends AbstractPattern
     protected function putFileContent($file, $data)
     {
         $flags = FILE_BINARY; // since PHP 6 but defined as 0 in PHP 5.3
-        if ($this->getFileLocking()) {
+        if ($this->getOptions()->getFileLocking()) {
             $flags = $flags | LOCK_EX;
         }
 

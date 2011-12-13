@@ -23,6 +23,7 @@ namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
     GlobIterator,
+    stdClass,
     Zend\Cache\Exception,
     Zend\Cache\Storage,
     Zend\Cache\Storage\Capabilities,
@@ -37,108 +38,6 @@ use ArrayObject,
  */
 class Filesystem extends AbstractAdapter
 {
-    /**
-     * Overwrite default namespace pattern
-     *
-     * @var string
-     */
-    protected $namespacePattern = '/^[a-z0-9_\+\-]*$/Di';
-
-    /**
-     * Namespace separator
-     *
-     * @var string
-     */
-    protected $namespaceSeparator = '-';
-
-    /**
-     * Overwrite default key pattern
-     */
-    protected $keyPattern = '/^[a-z0-9_\+\-]*$/Di';
-
-    /**
-     * Directory to store cache files
-     *
-     * @var null|string The cache directory
-     *                  or NULL for the systems temporary directory
-     */
-    protected $cacheDir = null;
-
-    /**
-     * Used umask on creating a cache file
-     *
-     * @var int
-     */
-    protected $fileUmask = 0117;
-
-    /**
-     * Lock files on writing
-     *
-     * @var boolean
-     */
-    protected $fileLocking = true;
-
-    /**
-     * Block writing files until writing by another process finished.
-     *
-     * NOTE1: this only attempts if fileLocking is enabled
-     * NOTE3: if disabled writing operations return false in part of a locked file
-     *
-     * @var boolean
-     */
-    protected $fileBlocking = true;
-
-    /**
-     * Used umask on creating a cache directory
-     *
-     * @var int
-     */
-    protected $dirUmask = 0007;
-
-    /**
-     * How much sub-directaries should be created?
-     *
-     * @var int
-     */
-    protected $dirLevel = 1;
-
-    /**
-     * Don't get 'fileatime' as 'atime' on metadata
-     *
-     * @var boolean
-     */
-    protected $noAtime = true;
-
-    /**
-     * Don't get 'filectime' as 'ctime' on metadata
-     *
-     * @var boolean
-     */
-    protected $noCtime = true;
-
-    /**
-     * Read control enabled ?
-     *
-     * If enabled a hash (readControlAlgo) will be saved and check on read.
-     *
-     * @var boolean
-     */
-    protected $readControl = false;
-
-    /**
-     * The used hash algorithm if read control is enabled
-     *
-     * @var string
-     */
-    protected $readControlAlgo = 'crc32';
-
-    /**
-     * Call clearstatcache enabled?
-     *
-     * @var boolean
-     */
-    protected $clearStatCache = true;
-
     /**
      * GlobIterator used as statement
      *
@@ -173,420 +72,42 @@ class Filesystem extends AbstractAdapter
     /* configuration */
 
     /**
-     * Get options
+     * Set options.
      *
-     * @return array
+     * @param  array|Traversable|FilesystemOptions $options
+     * @return FilesystemAdapter
+     * @see    getOptions()
+     */
+    public function setOptions($options)
+    {
+        if (!is_array($options) 
+            && !$options instanceof Traversable 
+            && !$options instanceof FilesystemOptions
+        ) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array, a Traversable object, or an FilesystemOptions instance; '
+                . 'received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+        $this->options = $options;
+        $options->setTarget($this);
+        return $this;
+    }
+
+    /**
+     * Get options.
+     *
+     * @return AdapterOptions
+     * @see setOptions()
      */
     public function getOptions()
     {
-        $options = parent::getOptions();
-        $options['namespace_separator'] = $this->getNamespaceSeparator();
-        $options['cache_dir']           = $this->getCacheDir();
-        $options['file_perm']           = $this->getFilePerm();
-        $options['file_umask']          = $this->getFileUmask();
-        $options['file_locking']        = $this->getFileLocking();
-        $options['file_blocking']       = $this->getFileBlocking();
-        $options['dir_perm']            = $this->getDirPerm();
-        $options['dir_umask']           = $this->getDirUmask();
-        $options['dir_level']           = $this->getDirLevel();
-        $options['no_atime']            = $this->getNoAtime();
-        $options['no_ctime']            = $this->getNoCtime();
-        $options['read_control']        = $this->getReadControl();
-        $options['read_control_algo']   = $this->getReadControlAlgo();
-        $options['clear_stat_cache']    = $this->getClearStatCache();
-        return $options;
-    }
-
-    /**
-     * Set namespace separator
-     *
-     * @param string $separator
-     * @return Filesystem
-     */
-    public function setNamespaceSeparator($separator)
-    {
-        $this->namespaceSeparator = (string) $separator;
-        $this->updateCapabilities();
-        return $this;
-    }
-
-    /**
-     * Get namespace separator
-     *
-     * @return string
-     */
-    public function getNamespaceSeparator()
-    {
-        return $this->namespaceSeparator;
-    }
-
-    /**
-     * Set cache dir
-     *
-     * @param string $dir
-     * @return Filesystem
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setCacheDir($dir)
-    {
-        if ($dir !== null) {
-            if (!is_dir($dir)) {
-                throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$dir}' not found or not a directoy"
-                );
-            } elseif (!is_writable($dir)) {
-                throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$dir}' not writable"
-                );
-            } elseif (!is_readable($dir)) {
-                throw new Exception\InvalidArgumentException(
-                    "Cache directory '{$dir}' not readable"
-                );
-            }
-
-            $dir = rtrim(realpath($dir), \DIRECTORY_SEPARATOR);
+        if (!$this->options) {
+            $this->setOptions(new FilesystemOptions());
         }
-
-        $this->cacheDir = $dir;
-        return $this;
-    }
-
-    /**
-     * Get cache dir
-     *
-     * @return null|string
-     */
-    public function getCacheDir()
-    {
-        if ($this->cacheDir === null) {
-            $this->setCacheDir(sys_get_temp_dir());
-        }
-
-        return $this->cacheDir;
-    }
-
-    /**
-     * Set file perm
-     *
-     * @param $perm
-     * @return Filesystem
-     */
-    public function setFilePerm($perm)
-    {
-        if (is_string($perm)) {
-            $perm = octdec($perm);
-        } else {
-            $perm = (int) $perm;
-        }
-
-        // use umask
-        return $this->setFileUmask(~$perm);
-    }
-
-    /**
-     * Get file perm
-     *
-     * @return int
-     */
-    public function getFilePerm()
-    {
-        return ~$this->getFileUmask();
-    }
-
-    /**
-     * Set file umask
-     *
-     * @param  $umask
-     * @return Filesystem
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setFileUmask($umask)
-    {
-        if (is_string($umask)) {
-            $umask = octdec($umask);
-        } else {
-            $umask = (int) $umask;
-        }
-        if ((~$umask & 0600) != 0600 ) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid file umask or file permission: '
-                . 'need permissions to read and write files by owner'
-            );
-        } elseif ((~$umask & 0111) > 0) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid file umask or file permission: '
-                . 'executable cache files are not allowed'
-            );
-        }
-
-        $this->fileUmask = $umask;
-        return $this;
-    }
-
-    /**
-     * Get file umask
-     *
-     * @return int
-     */
-    public function getFileUmask()
-    {
-        return $this->fileUmask;
-    }
-
-    /**
-     * Set file locking
-     *
-     * @param  bool $flag
-     * @return Filesystem
-     */
-    public function setFileLocking($flag)
-    {
-        $this->fileLocking = (bool)$flag;
-        return $this;
-    }
-
-    /**
-     * Get file locking
-     *
-     * @return bool
-     */
-    public function getFileLocking()
-    {
-        return $this->fileLocking;
-    }
-
-    /**
-     * Set file blocking
-     *
-     * @param  bool $flag
-     * @return Filesystem
-     */
-    public function setFileBlocking($flag)
-    {
-        $this->fileBlocking = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get file blocking
-     *
-     * @return bool
-     */
-    public function getFileBlocking()
-    {
-        return $this->fileBlocking;
-    }
-
-    /**
-     * Set no atime
-     *
-     * @param  bool $flag
-     * @return Filesystem
-     */
-    public function setNoAtime($flag)
-    {
-        $this->noAtime = (bool) $flag;
-        $this->updateCapabilities();
-        return $this;
-    }
-
-    /**
-     * Get no atime
-     *
-     * @return bool
-     */
-    public function getNoAtime()
-    {
-        return $this->noAtime;
-    }
-
-    /**
-     * Set no ctime
-     *
-     * @param  bool $flag
-     * @return Filesystem
-     */
-    public function setNoCtime($flag)
-    {
-        $this->noCtime = (bool) $flag;
-        $this->updateCapabilities();
-        return $this;
-    }
-
-    /**
-     * Get no ctime
-     *
-     * @return bool
-     */
-    public function getNoCtime()
-    {
-        return $this->noCtime;
-    }
-
-    /**
-     * Set dir perm
-     *
-     * @param string|integer $perm
-     * @return Filesystem
-     */
-    public function setDirPerm($perm)
-    {
-        if (is_string($perm)) {
-            $perm = octdec($perm);
-        } else {
-            $perm = (int) $perm;
-        }
-
-        // use umask
-        return $this->setDirUmask(~$perm);
-    }
-
-    /**
-     * Get dir perm
-     *
-     * @return int
-     */
-    public function getDirPerm()
-    {
-        return ~$this->getDirUmask();
-    }
-
-    /**
-     * Set dir umask
-     *
-     * @param string|integer $umask
-     * @return Filesystem
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setDirUmask($umask)
-    {
-        if (is_string($umask)) {
-            $umask = octdec($umask);
-        } else {
-            $umask = (int) $umask;
-        }
-
-        if ((~$umask & 0700) != 0700 ) {
-            throw new Exception\InvalidArgumentException(
-                'Invalid directory umask or directory permissions: '
-                . 'need permissions to execute, read and write directories by owner'
-            );
-        }
-
-        $this->dirUmask = $umask;
-        return $this;
-    }
-
-    /**
-     * Get dir umask
-     *
-     * @return int
-     */
-    public function getDirUmask()
-    {
-        return $this->dirUmask;
-    }
-
-    /**
-     * Set dir level
-     *
-     * @param  integer $level
-     * @return Filesystem
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setDirLevel($level)
-    {
-        $level = (int)$level;
-        if ($level < 0 || $level > 16) {
-            throw new Exception\InvalidArgumentException(
-                "Directory level '{$level}' have to be between 0 and 16"
-            );
-        }
-        $this->dirLevel = $level;
-        return $this;
-    }
-
-    /**
-     * Get dir level
-     *
-     * @return int
-     */
-    public function getDirLevel()
-    {
-        return $this->dirLevel;
-    }
-
-    /**
-     * Set read control
-     *
-     * @param bool $flag
-     * @return Filesystem
-     */
-    public function setReadControl($flag)
-    {
-        $this->readControl = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get read control
-     *
-     * @return bool
-     */
-    public function getReadControl()
-    {
-        return $this->readControl;
-    }
-
-    /**
-     * Set real control algo
-     *
-     * @param  string $algo
-     * @return Filesystem
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setReadControlAlgo($algo)
-    {
-        $algo = strtolower($algo);
-
-        if (!in_array($algo, Utils::getHashAlgos())) {
-            throw new Exception\InvalidArgumentException("Unsupported hash algorithm '{$algo}");
-        }
-
-        $this->readControlAlgo = $algo;
-        return $this;
-    }
-
-    /**
-     * Get read control algo
-     *
-     * @return string
-     */
-    public function getReadControlAlgo()
-    {
-        return $this->readControlAlgo;
-    }
-
-    /**
-     * Set clear stat cache
-     *
-     * @param  bool $flag
-     * @return Filesystem
-     */
-    public function setClearStatCache($flag)
-    {
-        $this->clearStatCache = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get clear stat cache
-     *
-     * @return bool
-     */
-    public function getClearStatCache()
-    {
-        return $this->clearStatCache;
+        return $this->options;
     }
 
     /* reading */
@@ -600,7 +121,8 @@ class Filesystem extends AbstractAdapter
      */
     public function getItem($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -617,7 +139,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -643,7 +165,8 @@ class Filesystem extends AbstractAdapter
      */
     public function getItems(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
@@ -662,7 +185,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -688,7 +211,8 @@ class Filesystem extends AbstractAdapter
      */
     public function hasItem($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -705,7 +229,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -725,7 +249,8 @@ class Filesystem extends AbstractAdapter
      */
     public function hasItems(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
@@ -741,7 +266,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -767,7 +292,8 @@ class Filesystem extends AbstractAdapter
      */
     public function getMetadata($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -784,11 +310,11 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
-            $lastInfoId = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            $lastInfoId = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
             if ($this->lastInfoId == $lastInfoId && $this->lastInfoAll) {
                 return $this->lastInfoAll;
             }
@@ -810,7 +336,8 @@ class Filesystem extends AbstractAdapter
      */
     public function getMetadatas(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
@@ -829,7 +356,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -859,7 +386,8 @@ class Filesystem extends AbstractAdapter
      */
     public function setItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -877,7 +405,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -897,7 +425,8 @@ class Filesystem extends AbstractAdapter
      */
     public function setItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -913,7 +442,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -939,7 +468,8 @@ class Filesystem extends AbstractAdapter
      */
     public function replaceItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -957,7 +487,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -982,7 +512,8 @@ class Filesystem extends AbstractAdapter
      */
     public function replaceItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -998,7 +529,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -1027,7 +558,8 @@ class Filesystem extends AbstractAdapter
      */
     public function addItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1045,7 +577,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -1070,7 +602,8 @@ class Filesystem extends AbstractAdapter
      */
     public function addItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1086,7 +619,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -1117,7 +650,8 @@ class Filesystem extends AbstractAdapter
      */
     public function checkAndSetItem($token, $key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1136,7 +670,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -1171,7 +705,8 @@ class Filesystem extends AbstractAdapter
      */
     public function touchItem($key, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1188,7 +723,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
@@ -1211,7 +746,8 @@ class Filesystem extends AbstractAdapter
      */
     public function touchItems(array $keys, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1248,7 +784,8 @@ class Filesystem extends AbstractAdapter
      */
     public function removeItem($key, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1284,7 +821,8 @@ class Filesystem extends AbstractAdapter
      */
     public function removeItems(array $keys, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1328,13 +866,14 @@ class Filesystem extends AbstractAdapter
             throw new Exception\RuntimeException('Statement already in use');
         }
 
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeMatchingMode($mode, self::MATCH_ACTIVE, $options);
-        $options = array_merge($this->getOptions(), $options);
+        $options = array_merge($baseOptions->toArray(), $options);
         $args = new ArrayObject(array(
             'mode'    => & $mode,
             'options' => & $options,
@@ -1346,16 +885,16 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ($this->getClearStatCache()) {
+            if ($baseOptions->getClearStatCache()) {
                 clearstatcache();
             }
 
             try {
-                $prefix = $options['namespace'] . $this->getNamespaceSeparator();
+                $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
                 $find = $options['cache_dir']
                     . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options['dir_level'])
                     . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-                $glob = new \GlobIterator($find);
+                $glob = new GlobIterator($find);
 
                 $this->stmtActive  = true;
                 $this->stmtGlob    = $glob;
@@ -1464,7 +1003,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $prefix = $options['namespace'] . $this->getNamespaceSeparator();
+            $prefix = $options['namespace'] . $this->getOptions()->getNamespaceSeparator();
             $result = $this->clearByPrefix($prefix, $mode, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
@@ -1480,7 +1019,8 @@ class Filesystem extends AbstractAdapter
      */
     public function optimize(array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1497,7 +1037,7 @@ class Filesystem extends AbstractAdapter
 
             if ( ($dirLevel = $this->getDirLevel()) ) {
                 // removes only empty directories
-                $this->rmDir($this->getCacheDir(), $options['namespace'] . $this->getNamespaceSeparator());
+                $this->rmDir($this->getCacheDir(), $options['namespace'] . $baseOptions->getNamespaceSeparator());
             }
 
             $result = true;
@@ -1525,7 +1065,7 @@ class Filesystem extends AbstractAdapter
             }
 
             if ($this->capabilities === null) {
-                $this->capabilityMarker = new \stdClass();
+                $this->capabilityMarker = new stdClass();
                     $this->capabilities = new Capabilities(
                     $this->capabilityMarker,
                     array(
@@ -1546,7 +1086,7 @@ class Filesystem extends AbstractAdapter
                         'expiredRead'        => true,
                         'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
                         'namespaceIsPrefix'  => true,
-                        'namespaceSeparator' => $this->getNamespaceSeparator(),
+                        'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
                         'iterable'           => true,
                         'clearAllNamespaces' => true,
                         'clearByNamespace'   => true,
@@ -1600,9 +1140,10 @@ class Filesystem extends AbstractAdapter
      */
     protected function internalSetItem($key, $value, array &$options)
     {
+        $baseOptions = $this->getOptions();
         $oldUmask = null;
 
-        $lastInfoId = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $lastInfoId = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
         if ($this->lastInfoId == $lastInfoId) {
             $filespec = $this->lastInfo['filespec'];
             // if lastKeyInfo is available I'm sure that the cache directory exist
@@ -1611,7 +1152,7 @@ class Filesystem extends AbstractAdapter
             if ($this->getDirLevel() > 0) {
                 $path = dirname($filespec);
                 if (!file_exists($path)) {
-                    $oldUmask = umask($this->getDirUmask());
+                    $oldUmask = umask($baseOptions->getDirUmask());
                     if ( !@mkdir($path, 0777, true) ) {
                         // reset umask on exception
                         umask($oldUmask);
@@ -1625,9 +1166,9 @@ class Filesystem extends AbstractAdapter
         }
 
         $info = null;
-        if ($this->getReadControl()) {
+        if ($baseOptions->getReadControl()) {
             $info['hash'] = Utils::generateHash($this->getReadControlAlgo(), $data, true);
-            $info['algo'] = $this->getReadControlAlgo();
+            $info['algo'] = $baseOptions->getReadControlAlgo();
         }
 
         if (isset($options['tags']) && $options['tags']) {
@@ -1636,9 +1177,9 @@ class Filesystem extends AbstractAdapter
 
         try {
             if ($oldUmask !== null) { // $oldUmask could be defined on set directory_umask
-                umask($this->getFileUmask());
+                umask($baseOptions->getFileUmask());
             } else {
-                $oldUmask = umask($this->getFileUmask());
+                $oldUmask = umask($baseOptions->getFileUmask());
             }
 
             $ret = $this->putFileContent($filespec . '.dat', $value);
@@ -1697,7 +1238,7 @@ class Filesystem extends AbstractAdapter
     protected function internalGetItem($key, array &$options)
     {
         if ( !$this->internalHasItem($key, $options)
-            || !($keyInfo=$this->getKeyInfo($key, $options['namespace']))
+            || !($keyInfo = $this->getKeyInfo($key, $options['namespace']))
         ) {
             if ($options['ignore_missing_items']) {
                 return false;
@@ -1708,10 +1249,11 @@ class Filesystem extends AbstractAdapter
             }
         }
 
+        $baseOptions = $this->getOptions();
         try {
             $data = $this->getFileContent($keyInfo['filespec'] . '.dat');
 
-            if ($this->getReadControl()) {
+            if ($baseOptions->getReadControl()) {
                 if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo'))
                     && isset($info['hash'], $info['algo'])
                 ) {
@@ -1767,7 +1309,8 @@ class Filesystem extends AbstractAdapter
      * @return array|bool
      * @throws ItemNotFoundException
      */
-    protected function internalGetMetadata($key, array &$options) {
+    protected function internalGetMetadata($key, array &$options) 
+    {
         $keyInfo = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
             if ($options['ignore_missing_items']) {
@@ -1819,7 +1362,7 @@ class Filesystem extends AbstractAdapter
         $options = $this->stmtOptions;
         $mode    = $this->stmtMatch;
 
-        $prefix  = $options['namespace'] . $this->getNamespaceSeparator();
+        $prefix  = $options['namespace'] . $this->getOptions()->getNamespaceSeparator();
         $prefixL = strlen($prefix);
 
         do {
@@ -1926,21 +1469,22 @@ class Filesystem extends AbstractAdapter
      */
     protected function clearByPrefix($prefix, $mode, array &$opts)
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $ttl = $opts['ttl'];
 
-        if ($this->getClearStatCache()) {
+        if ($baseOptions->getClearStatCache()) {
             clearstatcache();
         }
 
         try {
-            $find = $this->getCacheDir()
-                . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $this->getDirLevel())
+            $find = $baseOptions->getCacheDir()
+                . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $baseOptions->getDirLevel())
                 . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-            $glob = new \GlobIterator($find);
+            $glob = new GlobIterator($find);
         } catch (\Exception $e) {
             throw new Exception\RuntimeException('Instantiating GlobIterator failed', 0, $e);
         }
@@ -2052,7 +1596,7 @@ class Filesystem extends AbstractAdapter
      */
     protected function getKeyInfo($key, $ns)
     {
-        $lastInfoId = $ns . $this->getNamespaceSeparator() . $key;
+        $lastInfoId = $ns . $this->getOptions()->getNamespaceSeparator() . $key;
         if ($this->lastInfoId == $lastInfoId) {
             return $this->lastInfo;
         }
@@ -2090,14 +1634,15 @@ class Filesystem extends AbstractAdapter
      */
     protected function getFileSpec($key, $ns)
     {
-        $prefix     = $ns . $this->getNamespaceSeparator();
+        $options    = $this->getOptions();
+        $prefix     = $ns . $options->getNamespaceSeparator();
         $lastInfoId = $prefix . $key;
         if ($this->lastInfoId == $lastInfoId) {
             return $this->lastInfo['filespec'];
         }
 
-        $path  = $this->getCacheDir();
-        $level = $this->getDirLevel();
+        $path  = $options->getCacheDir();
+        $level = $options->getDirLevel();
         if ( $level > 0 ) {
             // create up to 256 directories per directory level
             $hash = md5($key);
@@ -2116,7 +1661,8 @@ class Filesystem extends AbstractAdapter
      * @return array|boolean The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
-    protected function readInfoFile($file) {
+    protected function readInfoFile($file) 
+    {
         if (!file_exists($file)) {
             return false;
         }
@@ -2140,7 +1686,7 @@ class Filesystem extends AbstractAdapter
     protected function getFileContent($file)
     {
         // if file locking enabled -> file_get_contents can't be used
-        if ($this->getFileLocking()) {
+        if ($this->getOptions()->getFileLocking()) {
             $fp = @fopen($file, 'rb');
             if ($fp === false) {
                 $lastErr = error_get_last();
@@ -2185,8 +1731,9 @@ class Filesystem extends AbstractAdapter
      */
     protected function putFileContent($file, $data)
     {
-        $locking  = $this->getFileLocking();
-        $blocking = $locking ? $this->getFileBlocking() : false;
+        $options  = $this->getOptions();
+        $locking  = $options->getFileLocking();
+        $blocking = $locking ? $options->getFileBlocking() : false;
 
         if ($locking && !$blocking) {
             $fp = @fopen($file, 'cb');
@@ -2235,7 +1782,8 @@ class Filesystem extends AbstractAdapter
      * @return void
      * @throw RuntimeException
      */
-    protected function unlink($file) {
+    protected function unlink($file) 
+    {
         if (!@unlink($file)) {
             // only throw exception if file still exists after deleting
             if (file_exists($file)) {
@@ -2253,21 +1801,22 @@ class Filesystem extends AbstractAdapter
     protected function updateCapabilities()
     {
         if ($this->capabilities) {
+            $options = $this->getOptions();
 
             // update namespace separator
             $this->capabilities->setNamespaceSeparator(
                 $this->capabilityMarker,
-                $this->getNamespaceSeparator()
+                $options->getNamespaceSeparator()
             );
 
             // update metadata capabilities
             $metadata = array('mtime', 'filespec');
 
-            if (!$this->getNoCtime()) {
+            if (!$options->getNoCtime()) {
                 $metadata[] = 'ctime';
             }
 
-            if (!$this->getNoAtime()) {
+            if (!$options->getNoAtime()) {
                 $metadata[] = 'atime';
             }
 

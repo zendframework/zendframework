@@ -72,53 +72,11 @@ abstract class AbstractAdapter implements Adapter
     protected $capabilityMarker;
 
     /**
-     * Writable option
-     *
-     * @var boolean
+     * options 
+     * 
+     * @var mixed
      */
-    protected $writable = true;
-
-    /**
-     * Readable option
-     *
-     * @var boolean
-     */
-    protected $readable = true;
-
-    /**
-     * TTL option
-     *
-     * @var int|float 0 means infinite or maximum of adapter
-     */
-    protected $ttl = 0;
-
-    /**
-     * Namespace option
-     *
-     * @var string
-     */
-    protected $namespace = 'zfcache';
-
-    /**
-     * Validate namespace against pattern
-     *
-     * @var string
-     */
-    protected $namespacePattern = '';
-
-    /**
-     * Validate key against pattern
-     *
-     * @var string
-     */
-    protected $keyPattern = '';
-
-    /**
-     * Ignore missing items
-     *
-     * @var boolean
-     */
-    protected $ignoreMissingItems = true;
+    protected $options;
 
     /**
      * Is a statement active
@@ -142,18 +100,6 @@ abstract class AbstractAdapter implements Adapter
     protected $stmtOptions = null;
 
     /**
-     * Constructor
-     *
-     * @param array|Traversable $options
-     * @see setOptions()
-     * @return void
-     */
-    public function __construct($options = array())
-    {
-        $this->setOptions($options);
-    }
-
-    /**
      * Destructor
      *
      * detach all registered plugins to free
@@ -174,92 +120,39 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Set options.
      *
-     * @param  array|Traversable $options
+     * @param  array|Traversable|AdapterOptions $options
      * @return AbstractAdapter
      * @see    getOptions()
      */
     public function setOptions($options)
     {
-        if (!($options instanceof Traversable) && !is_array($options)) {
-            throw new Exception\InvalidArgumentException(
-                'Options must be an array or an instance of Traversable'
-            );
+        if (!is_array($options) 
+            && !$options instanceof Traversable 
+            && !$options instanceof AdapterOptions
+        ) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array, a Traversable object, or an AdapterOptions instance; '
+                . 'received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
         }
-
-        foreach ($options as $option => $value) {
-            $method = 'set'
-                    . str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower($option))));
-            if (!method_exists($this, $method)) {
-                continue;
-            }
-            $this->{$method}($value);
-        }
-
+        $this->options = $options;
         return $this;
     }
 
     /**
      * Get options.
      *
-     * @return array
+     * @return AdapterOptions
      * @see setOptions()
      */
     public function getOptions()
     {
-        return array(
-            'writable'             => $this->getWritable(),
-            'readable'             => $this->getReadable(),
-            'caching'              => $this->getCaching(),
-            'ttl'                  => $this->getTtl(),
-            'namespace'            => $this->getNamespace(),
-            'namespace_pattern'    => $this->getNamespacePattern(),
-            'key_pattern'          => $this->getKeyPattern(),
-            'ignore_missing_items' => $this->getIgnoreMissingItems(),
-        );
-    }
-
-    /**
-     * Enable/Disable writing data to cache.
-     *
-     * @param  boolean $flag
-     * @return AbstractAdapter
-     */
-    public function setWritable($flag)
-    {
-        $this->writable = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * If writing data to cache enabled.
-     *
-     * @return boolean
-     */
-    public function getWritable()
-    {
-        return $this->writable;
-    }
-
-    /**
-     * Enable/Disable reading data from cache.
-     *
-     * @param  boolean $flag
-     * @return AbstractAdapter
-     */
-    public function setReadable($flag)
-    {
-        $this->readable = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * If reading data from cache enabled.
-     *
-     * @return boolean
-     */
-    public function getReadable()
-    {
-        return $this->readable;
+        if (!$this->options) {
+            $this->setOptions(new AdapterOptions());
+        }
+        return $this->options;
     }
 
     /**
@@ -274,9 +167,10 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setCaching($flag)
     {
-        $flag = (bool) $flag;
-        $this->setWritable($flag);
-        $this->setReadable($flag);
+        $flag    = (bool) $flag;
+        $options = $this->getOptions();
+        $options->setWritable($flag);
+        $options->setReadable($flag);
         return $this;
     }
 
@@ -291,172 +185,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getCaching()
     {
-        return ($this->getWritable() && $this->getReadable());
-    }
-
-    /**
-     * Set time to live.
-     *
-     * @param  int|float $ttl
-     * @return AbstractAdapter
-     */
-    public function setTtl($ttl)
-    {
-        $this->normalizeTtl($ttl);
-        $this->ttl = $ttl;
-        return $this;
-    }
-
-    /**
-     * Get time to live.
-     *
-     * @return float
-     */
-    public function getTtl()
-    {
-        return $this->ttl;
-    }
-
-    /**
-     * Set namespace.
-     *
-     * @param  string $namespace
-     * @return AbstractAdapter
-     */
-    public function setNamespace($namespace)
-    {
-        $nameapace = (string)$namespace;
-        if ($namespace === '') {
-            throw new Exception\InvalidArgumentException('No namespace given');
-        }
-
-        if (($pattern = $this->getNamespacePattern())
-            && !preg_match($pattern, $namespace)
-        ) {
-            throw new Exception\InvalidArgumentException(
-                "The namespace '{$namespace}' doesn't match agains pattern '{$pattern}'"
-            );
-        }
-        $this->namespace = (string) $namespace;
-        return $this;
-    }
-
-    /**
-     * Get namespace
-     *
-     * @return string
-     */
-    public function getNamespace()
-    {
-        return $this->namespace;
-    }
-
-    /**
-     * Set namespace pattern
-     *
-     * @param  null|string $pattern
-     * @return AbstractAdapter
-     */
-    public function setNamespacePattern($pattern)
-    {
-        if (($pattern = (string) $pattern) === '') {
-            $this->namespacePattern = '';
-            return $this;
-        }
-
-        // validate pattern
-        if (@preg_match($pattern, '') === false) {
-            $err = error_get_last();
-            throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
-
-        // validate current namespace
-        } elseif (($ns = $this->getNamespace()) && !preg_match($pattern, $ns)) {
-            throw new Exception\RuntimeException(
-                "The current namespace '{$ns}' doesn't match agains pattern '{$pattern}'"
-                . " - please change the namespace first"
-            );
-        }
-
-        $this->namespacePattern = $pattern;
-
-        return $this;
-    }
-
-    /**
-     * Get namespace pattern
-     *
-     * @return string
-     */
-    public function getNamespacePattern()
-    {
-        return $this->namespacePattern;
-    }
-
-    /**
-     * Set key pattern
-     *
-     * @param  null|string $pattern
-     * @return AbstractAdapter
-     */
-    public function setKeyPattern($pattern)
-    {
-        if (($pattern = (string)$pattern) === '') {
-            $this->keyPattern = '';
-            return $this;
-        }
-
-        // validate pattern
-        if (@preg_match($pattern, '') === false) {
-            $err = error_get_last();
-            throw new Exception\InvalidArgumentException("Invalid pattern '{$pattern}': {$err['message']}");
-        }
-
-        $this->keyPattern = $pattern;
-
-        return $this;
-    }
-
-    /**
-     * Get key pattern
-     *
-     * @return string
-     */
-    public function getKeyPattern()
-    {
-        return $this->keyPattern;
-    }
-
-    /**
-     * Enables or disables ignoring of missing items.
-     *
-     * - If enabled and a missing item was requested:
-     *   - getItem, getMetadata: return false
-     *   - removeItem[s]: return true
-     *   - incrementItem[s], decrementItem[s]: add a new item with 0 as base
-     *   - touchItem[s]: add new empty item
-     *
-     * - If disabled and a missing item was requested:
-     *   - getItem, getMetadata, incrementItem[s], decrementItem[s], touchItem[s]
-     *     throws ItemNotFoundException
-     *
-     * @param  boolean $flag
-     * @return Adapter
-     */
-    public function setIgnoreMissingItems($flag)
-    {
-        $this->ignoreMissingItems = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Ignore missing items
-     *
-     * @return boolean
-     * @see    setIgnoreMissingItems()
-     */
-    public function getIgnoreMissingItems()
-    {
-        return $this->ignoreMissingItems;
+        $options = $this->getOptions();
+        return ($options->getWritable() && $options->getReadable());
     }
 
     /* Event/Plugin handling */
@@ -619,7 +349,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getItems(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $options = $this->getOptions();
+        if (!$options->getReadable()) {
             return array();
         }
 
@@ -647,7 +378,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function hasItem($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        if (!$this->getOptions()->getReadable()) {
             return false;
         }
 
@@ -669,7 +400,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function hasItems(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        if (!$this->getOptions()->getReadable()) {
             return array();
         }
 
@@ -692,7 +423,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getMetadatas(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        if (!$this->getOptions()->getReadable()) {
             return array();
         }
 
@@ -722,7 +453,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        if (!$this->getOptions()->getWritable()) {
             return false;
         }
 
@@ -760,7 +491,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function addItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        if (!$this->getOptions()->getWritable()) {
             return false;
         }
 
@@ -798,7 +529,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function replaceItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        if (!$this->getOptions()->getWritable()) {
             return false;
         }
 
@@ -838,7 +569,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function touchItem($key, array $options = array())
     {
-        if (!$this->getWritable() || !$this->getReadable()) {
+        $classOptions = $this->getOptions();
+        if (!$classOptions->getWritable() || !$classOptions->getReadable()) {
            return false;
        }
 
@@ -873,7 +605,7 @@ abstract class AbstractAdapter implements Adapter
     public function touchItems(array $keys, array $options = array())
     {
         // Don't check readable because not all adapters needs to read the item before
-        if (!$this->getWritable()) {
+        if (!$this->getOptions()->getWritable()) {
             return false;
         }
 
@@ -893,7 +625,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function removeItems(array $keys, array $options = array())
     {
-        if (!$this->getWritable()) {
+        if (!$this->getOptions()->getWritable()) {
             return false;
         }
 
@@ -915,14 +647,15 @@ abstract class AbstractAdapter implements Adapter
      */
     public function incrementItem($key, $value, array $options = array())
     {
-       if (!$this->getWritable() || !$this->getReadable()) {
-           return false;
-       }
+        $classOptions = $this->getOptions();
+        if (!$classOptions->getWritable() || !$classOptions->getReadable()) {
+            return false;
+        }
 
-       $value = (int) $value;
-       $get   = (int) $this->getItem($key, $options);
-       $this->setItem($key, $get + $value, $options);
-       return $get + $value;
+        $value = (int) $value;
+        $get   = (int) $this->getItem($key, $options);
+        $this->setItem($key, $get + $value, $options);
+        return $get + $value;
     }
 
     /**
@@ -935,7 +668,7 @@ abstract class AbstractAdapter implements Adapter
     public function incrementItems(array $keyValuePairs, array $options = array())
     {
         // Don't check readable because not all adapters needs read the value before
-        if (!$this->getWritable()) {
+        if (!$this->getOptions()->getWritable()) {
             return false;
         }
 
@@ -956,7 +689,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function decrementItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable() || !$this->getReadable()) {
+        $classOptions = $this->getOptions();
+        if (!$classOptions->getWritable() || !$classOptions->getReadable()) {
             return false;
         }
 
@@ -976,7 +710,7 @@ abstract class AbstractAdapter implements Adapter
     public function decrementItems(array $keyValuePairs, array $options = array())
     {
         // Don't check readable because not all adapters needs read the value before
-        if (!$this->getWritable()) {
+        if (!$this->getOptions()->getWritable()) {
             return false;
         }
 
@@ -1003,7 +737,7 @@ abstract class AbstractAdapter implements Adapter
             throw new Exception\RuntimeException('Statement already in use');
         }
 
-        if (!$this->getReadable()) {
+        if (!$this->getOptions()->getReadable()) {
             return false;
         } elseif (!$keys) {
             // empty statement
@@ -1016,7 +750,7 @@ abstract class AbstractAdapter implements Adapter
             $options['select'] = array('key', 'value');
         }
 
-        $this->stmtOptions = array_merge($this->getOptions(), $options);
+        $this->stmtOptions = array_merge($this->getOptions()->toArray(), $options);
         $this->stmtKeys    = $keys;
         $this->stmtActive  = true;
 
@@ -1189,25 +923,27 @@ abstract class AbstractAdapter implements Adapter
      */
     protected function normalizeOptions(array &$options)
     {
+        $baseOptions = $this->getOptions();
+        
         // ttl
         if (isset($options['ttl'])) {
             $this->normalizeTtl($options['ttl']);
         } else {
-            $options['ttl'] = $this->getTtl();
+            $options['ttl'] = $baseOptions->getTtl();
         }
 
         // namespace
         if (isset($options['namespace'])) {
             $this->normalizeNamespace($options['namespace']);
         } else {
-            $options['namespace'] = $this->getNamespace();
+            $options['namespace'] = $baseOptions->getNamespace();
         }
 
         // ignore_missing_items
         if (isset($options['ignore_missing_items'])) {
             $options['ignore_missing_items'] = (bool) $options['ignore_missing_items'];
         } else {
-            $options['ignore_missing_items'] = $this->getIgnoreMissingItems();
+            $options['ignore_missing_items'] = $baseOptions->getIgnoreMissingItems();
         }
 
         // tags
@@ -1259,7 +995,7 @@ abstract class AbstractAdapter implements Adapter
 
         if ($namespace === '') {
             throw new Exception\InvalidArgumentException('Empty namespaces are not allowed');
-        } elseif (($p = $this->getNamespacePattern()) && !preg_match($p, $namespace)) {
+        } elseif (($p = $baseOptions->getNamespacePattern()) && !preg_match($p, $namespace)) {
             throw new Exception\InvalidArgumentException(
                 "The namespace '{$namespace}' doesn't match against pattern '{$p}'"
             );
@@ -1330,7 +1066,7 @@ abstract class AbstractAdapter implements Adapter
     {
         $key = (string) $key;
 
-        if (($p = $this->getKeyPattern()) && !preg_match($p, $key)) {
+        if (($p = $this->getOptions()->getKeyPattern()) && !preg_match($p, $key)) {
             throw new Exception\InvalidArgumentException(
                 "The key '{$key}' doesn't match agains pattern '{$p}'"
             );

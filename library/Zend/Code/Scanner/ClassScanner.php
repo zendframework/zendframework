@@ -30,6 +30,11 @@ class ClassScanner implements Scanner
     protected $shortName = null;
 
     /**
+     * @var int
+     */
+    protected $lineStart = null;
+
+    /**
      * @var bool
      */
     protected $isFinal = false;
@@ -120,6 +125,12 @@ class ClassScanner implements Scanner
     {
         $this->scan();
         return $this->shortName;
+    }
+
+    public function getLineStart()
+    {
+        $this->scan();
+        return $this->lineStart;
     }
 
     public function isFinal()
@@ -385,6 +396,7 @@ class ClassScanner implements Scanner
                                 } else {
                                     $this->name = $this->shortName;
                                 }
+                                $this->lineStart = $tokens[$tokenIndex][2];
                                 goto SCANNER_CLASS_INFO_CONTINUE;
 
                             case T_NS_SEPARATOR:

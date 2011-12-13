@@ -29,19 +29,12 @@ namespace Zend\Cache;
 interface Pattern
 {
     /**
-     * Constructor
-     *
-     * @param array|Traversable $options
-     */
-    public function __construct($options = array());
-
-    /**
      * Set pattern options
      *
-     * @param array|Traversable $options
+     * @param  Pattern\PatternOptions $options
      * @return Pattern
      */
-    public function setOptions($options);
+    public function setOptions(Pattern\PatternOptions $options);
 
     /**
      * Get all pattern options

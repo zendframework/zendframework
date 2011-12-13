@@ -483,7 +483,7 @@ abstract class AbstractAdapter implements Adapter
         if ($this->events === null) {
             $this->setEventManager(new EventManager(array(
                 __CLASS__,
-                get_class($this),
+                get_called_class(),
             )));
         }
         return $this->events;

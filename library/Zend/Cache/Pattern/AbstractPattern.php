@@ -21,8 +21,7 @@
 
 namespace Zend\Cache\Pattern;
 
-use Traversable,
-    Zend\Cache\Exception,
+use Zend\Cache\Exception,
     Zend\Cache\Pattern;
 
 /**
@@ -35,49 +34,32 @@ use Traversable,
 abstract class AbstractPattern implements Pattern
 {
     /**
-     * Constructor
-     *
-     * @param array|Traversable $options
+     * @var PatternOptions
      */
-    public function __construct($options = array())
-    {
-        $this->setOptions($options);
-    }
+    protected $options;
 
     /**
      * Set pattern options
      *
-     * @param  array|Traversable $options
+     * @param  PatternOptions $options
      * @return AbstractPattern
      * @throws Exception\InvalidArgumentException
      */
-    public function setOptions($options)
+    public function setOptions(PatternOptions $options)
     {
-        if (!($options instanceof Traversable) && !is_array($options)) {
-            throw new Exception\InvalidArgumentException(
-                'Options must be an array or an instance of Traversable'
-            );
-        }
-
-        foreach ($options as $option => $value) {
-            $method = 'set'
-                    . str_replace(' ', '', ucwords(str_replace('_', ' ', strtolower($option))));
-            if (!method_exists($this, $method)) {
-                continue;
-            }
-            $this->{$method}($value);
-        }
-
-        return $this;
+        $this->options = $options;
     }
 
     /**
      * Get all pattern options
      *
-     * @return array
+     * @return PatternOptions
      */
     public function getOptions()
     {
-        return array();
+        if (null === $this->options) {
+            $this->setOptions(new PatternOptions());
+        }
+        return $this->options;
     }
 }

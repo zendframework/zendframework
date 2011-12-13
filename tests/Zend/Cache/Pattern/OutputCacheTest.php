@@ -43,9 +43,11 @@ class OutputCacheTest extends CommonPatternTest
     public function setUp()
     {
         $this->_storage = new Cache\Storage\Adapter\Memory();
-        $this->_pattern = new Cache\Pattern\OutputCache(array(
-            'storage' => $this->_storage
+        $this->_options = new Cache\Pattern\PatternOptions(array(
+            'storage' => $this->_storage,
         ));
+        $this->_pattern = new Cache\Pattern\OutputCache();
+        $this->_pattern->setOptions($this->_options);
 
         parent::setUp();
     }

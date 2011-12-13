@@ -57,40 +57,13 @@ class CommonPatternTest extends \PHPUnit_Framework_TestCase
     public function testOptionNamesValid()
     {
         $options = $this->_pattern->getOptions();
-        foreach ($options as $name => $value) {
-            $this->assertRegExp(
-                '/^[a-z]*[a-z0-9_]*[a-z0-9]*$/',
-                $name,
-                "Invalid option name '{$name}'"
-            );
-        }
+        $this->assertInstanceOf('Zend\Cache\Pattern\PatternOptions', $options);
     }
 
     public function testOptionsGetAndSetDefault()
     {
         $options = $this->_pattern->getOptions();
         $this->_pattern->setOptions($options);
-        $this->assertEquals($options, $this->_pattern->getOptions());
+        $this->assertSame($options, $this->_pattern->getOptions());
     }
-
-    public function testOptionsFluentInterface()
-    {
-        $options = $this->_pattern->getOptions();
-        foreach ($options as $option => $value) {
-            $method = ucwords(str_replace('_', ' ', $option));
-            $method = 'set' . str_replace(' ', '', $method);
-            $this->assertSame(
-                $this->_pattern,
-                $this->_pattern->{$method}($value),
-                "Method '{$method}' doesn't implement the fluent interface"
-            );
-        }
-
-        $this->assertSame(
-            $this->_pattern,
-            $this->_pattern->setOptions(array()),
-            "Method 'setOptions' doesn't implement the fluent interface"
-        );
-    }
-
 }

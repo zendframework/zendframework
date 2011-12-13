@@ -65,10 +65,12 @@ class ClassCacheTest extends CommonPatternTest
     public function setUp()
     {
         $this->_storage = new Cache\Storage\Adapter\Memory();
-        $this->_pattern = new Cache\Pattern\ClassCache(array(
-            'entity'  => __NAMESPACE__ . '\TestClassCache',
-            'storage' => $this->_storage
+        $this->_options = new Cache\Pattern\PatternOptions(array(
+            'class'   => __NAMESPACE__ . '\TestClassCache',
+            'storage' => $this->_storage,
         ));
+        $this->_pattern = new Cache\Pattern\ClassCache();
+        $this->_pattern->setOptions($this->_options);
 
         parent::setUp();
     }
@@ -88,7 +90,7 @@ class ClassCacheTest extends CommonPatternTest
 
     public function testCallDisabledCacheOutput()
     {
-        $this->_pattern->setCacheOutput(false);
+        $this->_options->setCacheOutput(false);
         $this->_testCall(
             'bar',
             array('testCallDisabledCacheOutput', 'arg2')
@@ -136,7 +138,7 @@ class ClassCacheTest extends CommonPatternTest
         $data = ob_get_clean();
 
         $this->assertEquals($returnSpec . $firstCounter, $return);
-        if ($this->_pattern->getCacheOutput()) {
+        if ($this->_options->getCacheOutput()) {
             $this->assertEquals($outputSpec . $firstCounter, $data);
         } else {
             $this->assertEquals('', $data);

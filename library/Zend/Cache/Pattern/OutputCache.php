@@ -35,13 +35,6 @@ use Zend\Cache\Exception,
 class OutputCache extends AbstractPattern
 {
     /**
-     * The storage adapter
-     *
-     * @var StorageAdapter
-     */
-    protected $storage;
-
-    /**
      * The key stack
      *
      * @var array
@@ -49,63 +42,18 @@ class OutputCache extends AbstractPattern
     protected $keyStack = array();
 
     /**
-     * Constructor
+     * Set options
      *
-     * @param  array|\Traversable $options
+     * @param  PatternOptions $options
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($options = array())
+    public function setOptions(PatternOptions $options)
     {
-        parent::__construct($options);
+        parent::setOptions($options);
 
-        if (!$this->getStorage()) {
+        if (!$options->getStorage()) {
             throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
-    }
-
-    /**
-     * Get all pattern options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        $options = parent::getOptions();
-        $options['storage'] = $this->getStorage();
-        return $options;
-    }
-
-    /**
-     * Get cache storage
-     *
-     * return StorageAdapter
-     */
-    public function getStorage()
-    {
-        return $this->storage;
-    }
-
-    /**
-     * Set cache storage
-     *
-     * @param  StorageAdapter|array|string $storage
-     * @return OutputCache
-     */
-    public function setStorage($storage)
-    {
-        if (is_array($storage)) {
-            $storage = StorageFactory::factory($storage);
-        } elseif (is_string($storage)) {
-            $storage = StorageFactory::adapterFactory($storage);
-        } elseif (!($storage instanceof StorageAdapter)) {
-            throw new Exception\InvalidArgumentException(
-                'The storage must be an instanceof Zend\Cache\Storage\Adapter '
-              . 'or an array passed to Zend\Cache\Storage::factory '
-              . 'or simply the name of the storage adapter'
-            );
-        }
-
-        $this->storage = $storage;
         return $this;
     }
 
@@ -128,13 +76,15 @@ class OutputCache extends AbstractPattern
             throw new Exception\MissingKeyException('Missing key to read/write output from storage');
         }
 
+        $classOptions = $this->getOptions();
+
         $optOutput = true;
         if (isset($options['output'])) {
             $optOutput = (bool) $options['output'];
             unset($options['output']); // don't forword this option to storage
         }
 
-        $data = $this->getStorage()->getItem($key, $options);
+        $data = $classOptions->getStorage()->getItem($key, $options);
         if ($data !== false) {
             if ($optOutput) {
                 echo $data;
@@ -170,7 +120,7 @@ class OutputCache extends AbstractPattern
 
         $optOutput = true;
         if (isset($options['output'])) {
-            $optOutput = (bool)$options['output'];
+            $optOutput = (bool) $options['output'];
             unset($options['output']); // don't forword this option to storage
         }
 
@@ -184,6 +134,6 @@ class OutputCache extends AbstractPattern
             throw new Exception\RuntimeException('Output buffering not active');
         }
 
-        return $this->getStorage()->setItem($key, $data, $options);
+        return $this->getOptions()->getStorage()->setItem($key, $data, $options);
     }
 }

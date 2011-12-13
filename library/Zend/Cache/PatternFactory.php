@@ -20,7 +20,9 @@
 
 namespace Zend\Cache;
 
-use Zend\Loader\Broker;
+use Traversable,
+    Zend\Loader\Broker,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * @category   Zend
@@ -41,18 +43,35 @@ class PatternFactory
      * Instantiate a cache pattern
      *
      * @param  string|Pattern $patternName
-     * @param  array|Traversable $options
+     * @param  array|Traversable|Pattern\PatternOptions $options
      * @return Pattern
      * @throws Exception\RuntimeException
      */
     public static function factory($patternName, $options = array())
     {
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
+        }
+        if (is_array($options)) {
+            $options = new Pattern\PatternOptions($options);
+        }
+        if (!$options instanceof Pattern\PatternOptions) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array, Traversable object, or %s\Pattern\PatternOptions object; received "%s"',
+                __METHOD__,
+                __NAMESPACE__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
         if ($patternName instanceof Pattern) {
             $patternName->setOptions($options);
             return $patternName;
         }
 
-        return static::getBroker()->load($patternName, $options);
+        $pattern = static::getBroker()->load($patternName);
+        $pattern->setOptions($options);
+        return $pattern;
     }
 
     /**

@@ -35,100 +35,19 @@ use Zend\Cache\Exception,
 class CallbackCache extends AbstractPattern
 {
     /**
-     * The storage adapter
-     *
-     * @var StorageAdapter
+     * Set options
+     * 
+     * @param  PatternOptions $options 
+     * @return CallbackCache
+     * @throws Exception\InvalidArgumentException if missing storage option
      */
-    protected $storage;
-
-    /**
-     * Caching output stream
-     *
-     * @var boolean
-     */
-    protected $cacheOutput = true;
-
-    /**
-     * Constructor
-     *
-     * @param  array|\Traversable $options
-     * @throws Exception\InvalidArgumentException
-     */
-    public function __construct($options = array())
+    public function setOptions(PatternOptions $options)
     {
-        parent::__construct($options);
-
-        if (!$this->getStorage()) {
+        parent::setOptions($options);
+        if (!$options->getStorage()) {
             throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
-    }
-
-    /**
-     * Get all pattern options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        $options = parent::getOptions();
-        $options['storage']      = $this->getStorage();
-        $options['cache_output'] = $this->getCacheOutput();
-        return $options;
-    }
-
-    /**
-     * Get cache storage
-     *
-     * return StorageAdapter
-     */
-    public function getStorage()
-    {
-        return $this->storage;
-    }
-
-    /**
-     * Set cache storage
-     *
-     * @param  StorageAdapter|array|string $storage
-     * @return CallbackCache
-     */
-    public function setStorage($storage)
-    {
-        if (is_array($storage)) {
-            $storage = StorageFactory::factory($storage);
-        } elseif (is_string($storage)) {
-            $storage = StorageFactory::adapterFactory($storage);
-        } elseif ( !($storage instanceof StorageAdapter) ) {
-            throw new Exception\InvalidArgumentException(
-                'The storage must be an instanceof Zend\Cache\Storage\Adapter '
-              . 'or an array passed to Zend\Cache\Storage::factory '
-              . 'or simply the name of the storage adapter'
-            );
-        }
-
-        $this->storage = $storage;
         return $this;
-    }
-
-    /**
-     * Enable/Disable caching output stream
-     *
-     * @param boolean $flag
-     */
-    public function setCacheOutput($flag)
-    {
-        $this->cacheOutput = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get caching output stream
-     *
-     * return boolean
-     */
-    public function getCacheOutput()
-    {
-        return $this->cacheOutput;
     }
 
     /**
@@ -142,8 +61,9 @@ class CallbackCache extends AbstractPattern
      */
     public function call($callback, array $args = array(), array $options = array())
     {
+        $classOptions = $this->getOptions();
         $key = $this->_generateKey($callback, $args, $options);
-        if ( ($rs = $this->getStorage()->getItem($key, $options)) !== false ) {
+        if ( ($rs = $classOptions->getStorage()->getItem($key, $options)) !== false ) {
             if (!isset($rs[0])) {
                 throw new Exception\RuntimeException("Invalid cached data for key '{$key}'");
             }
@@ -152,7 +72,7 @@ class CallbackCache extends AbstractPattern
             return $rs[0];
         }
 
-        if ( ($cacheOutput = $this->getCacheOutput()) ) {
+        if ( ($cacheOutput = $classOptions->getCacheOutput()) ) {
             ob_start();
             ob_implicit_flush(false);
         }
@@ -178,7 +98,7 @@ class CallbackCache extends AbstractPattern
             $data = array($ret);
         }
 
-        $this->getStorage()->setItem($key, $data, $options);
+        $classOptions->getStorage()->setItem($key, $data, $options);
 
         return $ret;
     }
@@ -230,12 +150,12 @@ class CallbackCache extends AbstractPattern
      */
     protected function _generateKey($callback, array $args, array $options)
     {
-        $callbackKey = '';
-        $argumentKey = '';
+        $callbackKey  = '';
+        $argumentKey  = '';
 
         // generate callback key part
         if (isset($options['callback_key'])) {
-            $callbackKey = (string)$options['callback_key'];
+            $callbackKey = (string) $options['callback_key'];
 
             if (!is_callable($callback, false)) {
                 throw new Exception\InvalidArgumentException('Invalid callback');

@@ -33,160 +33,21 @@ use Zend\Cache,
 class ClassCache extends CallbackCache
 {
     /**
-     * The entity
+     * Set options
      *
-     * @var null|string
+     * @param  PatternOptions $options
+     * @throws Exception\InvalidArgumentException if missing 'class' or 'storage' options
      */
-    protected $entity = null;
-
-    /**
-     * Cache by default
-     *
-     * @var bool
-     */
-    protected $cacheByDefault = true;
-
-    /**
-     * Cache methods
-     *
-     * @var array
-     */
-    protected $cacheMethods = array();
-
-    /**
-     * Non-cache methods
-     *
-     * @var array
-     */
-    protected $nonCacheMethods = array();
-
-    /**
-     * Constructor
-     *
-     * @param  array|\Traversable $options
-     * @throws Exception\InvalidArgumentException
-     */
-    public function __construct($options = array())
+    public function setOptions(PatternOptions $options)
     {
-        parent::__construct($options);
+        parent::setOptions($options);
 
-        if (!$this->getEntity()) {
-            throw new Exception\InvalidArgumentException("Missing option 'entity'");
-        } elseif (!$this->getStorage()) {
+        if (!$options->getClass()) {
+            throw new Exception\InvalidArgumentException("Missing option 'class'");
+        } elseif (!$options->getStorage()) {
             throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }
-    }
-
-    /**
-     * Get all pattern options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        $options = parent::getOptions();
-        $options['entity']            = $this->getEntity();
-        $options['cache_by_default']  = $this->getCacheByDefault();
-        $options['cache_methods']     = $this->getCacheMethods();
-        $options['non_cache_methods'] = $this->getNonCacheMethods();
-        return $options;
-    }
-
-    /**
-     * Set the entity to cache
-     *
-     * @param  string $entity The entity as classname
-     * @return ClassCache
-     */
-    public function setEntity($entity)
-    {
-        if (!is_string($entity)) {
-            throw new Exception\InvalidArgumentException('Invalid entity, must be a classname');
-        }
-        $this->entity = $entity;
         return $this;
-    }
-
-    /**
-     * Get the entity to cache
-     *
-     * @return null|string The classname or NULL if no entity was set
-     */
-    public function getEntity()
-    {
-        return $this->entity;
-    }
-
-    /**
-     * Enable or disable caching of methods by default.
-     *
-     * @param  boolean $flag
-     * @return ClassCache
-     */
-    public function setCacheByDefault($flag)
-    {
-        $this->cacheByDefault = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Caching methods by default enabled.
-     *
-     * return boolean
-     */
-    public function getCacheByDefault()
-    {
-        return $this->cacheByDefault;
-    }
-
-    /**
-     * Enable cache methods
-     *
-     * @param  string[] $methods
-     * @return ClassCache
-     */
-    public function setCacheMethods(array $methods)
-    {
-        $this->cacheMethods = array_values(array_unique(array_map(function($method) {
-            return strtolower($method);
-        }, $methods)));
-
-        return $this;
-    }
-
-    /**
-     * Get enabled cache methods
-     *
-     * @return string[]
-     */
-    public function getCacheMethods()
-    {
-        return $this->cacheMethods;
-    }
-
-    /**
-     * Disable cache methods
-     *
-     * @param  string[] $methods
-     * @return ClassCache
-     */
-    public function setNonCacheMethods(array $methods)
-    {
-        $this->nonCacheMethods = array_values(array_unique(array_map(function($method) {
-            return strtolower($method);
-        }, $methods)));
-
-        return $this;
-    }
-
-    /**
-     * Get disabled cache methods
-     *
-     * @return string[]
-     */
-    public function getNonCacheMethods()
-    {
-        return $this->nonCacheMethods;
     }
 
     /**
@@ -200,15 +61,16 @@ class ClassCache extends CallbackCache
      */
     public function call($method, array $args = array(), array $options = array())
     {
-        $classname = $this->getEntity();
-        $method    = strtolower($method);
-        $callback  = $classname . '::' . $method;
+        $classOptions = $this->getOptions();
+        $classname    = $classOptions->getClass();
+        $method       = strtolower($method);
+        $callback     = $classname . '::' . $method;
 
-        $cache = $this->getCacheByDefault();
+        $cache = $classOptions->getCacheByDefault();
         if ($cache) {
-            $cache = !in_array($method, $this->getNonCacheMethods());
+            $cache = !in_array($method, $classOptions->getClassNonCacheMethods());
         } else {
-            $cache = in_array($method, $this->getCacheMethods());
+            $cache = in_array($method, $classOptions->getClassCacheMethods());
         }
 
         if (!$cache) {
@@ -238,11 +100,12 @@ class ClassCache extends CallbackCache
     public function generateKey($method, array $args = array(), array $options = array())
     {
         // speed up key generation
+        $classOptions = $this->getOptions();
         if (!isset($options['callback_key'])) {
-            $callback = $this->getEntity() . '::' . strtolower($method);
+            $callback = $classOptions->getClass() . '::' . strtolower($method);
             $options['callback_key'] = $callback;
         } else {
-            $callback = $this->getEntity() . '::' . $method;
+            $callback = $classOptions->getClass() . '::' . $method;
         }
 
         return parent::generateKey($callback, $args, $options);
@@ -271,7 +134,7 @@ class ClassCache extends CallbackCache
      */
     public function __set($name, $value)
     {
-        $class = $this->getEntity();
+        $class = $this->getOptions()->getClass();
         $class::$name = $value;
     }
 
@@ -284,7 +147,7 @@ class ClassCache extends CallbackCache
      */
     public function __get($name)
     {
-        $class = $this->getEntity();
+        $class = $this->getOptions()->getClass();
         return $class::$name;
     }
 
@@ -296,7 +159,7 @@ class ClassCache extends CallbackCache
      */
     public function __isset($name)
     {
-        $class = $this->getEntity();
+        $class = $this->getOptions()->getClass();
         return isset($class::$name);
     }
 
@@ -308,7 +171,7 @@ class ClassCache extends CallbackCache
      */
     public function __unset($name)
     {
-        $class = $this->getEntity();
+        $class = $this->getOptions()->getClass();
         unset($class::$name);
     }
 }

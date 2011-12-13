@@ -36,9 +36,11 @@ class CaptureCacheTest extends CommonPatternTest
 
     public function setUp()
     {
-        $this->_pattern = new Cache\Pattern\CaptureCache(array(
+        $this->_options = new Cache\Pattern\PatternOptions(array(
             // TODO
         ));
+        $this->_pattern = new Cache\Pattern\CaptureCache();
+        $this->_pattern->setOptions($this->_options);
 
         parent::setUp();
     }

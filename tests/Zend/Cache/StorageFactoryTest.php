@@ -154,7 +154,10 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
             $pluginClass = get_class($plugin);
             switch ($pluginClass) {
                 case 'Zend\Cache\Storage\Plugin\ClearByFactor':
-                    $this->assertSame($factory['plugins']['ClearByFactor']['clearing_factor'], $plugin->getClearingFactor());
+                    $this->assertSame(
+                        $factory['plugins']['ClearByFactor']['clearing_factor'],
+                        $plugin->getOptions()->getClearingFactor()
+                    );
                     break;
                 case 'Zend\Cache\Storage\Plugin\Serializer':
                     break;

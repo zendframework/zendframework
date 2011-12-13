@@ -3,35 +3,19 @@
 namespace ZendTest\Cache\Storage\TestAsset;
 
 use Zend\Cache\Storage\Plugin,
+    Zend\Cache\Storage\Plugin\AbstractPlugin,
     Zend\EventManager\EventCollection,
     Zend\EventManager\Event;
 
-class MockPlugin implements Plugin
+class MockPlugin extends AbstractPlugin
 {
 
-    protected $options = array();
     protected $handles = array();
     protected $calledEvents = array();
     protected $eventCallbacks  = array(
         'setItem.pre'  => 'onSetItemPre',
         'setItem.post' => 'onSetItemPost'
     );
-
-    public function __construct($options = array())
-    {
-        $this->setOptions($options);
-    }
-
-    public function setOptions($options)
-    {
-        $this->options = $options;
-        return $this;
-    }
-
-    public function getOptions()
-    {
-        return $this->options;
-    }
 
     public function attach(EventCollection $eventCollection)
     {

@@ -24,63 +24,51 @@
  */
 namespace Zend\Log\Filter;
 
+use Zend\Log\Exception,
+    Zend\Log\Filter;
+
 /**
- * @uses       \Zend\Log\Exception\InvalidArgumentException
- * @uses       \Zend\Log\Filter\AbstractFilter
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Message extends AbstractFilter
+class Message implements Filter
 {
     /**
+     * Regex to match
+     *
      * @var string
      */
-    protected $_regexp;
+    protected $regex;
 
     /**
-     * Filter out any log messages not matching $regexp.
+     * Filter out any log messages not matching the pattern
      *
-     * @param  string  $regexp     Regular expression to test the log message
-     * @return void
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @param string $regex Regular expression to test the log message
+     * @return Message
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct($regexp)
+    public function __construct($regex)
     {
-        if (@preg_match($regexp, '') === false) {
-            throw new \Zend\Log\Exception\InvalidArgumentException("Invalid regular expression '$regexp'");
+        if (@preg_match($regex, '') === false) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid regular expression "%s"',
+                $regex
+            ));
         }
-        $this->_regexp = $regexp;
-    }
-
-    /**
-     * Create a new instance of Zend_Log_Filter_Message
-     *
-     * @param  array|\Zend\Config\Config $config
-     * @return \Zend\Log\Filter\Message
-     */
-    static public function factory($config = array())
-    {
-        $config = self::_parseConfig($config);
-        $config = array_merge(array(
-            'regexp' => null
-        ), $config);
-
-        return new self(
-            $config['regexp']
-        );
+        $this->regex = $regex;
     }
 
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param  array    $event    event data
-     * @return boolean            accepted?
+     * @param array $event event data
+     * @return boolean accepted?
      */
-    public function accept($event)
+    public function filter(array $event)
     {
-        return preg_match($this->_regexp, $event['message']) > 0;
+        return preg_match($this->regex, $event['message']) > 0;
     }
 }

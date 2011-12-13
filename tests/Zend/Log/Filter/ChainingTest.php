@@ -46,6 +46,9 @@ class ChainingTest extends \PHPUnit_Framework_TestCase
         fclose($this->log);
     }
 
+    /**
+     * @group disable
+     */
     public function testFilterAllWriters()
     {
         // filter out anything above a WARNing for all writers

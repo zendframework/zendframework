@@ -34,8 +34,8 @@ interface Filter
     /**
      * Returns TRUE to accept the message, FALSE to block it.
      *
-     * @param  array    $event    event data
-     * @return boolean            accepted?
+     * @param array $event event data
+     * @return boolean accepted?
      */
-    public function accept($event);
+    public function filter(array $event);
 }

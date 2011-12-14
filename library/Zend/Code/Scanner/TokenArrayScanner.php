@@ -150,11 +150,13 @@ class TokenArrayScanner implements Scanner
         }
 
         $uses = array();
-        foreach ($info['uses'] as $useStatement) {
-            if ($useStatement['as'] === null) {
-                $uses[] = $useStatement['use'];
-            } else {
-                $uses[$useStatement['use']] = $useStatement['as'];
+        if (isset($info['uses'])) {
+            foreach ($info['uses'] as $useStatement) {
+                if ($useStatement['as'] === null) {
+                    $uses[] = $useStatement['use'];
+                } else {
+                    $uses[$useStatement['use']] = $useStatement['as'];
+                }
             }
         }
 

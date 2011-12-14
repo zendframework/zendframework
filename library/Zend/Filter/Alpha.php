@@ -23,9 +23,10 @@
  */
 namespace Zend\Filter;
 
-use Zend\Config\Config,
+use Traversable,
     Zend\Locale\Locale as ZendLocale,
-    Zend\Registry;
+    Zend\Registry,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * @uses       Zend\Filter\AbstractFilter
@@ -66,8 +67,8 @@ class Alpha extends AbstractFilter
      */
     public function __construct($options = false)
     {
-        if ($options instanceof Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
         } elseif (!is_array($options)) {
             $options = func_get_args();
             $temp    = array();
@@ -82,8 +83,8 @@ class Alpha extends AbstractFilter
             $options = $temp;
         }
 
-        if (null === self::$unicodeEnabled) {
-            self::$unicodeEnabled = (@preg_match('/\pL/u', 'a')) ? true : false;
+        if (array_key_exists('unicodeEnabled', $options)) {
+            $this->setUnicodeEnabled($options['unicodeEnabled']);
         }
 
         if (array_key_exists('allowWhiteSpace', $options)) {
@@ -120,6 +121,44 @@ class Alpha extends AbstractFilter
     }
 
     /**
+     * Toggle unicode matching capabilities
+     * 
+     * @param  bool $flag 
+     * @return Alpha
+     */
+    public function setUnicodeEnabled($flag)
+    {
+        $flag = (bool) $flag;
+        if (!$flag) {
+            static::$unicodeEnabled = $flag;
+            return;
+        }
+
+        if (!static::isUnicodeCapable()) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s cannot be unicode enabled; installed PCRE is not capable',
+                __CLASS__
+            ));
+        }
+
+        static::$unicodeEnabled = $flag;
+        return $this;
+    }
+
+    /**
+     * Is this instance unicode enabled?
+     * 
+     * @return bool
+     */
+    public function isUnicodeEnabled()
+    {
+        if (null === static::$unicodeEnabled) {
+            static::$unicodeEnabled = static::isUnicodeCapable();
+        }
+        return static::$unicodeEnabled;
+    }
+
+    /**
      * Returns the locale option
      *
      * @return string
@@ -153,20 +192,31 @@ class Alpha extends AbstractFilter
     {
         $whiteSpace = $this->allowWhiteSpace ? '\s' : '';
 
-        if (!self::$unicodeEnabled) {
+        $locale = (string) $this->locale;
+        if (!$this->isUnicodeEnabled()) {
             // POSIX named classes are not supported, use alternative a-zA-Z match
             $pattern = '/[^a-zA-Z' . $whiteSpace . ']/';
-        } elseif (((string) $this->locale == 'ja')
-                  || ((string) $this->locale == 'ko')
-                  || ((string) $this->locale == 'zh')
+        } elseif (($locale == 'ja')
+                  || ($locale == 'ko')
+                  || ($locale == 'zh')
         ) {
-            // Use english alphabeth
+            // Use english alphabet
             $pattern = '/[^a-zA-Z'  . $whiteSpace . ']/u';
         } else {
-            // Use native language alphabeth
+            // Use native language alphabet
             $pattern = '/[^\p{L}' . $whiteSpace . ']/u';
         }
 
         return preg_replace($pattern, '', (string) $value);
+    }
+
+    /**
+     * Are we unicode capable?
+     * 
+     * @return bool
+     */
+    protected static function isUnicodeCapable()
+    {
+        return (@preg_match('/\pL/u', 'a') ? true : false);
     }
 }

@@ -50,7 +50,7 @@ class Regex extends AbstractValidator
      * @var array
      */
     protected $_messageVariables = array(
-        'pattern' => '_pattern'
+        'pattern' => 'pattern'
     );
 
     /**
@@ -58,7 +58,7 @@ class Regex extends AbstractValidator
      *
      * @var string
      */
-    protected $_pattern;
+    protected $pattern;
 
     /**
      * Sets validator options
@@ -69,19 +69,17 @@ class Regex extends AbstractValidator
      */
     public function __construct($pattern)
     {
-        if ($pattern instanceof \Zend\Config\Config) {
-            $pattern = $pattern->toArray();
+        if (is_string($pattern)) {
+            $this->setPattern($pattern);
+            parent::__construct(array());
+            return;
         }
 
-        if (is_array($pattern)) {
-            if (array_key_exists('pattern', $pattern)) {
-                $pattern = $pattern['pattern'];
-            } else {
-                throw new Exception\InvalidArgumentException("Missing option 'pattern'");
-            }
-        }
+        parent::__construct($pattern);
 
-        $this->setPattern($pattern);
+        if (!$this->pattern) {
+            throw new Exception\InvalidArgumentException("Missing option 'pattern'");
+        }
     }
 
     /**
@@ -91,7 +89,7 @@ class Regex extends AbstractValidator
      */
     public function getPattern()
     {
-        return $this->_pattern;
+        return $this->pattern;
     }
 
     /**
@@ -103,11 +101,11 @@ class Regex extends AbstractValidator
      */
     public function setPattern($pattern)
     {
-        $this->_pattern = (string) $pattern;
-        $status         = @preg_match($this->_pattern, "Test");
+        $this->pattern = (string) $pattern;
+        $status        = @preg_match($this->pattern, "Test");
 
         if (false === $status) {
-             throw new Exception\InvalidArgumentException("Internal error while using the pattern '$this->_pattern'");
+             throw new Exception\InvalidArgumentException("Internal error while using the pattern '$this->pattern'");
         }
 
         return $this;
@@ -128,7 +126,7 @@ class Regex extends AbstractValidator
 
         $this->setValue($value);
 
-        $status = @preg_match($this->_pattern, $value);
+        $status = @preg_match($this->pattern, $value);
         if (false === $status) {
             $this->error(self::ERROROUS);
             return false;

@@ -37,6 +37,9 @@ class TarLoadArchveTarTest extends \PHPUnit_Framework_TestCase
 {
     public function testArchiveTarNotLoaded()
     {
+        if (class_exists('Archive_Tar')) {
+            $this->markTestSkipped('PEAR Archive_Tar is present; skipping test that expects its absence');
+        }
         try {
             $tar = new TarCompression;
             $this->fail('ExtensionNotLoadedException was expected but not thrown');

@@ -22,7 +22,13 @@
 namespace ZendTest\Config;
 
 use Zend\Config\Config,
-    Zend\Config\Parser\Token as TokenParser;
+    Zend\Config\Parser\Token as TokenParser,
+    Zend\Config\Parser\Translator as TranslatorParser,
+    Zend\Config\Parser\Filter as FilterParser,
+    Zend\Translator\Translator,
+    Zend\Translator\Adapter\ArrayAdapter,
+    Zend\Filter\StringToLower
+;
 
 /**
  * @category   Zend
@@ -36,6 +42,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 {
     protected $_nested;
     protected $_tokenBare,$_tokenPrefix, $_tokenSuffix, $_tokenSurround,$_tokenSurroundMixed;
+    protected $_translator,$_translatorStrings;
+    protected $_filter;
 
     public function setUp()
     {
@@ -98,26 +106,60 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->_tokenSurroundMixed = array(
             'simple' => '##TOKEN##',
             'inside' => '## some text with ##TOKEN## inside ##',
-            'simple2' => '@@TOKEN@@',
-            'inside' => '## some text with ##TOKEN## inside ##',
+            'nested' => array(
+                'simple' => '@@TOKEN@@',
+                'inside' => '@@ some text with @@TOKEN@@ inside @@',
+            ),
         );
+
+        $this->_translator = array(
+            'pages' => array(
+                array(
+                    'id' => 'oneDog',
+                    'label' => 'one dog',
+                    'route' => 'app-one-dog'
+                ),
+                array(
+                    'id' => 'twoDogs',
+                    'label' => 'two dogs',
+                    'route' => 'app-two-dogs'
+                ),
+            )
+        );
+
+        $this->_translatorStrings = array(
+            'one dog' => 'ein Hund',
+            'two dogs' => 'zwei Hunde'
+        );
+
+        $this->_filter = array(
+            'simple' => 'some MixedCase VALue',
+            'nested' => array(
+                'simple' => 'OTHER mixed Case Value',
+            ),
+        );
+
+        if (ArrayAdapter::hasCache()) {
+            ArrayAdapter::clearCache();
+            ArrayAdapter::removeCache();
+        }
     }
 
     public function testEmptyParsersCollection()
     {
         $config = new Config($this->_nested);
         $this->assertInstanceOf('\Zend\Config\Parser\Queue', $config->getParsers());
-        $this->assertEquals($this->_nested,$config->toArray());
+        $this->assertEquals($this->_nested, $config->toArray());
     }
 
     public function testParsersQueue()
     {
         $parser1 = new TokenParser();
         $parser2 = new TokenParser();
-        $config = new Config(array(),true,array($parser1,$parser2));
+        $config = new Config(array(), true, array($parser1, $parser2));
 
         $this->assertInstanceOf('\Zend\Config\Parser\Queue', $config->getParsers());
-        $this->assertEquals(2,$config->getParsers()->count());
+        $this->assertEquals(2, $config->getParsers()->count());
         $this->assertTrue($config->getParsers()->contains($parser1));
         $this->assertTrue($config->getParsers()->contains($parser2));
     }
@@ -158,7 +200,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testTokenPrefix()
     {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'),'::');
+        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '::');
         $config = new Config($this->_tokenPrefix, true, array($parser));
 
         $this->assertEquals('some replaced value', $config->simple);
@@ -169,7 +211,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testTokenSuffix()
     {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'),'','::');
+        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '', '::');
         $config = new Config($this->_tokenSuffix, true, array($parser));
 
         $this->assertEquals('some replaced value', $config->simple);
@@ -184,7 +226,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testTokenSurround()
     {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'),'##','##');
+        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
         $config = new Config($this->_tokenSurround, true, array($parser));
 
         $this->assertEquals('some replaced value', $config->simple);
@@ -196,14 +238,115 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testTokenSurround
      */
-    public function testTokenChangeParams(){
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'),'##','##');
-        $config = new Config($this->_tokenSurround, true, array($parser));
-        $config->nested['nested'][''];
+    public function testTokenChangeParams()
+    {
+        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
+        $config = new Config($this->_tokenSurroundMixed, true);
+        $parser->parse($config);
+        $this->assertEquals('some replaced value', $config->simple);
+        $this->assertEquals('## some text with some replaced value inside ##', $config->inside);
+        $this->assertEquals('@@TOKEN@@', $config->nested->simple);
+        $this->assertEquals('@@ some text with @@TOKEN@@ inside @@', $config->nested->inside);
+
+        /**
+         * Now change prefix and suffix on the parser
+         */
+        $parser->setPrefix('@@');
+        $parser->setSuffix('@@');
+
+        /**
+         * Parse the config again
+         */
+        $parser->parse($config);
+
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals('## some text with some replaced value inside ##', $config->inside);
         $this->assertEquals('some replaced value', $config->nested->simple);
-        $this->assertEquals('## some text with some replaced value inside ##', $config->nested->inside);
+        $this->assertEquals('@@ some text with some replaced value inside @@', $config->nested->inside);
     }
+
+    /**
+     * @depends testTokenSurround
+     */
+    public function testJITToken()
+    {
+        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
+        $config = new Config($this->_tokenSurround, true, $parser);
+
+        $config->simple = 'Changed text with ##TOKEN## inside';
+        $this->assertEquals('Changed text with some replaced value inside', $config->simple);
+
+        $config->newKey = 'New text with ##TOKEN##';
+        $this->assertEquals('New text with some replaced value', $config->newKey);
+    }
+
+    /**
+     * @depends testJITToken
+     */
+    public function testJITNestedToken()
+    {
+        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
+        $config = new Config($this->_tokenSurround, true, $parser);
+
+        $config->nested->moreNested = array();
+        $config->nested->moreNested->newKey = 'New text with ##TOKEN##';
+        $this->assertEquals('New text with some replaced value', $config->nested->moreNested->newKey);
+    }
+
+    public function testTranslator(){
+        $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
+        error_reporting(E_ALL);ini_set('display_errors',1);
+        $parser = new TranslatorParser($translator);
+        $config = new Config($this->_translator,true);
+
+        $parser->parse($config);
+
+        $this->assertEquals('oneDog',$config->pages[0]->id);
+        $this->assertEquals('ein Hund',$config->pages[0]->label);
+
+        $this->assertEquals('twoDogs',$config->pages[1]->id);
+        $this->assertEquals('zwei Hunde',$config->pages[1]->label);
+    }
+
+    public function testJITTranslator(){
+        $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
+        $parser = new TranslatorParser($translator);
+        $config = new Config(array(), true, $parser);
+
+        $config->newValue = 'one dog';
+        $this->assertEquals('ein Hund',$config->newValue);
+
+        $config->newValue = 'two dogs';
+        $this->assertEquals('zwei Hunde',$config->newValue);
+
+        $config->unknownTranslation = 'three dogs';
+        $this->assertEquals('three dogs',$config->unknownTranslation);
+    }
+
+    public function testFilter(){
+        $filter = new StringToLower();
+        $parser = new FilterParser($filter);
+        $config = new Config($this->_filter,1);
+
+        $parser->parse($config);
+
+        $this->assertEquals('some mixedcase value',$config->simple);
+        $this->assertEquals('other mixed case value',$config->nested->simple);
+    }
+
+    public function testJITFilter(){
+        $filter = new StringToLower();
+        $parser = new FilterParser($filter);
+        $config = new Config($this->_filter,1,$parser);
+
+        $this->assertEquals('some mixedcase value',$config->simple);
+        $this->assertEquals('other mixed case value',$config->nested->simple);
+
+        $config->newValue = 'THIRD mixed CASE value';
+        $this->assertEquals('third mixed case value',$config->newValue);
+    }
+
+
+
 }
 

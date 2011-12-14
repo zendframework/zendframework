@@ -34,11 +34,16 @@ interface Parser
     /**
      * Process the whole Config structure and recursively parse all its values.
      *
-     * @protected
-     * @abstract
      * @param Config $value
      * @return \Zend\Config\Config
      */
     public function parse(Config $value);
 
+    /**
+     * Process a single value
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function parseValue($value);
 }

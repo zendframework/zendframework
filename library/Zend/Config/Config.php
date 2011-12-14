@@ -164,9 +164,13 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         if ($this->allowModifications) {
             if (is_array($value)) {
-                $this->data[$name] = new self($value, true);
+                $this->data[$name] = new self($value, true, $this->parsers);
             } else {
-                $this->data[$name] = $value;
+				if (!$this->parsers->isEmpty()) {
+					$this->data[$name] = $this->parsers->parseValue($value);
+				} else {
+					$this->data[$name] = $value;
+				}
             }
             
             $this->count++;
@@ -381,13 +385,15 @@ class Config implements Countable, Iterator, ArrayAccess
         foreach ($merge as $key => $item) {
             if (array_key_exists($key, $this->data)) {
                 if ($item instanceof self && $this->data[$key] instanceof self) {
-                    $this->data[$key] = $this->data[$key]->merge(new self($item->toArray(), $this->allowModifications));
+                    $this->data[$key] = $this->data[$key]->merge(
+                        new self($item->toArray(), $this->allowModifications, $this->parsers)
+                    );
                 } else {
                     $this->data[$key] = $item;
                 }
             } else {
                 if ($item instanceof self) {
-                    $this->data[$key] = new self($item->toArray(), $this->allowModifications);
+                    $this->data[$key] = new self($item->toArray(), $this->allowModifications, $this->parsers);
                 } else {
                     $this->data[$key] = $item;
                 }

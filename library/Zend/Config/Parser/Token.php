@@ -65,8 +65,6 @@ class Token implements Parser
      */
     protected $map = null;
 
-
-
     /**
      * Token Parser walks through a Config structure and replaces all
      * occurences of tokens with supplied values.
@@ -190,6 +188,20 @@ class Token implements Parser
         return $this->addToken($token, $value);
     }
 
+	/**
+	 * Build replacement map
+	 */
+	protected function buildMap(){
+		if (!$this->suffix && !$this->prefix) {
+			$this->map = $this->tokens;
+		} else {
+			$this->map = array();
+			foreach ($this->tokens as $token => $value) {
+				$this->map[$this->prefix . $token . $this->suffix] = $value;
+			}
+		}
+	}
+
     public function parse(Config $config)
     {
         if ($config->isReadOnly()) {
@@ -197,17 +209,7 @@ class Token implements Parser
         }
 
         if ($this->map === null) {
-            /**
-             * Build replacement map
-             */
-            if (!$this->suffix && !$this->prefix) {
-                $this->map = $this->tokens;
-            } else {
-                $this->map = array();
-                foreach ($this->tokens as $token => $value) {
-                    $this->map[$this->prefix . $token . $this->suffix] = $value;
-                }
-            }
+            $this->buildMap();
         }
 
         /**
@@ -225,5 +227,21 @@ class Token implements Parser
 
         return $config;
     }
+
+	/**
+	 * Process a single value
+	 *
+	 * @param $value
+	 * @return mixed
+	 */
+	public function parseValue($value)
+	{
+		if ($this->map === null) {
+			$this->buildMap();
+		}
+		$keys = array_keys($this->map);
+		$values = array_values($this->map);
+		return str_replace($keys,$values,$value);
+	}
 
 }

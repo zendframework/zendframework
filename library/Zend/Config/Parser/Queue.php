@@ -54,4 +54,22 @@ class Queue extends PriorityQueue implements Parser
             $parser->parse($config);
         }
     }
+
+    /**
+     * Process a single value
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function parseValue($value)
+    {
+        foreach ($this as $parser) {
+            /** @var $parser \Zend\Config\Parser */
+            $value = $parser->parseValue($value);
+        }
+
+        return $value;
+    }
+
+
 }

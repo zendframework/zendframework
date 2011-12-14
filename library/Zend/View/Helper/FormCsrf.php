@@ -51,6 +51,6 @@ class FormCsrf extends AbstractHelper
             $this->hashElements[$name] = new HashElement($name);
             $this->hashElements[$name]->setDecorators(array('ViewHelper'));
         }
-        return $this->hashElements[$name]->render($this->getView());
+        return trim($this->hashElements[$name]->render($this->getView()));
     }
 }

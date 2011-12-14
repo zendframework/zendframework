@@ -47,6 +47,7 @@ class HelperLoader extends PluginClassLoader
         'fieldset'            => 'Zend\View\Helper\Fieldset',
         'formbutton'          => 'Zend\View\Helper\FormButton',
         'formcheckbox'        => 'Zend\View\Helper\FormCheckbox',
+        'formcsrf'            => 'Zend\View\Helper\FormCsrf',
         'formerrors'          => 'Zend\View\Helper\FormErrors',
         'formfile'            => 'Zend\View\Helper\FormFile',
         'formhidden'          => 'Zend\View\Helper\FormHidden',

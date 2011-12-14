@@ -10,12 +10,34 @@ use Zend\Cache\Storage\Plugin,
 class MockPlugin extends AbstractPlugin
 {
 
+    protected $options;
     protected $handles = array();
     protected $calledEvents = array();
     protected $eventCallbacks  = array(
         'setItem.pre'  => 'onSetItemPre',
         'setItem.post' => 'onSetItemPost'
     );
+
+    public function __construct($options = array())
+    {
+        if (is_array($options)) {
+            $options = new Plugin\PluginOptions($options);
+        }
+        if ($options instanceof Plugin\PluginOptions) {
+            $this->setOptions($options);
+        }
+    }
+
+    public function setOptions(Plugin\PluginOptions $options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
 
     public function attach(EventCollection $eventCollection)
     {

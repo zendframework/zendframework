@@ -128,13 +128,19 @@ class StorageFactory
 
         // set adapter or plugin options
         if (isset($cfg['options'])) {
-            if (!is_array($cfg['options'])) {
+            if (!is_array($cfg['options']) 
+                && !$cfg['options'] instanceof Traversable
+            ) {
                 throw new Exception\InvalidArgumentException(
-                    'Options needs to be an array'
+                    'Options needs to be an array or Traversable object'
                 );
             }
 
-            $adapter->setOptions($cfg['options']);
+            // Options at the top-level should be *merged* with existing options
+            $options = $adapter->getOptions();
+            foreach ($cfg['options'] as $key => $value) {
+                $options->$key = $value;
+            }
         }
 
         return $adapter;
@@ -143,8 +149,8 @@ class StorageFactory
     /**
      * Instantiate a storage adapter
      *
-     * @param string|Storage\Adapter $adapterName
-     * @param array|Traversable $options
+     * @param  string|Storage\Adapter $adapterName
+     * @param  array|Traversable|Storage\Adapter\AdapterOptions $options
      * @return Storage\Adapter
      * @throws Exception\RuntimeException
      */
@@ -156,7 +162,9 @@ class StorageFactory
             return $adapterName;
         }
 
-        return static::getAdapterBroker()->load($adapterName, $options);
+        $adapter = static::getAdapterBroker()->load($adapterName);
+        $adapter->setOptions($options);
+        return $adapter;
     }
 
     /**
@@ -197,7 +205,7 @@ class StorageFactory
      * Instantiate a storage plugin
      *
      * @param string|Storage\Plugin $pluginName
-     * @param array|Traversable $options
+     * @param array|Traversable|Storage\Plugin\PluginOptions $options
      * @return Storage\Plugin
      * @throws Exception\RuntimeException
      */
@@ -205,11 +213,17 @@ class StorageFactory
     {
         if ($pluginName instanceof Storage\Plugin) {
             // $pluginName is already an plugin object
-            $pluginName->setOptions($options);
-            return $pluginName;
+            $plugin = $pluginName;
+        } else {
+            $plugin = static::getPluginBroker()->load($pluginName);
         }
 
-        return static::getPluginBroker()->load($pluginName, $options);
+        if (!$options instanceof Storage\Plugin\PluginOptions) {
+            $options = new Storage\Plugin\PluginOptions($options);
+        }
+
+        $plugin->setOptions($options);
+        return $plugin;
     }
 
     /**

@@ -144,8 +144,8 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
 
         // test adapter
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\\' . $factory['adapter']['name'], $storage);
-        $this->assertEquals(123, $storage->getTtl());
-        $this->assertEquals('test', $storage->getNamespace());
+        $this->assertEquals(123, $storage->getOptions()->getTtl());
+        $this->assertEquals('test', $storage->getOptions()->getNamespace());
 
         // test plugin structure
         foreach ($storage->getPlugins() as $i => $plugin) {
@@ -162,7 +162,7 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
                 case 'Zend\Cache\Storage\Plugin\Serializer':
                     break;
                 default:
-                    $this->fail("Unexpected plguin class '{$pluginClass}'");
+                    $this->fail("Unexpected plugin class '{$pluginClass}'");
             }
 
         }

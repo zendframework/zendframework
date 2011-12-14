@@ -54,6 +54,13 @@ class Hash extends Xhtml
     protected $_hash;
 
     /**
+     * Static cache of the session names to generated hashes
+     *
+     * @var array 
+     */
+    protected static $_hashCache;
+
+    /**
      * Salt for CSRF token
      * @var string
      */
@@ -253,12 +260,17 @@ class Hash extends Xhtml
      */
     protected function _generateHash()
     {
-        $this->_hash = md5(
-            mt_rand(1,1000000)
-            .  $this->getSalt()
-            .  $this->getName()
-            .  mt_rand(1,1000000)
-        );
+        if (isset(static::$_hashCache[$this->getSessionName()])) {
+            $this->_hash = static::$_hashCache[$this->getSessionName()];
+        } else {
+            $this->_hash = md5(
+                mt_rand(1,1000000)
+                .  $this->getSalt()
+                .  $this->getName()
+                .  mt_rand(1,1000000)
+            );
+            static::$_hashCache[$this->getSessionName()] = $this->_hash;
+        }
         $this->setValue($this->_hash);
     }
 }

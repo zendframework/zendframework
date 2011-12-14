@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Soap\Wsdl\Strategy;
+namespace Zend\Soap\Wsdl\ComplexTypeStrategy;
 
 use Zend\Soap;
 
@@ -40,7 +40,7 @@ use Zend\Soap\Exception;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DefaultComplexType extends AbstractStrategy
+class DefaultComplexType extends AbstractComplexTypeStrategy
 {
     /**
      * Add a complex type by recursivly using all the class properties fetched via Reflection.
@@ -64,7 +64,7 @@ class DefaultComplexType extends AbstractStrategy
         $dom = $this->getContext()->toDomDocument();
         $class = new \ReflectionClass($type);
 
-        $soapTypeName = Soap\Wsdl::translateType($type);
+        $soapTypeName = $this->getContext()->translateType($type);
         $soapType     = 'tns:' . $soapTypeName;
 
         // Register type here to avoid recursion

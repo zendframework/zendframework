@@ -24,7 +24,7 @@
 namespace Zend\Validator\Hostname;
 
 /**
- * Ressource file for biz idn validation
+ * Resource file for biz idn validation
  *
  * @category   Zend
  * @package    Zend_Validate

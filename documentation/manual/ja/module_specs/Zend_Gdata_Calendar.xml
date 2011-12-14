@@ -689,7 +689,7 @@ $event->title = $service->newTitle("My Recurring Event");
 $event->where = array($service->newWhere("Palo Alto, California"));
 $event->content =
     $service->newContent(' This is my other awesome event, ' .
-                         ' occurring all-day every Tuesday from .
+                         ' occurring all-day every Tuesday from ' .
                          '2007-05-01 until 207-09-04. No RSVP required.');
 
 // 繰り返しパターンの期間と頻度を指定します

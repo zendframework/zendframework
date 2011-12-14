@@ -98,7 +98,7 @@ class PluginOptions extends Options
         $this->clearingFactor = $this->normalizeFactor($clearingFactor);
         return $this;
     }
-    
+
     /**
      * Get automatic clearing factor
      *
@@ -126,7 +126,7 @@ class PluginOptions extends Options
         $this->clearByNamespace = $clearByNamespace;
         return $this;
     }
-    
+
     /**
      * Clear items by namespace?
      *
@@ -152,12 +152,12 @@ class PluginOptions extends Options
     public function setExceptionCallback($exceptionCallback)
     {
         if ($exceptionCallback !== null && !is_callable($exceptionCallback, true)) {
-            throw new ExceptionHandler\InvalidArgumentException('Not a valid callback');
+            throw new Exception\InvalidArgumentException('Not a valid callback');
         }
         $this->exceptionCallback = $exceptionCallback;
         return $this;
     }
-    
+
     /**
      * Get callback to call on intercepted exception
      *
@@ -185,7 +185,7 @@ class PluginOptions extends Options
         $this->optimizingFactor = $this->normalizeFactor($optimizingFactor);
         return $this;
     }
-    
+
     /**
      * Set automatic optimizing factor
      *
@@ -256,7 +256,7 @@ class PluginOptions extends Options
         $this->serializerOptions = $serializerOptions;
         return $this;
     }
-    
+
     /**
      * Get configuration options for instantiating a serializer adapter
      *
@@ -284,7 +284,7 @@ class PluginOptions extends Options
         $this->throwExceptions = (bool) $throwExceptions;
         return $this;
     }
-    
+
     /**
      * Should we re-throw exceptions?
      *
@@ -302,8 +302,8 @@ class PluginOptions extends Options
      * Normalize a factor
      *
      * Cast to int and ensure we have a value greater than zero.
-     * 
-     * @param  int $factor 
+     *
+     * @param  int $factor
      * @return int
      * @throws Exception\InvalidArgumentException
      */

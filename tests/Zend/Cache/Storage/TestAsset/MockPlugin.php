@@ -3,10 +3,11 @@
 namespace ZendTest\Cache\Storage\TestAsset;
 
 use Zend\Cache\Storage\Plugin,
+    Zend\Cache\Storage\Plugin\AbstractPlugin,
     Zend\EventManager\EventCollection,
     Zend\EventManager\Event;
 
-class MockPlugin implements Plugin
+class MockPlugin extends AbstractPlugin
 {
 
     protected $options;

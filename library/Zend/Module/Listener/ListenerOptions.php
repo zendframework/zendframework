@@ -7,6 +7,11 @@ use Zend\Stdlib\Options;
 class ListenerOptions extends Options
 {
     /**
+     * @var array
+     */
+    protected $modulePaths = array();
+
+    /**
      * @var bool
      */
     protected $configCacheEnabled = false;
@@ -22,9 +27,26 @@ class ListenerOptions extends Options
     protected $cacheDir;
 
     /**
-     * @var string
+     * Get an array of paths where modules reside
+     *
+     * @return array
      */
-    protected $applicationEnvironment;
+    public function getModulePaths()
+    {
+        return $this->modulePaths;
+    }
+
+    /**
+     * Set an array of paths where modules reside
+     *
+     * @param array $modulePaths
+     * @return ListenerOptions
+     */
+    public function setModulePaths(array $modulePaths)
+    {
+        $this->modulePaths = $modulePaths;
+        return $this;
+    }
 
     /**
      * Check if the config cache is enabled
@@ -35,7 +57,7 @@ class ListenerOptions extends Options
     {
         return $this->configCacheEnabled;
     }
- 
+
     /**
      * Set if the config cache should be enabled or not
      *
@@ -53,12 +75,9 @@ class ListenerOptions extends Options
      *
      * @return string
      */
-    public function getConfigCacheKey() 
+    public function getConfigCacheKey()
     {
-        if ($this->configCacheKey !== null) {
-            return $this->configCacheKey;
-        }
-        return $this->getApplicationEnvironment();
+        return (string) $this->configCacheKey;
     }
 
     /**
@@ -67,16 +86,16 @@ class ListenerOptions extends Options
      * @param string $configCacheKey the value to be set
      * @return ManagerOptions
      */
-    public function setConfigCacheKey($configCacheKey) 
+    public function setConfigCacheKey($configCacheKey)
     {
         $this->configCacheKey = $configCacheKey;
         return $this;
     }
 
     /**
-     * Get the path to the config cache 
-     * 
-     * Should this be an option, or should the dir option include the 
+     * Get the path to the config cache
+     *
+     * Should this be an option, or should the dir option include the
      * filename, or should it simply remain hard-coded? Thoughts?
      *
      * @return string
@@ -95,7 +114,7 @@ class ListenerOptions extends Options
     {
         return $this->cacheDir;
     }
- 
+
     /**
      * Set the path where cache files can be stored
      *
@@ -113,30 +132,9 @@ class ListenerOptions extends Options
     }
 
     /**
-     * Get the application environment being used
-     *
-     * @return string
-     */
-    public function getApplicationEnvironment()
-    {
-        return $this->applicationEnvironment ?: 'production';
-    }
- 
-    /**
-     * Set the application environment to use
-     *
-     * @param string $applicationEnvironment the value to be set
-     */
-    public function setApplicationEnvironment($applicationEnvironment)
-    {
-        $this->applicationEnvironment = $applicationEnvironment;
-        return $this;
-    }
-
-    /**
      * Normalize a path for insertion in the stack
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
      * @return string
      */
     public static function normalizePath($path)

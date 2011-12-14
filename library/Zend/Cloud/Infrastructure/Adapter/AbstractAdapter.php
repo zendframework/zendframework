@@ -76,7 +76,7 @@ abstract class AbstractAdapter implements Adapter
      * @param  integer $timeout 
      * @return boolean
      */
-    public function waitStatusInstance($id, $status, $timeout = static::TIMEOUT_STATUS_CHANGE)
+    public function waitStatusInstance($id, $status, $timeout = self::TIMEOUT_STATUS_CHANGE)
     {
         if (empty($id) || empty($status)) {
             return false;

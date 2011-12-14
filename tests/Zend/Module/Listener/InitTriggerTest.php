@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Loader\ModuleAutoloader,
     Zend\Loader\AutoloaderFactory,
     Zend\Module\Listener\InitTrigger,
+    Zend\Module\Listener\ModuleResolverListener,
     Zend\Module\Manager;
 
 class InitTriggerTest extends TestCase
@@ -22,10 +23,15 @@ class InitTriggerTest extends TestCase
 
         // Store original include_path
         $this->includePath = get_include_path();
+
         $autoloader = new ModuleAutoloader(array(
             dirname(__DIR__) . '/TestAsset',
         ));
         $autoloader->register();
+
+        $this->moduleManager = new Manager(array());
+        $this->moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+        $this->moduleManager->events()->attach('loadModule', new InitTrigger, 2000);
     }
 
     public function tearDown()
@@ -49,10 +55,8 @@ class InitTriggerTest extends TestCase
 
     public function testInitMethodCalledByInitTriggerListener()
     {
-        $moduleManager = new Manager(array('ListenerTestModule'));
-        $moduleManager->setDisableLoadDefaultListeners(true);
-        $initListener = new InitTrigger();
-        $moduleManager->events()->attach('loadModule', $initListener);
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('ListenerTestModule'));
         $moduleManager->loadModules();
         $modules = $moduleManager->getLoadedModules();
         $this->assertTrue($modules['ListenerTestModule']->initCalled);

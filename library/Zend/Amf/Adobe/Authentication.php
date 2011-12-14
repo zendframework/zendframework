@@ -23,36 +23,37 @@
  */
 namespace Zend\Amf\Adobe;
 
-use Zend\Authentication;
+use stdClass,
+    Zend\Acl\Acl,
+    Zend\Acl\Role,
+    Zend\Amf\AbstractAuthentication,
+    Zend\Authentication\Adapter as AuthenticationAdapter,
+    Zend\Authentication\Result as AuthenticationResult;
 
 /**
  * This class implements authentication against XML file with roles for Flex Builder.
  *
- * @uses       \Zend\Acl\Acl
- * @uses       \Zend\Amf\AbstractAuthentication
- * @uses       \Zend\Authentication\Result
- * @uses       \Zend\Authentication\Adapter\Exception
  * @package    Zend_Amf
  * @subpackage Adobe
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Authentication extends \Zend\Amf\AbstractAuthentication
+class Authentication extends AbstractAuthentication
 {
 
     /**
      * ACL for authorization
      *
-     * @var \Zend\Acl\Acl
+     * @var Acl
      */
-    protected $_acl;
+    protected $acl;
 
     /**
      * Username/password array
      *
      * @var array
      */
-    protected $_users = array();
+    protected $users = array();
 
     /**
      * Create auth adapter
@@ -61,7 +62,7 @@ class Authentication extends \Zend\Amf\AbstractAuthentication
      */
     public function __construct($rolefile)
     {
-        $this->_acl = new \Zend\Acl\Acl();
+        $this->acl = new Acl();
         $xml = simplexml_load_file($rolefile);
 /*
 Roles file format:
@@ -75,9 +76,9 @@ Roles file format:
 </roles>
 */
         foreach($xml->role as $role) {
-            $this->_acl->addRole(new \Zend\Acl\Role\GenericRole((string)$role["id"]));
+            $this->acl->addRole(new Role\GenericRole((string)$role["id"]));
             foreach($role->user as $user) {
-                $this->_users[(string)$user['name']] = array(
+                $this->users[(string)$user['name']] = array(
                     'password' => (string)$user['password'],
                     'role'     => (string)$role['id']
                 );
@@ -88,48 +89,48 @@ Roles file format:
     /**
      * Get ACL with roles from XML file
      *
-     * @return \Zend\Acl\Acl
+     * @return Acl
      */
     public function getAcl()
     {
-        return $this->_acl;
+        return $this->acl;
     }
 
     /**
      * Perform authentication
      *
      * @see Zend_Auth_Adapter_Interface#authenticate()
-     * @return Zend\Authentication\Result
-     * @throws Zend\Authentication\Adapter\Exception
+     * @return AuthenticationResult
+     * @throws AuthenticationAdapter\Exception
      */
     public function authenticate()
     {
         if (empty($this->_username) 
             || empty($this->_password)
         ) {
-            throw new Authentication\Adapter\Exception\InvalidArgumentException('Username/password should be set');
+            throw new AuthenticationAdapter\Exception\InvalidArgumentException('Username/password should be set');
         }
 
-        if (!isset($this->_users[$this->_username])) {
-            return new Authentication\Result(
-                Authentication\Result::FAILURE_IDENTITY_NOT_FOUND,
+        if (!isset($this->users[$this->_username])) {
+            return new AuthenticationResult(
+                AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND,
                 null,
                 array('Username not found')
             );
         }
 
-        $user = $this->_users[$this->_username];
+        $user = $this->users[$this->_username];
         if($user["password"] != $this->_password) {
-            return new Authentication\Result(
-                Authentication\Result::FAILURE_CREDENTIAL_INVALID,
+            return new AuthenticationResult(
+                AuthenticationResult::FAILURE_CREDENTIAL_INVALID,
                 null,
                 array('Authentication failed')
             );
         }
 
-        $id       = new \stdClass();
+        $id       = new stdClass();
         $id->role = $user["role"];
         $id->name = $this->_username;
-        return new Authentication\Result(Authentication\Result::SUCCESS, $id);
+        return new AuthenticationResult(AuthenticationResult::SUCCESS, $id);
     }
 }

@@ -57,7 +57,7 @@ interface Adapter
      * @param  integer $timeout 
      * @return boolean
      */
-    public function waitStatusInstance($id, $status, $timeout = static::TIMEOUT_STATUS_CHANGE);
+    public function waitStatusInstance($id, $status, $timeout = self::TIMEOUT_STATUS_CHANGE);
     
     /**
      * Return the public DNS name of the instance

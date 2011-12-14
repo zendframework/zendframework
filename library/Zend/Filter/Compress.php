@@ -99,10 +99,14 @@ class Compress extends AbstractFilter
         $adapter = $this->_adapter;
         $options = $this->getAdapterOptions();
         if (!class_exists($adapter)) {
-            if (\Zend\Loader::isReadable('Zend/Filter/Compress/' . ucfirst($adapter) . '.php')) {
-                $adapter = 'Zend\\Filter\\Compress\\' . ucfirst($adapter);
+            $adapter = 'Zend\\Filter\\Compress\\' . ucfirst($adapter);
+            if (!class_exists($adapter)) {
+                throw new Exception\RuntimeException(sprintf(
+                    '%s unable to load adapter; class "%s" not found',
+                    __METHOD__,
+                    $this->_adapter
+                ));
             }
-            \Zend\Loader::loadClass($adapter);
         }
 
         $this->_adapter = new $adapter($options);

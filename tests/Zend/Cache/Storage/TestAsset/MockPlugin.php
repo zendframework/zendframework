@@ -9,7 +9,7 @@ use Zend\Cache\Storage\Plugin,
 class MockPlugin implements Plugin
 {
 
-    protected $options = array();
+    protected $options;
     protected $handles = array();
     protected $calledEvents = array();
     protected $eventCallbacks  = array(
@@ -19,10 +19,15 @@ class MockPlugin implements Plugin
 
     public function __construct($options = array())
     {
-        $this->setOptions($options);
+        if (is_array($options)) {
+            $options = new Plugin\PluginOptions($options);
+        }
+        if ($options instanceof Plugin\PluginOptions) {
+            $this->setOptions($options);
+        }
     }
 
-    public function setOptions($options)
+    public function setOptions(Plugin\PluginOptions $options)
     {
         $this->options = $options;
         return $this;

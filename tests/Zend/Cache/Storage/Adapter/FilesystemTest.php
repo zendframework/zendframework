@@ -21,6 +21,7 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
+
 use Zend\Cache;
 
 /**
@@ -50,9 +51,11 @@ class FilesystemTest extends CommonAdapterTest
             $this->fail("Can't create temporaty cache directory: {$err['message']}");
         }
 
-        $this->_storage = new Cache\Storage\Adapter\Filesystem(array(
-            'cache_dir' => $this->_tmpCacheDir
+        $this->_options = new Cache\Storage\Adapter\FilesystemOptions(array(
+            'cache_dir' => $this->_tmpCacheDir,
         ));
+        $this->_storage = new Cache\Storage\Adapter\Filesystem();
+        $this->_storage->setOptions($this->_options);
 
         parent::setUp();
     }
@@ -99,22 +102,22 @@ class FilesystemTest extends CommonAdapterTest
                   . substr($cacheDir, $firstSlash)
                   . '///';
 
-        $this->_storage->setCacheDir($cacheDir);
-        $cacheDir = $this->_storage->getCacheDir();
+        $this->_options->setCacheDir($cacheDir);
+        $cacheDir = $this->_options->getCacheDir();
 
         $this->assertEquals($cacheDirExpected, $cacheDir);
     }
 
     public function testSetCacheDirToSystemsTempDirWithNull()
     {
-        $this->_storage->setCacheDir(null);
-        $this->assertEquals(sys_get_temp_dir(), $this->_storage->getCacheDir());
+        $this->_options->setCacheDir(null);
+        $this->assertEquals(sys_get_temp_dir(), $this->_options->getCacheDir());
     }
 
     public function testSetCacheDirNoDirectoryException()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setCacheDir(__FILE__);
+        $this->_options->setCacheDir(__FILE__);
     }
 
     public function testSetCacheDirNotWritableException()
@@ -138,7 +141,7 @@ class FilesystemTest extends CommonAdapterTest
         unlink($testDir); mkdir($testDir); chmod($testDir, 0557);
 
         try {
-            $this->_storage->setCacheDir($testDir);
+            $this->_options->setCacheDir($testDir);
         } catch (\Exception $e) {
             rmdir($testDir);
             throw $e;
@@ -165,7 +168,7 @@ class FilesystemTest extends CommonAdapterTest
         unlink($testDir); mkdir($testDir); chmod($testDir, 0337);
 
         try {
-            $this->_storage->setCacheDir($testDir);
+            $this->_options->setCacheDir($testDir);
         } catch (\Exception $e) {
             rmdir($testDir);
             throw $e;
@@ -174,36 +177,36 @@ class FilesystemTest extends CommonAdapterTest
 
     public function testSetFilePermUpdatesUmask()
     {
-        $this->_storage->setFilePerm(0606);
-        $this->assertEquals(~0606, $this->_storage->getFileUmask());
+        $this->_options->setFilePerm(0606);
+        $this->assertEquals(~0606, $this->_options->getFileUmask());
     }
 
     public function testSetFilePermThrowsExceptionIfNotWritable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setFilePerm(0466);
+        $this->_options->setFilePerm(0466);
     }
 
     public function testSetFilePermThrowsExceptionIfNotReadable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setFilePerm(0266);
+        $this->_options->setFilePerm(0266);
     }
 
     public function testSetFilePermThrowsExceptionIfExecutable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setFilePerm(0661);
+        $this->_options->setFilePerm(0661);
     }
 
     public function testSetNoAtimeChangesAtimeOfMetadataCapability()
     {
         $capabilities = $this->_storage->getCapabilities();
 
-        $this->_storage->setNoAtime(false);
+        $this->_options->setNoAtime(false);
         $this->assertContains('atime', $capabilities->getSupportedMetadata());
 
-        $this->_storage->setNoAtime(true);
+        $this->_options->setNoAtime(true);
         $this->assertNotContains('atime', $capabilities->getSupportedMetadata());
     }
 
@@ -211,59 +214,59 @@ class FilesystemTest extends CommonAdapterTest
     {
         $capabilities = $this->_storage->getCapabilities();
 
-        $this->_storage->setNoCtime(false);
+        $this->_options->setNoCtime(false);
         $this->assertContains('ctime', $capabilities->getSupportedMetadata());
 
-        $this->_storage->setNoCtime(true);
+        $this->_options->setNoCtime(true);
         $this->assertNotContains('ctime', $capabilities->getSupportedMetadata());
     }
 
     public function testSetDirPermUpdatesUmask()
     {
-        $this->_storage->setDirPerm(0706);
-        $this->assertEquals(~0706, $this->_storage->getDirUmask());
+        $this->_options->setDirPerm(0706);
+        $this->assertEquals(~0706, $this->_options->getDirUmask());
     }
 
     public function testSetDirPermThrowsExceptionIfNotWritable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setDirPerm(0577);
+        $this->_options->setDirPerm(0577);
     }
 
     public function testSetDirPermThrowsExceptionIfNotReadable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setDirPerm(0377);
+        $this->_options->setDirPerm(0377);
     }
 
     public function testSetDirPermThrowsExceptionIfNotExecutable()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setDirPerm(0677);
+        $this->_options->setDirPerm(0677);
     }
 
     public function testSetDirLevelInvalidException()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setDirLevel(17); // must between 0-16
+        $this->_options->setDirLevel(17); // must between 0-16
     }
 
     public function testSetReadControlAlgoAllowStrlen()
     {
-        $this->_storage->setReadControlAlgo('strlen');
-        $this->assertEquals('strlen', $this->_storage->getReadControlAlgo());
+        $this->_options->setReadControlAlgo('strlen');
+        $this->assertEquals('strlen', $this->_options->getReadControlAlgo());
     }
 
     public function testSetReadControlAlgoInvalidException()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setReadControlAlgo('unknown');
+        $this->_options->setReadControlAlgo('unknown');
     }
 
     public function testDisabledFileBlocking()
     {
-        $this->_storage->setFileLocking(true);
-        $this->_storage->setFileBlocking(false);
+        $this->_options->setFileLocking(true);
+        $this->_options->setFileBlocking(false);
 
         // create cache item and get data file
         $this->assertTrue($this->_storage->setItem('key', 'value'));
@@ -283,5 +286,4 @@ class FilesystemTest extends CommonAdapterTest
         flock($fp, LOCK_UN);
         fclose($fp);
     }
-
 }

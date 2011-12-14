@@ -37,7 +37,9 @@ class MemoryTest extends CommonAdapterTest
     public function setUp()
     {
         // instantiate memory adapter
+        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
         $this->_storage = new Cache\Storage\Adapter\Memory();
+        $this->_storage->setOptions($this->_options);
 
         parent::setUp();
     }

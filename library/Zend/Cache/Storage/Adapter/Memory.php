@@ -78,7 +78,8 @@ class Memory extends AbstractAdapter
      */
     public function getItem($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -141,7 +142,8 @@ class Memory extends AbstractAdapter
      */
     public function getItems(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
@@ -201,7 +203,8 @@ class Memory extends AbstractAdapter
      */
     public function hasItem($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -248,7 +251,8 @@ class Memory extends AbstractAdapter
      */
     public function getMetadata($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -309,7 +313,8 @@ class Memory extends AbstractAdapter
      */
     public function setItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -357,7 +362,8 @@ class Memory extends AbstractAdapter
      */
     public function setItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -411,7 +417,8 @@ class Memory extends AbstractAdapter
      */
     public function addItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -462,7 +469,8 @@ class Memory extends AbstractAdapter
      */
     public function addItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -519,7 +527,8 @@ class Memory extends AbstractAdapter
      */
     public function replaceItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -570,7 +579,8 @@ class Memory extends AbstractAdapter
      */
     public function replaceItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -628,7 +638,8 @@ class Memory extends AbstractAdapter
      */
     public function touchItem($key, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -687,7 +698,8 @@ class Memory extends AbstractAdapter
      */
     public function removeItem($key, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -746,7 +758,8 @@ class Memory extends AbstractAdapter
      */
     public function removeItems(array $keys, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -824,7 +837,8 @@ class Memory extends AbstractAdapter
      */
     public function incrementItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -888,14 +902,15 @@ class Memory extends AbstractAdapter
      */
     public function decrementItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
         $value = (int) $value;
-        $args  = new\ArrayObject(array(
+        $args  = new ArrayObject(array(
             'key'     => & $key,
             'value'   => & $value,
             'options' => & $options,
@@ -958,7 +973,8 @@ class Memory extends AbstractAdapter
      */
     public function find($mode = self::MATCH_ACTIVE, array $options=array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -1134,7 +1150,8 @@ class Memory extends AbstractAdapter
      */
     public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1190,7 +1207,8 @@ class Memory extends AbstractAdapter
      */
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1393,5 +1411,4 @@ class Memory extends AbstractAdapter
             unset($data[$key]);
         }
     }
-
 }

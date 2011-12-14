@@ -21,6 +21,7 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
+
 use Zend\Cache,
     Zend\Cache\Exception\RuntimeException;
 
@@ -44,140 +45,131 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
         $this->_storage = $this->getMockForAbstractClass('Zend\Cache\Storage\Adapter\AbstractAdapter');
+        $this->_storage->expects($this->any())
+                       ->method('getOptions')
+                       ->will($this->returnValue($this->_options));
     }
 
     public function testGetOptions()
     {
         $options = $this->_storage->getOptions();
-
-        $this->assertArrayHasKey('writable', $options);
-        $this->assertInternalType('boolean', $options['writable']);
-
-        $this->assertArrayHasKey('readable', $options);
-        $this->assertInternalType('boolean', $options['readable']);
-
-        $this->assertArrayHasKey('ttl', $options);
-        $this->assertInternalType('integer', $options['ttl']);
-
-        $this->assertArrayHasKey('namespace', $options);
-        $this->assertInternalType('string', $options['namespace']);
-
-        $this->assertArrayHasKey('namespace_pattern', $options);
-        $this->assertInternalType('string', $options['namespace_pattern']);
-
-        $this->assertArrayHasKey('key_pattern', $options);
-        $this->assertInternalType('string', $options['key_pattern']);
-
-        $this->assertArrayHasKey('ignore_missing_items', $options);
-        $this->assertInternalType('boolean', $options['ignore_missing_items']);
+        $this->assertInstanceOf('Zend\Cache\Storage\Adapter\AdapterOptions', $options);
+        $this->assertInternalType('boolean', $options->getWritable());
+        $this->assertInternalType('boolean', $options->getReadable());
+        $this->assertInternalType('integer', $options->getTtl());
+        $this->assertInternalType('string', $options->getNamespace());
+        $this->assertInternalType('string', $options->getNamespacePattern());
+        $this->assertInternalType('string', $options->getKeyPattern());
+        $this->assertInternalType('boolean', $options->getIgnoreMissingItems());
     }
 
     public function testSetWritable()
     {
-        $this->_storage->setWritable(true);
-        $this->assertTrue($this->_storage->getWritable());
+        $this->_options->setWritable(true);
+        $this->assertTrue($this->_options->getWritable());
 
-        $this->_storage->setWritable(false);
-        $this->assertFalse($this->_storage->getWritable());
+        $this->_options->setWritable(false);
+        $this->assertFalse($this->_options->getWritable());
     }
 
     public function testSetReadable()
     {
-        $this->_storage->setReadable(true);
-        $this->assertTrue($this->_storage->getReadable());
+        $this->_options->setReadable(true);
+        $this->assertTrue($this->_options->getReadable());
 
-        $this->_storage->setReadable(false);
-        $this->assertFalse($this->_storage->getReadable());
+        $this->_options->setReadable(false);
+        $this->assertFalse($this->_options->getReadable());
     }
 
     public function testSetTtl()
     {
-        $this->_storage->setTtl('123');
-        $this->assertSame(123, $this->_storage->getTtl());
+        $this->_options->setTtl('123');
+        $this->assertSame(123, $this->_options->getTtl());
     }
 
     public function testSetTtlThrowsInvalidArgumentException()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setTtl(-1);
+        $this->_options->setTtl(-1);
     }
 
     public function testGetDefaultNamespaceNotEmpty()
     {
-        $ns = $this->_storage->getNamespace();
+        $ns = $this->_options->getNamespace();
         $this->assertNotEmpty($ns);
     }
 
     public function testSetNamespace()
     {
-        $this->_storage->setNamespace('new_namespace');
-        $this->assertSame('new_namespace', $this->_storage->getNamespace());
+        $this->_options->setNamespace('new_namespace');
+        $this->assertSame('new_namespace', $this->_options->getNamespace());
     }
 
     public function testSetNamespacePattern()
     {
         $pattern = '/^.*$/';
-        $this->_storage->setNamespacePattern($pattern);
-        $this->assertEquals($pattern, $this->_storage->getNamespacePattern());
+        $this->_options->setNamespacePattern($pattern);
+        $this->assertEquals($pattern, $this->_options->getNamespacePattern());
     }
 
     public function testUnsetNamespacePattern()
     {
-        $this->_storage->setNamespacePattern(null);
-        $this->assertSame('', $this->_storage->getNamespacePattern());
+        $this->_options->setNamespacePattern(null);
+        $this->assertSame('', $this->_options->getNamespacePattern());
     }
 
     public function testSetNamespace0()
     {
-        $this->_storage->setNamespace('0');
-        $this->assertSame('0', $this->_storage->getNamespace());
+        $this->_options->setNamespace('0');
+        $this->assertSame('0', $this->_options->getNamespace());
     }
 
     public function testSetEmptyNamespaceThrowsException()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setNamespace('');
+        $this->_options->setNamespace('');
     }
 
     public function testSetNamespacePatternThrowsExceptionOnInvalidPattern()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setNamespacePattern('#');
+        $this->_options->setNamespacePattern('#');
     }
 
     public function testSetNamespacePatternThrowsExceptionOnInvalidNamespace()
     {
-        $this->_storage->setNamespace('ns');
+        $this->_options->setNamespace('ns');
         $this->setExpectedException('Zend\Cache\Exception\RuntimeException');
-        $this->_storage->setNamespacePattern('/[abc]/');
+        $this->_options->setNamespacePattern('/[abc]/');
     }
 
     public function testSetKeyPattern()
     {
-        $this->_storage->setKeyPattern('/^[key]+$/Di');
-        $this->assertEquals('/^[key]+$/Di', $this->_storage->getKeyPattern());
+        $this->_options->setKeyPattern('/^[key]+$/Di');
+        $this->assertEquals('/^[key]+$/Di', $this->_options->getKeyPattern());
     }
 
     public function testUnsetKeyPattern()
     {
-        $this->_storage->setKeyPattern(null);
-        $this->assertSame('', $this->_storage->getKeyPattern());
+        $this->_options->setKeyPattern(null);
+        $this->assertSame('', $this->_options->getKeyPattern());
     }
 
     public function testSetKeyPatternThrowsExceptionOnInvalidPattern()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
-        $this->_storage->setKeyPattern('#');
+        $this->_options->setKeyPattern('#');
     }
 
     public function testSetIgnoreMissingItems()
     {
-        $this->_storage->setIgnoreMissingItems(true);
-        $this->assertTrue($this->_storage->getIgnoreMissingItems());
+        $this->_options->setIgnoreMissingItems(true);
+        $this->assertTrue($this->_options->getIgnoreMissingItems());
 
-        $this->_storage->setIgnoreMissingItems(false);
-        $this->assertFalse($this->_storage->getIgnoreMissingItems());
+        $this->_options->setIgnoreMissingItems(false);
+        $this->assertFalse($this->_options->getIgnoreMissingItems());
     }
 
     public function testPluginRegistry()
@@ -305,14 +297,15 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $rs = $this->_storage->getItems(array_keys($items), $options);
 
-        // remove missing items from arrray to test
-        array_walk($items, function ($v, $k) use (&$items) {
-            if ($v === false) {
-                unset($items[$k]);
+        // remove missing items from array to test
+        $expected = $items;
+        foreach ($expected as $key => $value) {
+            if (false === $value) {
+                unset($expected[$key]);
             }
-        });
+        }
 
-        $this->assertEquals($items, $rs);
+        $this->assertEquals($expected, $rs);
     }
 
     public function testGetMetadatas()
@@ -334,14 +327,15 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
 
         $rs = $this->_storage->getMetadatas(array_keys($items), $options);
 
-        // remove missing items from arrray to test
-        array_walk($items, function ($v, $k) use (&$items) {
-            if ($v === false) {
-                unset($items[$k]);
+        // remove missing items from array to test
+        $expected = $items;
+        foreach ($expected as $key => $value) {
+            if (false === $value) {
+                unset($expected[$key]);
             }
-        });
+        }
 
-        $this->assertEquals($items, $rs);
+        $this->assertEquals($expected, $rs);
     }
 
     public function testHasItem()

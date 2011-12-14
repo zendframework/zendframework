@@ -86,19 +86,12 @@ interface Adapter
      */
     const MATCH_TAGS_AND_NOT = 030;
 
-    /**
-     * Constructor
-     *
-     * @param array|Traversable $options
-     */
-    public function __construct($options = array());
-
     /* configuration */
 
     /**
      * Set options.
      *
-     * @param array|Traversable $options
+     * @param array|Traversable|Adapter\AdapterOptions $options
      * @return Adapter
      */
     public function setOptions($options);
@@ -106,7 +99,7 @@ interface Adapter
     /**
      * Get options
      *
-     * @return array
+     * @return Adapter\AdapterOptions
      */
     public function getOptions();
 

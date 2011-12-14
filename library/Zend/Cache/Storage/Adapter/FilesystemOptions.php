@@ -21,7 +21,8 @@
 
 namespace Zend\Cache\Storage\Adapter;
 
-use Zend\Cache\Exception;
+use Zend\Cache\Exception,
+    Zend\Cache\Utils;
 
 /**
  * These are options specific to the Filesystem adapter
@@ -35,23 +36,11 @@ use Zend\Cache\Exception;
 class FilesystemOptions extends AdapterOptions
 {
     /**
-     * Overwrite default namespace pattern
-     *
-     * @var string
+     * The adapter using these options
+     * 
+     * @var null|Filesystem
      */
-    protected $namespacePattern = '/^[a-z0-9_\+\-]*$/Di';
-
-    /**
-     * Namespace separator
-     *
-     * @var string
-     */
-    protected $namespaceSeparator = '-';
-
-    /**
-     * Overwrite default key pattern
-     */
-    protected $keyPattern = '/^[a-z0-9_\+\-]*$/Di';
+    protected $adapter;
 
     /**
      * Directory to store cache files
@@ -62,18 +51,25 @@ class FilesystemOptions extends AdapterOptions
     protected $cacheDir = null;
 
     /**
-     * Used umask on creating a cache file
-     *
-     * @var int
-     */
-    protected $fileUmask = 0117;
-
-    /**
-     * Lock files on writing
+     * Call clearstatcache enabled?
      *
      * @var boolean
      */
-    protected $fileLocking = true;
+    protected $clearStatCache = true;
+
+    /**
+     * How much sub-directaries should be created?
+     *
+     * @var int
+     */
+    protected $dirLevel = 1;
+
+    /**
+     * Used umask on creating a cache directory
+     *
+     * @var int
+     */
+    protected $dirUmask = 0007;
 
     /**
      * Block writing files until writing by another process finished.
@@ -86,18 +82,43 @@ class FilesystemOptions extends AdapterOptions
     protected $fileBlocking = true;
 
     /**
-     * Used umask on creating a cache directory
+     * Lock files on writing
      *
-     * @var int
+     * @var boolean
      */
-    protected $dirUmask = 0007;
+    protected $fileLocking = true;
 
     /**
-     * How much sub-directaries should be created?
+     * Used umask on creating a cache file
      *
      * @var int
      */
-    protected $dirLevel = 1;
+    protected $fileUmask = 0117;
+
+    /**
+     * Overwrite default key pattern
+     *
+     * Defined in AdapterOptions
+     *
+     * @var string
+     */
+    protected $keyPattern = '/^[a-z0-9_\+\-]*$/Di';
+
+    /**
+     * Overwrite default namespace pattern
+     *
+     * Defined in AdapterOptions.
+     *
+     * @var string
+     */
+    protected $namespacePattern = '/^[a-z0-9_\+\-]*$/Di';
+
+    /**
+     * Namespace separator
+     *
+     * @var string
+     */
+    protected $namespaceSeparator = '-';
 
     /**
      * Don't get 'fileatime' as 'atime' on metadata
@@ -130,73 +151,23 @@ class FilesystemOptions extends AdapterOptions
     protected $readControlAlgo = 'crc32';
 
     /**
-     * Call clearstatcache enabled?
-     *
-     * @var boolean
-     */
-    protected $clearStatCache = true;
-
-    /**
-     * The adapter using these options
-     * 
-     * @var null|Filesystem
-     */
-    protected $target;
-
-    /**
      * Filesystem adapter using this instance
      * 
      * @param  Filesystem $filesystem 
      * @return FilesystemOptions
      */
-    public function setTarget(Filesystem $filesystem)
+    public function setAdapter(Filesystem $filesystem)
     {
-        $this->target = $filesystem;
+        $this->adapter = $filesystem;
         $this->updateCapabilities();
         return $this;
-    }
-
-    /**
-     * Update target capabilities
-     * 
-     * @return void
-     */
-    protected function updateCapabilities()
-    {
-        if (!$this->target) {
-            return;
-        }
-        $this->target->updateCapabilities();
-    }
-
-    /**
-     * Set namespace separator
-     *
-     * @param string $separator
-     * @return Filesystem
-     */
-    public function setNamespaceSeparator($separator)
-    {
-        $this->namespaceSeparator = (string) $separator;
-        $this->updateCapabilities();
-        return $this;
-    }
-
-    /**
-     * Get namespace separator
-     *
-     * @return string
-     */
-    public function getNamespaceSeparator()
-    {
-        return $this->namespaceSeparator;
     }
 
     /**
      * Set cache dir
      *
-     * @param string $dir
-     * @return Filesystem
+     * @param  string $dir
+     * @return FilesystemOptions
      * @throws Exception\InvalidArgumentException
      */
     public function setCacheDir($dir)
@@ -238,10 +209,161 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
+     * Set clear stat cache
+     *
+     * @param  bool $flag
+     * @return FilesystemOptions
+     */
+    public function setClearStatCache($flag)
+    {
+        $this->clearStatCache = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Get clear stat cache
+     *
+     * @return bool
+     */
+    public function getClearStatCache()
+    {
+        return $this->clearStatCache;
+    }
+
+    /**
+     * Set dir level
+     *
+     * @param  int $level
+     * @return FilesystemOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setDirLevel($level)
+    {
+        $level = (int) $level;
+        if ($level < 0 || $level > 16) {
+            throw new Exception\InvalidArgumentException(
+                "Directory level '{$level}' must be between 0 and 16"
+            );
+        }
+        $this->dirLevel = $level;
+        return $this;
+    }
+
+    /**
+     * Get dir level
+     *
+     * @return int
+     */
+    public function getDirLevel()
+    {
+        return $this->dirLevel;
+    }
+
+    /**
+     * Set dir perm
+     *
+     * @param  string|int $perm
+     * @return FilesystemOptions
+     */
+    public function setDirPerm($perm)
+    {
+        $perm = $this->normalizeUmask($perm);
+
+        // use umask
+        return $this->setDirUmask(~$perm);
+    }
+
+    /**
+     * Get dir perm
+     *
+     * @return int
+     */
+    public function getDirPerm()
+    {
+        return ~$this->getDirUmask();
+    }
+
+    /**
+     * Set dir umask
+     *
+     * @param  string|int $umask
+     * @return FilesystemOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setDirUmask($umask)
+    {
+        $umask = $this->normalizeUmask($umask, function($umask) {
+            if ((~$umask & 0700) != 0700 ) {
+                throw new Exception\InvalidArgumentException(
+                    'Invalid directory umask or directory permissions: '
+                    . 'need permissions to execute, read and write directories by owner'
+                );
+            }
+        });
+
+        $this->dirUmask = $umask;
+        return $this;
+    }
+
+    /**
+     * Get dir umask
+     *
+     * @return int
+     */
+    public function getDirUmask()
+    {
+        return $this->dirUmask;
+    }
+
+    /**
+     * Set file blocking
+     *
+     * @param  bool $flag
+     * @return FilesystemOptions
+     */
+    public function setFileBlocking($flag)
+    {
+        $this->fileBlocking = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Get file blocking
+     *
+     * @return bool
+     */
+    public function getFileBlocking()
+    {
+        return $this->fileBlocking;
+    }
+
+    /**
+     * Set file locking
+     *
+     * @param  bool $flag
+     * @return FilesystemOptions
+     */
+    public function setFileLocking($flag)
+    {
+        $this->fileLocking = (bool)$flag;
+        return $this;
+    }
+
+    /**
+     * Get file locking
+     *
+     * @return bool
+     */
+    public function getFileLocking()
+    {
+        return $this->fileLocking;
+    }
+
+    /**
      * Set file perm
      *
-     * @param $perm
-     * @return Filesystem
+     * @param  int $perm
+     * @return FilesystemOptions
      */
     public function setFilePerm($perm)
     {
@@ -264,8 +386,8 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Set file umask
      *
-     * @param  $umask
-     * @return Filesystem
+     * @param  int $umask
+     * @return FilesystemOptions
      * @throws Exception\InvalidArgumentException
      */
     public function setFileUmask($umask)
@@ -299,54 +421,33 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Set file locking
+     * Set namespace separator
      *
-     * @param  bool $flag
-     * @return Filesystem
+     * @param  string $separator
+     * @return FilesystemOptions
      */
-    public function setFileLocking($flag)
+    public function setNamespaceSeparator($separator)
     {
-        $this->fileLocking = (bool)$flag;
+        $this->namespaceSeparator = (string) $separator;
+        $this->updateCapabilities();
         return $this;
     }
 
     /**
-     * Get file locking
+     * Get namespace separator
      *
-     * @return bool
+     * @return string
      */
-    public function getFileLocking()
+    public function getNamespaceSeparator()
     {
-        return $this->fileLocking;
-    }
-
-    /**
-     * Set file blocking
-     *
-     * @param  bool $flag
-     * @return Filesystem
-     */
-    public function setFileBlocking($flag)
-    {
-        $this->fileBlocking = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get file blocking
-     *
-     * @return bool
-     */
-    public function getFileBlocking()
-    {
-        return $this->fileBlocking;
+        return $this->namespaceSeparator;
     }
 
     /**
      * Set no atime
      *
      * @param  bool $flag
-     * @return Filesystem
+     * @return FilesystemOptions
      */
     public function setNoAtime($flag)
     {
@@ -369,7 +470,7 @@ class FilesystemOptions extends AdapterOptions
      * Set no ctime
      *
      * @param  bool $flag
-     * @return Filesystem
+     * @return FilesystemOptions
      */
     public function setNoCtime($flag)
     {
@@ -389,95 +490,10 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Set dir perm
-     *
-     * @param string|integer $perm
-     * @return Filesystem
-     */
-    public function setDirPerm($perm)
-    {
-        $perm = $this->normalizeUmask($perm);
-
-        // use umask
-        return $this->setDirUmask(~$perm);
-    }
-
-    /**
-     * Get dir perm
-     *
-     * @return int
-     */
-    public function getDirPerm()
-    {
-        return ~$this->getDirUmask();
-    }
-
-    /**
-     * Set dir umask
-     *
-     * @param string|integer $umask
-     * @return Filesystem
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setDirUmask($umask)
-    {
-        $umask = $this->normalizeUmask($umask, function($umask) {
-            if ((~$umask & 0700) != 0700 ) {
-                throw new Exception\InvalidArgumentException(
-                    'Invalid directory umask or directory permissions: '
-                    . 'need permissions to execute, read and write directories by owner'
-                );
-            }
-        });
-
-        $this->dirUmask = $umask;
-        return $this;
-    }
-
-    /**
-     * Get dir umask
-     *
-     * @return int
-     */
-    public function getDirUmask()
-    {
-        return $this->dirUmask;
-    }
-
-    /**
-     * Set dir level
-     *
-     * @param  integer $level
-     * @return Filesystem
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setDirLevel($level)
-    {
-        $level = (int) $level;
-        if ($level < 0 || $level > 16) {
-            throw new Exception\InvalidArgumentException(
-                "Directory level '{$level}' must be between 0 and 16"
-            );
-        }
-        $this->dirLevel = $level;
-        return $this;
-    }
-
-    /**
-     * Get dir level
-     *
-     * @return int
-     */
-    public function getDirLevel()
-    {
-        return $this->dirLevel;
-    }
-
-    /**
      * Set read control
      *
-     * @param bool $flag
-     * @return Filesystem
+     * @param  bool $flag
+     * @return FilesystemOptions
      */
     public function setReadControl($flag)
     {
@@ -499,7 +515,7 @@ class FilesystemOptions extends AdapterOptions
      * Set real control algo
      *
      * @param  string $algo
-     * @return Filesystem
+     * @return FilesystemOptions
      * @throws Exception\InvalidArgumentException
      */
     public function setReadControlAlgo($algo)
@@ -525,28 +541,6 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Set clear stat cache
-     *
-     * @param  bool $flag
-     * @return Filesystem
-     */
-    public function setClearStatCache($flag)
-    {
-        $this->clearStatCache = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Get clear stat cache
-     *
-     * @return bool
-     */
-    public function getClearStatCache()
-    {
-        return $this->clearStatCache;
-    }
-
-    /**
      * Normalize a umask and optionally apply a callback to it
      * 
      * @param  int|string $umask 
@@ -566,5 +560,20 @@ class FilesystemOptions extends AdapterOptions
         }
 
         return $umask;
+    }
+
+    /**
+     * Update target capabilities
+     *
+     * Returns immediately if no adapter is present.
+     * 
+     * @return void
+     */
+    protected function updateCapabilities()
+    {
+        if (!$this->adapter) {
+            return;
+        }
+        $this->adapter->updateCapabilities();
     }
 }

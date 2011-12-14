@@ -92,14 +92,14 @@ class Filesystem extends AbstractAdapter
             ));
         }
         $this->options = $options;
-        $options->setTarget($this);
+        $options->setAdapter($this);
         return $this;
     }
 
     /**
      * Get options.
      *
-     * @return AdapterOptions
+     * @return FilesystemOptions
      * @see setOptions()
      */
     public function getOptions()
@@ -1035,9 +1035,9 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ( ($dirLevel = $this->getDirLevel()) ) {
+            if ( ($dirLevel = $baseOptions->getDirLevel()) ) {
                 // removes only empty directories
-                $this->rmDir($this->getCacheDir(), $options['namespace'] . $baseOptions->getNamespaceSeparator());
+                $this->rmDir($baseOptions->getCacheDir(), $options['namespace'] . $baseOptions->getNamespaceSeparator());
             }
 
             $result = true;
@@ -1120,7 +1120,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $result = Utils::getDiskCapacity($this->getCacheDir());
+            $result = Utils::getDiskCapacity($this->getOptions()->getCacheDir());
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1149,7 +1149,7 @@ class Filesystem extends AbstractAdapter
             // if lastKeyInfo is available I'm sure that the cache directory exist
         } else {
             $filespec = $this->getFileSpec($key, $options['namespace']);
-            if ($this->getDirLevel() > 0) {
+            if ($baseOptions->getDirLevel() > 0) {
                 $path = dirname($filespec);
                 if (!file_exists($path)) {
                     $oldUmask = umask($baseOptions->getDirUmask());
@@ -1596,7 +1596,8 @@ class Filesystem extends AbstractAdapter
      */
     protected function getKeyInfo($key, $ns)
     {
-        $lastInfoId = $ns . $this->getOptions()->getNamespaceSeparator() . $key;
+        $options    = $this->getOptions();
+        $lastInfoId = $ns . $options->getNamespaceSeparator() . $key;
         if ($this->lastInfoId == $lastInfoId) {
             return $this->lastInfo;
         }
@@ -1614,11 +1615,11 @@ class Filesystem extends AbstractAdapter
             'mtime'    => $filemtime,
         );
 
-        if (!$this->getNoCtime()) {
+        if (!$options->getNoCtime()) {
             $this->lastInfo['ctime'] = filectime($filespec . '.dat');
         }
 
-        if (!$this->getNoAtime()) {
+        if (!$options->getNoAtime()) {
             $this->lastInfo['atime'] = fileatime($filespec . '.dat');
         }
 
@@ -1798,7 +1799,7 @@ class Filesystem extends AbstractAdapter
      *
      * @return void
      */
-    protected function updateCapabilities()
+    public function updateCapabilities()
     {
         if ($this->capabilities) {
             $options = $this->getOptions();

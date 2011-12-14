@@ -51,10 +51,11 @@ class ApcTest extends CommonAdapterTest
             }
         }
 
-        $enabled = (bool)ini_get('apc.enabled');
+        $enabled = (bool) ini_get('apc.enabled');
         if (PHP_SAPI == 'cli') {
-            $enabled = $enabled && (bool)ini_get('apc.enable_cli');
+            $enabled = $enabled && (bool) ini_get('apc.enable_cli');
         }
+
         if (!$enabled) {
             try {
                 new Cache\Storage\Adapter\Apc();
@@ -68,7 +69,9 @@ class ApcTest extends CommonAdapterTest
         $this->iniUseRequestTime = ini_get('apc.use_request_time');
         ini_set('apc.use_request_time', 0);
 
+        $this->_options = new Cache\Storage\Adapter\ApcOptions();
         $this->_storage = new Cache\Storage\Adapter\Apc();
+        $this->_storage->setOptions($this->_options);
 
         parent::setUp();
     }

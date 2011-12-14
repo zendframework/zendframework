@@ -67,7 +67,7 @@ class Apc extends AbstractAdapter
      * @throws Exception
      * @return void
      */
-    public function __construct($options = array())
+    public function __construct()
     {
         if (version_compare('3.1.6', phpversion('apc')) > 0) {
             throw new Exception\ExtensionNotLoadedException("Missing ext/apc >= 3.1.6");
@@ -85,8 +85,8 @@ class Apc extends AbstractAdapter
         }
 
         // init select map
-        if (self::$selectMap === null) {
-            self::$selectMap = array(
+        if (static::$selectMap === null) {
+            static::$selectMap = array(
                 // 'key'       => \APC_ITER_KEY,
                 'value'     => \APC_ITER_VALUE,
                 'mtime'     => \APC_ITER_MTIME,
@@ -102,33 +102,48 @@ class Apc extends AbstractAdapter
                 'internal_key' => \APC_ITER_KEY,
             );
         }
-
-        parent::__construct($options);
     }
 
     /* options */
 
     /**
-     * Set namespace separator for keys
-     * 
-     * @param  string $separator 
-     * @return Apc
+     * Set options.
+     *
+     * @param  array|Traversable|ApcOptions $options
+     * @return ApcAdapter
+     * @see    getOptions()
      */
-    public function setNamespaceSeparator($separator)
+    public function setOptions($options)
     {
-        $this->namespaceSeparator = (string) $separator;
+        if (!is_array($options) 
+            && !$options instanceof Traversable 
+            && !$options instanceof ApcOptions
+        ) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array, a Traversable object, or an ApcOptions instance; '
+                . 'received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+        $this->options = $options;
         return $this;
     }
 
     /**
-     * Get namespace separator for keys
-     * 
-     * @return string
+     * Get options.
+     *
+     * @return ApcOptions
+     * @see setOptions()
      */
-    public function getNamespaceSeparator()
+    public function getOptions()
     {
-        return $this->namespaceSeparator;
+        if (!$this->options) {
+            $this->setOptions(new ApcOptions());
+        }
+        return $this->options;
     }
+
 
     /* reading */
 
@@ -154,7 +169,8 @@ class Apc extends AbstractAdapter
      */
     public function getItem($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -171,7 +187,7 @@ class Apc extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
             $result      = apc_fetch($internalKey, $success);
             if (!$success) {
                 if (!$options['ignore_missing_items']) {
@@ -210,7 +226,8 @@ class Apc extends AbstractAdapter
      */
     public function getItems(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
@@ -226,9 +243,10 @@ class Apc extends AbstractAdapter
                 return $eventRs->last();
             }
 
+            $namespaceSep = $baseOptions->getNamespaceSeparator();
             $internalKeys = array();
             foreach ($keys as $key) {
-                $internalKeys[] = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+                $internalKeys[] = $options['namespace'] . $namespaceSep . $key;
             }
 
             $fetch = apc_fetch($internalKeys);
@@ -240,7 +258,7 @@ class Apc extends AbstractAdapter
             }
 
             // remove namespace prefix
-            $prefixL = strlen($options['namespace'] . $this->getNamespaceSeparator());
+            $prefixL = strlen($options['namespace'] . $namespaceSep);
             $result  = array();
             foreach ($fetch as $internalKey => &$value) {
                 $result[ substr($internalKey, $prefixL) ] = $value;
@@ -272,7 +290,8 @@ class Apc extends AbstractAdapter
      */
     public function hasItem($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -289,7 +308,7 @@ class Apc extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
             $result      = apc_exists($internalKey);
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -318,7 +337,8 @@ class Apc extends AbstractAdapter
      */
     public function hasItems(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
@@ -334,14 +354,15 @@ class Apc extends AbstractAdapter
                 return $eventRs->last();
             }
 
+            $namespaceSep = $baseOptions->getNamespaceSeparator();
             $internalKeys = array();
             foreach ($keys as $key) {
-                $internalKeys[] = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+                $internalKeys[] = $options['namespace'] . $namespaceSep . $key;
             }
 
             $exists  = apc_exists($internalKeys);
             $result  = array();
-            $prefixL = strlen($options['namespace'] . $this->getNamespaceSeparator());
+            $prefixL = strlen($options['namespace'] . $namespaceSep);
             foreach ($exists as $internalKey => $bool) {
                 if ($bool === true) {
                     $result[] = substr($internalKey, $prefixL);
@@ -372,13 +393,14 @@ class Apc extends AbstractAdapter
      */
     public function getMetadata($key, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $key = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
         $format   = \APC_ITER_ALL ^ \APC_ITER_VALUE ^ \APC_ITER_TYPE;
         $regexp   = '/^' . preg_quote($key, '/') . '$/';
@@ -412,16 +434,18 @@ class Apc extends AbstractAdapter
      */
     public function getMetadatas(array $keys, array $options = array())
     {
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
         $this->normalizeOptions($options);
         $nsl = strlen($options['namespace']);
 
-        $keysRegExp = array();
+        $namespaceSep = $baseOptions->getNamespaceSeparator();
+        $keysRegExp   = array();
         foreach ($keys as &$key) {
-            $keysRegExp[] = preg_quote($options['namespace'] . $this->getNamespaceSeparator() . $key, '/');
+            $keysRegExp[] = preg_quote($options['namespace'] . $namespaceSep . $key, '/');
         }
         $regexp = '/^(' . implode('|', $keysRegExp) . ')$/';
 
@@ -437,7 +461,7 @@ class Apc extends AbstractAdapter
 
             $this->normalizeMetadata($metadata);
 
-            $key       = substr($internalKey, strpos($internalKey, $this->getNamespaceSeparator()) + 1);
+            $key       = substr($internalKey, strpos($internalKey, $namespaceSep) + 1);
             $ret[$key] = & $metadata;
         }
 
@@ -470,13 +494,14 @@ class Apc extends AbstractAdapter
      */
     public function setItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $key = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
         if (!apc_store($key, $value, $options['ttl'])) {
             $type = is_object($value) ? get_class($value) : gettype($value);
@@ -502,7 +527,8 @@ class Apc extends AbstractAdapter
      */
     public function setItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -510,7 +536,7 @@ class Apc extends AbstractAdapter
 
         $keyValuePairs2 = array();
         foreach ($keyValuePairs as $key => &$value) {
-            $keyValuePairs2[ $options['namespace'] . $this->getNamespaceSeparator() . $key ] = &$value;
+            $keyValuePairs2[ $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key ] = &$value;
         }
 
         $errKeys = apc_store($keyValuePairs2, null, $options['ttl']);
@@ -542,13 +568,14 @@ class Apc extends AbstractAdapter
      */
     public function addItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $key = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
         if (!apc_add($key, $value, $options['ttl'])) {
             if (apc_exists($key)) {
@@ -578,7 +605,8 @@ class Apc extends AbstractAdapter
      */
     public function addItems(array $keyValuePairs, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -586,7 +614,7 @@ class Apc extends AbstractAdapter
 
         $keyValuePairs2 = array();
         foreach ($keyValuePairs as $key => &$value) {
-            $keyValuePairs2[ $options['namespace'] . $this->getNamespaceSeparator() . $key ] = &$value;
+            $keyValuePairs2[ $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key ] = &$value;
         }
 
         $errKeys = apc_add($keyValuePairs2, null, $options['ttl']);
@@ -618,13 +646,14 @@ class Apc extends AbstractAdapter
      */
     public function replaceItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $key = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
         if (!apc_exists($key)) {
             throw new Exception\ItemNotFoundException("Key '{$key}' doesn't exist");
@@ -654,13 +683,14 @@ class Apc extends AbstractAdapter
      */
     public function removeItem($key, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $key = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
         if (!apc_delete($key)) {
             if (!$options['ignore_missing_items']) {
@@ -687,13 +717,14 @@ class Apc extends AbstractAdapter
      */
     public function removeItems(array $keys, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         foreach ($keys as &$key) {
-            $key = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+            $key = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
         }
 
         $errKeys = apc_delete($keys);
@@ -723,13 +754,14 @@ class Apc extends AbstractAdapter
      */
     public function incrementItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
         $value = (int)$value;
         $newValue = apc_inc($internalKey, $value);
@@ -768,13 +800,14 @@ class Apc extends AbstractAdapter
      */
     public function decrementItem($key, $value, array $options = array())
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
         $this->normalizeOptions($options);
         $this->normalizeKey($key);
-        $internalKey = $options['namespace'] . $this->getNamespaceSeparator() . $key;
+        $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
         $value = (int)$value;
         $newValue = apc_dec($internalKey, $value);
@@ -812,7 +845,8 @@ class Apc extends AbstractAdapter
             throw new Exception\RuntimeException('Statement already in use');
         }
 
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -822,7 +856,7 @@ class Apc extends AbstractAdapter
 
         $this->normalizeOptions($options);
 
-        $prefix = $options['namespace'] . $this->getNamespaceSeparator();
+        $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
         $prefix = preg_quote($prefix, '/');
 
         $format = 0;
@@ -884,7 +918,8 @@ class Apc extends AbstractAdapter
             throw new Exception\RuntimeException('Statement already in use');
         }
 
-        if (!$this->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return false;
         }
 
@@ -895,7 +930,7 @@ class Apc extends AbstractAdapter
             return true;
         }
 
-        $prefix = $options['namespace'] . $this->getNamespaceSeparator();
+        $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
         $search = '/^' . preg_quote($prefix, '/') . '+/';
 
         $format = 0;
@@ -944,7 +979,10 @@ class Apc extends AbstractAdapter
                 $select = $this->stmtOptions['select'];
                 if (in_array('key', $select)) {
                     $internalKey = $this->stmtIterator->key();
-                    $key = substr($internalKey, strpos($internalKey, $this->getNamespaceSeparator()) + 1);
+                    $key = substr(
+                        $internalKey, 
+                        strpos($internalKey, $this->getOptions()->getNamespaceSeparator()) + 1
+                    );
                     $metadata['key'] = $key;
                 }
             }
@@ -1001,7 +1039,7 @@ class Apc extends AbstractAdapter
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
         $this->normalizeOptions($options);
-        $prefix = $options['namespace'] . $this->getNamespaceSeparator();
+        $prefix = $options['namespace'] . $this->getOptions()->getNamespaceSeparator();
         $regex  = '/^' . preg_quote($prefix, '/') . '+/';
 
         return $this->clearByRegEx($regex, $mode, $options);
@@ -1049,7 +1087,7 @@ class Apc extends AbstractAdapter
                     'expiredRead'        => false,
                     'maxKeyLength'       => 5182,
                     'namespaceIsPrefix'  => true,
-                    'namespaceSeparator' => $this->getNamespaceSeparator(),
+                    'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
                     'iterable'           => true,
                     'clearAllNamespaces' => true,
                     'clearByNamespace'   => true,
@@ -1088,7 +1126,8 @@ class Apc extends AbstractAdapter
      */
     protected function clearByRegEx($regex, $mode, array &$options)
     {
-        if (!$this->getWritable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
             return false;
         }
 
@@ -1127,7 +1166,7 @@ class Apc extends AbstractAdapter
 
         // remove namespace prefix
         if (isset($metadata['key'])) {
-            $pos = strpos($metadata['key'], $this->getNamespaceSeparator());
+            $pos = strpos($metadata['key'], $this->getOptions()->getNamespaceSeparator());
             if ($pos !== false) {
                 $metadata['internal_key'] = $metadata['key'];
             } else {

@@ -137,6 +137,11 @@ abstract class AbstractAdapter implements Adapter
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
         }
+
+        if (!$options instanceof AdapterOptions) {
+            $options = new AdapterOptions($options);
+        }
+
         $this->options = $options;
         return $this;
     }
@@ -349,8 +354,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getItems(array $keys, array $options = array())
     {
-        $options = $this->getOptions();
-        if (!$options->getReadable()) {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
             return array();
         }
 
@@ -991,11 +996,11 @@ abstract class AbstractAdapter implements Adapter
      */
     protected function normalizeNamespace(&$namespace)
     {
-        $namespace = (string)$namespace;
+        $namespace = (string) $namespace;
 
         if ($namespace === '') {
             throw new Exception\InvalidArgumentException('Empty namespaces are not allowed');
-        } elseif (($p = $baseOptions->getNamespacePattern()) && !preg_match($p, $namespace)) {
+        } elseif (($p = $this->getOptions()->getNamespacePattern()) && !preg_match($p, $namespace)) {
             throw new Exception\InvalidArgumentException(
                 "The namespace '{$namespace}' doesn't match against pattern '{$p}'"
             );

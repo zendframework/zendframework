@@ -26,11 +26,8 @@ use stdClass,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Capabilities,
     Zend\Cache\Storage\Event,
-    Zend\Cache\Storage\Plugin,
     Zend\Cache\Storage\PostEvent,
-    Zend\EventManager\EventCollection,
-    Zend\Serializer\Adapter as SerializerAdapter,
-    Zend\Serializer\Serializer as SerializerFactory;
+    Zend\EventManager\EventCollection;
 
 /**
  * @category   Zend
@@ -39,18 +36,9 @@ use stdClass,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Serializer implements Plugin
+class Serializer extends AbstractPlugin
 {
     /**
-     * Serializer adapter
-     *
-     * @var SerializerAdapter
-     */
-    protected $serializer;
-
-    /**
-     * Capabilities
-     *
      * @var array
      */
     protected $capabilities = array();
@@ -63,89 +51,15 @@ class Serializer implements Plugin
     protected $handles = array();
 
     /**
-     * Constructor
-     *
-     * @param  array|Traversable $options
-     * @return void
-     */
-    public function __construct($options = array())
-    {
-        $this->setOptions($options);
-    }
-
-    /**
-     * Set options
-     *
-     * @param  array|Traversable $options
-     * @return Serializer
-     */
-    public function setOptions($options)
-    {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array or Traversable object; received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
-        foreach ($options as $name => $value) {
-            $m = 'set' . str_replace('_', '', $name);
-            if (!method_exists($this, $m)) {
-                continue;
-            }
-            $this->$m($value);
-        }
-        return $this;
-    }
-
-    /**
-     * Get options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return array(
-            'serializer' => $this->getSerializer(),
-        );
-    }
-
-    /**
-     * Set serializer
-     *
-     * @param  SerializerAdapter $serializer
-     * @return Serializer
-     */
-    public function setSerializer(SerializerAdapter $serializer)
-    {
-        $this->serializer = $serializer;
-        return $this;
-    }
-
-    /**
-     * Get serializer
-     *
-     * @return SerializerAdapter
-     */
-    public function getSerializer()
-    {
-        if (!$this->serializer) {
-            return SerializerFactory::getDefaultAdapter();
-        }
-        return $this->serializer;
-    }
-
-    /**
      * Attach
      *
      * @param  EventCollection $eventCollection
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function attach(EventCollection $eventCollection)
+    public function attach(EventCollection $events)
     {
-        $index = spl_object_hash($eventCollection);
+        $index = spl_object_hash($events);
         if (isset($this->handles[$index])) {
             throw new Exception\LogicException('Plugin already attached');
         }
@@ -154,34 +68,34 @@ class Serializer implements Plugin
         $this->handles[$index] = & $handles;
 
         // read
-        $handles[] = $eventCollection->attach('getItem.post',  array($this, 'onReadItemPost'));
-        $handles[] = $eventCollection->attach('getItems.post', array($this, 'onReadItemsPost'));
+        $handles[] = $events->attach('getItem.post',  array($this, 'onReadItemPost'));
+        $handles[] = $events->attach('getItems.post', array($this, 'onReadItemsPost'));
 
         // fetch / fetchAll
-        $handles[] = $eventCollection->attach('fetch.post', array($this, 'onFetchPost'));
-        $handles[] = $eventCollection->attach('fetchAll.post', array($this, 'onFetchAllPost'));
+        $handles[] = $events->attach('fetch.post', array($this, 'onFetchPost'));
+        $handles[] = $events->attach('fetchAll.post', array($this, 'onFetchAllPost'));
 
         // write
-        $handles[] = $eventCollection->attach('setItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $eventCollection->attach('setItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('setItem.pre',  array($this, 'onWriteItemPre'));
+        $handles[] = $events->attach('setItems.pre', array($this, 'onWriteItemsPre'));
 
-        $handles[] = $eventCollection->attach('addItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $eventCollection->attach('addItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('addItem.pre',  array($this, 'onWriteItemPre'));
+        $handles[] = $events->attach('addItems.pre', array($this, 'onWriteItemsPre'));
 
-        $handles[] = $eventCollection->attach('replaceItem.pre',  array($this, 'onWriteItemPre'));
-        $handles[] = $eventCollection->attach('replaceItems.pre', array($this, 'onWriteItemsPre'));
+        $handles[] = $events->attach('replaceItem.pre',  array($this, 'onWriteItemPre'));
+        $handles[] = $events->attach('replaceItems.pre', array($this, 'onWriteItemsPre'));
 
-        $handles[] = $eventCollection->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'));
+        $handles[] = $events->attach('checkAndSetItem.pre', array($this, 'onWriteItemPre'));
 
         // increment / decrement item(s)
-        $handles[] = $eventCollection->attach('incrementItem.pre', array($this, 'onIncrementItemPre'));
-        $handles[] = $eventCollection->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'));
+        $handles[] = $events->attach('incrementItem.pre', array($this, 'onIncrementItemPre'));
+        $handles[] = $events->attach('incrementItems.pre', array($this, 'onIncrementItemsPre'));
 
-        $handles[] = $eventCollection->attach('decrementItem.pre', array($this, 'onDecrementItemPre'));
-        $handles[] = $eventCollection->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'));
+        $handles[] = $events->attach('decrementItem.pre', array($this, 'onDecrementItemPre'));
+        $handles[] = $events->attach('decrementItems.pre', array($this, 'onDecrementItemsPre'));
 
         // overwrite capabilities
-        $handles[] = $eventCollection->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'));
+        $handles[] = $events->attach('getCapabilities.post',  array($this, 'onGetCapabilitiesPost'));
 
         return $this;
     }
@@ -189,20 +103,20 @@ class Serializer implements Plugin
     /**
      * Detach
      *
-     * @param  EventCollection $eventCollection
+     * @param  EventCollection $events
      * @return Serializer
      * @throws Exception\LogicException
      */
-    public function detach(EventCollection $eventCollection)
+    public function detach(EventCollection $events)
     {
-        $index = spl_object_hash($eventCollection);
+        $index = spl_object_hash($events);
         if (!isset($this->handles[$index])) {
             throw new Exception\LogicException('Plugin not attached');
         }
 
         // detach all handles of this index
         foreach ($this->handles[$index] as $handle) {
-            $eventCollection->detach($handle);
+            $events->detach($handle);
         }
 
         // remove all detached handles
@@ -219,7 +133,8 @@ class Serializer implements Plugin
      */
     public function onReadItemPost(PostEvent $event)
     {
-        $serializer = $this->getSerializer();
+        $options    = $this->getOptions();
+        $serializer = $options->getSerializer();
         $result     = $event->getResult();
         $result     = $serializer->unserialize($result);
         $event->setResult($result);
@@ -233,7 +148,8 @@ class Serializer implements Plugin
      */
     public function onReadItemsPost(PostEvent $event)
     {
-        $serializer = $this->getSerializer();
+        $options    = $this->getOptions();
+        $serializer = $options->getSerializer();
         $result     = $event->getResult();
         foreach ($result as &$value) {
             $value = $serializer->unserialize($value);
@@ -249,9 +165,11 @@ class Serializer implements Plugin
      */
     public function onFetchPost(PostEvent $event)
     {
-        $item = $event->getResult();
+        $options    = $this->getOptions();
+        $serializer = $options->getSerializer();
+        $item       = $event->getResult();
         if (isset($item['value'])) {
-            $item['value'] = $this->getSerializer()->unserialize($item['value']);
+            $item['value'] = $serializer->unserialize($item['value']);
         }
         $event->setResult($item);
     }
@@ -264,7 +182,8 @@ class Serializer implements Plugin
      */
     public function onFetchAllPost(PostEvent $event)
     {
-        $serializer = $this->getSerializer();
+        $options    = $this->getOptions();
+        $serializer = $options->getSerializer();
         $result     = $event->getResult();
         foreach ($result as &$item) {
             if (isset($item['value'])) {
@@ -282,7 +201,8 @@ class Serializer implements Plugin
      */
     public function onWriteItemPre(Event $event)
     {
-        $serializer = $this->getSerializer();
+        $options    = $this->getOptions();
+        $serializer = $options->getSerializer();
         $params     = $event->getParams();
         $params['value'] = $serializer->serialize($params['value']);
     }
@@ -295,7 +215,8 @@ class Serializer implements Plugin
      */
     public function onWriteItemsPre(Event $event)
     {
-        $serializer = $this->getSerializer();
+        $options    = $this->getOptions();
+        $serializer = $options->getSerializer();
         $params     = $event->getParams();
         foreach ($params['keyValuePairs'] as &$value) {
             $value = $serializer->serialize($value);

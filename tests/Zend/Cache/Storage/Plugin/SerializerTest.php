@@ -48,7 +48,9 @@ class SerializerTest extends CommonPluginTest
     public function setUp()
     {
         $this->_adapter = $this->getMockForAbstractClass('Zend\Cache\Storage\Adapter\AbstractAdapter');
+        $this->_options = new Cache\Storage\Plugin\PluginOptions();
         $this->_plugin  = new Cache\Storage\Plugin\Serializer();
+        $this->_plugin->setOptions($this->_options);
     }
 
     public function testAddPlugin()

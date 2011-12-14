@@ -19,9 +19,11 @@ class OptimizeByFactorTest extends CommonPluginTest
     public function setUp()
     {
         $this->_adapter = new MockAdapter();
-        $this->_plugin  = new Cache\Storage\Plugin\OptimizeByFactor(array(
-            'optimizing_factor' => 1
+        $this->_options = new Cache\Storage\Plugin\PluginOptions(array(
+            'optimizing_factor' => 1,
         ));
+        $this->_plugin  = new Cache\Storage\Plugin\OptimizeByFactor();
+        $this->_plugin->setOptions($this->_options);
     }
 
     public function testAddPlugin()

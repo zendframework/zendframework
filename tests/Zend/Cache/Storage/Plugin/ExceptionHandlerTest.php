@@ -19,7 +19,9 @@ class ExceptionHandlerTest extends CommonPluginTest
     public function setUp()
     {
         $this->_adapter = new MockAdapter();
+        $this->_options = new Cache\Storage\Plugin\PluginOptions();
         $this->_plugin  = new Cache\Storage\Plugin\ExceptionHandler();
+        $this->_plugin->setOptions($this->_options);
 
         parent::setUp();
     }
@@ -103,7 +105,7 @@ class ExceptionHandlerTest extends CommonPluginTest
         $expectedException = new \Exception();
         $callbackCalled    = false;
 
-        $this->_plugin->setCallback(function ($exception) use ($expectedException, &$callbackCalled) {
+        $this->_options->setExceptionCallback(function ($exception) use ($expectedException, &$callbackCalled) {
             $callbackCalled = ($exception === $expectedException);
         });
 
@@ -122,7 +124,7 @@ class ExceptionHandlerTest extends CommonPluginTest
 
     public function testDontThrowException()
     {
-        $this->_plugin->setThrowExceptions(false);
+        $this->_options->setThrowExceptions(false);
 
         // run onException
         $event = new ExceptionEvent('getItem.exception', $this->_adapter, new ArrayObject(array(

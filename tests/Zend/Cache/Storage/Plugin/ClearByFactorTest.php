@@ -19,9 +19,11 @@ class ClearByFactorTest extends CommonPluginTest
     public function setUp()
     {
         $this->_adapter = new MockAdapter();
-        $this->_plugin  = new Cache\Storage\Plugin\ClearByFactor(array(
+        $this->_options = new Cache\Storage\Plugin\PluginOptions(array(
             'clearing_factor' => 1,
         ));
+        $this->_plugin  = new Cache\Storage\Plugin\ClearByFactor();
+        $this->_plugin->setOptions($this->_options);
 
         parent::setUp();
     }
@@ -64,8 +66,8 @@ class ClearByFactorTest extends CommonPluginTest
     public function testClearByFactorUsingNamespace()
     {
         $adapter = $this->getMock(get_class($this->_adapter), array('clearByNamespace'));
-        $this->_plugin->setClearingFactor(1);
-        $this->_plugin->setClearByNamespace(true);
+        $this->_options->setClearingFactor(1);
+        $this->_options->setClearByNamespace(true);
 
         // test optimize will be called
         $adapter
@@ -87,8 +89,8 @@ class ClearByFactorTest extends CommonPluginTest
     public function testClearByFactorAllNamespaces()
     {
         $adapter = $this->getMock(get_class($this->_adapter), array('clear'));
-        $this->_plugin->setClearingFactor(1);
-        $this->_plugin->setClearByNamespace(false);
+        $this->_options->setClearingFactor(1);
+        $this->_options->setClearByNamespace(false);
 
         // test optimize will be called
         $adapter

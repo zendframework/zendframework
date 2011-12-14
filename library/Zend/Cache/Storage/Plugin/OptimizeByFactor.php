@@ -23,7 +23,6 @@ namespace Zend\Cache\Storage\Plugin;
 
 use Traversable,
     Zend\Cache\Exception,
-    Zend\Cache\Storage\Plugin,
     Zend\Cache\Storage\PostEvent,
     Zend\EventManager\EventCollection;
 
@@ -34,7 +33,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OptimizeByFactor implements Plugin
+class OptimizeByFactor extends AbstractPlugin
 {
     /**
      * Handles
@@ -42,92 +41,6 @@ class OptimizeByFactor implements Plugin
      * @var array
      */
     protected $handles = array();
-
-    /**
-     * Automatic optimizing factor
-     *
-     * @var int
-     */
-    protected $optimizingFactor = 0;
-
-    /**
-     * Constructor
-     *
-     * @param  array|Traversable $options
-     * @return void
-     */
-    public function __construct($options = array())
-    {
-        $this->setOptions($options);
-    }
-
-    /**
-     * Set options
-     *
-     * @param  array|Traversable $options
-     * @return OptimizeByFactor
-     */
-    public function setOptions($options)
-    {
-        if (!is_array($options) && !$options instanceof Traversable) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array or Traversable object; received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
-        foreach ($options as $name => $value) {
-            $m = 'set' . str_replace('_', '', $name);
-            if (!method_exists($this, $m)) {
-                continue;
-            }
-            $this->$m($value);
-        }
-        return $this;
-    }
-
-    /**
-     * Get options
-     *
-     * @return array
-     */
-    public function getOptions()
-    {
-        return array(
-            'optimizing_factor' => $this->getOptimizingFactor(),
-        );
-    }
-
-    /**
-     * Get automatic optimizing factor
-     *
-     * @return int
-     */
-    public function getOptimizingFactor()
-    {
-        return $this->optimizingFactor;
-    }
-
-    /**
-     * Set automatic optimizing factor
-     *
-     * @param  int $factor
-     * @return OptimizeByFactor
-     * @throws Exception\InvalidArgumentAxception
-     */
-    public function setOptimizingFactor($factor)
-    {
-        $factor = (int) $factor;
-        if ($factor < 0) {
-            throw new Exception\InvalidArgumentAxception(
-                "Invalid optimizing factor '{$factor}': must be greater or equal 0"
-            );
-        }
-        $this->optimizingFactor = $factor;
-
-        return $this;
-    }
 
     /**
      * Attach
@@ -187,7 +100,7 @@ class OptimizeByFactor implements Plugin
      */
     public function optimizeByFactor(PostEvent $event)
     {
-        $factor = $this->getOptimizingFactor();
+        $factor = $this->getOptions()->getOptimizingFactor();
         if ($factor && $event->getResult() && mt_rand(1, $factor) == 1) {
             $params = $event->getParams();
             $event->getStorage()->optimize($params['options']);

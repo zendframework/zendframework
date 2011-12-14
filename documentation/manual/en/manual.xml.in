@@ -444,8 +444,38 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.cache"><info><title>Zend_Cache</title></info>-->
-            <!---->
+        <chapter xml:id="zend.cache"><info><title>Zend\Cache</title></info>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.cache.storage.adapter.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.cache.storage.adapter.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.cache.storage.plugin.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.cache.storage.plugin.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.cache.storage.capabilities.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.cache.storage.capabilities.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.cache.pattern.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.cache.pattern.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.cache.utils.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.cache.utils.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Cache-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_Cache-Introduction.xml" parse="xml"/>-->
@@ -471,7 +501,7 @@
                     <!--<xi:include href="../en/module_specs/Zend_Cache-Cache_Manager.xml" parse="xml"/>-->
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
-        <!--</chapter>-->
+        </chapter>
 
         <!--<chapter xml:id="zend.captcha"><info><title>Zend_Captcha</title></info>-->
             <!---->

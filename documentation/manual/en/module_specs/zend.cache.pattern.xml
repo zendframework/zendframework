@@ -9,12 +9,67 @@
             <title>Overview</title>
         </info>
 
+        <para>
+            Cache patterns are configurable objects to solve known performance
+            bottlenecks. Each of it should be used only on a specified situation.
+            For example you can use one of the patterns callback, object or class
+            to cache method and function calls or to cache output generation the
+            output cache pattern would be the right for you.
+        </para>
+
+        <para>
+            All cache patterns implements the same interface
+            <classname>Zend\Cache\Pattern</classname> and extends the abstract class
+            <classname>Zend\Cache\Pattern\AbstractPattern</classname> to implement
+            basic logic.
+        </para>
+
+        <para>
+            Configuration will be done by
+            <classname>Zend\Cache\Pattern\PatternOptions</classname> which can simply be
+            instantiated with an associative array of options passing to the constructor.
+            To configure an pattern object you can set an instance of
+            <classname>Zend\Cache\Pattern\PatternOptions</classname> with
+            <methodname>setOptions</methodname> or put it as second argument to the factory.
+        </para>
+
+        <para>
+            It's also possible to use one instance of
+            <classname>Zend\Cache\Pattern\PatternOptions</classname> and pass it to
+            different patterns.
+        </para>
+
     </section>
 
     <section xml:id="zend.cache.pattern.quick-start">
         <info>
             <title>Quick Start</title>
         </info>
+
+        <para>
+            Pattern objects can either be created from the provided
+            <classname>Zend\Cache\PatternFactory</classname> factory, or, by simply
+            instantiating one of the <classname>Zend\Cache\XXXCache</classname>
+            class.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory,
+    Zend\Cache\Pattern\PatternOptions;
+
+$callbackCache = PatternFactory::factory('callback', array(
+    'storage'      => 'apc',
+    'cache_output' => true,
+));
+
+// OR, the completely equivalent
+
+$callbackCache = new \Zend\Cache\Pattern\CallbackCache();
+$callbackCache->setOptions(new PatternOptions(array(
+    'storage'      => 'apc',
+    'cache_output' => true,
+)));
+]]></programlisting>
 
     </section>
 
@@ -34,30 +89,13 @@
         </info>
 
         <variablelist>
-            <varlistentry xml:id="zend.cache.pattern.methods.__construct">
-                <term>
-                    <methodsynopsis>
-                        <methodname>__construct</methodname>
-                        <methodparam>
-                            <funcparams>array|Traversable $options = array (
-)</funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
-
-                <listitem>
-                    <para>Constructor</para>
-                    <para></para>
-                    <para>Returns void</para>
-                </listitem>
-            </varlistentry>
 
             <varlistentry xml:id="zend.cache.pattern.methods.set-options">
                 <term>
                     <methodsynopsis>
                         <methodname>setOptions</methodname>
                         <methodparam>
-                            <funcparams>array|Traversable $options</funcparams>
+                            <funcparams>Zend\Cache\Pattern\PatternOptions $options</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
@@ -80,9 +118,9 @@
                 </term>
 
                 <listitem>
-                    <para>Get all pattern options</para>
+                    <para>Get pattern options</para>
                     <para></para>
-                    <para>Returns array</para>
+                    <para>Returns Zend\Cache\Pattern\PatternOptions</para>
                 </listitem>
             </varlistentry>
 
@@ -93,6 +131,121 @@
         <info>
             <title>Examples</title>
         </info>
+
+        <example xml:id="zend.cache.pattern.examples.callback">
+            <info><title>Using the callback cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$callbackCache = PatternFactory::factory('callback', array(
+    'storage' => 'apc'
+));
+
+// Calls and caches the function doResourceIntensiceStuff with three arguments
+// and returns result
+$result = $callbackCache->call('doResourceIntensiceStuff', array(
+    'argument1',
+    'argument2',
+    'argumentN'
+));
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.object">
+            <info><title>Using the object cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$object = new MyObject();
+$objectProxy = PatternFactory::factory('object', array(
+    'object'  => $object
+    'storage' => 'apc',
+));
+
+// Calls and caches $object->doResourceIntensiceStuff with three arguments
+// and returns result
+$result = $objectProxy->doResourceIntensiceStuff('argument1', 'argument2', 'argumentN'));
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.class">
+            <info><title>Using the class cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$classProxy = PatternFactory::factory('cache', array(
+    'class'   => 'MyClass'
+    'storage' => 'apc',
+));
+
+// Calls and caches MyClass::doResourceIntensiceStuff with three arguments
+// and returns result
+$result = $classProxy->doResourceIntensiceStuff('argument1', 'argument2', 'argumentN'));
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.output">
+            <info><title>Using the output cache pattern</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$outputCache = PatternFactory::factory('output', array(
+    'storage' => 'filesystem'
+));
+
+// Start capturing all output excl. headers. and write it to storage.
+// If there is already an cached item with the same key it will be
+// output and return true, else false.
+if ($outputCache->start('MyUniqueKey') === false) {
+    echo 'cache output since: ' . date('H:i:s') . "<br />\n";
+    
+    // end capturing output, write content to cache storage and display
+    // captured content
+    $outputCache->end()
+}
+
+echo 'never cached output';
+
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.pattern.examples.capture">
+            <info><title>Using the capture cache pattern (TODO: .htaccess)</title></info>
+            
+            <para>
+                You need to configure your HTTPd to redirect missing content
+                run your script generating it.
+            </para>
+            
+            <para>
+                This example uses Apache with the following .htaccess:
+            </para>
+            
+            <programlisting language="plain"><![CDATA[
+ErrorDocument 404 /index.php
+]]></programlisting>
+            
+            <para>Within your index.php you can add the following content:</para>
+            
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\PatternFactory;
+
+$capture = PatternFactory::factory('capture', array(
+    'public_dir' => __DIR__
+));
+
+// Start capturing all output excl. headers. and write to public directory
+// If the request was already written the file will be overwritten.
+$capture->start();
+
+// do stuff to dynamical generate output
+
+]]></programlisting>
+        </example>
 
     </section>
 </section>

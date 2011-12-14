@@ -9,24 +9,40 @@
             <title>Overview</title>
         </info>
 
+        <para>
+            Storage capabilities describes how a storage object works and
+            which features it supports. 
+        </para>
+
+        <para>
+            To get capabilities of a storage object you can use the method
+            <methodname>getCapabilities</methodname> of the object but only
+            the storage object and it's plug-ins has permissions to change it.
+        </para>
+
+        <para>
+            Because capabilities can be changed by storage, for example on
+            changing some options, you can get a note by catching the event if
+            it. (TODO: link to example)
+        </para>
+
+        <para>
+            If you are writing an own plug-in or adapter you also can change
+            capabilities because you have access to the marker object and
+            can create an own marker to instantiate a new object of
+            <classname>Zend\Cache\Storage\Capabilities</classname>.
+        </para>
+
     </section>
 
+<!--
     <section xml:id="zend.cache.storage.capabilities.quick-start">
         <info>
             <title>Quick Start</title>
         </info>
 
     </section>
-
-    <section xml:id="zend.cache.storage.capabilities.options">
-        <info>
-            <title>Configuration Options</title>
-        </info>
-
-        <variablelist>
-            <title/>
-        </variablelist>
-    </section>
+-->
 
     <section xml:id="zend.cache.storage.capabilities.methods">
         <info>
@@ -34,7 +50,9 @@
         </info>
 
         <variablelist>
+
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.__construct">
+
                 <term>
                     <methodsynopsis>
                         <methodname>__construct</methodname>
@@ -535,6 +553,53 @@
         <info>
             <title>Examples</title>
         </info>
+
+        <example xml:id="zend.cache.storage.capabilities.examples.spezific">
+            <info><title>Get storage capabilities and do spezific stuff in base of it</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\StorageFactory;
+
+$cache = StorageFactory::adapterFactory('filesystem');
+$capabilities = $cache->getCapabilities();
+
+// now you can run spezific stuff in base of supported feature
+if ($capabilities->getIterable()) {
+    $cache->find()
+    while ( ($item => $cache->fetch()) ) {
+        echo $item['key'] . ': ' . $item['value'] . "\n";
+    }
+} else {
+    echo 'Iterating cached items not supported.'
+}
+
+]]></programlisting>
+        </example>
+
+        <example xml:id="zend.cache.storage.capabilities.examples.event.change">
+            <info><title>Get note on changed capability</title></info>
+
+            <programlisting language="php"><![CDATA[
+use Zend\Cache\StorageFactory;
+
+$cache = StorageFactory::adapterFactory('filesystem', array(
+    'no_atime' => false,
+));
+$capabilities = $cache->getCapabilities();
+
+// Catching the change event
+$capabilities->events()->attach('change', function () {
+    echo 'Capabilities changed';
+});
+
+// change option which changes capabilities
+$cache->getOptions()->setNoATime(true);
+
+/** Will output:
+Capabilities changed
+*/
+]]></programlisting>
+        </example>
 
     </section>
 </section>

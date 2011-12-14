@@ -9,6 +9,35 @@
             <title>Overview</title>
         </info>
 
+        <para>
+            Storage adapters are wrappers of real storages like memory and
+            filesystem using the well known adapter pattern.
+        </para>
+
+        <para>
+            They comes with tons of methods to read, write and modify stored
+            items and to get information about stored items and the storage.
+            All optimized to use it for caching.
+        </para>
+
+        <para>
+            All adapters implementing the interface
+            <classname>Zend\Cache\Storage\Adapter</classname> and extends
+            <classname>Zend\Cache\Storage\Adapter\AbstractAdapter</classname>
+            which implements basic logic.
+        </para>
+
+        <para>
+            Configuration will be done by
+            <classname>Zend\Cache\Storage\Adapter\AdapterOptions</classname>
+            which can simply be instantiated with an associative array of options
+            passing to the constructor. To configure an storage adapter object
+            you can set an instance of
+            <classname>Zend\Cache\StorageAdapter\AdapterOptions</classname> with
+            <methodname>setOptions</methodname> or put it as second argument to the
+            factory.
+        </para>
+
     </section>
 
     <section xml:id="zend.cache.storage.adapter.quick-start">

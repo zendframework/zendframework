@@ -27,7 +27,9 @@ use Zend\Config\Config,
     Zend\Config\Parser\Filter as FilterParser,
     Zend\Translator\Translator,
     Zend\Translator\Adapter\ArrayAdapter,
-    Zend\Filter\StringToLower
+    Zend\Filter\StringToLower,
+    Zend\Filter\StringToUpper,
+    Zend\Filter\PregReplace
 ;
 
 /**
@@ -346,7 +348,57 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('third mixed case value',$config->newValue);
     }
 
+    /**
+     * @depends testFilter
+     */
+    public function testParsersQueueFIFO(){
+        $lower = new StringToLower();
+        $upper = new StringToUpper();
+        $lowerParser = new FilterParser($lower);
+        $upperParser = new FilterParser($upper);
 
+        /**
+         * Default queue order (FIFO)
+         */
+        $config = new Config(
+            $this->_filter,
+            1,
+            array(
+                $upperParser,
+                $lowerParser
+            )
+        );
+        $this->assertEquals('some mixedcase value',$config->simple);
+        $this->assertEquals('other mixed case value',$config->nested->simple);
+    }
+
+    /**
+     * @depends testParsersQueueFIFO
+     */
+    public function testParsersQueuePriorities(){
+        $lower = new StringToLower();
+        $upper = new StringToUpper();
+        $replace = new PregReplace('/[a-z]/','');
+        $lowerParser = new FilterParser($lower);
+        $upperParser = new FilterParser($upper);
+        $replaceParser = new FilterParser($replace);
+        $config = new Config(array(),1);
+
+        /**
+         * Insert lower case filter with higher priority
+         */
+        $config->getParsers()->insert($upperParser,10);
+        $config->getParsers()->insert($lowerParser,1000);
+        $config->simple = 'some MixedCase VALue';
+        $this->assertEquals('SOME MIXEDCASE VALUE',$config->simple);
+
+        /**
+         * Add even higher priority replace parser that will remove all lowercase letters
+         */
+        $config->getParsers()->insert($replaceParser,10000);
+        $config->newValue = 'THIRD mixed CASE value';
+        $this->assertEquals('THIRD  CASE ',$config->newValue);
+    }
 
 }
 

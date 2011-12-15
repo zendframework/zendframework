@@ -4,13 +4,18 @@ namespace ZendTest\Docbook;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Docbook\ClassMethod,
-    Zend\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection;
 
 class ClassMethodTest extends TestCase
 {
+    /**
+     * @var ClassReflection
+     */
+    protected $class;
+
     public function setUp()
     {
-        $this->class  = new ReflectionClass(new TestAsset\ParsedClass());
+        $this->class  = new ClassReflection(new TestAsset\ParsedClass());
     }
 
     public function testCorrectlyDetectsMethodName()

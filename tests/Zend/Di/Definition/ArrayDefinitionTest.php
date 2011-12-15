@@ -9,7 +9,7 @@ class ArrayDefinitionTest extends TestCase
 {
     
     /**
-     * @var Zend\Di\Definition\ArrayDefinition
+     * @var ArrayDefinition
      */
     protected $definition = null;
     

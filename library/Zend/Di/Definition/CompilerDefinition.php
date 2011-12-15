@@ -9,8 +9,6 @@ use Zend\Code\Scanner\DerivedClassScanner,
     Zend\Di\Definition\Annotation,
     Zend\Code\Annotation\AnnotationManager,
     Zend\Code\Reflection,
-//    Zend\Code\Scanner\FileScanner,
-//    Zend\Code\Scanner\MethodScanner,
     Zend\Code\Annotation\AnnotationCollection;
 
 class CompilerDefinition implements Definition
@@ -53,7 +51,7 @@ class CompilerDefinition implements Definition
 
     public function addDirectoryScanner(DirectoryScanner $directoryScanner)
     {
-        $this->directoryScanner->addScanner($directoryScanner);
+        $this->directoryScanner->addDirectoryScanner($directoryScanner);
     }
     
     public function addCodeScannerFile(FileScanner $fileScanner)
@@ -68,7 +66,7 @@ class CompilerDefinition implements Definition
     public function compile()
     {
         /* @var $classScanner \Zend\Code\Scanner\DerivedClassScanner */
-        foreach ($this->directoryScanner->getClasses() as $class) {
+        foreach ($this->directoryScanner->getClassNames() as $class) {
             $this->processClass($class);
         }
     }

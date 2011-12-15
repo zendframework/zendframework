@@ -20,7 +20,7 @@ class ClassScannerTest extends TestCase
         $this->assertContains('ArrayAccess', $interfaces);
         $this->assertContains('A\B\C\D\Blarg', $interfaces);
         $this->assertContains('ZendTest\Code\TestAsset\Local\SubClass', $interfaces);
-        $methods = $class->getMethods();
+        $methods = $class->getMethodNames();
         $this->assertInternalType('array', $methods);
         $this->assertContains('fooBarBaz', $methods);
     }
@@ -36,15 +36,15 @@ class ClassScannerTest extends TestCase
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
-        $this->assertInternalType('array', $class->getProperties());
-        $this->assertContains('bar', $class->getProperties());
+        $this->assertInternalType('array', $class->getPropertyNames());
+        $this->assertContains('bar', $class->getPropertyNames());
     }
 
     public function testClassScannerHasMethods()
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooClass');
-        $this->assertContains('fooBarBaz', $class->getMethods());
+        $this->assertContains('fooBarBaz', $class->getMethodNames());
     }
 
     public function testClassScannerReturnsMethodsWithMethodScanners()
@@ -62,6 +62,19 @@ class ClassScannerTest extends TestCase
         $file  = new FileScanner(__DIR__ . '/../TestAsset/FooInterface.php');
         $class = $file->getClass('ZendTest\Code\TestAsset\FooInterface');
         $this->assertEquals('ZendTest\Code\TestAsset\FooInterface', $class->getName());
+    }
+
+    public function testClassScannerCanReturnLineNumbers()
+    {
+        $file    = new FileScanner(__DIR__ . '/../TestAsset/FooClass.php');
+        $class   = $file->getClass('ZendTest\Code\TestAsset\FooClass');
+        $this->assertEquals(11, $class->getLineStart());
+        $this->assertEquals(23, $class->getLineEnd());
+
+        $file    = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $class   = $file->getClass('ZendTest\Code\TestAsset\BarClass');
+        $this->assertEquals(11, $class->getLineStart());
+        $this->assertEquals(34, $class->getLineEnd());
     }
 
 }

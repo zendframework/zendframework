@@ -41,12 +41,30 @@ class MethodScannerTest extends TestCase
         $this->assertEquals('t', $parameter->getName());
     }
 
-    public function testClassScannerReturnsPropertyWithNoDefault()
+    public function testMethodScannerReturnsPropertyWithNoDefault()
     {
         $file  = new FileScanner(__DIR__ . '/../TestAsset/BazClass.php');
         $class = $file->getClass('BazClass');
         $method = $class->getMethod('__construct');
         $this->assertTrue($method->isPublic());
+    }
+
+    public function testMethodScannerReturnsLineNumbersForMethods()
+    {
+        $file       = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $class      = $file->getClass('ZendTest\Code\TestAsset\BarClass');
+        $method     = $class->getMethod('three');
+        $this->assertEquals(28, $method->getLineStart());
+        $this->assertEquals(32, $method->getLineEnd());
+    }
+
+    public function testMethodScannerReturnsBodyMethods()
+    {
+        $file     = new FileScanner(__DIR__ . '/../TestAsset/BarClass.php');
+        $class    = $file->getClass('ZendTest\Code\TestAsset\BarClass');
+        $method   = $class->getMethod('three');
+        $expected = "\n" . '        $x = 5 + 5;' . "\n" . '        $y = \'this string\';' . "\n    ";
+        $this->assertEquals($expected, $method->getBody());
     }
 
 }

@@ -12,20 +12,6 @@ class AggregateDirectoryScanner extends DirectoryScanner
     
     protected $isScanned = false;
 
-    /**
-     * @var DirectoryScanner[]
-     */
-    protected $scanners = array();
-    
-    public function addScanner(DirectoryScanner $scanner)
-    {
-        $this->scanners[] = $scanner;
-        
-        if ($this->isScanned) {
-            $scanner->scan();
-        }
-    }
-    
     public function getNamespaces($returnScannerClass = false)
     {}
     
@@ -40,7 +26,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
     public function getClasses($returnScannerClass = false, $returnDerivedScannerClass = false)
     {
         $classes = array();
-        foreach ($this->scanners as $scanner) {
+        foreach ($this->directories as $scanner) {
             $classes += $scanner->getClasses();
         }
         if ($returnScannerClass) {
@@ -53,7 +39,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
     
     public function hasClass($class)
     {
-        foreach ($this->scanners as $scanner) {
+        foreach ($this->directories as $scanner) {
             if ($scanner->hasClass($class)) {
                 break;
             } else {
@@ -66,7 +52,7 @@ class AggregateDirectoryScanner extends DirectoryScanner
     
     public function getClass($class, $returnScannerClass = true, $returnDerivedScannerClass = false)
     {
-        foreach ($this->scanners as $scanner) {
+        foreach ($this->directories as $scanner) {
             if ($scanner->hasClass($class)) {
                 break;
             } else {

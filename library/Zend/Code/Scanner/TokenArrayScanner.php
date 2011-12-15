@@ -42,33 +42,15 @@ class TokenArrayScanner implements Scanner
     /**
      * @param null|array $tokens
      */
-    public function __construct($tokens = null, AnnotationManager $annotationManager = null)
-    {
-        if ($tokens) {
-            $this->setTokens($tokens);
-        }
-    }
-
-    public function reset()
-    {
-        $this->isScanned = false;
-        $this->infos     = array();
-    }
-    
-    public function setTokens(array $tokens)
+    public function __construct($tokens, AnnotationManager $annotationManager = null)
     {
         $this->tokens = $tokens;
-        $this->reset();
+        $this->annotationManager = $annotationManager;
     }
 
     public function getAnnotationManager()
     {
         return $this->annotationManager;
-    }
-
-    public function setAnnotationManager(AnnotationManager $annotationManager)
-    {
-        $this->annotationManager = $annotationManager;
     }
 
     public function getDocComment()
@@ -92,7 +74,7 @@ class TokenArrayScanner implements Scanner
     public function getUses($namespace = null)
     {
         $this->scan();
-        return $this->getNamespaceUsesNoScan($namespace);
+        return $this->getUsesNoScan($namespace);
     }
     
     public function getIncludes()
@@ -100,8 +82,23 @@ class TokenArrayScanner implements Scanner
         $this->scan();
         // @todo Implement getIncludes() in TokenArrayScanner
     }
-    
-    public function getClasses($returnScannerClass = false)
+
+    public function getClassNames()
+    {
+        $this->scan();
+
+        $return = array();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'class') {
+                continue;
+            }
+            $return[] = $info['name'];
+        }
+        return $return;
+    }
+
+    public function getClasses()
     {
         $this->scan();
         
@@ -111,35 +108,32 @@ class TokenArrayScanner implements Scanner
             if ($info['type'] != 'class') {
                 continue;
             }
-
-            if (!$returnScannerClass) {
-                $return[] = $info['name'];
-            } else {
-                $return[] = $this->getClass($info['name'], $returnScannerClass);
-            }
+            $return[] = $this->getClass($info['name']);
         }
         return $return;
     }
     
     /**
-     * 
-     * Enter description here ...
-     * @param string|int $classNameOrInfoIndex
+     * getClass()
+     *
+     * Return the class object from this scanner
+     *
+     * @param string|int $name
      * @return ClassScanner
      */
-    public function getClass($classNameOrInfoIndex)
+    public function getClass($name)
     {
         $this->scan();
 
-        if (is_int($classNameOrInfoIndex)) {
-            $info = $this->infos[$classNameOrInfoIndex];
+        if (is_int($name)) {
+            $info = $this->infos[$name];
             if ($info['type'] != 'class') {
                 throw new Exception\InvalidArgumentException('Index of info offset is not about a class');
             }
-        } elseif (is_string($classNameOrInfoIndex)) {
+        } elseif (is_string($name)) {
             $classFound = false;
             foreach ($this->infos as $infoIndex => $info) {
-                if ($info['type'] === 'class' && $info['name'] === $classNameOrInfoIndex) {
+                if ($info['type'] === 'class' && $info['name'] === $name) {
                     $classFound = true;
                     break;
                 }
@@ -149,24 +143,13 @@ class TokenArrayScanner implements Scanner
             }
         }
 
-        $uses = array();
-        if (isset($info['uses'])) {
-            foreach ($info['uses'] as $useStatement) {
-                if ($useStatement['as'] === null) {
-                    $uses[] = $useStatement['use'];
-                } else {
-                    $uses[$useStatement['use']] = $useStatement['as'];
-                }
-            }
-        }
-
         return new ClassScanner(
             array_slice(
                 $this->tokens, 
                 $info['tokenStart'], 
                 ($info['tokenEnd'] - $info['tokenStart'] + 1)
             ), // zero indexed array
-            new NameInformation($info['namespace'], $uses)
+            new NameInformation($info['namespace'], $info['uses'])
         );
     }
 
@@ -187,34 +170,36 @@ class TokenArrayScanner implements Scanner
 
 
         $uses = array();
-        foreach ($info['uses'] as $useStatement) {
-            if ($useStatement['as'] === null) {
-                $uses[] = $useStatement['use'];
-            } else {
-                $uses[$useStatement['use']] = $useStatement['as'];
-            }
+        if (!isset($info)) {
+            return null;
         }
 
-        return new NameInformation($info['namespace'], $uses);
+        return new NameInformation($info['namespace'], $info['uses']);
     }
 
-    public function getFunctions($returnInfo = false)
+    public function getFunctionNames()
+    {
+        $this->scan();
+        $functionNames = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] == 'function') {
+                $functionNames[] = $info['name'];
+            }
+        }
+        return $functionNames;
+    }
+
+    public function getFunctions()
     {
         $this->scan();
         
-        if (!$returnInfo) {
-            $functions = array();
-            foreach ($this->infos as $info) {
-                if ($info['type'] == 'function') {
-                    $functions[] = $info['name'];
-                }
+        $functions = array();
+        foreach ($this->infos as $info) {
+            if ($info['type'] == 'function') {
+                // @todo $functions[] = new FunctionScanner($info['name']);
             }
-            return $functions;
-        } else {
-            $scannerClass = new FunctionScanner();
-            // @todo
-            return $scannerClass;
         }
+        return $functions;
     }
 
     public static function export($tokens)
@@ -365,9 +350,6 @@ class TokenArrayScanner implements Scanner
 
                     SCANNER_NAMESPACE_END:
 
-                        if ($infos[$infoIndex]['namespace'] === null) {
-                            $infos[$infoIndex]['namespace'] = '-GLOBAL-';
-                        }
                         $namespace = $infos[$infoIndex]['namespace'];
 
                         $MACRO_INFO_ADVANCE();
@@ -498,7 +480,7 @@ class TokenArrayScanner implements Scanner
                         'lineStart'   => $tokens[$tokenIndex][2],
                         'lineEnd'     => null,
                         'namespace'   => $namespace,
-                        'uses'        => $this->getNamespaceUsesNoScan($namespace),
+                        'uses'        => $this->getUsesNoScan($namespace),
                         'name'        => null,
                         'shortName'   => null,
                     );
@@ -515,7 +497,7 @@ class TokenArrayScanner implements Scanner
                                 || ($tokenType === T_FUNCTION && $infos[$infoIndex]['type'] === 'function'))
                         ) {
                             $infos[$infoIndex]['shortName'] = $tokens[$tokenIndex+2][1];
-                            $infos[$infoIndex]['name'] = (($namespace != '-GLOBAL-') ? $namespace . '\\' : '') . $infos[$infoIndex]['shortName'];
+                            $infos[$infoIndex]['name'] = (($namespace != null) ? $namespace . '\\' : '') . $infos[$infoIndex]['shortName'];
                         }
 
                         if ($tokenType === null) {
@@ -529,11 +511,6 @@ class TokenArrayScanner implements Scanner
                                 }
                             }
                         }
-
-//                        if ($tokenType === null && $tokenContent == '}' && $classBraceCount == 1) {
-//                            echo 'BREAKING OUT of ' . $infos[$infoIndex]['name'] . ' on ' . $tokenIndex . PHP_EOL;
-//                            goto SCANNER_CLASS_END;
-//                        }
 
                     SCANNER_CLASS_CONTINUE:
 
@@ -567,7 +544,7 @@ class TokenArrayScanner implements Scanner
 
     // @todo hasNamespace(), getNamespace()
 
-    protected function getNamespaceUsesNoScan($namespace)
+    protected function getUsesNoScan($namespace)
     {
         $namespaces = array();
         foreach ($this->infos as $info) {
@@ -577,7 +554,7 @@ class TokenArrayScanner implements Scanner
         }
 
         if (!$namespaces) {
-            return null;
+            return array();
         }
 
         if ($namespace === null) {
@@ -599,6 +576,7 @@ class TokenArrayScanner implements Scanner
                 }
             }
         }
+
         return $uses;
     }
 

@@ -35,6 +35,11 @@ class ClassScanner implements Scanner
     protected $lineStart = null;
 
     /**
+     * @var int
+     */
+    protected $lineEnd = null;
+
+    /**
      * @var bool
      */
     protected $isFinal = false;
@@ -133,6 +138,12 @@ class ClassScanner implements Scanner
         return $this->lineStart;
     }
 
+    public function getLineEnd()
+    {
+        $this->scan();
+        return $this->lineEnd;
+    }
+
     public function isFinal()
     {
         $this->scan();
@@ -190,7 +201,7 @@ class ClassScanner implements Scanner
         return $return;
     }
 
-    public function getProperties($returnScannerProperty = false)
+    public function getPropertyNames()
     {
         $this->scan();
 
@@ -201,16 +212,28 @@ class ClassScanner implements Scanner
                 continue;
             }
 
-            if (!$returnScannerProperty) {
-                $return[] = $info['name'];
-            } else {
-                $return[] = $this->getProperty($info['name']);
-            }
+            $return[] = $info['name'];
         }
         return $return;
     }
 
-    public function getMethods($returnScannerMethod = false)
+    public function getProperties()
+    {
+        $this->scan();
+
+        $return = array();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'property') {
+                continue;
+            }
+
+            $return[] = $this->getProperty($info['name']);
+        }
+        return $return;
+    }
+
+    public function getMethodNames()
     {
         $this->scan();
 
@@ -221,11 +244,23 @@ class ClassScanner implements Scanner
                 continue;
             }
 
-            if (!$returnScannerMethod) {
-                $return[] = $info['name'];
-            } else {
-                $return[] = $this->getMethod($info['name']);
+            $return[] = $info['name'];
+        }
+        return $return;
+    }
+
+    public function getMethods()
+    {
+        $this->scan();
+
+        $return = array();
+
+        foreach ($this->infos as $info) {
+            if ($info['type'] != 'method') {
+                continue;
             }
+
+            $return[] = $this->getMethod($info['name']);
         }
         return $return;
     }
@@ -245,7 +280,7 @@ class ClassScanner implements Scanner
             }
         } elseif (is_string($methodNameOrInfoIndex)) {
             $methodFound = false;
-            foreach ($this->infos as $infoIndex => $info) {
+            foreach ($this->infos as $info) {
                 if ($info['type'] === 'method' && $info['name'] === $methodNameOrInfoIndex) {
                     $methodFound = true;
                     break;
@@ -320,6 +355,7 @@ class ClassScanner implements Scanner
          */
 
         $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+            static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex+1;
             if (!isset($tokens[$tokenIndex])) {
                 $token        = false;
@@ -332,7 +368,9 @@ class ClassScanner implements Scanner
             if (is_string($token)) {
                 $tokenType = null;
                 $tokenContent = $token;
+                $tokenLine = $tokenLine + substr_count($lastTokenArray[1], "\n"); // adjust token line by last known newline count
             } else {
+                $lastTokenArray = $token;
                 list($tokenType, $tokenContent, $tokenLine) = $token;
             }
             return $tokenIndex;
@@ -377,6 +415,8 @@ class ClassScanner implements Scanner
                             goto SCANNER_CLASS_INFO_END;
                         }
 
+                        $this->lineStart = $tokenLine;
+
                         switch ($tokenType) {
 
                             case T_FINAL:
@@ -396,7 +436,6 @@ class ClassScanner implements Scanner
                                 } else {
                                     $this->name = $this->shortName;
                                 }
-                                $this->lineStart = $tokens[$tokenIndex][2];
                                 goto SCANNER_CLASS_INFO_CONTINUE;
 
                             case T_NS_SEPARATOR:
@@ -567,6 +606,7 @@ class ClassScanner implements Scanner
 
                             SCANNER_CLASS_BODY_MEMBER_END:
 
+                                $memberContext = null;
                                 $MACRO_INFO_ADVANCE();
                                 goto SCANNER_CLASS_BODY_CONTINUE;
 
@@ -584,8 +624,8 @@ class ClassScanner implements Scanner
 
                 SCANNER_CLASS_BODY_CONTINUE:
 
-                    if ($MACRO_TOKEN_ADVANCE() === false) {
-                        goto SCANNER_END;
+                    if ($braceCount === 0 || $MACRO_TOKEN_ADVANCE() === false) {
+                        goto SCANNER_CONTINUE;
                     }
                     goto SCANNER_CLASS_BODY_TOP;
 
@@ -596,14 +636,17 @@ class ClassScanner implements Scanner
             }
 
         SCANNER_CONTINUE:
-        
+
+            if ($tokenContent === '}') {
+                $this->lineEnd = $tokenLine;
+            }
+
             if ($MACRO_TOKEN_ADVANCE() === false) {
                 goto SCANNER_END;
             }
             goto SCANNER_TOP;
 
         SCANNER_END:
-//var_dump($this->tokens[$tokenIndex], $this->tokens);
 
         // process short names
         if ($this->nameInformation) {

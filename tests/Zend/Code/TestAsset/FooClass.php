@@ -19,5 +19,5 @@ abstract class FooClass implements \ArrayAccess, E\Blarg, Local\SubClass
     {
         // foo
     }
-    
+
 }

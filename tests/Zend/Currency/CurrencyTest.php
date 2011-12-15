@@ -23,9 +23,11 @@
  * @namespace
  */
 namespace ZendTest\Currency;
-use Zend\Currency;
-use Zend\Locale;
-use Zend\Cache;
+
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Currency,
+    Zend\Locale;
 
 /**
  * @category   Zend
@@ -39,16 +41,30 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->_cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/../_files/'));
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'Filesystem',
+                'options' => array(
+                    'ttl' => 120,
+                )
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
+
         Currency\Currency::setCache($this->_cache);
     }
 
     public function tearDown()
     {
         Currency\Currency::clearCache();
-        $this->_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
     }
 
     /**
@@ -553,7 +569,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testCaching()
     {
         $cache = Currency\Currency::getCache();
-        $this->assertTrue($cache instanceof Cache\Frontend);
+        $this->assertTrue($cache instanceof CacheAdapter);
         $this->assertTrue(Currency\Currency::hasCache());
 
         Currency\Currency::clearCache();

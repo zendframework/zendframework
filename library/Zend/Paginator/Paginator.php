@@ -28,7 +28,7 @@ use ArrayIterator,
     Iterator,
     IteratorAggregate,
     Traversable,
-    Zend\Cache\Frontend\Core as CacheCore,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Db\Select as DbSelect,
     Zend\Db\Table\AbstractRowset as DbAbstractRowset,
     Zend\Db\Table\Select as DbTableSelect,
@@ -96,7 +96,7 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Cache object
      *
-     * @var CacheCore
+     * @var CacheAdapter
      */
     protected static $_cache;
 
@@ -323,9 +323,9 @@ class Paginator implements Countable, IteratorAggregate
     /**
      * Sets a cache object
      *
-     * @param CacheCore $cache
+     * @param CacheAdapter $cache
      */
-    public static function setCache(CacheCore $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         self::$_cache = $cache;
     }
@@ -476,14 +476,17 @@ class Paginator implements Countable, IteratorAggregate
         }
 
         if (null === $pageNumber) {
-            foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
+            $cacheIds = self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array('tags' => array(
+                $this->_getCacheInternalId()
+            )));
+            foreach ($cacheIds as $id) {
                 if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
-                    self::$_cache->remove($this->_getCacheId($page[1]));
+                    self::$_cache->removeItem($this->_getCacheId($page[1]));
                 }
             }
         } else {
             $cleanId = $this->_getCacheId($pageNumber);
-            self::$_cache->remove($cleanId);
+            self::$_cache->removeItem($cleanId);
         }
         return $this;
     }
@@ -693,7 +696,7 @@ class Paginator implements Countable, IteratorAggregate
         $pageNumber = $this->normalizePageNumber($pageNumber);
 
         if ($this->_cacheEnabled()) {
-            $data = self::$_cache->load($this->_getCacheId($pageNumber));
+            $data = self::$_cache->getItem($this->_getCacheId($pageNumber));
             if ($data !== false) {
                 return $data;
             }
@@ -714,7 +717,11 @@ class Paginator implements Countable, IteratorAggregate
         }
 
         if ($this->_cacheEnabled()) {
-            self::$_cache->save($items, $this->_getCacheId($pageNumber), array($this->_getCacheInternalId()));
+            self::$_cache->setItem(
+                $this->_getCacheId($pageNumber), 
+                $items, 
+                array('tags' => array($this->_getCacheInternalId()))
+            );
         }
 
         return $items;
@@ -802,10 +809,13 @@ class Paginator implements Countable, IteratorAggregate
     {
         $data = array();
         if ($this->_cacheEnabled()) {
-            foreach (self::$_cache->getIdsMatchingTags(array($this->_getCacheInternalId())) as $id) {
-                    if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
-                        $data[$page[1]] = self::$_cache->load($this->_getCacheId($page[1]));
-                    }
+            $cacheIds = self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array(
+                'tags' => array($this->_getCacheInternalId()),
+            ));
+            foreach ($cacheIds as $id) {
+                if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
+                    $data[$page[1]] = self::$_cache->getItem($this->_getCacheId($page[1]));
+                }
             }
         }
         return $data;

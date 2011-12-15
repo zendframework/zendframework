@@ -24,14 +24,10 @@
  */
 namespace Zend\Locale;
 
-use Zend\Locale\Data\Cldr;
+use Zend\Cache\Storage\Adapter,
+    Zend\Locale\Data\Cldr;
 
 /**
- * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Locale\Data\Cldr
- * @uses       \Zend\Locale\Exception\InvalidArgumentException
- * @usess      \Zend\Locale\Exception\UnsupportedTokenException
- * @uses       \Zend\Locale\Math
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Format
@@ -153,7 +149,7 @@ class Format
                     break;
 
                 case 'cache' :
-                    if ($value instanceof \Zend\Cache\Core) {
+                    if ($value instanceof CacheAdapter) {
                         Cldr::setCache($value);
                     }
                     break;

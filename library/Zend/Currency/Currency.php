@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Currency
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -22,20 +22,17 @@
  * @namespace
  */
 namespace Zend\Currency;
-use Zend\Cache\Frontend;
-use Zend\Locale;
-use Zend\Locale\Data\Cldr;
+
+use Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Locale,
+    Zend\Locale\Data\Cldr;
 
 /**
  * Class for handling currency notations
  *
- * @uses      Zend\Cache\Frontend;
- * @uses      Zend\Locale
- * @uses      Zend\Locale\Format
- * @uses      Zend\Locale\Data\Cldr
  * @category  Zend
  * @package   Zend_Currency
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Currency
@@ -483,7 +480,7 @@ class Currency
     /**
      * Returns the set cache
      *
-     * @return Zend\Cache\Frontend The set cache
+     * @return CacheAdapter The set cache
      */
     public static function getCache()
     {
@@ -493,10 +490,10 @@ class Currency
     /**
      * Sets a cache for Zend_Currency
      *
-     * @param  Zend\Cache\Frontend $cache Cache to set
+     * @param  CacheAdapter $cache Cache to set
      * @return void
      */
-    public static function setCache(Frontend $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         Cldr::setCache($cache);
     }

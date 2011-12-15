@@ -22,6 +22,7 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
+    SplObjectStorage,
     stdClass,
     Traversable,
     Zend\Cache\Exception,
@@ -53,9 +54,9 @@ abstract class AbstractAdapter implements Adapter
     /**
      * The plugin registry
      *
-     * @var array Array of registered plugins
+     * @var SplObjectStorage Registered plugins
      */
-    protected $pluginRegistry = array();
+    protected $pluginRegistry;
 
     /**
      * Capabilities of this adapter
@@ -291,7 +292,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function hasPlugin(Plugin $plugin)
     {
-        return in_array($plugin, $this->pluginRegistry, true);
+        $registry = $this->getPluginRegistry();
+        return $registry->contains($plugin);
     }
 
     /**
@@ -303,12 +305,16 @@ abstract class AbstractAdapter implements Adapter
      */
     public function addPlugin(Plugin $plugin)
     {
-        if (in_array($plugin, $this->pluginRegistry, true)) {
-            throw new Exception\LogicException('Plugin already registered');
+        $registry = $this->getPluginRegistry();
+        if ($registry->contains($plugin)) {
+            throw new Exception\LogicException(sprintf(
+                'Plugin of type "%s" already registered',
+                get_class($plugin)
+            ));
         }
 
         $plugin->attach($this->events());
-        $this->pluginRegistry[] = $plugin;
+        $registry->attach($plugin);
 
         return $this;
     }
@@ -322,21 +328,18 @@ abstract class AbstractAdapter implements Adapter
      */
     public function removePlugin(Plugin $plugin)
     {
-        $pluginRegistryIndex = array_search($plugin, $this->pluginRegistry, true);
-        if ($pluginRegistryIndex === false) {
-            throw new Exception\LogicException('Plugin not registered');
+        $registry = $this->getPluginRegistry();
+        if ($registry->contains($plugin)) {
+            $plugin->detach($this->events());
         }
-
-        $plugin->detach($this->events());
-        unset($this->pluginRegistry[$pluginRegistryIndex]);
-
+        $registry->detach($plugin);
         return $this;
     }
 
     /**
      * Get all registered plugins
      *
-     * @return array
+     * @return SplObjectStorage
      */
     public function getPlugins()
     {
@@ -1076,5 +1079,18 @@ abstract class AbstractAdapter implements Adapter
                 "The key '{$key}' doesn't match agains pattern '{$p}'"
             );
         }
+    }
+
+    /**
+     * Return registry of plugins
+     * 
+     * @return SplObjectStorage
+     */
+    protected function getPluginRegistry()
+    {
+        if (!$this->pluginRegistry instanceof SplObjectStorage) {
+            $this->pluginRegistry = new SplObjectStorage();
+        }
+        return $this->pluginRegistry;
     }
 }

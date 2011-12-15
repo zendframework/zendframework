@@ -22,15 +22,15 @@
 namespace ZendTest\Config;
 
 use Zend\Config\Config,
-    Zend\Config\Parser\Token as TokenParser,
-    Zend\Config\Parser\Translator as TranslatorParser,
-    Zend\Config\Parser\Filter as FilterParser,
-    Zend\Translator\Translator,
-    Zend\Translator\Adapter\ArrayAdapter,
-    Zend\Filter\StringToLower,
-    Zend\Filter\StringToUpper,
-    Zend\Filter\PregReplace
-;
+Zend\Config\Parser\Token as TokenParser,
+Zend\Config\Parser\Translator as TranslatorParser,
+Zend\Config\Parser\Filter as FilterParser,
+Zend\Config\Parser\Constant as ConstantParser,
+Zend\Translator\Translator,
+Zend\Translator\Adapter\ArrayAdapter,
+Zend\Filter\StringToLower,
+Zend\Filter\StringToUpper,
+Zend\Filter\PregReplace;
 
 /**
  * @category   Zend
@@ -43,8 +43,9 @@ use Zend\Config\Config,
 class ParserTest extends \PHPUnit_Framework_TestCase
 {
     protected $_nested;
-    protected $_tokenBare,$_tokenPrefix, $_tokenSuffix, $_tokenSurround,$_tokenSurroundMixed;
-    protected $_translator,$_translatorStrings;
+    protected $_tokenBare, $_tokenPrefix, $_tokenSuffix, $_tokenSurround, $_tokenSurroundMixed;
+    protected $_translator, $_translatorStrings;
+    protected $_userConstants, $_phpConstants;
     protected $_filter;
 
     public function setUp()
@@ -145,6 +146,24 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             ArrayAdapter::clearCache();
             ArrayAdapter::removeCache();
         }
+
+        $this->_userConstants = array(
+            'simple' => 'SOME_USERLAND_CONSTANT',
+            'inside' => 'some text with SOME_USERLAND_CONSTANT inside',
+            'nested' => array(
+                'simple' => 'SOME_USERLAND_CONSTANT',
+                'inside' => 'some text with SOME_USERLAND_CONSTANT inside',
+            ),
+        );
+
+        $this->_phpConstants = array(
+            'phpVersion' => 'PHP_VERSION',
+            'phpVersionInside' => 'Current PHP version is: PHP_VERSION',
+            'nested' => array(
+                'phpVersion' => 'PHP_VERSION',
+                'phpVersionInside' => 'Current PHP version is: PHP_VERSION',
+            ),
+        );
     }
 
     public function testEmptyParsersCollection()
@@ -295,63 +314,101 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('New text with some replaced value', $config->nested->moreNested->newKey);
     }
 
-    public function testTranslator(){
+    /**
+     * @depends testTokenSurround
+     */
+    public function testUserConstants()
+    {
+        define('SOME_USERLAND_CONSTANT', 'some constant value');
+
+        $parser = new ConstantParser();
+        $config = new Config($this->_userConstants, true);
+        $parser->parse($config);
+
+        $this->assertEquals('some constant value', $config->simple);
+        $this->assertEquals('some text with some constant value inside', $config->inside);
+        $this->assertEquals('some constant value', $config->nested->simple);
+        $this->assertEquals('some text with some constant value inside', $config->nested->inside);
+    }
+
+    /**
+     * @depends testTokenSurround
+     */
+    public function testPHPConstants()
+    {
+        $parser = new ConstantParser(false);
+        $config = new Config($this->_phpConstants, true);
+        $parser->parse($config);
+
+        $this->assertEquals(PHP_VERSION, $config->phpVersion);
+        $this->assertEquals('Current PHP version is: ' . PHP_VERSION, $config->phpVersionInside);
+        $this->assertEquals(PHP_VERSION, $config->nested->phpVersion);
+        $this->assertEquals('Current PHP version is: ' . PHP_VERSION, $config->nested->phpVersionInside);
+    }
+
+    public function testTranslator()
+    {
         $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
-        error_reporting(E_ALL);ini_set('display_errors',1);
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
         $parser = new TranslatorParser($translator);
-        $config = new Config($this->_translator,true);
+        $config = new Config($this->_translator, true);
 
         $parser->parse($config);
 
-        $this->assertEquals('oneDog',$config->pages[0]->id);
-        $this->assertEquals('ein Hund',$config->pages[0]->label);
+        $this->assertEquals('oneDog', $config->pages[0]->id);
+        $this->assertEquals('ein Hund', $config->pages[0]->label);
 
-        $this->assertEquals('twoDogs',$config->pages[1]->id);
-        $this->assertEquals('zwei Hunde',$config->pages[1]->label);
+        $this->assertEquals('twoDogs', $config->pages[1]->id);
+        $this->assertEquals('zwei Hunde', $config->pages[1]->label);
     }
 
-    public function testJITTranslator(){
+    public function testJITTranslator()
+    {
         $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
         $parser = new TranslatorParser($translator);
         $config = new Config(array(), true, $parser);
 
         $config->newValue = 'one dog';
-        $this->assertEquals('ein Hund',$config->newValue);
+        $this->assertEquals('ein Hund', $config->newValue);
 
         $config->newValue = 'two dogs';
-        $this->assertEquals('zwei Hunde',$config->newValue);
+        $this->assertEquals('zwei Hunde', $config->newValue);
 
         $config->unknownTranslation = 'three dogs';
-        $this->assertEquals('three dogs',$config->unknownTranslation);
+        $this->assertEquals('three dogs', $config->unknownTranslation);
     }
 
-    public function testFilter(){
+    public function testFilter()
+    {
         $filter = new StringToLower();
         $parser = new FilterParser($filter);
-        $config = new Config($this->_filter,1);
+        $config = new Config($this->_filter, 1);
 
         $parser->parse($config);
 
-        $this->assertEquals('some mixedcase value',$config->simple);
-        $this->assertEquals('other mixed case value',$config->nested->simple);
+        $this->assertEquals('some mixedcase value', $config->simple);
+        $this->assertEquals('other mixed case value', $config->nested->simple);
     }
 
-    public function testJITFilter(){
+    public function testJITFilter()
+    {
         $filter = new StringToLower();
         $parser = new FilterParser($filter);
-        $config = new Config($this->_filter,1,$parser);
+        $config = new Config($this->_filter, 1, $parser);
 
-        $this->assertEquals('some mixedcase value',$config->simple);
-        $this->assertEquals('other mixed case value',$config->nested->simple);
+        $this->assertEquals('some mixedcase value', $config->simple);
+        $this->assertEquals('other mixed case value', $config->nested->simple);
 
         $config->newValue = 'THIRD mixed CASE value';
-        $this->assertEquals('third mixed case value',$config->newValue);
+        $this->assertEquals('third mixed case value', $config->newValue);
     }
 
     /**
      * @depends testFilter
      */
-    public function testParsersQueueFIFO(){
+    public function testParsersQueueFIFO()
+    {
         $lower = new StringToLower();
         $upper = new StringToUpper();
         $lowerParser = new FilterParser($lower);
@@ -368,36 +425,37 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 $lowerParser
             )
         );
-        $this->assertEquals('some mixedcase value',$config->simple);
-        $this->assertEquals('other mixed case value',$config->nested->simple);
+        $this->assertEquals('some mixedcase value', $config->simple);
+        $this->assertEquals('other mixed case value', $config->nested->simple);
     }
 
     /**
      * @depends testParsersQueueFIFO
      */
-    public function testParsersQueuePriorities(){
+    public function testParsersQueuePriorities()
+    {
         $lower = new StringToLower();
         $upper = new StringToUpper();
-        $replace = new PregReplace('/[a-z]/','');
+        $replace = new PregReplace('/[a-z]/', '');
         $lowerParser = new FilterParser($lower);
         $upperParser = new FilterParser($upper);
         $replaceParser = new FilterParser($replace);
-        $config = new Config(array(),1);
+        $config = new Config(array(), 1);
 
         /**
          * Insert lower case filter with higher priority
          */
-        $config->getParsers()->insert($upperParser,10);
-        $config->getParsers()->insert($lowerParser,1000);
+        $config->getParsers()->insert($upperParser, 10);
+        $config->getParsers()->insert($lowerParser, 1000);
         $config->simple = 'some MixedCase VALue';
-        $this->assertEquals('SOME MIXEDCASE VALUE',$config->simple);
+        $this->assertEquals('SOME MIXEDCASE VALUE', $config->simple);
 
         /**
          * Add even higher priority replace parser that will remove all lowercase letters
          */
-        $config->getParsers()->insert($replaceParser,10000);
+        $config->getParsers()->insert($replaceParser, 10000);
         $config->newValue = 'THIRD mixed CASE value';
-        $this->assertEquals('THIRD  CASE ',$config->newValue);
+        $this->assertEquals('THIRD  CASE ', $config->newValue);
     }
 
 }

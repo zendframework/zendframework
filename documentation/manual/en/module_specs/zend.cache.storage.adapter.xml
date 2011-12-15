@@ -21,22 +21,34 @@
         </para>
 
         <para>
-            All adapters implementing the interface
+            All adapters implements the interface
             <classname>Zend\Cache\Storage\Adapter</classname> and extends
             <classname>Zend\Cache\Storage\Adapter\AbstractAdapter</classname>
-            which implements basic logic.
+            which comes with basic logic.
         </para>
 
         <para>
-            Configuration will be done by
-            <classname>Zend\Cache\Storage\Adapter\AdapterOptions</classname>
-            which can simply be instantiated with an associative array of options
-            passing to the constructor. To configure an storage adapter object
-            you can set an instance of
-            <classname>Zend\Cache\StorageAdapter\AdapterOptions</classname> with
-            <methodname>setOptions</methodname> or put it as second argument to the
-            factory.
+            Configuration will be done by one of the adapter options class.
+            Which is the right knows the adapter it self and instantiate it
+            internally if you pass an associative array of options to the
+            <methodname>adapterFactory</methodname>, <methodname>factory</methodname> or the
+            <methodname>setOptions</methodname> method. You can also get the
+            options instance with <methodname>getOptions</methodname> and change
+            it by using setters of it.
         </para>
+
+        <note>
+            <title>Nearly all methods can throw exceptions</title>
+            
+            <para>
+                Because nearly all methods can throw exceptions you need to
+                catch them manually or you can use the plug-in
+                <classname>Zend\Cache\Storage\Plugin\ExceptionHandler</classname>
+                'exception_handler' to automatically catch them and redirect exceptions
+                into a log file using the option 'exception_callback'.
+            </para>
+            
+        </note>
 
     </section>
 
@@ -44,6 +56,46 @@
         <info>
             <title>Quick Start</title>
         </info>
+
+        <para>
+            Caching adapters can either be created from the provided
+            <classname>Zend\Cache\StorageFactory</classname> factory, or by simply
+            instantiating one of the <classname>Zend\Cache\Storage\Adapter\*</classname>classes. 
+        </para>
+
+        <para>
+            To make live easier the <classname>Zend\Cache\StorageFactory</classname>
+            comes with a method <methodname>factory</methodname> to create an adapter
+            and creating/adding all given plug-ins at once.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Cache\StorageFactory;
+
+$cache  = StorageFactory::factory(array(
+    'adapter' => 'apc',
+    'plugins' => array(
+        'exception_handler' => array('throw_exceptions' => false),
+    ),
+));
+
+// OR, the completely equivalent
+
+$cache  = StorageFactory::adapterFactory('apc');
+$plugin = StorageFactory::adapterFactory('exception_handler', array(
+    'throw_exceptions' => false,
+));
+$cache->addPlugin($plugin);
+
+// OR, the completely equivalent
+
+$cache  = new Zend\Cache\Storage\Adapter\Apc();
+$plugin = new Zend\Cache\Storage\Plugin\ExceptionHandler(array(
+    'throw_exceptions' => false,
+));
+$cache->addPlugin($plugin);
+
+]]></programlisting>
 
     </section>
 
@@ -657,7 +709,7 @@
 
     <section xml:id="zend.cache.storage.adapter.examples">
         <info>
-            <title>Examples</title>
+            <title>TODO: Examples</title>
         </info>
 
     </section>

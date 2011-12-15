@@ -16,14 +16,15 @@
 
         <para>
             To get capabilities of a storage object you can use the method
-            <methodname>getCapabilities</methodname> of the object but only
-            the storage object and it's plug-ins has permissions to change it.
+            <methodname>getCapabilities</methodname> of the storage object but
+            only the storage object and it's plug-ins has permissions to change
+            it.
         </para>
 
         <para>
             Because capabilities can be changed by storage, for example on
-            changing some options, you can get a note by catching the event if
-            it. (TODO: link to example)
+            changing some options, you can get a note by listing the event of
+            it. See the examples how to do that.
         </para>
 
         <para>
@@ -577,7 +578,7 @@ if ($capabilities->getIterable()) {
         </example>
 
         <example xml:id="zend.cache.storage.capabilities.examples.event.change">
-            <info><title>Get note on changed capability</title></info>
+            <info><title>Listen to change event</title></info>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\StorageFactory;

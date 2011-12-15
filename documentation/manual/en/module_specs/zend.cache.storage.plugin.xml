@@ -9,12 +9,61 @@
             <title>Overview</title>
         </info>
 
+        <para>
+            Cache storage plug-ins are objects to add missing functionalities
+            or to change influences of a storage adapter. This can be very
+            helpful implement caching into an application.
+        </para>
+
+        <para>
+            The plug-ins listen to events the adapter triggers and can change
+            called method arguments (*.post - events), skipping and directly
+            return a result (using <methodname>stopPropagation</methodname>),
+            changing the result (with <methodname>setResult</methodname> of
+            <classname>Zend\Cache\Storage\PostEvent</classname>) and catching
+            exceptions (with <classname>Zend\Cache\Storage\ExceptionEvent</classname>).
+        </para>
+
     </section>
 
     <section xml:id="zend.cache.storage.plugin.quick-start">
         <info>
             <title>Quick Start</title>
         </info>
+
+        <para>
+            Storage plug-ins can either be created from <classname>Zend\Cache\StorageFactory</classname>
+            with the <methodname>pluginFactory</methodname>, or by simply instantiating
+            one of the <classname>Zend\Cache\Storage\Plugin\*</classname>classes. 
+        </para>
+        
+        <para>
+            To make live easier the <classname>Zend\Cache\StorageFactory</classname>
+            comes with a method <methodname>factory</methodname> to create an adapter
+            and creating/adding all given plug-ins at once.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\Cache\StorageFactory;
+
+$cache = StorageFactory::factory(array(
+    'adapter' => 'filesystem',
+    'plugins' => array('serializer'),
+));
+
+// OR, the completely equivalent
+
+$cache  = StorageFactory::adapterFactory('filesystem');
+$plugin = StorageFactory::pluginFactory('serializer');
+$cache->addPlugin($plugin);
+
+// OR, the completely equivalent
+
+$cache  = new Zend\Cache\Storage\Adapter\Filesystem();
+$plugin = new Zend\Cache\Storage\Plugin\Serializer();
+$cache->addPlugin($plugin);
+
+]]></programlisting>
 
     </section>
 
@@ -125,7 +174,7 @@
 
     <section xml:id="zend.cache.storage.plugin.examples">
         <info>
-            <title>Examples</title>
+            <title>TODO: Examples</title>
         </info>
 
     </section>

@@ -110,7 +110,7 @@ class StorageFactory
                     if (!isset($v['name'])) {
                         throw new Exception\InvalidArgumentException("Invalid plugins[{$k}] or missing plugins[{$k}].name");
                     }
-                    $name = (string)$v['name'];
+                    $name = (string) $v['name'];
                     if (isset($v['options'])) {
                         $options = $v['options'];
                     } else {
@@ -176,6 +176,7 @@ class StorageFactory
     {
         if (static::$adapterBroker === null) {
             static::$adapterBroker = new Storage\AdapterBroker();
+            static::$adapterBroker->setRegisterPluginsOnLoad(false);
         }
         return static::$adapterBroker;
     }
@@ -235,6 +236,7 @@ class StorageFactory
     {
         if (static::$pluginBroker === null) {
             static::$pluginBroker = new Storage\PluginBroker();
+            static::$pluginBroker->setRegisterPluginsOnLoad(false);
         }
         return static::$pluginBroker;
     }

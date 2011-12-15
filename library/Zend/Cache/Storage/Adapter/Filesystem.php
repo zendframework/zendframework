@@ -91,6 +91,11 @@ class Filesystem extends AbstractAdapter
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
         }
+
+        if (!$options instanceof FilesystemOptions) {
+            $options = new FilesystemOptions($options);
+        }
+
         $this->options = $options;
         $options->setAdapter($this);
         return $this;

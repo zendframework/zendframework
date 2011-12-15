@@ -24,18 +24,14 @@
  */
 namespace Zend\Locale\Data;
 
-use Zend\Cache\Cache,
-    Zend\Cache\Frontend as CacheFrontend,
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Locale\Locale,
-    Zend\Locale\Exception\InvalidArgumentException,
-    Zend\Locale\Exception\UnexpectedValueException;
+    Zend\Locale\Exception;
 
 /**
  * Locale data provider, handles CLDR
  *
- * @uses       Zend\Cache\Cache
- * @uses       Zend\Locale
- * @uses       Zend\Locale\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data
@@ -281,11 +277,19 @@ class Cldr extends AbstractLocale
         $locale = self::_checkLocale($locale);
 
         if (!isset(self::$_cache) && !self::$_cacheDisabled) {
-            self::$_cache = Cache::factory(
-                'Core',
-                'File',
-                array('automatic_serialization' => true),
-                array());
+            self::$_cache = CacheFactory::factory(array(
+                'adapter' => array(
+                    'name' => 'Filesystem',
+                ),
+                'plugins' => array(
+                    array(
+                        'name' => 'serializer',
+                        'options' => array(
+                            'serializer' => 'php_serialize',
+                        ),
+                    ),
+                ),
+            ));
         }
 
         $val = $value;
@@ -295,7 +299,7 @@ class Cldr extends AbstractLocale
 
         $val = urlencode($val);
         $id = strtr('Zend_LocaleL_' . $locale . '_' . $path . '_' . $val, array('-' => '_', '%' => '_', '+' => '_'));
-        if (!self::$_cacheDisabled && ($result = self::$_cache->load($id))) {
+        if (!self::$_cacheDisabled && ($result = self::$_cache->getItem($id))) {
             return unserialize($result);
         }
 
@@ -851,7 +855,7 @@ class Cldr extends AbstractLocale
                 break;
 
             default :
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                   "Unknown list ($path) for parsing locale data."
                 );
                 break;
@@ -859,9 +863,9 @@ class Cldr extends AbstractLocale
 
         if (isset(self::$_cache)) {
           if (self::$_cacheTags) {
-                self::$_cache->save( serialize($temp), $id, array('Zend_Locale'));
+                self::$_cache->setItem($id, serialize($temp), array('tags' => array('Zend_Locale')));
           } else {
-                self::$_cache->save( serialize($temp), $id);
+                self::$_cache->setItem($id, serialize($temp));
           }
         }
 
@@ -874,7 +878,7 @@ class Cldr extends AbstractLocale
      * @param  string $locale
      * @param  string $path
      * @param  string $value
-     * @throws \Zend\Locale\Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return string
      */
     public static function getContent($locale, $path, $value = false)
@@ -882,11 +886,19 @@ class Cldr extends AbstractLocale
         $locale = self::_checkLocale($locale);
 
         if (!isset(self::$_cache) && !self::$_cacheDisabled) {
-            self::$_cache = Cache::factory(
-                'Core',
-                'File',
-                array('automatic_serialization' => true),
-                array());
+            self::$_cache = CacheFactory::factory(array(
+                'adapter' => array(
+                    'name' => 'Filesystem',
+                ),
+                'plugins' => array(
+                    array(
+                        'name' => 'serializer',
+                        'options' => array(
+                            'serializer' => 'php_serialize',
+                        ),
+                    ),
+                ),
+            ));
         }
 
         $val = $value;
@@ -895,7 +907,7 @@ class Cldr extends AbstractLocale
         }
         $val = urlencode($val);
         $id = strtr('Zend_LocaleC_' . $locale . '_' . $path . '_' . $val, array('-' => '_', '%' => '_', '+' => '_'));
-        if (!self::$_cacheDisabled && ($result = self::$_cache->load($id))) {
+        if (!self::$_cacheDisabled && ($result = self::$_cache->getItem($id))) {
             return unserialize($result);
         }
 
@@ -1342,7 +1354,7 @@ class Cldr extends AbstractLocale
                 break;
 
             default :
-                throw new InvalidArgumentException(
+                throw new Exception\InvalidArgumentException(
                   "Unknown detail ($path) for parsing locale data."
                 );
                 break;
@@ -1353,9 +1365,9 @@ class Cldr extends AbstractLocale
         }
 
         if (self::$_cacheTags) {
-            self::$_cache->save( serialize($temp), $id, array('Zend_Locale'));
+            self::$_cache->setItem($id, serialize($temp), array('tags' => array('Zend_Locale')));
       } else {
-            self::$_cache->save( serialize($temp), $id);
+            self::$_cache->setItem($id, serialize($temp));
       }
 
         return $temp;
@@ -1374,7 +1386,7 @@ class Cldr extends AbstractLocale
         }
 
         if (!(Locale::isLocale((string) $locale))) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
               "Locale (" . (string) $locale . ") is no known locale"
             );
         }
@@ -1451,15 +1463,15 @@ class Cldr extends AbstractLocale
     public static function setPath($path)
     {
         if (!is_dir($path)) {
-            throw new UnexpectedValueException('The given path needs to be a directory');
+            throw new Exception\UnexpectedValueException('The given path needs to be a directory');
         }
 
         if (!file_exists($path . '/main/root.xml')) {
-            throw new UnexpectedValueException('Unable to find locale files within the given path');
+            throw new Exception\UnexpectedValueException('Unable to find locale files within the given path');
         }
 
         if (!file_exists($path . '/supplemental/supplementalData.xml')) {
-            throw new UnexpectedValueException('Unable to find supplemental files within the given path');
+            throw new Exception\UnexpectedValueException('Unable to find supplemental files within the given path');
         }
 
         self::$_path = $path;
@@ -1486,19 +1498,31 @@ class Cldr extends AbstractLocale
             return false;
         }
 
-        self::setCache(Cache::factory(
-            'Core',
-            'File',
-            array(
-                'automatic_serialization'   => true,
-                'automatic_cleaning_factor' => 0,
-                'lifetime'                  => null,
+        self::setCache(CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'Filesystem',
+                'options' => array(
+                    'cache_dir'         => self::getPath() . '/cache',
+                    'ttl'               => 0,
+                    'read_control'      => true,
+                    'read_control_algo' => 'strlen',
+                ),
             ),
-            array(
-                'cache_dir'         => self::getPath() . '/cache',
-                'read_control_type' => 'strlen',
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+                array(
+                    'name' => 'clear_by_factor',
+                    'options' => array(
+                        'clearing_factor' => 0,
+                    ),
+                ),
             )
-        ));
+        )));
 
         self::_getTagSupportForCache();
     }
@@ -1611,11 +1635,11 @@ class Cldr extends AbstractLocale
         }
 
         if (!is_dir($filePath)) {
-            throw new UnexpectedValueException('The given path needs to be a directory');
+            throw new Exception\UnexpectedValueException('The given path needs to be a directory');
         }
 
         if (self::getCache() !== null && !self::isCacheDisabled()) {
-            if ($result = self::getCache()->load($cacheId)) {
+            if ($result = self::getCache()->getItem($cacheId)) {
                 if ($detail !== null) {
                     $result = unserialize($result);
                     return $result[$detail];
@@ -1630,9 +1654,9 @@ class Cldr extends AbstractLocale
         ksort(self::$_result);
 
         if (self::hasCacheTagSupport()) {
-            self::getCache()->save(serialize(self::$_result), $cacheId, array('Zend_Locale'));
+            self::getCache()->setItem($cacheId, serialize(self::$_result), array('tags' => array('Zend_Locale')));
         } else {
-            self::getCache()->save(serialize(self::$_result), $cacheId);
+            self::getCache()->setItem($cacheId, serialize(self::$_result));
         }
 
         if ($detail !== null) {

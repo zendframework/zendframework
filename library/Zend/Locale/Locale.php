@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Locale
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -23,18 +23,15 @@
  */
 namespace Zend\Locale;
 
-use Zend\Registry;
+use Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Registry;
 
 /**
  * Base class for localization
  *
- * @uses      \Zend\Locale\Data\Cldr
- * @uses      \Zend\Locale\Exception\UnexpectedValueException
- * @uses      \Zend\Locale\Exception\InvalidArgumentException
- * @uses      \Zend\Registry
  * @category  Zend
  * @package   Zend_Locale
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Locale
@@ -962,7 +959,7 @@ class Locale
     /**
      * Returns the set cache
      *
-     * @return \Zend\Cache\Core The set cache
+     * @return CacheAdapter The set cache
      */
     public static function getCache()
     {
@@ -972,10 +969,10 @@ class Locale
     /**
      * Sets a cache
      *
-     * @param  \Zend\Cache\Frontend $cache Cache to set
+     * @param  CacheAdapter $cache Cache to set
      * @return void
      */
-    public static function setCache(\Zend\Cache\Frontend $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         Data\Cldr::setCache($cache);
     }

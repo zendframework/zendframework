@@ -72,9 +72,252 @@ $cache->addPlugin($plugin);
             <title>Configuration Options</title>
         </info>
 
+    <section xml:id="zend.cache.storage.plugin.plugin-options.methods">
+        <info>
+            <title>Available Methods</title>
+        </info>
+
         <variablelist>
-            <title/>
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.set-clearing-factor">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setClearingFactor</methodname>
+                        <methodparam>
+                            <funcparams>int $clearingFactor</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set automatic clearing factor</para>
+                    <para>Used by: - ClearByFactor</para>
+                    <para>Returns Zend\Cache\Storage\Plugin\PluginOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.get-clearing-factor">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getClearingFactor</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get automatic clearing factor</para>
+                    <para>Used by: - ClearByFactor</para>
+                    <para>Returns int</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.set-clear-by-namespace">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setClearByNamespace</methodname>
+                        <methodparam>
+                            <funcparams>bool $clearByNamespace</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set flag indicating whether or not to clear by namespace</para>
+                    <para>Used by: - ClearByFactor</para>
+                    <para>Returns Zend\Cache\Storage\Plugin\PluginOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.get-clear-by-namespace">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getClearByNamespace</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Clear items by namespace?</para>
+                    <para>Used by: - ClearByFactor</para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.set-exception-callback">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setExceptionCallback</methodname>
+                        <methodparam>
+                            <funcparams>callable $exceptionCallback</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set callback to call on intercepted exception</para>
+                    <para>Used by: - ExceptionHandler</para>
+                    <para>Returns Zend\Cache\Storage\Plugin\PluginOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.get-exception-callback">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getExceptionCallback</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get callback to call on intercepted exception</para>
+                    <para>Used by: - ExceptionHandler</para>
+                    <para>Returns null|callable</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.set-optimizing-factor">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setOptimizingFactor</methodname>
+                        <methodparam>
+                            <funcparams>int $optimizingFactor</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set automatic optimizing factor</para>
+                    <para>Used by: - OptimizeByFactor</para>
+                    <para>Returns Zend\Cache\Storage\Plugin\PluginOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.get-optimizing-factor">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getOptimizingFactor</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set automatic optimizing factor</para>
+                    <para>Used by: - OptimizeByFactor</para>
+                    <para>Returns int</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.set-serializer">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setSerializer</methodname>
+                        <methodparam>
+                            <funcparams>string|Zend\Serializer\Adapter $serializer</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set serializer</para>
+                    <para>Used by: - Serializer</para>
+                    <para>Returns Zend\Cache\Storage\Plugin\Serializer</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.get-serializer">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getSerializer</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get serializer</para>
+                    <para>Used by: - Serializer</para>
+                    <para>Returns Zend\Serializer\Adapter</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.set-serializer-options">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setSerializerOptions</methodname>
+                        <methodparam>
+                            <funcparams>array $serializerOptions</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set configuration options for instantiating a serializer adapter</para>
+                    <para>Used by: - Serializer</para>
+                    <para>Returns Zend\Cache\Storage\Plugin\PluginOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.get-serializer-options">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getSerializerOptions</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Get configuration options for instantiating a serializer adapter</para>
+                    <para>Used by: - Serializer</para>
+                    <para>Returns array</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.set-throw-exceptions">
+                <term>
+                    <methodsynopsis>
+                        <methodname>setThrowExceptions</methodname>
+                        <methodparam>
+                            <funcparams>bool $throwExceptions</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Set flag indicating we should re-throw exceptions</para>
+                    <para>Used by: - ExceptionHandler</para>
+                    <para>Returns Zend\Cache\Storage\Plugin\PluginOptions</para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.cache.storage.plugin.plugin-options.methods.get-throw-exceptions">
+                <term>
+                    <methodsynopsis>
+                        <methodname>getThrowExceptions</methodname>
+                        <methodparam>
+                            <funcparams></funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+                </term>
+
+                <listitem>
+                    <para>Should we re-throw exceptions?</para>
+                    <para>Used by: - ExceptionHandler</para>
+                    <para>Returns bool</para>
+                </listitem>
+            </varlistentry>
+
         </variablelist>
+    </section>
     </section>
 
     <section xml:id="zend.cache.storage.plugin.methods">
@@ -83,30 +326,12 @@ $cache->addPlugin($plugin);
         </info>
 
         <variablelist>
-            <varlistentry xml:id="zend.cache.storage.plugin.methods.__construct">
-                <term>
-                    <methodsynopsis>
-                        <methodname>__construct</methodname>
-                        <methodparam>
-                            <funcparams>array|Traversable $options = array (
-)</funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
-
-                <listitem>
-                    <para>Constructor</para>
-                    <para></para>
-                    <para>Returns void</para>
-                </listitem>
-            </varlistentry>
-
             <varlistentry xml:id="zend.cache.storage.plugin.methods.set-options">
                 <term>
                     <methodsynopsis>
                         <methodname>setOptions</methodname>
                         <methodparam>
-                            <funcparams>array|Traversable $options</funcparams>
+                            <funcparams>Zend\Cache\Storage\Plugin\PluginOptions $options</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
@@ -131,7 +356,7 @@ $cache->addPlugin($plugin);
                 <listitem>
                     <para>Get options</para>
                     <para></para>
-                    <para>Returns array</para>
+                    <para>Returns PluginOptions</para>
                 </listitem>
             </varlistentry>
 

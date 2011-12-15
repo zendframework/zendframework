@@ -414,6 +414,8 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
+            $value = $args['value'];
+
             $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
@@ -452,7 +454,7 @@ class Filesystem extends AbstractAdapter
             }
 
             $result = true;
-            foreach ($keyValuePairs as $key => $value) {
+            foreach ($args['keyValuePairs'] as $key => $value) {
                 $result = $this->internalSetItem($key, $value, $options) && $result;
             }
 
@@ -1087,6 +1089,7 @@ class Filesystem extends AbstractAdapter
                         'supportedMetadata'  => array('mtime', 'filespec'),
                         'maxTtl'             => 0,
                         'staticTtl'          => false,
+                        'tagging'            => true,
                         'ttlPrecision'       => 1,
                         'expiredRead'        => true,
                         'maxKeyLength'       => 251, // 255 - strlen(.dat | .ifo)
@@ -1137,9 +1140,9 @@ class Filesystem extends AbstractAdapter
     /**
      * Set key value pair
      *
-     * @param $key
-     * @param $value
-     * @param array $options
+     * @param  string $key
+     * @param  mixed $value
+     * @param  array $options
      * @return bool
      * @throws RuntimeException
      */
@@ -1158,14 +1161,13 @@ class Filesystem extends AbstractAdapter
                 $path = dirname($filespec);
                 if (!file_exists($path)) {
                     $oldUmask = umask($baseOptions->getDirUmask());
-                    if ( !@mkdir($path, 0777, true) ) {
-                        // reset umask on exception
+                    set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($oldUmask) {
                         umask($oldUmask);
-
-                        // throw exception with last error message
-                        $lastErr = error_get_last();
-                        throw new Exception\RuntimeException($lastErr['message']);
-                    }
+                        $message = sprintf('Error creating directory (in %s@%d): %s', $errfile, $errline, $errstr);
+                        throw new Exception\RuntimeException($message, $errno);
+                    }, E_WARNING);
+                    mkdir($path, 0777, true);
+                    restore_error_handler();
                 }
             }
         }
@@ -1351,10 +1353,12 @@ class Filesystem extends AbstractAdapter
             }
         }
 
-        if ( !@touch($keyInfo['filespec'] . '.dat') ) {
-            $err = error_get_last();
-            throw new Exception\RuntimeException($err['message']);
-        }
+        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) {
+            $message = sprintf('Error touching cache item (in %s@%d): %s', $errfile, $errline, $errstr);
+            throw new Exception\RuntimeException($message, $errno);
+        }, E_WARNING);
+        touch($keyInfo['filespec'] . '.dat');
+        restore_error_handler();
     }
 
     /**
@@ -1426,19 +1430,19 @@ class Filesystem extends AbstractAdapter
                 $meta = $this->internalGetMetadata($key, $options);
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
-                if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
+                if (($mode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
                     if (!isset($meta['tags']) || count(array_diff($opts['tags'], $meta['tags'])) > 0) {
                         continue;
                     }
 
                 // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
-                } elseif( ($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS ) {
+                } elseif( ($mode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
                     if (isset($meta['tags']) && count(array_diff($opts['tags'], $meta['tags'])) != count($opts['tags'])) {
                         continue;
                     }
 
                 // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
-                } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
+                } elseif ( ($mode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
                     if (!isset($meta['tags']) || count(array_diff($opts['tags'], $meta['tags'])) == count($opts['tags'])) {
                         continue;
                     }
@@ -1586,7 +1590,12 @@ class Filesystem extends AbstractAdapter
         foreach ($glob as $subdir) {
             // ignore not empty directories
             // skip removing current directory if removing of sub-directory failed
-            $ret = $this->rmDir($subdir, $prefix) && @rmdir($subdir);
+            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) {
+                // ignore rmdir errors
+                return true;
+            }, E_WARNING);
+            $ret = $this->rmDir($subdir, $prefix) && rmdir($subdir);
+            restore_error_handler();
         }
         return $ret;
     }
@@ -1609,7 +1618,13 @@ class Filesystem extends AbstractAdapter
 
         $filespec = $this->getFileSpec($key, $ns);
 
-        if ( ($filemtime = @filemtime($filespec . '.dat')) === false ) {
+        set_error_handler(function($errno, $errstr = '') {
+            return true;
+        }, E_WARNING);
+        $filemtime = filemtime($filespec . '.dat');
+        restore_error_handler();
+
+        if ($filemtime === false) {
             return false;
         }
 
@@ -1673,10 +1688,14 @@ class Filesystem extends AbstractAdapter
             return false;
         }
 
-        $info = @unserialize($this->getFileContent($file));
+        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
+            $message = sprintf('Corrupted info file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
+            throw new Exception\RuntimeException($message, $errno);
+        }, E_WARNING);
+        $info = unserialize($this->getFileContent($file));
+        restore_error_handler();
         if (!is_array($info)) {
-           $err = error_get_last();
-           throw new Exception\RuntimeException("Corrupted info file '{$file}': {$err['message']}");
+           throw new Exception\RuntimeException("Corrupted info file '{$file}'");
         }
 
         return $info;
@@ -1693,23 +1712,54 @@ class Filesystem extends AbstractAdapter
     {
         // if file locking enabled -> file_get_contents can't be used
         if ($this->getOptions()->getFileLocking()) {
-            $fp = @fopen($file, 'rb');
+            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
+                $message = sprintf(
+                    'Error getting contents from file "%s" (in %s@%d): %s', 
+                    $file, 
+                    $errfile, 
+                    $errline, 
+                    $errstr
+                );
+                throw new Exception\RuntimeException($message, $errno);
+            }, E_WARNING);
+            $fp = fopen($file, 'rb');
+            restore_error_handler();
             if ($fp === false) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+                throw new Exception\RuntimeException(sprintf(
+                    'Unknown error getting contents from file "%s"', 
+                    $file
+                ));
             }
 
-            if (!flock($fp, \LOCK_SH)) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
+                $message = sprintf(
+                    'Error locking file "%s" (in %s@%d): %s', 
+                    $file, 
+                    $errfile, 
+                    $errline, 
+                    $errstr
+                );
+                throw new Exception\RuntimeException($message, $errno);
+            }, E_WARNING);
+            $res = flock($fp, \LOCK_SH);
+            restore_error_handler();
+            if (!$res) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Unknown error locking file "%s"', $file
+                ));
             }
 
-            $result = @stream_get_contents($fp);
+            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($fp) {
+                flock($fp, \LOCK_UN);
+                fclose($fp);
+                $message = sprintf('Error getting stream contents (in %s@%d): %s', $errfile, $errline, $errstr);
+                throw new Exception\RuntimeException($message, $errno);
+            }, E_WARNING);
+            $result = stream_get_contents($fp);
             if ($result === false) {
-                $lastErr = error_get_last();
-                @flock($fp, \LOCK_UN);
-                @fclose($fp);
-                throw new Exception\RuntimeException($lastErr['message']);
+                flock($fp, \LOCK_UN);
+                fclose($fp);
+                throw new Exception\RuntimeException('Unknown error getting stream contents');
             }
 
             flock($fp, \LOCK_UN);
@@ -1717,10 +1767,16 @@ class Filesystem extends AbstractAdapter
 
         // if file locking disabled -> file_get_contents can be used
         } else {
-            $result = @file_get_contents($file, false);
+            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
+                flock($fp, \LOCK_UN);
+                fclose($fp);
+                $message = sprintf('Error getting file contents for file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
+                throw new Exception\RuntimeException($message, $errno);
+            }, E_WARNING);
+            $result = file_get_contents($file, false);
+            restore_error_handler();
             if ($result === false) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+                throw new Exception\RuntimeException(sprintf('Unknown error getting file contents for file "%s"', $file));
             }
         }
 
@@ -1742,10 +1798,15 @@ class Filesystem extends AbstractAdapter
         $blocking = $locking ? $options->getFileBlocking() : false;
 
         if ($locking && !$blocking) {
-            $fp = @fopen($file, 'cb');
+            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
+                umask($oldUmask);
+                $message = sprintf('Error opening file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
+                throw new Exception\RuntimeException($message, $errno);
+            }, E_WARNING);
+            $fp = fopen($file, 'cb');
+            restore_error_handler();
             if (!$fp) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+                throw new Exception\RuntimeException(sprintf('Unknown error opening file "%s"', $file));
             }
 
             if(!flock($fp, \LOCK_EX | \LOCK_NB)) {
@@ -1772,10 +1833,14 @@ class Filesystem extends AbstractAdapter
                 $flags = $flags | \LOCK_EX;
             }
 
-            if ( @file_put_contents($file, $data, $flags) === false ) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) {
+                $message = sprintf('Error writing file (in %s@%d): %s', $errfile, $errline, $errstr);
+                throw new Exception\RuntimeException($message, $errno);
+            }, E_WARNING);
+            if ( file_put_contents($file, $data, $flags) === false ) {
+                throw new Exception\RuntimeException(sprintf('Failed to write cache file ("%s") with data "%s"', $file, json_encode($data)));
             }
+            restore_error_handler();
         }
 
         return true;
@@ -1790,11 +1855,17 @@ class Filesystem extends AbstractAdapter
      */
     protected function unlink($file) 
     {
-        if (!@unlink($file)) {
+        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
+            umask($oldUmask);
+            $message = sprintf('Error unlinking file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
+            throw new Exception\RuntimeException($message, $errno);
+        }, E_WARNING);
+        $res = unlink($file);
+        restore_error_handler();
+        if (!$res) {
             // only throw exception if file still exists after deleting
             if (file_exists($file)) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+                throw new Exception\RuntimeException(sprintf('Unknown error unlinking file "%s"; file still exists', $file));
             }
         }
     }

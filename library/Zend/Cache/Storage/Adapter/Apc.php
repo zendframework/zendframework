@@ -1386,6 +1386,7 @@ class Apc extends AbstractAdapter
                         ),
                         'maxTtl'             => 0,
                         'staticTtl'          => false,
+                        'tagging'            => false,
                         'ttlPrecision'       => 1,
                         'useRequestTime'     => (bool) ini_get('apc.use_request_time'),
                         'expiredRead'        => false,

@@ -20,8 +20,10 @@
  */
 
 namespace ZendTest\Db\Table\Table;
-use Zend\Db\Table;
-use Zend\Cache;
+
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Db\Table;
 
 /**
  * @category   Zend
@@ -1546,26 +1548,26 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
      */
     protected function _getCache()
     {
-        /**
-         * @see Zend_Cache
-         */
+        $cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'namespace' => 'Zend_Db_Table_TestCommon',
+                ),
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
 
-        $folder = __DIR__ . DIRECTORY_SEPARATOR . '../_files' . DIRECTORY_SEPARATOR . 'cachefiles';
+        $cache->clear(CacheAdapter::MATCH_ALL);
 
-        $frontendOptions = array(
-            'automatic_serialization' => true
-        );
-
-        $backendOptions  = array(
-            'cache_dir'                 => $folder,
-            'file_name_prefix'          => 'Zend_Db_Table_TestCommon'
-        );
-
-        $cacheFrontend = Cache\Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-
-        $cacheFrontend->clean(Cache\Cache::CLEANING_MODE_ALL);
-
-        return $cacheFrontend;
+        return $cache;
     }
 
     /**
@@ -1579,27 +1581,33 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
          * @see Zend_Cache
          */
 
-        $folder = __DIR__ . DIRECTORY_SEPARATOR . '../_files' . DIRECTORY_SEPARATOR . 'nofiles';
+        $folder = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'nofiles';
         if (!file_exists($folder)) {
             mkdir($folder, 0777);
         }
 
-        $frontendOptions = array(
-            'automatic_serialization' => true
-        );
+        $cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'namespace' => 'Zend_Db_Table_TestCommon',
+                    'cache_dir' => $folder,
+                ),
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
 
-        $backendOptions  = array(
-            'cache_dir'                 => $folder,
-            'file_name_prefix'          => 'Zend_Db_Table_TestCommon'
-        );
-
-        $cacheFrontend = Cache\Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-
-        $cacheFrontend->clean(Cache\Cache::CLEANING_MODE_ALL);
-
+        $cache->clear(CacheAdapter::MATCH_ALL);
         rmdir($folder);
 
-        return $cacheFrontend;
+        return $cache;
     }
 
     /**

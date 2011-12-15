@@ -679,7 +679,7 @@ class Paginator implements Countable, IteratorAggregate
 
         if (is_array($items) || $items instanceof Countable) {
             $itemCount = count($items);
-        } else { // $items is something like LimitIterator
+        } elseif($items instanceof Traversable) { // $items is something like LimitIterator
             $itemCount = iterator_count($items);
         }
 
@@ -812,9 +812,11 @@ class Paginator implements Countable, IteratorAggregate
             $cacheIds = self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array(
                 'tags' => array($this->_getCacheInternalId()),
             ));
-            foreach ($cacheIds as $id) {
-                if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
-                    $data[$page[1]] = self::$_cache->getItem($this->_getCacheId($page[1]));
+            if (is_array($cacheIds) || $cacheIds instanceof Traversable) {
+                foreach ($cacheIds as $id) {
+                    if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
+                        $data[$page[1]] = self::$_cache->getItem($this->_getCacheId($page[1]));
+                    }
                 }
             }
         }

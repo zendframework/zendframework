@@ -173,7 +173,7 @@ abstract class DateObject {
         if (isset(self::$_cache)) {
             $id = strtr('Zend_DateObject_mkTime_' . $this->_offset . '_' . $year.$month.$day.'_'.$hour.$minute.$second . '_'.(int)$gmt, '-','_');
             if ($result = self::$_cache->getItem($id)) {
-                return unserialize($result);
+                return $result;
             }
         }
 
@@ -261,9 +261,9 @@ abstract class DateObject {
 
         if (isset(self::$_cache)) {
           if (self::$_cacheTags) {
-            self::$_cache->setItem($id, serialize($date), array('tags' => array('Zend_Date')));
+            self::$_cache->setItem($id, $date, array('tags' => array('Zend_Date')));
           } else {
-                self::$_cache->setItem($id, serialize($date));
+                self::$_cache->setItem($id, $date);
           }
         }
 
@@ -327,7 +327,7 @@ abstract class DateObject {
         if (isset(self::$_cache)) {
             $idstamp = strtr('Zend_DateObject_date_' . $this->_offset . '_'. $timestamp . '_'.(int)$gmt, '-','_');
             if ($result2 = self::$_cache->getItem($idstamp)) {
-                $timestamp = unserialize($result2);
+                $timestamp = $result2;
                 $jump = true;
             }
         }
@@ -351,9 +351,9 @@ abstract class DateObject {
 
             if (isset(self::$_cache)) {
               if (self::$_cacheTags) {
-                self::$_cache->setItem($idstamp, serialize($timestamp), array('tags' => array('Zend_Date')));
+                self::$_cache->setItem($idstamp, $timestamp, array('tags' => array('Zend_Date')));
               } else {
-                    self::$_cache->setItem($idstamp, serialize($timestamp));
+                    self::$_cache->setItem($idstamp, $timestamp);
               }
             }
         }
@@ -685,7 +685,7 @@ abstract class DateObject {
         if (isset(self::$_cache)) {
             $id = strtr('Zend_DateObject_getDateParts_' . $timestamp.'_'.(int)$fast, '-','_');
             if ($result = self::$_cache->getItem($id)) {
-                return unserialize($result);
+                return $result;
             }
         }
 
@@ -843,9 +843,9 @@ abstract class DateObject {
 
         if (isset(self::$_cache)) {
           if (self::$_cacheTags) {
-            self::$_cache->setItem($id, serialize($array), array('tags' => array('Zend_Date')));
+            self::$_cache->setItem($id, $array, array('tags' => array('Zend_Date')));
           } else {
-                self::$_cache->setItem($id, serialize($array));
+                self::$_cache->setItem($id, $array);
           }
         }
 

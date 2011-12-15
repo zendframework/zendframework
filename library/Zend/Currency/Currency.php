@@ -451,7 +451,7 @@ class Currency
             }
         }
 
-        $data = Zend_Locale_Data::getContent($this->_options['locale'], 'currencytoregion', $region);
+        $data = Cldr::getContent($this->_options['locale'], 'currencytoregion', $region);
 
         $result = explode(' ', $data);
         return $result;

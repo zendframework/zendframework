@@ -21,7 +21,8 @@
 
 namespace ZendTest\Date;
 
-use Zend\Cache\Cache,
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Date\Date,
     Zend\Date\Cities,
     Zend\Locale\Locale,
@@ -66,9 +67,22 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'ttl' => 120,
+                ),
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
         $this->_orig = Date::setOptions();
 
         Date::setOptions(array('cache' => $this->_cache));
@@ -80,7 +94,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Date::setOptions($this->_orig);
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         date_default_timezone_set($this->_originaltimezone);
     }
 
@@ -5234,9 +5248,22 @@ class DateTest extends \PHPUnit_Framework_TestCase
             // success
         }
 
-        $cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
+        $cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'ttl' => 120,
+                ),
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
         Date::setOptions(array('cache' => $cache));
     }
 

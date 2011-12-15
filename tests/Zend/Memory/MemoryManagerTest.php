@@ -23,9 +23,11 @@
  * @namespace
  */
 namespace ZendTest\Memory;
-use Zend\Cache\Cache;
-use Zend\Memory;
-use Zend\Memory\Container;
+
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Memory,
+    Zend\Memory\Container;
 
 
 /**
@@ -41,20 +43,33 @@ class MemoryManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Cache object
      *
-     * @var \Zend\Cache\Frontend
+     * @var CacheAdapter
      */
     private $_cache = null;
 
     public function setUp()
     {
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 1, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/_files/'));
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'ttl' => 1,
+                ),
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
     }
 
     public function tearDown()
     {
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         $this->_cache = null;
     }
 

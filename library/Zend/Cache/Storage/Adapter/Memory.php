@@ -1281,6 +1281,7 @@ class Memory extends AbstractAdapter
                     ),
                     'maxTtl'             => PHP_INT_MAX,
                     'staticTtl'          => false,
+                    'tagging'            => true,
                     'ttlPrecision'       => 0.05,
                     'expiredRead'        => true,
                     'maxKeyLength'       => 0,

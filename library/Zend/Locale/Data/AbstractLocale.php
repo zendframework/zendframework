@@ -80,6 +80,10 @@ abstract class AbstractLocale
     public static function setCache(CacheAdapter $cache)
     {
         self::$_cache = $cache;
+
+        foreach ($cache->getPlugins() as $plugin) {
+        }
+
         self::_getTagSupportForCache();
     }
 
@@ -171,6 +175,13 @@ abstract class AbstractLocale
             self::$_cacheTags = false;
             return false;
         }
+
+        $capabilities = self::$_cache->getCapabilities();
+        if (!$capabilities->getTagging()) {
+            self::$_cacheTags = false;
+            return false;
+        }
+
         self::$_cacheTags = true;
         return true;
     }

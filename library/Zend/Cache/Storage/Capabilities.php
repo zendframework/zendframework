@@ -35,6 +35,13 @@ use stdClass,
 class Capabilities
 {
     /**
+     * The event manager
+     *
+     * @var null|EventManager
+     */
+    protected $eventManager;
+
+    /**
      * A marker to set/change capabilities
      *
      * @var stdClass
@@ -49,11 +56,49 @@ class Capabilities
     protected $baseCapabilities;
 
     /**
-     * The event manager
-     *
-     * @var null|EventManager
+     * Clear all namespaces
      */
-    protected $eventManager;
+    protected $_clearAllNamespaces;
+
+    /**
+     * Clear by namespace
+     */
+    protected $_clearByNamespace;
+
+    /**
+     * Expire read
+     */
+    protected $_expiredRead;
+
+    /**
+     * Iterable
+     */
+    protected $_iterable;
+
+    /**
+     * Max key length
+     */
+    protected $_maxKeyLength;
+
+    /**
+     * Max ttl
+     */
+    protected $_maxTtl;
+
+    /**
+     * Namespace is prefix
+     */
+    protected $_namespaceIsPrefix;
+
+    /**
+     * Namespace separator
+     */
+    protected $_namespaceSeparator;
+
+    /**
+     * Static ttl
+     */
+    protected $_staticTtl;
 
    /**
     * Capability property
@@ -71,14 +116,11 @@ class Capabilities
     protected $_supportedMetadata;
 
     /**
-     * Max ttl
+     * Supports tagging? 
+     * 
+     * @var bool
      */
-    protected $_maxTtl;
-
-    /**
-     * Static ttl
-     */
-    protected $_staticTtl;
+    protected $_tagging;
 
     /**
      * Ttl precision
@@ -89,41 +131,6 @@ class Capabilities
      * Use request time
      */
     protected $_useRequestTime;
-
-    /**
-     * Expire read
-     */
-    protected $_expiredRead;
-
-    /**
-     * Max key length
-     */
-    protected $_maxKeyLength;
-
-    /**
-     * Namespace is prefix
-     */
-    protected $_namespaceIsPrefix;
-
-    /**
-     * Namespace separator
-     */
-    protected $_namespaceSeparator;
-
-    /**
-     * Iterable
-     */
-    protected $_iterable;
-
-    /**
-     * Clear all namespaces
-     */
-    protected $_clearAllNamespaces;
-
-    /**
-     * Clear by namespace
-     */
-    protected $_clearByNamespace;
 
     /**
      * Constructor
@@ -531,6 +538,27 @@ class Capabilities
     public function setClearByNamespace(stdClass $marker, $flag)
     {
         return $this->setCapability($marker, 'clearByNamespace', (bool)$flag);
+    }
+
+    /**
+     * Set value for tagging
+     *
+     * @param  mixed tagging
+     * @return $this
+     */
+    public function setTagging(stdClass $marker, $tagging)
+    {
+        return $this->setCapability($marker, 'tagging', (bool) $tagging);
+    }
+    
+    /**
+     * Get value for tagging
+     *
+     * @return mixed
+     */
+    public function getTagging()
+    {
+        return $this->getCapability('tagging', false);
     }
 
     /**

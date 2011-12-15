@@ -300,7 +300,7 @@ class Cldr extends AbstractLocale
         $val = urlencode($val);
         $id = strtr('Zend_LocaleL_' . $locale . '_' . $path . '_' . $val, array('-' => '_', '%' => '_', '+' => '_'));
         if (!self::$_cacheDisabled && ($result = self::$_cache->getItem($id))) {
-            return unserialize($result);
+            return $result;
         }
 
         $temp = array();
@@ -863,9 +863,9 @@ class Cldr extends AbstractLocale
 
         if (isset(self::$_cache)) {
           if (self::$_cacheTags) {
-                self::$_cache->setItem($id, serialize($temp), array('tags' => array('Zend_Locale')));
+                self::$_cache->setItem($id, $temp, array('tags' => array('Zend_Locale')));
           } else {
-                self::$_cache->setItem($id, serialize($temp));
+                self::$_cache->setItem($id, $temp);
           }
         }
 
@@ -908,7 +908,7 @@ class Cldr extends AbstractLocale
         $val = urlencode($val);
         $id = strtr('Zend_LocaleC_' . $locale . '_' . $path . '_' . $val, array('-' => '_', '%' => '_', '+' => '_'));
         if (!self::$_cacheDisabled && ($result = self::$_cache->getItem($id))) {
-            return unserialize($result);
+            return $result;
         }
 
         switch(strtolower($path)) {
@@ -1365,9 +1365,9 @@ class Cldr extends AbstractLocale
         }
 
         if (self::$_cacheTags) {
-            self::$_cache->setItem($id, serialize($temp), array('tags' => array('Zend_Locale')));
+            self::$_cache->setItem($id, $temp, array('tags' => array('Zend_Locale')));
       } else {
-            self::$_cache->setItem($id, serialize($temp));
+            self::$_cache->setItem($id, $temp);
       }
 
         return $temp;
@@ -1641,11 +1641,10 @@ class Cldr extends AbstractLocale
         if (self::getCache() !== null && !self::isCacheDisabled()) {
             if ($result = self::getCache()->getItem($cacheId)) {
                 if ($detail !== null) {
-                    $result = unserialize($result);
                     return $result[$detail];
                 }
 
-                return unserialize($result);
+                return $result;
             }
         }
 
@@ -1654,9 +1653,9 @@ class Cldr extends AbstractLocale
         ksort(self::$_result);
 
         if (self::hasCacheTagSupport()) {
-            self::getCache()->setItem($cacheId, serialize(self::$_result), array('tags' => array('Zend_Locale')));
+            self::getCache()->setItem($cacheId, self::$_result, array('tags' => array('Zend_Locale')));
         } else {
-            self::getCache()->setItem($cacheId, serialize(self::$_result));
+            self::getCache()->setItem($cacheId, self::$_result);
         }
 
         if ($detail !== null) {

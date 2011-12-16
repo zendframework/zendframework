@@ -1267,4 +1267,27 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($rs);
     }
 
+    public function testTagsAreUsedWhenCaching()
+    {
+        $capabilities = $this->_storage->getCapabilities();
+        if (!$capabilities->getTagging()) {
+            $this->markTestSkipped("Tags are not supported by this adapter");
+        }
+
+        // Ensure we don't have expired items in the cache for this test
+        $this->_options->setTtl(60);
+        $this->_storage->setItem('someitem', 'somevalue', array('tags' => array('foo')));
+        $this->assertTrue($this->_storage->find(Cache\Storage\Adapter::MATCH_TAGS_OR, array('tags' => array('foo'))));
+        $actualItems = array();
+        while (($item = $this->_storage->fetch()) !== false) {
+            // check $item
+            $this->assertArrayHasKey('key', $item);
+            $this->assertArrayHasKey('value', $item);
+
+            $actualItems[ $item['key'] ] = $item['value'];
+        }
+        $this->assertEquals(1, count($actualItems));
+        $this->assertArrayHasKey('someitem', $actualItems);
+        $this->assertEquals('somevalue', $actualItems['someitem']);
+    }
 }

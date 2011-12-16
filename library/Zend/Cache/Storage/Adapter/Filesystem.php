@@ -898,10 +898,10 @@ class Filesystem extends AbstractAdapter
 
             try {
                 $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-                $find = $options['cache_dir']
-                    . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options['dir_level'])
-                    . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
-                $glob = new GlobIterator($find);
+                $find   = $options['cache_dir']
+                        . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $options['dir_level'])
+                        . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
+                $glob   = new GlobIterator($find);
 
                 $this->stmtActive  = true;
                 $this->stmtGlob    = $glob;
@@ -1179,7 +1179,11 @@ class Filesystem extends AbstractAdapter
         }
 
         if (isset($options['tags']) && $options['tags']) {
-            $info['tags'] = array_values(array_unique($options['tags']));
+            $tags = $options['tags'];
+            if (!is_array($tags)) {
+                $tags = array($tags);
+            }
+            $info['tags'] = array_values(array_unique($tags));
         }
 
         try {
@@ -1195,7 +1199,7 @@ class Filesystem extends AbstractAdapter
                 // -> only return false
                 try {
                     $ret = $this->putFileContent($filespec . '.ifo', serialize($info));
-                } catch (\Exception $e) {
+                } catch (Exception\RuntimeException $e) {
                     $ret = false;
                 }
             }
@@ -1750,12 +1754,15 @@ class Filesystem extends AbstractAdapter
             }
 
             set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($fp) {
-                flock($fp, \LOCK_UN);
-                fclose($fp);
+                if (is_resource($fp)) {
+                    flock($fp, \LOCK_UN);
+                    fclose($fp);
+                }
                 $message = sprintf('Error getting stream contents (in %s@%d): %s', $errfile, $errline, $errstr);
                 throw new Exception\RuntimeException($message, $errno);
             }, E_WARNING);
             $result = stream_get_contents($fp);
+            restore_error_handler();
             if ($result === false) {
                 flock($fp, \LOCK_UN);
                 fclose($fp);
@@ -1816,13 +1823,11 @@ class Filesystem extends AbstractAdapter
             }
 
             if (!ftruncate($fp, 0)) {
-                $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+                throw new Exception\RuntimeException('Unable to truncate cache file');
             }
 
             if (!fwrite($fp, $data)) {
-                 $lastErr = error_get_last();
-                throw new Exception\RuntimeException($lastErr['message']);
+                throw new Exception\RuntimeException('Unable to write cache file');
             }
 
             flock($fp, \LOCK_UN);
@@ -1837,10 +1842,11 @@ class Filesystem extends AbstractAdapter
                 $message = sprintf('Error writing file (in %s@%d): %s', $errfile, $errline, $errstr);
                 throw new Exception\RuntimeException($message, $errno);
             }, E_WARNING);
-            if ( file_put_contents($file, $data, $flags) === false ) {
+            $result = file_put_contents($file, $data, $flags);
+            restore_error_handler();
+            if ($result === false ) {
                 throw new Exception\RuntimeException(sprintf('Failed to write cache file ("%s") with data "%s"', $file, json_encode($data)));
             }
-            restore_error_handler();
         }
 
         return true;
@@ -1855,8 +1861,12 @@ class Filesystem extends AbstractAdapter
      */
     protected function unlink($file) 
     {
+        // If file does not exist, nothing to do
+        if (!file_exists($file)) {
+            return;
+        }
+
         set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-            umask($oldUmask);
             $message = sprintf('Error unlinking file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
             throw new Exception\RuntimeException($message, $errno);
         }, E_WARNING);

@@ -43,5 +43,4 @@ class MemoryTest extends CommonAdapterTest
 
         parent::setUp();
     }
-
 }

@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
@@ -62,7 +61,7 @@ class FilesystemTest extends CommonAdapterTest
 
     public function tearDown()
     {
-        $this->_removeRecursive($this->_tmpCacheDir);
+        // $this->_removeRecursive($this->_tmpCacheDir);
 
         parent::tearDown();
     }

@@ -343,7 +343,7 @@ abstract class AbstractAdapter implements Adapter
      */
     public function getPlugins()
     {
-        return $this->pluginRegistry;
+        return $this->getPluginRegistry();
     }
 
     /* reading */

@@ -218,6 +218,12 @@ class FirePhp implements Wildfire\Plugin
     }
 
     /**
+     * Disable clone
+     */
+    private function __clone()
+    {}
+
+    /**
      * Destroys the singleton instance
      *
      * Primarily used for testing.

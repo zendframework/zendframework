@@ -97,7 +97,7 @@ class Firebug extends Profiler
                 $this->_message->setHeader(array('Time','Event','Parameters'));
                 $this->_message->setDestroy(true);
                 $this->_message->setOption('includeLineNumbers', false);
-                \Zend\Wildfire\Plugin\FirePhp\FirePhp::getInstance()->send($this->_message);
+                \Zend\Wildfire\Plugin\FirePhp::getInstance()->send($this->_message);
             }
 
         } else {

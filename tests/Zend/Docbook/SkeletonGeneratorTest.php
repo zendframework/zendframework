@@ -7,13 +7,13 @@ use DOMDocument,
     PHPUnit_Framework_TestCase as TestCase,
     Zend\Docbook\ClassParser,
     Zend\Docbook\SkeletonGenerator,
-    Zend\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection;
 
 class SkeletonGeneratorTest extends TestCase
 {
     public function setUp()
     {
-        $this->class     = new ReflectionClass(new TestAsset\ParsedClass());
+        $this->class     = new ClassReflection(new TestAsset\ParsedClass());
         $this->parser    = new ClassParser($this->class);
         $this->generator = new SkeletonGenerator($this->parser);
     }

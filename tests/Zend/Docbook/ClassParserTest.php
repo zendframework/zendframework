@@ -4,13 +4,13 @@ namespace ZendTest\Docbook;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Docbook\ClassParser,
-    Zend\Reflection\ReflectionClass;
+    Zend\Code\Reflection\ClassReflection;
 
 class ClassParserTest extends TestCase
 {
     public function setUp()
     {
-        $this->class  = new ReflectionClass(new TestAsset\ParsedClass());
+        $this->class  = new ClassReflection(new TestAsset\ParsedClass());
         $this->parser = new ClassParser($this->class);
     }
 

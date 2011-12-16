@@ -122,15 +122,24 @@ class DerivedClassScanner extends ClassScanner
         return $properties;
     }
 
+    public function getMethodNames()
+    {
+        $methods = $this->classScanner->getMethodNames();
+        foreach ($this->parentClassScanners as $pClassScanner) {
+            $methods = array_merge($methods, $pClassScanner->getMethodNames());
+        }
+        return $methods;
+    }
+
     /**
      * @param bool $returnScannerMethod
      * @return MethodScanner[]
      */
-    public function getMethods($returnScannerMethod = false)
+    public function getMethods()
     {
-        $methods = $this->classScanner->getMethods($returnScannerMethod);
+        $methods = $this->classScanner->getMethods();
         foreach ($this->parentClassScanners as $pClassScanner) {
-            $methods = array_merge($methods, $pClassScanner->getMethods($returnScannerMethod));
+            $methods = array_merge($methods, $pClassScanner->getMethods());
         }
         return $methods;
     }

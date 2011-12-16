@@ -26,7 +26,7 @@ namespace Zend\Code\Reflection;
 use ReflectionMethod as PhpReflectionMethod,
     Zend\Code\Reflection,
     Zend\Code\Annotation,
-    Zend\Code\Scanner\FileScanner,
+    Zend\Code\Scanner\CachingFileScanner,
     Zend\Code\Scanner\AnnotationScanner;
 
 /**
@@ -74,8 +74,8 @@ class MethodReflection extends PhpReflectionMethod implements Reflection
         }
 
         if (!$this->annotations) {
-            $fileScanner = new FileScanner($this->getFileName());
-            $nameInformation = $fileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
+            $cachingFileScanner = new CachingFileScanner($this->getFileName());
+            $nameInformation = $cachingFileScanner->getClassNameInformation($this->getDeclaringClass()->getName());
 
             $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
         }

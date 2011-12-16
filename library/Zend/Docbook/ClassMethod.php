@@ -3,8 +3,7 @@
 namespace Zend\Docbook;
 
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Code\Reflection\MethodReflection as ReflectionMethod,
-    Zend\Code\Scanner\Util as ScannerUtil;
+    Zend\Code\Reflection\MethodReflection;
 
 class ClassMethod
 {
@@ -64,7 +63,7 @@ class ClassMethod
      * @param  ReflectionMethod $reflection 
      * @return void
      */
-    public function __construct(ReflectionMethod $reflection)
+    public function __construct(MethodReflection $reflection)
     {
         $this->reflection = $reflection;
     }
@@ -114,7 +113,11 @@ class ClassMethod
      */
     public function getShortDescription()
     {
-        return $this->reflection->getDocblock()->getShortDescription();
+        $rDocblock = $this->reflection->getDocblock();
+        if ($rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+            return $rDocblock->getShortDescription();
+        }
+        return '';
     }
 
     /**
@@ -124,7 +127,11 @@ class ClassMethod
      */
     public function getLongDescription()
     {
-        return $this->reflection->getDocblock()->getLongDescription();
+        $rDocblock = $this->reflection->getDocblock();
+        if ($rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+            return $rDocblock->getLongDescription();
+        }
+        return '';
     }
 
     /**
@@ -134,7 +141,12 @@ class ClassMethod
      */
     public function getReturnType()
     {
-        $return = $this->reflection->getDocblock()->getTag('return');
+        $rDocblock = $this->reflection->getDocblock();
+        if (!$rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+            return 'void';
+        }
+
+        $return = $rDocblock->getTag('return');
 
         if (!$return) {
             return 'void';
@@ -152,7 +164,7 @@ class ClassMethod
     {
         $params = array();
 
-        $reflectionParams = $this->getParameterAnnotations();
+        $reflectionParams = $this->getParameterTags();
 
         foreach ($this->reflection->getParameters() as $index => $param) {
             $types = '';
@@ -190,89 +202,20 @@ class ClassMethod
         $values = explode('|', trim($value));
         array_walk($values, 'trim');
 
+        $nameInformation = new \Zend\Code\NameInformation(
+            $this->getNamespace(),
+            $this->getUses()
+        );
+
         foreach ($values as $index => $value) {
             // Is it an internal type?
             if (in_array(strtolower($value), $this->internalTypes)) {
                 continue;
             }
-
-            // Does it match the class name?
-            if ($value == $this->getClass()) {
-                $values[$index] = $this->getNamespace() . '\\' . $value;
-                continue;
-            }
-
-            $values[$index] = $this->resolveClass($value);
+            $values[$index] = $nameInformation->resolveName($value);
         }
 
         return implode('|', $values);
-    }
-
-    /**
-     * Attempt to resolve a class or namespace based on imports
-     * 
-     * @param  string $class 
-     * @return string String namespace/classname
-     */
-    protected function resolveClass($class)
-    {
-        if ('\\' == substr($class, 0, 1)) {
-            return substr($class, 1);
-        }
-
-        foreach ($this->getUses() as $import) {
-            // check for an "as". 
-            if (isset($import['as'])) {
-                $as = $import['as'];
-
-                // If it matches $class exactly, use the "use" value provided
-                if ($as == $class) {
-                    return $import['use'];
-                }
-
-                // If the first portion of $class matches, then resolve with 
-                // "use\\(classname - as)"
-                $initialSegment = substr($class, 0, (strlen($as) + 1));
-                if ($as . '\\' == $initialSegment) {
-                    return $import['use'] . '\\' . substr($class, (strlen($as) + 1));
-                }
-
-                // Otherwise, we know this is not a match
-                continue;
-            }
-
-            // get final segment of namespace provided in "use"
-            $use = $import['use'];
-            if (false === strstr($use, '\\')) {
-                $finalSegment = $use;
-            } else {
-                $finalSegment = substr($use, strrpos($use, '\\') + 1);
-            }
-            // if class === final segment, return full "use"
-            if ($class == $finalSegment) {
-                return $use;
-            }
-
-            // if initial segment of class === final segment, return use + (class - initial segment)
-            if (strstr($class, '\\')) {
-                $initialSegment = substr($class, 0, strpos($class, '\\'));
-                if ($finalSegment == $initialSegment) {
-                    return $use . '\\' . substr($class, strpos($class, '\\') + 1);
-                }
-            }
-
-            // Did not match... move to next
-        }
-
-        // check to see if a class by this name exists in the current namespace
-        // if so, resolve to "namespace\\classname"
-        $resolved = $this->getNamespace() . '\\' . $class;
-        if (class_exists($resolved)) {
-            return $resolved;
-        }
-
-        // Did not resolve; consider it fully resolved
-        return $class;
     }
 
     /**
@@ -303,14 +246,8 @@ class ClassMethod
         }
 
         $r = $this->reflection->getDeclaringClass();
-
-        $class     = $r->getName();
-        $namespace = $r->getNamespaceName();
-
-        $class = substr($class, strlen($namespace) + 1);
-
-        $this->class     = $class;
-        $this->namespace = $namespace;
+        $this->class     = $r->getShortName();
+        $this->namespace = $r->getNamespaceName();
 
         return $this->class;
     }
@@ -339,14 +276,18 @@ class ClassMethod
      * 
      * @return array
      */
-    protected function getParameterAnnotations()
+    protected function getParameterTags()
     {
         if (null !== $this->parameterAnnotations) {
             return $this->parameterAnnotations;
         }
 
         $rDocblock = $this->reflection->getDocblock();
-        $params    = $rDocblock->getTags('param');
+        if ($rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+            $params    = $rDocblock->getTags('param');
+        } else {
+            $params = array();
+        }
 
         $this->parameterAnnotations = $params;
         return $this->parameterAnnotations;

@@ -15,12 +15,16 @@ class MethodScanner implements Scanner
     protected $scannerClass = null;
     protected $class        = null;
     protected $name         = null;
+    protected $lineStart    = null;
+    protected $lineEnd      = null;
     protected $isFinal      = false;
     protected $isAbstract   = false;
     protected $isPublic     = true;
     protected $isProtected  = false;
     protected $isPrivate    = false;
     protected $isStatic     = false;
+
+    protected $body         = '';
 
     protected $tokens       = array();
     protected $nameInformation = null;
@@ -51,6 +55,18 @@ class MethodScanner implements Scanner
     {
         $this->scan();
         return $this->name;
+    }
+
+    public function getLineStart()
+    {
+        $this->scan();
+        return $this->lineStart;
+    }
+
+    public function getLineEnd()
+    {
+        $this->scan();
+        return $this->lineEnd;
     }
 
     public function getDocComment()
@@ -165,6 +181,12 @@ class MethodScanner implements Scanner
         return $p;
     }
 
+    public function getBody()
+    {
+        $this->scan();
+        return $this->body;
+    }
+
     public static function export()
     {
         // @todo
@@ -205,6 +227,7 @@ class MethodScanner implements Scanner
          */
 
         $MACRO_TOKEN_ADVANCE = function() use (&$tokens, &$tokenIndex, &$token, &$tokenType, &$tokenContent, &$tokenLine) {
+            static $lastTokenArray = null;
             $tokenIndex = ($tokenIndex === null) ? 0 : $tokenIndex+1;
             if (!isset($tokens[$tokenIndex])) {
                 $token        = false;
@@ -217,6 +240,7 @@ class MethodScanner implements Scanner
             if (is_string($token)) {
                 $tokenType = null;
                 $tokenContent = $token;
+                $tokenLine = $tokenLine + substr_count($lastTokenArray[1], "\n"); // adjust token line by last known newline count
             } else {
                 list($tokenType, $tokenContent, $tokenLine) = $token;
             }
@@ -249,38 +273,42 @@ class MethodScanner implements Scanner
 
         SCANNER_TOP:
 
+
+            $this->lineStart = ($this->lineStart) ?: $tokenLine;
+
             switch ($tokenType) {
                 case T_DOC_COMMENT:
+                    $this->lineStart = null;
                     if ($this->docComment === null && $this->name === null) {
                         $this->docComment = $tokenContent;
                     }
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case T_FINAL:
                     $this->isFinal = true;
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case T_ABSTRACT:
                     $this->isAbstract = true;
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case T_PUBLIC:
                     // use defaults
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case T_PROTECTED:
                     $this->isProtected = true;
                     $this->isPublic = false;
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case T_PRIVATE:
                     $this->isPrivate = true;
                     $this->isPublic = false;
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case T_STATIC:
                     $this->isStatic = true;
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case T_VARIABLE:
                 case T_STRING:
@@ -298,7 +326,7 @@ class MethodScanner implements Scanner
                         }
                     }
 
-                    goto SCANNER_CONTINUE;
+                    goto SCANNER_CONTINUE_SIGNATURE;
 
                 case null:
 
@@ -307,33 +335,49 @@ class MethodScanner implements Scanner
                             if (!isset($infos[$infoIndex])) {
                                 $MACRO_INFO_START();
                             }
-                            goto SCANNER_CONTINUE;
+                            goto SCANNER_CONTINUE_SIGNATURE;
                         case '(':
                             $parenCount++;
-                            goto SCANNER_CONTINUE;
+                            goto SCANNER_CONTINUE_SIGNATURE;
                         case ')':
                             $parenCount--;
                             if ($parenCount === 0) {
                                 if ($infos) {
                                     $MACRO_INFO_ADVANCE();
                                 }
-                                goto SCANNER_END;
+                                $context = 'body';
                             }
-                            goto SCANNER_CONTINUE;
+                            goto SCANNER_CONTINUE_BODY;
                         case ',':
                             if ($parenCount === 1) {
                                 $MACRO_INFO_ADVANCE();
                             }
-                            goto SCANNER_CONTINUE;
+                            goto SCANNER_CONTINUE_SIGNATURE;
                     }
             }
 
-        SCANNER_CONTINUE:
+        SCANNER_CONTINUE_SIGNATURE:
 
             if ($MACRO_TOKEN_ADVANCE() === false) {
                 goto SCANNER_END;
             }
             goto SCANNER_TOP;
+
+        SCANNER_CONTINUE_BODY:
+
+            $braceCount = 0;
+            while ($MACRO_TOKEN_ADVANCE() !== false) {
+                if ($tokenContent == '}') {
+                    $braceCount--;
+                }
+                if ($braceCount > 0) {
+                    $this->body .= $tokenContent;
+                }
+                if ($tokenContent == '{') {
+                    $braceCount++;
+                }
+                $this->lineEnd = $tokenLine;
+            }
 
         SCANNER_END:
 

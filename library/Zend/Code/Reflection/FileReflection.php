@@ -23,7 +23,9 @@
  */
 namespace Zend\Code\Reflection;
 
-use Zend\Code\Reflection;
+use Zend\Code\Reflection,
+    Zend\Code\NameInformation,
+    Zend\Code\Scanner\CachingFileScanner;
 
 /**
  * @uses       Reflector
@@ -61,7 +63,7 @@ class FileReflection implements Reflection
     /**
      * @var string
      */
-    protected $namespace       = null;
+    protected $namespaces      = array();
 
     /**
      * @var string[]
@@ -178,6 +180,11 @@ class FileReflection implements Reflection
         return $instance;
     }
 
+    public function getNamespaces()
+    {
+        return $this->namespaces;
+    }
+
     /**
      * getNamespace()
      *
@@ -185,7 +192,10 @@ class FileReflection implements Reflection
      */
     public function getNamespace()
     {
-        return $this->namespace;
+        if (count($this->namespaces) > 0) {
+            return $this->namespaces[0];
+        }
+        return null;
     }
 
     /**
@@ -289,11 +299,11 @@ class FileReflection implements Reflection
      */
     protected function reflect()
     {
-        $scanner = new \Zend\Code\Scanner\FileScanner($this->filePath);
+        $scanner = new CachingFileScanner($this->filePath);
         $this->docComment = $scanner->getDocComment();
         $this->requiredFiles = $scanner->getIncludes();
-        $this->classes = $scanner->getClasses();
-        $this->namespace = $scanner->getNamespaces();
+        $this->classes = $scanner->getClassNames();
+        $this->namespaces = $scanner->getNamespaces();
         $this->uses = $scanner->getUses();
     }
 

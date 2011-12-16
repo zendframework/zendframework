@@ -9,6 +9,10 @@ class ArrayDefinition implements Definition
     
     public function __construct(Array $dataArray)
     {
+        foreach ($dataArray as $class => $value) {
+            // force lower names
+            $dataArray[$class] = array_change_key_case($dataArray[$class], CASE_LOWER);
+        }
         $this->dataArray = $dataArray;
     }
     

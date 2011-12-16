@@ -4,12 +4,12 @@ namespace Zend\Docbook;
 
 use ReflectionMethod,
     Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Code\Reflection\ClassReflection as ReflectionClass;
+    Zend\Code\Reflection\ClassReflection;
 
 class ClassParser
 {
     /**
-     * @var ReflectionClass
+     * @var ClassReflection
      */
     protected $reflection;
 
@@ -29,7 +29,7 @@ class ClassParser
      * @param  ReflectionClass $class 
      * @return void
      */
-    public function __construct(ReflectionClass $class)
+    public function __construct(ClassReflection $class)
     {
         $this->reflection = $class;
     }

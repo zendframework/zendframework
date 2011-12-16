@@ -31,8 +31,8 @@ namespace Zend\Locale\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class MathException 
-	extends \LogicException
-	implements \Zend\Locale\Exception
+    extends \LogicException
+    implements \Zend\Locale\Exception
 {
     protected $op1 = null;
     protected $op2 = null;

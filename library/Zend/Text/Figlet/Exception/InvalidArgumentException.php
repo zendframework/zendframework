@@ -34,7 +34,7 @@ namespace Zend\Text\Figlet\Exception;
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException 
-	extends \InvalidArgumentException 
-	implements \Zend\Text\Figlet\Exception
+    extends \InvalidArgumentException
+    implements \Zend\Text\Figlet\Exception
 {
 }

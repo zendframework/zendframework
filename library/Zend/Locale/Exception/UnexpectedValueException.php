@@ -2,6 +2,6 @@
 namespace Zend\Locale\Exception;
 
 class UnexpectedValueException
-	extends \UnexpectedValueException
-	implements \Zend\Locale\Exception
+    extends \UnexpectedValueException
+    implements \Zend\Locale\Exception
 {}

@@ -34,6 +34,6 @@ namespace Zend\Log\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class InvalidArgumentException
-	extends \InvalidArgumentException
-	implements \Zend\Log\Exception
+    extends \InvalidArgumentException
+    implements \Zend\Log\Exception
 {}

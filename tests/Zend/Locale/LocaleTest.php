@@ -21,11 +21,11 @@
 
 namespace ZendTest\Locale;
 
-use \Zend\Locale\Locale,
-    \Zend\Locale\Exception\InvalidArgumentException,
-    \Zend\Locale\Exception\UnexpectedValueException,
-    \Zend\Cache\Cache,
-    \Zend\Cache\Frontend\Core as CacheCore;
+use Zend\Locale\Locale,
+    Zend\Locale\Exception\InvalidArgumentException,
+    Zend\Locale\Exception\UnexpectedValueException,
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter;
 
 /**
  * @category   Zend
@@ -42,11 +42,29 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->_cacheDir = sys_get_temp_dir() . '/zend_locale';
+        $this->_removeRecursive($this->_cacheDir);
+        mkdir($this->_cacheDir);
+
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'Filesystem',
+                'options' => array(
+                    'ttl'       => 120,
+                    'cache_dir' => $this->_cacheDir,
+                )
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
         LocaleTestHelper::resetObject();
         LocaleTestHelper::setCache($this->_cache);
         putenv("HTTP_ACCEPT_LANGUAGE=,de,en-UK-US;q=0.5,fr_FR;q=0.2");
@@ -54,7 +72,10 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        if ($this->_cache instanceof CacheAdapter) {
+            $this->_cache->clear(CacheAdapter::MATCH_ALL);
+            $this->_removeRecursive($this->_cacheDir);
+        }
         if (is_string($this->_locale) && strpos($this->_locale, ';')) {
             $locales = array();
             foreach (explode(';', $this->_locale) as $l) {
@@ -65,6 +86,27 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             return;
         }
         setlocale(LC_ALL, $this->_locale);
+    }
+
+    protected function _removeRecursive($dir)
+    {
+        if (file_exists($dir)) {
+            $dirIt = new \DirectoryIterator($dir);
+            foreach ($dirIt as $entry) {
+                $fname = $entry->getFilename();
+                if ($fname == '.' || $fname == '..') {
+                    continue;
+                }
+
+                if ($entry->isFile()) {
+                    unlink($entry->getPathname());
+                } else {
+                    $this->_removeRecursive($entry->getPathname());
+                }
+            }
+
+            rmdir($dir);
+        }
     }
 
     /**
@@ -677,7 +719,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     public function testCaching()
     {
         $cache = LocaleTestHelper::getCache();
-        $this->assertTrue($cache instanceof CacheCore);
+        $this->assertTrue($cache instanceof CacheAdapter);
         $this->assertTrue(LocaleTestHelper::hasCache());
 
         LocaleTestHelper::clearCache();

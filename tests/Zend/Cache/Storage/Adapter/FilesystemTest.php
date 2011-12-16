@@ -61,7 +61,7 @@ class FilesystemTest extends CommonAdapterTest
 
     public function tearDown()
     {
-        // $this->_removeRecursive($this->_tmpCacheDir);
+        $this->_removeRecursive($this->_tmpCacheDir);
 
         parent::tearDown();
     }

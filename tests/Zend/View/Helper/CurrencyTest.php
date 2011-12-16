@@ -23,10 +23,11 @@
  * @namespace
  */
 namespace ZendTest\View\Helper;
-use Zend\Cache;
-use Zend\Currency;
-use Zend\View\Helper;
 
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Currency,
+    Zend\View\Helper;
 
 /**
  * Test class for Zend_View_Helper_Currency
@@ -64,12 +65,30 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->clearRegistry();
-        $this->_cache = Cache\Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => sys_get_temp_dir())
-                 );
-        Currency\Currency::setCache($this->_cache);
 
+        $this->_cacheDir = sys_get_temp_dir() . '/zend_view_helper_currency';
+        $this->_removeRecursive($this->_cacheDir);
+        mkdir($this->_cacheDir);
+
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'Filesystem',
+                'options' => array(
+                    'ttl'       => 120,
+                    'cache_dir' => $this->_cacheDir,
+                )
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
+
+        Currency\Currency::setCache($this->_cache);
 
         $this->helper = new Helper\Currency('de_AT');
     }
@@ -83,8 +102,30 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
-        $this->_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
+        $this->_removeRecursive($this->_cacheDir);
         $this->clearRegistry();
+    }
+
+    protected function _removeRecursive($dir)
+    {
+        if (file_exists($dir)) {
+            $dirIt = new \DirectoryIterator($dir);
+            foreach ($dirIt as $entry) {
+                $fname = $entry->getFilename();
+                if ($fname == '.' || $fname == '..') {
+                    continue;
+                }
+
+                if ($entry->isFile()) {
+                    unlink($entry->getPathname());
+                } else {
+                    $this->_removeRecursive($entry->getPathname());
+                }
+            }
+
+            rmdir($dir);
+        }
     }
 
     public function testCurrencyObjectPassedToConstructor()

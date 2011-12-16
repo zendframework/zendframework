@@ -669,15 +669,16 @@ class PaginatorTest extends TestCase
         $pageItems = $this->_paginator->setItemCountPerPage(8)->setCurrentPageNumber(3)->getCurrentItems();
 
         $pageItems = $this->_paginator->getPageItemCache();
-        $expected = array(3 => new \ArrayIterator(range(17, 24)));
-        $this->assertEquals($expected, $pageItems);
+        $expected = /*array(3 => */ new \ArrayIterator(range(17, 24)) /*) */;
+        $this->assertEquals($expected, $pageItems[3]);
 
         // get back to already cached data
         $this->_paginator->setItemCountPerPage(5);
         $pageItems = $this->_paginator->getPageItemCache();
         $expected =array(1 => new \ArrayIterator(range(1, 5)),
                          2 => new \ArrayIterator(range(6, 10)));
-        $this->assertEquals($expected, $pageItems);
+        $this->assertEquals($expected[1], $pageItems[1]);
+        $this->assertEquals($expected[2], $pageItems[2]);
     }
 
     public function testToJson()

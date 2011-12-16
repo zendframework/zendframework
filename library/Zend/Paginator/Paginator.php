@@ -476,9 +476,13 @@ class Paginator implements Countable, IteratorAggregate
         }
 
         if (null === $pageNumber) {
-            $cacheIds = self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array('tags' => array(
+            self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array('tags' => array(
                 $this->_getCacheInternalId()
             )));
+            $cacheIds = array();
+            while (($item = self::$_cache->fetch()) !== false) {
+                $cacheIds[] = $item['key'];
+            }
             foreach ($cacheIds as $id) {
                 if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
                     self::$_cache->removeItem($this->_getCacheId($page[1]));
@@ -812,11 +816,13 @@ class Paginator implements Countable, IteratorAggregate
             $cacheIds = self::$_cache->find(CacheAdapter::MATCH_TAGS_OR, array(
                 'tags' => array($this->_getCacheInternalId()),
             ));
-            if (is_array($cacheIds) || $cacheIds instanceof Traversable) {
-                foreach ($cacheIds as $id) {
-                    if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
-                        $data[$page[1]] = self::$_cache->getItem($this->_getCacheId($page[1]));
-                    }
+            $cacheIds = array();
+            while (($item = self::$_cache->fetch()) !== false) {
+                $cacheIds[] = $item['key'];
+            }
+            foreach ($cacheIds as $id) {
+                if (preg_match('|'.self::CACHE_TAG_PREFIX."(\d+)_.*|", $id, $page)) {
+                    $data[$page[1]] = self::$_cache->getItem($this->_getCacheId($page[1]));
                 }
             }
         }

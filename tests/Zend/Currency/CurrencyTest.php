@@ -41,11 +41,16 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        $this->_cacheDir = sys_get_temp_dir() . '/zend_currency';
+        $this->_removeRecursive($this->_cacheDir);
+        mkdir($this->_cacheDir);
+
         $this->_cache = CacheFactory::factory(array(
             'adapter' => array(
                 'name' => 'Filesystem',
                 'options' => array(
-                    'ttl' => 120,
+                    'ttl'       => 120,
+                    'cache_dir' => $this->_cacheDir,
                 )
             ),
             'plugins' => array(
@@ -65,6 +70,28 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     {
         Currency\Currency::clearCache();
         $this->_cache->clear(CacheAdapter::MATCH_ALL);
+        $this->_removeRecursive($this->_cacheDir);
+    }
+
+    protected function _removeRecursive($dir)
+    {
+        if (file_exists($dir)) {
+            $dirIt = new \DirectoryIterator($dir);
+            foreach ($dirIt as $entry) {
+                $fname = $entry->getFilename();
+                if ($fname == '.' || $fname == '..') {
+                    continue;
+                }
+
+                if ($entry->isFile()) {
+                    unlink($entry->getPathname());
+                } else {
+                    $this->_removeRecursive($entry->getPathname());
+                }
+            }
+
+            rmdir($dir);
+        }
     }
 
     /**
@@ -519,7 +546,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
         $currency = new Currency\Currency(array('currency' => 'USD'), 'en_US');
         $this->assertEquals(array(0 => 'AS', 1 => 'EC', 2 => 'FM', 3 => 'GU', 4 => 'IO', 5 => 'MH', 6 => 'MP',
-            7 => 'PR', 8 => 'PW', 9 => "SV", 10 => 'TC', 11 => 'TL', 12 => 'UM', 13 => 'US', 14 => 'VG', 15 => 'VI'), $currency->getRegionList());
+            7 => 'PR', 8 => 'PW', 9 => "SV", 10 => 'TC', 11 => 'TL', 12 => 'UM', 13 => 'US', 14 => 'VG', 15 => 'VI', 16 => 'ZW'), $currency->getRegionList());
     }
 
     /**

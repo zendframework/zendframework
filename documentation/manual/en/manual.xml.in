@@ -1406,8 +1406,15 @@
             <!--</xi:include>-->
         <!--</chapter>-->
 
-        <!--<chapter xml:id="zend.mail"><info><title>Zend_Mail</title></info>-->
-            <!---->
+        <chapter xml:id="zend.mail">
+            <info><title>Zend\Mail</title></info>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.mail.message.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.mail.message.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mail-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_Mail-Introduction.xml" parse="xml"/>-->
@@ -1478,7 +1485,7 @@
                     <!--<xi:include href="../en/module_specs/Zend_Mail_Read.xml" parse="xml"/>-->
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
-        <!--</chapter>-->
+        </chapter>
 
         <!--<chapter xml:id="zend.markup"><info><title>Zend_Markup</title></info>-->
             <!---->

@@ -60,8 +60,7 @@ class AddressList implements Countable, Iterator
         }
 
         $email = strtolower($emailOrAddress->getEmail());
-        if (isset($this->addresses[$email])) {
-            // Already have this one
+        if ($this->has($email)) {
             return $this;
         }
 
@@ -122,6 +121,12 @@ class AddressList implements Countable, Iterator
         return isset($this->addresses[$email]);
     }
 
+    /**
+     * Get an address by email
+     * 
+     * @param  string $email 
+     * @return false|AddressDescription
+     */
     public function get($email)
     {
         $email = strtolower($email);
@@ -132,7 +137,13 @@ class AddressList implements Countable, Iterator
         return $this->addresses[$email];
     }
 
-    public function delete($emailOrAddress)
+    /**
+     * Delete an address from the list
+     * 
+     * @param  string $email
+     * @return bool
+     */
+    public function delete($email)
     {
         $email = strtolower($email);
         if (!isset($this->addresses[$email])) {

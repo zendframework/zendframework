@@ -140,7 +140,6 @@ abstract class AbstractAddressList implements Header
             if (empty($name)) {
                 $emails[] = $email;
             } else {
-                // $name = str_replace(array('"', "'"), array('\\"', "\\'"), $name);
                 if (false !== strstr($name, ',')) {
                     $name = sprintf('"%s"', $name);
                 }

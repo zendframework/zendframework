@@ -146,7 +146,7 @@ class Message
     public function addFrom($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->from();
-        $this->updateAddressList(__METHOD__, $addressList, $emailOrAddressOrList, $name);
+        $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
         return $this;
     }
 
@@ -185,7 +185,7 @@ class Message
     public function addTo($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->to();
-        $this->updateAddressList(__METHOD__, $addressList, $emailOrAddressOrList, $name);
+        $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
         return $this;
     }
 
@@ -222,7 +222,7 @@ class Message
     public function addCc($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->cc();
-        $this->updateAddressList(__METHOD__, $addressList, $emailOrAddressOrList, $name);
+        $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
         return $this;
     }
 
@@ -259,7 +259,7 @@ class Message
     public function addBcc($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->bcc();
-        $this->updateAddressList(__METHOD__, $addressList, $emailOrAddressOrList, $name);
+        $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
         return $this;
     }
 
@@ -298,7 +298,7 @@ class Message
     public function addReplyTo($emailOrAddressOrList, $name = null)
     {
         $addressList = $this->replyTo();
-        $this->updateAddressList(__METHOD__, $addressList, $emailOrAddressOrList, $name);
+        $this->updateAddressList($addressList, $emailOrAddressOrList, $name, __METHOD__);
         return $this;
     }
 
@@ -438,14 +438,10 @@ class Message
     /**
      * Get the string-serialized message body text
      * 
-     * @return string|null
+     * @return string
      */
     public function getBodyText()
     {
-        if (null === $this->body || is_string($this->body)) {
-            return $this->body;
-        }
-
         if ($this->body instanceof MimeMessage) {
             return $this->body->generateMessage();
         }
@@ -516,13 +512,13 @@ class Message
      *
      * Proxied to this from addFrom, addTo, addCc, addBcc, and addReplyTo.
      * 
-     * @param  string $callingMethod 
      * @param  AddressList $addressList 
      * @param  string|AddressDescription|array|AddressList|Traversable $emailOrAddressOrList 
      * @param  null|string $name 
+     * @param  string $callingMethod 
      * @return void
      */
-    protected function updateAddressList($callingMethod, AddressList $addressList, $emailOrAddressOrList, $name)
+    protected function updateAddressList(AddressList $addressList, $emailOrAddressOrList, $name, $callingMethod)
     {
         if ($emailOrAddressOrList instanceof Traversable) {
             foreach ($emailOrAddressOrList as $address) {

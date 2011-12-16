@@ -52,7 +52,7 @@ class MimeVersion implements Header
             throw new Exception\InvalidArgumentException('Invalid header line for Mime-Version string');
         }
 
-        // Check for address, and set if found
+        // Check for version, and set if found
         $header = new static();
         if (preg_match('/^(?<version>\d+\.\d+)$/', $value, $matches)) {
             $header->version = $matches['version'];

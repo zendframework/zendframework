@@ -215,6 +215,13 @@ class Headers implements Iterator, Countable
      */
     public function addHeaderLine($headerFieldNameOrLine, $fieldValue = null)
     {
+        if (!is_string($headerFieldNameOrLine)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects its first argument to be a string; received "%s"',
+                (is_object($headerFieldNameOrLine) ? get_class($headerFieldNameOrLine) : gettype($headerFieldNameOrLine))
+            ));
+        }
+
         $matches = null;
         if (preg_match('/^(?P<name>[^()><@,;:\"\\/\[\]?=}{ \t]+):.*$/', $headerFieldNameOrLine, $matches)
             && $fieldValue === null
@@ -244,7 +251,7 @@ class Headers implements Iterator, Countable
      */
     public function addHeader(Header $header)
     {
-        $key = str_replace(array('-', '_', ' ', '.'), '', strtolower($header->getFieldName()));
+        $key = $this->normalizeFieldName($header->getFieldName());
 
         $this->headersKeys[] = $key;
         $this->headers[] = $header;
@@ -290,7 +297,7 @@ class Headers implements Iterator, Countable
      */
     public function get($name)
     {
-        $key = str_replace(array('-', '_', ' ', '.'), '', strtolower($name));
+        $key = $this->normalizeFieldName($name);
         if (!in_array($key, $this->headersKeys)) {
             return false;
         }
@@ -329,7 +336,7 @@ class Headers implements Iterator, Countable
      */
     public function has($name)
     {
-        $name = str_replace(array('-', '_', ' ', '.'), '', strtolower($name));
+        $name = $this->normalizeFieldName($name);
         return (in_array($name, $this->headersKeys));
     }
 
@@ -496,5 +503,16 @@ class Headers implements Iterator, Countable
         $current->setEncoding($encoding);
         $this->headers[$index] = $current;
         return $current;
+    }
+
+    /**
+     * Normalize a field name
+     * 
+     * @param  string $fieldName 
+     * @return string
+     */
+    protected function normalizeFieldName($fieldName)
+    {
+        return str_replace(array('-', '_', ' ', '.'), '', strtolower($fieldName));
     }
 }

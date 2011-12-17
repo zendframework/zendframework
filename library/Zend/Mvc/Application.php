@@ -283,8 +283,8 @@ class Application implements AppContext
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_INVALID)
                   ->setController($controllerName)
-                  ->setControllerClass(get_class($controller))
-                  ->setParam('exception', $exception);
+                  ->setControllerClass(get_class($controller));
+            
             $results = $events->trigger('dispatch.error', $error);
             if (count($results)) {
                 $return  = $results->last();

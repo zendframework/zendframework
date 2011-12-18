@@ -18,10 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config\Writer;
+
+use Zend\Config\Writer,
+    Zend\Config\Exception,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * @category   Zend
@@ -29,77 +30,54 @@ namespace Zend\Config\Writer;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class AbstractWriter
+abstract class AbstractWriter implements Writer
 {
     /**
-     * Option keys to skip when calling setOptions()
+     * writeFile(): defined by Writer interface.
      *
-     * @var array
-     */
-    protected $_skipOptions = array(
-        'options'
-    );
-
-    /**
-     * Config object to write
-     *
-     * @var \Zend\Config\Config
-     */
-    protected $_config = null;
-
-    /**
-     * Create a new adapter
-     *
-     * $options can only be passed as array or be omitted
-     *
-     * @param null|array $options
-     */
-    public function __construct(array $options = null)
-    {
-        if (is_array($options)) {
-            $this->setOptions($options);
-        }
-    }
-
-    /**
-     * Set options via a Zend_Config instance
-     *
-     * @param  \Zend\Config\Config $config
-     * @return \Zend\Config\Writer\Writer
-     */
-    public function setConfig(\Zend\Config\Config $config)
-    {
-        $this->_config = $config;
-
-        return $this;
-    }
-
-    /**
-     * Set options via an array
-     *
-     * @param  array $options
-     * @return \Zend\Config\Writer\Writer
-     */
-    public function setOptions(array $options)
-    {
-        foreach ($options as $key => $value) {
-            if (in_array(strtolower($key), $this->_skipOptions)) {
-                continue;
-            }
-
-            $method = 'set' . ucfirst($key);
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Write a Zend_Config object to it's target
-     *
+     * @see    Writer::writeFile()
+     * @param  string  $filename
+     * @param  mixed   $config
+     * @param  boolean $exclusiveLock
      * @return void
      */
-    abstract public function write();
+    public function writeFile($filename, $config, $exclusiveLock = true)
+    {
+        if (!is_writable($filename)) {
+            throw new Exception\RuntimeException(sprintf('File "%s" is not writable', $filename));
+        }
+
+        $flags = 0;
+
+        if ($exclusiveLock) {
+            $flags |= LOCK_EX;
+        }
+
+        file_put_contents($filename, $this->writeString($config), $exclusiveLock);
+    }
+
+    /**
+     * writeString(): defined by Writer interface.
+     *
+     * @see    Writer::writeFile()
+     * @param  mixed   $config
+     * @return void
+     */
+    public function writeString($config)
+    {
+        if ($config instanceof Traversable) {
+            $config = IteratorToArray::convert($config);
+        } elseif (!is_array($config)) {
+            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable config');
+        }
+
+        return $this->processConfig($config);
+    }
+
+    /**
+     * Process an array configuration.
+     *
+     * @return string
+     */
+    abstract protected function processConfig(array $config);
 }

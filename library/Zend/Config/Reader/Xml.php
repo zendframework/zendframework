@@ -12,27 +12,26 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Config
+ * @category   Zend
+ * @package    Zend_Config
+ * @subpackage Reader
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config\Reader;
 
-use \XMLReader,
-    \Zend\Config\Exception;
+use XMLReader,
+    Zend\Config\Exception;
 
 /**
  * XML config reader.
  *
- * @category  Zend
- * @package   Zend_Config
- * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @category   Zend
+ * @package    Zend_Config
+ * @subpackage Reader
+ * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Xml extends AbstractReader
 {
@@ -43,21 +42,21 @@ class Xml extends AbstractReader
 
     /**
      * XML Reader instance.
-     * 
+     *
      * @var XMLReader
      */
     protected $reader;
 
     /**
      * Directory of the file to process.
-     * 
+     *
      * @var string
      */
     protected $directory;
-    
+
     /**
      * Nodes to handle as plain text.
-     * 
+     *
      * @var array
      */
     protected $textNodes = array(
@@ -67,7 +66,7 @@ class Xml extends AbstractReader
 
     /**
      * processFile(): defined by AbstractReader.
-     * 
+     *
      * @see    AbstractReader::processFile()
      * @param  string $filename
      * @return array
@@ -76,15 +75,15 @@ class Xml extends AbstractReader
     {
         $this->reader = new XMLReader();
         $this->reader->open($filename, null, LIBXML_XINCLUDE);
-        
+
         $this->directory = dirname($filename);
-        
+
         return $this->process();
     }
-    
+
     /**
      * processString(): defined by AbstractReader.
-     * 
+     *
      * @see    AbstractReader::processString()
      * @param  string $string
      * @return array
@@ -95,25 +94,25 @@ class Xml extends AbstractReader
         $this->reader->xml($string, null, LIBXML_XINCLUDE);
 
         $this->directory = __DIR__;
-        
+
         return $this->process();
     }
-    
+
     /**
      * Process data from the created XMLReader.
-     * 
+     *
      * @return array
      */
     protected function process()
     {
         $this->extends = array();
-        
+
         return $this->processNextElement();
     }
-    
+
     /**
      * Process the next inner element.
-     * 
+     *
      * @return mixed
      */
     protected function processNextElement()
@@ -122,7 +121,7 @@ class Xml extends AbstractReader
         $text     = '';
 
         while ($this->reader->read()) {
-            if ($this->reader->nodeType === XMLReader::ELEMENT) {               
+            if ($this->reader->nodeType === XMLReader::ELEMENT) {
                 if ($this->reader->depth === 0) {
                     return $this->processNextElement();
                 }
@@ -134,27 +133,27 @@ class Xml extends AbstractReader
                 if ($depth === 1 && isset($attributes['zf']['extends'])) {
                     $this->extends[$name] = $attributes['zf']['extends'];
                 }
-                
+
                 if ($this->reader->namespaceURI === self::XML_NAMESPACE) {
                     switch ($this->reader->localName) {
                         case 'const':
                             if (!isset($attributes['default']['name'])) {
                                 throw new Exception\RuntimeException('Misssing "name" attribute in "zf:const" node');
                             }
-    
+
                             $constantName = $attributes['default']['name'];
-    
+
                             if (!defined($constantName)) {
                                 throw new Exception\RuntimeException(sprintf('Constant with name "%s" was not defined', $constantName));
                             }
-        
+
                             $text .= constant($constantName);
                             break;
-                            
+
                         case 'dir':
                             $text .= $this->directory;
                             break;
-    
+
                         default:
                             throw new Exception\RuntimeException(sprintf('Unknown zf:node with name "%s" found', $name));
                     }
@@ -167,20 +166,20 @@ class Xml extends AbstractReader
                         } else {
                             $child = $this->processNextElement();
                         }
-                        
+
                         if ($attributes['default']) {
                             if (!is_array($child)) {
                                 $child = array();
                             }
-                            
+
                             $child = array_merge($child, $attributes['default']);
                         }
-        
+
                         if (isset($children[$name])) {
                             if (!is_array($children[$name]) || !$children[$name]) {
                                 $children[$name] = array($children[$name]);
                             }
-                            
+
                             $children[$name][] = $child;
                         } else {
                             $children[$name] = $child;
@@ -199,25 +198,25 @@ class Xml extends AbstractReader
 
     /**
      * Get all attributes on the current node.
-     * 
+     *
      * @return array
      */
     protected function getAttributes()
     {
         $attributes = array('default' => array(), 'zf' => array());
-        
-        if ($this->reader->hasAttributes) {       
+
+        if ($this->reader->hasAttributes) {
             while ($this->reader->moveToNextAttribute()) {
                 if ($this->reader->namespaceURI === self::XML_NAMESPACE) {
                     $attributes['zf'][$this->reader->localName] = $this->reader->value;
                 } else {
-                    $attributes['default'][$this->reader->localName] = $this->reader->value;   
+                    $attributes['default'][$this->reader->localName] = $this->reader->value;
                 }
             }
-            
+
             $this->reader->moveToElement();
         }
-        
+
         return $attributes;
     }
 }

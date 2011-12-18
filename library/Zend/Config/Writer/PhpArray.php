@@ -18,37 +18,27 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config\Writer;
 
 /**
- * @uses       \Zend\Config\Writer\FileAbstract
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ArrayWriter extends AbstractFileWriter
+class PhpArray extends AbstractWriter
 {
     /**
-     * Render a Zend_Config into a PHP Array config string.
+     * processConfig(): defined by AbstractWriter.
      *
-     * @since 1.10
+     * @param  array $config
      * @return string
      */
-    public function render()
+    public function processConfig(array $config)
     {
-        $data        = $this->_config->toArray();
-        $sectionName = $this->_config->getSectionName();
-
-        if (is_string($sectionName)) {
-            $data = array($sectionName => $data);
-        }
 
         $arrayString = "<?php\n"
-                     . "return " . var_export($data, true) . ";\n";
+                     . "return " . var_export($config, true) . ";\n";
 
         return $arrayString;
     }

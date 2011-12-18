@@ -12,26 +12,23 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category   Zend
- * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Config
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config;
 
-use \Countable,
-    \Iterator,
-    \ArrayAccess;
+use Countable,
+    Iterator,
+    ArrayAccess;
 
 /**
- * @category   Zend
- * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @category  Zend
+ * @package   Zend_Config
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Config implements Countable, Iterator, ArrayAccess
 {
@@ -93,7 +90,7 @@ class Config implements Countable, Iterator, ArrayAccess
             } else {
                 $this->data[$key] = $value;
             }
-            
+
             $this->count++;
         }
     }
@@ -110,7 +107,7 @@ class Config implements Countable, Iterator, ArrayAccess
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
         }
-        
+
         return $default;
     }
 
@@ -127,7 +124,7 @@ class Config implements Countable, Iterator, ArrayAccess
 
     /**
      * Set a value in the config.
-     * 
+     *
      * Only allow setting of a property if $allowModifications  was set to true
      * on construction. Otherwise, throw an exception.
      *
@@ -143,7 +140,7 @@ class Config implements Countable, Iterator, ArrayAccess
             } else {
                 $this->data[$name] = $value;
             }
-            
+
             $this->count++;
         } else {
             throw new Exception\RuntimeException('Config is read only');
@@ -159,7 +156,7 @@ class Config implements Countable, Iterator, ArrayAccess
     public function __clone()
     {
         $array = array();
-      
+
         foreach ($this->data as $key => $value) {
             if ($value instanceof self) {
                 $array[$key] = clone $value;
@@ -167,7 +164,7 @@ class Config implements Countable, Iterator, ArrayAccess
                 $array[$key] = $value;
             }
         }
-      
+
         $this->data = $array;
     }
 
@@ -180,7 +177,7 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         $array = array();
         $data  = $this->data;
-        
+
         foreach ($data as $key => $value) {
             if ($value instanceof self) {
                 $array[$key] = $value->toArray();
@@ -188,7 +185,7 @@ class Config implements Countable, Iterator, ArrayAccess
                 $array[$key] = $value;
             }
         }
-        
+
         return $array;
     }
 
@@ -215,14 +212,14 @@ class Config implements Countable, Iterator, ArrayAccess
             throw new Exception\InvalidArgumentException('Config is read only');
         } elseif (isset($this->data[$name])) {
             unset($this->data[$name]);
-            $this->count--;            
+            $this->count--;
             $this->skipNextIteration = true;
         }
     }
 
     /**
      * count(): defined by Countable interface.
-     * 
+     *
      * @see    Countable::count()
      * @return integer
      */
@@ -266,7 +263,7 @@ class Config implements Countable, Iterator, ArrayAccess
             $this->skipNextIteration = false;
             return;
         }
-        
+
         next($this->data);
     }
 
@@ -295,7 +292,7 @@ class Config implements Countable, Iterator, ArrayAccess
 
     /**
      * offsetExists(): defined by ArrayAccess interface.
-     * 
+     *
      * @see    ArrayAccess::offsetExists()
      * @param  mixed $offset
      * @return boolean
@@ -304,10 +301,10 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         return $this->__isset($offset);
     }
-    
+
     /**
      * offsetGet(): defined by ArrayAccess interface.
-     * 
+     *
      * @see    ArrayAccess::offsetGet()
      * @param  mixed $offset
      * @return mixed
@@ -316,10 +313,10 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         return $this->__get($offset);
     }
-    
+
     /**
      * offsetSet(): defined by ArrayAccess interface.
-     * 
+     *
      * @see    ArrayAccess::offsetSet()
      * @param  mixed $offset
      * @param  mixed $value
@@ -329,10 +326,10 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         $this->__set($offset, $value);
     }
-    
+
     /**
      * offsetUnset(): defined by ArrayAccess interface.
-     * 
+     *
      * @see    ArrayAccess::offsetUnset()
      * @param  mixed $offset
      * @return void
@@ -341,10 +338,10 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         $this->__unset($offset);
     }
-    
+
     /**
      * Merge another Config with this one.
-     * 
+     *
      * The items in $merge will override the same named items in the current
      * config.
      *
@@ -374,7 +371,7 @@ class Config implements Countable, Iterator, ArrayAccess
 
     /**
      * Prevent any more modifications being made to this instance.
-     * 
+     *
      * Useful after merge() has been used to merge multiple Config objects
      * into one object which should then not be modified again.
      *
@@ -383,7 +380,7 @@ class Config implements Countable, Iterator, ArrayAccess
     public function setReadOnly()
     {
         $this->allowModifications = false;
-        
+
         foreach ($this->data as $key => $value) {
             if ($value instanceof self) {
                 $value->setReadOnly();

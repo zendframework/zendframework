@@ -18,47 +18,53 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Config\Writer;
-use Zend\Config;
+
+use Zend\Config\Exception;
 
 /**
- * @uses       \Zend\Config\Exception
- * @uses       \Zend\Config\Writer\FileAbstract
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ini extends AbstractFileWriter
+class Ini extends AbstractWriter
 {
     /**
-     * String that separates nesting levels of configuration data identifiers
+     * Separator for nesting levels of configuration data identifiers.
      *
      * @var string
      */
-    protected $_nestSeparator = '.';
+    protected $nestSeparator = '.';
 
     /**
-     * If true the ini string is rendered in the global namespace without sections.
+     * If true the INI string is rendered in the global namespace without
+     * sections.
      *
      * @var bool
      */
-    protected $_renderWithoutSections = false;
+    protected $renderWithoutSections = false;
 
     /**
-     * Set the nest separator
+     * Set nest separator.
      *
-     * @param  string $filename
-     * @return \Zend\Config\Writer\Ini
+     * @param  stirng $separator
+     * @return self
      */
     public function setNestSeparator($separator)
     {
-        $this->_nestSeparator = $separator;
-
+        $this->nestSeparator = $separator;
         return $this;
+    }
+
+    /**
+     * Get nest separator.
+     *
+     * @return string
+     */
+    public function getNestSeparator()
+    {
+        return $this->nestSeparator;
     }
 
     /**
@@ -68,47 +74,48 @@ class Ini extends AbstractFileWriter
      * into the global namespace of the INI file.
      *
      * @param  bool $withoutSections
-     * @return \Zend\Config\Writer\Ini
+     * @return Ini
      */
-    public function setRenderWithoutSections($withoutSections=true)
+    public function setRenderWithoutSectionsFlags($withoutSections)
     {
-        $this->_renderWithoutSections = (bool)$withoutSections;
+        $this->renderWithoutSections = (bool) $withoutSections;
         return $this;
     }
 
     /**
-     * Render a Zend\Config into a INI config string.
+     * Return whether the writer should render without sections.
      *
-     * @since 1.10
+     * @return boolean
+     */
+    public function shouldRenderWithoutSections()
+    {
+        return $this->renderWithoutSections;
+    }
+
+    /**
+     * processConfig(): defined by AbstractWriter.
+     *
+     * @param  array $config
      * @return string
      */
-    public function render()
+    public function processConfig(array $config)
     {
-        $iniString   = '';
-        $extends     = $this->_config->getExtends();
-        $sectionName = $this->_config->getSectionName();
+        $iniString = '';
 
-        if($this->_renderWithoutSections == true) {
-            $iniString .= $this->_addBranch($this->_config);
-        } else if (is_string($sectionName)) {
-            $iniString .= '[' . $sectionName . ']' . "\n"
-                       .  $this->_addBranch($this->_config)
-                       .  "\n";
+        if ($this->shouldRenderWithoutSections()) {
+            $iniString .= $this->addBranch($config);
         } else {
-            $config = $this->_sortRootElements($this->_config);
+            $config = $this->sortRootElements($config);
+
             foreach ($config as $sectionName => $data) {
-                if (!($data instanceof Config\Config)) {
+                if (!is_array($data)) {
                     $iniString .= $sectionName
                                .  ' = '
-                               .  $this->_prepareValue($data)
+                               .  $this->prepareValue($data)
                                .  "\n";
                 } else {
-                    if (isset($extends[$sectionName])) {
-                        $sectionName .= ' : ' . $extends[$sectionName];
-                    }
-
                     $iniString .= '[' . $sectionName . ']' . "\n"
-                               .  $this->_addBranch($data)
+                               .  $this->addBranch($data)
                                .  "\n";
                 }
             }
@@ -118,24 +125,24 @@ class Ini extends AbstractFileWriter
     }
 
     /**
-     * Add a branch to an INI string recursively
+     * Add a branch to an INI string recursively.
      *
-     * @param  \Zend\Config\Config $config
-     * @return void
+     * @param  array $config
+     * @return string
      */
-    protected function _addBranch(Config\Config $config, $parents = array())
+    protected function addBranch(array $config, $parents = array())
     {
         $iniString = '';
 
         foreach ($config as $key => $value) {
             $group = array_merge($parents, array($key));
 
-            if ($value instanceof Config\Config) {
-                $iniString .= $this->_addBranch($value, $group);
+            if (is_array($value)) {
+                $iniString .= $this->addBranch($value, $group);
             } else {
-                $iniString .= implode($this->_nestSeparator, $group)
+                $iniString .= implode($this->nestSeparator, $group)
                            .  ' = '
-                           .  $this->_prepareValue($value)
+                           .  $this->prepareValue($value)
                            .  "\n";
             }
         }
@@ -144,50 +151,48 @@ class Ini extends AbstractFileWriter
     }
 
     /**
-     * Prepare a value for INI
+     * Prepare a value for INI.
      *
      * @param  mixed $value
      * @return string
      */
-    protected function _prepareValue($value)
+    protected function prepareValue($value)
     {
         if (is_integer($value) || is_float($value)) {
             return $value;
         } elseif (is_bool($value)) {
             return ($value ? 'true' : 'false');
-        } elseif (strpos($value, '"') === false) {
+        } elseif (false === strpos($value, '"')) {
             return '"' . $value .  '"';
         } else {
-            throw new Config\Exception\RuntimeException('Value can not contain double quotes "');
+            throw new Exception\RuntimeException('Value can not contain double quotes');
         }
     }
-    
+
     /**
-     * Root elements that are not assigned to any section needs to be
-     * on the top of config.
-     * 
-     * @see    http://framework.zend.com/issues/browse/ZF-6289
-     * @param  Zend\Config
-     * @return Zend\Config
+     * Root elements that are not assigned to any section needs to be on the
+     * top of config.
+     *
+     * @param  array $config
+     * @return array
      */
-    protected function _sortRootElements(\Zend\Config\Config $config)
+    protected function sortRootElements(array $config)
     {
-        $configArray = $config->toArray();
         $sections = array();
-        
-        // remove sections from config array
-        foreach ($configArray as $key => $value) {
+
+        // Remove sections from config array.
+        foreach ($config as $key => $value) {
             if (is_array($value)) {
                 $sections[$key] = $value;
-                unset($configArray[$key]);
+                unset($config[$key]);
             }
         }
-        
-        // readd sections to the end
+
+        // Read sections to the end.
         foreach ($sections as $key => $value) {
-            $configArray[$key] = $value;
+            $config[$key] = $value;
         }
-        
-        return new \Zend\Config\Config($configArray);
+
+        return $config;
     }
 }

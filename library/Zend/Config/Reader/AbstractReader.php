@@ -55,13 +55,13 @@ abstract class AbstractReader implements Reader
     protected $processedExtends;
 
     /**
-     * readFile(): defined by Reader interface.
+     * fromFile(): defined by Reader interface.
      *
-     * @see    Reader::readFile()
+     * @see    Reader::fromFile()
      * @param  string $filename
      * @return array
      */
-    public function readFile($filename)
+    public function fromFile($filename)
     {
         $this->extends = array();
 
@@ -69,13 +69,13 @@ abstract class AbstractReader implements Reader
     }
 
     /**
-     * readString(): defined by Reader interface.
+     * fromString(): defined by Reader interface.
      *
-     * @see    Reader::readString()
+     * @see    Reader::fromString()
      * @param  string $string
      * @return array
      */
-    public function readString($string)
+    public function fromString($string)
     {
         $this->extends = array();
 

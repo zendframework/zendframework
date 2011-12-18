@@ -29,18 +29,18 @@ namespace Zend\Config;
 interface Reader
 {
     /**
-     * Read a file and create a config object.
+     * Read from a file and create a config object.
      *
      * @param  string $filename
      * @return array
      */
-    public function readFile($filename);
+    public function fromFile($filename);
 
     /**
-     * Read a string and create a config object.
+     * Read from a string and create a config object.
      *
      * @param  string $string
      * @return array
      */
-    public function readString($string);
+    public function fromString($string);
 }

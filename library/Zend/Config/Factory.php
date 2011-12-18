@@ -55,15 +55,15 @@ class Factory
                     $this->readers['ini'] = new Reader\Ini();
                 }
 
-                return $this->readers['ini']->readFile($filename);
+                return $this->readers['ini']->fromFile($filename);
                 break;
 
             case 'xml':
                 if (!isset($this->readers['xml'])) {
-                    $this->readers['xml'] = new Reader\Ini();
+                    $this->readers['xml'] = new Reader\Xml();
                 }
 
-                return $this->readers['xml']->readFile($filename);
+                return $this->readers['xml']->fromFile($filename);
                 break;
         }
 

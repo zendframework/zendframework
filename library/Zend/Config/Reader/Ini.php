@@ -209,7 +209,7 @@ class Ini extends AbstractReader
         } else {
             if ($key === '@include') {
                 $reader  = clone $this;
-                $include = $reader->readFile($this->directory . '/' . $value)->toArray();
+                $include = $reader->fromFile($this->directory . '/' . $value)->toArray();
                 $config  = array_replace_recursive($config, $include);
             } else {
                 $config[$key] = str_replace('{DIR}', $this->directory, $value);

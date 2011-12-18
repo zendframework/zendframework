@@ -33,15 +33,15 @@ use Zend\Config\Writer,
 abstract class AbstractWriter implements Writer
 {
     /**
-     * writeFile(): defined by Writer interface.
+     * toFile(): defined by Writer interface.
      *
-     * @see    Writer::writeFile()
+     * @see    Writer::toFile()
      * @param  string  $filename
      * @param  mixed   $config
      * @param  boolean $exclusiveLock
      * @return void
      */
-    public function writeFile($filename, $config, $exclusiveLock = true)
+    public function toFile($filename, $config, $exclusiveLock = true)
     {
         if (!is_writable($filename)) {
             throw new Exception\RuntimeException(sprintf('File "%s" is not writable', $filename));
@@ -53,17 +53,17 @@ abstract class AbstractWriter implements Writer
             $flags |= LOCK_EX;
         }
 
-        file_put_contents($filename, $this->writeString($config), $exclusiveLock);
+        file_put_contents($filename, $this->toString($config), $exclusiveLock);
     }
 
     /**
-     * writeString(): defined by Writer interface.
+     * toString(): defined by Writer interface.
      *
-     * @see    Writer::writeFile()
+     * @see    Writer::toString()
      * @param  mixed   $config
      * @return void
      */
-    public function writeString($config)
+    public function toString($config)
     {
         if ($config instanceof Traversable) {
             $config = IteratorToArray::convert($config);

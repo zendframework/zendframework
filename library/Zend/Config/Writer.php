@@ -36,7 +36,7 @@ interface Writer
      * @param  boolean $exclusiveLock
      * @return void
      */
-    public function writeFile($filename, $config, $exclusiveLock = true);
+    public function toFile($filename, $config, $exclusiveLock = true);
 
     /**
      * Write a config object to a string.
@@ -44,5 +44,5 @@ interface Writer
      * @param  mixed $config
      * @return string
      */
-    public function writeString($config);
+    public function toString($config);
 }

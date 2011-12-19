@@ -110,7 +110,7 @@ class Hostname extends AbstractValidator
         'sm', 'sn', 'so', 'sr', 'st', 'su', 'sv', 'sy', 'sz', 'tc', 'td', 'tel', 'tf', 'tg', 'th',
         'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tp', 'tr', 'travel', 'tt', 'tv', 'tw', 'tz', 'ua',
         'ug', 'uk', 'um', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'ws',
-        'ye', 'yt', 'yu', 'za', 'zm', 'zw'
+        'xxx', 'ye', 'yt', 'yu', 'za', 'zm', 'zw'
     );
 
     /**

@@ -23,10 +23,15 @@
  * @namespace
  */
 namespace ZendTest\Mail;
-use Zend\Mail\Message;
-use Zend\Mime;
-use Zend\Mail\Storage;
-use Zend\Mail\Exception;
+
+use stdClass,
+    Zend\Mail\Address,
+    Zend\Mail\AddressList,
+    Zend\Mail\Header,
+    Zend\Mail\Message,
+    Zend\Mime\Message as MimeMessage,
+    Zend\Mime\Mime,
+    Zend\Mime\Part as MimePart;
 
 /**
  * @category   Zend
@@ -38,407 +43,624 @@ use Zend\Mail\Exception;
  */
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_file;
-
     public function setUp()
     {
-        $this->_file = __DIR__ . '/_files/mail.txt';
+        $this->message = new Message();
     }
 
-    public function testInvalidFile()
+    public function testInvalidByDefault()
     {
-        try {
-            $message = new Message(array('file' => '/this/file/does/not/exists'));
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while loading unknown file');
+        $this->assertFalse($this->message->isValid());
     }
 
-    public function testIsMultipart()
+    public function testSetsOrigDateHeaderByDefault()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertTrue($message->isMultipart());
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertTrue($headers->has('orig-date'));
+        $header  = $headers->get('orig-date');
+        $date    = date('r');
+        $date    = substr($date, 0, 16);
+        $test    = $header->getFieldValue();
+        $test    = substr($test, 0, 16);
+        $this->assertEquals($date, $test);
     }
 
-    public function testGetHeader()
+    public function testAddingFromAddressMarksAsValid()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertEquals($message->subject, 'multipart');
+        $this->message->addFrom('zf-devteam@zend.com');
+        $this->assertTrue($this->message->isValid());
     }
 
-    public function testGetDecodedHeader()
+    public function testHeadersMethodReturnsHeadersObject()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertEquals($message->from, iconv('UTF-8', iconv_get_encoding('internal_encoding'),
-                                                                   '"Peter Müller" <peter-mueller@example.com>'));
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
     }
 
-    public function testGetHeaderAsArray()
+    public function testToMethodReturnsAddressListObject()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertEquals($message->getHeader('subject', 'array'), array('multipart'));
+        $this->message->addTo('zf-devteam@zend.com');
+        $to = $this->message->to();
+        $this->assertInstanceOf('Zend\Mail\AddressList', $to);
     }
 
-    public function testGetHeaderFromOpenFile()
+    public function testToAddressListLivesInHeaders()
     {
-        $fh = fopen($this->_file, 'r');
-        $message = new Message(array('file' => $fh));
-
-        $this->assertEquals($message->subject, 'multipart');
+        $this->message->addTo('zf-devteam@zend.com');
+        $to      = $this->message->to();
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertTrue($headers->has('to'));
+        $header  = $headers->get('to');
+        $this->assertSame($header->getAddressList(), $to);
     }
 
-    public function testGetFirstPart()
+    public function testFromMethodReturnsAddressListObject()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertEquals(substr($message->getPart(1)->getContent(), 0, 14), 'The first part');
+        $this->message->addFrom('zf-devteam@zend.com');
+        $from = $this->message->from();
+        $this->assertInstanceOf('Zend\Mail\AddressList', $from);
     }
 
-    public function testGetFirstPartTwice()
+    public function testFromAddressListLivesInHeaders()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $message->getPart(1);
-        $this->assertEquals(substr($message->getPart(1)->getContent(), 0, 14), 'The first part');
+        $this->message->addFrom('zf-devteam@zend.com');
+        $from    = $this->message->from();
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertTrue($headers->has('from'));
+        $header  = $headers->get('from');
+        $this->assertSame($header->getAddressList(), $from);
     }
 
-
-    public function testGetWrongPart()
+    public function testCcMethodReturnsAddressListObject()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        try {
-            $message->getPart(-1);
-        } catch (\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while fetching unknown part');
+        $this->message->addCc('zf-devteam@zend.com');
+        $cc = $this->message->cc();
+        $this->assertInstanceOf('Zend\Mail\AddressList', $cc);
     }
 
-    public function testNoHeaderMessage()
+    public function testCcAddressListLivesInHeaders()
     {
-        $message = new Message(array('file' => __FILE__));
-
-        $this->assertEquals(substr($message->getContent(), 0, 5), '<?php');
-
-        $raw = file_get_contents(__FILE__);
-        $raw = "\t" . $raw;
-        $message = new Message(array('raw' => $raw));
-
-        $this->assertEquals(substr($message->getContent(), 0, 6), "\t<?php");
+        $this->message->addCc('zf-devteam@zend.com');
+        $cc      = $this->message->cc();
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertTrue($headers->has('cc'));
+        $header  = $headers->get('cc');
+        $this->assertSame($header->getAddressList(), $cc);
     }
 
-    public function testMultipleHeader()
+    public function testBccMethodReturnsAddressListObject()
     {
-        $raw = file_get_contents($this->_file);
-        $raw = "sUBject: test\nSubJect: test2\n" . $raw;
-        $message = new Message(array('raw' => $raw));
-
-        $this->assertEquals($message->getHeader('subject', 'string'),
-                           'test' . Mime\Mime::LINEEND . 'test2' . Mime\Mime::LINEEND .  'multipart');
-        $this->assertEquals($message->getHeader('subject'),  array('test', 'test2', 'multipart'));
+        $this->message->addBcc('zf-devteam@zend.com');
+        $bcc = $this->message->bcc();
+        $this->assertInstanceOf('Zend\Mail\AddressList', $bcc);
     }
 
-    public function testContentTypeDecode()
+    public function testBccAddressListLivesInHeaders()
     {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertEquals(Mime\Decode::splitContentType($message->ContentType),
-                            array('type' => 'multipart/alternative', 'boundary' => 'crazy-multipart'));
+        $this->message->addBcc('zf-devteam@zend.com');
+        $bcc     = $this->message->bcc();
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertTrue($headers->has('bcc'));
+        $header  = $headers->get('bcc');
+        $this->assertSame($header->getAddressList(), $bcc);
     }
 
-    public function testSplitEmptyMessage()
+    public function testReplyToMethodReturnsAddressListObject()
     {
-        $this->assertEquals(Mime\Decode::splitMessageStruct('', 'xxx'), null);
+        $this->message->addReplyTo('zf-devteam@zend.com');
+        $replyTo = $this->message->replyTo();
+        $this->assertInstanceOf('Zend\Mail\AddressList', $replyTo);
     }
 
-    public function testSplitInvalidMessage()
+    public function testReplyToAddressListLivesInHeaders()
     {
-        try {
-            Mime\Decode::splitMessageStruct("--xxx\n", 'xxx');
-        } catch (\Zend\Mime\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while decoding invalid message');
+        $this->message->addReplyTo('zf-devteam@zend.com');
+        $replyTo = $this->message->replyTo();
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertTrue($headers->has('reply-to'));
+        $header  = $headers->get('reply-to');
+        $this->assertSame($header->getAddressList(), $replyTo);
     }
 
-    public function testInvalidMailHandler()
+    public function testSenderIsNullByDefault()
     {
-        try {
-            $message = new Message(array('handler' => 1));
-        } catch (Exception\InvalidArgumentException $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while using invalid mail handler');
-
+        $this->assertNull($this->message->getSender());
     }
 
-    public function testMissingId()
+    public function testSettingSenderCreatesAddressObject()
     {
-        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/_files/test.mbox/INBOX'));
-
-        try {
-            $message = new Message(array('handler' => $mail));
-        } catch (Exception\InvalidArgumentException $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while mail handler without id');
-
+        $this->message->setSender('zf-devteam@zend.com');
+        $sender = $this->message->getSender();
+        $this->assertInstanceOf('Zend\Mail\Address', $sender);
     }
 
-    public function testIterator()
+    public function testCanSpecifyNameWhenSettingSender()
     {
-        $message = new Message(array('file' => $this->_file));
-        foreach (new \RecursiveIteratorIterator($message) as $num => $part) {
-            if ($num == 1) {
-                // explicit call of __toString() needed for PHP < 5.2
-                $this->assertEquals(substr($part->__toString(), 0, 14), 'The first part');
-            }
-        }
-        $this->assertEquals($part->contentType, 'text/x-vertical');
+        $this->message->setSender('zf-devteam@zend.com', 'ZF DevTeam');
+        $sender = $this->message->getSender();
+        $this->assertInstanceOf('Zend\Mail\Address', $sender);
+        $this->assertEquals('ZF DevTeam', $sender->getName());
     }
 
-    public function testDecodeString()
+    public function testCanProvideAddressObjectWhenSettingSender()
     {
-        $is = Mime\Decode::decodeQuotedPrintable('=?UTF-8?Q?"Peter M=C3=BCller"?= <peter-mueller@example.com>');
-        $should = iconv('UTF-8', iconv_get_encoding('internal_encoding'),
-                        '"Peter Müller" <peter-mueller@example.com>');
-        $this->assertEquals($is, $should);
+        $sender = new Address('zf-devteam@zend.com');
+        $this->message->setSender($sender);
+        $test = $this->message->getSender();
+        $this->assertSame($sender, $test);
     }
 
-    public function testSplitHeader()
+    public function testSenderAccessorsProxyToSenderHeader()
     {
-        $header = 'foo; x=y; y="x"';
-        $this->assertEquals(Mime\Decode::splitHeaderField($header), array('foo', 'x' => 'y', 'y' => 'x'));
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'x'), 'y');
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'y'), 'x');
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'foo', 'foo'), 'foo');
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'foo'), null);
+        $header = new Header\Sender();
+        $this->message->headers()->addHeader($header);
+        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->setSender($address);
+        $this->assertSame($address, $header->getAddress());
     }
 
-    public function testSplitInvalidHeader()
+    public function testCanAddFromAddressUsingName()
     {
-        $header = '';
-        try {
-            Mime\Decode::splitHeaderField($header);
-        } catch (\Zend\Mime\Exception $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while decoding invalid header field');
+        $this->message->addFrom('zf-devteam@zend.com', 'ZF DevTeam');
+        $addresses = $this->message->from();
+        $this->assertEquals(1, count($addresses));
+        $address = $addresses->current();
+        $this->assertEquals('zf-devteam@zend.com', $address->getEmail());
+        $this->assertEquals('ZF DevTeam', $address->getName());
     }
 
-    public function testSplitMessage()
+    public function testCanAddFromAddressUsingAddressObject()
     {
-        $header = 'Test: test';
-        $body   = 'body';
-        $newlines = array("\r\n", "\n\r", "\n", "\r");
+        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addFrom($address);
 
-        $decoded_body   = null; // "Declare" variable befor first "read" usage to avoid IDEs warning
-        $decoded_header = null; // "Declare" variable befor first "read" usage to avoid IDEs warning
-
-        foreach ($newlines as $contentEOL) {
-            foreach ($newlines as $decodeEOL) {
-                $content = $header . $contentEOL . $contentEOL . $body;
-                $decoded = Mime\Decode::splitMessage($content, $decoded_header, $decoded_body, $decodeEOL);
-                $this->assertEquals(array('test' => 'test'), $decoded_header);
-                $this->assertEquals($body, $decoded_body);
-            }
-        }
+        $addresses = $this->message->from();
+        $this->assertEquals(1, count($addresses));
+        $test = $addresses->current();
+        $this->assertSame($address, $test);
     }
 
-    public function testToplines()
+    public function testCanAddManyFromAddressesUsingArray()
     {
-        $message = new Message(array('headers' => file_get_contents($this->_file)));
-        $this->assertTrue(strpos($message->getToplines(), 'multipart message') === 0);
+        $addresses = array(
+            'zf-devteam@zend.com',
+            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
+        );
+        $this->message->addFrom($addresses);
+
+        $from = $this->message->from();
+        $this->assertEquals(3, count($from));
+
+        $this->assertTrue($from->has('zf-devteam@zend.com'));
+        $this->assertTrue($from->has('zf-contributors@lists.zend.com'));
+        $this->assertTrue($from->has('fw-announce@lists.zend.com'));
     }
 
-    public function testNoContent()
+    public function testCanAddManyFromAddressesUsingAddressListObject()
     {
-        $message = new Message(array('raw' => 'Subject: test'));
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
 
-        try {
-            $message->getContent();
-        } catch (Exception\RuntimeException $e) {
-            return; // ok
-        }
-
-        $this->fail('no exception raised while getting content of message without body');
+        $this->message->addFrom('fw-announce@lists.zend.com');
+        $this->message->addFrom($list);
+        $from = $this->message->from();
+        $this->assertEquals(2, count($from));
+        $this->assertTrue($from->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($from->has('zf-devteam@zend.com'));
     }
 
-    public function testEmptyHeader()
+    public function testCanSetFromListFromAddressList()
     {
-        $message = new Message(array());
-        $this->assertEquals(array(), $message->getHeaders());
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
 
-        $message = new Message(array());
-        $subject = null;
-        try {
-            $subject = $message->subject;
-        } catch (Exception\InvalidArgumentException $e) {
-            // ok
-        }
-        if ($subject) {
-            $this->fail('no exception raised while getting header from empty message');
-        }
+        $this->message->addFrom('fw-announce@lists.zend.com');
+        $this->message->setFrom($list);
+        $from = $this->message->from();
+        $this->assertEquals(1, count($from));
+        $this->assertFalse($from->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($from->has('zf-devteam@zend.com'));
     }
 
-    public function testEmptyBody()
+    public function testCanAddCcAddressUsingName()
     {
-        $message = new Message(array());
-        $part = null;
-        try {
-            $part = $message->getPart(1);
-        } catch (Exception\RuntimeException $e) {
-            // ok
-        }
-        if ($part) {
-            $this->fail('no exception raised while getting part from empty message');
-        }
+        $this->message->addCc('zf-devteam@zend.com', 'ZF DevTeam');
+        $addresses = $this->message->cc();
+        $this->assertEquals(1, count($addresses));
+        $address = $addresses->current();
+        $this->assertEquals('zf-devteam@zend.com', $address->getEmail());
+        $this->assertEquals('ZF DevTeam', $address->getName());
+    }
 
-        $message = new Message(array());
-        $this->assertTrue($message->countParts() == 0);
+    public function testCanAddCcAddressUsingAddressObject()
+    {
+        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addCc($address);
+
+        $addresses = $this->message->cc();
+        $this->assertEquals(1, count($addresses));
+        $test = $addresses->current();
+        $this->assertSame($address, $test);
+    }
+
+    public function testCanAddManyCcAddressesUsingArray()
+    {
+        $addresses = array(
+            'zf-devteam@zend.com',
+            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
+        );
+        $this->message->addCc($addresses);
+
+        $cc = $this->message->cc();
+        $this->assertEquals(3, count($cc));
+
+        $this->assertTrue($cc->has('zf-devteam@zend.com'));
+        $this->assertTrue($cc->has('zf-contributors@lists.zend.com'));
+        $this->assertTrue($cc->has('fw-announce@lists.zend.com'));
+    }
+
+    public function testCanAddManyCcAddressesUsingAddressListObject()
+    {
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addCc('fw-announce@lists.zend.com');
+        $this->message->addCc($list);
+        $cc = $this->message->cc();
+        $this->assertEquals(2, count($cc));
+        $this->assertTrue($cc->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($cc->has('zf-devteam@zend.com'));
+    }
+
+    public function testCanSetCcListFromAddressList()
+    {
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addCc('fw-announce@lists.zend.com');
+        $this->message->setCc($list);
+        $cc = $this->message->cc();
+        $this->assertEquals(1, count($cc));
+        $this->assertFalse($cc->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($cc->has('zf-devteam@zend.com'));
+    }
+
+    public function testCanAddBccAddressUsingName()
+    {
+        $this->message->addBcc('zf-devteam@zend.com', 'ZF DevTeam');
+        $addresses = $this->message->bcc();
+        $this->assertEquals(1, count($addresses));
+        $address = $addresses->current();
+        $this->assertEquals('zf-devteam@zend.com', $address->getEmail());
+        $this->assertEquals('ZF DevTeam', $address->getName());
+    }
+
+    public function testCanAddBccAddressUsingAddressObject()
+    {
+        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addBcc($address);
+
+        $addresses = $this->message->bcc();
+        $this->assertEquals(1, count($addresses));
+        $test = $addresses->current();
+        $this->assertSame($address, $test);
+    }
+
+    public function testCanAddManyBccAddressesUsingArray()
+    {
+        $addresses = array(
+            'zf-devteam@zend.com',
+            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
+        );
+        $this->message->addBcc($addresses);
+
+        $bcc = $this->message->bcc();
+        $this->assertEquals(3, count($bcc));
+
+        $this->assertTrue($bcc->has('zf-devteam@zend.com'));
+        $this->assertTrue($bcc->has('zf-contributors@lists.zend.com'));
+        $this->assertTrue($bcc->has('fw-announce@lists.zend.com'));
+    }
+
+    public function testCanAddManyBccAddressesUsingAddressListObject()
+    {
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addBcc('fw-announce@lists.zend.com');
+        $this->message->addBcc($list);
+        $bcc = $this->message->bcc();
+        $this->assertEquals(2, count($bcc));
+        $this->assertTrue($bcc->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($bcc->has('zf-devteam@zend.com'));
+    }
+
+    public function testCanSetBccListFromAddressList()
+    {
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addBcc('fw-announce@lists.zend.com');
+        $this->message->setBcc($list);
+        $bcc = $this->message->bcc();
+        $this->assertEquals(1, count($bcc));
+        $this->assertFalse($bcc->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($bcc->has('zf-devteam@zend.com'));
+    }
+
+    public function testCanAddReplyToAddressUsingName()
+    {
+        $this->message->addReplyTo('zf-devteam@zend.com', 'ZF DevTeam');
+        $addresses = $this->message->replyTo();
+        $this->assertEquals(1, count($addresses));
+        $address = $addresses->current();
+        $this->assertEquals('zf-devteam@zend.com', $address->getEmail());
+        $this->assertEquals('ZF DevTeam', $address->getName());
+    }
+
+    public function testCanAddReplyToAddressUsingAddressObject()
+    {
+        $address = new Address('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addReplyTo($address);
+
+        $addresses = $this->message->replyTo();
+        $this->assertEquals(1, count($addresses));
+        $test = $addresses->current();
+        $this->assertSame($address, $test);
+    }
+
+    public function testCanAddManyReplyToAddressesUsingArray()
+    {
+        $addresses = array(
+            'zf-devteam@zend.com',
+            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
+        );
+        $this->message->addReplyTo($addresses);
+
+        $replyTo = $this->message->replyTo();
+        $this->assertEquals(3, count($replyTo));
+
+        $this->assertTrue($replyTo->has('zf-devteam@zend.com'));
+        $this->assertTrue($replyTo->has('zf-contributors@lists.zend.com'));
+        $this->assertTrue($replyTo->has('fw-announce@lists.zend.com'));
+    }
+
+    public function testCanAddManyReplyToAddressesUsingAddressListObject()
+    {
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addReplyTo('fw-announce@lists.zend.com');
+        $this->message->addReplyTo($list);
+        $replyTo = $this->message->replyTo();
+        $this->assertEquals(2, count($replyTo));
+        $this->assertTrue($replyTo->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($replyTo->has('zf-devteam@zend.com'));
+    }
+
+    public function testCanSetReplyToListFromAddressList()
+    {
+        $list = new AddressList();
+        $list->add('zf-devteam@zend.com');
+
+        $this->message->addReplyTo('fw-announce@lists.zend.com');
+        $this->message->setReplyTo($list);
+        $replyTo = $this->message->replyTo();
+        $this->assertEquals(1, count($replyTo));
+        $this->assertFalse($replyTo->has('fw-announce@lists.zend.com'));
+        $this->assertTrue($replyTo->has('zf-devteam@zend.com'));
+    }
+
+    public function testSubjectIsEmptyByDefault()
+    {
+        $this->assertNull($this->message->getSubject());
+    }
+
+    public function testSubjectIsMutable()
+    {
+        $this->message->setSubject('test subject');
+        $subject = $this->message->getSubject();
+        $this->assertEquals('test subject', $subject);
+    }
+
+    public function testSettingSubjectProxiesToHeader()
+    {
+        $this->message->setSubject('test subject');
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+        $this->assertTrue($headers->has('subject'));
+        $header = $headers->get('subject');
+        $this->assertEquals('test subject', $header->getFieldValue());
+    }
+
+    public function testBodyIsEmptyByDefault()
+    {
+        $this->assertNull($this->message->getBody());
+    }
+
+    public function testMaySetBodyFromString()
+    {
+        $this->message->setBody('body');
+        $this->assertEquals('body', $this->message->getBody());
+    }
+
+    public function testMaySetBodyFromStringSerializableObject()
+    {
+        $object = new TestAsset\StringSerializableObject('body');
+        $this->message->setBody($object);
+        $this->assertSame($object, $this->message->getBody());
+        $this->assertEquals('body', $this->message->getBodyText());
+    }
+
+    public function testMaySetBodyFromMimeMessage()
+    {
+        $body = new MimeMessage();
+        $this->message->setBody($body);
+        $this->assertSame($body, $this->message->getBody());
+    }
+
+    public function testMaySetNullBody()
+    {
+        $this->message->setBody(null);
+        $this->assertNull($this->message->getBody());
+    }
+
+    public static function invalidBodyValues()
+    {
+        return array(
+            array(array('foo')),
+            array(true),
+            array(false),
+            array(new stdClass),
+        );
     }
 
     /**
-     * @group ZF-5209
+     * @dataProvider invalidBodyValues
      */
-    public function testCheckingHasHeaderFunctionality()
+    public function testSettingNonScalarNonMimeNonStringSerializableValueForBodyRaisesException($body)
     {
-        $message = new Message(array('headers' => array('subject' => 'foo')));
-
-        $this->assertTrue( $message->headerExists('subject'));
-        $this->assertTrue( isset($message->subject) );
-        $this->assertTrue( $message->headerExists('SuBject'));
-        $this->assertTrue( isset($message->suBjeCt) );
-        $this->assertFalse($message->headerExists('From'));
+        $this->setExpectedException('Zend\Mail\Exception\InvalidArgumentException');
+        $this->message->setBody($body);
     }
 
-    public function testWrongMultipart()
+    public function testSettingBodyFromSinglePartMimeMessageSetsAppropriateHeaders()
     {
-        $message = new Message(array('raw' => "Content-Type: multipart/mixed\r\n\r\ncontent"));
+        $mime = new Mime('foo-bar');
+        $part = new MimePart('<b>foo</b>');
+        $part->type = 'text/html';
+        $body = new MimeMessage();
+        $body->setMime($mime);
+        $body->addPart($part);
 
-        try {
-            $message->getPart(1);
-        } catch (Exception\RuntimeException $e) {
-            return; // ok
+        $this->message->setBody($body);
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+
+        $this->assertTrue($headers->has('mime-version'));
+        $header = $headers->get('mime-version');
+        $this->assertEquals('1.0', $header->getFieldValue());
+
+        $this->assertTrue($headers->has('content-type'));
+        $header = $headers->get('content-type');
+        $this->assertEquals('text/html', $header->getFieldValue());
+    }
+
+    public function testSettingBodyFromMultiPartMimeMessageSetsAppropriateHeaders()
+    {
+        $mime = new Mime('foo-bar');
+        $text = new MimePart('foo');
+        $text->type = 'text/plain';
+        $html = new MimePart('<b>foo</b>');
+        $html->type = 'text/html';
+        $body = new MimeMessage();
+        $body->setMime($mime);
+        $body->addPart($text);
+        $body->addPart($html);
+
+        $this->message->setBody($body);
+        $headers = $this->message->headers();
+        $this->assertInstanceOf('Zend\Mail\Headers', $headers);
+
+        $this->assertTrue($headers->has('mime-version'));
+        $header = $headers->get('mime-version');
+        $this->assertEquals('1.0', $header->getFieldValue());
+
+        $this->assertTrue($headers->has('content-type'));
+        $header = $headers->get('content-type');
+        $this->assertEquals("multipart/mixed;\r\n boundary=\"foo-bar\"", $header->getFieldValue());
+    }
+
+    public function testRetrievingBodyTextFromMessageWithMultiPartMimeBodyReturnsMimeSerialization()
+    {
+        $mime = new Mime('foo-bar');
+        $text = new MimePart('foo');
+        $text->type = 'text/plain';
+        $html = new MimePart('<b>foo</b>');
+        $html->type = 'text/html';
+        $body = new MimeMessage();
+        $body->setMime($mime);
+        $body->addPart($text);
+        $body->addPart($html);
+
+        $this->message->setBody($body);
+
+        $text = $this->message->getBodyText();
+        $this->assertEquals($body->generateMessage(), $text);
+        $this->assertContains('--foo-bar', $text);
+        $this->assertContains('--foo-bar--', $text);
+        $this->assertContains('Content-Type: text/plain', $text);
+        $this->assertContains('Content-Type: text/html', $text);
+    }
+
+    public function testEncodingIsAsciiByDefault()
+    {
+        $this->assertEquals('ASCII', $this->message->getEncoding());
+    }
+
+    public function testEncodingIsMutable()
+    {
+        $this->message->setEncoding('UTF-8');
+        $this->assertEquals('UTF-8', $this->message->getEncoding());
+    }
+
+    public function testSettingNonAsciiEncodingForcesMimeEncodingOfSomeHeaders()
+    {
+        if (!function_exists('iconv_mime_encode')) {
+            $this->markTestSkipped('Encoding relies on iconv extension');
         }
-        $this->fail('no exception raised while getting part from message without boundary');
+
+        $this->message->addTo('zf-devteam@zend.com', 'ZF DevTeam');
+        $this->message->addFrom('matthew@zend.com', "Matthew Weier O'Phinney");
+        $this->message->addCc('zf-contributors@lists.zend.com', 'ZF Contributors List');
+        $this->message->addBcc('zf-crteam@lists.zend.com', 'ZF CR Team');
+        $this->message->setSubject('This is a subject');
+        $this->message->setEncoding('UTF-8');
+
+        $test = $this->message->headers()->toString();
+
+        $expected = $this->encodeString('ZF DevTeam', 'UTF-8');
+        $this->assertContains($expected, $test);
+        $this->assertContains('<zf-devteam@zend.com>', $test);
+
+        $expected = $this->encodeString("Matthew Weier O'Phinney", 'UTF-8');
+        $this->assertContains($expected, $test, $test);
+        $this->assertContains('<matthew@zend.com>', $test);
+
+        $expected = $this->encodeString("ZF Contributors List", 'UTF-8');
+        $this->assertContains($expected, $test);
+        $this->assertContains('<zf-contributors@lists.zend.com>', $test);
+
+        $expected = $this->encodeString("ZF CR Team", 'UTF-8');
+        $this->assertContains($expected, $test);
+        $this->assertContains('<zf-crteam@lists.zend.com>', $test);
+
+        $self     = $this;
+        $words    = array_map(function($word) use ($self) {
+            return $self->encodeString($word, 'UTF-8');
+        }, explode(' ', 'This is a subject'));
+        $expected = 'Subject: ' . implode("\r\n ", $words);
+        $this->assertContains($expected, $test, $test);
     }
 
-    public function testLateFetch()
+    public function encodeString($string, $charset)
     {
-        $mail = new Storage\Mbox(array('filename' => __DIR__ . '/_files/test.mbox/INBOX'));
-
-        $message = new Message(array('handler' => $mail, 'id' => 5));
-        $this->assertEquals($message->countParts(), 2);
-        $this->assertEquals($message->countParts(), 2);
-
-        $message = new Message(array('handler' => $mail, 'id' => 5));
-        $this->assertEquals($message->subject, 'multipart');
-
-        $message = new Message(array('handler' => $mail, 'id' => 5));
-        $this->assertTrue(strpos($message->getContent(), 'multipart message') === 0);
-    }
-
-    public function testManualIterator()
-    {
-        $message = new Message(array('file' => $this->_file));
-
-        $this->assertTrue($message->valid());
-        $this->assertEquals($message->getChildren(), $message->current());
-        $this->assertEquals($message->key(), 1);
-
-        $message->next();
-        $this->assertTrue($message->valid());
-        $this->assertEquals($message->getChildren(), $message->current());
-        $this->assertEquals($message->key(), 2);
-
-        $message->next();
-        $this->assertFalse($message->valid());
-
-        $message->rewind();
-        $this->assertTrue($message->valid());
-        $this->assertEquals($message->getChildren(), $message->current());
-        $this->assertEquals($message->key(), 1);
-    }
-
-    public function testMessageFlagsAreSet()
-    {
-        $origFlags = array(
-            'foo' => 'bar',
-            'baz' => 'bat'
-        );
-        $message = new Message(array('flags' => $origFlags));
-
-        $messageFlags = $message->getFlags();
-        $this->assertTrue($message->hasFlag('bar'), var_export($messageFlags, 1));
-        $this->assertTrue($message->hasFlag('bat'), var_export($messageFlags, 1));
-        $this->assertEquals(array('bar' => 'bar', 'bat' => 'bat'), $messageFlags);
-    }
-
-    public function testGetHeaderFieldSingle()
-    {
-        $message = new Message(array('file' => $this->_file));
-        $this->assertEquals($message->getHeaderField('subject'), 'multipart');
-    }
-
-    public function testGetHeaderFieldDefault()
-    {
-        $message = new Message(array('file' => $this->_file));
-        $this->assertEquals($message->getHeaderField('content-type'), 'multipart/alternative');
-    }
-
-    public function testGetHeaderFieldNamed()
-    {
-        $message = new Message(array('file' => $this->_file));
-        $this->assertEquals($message->getHeaderField('content-type', 'boundary'), 'crazy-multipart');
-    }
-
-    public function testGetHeaderFieldMissing()
-    {
-        $message = new Message(array('file' => $this->_file));
-        $this->assertNull($message->getHeaderField('content-type', 'foo'));
-    }
-
-    public function testGetHeaderFieldInvalid()
-    {
-        $message = new Message(array('file' => $this->_file));
-        try {
-            $message->getHeaderField('fake-header-name', 'foo');
-        } catch (\Zend\Mail\Exception $e) {
-            return;
-        }
-        $this->fail('No exception thrown while requesting invalid field name');
-    }
-
-    public function testCaseInsensitiveMultipart()
-    {
-        $message = new Message(array('raw' => "coNTent-TYpe: muLTIpaRT/x-empty\r\n\r\n"));
-        $this->assertTrue($message->isMultipart());
-    }
-
-    public function testCaseInsensitiveField()
-    {
-        $header = 'test; fOO="this is a test"';
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'Foo'), 'this is a test');
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'bar'), null);
-    }
-
-    public function testSpaceInFieldName()
-    {
-        $header = 'test; foo =bar; baz      =42';
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'foo'), 'bar');
-        $this->assertEquals(Mime\Decode::splitHeaderField($header, 'baz'), 42);
+        $encoded = iconv_mime_encode('Header', $string, array(
+            'scheme'         => 'Q',
+            'output-charset' => $charset,
+            'line-length'    => 998,
+        ));
+        $encoded = str_replace('Header: ', '', $encoded);
+        return $encoded;
     }
 }

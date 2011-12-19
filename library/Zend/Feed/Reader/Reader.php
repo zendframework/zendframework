@@ -23,7 +23,8 @@
 */
 namespace Zend\Feed\Reader;
 
-use Zend\Http,
+use Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Http,
     Zend\Loader;
 
 /**
@@ -65,7 +66,7 @@ class Reader
     /**
      * Cache instance
      *
-     * @var \Zend\Cache\Frontend\Core
+     * @var CacheAdapter
      */
     protected static $_cache = null;
 
@@ -111,7 +112,7 @@ class Reader
     /**
      * Get the Feed cache
      *
-     * @return \Zend\Cache\Frontend\Core
+     * @return CacheAdapter
      */
     public static function getCache()
     {
@@ -121,10 +122,10 @@ class Reader
     /**
      * Set the feed cache
      *
-     * @param \Zend\Cache\Frontend\Core $cache
+     * @param  CacheAdapter $cache
      * @return void
      */
-    public static function setCache(\Zend\Cache\Frontend\Core $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         self::$_cache = $cache;
     }
@@ -217,13 +218,13 @@ class Reader
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);
 
         if (self::$_httpConditionalGet && $cache) {
-            $data = $cache->load($cacheId);
+            $data = $cache->getItem($cacheId);
             if ($data) {
                 if ($etag === null) {
-                    $etag = $cache->load($cacheId.'_etag');
+                    $etag = $cache->getItem($cacheId.'_etag');
                 }
                 if ($lastModified === null) {
-                    $lastModified = $cache->load($cacheId.'_lastmodified');;
+                    $lastModified = $cache->getItem($cacheId.'_lastmodified');;
                 }
                 if ($etag) {
                     $headers->addHeaderLine('If-None-Match', $etag);
@@ -240,17 +241,17 @@ class Reader
                 $responseXml = $data;
             } else {
                 $responseXml = $response->getBody();
-                $cache->save($responseXml, $cacheId);
+                $cache->setItem($cacheId, $responseXml);
                 if ($response->getHeader('ETag')) {
-                    $cache->save($response->getHeader('ETag'), $cacheId.'_etag');
+                    $cache->setItem($cacheId . '_etag', $response->getHeader('ETag'));
                 }
                 if ($response->getHeader('Last-Modified')) {
-                    $cache->save($response->getHeader('Last-Modified'), $cacheId.'_lastmodified');
+                    $cache->setItem($cacheId . '_lastmodified', $response->getHeader('Last-Modified'));
                 }
             }
             return self::importString($responseXml);
         } elseif ($cache) {
-            $data = $cache->load($cacheId);
+            $data = $cache->getItem($cacheId);
             if ($data !== false) {
                 return self::importString($data);
             }
@@ -259,7 +260,7 @@ class Reader
                 throw new Exception('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $responseXml = $response->getBody();
-            $cache->save($responseXml, $cacheId);
+            $cache->setItem($cacheId, $responseXml);
             return self::importString($responseXml);
         } else {
             $response = $client->send();

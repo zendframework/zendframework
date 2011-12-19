@@ -13,7 +13,7 @@ class CompilerDefinitionTest extends TestCase
         $definition = new CompilerDefinition;
         $definition->addDirectory(__DIR__ . '/../TestAsset/CompilerClasses');
         $definition->compile();
-        
+
         $this->assertTrue($definition->hasClass('ZendTest\Di\TestAsset\CompilerClasses\A'));
         
         $assertClasses = array(

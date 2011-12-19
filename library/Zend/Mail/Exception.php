@@ -32,4 +32,3 @@ namespace Zend\Mail;
 interface Exception
 {
 }
-

@@ -25,12 +25,14 @@
 namespace ZendTest\Paginator;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Paginator,
-    Zend\View\Helper,
-    Zend\View,
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Config,
+    Zend\Paginator,
     Zend\Paginator\Adapter,
-    Zend\Paginator\Exception;
+    Zend\Paginator\Exception,
+    Zend\View,
+    Zend\View\Helper;
 
 
 /**
@@ -77,10 +79,24 @@ class PaginatorTest extends TestCase
 
         $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
 
-        $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
-        $bO = array('cache_dir'=> $this->_getTmpDir());
-
-        $this->_cache = \Zend\Cache\Cache::factory('Core', 'File', $fO, $bO);
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'ttl'       => 3600,
+                    'cache_dir' => $this->_getTmpDir(),
+                ),
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
 
         Paginator\Paginator::setCache($this->_cache);
 
@@ -89,6 +105,7 @@ class PaginatorTest extends TestCase
 
     protected function tearDown()
     {
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         $this->_dbConn = null;
         $this->_testCollection = null;
         $this->_paginator = null;
@@ -97,10 +114,6 @@ class PaginatorTest extends TestCase
     protected function _getTmpDir()
     {
         $tmpDir = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'zend_paginator';
-        if (file_exists($tmpDir)) {
-            $this->_rmDirRecursive($tmpDir);
-        }
-        mkdir($tmpDir);
         $this->cacheDir = $tmpDir;
         return $tmpDir;
     }
@@ -136,7 +149,7 @@ class PaginatorTest extends TestCase
 
         Paginator\Paginator::setScrollingStyleBroker(new Paginator\ScrollingStyleBroker());
 
-        $this->_cache->clean();
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
         $this->_paginator->setCacheEnabled(true);
     }
 
@@ -656,15 +669,16 @@ class PaginatorTest extends TestCase
         $pageItems = $this->_paginator->setItemCountPerPage(8)->setCurrentPageNumber(3)->getCurrentItems();
 
         $pageItems = $this->_paginator->getPageItemCache();
-        $expected = array(3 => new \ArrayIterator(range(17, 24)));
-        $this->assertEquals($expected, $pageItems);
+        $expected = /*array(3 => */ new \ArrayIterator(range(17, 24)) /*) */;
+        $this->assertEquals($expected, $pageItems[3]);
 
         // get back to already cached data
         $this->_paginator->setItemCountPerPage(5);
         $pageItems = $this->_paginator->getPageItemCache();
         $expected =array(1 => new \ArrayIterator(range(1, 5)),
                          2 => new \ArrayIterator(range(6, 10)));
-        $this->assertEquals($expected, $pageItems);
+        $this->assertEquals($expected[1], $pageItems[1]);
+        $this->assertEquals($expected[2], $pageItems[2]);
     }
 
     public function testToJson()

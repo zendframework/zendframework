@@ -23,8 +23,9 @@
  */
 namespace Zend\Date;
 
+use Zend\Cache\Storage\Adapter as CacheAdapter;
+
 /**
- * @uses       \Zend\Date\Exception
  * @category   Zend
  * @package    Zend_Date
  * @subpackage Zend_Date_DateObject
@@ -171,8 +172,8 @@ abstract class DateObject {
 
         if (isset(self::$_cache)) {
             $id = strtr('Zend_DateObject_mkTime_' . $this->_offset . '_' . $year.$month.$day.'_'.$hour.$minute.$second . '_'.(int)$gmt, '-','_');
-            if ($result = self::$_cache->load($id)) {
-                return unserialize($result);
+            if ($result = self::$_cache->getItem($id)) {
+                return $result;
             }
         }
 
@@ -260,9 +261,9 @@ abstract class DateObject {
 
         if (isset(self::$_cache)) {
           if (self::$_cacheTags) {
-            self::$_cache->save( serialize($date), $id, array('Zend_Date'));
+            self::$_cache->setItem($id, $date, array('tags' => array('Zend_Date')));
           } else {
-                self::$_cache->save( serialize($date), $id);
+                self::$_cache->setItem($id, $date);
           }
         }
 
@@ -325,8 +326,8 @@ abstract class DateObject {
         $origstamp = $timestamp;
         if (isset(self::$_cache)) {
             $idstamp = strtr('Zend_DateObject_date_' . $this->_offset . '_'. $timestamp . '_'.(int)$gmt, '-','_');
-            if ($result2 = self::$_cache->load($idstamp)) {
-                $timestamp = unserialize($result2);
+            if ($result2 = self::$_cache->getItem($idstamp)) {
+                $timestamp = $result2;
                 $jump = true;
             }
         }
@@ -350,9 +351,9 @@ abstract class DateObject {
 
             if (isset(self::$_cache)) {
               if (self::$_cacheTags) {
-                self::$_cache->save( serialize($timestamp), $idstamp, array('Zend_Date'));
+                self::$_cache->setItem($idstamp, $timestamp, array('tags' => array('Zend_Date')));
               } else {
-                    self::$_cache->save( serialize($timestamp), $idstamp);
+                    self::$_cache->setItem($idstamp, $timestamp);
               }
             }
         }
@@ -683,8 +684,8 @@ abstract class DateObject {
 
         if (isset(self::$_cache)) {
             $id = strtr('Zend_DateObject_getDateParts_' . $timestamp.'_'.(int)$fast, '-','_');
-            if ($result = self::$_cache->load($id)) {
-                return unserialize($result);
+            if ($result = self::$_cache->getItem($id)) {
+                return $result;
             }
         }
 
@@ -842,9 +843,9 @@ abstract class DateObject {
 
         if (isset(self::$_cache)) {
           if (self::$_cacheTags) {
-            self::$_cache->save( serialize($array), $id, array('Zend_Date'));
+            self::$_cache->setItem($id, $array, array('tags' => array('Zend_Date')));
           } else {
-                self::$_cache->save( serialize($array), $id);
+                self::$_cache->setItem($id, $array);
           }
         }
 
@@ -1074,18 +1075,15 @@ abstract class DateObject {
     /**
      * Internal method to check if the given cache supports tags
      *
-     * @param Zend_Cache $cache
+     * @return bool
      */
     protected static function _getTagSupportForCache()
     {
-        $backend = self::$_cache->getBackend();
-        if ($backend instanceof \Zend\Cache\Backend\ExtendedInterface) {
-            $cacheOptions = $backend->getCapabilities();
-            self::$_cacheTags = $cacheOptions['tags'];
-        } else {
+        if (!self::$_cache instanceof CacheAdapter) {
             self::$_cacheTags = false;
+            return false;
         }
-
-        return self::$_cacheTags;
+        self::$_cacheTags = true;
+        return true;
     }
 }

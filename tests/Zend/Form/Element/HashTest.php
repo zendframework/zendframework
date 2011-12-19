@@ -177,4 +177,10 @@ class HashTest extends \PHPUnit_Framework_TestCase
         $html = $this->element->renderViewHelper();
         $this->assertContains($this->element->getHash(), $html, 'Html is: ' . $html);
     }
+
+    public function testMutlipleHashElementsWithSameNameShareSingleHash()
+    {
+        $element = new HashElement('foo');
+        $this->assertSame($this->element->getHash(), $element->getHash());
+    }
 }

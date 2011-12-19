@@ -5,7 +5,7 @@
     array (
     ),
     'instantiator' => '__construct',
-    'injectionMethods' => 
+    'methods' =>
     array (
       '__construct' => 
       array (
@@ -16,22 +16,22 @@
   ),
   'My\\EntityA' => 
   array (
-    'superTypes' => 
+    'supertypes' =>
     array (
     ),
     'instantiator' => NULL,
-    'injectionMethods' => 
+    'methods' =>
     array (
     ),
   ),
   'My\\Mapper' => 
   array (
-    'superTypes' => 
+    'supertypes' =>
     array (
       0 => 'ArrayObject',
     ),
     'instantiator' => '__construct',
-    'injectionMethods' => 
+    'methods' =>
     array (
       'setDbAdapter' => 
       array (
@@ -41,7 +41,7 @@
   ),
   'My\\RepositoryA' => 
   array (
-    'superTypes' => 
+    'superTypes' =>
     array (
     ),
     'instantiator' => '__construct',
@@ -55,12 +55,12 @@
   ),
   'My\\RepositoryB' => 
   array (
-    'superTypes' => 
+    'superTypes' =>
     array (
       0 => 'My\\RepositoryA',
     ),
     'instantiator' => NULL,
-    'injectionMethods' => 
+    'Methods' =>
     array (
     ),
   ),

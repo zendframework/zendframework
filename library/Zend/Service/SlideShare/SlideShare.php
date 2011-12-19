@@ -25,7 +25,8 @@
 namespace Zend\Service\SlideShare;
 
 use SimpleXMLElement,
-    Zend\Cache\Frontend,
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Http,
     Zend\Http\Client;
 
@@ -115,7 +116,7 @@ class SlideShare
     /**
      * The Cache object to use to perform caching
      *
-     * @var Zend\Cache\Frontend\Core
+     * @var CacheAdapter
      */
     protected $cacheobject;
 
@@ -154,31 +155,44 @@ class SlideShare
     }
 
     /**
-     * Sets the Zend\Cache\Frontend\Core object to use to cache the results of API queries
+     * Sets the CacheAdapter object to use to cache the results of API queries
      *
-     * @param Zend\Cache\Frontend\Core $cacheobject The Zend\Cache\Frontend\Core object used
+     * @param  CacheAdapter $cacheobject The CacheAdapter object used
      * @return Zend\Service\SlideShare\SlideShare
      */
-    public function setCacheObject(Frontend\Core $cacheobject)
+    public function setCacheObject(CacheAdapter $cacheobject)
     {
         $this->cacheobject = $cacheobject;
         return $this;
     }
 
     /**
-     * Gets the Zend\Cache object which will be used to cache API queries. If no cache object
+     * Gets the CacheAdapter object which will be used to cache API queries. If no cache object
      * was previously set the the default will be used (Filesystem caching in /tmp with a life
      * time of 43200 seconds)
      *
-     * @return Zend\Cache\Frontend\Core The object used in caching
+     * @return CacheAdapter The object used in caching
      */
     public function getCacheObject()
     {
 
-        if (!($this->cacheobject instanceof Frontend\Core)) {
-            $cache = \Zend\Cache\Cache::factory('Core', 'File', array('lifetime' => 43200,
-                                                               'automatic_serialization' => true),
-                                                         array('cache_dir' => sys_get_temp_dir()));
+        if (!($this->cacheobject instanceof CacheAdapter)) {
+            $cache = CacheFactory::factory(array(
+                'adapter' => array(
+                    'name' => 'filesystem',
+                    'options' => array(
+                        'ttl' => 43200,
+                    )
+                ),
+                'plugins' => array(
+                    array(
+                        'name'    => 'serializer',
+                        'options' => array(
+                            'serializer' => 'php_serialize',
+                        ),
+                    )
+                ),
+            ));
 
             $this->setCacheObject($cache);
         }
@@ -391,7 +405,7 @@ class SlideShare
 
         $cache_key = md5("__zendslideshare_cache_ss_$ss_id");
 
-        if (!$retval = $cache->load($cache_key)) {
+        if (!$retval = $cache->getItem($cache_key)) {
             $client = $this->getHttpClient();
 
             $client->setUri(self::SERVICE_GET_SHOW_URI);
@@ -418,7 +432,7 @@ class SlideShare
 
             $retval = $this->slideShowNodeToObject(clone $sxe);
 
-            $cache->save($retval, $cache_key);
+            $cache->setItem($cache_key, $retval);
         }
 
         return $retval;
@@ -526,7 +540,7 @@ class SlideShare
 
         $cache_key = md5('__zendslideshare_cache_' . $key . $value . $offset . $limit);
 
-        if (!$retval = $cache->load($cache_key)) {
+        if (!$retval = $cache->getItem($cache_key)) {
 
             $client = $this->getHttpClient();
 
@@ -560,7 +574,7 @@ class SlideShare
                 }
             }
 
-            $cache->save($retval, $cache_key);
+            $cache->setItem($cache_key, $retval);
         }
 
         return $retval;
@@ -589,7 +603,7 @@ class SlideShare
 
         $cache_key = md5('__zendslideshare_cache_search_' . $query);
 
-        if (!$retval = $cache->load($cache_key)) {
+        if (!$retval = $cache->getItem($cache_key)) {
 
             $client = $this->getHttpClient();
 
@@ -623,7 +637,7 @@ class SlideShare
                 }
             }
 
-            $cache->save($retval, $cache_key);
+            $cache->setItem($cache_key, $retval);
         }
 
         return $retval;

@@ -23,15 +23,12 @@
  * @namespace
  */
 namespace ZendTest\Translator\Adapter;
-use Zend\Translator\Adapter;
-use Zend\Translator;
-use Zend\Locale;
-use Zend\Cache;
-use Zend\Cache\Frontend;
 
-/**
- * Zend_Translator_Adapter_Array
- */
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Locale,
+    Zend\Translator,
+    Zend\Translator\Adapter;
 
 /**
  * @category   Zend
@@ -52,6 +49,10 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->_cacheDir = sys_get_temp_dir() . '/zend_translator_array';
+        $this->_removeRecursive($this->_cacheDir);
+        mkdir($this->_cacheDir);
+
         if (Adapter\ArrayAdapter::hasCache()) {
             Adapter\ArrayAdapter::clearCache();
             Adapter\ArrayAdapter::removeCache();
@@ -63,6 +64,28 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         if (Adapter\ArrayAdapter::hasCache()) {
             Adapter\ArrayAdapter::clearCache();
             Adapter\ArrayAdapter::removeCache();
+        }
+        $this->_removeRecursive($this->_cacheDir);
+    }
+
+    protected function _removeRecursive($dir)
+    {
+        if (file_exists($dir)) {
+            $dirIt = new \DirectoryIterator($dir);
+            foreach ($dirIt as $entry) {
+                $fname = $entry->getFilename();
+                if ($fname == '.' || $fname == '..') {
+                    continue;
+                }
+
+                if ($entry->isFile()) {
+                    unlink($entry->getPathname());
+                } else {
+                    $this->_removeRecursive($entry->getPathname());
+                }
+            }
+
+            rmdir($dir);
         }
     }
 
@@ -275,9 +298,23 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testCaching()
     {
-        $cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/_files/'));
+        $cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'Filesystem',
+                'options' => array(
+                    'ttl'       => 120,
+                    'cache_dir' => $this->_cacheDir,
+                )
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
 
         $this->assertFalse(Adapter\ArrayAdapter::hasCache());
         Adapter\ArrayAdapter::setCache($cache);
@@ -285,31 +322,45 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
-        $this->assertTrue($cache instanceof Frontend\Core);
+        $this->assertTrue($cache instanceof CacheAdapter);
         unset ($adapter);
 
         Adapter\ArrayAdapter::setCache($cache);
         $this->assertTrue(Adapter\ArrayAdapter::hasCache());
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
-        $this->assertTrue($cache instanceof Frontend\Core);
+        $this->assertTrue($cache instanceof CacheAdapter);
 
         Adapter\ArrayAdapter::removeCache();
         $this->assertFalse(Adapter\ArrayAdapter::hasCache());
 
-        $cache->save('testdata', 'testid');
+        $cache->setItem('testid', 'testdata');
         Adapter\ArrayAdapter::setCache($cache);
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         Adapter\ArrayAdapter::removeCache();
-        $temp = $cache->load('testid');
+        $temp = $cache->getItem('testid');
         $this->assertEquals('testdata', $temp);
     }
 
     public function testLoadingFilesIntoCacheAfterwards()
     {
-        $cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/_files/'));
+        $cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'Filesystem',
+                'options' => array(
+                    'ttl'       => 120,
+                    'cache_dir' => $this->_cacheDir,
+                )
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
 
         $this->assertFalse(Adapter\ArrayAdapter::hasCache());
         Adapter\ArrayAdapter::setCache($cache);
@@ -317,7 +368,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
         $adapter = new Adapter\ArrayAdapter(__DIR__ . '/_files/translation_en.php', 'en');
         $cache   = Adapter\ArrayAdapter::getCache();
-        $this->assertTrue($cache instanceof Frontend\Core);
+        $this->assertTrue($cache instanceof CacheAdapter);
 
         $adapter->addTranslation(__DIR__ . '/_files/translation_en.php', 'ru', array('reload' => true));
         $test = $adapter->getMessages('all');

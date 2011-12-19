@@ -19,169 +19,289 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Mail\Transport;
-use Zend\Config,
-    Zend\Mail\Transport\Exception,
-    Zend\Mail\AbstractTransport;
+
+use Traversable,
+    Zend\Mail\AddressDescription,
+    Zend\Mail\AddressList,
+    Zend\Mail\Exception,
+    Zend\Mail\Header,
+    Zend\Mail\Headers,
+    Zend\Mail\Message,
+    Zend\Mail\Transport;
 
 /**
- * Class for sending eMails via the PHP internal mail() function
+ * Class for sending email via the PHP internal mail() function
  *
- * @uses       \Zend\Mail\AbstractTransport
- * @uses       \Zend\Mail\Transport\Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Sendmail extends AbstractTransport
+class Sendmail implements Transport
 {
-    /**
-     * Subject
-     * @var string
-     * @access public
-     */
-    public $subject = null;
-
-
     /**
      * Config options for sendmail parameters
      *
      * @var string
      */
-    public $parameters;
+    protected $parameters;
 
     /**
-     * EOL character string
-     * @var string
-     * @access public
+     * Callback to use when sending mail; typically, {@link mailHandler()}
+     * 
+     * @var callable
      */
-    public $EOL = PHP_EOL;
+    protected $callable;
 
     /**
      * error information
      * @var string
      */
-    protected $_errstr;
+    protected $errstr;
+
+    /**
+     * @var string
+     */
+    protected $operatingSystem;
 
     /**
      * Constructor.
      *
-     * @param  string|array|\Zend\Config\Config $parameters OPTIONAL (Default: null)
+     * @param  null|string|array|Traversable $parameters OPTIONAL (Default: null)
      * @return void
      */
     public function __construct($parameters = null)
     {
-        if ($parameters instanceof Config\Config) {
-            $parameters = $parameters->toArray();
+        if ($parameters !== null) {
+            $this->setParameters($parameters);
         }
-
-        if (is_array($parameters)) {
-            $parameters = implode(' ', $parameters);
-        }
-
-        $this->parameters = $parameters;
+        $this->callable = array($this, 'mailHandler');
     }
 
+    /**
+     * Set sendmail parameters
+     *
+     * Used to populate the additional_parameters argument to mail()
+     * 
+     * @param  null|string|array|Traversable $parameters 
+     * @return Sendmail
+     */
+    public function setParameters($parameters)
+    {
+        if (is_null($parameters) || is_string($parameters)) {
+            $this->parameters = $parameters;
+            return $this;
+        }
+
+        if (!is_array($parameters) && !$parameters instanceof Traversable) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a string, array, or Traversable object of paremeters; received "%s"',
+                __METHOD__,
+                (is_object($parameters) ? get_class($parameters) : gettype($parameters))
+            ));
+        }
+
+        $string = '';
+        foreach ($parameters as $param) {
+            $string .= ' ' . $param;
+        }
+        trim($string);
+
+        $this->parameters = $string;
+        return $this;
+    }
+
+    /**
+     * Set callback to use for mail
+     *
+     * Primarily for testing purposes, but could be used to curry arguments.
+     * 
+     * @param  callable $callable 
+     * @return Sendmail
+     */
+    public function setCallable($callable)
+    {
+        if (!is_callable($callable)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a callable argument; received "%s"',
+                __METHOD__,
+                (is_object($callable) ? get_class($callable) : gettype($callable))
+            ));
+        }
+        $this->callable = $callable;
+        return $this;
+    }
+
+    /**
+     * Send a message
+     * 
+     * @param  Message $message 
+     * @return void
+     */
+    public function send(Message $message)
+    {
+        $to      = $this->prepareRecipients($message);
+        $subject = $this->prepareSubject($message);
+        $body    = $this->prepareBody($message);
+        $headers = $this->prepareHeaders($message);
+        $params  = $this->prepareParameters($message);
+
+        call_user_func($this->callable, $to, $subject, $body, $headers, $params);
+    }
+
+    /**
+     * Prepare recipients list
+     * 
+     * @param  Message $message 
+     * @return string
+     */
+    protected function prepareRecipients(Message $message)
+    {
+        $headers = $message->headers();
+
+        if (!$headers->has('to')) {
+            throw new Exception\RuntimeException('Invalid email; contains no "To" header');
+        }
+
+        $to   = $headers->get('to');
+        $list = $to->getAddressList();
+        if (0 == count($list)) {
+            throw new Exception\RuntimeException('Invalid "To" header; contains no addresses');
+        }
+
+        // If not on Windows, return normal string
+        if (!$this->isWindowsOs()) {
+            return $to->getFieldValue();
+        }
+
+        // Otherwise, return list of emails
+        $addresses = array();
+        foreach ($list as $address) {
+            $addresses[] = $address->getEmail();
+        }
+        $addresses = implode(', ', $addresses);
+        return $addresses;
+    }
+
+    /**
+     * Prepare the subject line string
+     * 
+     * @param  Message $message 
+     * @return string
+     */
+    protected function prepareSubject(Message $message)
+    {
+        return $message->getSubject();
+    }
+
+    /**
+     * Prepare the body string
+     * 
+     * @param  Message $message 
+     * @return string
+     */
+    protected function prepareBody(Message $message)
+    {
+        if (!$this->isWindowsOs()) {
+            // *nix platforms can simply return the body text
+            return $message->getBodyText();
+        }
+
+        // On windows, lines beginning with a full stop need to be fixed
+        $text = $message->getBodyText();
+        $text = str_replace("\n.", "\n..", $text);
+        return $text;
+    }
+
+    /**
+     * Prepare the textual representation of headers
+     * 
+     * @param  Message $message
+     * @return string
+     */
+    protected function prepareHeaders(Message $message)
+    {
+        $headers = $message->headers();
+
+        // On Windows, simply return verbatim
+        if ($this->isWindowsOs()) {
+            return $headers->toString();
+        }
+
+        // On *nix platforms, strip the "to" header
+        $headersToSend = new Headers();
+        foreach ($headers as $header) {
+            if ('To' == $header->getFieldName()) {
+                continue;
+            }
+            $headersToSend->addHeader($header);
+        }
+        return $headersToSend->toString();
+    }
+
+    /**
+     * Prepare additional_parameters argument
+     *
+     * Basically, overrides the MAIL FROM envelope with either the Sender or 
+     * From address.
+     * 
+     * @param  Message $message 
+     * @return string
+     */
+    protected function prepareParameters(Message $message)
+    {
+        if ($this->isWindowsOs()) {
+            return null;
+        }
+
+        $parameters = (string) $this->parameters;
+
+        $sender = $message->getSender();
+        if ($sender instanceof AddressDescription) {
+            $parameters .= ' -r ' . $sender->getEmail();
+            return $parameters;
+        }
+
+        $from = $message->from();
+        if (count($from)) {
+            $from->rewind();
+            $sender      = $from->current();
+            $parameters .= ' -r ' . $sender->getEmail();
+            return $parameters;
+        }
+
+        return $parameters;
+    }
 
     /**
      * Send mail using PHP native mail()
      *
-     * @access public
+     * @param  string $to
+     * @param  string $subject
+     * @param  string $message
+     * @param  string $headers
      * @return void
-     * @throws \Zend\Mail\Transport\Exception if parameters is set
-     *         but not a string
-     * @throws \Zend\Mail\Transport\Exception on mail() failure
+     * @throws Exception\RuntimeException on mail failure
      */
-    public function _sendMail()
+    public function mailHandler($to, $subject, $message, $headers, $parameters)
     {
-        if ($this->parameters === null) {
-            set_error_handler(array($this, '_handleMailErrors'));
-            $result = mail(
-                $this->recipients,
-                $this->_mail->getSubject(),
-                $this->body,
-                $this->header);
-            restore_error_handler();
+        set_error_handler(array($this, 'handleMailErrors'));
+        if ($parameters === null) {
+            $result = mail($to, $subject, $message, $headers);
         } else {
-        	if(!is_string($this->parameters)) {
-	            /**
-	             * Exception is thrown here because
-	             * $parameters is a public property
-	             */
-                throw new Exception\RuntimeException(
-                    'Parameters were set but are not a string'
-                );
+            $result = mail($to, $subject, $message, $headers, $parameters);
+        }
+        restore_error_handler();
+
+        if ($this->errstr !== null || !$result) {
+            $errstr = $this->errstr;
+            if (empty($errstr)) {
+                $errstr = 'Unknown error';
             }
-
-            set_error_handler(array($this, '_handleMailErrors'));
-            $result = mail(
-                $this->recipients,
-                $this->_mail->getSubject(),
-                $this->body,
-                $this->header,
-                $this->parameters);
-            restore_error_handler();
+            throw new Exception\RuntimeException('Unable to send mail: ' . $errstr);
         }
-
-        if ($this->_errstr !== null || !$result) {
-            throw new Exception\RuntimeException('Unable to send mail. ' . $this->_errstr);
-        }
-    }
-
-
-    /**
-     * Format and fix headers
-     *
-     * mail() uses its $to and $subject arguments to set the To: and Subject:
-     * headers, respectively. This method strips those out as a sanity check to
-     * prevent duplicate header entries.
-     *
-     * @access  protected
-     * @param   array $headers
-     * @return  void
-     * @throws  \Zend\Mail\Transport\Exception
-     */
-    protected function _prepareHeaders($headers)
-    {
-        if (!$this->_mail) {
-            throw new Exception\RuntimeException('_prepareHeaders requires a registered \Zend\Mail\Mail object');
-        }
-
-        // mail() uses its $to parameter to set the To: header, and the $subject
-        // parameter to set the Subject: header. We need to strip them out.
-        if (0 === strpos(PHP_OS, 'WIN')) {
-            // If the current recipients list is empty, throw an error
-            if (empty($this->recipients)) {
-                throw new Exception\RuntimeException('Missing To addresses');
-            }
-        } else {
-            // All others, simply grab the recipients and unset the To: header
-            if (!isset($headers['To'])) {
-                throw new Exception\RuntimeException('Missing To header');
-            }
-
-            unset($headers['To']['append']);
-            $this->recipients = implode(',', $headers['To']);
-        }
-
-        // Remove recipient header
-        unset($headers['To']);
-
-        // Remove subject header, if present
-        if (isset($headers['Subject'])) {
-            unset($headers['Subject']);
-        }
-
-        // Prepare headers
-        parent::_prepareHeaders($headers);
-
-        // Fix issue with empty blank line ontop when using Sendmail Trnasport
-        $this->header = rtrim($this->header);
     }
 
     /**
@@ -194,10 +314,22 @@ class Sendmail extends AbstractTransport
      * @param array  $errcontext
      * @return true
      */
-    public function _handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
+    public function handleMailErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {
-        $this->_errstr = $errstr;
+        $this->errstr = $errstr;
         return true;
     }
 
+    /**
+     * Is this a windows OS?
+     * 
+     * @return bool
+     */
+    protected function isWindowsOs()
+    {
+        if (!$this->operatingSystem) {
+            $this->operatingSystem = strtoupper(substr(PHP_OS, 0, 3));
+        }
+        return ($this->operatingSystem == 'WIN');
+    }
 }

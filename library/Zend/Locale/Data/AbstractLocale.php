@@ -24,17 +24,13 @@
  */
 namespace Zend\Locale\Data;
 
-use Zend\Cache\Cache,
-    Zend\Cache\Frontend as CacheFrontend,
+use Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Locale\Locale,
     Zend\Locale\Exception\InvalidArgumentException;
 
 /**
  * Locale data reader, handles the CLDR
  *
- * @uses       Zend\Cache\Cache
- * @uses       Zend\Locale
- * @uses       Zend\Locale\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data
@@ -46,7 +42,7 @@ abstract class AbstractLocale
     /**
      * Internal cache for ldml values
      *
-     * @var \Zend\Cache\Core
+     * @var CacheAdapter
      * @access private
      */
     protected static $_cache = null;
@@ -69,7 +65,7 @@ abstract class AbstractLocale
     /**
      * Returns the set cache
      *
-     * @return \Zend\Cache\Core The set cache
+     * @return CacheAdapter The set cache
      */
     public static function getCache()
     {
@@ -79,11 +75,15 @@ abstract class AbstractLocale
     /**
      * Set a cache for Zend_Locale_Data
      *
-     * @param \Zend\Cache\Frontend $cache A cache frontend
+     * @param CacheAdapter $cache A cache frontend
      */
-    public static function setCache(CacheFrontend $cache)
+    public static function setCache(CacheAdapter $cache)
     {
         self::$_cache = $cache;
+
+        foreach ($cache->getPlugins() as $plugin) {
+        }
+
         self::_getTagSupportForCache();
     }
 
@@ -94,7 +94,7 @@ abstract class AbstractLocale
      */
     public static function hasCache()
     {
-        if (self::$_cache !== null) {
+        if (self::$_cache instanceof CacheAdapter) {
             return true;
         }
 
@@ -119,14 +119,18 @@ abstract class AbstractLocale
      */
     public static function clearCache($tag = null)
     {
+        if (!self::$_cache instanceof CacheAdapter) {
+            return;
+        }
+
         if (self::$_cacheTags) {
             if ($tag == null) {
                 $tag = 'Zend_Locale';
             }
 
-            self::$_cache->clean(\Zend\Cache\Cache::CLEANING_MODE_MATCHING_TAG, array($tag));
+            self::$_cache->clear(CacheAdapter::MATCH_TAGS_OR, array('tags' => array($tag)));
         } else {
-            self::$_cache->clean(\Zend\Cache\Cache::CLEANING_MODE_ALL);
+            self::$_cache->clear(CacheAdapter::MATCH_ALL);
         }
     }
 
@@ -167,15 +171,19 @@ abstract class AbstractLocale
      */
     protected static function _getTagSupportForCache()
     {
-        $backend = self::$_cache->getBackend();
-        if ($backend instanceof \Zend\Cache\Backend\ExtendedInterface) {
-            $cacheOptions = $backend->getCapabilities();
-            self::$_cacheTags = $cacheOptions['tags'];
-        } else {
+        if (!self::$_cache instanceof CacheAdapter) {
             self::$_cacheTags = false;
+            return false;
         }
 
-        return self::$_cacheTags;
+        $capabilities = self::$_cache->getCapabilities();
+        if (!$capabilities->getTagging()) {
+            self::$_cacheTags = false;
+            return false;
+        }
+
+        self::$_cacheTags = true;
+        return true;
     }
 
     /**

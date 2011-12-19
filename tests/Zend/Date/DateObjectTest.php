@@ -23,7 +23,8 @@ namespace ZendTest\Date;
 
 use Zend\Date\Date,
     Zend\Date\DateObject,
-    Zend\Cache\Cache,
+    Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Locale\Locale;
 
 /**
@@ -47,16 +48,29 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
     {
         $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');
-        $this->_cache = Cache::factory('Core', 'File',
-                 array('lifetime' => 120, 'automatic_serialization' => true),
-                 array('cache_dir' => __DIR__ . '/../_files/'));
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'filesystem',
+                'options' => array(
+                    'ttl' => 120,
+                ),
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
         DateObjectTestHelper::setOptions(array('cache' => $this->_cache));
     }
 
     public function tearDown()
     {
         date_default_timezone_set($this->_originaltimezone);
-        $this->_cache->clean(Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
     }
 
     /**

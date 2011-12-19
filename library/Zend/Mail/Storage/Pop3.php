@@ -23,18 +23,12 @@
  * @namespace
  */
 namespace Zend\Mail\Storage;
-use Zend\Mail\AbstractStorage,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Protocol,
+
+use Zend\Mail\Protocol,
     Zend\Mail,
     Zend\Mime;
 
 /**
- * @uses       \Zend\Mail\Message\Message
- * @uses       \Zend\Mail\Protocol\Pop3
- * @uses       \Zend\Mail\Storage\AbstractStorage
- * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mime\Decode
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage

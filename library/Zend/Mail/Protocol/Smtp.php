@@ -25,17 +25,13 @@
  */
 namespace Zend\Mail\Protocol;
 
-use Zend\Mail\AbstractProtocol,
-    Zend\Mail\Protocol\Exception;
+use Zend\Mime\Mime;
 
 /**
- * Smtp implementation of Zend_Mail_Protocol_Abstract
+ * Smtp implementation of Zend\Mail\Protocol\AbstractProtocol
  *
  * Minimum implementation according to RFC2821: EHLO, MAIL FROM, RCPT TO, DATA, RSET, NOOP, QUIT
  *
- * @uses       \Zend\Mail\Protocol\AbstractProtocol
- * @uses       \Zend\Mail\Protocol\Exception
- * @uses       \Zend\Mime\Mime
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -111,14 +107,47 @@ class Smtp extends AbstractProtocol
     /**
      * Constructor.
      *
-     * @param  string  $host
-     * @param  integer $port
-     * @param  array   $config
+     * The first argument may be an array of all options. If so, it must include
+     * the 'host' and 'port' keys in order to ensure that all required values 
+     * are present.
+     *
+     * @param  string|array $host 
+     * @param  null|integer $port
+     * @param  null|array   $config
      * @return void
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception\InvalidArgumentException
      */
-    public function __construct($host = '127.0.0.1', $port = null, array $config = array())
+    public function __construct($host = '127.0.0.1', $port = null, array $config = null)
     {
+        // Did we receive a configuration array?
+        if (is_array($host)) {
+            // Merge config array with principal array, if provided
+            if (is_array($config)) {
+                $config = array_replace_recursive($host, $config);
+            } else {
+                $config = $host;
+            }
+
+            // Look for a host key; if none found, use default value
+            if (isset($config['host'])) {
+                $host = $config['host'];
+            } else {
+                $host = '127.0.0.1';
+            }
+
+            // Look for a port key; if none found, use default value
+            if (isset($config['port'])) {
+                $port = $config['port'];
+            } else {
+                $port = null;
+            }
+        }
+
+        // If we don't have a config array, initialize it
+        if (null === $config) {
+            $config = array();
+        }
+
         if (isset($config['ssl'])) {
             switch (strtolower($config['ssl'])) {
                 case 'tls':
@@ -165,7 +194,7 @@ class Smtp extends AbstractProtocol
      * Initiate HELO/EHLO sequence and set flag to indicate valid smtp session
      *
      * @param  string $host The client hostname or IP address (default: 127.0.0.1)
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function helo($host = '127.0.0.1')
@@ -203,7 +232,7 @@ class Smtp extends AbstractProtocol
      * Send EHLO or HELO depending on capabilities of smtp host
      *
      * @param  string $host The client hostname or IP address (default: 127.0.0.1)
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception
      * @return void
      */
     protected function _ehlo($host)
@@ -215,7 +244,7 @@ class Smtp extends AbstractProtocol
         } catch (Exception $e) {
             $this->_send('HELO ' . $host);
             $this->_expect(250, 300); // Timeout set for 5 minutes as per RFC 2821 4.5.3.2
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
     }
@@ -225,7 +254,7 @@ class Smtp extends AbstractProtocol
      * Issues MAIL command
      *
      * @param  string $from Sender mailbox
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function mail($from)
@@ -248,7 +277,7 @@ class Smtp extends AbstractProtocol
      * Issues RCPT command
      *
      * @param  string $to Receiver(s) mailbox
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function rcpt($to)
@@ -268,7 +297,7 @@ class Smtp extends AbstractProtocol
      * Issues DATA command
      *
      * @param  string $data
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function data($data)
@@ -281,7 +310,7 @@ class Smtp extends AbstractProtocol
         $this->_send('DATA');
         $this->_expect(354, 120); // Timeout set for 2 minutes as per RFC 2821 4.5.3.2
 
-        foreach (explode(\Zend\Mime\Mime::LINEEND, $data) as $line) {
+        foreach (explode(Mime::LINEEND, $data) as $line) {
             if (strpos($line, '.') === 0) {
                 // Escape lines prefixed with a '.'
                 $line = '.' . $line;
@@ -363,7 +392,7 @@ class Smtp extends AbstractProtocol
      *
      * This default method is implemented by AUTH adapters to properly authenticate to a remote host.
      *
-     * @throws \Zend\Mail\Protocol\Exception
+     * @throws Exception\RuntimeException
      * @return void
      */
     public function auth()

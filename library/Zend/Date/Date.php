@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Date
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -22,21 +22,18 @@
  * @namespace
  */
 namespace Zend\Date;
-use Zend\TimeSync;
-use Zend\Locale\Locale;
-use Zend\Locale\Format;
-use Zend\Locale\Data\Cldr;
-use Zend\Locale\Math;
+
+use Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Locale\Data\Cldr,
+    Zend\Locale\Format,
+    Zend\Locale\Locale,
+    Zend\Locale\Math,
+    Zend\TimeSync;
 
 /**
- * @uses      \Zend\Date\DateObject
- * @uses      \Zend\Date\Exception
- * @uses      \Zend\Locale\Locale
- * @uses      \Zend\Locale\Format
- * @uses      \Zend\Locale\Math
  * @category  Zend
  * @package   Zend_Date
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Date extends DateObject
@@ -271,8 +268,8 @@ class Date extends DateObject
                         if ($value === null) {
                             parent::$_cache = null;
                         } else {
-                            if (!$value instanceof \Zend\Cache\Frontend) {
-                                throw new Exception\InvalidArgumentException("Instance of Zend_Cache expected");
+                            if (!$value instanceof CacheAdapter) {
+                                throw new Exception\InvalidArgumentException("Instance of Zend\Cache\Storage\Adapter expected");
                             }
 
                             parent::$_cache     = $value;

@@ -73,6 +73,11 @@ class NameInformation
 
     public function addUse($use, $as = null)
     {
+        if (is_array($use) && array_key_exists('use', $use) && array_key_exists('as', $use)) {
+            $uses = $use;
+            $use  = $uses['use'];
+            $as   = $uses['as'];
+        }
         $use = trim($use, '\\');
         if ($as === null) {
             $as = trim($use, '\\');

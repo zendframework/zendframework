@@ -24,20 +24,9 @@
  */
 namespace Zend\Mail\Storage;
 
-use Zend\Mail\AbstractStorage,
-    Zend\Mail\Storage,
-    Zend\Mail\Storage\Exception,
-    Zend\Mail\Protocol;
+use Zend\Mail\Protocol;
 
 /**
- * @uses       \Zend\Mail\Message\Message
- * @uses       \Zend\Mail\Protocol\Imap
- * @uses       \Zend\Mail\Storage
- * @uses       \Zend\Mail\AbstractStorage
- * @uses       \Zend\Mail\Storage\Exception
- * @uses       \Zend\Mail\Storage\Folder
- * @uses       \Zend\Mail\Storage\MailFolder
- * @uses       \Zend\Mail\Storage\Writable
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage

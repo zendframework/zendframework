@@ -153,7 +153,7 @@ class ClassReflection extends ReflectionClass implements Reflection
      * Return method reflection by name
      *
      * @param  string $name
-     * @return \MethodReflection\Code\Reflection\ReflectionMethod
+     * @return MethodReflection
      */
     public function getMethod($name)
     {

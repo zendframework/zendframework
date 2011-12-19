@@ -22,7 +22,8 @@
  * @namespace
  */
 namespace Zend\Memory;
-use Zend\Cache;
+
+use Zend\Cache\Storage\Adapter as CacheAdapter;
 
 /**
  * Memory manager
@@ -30,11 +31,6 @@ use Zend\Cache;
  * This class encapsulates memory menagement operations, when PHP works
  * in limited memory mode.
  *
- * @uses       \Zend\Cache
- * @uses       \Zend\Memory\Container\AccessController
- * @uses       \Zend\Memory\Container\Locked
- * @uses       \Zend\Memory\Container\Movable
- * @uses       \Zend\Memory\Exception
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +41,7 @@ class MemoryManager
     /**
      * Storage cache object
      *
-     * @var \Zend\Cache\Frontend
+     * @var CacheAdapter
      */
     private $_cache = null;
 
@@ -153,10 +149,10 @@ class MemoryManager
      *
      * If cache is not specified, then memory objects are never swapped
      *
-     * @param \Zend\Cache\Frontend $cache
-     * @param array $backendOptions associative array of options for the corresponding backend constructor
+     * @param  CacheAdapter $cache
+     * @return void
      */
-    public function __construct(Cache\Frontend $cache = null)
+    public function __construct(CacheAdapter $cache = null)
     {
         if ($cache === null) {
             return;
@@ -195,7 +191,7 @@ class MemoryManager
     public function __destruct()
     {
         if ($this->_cache !== null) {
-            $this->_cache->clean(Cache\Cache::CLEANING_MODE_MATCHING_TAG, $this->_tags);
+            $this->_cache->clear(CacheAdapter::MATCH_TAGS_OR, array('tags' => $this->_tags));
         }
     }
 
@@ -422,7 +418,7 @@ class MemoryManager
         }
 
         if (!$container->isSwapped()) {
-            $this->_cache->save($container->getRef(), $this->_managerId . $id, $this->_tags);
+            $this->_cache->setItem($this->_managerId . $id, $container->getRef(), array('tags' => $this->_tags));
         }
 
         $this->_memorySize -= $this->_sizes[$id];
@@ -440,7 +436,7 @@ class MemoryManager
      */
     public function load(Container\Movable $container, $id)
     {
-        $value = $this->_cache->load($this->_managerId . $id, true);
+        $value = $this->_cache->getItem($this->_managerId . $id, array('ttl' => 0));
 
         // Try to swap other objects if necessary
         // (do not include specified object into check)

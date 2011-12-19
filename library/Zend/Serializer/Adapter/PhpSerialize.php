@@ -40,7 +40,7 @@ class PhpSerialize extends AbstractAdapter
     /**
      * @var null|string Serialized boolean false value
      */
-    private static $_serializedFalse = null;
+    private static $serializedFalse = null;
 
     /**
      * Constructor
@@ -54,8 +54,8 @@ class PhpSerialize extends AbstractAdapter
 
         // needed to check if a returned false is based on a serialize false
         // or based on failure (igbinary can overwrite [un]serialize functions)
-        if (self::$_serializedFalse === null) {
-            self::$_serializedFalse = serialize(false);
+        if (self::$serializedFalse === null) {
+            self::$serializedFalse = serialize(false);
         }
     }
 
@@ -69,11 +69,17 @@ class PhpSerialize extends AbstractAdapter
      */
     public function serialize($value, array $opts = array())
     {
+        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = '') {
+            $message = sprintf(
+                'Error with serialize operation in %s:%d: %s',
+                $errfile,
+                $errline,
+                $errstr
+            );
+            throw new RuntimeException($message, $errno);
+        });
         $ret = serialize($value);
-        if ($ret === false) {
-            $lastErr = error_get_last();
-            throw new RuntimeException($lastErr['message']);
-        }
+        restore_error_handler();
         return $ret;
     }
 
@@ -88,11 +94,37 @@ class PhpSerialize extends AbstractAdapter
      */
     public function unserialize($serialized, array $opts = array())
     {
-        $ret = @unserialize($serialized);
-        if ($ret === false && $serialized !== self::$_serializedFalse) {
-            $lastErr = error_get_last();
-            throw new RuntimeException($lastErr['message']);
+        if (!is_string($serialized)) {
+            // Must already be unserialized!
+            return $serialized;
+            throw new RuntimeException(sprintf(
+                '%s expects a serialized string argument; received "%s"',
+                __METHOD__,
+                (is_object($serialized) ? get_class($serialized) : gettype($serialized))
+            ));
         }
+        if (!preg_match('/^((s|i|d|b|a|O|C):|N;)/', $serialized)) {
+            return $serialized;
+        }
+
+        // If we have a serialized boolean false value, just return false; 
+        // prevents the unserialize handler from creating an error.
+        if ($serialized === self::$serializedFalse) {
+            return false;
+        }
+
+        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = '') use ($serialized) {
+            $message = sprintf(
+                'Error with unserialize operation in %s:%d: %s; (string: "%s")',
+                $errfile,
+                $errline,
+                $errstr,
+                $serialized
+            );
+            throw new RuntimeException($message, $errno);
+        }, E_NOTICE);
+        $ret = unserialize($serialized);
+        restore_error_handler();
         return $ret;
     }
 }

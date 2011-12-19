@@ -24,18 +24,11 @@
  */
 namespace Zend\Locale\Data;
 
-use Zend\Cache\Cache,
-    Zend\Cache\Frontend as CacheFrontend,
-    Zend\Locale\Locale as ZFLocale,
-    Zend\Locale\Exception\InvalidArgumentException,
-    Zend\Locale\Exception\UnexpectedValueException;
+use Zend\Locale\Locale as ZFLocale;
 
 /**
  * Locale data provider, handles INTL
  *
- * @uses       Zend\Cache\Cache
- * @uses       Zend\Locale
- * @uses       Zend\Locale\Exception\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Locale
  * @subpackage Data

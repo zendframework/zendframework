@@ -23,9 +23,11 @@
  * @namespace
  */
 namespace ZendTest\Currency;
-use Zend\Currency;
-use Zend\Locale;
-use Zend\Cache;
+
+use Zend\Cache\StorageFactory as CacheFactory,
+    Zend\Cache\Storage\Adapter as CacheAdapter,
+    Zend\Currency,
+    Zend\Locale;
 
 /**
  * @category   Zend
@@ -39,16 +41,57 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->_cache = Cache\Cache::factory('Core', 'File',
-            array('lifetime' => 120, 'automatic_serialization' => true),
-            array('cache_dir' => __DIR__ . '/../_files/'));
+        $this->_cacheDir = sys_get_temp_dir() . '/zend_currency';
+        $this->_removeRecursive($this->_cacheDir);
+        mkdir($this->_cacheDir);
+
+        $this->_cache = CacheFactory::factory(array(
+            'adapter' => array(
+                'name' => 'Filesystem',
+                'options' => array(
+                    'ttl'       => 120,
+                    'cache_dir' => $this->_cacheDir,
+                )
+            ),
+            'plugins' => array(
+                array(
+                    'name' => 'serializer',
+                    'options' => array(
+                        'serializer' => 'php_serialize',
+                    ),
+                ),
+            ),
+        ));
+
         Currency\Currency::setCache($this->_cache);
     }
 
     public function tearDown()
     {
         Currency\Currency::clearCache();
-        $this->_cache->clean(Cache\Cache::CLEANING_MODE_ALL);
+        $this->_cache->clear(CacheAdapter::MATCH_ALL);
+        $this->_removeRecursive($this->_cacheDir);
+    }
+
+    protected function _removeRecursive($dir)
+    {
+        if (file_exists($dir)) {
+            $dirIt = new \DirectoryIterator($dir);
+            foreach ($dirIt as $entry) {
+                $fname = $entry->getFilename();
+                if ($fname == '.' || $fname == '..') {
+                    continue;
+                }
+
+                if ($entry->isFile()) {
+                    unlink($entry->getPathname());
+                } else {
+                    $this->_removeRecursive($entry->getPathname());
+                }
+            }
+
+            rmdir($dir);
+        }
     }
 
     /**
@@ -503,7 +546,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
 
         $currency = new Currency\Currency(array('currency' => 'USD'), 'en_US');
         $this->assertEquals(array(0 => 'AS', 1 => 'EC', 2 => 'FM', 3 => 'GU', 4 => 'IO', 5 => 'MH', 6 => 'MP',
-            7 => 'PR', 8 => 'PW', 9 => "SV", 10 => 'TC', 11 => 'TL', 12 => 'UM', 13 => 'US', 14 => 'VG', 15 => 'VI'), $currency->getRegionList());
+            7 => 'PR', 8 => 'PW', 9 => "SV", 10 => 'TC', 11 => 'TL', 12 => 'UM', 13 => 'US', 14 => 'VG', 15 => 'VI', 16 => 'ZW'), $currency->getRegionList());
     }
 
     /**
@@ -553,7 +596,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     public function testCaching()
     {
         $cache = Currency\Currency::getCache();
-        $this->assertTrue($cache instanceof Cache\Frontend);
+        $this->assertTrue($cache instanceof CacheAdapter);
         $this->assertTrue(Currency\Currency::hasCache());
 
         Currency\Currency::clearCache();

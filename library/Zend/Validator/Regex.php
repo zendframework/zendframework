@@ -23,6 +23,9 @@
  */
 namespace Zend\Validator;
 
+use Traversable,
+    Zend\Stdlib\IteratorToArray;
+
 /**
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception
@@ -63,7 +66,7 @@ class Regex extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|\Zend\Config\Config $pattern
+     * @param  string|Traversable $pattern
      * @throws \Zend\Validator\Exception On missing 'pattern' parameter
      * @return void
      */
@@ -75,11 +78,21 @@ class Regex extends AbstractValidator
             return;
         }
 
-        parent::__construct($pattern);
+        if ($pattern instanceof Traversable) {
+            $pattern = IteratorToArray::convert($pattern);
+        }
 
-        if (!$this->pattern) {
+        if (!is_array($pattern)) {
+            throw new Exception\InvalidArgumentException('Invalid options provided to constructor');
+        }
+
+        if (!array_key_exists('pattern', $pattern)) {
             throw new Exception\InvalidArgumentException("Missing option 'pattern'");
         }
+
+        $this->setPattern($pattern['pattern']);
+        unset($pattern['pattern']);
+        parent::__construct($pattern);
     }
 
     /**
@@ -105,7 +118,7 @@ class Regex extends AbstractValidator
         $status        = @preg_match($this->pattern, "Test");
 
         if (false === $status) {
-             throw new Exception\InvalidArgumentException("Internal error while using the pattern '$this->pattern'");
+             throw new Exception\InvalidArgumentException("Internal error parsing the pattern '{$this->pattern}'");
         }
 
         return $this;

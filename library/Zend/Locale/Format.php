@@ -779,7 +779,7 @@ class Format
             trigger_error("Sorry, your PCRE extension does not support UTF8 which is needed for the I18N core", E_USER_NOTICE);
         }
 
-      if (!is_string($date)) {
+        if (!is_string($date)) {
             throw new Exception\InvalidArgumentException('Invalid date provided; must be string, ' . gettype($date) . ' provided');
         }
         $options = self::_checkOptions($options) + self::$_options;

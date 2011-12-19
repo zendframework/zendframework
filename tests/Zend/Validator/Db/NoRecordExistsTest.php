@@ -26,7 +26,8 @@ namespace ZendTest\Validator\Db;
 
 use Zend\Db\Table\AbstractTable,
     Zend\Validator\Db\RecordExists as RecordExistsValidator,
-    Zend\Validator\Db\NoRecordExists as NoRecordExistsValidator;
+    Zend\Validator\Db\NoRecordExists as NoRecordExistsValidator,
+    ReflectionClass;
 
 
 /**
@@ -222,5 +223,41 @@ class NoRecordExistsTest extends \PHPUnit_Framework_TestCase
         $validator->isValid('foo');
         $wherePart = $validator->getSelect()->getPart('where');
         $this->assertEquals('("field1" = :value)', $wherePart[0]);
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = new NoRecordExistsValidator('users', 'field1');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = new NoRecordExistsValidator('users', 'field1');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

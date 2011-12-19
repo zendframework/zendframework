@@ -76,6 +76,8 @@ class Ip extends AbstractValidator
 
         $options += $this->_options;
         $this->setOptions($options);
+        
+        parent::__construct();
     }
 
     /**

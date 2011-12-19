@@ -103,6 +103,8 @@ class InArray extends AbstractValidator
         if (array_key_exists('recursive', $options)) {
             $this->setRecursive($options['recursive']);
         }
+        
+        parent::__construct();
     }
 
     /**

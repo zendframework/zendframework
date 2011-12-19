@@ -23,8 +23,11 @@
  * @namespace
  */
 namespace ZendTest\Validator;
-use Zend\Validator;
-use Zend\Date;
+
+use Zend\Validator,
+    Zend\Date,
+    Zend\Registry,
+    ReflectionClass;
 
 /**
  * Test helper
@@ -65,7 +68,9 @@ class DateTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->_validator = new Validator\Date();
+        Registry::_unsetInstance();
+        $this->_errorOccurred = false;
+        $this->_validator     = new Validator\Date();
     }
 
     /**
@@ -148,15 +153,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->setFormat('dd/MM/yyyy')->isValid('2008/10/22'));
         $this->assertTrue($this->_validator->setFormat('dd/MM/yy')->isValid('22/10/08'));
         $this->assertFalse($this->_validator->setFormat('dd/MM/yy')->isValid('22/10'));
-        set_error_handler(array($this, 'errorHandlerIgnore'));
-        $result = $this->_validator->setFormat('s')->isValid(0);
-        restore_error_handler();
-        if (!$this->_errorOccurred) {
-            $this->assertTrue($result);
-        } else {
-            $this->markTestSkipped('Affected by bug described in ZF-2789');
-        }
-        $this->_errorOccurred = false;
+        $this->assertFalse($this->_validator->setFormat('s')->isValid(0));
     }
 
     /**
@@ -231,6 +228,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group  fml
      * ZF-7630
      */
     public function testDateObjectVerification()
@@ -263,5 +261,41 @@ class DateTest extends \PHPUnit_Framework_TestCase
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
     {
         $this->_errorOccurred = true;
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = $this->_validator;
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = $this->_validator;
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

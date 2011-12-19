@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Validator;
-use Zend\Validator;
+use Zend\Validator,
+    ReflectionClass;
 
 /**
  * Test helper
@@ -98,7 +99,7 @@ class RegexTest extends \PHPUnit_Framework_TestCase
      */
     public function testBadPattern()
     {
-        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Internal error while');
+        $this->setExpectedException('Zend\Validator\Exception\InvalidArgumentException', 'Internal error parsing');
         $validator = new Validator\Regex('/');
     }
 
@@ -132,5 +133,41 @@ class RegexTest extends \PHPUnit_Framework_TestCase
                 $this->assertEquals($element[1], $validator->isValid($input));
             }
         }
+    }
+    
+    public function testEqualsMessageTemplates()
+    {
+        $validator = new Validator\Regex('//');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageTemplates')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageTemplates');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageTemplates')
+        );
+    }
+    
+    public function testEqualsMessageVariables()
+    {
+        $validator = new Validator\Regex('//');
+        $reflection = new ReflectionClass($validator);
+        
+        if(!$reflection->hasProperty('_messageVariables')) {
+            return;
+        }
+        
+        $property = $reflection->getProperty('_messageVariables');
+        $property->setAccessible(true);
+
+        $this->assertEquals(
+            $property->getValue($validator),
+            $validator->getOption('messageVariables')
+        );
     }
 }

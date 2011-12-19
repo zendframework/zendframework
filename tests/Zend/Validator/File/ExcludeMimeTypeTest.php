@@ -23,7 +23,8 @@
  * @namespace
  */
 namespace ZendTest\Validator\File;
-use Zend\Validator\File;
+
+use Zend\Validator\File\ExcludeMimeType;
 
 /**
  * ExcludeMimeType testbed
@@ -37,41 +38,41 @@ use Zend\Validator\File;
  */
 class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Ensures that the validator follows expected behavior
-     *
-     * @return void
-     */
-    public function testBasic()
+    public static function basicValues()
     {
-        $valuesExpected = array(
-            array('image/gif', false),
+        return array(
+            array('image/gif', true),
             array('image', false),
             array('test/notype', true),
             array('image/gif, image/jpeg', false),
-            array(array('image/vasa', 'image/gif'), false),
-            array(array('image/jpeg', 'gif'), false),
-            array(array('image/jpeg', 'jpeg'), true),
+            array(array('image/vasa', 'image/gif'), true),
+            array(array('image/gif', 'jpeg'), false),
+            array(array('image/gif', 'gif'), true),
         );
+    }
 
+    /**
+     * Ensures that the validator follows expected behavior
+     *
+     * @group fml
+     * @dataProvider basicValues
+     */
+    public function testBasic($input, $expected)
+    {
         $files = array(
-            'name'     => 'testsize.mo',
-            'type'     => 'image/gif',
+            'name'     => 'picture.jpg',
+            'type'     => 'image/jpeg',
             'size'     => 200,
-            'tmp_name' => __DIR__ . '/_files/testsize.mo',
+            'tmp_name' => __DIR__ . '/_files/picture.jpg',
             'error'    => 0
         );
 
-        foreach ($valuesExpected as $element) {
-            $validator = new File\ExcludeMimeType($element[0]);
-            $validator->enableHeaderCheck();
-            $validator->isValid(__DIR__ . '/_files/testsize.mo', $files);
-            $this->assertEquals(
-                $element[1],
-                $validator->isValid(__DIR__ . '/_files/testsize.mo', $files),
-                "Tested with " . var_export($element, 1)
-            );
-        }
+        $validator = new ExcludeMimeType($input);
+        $validator->enableHeaderCheck();
+        $this->assertEquals(
+            $expected,
+            $validator->isValid(__DIR__ . '/_files/picture.jpg', $files)
+        );
     }
 
     /**
@@ -81,13 +82,13 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMimeType()
     {
-        $validator = new File\ExcludeMimeType('image/gif');
+        $validator = new ExcludeMimeType('image/gif');
         $this->assertEquals('image/gif', $validator->getMimeType());
 
-        $validator = new File\ExcludeMimeType(array('image/gif', 'video', 'text/test'));
+        $validator = new ExcludeMimeType(array('image/gif', 'video', 'text/test'));
         $this->assertEquals('image/gif,video,text/test', $validator->getMimeType());
 
-        $validator = new File\ExcludeMimeType(array('image/gif', 'video', 'text/test'));
+        $validator = new ExcludeMimeType(array('image/gif', 'video', 'text/test'));
         $this->assertEquals(array('image/gif', 'video', 'text/test'), $validator->getMimeType(true));
     }
 
@@ -98,7 +99,7 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMimeType()
     {
-        $validator = new File\ExcludeMimeType('image/gif');
+        $validator = new ExcludeMimeType('image/gif');
         $validator->setMimeType('image/jpeg');
         $this->assertEquals('image/jpeg', $validator->getMimeType());
         $this->assertEquals(array('image/jpeg'), $validator->getMimeType(true));
@@ -119,7 +120,7 @@ class ExcludeMimeTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddMimeType()
     {
-        $validator = new File\ExcludeMimeType('image/gif');
+        $validator = new ExcludeMimeType('image/gif');
         $validator->addMimeType('text');
         $this->assertEquals('image/gif,text', $validator->getMimeType());
         $this->assertEquals(array('image/gif', 'text'), $validator->getMimeType(true));

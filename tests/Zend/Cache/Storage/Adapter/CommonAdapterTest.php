@@ -231,7 +231,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         // wait until expired
         $wait = $ttl + $capabilities->getTtlPrecision();
-        usleep($wait * 1000000);
+        usleep($wait * 2000000);
 
         $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
         $this->_storage->getItem('key');
@@ -306,6 +306,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         $metadata = $this->_storage->getMetadata('key');
         $this->assertInternalType('array', $metadata);
+
         foreach ($capabilities->getSupportedMetadata() as $property) {
             $this->assertArrayHasKey($property, $metadata);
         }
@@ -535,7 +536,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         // wait until expired
         $wait = $ttl + $capabilities->getTtlPrecision();
-        usleep($wait * 1000000);
+        usleep($wait * 2000000);
 
         if (!$capabilities->getUseRequestTime()) {
             $this->assertFalse($this->_storage->getItem('key'));
@@ -564,7 +565,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         // wait until expired
         $wait = $ttl + $capabilities->getTtlPrecision();
-        usleep($wait * 1000000);
+        usleep($wait * 2000000);
 
         $rs = $this->_storage->getItems(array_keys($items));
         if (!$capabilities->getUseRequestTime()) {
@@ -960,10 +961,10 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         // sleep 1 times before expire to touch the item
-        usleep($capabilities->getTtlPrecision() * 1000000);
+        usleep($capabilities->getTtlPrecision() * 2000000);
         $this->assertTrue($this->_storage->touchItem('key'));
 
-        usleep($capabilities->getTtlPrecision() * 1000000);
+        usleep($capabilities->getTtlPrecision() * 2000000);
         $this->assertTrue($this->_storage->hasItem('key'));
 
         if (!$capabilities->getUseRequestTime()) {
@@ -1018,7 +1019,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         // wait until the first item expired
         $wait = $ttl + $capabilities->getTtlPrecision();
-        usleep($wait * 1000000);
+        usleep($wait * 2000000);
 
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
@@ -1049,7 +1050,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
         // wait until the first item expired
         $wait = $ttl + $capabilities->getTtlPrecision();
-        usleep($wait * 1000000);
+        usleep($wait * 2000000);
 
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
@@ -1089,7 +1090,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->clearByNamespace(Adapter::MATCH_ALL));
 
         // wait
-        usleep($capabilities->getTtlPrecision() * 1000000);
+        usleep($capabilities->getTtlPrecision() * 2000000);
 
         foreach ($items as $k => $v) {
             $this->assertFalse($this->_storage->hasItem($clearNs.$k));
@@ -1129,7 +1130,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->clear(Adapter::MATCH_ALL));
 
         // wait
-        usleep($capabilities->getTtlPrecision() * 1000000);
+        usleep($capabilities->getTtlPrecision() * 2000000);
 
         foreach ($namespaces as $ns) {
             $this->_options->setNamespace($ns);
@@ -1199,7 +1200,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key2', 'value2'));
 
         // wait until first 2 items expired
-        usleep($capabilities->getTtlPrecision() * 1000000);
+        usleep($capabilities->getTtlPrecision() * 2000000);
 
         $this->assertTrue($this->_storage->setItem('key3', 'value3'));
         $this->assertTrue($this->_storage->setItem('key4', 'value4'));

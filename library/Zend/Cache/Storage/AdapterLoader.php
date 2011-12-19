@@ -46,6 +46,7 @@ class AdapterLoader extends PluginClassLoader
         'systemvshm'       => 'Zend\Cache\Storage\Adapter\SystemVShm',
         'sqlite'           => 'Zend\Cache\Storage\Adapter\Sqlite',
         'dba'              => 'Zend\Cache\Storage\Adapter\Dba',
+        'wincache'         => 'Zend\Cache\Storage\Adapter\WinCache',
         'xcache'           => 'Zend\Cache\Storage\Adapter\XCache',
         'zendserverdisk'   => 'Zend\Cache\Storage\Adapter\ZendServerDisk',
         'zend_server_disk' => 'Zend\Cache\Storage\Adapter\ZendServerDisk',

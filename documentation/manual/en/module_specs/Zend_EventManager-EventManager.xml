@@ -124,7 +124,7 @@ $foo->bar('baz', 'bat');
 ]]></programlisting>
 
         <para>
-            Note that the third argument to <methodname>attach()</methodname> is any valid callback;
+            Note that the second argument to <methodname>attach()</methodname> is any valid callback;
             an anonymous function is shown in the example in order to keep the example
             self-contained. However, you could also utilize a valid function name, a functor, a
             string referencing a static method, or an array callback with a named static method or

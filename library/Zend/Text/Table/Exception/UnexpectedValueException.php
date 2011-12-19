@@ -5,7 +5,7 @@
 namespace Zend\Text\Table\Exception;
 
 class UnexpectedValueException
-	extends \UnexpectedValueException
-	implements \Zend\Text\Exception
+    extends \UnexpectedValueException
+    implements \Zend\Text\Exception
 {
 }

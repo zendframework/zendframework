@@ -34,6 +34,6 @@ namespace Zend\Log\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException
-	extends \RuntimeException
-	implements \Zend\Log\Exception
+    extends \RuntimeException
+    implements \Zend\Log\Exception
 {}

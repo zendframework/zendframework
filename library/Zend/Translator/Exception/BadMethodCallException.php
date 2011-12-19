@@ -30,6 +30,6 @@ namespace Zend\Translator\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class BadMethodCallException
-	extends \BadMethodCallException
-	implements \Zend\Translator\Exception
+    extends \BadMethodCallException
+    implements \Zend\Translator\Exception
 {}

@@ -34,6 +34,6 @@ namespace Zend\Rest\Client\Exception;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ResultException 
-	extends \Exception
-	implements \Zend\Rest\Client\Exception
+    extends \Exception
+    implements \Zend\Rest\Client\Exception
 {}

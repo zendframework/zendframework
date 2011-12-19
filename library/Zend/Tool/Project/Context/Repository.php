@@ -62,12 +62,18 @@ class Repository implements \Countable
         return self::$_instance;
     }
 
+    /**
+     * Reset instance
+     */
     public static function resetInstance()
     {
         self::$_instance = null;
         self::$_isInitialized = false;
     }
 
+    /**
+     * Constructor
+     */
     protected function __construct()
     {
         if (self::$_isInitialized == false) {
@@ -78,6 +84,21 @@ class Repository implements \Countable
         }
     }
 
+    /**
+     * Disable clone
+     */
+    private function __clone()
+    {
+
+    }
+
+    /**
+     * Add contexts from directory
+     *
+     * @param string $directory
+     * @param string $prefix
+     * @return void
+     */
     public function addContextsFromDirectory($directory, $prefix)
     {
         $prefix = trim($prefix, '\\') . '\\';
@@ -90,7 +111,12 @@ class Repository implements \Countable
         }
     }
 
-
+    /**
+     * Add context class
+     *
+     * @param string $contextClass
+     * @return Repository
+     */
     public function addContextClass($contextClass)
     {
         if (!class_exists($contextClass)) {
@@ -136,6 +162,13 @@ class Repository implements \Countable
         return $this;
     }
 
+    /**
+     * Get context
+     *
+     * @param string $name
+     * @return mixed
+     * @throws Exception\InvalidArgumentException
+     */
     public function getContext($name)
     {
         if (!$this->hasContext($name)) {
@@ -146,12 +179,24 @@ class Repository implements \Countable
         return clone $this->_contexts[$this->_shortContextNames[$name]]['context'];
     }
 
+    /**
+     * Checks for context
+     *
+     * @param string $name
+     * @return bool
+     */
     public function hasContext($name)
     {
         $name = $this->_normalizeName($name);
         return (isset($this->_shortContextNames[$name]) ? true : false);
     }
 
+    /**
+     * Check for system context
+     *
+     * @param string $name
+     * @return bool
+     */
     public function isSystemContext($name)
     {
         if (!$this->hasContext($name)) {
@@ -163,6 +208,12 @@ class Repository implements \Countable
         return $this->_contexts[$index]['isSystemContext'];
     }
 
+    /**
+     * Check for top level context
+     *
+     * @param string $name
+     * @return bool
+     */
     public function isTopLevelContext($name)
     {
         if (!$this->hasContext($name)) {
@@ -173,6 +224,12 @@ class Repository implements \Countable
         return $this->_contexts[$index]['isTopLevel'];
     }
 
+    /**
+     * Check for overwritable context
+     *
+     * @param string $name
+     * @return bool
+     */
     public function isOverwritableContext($name)
     {
         if (!$this->hasContext($name)) {
@@ -183,11 +240,22 @@ class Repository implements \Countable
         return $this->_contexts[$index]['isOverwritable'];
     }
 
+    /**
+     * Count
+     *
+     * @return int
+     */
     public function count()
     {
         return count($this->_contexts);
     }
 
+    /**
+     * Normalize alias
+     *
+     * @param string $name
+     * @return string
+     */
     protected function _normalizeName($name)
     {
         return strtolower($name);

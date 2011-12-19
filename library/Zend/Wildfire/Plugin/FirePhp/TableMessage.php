@@ -60,7 +60,7 @@ class TableMessage extends Message
      *
      * @param string $label The label of the table
      */
-    function __construct($label)
+    public function __construct($label)
     {
         parent::__construct(FirePhp::TABLE, null);
         $this->setLabel($label);

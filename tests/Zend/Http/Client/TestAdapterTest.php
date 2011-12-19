@@ -40,7 +40,7 @@ class TestAdapterTest extends \PHPUnit_Framework_TestCase
     /**
      * Test adapter
      *
-     * @var Zend_Http_Client_Adapter_Test
+     * @var \Zend\Http\Client\Adapter\Test
      */
     protected $adapter;
 

@@ -48,7 +48,7 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     /**
      * Common HTTP client
      *
-     * @var Zend_Http_Client
+     * @var \Zend\Http\Client
      */
     protected $_client = null;
 

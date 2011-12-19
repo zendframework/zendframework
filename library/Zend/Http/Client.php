@@ -713,20 +713,25 @@ class Client implements Dispatchable
 
     /**
      * Reset all the HTTP parameters (auth,cookies,request, response, etc)
+     *
+     * @param  bool   $clearCookies  Also clear all valid cookies? (defaults to false)
      * @return Client
      */
-    public function resetParameters()
-    {   
+    public function resetParameters($clearCookies = false)
+    {
         $uri = $this->getUri();
         
         $this->auth       = null;
         $this->streamName = null;
-        $this->cookies    = null;
         $this->encType    = null;
         $this->request    = null;
         $this->response   = null;
         
         $this->setUri($uri);
+
+        if ($clearCookies) {
+            $this->clearCookies();
+        }
 
         return $this;
     }
@@ -755,7 +760,7 @@ class Client implements Dispatchable
         if ($request !== null) {
             $this->setRequest($request);
         }
-        
+
         $this->redirectCounter = 0;
         $response = null;
 
@@ -768,7 +773,7 @@ class Client implements Dispatchable
         do {
             // uri
             $uri = $this->getUri();
-            
+
             // query
             $query = $this->getRequest()->query();
 
@@ -778,25 +783,25 @@ class Client implements Dispatchable
                 if (!empty($queryArray)) {
                     $newUri = $uri->toString();
                     $queryString = http_build_query($query);
-        
+
                     if ($this->config['rfc3986strict']) {
                         $queryString = str_replace('+', '%20', $queryString);
                     }
-                    
+
                     if (strpos($newUri,'?') !== false) {
                         $newUri .= '&' . $queryString;
                     } else {
                         $newUri .= '?' . $queryString;
-                    }    
-                    
+                    }
+
                     $uri = new \Zend\Uri\Http($newUri);
-                }    
+                }
             }
             // If we have no ports, set the defaults
             if (!$uri->getPort()) {
                 $uri->setPort(($uri->getScheme() == 'https' ? 443 : 80));
             }
-            
+
             // method
             $method = $this->getRequest()->getMethod();
 
@@ -805,20 +810,20 @@ class Client implements Dispatchable
 
             // headers
             $headers = $this->prepareHeaders($body,$uri);
-            
+
             $secure = ($uri->getScheme() == 'https') ? true : false;
-            
+
             // cookies
             $cookie = $this->prepareCookies($uri->getHost(), $uri->getPath(), $secure);
             if ($cookie->getFieldValue()) {
                 $headers['Cookie'] = $cookie->getFieldValue();
             }
-            
+
             // check that adapter supports streaming before using it
             if(is_resource($body) && !($this->adapter instanceof Client\Adapter\Stream)) {
                 throw new Client\Exception\RuntimeException('Adapter does not support streaming');
             }
-            
+
             // Open the connection, send the request and read the response
             $this->adapter->connect($uri->getHost(), $uri->getPort(), $secure);
 
@@ -834,18 +839,18 @@ class Client implements Dispatchable
             // HTTP connection
             $this->lastRawRequest = $this->adapter->write($method,
                 $uri, $this->config['httpversion'], $headers, $body);
-            
+
             $response = $this->adapter->read();
             if (! $response) {
                 throw new Exception\RuntimeException('Unable to read response, or response is empty');
             }
-            
+
             if ($this->config['storeresponse']) {
                 $this->lastRawResponse = $response;
             } else {
                 $this->lastRawResponse = null;
             }
-            
+
             if($this->config['outputstream']) {
                 $streamMetaData = stream_get_meta_data($stream);
                 if ($streamMetaData['seekable']) {

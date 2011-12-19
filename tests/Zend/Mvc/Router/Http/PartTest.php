@@ -245,7 +245,7 @@ class PartTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Part',
+            'Zend\Mvc\Router\Http\Part',
             array(
                 'route'        => 'Missing "route" in options array',
                 'route_broker' => 'Missing "route_broker" in options array'

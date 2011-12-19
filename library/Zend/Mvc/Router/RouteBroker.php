@@ -40,7 +40,7 @@ class RouteBroker implements Broker
      * 
      * @var string
      */
-    protected $defaultClassLoader = '\Zend\Loader\PluginClassLoader';
+    protected $defaultClassLoader = 'Zend\Loader\PluginClassLoader';
 
     /**
      * Plugin class loader used by this instance.

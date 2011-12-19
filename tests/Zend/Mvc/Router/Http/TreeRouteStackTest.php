@@ -15,14 +15,14 @@ class TreeRouteStackTest extends TestCase
 {
     public function testAddRouteRequiresHttpSpecificRoute()
     {
-        $this->setExpectedException('\Zend\Mvc\Router\Exception\InvalidArgumentException', 'Route definition must be an array or Traversable object');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Route definition must be an array or Traversable object');
         $stack = new TreeRouteStack();
         $stack->addRoute('foo', new \ZendTest\Mvc\Router\TestAsset\DummyRoute());
     }
     
     public function testAddRouteViaStringRequiresHttpSpecificRoute()
     {
-        $this->setExpectedException('\Zend\Mvc\Router\Exception\RuntimeException', 'Given route does not implement HTTP route interface');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Given route does not implement HTTP route interface');
         $stack = new TreeRouteStack();
         $stack->addRoute('foo', array(
             'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
@@ -220,7 +220,7 @@ class TreeRouteStackTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\TreeRouteStack',
+            'Zend\Mvc\Router\Http\TreeRouteStack',
             array(),
             array()
         );

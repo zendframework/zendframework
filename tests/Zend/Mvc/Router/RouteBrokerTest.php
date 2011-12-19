@@ -64,7 +64,7 @@ class RouteBrokerTest extends TestCase
     public function testGetClassLoaderReturnsDefaultLoader()
     {
         $broker = new RouteBroker();
-        $this->assertInstanceOf('\Zend\Loader\PluginClassLoader', $broker->getClassLoader());
+        $this->assertInstanceOf('Zend\Loader\PluginClassLoader', $broker->getClassLoader());
     }
     
     public function testSetClassLoader()
@@ -78,14 +78,14 @@ class RouteBrokerTest extends TestCase
     
     public function testSetClassLoaderOnlyAllowsPluginClassLocator()
     {
-        $this->setExpectedException('\Zend\Mvc\Router\Exception\InvalidArgumentException', 'Expected instance of PluginClassLocator');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Expected instance of PluginClassLocator');
         $broker = new RouteBroker();
         $broker->setClassLoader(new \Zend\Loader\PrefixPathLoader());
     }
     
     public function testLoadNonExistentRoute()
     {
-        $this->setExpectedException('\Zend\Mvc\Router\Exception\RuntimeException', 'Unable to locate class associated with "foo"');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Unable to locate class associated with "foo"');
         $broker = new RouteBroker();
         $broker->load('foo');
     }
@@ -102,7 +102,7 @@ class RouteBrokerTest extends TestCase
     
     public function testSetInvalidOptions()
     {
-        $this->setExpectedException('\Zend\Mvc\Router\Exception\InvalidArgumentException', 'Expected an array or Traversable; received "string"');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'Expected an array or Traversable; received "string"');
         $broker = new RouteBroker();
         $broker->setOptions('foo');
     }
@@ -110,15 +110,15 @@ class RouteBrokerTest extends TestCase
     public function testSetClassLoaderViaOptionsAsString()
     {
         $broker = new RouteBroker(array(
-            'class_loader' => '\Zend\Loader\PluginClassLoader'
+            'class_loader' => 'Zend\Loader\PluginClassLoader'
         ));
         
-        $this->assertInstanceOf('\Zend\Loader\PluginClassLoader', $broker->getClassLoader());
+        $this->assertInstanceOf('Zend\Loader\PluginClassLoader', $broker->getClassLoader());
     }
     
     public function testSetClassLoaderViaOptionsAsStringWithInvalidClassname()
     {
-        $this->setExpectedException('\Zend\Mvc\Router\Exception\RuntimeException', 'Unknown class "\Non\Existent\Class\Loader" provided as class loader option');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Unknown class "\Non\Existent\Class\Loader" provided as class loader option');
         $broker = new RouteBroker(array(
             'class_loader' => '\Non\Existent\Class\Loader'
         ));
@@ -126,7 +126,7 @@ class RouteBrokerTest extends TestCase
     
     public function testSetClassLoaderViaOptionsAsInteger()
     {
-        $this->setExpectedException('\Zend\Mvc\Router\Exception\RuntimeException', 'Option passed for class loader (integer) is of an unknown type');
+        $this->setExpectedException('Zend\Mvc\Router\Exception\RuntimeException', 'Option passed for class loader (integer) is of an unknown type');
         $broker = new RouteBroker(array(
             'class_loader' => 1
         ));
@@ -136,13 +136,13 @@ class RouteBrokerTest extends TestCase
     {
         $broker = new RouteBroker(array(
             'class_loader' => array(
-                'class'   => '\Zend\Loader\PluginClassLoader',
+                'class'   => 'Zend\Loader\PluginClassLoader',
                 'options' => array(),
                 'foo'     => 'bar'
             )
         ));
         
-        $this->assertInstanceOf('\Zend\Loader\PluginClassLoader', $broker->getClassLoader());
+        $this->assertInstanceOf('Zend\Loader\PluginClassLoader', $broker->getClassLoader());
     }
     
     public function testIgnoreUnknownOptions()

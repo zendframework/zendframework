@@ -1021,10 +1021,10 @@ class Apc extends AbstractAdapter
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
             $value       = (int)$value;
-            $newValue    = wincache_ucache_dec($internalKey, $value);
+            $newValue    = apc_dec($internalKey, $value);
             if ($newValue === false) {
                 if (apc_exists($internalKey)) {
-                    throw new Exception\RuntimeException("wincache_ucache_dec('{$internalKey}', {$value}) failed");
+                    throw new Exception\RuntimeException("apc_dec('{$internalKey}', {$value}) failed");
                 } elseif (!$options['ignore_missing_items']) {
                     throw new Exception\ItemNotFoundException(
                         "Key '{$internalKey}' not found"

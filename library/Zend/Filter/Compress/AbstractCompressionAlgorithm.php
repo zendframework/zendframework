@@ -18,15 +18,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Compress;
+
+use Traversable,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * Abstract compression adapter
  *
- * @uses       \Zend\Filter\Compress\CompressInterface
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -34,15 +33,17 @@ namespace Zend\Filter\Compress;
  */
 abstract class AbstractCompressionAlgorithm implements CompressionAlgorithm
 {
+    protected $options = array();
+
     /**
      * Class constructor
      *
-     * @param array|\Zend\Config\Config $options (Optional) Options to set
+     * @param null|array|Traversable $options (Optional) Options to set
      */
     public function __construct($options = null)
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
         }
 
         if (is_array($options)) {
@@ -53,20 +54,20 @@ abstract class AbstractCompressionAlgorithm implements CompressionAlgorithm
     /**
      * Returns one or all set options
      *
-     * @param string $option (Optional) Option to return
+     * @param  string $option (Optional) Option to return
      * @return mixed
      */
     public function getOptions($option = null)
     {
         if ($option === null) {
-            return $this->_options;
+            return $this->options;
         }
 
-        if (!array_key_exists($option, $this->_options)) {
+        if (!array_key_exists($option, $this->options)) {
             return null;
         }
 
-        return $this->_options[$option];
+        return $this->options[$option];
     }
 
     /**

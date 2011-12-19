@@ -256,7 +256,7 @@ class SegmentTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Segment',
+            'Zend\Mvc\Router\Http\Segment',
             array(
                 'route' => 'Missing "route" in options array'
             ),

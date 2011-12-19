@@ -142,7 +142,7 @@ class WildcardTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Wildcard',
+            'Zend\Mvc\Router\Http\Wildcard',
             array(),
             array()
         );

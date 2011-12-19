@@ -112,7 +112,7 @@ class LiteralTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Literal',
+            'Zend\Mvc\Router\Http\Literal',
             array(
                 'route' => 'Missing "route" in options array'
             ),

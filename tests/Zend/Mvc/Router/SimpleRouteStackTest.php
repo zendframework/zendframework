@@ -34,7 +34,7 @@ class SimpleRouteStackTest extends TestCase
             'foo' => new TestAsset\DummyRoute()
         ));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
         
     public function testAddRoutesAsTraversable()
@@ -44,7 +44,7 @@ class SimpleRouteStackTest extends TestCase
             'foo' => new TestAsset\DummyRoute()
         )));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
     
     public function testremoveRouteAsArray()
@@ -72,7 +72,7 @@ class SimpleRouteStackTest extends TestCase
             'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
         ));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
 
     public function testAddRouteAsArrayWithOptions()
@@ -83,7 +83,7 @@ class SimpleRouteStackTest extends TestCase
             'options' => array()
         ));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
     
     public function testAddRouteAsArrayWithoutType()
@@ -131,7 +131,7 @@ class SimpleRouteStackTest extends TestCase
             'type' => '\ZendTest\Mvc\Router\TestAsset\DummyRoute'
         )));
         
-        $this->assertInstanceOf('\Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
 
     public function testAssemble()
@@ -195,7 +195,7 @@ class SimpleRouteStackTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\SimpleRouteStack',
+            'Zend\Mvc\Router\SimpleRouteStack',
             array(),
             array(
                 'route_broker'   => new RouteBroker(),

@@ -116,7 +116,7 @@ class RegexTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Regex',
+            'Zend\Mvc\Router\Http\Regex',
             array(
                 'regex' => 'Missing "regex" in options array',
                 'spec'  => 'Missing "spec" in options array'

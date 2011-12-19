@@ -62,7 +62,7 @@ class SchemeTest extends TestCase
     {
         $tester = new FactoryTester($this);
         $tester->testFactory(
-            '\Zend\Mvc\Router\Http\Scheme',
+            'Zend\Mvc\Router\Http\Scheme',
             array(
                 'scheme' => 'Missing "scheme" in options array',
             ),

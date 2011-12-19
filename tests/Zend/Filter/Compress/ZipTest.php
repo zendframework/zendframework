@@ -273,9 +273,6 @@ class ZipTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Zip', $filter->toString());
     }
 
-    /**
-     * @group
-     */
     public function testDecompressWillThrowExceptionWhenDecompressingWithNoTarget()
     {
         $filter  = new ZipCompression(
@@ -297,7 +294,7 @@ class ZipTest extends \PHPUnit_Framework_TestCase
         );
         $content = $filter->decompress($content);
         $this->assertEquals(dirname(__DIR__) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
-        $content = file_get_contents(dirname(__DIR__) . '/_files/zip.tmp');
+        $content = file_get_contents(dirname(__DIR__) . '/_files/_compress');
         $this->assertEquals('compress me', $content);
     }
 }

@@ -338,7 +338,7 @@ class InflectorTest extends \PHPUnit_Framework_TestCase
         $broker  = $inflector->getPluginBroker();
         $this->assertEquals($options['target'], $inflector->getTarget());
 
-        $this->assertType('Zend\Filter\FilterBroker', $broker);
+        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker);
         $this->assertTrue($inflector->isThrowTargetExceptionsOn());
         $this->assertEquals($options['targetReplacementIdentifier'], $inflector->getTargetReplacementIdentifier());
 

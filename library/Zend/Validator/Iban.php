@@ -18,20 +18,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator;
-use Zend;
-use Zend\Locale;
+
+use Traversable,
+    Zend\Locale\Locale,
+    Zend\Registry,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * Validates IBAN Numbers (International Bank Account Numbers)
  *
- * @uses       \Zend\Locale\Locale
- * @uses       \Zend\Registry
- * @uses       \Zend\Validator\AbstractValidator
- * @uses       \Zend\Validator\Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -57,16 +53,16 @@ class Iban extends AbstractValidator
     /**
      * Optional locale
      *
-     * @var string|\Zend\Locale\Locale|null
+     * @var string|Locale|null
      */
-    protected $_locale;
+    protected $locale;
 
     /**
      * IBAN regexes by region
      *
      * @var array
      */
-    protected $_ibanregex = array(
+    protected $ibanregex = array(
         'AD' => '/^AD[0-9]{2}[0-9]{8}[A-Z0-9]{12}$/',
         'AT' => '/^AT[0-9]{2}[0-9]{5}[0-9]{11}$/',
         'BA' => '/^BA[0-9]{2}[0-9]{6}[0-9]{10}$/',
@@ -111,60 +107,65 @@ class Iban extends AbstractValidator
     /**
      * Sets validator options
      *
-     * @param  string|Zend_Config|\Zend\Locale\Locale $locale OPTIONAL
+     * @param  null|string|Locale|array|Traversable $locale OPTIONAL
      * @return void
      */
     public function __construct($locale = null)
     {
-        if ($locale instanceof \Zend\Config\Config) {
-            $locale = $locale->toArray();
+        $options = array();
+        if ($locale instanceof Traversable) {
+            $locale = IteratorToArray::convert($locale);
         }
 
         if (is_array($locale)) {
+            $options = $locale;
             if (array_key_exists('locale', $locale)) {
-                $locale = $locale['locale'];
+                $locale  = $locale['locale'];
+                unset($options['locale']);
             } else {
                 $locale = null;
             }
         }
 
         if (empty($locale) && ($locale !== false)) {
-            if (\Zend\Registry::isRegistered('Zend_Locale')) {
-                $locale = \Zend\Registry::get('Zend_Locale');
+            if (Registry::isRegistered('Zend_Locale')) {
+                $locale = Registry::get('Zend_Locale');
             }
         }
 
         if ($locale !== null) {
             $this->setLocale($locale);
         }
+        
+        parent::__construct($options);
     }
 
     /**
      * Returns the locale option
      *
-     * @return string|\Zend\Locale\Locale|null
+     * @return string|Locale|null
      */
     public function getLocale()
     {
-        return $this->_locale;
+        return $this->locale;
     }
 
     /**
      * Sets the locale option
      *
-     * @param  string|\Zend\Locale\Locale $locale
-     * @return \Zend\Validator\Date provides a fluent interface
+     * @param  string|Locale $locale
+     * @return Iban provides a fluent interface
      */
     public function setLocale($locale = null)
     {
         if ($locale !== false) {
-            $locale = Locale\Locale::findLocale($locale);
+            $locale = Locale::findLocale($locale);
             if (strlen($locale) < 4) {
                 throw new Exception\InvalidArgumentException('Region must be given for IBAN validation');
             }
         }
 
-        $this->_locale = $locale;
+        $this->locale = $locale;
         return $this;
     }
 
@@ -179,20 +180,20 @@ class Iban extends AbstractValidator
         $value = strtoupper($value);
         $this->setValue($value);
 
-        if (empty($this->_locale)) {
+        if (empty($this->locale)) {
             $region = substr($value, 0, 2);
         } else {
-            $region = new Locale\Locale($this->_locale);
+            $region = new Locale($this->locale);
             $region = $region->getRegion();
         }
 
-        if (!array_key_exists($region, $this->_ibanregex)) {
+        if (!array_key_exists($region, $this->ibanregex)) {
             $this->setValue($region);
             $this->error(self::NOTSUPPORTED);
             return false;
         }
 
-        if (!preg_match($this->_ibanregex[$region], $value)) {
+        if (!preg_match($this->ibanregex[$region], $value)) {
             $this->error(self::FALSEFORMAT);
             return false;
         }

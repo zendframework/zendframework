@@ -4640,13 +4640,22 @@ class Date extends DateObject
      */
     public static function isDate($date, $format = null, $locale = null)
     {
-        if (!is_string($date) && !is_numeric($date) && !($date instanceof Date) &&
-            !is_array($date)) {
+        if (!is_string($date) 
+            && !is_numeric($date) 
+            && !($date instanceof Date) 
+            && !is_array($date)
+        ) {
             return false;
         }
 
-        if (($format !== null) && ($format != 'ee') && ($format != 'ss') && ($format != 'GG') && ($format != 'MM') && ($format != 'EE') && ($format != 'TT')
-            && (Locale::isLocale($format))
+        if (($format !== null) 
+            && ($format != 'ee') 
+            && ($format != 'ss') 
+            && ($format != 'GG') 
+            && ($format != 'MM') 
+            && ($format != 'EE') 
+            && ($format != 'TT')
+            && Locale::isLocale($format)
         ) {
             $locale = $format;
             $format = null;
@@ -4656,16 +4665,21 @@ class Date extends DateObject
 
         if ($format === null) {
             $format = Format::getDateFormat($locale);
-        } else if ((self::$_options['format_type'] == 'php') && !defined($format)) {
+        } elseif ((self::$_options['format_type'] == 'php') && !defined($format)) {
             $format = Format::convertPhpToIsoFormat($format);
         }
 
         $format = self::_getLocalizedToken($format, $locale);
-        if (!is_array($date)) {
+        if ($date instanceof Date) {
+            $parsed = $date->toArray();
+        } elseif (!is_array($date)) {
             try {
-                $parsed = Format::getDate($date, array('locale' => $locale,
-                                                      'date_format' => $format, 'format_type' => 'iso',
-                                                      'fix_date' => false));
+                $parsed = Format::getDate($date, array(
+                    'locale'      => $locale,
+                    'date_format' => $format,
+                    'format_type' => 'iso',
+                    'fix_date'    => false,
+                ));
             } catch (\Zend\Locale\Exception $e) {
                 // Date can not be parsed
                 return false;
@@ -4674,34 +4688,36 @@ class Date extends DateObject
             $parsed = $date;
         }
 
-        if (((strpos($format, 'Y') !== false) or (strpos($format, 'y') !== false)) and
-            (!isset($parsed['year']))) {
+        if (((strpos($format, 'Y') !== false) || (strpos($format, 'y') !== false)) 
+            && !isset($parsed['year'])
+        ) {
             // Year expected but not found
                 return false;
         }
 
-        if ((strpos($format, 'M') !== false) and (!isset($parsed['month']))) {
+        if ((strpos($format, 'M') !== false) && (!isset($parsed['month']))) {
             // Month expected but not found
             return false;
         }
 
-        if ((strpos($format, 'd') !== false) and (!isset($parsed['day']))) {
+        if ((strpos($format, 'd') !== false) && (!isset($parsed['day']))) {
             // Day expected but not found
             return false;
         }
 
-        if (((strpos($format, 'H') !== false) or (strpos($format, 'h') !== false)) and
-            (!isset($parsed['hour']))) {
+        if (((strpos($format, 'H') !== false) || (strpos($format, 'h') !== false)) 
+            && !isset($parsed['hour'])
+        ) {
             // Hour expected but not found
                 return false;
         }
 
-        if ((strpos($format, 'm') !== false) and (!isset($parsed['minute']))) {
+        if ((strpos($format, 'm') !== false) && (!isset($parsed['minute']))) {
             // Minute expected but not found
             return false;
         }
 
-        if ((strpos($format, 's') !== false) and (!isset($parsed['second']))) {
+        if ((strpos($format, 's') !== false) && (!isset($parsed['second']))) {
             // Second expected  but not found
             return false;
         }

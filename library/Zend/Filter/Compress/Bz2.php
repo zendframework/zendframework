@@ -18,17 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Compress;
+
 use Zend\Filter\Exception;
 
 /**
  * Compression adapter for Bz2
  *
- * @uses       \Zend\Filter\Compress\AbstractCompressionAlgorithm
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +41,7 @@ class Bz2 extends AbstractCompressionAlgorithm
      *
      * @var array
      */
-    protected $_options = array(
+    protected $options = array(
         'blocksize' => 4,
         'archive'   => null,
     );
@@ -53,7 +49,7 @@ class Bz2 extends AbstractCompressionAlgorithm
     /**
      * Class constructor
      *
-     * @param array|\Zend\Config\Config $options (Optional) Options to set
+     * @param null|array|\Traversable $options (Optional) Options to set
      */
     public function __construct($options = null)
     {
@@ -70,14 +66,14 @@ class Bz2 extends AbstractCompressionAlgorithm
      */
     public function getBlocksize()
     {
-        return $this->_options['blocksize'];
+        return $this->options['blocksize'];
     }
 
     /**
      * Sets a new blocksize
      *
-     * @param integer $level
-     * @return \Zend\Filter\Compress\Bz2
+     * @param  integer $level
+     * @return Bz2
      */
     public function setBlocksize($blocksize)
     {
@@ -85,7 +81,7 @@ class Bz2 extends AbstractCompressionAlgorithm
             throw new Exception\InvalidArgumentException('Blocksize must be between 0 and 9');
         }
 
-        $this->_options['blocksize'] = (int) $blocksize;
+        $this->options['blocksize'] = (int) $blocksize;
         return $this;
     }
 
@@ -96,18 +92,18 @@ class Bz2 extends AbstractCompressionAlgorithm
      */
     public function getArchive()
     {
-        return $this->_options['archive'];
+        return $this->options['archive'];
     }
 
     /**
      * Sets the archive to use for de-/compression
      *
-     * @param string $archive Archive to use
-     * @return \Zend\Filter\Compress\Bz2
+     * @param  string $archive Archive to use
+     * @return Bz2
      */
     public function setArchive($archive)
     {
-        $this->_options['archive'] = (string) $archive;
+        $this->options['archive'] = (string) $archive;
         return $this;
     }
 

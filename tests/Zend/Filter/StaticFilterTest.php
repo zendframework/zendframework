@@ -49,7 +49,7 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
     public function testUsesFilterBrokerByDefault()
     {
         $broker = StaticFilter::getBroker();
-        $this->assertType('Zend\Filter\FilterBroker', $broker);
+        $this->assertInstanceOf('Zend\Filter\FilterBroker', $broker);
     }
 
     public function testCanSpecifyCustomBroker()
@@ -67,7 +67,7 @@ class StaticFilterTest extends \PHPUnit_Framework_TestCase
         StaticFilter::setBroker(null);
         $registered = StaticFilter::getBroker();
         $this->assertNotSame($broker, $registered);
-        $this->assertType('Zend\Filter\FilterBroker', $registered);
+        $this->assertInstanceOf('Zend\Filter\FilterBroker', $registered);
     }
 
     /**

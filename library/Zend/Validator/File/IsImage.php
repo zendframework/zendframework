@@ -18,10 +18,10 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Validator\File;
+
+use Traversable,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * Validator which checks if the file already exists in the directory
@@ -53,7 +53,7 @@ class IsImage extends MimeType
     /**
      * Sets validator options
      *
-     * @param  string|array|\Zend\Config\Config $mimetype
+     * @param  string|array|Traversable $mimetype
      * @return void
      */
     public function __construct($options = array())
@@ -118,26 +118,12 @@ class IsImage extends MimeType
             'image/x-xpmi',
         );
 
-        if (is_array($options) && array_key_exists('magicFile', $options)) {
-            $this->setMagicFile($options['magicFile']);
-            unset($options['magicFile']);
-        }
-
-        if (is_array($options) && array_key_exists('enableHeaderCheck', $options)) {
-            $this->enableHeaderCheck($options['enableHeaderCheck']);
-            unset($options['enableHeaderCheck']);
-        }
-
-        if (is_array($options) && !array_key_exists('mimeType', $options)) {
-            $options['mimeType'] = $options;
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
         }
 
         if (empty($options)) {
             $options = array('mimeType' => $default);
-        }
-
-        if (!is_array($options)) {
-            $options = array('mimeType' => $options);
         }
 
         parent::__construct($options);
@@ -151,14 +137,16 @@ class IsImage extends MimeType
      * @param  string $errorType
      * @return false
      */
-    protected function _throw($file, $errorType)
+    protected function createError($file, $errorType)
     {
         if ($file !== null) {
             if (is_array($file)) {
                 if(array_key_exists('name', $file)) {
-                    $this->value = basename($file['name']);
+                    $file = $file['name'];
                 }
-            } else if (is_string($file)) {
+            } 
+
+            if (is_string($file)) {
                 $this->value = basename($file);
             }
         }

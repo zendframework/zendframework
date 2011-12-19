@@ -25,7 +25,7 @@ namespace Zend\Filter;
 
 use Zend\Loader\Broker,
     Zend\Registry,
-    Zend\Translator\Adapter as TranslationAdapter,
+    Zend\Translator\Adapter\AbstractAdapter as TranslationAdapter,
     Zend\Translator\Translator as Translator,
     Zend\Validator;
 
@@ -966,7 +966,7 @@ class InputFilter
                                 $messages[] = $message;
                             }
                         }
-                        $errorsList[] = $notEmptyValidator->getErrors();
+                        $errorsList[] = array_keys($notEmptyValidator->getMessages());
                         $emptyFieldsFound = true;
                     }
                 }
@@ -1032,9 +1032,9 @@ class InputFilter
                     $this->invalidMessages[$validatorRule[self::RULE]] = $collectedMessages;
                     if (isset($this->invalidErrors[$validatorRule[self::RULE]])) {
                         $this->invalidErrors[$validatorRule[self::RULE]] = array_merge($this->invalidErrors[$validatorRule[self::RULE]],
-                                                                                        $validatorChain->getErrors());
+                                                                                        array_keys($validatorChain->getMessages()));
                     } else {
-                        $this->invalidErrors[$validatorRule[self::RULE]] = $validatorChain->getErrors();
+                        $this->invalidErrors[$validatorRule[self::RULE]] = array_keys($validatorChain->getMessages());
                     }
                     unset($this->validFields[$fieldName]);
                     $failed = true;

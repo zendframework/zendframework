@@ -18,17 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Filter\Compress;
+
 use Zend\Filter\Exception;
 
 /**
  * Compression adapter for Lzf
  *
- * @uses       \Zend\Filter\Compress\CompressionAlgorithm
- * @uses       \Zend\Filter\Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
@@ -38,8 +34,12 @@ class Lzf implements CompressionAlgorithm
 {
     /**
      * Class constructor
+     *
+     * @param  null $options
+     * @return void
+     * @throws Exception\ExtensionNotLoadedException if lzf extension missing
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         if (!extension_loaded('lzf')) {
             throw new Exception\ExtensionNotLoadedException('This filter needs the lzf extension');
@@ -51,6 +51,7 @@ class Lzf implements CompressionAlgorithm
      *
      * @param  string $content
      * @return string
+     * @throws Exception\RuntimeException if error occurs during compression
      */
     public function compress($content)
     {
@@ -67,12 +68,13 @@ class Lzf implements CompressionAlgorithm
      *
      * @param  string $content
      * @return string
+     * @throws Exception\RuntimeException if error occurs during decompression
      */
     public function decompress($content)
     {
         $compressed = lzf_decompress($content);
         if (!$compressed) {
-            throw new Exception\RuntimeException('Error during compression');
+            throw new Exception\RuntimeException('Error during decompression');
         }
 
         return $compressed;

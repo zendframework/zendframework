@@ -73,8 +73,8 @@ abstract class AbstractAdapter implements Adapter
     protected $capabilityMarker;
 
     /**
-     * options 
-     * 
+     * options
+     *
      * @var mixed
      */
     protected $options;
@@ -127,8 +127,8 @@ abstract class AbstractAdapter implements Adapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
+        if (!is_array($options)
+            && !$options instanceof Traversable
             && !$options instanceof AdapterOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -199,8 +199,8 @@ abstract class AbstractAdapter implements Adapter
 
     /**
      * Set event manager instance
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return AbstractAdapter
      */
     public function setEventManager(EventCollection $events)
@@ -932,7 +932,7 @@ abstract class AbstractAdapter implements Adapter
     protected function normalizeOptions(array &$options)
     {
         $baseOptions = $this->getOptions();
-        
+
         // ttl
         if (isset($options['ttl'])) {
             $this->normalizeTtl($options['ttl']);
@@ -1083,7 +1083,7 @@ abstract class AbstractAdapter implements Adapter
 
     /**
      * Return registry of plugins
-     * 
+     *
      * @return SplObjectStorage
      */
     protected function getPluginRegistry()

@@ -196,10 +196,6 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->hasPlugin($plugin));
         $this->assertEquals(0, count($this->_storage->getPlugins()));
         $this->assertEquals(0, count($plugin->getHandles()));
-
-        // test plugin already unregistered
-        $this->setExpectedException('Zend\Cache\Exception\LogicException');
-        $this->_storage->removePlugin($plugin);
     }
 
     public function testInternalTriggerPre()

@@ -52,13 +52,20 @@ class Memcached extends AbstractAdapter
      * @throws Exception
      * @return void
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         if (!extension_loaded('memcached')) {
             throw new Exception\ExtensionNotLoadedException("Memcached extension is not loaded");
         }
         
         $this->memcached= new MemcachedResource();
+        
+        if (!empty($options)) {
+            $this->setOptions($options);
+        }
+
+        $options= $this->getOptions();
+        $this->memcached->addServer($options->getServer(), $options->getPort());
         
     }
 
@@ -478,7 +485,14 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $result= $this->memcached->replace($internalKey, $value, $options['ttl']);
+            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
+            if (!$this->memcached->get($internalKey)) {
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$internalKey}' doesn't exist"
+                );
+            }
+            
+            $result = $this->memcached->replace($internalKey, $value, $options['ttl']);
             
             if ($result === false) {
                 $type = is_object($value) ? get_class($value) : gettype($value);
@@ -534,14 +548,15 @@ class Memcached extends AbstractAdapter
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
             
-            $result= $this->memcached->delete($internalKey);
+            $result = $this->memcached->delete($internalKey);
             
             if ($result === false) {
                 if (!$options['ignore_missing_items']) {
                     throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
                 }
             }
-
+            $result = true;
+            
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -673,42 +688,10 @@ class Memcached extends AbstractAdapter
     /* non-blocking */
 
     /**
-     * Find items.
-     *
-     * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - Tags to search for used with matching modes of
-     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
-     *
-     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
-     * @param  array $options
-     * @return boolean
-     * @throws Exception
-     * @see fetch()
-     * @see fetchAll()
-     *
-     * @triggers find.pre(PreEvent)
-     * @triggers find.post(PostEvent)
-     * @triggers find.exception(ExceptionEvent)
-     */
-    public function find($mode = self::MATCH_ACTIVE, array $options=array())
-    {
-        throw Exception\RuntimeException(sprintf(
-            '%s is not yet implemented',
-            __METHOD__
-        ));
-    }
-
-    /**
      * Fetches the next item from result set
      *
      * @return array|boolean The next item or false
-     * @throws Exception
-     * @see fetchAll()
+     * @see    fetchAll()
      *
      * @triggers fetch.pre(PreEvent)
      * @triggers fetch.post(PostEvent)
@@ -716,12 +699,72 @@ class Memcached extends AbstractAdapter
      */
     public function fetch()
     {
-        throw Exception\RuntimeException(sprintf(
-            '%s is not yet implemented',
-            __METHOD__
-        ));
+        if (!$this->stmtActive) {
+            return false;
+        }
+
+        $args = new ArrayObject();
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
+
+            if (!$this->stmtIterator) {
+                // clear stmt
+                $this->stmtActive   = false;
+                $this->stmtIterator = null;
+                $this->stmtOptions  = null;
+
+                $result = false;
+            } else {
+                $result = $this->memcached->fetch();
+                if (!empty($result)) {
+                    $select = $this->stmtOptions['select'];
+                    if (in_array('key', $select)) {
+                        $result['key'] = substr($result['key'], $prefixL);
+                    }
+                }
+            } 
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
+    /**
+     * FetchAll
+     * 
+     * @throws Exception
+     * @return array 
+     */
+    public function fetchAll()
+    {
+        $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
+         
+        $result = $this->memcached->fetchAll();
+         
+        if ($result === false) {
+            throw new Exception\RuntimeException("Memcached::fetchAll() failed");
+        }
+        
+        $select = $this->stmtOptions['select'];
+        
+        foreach ($result as &$elem) {
+            if (in_array('key', $select)) {
+                $elem['key'] = substr($elem['key'], $prefixL);
+            } else {
+                unset($elem['key']);
+            }
+        }
+        
+        return $result;
+    }
+     
     /* cleaning */
 
     /**
@@ -807,8 +850,7 @@ class Memcached extends AbstractAdapter
                             'object'   => 'object',
                             'resource' => false,
                         ),
-                        'supportedMetadata' => array(
-                        ),
+                        'supportedMetadata'  => array(),
                         'maxTtl'             => 0,
                         'staticTtl'          => false,
                         'tagging'            => false,
@@ -830,6 +872,71 @@ class Memcached extends AbstractAdapter
         }
     }
 
+    /**
+     * Get items that were marked to delay storage for purposes of removing blocking
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return bool
+     * @throws Exception
+     *
+     * @triggers getDelayed.pre(PreEvent)
+     * @triggers getDelayed.post(PostEvent)
+     * @triggers getDelayed.exception(ExceptionEvent)
+     */
+    public function getDelayed(array $keys, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($this->stmtActive) {
+            throw new Exception\RuntimeException('Statement already in use');
+        } elseif (!$baseOptions->getReadable()) {
+            return false;
+        } elseif (!$keys) {
+            return true;
+        }
+
+        $this->normalizeOptions($options);
+        if (isset($options['callback']) && !is_callable($options['callback'], false)) {
+            throw new Exception\InvalidArgumentException('Invalid callback');
+        }
+
+        $args = new ArrayObject(array(
+            'key'     => & $key,
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
+
+            $search = array();
+            foreach ($keys as $key) {
+                $search[] = $prefix.$key;
+            }
+
+            $this->stmtIterator = $this->memcached->getDelayed($search);
+                    
+            $this->stmtActive   = true;
+            $this->stmtOptions  = &$options;
+
+            if (isset($options['callback'])) {
+                $callback = $options['callback'];
+                while (($item = $this->fetch()) !== false) {
+                    call_user_func($callback, $item);
+                }
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
+    }
+    
     /**
      * Get storage capacity.
      *

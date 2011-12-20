@@ -21,8 +21,7 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 
-use Memcached,
-    Zend\Cache,
+use Zend\Cache,
     Zend\Cache\Exception;
 
 /**
@@ -51,9 +50,8 @@ class MemcachedTest extends CommonAdapterTest
 
     public function tearDown()
     {
-        if (extension_loaded('memcached')) {
-            $m = new Memcached();
-            $m->flush();
+        if (!empty($this->_storage)) {
+            $this->_storage->clear();
         }    
         
         parent::tearDown();

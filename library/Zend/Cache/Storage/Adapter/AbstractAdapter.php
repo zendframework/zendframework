@@ -331,6 +331,11 @@ abstract class AbstractAdapter implements Adapter
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
             $plugin->detach($this->events());
+        } else {
+            throw new Exception\LogicException(sprintf(
+                'Plugin of type "%s" already removed',
+                get_class($plugin)
+            ));
         }
         $registry->detach($plugin);
         return $this;

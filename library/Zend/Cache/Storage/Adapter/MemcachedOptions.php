@@ -63,6 +63,20 @@ class MemcachedOptions extends AdapterOptions
     );
 
     /**
+     * Memcached server address
+     * 
+     * @var string 
+     */
+    protected $server = 'localhost';
+    
+    /**
+     * Memcached port
+     * 
+     * @var integer
+     */
+    protected $port = 11211;
+    
+    /**
      * Whether or not to enable binary protocol for communication with server
      * 
      * @var bool
@@ -202,6 +216,37 @@ class MemcachedOptions extends AdapterOptions
      */
     protected $tcpNodelay = false;
 
+    public function setServer($server)
+    {
+        $this->server= $server;
+        return $this;
+    }
+    
+    public function getServer()
+    {
+        return $this->server;
+    }
+    
+    public function setPort($port)
+    {
+        if ((!is_int($port) && !is_numeric($port)) 
+            || 0 > $port
+        ) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a positive integer',
+                __METHOD__
+            ));
+        }
+        
+        $this->port= $port;
+        return $this;
+    }
+    
+    public function getPort()
+    {
+        return $this->port;
+    }
+    
     /**
      * Set flag indicating whether or not to enable binary protocol for 
      * communication with server
@@ -708,6 +753,10 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setSocketSendSize($socketSendSize)
     {
+        if ($socketSendSize === null) {
+            return $this;
+        }
+        
         if ((!is_int($socketSendSize) && !is_numeric($socketSendSize)) 
             || 0 > $socketSendSize
         ) {
@@ -739,6 +788,10 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setSocketRecvSize($socketRecvSize)
     {
+        if ($socketRecvSize === null) {
+            return $this;
+        }
+        
         if ((!is_int($socketRecvSize) && !is_numeric($socketRecvSize)) 
             || 0 > $socketRecvSize
         ) {

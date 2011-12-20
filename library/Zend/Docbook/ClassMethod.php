@@ -3,7 +3,8 @@
 namespace Zend\Docbook;
 
 use Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
-    Zend\Code\Reflection\MethodReflection;
+    Zend\Code\Reflection\MethodReflection,
+    Zend\Code\Reflection\DocBlockReflection;
 
 class ClassMethod
 {
@@ -59,8 +60,8 @@ class ClassMethod
 
     /**
      * Constructor
-     * 
-     * @param  ReflectionMethod $reflection 
+     *
+     * @param  ReflectionMethod $reflection
      * @return void
      */
     public function __construct(MethodReflection $reflection)
@@ -70,7 +71,7 @@ class ClassMethod
 
     /**
      * Retrieve method name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -80,7 +81,7 @@ class ClassMethod
 
     /**
      * Get normalized method identifier
-     * 
+     *
      * @return string
      */
     public function getId()
@@ -98,7 +99,7 @@ class ClassMethod
         foreach (explode('\\', $namespace) as $segment) {
             $id .= $filter->filter($segment) . '.';
         }
-        $id .= $filter->filter($class) 
+        $id .= $filter->filter($class)
             . '.methods.'
             . $filter->filter($name);
 
@@ -108,13 +109,13 @@ class ClassMethod
 
     /**
      * Retrieve method short description
-     * 
+     *
      * @return string
      */
     public function getShortDescription()
     {
         $rDocblock = $this->reflection->getDocblock();
-        if ($rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+        if ($rDocblock instanceof DocBlockReflection) {
             return $rDocblock->getShortDescription();
         }
         return '';
@@ -122,13 +123,13 @@ class ClassMethod
 
     /**
      * Retrieve method long description
-     * 
+     *
      * @return string
      */
     public function getLongDescription()
     {
         $rDocblock = $this->reflection->getDocblock();
-        if ($rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+        if ($rDocblock instanceof DocBlockReflection) {
             return $rDocblock->getLongDescription();
         }
         return '';
@@ -136,13 +137,13 @@ class ClassMethod
 
     /**
      * Retrieve method return type
-     * 
+     *
      * @return string
      */
     public function getReturnType()
     {
         $rDocblock = $this->reflection->getDocblock();
-        if (!$rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+        if (!$rDocblock instanceof DocBlockReflection) {
             return 'void';
         }
 
@@ -157,7 +158,7 @@ class ClassMethod
 
     /**
      * Return method argument prototype
-     * 
+     *
      * @return string
      */
     public function getPrototype()
@@ -193,8 +194,8 @@ class ClassMethod
 
     /**
      * Resolve the types provided via an @param or @return annotation
-     * 
-     * @param  string $value 
+     *
+     * @param  string $value
      * @return string
      */
     protected function resolveTypes($value)
@@ -220,7 +221,7 @@ class ClassMethod
 
     /**
      * Get the namespace of the class containing this method
-     * 
+     *
      * @return string
      */
     protected function getNamespace()
@@ -236,7 +237,7 @@ class ClassMethod
 
     /**
      * Get the class containing this method, without the leading namespace
-     * 
+     *
      * @return string
      */
     protected function getClass()
@@ -254,7 +255,7 @@ class ClassMethod
 
     /**
      * Get import statements and aliases from the class containing this method
-     * 
+     *
      * @return array
      */
     protected function getUses()
@@ -273,7 +274,7 @@ class ClassMethod
 
     /**
      * Get parameter annotations from docblock
-     * 
+     *
      * @return array
      */
     protected function getParameterTags()
@@ -283,7 +284,7 @@ class ClassMethod
         }
 
         $rDocblock = $this->reflection->getDocblock();
-        if ($rDocblock instanceof Zend\Code\Reflection\DocBlockReflection) {
+        if ($rDocblock instanceof DocBlockReflection) {
             $params    = $rDocblock->getTags('param');
         } else {
             $params = array();

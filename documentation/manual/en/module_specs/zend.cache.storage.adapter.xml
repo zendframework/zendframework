@@ -126,7 +126,7 @@ $cache->addPlugin($plugin);
 
                         <listitem>
                             <para>
-                                <methodname>methodname</methodname>incrementItem[s]</methodname>,
+                                <methodname>incrementItem[s]</methodname>,
                                 <methodname>decrementItem[s]</methodname>: add a new item with 0 as base
                             </para>
                         </listitem>
@@ -357,7 +357,6 @@ $cache->addPlugin($plugin);
 
                             <para>Returns boolean</para>
                         </listitem>
-                    </varlistentry>
                     </itemizedlist>
                 </listitem>
             </varlistentry>

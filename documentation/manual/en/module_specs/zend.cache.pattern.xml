@@ -251,7 +251,6 @@ $callbackCache->setOptions(new PatternOptions(array(
 
             <varlistentry xml:id="zend.cache.pattern.options.dir-perm">
                 <term>dir_perm</term>
-                </term>
 
                 <listitem>
                     <para>

@@ -144,6 +144,7 @@ class Module
 {
     public function init(ModuleManager $moduleManger)
     {
+        // Remember to keep the init() method as lightweight as possible
         $events = $moduleManager->events();
         $events->attach('loadModules.post', array($this, 'modulesLoaded'));
     }
@@ -182,6 +183,7 @@ class Module
 {
     public function init()
     {
+        // Remember to keep the init() method as lightweight as possible
         $events = StaticEventManager::getInstance();
         $events->attach('bootstrap', 'bootstrap', array($this, 'mvcBootstrap'));
     }

@@ -154,10 +154,12 @@
                         <methodname>init()</methodname>, this listener will call
                         it and pass the instance of
                         <classname>Zend\Module\Manager</classname> as the
-                        paramter. The <methodname>init()</methodname> method
-                        should be used for performing
+                        paramter. The <methodname>init()</methodname> method is
+                        called for <emphasis>every</emphasis> module on
+                        <emphasis>every</emphasis> page request and should
+                        <emphasis>only</emphasis> be used for performing
                         <emphasis>lightweight</emphasis> tasks such as
-                        registering an autoloader or event listeners.
+                        registering event listeners.
                     </para>
                 </listitem>
             </varlistentry>

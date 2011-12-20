@@ -112,7 +112,12 @@ $matches = $event->getRouteMatch();
       <para>
         Each <classname>Module</classname> class can have an optional
         <methodname>init()</methodname> method. Typically, you'll setup
-        event listeners for you module here.
+        event listeners for you module here. The <methodname>init()</methodname>
+        method is called for <emphasis>every</emphasis> module on
+        <emphasis>every</emphasis> page request and should
+        <emphasis>only</emphasis> be used for performing
+        <emphasis>lightweight</emphasis> tasks such as registering event
+        listeners.
       </para>
 
       <para>
@@ -136,6 +141,7 @@ class Module
 {
     public function init()
     {
+        // Remember to keep the init() method as lightweight as possible
         $events = StaticEventManager::getInstance();
         $events->attach('bootstrap', 'bootstrap', array($this, 'registerListeners'));
     }

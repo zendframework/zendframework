@@ -212,7 +212,12 @@ class Module
       method will be triggered by a <classname>Zend\Module\Manager</classname>
       listener when it loads the module class, and passed an instance of the
       manager. This allows you to perform tasks such as setting up
-      module-specific event listeners.
+      module-specific event listeners. The <methodname>init()</methodname>
+      method is called for <emphasis>every</emphasis> module on
+      <emphasis>every</emphasis> page request and should
+      <emphasis>only</emphasis> be used for performing
+      <emphasis>lightweight</emphasis> tasks such as registering event
+      listeners.
     </para>
 
     <para>

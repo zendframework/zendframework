@@ -46,6 +46,7 @@ abstract class AbstractPlugin implements Plugin
     public function setOptions(PluginOptions $options)
     {
         $this->options = $options;
+        return $this;
     }
 
     /**

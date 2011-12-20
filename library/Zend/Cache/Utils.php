@@ -35,7 +35,7 @@ class Utils
      * @return array
      * @throws Exception\RuntimeException
      */
-    static public function getDiskCapacity($path)
+    public static function getDiskCapacity($path)
     {
         $total = @disk_total_space($path);
         if ($total === false) {
@@ -61,7 +61,7 @@ class Utils
      * @return array
      * @throws Exception\RuntimeException
      */
-    static public function getPhpMemoryCapacity()
+    public static function getPhpMemoryCapacity()
     {
         $memSize = (float) self::bytesFromString(ini_get('memory_limit'));
         if ($memSize <= 0) {
@@ -83,7 +83,7 @@ class Utils
      * @return array
      * @throws Exception\RuntimeException
      */
-    static public function getSystemMemoryCapacity()
+    public static function getSystemMemoryCapacity()
     {
         // Windows
         if (substr(\PHP_OS, 0, 3) == 'WIN') {

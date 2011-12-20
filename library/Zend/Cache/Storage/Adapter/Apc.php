@@ -24,6 +24,7 @@ namespace Zend\Cache\Storage\Adapter;
 use APCIterator,
     ArrayObject,
     stdClass,
+    Traversable,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Capabilities;
 
@@ -109,7 +110,7 @@ class Apc extends AbstractAdapter
     /**
      * Set options.
      *
-     * @param  stringTraversable|ApcOptions $options
+     * @param  array|Traversable|ApcOptions $options
      * @return Apc
      * @see    getOptions()
      */
@@ -126,6 +127,11 @@ class Apc extends AbstractAdapter
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
         }
+
+        if (!$options instanceof ApcOptions) {
+            $options = new ApcOptions($options);
+        }
+
         $this->options = $options;
         return $this;
     }

@@ -4,51 +4,80 @@
     xmlns="http://docbook.org/ns/docbook" version="5.0"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xml:id="zend.module.intro">
-    <info><title>Introduction to the Module System</title></info>
+    <info>
+        <title>Introduction to the Module System</title>
+    </info>
 
     <para>
         Zend Framework 2.0 introduces a new and powerful approach to modules.
         This new module system is designed with flexibility, simplicity, and
         re-usability in mind. A module may contain just about anything: PHP
-        code, including MVC functionality; library code; view scripts; and/or
-        or public assets such as images, CSS, and JavaScript. The possibilities
-        are endless.
+        code, including MVC functionality; library code; view scripts; and/or or
+        public assets such as images, CSS, and JavaScript. The possibilities are
+        endless.
     </para>
 
+    <note>
+        <para>
+            The module system in ZF2 has been designed to be useful as a generic
+            and powerful foundation for developers and other projects to build
+            their own module or plugin systems from.
+        </para>
+
+        <para>
+            For a better understanding of the event-driven concepts behind the
+            ZF2 module system, it may be helpful to read the <link
+                linkend="zend.event-manager.event-manager">EventManager
+            documentation.</link>.
+        </para>
+    </note>
+
     <para>
-        The module system in Zend Framework 2 is made of up two main
-        components:
+        The module system is made up of the following:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <classname>Zend\Module\Manager</classname> is responsible for
-                most module-related tasks such as instantiating modules'
-                <classname>Module</classname> objects, merging module
-                configuration, keeping track of loaded modules, etc.
+                The Module Autoloader -
+                <classname>Zend\Loader\ModuleAutoloader</classname> is a
+                specialized autoloader that is responsible for locating and
+                loading of modules' <classname>Module</classname> classes from a
+                variety of sources.
             </para>
         </listitem>
         <listitem>
             <para>
-                <classname>Zend\Loader\ModuleAutoloader</classname> is a
-                specialized autoloader that is responsible for locating and
-                on-demand loading of modules' <classname>Module</classname>
-                classes from a variety of sources.
+                <link linkend="zend.module.module-manager">The Module
+                    Manager</link> - <classname>Zend\Module\Manager</classname>
+                simply takes an array of module names and fires a sequence of
+                events for each one, allowing the behavior of the module system
+                to be defined entirely by the listeners which are attached to
+                the module manager.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Module Manager Listeners -
+                Event listeners can be attached to the module manager's various
+                events. These listeners can do everything from resolving and
+                loading modules to performing complex initialization tasks and
+                introspection into each returned module object.
             </para>
         </listitem>
     </itemizedlist>
 
     <note>
         <para>
-            The name of a module in Zend Framework 2 is simply a <link
+            The name of a module in a typical Zend Framework 2 application is
+            simply a <link
                 xlink:href="http://php.net/namespaces"><acronym>PHP</acronym>
-                namespace</link> and must follow all of the same rules.
+            namespace</link> and must follow all of the same rules.
         </para>
     </note>
 
     <para>
-        The recommended structure of a typical MVC-oriented module is as
+        The recommended structure of a typical MVC-oriented ZF2 module is as
         follows:
     </para>
 
@@ -58,7 +87,7 @@ module_root/
     autoload_classmap.php
     autoload_function.php
     autoload_register.php
-    configs/
+    config/
         module.config.php
     public/
         images/
@@ -77,310 +106,10 @@ module_root/
             &lt;.phtml files&gt;
 </literallayout>
 
-
-    <section xml:id="zend.module.intro.the-module-class">
-        <info><title>The Module Class</title></info>
-
-        <para>
-            The <classname>Module</classname> class is single most important
-            part of any Zend Framework 2 module. When initializing a module,
-            <classname>Zend\Module\Manager</classname> only cares that a
-            <classname>Module</classname> class exists under that module's
-            namespace. 
-        </para>
-
-        <example
-            xml:id="zend.module.intro.example.minimal-module">
-            <info><title>A Minimal Module</title></info>
-
-            <para>
-                As an example, provided the module name "MyModule",
-                <classname>Zend\Module\Manager</classname> will simply expect
-                the class <classname>MyModule\Module</classname> to be
-                available. It is the responsibility of
-                <classname>Zend\Loader\ModuleAutoloader</classname> to find and
-                include the <classname>MyModule\Module</classname> class if it
-                is not already available. 
-            </para>
-
-            <para>
-                A module named "MyModule" module might start out looking
-                something like this:
-            </para>
-     
-            <literallayout>
-MyModule/
-    Module.php
-</literallayout>
-
-            <para>
-                Within <filename>Module.php</filename>, you define your
-                <classname>MyModule\Module</classname> class:
-            </para>
-
-            <programlisting language="php"><![CDATA[
-namespace MyModule;
-
-class Module
-{
-}
-]]></programlisting>
-            <para>
-                Though it will not serve any purpose, this "MyModule" module
-                now has everything it needs to be considered a valid module and
-                be loaded by the module system!
-            </para>
-        </example>
-
-        <para>
-            This <classname>Module</classname> class serves as the single entry
-            point for <classname>Zend\Module\Manager</classname> to detect and
-            interact with a module.  From within this simple, yet powerful
-            class, modules can override or provide additional application
-            configuration, perform initialization tasks such as registering
-            autoloader(s) and event listeners, declare dependencies, and much
-            more.
-        </para>
-
-        <para>
-            Typically, you'll want to take advantage of a couple of special
-            methods in your module's <classname>Module</classname> class. The
-            following methods are called by
-            <classname>Zend\Module\Manager</classname> on
-            <emphasis>every</emphasis> enabled module for
-            <emphasis>every</emphasis> application request:
-        </para>
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    The <methodname>init()</methodname> method should be used
-                    for performing <emphasis>lightweight</emphasis> tasks such
-                    as registering an autoloader or event listeners.
-                    <classname>Zend\Module\Manager</classname> passes itself as
-                    the only parameter to the <methodname>init()</methodname>
-                    method.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    The <methodname>getConfig()</methodname> method allows
-                    modules to inject their own configuration into the global
-                    application configuration. The application environment
-                    string will be passed as the only parameter to the
-                    <methodname>getConfig()</methodname> method, allowing you
-                    to return the appropriate configuration contengent upon the
-                    application environment. The
-                    <methodname>getConfig()</methodname> method is expected to
-                    always return an instance of
-                    <classname>Zend\Config\Config</classname>. All returned
-                    configurations will be merged by
-                    <classname>Zend\Module\Manager</classname> and resulting
-                    merged configuration will be utilized by the application.
-                </para>
-            </listitem>
-        </itemizedlist>
-
-        <example
-            xml:id="zend.module.intro.example.typical-module-class">
-            <info><title>A Typical Module Class</title></info>
-
-            <para>
-                The following example shows a more typical usage of the
-                <classname>Module</classname> class:
-            </para>
-
-            <programlisting language="php"><![CDATA[
-namespace MyModule;
-
-use Zend\Config\Config,
-    Zend\Loader\AutoloaderFactory,
-    Zend\Module\Manager;
-
-class Module
-{
-    public function init(Manager $moduleManager = null)
-    {
-        $this->initAutoloader();
-    }
-
-    public function getConfig($env = null)
-    {
-        $config = new Config(include __DIR__ . '/configs/module.config.php');
-        if ($env && isset($config->{$env})) {
-            return $config->{$env};
-        } 
-        return $config; 
-    }
-
-    public function initAutoloader()
-    {
-        AutoloaderFactory::factory(array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        ));
-    }
-}
-]]></programlisting>
-        </example>    
-
-        <note>
-            <para>
-                While modules can exist without a Module class, it would not be
-                detected by the module autoloader or manager. An alternative
-                method of utilizing such a module would have to be provided by
-                the developer. For the purposes of this documentation, we will
-                not go into such use-cases.
-            </para>
-        </note>
-    </section>
-
-    <section xml:id="zend.module.intro.the-init.post-event">
-        <info><title>The "init.post" Event</title></info>
-
-        <para>
-            It is not safe for a module to assume that any other modules have
-            already been loaded at the time <methodname>init()</methodname>
-            method is called. If your module needs to perform some action(s)
-            after all other modules have been loaded, the module manager's
-            "init.post" event makes this easy. 
-        </para>
-
-        <example
-            xml:id="zend.module.intro.example.init.post-event">
-            <info><title>Sample Usage of "init.post" Event</title></info>
-
-            <programlisting language="php"><![CDATA[
-use Zend\Module\Manager as ModuleManager;
-
-class Module
-{
-public function init(ModuleManager $moduleManger)
-{
-    $events = $moduleManager->events();
-    $events->attach('init.post', array($this, 'postInit'));
-}
-
-public function postInit($e)
-{
-    // This method is called once all modules are loaded.
-    $moduleManager = $e->getTarget();
-    $loadedModules = $moduleManager->getLoadedModules();
-    $config        = $moduleManager->getMergedConfig();
-}
-}
-]]></programlisting>
-        </example>
-    </section>
-
-    <section xml:id="zend.module.intro.module-loading">
-        <info><title>Module Loading</title></info>
-
-        <para>
-            Typically, modules will live under a <filename>modules/</filename>
-            directory under your application's root directory. To make such a
-            configuration work, we need to configure and register an instance
-            of <classname>Zend\Loader\ModuleAutoloader</classname>. The module
-            autoloader takes an array of paths which it should search when
-            trying to load modules.
-        </para>
-
-        <example
-            xml:id="zend.module.intro.example.module-loading-single-path">
-            <info><title>Registering a Single Module Path</title></info>
-
-            <para>
-                The following example will search for modules in
-                <filename>/path/to/myzf2project/modules</filename>.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-// Assuming we're in /path/to/myzf2project/public/index.php
-$moduleLoader = new \Zend\Loader\ModuleAutoloader(array(
-realpath(__DIR__ . '/../modules')
-));
-$moduleLoader->register();
-]]></programlisting>
-        </example>
-
-        <para>
-            Of course, multiple module paths can be registered as well,
-            allowing multiple applications to share a single copy of a module.
-        </para>
-
-        <example
-            xml:id="zend.module.intro.example.module-loading-multiple-paths">
-            <info><title>Registering Multiple Module Paths</title></info>
-
-            <para>
-                In this example, two paths are registered with the module
-                autoloader: an application-local modules directory and a
-                system-wide modules directory.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-// Assuming we're in /path/to/myzf2project/public/index.php
-$moduleLoader = new \Zend\Loader\ModuleAutoloader(array(
-realpath(__DIR__ . '/../modules'),
-'/path/to/shared/modules'
-));
-$moduleLoader->register();
-]]></programlisting>
-        </example>
-
-        <note>
-            <para>
-                Module paths behave very similar to the PHP include path, and
-                are searched in the order they are defined. If you have modules
-                with the same name in more than one registered module path, the
-                module autoloader will return the first one it finds.
-            </para>
-        </note>
-    </section>
-
-    <section xml:id="zend.module.intro.non-standard-module-paths">
-        <info><title>Non-Standard / Explicit Module Paths</title></info>
-
-        <para>
-            Sometimes you may want to specify exactly where a module is instead
-            of letting <classname>Zend\Loader\ModuleAutoloader</classname> try
-            to find it in the registered paths.
-        </para>
-
-        <example
-            xml:id="zend.module.intro.example.module-loading-nonstandard-paths">
-            <info><title>Registering a Non-Standard / Explicit Module Path</title></info>
-
-            <para>
-                In this example, the autoloader will first check for
-                <classname>MyModule\Module</classname> in
-                <filename>/path/to/mymoduledir/Module.php</filename>. If it's
-                not found, then it will fall back to searching any other
-                registered module paths.
-            </para>
-
-            <programlisting language="php"><![CDATA[
-$moduleLoader = new \Zend\Loader\ModuleAutoloader(array(
-realpath(__DIR__ . '/../modules'),
-'MyModule' => '/path/to/mymoduledir'
-));
-$moduleLoader->register();
-]]></programlisting>
-        </example>
-
-        <para>
-            This same method works if you provide the path to a phar archive.
-        </para>
-    </section>
-
     <section xml:id="zend.module.intro.the-autoload-files">
-        <info><title>The autoload_*.php Files</title></info>
+        <info>
+            <title>The autoload_*.php Files</title>
+        </info>
 
         <para>
             The three <filename>autoload_*.php</filename> files are not
@@ -390,7 +119,7 @@ $moduleLoader->register();
         <itemizedlist>
             <listitem>
                 <para>
-                    <filename>autoload_filemap.php</filename> should return an
+                    <filename>autoload_classmap.php</filename> should return an
                     array classmap of class name/filename pairs (with the
                     filenames resolved via the <varname>__DIR__</varname> magic
                     constant).
@@ -409,8 +138,8 @@ $moduleLoader->register();
 
             <listitem>
                 <para>
-                    <filename>autoload_register.php</filename> should register
-                    a PHP callback (typically that returned by
+                    <filename>autoload_register.php</filename> should register a
+                    PHP callback (typically that returned by
                     <filename>autoload_function.php</filename> with
                     <methodname>spl_autoload_register()</methodname>.
                 </para>
@@ -419,98 +148,11 @@ $moduleLoader->register();
 
         <para>
             The purpose of these three files is to provide reasonable default
-            mechanisms for autoloading the classes contained in the module,
-            thus providing a trivial way to consume the module without
-            requiring <classname>Zend\Module</classname> (e.g., for use outside
-            a ZF2 application).
+            mechanisms for autoloading the classes contained in the module, thus
+            providing a trivial way to consume the module without requiring
+            <classname>Zend\Module</classname> (e.g., for use outside a ZF2
+            application).
         </para>
     </section>
 
-    <section xml:id="zend.module.intro.packagine-modules-with-phar">
-        <info><title>Packaging Modules with Phar</title></info>
-
-        <para>
-            If you prefer, you may easily package your module as a <link
-                xlink:href="http://php.net/phar">phar archive</link>. Supported
-            phar extensions are: .phar, .phar.gz, .phar.bz2, .phar.tar,
-            .phar.tar.gz, .phar.tar.bz2, .phar.zip, .tar, .tar.gz, .tar.bz2,
-            and .zip. The module autoloader is able to discover modules with
-            these extensions.
-        </para>
-
-        <para>
-            The easiest way to package your module is to simply tar the module
-            directory. You can then replace the <filename>MyModule/</filename>
-            directory with <filename>MyModule.tar</filename>, and it should
-            still be autoloaded without any additional changes!
-        </para>
-
-        <note>
-            <para>
-                If possible, avoid using any type of compression (bz2, gz, zip)
-                on your phar archives, as it introduces unnecessary CPU
-                overhead to each request.
-            </para>
-        </note>
-    </section>
-
-    <section xml:id="zend.module.intro.best-practices-for-modules">
-        <info><title>Best Practices for Modules</title></info>
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    Keep the <methodname>init()</methodname> method
-                    lightweight. Be conservative with the actions you perform
-                    in the <methodname>init()</methodname> method of your
-                    <classname>Module</classname> class. This method is ran for
-                    <emphasis>every</emphasis> page request, and should not
-                    perform anything heavy. As a rule of thumb, registering
-                    autoloaders and event listeners are appropriate tasks to
-                    perform in the <methodname>init()</methodname> method. Such
-                    lightweight tasks will generally not have a measurable
-                    impact on the performance of your application, even with
-                    many modules enabled. It is considered bad practice to
-                    utilize the <methodname>init()</methodname> method for
-                    setting up or configuring instances of application
-                    resources such as a database connection, application
-                    logger, or mailer. Tasks such as these are better served
-                    through the new dependency injection capabilities of Zend
-                    Framework 2.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Do not perform writes within a module. You should
-                    <emphasis>never</emphasis> code your module to perform or
-                    expect any writes within the module's directory. Once
-                    installed, the files within a module's directory should
-                    always match the distribution verbatim. Any user-provided
-                    configuration should be performed via overrides in the
-                    Application module. Any other required filesystem writes
-                    should be performed in some writeable path that is outside
-                    of the module's directory. There are two primary advantages
-                    to following this rule: First, any modules which attempt to
-                    write within themselves will not be compatible with phar
-                    packaging. Second, by keeping the module in sync with the
-                    upstream distribution, updates via mechanisms such as Git
-                    will be simple and trouble-free. Of course, the Application
-                    module is a special exception to this rule, as there is
-                    typically no upstream distribution for this module, and
-                    it's unlikely you would want to run this package from
-                    within a phar archive.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Utilize a vendor prefix for module names.  To avoid module
-                    naming conflicts, you are encouraged to prefix your module
-                    namespace with a vendor prefix. As an example, the
-                    (incomplete) developer tools module distributed by Zend is
-                    named "ZendDeveloperTools" instead of simply
-                    "DeveloperTools".
-                </para>
-            </listitem>
-        </itemizedlist>
-    </section>
 </section>

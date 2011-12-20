@@ -13,8 +13,8 @@ class SkeletonGenerator
 
     /**
      * Constructor
-     * 
-     * @param  ClassParser $parser 
+     *
+     * @param  ClassParser $parser
      * @return void
      */
     public function __construct(ClassParser $parser)
@@ -24,7 +24,7 @@ class SkeletonGenerator
 
     /**
      * Generate docbook
-     * 
+     *
      * @return string
      */
     public function generate()
@@ -83,7 +83,9 @@ class SkeletonGenerator
             $entry = $dom->createElement('varlistentry');
             $entry->setAttribute('xml:id', $method->getId());
 
-            $term   = $dom->createElement('term');
+            $term   = $dom->createElement('term', $method->getName());
+
+            $item1 = $dom->createElement('listitem');
             $synop  = $dom->createElement('methodsynopsis');
             $mname  = $dom->createElement('methodname', $method->getName());
             $mparam = $dom->createElement('methodparam');
@@ -91,15 +93,16 @@ class SkeletonGenerator
             $mparam->appendChild($fparam);
             $synop->appendChild($mname);
             $synop->appendChild($mparam);
-            $term->appendChild($synop);
+            $item1->appendChild($synop);
 
-            $item = $dom->createElement('listitem');
-            $item->appendChild($dom->createElement('para', $method->getShortDescription()));
-            $item->appendChild($dom->createElement('para', $method->getLongDescription()));
-            $item->appendChild($dom->createElement('para', 'Returns ' . $method->getReturnType()));
+            $item2 = $dom->createElement('listitem');
+            $item2->appendChild($dom->createElement('para', $method->getShortDescription()));
+            $item2->appendChild($dom->createElement('para', $method->getLongDescription()));
+            $item2->appendChild($dom->createElement('para', 'Returns ' . $method->getReturnType()));
 
             $entry->appendChild($term);
-            $entry->appendChild($item);
+            $entry->appendChild($item1);
+            $entry->appendChild($item2);
 
             $varlist->appendChild($entry);
         }

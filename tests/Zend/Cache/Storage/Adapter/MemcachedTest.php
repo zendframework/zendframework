@@ -20,8 +20,10 @@
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
-use \Zend\Cache,
-    \Zend\Cache\Exception;
+
+use Memcached,
+    Zend\Cache,
+    Zend\Cache\Exception;
 
 /**
  * @category   Zend
@@ -56,5 +58,4 @@ class MemcachedTest extends CommonAdapterTest
         
         parent::tearDown();
     }
-
 }

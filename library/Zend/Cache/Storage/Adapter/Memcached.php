@@ -22,7 +22,9 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
+    Memcached as MemcachedResource,
     stdClass,
+    Traversable,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Capabilities;
 
@@ -39,16 +41,9 @@ class Memcached extends AbstractAdapter
     /**
      * Memcached instance
      *
-     * @var Memcached
+     * @var MemcachedResource
      */
     protected $memcached;
-
-    /**
-     * The used namespace separator
-     *
-     * @var string
-     */
-    protected $namespaceSeparator = ':';
 
     /**
      * Constructor
@@ -63,7 +58,7 @@ class Memcached extends AbstractAdapter
             throw new Exception\ExtensionNotLoadedException("Memcached extension is not loaded");
         }
         
-        $this->memcached= new Memcached();
+        $this->memcached= new MemcachedResource();
         
     }
 
@@ -72,8 +67,8 @@ class Memcached extends AbstractAdapter
     /**
      * Set options.
      *
-     * @param  stringTraversable|WinCacheOptions $options
-     * @return WinCache
+     * @param  string|Traversable|MemcachedOptions $options
+     * @return Memcached
      * @see    getOptions()
      */
     public function setOptions($options)
@@ -83,13 +78,29 @@ class Memcached extends AbstractAdapter
             && !$options instanceof MemcachedOptions    
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array, a Traversable object; '
+                '%s expects an array, a Traversable object, or a MemcachedOptions object; '
                 . 'received "%s"',
                 __METHOD__,
                 (is_object($options) ? get_class($options) : gettype($options))
             ));
         }
+
+        if (!$options instanceof MemcachedOptions) {
+            $options = new MemcachedOptions($options);
+        }
+
         $this->options = $options;
+
+        // Set memcached options, using options map to map to Memcached constants
+        $map = $options->getOptionsMap();
+        foreach ($options->toArray() as $key => $value) {
+            if (!array_key_exists($key, $map)) {
+                // skip keys for which there are not equivalent options
+                continue;
+            }
+            $this->memcached->setOption($map[$key], $value);
+        }
+
         return $this;
     }
 
@@ -661,6 +672,55 @@ class Memcached extends AbstractAdapter
 
     /* non-blocking */
 
+    /**
+     * Find items.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - tags <array> optional
+     *    - Tags to search for used with matching modes of
+     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     * @see fetch()
+     * @see fetchAll()
+     *
+     * @triggers find.pre(PreEvent)
+     * @triggers find.post(PostEvent)
+     * @triggers find.exception(ExceptionEvent)
+     */
+    public function find($mode = self::MATCH_ACTIVE, array $options=array())
+    {
+        throw Exception\RuntimeException(sprintf(
+            '%s is not yet implemented',
+            __METHOD__
+        ));
+    }
+
+    /**
+     * Fetches the next item from result set
+     *
+     * @return array|boolean The next item or false
+     * @throws Exception
+     * @see fetchAll()
+     *
+     * @triggers fetch.pre(PreEvent)
+     * @triggers fetch.post(PostEvent)
+     * @triggers fetch.exception(ExceptionEvent)
+     */
+    public function fetch()
+    {
+        throw Exception\RuntimeException(sprintf(
+            '%s is not yet implemented',
+            __METHOD__
+        ));
+    }
 
     /* cleaning */
 
@@ -751,6 +811,7 @@ class Memcached extends AbstractAdapter
                         ),
                         'maxTtl'             => 0,
                         'staticTtl'          => false,
+                        'tagging'            => false,
                         'ttlPrecision'       => 1,
                         'useRequestTime'     => false,
                         'expiredRead'        => false,

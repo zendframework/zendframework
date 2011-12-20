@@ -314,7 +314,7 @@ class Module
 
     <para>
       Zend Framework ships a default bootstrap implementation in
-      <classname>Zend\Mvc\Bootstrap</classname>. This class accepts a an
+      <classname>Zend\Mvc\Bootstrap</classname>. This class accepts an
       instance of <classname>Zend\Config\Config</classname> to its constructor;
       once you have an instance, you then call its
       <methodname>bootstrap()</methodname> method, passing it the

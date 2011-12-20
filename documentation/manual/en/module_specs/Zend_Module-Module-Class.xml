@@ -115,7 +115,9 @@ class Module implements AutoloaderProvider
         and methods that allow on <classname>Module</classname> classes, see
         <link
             linkend="zend.module.module-manager.module-manager-listeners">module
-            manager listeners documentation</link>.
+        manager listeners</link> and <link
+            linkend="zend.module.module-manager.module-manager-events">module
+        mananger events documentation</link>.
     </para>
 
     <section xml:id="zend.module.module-class.the-loadModules.post-event">
@@ -130,6 +132,16 @@ class Module implements AutoloaderProvider
             after all other modules have been loaded, the module manager's
             "loadModules.post" event makes this easy. 
         </para>
+
+        <note>
+            <para>
+                For more information on methods like
+                <methodname>init()</methodname> and
+                <methodname>getConfig()</methodname>, refer to the <link
+                    linkend="zend.module.module-manager.module-manager-listeners">module
+                manager listeners documentation</link>.
+            </para>
+        </note>
 
         <example
             xml:id="zend.module.module-class.example.loadModules.post-event">
@@ -167,7 +179,13 @@ class Module
         </info>
 
         <para>
-            If you are writing an MVC-oriented module for ZF2, you may need to access to addtional parts of the application in your <classname>Module</classname> class such as the instance of <classname>Zend\Mvc\Application</classname> or the DI locator. For this, you may utilize the MVC "bootstrap" event.
+            If you are writing an MVC-oriented module for ZF2, you may need to
+            access to addtional parts of the application in your
+            <classname>Module</classname> class such as the instance of
+            <classname>Zend\Mvc\Application</classname> or the DI locator. For
+            this, you may utilize the MVC "bootstrap" event. The bootstrap event
+            is triggered after the "loadModule.post" event, once
+            $bootstrap->bootstrap($application) is called.
         </para>
 
         <example

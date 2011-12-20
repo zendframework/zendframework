@@ -112,7 +112,7 @@ $matches = $event->getRouteMatch();
       <para>
         Each <classname>Module</classname> class can have an optional
         <methodname>init()</methodname> method. Typically, you'll setup
-        autoloading for your module here, but you can perform arbitrary tasks.
+        event listeners for you module here.
       </para>
 
       <para>
@@ -136,9 +136,6 @@ class Module
 {
     public function init()
     {
-        // setup autoloading, etc..
-
-        // Now, register listeners:
         $events = StaticEventManager::getInstance();
         $events->attach('bootstrap', 'bootstrap', array($this, 'registerListeners'));
     }
@@ -146,14 +143,13 @@ class Module
     public function registerListeners($e)
     {
         $application = $e->getParam('application');
-        $modules     = $e->getParam('modules');
-        $config      = $modules->getMergedConfig();
+        $config      = $e->getParam('config');
         $view        = $application->getLocator()->get('view');
-        $view->headTitle($config->view->base_title);
+        $view->headTitle($config['view']['base_title']);
 
         $listeners   = new Listeners\ViewListener();
         $listeners->setView($view);
-        $application->events()->attach($listeners);
+        $application->events()->attachAggregate($listeners);
     }
 }
 ]]></programlisting>

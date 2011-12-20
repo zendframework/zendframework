@@ -1415,6 +1415,24 @@
                 </xi:fallback>
             </xi:include>
 
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.mail.transport.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.mail.transport.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.mail.smtp-options.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.mail.smtp-options.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.mail.file-options.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.mail.file-options.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Mail-Introduction.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_Mail-Introduction.xml" parse="xml"/>-->
@@ -1584,6 +1602,30 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Intro.xml" parse="xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Module-Intro.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Module-Manager.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Module-Module-Manager.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Module-Class.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Module-Module-Class.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Module-Autoloader.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Module-Module-Autoloader.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Module-Best-Practices.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Module-Best-Practices.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

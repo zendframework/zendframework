@@ -151,7 +151,7 @@ prompt> git clone --recursive git://github.com/zendframework/ZendSkeletonApplica
     </para>
 
     <para>
-      First, let's have <filename>autoload_filemap.php</filename> return
+      First, let's have <filename>autoload_classmap.php</filename> return
       an empty array:
     </para>
 
@@ -162,7 +162,7 @@ return array();
 ]]></programlisting>
 
     <para>
-      We'll also edit our <filename>configs/module.config.php</filename>
+      We'll also edit our <filename>config/module.config.php</filename>
       file to read as follows:
     </para>
 
@@ -198,20 +198,13 @@ return array(
     <programlisting language="php"><![CDATA[
 namespace <your module name here>;
 
-use Zend\Config\Config,
-    Zend\Loader\AutoloaderFactory,
-    Zend\Module\Manager;
+use Zend\Module\Consumer\AutoloaderProvider;
 
-class Module
+class Module implements AutoloaderProvider
 {
-    public function init(Manager $moduleManager)
+    public function getAutoloaderConfig()
     {
-        $this->initAutoloader();
-    }
-
-    public function initAutoloader()
-    {
-        AutoloaderFactory::factory(array(
+        return array(
             'Zend\Loader\ClassMapAutoloader' => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
@@ -220,18 +213,12 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
-        ));
+        );
     }
 
-    public function getConfig($env = null)
+    public function getConfig()
     {
-        $config = new Config(
-            include __DIR__ . '/configs/module.config.php'
-        );
-        if ($env and isset($config->{$env})) {
-            return $config->{$env};
-        }
-        return $config;
+        return include __DIR__ . '/config/module.config.php';
     }
 }
 ]]></programlisting>
@@ -380,11 +367,11 @@ class HelloController extends ActionController
     <para>
       If you explore the <classname>ZendSkeletonApplication</classname>
       repository, you'll find a file
-      <filename>modules/Application/src/Application/View/Listener.php</filename>,
+      <filename>module/Application/src/Application/View/Listener.php</filename>,
       containing a class <classname>Application\View\Listener</classname>.
       This listener aggregate is registered in the bootstrap (class
       <classname>Application\Bootstrap</classname> in
-      <filename>modules/Application/src/Application/Bootstrap.php</filename>),
+      <filename>module/Application/src/Application/Bootstrap.php</filename>),
       and listens on the application's <classname>dispatch</classname> event
       in order to first render an action's view script, and then inject
       that into the layout. It uses the return value from actions to seed
@@ -510,7 +497,7 @@ return array(
     </para>
 
     <para>
-      Open your <filename>configs/module.config.php</filename> file, and
+      Open your <filename>config/module.config.php</filename> file, and
       modify it to add to the DI configuration's "instance"
       array so it reads as follows:
     </para>
@@ -580,22 +567,25 @@ return array(
     </para>
 
     <para>
-      Remember the <filename>configs/application.config.php</filename>
+      Remember the <filename>config/application.config.php</filename>
       file? Let's modify it to add our new module. Once done, it should
       read as follows:
     </para>
 
     <programlisting language="php"><![CDATA[
 <?php
-return new \Zend\Config\Config(array(
-    'modules_paths' => array(
-        realpath(__DIR__ . '/../modules'),
-    ),
+return array(
     'modules' => array(
         'Application',
         '<module namespace>',
     ),
-));
+    'module_listener_options' => array( 
+        'module_paths' => array(
+            './module',
+            './vendor',
+        ),
+    ),
+);
 ]]></programlisting>
 
     <para>

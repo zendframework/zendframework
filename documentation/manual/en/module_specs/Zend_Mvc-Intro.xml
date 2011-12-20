@@ -441,6 +441,7 @@ $response->send();
 
       <programlisting language="php"><![CDATA[
 <?php
+// config/application.config.php
 return array(
     'modules' => array(
         /* ... */
@@ -465,9 +466,11 @@ return array(
       </para>
 
       <programlisting language="php"><![CDATA[
+use Zend\Module\Listener;
+
 $moduleConfig     = include __DIR__ . '/../configs/application.config.php';
-$listenerOptions  = new Zend\Module\Listener\ListenerOptions($moduleConfig['module_listener_options']);
-$defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);
+$listenerOptions  = new Listener\ListenerOptions($moduleConfig['module_listener_options']);
+$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 ]]></programlisting>
 
       <para>
@@ -476,7 +479,9 @@ $defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerO
       </para>
 
       <programlisting language="php"><![CDATA[
-$moduleManager = new \Zend\Module\Manager(
+use Zend\Module\Manager as ModuleManager;
+
+$moduleManager = new ModuleManager(
     $moduleConfig['modules']
 );
 $moduleManager->events()->attachAggregate($defaultListeners);

@@ -10,11 +10,10 @@
     </info>
 
     <para>
-        Zend Framework 2 ships with a default module autoloader,
-        <classname>Zend\Loader\ModuleAutoloader</classname> is a specialized
-        autoloader that is responsible for locating and on-demand loading of
-        modules' <classname>Module</classname> classes from a variety of
-        sources.
+        Zend Framework 2 ships with a default module autoloader.
+        <classname>Zend\Loader\ModuleAutoloader</classname> is a specialized autoloader that is
+        responsible for location of, and on-demand loading of, the <classname>Module</classname>
+        classes from a variety of sources.
     </para>
 
     <section xml:id="zend.module.module-autoloader.usage">
@@ -24,48 +23,49 @@
 
         <para>
             If you are using the provided
-            <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>,
-            then it is very simple to set up the module autoloader. You simply
-            need to provide an array of module paths, either absolute or
-            relative to the application's root, for the module autoloader to
-            check when loading modules. The default listener aggregate will take
-            care of instantiating and registering the module autoloader for you.
+            <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>, then it is very
+            simple to set up the module autoloader. You simply need to provide an array of module
+            paths, either absolute or relative to the application's root, for the module autoloader
+            to check when loading modules. The default listener aggregate will take care of
+            instantiating and registering the module autoloader for you.
         </para>
 
         <para>
-            Keep in mind that in order for paths relative to your application
-            directory to work, you must have chdir(dirname(__DIR__)); in your
-            <filename>index.php</filename>.
+            Keep in mind that in order for paths relative to your application directory to work, you
+            must have the directive <code>chdir(dirname(__DIR__));</code> in your
+            <filename>public/index.php</filename>.
         </para>
 
-        <example
-            xml:id="zend.module.module-autoloader.example.module-autoloading">
+        <example xml:id="zend.module.module-autoloader.example.module-autoloading">
             <info>
                 <title>Registering module paths with the default listener aggregate</title>
             </info>
 
             <para>
-                The following example will search for modules in three different
-                paths. Two are local directories for this application, and the
-                third is a system-wide shared directory.
+                The following example will search for modules in three different paths. Two are
+                local directories for this application, and the third is a system-wide shared
+                directory.
             </para>
 
             <programlisting language="php"><![CDATA[
-// ./public/index.php
+// public/index.php
+use Zend\Module\Listener,
+    Zend\Module\Manager;
+
 chdir(dirname(__DIR__));
 
 // Instantiate and configure the default listener aggregate
-$listenerOptions = new Zend\Module\Listener\ListenerOptions(array(
+$listenerOptions = new Listener\ListenerOptions(array(
     'module_paths' => array(
         './module',
         './vendor',
         '/usr/share/zfmodules',
     )
 ));
-$defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);
+$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 
 // Instantiate the module manager
-$moduleManager = new Zend\Module\Manager(array(
+$moduleManager = new Manager(array(
     'Application',
     'FooModule',
     'BarModule',
@@ -79,10 +79,9 @@ $moduleManager->loadModules();
 
         <note>
             <para>
-                Module paths behave very similar to the PHP include path, and
-                are searched in the order they are defined. If you have modules
-                with the same name in more than one registered module path, the
-                module autoloader will return the first one it finds.
+                Module paths behave very similar to the PHP include path, and are searched in the
+                order they are defined. If you have modules with the same name in more than one
+                registered module path, the module autoloader will return the first one it finds.
             </para>
         </note>
 
@@ -94,13 +93,12 @@ $moduleManager->loadModules();
         </info>
 
         <para>
-            Sometimes you may want to specify exactly where a module is instead
-            of having <classname>Zend\Loader\ModuleAutoloader</classname> try
-            to find it in the registered paths.
+            Sometimes you may want to specify exactly where a module is instead of having
+            <classname>Zend\Loader\ModuleAutoloader</classname> try to find it in the registered
+            paths.
         </para>
 
-        <example
-            xml:id="zend.module.module-autoloader.example.module-loading-nonstandard-paths">
+        <example xml:id="zend.module.module-autoloader.example.module-loading-nonstandard-paths">
             <info>
                 <title>Registering a Non-Standard / Explicit Module Path</title>
             </info>
@@ -108,17 +106,20 @@ $moduleManager->loadModules();
             <para>
                 In this example, the autoloader will first check for
                 <classname>MyModule\Module</classname> in
-                <filename>/path/to/mymoduledir-v1.2/Module.php</filename>. If
-                it's not found, then it will fall back to searching any other
-                registered module paths.
+                <filename>/path/to/mymoduledir-v1.2/Module.php</filename>. If it's not found, then
+                it will fall back to searching any other registered module paths.
             </para>
 
             <programlisting language="php"><![CDATA[
 // ./public/index.php
+use Zend\Loader\ModuleAutoloader,
+    Zend\Module\Listener,
+    Zend\Module\Manager;
+
 chdir(dirname(__DIR__));
 
 // Instantiate and configure the default listener aggregate
-$listenerOptions = new Zend\Module\Listener\ListenerOptions(array(
+$listenerOptions = new Listener\ListenerOptions(array(
     'module_paths' => array(
         './module',
         './vendor',
@@ -126,12 +127,12 @@ $listenerOptions = new Zend\Module\Listener\ListenerOptions(array(
         'MyModule' => '/path/to/mymoduledir-v1.2',
     )
 ));
-$defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerOptions);
+$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
 
 /**
  * Without DefaultListenerAggregate:
  *
- * $moduleAutoloader = new Zend\Loader\ModuleAutoloader(array(
+ * $moduleAutoloader = new ModuleAutoloader(array(
  *     './module',
  *     './vendor',
  *     '/usr/share/zfmodules',
@@ -142,7 +143,7 @@ $defaultListeners = new Zend\Module\Listener\DefaultListenerAggregate($listenerO
  */
 
 // Instantiate the module manager
-$moduleManager = new Zend\Module\Manager(array(
+$moduleManager = new Manager(array(
     'MyModule',
     'FooModule',
     'BarModule',
@@ -166,26 +167,23 @@ $moduleManager->loadModules();
 
         <para>
             If you prefer, you may easily package your module as a <link
-                xlink:href="http://php.net/phar">phar archive</link>. The module
-            autoloader is able to autoload modules in the following archive
-            formats: .phar, .phar.gz, .phar.bz2, .phar.tar, .phar.tar.gz,
-            .phar.tar.bz2, .phar.zip, .tar, .tar.gz, .tar.bz2, and .zip.
+                xlink:href="http://php.net/phar">phar archive</link>. The module autoloader is able
+            to autoload modules in the following archive formats: .phar, .phar.gz, .phar.bz2,
+            .phar.tar, .phar.tar.gz, .phar.tar.bz2, .phar.zip, .tar, .tar.gz, .tar.bz2, and .zip.
         </para>
 
         <para>
-            The easiest way to package your module is to simply tar the module
-            directory. You can then replace the <filename>MyModule/</filename>
-            directory with <filename>MyModule.tar</filename>, and it should
-            still be autoloaded without any additional changes!
+            The easiest way to package your module is to simply tar the module directory. You can
+            then replace the <filename>MyModule/</filename> directory with
+            <filename>MyModule.tar</filename>, and it should still be autoloaded without any
+            additional changes!
         </para>
 
         <note>
             <para>
-                If possible, avoid using any type of compression (bz2, gz, zip)
-                on your phar archives, as it introduces unnecessary CPU overhead
-                to each request.
+                If possible, avoid using any type of compression (bz2, gz, zip) on your phar
+                archives, as it introduces unnecessary CPU overhead to each request.
             </para>
         </note>
     </section>
-
 </section>

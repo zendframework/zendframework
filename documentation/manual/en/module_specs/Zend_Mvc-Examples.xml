@@ -20,9 +20,11 @@
       </para>
 
       <programlisting language="php"><![CDATA[
+// Using explicit accessor methods
 $request  = $this->getRequest();
 $response = $this->getResponse();
 
+// Using direct property access
 $request  = $this->request;
 $response = $this->response;
 ]]></programlisting>

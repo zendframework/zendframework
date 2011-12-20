@@ -10,28 +10,26 @@
         </info>
 
         <para>
-            Storage capabilities describes how a storage object works and
+            Storage capabilities describes how a storage adapter works and
             which features it supports. 
         </para>
 
         <para>
-            To get capabilities of a storage object you can use the method
-            <methodname>getCapabilities</methodname> of the storage object but
-            only the storage object and it's plug-ins has permissions to change
-            it.
+            To get capabilities of a storage adapter, you can use the method
+            <methodname>getCapabilities()</methodname> of the storage adapter but
+            only the storage adapter and its plugins have permissions to change
+            them.
         </para>
 
         <para>
-            Because capabilities can be changed by storage, for example on
-            changing some options, you can get a note by listing the event of
-            it. See the examples how to do that.
+            Because capabilities are mutable, for example, by changing some options, you can
+            subscribe to the "change" event to get notifications; see the examples for details.
         </para>
 
         <para>
-            If you are writing an own plug-in or adapter you also can change
-            capabilities because you have access to the marker object and
-            can create an own marker to instantiate a new object of
-            <classname>Zend\Cache\Storage\Capabilities</classname>.
+            If you are writing your own plugin or adapter, you can also change capabilities because
+            you have access to the marker object and can create your own marker to instantiate a new
+            object of <classname>Zend\Cache\Storage\Capabilities</classname>.
         </para>
 
     </section>
@@ -53,8 +51,9 @@
         <variablelist>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.__construct">
+                <term>__construct</term>
 
-                <term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>__construct</methodname>
                         <methodparam>
@@ -62,491 +61,465 @@
 ), null|Zend\Cache\Storage\Capabilities $baseCapabilities</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Constructor</para>
-                    <para></para>
                     <para>Returns void</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.has-event-manager">
-                <term>
+                <term>hasEventManager</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>hasEventManager</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Returns if the dependency of Zend\EventManager is available</para>
-                    <para></para>
+                    <para>Returns if the dependency of Zend\EventManager is available.</para>
+
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-event-manager">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getEventManager</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getEventManager</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getEventManager</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Get the event manager</para>
-                    <para></para>
-                    <para>Returns Zend\EventManager\EventManager</para>
+
+                    <para>Returns Zend\EventManager\EventCollection instance.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-supported-datatypes">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getSupportedDatatypes</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getSupportedDatatypes</term>
 
                 <listitem>
-                    <para>Get supported datatypes</para>
-                    <para></para>
-                    <para>Returns array</para>
+                    <methodsynopsis>
+                        <methodname>getSupportedDatatypes</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get supported datatypes.</para>
+
+                    <para>Returns array.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-supported-datatypes">
-                <term>
+                <term>setSupportedDatatypes</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setSupportedDatatypes</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, array $datatypes</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set supported datatypes</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set supported datatypes.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-supported-metadata">
-                <term>
+                <term>getSupportedMetadata</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>getSupportedMetadata</methodname>
                         <methodparam>
                             <funcparams></funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Get supported metadata</para>
-                    <para></para>
-                    <para>Returns array</para>
+                    <para>Get supported metadata.</para>
+
+                    <para>Returns array.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-supported-metadata">
-                <term>
+                <term>setSupportedMetadata</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setSupportedMetadata</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, string $metadata</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set supported metadata</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-max-ttl">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getMaxTtl</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getMaxTtl</term>
 
                 <listitem>
+                    <methodsynopsis>
+                        <methodname>getMaxTtl</methodname>
+                        <void/>
+                    </methodsynopsis>
+
                     <para>Get maximum supported time-to-live</para>
-                    <para></para>
+
                     <para>Returns int</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-max-ttl">
-                <term>
+                <term>setMaxTtl</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setMaxTtl</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, int $maxTtl</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Set maximum supported time-to-live</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-static-ttl">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getStaticTtl</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getStaticTtl</term>
 
                 <listitem>
-                    <para>Is the time-to-live handled static (on write)</para>
-                    <para>or dynamic (on read)</para>
+                    <methodsynopsis>
+                        <methodname>getStaticTtl</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>
+                        Is the time-to-live handled static (on write), or dynamic (on read).
+                    </para>
+
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-static-ttl">
-                <term>
+                <term>setStaticTtl</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setStaticTtl</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, boolean $flag</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set if the time-to-live handled static (on write) or dynamic (on read)</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>
+                        Set if the time-to-live is handled statically (on write) or dynamically (on
+                        read)
+                    </para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-ttl-precision">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getTtlPrecision</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getTtlPrecision</term>
 
                 <listitem>
-                    <para>Get time-to-live precision</para>
-                    <para></para>
-                    <para>Returns float</para>
+                    <methodsynopsis>
+                        <methodname>getTtlPrecision</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get time-to-live precision.</para>
+
+                    <para>Returns float.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-ttl-precision">
-                <term>
+                <term>setTtlPrecision</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setTtlPrecision</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, float $ttlPrecision</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set time-to-live precision</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set time-to-live precision.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-use-request-time">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getUseRequestTime</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getUseRequestTime</term>
 
                 <listitem>
-                    <para>Get use request time</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getUseRequestTime</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get the "use request time" flag status</para>
+
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-use-request-time">
-                <term>
+                <term>setUseRequestTime</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setUseRequestTime</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, boolean $flag</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set use request time</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set the "use request time" flag.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-expired-read">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getExpiredRead</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getExpiredRead</term>
 
                 <listitem>
-                    <para>Get if expired items are readable</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getExpiredRead</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get flag indicating if expired items are readable.</para>
+
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-expired-read">
-                <term>
+                <term>setExpiredRead</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setExpiredRead</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, boolean $flag</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set if expired items are readable</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set if expired items are readable.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-max-key-length">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getMaxKeyLength</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getMaxKeyLength</term>
 
                 <listitem>
-                    <para>Get maximum key lenth</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getMaxKeyLength</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get maximum key lenth.</para>
+
                     <para>Returns int</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-max-key-length">
-                <term>
+                <term>setMaxKeyLength</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setMaxKeyLength</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, int $maxKeyLength</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set maximum key lenth</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set maximum key lenth.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-namespace-is-prefix">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getNamespaceIsPrefix</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getNamespaceIsPrefix</term>
 
                 <listitem>
-                    <para>Get if namespace support is implemented as prefix</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getNamespaceIsPrefix</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get if namespace support is implemented as a key prefix.</para>
+                    
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-namespace-is-prefix">
-                <term>
+                <term>setNamespaceIsPrefix</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setNamespaceIsPrefix</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, boolean $flag</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set if namespace support is implemented as prefix</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set if namespace support is implemented as a key prefix.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-namespace-separator">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getNamespaceSeparator</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getNamespaceSeparator</term>
 
                 <listitem>
-                    <para>Get namespace separator if namespace is implemented as prefix</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getNamespaceSeparator</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get namespace separator if namespace is implemented as a key prefix.</para>
+
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-namespace-separator">
-                <term>
+                <term>setNamespaceSeparator</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setNamespaceSeparator</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, string $separator</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set the namespace separator if namespace is implemented as prefix</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set the namespace separator if namespace is implemented as a key prefix.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-iterable">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getIterable</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getIterable</term>
 
                 <listitem>
-                    <para>Get if items are iterable</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getIterable</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get if items are iterable.</para>
+
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-iterable">
-                <term>
+                <term>setIterable</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setIterable</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, boolean $flag</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set if items are iterable</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set if items are iterable.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-clear-all-namespaces">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getClearAllNamespaces</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getClearAllNamespaces</term>
 
                 <listitem>
-                    <para>Get support to clear items of all namespaces</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getClearAllNamespaces</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get flag indicating support to clear items of all namespaces.</para>
+
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-clear-all-namespaces">
-                <term>
+                <term>setClearAllNamespaces</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setClearAllNamespaces</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, boolean $flag</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set support to clear items of all namespaces</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set flag indicating support to clear items of all namespaces.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.get-clear-by-namespace">
-                <term>
-                    <methodsynopsis>
-                        <methodname>getClearByNamespace</methodname>
-                        <methodparam>
-                            <funcparams></funcparams>
-                        </methodparam>
-                    </methodsynopsis>
-                </term>
+                <term>getClearByNamespace</term>
 
                 <listitem>
-                    <para>Get support to clear items by namespace</para>
-                    <para></para>
+                    <methodsynopsis>
+                        <methodname>getClearByNamespace</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>Get flag indicating support to clear items by namespace.</para>
+
                     <para>Returns boolean</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.cache.storage.capabilities.methods.set-clear-by-namespace">
-                <term>
+                <term>setClearByNamespace</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>setClearByNamespace</methodname>
                         <methodparam>
                             <funcparams>stdClass $marker, boolean $flag</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
-                    <para>Set support to clear items by namespace</para>
-                    <para></para>
-                    <para>Returns Zend\Cache\Storage\Capabilities</para>
+                    <para>Set flag indicating support to clear items by namespace.</para>
+
+                    <para>Implements a fluent interface.</para>
                 </listitem>
             </varlistentry>
-
         </variablelist>
     </section>
 
@@ -555,8 +528,8 @@
             <title>Examples</title>
         </info>
 
-        <example xml:id="zend.cache.storage.capabilities.examples.spezific">
-            <info><title>Get storage capabilities and do spezific stuff in base of it</title></info>
+        <example xml:id="zend.cache.storage.capabilities.examples.specific">
+            <info><title>Get storage capabilities and do specific stuff in base of it</title></info>
 
             <programlisting language="php"><![CDATA[
 use Zend\Cache\StorageFactory;
@@ -564,14 +537,14 @@ use Zend\Cache\StorageFactory;
 $cache = StorageFactory::adapterFactory('filesystem');
 $capabilities = $cache->getCapabilities();
 
-// now you can run spezific stuff in base of supported feature
+// now you can run specific stuff in base of supported feature
 if ($capabilities->getIterable()) {
-    $cache->find()
+    $cache->find();
     while ( ($item => $cache->fetch()) ) {
         echo $item['key'] . ': ' . $item['value'] . "\n";
     }
 } else {
-    echo 'Iterating cached items not supported.'
+    echo 'Iterating cached items not supported.';
 }
 
 ]]></programlisting>
@@ -589,18 +562,18 @@ $cache = StorageFactory::adapterFactory('filesystem', array(
 $capabilities = $cache->getCapabilities();
 
 // Catching the change event
-$capabilities->events()->attach('change', function () {
+$capabilities->events()->attach('change', function() {
     echo 'Capabilities changed';
 });
 
 // change option which changes capabilities
 $cache->getOptions()->setNoATime(true);
 
-/** Will output:
-Capabilities changed
-*/
+/*
+ * Will output:
+ * "Capabilities changed"
+ */
 ]]></programlisting>
         </example>
-
     </section>
 </section>

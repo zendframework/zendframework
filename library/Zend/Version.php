@@ -23,6 +23,8 @@
  */
 namespace Zend;
 
+use Zend\Json\Json;
+
 /**
  * Class to store and retrieve the version of Zend Framework.
  *
@@ -73,7 +75,7 @@ final class Version
         if (null === self::$latestVersion) {
             self::$latestVersion = 'not available';
             $tags = file_get_contents('https://api.github.com/repos/zendframework/zf2/tags');
-            $tags = json_decode($tags, true);
+            $tags = Json::decode($tags, Json::TYPE_ARRAY);
             $tag  = array_pop($tags);
             self::$latestVersion = str_replace('release-','', $tag['name']);
         }

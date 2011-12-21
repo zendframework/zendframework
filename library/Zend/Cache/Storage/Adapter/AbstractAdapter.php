@@ -739,6 +739,19 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Get delayed
      *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - select <array> optional
+     *    - An array of the information the returned item contains
+     *      (Default: array('key', 'value'))
+     *  - callback <callback> optional
+     *    - An result callback will be invoked for each item in the result set.
+     *    - The first argument will be the item array.
+     *    - The callback does not have to return anything.
+     *
      * @param  array $keys
      * @param  array $options
      * @return bool
@@ -758,7 +771,6 @@ abstract class AbstractAdapter implements Adapter
         }
 
         $this->normalizeOptions($options);
-
         if (!isset($options['select'])) {
             $options['select'] = array('key', 'value');
         }

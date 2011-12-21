@@ -719,6 +719,115 @@ class Memcached extends AbstractAdapter
     /* non-blocking */
 
     /**
+     * Get items that were marked to delay storage for purposes of removing blocking
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - select <array> optional
+     *    - An array of the information the returned item contains
+     *      (Default: array('key', 'value'))
+     *  - callback <callback> optional
+     *    - An result callback will be invoked for each item in the result set.
+     *    - The first argument will be the item array.
+     *    - The callback does not have to return anything.
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return bool
+     * @throws Exception
+     *
+     * @triggers getDelayed.pre(PreEvent)
+     * @triggers getDelayed.post(PostEvent)
+     * @triggers getDelayed.exception(ExceptionEvent)
+     */
+    public function getDelayed(array $keys, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($this->stmtActive) {
+            throw new Exception\RuntimeException('Statement already in use');
+        } elseif (!$baseOptions->getReadable()) {
+            return false;
+        } elseif (!$keys) {
+            return true;
+        }
+
+        $this->normalizeOptions($options);
+        if (isset($options['callback']) && !is_callable($options['callback'], false)) {
+            throw new Exception\InvalidArgumentException('Invalid callback');
+        }
+        if (!isset($options['select'])) {
+            $options['select'] = array('key', 'value');
+        }
+
+        $args = new ArrayObject(array(
+            'key'     => & $key,
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
+
+            // init search keys
+            $search = array();
+            foreach ($keys as $key) {
+                $search[] = $prefix.$key;
+            }
+
+            // we don't need the CAS token
+            $withCas = false;
+
+            // redirect callback
+            if (isset($options['callback'])) {
+                $cb = function (MemcachedResource $memc, array &$item) use (&$options, $baseOptions) {
+                    $select = & $options['select'];
+
+                    // handle selected key
+                    if (in_array('key', $select)) {
+                        $namespaceSeparator = $baseOptions->getNamespaceSeparator();
+                        $prefixL = strlen($options['namespace'] . $namespaceSeparator);
+                        $item['key'] = substr($item['key'], $prefixL);
+                    } else {
+                        unset($item['key']);
+                    }
+
+                    // handle selected value
+                    if (!in_array('value', $select)) {
+                        unset($item['value']);
+                    }
+
+                    call_user_func($options['callback'], $item);
+                };
+
+                if (!$this->memcached->getDelayed($search, false, $cb)) {
+                    throw new Exception\RuntimeException(
+                        'Memcached::getDelayed(<array>, false, <callback>) failed'
+                    );
+                }
+            } else {
+                if (!$this->memcached->getDelayed($search)) {
+                    throw new Exception\RuntimeException(
+                        'Memcached::getDelayed(<array>) failed'
+                    );
+                }
+
+                $this->stmtActive  = true;
+                $this->stmtOptions = &$options;
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
+    }
+
+    /**
      * Fetches the next item from result set
      *
      * @return array|boolean The next item or false
@@ -742,23 +851,28 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
+            $result = $this->memcached->fetch();
+            if (!empty($result)) {
+                $select = & $this->stmtOptions['select'];
 
-            if (!$this->stmtIterator) {
-                // clear stmt
-                $this->stmtActive   = false;
-                $this->stmtIterator = null;
-                $this->stmtOptions  = null;
-
-                $result = false;
-            } else {
-                $result = $this->memcached->fetch();
-                if (!empty($result)) {
-                    $select = $this->stmtOptions['select'];
-                    if (in_array('key', $select)) {
-                        $result['key'] = substr($result['key'], $prefixL);
-                    }
+                // handle selected key
+                if (in_array('key', $select)) {
+                    $namespaceSeparator = $this->getOptions()->getNamespaceSeparator();
+                    $prefixL = strlen($this->stmtOptions['namespace'] . $namespaceSeparator);
+                    $result['key'] = substr($result['key'], $prefixL);
+                } else {
+                    unset($result['key']);
                 }
+
+                // handle selected value
+                if (!in_array('value', $select)) {
+                    unset($result['value']);
+                }
+
+            } else {
+                // clear stmt
+                $this->stmtActive  = false;
+                $this->stmtOptions = null;
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -898,71 +1012,6 @@ class Memcached extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $this->capabilities);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-
-    /**
-     * Get items that were marked to delay storage for purposes of removing blocking
-     *
-     * @param  array $keys
-     * @param  array $options
-     * @return bool
-     * @throws Exception
-     *
-     * @triggers getDelayed.pre(PreEvent)
-     * @triggers getDelayed.post(PostEvent)
-     * @triggers getDelayed.exception(ExceptionEvent)
-     */
-    public function getDelayed(array $keys, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        } elseif (!$baseOptions->getReadable()) {
-            return false;
-        } elseif (!$keys) {
-            return true;
-        }
-
-        $this->normalizeOptions($options);
-        if (isset($options['callback']) && !is_callable($options['callback'], false)) {
-            throw new Exception\InvalidArgumentException('Invalid callback');
-        }
-
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-
-            $search = array();
-            foreach ($keys as $key) {
-                $search[] = $prefix.$key;
-            }
-
-            $this->stmtIterator = $this->memcached->getDelayed($search);
-
-            $this->stmtActive   = true;
-            $this->stmtOptions  = &$options;
-
-            if (isset($options['callback'])) {
-                $callback = $options['callback'];
-                while (($item = $this->fetch()) !== false) {
-                    call_user_func($callback, $item);
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }

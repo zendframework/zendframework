@@ -566,10 +566,10 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Check and set item
      *
-     * @param  string $token
-     * @param  string|int $key
-     * @param  mixed $value
-     * @param  array $options
+     * @param  mixed  $token
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
      * @return bool
      */
     public function checkAndSetItem($token, $key, $value, array $options = array())

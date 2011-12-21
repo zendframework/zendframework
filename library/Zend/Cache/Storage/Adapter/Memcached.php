@@ -164,14 +164,15 @@ class Memcached extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $result      = $this->memcached->get($internalKey);
-            if ($result===false) {
+            if (array_key_exists('token', $options)) {
+                $result = $this->memcached->get($internalKey, null, $options['token']);
+            } else {
+                $result = $this->memcached->get($internalKey);
+            }
+
+            if ($result === false) {
                 if (!$options['ignore_missing_items']) {
                     throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
-            } else {
-                if (array_key_exists('token', $options)) {
-                    $options['token'] = $result;
                 }
             }
 
@@ -522,6 +523,46 @@ class Memcached extends AbstractAdapter
                     "Memcached::replace('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
                 );
             }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
+    }
+
+    /**
+     * Check and set item
+     *
+     * @param  float  $token
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return bool
+     */
+    public function checkAndSetItem($token, $key, $value, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
+            return false;
+        }
+
+        $this->normalizeOptions($options);
+        $this->normalizeKey($key);
+        $args = new ArrayObject(array(
+            'token'   => & $token,
+            'key'     => & $key,
+            'value'   => & $value,
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
+            $result = $this->memcached->cas($token, $internalKey, $value, $options['ttl']);
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {

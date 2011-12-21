@@ -101,6 +101,20 @@ abstract class AbstractAdapter implements Adapter
     protected $stmtOptions = null;
 
     /**
+     * Constructor
+     *
+     * @param  null|array|Traversable|AdapterOptions $options
+     * @throws Exception
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if ($options) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
      * Destructor
      *
      * detach all registered plugins to free

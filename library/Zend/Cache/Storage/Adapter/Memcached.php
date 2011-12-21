@@ -48,7 +48,7 @@ class Memcached extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array $options Option
+     * @param  null|array|Traversable|MemcachedOptions $options
      * @throws Exception
      * @return void
      */
@@ -60,11 +60,9 @@ class Memcached extends AbstractAdapter
 
         $this->memcached= new MemcachedResource();
 
-        if (!empty($options)) {
-            $this->setOptions($options);
-        }
+        parent::__construct($options);
 
-        $options= $this->getOptions();
+        $options = $this->getOptions();
         $this->memcached->addServer($options->getServer(), $options->getPort());
 
     }
@@ -74,7 +72,7 @@ class Memcached extends AbstractAdapter
     /**
      * Set options.
      *
-     * @param  string|Traversable|MemcachedOptions $options
+     * @param  array|Traversable|MemcachedOptions $options
      * @return Memcached
      * @see    getOptions()
      */

@@ -57,16 +57,16 @@ class Memcached extends AbstractAdapter
         if (!extension_loaded('memcached')) {
             throw new Exception\ExtensionNotLoadedException("Memcached extension is not loaded");
         }
-        
+
         $this->memcached= new MemcachedResource();
-        
+
         if (!empty($options)) {
             $this->setOptions($options);
         }
 
         $options= $this->getOptions();
         $this->memcached->addServer($options->getServer(), $options->getPort());
-        
+
     }
 
     /* options */
@@ -80,9 +80,9 @@ class Memcached extends AbstractAdapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
-            && !$options instanceof MemcachedOptions    
+        if (!is_array($options)
+            && !$options instanceof Traversable
+            && !$options instanceof MemcachedOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array, a Traversable object, or a MemcachedOptions object; '
@@ -230,11 +230,11 @@ class Memcached extends AbstractAdapter
             }
 
             $fetch = $this->memcached->getMulti($internalKeys);
-            
+
             if ($fetch===false) {
                 throw new Exception\ItemNotFoundException('Memcached::getMulti(<array>) failed');
             }
-            
+
             // remove namespace prefix
             $prefixL = strlen($options['namespace'] . $namespaceSep);
             $result  = array();
@@ -270,7 +270,38 @@ class Memcached extends AbstractAdapter
      */
     public function getMetadata($key, array $options = array())
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . ' is not supported by the adapter');
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
+            return false;
+        }
+
+        $this->normalizeOptions($options);
+        $this->normalizeKey($key);
+        $args = new ArrayObject(array(
+            'key'     => & $key,
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
+            $result      = $this->memcached->get($internalKey);
+            if ($result===false) {
+                if (!$options['ignore_missing_items']) {
+                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
+                }
+            } else {
+                $result = array();
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     /* writing */
@@ -491,9 +522,9 @@ class Memcached extends AbstractAdapter
                     "Key '{$internalKey}' doesn't exist"
                 );
             }
-            
+
             $result = $this->memcached->replace($internalKey, $value, $options['ttl']);
-            
+
             if ($result === false) {
                 $type = is_object($value) ? get_class($value) : gettype($value);
                 throw new Exception\RuntimeException(
@@ -547,16 +578,16 @@ class Memcached extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            
+
             $result = $this->memcached->delete($internalKey);
-            
+
             if ($result === false) {
                 if (!$options['ignore_missing_items']) {
                     throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
                 }
             }
             $result = true;
-            
+
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -613,7 +644,7 @@ class Memcached extends AbstractAdapter
                         "Key '{$internalKey}' not found"
                     );
                 }
-                
+
                 $this->addItem($key, $value, $options);
                 $newValue = $value;
             }
@@ -728,7 +759,7 @@ class Memcached extends AbstractAdapter
                         $result['key'] = substr($result['key'], $prefixL);
                     }
                 }
-            } 
+            }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
@@ -738,22 +769,22 @@ class Memcached extends AbstractAdapter
 
     /**
      * FetchAll
-     * 
+     *
      * @throws Exception
-     * @return array 
+     * @return array
      */
     public function fetchAll()
     {
         $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
-         
+
         $result = $this->memcached->fetchAll();
-         
+
         if ($result === false) {
             throw new Exception\RuntimeException("Memcached::fetchAll() failed");
         }
-        
+
         $select = $this->stmtOptions['select'];
-        
+
         foreach ($result as &$elem) {
             if (in_array('key', $select)) {
                 $elem['key'] = substr($elem['key'], $prefixL);
@@ -761,10 +792,10 @@ class Memcached extends AbstractAdapter
                 unset($elem['key']);
             }
         }
-        
+
         return $result;
     }
-     
+
     /* cleaning */
 
     /**
@@ -807,7 +838,7 @@ class Memcached extends AbstractAdapter
             }
 
             $result = $this->memcached->flush();
-            
+
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -919,7 +950,7 @@ class Memcached extends AbstractAdapter
             }
 
             $this->stmtIterator = $this->memcached->getDelayed($search);
-                    
+
             $this->stmtActive   = true;
             $this->stmtOptions  = &$options;
 
@@ -936,7 +967,7 @@ class Memcached extends AbstractAdapter
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
-    
+
     /**
      * Get storage capacity.
      *
@@ -971,5 +1002,5 @@ class Memcached extends AbstractAdapter
     }
 
     /* internal */
-    
+
 }

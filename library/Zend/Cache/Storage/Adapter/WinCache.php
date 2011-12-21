@@ -50,7 +50,7 @@ class WinCache extends AbstractAdapter
      * @throws Exception
      * @return void
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         if (!extension_loaded('wincache')) {
             throw new Exception\ExtensionNotLoadedException("WinCache extension is not loaded");
@@ -109,7 +109,6 @@ class WinCache extends AbstractAdapter
         }
         return $this->options;
     }
-
 
     /* reading */
 

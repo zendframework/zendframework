@@ -563,8 +563,8 @@ $route = Scheme::factory(array(
 $route = Segment::factory(array(
     'route' => '/:controller[/:action]',
     'constraints' => array(
-        'controller' => '[a-zA-Z][a-ZA-Z0-9_-]+',
-        'action'     => '[a-zA-Z][a-ZA-Z0-9_-]+',
+        'controller' => '[a-zA-Z][a-zA-Z0-9_-]+',
+        'action'     => '[a-zA-Z][a-zA-Z0-9_-]+',
     ),
     'defaults' => array(
         'controller' => 'application-index',

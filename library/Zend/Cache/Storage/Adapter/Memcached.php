@@ -1030,6 +1030,7 @@ class Memcached extends AbstractAdapter
                         'ttlPrecision'       => 1,
                         'useRequestTime'     => false,
                         'expiredRead'        => false,
+                        'maxKeyLength'       => 255,
                         'namespaceIsPrefix'  => true,
                         'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
                         'iterable'           => false,

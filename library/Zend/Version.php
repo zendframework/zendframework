@@ -72,14 +72,24 @@ final class Version
     {
         if (null === self::$latestVersion) {
             self::$latestVersion = 'not available';
-
-            $handle = fopen('http://framework.zend.com/api/zf-version', 'r');
-            if (false !== $handle) {
-                self::$latestVersion = stream_get_contents($handle);
-                fclose($handle);
-            }
+            $tags = file_get_contents('https://api.github.com/repos/zendframework/zf2/tags');
+            $tags = json_decode($tags, true);
+            $tag  = array_pop($tags);
+            self::$latestVersion = str_replace('release-','', $tag['name']);
         }
 
         return self::$latestVersion;
+    }
+
+    /**
+     * Returns true if the running version of Zend Framework is
+     * the latest (or newer??) than the latest tag on GitHub,
+     * which is returned by static::getLatest(). 
+     * 
+     * @return boolean
+     */
+    public static function isLatest()
+    {
+        return static::compareVersion(static::getLatest()) < 1;
     }
 }

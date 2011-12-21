@@ -339,10 +339,11 @@ class Memcached extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!$this->memcached->set($internalKey, $value, $options['ttl'])) {
+            $expiration  = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->set($internalKey, $value, $expiration)) {
                 $type = is_object($value) ? get_class($value) : gettype($value);
                 throw new Exception\RuntimeException(
-                    "Memcached::set('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
+                    "Memcached::set('{$internalKey}', <{$type}>, {$expiration}) failed"
                 );
             }
 
@@ -397,9 +398,10 @@ class Memcached extends AbstractAdapter
                 $internalKeyValuePairs[$internalKey] = &$value;
             }
 
-            $errKeys = $this->memcached->setMulti($internalKeyValuePairs, $options['ttl']);
+            $expiration = $this->expirationTime($options['ttl']);
+            $errKeys = $this->memcached->setMulti($internalKeyValuePairs, $expiration);
             if ($errKeys==false) {
-                throw new Exception\RuntimeException("Memcached::setMulti(<array>, {$options['ttl']}) failed");
+                throw new Exception\RuntimeException("Memcached::setMulti(<array>, {$expiration}) failed");
             }
 
             $result = true;
@@ -450,14 +452,15 @@ class Memcached extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!$this->memcached->add($internalKey, $value, $options['ttl'])) {
+            $expiration  = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->add($internalKey, $value, $expiration)) {
                 if ($this->memcached->get($internalKey)!==false) {
                     throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
                 }
 
                 $type = is_object($value) ? get_class($value) : gettype($value);
                 throw new Exception\RuntimeException(
-                    "Memcached::add('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
+                    "Memcached::add('{$internalKey}', <{$type}>, {$expiration}) failed"
                 );
             }
 
@@ -515,12 +518,13 @@ class Memcached extends AbstractAdapter
                 );
             }
 
-            $result = $this->memcached->replace($internalKey, $value, $options['ttl']);
+            $expiration = $this->expirationTime($options['ttl']);
+            $result     = $this->memcached->replace($internalKey, $value, $expiration);
 
             if ($result === false) {
                 $type = is_object($value) ? get_class($value) : gettype($value);
                 throw new Exception\RuntimeException(
-                    "Memcached::replace('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
+                    "Memcached::replace('{$internalKey}', <{$type}>, {$expiration}) failed"
                 );
             }
 
@@ -562,7 +566,8 @@ class Memcached extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $result = $this->memcached->cas($token, $internalKey, $value, $options['ttl']);
+            $expiration  = $this->expirationTime($options['ttl']);
+            $result = $this->memcached->cas($token, $internalKey, $value, $expiration);
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
@@ -1081,4 +1086,26 @@ class Memcached extends AbstractAdapter
 
     /* internal */
 
+    /**
+     * Get expiration time by ttl
+     *
+     * Some storage commands involve sending an expiration value (relative to
+     * an item or to an operation requested by the client) to the server. In
+     * all such cases, the actual value sent may either be Unix time (number of
+     * seconds since January 1, 1970, as an integer), or a number of seconds
+     * starting from current time. In the latter case, this number of seconds
+     * may not exceed 60*60*24*30 (number of seconds in 30 days); if the
+     * expiration value is larger than that, the server will consider it to be
+     * real Unix time value rather than an offset from current time.
+     *
+     * @param int $ttl
+     * @return int
+     */
+    protected function expirationTime($ttl)
+    {
+        if ($ttl > 2592000) {
+            return time() + $ttl;
+        }
+        return $ttl;
+    }
 }

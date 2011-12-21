@@ -65,19 +65,34 @@ final class Version
     }
 
     /**
-     * Fetches the version of the latest stable release
+     * Fetches the version of the latest stable release.
      *
-     * @link http://framework.zend.com/download/latest
+     * This uses the GitHub API (v3) and only returns refs that begin with 
+     * 'tags/release-'. Because GitHub returns the refs in alphabetical order, 
+     * we need to reduce the array to a single value, comparing the version 
+     * numbers with version_compare().
+     *
+     * @see http://developer.github.com/v3/git/refs/#get-all-references
+     * @link https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-
      * @return string
      */
     public static function getLatest()
     {
         if (null === self::$latestVersion) {
             self::$latestVersion = 'not available';
-            $tags = file_get_contents('https://api.github.com/repos/zendframework/zf2/tags');
-            $tags = Json::decode($tags, Json::TYPE_ARRAY);
-            $tag  = array_pop($tags);
-            self::$latestVersion = str_replace('release-','', $tag['name']);
+            $url  = 'https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-';
+
+            $apiResponse = Json::decode(file_get_contents($url), Json::TYPE_ARRAY);
+
+            // Simplify the API response into a simple array of version numbers 
+            $tags = array_map(function($tag){
+                return substr($tag['ref'], 18); // Reliable because we're filtering on 'refs/tags/release-'
+            }, $apiResponse);
+
+            // Fetch the latest version number from the array
+            self::$latestVersion = array_reduce($tags, function($a, $b) {
+                return version_compare($a, $b, '>') ? $a : $b;
+            });
         }
 
         return self::$latestVersion;

@@ -125,15 +125,12 @@ class Memcached extends AbstractAdapter
         return $this->options;
     }
 
-
     /* reading */
 
     /**
      * Get an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *  - ignore_missing_items <boolean> optional
@@ -190,8 +187,6 @@ class Memcached extends AbstractAdapter
      * Get multiple items.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
@@ -252,8 +247,6 @@ class Memcached extends AbstractAdapter
      * Get metadata of an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *  - ignore_missing_items <boolean> optional
@@ -310,10 +303,10 @@ class Memcached extends AbstractAdapter
      * Store an item.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  string $key
      * @param  mixed $value
@@ -365,10 +358,10 @@ class Memcached extends AbstractAdapter
      * Store multiple items.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  array $keyValuePairs
      * @param  array $options
@@ -421,10 +414,10 @@ class Memcached extends AbstractAdapter
      * Add an item.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  string $key
      * @param  mixed  $value
@@ -480,10 +473,10 @@ class Memcached extends AbstractAdapter
      * Replace an item.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  string $key
      * @param  mixed  $value
@@ -916,11 +909,7 @@ class Memcached extends AbstractAdapter
      * Clear items off all namespaces.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - tags <array> optional
-     *    - Tags to search for used with matching modes of
-     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *  - No options available for this adapter
      *
      * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
      * @param  array $options

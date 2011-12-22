@@ -133,7 +133,7 @@ class Logger implements Factory
             throw new Exception\InvalidArgumentException('Configuration must be an array or instance of Zend\\Config\\Config');
         }
 
-        $log = new self;
+        $log = new static;
 
         if (array_key_exists('timestampFormat', $config)) {
             if (null != $config['timestampFormat'] && '' != $config['timestampFormat']) {

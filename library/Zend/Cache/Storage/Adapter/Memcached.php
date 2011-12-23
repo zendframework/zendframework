@@ -175,11 +175,11 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
             if (array_key_exists('token', $options)) {
-                $result = $this->memcached->get($internalKey, null, $options['token']);
+                $result = $this->memcached->get($key, null, $options['token']);
             } else {
-                $result = $this->memcached->get($internalKey);
+                $result = $this->memcached->get($key);
             }
 
             if ($result === false) {
@@ -231,22 +231,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $namespaceSep = $baseOptions->getNamespaceSeparator();
-            $internalKeys = array();
-            foreach ($keys as $key) {
-                $internalKeys[] = $options['namespace'] . $namespaceSep . $key;
-            }
-
-            $fetch = $this->memcached->getMulti($internalKeys);
-            if ($fetch === false) {
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+            $result = $this->memcached->getMulti($keys);
+            if ($result === false) {
                 throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-            }
-
-            // remove namespace prefix
-            $prefixL = strlen($options['namespace'] . $namespaceSep);
-            $result  = array();
-            foreach ($fetch as $internalKey => &$value) {
-                $result[ substr($internalKey, $prefixL) ] = $value;
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -293,8 +281,8 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $result      = $this->memcached->get($internalKey);
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+            $result = $this->memcached->get($key);
 
             if ($result === false) {
                 if (($rsCode = $this->memcached->getResultCode()) != 0
@@ -354,9 +342,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $expiration  = $this->expirationTime($options['ttl']);
-            if (!$this->memcached->set($internalKey, $value, $expiration)) {
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $expiration = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->set($key, $value, $expiration)) {
                 throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
@@ -404,15 +393,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKeyValuePairs = array();
-            $prefix                = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            foreach ($keyValuePairs as $key => &$value) {
-                $internalKey = $prefix . $key;
-                $internalKeyValuePairs[$internalKey] = &$value;
-            }
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
 
             $expiration = $this->expirationTime($options['ttl']);
-            if (!$this->memcached->setMulti($internalKeyValuePairs, $expiration)) {
+            if (!$this->memcached->setMulti($keyValuePairs, $expiration)) {
                 throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
@@ -463,9 +447,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $expiration  = $this->expirationTime($options['ttl']);
-            if (!$this->memcached->add($internalKey, $value, $expiration)) {
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $expiration = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->add($key, $value, $expiration)) {
                 throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
@@ -516,9 +501,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $expiration  = $this->expirationTime($options['ttl']);
-            if (!$this->memcached->replace($internalKey, $value, $expiration)) {
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $expiration = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->replace($key, $value, $expiration)) {
                 throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
@@ -560,9 +546,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $expiration  = $this->expirationTime($options['ttl']);
-            $result      = $this->memcached->cas($token, $internalKey, $value, $expiration);
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $expiration = $this->expirationTime($options['ttl']);
+            $result     = $this->memcached->cas($token, $key, $value, $expiration);
 
             if ($result === false) {
                 $rsCode = $this->memcached->getResultCode();
@@ -616,8 +603,8 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $result = $this->memcached->delete($internalKey);
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+            $result = $this->memcached->delete($key);
 
             if ($result === false) {
                 if (($rsCode = $this->memcached->getResultCode()) != 0
@@ -664,8 +651,9 @@ class Memcached extends AbstractAdapter
         ));
 
         try {
-            $rsCodes = array();
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
 
+            $rsCodes = array();
             if (static::$extMemcachedMajorVersion >= 2) {
                 $rsCodes = $this->memcached->deleteMulti($keys);
             } else {
@@ -739,9 +727,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = $this->memcached->increment($internalKey, $value);
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $value    = (int)$value;
+            $newValue = $this->memcached->increment($key, $value);
 
             if ($newValue === false) {
                 if (($rsCode = $this->memcached->getResultCode()) != 0
@@ -751,7 +740,7 @@ class Memcached extends AbstractAdapter
                 }
 
                 $expiration = $this->expirationTime($options['ttl']);
-                if (!$this->memcached->add($internalKey, $value, $expiration)) {
+                if (!$this->memcached->add($key, $value, $expiration)) {
                     throw $this->getExceptionByResultCode($this->memcached->getResultCode());
                 }
 
@@ -804,9 +793,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = $this->memcached->decrement($internalKey, $value);
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $value    = (int)$value;
+            $newValue = $this->memcached->decrement($key, $value);
 
             if ($newValue === false) {
                 if (($rsCode = $this->memcached->getResultCode()) != 0
@@ -816,7 +806,7 @@ class Memcached extends AbstractAdapter
                 }
 
                 $expiration = $this->expirationTime($options['ttl']);
-                if (!$this->memcached->add($internalKey, -$value, $expiration)) {
+                if (!$this->memcached->add($key, -$value, $expiration)) {
                     throw $this->getExceptionByResultCode($this->memcached->getResultCode());
                 }
 
@@ -884,16 +874,7 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-
-            // init search keys
-            $search = array();
-            foreach ($keys as $key) {
-                $search[] = $prefix.$key;
-            }
-
-            // we don't need the CAS token
-            $withCas = false;
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
 
             // redirect callback
             if (isset($options['callback'])) {
@@ -901,11 +882,7 @@ class Memcached extends AbstractAdapter
                     $select = & $options['select'];
 
                     // handle selected key
-                    if (in_array('key', $select)) {
-                        $namespaceSeparator = $baseOptions->getNamespaceSeparator();
-                        $prefixL = strlen($options['namespace'] . $namespaceSeparator);
-                        $item['key'] = substr($item['key'], $prefixL);
-                    } else {
+                    if (!in_array('key', $select)) {
                         unset($item['key']);
                     }
 
@@ -917,11 +894,11 @@ class Memcached extends AbstractAdapter
                     call_user_func($options['callback'], $item);
                 };
 
-                if (!$this->memcached->getDelayed($search, false, $cb)) {
+                if (!$this->memcached->getDelayed($keys, false, $cb)) {
                     throw $this->getExceptionByResultCode($this->memcached->getResultCode());
                 }
             } else {
-                if (!$this->memcached->getDelayed($search)) {
+                if (!$this->memcached->getDelayed($keys)) {
                     throw $this->getExceptionByResultCode($this->memcached->getResultCode());
                 }
 
@@ -965,11 +942,7 @@ class Memcached extends AbstractAdapter
                 $select = & $this->stmtOptions['select'];
 
                 // handle selected key
-                if (in_array('key', $select)) {
-                    $namespaceSeparator = $this->getOptions()->getNamespaceSeparator();
-                    $prefixL = strlen($this->stmtOptions['namespace'] . $namespaceSeparator);
-                    $result['key'] = substr($result['key'], $prefixL);
-                } else {
+                if (!in_array('key', $select)) {
                     unset($result['key']);
                 }
 
@@ -998,10 +971,7 @@ class Memcached extends AbstractAdapter
      */
     public function fetchAll()
     {
-        $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
-
         $result = $this->memcached->fetchAll();
-
         if ($result === false) {
             throw new Exception\RuntimeException("Memcached::fetchAll() failed");
         }
@@ -1009,9 +979,7 @@ class Memcached extends AbstractAdapter
         $select = $this->stmtOptions['select'];
 
         foreach ($result as &$elem) {
-            if (in_array('key', $select)) {
-                $elem['key'] = substr($elem['key'], $prefixL);
-            } else {
+            if (!in_array('key', $select)) {
                 unset($elem['key']);
             }
         }
@@ -1112,7 +1080,6 @@ class Memcached extends AbstractAdapter
                         'expiredRead'        => false,
                         'maxKeyLength'       => 255,
                         'namespaceIsPrefix'  => true,
-                        'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
                         'iterable'           => false,
                         'clearAllNamespaces' => true,
                         'clearByNamespace'   => false,

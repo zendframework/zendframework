@@ -46,7 +46,7 @@ class MemoryTest extends CommonAdapterTest
 
     public function testThrowOutOfCapacityException()
     {
-        $this->_options->setMemoryLimit(memory_get_usage(true) + 5);
+        $this->_options->setMemoryLimit(memory_get_usage(true) - 8);
 
         $this->setExpectedException('Zend\Cache\Exception\OutOfCapacityException');
         $this->_storage->addItem('test', 'test');

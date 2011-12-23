@@ -607,7 +607,6 @@ class Memcached extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
-            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -667,7 +666,7 @@ class Memcached extends AbstractAdapter
         try {
             $rsCodes = array();
 
-            if (method_exists($this->memcached, 'deleteMulti')) {
+            if (static::$extMemcachedMajorVersion >= 2) {
                 $rsCodes = $this->memcached->deleteMulti($keys);
             } else {
                 foreach ($keys as $key) {
@@ -730,6 +729,7 @@ class Memcached extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
+            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -794,6 +794,7 @@ class Memcached extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
+            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -873,7 +874,7 @@ class Memcached extends AbstractAdapter
         }
 
         $args = new ArrayObject(array(
-            'key'     => & $key,
+            'keys'    => & $keys,
             'options' => & $options,
         ));
 

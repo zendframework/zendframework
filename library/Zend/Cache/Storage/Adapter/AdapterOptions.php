@@ -86,7 +86,7 @@ class AdapterOptions extends Options
 
     /**
      * Cast to array
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -178,7 +178,7 @@ class AdapterOptions extends Options
      */
     public function setNamespace($namespace)
     {
-        $nameapace = (string)$namespace;
+        $namespace = (string)$namespace;
         if ($namespace === '') {
             throw new Exception\InvalidArgumentException('No namespace given');
         }

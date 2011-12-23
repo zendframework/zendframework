@@ -210,7 +210,7 @@ if ($appending) {
     array_pop($existing); 
 
     // Merge
-    $content = implode(PHP_EOL, $existing + $content);
+    $content = implode(PHP_EOL, array_merge($existing, $content));
 } else {
     // Create a file with the class/file map.
     // Stupid syntax highlighters make separating < from PHP declaration necessary

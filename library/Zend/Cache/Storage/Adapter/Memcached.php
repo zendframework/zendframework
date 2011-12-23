@@ -39,6 +39,13 @@ use ArrayObject,
 class Memcached extends AbstractAdapter
 {
     /**
+     * Major version of ext/memcached
+     *
+     * @var null|int
+     */
+    protected static $extMemcachedMajorVersion;
+
+    /**
      * Memcached instance
      *
      * @var MemcachedResource
@@ -54,11 +61,16 @@ class Memcached extends AbstractAdapter
      */
     public function __construct($options = null)
     {
-        if (!extension_loaded('memcached')) {
-            throw new Exception\ExtensionNotLoadedException("Memcached extension is not loaded");
+        if (static::$extMemcachedMajorVersion === null) {
+            $v = (string) phpversion('memcached');
+            static::$extMemcachedMajorVersion = ($v !== '') ? (int)$v[0] : 0;
         }
 
-        $this->memcached= new MemcachedResource();
+        if (static::$extMemcachedMajorVersion < 1) {
+            throw new Exception\ExtensionNotLoadedException('Need ext/memcached version >= 1.0.0');
+        }
+
+        $this->memcached = new MemcachedResource();
 
         parent::__construct($options);
 
@@ -620,6 +632,71 @@ class Memcached extends AbstractAdapter
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
+        }
+    }
+
+    /**
+     * Remove items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers removeItems.pre(PreEvent)
+     * @triggers removeItems.post(PostEvent)
+     * @triggers removeItems.exception(ExceptionEvent)
+     */
+    public function removeItems(array $keys, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
+            return false;
+        }
+
+        $this->normalizeOptions($options);
+        $args = new ArrayObject(array(
+            'keys'    => & $keys,
+            'options' => & $options,
+        ));
+
+        try {
+            $rsCodes = array();
+
+            if (method_exists($this->memcached, 'deleteMulti')) {
+                $rsCodes = $this->memcached->deleteMulti($keys);
+            } else {
+                foreach ($keys as $key) {
+                    $rs = $this->memcached->delete($key);
+                    if ($rs === false) {
+                        $rsCodes[$key] = $this->memcached->getResultCode();
+                    }
+                }
+            }
+
+            $missingKeys = null;
+            foreach ($rsCodes as $key => $rsCode) {
+                if ($rsCode !== true && $rsCode != 0) {
+                    if ($rsCode != MemcachedResource::RES_NOTFOUND) {
+                        throw $this->getExceptionByResultCode($rsCode);
+                    } elseif (!$options['ignore_missing_items']) {
+                        $missingKeys[] = $key;
+                    }
+                }
+            }
+            if ($missingKeys) {
+                throw new Exception\ItemNotFoundException(
+                    "Keys '" . implode("','", $missingKeys) . "' not found"
+                );
+            }
+
+            return true;
+        } catch (\MemcachedException $e) {
+            throw new RuntimeException($e->getMessage(), 0, $e);
         }
     }
 

@@ -316,7 +316,7 @@ $foo->bar('baz', 'bat');
                         <methodname>trigger</methodname>
 
                         <methodparam>
-                            <funcparams>string $event, mixed $context, mixed $argv</funcparams>
+                            <funcparams>string $event, mixed $target, mixed $argv, callback $callback</funcparams>
                         </methodparam>
                     </methodsynopsis>
                 </term>
@@ -331,7 +331,8 @@ $foo->bar('baz', 'bat');
                         <varname>$params</varname> should typically be an associative arry or
                         <classname>ArrayAccess</classname> instance; we recommend using the
                         parameters passed to the function/method (<function>compact()</function> is
-                        often useful here).
+                        often useful here). This method can also take a callback and behave in the 
+                        same way as <methodname>triggerUntil()</methodname>.
                     </para>
 
                     <para>

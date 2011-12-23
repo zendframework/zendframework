@@ -11,10 +11,8 @@
     <para>
         The module manager, <classname>Zend\Module\Manager</classname>, is a very simple class which
         is responsible for iterating over an array of module names and triggering a sequence of
-        events for each. The module manager is simply responsible for looping through the module
-        names provided to it and firing events; location and instantiation of module classes, and
-        initialization and configuration of module classes, is performed by attached event
-        listeners.
+        events for each. Instantiation of module classes, initialization tasks, and configuration
+        are all performed by attached event listeners.
     </para>
 
     <section xml:id="zend.module.module-manager.module-manager-events">

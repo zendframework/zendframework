@@ -128,7 +128,7 @@ class StorageFactory
 
         // set adapter or plugin options
         if (isset($cfg['options'])) {
-            if (!is_array($cfg['options']) 
+            if (!is_array($cfg['options'])
                 && !$cfg['options'] instanceof Traversable
             ) {
                 throw new Exception\InvalidArgumentException(
@@ -150,20 +150,23 @@ class StorageFactory
      * Instantiate a storage adapter
      *
      * @param  string|Storage\Adapter $adapterName
-     * @param  array|Traversable|Storage\Adapter\AdapterOptions $options
+     * @param  null|array|Traversable|Storage\Adapter\AdapterOptions $options
      * @return Storage\Adapter
      * @throws Exception\RuntimeException
      */
-    public static function adapterFactory($adapterName, $options = array())
+    public static function adapterFactory($adapterName, $options = null)
     {
         if ($adapterName instanceof Storage\Adapter) {
             // $adapterName is already an adapter object
-            $adapterName->setOptions($options);
-            return $adapterName;
+            $adapter = $adapterName;
+        } else {
+            $adapter = static::getAdapterBroker()->load($adapterName);
         }
 
-        $adapter = static::getAdapterBroker()->load($adapterName);
-        $adapter->setOptions($options);
+        if ($options !== null) {
+            $adapter->setOptions($options);
+        }
+
         return $adapter;
     }
 

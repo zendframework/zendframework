@@ -37,10 +37,19 @@ class MemoryTest extends CommonAdapterTest
     public function setUp()
     {
         // instantiate memory adapter
-        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
+        $this->_options = new Cache\Storage\Adapter\MemoryOptions();
         $this->_storage = new Cache\Storage\Adapter\Memory();
         $this->_storage->setOptions($this->_options);
 
         parent::setUp();
     }
+
+    public function testThrowOutOfCapacityException()
+    {
+        $this->_options->setMemoryLimit(memory_get_usage(true) + 5);
+
+        $this->setExpectedException('Zend\Cache\Exception\OutOfCapacityException');
+        $this->_storage->addItem('test', 'test');
+    }
+
 }

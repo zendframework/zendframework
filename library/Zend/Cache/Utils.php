@@ -224,7 +224,7 @@ abstract class Utils
      * @return float
      * @throws Exception\RuntimeException
      */
-    static protected function bytesFromString($memStr)
+    static public function bytesFromString($memStr)
     {
         if (!preg_match('/\s*([\-\+]?\d+)\s*(\w*)\s*/', $memStr, $matches)) {
             throw new Exception\RuntimeException("Can't detect bytes of string '{$memStr}'");

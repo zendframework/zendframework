@@ -318,8 +318,6 @@ class RuntimeDefinition implements Definition
             /** @var $p \ReflectionParameter  */
             $actualParamName = $p->getName();
 
-            $paramName = $this->createDistinctParameterName($actualParamName, $rClass->getName());
-
             $fqName = $rClass->getName() . '::' . $rMethod->getName() . ':' . $p->getPosition();
 
             $def['parameters'][$methodName][$fqName] = array();

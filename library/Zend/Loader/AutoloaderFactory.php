@@ -180,7 +180,6 @@ abstract class AutoloaderFactory
 
         require_once __DIR__ . '/StandardAutoloader.php';
         $loader = new StandardAutoloader();
-        $loader->setFallbackAutoloader(true);
         static::$standardAutoloader = $loader;
         return static::$standardAutoloader;
     }

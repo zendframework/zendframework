@@ -329,29 +329,4 @@ class RuntimeDefinition implements Definition
         }
 
     }
-
-    protected function createDistinctParameterName($paramName, $class)
-    {
-        $currentParams = array();
-        if ($this->classes[$class]['parameters'] === array()) {
-            return $paramName;
-        }
-        foreach ($this->classes as $cdata) {
-            foreach ($cdata['parameters'] as $mdata) {
-                $currentParams = array_merge($currentParams, array_keys($mdata));
-            }
-        }
-
-        if (!in_array($paramName, $currentParams)) {
-            return $paramName;
-        }
-
-        $alt = 2;
-        while (in_array($paramName . (string) $alt, $currentParams)) {
-            $alt++;
-        }
-
-        return $paramName . (string) $alt;
-    }
-    
 }

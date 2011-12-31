@@ -264,9 +264,10 @@ class StandardAutoloader implements SplAutoloader
         // $class may contain a namespace portion, in  which case we need
         // to preserve any underscores in that portion.
         preg_match('/(?P<namespace>.+\\\)?(?P<class>[^\\\]+$)/', $class, $matches);
-        return $directory . 
-               str_replace(self::NS_SEPARATOR, '/', $matches['namespace']) .
-               str_replace(self::PREFIX_SEPARATOR, '/', $matches['class']) . '.php';
+        return $directory
+             . str_replace(self::NS_SEPARATOR, '/', $matches['namespace'])
+             . str_replace(self::PREFIX_SEPARATOR, '/', $matches['class'])
+             . '.php';
     }
 
     /**

@@ -23,6 +23,8 @@ namespace Zend\Loader;
 
 require_once __DIR__ . '/SplAutoloader.php';
 
+if (class_exists('Zend\Loader\AutoloaderFactory')) return;
+
 /**
  * @category   Zend
  * @package    Zend_Loader
@@ -178,7 +180,9 @@ abstract class AutoloaderFactory
             return static::$standardAutoloader;
         }
 
-        require_once __DIR__ . '/StandardAutoloader.php';
+        if (!class_exists('Zend\Loader\StandardAutoloader')) {
+            require_once __DIR__ . '/StandardAutoloader.php';
+        }
         $loader = new StandardAutoloader();
         static::$standardAutoloader = $loader;
         return static::$standardAutoloader;

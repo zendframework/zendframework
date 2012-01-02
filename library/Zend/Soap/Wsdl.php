@@ -540,28 +540,23 @@ class Wsdl
             case 'string':
             case 'str':
                 return 'xsd:string';
-                break;
+            case 'long':
+                return 'xsd:long';
             case 'int':
             case 'integer':
                 return 'xsd:int';
-                break;
             case 'float':
             case 'double':
                 return 'xsd:float';
-                break;
             case 'boolean':
             case 'bool':
                 return 'xsd:boolean';
-                break;
             case 'array':
                 return 'soap-enc:Array';
-                break;
             case 'object':
                 return 'xsd:struct';
-                break;
             case 'mixed':
                 return 'xsd:anyType';
-                break;
             case 'void':
                 return '';
             default:

@@ -53,18 +53,15 @@ class Filesystem extends AbstractAdapter
     protected $stmtMatch = null;
 
     /**
-     * Buffer vars
+     * Last buffered identified of internal method getKeyInfo()
      *
      * @var string|null
      */
     protected $lastInfoId = null;
 
     /**
-     * @var array|bool|null
-     */
-    protected $lastInfoAll = null;
-
-    /**
+     * Buffered result of internal method getKeyInfo()
+     *
      * @var array|null
      */
     protected $lastInfo = null;
@@ -80,8 +77,8 @@ class Filesystem extends AbstractAdapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
+        if (!is_array($options)
+            && !$options instanceof Traversable
             && !$options instanceof FilesystemOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -319,13 +316,7 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            $lastInfoId = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if ($this->lastInfoId == $lastInfoId && $this->lastInfoAll) {
-                return $this->lastInfoAll;
-            }
-
-            $this->lastInfoAll = $result = $this->internalGetMetadata($key, $options);
-
+            $result = $this->internalGetMetadata($key, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1320,15 +1311,24 @@ class Filesystem extends AbstractAdapter
      * @return array|bool
      * @throws ItemNotFoundException
      */
-    protected function internalGetMetadata($key, array &$options) 
+    protected function internalGetMetadata($key, array &$options)
     {
-        $keyInfo = $this->getKeyInfo($key, $options['namespace']);
+        $baseOptions = $this->getOptions();
+        $keyInfo     = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
             if ($options['ignore_missing_items']) {
                 return false;
             } else {
                 throw new Exception\ItemNotFoundException("Key '{$key}' not found within namespace '{$options['namespace']}'");
             }
+        }
+
+        if (!$baseOptions->getNoCtime()) {
+            $keyInfo['ctime'] = filectime($keyInfo['filespec'] . '.dat');
+        }
+
+        if (!$baseOptions->getNoAtime()) {
+            $keyInfo['atime'] = fileatime($keyInfo['filespec'] . '.dat');
         }
 
         if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo')) ) {
@@ -1537,7 +1537,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
                 if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
-                    if (!isset($info['tags']) 
+                    if (!isset($info['tags'])
                         || count(array_diff($opts['tags'], $info['tags'])) > 0
                     ) {
                         continue;
@@ -1545,7 +1545,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
                 } elseif(($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS) {
-                    if (isset($info['tags']) 
+                    if (isset($info['tags'])
                         && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])
                     ) {
                         continue;
@@ -1553,7 +1553,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
                 } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
-                    if (!isset($info['tags']) 
+                    if (!isset($info['tags'])
                         || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])
                     ) {
                         continue;
@@ -1633,19 +1633,10 @@ class Filesystem extends AbstractAdapter
         }
 
         $this->lastInfoId  = $lastInfoId;
-        $this->lastInfoAll = null;
         $this->lastInfo    = array(
             'filespec' => $filespec,
             'mtime'    => $filemtime,
         );
-
-        if (!$options->getNoCtime()) {
-            $this->lastInfo['ctime'] = filectime($filespec . '.dat');
-        }
-
-        if (!$options->getNoAtime()) {
-            $this->lastInfo['atime'] = fileatime($filespec . '.dat');
-        }
 
         return $this->lastInfo;
     }
@@ -1686,7 +1677,7 @@ class Filesystem extends AbstractAdapter
      * @return array|boolean The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
-    protected function readInfoFile($file) 
+    protected function readInfoFile($file)
     {
         if (!file_exists($file)) {
             return false;
@@ -1718,10 +1709,10 @@ class Filesystem extends AbstractAdapter
         if ($this->getOptions()->getFileLocking()) {
             set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
                 $message = sprintf(
-                    'Error getting contents from file "%s" (in %s@%d): %s', 
-                    $file, 
-                    $errfile, 
-                    $errline, 
+                    'Error getting contents from file "%s" (in %s@%d): %s',
+                    $file,
+                    $errfile,
+                    $errline,
                     $errstr
                 );
                 throw new Exception\RuntimeException($message, $errno);
@@ -1730,17 +1721,17 @@ class Filesystem extends AbstractAdapter
             restore_error_handler();
             if ($fp === false) {
                 throw new Exception\RuntimeException(sprintf(
-                    'Unknown error getting contents from file "%s"', 
+                    'Unknown error getting contents from file "%s"',
                     $file
                 ));
             }
 
             set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
                 $message = sprintf(
-                    'Error locking file "%s" (in %s@%d): %s', 
-                    $file, 
-                    $errfile, 
-                    $errline, 
+                    'Error locking file "%s" (in %s@%d): %s',
+                    $file,
+                    $errfile,
+                    $errline,
                     $errstr
                 );
                 throw new Exception\RuntimeException($message, $errno);
@@ -1822,12 +1813,12 @@ class Filesystem extends AbstractAdapter
                 return false;
             }
 
-            if (!ftruncate($fp, 0)) {
-                throw new Exception\RuntimeException('Unable to truncate cache file');
-            }
-
             if (!fwrite($fp, $data)) {
                 throw new Exception\RuntimeException('Unable to write cache file');
+            }
+
+            if (!ftruncate($fp, strlen($data))) {
+                throw new Exception\RuntimeException('Unable to truncate cache file');
             }
 
             flock($fp, \LOCK_UN);
@@ -1859,7 +1850,7 @@ class Filesystem extends AbstractAdapter
      * @return void
      * @throw RuntimeException
      */
-    protected function unlink($file) 
+    protected function unlink($file)
     {
         // If file does not exist, nothing to do
         if (!file_exists($file)) {

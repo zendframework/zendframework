@@ -264,25 +264,60 @@ class FilesystemTest extends CommonAdapterTest
 
     public function testDisabledFileBlocking()
     {
+        if (substr(\PHP_OS, 0, 3) == 'WIN') {
+            $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');
+        }
+
         $this->_options->setFileLocking(true);
         $this->_options->setFileBlocking(false);
 
         // create cache item and get data file
         $this->assertTrue($this->_storage->setItem('key', 'value'));
-        $info = $this->_storage->getMetadata('key');
-        $this->assertInternalType('array', $info);
-        $this->assertArrayHasKey('filespec', $info);
-        $file = $info['filespec'] . '.dat';
+        $meta = $this->_storage->getMetadata('key');
+        $this->assertInternalType('array', $meta);
+        $this->assertArrayHasKey('filespec', $meta);
+        $file = $meta['filespec'] . '.dat';
 
-        // open file and create a write lock
-        $fp = @fopen($file, 'w+');
+        /******************
+         * first test failed on a locked item
+         */
+
+        // open file and create a lock
+        $fp = @fopen($file, 'cb');
         $this->assertInternalType('resource', $fp);
         flock($fp, LOCK_EX);
 
         // rewriting file should fail in part of open lock
         $this->assertFalse($this->_storage->setItem('key', 'lock'));
 
+        // close the lock
         flock($fp, LOCK_UN);
         fclose($fp);
+    }
+
+    public function testGetMetadataWithCtime()
+    {
+        $this->_options->setNoCtime(false);
+
+        $this->assertTrue($this->_storage->setItem('test', 'v'));
+
+        $meta = $this->_storage->getMetadata('test');
+        $this->assertInternalType('array', $meta);
+
+        $expectedCtime = filectime($meta['filespec'] . '.dat');
+        $this->assertEquals($expectedCtime, $meta['ctime']);
+    }
+
+    public function testGetMetadataWithAtime()
+    {
+        $this->_options->setNoAtime(false);
+
+        $this->assertTrue($this->_storage->setItem('test', 'v'));
+
+        $meta = $this->_storage->getMetadata('test');
+        $this->assertInternalType('array', $meta);
+
+        $expectedAtime = fileatime($meta['filespec'] . '.dat');
+        $this->assertEquals($expectedAtime, $meta['atime']);
     }
 }

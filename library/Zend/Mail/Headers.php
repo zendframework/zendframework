@@ -134,7 +134,17 @@ class Headers implements Iterator, Countable
     {
         if ($this->pluginClassLoader === null) {
             $this->pluginClassLoader = new PluginClassLoader(array(
-                'contenttype'        => 'Zend\Mail\Header\ContentType',
+                'bcc'         => 'Zend\\Mail\\Header\\Bcc',
+                'cc'          => 'Zend\\Mail\\Header\\Cc',
+                'contenttype' => 'Zend\\Mail\\Header\\ContentType',
+                'from'        => 'Zend\\Mail\\Header\\From',
+                'mimeversion' => 'Zend\\Mail\\Header\\MimeVersion',
+                'origdate'    => 'Zend\\Mail\\Header\\OrigDate',
+                'received'    => 'Zend\\Mail\\Header\\Received',
+                'replyto'     => 'Zend\\Mail\\Header\\ReplyTo',
+                'sender'      => 'Zend\\Mail\\Header\\Sender',
+                'subject'     => 'Zend\\Mail\\Header\\Subject',
+                'to'          => 'Zend\\Mail\\Header\\To',
             ));
         }
         return $this->pluginClassLoader;

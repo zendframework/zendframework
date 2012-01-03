@@ -1795,7 +1795,6 @@ class Filesystem extends AbstractAdapter
 
         if ($locking && !$blocking) {
             set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-                umask($oldUmask);
                 $message = sprintf('Error opening file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
                 throw new Exception\RuntimeException($message, $errno);
             }, E_WARNING);

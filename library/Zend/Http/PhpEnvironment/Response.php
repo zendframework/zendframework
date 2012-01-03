@@ -33,10 +33,7 @@ class Response extends HttpResponse
             return;
         }
 
-        $version = $this->getVersion();
-        $code    = $this->getStatusCode();
-        $message = $this->getReasonPhrase();
-        $status  = sprintf('HTTP/%s %d %s', $version, $code, $message);
+        $status  = $this->renderStatusLine();
         header($status);
 
         foreach ($this->headers() as $header) {

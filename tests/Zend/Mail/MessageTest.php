@@ -57,8 +57,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $headers = $this->message->headers();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
-        $this->assertTrue($headers->has('orig-date'));
-        $header  = $headers->get('orig-date');
+        $this->assertTrue($headers->has('date'));
+        $header  = $headers->get('date');
         $date    = date('r');
         $date    = substr($date, 0, 16);
         $test    = $header->getFieldValue();

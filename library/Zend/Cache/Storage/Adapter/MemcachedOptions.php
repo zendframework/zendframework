@@ -37,7 +37,7 @@ class MemcachedOptions extends AdapterOptions
 {
     /**
      * Map of option keys to \Memcached options
-     * 
+     *
      * @var array
      */
     private $optionsMap = array(
@@ -51,7 +51,6 @@ class MemcachedOptions extends AdapterOptions
         'libketama_compatible' => MemcachedResource::OPT_LIBKETAMA_COMPATIBLE,
         'no_block'             => MemcachedResource::OPT_NO_BLOCK,
         'poll_timeout'         => MemcachedResource::OPT_POLL_TIMEOUT,
-        'prefix_key'           => MemcachedResource::OPT_PREFIX_KEY,
         'recv_timeout'         => MemcachedResource::OPT_RECV_TIMEOUT,
         'retry_timeout'        => MemcachedResource::OPT_RETRY_TIMEOUT,
         'send_timeout'         => MemcachedResource::OPT_SEND_TIMEOUT,
@@ -60,176 +59,188 @@ class MemcachedOptions extends AdapterOptions
         'socket_recv_size'     => MemcachedResource::OPT_SOCKET_RECV_SIZE,
         'socket_send_size'     => MemcachedResource::OPT_SOCKET_SEND_SIZE,
         'tcp_nodelay'          => MemcachedResource::OPT_TCP_NODELAY,
+
+        // The prefix_key act as namespace an will be set directly
+        // 'prefix_key'           => MemcachedResource::OPT_PREFIX_KEY,
     );
 
     /**
      * Memcached server address
-     * 
-     * @var string 
+     *
+     * @var string
      */
     protected $server = 'localhost';
-    
+
     /**
      * Memcached port
-     * 
+     *
      * @var integer
      */
     protected $port = 11211;
-    
+
     /**
      * Whether or not to enable binary protocol for communication with server
-     * 
+     *
      * @var bool
      */
     protected $binaryProtocol = false;
 
     /**
      * Enable or disable buffered I/O
-     * 
+     *
      * @var bool
      */
     protected $bufferWrites = false;
 
     /**
      * Whether or not to cache DNS lookups
-     * 
+     *
      * @var bool
      */
     protected $cacheLookups = false;
 
     /**
      * Whether or not to use compression
-     * 
+     *
      * @var bool
      */
     protected $compression = true;
 
     /**
      * Time at which to issue connection timeout, in ms
-     * 
+     *
      * @var int
      */
     protected $connectTimeout = 1000;
 
     /**
      * Server distribution algorithm
-     * 
+     *
      * @var int
      */
     protected $distribution = MemcachedResource::DISTRIBUTION_MODULA;
 
     /**
      * Hashing algorithm to use
-     * 
+     *
      * @var int
      */
     protected $hash = MemcachedResource::HASH_DEFAULT;
 
     /**
      * Whether or not to enable compatibility with libketama-like behavior.
-     * 
+     *
      * @var bool
      */
     protected $libketamaCompatible = false;
 
     /**
-     * Namespace separator
-     *
-     * @var string
-     */
-    protected $namespaceSeparator = ':';
-
-    /**
      * Whether or not to enable asynchronous I/O
-     * 
+     *
      * @var bool
      */
     protected $noBlock = false;
 
     /**
      * Timeout for connection polling, in ms
-     * 
+     *
      * @var int
      */
     protected $pollTimeout = 0;
 
     /**
-     * Prefix to use with keys 
-     * 
-     * @var string
-     */
-    protected $prefixKey = '';
-
-    /**
      * Maximum allowed time for a recv operation, in ms
-     * 
+     *
      * @var int
      */
     protected $recvTimeout = 0;
 
     /**
      * Time to wait before retrying a connection, in seconds
-     * 
+     *
      * @var int
      */
     protected $retryTimeout = 0;
 
     /**
      * Maximum allowed time for a send operation, in ms
-     * 
+     *
      * @var int
      */
     protected $sendTimeout = 0;
 
     /**
      * Serializer to use
-     * 
+     *
      * @var int
      */
     protected $serializer = MemcachedResource::SERIALIZER_PHP;
 
     /**
      * Maximum number of server connection errors
-     * 
+     *
      * @var int
      */
     protected $serverFailureLimit = 0;
 
     /**
      * Maximum socket send buffer in bytes
-     * 
+     *
      * @var int
      */
     protected $socketSendSize;
 
     /**
      * Maximum socket recv buffer in bytes
-     * 
+     *
      * @var int
      */
     protected $socketRecvSize;
 
     /**
      * Whether or not to enable no-delay feature for connecting sockets
-     * 
+     *
      * @var bool
      */
     protected $tcpNodelay = false;
+
+    /**
+     * Set namespace.
+     *
+     * The option Memcached::OPT_PREFIX_KEY will be used as the namespace.
+     * It can't be longer than 128 characters.
+     *
+     * @see AdapterOptions::setNamespace()
+     * @see MemcachedOptions::setPrefixKey()
+     */
+    public function setNamespace($namespace)
+    {
+        $namespace = (string)$namespace;
+
+        if (128 < strlen($namespace)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects a prefix key of no longer than 128 characters',
+                __METHOD__
+            ));
+        }
+
+        return parent::setNamespace($namespace);
+    }
 
     public function setServer($server)
     {
         $this->server= $server;
         return $this;
     }
-    
+
     public function getServer()
     {
         return $this->server;
     }
-    
+
     public function setPort($port)
     {
-        if ((!is_int($port) && !is_numeric($port)) 
+        if ((!is_int($port) && !is_numeric($port))
             || 0 > $port
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -237,18 +248,18 @@ class MemcachedOptions extends AdapterOptions
                 __METHOD__
             ));
         }
-        
+
         $this->port= $port;
         return $this;
     }
-    
+
     public function getPort()
     {
         return $this->port;
     }
-    
+
     /**
-     * Set flag indicating whether or not to enable binary protocol for 
+     * Set flag indicating whether or not to enable binary protocol for
      * communication with server
      *
      * @param  bool $binaryProtocol
@@ -259,7 +270,7 @@ class MemcachedOptions extends AdapterOptions
         $this->binaryProtocol = (bool) $binaryProtocol;
         return $this;
     }
-    
+
     /**
      * Whether or not to enable binary protocol for communication with server
      *
@@ -281,7 +292,7 @@ class MemcachedOptions extends AdapterOptions
         $this->bufferWrites = (bool) $bufferWrites;
         return $this;
     }
-    
+
     /**
      * Whether or not buffered I/O is enabled
      *
@@ -303,7 +314,7 @@ class MemcachedOptions extends AdapterOptions
         $this->cacheLookups = (bool) $cacheLookups;
         return $this;
     }
-    
+
     /**
      * Whether or not to cache DNS lookups
      *
@@ -325,7 +336,7 @@ class MemcachedOptions extends AdapterOptions
         $this->compression = (bool) $compression;
         return $this;
     }
-    
+
     /**
      * Whether or not compression is enabled
      *
@@ -344,7 +355,7 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setConnectTimeout($connectTimeout)
     {
-        if ((!is_int($connectTimeout) && !is_numeric($connectTimeout)) 
+        if ((!is_int($connectTimeout) && !is_numeric($connectTimeout))
             || 0 > $connectTimeout
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -356,7 +367,7 @@ class MemcachedOptions extends AdapterOptions
         $this->connectTimeout = (int) $connectTimeout;
         return $this;
     }
-    
+
     /**
      * Get connection timeout value
      *
@@ -388,7 +399,7 @@ class MemcachedOptions extends AdapterOptions
         $this->distribution = $distribution;
         return $this;
     }
-    
+
     /**
      * Get server distribution algorithm
      *
@@ -427,7 +438,7 @@ class MemcachedOptions extends AdapterOptions
         $this->hash = $hash;
         return $this;
     }
-    
+
     /**
      * Get hash algorithm
      *
@@ -449,7 +460,7 @@ class MemcachedOptions extends AdapterOptions
         $this->libketamaCompatible = (bool) $libketamaCompatible;
         return $this;
     }
-    
+
     /**
      * Whether or not to enable libketama compatibility
      *
@@ -458,28 +469,6 @@ class MemcachedOptions extends AdapterOptions
     public function getLibketamaCompatible()
     {
         return $this->libketamaCompatible;
-    }
-
-    /**
-     * Set namespace separator
-     *
-     * @param  string $separator
-     * @return MemcachedOptions
-     */
-    public function setNamespaceSeparator($separator)
-    {
-        $this->namespaceSeparator = (string) $separator;
-        return $this;
-    }
-
-    /**
-     * Get namespace separator
-     *
-     * @return string
-     */
-    public function getNamespaceSeparator()
-    {
-        return $this->namespaceSeparator;
     }
 
     /**
@@ -493,7 +482,7 @@ class MemcachedOptions extends AdapterOptions
         $this->noBlock = (bool) $noBlock;
         return $this;
     }
-    
+
     /**
      * Whether or not to enable asynchronous I/O
      *
@@ -512,7 +501,7 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setPollTimeout($pollTimeout)
     {
-        if ((!is_int($pollTimeout) && !is_numeric($pollTimeout)) 
+        if ((!is_int($pollTimeout) && !is_numeric($pollTimeout))
             || 0 > $pollTimeout
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -524,7 +513,7 @@ class MemcachedOptions extends AdapterOptions
         $this->pollTimeout = (int) $pollTimeout;
         return $this;
     }
-    
+
     /**
      * Get connection polling timeout value
      *
@@ -538,36 +527,26 @@ class MemcachedOptions extends AdapterOptions
     /**
      * Set prefix for keys
      *
+     * The prefix key act as namespace.
+     *
      * @param  string $prefixKey
      * @return MemcachedOptions
      */
     public function setPrefixKey($prefixKey)
     {
-        if (!is_string($prefixKey)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a string',
-                __METHOD__
-            ));
-        }
-        if (128 < strlen($prefixKey)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects a prefix key of no longer than 128 characters',
-                __METHOD__
-            ));
-        }
-
-        $this->prefixKey = $prefixKey;
-        return $this;
+        return $this->setNamespace($prefixKey);
     }
-    
+
     /**
      * Get prefix key
+     *
+     * The prefix key act as namespace.
      *
      * @return string
      */
     public function getPrefixKey()
     {
-        return $this->prefixKey;
+        return $this->getNamespace();
     }
 
     /**
@@ -578,7 +557,7 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setRecvTimeout($recvTimeout)
     {
-        if ((!is_int($recvTimeout) && !is_numeric($recvTimeout)) 
+        if ((!is_int($recvTimeout) && !is_numeric($recvTimeout))
             || 0 > $recvTimeout
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -590,7 +569,7 @@ class MemcachedOptions extends AdapterOptions
         $this->recvTimeout = (int) $recvTimeout;
         return $this;
     }
-    
+
     /**
      * Get recv timeout value
      *
@@ -609,7 +588,7 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setRetryTimeout($retryTimeout)
     {
-        if ((!is_int($retryTimeout) && !is_numeric($retryTimeout)) 
+        if ((!is_int($retryTimeout) && !is_numeric($retryTimeout))
             || 0 > $retryTimeout
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -621,7 +600,7 @@ class MemcachedOptions extends AdapterOptions
         $this->retryTimeout = (int) $retryTimeout;
         return $this;
     }
-    
+
     /**
      * Get retry timeout value, in seconds
      *
@@ -640,7 +619,7 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setSendTimeout($sendTimeout)
     {
-        if ((!is_int($sendTimeout) && !is_numeric($sendTimeout)) 
+        if ((!is_int($sendTimeout) && !is_numeric($sendTimeout))
             || 0 > $sendTimeout
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -652,7 +631,7 @@ class MemcachedOptions extends AdapterOptions
         $this->sendTimeout = (int) $sendTimeout;
         return $this;
     }
-    
+
     /**
      * Get send timeout value
      *
@@ -703,7 +682,7 @@ class MemcachedOptions extends AdapterOptions
         $this->serializer = $serializer;
         return $this;
     }
-    
+
     /**
      * Get serializer
      *
@@ -722,7 +701,7 @@ class MemcachedOptions extends AdapterOptions
      */
     public function setServerFailureLimit($serverFailureLimit)
     {
-        if ((!is_int($serverFailureLimit) && !is_numeric($serverFailureLimit)) 
+        if ((!is_int($serverFailureLimit) && !is_numeric($serverFailureLimit))
             || 0 > $serverFailureLimit
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -734,7 +713,7 @@ class MemcachedOptions extends AdapterOptions
         $this->serverFailureLimit = (int) $serverFailureLimit;
         return $this;
     }
-    
+
     /**
      * Get maximum server failures allowed
      *
@@ -756,8 +735,8 @@ class MemcachedOptions extends AdapterOptions
         if ($socketSendSize === null) {
             return $this;
         }
-        
-        if ((!is_int($socketSendSize) && !is_numeric($socketSendSize)) 
+
+        if ((!is_int($socketSendSize) && !is_numeric($socketSendSize))
             || 0 > $socketSendSize
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -769,7 +748,7 @@ class MemcachedOptions extends AdapterOptions
         $this->socketSendSize = (int) $socketSendSize;
         return $this;
     }
-    
+
     /**
      * Get maximum socket send buffer in bytes
      *
@@ -791,8 +770,8 @@ class MemcachedOptions extends AdapterOptions
         if ($socketRecvSize === null) {
             return $this;
         }
-        
-        if ((!is_int($socketRecvSize) && !is_numeric($socketRecvSize)) 
+
+        if ((!is_int($socketRecvSize) && !is_numeric($socketRecvSize))
             || 0 > $socketRecvSize
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -804,7 +783,7 @@ class MemcachedOptions extends AdapterOptions
         $this->socketRecvSize = (int) $socketRecvSize;
         return $this;
     }
-    
+
     /**
      * Get maximum socket recv buffer in bytes
      *
@@ -826,7 +805,7 @@ class MemcachedOptions extends AdapterOptions
         $this->tcpNodelay = (bool) $tcpNodelay;
         return $this;
     }
-    
+
     /**
      * Whether or not to enable no-delay feature when connecting sockets
      *
@@ -839,7 +818,7 @@ class MemcachedOptions extends AdapterOptions
 
     /**
      * Get map of option keys to \Memcached constants
-     * 
+     *
      * @return array
      */
     public function getOptionsMap()

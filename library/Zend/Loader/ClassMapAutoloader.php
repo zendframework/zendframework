@@ -161,7 +161,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function register()
     {
-        spl_autoload_register(array($this, 'autoload'));
+        spl_autoload_register(array($this, 'autoload'), true, true);
     }
 
     /**

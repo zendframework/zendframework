@@ -23,6 +23,7 @@ namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
     Memcached as MemcachedResource,
+    MemcachedException,
     stdClass,
     Traversable,
     Zend\Cache\Exception,
@@ -39,6 +40,13 @@ use ArrayObject,
 class Memcached extends AbstractAdapter
 {
     /**
+     * Major version of ext/memcached
+     *
+     * @var null|int
+     */
+    protected static $extMemcachedMajorVersion;
+
+    /**
      * Memcached instance
      *
      * @var MemcachedResource
@@ -48,25 +56,28 @@ class Memcached extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array $options Option
+     * @param  null|array|Traversable|MemcachedOptions $options
      * @throws Exception
      * @return void
      */
     public function __construct($options = null)
     {
-        if (!extension_loaded('memcached')) {
-            throw new Exception\ExtensionNotLoadedException("Memcached extension is not loaded");
-        }
-        
-        $this->memcached= new MemcachedResource();
-        
-        if (!empty($options)) {
-            $this->setOptions($options);
+        if (static::$extMemcachedMajorVersion === null) {
+            $v = (string) phpversion('memcached');
+            static::$extMemcachedMajorVersion = ($v !== '') ? (int)$v[0] : 0;
         }
 
-        $options= $this->getOptions();
+        if (static::$extMemcachedMajorVersion < 1) {
+            throw new Exception\ExtensionNotLoadedException('Need ext/memcached version >= 1.0.0');
+        }
+
+        $this->memcached = new MemcachedResource();
+
+        parent::__construct($options);
+
+        $options = $this->getOptions();
         $this->memcached->addServer($options->getServer(), $options->getPort());
-        
+
     }
 
     /* options */
@@ -74,15 +85,15 @@ class Memcached extends AbstractAdapter
     /**
      * Set options.
      *
-     * @param  string|Traversable|MemcachedOptions $options
+     * @param  array|Traversable|MemcachedOptions $options
      * @return Memcached
      * @see    getOptions()
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
-            && !$options instanceof MemcachedOptions    
+        if (!is_array($options)
+            && !$options instanceof Traversable
+            && !$options instanceof MemcachedOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array, a Traversable object, or a MemcachedOptions object; '
@@ -125,15 +136,12 @@ class Memcached extends AbstractAdapter
         return $this->options;
     }
 
-
     /* reading */
 
     /**
      * Get an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *  - ignore_missing_items <boolean> optional
@@ -168,15 +176,18 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $result      = $this->memcached->get($internalKey);
-            if ($result===false) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
-                }
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+            if (array_key_exists('token', $options)) {
+                $result = $this->memcached->get($key, null, $options['token']);
             } else {
-                if (array_key_exists('token', $options)) {
-                    $options['token'] = $result;
+                $result = $this->memcached->get($key);
+            }
+
+            if ($result === false) {
+                if (($rsCode = $this->memcached->getResultCode()) != 0
+                    && ($rsCode != MemcachedResource::RES_NOTFOUND || !$options['ignore_missing_items'])
+                ) {
+                    throw $this->getExceptionByResultCode($rsCode);
                 }
             }
 
@@ -190,8 +201,6 @@ class Memcached extends AbstractAdapter
      * Get multiple items.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
@@ -223,23 +232,10 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $namespaceSep = $baseOptions->getNamespaceSeparator();
-            $internalKeys = array();
-            foreach ($keys as $key) {
-                $internalKeys[] = $options['namespace'] . $namespaceSep . $key;
-            }
-
-            $fetch = $this->memcached->getMulti($internalKeys);
-            
-            if ($fetch===false) {
-                throw new Exception\ItemNotFoundException('Memcached::getMulti(<array>) failed');
-            }
-            
-            // remove namespace prefix
-            $prefixL = strlen($options['namespace'] . $namespaceSep);
-            $result  = array();
-            foreach ($fetch as $internalKey => &$value) {
-                $result[ substr($internalKey, $prefixL) ] = $value;
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+            $result = $this->memcached->getMulti($keys);
+            if ($result === false) {
+                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -252,8 +248,6 @@ class Memcached extends AbstractAdapter
      * Get metadata of an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *  - ignore_missing_items <boolean> optional
@@ -270,7 +264,41 @@ class Memcached extends AbstractAdapter
      */
     public function getMetadata($key, array $options = array())
     {
-        throw new Exception\UnsupportedMethodCallException(__FUNCTION__ . ' is not supported by the adapter');
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getReadable()) {
+            return false;
+        }
+
+        $this->normalizeOptions($options);
+        $this->normalizeKey($key);
+        $args = new ArrayObject(array(
+            'key'     => & $key,
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+            $result = $this->memcached->get($key);
+
+            if ($result === false) {
+                if (($rsCode = $this->memcached->getResultCode()) != 0
+                    && ($rsCode != MemcachedResource::RES_NOTFOUND || !$options['ignore_missing_items'])
+                ) {
+                    throw $this->getExceptionByResultCode($rsCode);
+                }
+            } else {
+                $result = array();
+            }
+
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     /* writing */
@@ -279,10 +307,10 @@ class Memcached extends AbstractAdapter
      * Store an item.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  string $key
      * @param  mixed $value
@@ -315,12 +343,11 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!$this->memcached->set($internalKey, $value, $options['ttl'])) {
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "Memcached::set('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $expiration = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->set($key, $value, $expiration)) {
+                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
             $result = true;
@@ -334,10 +361,10 @@ class Memcached extends AbstractAdapter
      * Store multiple items.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  array $keyValuePairs
      * @param  array $options
@@ -367,16 +394,11 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKeyValuePairs = array();
-            $prefix                = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-            foreach ($keyValuePairs as $key => &$value) {
-                $internalKey = $prefix . $key;
-                $internalKeyValuePairs[$internalKey] = &$value;
-            }
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
 
-            $errKeys = $this->memcached->setMulti($internalKeyValuePairs, $options['ttl']);
-            if ($errKeys==false) {
-                throw new Exception\RuntimeException("Memcached::setMulti(<array>, {$options['ttl']}) failed");
+            $expiration = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->setMulti($keyValuePairs, $expiration)) {
+                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
             $result = true;
@@ -390,10 +412,10 @@ class Memcached extends AbstractAdapter
      * Add an item.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  string $key
      * @param  mixed  $value
@@ -426,16 +448,11 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!$this->memcached->add($internalKey, $value, $options['ttl'])) {
-                if ($this->memcached->get($internalKey)!==false) {
-                    throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
-                }
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
 
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "Memcached::add('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
+            $expiration = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->add($key, $value, $expiration)) {
+                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
 
             $result = true;
@@ -449,10 +466,10 @@ class Memcached extends AbstractAdapter
      * Replace an item.
      *
      * Options:
+     *  - ttl <float> optional
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
-     *  - tags <array> optional
-     *    - An array of tags
      *
      * @param  string $key
      * @param  mixed  $value
@@ -485,21 +502,63 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!$this->memcached->get($internalKey)) {
-                throw new Exception\ItemNotFoundException(
-                    "Key '{$internalKey}' doesn't exist"
-                );
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $expiration = $this->expirationTime($options['ttl']);
+            if (!$this->memcached->replace($key, $value, $expiration)) {
+                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
             }
-            
-            $result = $this->memcached->replace($internalKey, $value, $options['ttl']);
-            
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
+    }
+
+    /**
+     * Check and set item
+     *
+     * @param  float  $token
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
+     * @return bool
+     */
+    public function checkAndSetItem($token, $key, $value, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
+            return false;
+        }
+
+        $this->normalizeOptions($options);
+        $this->normalizeKey($key);
+        $args = new ArrayObject(array(
+            'token'   => & $token,
+            'key'     => & $key,
+            'value'   => & $value,
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $expiration = $this->expirationTime($options['ttl']);
+            $result     = $this->memcached->cas($token, $key, $value, $expiration);
+
             if ($result === false) {
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception\RuntimeException(
-                    "Memcached::replace('{$internalKey}', <{$type}>, {$options['ttl']}) failed"
-                );
+                $rsCode = $this->memcached->getResultCode();
+                if ($rsCode !== 0 && $rsCode != MemcachedResource::RES_DATA_EXISTS) {
+                    throw $this->getExceptionByResultCode($rsCode);
+                }
             }
+
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
@@ -536,7 +595,6 @@ class Memcached extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
-            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -546,20 +604,87 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            
-            $result = $this->memcached->delete($internalKey);
-            
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+            $result = $this->memcached->delete($key);
+
             if ($result === false) {
-                if (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
+                if (($rsCode = $this->memcached->getResultCode()) != 0
+                    && ($rsCode != MemcachedResource::RES_NOTFOUND || !$options['ignore_missing_items'])
+                ) {
+                    throw $this->getExceptionByResultCode($rsCode);
                 }
             }
+
             $result = true;
-            
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
+        }
+    }
+
+    /**
+     * Remove items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers removeItems.pre(PreEvent)
+     * @triggers removeItems.post(PostEvent)
+     * @triggers removeItems.exception(ExceptionEvent)
+     */
+    public function removeItems(array $keys, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if (!$baseOptions->getWritable()) {
+            return false;
+        }
+
+        $this->normalizeOptions($options);
+        $args = new ArrayObject(array(
+            'keys'    => & $keys,
+            'options' => & $options,
+        ));
+
+        try {
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $rsCodes = array();
+            if (static::$extMemcachedMajorVersion >= 2) {
+                $rsCodes = $this->memcached->deleteMulti($keys);
+            } else {
+                foreach ($keys as $key) {
+                    $rs = $this->memcached->delete($key);
+                    if ($rs === false) {
+                        $rsCodes[$key] = $this->memcached->getResultCode();
+                    }
+                }
+            }
+
+            $missingKeys = null;
+            foreach ($rsCodes as $key => $rsCode) {
+                if ($rsCode !== true && $rsCode != 0) {
+                    if ($rsCode != MemcachedResource::RES_NOTFOUND) {
+                        throw $this->getExceptionByResultCode($rsCode);
+                    } elseif (!$options['ignore_missing_items']) {
+                        $missingKeys[] = $key;
+                    }
+                }
+            }
+            if ($missingKeys) {
+                throw new Exception\ItemNotFoundException(
+                    "Keys '" . implode("','", $missingKeys) . "' not found"
+                );
+            }
+
+            return true;
+        } catch (MemcachedException $e) {
+            throw new RuntimeException($e->getMessage(), 0, $e);
         }
     }
 
@@ -593,6 +718,7 @@ class Memcached extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
+            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -602,19 +728,23 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = $this->memcached->increment($internalKey, $value);
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $value    = (int)$value;
+            $newValue = $this->memcached->increment($key, $value);
+
             if ($newValue === false) {
-                if ($this->memcached->get($internalKey)!==false) {
-                    throw new Exception\RuntimeException("Memcached::increment('{$internalKey}', {$value}) failed");
-                } elseif (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$internalKey}' not found"
-                    );
+                if (($rsCode = $this->memcached->getResultCode()) != 0
+                    && ($rsCode != MemcachedResource::RES_NOTFOUND || !$options['ignore_missing_items'])
+                ) {
+                    throw $this->getExceptionByResultCode($rsCode);
                 }
-                
-                $this->addItem($key, $value, $options);
+
+                $expiration = $this->expirationTime($options['ttl']);
+                if (!$this->memcached->add($key, $value, $expiration)) {
+                    throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+                }
+
                 $newValue = $value;
             }
 
@@ -654,6 +784,7 @@ class Memcached extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
+            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -663,19 +794,23 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            $value       = (int)$value;
-            $newValue    = $this->memcached->decrement($internalKey, $value);
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            $value    = (int)$value;
+            $newValue = $this->memcached->decrement($key, $value);
+
             if ($newValue === false) {
-                if ($this->memcached->get($internalKey)!==false) {
-                    throw new Exception\RuntimeException("Memcached::decrement('{$internalKey}', {$value}) failed");
-                } elseif (!$options['ignore_missing_items']) {
-                    throw new Exception\ItemNotFoundException(
-                        "Key '{$internalKey}' not found"
-                    );
+                if (($rsCode = $this->memcached->getResultCode()) != 0
+                    && ($rsCode != MemcachedResource::RES_NOTFOUND || !$options['ignore_missing_items'])
+                ) {
+                    throw $this->getExceptionByResultCode($rsCode);
                 }
 
-                $this->addItem($key, -$value, $options);
+                $expiration = $this->expirationTime($options['ttl']);
+                if (!$this->memcached->add($key, -$value, $expiration)) {
+                    throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+                }
+
                 $newValue = -$value;
             }
 
@@ -686,6 +821,98 @@ class Memcached extends AbstractAdapter
     }
 
     /* non-blocking */
+
+    /**
+     * Get items that were marked to delay storage for purposes of removing blocking
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - select <array> optional
+     *    - An array of the information the returned item contains
+     *      (Default: array('key', 'value'))
+     *  - callback <callback> optional
+     *    - An result callback will be invoked for each item in the result set.
+     *    - The first argument will be the item array.
+     *    - The callback does not have to return anything.
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return bool
+     * @throws Exception
+     *
+     * @triggers getDelayed.pre(PreEvent)
+     * @triggers getDelayed.post(PostEvent)
+     * @triggers getDelayed.exception(ExceptionEvent)
+     */
+    public function getDelayed(array $keys, array $options = array())
+    {
+        $baseOptions = $this->getOptions();
+        if ($this->stmtActive) {
+            throw new Exception\RuntimeException('Statement already in use');
+        } elseif (!$baseOptions->getReadable()) {
+            return false;
+        } elseif (!$keys) {
+            return true;
+        }
+
+        $this->normalizeOptions($options);
+        if (isset($options['callback']) && !is_callable($options['callback'], false)) {
+            throw new Exception\InvalidArgumentException('Invalid callback');
+        }
+        if (!isset($options['select'])) {
+            $options['select'] = array('key', 'value');
+        }
+
+        $args = new ArrayObject(array(
+            'keys'    => & $keys,
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
+
+            // redirect callback
+            if (isset($options['callback'])) {
+                $cb = function (MemcachedResource $memc, array &$item) use (&$options, $baseOptions) {
+                    $select = & $options['select'];
+
+                    // handle selected key
+                    if (!in_array('key', $select)) {
+                        unset($item['key']);
+                    }
+
+                    // handle selected value
+                    if (!in_array('value', $select)) {
+                        unset($item['value']);
+                    }
+
+                    call_user_func($options['callback'], $item);
+                };
+
+                if (!$this->memcached->getDelayed($keys, false, $cb)) {
+                    throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+                }
+            } else {
+                if (!$this->memcached->getDelayed($keys)) {
+                    throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+                }
+
+                $this->stmtActive  = true;
+                $this->stmtOptions = &$options;
+            }
+
+            $result = true;
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
+    }
 
     /**
      * Fetches the next item from result set
@@ -711,24 +938,25 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
+            $result = $this->memcached->fetch();
+            if (!empty($result)) {
+                $select = & $this->stmtOptions['select'];
 
-            if (!$this->stmtIterator) {
-                // clear stmt
-                $this->stmtActive   = false;
-                $this->stmtIterator = null;
-                $this->stmtOptions  = null;
-
-                $result = false;
-            } else {
-                $result = $this->memcached->fetch();
-                if (!empty($result)) {
-                    $select = $this->stmtOptions['select'];
-                    if (in_array('key', $select)) {
-                        $result['key'] = substr($result['key'], $prefixL);
-                    }
+                // handle selected key
+                if (!in_array('key', $select)) {
+                    unset($result['key']);
                 }
-            } 
+
+                // handle selected value
+                if (!in_array('value', $select)) {
+                    unset($result['value']);
+                }
+
+            } else {
+                // clear stmt
+                $this->stmtActive  = false;
+                $this->stmtOptions = null;
+            }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
@@ -738,44 +966,35 @@ class Memcached extends AbstractAdapter
 
     /**
      * FetchAll
-     * 
+     *
      * @throws Exception
-     * @return array 
+     * @return array
      */
     public function fetchAll()
     {
-        $prefixL = strlen($this->stmtOptions['namespace'] . $this->getOptions()->getNamespaceSeparator());
-         
         $result = $this->memcached->fetchAll();
-         
         if ($result === false) {
             throw new Exception\RuntimeException("Memcached::fetchAll() failed");
         }
-        
+
         $select = $this->stmtOptions['select'];
-        
+
         foreach ($result as &$elem) {
-            if (in_array('key', $select)) {
-                $elem['key'] = substr($elem['key'], $prefixL);
-            } else {
+            if (!in_array('key', $select)) {
                 unset($elem['key']);
             }
         }
-        
+
         return $result;
     }
-     
+
     /* cleaning */
 
     /**
      * Clear items off all namespaces.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
-     *  - tags <array> optional
-     *    - Tags to search for used with matching modes of
-     *      Zend\Cache\Storage\Adapter::MATCH_TAGS_*
+     *  - No options available for this adapter
      *
      * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
      * @param  array $options
@@ -806,8 +1025,11 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $result = $this->memcached->flush();
-            
+            if (!$this->memcached->flush()) {
+                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+            }
+
+            $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -857,8 +1079,8 @@ class Memcached extends AbstractAdapter
                         'ttlPrecision'       => 1,
                         'useRequestTime'     => false,
                         'expiredRead'        => false,
+                        'maxKeyLength'       => 255,
                         'namespaceIsPrefix'  => true,
-                        'namespaceSeparator' => $this->getOptions()->getNamespaceSeparator(),
                         'iterable'           => false,
                         'clearAllNamespaces' => true,
                         'clearByNamespace'   => false,
@@ -872,71 +1094,6 @@ class Memcached extends AbstractAdapter
         }
     }
 
-    /**
-     * Get items that were marked to delay storage for purposes of removing blocking
-     *
-     * @param  array $keys
-     * @param  array $options
-     * @return bool
-     * @throws Exception
-     *
-     * @triggers getDelayed.pre(PreEvent)
-     * @triggers getDelayed.post(PostEvent)
-     * @triggers getDelayed.exception(ExceptionEvent)
-     */
-    public function getDelayed(array $keys, array $options = array())
-    {
-        $baseOptions = $this->getOptions();
-        if ($this->stmtActive) {
-            throw new Exception\RuntimeException('Statement already in use');
-        } elseif (!$baseOptions->getReadable()) {
-            return false;
-        } elseif (!$keys) {
-            return true;
-        }
-
-        $this->normalizeOptions($options);
-        if (isset($options['callback']) && !is_callable($options['callback'], false)) {
-            throw new Exception\InvalidArgumentException('Invalid callback');
-        }
-
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $prefix = $options['namespace'] . $baseOptions->getNamespaceSeparator();
-
-            $search = array();
-            foreach ($keys as $key) {
-                $search[] = $prefix.$key;
-            }
-
-            $this->stmtIterator = $this->memcached->getDelayed($search);
-                    
-            $this->stmtActive   = true;
-            $this->stmtOptions  = &$options;
-
-            if (isset($options['callback'])) {
-                $callback = $options['callback'];
-                while (($item = $this->fetch()) !== false) {
-                    call_user_func($callback, $item);
-                }
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
-    }
-    
     /**
      * Get storage capacity.
      *
@@ -959,7 +1116,12 @@ class Memcached extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $mem    = array_pop($this->memcached->getStats());
+            $stats = $this->memcached->getStats();
+            if ($stats === false) {
+                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+            }
+
+            $mem    = array_pop($stats);
             $result = array(
                 'free'  => $mem['limit_maxbytes'] - $mem['bytes'],
                 'total' => $mem['limit_maxbytes'],
@@ -971,5 +1133,51 @@ class Memcached extends AbstractAdapter
     }
 
     /* internal */
-    
+
+    /**
+     * Get expiration time by ttl
+     *
+     * Some storage commands involve sending an expiration value (relative to
+     * an item or to an operation requested by the client) to the server. In
+     * all such cases, the actual value sent may either be Unix time (number of
+     * seconds since January 1, 1970, as an integer), or a number of seconds
+     * starting from current time. In the latter case, this number of seconds
+     * may not exceed 60*60*24*30 (number of seconds in 30 days); if the
+     * expiration value is larger than that, the server will consider it to be
+     * real Unix time value rather than an offset from current time.
+     *
+     * @param int $ttl
+     * @return int
+     */
+    protected function expirationTime($ttl)
+    {
+        if ($ttl > 2592000) {
+            return time() + $ttl;
+        }
+        return $ttl;
+    }
+
+    /**
+     * Generate exception based of memcached result code
+     *
+     * @param int $code
+     * @return Exception\RuntimeException|Exception\ItemNotFoundException
+     * @throws Exception\InvalidArgumentException On success code
+     */
+    protected function getExceptionByResultCode($code)
+    {
+        switch ($code) {
+            case MemcachedResource::RES_SUCCESS:
+                throw new Exception\InvalidArgumentException(
+                    "The result code '{$code}' (SUCCESS) isn't an error"
+                );
+
+            case MemcachedResource::RES_NOTFOUND:
+            case MemcachedResource::RES_NOTSTORED:
+                return new Exception\ItemNotFoundException($this->memcached->getResultMessage());
+
+            default:
+                return new Exception\RuntimeException($this->memcached->getResultMessage());
+        }
+    }
 }

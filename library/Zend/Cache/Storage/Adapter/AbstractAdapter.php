@@ -101,6 +101,20 @@ abstract class AbstractAdapter implements Adapter
     protected $stmtOptions = null;
 
     /**
+     * Constructor
+     *
+     * @param  null|array|Traversable|AdapterOptions $options
+     * @throws Exception
+     * @return void
+     */
+    public function __construct($options = null)
+    {
+        if ($options) {
+            $this->setOptions($options);
+        }
+    }
+
+    /**
      * Destructor
      *
      * detach all registered plugins to free
@@ -331,13 +345,8 @@ abstract class AbstractAdapter implements Adapter
         $registry = $this->getPluginRegistry();
         if ($registry->contains($plugin)) {
             $plugin->detach($this->events());
-        } else {
-            throw new Exception\LogicException(sprintf(
-                'Plugin of type "%s" already removed',
-                get_class($plugin)
-            ));
+            $registry->detach($plugin);
         }
-        $registry->detach($plugin);
         return $this;
     }
 
@@ -557,10 +566,10 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Check and set item
      *
-     * @param  string $token
-     * @param  string|int $key
-     * @param  mixed $value
-     * @param  array $options
+     * @param  mixed  $token
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  array  $options
      * @return bool
      */
     public function checkAndSetItem($token, $key, $value, array $options = array())
@@ -739,6 +748,19 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Get delayed
      *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-live (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - select <array> optional
+     *    - An array of the information the returned item contains
+     *      (Default: array('key', 'value'))
+     *  - callback <callback> optional
+     *    - An result callback will be invoked for each item in the result set.
+     *    - The first argument will be the item array.
+     *    - The callback does not have to return anything.
+     *
      * @param  array $keys
      * @param  array $options
      * @return bool
@@ -758,7 +780,6 @@ abstract class AbstractAdapter implements Adapter
         }
 
         $this->normalizeOptions($options);
-
         if (!isset($options['select'])) {
             $options['select'] = array('key', 'value');
         }

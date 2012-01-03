@@ -118,7 +118,7 @@ class Message
     {
         if (null === $this->headers) {
             $this->setHeaders(new Headers());
-            $this->headers->addHeaderLine('Orig-Date', date('r'));
+            $this->headers->addHeaderLine('Date', date('r'));
         }
         return $this->headers;
     }

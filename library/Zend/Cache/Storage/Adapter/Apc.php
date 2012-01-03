@@ -64,11 +64,11 @@ class Apc extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array $options Option
+     * @param  null|array|Traversable|ApcOptions $options
      * @throws Exception
      * @return void
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         if (version_compare('3.1.6', phpversion('apc')) > 0) {
             throw new Exception\ExtensionNotLoadedException("Missing ext/apc >= 3.1.6");
@@ -103,6 +103,8 @@ class Apc extends AbstractAdapter
                 'internal_key' => \APC_ITER_KEY,
             );
         }
+
+        parent::__construct($options);
     }
 
     /* options */
@@ -116,8 +118,8 @@ class Apc extends AbstractAdapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
+        if (!is_array($options)
+            && !$options instanceof Traversable
             && !$options instanceof ApcOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(

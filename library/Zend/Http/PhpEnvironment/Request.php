@@ -308,9 +308,9 @@ class Request extends HttpRequest
         }
 
         // Directory portion of base path matches.
-        if (0 === strpos($requestUri, dirname($baseUrl))) {
-            $baseUrl = dirname($baseUrl);
-            return $baseUrl;
+        $baseDir = str_replace('\\','/', dirname($baseUrl));
+        if (0 === strpos($requestUri, $baseDir)) {
+            return $baseDir;
         }
 
         $truncatedRequestUri = $requestUri;

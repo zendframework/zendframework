@@ -74,7 +74,7 @@ class SendmailTest extends TestCase
                 ->addBcc('zf-crteam@lists.zend.com', 'CR-Team, ZF Project')
                 ->addFrom(array(
                     'zf-devteam@zend.com',
-                    'Matthew' => 'matthew@zend.com',
+                    'matthew@zend.com' => 'Matthew',
                 ))
                 ->setSender('ralph.schindler@zend.com', 'Ralph Schindler')
                 ->setSubject('Testing Zend\Mail\Transport\Sendmail')

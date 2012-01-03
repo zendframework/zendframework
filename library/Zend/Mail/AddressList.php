@@ -84,7 +84,7 @@ class AddressList implements Countable, Iterator
             if (is_int($key) || is_numeric($key)) {
                 $this->add($value);
             } elseif (is_string($key)) {
-                $this->add($value, $key);
+                $this->add($key, $value);
             } else {
                 throw new Exception\RuntimeException(sprintf(
                     'Invalid key type in provided addresses array ("%s")',

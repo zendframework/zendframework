@@ -72,7 +72,7 @@ class Filesystem extends AbstractAdapter
      * Set options.
      *
      * @param  array|Traversable|FilesystemOptions $options
-     * @return FilesystemAdapter
+     * @return Filesystem
      * @see    getOptions()
      */
     public function setOptions($options)
@@ -639,10 +639,10 @@ class Filesystem extends AbstractAdapter
     /**
      * check and set item
      *
-     * @param $token
-     * @param $key
-     * @param $value
-     * @param array $options
+     * @param string $token
+     * @param string $key
+     * @param mixed  $value
+     * @param array  $options
      * @return bool|mixed
      * @throws ItemNotFoundException
      */

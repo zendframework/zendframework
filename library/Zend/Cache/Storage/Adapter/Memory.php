@@ -1398,8 +1398,6 @@ class Memory extends AbstractAdapter
             'free'  => ($free >= 0) ? $free : 0,
         );
 
-        $result = Utils::getPhpMemoryCapacity();
-
         return $this->triggerPost(__FUNCTION__, $args, $result);
     }
 

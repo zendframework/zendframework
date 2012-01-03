@@ -23,6 +23,7 @@ namespace Zend\Cache\Storage\Adapter;
 
 use ArrayObject,
     Memcached as MemcachedResource,
+    MemcachedException,
     stdClass,
     Traversable,
     Zend\Cache\Exception,
@@ -307,7 +308,7 @@ class Memcached extends AbstractAdapter
      *
      * Options:
      *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
@@ -361,7 +362,7 @@ class Memcached extends AbstractAdapter
      *
      * Options:
      *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
@@ -412,7 +413,7 @@ class Memcached extends AbstractAdapter
      *
      * Options:
      *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
@@ -466,7 +467,7 @@ class Memcached extends AbstractAdapter
      *
      * Options:
      *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *
@@ -682,7 +683,7 @@ class Memcached extends AbstractAdapter
             }
 
             return true;
-        } catch (\MemcachedException $e) {
+        } catch (MemcachedException $e) {
             throw new RuntimeException($e->getMessage(), 0, $e);
         }
     }
@@ -1166,13 +1167,13 @@ class Memcached extends AbstractAdapter
     protected function getExceptionByResultCode($code)
     {
         switch ($code) {
-            case \Memcached::RES_SUCCESS:
+            case MemcachedResource::RES_SUCCESS:
                 throw new Exception\InvalidArgumentException(
                     "The result code '{$code}' (SUCCESS) isn't an error"
                 );
 
-            case \Memcached::RES_NOTFOUND:
-            case \Memcached::RES_NOTSTORED:
+            case MemcachedResource::RES_NOTFOUND:
+            case MemcachedResource::RES_NOTSTORED:
                 return new Exception\ItemNotFoundException($this->memcached->getResultMessage());
 
             default:

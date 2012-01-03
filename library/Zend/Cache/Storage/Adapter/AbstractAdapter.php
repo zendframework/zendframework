@@ -750,7 +750,7 @@ abstract class AbstractAdapter implements Adapter
      *
      * Options:
      *  - ttl <float> optional
-     *    - The time-to-life (Default: ttl of object)
+     *    - The time-to-live (Default: ttl of object)
      *  - namespace <string> optional
      *    - The namespace to use (Default: namespace of object)
      *  - select <array> optional

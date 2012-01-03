@@ -237,13 +237,13 @@ class Serializer extends AbstractPlugin
         $params   = $event->getParams();
         $token    = null;
         $oldValue = $cache->getItem(
-            $params['key'], 
+            $params['key'],
             array('token' => &$token) + $params['options']
         );
         return $cache->checkAndSetItem(
-            $token, 
-            $oldValue + $params['value'], 
-            $params['key'], 
+            $token,
+            $oldValue + $params['value'],
+            $params['key'],
             $params['options']
         );
     }
@@ -285,13 +285,13 @@ class Serializer extends AbstractPlugin
         $params   = $event->getParams();
         $token    = null;
         $oldValue = $cache->getItem(
-            $params['key'], 
+            $params['key'],
             array('token' => &$token) + $params['options']
         );
         return $cache->checkAndSetItem(
-            $token, 
-            $oldValue - $params['value'], 
-            $params['key'], 
+            $token,
+            $oldValue - $params['value'],
+            $params['key'],
             $params['options']
         );
     }

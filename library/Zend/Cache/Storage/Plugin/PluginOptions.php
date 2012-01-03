@@ -58,6 +58,13 @@ class PluginOptions extends Options
 
     /**
      * Used by:
+     * - IgnoreUserAbort
+     * @var boolean
+     */
+    protected $exitOnAbort = true;
+
+    /**
+     * Used by:
      * - OptimizeByFactor
      * @var int
      */
@@ -169,6 +176,28 @@ class PluginOptions extends Options
     public function getExceptionCallback()
     {
         return $this->exceptionCallback;
+    }
+
+    /**
+     * Exit if connection aborted and ignore_user_abort is disabled.
+     *
+     * @param boolean $exitOnAbort
+     * @return PluginOptions
+     */
+    public function setExitOnAbort($exitOnAbort)
+    {
+        $this->exitOnAbort = (bool) $exitOnAbort;
+        return $this;
+    }
+
+    /**
+     * Exit if connection aborted and ignore_user_abort is disabled.
+     *
+     * @return boolean
+     */
+    public function getExitOnAbort()
+    {
+        return $this->exitOnAbort;
     }
 
     /**

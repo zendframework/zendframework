@@ -134,12 +134,12 @@ class SmtpOptions extends Options
     /**
      * Set connection configuration array
      * 
-     * @param  array $config 
+     * @param  array $connectionConfig 
      * @return SmtpOptions
      */
-    public function setConnectionConfig(array $config)
+    public function setConnectionConfig(array $connectionConfig)
     {
-        $this->connectionConfig = $config;
+        $this->connectionConfig = $connectionConfig;
         return $this;
     }
 

@@ -1766,8 +1766,6 @@ class Filesystem extends AbstractAdapter
         // if file locking disabled -> file_get_contents can be used
         } else {
             set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-                flock($fp, \LOCK_UN);
-                fclose($fp);
                 $message = sprintf('Error getting file contents for file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
                 throw new Exception\RuntimeException($message, $errno);
             }, E_WARNING);

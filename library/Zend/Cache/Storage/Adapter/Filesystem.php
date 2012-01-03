@@ -75,13 +75,13 @@ class Filesystem extends AbstractAdapter
      * Set options.
      *
      * @param  array|Traversable|FilesystemOptions $options
-     * @return FilesystemAdapter
+     * @return Filesystem
      * @see    getOptions()
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
+        if (!is_array($options)
+            && !$options instanceof Traversable
             && !$options instanceof FilesystemOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -648,10 +648,10 @@ class Filesystem extends AbstractAdapter
     /**
      * check and set item
      *
-     * @param $token
-     * @param $key
-     * @param $value
-     * @param array $options
+     * @param string $token
+     * @param string $key
+     * @param mixed  $value
+     * @param array  $options
      * @return bool|mixed
      * @throws ItemNotFoundException
      */
@@ -1320,7 +1320,7 @@ class Filesystem extends AbstractAdapter
      * @return array|bool
      * @throws ItemNotFoundException
      */
-    protected function internalGetMetadata($key, array &$options) 
+    protected function internalGetMetadata($key, array &$options)
     {
         $keyInfo = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
@@ -1537,7 +1537,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
                 if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
-                    if (!isset($info['tags']) 
+                    if (!isset($info['tags'])
                         || count(array_diff($opts['tags'], $info['tags'])) > 0
                     ) {
                         continue;
@@ -1545,7 +1545,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
                 } elseif(($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS) {
-                    if (isset($info['tags']) 
+                    if (isset($info['tags'])
                         && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])
                     ) {
                         continue;
@@ -1553,7 +1553,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
                 } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
-                    if (!isset($info['tags']) 
+                    if (!isset($info['tags'])
                         || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])
                     ) {
                         continue;
@@ -1686,7 +1686,7 @@ class Filesystem extends AbstractAdapter
      * @return array|boolean The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
-    protected function readInfoFile($file) 
+    protected function readInfoFile($file)
     {
         if (!file_exists($file)) {
             return false;
@@ -1718,10 +1718,10 @@ class Filesystem extends AbstractAdapter
         if ($this->getOptions()->getFileLocking()) {
             set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
                 $message = sprintf(
-                    'Error getting contents from file "%s" (in %s@%d): %s', 
-                    $file, 
-                    $errfile, 
-                    $errline, 
+                    'Error getting contents from file "%s" (in %s@%d): %s',
+                    $file,
+                    $errfile,
+                    $errline,
                     $errstr
                 );
                 throw new Exception\RuntimeException($message, $errno);
@@ -1730,17 +1730,17 @@ class Filesystem extends AbstractAdapter
             restore_error_handler();
             if ($fp === false) {
                 throw new Exception\RuntimeException(sprintf(
-                    'Unknown error getting contents from file "%s"', 
+                    'Unknown error getting contents from file "%s"',
                     $file
                 ));
             }
 
             set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
                 $message = sprintf(
-                    'Error locking file "%s" (in %s@%d): %s', 
-                    $file, 
-                    $errfile, 
-                    $errline, 
+                    'Error locking file "%s" (in %s@%d): %s',
+                    $file,
+                    $errfile,
+                    $errline,
                     $errstr
                 );
                 throw new Exception\RuntimeException($message, $errno);
@@ -1859,7 +1859,7 @@ class Filesystem extends AbstractAdapter
      * @return void
      * @throw RuntimeException
      */
-    protected function unlink($file) 
+    protected function unlink($file)
     {
         // If file does not exist, nothing to do
         if (!file_exists($file)) {

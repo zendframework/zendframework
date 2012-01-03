@@ -25,6 +25,7 @@ use ArrayObject,
     stdClass,
     Zend\Cache\Exception,
     Zend\Cache\Storage\Capabilities,
+    Zend\Cache\Storage\Adapter\MemoryOptions,
     Zend\Cache\Utils;
 
 /**
@@ -53,6 +54,49 @@ class Memory extends AbstractAdapter
      * @var array
      */
     protected $data = array();
+
+    /**
+     * Set options.
+     *
+     * @param  array|Traversable|MemoryOptions $options
+     * @return Memory
+     * @see    getOptions()
+     */
+    public function setOptions($options)
+    {
+        if (!is_array($options)
+            && !$options instanceof Traversable
+            && !$options instanceof MemoryOptions
+        ) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array, a Traversable object, or an MemoryOptions instance; '
+                . 'received "%s"',
+                __METHOD__,
+                (is_object($options) ? get_class($options) : gettype($options))
+            ));
+        }
+
+        if (!$options instanceof MemoryOptions) {
+            $options = new MemoryOptions($options);
+        }
+
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
+     * Get options.
+     *
+     * @return MemoryOptions
+     * @see setOptions()
+     */
+    public function getOptions()
+    {
+        if (!$this->options) {
+            $this->setOptions(new MemoryOptions());
+        }
+        return $this->options;
+    }
 
     /* reading */
 
@@ -332,6 +376,13 @@ class Memory extends AbstractAdapter
                 return $eventRs->last();
             }
 
+            if (!$this->hasFreeCapacity()) {
+                $memoryLimit = $baseOptions->getMemoryLimit();
+                throw new Exception\OutOfCapacityException(
+                    'Memory usage exceeds limit ({$memoryLimit}).'
+                );
+            }
+
             $ns = $options['namespace'];
             $this->data[$ns][$key] = array($value, microtime(true), $options['tags']);
 
@@ -377,6 +428,13 @@ class Memory extends AbstractAdapter
             $eventRs = $this->triggerPre(__FUNCTION__, $args);
             if ($eventRs->stopped()) {
                 return $eventRs->last();
+            }
+
+            if (!$this->hasFreeCapacity()) {
+                $memoryLimit = $baseOptions->getMemoryLimit();
+                throw new Exception\OutOfCapacityException(
+                    'Memory usage exceeds limit ({$memoryLimit}).'
+                );
             }
 
             $ns = $options['namespace'];
@@ -436,6 +494,13 @@ class Memory extends AbstractAdapter
                 return $eventRs->last();
             }
 
+            if (!$this->hasFreeCapacity()) {
+                $memoryLimit = $baseOptions->getMemoryLimit();
+                throw new Exception\OutOfCapacityException(
+                    'Memory usage exceeds limit ({$memoryLimit}).'
+                );
+            }
+
             $ns = $options['namespace'];
             if (isset($this->data[$ns][$key])) {
                 throw new Exception\RuntimeException("Key '{$key}' already exists within namespace '$ns'");
@@ -484,6 +549,13 @@ class Memory extends AbstractAdapter
             $eventRs = $this->triggerPre(__FUNCTION__, $args);
             if ($eventRs->stopped()) {
                 return $eventRs->last();
+            }
+
+            if (!$this->hasFreeCapacity()) {
+                $memoryLimit = $baseOptions->getMemoryLimit();
+                throw new Exception\OutOfCapacityException(
+                    'Memory usage exceeds limit ({$memoryLimit}).'
+                );
             }
 
             $ns = $options['namespace'];
@@ -1276,7 +1348,7 @@ class Memory extends AbstractAdapter
                         'resource' => true,
                     ),
                     'supportedMetadata' => array(
-                        'mtime', 
+                        'mtime',
                         'tags',
                     ),
                     'maxTtl'             => PHP_INT_MAX,
@@ -1319,12 +1391,33 @@ class Memory extends AbstractAdapter
             return $eventRs->last();
         }
 
-        $result = Utils::getPhpMemoryCapacity();
+        $total = $this->getOptions()->getMemoryLimit();
+        $free  = $total - (float) memory_get_usage(true);
+        $result = array(
+            'total' => $total,
+            'free'  => ($free >= 0) ? $free : 0,
+        );
 
         return $this->triggerPost(__FUNCTION__, $args, $result);
     }
 
     /* internal */
+
+    /**
+     * Has the memory adapter storage free capacity
+     * to store items
+     *
+     * Similar logic as getCapacity() but without triggering
+     * events and returns boolean.
+     *
+     * @return boolean
+     */
+    protected function hasFreeCapacity()
+    {
+        $total = $this->getOptions()->getMemoryLimit();
+        $free  = $total - (float) memory_get_usage(true);
+        return ($free > 0);
+    }
 
     /**
      * Internal method to check if an key exists

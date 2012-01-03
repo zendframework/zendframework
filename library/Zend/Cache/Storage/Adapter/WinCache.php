@@ -46,16 +46,16 @@ class WinCache extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array $options Option
+     * @param  array|Traversable|WinCacheOptions $options
      * @throws Exception
      * @return void
      */
-    public function __construct()
+    public function __construct($options = null)
     {
         if (!extension_loaded('wincache')) {
             throw new Exception\ExtensionNotLoadedException("WinCache extension is not loaded");
         }
-        
+
         $enabled = ini_get('wincache.ucenabled');
         if (PHP_SAPI == 'cli') {
             $enabled = $enabled && (bool) ini_get('wincache.enablecli');
@@ -66,6 +66,8 @@ class WinCache extends AbstractAdapter
                 "WinCache is disabled - see 'wincache.ucenabled' and 'wincache.enablecli'"
             );
         }
+
+        parent::__construct($options);
     }
 
     /* options */
@@ -73,15 +75,15 @@ class WinCache extends AbstractAdapter
     /**
      * Set options.
      *
-     * @param  stringTraversable|WinCacheOptions $options
+     * @param  array|Traversable|WinCacheOptions $options
      * @return WinCache
      * @see    getOptions()
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
-            && !$options instanceof WinCacheOptions    
+        if (!is_array($options)
+            && !$options instanceof Traversable
+            && !$options instanceof WinCacheOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array, a Traversable object; '
@@ -107,7 +109,6 @@ class WinCache extends AbstractAdapter
         }
         return $this->options;
     }
-
 
     /* reading */
 
@@ -322,15 +323,15 @@ class WinCache extends AbstractAdapter
             foreach ($keys as $key) {
                 $internalKeys[] = $options['namespace'] . $namespaceSep . $key;
             }
-            
+
             $prefixL = strlen($options['namespace'] . $namespaceSep);
             $result  = array();
             foreach ($internalKeys as $key) {
                 if (wincache_ucache_exists($key)) {
                     $result[] = substr($key, $prefixL);
-                }    
+                }
             }
-            
+
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -382,7 +383,7 @@ class WinCache extends AbstractAdapter
             $info     = wincache_ucache_info(true, $internalKey);
             if (isset($info['ucache_entries'][1])) {
                 $metadata = $info['ucache_entries'][1];
-            }    
+            }
 
             if (empty($metadata)) {
                 if (!$options['ignore_missing_items']) {
@@ -429,9 +430,9 @@ class WinCache extends AbstractAdapter
             if ($eventRs->stopped()) {
                 return $eventRs->last();
             }
-            
+
             $result= array();
-            
+
             foreach ($keys as $key) {
                 $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
@@ -448,7 +449,7 @@ class WinCache extends AbstractAdapter
                     $result[ substr($internalKey, $prefixL) ] = & $metadata;
                 }
             }
-            
+
             if (!$options['ignore_missing_items']) {
                 if (count($keys) != count($result)) {
                     $missing = implode("', '", array_diff($keys, array_keys($result)));
@@ -860,7 +861,7 @@ class WinCache extends AbstractAdapter
                         "Key '{$internalKey}' not found"
                     );
                 }
-                
+
                 $this->addItem($key, $value, $options);
                 $newValue = $value;
             }
@@ -977,7 +978,7 @@ class WinCache extends AbstractAdapter
             }
 
             $result= wincache_ucache_clear();
-            
+
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
@@ -1093,17 +1094,17 @@ class WinCache extends AbstractAdapter
             $metadata['num_hits'] = $metadata['hitcount'];
             unset($metadata['hitcount']);
         }
-        
+
         if (isset($metadata['ttl_seconds'])) {
             $metadata['ttl'] = $metadata['ttl_seconds'];
             unset($metadata['ttl_seconds']);
         }
-        
+
          if (isset($metadata['value_size'])) {
             $metadata['mem_size'] = $metadata['value_size'];
             unset($metadata['value_size']);
         }
-        
+
         // remove namespace prefix
         if (isset($metadata['key_name'])) {
             $pos = strpos($metadata['key_name'], $this->getOptions()->getNamespaceSeparator());

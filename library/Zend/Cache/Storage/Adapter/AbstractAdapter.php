@@ -353,11 +353,11 @@ abstract class AbstractAdapter implements Adapter
     /**
      * Get all registered plugins
      *
-     * @return Plugin[]
+     * @return SplObjectStorage
      */
     public function getPlugins()
     {
-        return iterator_to_array($this->getPluginRegistry(), false);
+        return $this->getPluginRegistry();
     }
 
     /* reading */

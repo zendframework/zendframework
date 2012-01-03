@@ -468,7 +468,7 @@ class Response extends Message implements ResponseDescription
      */
     public function toString()
     {
-        $str = $this->renderStatusLine() . PHP_EOL;
+        $str  = $this->renderStatusLine() . "\r\n";
         $str .= $this->headers()->toString();
         $str .= "\r\n";
         $str .= $this->getBody();

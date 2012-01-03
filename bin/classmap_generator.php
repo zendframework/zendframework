@@ -95,8 +95,17 @@ if (isset($opts->l)) {
         // If both library path and classmap path are absolute, we have to make
         // it relative to the classmap file.
         $libraryPathCompare  = rtrim(str_replace('\\', '/', realpath($libraryPath)), '/');
-        $classmapPathCompare = rtrim(str_replace('\\', '/', realpath($opts->o)), '/');
-        
+
+        if (file_exists($opts->o) ) {
+            $classmapPathCompare = rtrim(str_replace('\\', '/', realpath($opts->o)), '/');
+        } else {
+            // realpath() won't work for unexisting files
+            $newFilePath = explode('/', str_replace('\\', '/', $opts->o));
+            // stip filename
+            array_pop($newFilePath);
+            $classmapPathCompare = rtrim(realpath(implode('/', $newFilePath)), '/');
+        }
+
         if (is_file($libraryPathCompare)) {
             $libraryPathCompare = str_replace('\\', '/', dirname($libraryPathCompare));
         }

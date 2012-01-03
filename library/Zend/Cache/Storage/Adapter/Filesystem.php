@@ -1807,10 +1807,14 @@ class Filesystem extends AbstractAdapter
                 throw new Exception\RuntimeException(sprintf('Unknown error opening file "%s"', $file));
             }
 
-            if(!flock($fp, \LOCK_EX | \LOCK_NB)) {
-                // file is locked by another process -> abort writing
+            if(!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
                 fclose($fp);
-                return false;
+
+                if ($wouldblock) {
+                    throw new Exception\LockedException("File '{$file}' locked");
+                } else {
+                    throw new Exception\RuntimeException("Can't lock file '{$file}'");
+                }
             }
 
             if (!fwrite($fp, $data)) {

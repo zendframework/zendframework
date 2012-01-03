@@ -279,7 +279,7 @@ class FilesystemTest extends CommonAdapterTest
         $file = $meta['filespec'] . '.dat';
 
         /******************
-         * first test failed on a locked item
+         * first test with exclusive lock
          */
 
         // open file and create a lock
@@ -288,11 +288,47 @@ class FilesystemTest extends CommonAdapterTest
         flock($fp, LOCK_EX);
 
         // rewriting file should fail in part of open lock
-        $this->assertFalse($this->_storage->setItem('key', 'lock'));
+        try {
+            $this->_storage->setItem('key', 'lock');
 
-        // close the lock
-        flock($fp, LOCK_UN);
-        fclose($fp);
+            // close
+            flock($fp, LOCK_UN);
+            fclose($fp);
+
+            $this->fail('Missing expected exception Zend\Cache\Exception\LockedException');
+        } catch (\Zend\Cache\Exception\LockedException $e) {
+            // expected exception was thrown
+
+            // close
+            flock($fp, LOCK_UN);
+            fclose($fp);
+        }
+
+        /******************
+         * second test with shared lock
+         */
+
+        // open file and create a lock
+        $fp = @fopen($file, 'rb');
+        $this->assertInternalType('resource', $fp);
+        flock($fp, LOCK_SH);
+
+        // rewriting file should fail in part of open lock
+        try {
+            $this->_storage->setItem('key', 'lock');
+
+            // close
+            flock($fp, LOCK_UN);
+            fclose($fp);
+
+            $this->fail('Missing expected exception Zend\Cache\Exception\LockedException');
+        } catch (\Zend\Cache\Exception\LockedException $e) {
+            // expected exception was thrown
+
+            // close
+            flock($fp, LOCK_UN);
+            fclose($fp);
+        }
     }
 
     public function testGetMetadataWithCtime()

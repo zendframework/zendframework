@@ -75,7 +75,7 @@ class FilesystemOptions extends AdapterOptions
      * Block writing files until writing by another process finished.
      *
      * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations return false in part of a locked file
+     * NOTE: if disabled writing operations can throw a LockedException
      * NOTE: This option can't be disabled on windows
      *
      * @var boolean
@@ -320,7 +320,7 @@ class FilesystemOptions extends AdapterOptions
      * Set block writing files until writing by another process finished.
      *
      * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations return false in part of a locked file
+     * NOTE: if disabled writing operations can throw a LockedException
      * NOTE: This option can't be disabled on windows
      *
      * @param  bool $flag
@@ -343,7 +343,7 @@ class FilesystemOptions extends AdapterOptions
      * Get block writing files until writing by another process finished.
      *
      * NOTE: this only attempts if fileLocking is enabled
-     * NOTE: if disabled writing operations return false in part of a locked file
+     * NOTE: if disabled writing operations can throw a LockedException
      * NOTE: This option can't be disabled on windows
      *
      * @return bool

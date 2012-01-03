@@ -245,35 +245,36 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->_storage->getItem('key'));
     }
 
+    public function testGetItemsReturnsEmptyArrayIfNonReadable()
+    {
+        $this->_options->setReadable(false);
+
+        $this->assertTrue($this->_storage->setItem('key', 'value'));
+        $this->assertEquals(array(), $this->_storage->getItems(array('key')));
+    }
+
     public function testGetMetadata()
     {
         $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getSupportedMetadata()) {
-            $this->markTestSkipped("Metadata are not supported by the adapter");
-        }
-        
+        $supportedMetadatas = $capabilities->getSupportedMetadata();
+
         $this->assertTrue($this->_storage->setItem('key', 'value'));
-        $this->assertInternalType('array', $this->_storage->getMetadata('key'));
+        $metadata = $this->_storage->getMetadata('key');
+
+        $this->assertInternalType('array', $metadata);
+        foreach ($supportedMetadatas as $supportedMetadata) {
+            $this->assertArrayHasKey($supportedMetadata, $metadata);
+        }
     }
 
     public function testGetMetadataReturnsFalseIfIgnoreMissingItemsEnabled()
     {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getSupportedMetadata()) {
-            $this->markTestSkipped("Metadata are not supported by the adapter");
-        }
-        
         $this->_options->setIgnoreMissingItems(true);
         $this->assertFalse($this->_storage->getMetadata('unknown'));
     }
 
     public function testGetMetadataThrowsItemNotFoundExceptionIfIgnoreMissingItemsDisabled()
     {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getSupportedMetadata()) {
-            $this->markTestSkipped("Metadata are not supported by the adapter");
-        }
-        
         $this->_options->setIgnoreMissingItems(false);
 
         $this->setExpectedException('Zend\Cache\Exception\ItemNotFoundException');
@@ -282,11 +283,6 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetMetadataReturnsFalseIfNonReadable()
     {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getSupportedMetadata()) {
-            $this->markTestSkipped("Metadata are not supported by the adapter");
-        }
-        
         $this->_options->setReadable(false);
 
         $this->assertTrue($this->_storage->setItem('key', 'value'));
@@ -296,10 +292,8 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
     public function testGetMetadatas()
     {
         $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getSupportedMetadata()) {
-            $this->markTestSkipped("Metadata are not supported by the adapter");
-        }
-        
+        $supportedMetadatas = $capabilities->getSupportedMetadata();
+
         $items = array(
             'key1' => 'value1',
             'key2' => 'value2'
@@ -309,42 +303,20 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $metadatas = $this->_storage->getMetadatas(array_keys($items));
         $this->assertInternalType('array', $metadatas);
         $this->assertSame(count($items), count($metadatas));
-        foreach ($metadatas as $k => $info) {
-            $this->assertTrue(isset($items[$k]));
-            $this->assertInternalType('array', $info);
+        foreach ($metadatas as $k => $metadata) {
+            $this->assertInternalType('array', $metadata);
+            foreach ($supportedMetadatas as $supportedMetadata) {
+                $this->assertArrayHasKey($supportedMetadata, $metadata);
+            }
         }
     }
 
     public function testGetMetadatasReturnsEmptyArrayIfNonReadable()
     {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getSupportedMetadata()) {
-            $this->markTestSkipped("Metadata are not supported by the adapter");
-        }
-        
         $this->_options->setReadable(false);
 
         $this->assertTrue($this->_storage->setItem('key', 'value'));
-        $this->assertEquals(array(), $this->_storage->getItems(array('key')));
-    }
-
-    public function testGetMetadataAgainstMetadataCapabilities()
-    {
-        $capabilities = $this->_storage->getCapabilities();
-        if (!$capabilities->getSupportedMetadata()) {
-            $this->markTestSkipped("Metadata are not supported by the adapter");
-        }
-        
-        $capabilities = $this->_storage->getCapabilities();
-
-        $this->assertTrue($this->_storage->setItem('key', 'value'));
-
-        $metadata = $this->_storage->getMetadata('key');
-        $this->assertInternalType('array', $metadata);
-
-        foreach ($capabilities->getSupportedMetadata() as $property) {
-            $this->assertArrayHasKey($property, $metadata);
-        }
+        $this->assertEquals(array(), $this->_storage->getMetadatas(array('key')));
     }
 
     public function testSetGetHasAndRemoveItem()
@@ -833,14 +805,14 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         )));
 
         $fetchedItems = $this->_storage->fetchAll();
-        
+
         $this->assertEquals(count($items), count($fetchedItems));
         foreach ($fetchedItems as $item) {
             if (is_array($capabilities->getSupportedMetadata())) {
                 foreach ($capabilities->getSupportedMetadata() as $selectProperty) {
                     $this->assertArrayHasKey($selectProperty, $item);
                 }
-            }    
+            }
         }
     }
 

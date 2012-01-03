@@ -98,7 +98,7 @@ class AddressListTest extends TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            'zf-contributors@lists.zend.com' => 'ZF Contributors List',
             new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
         );
         $this->list->addMany($addresses);
@@ -112,7 +112,6 @@ class AddressListTest extends TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF DevTeam' => 'zf-devteam@zend.com',
             new Address('zf-devteam@zend.com', 'ZF DevTeam'),
         );
         $this->list->addMany($addresses);

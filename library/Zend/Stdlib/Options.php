@@ -34,16 +34,16 @@ use Traversable;
 abstract class Options implements ParameterObject
 {
     /**
-     * @param  array|Traversable|null $config
+     * @param  array|Traversable|null $options
      * @return Options
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct($config = null)
+    public function __construct($options = null)
     {
-        if (is_null($config)) {
+        if (is_null($options)) {
             return;
         }
-        $this->processArray($config);
+        $this->processArray($options);
     }
 
     /**

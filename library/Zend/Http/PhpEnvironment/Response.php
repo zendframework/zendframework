@@ -30,7 +30,7 @@ class Response extends HttpResponse
     public function sendHeaders()
     {
         if ($this->headersSent()) {
-            return;
+            return $this;
         }
 
         $status  = $this->renderStatusLine();
@@ -51,7 +51,7 @@ class Response extends HttpResponse
     public function sendContent()
     {
         if ($this->contentSent()) {
-            return;
+            return $this;
         }
         echo $this->getContent();
         $this->contentSent = true;

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend\Cloud\Infrastructure\Adapter
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -258,7 +258,7 @@ class Ec2OnlineTest extends TestCase
  * @category   Zend
  * @package    Zend\Cloud\Infrastructure\Adapter\Ec2
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend\Cloud\Infrastructure
  * @group      Zend\Cloud\Infrastructure\Adapter\Ec2

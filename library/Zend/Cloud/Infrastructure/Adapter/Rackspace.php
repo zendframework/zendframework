@@ -3,7 +3,7 @@
  * @category   Zend
  * @package    Zend\Cloud\Infrastructure
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -20,7 +20,7 @@ use Zend\Service\Rackspace\Servers as RackspaceServers,
  *
  * @package    Zend\Cloud\Infrastructure
  * @subpackage Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Rackspace extends AbstractAdapter

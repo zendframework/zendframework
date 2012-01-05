@@ -110,6 +110,9 @@ class PropertyGenerator extends AbstractMemberGenerator
     {
         if ($const) {
             $this->removeFlag(self::FLAG_PUBLIC | self::FLAG_PRIVATE | self::FLAG_PROTECTED);
+            $this->setFlags(self::FLAG_CONSTANT);
+        } else {
+            $this->removeFlag(self::FLAG_CONSTANT);
         }
     }
 

@@ -270,8 +270,8 @@ class StandardAutoloader implements SplAutoloader
         $namespace = (isset($matches['namespace'])) ? $matches['namespace'] : '';
 
         return $directory
-             . str_replace(self::NS_SEPARATOR, DIRECTORY_SEPARATOR, $namespace)
-             . str_replace(self::PREFIX_SEPARATOR, DIRECTORY_SEPARATOR, $class)
+             . str_replace(self::NS_SEPARATOR, '/', $namespace)
+             . str_replace(self::PREFIX_SEPARATOR, '/', $class)
              . '.php';
     }
 

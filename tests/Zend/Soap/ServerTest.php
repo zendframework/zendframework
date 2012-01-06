@@ -324,6 +324,17 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($server, $r);
     }
 
+    // GitHub PR #706
+    public function testSetClassWithObject()
+    {
+        $server = new Server();
+
+        // Correct class name should pass
+        $object = new \ZendTest\Soap\TestAsset\ServerTestClass();
+        $r = $server->setClass($object);
+        $this->assertSame($server, $r);
+    }
+
     public function testSetClassTwiceThrowsException()
     {
         $server = new Server();

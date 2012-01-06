@@ -37,7 +37,7 @@ class FilesystemOptions extends AdapterOptions
 {
     /**
      * The adapter using these options
-     * 
+     *
      * @var null|Filesystem
      */
     protected $adapter;
@@ -74,8 +74,9 @@ class FilesystemOptions extends AdapterOptions
     /**
      * Block writing files until writing by another process finished.
      *
-     * NOTE1: this only attempts if fileLocking is enabled
-     * NOTE3: if disabled writing operations return false in part of a locked file
+     * NOTE: this only attempts if fileLocking is enabled
+     * NOTE: if disabled writing operations can throw a LockedException
+     * NOTE: This option can't be disabled on windows
      *
      * @var boolean
      */
@@ -152,8 +153,8 @@ class FilesystemOptions extends AdapterOptions
 
     /**
      * Filesystem adapter using this instance
-     * 
-     * @param  Filesystem $filesystem 
+     *
+     * @param  Filesystem $filesystem
      * @return FilesystemOptions
      */
     public function setAdapter(Filesystem $filesystem)
@@ -316,19 +317,34 @@ class FilesystemOptions extends AdapterOptions
     }
 
     /**
-     * Set file blocking
+     * Set block writing files until writing by another process finished.
+     *
+     * NOTE: this only attempts if fileLocking is enabled
+     * NOTE: if disabled writing operations can throw a LockedException
+     * NOTE: This option can't be disabled on windows
      *
      * @param  bool $flag
      * @return FilesystemOptions
      */
     public function setFileBlocking($flag)
     {
+        $flag = (bool) $flag;
+        if ($flag && substr(\PHP_OS, 0, 3) == 'WIN') {
+            throw new Exception\InvalidArgumentException(
+                "This option can't be disabled on windows"
+            );
+        }
+
         $this->fileBlocking = (bool) $flag;
         return $this;
     }
 
     /**
-     * Get file blocking
+     * Get block writing files until writing by another process finished.
+     *
+     * NOTE: this only attempts if fileLocking is enabled
+     * NOTE: if disabled writing operations can throw a LockedException
+     * NOTE: This option can't be disabled on windows
      *
      * @return bool
      */
@@ -542,9 +558,9 @@ class FilesystemOptions extends AdapterOptions
 
     /**
      * Normalize a umask and optionally apply a callback to it
-     * 
-     * @param  int|string $umask 
-     * @param  callable $callback 
+     *
+     * @param  int|string $umask
+     * @param  callable $callback
      * @return int
      */
     protected function normalizeUmask($umask, $callback = null)
@@ -566,7 +582,7 @@ class FilesystemOptions extends AdapterOptions
      * Update target capabilities
      *
      * Returns immediately if no adapter is present.
-     * 
+     *
      * @return void
      */
     protected function updateCapabilities()

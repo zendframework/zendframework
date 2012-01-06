@@ -24,6 +24,7 @@ namespace Zend\Cache\Storage\Adapter;
 use ArrayObject,
     GlobIterator,
     stdClass,
+    Exception as BaseException,
     Zend\Cache\Exception,
     Zend\Cache\Storage,
     Zend\Cache\Storage\Capabilities,
@@ -153,7 +154,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -199,7 +200,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -237,7 +238,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalHasItem($key, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -280,7 +281,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -318,7 +319,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalGetMetadata($key, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -365,7 +366,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -409,7 +410,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -450,7 +451,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -495,7 +496,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -540,7 +541,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -585,7 +586,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -631,7 +632,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -689,7 +690,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -730,7 +731,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -768,7 +769,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -805,7 +806,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -843,7 +844,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -898,13 +899,13 @@ class Filesystem extends AbstractAdapter
                 $this->stmtGlob    = $glob;
                 $this->stmtMatch   = $mode;
                 $this->stmtOptions = $options;
-            } catch (\Exception $e) {
+            } catch (BaseException $e) {
                 throw new Exception\RuntimeException('Instantiating glob iterator failed', 0, $e);
             }
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -943,7 +944,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -974,7 +975,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->clearByPrefix('', $mode, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1004,7 +1005,7 @@ class Filesystem extends AbstractAdapter
             $prefix = $options['namespace'] . $this->getOptions()->getNamespaceSeparator();
             $result = $this->clearByPrefix($prefix, $mode, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1040,7 +1041,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1098,7 +1099,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->capabilities;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1121,7 +1122,7 @@ class Filesystem extends AbstractAdapter
 
             $result = Utils::getDiskCapacity($this->getOptions()->getCacheDir());
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1202,7 +1203,7 @@ class Filesystem extends AbstractAdapter
 
             return $ret;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // reset umask on exception
             umask($oldUmask);
             throw $e;
@@ -1235,7 +1236,7 @@ class Filesystem extends AbstractAdapter
      * @param $key
      * @param array $options
      * @return bool|string
-     * @throws \Exception|ItemNotFoundException|UnexpectedValueException
+     * @throws Exception\ItemNotFoundException|Exception\UnexpectedValueException
      */
     protected function internalGetItem($key, array &$options)
     {
@@ -1258,23 +1259,21 @@ class Filesystem extends AbstractAdapter
             if ($baseOptions->getReadControl()) {
                 if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo'))
                     && isset($info['hash'], $info['algo'])
+                    && Utils::generateHash($info['algo'], $data, true) != $info['hash']
                 ) {
-                    $hashData = Utils::generateHash($info['algo'], $data, true);
-                    if ($hashData != $info['hash']) {
-                        throw new Exception\UnexpectedValueException(
-                            'ReadControl: Stored hash and computed hash don\'t match'
-                        );
-                    }
+                    throw new Exception\UnexpectedValueException(
+                        'ReadControl: Stored hash and computed hash don\'t match'
+                    );
                 }
             }
 
             return $data;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             try {
                 // remove cache file on exception
                 $this->internalRemoveItem($key, $options);
-            } catch (\Exception $tmp) {} // do not throw remove exception on this point
+            } catch (Exception $tmp) {} // do not throw remove exception on this point
 
             throw $e;
         }
@@ -1498,7 +1497,7 @@ class Filesystem extends AbstractAdapter
                 . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $baseOptions->getDirLevel())
                 . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
             $glob = new GlobIterator($find);
-        } catch (\Exception $e) {
+        } catch (BaseException $e) {
             throw new Exception\RuntimeException('Instantiating GlobIterator failed', 0, $e);
         }
 

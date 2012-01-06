@@ -164,8 +164,13 @@ class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         $loader = new StandardAutoloader();
         $this->assertFalse($loader->autoload('Some\Fake\Classname'));
+    }
+
+    public function testReturnsFalseForInvalidClassNames()
+    {
+        $loader = new StandardAutoloader();
         $loader->setFallbackAutoloader(true);
-        $this->assertFalse($loader->autoload('Some\Fake\Classname\\'));
+        $this->assertFalse($loader->autoload('Some\Invalid\Classname\\'));
     }
 
     public function testRegisterRegistersCallbackWithSplAutoload()

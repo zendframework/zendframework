@@ -1262,7 +1262,7 @@ class Filesystem extends AbstractAdapter
                     && Utils::generateHash($info['algo'], $data, true) != $info['hash']
                 ) {
                     throw new Exception\UnexpectedValueException(
-                        'ReadControl: Stored hash and computed hash don\'t match'
+                        "ReadControl: Stored hash and computed hash don't match"
                     );
                 }
             }

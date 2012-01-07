@@ -628,4 +628,59 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
             $validator->getOption('messageVariables')
         );
     }
+
+    public function testUseMxCheckBasicValid()
+    {
+        $validator = new Validator\EmailAddress(array(
+            'useMxCheck'        => true,
+            'useDeepMxCheck'    => true
+        ));
+
+        $emailAddresses = array(
+            'bob@gmail.com',
+            'bob.jones@bbc.co.uk',
+            'bob.jones.smythe@bbc.co.uk',
+            'BoB@aol.com',
+            'bobjones@nist.gov',
+            "B.O'Callaghan@usmc.mil",
+            'bob+jones@nic.us',
+            'bob+jones@dailymail.co.uk',
+            'bob@teaparty.uk.com',
+            'bob@thelongestdomainnameintheworldandthensomeandthensomemoreandmore.com'
+        );
+
+        foreach ($emailAddresses as $input) {
+            $this->assertTrue($validator->isValid($input), "$input failed to pass validation:\n"
+                            . implode("\n", $validator->getMessages()));
+        }
+    }
+
+    public function testUseMxRecordsBasicInvalid() { 
+        $validator = new Validator\EmailAddress(array(
+            'useMxCheck'        => true,
+            'useDeepMxCheck'    => true
+        ));
+
+        $emailAddresses = array(
+            '',
+            'bob
+
+            @domain.com',
+            'bob jones@domain.com',
+            '.bobJones@studio24.com',
+            'bobJones.@studio24.com',
+            'bob.Jones.@studio24.com',
+            '"bob%jones@domain.com',
+            'bob@verylongdomainsupercalifragilisticexpialidociousaspoonfulofsugar.com',
+            'bob+domain.com',
+            'bob.domain.com',
+            'bob @domain.com',
+            'bob@ domain.com',
+            'bob @ domain.com',
+            'Abc..123@example.com'
+            );
+        foreach ($emailAddresses as $input) {
+            $this->assertFalse($validator->isValid($input), implode("\n", $this->_validator->getMessages()) . $input);
+        }
+    }
 }

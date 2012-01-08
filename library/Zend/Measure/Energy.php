@@ -199,7 +199,7 @@ class Energy extends AbstractMeasure
         'INCH_POUND'             => array('0.112984825',       'in lb'),
         'JOULE'                  => array('1',                 'J'),
         'KILOCALORIE_15C'        => array('4185.8',            'kcal'),
-        'KILOCALORIE'            => array('4186','8',          'kcal'),
+        'KILOCALORIE'            => array('4186.8',          'kcal'),
         'KILOCALORIE_THERMOCHEMICAL' => array('4184',          'kcal'),
         'KILOELECTRONVOLT'       => array('1.6021773e-16',     'keV'),
         'KILOGRAM_CALORIE'       => array('4185.8',            'kg cal'),

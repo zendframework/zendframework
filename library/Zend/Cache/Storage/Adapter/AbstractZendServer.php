@@ -44,6 +44,24 @@ abstract class AbstractZendServer extends AbstractAdapter
 
     /* reading */
 
+    /**
+     * Get an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return mixed Value on success and false on failure
+     * @throws Exception
+     *
+     * @triggers getItem.pre(PreEvent)
+     * @triggers getItem.post(PostEvent)
+     * @triggers getItem.exception(ExceptionEvent)
+     */
     public function getItem($key, array $options = array())
     {
         if (!$this->getOptions()->getReadable()) {
@@ -81,6 +99,22 @@ abstract class AbstractZendServer extends AbstractAdapter
         }
     }
 
+    /**
+     * Get multiple items.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return array Assoziative array of existing keys and values or false on failure
+     * @throws Exception
+     *
+     * @triggers getItems.pre(PreEvent)
+     * @triggers getItems.post(PostEvent)
+     * @triggers getItems.exception(ExceptionEvent)
+     */
     public function getItems(array $keys, array $options = array())
     {
         if (!$this->getOptions()->getReadable()) {
@@ -118,6 +152,22 @@ abstract class AbstractZendServer extends AbstractAdapter
         }
     }
 
+    /**
+     * Test if an item exists.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers hasItem.pre(PreEvent)
+     * @triggers hasItem.post(PostEvent)
+     * @triggers hasItem.exception(ExceptionEvent)
+     */
     public function hasItem($key, array $options = array())
     {
         if (!$this->getOptions()->getReadable()) {
@@ -146,6 +196,22 @@ abstract class AbstractZendServer extends AbstractAdapter
         }
     }
 
+    /**
+     * Test if multiple items exists.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers hasItems.pre(PreEvent)
+     * @triggers hasItems.post(PostEvent)
+     * @triggers hasItems.exception(ExceptionEvent)
+     */
     public function hasItems(array $keys, array $options = array())
     {
         if (!$this->getOptions()->getReadable()) {
@@ -183,6 +249,24 @@ abstract class AbstractZendServer extends AbstractAdapter
         }
     }
 
+    /**
+     * Get metadata of an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return array|boolean Metadata or false on failure
+     * @throws Exception
+     *
+     * @triggers getMetadata.pre(PreEvent)
+     * @triggers getMetadata.post(PostEvent)
+     * @triggers getMetadata.exception(ExceptionEvent)
+     */
     public function getMetadata($key, array $options = array())
     {
         if (!$this->getOptions()->getReadable()) {
@@ -211,6 +295,22 @@ abstract class AbstractZendServer extends AbstractAdapter
         }
     }
 
+    /**
+     * Get metadata for multiple items
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  array $keys
+     * @param  array $options
+     * @return array
+     * @throws Exception\ItemNotFoundException
+     *
+     * @triggers getMetadatas.pre(PreEvent)
+     * @triggers getMetadatas.post(PostEvent)
+     * @triggers getMetadatas.exception(ExceptionEvent)
+     */
     public function getMetadatas(array $keys, array $options = array())
     {
         if (!$this->getOptions()->getReadable()) {
@@ -250,6 +350,25 @@ abstract class AbstractZendServer extends AbstractAdapter
 
     /* writing */
 
+    /**
+     * Store an item.
+     *
+     * Options:
+     *  - ttl <float> optional
+     *    - The time-to-life (Default: ttl of object)
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  string $key
+     * @param  mixed $value
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers setItem.pre(PreEvent)
+     * @triggers setItem.post(PostEvent)
+     * @triggers setItem.exception(ExceptionEvent)
+     */
     public function setItem($key, $value, array $options = array())
     {
         if (!$this->getOptions()->getWritable()) {
@@ -280,6 +399,24 @@ abstract class AbstractZendServer extends AbstractAdapter
         }
     }
 
+    /**
+     * Remove an item.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *  - ignore_missing_items <boolean> optional
+     *    - Throw exception on missing item or return false
+     *
+     * @param  string $key
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     *
+     * @triggers removeItem.pre(PreEvent)
+     * @triggers removeItem.post(PostEvent)
+     * @triggers removeItem.exception(ExceptionEvent)
+     */
     public function removeItem($key, array $options = array())
     {
         if (!$this->getOptions()->getWritable()) {
@@ -314,6 +451,19 @@ abstract class AbstractZendServer extends AbstractAdapter
 
     /* cleaning */
 
+    /**
+     * Clear items off all namespaces.
+     *
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
+     * @return boolean
+     * @throws Exception
+     * @see clearByNamespace()
+     *
+     * @triggers clear.pre(PreEvent)
+     * @triggers clear.post(PostEvent)
+     * @triggers clear.exception(ExceptionEvent)
+     */
     public function clear($mode = self::MATCH_EXPIRED, array $options = array())
     {
         if (!$this->getOptions()->getWritable()) {
@@ -347,6 +497,23 @@ abstract class AbstractZendServer extends AbstractAdapter
         }
     }
 
+    /**
+     * Clear items by namespace.
+     *
+     * Options:
+     *  - namespace <string> optional
+     *    - The namespace to use (Default: namespace of object)
+     *
+     * @param  int $mode Matching mode (Value of Zend\Cache\Storage\Adapter::MATCH_*)
+     * @param  array $options
+     * @return boolean
+     * @throws Zend\Cache\Exception
+     * @see clear()
+     *
+     * @triggers clearByNamespace.pre(PreEvent)
+     * @triggers clearByNamespace.post(PostEvent)
+     * @triggers clearByNamespace.exception(ExceptionEvent)
+     */
     public function clearByNamespace($mode = self::MATCH_EXPIRED, array $options = array())
     {
         if (!$this->getOptions()->getWritable()) {
@@ -382,6 +549,15 @@ abstract class AbstractZendServer extends AbstractAdapter
 
     /* status */
 
+    /**
+     * Get capabilities
+     *
+     * @return Capabilities
+     *
+     * @triggers getCapabilities.pre(PreEvent)
+     * @triggers getCapabilities.post(PostEvent)
+     * @triggers getCapabilities.exception(ExceptionEvent)
+     */
     public function getCapabilities()
     {
         $args = new ArrayObject();
@@ -446,14 +622,14 @@ abstract class AbstractZendServer extends AbstractAdapter
     /**
      * Fetch a single item from Zend Data Cache (zdc)
      *
-     * @param string $internalKey
+     * @param  string $internalKey
      * @return mixed The stored value or FALSE if item wasn't found
-     * @throws Zend\Cache\Exception
+     * @throws Exception\RuntimeException
      */
     abstract protected function zdcFetch($internalKey);
 
     /**
-     * Fetch a multiple items from Zend Data Cache (zdc)
+     * Fetch multiple items from Zend Data Cache (zdc)
      *
      * @param  array $internalKeys
      * @return array All found items
@@ -464,8 +640,9 @@ abstract class AbstractZendServer extends AbstractAdapter
     /**
      * Delete data from Zend Data Cache (zdc)
      *
-     * @param string $internalKey
+     * @param  string $internalKey
      * @return boolean
+     * @throws Exception\RuntimeException
      */
     abstract protected function zdcDelete($internalKey);
 

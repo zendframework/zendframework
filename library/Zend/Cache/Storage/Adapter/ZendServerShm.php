@@ -33,6 +33,13 @@ use Zend\Cache\Exception;
 class ZendServerShm extends AbstractZendServer
 {
 
+    /**
+     * Constructor
+     *
+     * @param  null|array|Traversable|AdapterOptions $options
+     * @throws Exception
+     * @return void
+     */
     public function __construct($options = array())
     {
         if (!function_exists('zend_shm_cache_store')) {
@@ -44,6 +51,16 @@ class ZendServerShm extends AbstractZendServer
         parent::__construct($options);
     }
 
+    /**
+     * Get storage capacity.
+     *
+     * @param  array $options
+     * @return array|boolean Capacity as array or false on failure
+     *
+     * @triggers getCapacity.pre(PreEvent)
+     * @triggers getCapacity.post(PostEvent)
+     * @triggers getCapacity.exception(ExceptionEvent)
+     */
     public function getCapacity(array $options = array())
     {
         $args = new ArrayObject(array(
@@ -69,6 +86,15 @@ class ZendServerShm extends AbstractZendServer
         }
     }
 
+    /**
+     * Store data into Zend Data SHM Cache
+     *
+     * @param  string $internalKey
+     * @param  mixed  $value
+     * @param  int    $ttl
+     * @return void
+     * @throws Exception\RuntimeException
+     */
     protected function zdcStore($key, $value, $ttl)
     {
         if (!zend_shm_cache_store($key, $value, $ttl)) {
@@ -79,11 +105,25 @@ class ZendServerShm extends AbstractZendServer
         }
     }
 
+    /**
+     * Fetch a single item from Zend Data SHM Cache
+     *
+     * @param  string $internalKey
+     * @return mixed The stored value or FALSE if item wasn't found
+     * @throws Exception\RuntimeException
+     */
     protected function zdcFetch($key)
     {
         return zend_shm_cache_fetch((string)$key);
     }
 
+    /**
+     * Fetch multiple items from Zend Data SHM Cache
+     *
+     * @param  array $internalKeys
+     * @return array All found items
+     * @throws Exception\RuntimeException
+     */
     protected function zdcFetchMulti(array $internalKeys)
     {
         $items = zend_shm_cache_fetch($internalKeys);
@@ -93,11 +133,24 @@ class ZendServerShm extends AbstractZendServer
         return $items;
     }
 
+    /**
+     * Delete data from Zend Data SHM Cache
+     *
+     * @param  string $internalKey
+     * @return boolean
+     * @throws Exception\RuntimeException
+     */
     protected function zdcDelete($key)
     {
         return zend_shm_cache_delete($key);
     }
 
+    /**
+     * Clear items of all namespaces from Zend Data SHM Cache
+     *
+     * @return void
+     * @throws Exception\RuntimeException
+     */
     protected function zdcClear()
     {
         if (!zend_shm_cache_clear()) {
@@ -107,6 +160,13 @@ class ZendServerShm extends AbstractZendServer
         }
     }
 
+    /**
+     * Clear items of the given namespace from Zend Data SHM Cache
+     *
+     * @param  string $namespace
+     * @return void
+     * @throws Exception\RuntimeException
+     */
     protected function zdcClearByNamespace($namespace)
     {
         if (!zend_shm_cache_clear($namespace)) {
@@ -115,5 +175,4 @@ class ZendServerShm extends AbstractZendServer
             );
         }
     }
-
 }

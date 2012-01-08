@@ -34,6 +34,13 @@ use Zend\Cache\Utils,
 class ZendServerDisk extends AbstractZendServer
 {
 
+    /**
+     * Constructor
+     *
+     * @param  null|array|Traversable|AdapterOptions $options
+     * @throws Exception
+     * @return void
+     */
     public function __construct($options = array())
     {
         if (!function_exists('zend_disk_cache_store')) {
@@ -45,6 +52,16 @@ class ZendServerDisk extends AbstractZendServer
         parent::__construct($options);
     }
 
+    /**
+     * Get storage capacity.
+     *
+     * @param  array $options
+     * @return array|boolean Capacity as array or false on failure
+     *
+     * @triggers getCapacity.pre(PreEvent)
+     * @triggers getCapacity.post(PostEvent)
+     * @triggers getCapacity.exception(ExceptionEvent)
+     */
     public function getCapacity(array $options = array())
     {
         $args = new ArrayObject(array(
@@ -64,6 +81,15 @@ class ZendServerDisk extends AbstractZendServer
         }
     }
 
+    /**
+     * Store data into Zend Data Disk Cache
+     *
+     * @param  string $internalKey
+     * @param  mixed  $value
+     * @param  int    $ttl
+     * @return void
+     * @throws Exception\RuntimeException
+     */
     protected function zdcStore($key, $value, $ttl)
     {
         if (!zend_disk_cache_store($key, $value, $ttl)) {
@@ -74,11 +100,25 @@ class ZendServerDisk extends AbstractZendServer
         }
     }
 
+    /**
+     * Fetch a single item from Zend Data Disk Cache
+     *
+     * @param  string $internalKey
+     * @return mixed The stored value or FALSE if item wasn't found
+     * @throws Exception\RuntimeException
+     */
     protected function zdcFetch($key)
     {
         return zend_disk_cache_fetch((string)$key);
     }
 
+    /**
+     * Fetch multiple items from Zend Data Disk Cache
+     *
+     * @param  array $internalKeys
+     * @return array All found items
+     * @throws Exception\RuntimeException
+     */
     protected function zdcFetchMulti(array $internalKeys)
     {
         $items = zend_disk_cache_fetch($internalKeys);
@@ -88,11 +128,24 @@ class ZendServerDisk extends AbstractZendServer
         return $items;
     }
 
+    /**
+     * Delete data from Zend Data Disk Cache
+     *
+     * @param  string $internalKey
+     * @return boolean
+     * @throws Exception\RuntimeException
+     */
     protected function zdcDelete($key)
     {
         return zend_disk_cache_delete($key);
     }
 
+    /**
+     * Clear items of all namespaces from Zend Data Disk Cache
+     *
+     * @return void
+     * @throws Exception\RuntimeException
+     */
     protected function zdcClear()
     {
         if (!zend_disk_cache_clear()) {
@@ -102,6 +155,13 @@ class ZendServerDisk extends AbstractZendServer
         }
     }
 
+    /**
+     * Clear items of the given namespace from Zend Data Disk Cache
+     *
+     * @param  string $namespace
+     * @return void
+     * @throws Exception\RuntimeException
+     */
     protected function zdcClearByNamespace($namespace)
     {
         if (!zend_disk_cache_clear($namespace)) {

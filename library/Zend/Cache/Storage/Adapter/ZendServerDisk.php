@@ -48,7 +48,21 @@ class ZendServerDisk extends AbstractZendServer
 
     public function getCapacity(array $options = array())
     {
-        return Utils::getDiskCapacity(ini_get('zend_datacache.disk.save_path'));
+        $args = new ArrayObject(array(
+            'options' => & $options,
+        ));
+
+        try {
+            $eventRs = $this->triggerPre(__FUNCTION__, $args);
+            if ($eventRs->stopped()) {
+                return $eventRs->last();
+            }
+
+            $result = Utils::getDiskCapacity(ini_get('zend_datacache.disk.save_path'));
+            return $this->triggerPost(__FUNCTION__, $args, $result);
+        } catch (\Exception $e) {
+            return $this->triggerException(__FUNCTION__, $args, $e);
+        }
     }
 
     protected function zdcStore($key, $value, $ttl)

@@ -7,7 +7,7 @@
     <info><title>Configurazione Zend\Di</title></info>
 
     <para>
-        La maggior parte della configurazione sia per il 
+        La maggior parte della configurazione, sia per il 
         setup delle Definitions come per l'impostazione dell'Instance
         Manager può essere raggiunto da un file di configurazione.
         Questo file produrrà un array (tipicamente) con una particolare

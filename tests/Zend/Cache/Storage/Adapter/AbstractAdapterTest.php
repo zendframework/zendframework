@@ -47,6 +47,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_options = new Cache\Storage\Adapter\AdapterOptions();
         $this->_storage = $this->getMockForAbstractClass('Zend\Cache\Storage\Adapter\AbstractAdapter');
+        $this->_storage->setOptions($this->_options);
         $this->_storage->expects($this->any())
                        ->method('getOptions')
                        ->will($this->returnValue($this->_options));

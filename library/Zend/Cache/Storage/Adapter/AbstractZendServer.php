@@ -585,7 +585,7 @@ abstract class AbstractZendServer extends AbstractAdapter
                         ),
                         'supportedMetadata'  => array(),
                         'maxTtl'             => 0,
-                        'staticTtl'          => false,
+                        'staticTtl'          => true,
                         'tagging'            => false,
                         'ttlPrecision'       => 1,
                         'useRequestTime'     => false,

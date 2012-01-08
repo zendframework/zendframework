@@ -24,8 +24,7 @@ namespace Zend\Cache\Storage\Adapter;
 use ArrayObject,
     stdClass,
     Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Exception\RuntimeException,
-    Zend\Cache\Exception\ItemNotFoundException;
+    Zend\Cache\Exception;
 
 /**
  * @category   Zend
@@ -68,7 +67,7 @@ abstract class AbstractZendServer extends AbstractAdapter
             $result      = $this->zdcFetch($internalKey);
             if ($result === false) {
                 if (!$options['ignore_missing_items']) {
-                    throw new ItemNotFoundException("Key '{$internalKey}' not found");
+                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
                 }
 
                 $result = false;
@@ -106,12 +105,7 @@ abstract class AbstractZendServer extends AbstractAdapter
                 $internalKeys[] = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
             }
 
-            $fetch = $this->zdcFetch($internalKeys);
-            if ($fetch === false) {
-                throw new RuntimeException("Failed to fetch keys");
-            }
-
-            // remove namespace
+            $fetch   = $this->zdcFetchMulti($internalKeys);
             $prefixL = strlen($options['namespace'] . self::NAMESPACE_SEPARATOR);
             $result  = array();
             foreach ($fetch as $k => &$v) {
@@ -176,11 +170,7 @@ abstract class AbstractZendServer extends AbstractAdapter
                 $internalKeys[] = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
             }
 
-            $fetch = $this->zdcFetch($internalKeys);
-            if ($fetch === false) {
-                throw new RuntimeException("Failed to fetch keys");
-            }
-
+            $fetch   = $this->zdcFetchMulti($internalKeys);
             $prefixL = strlen($options['namespace'] . self::NAMESPACE_SEPARATOR);
             $result  = array();
             foreach ($fetch as $k => &$v) {
@@ -245,11 +235,7 @@ abstract class AbstractZendServer extends AbstractAdapter
                 $internalKeys[] = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
             }
 
-            $fetch = $this->zdcFetch($internalKeys);
-            if ($fetch === false) {
-                throw new RuntimeException("Failed to fetch keys");
-            }
-
+            $fetch   = $this->zdcFetchMulti($internalKeys);
             $prefixL = strlen($options['namespace'] . self::NAMESPACE_SEPARATOR);
             $result  = array();
             foreach ($fetch as $k => &$v) {
@@ -285,11 +271,7 @@ abstract class AbstractZendServer extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            if (!$this->zdcStore($internalKey, $value, $options['ttl'])) {
-                throw new RuntimeException(
-                    "zend_xxx_cache_store($internalKey, <value>, {$options['ttl']}) failed"
-                );
-            }
+            $this->zdcStore($internalKey, $value, $options['ttl']);
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
@@ -320,7 +302,7 @@ abstract class AbstractZendServer extends AbstractAdapter
 
             $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
             if (!$this->zdcDelete($internalKey) && !$options['ignore_missing_items']) {
-                throw new ItemNotFoundException("Key '{$internalKey}' not found");
+                throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
             }
 
             $result = true;
@@ -353,9 +335,7 @@ abstract class AbstractZendServer extends AbstractAdapter
 
             // clear all
             if (($mode & self::MATCH_ACTIVE) == self::MATCH_ACTIVE) {
-                if (!$this->zdcClear()) {
-                    throw new RuntimeException("Clearing failed");
-                }
+                $this->zdcClear();
             }
 
             // expired items will be deleted automatic
@@ -388,10 +368,7 @@ abstract class AbstractZendServer extends AbstractAdapter
 
             // clear all
             if (($mode & self::MATCH_ACTIVE) == self::MATCH_ACTIVE) {
-                $rs = $this->zdcClearByNamespace($options['namespace']);
-                if ($rs === false) {
-                    throw new RuntimeException("Clearing failed");
-                }
+                $this->zdcClearByNamespace($options['namespace']);
             }
 
             // expired items will be deleted automatic
@@ -458,22 +435,31 @@ abstract class AbstractZendServer extends AbstractAdapter
     /**
      * Store data into Zend Data Cache (zdc)
      *
-     * @param string $internalKey
-     * @param mixed  $value
-     * @param int    $ttl
-     * @return boolean
-     * @throws Zend\Cache\Exception
+     * @param  string $internalKey
+     * @param  mixed  $value
+     * @param  int    $ttl
+     * @return void
+     * @throws Exception\RuntimeException
      */
     abstract protected function zdcStore($internalKey, $value, $ttl);
 
     /**
-     * Fetch data from Zend Data Cache (zdc)
+     * Fetch a single item from Zend Data Cache (zdc)
      *
      * @param string $internalKey
      * @return mixed The stored value or FALSE if item wasn't found
      * @throws Zend\Cache\Exception
      */
     abstract protected function zdcFetch($internalKey);
+
+    /**
+     * Fetch a multiple items from Zend Data Cache (zdc)
+     *
+     * @param  array $internalKeys
+     * @return array All found items
+     * @throws Exception\RuntimeException
+     */
+    abstract protected function zdcFetchMulti(array $internalKeys);
 
     /**
      * Delete data from Zend Data Cache (zdc)
@@ -486,15 +472,17 @@ abstract class AbstractZendServer extends AbstractAdapter
     /**
      * Clear items of all namespaces from Zend Data Cache (zdc)
      *
-     * @return boolean
+     * @return void
+     * @throws Exception\RuntimeException
      */
     abstract protected function zdcClear();
 
     /**
      * Clear items of the given namespace from Zend Data Cache (zdc)
      *
-     * @param string $namespace
-     * @return boolean
+     * @param  string $namespace
+     * @return void
+     * @throws Exception\RuntimeException
      */
     abstract protected function zdcClearByNamespace($namespace);
 }

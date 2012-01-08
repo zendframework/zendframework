@@ -22,8 +22,7 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use Zend\Cache\Utils,
-    Zend\Cache\Exception\ExtensionNotLoadedException,
-    Zend\Cache\Exception\RuntimeException;
+    Zend\Cache\Exception;
 
 /**
  * @category   Zend
@@ -38,9 +37,9 @@ class ZendServerDisk extends AbstractZendServer
     public function __construct($options = array())
     {
         if (!function_exists('zend_disk_cache_store')) {
-            throw new ExtensionNotLoadedException("Missing 'zend_disk_cache_*' functions");
+            throw new Exception\ExtensionNotLoadedException("Missing 'zend_disk_cache_*' functions");
         } elseif (PHP_SAPI == 'cli') {
-            throw new ExtensionNotLoadedException("Zend server data cache isn't available on cli");
+            throw new Exception\ExtensionNotLoadedException("Zend server data cache isn't available on cli");
         }
 
         parent::__construct($options);
@@ -67,12 +66,26 @@ class ZendServerDisk extends AbstractZendServer
 
     protected function zdcStore($key, $value, $ttl)
     {
-        return zend_disk_cache_store($key, $value, $ttl);
+        if (!zend_disk_cache_store($key, $value, $ttl)) {
+            $valueType = gettype($value);
+            throw new Exception\RuntimeException(
+                "zend_disk_cache_store($internalKey, <{$valueType}>, {$options['ttl']}) failed"
+            );
+        }
     }
 
     protected function zdcFetch($key)
     {
-        return zend_disk_cache_fetch($key);
+        return zend_disk_cache_fetch((string)$key);
+    }
+
+    protected function zdcFetchMulti(array $internalKeys)
+    {
+        $items = zend_disk_cache_fetch($internalKeys);
+        if ($items === false) {
+            throw new Exception\RuntimeException("zend_disk_cache_fetch(<array>) failed");
+        }
+        return $items;
     }
 
     protected function zdcDelete($key)
@@ -82,12 +95,19 @@ class ZendServerDisk extends AbstractZendServer
 
     protected function zdcClear()
     {
-        return zend_disk_cache_clear();
+        if (!zend_disk_cache_clear()) {
+            throw new Exception\RuntimeException(
+                'zend_disk_cache_clear() failed'
+            );
+        }
     }
 
     protected function zdcClearByNamespace($namespace)
     {
-        return zend_disk_cache_clear($namespace);
+        if (!zend_disk_cache_clear($namespace)) {
+            throw new Exception\RuntimeException(
+                "zend_disk_cache_clear({$namespace}) failed"
+            );
+        }
     }
-
 }

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ namespace Zend\Markup\Renderer;
  * @uses       \Zend\Markup\Exception
  * @package    Zend_Markup
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 interface Exception extends \Zend\Markup\Exception

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend\Service
  * @subpackage GoGrid
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use Zend\Service\GoGrid\Object;
  * @category   Zend
  * @package    Zend_Service
  * @subpackage GoGrid
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ObjectList implements \Countable, \Iterator, \ArrayAccess

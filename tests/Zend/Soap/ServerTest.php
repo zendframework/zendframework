@@ -324,7 +324,9 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($server, $r);
     }
 
-    // GitHub PR #706
+    /**
+     * @group PR-706
+     */
     public function testSetClassWithObject()
     {
         $server = new Server();

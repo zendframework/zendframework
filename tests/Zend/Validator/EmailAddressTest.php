@@ -629,6 +629,9 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @group ZF2-130
+     */
     public function testUseMxCheckBasicValid()
     {
         $validator = new Validator\EmailAddress(array(
@@ -655,6 +658,9 @@ class EmailAddressTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @group ZF2-130
+     */
     public function testUseMxRecordsBasicInvalid() { 
         $validator = new Validator\EmailAddress(array(
             'useMxCheck'        => true,

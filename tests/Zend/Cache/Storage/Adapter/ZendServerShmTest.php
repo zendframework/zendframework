@@ -19,9 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace ZendTest\Cache;
+namespace ZendTest\Cache\Storage\Adapter;
+
 use Zend\Cache,
-    Zend\Loader\Broker;
+    Zend\Cache\Exception;
 
 /**
  * @category   Zend
@@ -31,30 +32,31 @@ use Zend\Cache,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class PatternFactoryTest extends \PHPUnit_Framework_TestCase
+class ZendServerShmTest extends CommonAdapterTest
 {
 
     public function setUp()
     {
-        Cache\PatternFactory::resetBroker();
+        if (!function_exists('zend_shm_cache_store')) {
+            try {
+                new Cache\Storage\Adapter\ZendServerShm();
+                $this->fail("Missing expected ExtensionNotLoadedException");
+            } catch (Exception\ExtensionNotLoadedException $e) {
+                $this->markTestSkipped($e->getMessage());
+            }
+        }
+
+        $this->_storage = new Cache\Storage\Adapter\ZendServerShm();
+        parent::setUp();
     }
 
     public function tearDown()
     {
-        Cache\PatternFactory::resetBroker();
-    }
+        if (function_exists('zend_shm_cache_clear')) {
+            zend_shm_cache_clear();
+        }
 
-    public function testDefaultBroker()
-    {
-        $broker = Cache\PatternFactory::getBroker();
-        $this->assertInstanceOf('Zend\Cache\PatternBroker', $broker);
-    }
-
-    public function testChangeBroker()
-    {
-        $broker = new Cache\PatternBroker();
-        Cache\PatternFactory::setBroker($broker);
-        $this->assertSame($broker, Cache\PatternFactory::getBroker());
+        parent::tearDown();
     }
 
 }

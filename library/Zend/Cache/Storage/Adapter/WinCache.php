@@ -1028,7 +1028,7 @@ class WinCache extends AbstractAdapter
                             'mem_size'
                         ),
                         'maxTtl'             => 0,
-                        'staticTtl'          => false,
+                        'staticTtl'          => true,
                         'ttlPrecision'       => 1,
                         'useRequestTime'     => false,
                         'expiredRead'        => false,

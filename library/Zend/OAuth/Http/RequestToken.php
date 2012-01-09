@@ -143,28 +143,4 @@ class RequestToken extends HTTPClient
                 ->addHeaderLine('Content-Type', Http\Client::ENC_URLENCODED);
         return $client;
     }
-
-    /**
-     * Attempt a request based on the current configured OAuth Request Scheme and
-     * return the resulting HTTP Response.
-     *
-     * @param  array $params
-     * @return Zend\Http\Response
-     */
-    protected function _attemptRequest(array $params)
-    {
-        switch ($this->_preferredRequestScheme) {
-            case OAuth\OAuth::REQUEST_SCHEME_HEADER:
-                $httpClient = $this->getRequestSchemeHeaderClient($params);
-                break;
-            case OAuth\OAuth::REQUEST_SCHEME_POSTBODY:
-                $httpClient = $this->getRequestSchemePostBodyClient($params);
-                break;
-            case OAuth\OAuth::REQUEST_SCHEME_QUERYSTRING:
-                $httpClient = $this->getRequestSchemeQueryStringClient($params,
-                    $this->_consumer->getRequestTokenUrl());
-                break;
-        }
-        return $httpClient->send();
-    }
 }

@@ -207,22 +207,19 @@ class Client extends \Zend\Http\Client
     }
 
     /**
-     * Same as Zend_HTTP_Client::request() except just before the request is
+     * Same as Zend\HTTP\Client::send() except just before the request is
      * executed, we automatically append any necessary OAuth parameters and
      * sign the request using the relevant signature method.
      *
-     * @param  string $method
+     * @param  null|Zend\Http\Request $method
      * @return Zend\Http\Response
      */
-    public function request($method = null)
+    public function send(Request $request = null)
     {
-        if (!is_null($method)) {
-            $this->setMethod($method);
-        }
         $this->prepareOAuth();
-        return parent::request();
+        return parent::send($request);
     }
-
+    
     /**
      * Performs OAuth preparation on the request before sending.
      *
@@ -240,11 +237,11 @@ class Client extends \Zend\Http\Client
         $query = null;
         if ($requestScheme == OAuth::REQUEST_SCHEME_HEADER) {
             $oauthHeaderValue = $this->getToken()->toHeader(
-                $this->getUri(true),
+                $this->getRequest()->getUri(),
                 $this->_config,
                 $this->_getSignableParametersAsQueryString()
             );
-            $this->setHeaders('Authorization', $oauthHeaderValue);
+            $this->setHeaders(array('Authorization' => $oauthHeaderValue));
         } elseif ($requestScheme == OAuth::REQUEST_SCHEME_POSTBODY) {
             if ($requestMethod == Request::METHOD_GET) {
                 throw new Exception(
@@ -254,7 +251,7 @@ class Client extends \Zend\Http\Client
                 );
             }
             $raw = $this->getToken()->toQueryString(
-                $this->getUri(true),
+                $this->getRequest()->getUri(),
                 $this->_config,
                 $this->_getSignableParametersAsQueryString()
             );
@@ -274,11 +271,11 @@ class Client extends \Zend\Http\Client
             if (!empty($this->paramsPost)) {
                 $params = array_merge($params, $this->paramsPost);
                 $query  = $this->getToken()->toQueryString(
-                    $this->getUri(true), $this->_config, $params
+                    $this->getRequest()->getUri(), $this->_config, $params
                 );
             }
             $query = $this->getToken()->toQueryString(
-                $this->getUri(true), $this->_config, $params
+                $this->getRequest()->getUri(), $this->_config, $params
             );
             $this->getUri()->setQuery($query);
             $this->paramsGet = array();
@@ -300,13 +297,13 @@ class Client extends \Zend\Http\Client
             if (!empty($this->paramsGet)) {
                 $params = array_merge($params, $this->paramsGet);
                 $query  = $this->getToken()->toQueryString(
-                    $this->getUri(true), $this->_config, $params
+                    $this->getRequest()->getUri(), $this->_config, $params
                 );
             }
             if (!empty($this->paramsPost)) {
                 $params = array_merge($params, $this->paramsPost);
                 $query  = $this->getToken()->toQueryString(
-                    $this->getUri(true), $this->_config, $params
+                    $this->getRequest()->getUri(), $this->_config, $params
                 );
             }
             return $params;

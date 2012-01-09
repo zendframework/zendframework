@@ -37,6 +37,11 @@ class ZendServerShmTest extends CommonAdapterTest
 
     public function setUp()
     {
+        if (strtolower(PHP_SAPI) == 'cli') {
+            $this->markTestSkipped('Zend Server SHM does not work in CLI environment');
+            return;
+        }
+
         if (!function_exists('zend_shm_cache_store')) {
             try {
                 new Cache\Storage\Adapter\ZendServerShm();

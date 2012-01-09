@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Cache\Pattern;
@@ -99,14 +98,17 @@ class ClassCacheTest extends CommonPatternTest
 
     public function testGenerateKey()
     {
-        $this->markTestIncomplete();
-
         $args = array('arg1', 2, 3.33, null);
+
+        $generatedKey = $this->_pattern->generateKey('emptyMethod', $args);
+        $usedKey      = null;
+        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
+            $params = $event->getParams();
+            $usedKey = $params['key'];
+        });
+
         $this->_pattern->call('emptyMethod', $args);
-        $this->assertEquals(
-            $this->_storage->getLastKey(), // get the last used key by storage
-            $this->_pattern->generateKey('emptyMethod', $args)
-        );
+        $this->assertEquals($generatedKey, $usedKey);
     }
 
     public function testCallUnknownMethodException()

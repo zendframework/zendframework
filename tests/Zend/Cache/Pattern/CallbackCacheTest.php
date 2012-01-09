@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Cache\Pattern;
@@ -116,8 +115,6 @@ class CallbackCacheTest extends CommonPatternTest
 
     public function testCallWithPredefinedCallbackAndArgumentKey()
     {
-        $this->markTestIncomplete();
-
         $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
         $args     = array('arg1', 2, 3.33, null);
         $options = array(
@@ -126,26 +123,30 @@ class CallbackCacheTest extends CommonPatternTest
         );
 
         $expectedKey = md5($options['callback_key'].$options['argument_key']);
+        $usedKey     = null;
+        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
+            $params = $event->getParams();
+            $usedKey = $params['key'];
+        });
 
         $this->_pattern->call($callback, $args, $options);
-        $this->assertEquals(
-            $expectedKey,
-            $this->_storage->getLastKey() // get the last used key by storage
-        );
+        $this->assertEquals($expectedKey, $usedKey);
     }
 
     public function testGenerateKey()
     {
-        $this->markTestIncomplete();
-
         $callback = __NAMESPACE__ . '\TestCallbackCache::emptyMethod';
         $args     = array('arg1', 2, 3.33, null);
 
+        $generatedKey = $this->_pattern->generateKey($callback, $args);
+        $usedKey      = null;
+        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedKey) {
+            $params = $event->getParams();
+            $usedKey = $params['key'];
+        });
+
         $this->_pattern->call($callback, $args);
-        $this->assertEquals(
-            $this->_storage->getLastKey(), // get the last used key by storage
-            $this->_pattern->generateKey($callback, $args)
-        );
+        $this->assertEquals($generatedKey, $usedKey);
     }
 
     public function testGenerateKeyWithPredefinedCallbackAndArgumentKey()

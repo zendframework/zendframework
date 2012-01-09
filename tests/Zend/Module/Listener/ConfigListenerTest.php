@@ -175,6 +175,41 @@ class ConfigListenerTest extends TestCase
         $this->assertSame('loaded', $config['yml']);
     }
 
+    public function testCanCacheMergedConfigFromGlob()
+    {
+        $options = new ListenerOptions(array(
+            'cache_dir'            => $this->tmpdir,
+            'config_cache_enabled' => true,
+        ));
+        $configListener = new ConfigListener($options);
+        $configListener->addConfigGlobPath(__DIR__ . '/_files/good/*.{ini,json,php,xml,yml}');
+
+        $moduleManager = $this->moduleManager;
+        $moduleManager->setModules(array('SomeModule'));
+
+        $moduleManager->events()->attachAggregate($configListener);
+
+        $moduleManager->loadModules();
+        $configObjectFromGlob = $configListener->getMergedConfig();
+
+        // This time, don't add the glob path
+        $configListener = new ConfigListener($options);
+        $moduleManager = new Manager(array('SomeModule'));
+        $moduleManager->events()->attach('loadModule.resolve', new ModuleResolverListener, 1000);
+
+        $moduleManager->events()->attachAggregate($configListener);
+
+        $moduleManager->loadModules();
+
+        // Check if values from glob object and cache object are the same
+        $configObjectFromCache = $configListener->getMergedConfig();
+        $this->assertSame($configObjectFromGlob->ini, $configObjectFromCache->ini);
+        $this->assertSame($configObjectFromGlob->php, $configObjectFromCache->php);
+        $this->assertSame($configObjectFromGlob->json, $configObjectFromCache->json);
+        $this->assertSame($configObjectFromGlob->xml, $configObjectFromCache->xml);
+        $this->assertSame($configObjectFromGlob->yml, $configObjectFromCache->yml);
+    }
+
     public function testCanMergeConfigFromArrayOfGlobs()
     {
         $configListener = new ConfigListener;

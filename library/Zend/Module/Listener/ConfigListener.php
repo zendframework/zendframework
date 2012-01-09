@@ -184,6 +184,9 @@ class ConfigListener extends AbstractListener
      */
     public function mergeConfigGlobPaths($e = null)
     {
+        if (true === $this->skipConfig) {
+            return $this;
+        }
         foreach ($this->globPaths as $globPath) {
             $this->mergeGlobPath($globPath);
         }
@@ -201,6 +204,9 @@ class ConfigListener extends AbstractListener
      */
     protected function mergeGlobPath($globPath)
     {
+        if (true === $this->skipConfig) {
+            return $this;
+        }
         foreach (glob($globPath, GLOB_BRACE) as $path) {
             $pathInfo = pathinfo($path);
             switch (strtolower($pathInfo['extension'])) {
@@ -241,6 +247,9 @@ class ConfigListener extends AbstractListener
                     break;
             }
             $this->mergeTraversableConfig($config);
+            if ($this->getOptions()->getConfigCacheEnabled()) {
+                $this->updateCache();
+            }
         }
         return $this;
     }

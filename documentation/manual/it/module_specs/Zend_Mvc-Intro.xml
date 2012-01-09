@@ -516,7 +516,7 @@ class Module
   </section>
 
   <section xml:id="zend.mvc.intro.conclusion">
-    <info><title>Conclusion</title></info>
+    <info><title>Conclusioni</title></info>
 
     <para>
         Il layer ZF2 è incredibilmente flessibile, offrendo un punto 

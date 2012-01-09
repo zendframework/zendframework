@@ -376,6 +376,24 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
                             'Expected 3 pages, found ' . count($nav));
     }
 
+    /**
+     * @group ZF-9815
+     */
+    public function testAddPagesShouldWorkWithNavigationContainer()
+    {
+        $nav = new Navigation\Navigation();
+        $nav->addPages($this->_getFindByNavigation());
+
+        $this->assertEquals(
+            3, count($nav), 'Expected 3 pages, found ' . count($nav)
+        );
+
+        $this->assertEquals(
+            $nav->toArray(),
+            $this->_getFindByNavigation()->toArray()
+        );
+    }
+
     public function testAddPagesShouldThrowExceptionWhenGivenString()
     {
         $nav = new Navigation\Navigation();

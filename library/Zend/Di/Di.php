@@ -429,15 +429,19 @@ class Di implements DependencyInjection
         // first pass will find the sources, the second pass will order them and resolve lookups if they exist
         // MOST methods will only have a single parameters to resolve, so this should be fast
 
-        foreach ($injectionMethodParameters as $fqName => $info) {
+        foreach ($injectionMethodParameters as $fqParamPos => $info) {
             list($name, $type, $isRequired) = $info;
 
+            $fqParamName = substr_replace($fqParamPos, ':' . $info[0], strrpos($fqParamPos, ':'));
+
             // PRIORITY 1 - consult user provided parameters
-            if (isset($callTimeUserParams[$fqName]) || isset($callTimeUserParams[$name])) {
+            if (isset($callTimeUserParams[$fqParamPos]) || isset($callTimeUserParams[$name])) {
 
                 // @todo FQ Name in call time params
-                if (isset($callTimeUserParams[$fqName])) {
-                    $callTimeCurValue =& $callTimeUserParams[$fqName];
+                if (isset($callTimeUserParams[$fqParamPos])) {
+                    $callTimeCurValue =& $callTimeUserParams[$fqParamPos];
+                } elseif (isset($callTimeUserParams[$fqParamName])) {
+                    $callTimeCurValue =& $callTimeUserParams[$fqParamName];
                 } else {
                     $callTimeCurValue =& $callTimeUserParams[$name];
                 }
@@ -445,23 +449,23 @@ class Di implements DependencyInjection
                 if (is_string($callTimeCurValue)) {
                     if ($this->instanceManager->hasAlias($callTimeCurValue)) {
                         // was an alias provided?
-                        $computedParams['required'][$fqName] = array(
+                        $computedParams['required'][$fqParamPos] = array(
                             $callTimeUserParams[$name],
                             $this->instanceManager->getClassFromAlias($callTimeCurValue)
                         );    
                     } elseif ($this->definitions->hasClass($callTimeUserParams[$name])) {
                         // was a known class provided?
-                        $computedParams['required'][$fqName] = array(
+                        $computedParams['required'][$fqParamPos] = array(
                             $callTimeCurValue,
                             $callTimeCurValue
                         );
                     } else {
                         // must be a value
-                        $computedParams['value'][$fqName] = $callTimeCurValue;
+                        $computedParams['value'][$fqParamPos] = $callTimeCurValue;
                     }
                 } else {
                     // int, float, null, object, etc
-                    $computedParams['value'][$fqName] = $callTimeCurValue;
+                    $computedParams['value'][$fqParamPos] = $callTimeCurValue;
                 }
                 unset($callTimeCurValue);
                 continue;
@@ -474,36 +478,40 @@ class Di implements DependencyInjection
             
             foreach (array('thisAlias', 'thisClass', 'requestedAlias', 'requestedClass') as $thisIndex) {
                 // check the provided parameters config
-                if (isset($iConfig[$thisIndex]['parameters'][$fqName]) || isset($iConfig[$thisIndex]['parameters'][$name])) {
+                if (isset($iConfig[$thisIndex]['parameters'][$fqParamPos])
+                    || isset($iConfig[$thisIndex]['parameters'][$fqParamName])
+                    || isset($iConfig[$thisIndex]['parameters'][$name])) {
 
                     // @todo FQ Name in config parameters
-                    if (isset($iConfig[$thisIndex]['parameters'][$fqName])) {
-                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqName];
+                    if (isset($iConfig[$thisIndex]['parameters'][$fqParamPos])) {
+                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqParamPos];
+                    } elseif (isset($iConfig[$thisIndex]['parameters'][$fqParamName])) {
+                        $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$fqParamName];
                     } else {
                         $iConfigCurValue =& $iConfig[$thisIndex]['parameters'][$name];
                     }
 
                     if (is_string($iConfigCurValue)
                         && $type === false) {
-                        $computedParams['value'][$fqName] = $iConfigCurValue;
+                        $computedParams['value'][$fqParamPos] = $iConfigCurValue;
                     } elseif (is_string($iConfigCurValue)
                         && isset($aliases[$iConfigCurValue])) {
-                        $computedParams['required'][$fqName] = array(
+                        $computedParams['required'][$fqParamPos] = array(
                             $iConfig[$thisIndex]['parameters'][$name],
                             $this->instanceManager->getClassFromAlias($iConfigCurValue)
                         );
                     } elseif (is_string($iConfigCurValue)
                         && $this->definitions->hasClass($iConfigCurValue)) {
-                        $computedParams['required'][$fqName] = array(
+                        $computedParams['required'][$fqParamPos] = array(
                             $iConfigCurValue,
                             $iConfigCurValue
                         );
                     } elseif (is_object($iConfigCurValue)
                         && $iConfigCurValue instanceof \Closure
                         && $type !== 'Closure') {
-                        $computedParams['value'][$fqName] = $iConfigCurValue();
+                        $computedParams['value'][$fqParamPos] = $iConfigCurValue();
                     } else {
-                        $computedParams['value'][$fqName] = $iConfigCurValue;
+                        $computedParams['value'][$fqParamPos] = $iConfigCurValue;
                     }
                     unset($iConfigCurValue);
                     continue 2;
@@ -518,13 +526,13 @@ class Di implements DependencyInjection
                 $pInstances = $this->instanceManager->getTypePreferences($alias);
                 foreach ($pInstances as $pInstance) {
                     if (is_object($pInstance)) {
-                        $computedParams['value'][$fqName] = $pInstance;
+                        $computedParams['value'][$fqParamPos] = $pInstance;
                         continue 2;
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
-                        $computedParams['required'][$fqName] = array($pInstance, $pInstanceClass);
+                        $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
@@ -535,50 +543,50 @@ class Di implements DependencyInjection
                 $pInstances = $this->instanceManager->getTypePreferences($type);
                 foreach ($pInstances as $pInstance) {
                     if (is_object($pInstance)) {
-                        $computedParams['value'][$fqName] = $pInstance;
+                        $computedParams['value'][$fqParamPos] = $pInstance;
                         continue 2;
                     }
                     $pInstanceClass = ($this->instanceManager->hasAlias($pInstance)) ?
                          $this->instanceManager->getClassFromAlias($pInstance) : $pInstance;
                     if ($pInstanceClass === $type || $this->isSubclassOf($pInstanceClass, $type)) {
-                        $computedParams['required'][$fqName] = array($pInstance, $pInstanceClass);
+                        $computedParams['required'][$fqParamPos] = array($pInstance, $pInstanceClass);
                         continue 2;
                     }
                 }
             }
 
             if (!$isRequired) {
-                $computedParams['optional'][$fqName] = true;
+                $computedParams['optional'][$fqParamPos] = true;
             }
 
             if ($type && $isRequired && $methodIsRequired) {
-                $computedParams['required'][$fqName] = array($type, $type);
+                $computedParams['required'][$fqParamPos] = array($type, $type);
             }
             
         }
 
         $index = 0;
-        foreach ($injectionMethodParameters as $fqName => $value) {
+        foreach ($injectionMethodParameters as $fqParamPos => $value) {
             $name = $value[0];
 
-            if (isset($computedParams['value'][$fqName])) {
+            if (isset($computedParams['value'][$fqParamPos])) {
 
                 // if there is a value supplied, use it
-                $resolvedParams[$index] = $computedParams['value'][$fqName];
+                $resolvedParams[$index] = $computedParams['value'][$fqParamPos];
 
-            } elseif (isset($computedParams['required'][$fqName])) {
+            } elseif (isset($computedParams['required'][$fqParamPos])) {
 
                 // detect circular dependencies! (they can only happen in instantiators)
-                if ($isInstantiator && in_array($computedParams['required'][$fqName][1], $this->currentDependencies)) {
+                if ($isInstantiator && in_array($computedParams['required'][$fqParamPos][1], $this->currentDependencies)) {
                     throw new Exception\CircularDependencyException(
                         "Circular dependency detected: $class depends on {$value[1]} and viceversa"
                     );
                 }
                 array_push($this->currentDependencies, $class);
-                $resolvedParams[$index] = $this->get($computedParams['required'][$fqName][0], $callTimeUserParams);
+                $resolvedParams[$index] = $this->get($computedParams['required'][$fqParamPos][0], $callTimeUserParams);
                 array_pop($this->currentDependencies);
 
-            } elseif (!array_key_exists($fqName, $computedParams['optional'])) {
+            } elseif (!array_key_exists($fqParamPos, $computedParams['optional'])) {
 
                 if ($methodIsRequired) {
                     // if this item was not marked as optional,

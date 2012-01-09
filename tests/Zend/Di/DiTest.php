@@ -442,7 +442,7 @@ class DiTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testInjectionCanHandleDisambiguation()
+    public function testInjectionCanHandleDisambiguationViaPositions()
     {
         $definitionList = new DefinitionList(array(
             $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
@@ -459,6 +459,32 @@ class DiTest extends \PHPUnit_Framework_TestCase
             array(
                 'ZendTest\Di\TestAsset\InjectionClasses\A::injectBOnce:0' => new \ZendTest\Di\TestAsset\InjectionClasses\B('once'),
                 'ZendTest\Di\TestAsset\InjectionClasses\A::injectBTwice:0' => new \ZendTest\Di\TestAsset\InjectionClasses\B('twice')
+            )
+        );
+        $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[0]);
+        $this->assertEquals('once', $a->bs[0]->id);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\B', $a->bs[1]);
+        $this->assertEquals('twice', $a->bs[1]->id);
+    }
+
+    public function testInjectionCanHandleDisambiguationViaNames()
+    {
+        $definitionList = new DefinitionList(array(
+            $classdef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\InjectionClasses\A'),
+            new Definition\RuntimeDefinition()
+        ));
+        $classdef->addMethod('injectBOnce');
+        $classdef->addMethod('injectBTwice');
+        $classdef->addMethodParameter('injectBOnce', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+        $classdef->addMethodParameter('injectBTwice', 'b', array('required' => true, 'type' => 'ZendTest\Di\TestAsset\InjectionClasses\B'));
+
+        $di = new Di($definitionList);
+        $di->instanceManager()->setInjections(
+            'ZendTest\Di\TestAsset\InjectionClasses\A',
+            array(
+                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBOnce:b' => new \ZendTest\Di\TestAsset\InjectionClasses\B('once'),
+                'ZendTest\Di\TestAsset\InjectionClasses\A::injectBTwice:b' => new \ZendTest\Di\TestAsset\InjectionClasses\B('twice')
             )
         );
         $a = $di->newInstance('ZendTest\Di\TestAsset\InjectionClasses\A');

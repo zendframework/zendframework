@@ -142,6 +142,14 @@ EOS;
         $this->assertEquals('    const someVal = \'some string value\';', $codeGenProperty->generate());
     }
 
+    // GitHub PR #704
+    public function testPropertyCanProduceContstantModifierWithSetter()
+    {
+        $codeGenProperty = new PropertyGenerator('someVal', 'some string value');
+        $codeGenProperty->setConst(true);
+        $this->assertEquals('    const someVal = \'some string value\';', $codeGenProperty->generate());
+    }
+
     public function testPropertyCanProduceStaticModifier()
     {
         $codeGenProperty = new PropertyGenerator('someVal', 'some string value', PropertyGenerator::FLAG_STATIC);

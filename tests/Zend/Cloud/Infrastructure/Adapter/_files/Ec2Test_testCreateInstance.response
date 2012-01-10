@@ -1,0 +1,45 @@
+HTTP/1.1 200 OK
+Content-type: text/xml;charset=UTF-8
+Vary: Accept-Encoding
+Date: Tue, 04 Oct 2011 10:20:31 GMT
+Server: AmazonEC2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2009-04-04/">
+    <requestId>da504c82-2696-4a3c-8165-d2b2869b6b78</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-14f4287a</reservationId>
+            <ownerId>788695787266</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>default</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-6cfcb00c</instanceId>
+                    <imageId>ami-7f418316</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-36-34-11.ec2.internal</privateDnsName>
+                    <dnsName>ec2-184-72-66-78.compute-1.amazonaws.com</dnsName>
+                    <reason/>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2011-10-04T10:20:14.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>us-east-1b</availabilityZone>
+                    </placement>
+                    <kernelId>aki-805ea7e9</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>

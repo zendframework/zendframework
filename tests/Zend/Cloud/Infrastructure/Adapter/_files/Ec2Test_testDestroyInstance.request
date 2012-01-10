@@ -1,0 +1,9 @@
+POST / HTTP/1.1
+Host: us-east-1.ec2.amazonaws.com
+Connection: close
+Accept-encoding: gzip, deflate
+User-Agent: Zend_Http_Client
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 248
+
+Action=TerminateInstances&InstanceId.1=i-6cfcb00c&AWSAccessKeyId=0123456789&SignatureVersion=2&Timestamp=2011-10-04T10%3A21%3A05Z&Version=2009-04-04&SignatureMethod=HmacSHA256&Signature=ngm%2F0jV%2Fbss%2B4ZCVqvp53Y9ZWXvEG89ASrFywxmRnQU%3D

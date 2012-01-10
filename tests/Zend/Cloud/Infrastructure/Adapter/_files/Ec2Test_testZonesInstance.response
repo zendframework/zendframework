@@ -1,0 +1,32 @@
+HTTP/1.1 200 OK
+Content-type: text/xml;charset=UTF-8
+Vary: Accept-Encoding
+Date: Tue, 04 Oct 2011 10:20:49 GMT
+Server: AmazonEC2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<DescribeAvailabilityZonesResponse xmlns="http://ec2.amazonaws.com/doc/2009-04-04/">
+    <requestId>9b5f3c62-9e3c-41ef-ba6b-57069dbb2da3</requestId>
+    <availabilityZoneInfo>
+        <item>
+            <zoneName>us-east-1a</zoneName>
+            <zoneState>available</zoneState>
+            <regionName>us-east-1</regionName>
+        </item>
+        <item>
+            <zoneName>us-east-1b</zoneName>
+            <zoneState>available</zoneState>
+            <regionName>us-east-1</regionName>
+        </item>
+        <item>
+            <zoneName>us-east-1c</zoneName>
+            <zoneState>available</zoneState>
+            <regionName>us-east-1</regionName>
+        </item>
+        <item>
+            <zoneName>us-east-1d</zoneName>
+            <zoneState>available</zoneState>
+            <regionName>us-east-1</regionName>
+        </item>
+    </availabilityZoneInfo>
+</DescribeAvailabilityZonesResponse>

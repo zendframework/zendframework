@@ -59,6 +59,20 @@ abstract class AbstractAdapter implements Adapter
     );
 
     /**
+     * Error message
+     * 
+     * @var string 
+     */
+    protected $errorMsg;
+    
+    /**
+     * Error code
+     * 
+     * @var string 
+     */
+    protected $errorCode;
+    
+    /**
      * Get the last result of the adapter
      *
      * @return array
@@ -169,5 +183,47 @@ abstract class AbstractAdapter implements Adapter
             }
         }    
         return $result;
+    }
+    
+    /**
+     * Return true if the last request was successful
+     * 
+     * @return boolean 
+     */
+    public function isSuccessful()
+    {
+        return (empty($this->errorMsg));
+    }
+    
+    /**
+     * Get the error message
+     * 
+     * @return string 
+     */
+    public function getErrorMsg()
+    {
+        return $this->errorMsg;
+    }
+    
+    /**
+     * Get the error code
+     * 
+     * @return string 
+     */
+    public function getErrorCode()
+    {
+        return $this->errorCode;
+    }
+    
+    /**
+     * Reset the error message and error code
+     * 
+     * @return void
+     */
+    protected function resetError()
+    {
+        $this->errorCode = null;
+        $this->errorMsg = null;
+        return;
     }
 }

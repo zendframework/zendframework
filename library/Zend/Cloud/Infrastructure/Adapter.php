@@ -169,4 +169,25 @@ interface Adapter
      * @return string
      */
     public function getLastHttpRequest();
+    
+    /**
+     * Return true if the last request was successful
+     * 
+     * @return boolean 
+     */
+    public function isSuccessful();
+    
+    /**
+     * Get the error message
+     * 
+     * @return string 
+     */
+    public function getErrorMsg();
+    
+    /**
+     * Get the error code
+     * 
+     * @return string
+     */
+    public function getErrorCode();
 } 

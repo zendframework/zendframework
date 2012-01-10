@@ -113,7 +113,7 @@ class Ec2 extends AbstractAdapter
         Instance::MONITOR_NETWORK_IN  => 'NetworkIn',
         Instance::MONITOR_NETWORK_OUT => 'NetworkOut',
     );
-
+    
     /**
      * Constructor
      *
@@ -150,7 +150,7 @@ class Ec2 extends AbstractAdapter
 
         try {
             $this->ec2 = new Ec2Instance($options[self::AWS_ACCESS_KEY], $options[self::AWS_SECRET_KEY], $this->region);
-        } catch (Ec2Exception  $e) {
+        } catch (Ec2Exception $e) {
             throw new Exception\RuntimeException('Error on create: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
@@ -170,11 +170,16 @@ class Ec2 extends AbstractAdapter
         $result = array();       
         if (!empty($attr) && is_array($attr)) {
             $result[Instance::INSTANCE_ID]         = $attr['instanceId'];
+            unset ($attr['instanceId']);
             $result[Instance::INSTANCE_STATUS]     = $this->mapStatus[$attr['instanceState']['name']];
+            unset ($attr['instanceState']['name']);
             $result[Instance::INSTANCE_IMAGEID]    = $attr['imageId'];
+            unset ($attr['imageId']);
             $result[Instance::INSTANCE_ZONE]       = $attr['availabilityZone'];
+            unset ($attr['availabilityZone']);
             $result[Instance::INSTANCE_LAUNCHTIME] = $attr['launchTime'];
-
+            unset ($attr['launchTime']);
+            
             switch ($attr['instanceType']) {
                 case Ec2Instance::MICRO:
                     $result[Instance::INSTANCE_CPU]     = '1 virtual core';
@@ -207,22 +212,32 @@ class Ec2 extends AbstractAdapter
                     $result[Instance::INSTANCE_STORAGE] = '1690GB';
                     break;
             }
+            unset ($attr['instanceType']);
+            $result = array_merge($attr, $result);
         }
         return $result;
     }
 
     /**
-     * Return a list of the available instancies
+     * Return the list of available instances
      *
-     * @return InstanceList
+     * @return boolean|InstanceList
      */ 
     public function listInstances() 
     {
-        $this->adapterResult = $this->ec2->describe();
-
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2->describe();
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
+            return false;
+        }    
         $result = array();
         foreach ($this->adapterResult['instances'] as $instance) {
             $result[]= $this->convertAttributes($instance);
+        }
+        if (empty($result)) {
+            return null;
         }
         return new InstanceList($this, $result);
     }
@@ -235,10 +250,13 @@ class Ec2 extends AbstractAdapter
      */ 
     public function statusInstance($id)
     {
-        $this->adapterResult = $this->ec2->describe($id);
-        if (empty($this->adapterResult['instances'])) {
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2->describe($id);
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
             return false;
-        }    
+        }       
         $result = $this->adapterResult['instances'][0];
         return $this->mapStatus[$result['instanceState']['name']];
     }
@@ -251,10 +269,13 @@ class Ec2 extends AbstractAdapter
      */
     public function publicDnsInstance($id) 
     {
-        $this->adapterResult = $this->ec2->describe($id);
-        if (empty($this->adapterResult['instances'])) {
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2->describe($id);
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
             return false;
-        }    
+        }
         $result = $this->adapterResult['instances'][0];
         return $result['dnsName'];
     }
@@ -267,7 +288,13 @@ class Ec2 extends AbstractAdapter
      */ 
     public function rebootInstance($id)
     {
-        $this->adapterResult= $this->ec2->reboot($id);
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2->reboot($id);
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
+            return false;
+        }
         return $this->adapterResult;
     }
 
@@ -280,12 +307,13 @@ class Ec2 extends AbstractAdapter
      */ 
     public function createInstance($name, $options)
     {
-        // @todo instance's name management?
-        $this->adapterResult = $this->ec2->run($options);
-        if (empty($this->adapterResult['instances'])) {
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2->run($options);
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
             return false;
         }
-        $this->error= false;
         return new Instance($this, $this->convertAttributes($this->adapterResult['instances'][0]));
     }
 
@@ -319,25 +347,38 @@ class Ec2 extends AbstractAdapter
      */ 
     public function destroyInstance($id)
     {
-        $this->adapterResult = $this->ec2->terminate($id);
-        return (!empty($this->adapterResult));
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2->terminate($id);
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
+            return false;
+        }
+        return true;
     }
  
     /**
      * Return a list of all the available instance images
      *
-     * @return ImageList
+     * @return boolean|ImageList
      */ 
     public function imagesInstance()
     {
         if (!isset($this->ec2Image)) {
             $this->ec2Image = new Ec2Image($this->accessKey, $this->accessSecret, $this->region);
+            $this->ec2Image->setHttpClient($this->ec2->getHttpClient());
         }
-
-        $this->adapterResult = $this->ec2Image->describe();
-                
+        
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2Image->describe();
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
+            return false;
+        }
+        
         $images = array();
-
+        $i = 0;
         foreach ($this->adapterResult as $result) {
             switch (strtolower($result['platform'])) {
                 case 'windows' :
@@ -348,7 +389,7 @@ class Ec2 extends AbstractAdapter
                     break;
             }
 
-            $images[]= array (
+            $images[$i] = array (
                 Image::IMAGE_ID           => $result['imageId'],
                 Image::IMAGE_NAME         => '',
                 Image::IMAGE_DESCRIPTION  => $result['imageLocation'],
@@ -356,6 +397,16 @@ class Ec2 extends AbstractAdapter
                 Image::IMAGE_ARCHITECTURE => $result['architecture'],
                 Image::IMAGE_PLATFORM     => $platform,
             );
+            unset($result['imageId']);
+            unset($result['imageLocation']);
+            unset($result['imageOwnerId']);
+            unset($result['architecture']);
+            unset($result['platform']);
+            $images[$i] = array_merge($result, $images[$i]);
+            $i++;
+        }
+        if (empty($images)) {
+            return null;
         }
         return new ImageList($images,$this->ec2Image);
     }
@@ -363,14 +414,22 @@ class Ec2 extends AbstractAdapter
     /**
      * Return all the available zones
      * 
-     * @return array
+     * @return boolean|array
      */
     public function zonesInstance()
     {
         if (!isset($this->ec2Zone)) {
             $this->ec2Zone = new Ec2Zone($this->accessKey,$this->accessSecret,$this->region);
+            $this->ec2Zone->setHttpClient($this->ec2->getHttpClient());
         }
-        $this->adapterResult = $this->ec2Zone->describe();
+        
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2Zone->describe();
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
+            return false;
+        }
 
         $zones = array();
         foreach ($this->adapterResult as $zone) {
@@ -389,7 +448,7 @@ class Ec2 extends AbstractAdapter
      * @param  string $id
      * @param  string $metric
      * @param  null|array $options
-     * @return array
+     * @return boolean|array
      */ 
     public function monitorInstance($id, $metric, $options = null)
     {
@@ -421,6 +480,7 @@ class Ec2 extends AbstractAdapter
 
         if (!isset($this->ec2Monitor)) {
             $this->ec2Monitor = new Ec2Monitor($this->accessKey, $this->accessSecret, $this->region);
+            $this->ec2Monitor->setHttpClient($this->ec2->getHttpClient());
         }
 
         $param = array(
@@ -434,7 +494,13 @@ class Ec2 extends AbstractAdapter
             $param['EndTime']   = $options[Instance::MONITOR_END_TIME];
         }
 
-        $this->adapterResult = $this->ec2Monitor->getMetricStatistics($param);
+        $this->resetError();
+        try {
+            $this->adapterResult = $this->ec2Monitor->getMetricStatistics($param);
+        } catch (Ec2Exception\RunTimeException $e) {
+            $this->setError($e);
+            return false;
+        }
 
         $monitor             = array();
         $num                 = 0;
@@ -475,7 +541,7 @@ class Ec2 extends AbstractAdapter
      */
     public function getLastHttpRequest()
     {
-        return $this->ec2->getHttpClient()->getLastRequest();
+        return $this->ec2->getHttpClient()->getLastRawRequest();
     }
 
     /**
@@ -485,6 +551,18 @@ class Ec2 extends AbstractAdapter
      */
     public function getLastHttpResponse()
     {
-        return $this->ec2->getHttpClient()->getLastResponse();
+        return $this->ec2->getHttpClient()->getResponse()->toString();
+    }
+    
+    /**
+     * Set the error message and error code from Ec2Exception\RunTimeException
+     * 
+     * @return void
+     */
+    protected function setError(Ec2Exception\RunTimeException $e)
+    {
+        $msg = explode(' ',$e->getMessage(),2);
+        $this->errorCode = $msg[0];
+        $this->errorMsg = $msg[1];
     }
 }

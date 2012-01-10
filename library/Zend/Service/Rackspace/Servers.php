@@ -90,7 +90,7 @@ class Servers extends Rackspace
     public function getServer($id) 
     {
         if (empty($id)) {
-            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_ID);
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_SERVERID);
         }
         $result= $this->httpCall($this->getManagementUrl().'/servers/'.rawurlencode($id),'GET');
         $status= $result->getStatusCode();
@@ -731,18 +731,21 @@ class Servers extends Rackspace
      * @return array|boolean
      */
     public function listFlavors($details=false)
-    {
+    { 
         $url= '/flavors';
         if ($details) {
             $url.= '/detail';
-        } 
+        }
         $result= $this->httpCall($this->getManagementUrl().$url,'GET');
         $status= $result->getStatusCode();
         switch ($status) {
             case '200' : 
             case '203' : // break intentionally omitted   
                 $flavors= json_decode($result->getBody(),true);
-                return $flavors['flavors'];
+                if (isset($flavors['flavors'])) {
+                    return $flavors['flavors'];
+                }
+                break;
             case '503' :
                 $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
                 break;
@@ -776,7 +779,10 @@ class Servers extends Rackspace
             case '200' : 
             case '203' : // break intentionally omitted   
                 $flavor= json_decode($result->getBody(),true);
-                return $flavor['flavor'];
+                if (isset($flavor['flavor'])) {
+                    return $flavor['flavor'];
+                }
+                break;
             case '503' :
                 $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
                 break;
@@ -836,6 +842,9 @@ class Servers extends Rackspace
      */
     public function getImage($id)
     {
+        if (empty($id)) {
+            throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_SERVERID);
+        }
         $result= $this->httpCall($this->getManagementUrl().'/images/'.rawurlencode($id),'GET');
         $status= $result->getStatusCode();
         switch ($status) {
@@ -888,7 +897,7 @@ class Servers extends Rackspace
         $status = $result->getStatusCode();
         switch ($status) {
             case '202' : // break intentionally omitted   
-                 $image= json_decode($result->getBody(),true);
+                $image= json_decode($result->getBody(),true);
                 return new Servers\Image($this,$image['image']);
             case '503' :
                 $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
@@ -968,7 +977,10 @@ class Servers extends Rackspace
             case '200' : 
             case '203' : // break intentionally omitted   
                 $backup = json_decode($result->getBody(),true);
-                return $image['backupSchedule'];
+                if (isset($image['backupSchedule'])) {
+                    return $image['backupSchedule'];
+                }
+                break;
             case '503' :
                 $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
                 break;

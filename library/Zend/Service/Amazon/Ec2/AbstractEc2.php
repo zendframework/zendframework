@@ -159,10 +159,10 @@ abstract class AbstractEc2 extends Amazon\AbstractAmazon
             ));
 
             $request->setUri($url);
-            $request->setMethod(\Zend\Http\Client::POST);
+            $request->setMethod('POST');
             $request->setParameterPost($params);
 
-            $httpResponse = $request->request();
+            $httpResponse = $request->send();
 
 
         } catch (\Zend\Http\Client\Exception $zhce) {

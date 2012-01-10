@@ -28,7 +28,6 @@ use Zend\OAuth;
  * @package    Zend_OAuth
  * @subpackage UnitTests
  * @group      Zend_OAuth
- * @group      disable
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -208,7 +207,7 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new OAuth\Consumer($config);
         $token = $consumer->getRequestToken(null, null, new RequestToken48231);
-        $this->assertType('Zend\\OAuth\\Token\\Request', $token);
+        $this->assertInstanceOf('Zend\\OAuth\\Token\\Request', $token);
     }
 
     public function testGetRedirectUrlReturnsUserAuthorizationUrlWithParameters()
@@ -234,21 +233,21 @@ class ConsumerTest extends \PHPUnit_Framework_TestCase
         $rtoken = new OAuth\Token\Request;
         $rtoken->setToken('token');
         $token = $consumer->getAccessToken(array('oauth_token'=>'token'), $rtoken, null, new AccessToken48231);
-        $this->assertType('Zend\\OAuth\\Token\\Access', $token);
+        $this->assertInstanceOf('Zend\\OAuth\\Token\\Access', $token);
     }
 
     public function testGetLastRequestTokenReturnsInstanceWhenExists()
     {
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Consumer48231($config);
-        $this->assertType('Zend\\OAuth\\Token\\Request', $consumer->getLastRequestToken());
+        $this->assertInstanceOf('Zend\\OAuth\\Token\\Request', $consumer->getLastRequestToken());
     }
 
     public function testGetLastAccessTokenReturnsInstanceWhenExists()
     {
         $config = array('consumerKey'=>'12345','consumerSecret'=>'54321');
         $consumer = new Consumer48231($config);
-        $this->assertType('Zend\\OAuth\\Token\\Access', $consumer->getLastAccessToken());
+        $this->assertInstanceOf('Zend\\OAuth\\Token\\Access', $consumer->getLastAccessToken());
     }
 
 }

@@ -22,7 +22,7 @@
 namespace Zend\Service\Rackspace;
 
 use Zend\Service\Rackspace\Exception,
- Zend\Http\Client as HttpClient;
+    Zend\Http\Client as HttpClient;
 
 abstract class Rackspace
 {
@@ -187,7 +187,7 @@ abstract class Rackspace
     {
         if (empty($this->managementUrl)) {
             if (!$this->authenticate()) {
-                return false;
+                throw new Exception\RuntimeException('Authentication failed, you need a valid token to use the Rackspace API');
             }
         }
         return $this->managementUrl;
@@ -239,7 +239,7 @@ abstract class Rackspace
     {
         if (empty($this->token)) {
             if (!$this->authenticate()) {
-                return false;
+                throw new Exception\RuntimeException('Authentication failed, you need a valid token to use the Rackspace API');
             }
         }
         return $this->token;
@@ -256,7 +256,7 @@ abstract class Rackspace
     /**
      * Get the error code of the last HTTP call
      * 
-     * @return strig 
+     * @return string 
      */
     public function getErrorCode() 
     {
@@ -281,7 +281,7 @@ abstract class Rackspace
      */
     public function isSuccessful()
     {
-        return ($this->errorMsg=='');
+        return (empty($this->errorMsg));
     }
     /**
      * HTTP call
@@ -313,8 +313,8 @@ abstract class Rackspace
         }
         $client->setHeaders($headers);
         $client->setUri($url);
-        $this->errorMsg='';
-        $this->errorCode='';
+        $this->errorMsg = null;
+        $this->errorCode = null;
         return $client->send();
     }
     /**
@@ -329,7 +329,7 @@ abstract class Rackspace
             self::AUTHKEY_HEADER => $this->key
         );
         $result = $this->httpCall($this->authUrl.'/'.self::VERSION,'GET', $headers);
-        if ($result->getStatusCode()==204) {
+        if ($result->getStatusCode()===204) {
             $this->token = $result->headers()->get(self::AUTHTOKEN)->getFieldValue();
             $this->storageUrl = $result->headers()->get(self::STORAGE_URL)->getFieldValue();
             $this->cdnUrl = $result->headers()->get(self::CDNM_URL)->getFieldValue();

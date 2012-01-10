@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Content-type: text/xml;charset=UTF-8
+Vary: Accept-Encoding
+Date: Tue, 04 Oct 2011 10:21:02 GMT
+Server: AmazonEC2
+
+<?xml version="1.0" encoding="UTF-8"?>
+<RebootInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2009-04-04/">
+    <requestId>6c98e1ad-bbfd-494f-99b7-f522f18fd255</requestId>
+    <return>true</return>
+</RebootInstancesResponse>

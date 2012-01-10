@@ -21,7 +21,8 @@
 
 namespace ZendTest\Cache\Storage\Adapter;
 use Zend\Cache\Storage\Adapter,
-    Zend\Cache;
+    Zend\Cache,
+    Zend\Stdlib\ErrorHandler;
 
 /**
  * PHPUnit test case
@@ -67,6 +68,15 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
             $this->_options,
             'Options instance is needed for tests'
         );
+    }
+
+    public function tearDown()
+    {
+        // be sure the error handler has been stopped
+        if (ErrorHandler::started()) {
+            ErrorHandler::stop();
+            $this->fail('ErrorHandler not stopped');
+        }
     }
 
     public function testOptionNamesValid()

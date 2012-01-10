@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
@@ -98,7 +98,7 @@ class AddressListTest extends TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            'zf-contributors@lists.zend.com' => 'ZF Contributors List',
             new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
         );
         $this->list->addMany($addresses);
@@ -112,7 +112,6 @@ class AddressListTest extends TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF DevTeam' => 'zf-devteam@zend.com',
             new Address('zf-devteam@zend.com', 'ZF DevTeam'),
         );
         $this->list->addMany($addresses);

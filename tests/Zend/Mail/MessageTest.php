@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use stdClass,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
@@ -57,8 +57,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $headers = $this->message->headers();
         $this->assertInstanceOf('Zend\Mail\Headers', $headers);
-        $this->assertTrue($headers->has('orig-date'));
-        $header  = $headers->get('orig-date');
+        $this->assertTrue($headers->has('date'));
+        $header  = $headers->get('date');
         $date    = date('r');
         $date    = substr($date, 0, 16);
         $test    = $header->getFieldValue();
@@ -230,7 +230,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            'zf-contributors@lists.zend.com' => 'ZF Contributors List',
             new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
         );
         $this->message->addFrom($addresses);
@@ -294,7 +294,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            'zf-contributors@lists.zend.com' => 'ZF Contributors List',
             new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
         );
         $this->message->addCc($addresses);
@@ -358,7 +358,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            'zf-contributors@lists.zend.com' => 'ZF Contributors List',
             new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
         );
         $this->message->addBcc($addresses);
@@ -422,7 +422,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $addresses = array(
             'zf-devteam@zend.com',
-            'ZF Contributors List' => 'zf-contributors@lists.zend.com',
+            'zf-contributors@lists.zend.com' => 'ZF Contributors List',
             new Address('fw-announce@lists.zend.com', 'ZF Announce List'),
         );
         $this->message->addReplyTo($addresses);

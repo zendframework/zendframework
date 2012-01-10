@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -35,7 +35,7 @@ use Zend\Navigation,
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Navigation
  */
@@ -374,6 +374,24 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(3, count($nav),
                             'Expected 3 pages, found ' . count($nav));
+    }
+
+    /**
+     * @group ZF-9815
+     */
+    public function testAddPagesShouldWorkWithNavigationContainer()
+    {
+        $nav = new Navigation\Navigation();
+        $nav->addPages($this->_getFindByNavigation());
+
+        $this->assertEquals(
+            3, count($nav), 'Expected 3 pages, found ' . count($nav)
+        );
+
+        $this->assertEquals(
+            $nav->toArray(),
+            $this->_getFindByNavigation()->toArray()
+        );
     }
 
     public function testAddPagesShouldThrowExceptionWhenGivenString()

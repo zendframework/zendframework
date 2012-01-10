@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Server
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -37,7 +37,7 @@ use Zend\Config\Config;
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Server
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Server implements \Zend\Server\Server
@@ -535,7 +535,7 @@ class Server implements \Zend\Server\Server
      *
      * See {@link setObject()} to set preconfigured object instances as request handlers.
      *
-     * @param string $class Class Name which executes SOAP Requests at endpoint.
+     * @param string|object $class Class name or object instance which executes SOAP Requests at endpoint.
      * @return \Zend\Soap\Server
      * @throws \Zend\Soap\ServerException if called more than once, or if class
      * does not exist
@@ -544,6 +544,10 @@ class Server implements \Zend\Server\Server
     {
         if (isset($this->_class)) {
             throw new Exception\InvalidArgumentException('A class has already been registered with this soap server instance');
+        }
+
+        if (is_object($class)) {
+            return $this->setObject($class);
         }
 
         if (!is_string($class)) {

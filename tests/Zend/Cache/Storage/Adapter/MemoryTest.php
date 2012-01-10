@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
@@ -37,10 +36,19 @@ class MemoryTest extends CommonAdapterTest
     public function setUp()
     {
         // instantiate memory adapter
-        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
+        $this->_options = new Cache\Storage\Adapter\MemoryOptions();
         $this->_storage = new Cache\Storage\Adapter\Memory();
         $this->_storage->setOptions($this->_options);
 
         parent::setUp();
     }
+
+    public function testThrowOutOfCapacityException()
+    {
+        $this->_options->setMemoryLimit(memory_get_usage(true) - 8);
+
+        $this->setExpectedException('Zend\Cache\Exception\OutOfCapacityException');
+        $this->_storage->addItem('test', 'test');
+    }
+
 }

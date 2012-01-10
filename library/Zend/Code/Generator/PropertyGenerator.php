@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage PHP
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -32,7 +32,7 @@ use Zend\Code\Reflection\PropertyReflection;
  * @uses       \Zend\Code\Generator\PhpPropertyValue
  * @category   Zend
  * @package    Zend_CodeGenerator
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PropertyGenerator extends AbstractMemberGenerator
@@ -110,6 +110,9 @@ class PropertyGenerator extends AbstractMemberGenerator
     {
         if ($const) {
             $this->removeFlag(self::FLAG_PUBLIC | self::FLAG_PRIVATE | self::FLAG_PROTECTED);
+            $this->setFlags(self::FLAG_CONSTANT);
+        } else {
+            $this->removeFlag(self::FLAG_CONSTANT);
         }
     }
 

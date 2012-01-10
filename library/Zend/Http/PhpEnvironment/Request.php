@@ -73,7 +73,7 @@ class Request extends HttpRequest
     public function getRequestUri()
     {
         if ($this->requestUri === null) {
-            $this->requestUri = $this->detectRequestUri();
+            $this->setRequestUri($this->detectRequestUri());
         }
         return $this->requestUri;
     }
@@ -98,7 +98,7 @@ class Request extends HttpRequest
     public function getBaseUrl()
     {
         if ($this->baseUrl === null) {
-            $this->baseUrl = rtrim($this->detectBaseUrl(), '/');
+            $this->setBaseUrl($this->detectBaseUrl());
         }
         return $this->baseUrl;
     }
@@ -123,7 +123,7 @@ class Request extends HttpRequest
     public function getBasePath()
     {
         if ($this->basePath === null) {
-            $this->basePath = rtrim($this->detectBasePath(), '/');
+            $this->setBasePath($this->detectBasePath());
         }
         
         return $this->basePath;
@@ -213,7 +213,7 @@ class Request extends HttpRequest
      * 
      * @return string
      */
-    public function detectRequestUri()
+    protected function detectRequestUri()
     {
         $requestUri = null;
 
@@ -268,7 +268,7 @@ class Request extends HttpRequest
      * 
      * @return string
      */
-    public function detectBaseUrl()
+    protected function detectBaseUrl()
     {
         $baseUrl        = '';
         $filename       = $this->server()->get('SCRIPT_FILENAME', '');
@@ -345,7 +345,7 @@ class Request extends HttpRequest
      * 
      * @return string
      */
-    public function detectBasePath()
+    protected function detectBasePath()
     {
         $filename = basename($this->server()->get('SCRIPT_FILENAME', ''));
         $baseUrl  = $this->getBaseUrl();

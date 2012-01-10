@@ -17,7 +17,6 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
 namespace ZendTest\Cache\Storage\Adapter;
@@ -47,6 +46,7 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $this->_options = new Cache\Storage\Adapter\AdapterOptions();
         $this->_storage = $this->getMockForAbstractClass('Zend\Cache\Storage\Adapter\AbstractAdapter');
+        $this->_storage->setOptions($this->_options);
         $this->_storage->expects($this->any())
                        ->method('getOptions')
                        ->will($this->returnValue($this->_options));

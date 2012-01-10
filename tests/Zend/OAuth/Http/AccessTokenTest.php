@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_OAuth
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,8 +29,7 @@ use Zend\OAuth\Http,
  * @package    Zend_OAuth
  * @subpackage UnitTests
  * @group      Zend_OAuth
- * @group      disable
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AccessTokenTest extends \PHPUnit_Framework_TestCase
@@ -53,7 +52,7 @@ class AccessTokenTest extends \PHPUnit_Framework_TestCase
     public function testConstructorSetsConsumerInstance()
     {
         $request = new Http\AccessToken($this->stubConsumer, null, $this->stubHttpUtility);
-        $this->assertType('\\ZendTest\\OAuth\\Http\\Consumer39745', $request->getConsumer());
+        $this->assertInstanceOf('\\ZendTest\\OAuth\\Http\\Consumer39745', $request->getConsumer());
     }
 
     public function testConstructorSetsCustomServiceParameters()
@@ -140,7 +139,8 @@ class AccessTokenTest extends \PHPUnit_Framework_TestCase
             .'a6738a19f&oauth_signature_method=HMAC-SHA1&oauth_timestamp=12345'
             .'678901&oauth_token=0987654321&oauth_version=1.0&oauth_signature='
             .'6fb42da0e32e07b61c9f0251fe627a9c~',
-            $client->getRawData()
+            //$client->getRawData()
+            $client->getRequest()->getContent()
         );
     }
 
@@ -197,7 +197,7 @@ class HTTPUtility39745 extends OAuth\Http\Utility
 
 class HTTPClient39745 extends \Zend\Http\Client
 {
-    public function getRawData(){return $this->raw_post_data;}
+    //public function getRawData(){return $this->raw_post_data;}
 }
 
 class RequestToken39745 extends OAuth\Token\Request

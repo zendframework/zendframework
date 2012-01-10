@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use ArrayIterator,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Headers implements Iterator, Countable
@@ -134,7 +134,23 @@ class Headers implements Iterator, Countable
     {
         if ($this->pluginClassLoader === null) {
             $this->pluginClassLoader = new PluginClassLoader(array(
-                'contenttype'        => 'Zend\Mail\Header\ContentType',
+                'bcc'          => 'Zend\Mail\Header\Bcc',
+                'cc'           => 'Zend\Mail\Header\Cc',
+                'contenttype'  => 'Zend\Mail\Header\ContentType',
+                'content_type' => 'Zend\Mail\Header\ContentType',
+                'content-type' => 'Zend\Mail\Header\ContentType',
+                'date'         => 'Zend\Mail\Header\Date',
+                'from'         => 'Zend\Mail\Header\From',
+                'mimeversion'  => 'Zend\Mail\Header\MimeVersion',
+                'mime_version' => 'Zend\Mail\Header\MimeVersion',
+                'mime-version' => 'Zend\Mail\Header\MimeVersion',
+                'received'     => 'Zend\Mail\Header\Received',
+                'replyto'      => 'Zend\Mail\Header\ReplyTo',
+                'reply_to'     => 'Zend\Mail\Header\ReplyTo',
+                'reply-to'     => 'Zend\Mail\Header\ReplyTo',
+                'sender'       => 'Zend\Mail\Header\Sender',
+                'subject'      => 'Zend\Mail\Header\Subject',
+                'to'           => 'Zend\Mail\Header\To',
             ));
         }
         return $this->pluginClassLoader;

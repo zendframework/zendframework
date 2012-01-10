@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ use Zend\Loader\PluginClassLoader;
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PluginLoader extends PluginClassLoader
@@ -42,11 +42,11 @@ class PluginLoader extends PluginClassLoader
     protected $plugins = array(
         'clear_by_factor'    => 'Zend\Cache\Storage\Plugin\ClearByFactor',
         'clearbyfactor'      => 'Zend\Cache\Storage\Plugin\ClearByFactor',
-        //'exception_handler'  => 'Zend\Cache\Storage\Plugin\ExceptionHandler',
-        //'exceptionhandler'   => 'Zend\Cache\Storage\Plugin\ExceptionHandler',
+        'exception_handler'  => 'Zend\Cache\Storage\Plugin\ExceptionHandler',
+        'exceptionhandler'   => 'Zend\Cache\Storage\Plugin\ExceptionHandler',
         //'filter'             => 'Zend\Cache\Storage\Plugin\Filter',
-        //'ignore_user_abort'  => 'Zend\Cache\Storage\Plugin\IgnoreUserAbort',
-        //'ignoreuserabort'    => 'Zend\Cache\Storage\Plugin\IgnoreUserAbort',
+        'ignore_user_abort'  => 'Zend\Cache\Storage\Plugin\IgnoreUserAbort',
+        'ignoreuserabort'    => 'Zend\Cache\Storage\Plugin\IgnoreUserAbort',
         //'key_filter'         => 'Zend\Cache\Storage\Plugin\KeyFilter',
         //'keyfilter'          => 'Zend\Cache\Storage\Plugin\KeyFilter',
         //'levels'             => 'Zend\Cache\Storage\Plugin\Levels',

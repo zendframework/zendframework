@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Cache\Exception,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class PluginOptions extends Options
@@ -55,6 +55,13 @@ class PluginOptions extends Options
      * @var callable
      */
     protected $exceptionCallback;
+
+    /**
+     * Used by:
+     * - IgnoreUserAbort
+     * @var boolean
+     */
+    protected $exitOnAbort = true;
 
     /**
      * Used by:
@@ -169,6 +176,28 @@ class PluginOptions extends Options
     public function getExceptionCallback()
     {
         return $this->exceptionCallback;
+    }
+
+    /**
+     * Exit if connection aborted and ignore_user_abort is disabled.
+     *
+     * @param boolean $exitOnAbort
+     * @return PluginOptions
+     */
+    public function setExitOnAbort($exitOnAbort)
+    {
+        $this->exitOnAbort = (bool) $exitOnAbort;
+        return $this;
+    }
+
+    /**
+     * Exit if connection aborted and ignore_user_abort is disabled.
+     *
+     * @return boolean
+     */
+    public function getExitOnAbort()
+    {
+        return $this->exitOnAbort;
     }
 
     /**

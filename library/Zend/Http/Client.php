@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend\Http
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -38,7 +38,7 @@ use Zend\Config\Config,
  *
  * @category   Zend
  * @package    Zend\Http
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Client implements Dispatchable
@@ -488,7 +488,7 @@ class Client implements Dispatchable
             }
         } elseif ($cookie instanceof SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
-        } elseif (is_string($cookie) && !empty($value)) {
+        } elseif (is_string($cookie) && !is_null($value)) {
             if (!empty($value) && $this->config['encodecookies']) {
                 $value = urlencode($value);
             }

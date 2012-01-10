@@ -30,13 +30,10 @@ class Response extends HttpResponse
     public function sendHeaders()
     {
         if ($this->headersSent()) {
-            return;
+            return $this;
         }
 
-        $version = $this->getVersion();
-        $code    = $this->getStatusCode();
-        $message = $this->getReasonPhrase();
-        $status  = sprintf('HTTP/%s %d %s', $version, $code, $message);
+        $status  = $this->renderStatusLine();
         header($status);
 
         foreach ($this->headers() as $header) {
@@ -54,7 +51,7 @@ class Response extends HttpResponse
     public function sendContent()
     {
         if ($this->contentSent()) {
-            return;
+            return $this;
         }
         echo $this->getContent();
         $this->contentSent = true;

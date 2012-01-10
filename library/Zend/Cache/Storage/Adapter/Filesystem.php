@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -24,16 +24,18 @@ namespace Zend\Cache\Storage\Adapter;
 use ArrayObject,
     GlobIterator,
     stdClass,
+    Exception as BaseException,
     Zend\Cache\Exception,
     Zend\Cache\Storage,
     Zend\Cache\Storage\Capabilities,
-    Zend\Cache\Utils;
+    Zend\Cache\Utils,
+    Zend\Stdlib\ErrorHandler;
 
 /**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Filesystem extends AbstractAdapter
@@ -53,18 +55,15 @@ class Filesystem extends AbstractAdapter
     protected $stmtMatch = null;
 
     /**
-     * Buffer vars
+     * Last buffered identified of internal method getKeyInfo()
      *
      * @var string|null
      */
     protected $lastInfoId = null;
 
     /**
-     * @var array|bool|null
-     */
-    protected $lastInfoAll = null;
-
-    /**
+     * Buffered result of internal method getKeyInfo()
+     *
      * @var array|null
      */
     protected $lastInfo = null;
@@ -75,13 +74,13 @@ class Filesystem extends AbstractAdapter
      * Set options.
      *
      * @param  array|Traversable|FilesystemOptions $options
-     * @return FilesystemAdapter
+     * @return Filesystem
      * @see    getOptions()
      */
     public function setOptions($options)
     {
-        if (!is_array($options) 
-            && !$options instanceof Traversable 
+        if (!is_array($options)
+            && !$options instanceof Traversable
             && !$options instanceof FilesystemOptions
         ) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -156,7 +155,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -202,7 +201,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -240,7 +239,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalHasItem($key, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -283,7 +282,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -319,15 +318,9 @@ class Filesystem extends AbstractAdapter
                 clearstatcache();
             }
 
-            $lastInfoId = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if ($this->lastInfoId == $lastInfoId && $this->lastInfoAll) {
-                return $this->lastInfoAll;
-            }
-
-            $this->lastInfoAll = $result = $this->internalGetMetadata($key, $options);
-
+            $result = $this->internalGetMetadata($key, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -374,7 +367,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -418,7 +411,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -459,7 +452,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -504,7 +497,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -549,7 +542,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -594,7 +587,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->internalSetItem($key, $value, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -640,7 +633,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -648,10 +641,10 @@ class Filesystem extends AbstractAdapter
     /**
      * check and set item
      *
-     * @param $token
-     * @param $key
-     * @param $value
-     * @param array $options
+     * @param string $token
+     * @param string $key
+     * @param mixed  $value
+     * @param array  $options
      * @return bool|mixed
      * @throws ItemNotFoundException
      */
@@ -698,7 +691,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -739,7 +732,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -777,7 +770,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -814,7 +807,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -852,7 +845,7 @@ class Filesystem extends AbstractAdapter
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -907,13 +900,13 @@ class Filesystem extends AbstractAdapter
                 $this->stmtGlob    = $glob;
                 $this->stmtMatch   = $mode;
                 $this->stmtOptions = $options;
-            } catch (\Exception $e) {
+            } catch (BaseException $e) {
                 throw new Exception\RuntimeException('Instantiating glob iterator failed', 0, $e);
             }
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -952,7 +945,7 @@ class Filesystem extends AbstractAdapter
             }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -983,7 +976,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->clearByPrefix('', $mode, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1013,7 +1006,7 @@ class Filesystem extends AbstractAdapter
             $prefix = $options['namespace'] . $this->getOptions()->getNamespaceSeparator();
             $result = $this->clearByPrefix($prefix, $mode, $options);
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1044,12 +1037,15 @@ class Filesystem extends AbstractAdapter
 
             if ( ($dirLevel = $baseOptions->getDirLevel()) ) {
                 // removes only empty directories
-                $this->rmDir($baseOptions->getCacheDir(), $options['namespace'] . $baseOptions->getNamespaceSeparator());
+                $this->rmDir(
+                    $baseOptions->getCacheDir(),
+                    $options['namespace'] . $baseOptions->getNamespaceSeparator()
+                );
             }
 
             $result = true;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1107,7 +1103,7 @@ class Filesystem extends AbstractAdapter
 
             $result = $this->capabilities;
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1130,7 +1126,7 @@ class Filesystem extends AbstractAdapter
 
             $result = Utils::getDiskCapacity($this->getOptions()->getCacheDir());
             return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);
         }
     }
@@ -1161,13 +1157,14 @@ class Filesystem extends AbstractAdapter
                 $path = dirname($filespec);
                 if (!file_exists($path)) {
                     $oldUmask = umask($baseOptions->getDirUmask());
-                    set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($oldUmask) {
-                        umask($oldUmask);
-                        $message = sprintf('Error creating directory (in %s@%d): %s', $errfile, $errline, $errstr);
-                        throw new Exception\RuntimeException($message, $errno);
-                    }, E_WARNING);
-                    mkdir($path, 0777, true);
-                    restore_error_handler();
+                    ErrorHandler::start();
+                    $mkdir = mkdir($path, 0777, true);
+                    $error = ErrorHandler::stop();
+                    if (!$mkdir) {
+                        throw new Exception\RuntimeException(
+                            "Error creating directory '{$file}'", 0, $error
+                        );
+                    }
                 }
             }
         }
@@ -1211,7 +1208,7 @@ class Filesystem extends AbstractAdapter
 
             return $ret;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // reset umask on exception
             umask($oldUmask);
             throw $e;
@@ -1244,7 +1241,7 @@ class Filesystem extends AbstractAdapter
      * @param $key
      * @param array $options
      * @return bool|string
-     * @throws \Exception|ItemNotFoundException|UnexpectedValueException
+     * @throws Exception\ItemNotFoundException|Exception\UnexpectedValueException
      */
     protected function internalGetItem($key, array &$options)
     {
@@ -1267,23 +1264,21 @@ class Filesystem extends AbstractAdapter
             if ($baseOptions->getReadControl()) {
                 if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo'))
                     && isset($info['hash'], $info['algo'])
+                    && Utils::generateHash($info['algo'], $data, true) != $info['hash']
                 ) {
-                    $hashData = Utils::generateHash($info['algo'], $data, true);
-                    if ($hashData != $info['hash']) {
-                        throw new Exception\UnexpectedValueException(
-                            'ReadControl: Stored hash and computed hash don\'t match'
-                        );
-                    }
+                    throw new Exception\UnexpectedValueException(
+                        "ReadControl: Stored hash and computed hash don't match"
+                    );
                 }
             }
 
             return $data;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             try {
                 // remove cache file on exception
                 $this->internalRemoveItem($key, $options);
-            } catch (\Exception $tmp) {} // do not throw remove exception on this point
+            } catch (Exception $tmp) {} // do not throw remove exception on this point
 
             throw $e;
         }
@@ -1320,15 +1315,24 @@ class Filesystem extends AbstractAdapter
      * @return array|bool
      * @throws ItemNotFoundException
      */
-    protected function internalGetMetadata($key, array &$options) 
+    protected function internalGetMetadata($key, array &$options)
     {
-        $keyInfo = $this->getKeyInfo($key, $options['namespace']);
+        $baseOptions = $this->getOptions();
+        $keyInfo     = $this->getKeyInfo($key, $options['namespace']);
         if (!$keyInfo) {
             if ($options['ignore_missing_items']) {
                 return false;
             } else {
                 throw new Exception\ItemNotFoundException("Key '{$key}' not found within namespace '{$options['namespace']}'");
             }
+        }
+
+        if (!$baseOptions->getNoCtime()) {
+            $keyInfo['ctime'] = filectime($keyInfo['filespec'] . '.dat');
+        }
+
+        if (!$baseOptions->getNoAtime()) {
+            $keyInfo['atime'] = fileatime($keyInfo['filespec'] . '.dat');
         }
 
         if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo')) ) {
@@ -1341,8 +1345,8 @@ class Filesystem extends AbstractAdapter
     /**
      * Touch a key
      *
-     * @param $key
-     * @param array $options
+     * @param string $key
+     * @param array  $options
      * @return bool
      * @throws ItemNotFoundException|RuntimeException
      */
@@ -1353,16 +1357,20 @@ class Filesystem extends AbstractAdapter
             if ($options['ignore_missing_items']) {
                 return false;
             } else {
-                throw new Exception\ItemNotFoundException("Key '{$key}' not found within namespace '{$options['namespace']}'");
+                throw new Exception\ItemNotFoundException(
+                    "Key '{$key}' not found within namespace '{$options['namespace']}'"
+                );
             }
         }
 
-        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) {
-            $message = sprintf('Error touching cache item (in %s@%d): %s', $errfile, $errline, $errstr);
-            throw new Exception\RuntimeException($message, $errno);
-        }, E_WARNING);
-        touch($keyInfo['filespec'] . '.dat');
-        restore_error_handler();
+        ErrorHandler::start();
+        $touch = touch($keyInfo['filespec'] . '.dat');
+        $error = ErrorHandler::stop();
+        if (!$touch) {
+            throw new Exception\RuntimeException(
+                "Error touching file '{$file}'", 0, $error
+            );
+        }
     }
 
     /**
@@ -1498,7 +1506,7 @@ class Filesystem extends AbstractAdapter
                 . str_repeat(\DIRECTORY_SEPARATOR . $prefix . '*', $baseOptions->getDirLevel())
                 . \DIRECTORY_SEPARATOR . $prefix . '*.dat';
             $glob = new GlobIterator($find);
-        } catch (\Exception $e) {
+        } catch (BaseException $e) {
             throw new Exception\RuntimeException('Instantiating GlobIterator failed', 0, $e);
         }
 
@@ -1537,7 +1545,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
                 if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {
-                    if (!isset($info['tags']) 
+                    if (!isset($info['tags'])
                         || count(array_diff($opts['tags'], $info['tags'])) > 0
                     ) {
                         continue;
@@ -1545,7 +1553,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
                 } elseif(($mode & self::MATCH_NO_TAGS) == self::MATCH_NO_TAGS) {
-                    if (isset($info['tags']) 
+                    if (isset($info['tags'])
                         && count(array_diff($opts['tags'], $info['tags'])) != count($opts['tags'])
                     ) {
                         continue;
@@ -1553,7 +1561,7 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
                 } elseif ( ($mode & self::MATCH_ANY_TAGS) == self::MATCH_ANY_TAGS ) {
-                    if (!isset($info['tags']) 
+                    if (!isset($info['tags'])
                         || count(array_diff($opts['tags'], $info['tags'])) == count($opts['tags'])
                     ) {
                         continue;
@@ -1592,15 +1600,17 @@ class Filesystem extends AbstractAdapter
 
         $ret = true;
         foreach ($glob as $subdir) {
-            // ignore not empty directories
             // skip removing current directory if removing of sub-directory failed
-            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) {
-                // ignore rmdir errors
-                return true;
-            }, E_WARNING);
-            $ret = $this->rmDir($subdir, $prefix) && rmdir($subdir);
-            restore_error_handler();
+            if ($this->rmDir($subdir, $prefix)) {
+                // ignore not empty directories
+                ErrorHandler::start();
+                $ret = rmdir($subdir) && $ret;
+                ErrorHandler::stop();
+            } else {
+                $ret = false;
+            }
         }
+
         return $ret;
     }
 
@@ -1614,38 +1624,32 @@ class Filesystem extends AbstractAdapter
      */
     protected function getKeyInfo($key, $ns)
     {
-        $options    = $this->getOptions();
-        $lastInfoId = $ns . $options->getNamespaceSeparator() . $key;
+        $lastInfoId = $ns . $this->getOptions()->getNamespaceSeparator() . $key;
         if ($this->lastInfoId == $lastInfoId) {
             return $this->lastInfo;
         }
 
         $filespec = $this->getFileSpec($key, $ns);
+        $file     = $filespec . '.dat';
 
-        set_error_handler(function($errno, $errstr = '') {
-            return true;
-        }, E_WARNING);
-        $filemtime = filemtime($filespec . '.dat');
-        restore_error_handler();
-
-        if ($filemtime === false) {
+        if (!file_exists($file)) {
             return false;
         }
 
+        ErrorHandler::start();
+        $mtime = filemtime($file);
+        $error = ErrorHandler::stop();
+        if (!$mtime) {
+            throw new Exception\RuntimeException(
+                "Error getting mtime of file '{$file}'", 0, $error
+            );
+        }
+
         $this->lastInfoId  = $lastInfoId;
-        $this->lastInfoAll = null;
         $this->lastInfo    = array(
             'filespec' => $filespec,
-            'mtime'    => $filemtime,
+            'mtime'    => $mtime,
         );
-
-        if (!$options->getNoCtime()) {
-            $this->lastInfo['ctime'] = filectime($filespec . '.dat');
-        }
-
-        if (!$options->getNoAtime()) {
-            $this->lastInfo['atime'] = fileatime($filespec . '.dat');
-        }
 
         return $this->lastInfo;
     }
@@ -1686,23 +1690,24 @@ class Filesystem extends AbstractAdapter
      * @return array|boolean The info array or false if file wasn't found
      * @throws Exception\RuntimeException
      */
-    protected function readInfoFile($file) 
+    protected function readInfoFile($file)
     {
         if (!file_exists($file)) {
             return false;
         }
 
-        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-            $message = sprintf('Corrupted info file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
-            throw new Exception\RuntimeException($message, $errno);
-        }, E_WARNING);
-        $info = unserialize($this->getFileContent($file));
-        restore_error_handler();
-        if (!is_array($info)) {
-           throw new Exception\RuntimeException("Corrupted info file '{$file}'");
+        $content = $this->getFileContent($file);
+
+        ErrorHandler::start();
+        $ifo = unserialize($content);
+        $err = ErrorHandler::stop();
+        if (!is_array($ifo)) {
+            throw new Exception\RuntimeException(
+                "Corrupted info file '{$file}'", 0, $err
+            );
         }
 
-        return $info;
+        return $ifo;
     }
 
     /**
@@ -1714,59 +1719,36 @@ class Filesystem extends AbstractAdapter
      */
     protected function getFileContent($file)
     {
+        $locking = $this->getOptions()->getFileLocking();
+
+        ErrorHandler::start();
+
         // if file locking enabled -> file_get_contents can't be used
-        if ($this->getOptions()->getFileLocking()) {
-            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-                $message = sprintf(
-                    'Error getting contents from file "%s" (in %s@%d): %s', 
-                    $file, 
-                    $errfile, 
-                    $errline, 
-                    $errstr
-                );
-                throw new Exception\RuntimeException($message, $errno);
-            }, E_WARNING);
+        if ($locking) {
             $fp = fopen($file, 'rb');
-            restore_error_handler();
             if ($fp === false) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Unknown error getting contents from file "%s"', 
-                    $file
-                ));
-            }
-
-            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-                $message = sprintf(
-                    'Error locking file "%s" (in %s@%d): %s', 
-                    $file, 
-                    $errfile, 
-                    $errline, 
-                    $errstr
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "Error opening file '{$file}'", 0, $err
                 );
-                throw new Exception\RuntimeException($message, $errno);
-            }, E_WARNING);
-            $res = flock($fp, \LOCK_SH);
-            restore_error_handler();
-            if (!$res) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Unknown error locking file "%s"', $file
-                ));
             }
 
-            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($fp) {
-                if (is_resource($fp)) {
-                    flock($fp, \LOCK_UN);
-                    fclose($fp);
-                }
-                $message = sprintf('Error getting stream contents (in %s@%d): %s', $errfile, $errline, $errstr);
-                throw new Exception\RuntimeException($message, $errno);
-            }, E_WARNING);
-            $result = stream_get_contents($fp);
-            restore_error_handler();
-            if ($result === false) {
+            if (!flock($fp, \LOCK_SH)) {
+                fclose($fp);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "Error locking file '{$file}'", 0, $err
+                );
+            }
+
+            $res = stream_get_contents($fp);
+            if ($res === false) {
                 flock($fp, \LOCK_UN);
                 fclose($fp);
-                throw new Exception\RuntimeException('Unknown error getting stream contents');
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    'Error getting stream contents', 0, $err
+                );
             }
 
             flock($fp, \LOCK_UN);
@@ -1774,20 +1756,17 @@ class Filesystem extends AbstractAdapter
 
         // if file locking disabled -> file_get_contents can be used
         } else {
-            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-                flock($fp, \LOCK_UN);
-                fclose($fp);
-                $message = sprintf('Error getting file contents for file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
-                throw new Exception\RuntimeException($message, $errno);
-            }, E_WARNING);
-            $result = file_get_contents($file, false);
-            restore_error_handler();
-            if ($result === false) {
-                throw new Exception\RuntimeException(sprintf('Unknown error getting file contents for file "%s"', $file));
+            $res = file_get_contents($file, false);
+            if ($res === false) {
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "Error getting file contents for file '{$file}'", 0, $err
+                );
             }
         }
 
-        return $result;
+        ErrorHandler::stop();
+        return $res;
     }
 
     /**
@@ -1804,30 +1783,36 @@ class Filesystem extends AbstractAdapter
         $locking  = $options->getFileLocking();
         $blocking = $locking ? $options->getFileBlocking() : false;
 
+        ErrorHandler::start();
+
         if ($locking && !$blocking) {
-            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-                umask($oldUmask);
-                $message = sprintf('Error opening file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
-                throw new Exception\RuntimeException($message, $errno);
-            }, E_WARNING);
             $fp = fopen($file, 'cb');
-            restore_error_handler();
             if (!$fp) {
-                throw new Exception\RuntimeException(sprintf('Unknown error opening file "%s"', $file));
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "Error opening file '{$file}'", 0, $err
+                );
             }
 
-            if(!flock($fp, \LOCK_EX | \LOCK_NB)) {
-                // file is locked by another process -> abort writing
+            if(!flock($fp, \LOCK_EX | \LOCK_NB, $wouldblock)) {
                 fclose($fp);
-                return false;
-            }
-
-            if (!ftruncate($fp, 0)) {
-                throw new Exception\RuntimeException('Unable to truncate cache file');
+                $err = ErrorHandler::stop();
+                if ($wouldblock) {
+                    throw new Exception\LockedException("File '{$file}' locked", 0, $err);
+                } else {
+                    throw new Exception\RuntimeException("Error locking file '{$file}'", 0, $err);
+                }
             }
 
             if (!fwrite($fp, $data)) {
-                throw new Exception\RuntimeException('Unable to write cache file');
+                fclose($fp);
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException("Error writing file '{$file}'", 0, $err);
+            }
+
+            if (!ftruncate($fp, strlen($data))) {
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException("Error truncating file '{$file}'", 0, $err);
             }
 
             flock($fp, \LOCK_UN);
@@ -1838,17 +1823,16 @@ class Filesystem extends AbstractAdapter
                 $flags = $flags | \LOCK_EX;
             }
 
-            set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) {
-                $message = sprintf('Error writing file (in %s@%d): %s', $errfile, $errline, $errstr);
-                throw new Exception\RuntimeException($message, $errno);
-            }, E_WARNING);
-            $result = file_put_contents($file, $data, $flags);
-            restore_error_handler();
-            if ($result === false ) {
-                throw new Exception\RuntimeException(sprintf('Failed to write cache file ("%s") with data "%s"', $file, json_encode($data)));
+            $bytes = strlen($data);
+            if (file_put_contents($file, $data, $flags) !== $bytes) {
+                $err = ErrorHandler::stop();
+                throw new Exception\RuntimeException(
+                    "Error putting {$bytes} bytes to file '{$file}'", 0, $err
+                );
             }
         }
 
+        ErrorHandler::stop();
         return true;
     }
 
@@ -1859,24 +1843,22 @@ class Filesystem extends AbstractAdapter
      * @return void
      * @throw RuntimeException
      */
-    protected function unlink($file) 
+    protected function unlink($file)
     {
         // If file does not exist, nothing to do
         if (!file_exists($file)) {
             return;
         }
 
-        set_error_handler(function($errno, $errstr = '', $errfile = '', $errline = 0) use ($file) {
-            $message = sprintf('Error unlinking file "%s" (in %s@%d): %s', $file, $errfile, $errline, $errstr);
-            throw new Exception\RuntimeException($message, $errno);
-        }, E_WARNING);
+        ErrorHandler::start();
         $res = unlink($file);
-        restore_error_handler();
-        if (!$res) {
-            // only throw exception if file still exists after deleting
-            if (file_exists($file)) {
-                throw new Exception\RuntimeException(sprintf('Unknown error unlinking file "%s"; file still exists', $file));
-            }
+        $err = ErrorHandler::stop();
+
+        // only throw exception if file still exists after deleting
+        if (!$res && file_exists($file)) {
+            throw new Exception\RuntimeException(
+                "Error unlinking file '{$file}'; file still exists", 0, $err
+            );
         }
     }
 

@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,10 +28,10 @@ use Zend\Mail\Header;
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Header
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class OrigDate implements Header
+class Date implements Header
 {
     /**
      * @var string
@@ -49,7 +49,7 @@ class OrigDate implements Header
      * Factory: create header object from string
      * 
      * @param  string $headerLine 
-     * @return OrigDate
+     * @return Date
      * @throws Exception\InvalidArgumentException
      */
     public static function fromString($headerLine)
@@ -57,8 +57,8 @@ class OrigDate implements Header
         list($name, $value) = preg_split('#: #', $headerLine, 2);
 
         // check to ensure proper header type for this factory
-        if (strtolower($name) !== 'orig-date') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Orig-Date string');
+        if (strtolower($name) !== 'date') {
+            throw new Exception\InvalidArgumentException('Invalid header line for Date string');
         }
 
         $header = new static();
@@ -74,7 +74,7 @@ class OrigDate implements Header
      */
     public function getFieldName()
     {
-        return 'Orig-Date';
+        return 'Date';
     }
 
     /**
@@ -116,6 +116,6 @@ class OrigDate implements Header
      */
     public function toString()
     {
-        return 'Orig-Date: ' . $this->getFieldValue();
+        return 'Date: ' . $this->getFieldValue();
     }
 }

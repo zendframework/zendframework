@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ use Zend\Mail\Headers,
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Mail
  */
@@ -281,5 +281,41 @@ class HeadersTest extends \PHPUnit_Framework_TestCase
         );
         $expected = implode("\r\n", $expected) . "\r\n";
         $this->assertEquals($expected, $string);
+    }
+
+    public static function expectedHeaders()
+    {
+        return array(
+            array('bcc', 'Zend\Mail\Header\Bcc'),
+            array('cc', 'Zend\Mail\Header\Cc'),
+            array('contenttype', 'Zend\Mail\Header\ContentType'),
+            array('content_type', 'Zend\Mail\Header\ContentType'),
+            array('content-type', 'Zend\Mail\Header\ContentType'),
+            array('from', 'Zend\Mail\Header\From'),
+            array('mimeversion', 'Zend\Mail\Header\MimeVersion'),
+            array('mime_version', 'Zend\Mail\Header\MimeVersion'),
+            array('mime-version', 'Zend\Mail\Header\MimeVersion'),
+            array('origdate', 'Zend\Mail\Header\OrigDate'),
+            array('orig_date', 'Zend\Mail\Header\OrigDate'),
+            array('orig-date', 'Zend\Mail\Header\OrigDate'),
+            array('received', 'Zend\Mail\Header\Received'),
+            array('replyto', 'Zend\Mail\Header\ReplyTo'),
+            array('reply_to', 'Zend\Mail\Header\ReplyTo'),
+            array('reply-to', 'Zend\Mail\Header\ReplyTo'),
+            array('sender', 'Zend\Mail\Header\Sender'),
+            array('subject', 'Zend\Mail\Header\Subject'),
+            array('to', 'Zend\Mail\Header\To'),
+        );
+    }
+
+    /**
+     * @dataProvider expectedHeaders
+     */
+    public function testDefaultPluginLoaderIsSeededWithHeaders($plugin, $class)
+    {
+        $headers = new Headers();
+        $loader  = $headers->getPluginClassLoader();
+        $test    = $loader->load($plugin);
+        $this->assertEquals($class, $test);
     }
 }

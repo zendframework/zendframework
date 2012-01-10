@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -30,7 +30,7 @@ use Zend\Cache\Exception,
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage Storage
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AdapterOptions extends Options
@@ -86,7 +86,7 @@ class AdapterOptions extends Options
 
     /**
      * Cast to array
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -178,7 +178,7 @@ class AdapterOptions extends Options
      */
     public function setNamespace($namespace)
     {
-        $nameapace = (string)$namespace;
+        $namespace = (string)$namespace;
         if ($namespace === '') {
             throw new Exception\InvalidArgumentException('No namespace given');
         }

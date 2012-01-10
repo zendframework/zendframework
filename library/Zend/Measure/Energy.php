@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Measure
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ namespace Zend\Measure;
  * @uses       Zend\Measure\Abstract
  * @category   Zend
  * @package    Zend_Measure
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Energy extends AbstractMeasure
@@ -199,7 +199,7 @@ class Energy extends AbstractMeasure
         'INCH_POUND'             => array('0.112984825',       'in lb'),
         'JOULE'                  => array('1',                 'J'),
         'KILOCALORIE_15C'        => array('4185.8',            'kcal'),
-        'KILOCALORIE'            => array('4186','8',          'kcal'),
+        'KILOCALORIE'            => array('4186.8',          'kcal'),
         'KILOCALORIE_THERMOCHEMICAL' => array('4184',          'kcal'),
         'KILOELECTRONVOLT'       => array('1.6021773e-16',     'keV'),
         'KILOGRAM_CALORIE'       => array('4185.8',            'kg cal'),

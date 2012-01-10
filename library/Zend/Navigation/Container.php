@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Navigation
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,7 +36,7 @@ use Zend\Config;
  * @uses      \Zend\Navigation\AbstractPage
  * @category  Zend
  * @package   Zend_Navigation
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Container implements \RecursiveIterator, \Countable
@@ -150,10 +150,12 @@ abstract class Container implements \RecursiveIterator, \Countable
     /**
      * Adds several pages at once
      *
-     * @param  array|\Zend\Config\Config $pages   pages to add
-     * @return \Zend\Navigation\Container  fluent interface, returns self
-     * @throws \Zend\Navigation\InvalidArgumentException  if $pages is not array
-     *                                                   or \Zend\Config\Config
+     * @param  array|\Zend\Config\Config|\Zend\Navigation\Container $pages pages
+     *                                                                     to add
+     * @return \Zend\Navigation\Container   fluent interface, returns self
+     * @throws \Zend\Navigation\InvalidArgumentException  if $pages is not array,
+     *                                                    \Zend\Config\Config or
+     *                                                    \Zend\Navigation\Container
      */
     public function addPages($pages)
     {
@@ -161,10 +163,16 @@ abstract class Container implements \RecursiveIterator, \Countable
             $pages = $pages->toArray();
         }
 
+        if ($pages instanceof Container) {
+            $pages = iterator_to_array($pages);
+        }
+
         if (!is_array($pages)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $pages must be an array or an ' .
-                    'instance of Zend_Config');
+                'Invalid argument: $pages must be an array, an '
+                . 'instance of \Zend\Config\Config or an instance of '
+                . '\Zend\Navigation\Container'
+            );
         }
 
         foreach ($pages as $page) {

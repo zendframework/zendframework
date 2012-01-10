@@ -81,7 +81,7 @@ $cache = StorageFactory::factory(array(
 
 // Alternately:
 $cache  = StorageFactory::adapterFactory('apc');
-$plugin = StorageFactory::adapterFactory('exception_handler', array(
+$plugin = StorageFactory::pluginFactory('exception_handler', array(
     'throw_exceptions' => false,
 ));
 $cache->addPlugin($plugin);

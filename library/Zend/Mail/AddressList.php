@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Mail
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@ use Countable,
 /**
  * @category   Zend
  * @package    Zend_Mail
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class AddressList implements Countable, Iterator
@@ -84,7 +84,7 @@ class AddressList implements Countable, Iterator
             if (is_int($key) || is_numeric($key)) {
                 $this->add($value);
             } elseif (is_string($key)) {
-                $this->add($value, $key);
+                $this->add($key, $value);
             } else {
                 throw new Exception\RuntimeException(sprintf(
                     'Invalid key type in provided addresses array ("%s")',

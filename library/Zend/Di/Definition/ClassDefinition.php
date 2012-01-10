@@ -6,7 +6,7 @@ class ClassDefinition implements Definition, PartialMarker
 {
 
     protected $class = null;
-    protected $supertypes = null;
+    protected $supertypes = array();
     protected $instantiator = null;
     protected $methods = array();
     protected $methodParameters = array();

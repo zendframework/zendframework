@@ -147,7 +147,7 @@ class Di implements DependencyInjection
         // localize dependencies (this also will serve as poka-yoke)
         $definitions      = $this->definitions;
         $instanceManager = $this->instanceManager();
-        
+
         if ($instanceManager->hasAlias($name)) {
             $class = $instanceManager->getClassFromAlias($name);
             $alias = $name;
@@ -167,14 +167,19 @@ class Di implements DependencyInjection
         
         $instantiator     = $definitions->getInstantiator($class);
         $injectionMethods = $definitions->getMethods($class);
-        
+
+        $supertypeInjectionMethods = array();
+        foreach ($definitions->getClassSupertypes($class) as $supertype) {
+            $supertypeInjectionMethods[$supertype] = $definitions->getMethods($supertype);
+        }
+
         if ($instantiator === '__construct') {
-            $object = $this->createInstanceViaConstructor($class, $params, $alias);
+            $instance = $this->createInstanceViaConstructor($class, $params, $alias);
             if (array_key_exists('__construct', $injectionMethods)) {
                 unset($injectionMethods['__construct']);
             }
         } elseif (is_callable($instantiator, false)) {
-            $object = $this->createInstanceViaCallback($instantiator, $params, $alias);
+            $instance = $this->createInstanceViaCallback($instantiator, $params, $alias);
         } else {
             if (is_array($instantiator)) {
                 $msg = sprintf(
@@ -190,16 +195,23 @@ class Di implements DependencyInjection
 
         if ($isShared) {
             if ($params) {
-                $this->instanceManager->addSharedInstanceWithParameters($object, $name, $params);
+                $this->instanceManager->addSharedInstanceWithParameters($instance, $name, $params);
             } else {
-                $this->instanceManager->addSharedInstance($object, $name);
+                $this->instanceManager->addSharedInstance($instance, $name);
             }
         }
 
-        if ($injectionMethods) {
+        if ($injectionMethods || $supertypeInjectionMethods) {
             foreach ($injectionMethods as $injectionMethod => $methodIsRequired) {
                 if ($injectionMethod !== '__construct'){
-                    $this->handleInjectionMethodForObject($object, $injectionMethod, $params, $alias, $methodIsRequired);
+                    $this->handleInjectionMethodForInstance($instance, $injectionMethod, $params, $alias, $methodIsRequired);
+                }
+            }
+            foreach ($supertypeInjectionMethods as $supertype => $supertypeInjectionMethod) {
+                foreach ($supertypeInjectionMethod as $injectionMethod => $methodIsRequired) {
+                    if ($injectionMethod !== '__construct') {
+                        $this->handleInjectionMethodForInstance($instance, $injectionMethod, $params, $alias, $methodIsRequired, $supertype);
+                    }
                 }
             }
 
@@ -235,11 +247,11 @@ class Di implements DependencyInjection
                                 foreach ($methodParams as $methodParam) {
                                     if (get_class($objectToInject) == $methodParam[1] ||
                                         $this->isSubclassOf(get_class($objectToInject), $methodParam[1])) {
-                                        $callParams = $this->resolveMethodParameters(get_class($object), $injectionMethod,
+                                        $callParams = $this->resolveMethodParameters(get_class($instance), $injectionMethod,
                                             array($methodParam[0] => $objectToInject), false, $alias, true
                                         );
                                         if ($callParams) {
-                                            call_user_func_array(array($object, $injectionMethod), $callParams);
+                                            call_user_func_array(array($instance, $injectionMethod), $callParams);
                                         }
                                         continue 3;
                                     }
@@ -250,10 +262,10 @@ class Di implements DependencyInjection
                 }
                 if ($methodsToCall) {
                     foreach ($methodsToCall as $methodInfo) {
-                        $callParams = $this->resolveMethodParameters(get_class($object), $methodInfo['method'],
+                        $callParams = $this->resolveMethodParameters(get_class($instance), $methodInfo['method'],
                             $methodInfo['args'], false, $alias, true
                         );
-                        call_user_func_array(array($object, $methodInfo['method']), $callParams);
+                        call_user_func_array(array($instance, $methodInfo['method']), $callParams);
                     }
                 }
             }
@@ -262,7 +274,7 @@ class Di implements DependencyInjection
 
         
         array_pop($this->instanceContext);
-        return $object;
+        return $instance;
     }
     
     /**
@@ -362,15 +374,16 @@ class Di implements DependencyInjection
      * @param array $params
      * @param string $alias
      */
-    protected function handleInjectionMethodForObject($object, $method, $params, $alias, $methodIsRequired)
+    protected function handleInjectionMethodForInstance($instance, $method, $params, $alias, $methodIsRequired, $methodClass = null)
     {
+        $methodClass = ($methodClass) ?: get_class($instance);
         // @todo make sure to resolve the supertypes for both the object & definition
-        $callParameters = $this->resolveMethodParameters(get_class($object), $method, $params, false, $alias, $methodIsRequired);
+        $callParameters = $this->resolveMethodParameters($methodClass, $method, $params, false, $alias, $methodIsRequired);
         if ($callParameters == false) {
             return;
         }
         if ($callParameters !== array_fill(0, count($callParameters), null)) {
-            call_user_func_array(array($object, $method), $callParameters);
+            call_user_func_array(array($instance, $method), $callParameters);
         }
     }
 

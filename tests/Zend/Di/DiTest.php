@@ -281,6 +281,11 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testGetWillResolveSetterInjectionDependencies()
     {
         $di = new Di();
+        // for setter injection, the dependency is not required, thus it must be forced
+        $di->instanceManager()->setParameters(
+            'ZendTest\Di\TestAsset\SetterInjection\B',
+            array('a' => new TestAsset\SetterInjection\A)
+        );
         $b = $di->get('ZendTest\Di\TestAsset\SetterInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
@@ -292,6 +297,12 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testGetWillResolveSetterInjectionDependenciesAndInstanceAreTheSame()
     {
         $di = new Di();
+        // for setter injection, the dependency is not required, thus it must be forced
+        $di->instanceManager()->setParameters(
+            'ZendTest\Di\TestAsset\SetterInjection\B',
+            array('a' => $a = new TestAsset\SetterInjection\A)
+        );
+
         $b = $di->get('ZendTest\Di\TestAsset\SetterInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
@@ -301,7 +312,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b2->a);
         
         $this->assertSame($b, $b2);
-        $this->assertSame($b->a, $b2->a);
+        $this->assertSame($b->a, $a);
+        $this->assertSame($b2->a, $a);
     }
     
     /**
@@ -310,6 +322,12 @@ class DiTest extends \PHPUnit_Framework_TestCase
     public function testNewInstanceWillResolveSetterInjectionDependencies()
     {
         $di = new Di();
+        // for setter injection, the dependency is not required, thus it must be forced
+        $di->instanceManager()->setParameters(
+            'ZendTest\Di\TestAsset\SetterInjection\B',
+            array('a' => new TestAsset\SetterInjection\A)
+        );
+
         $b = $di->newInstance('ZendTest\Di\TestAsset\SetterInjection\B');
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\B', $b);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $b->a);
@@ -536,6 +554,41 @@ class DiTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bs-id', $a->bs[0]->id);
         $this->assertInstanceOf('ZendTest\Di\TestAsset\InjectionClasses\C', $a->bs[1]);
         $this->assertEquals('bs-id-for-c', $a->bs[1]->id);
+    }
+
+    /**
+     * @group SetterInjection
+     * @group SupertypeResolution
+     */
+    public function testInjectionForSetterInjectionWillConsultSupertypeDefinitions()
+    {
+        $di = new Di();
+        // for setter injection, the dependency is not required, thus it must be forced
+        $di->instanceManager()->setParameters(
+            'ZendTest\Di\TestAsset\SetterInjection\C',
+            array('a' => new TestAsset\SetterInjection\A)
+        );
+        $c = $di->get('ZendTest\Di\TestAsset\SetterInjection\C');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\C', $c);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $c->a);
+    }
+
+    /**
+     * @group SetterInjection
+     * @group SupertypeResolution
+     */
+    public function testInjectionForSetterInjectionWillConsultSupertypeDefinitionInClassDefinition()
+    {
+        $di = new Di();
+
+        // for setter injection, the dependency is not required, thus it must be forced
+        $classDef = new Definition\ClassDefinition('ZendTest\Di\TestAsset\SetterInjection\B');
+        $classDef->addMethod('setA', true);
+        $di->definitions()->addDefinition($classDef, false); // top of stack b/c Runtime is already there
+
+        $c = $di->get('ZendTest\Di\TestAsset\SetterInjection\C');
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\C', $c);
+        $this->assertInstanceOf('ZendTest\Di\TestAsset\SetterInjection\A', $c->a);
     }
     
 }

@@ -95,13 +95,13 @@ class DefinitionList extends SplDoublyLinkedList implements Definition\Definitio
     
     public function getClassSupertypes($class)
     {
-        $superTypes = array();
+        $supertypes = array();
         /** @var $definition Definition\Definition */
         foreach ($this as $definition) {
-            $superTypes = array_merge($definition->getClassSupertypes($class), $superTypes);
+            $supertypes = array_merge($supertypes, $definition->getClassSupertypes($class));
         }
         // @todo remove duplicates?
-        return $superTypes;
+        return $supertypes;
     }
     
     public function getInstantiator($class)

@@ -788,17 +788,7 @@ abstract class AbstractTable
 
         // If $this has a metadata cache
         if (null !== $this->_metadataCache) {
-            // Define the cache identifier where the metadata are saved
-
-            //get db configuration
-            $dbConfig = $this->_db->getConfig();
-
-            // Define the cache identifier where the metadata are saved
-            $cacheId = md5( // port:host/dbname:schema.table (based on availabilty)
-                (isset($dbConfig['options']['port']) ? ':'.$dbConfig['options']['port'] : null)
-                . (isset($dbConfig['options']['host']) ? ':'.$dbConfig['options']['host'] : null)
-                . '/'.$dbConfig['dbname'].':'.$this->_schema.'.'.$this->_name
-                );
+            $cacheId = $this->_cacheId();
         }
 
         // If $this has no metadata cache or metadata cache misses
@@ -819,6 +809,25 @@ abstract class AbstractTable
         // Return whether the metadata were loaded from cache
         return $isMetadataFromCache;
     }
+
+	/**
+	 * Define the cache identifier where the metadata are saved
+	 * 
+	 * @return string
+	 */
+	protected function _cacheId()
+	{
+		//get db configuration
+		$dbConfig = $this->_db->getConfig();
+
+		$cacheId = md5( // port:host/dbname:schema.table (based on availabilty)
+			(isset($dbConfig['options']['port']) ? ':'.$dbConfig['options']['port'] : null)
+			. (isset($dbConfig['options']['host']) ? ':'.$dbConfig['options']['host'] : null)
+			. '/'.$dbConfig['dbname'].':'.$this->_schema.'.'.$this->_name
+		);
+
+		return $cacheId;
+	}
 
     /**
      * Retrieve table columns

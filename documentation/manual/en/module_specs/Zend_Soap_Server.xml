@@ -425,4 +425,25 @@ $response = $server->getLastResponse();
 ]]></programlisting>
         </section>
     </section>
+
+    <section xml:id="zend.soap.server.documentliteral"><info><title>Document/Literal WSDL Handling</title></info>
+
+        <para>
+            Using the document/literal binding-style/encoding pattern is used to make SOAP messages as human-readable
+            as possible and allow abstraction between very incompatible languages. The Dot NET framework uses this
+            pattern for SOAP service generation by default. The central concept of this approach to SOAP is the
+            introduction of a Request and an Response object for every function/method of the SOAP service.
+            The parameters of the function are properties on request object and the response object contains
+            a single parameter that is built in the style "methodName"Result
+        </para>
+
+        <para>
+            Zend SOAP supports this pattern in both AutoDiscovery and in the Server component. You can write
+            your service object without knowledge about using this pattern. Use docblock comments to hint the parameter
+            and return types as usual. The <classname>Zend\Soap\Server\DocumentLiteralWrapper</classname> 
+            wraps around your service object and converts request and response into normal method calls on your service.
+        </para>
+
+        <para>See the class doc block of the <classname>DocumentLiteralWrapper</classname> for a detailed example and discussion.</para>
+    </section>
 </section>

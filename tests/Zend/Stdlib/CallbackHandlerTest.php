@@ -41,77 +41,84 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetEventShouldReturnEvent()
+    public function testCallbackShouldStoreMetadata()
     {
-        $handler = new CallbackHandler('foo', 'rand');
-        $this->assertEquals('foo', $handler->getEvent());
+        $handler = new CallbackHandler('rand', array('event' => 'foo'));
+        $this->assertEquals('foo', $handler->getMetadatum('event'));
+        $this->assertEquals(array('event' => 'foo'), $handler->getMetadata());
     }
 
     public function testCallbackShouldBeStringIfNoHandlerPassedToConstructor()
     {
-        $handler = new CallbackHandler('foo', 'rand');
+        $handler = new CallbackHandler('rand');
         $this->assertSame('rand', $handler->getCallback());
     }
 
     public function testCallbackShouldBeArrayIfHandlerPassedToConstructor()
     {
-        $handler = new CallbackHandler('foo', array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'));
-        $this->assertSame(array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'), $handler->getCallback());
+        $handler = new CallbackHandler(array('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'));
+        $this->assertSame(array('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'), $handler->getCallback());
     }
 
     public function testCallShouldInvokeCallbackWithSuppliedArguments()
     {
-        $handler = new CallbackHandler('foo', array( $this, 'handleCall' ));
+        $handler = new CallbackHandler(array( $this, 'handleCall' ));
         $args   = array('foo', 'bar', 'baz');
         $handler->call($args);
         $this->assertSame($args, $this->args);
     }
 
-    public function testPassingInvalidCallbackShouldRaiseInvalidCallbackExceptionDuringCall()
+    public function testPassingInvalidCallbackShouldRaiseInvalidCallbackExceptionDuringInstantiation()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
-        $handler = new CallbackHandler('Invokable', 'boguscallback');
-        $handler->call();
+        $handler = new CallbackHandler('boguscallback');
     }
 
     public function testCallShouldReturnTheReturnValueOfTheCallback()
     {
-        $handler = new CallbackHandler('foo', array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'));
-        if (!is_callable(array('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'))) {
-            echo "\nClass exists? " . var_export(class_exists('\\ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback'), 1) . "\n";
+        $handler = new CallbackHandler(array('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'));
+        if (!is_callable(array('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback', 'test'))) {
+            echo "\nClass exists? " . var_export(class_exists('ZendTest\\Stdlib\\SignalHandlers\\ObjectCallback'), 1) . "\n";
             echo "Include path: " . get_include_path() . "\n";
         }
         $this->assertEquals('bar', $handler->call(array()));
     }
 
-    public function testStringCallbackResolvingToClassNameShouldCallViaInvoke()
+    public function testStringCallbackResolvingToClassDefiningInvokeNameShouldRaiseException()
     {
-        $handler = new CallbackHandler('foo', '\\ZendTest\\Stdlib\\SignalHandlers\\Invokable');
-        $this->assertEquals('__invoke', $handler->call(), var_export($handler->getCallback(), 1));
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
+        $handler = new CallbackHandler('ZendTest\\Stdlib\\SignalHandlers\\Invokable');
     }
 
     public function testStringCallbackReferringToClassWithoutDefinedInvokeShouldRaiseException()
     {
         $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
-        $handler = new CallbackHandler('foo', '\\ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod');
+        $handler = new CallbackHandler('ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod');
+    }
+
+    public function testCallbackConsistingOfStringContextWithNonStaticMethodShouldRaiseException()
+    {
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
+        $handler = new CallbackHandler(array('ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod', 'handler'));
         $handler->call();
     }
 
-    public function testCallbackConsistingOfStringContextWithNonStaticMethodShouldInstantiateContext()
+    public function testStringCallbackConsistingOfNonStaticMethodShouldRaiseException()
     {
-        $handler = new CallbackHandler('foo', array( 'ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod', 'callable' ));
-        $this->assertEquals('callable', $handler->call());
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
+        $handler = new CallbackHandler('ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod::handler');
+        $handler->call();
     }
 
-    public function testCallbackToClassImplementingOverloadingShouldSucceed()
+    public function testCallbackToClassImplementingOverloadingButNotInvocableShouldRaiseException()
     {
-        $handler = new CallbackHandler('foo', array( '\\ZendTest\\Stdlib\\SignalHandlers\\Overloadable', 'foo' ));
-        $this->assertEquals('foo', $handler->call());
+        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
+        $handler = new CallbackHandler('foo', array( 'ZendTest\\Stdlib\\SignalHandlers\\Overloadable', 'foo' ));
     }
 
     public function testClosureCallbackShouldBeInvokedByCall()
     {
-        $handler = new CallbackHandler(null, function () {
+        $handler = new CallbackHandler(function () {
             return 'foo';
         });
         $this->assertEquals('foo', $handler->call());

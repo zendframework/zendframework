@@ -19,14 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace ZendTest\Soap\Server;
 
-use Zend\Soap\Server,
+use Zend\Soap\Client\Local as SoapClient,
+    Zend\Soap\Server,
     Zend\Soap\ServerException,
-    Zend\Soap\Server\DocumentLiteralWrapper;
+    Zend\Soap\Server\DocumentLiteralWrapper,
+    ZendTest\Soap\TestAsset\MyCalculatorService;
 
 class DocumentLiteralWrapperTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,30 +38,20 @@ class DocumentLiteralWrapperTest extends \PHPUnit_Framework_TestCase
         ini_set("soap.wsdl_cache_enabled", 0);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testDelegate()
     {
         $server = new Server(__DIR__ . self::WSDL);
         $server->setObject(new DocumentLiteralWrapper(new MyCalculatorService));
 
-        // The local client needs an abstraction for this pattern aswell,
-        // this is just a test so we use the messy way.
-        $client = new \Zend\Soap\Client\Local($server, __DIR__ . self::WSDL);
+        // The local client needs an abstraction for this pattern as well.
+        // This is just a test so we use the messy way.
+        $client = new SoapClient($server, __DIR__ . self::WSDL);
         $ret = $client->add(array('x' => 10, 'y' => 20));
 
         $this->assertInstanceOf('stdClass', $ret);
         $this->assertEquals(30, $ret->addResult);
-    }
-}
-
-class MyCalculatorService
-{
-    /**
-     * @param int $x
-     * @param int $y
-     * @return int
-     */
-    public function add($x, $y)
-    {
-        return $x+$y;
     }
 }

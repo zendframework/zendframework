@@ -11,22 +11,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage QueueService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
+ * namespace
+ */
+namespace Zend\Cloud\QueueService;
+
+/**
  * Collection of message objects
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage QueueService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_QueueService_MessageSet implements Countable, IteratorAggregate
+class MessageSet implements \Countable, \IteratorAggregate
 {
     /** @var int */
     protected $_messageCount;
@@ -43,7 +48,7 @@ class Zend_Cloud_QueueService_MessageSet implements Countable, IteratorAggregate
     public function __construct(array $messages)
     {
         $this->_messageCount = count($messages);
-        $this->_messages     = new ArrayIterator($messages);
+        $this->_messages     = new \ArrayIterator($messages);
     }
 
     /**

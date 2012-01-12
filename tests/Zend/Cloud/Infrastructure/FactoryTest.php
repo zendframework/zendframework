@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -26,7 +26,7 @@ use Zend\Config\Config,
     ZendTest\Cloud\Infrastructure\Adapter\Ec2OfflineTest,
     ZendTest\Cloud\Infrastructure\Adapter\RackspaceOfflineTest;
 
-// Call Zend_Cloud_Infrastructure_FactoryTest::main() if this source file is executed directly.
+// Call Zend\Cloud\Infrastructure\FactoryTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\Infrastructure\FactoryTest::main");
 }
@@ -35,11 +35,11 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  * Test class for Zend_Cloud_Infrastructure_Factory
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Cloud
+ * @group      Zend\Cloud
  */
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -76,7 +76,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-// Call Zend_Cloud_Infrastructure_FactoryTest::main() if this source file is executed directly.
+// Call Zend\Cloud\Infrastructure\FactoryTest::main() if this source file is executed directly.
 if (PHPUnit_MAIN_METHOD == "ZendTest\Cloud\Infrastructure\FactoryTest::main") {
     FactoryTest::main();
 }

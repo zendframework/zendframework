@@ -11,16 +11,20 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
+ * @package    Zend\Cloud\DocumentService\Adapter
+ * @subpackage WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/*
- * @see Zend_Cloud_DocumentService_QueryAdapter
+/**
+ * namespace
  */
-require_once 'Zend/Cloud/DocumentService/QueryAdapter.php';
+namespace Zend\Cloud\DocumentService\Adapter\WindowsAzure;
+
+use Zend\Cloud\DocumentService\QueryAdapter,
+    Zend\Service\WindowsAzure\Storage\TableEntityQuery,
+    Zend\Cloud\DocumentService\Adapter\Exception;
 
 /**
  * Class implementing Query adapter for working with Azure queries in a
@@ -28,32 +32,30 @@ require_once 'Zend/Cloud/DocumentService/QueryAdapter.php';
  *
  * @todo       Look into preventing a query injection attack.
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage DocumentService
+ * @package    Zend\Cloud\DocumentService\Adapter
+ * @subpackage WindowsAzure
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
-    implements Zend_Cloud_DocumentService_QueryAdapter
+class Query implements QueryAdapter
 {
     /**
      * Azure concrete query
      *
-     * @var Zend_Service_WindowsAzure_Storage_TableEntityQuery
+     * @var Zend\Service\WindowsAzure\Storage\TableEntityQuery
      */
     protected $_azureSelect;
 
     /**
      * Constructor
      *
-     * @param  null|Zend_Service_WindowsAzure_Storage_TableEntityQuery $select Table select object
+     * @param  null|Zend\Service\WindowsAzure\Storage\TableEntityQuery $select Table select object
      * @return void
      */
     public function __construct($select = null)
     {
-        if (!$select instanceof Zend_Service_WindowsAzure_Storage_TableEntityQuery) {
-            require_once 'Zend/Service/WindowsAzure/Storage/TableEntityQuery.php';
-            $select = new Zend_Service_WindowsAzure_Storage_TableEntityQuery();
+        if (!$select instanceof Zend\Service\WindowsAzure\Storage\TableEntityQuery) {
+            $select = new TableEntityQuery();
         }
         $this->_azureSelect = $select;
     }
@@ -64,7 +66,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * Does nothing for Azure.
      *
      * @param  string $select
-     * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
+     * @return Zend\Cloud\DocumentService\Adapter\WindowsAzure_Query
      */
     public function select($select)
     {
@@ -75,7 +77,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * FROM clause (table name)
      *
      * @param string $from
-     * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
+     * @return Zend\Cloud\DocumentService\Adapter\WindowsAzure\Query
      */
     public function from($from)
     {
@@ -89,7 +91,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * @param string $where
      * @param mixed $value Value or array of values to be inserted instead of ?
      * @param string $op Operation to use to join where clauses (AND/OR)
-     * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
+     * @return Zend\Cloud\DocumentService\Adapter\WindowsAzure\Query
      */
     public function where($where, $value = null, $op = 'and')
     {
@@ -108,13 +110,12 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * have special syntax for primary keys
      *
      * @param  array $value Row ID for the document (PartitionKey, RowKey)
-     * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
+     * @return Zend\Cloud\DocumentService\Adapter\WindowsAzure\Query
      */
     public function whereId($value)
     {
         if (!is_array($value)) {
-            require_once 'Zend/Cloud/DocumentService/Exception.php';
-            throw new Zend_Cloud_DocumentService_Exception('Invalid document key');
+            throw new Exception\InvalidArgumentException('Invalid document key');
         }
         $this->_azureSelect->wherePartitionKey($value[0])->whereRowKey($value[1]);
         return $this;
@@ -124,7 +125,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * LIMIT clause (how many rows to return)
      *
      * @param  int $limit
-     * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
+     * @return Zend\Cloud\DocumentService\Adapter\WindowsAzure\Query
      */
     public function limit($limit)
     {
@@ -138,19 +139,18 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      * @todo   Azure service doesn't seem to support this yet; emulate?
      * @param  string $sort Column to sort by
      * @param  string $direction Direction - asc/desc
-     * @return Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
-     * @throws Zend_Cloud_OperationNotAvailableException
+     * @return Zend\Cloud\DocumentService\Adapter\WindowsAzure\Query
+     * @throws Zend\Cloud\OperationNotAvailableException
      */
     public function order($sort, $direction = 'asc')
     {
-        require_once 'Zend/Cloud/OperationNotAvailableException.php';
-        throw new Zend_Cloud_OperationNotAvailableException('No support for sorting for Azure yet');
+        throw new Exception\OperationNotAvailableException('No support for sorting for Azure yet');
     }
 
     /**
      * Get Azure select query
      *
-     * @return Zend_Service_WindowsAzure_Storage_TableEntityQuery
+     * @return Zend\Service\WindowsAzure\Storage\TableEntityQuery
      */
     public function getAzureSelect()
     {
@@ -162,7 +162,7 @@ class Zend_Cloud_DocumentService_Adapter_WindowsAzure_Query
      *
      * Simply return the WindowsAzure table entity query object
      *
-     * @return Zend_Service_WindowsAzure_Storage_TableEntityQuery
+     * @return Zend\Service\WindowsAzure\Storage\TableEntityQuery
      */
     public function assemble()
     {

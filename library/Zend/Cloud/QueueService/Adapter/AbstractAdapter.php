@@ -11,15 +11,20 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage QueueService
+ * @package    Zend\Cloud\QueueService
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-require_once 'Zend/Cloud/QueueService/Adapter.php';
-require_once 'Zend/Cloud/QueueService/Message.php';
-require_once 'Zend/Cloud/QueueService/MessageSet.php';
+/**
+ * namespace
+ */
+namespace Zend\Cloud\QueueService\Adapter;
+
+use Zend\Cloud\QueueService\Adapter,
+    Zend\Cloud\QueueService\Message,
+    Zend\Cloud\QueueService\MessageSet;
 
 /**
  * Abstract queue adapter
@@ -27,13 +32,12 @@ require_once 'Zend/Cloud/QueueService/MessageSet.php';
  * Provides functionality around setting message and message set classes.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage QueueService
+ * @package    Zend\Cloud\QueueService
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Cloud_QueueService_Adapter_AbstractAdapter
-    implements Zend_Cloud_QueueService_Adapter
+abstract class AbstractAdapter implements Adapter
 {
     /**@+ option keys */
     const MESSAGE_CLASS    = 'message_class';
@@ -41,16 +45,16 @@ abstract class Zend_Cloud_QueueService_Adapter_AbstractAdapter
     /**@-*/
 
     /** @var string Class to use for queue messages */
-    protected $_messageClass    = 'Zend_Cloud_QueueService_Message';
+    protected $_messageClass    = 'Zend\Cloud\QueueService\Message';
 
     /** @var string Class to use for collections of queue messages */
-    protected $_messageSetClass = 'Zend_Cloud_QueueService_MessageSet';
+    protected $_messageSetClass = 'Zend\Cloud\QueueService\MessageSet';
 
     /**
      * Set class to use for message objects
      *
      * @param  string $class
-     * @return Zend_Cloud_QueueService_Adapter_AbstractAdapter
+     * @return Zend\Cloud\QueueService\Adapter\AbstractAdapter
      */
     public function setMessageClass($class)
     {
@@ -72,7 +76,7 @@ abstract class Zend_Cloud_QueueService_Adapter_AbstractAdapter
      * Set class to use for message collection objects
      *
      * @param  string $class
-     * @return Zend_Cloud_QueueService_Adapter_AbstractAdapter
+     * @return Zend\Cloud\QueueService\Adapter\AbstractAdapter
      */
     public function setMessageSetClass($class)
     {

@@ -11,11 +11,16 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage QueueService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
+/**
+ * namespace
+ */
+namespace Zend\Cloud\QueueService;
 
 /**
  * Common interface for queue services in the cloud. This interface supports
@@ -29,12 +34,12 @@
  * support in future versions of the interface.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage QueueService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Cloud_QueueService_Adapter
+interface Adapter
 {
     /** Ctor HTTP adapter option */
     const HTTP_ADAPTER = 'http_adapter';
@@ -114,7 +119,7 @@ interface Zend_Cloud_QueueService_Adapter
      * @param  string $queueId
      * @param  int    $max
      * @param  array  $options
-     * @return array[Zend_Cloud_QueueService_Message]  Array of messages
+     * @return array[Zend\Cloud\QueueService\Message]  Array of messages
      */
     public function receiveMessages($queueId, $max = 1, $options = null);
 
@@ -124,7 +129,7 @@ interface Zend_Cloud_QueueService_Adapter
      * @param  string $queueId
      * @param  int $num How many messages
      * @param  array  $options
-     * @return array[Zend_Cloud_QueueService_Message]
+     * @return array[Zend\Cloud\QueueService\Message]
      */
     public function peekMessages($queueId, $num = 1, $options = null);
 
@@ -132,7 +137,7 @@ interface Zend_Cloud_QueueService_Adapter
      * Delete the specified message from the specified queue.
      *
      * @param  string $queueId
-     * @param  Zend_Cloud_QueueService_Message $message Message to delete
+     * @param  Zend\Cloud\QueueService\Message $message Message to delete
      * @param  array  $options
      * @return void
      *

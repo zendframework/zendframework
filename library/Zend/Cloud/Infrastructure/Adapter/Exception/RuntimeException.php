@@ -27,8 +27,8 @@ use \Zend\Cloud\Infrastructure\Adapter\Exception;
 
 /**
  * @category   Zend
- * @package    Zend_Service_Amazon
- * @subpackage Ec2
+ * @package    Zend\Cloud\Infrastructure\Adapter
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

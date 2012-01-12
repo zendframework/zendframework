@@ -11,22 +11,27 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage StorageService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
+ * namespace
+ */
+namespace Zend\Cloud\StorageService;
+
+/**
  * Common interface for unstructured cloud storage.
  *
  * @category   Zend
- * @package    Zend_Cloud
+ * @package    Zend\Cloud
  * @subpackage StorageService
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Cloud_StorageService_Adapter
+interface Adapter
 {
     // HTTP adapter to use for connections
     const HTTP_ADAPTER = 'http_adapter';
@@ -89,7 +94,6 @@ interface Zend_Cloud_StorageService_Adapter
     /**
      * Rename an item in the storage service to a given name.
      *
-     *
      * @param  string $path
      * @param  string $name
      * @param  array $options
@@ -101,7 +105,6 @@ interface Zend_Cloud_StorageService_Adapter
      * List items in the given directory in the storage service
      *
      * The $path must be a directory
-     *
      *
      * @param  string $path Must be a directory
      * @param  array $options

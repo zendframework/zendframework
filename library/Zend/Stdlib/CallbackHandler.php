@@ -47,12 +47,6 @@ class CallbackHandler
     protected $callback;
 
     /**
-     * Until callback has been validated, mark as invalid
-     * @var bool
-     */
-    protected $isValidCallback = false;
-
-    /**
      * Callback metadata, if any
      * @var array
      */
@@ -80,8 +74,7 @@ class CallbackHandler
      *
      * If a callback is a functor, or an array callback composing an object 
      * instance, this method will pass the object to a WeakRef instance prior
-     * to registering the callback. See {@link isValid()} for more information
-     * on how this affects execution.
+     * to registering the callback.
      * 
      * @param  callback $callback 
      * @return void
@@ -94,7 +87,6 @@ class CallbackHandler
 
         // If pecl/weakref is not installed, simply store the callback and return
         if (!class_exists('WeakRef')) {
-            $this->validateCallback($callback);
             $this->callback = $callback;
             return;
         }
@@ -119,7 +111,6 @@ class CallbackHandler
         // If we have an array callback, and the first argument is not an 
         // object, register as-is
         if (!is_object($target)) {
-            $this->validateCallback($callback);
             $this->callback = $callback;
             return;
         }
@@ -134,7 +125,6 @@ class CallbackHandler
      * Retrieve registered callback
      * 
      * @return Callback
-     * @throws Exception\InvalidCallbackException If callback is invalid
      */
     public function getCallback()
     {
@@ -243,96 +233,5 @@ class CallbackHandler
             return $this->metadata[$name];
         }
         return null;
-    }
-
-    /**
-     * Validate a callback
-     *
-     * Attempts to ensure that the provided callback is actually callable.
-     *
-     * Interestingly, given a class "Foo" with a non-static method "bar", 
-     * is_callable() still returns true for the following callbacks:
-     *
-     * - array('Foo', 'bar')
-     * - 'Foo::bar'
-     *
-     * even though passing these to call_user_func*() will raise an error.
-     * 
-     * @param  string|array|object $callback 
-     * @return bool
-     * @throws Exception\InvalidCallbackException
-     */
-    protected function validateCallback($callback)
-    {
-        if (is_array($callback)) {
-            return $this->validateArrayCallback($callback);
-        }
-        if (is_string($callback)) {
-            return $this->validateStringCallback($callback);
-        }
-        return true;
-    }
-
-    /**
-     * Validate an array callback
-     *
-     * If the first argument of the array is an object, simply returns true. 
-     * Otherwise, passes the array arguments off to validateStaticMethod().
-     *
-     * @param  array $callback 
-     * @return true
-     * @throws Exception\InvalidCallbackException
-     */
-    protected function validateArrayCallback($callback)
-    {
-        list($target, $method) = $callback;
-        if (is_object($target)) {
-            return true;
-        }
-
-        return $this->validateStaticMethod($target, $method);
-    }
-
-    /**
-     * Validate a string callback
-     *
-     * If the callback is a function name, simply returns true. If it refers
-     * to a static method, proxies to validateStaticMethod().
-     * 
-     * @param  string $callback 
-     * @return true
-     * @throws Exception\InvalidCallbackException
-     */
-    protected function validateStringCallback($callback)
-    {
-        if (!strstr($callback, '::')) {
-            return true;
-        }
-
-        list($target, $method) = explode('::', $callback, 2);
-        return $this->validateStaticMethod($target, $method);
-    }
-
-    /**
-     * Validates that a static callback actually exists
-     * 
-     * @param  string $target 
-     * @param  string $method 
-     * @return bool
-     * @throws Exception\InvalidCallbackException
-     */
-    protected function validateStaticMethod($target, $method)
-    {
-        $r = new ReflectionClass($target);
-        if (!$r->hasMethod($method)) {
-            throw new Exception\InvalidCallbackException('Invalid callback; method does not exist');
-        }
-
-        $m = $r->getMethod($method);
-        if (!$m->isStatic()) {
-            throw new Exception\InvalidCallbackException('Invalid callback; method is not static');
-        }
-
-        return true;
     }
 }

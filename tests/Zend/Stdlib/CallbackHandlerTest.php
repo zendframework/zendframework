@@ -96,18 +96,28 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         $handler = new CallbackHandler('ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod');
     }
 
-    public function testCallbackConsistingOfStringContextWithNonStaticMethodShouldRaiseException()
+    public function testCallbackConsistingOfStringContextWithNonStaticMethodShouldNotRaiseExceptionButWillRaiseEStrict()
     {
-        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
         $handler = new CallbackHandler(array('ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod', 'handler'));
+        $error   = false;
+        set_error_handler(function ($errno, $errstr) use (&$error) {
+            $error = true;
+        }, E_STRICT);
         $handler->call();
+        restore_error_handler();
+        $this->assertTrue($error);
     }
 
-    public function testStringCallbackConsistingOfNonStaticMethodShouldRaiseException()
+    public function testStringCallbackConsistingOfNonStaticMethodShouldNotRaiseExceptionButWillRaiseEStrict()
     {
-        $this->setExpectedException('Zend\Stdlib\Exception\InvalidCallbackException');
         $handler = new CallbackHandler('ZendTest\\Stdlib\\SignalHandlers\\InstanceMethod::handler');
+        $error   = false;
+        set_error_handler(function ($errno, $errstr) use (&$error) {
+            $error = true;
+        }, E_STRICT);
         $handler->call();
+        restore_error_handler();
+        $this->assertTrue($error);
     }
 
     public function testCallbackToClassImplementingOverloadingButNotInvocableShouldRaiseException()

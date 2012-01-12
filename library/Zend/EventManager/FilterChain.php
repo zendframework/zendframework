@@ -90,7 +90,7 @@ class FilterChain implements Filter
         if (empty($callback)) {
             throw new InvalidCallbackException('No callback provided');
         }
-        $filter = new CallbackHandler(null, $callback, array('priority' => $priority));
+        $filter = new CallbackHandler($callback, array('priority' => $priority));
         $this->filters->insert($filter, $priority);
         return $filter;
     }

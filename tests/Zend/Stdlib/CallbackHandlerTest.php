@@ -124,6 +124,13 @@ class CallbackHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $handler->call());
     }
 
+    public function testHandlerShouldBeInvocable()
+    {
+        $handler = new CallbackHandler(array($this, 'handleCall'));
+        $handler('foo', 'bar');
+        $this->assertEquals(array('foo', 'bar'), $this->args);
+    }
+
     public function handleCall()
     {
         $this->args = func_get_args();

@@ -212,6 +212,16 @@ class CallbackHandler
     }
 
     /**
+     * Invoke as functor
+     * 
+     * @return mixed
+     */
+    public function __invoke()
+    {
+        return $this->call(func_get_args());
+    }
+
+    /**
      * Get all callback metadata
      * 
      * @return array

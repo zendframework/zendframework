@@ -91,7 +91,7 @@ class Rackspace extends AbstractAdapter
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param  array|Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = array())

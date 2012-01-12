@@ -11,25 +11,30 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage StorageService
+ * @package    Zend\Cloud\StorageService
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-require_once 'Zend/Cloud/StorageService/Adapter.php';
-require_once 'Zend/Cloud/StorageService/Exception.php';
+/**
+ * namespace
+ */
+namespace Zend\Cloud\StorageService\Adapter;
+
+use Zend\Cloud\StorageService\Adapter,
+    Zend\Cloud\StorageService\Exception;
 
 /**
  * FileSystem adapter for unstructured cloud storage.
  *
  * @category   Zend
- * @package    Zend_Cloud
- * @subpackage StorageService
+ * @package    Zend\Cloud\StorageService
+ * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cloud_StorageService_Adapter_FileSystem implements Zend_Cloud_StorageService_Adapter
+class FileSystem implements Adapter
 {
 
     /**
@@ -46,17 +51,17 @@ class Zend_Cloud_StorageService_Adapter_FileSystem implements Zend_Cloud_Storage
     /**
      * Constructor
      *
-     * @param  array|Zend_Config $options
+     * @param  array|Zend\Config\Config $options
      * @return void
      */
     public function __construct($options = array())
     {
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         }
 
         if (!is_array($options)) {
-            throw new Zend_Cloud_StorageService_Exception('Invalid options provided');
+            throw new Exception\InvalidArgumentException('Invalid options provided');
         }
 
         if (isset($options[self::LOCAL_DIRECTORY])) {
@@ -228,8 +233,7 @@ class Zend_Cloud_StorageService_Adapter_FileSystem implements Zend_Cloud_Storage
      */
     public function storeMetadata($destinationPath, $metadata, $options = array())
     {
-        require_once 'Zend/Cloud/OperationNotAvailableException.php';
-        throw new Zend_Cloud_OperationNotAvailableException('Storing metadata not implemented');
+        throw new Exception\OperationNotAvailableException('Storing metadata not implemented');
     }
 
     /**
@@ -241,8 +245,7 @@ class Zend_Cloud_StorageService_Adapter_FileSystem implements Zend_Cloud_Storage
      */
     public function deleteMetadata($path)
     {
-        require_once 'Zend/Cloud/OperationNotAvailableException.php';
-        throw new Zend_Cloud_OperationNotAvailableException('Deleting metadata not implemented');
+        throw new Exception\OperationNotAvailableException('Deleting metadata not implemented');
     }
 
     /**

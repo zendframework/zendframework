@@ -129,7 +129,7 @@ class Client implements ClientInterface
      *
      * @param \Zend\Json\Server\Request $request Request.
      * @return \Zend\Json\Server\Response Response.
-     * @throws Exception\HttpException When HTTP communication fails. TODO
+     * @throws \Zend\Json\Server\Exception\HttpException When HTTP communication fails.
      */
     public function doRequest($request)
     {
@@ -153,7 +153,6 @@ class Client implements ClientInterface
         $this->httpClient->setRawBody($request->__toString());
         $httpResponse = $this->httpClient->setMethod('POST')->send();
 
-        //TODO: this is temporary placeholder from ChilloutFramework's ChillDev\Json\Client - refactor for ZF2 exceptions
         if (!$httpResponse->isSuccess()) {
             throw new Exception\HttpException(
                 $httpResponse->getReasonPhrase(),
@@ -177,7 +176,7 @@ class Client implements ClientInterface
      * @param string $method Name of the method we want to call.
      * @param array $params Array of parameters for the method.
      * @return mixed Method call results.
-     * @throws Exception\RemoteCallException When remote call fails. TODO
+     * @throws \Zend\Json\Server\Exception\ErrorExceptionn When remote call fails.
      */
     public function call($method, $params = array())
     {
@@ -185,13 +184,11 @@ class Client implements ClientInterface
 
         $response = $this->doRequest($request);
 
-        //TODO: this is temporary placeholder from ChilloutFramework's ChillDev\Json\Client - refactor for ZF2 exceptions
         if ($response->isError()) {
             $error = $response->getError();
-            throw new Exception\RemoteCallException(
-                $request->getMethod(),
-                $fault->getMessage(),
-                $fault->getCode()
+            throw new Exception\ErrorException(
+                $error->getMessage(),
+                $error->getCode()
             );
         }
 

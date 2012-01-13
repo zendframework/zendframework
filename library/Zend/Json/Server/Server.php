@@ -144,10 +144,9 @@ class Server extends AbstractServer
      */
     public function setClass($class, $namespace = '', $argv = null)
     {
-        $argv = null;
-        if (3 < func_num_args()) {
+        if (2 < func_num_args()) {
             $argv = func_get_args();
-            $argv = array_slice($argv, 3);
+            $argv = array_slice($argv, 2);
         }
 
         $reflection = Reflection::reflectClass($class, $argv, $namespace);

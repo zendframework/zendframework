@@ -559,10 +559,9 @@ class Server implements \Zend\Server\Server
         }
 
         $this->_class = $class;
-        if (1 < func_num_args()) {
+        if (2 < func_num_args()) {
             $argv = func_get_args();
-            array_shift($argv);
-            $this->_classArgs = $argv;
+            $this->_classArgs = array_slice($argv, 2);
         }
 
         return $this;

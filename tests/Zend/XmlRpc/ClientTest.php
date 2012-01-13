@@ -556,11 +556,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingUriOnHttpClientIsNotOverwrittenByXmlRpcClient()
     {
-        $changedUri = "http://bar:80";
+        $changedUri = 'http://bar:80';
         // Overwrite: http://foo:80
         $this->setServerResponseTo(array());
         $this->xmlrpcClient->getHttpClient()->setUri($changedUri);
-        $this->xmlrpcClient->call("foo");
+        $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri()->toString();
 
         $this->assertEquals($changedUri, $uri);
@@ -571,7 +571,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettingNoHttpClientUriForcesClientToSetUri()
     {
-        $baseUri = "http://foo:80";
+        $baseUri = 'http://foo:80';
         $this->httpAdapter = new Adapter\Test();
         $this->httpClient = new Http\Client(null, array('adapter' => $this->httpAdapter));
 
@@ -580,7 +580,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->setServerResponseTo(array());
         $this->assertNull($this->xmlrpcClient->getHttpClient()->getRequest()->getUri());
-        $this->xmlrpcClient->call("foo");
+        $this->xmlrpcClient->call('foo');
         $uri = $this->xmlrpcClient->getHttpClient()->getUri();
 
         $this->assertEquals($baseUri, $uri->toString());
@@ -645,7 +645,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $headers = array("HTTP/1.1 $status $message",
                          "Status: $status",
-                         'Content_Type: text/xml; charset=utf-8',
+                         'Content-Type: text/xml; charset=utf-8',
                          'Content-Length: ' . strlen($data)
                          );
         return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";

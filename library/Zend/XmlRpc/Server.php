@@ -251,7 +251,6 @@ class Server extends AbstractServer
             throw new Server\Exception\InvalidArgumentException('Invalid method class', 610);
         }
 
-        $argv = null;
         if (2 < func_num_args()) {
             $argv = func_get_args();
             $argv = array_slice($argv, 2);

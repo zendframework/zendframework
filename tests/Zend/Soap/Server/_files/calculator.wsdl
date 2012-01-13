@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="MyCalculatorService" targetNamespace="http://localhost">
+  <types>
+    <xsd:schema targetNamespace="http://localhost">
+      <xsd:element name="add">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="x" type="xsd:int"/>
+            <xsd:element name="y" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="addResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="addResult" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <portType name="MyCalculatorServicePort">
+    <operation name="add">
+      <documentation>@param int $x</documentation>
+      <input message="tns:addIn"/>
+      <output message="tns:addOut"/>
+    </operation>
+  </portType>
+  <binding name="MyCalculatorServiceBinding" type="tns:MyCalculatorServicePort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="add">
+      <soap:operation soapAction="http://localhost#add"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="MyCalculatorServiceService">
+    <port name="MyCalculatorServicePort" binding="tns:MyCalculatorServiceBinding">
+      <soap:address location="http://localhost"/>
+    </port>
+  </service>
+  <message name="addIn">
+    <part name="parameters" element="tns:add"/>
+  </message>
+  <message name="addOut">
+    <part name="parameters" element="tns:addResponse"/>
+  </message>
+</definitions>

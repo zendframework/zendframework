@@ -3,7 +3,7 @@ namespace ZendTest\Stdlib\SignalHandlers;
 
 class InstanceMethod
 {
-    public function callable()
+    public function handler()
     {
         return __FUNCTION__;
     }

@@ -264,7 +264,7 @@ class EventManager implements EventCollection
         if (empty($this->events[$event])) {
             $this->events[$event] = new PriorityQueue();
         }
-        $listener = new CallbackHandler($event, $callback, array('priority' => $priority));
+        $listener = new CallbackHandler($callback, array('event' => $event, 'priority' => $priority));
         $this->events[$event]->insert($listener, $priority);
         return $listener;
     }
@@ -292,8 +292,8 @@ class EventManager implements EventCollection
      */
     public function detach(CallbackHandler $listener)
     {
-        $event = $listener->getEvent();
-        if (empty($this->events[$event])) {
+        $event = $listener->getMetadatum('event');
+        if (!$event || empty($this->events[$event])) {
             return false;
         }
         $return = $this->events[$event]->remove($listener);
@@ -394,7 +394,7 @@ class EventManager implements EventCollection
         if (count($staticListeners)) {
             $listeners = clone $listeners;
             foreach ($staticListeners as $listener) {
-                $priority = $listener->getOption('priority');
+                $priority = $listener->getMetadatum('priority');
                 if (null === $priority) {
                     $priority = 1;
                 } elseif (is_array($priority)) {
@@ -411,12 +411,6 @@ class EventManager implements EventCollection
         }
 
         foreach ($listeners as $listener) {
-            // If we have an invalid listener, detach it, and move on to the next
-            if (!$listener->isValid()) {
-                $this->detach($listener);
-                continue;
-            }
-
             // Trigger the listener's callback, and push its result onto the
             // response collection
             $responses->push(call_user_func($listener->getCallback(), $e));

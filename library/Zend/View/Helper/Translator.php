@@ -133,7 +133,7 @@ class Translator extends AbstractHelper
     public function setTranslator($translator)
     {
         if ($translator instanceof TranslationAdapter) {
-            $this->translator = $translate;
+            $this->translator = $translator;
         } else if ($translator instanceof Translation) {
             $this->translator = $translator->getAdapter();
         } else {

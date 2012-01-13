@@ -136,4 +136,12 @@ interface Server
      * @return bool $flag Current status.
      */
     public function getReturnResponse();
+
+    /**
+     * Returns last produced response.
+     *
+     * @return string|object Content of last response, or response object that
+     * implements __toString() methods.
+     */
+    public function getResponse();
 }

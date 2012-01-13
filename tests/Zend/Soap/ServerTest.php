@@ -599,7 +599,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
 
         $server->handle($request);
 
-        $this->assertEquals($expectedResponse, $server->getLastResponse());
+        $this->assertEquals($expectedResponse, $server->getResponse());
     }
 
     public function testHandle()

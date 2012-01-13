@@ -729,7 +729,7 @@ class Server implements \Zend\Server\Server
      *
      * @return string
      */
-    public function getLastResponse()
+    public function getResponse()
     {
         return $this->_response;
     }

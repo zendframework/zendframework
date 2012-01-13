@@ -227,7 +227,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
         $this->_server->setReturnResponse(true);
 
         $this->assertFalse(isset($response));
-        $response = $this->_server->getLastResponse();
+        $response = $this->_server->getResponse();
         $this->assertTrue($response instanceof Response);
         $this->assertSame($response->__toString(), $output);
         $return = $response->getReturnValue();

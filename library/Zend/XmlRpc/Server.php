@@ -158,7 +158,7 @@ class Server extends AbstractServer
      * Last response results.
      * @var \Zend\XmlRpc\Response
      */
-    protected $lastResponse;
+    protected $response;
 
     /**
      * Constructor
@@ -288,7 +288,7 @@ class Server extends AbstractServer
      * If true, {@link handle()} will return the response instead of
      * automatically sending it back to the requesting client.
      *
-     * The response is always available via {@link getLastResponse()}.
+     * The response is always available via {@link getResponse()}.
      *
      * @param boolean $flag
      * @return \Zend\XmlRpc\Server
@@ -339,7 +339,7 @@ class Server extends AbstractServer
 
         // Set output encoding
         $response->setEncoding($this->getEncoding());
-        $this->lastResponse = $response;
+        $this->response = $response;
 
         if (!$this->returnResponse) {
             echo $response;
@@ -456,9 +456,9 @@ class Server extends AbstractServer
      *
      * @return \Zend\XmlRpc\Response
      */
-    public function getLastResponse()
+    public function getResponse()
     {
-        return $this->lastResponse;
+        return $this->response;
     }
 
     /**

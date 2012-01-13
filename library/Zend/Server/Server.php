@@ -119,4 +119,21 @@ interface Server
      * @return void
      */
     public function setPersistence($mode);
+
+    /**
+     * Sets auto-response flag for the server.
+     *
+     * To unify all servers, default behavior should be to auto-emit response.
+     *
+     * @param bool $flag
+     * @return \Zend\Server\Server Self instance.
+     */
+    public function setReturnResponse($flag = true);
+
+    /**
+     * Returns auto-response flag of the server.
+     *
+     * @return bool $flag Current status.
+     */
+    public function getReturnResponse();
 }

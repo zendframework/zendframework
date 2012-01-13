@@ -709,7 +709,7 @@ class Server implements \Zend\Server\Server
      * @param boolean $flag
      * @return \Zend\Soap\Server
      */
-    public function setReturnResponse($flag)
+    public function setReturnResponse($flag = true)
     {
         $this->_returnResponse = ($flag) ? true : false;
         return $this;

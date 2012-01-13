@@ -49,7 +49,7 @@ class Server extends AbstractServer
      * Flag: whether or not to auto-emit the response
      * @var bool
      */
-    protected $_autoEmitResponse = true;
+    protected $returnResponse = false;
 
     /**
      * @var bool Flag; allow overwriting existing methods when creating server definition
@@ -194,7 +194,7 @@ class Server extends AbstractServer
         $response = $this->_getReadyResponse();
 
         // Emit response?
-        if ($this->autoEmitResponse()) {
+        if (!$this->returnResponse) {
             echo $response;
             return;
         }
@@ -280,21 +280,49 @@ class Server extends AbstractServer
      *
      * @param  bool $flag
      * @return Server
+     * @deprecated Left just for BC, drop it as soon as not used by anyone - use setReturnResponse() with negation instead.
      */
     public function setAutoEmitResponse($flag)
     {
-        $this->_autoEmitResponse = (bool) $flag;
-        return $this;
+        return $this->setReturnResponse(!$flag);
     }
 
     /**
      * Will we auto-emit the response?
      *
      * @return bool
+     * @deprecated Left just for BC, drop it as soon as not used by anyone - use getReturnResponse() with negation instead.
      */
     public function autoEmitResponse()
     {
-        return $this->_autoEmitResponse;
+        return !$this->getReturnResponse();
+    }
+
+    /**
+     * Set return response flag
+     *
+     * If true, {@link handle()} will return the response instead of
+     * automatically sending it back to the requesting client.
+     *
+     * The response is always available via {@link getResponse()}.
+     *
+     * @param boolean $flag
+     * @return \Zend\Json\Server\Server
+     */
+    public function setReturnResponse($flag = true)
+    {
+        $this->returnResponse = ($flag) ? true : false;
+        return $this;
+    }
+
+    /**
+     * Retrieve return response flag
+     *
+     * @return boolean
+     */
+    public function getReturnResponse()
+    {
+        return $this->returnResponse;
     }
 
     // overloading for SMD metadata

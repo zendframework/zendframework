@@ -266,7 +266,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         return implode("\r\n", $headers) . "\r\n\r\n$data\r\n\r\n";
     }
 
-    //TODO:BEGIN
     public function makeHttpResponseFor($nativeVars)
     {
         $response = $this->getServerResponseFor($nativeVars);
@@ -279,25 +278,3 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->jsonClient->setHttpClient($this->mockedHttpClient);
     }
 }
-
-/*
-     * @throws \Zend\Json\Server\Exception\HttpException When HTTP communication fails.
-
-     * @throws \Zend\Json\Server\Exception\ErrorExceptionn When remote call fails.
-    public function call($method, $params = array())
-    {
-        $request = $this->createRequest($method, $params);
-
-        $response = $this->doRequest($request);
-
-        if ($response->isError()) {
-            $error = $response->getError();
-            throw new Exception\ErrorException(
-                $error->getMessage(),
-                $error->getCode()
-            );
-        }
-
-        return $response->getResult();
-    }
-*/

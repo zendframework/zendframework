@@ -54,6 +54,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_server = new Server();
+        $this->_server->setReturnResponse(true);
     }
 
     /**
@@ -123,6 +124,16 @@ class ServerTest extends \PHPUnit_Framework_TestCase
             ),
             'zsr'
         );
+    }
+
+    /**
+     * getReturnResponse() default value
+     */
+    public function testEmitResponseByDefault()
+    {
+        $server = new Server();
+
+        $this->assertFalse($server->getReturnResponse());
     }
 
     /**
@@ -202,6 +213,29 @@ class ServerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * handle() test - default behavior should be to not return the response
+     */
+    public function testHandle()
+    {
+        $request = new Request();
+        $request->setMethod('system.listMethods');
+        $this->_server->setReturnResponse(false);
+        ob_start();
+        $response = $this->_server->handle($request);
+        $output = ob_get_contents();
+        ob_end_clean();
+        $this->_server->setReturnResponse(true);
+
+        $this->assertFalse(isset($response));
+        $response = $this->_server->getLastResponse();
+        $this->assertTrue($response instanceof Response);
+        $this->assertSame($response->__toString(), $output);
+        $return = $response->getReturnValue();
+        $this->assertTrue(is_array($return));
+        $this->assertTrue(in_array('system.multicall', $return));
+    }
+
+    /**
      * handle() test
      *
      * Call as method call
@@ -211,7 +245,7 @@ class ServerTest extends \PHPUnit_Framework_TestCase
      *
      * Returns: Zend_XmlRpc_Response|Zend_XmlRpc_Fault
      */
-    public function testHandle()
+    public function testHandleWithReturnResponse()
     {
         $request = new Request();
         $request->setMethod('system.listMethods');

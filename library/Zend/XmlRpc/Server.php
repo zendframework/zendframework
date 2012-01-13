@@ -155,6 +155,12 @@ class Server extends AbstractServer
     protected $returnResponse = false;
 
     /**
+     * Last response results.
+     * @var \Zend\XmlRpc\Response
+     */
+    protected $lastResponse;
+
+    /**
      * Constructor
      *
      * Creates system.* methods.
@@ -334,6 +340,7 @@ class Server extends AbstractServer
 
         // Set output encoding
         $response->setEncoding($this->getEncoding());
+        $this->lastResponse = $response;
 
         if (!$this->returnResponse) {
             echo $response;
@@ -443,6 +450,16 @@ class Server extends AbstractServer
     public function getRequest()
     {
         return $this->_request;
+    }
+
+    /**
+     * Last response.
+     *
+     * @return \Zend\XmlRpc\Response
+     */
+    public function getLastResponse()
+    {
+        return $this->lastResponse;
     }
 
     /**

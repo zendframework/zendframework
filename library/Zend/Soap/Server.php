@@ -810,7 +810,7 @@ class Server implements \Zend\Server\Server
         ob_start();
         if($setRequestException instanceof \Exception) {
             // Send SOAP fault message if we've catched exception
-            $soap->fault("Sender", $setRequestException->getMessage());
+            $soap->fault('Sender', $setRequestException->getMessage());
         } else {
             try {
                 $soap->handle($this->_request);
@@ -940,6 +940,6 @@ class Server implements \Zend\Server\Server
      */
     public function handlePhpErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {
-        throw $this->fault($errstr, "Receiver");
+        throw $this->fault($errstr, 'Receiver');
     }
 }

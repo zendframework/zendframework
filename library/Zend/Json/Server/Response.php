@@ -24,6 +24,8 @@
  */
 namespace Zend\Json\Server;
 
+use Zend\Json\Json;
+
 /**
  * @uses       \Zend\Json\Json
  * @category   Zend
@@ -63,6 +65,44 @@ class Response
      * @var string
      */
     protected $_version;
+
+    /**
+     * Set response state
+     *
+     * @param  array $options
+     * @return \Zend\Json\Server\Response
+     */
+    public function setOptions(array $options)
+    {
+        // re-produce error state
+        if (isset($options['error']) && is_array($options['error'])) {
+            $error = $options['error'];
+            $options['error'] = new Error($error['message'], $error['code'], $error['data']);
+        }
+
+        $methods = get_class_methods($this);
+        foreach ($options as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (in_array($method, $methods)) {
+                $this->$method($value);
+            } elseif ($key == 'jsonrpc') {
+                $this->setVersion($value);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Set response state based on JSON
+     *
+     * @param  string $json
+     * @return void
+     */
+    public function loadJson($json)
+    {
+        $options = Json::decode($json, Json::TYPE_ARRAY);
+        $this->setOptions($options);
+    }
 
     /**
      * Set result

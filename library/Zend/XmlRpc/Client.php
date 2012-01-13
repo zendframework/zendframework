@@ -24,6 +24,7 @@
  */
 namespace Zend\XmlRpc;
 use Zend\Http,
+    Zend\Server\Client as ClientInterface,
     Zend\XmlRpc\Value;
 
 /**
@@ -44,7 +45,7 @@ use Zend\Http,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client
+class Client implements ClientInterface
 {
     /**
      * Full address of the XML-RPC service

@@ -33,7 +33,7 @@ use Zend\Http\Client\Adapter,
     Zend\XmlRpc;
 
 /**
- * Test case for Zend_XmlRpc_Value
+ * Test case for Zend\XmlRpc\Client
  *
  * @category   Zend
  * @package    Zend_XmlRpc

@@ -288,7 +288,7 @@ class Server extends AbstractServer
      * If true, {@link handle()} will return the response instead of
      * automatically sending it back to the requesting client.
      *
-     * The response is always available via {@link getResponse()}.
+     * The response is always available via {@link getLastResponse()}.
      *
      * @param boolean $flag
      * @return \Zend\XmlRpc\Server

@@ -51,20 +51,20 @@ abstract class AbstractAdapter implements Adapter
      * Class to utilize for new document objects
      * @var string
      */
-    protected $_documentClass = 'Zend\Cloud\DocumentService\Document';
+    protected $_documentClass = '\Zend\Cloud\DocumentService\Document';
 
     /**
      * Class to utilize for new document set objects
      * @var string
      */
-    protected $_documentSetClass = 'Zend\Cloud\DocumentService\DocumentSet';
+    protected $_documentSetClass = '\Zend\Cloud\DocumentService\DocumentSet';
 
     /**
      * Class to utilize for new query objects
      *
      * @var string
      */
-    protected $_queryClass = 'Zend\Cloud\DocumentService\Query';
+    protected $_queryClass = '\Zend\Cloud\DocumentService\Query';
 
     /**
      * Set the class for document objects

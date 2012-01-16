@@ -181,7 +181,7 @@ class SimpleDb extends AbstractAdapter
             $document =  $this->_getDocumentFromArray($document);
         }
 
-        if (!$document instanceof Zend\Cloud\DocumentService\Document) {
+        if (!$document instanceof \Zend\Cloud\DocumentService\Document) {
             throw new Exception\InvalidArgumentException('Invalid document supplied');
         }
 

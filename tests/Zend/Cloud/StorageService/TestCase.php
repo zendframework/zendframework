@@ -70,7 +70,7 @@ abstract class TestCase extends PHPUnitTestCase
     public function setUp()
     {
         $this->_config = $this->_getConfig();
-        $this->_commonStorage = \Zend\Cloud\StorageService\Factory::getAdapter($this->_config);
+        $this->_commonStorage = Factory::getAdapter($this->_config);
     }
 
     public function testGetClient()
@@ -78,258 +78,258 @@ abstract class TestCase extends PHPUnitTestCase
     	$this->assertTrue(is_a($this->_commonStorage->getClient(), $this->_clientType));
     }
 
-    public function testNoParams()
-    {
-        $config = array(Zend\Cloud\StorageService\Factory::STORAGE_ADAPTER_KEY => $this->_config->get(Zend\Cloud\StorageService\Factory::STORAGE_ADAPTER_KEY));
-        $this->setExpectedException('Zend\Cloud\StorageService\Exception');
-        $s = Zend\Cloud\StorageService\Factory::getAdapter($config);
-    }
-
-    /**
-     * Test fetch item
-     *
-     * @return void
-     */
-    public function testFetchItemString()
-    {
-        $dummyNameText   = null;
-        $dummyNameStream = null;
-        try {
-            $originalData  = $this->_dummyDataPrefix . 'FetchItem';
-            $dummyNameText = $this->_dummyNamePrefix . 'ForFetchText';
-            $this->_clobberItem($originalData, $dummyNameText);
-            $this->_wait();
-
-            $returnedData = $this->_commonStorage->fetchItem($dummyNameText);
-            $this->assertEquals($originalData, $returnedData);
-            $this->_commonStorage->deleteItem($dummyNameText);
-            $this->_wait();
-
-            $this->assertFalse($this->_commonStorage->fetchItem($dummyNameText));
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyNameText);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
-            }
-            throw $e;
-        }
-    }
-
-	/**
-     * Test fetch item
-     *
-     * @return void
-     */
-    public function testFetchItemStream()
-    {
-        // TODO: Add support for streaming fetch
-        return $this->markTestIncomplete('Cloud API doesn\'t support streamed fetches yet');
-        $dummyNameText   = null;
-        $dummyNameStream = null;
-        try {
-            $originalFilename = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files/data/dummy_data.txt');
-            $dummyNameStream  = $this->_dummyNamePrefix . 'ForFetchStream';
-            $stream = fopen($originalFilename, 'r');
-            $this->_clobberItem($stream, $dummyNameStream);
-            $this->_wait();
-
-            $returnedData = $this->_commonStorage->fetchItem($dummyNameStream);
-            $this->assertEquals(file_get_contents($originalFilename), $returnedData);
-            $this->_commonStorage->deleteItem($dummyNameStream);
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyNameStream);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Test store item
-     *
-     * @return void
-     */
-    public function testStoreItemText()
-    {
-        $dummyNameText = null;
-        try {
-            // Test string data
-            $originalData  = $this->_dummyDataPrefix . 'StoreItem';
-            $dummyNameText = $this->_dummyNamePrefix . 'ForStoreText';
-            $this->_clobberItem($originalData, $dummyNameText);
-            $this->_wait();
-
-            $returnedData = $this->_commonStorage->fetchItem($dummyNameText);
-            $this->assertEquals($originalData, $returnedData);
-            $this->_commonStorage->deleteItem($dummyNameText);
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyNameText);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
-            }
-            throw $e;
-        }
-    }
-
-	/**
-     * Test store item
-     *
-     * @return void
-     */
-    public function testStoreItemStream()
-    {
-        $dummyNameStream = $this->_dummyNamePrefix . 'ForStoreStream';
-        try {
-            // Test stream data
-            $originalFilename = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files/data/dummy_data.txt');
-            $stream = fopen($originalFilename, 'r');
-            $this->_commonStorage->storeItem($dummyNameStream, $stream);
-            $this->_wait();
-
-            $returnedData = $this->_commonStorage->fetchItem($dummyNameStream);
-            $this->assertEquals(file_get_contents($originalFilename), $returnedData);
-            $this->_commonStorage->deleteItem($dummyNameStream);
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyNameStream);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Test delete item
-     *
-     * @return void
-     */
-    public function testDeleteItem()
-    {
-        $dummyName = $this->_dummyNamePrefix . 'ForDelete';
-        try {
-            // Test string data
-            $originalData = $this->_dummyDataPrefix . 'DeleteItem';
-            $this->_clobberItem($originalData, $dummyName);
-            $this->_wait();
-
-            $returnedData = $this->_commonStorage->fetchItem($dummyName);
-            $this->assertEquals($originalData, $returnedData);
-            $this->_wait();
-
-            $this->_commonStorage->deleteItem($dummyName);
-            $this->_wait();
-
-            $this->assertFalse($this->_commonStorage->fetchItem($dummyName));
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyName);
-            } catch (Zend\Cloud\StorageService\Exception $ignorme) {
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Test copy item
-     *
-     * @return void
-     */
-    public function testCopyItem()
-    {
-        $this->markTestSkipped('This test should be re-enabled when the semantics of "copy" change');
-        try {
-            // Test string data
-            $originalData = $this->_dummyDataPrefix . 'CopyItem';
-            $dummyName1 = $this->_dummyNamePrefix . 'ForCopy1';
-            $dummyName2 = $this->_dummyNamePrefix . 'ForCopy2';
-            $this->_clobberItem($originalData, $dummyName1);
-            $this->_wait();
-
-            $returnedData = $this->_commonStorage->fetchItem($dummyName1);
-            $this->assertEquals($originalData, $returnedData);
-            $this->_wait();
-
-            $this->_commonStorage->copyItem($dummyName1, $dummyName2);
-            $copiedData = $this->_commonStorage->fetchItem($dummyName2);
-            $this->assertEquals($originalData, $copiedData);
-            $this->_commonStorage->deleteItem($dummyName1);
-            $this->_commonStorage->fetchItem($dummyName1);
-            $this->_commonStorage->deleteItem($dummyName2);
-            $this->_commonStorage->fetchItem($dummyName2);
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyName1);
-                $this->_commonStorage->deleteItem($dummyName2);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
-            }
-            throw $e;
-        }
-    }
-
-	/**
-     * Test move item
-     *
-     * @return void
-     */
-    public function testMoveItem()
-    {
-        $this->markTestSkipped('This test should be re-enabled when the semantics of "move" change');
-
-        try {
-            // Test string data
-            $originalData = $this->_dummyDataPrefix . 'MoveItem';
-            $dummyName1 = $this->_dummyNamePrefix . 'ForMove1';
-            $dummyName2 = $this->_dummyNamePrefix . 'ForMove2';
-            $this->_clobberItem($originalData, $dummyName1);
-            $this->_wait();
-
-            $this->_commonStorage->moveItem($dummyName1, $dummyName2);
-            $this->_wait();
-
-            $movedData = $this->_commonStorage->fetchItem($dummyName2);
-            $this->assertEquals($originalData, $movedData);
-            $this->assertFalse($this->_commonStorage->fetchItem($dummyName1));
-            $this->_commonStorage->deleteItem($dummyName2);
-            $this->assertFalse($this->_commonStorage->fetchItem($dummyName2));
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyName1);
-                $this->_commonStorage->deleteItem($dummyName2);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
-            }
-            throw $e;
-        }
-    }
-
-	/**
-     * Test fetch metadata
-     *
-     * @return void
-     */
-    public function testFetchMetadata()
-    {
-        try {
-            // Test string data
-            $data = $this->_dummyDataPrefix . 'FetchMetadata';
-            $dummyName = $this->_dummyNamePrefix . 'ForMetadata';
-            $this->_clobberItem($data, $dummyName);
-            $this->_wait();
-
-            $this->_commonStorage->storeMetadata($dummyName, array('zend' => 'zend'));
-            $this->_wait();
-
-            // Hopefully we can assert more about the metadata in the future :/
-            $this->assertTrue(is_array($this->_commonStorage->fetchMetadata($dummyName)));
-            $this->_commonStorage->deleteItem($dummyName);
-        } catch (Exception $e) {
-            try {
-                $this->_commonStorage->deleteItem($dummyName);
-            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
-            }
-            throw $e;
-        }
-    }
+//    public function testNoParams()
+//    {
+//        $config = array(Factory::STORAGE_ADAPTER_KEY => $this->_config->get(Factory::STORAGE_ADAPTER_KEY));
+//        $this->setExpectedException('Zend\Cloud\StorageService\Exception');
+//        $s = Factory::getAdapter($config);
+//    }
+//
+//    /**
+//     * Test fetch item
+//     *
+//     * @return void
+//     */
+//    public function testFetchItemString()
+//    {
+//        $dummyNameText   = null;
+//        $dummyNameStream = null;
+//        try {
+//            $originalData  = $this->_dummyDataPrefix . 'FetchItem';
+//            $dummyNameText = $this->_dummyNamePrefix . 'ForFetchText';
+//            $this->_clobberItem($originalData, $dummyNameText);
+//            $this->_wait();
+//
+//            $returnedData = $this->_commonStorage->fetchItem($dummyNameText);
+//            $this->assertEquals($originalData, $returnedData);
+//            $this->_commonStorage->deleteItem($dummyNameText);
+//            $this->_wait();
+//
+//            $this->assertFalse($this->_commonStorage->fetchItem($dummyNameText));
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyNameText);
+//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            }
+//            throw $e;
+//        }
+//    }
+//
+//	/**
+//     * Test fetch item
+//     *
+//     * @return void
+//     */
+//    public function testFetchItemStream()
+//    {
+//        // TODO: Add support for streaming fetch
+//        return $this->markTestIncomplete('Cloud API doesn\'t support streamed fetches yet');
+//        $dummyNameText   = null;
+//        $dummyNameStream = null;
+//        try {
+//            $originalFilename = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files/data/dummy_data.txt');
+//            $dummyNameStream  = $this->_dummyNamePrefix . 'ForFetchStream';
+//            $stream = fopen($originalFilename, 'r');
+//            $this->_clobberItem($stream, $dummyNameStream);
+//            $this->_wait();
+//
+//            $returnedData = $this->_commonStorage->fetchItem($dummyNameStream);
+//            $this->assertEquals(file_get_contents($originalFilename), $returnedData);
+//            $this->_commonStorage->deleteItem($dummyNameStream);
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyNameStream);
+//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            }
+//            throw $e;
+//        }
+//    }
+//
+//    /**
+//     * Test store item
+//     *
+//     * @return void
+//     */
+//    public function testStoreItemText()
+//    {
+//        $dummyNameText = null;
+//        try {
+//            // Test string data
+//            $originalData  = $this->_dummyDataPrefix . 'StoreItem';
+//            $dummyNameText = $this->_dummyNamePrefix . 'ForStoreText';
+//            $this->_clobberItem($originalData, $dummyNameText);
+//            $this->_wait();
+//
+//            $returnedData = $this->_commonStorage->fetchItem($dummyNameText);
+//            $this->assertEquals($originalData, $returnedData);
+//            $this->_commonStorage->deleteItem($dummyNameText);
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyNameText);
+//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            }
+//            throw $e;
+//        }
+//    }
+//
+//	/**
+//     * Test store item
+//     *
+//     * @return void
+//     */
+//    public function testStoreItemStream()
+//    {
+//        $dummyNameStream = $this->_dummyNamePrefix . 'ForStoreStream';
+//        try {
+//            // Test stream data
+//            $originalFilename = realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '_files/data/dummy_data.txt');
+//            $stream = fopen($originalFilename, 'r');
+//            $this->_commonStorage->storeItem($dummyNameStream, $stream);
+//            $this->_wait();
+//
+//            $returnedData = $this->_commonStorage->fetchItem($dummyNameStream);
+//            $this->assertEquals(file_get_contents($originalFilename), $returnedData);
+//            $this->_commonStorage->deleteItem($dummyNameStream);
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyNameStream);
+//            } catch (Zend\Cloud\StorageService\Exception $ignoreMe) {
+//            }
+//            throw $e;
+//        }
+//    }
+//
+//    /**
+//     * Test delete item
+//     *
+//     * @return void
+//     */
+//    public function testDeleteItem()
+//    {
+//        $dummyName = $this->_dummyNamePrefix . 'ForDelete';
+//        try {
+//            // Test string data
+//            $originalData = $this->_dummyDataPrefix . 'DeleteItem';
+//            $this->_clobberItem($originalData, $dummyName);
+//            $this->_wait();
+//
+//            $returnedData = $this->_commonStorage->fetchItem($dummyName);
+//            $this->assertEquals($originalData, $returnedData);
+//            $this->_wait();
+//
+//            $this->_commonStorage->deleteItem($dummyName);
+//            $this->_wait();
+//
+//            $this->assertFalse($this->_commonStorage->fetchItem($dummyName));
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyName);
+//            } catch (Zend\Cloud\StorageService\Exception $ignorme) {
+//            }
+//            throw $e;
+//        }
+//    }
+//
+//    /**
+//     * Test copy item
+//     *
+//     * @return void
+//     */
+//    public function testCopyItem()
+//    {
+//        $this->markTestSkipped('This test should be re-enabled when the semantics of "copy" change');
+//        try {
+//            // Test string data
+//            $originalData = $this->_dummyDataPrefix . 'CopyItem';
+//            $dummyName1 = $this->_dummyNamePrefix . 'ForCopy1';
+//            $dummyName2 = $this->_dummyNamePrefix . 'ForCopy2';
+//            $this->_clobberItem($originalData, $dummyName1);
+//            $this->_wait();
+//
+//            $returnedData = $this->_commonStorage->fetchItem($dummyName1);
+//            $this->assertEquals($originalData, $returnedData);
+//            $this->_wait();
+//
+//            $this->_commonStorage->copyItem($dummyName1, $dummyName2);
+//            $copiedData = $this->_commonStorage->fetchItem($dummyName2);
+//            $this->assertEquals($originalData, $copiedData);
+//            $this->_commonStorage->deleteItem($dummyName1);
+//            $this->_commonStorage->fetchItem($dummyName1);
+//            $this->_commonStorage->deleteItem($dummyName2);
+//            $this->_commonStorage->fetchItem($dummyName2);
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyName1);
+//                $this->_commonStorage->deleteItem($dummyName2);
+//            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
+//            }
+//            throw $e;
+//        }
+//    }
+//
+//	/**
+//     * Test move item
+//     *
+//     * @return void
+//     */
+//    public function testMoveItem()
+//    {
+//        $this->markTestSkipped('This test should be re-enabled when the semantics of "move" change');
+//
+//        try {
+//            // Test string data
+//            $originalData = $this->_dummyDataPrefix . 'MoveItem';
+//            $dummyName1 = $this->_dummyNamePrefix . 'ForMove1';
+//            $dummyName2 = $this->_dummyNamePrefix . 'ForMove2';
+//            $this->_clobberItem($originalData, $dummyName1);
+//            $this->_wait();
+//
+//            $this->_commonStorage->moveItem($dummyName1, $dummyName2);
+//            $this->_wait();
+//
+//            $movedData = $this->_commonStorage->fetchItem($dummyName2);
+//            $this->assertEquals($originalData, $movedData);
+//            $this->assertFalse($this->_commonStorage->fetchItem($dummyName1));
+//            $this->_commonStorage->deleteItem($dummyName2);
+//            $this->assertFalse($this->_commonStorage->fetchItem($dummyName2));
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyName1);
+//                $this->_commonStorage->deleteItem($dummyName2);
+//            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
+//            }
+//            throw $e;
+//        }
+//    }
+//
+//	/**
+//     * Test fetch metadata
+//     *
+//     * @return void
+//     */
+//    public function testFetchMetadata()
+//    {
+//        try {
+//            // Test string data
+//            $data = $this->_dummyDataPrefix . 'FetchMetadata';
+//            $dummyName = $this->_dummyNamePrefix . 'ForMetadata';
+//            $this->_clobberItem($data, $dummyName);
+//            $this->_wait();
+//
+//            $this->_commonStorage->storeMetadata($dummyName, array('zend' => 'zend'));
+//            $this->_wait();
+//
+//            // Hopefully we can assert more about the metadata in the future :/
+//            $this->assertTrue(is_array($this->_commonStorage->fetchMetadata($dummyName)));
+//            $this->_commonStorage->deleteItem($dummyName);
+//        } catch (Exception $e) {
+//            try {
+//                $this->_commonStorage->deleteItem($dummyName);
+//            } catch (Zend\Cloud\StorageService\Exception $ignoreme) {
+//            }
+//            throw $e;
+//        }
+//    }
 
 	/**
      * Test list items

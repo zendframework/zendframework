@@ -159,8 +159,8 @@ class Files extends RackspaceAbstract
             throw new Exception\InvalidArgumentException(self::ERROR_PARAM_NO_NAME_CONTAINER);
         }
         $result= $this->httpCall($this->getStorageUrl().'/'.rawurlencode($container),'GET',null,$options);
-        if ($result->isSuccess()) {
-            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);
+        if ($result->isSuccess() && ($result->getBody()!=='[]')) {
+            return new Files\ObjectList($this,json_decode($result->getBody(),true),$container);  
         }
         return false;
     }

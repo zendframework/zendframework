@@ -49,7 +49,7 @@ class Query extends QueryInterface
      * @param  null|string $collectionName
      * @return void
      */
-    public function __construct(Zend\Cloud\DocumentServic\Adapter\SimpleDb $adapter, $collectionName = null)
+    public function __construct(\Zend\Cloud\DocumentService\Adapter\SimpleDb $adapter, $collectionName = null)
     {
         $this->_adapter = $adapter;
         if (null !== $collectionName) {

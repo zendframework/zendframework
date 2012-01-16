@@ -27,7 +27,7 @@ use ZendTest\Cloud\StorageService\TestCase,
 
 // Call Zend\Cloud\StorageService\Adapter\NirvanixTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend\Cloud\StorageService\Adapter\NirvanixTest::main");
+    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\StorageService\Adapter\NirvanixTest::main");
 }
 
 /**
@@ -85,7 +85,7 @@ class NirvanixTest extends TestCase
             || !defined('TESTS_ZEND_SERVICE_NIRVANIX_ONLINE_PASSWORD')
             || !defined('TESTS_ZEND_CLOUD_STORAGE_NIRVANIX_DIRECTORY')
         ) {
-            $this->markTestSkipped("Windows Azure access not configured, skipping test");
+            $this->markTestSkipped("Nirvanix access not configured, skipping test");
         }
 
         $config = new Zend\Config\Config(array(
@@ -100,6 +100,6 @@ class NirvanixTest extends TestCase
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend\Cloud\StorageService\Adapter\NirvanixTest::main') {
+if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\StorageService\Adapter\NirvanixTest::main') {
     NirvanixTest::main();
 }

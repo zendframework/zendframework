@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<section 
+    xmlns="http://docbook.org/ns/docbook" version="5.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.mvc.intro">
+  <info><title>Introduzione al layer MVC</title></info>
+
+  <para>
+    <classname>Zend\Mvc</classname> è un completamente nuova implentazione
+    MVC disegnata dalle fondamenta per Zend Framework 2.0. Il punto
+    chiave di questa implementazione sono le performance e la flessibilità.
+  </para>
+
+  <para>
+    L'apparato MVC è costruito sopra questi componenti:
+  </para>
+
+  <itemizedlist>
+    <listitem>
+      <para>
+        <classname>Zend\Di</classname>, nello specifico la sua
+        interfaccia <classname>Locator</classname>, comunque  
+        il Dependency Injection Container (DiC).
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\EventManager</classname>
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Http</classname>, nello specifico la richiesta 
+        e la risposta, che sono usate con:
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Stdlib\Dispatchable</classname>; tutti i "controller"
+        sono semplicemente deglio oggetti eseguibili (dispatchable objects)
+      </para>
+    </listitem>
+  </itemizedlist>
+
+  <para>
+    Insieme al layer MVC molti altri sottocomponenti sono disponibili:
+  </para>
+
+  <itemizedlist>
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Router</classname> contiene le classi per 
+        gestire il routing delle richieste (l'atto di consegnare una 
+        richiesta  ad un controller o un oggetto eseguibile (dispatchable))
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\PhpEnvironment</classname>, un insieme di decorators
+        per la richiesta (<classname>Request</classname>) e la risposta (<classname>Response</classname>) degli oggetti
+        HTTP che garantiscono che la richiesta sia introdotta nel sistema
+        (includendo parametri, variabili POST, gli header HTTP, etc.)
+      </para>
+    </listitem>
+
+    <listitem>
+      <para>
+        <classname>Zend\Mvc\Controller</classname>, un insieme di classi
+        "controller" astratte che hanno delle responsabilità di base come
+        il legare eventi, eseguire azioni, etc. 
+      </para>
+    </listitem>
+  </itemizedlist>
+
+  <para>
+    La porta di ingresso (gateway) per lo MVC è l'oggetto 
+    <classname>Zend\Mvc\Application</classname> (riferito semplicemente con 
+    il nome della sua classe da qui in avanti <classname>Application</classname>).
+    La sua principale responsabilità è quella <emphasis>instradare</emphasis> le 
+    richieste e di ricevere ed <emphasis>eseguire</emphasis> il controller
+    richiesto. Una volta compiuto questo compito, ritorna una risposta che può
+    essere <emphasis>inviata</emphasis>.
+  </para>
+
+  <section xml:id="zend.mvc.intro.basic-application-structure">
+    <info><title>Struttura base di una applicazione</title></info>
+
+    <para>
+        La struttura base di una applicazione è la seguente:
+    </para>
+
+    <literallayout>
+application_root/
+    config/
+        application.config.php
+    data/
+    module/
+    vendor/
+    public/
+        .htaccess
+        index.php
+</literallayout>
+
+    <para>
+        Il file <filename>public/index.php</filename> esegue il lavoro 
+        di base come la configurazione primaria e la configurazione della
+        <classname>Application</classname>.
+        Quando compiuto avvia (<methodname>run()</methodname>) l'
+        <classname>Application</classname> e invia (<methodname>send()</methodname>)
+        la risposta ottenuta.
+    </para>
+
+    <para>
+        La directory <filename>config</filename> contiene tipicamente
+        la configurazione utilizzata da <classname>Zend\Module\Manager</classname>
+        in modo da caricare i moduli e miscelare le configurazioni. Vedremo
+        in dettaglio questa sezione successivamente.
+    </para>
+
+    <para>
+        La directory <filename>vendor</filename> dovrebbe contenere
+        qualunque modulo o libreria con cui l'applicazione ha una
+        dipendenza che è sviluppata da parti terze.
+        Questa potrebbe includere Zend Framework, librerie costruite
+        dalla nostra aziend oppure librerie da altri progetti di parti
+        terze. Librerie e module posizionati in <filename>vendor</filename>
+        non dovrebero essere modificate direttamente nel progetto 
+        in quanto sono gestite esternamente.
+    </para>
+
+    <para>
+        Infine, la directory <filename>module</filename> conterrà uno
+        o più module a cui sono consegnate funzionalità della nostra
+        applicazione.
+    </para>
+
+    <para>
+        Deleghiamo ai nostri module, questi sono l'unità elementare della
+        nostra applicazione web.
+    </para>
+  </section>
+
+  <section xml:id="zend.mvc.intro.basic-module-structure">
+    <info><title>Struttura base dei moduli</title></info>
+
+    <para>
+        Un module puà contenere possibilmente qualunque cosa: codice PHP,
+        incluse funzionalità MVC, librerie, view scripts e/o assetti pubblici
+        come immagini, CSS, JavaScript. Una delle richieste -- e anche questo
+        è opzionale -- è che un module lavora con un namespace PHP e che questo
+        contiene una class <classname>Module</classname> in questo namespace. 
+        Questa classe allora sarà utilizzata da <classname>Zend\Module\Manager</classname>
+        in modo da poter elaborare un certo numero di task.
+    </para>
+
+    <para>
+        La struttura raccomandata di un module è la seguente:
+    </para>
+
+    <literallayout>
+module_root/
+    Module.php
+    autoload_classmap.php
+    autoload_function.php
+    autoload_register.php
+    config/
+        module.config.php
+    public/
+        images/
+        css/
+        js/
+    src/
+        &lt;module_namespace&gt;/
+            &lt;code files&gt;
+    tests/
+        phpunit.xml
+        bootstrap.php
+        &lt;module_namespace&gt;/
+            &lt;test code files&gt;
+    views/
+        &lt;dir-named-after-a-controller/
+            &lt;.phtml files&gt;
+</literallayout>
+
+    <para>
+        Finchè un module lavora come namespace, la directory radice 
+        dovrebbe essere quel namespace. Tipicamente questo namespace
+        includerà anche un prefisso di chi lo realizza (vendor name).
+        Per esempio se realizziamo un module che realizzi alcune funzionalità
+        sugli "User" che è realizzato dalla Zend probabilmente dovrebbe
+        chiamarsi "ZendUser" e questo è anche il nome con cui dovrebbe
+        chiamarsi la directory radice.
+    </para>
+
+    <para>
+        Il file <filename>Module.php</filename> messo nella directory radice
+        sarà così nel namespace del modulo:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+namespace ZendUser;
+
+class Module
+{
+}
+]]></programlisting>
+
+    <para>
+        Di default se è definito un <methodname>init()</methodname>, questo
+        sarà invocat da un listener <classname>Zend\Module\Manager</classname>
+        quando questo caricherà la classe del module e passa un istanza del 
+        manager. Questo ti permette di realizzare task di configurazione
+        per il listener degli eventi specifici del modulo. Il metodo
+        <methodname>init()</methodname> è chiamato <emphasis>sempre</emphasis>
+        per ogni richiesta e dovrebbe essere utilizzato <emphasis>solo</emphasis>
+        per eseguire task molto leggeri come registrari eventi per i listener. 
+    </para>
+
+    <para>
+        Il tre <filename>autoload_*.php</filename> non sono richiesti ma
+        fortemente consigliati. Loro realizzano:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+            <filename>autoload_classmap.php</filename> dovrebbe ritornare
+            un array che è una mappatura (classmap) di classi, in pratica
+            coppie di nome/filename (con i nomi di file risolti con la 
+            costante magica <varname>__DIR__</varname>).
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            <filename>autoload_function.php</filename> dovrebbe ritornare
+            un call PHP che può essere passato alla funzione 
+            <methodname>spl_autoload_register()</methodname>. Tipicamente
+            questo callback utilizza la "map" ritornata da 
+            <filename>autoload_filemap.php</filename>.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            <filename>autoload_register.php</filename> dovrebbe registrare
+            un callback PHP (tipicamente che viene ritornato da 
+            <filename>autoload_function.php</filename> con 
+            <methodname>spl_autoload_register()</methodname>).
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+        Il concetto di questi tre file è di fornire un meccanismo
+        di defuault per l'autoloading delle classi contenute in un 
+        modulo, realizzando in modo semplice un metodo per lavorare
+        con un modulo senza richiedere <classname>Zend\Module</classname>
+        (es. esternamente da un applicazione ZF2).
+    </para>
+
+    <para>
+        La directory <filename>config</filename> dovrebbe contenere
+        qualunque configurazione specifica del modulo. Questi file
+        posso essere in qualunque formato gestito da 
+        <classname>Zend\Config</classname>. Raccomandiamo di chiamare
+        la configurazione principale "module.format" e per le 
+        configurazioni basate in PHP "module.config.php". Tipicamente
+        creerai configurazioni per il router allo stesso modo che
+        per il dependency injector (iniettore delle dipendenze).
+    </para>
+
+    <para>
+        La directory <filename>src</filename> dovrebbe essere una
+        <link xlink:href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">directory con struttura PSR-0 compatibile</link>
+        con il codice sorgente del tuo modulo. Tipicamente avrai almeno
+        una sottodirectory chiamata con il namespace del tuo modulo,
+        comunque puoi "traghettare" il tuo codice con namespace 
+        multipli se lo desideri.
+    </para>
+
+    <para>
+        La directory <filename>tests</filename> dovrebbe contenere
+        le tue unit tests. Tipicamente queste saranno scritte utilizzando
+        <link xlink:href="http://phpunit.de">PHPUnit</link>, e conterranno
+        artefatti collegati con le loro configurazioni (es. 
+        <filename>phpunit.xml</filename>, bootstrap.php). 
+    </para>
+
+    <para>
+        La directory <filename>public</filename> può essere utilizzata
+        per contenere assetti che tu vuoi esporre nella tua applicazioni
+        come documenti. Possono essere file immagini, file CSS, file JavaScript,
+        etc. Come questi saranno esposti è lasciato allo sviluppatore.
+    </para>
+
+    <para>
+        La directory <filename>views</filename> contiene le viste (view scripts) 
+        collegati con i tuoi controller.
+    </para>
+  </section>
+
+  <section xml:id="zend.mvc.intro.bootstrapping-an-application">
+    <info><title>Bootstrap di una Application</title></info>
+
+    <para>
+        Una <classname>Application</classname> è composta da molti oggetti, 
+        ma in particolare interessano allo sviluppatore il Router ed il 
+        Locator. Questi hanno sempre bisogno di essere configurati ed 
+        iniettati per avviare una <classname>Application</classname>. Il 
+        bootstrap consiste nel configurare ed iniettare il router, così
+        come il locator. 
+    </para>
+
+    <para>
+        Lo Zend Framework ha una implementazione del boostrap di default
+        <classname>Zend\Mvc\Bootstrap</classname>. Questa classe accetta
+        una istanza di <classname>Zend\Config\Config</classname> al suo
+        costruttore, una volta che avete una istanza potete chiamare
+        il metodo <methodname>bootstrap()</methodname> passandogli 
+        la <classname>Application</classname>. Questa configurerà il tuo
+        locator (utilizzando <classname>Zend\Di\Di</classname> di default) 
+        ed il tuo router (utilizzando 
+        <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname> di default). 
+    </para>
+
+    <para>
+        Una volta assolti questi due compiti, sarà invocato l'evento
+        "bootstrap" che è collegato all'istanza <classname>EventManager</classname>.
+        Questo permette ai tuoi moduli di collegari listeners e questi possono
+        realizzare dei bootstrap specifici per il tuo modulo (che potrebbero 
+        includere la registrazione delle ACL, configurare le cache oppure i 
+        listener per i log, etc.).
+    </para>
+
+    <para>
+        L'utilizzo sarebbe il seguente:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// Assuming $config is the merged config from all modules
+$bootstrap   = new Bootstrap($config);
+$application = new Application();
+$bootstrap->bootstrap($application);
+]]></programlisting>
+
+    <para>
+        A questo punto la tua <classname>Application</classname> è
+        pronta per essere avviata:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$response = $application->run();
+$response->send();
+]]></programlisting>
+
+    <para>
+        Il metodo <methodname>run()</methodname> esegue tipicamente 
+        quattro cose:
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>
+            Elabora l'oggetto <classname>Request</classname>, controllando
+            che questo sia completamente configurato sul sistema su cui
+            si sta lavorando (questo include l'iniezione degli heder, 
+            query, parametri POST e molto altro).
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            Esegue l'evento "route". Di default, il metodo <methodname>route()</methodname>
+            della classe <classname>Application</classname> è registrato come
+            un listener, ma tu puoi fornire dei tuoi listener per rimpiazzarlo
+            o intercettarlo prima o dopo la sua esecuzione.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            Avvia l'evento "dispatch".  Di default, il metodo <methodname>dispatch()</methodname>
+            della classe <classname>Application</classname> è registrato come
+            un listener, ma tu puoi fornire dei tuoi listener per rimpiazzarlo
+            o intercettarlo prima o dopo la sua esecuzione.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+            Elabora l'oggetto <classname>Response</classname> capace di
+            inviarsi dalla risposta dell'evento "dispatch".
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>
+        Noterai che hai un sacco di controllo sul tuo workflow. Utilizzando
+        il sistema di priorità dell'EventManager puoi intercettare 
+        gli eventi "route" e "dispatch" in ogni dove durante l'esecuzione,
+        pemettendoti di veicolare i workflow della tua applicazione
+        secondo i tuoi bisogni.
+    </para>
+  </section>
+
+  <section xml:id="zend.mvc.intro.bootstrapping-a-modular-application">
+    <info><title>Bootstrap di una applicazione modulare</title></info>
+
+    <para>
+        Mentre l'approccio visto funzione bene, da dove viene la 
+        configurazione? Quando costruiamo una applicazione modulare
+        le informazioni nascono proprio dai moduli. Come possiamo
+        prendere queste informazioni e aggregarle fra di loro?
+    </para>
+
+    <para>
+        La risposta è tramite <classname>Zend\Module\Manager</classname>.
+        Questo componente ti permette di specificare dove esistono i 
+        moduli, allora localizzerà tutti i moduli e li inizializzerà.
+        Se la classe <classname>Module</classname> di un modulo ha il
+        suo <methodname>getConfig()</methodname>, questo risponderà
+        con la configurazione e sarà mischiata con quella della
+        applicazione. Suona complicato? Non lo è.
+    </para>
+
+    <section xml:id="zend.mvc.intro.bootstrapping-a-modular-application.configuring-the-module-manager">
+      <info><title>Configurare il Module Manager</title></info>
+
+      <para>
+        Il primo passo è configurare il module manager. Il modo più
+        semplice per farlo è utilizzare la classe
+        <classname>Zend\Module\Listener\DefaultListenerAggregate</classname>.
+        Quindi è sufficiente informare il module manager dei moduli da caricare
+        e attaccare il listener aggregate.
+      </para>
+
+      <para>
+        Ricordi il <filename>application.config.php</filename> di prima?
+        Stiamo per andare a realizzare qualche configurazione.
+      </para>
+
+      <programlisting language="php"><![CDATA[
+<?php
+// config/application.config.php
+return array(
+    'modules' => array(
+        /* ... */
+    ),
+    'module_listener_options' => array( 
+        'module_paths' => array(
+            './module',
+            './vendor',
+        ),
+    ),
+);
+]]></programlisting>
+
+      <para>
+        Come aggiungiamo moduli al sistema, aggiungiamo anche
+        elementi all'array <varname>modules</varname>.
+      </para>
+
+      <para>
+        Ora con il nostro <filename>public/index.php</filename> 
+        possiamo configurare il <classname>DefaultListenerAggregate</classname>:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+use Zend\Module\Listener;
+
+$moduleConfig     = include __DIR__ . '/../configs/application.config.php';
+$listenerOptions  = new Listener\ListenerOptions($moduleConfig['module_listener_options']);
+$defaultListeners = new Listener\DefaultListenerAggregate($listenerOptions);
+]]></programlisting>
+
+      <para>
+        Una volta fatto, possiamo istanziare il nostro module manager:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+use Zend\Module\Manager as ModuleManager;
+
+$moduleManager = new ModuleManager(
+    $moduleConfig['modules']
+);
+$moduleManager->events()->attachAggregate($defaultListeners);
+]]></programlisting>
+
+      <para>
+        Ogni classe <classname>Module</classname> ha la sua configurazione
+        e la <classname>Application</classname> dovrebbe conoscere come è
+        presente tramite il metodo <methodname>getConfig()</methodname>. 
+        Questo metodo deve ritornare un array oppure un oggetto di tipo
+        <classname>Traversable</classname> come un 
+        <classname>Zend\Config\Config</classname>. Un esempio:
+      </para>
+
+      <programlisting language="php"><![CDATA[
+namespace ZendUser;
+
+class Module
+{
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php'
+    }
+}
+]]></programlisting>
+    </section>
+  </section>
+
+  <section xml:id="zend.mvc.intro.conclusion">
+    <info><title>Conclusioni</title></info>
+
+    <para>
+        Il layer ZF2 è incredibilmente flessibile, offrendo un punto 
+        di ingresso semplice per creare infrastrutture modulari, così
+        come fornire l'abilità di realizzare workflow personali della
+        nostra applicazione tramite il sistema EventManager.
+        Il Bootstrap, largamente lasciato allo sviluppatore, è 
+      Bootstrapping, while largely left to the developer, is lineare e 
+      permette una semplice metodologia per configurare l'applicazione
+      e realizzare diverse strade e servizi in gioco. Il module manager
+      è leggero e con un approccio semplice forzando una architettura
+      modulare che incoraggia una pulita separazioni dei concetti ed 
+      il riutilizzo del codice.
+    </para>
+  </section>
+</section>

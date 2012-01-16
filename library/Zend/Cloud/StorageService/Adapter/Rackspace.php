@@ -11,7 +11,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService
+ * @package    Zend_Cloud_StorageService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,43 +22,51 @@
  */
 namespace Zend\Cloud\StorageService\Adapter;
 
-use Zend\Cloud\StorageService\Adapter,
+use Traversable,
+    Zend\Cloud\StorageService\Adapter,
     Zend\Cloud\StorageService\Exception,
-    Zend\Service\Rackspace\Files as RackspaceFile;
+    Zend\Service\Rackspace\Exception as RackspaceException,
+    Zend\Service\Rackspace\Files as RackspaceFile,
+    Zend\Stdlib\IteratorToArray;
 
 /**
  * Adapter for Rackspace cloud storage
  *
  * @category   Zend
- * @package    Zend\Cloud\StorageService
+ * @package    Zend_Cloud_StorageService
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Rackspace implements Adapter
 {
-    const USER    = 'user';
-    const API_KEY = 'key';
-    const REMOTE_CONTAINER = 'container';
+    const USER                = 'user';
+    const API_KEY             = 'key';
+    const REMOTE_CONTAINER    = 'container';
     const DELETE_METADATA_KEY = 'ZF_metadata_deleted';
     
     /**
-     * The Nirvanix adapter
-     * @var Zend\Service\Rackspace
+     * The Rackspace adapter
+     * @var RackspaceFile
      */
     protected $rackspace;
+
+    /**
+     * Container in which files are stored
+     * @var string
+     */
     protected $container = 'default';
     
     /**
      * Constructor
      *
-     * @param  array|Zend\Config\Config $options
+     * @param  array|Traversable $options
      * @return void
      */
     function __construct($options = array())
     {
-        if ($options instanceof \Zend\Config\Config) {
-            $options = $options->toArray();
+        if ($options instanceof Traversable) {
+            $options = IteratorToArray::convert($options);
         }
 
         if (!is_array($options) || empty($options)) {
@@ -67,7 +75,7 @@ class Rackspace implements Adapter
 
         try {
             $this->rackspace = new RackspaceFile($options[self::USER], $options[self::API_KEY]);
-        } catch (Zend\Service\Rackspace\Exception $e) {
+        } catch (RackspaceException $e) {
             throw new Exception\RuntimeException('Error on create: '.$e->getMessage(), $e->getCode(), $e);
         }
         
@@ -102,8 +110,8 @@ class Rackspace implements Adapter
     /**
      * Store an item in the storage service.
      * 
-     * @param string $destinationPath
-     * @param mixed $data
+     * @param  string $destinationPath
+     * @param  mixed $data
      * @param  array $options
      * @return void
      */
@@ -214,9 +222,9 @@ class Rackspace implements Adapter
      * WARNING: This operation overwrites any metadata that is located at
      * $destinationPath.
      *
-     * @param string $destinationPath
-     * @param array  $metadata        associative array specifying the key/value pairs for the metadata.
-     * @param array  $options
+     * @param  string $destinationPath
+     * @param  array  $metadata        associative array specifying the key/value pairs for the metadata.
+     * @param  array  $options
      * @return void
      */
     public function storeMetadata($destinationPath, $metadata, $options = null)
@@ -230,10 +238,10 @@ class Rackspace implements Adapter
     /**
      * Delete a key/value array of metadata at the given path.
      *
-     * @param string $path
-     * @param array $metadata - An associative array specifying the key/value pairs for the metadata
-     *                          to be deleted.  If null, all metadata associated with the object will
-     *                          be deleted.
+     * @param  string $path
+     * @param  array $metadata - An associative array specifying the key/value pairs for the metadata
+     *                           to be deleted.  If null, all metadata associated with the object will
+     *                           be deleted.
      * @param  array $options
      * @return void
      */
@@ -265,9 +273,10 @@ class Rackspace implements Adapter
      * Recursively traverse all the folders and build an array that contains
      * the path names for each folder.
      *
-     * @param string $path        folder path to get the list of folders from.
-     * @param array& $resultArray reference to the array that contains the path names
-     *                            for each folder.
+     * @param  string $path        folder path to get the list of folders from.
+     * @param  array& $resultArray reference to the array that contains the path names
+     *                             for each folder.
+     * @return void
      */
     private function getAllFolders($path, &$resultArray)
     {
@@ -318,7 +327,8 @@ class Rackspace implements Adapter
 
     /**
      * Get the concrete client.
-     * @return Zend\Service\Rackspace\Files
+     *
+     * @return RackspaceFile
      */
     public function getClient()
     {

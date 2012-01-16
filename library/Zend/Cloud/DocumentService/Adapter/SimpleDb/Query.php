@@ -23,7 +23,8 @@
 namespace Zend\Cloud\DocumentService\Adapter\SimpleDb;
 
 use Zend\Cloud\DocumentService\Query as QueryInterface,
-    Zend\Cloud\DocumentService\Adapter\Exception;
+    Zend\Cloud\DocumentService\Adapter\Exception,
+    Zend\Cloud\DocumentService\Adapter\SimpleDb as SimpleDbAdapter;
 
 /**
  * Class implementing Query adapter for working with SimpleDb queries in a
@@ -45,11 +46,11 @@ class Query extends QueryInterface
     /**
      * Constructor
      *
-     * @param  Zend\Cloud\DocumentService\Adapter\SimpleDb $adapter
+     * @param  SimpleDbAdapter $adapter
      * @param  null|string $collectionName
      * @return void
      */
-    public function __construct(\Zend\Cloud\DocumentService\Adapter\SimpleDb $adapter, $collectionName = null)
+    public function __construct(SimpleDbAdapter $adapter, $collectionName = null)
     {
         $this->_adapter = $adapter;
         if (null !== $collectionName) {
@@ -60,7 +61,7 @@ class Query extends QueryInterface
     /**
      * Get adapter
      *
-     * @return Zend\Cloud\DocumentService\Adapter\SimpleDb
+     * @return SimpleDbAdapter
      */
     public function getAdapter()
     {

@@ -25,11 +25,6 @@ use ZendTest\Cloud\StorageService\TestCase,
     Zend\Service\Rackspace\Files as RackspaceService,
     Zend\Config\Config;
 
-// Call Zend\Cloud\StorageService\Adapter\RackspaceTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\StorageService\Adapter\RackspaceTest::main");
-}
-
 /**
  * @category   Zend
  * @package    Zend\Cloud\StorageService\Adapter
@@ -40,18 +35,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 class RackspaceTest extends TestCase
 {
     protected $_clientType = 'Zend\Service\Rackspace\Files';
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @access public
-     * @static
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     public function testFetchItemStream()
     {
@@ -72,6 +55,10 @@ class RackspaceTest extends TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERVICE_RACKSPACE_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Rackspace online tests are not enabled');
+        }
+
         parent::setUp();
         $this->_waitPeriod = 5;
         
@@ -139,8 +126,4 @@ class RackspaceTest extends TestCase
 
         return $config;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\StorageService\Adapter\RackspaceTest::main') {
-    RackspaceTest::main();
 }

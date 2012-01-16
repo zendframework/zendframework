@@ -23,6 +23,7 @@
 namespace Zend\Cloud\DocumentService\Adapter;
 
 use Zend\Cloud\DocumentService\Adapter\SimpleDb\Query,
+    Zend\Service\Amazon\Exception as AmazonException,
     Zend\Service\Amazon\SimpleDb\SimpleDb as SimpleDbService,
     Zend\Service\Amazon\SimpleDb\Attribute,
     Zend\Cloud\DocumentService\Document;
@@ -181,7 +182,7 @@ class SimpleDb extends AbstractAdapter
             $document =  $this->_getDocumentFromArray($document);
         }
 
-        if (!$document instanceof \Zend\Cloud\DocumentService\Document) {
+        if (!$document instanceof Document) {
             throw new Exception\InvalidArgumentException('Invalid document supplied');
         }
 
@@ -191,7 +192,7 @@ class SimpleDb extends AbstractAdapter
                 $document->getID(),
                 $this->_makeAttributes($document->getID(), $document->getFields())
             );
-        } catch(Zend\Service\Amazon\Exception $e) {
+        } catch(AmazonException $e) {
             throw new Exception\RunTimeException('Error on document insertion: '.$e->getMessage(), $e->getCode(), $e);
         }
     }

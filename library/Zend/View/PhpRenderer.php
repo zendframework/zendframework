@@ -41,7 +41,7 @@ class PhpRenderer implements Renderer, Pluggable
     /**
      * Template resolver
      *
-     * @var TemplateResolver
+     * @var Resolver
      */
     private $templateResolver;
 
@@ -116,25 +116,12 @@ class PhpRenderer implements Renderer, Pluggable
     /**
      * Set script resolver
      * 
-     * @param  string|TemplateResolver $resolver 
-     * @param  mixed $options 
+     * @param  Resolver $resolver 
      * @return PhpRenderer
      * @throws Exception\InvalidArgumentException
      */
-    public function setResolver($resolver, $options = null)
+    public function setResolver(Resolver $resolver)
     {
-        if (is_string($resolver)) {
-            if (!class_exists($resolver)) {
-                throw new Exception\InvalidArgumentException('Class passed as resolver could not be found');
-            }
-            $resolver = new $resolver($options);
-        }
-        if (!$resolver instanceof TemplateResolver) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected resolver to implement TemplateResolver; received "%s"',
-                (is_object($resolver) ? get_class($resolver) : gettype($resolver))
-            ));
-        }
         $this->templateResolver = $resolver;
         return $this;
     }
@@ -143,16 +130,16 @@ class PhpRenderer implements Renderer, Pluggable
      * Retrieve template name or template resolver
      * 
      * @param  null|string $name 
-     * @return string|TemplateResolver
+     * @return string|Resolver
      */
     public function resolver($name = null)
     {
         if (null === $this->templateResolver) {
-            $this->setResolver(new TemplatePathStack());
+            $this->setResolver(new Resolver\TemplatePathStack());
         }
 
         if (null !== $name) {
-            return $this->templateResolver->getScriptPath($name);
+            return $this->templateResolver->resolve($name, $this);
         }
 
         return $this->templateResolver;
@@ -408,7 +395,7 @@ class PhpRenderer implements Renderer, Pluggable
     /**
      * Processes a view script and returns the output.
      *
-     * @param string $name The script name to process.
+     * @param  string $name The script name to process.
      * @return string The script output.
      */
     public function render($name, $vars = null)

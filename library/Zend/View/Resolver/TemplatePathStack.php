@@ -14,27 +14,28 @@
  *
  * @category   Zend
  * @package    Zend_View
+ * @subpackage Resolver
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\View;
+namespace Zend\View\Resolver;
 
 use SplFileInfo,
-    Zend\Stdlib\SplStack;
+    Zend\Stdlib\SplStack,
+    Zend\View\Renderer,
+    Zend\View\Resolver;
 
 /**
  * Resolves view scripts based on a stack of paths
  *
  * @category   Zend
  * @package    Zend_View
+ * @subpackage Resolver
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TemplatePathStack implements TemplateResolver
+class TemplatePathStack implements Resolver
 {
     /**
      * @var SplStack
@@ -250,10 +251,11 @@ class TemplatePathStack implements TemplateResolver
      * Retrieve the filesystem path to a view script
      *
      * @param  string $name
+     * @param  null|Renderer $renderer
      * @return string
      * @throws Exception\RuntimeException
      */
-    public function getScriptPath($name)
+    public function resolve($name, Renderer $renderer = null)
     {
         if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name)) {
             throw new Exception\DomainException(

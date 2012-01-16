@@ -39,6 +39,17 @@ use Zend\Filter\FilterChain,
 class PhpRenderer implements Renderer, Pluggable
 {
     /**
+     * @var string Rendered content
+     */
+    private $content = '';
+
+    /**
+     * Queue of templates to render
+     * @var array
+     */
+    private $extensions = array();
+
+    /**
      * Template resolver
      *
      * @var Resolver
@@ -401,7 +412,7 @@ class PhpRenderer implements Renderer, Pluggable
     public function render($name, $vars = null)
     {
         // find the script file name using the parent private method
-        $this->file = $this->resolver($name);
+        $this->enqueue($name);
         unset($name); // remove $name from local scope
 
         $this->varsCache[] = $this->vars();
@@ -420,13 +431,28 @@ class PhpRenderer implements Renderer, Pluggable
         extract($__vars);
         unset($__vars); // remove $__vars from local scope
 
-        ob_start();
-        include $this->file;
-        $content = ob_get_clean();
+        while ($this->file = array_shift($this->extensions)) {
+            $this->file = $this->resolver($this->file);
+            ob_start();
+            include $this->file;
+            $this->content = ob_get_clean();
+        }
 
         $this->setVars(array_pop($this->varsCache));
 
-        return $this->getFilterChain()->filter($content); // filter output
+        return $this->getFilterChain()->filter($this->content); // filter output
+    }
+
+    /**
+     * Add a template to the stack
+     * 
+     * @param  string $template 
+     * @return PhpRenderer
+     */
+    public function enqueue($template)
+    {
+        $this->extensions[] = $template;
+        return $this;
     }
 
     /**

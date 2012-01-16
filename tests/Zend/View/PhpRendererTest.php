@@ -22,7 +22,8 @@
 namespace ZendTest\View;
 
 use Zend\View\PhpRenderer,
-    Zend\View\TemplatePathStack,
+    Zend\View\Resolver\TemplateMapResolver,
+    Zend\View\Resolver\TemplatePathStack,
     Zend\View\Variables,
     Zend\Filter\FilterChain;
 
@@ -48,7 +49,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
     public function testUsesTemplatePathStackAsDefaultResolver()
     {
-        $this->assertInstanceOf('Zend\View\TemplatePathStack', $this->renderer->resolver());
+        $this->assertInstanceOf('Zend\View\Resolver\TemplatePathStack', $this->renderer->resolver());
     }
 
     public function testCanSetResolverInstance()
@@ -283,5 +284,17 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         }
         $escapeHelper = $this->renderer->plugin('escape');
         $this->assertSame($escapeHelper, $this->renderer->vars()->getEscapeCallback());
+    }
+
+    public function testRendersTemplatesInAStack()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'layout' => __DIR__ . '/_templates/layout.phtml',
+            'block'  => __DIR__ . '/_templates/block.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $content = $this->renderer->render('block');
+        $this->assertRegexp('#<body>\s*Block content\s*</body>#', $content);
     }
 }

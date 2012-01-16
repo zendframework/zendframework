@@ -406,21 +406,55 @@ class PhpRenderer implements Renderer, Pluggable
     /**
      * Processes a view script and returns the output.
      *
-     * @param  string $name The script name to process.
+     * @param  string|Model $nameOrModel Either the template to use, or a 
+     *                                   ViewModel. The ViewModel must have the 
+     *                                   template as an option in order to be 
+     *                                   valid.
+     * @param  null|array|Traversable Values to use when rendering. If none 
+     *                                provided, uses those in the composed 
+     *                                variables container.
      * @return string The script output.
+     * @throws Exception\DomainException if a ViewModel is passed, but does not
+     *                                   contain a template option.
+     * @throws Exception\InvalidArgumentException if the values passed are not
+     *                                            an array or ArrayAccess object
      */
-    public function render($name, $vars = null)
+    public function render($nameOrModel, $values = null)
     {
+        if ($nameOrModel instanceof Model) {
+            $model   = $nameOrModel;
+            $options = $model->getOptions();
+            if (!isset($options['template']) || empty($options['template'])) {
+                throw new Exception\DomainException(sprintf(
+                    '%s: received View Model argument, but missing "template" option',
+                    __METHOD__
+                ));
+            }
+            $nameOrModel = $options['template'];
+            unset($options['template']);
+            foreach ($options as $setting => $value) {
+                $method = 'set' . $setting;
+                if (method_exists($this, $method)) {
+                    $this->$method($value);
+                }
+                unset($method, $setting, $value);
+            }
+            unset($options);
+
+            $values = $model->getVariables();
+            unset($model);
+        }
+
         // find the script file name using the parent private method
-        $this->enqueue($name);
-        unset($name); // remove $name from local scope
+        $this->enqueue($nameOrModel);
+        unset($nameOrModel); // remove $name from local scope
 
         $this->varsCache[] = $this->vars();
 
-        if (null !== $vars) {
-            $this->setVars($vars);
+        if (null !== $values) {
+            $this->setVars($values);
         }
-        unset($vars);
+        unset($values);
 
         // extract all assigned vars (pre-escaped), but not 'this'.
         // assigns to a double-underscored variable, to prevent naming collisions

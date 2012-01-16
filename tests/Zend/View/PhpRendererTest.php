@@ -22,6 +22,7 @@
 namespace ZendTest\View;
 
 use Zend\View\PhpRenderer,
+    Zend\View\Model\ViewModel,
     Zend\View\Resolver\TemplateMapResolver,
     Zend\View\Resolver\TemplatePathStack,
     Zend\View\Variables,
@@ -296,5 +297,50 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
 
         $content = $this->renderer->render('block');
         $this->assertRegexp('#<body>\s*Block content\s*</body>#', $content);
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testCanRenderViewModel()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'empty' => __DIR__ . '/_templates/empty.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $model = new ViewModel();
+        $model->setOption('template', 'empty');
+
+        $content = $this->renderer->render($model);
+        $this->assertRegexp('/\s*Empty view\s*/s', $content);
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testViewModelWithoutTemplateRaisesException()
+    {
+        $model = new ViewModel();
+        $this->setExpectedException('Zend\View\Exception\DomainException');
+        $content = $this->renderer->render($model);
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testRendersViewModelWithVariablesSpecified()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'test' => __DIR__ . '/_templates/test.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $model = new ViewModel();
+        $model->setOption('template', 'test');
+        $model->setVariable('bar', 'bar');
+
+        $content = $this->renderer->render($model);
+        $this->assertRegexp('/\s*foo bar baz\s*/s', $content);
     }
 }

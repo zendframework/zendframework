@@ -306,7 +306,7 @@ class Server extends AbstractServer
      * The response is always available via {@link getResponse()}.
      *
      * @param boolean $flag
-     * @return \Zend\Json\Server\Server
+     * @return Server
      */
     public function setReturnResponse($flag = true)
     {

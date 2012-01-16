@@ -23,29 +23,21 @@
  * @namespace
  */
 namespace Zend\XmlRpc;
+
 use Zend\Http,
-    Zend\Server\Client as ClientInterface,
+    Zend\Server\Client as ServerClient,
     Zend\XmlRpc\Value;
 
 /**
  * An XML-RPC client implementation
  *
- * @uses       Zend\Http\Client
- * @uses       Zend\XmlRpc\Client\FaultException
- * @uses       Zend\XmlRpc\Client\HttpException
- * @uses       Zend\XmlRpc\Client\ServerIntrospection
- * @uses       Zend\XmlRpc\Client\ServerProxy
- * @uses       Zend\XmlRpc\Fault
- * @uses       Zend\XmlRpc\Request
- * @uses       Zend\XmlRpc\Response
- * @uses       Zend\XmlRpc\Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client implements ClientInterface
+class Client implements ServerClient
 {
     /**
      * Full address of the XML-RPC service

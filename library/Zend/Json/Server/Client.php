@@ -14,6 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Json
+ * @subpackage Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -24,15 +25,16 @@
 namespace Zend\Json\Server;
 
 use Zend\Http\Client as HttpClient,
-    Zend\Server\Client as ClientInterface;
+    Zend\Server\Client as ServerClient;
 
 /**
  * @category   Zend
  * @package    Zend_Json
+ * @subpackage Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Client implements ClientInterface
+class Client implements ServerClient
 {
     /**
      * Full address of the JSON-RPC service.
@@ -44,21 +46,21 @@ class Client implements ClientInterface
     /**
      * HTTP Client to use for requests.
      *
-     * @var \Zend\Http\Client
+     * @var HttpClient
      */
     protected $httpClient;
 
     /**
      * Request of the last method call.
      *
-     * @var \Zend\Json\Server\Request
+     * @var Request
      */
     protected $lastRequest;
 
     /**
      * Response received from the last method call.
      *
-     * @var \Zend\Json\Server\Response
+     * @var Response
      */
     protected $lastResponse;
 
@@ -73,7 +75,7 @@ class Client implements ClientInterface
      * Create a new JSON-RPC client to a remote server.
      *
      * @param string $server Full address of the JSON-RPC service.
-     * @param \Zend\Http\Client $httpClient HTTP Client to use for requests.
+     * @param HttpClient $httpClient HTTP Client to use for requests.
      */
     public function __construct($server, HttpClient $httpClient = null)
     {
@@ -84,20 +86,19 @@ class Client implements ClientInterface
     /**
      * Sets the HTTP client object to use for connecting the JSON-RPC server.
      *
-     * @param \Zend\Http\Client $httpClient New HTTP client to use.
-     * @return \Zend\Json\Server\Client Self instance.
+     * @param  HttpClient $httpClient New HTTP client to use.
+     * @return Client Self instance.
      */
     public function setHttpClient(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
-
         return $this;
     }
 
     /**
      * Gets the HTTP client object.
      *
-     * @return \Zend\Http\Client HTTP client.
+     * @return HttpClient HTTP client.
      */
     public function getHttpClient()
     {
@@ -107,7 +108,7 @@ class Client implements ClientInterface
     /**
      * The request of the last method call.
      *
-     * @return \Zend\Json\Server\Request Request instance.
+     * @return Request Request instance.
      */
     public function getLastRequest()
     {
@@ -117,7 +118,7 @@ class Client implements ClientInterface
     /**
      * The response received from the last method call.
      *
-     * @return \Zend\Json\Server\Response Response instance.
+     * @return Response Response instance.
      */
     public function getLastResponse()
     {
@@ -127,9 +128,9 @@ class Client implements ClientInterface
     /**
      * Perform an JSOC-RPC request and return a response.
      *
-     * @param \Zend\Json\Server\Request $request Request.
-     * @return \Zend\Json\Server\Response Response.
-     * @throws \Zend\Json\Server\Exception\HttpException When HTTP communication fails.
+     * @param  Request $request Request.
+     * @return Response Response.
+     * @throws Exception\HttpException When HTTP communication fails.
      */
     public function doRequest($request)
     {
@@ -143,7 +144,7 @@ class Client implements ClientInterface
         $headers = $httpRequest->headers();
         $headers->addHeaders(array(
             'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
+            'Accept'       => 'application/json',
         ));
 
         if (!$headers->get('User-Agent')) {
@@ -151,7 +152,8 @@ class Client implements ClientInterface
         }
 
         $this->httpClient->setRawBody($request->__toString());
-        $httpResponse = $this->httpClient->setMethod('POST')->send();
+        $this->httpClient->setMethod('POST');
+        $httpResponse = $this->httpClient->send();
 
         if (!$httpResponse->isSuccess()) {
             throw new Exception\HttpException(
@@ -173,10 +175,10 @@ class Client implements ClientInterface
     /**
      * Send an JSON-RPC request to the service (for a specific method).
      *
-     * @param string $method Name of the method we want to call.
-     * @param array $params Array of parameters for the method.
+     * @param  string $method Name of the method we want to call.
+     * @param  array $params Array of parameters for the method.
      * @return mixed Method call results.
-     * @throws \Zend\Json\Server\Exception\ErrorExceptionn When remote call fails.
+     * @throws Exception\ErrorExceptionn When remote call fails.
      */
     public function call($method, $params = array())
     {
@@ -198,9 +200,9 @@ class Client implements ClientInterface
     /**
      * Create request object.
      *
-     * @param string $method Method to call.
-     * @param array $params List of arguments.
-     * @return \Zend\Json\Server\Request Created request.
+     * @param  string $method Method to call.
+     * @param  array $params List of arguments.
+     * @return Request Created request.
      */
     protected function createRequest($method, array $params)
     {

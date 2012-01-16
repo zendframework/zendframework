@@ -38,8 +38,8 @@ interface Client
      *
      * Unified interface for calling custome remote methods.
      *
-     * @param string $method Remote call name.
-     * @param array $params Call parameters.
+     * @param  string $method Remote call name.
+     * @param  array $params Call parameters.
      * @return mixed Remote call results.
      */
     public function call($method, $params = array());

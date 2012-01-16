@@ -25,9 +25,9 @@ use ZendTest\Cloud\StorageService\TestCase,
     Zend\Cloud\StorageService\Adapter\WindowsAzure,
     Zend\Config\Config;
 
-// Call Zend\Cloud\StorageService\Adapter\WindowsAzureTest::main() if this source file is executed directly.
+// Call ZendTest\Cloud\StorageService\Adapter\WindowsAzureTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend\Cloud\StorageService\Adapter\WindowsAzureTest::main");
+    define("PHPUnit_MAIN_METHOD", "ZendTest\Cloud\StorageService\Adapter\WindowsAzureTest::main");
 }
 
 /**
@@ -78,6 +78,6 @@ class WindowsAzureTest extends TestCase
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend\Cloud\StorageService\Adapter\WindowsAzureTest::main') {
+if (PHPUnit_MAIN_METHOD == 'ZendTest\Cloud\StorageService\Adapter\WindowsAzureTest::main') {
     WindowsAzureTest::main();
 }

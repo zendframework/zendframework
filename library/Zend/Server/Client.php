@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,19 +21,26 @@
 /**
  * @namespace
  */
-namespace Zend\XmlRpc\Client\Exception;
+namespace Zend\Server;
 
 /**
- * Thrown by Zend_XmlRpc_Client when an HTTP error occurs during an
- * XML-RPC method call.
+ * Client Interface
  *
- * @uses       Zend\XmlRpc\Client\Exception
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HttpException
-    extends RuntimeException
-{}
+interface Client
+{
+    /**
+     * Executes remote call
+     *
+     * Unified interface for calling custome remote methods.
+     *
+     * @param string $method Remote call name.
+     * @param array $params Call parameters.
+     * @return mixed Remote call results.
+     */
+    public function call($method, $params = array());
+}

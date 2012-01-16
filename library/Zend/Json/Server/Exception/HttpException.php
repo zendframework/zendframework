@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Json
+ * @subpackage Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,16 +22,16 @@
 /**
  * @namespace
  */
-namespace Zend\XmlRpc\Client\Exception;
+namespace Zend\Json\Server\Exception;
 
 /**
- * Thrown by Zend_XmlRpc_Client when an HTTP error occurs during an
- * XML-RPC method call.
+ * Thrown by Zend_Json_Server_Client when an HTTP error occurs during an
+ * JSON-RPC method call.
  *
- * @uses       Zend\XmlRpc\Client\Exception
+ * @uses       Zend\Json\Server\Exception
  * @category   Zend
- * @package    Zend_XmlRpc
- * @subpackage Client
+ * @package    Zend_Json
+ * @subpackage Server
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

@@ -559,10 +559,9 @@ class Server implements \Zend\Server\Server
         }
 
         $this->_class = $class;
-        if (1 < func_num_args()) {
+        if (2 < func_num_args()) {
             $argv = func_get_args();
-            array_shift($argv);
-            $this->_classArgs = $argv;
+            $this->_classArgs = array_slice($argv, 2);
         }
 
         return $this;
@@ -709,7 +708,7 @@ class Server implements \Zend\Server\Server
      * @param boolean $flag
      * @return \Zend\Soap\Server
      */
-    public function setReturnResponse($flag)
+    public function setReturnResponse($flag = true)
     {
         $this->_returnResponse = ($flag) ? true : false;
         return $this;
@@ -730,7 +729,7 @@ class Server implements \Zend\Server\Server
      *
      * @return string
      */
-    public function getLastResponse()
+    public function getResponse()
     {
         return $this->_response;
     }
@@ -810,7 +809,7 @@ class Server implements \Zend\Server\Server
         ob_start();
         if($setRequestException instanceof \Exception) {
             // Send SOAP fault message if we've catched exception
-            $soap->fault("Sender", $setRequestException->getMessage());
+            $soap->fault('Sender', $setRequestException->getMessage());
         } else {
             try {
                 $soap->handle($this->_request);
@@ -940,6 +939,6 @@ class Server implements \Zend\Server\Server
      */
     public function handlePhpErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {
-        throw $this->fault($errstr, "Receiver");
+        throw $this->fault($errstr, 'Receiver');
     }
 }

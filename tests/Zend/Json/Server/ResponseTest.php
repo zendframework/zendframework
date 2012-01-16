@@ -108,6 +108,25 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testShouldBeAbleToLoadResponseFromJSONString()
+    {
+        $options = $this->getOptions();
+        $json    = Json\Json::encode($options);
+        $this->response->loadJSON($json);
+
+        $this->assertEquals('foobar', $this->response->getId());
+        $this->assertEquals($options['result'], $this->response->getResult());
+    }
+
+    public function testLoadingFromJSONShouldSetJSONRpcVersionWhenPresent()
+    {
+        $options = $this->getOptions();
+        $options['jsonrpc'] = '2.0';
+        $json    = Json\Json::encode($options);
+        $this->response->loadJSON($json);
+        $this->assertEquals('2.0', $this->response->getVersion());
+    }
+
     public function testResponseShouldBeAbleToCastToJSON()
     {
         $this->response->setResult(true)
@@ -164,5 +183,17 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($test['result']);
         $this->assertEquals($this->response->getId(), $test['id']);
+    }
+
+    public function getOptions()
+    {
+        return array(
+            'result' => array(
+                5,
+                'four',
+                true,
+            ),
+            'id'  => 'foobar'
+        );
     }
 }

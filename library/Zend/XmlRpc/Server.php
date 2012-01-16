@@ -148,6 +148,19 @@ class Server extends AbstractServer
     protected $_sendArgumentsToAllMethods = true;
 
     /**
+     * Flag: whether or not {@link handle()} should return a response instead
+     * of automatically emitting it.
+     * @var boolean
+     */
+    protected $returnResponse = false;
+
+    /**
+     * Last response results.
+     * @var \Zend\XmlRpc\Response
+     */
+    protected $response;
+
+    /**
      * Constructor
      *
      * Creates system.* methods.
@@ -238,7 +251,6 @@ class Server extends AbstractServer
             throw new Server\Exception\InvalidArgumentException('Invalid method class', 610);
         }
 
-        $argv = null;
         if (2 < func_num_args()) {
             $argv = func_get_args();
             $argv = array_slice($argv, 2);
@@ -271,6 +283,33 @@ class Server extends AbstractServer
     }
 
     /**
+     * Set return response flag
+     *
+     * If true, {@link handle()} will return the response instead of
+     * automatically sending it back to the requesting client.
+     *
+     * The response is always available via {@link getResponse()}.
+     *
+     * @param boolean $flag
+     * @return \Zend\XmlRpc\Server
+     */
+    public function setReturnResponse($flag = true)
+    {
+        $this->returnResponse = ($flag) ? true : false;
+        return $this;
+    }
+
+    /**
+     * Retrieve return response flag
+     *
+     * @return boolean
+     */
+    public function getReturnResponse()
+    {
+        return $this->returnResponse;
+    }
+
+    /**
      * Handle an xmlrpc call
      *
      * @param Zend\XmlRpc\Request $request Optional
@@ -300,6 +339,12 @@ class Server extends AbstractServer
 
         // Set output encoding
         $response->setEncoding($this->getEncoding());
+        $this->response = $response;
+
+        if (!$this->returnResponse) {
+            echo $response;
+            return;
+        }
 
         return $response;
     }
@@ -404,6 +449,16 @@ class Server extends AbstractServer
     public function getRequest()
     {
         return $this->_request;
+    }
+
+    /**
+     * Last response.
+     *
+     * @return \Zend\XmlRpc\Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 
     /**

@@ -24,6 +24,8 @@
  */
 namespace Zend\Db\Statement;
 
+use Zend\Db;
+
 /**
  * Extends for Db2 native adapter.
  *

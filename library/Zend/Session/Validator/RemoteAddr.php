@@ -48,9 +48,7 @@ class RemoteAddr implements SessionValidator
     public function __construct($data = null)
     {
         if (empty($data)) {
-            $data = isset($_SERVER['REMOTE_ADDR'])
-                  ? sprintf('%u', ip2long($_SERVER['REMOTE_ADDR']))
-                  : 0;
+            $data = $this->getIpAddress();
         }
         $this->data = $data;
     }
@@ -63,11 +61,27 @@ class RemoteAddr implements SessionValidator
      */
     public function isValid()
     {
-        $userAgent = isset($_SERVER['REMOTE_ADDR'])
-                   ? sprintf('%u', ip2long($_SERVER['REMOTE_ADDR']))
-                   : 0;
+        return $this->getIpAddress() === $this->getData();
+    }
 
-        return $userAgent === $this->getData();
+    /**
+     * Returns client IP address.
+     *
+     * @return int IP address (converted to integer).
+     */
+    protected function getIpAddress()
+    {
+        // proxy IP address
+        if (isset($_SERVER['X_FORWORDED_FOR'])) {
+            return sprintf('%u', ip2long($_SERVER['X_FORWORDED_FOR']));
+        }
+
+        // direct IP address
+        if (isset($_SERVER['REMOTE_ADDR'])) {
+            return sprintf('%u', ip2long($_SERVER['REMOTE_ADDR']));
+        }
+
+        return 0;
     }
 
     /**

@@ -21,13 +21,12 @@
 
 namespace Zend\View\Model;
 
+use Zend\Feed\Writer\Feed,
+    Zend\Feed\Writer\FeedFactory;
+
 /**
  * Marker view model for indicating feed data.
  *
- * @todo       This should probably take the $variables passed as a data structure
- *             and create a Zend\Feed\Writer\Feed object from it. As such, we should
- *             likely also create some sort of Factory object for feeds that would
- *             take a structured assoc array and use it to populate a Feed object.
  * @category   Zend
  * @package    Zend_View
  * @subpackage Model
@@ -36,4 +35,63 @@ namespace Zend\View\Model;
  */
 class FeedModel extends ViewModel
 {
+    /**
+     * @var Feed
+     */
+    protected $feed;
+
+    /**
+     * @var false|string
+     */
+    protected $type = false;
+
+    public function getFeed()
+    {
+        if ($this->feed instanceof Feed) {
+            return $this->feed;
+        }
+
+        if (!$this->type) {
+            $options   = $this->getOptions();
+            if (isset($options['feed_type'])) {
+                $this->type = $options['feed_type'];
+            }
+        }
+
+        $variables = $this->getVariables();
+        $feed      = FeedFactory::factory($variables);
+        $this->setFeed($feed);
+
+        return $this->feed;
+    }
+
+    /**
+     * Set the feed object
+     * 
+     * @param  Feed $feed 
+     * @return FeedModel
+     */
+    public function setFeed(Feed $feed)
+    {
+        $this->feed = $feed;
+        return $this;
+    }
+
+    /**
+     * Get the feed type
+     * 
+     * @return false|string
+     */
+    public function getFeedType()
+    {
+        if ($this->type) {
+            return $this->type;
+        }
+
+        $options   = $this->getOptions();
+        if (isset($options['feed_type'])) {
+            $this->type = $options['feed_type'];
+        }
+        return $this->type;
+    }
 }

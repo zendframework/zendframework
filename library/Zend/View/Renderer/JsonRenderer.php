@@ -80,7 +80,7 @@ class JsonRenderer implements Renderer
         // use case 1: View Models
         // Serialize variables in view model
         if ($nameOrModel instanceof Model) {
-            if ($nameOrModel instanceof Model\JsonViewModel) {
+            if ($nameOrModel instanceof Model\JsonModel) {
                 $values = $nameOrModel->serialize();
             } else {
                 $values = $nameOrModel->getVariables();

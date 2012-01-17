@@ -92,6 +92,8 @@ class FeedRenderer implements Renderer
                 $type    = $this->getFeedType();
                 if (isset($options['feed_type'])) {
                     $type = $options['feed_type'];
+                } else {
+                    $this->setFeedType($type);
                 }
                 $nameOrModel = new Model\FeedModel($vars, $type);
             }
@@ -111,6 +113,8 @@ class FeedRenderer implements Renderer
         $type = $nameOrModel->getFeedType();
         if (!$type) {
             $type = $this->getFeedType();
+        } else {
+            $this->setFeedType($type);
         }
 
         // Render feed

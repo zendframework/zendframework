@@ -239,6 +239,7 @@ class View
                 __METHOD__
             ));
         }
+        $event->setRenderer($renderer);
 
         $rendered = $renderer->render($model);
 

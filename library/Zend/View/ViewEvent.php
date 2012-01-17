@@ -38,6 +38,11 @@ class ViewEvent extends Event
     protected $model;
 
     /**
+     * @var Renderer
+     */
+    protected $renderer;
+
+    /**
      * @var null|Request
      */
     protected $request;
@@ -109,6 +114,28 @@ class ViewEvent extends Event
     }
 
     /**
+     * Set value for renderer
+     *
+     * @param  Renderer $renderer
+     * @return ViewEvent
+     */
+    public function setRenderer(Renderer $renderer)
+    {
+        $this->renderer = $renderer;
+        return $this;
+    }
+    
+    /**
+     * Get value for renderer
+     *
+     * @return null|Renderer
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    /**
      * Retrieve the MVC request object
      * 
      * @return null|Request
@@ -150,6 +177,8 @@ class ViewEvent extends Event
         switch($name) {
             case 'model':
                 return $this->getModel();
+            case 'renderer':
+                return $this->getRenderer();
             case 'request':
                 return $this->getRequest();
             case 'response':
@@ -170,6 +199,7 @@ class ViewEvent extends Event
     {
         $params             = parent::getParams();
         $params['model']    = $this->getModel();
+        $params['renderer'] = $this->getRenderer();
         $params['request']  = $this->getRequest();
         $params['response'] = $this->getResponse();
         $params['result']   = $this->getResult();
@@ -189,7 +219,7 @@ class ViewEvent extends Event
             return $this;
         }
 
-        foreach (array('model', 'request', 'response', 'result') as $param) {
+        foreach (array('model', 'renderer', 'request', 'response', 'result') as $param) {
             if (isset($params[$param])) {
                 $method = 'set' . $param;
                 $this->$method($params[$param]);
@@ -210,6 +240,9 @@ class ViewEvent extends Event
         switch ($name) {
             case 'model':
                 $this->setModel($value);
+                break;
+            case 'renderer':
+                $this->setRenderer($value);
                 break;
             case 'request':
                 $this->setRequest($value);

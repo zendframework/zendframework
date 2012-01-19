@@ -127,7 +127,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager = $this->moduleManager;
         $moduleManager->setModules(array('SomeModule'));
         $moduleManager->events()->attach('loadModule', $configListener);
-        $moduleManager->events()->attach('loadModules.post', array($configListener, 'mergeConfigGlobPaths'), 1000);
+        $moduleManager->events()->attach('loadModules.post', array($configListener, 'loadModulesPost'), 1000);
         $moduleManager->loadModules();
     }
 
@@ -244,7 +244,7 @@ class ConfigListenerTest extends TestCase
         $this->assertEquals(1, count($moduleManager->events()->getEvents()));
 
         $configListener->attach($moduleManager->events());
-        $this->assertEquals(3, count($moduleManager->events()->getEvents()));
+        $this->assertEquals(4, count($moduleManager->events()->getEvents()));
 
         $configListener->detach($moduleManager->events());
         $this->assertEquals(1, count($moduleManager->events()->getEvents()));
@@ -263,7 +263,7 @@ class ConfigListenerTest extends TestCase
         $moduleManager->setModules(array('SomeModule'));
 
         $moduleManager->events()->attach('loadModule', $configListener);
-        $moduleManager->events()->attach('loadModules.post', array($configListener, 'mergeConfigGlobPaths'), 1000);
+        $moduleManager->events()->attach('loadModules.post', array($configListener, 'loadModulesPost'), 1000);
 
         $moduleManager->loadModules();
     }

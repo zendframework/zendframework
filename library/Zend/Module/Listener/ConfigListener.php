@@ -65,7 +65,7 @@ class ConfigListener extends AbstractListener
      */
     public function __invoke(ModuleEvent $e)
     {
-        $this->loadModule($e);
+        return $this->loadModule($e);
     }
 
     /**

@@ -46,7 +46,7 @@ abstract class OnlineTestCase extends TestCase
     private $_nodes;
 
     /**
-     * @return Zend_LDAP
+     * @return \Zend\Ldap\Ldap
      */
     protected function _getLDAP()
     {

@@ -756,7 +756,7 @@ class App
             return $feedContent;
         }
 
-        $protocolVersionStr = $response->getHeader('GData-Version');
+        $protocolVersionStr =  $response->headers()->get('GData-Version')->getFieldValue();
         $majorProtocolVersion = null;
         $minorProtocolVersion = null;
         if ($protocolVersionStr !== null) {
@@ -774,7 +774,7 @@ class App
         if ($this->getHttpClient() != null) {
             $feed->setHttpClient($this->getHttpClient());
         }
-        $etag = $response->getHeader('ETag');
+        $etag = $response->headers()->get('ETag')->getFieldValue();
         if ($etag !== null) {
             $feed->setEtag($etag);
         }

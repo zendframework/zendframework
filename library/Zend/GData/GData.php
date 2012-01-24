@@ -216,7 +216,6 @@ class GData extends App
             $body = $filterResult['body'];
             $headers = $filterResult['headers'];
             $contentType = $filterResult['contentType'];
-            if (!$contentType) $contentType = "application/xml";
             return $this->_httpClient->filterHttpResponse(parent::performHttpRequest($method, $url, $headers, $body, $contentType, $remainingRedirects));
         } else {
             return parent::performHttpRequest($method, $url, $headers, $body, $contentType, $remainingRedirects);

@@ -72,8 +72,8 @@ class RemoteAddr implements SessionValidator
     protected function getIpAddress()
     {
         // proxy IP address
-        if (isset($_SERVER['X_FORWORDED_FOR'])) {
-            return sprintf('%u', ip2long($_SERVER['X_FORWORDED_FOR']));
+        if (isset($_SERVER['X_FORWARDED_FOR'])) {
+            return sprintf('%u', ip2long($_SERVER['X_FORWARDED_FOR']));
         }
 
         // direct IP address

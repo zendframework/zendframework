@@ -186,6 +186,7 @@ class Application implements AppContext
         $event  = new MvcEvent();
         $event->setTarget($this);
         $event->setRequest($this->getRequest())
+              ->setResponse($this->getResponse())
               ->setRouter($this->getRouter());
 
         $result = $events->trigger('route', $event, function ($r) {

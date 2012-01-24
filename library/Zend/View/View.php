@@ -21,6 +21,7 @@
 namespace Zend\View;
 
 use Zend\EventManager\EventCollection,
+    Zend\EventManager\EventManager,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response;
 
@@ -93,7 +94,7 @@ class View
      */
     public function getResponse()
     {
-        return $this->request;
+        return $this->response;
     }
 
  
@@ -106,7 +107,7 @@ class View
     public function addRenderer(Renderer $renderer)
     {
         $class = get_class($renderer);
-        if (array_key_exists($this->renderers[$class])) {
+        if (array_key_exists($class, $this->renderers)) {
             throw new Exception\RuntimeException(sprintf(
                 'Unable to add renderer of type "%s"; another renderer of that type is already attached',
                 $class
@@ -124,7 +125,7 @@ class View
      */
     public function hasRenderer($class)
     {
-        return array_key_exists($this->renderers[$class]);
+        return array_key_exists($class, $this->renderers);
     }
 
     /**
@@ -228,6 +229,7 @@ class View
     public function render(Model $model)
     {
         $event   = $this->getEvent();
+        $event->setModel($model);
         $events  = $this->events();
         $results = $events->trigger('renderer', $event, function($result) {
             return ($result instanceof Renderer);
@@ -256,7 +258,6 @@ class View
     protected function getEvent()
     {
         $event = new ViewEvent();
-        $event->setModel($model);
         $event->setTarget($this);
         if (null !== ($request = $this->getRequest())) {
             $event->setRequest($request);

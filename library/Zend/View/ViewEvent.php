@@ -65,6 +65,8 @@ class ViewEvent extends Event
      */
     public function setModel(Model $model)
     {
+        $this->model = $model;
+        return $this;
     }
 
     /**

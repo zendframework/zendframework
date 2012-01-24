@@ -23,6 +23,7 @@ namespace Zend\View\Resolver;
 
 use SplFileInfo,
     Zend\Stdlib\SplStack,
+    Zend\View\Exception,
     Zend\View\Renderer,
     Zend\View\Resolver;
 

@@ -21,7 +21,12 @@
 /**
  * @namespace
  */
-namespace Zend\Config;
+namespace Zend\Config\Processor;
+
+use Zend\Config\Config,
+    Zend\Config\Processor,
+    Zend\Config\Exception\InvalidArgumentException,
+    Zend\Stdlib\PriorityQueue;
 
 /**
  * @category   Zend
@@ -29,15 +34,25 @@ namespace Zend\Config;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Parser
+class Queue extends PriorityQueue implements Processor
 {
     /**
-     * Process the whole Config structure and recursively parse all its values.
+     * Process the whole config structure with each parser in the queue.
      *
-     * @param Config $value
-     * @return \Zend\Config\Config
+     * @param \Zend\Config\Config $config
+     * @throws \Zend\Config\Exception\InvalidArgumentException
      */
-    public function parse(Config $value);
+    public function process(Config $config)
+    {
+        if ($config->isReadOnly()) {
+            throw new InvalidArgumentException('Cannot parse config because it is read-only');
+        }
+
+        foreach ($this as $parser) {
+            /** @var $parser \Zend\Config\Processor */
+            $parser->process($config);
+        }
+    }
 
     /**
      * Process a single value
@@ -45,5 +60,13 @@ interface Parser
      * @param $value
      * @return mixed
      */
-    public function parseValue($value);
+    public function processValue($value)
+    {
+        foreach ($this as $parser) {
+            /** @var $parser \Zend\Config\Processor */
+            $value = $parser->processValue($value);
+        }
+
+        return $value;
+    }
 }

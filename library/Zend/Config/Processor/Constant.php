@@ -21,11 +21,11 @@
 /**
  * @namespace
  */
-namespace Zend\Config\Parser;
+namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Parser,
-    Zend\Config\Parser\Token,
+    Zend\Config\Processor,
+    Zend\Config\Processor\Token,
     Zend\Config\Exception\InvalidArgumentException,
     \Traversable,
     \ArrayObject;
@@ -36,7 +36,7 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Constant extends Token implements Parser
+class Constant extends Token implements Processor
 {
     /**
      * Replace only user-defined tokens
@@ -46,13 +46,13 @@ class Constant extends Token implements Parser
     protected $userOnly = true;
 
     /**
-     * Constant Parser walks through a Config structure and replaces all
+     * Constant Processor walks through a Config structure and replaces all
      * PHP constants with their respective values
      *
      * @param bool   $userOnly              True to process only user-defined constants, false to process all PHP constants
      * @param string $prefix                Optional prefix
      * @param string $suffix                Optional suffix
-     * @return \Zend\Config\Parser\Constant
+     * @return \Zend\Config\Processor\Constant
      */
     public function __construct($userOnly = true, $prefix = '', $suffix = '')
     {

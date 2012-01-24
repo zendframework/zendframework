@@ -21,10 +21,10 @@
 /**
  * @namespace
  */
-namespace Zend\Config\Parser;
+namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Parser,
+    Zend\Config\Processor,
     Zend\Config\Exception\InvalidArgumentException,
     \Traversable,
     \ArrayObject;
@@ -35,7 +35,7 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Token implements Parser
+class Token implements Processor
 {
     /**
      * Token prefix.
@@ -66,7 +66,7 @@ class Token implements Parser
     protected $map = null;
 
     /**
-     * Token Parser walks through a Config structure and replaces all
+     * Token Processor walks through a Config structure and replaces all
      * occurences of tokens with supplied values.
      *
      * @param  array|\Zend\Config\Config|ArrayObject|\Traversable   $tokens  Associative array of TOKEN => value
@@ -74,7 +74,7 @@ class Token implements Parser
      * @param string $prefix
      * @param string $suffix
      * @internal param array $options
-     * @return \Zend\Config\Parser\Token
+     * @return \Zend\Config\Processor\Token
      */
     public function __construct($tokens = array(), $prefix = '', $suffix = '')
     {
@@ -202,7 +202,7 @@ class Token implements Parser
 		}
 	}
 
-    public function parse(Config $config)
+    public function process(Config $config)
     {
         if ($config->isReadOnly()) {
             throw new InvalidArgumentException('Cannot parse config because it is read-only');
@@ -219,7 +219,7 @@ class Token implements Parser
         $values = array_values($this->map);
         foreach ($config as $key => $val) {
             if ($val instanceof Config) {
-                $this->parse($val);
+                $this->process($val);
             } else {
                 $config->$key = str_replace($keys,$values,$val);
             }
@@ -234,7 +234,7 @@ class Token implements Parser
 	 * @param $value
 	 * @return mixed
 	 */
-	public function parseValue($value)
+	public function processValue($value)
 	{
 		if ($this->map === null) {
 			$this->buildMap();

@@ -21,12 +21,13 @@
 /**
  * @namespace
  */
-namespace Zend\Config\Parser;
+namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
-    Zend\Config\Parser,
+    Zend\Config\Processor,
     Zend\Config\Exception\InvalidArgumentException,
-    Zend\Filter\Filter as ZendFilter,
+    Zend\Translator\Translator as ZendTranslator,
+    Zend\Locale\Locale,
     \Traversable,
     \ArrayObject;
 
@@ -36,41 +37,65 @@ use Zend\Config\Config,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Filter implements Parser
+class Translator implements Processor
 {
     /**
-     * @var \Zend\Filter\Filter
+     * @var \Zend\Translator\Translator
      */
-    protected $filter;
+    protected $translator;
 
     /**
-     * Filter all config values using the supplied Zend\Filter
-     *
-     * @param \Zend\Filter\Filter $filter
-     * @return \Zend\Config\Parser\Filter
+     * @var \Zend\Locale\Locale|string|null
      */
-    public function __construct(ZendFilter $filter)
+    protected $locale = null;
+
+    /**
+     * Translator uses the supplied Zend\Translator\Translator to find and
+     * translate language strings in config.
+     *
+     * @param \Zend\Translator\Translator $translator
+     * @param \Zend\Locale\Locale|string|null                            $locale
+     * @return \Zend\Config\Processor\Translator
+     */
+    public function __construct(ZendTranslator $translator, $locale = null)
     {
-        $this->setFilter($filter);
+        $this->setTranslator($translator);
+        $this->setLocale($locale);
     }
 
     /**
-     * @return \Zend\Filter\Filter
+     * @return \Zend\Translator\Translator
      */
-    public function getFilter()
+    public function getTranslator()
     {
         return $this->translator;
     }
 
     /**
-     * @param \Zend\Filter\Filter $filter
+     * @param \Zend\Translator\Translator $translator
      */
-    public function setFilter(ZendFilter $filter)
+    public function setTranslator(ZendTranslator $translator)
     {
-        $this->filter = $filter;
+        $this->translator = $translator;
     }
 
-    public function parse(Config $config)
+    /**
+     * @return \Zend\Locale\Locale|string|null
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param \Zend\Locale\Locale|string|null $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    public function process(Config $config)
     {
         if ($config->isReadOnly()) {
             throw new InvalidArgumentException('Cannot parse config because it is read-only');
@@ -81,9 +106,9 @@ class Filter implements Parser
          */
         foreach ($config as $key => $val) {
             if ($val instanceof Config) {
-                $this->parse($val);
+                $this->process($val);
             } else {
-                $config->$key = $this->filter->filter($val);
+                $config->$key = $this->translator->translate($val,$this->locale);
             }
         }
 
@@ -96,9 +121,9 @@ class Filter implements Parser
 	 * @param $value
 	 * @return mixed
 	 */
-	public function parseValue($value)
+	public function processValue($value)
 	{
-		return $this->filter->filter($value);
+		return $this->translator->translate($value,$this->locale);
 	}
 
 }

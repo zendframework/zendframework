@@ -15,17 +15,18 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Config;
 
 use Zend\Config\Config,
-Zend\Config\Parser\Token as TokenParser,
-Zend\Config\Parser\Translator as TranslatorParser,
-Zend\Config\Parser\Filter as FilterParser,
-Zend\Config\Parser\Constant as ConstantParser,
+Zend\Config\Processor\Token as TokenProcessor,
+Zend\Config\Processor\Translator as TranslatorProcessor,
+Zend\Config\Processor\Filter as FilterProcessor,
+Zend\Config\Processor\Constant as ConstantProcessor,
+Zend\Config\Processor\Queue as Queue,
 Zend\Translator\Translator,
 Zend\Translator\Adapter\ArrayAdapter,
 Zend\Filter\StringToLower,
@@ -40,7 +41,7 @@ Zend\Filter\PregReplace;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
     protected $_nested;
     protected $_tokenBare, $_tokenPrefix, $_tokenSuffix, $_tokenSurround, $_tokenSurroundMixed;
@@ -166,52 +167,26 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testEmptyParsersCollection()
+    public function testProcessorsQueue()
     {
-        $config = new Config($this->_nested);
-        $this->assertInstanceOf('\Zend\Config\Parser\Queue', $config->getParsers());
-        $this->assertEquals($this->_nested, $config->toArray());
-    }
+        $processor1 = new TokenProcessor();
+        $processor2 = new TokenProcessor();
+        $queue = new Queue();
+        $queue->insert($processor1);
+        $queue->insert($processor2);
 
-    public function testParsersQueue()
-    {
-        $parser1 = new TokenParser();
-        $parser2 = new TokenParser();
-        $config = new Config(array(), true, array($parser1, $parser2));
-
-        $this->assertInstanceOf('\Zend\Config\Parser\Queue', $config->getParsers());
-        $this->assertEquals(2, $config->getParsers()->count());
-        $this->assertTrue($config->getParsers()->contains($parser1));
-        $this->assertTrue($config->getParsers()->contains($parser2));
-    }
-
-    public function testParsersCollectionPersistence()
-    {
-        $config = new Config($this->_nested);
-        $this->assertInstanceOf('\Zend\Config\Parser\Queue', $config->getParsers());
-        $this->assertInstanceOf('\Zend\Config\Parser\Queue', $config->c->getParsers());
-        $this->assertInstanceOf('\Zend\Config\Parser\Queue', $config->c->cd->getParsers());
-        $this->assertSame($config->getParsers(), $config->c->getParsers());
-        $this->assertSame($config->c->getParsers(), $config->c->cd->getParsers());
+        $this->assertInstanceOf('\Zend\Config\Processor\Queue', $queue);
+        $this->assertEquals(2, $queue->count());
+        $this->assertTrue($queue->contains($processor1));
+        $this->assertTrue($queue->contains($processor2));
     }
 
     public function testBareTokenPost()
     {
         $config = new Config($this->_tokenBare, true);
-        $parser = new TokenParser();
-        $parser->addToken('BARETOKEN', 'some replaced value');
-        $parser->parse($config);
-
-        $this->assertEquals('some replaced value', $config->simple);
-        $this->assertEquals('some text with some replaced value inside', $config->inside);
-        $this->assertEquals('some replaced value', $config->nested->simple);
-        $this->assertEquals('some text with some replaced value inside', $config->nested->inside);
-    }
-
-    public function testBareTokenJIT()
-    {
-        $parser = new TokenParser(array('BARETOKEN' => 'some replaced value'));
-        $config = new Config($this->_tokenBare, true, array($parser));
+        $processor = new TokenProcessor();
+        $processor->addToken('BARETOKEN', 'some replaced value');
+        $processor->process($config);
 
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals('some text with some replaced value inside', $config->inside);
@@ -221,8 +196,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testTokenPrefix()
     {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '::');
-        $config = new Config($this->_tokenPrefix, true, array($parser));
+        $config = new Config($this->_tokenPrefix, true);
+        $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '::');
+        $processor->process($config);
 
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals(':: some text with some replaced value inside ::', $config->inside);
@@ -232,8 +208,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testTokenSuffix()
     {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '', '::');
-        $config = new Config($this->_tokenSuffix, true, array($parser));
+        $config = new Config($this->_tokenSuffix, true);
+        $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '', '::');
+        $processor->process($config);
 
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals(':: some text with some replaced value inside ::', $config->inside);
@@ -247,8 +224,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testTokenSurround()
     {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
-        $config = new Config($this->_tokenSurround, true, array($parser));
+        $config = new Config($this->_tokenSurround, true);
+        $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '##', '##');
+        $processor->process($config);
 
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals('## some text with some replaced value inside ##', $config->inside);
@@ -261,24 +239,24 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testTokenChangeParams()
     {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
         $config = new Config($this->_tokenSurroundMixed, true);
-        $parser->parse($config);
+        $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '##', '##');
+        $processor->process($config);
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals('## some text with some replaced value inside ##', $config->inside);
         $this->assertEquals('@@TOKEN@@', $config->nested->simple);
         $this->assertEquals('@@ some text with @@TOKEN@@ inside @@', $config->nested->inside);
 
         /**
-         * Now change prefix and suffix on the parser
+         * Now change prefix and suffix on the processor
          */
-        $parser->setPrefix('@@');
-        $parser->setSuffix('@@');
+        $processor->setPrefix('@@');
+        $processor->setSuffix('@@');
 
         /**
          * Parse the config again
          */
-        $parser->parse($config);
+        $processor->process($config);
 
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals('## some text with some replaced value inside ##', $config->inside);
@@ -289,41 +267,13 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testTokenSurround
      */
-    public function testJITToken()
-    {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
-        $config = new Config($this->_tokenSurround, true, $parser);
-
-        $config->simple = 'Changed text with ##TOKEN## inside';
-        $this->assertEquals('Changed text with some replaced value inside', $config->simple);
-
-        $config->newKey = 'New text with ##TOKEN##';
-        $this->assertEquals('New text with some replaced value', $config->newKey);
-    }
-
-    /**
-     * @depends testJITToken
-     */
-    public function testJITNestedToken()
-    {
-        $parser = new TokenParser(array('TOKEN' => 'some replaced value'), '##', '##');
-        $config = new Config($this->_tokenSurround, true, $parser);
-
-        $config->nested->moreNested = array();
-        $config->nested->moreNested->newKey = 'New text with ##TOKEN##';
-        $this->assertEquals('New text with some replaced value', $config->nested->moreNested->newKey);
-    }
-
-    /**
-     * @depends testTokenSurround
-     */
     public function testUserConstants()
     {
         define('SOME_USERLAND_CONSTANT', 'some constant value');
 
-        $parser = new ConstantParser();
         $config = new Config($this->_userConstants, true);
-        $parser->parse($config);
+        $processor = new ConstantProcessor();
+        $processor->process($config);
 
         $this->assertEquals('some constant value', $config->simple);
         $this->assertEquals('some text with some constant value inside', $config->inside);
@@ -336,9 +286,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testPHPConstants()
     {
-        $parser = new ConstantParser(false);
         $config = new Config($this->_phpConstants, true);
-        $parser->parse($config);
+        $processor = new ConstantProcessor(false);
+        $processor->process($config);
 
         $this->assertEquals(PHP_VERSION, $config->phpVersion);
         $this->assertEquals('Current PHP version is: ' . PHP_VERSION, $config->phpVersionInside);
@@ -348,13 +298,11 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
-        $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-        $parser = new TranslatorParser($translator);
         $config = new Config($this->_translator, true);
+        $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
+        $processor = new TranslatorProcessor($translator);
 
-        $parser->parse($config);
+        $processor->process($config);
 
         $this->assertEquals('oneDog', $config->pages[0]->id);
         $this->assertEquals('ein Hund', $config->pages[0]->label);
@@ -363,98 +311,70 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('zwei Hunde', $config->pages[1]->label);
     }
 
-    public function testJITTranslator()
-    {
-        $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
-        $parser = new TranslatorParser($translator);
-        $config = new Config(array(), true, $parser);
-
-        $config->newValue = 'one dog';
-        $this->assertEquals('ein Hund', $config->newValue);
-
-        $config->newValue = 'two dogs';
-        $this->assertEquals('zwei Hunde', $config->newValue);
-
-        $config->unknownTranslation = 'three dogs';
-        $this->assertEquals('three dogs', $config->unknownTranslation);
-    }
-
     public function testFilter()
     {
+        $config = new Config($this->_filter, true);
         $filter = new StringToLower();
-        $parser = new FilterParser($filter);
-        $config = new Config($this->_filter, 1);
-
-        $parser->parse($config);
+        $processor = new FilterProcessor($filter);
+        $processor->process($config);
 
         $this->assertEquals('some mixedcase value', $config->simple);
         $this->assertEquals('other mixed case value', $config->nested->simple);
-    }
-
-    public function testJITFilter()
-    {
-        $filter = new StringToLower();
-        $parser = new FilterParser($filter);
-        $config = new Config($this->_filter, 1, $parser);
-
-        $this->assertEquals('some mixedcase value', $config->simple);
-        $this->assertEquals('other mixed case value', $config->nested->simple);
-
-        $config->newValue = 'THIRD mixed CASE value';
-        $this->assertEquals('third mixed case value', $config->newValue);
     }
 
     /**
      * @depends testFilter
      */
-    public function testParsersQueueFIFO()
+    public function testProcessorsQueueFIFO()
     {
+        $config = new Config($this->_filter, true);
         $lower = new StringToLower();
         $upper = new StringToUpper();
-        $lowerParser = new FilterParser($lower);
-        $upperParser = new FilterParser($upper);
+        $lowerProcessor = new FilterProcessor($lower);
+        $upperProcessor = new FilterProcessor($upper);
 
         /**
          * Default queue order (FIFO)
          */
-        $config = new Config(
-            $this->_filter,
-            1,
-            array(
-                $upperParser,
-                $lowerParser
-            )
-        );
+        $queue = new Queue();
+        $queue->insert($upperProcessor);
+        $queue->insert($lowerProcessor);
+        $queue->process($config);
+
         $this->assertEquals('some mixedcase value', $config->simple);
         $this->assertEquals('other mixed case value', $config->nested->simple);
     }
 
     /**
-     * @depends testParsersQueueFIFO
+     * @depends testProcessorsQueueFIFO
      */
-    public function testParsersQueuePriorities()
+    public function testProcessorsQueuePriorities()
     {
+        $config = new Config($this->_filter, 1);
         $lower = new StringToLower();
         $upper = new StringToUpper();
         $replace = new PregReplace('/[a-z]/', '');
-        $lowerParser = new FilterParser($lower);
-        $upperParser = new FilterParser($upper);
-        $replaceParser = new FilterParser($replace);
-        $config = new Config(array(), 1);
+        $lowerProcessor = new FilterProcessor($lower);
+        $upperProcessor = new FilterProcessor($upper);
+        $replaceProcessor = new FilterProcessor($replace);
+        $queue = new Queue();
 
         /**
          * Insert lower case filter with higher priority
          */
-        $config->getParsers()->insert($upperParser, 10);
-        $config->getParsers()->insert($lowerParser, 1000);
+        $queue->insert($upperProcessor, 10);
+        $queue->insert($lowerProcessor, 1000);
+
         $config->simple = 'some MixedCase VALue';
+        $queue->process($config);
         $this->assertEquals('SOME MIXEDCASE VALUE', $config->simple);
 
         /**
-         * Add even higher priority replace parser that will remove all lowercase letters
+         * Add even higher priority replace processor that will remove all lowercase letters
          */
-        $config->getParsers()->insert($replaceParser, 10000);
+        $queue->insert($replaceProcessor, 10000);
         $config->newValue = 'THIRD mixed CASE value';
+        $queue->process($config);
         $this->assertEquals('THIRD  CASE ', $config->newValue);
     }
 

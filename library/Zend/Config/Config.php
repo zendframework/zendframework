@@ -25,10 +25,7 @@ namespace Zend\Config;
 
 use \Countable,
     \Iterator,
-    \ArrayAccess,
-    Zend\Config\Exception\InvalidArgumentException,
-    Zend\Config\Parser,
-    Zend\Config\Parser\Queue as ParserQueue;
+    \ArrayAccess;
 
 /**
  * @category   Zend
@@ -60,13 +57,6 @@ class Config implements Countable, Iterator, ArrayAccess
     protected $data = array();
 
     /**
-     * Data withing the configuration.
-     *
-     * @var \Zend\Config\Parser\Queue
-     */
-    protected $parsers;
-
-    /**
      * Used when unsetting values during iteration to ensure we do not skip
      * the next element.
      *
@@ -91,35 +81,20 @@ class Config implements Countable, Iterator, ArrayAccess
      *
      * @param  array   $array
      * @param  boolean $allowModifications
-     * @param \Zend\Config\Parser\Queue|\Zend\Config\Parser|Traversable|array $parsers
-     * @return \Zend\Config\Config
+     * @return void
      */
-    public function __construct(array $array, $allowModifications = false, $parsers = null)
+    public function __construct(array $array, $allowModifications = false)
     {
         $this->allowModifications = (boolean) $allowModifications;
 
-        if ($parsers !== null) {
-            $parsers = $this->setParsers($parsers);
-        } else {
-            // create empty queue
-            $parsers = $this->getParsers();
-        }
-
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                $this->data[$key] = new self($value, $this->allowModifications, $parsers);
+                $this->data[$key] = new self($value, $this->allowModifications);
             } else {
                 $this->data[$key] = $value;
             }
-
+            
             $this->count++;
-        }
-
-        /**
-         * Process config
-         */
-        if(!$parsers->isEmpty()){
-            $this->parse();
         }
     }
 
@@ -164,13 +139,9 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         if ($this->allowModifications) {
             if (is_array($value)) {
-                $this->data[$name] = new self($value, true, $this->parsers);
+                $this->data[$name] = new self($value, true);
             } else {
-				if (!$this->parsers->isEmpty()) {
-					$this->data[$name] = $this->parsers->parseValue($value);
-				} else {
-					$this->data[$name] = $value;
-				}
+                $this->data[$name] = $value;
             }
             
             $this->count++;
@@ -385,15 +356,13 @@ class Config implements Countable, Iterator, ArrayAccess
         foreach ($merge as $key => $item) {
             if (array_key_exists($key, $this->data)) {
                 if ($item instanceof self && $this->data[$key] instanceof self) {
-                    $this->data[$key] = $this->data[$key]->merge(
-                        new self($item->toArray(), $this->allowModifications, $this->parsers)
-                    );
+                    $this->data[$key] = $this->data[$key]->merge(new self($item->toArray(), $this->allowModifications));
                 } else {
                     $this->data[$key] = $item;
                 }
             } else {
                 if ($item instanceof self) {
-                    $this->data[$key] = new self($item->toArray(), $this->allowModifications, $this->parsers);
+                    $this->data[$key] = new self($item->toArray(), $this->allowModifications);
                 } else {
                     $this->data[$key] = $item;
                 }
@@ -430,69 +399,5 @@ class Config implements Countable, Iterator, ArrayAccess
     public function isReadOnly()
     {
         return !$this->allowModifications;
-    }
-
-    /**
-     * Get parsers queue for this config.
-     *
-     * @return \Zend\Config\Parser\Queue
-     */
-    public function getParsers(){
-        if ($this->parsers === null) {
-            $this->parsers = new ParserQueue();
-        }
-        return $this->parsers;
-    }
-
-    /**
-     * Set config parsers
-     *
-     * @param \Zend\Config\Parser\Queue|\Zend\Config\Parser|Traversable|array $parsers
-     * @return \Zend\Config\Parser\Queue
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setParsers($parsers)
-    {
-        // A complete, ready to use queue object
-        if ($parsers instanceof ParserQueue) {
-            return $this->parsers = $parsers;
-        }
-
-        // A single parser
-        elseif ($parsers instanceof Parser) {
-            $this->parsers = new ParserQueue();
-            $this->parsers->insert($parsers);
-            return $this->parsers;
-        }
-
-        // An array of parsers
-        elseif (
-            !is_array($parsers) &&
-            !($parsers instanceof \Traversable) &&
-            !($parsers instanceof ParserQueue)
-        ) {
-            throw new InvalidArgumentException('Cannot use ' . gettype($parsers) . ' as a parsers.');
-        }
-
-        $this->parsers = new ParserQueue();
-        foreach ($parsers as $parser) {
-            if ($parser instanceof Parser) {
-                $this->parsers->insert($parser);
-            } else {
-                throw new InvalidArgumentException('Cannot use ' . gettype($parser) . ' as a parser');
-            }
-        }
-
-        return $this->parsers;
-    }
-
-    /**
-     * Process the whole config structure with each parser in the queue.
-     *
-     * @return void
-     */
-    public function parse()
-    {
-        $this->getParsers()->parse($this);
     }
 }

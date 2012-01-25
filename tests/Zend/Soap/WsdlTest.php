@@ -523,7 +523,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('xsd:int',          $wsdl->getType('int'),     'xsd:int detection failed.');
         $this->assertEquals('xsd:int',          $wsdl->getType('integer'), 'xsd:int detection failed.');
         $this->assertEquals('xsd:float',        $wsdl->getType('float'),   'xsd:float detection failed.');
-        $this->assertEquals('xsd:float',        $wsdl->getType('double'),  'xsd:float detection failed.');
+        $this->assertEquals('xsd:double',        $wsdl->getType('double'),  'xsd:double detection failed.');
         $this->assertEquals('xsd:boolean',      $wsdl->getType('boolean'), 'xsd:boolean detection failed.');
         $this->assertEquals('xsd:boolean',      $wsdl->getType('bool'),    'xsd:boolean detection failed.');
         $this->assertEquals('soap-enc:Array',   $wsdl->getType('array'),   'soap-enc:Array detection failed.');
@@ -619,7 +619,7 @@ class WsdlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("xsd:int", $wsdl->getType("iNt"));
         $this->assertEquals("xsd:int", $wsdl->getType("INTEGER"));
         $this->assertEquals("xsd:float", $wsdl->getType("FLOAT"));
-        $this->assertEquals("xsd:float", $wsdl->getType("douBLE"));
+        $this->assertEquals("xsd:double", $wsdl->getType("douBLE"));
     }
 
     /**

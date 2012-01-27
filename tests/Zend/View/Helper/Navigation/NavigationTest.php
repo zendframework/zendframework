@@ -68,6 +68,24 @@ class NavigationTest extends AbstractTest
         $this->assertEquals($this->_helper, $returned);
         $this->assertEquals($this->_nav2, $returned->getContainer());
     }
+    
+    public function testAcceptAclShouldReturnGracefullyWithUnknownResource()
+    {
+        // setup
+        $acl = $this->_getAcl();
+        $this->_helper->setAcl($acl['acl']);
+        $this->_helper->setRole($acl['role']);
+        
+        $accepted = $this->_helper->accept(
+            new \Zend\Navigation\Page\Uri(array(
+                'resource'  => 'unknownresource',
+                'privilege' => 'someprivilege' 
+            ),
+            false)
+        );
+
+        $this->assertEquals($accepted, false);
+    }
 
     public function testShouldProxyToMenuHelperByDeafult()
     {

@@ -12,7 +12,7 @@ class Windows extends Virtual implements Adapter
 {
     protected static $hasMBString;
 
-    protected $modeResult;
+    protected $probeResult;
 
     /**
      * Determine and return current console width.
@@ -28,11 +28,11 @@ class Windows extends Virtual implements Adapter
         /**
          * Try to read console size from "mode" command
          */
-        if($this->modeResult === null){
-            $this->runModeCommand();
+        if($this->probeResult === null){
+            $this->runProbeCommand();
         }
 
-        if(preg_match('/Columns\:\s+(\d+)/',$this->modeResult,$matches)){
+        if(preg_match('/^(\d+)\t/s',$this->probeResult,$matches)){
             $width = $matches[1];
         }else{
             $width = parent::getWidth();
@@ -55,25 +55,25 @@ class Windows extends Virtual implements Adapter
         /**
          * Try to read console size from "mode" command
          */
-        if($this->modeResult === null){
-            $this->runModeCommand();
+        if($this->probeResult === null){
+            $this->runProbeCommand();
         }
 
-        if(preg_match('/Rows\:\s+(\d+)/',$this->modeResult,$matches)){
+        if(preg_match('/^\d+\t(\d+)/s',$this->probeResult,$matches)){
             $height = $matches[1];
         }else{
-            $height = parent::getHeight();
+            $height = parent::getheight();
         }
 
         return $height;
     }
 
-    protected function runModeCommand(){
-        exec('mode',$output,$return);
-        if($return || !count($output)){
-            $this->modeResult = '';
+    protected function runProbeCommand(){
+        $output = system('powershell -command "$size = $Host.ui.rawui.windowsize; write ""$($size.width)`t$($size.height)"""',$return);
+        if($return || !$output){
+            $this->probeResult = '';
         }else{
-            $this->modeResult = trim(implode('',$output));
+            $this->probeResult = trim($output);
         }
     }
 
@@ -86,11 +86,11 @@ class Windows extends Virtual implements Adapter
         /**
          * Try to read code page info from "mode" command
          */
-        if($this->modeResult === null){
-            $this->runModeCommand();
+        if($this->probeResult === null){
+            $this->runProbeCommand();
         }
 
-        if(preg_match('/Code page\:\s+(\d+)/',$this->modeResult,$matches)){
+        if(preg_match('/Code page\:\s+(\d+)/',$this->probeResult,$matches)){
             return (int)$matches[1] == 65001;
         }else{
             return false;
@@ -155,4 +155,77 @@ class Windows extends Virtual implements Adapter
     protected function switchToUtf8(){
         `mode con cp select=65001`;
     }
+
+    /**
+     * Clear console screen
+     */
+    public function clear()
+    {
+        echo str_repeat("\r\n",$this->getHeight());
+    }
+
+    /**
+     * Clear line at cursor position
+     */
+    public function clearLine()
+    {
+        echo "\r".str_repeat(' ',$this->getWidth())."\r";
+    }
+
+
+    /**
+     * Read a single character from the console input
+     *
+     * @param string|null   $mask   A list of allowed chars
+     * @return string
+     */
+    public function readChar($mask = null){
+        /**
+         * Decide if we can use `choice` tool
+         */
+        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]*$/',$mask);
+
+        do{
+            if($useChoice){
+                /**
+                 * Use the `choice` tool available since windows 2000
+                 */
+                system('choice /n /cs /c '.escapeshellarg($mask).' >NUL',$return);
+                if($return == 255 || $return < 1 || $return > strlen($mask)){
+                    throw new \RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
+                }else{
+                    /**
+                     * Fetch the char from mask
+                     */
+                    $char = substr($mask,$return-1,1);
+                }
+            }else{
+                /**
+                 * Use a fallback method
+                 */
+                $char = $this->readLine(1);
+                if(!$char){
+                    $char = "\n"; // user pressed [enter]
+                }
+            }
+        }while(
+            ($mask !== null && !stristr($mask,$char))
+        );
+        return $char;
+    }
+
+    /**
+     * Read a single line from the console input.
+     *
+     * @param int $maxLength        Maximum response length
+     * @return string
+     */
+    public function readLine($maxLength = 2048){
+        $f = fopen('php://stdin','r');
+        $line = trim(fread($f,$maxLength));
+        fclose($f);
+        return $line;
+    }
+
+
 }

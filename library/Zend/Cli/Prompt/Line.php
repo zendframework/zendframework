@@ -1,13 +1,108 @@
 <?php
-namespace Zend\Cli\Text;
+namespace Zend\Cli\Prompt;
 
 use Zend\Cli\Prompt;
 
-class Line implements Prompt
+class Line extends AbstractPrompt implements Prompt
 {
-    public function show(){
+    /**
+     * @var string
+     */
+    protected $promptText = 'Please enter value: ';
+
+    /**
+     * @var bool
+     */
+    protected $allowEmpty = false;
+
+    /**
+     * @var int
+     */
+    protected $maxLength = 2048;
+
+    /**
+     * Ask the user for an answer (a line of text)
+     *
+     * @param string    $promptText     The prompt text to display in console
+     * @param bool      $allowEmpty     Is empty response allowed?
+     * @param int       $maxLength      Maximum response length
+     */
+    public function __construct($promptText = 'Please enter value: ', $allowEmpty = false, $maxLength = 2048)
+    {
+        if($promptText !== null){
+            $this->setPromptText($promptText);
+        }
+
+        if($allowEmpty !== null){
+            $this->setAllowEmpty($allowEmpty);
+        }
+
+        if($maxLength !== null){
+            $this->setMaxLength($maxLength);
+        }
     }
 
-    public function getLastResult(){
+    /**
+     * Show the prompt to user and return the answer.
+     *
+     * @return mixed
+     */
+    public function show()
+    {
+        do{
+            $this->getConsole()->write($this->promptText);
+            $line = $this->getConsole()->readLine($this->maxLength);
+        }while(!$this->allowEmpty && !$line);
+
+        return $this->lastResponse = $line;
     }
+
+    /**
+     * @param boolean $allowEmpty
+     */
+    public function setAllowEmpty($allowEmpty)
+    {
+        $this->allowEmpty = $allowEmpty;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAllowEmpty()
+    {
+        return $this->allowEmpty;
+    }
+
+    /**
+     * @param int $maxLength
+     */
+    public function setMaxLength($maxLength)
+    {
+        $this->maxLength = $maxLength;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxLength()
+    {
+        return $this->maxLength;
+    }
+
+    /**
+     * @param string $promptText
+     */
+    public function setPromptText($promptText)
+    {
+        $this->promptText = $promptText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPromptText()
+    {
+        return $this->promptText;
+    }
+
 }

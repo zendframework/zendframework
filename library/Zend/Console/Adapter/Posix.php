@@ -319,4 +319,24 @@ class Posix extends AbstractAdapter implements Adapter
         }
     }
 
+    /**
+     * Read a single character from the console input
+     *
+     * @param string|null   $mask   A list of allowed chars
+     * @return string
+     */
+    public function readChar($mask = null){
+        do{
+            $char = trim(`read -s -n1 val; echo \$val`);
+        }while(
+            !$char ||
+            ($mask !== null && !stristr($mask,$char))
+        );
+        return $char;
+    }
+
+    /**
+     * @todo Add GNU readline support
+     */
+
 }

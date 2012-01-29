@@ -62,8 +62,8 @@ class WindowsAnsicon extends Posix implements Adapter
         }
 
         /**
-                 * Try to read console size from ANSICON env var
-                 */
+         * Try to read console size from ANSICON env var
+         */
         if(preg_match('/\(\d+x(\d+)/',getenv('ANSICON'),$matches)){
             $height = $matches[1];
         }else{
@@ -164,4 +164,38 @@ class WindowsAnsicon extends Posix implements Adapter
     public function getDefaultCharset(){
         return new Charset\AsciiExtended();
     }
+
+    /**
+     * Read a single character from the console input
+     *
+     * @param string|null   $mask   A list of allowed chars
+     * @return string
+     */
+    public function readChar($mask = null){
+        /**
+         * Decide if we can use `choice` tool
+         */
+        $useChoice = $mask !== null && preg_match('/^[a-zA-Z0-9]$',$mask);
+
+        do{
+            if($useChoice){
+                system('choice /n /cs /c '.$mask,$return);
+                if($return == 255 || $return < 1 || $return > strlen($mask)){
+                    throw new \RuntimeException('"choice" command failed to run. Are you using Windows XP or newer?');
+                }else{
+                    /**
+                     * Fetch the char from mask
+                     */
+                    $char = substr($mask,$return-1,1);
+                }
+            }else{
+                $char = parent::readChar($mask);
+            }
+        }while(
+            !$char ||
+            ($mask !== null && !stristr($mask,$char))
+        );
+        return $char;
+    }
+
 }

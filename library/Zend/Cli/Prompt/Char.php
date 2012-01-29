@@ -26,15 +26,21 @@ class Char extends AbstractPrompt implements Prompt
     protected $ignoreCase = true;
 
     /**
+     * @var bool
+     */
+    protected $echo = true;
+
+    /**
      * Ask the user for a single key stroke
      *
      * @param string  $promptText     The prompt text to display in console
      * @param string  $allowedChars   A list of allowed chars (i.e. "abc12345")
      * @param bool    $ignoreCase     If true, case will be ignored and prompt will always return lower-cased response
      * @param bool    $allowEmpty     Is empty response allowed?
+     * @param bool    $echo           Display the selection after user presses key
      */
     public function __construct(
-        $promptText = 'Please hit a key', $allowedChars = 'abc', $ignoreCase = true, $allowEmpty = false
+        $promptText = 'Please hit a key', $allowedChars = 'abc', $ignoreCase = true, $allowEmpty = false, $echo = true
     ){
         if($promptText !== null){
             $this->setPromptText($promptText);
@@ -55,19 +61,38 @@ class Char extends AbstractPrompt implements Prompt
                 $this->setAllowedChars($allowedChars);
             }
         }
+
+        if($echo !== null){
+            $this->setEcho($echo);
+        }
     }
 
     /**
-     * Show the prompt to user and return the answer.
+     * Show the prompt to user and return a single char.
      *
-     * @return mixed
+     * @return string
      */
     public function show()
     {
-        $f = fopen('php://stdin','r');
+        $this->getConsole()->write($this->promptText);
+        $mask = $this->getAllowedChars();
+
+        /**
+         * Normalize the mask if case is irrelevant
+         */
+        if($this->ignoreCase){
+            $mask = strtolower($mask);   // lowercase all
+            $mask .= strtoupper($mask);  // uppercase and append
+            $mask = str_split($mask);    // convert to array
+            $mask = array_unique($mask); // remove duplicates
+            $mask = implode("",$mask);   // convert back to string
+        }
+
         do{
-            $this->getConsole()->write($this->promptText);
-            $char = fread($f,1);
+            /**
+             * Read char from console
+             */
+            $char = $this->getConsole()->readChar($mask);
 
             /**
              * Lowercase the response if case is irrelevant
@@ -77,14 +102,17 @@ class Char extends AbstractPrompt implements Prompt
             }
 
             /**
-             * Check if a valid char
+             * Check if it is an allowed char
              */
             if(stristr($this->allowedChars,$char)){
-                echo "\n";
+                if($this->echo){
+                    echo trim($char)."\n";
+                }else{
+                    echo "\n";
+                }
                 break;
             }
         }while(true);
-        fclose($f);
 
         return $this->lastResponse = $char;
     }
@@ -151,6 +179,22 @@ class Char extends AbstractPrompt implements Prompt
     public function getIgnoreCase()
     {
         return $this->ignoreCase;
+    }
+
+    /**
+     * @param boolean $echo
+     */
+    public function setEcho($echo)
+    {
+        $this->echo = $echo;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEcho()
+    {
+        return $this->echo;
     }
 
 }

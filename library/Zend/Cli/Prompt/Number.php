@@ -8,7 +8,7 @@ class Number extends Line implements Prompt
     /**
      * @var string
      */
-    protected $promptText = 'Please enter number: ';
+    protected $promptText = 'Please enter a number: ';
 
     /**
      * @var bool
@@ -34,8 +34,9 @@ class Number extends Line implements Prompt
      * @param integer   $min            Minimum value (inclusive)
      * @param integer   $max            Maximum value (inclusive)
      */
-    public function __construct($promptText = null, $allowEmpty = null, $allowFloat = null, $min = null, $max = null)
-    {
+    public function __construct(
+        $promptText = 'Please enter a number: ', $allowEmpty = false, $allowFloat = false, $min = null, $max = null
+    ){
         if($promptText !== null){
             $this->setPromptText($promptText);
         }
@@ -64,13 +65,39 @@ class Number extends Line implements Prompt
      */
     public function show()
     {
-        $f = fopen('php://stdin','r');
+        /**
+         * Ask for a number and validate it.
+         */
         do{
-            $this->getConsole()->write($this->promptText);
-            $line = trim(stream_get_line($f,$this->maxLength,"\n"));
-        }while(!$this->allowEmpty && !$line);
+            $valid = true;
+            $number = parent::show();
+            if($number === "" && !$this->allowEmpty){
+                $valid = false;
+            }elseif($number === ""){
+                $number = null;
+            }elseif(!is_numeric($number)){
+                $this->getConsole()->writeLine("$number is not a number\n");
+                $valid = false;
+            }elseif(!$this->allowFloat && (round($number) != $number) ){
+                $this->getConsole()->writeLine("Please enter a non-floating number, i.e. ".round($number)."\n");
+                $valid = false;
+            }elseif($this->max !== null && $number > $this->max){
+                $this->getConsole()->writeLine("Please enter a number not greater than ".$this->max."\n");
+                $valid = false;
+            }elseif($this->min !== null && $number < $this->min){
+                $this->getConsole()->writeLine("Please enter a number not smaller than ".$this->min."\n");
+                $valid = false;
+            }
+        }while(!$valid);
 
-        return $this->lastResponse = $line;
+        /**
+         * Cast proper type
+         */
+        if($number !== null){
+            $number = $this->allowFloat ? (double)$number : (int)$number;
+        }
+
+        return $this->lastResponse = $number;
     }
 
     /**

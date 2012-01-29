@@ -61,7 +61,7 @@ abstract class AbstractAdapter implements Adapter
      * @param null|int                 $color
      * @param null|int                 $bgColor
      */
-    public function writeLine($text, $color = null, $bgColor = null)
+    public function writeLine($text = "", $color = null, $bgColor = null)
     {
         $width = $this->getStringWidth( $text );
 
@@ -80,7 +80,7 @@ abstract class AbstractAdapter implements Adapter
          */
         $consoleWidth = $this->getWidth();
         if ($width > $consoleWidth) {
-            $text = $this->stringTrim( $text, $this->getWidth() );
+            $text = $this->stringTrim( $text, $consoleWidth );
             echo $text;
         } elseif ($width == $consoleWidth) {
             echo $text;
@@ -565,5 +565,33 @@ abstract class AbstractAdapter implements Adapter
         } else {
             return strlen( $string );
         }
+    }
+
+    /**
+     * Read a single line from the console input
+     *
+     * @param int $maxLength        Maximum response length
+     * @return string
+     */
+    public function readLine($maxLength = 2048){
+        $f = fopen('php://stdin','r');
+        $line = stream_get_line($f,2048,"\n");
+        fclose($f);
+        return $line;
+    }
+
+    /**
+     * Read a single character from the console input
+     *
+     * @param string|null   $mask   A list of allowed chars
+     * @return string
+     */
+    public function readChar($mask = null){
+        $f = fopen('php://stdin','r');
+        do{
+            $char = fread($f,1);
+        }while($mask === null || stristr($mask,$char));
+        fclose($f);
+        return $char;
     }
 }

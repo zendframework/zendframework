@@ -40,7 +40,7 @@ interface Adapter
      * @param null|int $color
      * @param null|int $bgColor
      */
-    public function writeLine($text, $color = null, $bgColor = null);
+    public function writeLine($text = "", $color = null, $bgColor = null);
 
     /**
      * Write a piece of text at the coordinates of $x and $y
@@ -278,4 +278,22 @@ interface Adapter
      * @abstract
      */
     public function clearScreen();
+
+    /**
+     * Read a single line from the console input
+     *
+     * @abstract
+     * @param int $maxLength        Maximum response length
+     * @return string
+     */
+    public function readLine($maxLength = 2048);
+
+    /**
+     * Read a single character from the console input
+     *
+     * @abstract
+     * @param string|null   $mask   A list of allowed chars
+     * @return string
+     */
+    public function readChar($mask = null);
 }

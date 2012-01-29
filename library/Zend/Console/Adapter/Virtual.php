@@ -32,7 +32,7 @@ class Virtual extends AbstractAdapter implements Adapter
          * Try to read console size from "mode" command
          */
         if($this->modeResult === null){
-            $this->runModeCommand();
+            $this->runProbeCommand();
         }
 
         if(preg_match('/Columns\:\s+(\d+)/',$this->modeResult,$matches)){
@@ -59,7 +59,7 @@ class Virtual extends AbstractAdapter implements Adapter
          * Try to read console size from "mode" command
          */
         if($this->modeResult === null){
-            $this->runModeCommand();
+            $this->runProbeCommand();
         }
 
         if(preg_match('/Rows\:\s+(\d+)/',$this->modeResult,$matches)){
@@ -71,7 +71,7 @@ class Virtual extends AbstractAdapter implements Adapter
         return $height;
     }
 
-    protected function runModeCommand(){
+    protected function runProbeCommand(){
         exec('mode',$output,$return);
         if($return || !count($output)){
             $this->modeResult = '';
@@ -90,7 +90,7 @@ class Virtual extends AbstractAdapter implements Adapter
          * Try to read code page info from "mode" command
          */
         if($this->modeResult === null){
-            $this->runModeCommand();
+            $this->runProbeCommand();
         }
 
         if(preg_match('/Code page\:\s+(\d+)/',$this->modeResult,$matches)){

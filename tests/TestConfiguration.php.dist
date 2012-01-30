@@ -562,6 +562,20 @@ defined('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED') || define('TESTS_ZEND_QUEUE_PLATF
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST', false);
 defined('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS') || define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
 
+
+/**
+ * Zend\Service\AgileZen online tests
+ */
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_ENABLED',false);
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_APIKEY','insert the API key');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID','insert the project id');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID','insert the story id');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL','insert email for invitation');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID','insert role id for invitation');
+
+//define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME','insert the member name to add to the project');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME',44931);
+
 /**
  * Zend_Service_Amazon online tests
  */

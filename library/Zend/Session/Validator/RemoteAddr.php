@@ -40,6 +40,18 @@ class RemoteAddr implements SessionValidator
     protected $data;
 
     /**
+     * Whether to use proxy addresses or not.
+     *
+     * As default this setting is disabled - IP address is mostly needed to increase
+     * security. HTTP_* are not reliable since can easily be spoofed. It can be enabled
+     * just for more flexibility, but if user uses proxy to connect to trusted services
+     * it's his/her own risk, only reliable field for IP address is $_SERVER['REMOTE_ADDR'].
+     *
+     * @var bool
+     */
+    protected static $useProxy = false;
+
+    /**
      * Constructor - get the current user IP and store it in the session
      * as 'valid data'
      *
@@ -65,23 +77,56 @@ class RemoteAddr implements SessionValidator
     }
 
     /**
+     * Changes proxy handling setting.
+     *
+     * This must be static method, since validators are recovered automatically
+     * at session read, so this is the only way to switch setting.
+     *
+     * @param bool  $useProxy Whether to check also proxied IP addresses.
+     * @return void
+     */
+    public static function setUseProxy($useProxy = true)
+    {
+        self::$useProxy = $useProxy;
+    }
+
+    /**
+     * Checks proxy handling setting.
+     *
+     * @return bool Current setting value.
+     */
+    public static function getUseProxy()
+    {
+        return self::$useProxy;
+    }
+
+    /**
      * Returns client IP address.
      *
-     * @return int IP address (converted to integer).
+     * @return string IP address.
      */
     protected function getIpAddress()
     {
-        // proxy IP address
-        if (isset($_SERVER['X_FORWARDED_FOR'])) {
-            return sprintf('%u', ip2long($_SERVER['X_FORWARDED_FOR']));
+        if (self::$useProxy) {
+            // proxy IP address
+            if (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP']) {
+                $ips = explode(',', $_SERVER['HTTP_CLIENT_IP']);
+                return trim($ips[0]);
+            }
+
+            // proxy IP address
+            if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR']) {
+                $ips = explode(',', $_SERVER['X_FORWARDED_FOR']);
+                return trim($ips[0]);
+            }
         }
 
         // direct IP address
         if (isset($_SERVER['REMOTE_ADDR'])) {
-            return sprintf('%u', ip2long($_SERVER['REMOTE_ADDR']));
+            return $_SERVER['REMOTE_ADDR'];
         }
 
-        return 0;
+        return '';
     }
 
     /**

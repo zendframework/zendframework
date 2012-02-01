@@ -200,11 +200,11 @@ class YouTube extends Media
         }
 
         if ($clientId != null) {
-            $client->setHeaders(array('X-GData-Client' => $clientId));
+            $client->getRequest()->headers()->addHeaderLine('X-GData-Client', $clientId);
         }
 
         if ($developerKey != null) {
-            $client->setHeaders(array('X-GData-Key' => 'key='. $developerKey));
+            $client->getRequest()->headers()->addHeaderLine('X-GData-Key', 'key='. $developerKey);
         }
 
         return parent::setHttpClient($client, $applicationId);

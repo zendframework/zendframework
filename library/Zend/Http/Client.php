@@ -1117,6 +1117,7 @@ class Client implements Dispatchable
         }
 
         $body = '';
+        $totalFiles = 0;
         
         if (!$this->getRequest()->headers()->has('Content-Type')) {
             $totalFiles = count($this->getRequest()->file()->toArray());

@@ -536,7 +536,7 @@ class Client implements Dispatchable
     public function setHeaders($headers)
     {
         if (is_array($headers)) {
-            $newHeaders = new Headers();
+            $newHeaders = $this->getRequest()->headers();
             $newHeaders->addHeaders($headers);
             $this->getRequest()->setHeaders($newHeaders);
         } elseif ($headers instanceof Headers) {

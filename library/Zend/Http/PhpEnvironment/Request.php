@@ -192,14 +192,13 @@ class Request extends HttpRequest
         foreach ($server as $key => $value) {
             if (strpos($key, 'HTTP_') === 0 && $value) {
                 $header = substr($key, 5);
-                $headers[substr($key, 5)] = $value;
             } elseif (in_array($key, array('CONTENT_LENGTH', 'CONTENT_MD5', 'CONTENT_TYPE')) && $value) {
                 $header = $key;
             } else {
                 continue;
             }
 
-            $headers[$header] = $server[$key];
+            $headers[strtr($header, '_', '-')] = $value;
         }
 
         return $headers;

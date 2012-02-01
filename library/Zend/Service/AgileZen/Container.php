@@ -13,80 +13,97 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service
+ * @package    Zend_Service
  * @subpackage AgileZen
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 namespace Zend\Service\AgileZen;
+
+use ArrayAccess,
+    Countable,
+    Iterator,
+    Traversable;
 
 /**
  * @category   Zend
- * @package    Zend\Service
+ * @package    Zend_Service
  * @subpackage AgileZen
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Container implements \Countable, \Iterator, \ArrayAccess
+class Container implements Countable, Iterator, ArrayAccess
 {
     /**
-     * @var array of Zend\Service\Resources\*
+     * @var array of Zend\Service\AgileZen\Resources\*
      */
     protected $objects = array();
+
     /**
      * @var int Iterator key
      */
     protected $iteratorKey = 0;
+
     /**
      * @var AgileZen
      */
     protected $service;
+
     /**
      * Project id
      * 
      * @var integer 
      */
     protected $projectId;
+
     /**
      * Namespace prefix for Resources
      * 
      * @var string 
      */
     protected $namespacePrefix = 'Zend\Service\AgileZen\Resources';
+
     /**
-     * __construct()
-     *
-     * @param  array $list
-     * @return boolean
+     * Constructor
+     * 
+     * @param  AgileZen $service 
+     * @param  array|Traversable $list 
+     * @param  string $resource 
+     * @param  null|int|string $projectId 
+     * @return void
      */
-    public function __construct($service, $list, $resource, $projectId = null)
+    public function __construct(AgileZen $service, $list, $resource, $projectId = null)
     {
-        if (!($service instanceof AgileZen)) {
-            throw new Exception\InvalidArgumentException("You must pass an AgileZen object");
-        }
-        if (empty($list)) {
+        if (empty($list) || (!is_array($list) && !$list instanceof Traversable)) {
             throw new Exception\InvalidArgumentException("You must pass an array of data objects");
         }
         if (empty($resource)) {
             throw new Exception\InvalidArgumentException("You must pass a valid resource name");
         }
-        if (!class_exists($this->namespacePrefix . '\\'. ucfirst($resource))) {
+
+        $resource = $this->namespacePrefix . '\\' . ucfirst($resource);
+        if (!class_exists($resource)) {
             throw new Exception\InvalidArgumentException("The resource provided doesn't exist");
         }
-        $this->service = $service;
-        $this->resource= $this->namespacePrefix . '\\'. ucfirst($resource);
+
+        $this->service  = $service;
+        $this->resource = $resource;
+
         if (!empty($projectId)) {
             $this->projectId = $projectId;
         }
+
         $this->constructFromArray($list);
     }
+
     /**
      * Transforms the Array to array of container
      *
-     * @param  array $list
+     * @param  array|Traversable $list
      * @return void
      */
-    private function constructFromArray(array $list)
+    private function constructFromArray($list)
     {
         foreach ($list as $obj) {
             if (!empty($this->projectId)) {
@@ -95,6 +112,7 @@ class Container implements \Countable, \Iterator, \ArrayAccess
             $this->addObject(new $this->resource($this->service,$obj));
         }
     }
+
     /**
      * Add an object
      *
@@ -106,6 +124,7 @@ class Container implements \Countable, \Iterator, \ArrayAccess
         $this->objects[] = $obj;
         return $this;
     }
+
     /**
      * Return number of servers
      *
@@ -117,17 +136,19 @@ class Container implements \Countable, \Iterator, \ArrayAccess
     {
         return count($this->objects);
     }
+
     /**
      * Return the current element
      *
      * Implement Iterator::current()
      *
-     * @return Zend\Service\Resources\*
+     * @return Zend\Service\AgileZen\Resources\*
      */
     public function current()
     {
         return $this->objects[$this->iteratorKey];
     }
+
     /**
      * Return the key of the current element
      *
@@ -139,6 +160,7 @@ class Container implements \Countable, \Iterator, \ArrayAccess
     {
         return $this->iteratorKey;
     }
+
     /**
      * Move forward to next element
      *
@@ -150,6 +172,7 @@ class Container implements \Countable, \Iterator, \ArrayAccess
     {
         $this->iteratorKey += 1;
     }
+
     /**
      * Rewind the Iterator to the first element
      *
@@ -161,6 +184,7 @@ class Container implements \Countable, \Iterator, \ArrayAccess
     {
         $this->iteratorKey = 0;
     }
+
     /**
      * Check if there is a current element after calls to rewind() or next()
      *
@@ -173,10 +197,10 @@ class Container implements \Countable, \Iterator, \ArrayAccess
         $numItems = $this->count();
         if ($numItems > 0 && $this->iteratorKey < $numItems) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
+
     /**
      * Whether the offset exists
      *
@@ -189,22 +213,22 @@ class Container implements \Countable, \Iterator, \ArrayAccess
     {
         return ($offset < $this->count());
     }
+
     /**
      * Return value at given offset
      *
      * Implement ArrayAccess::offsetGet()
      *
      * @param   int     $offset
-     * @throws  OutOfBoundsException
-     * @return  Zend\Service\AgileZend\Resources\*
+     * @throws  Exception\OutOfBoundsException
+     * @return  Zend\Service\AgileZen\Resources\*
      */
     public function offsetGet($offset)
     {
-        if ($this->offsetExists($offset)) {
-            return $this->objects[$offset];
-        } else {
+        if (!$this->offsetExists($offset)) {
             throw new Exception\OutOfBoundsException('Illegal index');
         }
+        return $this->objects[$offset];
     }
 
     /**
@@ -214,11 +238,11 @@ class Container implements \Countable, \Iterator, \ArrayAccess
      *
      * @param   int     $offset
      * @param   string  $value
-     * @throws  Zend\Service\AgileZend\Resources\*
+     * @throws  Exception\RuntimeException
      */
     public function offsetSet($offset, $value)
     {
-        throw new Exception('You are trying to set read-only property');
+        throw new Exception\RuntimeException('You are trying to set read-only property');
     }
 
     /**
@@ -227,10 +251,10 @@ class Container implements \Countable, \Iterator, \ArrayAccess
      * Implement ArrayAccess::offsetUnset()
      *
      * @param   int     $offset
-     * @throws  Zend\Service\AgileZend\Resources\*
+     * @throws  Exception\RuntimeException
      */
     public function offsetUnset($offset)
     {
-        throw new Exception('You are trying to unset read-only property');
+        throw new Exception\RuntimeException('You are trying to unset read-only property');
     }
 }

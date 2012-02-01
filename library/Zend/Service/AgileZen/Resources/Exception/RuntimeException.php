@@ -13,25 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\AgileZen\Resources
- * @subpackage Exception
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\AgileZen\Resources\Exception;
 
+use Zend\Service\AgileZen\Resources\Exception;
+
 /**
- * @package    Zend\Service\AgileZen\Resources
- * @subpackage Exception
+ * @category   Zend
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources_Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class RuntimeException 
     extends \RuntimeException 
-    implements \Zend\Service\AgileZen\Resources\Exception
-{
-}
+    implements Exception
+{}

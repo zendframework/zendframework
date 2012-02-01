@@ -13,11 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 namespace Zend\Service\AgileZen\Resources;
 
 use Zend\Service\AgileZen\AgileZen,
@@ -25,8 +26,8 @@ use Zend\Service\AgileZen\AgileZen,
 
 /**
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,67 +39,74 @@ class Task extends Entity
      * @var string 
      */
     protected $text;
+
     /**
      * Create time
      * 
      * @var string 
      */
     protected $createTime;
+
     /**
      * Status
      * 
      * @var string 
      */
     protected $status;
+
     /**
      * Finish time
      * 
      * @var string 
      */
     protected $finishTime;
+
     /**
      * Finished by
      * 
-     * @var Zend\Service\AgileZen\Resources\User
+     * @var User
      */
     protected $finishedBy;
+
     /**
      * AgileZen service
      * 
-     * @var Zend\Service\AgileZen\AgileZen 
+     * @var AgileZen 
      */
     protected $service;
+
     /**
      * Project Id
      * 
      * @var integer 
      */
     protected $projectId;
+
     /**
      * Constructor
      * 
      * @param AgileZen $service
      * @param array $data 
      */
-    public function __construct(AgileZen $service,$data)
+    public function __construct(AgileZen $service, array $data)
     {
-        if (!($service instanceof AgileZen) || !is_array($data)) {
-             throw new Exception\InvalidArgumentException("You must pass a AgileZen object and an array");
-        }
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the task");
         }
         
-        $this->text = $data['text'];
+        $this->text       = $data['text'];
         $this->createTime = $data['createTime'];
-        $this->status = $data['status'];
-        $this->projectId = $data['projectId'];
+        $this->status     = $data['status'];
+        $this->projectId  = $data['projectId'];
+
         if (isset($data['finishTime'])) {
             $this->finishTime = $data['finishTime'];
         }
+
         if (isset($data['finishedBy']) && !empty($data['finishedBy'])) {
             $this->finishedBy = new User($service, $data['finishedBy']);
         }
+
         $this->service= $service;
         
         parent::__construct($data['id']);
@@ -112,6 +120,7 @@ class Task extends Entity
     {
         return $this->text;
     }
+
     /**
      * Get create time
      * 
@@ -121,6 +130,7 @@ class Task extends Entity
     {
         return $this->createTime;
     }
+
     /**
      * Get status
      * 
@@ -130,6 +140,7 @@ class Task extends Entity
     {
         return $this->status;
     }
+
     /**
      * Get finish time
      * 
@@ -139,6 +150,7 @@ class Task extends Entity
     {
         return $this->finishTime;
     }
+
     /**
      * Get finished by
      * 
@@ -148,6 +160,7 @@ class Task extends Entity
     {
         return $this->finishedBy;
     }
+
     /**
      * Get the project's Id
      * 

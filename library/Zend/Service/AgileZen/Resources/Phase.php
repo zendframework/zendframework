@@ -13,11 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 namespace Zend\Service\AgileZen\Resources;
 
 use Zend\Service\AgileZen\AgileZen,
@@ -25,8 +26,8 @@ use Zend\Service\AgileZen\AgileZen,
 
 /**
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,41 +39,43 @@ class Phase extends Entity
      * @var string 
      */
     protected $name;
+
     /**
      * Description
      * 
      * @var string 
      */
     protected $description;
+
     /**
      * Index
      * 
      * @var string 
      */
     protected $index;
+
     /**
      * Service
      * 
-     * @var Zend\Service\AgileZen\AgileZen 
+     * @var AgileZen 
      */
     protected $service;
+
     /**
      * Project Id
      * 
      * @var integer 
      */
     protected $projectId;
+
     /**
      * Constructor
      * 
      * @param AgileZen $service
      * @param array $data 
      */
-    public function __construct(AgileZen $service,$data)
+    public function __construct(AgileZen $service, array $data)
     {
-        if (!($service instanceof AgileZen) || !is_array($data)) {
-             throw new Exception\InvalidArgumentException("You must pass a AgileZen object and an array");
-        }
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the phase");
         }
@@ -80,14 +83,15 @@ class Phase extends Entity
              throw new Exception\InvalidArgumentException("You must pass the name of the phase");
         }
         
-        $this->name = $data['name'];
+        $this->name        = $data['name'];
         $this->description = $data['description'];
-        $this->index= $data['index'];
-        $this->service= $service;
-        $this->projectId = $data['projectId'];
+        $this->index       = $data['index'];
+        $this->service     = $service;
+        $this->projectId   = $data['projectId'];
         
         parent::__construct($data['id']);
     }
+
     /**
      * Get name
      * 
@@ -97,6 +101,7 @@ class Phase extends Entity
     {
         return $this->name;
     }
+
     /**
      * Get description
      * 
@@ -106,6 +111,7 @@ class Phase extends Entity
     {
         return $this->description;
     }
+
     /**
      * Get index
      * 
@@ -115,6 +121,7 @@ class Phase extends Entity
     {
         return $this->index;
     }
+
     /**
      * Get the project Id
      * 
@@ -124,10 +131,11 @@ class Phase extends Entity
     {
         return $this->projectId;
     }
+
     /**
      * Get stories 
      * 
-     * @return Zend\Service\AgileZen\Container 
+     * @return \Zend\Service\AgileZen\Container 
      */
     public function getStories()
     {

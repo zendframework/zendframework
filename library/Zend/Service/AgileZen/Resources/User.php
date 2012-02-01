@@ -13,11 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 namespace Zend\Service\AgileZen\Resources;
 
 use Zend\Service\AgileZen\AgileZen,
@@ -25,8 +26,8 @@ use Zend\Service\AgileZen\AgileZen,
 
 /**
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,35 +39,37 @@ class User extends Entity
      * @var string 
      */
     protected $name;
+
     /**
      * Username
      * 
      * @var string 
      */
     protected $userName;
+
     /**
      * Email
      * 
      * @var string 
      */
     protected $email;
+
     /**
      * AgileZen service
      * 
      * @var Zend\Service\AgileZen\AgileZen 
      */
     protected $service;
+
     /**
      * Constructor
      * 
-     * @param AgileZen $service
-     * @param array $data 
+     * @param  AgileZen $service
+     * @param  array $data 
+     * @return void
      */
-    public function __construct(AgileZen $service,$data)
+    public function __construct(AgileZen $service, array $data)
     {
-        if (!($service instanceof AgileZen) || !is_array($data)) {
-             throw new Exception\InvalidArgumentException("You must pass a AgileZen object and an array");
-        }
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the user");
         }
@@ -74,13 +77,14 @@ class User extends Entity
              throw new Exception\InvalidArgumentException("You must pass the name of the user");
         }
         
-        $this->name = $data['name'];
+        $this->name     = $data['name'];
         $this->userName = $data['userName'];
-        $this->email= $data['email'];
-        $this->service= $service;
+        $this->email    = $data['email'];
+        $this->service  = $service;
         
         parent::__construct($data['id']);
     }
+
     /**
      * Get the name
      * 
@@ -90,6 +94,7 @@ class User extends Entity
     {
         return $this->name;
     }
+
     /**
      * Get the username
      * 
@@ -99,6 +104,7 @@ class User extends Entity
     {
         return $this->userName;
     }
+
     /**
      * Get the email 
      * 

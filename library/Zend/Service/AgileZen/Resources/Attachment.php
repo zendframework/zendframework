@@ -13,11 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 namespace Zend\Service\AgileZen\Resources;
 
 use Zend\Service\AgileZen\AgileZen,
@@ -25,8 +26,8 @@ use Zend\Service\AgileZen\AgileZen,
 
 /**
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,60 +39,64 @@ class Attachment extends Entity
      * @var string 
      */
     protected $fileName;
+
     /**
      * Size
      * 
      * @var integer 
      */
     protected $size;
+
     /**
      * Content type
      * 
      * @var string 
      */
     protected $contentType;
+
     /**
      * Token
      * 
      * @var string 
      */
     protected $token;
+
     /**
      * Service
      * 
-     * @var Zend\Service\AgileZen\AgileZen 
+     * @var AgileZen 
      */
     protected $service;
+
     /**
      * Project Id
      * 
      * @var integer 
      */
     protected $projectId;
+
     /**
      * Constructor
      * 
      * @param AgileZen $service
      * @param array $data 
      */
-    public function __construct(AgileZen $service, $data)
+    public function __construct(AgileZen $service, array $data)
     {
-        if (!($service instanceof AgileZen) || !is_array($data)) {
-             throw new Exception\InvalidArgumentException("You must pass a AgileZen object and an array");
-        }
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the attachment");
         }
         
-        $this->fileName = $data['fileName'];
-        $this->size = $data['sizeInBytes'];
+        $this->fileName    = $data['fileName'];
+        $this->size        = $data['sizeInBytes'];
         $this->contentType = $data['contentType'];
-        $this->token = $data['token'];
-        $this->projectId = $data['projectId'];
-        $this->service= $service;
+        $this->token       = $data['token'];
+        $this->projectId   = $data['projectId'];
+        $this->service     = $service;
         
         parent::__construct($data['id']);
     }
+
     /**
      * Get file name
      * 
@@ -101,6 +106,7 @@ class Attachment extends Entity
     {
         return $this->fileName;
     }
+
     /**
      * Get size
      * 
@@ -110,6 +116,7 @@ class Attachment extends Entity
     {
         return $this->size;
     }
+
     /**
      * Get content type
      * 
@@ -119,6 +126,7 @@ class Attachment extends Entity
     {
         return $this->contentType;
     }
+
     /**
      * Get token
      * 
@@ -128,6 +136,7 @@ class Attachment extends Entity
     {
         return $this->token;
     }
+
     /**
      * Get the project's Id
      * 

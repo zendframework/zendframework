@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -14,11 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 namespace Zend\Service\AgileZen\Resources;
 
 use Zend\Service\AgileZen\AgileZen,
@@ -26,8 +26,8 @@ use Zend\Service\AgileZen\AgileZen,
 
 /**
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -39,66 +39,72 @@ class Invite extends Entity
      * @var string
      */
     protected $createTime;
+
     /**
      * Service
      * 
-     * @var Zend\Service\AgileZen\AgileZen 
+     * @var AgileZen 
      */
     protected $service;
+
     /**
      * Email
      * 
      * @var string 
      */
     protected $email;
+
     /**
      * Token
      * 
      * @var string
      */
     protected $token;
+
     /**
      * Sender
      * 
      * @var User 
      */
     protected $sender;
+
     /**
      * Role
      * 
      * @var Role 
      */
     protected $role;
+
     /**
      * Project Id
      * 
      * @var integer 
      */
     protected $projectId;
+
     /**
      * Constructor
      * 
      * @param AgileZen $service
      * @param array $data 
      */
-    public function __construct(AgileZen $service, $data)
+    public function __construct(AgileZen $service, array $data)
     {
-        if (!($service instanceof AgileZen) || !is_array($data)) {
-             throw new Exception\InvalidArgumentException("You must pass a AgileZen object and an array");
-        }
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the invite");
         }
+
         $this->createTime = $data['createTime'];
-        $this->email = $data['email'];
-        $this->token = $data['token'];
-        $this->sender = new User($service, $data['sender']);
-        $this->role = new Role($service, $data['role']); 
-        $this->projectId = $data['projectId'];
-        $this->service= $service;
+        $this->email      = $data['email'];
+        $this->token      = $data['token'];
+        $this->sender     = new User($service, $data['sender']);
+        $this->role       = new Role($service, $data['role']);
+        $this->projectId  = $data['projectId'];
+        $this->service    = $service;
         
         parent::__construct($data['id']);
     }
+
     /**
      * Get the create time
      * 
@@ -108,6 +114,7 @@ class Invite extends Entity
     {
         return $this->createTime;
     }
+
     /**
      * Get the email
      * 
@@ -117,6 +124,7 @@ class Invite extends Entity
     {
         return $this->email;
     }
+
     /**
      * Get the token
      * 
@@ -126,6 +134,7 @@ class Invite extends Entity
     {
         return $this->token;
     }
+
     /**
      * Get the sender
      * 
@@ -135,6 +144,7 @@ class Invite extends Entity
     {
         return $this->sender;
     }
+
     /**
      * Get the role
      * 
@@ -144,6 +154,7 @@ class Invite extends Entity
     {
         return $this->role;
     }
+
     /**
      * Get the project's Id
      * 

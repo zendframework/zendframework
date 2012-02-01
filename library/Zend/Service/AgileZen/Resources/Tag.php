@@ -13,11 +13,12 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 namespace Zend\Service\AgileZen\Resources;
 
 use Zend\Service\AgileZen\AgileZen,
@@ -25,8 +26,8 @@ use Zend\Service\AgileZen\AgileZen,
 
 /**
  * @category   Zend
- * @package    Zend\Service\AgileZen
- * @subpackage Resources
+ * @package    Zend_Service
+ * @subpackage AgileZen_Resources
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -38,29 +39,29 @@ class Tag extends Entity
      * @var string 
      */
     protected $name;
+
     /**
      * AgileZen service
      * 
-     * @var Zend\Service\AgileZen\AgileZen 
+     * @var AgileZen 
      */
     protected $service;
+
     /**
      * Project Id
      * 
      * @var integer 
      */
     protected $projectId;
+
     /**
      * Constructor
      * 
      * @param AgileZen $service
      * @param array $data 
      */
-    public function __construct(AgileZen $service,$data)
+    public function __construct(AgileZen $service, array $data)
     {
-        if (!($service instanceof AgileZen) || !is_array($data)) {
-             throw new Exception\InvalidArgumentException("You must pass a AgileZen object and an array");
-        }
         if (!array_key_exists('id', $data)) {
              throw new Exception\InvalidArgumentException("You must pass the id of the user");
         }
@@ -68,12 +69,13 @@ class Tag extends Entity
              throw new Exception\InvalidArgumentException("You must pass the name of the user");
         }
         
-        $this->name = $data['name'];
-        $this->service = $service;
+        $this->name      = $data['name'];
+        $this->service   = $service;
         $this->projectId = $data['projectId'];
         
         parent::__construct($data['id']);
     }
+
     /**
      * Get name
      * 
@@ -83,6 +85,7 @@ class Tag extends Entity
     {
         return $this->name;
     }
+
     /**
      * Get the project's Id
      * 

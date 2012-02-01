@@ -57,6 +57,12 @@ class Phase extends Entity
      */
     protected $service;
     /**
+     * Project Id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Constructor
      * 
      * @param AgileZen $service
@@ -78,6 +84,7 @@ class Phase extends Entity
         $this->description = $data['description'];
         $this->index= $data['index'];
         $this->service= $service;
+        $this->projectId = $data['projectId'];
         
         parent::__construct($data['id']);
     }
@@ -107,5 +114,23 @@ class Phase extends Entity
     public function getIndex()
     {
         return $this->index;
+    }
+    /**
+     * Get the project Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
+    }
+    /**
+     * Get stories 
+     * 
+     * @return Zend\Service\AgileZen\Container 
+     */
+    public function getStories()
+    {
+        return $this->service->getStoriesPhase($this->projectId, $this->id);
     }
 }

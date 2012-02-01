@@ -45,6 +45,12 @@ class Tag extends Entity
      */
     protected $service;
     /**
+     * Project Id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Constructor
      * 
      * @param AgileZen $service
@@ -63,7 +69,8 @@ class Tag extends Entity
         }
         
         $this->name = $data['name'];
-        $this->service= $service;
+        $this->service = $service;
+        $this->projectId = $data['projectId'];
         
         parent::__construct($data['id']);
     }
@@ -75,5 +82,14 @@ class Tag extends Entity
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Get the project's Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }

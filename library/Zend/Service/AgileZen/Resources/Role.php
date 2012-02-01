@@ -58,6 +58,12 @@ class Role extends Entity
      */
     protected $members;
     /**
+     * Project Id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Constructor
      * 
      * @param AgileZen $service
@@ -81,7 +87,8 @@ class Role extends Entity
         if (!empty($data['members'])) {
             $this->members = new Container($service, $data['members'], 'user');
         }    
-        $this->service= $service;
+        $this->service = $service;
+        $this->projectId = $data['projectId'];
         
         parent::__construct($data['id']);
     }
@@ -111,5 +118,14 @@ class Role extends Entity
     public function getMembers()
     {
         return $this->members;
+    }
+    /**
+     * Get the project's Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }

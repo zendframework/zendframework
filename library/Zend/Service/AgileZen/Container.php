@@ -42,6 +42,12 @@ class Container implements \Countable, \Iterator, \ArrayAccess
      */
     protected $service;
     /**
+     * Project id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Namespace prefix for Resources
      * 
      * @var string 
@@ -53,7 +59,7 @@ class Container implements \Countable, \Iterator, \ArrayAccess
      * @param  array $list
      * @return boolean
      */
-    public function __construct($service, $list, $resource)
+    public function __construct($service, $list, $resource, $projectId = null)
     {
         if (!($service instanceof AgileZen)) {
             throw new Exception\InvalidArgumentException("You must pass an AgileZen object");
@@ -69,6 +75,9 @@ class Container implements \Countable, \Iterator, \ArrayAccess
         }
         $this->service = $service;
         $this->resource= $this->namespacePrefix . '\\'. ucfirst($resource);
+        if (!empty($projectId)) {
+            $this->projectId = $projectId;
+        }
         $this->constructFromArray($list);
     }
     /**
@@ -80,6 +89,9 @@ class Container implements \Countable, \Iterator, \ArrayAccess
     private function constructFromArray(array $list)
     {
         foreach ($list as $obj) {
+            if (!empty($this->projectId)) {
+                $obj['projectId'] = $this->projectId;
+            }
             $this->addObject(new $this->resource($this->service,$obj));
         }
     }

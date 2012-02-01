@@ -70,6 +70,12 @@ class Invite extends Entity
      */
     protected $role;
     /**
+     * Project Id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Constructor
      * 
      * @param AgileZen $service
@@ -87,7 +93,8 @@ class Invite extends Entity
         $this->email = $data['email'];
         $this->token = $data['token'];
         $this->sender = new User($service, $data['sender']);
-        $this->role = new Role($service, $data['role']);  
+        $this->role = new Role($service, $data['role']); 
+        $this->projectId = $data['projectId'];
         $this->service= $service;
         
         parent::__construct($data['id']);
@@ -136,5 +143,14 @@ class Invite extends Entity
     public function getRole()
     {
         return $this->role;
+    }
+    /**
+     * Get the project's Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }

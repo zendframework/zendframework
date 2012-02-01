@@ -57,6 +57,12 @@ class Comment extends Entity
      */
     protected $service;
     /**
+     * Project Id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Constructor
      * 
      * @param AgileZen $service
@@ -74,6 +80,7 @@ class Comment extends Entity
         $this->text = $data['text'];
         $this->createTime = $data['createTime'];
         $this->author = new User($service, $data['author']);
+        $this->projectId = $data['projectId'];
         $this->service= $service;
         
         parent::__construct($data['id']);
@@ -104,5 +111,14 @@ class Comment extends Entity
     public function getAuthor()
     {
         return $this->author;
+    }
+    /**
+     * Get the project's Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }

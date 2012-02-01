@@ -219,7 +219,7 @@ class Story extends Entity
     /**
      * Get the owner
      * 
-     * @return type 
+     * @return Zend\Service\AgileZen\Resources\User 
      */
     public function getOwner()
     {
@@ -237,12 +237,12 @@ class Story extends Entity
     /**
      * Get a task
      * 
-     * @param  integer $id
+     * @param  integer $taskId
      * @return Zend\Service\AgileZen\Resources\Task 
      */
-    public function getTask($id) 
+    public function getTask($taskId) 
     {
-        return $this->service->getTask($this->projectId, $this->id, $id);
+        return $this->service->getTask($this->projectId, $this->id, $taskId);
     }
     /**
      * Add a task
@@ -274,5 +274,63 @@ class Story extends Entity
     public function removeTask($id)
     {
         return $this->service->removeTask($this->projectId, $this->id, $id);
+    }
+    /**
+     * Get the comments
+     * 
+     * @return Zend\Service\AgileZen\Container  
+     */
+    public function getComments()
+    {
+        return $this->service->getComments($this->projectId, $this->id);
+    }
+    /**
+     * Get a comment
+     * 
+     * @param  integer $commentId
+     * @return Zend\Service\AgileZen\Resources\Comment
+     */
+    public function getComment($commentId)
+    {
+        return $this->service->getComment($this->projectId, $this->id, $commentId);
+    }
+    /**
+     * Add a comment
+     * 
+     * @param  array $data
+     * @return Zend\Service\AgileZen\Resources\Comment 
+     */
+    public function addComment($data)
+    {
+        return $this->service->addComment($this->projectId, $this->id, $data);
+    }
+    /**
+     * Update a comment
+     * 
+     * @param  array $data
+     * @return Zend\Service\AgileZen\Resources\Comment 
+     */
+    public function updateComment($data)
+    {
+        return $this->service->updateComment($this->projectId, $this->id, $data);
+    }
+    /**
+     * Remove a comment
+     * 
+     * @param  integer $commentId
+     * @return boolean 
+     */
+    public function removeComment($commentId)
+    {
+        return $this->service->removeComment($this->projectId, $this->id, $commentId);
+    }
+    /**
+     * Get the project's Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }

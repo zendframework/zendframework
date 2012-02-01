@@ -197,7 +197,7 @@ class AgileZen
         switch ($status) {
             case '200' : 
                 $list = json_decode($result->getBody(),true);
-                if (is_array($list)) {
+                if (is_array($list) && !empty($list['items'])) {
                     return new Container($this, $list['items'], 'project');
                 } 
                 return false;
@@ -282,7 +282,7 @@ class AgileZen
         switch ($status) {
             case '200' : 
                 $members = json_decode($result->getBody(),true);
-                if (is_array($members)) {
+                if (is_array($members) && !empty($members['items'])) {
                     return new Container($this, $members['items'], 'user');
                 } 
                 return false;
@@ -353,18 +353,18 @@ class AgileZen
      * @param  integer $id
      * @return Container|boolean
      */
-    public function getPhases($id)
+    public function getPhases($projectId)
     {
-        if (empty($id)) {
+        if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result= $this->httpCall("/projects/$id/phases",'GET');
+        $result= $this->httpCall("/projects/$projectId/phases",'GET');
         $status= $result->getStatusCode();
         switch ($status) {
             case '200' : 
                 $phases = json_decode($result->getBody(),true);
-                if (is_array($phases)) {
-                    return new Container($this, $phases['items'], 'phase');
+                if (is_array($phases) && !empty($phases['items'])) {
+                    return new Container($this, $phases['items'], 'phase', $projectId);
                 } 
                 return false;
             default:
@@ -380,18 +380,49 @@ class AgileZen
      * @param  integer $id
      * @return Container|boolean
      */
-    public function getStories($id)
+    public function getStories($projectId)
     {
-        if (empty($id)) {
+        if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result= $this->httpCall("/projects/$id/stories",'GET');
+        $result= $this->httpCall("/projects/$projectId/stories",'GET');
         $status= $result->getStatusCode();
         switch ($status) {
             case '200' : 
                 $stories = json_decode($result->getBody(),true);
                 if (is_array($stories) && !empty($stories['items'])) {
-                    return new Container($this, $stories['items'], 'story');
+                    return new Container($this, $stories['items'], 'story', $projectId);
+                } 
+                return false;
+            default:
+                $this->errorMsg = $this->getErrorFromResponse($result);
+                break;    
+        }
+        $this->errorCode= $status;
+        return false;
+    }
+    /**
+     * Get stories in a phase
+     * 
+     * @param  integer $projectId
+     * @param  integer $phaseId
+     * @return Container 
+     */
+    public function getStoriesPhase ($projectId, $phaseId)
+    {
+        if (empty($projectId)) {
+            throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
+        }
+        if (empty($phaseId)) {
+            throw new Exception\InvalidArgumentException(self::ERR_ID_PHASE);
+        }
+        $result= $this->httpCall("/projects/$projectId/phases/$phaseId/stories",'GET');
+        $status= $result->getStatusCode();
+        switch ($status) {
+            case '200' : 
+                $stories = json_decode($result->getBody(),true);
+                if (is_array($stories) && !empty($stories['items'])) {
+                    return new Container($this, $stories['items'], 'story', $projectId);
                 } 
                 return false;
             default:
@@ -448,6 +479,7 @@ class AgileZen
             case '200' : 
                 $story = json_decode($result->getBody(),true);
                 if (!empty($story) && is_array($story)) {
+                    $story['projectId'] = $projectId;
                     return new Resources\Story($this, $story);
 
                 }
@@ -479,6 +511,7 @@ class AgileZen
             case '200' : 
                 $phase = json_decode($result->getBody(),true);
                 if (!empty($phase) && is_array($phase)) {
+                    $phase['projectId'] = $projectId;
                     return new Resources\Phase($this, $phase);
                 }
                 return false;
@@ -495,18 +528,18 @@ class AgileZen
      * @param  integer $id
      * @return Container 
      */
-    public function getRoles($id)
+    public function getRoles($projectId)
     {
-        if (empty($id)) {
+        if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$id/roles",'GET');
+        $result = $this->httpCall("/projects/$projectId/roles",'GET');
         $status = $result->getStatusCode();
         switch ($status) {
             case '200' : 
                 $roles = json_decode($result->getBody(),true);
-                if (is_array($roles)) {
-                    return new Container($this, $roles['items'], 'role');
+                if (is_array($roles) && !empty($roles['items'])) {
+                    return new Container($this, $roles['items'], 'role', $projectId);
                 } 
                 return false;
             default:
@@ -536,6 +569,7 @@ class AgileZen
             case '200' : 
                 $role = json_decode($result->getBody(),true);
                 if (!empty($role) && is_array($role)) {
+                    $role['projectId'] = $projectId;
                     return new Resources\Role($this, $role);
                 }
                 return false;
@@ -552,18 +586,18 @@ class AgileZen
      * @param  integer $id
      * @return Container 
      */
-    public function getInvites($id)
+    public function getInvites($projectId)
     {
-        if (empty($id)) {
+        if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$id/invites",'GET');
+        $result = $this->httpCall("/projects/$projectId/invites",'GET');
         $status = $result->getStatusCode();
         switch ($status) {
             case '200' : 
                 $invites = json_decode($result->getBody(),true);
                 if (is_array($invites) && !empty($invites['items'])) {
-                    return new Container($this, $invites['items'], 'invite');
+                    return new Container($this, $invites['items'], 'invite', $projectId);
                 } 
                 return false;
             default:
@@ -593,6 +627,7 @@ class AgileZen
             case '200' : 
                 $invite = json_decode($result->getBody(),true);
                 if (is_array($invite) && !empty($invite)) {
+                    $invite['projectId'] = $projectId;
                     return new Resources\Invite($this, $invite);
                 }
                 return false;
@@ -624,7 +659,7 @@ class AgileZen
             case '200' : 
                 $tasks = json_decode($result->getBody(),true);
                 if (is_array($tasks['items']) && !empty($tasks['items'])) {
-                    return new Container($this, $tasks['items'], 'task');
+                    return new Container($this, $tasks['items'], 'task', $projectId);
                 }
                 return false;
             default:
@@ -659,6 +694,7 @@ class AgileZen
             case '200' : 
                 $task = json_decode($result->getBody(),true);
                 if (is_array($task) && !empty($task)) {
+                    $task['projectId'] = $projectId;
                     return new Resources\Task($this, $task);
                 }
                 return false;
@@ -697,6 +733,7 @@ class AgileZen
             case '200' : 
                 $task = json_decode($result->getBody(),true);
                 if (is_array($task) && !empty($task)) {
+                    $task['projectId'] = $projectId;
                     return new Resources\Task($this, $task);
                 }
                 return false;
@@ -739,6 +776,7 @@ class AgileZen
             case '200' : 
                 $task = json_decode($result->getBody(),true);
                 if (is_array($task) && !empty($task)) {
+                    $task['projectId'] = $projectId;
                     return new Resources\Task($this, $task);
                 }
                 return false;
@@ -804,6 +842,7 @@ class AgileZen
             case '200' : 
                 $story = json_decode($result->getBody(),true);
                 if (is_array($story) && !empty($story)) {
+                    $story['projectId'] = $projectId;
                     return new Resources\Story($this, $story);
                 }
                 return false;
@@ -842,6 +881,7 @@ class AgileZen
             case '200' : 
                 $story = json_decode($result->getBody(),true);
                 if (is_array($story) && !empty($story)) {
+                    $story['projectId'] = $projectId;
                     return new Resources\Story($this, $story);
                 }
                 return false;
@@ -903,6 +943,7 @@ class AgileZen
             case '200' : 
                 $role = json_decode($result->getBody(),true);
                 if (is_array($role) && !empty($role)) {
+                    $role['projectId'] = $projectId;
                     return new Resources\Role($this, $role);
                 }
                 return false;
@@ -941,6 +982,7 @@ class AgileZen
             case '200' : 
                 $role = json_decode($result->getBody(),true);
                 if (is_array($role) && !empty($role)) {
+                    $role['projectId'] = $projectId;
                     return new Resources\Role($this, $role);
                 }
                 return false;
@@ -1005,6 +1047,7 @@ class AgileZen
             case '200' : 
                 $phase = json_decode($result->getBody(),true);
                 if (is_array($phase) && !empty($phase)) {
+                    $phase['projectId'] = $projectId;
                     return new Resources\Phase($this, $phase);
                 }
                 return false;
@@ -1043,6 +1086,7 @@ class AgileZen
             case '200' : 
                 $phase = json_decode($result->getBody(),true);
                 if (is_array($phase) && !empty($phase)) {
+                    $phase['projectId'] = $projectId;
                     return new Resources\Phase($this, $phase);
                 }
                 return false;
@@ -1107,6 +1151,7 @@ class AgileZen
             case '200' : 
                 $invite = json_decode($result->getBody(),true);
                 if (is_array($invite) && !empty($invite)) {
+                    $invite['projectId'] = $projectId;
                     return new Resources\Invite($this, $invite);
                 }
                 return false;
@@ -1165,6 +1210,7 @@ class AgileZen
             case '200' : 
                 $tag = json_decode($result->getBody(),true);
                 if (is_array($tag) && !empty($tag)) {
+                    $tag['projectId'] = $projectId;
                     return new Resources\Tag($this, $tag);
                 }
                 return false;
@@ -1191,8 +1237,8 @@ class AgileZen
         switch ($status) {
             case '200' : 
                 $tags = json_decode($result->getBody(),true);
-                if (is_array($tags) && !empty($tags)) {
-                    return new Container($this, $tags['items'], 'tag');
+                if (is_array($tags) && !empty($tags['items'])) {
+                    return new Container($this, $tags['items'], 'tag', $projectId);
                 } 
                 return false;
             default:
@@ -1226,6 +1272,7 @@ class AgileZen
             case '200' : 
                 $tag = json_decode($result->getBody(),true);
                 if (is_array($tag) && !empty($tag)) {
+                    $tag['projectId'] = $projectId;
                     return new Resources\Tag($this, $tag);
                 }
                 return false;
@@ -1260,6 +1307,7 @@ class AgileZen
             case '200' : 
                 $task = json_decode($result->getBody(),true);
                 if (is_array($task) && !empty($task)) {
+                    $task['projectId'] = $projectId;
                     return new Resources\Task($this, $task);
                 }
                 return false;
@@ -1322,6 +1370,7 @@ class AgileZen
             case '200' : 
                 $attach = json_decode($result->getBody(),true);
                 if (is_array($attach) && !empty($attach)) {
+                    $attach['projectId'] = $projectId;
                     return new Resources\Attachment($this, $attach);
                 }
                 return false;
@@ -1352,8 +1401,8 @@ class AgileZen
         switch ($status) {
             case '200' : 
                 $attachments = json_decode($result->getBody(),true);
-                if (is_array($attachments) && !empty($attachments)) {
-                    return new Container($this, $attachments['items'], 'attachment');
+                if (is_array($attachments) && !empty($attachments['items'])) {
+                    return new Container($this, $attachments['items'], 'attachment', $projectId);
                 } 
                 return false;
             default:
@@ -1390,8 +1439,8 @@ class AgileZen
         switch ($status) {
             case '200' : 
                 $attachments = json_decode($result->getBody(),true);
-                if (is_array($attachments) && !empty($attachments)) {
-                    return new Container($this, $attachments['items'], 'attachment');
+                if (is_array($attachments) && !empty($attachments['items'])) {
+                    return new Container($this, $attachments['items'], 'attachment', $projectId);
                 } 
                 return false;
             default:
@@ -1433,6 +1482,7 @@ class AgileZen
             case '200' : 
                 $attachment = json_decode($result->getBody(),true);
                 if (is_array($attachment) && !empty($attachment)) {
+                    $attachment['projectId'] = $projectId;
                     return new Resources\Attachment($this, $attachment);
                 }
                 return false;
@@ -1499,6 +1549,7 @@ class AgileZen
             case '200' : 
                 $comment = json_decode($result->getBody(),true);
                 if (is_array($comment) && !empty($comment)) {
+                    $comment['projectId'] = $projectId;
                     return new Resources\Comment($this, $comment);
                 }
                 return false;
@@ -1529,8 +1580,8 @@ class AgileZen
         switch ($status) {
             case '200' : 
                 $comments = json_decode($result->getBody(),true);
-                if (is_array($comments) && !empty($comments)) {
-                    return new Container($this, $comments['items'], 'comment');
+                if (is_array($comments) && !empty($comments['items'])) {
+                    return new Container($this, $comments['items'], 'comment', $projectId);
                 } 
                 return false;
             default:
@@ -1568,6 +1619,7 @@ class AgileZen
             case '200' : 
                 $comment = json_decode($result->getBody(),true);
                 if (is_array($comment) && !empty($comment)) {
+                    $comment['projectId'] = $projectId;
                     return new Resources\Comment($this, $comment);
                 } 
                 return false;
@@ -1610,6 +1662,7 @@ class AgileZen
             case '200' : 
                 $comment = json_decode($result->getBody(),true);
                 if (is_array($comment) && !empty($comment)) {
+                    $comment['projectId'] = $projectId;
                     return new Resources\Comment($this, $comment);
                 }
                 return false;

@@ -69,6 +69,12 @@ class Task extends Entity
      */
     protected $service;
     /**
+     * Project Id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Constructor
      * 
      * @param AgileZen $service
@@ -86,6 +92,7 @@ class Task extends Entity
         $this->text = $data['text'];
         $this->createTime = $data['createTime'];
         $this->status = $data['status'];
+        $this->projectId = $data['projectId'];
         if (isset($data['finishTime'])) {
             $this->finishTime = $data['finishTime'];
         }
@@ -140,5 +147,14 @@ class Task extends Entity
     public function getFinishedBy()
     {
         return $this->finishedBy;
+    }
+    /**
+     * Get the project's Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }

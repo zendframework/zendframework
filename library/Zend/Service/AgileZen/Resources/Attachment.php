@@ -63,12 +63,18 @@ class Attachment extends Entity
      */
     protected $service;
     /**
+     * Project Id
+     * 
+     * @var integer 
+     */
+    protected $projectId;
+    /**
      * Constructor
      * 
      * @param AgileZen $service
      * @param array $data 
      */
-    public function __construct(AgileZen $service,$data)
+    public function __construct(AgileZen $service, $data)
     {
         if (!($service instanceof AgileZen) || !is_array($data)) {
              throw new Exception\InvalidArgumentException("You must pass a AgileZen object and an array");
@@ -81,6 +87,7 @@ class Attachment extends Entity
         $this->size = $data['sizeInBytes'];
         $this->contentType = $data['contentType'];
         $this->token = $data['token'];
+        $this->projectId = $data['projectId'];
         $this->service= $service;
         
         parent::__construct($data['id']);
@@ -120,5 +127,14 @@ class Attachment extends Entity
     public function getToken()
     {
         return $this->token;
+    }
+    /**
+     * Get the project's Id
+     * 
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }

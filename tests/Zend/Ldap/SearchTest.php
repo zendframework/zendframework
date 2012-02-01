@@ -133,7 +133,7 @@ class SearchTest extends OnlineTestCase
     {
         $entries=$this->_getLDAP()->searchEntries('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
-        $this->assertType("array", $entries);
+        $this->assertInternalType("array", $entries);
         $this->assertEquals(9, count($entries));
     }
 
@@ -232,7 +232,7 @@ class SearchTest extends OnlineTestCase
         $filter=Filter::equals('objectClass', 'organizationalUnit');
 
         $entries=$this->_getLDAP()->searchEntries($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
-        $this->assertType("array", $entries);
+        $this->assertInternalType("array", $entries);
         $this->assertEquals(9, count($entries));
     }
 
@@ -442,7 +442,7 @@ class SearchTest extends OnlineTestCase
     {
         $items = $this->_getLDAP()->search('(objectClass=organizationalUnit)',
             TESTS_ZEND_LDAP_WRITEABLE_SUBTREE, Ldap\Ldap::SEARCH_SCOPE_SUB);
-        $this->assertType('\Zend\Ldap\Collection\DefaultIterator', $items->getInnerIterator());
+        $this->assertInstanceOf('\Zend\Ldap\Collection\DefaultIterator', $items->getInnerIterator());
     }
 
     /**

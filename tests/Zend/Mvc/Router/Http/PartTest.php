@@ -74,7 +74,13 @@ class PartTest extends TestCase
                             'options' => array(
                                 'route' => '/bar'
                             )
-                        )
+                        ),
+                        'optional' => array(
+                            'type'   => 'Zend\Mvc\Router\Http\Segment',
+                            'options' => array(
+                                'route' => '/bat[/:bar]'
+                            )
+                        ),
                     )
                 )
             )
@@ -152,6 +158,13 @@ class PartTest extends TestCase
                 '/foo/bat/bar/bar',
                 null,
                 'bat/literal',
+                array('foo' => 'bar')
+            ),
+            'optional-parameters-not-required-in-last-part' => array(
+                self::getRoute(),
+                '/foo/bat/bar/bat',
+                null,
+                'bat/optional',
                 array('foo' => 'bar')
             ),
         );

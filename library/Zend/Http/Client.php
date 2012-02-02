@@ -799,7 +799,7 @@ class Client implements Dispatchable
             }
             // If we have no ports, set the defaults
             if (!$uri->getPort()) {
-                $uri->setPort(($uri->getScheme() == 'https' ? 443 : 80));
+                $uri->setPort($uri->getScheme() == 'https' ? 443 : 80);
             }
 
             // method
@@ -811,7 +811,7 @@ class Client implements Dispatchable
             // headers
             $headers = $this->prepareHeaders($body,$uri);
 
-            $secure = ($uri->getScheme() == 'https') ? true : false;
+            $secure = $uri->getScheme() == 'https';
 
             // cookies
             $cookie = $this->prepareCookies($uri->getHost(), $uri->getPath(), $secure);
@@ -1117,6 +1117,7 @@ class Client implements Dispatchable
         }
 
         $body = '';
+        $totalFiles = 0;
         
         if (!$this->getRequest()->headers()->has('Content-Type')) {
             $totalFiles = count($this->getRequest()->file()->toArray());

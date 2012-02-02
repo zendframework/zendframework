@@ -754,7 +754,7 @@ abstract class AbstractHelper
 
         if ($resource || $privilege) {
             // determine using helper role and page resource/privilege
-            return $acl->isAllowed($role, $resource, $privilege);
+            return $acl->hasResource($resource) && $acl->isAllowed($role, $resource, $privilege);
         }
 
         return true;

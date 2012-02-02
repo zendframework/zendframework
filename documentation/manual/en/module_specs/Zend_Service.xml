@@ -76,12 +76,6 @@
 
         <listitem>
             <para>
-                <link linkend="zend.service.simpy">Simpy</link>
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
                 <link linkend="zend.service.slideshare">SlideShare</link>
             </para>
         </listitem>

@@ -158,6 +158,45 @@ class ObjectCacheTest extends CommonPatternTest
         );
     }
 
+    public function testGenerateKeyWithClassObjectKey()
+    {
+        $args = array('arg1', 2, 3.33, null);
+        $key = $this->_pattern->generateKey('emptyMethod', $args, array('callback_key' => 'test-object-cache::emptymethod'));
+
+        $class = __NAMESPACE__ . '\TestObjectCache';
+        $options = new Cache\Pattern\PatternOptions(array(
+            'object' => new $class(),
+            'storage' => $this->_storage,
+            'objectKey'  => 'test-object-cache',
+        ));
+        $this->_pattern->setOptions($options);
+
+        $keyWithClassObjectKey = $this->_pattern->generateKey('emptyMethod', $args);
+        $this->assertEquals($key, $keyWithClassObjectKey);
+    }
+
+    public function testCallWithClassObjectKey()
+    {
+        $class = __NAMESPACE__ . '\TestObjectCache';
+        $options = new Cache\Pattern\PatternOptions(array(
+            'object' => new $class(),
+            'storage' => $this->_storage,
+            'objectKey'  => 'test-object-cache',
+        ));
+        $this->_pattern->setOptions($options);
+
+        $args = array('arg1', 2, 3.33, null);
+
+        $usedCallbackKey      = null;
+        $this->_options->getStorage()->events()->attach('setItem.pre', function ($event) use (&$usedCallbackKey) {
+            $params = $event->getParams();
+            $usedCallbackKey = $params['options']['callback_key'];
+        });
+
+        $this->_pattern->call('emptyMethod', $args);
+        $this->assertEquals('test-object-cache::emptymethod', $usedCallbackKey);
+    }
+
     public function testCallUnknownMethodException()
     {
         $this->setExpectedException('Zend\Cache\Exception\InvalidArgumentException');

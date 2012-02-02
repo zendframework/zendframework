@@ -82,6 +82,8 @@ class ViewModel implements Model
      */
     public function setOptions($options)
     {
+        // Assumption is that lowest common denominator for renderer configuration
+        // is an array
         if ($options instanceof Traversable) {
             $options = IteratorToArray::convert($options);
         }
@@ -131,6 +133,7 @@ class ViewModel implements Model
      */
     public function setVariables($variables)
     {
+        // Assumption is that renderers can handle arrays or ArrayAccess objects
         if ($variables instanceof ArrayAccess && $variables instanceof Traversable) {
             $this->variables = $variables;
             return $this;

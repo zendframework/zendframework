@@ -158,7 +158,7 @@ class SimpleRouteStack implements RouteStack
     /**
      * addRoute(): defined by RouteStack interface.
      *
-     * @see    Route::addRoute()
+     * @see    RouteStack::addRoute()
      * @param  string  $name
      * @param  mixed   $route
      * @param  integer $priority
@@ -182,7 +182,7 @@ class SimpleRouteStack implements RouteStack
     /**
      * removeRoute(): defined by RouteStack interface.
      *
-     * @see    Route::removeRoute()
+     * @see    RouteStack::removeRoute()
      * @param  string  $name
      * @return RouteStack
      */
@@ -190,6 +190,19 @@ class SimpleRouteStack implements RouteStack
     {
         $this->routes->remove($name);
         return $this;
+    }
+
+
+    /**
+     * setRoutes(): defined by RouteStack interface.
+     *
+     * @param  array|Traversable $routes
+     * @return RouteStack
+     */
+    public function setRoutes($routes)
+    {
+        $this->routes->clear();
+        $this->addRoutes($routes);
     }
 
     /**

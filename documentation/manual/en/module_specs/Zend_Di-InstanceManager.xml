@@ -134,7 +134,7 @@ namespace MyMovieApp
         // methods required for this type
     }
 
-    class GenericMovieFinder
+    class GenericMovieFinder implements MovieFinderInterface
     {
         protected $dbAdapter = null;
         public function __construct(\MyLibrary\DbAdapter $dbAdapter)

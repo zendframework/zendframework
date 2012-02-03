@@ -32,7 +32,7 @@ use Zend\Authentication\Adapter as AuthenticationAdapter,
  * @uses       Zend\Authentication\Adapter
  * @uses       Zend\Ldap\Ldap
  * @uses       Zend\Ldap\Exception
- * @uses       Zend\Ldap\Filter\Filter
+ * @uses       Zend\Ldap\Filter
  * @category   Zend
  * @package    Zend_Authentication
  * @subpackage Adapter
@@ -443,9 +443,9 @@ class Ldap implements AuthenticationAdapter
             $user = $dn;
         }
 
-        $groupName   = \Zend\Ldap\Filter\Filter::equals($adapterOptions['groupAttr'], $adapterOptions['group']);
-        $membership  = \Zend\Ldap\Filter\Filter::equals($adapterOptions['memberAttr'], $user);
-        $group       = \Zend\Ldap\Filter\Filter::andFilter($groupName, $membership);
+        $groupName   = \Zend\Ldap\Filter::equals($adapterOptions['groupAttr'], $adapterOptions['group']);
+        $membership  = \Zend\Ldap\Filter::equals($adapterOptions['memberAttr'], $user);
+        $group       = \Zend\Ldap\Filter::andFilter($groupName, $membership);
         $groupFilter = $adapterOptions['groupFilter'];
         if (!empty($groupFilter)) {
             $group = $group->addAnd($groupFilter);

@@ -21,7 +21,9 @@
 
 namespace Zend\View\Resolver;
 
-use Traversable,
+use ArrayIterator,
+    IteratorAggregate,
+    Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\View\Exception,
     Zend\View\Renderer,
@@ -34,7 +36,7 @@ use Traversable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class TemplateMapResolver implements Resolver
+class TemplateMapResolver implements IteratorAggregate, Resolver
 {
     /**
      * @var array
@@ -52,6 +54,16 @@ class TemplateMapResolver implements Resolver
     public function __construct($map = array())
     {
         $this->setMap($map);
+    }
+
+    /**
+     * IteratorAggregate: return internal iterator
+     * 
+     * @return Traversable
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->map);
     }
 
     /**

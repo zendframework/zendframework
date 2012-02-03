@@ -203,6 +203,7 @@ class SimpleRouteStack implements RouteStack
     {
         $this->routes->clear();
         $this->addRoutes($routes);
+        return $this;
     }
 
     /**

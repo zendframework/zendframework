@@ -54,6 +54,11 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->request  = new Request();
         $this->response = new Response();
         $this->event    = new MvcEvent();
+        $this->resolver = new TemplateMapResolver(array(
+            'layout' => __DIR__ . '/_files/layout.phtml',
+        ));
+        $this->renderer = new PhpRenderer();
+        $this->renderer->setResolver($this->resolver);
 
         $this->event->setRequest($this->request)
                     ->setResponse($this->response);
@@ -205,12 +210,118 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->assertNull($result);
     }
 
+    public function testRendersContentInLayout()
+    {
+        $this->resolver->add('content', __DIR__ . '/_files/content.phtml');
+        $model = new Model\ViewModel();
+        $model->setOption('template', 'content')
+              ->setOption('enable_layout', true);
+        $this->event->setResult($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->render($this->event);
+        $this->assertSame($this->response, $result);
+        $this->assertContains('<layout>content</layout>', $result->getContent());
+    }
+
+    public function testRendersContentByItselfWhenLayoutDisabled()
+    {
+        $this->resolver->add('content', __DIR__ . '/_files/content.phtml');
+        $model = new Model\ViewModel();
+        $model->setOption('template', 'content')
+              ->setOption('enable_layout', false);
+        $this->event->setResult($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->render($this->event);
+        $this->assertSame($this->response, $result);
+        $this->assertContains('content', $result->getContent());
+        $this->assertNotContains('<layout>', $result->getContent());
+    }
+
+    public function testRendersJson()
+    {
+        $model = new Model\JsonModel();
+        $model->setVariable('foo', 'bar');
+        $this->event->setResult($model);
+
+        $result = $this->strategy->render($this->event);
+        $this->assertSame($this->response, $result);
+        $this->assertContains(json_encode(array('foo' => 'bar')), $result->getContent());
+    }
+
+    protected function getFeedData($type)
+    {
+        return array(
+            'copyright' => date('Y'),
+            'date_created' => time(),
+            'date_modified' => time(),
+            'last_build_date' => time(),
+            'description' => __CLASS__,
+            'id' => 'http://framework.zend.com/',
+            'language' => 'en_US',
+            'feed_link' => array(
+                'link' => 'http://framework.zend.com/feed.xml',
+                'type' => $type,
+            ),
+            'link' => 'http://framework.zend.com/feed.xml',
+            'title' => 'Testing',
+            'encoding' => 'UTF-8',
+            'base_url' => 'http://framework.zend.com/',
+            'entries' => array(
+                array(
+                    'content' => 'test content',
+                    'date_created' => time(),
+                    'date_modified' => time(),
+                    'description' => __CLASS__,
+                    'id' => 'http://framework.zend.com/1',
+                    'link' => 'http://framework.zend.com/1',
+                    'title' => 'Test 1',
+                ),
+                array(
+                    'content' => 'test content',
+                    'date_created' => time(),
+                    'date_modified' => time(),
+                    'description' => __CLASS__,
+                    'id' => 'http://framework.zend.com/2',
+                    'link' => 'http://framework.zend.com/2',
+                    'title' => 'Test 2',
+                ),
+            ),
+        );
+    }
+
+    public function testRenderRssFeed()
+    {
+        $model = new Model\FeedModel();
+        $model->setVariables($this->getFeedData('rss'));
+        $model->setOption('feed_type', 'rss');
+        $this->event->setResult($model);
+
+        $result = $this->strategy->render($this->event);
+        $this->assertSame($this->response, $result);
+
+        $feed = $model->getFeed();
+
+        $this->assertContains($feed->export('rss'), $result->getContent());
+    }
+
+    public function testRenderAtomFeed()
+    {
+        $model = new Model\FeedModel();
+        $model->setVariables($this->getFeedData('atom'));
+        $model->setOption('feed_type', 'atom');
+        $this->event->setResult($model);
+
+        $result = $this->strategy->render($this->event);
+        $this->assertSame($this->response, $result);
+
+        $feed = $model->getFeed();
+
+        $this->assertContains($feed->export('atom'), $result->getContent());
+    }
+
     /**
-     * @todo render PHTML strategy with layout
-     * @todo render PHTML strategy with no layout
-     * @todo render JSON strategy
-     * @todo render Feed strategy as RSS
-     * @todo render Feed strategy as Atom
      * @todo render with alternate strategy
      *
      * @todo render error for controller not found

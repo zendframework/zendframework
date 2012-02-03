@@ -56,7 +56,22 @@ abstract class FeedFactory
             $key    = static::convertKey($key);
             $method = 'set' . $key;
             if (method_exists($feed, $method)) {
-                $feed->$method($value);
+                switch ($method) {
+                    case 'setfeedlink':
+                        if (!is_array($value)) {
+                            // Need an array
+                            break;
+                        }
+                        if (!array_key_exists('link', $value) || !array_key_exists('type', $value)) {
+                            // Need both keys to set this correctly
+                            break;
+                        }
+                        $feed->setFeedLink($value['link'], $value['type']);
+                        break;
+                    default:
+                        $feed->$method($value);
+                        break;
+                }
                 continue;
             }
 

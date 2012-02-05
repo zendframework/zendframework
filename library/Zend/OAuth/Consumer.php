@@ -174,7 +174,7 @@ class Consumer extends OAuth
         }
 
         // OAuth 1.0a Verifier
-        if (!is_null($authorizedToken->getParam('oauth_verifier'))) {
+        if ($authorizedToken->getParam('oauth_verifier') !== null) {
             $params = array_merge($request->getParameters(), array(
                 'oauth_verifier' => $authorizedToken->getParam('oauth_verifier')
             ));

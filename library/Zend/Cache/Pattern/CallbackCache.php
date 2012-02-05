@@ -36,14 +36,15 @@ class CallbackCache extends AbstractPattern
 {
     /**
      * Set options
-     * 
-     * @param  PatternOptions $options 
+     *
+     * @param  PatternOptions $options
      * @return CallbackCache
      * @throws Exception\InvalidArgumentException if missing storage option
      */
     public function setOptions(PatternOptions $options)
     {
         parent::setOptions($options);
+
         if (!$options->getStorage()) {
             throw new Exception\InvalidArgumentException("Missing option 'storage'");
         }

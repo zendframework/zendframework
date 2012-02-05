@@ -81,17 +81,10 @@ class WinCache extends AbstractAdapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options)
-            && !$options instanceof Traversable
-            && !$options instanceof WinCacheOptions
-        ) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array, a Traversable object; '
-                . 'received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
+        if (!$options instanceof WinCacheOptions) {
+            $options = new WinCacheOptions($options);
         }
+
         $this->options = $options;
         return $this;
     }

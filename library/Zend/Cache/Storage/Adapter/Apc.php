@@ -118,18 +118,6 @@ class Apc extends AbstractAdapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options)
-            && !$options instanceof Traversable
-            && !$options instanceof ApcOptions
-        ) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array, a Traversable object, or an ApcOptions instance; '
-                . 'received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
         if (!$options instanceof ApcOptions) {
             $options = new ApcOptions($options);
         }

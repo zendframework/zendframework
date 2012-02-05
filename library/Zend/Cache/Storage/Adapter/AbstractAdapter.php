@@ -726,7 +726,7 @@ abstract class AbstractAdapter implements Adapter
 
         $ret = true;
         foreach ($keyValuePairs as $key => $value) {
-            $ret = $this->decrementMulti($key, $value, $options) && $ret;
+            $ret = $this->decrementItem($key, $value, $options) && $ret;
         }
         return $ret;
     }

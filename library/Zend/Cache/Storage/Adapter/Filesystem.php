@@ -1023,7 +1023,7 @@ class Filesystem extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            if ( ($dirLevel = $baseOptions->getDirLevel()) ) {
+            if ($baseOptions->getDirLevel()) {
                 // removes only empty directories
                 $this->rmDir(
                     $baseOptions->getCacheDir(),
@@ -1323,7 +1323,8 @@ class Filesystem extends AbstractAdapter
             $keyInfo['atime'] = fileatime($keyInfo['filespec'] . '.dat');
         }
 
-        if ( ($info = $this->readInfoFile($keyInfo['filespec'] . '.ifo')) ) {
+        $info = $this->readInfoFile($keyInfo['filespec'] . '.ifo');
+        if ($info) {
             return $keyInfo + $info;
         }
 

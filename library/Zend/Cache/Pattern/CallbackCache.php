@@ -73,7 +73,8 @@ class CallbackCache extends AbstractPattern
             return $rs[0];
         }
 
-        if ( ($cacheOutput = $classOptions->getCacheOutput()) ) {
+        $cacheOutput = $classOptions->getCacheOutput();
+        if ($cacheOutput) {
             ob_start();
             ob_implicit_flush(false);
         }

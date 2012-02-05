@@ -199,7 +199,7 @@ class Callback extends PubSubHubbub\AbstractCallback
      */
     public function hasFeedUpdate()
     {
-        if (is_null($this->_feedUpdate)) {
+        if ($this->_feedUpdate === null) {
             return false;
         }
         return true;

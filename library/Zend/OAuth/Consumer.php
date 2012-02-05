@@ -119,7 +119,7 @@ class Consumer extends OAuth
     ) {
         if ($redirect === null) {
             $redirect = new Http\UserAuthorization($this, $customServiceParameters);
-        } elseif(!is_null($customServiceParameters)) {
+        } elseif($customServiceParameters !== null) {
             $redirect->setParameters($customServiceParameters);
         }
         if ($token !== null) {

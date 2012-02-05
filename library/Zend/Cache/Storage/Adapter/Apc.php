@@ -834,7 +834,6 @@ class Apc extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
-            'value'   => & $value,
             'options' => & $options,
         ));
 
@@ -1076,7 +1075,7 @@ class Apc extends AbstractAdapter
         }
 
         $args = new ArrayObject(array(
-            'key'     => & $key,
+            'keys'    => & $keys,
             'options' => & $options,
         ));
 

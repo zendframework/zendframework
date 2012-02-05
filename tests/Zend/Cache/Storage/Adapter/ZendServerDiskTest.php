@@ -46,7 +46,8 @@ class ZendServerDiskTest extends CommonAdapterTest
             }
         }
 
-        $this->_storage = new Cache\Storage\Adapter\ZendServerDisk();
+        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
+        $this->_storage = new Cache\Storage\Adapter\ZendServerDisk($this->_options);
         parent::setUp();
     }
 

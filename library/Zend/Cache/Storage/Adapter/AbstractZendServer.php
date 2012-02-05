@@ -287,7 +287,14 @@ abstract class AbstractZendServer extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . self::NAMESPACE_SEPARATOR . $key;
-            $result      = ($this->zdcFetch($internalKey) !== false) ? array() : false;
+            if ($this->zdcFetch($internalKey) === false) {
+                if (!$options['ignore_missing_items']) {
+                    throw new Exception\ItemNotFoundException("Key '{$internalKey}' not found");
+                }
+                $result = false;
+            } else {
+                $result = array();
+            }
 
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {

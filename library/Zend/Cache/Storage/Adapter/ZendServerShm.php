@@ -96,12 +96,12 @@ class ZendServerShm extends AbstractZendServer
      * @return void
      * @throws Exception\RuntimeException
      */
-    protected function zdcStore($key, $value, $ttl)
+    protected function zdcStore($internalKey, $value, $ttl)
     {
-        if (!zend_shm_cache_store($key, $value, $ttl)) {
+        if (!zend_shm_cache_store($internalKey, $value, $ttl)) {
             $valueType = gettype($value);
             throw new Exception\RuntimeException(
-                "zend_disk_cache_store($internalKey, <{$valueType}>, {$options['ttl']}) failed"
+                "zend_disk_cache_store($internalKey, <{$valueType}>, {$ttl}) failed"
             );
         }
     }
@@ -113,9 +113,9 @@ class ZendServerShm extends AbstractZendServer
      * @return mixed The stored value or FALSE if item wasn't found
      * @throws Exception\RuntimeException
      */
-    protected function zdcFetch($key)
+    protected function zdcFetch($internalKey)
     {
-        return zend_shm_cache_fetch((string)$key);
+        return zend_shm_cache_fetch((string)$internalKey);
     }
 
     /**
@@ -141,9 +141,9 @@ class ZendServerShm extends AbstractZendServer
      * @return boolean
      * @throws Exception\RuntimeException
      */
-    protected function zdcDelete($key)
+    protected function zdcDelete($internalKey)
     {
-        return zend_shm_cache_delete($key);
+        return zend_shm_cache_delete($internalKey);
     }
 
     /**

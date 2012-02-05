@@ -780,7 +780,6 @@ class WinCache extends AbstractAdapter
         $this->normalizeKey($key);
         $args = new ArrayObject(array(
             'key'     => & $key,
-            'value'   => & $value,
             'options' => & $options,
         ));
 

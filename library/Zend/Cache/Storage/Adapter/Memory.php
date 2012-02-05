@@ -657,7 +657,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = ArrayObject(array(
+        $args = new ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
         ));

@@ -427,7 +427,6 @@ abstract class AbstractZendServer extends AbstractAdapter
         $this->normalizeOptions($options);
         $args = new ArrayObject(array(
             'key'     => & $key,
-            'value'   => & $value,
             'options' => & $options,
         ));
 

@@ -1162,7 +1162,7 @@ class Filesystem extends AbstractAdapter
                     $error = ErrorHandler::stop();
                     if (!$mkdir) {
                         throw new Exception\RuntimeException(
-                            "Error creating directory '{$file}'", 0, $error
+                            "Error creating directory '{$path}'", 0, $error
                         );
                     }
                 }
@@ -1171,7 +1171,7 @@ class Filesystem extends AbstractAdapter
 
         $info = null;
         if ($baseOptions->getReadControl()) {
-            $info['hash'] = Utils::generateHash($this->getReadControlAlgo(), $data, true);
+            $info['hash'] = Utils::generateHash($this->getReadControlAlgo(), $value, true);
             $info['algo'] = $baseOptions->getReadControlAlgo();
         }
 
@@ -1368,7 +1368,7 @@ class Filesystem extends AbstractAdapter
         $error = ErrorHandler::stop();
         if (!$touch) {
             throw new Exception\RuntimeException(
-                "Error touching file '{$file}'", 0, $error
+                "Error touching file '{$keyInfo['filespec']}.dat'", 0, $error
             );
         }
     }
@@ -1443,19 +1443,19 @@ class Filesystem extends AbstractAdapter
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
                 if (($mode & self::MATCH_TAGS_AND) == self::MATCH_TAGS_AND ) {
-                    if (!isset($meta['tags']) || count(array_diff($opts['tags'], $meta['tags'])) > 0) {
+                    if (!isset($meta['tags']) || count(array_diff($options['tags'], $meta['tags'])) > 0) {
                         continue;
                     }
 
                 // if MATCH_NO_TAGS mode -> check if no given tag available in current cache
                 } elseif( ($mode & self::MATCH_TAGS_NEGATE) == self::MATCH_TAGS_NEGATE ) {
-                    if (isset($meta['tags']) && count(array_diff($opts['tags'], $meta['tags'])) != count($opts['tags'])) {
+                    if (isset($meta['tags']) && count(array_diff($options['tags'], $meta['tags'])) != count($options['tags'])) {
                         continue;
                     }
 
                 // if MATCH_ANY_TAGS mode -> check if any given tag available in current cache
                 } elseif ( ($mode & self::MATCH_TAGS_OR) == self::MATCH_TAGS_OR ) {
-                    if (!isset($meta['tags']) || count(array_diff($opts['tags'], $meta['tags'])) == count($opts['tags'])) {
+                    if (!isset($meta['tags']) || count(array_diff($options['tags'], $meta['tags'])) == count($options['tags'])) {
                         continue;
                     }
 
@@ -1541,7 +1541,7 @@ class Filesystem extends AbstractAdapter
             // check tags only if one of the tag matching mode is selected
             if (($mode & 070) > 0) {
 
-                $info = $this->readInfoFile($filespec . '.ifo');
+                $info = $this->readInfoFile($pathnameSpec . '.ifo');
 
                 // if MATCH_TAGS mode -> check if all given tags available in current cache
                 if (($mode & self::MATCH_TAGS) == self::MATCH_TAGS ) {

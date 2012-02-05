@@ -684,7 +684,7 @@ abstract class AbstractAdapter implements Adapter
 
         $ret = true;
         foreach ($keyValuePairs as $key => $value) {
-            $ret = $this->incrementItems($key, $value, $options) && $ret;
+            $ret = $this->incrementItem($key, $value, $options) && $ret;
         }
         return $ret;
     }

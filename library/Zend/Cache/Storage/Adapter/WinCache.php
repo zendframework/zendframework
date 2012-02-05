@@ -380,7 +380,7 @@ class WinCache extends AbstractAdapter
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
 
-            $info     = wincache_ucache_info(true, $internalKey);
+            $info = wincache_ucache_info(true, $internalKey);
             if (isset($info['ucache_entries'][1])) {
                 $metadata = $info['ucache_entries'][1];
             }
@@ -620,7 +620,7 @@ class WinCache extends AbstractAdapter
             }
 
             $internalKey = $options['namespace'] . $baseOptions->getNamespaceSeparator() . $key;
-            if (!@wincache_ucache_add($internalKey, $value, $options['ttl'])) {
+            if (!wincache_ucache_add($internalKey, $value, $options['ttl'])) {
                 if (wincache_ucache_exists($internalKey)) {
                     throw new Exception\RuntimeException("Key '{$internalKey}' already exists");
                 }
@@ -977,8 +977,7 @@ class WinCache extends AbstractAdapter
                 return $eventRs->last();
             }
 
-            $result= wincache_ucache_clear();
-
+            $result = wincache_ucache_clear();
             return $this->triggerPost(__FUNCTION__, $args, $result);
         } catch (\Exception $e) {
             return $this->triggerException(__FUNCTION__, $args, $e);

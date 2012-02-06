@@ -32,8 +32,6 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
             return;
         }
         $this->modules[] = $e->getModule();
-        $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'addTypePreference'), 1000);
     }
 
     public function loadModulesPost(Event $e)

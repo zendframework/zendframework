@@ -35,6 +35,7 @@ class DefaultListenerAggregate extends AbstractListener
         $this->listeners[] = $events->attach('loadModule.resolve', new ModuleResolverListener, 1000);
         $this->listeners[] = $events->attach('loadModule', new AutoloaderListener($options), 2000);
         $this->listeners[] = $events->attach('loadModule', new InitTrigger($options), 1000);
+        $this->listeners[] = $events->attach('loadModule', new LocatorRegistrationListener($options), 1000);
         $this->listeners[] = $events->attachAggregate($configListener);
         return $this;
     }

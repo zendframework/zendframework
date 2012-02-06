@@ -27,7 +27,12 @@ namespace Zend\Mvc\Router\Cli;
 use Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Mvc\Router\Exception;
+    Zend\Mvc\Router\Exception,
+    Zend\Cli\Request as CliRequest,
+    Zend\Filter\FilterChain,
+    Zend\Validator\ValidatorChain,
+    Zend\Mvc\Exception\InvalidArgumentException
+    ;
 
 /**
  * Segment route.
@@ -38,7 +43,7 @@ use Traversable,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @see        http://manuals.rubyonrails.com/read/chapter/65
  */
-class Segment implements Route
+class Simple implements Route
 {
     /**
      * Parts of the route.
@@ -48,18 +53,18 @@ class Segment implements Route
     protected $parts;
 
     /**
-     * Regex used for matching the route.
-     *
-     * @var string
-     */
-    protected $string;
-
-    /**
      * Default values.
      *
      * @var array
      */
     protected $defaults;
+
+    /**
+     * Parameters' name aliases.
+     *
+     * @var array
+     */
+    protected $aliases;
 
     /**
      * List of assembled parameters.
@@ -69,17 +74,68 @@ class Segment implements Route
     protected $assembledParams = array();
 
     /**
-     * Create a new regex route.
-     *
-     * @param  string $route
-     * @param  array  $constraints
-     * @param  array  $defaults
-     * @return void
+     * @var \Zend\Validator\ValidatorChain
      */
-    public function __construct($route, array $constraints = array(), array $defaults = array())
-    {
+    protected $validators;
+
+    /**
+     * @var \Zend\Filter\FilterChain
+     */
+    protected $filters;
+
+    /**
+     * Create a new Simple CLI route.
+     *
+     * @param  string                                   $route
+     * @param  array                                    $constraints
+     * @param  array                                    $defaults
+     * @param  array                                    $aliases
+     * @param  null|array|Traversable|FilterChain       $filters
+     * @param  null|array|Traversable|ValidatorChain    $validators
+     * @return \Zend\Mvc\Router\Cli\Simple
+     */
+    public function __construct(
+        $route,
+        array $constraints = array(),
+        array $defaults = array(),
+        array $aliases = array(),
+        $filters = null,
+        $validators = null
+    ){
         $this->defaults = $defaults;
-        $this->parseRouteDefinition($route);
+        $this->constraints = $constraints;
+        $this->aliases = $aliases;
+
+        if($filters !== null){
+            if($filters instanceof FilterChain){
+                $this->filters = $filters;
+            }elseif($filters instanceof Traversable){
+                $this->filters = new FilterChain(array(
+                    'filters' => IteratorToArray::convert($filters, false) 
+                ));
+            }elseif(is_array($filters)){
+                $this->filters = new FilterChain(array(
+                    'filters' => $filters 
+                ));
+            }else{
+                throw new InvalidArgumentException('Cannot use '.gettype($filters).' as filters for '.__CLASS__);
+            }
+        }
+        
+        if($validators !== null){
+            if($validators instanceof ValidatorChain){
+                $this->validators = $validators;
+            }elseif($validators instanceof Traversable || is_array($validators)){
+                $this->validators = new ValidatorChain();
+                foreach($validators as $v){
+                    $this->validators->addValidator($v);
+                }
+            }else{
+                throw new InvalidArgumentException('Cannot use '.gettype($validators).' as validators for '.__CLASS__);
+            }
+        }
+        
+        $this->parts = $this->parseRouteDefinition($route);
     }
 
     /**
@@ -87,7 +143,7 @@ class Segment implements Route
      *
      * @see    Route::factory()
      * @param  array|Traversable $options
-     * @return void
+     * @return Simple
      */
     public static function factory($options = array())
     {
@@ -101,15 +157,33 @@ class Segment implements Route
             throw new Exception\InvalidArgumentException('Missing "route" in options array');
         }
 
-        if (!isset($options['constraints'])) {
-            $options['constraints'] = array();
+        foreach(array(
+            'constraints',
+            'defaults',
+            'aliases',
+        ) as $opt){
+            if (!isset($options[$opt])) {
+                $options[$opt] = array();
+            }
         }
 
-        if (!isset($options['defaults'])) {
-            $options['defaults'] = array();
+        if (!isset($options['validators'])) {
+            $options['validators'] = null;
         }
 
-        return new static($options['route'], $options['constraints'], $options['defaults']);
+        if (!isset($options['filters'])) {
+            $options['filters'] = null;
+        }
+
+
+        return new static(
+            $options['route'],
+            $options['constraints'],
+            $options['defaults'],
+            $options['aliases'],
+            $options['filters'],
+            $options['validators']
+        );
     }
 
     /**
@@ -120,194 +194,177 @@ class Segment implements Route
      */
     protected function parseRouteDefinition($def)
     {
-        $currentPos = 0;
+        $def = trim($def);
+        $pos        = 0;
         $length     = strlen($def);
         $parts      = array();
-        $levelParts = array(&$parts);
-        $level      = 0;
 
-        while ($currentPos < $length) {
-            preg_match('(\G(?<literal>[^:{\[\]]*)(?<token>[:{\[\]]|$))', $def, $matches, 0, $currentPos);
-
-            $currentPos += strlen($matches[0]);
-
-            if (!empty($matches['literal'])) {
-                $levelParts[$level][] = array('literal', $matches['literal']);
+        while ($pos < $length) {
+            /**
+             * Literal param, i.e.
+             *   something
+             */
+            if (preg_match( '/(?<name>[a-z0-9][a-zA-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos )) {
+                $item = array(
+                    'name'       => $m['name'],
+                    'literal'    => true,
+                    'required'   => true,
+                    'positional' => true,
+                );
+            }
+            /**
+             * Optional literal param, i.e.
+             *    [something]
+             */
+            elseif (preg_match( '/\[ *?(?<name>[a-z0-9][a-zA-Z0-9\_]*?) *?\](?: +|$)/s', $def, $m, 0, $pos )) {
+                $item = array(
+                    'name'       => $m['name'],
+                    'literal'    => true,
+                    'required'   => false,
+                    'positional' => true,
+                );
+            }
+            /**
+             * Optional literal param alternative
+             *    [something|somethingElse|anotherOne]
+             *    [  something   |  somethingElse  |  anotherOne  ]
+             */
+            elseif (preg_match( '/
+                \[
+                    (?:
+                        \ *?
+                        (?<name>[a-z0-9][a-zA-Z0-9_]*?)
+                        \ *?
+                        (?:\||(?=\]))
+                        \ *?
+                    )+
+                \]
+                (?:\ +|$)
+                /sx', $def, $m, 0, $pos
+            )
+            ) {
+                $item = array(
+                    'name'       => $m['name'],
+                    'literal'    => true,
+                    'required'   => false,
+                    'positional' => true,
+                );
+            }
+            /**
+             * Mandatory value param, i.e.
+             *    SOMETHING
+             */
+            elseif (preg_match( '/(?<name>[A-Z0-9\_]+)(?: +|$)/s', $def, $m, 0, $pos )) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'literal'    => false,
+                    'required'   => false,
+                    'positional' => true,
+                );
+            }
+            /**
+             * Optional value param, i.e.
+             *    [SOMETHING]
+             */
+            elseif (preg_match( '/\[(?<name>[A-Z0-9\_]+)\](?: +|$)/s', $def, $m, 0, $pos )) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'literal'    => false,
+                    'required'   => false,
+                    'positional' => true,
+                );
+            }
+            /**
+             * Mandatory long param
+             *    --param
+             *    --param=i
+             *    --param=s
+             *    --param=w
+             */
+            elseif (preg_match( '/--(?<name>[a-zA-Z0-9]+(?:=(?<type>[swi]))?)(?: +|$)/s', $def, $m, 0, $pos )) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'literal'    => false,
+                    'required'   => true,
+                    'positional' => false,
+                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
+                );
+            }
+            /**
+             * Optional long param
+             *    [--param]
+             *    [--param=i]
+             *    [--param=s]
+             *    [--param=w]
+             */
+            elseif (preg_match('/\[ *?--(?<name>[a-zA-Z0-9]+(?:=(?<type>[swi]))?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'literal'    => false,
+                    'required'   => false,
+                    'positional' => false,
+                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
+                );
+            }
+            /**
+             * Mandatory short param
+             *    -a
+             *    -a=i
+             *    -a=s
+             *    -a=w
+             */
+            elseif (preg_match( '/-(?<name>[a-zA-Z0-9](?:=(?<type>[swi]))?)(?: +|$)/s', $def, $m, 0, $pos )) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'literal'    => false,
+                    'required'   => true,
+                    'positional' => false,
+                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
+                );
+            }
+            /**
+             * Optional short param
+             *    [-a]
+             *    [-a=i]
+             *    [-a=s]
+             *    [-a=w]
+             */
+            elseif (preg_match('/\[ *?-(?<name>[a-zA-Z0-9](?:=(?<type>[swi]))?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'literal'    => false,
+                    'required'   => false,
+                    'positional' => false,
+                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
+                );
+            }
+            else {
+                throw new Exception\InvalidArgumentException(
+                    'Cannot understand CLI route at '.
+                    ($pos > 0 ? '[...] ' : '').
+                    '"' . substr( $def, $pos ) . '"'
+                );
             }
 
-            if ($matches['token'] === ':') {
-                if (isset($def[$currentPos]) && $def[$currentPos] === '{') {
-                    if (!preg_match('(\G\{(?<name>[^}]+)\}:?)', $def, $matches, 0, $currentPos)) {
-                        throw new Exception\RuntimeException('Translated parameter missing closing bracket');
-                    }
-
-                    $levelParts[$level][] = array('translated-parameter', $matches['name']);
-                } else {
-                    if (!preg_match('(\G(?<name>[^:/{\[\]]+)(?:{(?<delimiters>[^}]+)})?:?)', $def, $matches, 0, $currentPos)) {
-                        throw new Exception\RuntimeException('Found empty parameter name');
-                    }
-
-                    $levelParts[$level][] = array('parameter', $matches['name'], isset($matches['delimiters']) ? $matches['delimiters'] : null);
-                }
-
-                $currentPos += strlen($matches[0]);
-            } elseif ($matches['token'] === '{') {
-                if (!preg_match('(\G(?<literal>[^}]+)\})', $def, $matches, 0, $currentPos)) {
-                    throw new Exception\RuntimeException('Translated literal missing closing bracket');
-                }
-
-                $currentPos += strlen($matches[0]);
-
-                $levelParts[$level][] = array('translated-literal', $matches['literal']);
-            } elseif ($matches['token'] === '[') {
-                $levelParts[$level][] = array('optional', array());
-                $levelParts[$level + 1] = &$levelParts[$level][count($levelParts[$level]) - 1][1];
-
-                $level++;
-            } elseif ($matches['token'] === ']') {
-                unset($levelParts[$level]);
-                $level--;
-
-                if ($level < 0) {
-                    throw new Exception\RuntimeException('Found closing bracket without matching opening bracket');
-                }
-            } else {
-                break;
-            }
+            $pos += strlen( $m[0] );
+            $parts[] = $item;
         }
 
-        if ($level > 0) {
-            throw new Exception\RuntimeException('Found unbalanced brackets');
-        }
-
+        print_r($parts);
         return $parts;
-    }
-
-    /**
-     * Build the matching regex from parsed parts.
-     *
-     * @param  array $parts
-     * @param  array $constraints
-     * @return string
-     */
-    protected function buildRegex(array $parts, array $constraints)
-    {
-        $regex = '';
-
-        foreach ($parts as $part) {
-            switch ($part[0]) {
-                case 'literal':
-                    $regex .= preg_quote($part[1]);
-                    break;
-
-                case 'parameter':
-                    if (isset($constraints[$part[1]])) {
-                        $regex .= '(?<' . $part[1] . '>' . $constraints[$part[1]] . ')';
-                    } elseif ($part[2] === null) {
-                        $regex .= '(?<' . $part[1] . '>[^/]+)';
-                    } else {
-                        $regex .= '(?<' . $part[1] . '>[^' . $part[2] . ']+)';
-                    }
-                    break;
-
-                case 'optional':
-                    $regex .= '(?:' . $this->buildRegex($part[1], $constraints) . ')?';
-                    break;
-
-                // @codeCoverageIgnoreStart
-                case 'translated-literal':
-                    throw new Exception\RuntimeException('Translated literals are not implemented yet');
-                    break;
-
-                case 'translated-parameter':
-                    throw new Exception\RuntimeException('Translated parameters are not implemented yet');
-                    break;
-                // @codeCoverageIgnoreEnd
-            }
-        }
-
-        return $regex;
-    }
-
-    /**
-     * Build a path.
-     *
-     * @param  array   $parts
-     * @param  array   $mergedParams
-     * @param  boolean $isOptional
-     * @param  boolean $hasChild
-     * @return string
-     */
-    protected function buildPath(array $parts, array $mergedParams, $isOptional, $hasChild)
-    {
-        $path      = '';
-        $skip      = true;
-        $skippable = false;
-
-        foreach ($parts as $part) {
-            switch ($part[0]) {
-                case 'literal':
-                    $path .= $part[1];
-                    break;
-
-                case 'parameter':
-                    $skippable = true;
-
-                    if (!isset($mergedParams[$part[1]])) {
-                        if (!$isOptional || $hasChild) {
-                            throw new Exception\InvalidArgumentException(sprintf('Missing parameter "%s"', $part[1]));
-                        }
-
-                        return '';
-                    } elseif (!$isOptional || $hasChild || !isset($this->defaults[$part[1]]) || $this->defaults[$part[1]] !== $mergedParams[$part[1]]) {
-                        $skip = false;
-                    }
-
-                    $path .= urlencode($mergedParams[$part[1]]);
-
-                    $this->assembledParams[] = $part[1];
-                    break;
-
-                case 'optional':
-                    $skippable    = true;
-                    $optionalPart = $this->buildPath($part[1], $mergedParams, true, $hasChild);
-
-                    if ($optionalPart !== null) {
-                        $path .= $optionalPart;
-                        $skip  = false;
-                    }
-                    break;
-
-                // @codeCoverageIgnoreStart
-                case 'translated-literal':
-                    throw new Exception\RuntimeException('Translated literals are not implemented yet');
-                    break;
-
-                case 'translated-parameter':
-                    throw new Exception\RuntimeException('Translated parameters are not implemented yet');
-                    break;
-                // @codeCoverageIgnoreEnd
-            }
-        }
-
-        if ($isOptional && $skippable && $skip) {
-            return '';
-        }
-
-        return $path;
     }
 
     /**
      * match(): defined by Route interface.
      *
-     * @see    Route::match()
-     * @param  Request $request
+     * @see     Route::match()
+     * @param   Request|RequestDescription $request
      * @param   null|int                       $pathOffset
-     * @return RouteMatch
+     * @return  RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!method_exists($request, 'uri')) {
+        if (!$request instanceof CliRequest) {
             return null;
         }
 
@@ -350,12 +407,7 @@ class Segment implements Route
     {
         $this->assembledParams = array();
 
-        return $this->buildPath(
-            $this->parts,
-            array_merge($this->defaults, $params),
-            false,
-            (isset($options['has_child']) ? $options['has_child'] : false)
-        );
+
     }
 
     /**

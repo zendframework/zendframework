@@ -22,6 +22,7 @@
 namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase,
+    ReflectionClass,
     stdClass,
     Zend\EventManager\Event,
     Zend\EventManager\EventManager,
@@ -33,7 +34,8 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\View\Model,
     Zend\View\PhpRenderer,
     Zend\View\Resolver\TemplateMapResolver,
-    Zend\View\View;
+    Zend\View\View,
+    Zend\View\ViewEvent;
 
 /**
  * @category   Zend
@@ -474,14 +476,122 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->assertContains('<layout>', $result->getContent());
     }
 
+    public function makeRendererExtensionsVisible()
+    {
+        $r = new ReflectionClass($this->renderer);
+        $prop = $r->getProperty('extensions');
+        $prop->setAccessible(true);
+        $this->assertEquals(array(), $prop->getValue($this->renderer));
+        $this->extensions = $prop;
+    }
+
+    public function testSelectLayoutExitsEarlyWithNonViewModel()
+    {
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response);
+        $this->makeRendererExtensionsVisible();
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectLayout($event);
+        $this->assertNull($result);
+        $this->assertEquals(array(), $this->extensions->getValue($this->renderer));
+    }
+
+    public function testSelectLayoutExitsEarlyWithInvalidViewModel()
+    {
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel(new Model\JsonModel);
+        $this->makeRendererExtensionsVisible();
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectLayout($event);
+        $this->assertNull($result);
+        $this->assertEquals(array(), $this->extensions->getValue($this->renderer));
+    }
+
+    public function testSelectLayoutExitsEarlyWithXhrRequest()
+    {
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel(new Model\ViewModel);
+        $this->request->headers()->addHeaderLine('X-Requested-With', 'XmlHttpRequest');
+        $this->makeRendererExtensionsVisible();
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectLayout($event);
+        $this->assertNull($result);
+        $this->assertEquals(array(), $this->extensions->getValue($this->renderer));
+    }
+
+    public function testSelectLayoutExitsEarlyIfModelDisablesLayouts()
+    {
+        $model = new Model\ViewModel(array(), array('enable_layout' => false));
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->makeRendererExtensionsVisible();
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectLayout($event);
+        $this->assertNull($result);
+        $this->assertEquals(array(), $this->extensions->getValue($this->renderer));
+    }
+
+    public function testSelectLayoutExitsEarlyIfNoPhpRendererAttached()
+    {
+        $model = new Model\ViewModel(array(), array('enable_layout' => true));
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+
+        $result = $this->strategy->selectLayout($event);
+        $this->assertNull($result);
+    }
+
+    public function testSelectLayoutUsesDefaultLayoutIfNoneSpecifiedInModel()
+    {
+        $model = new Model\ViewModel(array(), array('enable_layout' => true));
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->makeRendererExtensionsVisible();
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectLayout($event);
+        $this->assertNull($result);
+        $this->assertEquals(array('layout'), $this->extensions->getValue($this->renderer));
+    }
+
+    public function testSelectLayoutUsesLayoutSpecifiedInModel()
+    {
+        $model = new Model\ViewModel(array(), array('enable_layout' => true, 'layout' => 'my/layout'));
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->makeRendererExtensionsVisible();
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectLayout($event);
+        $this->assertNull($result);
+        $this->assertEquals(array('my/layout'), $this->extensions->getValue($this->renderer));
+    }
+
     /**
-     * @todo selectLayout with non-viable view model
-     * @todo selectLayout with XHR request
-     * @todo selectLayout when layouts are disabled
-     * @todo selectLayout with no PhpRenderer attached
-     * @todo selectLayout with layout specified
-     * @todo selectLayout with default layout
-     *
      * @todo selectRendererByContext with JsonModel and no JsonRenderer attached
      * @todo selectRendererByContext with JsonModel and JsonRenderer attached
      * @todo selectRendererByContext with FeedModel and no FeedRenderer attached

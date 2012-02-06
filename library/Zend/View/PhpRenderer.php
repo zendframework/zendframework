@@ -465,7 +465,7 @@ class PhpRenderer implements Renderer, Pluggable
         extract($__vars);
         unset($__vars); // remove $__vars from local scope
 
-        while ($this->file = array_shift($this->extensions)) {
+        while ($this->file = array_pop($this->extensions)) {
             $this->file = $this->resolver($this->file);
             ob_start();
             include $this->file;

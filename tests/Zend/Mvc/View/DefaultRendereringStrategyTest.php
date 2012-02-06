@@ -321,9 +321,23 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->assertContains($feed->export('atom'), $result->getContent());
     }
 
+    public function testWillRenderAlternateStrategyWhenSelected()
+    {
+        $renderer = new TestAsset\DumbStrategy();
+        $this->view->addRenderingStrategy(function ($e) use ($renderer) {
+            return $renderer;
+        }, 100);
+        $model = new Model\ViewModel(array('foo' => 'bar'));
+        $model->setOption('template', 'content');
+        $this->event->setResult($model);
+
+        $result = $this->strategy->render($this->event);
+        $this->assertSame($this->response, $result);
+
+        $expected = sprintf('content (%s): %s', json_encode(array('template' => 'content')), json_encode(array('foo' => 'bar')));
+    }
+
     /**
-     * @todo render with alternate strategy
-     *
      * @todo render error for controller not found
      * @todo render error for controller invalid
      * @todo render error for exception detected

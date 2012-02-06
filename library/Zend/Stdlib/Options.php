@@ -40,28 +40,26 @@ abstract class Options implements ParameterObject
      */
     public function __construct($options = null)
     {
-        if (is_null($options)) {
-            return;
+        if (null !== $options) {
+            $this->setFromArray($options);
         }
-        $this->processArray($options);
     }
 
     /**
-     * @param  array|Traversable $config
+     * @param  array|Traversable $options
      * @return void
      */
-    protected function processArray($config)
+    public function setFromArray($options)
     {
-        if (!is_array($config) && !$config instanceof Traversable) {
+        if (!is_array($options) && !$options instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Parameter provided to %s must be an array or Traversable',
                 __METHOD__
             ));
         }
 
-        foreach ($config as $key => $value) {
-            $setter = $this->assembleSetterNameFromConfigKey($key);
-            $this->{$setter}($value);
+        foreach ($options as $key => $value) {
+            $this->__set($key, $value);
         }
     }
 
@@ -70,14 +68,14 @@ abstract class Options implements ParameterObject
      * @return string name of setter method
      * @throws Exception\BadMethodCallException if setter method is undefined
      */
-    protected function assembleSetterNameFromConfigKey($key)
+    protected function assembleSetterNameFromKey($key)
     {
         $parts = explode('_', $key);
         $parts = array_map('ucfirst', $parts);
         $setter = 'set' . implode('', $parts);
         if (!method_exists($this, $setter)) {
             throw new Exception\BadMethodCallException(
-                'The configuration key "' . $key . '" does not '
+                'The option "' . $key . '" does not '
                 . 'have a matching ' . $setter . ' setter method '
                 . 'which must be defined'
             );
@@ -90,14 +88,14 @@ abstract class Options implements ParameterObject
      * @return string name of getter method
      * @throws Exception\BadMethodCallException if getter method is undefined
      */
-    protected function assembleGetterNameFromConfigKey($key)
+    protected function assembleGetterNameFromKey($key)
     {
         $parts = explode('_', $key);
         $parts = array_map('ucfirst', $parts);
         $getter = 'get' . implode('', $parts);
         if (!method_exists($this, $getter)) {
             throw new Exception\BadMethodCallException(
-                'The configuration key "' . $key . '" does not '
+                'The option "' . $key . '" does not '
                 . 'have a matching ' . $getter . ' getter method '
                 . 'which must be defined'
             );
@@ -113,7 +111,7 @@ abstract class Options implements ParameterObject
      */
     public function __set($key, $value)
     {
-        $setter = $this->assembleSetterNameFromConfigKey($key);
+        $setter = $this->assembleSetterNameFromKey($key);
         $this->{$setter}($value);
     }
 
@@ -124,7 +122,7 @@ abstract class Options implements ParameterObject
      */
     public function __get($key)
     {
-        $getter = $this->assembleGetterNameFromConfigKey($key);
+        $getter = $this->assembleGetterNameFromKey($key);
         return $this->{$getter}();
     }
 
@@ -135,8 +133,7 @@ abstract class Options implements ParameterObject
      */
     public function __isset($key)
     {
-        $getter = $this->assembleGetterNameFromConfigKey($key);
-        return !is_null($this->{$getter}());
+        return null !== $this->__get($key);
     }
 
     /**
@@ -147,9 +144,8 @@ abstract class Options implements ParameterObject
      */
     public function __unset($key)
     {
-        $setter = $this->assembleSetterNameFromConfigKey($key);
         try {
-            $this->{$setter}(null);
+            $this->__set($key, null);
         } catch(\InvalidArgumentException $e) {
             throw new Exception\InvalidArgumentException(
                 'The class property $' . $key . ' cannot be unset as'

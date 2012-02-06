@@ -33,6 +33,8 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\View\DefaultRenderingStrategy,
     Zend\View\Model,
     Zend\View\PhpRenderer,
+    Zend\View\Renderer\FeedRenderer,
+    Zend\View\Renderer\JsonRenderer,
     Zend\View\Resolver\TemplateMapResolver,
     Zend\View\View,
     Zend\View\ViewEvent;
@@ -591,20 +593,191 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->assertEquals(array('my/layout'), $this->extensions->getValue($this->renderer));
     }
 
+    public function testPhpRendererIsSelectedForJsonModelIfNoJsonRendererAttached()
+    {
+        $model = new Model\JsonModel();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($this->renderer, $result);
+    }
+
+    public function testJsonRendererIsSelectedForJsonModel()
+    {
+        $model = new Model\JsonModel();
+        $json  = new JsonRenderer();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+        $this->view->addRenderer($json);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($json, $result);
+    }
+
+    public function testPhpRendererIsSelectedForFeedModelIfNoFeedRendererAttached()
+    {
+        $model = new Model\FeedModel();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($this->renderer, $result);
+    }
+
+    public function testFeedRendererIsSelectedForFeedModel()
+    {
+        $model = new Model\FeedModel();
+        $feed  = new FeedRenderer();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+        $this->view->addRenderer($feed);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($feed, $result);
+    }
+
+    public function testPhpRendererIsSelectedForJsonAcceptIfNoJsonRendererAttached()
+    {
+        $this->request->headers()->addHeaderLine('Accept', 'application/json');
+        $model = new Model\ViewModel();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($this->renderer, $result);
+    }
+
+    public function testJsonRendererIsSelectedForJsonAccept()
+    {
+        $this->request->headers()->addHeaderLine('Accept', 'application/json');
+        $model = new Model\ViewModel();
+        $json  = new JsonRenderer();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+        $this->view->addRenderer($json);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($json, $result);
+    }
+
+    public function testPhpRendererIsSelectedForRssAcceptIfNoFeedRendererAttached()
+    {
+        $this->request->headers()->addHeaderLine('Accept', 'application/rss+xml');
+        $model = new Model\ViewModel();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($this->renderer, $result);
+    }
+
+    public function testFeedRendererIsSelectedForRssAccept()
+    {
+        $this->request->headers()->addHeaderLine('Accept', 'application/rss+xml');
+        $model = new Model\ViewModel();
+        $feed  = new FeedRenderer();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+        $this->view->addRenderer($feed);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($feed, $result);
+    }
+
+    public function testPhpRendererIsSelectedForAtomAcceptIfNoFeedRendererAttached()
+    {
+        $this->request->headers()->addHeaderLine('Accept', 'application/atom+xml');
+        $model = new Model\ViewModel();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($this->renderer, $result);
+    }
+
+    public function testFeedRendererIsSelectedForAtomAccept()
+    {
+        $this->request->headers()->addHeaderLine('Accept', 'application/atom+xml');
+        $model = new Model\ViewModel();
+        $feed  = new FeedRenderer();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+        $this->view->addRenderer($feed);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($feed, $result);
+    }
+
+    public function testCreatesAndAttachesPhpRendererIfNoneSetAndOtherAcceptRulesDoNotApply()
+    {
+        $model = new Model\ViewModel();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertInstanceOf('Zend\View\PhpRenderer', $result);
+        $this->assertNotSame($this->renderer, $result);
+    }
+
+    public function testSelectsPhpRendererIfAcceptRulesDoNotApply()
+    {
+        $model = new Model\ViewModel();
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setModel($model);
+        $this->view->addRenderer($this->renderer);
+
+        $result = $this->strategy->selectRendererByContext($event);
+        $this->assertSame($this->renderer, $result);
+    }
+
     /**
-     * @todo selectRendererByContext with JsonModel and no JsonRenderer attached
-     * @todo selectRendererByContext with JsonModel and JsonRenderer attached
-     * @todo selectRendererByContext with FeedModel and no FeedRenderer attached
-     * @todo selectRendererByContext with FeedModel and FeedRenderer attached
-     * @todo selectRendererByContext with ViewModel and JSON accept and no JsonRenderer attached
-     * @todo selectRendererByContext with ViewModel and JSON accept and JsonRenderer attached
-     * @todo selectRendererByContext with ViewModel and Rss accept and no FeedRenderer attached
-     * @todo selectRendererByContext with ViewModel and Rss accept and FeedRenderer attached
-     * @todo selectRendererByContext with ViewModel and Atom accept and no FeedRenderer attached
-     * @todo selectRendererByContext with ViewModel and Atom accept and FeedRenderer attached
-     * @todo selectRendererByContext with ViewModel and HTML accept and no PhpRenderer attached
-     * @todo selectRendererByContext with ViewModel and HTML accept and PhpRenderer attached
-     *
      * @todo populateResponse with empty result and empty placeholders
      * @todo populateResponse with empty result and filled article placeholder
      * @todo populateResponse with empty result and filled content placeholder

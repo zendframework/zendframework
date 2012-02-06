@@ -31,6 +31,8 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\View\DefaultRenderingStrategy,
+    Zend\Registry,
+    Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Model,
     Zend\View\PhpRenderer,
     Zend\View\Renderer\FeedRenderer,
@@ -55,6 +57,11 @@ class DefaultRenderingStrategyTest extends TestCase
 
     public function setUp()
     {
+        // Necessary to ensure placeholders do not persist between individual tests
+        if (Registry::isRegistered(PlaceholderRegistry::REGISTRY_KEY)) {
+            Registry::getInstance()->offsetUnset(PlaceholderRegistry::REGISTRY_KEY);
+        }
+
         $this->view     = new View();
         $this->request  = new Request();
         $this->response = new Response();
@@ -777,13 +784,133 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->assertSame($this->renderer, $result);
     }
 
-    /**
-     * @todo populateResponse with empty result and empty placeholders
-     * @todo populateResponse with empty result and filled article placeholder
-     * @todo populateResponse with empty result and filled content placeholder
-     * @todo populateResponse with empty result and filled article and content placeholders
-     * @todo populateResponse with JsonRenderer selected
-     * @todo populateResponse with FeedRenderer selected and RSS feed type
-     * @todo populateResponse with FeedRenderer selected and Atom feed type
-     */
+    public function testResponseContentIsEmptyWhenResultAndPlaceholdersAreEmpty()
+    {
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response);
+
+        $this->strategy->populateResponse($event);
+        $content = $this->response->getContent();
+        $this->assertTrue(empty($content));
+    }
+
+    public function testResponseContentSetToArticlePlaceholderWhenResultIsEmpty()
+    {
+        $this->renderer->placeholder('article')->set('Article Content');
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRenderer($this->renderer);
+
+        $this->strategy->populateResponse($event);
+        $content = $this->response->getContent();
+        $this->assertEquals('Article Content', $content);
+    }
+
+    public function testResponseContentSetToContentPlaceholderWhenResultAndArticlePlaceholderAreEmpty()
+    {
+        $this->renderer->placeholder('content')->set('Content');
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRenderer($this->renderer);
+
+        $this->strategy->populateResponse($event);
+        $content = $this->response->getContent();
+        $this->assertEquals('Content', $content);
+    }
+
+    public function testResponseContentSetToArticlePlaceholderWhenResultIsEmptyAndBothArticleAndContentPlaceholdersSet()
+    {
+        $this->renderer->placeholder('article')->set('Article Content');
+        $this->renderer->placeholder('content')->set('Content');
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRenderer($this->renderer);
+
+        $this->strategy->populateResponse($event);
+        $content = $this->response->getContent();
+        $this->assertEquals('Article Content', $content);
+    }
+
+    public function testResponseContentSetToResultIfNotEmpty()
+    {
+        $this->renderer->placeholder('article')->set('Article Content');
+        $this->renderer->placeholder('content')->set('Content');
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRenderer($this->renderer)
+              ->setResult('Result Content');
+
+        $this->strategy->populateResponse($event);
+        $content = $this->response->getContent();
+        $this->assertEquals('Result Content', $content);
+    }
+
+    public function testResponseContentSetToJsonResultAndContentTypeHeaderSetWhenJsonRendererSelected()
+    {
+        $content  = json_encode(array('foo' => 'bar'));
+        $renderer = new JsonRenderer();
+
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRenderer($renderer)
+              ->setResult($content);
+
+        $this->strategy->populateResponse($event);
+        $result = $this->response->getContent();
+        $this->assertEquals($content, $result);
+        $this->assertTrue($this->response->headers()->has('content-type'));
+        $this->assertEquals('application/json', $this->response->headers()->get('content-type')->getFieldValue());
+    }
+
+    public function testResponseContentSetToResultValueAndContentTypeHeaderSetToRssWhenFeedRendererSelected()
+    {
+        $content  = 'should be xml';
+        $renderer = new FeedRenderer();
+        $renderer->setFeedType('rss');
+
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRenderer($renderer)
+              ->setResult($content);
+
+        $this->strategy->populateResponse($event);
+        $result = $this->response->getContent();
+        $this->assertEquals($content, $result);
+        $this->assertTrue($this->response->headers()->has('content-type'));
+        $this->assertEquals('application/rss+xml', $this->response->headers()->get('content-type')->getFieldValue());
+    }
+
+    public function testResponseContentSetToResultValueAndContentTypeHeaderSetToAtomWhenFeedRendererSelected()
+    {
+        $content  = 'should be xml';
+        $renderer = new FeedRenderer();
+        $renderer->setFeedType('atom');
+
+        $event = new ViewEvent();
+        $event->setTarget($this->view)
+              ->setRequest($this->request)
+              ->setResponse($this->response)
+              ->setRenderer($renderer)
+              ->setResult($content);
+
+        $this->strategy->populateResponse($event);
+        $result = $this->response->getContent();
+        $this->assertEquals($content, $result);
+        $this->assertTrue($this->response->headers()->has('content-type'));
+        $this->assertEquals('application/atom+xml', $this->response->headers()->get('content-type')->getFieldValue());
+    }
 }

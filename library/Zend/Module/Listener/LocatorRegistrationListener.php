@@ -21,11 +21,28 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      */
     protected $listeners = array();
 
+    /**
+     * __invoke 
+     *
+     * Convenience method for manually attaching an instance of this class as a listener.
+     * 
+     * @param ModuleEvent $e 
+     * @return void
+     */
     public function __invoke(ModuleEvent $e)
     {
         return $this->loadModule($e);
     }
 
+    /**
+     * loadModule 
+     *
+     * Check each loaded module to see if it implements LocatorRegistered. If it 
+     * does, we add it to an internal array for later.
+     * 
+     * @param ModuleEvent $e 
+     * @return void
+     */
     public function loadModule(ModuleEvent $e)
     {
         if (!$e->getModule() instanceof LocatorRegistered) {
@@ -34,6 +51,14 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
         $this->modules[] = $e->getModule();
     }
 
+    /**
+     * loadModulesPost 
+     *
+     * Once all the modules are loaded, loop 
+     * 
+     * @param Event $e 
+     * @return void
+     */
     public function loadModulesPost(Event $e)
     {
         if (0 === count($this->modules)) {
@@ -45,6 +70,17 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
         $events->attach('bootstrap', 'bootstrap', array($this, 'addTypePreference'), 1000);
     }
 
+    /**
+     * addTypePreference 
+     *
+     * This is ran during the MVC bootstrap event because it requires access to 
+     * the DI container.
+     *
+     * @TODO: Check the application / locator / etc a bit better to make sure 
+     * the env looks how we're expecting it to?
+     * @param Event $e 
+     * @return void
+     */
     public function addTypePreference(Event $e)
     {
         $im = $e->getParam('application')->getLocator()->instanceManager();
@@ -61,7 +97,7 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      * Attach one or more listeners
      *
      * @param EventCollection $events
-     * @return ConfigListener
+     * @return LocatorRegistrationListener
      */
     public function attach(EventCollection $events)
     {
@@ -74,7 +110,7 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      * Detach all previously attached listeners
      *
      * @param EventCollection $events
-     * @return void
+     * @return LocatorRegistrationListener
      */
     public function detach(EventCollection $events)
     {

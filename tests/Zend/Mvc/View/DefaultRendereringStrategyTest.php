@@ -27,6 +27,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\EventManager\EventManager,
     Zend\Http\Request,
     Zend\Http\Response,
+    Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\View\DefaultRenderingStrategy,
     Zend\View\Model,
@@ -337,13 +338,90 @@ class DefaultRenderingStrategyTest extends TestCase
         $expected = sprintf('content (%s): %s', json_encode(array('template' => 'content')), json_encode(array('foo' => 'bar')));
     }
 
+    public function testSets404StatusForControllerNotFoundError()
+    {
+        $this->resolver->add('pages/404', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(false);
+        $this->event->setError(Application::ERROR_CONTROLLER_NOT_FOUND);
+
+        $result = $this->strategy->renderError($this->event);
+        $this->assertSame($this->response, $result);
+
+        $this->assertTrue($this->response->isNotFound());
+        $this->assertContains('Page not found.', $this->response->getContent());
+    }
+
+    public function testSets404StatusForInvalidController()
+    {
+        $this->resolver->add('pages/404', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(false);
+        $this->event->setError(Application::ERROR_CONTROLLER_INVALID);
+
+        $result = $this->strategy->renderError($this->event);
+        $this->assertSame($this->response, $result);
+
+        $this->assertTrue($this->response->isNotFound());
+        $this->assertContains('Page not found.', $this->response->getContent());
+    }
+
+    public function testSets500StatusForDetectedException()
+    {
+        $this->resolver->add('error', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(false);
+        $this->strategy->setDisplayExceptions(false);
+        $this->event->setError(Application::ERROR_EXCEPTION);
+        $this->event->setParam('exception', new \Exception('Test exception'));
+
+        $result = $this->strategy->renderError($this->event);
+        $this->assertSame($this->response, $result);
+
+        $this->assertTrue($this->response->isServerError());
+        $content = $this->response->getContent();
+        $this->assertContains('error occurred during execution', $content);
+        $this->assertNotContains('Test exception', $content, $content);
+    }
+
+    public function testRendersStackTraceForDetectedExceptionWhenDisplayExceptionsEnabled()
+    {
+        $this->resolver->add('error', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(false);
+        $this->strategy->setDisplayExceptions(true);
+        $this->event->setError(Application::ERROR_EXCEPTION);
+        $this->event->setParam('exception', new \Exception('Test exception'));
+
+        $result = $this->strategy->renderError($this->event);
+        $this->assertSame($this->response, $result);
+
+        $this->assertTrue($this->response->isServerError());
+        $content = $this->response->getContent();
+        $this->assertContains('error occurred during execution', $content);
+        $this->assertContains('Test exception', $content, $content);
+    }
+
+    public function testErrorInjectedIntoLayoutWhenErrorLayoutsAreEnabled()
+    {
+        $this->resolver->add('error', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(true);
+        $this->strategy->setDisplayExceptions(true);
+        $this->event->setError(Application::ERROR_EXCEPTION);
+        $this->event->setParam('exception', new \Exception('Test exception'));
+
+        $result = $this->strategy->renderError($this->event);
+        $this->assertSame($this->response, $result);
+
+        $this->assertTrue($this->response->isServerError());
+        $content = $this->response->getContent();
+        $this->assertContains('error occurred during execution', $content);
+        $this->assertContains('Test exception', $content, $content);
+        $this->assertContains('<layout>', $content, $content);
+    }
+
     /**
-     * @todo render error for controller not found
-     * @todo render error for controller invalid
-     * @todo render error for exception detected
-     * @todo render error for exception detected with display exceptions true
-     * @todo render error without layout
-     *
      * @todo render 404 with event result a response
      * @todo render 404 with non-404 response status
      * @todo render 404 with layout

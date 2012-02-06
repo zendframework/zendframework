@@ -280,7 +280,6 @@ class DefaultRenderingStrategy implements ListenerAggregate
     public function renderError(MvcEvent $e)
     {
         $error    = $e->getError();
-        $app      = $e->getTarget();
         $response = $e->getResponse();
         if (!$response) {
             $response = new HttpResponse();

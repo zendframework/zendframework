@@ -421,12 +421,60 @@ class DefaultRenderingStrategyTest extends TestCase
         $this->assertContains('<layout>', $content, $content);
     }
 
+    public function test404RendererIsSkippedIfEventResultIsAResponseObject()
+    {
+        $this->resolver->add('pages/404', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(false);
+        $this->strategy->setDisplayExceptions(false);
+
+        $this->event->setResult($this->response);
+        $result = $this->strategy->render404($this->event);
+        $this->assertNull($result);
+    }
+
+    public function test404RendererIsSkippedIfNon404StatusDetected()
+    {
+        $this->resolver->add('pages/404', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(false);
+        $this->strategy->setDisplayExceptions(false);
+
+        $this->response->setStatusCode(200);
+        $result = $this->strategy->render404($this->event);
+        $this->assertNull($result);
+    }
+
+    public function test404RendererWillRenderContentWhenLayoutsAreDisabled()
+    {
+        $this->resolver->add('pages/404', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(false);
+        $this->strategy->setDisplayExceptions(false);
+
+        $this->response->setStatusCode(404);
+        $result = $this->strategy->render404($this->event);
+        $this->assertSame($this->response, $result);
+        $this->assertEquals(404, $result->getStatusCode());
+        $this->assertContains('Page not found.', $result->getContent());
+    }
+
+    public function test404RendererWillRenderContentWithLayout()
+    {
+        $this->resolver->add('pages/404', __DIR__ . '/_files/error.phtml');
+        $this->view->addRenderer($this->renderer);
+        $this->strategy->setEnableLayoutForErrors(true);
+        $this->strategy->setDisplayExceptions(false);
+
+        $this->response->setStatusCode(404);
+        $result = $this->strategy->render404($this->event);
+        $this->assertSame($this->response, $result);
+        $this->assertEquals(404, $result->getStatusCode());
+        $this->assertContains('Page not found.', $result->getContent());
+        $this->assertContains('<layout>', $result->getContent());
+    }
+
     /**
-     * @todo render 404 with event result a response
-     * @todo render 404 with non-404 response status
-     * @todo render 404 with layout
-     * @todo render 404 without layout
-     *
      * @todo selectLayout with non-viable view model
      * @todo selectLayout with XHR request
      * @todo selectLayout when layouts are disabled

@@ -302,6 +302,7 @@ class Segment implements Route
      *
      * @see    Route::match()
      * @param  Request $request
+     * @param   null|int                       $pathOffset
      * @return RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
@@ -310,27 +311,28 @@ class Segment implements Route
             return null;
         }
 
-        $uri  = $request->uri();
-        $path = $uri->getPath();
+        $params = $request->getParams();
 
-        if ($pathOffset !== null) {
-            $result = preg_match('(\G' . $this->regex . ')', $path, $matches, null, $pathOffset);
-        } else {
-            $result = preg_match('(^' . $this->regex . '$)', $path, $matches);
+        $positional = $named = array();
+        foreach($this->parts as &$part){
+            if($part['positional'])
+                $positional[] = &$part;
+            else
+                $named[] = &$part;
         }
 
-        if (!$result) {
-            return null;
-        }
+        /**
+         * Go through all positional params
+         */
+        $pos = 0;
+        for($x = 0;$x<count($positional);$x++){
+            if($params->offsetExists($pos)){
 
-        $matchedLength = strlen($matches[0]);
+            }else{
 
-        foreach ($matches as $key => $value) {
-            if (is_numeric($key) || is_int($key)) {
-                unset($matches[$key]);
-            } else {
-                $matches[$key] = urldecode($matches[$key]);
+
             }
+
         }
 
         return new RouteMatch(array_merge($this->defaults, $matches), $matchedLength);

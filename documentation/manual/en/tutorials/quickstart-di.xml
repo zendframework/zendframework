@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<article xmlns="http://docbook.org/ns/docbook" version="5.0">
-<section xml:id="learning.di.very-brief-introduction-to-di"><info><title>Very brief introduction to Di.</title></info>
+<article xml:id="learning.di"><info><title>Learning Dependency Injection</title></info>
+
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="learning.di.very-brief-introduction-to-di">
+  <info><title>Very brief introduction to Di.</title></info>
   
   <para>
     <emphasis>Dependency Injection</emphasis> is a concept that has been
@@ -643,4 +645,5 @@ $struct = $container->get('struct'); // My\Struct instance
         the container class to use.
     </para>
 </section>
+
 </article>

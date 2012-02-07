@@ -388,5 +388,6 @@ $cache->addPlugin($plugin);
             <title>TODO: Examples</title>
         </info>
 
+        <para></para>
     </section>
 </section>

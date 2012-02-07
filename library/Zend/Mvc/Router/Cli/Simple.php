@@ -45,6 +45,9 @@ use Traversable,
  */
 class Simple implements Route
 {
+    const VALUE_NUMBER  = 'n';
+    const VALUE_STRING  = 's';
+
     /**
      * Parts of the route.
      *
@@ -201,27 +204,70 @@ class Simple implements Route
 
         while ($pos < $length) {
             /**
-             * Literal param, i.e.
-             *   something
+             * Mandatory long param
+             *    --param
+             *    --param=n
+             *    --param=s
              */
-            if (preg_match( '/(?<name>[a-z0-9][a-zA-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos )) {
+            if (preg_match( '/\G--(?<name>[a-zA-Z0-9]+)(?:=(?<type>[ns]))?(?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
-                    'name'       => $m['name'],
-                    'literal'    => true,
+                    'name'       => strtolower( $m['name'] ),
+                    'short'      => false,
+                    'literal'    => false,
                     'required'   => true,
-                    'positional' => true,
+                    'positional' => false,
+                    'valueType'  => !empty($m['type']) ? $m['type'] : null,
                 );
             }
             /**
-             * Optional literal param, i.e.
-             *    [something]
+             * Optional long param
+             *    [--param]
+             *    [--param=n]
+             *    [--param=s]
              */
-            elseif (preg_match( '/\[ *?(?<name>[a-z0-9][a-zA-Z0-9\_]*?) *?\](?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match(
+                '/\G\[ *?--(?<name>[a-zA-Z0-9]+)(?:=(?<type>[ns]))? *?\](?: +|$)/s', $def, $m, 0, $pos
+            )) {
                 $item = array(
-                    'name'       => $m['name'],
-                    'literal'    => true,
+                    'name'       => strtolower( $m['name'] ),
+                    'short'      => false,
+                    'literal'    => false,
                     'required'   => false,
-                    'positional' => true,
+                    'positional' => false,
+                    'valueType'  => !empty($m['type']) ? $m['type'] : null,
+                );
+            }
+            /**
+             * Mandatory short param
+             *    -a
+             *    -a=i
+             *    -a=s
+             *    -a=w
+             */
+            elseif (preg_match( '/\G-(?<name>[a-zA-Z0-9])(?:=(?<type>[ns]))?(?: +|$)/s', $def, $m, 0, $pos )) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'short'      => true,
+                    'literal'    => false,
+                    'required'   => true,
+                    'positional' => false,
+                    'valueType'  => !empty($m['type']) ? $m['type'] : null,
+                );
+            }
+            /**
+             * Optional short param
+             *    [-a]
+             *    [-a=n]
+             *    [-a=s]
+             */
+            elseif (preg_match('/\G\[ *?-(?<name>[a-zA-Z0-9])(?:=(?<type>[ns]))? *?\](?: +|$)/s', $def, $m, 0, $pos)) {
+                $item = array(
+                    'name'       => strtolower( $m['name'] ),
+                    'short'      => true,
+                    'literal'    => false,
+                    'required'   => false,
+                    'positional' => false,
+                    'valueType'  => !empty($m['type']) ? $m['type'] : null,
                 );
             }
             /**
@@ -230,6 +276,7 @@ class Simple implements Route
              *    [  something   |  somethingElse  |  anotherOne  ]
              */
             elseif (preg_match( '/
+                \G
                 \[
                     (?:
                         \ *?
@@ -248,16 +295,17 @@ class Simple implements Route
                     'literal'    => true,
                     'required'   => false,
                     'positional' => true,
+                    'alternative' => array(),
                 );
             }
             /**
-             * Mandatory value param, i.e.
-             *    SOMETHING
+             * Optional literal param, i.e.
+             *    [something]
              */
-            elseif (preg_match( '/(?<name>[A-Z0-9\_]+)(?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match( '/\G\[ *?(?<name>[a-z0-9][a-zA-Z0-9\_]*?) *?\](?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
-                    'literal'    => false,
+                    'name'       => $m['name'],
+                    'literal'    => true,
                     'required'   => false,
                     'positional' => true,
                 );
@@ -266,7 +314,7 @@ class Simple implements Route
              * Optional value param, i.e.
              *    [SOMETHING]
              */
-            elseif (preg_match( '/\[(?<name>[A-Z0-9\_]+)\](?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match( '/\G\[(?<name>[A-Z0-9\_]+)\](?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
@@ -275,73 +323,33 @@ class Simple implements Route
                 );
             }
             /**
-             * Mandatory long param
-             *    --param
-             *    --param=i
-             *    --param=s
-             *    --param=w
+             * Mandatory value param, i.e.
+             *    SOMETHING
              */
-            elseif (preg_match( '/--(?<name>[a-zA-Z0-9]+(?:=(?<type>[swi]))?)(?: +|$)/s', $def, $m, 0, $pos )) {
+            elseif (preg_match( '/\G(?<name>[A-Z0-9\_]+)(?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
                     'name'       => strtolower( $m['name'] ),
                     'literal'    => false,
                     'required'   => true,
-                    'positional' => false,
-                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
+                    'positional' => true,
                 );
             }
             /**
-             * Optional long param
-             *    [--param]
-             *    [--param=i]
-             *    [--param=s]
-             *    [--param=w]
+             * Mandatory literal param, i.e.
+             *   something
              */
-            elseif (preg_match('/\[ *?--(?<name>[a-zA-Z0-9]+(?:=(?<type>[swi]))?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
+            elseif (preg_match( '/\G(?<name>[a-z0-9][a-zA-Z0-9\_]*?)(?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
-                    'name'       => strtolower( $m['name'] ),
-                    'literal'    => false,
-                    'required'   => false,
-                    'positional' => false,
-                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
-                );
-            }
-            /**
-             * Mandatory short param
-             *    -a
-             *    -a=i
-             *    -a=s
-             *    -a=w
-             */
-            elseif (preg_match( '/-(?<name>[a-zA-Z0-9](?:=(?<type>[swi]))?)(?: +|$)/s', $def, $m, 0, $pos )) {
-                $item = array(
-                    'name'       => strtolower( $m['name'] ),
-                    'literal'    => false,
+                    'name'       => $m['name'],
+                    'literal'    => true,
                     'required'   => true,
-                    'positional' => false,
-                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
-                );
-            }
-            /**
-             * Optional short param
-             *    [-a]
-             *    [-a=i]
-             *    [-a=s]
-             *    [-a=w]
-             */
-            elseif (preg_match('/\[ *?-(?<name>[a-zA-Z0-9](?:=(?<type>[swi]))?) *?\](?: +|$)/s', $def, $m, 0, $pos)) {
-                $item = array(
-                    'name'       => strtolower( $m['name'] ),
-                    'literal'    => false,
-                    'required'   => false,
-                    'positional' => false,
-                    'getoptType' => !empty($m['type']) ? $m['type'] : null,
+                    'positional' => true,
                 );
             }
             else {
                 throw new Exception\InvalidArgumentException(
                     'Cannot understand CLI route at '.
-                    ($pos > 0 ? '[...] ' : '').
+                    ($pos > 0 ? '...' : '').
                     '"' . substr( $def, $pos ) . '"'
                 );
             }
@@ -350,7 +358,7 @@ class Simple implements Route
             $parts[] = $item;
         }
 
-        print_r($parts);
+//        print_r($parts);
         return $parts;
     }
 
@@ -358,8 +366,8 @@ class Simple implements Route
      * match(): defined by Route interface.
      *
      * @see     Route::match()
-     * @param   Request|RequestDescription $request
-     * @param   null|int                       $pathOffset
+     * @param   Request             $request
+     * @param   null|int            $pathOffset
      * @return  RouteMatch
      */
     public function match(Request $request, $pathOffset = null)
@@ -368,8 +376,14 @@ class Simple implements Route
             return null;
         }
 
-        $params = $request->getParams();
+        /** @var $request CliRequest */
+        /** @var $params \Zend\Stdlib\ParametersDescription */
+        $params = $request->getParams()->toArray();
+        $matches = array();
 
+        /**
+         * Extract positional and named parts
+         */
         $positional = $named = array();
         foreach($this->parts as &$part){
             if($part['positional'])
@@ -379,20 +393,133 @@ class Simple implements Route
         }
 
         /**
-         * Go through all positional params
+         * Scan for named parts inside Cli params
          */
-        $pos = 0;
-        for($x = 0;$x<count($positional);$x++){
-            if($params->offsetExists($pos)){
-
+        foreach($named as &$part){
+            /**
+             * Prepare match regex
+             */
+            if($part['short']){
+                if(isset($part['valueType'])){
+                    $regex = '/^\-'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
+                }else{
+                    $regex = '/^\-'.$part['name'].'$/';
+                }
             }else{
-
-
+                if(isset($part['valueType'])){
+                    $regex = '/^\-{2,}'.$part['name'].'(?:\=(?<value>.*?)$)?$/';
+                }else{
+                    $regex = '/^\-{2,}'.$part['name'].'$/';
+                }
             }
 
+            /**
+             * Look for param
+             */
+            $value = $param = null;
+            for($x=0;$x<count($params);$x++){
+                if(preg_match($regex,$params[$x],$m)){
+                    // found param
+                    $param = $params[$x];
+
+                    // prevent further scanning of this param
+                    array_splice($params,$x,1);
+
+                    if(isset($m['value'])){
+                        $value = $m['value'];
+                    }
+
+                    break;
+                }
+            }
+
+            /**
+             * Drop out if that was a mandatory param
+             */
+            if(!$param && $part['required']){
+                return false;
+            }
+
+            /**
+             * Try to retrieve value if it is expected
+             */
+            if(!$value && isset($part['valueType'])){
+                if($x < count($params)+1){
+                    // retrieve value from adjacent param
+                    $value = $params[$x];
+
+                    // prevent further scanning of this param
+                    array_splice($params,$x,1);
+                }else{
+                    // there are no more params available
+                    return false;
+                }
+            }
+
+            /**
+             * Validate the value type
+             */
+            if(isset($part['valueType'])){
+                if($part['valueType'] == self::VALUE_NUMBER && !is_numeric($value)){
+                    // value type mismatch
+                    return false;
+                }
+
+                if(
+                    isset($this->constraints[$part['name']]) &&
+                    !preg_match($this->constraints[$part['name']],$value)
+                ){
+                    // constraint failed
+                    return false;
+                }
+            }
+
+            /**
+             * Store the value
+             */
+            if(isset($part['valueType'])){
+                $matches[$part['name']] = $value;
+            }else{
+                $matches[$part['name']] = true;
+            }
         }
 
-        return new RouteMatch(array_merge($this->defaults, $matches), $matchedLength);
+
+//        /**
+//         * Go through all positional parts
+//         */
+//        $pos = 0;
+//        for($x = 0;$x<count($positional);$x++){
+//            $part = $positional[$x];
+//
+//            if($params->offsetExists($pos)){
+//                // found value at exact position
+//                $val = $params->get($pos);
+//
+//                /**
+//                 * Check constraints
+//                 */
+//                if (
+//                    isset($this->constraints[$part['name']]) &&
+//                    !preg_match($this->constraints[$part['name']],$val)
+//                ) {
+//                    return null;
+//                }
+//
+//                /**
+//                 * Save matched value
+//                 */
+//
+//            }else{
+//                /**
+//                 * We reached end of available positional params
+//                 */
+//
+//            }
+//
+//        }
+
+        return new RouteMatch(array_merge($this->defaults, $matches));
     }
 
     /**

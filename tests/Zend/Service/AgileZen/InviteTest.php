@@ -31,7 +31,7 @@ class InviteTest extends \PHPUnit_Framework_TestCase
         }
         $data = array (
             'email' => constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL'),
-            'role'  => constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID')
+            'role'  => (integer) constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID')
         );
         $invite = $this->agileZen->addInvite(
                 constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'),

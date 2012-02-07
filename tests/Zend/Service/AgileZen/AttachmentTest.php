@@ -32,6 +32,10 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
                 constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID'),
                 $data
         );
+        if (!$this->agileZen->isSuccessful()) {
+            $this->markTestSkipped('Your API key cannot add attachments to the project id ' .
+                    constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'));
+        }
         $this->assertTrue($this->agileZen->isSuccessful());
         $this->assertTrue($attachment instanceof \Zend\Service\AgileZen\Resources\Task);
         self::$attachId = $attachment->getId();

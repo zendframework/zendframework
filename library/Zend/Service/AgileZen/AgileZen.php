@@ -145,7 +145,15 @@ class AgileZen
         $client->setUri(self::URL . $url);
         $this->errorMsg = null;
         $this->errorCode = null;
-        return $client->send();
+        
+        $result = $client->send();
+        $status = $result->getStatusCode();
+        if ($status != 200) {
+            $this->errorMsg = $this->getErrorFromResponse($result);
+            $this->errorCode= $status;
+            return false;
+        }
+        return $result;
     }
 
     /**
@@ -186,68 +194,49 @@ class AgileZen
     public function authenticate()
     {
         $result = $this->httpCall('/projects','GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
      * Get the list of the projects
      * 
+     * @param  array $params
      * @return Container|boolean 
      */
-    public function getProjects()
+    public function getProjects($params=array())
     {
-        $result = $this->httpCall('/projects','GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $list = json_decode($result->getBody(),true);
-                if (is_array($list) && !empty($list['items'])) {
-                    return new Container($this, $list['items'], 'project');
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall('/projects' . $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $list = json_decode($result->getBody(),true);
+        if (is_array($list) && !empty($list['items'])) {
+            return new Container($this, $list['items'], 'project');
+        } 
+        return false;    
     }
 
     /**
      * Get project
      * 
      * @param  integer $id
+     * @param  array   $params
      * @return Resources\Project|boolean 
      */
-    public function getProject($id)
+    public function getProject($projectId, $params=array())
     {
-        if (empty($id)) {
+        if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$id",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $project = json_decode($result->getBody(),true);
-                if (is_array($project)) {
-                    return new Resources\Project($this, $project);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId" . $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $project = json_decode($result->getBody(),true);
+        if (is_array($project)) {
+            return new Resources\Project($this, $project);
+        } 
+        return false;       
     }
 
     /**
@@ -266,47 +255,37 @@ class AgileZen
             throw new Exception\InvalidArgumentException('The array of values is not valid for the project');
         }
         $result = $this->httpCall("/projects/$id",'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $project = json_decode($result->getBody(),true);
-                if (is_array($project)) {
-                    return new Resources\Project($this, $project);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $project = json_decode($result->getBody(),true);
+        if (is_array($project)) {
+            return new Resources\Project($this, $project);
+        } 
+        return false;    
     }
 
     /**
      * Get the members of a project
      * 
      * @param  integer $projectId
+     * @param  array   $params
      * @return Container|boolean
      */
-    public function getMembers($projectId)
+    public function getMembers($projectId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/members",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $members = json_decode($result->getBody(),true);
-                if (is_array($members) && !empty($members['items'])) {
-                    return new Container($this, $members['items'], 'user');
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/members" . 
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $members = json_decode($result->getBody(),true);
+        if (is_array($members) && !empty($members['items'])) {
+            return new Container($this, $members['items'], 'user');
+        } 
         return false;
     }
 
@@ -325,17 +304,8 @@ class AgileZen
         if (empty($member)) {
             throw new Exception\InvalidArgumentException('You must specify id or name of the member');
         }
-        $result= $this->httpCall("/projects/$projectId/members/", 'POST', $member);
-        $status= $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        $result = $this->httpCall("/projects/$projectId/members/", 'POST', $member);
+        return ($result!==false);
     }
 
     /**
@@ -353,72 +323,53 @@ class AgileZen
         if (empty($member)) {
             throw new Exception\InvalidArgumentException('You must specify id or name of the member');
         }
-        $result= $this->httpCall("/projects/$projectId/members/$member", 'DELETE');
-        $status= $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        $result = $this->httpCall("/projects/$projectId/members/$member", 'DELETE');
+        return ($result!==false);
     }
 
     /**
      * Get the phases of a project
      * 
      * @param  integer $id
+     * @param  array   $params
      * @return Container|boolean
      */
-    public function getPhases($projectId)
+    public function getPhases($projectId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result= $this->httpCall("/projects/$projectId/phases",'GET');
-        $status= $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $phases = json_decode($result->getBody(),true);
-                if (is_array($phases) && !empty($phases['items'])) {
-                    return new Container($this, $phases['items'], 'phase', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/phases" . $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $phases = json_decode($result->getBody(),true);
+        if (is_array($phases) && !empty($phases['items'])) {
+            return new Container($this, $phases['items'], 'phase', $projectId);
+        } 
         return false;
     }
 
     /**
      * Get the phases of a project
      * 
-     * @param  integer $id
+     * @param  integer $projectId
+     * @param  array $params
      * @return Container|boolean
      */
-    public function getStories($projectId)
+    public function getStories($projectId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result= $this->httpCall("/projects/$projectId/stories",'GET');
-        $status= $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $stories = json_decode($result->getBody(),true);
-                if (is_array($stories) && !empty($stories['items'])) {
-                    return new Container($this, $stories['items'], 'story', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories" . $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $stories = json_decode($result->getBody(),true);
+        if (is_array($stories) && !empty($stories['items'])) {
+            return new Container($this, $stories['items'], 'story', $projectId);
+        } 
         return false;
     }
 
@@ -427,9 +378,10 @@ class AgileZen
      * 
      * @param  integer $projectId
      * @param  integer $phaseId
+     * @param  arary   $params
      * @return Container 
      */
-    public function getStoriesPhase ($projectId, $phaseId)
+    public function getStoriesPhase ($projectId, $phaseId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -437,20 +389,15 @@ class AgileZen
         if (empty($phaseId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PHASE);
         }
-        $result= $this->httpCall("/projects/$projectId/phases/$phaseId/stories",'GET');
-        $status= $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $stories = json_decode($result->getBody(),true);
-                if (is_array($stories) && !empty($stories['items'])) {
-                    return new Container($this, $stories['items'], 'story', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/phases/$phaseId/stories" . 
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $stories = json_decode($result->getBody(),true);
+        if (is_array($stories) && !empty($stories['items'])) {
+            return new Container($this, $stories['items'], 'story', $projectId);
+        } 
         return false;
     }
 
@@ -465,30 +412,27 @@ class AgileZen
         if (empty($id)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result= $this->httpCall("/projects/$id?with=metrics",'GET');
-        $status= $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $result = json_decode($result->getBody(),true);
-                if (isset($result['metrics'])) {
-                    return $result['metrics'];
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$id?with=metrics",'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $result = json_decode($result->getBody(),true);
+        if (isset($result['metrics'])) {
+            return $result['metrics'];
+        }
         return false;
+            
     }
 
     /**
      * Get a story of a project
      * 
-     * @param  integer $id
+     * @param  integer $projectId
+     * @param  integer $storyId
+     * @param  array   $params
      * @return Resources\Story|boolean 
      */
-    public function getStory($projectId, $storyId)
+    public function getStory($projectId, $storyId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -496,22 +440,16 @@ class AgileZen
         if (empty($storyId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $story = json_decode($result->getBody(),true);
-                if (!empty($story) && is_array($story)) {
-                    $story['projectId'] = $projectId;
-                    return new Resources\Story($this, $story);
-
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId" . 
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $story = json_decode($result->getBody(),true);
+        if (!empty($story) && is_array($story)) {
+            $story['projectId'] = $projectId;
+            return new Resources\Story($this, $story);
+        }
         return false;
     }
 
@@ -519,9 +457,10 @@ class AgileZen
      * Get a phase of a project
      * 
      * @param  integer $id
+     * @param  array $params
      * @return Resources\Phase|boolean 
      */
-    public function getPhase($projectId, $phaseId)
+    public function getPhase($projectId, $phaseId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -529,21 +468,16 @@ class AgileZen
         if (empty($phaseId)) {
             throw new Exception\InvalidArgumentException("You did not specify the id of the phase");
         }
-        $result = $this->httpCall("/projects/$projectId/phases/$phaseId",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $phase = json_decode($result->getBody(),true);
-                if (!empty($phase) && is_array($phase)) {
-                    $phase['projectId'] = $projectId;
-                    return new Resources\Phase($this, $phase);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/phases/$phaseId" . 
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $phase = json_decode($result->getBody(),true);
+        if (!empty($phase) && is_array($phase)) {
+            $phase['projectId'] = $projectId;
+            return new Resources\Phase($this, $phase);
+        }
         return false;
     }
 
@@ -551,37 +485,34 @@ class AgileZen
      * Get project roles
      * 
      * @param  integer $id
+     * @param  array   $params
      * @return Container 
      */
-    public function getRoles($projectId)
+    public function getRoles($projectId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/roles",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $roles = json_decode($result->getBody(),true);
-                if (is_array($roles) && !empty($roles['items'])) {
-                    return new Container($this, $roles['items'], 'role', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/roles" . $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $roles = json_decode($result->getBody(),true);
+        if (is_array($roles) && !empty($roles['items'])) {
+            return new Container($this, $roles['items'], 'role', $projectId);
+        } 
+        return false;       
     }
 
     /**
      * Get a phase of a project
      * 
-     * @param  integer $id
+     * @param  integer $projectId
+     * @param  integer $roleId
+     * @param  array   $params
      * @return Resources\Role|boolean 
      */
-    public function getRole($projectId, $roleId)
+    public function getRole($projectId, $roleId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -589,21 +520,16 @@ class AgileZen
         if (empty($roleId)) {
             throw new Exception\InvalidArgumentException("You did not specify the id of the role");
         }
-        $result = $this->httpCall("/projects/$projectId/roles/$roleId",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $role = json_decode($result->getBody(),true);
-                if (!empty($role) && is_array($role)) {
-                    $role['projectId'] = $projectId;
-                    return new Resources\Role($this, $role);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/roles/$roleId" . 
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $role = json_decode($result->getBody(),true);
+        if (!empty($role) && is_array($role)) {
+            $role['projectId'] = $projectId;
+            return new Resources\Role($this, $role);
+        }
         return false;
     }
 
@@ -611,37 +537,35 @@ class AgileZen
      * Get invites of the project
      *  
      * @param  integer $id
+     * @param  array   $params
      * @return Container 
      */
-    public function getInvites($projectId)
+    public function getInvites($projectId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/invites",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $invites = json_decode($result->getBody(),true);
-                if (is_array($invites) && !empty($invites['items'])) {
-                    return new Container($this, $invites['items'], 'invite', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        $result = $this->httpCall("/projects/$projectId/invites" . 
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
+        } 
+        $invites = json_decode($result->getBody(),true);
+        if (is_array($invites) && !empty($invites['items'])) {
+            return new Container($this, $invites['items'], 'invite', $projectId);
+        } 
+        return false;    
     }
 
     /**
      * Get an invite of a project
      * 
-     * @param  integer $id
+     * @param  integer $projectId
+     * @param  integer $inviteId
+     * @param  array   $params
      * @return Resources\Invite|boolean 
      */
-    public function getInvite($projectId, $inviteId)
+    public function getInvite($projectId, $inviteId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -650,21 +574,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the id of the invite");
         }
         $result = $this->httpCall("/projects/$projectId/invites/$inviteId",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $invite = json_decode($result->getBody(),true);
-                if (is_array($invite) && !empty($invite)) {
-                    $invite['projectId'] = $projectId;
-                    return new Resources\Invite($this, $invite);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $invite = json_decode($result->getBody(),true);
+        if (is_array($invite) && !empty($invite)) {
+            $invite['projectId'] = $projectId;
+            return new Resources\Invite($this, $invite);
+        }
+        return false;    
     }
 
     /**
@@ -672,9 +590,10 @@ class AgileZen
      * 
      * @param  integer $projectId
      * @param  integer $storyId
+     * @param  array   $params
      * @return Container|boolean
      */
-    public function getTasks($projectId, $storyId)
+    public function getTasks($projectId, $storyId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -682,20 +601,15 @@ class AgileZen
         if (empty($storyId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $tasks = json_decode($result->getBody(),true);
-                if (is_array($tasks['items']) && !empty($tasks['items'])) {
-                    return new Container($this, $tasks['items'], 'task', $projectId);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks" . 
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $tasks = json_decode($result->getBody(),true);
+        if (is_array($tasks['items']) && !empty($tasks['items'])) {
+            return new Container($this, $tasks['items'], 'task', $projectId);
+        }
         return false;
     }
 
@@ -705,9 +619,10 @@ class AgileZen
      * @param  integer $projectId
      * @param  integer $storyId
      * @param  integer $taskId
+     * @param  array   $params
      * @return Resources\Task|boolean
      */
-    public function getTask($projectId, $storyId, $taskId)
+    public function getTask($projectId, $storyId, $taskId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -718,21 +633,16 @@ class AgileZen
         if (empty($taskId)) {
             throw new Exception\InvalidArgumentException("You did not specify the id of the task");
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks/$taskId",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $task = json_decode($result->getBody(),true);
-                if (is_array($task) && !empty($task)) {
-                    $task['projectId'] = $projectId;
-                    return new Resources\Task($this, $task);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks/$taskId" .
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $task = json_decode($result->getBody(),true);
+        if (is_array($task) && !empty($task)) {
+            $task['projectId'] = $projectId;
+            return new Resources\Task($this, $task);
+        }
         return false;
     }
 
@@ -759,21 +669,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the text key in data");
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks",'POST',$data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $task = json_decode($result->getBody(),true);
-                if (is_array($task) && !empty($task)) {
-                    $task['projectId'] = $projectId;
-                    return new Resources\Task($this, $task);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $task = json_decode($result->getBody(),true);
+        if (is_array($task) && !empty($task)) {
+            $task['projectId'] = $projectId;
+            return new Resources\Task($this, $task);
+        }
+        return false;   
     }
 
     /**
@@ -803,20 +707,14 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the text key in data");
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks/$taskId",'PUT',$data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $task = json_decode($result->getBody(),true);
-                if (is_array($task) && !empty($task)) {
-                    $task['projectId'] = $projectId;
-                    return new Resources\Task($this, $task);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $task = json_decode($result->getBody(),true);
+        if (is_array($task) && !empty($task)) {
+            $task['projectId'] = $projectId;
+            return new Resources\Task($this, $task);
+        }
         return false;
     }
 
@@ -840,16 +738,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the id of the task");
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/tasks/$taskId",'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -857,9 +746,10 @@ class AgileZen
      * 
      * @param  integer $projectId
      * @param  array $data
+     * @param  aray  $params
      * @return Resources\Story|boolean
      */
-    public function addStory($projectId, $data)
+    public function addStory($projectId, $data, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -870,22 +760,18 @@ class AgileZen
         if (!isset($data['text'])) {
             throw new Exception\InvalidArgumentException("You did not specify the text key in data");
         }
-        $result = $this->httpCall("/projects/$projectId/stories", 'POST', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $story = json_decode($result->getBody(),true);
-                if (is_array($story) && !empty($story)) {
-                    $story['projectId'] = $projectId;
-                    return new Resources\Story($this, $story);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories" . 
+                $this->getUrlParameters($params), 'POST', $data);
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $story = json_decode($result->getBody(),true);
+        if (is_array($story) && !empty($story)) {
+            $story['projectId'] = $projectId;
+            return new Resources\Story($this, $story);
+        }
         return false;
+            
     }
 
     /**
@@ -911,21 +797,16 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the text key in data");
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId", 'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $story = json_decode($result->getBody(),true);
-                if (is_array($story) && !empty($story)) {
-                    $story['projectId'] = $projectId;
-                    return new Resources\Story($this, $story);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $story = json_decode($result->getBody(),true);
+        if (is_array($story) && !empty($story)) {
+            $story['projectId'] = $projectId;
+            return new Resources\Story($this, $story);
+        }
         return false;
+            
     }
 
     /**
@@ -944,16 +825,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId", 'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -975,21 +847,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_NAME_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/roles", 'POST', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $role = json_decode($result->getBody(),true);
-                if (is_array($role) && !empty($role)) {
-                    $role['projectId'] = $projectId;
-                    return new Resources\Role($this, $role);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $role = json_decode($result->getBody(),true);
+        if (is_array($role) && !empty($role)) {
+            $role['projectId'] = $projectId;
+            return new Resources\Role($this, $role);
+        }
+        return false;   
     }
 
     /**
@@ -1015,21 +881,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_NAME_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/roles/$roleId", 'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $role = json_decode($result->getBody(),true);
-                if (is_array($role) && !empty($role)) {
-                    $role['projectId'] = $projectId;
-                    return new Resources\Role($this, $role);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $role = json_decode($result->getBody(),true);
+        if (is_array($role) && !empty($role)) {
+            $role['projectId'] = $projectId;
+            return new Resources\Role($this, $role);
+        }
+        return false; 
     }
 
     /**
@@ -1048,16 +908,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_ROLE);
         }
         $result = $this->httpCall("/projects/$projectId/roles/$roleId", 'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -1082,21 +933,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException("You did not specify the description key in data");
         }
         $result = $this->httpCall("/projects/$projectId/phases", 'POST', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $phase = json_decode($result->getBody(),true);
-                if (is_array($phase) && !empty($phase)) {
-                    $phase['projectId'] = $projectId;
-                    return new Resources\Phase($this, $phase);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $phase = json_decode($result->getBody(),true);
+        if (is_array($phase) && !empty($phase)) {
+            $phase['projectId'] = $projectId;
+            return new Resources\Phase($this, $phase);
+        }
+        return false;    
     }
 
     /**
@@ -1122,21 +967,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_NAME_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/phases/$phaseId", 'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $phase = json_decode($result->getBody(),true);
-                if (is_array($phase) && !empty($phase)) {
-                    $phase['projectId'] = $projectId;
-                    return new Resources\Phase($this, $phase);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $phase = json_decode($result->getBody(),true);
+        if (is_array($phase) && !empty($phase)) {
+            $phase['projectId'] = $projectId;
+            return new Resources\Phase($this, $phase);
+        }
+        return false;   
     }
 
     /**
@@ -1155,16 +994,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_PHASE);
         }
         $result = $this->httpCall("/projects/$projectId/phases/$phaseId", 'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -1189,21 +1019,16 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ROLEID_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/invites", 'POST', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $invite = json_decode($result->getBody(),true);
-                if (is_array($invite) && !empty($invite)) {
-                    $invite['projectId'] = $projectId;
-                    return new Resources\Invite($this, $invite);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $invite = json_decode($result->getBody(),true);
+        if (is_array($invite) && !empty($invite)) {
+            $invite['projectId'] = $projectId;
+            return new Resources\Invite($this, $invite);
+        }
         return false;
+            
     }
 
     /**
@@ -1222,16 +1047,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_INVITE);
         }
         $result = $this->httpCall("/projects/$projectId/invites/$inviteId", 'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -1239,9 +1055,10 @@ class AgileZen
      * 
      * @param  integer $projectId
      * @param  integer $tagId
+     * @param  array   $params
      * @return Resources\Tag|boolean 
      */
-    public function getTag($projectId, $tagId)
+    public function getTag($projectId, $tagId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -1249,50 +1066,40 @@ class AgileZen
         if (empty($tagId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_TAG);
         }
-        $result = $this->httpCall("/projects/$projectId/tags/$tagId", 'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $tag = json_decode($result->getBody(),true);
-                if (is_array($tag) && !empty($tag)) {
-                    $tag['projectId'] = $projectId;
-                    return new Resources\Tag($this, $tag);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/tags/$tagId" . 
+                $this->getUrlParameters($params), 'GET');
+        if ($result===false) {
+            return false;
+        } 
+        $tag = json_decode($result->getBody(),true);
+        if (is_array($tag) && !empty($tag)) {
+            $tag['projectId'] = $projectId;
+            return new Resources\Tag($this, $tag);
         }
-        $this->errorCode= $status;
-        return false;
+        return false; 
     }
 
     /**
      * Get the tags of a project
      * 
      * @param  integer $projectId
+     * @param  array   $params
      * @return Container 
      */
-    public function getTags($projectId)
+    public function getTags($projectId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
         }
-        $result = $this->httpCall("/projects/$projectId/tags",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $tags = json_decode($result->getBody(),true);
-                if (is_array($tags) && !empty($tags['items'])) {
-                    return new Container($this, $tags['items'], 'tag', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/tags" . $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode = $status;
-        return false;
+        $tags = json_decode($result->getBody(),true);
+        if (is_array($tags) && !empty($tags['items'])) {
+            return new Container($this, $tags['items'], 'tag', $projectId);
+        } 
+        return false;    
     }
 
     /**
@@ -1314,20 +1121,14 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_NAME_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/tags", 'POST', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $tag = json_decode($result->getBody(),true);
-                if (is_array($tag) && !empty($tag)) {
-                    $tag['projectId'] = $projectId;
-                    return new Resources\Tag($this, $tag);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $tag = json_decode($result->getBody(),true);
+        if (is_array($tag) && !empty($tag)) {
+            $tag['projectId'] = $projectId;
+            return new Resources\Tag($this, $tag);
+        }
         return false;
     }
 
@@ -1350,21 +1151,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_NAME_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/tasks", 'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $task = json_decode($result->getBody(),true);
-                if (is_array($task) && !empty($task)) {
-                    $task['projectId'] = $projectId;
-                    return new Resources\Task($this, $task);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $task = json_decode($result->getBody(),true);
+        if (is_array($task) && !empty($task)) {
+            $task['projectId'] = $projectId;
+            return new Resources\Task($this, $task);
+        }
+        return false;        
     }
 
     /**
@@ -1383,16 +1178,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_TAG);
         }
         $result = $this->httpCall("/projects/$projectId/tags/$tagId", 'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -1401,9 +1187,10 @@ class AgileZen
      * @param  integer $projectId
      * @param  integer $storyId
      * @param  integer $attachId
+     * @param  array   $params
      * @return Resources\Attachment|boolean 
      */
-    public function getAttachment($projectId, $storyId, $attachId)
+    public function getAttachment($projectId, $storyId, $attachId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -1414,22 +1201,17 @@ class AgileZen
         if (empty($attachId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_ATTACH);
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments/$attachId", 'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $attach = json_decode($result->getBody(),true);
-                if (is_array($attach) && !empty($attach)) {
-                    $attach['projectId'] = $projectId;
-                    return new Resources\Attachment($this, $attach);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments/$attachId" . 
+                $this->getUrlParameters($params), 'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $attach = json_decode($result->getBody(),true);
+        if (is_array($attach) && !empty($attach)) {
+            $attach['projectId'] = $projectId;
+            return new Resources\Attachment($this, $attach);
+        }
+        return false;       
     }
 
     /**
@@ -1437,9 +1219,10 @@ class AgileZen
      * 
      * @param  integer $projectId
      * @param  integer $storyId
+     * @param  array   $params
      * @return Container 
      */
-    public function getAttachments($projectId, $storyId)
+    public function getAttachments($projectId, $storyId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -1447,21 +1230,16 @@ class AgileZen
         if (empty($storyId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $attachments = json_decode($result->getBody(),true);
-                if (is_array($attachments) && !empty($attachments['items'])) {
-                    return new Container($this, $attachments['items'], 'attachment', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments" .
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode = $status;
-        return false;
+        $attachments = json_decode($result->getBody(),true);
+        if (is_array($attachments) && !empty($attachments['items'])) {
+            return new Container($this, $attachments['items'], 'attachment', $projectId);
+        } 
+        return false;    
     }
 
     /**
@@ -1487,20 +1265,14 @@ class AgileZen
             $this->getHttpClient()->setFileUpload($file,'attachment');
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments", 'POST');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $attachments = json_decode($result->getBody(),true);
-                if (is_array($attachments) && !empty($attachments['items'])) {
-                    return new Container($this, $attachments['items'], 'attachment', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $attachments = json_decode($result->getBody(),true);
+        if (is_array($attachments) && !empty($attachments['items'])) {
+            return new Container($this, $attachments['items'], 'attachment', $projectId);
+        } 
+        return false;   
     }
 
     /**
@@ -1530,21 +1302,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_FILE_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments/$attachId", 'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $attachment = json_decode($result->getBody(),true);
-                if (is_array($attachment) && !empty($attachment)) {
-                    $attachment['projectId'] = $projectId;
-                    return new Resources\Attachment($this, $attachment);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $attachment = json_decode($result->getBody(),true);
+        if (is_array($attachment) && !empty($attachment)) {
+            $attachment['projectId'] = $projectId;
+            return new Resources\Attachment($this, $attachment);
+        }
+        return false;    
     }
 
     /**
@@ -1567,16 +1333,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_ATTACH);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/attachments/$attachId", 'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -1585,9 +1342,10 @@ class AgileZen
      * @param  integer $projectId
      * @param  integer $storyId
      * @param  integer $commentId
+     * @param  array   $params
      * @return Resources\Comment|boolean 
      */
-    public function getComment($projectId, $storyId, $commentId)
+    public function getComment($projectId, $storyId, $commentId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -1598,22 +1356,17 @@ class AgileZen
         if (empty($commentId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_COMMENT);
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments/$commentId", 'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $comment = json_decode($result->getBody(),true);
-                if (is_array($comment) && !empty($comment)) {
-                    $comment['projectId'] = $projectId;
-                    return new Resources\Comment($this, $comment);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments/$commentId" . 
+                $this->getUrlParameters($params), 'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $comment = json_decode($result->getBody(),true);
+        if (is_array($comment) && !empty($comment)) {
+            $comment['projectId'] = $projectId;
+            return new Resources\Comment($this, $comment);
+        }
+        return false; 
     }
 
     /**
@@ -1621,9 +1374,10 @@ class AgileZen
      * 
      * @param  integer $projectId
      * @param  integer $storyId
+     * @param  array   $params
      * @return Container 
      */
-    public function getComments($projectId, $storyId)
+    public function getComments($projectId, $storyId, $params=array())
     {
         if (empty($projectId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_PROJECT);
@@ -1631,21 +1385,16 @@ class AgileZen
         if (empty($storyId)) {
             throw new Exception\InvalidArgumentException(self::ERR_ID_STORY);
         }
-        $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments",'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $comments = json_decode($result->getBody(),true);
-                if (is_array($comments) && !empty($comments['items'])) {
-                    return new Container($this, $comments['items'], 'comment', $projectId);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments" .
+                $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode = $status;
-        return false;
+        $comments = json_decode($result->getBody(),true);
+        if (is_array($comments) && !empty($comments['items'])) {
+            return new Container($this, $comments['items'], 'comment', $projectId);
+        } 
+        return false;   
     }
 
     /**
@@ -1671,21 +1420,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_TEXT_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments", 'POST', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $comment = json_decode($result->getBody(),true);
-                if (is_array($comment) && !empty($comment)) {
-                    $comment['projectId'] = $projectId;
-                    return new Resources\Comment($this, $comment);
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $comment = json_decode($result->getBody(),true);
+        if (is_array($comment) && !empty($comment)) {
+            $comment['projectId'] = $projectId;
+            return new Resources\Comment($this, $comment);
+        } 
+        return false;    
     }
 
     /**
@@ -1715,21 +1458,15 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_TEXT_KEY);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments/$commentId", 'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $comment = json_decode($result->getBody(),true);
-                if (is_array($comment) && !empty($comment)) {
-                    $comment['projectId'] = $projectId;
-                    return new Resources\Comment($this, $comment);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $comment = json_decode($result->getBody(),true);
+        if (is_array($comment) && !empty($comment)) {
+            $comment['projectId'] = $projectId;
+            return new Resources\Comment($this, $comment);
+        }
+        return false;  
     }
 
     /**
@@ -1752,16 +1489,7 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_ID_COMMENT);
         }
         $result = $this->httpCall("/projects/$projectId/stories/$storyId/comments/$commentId", 'DELETE');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                return true;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
-        }
-        $this->errorCode= $status;
-        return false;
+        return ($result!==false);
     }
 
     /**
@@ -1772,20 +1500,14 @@ class AgileZen
     public function getMe()
     {
         $result = $this->httpCall("/me", 'GET');
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $me = json_decode($result->getBody(),true);
-                if (is_array($me) && !empty($me)) {
-                    return new Resources\User($this, $me);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $me = json_decode($result->getBody(),true);
+        if (is_array($me) && !empty($me)) {
+            return new Resources\User($this, $me);
+        }
+        return false;   
     }
 
     /**
@@ -1800,44 +1522,33 @@ class AgileZen
             throw new Exception\InvalidArgumentException(self::ERR_DATA);
         }
         $result = $this->httpCall("/me", 'PUT', $data);
-        $status = $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $me = json_decode($result->getBody(),true);
-                if (is_array($me) && !empty($me)) {
-                    return new Resources\User($this, $me);
-                }
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+         if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
+        $me = json_decode($result->getBody(),true);
+        if (is_array($me) && !empty($me)) {
+            return new Resources\User($this, $me);
+        }
         return false;
     }
 
     /**
      * Get my stories
      * 
+     * @param  array $params
      * @return Container|boolean
      */
-    public function getMyStories()
+    public function getMyStories($params=array())
     {
-        $result= $this->httpCall("/me/stories",'GET');
-        $status= $result->getStatusCode();
-        switch ($status) {
-            case '200' : 
-                $stories = json_decode($result->getBody(),true);
-                if (is_array($stories) && !empty($stories['items'])) {
-                    return new Container($this, $stories['items'], 'story');
-                } 
-                return false;
-            default:
-                $this->errorMsg = $this->getErrorFromResponse($result);
-                break;    
+        $result = $this->httpCall("/me/stories" . $this->getUrlParameters($params),'GET');
+        if ($result===false) {
+            return false;
         }
-        $this->errorCode= $status;
-        return false;
+        $stories = json_decode($result->getBody(),true);
+        if (is_array($stories) && !empty($stories['items'])) {
+            return new Container($this, $stories['items'], 'story');
+        } 
+        return false;    
     }
 
     /**
@@ -1860,5 +1571,34 @@ class AgileZen
             return $msg;
         }
         return self::ERR_UNKNOWN;
+    }
+    /**
+     * Format the URL with the parameters filter, enrichments, and pagination
+     * 
+     * @param  array $params
+     * @return string 
+     */
+    protected function getUrlParameters($params)
+    {
+        if (empty($params)) {
+            return null;
+        }
+        if (!is_array($params)) {
+            throw new Exception\InvalidArgumentException('You didn\'t specify the array of parameters');
+        }
+        $validKeys = array ('where', 'with', 'page', 'pageSize');
+        $url = '?';
+        foreach ($validKeys as $key) {
+             if (isset($params[$key])) { 
+                 if ($url!=='?') {
+                     $url.= '&';
+                 }
+                 $url.= $key . '=' . urlencode($params[$key]);
+             }
+        }
+        if ($url==='?') {
+            return null;
+        }
+        return $url;
     }
 }

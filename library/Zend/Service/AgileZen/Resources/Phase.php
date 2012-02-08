@@ -135,10 +135,11 @@ class Phase extends Entity
     /**
      * Get stories 
      * 
+     * @param  array $params 
      * @return \Zend\Service\AgileZen\Container 
      */
-    public function getStories()
+    public function getStories($params=array())
     {
-        return $this->service->getStoriesPhase($this->projectId, $this->id);
+        return $this->service->getStoriesPhase($this->projectId, $this->id, $params);
     }
 }

@@ -21,14 +21,24 @@
 
 namespace Zend\View;
 
+use Countable,
+    IteratorAggregate;
+
 /**
+ * Interface describing a view model.
+ *
+ * Extends "Countable"; count() should return the number of children attached
+ * to the model.
+ *
+ * Extends "IteratorAggregate"; should allow iterating over children.
+ *
  * @category   Zend
  * @package    Zend_View
  * @subpackage Model
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Model
+interface Model extends Countable, IteratorAggregate
 {
     /**
      * Set renderer option/hint
@@ -77,4 +87,73 @@ interface Model
      * @return array|\ArrayAccess
      */
     public function getVariables();
+
+    /**
+     * Set the template to be used by this model 
+     * 
+     * @param  string $template
+     * @return Model
+     */
+    public function setTemplate($template);
+
+    /**
+     * Get the template to be used by this model
+     * 
+     * @return string
+     */
+    public function getTemplate();
+
+    /**
+     * Add a child model
+     * 
+     * @param  Model $child 
+     * @return Model
+     */
+    public function addChild(Model $child);
+
+    /**
+     * Return all children.
+     *
+     * Return specifies an array, but may be any iterable object.
+     *
+     * @return array
+     */
+    public function getChildren();
+
+    /**
+     * Does the model have any children? 
+     * 
+     * @return bool
+     */
+    public function hasChildren();
+
+    /**
+     * Set the name of the variable to capture this model to, if it is a child model
+     * 
+     * @param  string $capture 
+     * @return Model
+     */
+    public function setCaptureTo($capture);
+
+    /**
+     * Get the name of the variable to which to capture this model
+     * 
+     * @return string
+     */
+    public function captureTo();
+
+    /**
+     * Set flag indicating whether or not this is considered a terminal or standalone model
+     * 
+     * @param  bool $terminate 
+     * @return Model
+     */
+    public function setTerminal($terminate);
+
+    /**
+     * Is this considered a terminal or standalone model?
+     * 
+     * @return bool
+     */
+    public function terminate();
 }

@@ -22,6 +22,7 @@
 namespace Zend\View\Model;
 
 use ArrayAccess,
+    ArrayIterator,
     Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\View\Exception,
@@ -37,10 +38,37 @@ use ArrayAccess,
 class ViewModel implements Model
 {
     /**
+     * What variable a parent model should capture this model to 
+     * 
+     * @var string
+     */
+    protected $captureTo = 'content';
+
+    /**
+     * Child models
+     * @var array
+     */
+    protected $children = array();
+
+    /**
      * Renderer options
      * @var array
      */
     protected $options = array();
+
+    /**
+     * Template to use when rendering this model 
+     * 
+     * @var string
+     */
+    protected $template = '';
+
+    /**
+     * Is this a standalone, or terminal, model?
+     * 
+     * @var bool
+     */
+    protected $terminate = false;
 
     /**
      * View variables
@@ -163,5 +191,125 @@ class ViewModel implements Model
     public function getVariables()
     {
         return $this->variables;
+    }
+
+    /**
+     * Set the template to be used by this model 
+     * 
+     * @param  string $template
+     * @return ViewModel
+     */
+    public function setTemplate($template)
+    {
+        $this->template = (string) $template;
+        return $this;
+    }
+
+    /**
+     * Get the template to be used by this model
+     * 
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * Add a child model
+     * 
+     * @param  Model $child 
+     * @return ViewModel
+     */
+    public function addChild(Model $child)
+    {
+        $this->children[] = $child;
+        return $this;
+    }
+
+    /**
+     * Return all children.
+     *
+     * Return specifies an array, but may be any iterable object.
+     *
+     * @return array
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Does the model have any children? 
+     * 
+     * @return bool
+     */
+    public function hasChildren()
+    {
+        return (0 < count($this->children));
+    }
+
+    /**
+     * Set the name of the variable to capture this model to, if it is a child model
+     * 
+     * @param  string $capture 
+     * @return ViewModel
+     */
+    public function setCaptureTo($capture)
+    {
+        $this->captureTo = (string) $capture;
+        return $this;
+    }
+
+    /**
+     * Get the name of the variable to which to capture this model
+     * 
+     * @return string
+     */
+    public function captureTo()
+    {
+        return $this->captureTo;
+    }
+
+    /**
+     * Set flag indicating whether or not this is considered a terminal or standalone model
+     * 
+     * @param  bool $terminate 
+     * @return ViewModel
+     */
+    public function setTerminal($terminate)
+    {
+        $this->terminate = (bool) $terminate;
+        return $this;
+    }
+
+    /**
+     * Is this considered a terminal or standalone model?
+     * 
+     * @return bool
+     */
+    public function terminate()
+    {
+        return $this->terminate;
+    }
+
+    /**
+     * Return count of children
+     * 
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->children);
+    }
+
+    /**
+     * Get iterator of children
+     * 
+     * @return Iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->children);
     }
 }

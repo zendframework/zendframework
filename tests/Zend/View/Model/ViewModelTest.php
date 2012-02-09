@@ -128,4 +128,90 @@ class ViewModelTest extends TestCase
         $this->setExpectedException('Zend\View\Exception\InvalidArgumentException', 'expects an array');
         $model->setOptions(new stdClass);
     }
+
+    public function testCaptureToDefaultsToContent()
+    {
+        $model = new ViewModel();
+        $this->assertEquals('content', $model->captureTo());
+    }
+
+    public function testCaptureToValueIsMutable()
+    {
+        $model = new ViewModel();
+        $model->setCaptureTo('foo');
+        $this->assertEquals('foo', $model->captureTo());
+    }
+
+    public function testHasNoChildrenByDefault()
+    {
+        $model = new ViewModel();
+        $this->assertFalse($model->hasChildren());
+    }
+
+    public function testWhenNoChildrenCountIsZero()
+    {
+        $model = new ViewModel();
+        $this->assertEquals(0, count($model));
+    }
+
+    public function testCanAddChildren()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $model->addChild($child);
+        $this->assertTrue($model->hasChildren());
+    }
+
+    public function testCanCountChildren()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $model->addChild($child);
+        $this->assertEquals(1, count($model));
+        $model->addChild($child);
+        $this->assertEquals(2, count($model));
+    }
+
+    public function testCanIterateChildren()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $model->addChild($child);
+        $model->addChild($child);
+        $model->addChild($child);
+
+        $count = 0;
+        foreach ($model as $childModel) {
+            $this->assertSame($child, $childModel);
+            $count++;
+        }
+        $this->assertEquals(3, $count);
+    }
+
+    public function testTemplateIsEmptyByDefault()
+    {
+        $model    = new ViewModel();
+        $template = $model->getTemplate();
+        $this->assertTrue(empty($template));
+    }
+
+    public function testTemplateIsMutable()
+    {
+        $model = new ViewModel();
+        $model->setTemplate('foo');
+        $this->assertEquals('foo', $model->getTemplate());
+    }
+
+    public function testIsNotTerminatedByDefault()
+    {
+        $model = new ViewModel();
+        $this->assertFalse($model->terminate());
+    }
+
+    public function testTerminationFlagIsMutable()
+    {
+        $model = new ViewModel();
+        $model->setTerminal(true);
+        $this->assertTrue($model->terminate());
+    }
 }

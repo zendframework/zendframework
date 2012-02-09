@@ -98,7 +98,7 @@ class Xml extends Config
         if (!$oldUseInternalErrors) {
             libxml_use_internal_errors(false);
         }
-        if ( ($xmlErrorCnt = count($xmlErrors)) ) {
+        if (count($xmlErrors)) {
             libxml_clear_errors();
 
             // create and throw exception stack

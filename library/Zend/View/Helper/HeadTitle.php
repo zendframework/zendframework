@@ -76,9 +76,9 @@ class HeadTitle extends Placeholder\Container\Standalone
      */
     public function __invoke($title = null, $setType = null)
     {
-        if ($setType === null && is_null($this->getDefaultAttachOrder())) {
+        if ($setType === null && $this->getDefaultAttachOrder() === null) {
             $setType = Placeholder\Container\AbstractContainer::APPEND;
-        } elseif ($setType === null && !is_null($this->getDefaultAttachOrder())) {
+        } elseif ($setType === null && $this->getDefaultAttachOrder() !== null) {
             $setType = $this->getDefaultAttachOrder();
         }
         $title = (string) $title;

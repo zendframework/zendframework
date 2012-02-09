@@ -488,7 +488,7 @@ class Client implements Dispatchable
             }
         } elseif ($cookie instanceof SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
-        } elseif (is_string($cookie) && !is_null($value)) {
+        } elseif (is_string($cookie) && $value !== null) {
             if (!empty($value) && $this->config['encodecookies']) {
                 $value = urlencode($value);
             }

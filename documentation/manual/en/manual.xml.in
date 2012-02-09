@@ -19,7 +19,7 @@
             <year>2005-<?dbtimestamp format="Y"?></year>
             <holder>
                 Zend Technologies Inc.
-                (<uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">http://www.zend.com</uri>)
+                (<link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.zend.com">http://www.zend.com</link>)
             </holder>
         </copyright>
         <!--
@@ -50,15 +50,11 @@
     <part xml:id="learning">
         <info><title>&part.learning.title;</title></info>
 
-
-        <chapter xml:id="learning.di"><info><title>Learning Dependency Injection</title></info>
-
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/quickstart-di.xml" parse="xml">
-                <xi:fallback>
-                    <xi:include href="../en/tutorials/quickstart-di.xml" parse="xml"/>
-                </xi:fallback>
-            </xi:include>
-        </chapter>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tutorials/quickstart-di.xml" parse="xml">
+            <xi:fallback>
+                <xi:include href="../en/tutorials/quickstart-di.xml" parse="xml"/>
+            </xi:fallback>
+        </xi:include>
 
         <!--<chapter xml:id="learning.quickstart">-->
             <!--<info><title>&part.learning.quickstart.title;</title></info>-->

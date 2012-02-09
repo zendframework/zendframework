@@ -69,7 +69,7 @@ class CaptureCache extends AbstractPattern
         }
 
         ob_start(array($this, 'flush'));
-        ob_implicitflush(false);
+        ob_implicit_flush(false);
         $this->pageId = $pageId;
 
         return false;

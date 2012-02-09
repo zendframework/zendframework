@@ -47,6 +47,42 @@ class SimpleRouteStackTest extends TestCase
         $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
     }
     
+    public function testSetRoutesWithInvalidArgument()
+    {
+        $this->setExpectedException('Zend\Mvc\Router\Exception\InvalidArgumentException', 'addRoutes expects an array or Traversable set of routes');
+        $stack = new SimpleRouteStack();
+        $stack->setRoutes('foo');
+    }
+    
+    public function testSetRoutesAsArray()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->setRoutes(array(
+            'foo' => new TestAsset\DummyRoute()
+        ));
+        
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        
+        $stack->setRoutes(array());
+        
+        $this->assertSame(null, $stack->match(new Request()));
+    }
+        
+    public function testSetRoutesAsTraversable()
+    {
+        $stack = new SimpleRouteStack();
+        $stack->setRoutes(new ArrayIterator(array(
+            'foo' => new TestAsset\DummyRoute()
+        )));
+        
+        $this->assertInstanceOf('Zend\Mvc\Router\RouteMatch', $stack->match(new Request()));
+        
+        $stack->setRoutes(new ArrayIterator(array()));
+        
+        $this->assertSame(null, $stack->match(new Request()));
+        
+    }
+    
     public function testremoveRouteAsArray()
     {
         $stack = new SimpleRouteStack();

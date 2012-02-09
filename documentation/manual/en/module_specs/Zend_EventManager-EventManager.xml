@@ -132,8 +132,8 @@ $foo->bar('baz', 'bat');
         </para>
 
         <para>
-            Sometimes you may want to specify listeners without yet having an object isntance of the
-            class composing an <classname>Event</classname>Manager. The
+            Sometimes you may want to specify listeners without yet having an object instance of the
+            class composing an <classname>EventManager</classname>. The
             <classname>StaticEventManager</classname> allows you to do this. The call to
             <methodname>attach</methodname> is identical to the <classname>EventManager</classname>,
             but expects an additional parameter at the beginning: a named instance. Remember the
@@ -328,7 +328,7 @@ $foo->bar('baz', 'bat');
                         with values such as ".pre", ".post", etc. as needed.
                         <varname>$context</varname> should be the current object instance, or the
                         name of the function if not triggering within an object.
-                        <varname>$params</varname> should typically be an associative arry or
+                        <varname>$params</varname> should typically be an associative array or
                         <classname>ArrayAccess</classname> instance; we recommend using the
                         parameters passed to the function/method (<function>compact()</function> is
                         often useful here). This method can also take a callback and behave in the 

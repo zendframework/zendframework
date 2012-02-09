@@ -379,7 +379,7 @@ class Message
      */
     public function setBody($body)
     {
-        if (!is_string($body) && !is_null($body)) {
+        if (!is_string($body) && $body !== null) {
             if (!is_object($body)) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     '%s expects a string or object argument; received "%s"',

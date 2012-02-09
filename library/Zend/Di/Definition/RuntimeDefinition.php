@@ -94,7 +94,7 @@ class RuntimeDefinition implements Definition
             return (array_key_exists($class, $this->classes));
         }
         
-        return class_exists($class, true);
+        return class_exists($class) || interface_exists($class);
     }
 
     /**

@@ -572,9 +572,8 @@ define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID','insert the project id');
 define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_STORY_ID','insert the story id');
 define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_EMAIL','insert email for invitation');
 define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_INVITE_ROLE_ID','insert role id for invitation');
+define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME','insert the member name to add to the project');
 
-//define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME','insert the member name to add to the project');
-define('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_MEMBER_NAME',44931);
 
 /**
  * Zend_Service_Amazon online tests

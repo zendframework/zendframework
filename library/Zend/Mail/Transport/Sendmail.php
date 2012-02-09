@@ -90,7 +90,7 @@ class Sendmail implements Transport
      */
     public function setParameters($parameters)
     {
-        if (is_null($parameters) || is_string($parameters)) {
+        if ($parameters === null || is_string($parameters)) {
             $this->parameters = $parameters;
             return $this;
         }

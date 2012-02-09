@@ -48,18 +48,6 @@ abstract class AbstractPattern implements Pattern
      */
     public function setOptions(PatternOptions $options)
     {
-        if (!is_array($options)
-            && !$options instanceof Traversable
-            && !$options instanceof PatternOptions
-        ) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array, a Traversable object, or an PatternOptions instance; '
-                    . 'received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
         if (!$options instanceof PatternOptions) {
             $options = new PatternOptions($options);
         }
@@ -67,8 +55,6 @@ abstract class AbstractPattern implements Pattern
         $this->options = $options;
         return $this;
     }
-
-
 
     /**
      * Get all pattern options

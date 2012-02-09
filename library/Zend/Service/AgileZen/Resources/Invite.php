@@ -95,6 +95,9 @@ class Invite extends Entity
         }
 
         $this->createTime = $data['createTime'];
+
+        $data['role']['projectId'] = $data['projectId'];
+        
         $this->email      = $data['email'];
         $this->token      = $data['token'];
         $this->sender     = new User($service, $data['sender']);

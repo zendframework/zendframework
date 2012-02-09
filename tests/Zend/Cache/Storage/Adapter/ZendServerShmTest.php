@@ -51,7 +51,8 @@ class ZendServerShmTest extends CommonAdapterTest
             }
         }
 
-        $this->_storage = new Cache\Storage\Adapter\ZendServerShm();
+        $this->_options = new Cache\Storage\Adapter\AdapterOptions();
+        $this->_storage = new Cache\Storage\Adapter\ZendServerShm($this->_options);
         parent::setUp();
     }
 

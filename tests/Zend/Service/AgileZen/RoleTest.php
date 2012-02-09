@@ -34,11 +34,10 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     public function testAddRole()
     {
         $data = array(
-            'name'   => 'unit test',
+            'name'   => 'testZF',
             'access' => 'read'
         );
         $role = $this->agileZen->addRole(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'), $data);
-
         $this->assertTrue($this->agileZen->isSuccessful());
         $this->assertTrue($role instanceof \Zend\Service\AgileZen\Resources\Role);
         $this->assertEquals($data['name'], $role->getName());
@@ -54,7 +53,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
                     constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'));
         }
         $data = array(
-            'name'   => 'updated unit test',
+            'name'   => 'updated testZF',
             'access' => 'admin'
         );
         $role = $this->agileZen->updateRole(
@@ -84,7 +83,7 @@ class RoleTest extends \PHPUnit_Framework_TestCase
     }
     public function testRemoveRole()
     {
-        if (empty(self::$roleIdId)) {
+        if (empty(self::$roleId)) {
             $this->markTestSkipped('No role to delete for the project Id ' .
                     constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'));
         }

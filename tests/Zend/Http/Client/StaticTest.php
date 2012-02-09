@@ -502,6 +502,35 @@ class StaticTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test sending cookie with encoded value
+     *
+     * @group fix-double-encoding-problem-about-cookie-value
+     */
+    public function testEncodedCookiesInRequestHeaders()
+    {
+        $this->_client->addCookie('foo', 'bar=baz');
+        $this->_client->send();
+        $cookieValue = 'Cookie: foo='.urlencode('bar=baz');
+        $this->assertContains($cookieValue, $this->_client->getLastRawRequest(),
+            'Request is expected to contain the entire cookie "keyname=encoded_value"');
+    }
+
+    /**
+     * Test sending cookie header with raw value
+     *
+     * @group fix-double-encoding-problem-about-cookie-value
+     */
+    public function testRawCookiesInRequestHeaders()
+    {
+        $this->_client->setConfig(array('encodecookies' => false));
+        $this->_client->addCookie('foo', 'bar=baz');
+        $this->_client->send();
+        $cookieValue = 'Cookie: foo=bar=baz';
+        $this->assertContains($cookieValue, $this->_client->getLastRawRequest(),
+            'Request is expected to contain the entire cookie "keyname=raw_value"');
+    }
+
+    /**
      * Data providers
      */
 

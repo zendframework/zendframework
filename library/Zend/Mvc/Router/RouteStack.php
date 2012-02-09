@@ -47,7 +47,7 @@ interface RouteStack extends Route
      * @return RouteStack
      */
     public function addRoutes($routes);
-    
+
     /**
      * Remove a route from the stack.
      * 
@@ -55,5 +55,13 @@ interface RouteStack extends Route
      * @return RouteStack
      */
     public function removeRoute($name);
+
+    /**
+     * Remove all routes from the stack and set new ones.
+     * 
+     * @param  array|Traversable $routes
+     * @return RouteStack
+     */
+    public function setRoutes($routes);
 }
 

@@ -563,7 +563,7 @@ class Entry extends Extension\AbstractEntry
     protected function _absolutiseUri($link)
     {
         if (!Uri\UriFactory::factory($link)->isValid()) {
-            if (!is_null($this->getBaseUrl())) {
+            if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
                 if (!Uri\UriFactory::factory($link)->isValid()) {
                     $link = null;

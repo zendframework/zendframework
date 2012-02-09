@@ -26,7 +26,7 @@ namespace Zend\Ldap\Node;
 use Zend\Ldap;
 
 /**
- * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDSE node.
+ * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDse node.
  *
  * @uses       \Zend\Ldap\Dn
  * @uses       \Zend\Ldap\Node\AbstractNode
@@ -47,7 +47,7 @@ class RootDse extends AbstractNode
     const SERVER_TYPE_EDIRECTORY      = 4;
 
     /**
-     * Factory method to create the RootDSE.
+     * Factory method to create the RootDse.
      *
      * @param  \Zend\Ldap\Ldap $ldap
      * @return \Zend\Ldap\Node\RootDse

@@ -189,7 +189,7 @@ class PatternOptions extends Options
         $this->cacheByDefault = $cacheByDefault;
         return $this;
     }
-    
+
     /**
      * Do we cache by default?
      *
@@ -220,7 +220,7 @@ class PatternOptions extends Options
         $this->cacheOutput = (bool) $cacheOutput;
         return $this;
     }
-    
+
     /**
      * Will we cache output?
      *
@@ -253,7 +253,7 @@ class PatternOptions extends Options
         $this->class = $class;
         return $this;
     }
-    
+
     /**
      * Get class name
      *
@@ -281,7 +281,7 @@ class PatternOptions extends Options
         $this->classCacheMethods = $this->recursiveStrtolower($classCacheMethods);
         return $this;
     }
-    
+
     /**
      * Get list of methods from which to cache return values
      *
@@ -309,7 +309,7 @@ class PatternOptions extends Options
         $this->classNonCacheMethods = $this->recursiveStrtolower($classNonCacheMethods);
         return $this;
     }
-    
+
     /**
      * Get list of methods from which NOT to cache return values
      *
@@ -327,8 +327,8 @@ class PatternOptions extends Options
      * Set directory permissions
      *
      * Sets {@link $dirUmask} property to inverse of provided value.
-     * 
-     * @param  string $dirPerm 
+     *
+     * @param  string $dirPerm
      * @return PatternOptions
      */
     public function setDirPerm($dirPerm)
@@ -347,7 +347,7 @@ class PatternOptions extends Options
      * Gets directory permissions
      *
      * Proxies to {@link $dirUmask} property, returning its inverse.
-     * 
+     *
      * @return int
      */
     public function getDirPerm()
@@ -377,7 +377,7 @@ class PatternOptions extends Options
         $this->dirUmask = $dirUmask;
         return $this;
     }
-    
+
     /**
      * Get directory umask
      *
@@ -405,7 +405,7 @@ class PatternOptions extends Options
         $this->fileLocking = (bool) $fileLocking;
         return $this;
     }
-    
+
     /**
      * Is file locking enabled?
      *
@@ -423,8 +423,8 @@ class PatternOptions extends Options
      * Set file permissions
      *
      * Sets {@link $fileUmask} property to inverse of provided value.
-     * 
-     * @param  string $filePerm 
+     *
+     * @param  string $filePerm
      * @return PatternOptions
      */
     public function setFilePerm($filePerm)
@@ -443,7 +443,7 @@ class PatternOptions extends Options
      * Gets file permissions
      *
      * Proxies to {@link $fileUmask} property, returning its inverse.
-     * 
+     *
      * @return int
      */
     public function getFilePerm()
@@ -478,7 +478,7 @@ class PatternOptions extends Options
         $this->fileUmask = $fileUmask;
         return $this;
     }
-    
+
     /**
      * Get file umask
      *
@@ -503,7 +503,7 @@ class PatternOptions extends Options
         $this->indexFilename = (string) $indexFilename;
         return $this;
     }
-    
+
     /**
      * Get value for index filename
      *
@@ -530,7 +530,7 @@ class PatternOptions extends Options
         $this->object = $object;
         return $this;
     }
-    
+
     /**
      * Get object to cache
      *
@@ -555,7 +555,7 @@ class PatternOptions extends Options
         $this->objectCacheMagicProperties = (bool) $objectCacheMagicProperties;
         return $this;
     }
-    
+
     /**
      * Should we cache magic properties?
      *
@@ -581,7 +581,7 @@ class PatternOptions extends Options
         $this->objectCacheMethods = $this->normalizeObjectMethods($objectCacheMethods);
         return $this;
     }
-    
+
     /**
      * Get list of object methods for which to cache return values
      *
@@ -612,7 +612,7 @@ class PatternOptions extends Options
         }
         return $this;
     }
-    
+
     /**
      * Get object key
      *
@@ -638,7 +638,7 @@ class PatternOptions extends Options
         $this->objectNonCacheMethods = $this->normalizeObjectMethods($objectNonCacheMethods);
         return $this;
     }
-    
+
     /**
      * Get list of object methods for which NOT to cache return values
      *
@@ -663,7 +663,7 @@ class PatternOptions extends Options
         $this->publicDir = (string) $publicDir;
         return $this;
     }
-    
+
     /**
      * Get location of public directory
      *
@@ -695,7 +695,7 @@ class PatternOptions extends Options
         $this->storage = $storage;
         return $this;
     }
-    
+
     /**
      * Get storage adapter
      *
@@ -727,7 +727,7 @@ class PatternOptions extends Options
         $this->tagKey = $tagKey;
         return $this;
     }
-    
+
     /**
      * Get tag key
      *
@@ -752,7 +752,7 @@ class PatternOptions extends Options
         $this->tags = $tags;
         return $this;
     }
-    
+
     /**
      * Get tags
      *
@@ -781,7 +781,7 @@ class PatternOptions extends Options
         $this->tagStorage = $tagStorage;
         return $this;
     }
-    
+
     /**
      * Get storage adapter for tags
      *
@@ -798,8 +798,8 @@ class PatternOptions extends Options
     /**
      * Recursively apply strtolower on all values of an array, and return as a
      * list of unique values
-     * 
-     * @param  array $array 
+     *
+     * @param  array $array
      * @return array
      */
     protected function recursiveStrtolower(array $array)
@@ -811,11 +811,11 @@ class PatternOptions extends Options
 
     /**
      * Normalize object methods
-     * 
-     * Recursively casts values to lowercase, then determines if any are in a 
+     *
+     * Recursively casts values to lowercase, then determines if any are in a
      * list of methods not handled, raising an exception if so.
      *
-     * @param  array $methods 
+     * @param  array $methods
      * @return array
      * @throws Exception\InvalidArgumentException
      */
@@ -836,13 +836,13 @@ class PatternOptions extends Options
      *
      * Allows specifying a umask as either an octal or integer. If the umask
      * fails required permissions, raises an exception.
-     * 
-     * @param  int|string $mask 
-     * @param  callable Callback used to verify the umask is acceptable for the given purpose
+     *
+     * @param  int|string $umask
+     * @param  callable   $comparison Callback used to verify the umask is acceptable for the given purpose
      * @return int
      * @throws Exception\InvalidArgumentException
      */
-    protected function normalizeUmask($mask, $comparison)
+    protected function normalizeUmask($umask, $comparison)
     {
         if (is_string($umask)) {
             $umask = octdec($umask);
@@ -857,8 +857,8 @@ class PatternOptions extends Options
 
     /**
      * Create a storage object from a given specification
-     * 
-     * @param  array|string|StorageAdapter $storage 
+     *
+     * @param  array|string|StorageAdapter $storage
      * @return StorageAdapter
      */
     protected function storageFactory($storage)

@@ -40,7 +40,7 @@ abstract class Options implements ParameterObject
      */
     public function __construct($options = null)
     {
-        if (is_null($options)) {
+        if ($options === null) {
             return;
         }
         $this->processArray($options);
@@ -136,7 +136,7 @@ abstract class Options implements ParameterObject
     public function __isset($key)
     {
         $getter = $this->assembleGetterNameFromConfigKey($key);
-        return !is_null($this->{$getter}());
+        return ($this->{$getter}() !== null);
     }
 
     /**

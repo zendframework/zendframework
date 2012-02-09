@@ -351,7 +351,7 @@ class Attribute
                     $convertedValues[] = $v;
                 }
             }
-        } elseif (!is_null($value)) {
+        } elseif ($value !== null) {
             $value = self::_valueToLdapDateTime($value, $utc);
             if ($value !== null) {
                 $convertedValues[] = $value;

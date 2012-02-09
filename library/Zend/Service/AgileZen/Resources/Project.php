@@ -167,33 +167,36 @@ class Project extends Entity
     /**
      * Get the phases of the project
      * 
+     * @param  array $params
      * @return \Zend\Service\AgileZen\Container 
      */
-    public function getPhases()
+    public function getPhases($params=array())
     {
-        return $this->service->getPhases($this->id);
+        return $this->service->getPhases($this->id, $params);
     }
 
     /**
      * Get the stories of the project
      * 
+     * @param  array $params
      * @return \Zend\Service\AgileZen\Container 
      */
-    public function getStories()
+    public function getStories($params=array())
     {
-        return $this->service->getStories($this->id);
+        return $this->service->getStories($this->id, $params);
     }
 
     /**
      * Get a specific phase of the project
      * 
      * @param  string $id
+     * @param  array  $params
      * @return Phase
      */
-    public function getPhase($id) 
+    public function getPhase($id, $params=array()) 
     {
         if (!empty($id)) {
-            return $this->service->getPhase($this->id, $id);
+            return $this->service->getPhase($this->id, $id, $params);
         }
     }
 
@@ -201,12 +204,13 @@ class Project extends Entity
      * Get a specific story of the project
      * 
      * @param  string $id
+     * @param  array  $params
      * @return Phase
      */
-    public function getStory($id) 
+    public function getStory($id, $params=array()) 
     {
         if (!empty($id)) {
-            return $this->service->getStory($this->id, $id);
+            return $this->service->getStory($this->id, $id, $params);
         }
     }
 

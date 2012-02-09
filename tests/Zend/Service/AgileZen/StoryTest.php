@@ -25,13 +25,23 @@ class StoryTest extends \PHPUnit_Framework_TestCase
     {
         $data = array(
             'text'    => 'test story',
-            'details' => 'details of the test story'
+            'details' => 'details of the test story',
+            'tags'    => array('foo', 'bar')
         );
-        $story = $this->agileZen->addStory(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'), $data);
+        $params = array (
+            'with' => 'tags'
+        );
+        $story = $this->agileZen->addStory(constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'), $data, $params);
         $this->assertTrue($this->agileZen->isSuccessful());
         $this->assertTrue($story instanceof \Zend\Service\AgileZen\Resources\Story);
         $this->assertEquals($data['text'], $story->getText());
         self::$storyId = $story->getId();
+        $tags = $story->getTags();
+        $this->assertTrue($tags instanceof \Zend\Service\AgileZen\Container);
+        foreach ($tags as $tag) {
+            $this->assertTrue($tag instanceof \Zend\Service\AgileZen\Resources\Tag);
+            $this->assertTrue(($tag->getName()=='foo') || ($tag->getName()=='bar'));
+        }
     }
     public function testUpdateStory()
     {
@@ -54,7 +64,7 @@ class StoryTest extends \PHPUnit_Framework_TestCase
     }
     public function testGetStory()
     {
-        if (!empty(self::$storyId)) {
+        if (empty(self::$storyId)) {
             $this->markTestSkipped('No story founded for the project Id ' .
                     constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'));
         }
@@ -65,6 +75,49 @@ class StoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->agileZen->isSuccessful());
         $this->assertTrue($story instanceof \Zend\Service\AgileZen\Resources\Story);
         $this->assertEquals(self::$storyId, $story->getId());
+    }
+    public function testGetStoryWithDetails()
+    {
+         if (empty(self::$storyId)) {
+            $this->markTestSkipped('No story founded for the project Id ' .
+                    constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'));
+        }
+        $params = array (
+            'with' => 'details'
+        );
+        $story = $this->agileZen->getStory(
+                constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'),
+                self::$storyId,
+                $params
+        );
+        $this->assertTrue($this->agileZen->isSuccessful());
+        $this->assertTrue($story instanceof \Zend\Service\AgileZen\Resources\Story);
+        $this->assertEquals(self::$storyId, $story->getId());
+        $this->assertEquals('updated details of the test story', $story->getDetails());
+    }
+    public function testGetStoryWithTags()
+    {
+         if (empty(self::$storyId)) {
+            $this->markTestSkipped('No story founded for the project Id ' .
+                    constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'));
+        }
+        $params = array (
+            'with' => 'tags'
+        );
+        $story = $this->agileZen->getStory(
+                constant('TESTS_ZEND_SERVICE_AGILEZEN_ONLINE_PROJECT_ID'),
+                self::$storyId,
+                $params
+        );
+        $this->assertTrue($this->agileZen->isSuccessful());
+        $this->assertTrue($story instanceof \Zend\Service\AgileZen\Resources\Story);
+        $this->assertEquals(self::$storyId, $story->getId());
+        $tags = $story->getTags();
+        $this->assertTrue($tags instanceof \Zend\Service\AgileZen\Container);
+        foreach ($tags as $tag) {
+            $this->assertTrue($tag instanceof \Zend\Service\AgileZen\Resources\Tag);
+            $this->assertTrue(($tag->getName()==='foo') || ($tag->getName()==='bar'));
+        }
     }
     public function testRemoveStory()
     {

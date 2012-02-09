@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<section xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0"
+<section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0"
     xml:id="zend.http.response">
     <info>
         <title>Zend\Http\Response</title>
@@ -39,7 +39,7 @@
             client's browser, but which can also be a place for request/response payload data
             typical of an AJAX request.  More information on the structure and specification of an
             HTTP response can be found in <link
-                xl:href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html">RFC-2616 on the
+                xlink:href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html">RFC-2616 on the
                 W3.org site</link>.
         </para>
 
@@ -112,278 +112,251 @@ EOS);
 
         <variablelist>
             <varlistentry xml:id="zend.http.response.methods.from-string">
-                <term>
+                <term>Response::fromString</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>Response::fromString</methodname>
                         <methodparam>
                             <funcparams>string $string</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Populate object from string</para>
                     <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.render-status-line">
-                <term>
+                <term>renderStatusLine</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>renderStatusLine</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Render the status line header</para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.set-headers">
-                <term>
+                <term>setHeaders</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setHeaders</methodname>
                         <methodparam>
                             <funcparams>Zend\Http\Headers $headers</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set response headers</para>
                     <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.headers">
-                <term>
+                <term>headers</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>headers</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get response headers</para>
                     <para>Returns <classname>Zend\Http\Headers</classname></para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.set-version">
-                <term>
+                <term>setVersion</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setVersion</methodname>
                         <methodparam>
                             <funcparams>string $version</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.get-version">
-                <term>
+                <term>getVersion</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getVersion</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.get-status-code">
-                <term>
+                <term>getStatusCode</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getStatusCode</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Retrieve HTTP status code</para>
                     <para>Returns int</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.set-reason-phrase">
-                <term>
+                <term>setReasonPhrase</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setReasonPhrase</methodname>
                         <methodparam>
                             <funcparams>string $reasonPhrase</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.get-reason-phrase">
-                <term>
+                <term>getReasonPhrase</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getReasonPhrase</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get HTTP status message</para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.set-status-code">
-                <term>
+                <term>setStatusCode</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setStatusCode</methodname>
                         <methodparam>
                             <funcparams>numeric $code</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set HTTP status code and (optionally) message</para>
                     <para>Returns <classname>Zend\Http\Response</classname></para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-client-error">
-                <term>
+                <term>isClientError</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isClientError</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Does the status code indicate a client error?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-forbidden">
-                <term>
+                <term>isForbidden</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isForbidden</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Is the request forbidden due to ACLs?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-informational">
-                <term>
+                <term>isInformational</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isInformational</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Is the current status "informational"?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-not-found">
-                <term>
+                <term>isNotFound</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isNotFound</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Does the status code indicate the resource is not found?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-ok">
-                <term>
+                <term>isOk</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isOk</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Do we have a normal, OK response?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-server-error">
-                <term>
+                <term>isServerError</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isServerError</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Does the status code reflect a server error?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-redirect">
-                <term>
+                <term>isRedirect</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isRedirect</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Do we have a redirect?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.is-success">
-                <term>
+                <term>isRedirect</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>isSuccess</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Was the response successful?</para>
                     <para>Returns bool</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.decode-chunked-body">
-                <term>
+                <term>decodeChunkedBody</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>decodeChunkedBody</methodname>
                         <methodparam>
                             <funcparams>string $body</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Decode a "chunked" transfer-encoded body and return the decoded text</para>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.decode-gzip">
-                <term>
+                <term>decodeGzip</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>decodeGzip</methodname>
                         <methodparam>
                             <funcparams>string $body</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Decode a gzip encoded message (when Content-encoding = gzip)</para>
                     <para>Currently requires PHP with zlib support</para>
                     <para>Returns string</para>
@@ -391,16 +364,14 @@ EOS);
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response.methods.decode-deflate">
-                <term>
+                <term>decodeGzip</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>decodeDeflate</methodname>
                         <methodparam>
                             <funcparams>string $body</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Decode a zlib deflated message (when Content-encoding = deflate)</para>
                     <para>Currently requires PHP with zlib support</para>
                     <para>Returns string</para>
@@ -408,16 +379,14 @@ EOS);
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response._parent_.zend.stdlib.message.methods.set-metadata">
-                <term>
+                <term>setMetadata</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setMetadata</methodname>
                         <methodparam>
                             <funcparams>string|int|array|Traversable $spec, mixed $value</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set message metadata</para>
                     <para>Non-destructive setting of message metadata; always adds to the metadata, never overwrites
 the entire metadata container.</para>
@@ -426,45 +395,40 @@ the entire metadata container.</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response._parent_.zend.stdlib.message.methods.get-metadata">
-                <term>
+                <term>getMetadata</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getMetadata</methodname>
                         <methodparam>
                             <funcparams>null|string|int $key, null|mixed $default</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Retrieve all metadata or a single metadatum as specified by key</para>
                     <para>Returns mixed</para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response._parent_.zend.stdlib.message.methods.set-content">
-                <term>
+                <term>setContent</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>setContent</methodname>
                         <methodparam>
                             <funcparams>mixed $value</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Set message content</para>
                     <para>Returns <classname>Zend\Stdlib\Message</classname></para>
                 </listitem>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response._parent_.zend.stdlib.message.methods.get-content">
-                <term>
+                <term>getContent</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>getContent</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Get message content</para>
                     <para></para>
                     <para>Returns mixed</para>
@@ -472,13 +436,12 @@ the entire metadata container.</para>
             </varlistentry>
 
             <varlistentry xml:id="zend.http.response._parent_.zend.stdlib.message.methods.to-string">
-                <term>
+                <term>toString</term>
+                <listitem>
                     <methodsynopsis>
                         <methodname>toString</methodname>
+                        <void/>
                     </methodsynopsis>
-                </term>
-
-                <listitem>
                     <para>Returns string</para>
                 </listitem>
             </varlistentry>

@@ -96,6 +96,23 @@ class Bootstrap implements Bootstrapper
         $di = new Di;
         $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
 
+        // default configuration for the router
+        $routerDiConfig = new DiConfiguration(
+            array(
+                'definition' => array(
+                    'class' => array(
+                        'Zend\Mvc\Router\RouteStack' => array(
+                            'instantiator' => array(
+                                'Zend\Mvc\Router\Http\TreeRouteStack',
+                                'factory'
+                            ),
+                        ),
+                    ),
+                )
+            )
+        );
+        $routerDiConfig->configure($di);
+
         $config = new DiConfiguration($this->config->di);
         $config->configure($di);
 
@@ -110,8 +127,7 @@ class Bootstrap implements Bootstrapper
      */
     protected function setupRouter(AppContext $application)
     {
-        $router = new Router();
-        $router->addRoutes($this->config->routes);
+        $router = $application->getLocator()->get('Zend\Mvc\Router\RouteStack');
         $application->setRouter($router);
     }
 

@@ -488,10 +488,7 @@ class Client implements Dispatchable
             }
         } elseif ($cookie instanceof SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
-        } elseif (is_string($cookie) && !is_null($value)) {
-            if (!empty($value) && $this->config['encodecookies']) {
-                $value = urlencode($value);
-            }
+        } elseif (is_string($cookie) && $value !== null) {
             $setCookie = new SetCookie($cookie, $value, $domain, $expire, $path, $secure, $httponly);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
         } else {
@@ -1010,8 +1007,9 @@ class Client implements Dispatchable
                 }
             }
         }
-        
+
         $cookies = Cookie::fromSetCookieArray($validCookies);
+        $cookies->setEncodeValue($this->config['encodecookies']);
 
         return $cookies;
     }

@@ -63,6 +63,7 @@ class DefaultListenerAggregateTest extends TestCase
         $expectedEvents = array(
             'loadModules.pre' => array(
                 'Zend\Loader\ModuleAutoloader',
+                'Zend\Module\Listener\ConfigListener',
             ),
             'loadModule.resolve' => array(
                 'Zend\Module\Listener\ModuleResolverListener',

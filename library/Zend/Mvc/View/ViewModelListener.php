@@ -23,11 +23,25 @@ namespace Zend\Mvc\View;
 
 use Zend\EventManager\EventCollection as Events,
     Zend\EventManager\ListenerAggregate,
+    Zend\Filter\Word\CamelCaseToDash as CamelCaseToDashFilter,
     Zend\Mvc\MvcEvent,
+    Zend\Mvc\Router\RouteMatch,
     Zend\View\Model as ViewModel;
 
 class ViewModelListener implements ListenerAggregate
 {
+    /**
+     * Filter/inflector used to normalize names for use as template identifiers
+     * 
+     * @var mixed
+     */
+    protected $inflector;
+
+    /**
+     * Listeners we've registered
+     * 
+     * @var array
+     */
     protected $listeners = array();
 
     /**
@@ -73,6 +87,8 @@ class ViewModelListener implements ListenerAggregate
             return;
         }
 
+        $this->injectTemplate($e->getRouteMatch(), $result);
+
         $model = $e->getViewModel();
 
         if ($result->terminate()) {
@@ -81,5 +97,72 @@ class ViewModelListener implements ListenerAggregate
         }
 
         $model->addChild($result);
+    }
+
+    /**
+     * Inject template into view model
+     *
+     * If a template is already present, do nothing. Otherwise, create a 
+     * template identifier based on the controller in the RouteMatch, and, if
+     * present, the action.
+     * 
+     * @param  RouteMatch $routeMatch 
+     * @param  ViewModel $model 
+     * @return void
+     */
+    protected function injectTemplate(RouteMatch $routeMatch, ViewModel $model)
+    {
+        $template = $model->getTemplate();
+        if (!empty($template)) {
+            return;
+        }
+
+        $controller = $routeMatch->getParam('controller', 'index');
+        $controller = $this->deriveControllerClass($controller);
+        $template   = $this->inflectName($controller);
+
+        $action     = $routeMatch->getParam('action');
+        if (null !== $action) {
+            $template .= '/' . $this->inflectName($action);
+        }
+        $model->setTemplate($template);
+    }
+
+    /**
+     * Inflect a name to a normalized value
+     * 
+     * @param  string $name 
+     * @return string
+     */
+    protected function inflectName($name)
+    {
+        if (!$this->inflector) {
+            $this->inflector = new CamelCaseToDashFilter();
+        }
+        $name = $this->inflector->filter($name);
+        return strtolower($name);
+    }
+
+    /**
+     * Determine the name of the controller
+     *
+     * Strip the namespace, and the suffix "Controller" if present.
+     * 
+     * @param  string $controller 
+     * @return string
+     */
+    protected function deriveControllerClass($controller)
+    {
+        if (strstr($controller, '\\')) {
+            $controller = substr($controller, strrpos($controller, '\\') + 1);
+        }
+
+        if ((10 < strlen($controller)) 
+            && ('Controller' == substr($controller, -10))
+        ) {
+            $controller = substr($controller, 0, -10);
+        }
+
+        return $controller;
     }
 }

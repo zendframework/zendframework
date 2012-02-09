@@ -23,6 +23,7 @@ namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\MvcEvent,
+    Zend\Mvc\Router\RouteMatch,
     Zend\Mvc\View\ViewModelListener,
     Zend\View\Model\ViewModel;
 
@@ -37,29 +38,29 @@ class ViewModelListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->event    = new MvcEvent();
-        $this->listener = new ViewModelListener();
+        $this->listener   = new ViewModelListener();
+        $this->event      = new MvcEvent();
+        $this->routeMatch = new RouteMatch(array());
+        $this->event->setRouteMatch($this->routeMatch);
     }
 
     public function testReplacesEventModelWithChildModelIfChildIsMarkedTerminal()
     {
         $childModel  = new ViewModel();
         $childModel->setTerminal(true);
-        $event = new MvcEvent();
-        $event->setResult($childModel);
+        $this->event->setResult($childModel);
 
-        $this->listener->insertViewModel($event);
-        $this->assertSame($childModel, $event->getViewModel());
+        $this->listener->insertViewModel($this->event);
+        $this->assertSame($childModel, $this->event->getViewModel());
     }
 
     public function testAddsViewModelAsChildOfEventViewModelWhenChildIsNotTerminal()
     {
         $childModel  = new ViewModel();
-        $event       = new MvcEvent();
-        $event->setResult($childModel);
+        $this->event->setResult($childModel);
 
-        $this->listener->insertViewModel($event);
-        $model = $event->getViewModel();
+        $this->listener->insertViewModel($this->event);
+        $model = $this->event->getViewModel();
         $this->assertNotSame($childModel, $model);
         $this->assertTrue($model->hasChildren());
         $this->assertEquals(1, count($model));
@@ -68,5 +69,18 @@ class ViewModelListenerTest extends TestCase
             break;
         }
         $this->assertSame($childModel, $child);
+    }
+
+    public function testSetsTemplateBasedOnRouteMatchIfNoTemplateIsSetOnViewModel()
+    {
+        $this->routeMatch->setParam('controller', 'Foo\Controller\SomewhatController');
+        $this->routeMatch->setParam('action', 'useful');
+
+        $model = new ViewModel();
+        $this->event->setResult($model);
+
+        $this->listener->insertViewModel($this->event);
+
+        $this->assertEquals('somewhat/useful', $model->getTemplate());
     }
 }

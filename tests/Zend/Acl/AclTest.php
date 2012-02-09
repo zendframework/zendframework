@@ -126,7 +126,7 @@ class AclTest extends \PHPUnit_Framework_TestCase
      */
     public function testRoleRegistryAddInheritsNonExistent()
     {
-        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException', 'not found');
+        $this->setExpectedException('Zend\Acl\Exception\InvalidArgumentException');
         $this->_acl->addRole(new Role\GenericRole('guest'), 'nonexistent');
     }
 

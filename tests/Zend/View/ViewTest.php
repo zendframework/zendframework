@@ -162,7 +162,17 @@ class ViewTest extends TestCase
 
     public function testTerminalChildRaisesException()
     {
-        $this->markTestIncomplete();
+        $this->attachTestStrategies();
+
+        $child1 = new ViewModel(array('foo' => 'bar'));
+        $child1->setCaptureTo('child1');
+        $child1->setTerminal(true);
+
+        $this->model->setVariable('parent', 'node');
+        $this->model->addChild($child1);
+
+        $this->setExpectedException('Zend\View\Exception\DomainException');
+        $this->view->render($this->model);
     }
 
     public function testChildrenAreCapturedToParentVariables()

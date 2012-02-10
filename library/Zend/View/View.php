@@ -271,6 +271,9 @@ class View
     protected function renderChildren(Model $model)
     {
         foreach ($model as $child) {
+            if ($child->terminate()) {
+                throw new Exception\DomainException('Inconsistent state; child view model is marked as terminal');
+            }
             $child->setOption('has_parent', true);
             $result  = $this->render($child);
             $child->setOption('has_parent', null);

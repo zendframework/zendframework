@@ -21,7 +21,8 @@
 
 namespace Zend\Config\Reader;
 
-use Zend\Config\Exception;
+use Zend\Config\Reader,
+    Zend\Config\Exception;
 
 /**
  * XML config reader.
@@ -32,7 +33,7 @@ use Zend\Config\Exception;
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Ini extends AbstractReader
+class Ini implements Reader
 {
     /**
      * Separator for nesting levels of configuration data identifiers.
@@ -40,13 +41,6 @@ class Ini extends AbstractReader
      * @var string
      */
     protected $nestSeparator = '.';
-
-    /**
-     * Separator for parent section names.
-     *
-     * @var string
-     */
-    protected $sectionSeparator = ':';
 
     /**
      * Directory of the file to process.
@@ -78,35 +72,13 @@ class Ini extends AbstractReader
     }
 
     /**
-     * Set section separator.
+     * fromFile(): defined by Reader interface.
      *
-     * @param  string $separator
-     * @return self
-     */
-    public function setSectionSeparator($separator)
-    {
-        $this->sectionSeparator = $separator;
-        return $this;
-    }
-
-    /**
-     * Get section separator.
-     *
-     * @return string
-     */
-    public function getSectionSeparator()
-    {
-        return $this->sectionSeparator;
-    }
-
-    /**
-     * processFile(): defined by AbstractReader.
-     *
-     * @see    AbstractReader::processFile()
+     * @see    Reader::fromFile()
      * @param  string $filename
      * @return array
      */
-    protected function processFile($filename)
+    protected function fromFile($filename)
     {
         $this->directory = dirname($filename);
 
@@ -114,15 +86,15 @@ class Ini extends AbstractReader
     }
 
     /**
-     * processString(): defined by AbstractReader.
+     * fromString(): defined by Reader interface.
      *
-     * @see    AbstractReader::processString()
+     * @see    Reader::fromString()
      * @param  string $string
      * @return array
      */
-    protected function processString($string)
+    protected function fromString($string)
     {
-        $this->directory = __DIR__;
+        $this->directory = null;
 
         return $this->process(parse_ini_string($string, true));
     }
@@ -135,28 +107,13 @@ class Ini extends AbstractReader
      */
     protected function process(array $data)
     {
-        $this->extends = array();
-        $config        = array();
+        $config = array();
 
-        foreach ($data as $key => $value) {
-            $pieces  = explode($this->sectionSeparator, $key);
-            $section = trim($pieces[0]);
-
-            switch (count($pieces)) {
-                case 2:
-                    $this->extends[$section] = trim($pieces[1]);
-                    // Break intentionally omitted.
-
-                case 1:
-                    if (is_array($value)) {
-                        $config[$section] = $this->processSection($value);
-                    } else {
-                        $config[$section] = $value;
-                    }
-                    break;
-
-                default:
-                    throw new Exception\RuntimeException(sprintf('Section "%s" may not extend multiple sexctions', $section));
+        foreach ($data as $section => $value) {
+            if (is_array($value)) {
+                $config[$section] = $this->processSection($value);
+            } else {
+                $config[$section] = $value;
             }
         }
 
@@ -208,11 +165,15 @@ class Ini extends AbstractReader
             $this->processKey($pieces[1], $value, $config[$pieces[0]]);
         } else {
             if ($key === '@include') {
+                if ($this->directory === null) {
+                    throw new Exception\RuntimeException('Cannot process @include statement for a string config');
+                }
+
                 $reader  = clone $this;
-                $include = $reader->fromFile($this->directory . '/' . $value)->toArray();
+                $include = $reader->fromFile($this->directory . '/' . $value);
                 $config  = array_replace_recursive($config, $include);
             } else {
-                $config[$key] = str_replace('{DIR}', $this->directory, $value);
+                $config[$key] = $value;
             }
         }
     }

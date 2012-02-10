@@ -62,13 +62,6 @@ class Config implements Countable, Iterator, ArrayAccess
     protected $skipNextIteration;
 
     /**
-     * Internal error messages.
-     *
-     * @var null|array
-     */
-    protected $_errorMessages = array();
-
-    /**
      * Zend_Config provides a property based interface to
      * an array. The data are read-only unless $allowModifications
      * is set to true on construction.
@@ -381,7 +374,7 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         $this->allowModifications = false;
 
-        foreach ($this->data as $key => $value) {
+        foreach ($this->data as $value) {
             if ($value instanceof self) {
                 $value->setReadOnly();
             }

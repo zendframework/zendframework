@@ -228,6 +228,11 @@ class View
      */
     public function render(Model $model)
     {
+        // If we have children, render them first
+        if ($model->hasChildren()) {
+            $this->renderChildren($model);
+        }
+
         $event   = $this->getEvent();
         $event->setModel($model);
         $events  = $this->events();
@@ -245,9 +250,35 @@ class View
 
         $rendered = $renderer->render($model);
 
+        // If this is a child model, return the rendered content; do not
+        // invoke the response strategy.
+        $options = $model->getOptions();
+        if (array_key_exists('has_parent', $options) && $options['has_parent']) {
+            return $rendered;
+        }
+
         $event->setResult($rendered);
 
         $events->trigger('response', $event);
+    }
+
+    /**
+     * Loop through children, rendering each
+     * 
+     * @param  Model $model 
+     * @return void
+     */
+    protected function renderChildren(Model $model)
+    {
+        foreach ($model as $child) {
+            $child->setOption('has_parent', true);
+            $result  = $this->render($child);
+            $child->setOption('has_parent', null);
+            $capture = $child->captureTo();
+            if (!empty($capture)) {
+                $model->setVariable($capture, $result);
+            }
+        }
     }
 
     /**

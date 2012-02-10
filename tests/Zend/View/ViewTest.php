@@ -22,6 +22,7 @@
 namespace ZendTest\View;
 
 use PHPUnit_Framework_TestCase as TestCase,
+    stdClass,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\View\Model\ViewModel,
@@ -43,14 +44,52 @@ class ViewTest extends TestCase
         $this->view->setResponse($this->response);
     }
 
+    public function attachTestStrategies()
+    {
+        $this->view->addRenderingStrategy(function ($e) {
+            return new TestAsset\Renderer\VarExportRenderer();
+        });
+        $this->result = $result = new stdClass;
+        $this->view->addResponseStrategy(function ($e) use ($result) {
+            $result->content = $e->getResult();
+        });
+    }
+
     public function testRendersViewModelWithNoChildren()
     {
-        $this->markTestIncomplete();
+        $this->attachTestStrategies();
+        $variables = array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        );
+        $this->model->setVariables($variables);
+        $this->view->render($this->model);
+
+        $this->assertEquals(var_export($variables, true), $this->result->content);
     }
 
     public function testRendersViewModelWithChildren()
     {
-        $this->markTestIncomplete();
+        $this->attachTestStrategies();
+
+        $child1 = new ViewModel(array('foo' => 'bar'));
+        $child1->setCaptureTo('child1');
+
+        $child2 = new ViewModel(array('bar' => 'baz'));
+        $child2->setCaptureTo('child2');
+
+        $this->model->setVariable('parent', 'node');
+        $this->model->addChild($child1);
+        $this->model->addChild($child2);
+
+        $this->view->render($this->model);
+
+        $expected = var_export(array(
+            'parent' => 'node',
+            'child1' => var_export(array('foo' => 'bar'), true),
+            'child2' => var_export(array('bar' => 'baz'), true),
+        ), true);
+        $this->assertEquals($expected, $this->result->content);
     }
 
     public function testRendersTreeOfModels()

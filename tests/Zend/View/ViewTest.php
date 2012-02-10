@@ -94,7 +94,28 @@ class ViewTest extends TestCase
 
     public function testRendersTreeOfModels()
     {
-        $this->markTestIncomplete();
+        $this->attachTestStrategies();
+
+        $child1 = new ViewModel(array('foo' => 'bar'));
+        $child1->setCaptureTo('child1');
+
+        $child2 = new ViewModel(array('bar' => 'baz'));
+        $child2->setCaptureTo('child2');
+        $child1->addChild($child2);
+
+        $this->model->setVariable('parent', 'node');
+        $this->model->addChild($child1);
+
+        $this->view->render($this->model);
+
+        $expected = var_export(array(
+            'parent' => 'node',
+            'child1' => var_export(array(
+                'foo'    => 'bar',
+                'child2' => var_export(array('bar' => 'baz'), true),
+            ), true),
+        ), true);
+        $this->assertEquals($expected, $this->result->content);
     }
 
     public function testChildrenMayInvokeDifferentRenderingStrategiesThanParents()

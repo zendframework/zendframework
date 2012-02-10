@@ -24,7 +24,7 @@ namespace ZendTest\Mvc\View;
 use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
-    Zend\Mvc\View\ViewModelListener,
+    Zend\Mvc\View\InjectViewModelListener,
     Zend\View\Model\ViewModel;
 
 /**
@@ -34,11 +34,11 @@ use PHPUnit_Framework_TestCase as TestCase,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ViewModelListenerTest extends TestCase
+class InjectViewModelListenerTest extends TestCase
 {
     public function setUp()
     {
-        $this->listener   = new ViewModelListener();
+        $this->listener   = new InjectViewModelListener();
         $this->event      = new MvcEvent();
         $this->routeMatch = new RouteMatch(array());
         $this->event->setRouteMatch($this->routeMatch);
@@ -50,7 +50,7 @@ class ViewModelListenerTest extends TestCase
         $childModel->setTerminal(true);
         $this->event->setResult($childModel);
 
-        $this->listener->insertViewModel($this->event);
+        $this->listener->injectViewModel($this->event);
         $this->assertSame($childModel, $this->event->getViewModel());
     }
 
@@ -59,7 +59,7 @@ class ViewModelListenerTest extends TestCase
         $childModel  = new ViewModel();
         $this->event->setResult($childModel);
 
-        $this->listener->insertViewModel($this->event);
+        $this->listener->injectViewModel($this->event);
         $model = $this->event->getViewModel();
         $this->assertNotSame($childModel, $model);
         $this->assertTrue($model->hasChildren());
@@ -69,18 +69,5 @@ class ViewModelListenerTest extends TestCase
             break;
         }
         $this->assertSame($childModel, $child);
-    }
-
-    public function testSetsTemplateBasedOnRouteMatchIfNoTemplateIsSetOnViewModel()
-    {
-        $this->routeMatch->setParam('controller', 'Foo\Controller\SomewhatController');
-        $this->routeMatch->setParam('action', 'useful');
-
-        $model = new ViewModel();
-        $this->event->setResult($model);
-
-        $this->listener->insertViewModel($this->event);
-
-        $this->assertEquals('somewhat/useful', $model->getTemplate());
     }
 }

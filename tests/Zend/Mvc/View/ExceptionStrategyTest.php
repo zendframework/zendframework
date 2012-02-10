@@ -29,6 +29,13 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Mvc\View\ExceptionStrategy,
     Zend\View\Model\ViewModel;
 
+/**
+ * @category   Zend
+ * @package    Zend_Mvc
+ * @subpackage UnitTest
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class ExceptionStrategyTest extends TestCase
 {
     public function setUp()
@@ -113,5 +120,23 @@ class ExceptionStrategyTest extends TestCase
 
         $response = $event->getResponse();
         $this->assertTrue($response->isServerError());
+    }
+
+    public function testEmptyErrorInEventResultsInNoOperations()
+    {
+        $event = new MvcEvent();
+        $this->strategy->prepareExceptionViewModel($event);
+        $response = $event->getResponse();
+        if (null !== $response) {
+            $this->assertNotEquals(500, $response->getStatusCode());
+        }
+        $model = $event->getResult();
+        if (null !== $model) {
+            $variables = $model->getVariables();
+            $this->assertArrayNotHasKey('message', $variables);
+            $this->assertArrayNotHasKey('exception', $variables);
+            $this->assertArrayNotHasKey('display_exceptions', $variables);
+            $this->assertNotEquals('error', $model->getTemplate());
+        }
     }
 }

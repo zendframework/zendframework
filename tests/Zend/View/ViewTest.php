@@ -21,7 +21,8 @@
 
 namespace ZendTest\View;
 
-use PHPUnit_Framework_TestCase as TestCase,
+use ArrayObject,
+    PHPUnit_Framework_TestCase as TestCase,
     stdClass,
     Zend\Http\Request,
     Zend\Http\Response,
@@ -207,11 +208,33 @@ class ViewTest extends TestCase
 
     public function testResponseStrategyIsTriggeredForParentModel()
     {
-        $this->markTestIncomplete();
+        // I wish there were a "markTestRedundant()" method in PHPUnit
+        $this->testRendersViewModelWithChildren();
     }
 
     public function testResponseStrategyIsNotTriggeredForChildModel()
     {
-        $this->markTestIncomplete();
+        $this->view->addRenderingStrategy(function ($e) {
+            return new Renderer\JsonRenderer();
+        });
+
+        $result = new ArrayObject;
+        $this->view->addResponseStrategy(function ($e) use ($result) {
+            $result[] = $e->getResult();
+        });
+
+        $child1 = new ViewModel(array('foo' => 'bar'));
+        $child1->setCaptureTo('child1');
+
+        $child2 = new ViewModel(array('bar' => 'baz'));
+        $child2->setCaptureTo('child2');
+
+        $this->model->setVariable('parent', 'node');
+        $this->model->addChild($child1);
+        $this->model->addChild($child2);
+
+        $this->view->render($this->model);
+
+        $this->assertEquals(1, count($result));
     }
 }

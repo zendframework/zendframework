@@ -25,6 +25,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     stdClass,
     Zend\Http\Request,
     Zend\Http\Response,
+    Zend\View\Model,
     Zend\View\Model\ViewModel,
     Zend\View\PhpRenderer,
     Zend\View\Renderer,
@@ -120,7 +121,43 @@ class ViewTest extends TestCase
 
     public function testChildrenMayInvokeDifferentRenderingStrategiesThanParents()
     {
-        $this->markTestIncomplete();
+        $this->view->addRenderingStrategy(function ($e) {
+            $model = $e->getModel();
+            if (!$model instanceof ViewModel) {
+                return;
+            }
+            return new TestAsset\Renderer\VarExportRenderer();
+        });
+        $this->view->addRenderingStrategy(function ($e) {
+            $model = $e->getModel();
+            if (!$model instanceof Model\JsonModel) {
+                return;
+            }
+            return new Renderer\JsonRenderer();
+        }, 10); // higher priority, so it matches earlier
+        $this->result = $result = new stdClass;
+        $this->view->addResponseStrategy(function ($e) use ($result) {
+            $result->content = $e->getResult();
+        });
+
+        $child1 = new ViewModel(array('foo' => 'bar'));
+        $child1->setCaptureTo('child1');
+
+        $child2 = new Model\JsonModel(array('bar' => 'baz'));
+        $child2->setCaptureTo('child2');
+
+        $this->model->setVariable('parent', 'node');
+        $this->model->addChild($child1);
+        $this->model->addChild($child2);
+
+        $this->view->render($this->model);
+
+        $expected = var_export(array(
+            'parent' => 'node',
+            'child1' => var_export(array('foo' => 'bar'), true),
+            'child2' => json_encode(array('bar' => 'baz')),
+        ), true);
+        $this->assertEquals($expected, $this->result->content);
     }
 
     public function testTerminalChildRaisesException()

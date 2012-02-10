@@ -123,7 +123,10 @@ class TreeRouteStack extends SimpleRouteStack
                 'route_broker'  => $this->routeBroker,
             );
 
+            $priority = (isset($route->priority) ? $route->priority : null);
+            
             $route = $this->routeBroker->load('part', $options);
+            $route->priority = $priority;
         }
 
         return $route;

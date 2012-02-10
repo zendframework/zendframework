@@ -216,6 +216,43 @@ class TreeRouteStackTest extends TestCase
         $this->assertEquals($uri, $stack->getRequestUri());
     }
 
+    public function testPriorityIsPassedToPartRoute()
+    {
+        $stack = new TreeRouteStack();
+        $stack->addRoutes(array(
+            'foo' => array(
+                'type' => 'Literal',
+                'priority' => 1000,
+                'options' => array(
+                    'route' => '/foo',
+                    'defaults' => array(
+                        'controller' => 'foo',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'bar' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/bar',
+                            'defaults' => array(
+                                'controller' => 'foo',
+                                'action'     => 'bar',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ));
+
+        $reflectedClass    = new \ReflectionClass($stack);
+        $reflectedProperty = $reflectedClass->getProperty('routes');
+        $reflectedProperty->setAccessible(true);
+        $routes = $reflectedProperty->getValue($stack);
+
+        $this->assertEquals(1000, $routes->get('foo')->priority);
+    }
+
     public function testFactory()
     {
         $tester = new FactoryTester($this);

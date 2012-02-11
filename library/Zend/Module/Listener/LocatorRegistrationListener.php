@@ -3,6 +3,7 @@
 namespace Zend\Module\Listener;
 
 use Zend\EventManager\StaticEventManager,
+    Zend\Di\InstanceManager,
     Zend\EventManager\Event,
     Zend\Module\ModuleEvent,
     Zend\Module\Consumer\LocatorRegistered,
@@ -48,17 +49,27 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      */
     public function loadModulesPost(Event $e)
     {
+        $events = StaticEventManager::getInstance();
+        $moduleManager = $e->getTarget();
+        $events->attach('bootstrap', 'bootstrap', function ($e) use ($moduleManager) {
+            $moduleClassName = get_class($moduleManager);
+            $im = $e->getParam('application')->getLocator()->instanceManager();
+            if (!$im->hasTypePreferences($moduleClassName)) {
+                $im->addTypePreference($moduleClassName, $moduleManager);
+            }
+        }, 1000);
+
         if (0 === count($this->modules)) {
             return;
         }
 
         // Attach to the bootstrap event if there are modules we need to process
         $events = StaticEventManager::getInstance();
-        $events->attach('bootstrap', 'bootstrap', array($this, 'addTypePreference'), 1000);
+        $events->attach('bootstrap', 'bootstrap', array($this, 'onBootstrap'), 1000);
     }
 
     /**
-     * addTypePreference 
+     * Bootstrap listener 
      *
      * This is ran during the MVC bootstrap event because it requires access to 
      * the DI container.
@@ -68,7 +79,7 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
      * @param Event $e 
      * @return void
      */
-    public function addTypePreference(Event $e)
+    public function onBootstrap(Event $e)
     {
         $im = $e->getParam('application')->getLocator()->instanceManager();
 

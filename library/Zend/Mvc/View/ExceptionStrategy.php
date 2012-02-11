@@ -138,6 +138,9 @@ class ExceptionStrategy implements ListenerAggregate
     public function prepareExceptionViewModel(MvcEvent $e)
     {
         $error    = $e->getError();
+        if (empty($error)) {
+            return;
+        }
 
         switch ($error) {
             case Application::ERROR_CONTROLLER_NOT_FOUND:

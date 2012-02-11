@@ -22,19 +22,6 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
     protected $listeners = array();
 
     /**
-     * __invoke 
-     *
-     * Convenience method for manually attaching an instance of this class as a listener.
-     * 
-     * @param ModuleEvent $e 
-     * @return void
-     */
-    public function __invoke(ModuleEvent $e)
-    {
-        return $this->loadModule($e);
-    }
-
-    /**
      * loadModule 
      *
      * Check each loaded module to see if it implements LocatorRegistered. If it 

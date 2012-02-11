@@ -23,16 +23,9 @@ namespace Zend\Mvc\View;
 
 use Zend\EventManager\EventCollection,
     Zend\EventManager\ListenerAggregate,
-    Zend\Http\Request as HttpRequest,
-    Zend\Http\Response as HttpResponse,
-    Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
     Zend\View\Model as ViewModel,
-    Zend\View\PhpRenderer,
-    Zend\View\Renderer\FeedRenderer,
-    Zend\View\Renderer\JsonRenderer,
-    Zend\View\View,
-    Zend\View\ViewEvent;
+    Zend\View\View;
 
 /**
  * @category   Zend
@@ -49,11 +42,6 @@ class DefaultRenderingStrategy implements ListenerAggregate
     protected $listeners = array();
 
     /**
-     * @var bool
-     */
-    protected $useDefaultRenderingStrategy = true;
-
-    /**
      * @var View
      */
     protected $view;
@@ -68,28 +56,6 @@ class DefaultRenderingStrategy implements ListenerAggregate
     {
         $this->view = $view;
         return $this;
-    }
-
-    /**
-     * Set flag indicating whether or not to use default rendering strategy
-     * 
-     * @param  bool $flag 
-     * @return DefaultRenderingStrategy
-     */
-    public function setUseDefaultRenderingStrategy($flag)
-    {
-        $this->useDefaultRenderingStrategy = (bool) $flag;
-        return $this;
-    }
-
-    /**
-     * Use the default rendering strategy?
-     * 
-     * @return bool
-     */
-    public function useDefaultRenderingStrategy()
-    {
-        return $this->useDefaultRenderingStrategy;
     }
 
     /**
@@ -124,171 +90,21 @@ class DefaultRenderingStrategy implements ListenerAggregate
      * @param  MvcEvent $e 
      * @return \Zend\Stdlib\ResponseDescription
      */
-    public function render($e)
+    public function render(MvcEvent $e)
     {
-        if (!$e instanceof MvcEvent) {
-            // don't know what to do if we don't have MVC-related params
-            return;
-        }
-
         // Martial arguments
         $request   = $e->getRequest();
         $response  = $e->getResponse();
         $viewModel = $e->getResult();
         if (!$viewModel instanceof ViewModel) {
-            if (!is_array($viewModel) && !$viewModel instanceof Traversable) {
-                // Don't know how to handle this
-                return;
-            }
-
-            $viewModel = new ViewModel\ViewModel($viewModel);
-        }
-
-        // Attach default strategies
-        if ($this->useDefaultRenderingStrategy()) {
-            $this->attachDefaultStrategies();
+            return;
         }
 
         $view = $this->view;
         $view->setRequest($request);
         $view->setResponse($response);
-
         $view->render($viewModel);
+
         return $response;
-    }
-
-    /**
-     * Select a renderer by context
-     *
-     * If a specific view model type is selected, attempt to map it to a specific
-     * renderer.
-     *
-     * Otherwise, check the Accept headers, and use those to determine appropriate
-     * renderer.
-     * 
-     * @param  ViewEvent $e 
-     * @return null|\Zend\View\Renderer
-     */
-    public function selectRendererByContext(ViewEvent $e)
-    {
-        $viewModel = $e->getModel();
-
-        // Test for specific result types
-        switch (true) {
-            case ($viewModel instanceof ViewModel\JsonModel):
-                if ($this->view->hasRenderer('Zend\View\Renderer\JsonRenderer')) {
-                    return $this->view->getRenderer('Zend\View\Renderer\JsonRenderer');
-                }
-                break;
-            case ($viewModel instanceof ViewModel\FeedModel):
-                if ($this->view->hasRenderer('Zend\View\Renderer\FeedRenderer')) {
-                    return $this->view->getRenderer('Zend\View\Renderer\FeedRenderer');
-                }
-                break;
-            default:
-                break;
-        }
-
-        // Test against Accept header
-        $request = $e->getRequest();
-        if ($request instanceof HttpRequest) {
-            $headers = $request->headers();
-            if ($headers->has('Accept')) {
-                $accept = $headers->get('Accept');
-                foreach ($accept->getPrioritized() as $mediaType) {
-                    switch (true) {
-                        case (0 === strpos($mediaType, 'application/json')):
-                            // JSON
-                            if ($this->view->hasRenderer('Zend\View\Renderer\JsonRenderer')) {
-                                return $this->view->getRenderer('Zend\View\Renderer\JsonRenderer');
-                            }
-                            break;
-                        case (0 === strpos($mediaType, 'application/rss+xml')):
-                        case (0 === strpos($mediaType, 'application/atom+xml')):
-                            // RSS or Atom feed
-                            if ($this->view->hasRenderer('Zend\View\Renderer\FeedRenderer')) {
-                                return $this->view->getRenderer('Zend\View\Renderer\FeedRenderer');
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-
-        // Last straw: use the PhpRenderer
-        if (!$this->view->hasRenderer('Zend\View\PhpRenderer')) {
-            $this->view->addRenderer(new PhpRenderer);
-        }
-        return $this->view->getRenderer('Zend\View\PhpRenderer');
-    }
-
-    /**
-     * Populate the response object from the View
-     *
-     * Populates the content of the response object from the view rendering
-     * results. Additionally, based on the renderer type, a Content-Type may be 
-     * set.
-     * 
-     * @param  ViewEvent $e 
-     * @return void
-     */
-    public function populateResponse(ViewEvent $e)
-    {
-        $result   = $e->getResult();
-        $response = $e->getResponse();
-        $renderer = $e->getRenderer();
-
-        // Set content
-        if (empty($result) && $renderer instanceof PhpRenderer) {
-            $placeholders = $renderer->plugin('placeholder');
-            $registry     = $placeholders->getRegistry();
-            if ($registry->containerExists('article')) {
-                $result = (string) $registry->getContainer('article');
-            } elseif ($registry->containerExists('content')) {
-                $result = (string) $registry->getContainer('content');
-            }
-        }
-        $response->setContent($result);
-
-        // Attempt to set content-type header
-        switch (true) {
-            case ($renderer instanceof JsonRenderer):
-                $response->headers()->addHeaderLine('content-type', 'application/json');
-                break;
-            case ($renderer instanceof FeedRenderer):
-                $type = $renderer->getFeedType();
-                $type = ('rss' == $type)
-                      ? 'application/rss+xml'
-                      : 'application/atom+xml';
-                $response->headers()->addHeaderLine('content-type', $type);
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * Attach the default strategies
-     *
-     * Also ensures that we have renderers for the default strategies.
-     * 
-     * @return void
-     */
-    protected function attachDefaultStrategies()
-    {
-        if (!$this->view->hasRenderer('Zend\View\Renderer\FeedRenderer')) {
-            $this->view->addRenderer(new FeedRenderer);
-        }
-        if (!$this->view->hasRenderer('Zend\View\Renderer\JsonRenderer')) {
-            $this->view->addRenderer(new JsonRenderer);
-        }
-        if (!$this->view->hasRenderer('Zend\View\PhpRenderer')) {
-            $this->view->addRenderer(new PhpRenderer);
-        }
-
-        $this->view->addRenderingStrategy(array($this, 'selectRendererByContext'), -100);
-        $this->view->addResponseStrategy(array($this, 'populateResponse'), -100);
     }
 }

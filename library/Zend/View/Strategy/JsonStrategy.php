@@ -67,8 +67,8 @@ class JsonStrategy implements ListenerAggregate
      */
     public function attach(EventCollection $events)
     {
-        $this->listeners[] = $events->attach('renderer', array($this, 'selectJsonRenderer'));
-        $this->listeners[] = $events->attach('response', array($this, 'injectJsonResponse'));
+        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'));
+        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'));
     }
 
     /**
@@ -93,7 +93,7 @@ class JsonStrategy implements ListenerAggregate
      * @param  ViewEvent $e 
      * @return null|JsonRenderer
      */
-    public function selectJsonRenderer(ViewEvent $e)
+    public function selectRenderer(ViewEvent $e)
     {
         $model = $e->getModel();
 
@@ -127,7 +127,7 @@ class JsonStrategy implements ListenerAggregate
      * @param  ViewEvent $e 
      * @return void
      */
-    public function injectJsonResponse(ViewEvent $e)
+    public function injectResponse(ViewEvent $e)
     {
         $renderer = $e->getRenderer();
         if ($renderer !== $this->renderer) {

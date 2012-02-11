@@ -49,7 +49,7 @@ class JsonStrategyTest extends TestCase
     public function testJsonModelSelectsJsonStrategy()
     {
         $this->event->setModel(new Model\JsonModel());
-        $result = $this->strategy->selectJsonRenderer($this->event);
+        $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
     }
 
@@ -58,13 +58,13 @@ class JsonStrategyTest extends TestCase
         $request = new HttpRequest();
         $request->headers()->addHeaderLine('Accept', 'application/json');
         $this->event->setRequest($request);
-        $result = $this->strategy->selectJsonRenderer($this->event);
+        $result = $this->strategy->selectRenderer($this->event);
         $this->assertSame($this->renderer, $result);
     }
 
     public function testLackOfJsonModelOrAcceptHeaderDoesNotSelectJsonStrategy()
     {
-        $result = $this->strategy->selectJsonRenderer($this->event);
+        $result = $this->strategy->selectRenderer($this->event);
         $this->assertNotSame($this->renderer, $result);
         $this->assertNull($result);
     }
@@ -82,13 +82,13 @@ class JsonStrategyTest extends TestCase
         $this->event->setResponse($this->response);
 
         // test empty renderer
-        $this->strategy->injectJsonResponse($this->event);
+        $this->strategy->injectResponse($this->event);
         $this->assertResponseNotInjected();
 
         // test non-matching renderer
         $renderer = new JsonRenderer();
         $this->event->setRenderer($renderer);
-        $this->strategy->injectJsonResponse($this->event);
+        $this->strategy->injectResponse($this->event);
         $this->assertResponseNotInjected();
     }
 
@@ -98,7 +98,7 @@ class JsonStrategyTest extends TestCase
         $this->event->setRenderer($this->renderer);
         $this->event->setResult($this->response);
 
-        $this->strategy->injectJsonResponse($this->event);
+        $this->strategy->injectResponse($this->event);
         $this->assertResponseNotInjected();
     }
 
@@ -109,7 +109,7 @@ class JsonStrategyTest extends TestCase
         $this->event->setRenderer($this->renderer);
         $this->event->setResult($expected);
 
-        $this->strategy->injectJsonResponse($this->event);
+        $this->strategy->injectResponse($this->event);
         $content = $this->response->getContent();
         $headers = $this->response->headers();
         $this->assertEquals($expected, $content);

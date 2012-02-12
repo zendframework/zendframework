@@ -103,9 +103,13 @@ class ModuleAutoloader implements SplAutoloader
 
         $moduleName = substr($class, 0, -7);
         if (isset($this->explicitPaths[$moduleName])) {
-            if ($classLoaded = $this->loadModuleFromDir($this->explicitPaths[$moduleName], $class)) {
+            $classLoaded = $this->loadModuleFromDir($this->explicitPaths[$moduleName], $class);
+            if ($classLoaded) {
                 return $classLoaded;
-            } elseif ($classLoaded = $this->loadModuleFromPhar($this->explicitPaths[$moduleName], $class)) {
+            }
+
+            $classLoaded = $this->loadModuleFromPhar($this->explicitPaths[$moduleName], $class);
+            if ($classLoaded) {
                 return $classLoaded;
             }
         }
@@ -119,7 +123,9 @@ class ModuleAutoloader implements SplAutoloader
 
         foreach ($this->paths as $path) {
             $path = $path . $moduleClassPath;
-            if ($classLoaded = $this->loadModuleFromDir($path, $class)) {
+
+            $classLoaded = $this->loadModuleFromDir($path, $class);
+            if ($classLoaded) {
                 return $classLoaded;
             }
 
@@ -134,7 +140,8 @@ class ModuleAutoloader implements SplAutoloader
                         continue;
                     }
 
-                    if ($classLoaded = $this->loadModuleFromPhar($entry->getPathname(), $class)) {
+                    $classLoaded = $this->loadModuleFromPhar($entry->getPathname(), $class);
+                    if ($classLoaded) {
                         return $classLoaded;
                     }
                 }

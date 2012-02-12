@@ -144,12 +144,27 @@ class Bootstrap implements Bootstrapper
      */
     protected function setupView($application)
     {
+        // Basic view strategy
         $locator             = $application->getLocator();
+        $events              = $application->events();
         $view                = $locator->get('Zend\View\View');
         $phpRendererStrategy = $locator->get('Zend\View\Strategy\PhpRendererStrategy');
         $defaultViewStrategy = $locator->get('Zend\Mvc\View\DefaultRenderingStrategy');
         $view->events()->attachAggregate($phpRendererStrategy);
-        $application->events()->attachAggregate($defaultViewStrategy);
+        $events->attachAggregate($defaultViewStrategy);
+
+        // Error strategies
+        $noRouteStrategy   = $locator->get('Zend\Mvc\View\RouteNotFoundStrategy');
+        $exceptionStrategy = $locator->get('Zend\Mvc\View\ExceptionStrategy');
+        $events->attachAggregate($noRouteStrategy);
+        $events->attachAggregate($exceptionStrategy);
+
+        // Template/ViewModel listeners
+        $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
+        $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
+        $staticEvents            = StaticEventManager::getInstance();
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectTemplateListener, 'injectTemplate'), -90);
+        $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectViewModelListener, 'injectViewModel'), -100);
     }
 
     /**

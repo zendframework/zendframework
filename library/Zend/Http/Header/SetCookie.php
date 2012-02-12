@@ -175,21 +175,30 @@ class SetCookie implements MultipleHeaderDescription
             throw new Exception\RuntimeException('A cookie name is required to generate a field value for this cookie');
         }
         $fieldValue = $this->getName() . '=' . urlencode($this->getValue());
-        if (($expires = $this->getExpires())) {
+
+        $expires = $this->getExpires();
+        if ($expires) {
             $fieldValue .= '; Expires=' . $expires;
         }
-        if (($domain = $this->getDomain())) {
+
+        $domain = $this->getDomain();
+        if ($domain) {
             $fieldValue .= '; Domain=' . $domain;
         }
-        if (($path = $this->getPath())) {
+
+        $path = $this->getPath();
+        if ($path) {
             $fieldValue .= '; Path=' . $path;
         }
+
         if ($this->isSecure()) {
             $fieldValue .= '; Secure';
         }
+
         if ($this->isHttponly()) {
             $fieldValue .= '; HttpOnly';
         }
+
         return $fieldValue;
     }
 
@@ -362,15 +371,15 @@ class SetCookie implements MultipleHeaderDescription
         if ($this->getDomain() && (strrpos($requestDomain, $this->getDomain()) !== false)) {
             return false;
         }
-        
+
         if ($this->getPath() && (strpos($path, $this->getPath()) !== 0)) {
             return false;
         }
-        
+
         if ($this->secure && $this->isSecure()!==$isSecure) {
             return false;
         }
-        
+
         return true;
 
     }

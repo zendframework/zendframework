@@ -177,7 +177,6 @@ class Application implements AppContext
         $event->setRequest($this->getRequest())
               ->setResponse($this->getResponse())
               ->setRouter($this->getRouter());
-        $this->setEvent($event);
         return $event;
     }
 
@@ -218,40 +217,61 @@ class Application implements AppContext
         $events = $this->events();
         $event  = $this->getMvcEvent();
 
+        // Define callback used to determine whether or not to short-circuit
+        $shortCircuit = function ($r) use ($event) {
+            if ($r instanceof Response) {
+                return true;
+            }
+            if ($event->getError()) {
+                return true;
+            }
+            return false;
+        };
+        
         // Trigger route event
-        $result = $events->trigger('route', $event, function ($r) {
-            return ($r instanceof Response);
-        });
+        $result = $events->trigger('route', $event, $shortCircuit);
         if ($result->stopped()) {
             $response = $result->last();
-            return $response;
+            if ($response instanceof Response) {
+                return $response;
+            }
+            if ($event->getError()) {
+                return $this->completeRequest($event);
+            }
+            return $event->getResponse();
         }
         if ($event->getError()) {
-            $events->trigger('render', $event);
-            $events->trigger('finish', $event);
-            return $event->getResponse();
+            return $this->completeRequest($event);
         }
 
         // Trigger dispatch event
-        $result = $events->trigger('dispatch', $event, function ($r) {
-            return ($r instanceof Response);
-        });
-        if ($event->getError()) {
-            $events->trigger('render', $event);
-            $events->trigger('finish', $event);
-            return $event->getResponse();
-        }
+        $result = $events->trigger('dispatch', $event, $shortCircuit);
 
         // Complete response
         $response = $result->last();
         if (!$response instanceof Response) {
             $response = $this->getResponse();
-            $event->setResponse($response);
         }
+        $event->setResponse($response);
 
+        return $this->completeRequest($event);
+    }
+
+    /**
+     * Complete the request
+     *
+     * Triggers "render" and "finish" events, and returns response from
+     * event object.
+     * 
+     * @param  MvcEvent $event 
+     * @return Response
+     */
+    protected function completeRequest(MvcEvent $event)
+    {
+        $events = $this->events();
         $events->trigger('render', $event);
         $events->trigger('finish', $event);
-        return $response;
+        return $event->getResponse();
     }
 
     /**

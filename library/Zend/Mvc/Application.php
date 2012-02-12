@@ -31,6 +31,7 @@ class Application implements AppContext
     const ERROR_CONTROLLER_INVALID   = 404;
     const ERROR_EXCEPTION            = 500;
 
+    protected $event;
     protected $events;
     protected $locator;
     protected $request;
@@ -41,7 +42,7 @@ class Application implements AppContext
      * Set the event manager instance used by this context
      *
      * @param  EventCollection $events
-     * @return AppContext
+     * @return Application
      */
     public function setEventManager(EventCollection $events)
     {
@@ -53,7 +54,7 @@ class Application implements AppContext
      * Set a service locator/DI object
      *
      * @param  Locator $locator
-     * @return AppContext
+     * @return Application
      */
     public function setLocator(Locator $locator)
     {
@@ -65,7 +66,7 @@ class Application implements AppContext
      * Set the request object
      *
      * @param  Request $request
-     * @return AppContext
+     * @return Application
      */
     public function setRequest(Request $request)
     {
@@ -77,7 +78,7 @@ class Application implements AppContext
      * Set the response object
      *
      * @param  Response $response
-     * @return AppContext
+     * @return Application
      */
     public function setResponse(Response $response)
     {
@@ -91,11 +92,23 @@ class Application implements AppContext
      * A router should return a metadata object containing a controller key.
      *
      * @param  Router\RouteStack $router
-     * @return AppContext
+     * @return Application
      */
     public function setRouter(Router\RouteStack $router)
     {
         $this->router = $router;
+        return $this;
+    }
+
+    /**
+     * Set the MVC event instance
+     * 
+     * @param  MvcEvent $event 
+     * @return Application
+     */
+    public function setMvcEvent(MvcEvent $event)
+    {
+        $this->event = $event;
         return $this;
     }
 
@@ -149,6 +162,26 @@ class Application implements AppContext
     }
 
     /**
+     * Get the MVC event instance
+     * 
+     * @return MvcEvent
+     */
+    public function getMvcEvent()
+    {
+        if ($this->event) {
+            return $this->event;
+        }
+
+        $event  = new MvcEvent();
+        $event->setTarget($this);
+        $event->setRequest($this->getRequest())
+              ->setResponse($this->getResponse())
+              ->setRouter($this->getRouter());
+        $this->setEvent($event);
+        return $event;
+    }
+
+    /**
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.
@@ -183,11 +216,7 @@ class Application implements AppContext
     public function run()
     {
         $events = $this->events();
-        $event  = new MvcEvent();
-        $event->setTarget($this);
-        $event->setRequest($this->getRequest())
-              ->setResponse($this->getResponse())
-              ->setRouter($this->getRouter());
+        $event  = $this->getMvcEvent();
 
         // Trigger route event
         $result = $events->trigger('route', $event, function ($r) {

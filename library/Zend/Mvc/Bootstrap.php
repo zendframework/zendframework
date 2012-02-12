@@ -98,20 +98,22 @@ class Bootstrap implements Bootstrapper
         $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
 
         // default configuration for the router
-        $routerDiConfig = new DiConfiguration(
-            array(
-                'definition' => array(
-                    'class' => array(
-                        'Zend\Mvc\Router\RouteStack' => array(
-                            'instantiator' => array(
-                                'Zend\Mvc\Router\Http\TreeRouteStack',
-                                'factory'
-                            ),
-                        ),
+        $routerDiConfig = new DiConfiguration(array('definition' => array('class' => array(
+            'Zend\Mvc\Router\RouteStack' => array(
+                'instantiator' => array(
+                    'Zend\Mvc\Router\Http\TreeRouteStack',
+                    'factory'
+                ),
+            ),
+            'Zend\Mvc\View\DefaultRenderingStrategy' => array(
+                'setBaseTemplate' => array(
+                    'baseTemplate' => array(
+                        'required' => false,
+                        'type'     => false,
                     ),
-                )
-            )
-        );
+                ),
+            ),
+        ))));
         $routerDiConfig->configure($di);
 
         $config = new DiConfiguration($this->config->di);
@@ -165,6 +167,11 @@ class Bootstrap implements Bootstrapper
         $staticEvents            = StaticEventManager::getInstance();
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectTemplateListener, 'injectTemplate'), -90);
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectViewModelListener, 'injectViewModel'), -100);
+
+        // Inject MVC Event with view model
+        $mvcEvent  = $application->getMvcEvent();
+        $viewModel = $mvcEvent->getViewModel();
+        $viewModel->setTemplate($defaultViewStrategy->getBaseTemplate());
     }
 
     /**

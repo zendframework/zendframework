@@ -39,11 +39,6 @@ class View
     protected $events;
 
     /**
-     * @var Renderer[]
-     */
-    protected $renderers = array();
-
-    /**
      * @var Request
      */
     protected $request;
@@ -95,51 +90,6 @@ class View
     public function getResponse()
     {
         return $this->response;
-    }
-
- 
-    /**
-     * Add a renderer
-     * 
-     * @param  Renderer $renderer 
-     * @return View
-     */
-    public function addRenderer(Renderer $renderer)
-    {
-        $class = get_class($renderer);
-        if (array_key_exists($class, $this->renderers)) {
-            throw new Exception\RuntimeException(sprintf(
-                'Unable to add renderer of type "%s"; another renderer of that type is already attached',
-                $class
-            ));
-        }
-        $this->renderers[$class] = $renderer;
-        return $this;
-    }
-
-    /**
-     * Does a renderer for the given class exist?
-     * 
-     * @param  string $class 
-     * @return bool
-     */
-    public function hasRenderer($class)
-    {
-        return array_key_exists($class, $this->renderers);
-    }
-
-    /**
-     * Retrieve renderer by class
-     * 
-     * @param  string $class 
-     * @return false|Renderer
-     */
-    public function getRenderer($class)
-    {
-        if (!$this->hasRenderer($class)) {
-            return false;
-        }
-        return $this->renderers[$class];
     }
 
     /**

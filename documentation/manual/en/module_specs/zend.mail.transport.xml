@@ -148,16 +148,16 @@ $transport->send($message);
 
         <variablelist>
             <varlistentry xml:id="zend.mail.transport.methods.send">
-                <term>
+                <term>send</term>
+
+                <listitem>
                     <methodsynopsis>
                         <methodname>send</methodname>
                         <methodparam>
                             <funcparams>Zend\Mail\Message $message</funcparams>
                         </methodparam>
                     </methodsynopsis>
-                </term>
 
-                <listitem>
                     <para>Send a mail message.</para>
 
                     <para>Returns void</para>

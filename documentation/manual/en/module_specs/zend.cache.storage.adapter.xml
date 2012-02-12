@@ -353,6 +353,7 @@ $cache->addPlugin($plugin);
                         <listitem>
                             <methodsynopsis>
                                 <methodname>getWritable</methodname>
+                                <void/>
                             </methodsynopsis>
 
                             <para>Returns boolean</para>
@@ -917,5 +918,6 @@ $cache->addPlugin($plugin);
             <title>TODO: Examples</title>
         </info>
 
+        <para></para>
     </section>
 </section>

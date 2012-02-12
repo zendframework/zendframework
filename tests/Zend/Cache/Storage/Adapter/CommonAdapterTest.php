@@ -980,7 +980,7 @@ abstract class CommonAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->_storage->setItem('key', 'value'));
 
         // sleep 1 times before expire to touch the item
-        usleep($capabilities->getTtlPrecision() * 2000000);
+        usleep($capabilities->getTtlPrecision() * 1000000);
         $this->assertTrue($this->_storage->touchItem('key'));
 
         usleep($capabilities->getTtlPrecision() * 1000000);

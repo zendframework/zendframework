@@ -23,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Form\Element\Exception;
+namespace Zend\Form\Decorator\Exception;
 
 /**
  * @uses       Zend\Form\Decorator\Exception

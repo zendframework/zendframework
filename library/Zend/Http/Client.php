@@ -488,10 +488,7 @@ class Client implements Dispatchable
             }
         } elseif ($cookie instanceof SetCookie) {
             $this->cookies[$this->getCookieId($cookie)] = $cookie;
-        } elseif (is_string($cookie) && !is_null($value)) {
-            if (!empty($value) && $this->config['encodecookies']) {
-                $value = urlencode($value);
-            }
+        } elseif (is_string($cookie) && $value !== null) {
             $setCookie = new SetCookie($cookie, $value, $domain, $expire, $path, $secure, $httponly);
             $this->cookies[$this->getCookieId($setCookie)] = $setCookie;
         } else {
@@ -799,7 +796,7 @@ class Client implements Dispatchable
             }
             // If we have no ports, set the defaults
             if (!$uri->getPort()) {
-                $uri->setPort(($uri->getScheme() == 'https' ? 443 : 80));
+                $uri->setPort($uri->getScheme() == 'https' ? 443 : 80);
             }
 
             // method
@@ -811,7 +808,7 @@ class Client implements Dispatchable
             // headers
             $headers = $this->prepareHeaders($body,$uri);
 
-            $secure = ($uri->getScheme() == 'https') ? true : false;
+            $secure = $uri->getScheme() == 'https';
 
             // cookies
             $cookie = $this->prepareCookies($uri->getHost(), $uri->getPath(), $secure);
@@ -1010,8 +1007,9 @@ class Client implements Dispatchable
                 }
             }
         }
-        
+
         $cookies = Cookie::fromSetCookieArray($validCookies);
+        $cookies->setEncodeValue($this->config['encodecookies']);
 
         return $cookies;
     }
@@ -1117,6 +1115,7 @@ class Client implements Dispatchable
         }
 
         $body = '';
+        $totalFiles = 0;
         
         if (!$this->getRequest()->headers()->has('Content-Type')) {
             $totalFiles = count($this->getRequest()->file()->toArray());

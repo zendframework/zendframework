@@ -79,7 +79,7 @@ class SmtpOptions extends Options
      */
     public function setName($name)
     {
-        if (!is_string($name) && !is_null($name)) {
+        if (!is_string($name) && $name !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Name must be a string or null; argument of type "%s" provided',
                 (is_object($name) ? get_class($name) : gettype($name))
@@ -111,7 +111,7 @@ class SmtpOptions extends Options
      */
     public function setConnectionClass($connectionClass) 
     {
-        if (!is_string($connectionClass) && !is_null($connectionClass)) {
+        if (!is_string($connectionClass) && $connectionClass !== null) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Connection class must be a string or null; argument of type "%s" provided',
                 (is_object($connectionClass) ? get_class($connectionClass) : gettype($connectionClass))

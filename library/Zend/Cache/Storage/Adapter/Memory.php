@@ -64,18 +64,6 @@ class Memory extends AbstractAdapter
      */
     public function setOptions($options)
     {
-        if (!is_array($options)
-            && !$options instanceof Traversable
-            && !$options instanceof MemoryOptions
-        ) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                '%s expects an array, a Traversable object, or an MemoryOptions instance; '
-                . 'received "%s"',
-                __METHOD__,
-                (is_object($options) ? get_class($options) : gettype($options))
-            ));
-        }
-
         if (!$options instanceof MemoryOptions) {
             $options = new MemoryOptions($options);
         }
@@ -657,7 +645,7 @@ class Memory extends AbstractAdapter
         }
 
         $this->normalizeOptions($options);
-        $args = ArrayObject(array(
+        $args = new ArrayObject(array(
             'keyValuePairs' => & $keyValuePairs,
             'options'       => & $options,
         ));

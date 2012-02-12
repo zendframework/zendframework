@@ -87,18 +87,42 @@ class ManagerTest extends TestCase
         $loader = new ModuleAutoloader;
         $loader->registerPath(__DIR__ . '/_files/');
         $loader->register();
+
         $this->assertTrue(class_exists('PharModule\Module'));
-        $this->assertTrue(class_exists('PharModuleGz\Module'));
-        $this->assertTrue(class_exists('PharModuleBz2\Module'));
-        $this->assertTrue(class_exists('PharModulePharTar\Module'));
-        $this->assertTrue(class_exists('PharModulePharTarGz\Module'));
-        $this->assertTrue(class_exists('PharModulePharTarBz2\Module'));
-        $this->assertTrue(class_exists('PharModulePharZip\Module'));
         $this->assertTrue(class_exists('PharModuleTar\Module'));
-        $this->assertTrue(class_exists('PharModuleTarGz\Module'));
-        $this->assertTrue(class_exists('PharModuleTarBz2\Module'));
-        $this->assertTrue(class_exists('PharModuleZip\Module'));
+        $this->assertTrue(class_exists('PharModulePharTar\Module'));
         $this->assertTrue(class_exists('PharModuleNested\Module'));
+
+        // gzip / zip
+        if (extension_loaded('zlib')) {
+            // gzip
+            $this->assertTrue(class_exists('PharModuleGz\Module'));
+            $this->assertTrue(class_exists('PharModulePharTarGz\Module'));
+            $this->assertTrue(class_exists('PharModuleTarGz\Module'));
+
+            // zip
+            $this->assertTrue(class_exists('PharModulePharZip\Module'));
+            $this->assertTrue(class_exists('PharModuleZip\Module'));
+        } else {
+            $this->assertFalse(class_exists('PharModuleGz\Module'));
+            $this->assertFalse(class_exists('PharModulePharTarGz\Module'));
+            $this->assertFalse(class_exists('PharModuleTarGz\Module'));
+
+            $this->assertFalse(class_exists('PharModulePharZip\Module'));
+            $this->assertFalse(class_exists('PharModuleZip\Module'));
+        }
+
+        // bzip2
+        if (extension_loaded('bzip2')) {
+            $this->assertTrue(class_exists('PharModuleBz2\Module'));
+            $this->assertTrue(class_exists('PharModulePharTarBz2\Module'));
+            $this->assertTrue(class_exists('PharModuleTarBz2\Module'));
+        } else {
+            $this->assertFalse(class_exists('PharModuleBz2\Module'));
+            $this->assertFalse(class_exists('PharModulePharTarBz2\Module'));
+            $this->assertFalse(class_exists('PharModuleTarBz2\Module'));
+        }
+
         $loader->unregister();
     }
 

@@ -194,6 +194,7 @@ class Part extends TreeRouteStack implements Route
             }
         }
 
+        unset($options['has_child']);
         $options['only_return_path'] = true;
         $path .= parent::assemble($params, $options);
 

@@ -184,7 +184,7 @@ class ObjectCache extends CallbackCache
 
         if (!isset($options['callback_key'])) {
             if ((isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
-                || ($entityKey = $classOptions->getObjectKey() !== null)
+                || (($entityKey = $classOptions->getObjectKey()) !== null)
             ) {
                 $options['callback_key'] = $entityKey . '::' . strtolower($method);
                 unset($options['entity_key']);
@@ -208,7 +208,7 @@ class ObjectCache extends CallbackCache
         $classOptions = $this->getOptions();
         if (!isset($options['callback_key'])) {
             if ( (isset($options['entity_key']) && ($entityKey = $options['entity_key']) !== null)
-              || ($entityKey = $classOptions->getObjectKey() !== null)) {
+              || (($entityKey = $classOptions->getObjectKey()) !== null)) {
                 $options['callback_key'] = $entityKey . '::' . strtolower($method);
                 unset($options['entity_key']);
             }

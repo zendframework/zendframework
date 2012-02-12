@@ -261,15 +261,13 @@ class Application implements AppContext
         $routeMatch = $e->getRouteMatch();
 
         $controllerName = $routeMatch->getParam('controller', 'not-found');
-
-        try {
-            $controller = $locator->get($controllerName);
-        } catch (ClassNotFoundException $exception) {
+        $im=$locator->instanceManager();
+        if(!$im->hasAlias($controllerName))
+        {
+            
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_NOT_FOUND)
-                  ->setController($controllerName)
-                  ->setParam('exception', $exception);
-
+                  ->setController($controllerName);
             $results = $events->trigger('dispatch.error', $error);
             if (count($results)) {
                 $return  = $results->last();
@@ -279,12 +277,32 @@ class Application implements AppContext
             goto complete;
         }
 
-        if (!$controller instanceof Dispatchable) {
+        $controllerClass=$im->getClassFromAlias($controllerName);
+        $reflection = new \ReflectionClass($controllerClass);
+        if(!$reflection->implementsInterface('Zend\Stdlib\Dispatchable'))
+        {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_INVALID)
                   ->setController($controllerName)
-                  ->setControllerClass(get_class($controller));
+                  ->setControllerClass($controllerClass);
             
+            $results = $events->trigger('dispatch.error', $error);
+            if (count($results)) {
+                $return  = $results->last();
+            } else {
+                $return = $error->getParams();
+            }
+            goto complete;
+        }
+        
+        try {
+            $controller = $locator->get($controllerName);
+        } catch (ClassNotFoundException $exception) {
+            $error = clone $e;
+            $error->setError(static::ERROR_CONTROLLER_NOT_FOUND)
+                  ->setController($controllerName)
+                  ->setParam('exception', $exception);
+
             $results = $events->trigger('dispatch.error', $error);
             if (count($results)) {
                 $return  = $results->last();

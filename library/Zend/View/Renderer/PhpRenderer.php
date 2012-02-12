@@ -53,7 +53,7 @@ class PhpRenderer implements Renderer, Pluggable
      * Queue of templates to render
      * @var array
      */
-    private $extensions = array();
+    private $templates = array();
 
     /**
      * Template resolver
@@ -451,7 +451,7 @@ class PhpRenderer implements Renderer, Pluggable
         }
 
         // find the script file name using the parent private method
-        $this->enqueue($nameOrModel);
+        $this->addTemplate($nameOrModel);
         unset($nameOrModel); // remove $name from local scope
 
         $this->varsCache[] = $this->vars();
@@ -470,7 +470,7 @@ class PhpRenderer implements Renderer, Pluggable
         extract($__vars);
         unset($__vars); // remove $__vars from local scope
 
-        while ($this->file = array_pop($this->extensions)) {
+        while ($this->file = array_pop($this->templates)) {
             $this->file = $this->resolver($this->file);
             ob_start();
             include $this->file;
@@ -488,9 +488,9 @@ class PhpRenderer implements Renderer, Pluggable
      * @param  string $template 
      * @return PhpRenderer
      */
-    public function enqueue($template)
+    public function addTemplate($template)
     {
-        $this->extensions[] = $template;
+        $this->templates[] = $template;
         return $this;
     }
 

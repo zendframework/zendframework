@@ -13,7 +13,7 @@ class DependencyInjectorProxy extends Di
     protected $di;
 
     /**
-     * @param DependencyInjector $di 
+     * @param DependencyInjector $di
      * @return void
      */
     public function __construct(Di $di)
@@ -29,9 +29,9 @@ class DependencyInjectorProxy extends Di
 
     /**
      * Override, as we want it to use the functionality defined in the proxy
-     * 
-     * @param  string $name 
-     * @param  array $params 
+     *
+     * @param  string $name
+     * @param  array $params
      * @return GeneratorInstance
      */
     public function get($name, array $params = array())
@@ -39,7 +39,8 @@ class DependencyInjectorProxy extends Di
         $im = $this->instanceManager();
 
         if ($params) {
-            if (($fastHash = $im->hasSharedInstanceWithParameters($name, $params, true))) {
+            $fastHash = $im->hasSharedInstanceWithParameters($name, $params, true);
+            if ($fastHash) {
                 return $im->getSharedInstanceWithParameters(null, array(), $fastHash);
             }
         } else {
@@ -54,9 +55,9 @@ class DependencyInjectorProxy extends Di
      * Override createInstanceViaConstructor method from injector
      *
      * Returns code generation artifacts.
-     * 
-     * @param  string $class 
-     * @param  null|array $params 
+     *
+     * @param  string $class
+     * @param  null|array $params
      * @param  null|string $alias
      * @return GeneratorInstance
      */
@@ -75,9 +76,9 @@ class DependencyInjectorProxy extends Di
 
     /**
      * Override instance creation via callback
-     * 
-     * @param  callback $callback 
-     * @param  null|array $params 
+     *
+     * @param  callback $callback
+     * @param  null|array $params
      * @return GeneratorInstance
      */
     public function createInstanceViaCallback($callback, $params, $alias = null)
@@ -103,11 +104,11 @@ class DependencyInjectorProxy extends Di
 
     /**
      * Retrieve metadata for injectible methods
-     * 
-     * @param  string $class 
-     * @param  string $method 
-     * @param  array $params 
-     * @param  string $alias 
+     *
+     * @param  string $class
+     * @param  string $method
+     * @param  array $params
+     * @param  string $alias
      * @return array
      */
     public function handleInjectionMethodForObject($class, $method, $params, $alias, $isRequired)
@@ -121,10 +122,10 @@ class DependencyInjectorProxy extends Di
 
     /**
      * Override new instance creation
-     * 
-     * @param  string $name 
-     * @param  array $params 
-     * @param  bool $isShared 
+     *
+     * @param  string $name
+     * @param  array $params
+     * @param  bool $isShared
      * @return GeneratorInstance
      */
     public function newInstance($name, array $params = array(), $isShared = true)

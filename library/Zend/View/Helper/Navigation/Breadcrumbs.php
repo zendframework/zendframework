@@ -272,8 +272,9 @@ class Breadcrumbs extends AbstractHelper
         }
 
         // put breadcrumb pages in model
-        $model = array('pages' => array());
-        if ($active = $this->findActive($container)) {
+        $model  = array('pages' => array());
+        $active = $this->findActive($container);
+        if ($active) {
             $active = $active['page'];
             $model['pages'][] = $active;
             while ($parent = $active->getParent()) {
@@ -296,8 +297,8 @@ class Breadcrumbs extends AbstractHelper
         if (is_array($partial)) {
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
-                    'Unable to render menu: A view partial supplied as ' 
-                    .  'an array must contain two values: partial view ' 
+                    'Unable to render menu: A view partial supplied as '
+                    .  'an array must contain two values: partial view '
                     .  'script and module where script can be found'
                 );
             }
@@ -325,7 +326,8 @@ class Breadcrumbs extends AbstractHelper
      */
     public function render(Container $container = null)
     {
-        if ($partial = $this->getPartial()) {
+        $partial = $this->getPartial();
+        if ($partial) {
             return $this->renderPartial($container, $partial);
         } else {
             return $this->renderStraight($container);

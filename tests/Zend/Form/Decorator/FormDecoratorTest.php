@@ -25,7 +25,7 @@ use Zend\Form\Decorator\FormDecorator,
     Zend\Form\DisplayGroup,
     Zend\Form\Form,
     Zend\Loader\PrefixPathLoader,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Form

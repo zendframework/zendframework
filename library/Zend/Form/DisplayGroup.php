@@ -29,7 +29,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Stdlib\IteratorToArray,
     Zend\Translator,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View;
 
 /**

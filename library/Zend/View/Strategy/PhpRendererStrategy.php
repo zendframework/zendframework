@@ -26,7 +26,7 @@ use Zend\EventManager\EventCollection,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\View\Model,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\ViewEvent;
 
 /**

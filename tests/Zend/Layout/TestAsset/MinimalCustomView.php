@@ -24,6 +24,9 @@
  */
 namespace ZendTest\Layout\TestAsset;
 
+use Zend\View\Renderer,
+    Zend\View\Resolver;
+
 /**
  * @category   Zend
  * @package    Zend_Layout
@@ -31,9 +34,11 @@ namespace ZendTest\Layout\TestAsset;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class MinimalCustomView implements \Zend\View\Renderer
+class MinimalCustomView implements Renderer
 {
     public function getEngine() {}
 
-    public function render($name) {}
+    public function setResolver(Resolver $resolver) {}
+
+    public function render($nameOrModel, $values = null) {}
 }

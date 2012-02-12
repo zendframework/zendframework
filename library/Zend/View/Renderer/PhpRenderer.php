@@ -21,11 +21,17 @@
 /**
  * @namespace
  */
-namespace Zend\View;
+namespace Zend\View\Renderer;
 
-use Zend\Filter\FilterChain,
+use ArrayAccess,
+    Zend\Filter\FilterChain,
     Zend\Loader\Pluggable,
-    ArrayAccess;
+    Zend\View\Exception,
+    Zend\View\HelperBroker,
+    Zend\View\Model,
+    Zend\View\Renderer,
+    Zend\View\Resolver,
+    Zend\View\Variables;
 
 /**
  * Abstract class for Zend_View to help enforce private constructs.
@@ -105,7 +111,7 @@ class PhpRenderer implements Renderer, Pluggable
      *
      * Returns the object instance, as it is its own template engine
      *
-     * @return \Zend\View\PhpRenderer
+     * @return PhpRenderer
      */
     public function getEngine()
     {

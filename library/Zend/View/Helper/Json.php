@@ -26,7 +26,7 @@ namespace Zend\View\Helper;
 
 use Zend\Http\Response,
     Zend\Json\Json as JsonFormatter,
-    Zend\Layout\Layout;
+    Zend\Layout\Layout as LayoutComponent;
 
 /**
  * Helper for simplifying JSON responses
@@ -39,7 +39,7 @@ use Zend\Http\Response,
 class Json extends AbstractHelper
 {
     /**
-     * @var Layout
+     * @var LayoutComponent
      */
     protected $layout;
 
@@ -51,10 +51,10 @@ class Json extends AbstractHelper
     /**
      * Set the layout object
      * 
-     * @param  Layout $layout 
+     * @param  LayoutComponent $layout 
      * @return Json
      */
-    public function setLayout(Layout $layout)
+    public function setLayout(LayoutComponent $layout)
     {
         $this->layout = $layout;
         return $this;
@@ -99,7 +99,7 @@ class Json extends AbstractHelper
 
         $data = JsonFormatter::encode($data, null, $options);
 
-        if (!$keepLayouts && ($this->layout instanceof Layout)) {
+        if (!$keepLayouts && ($this->layout instanceof LayoutComponent)) {
             $this->layout->disableLayout();
         }
 

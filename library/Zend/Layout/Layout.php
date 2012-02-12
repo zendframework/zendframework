@@ -27,7 +27,7 @@ use Traversable,
     Zend\Config\Config,
     Zend\Filter,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer;
 
 /**

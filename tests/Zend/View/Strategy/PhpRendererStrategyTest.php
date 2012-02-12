@@ -27,7 +27,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Registry,
     Zend\View\Helper\Placeholder\Registry as PlaceholderRegistry,
     Zend\View\Model,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Strategy\PhpRendererStrategy,
     Zend\View\ViewEvent;
 

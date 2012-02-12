@@ -160,7 +160,7 @@ class LayoutTest extends TestCase
     public function testViewAccessorsAllowSettingView()
     {
         $layout = new Layout\Layout();
-        $view   = new View\PhpRenderer();
+        $view   = new View\Renderer\PhpRenderer();
         $layout->setView($view);
         $received = $layout->getView();
         $this->assertSame($view, $received);
@@ -221,7 +221,7 @@ class LayoutTest extends TestCase
     public function testRenderWithNoInflection()
     {
         $layout = new Layout\Layout();
-        $view   = new View\PhpRenderer();
+        $view   = new View\Renderer\PhpRenderer();
         $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->disableInflector()
                ->setLayout('layout.phtml')
@@ -235,7 +235,7 @@ class LayoutTest extends TestCase
     public function testRenderWithDefaultInflection()
     {
         $layout = new Layout\Layout();
-        $view   = new View\PhpRenderer();
+        $view   = new View\Renderer\PhpRenderer();
         $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setView($view);
         $layout->message = 'Rendered layout';
@@ -247,7 +247,7 @@ class LayoutTest extends TestCase
     public function testRenderWithCustomInflection()
     {
         $layout = new Layout\Layout();
-        $view   = new View\PhpRenderer();
+        $view   = new View\Renderer\PhpRenderer();
         $layout->setLayoutPath(__DIR__ . '/_files/layouts')
                ->setView($view);
         $inflector = $layout->getInflector();

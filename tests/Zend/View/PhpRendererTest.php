@@ -21,7 +21,7 @@
 
 namespace ZendTest\View;
 
-use Zend\View\PhpRenderer,
+use Zend\View\Renderer\PhpRenderer,
     Zend\View\Model\ViewModel,
     Zend\View\Resolver\TemplateMapResolver,
     Zend\View\Resolver\TemplatePathStack,

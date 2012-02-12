@@ -22,7 +22,7 @@
 namespace ZendTest\View;
 
 use Zend\View\HelperBroker,
-    Zend\View\PhpRenderer;
+    Zend\View\Renderer\PhpRenderer;
 
 /**
  * @category   Zend
@@ -32,7 +32,7 @@ use Zend\View\HelperBroker,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_View
  */
-class ViewTest extends \PHPUnit_Framework_TestCase
+class HelperBrokerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

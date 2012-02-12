@@ -25,7 +25,7 @@ use Zend\Form\Element\Password as PasswordElement,
     Zend\Form\Element\Xhtml as XhtmlElement,
     Zend\Form\Element,
     Zend\Form\Decorator,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Password

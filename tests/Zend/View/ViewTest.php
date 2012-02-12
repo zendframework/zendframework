@@ -28,7 +28,7 @@ use ArrayObject,
     Zend\Http\Response,
     Zend\View\Model,
     Zend\View\Model\ViewModel,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer,
     Zend\View\Resolver,
     Zend\View\View;

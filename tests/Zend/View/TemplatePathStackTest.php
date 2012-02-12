@@ -21,7 +21,7 @@
 
 namespace ZendTest\View;
 
-use Zend\View\TemplatePathStack;
+use Zend\View\Resolver\TemplatePathStack;
 
 /**
  * @category   Zend
@@ -128,7 +128,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->stack->addPath(__DIR__ . '/_templates');
 
         $this->setExpectedException('Zend\View\Exception', 'parent directory traversal');
-        $test = $this->stack->getScriptPath('../_stubs/scripts/LfiProtectionCheck.phtml');
+        $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
     }
 
     public function testDisablingLfiProtectionAllowsParentDirectoryTraversal()
@@ -136,28 +136,28 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->stack->setLfiProtection(false)
                     ->addPath(__DIR__ . '/_templates');
 
-        $test = $this->stack->getScriptPath('../_stubs/scripts/LfiProtectionCheck.phtml');
+        $test = $this->stack->resolve('../_stubs/scripts/LfiProtectionCheck.phtml');
         $this->assertContains('LfiProtectionCheck.phtml', $test);
     }
 
     public function testRaisesExceptionWhenRetrievingScriptIfNoPathsRegistered()
     {
         $this->setExpectedException('Zend\View\Exception', 'unable to determine');
-        $this->stack->getScriptPath('test.phtml');
+        $this->stack->resolve('test.phtml');
     }
 
     public function testRaisesExceptionWhenUnableToResolveScriptToPath()
     {
         $this->stack->addPath(__DIR__ . '/_templates');
         $this->setExpectedException('Zend\View\Exception', 'not found');
-        $this->stack->getScriptPath('bogus-script.txt');
+        $this->stack->resolve('bogus-script.txt');
     }
 
     public function testReturnsFullPathNameWhenAbleToResolveScriptPath()
     {
         $this->stack->addPath(__DIR__ . '/_templates');
         $expected = realpath(__DIR__ . '/_templates/test.phtml');
-        $test     = $this->stack->getScriptPath('test.phtml');
+        $test     = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
 
@@ -170,7 +170,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->stack->setUseStreamWrapper(true)
                     ->addPath(__DIR__ . '/_templates');
         $expected = 'zend.view://' . realpath(__DIR__ . '/_templates/test.phtml');
-        $test     = $this->stack->getScriptPath('test.phtml');
+        $test     = $this->stack->resolve('test.phtml');
         $this->assertEquals($expected, $test);
     }
 
@@ -240,7 +240,7 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
     {
         $path = 'phar://' . __DIR__ . '/_templates/view.phar/start/../views';
         $this->stack->addPath($path);
-        $test = $this->stack->getScriptPath('foo/hello.phtml');
+        $test = $this->stack->resolve('foo/hello.phtml');
         $this->assertEquals($path . '/foo/hello.phtml', $test);
     }
 }

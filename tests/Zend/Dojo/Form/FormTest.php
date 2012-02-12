@@ -48,7 +48,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form = new DojoForm();
         $this->form->addElement('TextBox', 'foo')
                    ->addDisplayGroup(array('foo'), 'dg')
-                   ->setView(new View\PhpRenderer());
+                   ->setView(new View\Renderer\PhpRenderer());
     }
 
     public function testDojoFormDecoratorPathShouldBeRegisteredByDefault()
@@ -93,7 +93,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testDisplayGroupShouldRegisterDojoViewHelper()
     {
-        $this->form->dg->setView(new View\PhpRenderer());
+        $this->form->dg->setView(new View\Renderer\PhpRenderer());
         $view   = $this->form->dg->getView();
         $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));
     }

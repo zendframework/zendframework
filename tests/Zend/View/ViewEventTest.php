@@ -6,7 +6,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\View\Model\ViewModel,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\ViewEvent;
 
 class ViewEventTest extends TestCase

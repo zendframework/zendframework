@@ -189,6 +189,7 @@ class Application implements AppContext
               ->setResponse($this->getResponse())
               ->setRouter($this->getRouter());
 
+        // Trigger route event
         $result = $events->trigger('route', $event, function ($r) {
             return ($r instanceof Response);
         });
@@ -196,19 +197,31 @@ class Application implements AppContext
             $response = $result->last();
             return $response;
         }
+        if ($event->getError()) {
+            $events->trigger('render', $event);
+            $events->trigger('finish', $event);
+            return $event->getResponse();
+        }
 
+        // Trigger dispatch event
         $result = $events->trigger('dispatch', $event, function ($r) {
             return ($r instanceof Response);
         });
+        if ($event->getError()) {
+            $events->trigger('render', $event);
+            $events->trigger('finish', $event);
+            return $event->getResponse();
+        }
 
+        // Complete response
         $response = $result->last();
         if (!$response instanceof Response) {
             $response = $this->getResponse();
             $event->setResponse($response);
         }
 
+        $events->trigger('render', $event);
         $events->trigger('finish', $event);
-
         return $response;
     }
 

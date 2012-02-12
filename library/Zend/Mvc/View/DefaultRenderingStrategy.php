@@ -66,7 +66,7 @@ class DefaultRenderingStrategy implements ListenerAggregate
      */
     public function attach(EventCollection $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'render'), -10000);
+        $this->listeners[] = $events->attach('render', array($this, 'render'), -10000);
     }
 
     /**

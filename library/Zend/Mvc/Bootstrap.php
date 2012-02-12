@@ -81,6 +81,7 @@ class Bootstrap implements Bootstrapper
     {
         $this->setupLocator($application);
         $this->setupRouter($application);
+        $this->setupView($application);
         $this->setupEvents($application);
     }
 
@@ -129,6 +130,26 @@ class Bootstrap implements Bootstrapper
     {
         $router = $application->getLocator()->get('Zend\Mvc\Router\RouteStack');
         $application->setRouter($router);
+    }
+
+    /**
+     * Sets up the view integration
+     *
+     * Pulls the View object and PhpRenderer strategy from the locator, and 
+     * attaches the former to the latter. Then attaches the 
+     * DefaultRenderingStrategy to the application event manager.
+     * 
+     * @param  Application $application 
+     * @return void
+     */
+    protected function setupView($application)
+    {
+        $locator             = $application->getLocator();
+        $view                = $locator->get('Zend\View\View');
+        $phpRendererStrategy = $locator->get('Zend\View\Strategy\PhpRendererStrategy');
+        $defaultViewStrategy = $locator->get('Zend\Mvc\View\DefaultRenderingStrategy');
+        $view->events()->attachAggregate($phpRendererStrategy);
+        $application->events()->attachAggregate($defaultViewStrategy);
     }
 
     /**

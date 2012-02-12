@@ -1305,8 +1305,9 @@ class Form implements Iterator, Countable, Validator
      */
     public function setDefault($name, $value)
     {
-        $name = (string) $name;
-        if ($element = $this->getElement($name)) {
+        $name    = (string) $name;
+        $element = $this->getElement($name);
+        if ($element) {
             $element->setValue($value);
         } else {
             if (is_scalar($value)) {
@@ -1328,11 +1329,13 @@ class Form implements Iterator, Countable, Validator
      */
     public function getValue($name)
     {
-        if ($element = $this->getElement($name)) {
+        $element = $this->getElement($name);
+        if ($element) {
             return $element->getValue();
         }
 
-        if ($subForm = $this->getSubForm($name)) {
+        $subForm = $this->getSubForm($name);
+        if ($subForm) {
             return $subForm->getValues(true);
         }
 
@@ -1467,7 +1470,8 @@ class Form implements Iterator, Countable, Validator
      */
     public function getUnfilteredValue($name)
     {
-        if ($element = $this->getElement($name)) {
+        $element = $this->getElement($name);
+        if ($element) {
             return $element->getUnfilteredValue();
         }
         return null;
@@ -2240,7 +2244,7 @@ class Form implements Iterator, Countable, Validator
         }
         $context = $data;
         foreach ($this->getElements() as $key => $element) {
-            if (null !== $translator 
+            if (null !== $translator
                 && $this->hasTranslator()
                 && !$element->hasTranslator()
             ) {

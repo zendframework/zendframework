@@ -93,7 +93,7 @@ class Accept implements HeaderDescription
     {
         $strings = array();
         foreach ($this->values as $value) {
-            $strings[] = implode('; ', $value);
+            $strings[] = implode('; ', (array) $value);
         }
         return implode(',', $strings);
     }
@@ -118,7 +118,7 @@ class Accept implements HeaderDescription
      */
     public function addMediaType($type, $priority = 1, $level = null)
     {
-        if (!preg_match('#^([a-zA-Z+-]+|\*)/(\*|[a-zA-Z0-9+-]+)$', $type)) {
+        if (!preg_match('#^([a-zA-Z+-]+|\*)/(\*|[a-zA-Z0-9+-]+)$#', $type)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a valid media type; received "%s"',
                 __METHOD__,

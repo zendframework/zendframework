@@ -23,23 +23,22 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
 
     public function testAcceptGetFieldValueReturnsProperValue()
     {
-        $this->markTestIncomplete('Accept needs to be completed');
-
-        $acceptHeader = new Accept();
+        $acceptHeader = Accept::fromString('Accept: xxx');
         $this->assertEquals('xxx', $acceptHeader->getFieldValue());
     }
 
     public function testAcceptToStringReturnsHeaderFormattedString()
     {
-        $this->markTestIncomplete('Accept needs to be completed');
-
         $acceptHeader = new Accept();
+        $acceptHeader->addMediaType('text/html', 0.8)
+                     ->addMediaType('application/json', 1)
+                     ->addMediaType('application/atom+xml', 0.9);
 
         // @todo set some values, then test output
-        $this->assertEmpty('Accept: xxx', $acceptHeader->toString());
+        $this->assertEquals('Accept: text/html;q=0.8,application/json,application/atom+xml;q=0.9', $acceptHeader->toString());
     }
 
-    /** Implmentation specific tests here */
+    /** Implementation specific tests here */
 
     public function testCanParseCommaSeparatedValues()
     {

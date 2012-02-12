@@ -310,7 +310,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->renderer->setResolver($resolver);
 
         $model = new ViewModel();
-        $model->setOption('template', 'empty');
+        $model->setTemplate('empty');
 
         $content = $this->renderer->render($model);
         $this->assertRegexp('/\s*Empty view\s*/s', $content);
@@ -337,7 +337,7 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->renderer->setResolver($resolver);
 
         $model = new ViewModel();
-        $model->setOption('template', 'test');
+        $model->setTemplate('test');
         $model->setVariable('bar', 'bar');
 
         $content = $this->renderer->render($model);

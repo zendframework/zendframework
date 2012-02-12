@@ -428,16 +428,15 @@ class PhpRenderer implements Renderer, Pluggable
     public function render($nameOrModel, $values = null)
     {
         if ($nameOrModel instanceof Model) {
-            $model   = $nameOrModel;
-            $options = $model->getOptions();
-            if (!isset($options['template']) || empty($options['template'])) {
+            $model       = $nameOrModel;
+            $nameOrModel = $model->getTemplate();
+            if (empty($nameOrModel)) {
                 throw new Exception\DomainException(sprintf(
-                    '%s: received View Model argument, but missing "template" option',
+                    '%s: received View Model argument, but template is empty',
                     __METHOD__
                 ));
             }
-            $nameOrModel = $options['template'];
-            unset($options['template']);
+            $options = $model->getOptions();
             foreach ($options as $setting => $value) {
                 $method = 'set' . $setting;
                 if (method_exists($this, $method)) {

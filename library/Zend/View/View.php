@@ -190,7 +190,7 @@ class View
             return ($result instanceof Renderer);
         });
         $renderer = $results->last();
-        if (!$renderer) {
+        if (!$renderer instanceof Renderer) {
             throw new RuntimeException(sprintf(
                 '%s: no renderer selected!',
                 __METHOD__

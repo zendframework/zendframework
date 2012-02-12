@@ -97,7 +97,7 @@ class Bootstrap implements Bootstrapper
         $di = new Di;
         $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
 
-        // default configuration for the router
+        // Default configuration for common MVC classes
         $routerDiConfig = new DiConfiguration(array('definition' => array('class' => array(
             'Zend\Mvc\Router\RouteStack' => array(
                 'instantiator' => array(
@@ -108,6 +108,36 @@ class Bootstrap implements Bootstrapper
             'Zend\Mvc\View\DefaultRenderingStrategy' => array(
                 'setBaseTemplate' => array(
                     'baseTemplate' => array(
+                        'required' => false,
+                        'type'     => false,
+                    ),
+                ),
+            ),
+            'Zend\Mvc\View\ExceptionStrategy' => array(
+                'setDisplayExceptions' => array(
+                    'displayExceptions' => array(
+                        'required' => false,
+                        'type'     => false,
+                    ),
+                ),
+                'setErrorTemplate' => array(
+                    'template' => array(
+                        'required' => false,
+                        'type'     => false,
+                    ),
+                ),
+            ),
+            'Zend\Mvc\View\RouteNotFoundStrategy' => array(
+                'setNotFoundTemplate' => array(
+                    'template' => array(
+                        'required' => false,
+                        'type'     => false,
+                    ),
+                ),
+            ),
+            'Zend\View\Strategy\PhpRendererStrategy' => array(
+                'setContentPlaceholders' => array(
+                    'contentPlaceholders' => array(
                         'required' => false,
                         'type'     => false,
                     ),

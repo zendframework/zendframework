@@ -132,12 +132,12 @@ class Stream extends Response
     public static function fromStream($response_str, $stream)
     {
         $response= new static();
-        
+
         $response::fromString($response_str);
         if (is_resource($stream)) {
             $response->setStream($stream);
         }
-        
+
         return $response;
     }
 
@@ -190,11 +190,7 @@ class Stream extends Response
             return '';
         }
 
-        if(isset($headers['content-length'])) {
-            $this->body = stream_get_contents($this->stream, $headers['content-length']);
-        } else {
-            $this->body = stream_get_contents($this->stream);
-        }
+        $this->body = stream_get_contents($this->stream);
         fclose($this->stream);
         $this->stream = null;
     }

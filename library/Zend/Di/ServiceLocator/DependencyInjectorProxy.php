@@ -143,7 +143,7 @@ class DependencyInjectorProxy extends Di
         if (!$definition->hasClass($class)) {
             $aliasMsg = ($alias) ? '(specified by alias ' . $alias . ') ' : '';
             throw new Exception\ClassNotFoundException(
-                'Class ' . $aliasMsg . $class . ' could not be located in provided definition.'
+                'Class ' . $aliasMsg . $class . ' could not be located in provided definitions.'
             );
         }
 

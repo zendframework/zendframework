@@ -172,7 +172,7 @@ class Application implements AppContext
             return $this->event;
         }
 
-        $event  = new MvcEvent();
+        $this->event = $event  = new MvcEvent();
         $event->setTarget($this);
         $event->setRequest($this->getRequest())
               ->setResponse($this->getResponse())

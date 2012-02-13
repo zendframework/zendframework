@@ -126,7 +126,7 @@ class DefaultRenderingStrategy implements ListenerAggregate
         // Martial arguments
         $request   = $e->getRequest();
         $response  = $e->getResponse();
-        $viewModel = $e->getResult();
+        $viewModel = $e->getViewModel();
         if (!$viewModel instanceof ViewModel) {
             return;
         }

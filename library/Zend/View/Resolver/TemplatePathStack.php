@@ -270,6 +270,11 @@ class TemplatePathStack implements Resolver
             );
         }
 
+        // Ensure we have a file extension
+        if (pathinfo($name, \PATHINFO_EXTENSION) == '') {
+            $name .= '.phtml';
+        }
+
         $paths   = PATH_SEPARATOR;
         foreach ($this->paths as $path) {
             $file = new SplFileInfo($path . $name);

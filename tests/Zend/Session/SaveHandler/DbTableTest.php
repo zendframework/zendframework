@@ -110,7 +110,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         $sh = new DbTable($this->_saveHandlerTableConfig);
         $this->assertInstanceOf('Zend\Db\Table\AbstractTable', $sh);
-        $this->assertInstanceOf('Zend\Session\Manager', $sh->getManager());
     }
 
     public function testConstructorThrowsExceptionGivenConfigAsNull()
@@ -126,20 +125,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->_saveHandlerTableConfig;
         $config['name'] = 'schema.session';
-        $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
-    }
-
-    public function testTableEmptyNamePullFromSavePath()
-    {
-        $config = $this->_saveHandlerTableConfig;
-        unset($config['name']);
-        $savePath = ini_get('session.save_path');
-        $this->manager->getConfig()->setSavePath(__DIR__);
-            
-        $this->setExpectedException(
-            'Zend\Session\SaveHandler\Exception',
-            'path'
-            );
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
     }
 
@@ -344,8 +329,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
-        $manager = new TestManager();
-        $saveHandler->setManager($manager);
+        $manager = new TestManager(null, null, $saveHandler);
         $manager->start();
 
         /**

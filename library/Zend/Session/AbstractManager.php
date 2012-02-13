@@ -88,6 +88,12 @@ abstract class AbstractManager implements Manager
                         }
                         unset($config[$key]);
                         break;
+                    case 'savehandler':
+                        if (null === $saveHandler) {
+                            $saveHandler = $value;
+                        }
+                        unset($config[$key]);
+                        break;
                 }
             }
         } elseif (is_string($config)) {

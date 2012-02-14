@@ -94,7 +94,7 @@ class Bootstrap implements Bootstrapper
     protected function setupLocator(AppContext $application)
     {
         $di = new Di;
-        $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
+        $di->instanceManager()->addSharedInstance($di, 'Zend\Di\Locator');
 
         // default configuration for the router
         $routerDiConfig = new DiConfiguration(

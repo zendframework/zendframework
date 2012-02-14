@@ -293,10 +293,6 @@ class Application implements AppContext
             goto complete;
         }
 
-        if ($controller instanceof LocatorAware) {
-            $controller->setLocator($locator);
-        }
-
         $request  = $e->getRequest();
         $response = $this->getResponse();
 

@@ -32,7 +32,7 @@ issues we've encountered in refactoring.
 
 To run tests:
 
- * Make sure you have a recent version of PHPUnit installed; 3.4.0
+ * Make sure you have a recent version of PHPUnit installed; 3.5.0
    minimally.
 
  * Enter the tests/ subdirectory.

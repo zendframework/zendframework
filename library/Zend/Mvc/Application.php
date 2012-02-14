@@ -288,10 +288,9 @@ class Application implements AppContext
         $routeMatch = $router->match($request);
 
         if (!$routeMatch instanceof Router\RouteMatch) {
-            $error = clone $e;
-            $error->setError(static::ERROR_CONTROLLER_NOT_FOUND);
+            $e->setError(static::ERROR_CONTROLLER_NOT_FOUND);
 
-            $results = $this->events()->trigger('dispatch.error', $error);
+            $results = $this->events()->trigger('dispatch.error', $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -319,10 +318,9 @@ class Application implements AppContext
             );
         }
 
-        $events     = $this->events();
-        $routeMatch = $e->getRouteMatch();
-
+        $routeMatch     = $e->getRouteMatch();
         $controllerName = $routeMatch->getParam('controller', 'not-found');
+        $events         = $this->events();
 
         try {
             $controller = $locator->get($controllerName);

@@ -52,6 +52,7 @@ class InjectViewModelListener implements ListenerAggregate
     public function attach(Events $events)
     {
         $this->listeners[] = $events->attach('dispatch', array($this, 'injectViewModel'), -100);
+        $this->listeners[] = $events->attach('dispatch.error', array($this, 'injectViewModel'), -100);
     }
 
     /**

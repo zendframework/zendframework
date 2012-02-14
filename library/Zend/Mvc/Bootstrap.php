@@ -129,7 +129,7 @@ class Bootstrap implements Bootstrapper
             ),
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
                 'setNotFoundTemplate' => array(
-                    'template' => array(
+                    'notFoundTemplate' => array(
                         'required' => false,
                         'type'     => false,
                     ),
@@ -193,6 +193,7 @@ class Bootstrap implements Bootstrapper
         // Basic view strategy
         $locator             = $application->getLocator();
         $events              = $application->events();
+        $staticEvents        = StaticEventManager::getInstance();
         $view                = $locator->get('Zend\View\View');
         $phpRendererStrategy = $locator->get('Zend\View\Strategy\PhpRendererStrategy');
         $defaultViewStrategy = $locator->get('Zend\Mvc\View\DefaultRenderingStrategy');
@@ -208,8 +209,8 @@ class Bootstrap implements Bootstrapper
         // Template/ViewModel listeners
         $injectTemplateListener  = $locator->get('Zend\Mvc\View\InjectTemplateListener');
         $injectViewModelListener = $locator->get('Zend\Mvc\View\InjectViewModelListener');
-        $staticEvents            = StaticEventManager::getInstance();
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectTemplateListener, 'injectTemplate'), -90);
+        $events->attach('dispatch.error', array($injectViewModelListener, 'injectViewModel'), -100);
         $staticEvents->attach('Zend\Stdlib\Dispatchable', 'dispatch', array($injectViewModelListener, 'injectViewModel'), -100);
 
         // Inject MVC Event with view model

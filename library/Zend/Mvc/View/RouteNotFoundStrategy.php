@@ -58,8 +58,9 @@ class RouteNotFoundStrategy implements ListenerAggregate
      */
     public function attach(EventCollection $events)
     {
-        $this->listeners[] = $events->attach('dispatch', array($this, 'prepareNotFoundViewModel'), -1000);
+        $this->listeners[] = $events->attach('dispatch', array($this, 'prepareNotFoundViewModel'), -90);
         $this->listeners[] = $events->attach('dispatch.error', array($this, 'detectNotFoundError'));
+        $this->listeners[] = $events->attach('dispatch.error', array($this, 'prepareNotFoundViewModel'));
     }
 
     /**

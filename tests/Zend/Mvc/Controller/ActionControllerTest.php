@@ -29,11 +29,13 @@ class ActionControllerTest extends TestCase
         StaticEventManager::resetInstance();
     }
 
-    public function testDispatchInvokesIndexActionWhenNoActionPresentInRouteMatch()
+    public function testDispatchInvokesNotFoundActionWhenNoActionPresentInRouteMatch()
     {
         $result = $this->controller->dispatch($this->request, $this->response);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
         $this->assertTrue(isset($result['content']));
-        $this->assertContains('Placeholder page', $result['content']);
+        $this->assertContains('Page not found', $result['content']);
     }
 
     public function testDispatchInvokesNotFoundActionWhenInvalidActionPresentInRouteMatch()

@@ -99,7 +99,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
             throw new \DomainException('Missing route matches; unsure how to retrieve action');
         }
 
-        $action = $routeMatch->getParam('action', 'index');
+        $action = $routeMatch->getParam('action', 'not-found');
         $method = static::getMethodFromAction($action);
 
         if (!method_exists($this, $method)) {

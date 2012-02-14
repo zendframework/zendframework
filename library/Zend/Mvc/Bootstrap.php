@@ -135,6 +135,39 @@ class Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
+            'Zend\View\HelperBroker' => array(
+                'setClassLoader' => array(
+                    'required' => true,
+                    'loader'   => array(
+                        'type'     => 'Zend\View\HelperLoader',
+                        'required' => true,
+                    ),
+                ),
+            ),
+            'Zend\View\HelperLoader' => array(
+                'registerPlugins' => array(
+                    'map' => array(
+                        'type'     => false,
+                        'required' => false,
+                    ),
+                ),
+            ),
+            'Zend\View\Renderer\PhpRenderer' => array(
+                'setBroker' => array(
+                    'required' => true,
+                    'broker'   => array(
+                        'type'     => 'Zend\View\HelperBroker',
+                        'required' => true,
+                    ),
+                ),
+                'setResolver' => array(
+                    'required' => false,
+                    'resolver' => array(
+                        'type'     => 'Zend\View\Resolver',
+                        'required' => true,
+                    ),
+                ),
+            ),
             'Zend\View\Resolver\TemplatePathStack' => array(
                 'setDefaultSuffix' => array(
                     'defaultSuffix' => array(

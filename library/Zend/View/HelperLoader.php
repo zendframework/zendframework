@@ -86,5 +86,7 @@ class HelperLoader extends PluginClassLoader
         'serverurl'           => 'Zend\View\Helper\ServerUrl',
         'translator'          => 'Zend\View\Helper\Translator',
         'url'                 => 'Zend\View\Helper\Url',
+        'viewmodel'           => 'Zend\View\Helper\ViewModel',
+        'view_model'          => 'Zend\View\Helper\ViewModel',
     );
 }

@@ -446,6 +446,10 @@ class PhpRenderer implements Renderer, Pluggable
             }
             unset($options);
 
+            // Give view model awareness via ViewModel helper
+            $helper = $this->plugin('view_model');
+            $helper->setCurrent($model);
+
             $values = $model->getVariables();
             unset($model);
         }

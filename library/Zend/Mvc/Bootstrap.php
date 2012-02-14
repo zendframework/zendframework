@@ -252,6 +252,11 @@ class Bootstrap implements Bootstrapper
         $mvcEvent  = $application->getMvcEvent();
         $viewModel = $mvcEvent->getViewModel();
         $viewModel->setTemplate($defaultViewStrategy->getBaseTemplate());
+
+        // Inject MVC Event view model as root view model
+        $renderer    = $phpRendererStrategy->getRenderer();
+        $modelHelper = $renderer->plugin('view_model');
+        $modelHelper->setRoot($viewModel);
     }
 
     /**

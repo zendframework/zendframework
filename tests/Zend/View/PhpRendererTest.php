@@ -343,4 +343,23 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $content = $this->renderer->render($model);
         $this->assertRegexp('/\s*foo bar baz\s*/s', $content);
     }
+
+    /**
+     * @group view-model
+     */
+    public function testRenderedViewModelIsRegisteredAsCurrentViewModel()
+    {
+        $resolver = new TemplateMapResolver(array(
+            'empty' => __DIR__ . '/_templates/empty.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+
+        $model = new ViewModel();
+        $model->setTemplate('empty');
+
+        $content = $this->renderer->render($model);
+        $helper  = $this->renderer->plugin('view_model');
+        $this->assertTrue($helper->hasCurrent());
+        $this->assertSame($model, $helper->getCurrent());
+    }
 }

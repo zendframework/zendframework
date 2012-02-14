@@ -67,6 +67,16 @@ class PhpRendererStrategy implements ListenerAggregate
     }
 
     /**
+     * Retrieve the composed renderer
+     * 
+     * @return PhpRenderer
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    /**
      * Set list of possible content placeholders
      *
      * @param  array contentPlaceholders

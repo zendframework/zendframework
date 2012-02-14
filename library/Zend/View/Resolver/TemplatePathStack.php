@@ -271,7 +271,7 @@ class TemplatePathStack implements Resolver
         }
 
         // Ensure we have a file extension
-        if (pathinfo($name, \PATHINFO_EXTENSION) == '') {
+        if (pathinfo($name, PATHINFO_EXTENSION) == '') {
             $name .= '.phtml';
         }
 

@@ -2,8 +2,7 @@
 
 namespace Zend\Mvc\Controller;
 
-use ArrayObject,
-    Zend\Di\Locator,
+use Zend\Di\Locator,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
@@ -11,7 +10,6 @@ use ArrayObject,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
     Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\IsAssocArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
     Zend\Mvc\InjectApplicationEvent,
@@ -109,12 +107,6 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
         }
 
         $actionResponse = $this->$method();
-
-        if (!is_object($actionResponse)) {
-            if (IsAssocArray::test($actionResponse)) {
-                $actionResponse = new ArrayObject($actionResponse, ArrayObject::ARRAY_AS_PROPS);
-            }
-        }
 
         $e->setResult($actionResponse);
         return $actionResponse;

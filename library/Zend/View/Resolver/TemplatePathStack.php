@@ -39,6 +39,15 @@ use SplFileInfo,
 class TemplatePathStack implements Resolver
 {
     /**
+     * Default suffix to use
+     *
+     * Appends this suffix if the template requested does not use it.
+     * 
+     * @var string
+     */
+    protected $defaultSuffix = 'phtml';
+
+    /**
      * @var SplStack
      */
     protected $paths;
@@ -109,6 +118,29 @@ class TemplatePathStack implements Resolver
                     break;
             }
         }
+    }
+
+    /**
+     * Set default file suffix
+     *
+     * @param  string $defaultSuffix
+     * @return TemplatePathStack
+     */
+    public function setDefaultSuffix($defaultSuffix)
+    {
+        $this->defaultSuffix = (string) $defaultSuffix;
+        $this->defaultSuffix = ltrim($this->defaultSuffix, '.');
+        return $this;
+    }
+    
+    /**
+     * Get default file suffix
+     *
+     * @return string
+     */
+    public function getDefaultSuffix()
+    {
+        return $this->defaultSuffix;
     }
 
     /**
@@ -270,9 +302,10 @@ class TemplatePathStack implements Resolver
             );
         }
 
-        // Ensure we have a file extension
-        if (pathinfo($name, PATHINFO_EXTENSION) == '') {
-            $name .= '.phtml';
+        // Ensure we have the expected file extension
+        $defaultSuffix = $this->getDefaultSuffix();
+        if (pathinfo($name, PATHINFO_EXTENSION) != $defaultSuffix) {;
+            $name .= '.' . $defaultSuffix;
         }
 
         $paths   = PATH_SEPARATOR;

@@ -243,4 +243,21 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $test = $this->stack->resolve('foo/hello.phtml');
         $this->assertEquals($path . '/foo/hello.phtml', $test);
     }
+
+    public function testDefaultFileSuffixIsPhtml()
+    {
+        $this->assertEquals('phtml', $this->stack->getDefaultSuffix());
+    }
+
+    public function testDefaultFileSuffixIsMutable()
+    {
+        $this->stack->setDefaultSuffix('php');
+        $this->assertEquals('php', $this->stack->getDefaultSuffix());
+    }
+
+    public function testSettingDefaultSuffixStripsLeadingDot()
+    {
+        $this->stack->setDefaultSuffix('.config.php');
+        $this->assertEquals('config.php', $this->stack->getDefaultSuffix());
+    }
 }

@@ -135,6 +135,20 @@ class Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
+            'Zend\View\Resolver\TemplatePathStack' => array(
+                'setDefaultSuffix' => array(
+                    'defaultSuffix' => array(
+                        'required' => false,
+                        'type'     => false,
+                    ),
+                ),
+                'setPaths' => array(
+                    'paths' => array(
+                        'required' => false,
+                        'type'     => false,
+                    ),
+                ),
+            ),
             'Zend\View\Strategy\PhpRendererStrategy' => array(
                 'setContentPlaceholders' => array(
                     'contentPlaceholders' => array(

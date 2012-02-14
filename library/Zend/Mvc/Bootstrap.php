@@ -168,6 +168,14 @@ class Bootstrap implements Bootstrapper
                     ),
                 ),
             ),
+            'Zend\View\Resolver\AggregateResolver' => array(
+                'attach' => array(
+                    'resolver' => array(
+                        'required' => false,
+                        'type'     => 'Zend\View\Resolver',
+                    ),
+                ),
+            ),
             'Zend\View\Resolver\TemplatePathStack' => array(
                 'setDefaultSuffix' => array(
                     'defaultSuffix' => array(

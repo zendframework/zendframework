@@ -165,6 +165,6 @@ class Cache implements Savable
      */
     public function getStorageAdapter()
     {
-        return $this->_storageAdapter;
+        return $this->storageAdapter;
     }
 }

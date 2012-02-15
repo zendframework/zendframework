@@ -193,12 +193,11 @@ class TemplateMapResolverTest extends TestCase
         $this->assertEquals($map['foo/bar'], $resolver->get('foo/bar'));
     }
 
-    public function testGetRaisesExceptionWhenNameHasNoMatch()
+    public function testGetReturnsFalseWhenNameHasNoMatch()
     {
         $map = array('foo/bar' => __DIR__ . '/foo/bar.phtml');
         $resolver = new TemplateMapResolver($map);
-        $this->setExpectedException('Zend\View\Exception\DomainException', 'no template');
-        $resolver->get('bar/baz');
+        $this->assertFalse($resolver->get('bar/baz'));
     }
 
     public function testResolveReturnsPathWhenNameHasMatch()
@@ -208,11 +207,10 @@ class TemplateMapResolverTest extends TestCase
         $this->assertEquals($map['foo/bar'], $resolver->resolve('foo/bar'));
     }
 
-    public function testResolveRaisesExceptionWhenNameHasNoMatch()
+    public function testResolveReturnsFalseWhenNameHasNoMatch()
     {
         $map = array('foo/bar' => __DIR__ . '/foo/bar.phtml');
         $resolver = new TemplateMapResolver($map);
-        $this->setExpectedException('Zend\View\Exception\DomainException', 'no template');
-        $resolver->resolve('bar/baz');
+        $this->assertFalse($resolver->resolve('bar/baz'));
     }
 }

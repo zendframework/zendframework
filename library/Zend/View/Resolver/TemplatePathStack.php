@@ -38,6 +38,9 @@ use SplFileInfo,
  */
 class TemplatePathStack implements Resolver
 {
+    const FAILURE_NO_PATHS  = 'TemplatePathStack_Failure_No_Paths';
+    const FAILURE_NOT_FOUND = 'TemplatePathStack_Failure_Not_Found';
+
     /**
      * Default suffix to use
      *
@@ -51,6 +54,13 @@ class TemplatePathStack implements Resolver
      * @var SplStack
      */
     protected $paths;
+
+    /**
+     * Reason for last lookup failure
+     * 
+     * @var false|string
+     */
+    protected $lastLookupFailure = false;
 
     /**
      * Flag indicating whether or not LFI protection for rendering view scripts is enabled
@@ -290,6 +300,8 @@ class TemplatePathStack implements Resolver
      */
     public function resolve($name, Renderer $renderer = null)
     {
+        $this->lastLookupFailure = false;
+
         if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name)) {
             throw new Exception\DomainException(
                 'Requested scripts may not include parent directory traversal ("../", "..\\" notation)'
@@ -297,9 +309,8 @@ class TemplatePathStack implements Resolver
         }
 
         if (!count($this->paths)) {
-            throw new Exception\RuntimeException(
-                'No view script directory set; unable to determine location for view script'
-            );
+            $this->lastLookupFailure = static::FAILURE_NO_PATHS;
+            return false;
         }
 
         // Ensure we have the expected file extension
@@ -308,7 +319,6 @@ class TemplatePathStack implements Resolver
             $name .= '.' . $defaultSuffix;
         }
 
-        $paths   = PATH_SEPARATOR;
         foreach ($this->paths as $path) {
             $file = new SplFileInfo($path . $name);
             if ($file->isReadable()) {
@@ -326,12 +336,19 @@ class TemplatePathStack implements Resolver
                 }
                 return $filePath;
             }
-            $paths .= $path . PATH_SEPARATOR;
         }
 
-        throw new Exception\RuntimeException(sprintf(
-            'Script "%s" not found in path (%s)',
-            $name, trim($paths, PATH_SEPARATOR)
-        ));
+        $this->lastLookupFailure = static::FAILURE_NOT_FOUND;
+        return false;
+    }
+
+    /**
+     * Get the last lookup failure message, if any
+     * 
+     * @return false|string
+     */
+    public function getLastLookupFailure()
+    {
+        return $this->lastLookupFailure;
     }
 }

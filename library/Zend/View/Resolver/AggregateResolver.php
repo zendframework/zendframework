@@ -37,6 +37,15 @@ use Countable,
  */
 class AggregateResolver implements Countable, IteratorAggregate, Resolver
 {
+    const FAILURE_NO_RESOLVERS = 'AggregateResolver_Failure_No_Resolvers';
+    const FAILURE_NOT_FOUND    = 'AggregateResolver_Failure_Not_Found';
+
+    /**
+     * Last lookup failure
+     * @var false|string
+     */
+    protected $lastLookupFailure = false;
+
     /**
      * @var Resolver
      */
@@ -97,37 +106,32 @@ class AggregateResolver implements Countable, IteratorAggregate, Resolver
      * 
      * @param  string $name 
      * @param  null|Renderer $renderer 
-     * @return string
-     * @throws Exception\RuntimeException when no resolver succeeds
+     * @return false|string
      */
     public function resolve($name, Renderer $renderer = null)
     {
+        $this->lastLookupFailure      = false;
         $this->lastSuccessfulResolver = null;
 
         if (0 === count($this->queue)) {
-            throw new Exception\RuntimeException('No resolvers attached to AggregateResolver');
+            $this->lastLookupFailure = static::FAILURE_NO_RESOLVERS;
+            return false;
         }
 
         foreach ($this->queue as $resolver) {
-            try {
-                $resource = $resolver->resolve($name, $renderer);
-                if (!$resource) {
-                    // No resource found; try next resolver
-                    continue;
-                }
-
-                // Resource found; return it
-                $this->lastSuccessfulResolver = $resolver;
-                return $resource;
-            } catch (\Exception $e) {
-                // non-resolution is normal in an aggregate
+            $resource = $resolver->resolve($name, $renderer);
+            if (!$resource) {
+                // No resource found; try next resolver
+                continue;
             }
+
+            // Resource found; return it
+            $this->lastSuccessfulResolver = $resolver;
+            return $resource;
         }
 
-        throw new Exception\RuntimeException(sprintf(
-            'Script "%s" not resolved by any attached resolvers',
-            $name
-        ));
+        $this->lastLookupFailure = static::FAILURE_NOT_FOUND;
+        return false;
     }
 
     /**
@@ -138,5 +142,15 @@ class AggregateResolver implements Countable, IteratorAggregate, Resolver
     public function getLastSuccessfulResolver()
     {
         return $this->lastSuccessfulResolver;
+    }
+
+    /**
+     * Get last lookup failure
+     * 
+     * @return false|string
+     */
+    public function getLastLookupFailure()
+    {
+        return $this->lastLookupFailure;
     }
 }

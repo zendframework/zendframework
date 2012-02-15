@@ -362,4 +362,12 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($helper->hasCurrent());
         $this->assertSame($model, $helper->getCurrent());
     }
+
+    public function testRendererRaisesExceptionIfResolverCannotResolveTemplate()
+    {
+        $expected = '10 &gt; 9';
+        $this->renderer->vars()->assign(array('foo' => '10 > 9'));
+        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'could not resolve');
+        $test = $this->renderer->render('should-not-find-this');
+    }
 }

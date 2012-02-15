@@ -50,6 +50,13 @@ class PhpRenderer implements Renderer, Pluggable
     private $content = '';
 
     /**
+     * Template being rendered
+     * 
+     * @var null|string
+     */
+    private $template = null;
+
+    /**
      * Queue of templates to render
      * @var array
      */
@@ -474,8 +481,15 @@ class PhpRenderer implements Renderer, Pluggable
         extract($__vars);
         unset($__vars); // remove $__vars from local scope
 
-        while ($this->file = array_pop($this->templates)) {
-            $this->file = $this->resolver($this->file);
+        while ($this->template = array_pop($this->templates)) {
+            $this->file = $this->resolver($this->template);
+            if (!$this->file) {
+                throw new Exception\RuntimeException(sprintf(
+                    '%s: Unable to render template "%s"; resolver could not resolve to a file',
+                    __METHOD__,
+                    $this->template
+                ));
+            }
             ob_start();
             include $this->file;
             $this->content = ob_get_clean();

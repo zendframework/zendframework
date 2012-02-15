@@ -140,17 +140,17 @@ class TemplatePathStackTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('LfiProtectionCheck.phtml', $test);
     }
 
-    public function testRaisesExceptionWhenRetrievingScriptIfNoPathsRegistered()
+    public function testReturnsFalseWhenRetrievingScriptIfNoPathsRegistered()
     {
-        $this->setExpectedException('Zend\View\Exception', 'unable to determine');
-        $this->stack->resolve('test.phtml');
+        $this->assertFalse($this->stack->resolve('test.phtml'));
+        $this->assertEquals(TemplatePathStack::FAILURE_NO_PATHS, $this->stack->getLastLookupFailure());
     }
 
-    public function testRaisesExceptionWhenUnableToResolveScriptToPath()
+    public function testReturnsFalseWhenUnableToResolveScriptToPath()
     {
         $this->stack->addPath(__DIR__ . '/_templates');
-        $this->setExpectedException('Zend\View\Exception', 'not found');
-        $this->stack->resolve('bogus-script.txt');
+        $this->assertFalse($this->stack->resolve('bogus-script.txt'));
+        $this->assertEquals(TemplatePathStack::FAILURE_NOT_FOUND, $this->stack->getLastLookupFailure());
     }
 
     public function testReturnsFullPathNameWhenAbleToResolveScriptPath()

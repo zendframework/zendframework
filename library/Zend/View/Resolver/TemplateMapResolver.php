@@ -164,17 +164,13 @@ class TemplateMapResolver implements IteratorAggregate, Resolver
      * Retrieve a template path by name
      * 
      * @param  string $name 
-     * @return string
+     * @return false|string
      * @throws Exception\DomainException if no entry exists
      */
     public function get($name)
     {
         if (!$this->has($name)) {
-            throw new Exception\DomainException(sprintf(
-                '%s: no template by name of "%s" found',
-                __METHOD__,
-                (string) $name
-            ));
+            return false;
         }
         return $this->map[$name];
     }

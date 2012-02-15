@@ -89,14 +89,14 @@ class AggregateResolverTest extends TestCase
         $this->assertSame($barResolver, $resolver->getLastSuccessfulResolver());
     }
 
-    public function testRaisesExceptionWhenNoResolverSucceeds()
+    public function testReturnsFalseWhenNoResolverSucceeds()
     {
         $resolver = new Resolver\AggregateResolver();
         $resolver->attach(new Resolver\TemplateMapResolver(array(
             'foo' => 'bar',
         )));
-        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'not resolved');
-        $test = $resolver->resolve('bar');
+        $this->assertFalse($resolver->resolve('bar'));
+        $this->assertEquals(Resolver\AggregateResolver::FAILURE_NOT_FOUND, $resolver->getLastLookupFailure());
     }
 
     public function testLastSuccessfulResolverIsNullWhenNoResolverSucceeds()
@@ -138,10 +138,10 @@ class AggregateResolverTest extends TestCase
         $this->assertEquals('bar', $test);
     }
 
-    public function testRaisesExceptionWhenAttemptingToResolveWhenNoResolversAreAttached()
+    public function testReturnsFalseWhenAttemptingToResolveWhenNoResolversAreAttached()
     {
         $resolver = new Resolver\AggregateResolver();
-        $this->setExpectedException('Zend\View\Exception\RuntimeException', 'attached');
-        $resolver->resolve('foo');
+        $this->assertFalse($resolver->resolve('foo'));
+        $this->assertEquals(Resolver\AggregateResolver::FAILURE_NO_RESOLVERS, $resolver->getLastLookupFailure());
     }
 }

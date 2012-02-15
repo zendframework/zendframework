@@ -42,6 +42,17 @@ use JsonSerializable,
 class JsonRenderer implements Renderer
 {
     /**
+     * Whether or not to merge child models with no capture-to value set
+     * @var bool
+     */
+    protected $mergeUnnamedChildren = false;
+
+    /**
+     * @var Resolver
+     */
+    protected $resolver;
+
+    /**
      * Return the template engine object, if any
      *
      * If using a third-party template engine, such as Smarty, patTemplate,
@@ -68,6 +79,28 @@ class JsonRenderer implements Renderer
     }
 
     /**
+     * Set flag indicating whether or not to merge unnamed children
+     *
+     * @param  bool $mergeUnnamedChildren
+     * @return JsonRenderer
+     */
+    public function setMergeUnnamedChildren($mergeUnnamedChildren)
+    {
+        $this->mergeUnnamedChildren = (bool) $mergeUnnamedChildren;
+        return $this;
+    }
+    
+    /**
+     * Should we merge unnamed children?
+     *
+     * @return bool
+     */
+    public function mergeUnnamedChildren()
+    {
+        return $this->mergeUnnamedChildren;
+    }
+
+    /**
      * Renders values as JSON
      *
      * @todo   Determine what use case exists for accepting both $nameOrModel and $values
@@ -83,7 +116,7 @@ class JsonRenderer implements Renderer
             if ($nameOrModel instanceof Model\JsonModel) {
                 $values = $nameOrModel->serialize();
             } else {
-                $values = $nameOrModel->getVariables();
+                $values = $this->recurseModel($nameOrModel);
                 $values = json_encode($values);
             }
 
@@ -115,5 +148,37 @@ class JsonRenderer implements Renderer
             __METHOD__
         ));
     }
-}
 
+    /**
+     * Retrieve values from a model and recurse its children to build a data structure
+     * 
+     * @param  Model $model 
+     * @return array
+     */
+    protected function recurseModel(Model $model)
+    {
+        $values = $model->getVariables();
+        if (!$model->hasChildren()) {
+            return $values;
+        }
+
+        $mergeChildren = $this->mergeUnnamedChildren();
+        foreach ($model as $child) {
+            $captureTo = $child->captureTo();
+            if (!$captureTo && !$mergeChildren) {
+                // We don't want to do anything with this child
+                continue;
+            }
+
+            $childValues = $this->recurseModel($child);
+            if ($captureTo) {
+                // Capturing to a specific key
+                $values[$captureTo] = $childValues;
+            } elseif ($mergeChildren) {
+                // Merging values with parent
+                $values = array_replace_recursive($values, $childValues);
+            }
+        }
+        return $values;
+    }
+}

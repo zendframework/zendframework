@@ -9,12 +9,13 @@ use Zend\Di\Locator,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
+    Zend\Mvc\InjectApplicationEvent,
+    Zend\Mvc\LocatorAware,
+    Zend\Mvc\MvcEvent,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
-    Zend\Mvc\InjectApplicationEvent,
-    Zend\Mvc\LocatorAware,
-    Zend\Mvc\MvcEvent;
+    Zend\View\Model\ViewModel;
 
 /**
  * Basic action controller
@@ -37,7 +38,9 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      */
     public function indexAction()
     {
-        return array('content' => 'Placeholder page');
+        return new ViewModel(array(
+            'content' => 'Placeholder page'
+        ));
     }
 
     /**
@@ -47,8 +50,16 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      */
     public function notFoundAction()
     {
-        $this->response->setStatusCode(404);
-        return array('content' => 'Page not found');
+        $response   = $this->response;
+        $event      = $this->getEvent();
+        $routeMatch = $event->getRouteMatch();
+
+        $response->setStatusCode(404);
+        $routeMatch->setParam('action', 'not-found');
+
+        return new ViewModel(array(
+            'content' => 'Page not found'
+        ));
     }
 
     /**

@@ -41,6 +41,11 @@ use Zend\View\Exception,
 class RenderChildModel extends AbstractHelper
 {
     /**
+     * @var Model Current view model
+     */
+    protected $current;
+
+    /**
      * @var ViewModel
      */
     protected $viewModelHelper;
@@ -74,8 +79,11 @@ class RenderChildModel extends AbstractHelper
             return '';
         }
 
-        $view = $this->getView();
-        return $view->render($model);
+        $view   = $this->getView();
+        $return = $view->render($model);
+        $helper = $this->getViewModelHelper();
+        $helper->setCurrent($this->current);
+        return $return;
     }
 
     /**
@@ -90,7 +98,7 @@ class RenderChildModel extends AbstractHelper
      */
     protected function findChild($child)
     {
-        $model = $this->getCurrent();
+        $this->current = $model = $this->getCurrent();
         foreach ($model->getChildren() as $childModel) {
             if ($childModel->captureTo() == $child) {
                 return $childModel;

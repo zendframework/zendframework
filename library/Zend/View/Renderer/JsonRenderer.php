@@ -126,12 +126,8 @@ class JsonRenderer implements Renderer
         // use case 2: $nameOrModel is populated, $values is not
         // Serialize $nameOrModel
         if (null === $values) {
-            if (!is_object($nameOrModel)) {
+            if (!is_object($nameOrModel) || $nameOrModel instanceof JsonSerializable) {
                 return json_encode($nameOrModel);
-            }
-
-            if ($nameOrModel instanceof JsonSerializable) {
-                return $nameOrModel->jsonSerialize();
             }
 
             if ($nameOrModel instanceof Traversable) {

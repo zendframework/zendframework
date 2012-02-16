@@ -21,7 +21,9 @@
 
 namespace ZendTest\View\Renderer;
 
-use PHPUnit_Framework_TestCase as TestCase,
+use ArrayObject,
+    PHPUnit_Framework_TestCase as TestCase,
+    stdClass,
     Zend\View\Renderer\JsonRenderer,
     Zend\View\Model\ViewModel;
 
@@ -111,28 +113,63 @@ class JsonRendererTest extends TestCase
         $this->assertEquals(json_encode($expected), $test);
     }
 
-    public function testRendersNonObjectModelAsJson()
+    public function getNonObjectModels()
     {
-        $this->markTestIncomplete();
+        return array(
+            array('string'),
+            array(1),
+            array(1.0),
+            array(array('foo', 'bar')),
+            array(array('foo' => 'bar')),
+        );
+    }
+
+    /**
+     * @dataProvider getNonObjectModels
+     */
+    public function testRendersNonObjectModelAsJson($model)
+    {
+        $expected = json_encode($model);
+        $test     = $this->renderer->render($model);
+        $this->assertEquals($expected, $test);
     }
 
     public function testRendersJsonSerializableModelsAsJson()
     {
-        $this->markTestIncomplete();
+        if (version_compare(PHP_VERSION, '5.4.0', '<')) {
+            $this->markTestSkipped('Can only test JsonSerializable models in PHP 5.4.0 and up');
+        }
+        $model        = new TestAsset\JsonModel;
+        $model->value = array('foo' => 'bar');
+        $expected     = json_encode($model->value);
+        $test         = $this->renderer->render($model);
+        $this->assertEquals($expected, $test);
     }
 
     public function testRendersTraversableObjectsAsJsonObjects()
     {
-        $this->markTestIncomplete();
+        $model = new ArrayObject(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ));
+        $expected     = json_encode($model->getArrayCopy());
+        $test         = $this->renderer->render($model);
+        $this->assertEquals($expected, $test);
     }
 
     public function testRendersNonTraversableNonJsonSerializableObjectsAsJsonObjects()
     {
-        $this->markTestIncomplete();
+        $model      = new stdClass;
+        $model->foo = 'bar';
+        $model->bar = 'baz';
+        $expected   = json_encode(get_object_vars($model));
+        $test       = $this->renderer->render($model);
+        $this->assertEquals($expected, $test);
     }
 
     public function testNonViewModelInitialArgumentWithValuesRaisesException()
     {
-        $this->markTestIncomplete();
+        $this->setExpectedException('Zend\View\Exception\DomainException');
+        $this->renderer->render('foo', array('bar' => 'baz'));
     }
 }

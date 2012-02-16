@@ -160,6 +160,13 @@ class Bootstrap implements Bootstrapper
                         'required' => true,
                     ),
                 ),
+                'setCanRenderTrees' => array(
+                    'required' => false,
+                    'renderTrees' => array(
+                        'type'     => false,
+                        'required' => true,
+                    ),
+                ),
                 'setResolver' => array(
                     'required' => false,
                     'resolver' => array(

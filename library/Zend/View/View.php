@@ -178,11 +178,6 @@ class View
      */
     public function render(Model $model)
     {
-        // If we have children, render them first
-        if ($model->hasChildren()) {
-            $this->renderChildren($model);
-        }
-
         $event   = $this->getEvent();
         $event->setModel($model);
         $events  = $this->events();
@@ -196,6 +191,19 @@ class View
                 __METHOD__
             ));
         }
+
+        // If we have children, render them first, but only if:
+        // a) the renderer does not implement TreeRendererInterface, or
+        // b) it does, but canRenderTrees() returns false
+        if ($model->hasChildren()
+            && (!$renderer instanceof Renderer\TreeRendererInterface
+                || !$renderer->canRenderTrees())
+        ) {
+            $this->renderChildren($model);
+        }
+
+        // Reset the model, in case it has changed, and set the renderer
+        $event->setModel($model);
         $event->setRenderer($renderer);
 
         $rendered = $renderer->render($model);

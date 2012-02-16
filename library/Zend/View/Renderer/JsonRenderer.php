@@ -30,7 +30,7 @@ use JsonSerializable,
     Zend\View\Resolver;
 
 /**
- * Interface class for Zend_View compatible template engine implementations
+ * JSON renderer
  *
  * @todo       Should this use Zend\Json?
  * @category   Zend
@@ -39,7 +39,7 @@ use JsonSerializable,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class JsonRenderer implements Renderer
+class JsonRenderer implements Renderer, TreeRendererInterface
 {
     /**
      * Whether or not to merge child models with no capture-to value set
@@ -143,6 +143,18 @@ class JsonRenderer implements Renderer
             '%s: Do not know how to handle operation when both $nameOrModel and $values are populated',
             __METHOD__
         ));
+    }
+
+    /**
+     * Can this renderer render trees of view models?
+     *
+     * Yes.
+     * 
+     * @return true
+     */
+    public function canRenderTrees()
+    {
+        return true;
     }
 
     /**

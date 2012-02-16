@@ -370,4 +370,17 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'could not resolve');
         $test = $this->renderer->render('should-not-find-this');
     }
+
+    public function testDoesNotRenderTreesOfViewModelsByDefault()
+    {
+        $this->assertFalse($this->renderer->canRenderTrees());
+    }
+
+    public function testRenderTreesOfViewModelsCapabilityIsMutable()
+    {
+        $this->renderer->setCanRenderTrees(true);
+        $this->assertTrue($this->renderer->canRenderTrees());
+        $this->renderer->setCanRenderTrees(false);
+        $this->assertFalse($this->renderer->canRenderTrees());
+    }
 }

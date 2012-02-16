@@ -42,12 +42,17 @@ use ArrayAccess,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PhpRenderer implements Renderer, Pluggable
+class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
 {
     /**
      * @var string Rendered content
      */
     private $content = '';
+
+    /**
+     * @var bool Whether or not to render trees of view models
+     */
+    private $renderTrees = false;
 
     /**
      * Template being rendered
@@ -498,6 +503,33 @@ class PhpRenderer implements Renderer, Pluggable
         $this->setVars(array_pop($this->varsCache));
 
         return $this->getFilterChain()->filter($this->content); // filter output
+    }
+
+    /**
+     * Set flag indicating whether or not we should render trees of view models
+     *
+     * If set to true, the View instance will not attempt to render children 
+     * separately, but instead pass the root view model directly to the PhpRenderer.
+     * It is then up to the developer to render the children from within the 
+     * view script.
+     * 
+     * @param  bool $renderTrees 
+     * @return PhpRenderer
+     */
+    public function setCanRenderTrees($renderTrees)
+    {
+        $this->renderTrees = (bool) $renderTrees;
+        return $this;
+    }
+
+    /**
+     * Can we render trees, or are we configured to do so?
+     * 
+     * @return bool
+     */
+    public function canRenderTrees()
+    {
+        return $this->renderTrees;
     }
 
     /**

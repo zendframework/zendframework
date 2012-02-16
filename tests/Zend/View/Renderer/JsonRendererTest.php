@@ -172,4 +172,9 @@ class JsonRendererTest extends TestCase
         $this->setExpectedException('Zend\View\Exception\DomainException');
         $this->renderer->render('foo', array('bar' => 'baz'));
     }
+
+    public function testRendersTreesOfViewModelsByDefault()
+    {
+        $this->assertTrue($this->renderer->canRenderTrees());
+    }
 }

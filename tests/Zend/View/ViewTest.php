@@ -237,4 +237,65 @@ class ViewTest extends TestCase
 
         $this->assertEquals(1, count($result));
     }
+
+    public function testUsesTreeRendererInterfaceToDetermineWhetherOrNotToPassOnlyRootViewModelToPhpRenderer()
+    {
+        $resolver    = new Resolver\TemplateMapResolver(array(
+            'layout'  => __DIR__ . '/_templates/nested-view-model-layout.phtml',
+            'content' => __DIR__ . '/_templates/nested-view-model-content.phtml',
+        ));
+        $phpRenderer = new PhpRenderer();
+        $phpRenderer->setCanRenderTrees(true);
+        $phpRenderer->setResolver($resolver);
+
+        $this->view->addRenderingStrategy(function ($e) use ($phpRenderer) {
+            return $phpRenderer;
+        });
+
+        $result = new stdClass;
+        $this->view->addResponseStrategy(function ($e) use ($result) {
+            $result->content = $e->getResult();
+        });
+
+        $layout = new ViewModel();
+        $layout->setTemplate('layout');
+        $content = new ViewModel();
+        $content->setTemplate('content');
+        $content->setCaptureTo('content');
+        $layout->addChild($content);
+
+        $this->view->render($layout);
+
+        $this->assertContains('Layout start', $result->content);
+        $this->assertContains('Content for layout', $result->content, $result->content);
+        $this->assertContains('Layout end', $result->content);
+    }
+
+    public function testUsesTreeRendererInterfaceToDetermineWhetherOrNotToPassOnlyRootViewModelToJsonRenderer()
+    {
+        $jsonRenderer = new Renderer\JsonRenderer();
+
+        $this->view->addRenderingStrategy(function ($e) use ($jsonRenderer) {
+            return $jsonRenderer;
+        });
+
+        $result = new stdClass;
+        $this->view->addResponseStrategy(function ($e) use ($result) {
+            $result->content = $e->getResult();
+        });
+
+        $layout  = new ViewModel(array('status' => 200));
+        $content = new ViewModel(array('foo' => 'bar'));
+        $content->setCaptureTo('response');
+        $layout->addChild($content);
+
+        $this->view->render($layout);
+
+        $expected = json_encode(array(
+            'status' => 200,
+            'response' => array('foo' => 'bar'),
+        ));
+
+        $this->assertEquals($expected, $result->content);
+    }
 }

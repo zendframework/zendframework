@@ -26,6 +26,7 @@ use Zend\EventManager\EventCollection,
     Zend\Http\Response as HttpResponse,
     Zend\Mvc\Application,
     Zend\Mvc\MvcEvent,
+    Zend\Stdlib\ResponseDescription as Response,
     Zend\View\Model as ViewModel;
 
 /**
@@ -137,8 +138,15 @@ class ExceptionStrategy implements ListenerAggregate
      */
     public function prepareExceptionViewModel(MvcEvent $e)
     {
-        $error    = $e->getError();
+        // Do nothing if no error in the event
+        $error = $e->getError();
         if (empty($error)) {
+            return;
+        }
+
+        // Do nothing if the result is a response object
+        $result = $e->getResult();
+        if ($result instanceof Response) {
             return;
         }
 

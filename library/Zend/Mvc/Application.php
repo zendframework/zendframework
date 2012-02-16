@@ -249,9 +249,11 @@ class Application implements AppContext
 
         // Complete response
         $response = $result->last();
-        if (!$response instanceof Response) {
-            $response = $this->getResponse();
+        if ($response instanceof Response) {
+            return $response;
         }
+
+        $response = $this->getResponse();
         $event->setResponse($response);
 
         return $this->completeRequest($event);

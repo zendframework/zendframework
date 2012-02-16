@@ -44,9 +44,10 @@ class RenderChildModelTest extends TestCase
     public function setUp()
     {
         $this->resolver = new TemplateMapResolver(array(
-            'layout' => __DIR__ . '/../_templates/nested-view-model-layout.phtml',
-            'child1' => __DIR__ . '/../_templates/nested-view-model-content.phtml',
-            'child2' => __DIR__ . '/../_templates/nested-view-model-child2.phtml',
+            'layout'  => __DIR__ . '/../_templates/nested-view-model-layout.phtml',
+            'child1'  => __DIR__ . '/../_templates/nested-view-model-content.phtml',
+            'child2'  => __DIR__ . '/../_templates/nested-view-model-child2.phtml',
+            'complex' => __DIR__ . '/../_templates/nested-view-model-complexlayout.phtml',
         ));
         $this->renderer = $renderer = new PhpRenderer();
         $renderer->setCanRenderTrees(true);
@@ -116,6 +117,25 @@ class RenderChildModelTest extends TestCase
         $this->assertContains('Layout start', $result, $result);
         $this->assertContains('Content for layout', $result, $result);
         $this->assertContains('Layout end', $result, $result);
+    }
+
+    public function testRendersSequentialChildrenWithNestedChildren()
+    {
+        $this->parent->setTemplate('complex');
+        $child1 = $this->setupFirstChild();
+        $child1->setTemplate('layout');
+        $child1->setCaptureTo('content');
+
+        $child2 = $this->setupSecondChild();
+        $child2->setCaptureTo('sidebar');
+
+        $nested = new ViewModel();
+        $nested->setTemplate('child1');
+        $nested->setCaptureTo('content');
+        $child1->addChild($nested);
+
+        $result = $this->renderer->render($this->parent);
+        $this->assertRegExp('/Content:\s+Layout start\s+Content for layout\s+Layout end\s+Sidebar:\s+Second child/s', $result, $result);
     }
 
     /**

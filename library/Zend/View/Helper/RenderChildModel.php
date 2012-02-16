@@ -79,10 +79,11 @@ class RenderChildModel extends AbstractHelper
             return '';
         }
 
-        $view   = $this->getView();
-        $return = $view->render($model);
-        $helper = $this->getViewModelHelper();
-        $helper->setCurrent($this->current);
+        $current = $this->current;
+        $view    = $this->getView();
+        $return  = $view->render($model);
+        $helper  = $this->getViewModelHelper();
+        $helper->setCurrent($current);
         return $return;
     }
 

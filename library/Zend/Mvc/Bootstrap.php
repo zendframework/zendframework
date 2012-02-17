@@ -99,12 +99,6 @@ class Bootstrap implements Bootstrapper
 
         // Default configuration for common MVC classes
         $routerDiConfig = new DiConfiguration(array('definition' => array('class' => array(
-            'Zend\Mvc\Router\RouteStack' => array(
-                'instantiator' => array(
-                    'Zend\Mvc\Router\Http\TreeRouteStack',
-                    'factory'
-                ),
-            ),
             'Zend\Mvc\View\DefaultRenderingStrategy' => array(
                 'setBaseTemplate' => array(
                     'baseTemplate' => array(

@@ -22,6 +22,7 @@
 namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase,
+    Zend\EventManager\EventManager,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
     Zend\Mvc\View\InjectViewModelListener,
@@ -69,5 +70,60 @@ class InjectViewModelListenerTest extends TestCase
             break;
         }
         $this->assertSame($childModel, $child);
+    }
+
+    public function testLackOfViewModelInResultBypassesViewModelInjection()
+    {
+        $this->assertNull($this->listener->injectViewModel($this->event));
+        $this->assertNull($this->event->getResult());
+        $this->assertFalse($this->event->getViewModel()->hasChildren());
+    }
+
+    public function testAttachesListenersAtExpectedPriorities()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+
+        $expectedCallback = array($this->listener, 'injectViewModel');
+        $expectedPriority = -100;
+        $found            = false;
+        foreach ($listeners as $listener) {
+            $callback = $listener->getCallback();
+            if ($callback === $expectedCallback) {
+                if ($listener->getMetadatum('priority') == $expectedPriority) {
+                    $found = true;
+                    break;
+                }
+            }
+        }
+        $this->assertTrue($found, 'Listener not found');
+
+        $listeners = $events->getListeners('dispatch.error');
+        $found     = false;
+        foreach ($listeners as $listener) {
+            $callback = $listener->getCallback();
+            if ($callback === $expectedCallback) {
+                if ($listener->getMetadatum('priority') == $expectedPriority) {
+                    $found = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    public function testDetachesListeners()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(1, count($listeners));
+        $listeners = $events->getListeners('dispatch.error');
+        $this->assertEquals(1, count($listeners));
+        $events->detachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(0, count($listeners));
+        $listeners = $events->getListeners('dispatch.error');
+        $this->assertEquals(0, count($listeners));
     }
 }

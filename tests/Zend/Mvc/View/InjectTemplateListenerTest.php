@@ -22,6 +22,7 @@
 namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase,
+    Zend\EventManager\EventManager,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\Router\RouteMatch,
     Zend\Mvc\View\InjectTemplateListener,
@@ -92,5 +93,57 @@ class InjectTemplateListenerTest extends TestCase
         $this->listener->injectTemplate($this->event);
 
         $this->assertEquals('somewhat.derived/some-uber-cool', $model->getTemplate());
+    }
+
+    public function testLackOfViewModelInResultBypassesTemplateInjection()
+    {
+        $this->assertNull($this->listener->injectTemplate($this->event));
+        $this->assertNull($this->event->getResult());
+    }
+
+    public function testBypassesTemplateInjectionIfResultViewModelAlreadyHasATemplate()
+    {
+        $this->routeMatch->setParam('controller', 'Foo\Controller\SomewhatController');
+        $this->routeMatch->setParam('action', 'useful');
+
+        $model = new ViewModel();
+        $model->setTemplate('custom');
+        $this->event->setResult($model);
+
+        $this->listener->injectTemplate($this->event);
+
+        $this->assertEquals('custom', $model->getTemplate());
+    }
+
+    public function testAttachesListenerAtExpectedPriority()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+
+        $expectedCallback = array($this->listener, 'injectTemplate');
+        $expectedPriority = -90;
+        $found            = false;
+        foreach ($listeners as $listener) {
+            $callback = $listener->getCallback();
+            if ($callback === $expectedCallback) {
+                if ($listener->getMetadatum('priority') == $expectedPriority) {
+                    $found = true;
+                    break;
+                }
+            }
+        }
+        $this->assertTrue($found, 'Listener not found');
+    }
+
+    public function testDetachesListeners()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(1, count($listeners));
+        $events->detachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(0, count($listeners));
     }
 }

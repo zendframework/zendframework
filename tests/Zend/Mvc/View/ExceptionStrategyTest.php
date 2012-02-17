@@ -139,4 +139,15 @@ class ExceptionStrategyTest extends TestCase
             $this->assertNotEquals('error', $model->getTemplate());
         }
     }
+
+    public function testDoesNothingIfEventResultIsAResponse()
+    {
+        $event = new MvcEvent();
+        $response = new Response();
+        $event->setResponse($response);
+        $event->setResult($response);
+        $event->setError('foobar');
+
+        $this->assertNull($this->strategy->prepareExceptionViewModel($event));
+    }
 }

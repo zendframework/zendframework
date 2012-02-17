@@ -110,6 +110,7 @@ class InjectViewModelListenerTest extends TestCase
                 }
             }
         }
+        $this->assertTrue($found, 'Listener not found');
     }
 
     public function testDetachesListeners()

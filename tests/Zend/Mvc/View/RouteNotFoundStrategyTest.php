@@ -22,6 +22,7 @@
 namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase,
+    Zend\EventManager\EventManager,
     Zend\Http\Request,
     Zend\Http\Response,
     Zend\Mvc\Application,
@@ -122,5 +123,84 @@ class RouteNotFoundStrategyTest extends TestCase
         $this->assertEquals($this->strategy->getNotFoundTemplate(), $model->getTemplate());
         $variables = $model->getVariables();
         $this->assertArrayHasKey('message', $variables);
+    }
+
+    public function testInjectsHttpResponseIntoEventIfNoneAlreadyPresent()
+    {
+        $event    = new MvcEvent();
+        $errors   = array(
+            'not-found' => Application::ERROR_CONTROLLER_NOT_FOUND,
+            'invalid'   => Application::ERROR_CONTROLLER_INVALID,
+        );
+        foreach ($errors as $key => $error) {
+            $event->setError($error);
+            $this->strategy->detectNotFoundError($event);
+            $response = $event->getResponse();
+            $this->assertInstanceOf('Zend\Http\Response', $response);
+            $this->assertTrue($response->isNotFound(), 'Failed asserting against ' . $key);
+        }
+    }
+
+    public function testNotFoundTemplateDefaultsToError()
+    {
+        $this->assertEquals('error', $this->strategy->getNotFoundTemplate());
+    }
+
+    public function testNotFoundTemplateIsMutable()
+    {
+        $this->strategy->setNotFoundTemplate('alternate/error');
+        $this->assertEquals('alternate/error', $this->strategy->getNotFoundTemplate());
+    }
+
+    public function testAttachesListenersAtExpectedPriorities()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->strategy);
+
+        foreach (array('dispatch' => -90, 'dispatch.error' => 1) as $event => $expectedPriority) {
+            $listeners        = $events->getListeners($event);
+            $expectedCallback = array($this->strategy, 'prepareNotFoundViewModel');
+            $found            = false;
+            foreach ($listeners as $listener) {
+                $callback = $listener->getCallback();
+                if ($callback === $expectedCallback) {
+                    if ($listener->getMetadatum('priority') == $expectedPriority) {
+                        $found = true;
+                        break;
+                    }
+                }
+            }
+            $this->assertTrue($found, 'Listener not found');
+        }
+
+        $listeners        = $events->getListeners('dispatch.error');
+        $expectedCallback = array($this->strategy, 'detectNotFoundError');
+        $expectedPriority = 1;
+        $found            = false;
+        foreach ($listeners as $listener) {
+            $callback = $listener->getCallback();
+            if ($callback === $expectedCallback) {
+                if ($listener->getMetadatum('priority') == $expectedPriority) {
+                    $found = true;
+                    break;
+                }
+            }
+        }
+        $this->assertTrue($found, 'Listener not found');
+    }
+
+    public function testDetachesListeners()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->strategy);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(1, count($listeners));
+        $listeners = $events->getListeners('dispatch.error');
+        $this->assertEquals(2, count($listeners));
+        $events->detachAggregate($this->strategy);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(0, count($listeners));
+        $listeners = $events->getListeners('dispatch.error');
+        $this->assertEquals(0, count($listeners));
     }
 }

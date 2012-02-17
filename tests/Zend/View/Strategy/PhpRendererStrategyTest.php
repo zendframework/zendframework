@@ -22,6 +22,7 @@
 namespace ZendTest\View\Strategy;
 
 use PHPUnit_Framework_TestCase as TestCase,
+    Zend\EventManager\EventManager,
     Zend\Http\Request as HttpRequest,
     Zend\Http\Response as HttpResponse,
     Zend\Registry,
@@ -119,5 +120,54 @@ class PhpRendererStrategyTest extends TestCase
         $this->strategy->injectResponse($event);
         $content = $this->response->getContent();
         $this->assertEquals('Result Content', $content);
+    }
+
+    public function testContentPlaceholdersIncludeContentAndArticleByDefault()
+    {
+        $this->assertEquals(array('article', 'content'), $this->strategy->getContentPlaceholders());
+    }
+
+    public function testContentPlaceholdersListIsMutable()
+    {
+        $this->strategy->setContentPlaceholders(array('foo', 'bar'));
+        $this->assertEquals(array('foo', 'bar'), $this->strategy->getContentPlaceholders());
+    }
+
+    public function testAttachesListenersAtExpectedPriorities()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->strategy);
+
+        foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
+            $listeners        = $events->getListeners($event);
+            $expectedCallback = array($this->strategy, $method);
+            $expectedPriority = 1;
+            $found            = false;
+            foreach ($listeners as $listener) {
+                $callback = $listener->getCallback();
+                if ($callback === $expectedCallback) {
+                    if ($listener->getMetadatum('priority') == $expectedPriority) {
+                        $found = true;
+                        break;
+                    }
+                }
+            }
+            $this->assertTrue($found, 'Listener not found');
+        }
+    }
+
+    public function testDetachesListeners()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->strategy);
+        $listeners = $events->getListeners('renderer');
+        $this->assertEquals(1, count($listeners));
+        $listeners = $events->getListeners('response');
+        $this->assertEquals(1, count($listeners));
+        $events->detachAggregate($this->strategy);
+        $listeners = $events->getListeners('renderer');
+        $this->assertEquals(0, count($listeners));
+        $listeners = $events->getListeners('response');
+        $this->assertEquals(0, count($listeners));
     }
 }

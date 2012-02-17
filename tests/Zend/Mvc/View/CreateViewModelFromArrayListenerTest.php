@@ -23,6 +23,7 @@ namespace ZendTest\Mvc\View;
 
 use PHPUnit_Framework_TestCase as TestCase,
     stdClass,
+    Zend\EventManager\EventManager,
     Zend\Mvc\MvcEvent,
     Zend\Mvc\View\CreateViewModelFromArrayListener,
     Zend\View\Model\ViewModel;
@@ -83,5 +84,37 @@ class CreateViewModelFromArrayListenerTest extends TestCase
         $result = $this->event->getResult();
         $this->assertEquals(gettype($test), gettype($result));
         $this->assertEquals($test, $result);
+    }
+
+    public function testAttachesListenerAtExpectedPriority()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+
+        $expectedCallback = array($this->listener, 'createViewModelFromArray');
+        $expectedPriority = -80;
+        $found            = false;
+        foreach ($listeners as $listener) {
+            $callback = $listener->getCallback();
+            if ($callback === $expectedCallback) {
+                if ($listener->getMetadatum('priority') == $expectedPriority) {
+                    $found = true;
+                    break;
+                }
+            }
+        }
+        $this->assertTrue($found, 'Listener not found');
+    }
+
+    public function testDetachesListeners()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(1, count($listeners));
+        $events->detachAggregate($this->listener);
+        $listeners = $events->getListeners('dispatch');
+        $this->assertEquals(0, count($listeners));
     }
 }

@@ -252,19 +252,21 @@ class SessionManager extends AbstractManager
     }
 
     /**
-     * Regenerate the session ID, using session save handler's native ID generation
+     * Regenerate id
      *
-     * Can safely be called in the middle of a session.
-     * 
+     * Regenerate the session ID, using session save handler's 
+     * native ID generation Can safely be called in the middle of a session.
+     *
+     * @param bool $deleteOldSession
      * @return SessionManager
      */
-    public function regenerateId()
+    public function regenerateId($deleteOldSession = true)
     {
         if (!$this->sessionExists()) {
-            session_regenerate_id();
+            session_regenerate_id($deleteOldSession);
             return $this;
         }
-        session_regenerate_id();
+        session_regenerate_id($deleteOldSession);
         return $this;
     }
 

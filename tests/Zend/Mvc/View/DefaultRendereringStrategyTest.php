@@ -115,4 +115,30 @@ class DefaultRenderingStrategyTest extends TestCase
 
         $expected = sprintf('content (%s): %s', json_encode(array('template' => 'content')), json_encode(array('foo' => 'bar')));
     }
+
+    public function testBaseTemplateIsLayoutByDefault()
+    {
+        $this->assertEquals('layout', $this->strategy->getBaseTemplate());
+    }
+
+    public function testBaseTemplateIsMutable()
+    {
+        $this->strategy->setBaseTemplate('alternate/layout');
+        $this->assertEquals('alternate/layout', $this->strategy->getBaseTemplate());
+    }
+
+    public function testBypassesRenderingIfResultIsAResponse()
+    {
+        $renderer = new TestAsset\DumbStrategy();
+        $this->view->addRenderingStrategy(function ($e) use ($renderer) {
+            return $renderer;
+        }, 100);
+        $model = new Model\ViewModel(array('foo' => 'bar'));
+        $model->setOption('template', 'content');
+        $this->event->setViewModel($model);
+        $this->event->setResult($this->response);
+
+        $result = $this->strategy->render($this->event);
+        $this->assertSame($this->response, $result);
+    }
 }

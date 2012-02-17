@@ -24,13 +24,12 @@
  */
 namespace Zend\View\Helper;
 
-use Zend\Layout\Layout as BaseLayout;
+use Zend\View\Exception,
+    Zend\View\Model;
 
 /**
  * View helper for retrieving layout object
  *
- * @uses       \Zend\Layout\Layout
- * @uses       \Zend\View\Helper\AbstractHelper
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -38,42 +37,75 @@ use Zend\Layout\Layout as BaseLayout;
  */
 class Layout extends AbstractHelper
 {
-    /** @var BaseLayout */
-    protected $_layout;
+    /**
+     * @var ViewModel
+     */
+    protected $viewModelHelper;
 
     /**
-     * Get layout object
+     * Get layout template
      *
-     * @return BaseLayout
+     * @return string
      */
     public function getLayout()
     {
-        if (null === $this->_layout) {
-            $this->_layout = new BaseLayout();
-        }
-
-        return $this->_layout;
+        $model = $this->getRoot();
+        return $model->getTemplate();
     }
 
     /**
-     * Set layout object
+     * Set layout template
      *
-     * @param  BaseLayout $layout
+     * @param  string $template
      * @return Layout
      */
-    public function setLayout(BaseLayout $layout)
+    public function setLayout($template)
     {
-        $this->_layout = $layout;
+        $model = $this->getRoot();
+        $model->setTemplate((string) $template);
         return $this;
     }
 
     /**
-     * Return layout object
+     * Set layout template
      *
-     * @return BaseLayout
+     * @param  string $template
+     * @return Layout
      */
-    public function __invoke()
+    public function __invoke($template)
     {
-        return $this->getLayout();
+        return $this->setLayout($template);
+    }
+
+    /**
+     * Get the root view model
+     * 
+     * @return null|Model
+     */
+    protected function getRoot()
+    {
+        $helper = $this->getViewModelHelper();
+        if (!$helper->hasRoot()) {
+            throw new Exception\RuntimeException(sprintf(
+                '%s: no view model currently registered as root in renderer',
+                __METHOD__
+            ));
+        }
+        return $helper->getRoot();
+    }
+
+    /**
+     * Retrieve the view model helper
+     * 
+     * @return ViewModel
+     */
+    protected function getViewModelHelper()
+    {
+        if ($this->viewModelHelper) {
+            return $this->viewModelHelper;
+        }
+        $view = $this->getView();
+        $this->viewModelHelper = $view->plugin('view_model');
+        return $this->viewModelHelper;
     }
 }

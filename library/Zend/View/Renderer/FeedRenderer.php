@@ -95,15 +95,16 @@ class FeedRenderer implements Renderer
                 } else {
                     $this->setFeedType($type);
                 }
-                $nameOrModel = new Model\FeedModel($vars, $type);
+                $nameOrModel = new Model\FeedModel($vars, array('feed_type' => $type));
             }
         } elseif (is_string($nameOrModel)) {
             // Use case 2: string $nameOrModel + array|Traversable|Feed $values
-            $nameOrModel = new Model\FeedModel($values, $nameOrModel);
+            $nameOrModel = new Model\FeedModel($values, (array) $nameOrModel);
         } else {
             // Use case 3: failure
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects a ViewModel or a string feed type as the first argument; received "%s"',
+                __METHOD__,
                 (is_object($nameOrModel) ? get_class($nameOrModel) : gettype($nameOrModel))
             ));
         }

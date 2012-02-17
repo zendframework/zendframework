@@ -109,11 +109,13 @@ class JsonStrategy implements ListenerAggregate
         }
 
         $headers = $request->headers();
-        $accept  = $headers->get('Accept');
-        foreach ($accept->getPrioritized() as $mediaType) {
-            if (0 === strpos($mediaType, 'application/json')) {
-                // application/json Accept header found
-                return $this->renderer;
+        if ($headers->has('accept')) {
+            $accept  = $headers->get('Accept');
+            foreach ($accept->getPrioritized() as $mediaType) {
+                if (0 === strpos($mediaType, 'application/json')) {
+                    // application/json Accept header found
+                    return $this->renderer;
+                }
             }
         }
 

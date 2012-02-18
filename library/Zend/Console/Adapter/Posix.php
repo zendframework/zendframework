@@ -336,6 +336,14 @@ class Posix extends AbstractAdapter implements Adapter
     }
 
     /**
+     * Reset color to console default.
+     */
+    public function clear(){
+        echo chr(27).'[2J'; // reset bg color
+        $this->setPos(1,1); // reset cursor position
+    }
+
+    /**
      * @todo Add GNU readline support
      */
 

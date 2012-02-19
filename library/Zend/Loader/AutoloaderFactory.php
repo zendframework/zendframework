@@ -92,6 +92,13 @@ abstract class AutoloaderFactory
                                 sprintf('Autoloader class "%s" not loaded', $class)
                     );
                 }
+
+                if (!is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
+                    throw new Exception\InvalidArgumentException(
+                        sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
+                    );
+                }
+
                 if ($class === 'Zend\Loader\StandardAutoloader') {
                     $autoloader->setOptions($options);
                 } else {

@@ -24,9 +24,10 @@
  */
 namespace ZendTest\View\Helper;
 
-use Zend\View\Renderer\PhpRenderer as View,
+use Zend\Paginator,
     Zend\View\Helper,
-    Zend\Paginator;
+    Zend\View\Renderer\PhpRenderer as View,
+    Zend\View\Resolver;
 
 /**
  * @category   Zend
@@ -54,8 +55,11 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        $resolver = new Resolver\TemplatePathStack(array('script_paths' => array(
+            __DIR__ . '/_files/scripts',
+        )));
         $view = new View();
-        $view->resolver()->addPath(__DIR__ . '/_files/scripts');
+        $view->setResolver($resolver);
 
         Helper\PaginationControl::setDefaultViewPartial(null);
         $this->_viewHelper = new Helper\PaginationControl();
@@ -166,7 +170,7 @@ class PaginationControlTest extends \PHPUnit_Framework_TestCase
              * make sure it gets to Zend_View_Helper_Partial and it's recognized
              * as a module. */
             $this->assertInstanceOf('Zend\View\Exception\RuntimeException', $e);
-            $this->assertContains('Script "partial.phtml" not found in path', $e->getMessage());
+            $this->assertContains('could not resolve', $e->getMessage());
         }
     }
 

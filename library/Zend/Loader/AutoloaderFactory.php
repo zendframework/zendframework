@@ -33,6 +33,8 @@ if (class_exists('Zend\Loader\AutoloaderFactory')) return;
  */
 abstract class AutoloaderFactory
 {
+    const STANDARD_AUTOLOADER = 'Zend\Loader\StandardAutoloader';
+
     /**
      * @var array All autoloaders registered using the factory
      */
@@ -73,7 +75,12 @@ abstract class AutoloaderFactory
     public static function factory($options = null)
     {
         if (null === $options) {
-            $options = array('Zend\Loader\StandardAutoloader' => array());
+            if (!isset(static::$loaders[static::STANDARD_AUTOLOADER])) {
+                static::$loaders[STANDARD_AUTOLOADER] = static::getStandardAutoloader();
+            }
+
+            // Return so we don't hit the next check's exception (we're done here anyway)
+            return;
         }
 
         if (!is_array($options) && !($options instanceof \Traversable)) {
@@ -94,12 +101,13 @@ abstract class AutoloaderFactory
                 }
 
                 if (!is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
+                    require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
-                        sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
+                                sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
                     );
                 }
 
-                if ($class === 'Zend\Loader\StandardAutoloader') {
+                if ($class === static::STANDARD_AUTOLOADER) {
                     $autoloader->setOptions($options);
                 } else {
                     $autoloader = new $class($options);
@@ -186,9 +194,12 @@ abstract class AutoloaderFactory
         if (null !== static::$standardAutoloader) {
             return static::$standardAutoloader;
         }
+        
+        // Extract the filename from the classname
+        $stdAutoloader = substr(strrchr(static::STANDARD_AUTOLOADER, '\\'), 1);
 
-        if (!class_exists('Zend\Loader\StandardAutoloader')) {
-            require_once __DIR__ . '/StandardAutoloader.php';
+        if (!class_exists(static::STANDARD_AUTOLOADER)) {
+            require_once __DIR__ . "/$stdAutoloader.php";
         }
         $loader = new StandardAutoloader();
         static::$standardAutoloader = $loader;

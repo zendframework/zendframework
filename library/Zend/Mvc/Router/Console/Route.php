@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Console_Getopt
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -21,45 +21,23 @@
 /**
  * @namespace
  */
-namespace Zend\Cli\Exception;
+namespace Zend\Mvc\Router\Console;
+
+use Zend\Mvc\Router\Route as BaseRoute;
 
 /**
- * @category   Zend
- * @package    Zend_Console_Getopt
+ * Tree specific route interface.
+ * 
+ * @package    Zend_Mvc_Router
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Cli\Exception
+interface Route extends BaseRoute
 {
     /**
-     * Usage
-     *
-     * @var string
+     * Get a list of parameters used while assembling.
+     * 
+     * @return array
      */
-    protected $usage = '';
-
-    /**
-     * Constructor
-     *
-     * @param string $message
-     * @param string $usage
-     * @return void
-     */
-    public function __construct($message, $usage = '')
-    {
-        $this->usage = $usage;
-        parent::__construct($message);
-    }
-
-    /**
-     * Returns the usage
-     *
-     * @return string
-     */
-    public function getUsageMessage()
-    {
-        return $this->usage;
-    }
+    public function getAssembledParams();
 }

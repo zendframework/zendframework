@@ -22,7 +22,7 @@
 /**
  * @namespace
  */
-namespace Zend\Mvc\Router\Cli;
+namespace Zend\Mvc\Router\Console;
 
 use Zend\Mvc\Router\RouteMatch as BaseRouteMatch;
 

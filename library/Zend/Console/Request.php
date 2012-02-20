@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Cli;
+namespace Zend\Console;
 
 use Zend\Stdlib\RequestDescription,
     Zend\Stdlib\Message,
@@ -21,17 +21,22 @@ class Request extends Message implements RequestDescription
     protected $envParams = null;
 
     /**
+     * @var string
+     */
+    protected $scriptName = null;
+
+    /**
      * Create a new CLI request
      *
-     * @param array|null $args     Cli arguments. If not supplied, $_SERVER['argv'] will be used
+     * @param array|null $args     Console arguments. If not supplied, $_SERVER['argv'] will be used
      */
     public function __construct(array $args = null, array $env = null)
     {
         if($args === null){
             if (!isset($_SERVER['argv'])) {
                 $errorDescription = (ini_get('register_argc_argv') == false)
-                    ? "Cannot create Cli\\Request because PHP ini option 'register_argc_argv' is set Off"
-                    : 'Cannot create Cli\\Request because $_SERVER["argv"] is not set for unknown reason.';
+                    ? "Cannot create Console\\Request because PHP ini option 'register_argc_argv' is set Off"
+                    : 'Cannot create Console\\Request because $_SERVER["argv"] is not set for unknown reason.';
                 throw new Exception\RuntimeException($errorDescription);
             }
             $args = $_SERVER['argv'];
@@ -41,7 +46,21 @@ class Request extends Message implements RequestDescription
             $env = $_ENV;
         }
 
+        /**
+         * Extract first param assuming it is the script name
+         */
+        if(count($args) > 0){
+            $this->setScriptName(array_shift($args));
+        }
+
+        /**
+         * Store runtime params
+         */
         $this->params()->fromArray($args);
+
+        /**
+         * Store environment data
+         */
         $this->env()->fromArray($env);
     }
 
@@ -103,7 +122,7 @@ class Request extends Message implements RequestDescription
      * primary API for value setting, for that see env())
      *
      * @param \Zend\Stdlib\ParametersDescription $env
-     * @return \Zend\Cli\Request
+     * @return \Zend\Console\Request
      */
     public function setEnv(ParametersDescription $env)
     {
@@ -141,6 +160,22 @@ class Request extends Message implements RequestDescription
     public function __toString()
     {
         return $this->toString();
+    }
+
+    /**
+     * @param string $scriptName
+     */
+    public function setScriptName($scriptName)
+    {
+        $this->scriptName = $scriptName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getScriptName()
+    {
+        return $this->scriptName;
     }
 
 }

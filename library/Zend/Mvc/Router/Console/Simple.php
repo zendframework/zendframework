@@ -22,13 +22,13 @@
 /**
  * @namespace
  */
-namespace Zend\Mvc\Router\Cli;
+namespace Zend\Mvc\Router\Console;
 
 use Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Mvc\Router\Exception,
-    Zend\Cli\Request as CliRequest,
+    Zend\Console\Request as ConsoleRequest,
     Zend\Filter\FilterChain,
     Zend\Validator\ValidatorChain,
     Zend\Mvc\Exception\InvalidArgumentException
@@ -87,7 +87,7 @@ class Simple implements Route
     protected $filters;
 
     /**
-     * Create a new Simple CLI route.
+     * Create a new simple console route.
      *
      * @param  string                                   $route
      * @param  array                                    $constraints
@@ -95,7 +95,7 @@ class Simple implements Route
      * @param  array                                    $aliases
      * @param  null|array|Traversable|FilterChain       $filters
      * @param  null|array|Traversable|ValidatorChain    $validators
-     * @return \Zend\Mvc\Router\Cli\Simple
+     * @return \Zend\Mvc\Router\Console\Simple
      */
     public function __construct(
         $route,
@@ -324,7 +324,7 @@ class Simple implements Route
             }
             /**
              * Mandatory value param, i.e.
-             *    SOMETHING
+             *    <something>
              */
             elseif (preg_match( '/\G(?<name>[A-Z0-9\_]+)(?: +|$)/s', $def, $m, 0, $pos )) {
                 $item = array(
@@ -348,7 +348,7 @@ class Simple implements Route
             }
             else {
                 throw new Exception\InvalidArgumentException(
-                    'Cannot understand CLI route at '.
+                    'Cannot understand Console route at '.
                     ($pos > 0 ? '...' : '').
                     '"' . substr( $def, $pos ) . '"'
                 );
@@ -372,11 +372,11 @@ class Simple implements Route
      */
     public function match(Request $request, $pathOffset = null)
     {
-        if (!$request instanceof CliRequest) {
+        if (!$request instanceof ConsoleRequest) {
             return null;
         }
 
-        /** @var $request CliRequest */
+        /** @var $request ConsoleRequest */
         /** @var $params \Zend\Stdlib\ParametersDescription */
         $params = $request->getParams()->toArray();
         $matches = array();
@@ -393,7 +393,7 @@ class Simple implements Route
         }
 
         /**
-         * Scan for named parts inside Cli params
+         * Scan for named parts inside Console params
          */
         foreach($named as &$part){
             /**

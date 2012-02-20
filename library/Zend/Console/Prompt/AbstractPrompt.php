@@ -1,7 +1,7 @@
 <?php
-namespace Zend\Cli\Prompt;
+namespace Zend\Console\Prompt;
 
-use Zend\Cli\Prompt,
+use Zend\Console\Prompt,
 Zend\Console\Console,
 Zend\Console\Adapter as ConsoleAdapter
 ;

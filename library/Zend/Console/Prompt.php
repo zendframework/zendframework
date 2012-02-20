@@ -1,5 +1,5 @@
 <?php
-namespace Zend\Cli;
+namespace Zend\Console;
 
 use Zend\Console\Adapter as ConsoleAdapter;
 

@@ -178,4 +178,11 @@ class ActionControllerTest extends TestCase
         $plugin = $this->controller->url();
         $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Url', $plugin);
     }
+
+    public function testMethodOverloadingShouldInvokePluginAsFunctorIfPossible()
+    {
+        $model = $this->event->getViewModel();
+        $this->controller->layout('alternate/layout');
+        $this->assertEquals('alternate/layout', $model->getTemplate());
+    }
 }

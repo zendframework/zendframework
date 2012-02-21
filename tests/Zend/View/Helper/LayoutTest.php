@@ -77,6 +77,13 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('alternate/layout', $this->parent->getTemplate());
     }
 
+    public function testCallingInvokeWithNoArgumentReturnsViewModel()
+    {
+        $helper = $this->helper;
+        $result = $helper();
+        $this->assertSame($this->parent, $result);
+    }
+
     public function testRaisesExceptionIfViewModelHelperHasNoRoot()
     {
         $renderer         = new PhpRenderer();

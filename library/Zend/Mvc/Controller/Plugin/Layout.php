@@ -44,28 +44,29 @@ class Layout extends AbstractPlugin
      * Set the layout
      * 
      * @param  string $template 
-     * @return void
+     * @return Layout
      */
     public function setLayout($template)
     {
-        $event     = $this->getEvent();
-        $viewModel = $event->getViewModel();
-        if (!$viewModel instanceof Model) {
-            throw new Exception\DomainException('Layout plugin requires that event view model is populated');
-        }
+        $viewModel = $this->getViewModel();
         $viewModel->setTemplate((string) $template);
+        return $this;
     }
 
     /**
      * Invoke as a functor
      *
-     * Proxies to {setLayout()}.
+     * If no arguments are given, grabs the "root" or "layout" view model.
+     * Otherwise, attempts to set the template for that view model.
      * 
-     * @param  string $template 
+     * @param  null|string $template 
      * @return void
      */
-    public function __invoke($template)
+    public function __invoke($template = null)
     {
+        if (null === $template) {
+            return $this->getViewModel();
+        }
         return $this->setLayout($template);
     }
 
@@ -95,5 +96,21 @@ class Layout extends AbstractPlugin
         $this->event = $event;
 
         return $this->event;
+    }
+
+    /**
+     * Retrieve the root view model from the event
+     * 
+     * @return ViewModel
+     * @throws Exception\DomainException
+     */
+    protected function getViewModel()
+    {
+        $event     = $this->getEvent();
+        $viewModel = $event->getViewModel();
+        if (!$viewModel instanceof Model) {
+            throw new Exception\DomainException('Layout plugin requires that event view model is populated');
+        }
+        return $viewModel;
     }
 }

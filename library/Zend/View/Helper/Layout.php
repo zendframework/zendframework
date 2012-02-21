@@ -67,13 +67,19 @@ class Layout extends AbstractHelper
     }
 
     /**
-     * Set layout template
+     * Set layout template or retrieve "layout" view model
      *
-     * @param  string $template
+     * If no arguments are given, grabs the "root" or "layout" view model.
+     * Otherwise, attempts to set the template for that view model.
+     *
+     * @param  null|string $template
      * @return Layout
      */
-    public function __invoke($template)
+    public function __invoke($template = null)
     {
+        if (null === $template) {
+            return $this->getRoot();
+        }
         return $this->setLayout($template);
     }
 

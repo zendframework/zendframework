@@ -138,14 +138,12 @@ class RenderChildModelTest extends TestCase
         $this->assertRegExp('/Content:\s+Layout start\s+Content for layout\s+Layout end\s+Sidebar:\s+Second child/s', $result, $result);
     }
 
-    /**
-     * @outputBuffering enabled
-     */
     public function testAttemptingToRenderWithNoCurrentModelRaisesException()
     {
         $renderer = new PhpRenderer();
         $renderer->setResolver($this->resolver);
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'no view model');
+        $this->expectOutputString("Layout start\n\n");
         $renderer->render('layout');
     }
 }

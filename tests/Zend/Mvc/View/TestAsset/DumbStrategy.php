@@ -21,7 +21,8 @@
 
 namespace ZendTest\Mvc\View\TestAsset;
 
-use Zend\View\Model,
+use ArrayObject,
+    Zend\View\Model,
     Zend\View\Renderer,
     Zend\View\Resolver;
 
@@ -53,8 +54,12 @@ class DumbStrategy implements Renderer
         $options = array();
         $values  = (array) $values;
         if ($nameOrModel instanceof Model) {
-            $options = $nameOrModel->getOptions();
-            $values  = array_merge($nameOrModel->getVariables(), $values);
+            $options   = $nameOrModel->getOptions();
+            $variables = $nameOrModel->getVariables();
+            if ($variables instanceof ArrayObject) {
+                $variables = $variables->getArrayCopy();
+            }
+            $values = array_merge($variables, $values);
             if (array_key_exists('template', $options)) {
                 $nameOrModel = $options['template'];
             } else {

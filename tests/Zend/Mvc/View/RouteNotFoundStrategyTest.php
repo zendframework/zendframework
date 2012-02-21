@@ -122,7 +122,7 @@ class RouteNotFoundStrategyTest extends TestCase
         $this->assertInstanceOf('Zend\View\Model', $model);
         $this->assertEquals($this->strategy->getNotFoundTemplate(), $model->getTemplate());
         $variables = $model->getVariables();
-        $this->assertArrayHasKey('message', $variables);
+        $this->assertTrue(isset($variables['message']));
     }
 
     public function testInjectsHttpResponseIntoEventIfNoneAlreadyPresent()

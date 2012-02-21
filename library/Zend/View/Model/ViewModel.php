@@ -95,6 +95,63 @@ class ViewModel implements Model
     }
 
     /**
+     * Property overloading: set variable value
+     * 
+     * @param  string $name 
+     * @param  mixed $value 
+     * @return void
+     */
+    public function __set($name, $value)
+    {
+        $variables = $this->getVariables();
+        $variables[$name] = $value;
+    }
+
+    /**
+     * Property overloading: get variable value
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        if (!$this->__isset($name)) {
+            return null;
+        }
+
+        $variables = $this->getVariables();
+        return $variables[$name];
+    }
+
+    /**
+     * Property overloading: do we have the requested variable value?
+     * 
+     * @param  string $name 
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        $variables = $this->getVariables();
+        return isset($variables[$name]);
+    }
+
+    /**
+     * Property overloading: unset the requested variable
+     * 
+     * @param  string $name 
+     * @return void
+     */
+    public function __unset($name)
+    {
+        if (!$this->__isset($name)) {
+            return null;
+        }
+
+        $variables = $this->getVariables();
+        unset($variables[$name]);
+    }
+
+    /**
      * Set renderer option/hint
      * 
      * @param  string $name 

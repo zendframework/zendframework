@@ -232,4 +232,18 @@ class ViewModelTest extends TestCase
         $model->setVariables($variables);
         $this->assertSame($variables, $model->getVariables());
     }
+
+    public function testPropertyOverloadingGivesAccessToProperties()
+    {
+        $model      = new ViewModel();
+        $variables  = $model->getVariables();
+        $model->foo = 'bar';
+        $this->assertTrue(isset($model->foo));
+        $this->assertEquals('bar', $variables['foo']);
+        $this->assertEquals('bar', $model->foo);
+
+        unset($model->foo);
+        $this->assertFalse(isset($model->foo));
+        $this->assertFalse(isset($variables['foo']));
+    }
 }

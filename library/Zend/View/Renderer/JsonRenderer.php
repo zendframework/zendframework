@@ -23,6 +23,7 @@ namespace Zend\View\Renderer;
 
 use JsonSerializable,
     Traversable,
+    Zend\Json\Json,
     Zend\Stdlib\IteratorToArray,
     Zend\View\Exception,
     Zend\View\Model,
@@ -32,7 +33,6 @@ use JsonSerializable,
 /**
  * JSON renderer
  *
- * @todo       Should this use Zend\Json?
  * @category   Zend
  * @package    Zend_View
  * @subpackage Renderer
@@ -117,7 +117,7 @@ class JsonRenderer implements Renderer, TreeRendererInterface
                 $values = $nameOrModel->serialize();
             } else {
                 $values = $this->recurseModel($nameOrModel);
-                $values = json_encode($values);
+                $values = Json::encode($values);
             }
 
             return $values;
@@ -127,15 +127,15 @@ class JsonRenderer implements Renderer, TreeRendererInterface
         // Serialize $nameOrModel
         if (null === $values) {
             if (!is_object($nameOrModel) || $nameOrModel instanceof JsonSerializable) {
-                return json_encode($nameOrModel);
+                return Json::encode($nameOrModel);
             }
 
             if ($nameOrModel instanceof Traversable) {
                 $nameOrModel = IteratorToArray::convert($nameOrModel);
-                return json_encode($nameOrModel);
+                return Json::encode($nameOrModel);
             }
 
-            return json_encode(get_object_vars($nameOrModel));
+            return Json::encode(get_object_vars($nameOrModel));
         }
 
         // use case 3: Both $nameOrModel and $values are populated

@@ -385,7 +385,6 @@ document.write(bar.strlen());');
             $this->helper->__invoke()->captureEnd();
             $this->assertContains('Cannot nest', $e->getMessage());
         }
-        $this->helper->__invoke()->captureEnd();
     }
 
     /**

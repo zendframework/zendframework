@@ -31,6 +31,7 @@ use ArrayObject,
     Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer,
     Zend\View\Resolver,
+    Zend\View\Variables as ViewVariables,
     Zend\View\View;
 
 class ViewTest extends TestCase
@@ -75,22 +76,20 @@ class ViewTest extends TestCase
         $this->attachTestStrategies();
 
         $child1 = new ViewModel(array('foo' => 'bar'));
-        $child1->setCaptureTo('child1');
 
         $child2 = new ViewModel(array('bar' => 'baz'));
-        $child2->setCaptureTo('child2');
 
         $this->model->setVariable('parent', 'node');
-        $this->model->addChild($child1);
-        $this->model->addChild($child2);
+        $this->model->addChild($child1, 'child1');
+        $this->model->addChild($child2, 'child2');
 
         $this->view->render($this->model);
 
-        $expected = var_export(array(
+        $expected = var_export(new ViewVariables(array(
             'parent' => 'node',
             'child1' => var_export(array('foo' => 'bar'), true),
             'child2' => var_export(array('bar' => 'baz'), true),
-        ), true);
+        )), true);
         $this->assertEquals($expected, $this->result->content);
     }
 
@@ -110,13 +109,13 @@ class ViewTest extends TestCase
 
         $this->view->render($this->model);
 
-        $expected = var_export(array(
+        $expected = var_export(new ViewVariables(array(
             'parent' => 'node',
             'child1' => var_export(array(
                 'foo'    => 'bar',
                 'child2' => var_export(array('bar' => 'baz'), true),
             ), true),
-        ), true);
+        )), true);
         $this->assertEquals($expected, $this->result->content);
     }
 
@@ -153,11 +152,11 @@ class ViewTest extends TestCase
 
         $this->view->render($this->model);
 
-        $expected = var_export(array(
+        $expected = var_export(new ViewVariables(array(
             'parent' => 'node',
             'child1' => var_export(array('foo' => 'bar'), true),
             'child2' => json_encode(array('bar' => 'baz')),
-        ), true);
+        )), true);
         $this->assertEquals($expected, $this->result->content);
     }
 
@@ -199,10 +198,10 @@ class ViewTest extends TestCase
 
         $this->view->render($this->model);
 
-        $expected = var_export(array(
+        $expected = var_export(new ViewVariables(array(
             'parent' => 'node',
             'child1' => var_export(array('foo' => 'bar'), true),
-        ), true);
+        )), true);
         $this->assertEquals($expected, $this->result->content);
     }
 

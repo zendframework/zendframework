@@ -24,7 +24,8 @@ namespace ZendTest\View\Model;
 use ArrayObject,
     stdClass,
     PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\Model\ViewModel;
+    Zend\View\Model\ViewModel,
+    Zend\View\Variables as ViewVariables;
 
 /**
  * @category   Zend
@@ -38,7 +39,7 @@ class ViewModelTest extends TestCase
     public function testAllowsEmptyConstructor()
     {
         $model = new ViewModel();
-        $this->assertEquals(array(), $model->getVariables());
+        $this->assertInstanceOf('Zend\View\Variables', $model->getVariables());
         $this->assertEquals(array(), $model->getOptions());
     }
 
@@ -222,5 +223,13 @@ class ViewModelTest extends TestCase
         $model->addChild($child, 'foo');
         $this->assertTrue($model->hasChildren());
         $this->assertEquals('foo', $child->captureTo());
+    }
+
+    public function testAllowsPassingViewVariablesContainerAsVariables()
+    {
+        $variables = new ViewVariables();
+        $model     = new ViewModel();
+        $model->setVariables($variables);
+        $this->assertSame($variables, $model->getVariables());
     }
 }

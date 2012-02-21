@@ -26,7 +26,8 @@ use ArrayAccess,
     Traversable,
     Zend\Stdlib\IteratorToArray,
     Zend\View\Exception,
-    Zend\View\Model;
+    Zend\View\Model,
+    Zend\View\Variables as ViewVariables;
 
 /**
  * @category   Zend
@@ -79,13 +80,17 @@ class ViewModel implements Model
     /**
      * Constructor
      * 
-     * @param  array|Traversable $variables 
+     * @param  null|array|Traversable $variables 
      * @param  array|Traversable $options 
      * @return void
      */
-    public function __construct($variables = array(), $options = array())
+    public function __construct($variables = null, $options = array())
     {
+        if (null === $variables) {
+            $variables = new ViewVariables();
+        }
         $this->setVariables($variables);
+
         $this->setOptions($options);
     }
 

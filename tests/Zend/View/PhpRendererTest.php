@@ -371,16 +371,43 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $test = $this->renderer->render('should-not-find-this');
     }
 
+    /**
+     * @group view-model
+     */
     public function testDoesNotRenderTreesOfViewModelsByDefault()
     {
         $this->assertFalse($this->renderer->canRenderTrees());
     }
 
+    /**
+     * @group view-model
+     */
     public function testRenderTreesOfViewModelsCapabilityIsMutable()
     {
         $this->renderer->setCanRenderTrees(true);
         $this->assertTrue($this->renderer->canRenderTrees());
         $this->renderer->setCanRenderTrees(false);
         $this->assertFalse($this->renderer->canRenderTrees());
+    }
+
+    /**
+     * @group view-model
+     */
+    public function testIfViewModelComposesVariablesInstanceThenRendererUsesIt()
+    {
+        $model = new ViewModel();
+        $model->setTemplate('template');
+        $vars  = $model->getVariables();
+        $vars->setEscapeCallback(function ($value) {
+            return strtolower($value);
+        });
+        $vars['foo'] = 'BAR-BAZ-BAT';
+
+        $resolver = new TemplateMapResolver(array(
+            'template' => __DIR__ . '/_templates/view-model-variables.phtml',
+        ));
+        $this->renderer->setResolver($resolver);
+        $test = $this->renderer->render($model);
+        $this->assertContains('bar-baz-bat', $test);
     }
 }

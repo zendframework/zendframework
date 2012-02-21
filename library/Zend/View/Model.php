@@ -107,9 +107,10 @@ interface Model extends Countable, IteratorAggregate
      * Add a child model
      * 
      * @param  Model $child 
+     * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
      * @return Model
      */
-    public function addChild(Model $child);
+    public function addChild(Model $child, $captureTo = null);
 
     /**
      * Return all children.

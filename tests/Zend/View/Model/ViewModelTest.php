@@ -214,4 +214,13 @@ class ViewModelTest extends TestCase
         $model->setTerminal(true);
         $this->assertTrue($model->terminate());
     }
+
+    public function testAddChildAllowsSpecifyingCaptureToValue()
+    {
+        $model = new ViewModel();
+        $child = new ViewModel();
+        $model->addChild($child, 'foo');
+        $this->assertTrue($model->hasChildren());
+        $this->assertEquals('foo', $child->captureTo());
+    }
 }

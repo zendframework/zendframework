@@ -219,11 +219,15 @@ class ViewModel implements Model
      * Add a child model
      * 
      * @param  Model $child 
+     * @param  null|string $captureTo Optional; if specified, the "capture to" value to set on the child
      * @return ViewModel
      */
-    public function addChild(Model $child)
+    public function addChild(Model $child, $captureTo = null)
     {
         $this->children[] = $child;
+        if (null !== $captureTo) {
+            $child->setCaptureTo($captureTo);
+        }
         return $this;
     }
 

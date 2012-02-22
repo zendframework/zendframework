@@ -59,9 +59,9 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->viewModelHelper->setRoot($this->parent);
     }
 
-    public function testCallingSetLayoutAltersRootModelTemplate()
+    public function testCallingSetTemplateAltersRootModelTemplate()
     {
-        $this->helper->setLayout('alternate/layout');
+        $this->helper->setTemplate('alternate/layout');
         $this->assertEquals('alternate/layout', $this->parent->getTemplate());
     }
 
@@ -70,7 +70,7 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('layout', $this->helper->getLayout());
     }
 
-    public function testCallingInvokeProxiesToSetLayout()
+    public function testCallingInvokeProxiesToSetTemplate()
     {
         $helper = $this->helper;
         $helper('alternate/layout');
@@ -91,6 +91,6 @@ class LayoutTest extends \PHPUnit_Framework_TestCase
         $helper          = $renderer->plugin('layout');
 
         $this->setExpectedException('Zend\View\Exception\RuntimeException', 'view model');
-        $helper->setLayout('foo/bar');
+        $helper->setTemplate('foo/bar');
     }
 }

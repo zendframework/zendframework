@@ -59,7 +59,7 @@ class Layout extends AbstractHelper
      * @param  string $template
      * @return Layout
      */
-    public function setLayout($template)
+    public function setTemplate($template)
     {
         $model = $this->getRoot();
         $model->setTemplate((string) $template);
@@ -80,7 +80,7 @@ class Layout extends AbstractHelper
         if (null === $template) {
             return $this->getRoot();
         }
-        return $this->setLayout($template);
+        return $this->setTemplate($template);
     }
 
     /**

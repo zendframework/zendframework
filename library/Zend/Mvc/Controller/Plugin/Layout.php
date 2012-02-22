@@ -41,12 +41,12 @@ class Layout extends AbstractPlugin
     protected $event;
 
     /**
-     * Set the layout
+     * Set the layout template
      * 
      * @param  string $template 
      * @return Layout
      */
-    public function setLayout($template)
+    public function setTemplate($template)
     {
         $viewModel = $this->getViewModel();
         $viewModel->setTemplate((string) $template);
@@ -67,7 +67,7 @@ class Layout extends AbstractPlugin
         if (null === $template) {
             return $this->getViewModel();
         }
-        return $this->setLayout($template);
+        return $this->setTemplate($template);
     }
 
     /**

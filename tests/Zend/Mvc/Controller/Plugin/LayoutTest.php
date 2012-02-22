@@ -42,20 +42,20 @@ class LayoutTest extends TestCase
     {
         $plugin = new LayoutPlugin();
         $this->setExpectedException('Zend\Mvc\Exception\DomainException', 'requires a controller');
-        $plugin->setLayout('home');
+        $plugin->setTemplate('home');
     }
 
-    public function testSetLayoutAltersTemplateInEventViewModel()
+    public function testSetTemplateAltersTemplateInEventViewModel()
     {
         $model = new ViewModel();
         $model->setTemplate('layout');
         $this->event->setViewModel($model);
 
-        $this->plugin->setLayout('alternate/layout');
+        $this->plugin->setTemplate('alternate/layout');
         $this->assertEquals('alternate/layout', $model->getTemplate());
     }
 
-    public function testInvokeProxiesToSetLayout()
+    public function testInvokeProxiesToSetTemplate()
     {
         $model = new ViewModel();
         $model->setTemplate('layout');

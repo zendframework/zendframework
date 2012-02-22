@@ -34,10 +34,10 @@ return array(
     "'%value%' is an empty string" => "'%value%' is an empty string",
 
     // Zend_Validate_Barcode
-    "'%value%' failed checksum validation" => "'%value%' failed checksum validation",
-    "'%value%' contains invalid characters" => "'%value%' contains invalid characters",
-    "'%value%' should have a length of %length% characters" => "'%value%' should have a length of %length% characters",
-    "Invalid type given. String expected" => "Invalid type given. String expected",
+    "'%value%' failed checksum validation" => "'%value%' feilet i kontrollsumvalidering",
+    "'%value%' contains invalid characters" => "'%value%' inneholder ugyldige tegn",
+    "'%value%' should have a length of %length% characters" => "'%value%' må ha en lengde på %length% tegn",
+    "Invalid type given. String expected" => "Ugyldig typen gitt. Streng forventet",
 
     // Zend_Validate_Between
     "'%value%' is not between '%min%' and '%max%', inclusively" => "'%value%' is not between '%min%' and '%max%', inclusively",

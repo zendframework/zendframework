@@ -599,7 +599,8 @@ class Wsdl
             $type = substr($type, 1);
         }
 
-        if ($pos = strrpos($type, '\\')) {
+        $pos = strrpos($type, '\\');
+        if ($pos) {
             $type = substr($type, $pos+1);
         }
 

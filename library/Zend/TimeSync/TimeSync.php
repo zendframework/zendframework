@@ -261,15 +261,17 @@ class TimeSync implements \IteratorAggregate
      */
     protected function _addServer($target, $alias)
     {
-        if ($pos = strpos($target, '://')) {
+        $pos = strpos($target, '://');
+        if ($pos) {
             $protocol = substr($target, 0, $pos);
-            $address = substr($target, $pos + 3);
+            $address  = substr($target, $pos + 3);
         } else {
-            $address = $target;
+            $address  = $target;
             $protocol = self::DEFAULT_PROTOCOL;
         }
 
-        if ($pos = strrpos($address, ':')) {
+        $pos = strrpos($address, ':');
+        if ($pos) {
             $posbr = strpos($address, ']');
             if ($posbr and ($pos > $posbr)) {
                 $port = substr($address, $pos + 1);

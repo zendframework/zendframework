@@ -23,6 +23,8 @@
  */
 namespace Zend\Validator;
 
+use Traversable;
+
 /**
  * @uses       \Zend\Validator\AbstractValidator
  * @uses       \Zend\Validator\Exception
@@ -76,7 +78,7 @@ class Ip extends AbstractValidator
 
         $options += $this->_options;
         $this->setOptions($options);
-        
+
         parent::__construct();
     }
 

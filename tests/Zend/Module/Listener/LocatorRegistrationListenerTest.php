@@ -79,10 +79,10 @@ class LocatorRegistrationTest extends TestCase
 
         $this->assertEquals(1, count($typePreferences1));
         $this->assertInstanceOf('ListenerTestModule\Module', $typePreferences1[0]);
-        $this->assertEquals(spl_object_hash($this->module), spl_object_hash($locator->get('Foo\Bar')->module));
+        $this->assertSame($this->module, $locator->get('Foo\Bar')->module);
 
         $this->assertEquals(1, count($typePreferences2));
         $this->assertInstanceOf('Zend\Module\Manager', $typePreferences2[0]);
-        $this->assertEquals(spl_object_hash($this->moduleManager), spl_object_hash($locator->get('Foo\Bar')->moduleManager));
+        $this->assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
     }
 }

@@ -24,7 +24,7 @@
 namespace Zend\Dojo;
 
 use Zend\View\Renderer,
-    Zend\View\PhpRenderer;
+    Zend\View\Renderer\PhpRenderer;
 
 /**
  * Enable Dojo components

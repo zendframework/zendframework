@@ -29,11 +29,16 @@ class ActionControllerTest extends TestCase
         StaticEventManager::resetInstance();
     }
 
-    public function testDispatchInvokesIndexActionWhenNoActionPresentInRouteMatch()
+    public function testDispatchInvokesNotFoundActionWhenNoActionPresentInRouteMatch()
     {
         $result = $this->controller->dispatch($this->request, $this->response);
-        $this->assertTrue(isset($result['content']));
-        $this->assertContains('Placeholder page', $result['content']);
+        $response = $this->controller->getResponse();
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertInstanceOf('Zend\View\Model', $result);
+        $this->assertEquals('content', $result->captureTo());
+        $vars = $result->getVariables();
+        $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
+        $this->assertContains('Page not found', $vars['content']);
     }
 
     public function testDispatchInvokesNotFoundActionWhenInvalidActionPresentInRouteMatch()
@@ -42,8 +47,11 @@ class ActionControllerTest extends TestCase
         $result = $this->controller->dispatch($this->request, $this->response);
         $response = $this->controller->getResponse();
         $this->assertEquals(404, $response->getStatusCode());
-        $this->assertTrue(isset($result['content']));
-        $this->assertContains('Page not found', $result['content']);
+        $this->assertInstanceOf('Zend\View\Model', $result);
+        $this->assertEquals('content', $result->captureTo());
+        $vars = $result->getVariables();
+        $this->assertArrayHasKey('content', $vars, var_export($vars, 1));
+        $this->assertContains('Page not found', $vars['content']);
     }
 
     public function testDispatchInvokesProvidedActionWhenMethodExists()
@@ -169,5 +177,12 @@ class ActionControllerTest extends TestCase
     {
         $plugin = $this->controller->url();
         $this->assertInstanceOf('Zend\Mvc\Controller\Plugin\Url', $plugin);
+    }
+
+    public function testMethodOverloadingShouldInvokePluginAsFunctorIfPossible()
+    {
+        $model = $this->event->getViewModel();
+        $this->controller->layout('alternate/layout');
+        $this->assertEquals('alternate/layout', $model->getTemplate());
     }
 }

@@ -25,7 +25,7 @@
 namespace ZendTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\View\PhpRenderer as View,
+    Zend\View\Renderer\PhpRenderer as View,
     Zend\View\Helper\FormCsrf;
 
 /**

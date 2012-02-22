@@ -76,8 +76,7 @@ class ForwardTest extends TestCase
     public function testPluginDispatchsRequestedControllerWhenFound()
     {
         $result = $this->plugin->dispatch('forward');
-        $this->assertInstanceOf('ArrayObject', $result);
-        $result = $result->getArrayCopy();
+        $this->assertInternalType('array', $result);
         $this->assertEquals(array('content' => 'ZendTest\Mvc\Controller\TestAsset\ForwardController::testAction'), $result);
     }
 
@@ -87,7 +86,7 @@ class ForwardTest extends TestCase
             'action' => 'test-matches',
             'param1' => 'foobar',
         ));
-        $this->assertInstanceOf('ArrayObject', $result);
+        $this->assertInternalType('array', $result);
         $this->assertTrue(isset($result['action']));
         $this->assertEquals('test-matches', $result['action']);
         $this->assertTrue(isset($result['param1']));

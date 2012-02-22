@@ -30,7 +30,7 @@ use Zend\Navigation\Navigation,
     Zend\Acl\Resource\GenericResource,
     Zend\Config\Xml as XmlConfig,
     Zend\Translator\Translator,
-    Zend\View\PhpRenderer;
+    Zend\View\Renderer\PhpRenderer;
 
 /**
  * Base class for navigation view helper tests

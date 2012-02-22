@@ -31,6 +31,7 @@ class Application implements AppContext
     const ERROR_CONTROLLER_INVALID   = 404;
     const ERROR_EXCEPTION            = 500;
 
+    protected $event;
     protected $events;
     protected $locator;
     protected $request;
@@ -41,7 +42,7 @@ class Application implements AppContext
      * Set the event manager instance used by this context
      *
      * @param  EventCollection $events
-     * @return AppContext
+     * @return Application
      */
     public function setEventManager(EventCollection $events)
     {
@@ -53,7 +54,7 @@ class Application implements AppContext
      * Set a service locator/DI object
      *
      * @param  Locator $locator
-     * @return AppContext
+     * @return Application
      */
     public function setLocator(Locator $locator)
     {
@@ -65,7 +66,7 @@ class Application implements AppContext
      * Set the request object
      *
      * @param  Request $request
-     * @return AppContext
+     * @return Application
      */
     public function setRequest(Request $request)
     {
@@ -77,7 +78,7 @@ class Application implements AppContext
      * Set the response object
      *
      * @param  Response $response
-     * @return AppContext
+     * @return Application
      */
     public function setResponse(Response $response)
     {
@@ -91,11 +92,23 @@ class Application implements AppContext
      * A router should return a metadata object containing a controller key.
      *
      * @param  Router\RouteStack $router
-     * @return AppContext
+     * @return Application
      */
     public function setRouter(Router\RouteStack $router)
     {
         $this->router = $router;
+        return $this;
+    }
+
+    /**
+     * Set the MVC event instance
+     * 
+     * @param  MvcEvent $event 
+     * @return Application
+     */
+    public function setMvcEvent(MvcEvent $event)
+    {
+        $this->event = $event;
         return $this;
     }
 
@@ -149,6 +162,25 @@ class Application implements AppContext
     }
 
     /**
+     * Get the MVC event instance
+     * 
+     * @return MvcEvent
+     */
+    public function getMvcEvent()
+    {
+        if ($this->event) {
+            return $this->event;
+        }
+
+        $this->event = $event  = new MvcEvent();
+        $event->setTarget($this);
+        $event->setRequest($this->getRequest())
+              ->setResponse($this->getResponse())
+              ->setRouter($this->getRouter());
+        return $event;
+    }
+
+    /**
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.
@@ -183,32 +215,65 @@ class Application implements AppContext
     public function run()
     {
         $events = $this->events();
-        $event  = new MvcEvent();
-        $event->setTarget($this);
-        $event->setRequest($this->getRequest())
-              ->setRouter($this->getRouter());
+        $event  = $this->getMvcEvent();
 
-        $result = $events->trigger('route', $event, function ($r) {
-            return ($r instanceof Response);
-        });
+        // Define callback used to determine whether or not to short-circuit
+        $shortCircuit = function ($r) use ($event) {
+            if ($r instanceof Response) {
+                return true;
+            }
+            if ($event->getError()) {
+                return true;
+            }
+            return false;
+        };
+        
+        // Trigger route event
+        $result = $events->trigger('route', $event, $shortCircuit);
         if ($result->stopped()) {
             $response = $result->last();
+            if ($response instanceof Response) {
+                return $response;
+            }
+            if ($event->getError()) {
+                return $this->completeRequest($event);
+            }
+            return $event->getResponse();
+        }
+        if ($event->getError()) {
+            return $this->completeRequest($event);
+        }
+
+        // Trigger dispatch event
+        $result = $events->trigger('dispatch', $event, $shortCircuit);
+
+        // Complete response
+        $response = $result->last();
+        if ($response instanceof Response) {
             return $response;
         }
 
-        $result = $events->trigger('dispatch', $event, function ($r) {
-            return ($r instanceof Response);
-        });
+        $response = $this->getResponse();
+        $event->setResponse($response);
 
-        $response = $result->last();
-        if (!$response instanceof Response) {
-            $response = $this->getResponse();
-            $event->setResponse($response);
-        }
+        return $this->completeRequest($event);
+    }
 
+    /**
+     * Complete the request
+     *
+     * Triggers "render" and "finish" events, and returns response from
+     * event object.
+     * 
+     * @param  MvcEvent $event 
+     * @return Response
+     */
+    protected function completeRequest(MvcEvent $event)
+    {
+        $events = $this->events();
+        $events->trigger('render', $event);
         $events->trigger('finish', $event);
-
-        return $response;
+        return $event->getResponse();
     }
 
     /**
@@ -225,10 +290,9 @@ class Application implements AppContext
         $routeMatch = $router->match($request);
 
         if (!$routeMatch instanceof Router\RouteMatch) {
-            $error = clone $e;
-            $error->setError(static::ERROR_CONTROLLER_NOT_FOUND);
+            $e->setError(static::ERROR_CONTROLLER_NOT_FOUND);
 
-            $results = $this->events()->trigger('dispatch.error', $error);
+            $results = $this->events()->trigger('dispatch.error', $e);
             if (count($results)) {
                 $return  = $results->last();
             } else {
@@ -256,10 +320,9 @@ class Application implements AppContext
             );
         }
 
-        $events     = $this->events();
-        $routeMatch = $e->getRouteMatch();
-
+        $routeMatch     = $e->getRouteMatch();
         $controllerName = $routeMatch->getParam('controller', 'not-found');
+        $events         = $this->events();
 
         try {
             $controller = $locator->get($controllerName);

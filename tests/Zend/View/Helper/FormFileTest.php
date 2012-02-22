@@ -52,7 +52,7 @@ class FormFileTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_View_Helper_Doctype']);
         }
-        $this->view = new \Zend\View\PhpRenderer();
+        $this->view = new \Zend\View\Renderer\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormFile();
         $this->helper->setView($this->view);
     }

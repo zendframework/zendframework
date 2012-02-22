@@ -34,7 +34,7 @@ use Traversable,
     Zend\Translator,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Validator,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer as View;
 
 /**

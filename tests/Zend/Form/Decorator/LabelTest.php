@@ -25,7 +25,7 @@ use Zend\Form\Decorator\Label as LabelDecorator,
     Zend\Form\Decorator\AbstractDecorator,
     Zend\Form\Element,
     Zend\Translator\Translator,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Label

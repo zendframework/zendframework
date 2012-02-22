@@ -28,7 +28,7 @@ use ArrayObject,
     Iterator,
     PHPUnit_Framework_TestCase as TestCase,
     Zend\View\Helper\PartialLoop,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_View_Helper_PartialLoop.

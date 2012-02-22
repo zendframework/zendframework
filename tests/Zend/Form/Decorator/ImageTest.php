@@ -25,7 +25,7 @@ use Zend\Form\Decorator\Image as ImageDecorator,
     Zend\Form\Decorator\AbstractDecorator,
     Zend\Form\Element,
     Zend\Form\Element\Image as ImageElement,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Decorator_Image

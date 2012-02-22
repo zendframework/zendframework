@@ -223,4 +223,54 @@ class VariablesTest extends \PHPUnit_Framework_TestCase
         $rawValues = $this->vars->getRawValues();
         $this->assertEquals(0, count($rawValues));
     }
+
+    public function testAllowsSpecifyingClosureValuesAndReturningTheValue()
+    {
+        $this->vars->foo = function () {
+            return 'bar';
+        };
+
+        $this->assertEquals('bar', $this->vars->foo);
+    }
+
+    public function testAllowsSpecifyingFunctorValuesAndReturningTheValue()
+    {
+        $this->vars->foo = new TestAsset\VariableFunctor('bar');
+        $this->assertEquals('bar', $this->vars->foo);
+    }
+
+    public function testClosureValuesAreEscaped()
+    {
+        $this->vars->foo = function () {
+            return '<a href="foo">bar</a>';
+        };
+
+        $expected = $this->vars->escape('<a href="foo">bar</a>');
+        $this->assertEquals($expected, $this->vars->foo);
+    }
+
+    public function testFunctorValuesAreEscaped()
+    {
+        $this->vars->foo = new TestAsset\VariableFunctor('<a href="foo">bar</a>');
+        $expected = $this->vars->escape('<a href="foo">bar</a>');
+        $this->assertEquals($expected, $this->vars->foo);
+    }
+
+    public function testCallbackValuesAreReturnedAsIsWhenRetrievedAsRawValue()
+    {
+        $value = function () {
+            return '<a href="foo">bar</a>';
+        };
+        $this->vars->foo = $value;
+
+        $this->assertSame($value, $this->vars->getRawValue('foo'));
+    }
+
+    public function testFunctorValuesAreReturnedAsIsWhenRetrievedAsRawValue()
+    {
+        $value = new TestAsset\VariableFunctor('<a href="foo">bar</a>');
+        $this->vars->foo = $value;
+
+        $this->assertSame($value, $this->vars->getRawValue('foo'));
+    }
 }

@@ -839,7 +839,7 @@ class Paginator implements Countable, IteratorAggregate
     public function getView()
     {
         if ($this->_view === null) {
-            $this->setView(new View\PhpRenderer());
+            $this->setView(new View\Renderer\PhpRenderer());
         }
 
         return $this->_view;

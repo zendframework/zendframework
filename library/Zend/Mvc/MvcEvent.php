@@ -4,7 +4,8 @@ namespace Zend\Mvc;
 
 use Zend\EventManager\Event,
     Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response;
+    Zend\Stdlib\ResponseDescription as Response,
+    Zend\View\Model as ViewModel;
 
 class MvcEvent extends Event
 {
@@ -13,6 +14,7 @@ class MvcEvent extends Event
     protected $result;
     protected $router;
     protected $routeMatch;
+    protected $viewModel;
 
     public function getRouter()
     {
@@ -60,6 +62,31 @@ class MvcEvent extends Event
         $this->setParam('response', $response);
         $this->response = $response;
         return $this;
+    }
+
+    /**
+     * Set value for viewModel
+     *
+     * @param  ViewModel viewModel
+     * @return MvcEvent
+     */
+    public function setViewModel(ViewModel $viewModel)
+    {
+        $this->viewModel = $viewModel;
+        return $this;
+    }
+    
+    /**
+     * Get value for viewModel
+     *
+     * @return ViewModel
+     */
+    public function getViewModel()
+    {
+        if (null === $this->viewModel) {
+            $this->setViewModel(new ViewModel\ViewModel());
+        }
+        return $this->viewModel;
     }
 
     public function getResult()

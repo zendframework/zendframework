@@ -48,7 +48,7 @@ class SubFormTest extends \PHPUnit_Framework_TestCase
         $this->form = new DojoSubForm();
         $this->form->addElement('TextBox', 'foo')
                    ->addDisplayGroup(array('foo'), 'dg')
-                   ->setView(new View\PhpRenderer());
+                   ->setView(new View\Renderer\PhpRenderer());
     }
 
     public function testDojoFormDecoratorPathShouldBeRegisteredByDefault()

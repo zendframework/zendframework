@@ -24,9 +24,9 @@
  */
 return array(
     // Zend_Validate_Alnum
-    "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
-    "'%value%' contains characters which are non alphabetic and no digits" => "'%value%' contains characters which are non alphabetic and no digits",
-    "'%value%' is an empty string" => "'%value%' is an empty string",
+    "Invalid type given. String, integer or float expected" => "Ikke gylig type er angitt. Streng, heltall eller flyttall blir akseptert",
+    "'%value%' contains characters which are non alphabetic and no digits" => "'%value%' inneholder tegn som ikke er alfabetiske og ingen sifre",
+    "'%value%' is an empty string" => "'%value%' er en tom streng",
 
     // Zend_Validate_Alpha
     "Invalid type given. String expected" => "Invalid type given. String expected",

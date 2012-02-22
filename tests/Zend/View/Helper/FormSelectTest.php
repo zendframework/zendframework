@@ -46,7 +46,7 @@ class FormSelectTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->view   = new \Zend\View\PhpRenderer();
+        $this->view   = new \Zend\View\Renderer\PhpRenderer();
         $this->helper = new \Zend\View\Helper\FormSelect();
         $this->helper->setView($this->view);
     }

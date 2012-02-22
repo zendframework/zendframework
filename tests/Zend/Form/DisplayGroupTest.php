@@ -29,7 +29,7 @@ use Zend\Form\Form,
     Zend\Loader\PrefixPathLoader as PluginLoader,
     Zend\Registry,
     Zend\Translator\Translator,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * @category   Zend

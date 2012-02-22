@@ -49,7 +49,7 @@ class BuildLayerTest extends \PHPUnit_Framework_TestCase
         if (isset($registry['Zend\Dojo\View\Helper\Dojo'])) {
             unset($registry['Zend\Dojo\View\Helper\Dojo']);
         }
-        $this->view = new View\PhpRenderer();
+        $this->view = new View\Renderer\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($this->view);
     }
 

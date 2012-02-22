@@ -26,7 +26,7 @@ use Zend\Form\Element\Select as SelectElement,
     Zend\Form\Element,
     Zend\Form\Decorator,
     Zend\Translator\Translator,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Select

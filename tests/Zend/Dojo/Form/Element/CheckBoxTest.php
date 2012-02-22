@@ -57,7 +57,7 @@ class CheckBoxTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -230,7 +230,7 @@ class CheckBoxTest extends \PHPUnit_Framework_TestCase
                     'checkedValue' => 'checkedVal',
                     'unCheckedValue' => 'UNCHECKED',
                 ));
-        $element->setView(new View\PhpRenderer());
+        $element->setView(new View\Renderer\PhpRenderer());
         $html = $element->render();
         $this->assertContains('value="checkedVal"', $html, $html);
     }

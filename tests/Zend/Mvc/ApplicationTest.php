@@ -566,4 +566,26 @@ class ApplicationTest extends TestCase
         $result = $app->run();
         $this->assertSame($response, $result);
     }
+
+    /**
+     * @group error-handling
+     */
+    public function testFailureForRouteToReturnRouteMatchShouldPopulateEventError()
+    {
+        $app    = $this->setupBadController();
+        $router = new Router\SimpleRouteStack();
+        $app->setRouter($router);
+
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('dispatch.error', function ($e) use ($response) {
+            $error      = $e->getError();
+            $response->setContent("Code: " . $error);
+            return $response;
+        });
+
+        $app->run();
+        $event = $app->getMvcEvent();
+        $this->assertEquals(Application::ERROR_CONTROLLER_NOT_FOUND, $event->getError());
+    }
 }

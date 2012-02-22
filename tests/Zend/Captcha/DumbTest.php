@@ -64,7 +64,7 @@ class DumbTest extends CommonWordTest
     {
         $id   = $this->captcha->generate('test');
         $word = $this->captcha->getWord();
-        $html = $this->captcha->render(new \Zend\View\PhpRenderer);
+        $html = $this->captcha->render(new \Zend\View\Renderer\PhpRenderer);
         $this->assertContains(strrev($word), $html);
         $this->assertNotContains($word, $html);
     }

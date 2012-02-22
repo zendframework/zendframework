@@ -341,19 +341,22 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
     }
 
     /**
-     * Method overloading: return plugins
+     * Method overloading: return/call plugins
+     *
+     * If the plugin is a functor, call it, passing the parameters provided.
+     * Otherwise, return the plugin instance.
      * 
-     * @param mixed $method 
-     * @param mixed $params 
-     * @return void
+     * @param  string $method 
+     * @param  array $params 
+     * @return mixed
      */
     public function __call($method, $params)
     {
-        $options = null;
-        if (0 < count($params)) {
-            $options = array_shift($params);
+        $plugin = $this->plugin($method);
+        if (is_callable($plugin)) {
+            return call_user_func_array($plugin, $params);
         }
-        return $this->plugin($method, $options);
+        return $plugin;
     }
 
     /**

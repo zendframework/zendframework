@@ -2,21 +2,20 @@
 
 namespace Zend\Mvc\Controller;
 
-use ArrayObject,
-    Zend\Di\Locator,
+use Zend\Di\Locator,
     Zend\EventManager\EventCollection,
     Zend\EventManager\EventDescription as Event,
     Zend\EventManager\EventManager,
     Zend\Http\PhpEnvironment\Response as HttpResponse,
     Zend\Loader\Broker,
     Zend\Loader\Pluggable,
-    Zend\Stdlib\Dispatchable,
-    Zend\Stdlib\IsAssocArray,
-    Zend\Stdlib\RequestDescription as Request,
-    Zend\Stdlib\ResponseDescription as Response,
     Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\LocatorAware,
-    Zend\Mvc\MvcEvent;
+    Zend\Mvc\MvcEvent,
+    Zend\Stdlib\Dispatchable,
+    Zend\Stdlib\RequestDescription as Request,
+    Zend\Stdlib\ResponseDescription as Response,
+    Zend\View\Model\ViewModel;
 
 /**
  * Basic action controller
@@ -39,7 +38,9 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      */
     public function indexAction()
     {
-        return array('content' => 'Placeholder page');
+        return new ViewModel(array(
+            'content' => 'Placeholder page'
+        ));
     }
 
     /**
@@ -49,8 +50,16 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
      */
     public function notFoundAction()
     {
-        $this->response->setStatusCode(404);
-        return array('content' => 'Page not found');
+        $response   = $this->response;
+        $event      = $this->getEvent();
+        $routeMatch = $event->getRouteMatch();
+
+        $response->setStatusCode(404);
+        $routeMatch->setParam('action', 'not-found');
+
+        return new ViewModel(array(
+            'content' => 'Page not found'
+        ));
     }
 
     /**
@@ -101,7 +110,7 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
             throw new \DomainException('Missing route matches; unsure how to retrieve action');
         }
 
-        $action = $routeMatch->getParam('action', 'index');
+        $action = $routeMatch->getParam('action', 'not-found');
         $method = static::getMethodFromAction($action);
 
         if (!method_exists($this, $method)) {
@@ -109,12 +118,6 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
         }
 
         $actionResponse = $this->$method();
-
-        if (!is_object($actionResponse)) {
-            if (IsAssocArray::test($actionResponse)) {
-                $actionResponse = new ArrayObject($actionResponse, ArrayObject::ARRAY_AS_PROPS);
-            }
-        }
 
         $e->setResult($actionResponse);
         return $actionResponse;
@@ -274,19 +277,22 @@ abstract class ActionController implements Dispatchable, InjectApplicationEvent,
     }
 
     /**
-     * Method overloading: return plugins
+     * Method overloading: return/call plugins
+     *
+     * If the plugin is a functor, call it, passing the parameters provided.
+     * Otherwise, return the plugin instance.
      * 
-     * @param mixed $method 
-     * @param mixed $params 
-     * @return void
+     * @param  string $method 
+     * @param  array $params 
+     * @return mixed
      */
-    public function __call($method, $params)
+    public function __call($method, array $params)
     {
-        $options = null;
-        if (0 < count($params)) {
-            $options = array_shift($params);
+        $plugin = $this->plugin($method);
+        if (is_callable($plugin)) {
+            return call_user_func_array($plugin, $params);
         }
-        return $this->plugin($method, $options);
+        return $plugin;
     }
 
     /**

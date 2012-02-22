@@ -24,7 +24,7 @@ namespace ZendTest\Form\Element;
 use Zend\Form\Element\Hash as HashElement,
     Zend\Form\Element\Xhtml as XhtmlElement,
     Zend\Form\Element,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_Hash

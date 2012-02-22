@@ -1,0 +1,9 @@
+<?php $this->placeholder('content')->captureStart() ?>
+Message: <?php echo $message ?>
+
+<?php if ($this->display_exceptions): ?>
+Exception: <?php echo $exception->getMessage() ?>
+
+<?php echo $exception->getTraceAsString() ?>
+<?php endif ?>
+<?php $this->placeholder('content')->captureEnd() ?>

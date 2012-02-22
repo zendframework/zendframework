@@ -290,14 +290,14 @@ class PaginatorTest extends TestCase
      */
     public function testRendersWithoutPartial()
     {
-        $this->_paginator->setView(new View\PhpRenderer());
+        $this->_paginator->setView(new View\Renderer\PhpRenderer());
         $string = @$this->_paginator->__toString();
         $this->assertEquals('', $string);
     }
 
     public function testRendersWithPartial()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         $view->resolver()->addPath(__DIR__ . '/_files/scripts');
 
         Helper\PaginationControl::setDefaultViewPartial('partial.phtml');
@@ -531,14 +531,14 @@ class PaginatorTest extends TestCase
 
     public function testGetsAndSetsView()
     {
-        $this->_paginator->setView(new View\PhpRenderer());
+        $this->_paginator->setView(new View\Renderer\PhpRenderer());
         $this->assertInstanceOf('Zend\\View\\Renderer', $this->_paginator->getView());
     }
 
     public function testRenders()
     {
         $this->setExpectedException('Zend\\View\\Exception', 'view partial');
-        $this->_paginator->render(new View\PhpRenderer());
+        $this->_paginator->render(new View\Renderer\PhpRenderer());
     }
 
     public function testGetsAndSetsPageRange()

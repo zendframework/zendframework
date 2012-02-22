@@ -25,7 +25,7 @@ use Zend\Dojo\View\Helper\Dojo as DojoHelper,
     Zend\Dojo\View\Helper\Dojo\Container as DojoContainer,
     Zend\Json\Json,
     Zend\Registry,
-    Zend\View\PhpRenderer,
+    Zend\View\Renderer\PhpRenderer,
     Zend\View\Renderer;
 
 /**

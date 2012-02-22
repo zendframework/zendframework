@@ -24,7 +24,7 @@
  */
 namespace ZendTest\View\Helper\Placeholder;
 
-use Zend\View\PhpRenderer as View;
+use Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_View_Helper_Placeholder_StandaloneContainer.

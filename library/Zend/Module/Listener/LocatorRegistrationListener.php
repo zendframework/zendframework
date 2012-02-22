@@ -51,11 +51,13 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
     {
         $events = StaticEventManager::getInstance();
         $moduleManager = $e->getTarget();
+
+        // Shared instance for module manager
         $events->attach('bootstrap', 'bootstrap', function ($e) use ($moduleManager) {
             $moduleClassName = get_class($moduleManager);
             $im = $e->getParam('application')->getLocator()->instanceManager();
-            if (!$im->hasTypePreferences($moduleClassName)) {
-                $im->addTypePreference($moduleClassName, $moduleManager);
+            if (!$im->hasSharedInstance($moduleClassName)) {
+                $im->addSharedInstance($moduleManager, $moduleClassName);
             }
         }, 1000);
 
@@ -85,8 +87,8 @@ class LocatorRegistrationListener extends AbstractListener implements ListenerAg
 
         foreach ($this->modules as $module) {
             $moduleClassName = get_class($module);
-            if (!$im->hasTypePreferences($moduleClassName)) {
-                $im->addTypePreference($moduleClassName, $module);
+            if (!$im->hasSharedInstance($moduleClassName)) {
+                $im->addSharedInstance($module, $moduleClassName);
             }
         }
     }

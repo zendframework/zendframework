@@ -60,7 +60,7 @@ class LocatorRegistrationTest extends TestCase
         set_include_path($this->includePath);
     }
 
-    public function testModuleClassIsRegisteredWithDiAndInjectedWithTypeHints()
+    public function testModuleClassIsRegisteredWithDiAndInjectedWithSharedInstances()
     {
         $locatorRegistrationListener = new LocatorRegistrationListener;
         $this->moduleManager->events()->attachAggregate($locatorRegistrationListener);
@@ -74,15 +74,13 @@ class LocatorRegistrationTest extends TestCase
         $application     = new Application;
         $bootstrap->bootstrap($application);
         $locator         = $application->getLocator();
-        $typePreferences1 = $locator->instanceManager()->getTypePreferences('ListenerTestModule\Module');
-        $typePreferences2 = $locator->instanceManager()->getTypePreferences('Zend\Module\Manager');
+        $sharedInstance1 = $locator->instanceManager()->getSharedInstance('ListenerTestModule\Module');
+        $sharedInstance2 = $locator->instanceManager()->getSharedInstance('Zend\Module\Manager');
 
-        $this->assertEquals(1, count($typePreferences1));
-        $this->assertInstanceOf('ListenerTestModule\Module', $typePreferences1[0]);
+        $this->assertInstanceOf('ListenerTestModule\Module', $sharedInstance1);
         $this->assertSame($this->module, $locator->get('Foo\Bar')->module);
 
-        $this->assertEquals(1, count($typePreferences2));
-        $this->assertInstanceOf('Zend\Module\Manager', $typePreferences2[0]);
+        $this->assertInstanceOf('Zend\Module\Manager', $sharedInstance2);
         $this->assertSame($this->moduleManager, $locator->get('Foo\Bar')->moduleManager);
     }
 }

@@ -45,21 +45,21 @@ class Mvc extends AbstractPage
      *
      * @var string
      */
-    protected $_action;
+    protected $action;
 
     /**
      * Controller name to use when assembling URL
      *
      * @var string
      */
-    protected $_controller;
+    protected $controller;
 
     /**
      * Module name to use when assembling URL
      *
      * @var string
      */
-    protected $_module;
+    protected $module;
 
     /**
      * Params to use when assembling URL
@@ -67,7 +67,7 @@ class Mvc extends AbstractPage
      * @see getHref()
      * @var array
      */
-    protected $_params = array();
+    protected $params = array();
 
     /**
      * Route name to use when assembling URL
@@ -75,7 +75,7 @@ class Mvc extends AbstractPage
      * @see getHref()
      * @var string
      */
-    protected $_route;
+    protected $route;
 
     /**
      * Whether params should be reset when assembling URL
@@ -83,15 +83,15 @@ class Mvc extends AbstractPage
      * @see getHref()
      * @var bool
      */
-    protected $_resetParams = true;
+    protected $resetParams = true;
 
     /**
      * Whether href should be encoded when assembling URL
      *
      * @see getHref()
-     * @var bool 
+     * @var bool
      */
-    protected $_encodeUrl = true;
+    protected $encodeUrl = true;
 
     /**
      * Cached href
@@ -102,7 +102,7 @@ class Mvc extends AbstractPage
      *
      * @var string
      */
-    protected $_hrefCache;
+    protected $hrefCache;
 
     /**
      * Action helper for assembling URLs
@@ -110,7 +110,7 @@ class Mvc extends AbstractPage
      * @see getHref()
      * @var \Zend\Controller\Action\Helper\Url
      */
-    protected static $_urlHelper = null;
+    protected static $urlHelper = null;
 
     // Accessors:
 
@@ -123,41 +123,43 @@ class Mvc extends AbstractPage
      * @param  bool $recursive  [optional] whether page should be considered
      *                          active if any child pages are active. Default is
      *                          false.
+     *
      * @return bool             whether page should be considered active or not
      */
     public function isActive($recursive = false)
     {
-        if (!$this->_active) {
-            $front = FrontController::getInstance();
+        if (!$this->active) {
+            $front     = FrontController::getInstance();
             $reqParams = $front->getRequest()->getParams();
 
             if (!array_key_exists('module', $reqParams)) {
                 $reqParams['module'] = $front->getDefaultModule();
             }
 
-            $myParams = $this->_params;
+            $myParams = $this->params;
 
-            if (null !== $this->_module) {
-                $myParams['module'] = $this->_module;
+            if (null !== $this->module) {
+                $myParams['module'] = $this->module;
             } else {
                 $myParams['module'] = $front->getDefaultModule();
             }
 
-            if (null !== $this->_controller) {
-                $myParams['controller'] = $this->_controller;
+            if (null !== $this->controller) {
+                $myParams['controller'] = $this->controller;
             } else {
                 $myParams['controller'] = $front->getDefaultControllerName();
             }
 
-            if (null !== $this->_action) {
-                $myParams['action'] = $this->_action;
+            if (null !== $this->action) {
+                $myParams['action'] = $this->action;
             } else {
                 $myParams['action'] = $front->getDefaultAction();
             }
 
             if (count(array_intersect_assoc($reqParams, $myParams)) ==
-                count($myParams)) {
-                $this->_active = true;
+                count($myParams)
+            ) {
+                $this->active = true;
                 return true;
             }
         }
@@ -175,14 +177,14 @@ class Mvc extends AbstractPage
      */
     public function getHref()
     {
-        if ($this->_hrefCache) {
-            return $this->_hrefCache;
+        if ($this->hrefCache) {
+            return $this->hrefCache;
         }
 
-        if (null === self::$_urlHelper) {
-            $front  = FrontController::getInstance();
-            $broker = $front->getHelperBroker();
-            self::$_urlHelper = $broker->load('url');
+        if (null === self::$urlHelper) {
+            $front           = FrontController::getInstance();
+            $broker          = $front->getHelperBroker();
+            self::$urlHelper = $broker->load('url');
         }
 
         $params = $this->getParams();
@@ -198,19 +200,21 @@ class Mvc extends AbstractPage
         if (($param = $this->getAction()) != null) {
             $params['action'] = $param;
         }
-        
-        $url = self::$_urlHelper->__invoke($params,
-                                      $this->getRoute(),
-                                      $this->getResetParams(),
-                                      $this->getEncodeUrl());
+
+        $url = self::$urlHelper->__invoke(
+            $params,
+            $this->getRoute(),
+            $this->getResetParams(),
+            $this->getEncodeUrl()
+        );
 
         // Add the fragment identifier if it is set
-        $fragment = $this->getFragment();       
+        $fragment = $this->getFragment();
         if (null !== $fragment) {
             $url .= '#' . $fragment;
-        } 
+        }
 
-        return $this->_hrefCache = $url;
+        return $this->hrefCache = $url;
     }
 
     /**
@@ -219,6 +223,7 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string $action             action name
+     *
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
      * @throws \Zend\Navigation\InvalidArgumentException  if invalid $action is given
      */
@@ -226,11 +231,12 @@ class Mvc extends AbstractPage
     {
         if (null !== $action && !is_string($action)) {
             throw new InvalidArgumentException(
-                    'Invalid argument: $action must be a string or null');
+                'Invalid argument: $action must be a string or null'
+            );
         }
 
-        $this->_action = $action;
-        $this->_hrefCache = null;
+        $this->action    = $action;
+        $this->hrefCache = null;
         return $this;
     }
 
@@ -243,7 +249,7 @@ class Mvc extends AbstractPage
      */
     public function getAction()
     {
-        return $this->_action;
+        return $this->action;
     }
 
     /**
@@ -252,6 +258,7 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string|null $controller    controller name
+     *
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
      * @throws \Zend\Navigation\InvalidArgumentException  if invalid controller name is given
      */
@@ -259,11 +266,12 @@ class Mvc extends AbstractPage
     {
         if (null !== $controller && !is_string($controller)) {
             throw new InvalidArgumentException(
-                    'Invalid argument: $controller must be a string or null');
+                'Invalid argument: $controller must be a string or null'
+            );
         }
 
-        $this->_controller = $controller;
-        $this->_hrefCache = null;
+        $this->controller = $controller;
+        $this->hrefCache  = null;
         return $this;
     }
 
@@ -276,7 +284,7 @@ class Mvc extends AbstractPage
      */
     public function getController()
     {
-        return $this->_controller;
+        return $this->controller;
     }
 
     /**
@@ -285,6 +293,7 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string|null $module        module name
+     *
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
      * @throws \Zend\Navigation\InvalidArgumentException  if invalid module name is given
      */
@@ -292,11 +301,12 @@ class Mvc extends AbstractPage
     {
         if (null !== $module && !is_string($module)) {
             throw new InvalidArgumentException(
-                    'Invalid argument: $module must be a string or null');
+                'Invalid argument: $module must be a string or null'
+            );
         }
 
-        $this->_module = $module;
-        $this->_hrefCache = null;
+        $this->module    = $module;
+        $this->hrefCache = null;
         return $this;
     }
 
@@ -309,7 +319,7 @@ class Mvc extends AbstractPage
      */
     public function getModule()
     {
-        return $this->_module;
+        return $this->module;
     }
 
     /**
@@ -319,18 +329,19 @@ class Mvc extends AbstractPage
      *
      * @param  array|null $params        [optional] page params. Default is null
      *                                   which sets no params.
+     *
      * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
      */
     public function setParams(array $params = null)
     {
         if (null === $params) {
-            $this->_params = array();
+            $this->params = array();
         } else {
             // TODO: do this more intelligently?
-            $this->_params = $params;
+            $this->params = $params;
         }
 
-        $this->_hrefCache = null;
+        $this->hrefCache = null;
         return $this;
     }
 
@@ -343,7 +354,7 @@ class Mvc extends AbstractPage
      */
     public function getParams()
     {
-        return $this->_params;
+        return $this->params;
     }
 
     /**
@@ -352,6 +363,7 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string $route              route name to use when assembling URL
+     *
      * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
      * @throws \Zend\Navigation\InvalidArgumentException  if invalid $route is given
      */
@@ -359,11 +371,12 @@ class Mvc extends AbstractPage
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
             throw new InvalidArgumentException(
-                 'Invalid argument: $route must be a non-empty string or null');
+                'Invalid argument: $route must be a non-empty string or null'
+            );
         }
 
-        $this->_route = $route;
-        $this->_hrefCache = null;
+        $this->route     = $route;
+        $this->hrefCache = null;
         return $this;
     }
 
@@ -376,7 +389,7 @@ class Mvc extends AbstractPage
      */
     public function getRoute()
     {
-        return $this->_route;
+        return $this->route;
     }
 
     /**
@@ -386,12 +399,13 @@ class Mvc extends AbstractPage
      *
      * @param  bool $resetParams         whether params should be reset when
      *                                   assembling URL
+     *
      * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
      */
     public function setResetParams($resetParams)
     {
-        $this->_resetParams = (bool) $resetParams;
-        $this->_hrefCache = null;
+        $this->resetParams = (bool)$resetParams;
+        $this->hrefCache   = null;
         return $this;
     }
 
@@ -404,36 +418,37 @@ class Mvc extends AbstractPage
      */
     public function getResetParams()
     {
-        return $this->_resetParams;
+        return $this->resetParams;
     }
 
     /**
      * Sets whether href should be encoded when assembling URL
-     * 
+     *
      * @see getHref()
      *
      * @param bool $resetParams         whether href should be encoded when
      *                                  assembling URL
+     *
      * @return \Zend\Navigation\Page\Mvc fluent interface, returns self
      */
     public function setEncodeUrl($encodeUrl)
     {
-        $this->_encodeUrl = (bool) $encodeUrl;
-        $this->_hrefCache = null;
-        
+        $this->encodeUrl = (bool) $encodeUrl;
+        $this->hrefCache = null;
+
         return $this;
     }
-    
+
     /**
      * Returns whether herf should be encoded when assembling URL
-     * 
+     *
      * @see getHref()
      *
-     * @return bool whether herf should be encoded when assembling URL 
+     * @return bool whether herf should be encoded when assembling URL
      */
     public function getEncodeUrl()
     {
-        return $this->_encodeUrl;
+        return $this->encodeUrl;
     }
 
     /**
@@ -442,11 +457,12 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  \Zend\Controller\Action\Helper\Url $uh  URL helper
+     *
      * @return void
      */
     public static function setUrlHelper(\Zend\Controller\Action\Helper\Url $uh)
     {
-        self::$_urlHelper = $uh;
+        self::$urlHelper = $uh;
     }
 
     // Public methods:
@@ -461,13 +477,14 @@ class Mvc extends AbstractPage
         return array_merge(
             parent::toArray(),
             array(
-                'action'       => $this->getAction(),
-                'controller'   => $this->getController(),
-                'module'       => $this->getModule(),
-                'params'       => $this->getParams(),
-                'route'        => $this->getRoute(),
-                'reset_params' => $this->getResetParams(),
-                'encodeUrl'    => $this->getEncodeUrl(),
-            ));
+                 'action'       => $this->getAction(),
+                 'controller'   => $this->getController(),
+                 'module'       => $this->getModule(),
+                 'params'       => $this->getParams(),
+                 'route'        => $this->getRoute(),
+                 'reset_params' => $this->getResetParams(),
+                 'encodeUrl'    => $this->getEncodeUrl(),
+            )
+        );
     }
 }

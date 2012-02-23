@@ -257,10 +257,14 @@ class EventManager implements EventCollection
      * @param  string $event
      * @param  callback $callback PHP callback
      * @param  int $priority If provided, the priority at which to register the callback
-     * @return ListenerAggregate (to allow later unsubscribe)
+     * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
      */
-    public function attach($event, $callback, $priority = 1)
+    public function attach($event, $callback = null, $priority = 1)
     {
+        if ($event instanceof ListenerAggregate) {
+            return $this->attachAggregate($event, $callback);
+        }
+
         if (empty($this->events[$event])) {
             $this->events[$event] = new PriorityQueue();
         }
@@ -277,21 +281,38 @@ class EventManager implements EventCollection
      * methods.
      *
      * @param  ListenerAggregate $aggregate
+     * @param  int $priority If provided, a suggested priority for the aggregate to use
      * @return mixed return value of {@link ListenerAggregate::attach()}
      */
-    public function attachAggregate(ListenerAggregate $aggregate)
+    public function attachAggregate(ListenerAggregate $aggregate, $priority = null)
     {
-        return $aggregate->attach($this);
+        if (null === $priority || !is_scalar($priority)) {
+            $priority = 1;
+        }
+        return $aggregate->attach($this, (int) $priority);
     }
 
     /**
      * Unsubscribe a listener from an event
      *
-     * @param  CallbackHandler $listener
+     * @param  CallbackHandler|ListenerAggregate $listener
      * @return bool Returns true if event and listener found, and unsubscribed; returns false if either event or listener not found
+     * @throws Exception\InvalidArgumentException if invalid listener provided
      */
-    public function detach(CallbackHandler $listener)
+    public function detach($listener)
     {
+        if ($listener instanceof ListenerAggregate) {
+            return $this->detachAggregate($listener);
+        }
+
+        if (!$listener instanceof CallbackHandler) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: expected a ListenerAggregate or CallbackHandler; received "%s"',
+                __METHOD__,
+                (is_object($listener) ? get_class($listener) : gettype($listener))
+            ));
+        }
+
         $event = $listener->getMetadatum('event');
         if (!$event || empty($this->events[$event])) {
             return false;

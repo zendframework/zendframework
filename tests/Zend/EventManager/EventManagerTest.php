@@ -227,6 +227,16 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testCanAttachListenerAggregateViaAttach()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attach($aggregate);
+        $events = $this->events->getEvents();
+        foreach (array('foo.bar', 'foo.baz') as $event) {
+            $this->assertContains($event, $events);
+        }
+    }
+
     public function testAttachAggregateReturnsAttachOfListenerAggregate()
     {
         $aggregate = new TestAsset\MockAggregate();
@@ -245,6 +255,36 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $aggregate = new TestAsset\MockAggregate();
         $this->events->attachAggregate($aggregate);
         $this->events->detachAggregate($aggregate);
+        $events = $this->events->getEvents();
+        foreach (array('foo.bar', 'foo.baz', 'other') as $event) {
+            $this->assertContains($event, $events);
+        }
+
+        $listeners = $this->events->getListeners('foo.bar');
+        $this->assertEquals(2, count($listeners));
+        $this->assertContains($listenerFooBar1, $listeners);
+        $this->assertContains($listenerFooBar2, $listeners);
+
+        $listeners = $this->events->getListeners('foo.baz');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerFooBaz1, $listeners);
+
+        $listeners = $this->events->getListeners('other');
+        $this->assertEquals(1, count($listeners));
+        $this->assertContains($listenerOther, $listeners);
+    }
+
+    public function testCanDetachListenerAggregatesViaDetach()
+    {
+        // setup some other event listeners, to ensure appropriate items are detached
+        $listenerFooBar1 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBar2 = $this->events->attach('foo.bar', function(){ return true; });
+        $listenerFooBaz1 = $this->events->attach('foo.baz', function(){ return true; });
+        $listenerOther   = $this->events->attach('other', function(){ return true; });
+
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attach($aggregate);
+        $this->events->detach($aggregate);
         $events = $this->events->getEvents();
         foreach (array('foo.bar', 'foo.baz', 'other') as $event) {
             $this->assertContains($event, $events);

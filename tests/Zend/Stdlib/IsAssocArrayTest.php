@@ -22,6 +22,13 @@ class IsAssocArrayTest extends TestCase
         );
     }
 
+    public static function validAssocEmptyArrays()
+    {
+        $array = self::validAssocArrays();
+        $array[] = array(array());
+        return $array;
+    }
+
     public static function invalidAssocArrays()
     {
         return array(
@@ -47,10 +54,26 @@ class IsAssocArrayTest extends TestCase
     }
 
     /**
+     * @dataProvider validAssocEmptyArrays
+     */
+    public function testValidAssocEmptyArraysReturnTrue($test)
+    {
+        $this->assertTrue(isAssocArray::test($test, true));
+    }
+
+    /**
      * @dataProvider invalidAssocArrays
      */
     public function testInvalidAssocArraysReturnFalse($test)
     {
         $this->assertFalse(IsAssocArray::test($test));
+    }
+
+    /**
+     * @dataProvider invalidAssocArrays
+     */
+    public function testInvalidAssocEmptyArraysReturnFalse($test)
+    {
+        $this->assertFalse(IsAssocArray::test($test, true));
     }
 }

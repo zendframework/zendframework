@@ -81,6 +81,19 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($map));
     }
 
+    /**
+     * This tests checks if invalid autoloaders cause exceptions
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testFactoryCatchesInvalidClasses()
+    {
+        include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
+        AutoloaderFactory::factory(array(
+            'InvalidInterfaceAutoloader' => array()            
+        ));
+    }
+
     public function testFactoryDoesNotRegisterDuplicateAutoloaders()
     {
         AutoloaderFactory::factory(array(

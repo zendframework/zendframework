@@ -116,17 +116,17 @@ class Socket implements HttpAdapter, Stream
         }
     }
 
-	/**
- 	 * Retrieve the array of all configuration options
- 	 *
- 	 * @return array
- 	 */
+    /**
+     * Retrieve the array of all configuration options
+     *
+     * @return array
+     */
  	public function getConfig()
  	{
  	    return $this->config;
  	}
 
- 	/**
+    /**
      * Set the stream context for the TCP connection to the server
      *
      * Can accept either a pre-existing stream context resource, or an array
@@ -320,7 +320,7 @@ class Socket implements HttpAdapter, Stream
         if ($statusCode == 100 || $statusCode == 101) return $this->read();
 
         // Check headers to see what kind of connection / transfer encoding we have
-        $headers = $responseObj->headers()->toArray();
+        $headers = $responseObj->headers();
 
         /**
          * Responses to HEAD requests and 204 or 304 responses are not expected
@@ -330,16 +330,19 @@ class Socket implements HttpAdapter, Stream
             $this->method == \Zend\Http\Request::METHOD_HEAD) {
 
             // Close the connection if requested to do so by the server
-            if (isset($headers['connection']) && $headers['connection'] == 'close') {
+            $connection = $headers->get('connection');
+            if ($connection !== false && $connection->getFieldValue() == 'close') {
                 $this->close();
             }
             return $response;
         }
 
         // If we got a 'transfer-encoding: chunked' header
-        if (isset($headers['transfer-encoding'])) {
+        $transfer_encoding = $headers->get('transfer-encoding');
+        $content_length = $headers->get('content-length');
+        if ($transfer_encoding !== false) {
             
-            if (strtolower($headers['transfer-encoding']) == 'chunked') {
+            if (strtolower($transfer_encoding->getFieldValue()) == 'chunked') {
 
                 do {
                     $line  = @fgets($this->socket);
@@ -390,7 +393,7 @@ class Socket implements HttpAdapter, Stream
             } else {
                 $this->close();
                 throw new AdapterException\RuntimeException('Cannot handle "' .
-                    $headers['transfer-encoding'] . '" transfer encoding');
+                    $transfer_encoding->getFieldValue() . '" transfer encoding');
             }
             
             // We automatically decode chunked-messages when writing to a stream
@@ -399,15 +402,14 @@ class Socket implements HttpAdapter, Stream
                 $response = str_ireplace("Transfer-Encoding: chunked\r\n", '', $response);
             }
         // Else, if we got the content-length header, read this number of bytes
-        } elseif (isset($headers['content-length'])) {
+        } elseif ($content_length !== false) {
 
             // If we got more than one Content-Length header (see ZF-9404) use
             // the last value sent
-            if (is_array($headers['content-length'])) {
-                $contentLength = $headers['content-length'][count($headers['content-length']) - 1]; 
-            } else {
-                $contentLength = $headers['content-length'];
+            if (is_array($content_length)) {
+                $content_length = $content_length[count($content_length) - 1];
             }
+            $contentLength = $content_length->getFieldValue();
             
             $current_pos = ftell($this->socket);
             $chunk = '';
@@ -460,7 +462,8 @@ class Socket implements HttpAdapter, Stream
         }
 
         // Close the connection if requested to do so by the server
-        if (isset($headers['connection']) && $headers['connection'] == 'close') {
+        $connection = $headers->get('connection');
+        if ($connection !== false && $connection->getFieldValue() == 'close') {
             $this->close();
         }
 

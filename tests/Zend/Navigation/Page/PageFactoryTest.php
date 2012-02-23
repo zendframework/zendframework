@@ -24,7 +24,7 @@
  */
 namespace ZendTest\Navigation;
 
-use Zend\Navigation\AbstractPage,
+use Zend\Navigation\Page\AbstractPage,
     Zend\Navigation;
 
 /**

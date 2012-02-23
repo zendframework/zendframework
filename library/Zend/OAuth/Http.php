@@ -223,10 +223,10 @@ class Http
     {
         switch ($this->_preferredRequestScheme) {
             case OAuth::REQUEST_SCHEME_HEADER:
-                $this->_preferredRequestScheme = OAuth\OAuth::REQUEST_SCHEME_POSTBODY;
+                $this->_preferredRequestScheme = OAuth::REQUEST_SCHEME_POSTBODY;
                 break;
             case OAuth::REQUEST_SCHEME_POSTBODY:
-                $this->_preferredRequestScheme = OAuth\OAuth::REQUEST_SCHEME_QUERYSTRING;
+                $this->_preferredRequestScheme = OAuth::REQUEST_SCHEME_QUERYSTRING;
                 break;
             default:
                 throw new Exception(

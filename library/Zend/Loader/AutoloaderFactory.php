@@ -76,7 +76,9 @@ abstract class AutoloaderFactory
     {
         if (null === $options) {
             if (!isset(static::$loaders[static::STANDARD_AUTOLOADER])) {
-                static::$loaders[static::STANDARD_AUTOLOADER] = static::getStandardAutoloader();
+                $autoloader = static::getStandardAutoloader();
+                $autoloader->register();
+                static::$loaders[static::STANDARD_AUTOLOADER] = $autoloader;
             }
 
             // Return so we don't hit the next check's exception (we're done here anyway)

@@ -187,4 +187,23 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $constructor = $reflection->getConstructor();
         $this->assertNull($constructor);
     }
+
+    public function testPassingNoArgumentsToFactoryInstantiatesAndRegistersStandardAutoloader()
+    {
+        AutoloaderFactory::factory();
+        $loaders = AutoloaderFactory::getRegisteredAutoloaders();
+        $this->assertEquals(1, count($loaders));
+        $loader = array_shift($loaders);
+        $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $loader);
+
+        $test  = array($loader, 'autoload');
+        $found = false;
+        foreach (spl_autoload_functions() as $function) {
+            if ($function === $test) {
+                $found = true;
+                break;
+            }
+        }
+        $this->assertTrue($found, 'StandardAutoloader not registered with spl_autoload');
+    }
 }

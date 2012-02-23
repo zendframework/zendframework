@@ -112,7 +112,7 @@ class GenericTag implements Tag
     
     protected function parse($docblockLine)
     {
-        $this->values = explode($docblockLine, $this->contentSplitCharacter);
+        $this->values = explode($this->contentSplitCharacter, $docblockLine);
     }
     
 }

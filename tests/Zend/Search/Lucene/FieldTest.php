@@ -63,7 +63,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::Keyword('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   true);
         $this->assertEquals($field->isStored,    true);
@@ -78,7 +78,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::Text('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   true);
         $this->assertEquals($field->isStored,    true);
@@ -93,7 +93,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::UnIndexed('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   false);
         $this->assertEquals($field->isStored,    true);
@@ -108,7 +108,7 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $field = Document\Field::UnStored('field', 'value');
 
         $this->assertEquals($field->boost, 1);
-        $this->assertEquals($field->encoding, '');
+        $this->assertEquals($field->encoding, 'UTF-8');
         $this->assertEquals($field->isBinary,    false);
         $this->assertEquals($field->isIndexed,   true);
         $this->assertEquals($field->isStored,    false);

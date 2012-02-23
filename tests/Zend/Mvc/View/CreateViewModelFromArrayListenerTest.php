@@ -117,4 +117,12 @@ class CreateViewModelFromArrayListenerTest extends TestCase
         $listeners = $events->getListeners('dispatch');
         $this->assertEquals(0, count($listeners));
     }
+
+    public function testViewModelCreatesViewModelWithEmptyArray()
+    {
+        $this->event->setResult(array());
+        $this->listener->createViewModelFromArray($this->event);
+        $result = $this->event->getResult();
+        $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
+    }
 }

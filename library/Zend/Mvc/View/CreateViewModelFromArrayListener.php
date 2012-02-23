@@ -71,7 +71,7 @@ class CreateViewModelFromArrayListener implements ListenerAggregate
     public function createViewModelFromArray(MvcEvent $e)
     {
         $result = $e->getResult();
-        if (!IsAssocArray::test($result)) {
+        if (!IsAssocArray::test($result, true)) {
             return;
         }
 

@@ -40,8 +40,8 @@ return array(
     "Invalid type given. String expected" => "Ugyldig typen gitt. Streng forventet",
 
     // Zend_Validate_Between
-    "'%value%' is not between '%min%' and '%max%', inclusively" => "'%value%' is not between '%min%' and '%max%', inclusively",
-    "'%value%' is not strictly between '%min%' and '%max%'" => "'%value%' is not strictly between '%min%' and '%max%'",
+    "'%value%' is not between '%min%' and '%max%', inclusively" => "'%value%' er ikke mellom '%min%' og '%max%', inkluderende",
+    "'%value%' is not strictly between '%min%' and '%max%'" => "'%value%' er ikke strengt talt mellom '%min%' og '%max%'",
 
     // Zend_Validate_Callback
     "'%value%' is not valid" => "'%value%' is not valid",

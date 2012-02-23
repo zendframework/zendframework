@@ -48,8 +48,8 @@ return array(
     "An exception has been raised within the callback" => "Et unntak er hevet innen tilbakeringingen",
 
     // Zend_Validate_Ccnum
-    "'%value%' must contain between 13 and 19 digits" => "'%value%' must contain between 13 and 19 digits",
-    "Luhn algorithm (mod-10 checksum) failed on '%value%'" => "Luhn algorithm (mod-10 checksum) failed on '%value%'",
+    "'%value%' must contain between 13 and 19 digits" => "'%value%' må inneholde mellom 13 og 19 siffer",
+    "Luhn algorithm (mod-10 checksum) failed on '%value%'" => "Luhn algoritmen (mod-10 checksum) mislyktes på '%value%'",
 
     // Zend_Validate_CreditCard
     "'%value%' seems to contain an invalid checksum" => "'%value%' seems to contain an invalid checksum",

@@ -44,8 +44,8 @@ return array(
     "'%value%' is not strictly between '%min%' and '%max%'" => "'%value%' er ikke strengt talt mellom '%min%' og '%max%'",
 
     // Zend_Validate_Callback
-    "'%value%' is not valid" => "'%value%' is not valid",
-    "An exception has been raised within the callback" => "An exception has been raised within the callback",
+    "'%value%' is not valid" => "'%value%' er ikke gyldig",
+    "An exception has been raised within the callback" => "Et unntak er hevet innen tilbakeringingen",
 
     // Zend_Validate_Ccnum
     "'%value%' must contain between 13 and 19 digits" => "'%value%' must contain between 13 and 19 digits",

@@ -22,6 +22,7 @@
  * @namespace
  */
 namespace Zend\Navigation;
+
 use Zend\Config;
 
 /**
@@ -46,21 +47,21 @@ abstract class Container implements \RecursiveIterator, \Countable
      *
      * @var array
      */
-    protected $_pages = array();
+    protected $pages = array();
 
     /**
      * An index that contains the order in which to iterate pages
      *
      * @var array
      */
-    protected $_index = array();
+    protected $index = array();
 
     /**
      * Whether index is dirty and needs to be re-arranged
      *
      * @var bool
      */
-    protected $_dirtyIndex = false;
+    protected $dirtyIndex = false;
 
     // Internal methods:
 
@@ -71,11 +72,11 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     protected function _sort()
     {
-        if ($this->_dirtyIndex) {
+        if ($this->dirtyIndex) {
             $newIndex = array();
             $index = 0;
 
-            foreach ($this->_pages as $hash => $page) {
+            foreach ($this->pages as $hash => $page) {
                 $order = $page->getOrder();
                 if ($order === null) {
                     $newIndex[$hash] = $index;
@@ -86,8 +87,8 @@ abstract class Container implements \RecursiveIterator, \Countable
             }
 
             asort($newIndex);
-            $this->_index = $newIndex;
-            $this->_dirtyIndex = false;
+            $this->index = $newIndex;
+            $this->dirtyIndex = false;
         }
     }
 
@@ -100,7 +101,7 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     public function notifyOrderUpdated()
     {
-        $this->_dirtyIndex = true;
+        $this->dirtyIndex = true;
     }
 
     /**
@@ -118,28 +119,30 @@ abstract class Container implements \RecursiveIterator, \Countable
     {
         if ($page === $this) {
             throw new Exception\InvalidArgumentException(
-                'A page cannot have itself as a parent');
+                'A page cannot have itself as a parent'
+            );
         }
 
         if (is_array($page) || $page instanceof Config\Config) {
             $page = AbstractPage::factory($page);
         } elseif (!$page instanceof AbstractPage) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $page must be an instance of ' .
-                    'Zend_Navigation_Page or Zend_Config, or an array');
+                'Invalid argument: $page must be an instance of '
+                . 'Zend_Navigation_Page or Zend_Config, or an array'
+            );
         }
 
         $hash = $page->hashCode();
 
-        if (array_key_exists($hash, $this->_index)) {
+        if (array_key_exists($hash, $this->index)) {
             // page is already in container
             return $this;
         }
 
         // adds page to container and sets dirty flag
-        $this->_pages[$hash] = $page;
-        $this->_index[$hash] = $page->getOrder();
-        $this->_dirtyIndex = true;
+        $this->pages[$hash] = $page;
+        $this->index[$hash] = $page->getOrder();
+        $this->dirtyIndex = true;
 
         // inject self as page parent
         $page->setParent($this);
@@ -201,7 +204,7 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     public function getPages()
     {
-        return $this->_pages;
+        return $this->pages;
     }
 
     /**
@@ -218,17 +221,17 @@ abstract class Container implements \RecursiveIterator, \Countable
             $hash = $page->hashCode();
         } elseif (is_int($page)) {
             $this->_sort();
-            if (!$hash = array_search($page, $this->_index)) {
+            if (!$hash = array_search($page, $this->index)) {
                 return false;
             }
         } else {
             return false;
         }
 
-        if (isset($this->_pages[$hash])) {
-            unset($this->_pages[$hash]);
-            unset($this->_index[$hash]);
-            $this->_dirtyIndex = true;
+        if (isset($this->pages[$hash])) {
+            unset($this->pages[$hash]);
+            unset($this->index[$hash]);
+            $this->dirtyIndex = true;
             return true;
         }
 
@@ -242,8 +245,8 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     public function removePages()
     {
-        $this->_pages = array();
-        $this->_index = array();
+        $this->pages = array();
+        $this->index = array();
         return $this;
     }
 
@@ -257,10 +260,10 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     public function hasPage(AbstractPage $page, $recursive = false)
     {
-        if (array_key_exists($page->hashCode(), $this->_index)) {
+        if (array_key_exists($page->hashCode(), $this->index)) {
             return true;
         } elseif ($recursive) {
-            foreach ($this->_pages as $childPage) {
+            foreach ($this->pages as $childPage) {
                 if ($childPage->hasPage($page, true)) {
                     return true;
                 }
@@ -277,7 +280,7 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     public function hasPages()
     {
-        return count($this->_index) > 0;
+        return count($this->index) > 0;
     }
 
     /**
@@ -369,10 +372,13 @@ abstract class Container implements \RecursiveIterator, \Countable
             return $this->{$match[1]}($match[2], $arguments[0]);
         }
 
-        throw new Exception\BadMethodCallException(sprintf(
+        throw new Exception\BadMethodCallException(
+            sprintf(
                 'Bad method call: Unknown method %s::%s',
                 get_class($this),
-                $method));
+                $method
+            )
+        );
     }
 
     /**
@@ -384,11 +390,11 @@ abstract class Container implements \RecursiveIterator, \Countable
     {
         $pages = array();
         
-        $this->_dirtyIndex = true;
+        $this->dirtyIndex = true;
         $this->_sort();
-        $indexes = array_keys($this->_index);
+        $indexes = array_keys($this->index);
         foreach ($indexes as $hash) {
-            $pages[] = $this->_pages[$hash]->toArray();
+            $pages[] = $this->pages[$hash]->toArray();
         }
         return $pages;
     }
@@ -406,15 +412,16 @@ abstract class Container implements \RecursiveIterator, \Countable
     public function current()
     {
         $this->_sort();
-        current($this->_index);
-        $hash = key($this->_index);
+        current($this->index);
+        $hash = key($this->index);
 
-        if (isset($this->_pages[$hash])) {
-            return $this->_pages[$hash];
+        if (isset($this->pages[$hash])) {
+            return $this->pages[$hash];
         } else {
             throw new Exception\OutOfBoundsException(
-                    'Corruption detected in container; ' .
-                    'invalid key found in internal iterator');
+                'Corruption detected in container; '
+                . 'invalid key found in internal iterator'
+            );
         }
     }
 
@@ -428,7 +435,7 @@ abstract class Container implements \RecursiveIterator, \Countable
     public function key()
     {
         $this->_sort();
-        return key($this->_index);
+        return key($this->index);
     }
 
     /**
@@ -441,7 +448,7 @@ abstract class Container implements \RecursiveIterator, \Countable
     public function next()
     {
         $this->_sort();
-        next($this->_index);
+        next($this->index);
     }
 
     /**
@@ -454,7 +461,7 @@ abstract class Container implements \RecursiveIterator, \Countable
     public function rewind()
     {
         $this->_sort();
-        reset($this->_index);
+        reset($this->index);
     }
 
     /**
@@ -467,7 +474,7 @@ abstract class Container implements \RecursiveIterator, \Countable
     public function valid()
     {
         $this->_sort();
-        return current($this->_index) !== false;
+        return current($this->index) !== false;
     }
 
     /**
@@ -491,10 +498,10 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     public function getChildren()
     {
-        $hash = key($this->_index);
+        $hash = key($this->index);
 
-        if (isset($this->_pages[$hash])) {
-            return $this->_pages[$hash];
+        if (isset($this->pages[$hash])) {
+            return $this->pages[$hash];
         }
 
         return null;
@@ -511,6 +518,6 @@ abstract class Container implements \RecursiveIterator, \Countable
      */
     public function count()
     {
-        return count($this->_index);
+        return count($this->index);
     }
 }

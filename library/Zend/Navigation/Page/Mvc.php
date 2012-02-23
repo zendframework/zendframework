@@ -24,14 +24,18 @@
  */
 namespace Zend\Navigation\Page;
 
-use Zend\Mvc\Router\RouteMatch,
-    Zend\Navigation\AbstractPage,
-    Zend\Navigation\Exception,
+use Zend\Navigation\Exception,
+    Zend\Mvc\Router\RouteMatch,
     Zend\View\Helper\Url as UrlHelper;
 
 /**
  * Represents a page that is defined using module, controller, action, route
  * name and route params to assemble the href
+ *
+ * @uses       \Zend\Navigation\Exception\DomainException
+ * @uses       \Zend\Navigation\Exception\InvalidArgumentException
+ * @uses       \Zend\Mvc\Router\RouteMatch
+ * @uses       \Zend\View\Helper\Url
  *
  * @category   Zend
  * @package    Zend_Navigation
@@ -181,6 +185,7 @@ class Mvc extends AbstractPage
      * @see UrlHelper
      *
      * @return string  page href
+     * @throws \Zend\Navigation\Exception\DomainException   if no UrlHelper is set
      */
     public function getHref()
     {
@@ -231,8 +236,9 @@ class Mvc extends AbstractPage
      *
      * @param  string $action             action name
      *
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid $action is given
+     * @return \Zend\Navigation\Page\Mvc fluent interface, returns self
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
+     *                                                              $action is given
      */
     public function setAction($action)
     {
@@ -266,8 +272,10 @@ class Mvc extends AbstractPage
      *
      * @param  string|null $controller    controller name
      *
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid controller name is given
+     * @return \Zend\Navigation\Page\Mvc    fluent interface, returns self
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
+     *                                                              controller name
+     *                                                              is given
      */
     public function setController($controller)
     {
@@ -301,8 +309,10 @@ class Mvc extends AbstractPage
      *
      * @param  string|null $module        module name
      *
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid module name is given
+     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
+     *                                                              module name
+     *                                                              is given
      */
     public function setModule($module)
     {
@@ -371,8 +381,9 @@ class Mvc extends AbstractPage
      *
      * @param  string $route              route name to use when assembling URL
      *
-     * @return Mvc   fluent interface, returns self
-     * @throws Exception\InvalidArgumentException  if invalid $route is given
+     * @return \Zend\Navigation\Page\Mvc    fluent interface, returns self
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
+     *                                                              $route is given
      */
     public function setRoute($route)
     {
@@ -404,7 +415,7 @@ class Mvc extends AbstractPage
      *
      * @param  RouteMatch $matches
      *
-     * @return Mvc
+     * @return \Zend\Navigation\Page\Mvc    fluent interface, returns self
      */
     public function setRouteMatch(RouteMatch $matches)
     {
@@ -419,7 +430,7 @@ class Mvc extends AbstractPage
      *
      * @param UrlHelper $helper URL helper plugin
      *
-     * @return Mvc
+     * @return \Zend\Navigation\Page\Mvc    fluent interface, returns self
      */
     public function setUrlHelper(UrlHelper $helper)
     {

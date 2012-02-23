@@ -23,14 +23,17 @@
  */
 namespace Zend\Navigation;
 
+use Zend\Navigation\Exception;
+
 /**
  * A simple container class for {@link Zend_Navigation_Page} pages
  *
  * @uses      \Zend\Navigation\Container
- * @uses      \Zend\Navigation\InvalidArgumentException
+ * @uses      \Zend\Navigation\Exception\InvalidArgumentException
+ *
  * @category  Zend
  * @package   Zend_Navigation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Navigation extends Container
@@ -39,7 +42,8 @@ class Navigation extends Container
      * Creates a new navigation container
      *
      * @param array|\Zend\Config\Config $pages    [optional] pages to add
-     * @throws \Zend\Navigation\InvalidArgumentException  if $pages is invalid
+     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if $pages is
+     *                                                              invalid
      */
     public function __construct($pages = null)
     {

@@ -49,14 +49,14 @@ abstract class AbstractPage extends Container
 
     /**
      * Fragment identifier (anchor identifier)
-     * 
-     * The fragment identifier (anchor identifier) pointing to an anchor within 
+     *
+     * The fragment identifier (anchor identifier) pointing to an anchor within
      * a resource that is subordinate to another, primary resource.
      * The fragment identifier introduced by a hash mark "#".
      * Example: http://www.example.org/foo.html#bar ("bar" is the fragment identifier)
-     * 
+     *
      * @link http://www.w3.org/TR/html401/intro/intro.html#fragment-uri
-     * 
+     *
      * @var string|null
      */
     protected $fragment;
@@ -198,7 +198,8 @@ abstract class AbstractPage extends Container
 
         if (!is_array($options)) {
             throw new Exception\InvalidArgumentException(
-                'Invalid argument: $options must be an array or Zend\Config\Config');
+                'Invalid argument: $options must be an array or Zend\Config\Config'
+            );
         }
 
         if (isset($options['type'])) {
@@ -221,8 +222,8 @@ abstract class AbstractPage extends Container
                 if (!$page instanceof self) {
                     throw new Exception\InvalidArgumentException(
                         sprintf(
-                            'Invalid argument: Detected type "%s", which '
-                            . 'is not an instance of Zend_Navigation_Page',
+                            'Invalid argument: Detected type "%s", which ' .
+                            'is not an instance of Zend_Navigation_Page',
                             $type
                         )
                     );
@@ -262,7 +263,7 @@ abstract class AbstractPage extends Container
         }
 
         // do custom initialization
-        $this->_init();
+        $this->init();
     }
 
     /**
@@ -270,7 +271,7 @@ abstract class AbstractPage extends Container
      *
      * @return void
      */
-    protected function _init()
+    protected function init()
     {
     }
 
@@ -352,11 +353,11 @@ abstract class AbstractPage extends Container
                 'Invalid argument: $fragment must be a string or null'
             );
         }
- 
+
         $this->fragment = $fragment;
         return $this;
     }
-    
+
      /**
      * Returns fragment identifier
      *
@@ -511,8 +512,8 @@ abstract class AbstractPage extends Container
 
             if (!is_array($relations)) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $relations must be an '
-                    . 'array or an instance of Zend\Config'
+                    'Invalid argument: $relations must be an ' .
+                    'array or an instance of Zend\Config'
                 );
             }
 
@@ -574,8 +575,8 @@ abstract class AbstractPage extends Container
 
             if (!is_array($relations)) {
                 throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $relations must be an '
-                    . 'array or an instance of Zend\Config'
+                    'Invalid argument: $relations must be an ' .
+                    'array or an instance of Zend\Config'
                 );
             }
 
@@ -634,8 +635,8 @@ abstract class AbstractPage extends Container
 
         if (null !== $order && !is_int($order)) {
             throw new Exception\InvalidArgumentException(
-                'Invalid argument: $order must be an integer or null, '
-                . 'or a string that casts to an integer'
+                'Invalid argument: $order must be an integer or null, ' .
+                'or a string that casts to an integer'
             );
         }
 
@@ -679,8 +680,8 @@ abstract class AbstractPage extends Container
             $this->resource = $resource;
         } else {
             throw new Exception\InvalidArgumentException(
-                'Invalid argument: $resource must be null, a string, '
-                . ' or an instance of Zend_Acl_Resource_Interface'
+                'Invalid argument: $resource must be null, a string, ' .
+                'or an instance of Zend_Acl_Resource_Interface'
             );
         }
 
@@ -886,7 +887,7 @@ abstract class AbstractPage extends Container
             );
         }
 
-        $method = 'set' . self::_normalizePropertyName($property);
+        $method = 'set' . self::normalizePropertyName($property);
 
         if ($method != 'setOptions' && $method != 'setConfig' &&
             method_exists($this, $method)) {
@@ -917,7 +918,7 @@ abstract class AbstractPage extends Container
             );
         }
 
-        $method = 'get' . self::_normalizePropertyName($property);
+        $method = 'get' . self::normalizePropertyName($property);
 
         if (method_exists($this, $method)) {
             return $this->$method();
@@ -973,7 +974,7 @@ abstract class AbstractPage extends Container
      */
     public function __isset($name)
     {
-        $method = 'get' . self::_normalizePropertyName($name);
+        $method = 'get' . self::normalizePropertyName($name);
         if (method_exists($this, $method)) {
             return true;
         }
@@ -992,7 +993,7 @@ abstract class AbstractPage extends Container
      */
     public function __unset($name)
     {
-        $method = 'set' . self::_normalizePropertyName($name);
+        $method = 'set' . self::normalizePropertyName($name);
         if (method_exists($this, $method)) {
             throw new Exception\InvalidArgumentException(
                 sprintf(
@@ -1159,7 +1160,7 @@ abstract class AbstractPage extends Container
      * @param  string $property  property name to normalize
      * @return string            normalized property name
      */
-    protected static function _normalizePropertyName($property)
+    protected static function normalizePropertyName($property)
     {
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $property)));
     }

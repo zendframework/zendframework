@@ -61,13 +61,6 @@ class Mvc extends AbstractPage
     protected $controller;
 
     /**
-     * Module name to use when assembling URL
-     *
-     * @var string
-     */
-    protected $module;
-
-    /**
      * Params to use when assembling URL
      *
      * @see getHref()
@@ -105,7 +98,6 @@ class Mvc extends AbstractPage
      * View helper for assembling URLs
      *
      * @see getHref()
-     *
      * @var UrlHelper
      */
     protected $urlHelper = null;
@@ -130,7 +122,6 @@ class Mvc extends AbstractPage
      * @param  bool $recursive  [optional] whether page should be considered
      *                          active if any child pages are active. Default is
      *                          false.
-     *
      * @return bool             whether page should be considered active or not
      */
     public function isActive($recursive = false)
@@ -139,6 +130,11 @@ class Mvc extends AbstractPage
             $reqParams = array();
             if ($this->routeMatch instanceof RouteMatch) {
                 $reqParams = $this->routeMatch->getParams();
+
+                if ($this->routeMatch->getMatchedRouteName() === $this->getRoute()) {
+                    $this->active = true;
+                    return true;
+                }
             }
 
             $myParams = $this->params;
@@ -230,7 +226,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string $action             action name
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid $action is given
      */
@@ -265,7 +260,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string|null $controller    controller name
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid controller name is given
      */
@@ -300,7 +294,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string|null $module        module name
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid module name is given
      */
@@ -336,7 +329,6 @@ class Mvc extends AbstractPage
      *
      * @param  array|null $params        [optional] page params. Default is null
      *                                   which sets no params.
-     *
      * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
      */
     public function setParams(array $params = null)
@@ -370,7 +362,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string $route              route name to use when assembling URL
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid $route is given
      */
@@ -403,7 +394,6 @@ class Mvc extends AbstractPage
      * Set route match object from which parameters will be retrieved
      *
      * @param  RouteMatch $matches
-     *
      * @return Mvc
      */
     public function setRouteMatch(RouteMatch $matches)

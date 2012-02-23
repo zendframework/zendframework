@@ -41,10 +41,13 @@ interface ListenerAggregate
     /**
      * Attach one or more listeners
      *
+     * Implementors may add an optional $priority argument; the EventManager
+     * implementation will pass this to the aggregate.
+     *
      * @param EventCollection $events
      * @param null|int $priority Optional priority "hint" to use when attaching listeners
      */
-    public function attach(EventCollection $events, $priority = null);
+    public function attach(EventCollection $events);
 
     /**
      * Detach all previously attached listeners

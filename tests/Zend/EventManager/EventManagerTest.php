@@ -312,6 +312,20 @@ class EventManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('ZendTest\EventManager\TestAsset\MockAggregate::detach', $method);
     }
 
+    public function testAttachAggregateAcceptsOptionalPriorityValue()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attachAggregate($aggregate, 1);
+        $this->assertEquals(1, $aggregate->priority);
+    }
+
+    public function testAttachAggregateAcceptsOptionalPriorityValueViaAttachCallbackArgument()
+    {
+        $aggregate = new TestAsset\MockAggregate();
+        $this->events->attach($aggregate, 1);
+        $this->assertEquals(1, $aggregate->priority);
+    }
+
     public function testCallingEventsStopPropagationMethodHaltsEventEmission()
     {
         $this->events->attach('foo.bar', function ($e) { return 'bogus'; }, 4);

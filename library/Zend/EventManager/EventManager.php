@@ -254,8 +254,8 @@ class EventManager implements EventCollection
      * executed. By default, this value is 1; however, you may set it for any
      * integer value. Higher values have higher priority (i.e., execute first).
      *
-     * @param  string $event
-     * @param  callback $callback PHP callback
+     * @param  string|ListenerAggregate $event
+     * @param  callback|int $callback If string $event provided, expects PHP callback; for a ListenerAggregate $event, this will be the priority
      * @param  int $priority If provided, the priority at which to register the callback
      * @return CallbackHandler|mixed CallbackHandler if attaching callback (to allow later unsubscribe); mixed if attaching aggregate
      */
@@ -263,6 +263,13 @@ class EventManager implements EventCollection
     {
         if ($event instanceof ListenerAggregate) {
             return $this->attachAggregate($event, $callback);
+        }
+
+        if (null === $callback) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s: expects a callback; none provided',
+                __METHOD__
+            ));
         }
 
         if (empty($this->events[$event])) {
@@ -281,15 +288,12 @@ class EventManager implements EventCollection
      * methods.
      *
      * @param  ListenerAggregate $aggregate
-     * @param  int $priority If provided, a suggested priority for the aggregate to use
+     * @param  null|int $priority If provided, a suggested priority for the aggregate to use
      * @return mixed return value of {@link ListenerAggregate::attach()}
      */
     public function attachAggregate(ListenerAggregate $aggregate, $priority = null)
     {
-        if (null === $priority || !is_scalar($priority)) {
-            $priority = 1;
-        }
-        return $aggregate->attach($this, (int) $priority);
+        return $aggregate->attach($this, $priority);
     }
 
     /**

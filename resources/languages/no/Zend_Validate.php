@@ -125,41 +125,41 @@ return array(
     "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "Minimum forventet bredde for bilde '%value%' skulle være '%minwidth%' men var '%width%'",
     "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "Maksimal tillatt høyde for bilde '%value%' skulle være '%maxheight%' men var '%height%'",
     "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "Minimum forventet høyde for bilde '%value%' skulle være '%minheight%' men var '%height%'",
-    "The size of image '%value%' could not be detected" => "The size of image '%value%' could not be detected",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "The size of image '%value%' could not be detected" => "Størrelsen på bildet '%value%' kunne ikke bli funnet",
+    "File '%value%' is not readable or does not exist" => "File '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_IsCompressed
-    "File '%value%' is not compressed, '%type%' detected" => "File '%value%' is not compressed, '%type%' detected",
-    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' is not compressed, '%type%' detected" => "Filen '%value%' er ikke komprimert, filtypen '%type%' ble funnet",
+    "The mimetype of file '%value%' could not be detected" => "Mimetype for filen '%value%' fle ikke funnet",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_IsImage
-    "File '%value%' is no image, '%type%' detected" => "File '%value%' is no image, '%type%' detected",
-    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' is no image, '%type%' detected" => "Filen '%value%' er ikke et bilde, '%type%' ble funnet",
+    "The mimetype of file '%value%' could not be detected" => "Mimetype for filen '%value%' fle ikke funnet",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_Md5
-    "File '%value%' does not match the given md5 hashes" => "File '%value%' does not match the given md5 hashes",
-    "A md5 hash could not be evaluated for the given file" => "A md5 hash could not be evaluated for the given file",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' does not match the given md5 hashes" => "Filen '%value%' er ikke samsvarer med den angitte md5 hashen",
+    "A md5 hash could not be evaluated for the given file" => "En md5 hash kunne ikke bli vurdert for den gitte filen",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_MimeType
-    "File '%value%' has a false mimetype of '%type%'" => "File '%value%' has a false mimetype of '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' has a false mimetype of '%type%'" => "Filen '%value%' har en feil mimetype for '%type%'",
+    "The mimetype of file '%value%' could not be detected" => "Mimetypen for filen '%value%' ble ikke funnet",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_NotExists
-    "File '%value%' exists" => "File '%value%' exists",
+    "File '%value%' exists" => "Filen '%value%' finnes",
 
     // Zend_Validate_File_Sha1
-    "File '%value%' does not match the given sha1 hashes" => "File '%value%' does not match the given sha1 hashes",
-    "A sha1 hash could not be evaluated for the given file" => "A sha1 hash could not be evaluated for the given file",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' does not match the given sha1 hashes" => "Filen '%value%' er ikke samsvarer med den angitte sha1 hashen",
+    "A sha1 hash could not be evaluated for the given file" => "En sha1 hash kunne ikke bli vurdert for den gitte filen",
+    "File '%value%' is not readable or does not exist" => "File '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_Size
     "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected",
     "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Minimum expected size for file '%value%' is '%min%' but '%size%' detected",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_Upload
     "File '%value%' exceeds the defined ini size" => "File '%value%' exceeds the defined ini size",
@@ -176,14 +176,14 @@ return array(
     // Zend_Validate_File_WordCount
     "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Too much words, maximum '%max%' are allowed but '%count%' were counted",
     "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Too less words, minimum '%min%' are expected but '%count%' were counted",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_Float
     "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
-    "'%value%' does not appear to be a float" => "'%value%' does not appear to be a float",
+    "'%value%' does not appear to be a float" => "'%value%' synes ikke å være flyttall",
 
     // Zend_Validate_GreaterThan
-    "'%value%' is not greater than '%min%'" => "'%value%' is not greater than '%min%'",
+    "'%value%' is not greater than '%min%'" => "'%value%' er ikke større enn '%min%'",
 
     // Zend_Validate_Hex
     "Invalid type given. String expected" => "Invalid type given. String expected",

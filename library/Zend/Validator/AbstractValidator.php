@@ -112,7 +112,7 @@ abstract class AbstractValidator implements Validator
         }
 
         if (isset($this->options) && array_key_exists($option, $this->options)) {
-            return $this->options[$options];
+            return $this->options[$option];
         }
 
         throw new InvalidArgumentException("Invalid option '$option'");

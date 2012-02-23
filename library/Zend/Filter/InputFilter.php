@@ -185,12 +185,12 @@ class InputFilter
             case self::VALIDATOR:
                 if (is_string($broker)) {
                     if (!class_exists($broker)) {
-                        throw new Exception(sprintf('Broker class "%s" not found', $broker));
+                        throw new Exception\RuntimeException(sprintf('Broker class "%s" not found', $broker));
                     }
                     $broker = new $broker;
                 }
                 if (!$broker instanceof Broker) {
-                    throw new Exception(sprintf(
+                    throw new Exception\RuntimeException(sprintf(
                         'setPluginBroker() expects a class or object of type Zend\Loader\Broker; received "%s"',
                         (is_object($broker) ? get_class($broker) : gettype($broker))
                     ));

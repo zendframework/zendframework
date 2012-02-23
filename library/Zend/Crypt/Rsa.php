@@ -23,6 +23,8 @@
  */
 namespace Zend\Crypt;
 
+use Zend\Crypt\Exception;
+
 /**
  * @uses       Zend\Crypt\Rsa\PrivateKey
  * @uses       Zend\Crypt\Rsa\PublicKey
@@ -211,7 +213,7 @@ class Rsa
         $publicKey  = null;
         $resource   = openssl_pkey_new($config);
         // above fails on PHP 5.3
-        
+
         openssl_pkey_export($resource, $private, $passPhrase);
 
         $privateKey = new Rsa\PrivateKey($private, $passPhrase);
@@ -268,7 +270,7 @@ class Rsa
                 // check if md2 digest is enabled on openssl just for backwards compatibility
                 $digests = openssl_get_md_methods();
                 if (!in_array(strtoupper($name), $digests)) {
-                    throw new Zend\Crypt\Exception('Openssl md2 digest is not enabled  (deprecated)');
+                    throw new Exception('Openssl md2 digest is not enabled  (deprecated)');
                 }
                 $this->_hashAlgorithm = OPENSSL_ALGO_MD2;
                 break;

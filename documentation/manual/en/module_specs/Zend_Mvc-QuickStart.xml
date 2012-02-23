@@ -168,8 +168,6 @@ return array();
 
     <programlisting language="php"><![CDATA[
 return array(
-    'routes' => array(
-    ),
     'di' => array(
         'instance' => array(
             'alias' => array(
@@ -440,30 +438,42 @@ class HelloController extends ActionController
         you to specify this: "/zend-user-hello/world". We're
         going to create a route here mainly for illustration purposes, as
         creating explicit routes is a recommended practice.
+        The application will look for a 
+        <classname>Zend\Mvc\Router\RouteStack</classname> instance to setup
+        routing. The default generated router is a 
+        <classname>Zend\Mvc\Router\Http\TreeRouteStack</classname>.
       </para>
     </note>
 
     <para>
       Open your <filename>configs/module.config.php</filename> file, and
-      modify it to add to the "routes" array so it reads as
+      modify it to add to the "routes" parameters so it reads as
       follows:
     </para>
 
     <programlisting language="php"><![CDATA[
 return array(
-    'routes' => array(
-        '<module name>-hello-world' => array(
-            'type'    => `Zend\Mvc\Router\Http\Literal`,
-            'options' => array(
-                'route' => '/hello/world',
-                'defaults' => array(
-                    'controller' => '<module name>-hello',
-                    'action'     => 'world',
+    'di' => array(
+        'instance' => array(
+            'Zend\Mvc\Router\RouteStack' => array(
+                'parameters' => array(
+                    'routes' => array(
+                        '<module name>-hello-world' => array(
+                            'type'    => `Zend\Mvc\Router\Http\Literal`,
+                                'options' => array(
+                                'route' => '/hello/world',
+                                'defaults' => array(
+                                    'controller' => '<module name>-hello',
+                                    'action'     => 'world',
+                                ),
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),
+        // ... other di configuration ...
     ),
-    // ... di configuration ...
 );
 ]]></programlisting>
 
@@ -504,9 +514,9 @@ return array(
 
     <programlisting language="php"><![CDATA[
 return array(
-    // ... routes configuration ...
     'di' => array(
         'instance' => array(
+            // ... routes configuration ...
             'alias' => array(
                 '<module name>-hello' => '<module namespace>\Controller\HelloController',
             ),

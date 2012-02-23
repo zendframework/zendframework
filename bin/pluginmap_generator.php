@@ -33,7 +33,7 @@
  *                              file
  */
 
-$libPath = __DIR__ . '/../library';
+$libPath = getenv('LIB_PATH') ? getenv('LIB_PATH') : __DIR__ . '/../library';
 if (!is_dir($libPath)) {
     // Try to load StandardAutoloader from include_path
     if (false === include('Zend/Loader/StandardAutoloader.php')) {
@@ -42,7 +42,7 @@ if (!is_dir($libPath)) {
     }
 } else {
     // Try to load StandardAutoloader from library
-    if (false === include(__DIR__ . '/../library/Zend/Loader/StandardAutoloader.php')) {
+    if (false === include($libPath . '/Zend/Loader/StandardAutoloader.php')) {
         echo "Unable to locate autoloader via library; aborting" . PHP_EOL;
         exit(2);
     }

@@ -33,21 +33,6 @@ namespace Zend\Session;
 interface SaveHandler
 {
     /**
-     * Set session manager
-     * 
-     * @param  Manager $manager 
-     * @return void
-     */
-    public function setManager(Manager $manager);
-
-    /**
-     * Retrieve session manager
-     * 
-     * @return Manager
-     */
-    public function getManager();
-
-    /**
      * Open Session - retrieve resources
      *
      * @param string $save_path

@@ -170,7 +170,7 @@ class SessionConfiguration extends StandardConfiguration
      * @return SessionConfiguration
      * @throws SessionException
      */
-    public function setSaveHandler($saveHandler)
+    public function setPhpSaveHandler($saveHandler)
     {
         $saveHandler = (string) $saveHandler;
         set_error_handler(array($this, '_handleError'));

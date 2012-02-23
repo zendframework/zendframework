@@ -101,6 +101,13 @@ class SessionManager extends AbstractManager
         if ($this->sessionExists()) {
             return;
         }
+
+        $saveHandler = $this->getSaveHandler();
+        if ($saveHandler instanceof SaveHandler) {
+            // register the session handler with ext/session
+            $this->_registerSaveHandler($saveHandler);
+        }
+
         session_start();
         if (!$this->isValid()) {
             throw new Exception\RuntimeException('Session failed validation');
@@ -396,5 +403,26 @@ class SessionManager extends AbstractManager
             // There is a running session so we'll regenerate id to send a new cookie
             $this->regenerateId();
         }
+    }
+
+    /**
+     * Register Save Handler with ext/session
+     *
+     * Since ext/session is coupled to this particular session manager
+     * register the save handler with ext/session.
+     *
+     * @param SaveHandler $saveHandler
+     * @return bool
+     */
+    protected function _registerSaveHandler(SaveHandler $saveHandler)
+    {
+        return session_set_save_handler(
+            array($saveHandler, 'open'),
+            array($saveHandler, 'close'),
+            array($saveHandler, 'read'),
+            array($saveHandler, 'write'),
+            array($saveHandler, 'destroy'),
+            array($saveHandler, 'gc')
+        );
     }
 }

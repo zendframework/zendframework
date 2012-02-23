@@ -57,6 +57,11 @@ abstract class AbstractManager implements Manager
      */
     protected $_storageDefaultClass = 'Zend\\Session\\Storage\\SessionStorage';
 
+    /**
+     * @var SaveHandler
+     */
+    protected $_saveHandler;
+
 
     /**
      * Constructor
@@ -66,9 +71,10 @@ abstract class AbstractManager implements Manager
      * 
      * @param  null|string|Configuration|array $config 
      * @param  null|string|Storage $storage 
+     * @param  null|string|SaveHandler $saveHandler
      * @return void
      */
-    public function __construct($config = null, $storage = null)
+    public function __construct($config = null, $storage = null, $saveHandler = null)
     {
         if ($config instanceof \Zend\Config\Config) {
             $config = $config->toArray();
@@ -79,6 +85,12 @@ abstract class AbstractManager implements Manager
                     case 'storage':
                         if (null === $storage) {
                             $storage = $value;
+                        }
+                        unset($config[$key]);
+                        break;
+                    case 'savehandler':
+                        if (null === $saveHandler) {
+                            $saveHandler = $value;
                         }
                         unset($config[$key]);
                         break;
@@ -93,6 +105,7 @@ abstract class AbstractManager implements Manager
         
         $this->_setConfig($config);
         $this->_setStorage($storage);
+        $this->_setSaveHandler($saveHandler);
     }
 
     /**
@@ -182,5 +195,44 @@ abstract class AbstractManager implements Manager
     public function getStorage()
     {
         return $this->_storage;
+    }
+
+    /**
+     * Set session save handler object
+     *
+     * Allows passing a null value, string class name, or SaveHandler object.  If a
+     * null value is passed, no explicit save handler will be used.
+     *
+     * @param null|string|SaveHandler $saveHandler
+     * @return void
+     */
+    public function _setSaveHandler($saveHandler)
+    {
+        if (null === $saveHandler) {
+            return ;
+        }
+
+        if (is_string($saveHandler)) {
+            if (!class_exists($saveHandler)) {
+                throw new Exception\InvalidArgumentException('Class provided for SaveHandler does not exist');
+            }
+            $saveHandler = new $saveHandler();
+        }
+
+        if (!$saveHandler instanceof SaveHandler) {
+            throw new Exception\InvalidArgumentException('SaveHandler type provided is invalid; must implement Zend\\Session\\SaveHandler');
+        }
+
+        $this->_saveHandler = $saveHandler;
+    }
+
+    /**
+     * Get SaveHandler Object
+     *
+     * @return SaveHandler
+     */
+    public function getSaveHandler()
+    {
+        return $this->_saveHandler;
     }
 }

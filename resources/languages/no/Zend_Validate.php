@@ -49,82 +49,82 @@ return array(
 
     // Zend_Validate_Ccnum
     "'%value%' must contain between 13 and 19 digits" => "'%value%' må inneholde mellom 13 og 19 siffer",
-    "Luhn algorithm (mod-10 checksum) failed on '%value%'" => "Luhn algoritmen (mod-10 checksum) mislyktes på '%value%'",
+    "Luhn algorithm (mod-10 checksum) failed on '%value%'" => "Luhn algoritmen (mod-10 sjekksum) mislyktes på '%value%'",
 
     // Zend_Validate_CreditCard
-    "'%value%' seems to contain an invalid checksum" => "'%value%' seems to contain an invalid checksum",
-    "'%value%' must contain only digits" => "'%value%' must contain only digits",
-    "Invalid type given. String expected" => "Invalid type given. String expected",
-    "'%value%' contains an invalid amount of digits" => "'%value%' contains an invalid amount of digits",
-    "'%value%' is not from an allowed institute" => "'%value%' is not from an allowed institute",
-    "'%value%' seems to be an invalid creditcard number" => "'%value%' seems to be an invalid creditcard number",
-    "An exception has been raised while validating '%value%'" => "An exception has been raised while validating '%value%'",
+    "'%value%' seems to contain an invalid checksum" => "Det synes som at '%value%' har en ugyldig sjekksum",
+    "'%value%' must contain only digits" => "'%value%' må kun inneholde siffer",
+    "Invalid type given. String expected" => "Ugyldig type gitt. Streng forventet",
+    "'%value%' contains an invalid amount of digits" => "'%value%' inneholder ett ugyldig antall sifre",
+    "'%value%' is not from an allowed institute" => "'%value%' er ikke fra ett tillatt institutt",
+    "'%value%' seems to be an invalid creditcard number" => "'%value%' synes å være ett ugyldig kredittkortnummer",
+    "An exception has been raised while validating '%value%'" => "Et unntak ble reist under validering av '%value%'",
 
     // Zend_Validate_Date
-    "Invalid type given. String, integer, array or Zend_Date expected" => "Invalid type given. String, integer, array or Zend_Date expected",
-    "'%value%' does not appear to be a valid date" => "'%value%' does not appear to be a valid date",
-    "'%value%' does not fit the date format '%format%'" => "'%value%' does not fit the date format '%format%'",
+    "Invalid type given. String, integer, array or Zend_Date expected" => "Ugyldig type angitt. Streng, heltall, array eller Zend_Date var forventet",
+    "'%value%' does not appear to be a valid date" => "'%value%' synes ikke å være en gyldig dato",
+    "'%value%' does not fit the date format '%format%'" => "'%value%' passer ikke datoformatet '%format%'",
 
     // Zend_Validate_Db_Abstract
-    "No record matching '%value%' was found" => "No record matching '%value%' was found",
-    "A record matching '%value%' was found" => "A record matching '%value%' was found",
+    "No record matching '%value%' was found" => "Ingen poster ble funnet for '%value%'",
+    "A record matching '%value%' was found" => "En post ble funnet for '%value%'",
 
     // Zend_Validate_Digits
-    "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
-    "'%value%' must contain only digits" => "'%value%' must contain only digits",
-    "'%value%' is an empty string" => "'%value%' is an empty string",
+    "Invalid type given. String, integer or float expected" => "Ugyldig type angitt. Streng heltall eller flyttall var forventet",
+    "'%value%' must contain only digits" => "'%value%' må bare inneholde sifre",
+    "'%value%' is an empty string" => "'%value%' er en tom streng",
 
     // Zend_Validate_EmailAddress
-    "Invalid type given. String expected" => "Invalid type given. String expected",
-    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' is not a valid email address in the basic format local-part@hostname",
-    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' is not a valid hostname for email address '%value%'",
-    "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' does not appear to have a valid MX record for the email address '%value%'",
-    "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network",
-    "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' can not be matched against dot-atom format",
-    "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' can not be matched against quoted-string format",
-    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' is not a valid local part for email address '%value%'",
-    "'%value%' exceeds the allowed length" => "'%value%' exceeds the allowed length",
+    "Invalid type given. String expected" => "Ugyldig type angitt. Streng var forventet",
+    "'%value%' is not a valid email address in the basic format local-part@hostname" => "'%value%' er ikke en gyldig e-postadresse i det grunnleggende formatet bruker@vertsnavn",
+    "'%hostname%' is not a valid hostname for email address '%value%'" => "'%hostname%' er ikke en gyldig vertsnavn for e-postadressen '%value%'",
+    "'%hostname%' does not appear to have a valid MX record for the email address '%value%'" => "'%hostname%' synes ikke å ha en gyldig 'MX record' for e-postadressen '%value%'",
+    "'%hostname%' is not in a routable network segment. The email address '%value%' should not be resolved from public network" => "'%hostname%' er ikke i en rutbare nettverk segment. E-postadressen '%value%' kommer ikke fra et offentlig nett",
+    "'%localPart%' can not be matched against dot-atom format" => "'%localPart%' kan ikke sammenliknes mot dot-atom formatet",
+    "'%localPart%' can not be matched against quoted-string format" => "'%localPart%' kan ikke sammenliknes mot anførselstegn-streng formatet",
+    "'%localPart%' is not a valid local part for email address '%value%'" => "'%localPart%' er ikke en gyldig lokal del for e-postadressen '%value%'",
+    "'%value%' exceeds the allowed length" => "'%value%' overstiger tillatt lengde",
 
     // Zend_Validate_File_Count
-    "Too many files, maximum '%max%' are allowed but '%count%' are given" => "Too many files, maximum '%max%' are allowed but '%count%' are given",
-    "Too few files, minimum '%min%' are expected but '%count%' are given" => "Too few files, minimum '%min%' are expected but '%count%' are given",
+    "Too many files, maximum '%max%' are allowed but '%count%' are given" => "For mange filer, maksimum '%max%' er tillatt, men '%count%' er angitt",
+    "Too few files, minimum '%min%' are expected but '%count%' are given" => "for få filer, minimum '%min%' er forventet, men '%count%' er angitt",
 
     // Zend_Validate_File_Crc32
-    "File '%value%' does not match the given crc32 hashes" => "File '%value%' does not match the given crc32 hashes",
-    "A crc32 hash could not be evaluated for the given file" => "A crc32 hash could not be evaluated for the given file",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' does not match the given crc32 hashes" => "Filen '%value%' samsvarer ikke med gitte crc32 hasher",
+    "A crc32 hash could not be evaluated for the given file" => "En crc32 hash kunne ikke bli vurdert for den gitte filen",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_ExcludeExtension
-    "File '%value%' has a false extension" => "File '%value%' has a false extension",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' has a false extension" => "Feil filtype for filen '%value%'",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_ExcludeMimeType
-    "File '%value%' has a false mimetype of '%type%'" => "File '%value%' has a false mimetype of '%type%'",
-    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' has a false mimetype of '%type%'" => "Filen '%value%' har en feil mimetype av '%type%'",
+    "The mimetype of file '%value%' could not be detected" => "Mimetype for filen '%value%' ble ikke funnet",
+    "File '%value%' is not readable or does not exist" => "File '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_Exists
-    "File '%value%' does not exist" => "File '%value%' does not exist",
+    "File '%value%' does not exist" => "Filen '%value%' finnes ikke",
 
     // Zend_Validate_File_Extension
-    "File '%value%' has a false extension" => "File '%value%' has a false extension",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' has a false extension" => "Feil filtype for filen '%value%'",
+    "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_FilesSize
-    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "All files in sum should have a maximum size of '%max%' but '%size%' were detected",
-    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "All files in sum should have a minimum size of '%min%' but '%size%' were detected",
-    "One or more files can not be read" => "One or more files can not be read",
+    "All files in sum should have a maximum size of '%max%' but '%size%' were detected" => "Alle filer i sum skal ha en maksimal størrelse på '%max%', men '%size%' var påvist",
+    "All files in sum should have a minimum size of '%min%' but '%size%' were detected" => "Alle filer i sum skal ha en minimum størrelse på '%min%' but '%size%' var påvist",
+    "One or more files can not be read" => "En eller flere filer kan ikke leses",
 
     // Zend_Validate_File_Hash
-    "File '%value%' does not match the given hashes" => "File '%value%' does not match the given hashes",
-    "A hash could not be evaluated for the given file" => "A hash could not be evaluated for the given file",
-    "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
+    "File '%value%' does not match the given hashes" => "Filen '%value%' er ikke samsvarer med de gitte hasher",
+    "A hash could not be evaluated for the given file" => "En hash kunne ikke bli vurdert for den gitte filen",
+    "File '%value%' is not readable or does not exist" => "File '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_ImageSize
-    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected",
-    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected",
-    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected",
-    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected",
+    "Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected" => "Maksimal tillatt bredde for bilde '%value%' skulle være '%maxwidth%' men var '%width%'",
+    "Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected" => "Minimum forventet bredde for bilde '%value%' skulle være '%minwidth%' men var '%width%'",
+    "Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected" => "Maksimal tillatt høyde for bilde '%value%' skulle være '%maxheight%' men var '%height%'",
+    "Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected" => "Minimum forventet høyde for bilde '%value%' skulle være '%minheight%' men var '%height%'",
     "The size of image '%value%' could not be detected" => "The size of image '%value%' could not be detected",
     "File '%value%' is not readable or does not exist" => "File '%value%' is not readable or does not exist",
 

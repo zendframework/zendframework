@@ -331,7 +331,7 @@ class Socket implements HttpAdapter, Stream
 
             // Close the connection if requested to do so by the server
             $connection = $headers->get('connection');
-            if ($connection !== false && $connection->getFieldValue() == 'close') {
+            if ($connection && $connection->getFieldValue() == 'close') {
                 $this->close();
             }
             return $response;
@@ -463,7 +463,7 @@ class Socket implements HttpAdapter, Stream
 
         // Close the connection if requested to do so by the server
         $connection = $headers->get('connection');
-        if ($connection !== false && $connection->getFieldValue() == 'close') {
+        if ($connection && $connection->getFieldValue() == 'close') {
             $this->close();
         }
 

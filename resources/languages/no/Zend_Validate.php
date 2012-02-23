@@ -157,37 +157,37 @@ return array(
     "File '%value%' is not readable or does not exist" => "File '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_Size
-    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected",
-    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Minimum expected size for file '%value%' is '%min%' but '%size%' detected",
+    "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected" => "Maksimal tillatt størrelse for filen '%value%' er '%max%' men '%size%' ble funnet",
+    "Minimum expected size for file '%value%' is '%min%' but '%size%' detected" => "Minimum forventet størrelse for filen '%value%' er '%min%' men '%size%' ble funnet",
     "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_File_Upload
-    "File '%value%' exceeds the defined ini size" => "File '%value%' exceeds the defined ini size",
-    "File '%value%' exceeds the defined form size" => "File '%value%' exceeds the defined form size",
-    "File '%value%' was only partially uploaded" => "File '%value%' was only partially uploaded",
-    "File '%value%' was not uploaded" => "File '%value%' was not uploaded",
-    "No temporary directory was found for file '%value%'" => "No temporary directory was found for file '%value%'",
-    "File '%value%' can't be written" => "File '%value%' can't be written",
-    "A PHP extension returned an error while uploading the file '%value%'" => "A PHP extension returned an error while uploading the file '%value%'",
-    "File '%value%' was illegally uploaded. This could be a possible attack" => "File '%value%' was illegally uploaded. This could be a possible attack",
-    "File '%value%' was not found" => "File '%value%' was not found",
-    "Unknown error while uploading file '%value%'" => "Unknown error while uploading file '%value%'",
+    "File '%value%' exceeds the defined ini size" => "Filen '%value%' overskrider definerte ini størrelse",
+    "File '%value%' exceeds the defined form size" => "Filen '%value%' overskrider definerte skjema størrelse",
+    "File '%value%' was only partially uploaded" => "Filen '%value%' ble delvis lastet opp",
+    "File '%value%' was not uploaded" => "Filen '%value%' ble ikke lastet opp",
+    "No temporary directory was found for file '%value%'" => "Ingen midlertidig mappe ble funnet for filen '%value%'",
+    "File '%value%' can't be written" => "Filen '%value%' kan ikke bli skrevet",
+    "A PHP extension returned an error while uploading the file '%value%'" => "En PHP forlengelsen returnerte en feil under opplasting av filen '%value%'",
+    "File '%value%' was illegally uploaded. This could be a possible attack" => "Filen '%value%' ble ulovlig lastet opp. Dette kan være en mulig angrep",
+    "File '%value%' was not found" => "Filen '%value%' ble ikke funnet",
+    "Unknown error while uploading file '%value%'" => "Ukjent feil under opplasting av filen '%value%'",
 
     // Zend_Validate_File_WordCount
-    "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "Too much words, maximum '%max%' are allowed but '%count%' were counted",
-    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "Too less words, minimum '%min%' are expected but '%count%' were counted",
+    "Too much words, maximum '%max%' are allowed but '%count%' were counted" => "For mange ord, maksimum '%max%' er tillatt, men '%count%' ble telt",
+    "Too less words, minimum '%min%' are expected but '%count%' were counted" => "For få ord, minimum '%min%' er forventet, men '%count%' ble telt",
     "File '%value%' is not readable or does not exist" => "Filen '%value%' er ikke lesbar eller finnes ikke",
 
     // Zend_Validate_Float
-    "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
+    "Invalid type given. String, integer or float expected" => "Ugyldig type angitt. Streng, heltall eller flyttall forventet",
     "'%value%' does not appear to be a float" => "'%value%' synes ikke å være flyttall",
 
     // Zend_Validate_GreaterThan
     "'%value%' is not greater than '%min%'" => "'%value%' er ikke større enn '%min%'",
 
     // Zend_Validate_Hex
-    "Invalid type given. String expected" => "Invalid type given. String expected",
-    "'%value%' has not only hexadecimal digit characters" => "'%value%' has not only hexadecimal digit characters",
+    "Invalid type given. String expected" => "Ugyldig type angitt. Streng forventet",
+    "'%value%' has not only hexadecimal digit characters" => "'%value%' har ikke bare heksadesimale siffer tegn",
 
     // Zend_Validate_Hostname
     "Invalid type given. String expected" => "Invalid type given. String expected",

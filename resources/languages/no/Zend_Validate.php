@@ -191,75 +191,75 @@ return array(
 
     // Zend_Validate_Hostname
     "Invalid type given. String expected" => "Invalid type given. String expected",
-    "'%value%' appears to be an IP address, but IP addresses are not allowed" => "'%value%' appears to be an IP address, but IP addresses are not allowed",
-    "'%value%' appears to be a DNS hostname but cannot match TLD against known list" => "'%value%' appears to be a DNS hostname but cannot match TLD against known list",
-    "'%value%' appears to be a DNS hostname but contains a dash in an invalid position" => "'%value%' appears to be a DNS hostname but contains a dash in an invalid position",
-    "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'",
-    "'%value%' appears to be a DNS hostname but cannot extract TLD part" => "'%value%' appears to be a DNS hostname but cannot extract TLD part",
-    "'%value%' does not match the expected structure for a DNS hostname" => "'%value%' does not match the expected structure for a DNS hostname",
-    "'%value%' does not appear to be a valid local network name" => "'%value%' does not appear to be a valid local network name",
-    "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' appears to be a local network name but local network names are not allowed",
-    "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded",
-    "'%value%' does not appear to be a valid URI hostname" => "'%value%' does not appear to be a valid URI hostname",
+    "'%value%' appears to be an IP address, but IP addresses are not allowed" => "'%value%' synes å være en IP-adresse, men IP-adresser er ikke tillatt",
+    "'%value%' appears to be a DNS hostname but cannot match TLD against known list" => "'%value%' synes å være en DNS-vertsnavnet men kan ikke matche TLD mot kjent liste",
+    "'%value%' appears to be a DNS hostname but contains a dash in an invalid position" => "'%value%' synes å være en DNS-vertsnavnet men inneholder ett dash i en ugyldig posisjon",
+    "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'" => "'%value%' synes å være en DNS-vertsnavnet men kan ikke sammenligne mot vertsnavn skjema for TLD '%tld%'",
+    "'%value%' appears to be a DNS hostname but cannot extract TLD part" => "'%value%' synes å være en DNS-vertsnavnet men kan ikke trekke ut TLD del",
+    "'%value%' does not match the expected structure for a DNS hostname" => "'%value%' samsvarer ikke med forventet struktur for ett DNS vertsnavn",
+    "'%value%' does not appear to be a valid local network name" => "'%value%' synes ikke å være et gyldig lokalt nettverk navn",
+    "'%value%' appears to be a local network name but local network names are not allowed" => "'%value%' synes å være et lokalt nettverk navn men lokale nettverk er ikke tillatt",
+    "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded" => "'%value%' synes å være en DNS-vertsnavnet men den gitte punycode notasjonen ikke kan dekodes",
+    "'%value%' does not appear to be a valid URI hostname" => "'%value%' synes ikke å være et gyldig URI vertsnavn",
 
     // Zend_Validate_Iban
-    "Unknown country within the IBAN '%value%'" => "Unknown country within the IBAN '%value%'",
-    "'%value%' has a false IBAN format" => "'%value%' has a false IBAN format",
-    "'%value%' has failed the IBAN check" => "'%value%' has failed the IBAN check",
+    "Unknown country within the IBAN '%value%'" => "Ukjent land innenfor IBAN '%value%'",
+    "'%value%' has a false IBAN format" => "'%value%' har feil IBAN format",
+    "'%value%' has failed the IBAN check" => "'%value%' har feilet IBAN skjekken",
 
     // Zend_Validate_Identical
-    "The two given tokens do not match" => "The two given tokens do not match",
-    "No token was provided to match against" => "No token was provided to match against",
+    "The two given tokens do not match" => "De to angitte tokenene stemmer ikke overens",
+    "No token was provided to match against" => "Ingen token ble angitt for å stemme mot",
 
     // Zend_Validate_InArray
-    "'%value%' was not found in the haystack" => "'%value%' was not found in the haystack",
+    "'%value%' was not found in the haystack" => "'%value%' ble ikke funnet i høystaken",
 
     // Zend_Validate_Int
-    "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
-    "'%value%' does not appear to be an integer" => "'%value%' does not appear to be an integer",
+    "Invalid type given. String or integer expected" => "Ugyldig type angitt. Streng eller heltall forventet",
+    "'%value%' does not appear to be an integer" => "'%value%' synes ikke å være et heltall",
 
     // Zend_Validate_Ip
-    "Invalid type given. String expected" => "Invalid type given. String expected",
-    "'%value%' does not appear to be a valid IP address" => "'%value%' does not appear to be a valid IP address",
+    "Invalid type given. String expected" => "Ugyldig type angitt. Streng forventet",
+    "'%value%' does not appear to be a valid IP address" => "'%value%' synes ikke å være en gyldig IP-adresse",
 
     // Zend_Validate_Isbn
-    "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
-    "'%value%' is not a valid ISBN number" => "'%value%' is not a valid ISBN number",
+    "Invalid type given. String or integer expected" => "Ugyldig type angitt. Streng eller heltall forventet",
+    "'%value%' is not a valid ISBN number" => "'%value%' er ikke et gyldig ISBN nummer",
 
     // Zend_Validate_LessThan
-    "'%value%' is not less than '%max%'" => "'%value%' is not less than '%max%'",
+    "'%value%' is not less than '%max%'" => "'%value%' er ikke mindre enn '%max%'",
 
     // Zend_Validate_NotEmpty
-    "Invalid type given. String, integer, float, boolean or array expected" => "Invalid type given. String, integer, float, boolean or array expected",
-    "Value is required and can't be empty" => "Value is required and can't be empty",
+    "Invalid type given. String, integer, float, boolean or array expected" => "Ugyldig type angitt. Streng, heltall, flyttall, boolean eller array forventet",
+    "Value is required and can't be empty" => "Verdi er nødvendig og kan ikke være tomt",
 
     // Zend_Validate_PostCode
-    "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
-    "'%value%' does not appear to be a postal code" => "'%value%' does not appear to be a postal code",
+    "Invalid type given. String or integer expected" => "Ugyldig type angitt. Streng eller heltall forventet",
+    "'%value%' does not appear to be a postal code" => "'%value%' synes ikke å være et postnummer",
 
     // Zend_Validate_Regex
-    "Invalid type given. String, integer or float expected" => "Invalid type given. String, integer or float expected",
-    "'%value%' does not match against pattern '%pattern%'" => "'%value%' does not match against pattern '%pattern%'",
-    "There was an internal error while using the pattern '%pattern%'" => "There was an internal error while using the pattern '%pattern%'",
+    "Invalid type given. String, integer or float expected" => "Ugyldig type angitt. String, heltall eller flyttall forventet",
+    "'%value%' does not match against pattern '%pattern%'" => "'%value%' stemmer ikke mot mønsteret '%pattern%'",
+    "There was an internal error while using the pattern '%pattern%'" => "Det var en intern feil ved bruk av mønsteret '%pattern%'",
 
     // Zend_Validate_Sitemap_Changefreq
-    "'%value%' is not a valid sitemap changefreq" => "'%value%' is not a valid sitemap changefreq",
-    "Invalid type given. String expected" => "Invalid type given. String expected",
+    "'%value%' is not a valid sitemap changefreq" => "'%value%' er ikke en gyldig sitemap changefreq",
+    "Invalid type given. String expected" => "Ugyldig type angitt. Streng forventet",
 
     // Zend_Validate_Sitemap_Lastmod
-    "'%value%' is not a valid sitemap lastmod" => "'%value%' is not a valid sitemap lastmod",
-    "Invalid type given. String expected" => "Invalid type given. String expected",
+    "'%value%' is not a valid sitemap lastmod" => "'%value%' er ikke en gyldig sitemap lastmod",
+    "Invalid type given. String expected" => "Ugyldig type angitt. Streng forventet",
 
     // Zend_Validate_Sitemap_Loc
-    "'%value%' is not a valid sitemap location" => "'%value%' is not a valid sitemap location",
-    "Invalid type given. String expected" => "Invalid type given. String expected",
+    "'%value%' is not a valid sitemap location" => "'%value%' er ikke en gyldig sitemap sted",
+    "Invalid type given. String expected" => "Ugyldig type angitt. Streng forventet",
 
     // Zend_Validate_Sitemap_Priority
-    "'%value%' is not a valid sitemap priority" => "'%value%' is not a valid sitemap priority",
-    "Invalid type given. Numeric string, integer or float expected" => "Invalid type given. Numeric string, integer or float expected",
+    "'%value%' is not a valid sitemap priority" => "'%value%' er ikke en gyldig sitemap prioritet",
+    "Invalid type given. Numeric string, integer or float expected" => "Ugyldig type angitt. Numerisk streng, heltall eller flyttall forventet",
 
     // Zend_Validate_StringLength
     "Invalid type given. String expected" => "Invalid type given. String expected",
-    "'%value%' is less than %min% characters long" => "'%value%' is less than %min% characters long",
-    "'%value%' is more than %max% characters long" => "'%value%' is more than %max% characters long",
+    "'%value%' is less than %min% characters long" => "'%value%' er mindre enn %min% tegn",
+    "'%value%' is more than %max% characters long" => "'%value%' er mer enn %max% tegn",
 );

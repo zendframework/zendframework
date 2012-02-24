@@ -233,6 +233,7 @@ class Application implements AppContext
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof Response) {
+                $events->trigger('finish', $event);
                 return $response;
             }
             if ($event->getError()) {
@@ -250,6 +251,7 @@ class Application implements AppContext
         // Complete response
         $response = $result->last();
         if ($response instanceof Response) {
+            $events->trigger('finish', $event);
             return $response;
         }
 

@@ -12,15 +12,13 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Navigation
+ * @category   Zend
+ * @package    Zend_Navigation
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Navigation\Exception;
 
 use Zend\Navigation\Exception;
@@ -28,16 +26,11 @@ use Zend\Navigation\Exception;
 /**
  * Navigation invalid argument exception
  *
- * @uses       \Zend\Navigation\Exception
- *
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class InvalidArgumentException extends \InvalidArgumentException
-    implements Exception
-{
-
-}
+class InvalidArgumentException extends \InvalidArgumentException implements Exception
+{}

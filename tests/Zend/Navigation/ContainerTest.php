@@ -388,8 +388,8 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            $nav->toArray(),
-            $this->_getFindByNavigation()->toArray()
+            $this->_getFindByNavigation()->toArray(),
+            $nav->toArray()
         );
     }
 

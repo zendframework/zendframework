@@ -171,7 +171,6 @@ class Mvc extends AbstractPage
      * the href based on the page's properties.
      *
      * @see UrlHelper
-     *
      * @return string  page href
      * @throws Exception\DomainException if no UrlHelper is set
      */
@@ -323,10 +322,9 @@ class Mvc extends AbstractPage
      * Sets params to use when assembling URL
      *
      * @see getHref()
-     *
-     * @param  array|null $params        [optional] page params. Default is null
-     *                                   which sets no params.
-     * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
+     * @param  array|null $params [optional] page params. Default is null
+     *                            which sets no params.
+     * @return Mvc  fluent interface, returns self
      */
     public function setParams(array $params = null)
     {

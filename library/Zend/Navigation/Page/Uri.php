@@ -19,18 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Navigation\Page;
 
 use Zend\Navigation\Exception;
 
 /**
  * Represents a page that is defined by specifying a URI
- *
- * @uses       \Zend\Navigation\Page\AbstractPage
- * @uses       \Zend\Navigation\Exception
  *
  * @category   Zend
  * @package    Zend_Navigation
@@ -52,8 +46,8 @@ class Uri extends AbstractPage
      *
      * @param  string $uri                page URI, must a string or null
      *
-     * @return \Zend\Navigation\Page\Uri   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if $uri is invalid
+     * @return Uri   fluent interface, returns self
+     * @throws Exception\InvalidArgumentException  if $uri is invalid
      */
     public function setUri($uri)
     {
@@ -110,7 +104,7 @@ class Uri extends AbstractPage
         return array_merge(
             parent::toArray(),
             array(
-                 'uri' => $this->getUri(),
+                'uri' => $this->getUri(),
             )
         );
     }

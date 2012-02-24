@@ -621,7 +621,7 @@ abstract class AbstractPage extends Container
     public function setOrder($order = null)
     {
         if (is_string($order)) {
-            $temp = (int)$order;
+            $temp = (int) $order;
             if ($temp < 0 || $temp > 0 || $order == '0') {
                 $order = $temp;
             }
@@ -1130,26 +1130,23 @@ abstract class AbstractPage extends Container
      */
     public function toArray()
     {
-        return array_merge(
-            $this->getCustomProperties(),
-            array(
-                'label'     => $this->getLabel(),
-                'fragment'  => $this->getFragment(),
-                'id'        => $this->getId(),
-                'class'     => $this->getClass(),
-                'title'     => $this->getTitle(),
-                'target'    => $this->getTarget(),
-                'rel'       => $this->getRel(),
-                'rev'       => $this->getRev(),
-                'order'     => $this->getOrder(),
-                'resource'  => $this->getResource(),
-                'privilege' => $this->getPrivilege(),
-                'active'    => $this->isActive(),
-                'visible'   => $this->isVisible(),
-                'type'      => get_class($this),
-                'pages'     => parent::toArray(),
-            )
-        );
+        return array_merge($this->getCustomProperties(), array(
+            'label'     => $this->getLabel(),
+            'fragment'  => $this->getFragment(),
+            'id'        => $this->getId(),
+            'class'     => $this->getClass(),
+            'title'     => $this->getTitle(),
+            'target'    => $this->getTarget(),
+            'rel'       => $this->getRel(),
+            'rev'       => $this->getRev(),
+            'order'     => $this->getOrder(),
+            'resource'  => $this->getResource(),
+            'privilege' => $this->getPrivilege(),
+            'active'    => $this->isActive(),
+            'visible'   => $this->isVisible(),
+            'type'      => get_class($this),
+            'pages'     => parent::toArray(),
+        ));
     }
 
     // Internal methods:

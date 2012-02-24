@@ -838,43 +838,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testSetConfig()
-    {
-        $page = AbstractPage::factory(array(
-            'label' => 'foo',
-            'action' => 'index',
-            'controller' => 'index'
-        ));
-
-        $options = array(
-            'label' => 'bar',
-            'action' => 'baz',
-            'controller' => 'bat',
-            'module' => 'test',
-            'id' => 'foo-test'
-        );
-
-        $page->setConfig(new Config\Config($options));
-
-        $expected = array(
-            'label'       => 'bar',
-            'action'      => 'baz',
-            'controller'  => 'bat',
-            'module'      => 'test',
-            'id'          => 'foo-test'
-        );
-
-        $actual = array(
-            'label'       => $page->getLabel(),
-            'action'      => $page->getAction(),
-            'controller'  => $page->getController(),
-            'module'      => $page->getModule(),
-            'id'          => $page->getId()
-        );
-
-        $this->assertEquals($expected, $actual);
-    }
-
     public function testSetOptionsShouldSetCustomProperties()
     {
         $page = AbstractPage::factory(array(

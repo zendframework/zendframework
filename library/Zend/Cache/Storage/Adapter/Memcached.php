@@ -84,10 +84,7 @@ class Memcached extends AbstractAdapter
             $options->addServer('localhost', 11211);
             $servers = $options->getServers();
         }
-
-        foreach ($servers as $server) {
-            $this->memcached->addServer($server[0], $server[1]);
-        }
+        $this->memcached->addServers($servers);
     }
 
     /* options */

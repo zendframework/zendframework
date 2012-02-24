@@ -17,12 +17,12 @@ class Range implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'range') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Range string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Range string: "' . $name . '"');
         }
 
         // @todo implementation details
         $header->value= $value;
-        
+
         return $header;
     }
 

@@ -17,7 +17,7 @@ class Host implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'host') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Host string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Host string: "' . $name . '"');
         }
 
         // @todo implementation details

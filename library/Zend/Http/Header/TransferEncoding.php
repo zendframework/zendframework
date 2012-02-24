@@ -17,7 +17,7 @@ class TransferEncoding implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'transfer-encoding') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Transfer-Encoding string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Transfer-Encoding string: "' . $name . '"');
         }
 
         // @todo implementation details

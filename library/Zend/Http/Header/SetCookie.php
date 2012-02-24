@@ -102,7 +102,7 @@ class SetCookie implements MultipleHeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'set-cookie') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Set-Cookie string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Set-Cookie string: "' . $name . '"');
         }
 
         $multipleHeaders = preg_split('#(?<!Sun|Mon|Tue|Wed|Thu|Fri|Sat),\s*#', $value);

@@ -17,7 +17,7 @@ class ContentDisposition implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-disposition') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Disposition string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Disposition string: "' . $name . '"');
         }
 
         // @todo implementation details

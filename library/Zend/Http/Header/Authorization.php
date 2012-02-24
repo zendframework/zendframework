@@ -17,7 +17,7 @@ class Authorization implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'authorization') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Authorization string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Authorization string: "' . $name . '"');
         }
 
         // @todo implementation details

@@ -17,7 +17,7 @@ class RetryAfter implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'retry-after') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Retry-After string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Retry-After string: "' . $name . '"');
         }
 
         // @todo implementation details

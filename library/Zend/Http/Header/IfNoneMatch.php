@@ -17,7 +17,7 @@ class IfNoneMatch implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-none-match') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-None-Match string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-None-Match string: "' . $name . '"');
         }
 
         // @todo implementation details

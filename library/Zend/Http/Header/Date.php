@@ -17,7 +17,7 @@ class Date implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'date') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Date string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Date string: "' . $name . '"');
         }
 
         // @todo implementation details

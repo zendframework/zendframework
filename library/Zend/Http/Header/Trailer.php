@@ -17,7 +17,7 @@ class Trailer implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'trailer') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Trailer string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Trailer string: "' . $name . '"');
         }
 
         // @todo implementation details

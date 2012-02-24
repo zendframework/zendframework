@@ -17,7 +17,7 @@ class IfMatch implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-match') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Match string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Match string: "' . $name . '"');
         }
 
         // @todo implementation details

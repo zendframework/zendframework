@@ -17,7 +17,7 @@ class IfUnmodifiedSince implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-unmodified-since') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Unmodified-Since string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Unmodified-Since string: "' . $name . '"');
         }
 
         // @todo implementation details

@@ -17,7 +17,7 @@ class MaxForwards implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'max-forwards') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Max-Forwards string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Max-Forwards string: "' . $name . '"');
         }
 
         // @todo implementation details

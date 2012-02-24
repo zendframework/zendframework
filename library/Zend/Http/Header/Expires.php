@@ -17,7 +17,7 @@ class Expires implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'expires') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Expires string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Expires string: "' . $name . '"');
         }
 
         // @todo implementation details

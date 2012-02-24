@@ -30,7 +30,7 @@ class Accept implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'accept') {
-            throw new Exception\InvalidArgumentException('Invalid header line for accept header string');
+            throw new Exception\InvalidArgumentException('Invalid header line for accept header string: "' . $name . '"');
         }
 
         // process multiple accept values

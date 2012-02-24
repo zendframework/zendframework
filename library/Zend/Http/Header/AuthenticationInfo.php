@@ -17,7 +17,7 @@ class AuthenticationInfo implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'authentication-info') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Authentication-Info string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Authentication-Info string: "' . $name . '"');
         }
 
         // @todo implementation details

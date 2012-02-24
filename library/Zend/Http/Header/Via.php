@@ -17,7 +17,7 @@ class Via implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'via') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Via string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Via string: "' . $name . '"');
         }
 
         // @todo implementation details

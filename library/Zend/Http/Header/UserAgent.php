@@ -17,7 +17,7 @@ class UserAgent implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'user-agent') {
-            throw new Exception\InvalidArgumentException('Invalid header line for User-Agent string');
+            throw new Exception\InvalidArgumentException('Invalid header line for User-Agent string: "' . $name . '"');
         }
 
         // @todo implementation details

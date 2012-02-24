@@ -17,7 +17,7 @@ class AcceptLanguage implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'accept-language') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Accept-Language string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Accept-Language string: "' . $name . '"');
         }
 
         // @todo implementation details

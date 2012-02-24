@@ -19,7 +19,7 @@ class Age implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'age') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Age string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Age string: "' . $name . '"');
         }
 
         $header->deltaSeconds = $value;

@@ -17,7 +17,7 @@ class ContentType implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-type') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Type string: "' . $name . '"');
         }
 
         // @todo implementation details

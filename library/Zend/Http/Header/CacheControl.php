@@ -17,7 +17,7 @@ class CacheControl implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cache-control') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Cache-Control string: "' . $name . '"');
         }
 
         // @todo implementation details

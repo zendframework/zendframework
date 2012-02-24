@@ -17,7 +17,7 @@ class ProxyAuthenticate implements MultipleHeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'proxy-authenticate') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Proxy-Authenticate string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Proxy-Authenticate string: "' . $name . '"');
         }
 
         // @todo implementation details

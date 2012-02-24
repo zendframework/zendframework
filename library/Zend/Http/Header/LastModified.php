@@ -17,7 +17,7 @@ class LastModified implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'last-modified') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Last-Modified string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Last-Modified string: "' . $name . '"');
         }
 
         // @todo implementation details

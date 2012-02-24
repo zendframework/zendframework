@@ -17,7 +17,7 @@ class ContentRange implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-range') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Range string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Range string: "' . $name . '"');
         }
 
         // @todo implementation details

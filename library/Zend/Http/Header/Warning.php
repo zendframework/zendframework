@@ -17,7 +17,7 @@ class Warning implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'warning') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Warning string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Warning string: "' . $name . '"');
         }
 
         // @todo implementation details

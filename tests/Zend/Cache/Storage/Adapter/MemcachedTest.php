@@ -42,8 +42,7 @@ class MemcachedTest extends CommonAdapterTest
         }
 
         $this->_options = new Cache\Storage\Adapter\MemcachedOptions();
-        $this->_storage = new Cache\Storage\Adapter\Memcached();
-        $this->_storage->setOptions($this->_options);
+        $this->_storage = new Cache\Storage\Adapter\Memcached($this->_options);
 
         parent::setUp();
     }

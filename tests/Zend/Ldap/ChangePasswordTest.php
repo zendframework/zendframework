@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -28,9 +28,9 @@ use Zend\Ldap;
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
- * @group      Zend_LDAP
+ * @group      Zend_Ldap
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -56,7 +56,7 @@ class ChangePasswordTest extends OnlineTestCase
         try {
             $this->_getLDAP()->add($dn, $data);
 
-            $this->assertType('Zend\Ldap\Ldap', $this->_getLDAP()->bind($dn, $password));
+            $this->assertInstanceOf('Zend\Ldap\Ldap', $this->_getLDAP()->bind($dn, $password));
 
             $this->_getLDAP()->bind();
             $this->_getLDAP()->delete($dn);
@@ -105,7 +105,7 @@ class ChangePasswordTest extends OnlineTestCase
                     strstr($message, 'Server is unwilling to perform'));
             }
 
-            $this->assertType('Zend\Ldap\Ldap', $this->_getLDAP()->bind($dn, $newPasswd));
+            $this->assertInstanceOf('Zend\Ldap\Ldap', $this->_getLDAP()->bind($dn, $newPasswd));
 
             $this->_getLDAP()->bind();
             $this->_getLDAP()->delete($dn);
@@ -145,7 +145,7 @@ class ChangePasswordTest extends OnlineTestCase
         try {
             $this->_getLDAP()->add($dn, $data);
 
-            $this->assertType('Zend_LDAP', $this->_getLDAP()->bind($dn, $password));
+            $this->assertInstanceOf('Zend\Ldap', $this->_getLDAP()->bind($dn, $password));
 
             $this->_getLDAP()->bind();
             $this->_getLDAP()->delete($dn);
@@ -201,7 +201,7 @@ class ChangePasswordTest extends OnlineTestCase
                     strstr($message, 'Server is unwilling to perform'));
             }
 
-            $this->assertType('Zend_LDAP', $this->_getLDAP()->bind($dn, $newPasswd));
+            $this->assertInstanceOf('Zend\Ldap', $this->_getLDAP()->bind($dn, $newPasswd));
 
             $this->_getLDAP()->bind();
             $this->_getLDAP()->delete($dn);

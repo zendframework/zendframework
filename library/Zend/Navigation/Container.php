@@ -23,7 +23,8 @@
  */
 namespace Zend\Navigation;
 
-use Zend\Config;
+use Zend\Navigation\Page\AbstractPage,
+    Zend\Config;
 
 /**
  * Zend_Navigation_Container
@@ -34,10 +35,11 @@ use Zend\Config;
  * @uses      RecursiveIterator
  * @uses      RecursiveIteratorIterator
  * @uses      \Zend\Navigation\InvalidArgumentException
- * @uses      \Zend\Navigation\AbstractPage
+ * @uses      \Zend\Navigation\Page\AbstractPage
+ *
  * @category  Zend
  * @package   Zend_Navigation
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Container implements \RecursiveIterator, \Countable

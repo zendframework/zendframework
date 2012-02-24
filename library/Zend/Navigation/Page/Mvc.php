@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Navigation\Page;
 
 use Zend\Mvc\Router\RouteMatch,
-    Zend\Navigation\AbstractPage,
     Zend\Navigation\Exception,
     Zend\View\Helper\Url as UrlHelper;
 
@@ -177,6 +173,7 @@ class Mvc extends AbstractPage
      * @see UrlHelper
      *
      * @return string  page href
+     * @throws Exception\DomainException if no UrlHelper is set
      */
     public function getHref()
     {
@@ -394,7 +391,7 @@ class Mvc extends AbstractPage
      * Set route match object from which parameters will be retrieved
      *
      * @param  RouteMatch $matches
-     * @return Mvc
+     * @return Mvc fluent interface, returns self
      */
     public function setRouteMatch(RouteMatch $matches)
     {
@@ -407,9 +404,8 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param UrlHelper $helper URL helper plugin
-     *
-     * @return Mvc
+     * @param  UrlHelper $helper URL helper plugin
+     * @return Mvc    fluent interface, returns self
      */
     public function setUrlHelper(UrlHelper $helper)
     {
@@ -421,9 +417,7 @@ class Mvc extends AbstractPage
      * Sets the default view helper for assembling URLs.
      *
      * @see getHref()
-     *
      * @param  null|UrlHelper $helper  URL helper
-     *
      * @return void
      */
     public static function setDefaultUrlHelper($helper)

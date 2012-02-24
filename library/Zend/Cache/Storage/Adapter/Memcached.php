@@ -77,9 +77,17 @@ class Memcached extends AbstractAdapter
 
         // It's ok to add server as soon as possible because
         // ext/memcached auto-connects to the server on first use
-        // TODO: Handle multiple servers
         $options = $this->getOptions();
-        $this->memcached->addServer($options->getServer(), $options->getPort());
+
+        $servers = $options->getServers();
+        if (!$servers) {
+            $options->addServer('localhost', 11211);
+            $servers = $options->getServers();
+        }
+
+        foreach ($servers as $server) {
+            $this->memcached->addServer($server[0], $server[1]);
+        }
     }
 
     /* options */

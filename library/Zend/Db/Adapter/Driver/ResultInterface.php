@@ -1,8 +1,8 @@
 <?php
 
-namespace Zend\Db\Adapter;
+namespace Zend\Db\Adapter\Driver;
 
-interface DriverResultInterface extends \Countable, \Traversable
+interface ResultInterface extends \Countable, \Traversable
 {
     public function isQueryResult();
     public function getAffectedRows();

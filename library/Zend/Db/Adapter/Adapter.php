@@ -10,8 +10,8 @@ use Zend\Db\ResultSet;
 /**
  * Class DocBlock
  *
- * @property DriverInterface $driver
- * @property PlatformInterface $platform
+ * @property Driver\DriverInterface $driver
+ * @property Platform\PlatformInterface $platform
  */
 class Adapter
 {
@@ -27,24 +27,18 @@ class Adapter
     const PREPARE_TYPE_POSITIONAL = 'positional';
     const PREPARE_TYPE_NAMED = 'named';
 
-    /**
-     * Built-in namespaces
-     */
-    const BUILTIN_DRIVERS_NAMESPACE = 'Zend\Db\Adapter\Driver';
-    const BUILTIN_PLATFORMS_NAMESPACE = 'Zend\Db\Adapter\Platform';
-
     const FUNCTION_FORMAT_PARAMETER_NAME = 'formatParameterName';
     const FUNCTION_QUOTE_IDENTIFIER = 'quoteIdentifier';
     const FUNCTION_QUOTE_VALUE = 'quoteValue';
 
 
     /**
-     * @var DriverInterface
+     * @var Driver\DriverInterface
      */
     protected $driver = null;
 
     /**
-     * @var PlatformInterface
+     * @var Platform\PlatformInterface
      */
     protected $platform = null;
 
@@ -60,17 +54,17 @@ class Adapter
 
 
     /**
-     * @param DriverInterface|array $driver
-     * @param PlatformInterface $platform
+     * @param Driver\DriverInterface|array $driver
+     * @param Platform\PlatformInterface $platform
      * @param ResultSet\ResultSet $queryResultPrototype
      */
-    public function __construct($driver, PlatformInterface $platform = null, ResultSet\ResultSet $queryResultPrototype = null)
+    public function __construct($driver, Platform\PlatformInterface $platform = null, ResultSet\ResultSet $queryResultPrototype = null)
     {
         if (is_array($driver)) {
             $driver = $this->createDriverFromParameters($driver);
         }
 
-        if (!$driver instanceof DriverInterface) {
+        if (!$driver instanceof Driver\DriverInterface) {
             throw new \InvalidArgumentException('Invalid driver');
         }
 
@@ -89,10 +83,10 @@ class Adapter
     /**
      * setDriver()
      * 
-     * @param DriverInterface $driver
+     * @param Driver\DriverInterface $driver
      * @return Adapter
      */
-    public function setDriver(DriverInterface $driver)
+    public function setDriver(Driver\DriverInterface $driver)
     {
         $this->driver = $driver;
         return $this;
@@ -100,30 +94,32 @@ class Adapter
 
     /**
      * @param array $parameters
-     * @return DriverInterface
+     * @return Driver\DriverInterface
      * @throws \InvalidArgumentException
      */
     public function createDriverFromParameters(array $parameters)
     {
-        if (!isset($parameters['type']) || !is_string($parameters['type'])) {
-            throw new \InvalidArgumentException('createDriverFromParameters() expects a "type" key to be present inside the parameters');
+        if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
+            throw new \InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
         }
 
-        $className = $parameters['type'];
-        if (strpos($className, '\\') === false) {
-            $className = self::BUILTIN_DRIVERS_NAMESPACE . '\\' . $parameters['type'];
+        $driverName = strtolower($parameters['driver']);
+        switch ($driverName) {
+            case 'mysqli':
+                $driver = new Driver\Mysqli\Mysqli($parameters);
+                break;
+            case 'sqlsrv':
+                $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
+                break;
+            case 'pdo':
+            default:
+                if ($driverName == 'pdo' || strpos($driverName, 'pdo') === 0) {
+                    $driver = new Driver\Pdo\Pdo($parameters);
+                }
         }
-        unset($parameters['type']);
-        $driver = $className;
 
-        if (is_string($driver) && class_exists($driver, true)) {
-            $driver = new $driver($parameters);
-        } else {
-            throw new \InvalidArgumentException('Class by name ' . $driver . ' not found', null, null);
-        }
-
-        if (!$driver instanceof DriverInterface) {
-            throw new \InvalidArgumentException('$driver provided is neither a driver class name or object of type DriverInterface', null, null);
+        if (!isset($driver) || !$driver instanceof Driver\DriverInterface) {
+            throw new \InvalidArgumentException('DriverInterface expected', null, null);
         }
 
         return $driver;
@@ -133,7 +129,7 @@ class Adapter
      * getDriver()
      * 
      * @throws Exception
-     * @return DriverInterface
+     * @return Driver\DriverInterface
      */
     public function getDriver()
     {
@@ -159,17 +155,17 @@ class Adapter
     }
 
     /**
-     * @param PlatformInterface $platform
+     * @param Platform\PlatformInterface $platform
      * @return Adapter
      */
-    public function setPlatform(PlatformInterface $platform)
+    public function setPlatform(Platform\PlatformInterface $platform)
     {
         $this->platform = $platform;
         return $this;
     }
 
     /**
-     * @return PlatformInterface
+     * @return Platform\PlatformInterface
      */
     public function getPlatform()
     {
@@ -177,20 +173,23 @@ class Adapter
     }
 
     /**
-     * @param DriverInterface $driver
-     * @return PlatformInterface
+     * @param Driver\DriverInterface $driver
+     * @return Platform\PlatformInterface
      */
-    public function createPlatformFromDriver(DriverInterface $driver)
+    public function createPlatformFromDriver(Driver\DriverInterface $driver)
     {
         // consult driver for platform implementation
-        $platform = $driver->getDatabasePlatformName(DriverInterface::NAME_FORMAT_CAMELCASE);
-        if ($platform == '') {
-            $platform = 'Sql92';
+        $platformName = $driver->getDatabasePlatformName(Driver\DriverInterface::NAME_FORMAT_CAMELCASE);
+        switch ($platformName) {
+            case 'Mysql':
+                return new Platform\Mysql();
+            case 'SqlServer':
+                return new Platform\SqlServer();
+            case 'Sqlite':
+                return new Platform\Sqlite();
+            default:
+                return new Platform\Sql92();
         }
-        if ($platform{0} != '\\') {
-            $platform = self::BUILTIN_PLATFORMS_NAMESPACE . '\\' . $platform;
-        }
-        return new $platform;
     }
 
     public function getDefaultSchema()
@@ -203,7 +202,7 @@ class Adapter
      *
      * @param string $sql
      * @param string|array $parametersOrPrepareExecuteFlag
-     * @return Zend\Db\Adapter\DriverStatement|
+     * @return Driver\StatementInterface
      */
     public function query($sql, $parametersOrPrepareExecuteFlag = self::QUERY_MODE_PREPARE)
     {
@@ -227,9 +226,7 @@ class Adapter
             $result = $c->execute($sql);
         }
 
-        //$resultSetProducing = (stripos(trim($sql), 'SELECT') === 0); // will this sql produce a rowset?
-
-        if ($result instanceof DriverResultInterface && $result->isQueryResult()) {
+        if ($result instanceof Driver\ResultInterface && $result->isQueryResult()) {
             $resultSet = clone $this->queryResultSetPrototype;
             $resultSet->setDataSource($result);
             return $resultSet;
@@ -240,6 +237,7 @@ class Adapter
 
     /**
      * @param $name
+     * @return Driver\DriverInterface|Platform\PlatformInterface
      */
     public function __get($name)
     {

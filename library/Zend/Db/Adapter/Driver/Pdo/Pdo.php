@@ -1,63 +1,62 @@
 <?php
 
-namespace Zend\Db\Adapter\Driver;
+namespace Zend\Db\Adapter\Driver\Pdo;
 
-use PDOStatement;
+use Zend\Db\Adapter\Driver\DriverInterface;
 
-class Pdo implements \Zend\Db\Adapter\DriverInterface
+class Pdo implements DriverInterface
 {
     /**
-     * @var Pdo\Connection
+     * @var Connection
      */
     protected $connection = null;
 
     /**
-     * @var Pdo\Statement
+     * @var Statement
      */
     protected $statementPrototype = null;
 
     /**
-     * @var Pdo\Result
+     * @var Result
      */
     protected $resultPrototype = null;
 
     /**
-     * @param array|Pdo\Connection|\PDO $connection
-     * @param null|Pdo\Statement $statementPrototype
-     * @param null|Pdo\Result $resultPrototype
+     * @param array|Connection|\PDO $connection
+     * @param null|Statement $statementPrototype
+     * @param null|Result $resultPrototype
      */
-    public function __construct($connection, Pdo\Statement $statementPrototype = null, Pdo\Result $resultPrototype = null)
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
     {
-        if (!$connection instanceof Pdo\Connection) {
-            $connection = new Pdo\Connection($connection);
+        if (!$connection instanceof Connection) {
+            $connection = new Connection($connection);
         }
 
-        if (!$connection instanceof Pdo\Connection) {
+        if (!$connection instanceof Connection) {
             throw new \InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
         }
 
         $this->registerConnection($connection);
-        $this->registerStatementPrototype(($statementPrototype) ?: new Pdo\Statement());
-        $this->registerResultPrototype(($resultPrototype) ?: new Pdo\Result());
+        $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
+        $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 
-    public function registerConnection(Pdo\Connection $connection)
+    public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
         return $this;
     }
 
-    public function registerStatementPrototype(Pdo\Statement $statementPrototype)
+    public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
     }
 
-    public function registerResultPrototype(Pdo\Result $resultPrototype)
+    public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
-        $this->resultPrototype->setDriver($this);
     }
 
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
@@ -73,7 +72,7 @@ class Pdo implements \Zend\Db\Adapter\DriverInterface
     }
 
     /**
-     * @return Pdo\Connection
+     * @return Connection
      */
     public function getConnection()
     {
@@ -82,7 +81,7 @@ class Pdo implements \Zend\Db\Adapter\DriverInterface
 
     /**
      * @param string $sql
-     * @return Pdo\Statement
+     * @return Statement
      */
     public function createStatement($sql)
     {
@@ -93,7 +92,7 @@ class Pdo implements \Zend\Db\Adapter\DriverInterface
 
     /**
      * @param resource $resource
-     * @return Pdo\Result
+     * @return Result
      */
     public function createResult($resource)
     {

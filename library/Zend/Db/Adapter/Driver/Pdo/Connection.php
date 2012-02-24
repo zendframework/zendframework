@@ -2,18 +2,15 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter,
-    Zend\Db\Adapter\DriverInterface,
-    Zend\Db\Adapter\Exception\InvalidQueryException,
-    PDO,
-    PDOException,
-    PDOStatement;
+use Zend\Db\Adapter\Driver\ConnectionInterface,
+    Zend\Db\Adapter\Driver\DriverInterface,
+    Zend\Db\Adapter\Exception\InvalidQueryException;
 
 
-class Connection implements Adapter\DriverConnectionInterface
+class Connection implements ConnectionInterface
 {
     /**
-     * @var \Zend\Db\Adapter\Driver\Pdo
+     * @var Pdo
      */
     protected $driver = null;
 
@@ -23,7 +20,7 @@ class Connection implements Adapter\DriverConnectionInterface
     protected $connectionParameters = array();
     
     /**
-     * @var PDO
+     * @var \PDO
      */
     protected $resource = null;
 
@@ -33,29 +30,29 @@ class Connection implements Adapter\DriverConnectionInterface
     protected $inTransaction = false;
 
     /**
-     * @param array|PDO $connectionParameters
+     * @param array|\PDO $connectionInfo
      */
     public function __construct($connectionInfo = null)
     {
         if (is_array($connectionInfo)) {
             $this->setConnectionParameters($connectionInfo);
-        } elseif ($connectionInfo instanceof PDO) {
+        } elseif ($connectionInfo instanceof \PDO) {
             $this->setResource($connectionInfo);
         }
     }
 
     /**
-     * @param DriverInterface $driver
+     * @param Pdo $driver
      * @return Connection
      */
-    public function setDriver(DriverInterface $driver)
+    public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
         return $this;
     }
 
     /**
-     * @param array $connectionParams
+     * @param array $connectionParameters
      */
     public function setConnectionParameters(array $connectionParameters)
     {
@@ -86,20 +83,21 @@ class Connection implements Adapter\DriverConnectionInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-        
+
+        /** @var $result \PDOStatement */
         $result = $this->resource->query('SELECT DATABASE()');
         $r = $result->fetch_row();
         return $r[0];
     }
 
-    public function setResource(PDO $resource)
+    public function setResource(\PDO $resource)
     {
         $this->resource = $resource;
         return $this;
     }
 
     /**
-     * @return PDO
+     * @return \PDO
      */
     public function getResource()
     {
@@ -121,18 +119,29 @@ class Connection implements Adapter\DriverConnectionInterface
 
         // @todo method createKnownDsn
 
-        $dsn = $username = $password = null;
+        $dsn = $username = $password = $database = null;
         $options = array();
         foreach ($this->connectionParameters as $key => $value) {
-            switch ($key) {
+            switch (strtolower($key)) {
                 case 'dsn':
-                    $dsn = (string) $value;
+                    $dsn = $value;
+                    break 2;
+                case 'driver':
+                    $value = strtolower($value);
+                    if (strpos($value, 'pdo') === 0) {
+                        $pdoDriver = strtolower(substr(str_replace(array('-', '_', ' '), '', $value), 3));
+                    }
                     break;
+                case 'pdodriver':
+                    $pdoDriver = (string) $value;
                 case 'username':
                     $username = (string) $value;
                     break;
                 case 'password':
                     $password = (string) $value;
+                    break;
+                case 'database':
+                    $database = (string) $value;
                     break;
                 case 'options':
                     $options = array_merge($options, (array) $value);
@@ -143,9 +152,18 @@ class Connection implements Adapter\DriverConnectionInterface
             }
         }
 
+        if (!isset($dsn) && isset($pdoDriver)) {
+            $dsn = $pdoDriver . ':';
+            if (isset($database)) {
+                $dsn .= $database;
+            }
+        } elseif (!isset($dsn)) {
+            throw new \Exception('A dsn was not provided or could not be constructed from your parameters');
+        }
+
         try {
-            $this->resource = new PDO($dsn, $username, $password, $options);
-        } catch (PDOException $e) {
+            $this->resource = new \PDO($dsn, $username, $password, $options);
+        } catch (\PDOException $e) {
             throw new \Exception('Connect Error: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
@@ -157,7 +175,7 @@ class Connection implements Adapter\DriverConnectionInterface
      */
     public function isConnected()
     {
-        return ($this->resource instanceof PDO);
+        return ($this->resource instanceof \PDO);
     }
 
     /**
@@ -241,6 +259,8 @@ class Connection implements Adapter\DriverConnectionInterface
     
     /**
      * @todo PDO_SQLite does not support scrollable cursors; make this configurable based on dsn?
+     * @param string $sql
+     * @return Statement
      */
     public function prepare($sql)
     {

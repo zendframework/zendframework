@@ -2,18 +2,12 @@
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-use Zend\Db\Adapter\DriverResultInterface,
-    Iterator;
+use Zend\Db\Adapter\Driver\ResultInterface;
 
-class Result implements Iterator, DriverResultInterface
+class Result implements \Iterator, ResultInterface
 {
     /**
-     * @var Zend\Db\Adapter\Driver\AbstractDriver
-     */
-    protected $driver = null;
-    
-    /**
-     * @var Sqlsrv_result|Sqlsrv_stmt
+     * @var resource
      */
     protected $resource = null;
     
@@ -23,12 +17,6 @@ class Result implements Iterator, DriverResultInterface
 
     protected $position = -1;
 
-    public function setDriver(\Zend\Db\Adapter\DriverInterface $driver)
-    {
-        $this->driver = $driver;
-        return $this;
-    }
-    
     public function initialize($resource)
     {
         $this->resource = $resource;

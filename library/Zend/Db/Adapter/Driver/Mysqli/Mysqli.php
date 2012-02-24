@@ -1,62 +1,63 @@
 <?php
 
-namespace Zend\Db\Adapter\Driver;
+namespace Zend\Db\Adapter\Driver\Mysqli;
 
-class Mysqli implements \Zend\Db\Adapter\DriverInterface
+use Zend\Db\Adapter\Driver\DriverInterface;
+
+class Mysqli implements DriverInterface
 {
 
     /**
-     * @var Mysqli\Connection
+     * @var Connection
      */
     protected $connection = null;
 
     /**
-     * @var Mysqli\Statement
+     * @var Statement
      */
     protected $statementPrototype = null;
 
     /**
-     * @var Mysqli\Result
+     * @var Result
      */
     protected $resultPrototype = null;
 
     /**
-     * @param array|Mysqli\Connection|\mysqli $connection
-     * @param null|Mysqli\Statement $statementPrototype
-     * @param null|Mysqli\Result $resultPrototype
+     * @param array|Connection|\mysqli $connection
+     * @param null|Statement $statementPrototype
+     * @param null|Result $resultPrototype
      */
-    public function __construct($connection, Mysqli\Statement $statementPrototype = null, Mysqli\Result $resultPrototype = null)
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
     {
-        if (!$connection instanceof Mysqli\Connection) {
-            $connection = new Mysqli\Connection($connection);
+        if (!$connection instanceof Connection) {
+            $connection = new Connection($connection);
         }
 
-        if (!$connection instanceof Mysqli\Connection) {
+        if (!$connection instanceof Connection) {
             throw new \InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
         }
 
         $this->registerConnection($connection);
-        $this->registerStatementPrototype(($statementPrototype) ?: new Mysqli\Statement());
-        $this->registerResultPrototype(($resultPrototype) ?: new Mysqli\Result());
+        $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
+        $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 
-    public function registerConnection(Mysqli\Connection $connection)
+    public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
-        $this->connection->setDriver($this);
+        $this->connection->setDriver($this); // needs access to driver to createStatement()
         return $this;
     }
 
-    public function registerStatementPrototype(Mysqli\Statement $statementPrototype)
+    public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
-        $this->statementPrototype->setDriver($this);
+        $this->statementPrototype->setDriver($this); // needs access to driver to createResult()
     }
 
-    public function registerResultPrototype(Mysqli\Result $resultPrototype)
+    public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
-        $this->resultPrototype->setDriver($this);
     }
 
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
@@ -76,7 +77,7 @@ class Mysqli implements \Zend\Db\Adapter\DriverInterface
     }
 
     /**
-     * @return Mysqli\Connection
+     * @return Connection
      */
     public function getConnection()
     {
@@ -85,7 +86,7 @@ class Mysqli implements \Zend\Db\Adapter\DriverInterface
 
     /**
      * @param string $sql
-     * @return Mysqli\Statement
+     * @return Statement
      */
     public function createStatement($sql)
     {
@@ -95,7 +96,7 @@ class Mysqli implements \Zend\Db\Adapter\DriverInterface
     }
 
     /**
-     * @return Mysqli\Result
+     * @return Result
      */
     public function createResult($resource)
     {

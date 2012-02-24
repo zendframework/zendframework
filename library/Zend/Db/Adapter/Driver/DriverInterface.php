@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Db\Adapter;
+namespace Zend\Db\Adapter\Driver;
 
 interface DriverInterface
 {
@@ -19,12 +19,12 @@ interface DriverInterface
     public function checkEnvironment();
 
     /**
-     * @return DriverConnectionInterface
+     * @return ConnectionInterface
      */
     public function getConnection();
 
     /**
-     * @return DriverStatementInterface
+     * @return StatementInterface
      */
     public function createStatement($sqlOrResource);
 

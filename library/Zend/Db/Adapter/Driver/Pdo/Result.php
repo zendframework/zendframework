@@ -2,10 +2,9 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\DriverInterface,
-    Zend\Db\Adapter\DriverResultInterface,
+use Zend\Db\Adapter\Driver\ResultInterface,
     Iterator,
-    PDO,
+    PDO as PDOResource,
     PDOStatement;
 
 /**
@@ -13,7 +12,7 @@ use Zend\Db\Adapter\DriverInterface,
  *
  * @todo Use PDO's native interface for fetching into named objects?
  */
-class Result implements Iterator, DriverResultInterface
+class Result implements Iterator, ResultInterface
 {
 
     const STATEMENT_MODE_SCROLLABLE = 'scrollable';
@@ -21,11 +20,6 @@ class Result implements Iterator, DriverResultInterface
 
     protected $statementMode = self::STATEMENT_MODE_FORWARD;
 
-    /**
-     * @var Zend\Db\Adapter\Driver\AbstractDriver
-     */
-    protected $driver = null;
-    
     /**
      * @var \PDOStatement
      */
@@ -54,12 +48,6 @@ class Result implements Iterator, DriverResultInterface
      */
     protected $position = -1;
 
-    public function setDriver(DriverInterface $driver)
-    {
-        $this->driver = $driver;
-        return $this;
-    }
-
     public function initialize(PDOStatement $resource)
     {
         $this->resource = $resource;
@@ -80,13 +68,13 @@ class Result implements Iterator, DriverResultInterface
             return $this->currentData;
         }
 
-        $this->currentData = $this->resource->fetch(PDO::FETCH_ASSOC);
+        $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         return $this->currentData;
     }
     
     public function next()
     {
-        $this->currentData = $this->resource->fetch(PDO::FETCH_ASSOC);
+        $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
         $this->position++;
         return $this->currentData;
@@ -105,7 +93,7 @@ class Result implements Iterator, DriverResultInterface
         if ($this->statementMode == self::STATEMENT_MODE_FORWARD && $this->position > 0) {
             throw new \Exception('This result is a forward only result set, calling rewind() after moving forward is not supported');
         }
-        $this->currentData = $this->resource->fetch(PDO::FETCH_ASSOC);
+        $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         $this->currentComplete = true;
         $this->position = 0;
     }

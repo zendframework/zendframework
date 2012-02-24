@@ -2,19 +2,22 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter,
-    Zend\Db\Adapter\DriverStatementInterface,
+use Zend\Db\Adapter\Driver\StatementInterface,
     Zend\Db\Adapter\ParameterContainer,
     Zend\Db\Adapter\ParameterContainerInterface;
 
-class Statement implements DriverStatementInterface
+class Statement implements StatementInterface
 {
     /**
-     * @var \Zend\Db\Adapter\Driver\Mysqli
+     * @var Mysqli
      */
     protected $driver = null;
+
+    /**
+     * @var bool|string
+     */
     protected $sql = false;
-    protected $isQuery = null;
+
     protected $parameterContainer = null;
     
     /**
@@ -22,7 +25,7 @@ class Statement implements DriverStatementInterface
      */
     protected $resource = null;
     
-    public function setDriver(Adapter\DriverInterface $driver)
+    public function setDriver(Mysqli $driver)
     {
         $this->driver = $driver;
         return $this;
@@ -41,9 +44,6 @@ class Statement implements DriverStatementInterface
     public function setSql($sql)
     {
         $this->sql = $sql;
-        if (strpos(ltrim($sql), 'SELECT') === 0) {
-            $this->isQuery = true;
-        }
         return $this;
     }
     
@@ -51,13 +51,7 @@ class Statement implements DriverStatementInterface
     {
         $this->parameterContainer = $parameterContainer;
     }
-    
-    
-    public function isQuery()
-    {
-        return $this->isQuery;
-    }
-    
+
     public function getResource()
     {
         return $this->resource;
@@ -114,5 +108,10 @@ class Statement implements DriverStatementInterface
         array_unshift($args, $type);
 
         call_user_func_array(array($this->resource, 'bind_param'), $args);
+    }
+
+    public function isQuery()
+    {
+        // TODO: Implement isQuery() method.
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Zend\Db\Adapter\Platform;
 
-class Sqlite implements \Zend\Db\Adapter\PlatformInterface
+class Sqlite implements PlatformInterface
 {
     public function getName()
     {

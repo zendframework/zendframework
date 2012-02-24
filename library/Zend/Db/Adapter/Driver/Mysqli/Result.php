@@ -2,11 +2,9 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter,
-    Zend\Db\Adapter\DriverResultInterface,
-    Iterator;
+use Zend\Db\Adapter\Driver\ResultInterface;
 
-class Result implements Iterator, DriverResultInterface
+class Result implements \Iterator, ResultInterface
 {
     const MODE_STATEMENT = 'statement';
     const MODE_RESULT = 'result';
@@ -16,12 +14,7 @@ class Result implements Iterator, DriverResultInterface
     protected $isQueryResult = true;
 
     /**
-     * @var Zend\Db\Adapter\Driver\AbstractDriver
-     */
-    protected $driver = null;
-    
-    /**
-     * @var mysqli_result|mysqli_stmt
+     * @var \mysqli_result|\mysqli_stmt
      */
     protected $resource = null;
 
@@ -52,14 +45,7 @@ class Result implements Iterator, DriverResultInterface
     protected $currentData = false;
     
     protected $statementBindValues = array('keys' => null, 'values' => array());
-    
-    
-    public function setDriver(Adapter\DriverInterface $driver)
-    {
-        $this->driver = $driver;
-        return $this;
-    }
-    
+
     public function initialize($resource)
     {
         if (!$resource instanceof \mysqli && !$resource instanceof \mysqli_result && !$resource instanceof \mysqli_stmt) {
@@ -120,6 +106,7 @@ class Result implements Iterator, DriverResultInterface
      * @see http://php.net/manual/en/mysqli-stmt.bind-result.php
      * 
      * @throws \RuntimeException
+     * @return bool
      */
     protected function loadDataFromMysqliStatement()
     {

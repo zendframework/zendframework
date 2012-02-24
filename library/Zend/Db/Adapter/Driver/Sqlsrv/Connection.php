@@ -1,13 +1,13 @@
 <?php
 
 namespace Zend\Db\Adapter\Driver\Sqlsrv;
-use Zend\Db\Adapter;
 
+use Zend\Db\Adapter\Driver\ConnectionInterface;
 
-class Connection implements Adapter\DriverConnectionInterface
+class Connection implements ConnectionInterface
 {
     /**
-     * @var \Zend\Db\Adapter\DriverInterface
+     * @var Sqlsrv
      */
     protected $driver = null;
 
@@ -17,7 +17,7 @@ class Connection implements Adapter\DriverConnectionInterface
     protected $connectionParameters = array();
     
     /**
-     * @var \Sqlsrv
+     * @var resource
      */
     protected $resource = null;
 
@@ -35,7 +35,7 @@ class Connection implements Adapter\DriverConnectionInterface
         }
     }
     
-    public function setDriver(Adapter\DriverInterface $driver)
+    public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
         return $this;
@@ -78,7 +78,7 @@ class Connection implements Adapter\DriverConnectionInterface
     }
 
     /**
-     * @return \Sqlsrv
+     * @return resource
      */
     public function getResource()
     {
@@ -99,9 +99,18 @@ class Connection implements Adapter\DriverConnectionInterface
                 case 'servername':
                     $serverName = $cpValue;
                     break;
-                // @todo check other sqlsrv param values
-                default:
-                    $params[$cpName] = $cpValue;
+                case 'username':
+                case 'uid':
+                    $params['UID'] = $cpValue;
+                    break;
+                case 'password':
+                case 'pwd':
+                    $params['PWD'] = $cpValue;
+                    break;
+                case 'database':
+                case 'dbname':
+                    $params['Database'] = $cpValue;
+                    break;
             }
         }
 

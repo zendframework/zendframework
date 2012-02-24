@@ -2,7 +2,7 @@
 
 namespace Zend\Db\Adapter\Platform;
 
-class SqlServer implements \Zend\Db\Adapter\PlatformInterface
+class SqlServer implements PlatformInterface
 {
     public function getName()
     {

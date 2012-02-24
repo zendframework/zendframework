@@ -1,6 +1,6 @@
 <?php
 
-namespace Zend\Db\Adapter;
+namespace Zend\Db\Adapter\Platform;
 
 interface PlatformInterface
 {

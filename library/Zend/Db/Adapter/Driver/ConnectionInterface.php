@@ -1,11 +1,9 @@
 <?php
 
-namespace Zend\Db\Adapter;
+namespace Zend\Db\Adapter\Driver;
 
-interface DriverConnectionInterface
+interface ConnectionInterface
 {
-    public function setDriver(DriverInterface $driver);
-
     public function getDefaultCatalog();
     public function getDefaultSchema();
     public function getResource();

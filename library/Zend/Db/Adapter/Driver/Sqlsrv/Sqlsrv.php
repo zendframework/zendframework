@@ -1,62 +1,63 @@
 <?php
 
-namespace Zend\Db\Adapter\Driver;
+namespace Zend\Db\Adapter\Driver\Sqlsrv;
 
-class Sqlsrv implements \Zend\Db\Adapter\DriverInterface
+use Zend\Db\Adapter\Driver\DriverInterface;
+
+class Sqlsrv implements DriverInterface
 {
 
     /**
-     * @var Sqlsrv\Connection
+     * @var Connection
      */
     protected $connection = null;
 
     /**
-     * @var Sqlsrv\Statement
+     * @var Statement
      */
     protected $statementPrototype = null;
 
     /**
-     * @var Sqlsrv\Result
+     * @var Result
      */
     protected $resultPrototype = null;
 
     /**
-     * @param array|Sqlsrv\Connection|resource $connection
-     * @param null|Sqlsrv\Statement $statementPrototype
-     * @param null|Sqlsrv\Result $resultPrototype
+     * @param array|Connection|resource $connection
+     * @param null|Statement $statementPrototype
+     * @param null|Result $resultPrototype
      */
-    public function __construct($connection, Sqlsrv\Statement $statementPrototype = null, Sqlsrv\Result $resultPrototype = null)
+    public function __construct($connection, Statement $statementPrototype = null, Result $resultPrototype = null)
     {
-        if (!$connection instanceof Sqlsrv\Connection) {
-            $connection = new Sqlsrv\Connection($connection);
+        if (!$connection instanceof Connection) {
+            $connection = new Connection($connection);
         }
 
-        if (!$connection instanceof Sqlsrv\Connection) {
+        if (!$connection instanceof Connection) {
             throw new \InvalidArgumentException('$connection must be an array of parameters or a Pdo\Connection object');
         }
 
         $this->registerConnection($connection);
-        $this->registerStatementPrototype(($statementPrototype) ?: new Sqlsrv\Statement());
-        $this->registerResultPrototype(($resultPrototype) ?: new Sqlsrv\Result());
+        $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
+        $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 
-    public function registerConnection(Sqlsrv\Connection $connection)
+    public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
         return $this;
     }
 
-    public function registerStatementPrototype(Sqlsrv\Statement $statementPrototype)
+    public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
     }
 
-    public function registerResultPrototype(Sqlsrv\Result $resultPrototype)
+    public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
-        $this->resultPrototype->setDriver($this);
     }
 
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
@@ -76,7 +77,7 @@ class Sqlsrv implements \Zend\Db\Adapter\DriverInterface
     }
 
     /**
-     * @return Sqlsrv\Connection
+     * @return Connection
      */
     public function getConnection()
     {
@@ -85,7 +86,7 @@ class Sqlsrv implements \Zend\Db\Adapter\DriverInterface
 
     /**
      * @param string $sql
-     * @return Sqlsrv\Statement
+     * @return Statement
      */
     public function createStatement($sql)
     {
@@ -96,7 +97,7 @@ class Sqlsrv implements \Zend\Db\Adapter\DriverInterface
 
     /**
      * @param resource $result
-     * @return Sqlsrv\Result
+     * @return Result
      */
     public function createResult($resource)
     {

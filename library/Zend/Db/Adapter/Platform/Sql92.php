@@ -2,7 +2,7 @@
 
 namespace Zend\Db\Adapter\Platform;
 
-class Sql92 implements \Zend\Db\Adapter\PlatformInterface
+class Sql92 implements PlatformInterface
 {
     public function getName()
     {
@@ -16,8 +16,7 @@ class Sql92 implements \Zend\Db\Adapter\PlatformInterface
     
     public function quoteIdentifier($identifier)
     {
-        $qis = $this->getQuoteIdentifierSymbol();
-        return $qis . str_replace($qis, '\\' . $qis, $identifier) . $qis;
+        return '"' . str_replace('"', '\\' . '"', $identifier) . '"';
     }
     
     public function getQuoteValueSymbol()
@@ -27,12 +26,30 @@ class Sql92 implements \Zend\Db\Adapter\PlatformInterface
     
     public function quoteValue($value)
     {
-        $qvs = $this->getQuoteValueSymbol();
-        return $qvs . str_replace($qvs, '\\' . $qvs, $value) . $qvs;
+        return '\'' . str_replace('\'', '\\' . '\'', $value) . '\'';
     }
 
     public function getIdentifierSeparator()
     {
         return '.';
+    }
+
+    public function quoteIdentifierWithSeparator($identifier)
+    {
+        $parts = preg_split('#([\.\s])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE);
+        foreach($parts as $i => $part) {
+            switch ($part) {
+                case ' ':
+                case '.':
+                case 'AS':
+                case 'As':
+                case 'aS':
+                case 'as':
+                    break;
+                default:
+                    $parts[$i] = '"' . str_replace('"', '\\' . '"', $identifier) . '"';
+            }
+        }
+        return implode('', $parts);
     }
 }

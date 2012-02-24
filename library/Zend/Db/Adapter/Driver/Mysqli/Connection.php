@@ -2,15 +2,13 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter,
-    mysqli;
+use Zend\Db\Adapter\Driver\ConnectionInterface,
+    Zend\Db\Adapter\Driver\DriverInterface;
 
-
-
-class Connection implements Adapter\DriverConnectionInterface
+class Connection implements ConnectionInterface
 {
     /**
-     * @var \Zend\Db\Adapter\Driver\Mysqli
+     * @var Mysqli
      */
     protected $driver = null;
     
@@ -27,12 +25,12 @@ class Connection implements Adapter\DriverConnectionInterface
     {
         if (is_array($connectionInfo)) {
             $this->setConnectionParameters($connectionInfo);
-        } elseif ($connectionInfo instanceof mysqli) {
+        } elseif ($connectionInfo instanceof \mysqli) {
             $this->setResource($connectionInfo);
         }
     }
 
-    public function setDriver(Adapter\DriverInterface $driver)
+    public function setDriver(DriverInterface $driver)
     {
         $this->driver = $driver;
         return $this;
@@ -59,7 +57,8 @@ class Connection implements Adapter\DriverConnectionInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-        
+
+        /** @var $result \mysqli_result */
         $result = $this->resource->query('SELECT DATABASE()');
         $r = $result->fetch_row();
         return $r[0];
@@ -72,7 +71,7 @@ class Connection implements Adapter\DriverConnectionInterface
     }
 
     /**
-     * @return \Mysqli
+     * @return \mysqli
      */
     public function getResource()
     {
@@ -81,7 +80,7 @@ class Connection implements Adapter\DriverConnectionInterface
     
     public function connect()
     {
-        if ($this->resource instanceof mysqli) {
+        if ($this->resource instanceof \mysqli) {
             return;
         }
 

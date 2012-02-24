@@ -2,18 +2,15 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\ParameterContainerInterface,
+use Zend\Db\Adapter\Driver\StatementInterface,
+    Zend\Db\Adapter\ParameterContainerInterface,
     Zend\Db\Adapter\ParameterContainer,
-    Zend\Db\Adapter\DriverStatementInterface,
-    Zend\Db\Adapter\DriverInterface,
-    Zend\Db\Adapter\Exception,
-    PDO,
-    PDOStatement;
+    Zend\Db\Adapter\Exception;
 
-class Statement implements DriverStatementInterface
+class Statement implements StatementInterface
 {
     /**
-     * @var \Zend\Db\Adapter\DriverInterface
+     * @var Pdo
      */
     protected $driver             = null;
     protected $sql                = false;
@@ -25,13 +22,13 @@ class Statement implements DriverStatementInterface
      */
     protected $resource = null;
     
-    public function setDriver(DriverInterface $driver)
+    public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
         return $this;
     }
 
-    public function initialize(PDO $connectionResource, $sql)
+    public function initialize(\PDO $connectionResource, $sql)
     {
         $this->sql = $sql;
         if (strpos(ltrim($sql), 'SELECT') === 0) {
@@ -46,10 +43,12 @@ class Statement implements DriverStatementInterface
         return $this;
     }
 
-//    public function setParameterContainer(ParameterContainer $parameterContainer)
-//    {
-//        $this->parameterContainer = $parameterContainer;
-//    }
+    /*
+    public function setParameterContainer(ParameterContainer $parameterContainer)
+    {
+        $this->parameterContainer = $parameterContainer;
+    }
+    */
 
     public function isQuery()
     {
@@ -95,20 +94,20 @@ class Statement implements DriverStatementInterface
     {
         $parameters = $container->toArray();
         foreach ($parameters as $position => &$value) {
-            $type = PDO::PARAM_STR;
+            $type = \PDO::PARAM_STR;
             if ($container->offsetHasErrata($position)) {
                 switch ($container->offsetGetErrata($position)) {
                     case ParameterContainerInterface::TYPE_INTEGER:
-                        $type = PDO::PARAM_INT;
+                        $type = \PDO::PARAM_INT;
                         break;
                     case ParameterContainerInterface::TYPE_NULL:
-                        $type = PDO::PARAM_NULL;
+                        $type = \PDO::PARAM_NULL;
                         break;
                     case ParameterContainerInterface::TYPE_LOB:
-                        $type = PDO::PARAM_LOB;
+                        $type = \PDO::PARAM_LOB;
                         break;
                     case (is_bool($value)):
-                        $type = PDO::PARAM_BOOL;
+                        $type = \PDO::PARAM_BOOL;
                         break;
                 }
             }

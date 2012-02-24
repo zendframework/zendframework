@@ -341,6 +341,10 @@ class Application implements AppContext
             goto complete;
         }
 
+        if ($controller instanceof LocatorAware) {
+            $controller->setLocator($locator);
+        }
+
         if (!$controller instanceof Dispatchable) {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_INVALID)

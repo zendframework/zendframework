@@ -95,7 +95,7 @@ class Bootstrap implements Bootstrapper
     protected function setupLocator(AppContext $application)
     {
         $di = new Di;
-        $di->instanceManager()->addSharedInstance($di, 'Zend\Di\Locator');
+        $di->instanceManager()->addTypePreference('Zend\Di\Locator', $di);
 
         // Default configuration for common MVC classes
         $diConfig = new DiConfiguration(array('definition' => array('class' => array(

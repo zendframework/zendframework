@@ -588,4 +588,50 @@ class ApplicationTest extends TestCase
         $event = $app->getMvcEvent();
         $this->assertEquals(Application::ERROR_CONTROLLER_NOT_FOUND, $event->getError());
     }
+
+    /**
+     * @group ZF2-171
+     */
+    public function testFinishShouldRunEvenIfRouteEventReturnsResponse()
+    {
+        $app      = new Application();
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->attach('route', function($e) use ($response) {
+            return $response;
+        }, 100);
+
+        $token = new stdClass;
+        $events->attach('finish', function($e) use ($token) {
+            $token->foo = 'bar';
+        });
+
+        $app->run();
+        $this->assertTrue(isset($token->foo));
+        $this->assertEquals('bar',$token->foo);
+    }
+
+    /**
+     * @group ZF2-171
+     */
+    public function testFinishShouldRunEvenIfDispatchEventReturnsResponse()
+    {
+        $this->markTestSkipped();
+        $app      = new Application();
+        $response = $app->getResponse();
+        $events   = $app->events();
+        $events->clearListeners('route');
+        $events->attach('dispatch', function($e) use ($response) {
+            return $response;
+        }, 100);
+
+        $token = new stdClass;
+        $events->attach('finish', function($e) use ($token) {
+            $token->foo = 'bar';
+        });
+
+        $app->run();
+        $this->assertTrue(isset($token->foo));
+        $this->assertEquals('bar',$token->foo);
+    }
 }

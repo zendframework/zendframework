@@ -98,7 +98,19 @@ class Bootstrap implements Bootstrapper
         $di->instanceManager()->addSharedInstance($di, 'Zend\Di\Locator');
 
         // Default configuration for common MVC classes
-        $routerDiConfig = new DiConfiguration(array('definition' => array('class' => array(
+        $diConfig = new DiConfiguration(array('definition' => array('class' => array(
+            'Zend\Mvc\Router\RouteStack' => array(
+                'instantiator' => array(
+                    'Zend\Mvc\Router\Http\TreeRouteStack',
+                    'factory'
+                ),
+            ),
+            'Zend\Mvc\Router\Http\TreeRouteStack' => array(
+                'instantiator' => array(
+                    'Zend\Mvc\Router\Http\TreeRouteStack',
+                    'factory'
+                ),
+            ),
             'Zend\Mvc\View\DefaultRenderingStrategy' => array(
                 'setBaseTemplate' => array(
                     'baseTemplate' => array(
@@ -200,7 +212,7 @@ class Bootstrap implements Bootstrapper
                 ),
             ),
         ))));
-        $routerDiConfig->configure($di);
+        $diConfig->configure($di);
 
         $config = new DiConfiguration($this->config->di);
         $config->configure($di);

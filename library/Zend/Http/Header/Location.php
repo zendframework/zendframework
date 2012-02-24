@@ -19,11 +19,11 @@ class Location implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'location') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Location string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Location string: "'.$name.'"');
         }
 
         if (!Uri::validateHost($value)) {
-            throw new Exception\InvalidArgumentException('Invalid URI value for Location');
+            throw new Exception\InvalidArgumentException('Invalid URI value for Location: "'.$value.'"');
         }
         // @todo implementation details
         $header->value= $value;

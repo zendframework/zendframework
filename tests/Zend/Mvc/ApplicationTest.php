@@ -616,7 +616,6 @@ class ApplicationTest extends TestCase
      */
     public function testFinishShouldRunEvenIfDispatchEventReturnsResponse()
     {
-        $this->markTestSkipped();
         $app      = new Application();
         $response = $app->getResponse();
         $events   = $app->events();

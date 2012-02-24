@@ -17,12 +17,12 @@ class Connection implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'connection') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Connection string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Connection string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Connection implements HeaderDescription
     {
         return 'Connection: ' . $this->getFieldValue();
     }
-    
+
 }

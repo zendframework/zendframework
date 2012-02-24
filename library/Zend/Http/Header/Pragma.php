@@ -17,12 +17,12 @@ class Pragma implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'pragma') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Pragma string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Pragma string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Pragma implements HeaderDescription
     {
         return 'Pragma: ' . $this->getFieldValue();
     }
-    
+
 }

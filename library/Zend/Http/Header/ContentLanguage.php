@@ -17,12 +17,12 @@ class ContentLanguage implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-language') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Language string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Language string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentLanguage implements HeaderDescription
     {
         return 'Content-Language: ' . $this->getFieldValue();
     }
-    
+
 }

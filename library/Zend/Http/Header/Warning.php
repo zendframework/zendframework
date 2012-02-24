@@ -17,12 +17,12 @@ class Warning implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'warning') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Warning string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Warning string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Warning implements HeaderDescription
     {
         return 'Warning: ' . $this->getFieldValue();
     }
-    
+
 }

@@ -17,12 +17,12 @@ class TE implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'te') {
-            throw new Exception\InvalidArgumentException('Invalid header line for TE string');
+            throw new Exception\InvalidArgumentException('Invalid header line for TE string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class TE implements HeaderDescription
     {
         return 'TE: ' . $this->getFieldValue();
     }
-    
+
 }

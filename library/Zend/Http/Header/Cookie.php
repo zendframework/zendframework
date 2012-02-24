@@ -61,7 +61,7 @@ class Cookie extends ArrayObject implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'cookie') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Server string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Server string: "' . $name . '"');
         }
 
         $nvPairs = preg_split('#;\s*#', $value);

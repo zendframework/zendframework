@@ -232,9 +232,6 @@ class ConfigListener extends AbstractListener
      */
     protected function mergeGlobPath($globPath)
     {
-        if (true === $this->skipConfig) {
-            return $this;
-        }
         foreach (glob($globPath, GLOB_BRACE) as $path) {
             $pathInfo = pathinfo($path);
             switch (strtolower($pathInfo['extension'])) {

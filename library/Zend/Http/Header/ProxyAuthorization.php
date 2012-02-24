@@ -21,8 +21,8 @@ class ProxyAuthorization implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ProxyAuthorization implements HeaderDescription
     {
         return 'Proxy-Authorization: ' . $this->getFieldValue();
     }
-    
+
 }

@@ -21,8 +21,8 @@ class TransferEncoding implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class TransferEncoding implements HeaderDescription
     {
         return 'Transfer-Encoding: ' . $this->getFieldValue();
     }
-    
+
 }

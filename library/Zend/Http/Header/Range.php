@@ -21,7 +21,7 @@ class Range implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
+        $header->value = $value;
 
         return $header;
     }
@@ -40,5 +40,5 @@ class Range implements HeaderDescription
     {
         return 'Range: ' . $this->getFieldValue();
     }
-    
+
 }

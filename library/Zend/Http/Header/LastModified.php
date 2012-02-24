@@ -21,8 +21,8 @@ class LastModified implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class LastModified implements HeaderDescription
     {
         return 'Last-Modified: ' . $this->getFieldValue();
     }
-    
+
 }

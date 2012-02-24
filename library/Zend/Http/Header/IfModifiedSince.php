@@ -21,8 +21,8 @@ class IfModifiedSince implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfModifiedSince implements HeaderDescription
     {
         return 'If-Modified-Since: ' . $this->getFieldValue();
     }
-    
+
 }

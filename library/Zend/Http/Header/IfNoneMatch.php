@@ -21,8 +21,8 @@ class IfNoneMatch implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfNoneMatch implements HeaderDescription
     {
         return 'If-None-Match: ' . $this->getFieldValue();
     }
-    
+
 }

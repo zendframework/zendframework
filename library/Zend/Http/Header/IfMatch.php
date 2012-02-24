@@ -21,8 +21,8 @@ class IfMatch implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfMatch implements HeaderDescription
     {
         return 'If-Match: ' . $this->getFieldValue();
     }
-    
+
 }

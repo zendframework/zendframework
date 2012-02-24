@@ -21,8 +21,8 @@ class MaxForwards implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class MaxForwards implements HeaderDescription
     {
         return 'Max-Forwards: ' . $this->getFieldValue();
     }
-    
+
 }

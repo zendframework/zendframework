@@ -21,8 +21,8 @@ class WWWAuthenticate implements MultipleHeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,7 +40,7 @@ class WWWAuthenticate implements MultipleHeaderDescription
     {
         return 'WWW-Authenticate: ' . $this->getFieldValue();
     }
-    
+
     public function toStringMultipleHeaders(array $headers)
     {
         $strings = array($this->toString());

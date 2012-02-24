@@ -21,8 +21,8 @@ class RetryAfter implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class RetryAfter implements HeaderDescription
     {
         return 'Retry-After: ' . $this->getFieldValue();
     }
-    
+
 }

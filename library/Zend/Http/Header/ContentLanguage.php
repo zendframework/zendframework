@@ -21,8 +21,8 @@ class ContentLanguage implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentLanguage implements HeaderDescription
     {
         return 'Content-Language: ' . $this->getFieldValue();
     }
-    
+
 }

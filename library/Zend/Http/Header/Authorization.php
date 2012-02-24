@@ -21,8 +21,8 @@ class Authorization implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Authorization implements HeaderDescription
     {
         return 'Authorization: ' . $this->getFieldValue();
     }
-    
+
 }

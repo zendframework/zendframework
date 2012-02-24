@@ -21,8 +21,8 @@ class Refresh implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Refresh implements HeaderDescription
     {
         return 'Refresh: ' . $this->getFieldValue();
     }
-    
+
 }

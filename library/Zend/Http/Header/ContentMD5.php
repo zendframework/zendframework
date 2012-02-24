@@ -21,8 +21,8 @@ class ContentMD5 implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentMD5 implements HeaderDescription
     {
         return 'Content-MD5: ' . $this->getFieldValue();
     }
-    
+
 }

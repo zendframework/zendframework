@@ -21,8 +21,8 @@ class ContentRange implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentRange implements HeaderDescription
     {
         return 'Content-Range: ' . $this->getFieldValue();
     }
-    
+
 }

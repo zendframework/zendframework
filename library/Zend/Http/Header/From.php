@@ -21,8 +21,8 @@ class From implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class From implements HeaderDescription
     {
         return 'From: ' . $this->getFieldValue();
     }
-    
+
 }

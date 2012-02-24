@@ -21,8 +21,8 @@ class ContentLocation implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentLocation implements HeaderDescription
     {
         return 'Content-Location: ' . $this->getFieldValue();
     }
-    
+
 }

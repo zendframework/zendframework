@@ -21,8 +21,8 @@ class UserAgent implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class UserAgent implements HeaderDescription
     {
         return 'User-Agent: ' . $this->getFieldValue();
     }
-    
+
 }

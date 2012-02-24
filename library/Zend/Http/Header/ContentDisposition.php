@@ -21,8 +21,8 @@ class ContentDisposition implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentDisposition implements HeaderDescription
     {
         return 'Content-Disposition: ' . $this->getFieldValue();
     }
-    
+
 }

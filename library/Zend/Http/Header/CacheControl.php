@@ -21,8 +21,8 @@ class CacheControl implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class CacheControl implements HeaderDescription
     {
         return 'Cache-Control: ' . $this->getFieldValue();
     }
-    
+
 }

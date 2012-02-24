@@ -21,8 +21,8 @@ class Connection implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Connection implements HeaderDescription
     {
         return 'Connection: ' . $this->getFieldValue();
     }
-    
+
 }

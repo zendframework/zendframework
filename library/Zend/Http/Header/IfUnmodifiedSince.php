@@ -21,8 +21,8 @@ class IfUnmodifiedSince implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfUnmodifiedSince implements HeaderDescription
     {
         return 'If-Unmodified-Since: ' . $this->getFieldValue();
     }
-    
+
 }

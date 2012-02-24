@@ -21,8 +21,8 @@ class Expires implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Expires implements HeaderDescription
     {
         return 'Expires: ' . $this->getFieldValue();
     }
-    
+
 }

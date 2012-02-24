@@ -21,8 +21,8 @@ class ContentType implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentType implements HeaderDescription
     {
         return 'Content-Type: ' . $this->getFieldValue();
     }
-    
+
 }

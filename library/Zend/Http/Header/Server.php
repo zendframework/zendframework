@@ -21,8 +21,8 @@ class Server implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Server implements HeaderDescription
     {
         return 'Server: ' . $this->getFieldValue();
     }
-    
+
 }

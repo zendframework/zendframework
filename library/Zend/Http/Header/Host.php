@@ -21,8 +21,8 @@ class Host implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Host implements HeaderDescription
     {
         return 'Host: ' . $this->getFieldValue();
     }
-    
+
 }

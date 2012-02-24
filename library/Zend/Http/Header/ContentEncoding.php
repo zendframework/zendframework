@@ -21,8 +21,8 @@ class ContentEncoding implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentEncoding implements HeaderDescription
     {
         return 'Content-Encoding: ' . $this->getFieldValue();
     }
-    
+
 }

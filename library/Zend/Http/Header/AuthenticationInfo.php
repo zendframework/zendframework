@@ -21,8 +21,8 @@ class AuthenticationInfo implements HeaderDescription
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class AuthenticationInfo implements HeaderDescription
     {
         return 'Authentication-Info: ' . $this->getFieldValue();
     }
-    
+
 }

@@ -88,6 +88,9 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testFactoryCatchesInvalidClasses()
     {
+        if (version_compare(PHP_VERSION, '5.3.6', '<=')) {
+            $this->markTestSkipped('Cannot test invalid interface loader with versions less than or equal to 5.3.6');
+        }
         include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
         AutoloaderFactory::factory(array(
             'InvalidInterfaceAutoloader' => array()            

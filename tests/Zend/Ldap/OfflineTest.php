@@ -108,7 +108,8 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'allowEmptyPassword'     => false,
             'useStartTls'            => false,
             'optReferrals'           => false,
-            'tryUsernameSplit'       => true
+            'tryUsernameSplit'       => true,
+            'networkTimeout'         => null,
         ), $ldap->getOptions());
     }
 
@@ -139,7 +140,8 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'allowEmptyPassword'     => false,
             'useStartTls'            => false,
             'optReferrals'           => false,
-            'tryUsernameSplit'       => true
+            'tryUsernameSplit'       => true,
+            'networkTimeout'         => null,
         ), $ldap->getOptions());
     }
 }

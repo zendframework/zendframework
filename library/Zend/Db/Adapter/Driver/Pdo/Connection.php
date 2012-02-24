@@ -20,7 +20,7 @@ class Connection implements Adapter\DriverConnectionInterface
     /**
      * @var array
      */
-    protected $connectionParams = array();
+    protected $connectionParameters = array();
     
     /**
      * @var PDO
@@ -33,12 +33,14 @@ class Connection implements Adapter\DriverConnectionInterface
     protected $inTransaction = false;
 
     /**
-     * @param array $connectionParameters
+     * @param array|PDO $connectionParameters
      */
-    public function __construct(array $connectionParameters = array())
+    public function __construct($connectionInfo = null)
     {
-        if ($connectionParameters) {
-            $this->setConnectionParams($connectionParameters);
+        if (is_array($connectionInfo)) {
+            $this->setConnectionParameters($connectionInfo);
+        } elseif ($connectionInfo instanceof PDO) {
+            $this->setResource($connectionInfo);
         }
     }
 
@@ -55,17 +57,17 @@ class Connection implements Adapter\DriverConnectionInterface
     /**
      * @param array $connectionParams
      */
-    public function setConnectionParams(array $connectionParams)
+    public function setConnectionParameters(array $connectionParameters)
     {
-        $this->connectionParams = $connectionParams;
+        $this->connectionParameters = $connectionParameters;
     }
 
     /**
      * @return array
      */
-    public function getConnectionParams()
+    public function getConnectionParameters()
     {
-        return $this->connectionParams;
+        return $this->connectionParameters;
     }
 
     /**
@@ -89,12 +91,21 @@ class Connection implements Adapter\DriverConnectionInterface
         $r = $result->fetch_row();
         return $r[0];
     }
-    
+
+    public function setResource(PDO $resource)
+    {
+        $this->resource = $resource;
+        return $this;
+    }
+
     /**
      * @return PDO
      */
     public function getResource()
     {
+        if ($this->resource == null) {
+            $this->connect();
+        }
         return $this->resource;
     }
 
@@ -112,7 +123,7 @@ class Connection implements Adapter\DriverConnectionInterface
 
         $dsn = $username = $password = null;
         $options = array();
-        foreach ($this->connectionParams as $key => $value) {
+        foreach ($this->connectionParameters as $key => $value) {
             switch ($key) {
                 case 'dsn':
                     $dsn = (string) $value;

@@ -6,9 +6,6 @@ interface DriverConnectionInterface
 {
     public function setDriver(DriverInterface $driver);
 
-    // public function setConnectionParams(array $connectionParams); // this really belongs in a separate interface
-    
-    public function getConnectionParams();
     public function getDefaultCatalog();
     public function getDefaultSchema();
     public function getResource();

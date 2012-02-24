@@ -1,7 +1,10 @@
 <?php
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
-use Zend\Db\Adapter;
+
+use Zend\Db\Adapter,
+    mysqli;
+
 
 
 class Connection implements Adapter\DriverConnectionInterface
@@ -11,7 +14,7 @@ class Connection implements Adapter\DriverConnectionInterface
      */
     protected $driver = null;
     
-    protected $connectionParams = array();
+    protected $connectionParameters = array();
     
     /**
      * @var \mysqli
@@ -20,10 +23,12 @@ class Connection implements Adapter\DriverConnectionInterface
 
     protected $inTransaction = false;    
 
-    public function __construct(array $connectionParameters = array())
+    public function __construct($connectionInfo = null)
     {
-        if ($connectionParameters) {
-            $this->setConnectionParams($connectionParameters);
+        if (is_array($connectionInfo)) {
+            $this->setConnectionParameters($connectionInfo);
+        } elseif ($connectionInfo instanceof mysqli) {
+            $this->setResource($connectionInfo);
         }
     }
 
@@ -33,15 +38,15 @@ class Connection implements Adapter\DriverConnectionInterface
         return $this;
     }
     
-    public function setConnectionParams(array $connectionParameters)
+    public function setConnectionParameters(array $connectionParameters)
     {
-        $this->connectionParams = $connectionParameters;
+        $this->connectionParameters = $connectionParameters;
         return $this;
     }
 
-    public function getConnectionParams()
+    public function getConnectionParameters()
     {
-        return $this->connectionParams;
+        return $this->connectionParameters;
     }
     
     public function getDefaultCatalog()
@@ -59,7 +64,13 @@ class Connection implements Adapter\DriverConnectionInterface
         $r = $result->fetch_row();
         return $r[0];
     }
-    
+
+    public function setResource(mysqli $resource)
+    {
+        $this->resource = $resource;
+        return $this;
+    }
+
     /**
      * @return \Mysqli
      */
@@ -70,12 +81,12 @@ class Connection implements Adapter\DriverConnectionInterface
     
     public function connect()
     {
-        if ($this->resource) {
+        if ($this->resource instanceof mysqli) {
             return;
         }
 
         // localize
-        $p = $this->connectionParams;
+        $p = $this->connectionParameters;
 
         // given a list of key names, test for existence in $p
         $findParameterValue = function(array $names) use ($p) {

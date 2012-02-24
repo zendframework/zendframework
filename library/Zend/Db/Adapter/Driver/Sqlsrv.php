@@ -21,13 +21,13 @@ class Sqlsrv implements \Zend\Db\Adapter\DriverInterface
     protected $resultPrototype = null;
 
     /**
-     * @param array|Sqlsrv\Connection $connection
+     * @param array|Sqlsrv\Connection|resource $connection
      * @param null|Sqlsrv\Statement $statementPrototype
      * @param null|Sqlsrv\Result $resultPrototype
      */
     public function __construct($connection, Sqlsrv\Statement $statementPrototype = null, Sqlsrv\Result $resultPrototype = null)
     {
-        if (is_array($connection)) {
+        if (!$connection instanceof Sqlsrv\Connection) {
             $connection = new Sqlsrv\Connection($connection);
         }
 

@@ -21,13 +21,13 @@ class Mysqli implements \Zend\Db\Adapter\DriverInterface
     protected $resultPrototype = null;
 
     /**
-     * @param array|Mysqli\Connection $connection
+     * @param array|Mysqli\Connection|\mysqli $connection
      * @param null|Mysqli\Statement $statementPrototype
      * @param null|Mysqli\Result $resultPrototype
      */
     public function __construct($connection, Mysqli\Statement $statementPrototype = null, Mysqli\Result $resultPrototype = null)
     {
-        if (is_array($connection)) {
+        if (!$connection instanceof Mysqli\Connection) {
             $connection = new Mysqli\Connection($connection);
         }
 

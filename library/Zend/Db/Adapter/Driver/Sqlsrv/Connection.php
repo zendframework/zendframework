@@ -14,7 +14,7 @@ class Connection implements Adapter\DriverConnectionInterface
     /**
      * @var array
      */
-    protected $connectionParams = array();
+    protected $connectionParameters = array();
     
     /**
      * @var \Sqlsrv
@@ -26,10 +26,12 @@ class Connection implements Adapter\DriverConnectionInterface
      */
     protected $inTransaction = false;
     
-    public function __construct(array $connectionParameters = array())
+    public function __construct($connectionInfo)
     {
-        if ($connectionParameters) {
-            $this->setConnectionParams($connectionParameters);
+        if (is_array($connectionInfo)) {
+            $this->setConnectionParameters($connectionInfo);
+        } elseif (is_resource($connectionInfo)) {
+            $this->setResource($connectionInfo);
         }
     }
     
@@ -39,15 +41,15 @@ class Connection implements Adapter\DriverConnectionInterface
         return $this;
     }
     
-    public function setConnectionParams(array $connectionParameters)
+    public function setConnectionParameters(array $connectionParameters)
     {
-        $this->connectionParams = $connectionParameters;
+        $this->connectionParameters = $connectionParameters;
         return $this;
     }
     
-    public function getConnectionParams()
+    public function getConnectionParameters()
     {
-        return $this->connectionParams;
+        return $this->connectionParameters;
     }
     
     public function getDefaultCatalog()
@@ -65,7 +67,16 @@ class Connection implements Adapter\DriverConnectionInterface
         $r = sqlsrv_fetch_array($result);
         return $r[0];
     }
-    
+
+    public function setResource($resource)
+    {
+        if (get_resource_type($resource) !== 'SQL Server Connection') {
+            throw new \Exception('Resource provided was not of type SQL Server Connection');
+        }
+        $this->resource = $resource;
+        return $this;
+    }
+
     /**
      * @return \Sqlsrv
      */
@@ -82,7 +93,7 @@ class Connection implements Adapter\DriverConnectionInterface
         
         $serverName = '.';
         $params = array();
-        foreach ($this->connectionParams as $cpName => $cpValue) {
+        foreach ($this->connectionParameters as $cpName => $cpValue) {
             switch (strtolower($cpName)) {
                 case 'hostname':
                 case 'servername':
@@ -193,5 +204,6 @@ class Connection implements Adapter\DriverConnectionInterface
         $row = sqlsrv_fetch_array($result);
         return $row['Current_Identity'];
     }
+
 }
     

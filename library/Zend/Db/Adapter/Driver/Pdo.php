@@ -22,13 +22,13 @@ class Pdo implements \Zend\Db\Adapter\DriverInterface
     protected $resultPrototype = null;
 
     /**
-     * @param array|Pdo\Connection $connection
+     * @param array|Pdo\Connection|\PDO $connection
      * @param null|Pdo\Statement $statementPrototype
      * @param null|Pdo\Result $resultPrototype
      */
     public function __construct($connection, Pdo\Statement $statementPrototype = null, Pdo\Result $resultPrototype = null)
     {
-        if (is_array($connection)) {
+        if (!$connection instanceof Pdo\Connection) {
             $connection = new Pdo\Connection($connection);
         }
 
@@ -62,10 +62,7 @@ class Pdo implements \Zend\Db\Adapter\DriverInterface
 
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
-        // have to pull this from the dsn
-        $connectionParameters = $this->getConnection()->getConnectionParams();
-        list($type, $options) = preg_split('/:/', $connectionParameters['dsn'], 2);
-        return ucwords($type);
+        return ucwords($this->getConnection()->getResource()->getAttribute(\PDO::ATTR_DRIVER_NAME));
     }
     
     public function checkEnvironment()

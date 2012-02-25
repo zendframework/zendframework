@@ -485,7 +485,7 @@ $container = new Zend_Navigation(array(
 $container->removePage(0);      // Entfernt Seite 1
 
 // Entfernt eine Seite durch die Instanz
-$page3 = $container->findOneByAction('Seite 3');
+$page3 = $container->findOneByAction('page3');
 $container->removePage($page3); // Entfernt Seite 3
 
 // Entfernt eine Seite durch explizite angabe der Reihenfolge der Seite

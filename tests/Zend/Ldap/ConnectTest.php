@@ -90,6 +90,16 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
     }
+    public function testNetworkTimeoutConnect()
+    {
+        $networkTimeout = 1;
+        $ldap = new Ldap\Ldap(array_merge($this->_options, array('networkTimeout' => $networkTimeout)));
+
+        $ldap->connect();
+        ldap_get_option($ldap->getResource(), LDAP_OPT_NETWORK_TIMEOUT, $actual);
+        $this->assertEquals($networkTimeout, $actual);
+    }
+
     public function testExplicitParamsConnect()
     {
         $host = TESTS_ZEND_LDAP_HOST;
@@ -125,6 +135,22 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
         } catch (Ldap\Exception $zle) {
             $this->assertContains('Invalid credentials', $zle->getMessage());
         }
+    }
+    public function testExplicitNetworkTimeoutConnect()
+    {
+        $networkTimeout = 1;
+        $host = TESTS_ZEND_LDAP_HOST;
+        $port = 0;
+        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389)
+            $port = TESTS_ZEND_LDAP_PORT;
+        $useSsl = false;
+        if (defined('TESTS_ZEND_LDAP_USE_SSL'))
+            $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+
+        $ldap = new Ldap\Ldap();
+        $ldap->connect($host, $port, $useSsl, null, $networkTimeout);
+        ldap_get_option($ldap->getResource(), LDAP_OPT_NETWORK_TIMEOUT, $actual);
+        $this->assertEquals($networkTimeout, $actual);
     }
     public function testBadPortConnect()
     {

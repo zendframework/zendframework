@@ -204,7 +204,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testGetAllPosts()
     {
         $posts = $this->_delicious->getAllPosts('zfSite');
-        $this->assertType('Zend\Service\Delicious\PostList', $posts);
+        $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
 
         foreach ($posts as $post) {
             $this->assertContains('zfSite', $post->getTags());
@@ -219,7 +219,7 @@ class PrivateDataTest extends \PHPUnit_Framework_TestCase
     public function testGetRecentPosts()
     {
         $posts = $this->_delicious->getRecentPosts('zfSite', 10);
-        $this->assertType('Zend\Service\Delicious\PostList', $posts);
+        $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
         $this->assertTrue(count($posts) <= 10);
 
         foreach ($posts as $post) {

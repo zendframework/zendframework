@@ -78,7 +78,7 @@ class MySQLiTest extends AbstractTest
             $this->assertTrue($stmt->bindParam('name', $productNameValue), 'Expected bindParam(\'name\') to return true');
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend_Db_Statement_Exception', $e,
+            $this->assertInstanceOf('Zend_Db_Statement_Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals("Invalid bind-variable name ':id'", $e->getMessage());
         }
@@ -101,7 +101,7 @@ class MySQLiTest extends AbstractTest
             $this->assertTrue($stmt->bindParam('name', $productNameValue), 'Expected bindParam(\'name\') to return true');
             $this->fail('Expected to catch Zend_Db_Statement_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend_Db_Statement_Exception', $e,
+            $this->assertInstanceOf('Zend_Db_Statement_Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals("Invalid bind-variable name ':id'", $e->getMessage());
         }

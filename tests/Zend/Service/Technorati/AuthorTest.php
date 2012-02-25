@@ -70,7 +70,7 @@ class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCas
         $this->assertInternalType('string', $author->getFirstName());
         $this->assertEquals('This is a bio.', $author->getBio());
 
-        $this->assertType('Zend_Uri_Http', $author->getThumbnailPicture());
+        $this->assertInstanceOf('Zend_Uri_Http', $author->getThumbnailPicture());
         $this->assertEquals(Zend_Uri::factory('http://static.technorati.com/progimages/photo.jpg?uid=117217'), $author->getThumbnailPicture());
     }
 
@@ -112,12 +112,12 @@ class Zend_Service_Technorati_AuthorTest extends Zend_Service_Technorati_TestCas
 
         $set = Zend_Uri::factory('http://www.simonecarletti.com/');
         $get = $author->setThumbnailPicture($set)->getThumbnailPicture();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $author->setThumbnailPicture($set)->getThumbnailPicture();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals(Zend_Uri::factory($set), $get);
 
         $set = 'http:::/foo';

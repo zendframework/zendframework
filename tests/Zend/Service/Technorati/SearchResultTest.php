@@ -64,13 +64,13 @@ class Zend_Service_Technorati_SearchResultTest extends Zend_Service_Technorati_T
         $this->assertContains('El SDK de Android', $object->getTitle());
         $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('[ Android]', $object->getExcerpt());
-        $this->assertType('Zend_Uri_Http', $object->getPermalink());
+        $this->assertInstanceOf('Zend_Uri_Http', $object->getPermalink());
         $this->assertEquals(Zend_Uri_Http::factory('http://blogs.eurielec.etsit.upm.es/miotroblog/?p=271'), $object->getPermalink());
-        $this->assertType('Zend_Date', $object->getCreated());
+        $this->assertInstanceOf('Zend_Date', $object->getCreated());
         $this->assertEquals(new Zend_Date('2007-11-14 22:18:04 GMT'), $object->getCreated());
 
         // check weblog
-        $this->assertType('Zend_Service_Technorati_Weblog', $object->getWeblog());
+        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $object->getWeblog());
         $this->assertContains('Mi otro blog', $object->getWeblog()->getName());
     }
 

@@ -52,7 +52,7 @@ class Zend_Service_StrikeIron_USAddressVerificationTest extends PHPUnit_Framewor
 
     public function testInheritsFromBase()
     {
-        $this->assertType('Zend_Service_StrikeIron_Base', $this->service);
+        $this->assertInstanceOf('Zend_Service_StrikeIron_Base', $this->service);
     }
 
     public function testHasCorrectWsdl()
@@ -66,6 +66,6 @@ class Zend_Service_StrikeIron_USAddressVerificationTest extends PHPUnit_Framewor
         $strikeIron = new Zend_Service_StrikeIron(array('client' => $this->soapClient));
         $client = $strikeIron->getService(array('class' => 'USAddressVerification'));
 
-        $this->assertType('Zend_Service_StrikeIron_USAddressVerification', $client);
+        $this->assertInstanceOf('Zend_Service_StrikeIron_USAddressVerification', $client);
     }
 }

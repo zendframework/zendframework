@@ -45,7 +45,7 @@ class PdoMysqlTest extends AbstractPdoTest
         try {
             $stmt->nextRowset();
         } catch (\Zend\Db\Statement\Exception $e) {
-            $this->assertType('Zend_Db_Statement_Exception', $e,
+            $this->assertInstanceOf('Zend_Db_Statement_Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
             $this->assertEquals('SQLSTATE[HYC00]: Optional feature not implemented', $e->getMessage());
         }

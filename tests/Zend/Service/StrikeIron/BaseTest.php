@@ -175,7 +175,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
 
     public function testMethodResultWrappingAnyObject()
     {
-        $this->assertType('Zend_Service_StrikeIron_Decorator',
+        $this->assertInstanceOf('Zend_Service_StrikeIron_Decorator',
                           $this->base->returnTheObject());
     }
 
@@ -190,7 +190,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
             $this->base->throwTheException();
             $this->fail();
         } catch (Exception $e) {
-            $this->assertType('Zend_Service_StrikeIron_Exception', $e);
+            $this->assertInstanceOf('Zend_Service_StrikeIron_Exception', $e);
             $this->assertEquals('Exception: foo', $e->getMessage());
             $this->assertEquals(43, $e->getCode());
         }

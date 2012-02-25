@@ -49,6 +49,6 @@ class OracleTest extends \ZendTest\Paginator\Adapter\DbSelect\OracleTest
         $adapter = new \Zend\Paginator\Adapter\DbTableSelect($query);
         $items   = $adapter->getItems(0, 10);
 
-        $this->assertType('Zend\Db\Table\Rowset', $items);
+        $this->assertInstanceOf('Zend\Db\Table\Rowset', $items);
     }
 }

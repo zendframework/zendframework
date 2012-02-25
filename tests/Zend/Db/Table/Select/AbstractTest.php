@@ -151,7 +151,7 @@ abstract class AbstractTest extends \ZendTest\Db\Select\AbstractTest
             $query = $select->assemble();
             $this->fail('Expected to catch Zend_Db_Table_Select_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend_Db_Table_Select_Exception', $e);
+            $this->assertInstanceOf('Zend_Db_Table_Select_Exception', $e);
             $this->assertEquals('Select query cannot join with another table', $e->getMessage());
         }
     }
@@ -308,7 +308,7 @@ abstract class AbstractTest extends \ZendTest\Db\Select\AbstractTest
 //        try {
 //            $select = $table->select()->columns('product_id');
 //
-//            $this->assertType('Zend_Db_Table_Select', $select);
+//            $this->assertInstanceOf('Zend_Db_Table_Select', $select);
 //        } catch (Zend_Db_Table_Select_Exception $e) {
 //            $this->fail('Exception thrown: ' . $e->getMessage());
 //        }

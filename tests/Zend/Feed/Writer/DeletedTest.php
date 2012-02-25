@@ -76,7 +76,18 @@ class DeletedTest extends \PHPUnit_Framework_TestCase
         $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($entry->getWhen()));
     }
-
+ 
+    /**
+     * @group ZF-12070
+     */
+    public function testSetWhenUsesGivenUnixTimestampWhenItIsLessThanTenDigits()
+    {
+        $entry = new Writer\Deleted;
+        $entry->setWhen(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getWhen()));
+    }
+    
     public function testSetWhenUsesZendDateObject()
     {
         $entry = new Writer\Deleted;

@@ -44,7 +44,7 @@ class PubSubHubbubTest extends \PHPUnit_Framework_TestCase
     public function testCanSetCustomHttpClient()
     {
         PubSubHubbub\PubSubHubbub::setHttpClient(new Pubsub());
-        $this->assertType('ZendTest\Feed\PubSubHubbub\Pubsub', PubSubHubbub\PubSubHubbub::getHttpClient());
+        $this->assertInstanceOf('ZendTest\Feed\PubSubHubbub\Pubsub', PubSubHubbub\PubSubHubbub::getHttpClient());
     }
 
     public function testCanDetectHubs()

@@ -66,7 +66,7 @@ class Zend_Service_Technorati_DailyCountsResultSetTest extends Zend_Service_Tech
         $this->assertEquals(5, $object->totalResultsAvailable());
 
         // check properties
-        $this->assertType('Zend_Uri_Http', $object->getSearchUrl());
+        $this->assertInstanceOf('Zend_Uri_Http', $object->getSearchUrl());
         $this->assertEquals(Zend_Uri::factory('http://technorati.com/search/google'), $object->getSearchUrl());
     }
 

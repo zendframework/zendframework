@@ -99,12 +99,12 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         // check first author
         $author = $authors[0];
-        $this->assertType('Zend_Service_Technorati_Author', $author);
+        $this->assertInstanceOf('Zend_Service_Technorati_Author', $author);
         $this->assertEquals('rfilippini', $author->getUsername());
 
         // check second author, be sure it's not the first one
         $author = $authors[1];
-        $this->assertType('Zend_Service_Technorati_Author', $author);
+        $this->assertInstanceOf('Zend_Service_Technorati_Author', $author);
         $this->assertEquals('Rinzi', $author->getUsername());
     }
 
@@ -122,12 +122,12 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = Zend_Uri::factory('http://www.simonecarletti.com/');
         $get = $weblog->setUrl($set)->getUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $weblog->setUrl($set)->getUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals(Zend_Uri::factory($set), $get);
 
         $set = 'http:::/foo';
@@ -142,12 +142,12 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = Zend_Uri::factory('http://www.simonecarletti.com/');
         $get = $weblog->setAtomUrl($set)->getAtomUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $weblog->setAtomUrl($set)->getAtomUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals(Zend_Uri::factory($set), $get);
 
         $set = 'http:::/foo';
@@ -162,12 +162,12 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = Zend_Uri::factory('http://www.simonecarletti.com/');
         $get = $weblog->setRssUrl($set)->getRssUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals($set, $get);
 
         $set = 'http://www.simonecarletti.com/';
         $get = $weblog->setRssUrl($set)->getRssUrl();
-        $this->assertType('Zend_Uri_Http', $get);
+        $this->assertInstanceOf('Zend_Uri_Http', $get);
         $this->assertEquals(Zend_Uri::factory($set), $get);
 
         $set = 'http:::/foo';
@@ -206,7 +206,7 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = '2007-11-11 08:47:26 GMT';
         $get = $weblog->setLastUpdate($set)->getLastUpdate();
-        $this->assertType('Zend_Date', $get);
+        $this->assertInstanceOf('Zend_Date', $get);
         $this->assertEquals(new Zend_Date($set), $get);
 
         /* not supported
@@ -239,36 +239,36 @@ class Zend_Service_Technorati_WeblogTest extends Zend_Service_Technorati_TestCas
 
         $set = false;
         $get = $weblog->setHasPhoto($set)->hasPhoto();
-        $this->assertType('boolean', $get);
+        $this->assertInternalType('boolean', $get);
         $this->assertEquals($set, $get);
 
         $set = 0;
         $get = $weblog->setHasPhoto($set)->hasPhoto();
-        $this->assertType('boolean', $get);
+        $this->assertInternalType('boolean', $get);
         $this->assertEquals((bool) $set, $get);
 
         // check lat
 
         $set = 1.3;
         $get = $weblog->setLat($set)->getLat();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals($set, $get);
 
         $set = '1.3';
         $get = $weblog->setLat($set)->getLat();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals((float) $set, $get);
 
         // check lon
 
         $set = 1.3;
         $get = $weblog->setLon($set)->getLon();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals($set, $get);
 
         $set = '1.3';
         $get = $weblog->setLon($set)->getLon();
-        $this->assertType('float', $get);
+        $this->assertInternalType('float', $get);
         $this->assertEquals((float) $set, $get);
     }
 }

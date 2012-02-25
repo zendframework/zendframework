@@ -61,13 +61,13 @@ class Zend_Service_Technorati_GetInfoResultTest extends Zend_Service_Technorati_
 
         // check author
         $author = $object->getAuthor();
-        $this->assertType('Zend_Service_Technorati_Author', $author);
+        $this->assertInstanceOf('Zend_Service_Technorati_Author', $author);
         $this->assertEquals('weppos', $author->getUsername());
 
         // check weblogs
         $weblogs = $object->getWeblogs();
         $this->assertInternalType('array', $weblogs);
         $this->assertEquals(2, count($weblogs));
-        $this->assertType('Zend_Service_Technorati_Weblog', $weblogs[0]);
+        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $weblogs[0]);
     }
 }

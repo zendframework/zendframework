@@ -111,7 +111,7 @@ class ProfileFeedTest extends \PHPUnit_Framework_TestCase
         $this->profileFeed->transferFromXML($this->feedText);
 
         $medications = $this->profileFeed->entry[0]->getCcr()->getMedications();
-        $this->assertType('DOMNodeList', $medications);
+        $this->assertInstanceOf('DOMNodeList', $medications);
         $this->assertEquals(1, count($medications));
 
         foreach ($medications as $med) {

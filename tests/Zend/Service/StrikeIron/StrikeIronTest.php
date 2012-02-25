@@ -53,7 +53,7 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
     public function testFactoryReturnsServiceByStrikeIronClass()
     {
         $base = $this->strikeIron->getService(array('class' => 'Base'));
-        $this->assertType('Zend_Service_StrikeIron_Base', $base);
+        $this->assertInstanceOf('Zend_Service_StrikeIron_Base', $base);
         $this->assertSame(null, $base->getWsdl());
         $this->assertSame($this->soapClient, $base->getSoapClient());
     }
@@ -62,7 +62,7 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
     {
         $class = 'Zend_Service_StrikeIron_StrikeIronTest_StubbedBase';
         $stub = $this->strikeIron->getService(array('class' => $class));
-        $this->assertType($class, $stub);
+        $this->assertInstanceOf($class, $stub);
     }
 
     public function testFactoryReturnsServiceByWsdl()

@@ -60,7 +60,7 @@ class Zend_Service_Technorati_DailyCountsResultTest extends Zend_Service_Technor
         $object = new Zend_Service_Technorati_DailyCountsResult($this->domElements->item(1));
 
         // check properties
-        $this->assertType('Zend_Date', $object->getDate());
+        $this->assertInstanceOf('Zend_Date', $object->getDate());
         $this->assertEquals(new Zend_Date(strtotime('2007-11-13')), $object->getDate());
         $this->assertInternalType('integer', $object->getCount());
         $this->assertEquals(54414, $object->getCount());

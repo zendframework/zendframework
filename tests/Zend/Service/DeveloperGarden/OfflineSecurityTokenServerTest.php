@@ -220,8 +220,8 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
-        $this->assertType(
-            'Zend\\Cache\\Frontend\\Core',
+        $this->assertInstanceOf(
+            'Zend\Cache\Frontend\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
     }
@@ -232,8 +232,8 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
-        $this->assertType(
-            'Zend\\Cache\\Frontend\\Core',
+        $this->assertInstanceOf(
+            'Zend\Cache\Frontend\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
 
@@ -249,8 +249,8 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
-        $this->assertType(
-            'Zend\\Cache\\Frontend\\Core',
+        $this->assertInstanceOf(
+            'Zend\Cache\Frontend\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
 
@@ -268,8 +268,8 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
-        $this->assertType(
-            'Zend\\Cache\\Frontend\\Core',
+        $this->assertInstanceOf(
+            'Zend\Cache\Frontend\Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
 

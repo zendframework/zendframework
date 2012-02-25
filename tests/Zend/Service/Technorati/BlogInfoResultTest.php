@@ -61,11 +61,11 @@ class Zend_Service_Technorati_BlogInfoResultTest extends Zend_Service_Technorati
 
         // check weblog
         $weblog = $object->getWeblog();
-        $this->assertType('Zend_Service_Technorati_Weblog', $weblog);
+        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $weblog);
         $this->assertEquals('Simone Carletti\'s Blog', $weblog->getName());
 
         // check url
-        $this->assertType('Zend_Uri_Http', $object->getUrl());
+        $this->assertInstanceOf('Zend_Uri_Http', $object->getUrl());
         $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
 
         // check inboundblogs
@@ -83,7 +83,7 @@ class Zend_Service_Technorati_BlogInfoResultTest extends Zend_Service_Technorati
         $object = new Zend_Service_Technorati_BlogInfoResult($dom);
 
         // check url
-        $this->assertType('Zend_Uri_Http', $object->getUrl());
+        $this->assertInstanceOf('Zend_Uri_Http', $object->getUrl());
         $this->assertEquals($object->getWeblog()->getUrl(), $object->getUrl());
     }
 }

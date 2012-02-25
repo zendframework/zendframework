@@ -81,7 +81,7 @@ class Zend_Service_StrikeIron_DecoratorTest extends PHPUnit_Framework_TestCase
     {
         $object = (object)array('Foo' => new stdclass);
         $decorator = new Zend_Service_StrikeIron_Decorator($object);
-        $this->assertType(get_class($decorator), $decorator->Foo);
+        $this->assertInstanceOf(get_class($decorator), $decorator->Foo);
     }
 
     public function testDecoratorProxiesMethodCalls()

@@ -70,7 +70,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
         // soapclient instance without hitting the network
         $base = new Zend_Service_StrikeIron_Base(array('options' => array('location' => '',
                                                                           'uri'      => '')));
-        $this->assertType('SOAPClient', $base->getSoapClient());
+        $this->assertInstanceOf('SOAPClient', $base->getSoapClient());
     }
 
     public function testDefaultSoapHeadersHasTheLicenseInfoHeader()
@@ -82,7 +82,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($headers));
         $header = $headers[0];
 
-        $this->assertType('SoapHeader', $header);
+        $this->assertInstanceOf('SoapHeader', $header);
         $this->assertEquals('LicenseInfo', $header->name);
         $this->assertEquals('user', $header->data['RegisteredUser']['UserID']);
         $this->assertEquals('pass', $header->data['RegisteredUser']['Password']);
@@ -141,7 +141,7 @@ class Zend_Service_StrikeIron_BaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($headers));
         $header = $headers[0];
 
-        $this->assertType('SoapHeader', $header);
+        $this->assertInstanceOf('SoapHeader', $header);
         $this->assertEquals('LicenseInfo', $header->name);
         $this->assertEquals('foo', $header->data['RegisteredUser']['UserID']);
         $this->assertEquals('bar', $header->data['RegisteredUser']['Password']);

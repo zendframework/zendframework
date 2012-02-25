@@ -40,7 +40,7 @@ class MySQLiTest extends AbstractTest
     {
         $this->markTestSkipped('This suite is skipped until Zend\DB can be refactored.');
     }
-    
+
     public function testStatementRowCount()
     {
         $products = $this->_db->quoteIdentifier('zfproducts');
@@ -134,7 +134,7 @@ class MySQLiTest extends AbstractTest
     public function testStatementCanReturnDriverStatement()
     {
         $statement = parent::testStatementCanReturnDriverStatement();
-        $this->assertType('mysqli_stmt', $statement->getDriverStatement());
+        $this->assertInstanceOf('mysqli_stmt', $statement->getDriverStatement());
     }
 
     /**
@@ -149,39 +149,39 @@ class MySQLiTest extends AbstractTest
         $result = $stmt->fetch();
         $this->assertFalse($result);
     }
-    
-	/**
-	 * Test to verify valid report of issue
-	 * 
+
+    /**
+     * Test to verify valid report of issue
+     *
      * @group ZF-8986
      */
     public function testNumberOfBoundParamsDoesNotMatchNumberOfTokens()
     {
-    	$this->_util->createTable('zf_objects', array(
-            'object_id'		=> 'INTEGER NOT NULL',
-    		'object_type'	=> 'INTEGER NOT NULL',
-    		'object_status' => 'INTEGER NOT NULL',
-    		'object_lati'   => 'REAL',
-    		'object_long'   => 'REAL',
+        $this->_util->createTable('zf_objects', array(
+            'object_id'     => 'INTEGER NOT NULL',
+            'object_type'   => 'INTEGER NOT NULL',
+            'object_status' => 'INTEGER NOT NULL',
+            'object_lati'   => 'REAL',
+            'object_long'   => 'REAL',
         ));
         $tableName = $this->_util->getTableName('zf_objects');
-        
+
         $numRows = $this->_db->insert($tableName, array (
-        	'object_id' => 1,
-        	'object_type' => 1,
-        	'object_status' => 1,
-        	'object_lati' => 1.12345,
-        	'object_long' => 1.54321,
+            'object_id'     => 1,
+            'object_type'   => 1,
+            'object_status' => 1,
+            'object_lati'   => 1.12345,
+            'object_long'   => 1.54321,
         ));
-        
+
         $sql = 'SELECT object_id, object_type, object_status,'
-             . ' object_lati, object_long FROM ' . $tableName 
+             . ' object_lati, object_long FROM ' . $tableName
              . ' WHERE object_id = ?';
-             
+
         try {
-        	$stmt = $this->_db->query($sql, 1);
+            $stmt = $this->_db->query($sql, 1);
         } catch (\Exception $e) {
-        	$this->fail('Bounding params failed: ' . $e->getMessage());
+            $this->fail('Bounding params failed: ' . $e->getMessage());
         }
         $result = $stmt->fetch();
         $this->assertInternalType('array', $result);

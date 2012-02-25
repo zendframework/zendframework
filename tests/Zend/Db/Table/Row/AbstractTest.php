@@ -872,13 +872,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $row = $rowset->current();
         $this->assertTrue($row instanceof \Traversable);
         $this->assertTrue($row instanceof \IteratorAggregate);
-        $this->assertType('ArrayIterator', $row->getIterator());
-        
+        $this->assertInstanceOf('ArrayIterator', $row->getIterator());
+
         $count=0;
         foreach ($row as $columnValue) {
             $count++;
         }
-        
+
         $this->assertEquals(8, $count, 'The row was iterated, there should be 8 columns iterated');
     }
 

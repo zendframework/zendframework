@@ -62,7 +62,7 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
     {
         $class = 'Zend_Service_StrikeIron_StrikeIronTest_StubbedBase';
         $stub = $this->strikeIron->getService(array('class' => $class));
-        $this->assertType($class, $stub);
+        $this->assertInstanceOf($class, $stub);
     }
 
     public function testFactoryReturnsServiceByWsdl()

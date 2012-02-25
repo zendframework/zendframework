@@ -129,12 +129,12 @@ class PublicDataTest extends \PHPUnit_Framework_TestCase
     {
         $posts = $this->_delicious->getUserPosts(self::TEST_UNAME, 10);
 
-        $this->assertType('\Zend\Service\Delicious\PostList', $posts);
+        $this->assertInstanceOf('Zend\Service\Delicious\PostList', $posts);
 
         // check if all objects in returned \Zend\Service\Delicious\PostList
         // are instances of \Zend\Service\Delicious\SimplePost
         foreach ($posts as $post) {
-            $this->assertType('\Zend\Service\Delicious\SimplePost', $post);
+            $this->assertInstanceOf('Zend\Service\Delicious\SimplePost', $post);
         }
 
         // test filtering of Zend_Service_Delicious_PostList by tag name

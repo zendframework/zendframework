@@ -153,7 +153,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindParentRowErrorOnBadString()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $bug_id = $this->_db->quoteIdentifier('bug_id', true);
 
         $table = $this->_table['bugs'];
@@ -167,7 +167,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindParentRowExceptionOnBadClass()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $bug_id = $this->_db->quoteIdentifier('bug_id', true);
 
         $table = $this->_table['bugs'];
@@ -259,7 +259,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetErrorOnBadClassNameAsString()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -274,7 +274,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetErrorOnBadClassNameAsStringForIntersection()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -287,7 +287,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetExceptionOnBadClassAsString()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -302,7 +302,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetExceptionOnBadClassAsStringForIntersection()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -709,7 +709,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                         ->current()
                         ->findParentRow($this->_table['accounts']->setRowClass($myRowClass));
 
-        $this->assertType($myRowClass, $bug1Reporter,
+        $this->assertInstanceOf($myRowClass, $bug1Reporter,
             "Expecting object of type $myRowClass, got ".get_class($bug1Reporter));
     }
 
@@ -729,7 +729,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                         ->current()
                         ->findParentRow(new \ZendTest\Db\Table\TestAsset\TableAccountsCustom(array('db' => $this->_db)));
 
-        $this->assertType($myRowClass, $bug1Reporter,
+        $this->assertInstanceOf($myRowClass, $bug1Reporter,
             "Expecting object of type $myRowClass, got ".get_class($bug1Reporter));
     }
 
@@ -755,13 +755,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                     'Engineer'
                     );
 
-        $this->assertType($myRowsetClass, $bugs,
+        $this->assertInstanceOf($myRowsetClass, $bugs,
             "Expecting object of type $myRowsetClass, got ".get_class($bugs));
 
         $this->assertEquals(3, count($bugs));
 
         foreach ($bugs as $bug) {
-            $this->assertType($myRowClass, $bug,
+            $this->assertInstanceOf($myRowClass, $bug,
                 "Expecting object of type $myRowClass, got ".get_class($bug));
         }
     }
@@ -784,13 +784,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                 ->fetchRow($this->_db->quoteInto("$account_name = ?", 'mmouse'))
                 ->findDependentRowset('\ZendTest\Db\Table\TestAsset\TableBugsCustom', 'Engineer');
 
-        $this->assertType($myRowsetClass, $bugs,
+        $this->assertInstanceOf($myRowsetClass, $bugs,
             "Expecting object of type $myRowsetClass, got ".get_class($bugs));
 
         $this->assertEquals(3, count($bugs));
 
         foreach ($bugs as $bug) {
-            $this->assertType($myRowClass, $bug,
+            $this->assertInstanceOf($myRowClass, $bug,
                 "Expecting object of type $myRowClass, got ".get_class($bug));
         }
     }
@@ -817,13 +817,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                             '\ZendTest\Db\Table\TestAsset\TableBugsProducts'
                             );
 
-        $this->assertType($myRowsetClass, $bug1Products,
+        $this->assertInstanceOf($myRowsetClass, $bug1Products,
             "Expecting object of type $myRowsetClass, got ".get_class($bug1Products));
 
         $this->assertEquals(3, count($bug1Products));
 
         foreach ($bug1Products as $bug1Product) {
-            $this->assertType($myRowClass, $bug1Product,
+            $this->assertInstanceOf($myRowClass, $bug1Product,
                 "Expecting object of type $myRowClass, got ".get_class($bug1Product));
         }
     }
@@ -847,13 +847,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                             '\ZendTest\Db\Table\TestAsset\TableBugsProductsCustom'
                             );
 
-        $this->assertType($myRowsetClass, $bug1Products,
+        $this->assertInstanceOf($myRowsetClass, $bug1Products,
             "Expecting object of type $myRowsetClass, got ".get_class($bug1Products));
 
         $this->assertEquals(3, count($bug1Products));
 
         foreach ($bug1Products as $bug1Product) {
-            $this->assertType($myRowClass, $bug1Product,
+            $this->assertInstanceOf($myRowClass, $bug1Product,
                 "Expecting object of type $myRowClass, got ".get_class($bug1Product));
         }
     }
@@ -1221,11 +1221,11 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $table = $this->_getTable('\ZendTest\Db\Table\TestAsset\TableSpecial', $options);
         return $table;
     }
-    
+
     /**
      * Ensure that the related table returned from the ManyToManyRowset only contains
      * the proper columns for the table.
-     * 
+     *
      * @group ZF-3709
      */
     public function testTableRelationshipReturnsOnlyTheColumnsInTargetTable()

@@ -76,7 +76,7 @@ class PdoMysqlTest extends AbstractPdoTest
     public function testStatementCanReturnDriverStatement()
     {
         $statement = parent::testStatementCanReturnDriverStatement();
-        $this->assertType('PDOStatement', $statement->getDriverStatement());
+        $this->assertInstanceOf('PDOStatement', $statement->getDriverStatement());
     }
 
     public function getDriver()

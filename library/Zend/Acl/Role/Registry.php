@@ -23,8 +23,10 @@
  */
 namespace Zend\Acl\Role;
 
-use Zend\Acl\Role;
-use Zend\Acl;
+use Zend\Acl,
+    Zend\Acl\Exception,
+    Zend\Acl\Role;
+
 
 /**
  * @uses       Zend\Acl\Role
@@ -247,7 +249,7 @@ class Registry
 
     /**
      * Get all roles in the registry
-     * 
+     *
      * @return array
      */
     public function getRoles()

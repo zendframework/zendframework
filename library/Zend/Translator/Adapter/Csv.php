@@ -48,7 +48,7 @@ class Csv extends AbstractAdapter
         $this->_options['length']    = 0;
         $this->_options['enclosure'] = '"';
 
-        if ($options instanceof Zend_Config) {
+        if ($options instanceof \Zend\Config\Config) {
             $options = $options->toArray();
         } else if (func_num_args() > 1) {
             $args               = func_get_args();

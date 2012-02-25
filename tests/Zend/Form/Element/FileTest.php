@@ -31,7 +31,7 @@ use Zend\Form\Element\File as FileElement,
     Zend\Loader\PrefixPathMapper,
     Zend\Registry,
     Zend\Translator\Translator,
-    Zend\View\PhpRenderer as View;
+    Zend\View\Renderer\PhpRenderer as View;
 
 /**
  * Test class for Zend_Form_Element_File

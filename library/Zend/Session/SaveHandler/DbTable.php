@@ -22,7 +22,6 @@ namespace Zend\Session\SaveHandler;
 
 use Zend\Session\SaveHandler as Savable,
     Zend\Session\Container,
-    Zend\Session\Manager,
     Zend\Db\Table\AbstractTable,
     Zend\Db\Table\AbstractRow;
 
@@ -32,7 +31,6 @@ use Zend\Session\SaveHandler as Savable,
  * @uses       Zend\Config
  * @uses       Zend_Db_Table_Abstract
  * @uses       Zend_Db_Table_Row_Abstract
- * @uses       Zend\Session\Manager
  * @uses       Zend\Session\SaveHandler\Exception
  * @category   Zend
  * @package    Zend_Session
@@ -44,6 +42,8 @@ class DbTable
     extends AbstractTable
     implements Savable
 {
+    const NAME = 'name';
+
     const PRIMARY_ASSIGNMENT                   = 'primaryAssignment';
     const PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH = 'sessionSavePath';
     const PRIMARY_ASSIGNMENT_SESSION_NAME      = 'sessionName';
@@ -62,9 +62,11 @@ class DbTable
     const PRIMARY_TYPE_WHERECLAUSE = 'PRIMARY_TYPE_WHERECLAUSE';
 
     /**
-     * @var Zend\Session\Handler
+     * Session table name
+     *
+     * @var string
      */
-    protected $_manager;
+    protected $_name;
 
     /**
      * Session table primary key value assignment
@@ -129,6 +131,8 @@ class DbTable
      * Zend_Session_SaveHandler_DbTable and Zend_Db_Table_Abstract. These are the configuration options for
      * Zend_Session_SaveHandler_DbTable:
      *
+     * name              => (string) Session table name
+     *
      * primaryAssignment => (string|array) Session table primary key value assignment
      *      (optional; default: 1 => sessionId) You have to assign a value to each primary key of your session table.
      *      The value of this configuration option is either a string if you have only one primary key or an array if
@@ -169,8 +173,8 @@ class DbTable
         foreach ($config as $key => $value) {
             do {
                 switch ($key) {
-                    case 'manager':
-                        $this->setManager($value);
+                    case self::NAME:
+                        $this->_name = (string) $value;
                         break;
                     case self::PRIMARY_ASSIGNMENT:
                         $this->_primaryAssignment = $value;
@@ -199,41 +203,6 @@ class DbTable
         }
 
         parent::__construct($config);
-    }
-
-    /**
-     * Set session manager
-     * 
-     * @param  Manager $manager 
-     * @return DbTable
-     */
-    public function setManager(Manager $manager)
-    {
-        $this->_manager = $manager;
-        return $this;
-    }
-
-    /**
-     * Get Session Manager
-     * 
-     * @return Manager
-     */
-    public function getManager()
-    {
-        if (null === $this->_manager) {
-            $this->setManager(Container::getDefaultManager());
-        }
-        return $this->_manager;
-    }
-
-    /**
-     * Destructor
-     *
-     * @return void
-     */
-    public function __destruct()
-    {
-        $this->getManager()->writeClose();
     }
 
     /**
@@ -431,12 +400,6 @@ class DbTable
      */
     protected function _setupTableName()
     {
-        $config = $this->getManager()->getConfig();
-
-        if (empty($this->_name) && basename(($this->_name = $config->getSavePath())) != $this->_name) {
-            throw new Exception\RuntimeException('session.save_path is a path and not a table name.');
-        }
-
         if (strpos($this->_name, '.')) {
             list($this->_schema, $this->_name) = explode('.', $this->_name);
         }

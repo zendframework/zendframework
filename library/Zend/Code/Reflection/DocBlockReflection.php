@@ -103,9 +103,9 @@ class DocBlockReflection implements Reflection
      * @param Reflector|string $commentOrReflector
      * @return \Zend\Code\Reflection\DocBlockReflection
      */
-    public function __construct($commentOrReflector, Docblock\TagManager $tagManager = null)
+    public function __construct($commentOrReflector, DocBlock\TagManager $tagManager = null)
     {
-        $this->tagManager = $tagManager ?: new Docblock\TagManager(Docblock\TagManager::USE_DEFAULT_PROTOTYPES);
+        $this->tagManager = $tagManager ?: new DocBlock\TagManager(DocBlock\TagManager::USE_DEFAULT_PROTOTYPES);
 
         if ($commentOrReflector instanceof \Reflector) {
             $this->reflector = $commentOrReflector;

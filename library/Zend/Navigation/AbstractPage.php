@@ -45,7 +45,7 @@ abstract class AbstractPage extends Container
      *
      * @var string|null
      */
-    protected $_label;
+    protected $label;
 
     /**
      * Fragment identifier (anchor identifier)
@@ -59,35 +59,35 @@ abstract class AbstractPage extends Container
      * 
      * @var string|null
      */
-    protected $_fragment;
+    protected $fragment;
 
     /**
      * Page id
      *
      * @var string|null
      */
-    protected $_id;
+    protected $id;
 
     /**
      * Style class for this page (CSS)
      *
      * @var string|null
      */
-    protected $_class;
+    protected $class;
 
     /**
      * A more descriptive title for this page
      *
      * @var string|null
      */
-    protected $_title;
+    protected $title;
 
     /**
      * This page's target
      *
      * @var string|null
      */
-    protected $_target;
+    protected $target;
 
     /**
      * Forward links to other pages
@@ -96,7 +96,7 @@ abstract class AbstractPage extends Container
      *
      * @var array
      */
-    protected $_rel = array();
+    protected $rel = array();
 
     /**
      * Reverse links to other pages
@@ -105,56 +105,56 @@ abstract class AbstractPage extends Container
      *
      * @var array
      */
-    protected $_rev = array();
+    protected $rev = array();
 
     /**
      * Page order used by parent container
      *
      * @var int|null
      */
-    protected $_order;
+    protected $order;
 
     /**
      * ACL resource associated with this page
      *
      * @var string|\Zend\Acl\Resource|null
      */
-    protected $_resource;
+    protected $resource;
 
     /**
      * ACL privilege associated with this page
      *
      * @var string|null
      */
-    protected $_privilege;
+    protected $privilege;
 
     /**
      * Whether this page should be considered active
      *
      * @var bool
      */
-    protected $_active = false;
+    protected $active = false;
 
     /**
      * Whether this page should be considered visible
      *
      * @var bool
      */
-    protected $_visible = true;
+    protected $visible = true;
 
     /**
      * Parent container
      *
      * @var \Zend\Navigation\Container|null
      */
-    protected $_parent;
+    protected $parent;
 
     /**
      * Custom page properties, used by __set(), __get() and __isset()
      *
      * @var array
      */
-    protected $_properties = array();
+    protected $properties = array();
 
     // Initialization:
 
@@ -219,10 +219,13 @@ abstract class AbstractPage extends Container
 
                 $page = new $type($options);
                 if (!$page instanceof self) {
-                    throw new Exception\InvalidArgumentException(sprintf(
-                            'Invalid argument: Detected type "%s", which ' .
-                            'is not an instance of Zend_Navigation_Page',
-                            $type));
+                    throw new Exception\InvalidArgumentException(
+                        sprintf(
+                            'Invalid argument: Detected type "%s", which '
+                            . 'is not an instance of Zend_Navigation_Page',
+                            $type
+                        )
+                    );
                 }
                 return $page;
             }
@@ -238,7 +241,8 @@ abstract class AbstractPage extends Container
             return new Page\Uri($options);
         } else {
             throw new Exception\InvalidArgumentException(
-                'Invalid argument: Unable to determine class to instantiate');
+                'Invalid argument: Unable to determine class to instantiate'
+            );
         }
     }
 
@@ -316,10 +320,11 @@ abstract class AbstractPage extends Container
     {
         if (null !== $label && !is_string($label)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $label must be a string or null');
+                'Invalid argument: $label must be a string or null'
+            );
         }
 
-        $this->_label = $label;
+        $this->label = $label;
         return $this;
     }
 
@@ -330,7 +335,7 @@ abstract class AbstractPage extends Container
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -344,10 +349,11 @@ abstract class AbstractPage extends Container
     {
         if (null !== $fragment && !is_string($fragment)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $fragment must be a string or null');
+                'Invalid argument: $fragment must be a string or null'
+            );
         }
  
-        $this->_fragment = $fragment;
+        $this->fragment = $fragment;
         return $this;
     }
     
@@ -358,7 +364,7 @@ abstract class AbstractPage extends Container
      */
     public function getFragment()
     {
-        return $this->_fragment;
+        return $this->fragment;
     }
 
     /**
@@ -373,10 +379,11 @@ abstract class AbstractPage extends Container
     {
         if (null !== $id && !is_string($id) && !is_numeric($id)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $id must be a string, number or null');
+                'Invalid argument: $id must be a string, number or null'
+            );
         }
 
-        $this->_id = null === $id ? $id : (string) $id;
+        $this->id = null === $id ? $id : (string) $id;
 
         return $this;
     }
@@ -388,7 +395,7 @@ abstract class AbstractPage extends Container
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -403,10 +410,11 @@ abstract class AbstractPage extends Container
     {
         if (null !== $class && !is_string($class)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $class must be a string or null');
+                'Invalid argument: $class must be a string or null'
+            );
         }
 
-        $this->_class = $class;
+        $this->class = $class;
         return $this;
     }
 
@@ -417,7 +425,7 @@ abstract class AbstractPage extends Container
      */
     public function getClass()
     {
-        return $this->_class;
+        return $this->class;
     }
 
     /**
@@ -432,10 +440,11 @@ abstract class AbstractPage extends Container
     {
         if (null !== $title && !is_string($title)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $title must be a non-empty string');
+                'Invalid argument: $title must be a non-empty string'
+            );
         }
 
-        $this->_title = $title;
+        $this->title = $title;
         return $this;
     }
 
@@ -446,7 +455,7 @@ abstract class AbstractPage extends Container
      */
     public function getTitle()
     {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -461,10 +470,11 @@ abstract class AbstractPage extends Container
     {
         if (null !== $target && !is_string($target)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $target must be a string or null');
+                'Invalid argument: $target must be a string or null'
+            );
         }
 
-        $this->_target = $target;
+        $this->target = $target;
         return $this;
     }
 
@@ -475,7 +485,7 @@ abstract class AbstractPage extends Container
      */
     public function getTarget()
     {
-        return $this->_target;
+        return $this->target;
     }
 
     /**
@@ -492,7 +502,7 @@ abstract class AbstractPage extends Container
      */
     public function setRel($relations = null)
     {
-        $this->_rel = array();
+        $this->rel = array();
 
         if (null !== $relations) {
             if ($relations instanceof Config) {
@@ -501,13 +511,14 @@ abstract class AbstractPage extends Container
 
             if (!is_array($relations)) {
                 throw new Exception\InvalidArgumentException(
-                        'Invalid argument: $relations must be an ' .
-                        'array or an instance of Zend\Config');
+                    'Invalid argument: $relations must be an '
+                    . 'array or an instance of Zend\Config'
+                );
             }
 
             foreach ($relations as $name => $relation) {
                 if (is_string($name)) {
-                    $this->_rel[$name] = $relation;
+                    $this->rel[$name] = $relation;
                 }
             }
         }
@@ -532,12 +543,12 @@ abstract class AbstractPage extends Container
     public function getRel($relation = null)
     {
         if (null !== $relation) {
-            return isset($this->_rel[$relation]) ?
-                   $this->_rel[$relation] :
+            return isset($this->rel[$relation]) ?
+                   $this->rel[$relation] :
                    null;
         }
 
-        return $this->_rel;
+        return $this->rel;
     }
 
     /**
@@ -554,7 +565,7 @@ abstract class AbstractPage extends Container
      */
     public function setRev($relations = null)
     {
-        $this->_rev = array();
+        $this->rev = array();
 
         if (null !== $relations) {
             if ($relations instanceof Config) {
@@ -563,13 +574,14 @@ abstract class AbstractPage extends Container
 
             if (!is_array($relations)) {
                 throw new Exception\InvalidArgumentException(
-                        'Invalid argument: $relations must be an ' .
-                        'array or an instance of Zend\Config');
+                    'Invalid argument: $relations must be an '
+                    . 'array or an instance of Zend\Config'
+                );
             }
 
             foreach ($relations as $name => $relation) {
                 if (is_string($name)) {
-                    $this->_rev[$name] = $relation;
+                    $this->rev[$name] = $relation;
                 }
             }
         }
@@ -594,12 +606,12 @@ abstract class AbstractPage extends Container
     public function getRev($relation = null)
     {
         if (null !== $relation) {
-            return isset($this->_rev[$relation]) ?
-                   $this->_rev[$relation] :
+            return isset($this->rev[$relation]) ?
+                   $this->rev[$relation] :
                    null;
         }
 
-        return $this->_rev;
+        return $this->rev;
     }
 
     /**
@@ -622,15 +634,16 @@ abstract class AbstractPage extends Container
 
         if (null !== $order && !is_int($order)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $order must be an integer or null, ' .
-                    'or a string that casts to an integer');
+                'Invalid argument: $order must be an integer or null, '
+                . 'or a string that casts to an integer'
+            );
         }
 
-        $this->_order = $order;
+        $this->order = $order;
 
         // notify parent, if any
-        if (isset($this->_parent)) {
-            $this->_parent->notifyOrderUpdated();
+        if (isset($this->parent)) {
+            $this->parent->notifyOrderUpdated();
         }
 
         return $this;
@@ -643,7 +656,7 @@ abstract class AbstractPage extends Container
      */
     public function getOrder()
     {
-        return $this->_order;
+        return $this->order;
     }
 
     /**
@@ -663,11 +676,12 @@ abstract class AbstractPage extends Container
     {
         if (null === $resource || is_string($resource) ||
             $resource instanceof \Zend\Acl\Resource) {
-            $this->_resource = $resource;
+            $this->resource = $resource;
         } else {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $resource must be null, a string, ' .
-                    ' or an instance of Zend_Acl_Resource_Interface');
+                'Invalid argument: $resource must be null, a string, '
+                . ' or an instance of Zend_Acl_Resource_Interface'
+            );
         }
 
         return $this;
@@ -680,7 +694,7 @@ abstract class AbstractPage extends Container
      */
     public function getResource()
     {
-        return $this->_resource;
+        return $this->resource;
     }
 
     /**
@@ -693,7 +707,7 @@ abstract class AbstractPage extends Container
      */
     public function setPrivilege($privilege = null)
     {
-        $this->_privilege = is_string($privilege) ? $privilege : null;
+        $this->privilege = is_string($privilege) ? $privilege : null;
         return $this;
     }
 
@@ -704,7 +718,7 @@ abstract class AbstractPage extends Container
      */
     public function getPrivilege()
     {
-        return $this->_privilege;
+        return $this->privilege;
     }
 
     /**
@@ -716,7 +730,7 @@ abstract class AbstractPage extends Container
      */
     public function setActive($active = true)
     {
-        $this->_active = (bool) $active;
+        $this->active = (bool) $active;
         return $this;
     }
 
@@ -730,8 +744,8 @@ abstract class AbstractPage extends Container
      */
     public function isActive($recursive = false)
     {
-        if (!$this->_active && $recursive) {
-            foreach ($this->_pages as $page) {
+        if (!$this->active && $recursive) {
+            foreach ($this->pages as $page) {
                 if ($page->isActive(true)) {
                     return true;
                 }
@@ -739,7 +753,7 @@ abstract class AbstractPage extends Container
             return false;
         }
 
-        return $this->_active;
+        return $this->active;
     }
 
     /**
@@ -767,7 +781,7 @@ abstract class AbstractPage extends Container
         if (is_string($visible) && 'false' == strtolower($visible)) {
             $visible = false;
         }
-        $this->_visible = (bool) $visible;
+        $this->visible = (bool) $visible;
         return $this;
     }
 
@@ -781,14 +795,14 @@ abstract class AbstractPage extends Container
      */
     public function isVisible($recursive = false)
     {
-        if ($recursive && isset($this->_parent) &&
-            $this->_parent instanceof self) {
-            if (!$this->_parent->isVisible(true)) {
+        if ($recursive && isset($this->parent) &&
+            $this->parent instanceof self) {
+            if (!$this->parent->isVisible(true)) {
                 return false;
             }
         }
 
-        return $this->_visible;
+        return $this->visible;
     }
 
     /**
@@ -818,25 +832,26 @@ abstract class AbstractPage extends Container
     {
         if ($parent === $this) {
             throw new Exception\InvalidArgumentException(
-                'A page cannot have itself as a parent');
+                'A page cannot have itself as a parent'
+            );
         }
 
         // return if the given parent already is parent
-        if ($parent === $this->_parent) {
+        if ($parent === $this->parent) {
             return $this;
         }
 
         // remove from old parent
-        if (null !== $this->_parent) {
-            $this->_parent->removePage($this);
+        if (null !== $this->parent) {
+            $this->parent->removePage($this);
         }
 
         // set new parent
-        $this->_parent = $parent;
+        $this->parent = $parent;
 
         // add to parent if page and not already a child
-        if (null !== $this->_parent && !$this->_parent->hasPage($this, false)) {
-            $this->_parent->addPage($this);
+        if (null !== $this->parent && !$this->parent->hasPage($this, false)) {
+            $this->parent->addPage($this);
         }
 
         return $this;
@@ -849,7 +864,7 @@ abstract class AbstractPage extends Container
      */
     public function getParent()
     {
-        return $this->_parent;
+        return $this->parent;
     }
 
     /**
@@ -867,7 +882,8 @@ abstract class AbstractPage extends Container
     {
         if (!is_string($property) || empty($property)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $property must be a non-empty string');
+                'Invalid argument: $property must be a non-empty string'
+            );
         }
 
         $method = 'set' . self::_normalizePropertyName($property);
@@ -876,7 +892,7 @@ abstract class AbstractPage extends Container
             method_exists($this, $method)) {
             $this->$method($value);
         } else {
-            $this->_properties[$property] = $value;
+            $this->properties[$property] = $value;
         }
 
         return $this;
@@ -897,15 +913,16 @@ abstract class AbstractPage extends Container
     {
         if (!is_string($property) || empty($property)) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $property must be a non-empty string');
+                'Invalid argument: $property must be a non-empty string'
+            );
         }
 
         $method = 'get' . self::_normalizePropertyName($property);
 
         if (method_exists($this, $method)) {
             return $this->$method();
-        } elseif (isset($this->_properties[$property])) {
-            return $this->_properties[$property];
+        } elseif (isset($this->properties[$property])) {
+            return $this->properties[$property];
         }
 
         return null;
@@ -961,7 +978,7 @@ abstract class AbstractPage extends Container
             return true;
         }
 
-        return isset($this->_properties[$name]);
+        return isset($this->properties[$name]);
     }
 
     /**
@@ -977,13 +994,16 @@ abstract class AbstractPage extends Container
     {
         $method = 'set' . self::_normalizePropertyName($name);
         if (method_exists($this, $method)) {
-            throw new Exception\InvalidArgumentException(sprintf(
+            throw new Exception\InvalidArgumentException(
+                sprintf(
                     'Unsetting native property "%s" is not allowed',
-                    $name));
+                    $name
+                )
+            );
         }
 
-        if (isset($this->_properties[$name])) {
-            unset($this->_properties[$name]);
+        if (isset($this->properties[$name])) {
+            unset($this->properties[$name]);
         }
     }
 
@@ -996,7 +1016,7 @@ abstract class AbstractPage extends Container
      */
     public function __toString()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     // Public methods:
@@ -1012,7 +1032,7 @@ abstract class AbstractPage extends Container
     public function addRel($relation, $value)
     {
         if (is_string($relation)) {
-            $this->_rel[$relation] = $value;
+            $this->rel[$relation] = $value;
         }
         return $this;
     }
@@ -1028,7 +1048,7 @@ abstract class AbstractPage extends Container
     public function addRev($relation, $value)
     {
         if (is_string($relation)) {
-            $this->_rev[$relation] = $value;
+            $this->rev[$relation] = $value;
         }
         return $this;
     }
@@ -1041,8 +1061,8 @@ abstract class AbstractPage extends Container
      */
     public function removeRel($relation)
     {
-        if (isset($this->_rel[$relation])) {
-            unset($this->_rel[$relation]);
+        if (isset($this->rel[$relation])) {
+            unset($this->rel[$relation]);
         }
 
         return $this;
@@ -1056,8 +1076,8 @@ abstract class AbstractPage extends Container
      */
     public function removeRev($relation)
     {
-        if (isset($this->_rev[$relation])) {
-            unset($this->_rev[$relation]);
+        if (isset($this->rev[$relation])) {
+            unset($this->rev[$relation]);
         }
 
         return $this;
@@ -1070,7 +1090,7 @@ abstract class AbstractPage extends Container
      */
     public function getDefinedRel()
     {
-        return array_keys($this->_rel);
+        return array_keys($this->rel);
     }
 
     /**
@@ -1080,7 +1100,7 @@ abstract class AbstractPage extends Container
      */
     public function getDefinedRev()
     {
-        return array_keys($this->_rev);
+        return array_keys($this->rev);
     }
 
     /**
@@ -1090,7 +1110,7 @@ abstract class AbstractPage extends Container
      */
     public function getCustomProperties()
     {
-        return $this->_properties;
+        return $this->properties;
     }
 
     /**
@@ -1114,7 +1134,7 @@ abstract class AbstractPage extends Container
             $this->getCustomProperties(),
             array(
                 'label'     => $this->getLabel(),
-                'fragment' => $this->getFragment(),
+                'fragment'  => $this->getFragment(),
                 'id'        => $this->getId(),
                 'class'     => $this->getClass(),
                 'title'     => $this->getTitle(),

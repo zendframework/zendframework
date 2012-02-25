@@ -288,7 +288,16 @@ class Variables extends ArrayObject
             return null;
         }
 
-        return parent::offsetGet($key);
+        $return = parent::offsetGet($key);
+
+        // If we have a closure/functor, invoke it, and ensure the return value 
+        // is escaped.
+        if (is_object($return) && is_callable($return)) {
+            $return = call_user_func($return);
+            return $this->escape($return);
+        }
+
+        return $return;
     }
 
     /**

@@ -47,8 +47,9 @@ class Navigation extends Container
             $this->addPages($pages);
         } elseif (null !== $pages) {
             throw new Exception\InvalidArgumentException(
-                    'Invalid argument: $pages must be an array, an ' .
-                    'instance of Zend_Config, or null');
+                'Invalid argument: $pages must be an array, an '
+                . 'instance of Zend_Config, or null'
+            );
         }
     }
 }

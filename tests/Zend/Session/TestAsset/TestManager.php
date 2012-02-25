@@ -4,6 +4,7 @@ namespace ZendTest\Session\TestAsset;
 use Zend\Session\AbstractManager,
     Zend\Session\Configuration as SessionConfiguration,
     Zend\Session\Storage as SessionStorage,
+    Zend\Session\SaveHandler as SessionSaveHandler,
     Zend\EventManager\EventCollection;
 
 class TestManager extends AbstractManager
@@ -78,5 +79,10 @@ class TestManager extends AbstractManager
     public function setStorage(SessionStorage $storage)
     {
         $this->_setStorage($storage);
+    }
+
+    public function setSaveHandler(SessionSaveHandler $saveHandler)
+    {
+        $this->_setSaveHandler($saveHandler);
     }
 }

@@ -59,7 +59,7 @@ class DijitTest extends \PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        $view = new View\PhpRenderer();
+        $view = new View\Renderer\PhpRenderer();
         \Zend\Dojo\Dojo::enableView($view);
         return $view;
     }
@@ -119,7 +119,7 @@ class DijitTest extends \PHPUnit_Framework_TestCase
 
     public function testElementShouldDojoEnableViewObject()
     {
-        $this->element->setView(new View\PhpRenderer());
+        $this->element->setView(new View\Renderer\PhpRenderer());
         $view = $this->element->getView();
         
         $this->assertInstanceOf('Zend\Dojo\View\Helper\Dojo', $view->plugin('dojo'));

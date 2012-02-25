@@ -250,7 +250,9 @@ class Links extends AbstractHelper
                 if (!($flag & $relFlag)) {
                     continue;
                 }
-                if ($found = $this->findRelation($page, $rel, $type)) {
+
+                $found = $this->findRelation($page, $rel, $type);
+                if ($found) {
                     if (!is_array($found)) {
                         $found = array($found);
                     }
@@ -302,8 +304,10 @@ class Links extends AbstractHelper
     protected function _findFromProperty(AbstractPage $page, $rel, $type)
     {
         $method = 'get' . ucfirst($rel);
-        if ($result = $page->$method($type)) {
-            if ($result = $this->_convertToPages($result)) {
+        $result = $page->$method($type);
+        if ($result) {
+            $result = $this->_convertToPages($result);
+            if ($result) {
                 if (!is_array($result)) {
                     $result = array($result);
                 }
@@ -564,9 +568,9 @@ class Links extends AbstractHelper
      */
     public function searchRevSection(AbstractPage $page)
     {
-        $found = null;
-
-        if ($parent = $page->getParent()) {
+        $found  = null;
+        $parent = $page->getParent();
+        if ($parent) {
             if ($parent instanceof AbstractPage &&
                 $this->_findRoot($page)->hasPage($parent)) {
                 $found = $parent;
@@ -589,9 +593,9 @@ class Links extends AbstractHelper
      */
     public function searchRevSubsection(AbstractPage $page)
     {
-        $found = null;
-
-        if ($parent = $page->getParent()) {
+        $found  = null;
+        $parent = $page->getParent();
+        if ($parent) {
             if ($parent instanceof AbstractPage) {
                 $root = $this->_findRoot($page);
                 foreach ($root as $chapter) {
@@ -675,7 +679,8 @@ class Links extends AbstractHelper
                 // first key is numeric; assume several pages
                 $pages = array();
                 foreach ($mixed as $value) {
-                    if ($value = $this->_convertToPages($value, false)) {
+                    $value = $this->_convertToPages($value, false);
+                    if ($value) {
                         $pages[] = $value;
                     }
                 }
@@ -756,7 +761,8 @@ class Links extends AbstractHelper
             $container = $this->getContainer();
         }
 
-        if ($active = $this->findActive($container)) {
+        $active = $this->findActive($container);
+        if ($active) {
             $active = $active['page'];
         } else {
             // no active page
@@ -771,7 +777,8 @@ class Links extends AbstractHelper
         foreach ($result as $attrib => $types) {
             foreach ($types as $relation => $pages) {
                 foreach ($pages as $page) {
-                    if ($r = $this->renderLink($page, $attrib, $relation)) {
+                    $r = $this->renderLink($page, $attrib, $relation);
+                    if ($r) {
                         $output .= $indent . $r . self::EOL;
                     }
                 }

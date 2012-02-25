@@ -15,12 +15,17 @@ abstract class IsAssocArray
      * We have an associative array if at least one key is a string.
      * 
      * @param  mixed $value 
+     * @param  bool  $allowEmpty
      * @return bool
      */
-    public static function test($value)
+    public static function test($value, $allowEmpty = false)
     {
-        return (is_array($value)
-                && count(array_filter(array_keys($value), 'is_string')) > 0
-        );
+        if (is_array($value)) {
+            if ($allowEmpty && count($value) == 0) {
+                return true;
+            }
+            return count(array_filter(array_keys($value), 'is_string')) > 0;
+        }
+        return false;
     }
 }

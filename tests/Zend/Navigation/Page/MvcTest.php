@@ -415,4 +415,45 @@ class MvcTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    public function testDefaultUrlHelperCanBeSetWithConstructor()
+    {
+        $page = new Page\Mvc(array(
+            'label'            => 'foo',
+            'action'           => 'index',
+            'controller'       => 'index',
+            'defaultUrlHelper' => $this->urlHelper
+        ));
+
+        $this->assertEquals($this->urlHelper, $page->getDefaultUrlHelper());
+        $page->setDefaultUrlHelper(null);
+    }
+
+    public function testDefaultUrlHelperCanBeSetWithGetter()
+    {
+        $page = new Page\Mvc(array(
+            'label'            => 'foo',
+            'action'           => 'index',
+            'controller'       => 'index',
+        ));
+        $page->setDefaultUrlHelper($this->urlHelper);
+
+        $this->assertEquals($this->urlHelper, $page->getDefaultUrlHelper());
+        $page->setDefaultUrlHelper(null);
+    }
+
+    public function testNoExceptionForGetHrefIfDefaultUrlHelperIsSet()
+    {
+        $page = new Page\Mvc(array(
+            'label'            => 'foo',
+            'action'           => 'index',
+            'controller'       => 'index',
+            'defaultUrlHelper' => $this->urlHelper
+        ));
+
+        // If the default url helper is not used an exception will be thrown.
+        // This method intentionally has no assertion.
+        $page->getHref();
+        $page->setDefaultUrlHelper(null);
+    }
 }

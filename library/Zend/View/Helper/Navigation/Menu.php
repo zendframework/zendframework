@@ -236,7 +236,8 @@ class Menu extends AbstractHelper
         );
 
         // does page have a href?
-        if ($href = $page->getHref()) {
+        $href = $page->getHref();
+        if ($href) {
             $element = 'a';
             $attribs['href'] = $href;
             $attribs['target'] = $page->getTarget();
@@ -376,8 +377,9 @@ class Menu extends AbstractHelper
         $html = '';
 
         // find deepest active
-        if ($found = $this->findActive($container, $minDepth, $maxDepth)) {
-            $foundPage = $found['page'];
+        $found = $this->findActive($container, $minDepth, $maxDepth);
+        if ($found) {
+            $foundPage  = $found['page'];
             $foundDepth = $found['depth'];
         } else {
             $foundPage = null;
@@ -606,8 +608,8 @@ class Menu extends AbstractHelper
         if (is_array($partial)) {
             if (count($partial) != 2) {
                 throw new Exception\InvalidArgumentException(
-                    'Unable to render menu: A view partial supplied as ' 
-                    .  'an array must contain two values: partial view ' 
+                    'Unable to render menu: A view partial supplied as '
+                    .  'an array must contain two values: partial view '
                     .  'script and module where script can be found'
                 );
             }
@@ -642,7 +644,8 @@ class Menu extends AbstractHelper
      */
     public function render(Container $container = null)
     {
-        if ($partial = $this->getPartial()) {
+        $partial = $this->getPartial();
+        if ($partial) {
             return $this->renderPartial($container, $partial);
         } else {
             return $this->renderMenu($container);

@@ -34,7 +34,7 @@ use Zend\Form\Element,
     Zend\Translator\Translator,
     Zend\Validator\AbstractValidator,
     Zend\Validator\Alpha as AlphaValidator,
-    Zend\View\PhpRenderer;
+    Zend\View\Renderer\PhpRenderer;
 
 /**
  * @category   Zend
@@ -1200,7 +1200,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     public function testGetViewLazyLoadsPhpRendererByDefault()
     {
         $view = $this->element->getView();
-        $this->assertInstanceOf('Zend\View\PhpRenderer', $view);
+        $this->assertInstanceOf('Zend\View\Renderer\PhpRenderer', $view);
     }
 
     public function testCanSetView()

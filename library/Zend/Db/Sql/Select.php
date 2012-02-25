@@ -3,7 +3,7 @@
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\PlatformInterface,
+    Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
     Zend\Db\Adapter\ParameterContainer;
 
@@ -84,8 +84,8 @@ class Select implements SqlInterface, ParameterizedSqlInterface
         $limit = null;
 
         $s1 = sprintf($this->specification1, $columns, $table);
-        $s2 = sprintf($this->specification2, $where);
 
+        $s2 = (isset($where)) ? sprintf($this->specification2, $where) : '';
         $s3 = (isset($order)) ? sprintf($this->specification3, $order) : '';
         $s4 = (isset($limit)) ? sprintf($this->specification3, $limit) : '';
 
@@ -95,7 +95,8 @@ class Select implements SqlInterface, ParameterizedSqlInterface
 
     public function getParameterContainer()
     {
-        return new ParameterContainer($this->where);
+        $where = (is_array($this->where)) ? $this->where : array();
+        return new ParameterContainer($where);
     }
 
     public function getSqlString(PlatformInterface $platform = null)

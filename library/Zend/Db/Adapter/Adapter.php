@@ -69,27 +69,14 @@ class Adapter
         }
 
         $driver->checkEnvironment();
-        $this->setDriver($driver);
+        $this->driver = $driver;
 
         if ($platform == null) {
             $platform = $this->createPlatformFromDriver($driver);
         }
 
-        $this->setPlatform($platform);
-
+        $this->platform = $platform;
         $this->queryResultSetPrototype = ($queryResultPrototype) ?: new ResultSet\ResultSet();
-    }
-
-    /**
-     * setDriver()
-     * 
-     * @param Driver\DriverInterface $driver
-     * @return Adapter
-     */
-    public function setDriver(Driver\DriverInterface $driver)
-    {
-        $this->driver = $driver;
-        return $this;
     }
 
     /**
@@ -97,7 +84,7 @@ class Adapter
      * @return Driver\DriverInterface
      * @throws \InvalidArgumentException
      */
-    public function createDriverFromParameters(array $parameters)
+    protected function createDriverFromParameters(array $parameters)
     {
         if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
             throw new \InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
@@ -155,16 +142,6 @@ class Adapter
     }
 
     /**
-     * @param Platform\PlatformInterface $platform
-     * @return Adapter
-     */
-    public function setPlatform(Platform\PlatformInterface $platform)
-    {
-        $this->platform = $platform;
-        return $this;
-    }
-
-    /**
      * @return Platform\PlatformInterface
      */
     public function getPlatform()
@@ -176,7 +153,7 @@ class Adapter
      * @param Driver\DriverInterface $driver
      * @return Platform\PlatformInterface
      */
-    public function createPlatformFromDriver(Driver\DriverInterface $driver)
+    protected function createPlatformFromDriver(Driver\DriverInterface $driver)
     {
         // consult driver for platform implementation
         $platformName = $driver->getDatabasePlatformName(Driver\DriverInterface::NAME_FORMAT_CAMELCASE);

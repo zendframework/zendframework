@@ -3,8 +3,10 @@
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
 use Zend\Db\Adapter\Driver\StatementInterface,
+    Zend\Db\Adapter\Exception,
     Zend\Db\Adapter\ParameterContainer,
     Zend\Db\Adapter\ParameterContainerInterface;
+
 
 class Statement implements StatementInterface
 {
@@ -36,7 +38,11 @@ class Statement implements StatementInterface
         $this->sql = $sql;
         $this->resource = $mysqli->prepare($sql);
         if (!$this->resource instanceof \mysqli_stmt) {
-            throw new \RuntimeException('Statement couldn\'t be produced');
+            throw new Exception\InvalidQueryException(
+                'Statement couldn\'t be produced with sql: "' . $sql . '"',
+                null,
+                new ErrorException($mysqli->error, $mysqli->errno)
+            );
         }
         return $this;
     }
@@ -105,9 +111,11 @@ class Statement implements StatementInterface
             }
             $args[] = &$value;
         }
-        array_unshift($args, $type);
 
-        call_user_func_array(array($this->resource, 'bind_param'), $args);
+        if ($args) {
+            array_unshift($args, $type);
+            call_user_func_array(array($this->resource, 'bind_param'), $args);
+        }
     }
 
     public function isQuery()

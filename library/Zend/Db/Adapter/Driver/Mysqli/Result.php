@@ -131,8 +131,11 @@ class Result implements \Iterator, ResultInterface
         } elseif ($r === false) {
             throw new \RuntimeException($this->resource->error);
         }
-        
-        $this->currentData = array_combine($this->statementBindValues['keys'], $this->statementBindValues['values']);
+
+        // derefernece
+        for ($i = 0; $i < count($this->statementBindValues['keys']); $i++) {
+            $this->currentData[$this->statementBindValues['keys'][$i]] = $this->statementBindValues['values'][$i];
+        }
         $this->currentComplete = true;
         $this->nextComplete = true;
         $this->position++;

@@ -12,12 +12,7 @@ use Zend\Db\Adapter\Adapter,
 
 class TableGateway implements TableGatewayInterface
 {
-    const USE_STATIC_ADAPTER = null;
 
-    /**
-     * @var \Zend\Db\Adapter\Adapter[]
-     */
-    protected static $staticAdapters = array();
 
     /**
      * @var \Zend\Db\Adapter\Adapter
@@ -59,41 +54,11 @@ class TableGateway implements TableGatewayInterface
      */
     protected $sqlDelete = null;
 
-    public static function setStaticAdapter(Adapter $adapter)
-    {
-        $class = get_called_class();
 
-        static::$staticAdapters[$class] = $adapter;
-        if ($class === __CLASS__) {
-            static::$staticAdapters[__CLASS__] = $adapter;
-        }
-    }
 
-    public static function getStaticAdapter()
-    {
-        $class = get_called_class();
-
-        // class specific adapter
-        if (isset(static::$staticAdapters[$class])) {
-            return static::$staticAdapters[$class];
-        }
-
-        // default adapter
-        if (isset(static::$staticAdapters[__CLASS__])) {
-            return static::$staticAdapters[__CLASS__];
-        }
-
-        throw new \Exception('No database adapter was found.');
-    }
-
-    public function __construct($tableName, Adapter $adapter = null, $databaseSchema = null, ResultSet $selectResultPrototype = null)
+    public function __construct($tableName, Adapter $adapter, $databaseSchema = null, ResultSet $selectResultPrototype = null)
     {
         $this->setTableName($tableName);
-
-        if ($adapter === self::USE_STATIC_ADAPTER) {
-            $adapter = static::getStaticAdapter();
-        }
-
         $this->setAdapter($adapter);
 
         if (is_string($databaseSchema)) {
@@ -143,11 +108,13 @@ class TableGateway implements TableGatewayInterface
         return $this->selectResultPrototype;
     }
 
-    public function select($where)
+    public function select($where = null)
     {
         $select = clone $this->sqlSelect;
         $select->from($this->tableName, $this->databaseSchema);
-        $select->where($where);
+        if ($where) {
+            $select->where($where);
+        }
 
         $statement = $select->getParameterizedSqlString($this->adapter);
         $result = $statement->execute($select->getParameterContainer());

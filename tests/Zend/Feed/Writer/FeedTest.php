@@ -203,6 +203,17 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($myDate->equals($writer->getDateCreated()));
     }
 
+    /**
+     * @group ZF-12023
+     */
+    public function testSetDateCreatedUsesGivenUnixTimestampThatIsLessThanTenDigits()
+    {
+        $writer = new Writer\Feed;
+        $writer->setDateCreated(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getDateCreated()));
+    }
+
     public function testSetDateCreatedUsesZendDateObject()
     {
         $writer = new Writer\Feed;
@@ -224,6 +235,17 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $writer->setDateModified(1234567890);
         $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getDateModified()));
+    }
+    
+    /**
+     * @group ZF-12023
+     */
+    public function testSetDateModifiedUsesGivenUnixTimestampThatIsLessThanTenDigits()
+    {
+        $writer = new Writer\Feed;
+        $writer->setDateModified(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getDateModified()));
     }
 
@@ -283,6 +305,17 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
     }
 
+    /**
+     * @group ZF-12023
+     */
+    public function testSetLastBuildDateUsesGivenUnixTimestampThatIsLessThanTenDigits()
+    {
+        $writer = new Writer\Feed;
+        $writer->setLastBuildDate(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+    }
+    
     public function testSetLastBuildDateUsesZendDateObject()
     {
         $writer = new Writer\Feed;

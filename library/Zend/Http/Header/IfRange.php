@@ -17,12 +17,12 @@ class IfRange implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-range') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Range string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Range string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfRange implements HeaderDescription
     {
         return 'If-Range: ' . $this->getFieldValue();
     }
-    
+
 }

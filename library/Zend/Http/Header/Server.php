@@ -17,12 +17,12 @@ class Server implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'server') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Server string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Server string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Server implements HeaderDescription
     {
         return 'Server: ' . $this->getFieldValue();
     }
-    
+
 }

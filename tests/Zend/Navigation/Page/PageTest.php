@@ -22,10 +22,11 @@
 /**
  * @namespace
  */
-namespace ZendTest\Navigation;
+namespace ZendTest\Navigation\Page;
 
-use Zend\Navigation\AbstractPage,
-    Zend\Navigation\Page,
+use Zend\Navigation\Page\AbstractPage,
+    Zend\Navigation\Page\Mvc,
+    Zend\Navigation\Page\Uri,
     Zend\Navigation,
     Zend\Config;
 
@@ -549,39 +550,39 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetActiveOnNewlyConstructedPageShouldReturnFalse()
     {
-        $page = new Page\Uri();
+        $page = new Uri();
         $this->assertFalse($page->getActive());
     }
 
     public function testIsActiveOnNewlyConstructedPageShouldReturnFalse()
     {
-        $page = new Page\Uri();
+        $page = new Uri();
         $this->assertFalse($page->isActive());
     }
 
     public function testGetActiveShouldReturnTrueIfPageIsActive()
     {
-        $page = new Page\Uri(array('active' => true));
+        $page = new Uri(array('active' => true));
         $this->assertTrue($page->getActive());
     }
 
     public function testIsActiveShouldReturnTrueIfPageIsActive()
     {
-        $page = new Page\Uri(array('active' => true));
+        $page = new Uri(array('active' => true));
         $this->assertTrue($page->isActive());
     }
 
     public function testIsActiveWithRecursiveTrueShouldReturnTrueIfChildActive()
     {
-        $page = new Page\Uri(array(
+        $page = new Uri(array(
             'label'  => 'Page 1',
             'active' => false,
             'pages'  => array(
-                new Page\Uri(array(
+                new Uri(array(
                     'label'  => 'Page 1.1',
                     'active' => false,
                     'pages'  => array(
-                        new Page\Uri(array(
+                        new Uri(array(
                             'label'  => 'Page 1.1',
                             'active' => true
                         ))
@@ -596,15 +597,15 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetActiveWithRecursiveTrueShouldReturnTrueIfChildActive()
     {
-        $page = new Page\Uri(array(
+        $page = new Uri(array(
             'label'  => 'Page 1',
             'active' => false,
             'pages'  => array(
-                new Page\Uri(array(
+                new Uri(array(
                     'label'  => 'Page 1.1',
                     'active' => false,
                     'pages'  => array(
-                        new Page\Uri(array(
+                        new Uri(array(
                             'label'  => 'Page 1.1',
                             'active' => true
                         ))
@@ -619,14 +620,14 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetActiveWithNoParamShouldSetFalse()
     {
-        $page = new Page\Uri();
+        $page = new Uri();
         $page->setActive();
         $this->assertTrue($page->getActive());
     }
 
     public function testSetActiveShouldJuggleValue()
     {
-        $page = new Page\Uri();
+        $page = new Uri();
 
         $page->setActive(1);
         $this->assertTrue($page->getActive());
@@ -643,38 +644,38 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testIsVisibleOnNewlyConstructedPageShouldReturnTrue()
     {
-        $page = new Page\Uri();
+        $page = new Uri();
         $this->assertTrue($page->isVisible());
     }
 
     public function testGetVisibleOnNewlyConstructedPageShouldReturnTrue()
     {
-        $page = new Page\Uri();
+        $page = new Uri();
         $this->assertTrue($page->getVisible());
     }
 
     public function testIsVisibleShouldReturnFalseIfPageIsNotVisible()
     {
-        $page = new Page\Uri(array('visible' => false));
+        $page = new Uri(array('visible' => false));
         $this->assertFalse($page->isVisible());
     }
 
     public function testGetVisibleShouldReturnFalseIfPageIsNotVisible()
     {
-        $page = new Page\Uri(array('visible' => false));
+        $page = new Uri(array('visible' => false));
         $this->assertFalse($page->getVisible());
     }
 
     public function testIsVisibleRecursiveTrueShouldReturnFalseIfParentInivisble()
     {
-        $page = new Page\Uri(array(
+        $page = new Uri(array(
             'label'  => 'Page 1',
             'visible' => false,
             'pages'  => array(
-                new Page\Uri(array(
+                new Uri(array(
                     'label'  => 'Page 1.1',
                     'pages'  => array(
-                        new Page\Uri(array(
+                        new Uri(array(
                             'label'  => 'Page 1.1'
                         ))
                     )
@@ -689,14 +690,14 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testGetVisibleRecursiveTrueShouldReturnFalseIfParentInivisble()
     {
-        $page = new Page\Uri(array(
+        $page = new Uri(array(
             'label'  => 'Page 1',
             'visible' => false,
             'pages'  => array(
-                new Page\Uri(array(
+                new Uri(array(
                     'label'  => 'Page 1.1',
                     'pages'  => array(
-                        new Page\Uri(array(
+                        new Uri(array(
                             'label'  => 'Page 1.1'
                         ))
                     )
@@ -711,14 +712,14 @@ class PageTest extends \PHPUnit_Framework_TestCase
 
     public function testSetVisibleWithNoParamShouldSetVisble()
     {
-        $page = new Page\Uri(array('visible' => false));
+        $page = new Uri(array('visible' => false));
         $page->setVisible();
         $this->assertTrue($page->isVisible());
     }
 
     public function testSetVisibleShouldJuggleValue()
     {
-        $page = new Page\Uri();
+        $page = new Uri();
 
         $page->setVisible(1);
         $this->assertTrue($page->isVisible());
@@ -817,43 +818,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
         );
 
         $page->setOptions($options);
-
-        $expected = array(
-            'label'       => 'bar',
-            'action'      => 'baz',
-            'controller'  => 'bat',
-            'module'      => 'test',
-            'id'          => 'foo-test'
-        );
-
-        $actual = array(
-            'label'       => $page->getLabel(),
-            'action'      => $page->getAction(),
-            'controller'  => $page->getController(),
-            'module'      => $page->getModule(),
-            'id'          => $page->getId()
-        );
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testSetConfig()
-    {
-        $page = AbstractPage::factory(array(
-            'label' => 'foo',
-            'action' => 'index',
-            'controller' => 'index'
-        ));
-
-        $options = array(
-            'label' => 'bar',
-            'action' => 'baz',
-            'controller' => 'bat',
-            'module' => 'test',
-            'id' => 'foo-test'
-        );
-
-        $page->setConfig(new Config\Config($options));
 
         $expected = array(
             'label'       => 'bar',

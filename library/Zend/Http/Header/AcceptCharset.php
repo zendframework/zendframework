@@ -20,7 +20,7 @@ class AcceptCharset implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'accept-charset') {
-            throw new Exception\InvalidArgumentException('Invalid header line for accept header string');
+            throw new Exception\InvalidArgumentException('Invalid header line for accept header string: "' . $name . '"');
         }
 
         $valueParts = explode(';', $value, 2);

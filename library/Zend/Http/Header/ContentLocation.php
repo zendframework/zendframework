@@ -17,12 +17,12 @@ class ContentLocation implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-location') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Location string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Location string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentLocation implements HeaderDescription
     {
         return 'Content-Location: ' . $this->getFieldValue();
     }
-    
+
 }

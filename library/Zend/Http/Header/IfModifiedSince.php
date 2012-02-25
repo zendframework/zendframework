@@ -17,12 +17,12 @@ class IfModifiedSince implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-modified-since') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Modified-Since string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Modified-Since string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfModifiedSince implements HeaderDescription
     {
         return 'If-Modified-Since: ' . $this->getFieldValue();
     }
-    
+
 }

@@ -19,7 +19,7 @@ class Allow implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'allow') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Allow string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Allow string: "' . $name . '"');
         }
 
         foreach (explode(',', $value) as $method) {

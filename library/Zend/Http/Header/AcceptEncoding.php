@@ -17,7 +17,7 @@ class AcceptEncoding implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'accept-encoding') {
-            throw new Exception\InvalidArgumentException('Invalid header line for accept header string');
+            throw new Exception\InvalidArgumentException('Invalid header line for accept header string: "' . $name . '"');
         }
 
         // @todo implementation details

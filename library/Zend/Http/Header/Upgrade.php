@@ -17,12 +17,12 @@ class Upgrade implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'upgrade') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Upgrade string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Upgrade string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Upgrade implements HeaderDescription
     {
         return 'Upgrade: ' . $this->getFieldValue();
     }
-    
+
 }

@@ -72,9 +72,11 @@ class DefaultListenerAggregateTest extends TestCase
                 'Zend\Module\Listener\AutoloaderListener',
                 'Zend\Module\Listener\InitTrigger',
                 'Zend\Module\Listener\ConfigListener',
+                'Zend\Module\Listener\LocatorRegistrationListener',
             ),
             'loadModules.post' => array(
                 'Zend\Module\Listener\ConfigListener',
+                'Zend\Module\Listener\LocatorRegistrationListener',
             ),
         );
         foreach ($expectedEvents as $event => $expectedListeners) {

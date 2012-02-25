@@ -24,7 +24,7 @@
  */
 namespace ZendTest\View\Helper\Navigation;
 
-use Zend\Navigation\AbstractPage,
+use Zend\Navigation\Page\AbstractPage,
     Zend\Navigation\Page\Uri as UriPage,
     Zend\Config,
     Zend\Acl,

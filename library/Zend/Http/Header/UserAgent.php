@@ -17,12 +17,12 @@ class UserAgent implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'user-agent') {
-            throw new Exception\InvalidArgumentException('Invalid header line for User-Agent string');
+            throw new Exception\InvalidArgumentException('Invalid header line for User-Agent string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class UserAgent implements HeaderDescription
     {
         return 'User-Agent: ' . $this->getFieldValue();
     }
-    
+
 }

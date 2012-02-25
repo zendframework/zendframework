@@ -22,7 +22,8 @@
 namespace Zend\Cache\Storage\Adapter;
 
 use Memcached as MemcachedResource,
-    Zend\Cache\Exception;
+    Zend\Cache\Exception,
+    Zend\Validator\Hostname;
 
 /**
  * These are options specific to the APC adapter
@@ -35,6 +36,7 @@ use Memcached as MemcachedResource,
  */
 class MemcachedOptions extends AdapterOptions
 {
+
     /**
      * Map of option keys to \Memcached options
      *
@@ -69,14 +71,7 @@ class MemcachedOptions extends AdapterOptions
      *
      * @var string
      */
-    protected $server = 'localhost';
-
-    /**
-     * Memcached port
-     *
-     * @var integer
-     */
-    protected $port = 11211;
+    protected $servers = array();
 
     /**
      * Whether or not to enable binary protocol for communication with server
@@ -227,19 +222,25 @@ class MemcachedOptions extends AdapterOptions
         return parent::setNamespace($namespace);
     }
 
-    public function setServer($server)
+    /**
+     * Add Server
+     *
+     * @param string $host
+     * @param int $port
+     * @return MemcachedOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function addServer($host, $port = 11211)
     {
-        $this->server= $server;
-        return $this;
-    }
+        $hostNameValidator = new Hostname(array('allow' => Hostname::ALLOW_ALL));
+        if (!$hostNameValidator->isValid($host)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                 '%s expects a valid hostname: %s',
+                 __METHOD__,
+                 implode("\n", $hostNameValidator->getMessages())
+            ));
+        }
 
-    public function getServer()
-    {
-        return $this->server;
-    }
-
-    public function setPort($port)
-    {
         if ((!is_int($port) && !is_numeric($port))
             || 0 > $port
         ) {
@@ -249,13 +250,41 @@ class MemcachedOptions extends AdapterOptions
             ));
         }
 
-        $this->port= $port;
+        $this->servers[] = array($host, $port);
         return $this;
     }
 
-    public function getPort()
+    /**
+     * Set Servers
+     *
+     * @param array $servers list of servers in [] = array($host, $port)
+     * @return MemcachedOptions
+     * @throws Exception\InvalidArgumentException
+     */
+    public function setServers(array $servers)
     {
-        return $this->port;
+        foreach ($servers as $server) {
+            if (!isset($server[0])) {
+                throw new Exception\InvalidArgumentException('The servers array must contain a host value.');
+            }
+
+            if (!isset($server[1])) {
+                $this->addServer($server[0]);
+            } else {
+                $this->addServer($server[0], $server[1]);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Get Servers
+     *
+     * @return array
+     */
+    public function getServers()
+    {
+        return $this->servers;
     }
 
     /**

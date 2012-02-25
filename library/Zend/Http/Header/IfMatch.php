@@ -17,12 +17,12 @@ class IfMatch implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'if-match') {
-            throw new Exception\InvalidArgumentException('Invalid header line for If-Match string');
+            throw new Exception\InvalidArgumentException('Invalid header line for If-Match string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class IfMatch implements HeaderDescription
     {
         return 'If-Match: ' . $this->getFieldValue();
     }
-    
+
 }

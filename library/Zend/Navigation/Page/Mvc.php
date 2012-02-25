@@ -19,13 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Navigation\Page;
 
 use Zend\Mvc\Router\RouteMatch,
-    Zend\Navigation\AbstractPage,
     Zend\Navigation\Exception,
     Zend\View\Helper\Url as UrlHelper;
 
@@ -59,13 +55,6 @@ class Mvc extends AbstractPage
      * @var string
      */
     protected $controller;
-
-    /**
-     * Module name to use when assembling URL
-     *
-     * @var string
-     */
-    protected $module;
 
     /**
      * Params to use when assembling URL
@@ -105,7 +94,6 @@ class Mvc extends AbstractPage
      * View helper for assembling URLs
      *
      * @see getHref()
-     *
      * @var UrlHelper
      */
     protected $urlHelper = null;
@@ -130,7 +118,6 @@ class Mvc extends AbstractPage
      * @param  bool $recursive  [optional] whether page should be considered
      *                          active if any child pages are active. Default is
      *                          false.
-     *
      * @return bool             whether page should be considered active or not
      */
     public function isActive($recursive = false)
@@ -139,6 +126,11 @@ class Mvc extends AbstractPage
             $reqParams = array();
             if ($this->routeMatch instanceof RouteMatch) {
                 $reqParams = $this->routeMatch->getParams();
+
+                if ($this->routeMatch->getMatchedRouteName() === $this->getRoute()) {
+                    $this->active = true;
+                    return true;
+                }
             }
 
             $myParams = $this->params;
@@ -179,8 +171,8 @@ class Mvc extends AbstractPage
      * the href based on the page's properties.
      *
      * @see UrlHelper
-     *
      * @return string  page href
+     * @throws Exception\DomainException if no UrlHelper is set
      */
     public function getHref()
     {
@@ -230,7 +222,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string $action             action name
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid $action is given
      */
@@ -265,7 +256,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string|null $controller    controller name
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid controller name is given
      */
@@ -300,7 +290,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string|null $module        module name
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid module name is given
      */
@@ -333,11 +322,9 @@ class Mvc extends AbstractPage
      * Sets params to use when assembling URL
      *
      * @see getHref()
-     *
-     * @param  array|null $params        [optional] page params. Default is null
-     *                                   which sets no params.
-     *
-     * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
+     * @param  array|null $params [optional] page params. Default is null
+     *                            which sets no params.
+     * @return Mvc  fluent interface, returns self
      */
     public function setParams(array $params = null)
     {
@@ -370,7 +357,6 @@ class Mvc extends AbstractPage
      * @see getHref()
      *
      * @param  string $route              route name to use when assembling URL
-     *
      * @return Mvc   fluent interface, returns self
      * @throws Exception\InvalidArgumentException  if invalid $route is given
      */
@@ -403,8 +389,7 @@ class Mvc extends AbstractPage
      * Set route match object from which parameters will be retrieved
      *
      * @param  RouteMatch $matches
-     *
-     * @return Mvc
+     * @return Mvc fluent interface, returns self
      */
     public function setRouteMatch(RouteMatch $matches)
     {
@@ -417,9 +402,8 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param UrlHelper $helper URL helper plugin
-     *
-     * @return Mvc
+     * @param  UrlHelper $helper URL helper plugin
+     * @return Mvc    fluent interface, returns self
      */
     public function setUrlHelper(UrlHelper $helper)
     {
@@ -431,9 +415,7 @@ class Mvc extends AbstractPage
      * Sets the default view helper for assembling URLs.
      *
      * @see getHref()
-     *
      * @param  null|UrlHelper $helper  URL helper
-     *
      * @return void
      */
     public static function setDefaultUrlHelper($helper)

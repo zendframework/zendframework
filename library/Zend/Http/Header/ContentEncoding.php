@@ -17,12 +17,12 @@ class ContentEncoding implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-encoding') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Encoding string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Encoding string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentEncoding implements HeaderDescription
     {
         return 'Content-Encoding: ' . $this->getFieldValue();
     }
-    
+
 }

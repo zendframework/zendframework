@@ -42,7 +42,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
         $reflection = new ReflectionClass($className);
         try {
             $object = $reflection->newInstanceArgs($args);
-            $this->assertType($className, $object);
+            $this->assertInstanceOf($className, $object);
         } catch (Zend_Service_Technorati_Exception $e) {
             $this->fail("Exception " . $e->getMessage() . " thrown");
         }
@@ -53,7 +53,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
         $reflection = new ReflectionClass($resultSetClassName);
         $resultset = $reflection->newInstanceArgs($args);
         foreach ($resultset as $result) {
-            $this->assertType($resultClassName, $result);
+            $this->assertInstanceOf($resultClassName, $result);
         }
     }
 
@@ -62,7 +62,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
         $unobject = unserialize(serialize($resultSet));
         $unresult = null;
 
-        $this->assertType(get_class($resultSet), $unobject);
+        $this->assertInstanceOf(get_class($resultSet), $unobject);
 
         foreach ($resultSet as $index => $result) {
             try {
@@ -97,7 +97,7 @@ class Zend_Service_Technorati_TestCase extends PHPUnit_Framework_TestCase
          */
         $unresult = unserialize(serialize($result));
 
-        $this->assertType(get_class($result), $unresult);
+        $this->assertInstanceOf(get_class($result), $unresult);
         $this->assertEquals($result, $unresult);
     }
 

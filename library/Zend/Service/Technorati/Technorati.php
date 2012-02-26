@@ -923,7 +923,7 @@ class Technorati
      */
     protected static function _checkResponse(Response $response)
     {
-        if ($response->isError()) {
+        if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException(sprintf(
                         'Invalid response status code (HTTP/%s %s %s)',
                         $response->getVersion(), $response->getStatus(), $response->getMessage()));

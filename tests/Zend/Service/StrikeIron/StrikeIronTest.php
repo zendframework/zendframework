@@ -45,13 +45,11 @@ class StrikeIronTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryThrowsOnBadName()
     {
-        $this->markTestIncomplete("TODO: redesign tests that throw exceptions");
         try {
             $this->strikeIron->getService(array('class' => 'BadServiceNameHere'));
-            $this->fail();
+            $this->fail('Expected \Zend\Service\StrikeIron\Exception instance');
         } catch (\Zend\Service\StrikeIron\Exception $e) {
-            $this->assertRegExp('/could not be loaded/i', $e->getMessage());
-            $this->assertRegExp('/failed/i', $e->getMessage());
+            $this->assertRegExp('/Class file not found/', $e->getMessage());
         }
     }
 
@@ -63,7 +61,7 @@ class StrikeIronTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->soapClient, $base->getSoapClient());
     }
 
-    public function testFactoryReturnsServiceAnyUnderscoredClass()
+    public function testFactoryReturnsServiceAnySlashedClass()
     {
         $class = 'ZendTest\Service\StrikeIron\StrikeIronTest\StubbedBase';
         $stub = $this->strikeIron->getService(array('class' => $class));

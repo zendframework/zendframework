@@ -61,7 +61,7 @@ class StrikeIron
      * instance.
      *
      * @param  null|string  $options  Service options
-     * @return object       Zend_Service_StrikeIron_* instance
+     * @return object       Zend\Service\StrikeIron_* instance
      * @throws \Zend\Service\StrikeIron\Exception
      */
     public function getService($options = array())
@@ -73,16 +73,8 @@ class StrikeIron
             $class = "Zend\\Service\\StrikeIron\\{$class}";
         }
 
-        try {
-            if (!class_exists($class)) {
-                @\Zend\Loader::loadClass($class);
-            }
-            if (!class_exists($class, false)) {
-                throw new \Exception('Class file not found');
-            }
-        } catch (\Exception $e) {
-            $msg = "Service '$class' could not be loaded: " . $e->getMessage();
-            throw new Exception\RuntimeException($msg, $e->getCode(), $e);
+        if (!class_exists($class)) {
+            throw new Exception\RuntimeException('Class file not found');
         }
 
         // instantiate and return the service

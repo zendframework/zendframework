@@ -20,20 +20,25 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\StrikeIron;
+
+/**
  * This class allows StrikeIron authentication credentials to be specified
  * in one place and provides a factory for returning instances of different
  * StrikeIron service classes.
  *
  * @uses       Exception
- * @uses       Zend_Loader
- * @uses       Zend_Service_StrikeIron_Exception
+ * @uses       \Zend\Loader\Loader
+ * @uses       \Zend\Service\StrikeIron\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_StrikeIron
+class StrikeIron
 {
     /**
      * Options to pass to Zend_Service_StrikeIron_Base constructor
@@ -44,7 +49,7 @@ class Zend_Service_StrikeIron
     /**
      * Class constructor
      *
-     * @param array  $options  Options to pass to Zend_Service_StrikeIron_Base constructor
+     * @param array  $options  Options to pass to \Zend\Service\StrikeIron\Base constructor
      */
     public function __construct($options = array())
     {
@@ -57,27 +62,27 @@ class Zend_Service_StrikeIron
      *
      * @param  null|string  $options  Service options
      * @return object       Zend_Service_StrikeIron_* instance
-     * @throws Zend_Service_StrikeIron_Exception
+     * @throws \Zend\Service\StrikeIron\Exception
      */
     public function getService($options = array())
     {
         $class = isset($options['class']) ? $options['class'] : 'Base';
         unset($options['class']);
 
-        if (strpos($class, '_') === false) {
-            $class = "Zend_Service_StrikeIron_{$class}";
+        if (strpos($class, '\\') === false) {
+            $class = "Zend\\Service\\StrikeIron\\{$class}";
         }
 
         try {
             if (!class_exists($class)) {
-                @Zend_Loader::loadClass($class);
+                @\Zend\Loader::loadClass($class);
             }
             if (!class_exists($class, false)) {
-                throw new Exception('Class file not found');
+                throw new \Exception('Class file not found');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $msg = "Service '$class' could not be loaded: " . $e->getMessage();
-            throw new Zend_Service_StrikeIron_Exception($msg, $e->getCode(), $e);
+            throw new Exception\RuntimeException($msg, $e->getCode(), $e);
         }
 
         // instantiate and return the service

@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\StrikeIron;
+
+/**
  * @uses       SoapHeader
  * @uses       SoapClient
- * @uses       Zend_Service_StrikeIron_Decorator
- * @uses       Zend_Service_StrikeIron_Exception
+ * @uses       \Zend\Service\StrikeIron\Decorator
+ * @uses       \Zend\Service\StrikeIron\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_StrikeIron_Base
+class Base
 {
     /**
      * Configuration options
@@ -53,12 +58,12 @@ class Zend_Service_StrikeIron_Base
      * Class constructor
      *
      * @param  array  $options  Key/value pair options
-     * @throws Zend_Service_StrikeIron_Exception
+     * @throws \Zend\Service\StrikeIron\Exception
      */
     public function __construct($options = array())
     {
         if (!extension_loaded('soap')) {
-            throw new Zend_Service_StrikeIron_Exception('SOAP extension is not enabled');
+            throw new Exception\RuntimeException('SOAP extension is not enabled');
         }
 
         $this->_options  = array_merge($this->_options, $options);
@@ -74,7 +79,7 @@ class Zend_Service_StrikeIron_Base
      * @param  string  $method  Method name
      * @param  array   $params  Parameters for method
      * @return mixed            Result
-     * @throws Zend_Service_StrikeIron_Exception
+     * @throws \Zend\Service\StrikeIron\Exception
      */
     public function __call($method, $params)
     {
@@ -89,9 +94,9 @@ class Zend_Service_StrikeIron_Base
                                                             $this->_options['options'],
                                                             $this->_options['headers'],
                                                             $this->_outputHeaders);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $message = get_class($e) . ': ' . $e->getMessage();
-            throw new Zend_Service_StrikeIron_Exception($message, $e->getCode(), $e);
+            throw new Exception\RuntimeException($message, $e->getCode(), $e);
         }
 
         // transform/decorate the result and return it
@@ -111,7 +116,7 @@ class Zend_Service_StrikeIron_Base
         }
 
         if (! isset($this->_options['client'])) {
-            $this->_options['client'] = new SoapClient($this->_options['wsdl'],
+            $this->_options['client'] = new \SoapClient($this->_options['wsdl'],
                                                        $this->_options['options']);
         }
     }
@@ -120,7 +125,7 @@ class Zend_Service_StrikeIron_Base
      * Initialize the headers to pass to SOAPClient->__soapCall()
      *
      * @return void
-     * @throws Zend_Service_StrikeIron_Exception
+     * @throws \Zend\Service\StrikeIron\Exception
      */
     protected function _initSoapHeaders()
     {
@@ -132,8 +137,8 @@ class Zend_Service_StrikeIron_Base
             }
 
             foreach ($this->_options['headers'] as $header) {
-                if (! $header instanceof SoapHeader) {
-                    throw new Zend_Service_StrikeIron_Exception('Header must be instance of SoapHeader');
+                if (! $header instanceof \SoapHeader) {
+                    throw new Exception\RuntimeException('Header must be instance of SoapHeader');
                 } else if ($header->name == 'LicenseInfo') {
                     $foundLicenseInfo = true;
                     break;
@@ -145,7 +150,7 @@ class Zend_Service_StrikeIron_Base
 
         // add default LicenseInfo header if a custom one was not supplied
         if (! $foundLicenseInfo) {
-            $this->_options['headers'][] = new SoapHeader('http://ws.strikeiron.com',
+            $this->_options['headers'][] = new \SoapHeader('http://ws.strikeiron.com',
                             'LicenseInfo',
                             array('RegisteredUser' => array('UserID'   => $this->_options['username'],
                                                             'Password' => $this->_options['password'])));
@@ -189,7 +194,7 @@ class Zend_Service_StrikeIron_Base
             $result = $result->$resultObjectName;
         }
         if (is_object($result)) {
-            $result = new Zend_Service_StrikeIron_Decorator($result, $resultObjectName);
+            $result = new Decorator($result, $resultObjectName);
         }
         return $result;
     }
@@ -231,8 +236,8 @@ class Zend_Service_StrikeIron_Base
      *
      * @param  boolean  $now          Force a call to getRemainingHits instead of cache?
      * @param  string   $queryMethod  Method that will cause SubscriptionInfo header to be sent
-     * @return Zend_Service_StrikeIron_Decorator  Decorated subscription info
-     * @throws Zend_Service_StrikeIron_Exception
+     * @return \Zend\Service\StrikeIron\Decorator  Decorated subscription info
+     * @throws \Zend\Service\StrikeIron\Exception
      */
     public function getSubscriptionInfo($now = false, $queryMethod = 'GetRemainingHits')
     {
@@ -243,10 +248,10 @@ class Zend_Service_StrikeIron_Base
         // capture subscription info if returned in output headers
         if (isset($this->_outputHeaders['SubscriptionInfo'])) {
             $info = (object)$this->_outputHeaders['SubscriptionInfo'];
-            $subscriptionInfo = new Zend_Service_StrikeIron_Decorator($info, 'SubscriptionInfo');
+            $subscriptionInfo = new Decorator($info, 'SubscriptionInfo');
         } else {
             $msg = 'No SubscriptionInfo header found in last output headers';
-            throw new Zend_Service_StrikeIron_Exception($msg);
+            throw new Exception\RuntimeException($msg);
         }
 
         return $subscriptionInfo;

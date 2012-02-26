@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @uses       \Zend\Service\StrikeIron\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
@@ -22,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Service\StrikeIron;
+namespace Zend\Service\StrikeIron\Exception;
 
 /**
  * @category   Zend
@@ -31,5 +32,7 @@ namespace Zend\Service\StrikeIron;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException
+    extends \RuntimeException
+    implements \Zend\Service\StrikeIron\Exception
 {}

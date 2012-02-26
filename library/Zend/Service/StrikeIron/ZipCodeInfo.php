@@ -20,14 +20,19 @@
  */
 
 /**
- * @uses       Zend_Service_StrikeIron_Base
+ * @namespace
+ */
+namespace Zend\Service\StrikeIron;
+
+/**
+ * @uses       \Zend\Service\StrikeIron\Base
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_StrikeIron_ZipCodeInfo extends Zend_Service_StrikeIron_Base
+class ZipCodeInfo extends Base
 {
     /**
      * Configuration options

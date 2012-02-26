@@ -125,7 +125,7 @@ class Connection implements ConnectionInterface
             switch (strtolower($key)) {
                 case 'dsn':
                     $dsn = $value;
-                    break 2;
+                    break;
                 case 'driver':
                     $value = strtolower($value);
                     if (strpos($value, 'pdo') === 0) {
@@ -134,15 +134,20 @@ class Connection implements ConnectionInterface
                     break;
                 case 'pdodriver':
                     $pdoDriver = (string) $value;
+                    break;
+                case 'user':
                 case 'username':
                     $username = (string) $value;
                     break;
+                case 'pass':
                 case 'password':
                     $password = (string) $value;
                     break;
                 case 'database':
+                case 'dbname':
                     $database = (string) $value;
                     break;
+                case 'driver_options':
                 case 'options':
                     $options = array_merge($options, (array) $value);
                     break;

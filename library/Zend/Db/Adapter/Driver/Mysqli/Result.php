@@ -200,7 +200,7 @@ class Result implements \Iterator, ResultInterface
     
     public function count()
     {
-        // @todo return $this->numberOfRows;
+        return $this->resource->num_rows;
     }
     
 }

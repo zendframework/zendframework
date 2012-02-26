@@ -20,18 +20,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a single Technorati TopTags or BlogPostTags query result object.
  * It is never returned as a standalone object,
  * but it always belongs to a valid Zend_Service_Technorati_TagsResultSet object.
  *
- * @uses       Zend_Service_Technorati_Result
+ * @uses       \Zend\Service\Technorati\Result
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_TagsResult extends Zend_Service_Technorati_Result
+class TagsResult extends Result
 {
     /**
      * Name of the tag.
@@ -55,7 +60,7 @@ class Zend_Service_Technorati_TagsResult extends Zend_Service_Technorati_Result
      *
      * @param   DomElement $dom the ReST fragment for this object
      */
-    public function __construct(DomElement $dom)
+    public function __construct(\DomElement $dom)
     {
         $this->_fields = array( '_tag'   => 'tag',
                                 '_posts' => 'posts');

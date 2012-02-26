@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_SearchResultSet
+ * @see \Zend\Service\Technorati\SearchResultSet
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_SearchResultSetTest extends Zend_Service_Technorati_TestCase
+class SearchResultSetTest extends TestCase
 {
     public function setUp()
     {
@@ -47,17 +52,12 @@ class Zend_Service_Technorati_SearchResultSetTest extends Zend_Service_Technorat
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_SearchResultSet', array($this->dom));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_SearchResultSet', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\SearchResultSet', array($this->dom));
     }
 
     public function testSearchResultSet()
     {
-        $object = new Zend_Service_Technorati_SearchResultSet($this->dom);
+        $object = new Technorati\SearchResultSet($this->dom);
 
         // check counts
         $this->assertInternalType('integer', $object->totalResults());
@@ -69,13 +69,13 @@ class Zend_Service_Technorati_SearchResultSetTest extends Zend_Service_Technorat
     public function testSearchResultSetItemsInstanceOfResult()
     {
         $this->_testResultSetItemsInstanceOfResult(
-                    'Zend_Service_Technorati_SearchResultSet',
+                    'Zend\Service\Technorati\SearchResultSet',
                     array($this->dom),
-                    'Zend_Service_Technorati_SearchResult');
+                    'Zend\Service\Technorati\SearchResult');
     }
 
     public function testSearchResultSetSerialization()
     {
-        $this->_testResultSetSerialization(new Zend_Service_Technorati_SearchResultSet($this->dom));
+        $this->_testResultSetSerialization(new Technorati\SearchResultSet($this->dom));
     }
 }

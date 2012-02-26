@@ -20,24 +20,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a single Technorati Cosmos query result object.
  * It is never returned as a standalone object,
  * but it always belongs to a valid Zend_Service_Technorati_CosmosResultSet object.
  *
- * @uses       Zend_Service_Technorati_Result
- * @uses       Zend_Service_Technorati_Utils
+ * @uses       \Zend\Service\Technorati\Result
+ * @uses       \Zend\Service\Technorati\Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Result
+class CosmosResult extends Result
 {
     /**
      * Technorati weblog object that links queried URL.
      *
-     * @var     Zend_Service_Technorati_Weblog
+     * @var     \Zend\Service\Technorati\Weblog
      * @access  protected
      */
     protected $_weblog;
@@ -45,7 +50,7 @@ class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Resul
     /**
      * The nearest permalink tracked for queried URL.
      *
-     * @var     Zend_Uri_Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $_nearestPermalink;
@@ -69,7 +74,7 @@ class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Resul
     /**
      * The URL of the specific link target page
      *
-     * @var     Zend_Uri_Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $_linkUrl;
@@ -80,7 +85,7 @@ class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Resul
      *
      * @param   DomElement $dom the ReST fragment for this object
      */
-    public function __construct(DomElement $dom)
+    public function __construct(\DomElement $dom)
     {
         $this->_fields = array( '_nearestPermalink' => 'nearestpermalink',
                                 '_excerpt'          => 'excerpt',
@@ -92,15 +97,15 @@ class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Resul
         $this->_parseWeblog();
 
         // filter fields
-        $this->_nearestPermalink = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_nearestPermalink);
-        $this->_linkUrl          = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_linkUrl);
-        $this->_linkCreated      = Zend_Service_Technorati_Utils::normalizeDate($this->_linkCreated);
+        $this->_nearestPermalink = Utils::normalizeUriHttp($this->_nearestPermalink);
+        $this->_linkUrl          = Utils::normalizeUriHttp($this->_linkUrl);
+        $this->_linkCreated      = Utils::normalizeDate($this->_linkCreated);
     }
 
     /**
      * Returns the weblog object that links queried URL.
      *
-     * @return  Zend_Service_Technorati_Weblog
+     * @return  \Zend\Service\Technorati\Weblog
      */
     public function getWeblog() {
         return $this->_weblog;
@@ -109,7 +114,7 @@ class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Resul
     /**
      * Returns the nearest permalink tracked for queried URL.
      *
-     * @return  Zend_Uri_Http
+     * @return  \Zend\Uri\Http
      */
     public function getNearestPermalink() {
         return $this->_nearestPermalink;
@@ -137,7 +142,7 @@ class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Resul
      * If queried URL is a valid blog,
      * returns the URL of the specific link target page.
      *
-     * @return  Zend_Uri_Http
+     * @return  \Zend\Uri\Http
      */
     public function getLinkUrl() {
         return $this->_linkUrl;

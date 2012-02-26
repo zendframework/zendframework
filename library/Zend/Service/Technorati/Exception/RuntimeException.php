@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @uses       \Zend\Service\Technorati\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -22,7 +23,7 @@
 /**
  * @namespace
  */
-namespace Zend\Service\Technorati;
+namespace Zend\Service\Technorati\Exception;
 
 /**
  * @category   Zend
@@ -31,5 +32,8 @@ namespace Zend\Service\Technorati;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
+class RuntimeException
+    extends \RuntimeException
+    implements \Zend\Service\Technorati\Exception
 {}
+

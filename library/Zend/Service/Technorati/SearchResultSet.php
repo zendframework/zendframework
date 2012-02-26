@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a Technorati Search query result set.
  *
- * @uses       Zend_Service_Technorati_ResultSet
- * @uses       Zend_Service_Technorati_SearchResult
+ * @uses       \Zend\Service\Technorati\ResultSet
+ * @uses       \Zend\Service\Technorati\SearchResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_SearchResultSet extends Zend_Service_Technorati_ResultSet
+class SearchResultSet extends ResultSet
 {
     /**
      * Number of query results.
@@ -46,7 +51,7 @@ class Zend_Service_Technorati_SearchResultSet extends Zend_Service_Technorati_Re
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(DomDocument $dom, $options = array())
+    public function __construct(\DomDocument $dom, $options = array())
     {
         parent::__construct($dom, $options);
 
@@ -60,10 +65,10 @@ class Zend_Service_Technorati_SearchResultSet extends Zend_Service_Technorati_Re
     /**
      * Implements Zend_Service_Technorati_ResultSet::current().
      *
-     * @return Zend_Service_Technorati_SearchResult current result
+     * @return \Zend\Service\Technorati\SearchResult current result
      */
     public function current()
     {
-        return new Zend_Service_Technorati_SearchResult($this->_results->item($this->_currentIndex));
+        return new SearchResult($this->_results->item($this->_currentIndex));
     }
 }

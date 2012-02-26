@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_DailyCountsResult
+ * @see \Zend\Service\Technorati\DailyCountsResult
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_DailyCountsResultTest extends Zend_Service_Technorati_TestCase
+class DailyCountsResultTest extends TestCase
 {
     public function setUp()
     {
@@ -47,27 +52,22 @@ class Zend_Service_Technorati_DailyCountsResultTest extends Zend_Service_Technor
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_CosmosResult', array($this->domElements->item(0)));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_DailyCountsResult', 'DOMElement');
+        $this->_testConstruct('Zend\Service\Technorati\CosmosResult', array($this->domElements->item(0)));
     }
 
     public function testDailyCountsResult()
     {
-        $object = new Zend_Service_Technorati_DailyCountsResult($this->domElements->item(1));
+        $object = new Technorati\DailyCountsResult($this->domElements->item(1));
 
         // check properties
-        $this->assertInstanceOf('Zend_Date', $object->getDate());
-        $this->assertEquals(new Zend_Date(strtotime('2007-11-13')), $object->getDate());
+        $this->assertInstanceOf('Zend\Date\Date', $object->getDate());
+        $this->assertEquals(new \Zend\Date\Date(strtotime('2007-11-13')), $object->getDate());
         $this->assertInternalType('integer', $object->getCount());
         $this->assertEquals(54414, $object->getCount());
     }
 
     public function testDailyCountsResultSerialization()
     {
-        $this->_testResultSerialization(new Zend_Service_Technorati_DailyCountsResult($this->domElements->item(0)));
+        $this->_testResultSerialization(new Technorati\DailyCountsResult($this->domElements->item(0)));
     }
 }

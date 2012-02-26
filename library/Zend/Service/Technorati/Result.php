@@ -20,12 +20,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a single Technorati Search query result object.
  * It is never returned as a standalone object,
  * but it always belongs to a valid Zend_Service_Technorati_SearchResultSet object.
  *
  * @uses       DOMXPath
- * @uses       Zend_Service_Technorati_Weblog
+ * @uses       \Zend\Service\Technorati\Weblog
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -33,7 +38,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @abstract
  */
-abstract class Zend_Service_Technorati_Result
+abstract class Result
 {
     /**
      * An associative array of 'fieldName' => 'xmlfieldtag'
@@ -67,9 +72,9 @@ abstract class Zend_Service_Technorati_Result
      *
      * @param   DomElement $result  the ReST fragment for this object
      */
-    public function __construct(DomElement $dom)
+    public function __construct(\DomElement $dom)
     {
-        $this->_xpath = new DOMXPath($dom->ownerDocument);
+        $this->_xpath = new \DOMXPath($dom->ownerDocument);
         $this->_dom = $dom;
 
         // default fields for all search results
@@ -98,7 +103,7 @@ abstract class Zend_Service_Technorati_Result
         // weblog object field
         $result = $this->_xpath->query('./weblog', $this->_dom);
         if ($result->length == 1) {
-            $this->_weblog = new Zend_Service_Technorati_Weblog($result->item(0));
+            $this->_weblog = new Weblog($result->item(0));
         } else {
             $this->_weblog = null;
         }

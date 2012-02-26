@@ -20,24 +20,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a single Technorati Tag query result object.
  * It is never returned as a standalone object,
  * but it always belongs to a valid Zend_Service_Technorati_TagResultSet object.
  *
- * @uses       Zend_Service_Technorati_Result
- * @uses       Zend_Service_Technorati_Utils
+ * @uses       \Zend\Service\Technorati\Result
+ * @uses       \Zend\Service\Technorati\Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
+class TagResult extends Result
 {
     /**
      * Technorati weblog object corresponding to queried keyword.
      *
-     * @var     Zend_Service_Technorati_Weblog
+     * @var     \Zend\Service\Technorati\Weblog
      * @access  protected
      */
     protected $_weblog;
@@ -79,7 +84,7 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
     /**
      * The permalink of the blog entry.
      *
-     * @var     Zend_Uri_Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $_permalink;
@@ -90,7 +95,7 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
      *
      * @param   DomElement $dom the ReST fragment for this object
      */
-    public function __construct(DomElement $dom)
+    public function __construct(\DomElement $dom)
     {
         $this->_fields = array( '_permalink'    => 'permalink',
                                 '_excerpt'      => 'excerpt',
@@ -103,15 +108,15 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
         $this->_parseWeblog();
 
         // filter fields
-        $this->_permalink = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_permalink);
-        $this->_created   = Zend_Service_Technorati_Utils::normalizeDate($this->_created);
-        $this->_updated   = Zend_Service_Technorati_Utils::normalizeDate($this->_updated);
+        $this->_permalink = Utils::normalizeUriHttp($this->_permalink);
+        $this->_created   = Utils::normalizeDate($this->_created);
+        $this->_updated   = Utils::normalizeDate($this->_updated);
     }
 
     /**
      * Returns the weblog object that links queried URL.
      *
-     * @return  Zend_Service_Technorati_Weblog
+     * @return  \Zend\Service\Technorati\Weblog
      */
     public function getWeblog() {
         return $this->_weblog;
@@ -156,7 +161,7 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
     /**
      * Returns the permalink of the blog entry.
      *
-     * @return  Zend_Uri_Http
+     * @return  \Zend\Uri\Http
      */
     public function getPermalink() {
         return $this->_permalink;

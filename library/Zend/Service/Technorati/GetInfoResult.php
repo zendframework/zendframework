@@ -20,23 +20,28 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a single Technorati GetInfo query result object.
  *
  * @uses       DOMXPath
- * @uses       Zend_Service_Technorati_Author
- * @uses       Zend_Service_Technorati_Weblog
+ * @uses       \Zend\Service\Technorati\Author
+ * @uses       \Zend\Service\Technorati\Weblog
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_GetInfoResult
+class GetInfoResult
 {
     /**
      * Technorati author
      *
-     * @var     Zend_Service_Technorati_Author
+     * @var     \Zend\Service\Technorati\Author
      * @access  protected
      */
     protected $_author;
@@ -55,19 +60,19 @@ class Zend_Service_Technorati_GetInfoResult
      *
      * @param   DomDocument $dom the ReST fragment for this object
      */
-    public function __construct(DomDocument $dom)
+    public function __construct(\DomDocument $dom)
     {
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
 
         $result = $xpath->query('//result');
         if ($result->length == 1) {
-            $this->_author = new Zend_Service_Technorati_Author($result->item(0));
+            $this->_author = new Author($result->item(0));
         }
 
         $result = $xpath->query('//item/weblog');
         if ($result->length >= 1) {
             foreach ($result as $weblog) {
-                $this->_weblogs[] = new Zend_Service_Technorati_Weblog($weblog);
+                $this->_weblogs[] = new Weblog($weblog);
             }
         }
     }
@@ -76,7 +81,7 @@ class Zend_Service_Technorati_GetInfoResult
     /**
      * Returns the author associated with queried username.
      *
-     * @return  Zend_Service_Technorati_Author
+     * @return  \Zend\Service\Technorati\Author
      */
     public function getAuthor() {
         return $this->_author;
@@ -85,7 +90,7 @@ class Zend_Service_Technorati_GetInfoResult
     /**
      * Returns the collection of weblogs authored by queried username.
      *
-     * @return  array of Zend_Service_Technorati_Weblog
+     * @return  array of \Zend\Service\Technorati\Weblog
      */
     public function getWeblogs() {
         return $this->_weblogs;

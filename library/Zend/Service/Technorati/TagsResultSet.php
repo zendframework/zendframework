@@ -20,24 +20,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a Technorati TopTags or BlogPostTags queries result set.
  *
- * @uses       Zend_Service_Technorati_ResultSet
- * @uses       Zend_Service_Technorati_TagsResult
+ * @uses       \Zend\Service\Technorati\ResultSet
+ * @uses       \Zend\Service\Technorati\TagsResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_TagsResultSet extends Zend_Service_Technorati_ResultSet
+class TagsResultSet extends ResultSet
 {
     /**
      * Constructs a new object object from DOM Document.
      *
      * @param   DomDocument $dom the ReST fragment for this object
      */
-    public function __construct(DomDocument $dom, $options = array())
+    public function __construct(\DomDocument $dom, $options = array())
     {
         parent::__construct($dom, $options);
 
@@ -48,10 +53,10 @@ class Zend_Service_Technorati_TagsResultSet extends Zend_Service_Technorati_Resu
     /**
      * Implements Zend_Service_Technorati_ResultSet::current().
      *
-     * @return Zend_Service_Technorati_TagsResult current result
+     * @return \Zend\Service\Technorati\TagsResult current result
      */
     public function current()
     {
-        return new Zend_Service_Technorati_TagsResult($this->_results->item($this->_currentIndex));
+        return new TagsResult($this->_results->item($this->_currentIndex));
     }
 }

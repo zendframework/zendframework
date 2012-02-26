@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a single Technorati KeyInfo query result object.
  * It provides information about your Technorati API Key daily usage.
  *
@@ -30,7 +35,7 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_KeyInfoResult
+class KeyInfoResult
 {
     /**
      * Technorati API key
@@ -64,9 +69,9 @@ class Zend_Service_Technorati_KeyInfoResult
      * @param   DomElement $dom the ReST fragment for this object
      * @param   string $apiKey  the API Key string
      */
-    public function __construct(DomDocument $dom, $apiKey = null)
+    public function __construct(\DomDocument $dom, $apiKey = null)
     {
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
 
         $this->_apiQueries   = (int) $xpath->query('/tapi/document/result/apiqueries/text()')->item(0)->data;
         $this->_maxQueries   = (int) $xpath->query('/tapi/document/result/maxqueries/text()')->item(0)->data;
@@ -106,7 +111,7 @@ class Zend_Service_Technorati_KeyInfoResult
      * Sets API Key string.
      *
      * @param   string $apiKey  the API Key
-     * @return  Zend_Service_Technorati_KeyInfoResult $this instance
+     * @return  \Zend\Service\Technorati\KeyInfoResult $this instance
      */
     public function setApiKey($apiKey) {
         $this->_apiKey = $apiKey;

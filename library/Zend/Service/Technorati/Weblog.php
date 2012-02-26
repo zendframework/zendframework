@@ -20,18 +20,23 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a Weblog object successful recognized by Technorati.
  *
  * @uses       DOMXPath
- * @uses       Zend_Service_Technorati_Author
- * @uses       Zend_Service_Technorati_Utils
+ * @uses       \Zend\Service\Technorati\Author
+ * @uses       \Zend\Service\Technorati\Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_Weblog
+class Weblog
 {
     /**
      * Blog name as written in the feed.
@@ -44,7 +49,7 @@ class Zend_Service_Technorati_Weblog
     /**
      * Base blog URL.
      *
-     * @var     Zend_Uri_Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $_url;
@@ -52,7 +57,7 @@ class Zend_Service_Technorati_Weblog
     /**
      * RSS feed URL, if any.
      *
-     * @var     null|Zend_Uri_Http
+     * @var     null|\Zend\Uri\Http
      * @access  protected
      */
     protected $_rssUrl;
@@ -60,7 +65,7 @@ class Zend_Service_Technorati_Weblog
     /**
      * Atom feed URL, if any.
      *
-     * @var     null|Zend_Uri_Http
+     * @var     null|\Zend\Uri\Http
      * @access  protected
      */
     protected $_atomUrl;
@@ -126,7 +131,7 @@ class Zend_Service_Technorati_Weblog
      *
      * @var     bool
      * @access  protected
-     * @see     Zend_Service_Technorati_Author::$thumbnailPicture
+     * @see     \Zend\Service\Technorati\Author::$thumbnailPicture
      */
     protected $_hasPhoto = false;
 
@@ -144,9 +149,9 @@ class Zend_Service_Technorati_Weblog
      *
      * @param  DomElement $dom the ReST fragment for this object
      */
-    public function __construct(DomElement $dom)
+    public function __construct(\DomElement $dom)
     {
-        $xpath = new DOMXPath($dom->ownerDocument);
+        $xpath = new \DOMXPath($dom->ownerDocument);
 
         $result = $xpath->query('./name/text()', $dom);
         if ($result->length == 1) $this->setName($result->item(0)->data);
@@ -174,7 +179,7 @@ class Zend_Service_Technorati_Weblog
         $result = $xpath->query('./author', $dom);
         if ($result->length >= 1) {
             foreach ($result as $author) {
-                $this->_authors[] = new Zend_Service_Technorati_Author($author);
+                $this->_authors[] = new Author($author);
             }
         }
 
@@ -212,7 +217,7 @@ class Zend_Service_Technorati_Weblog
     /**
      * Returns weblog URL.
      *
-     * @return  null|Zend_Uri_Http object representing weblog base URL
+     * @return  null|\Zend\Uri\Http object representing weblog base URL
      */
     public function getUrl()
     {
@@ -242,7 +247,7 @@ class Zend_Service_Technorati_Weblog
     /**
      * Returns weblog Rss URL.
      *
-     * @return  null|Zend_Uri_Http object representing the URL
+     * @return  null|\Zend\Uri\Http object representing the URL
      *          of the RSS feed for given blog
      */
     public function getRssUrl()
@@ -253,7 +258,7 @@ class Zend_Service_Technorati_Weblog
     /**
      * Returns weblog Atom URL.
      *
-     * @return  null|Zend_Uri_Http object representing the URL
+     * @return  null|\Zend\Uri\Http object representing the URL
      *          of the Atom feed for given blog
      */
     public function getAtomUrl()
@@ -322,7 +327,7 @@ class Zend_Service_Technorati_Weblog
     /**
      * Returns the array of weblog authors.
      *
-     * @return  array of Zend_Service_Technorati_Author authors
+     * @return  array of \Zend\Service\Technorati\Author authors
      */
     public function getAuthors()
     {
@@ -334,7 +339,7 @@ class Zend_Service_Technorati_Weblog
      * Sets weblog name.
      *
      * @param   string $name
-     * @return  Zend_Service_Technorati_Weblog $this instance
+     * @return  \Zend\Service\Technorati\Weblog $this instance
      */
     public function setName($name)
     {
@@ -345,14 +350,14 @@ class Zend_Service_Technorati_Weblog
     /**
      * Sets weblog URL.
      *
-     * @param   string|Zend_Uri_Http $url
+     * @param   string|\Zend\Uri\Http $url
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception if $input is an invalid URI
+     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if $input is an invalid URI
      *          (via Zend_Service_Technorati_Utils::normalizeUriHttp)
      */
     public function setUrl($url)
     {
-        $this->_url = Zend_Service_Technorati_Utils::normalizeUriHttp($url);
+        $this->_url = Utils::normalizeUriHttp($url);
         return $this;
     }
 
@@ -360,7 +365,7 @@ class Zend_Service_Technorati_Weblog
      * Sets number of inbound blogs.
      *
      * @param   integer $number
-     * @return  Zend_Service_Technorati_Weblog $this instance
+     * @return  \Zend\Service\Technorati\Weblog $this instance
      */
     public function setInboundBlogs($number)
     {
@@ -372,7 +377,7 @@ class Zend_Service_Technorati_Weblog
      * Sets number of Iinbound links.
      *
      * @param   integer $number
-     * @return  Zend_Service_Technorati_Weblog $this instance
+     * @return  \Zend\Service\Technorati\Weblog $this instance
      */
     public function setInboundLinks($number)
     {
@@ -383,28 +388,28 @@ class Zend_Service_Technorati_Weblog
     /**
      * Sets weblog Rss URL.
      *
-     * @param   string|Zend_Uri_Http $url
-     * @return  Zend_Service_Technorati_Weblog $this instance
-     * @throws  Zend_Service_Technorati_Exception if $input is an invalid URI
+     * @param   string|\Zend\Uri\Http $url
+     * @return  \Zend\Service\Technorati\Weblog $this instance
+     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if $input is an invalid URI
      *          (via Zend_Service_Technorati_Utils::normalizeUriHttp)
      */
     public function setRssUrl($url)
     {
-        $this->_rssUrl = Zend_Service_Technorati_Utils::normalizeUriHttp($url);
+        $this->_rssUrl = Utils::normalizeUriHttp($url);
         return $this;
     }
 
     /**
      * Sets weblog Atom URL.
      *
-     * @param   string|Zend_Uri_Http $url
-     * @return  Zend_Service_Technorati_Weblog $this instance
-     * @throws  Zend_Service_Technorati_Exception if $input is an invalid URI
+     * @param   string|\Zend\Uri\Http $url
+     * @return  \Zend\Service\Technorati\Weblog $this instance
+     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if $input is an invalid URI
      *          (via Zend_Service_Technorati_Utils::normalizeUriHttp)
      */
     public function setAtomUrl($url)
     {
-        $this->_atomUrl = Zend_Service_Technorati_Utils::normalizeUriHttp($url);
+        $this->_atomUrl = Utils::normalizeUriHttp($url);
         return $this;
     }
 
@@ -416,12 +421,12 @@ class Zend_Service_Technorati_Weblog
      *
      * @param   mixed $datetime A string representing the last update date time
      *                          in a valid date time format
-     * @return  Zend_Service_Technorati_Weblog $this instance
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  \Zend\Service\Technorati\Weblog $this instance
+     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
      */
     public function setLastUpdate($datetime)
     {
-        $this->_lastUpdate = Zend_Service_Technorati_Utils::normalizeDate($datetime);
+        $this->_lastUpdate = Utils::normalizeDate($datetime);
         return $this;
     }
 
@@ -429,7 +434,7 @@ class Zend_Service_Technorati_Weblog
      * Sets weblog Rank.
      *
      * @param   integer $rank
-     * @return  Zend_Service_Technorati_Weblog $this instance
+     * @return  \Zend\Service\Technorati\Weblog $this instance
      */
     public function setRank($rank)
     {
@@ -441,7 +446,7 @@ class Zend_Service_Technorati_Weblog
      * Sets weblog latitude coordinate.
      *
      * @param   float $coordinate
-     * @return  Zend_Service_Technorati_Weblog $this instance
+     * @return  \Zend\Service\Technorati\Weblog $this instance
      */
     public function setLat($coordinate)
     {
@@ -453,7 +458,7 @@ class Zend_Service_Technorati_Weblog
      * Sets weblog longitude coordinate.
      *
      * @param   float $coordinate
-     * @return  Zend_Service_Technorati_Weblog $this instance
+     * @return  \Zend\Service\Technorati\Weblog $this instance
      */
     public function setLon($coordinate)
     {
@@ -465,7 +470,7 @@ class Zend_Service_Technorati_Weblog
      * Sets hasPhoto property.
      *
      * @param   bool $hasPhoto
-     * @return  Zend_Service_Technorati_Weblog $this instance
+     * @return  \Zend\Service\Technorati\Weblog $this instance
      */
     public function setHasPhoto($hasPhoto)
     {

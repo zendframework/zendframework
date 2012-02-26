@@ -20,24 +20,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a single Technorati BlogInfo query result object.
  *
  * @uses       DOMXPath
- * @uses       Zend_Service_Technorati_Exception
- * @uses       Zend_Service_Technorati_Utils
- * @uses       Zend_Service_Technorati_Weblog
+ * @uses       \Zend\Service\Technorati\Exception\RuntimeException
+ * @uses       \Zend\Service\Technorati\Utils
+ * @uses       \Zend\Service\Technorati\Weblog
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_BlogInfoResult
+class BlogInfoResult
 {
     /**
      * Technorati weblog url, if queried URL is a valid weblog.
      *
-     * @var     Zend_Uri_Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $_url;
@@ -45,7 +50,7 @@ class Zend_Service_Technorati_BlogInfoResult
     /**
      * Technorati weblog, if queried URL is a valid weblog.
      *
-     * @var     Zend_Service_Technorati_Weblog
+     * @var     \Zend\Service\Technorati\Weblog
      * @access  protected
      */
     protected $_weblog;
@@ -72,16 +77,16 @@ class Zend_Service_Technorati_BlogInfoResult
      *
      * @param   DomDocument $dom the ReST fragment for this object
      */
-    public function __construct(DomDocument $dom)
+    public function __construct(\DomDocument $dom)
     {
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
         $result = $xpath->query('//result/weblog');
         if ($result->length == 1) {
-            $this->_weblog = new Zend_Service_Technorati_Weblog($result->item(0));
+            $this->_weblog = new Weblog($result->item(0));
         } else {
             // follow the same behavior of blogPostTags
             // and raise an Exception if the URL is not a valid weblog
-            throw new Zend_Service_Technorati_Exception(
+            throw new Exception\RuntimeException(
                 "Your URL is not a recognized Technorati weblog");
         }
 
@@ -90,9 +95,9 @@ class Zend_Service_Technorati_BlogInfoResult
             try {
                 // fetched URL often doens't include schema
                 // and this issue causes the following line to fail
-                $this->_url = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
-            } catch(Zend_Service_Technorati_Exception $e) {
-                if ($this->getWeblog() instanceof Zend_Service_Technorati_Weblog) {
+                $this->_url = Utils::normalizeUriHttp($result->item(0)->data);
+            } catch(Exception $e) {
+                if ($this->getWeblog() instanceof Weblog) {
                     $this->_url = $this->getWeblog()->getUrl();
                 }
             }
@@ -110,7 +115,7 @@ class Zend_Service_Technorati_BlogInfoResult
     /**
      * Returns the weblog URL.
      *
-     * @return  Zend_Uri_Http
+     * @return  \Zend\Uri\Http
      */
     public function getUrl() {
         return $this->_url;
@@ -119,7 +124,7 @@ class Zend_Service_Technorati_BlogInfoResult
     /**
      * Returns the weblog.
      *
-     * @return  Zend_Service_Technorati_Weblog
+     * @return  \Zend\Service\Technorati\Weblog
      */
     public function getWeblog() {
         return $this->_weblog;

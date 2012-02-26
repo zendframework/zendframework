@@ -20,6 +20,11 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * This is the most essential result set.
  * The scope of this class is to be extended by a query-specific child result set class,
  * and it should never be used to initialize a standalone object.
@@ -30,7 +35,7 @@
  * @uses       DOMDocument
  * @uses       DOMXpath
  * @uses       OutOfBoundsException
- * @uses       Zend_Service_Technorati_Result
+ * @uses       \Zend\Service\Technorati\Result
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -38,7 +43,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @abstract
  */
-abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
+abstract class ResultSet implements \SeekableIterator
 {
     /**
      * The total number of results available
@@ -111,7 +116,7 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(DomDocument $dom, $options = array())
+    public function __construct(\DomDocument $dom, $options = array())
     {
         $this->_init($dom, $options);
 
@@ -147,10 +152,10 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
      * @param   array $options   query options as associative array
      *      * @return  void
      */
-    protected function _init(DomDocument $dom, $options = array())
+    protected function _init(\DomDocument $dom, $options = array())
     {
         $this->_dom     = $dom;
-        $this->_xpath   = new DOMXPath($dom);
+        $this->_xpath   = new \DOMXPath($dom);
 
         $this->_results = $this->_xpath->query("//item");
     }
@@ -229,7 +234,7 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
         if ($indexInt >= 0 && $indexInt < $this->_results->length) {
             $this->_currentIndex = $indexInt;
         } else {
-            throw new OutOfBoundsException("Illegal index '$index'");
+            throw new \OutOfBoundsException("Illegal index '$index'");
         }
     }
 
@@ -277,7 +282,7 @@ abstract class Zend_Service_Technorati_ResultSet implements SeekableIterator
      * @return void
      */
     public function __wakeup() {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXml($this->_xml);
         $this->_init($dom);
         $this->_xml = null; // reset XML content

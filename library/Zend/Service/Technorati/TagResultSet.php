@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a Technorati Tag query result set.
  *
- * @uses       Zend_Service_Technorati_ResultSet
- * @uses       Zend_Service_Technorati_TagResult
+ * @uses       \Zend\Service\Technorati\ResultSet
+ * @uses       \Zend\Service\Technorati\TagResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_ResultSet
+class TagResultSet extends ResultSet
 {
     /**
      * Number of posts that match the tag.
@@ -54,7 +59,7 @@ class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_Resul
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(DomDocument $dom, $options = array())
+    public function __construct(\DomDocument $dom, $options = array())
     {
         parent::__construct($dom, $options);
 
@@ -91,10 +96,10 @@ class Zend_Service_Technorati_TagResultSet extends Zend_Service_Technorati_Resul
     /**
      * Implements Zend_Service_Technorati_ResultSet::current().
      *
-     * @return Zend_Service_Technorati_TagResult current result
+     * @return \Zend\Service\Technorati\TagResult current result
      */
     public function current()
     {
-        return new Zend_Service_Technorati_TagResult($this->_results->item($this->_currentIndex));
+        return new TagResult($this->_results->item($this->_currentIndex));
     }
 }

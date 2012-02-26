@@ -20,24 +20,29 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+/**
  * Represents a Technorati Tag query result set.
  *
  * @uses       Zend_Date
- * @uses       Zend_Service_Technorati_DailyCountsResult
- * @uses       Zend_Service_Technorati_ResultSet
- * @uses       Zend_Service_Technorati_Utils
+ * @uses       \Zend\Service\Technorati\DailyCountsResult
+ * @uses       \Zend\Service\Technorati\ResultSet
+ * @uses       \Zend\Service\Technorati\Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_DailyCountsResultSet extends Zend_Service_Technorati_ResultSet
+class DailyCountsResultSet extends ResultSet
 {
     /**
      * Technorati search URL for given query.
      *
-     * @var     Zend_Uri_Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $_searchUrl;
@@ -45,7 +50,7 @@ class Zend_Service_Technorati_DailyCountsResultSet extends Zend_Service_Technora
     /**
      * Number of days for which counts provided.
      *
-     * @var     Zend_Service_Technorati_Weblog
+     * @var     \Zend\Service\Technorati\Weblog
      * @access  protected
      */
     protected $_days;
@@ -56,7 +61,7 @@ class Zend_Service_Technorati_DailyCountsResultSet extends Zend_Service_Technora
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(DomDocument $dom, $options = array())
+    public function __construct(\DomDocument $dom, $options = array())
     {
         parent::__construct($dom, $options);
 
@@ -65,7 +70,7 @@ class Zend_Service_Technorati_DailyCountsResultSet extends Zend_Service_Technora
 
         $result = $this->_xpath->query('/tapi/document/result/searchurl/text()');
         if ($result->length == 1) {
-            $this->_searchUrl = Zend_Service_Technorati_Utils::normalizeUriHttp($result->item(0)->data);
+            $this->_searchUrl = Utils::normalizeUriHttp($result->item(0)->data);
         }
 
         $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/items/item)");
@@ -76,7 +81,7 @@ class Zend_Service_Technorati_DailyCountsResultSet extends Zend_Service_Technora
     /**
      * Returns the search URL for given query.
      *
-     * @return  Zend_Uri_Http
+     * @return  \Zend\Uri\Http
      */
     public function getSearchUrl() {
         return $this->_searchUrl;
@@ -94,10 +99,10 @@ class Zend_Service_Technorati_DailyCountsResultSet extends Zend_Service_Technora
     /**
      * Implements Zend_Service_Technorati_ResultSet::current().
      *
-     * @return Zend_Service_Technorati_DailyCountsResult current result
+     * @return \Zend\Service\Technorati\DailyCountsResult current result
      */
     public function current()
     {
-        return new Zend_Service_Technorati_DailyCountsResult($this->_results->item($this->_currentIndex));
+        return new DailyCountsResult($this->_results->item($this->_currentIndex));
     }
 }

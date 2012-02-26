@@ -20,11 +20,17 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+use Zend\Uri;
+
+/**
  * Collection of utilities for various Zend_Service_Technorati classes.
  *
  * @uses       Zend_Date
  * @uses       Zend_Locale
- * @uses       Zend_Service_Technorati_Exception
+ * @uses       \Zend\Service\Technorati\Exception\RuntimeException
  * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Service
@@ -32,15 +38,15 @@
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_Utils
+class Utils
 {
     /**
      * Parses, validates and returns a valid Zend_Uri object
      * from given $input.
      *
-     * @param   string|Zend_Uri_Http $input
-     * @return  null|Zend_Uri_Http
-     * @throws  Zend_Service_Technorati_Exception
+     * @param   string|\Zend\Uri\Http $input
+     * @return  null|\Zend\Uri\Http
+     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
      * @static
      */
     public static function normalizeUriHttp($input)
@@ -50,21 +56,21 @@ class Zend_Service_Technorati_Utils
             return null;
         }
 
-        if ($input instanceof Zend_Uri_Http) {
+        if ($input instanceof Uri\Http) {
             $uri = $input;
         } else {
             try {
-                $uri = Zend_Uri::factory((string) $input);
+                $uri = Uri\UriFactory::factory((string) $input);
             }
             // wrap exception under Zend_Service_Technorati_Exception object
-            catch (Exception $e) {
-                throw new Zend_Service_Technorati_Exception($e->getMessage(), 0, $e);
+            catch (\Exception $e) {
+                throw new Exception\RuntimeException($e->getMessage(), 0, $e);
             }
         }
 
         // allow inly Zend_Uri_Http objects or child classes
-        if (!($uri instanceof Zend_Uri_Http)) {
-            throw new Zend_Service_Technorati_Exception(
+        if (!($uri instanceof Uri\Http)) {
+            throw new Exception\RuntimeException(
                 "Invalid URL $uri, only HTTP(S) protocols can be used");
         }
 
@@ -80,22 +86,22 @@ class Zend_Service_Technorati_Utils
      *
      * @param   mixed|Zend_Date $input
      * @return  null|Zend_Date
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
      * @static
      */
     public static function normalizeDate($input)
     {
         // allow null as value and return valid Zend_Date objects
-        if (($input === null) || ($input instanceof Zend_Date)) {
+        if (($input === null) || ($input instanceof \Zend\Date)) {
             return $input;
         }
 
-        // due to a BC break as of ZF 1.5 it's not safe to use Zend_Date::isDate() here
+        // due to a BC break as of ZF 1.5 it's not safe to use Zend\Date::isDate() here
         // see ZF-2524, ZF-2334
         if (@strtotime($input) !== FALSE) {
-            return new Zend_Date($input);
+            return new \Zend\Date\Date($input);
         } else {
-            throw new Zend_Service_Technorati_Exception("'$input' is not a valid Date/Time");
+            throw new Exception\RuntimeException("'$input' is not a valid Date/Time");
         }
     }
 

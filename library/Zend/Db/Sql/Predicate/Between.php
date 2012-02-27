@@ -2,14 +2,18 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-class Between extends AbstractPredicate
+class Between implements PredicateInterface
 {
-    protected $leftValue;
-    protected $rightValue;
+    protected $specification = '%1$s BETWEEN %2$s AND %3$s';
+    protected $subject = null;
+    protected $leftValue = null;
+    protected $rightValue = null;
     
     public function __construct($subject = null, $leftValue = null, $rightValue = null)
     {
-        parent::__construct($subject);
+        if ($subject) {
+            $this->setSubject($subject);
+        }
         if ($leftValue) {
             $this->setLeftValue($leftValue);
         }
@@ -17,31 +21,53 @@ class Between extends AbstractPredicate
             $this->setRightValue($rightValue);
         }
     }
-    
-    public function setLeftValue($value)
+
+    public function setSubject($subject)
     {
-        $this->leftValue = $value;
-        return $this;
+        $this->subject = $subject;
     }
-    
-    public function setRightValue($value)
+
+    public function getSubject()
     {
-        $this->rightValue = $value;
-        return $this;
+        return $this->subject;
     }
-    
-    public function toPreparedString($type = null)
+
+    public function setLeftValue($leftValue)
     {
+        $this->leftValue = $leftValue;
     }
-    
-    public function getValues($type = null)
+
+    public function getLeftValue()
     {
-        
+        return $this->leftValue;
     }
-    
-    public function toString()
+
+    public function setRightValue($rightValue)
     {
-        return $this->subject . ' BETWEEN ' . $this->leftValue . ' AND ' . $this->rightValue;
+        $this->rightValue = $rightValue;
     }
-    
+
+    public function getRightValue()
+    {
+        return $this->rightValue;
+    }
+
+    public function setSpecification($specification)
+    {
+        $this->specification = $specification;
+    }
+
+    public function getSpecification()
+    {
+        return $this->specification;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getWhereParts()
+    {
+        // TODO: Implement getWhereParts() method.
+    }
 }

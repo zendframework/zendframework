@@ -28,7 +28,14 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
 
     public function offsetSet($nameOrPosition, $value, $errata = null)
     {
-        $this->data[$nameOrPosition] = $value;
+        if ($nameOrPosition === null) {
+            $this->data[] = $value;
+            end($this->data);
+            $nameOrPosition = key($this->data);
+        } else {
+            $this->data[$nameOrPosition] = $value;
+        }
+
         $this->errata[$nameOrPosition] = null;
         if ($errata) {
             $this->offsetSetErrata($nameOrPosition, $errata);

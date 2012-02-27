@@ -2,10 +2,9 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-class IsNull implements \Zend\Db\Sql\SqlPreparedStatement
+class IsNull implements PredicateInterface
 {
-    //protected $;
-    
+
     public function __construct(array $valueSet = array())
     {
         if ($valueSet) {
@@ -13,9 +12,16 @@ class IsNull implements \Zend\Db\Sql\SqlPreparedStatement
         }
     }
     
-    public function setValueSet($valueSet) {}
-    
-    public function toPreparedString($type = null) {}
-    public function toString() {}
-    
+    public function setValueSet($valueSet)
+    {
+
+    }
+
+    /**
+     * @return array
+     */
+    public function getWhereParts()
+    {
+        // TODO: Implement getWhereParts() method.
+    }
 }

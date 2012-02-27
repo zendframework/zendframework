@@ -4,6 +4,8 @@ namespace Zend\Db\Adapter\Driver;
 
 interface DriverInterface
 {
+    const PARAMETERIZATION_POSITIONAL = 'positional';
+    const PARAMETERIZATION_NAMED = 'named';
     const NAME_FORMAT_CAMELCASE = 'camelCase';
     const NAME_FORMAT_NATURAL = 'natural';
 
@@ -26,22 +28,22 @@ interface DriverInterface
     /**
      * @return StatementInterface
      */
-    public function createStatement($sqlOrResource);
+    public function createStatement($sqlOrResource = null);
 
     /**
-     * @return DriverResultInterface
+     * @return ResultInterface
      */
     public function createResult($resource);
 
     /**
      * @return array
      */
-    public function getPrepareTypeSupport();
+    public function getPrepareType();
 
     /**
      * @param $name
      * @return string
      */
-    public function formatParameterName($name);
+    public function formatParameterName($name, $type = null);
 
 }

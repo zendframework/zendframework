@@ -4,6 +4,8 @@ namespace Zend\Db\Adapter;
 
 interface ParameterContainerInterface extends \ArrayAccess, \Countable, \Traversable
 {
+    const POSITION_APPEND = null;
+
     const TYPE_AUTO = 'auto';
     const TYPE_NULL = 'null';
     const TYPE_DOUBLE = 'double';

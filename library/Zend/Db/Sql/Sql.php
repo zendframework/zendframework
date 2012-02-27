@@ -2,9 +2,7 @@
 
 namespace Zend\Db\Sql;
 
-use Zend\Db\Adapter\Adapter;
-
 class Sql
 {
-
+    // @todo is this a facade for something?
 }

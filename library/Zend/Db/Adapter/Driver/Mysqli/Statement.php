@@ -10,15 +10,21 @@ use Zend\Db\Adapter\Driver\StatementInterface,
 
 class Statement implements StatementInterface
 {
+
+    /**
+     * @var \mysqli
+     */
+    protected $mysqli = null;
+
     /**
      * @var Mysqli
      */
     protected $driver = null;
 
     /**
-     * @var bool|string
+     * @var string
      */
-    protected $sql = false;
+    protected $sql = '';
 
     protected $parameterContainer = null;
     
@@ -26,24 +32,18 @@ class Statement implements StatementInterface
      * @var \mysqli_stmt
      */
     protected $resource = null;
-    
+
+    protected $isPrepared = false;
+
     public function setDriver(Mysqli $driver)
     {
         $this->driver = $driver;
         return $this;
     }
-    
-    public function initialize(\mysqli $mysqli, $sql)
+
+    public function initialize(\mysqli $mysqli)
     {
-        $this->sql = $sql;
-        $this->resource = $mysqli->prepare($sql);
-        if (!$this->resource instanceof \mysqli_stmt) {
-            throw new Exception\InvalidQueryException(
-                'Statement couldn\'t be produced with sql: "' . $sql . '"',
-                null,
-                new ErrorException($mysqli->error, $mysqli->errno)
-            );
-        }
+        $this->mysqli = $mysqli;
         return $this;
     }
     
@@ -62,14 +62,66 @@ class Statement implements StatementInterface
     {
         return $this->resource;
     }
-    
+
+    public function setResource(\mysqli_stmt $mysqliStatement)
+    {
+        $this->resource = $mysqliStatement;
+        $this->isPrepared = true;
+        return $this;
+    }
+
     public function getSQL()
     {
         return $this->sql;
     }
-    
+
+    /**
+     * @return ParameterContainer
+     */
+    public function getParameterContainer()
+    {
+        return $this->parameterContainer;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPrepared()
+    {
+        return $this->isPrepared;
+    }
+
+    /**
+     * @param string $sql
+     */
+    public function prepare($sql = null)
+    {
+        if ($this->isPrepared) {
+            throw new \Exception('This statement has already been prepared');
+        }
+
+        $sql = ($sql) ?: $this->sql;
+
+        $this->resource = $this->mysqli->prepare($this->sql);
+        if (!$this->resource instanceof \mysqli_stmt) {
+            throw new Exception\InvalidQueryException(
+                'Statement couldn\'t be produced with sql: "' . $sql . '"',
+                null,
+                new ErrorException($this->mysqli->error, $this->mysqli->errno)
+            );
+        }
+
+        $this->isPrepared = true;
+    }
+
     public function execute($parameters = null)
     {
+        if (!$this->isPrepared) {
+            $this->prepare();
+        }
+
+        $parameters = ($parameters) ?: $this->parameterContainer;
+
         if ($parameters != null) {
             if (is_array($parameters)) {
                 $parameters = new ParameterContainer($parameters);
@@ -80,7 +132,7 @@ class Statement implements StatementInterface
             $this->bindParametersFromContainer($parameters);
         }
             
-        if ($x = $this->resource->execute() === false) {
+        if ($this->resource->execute() === false) {
             throw new \RuntimeException($this->resource->error);
         }
 
@@ -118,8 +170,4 @@ class Statement implements StatementInterface
         }
     }
 
-    public function isQuery()
-    {
-        // TODO: Implement isQuery() method.
-    }
 }

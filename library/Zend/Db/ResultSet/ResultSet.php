@@ -5,25 +5,46 @@ namespace Zend\Db\ResultSet;
 use Iterator,
     IteratorAggregate;
 
-class ResultSet implements Iterator, ResultSetInterface
+class ResultSet implements Iterator /*, ResultSetInterface */
 {
     const TYPE_OBJECT = 'object';
     const TYPE_ARRAY  = 'array';
-    
+
+    /**
+     * @var RowObjectInterface
+     */
     protected $rowObjectPrototype = null;
     protected $returnType = self::TYPE_OBJECT;
-    
+
     /**
-     * @var \Traversable
+     * @var \Iterator|\IteratorAggregate
      */
     protected $dataSource = null;
 
-    public function __construct($dataSource = null, RowObjectInterface $rowObjectPrototype = null)
+    public function __construct(RowObjectInterface $rowObjectPrototype = null)
     {
-        if ($dataSource) {
-            $this->setDataSource($dataSource);
-        }
-        $this->rowObjectPrototype = ($rowObjectPrototype) ?: new Row;
+        $this->setRowObjectPrototype(($rowObjectPrototype) ?: new Row);
+    }
+
+    public function setRowObjectPrototype(RowObjectInterface $rowObjectPrototype)
+    {
+        $this->rowObjectPrototype = $rowObjectPrototype;
+        return $this;
+    }
+
+    public function getRowObjectPrototype()
+    {
+        return $this->rowObjectPrototype;
+    }
+
+    public function setReturnType($returnType)
+    {
+        $this->returnType = $returnType;
+    }
+
+    public function getReturnType()
+    {
+        return $this->returnType;
     }
 
     public function setDataSource($dataSource)
@@ -37,14 +58,21 @@ class ResultSet implements Iterator, ResultSetInterface
         }
     }
 
-    public function getFieldCount() {}
+    public function getDataSource()
+    {
+        return $this->dataSource;
+    }
+
+    public function getFieldCount()
+    {
+        // @todo
+    }
     
     public function next()
     {
         return $this->dataSource->next();
     }
-    
-    
+
     public function key()
     {
         return $this->dataSource->key();
@@ -52,7 +80,15 @@ class ResultSet implements Iterator, ResultSetInterface
     
     public function current()
     {
-        return $this->dataSource->current();
+        $data = $this->dataSource->current();
+
+        if ($this->returnType === self::TYPE_OBJECT && is_array($data)) {
+            $row = clone $this->rowObjectPrototype;
+            $row->exchangeArray($data);
+            return $row;
+        } else {
+            return $data;
+        }
     }
     
     public function valid()
@@ -67,7 +103,7 @@ class ResultSet implements Iterator, ResultSetInterface
 
     public function count()
     {
-        return $this->dataSource->count();
+        return count($this->dataSource);
     }
 
     public function toArray()
@@ -76,14 +112,17 @@ class ResultSet implements Iterator, ResultSetInterface
         foreach ($this as $row) {
             if (is_array($row)) {
                 $return[] = $row;
-            } elseif (method_exists('toArray', $row)) {
+            } elseif (method_exists($row, 'toArray')) {
                 $return[] = $row->toArray();
+            } elseif ($row instanceof \ArrayObject) {
+                $return[] = $row->getArrayCopy();
             } else {
                 throw new \RuntimeException('Rows as part of this datasource cannot be cast to an array.');
             }
         }
         return $return;
     }
-    
-    
+
+
+
 }

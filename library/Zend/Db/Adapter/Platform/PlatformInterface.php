@@ -10,5 +10,5 @@ interface PlatformInterface
     public function getQuoteValueSymbol();
     public function quoteValue($value);
     public function getIdentifierSeparator();
-    public function quoteIdentifierWithSeparator($identifier);
+    public function quoteIdentifierInFragment($identifier, array $additionalSafeWords = array());
 }

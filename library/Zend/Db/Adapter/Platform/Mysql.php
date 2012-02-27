@@ -34,13 +34,17 @@ class Mysql implements PlatformInterface
         return '.';
     }
 
-    public function quoteIdentifierWithSeparator($identifier)
+    public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
         $parts = preg_split('#([\.\s])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE);
         foreach($parts as $i => $part) {
+            if ($safeWords && in_array($part, $safeWords)) {
+                continue;
+            }
             switch ($part) {
                 case ' ':
                 case '.':
+                case '*':
                 case 'AS':
                 case 'As':
                 case 'aS':

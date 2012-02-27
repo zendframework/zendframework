@@ -8,6 +8,10 @@ use Zend\Db\Adapter\Driver\StatementInterface,
 
 class Statement implements StatementInterface
 {
+    /**
+     * @var resource
+     */
+    protected $sqlsrv = null;
 
     /**
      * @var Sqlsrv
@@ -39,6 +43,8 @@ class Statement implements StatementInterface
      */
     protected $resource = null;
 
+    protected $isPrepared = false;
+
     public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
@@ -54,45 +60,76 @@ class Statement implements StatementInterface
      * 
      * @param resource
      */
-    public function initialize($resource, $sql)
+    public function initialize($resource)
     {
-        $pRef = &$this->parameterReferences;
-        for ($position = 0; $position < substr_count($sql, '?'); $position++) {
-            $pRef[$position] = array('', SQLSRV_PARAM_IN, null, null);
-        }
-
-        $statementResource = sqlsrv_prepare($resource, $sql, $pRef);
-
-        $this->resource = $statementResource;
-        $this->sql = $sql;
-        if (strpos(ltrim($sql), 'SELECT') === 0) {
-            $this->isQuery = true;
-        }
-        return $this;
+        $this->sqlsrv = $resource;
     }
 
-    public function setParameterContainer(DriverStatement\ParameterContainer $parameterContainer)
+    public function setParameterContainer(ParameterContainerInterface $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
     }
-    
-    public function isQuery()
+
+    /**
+     * @return ParameterContainerInterface
+     */
+    public function getParameterContainer()
     {
-        return $this->isQuery;
+        return $this->parameterContainer;
     }
     
     public function getResource()
     {
         return $this->resource;
     }
-    
+
+    /**
+     * @param string $sql
+     */
+    public function setSql($sql)
+    {
+        $this->sql = $sql;
+    }
+
     public function getSQL()
     {
         return $this->sql;
     }
-    
+
+    /**
+     * @param string $sql
+     */
+    public function prepare($sql = null)
+    {
+        if ($this->isPrepared) {
+            throw new \Exception('Already prepared');
+        }
+        $sql = ($sql) ?: $this->sql;
+
+        $pRef = &$this->parameterReferences;
+        for ($position = 0; $position < substr_count($sql, '?'); $position++) {
+            $pRef[$position] = array('', SQLSRV_PARAM_IN, null, null);
+        }
+
+        $this->resource = sqlsrv_prepare($this->sqlsrv, $sql, $pRef);
+
+        $this->isPrepared = true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPrepared()
+    {
+        return $this->isPrepared;
+    }
+
     public function execute($parameters = null)
     {
+        if (!$this->isPrepared) {
+            $this->prepare();
+        }
+
         if ($parameters !== null) {
             if (is_array($parameters)) {
                 $parameters = new ParameterContainer($parameters);
@@ -138,5 +175,5 @@ class Statement implements StatementInterface
         //    }
         //}
     }
-    
+
 }

@@ -88,10 +88,15 @@ class Sqlsrv implements DriverInterface
      * @param string $sql
      * @return Statement
      */
-    public function createStatement($sql)
+    public function createStatement($sqlOrResource = null)
     {
         $statement = clone $this->statementPrototype;
-        $statement->initialize($this->connection->getResource(), $sql);
+        if (is_string($sqlOrResource)) {
+            $statement->setSql($sqlOrResource);
+        } elseif ($sqlOrResource instanceof \PDOStatement) {
+            $statement->setResource($sqlOrResource);
+        }
+        $statement->initialize($this->connection->getResource());
         return $statement;
     }
 
@@ -109,16 +114,16 @@ class Sqlsrv implements DriverInterface
     /**
      * @return array
      */
-    public function getPrepareTypeSupport()
+    public function getPrepareType()
     {
-        return array('positional');
+        return self::PARAMETERIZATION_POSITIONAL;
     }
 
     /**
      * @param $name
      * @return string
      */
-    public function formatParameterName($name)
+    public function formatParameterName($name, $type = null)
     {
         return '?';
     }

@@ -16,9 +16,4 @@ interface ConnectionInterface
     public function execute($sql); // return result set
 
     public function getLastGeneratedId();
-    
-    /**
-     * @return \Zend\Db\Adapter\DriverStatementInterface
-     */
-    public function prepare($sql); // must return StatementInterface object
 }

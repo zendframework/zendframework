@@ -3,13 +3,14 @@
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\PlatformInterface,
+    Zend\Db\Adapter\Driver\StatementInterface,
+    Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
     Zend\Db\Adapter\ParameterContainer;
 
-class Delete implements SqlInterface, ParameterizedSqlInterface
+class Delete implements SqlInterface, PreparableSqlInterface
 {
-    protected $specification = 'DELETE FROM %1$s WHERE %2$s';
+    protected $specification = 'DELETE FROM %1$s';
 
     protected $databaseOrSchema = null;
     protected $table = null;
@@ -22,6 +23,7 @@ class Delete implements SqlInterface, ParameterizedSqlInterface
         if ($table) {
             $this->from($table, $databaseOrSchema);
         }
+        $this->where = new Where();
     }
 
     public function from($table, $databaseOrSchema = null)
@@ -33,9 +35,28 @@ class Delete implements SqlInterface, ParameterizedSqlInterface
         return $this;
     }
 
-    public function where($where)
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
-        $this->where = $where;
+        if ($predicate instanceof Where) {
+            $this->where = $predicate;
+        } elseif ($predicate instanceof \Closure) {
+            $predicate($this->where);
+        } else {
+            if (is_string($predicate)) {
+                $predicate = new Predicate\Literal($predicate);
+            } elseif (is_array($predicate)) {
+                foreach ($predicate as $pkey => $pvalue) {
+                    if (is_string($pkey) && strpos($pkey, '?') !== false) {
+                        $predicate = new Predicate\Literal($pkey, $pvalue);
+                    } elseif (is_string($pkey)) {
+                        $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
+                    } else {
+                        $predicate = new Predicate\Literal($pvalue);
+                    }
+                }
+            }
+            $this->where->addPredicate($predicate, $combination);
+        }
         return $this;
     }
 
@@ -45,7 +66,7 @@ class Delete implements SqlInterface, ParameterizedSqlInterface
         return true;
     }
 
-    public function getParameterizedSqlString(Adapter $adapter)
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
@@ -57,22 +78,9 @@ class Delete implements SqlInterface, ParameterizedSqlInterface
                 . $table;
         }
 
-        $where = $this->where;
-        if (is_array($where)) {
-            $whereSql = array();
-            foreach ($where as $whereName => $whereValue) {
-                $whereSql[] = $platform->quoteIdentifier($whereName) . ' = ' . $driver->formatParameterName($whereName);
-            }
-            $where = implode(' AND ', $whereSql);
-        }
-
-        $sql = sprintf($this->specification, $table, $where);
-        return $adapter->getDriver()->getConnection()->prepare($sql);
-    }
-
-    public function getParameterContainer()
-    {
-        return new ParameterContainer(array_merge($this->set, $this->where));
+        $sql = sprintf($this->specification, $table);
+        $statement->setSql($sql);
+        $this->where->prepareStatement($adapter, $statement);
     }
 
     public function getSqlString(PlatformInterface $platform = null)
@@ -84,16 +92,7 @@ class Delete implements SqlInterface, ParameterizedSqlInterface
             $table = $platform->quoteIdentifier($this->databaseOrSchema) . $platform->getIdentifierSeparator() . $table;
         }
 
-        $where = $this->where;
-        if (is_array($where)) {
-            $whereSql = array();
-            foreach ($where as $whereName => $whereValue) {
-                $whereSql[] = $platform->quoteIdentifier($whereName) . ' = ' . $platform->quoteValue($whereName);
-            }
-            $where = implode(' AND ', $whereSql);
-        }
-
-        return sprintf($this->specification, $table, $where);
+        return sprintf($this->specification, $table, $this->where->getSqlString($platform));
     }
 
 }

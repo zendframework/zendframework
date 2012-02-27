@@ -3,11 +3,12 @@
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\PlatformInterface,
+    Zend\Db\Adapter\Driver\StatementInterface,
+    Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
     Zend\Db\Adapter\ParameterContainer;
 
-class Insert implements SqlInterface, ParameterizedSqlInterface
+class Insert implements SqlInterface, PreparableSqlInterface
 {
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
@@ -113,11 +114,50 @@ class Insert implements SqlInterface, ParameterizedSqlInterface
         }
 
         if (count($this->columns) > 0 && count($this->columns) != count($this->values)) {
-            if ($throwException) throw new \Exception('When columns are present, there needs to be an equal number of columns and values');
+            if ($throwException) {
+                throw new \Exception('When columns are present, there needs to be an equal number of columns and values');
+            }
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * @param \Zend\Db\Adapter\Adapter $adapter
+     * @return \Zend\Db\Adapter\Driver\StatementInterface
+     */
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
+    {
+        $driver   = $adapter->getDriver();
+        $platform = $adapter->getPlatform();
+        $parameterContainer = $statement->getParameterContainer();
+        $prepareType = $driver->getPrepareType();
+
+        $table = $platform->quoteIdentifier($this->table);
+        if ($this->databaseOrSchema != '') {
+            $table = $platform->quoteIdentifier($this->databaseOrSchema)
+                . $platform->getIdentifierSeparator()
+                . $table;
+        }
+
+        $columns = array();
+        $values  = array();
+
+        foreach ($this->columns as $cIndex => $column) {
+            $columns[$cIndex] = $column;
+            if ($prepareType == 'positional') {
+                $parameterContainer->offsetSet(null, $this->values[$cIndex]);
+                $values[$cIndex] = $driver->formatParameterName(null);
+            } elseif ($prepareType == 'named') {
+                $values[$cIndex] = $driver->formatParameterName($column);
+                $parameterContainer->offsetSet($column, $this->values[$cIndex]);
+            }
+        }
+
+        $sql = sprintf($this->specification, $table, implode(', ', $columns), implode(', ', $values));
+
+        $statement->setSql($sql);
     }
 
     public function getSqlString(PlatformInterface $platform = null)
@@ -138,31 +178,7 @@ class Insert implements SqlInterface, ParameterizedSqlInterface
         return sprintf($this->specification, $table, $columns, $values);
     }
 
-    public function getParameterizedSqlString(Adapter $adapter)
-    {
-        $driver   = $adapter->getDriver();
-        $platform = $adapter->getPlatform();
 
-        $table = $platform->quoteIdentifier($this->table);
-        if ($this->databaseOrSchema != '') {
-            $table = $platform->quoteIdentifier($this->databaseOrSchema)
-                . $platform->getIdentifierSeparator()
-                . $table;
-        }
 
-        $columns = array_map(array($platform, 'quoteIdentifier'), $this->columns);
-        $columns = implode(', ', $columns);
-
-        $values = array_map(array($driver, 'formatParameterName'), $this->columns);
-        $values = implode(', ', $values);
-
-        $sql = sprintf($this->specification, $table, $columns, $values);
-        return $adapter->getDriver()->getConnection()->prepare($sql);
-    }
-
-    public function getParameterContainer()
-    {
-        return new ParameterContainer(array_combine($this->columns, $this->values));
-    }
 
 }

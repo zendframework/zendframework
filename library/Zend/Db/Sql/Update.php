@@ -3,16 +3,17 @@
 namespace Zend\Db\Sql;
 
 use Zend\Db\Adapter\Adapter,
-    Zend\Db\Adapter\PlatformInterface,
+    Zend\Db\Adapter\Driver\StatementInterface,
+    Zend\Db\Adapter\Platform\PlatformInterface,
     Zend\Db\Adapter\Platform\Sql92,
     Zend\Db\Adapter\ParameterContainer;
 
-class Update implements SqlInterface, ParameterizedSqlInterface
+class Update implements SqlInterface, PreparableSqlInterface
 {
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
 
-    protected $specification = 'UPDATE %1$s SET %2$s WHERE %3$s';
+    protected $specification = 'UPDATE %1$s SET %2$s';
 
     protected $databaseOrSchema = null;
     protected $table = null;
@@ -25,6 +26,7 @@ class Update implements SqlInterface, ParameterizedSqlInterface
         if ($table) {
             $this->table($table, $databaseOrSchema);
         }
+        $this->where = new Where();
     }
 
     public function table($table, $databaseOrSchema = null)
@@ -56,9 +58,28 @@ class Update implements SqlInterface, ParameterizedSqlInterface
         return $this;
     }
 
-    public function where($where)
+    public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
-        $this->where = $where;
+        if ($predicate instanceof Where) {
+            $this->where = $predicate;
+        } elseif ($predicate instanceof \Closure) {
+            $predicate($this->where);
+        } else {
+            if (is_string($predicate)) {
+                $predicate = new Predicate\Literal($predicate);
+            } elseif (is_array($predicate)) {
+                foreach ($predicate as $pkey => $pvalue) {
+                    if (is_string($pkey) && strpos($pkey, '?') !== false) {
+                        $predicate = new Predicate\Literal($pkey, $pvalue);
+                    } elseif (is_string($pkey)) {
+                        $predicate = new Predicate\Operator($pkey, Predicate\Operator::OP_EQ, $pvalue);
+                    } else {
+                        $predicate = new Predicate\Literal($pvalue);
+                    }
+                }
+            }
+            $this->where->addPredicate($predicate, $combination);
+        }
         return $this;
     }
 
@@ -82,10 +103,12 @@ class Update implements SqlInterface, ParameterizedSqlInterface
         return true;
     }
 
-    public function getParameterizedSqlString(Adapter $adapter)
+    public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
         $driver   = $adapter->getDriver();
         $platform = $adapter->getPlatform();
+        $parameterContainer = $statement->getParameterContainer();
+        $prepareType = $driver->getPrepareType();
 
         $table = $platform->quoteIdentifier($this->table);
         if ($this->databaseOrSchema != '') {
@@ -97,29 +120,24 @@ class Update implements SqlInterface, ParameterizedSqlInterface
         $set = $this->set;
         if (is_array($set)) {
             $setSql = array();
-            foreach ($set as $setName => $setValue) {
-                $setSql[] = $platform->quoteIdentifier($setName) . ' = ' . $driver->formatParameterName($setName);
+            $values = array();
+            foreach ($set as $column => $value) {
+                if ($prepareType == 'positional') {
+                    $parameterContainer->offsetSet(null, $value);
+                    $name = $driver->formatParameterName(null);
+                } elseif ($prepareType == 'named') {
+                    $parameterContainer->offsetSet($column, $value);
+                    $name = $driver->formatParameterName($column);
+                }
+                $setSql[] = $platform->quoteIdentifier($column) . ' = ' . $name;
             }
             $set = implode(', ', $setSql);
         }
 
-        $where = $this->where;
-        if (is_array($where)) {
-            $whereSql = array();
-            foreach ($where as $whereName => $whereValue) {
-                $whereSql[] = $platform->quoteIdentifier($whereName) . ' = ' . $driver->formatParameterName($whereName);
-            }
-            $where = implode(' AND ', $whereSql);
-        }
+        $sql = sprintf($this->specification, $table, $set);
+        $statement->setSql($sql);
 
-        $sql = sprintf($this->specification, $table, $set, $where);
-        return $adapter->getDriver()->getConnection()->prepare($sql);
-    }
-
-    public function getParameterContainer()
-    {
-        // @todo make sure this doen't clobber names
-        return new ParameterContainer(array_merge($this->set, $this->where));
+        $this->where->prepareStatement($adapter, $statement);
     }
 
     public function getSqlString(PlatformInterface $platform = null)
@@ -140,16 +158,7 @@ class Update implements SqlInterface, ParameterizedSqlInterface
             $set = implode(', ', $setSql);
         }
 
-        $where = $this->where;
-        if (is_array($where)) {
-            $whereSql = array();
-            foreach ($where as $whereName => $whereValue) {
-                $whereSql[] = $platform->quoteIdentifier($whereName) . ' = ' . $platform->quoteValue($whereName);
-            }
-            $where = implode(' AND ', $whereSql);
-        }
-
-        return sprintf($this->specification, $table, $set, $where);
+        return sprintf($this->specification, $table, $set, $this->where->getSqlString($platform));
     }
 
 }

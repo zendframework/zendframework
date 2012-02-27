@@ -2,32 +2,67 @@
 
 namespace Zend\Db\Sql\Predicate;
 
-class In extends AbstractPredicate
+class In implements PredicateInterface
 {
+    protected $specification = '%1$s IN (%2$s)';
+    protected $subject;
     protected $valueSet;
-    
+
     public function __construct($subject = null, array $valueSet = array())
     {
-        (empty($subject)) ?: $this->setSubject($subject);
-        (empty($valueSet)) ?: $this->setValueSet($valueSet);
+        if ($subject) {
+            $this->setSubject($subject);
+        }
+        if ($valueSet) {
+            $this->setValueSet($valueSet);
+        }
     }
-    
+
+    public function getParameterizedSqlString(Adapter $adapter)
+    {
+        // TODO: Implement getParameterizedSqlString() method.
+    }
+
+    public function getParameterContainer()
+    {
+        // TODO: Implement getParameterContainer() method.
+    }
+
+    public function setSpecification($specification)
+    {
+        $this->specification = $specification;
+    }
+
+    public function getSpecification()
+    {
+        return $this->specification;
+    }
+
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+    }
+
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
     public function setValueSet($valueSet)
     {
         $this->valueSet = $valueSet;
-        return $this;
     }
-    
-    public function toPreparedString($type = null) {}
-    public function getValues($type = null) {}
-    
-    public function toString()
+
+    public function getValueSet()
     {
-        $sqlPredicate = $this->subject . ' IN (';
-        $sqlPredicateValues = array();
-        foreach ($this->valueSet as $value) {
-            $sqlPredicateValues[] = null;
-        }
+        return $this->valueSet;
     }
-    
+
+    /**
+     * @return array
+     */
+    public function getWhereParts()
+    {
+        // TODO: Implement getWhereParts() method.
+    }
 }

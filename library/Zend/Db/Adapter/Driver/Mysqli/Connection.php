@@ -75,6 +75,7 @@ class Connection implements ConnectionInterface
      */
     public function getResource()
     {
+        $this->connect();
         return $this->resource;
     }
     
@@ -174,16 +175,6 @@ class Connection implements ConnectionInterface
 
         $resultPrototype = $this->driver->createResult(($resultResource === true) ? $this->resource : $resultResource);
         return $resultPrototype;
-    }
-    
-    public function prepare($sql)
-    {
-        if (!$this->isConnected()) {
-            $this->connect();
-        }
-        
-        $statement = $this->driver->createStatement($sql);
-        return $statement;
     }
 
     public function getLastGeneratedId()

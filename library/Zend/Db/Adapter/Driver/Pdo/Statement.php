@@ -9,37 +9,36 @@ use Zend\Db\Adapter\Driver\StatementInterface,
 
 class Statement implements StatementInterface
 {
+
+    /**
+     * @var \PDO
+     */
+    protected $pdo = null;
+
     /**
      * @var Pdo
      */
-    protected $driver             = null;
-    protected $sql                = false;
-    protected $isQuery            = null;
+    protected $driver = null;
+    protected $sql = '';
+    protected $isQuery = null;
     protected $parameterContainer = null;
     
     /**
      * @var \PDOStatement
      */
     protected $resource = null;
-    
+
+    protected $isPrepared = false;
+
     public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
         return $this;
     }
 
-    public function initialize(\PDO $connectionResource, $sql)
+    public function initialize(\PDO $connectionResource)
     {
-        $this->sql = $sql;
-        if (strpos(ltrim($sql), 'SELECT') === 0) {
-            $this->isQuery = true;
-        }
-
-        $this->resource = $connectionResource->prepare($sql);
-        if ($this->resource == false) {
-            $error = $connectionResource->errorInfo();
-            throw new \Exception($error[2]);
-        }
+        $this->pdo = $connectionResource;
         return $this;
     }
 
@@ -50,28 +49,96 @@ class Statement implements StatementInterface
     }
     */
 
-    public function isQuery()
+    public function setResource(\PDOStatement $pdoStatement)
     {
-        return $this->isQuery;
+        $this->resource = $pdoStatement;
+        return $this;
     }
     
     public function getResource()
     {
         return $this->resource;
     }
-    
+
+
+    /**
+     * @param string $sql
+     */
+    public function setSql($sql)
+    {
+        $this->sql = $sql;
+        return $this;
+    }
+
     public function getSql()
     {
         return $this->sql;
     }
-    
+
+
+    /**
+     * @param ParameterContainerInterface $parameterContainer
+     */
+    public function setParameterContainer(ParameterContainerInterface $parameterContainer)
+    {
+        $this->parameterContainer = $parameterContainer;
+        return $this;
+    }
+
+    /**
+     * @return ParameterContainerInterface
+     */
+    public function getParameterContainer()
+    {
+        return $this->parameterContainer;
+    }
+
+    /**
+     * @param string $sql
+     */
+    public function prepare($sql = null)
+    {
+        if ($this->isPrepared) {
+            throw new \Exception('This statement has been prepared already');
+        }
+
+        if ($sql == null) {
+            $sql = $this->sql;
+        }
+
+        $this->resource = $this->pdo->prepare($sql);
+
+        if ($this->resource === false) {
+            $error = $this->pdo->errorInfo();
+            var_dump($error);
+            throw new \Exception($error[2]);
+        }
+
+        $this->isPrepared = true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPrepared()
+    {
+        return $this->isPrepared;
+    }
+
+
     /**
      * @todo  Should this use the ability of PDOStatement to return objects of a specified class?
-     * @param mixed $parameters 
+     * @param mixed $parameters
      * @return Result
      */
     public function execute($parameters = null)
     {
+        if (!$this->isPrepared) {
+            $this->prepare();
+        }
+
+        $parameters = ($parameters) ?: $parameters = $this->parameterContainer;
+
         if ($parameters != null) {
             if (is_array($parameters)) {
                 $parameters = new ParameterContainer($parameters);
@@ -89,7 +156,8 @@ class Statement implements StatementInterface
         $result = $this->driver->createResult($this->resource);
         return $result;
     }
-    
+
+
     protected function bindParametersFromContainer(ParameterContainerInterface $container)
     {
         $parameters = $container->toArray();
@@ -116,4 +184,5 @@ class Statement implements StatementInterface
             $this->resource->bindParam((is_int($position) ? ($position + 1) : $position), $value, $type);
         }
     }
+
 }

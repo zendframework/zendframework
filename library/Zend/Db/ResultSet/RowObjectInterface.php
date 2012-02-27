@@ -7,5 +7,5 @@ use ArrayAccess,
 
 interface RowObjectInterface extends Countable, ArrayAccess
 {
-
+    public function exchangeArray($input);
 }

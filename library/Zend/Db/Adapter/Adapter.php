@@ -52,6 +52,10 @@ class Adapter
      */
     protected $queryMode = self::QUERY_MODE_PREPARE;
 
+    /**
+     * @var Driver\StatementInterface
+     */
+    protected $lastPreparedStatement = null;
 
     /**
      * @param Driver\DriverInterface|array $driver
@@ -185,22 +189,26 @@ class Adapter
     {
         if (is_string($parametersOrPrepareExecuteFlag) && in_array($parametersOrPrepareExecuteFlag, array(self::QUERY_MODE_PREPARE, self::QUERY_MODE_EXECUTE))) {
             $mode = $parametersOrPrepareExecuteFlag;
+            $parameters = null;
         } elseif (is_array($parametersOrPrepareExecuteFlag)) {
             $mode = self::QUERY_MODE_PREPARE;
             $parameters = $parametersOrPrepareExecuteFlag;
         } else {
-            throw new \Exception('Parameter 2 to this method must be a flag or an array');
+            throw new \Exception('Parameter 2 to this method must be a flag, an array, or ParameterContainer');
         }
 
-        $c = $this->driver->getConnection();
-
         if ($mode == self::QUERY_MODE_PREPARE) {
-            $statement = $c->prepare($sql);
-            return $statement;
-            // @todo determine if we fulfill the request
-            // $result = $statement->execute($parameters);
+            $this->lastPreparedStatement = null;
+            $this->lastPreparedStatement = $this->driver->createStatement($sql);
+            $this->lastPreparedStatement->prepare();
+            if (is_array($parameters) || $parameters instanceof ParameterContainer) {
+                $this->lastPreparedStatement->setParameterContainer((is_array($parameters)) ? new ParameterContainer($parameters) : $parameters);
+                $result = $this->lastPreparedStatement->execute();
+            } else {
+                return $this->lastPreparedStatement;
+            }
         } else {
-            $result = $c->execute($sql);
+            $result = $this->driver->getConnection()->execute($sql);
         }
 
         if ($result instanceof Driver\ResultInterface && $result->isQueryResult()) {
@@ -212,6 +220,16 @@ class Adapter
         return $result;
     }
 
+    public function createStatement($initialSql = null, $initialParameters = null)
+    {
+        $statement = $this->driver->createStatement($initialSql);
+        if ($initialParameters == null || !$initialParameters instanceof ParameterContainerInterface && is_array($initialParameters)) {
+            $initialParameters = new ParameterContainer((is_array($initialParameters) ? $initialParameters : array()));
+        }
+        $statement->setParameterContainer($initialParameters);
+        return $statement;
+    }
+
     /**
      * @param $name
      * @return Driver\DriverInterface|Platform\PlatformInterface
@@ -219,10 +237,14 @@ class Adapter
     public function __get($name)
     {
         switch (strtolower($name)) {
-            case 'driver': return $this->driver;
-            case 'platform': return $this->platform;
+            case 'driver':
+                return $this->driver;
+            case 'platform':
+                return $this->platform;
+            default:
+                throw new \Exception('Invalid magic property on adapter');
         }
-        throw new \Exception('Invalid magic property on adapter');
+
     }
 
 }

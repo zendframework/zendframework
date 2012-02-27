@@ -38,29 +38,29 @@ abstract class AbstractManager implements Manager
     /**
      * @var Configuration
      */
-    protected $_config;
+    protected $config;
 
     /**
      * Default configuration class to use when no configuration provided
      * @var string
      */
-    protected $_configDefaultClass = 'Zend\\Session\\Configuration\\SessionConfiguration';
+    protected $configDefaultClass = 'Zend\\Session\\Configuration\\SessionConfiguration';
 
     /**
      * @var Storage
      */
-    protected $_storage;
+    protected $storage;
 
     /**
      * Default storage class to use when no storage provided
      * @var string
      */
-    protected $_storageDefaultClass = 'Zend\\Session\\Storage\\SessionStorage';
+    protected $storageDefaultClass = 'Zend\\Session\\Storage\\SessionStorage';
 
     /**
      * @var SaveHandler
      */
-    protected $_saveHandler;
+    protected $saveHandler;
 
 
     /**
@@ -103,9 +103,9 @@ abstract class AbstractManager implements Manager
             $config = new $config;
         }
         
-        $this->_setConfig($config);
-        $this->_setStorage($storage);
-        $this->_setSaveHandler($saveHandler);
+        $this->setConfig($config);
+        $this->setStorage($storage);
+        $this->setSaveHandler($saveHandler);
     }
 
     /**
@@ -119,14 +119,14 @@ abstract class AbstractManager implements Manager
      * @param  null|string|array|Configuration $config 
      * @return void
      */
-    protected function _setConfig($config)
+    public function setConfig($config)
     {
         if (null === $config) {
-            $config = new $this->_configDefaultClass();
+            $config = new $this->configDefaultClass();
         }
 
         if (is_array($config)) {
-            $class = $this->_configDefaultClass;
+            $class = $this->configDefaultClass;
             if (array_key_exists('class', $config)) {
                 $class = $config['class'];
                 unset($config['class']);
@@ -145,7 +145,7 @@ abstract class AbstractManager implements Manager
         if (!$config instanceof Configuration) {
             throw new Exception\InvalidArgumentException('Configuration type provided is invalid; must implement Zend\\Session\\Configuration');
         }
-        $this->_config = $config;
+        $this->config = $config;
     }
 
     /**
@@ -155,7 +155,7 @@ abstract class AbstractManager implements Manager
      */
     public function getConfig()
     {
-        return $this->_config;
+        return $this->config;
     }
 
     /**
@@ -167,10 +167,10 @@ abstract class AbstractManager implements Manager
      * @param  null|string|Storage $storage 
      * @return void
      */
-    protected function _setStorage($storage)
+    public function setStorage($storage)
     {
         if (null === $storage) {
-            $storage = new $this->_storageDefaultClass();
+            $storage = new $this->storageDefaultClass();
         }
 
         if (is_string($storage)) {
@@ -184,7 +184,7 @@ abstract class AbstractManager implements Manager
             throw new Exception\InvalidArgumentException('Storage type provided is invalid; must implement Zend\\Session\\Storage');
         }
 
-        $this->_storage = $storage;
+        $this->storage = $storage;
     }
 
     /**
@@ -194,7 +194,7 @@ abstract class AbstractManager implements Manager
      */
     public function getStorage()
     {
-        return $this->_storage;
+        return $this->storage;
     }
 
     /**
@@ -206,7 +206,7 @@ abstract class AbstractManager implements Manager
      * @param null|string|SaveHandler $saveHandler
      * @return void
      */
-    public function _setSaveHandler($saveHandler)
+    public function setSaveHandler($saveHandler)
     {
         if (null === $saveHandler) {
             return ;
@@ -223,7 +223,7 @@ abstract class AbstractManager implements Manager
             throw new Exception\InvalidArgumentException('SaveHandler type provided is invalid; must implement Zend\\Session\\SaveHandler');
         }
 
-        $this->_saveHandler = $saveHandler;
+        $this->saveHandler = $saveHandler;
     }
 
     /**
@@ -233,6 +233,6 @@ abstract class AbstractManager implements Manager
      */
     public function getSaveHandler()
     {
-        return $this->_saveHandler;
+        return $this->saveHandler;
     }
 }

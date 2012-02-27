@@ -22,6 +22,7 @@ namespace Zend\Session\SaveHandler;
 
 use Zend\Session\SaveHandler as Savable,
     Zend\Session\Container,
+    Zend\Session\Exception,
     Zend\Db\Table\AbstractTable,
     Zend\Db\Table\AbstractRow;
 

@@ -11,8 +11,8 @@ class TestManager extends AbstractManager
 {
     public $started = false;
 
-    protected $_configDefaultClass = 'Zend\\Session\\Configuration\\StandardConfiguration';
-    protected $_storageDefaultClass = 'Zend\\Session\\Storage\\ArrayStorage';
+    protected $configDefaultClass = 'Zend\\Session\\Configuration\\StandardConfiguration';
+    protected $storageDefaultClass = 'Zend\\Session\\Storage\\ArrayStorage';
 
     public function start()
     {
@@ -69,20 +69,4 @@ class TestManager extends AbstractManager
 
     public function expireSessionCookie()
     {}
-
-
-    public function setConfig(SessionConfiguration $config)
-    {
-        $this->_setConfig($config);
-    }
-
-    public function setStorage(SessionStorage $storage)
-    {
-        $this->_setStorage($storage);
-    }
-
-    public function setSaveHandler(SessionSaveHandler $saveHandler)
-    {
-        $this->_setSaveHandler($saveHandler);
-    }
 }

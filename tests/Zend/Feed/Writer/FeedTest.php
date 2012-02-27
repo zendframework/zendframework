@@ -214,6 +214,17 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($myDate->equals($writer->getDateCreated()));
     }
 
+    /**
+     * @group ZF-11610
+     */
+    public function testSetDateCreatedUsesGivenUnixTimestampThatIsAVerySmallInteger()
+    {
+        $writer = new Writer\Feed;
+        $writer->setDateCreated(123);
+        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getDateCreated()));
+    }
+
     public function testSetDateCreatedUsesZendDateObject()
     {
         $writer = new Writer\Feed;
@@ -249,6 +260,17 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($myDate->equals($writer->getDateModified()));
     }
 
+    /**
+     * @group ZF-11610
+     */
+    public function testSetDateModifiedUsesGivenUnixTimestampThatIsAVerySmallInteger()
+    {
+        $writer = new Writer\Feed;
+        $writer->setDateModified(123);
+        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getDateModified()));
+    }
+    
     public function testSetDateModifiedUsesZendDateObject()
     {
         $writer = new Writer\Feed;
@@ -313,6 +335,17 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $writer = new Writer\Feed;
         $writer->setLastBuildDate(123456789);
         $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
+    }
+    
+    /**
+     * @group ZF-11610
+     */
+    public function testSetLastBuildDateUsesGivenUnixTimestampThatIsAVerySmallInteger()
+    {
+        $writer = new Writer\Feed;
+        $writer->setLastBuildDate(123);
+        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($writer->getLastBuildDate()));
     }
     

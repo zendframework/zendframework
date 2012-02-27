@@ -144,7 +144,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date)) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
@@ -164,7 +164,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date)) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;
@@ -184,7 +184,7 @@ class AbstractFeed
         $zdate = null;
         if ($date === null) {
             $zdate = new Date\Date;
-        } elseif (ctype_digit($date)) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Date\Date($date, Date\Date::TIMESTAMP);
         } elseif ($date instanceof Date\Date) {
             $zdate = $date;

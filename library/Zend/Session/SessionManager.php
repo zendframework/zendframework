@@ -39,12 +39,12 @@ class SessionManager extends AbstractManager
     /**
      * @var Configuration
      */
-    protected $_config;
+    protected $config;
 
     /**
      * @var Storage
      */
-    protected $_storage;
+    protected $storage;
 
     /**
      * Default options when a call to {@link destroy()} is made
@@ -52,7 +52,7 @@ class SessionManager extends AbstractManager
      * - clear_storage: whether or not to empty the storage object of any stored values
      * @var array
      */
-    protected $_defaultDestroyOptions = array(
+    protected $defaultDestroyOptions = array(
         'send_expire_cookie' => true,
         'clear_storage'      => false,
     );
@@ -60,12 +60,12 @@ class SessionManager extends AbstractManager
     /**
      * @var string value returned by session_name()
      */
-    protected $_name;
+    protected $name;
 
     /**
      * @var EventCollection Validation chain to determine if session is valid
      */
-    protected $_validatorChain;
+    protected $validatorChain;
 
     /**
      * Does a session exist and is it currently active?
@@ -105,7 +105,7 @@ class SessionManager extends AbstractManager
         $saveHandler = $this->getSaveHandler();
         if ($saveHandler instanceof SaveHandler) {
             // register the session handler with ext/session
-            $this->_registerSaveHandler($saveHandler);
+            $this->registerSaveHandler($saveHandler);
         }
 
         session_start();
@@ -129,7 +129,7 @@ class SessionManager extends AbstractManager
     /**
      * Destroy/end a session
      * 
-     * @param  array $options See {@link $_defaultDestroyOptions}
+     * @param  array $options See {@link $defaultDestroyOptions}
      * @return void
      */
     public function destroy(array $options = null)
@@ -139,9 +139,9 @@ class SessionManager extends AbstractManager
         }
 
         if (null === $options) {
-            $options = $this->_defaultDestroyOptions;
+            $options = $this->defaultDestroyOptions;
         } else {
-            $options = array_merge($this->_defaultDestroyOptions, $options);
+            $options = array_merge($this->defaultDestroyOptions, $options);
         }
 
         session_destroy();
@@ -190,14 +190,14 @@ class SessionManager extends AbstractManager
      */
     public function getName()
     {
-        if (null === $this->_name) {
+        if (null === $this->name) {
             // If we're grabbing via session_name(), we don't need our 
             // validation routine; additionally, calling setName() after
             // session_start() can lead to issues, and often we just need the name
             // in order to do things such as setting cookies.
-            $this->_name = session_name();
+            $this->name = session_name();
         }
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -221,7 +221,7 @@ class SessionManager extends AbstractManager
             throw new Exception\InvalidArgumentException('Name provided contains invalid characters; must be alphanumeric only');
         }
 
-        $this->_name = $name;
+        $this->name = $name;
         session_name($name);
         return $this;
     }
@@ -291,7 +291,7 @@ class SessionManager extends AbstractManager
         if (null === $ttl) {
             $ttl = $this->getConfig()->getRememberMeSeconds();
         }
-        $this->_setSessionCookieLifetime($ttl);
+        $this->setSessionCookieLifetime($ttl);
         return $this;
     }
 
@@ -304,7 +304,7 @@ class SessionManager extends AbstractManager
      */
     public function forgetMe()
     {
-        $this->_setSessionCookieLifetime(0);
+        $this->setSessionCookieLifetime(0);
         return $this;
     }
 
@@ -318,7 +318,7 @@ class SessionManager extends AbstractManager
      */
     public function setValidatorChain(EventCollection $chain)
     {
-        $this->_validatorChain = $chain;
+        $this->validatorChain = $chain;
         return $this;
     }
 
@@ -331,10 +331,10 @@ class SessionManager extends AbstractManager
      */
     public function getValidatorChain()
     {
-        if (null === $this->_validatorChain) {
+        if (null === $this->validatorChain) {
             $this->setValidatorChain(new ValidatorChain($this->getStorage()));
         }
-        return $this->_validatorChain;
+        return $this->validatorChain;
     }
 
     /**
@@ -392,7 +392,7 @@ class SessionManager extends AbstractManager
      * @param  int $ttl 
      * @return void
      */
-    protected function _setSessionCookieLifetime($ttl)
+    protected function setSessionCookieLifetime($ttl)
     {
         $config = $this->getConfig();
         if (!$config->getUseCookies()) {
@@ -417,7 +417,7 @@ class SessionManager extends AbstractManager
      * @param SaveHandler $saveHandler
      * @return bool
      */
-    protected function _registerSaveHandler(SaveHandler $saveHandler)
+    protected function registerSaveHandler(SaveHandler $saveHandler)
     {
         return session_set_save_handler(
             array($saveHandler, 'open'),

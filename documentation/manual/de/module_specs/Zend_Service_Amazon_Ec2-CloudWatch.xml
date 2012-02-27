@@ -5,7 +5,7 @@
     <para>
         Amazon CloudWatch ist ein einfach zu verwendender Web Service der vollständiges Monitoring
         für Amazon Elastic Compute Cloud (Amazon <acronym>EC2</acronym>) und Elastic Load
-        Balancing bietet. Für detailiertere Informationen sehen Sie in den <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">Amazon
+        Balancing bietet. Für detailiertere Informationen sehen Sie in den <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/Welcome.html">Amazon
             CloudWatch Developers Guide</link>.
     </para>
 
@@ -69,7 +69,7 @@ $return = $ec2_ebs->listMetrics();
                         <acronym>EC2</acronym> Werte sind <acronym>CPU</acronym>Utilization,
                         NetworkIn, NetworkOut, DiskWriteOps, DiskReadBytes, DiskReadOps,
                         DiskWriteBytes. Gültige Elastic Load Balancing Metriken sind Latency,
-                        RequestCount, HealthyHostCount, UnHealthyHostCount. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">Für
+                        RequestCount, HealthyHostCount, UnHealthyHostCount. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html#ec2-metricscollected">Für
                             weitere Informationen hier klicken</link>.
                     </para>
                 </listitem>
@@ -81,7 +81,7 @@ $return = $ec2_ebs->listMetrics();
                         Samples, Sum. Man kann diese als String oder Array von Strings definieren.
                         Wenn man keine spezifiziert dann wird als Standard Average genommen statt
                         nichts zu tun. Wenn man eine ungültige Option spezifiziert wird diese
-                        einfach ignoriert. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">Für
+                        einfach ignoriert. <link xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/US_GetStatistics.html">Für
                             weitere Informationen hier klicken</link>.
                     </para>
                 </listitem>

@@ -26,6 +26,7 @@ namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
 use Zend\Locale;
+use Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
  * Zend_Translator_Adapter_XmlTm
@@ -67,6 +68,19 @@ class XmlTmTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\XmlTm(__DIR__ . '/_files/translation_en.xmltm');
         $this->assertEquals('XmlTm', $adapter->toString());
+    }
+    
+    /**
+     * @group ZF-12012
+     */
+    public function testErrorOnCreateIncludesFilename()
+    {
+        try {
+            $adapter = new Adapter\XmlTm(__DIR__ . '/_files/failed.xmltm', 'en');
+            $this->fail("exception expected");
+        } catch (InvalidFileTypeException $e) {
+            $this->assertContains('failed.xmltm', $e->getMessage());
+        }
     }
 
     public function testTranslate()

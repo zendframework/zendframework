@@ -142,18 +142,12 @@ class PhpCodeTest extends \PHPUnit_Framework_TestCase
     }
 */
 
-    public function testUnserialzeInvalid()
+    public function testUnserializeInvalid()
     {
         $value = 'not a serialized string';
         
-        try {
-            $this->_adapter->unserialize($value);
-        } catch (Exception\RuntimeException $expected) {
-            $this->assertRegExp('/^eval failed: syntax error.*$/', $expected->getMessage());
-            return;
-        }
-        
-        $this->fail('RuntimeException has not been raised');
+        $this->setExpectedException('Zend\Serializer\Exception\RuntimeException', 'eval failed: syntax error');
+        $this->_adapter->unserialize($value);
     }
 
 }

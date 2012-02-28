@@ -102,12 +102,13 @@ class PhpRendererStrategy implements ListenerAggregate
      * Attach the aggregate to the specified event manager
      * 
      * @param  EventCollection $events 
+     * @param  int $priority
      * @return void
      */
-    public function attach(EventCollection $events)
+    public function attach(EventCollection $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'));
-        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'));
+        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'), $priority);
+        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'), $priority);
     }
 
     /**

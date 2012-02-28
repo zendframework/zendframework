@@ -150,6 +150,29 @@ class JsonStrategyTest extends TestCase
             $this->assertTrue($found, 'Listener not found');
         }
     }
+    
+    public function testCanAttachListenersAtSpecifiedPriority()
+    {
+        $events = new EventManager();
+        $events->attachAggregate($this->strategy, 1000);
+
+        foreach (array('renderer' => 'selectRenderer', 'response' => 'injectResponse') as $event => $method) {
+            $listeners        = $events->getListeners($event);
+            $expectedCallback = array($this->strategy, $method);
+            $expectedPriority = 1000;
+            $found            = false;
+            foreach ($listeners as $listener) {
+                $callback = $listener->getCallback();
+                if ($callback === $expectedCallback) {
+                    if ($listener->getMetadatum('priority') == $expectedPriority) {
+                        $found = true;
+                        break;
+                    }
+                }
+            }
+            $this->assertTrue($found, 'Listener not found');
+        }
+    }
 
     public function testDetachesListeners()
     {

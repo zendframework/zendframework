@@ -65,10 +65,16 @@ class JsonStrategy implements ListenerAggregate
      * @param  EventCollection $events 
      * @return void
      */
-    public function attach(EventCollection $events)
+    public function attach(EventCollection $events, $priority = null)
     {
-        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'));
-        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'));
+        if (null === $priority) {
+            $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'));
+            $this->listeners[] = $events->attach('response', array($this, 'injectResponse'));
+            return;
+        }
+
+        $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'), $priority);
+        $this->listeners[] = $events->attach('response', array($this, 'injectResponse'), $priority);
     }
 
     /**

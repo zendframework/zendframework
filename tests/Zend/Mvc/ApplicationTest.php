@@ -499,7 +499,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains('404', $response->getContent());
+        $this->assertContains(Application::ERROR_CONTROLLER_NOT_FOUND, $response->getContent());
         $this->assertContains('bad', $response->getContent());
     }
 
@@ -523,7 +523,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains('404', $response->getContent());
+        $this->assertContains(Application::ERROR_CONTROLLER_INVALID, $response->getContent());
         $this->assertContains('bad', $response->getContent());
         $this->assertContains('stdClass', $response->getContent());
     }
@@ -546,7 +546,7 @@ class ApplicationTest extends TestCase
         });
 
         $app->run();
-        $this->assertContains('404', $response->getContent());
+        $this->assertContains(Application::ERROR_CONTROLLER_NOT_FOUND, $response->getContent());
     }
 
     /**

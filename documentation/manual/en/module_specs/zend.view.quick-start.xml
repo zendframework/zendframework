@@ -72,7 +72,7 @@
                 <para>
                     <emphasis>Renderer and Response Strategies</emphasis>.
                     Renderer Strategies listen to the "renderer" event of the
-                    View, and decide what Renderer should be selected, based on
+                    View, and decide which Renderer should be selected, based on
                     the Request or other criteria. Response strategies are used
                     to inject the Response object with the results of rendering
                     -- which may also include taking actions such as setting
@@ -503,7 +503,7 @@ class ArticleController extends ActionController
                 event composes a View Model which acts as the "root" for nested
                 view models, as such, it should contain the skeleton, or layout,
                 template for the site (configuration refers to this as the
-                "baseTemplate"). All other content is then rendered and
+                "layoutTemplate"). All other content is then rendered and
                 captured to view variables ov this root view model.
             </para>
 

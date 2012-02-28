@@ -184,7 +184,7 @@ return array(
             // above).
             'Zend\Mvc\View\DefaultRenderingStrategy' => array(
                 'parameters' => array(
-                    'baseTemplate' => 'site/layout',
+                    'layoutTemplate' => 'site/layout',
                 ),
             ),
 
@@ -200,7 +200,7 @@ return array(
             'Zend\Mvc\View\ExceptionStrategy' => array(
                 'parameters' => array(
                     'displayExceptions' => true,
-                    'template'          => 'site/error',
+                    'exceptionTemplate' => 'site/error',
                 ),
             ),
 
@@ -218,10 +218,14 @@ return array(
             //
             // You can opt in to inject the reason for a 404 situation; see the
             // various Application::ERROR_* constants for a list of values.
+            // Additionally, a number of 404 situations derive from exceptions
+            // raised during routing or dispatching. You can opt-in to display
+            // these.
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
                 'parameters' => array(
-                    'notFoundTemplate'      => 'site/404',
+                    'displayExceptions'     => true,
                     'displayNotFoundReason' => true,
+                    'notFoundTemplate'      => 'site/404',
                 ),
             ),
         ),
@@ -547,7 +551,7 @@ return array(
         <title><?php echo $this->headTitle() ?></title>
     </head>
     <body>
-        <?php echo $this->raw('content'); ?>
+        <?php echo $this->content; ?>
     </body>
 </html>
 ]]></programlisting>

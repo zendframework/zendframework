@@ -24,6 +24,7 @@
  * @namespace
  */
 namespace Zend\Service\Technorati\Exception;
+use Zend\Service\Technorati\Exception as TechnoratiException;
 
 /**
  * @category   Zend
@@ -34,6 +35,6 @@ namespace Zend\Service\Technorati\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements \Zend\Service\Technorati\Exception
+    implements TechnoratiException
 {}
 

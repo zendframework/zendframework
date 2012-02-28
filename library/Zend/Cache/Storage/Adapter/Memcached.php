@@ -27,6 +27,8 @@ use ArrayObject,
     stdClass,
     Traversable,
     Zend\Cache\Exception,
+    Zend\Cache\Storage\Event,
+    Zend\Cache\Storage\CallbackEvent,
     Zend\Cache\Storage\Capabilities;
 
 /**
@@ -134,273 +136,208 @@ class Memcached extends AbstractAdapter
     /* reading */
 
     /**
-     * Get an item.
+     * Internal method to get an item.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
+     *  - namespace <string>
+     *    - The namespace to use
+     *  - ignore_missing_items <boolean>
      *    - Throw exception on missing item or return false
      *
-     * @param  string $key
-     * @param  array $options
-     * @return mixed Value on success and false on failure
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
+     * @return mixed Data on success or false on failure
      * @throws Exception
-     *
-     * @triggers getItem.pre(PreEvent)
-     * @triggers getItem.post(PostEvent)
-     * @triggers getItem.exception(ExceptionEvent)
      */
-    public function getItem($key, array $options = array())
+    protected function internalGetItem(& $normalizedKey, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
+
+        if (array_key_exists('token', $normalizedOptions)) {
+            $result = $this->memcached->get($normalizedKey, null, $normalizedOptions['token']);
+        } else {
+            $result = $this->memcached->get($normalizedKey);
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
+        if ($result === false) {
+            if (($rsCode = $this->memcached->getResultCode()) != 0
+                && ($rsCode != MemcachedResource::RES_NOTFOUND || !$normalizedOptions['ignore_missing_items'])
+            ) {
+                throw $this->getExceptionByResultCode($rsCode);
             }
-
-            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
-            if (array_key_exists('token', $options)) {
-                $result = $this->memcached->get($key, null, $options['token']);
-            } else {
-                $result = $this->memcached->get($key);
-            }
-
-            if ($result === false) {
-                if (($rsCode = $this->memcached->getResultCode()) != 0
-                    && ($rsCode != MemcachedResource::RES_NOTFOUND || !$options['ignore_missing_items'])
-                ) {
-                    throw $this->getExceptionByResultCode($rsCode);
-                }
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
         }
+
+        return $result;
     }
 
     /**
-     * Get multiple items.
+     * Internal method to get multiple items.
      *
      * Options:
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array Associative array of existing keys and values
+     * @throws Exception
+     */
+    protected function internalGetItems(array & $normalizedKeys, array & $normalizedOptions)
+    {
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
+
+        $result = $this->memcached->getMulti($normalizedKeys);
+        if ($result === false) {
+            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
+        }
+
+        return $result;
+    }
+
+    /**
+     * Internal method to test if an item exists.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
+     *
+     * @param  string $normalizedKey
+     * @param  array  $normalizedOptions
+     * @return boolean
+     * @throws Exception
+     */
+    protected function internalHasItem(& $normalizedKey, array & $normalizedOptions)
+    {
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
+
+        $value = $this->memcached->get($normalizedKey);
+        if ($value === false) {
+            $rsCode = $this->memcached->getResultCode();
+            if ($rsCode == MemcachedResource::RES_SUCCESS) {
+                return true;
+            } elseif ($rsCode == MemcachedResource::RES_NOTFOUND) {
+                return false;
+            } else {
+                throw $this->getExceptionByResultCode($rsCode);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Internal method to test multiple items.
+     *
+     * Options:
+     *  - namespace <string>
+     *    - The namespace to use
      *
      * @param  array $keys
      * @param  array $options
-     * @return array Assoziative array of existing keys and values or false on failure
+     * @return array Array of existing keys
      * @throws Exception
-     *
-     * @triggers getItems.pre(PreEvent)
-     * @triggers getItems.post(PostEvent)
-     * @triggers getItems.exception(ExceptionEvent)
      */
-    public function getItems(array $keys, array $options = array())
+    protected function internalHasItems(array & $normalizedKeys, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return array();
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
+
+        $result = $this->memcached->getMulti($normalizedKeys);
+        if ($result === false) {
+            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keys'    => & $keys,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
-            $result = $this->memcached->getMulti($keys);
-            if ($result === false) {
-                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        foreach ($result as $key => & $value) {
+            $value = true;
         }
+
+        return $result;
     }
 
     /**
-     * Get metadata of an item.
+     * Get metadata of multiple items
      *
      * Options:
      *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
-     *  - ignore_missing_items <boolean> optional
-     *    - Throw exception on missing item or return false
+     *    - The namespace to use
      *
-     * @param  string $key
-     * @param  array $options
-     * @return array|boolean Metadata or false on failure
+     * @param  array $normalizedKeys
+     * @param  array $normalizedOptions
+     * @return array
      * @throws Exception
      *
-     * @triggers getMetadata.pre(PreEvent)
-     * @triggers getMetadata.post(PostEvent)
-     * @triggers getMetadata.exception(ExceptionEvent)
+     * @triggers getMetadatas.pre(PreEvent)
+     * @triggers getMetadatas.post(PostEvent)
+     * @triggers getMetadatas.exception(ExceptionEvent)
      */
-    public function getMetadata($key, array $options = array())
+    protected function internalGetMetadatas(array & $normalizedKeys, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getReadable()) {
-            return false;
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
+
+        $result = $this->memcached->getMulti($normalizedKeys);
+        if ($result === false) {
+            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
-            $result = $this->memcached->get($key);
-
-            if ($result === false) {
-                if (($rsCode = $this->memcached->getResultCode()) != 0
-                    && ($rsCode != MemcachedResource::RES_NOTFOUND || !$options['ignore_missing_items'])
-                ) {
-                    throw $this->getExceptionByResultCode($rsCode);
-                }
-            } else {
-                $result = array();
-            }
-
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
+        foreach ($result as $key => & $value) {
+            $value = array();
         }
+
+        return $result;
     }
 
     /* writing */
 
     /**
-     * Store an item.
+     * Internal method to store an item.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-live (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  string $key
-     * @param  mixed $value
-     * @param  array $options
+     * @param  string $normalizedKey
+     * @param  mixed  $value
+     * @param  array  $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers setItem.pre(PreEvent)
-     * @triggers setItem.post(PostEvent)
-     * @triggers setItem.exception(ExceptionEvent)
      */
-    public function setItem($key, $value, array $options = array())
+    protected function internalSetItem(& $normalizedKey, & $value, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
+
+        $expiration = $this->expirationTime($normalizedOptions['ttl']);
+        if (!$this->memcached->set($normalizedKey, $value, $expiration)) {
+            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
-        $this->normalizeOptions($options);
-        $this->normalizeKey($key);
-        $args = new ArrayObject(array(
-            'key'     => & $key,
-            'value'   => & $value,
-            'options' => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
-
-            $expiration = $this->expirationTime($options['ttl']);
-            if (!$this->memcached->set($key, $value, $expiration)) {
-                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**
-     * Store multiple items.
+     * Internal method to store multiple items.
      *
      * Options:
-     *  - ttl <float> optional
-     *    - The time-to-live (Default: ttl of object)
-     *  - namespace <string> optional
-     *    - The namespace to use (Default: namespace of object)
+     *  - ttl <float>
+     *    - The time-to-life
+     *  - namespace <string>
+     *    - The namespace to use
      *
-     * @param  array $keyValuePairs
-     * @param  array $options
+     * @param  array $normalizedKeyValuePairs
+     * @param  array $normalizedOptions
      * @return boolean
      * @throws Exception
-     *
-     * @triggers setItems.pre(PreEvent)
-     * @triggers setItems.post(PostEvent)
-     * @triggers setItems.exception(ExceptionEvent)
      */
-    public function setItems(array $keyValuePairs, array $options = array())
+    protected function internalSetItems(array & $normalizedKeyValuePairs, array & $normalizedOptions)
     {
-        $baseOptions = $this->getOptions();
-        if (!$baseOptions->getWritable()) {
-            return false;
+        $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $normalizedOptions['namespace']);
+
+        $expiration = $this->expirationTime($normalizedOptions['ttl']);
+        if (!$this->memcached->setMulti($normalizedKeyValuePairs, $expiration)) {
+            throw $this->getExceptionByResultCode($this->memcached->getResultCode());
         }
 
-        $this->normalizeOptions($options);
-        $args = new ArrayObject(array(
-            'keyValuePairs' => & $keyValuePairs,
-            'options'       => & $options,
-        ));
-
-        try {
-            $eventRs = $this->triggerPre(__FUNCTION__, $args);
-            if ($eventRs->stopped()) {
-                return $eventRs->last();
-            }
-
-            $this->memcached->setOption(MemcachedResource::OPT_PREFIX_KEY, $options['namespace']);
-
-            $expiration = $this->expirationTime($options['ttl']);
-            if (!$this->memcached->setMulti($keyValuePairs, $expiration)) {
-                throw $this->getExceptionByResultCode($this->memcached->getResultCode());
-            }
-
-            $result = true;
-            return $this->triggerPost(__FUNCTION__, $args, $result);
-        } catch (\Exception $e) {
-            return $this->triggerException(__FUNCTION__, $args, $e);
-        }
+        return true;
     }
 
     /**

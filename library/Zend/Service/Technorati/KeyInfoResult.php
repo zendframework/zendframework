@@ -45,7 +45,7 @@ class KeyInfoResult
      * @var     string
      * @access  protected
      */
-    protected $_apiKey;
+    protected $apiKey;
 
     /**
      * Number of queries used today
@@ -53,7 +53,7 @@ class KeyInfoResult
      * @var     int
      * @access  protected
      */
-    protected $_apiQueries;
+    protected $apiQueries;
 
     /**
      * Total number of available queries per day
@@ -61,7 +61,7 @@ class KeyInfoResult
      * @var     int
      * @access  protected
      */
-    protected $_maxQueries;
+    protected $maxQueries;
 
 
     /**
@@ -75,8 +75,8 @@ class KeyInfoResult
     {
         $xpath = new DOMXPath($dom);
 
-        $this->_apiQueries   = (int) $xpath->query('/tapi/document/result/apiqueries/text()')->item(0)->data;
-        $this->_maxQueries   = (int) $xpath->query('/tapi/document/result/maxqueries/text()')->item(0)->data;
+        $this->apiQueries   = (int) $xpath->query('/tapi/document/result/apiqueries/text()')->item(0)->data;
+        $this->maxQueries   = (int) $xpath->query('/tapi/document/result/maxqueries/text()')->item(0)->data;
         $this->setApiKey($apiKey);
     }
 
@@ -87,7 +87,7 @@ class KeyInfoResult
      * @return  string  API Key string
      */
     public function getApiKey() {
-        return $this->_apiKey;
+        return $this->apiKey;
     }
 
     /**
@@ -96,7 +96,7 @@ class KeyInfoResult
      * @return  int     number of queries sent today
      */
     public function getApiQueries() {
-        return $this->_apiQueries;
+        return $this->apiQueries;
     }
 
     /**
@@ -105,7 +105,7 @@ class KeyInfoResult
      * @return  int     maximum number of available queries per day
      */
     public function getMaxQueries() {
-        return $this->_maxQueries;
+        return $this->maxQueries;
     }
 
 
@@ -116,7 +116,7 @@ class KeyInfoResult
      * @return  KeyInfoResult $this instance
      */
     public function setApiKey($apiKey) {
-        $this->_apiKey = $apiKey;
+        $this->apiKey = $apiKey;
         return $this;
     }
 }

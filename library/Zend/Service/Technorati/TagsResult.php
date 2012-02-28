@@ -45,7 +45,7 @@ class TagsResult extends Result
      * @var     string
      * @access  protected
      */
-    protected $_tag;
+    protected $tag;
 
     /**
      * Number of posts containing this tag.
@@ -53,7 +53,7 @@ class TagsResult extends Result
      * @var     int
      * @access  protected
      */
-    protected $_posts;
+    protected $posts;
 
 
     /**
@@ -63,13 +63,13 @@ class TagsResult extends Result
      */
     public function __construct(DomElement $dom)
     {
-        $this->_fields = array( '_tag'   => 'tag',
-                                '_posts' => 'posts');
+        $this->fields = array( 'tag'   => 'tag',
+                               'posts' => 'posts');
         parent::__construct($dom);
 
         // filter fields
-        $this->_tag   = (string) $this->_tag;
-        $this->_posts = (int) $this->_posts;
+        $this->tag   = (string) $this->tag;
+        $this->posts = (int) $this->posts;
     }
 
     /**
@@ -78,7 +78,7 @@ class TagsResult extends Result
      * @return  string
      */
     public function getTag() {
-        return $this->_tag;
+        return $this->tag;
     }
 
     /**
@@ -87,6 +87,6 @@ class TagsResult extends Result
      * @return  int
      */
     public function getPosts() {
-        return $this->_posts;
+        return $this->posts;
     }
 }

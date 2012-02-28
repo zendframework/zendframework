@@ -43,7 +43,7 @@ class TagResultSet extends ResultSet
      * @var     int
      * @access  protected
      */
-    protected $_postsMatched;
+    protected $postsMatched;
 
     /**
      * Number of blogs that match the tag.
@@ -51,7 +51,7 @@ class TagResultSet extends ResultSet
      * @var     int
      * @access  protected
      */
-    protected $_blogsMatched;
+    protected $blogsMatched;
 
     /**
      * Parses the search response and retrieve the results for iteration.
@@ -63,15 +63,15 @@ class TagResultSet extends ResultSet
     {
         parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/postsmatched/text()');
-        if ($result->length == 1) $this->_postsMatched = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/postsmatched/text()');
+        if ($result->length == 1) $this->postsMatched = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/blogsmatched/text()');
-        if ($result->length == 1) $this->_blogsMatched = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/blogsmatched/text()');
+        if ($result->length == 1) $this->blogsMatched = (int) $result->item(0)->data;
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
+        $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/item)");
         /** @todo Validate the following assertion */
-        $this->_totalResultsAvailable = (int) $this->getPostsMatched();
+        $this->totalResultsAvailable = (int) $this->getPostsMatched();
     }
 
 
@@ -81,7 +81,7 @@ class TagResultSet extends ResultSet
      * @return  int
      */
     public function getPostsMatched() {
-        return $this->_postsMatched;
+        return $this->postsMatched;
     }
 
     /**
@@ -90,7 +90,7 @@ class TagResultSet extends ResultSet
      * @return  int
      */
     public function getBlogsMatched() {
-        return $this->_blogsMatched;
+        return $this->blogsMatched;
     }
 
     /**
@@ -100,6 +100,6 @@ class TagResultSet extends ResultSet
      */
     public function current()
     {
-        return new TagResult($this->_results->item($this->_currentIndex));
+        return new TagResult($this->results->item($this->currentIndex));
     }
 }

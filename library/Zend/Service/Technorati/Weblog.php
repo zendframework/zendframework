@@ -44,7 +44,7 @@ class Weblog
      * @var     string
      * @access  protected
      */
-    protected $_name;
+    protected $name;
 
     /**
      * Base blog URL.
@@ -52,7 +52,7 @@ class Weblog
      * @var     Uri\Http
      * @access  protected
      */
-    protected $_url;
+    protected $url;
 
     /**
      * RSS feed URL, if any.
@@ -60,7 +60,7 @@ class Weblog
      * @var     null|Uri\Http
      * @access  protected
      */
-    protected $_rssUrl;
+    protected $rssUrl;
 
     /**
      * Atom feed URL, if any.
@@ -68,7 +68,7 @@ class Weblog
      * @var     null|Uri\Http
      * @access  protected
      */
-    protected $_atomUrl;
+    protected $atomUrl;
 
     /**
      * Number of unique blogs linking this blog.
@@ -76,7 +76,7 @@ class Weblog
      * @var     integer
      * @access  protected
      */
-    protected $_inboundBlogs;
+    protected $inboundBlogs;
 
     /**
      * Number of incoming links to this blog.
@@ -84,7 +84,7 @@ class Weblog
      * @var     integer
      * @access  protected
      */
-    protected $_inboundLinks;
+    protected $inboundLinks;
 
     /**
      * Last blog update UNIX timestamp.
@@ -92,7 +92,7 @@ class Weblog
      * @var     null|ZendDate
      * @access  protected
      */
-    protected $_lastUpdate;
+    protected $lastUpdate;
 
     /**
      * Technorati rank value for this weblog.
@@ -102,7 +102,7 @@ class Weblog
      * @var     integer
      * @access  protected
      */
-    protected $_rank;
+    protected $rank;
 
     /**
      * Blog latitude coordinate.
@@ -112,7 +112,7 @@ class Weblog
      * @var     float
      * @access  protected
      */
-    protected $_lat;
+    protected $lat;
 
     /**
      * Blog longitude coordinate.
@@ -122,7 +122,7 @@ class Weblog
      * @var     float
      * @access  protected
      */
-    protected $_lon;
+    protected $lon;
 
     /**
      * Whether the author who claimed this weblog has a photo.
@@ -133,7 +133,7 @@ class Weblog
      * @access  protected
      * @see     Author::$thumbnailPicture
      */
-    protected $_hasPhoto = false;
+    protected $hasPhoto = false;
 
     /**
      * An array of Author who claimed this blog
@@ -141,7 +141,7 @@ class Weblog
      * @var     array
      * @access  protected
      */
-    protected $_authors = array();
+    protected $authors = array();
 
 
     /**
@@ -179,7 +179,7 @@ class Weblog
         $result = $xpath->query('./author', $dom);
         if ($result->length >= 1) {
             foreach ($result as $author) {
-                $this->_authors[] = new Author($author);
+                $this->authors[] = new Author($author);
             }
         }
 
@@ -211,7 +211,7 @@ class Weblog
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -221,7 +221,7 @@ class Weblog
      */
     public function getUrl()
     {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -231,7 +231,7 @@ class Weblog
      */
     public function getInboundBlogs()
     {
-        return $this->_inboundBlogs;
+        return $this->inboundBlogs;
     }
 
     /**
@@ -241,7 +241,7 @@ class Weblog
      */
     public function getInboundLinks()
     {
-        return $this->_inboundLinks;
+        return $this->inboundLinks;
     }
 
     /**
@@ -252,7 +252,7 @@ class Weblog
      */
     public function getRssUrl()
     {
-        return $this->_rssUrl;
+        return $this->rssUrl;
     }
 
     /**
@@ -263,7 +263,7 @@ class Weblog
      */
     public function getAtomUrl()
     {
-        return $this->_atomUrl;
+        return $this->atomUrl;
     }
 
     /**
@@ -273,7 +273,7 @@ class Weblog
      */
     public function getLastUpdate()
     {
-        return $this->_lastUpdate;
+        return $this->lastUpdate;
     }
 
     /**
@@ -285,7 +285,7 @@ class Weblog
      */
     public function getRank()
     {
-        return $this->_rank;
+        return $this->rank;
     }
 
     /**
@@ -296,7 +296,7 @@ class Weblog
      * @return  float   weblog latitude coordinate
      */
     public function getLat() {
-        return $this->_lat;
+        return $this->lat;
     }
 
     /**
@@ -308,7 +308,7 @@ class Weblog
      */
     public function getLon()
     {
-        return $this->_lon;
+        return $this->lon;
     }
 
     /**
@@ -321,7 +321,7 @@ class Weblog
      */
     public function hasPhoto()
     {
-        return (bool) $this->_hasPhoto;
+        return (bool) $this->hasPhoto;
     }
 
     /**
@@ -331,7 +331,7 @@ class Weblog
      */
     public function getAuthors()
     {
-        return (array) $this->_authors;
+        return (array) $this->authors;
     }
 
 
@@ -343,7 +343,7 @@ class Weblog
      */
     public function setName($name)
     {
-        $this->_name = (string) $name;
+        $this->name = (string) $name;
         return $this;
     }
 
@@ -357,7 +357,7 @@ class Weblog
      */
     public function setUrl($url)
     {
-        $this->_url = Utils::normalizeUriHttp($url);
+        $this->url = Utils::normalizeUriHttp($url);
         return $this;
     }
 
@@ -369,7 +369,7 @@ class Weblog
      */
     public function setInboundBlogs($number)
     {
-        $this->_inboundBlogs = (int) $number;
+        $this->inboundBlogs = (int) $number;
         return $this;
     }
 
@@ -381,7 +381,7 @@ class Weblog
      */
     public function setInboundLinks($number)
     {
-        $this->_inboundLinks = (int) $number;
+        $this->inboundLinks = (int) $number;
         return $this;
     }
 
@@ -395,7 +395,7 @@ class Weblog
      */
     public function setRssUrl($url)
     {
-        $this->_rssUrl = Utils::normalizeUriHttp($url);
+        $this->rssUrl = Utils::normalizeUriHttp($url);
         return $this;
     }
 
@@ -409,7 +409,7 @@ class Weblog
      */
     public function setAtomUrl($url)
     {
-        $this->_atomUrl = Utils::normalizeUriHttp($url);
+        $this->atomUrl = Utils::normalizeUriHttp($url);
         return $this;
     }
 
@@ -426,7 +426,7 @@ class Weblog
      */
     public function setLastUpdate($datetime)
     {
-        $this->_lastUpdate = Utils::normalizeDate($datetime);
+        $this->lastUpdate = Utils::normalizeDate($datetime);
         return $this;
     }
 
@@ -438,7 +438,7 @@ class Weblog
      */
     public function setRank($rank)
     {
-        $this->_rank = (int) $rank;
+        $this->rank = (int) $rank;
         return $this;
     }
 
@@ -450,7 +450,7 @@ class Weblog
      */
     public function setLat($coordinate)
     {
-        $this->_lat = (float) $coordinate;
+        $this->lat = (float) $coordinate;
         return $this;
     }
 
@@ -462,7 +462,7 @@ class Weblog
      */
     public function setLon($coordinate)
     {
-        $this->_lon = (float) $coordinate;
+        $this->lon = (float) $coordinate;
         return $this;
     }
 
@@ -474,7 +474,7 @@ class Weblog
      */
     public function setHasPhoto($hasPhoto)
     {
-        $this->_hasPhoto = (bool) $hasPhoto;
+        $this->hasPhoto = (bool) $hasPhoto;
         return $this;
     }
 

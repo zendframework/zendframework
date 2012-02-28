@@ -44,7 +44,7 @@ class DailyCountsResultSet extends ResultSet
      * @var     Uri\Http
      * @access  protected
      */
-    protected $_searchUrl;
+    protected $searchUrl;
 
     /**
      * Number of days for which counts provided.
@@ -52,7 +52,7 @@ class DailyCountsResultSet extends ResultSet
      * @var     Weblog
      * @access  protected
      */
-    protected $_days;
+    protected $days;
 
     /**
      * Parses the search response and retrieve the results for iteration.
@@ -64,16 +64,16 @@ class DailyCountsResultSet extends ResultSet
     {
         parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/days/text()');
-        if ($result->length == 1) $this->_days = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/days/text()');
+        if ($result->length == 1) $this->days = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/searchurl/text()');
+        $result = $this->xpath->query('/tapi/document/result/searchurl/text()');
         if ($result->length == 1) {
-            $this->_searchUrl = Utils::normalizeUriHttp($result->item(0)->data);
+            $this->searchUrl = Utils::normalizeUriHttp($result->item(0)->data);
         }
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/items/item)");
-        $this->_totalResultsAvailable = (int) $this->getDays();
+        $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/items/item)");
+        $this->totalResultsAvailable = (int) $this->getDays();
     }
 
 
@@ -83,7 +83,7 @@ class DailyCountsResultSet extends ResultSet
      * @return  Uri\Http
      */
     public function getSearchUrl() {
-        return $this->_searchUrl;
+        return $this->searchUrl;
     }
 
     /**
@@ -92,7 +92,7 @@ class DailyCountsResultSet extends ResultSet
      * @return  int
      */
     public function getDays() {
-        return $this->_days;
+        return $this->days;
     }
 
     /**
@@ -102,6 +102,6 @@ class DailyCountsResultSet extends ResultSet
      */
     public function current()
     {
-        return new DailyCountsResult($this->_results->item($this->_currentIndex));
+        return new DailyCountsResult($this->results->item($this->currentIndex));
     }
 }

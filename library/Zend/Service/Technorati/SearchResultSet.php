@@ -43,7 +43,7 @@ class SearchResultSet extends ResultSet
      * @var     int
      * @access  protected
      */
-    protected $_queryCount;
+    protected $queryCount;
 
     /**
      * Parses the search response and retrieve the results for iteration.
@@ -55,11 +55,11 @@ class SearchResultSet extends ResultSet
     {
         parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/querycount/text()');
-        if ($result->length == 1) $this->_queryCount = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/querycount/text()');
+        if ($result->length == 1) $this->queryCount = (int) $result->item(0)->data;
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
-        $this->_totalResultsAvailable = (int) $this->_queryCount;
+        $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/item)");
+        $this->totalResultsAvailable = (int) $this->queryCount;
     }
 
     /**
@@ -69,6 +69,6 @@ class SearchResultSet extends ResultSet
      */
     public function current()
     {
-        return new SearchResult($this->_results->item($this->_currentIndex));
+        return new SearchResult($this->results->item($this->currentIndex));
     }
 }

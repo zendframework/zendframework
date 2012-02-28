@@ -45,7 +45,7 @@ class Author
      * @var     string
      * @access  protected
      */
-    protected $_firstName;
+    protected $firstName;
 
     /**
      * Author last name
@@ -53,7 +53,7 @@ class Author
      * @var     string
      * @access  protected
      */
-    protected $_lastName;
+    protected $lastName;
 
     /**
      * Technorati account username
@@ -61,7 +61,7 @@ class Author
      * @var     string
      * @access  protected
      */
-    protected $_username;
+    protected $username;
 
     /**
      * Technorati account description
@@ -69,7 +69,7 @@ class Author
      * @var     string
      * @access  protected
      */
-    protected $_description;
+    protected $description;
 
     /**
      * Technorati account biography
@@ -77,7 +77,7 @@ class Author
      * @var     string
      * @access  protected
      */
-    protected $_bio;
+    protected $bio;
 
     /**
      * Technorati account thumbnail picture URL, if any
@@ -85,7 +85,7 @@ class Author
      * @var     null|Uri\Http
      * @access  protected
      */
-    protected $_thumbnailPicture;
+    protected $thumbnailPicture;
 
 
     /**
@@ -123,7 +123,7 @@ class Author
      * @return  string  Author first name
      */
     public function getFirstName() {
-        return $this->_firstName;
+        return $this->firstName;
     }
 
     /**
@@ -132,7 +132,7 @@ class Author
      * @return  string  Author last name
      */
     public function getLastName() {
-        return $this->_lastName;
+        return $this->lastName;
     }
 
     /**
@@ -141,7 +141,7 @@ class Author
      * @return  string  Technorati account username
      */
     public function getUsername() {
-        return $this->_username;
+        return $this->username;
     }
 
     /**
@@ -150,7 +150,7 @@ class Author
      * @return  string  Technorati account description
      */
     public function getDescription() {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -159,7 +159,7 @@ class Author
      * @return  string  Technorati account biography
      */
     public function getBio() {
-        return $this->_bio;
+        return $this->bio;
     }
 
     /**
@@ -168,7 +168,7 @@ class Author
      * @return  null|Uri\Http  Technorati account thumbnail picture
      */
     public function getThumbnailPicture() {
-        return $this->_thumbnailPicture;
+        return $this->thumbnailPicture;
     }
 
 
@@ -179,7 +179,7 @@ class Author
      * @return  Author  $this instance
      */
     public function setFirstName($input) {
-        $this->_firstName = (string) $input;
+        $this->firstName = (string) $input;
         return $this;
     }
 
@@ -190,7 +190,7 @@ class Author
      * @return  Author  $this instance
      */
     public function setLastName($input) {
-        $this->_lastName = (string) $input;
+        $this->lastName = (string) $input;
         return $this;
     }
 
@@ -201,7 +201,7 @@ class Author
      * @return  Author  $this instance
      */
     public function setUsername($input) {
-        $this->_username = (string) $input;
+        $this->username = (string) $input;
         return $this;
     }
 
@@ -212,7 +212,7 @@ class Author
      * @return  Author  $this instance
      */
     public function setBio($input) {
-        $this->_bio = (string) $input;
+        $this->bio = (string) $input;
         return $this;
     }
 
@@ -223,7 +223,7 @@ class Author
      * @return  Author  $this instance
      */
     public function setDescription($input) {
-        $this->_description = (string) $input;
+        $this->description = (string) $input;
         return $this;
     }
 
@@ -236,7 +236,7 @@ class Author
      *          (via Utils::normalizeUriHttp)
      */
     public function setThumbnailPicture($input) {
-        $this->_thumbnailPicture = Utils::normalizeUriHttp($input);
+        $this->thumbnailPicture = Utils::normalizeUriHttp($input);
         return $this;
     }
 

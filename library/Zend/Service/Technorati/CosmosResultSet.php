@@ -44,7 +44,7 @@ class CosmosResultSet extends ResultSet
      * @var     Uri\Http
      * @access  protected
      */
-    protected $_url;
+    protected $url;
 
     /**
      * Technorati weblog, if queried URL is a valid weblog.
@@ -52,7 +52,7 @@ class CosmosResultSet extends ResultSet
      * @var     Weblog
      * @access  protected
      */
-    protected $_weblog;
+    protected $weblog;
 
     /**
      * Number of unique blogs linking this blog
@@ -60,7 +60,7 @@ class CosmosResultSet extends ResultSet
      * @var     integer
      * @access  protected
      */
-    protected $_inboundBlogs;
+    protected $inboundBlogs;
 
     /**
      * Number of incoming links to this blog
@@ -68,7 +68,7 @@ class CosmosResultSet extends ResultSet
      * @var     integer
      * @access  protected
      */
-    protected $_inboundLinks;
+    protected $inboundLinks;
 
     /**
      * Parses the search response and retrieve the results for iteration.
@@ -80,40 +80,40 @@ class CosmosResultSet extends ResultSet
     {
         parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/inboundlinks/text()');
-        if ($result->length == 1) $this->_inboundLinks = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/inboundlinks/text()');
+        if ($result->length == 1) $this->inboundLinks = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/inboundblogs/text()');
-        if ($result->length == 1) $this->_inboundBlogs = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/inboundblogs/text()');
+        if ($result->length == 1) $this->inboundBlogs = (int) $result->item(0)->data;
 
-        $result = $this->_xpath->query('/tapi/document/result/weblog');
+        $result = $this->xpath->query('/tapi/document/result/weblog');
         if ($result->length == 1) {
-            $this->_weblog = new Weblog($result->item(0));
+            $this->weblog = new Weblog($result->item(0));
         }
 
-        $result = $this->_xpath->query('/tapi/document/result/url/text()');
+        $result = $this->xpath->query('/tapi/document/result/url/text()');
         if ($result->length == 1) {
             try {
                 // fetched URL often doens't include schema
                 // and this issue causes the following line to fail
-                $this->_url = Utils::normalizeUriHttp($result->item(0)->data);
+                $this->url = Utils::normalizeUriHttp($result->item(0)->data);
             } catch(Exception $e) {
                 if ($this->getWeblog() instanceof Weblog) {
-                    $this->_url = $this->getWeblog()->getUrl();
+                    $this->url = $this->getWeblog()->getUrl();
                 }
             }
         }
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
+        $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/item)");
 
         // total number of results depends on query type
         // for now check only getInboundLinks() and getInboundBlogs() value
         if ((int) $this->getInboundLinks() > 0) {
-            $this->_totalResultsAvailable = $this->getInboundLinks();
+            $this->totalResultsAvailable = $this->getInboundLinks();
         } elseif ((int) $this->getInboundBlogs() > 0) {
-            $this->_totalResultsAvailable = $this->getInboundBlogs();
+            $this->totalResultsAvailable = $this->getInboundBlogs();
         } else {
-            $this->_totalResultsAvailable = 0;
+            $this->totalResultsAvailable = 0;
         }
     }
 
@@ -124,7 +124,7 @@ class CosmosResultSet extends ResultSet
      * @return  Uri\Http
      */
     public function getUrl() {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -133,7 +133,7 @@ class CosmosResultSet extends ResultSet
      * @return  Weblog
      */
     public function getWeblog() {
-        return $this->_weblog;
+        return $this->weblog;
     }
 
     /**
@@ -143,7 +143,7 @@ class CosmosResultSet extends ResultSet
      */
     public function getInboundBlogs()
     {
-        return $this->_inboundBlogs;
+        return $this->inboundBlogs;
     }
 
     /**
@@ -153,7 +153,7 @@ class CosmosResultSet extends ResultSet
      */
     public function getInboundLinks()
     {
-        return $this->_inboundLinks;
+        return $this->inboundLinks;
     }
 
     /**
@@ -163,6 +163,6 @@ class CosmosResultSet extends ResultSet
      */
     public function current()
     {
-        return new CosmosResult($this->_results->item($this->_currentIndex));
+        return new CosmosResult($this->results->item($this->currentIndex));
     }
 }

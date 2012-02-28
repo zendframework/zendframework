@@ -44,7 +44,7 @@ class GetInfoResult
      * @var     Author
      * @access  protected
      */
-    protected $_author;
+    protected $author;
 
     /**
      * A list of weblogs claimed by this author
@@ -52,7 +52,7 @@ class GetInfoResult
      * @var     array
      * @access  protected
      */
-    protected $_weblogs = array();
+    protected $weblogs = array();
 
 
     /**
@@ -66,13 +66,13 @@ class GetInfoResult
 
         $result = $xpath->query('//result');
         if ($result->length == 1) {
-            $this->_author = new Author($result->item(0));
+            $this->author = new Author($result->item(0));
         }
 
         $result = $xpath->query('//item/weblog');
         if ($result->length >= 1) {
             foreach ($result as $weblog) {
-                $this->_weblogs[] = new Weblog($weblog);
+                $this->weblogs[] = new Weblog($weblog);
             }
         }
     }
@@ -84,7 +84,7 @@ class GetInfoResult
      * @return  Author
      */
     public function getAuthor() {
-        return $this->_author;
+        return $this->author;
     }
 
     /**
@@ -93,7 +93,7 @@ class GetInfoResult
      * @return  array of Weblog
      */
     public function getWeblogs() {
-        return $this->_weblogs;
+        return $this->weblogs;
     }
 
 }

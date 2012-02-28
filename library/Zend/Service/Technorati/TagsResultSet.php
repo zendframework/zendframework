@@ -46,8 +46,8 @@ class TagsResultSet extends ResultSet
     {
         parent::__construct($dom, $options);
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
-        $this->_totalResultsAvailable = (int) $this->_totalResultsReturned;
+        $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/item)");
+        $this->totalResultsAvailable = (int) $this->totalResultsReturned;
     }
 
     /**
@@ -57,6 +57,6 @@ class TagsResultSet extends ResultSet
      */
     public function current()
     {
-        return new TagsResult($this->_results->item($this->_currentIndex));
+        return new TagsResult($this->results->item($this->currentIndex));
     }
 }

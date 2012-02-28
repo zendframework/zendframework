@@ -70,7 +70,7 @@ class Technorati
      * @var     string
      * @access  protected
      */
-    protected $_apiKey;
+    protected $apiKey;
 
     /**
      * RestClient instance
@@ -78,7 +78,7 @@ class Technorati
      * @var     RestClient
      * @access  protected
      */
-    protected $_restClient;
+    protected $restClient;
 
 
     /**
@@ -93,7 +93,7 @@ class Technorati
         iconv_set_encoding('input_encoding', 'UTF-8');
         iconv_set_encoding('internal_encoding', 'UTF-8');
 
-        $this->_apiKey = $apiKey;
+        $this->apiKey = $apiKey;
     }
 
 
@@ -156,10 +156,10 @@ class Technorati
 
         $options['url'] = $url;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateCosmos($options);
-        $response = $this->_makeRequest(self::API_PATH_COSMOS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateCosmos($options);
+        $response = $this->makeRequest(self::API_PATH_COSMOS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new CosmosResultSet($dom, $options);
     }
@@ -214,10 +214,10 @@ class Technorati
 
         $options['query'] = $query;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateSearch($options);
-        $response = $this->_makeRequest(self::API_PATH_SEARCH, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateSearch($options);
+        $response = $this->makeRequest(self::API_PATH_SEARCH, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new SearchResultSet($dom, $options);
     }
@@ -258,10 +258,10 @@ class Technorati
 
         $options['tag'] = $tag;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateTag($options);
-        $response = $this->_makeRequest(self::API_PATH_TAG, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateTag($options);
+        $response = $this->makeRequest(self::API_PATH_TAG, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new TagResultSet($dom, $options);
     }
@@ -290,10 +290,10 @@ class Technorati
 
         $options['q'] = $query;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateDailyCounts($options);
-        $response = $this->_makeRequest(self::API_PATH_DAILYCOUNTS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateDailyCounts($options);
+        $response = $this->makeRequest(self::API_PATH_DAILYCOUNTS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new DailyCountsResultSet($dom);
     }
@@ -324,10 +324,10 @@ class Technorati
                                         'format'    => 'xml'
                                         );
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateTopTags($options);
-        $response = $this->_makeRequest(self::API_PATH_TOPTAGS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateTopTags($options);
+        $response = $this->makeRequest(self::API_PATH_TOPTAGS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new TagsResultSet($dom);
     }
@@ -349,10 +349,10 @@ class Technorati
 
         $options['url'] = $url;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateBlogInfo($options);
-        $response = $this->_makeRequest(self::API_PATH_BLOGINFO, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateBlogInfo($options);
+        $response = $this->makeRequest(self::API_PATH_BLOGINFO, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new BlogInfoResult($dom);
     }
@@ -388,10 +388,10 @@ class Technorati
 
         $options['url'] = $url;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateBlogPostTags($options);
-        $response = $this->_makeRequest(self::API_PATH_BLOGPOSTTAGS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateBlogPostTags($options);
+        $response = $this->makeRequest(self::API_PATH_BLOGPOSTTAGS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new TagsResultSet($dom);
     }
@@ -418,10 +418,10 @@ class Technorati
 
         $options['username'] = $username;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateGetInfo($options);
-        $response = $this->_makeRequest(self::API_PATH_GETINFO, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateGetInfo($options);
+        $response = $this->makeRequest(self::API_PATH_GETINFO, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
         return new GetInfoResult($dom);
     }
@@ -440,14 +440,14 @@ class Technorati
     {
         static $defaultOptions = array();
 
-        $options = $this->_prepareOptions(array(), $defaultOptions);
+        $options = $this->prepareOptions(array(), $defaultOptions);
         // you don't need to validate this request
         // because key is the only mandatory element
         // and it's already set in #_prepareOptions
-        $response = $this->_makeRequest(self::API_PATH_KEYINFO, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $response = $this->makeRequest(self::API_PATH_KEYINFO, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new KeyInfoResult($dom, $this->_apiKey);
+        return new KeyInfoResult($dom, $this->apiKey);
     }
 
 
@@ -458,7 +458,7 @@ class Technorati
      */
     public function getApiKey()
     {
-        return $this->_apiKey;
+        return $this->apiKey;
     }
 
     /**
@@ -471,11 +471,11 @@ class Technorati
      */
     public function getRestClient()
     {
-        if ($this->_restClient === null) {
-            $this->_restClient = new RestClient(self::API_URI_BASE);
+        if ($this->restClient === null) {
+            $this->restClient = new RestClient(self::API_URI_BASE);
         }
 
-        return $this->_restClient;
+        return $this->restClient;
     }
 
     /**
@@ -492,7 +492,7 @@ class Technorati
      */
     public function setApiKey($key)
     {
-        $this->_apiKey = $key;
+        $this->apiKey = $key;
         return $this;
     }
 
@@ -505,27 +505,27 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateCosmos(array $options)
+    protected function validateCosmos(array $options)
     {
         static $validOptions = array('key', 'url',
             'type', 'limit', 'start', 'current', 'claim', 'highlight', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate url (required)
-        $this->_validateOptionUrl($options);
+        $this->validateOptionUrl($options);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
         // Validate type (optional)
-        $this->_validateInArrayOption('type', $options, array('link', 'weblog'));
+        $this->validateInArrayOption('type', $options, array('link', 'weblog'));
         // Validate claim (optional)
-        $this->_validateOptionClaim($options);
+        $this->validateOptionClaim($options);
         // Validate highlight (optional)
-        $this->_validateIntegerOption('highlight', $options);
+        $this->validateIntegerOption('highlight', $options);
         // Validate current (optional)
         if (isset($options['current'])) {
             $tmp = (int) $options['current'];
@@ -542,25 +542,25 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateSearch(array $options)
+    protected function validateSearch(array $options)
     {
         static $validOptions = array('key', 'query',
             'language', 'authority', 'limit', 'start', 'claim', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate query (required)
-        $this->_validateMandatoryOption('query', $options);
+        $this->validateMandatoryOption('query', $options);
         // Validate authority (optional)
-        $this->_validateInArrayOption('authority', $options, array('n', 'a1', 'a4', 'a7'));
+        $this->validateInArrayOption('authority', $options, array('n', 'a1', 'a4', 'a7'));
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate claim (optional)
-        $this->_validateOptionClaim($options);
+        $this->validateOptionClaim($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -571,25 +571,25 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateTag(array $options)
+    protected function validateTag(array $options)
     {
         static $validOptions = array('key', 'tag',
             'limit', 'start', 'excerptsize', 'topexcerptsize', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate query (required)
-        $this->_validateMandatoryOption('tag', $options);
+        $this->validateMandatoryOption('tag', $options);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate excerptsize (optional)
-        $this->_validateIntegerOption('excerptsize', $options);
+        $this->validateIntegerOption('excerptsize', $options);
         // Validate excerptsize (optional)
-        $this->_validateIntegerOption('topexcerptsize', $options);
+        $this->validateIntegerOption('topexcerptsize', $options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
 
@@ -601,17 +601,17 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateDailyCounts(array $options)
+    protected function validateDailyCounts(array $options)
     {
         static $validOptions = array('key', 'q',
             'days', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate q (required)
-        $this->_validateMandatoryOption('q', $options);
+        $this->validateMandatoryOption('q', $options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
         // Validate days (optional)
         if (isset($options['days'])) {
             $options['days'] = (int) $options['days'];
@@ -631,17 +631,17 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateGetInfo(array $options)
+    protected function validateGetInfo(array $options)
     {
         static $validOptions = array('key', 'username',
             'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate username (required)
-        $this->_validateMandatoryOption('username', $options);
+        $this->validateMandatoryOption('username', $options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -652,19 +652,19 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateTopTags(array $options)
+    protected function validateTopTags(array $options)
     {
         static $validOptions = array('key',
             'limit', 'start', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -675,17 +675,17 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateBlogInfo(array $options)
+    protected function validateBlogInfo(array $options)
     {
         static $validOptions = array('key', 'url',
             'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate url (required)
-        $this->_validateOptionUrl($options);
+        $this->validateOptionUrl($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -696,21 +696,21 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateBlogPostTags(array $options)
+    protected function validateBlogPostTags(array $options)
     {
         static $validOptions = array('key', 'url',
             'limit', 'start', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate url (required)
-        $this->_validateOptionUrl($options);
+        $this->validateOptionUrl($options);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -723,7 +723,7 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateInArrayOption($name, $options, array $array)
+    protected function validateInArrayOption($name, $options, array $array)
     {
         if (isset($options[$name]) && !in_array($options[$name], $array)) {
             throw new Exception\RuntimeException(
@@ -739,7 +739,7 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateMandatoryOption($name, $options)
+    protected function validateMandatoryOption($name, $options)
     {
         if (!isset($options[$name]) || !trim($options[$name])) {
             throw new Exception\RuntimeException(
@@ -754,7 +754,7 @@ class Technorati
      * @return  void
      * @access  protected
      */
-    protected function _validateIntegerOption($name, $options)
+    protected function validateIntegerOption($name, $options)
     {
         if (isset($options[$name])) {
             $options[$name] = (int) $options[$name];
@@ -771,12 +771,12 @@ class Technorati
      * @throws  Exception\RuntimeException on failure
      * @access  protected
      */
-    protected function _makeRequest($path, $options = array())
+    protected function makeRequest($path, $options = array())
     {
         $restClient = $this->getRestClient();
         $restClient->getHttpClient()->resetParameters();
         $response = $restClient->restGet($path, $options);
-        self::_checkResponse($response);
+        self::checkResponse($response);
         return $response;
     }
 
@@ -787,9 +787,9 @@ class Technorati
      * @return  void
      * @access  protected
      */
-    protected function _validateOptionClaim(array $options)
+    protected function validateOptionClaim(array $options)
     {
-        $this->_validateIntegerOption('claim', $options);
+        $this->validateIntegerOption('claim', $options);
     }
 
     /**
@@ -801,7 +801,7 @@ class Technorati
      * @throws  Exception\RuntimeException if 'format' value != XML
      * @access  protected
      */
-    protected function _validateOptionFormat(array $options)
+    protected function validateOptionFormat(array $options)
     {
         if (isset($options['format']) && $options['format'] != 'xml') {
             throw new Exception\RuntimeException(
@@ -820,7 +820,7 @@ class Technorati
      * @throws  Exception\RuntimeException if 'limit' value is invalid
      * @access  protected
      */
-    protected function _validateOptionLimit(array $options)
+    protected function validateOptionLimit(array $options)
     {
         if (!isset($options['limit'])) return;
 
@@ -841,7 +841,7 @@ class Technorati
      * @throws  Exception\RuntimeException if 'start' value is invalid
      * @access  protected
      */
-    protected function _validateOptionStart(array $options)
+    protected function validateOptionStart(array $options)
     {
         if (!isset($options['start'])) return;
 
@@ -862,9 +862,9 @@ class Technorati
      * @access  protected
      * @todo    support for Zend\Uri\Http
      */
-    protected function _validateOptionUrl(array $options)
+    protected function validateOptionUrl(array $options)
     {
-        $this->_validateMandatoryOption('url', $options);
+        $this->validateMandatoryOption('url', $options);
     }
 
     /**
@@ -876,7 +876,7 @@ class Technorati
      * @link    http://technorati.com/developers/api/error.html Technorati API: Error response
      * @access  protected
      */
-    protected static function _checkErrors(DomDocument $dom)
+    protected static function checkErrors(DomDocument $dom)
     {
         $xpath = new \DOMXPath($dom);
 
@@ -895,11 +895,11 @@ class Technorati
      * @throws  Exception\RuntimeException if response content contains an error message
      * @access  protected
      */
-    protected function _convertResponseAndCheckContent(Response $response)
+    protected function convertResponseAndCheckContent(Response $response)
     {
         $dom = new \DOMDocument();
         $dom->loadXML($response->getBody());
-        self::_checkErrors($dom);
+        self::checkErrors($dom);
         return $dom;
     }
 
@@ -911,7 +911,7 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected static function _checkResponse(Response $response)
+    protected static function checkResponse(Response $response)
     {
         if ($response->isServerError() || $response->isClientError()) {
             throw new Exception\RuntimeException(sprintf(
@@ -929,7 +929,7 @@ class Technorati
      * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _compareOptions(array $options, array $validOptions)
+    protected function compareOptions(array $options, array $validOptions)
     {
         $difference = array_diff(array_keys($options), $validOptions);
         if ($difference) {
@@ -947,10 +947,10 @@ class Technorati
      * @return  array Merged array of user and default/required options.
      * @access  protected
      */
-    protected function _prepareOptions($options, array $defaultOptions)
+    protected function prepareOptions($options, array $defaultOptions)
     {
         $options = (array) $options; // force cast to convert null to array()
-        $options['key'] = $this->_apiKey;
+        $options['key'] = $this->apiKey;
         $options = array_merge($defaultOptions, $options);
         return $options;
     }

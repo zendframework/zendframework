@@ -45,7 +45,7 @@ class BlogInfoResult
      * @var     Uri\Http
      * @access  protected
      */
-    protected $_url;
+    protected $url;
 
     /**
      * Technorati weblog, if queried URL is a valid weblog.
@@ -53,7 +53,7 @@ class BlogInfoResult
      * @var     Weblog
      * @access  protected
      */
-    protected $_weblog;
+    protected $weblog;
 
     /**
      * Number of unique blogs linking this blog
@@ -61,7 +61,7 @@ class BlogInfoResult
      * @var     integer
      * @access  protected
      */
-    protected $_inboundBlogs;
+    protected $inboundBlogs;
 
     /**
      * Number of incoming links to this blog
@@ -69,7 +69,7 @@ class BlogInfoResult
      * @var     integer
      * @access  protected
      */
-    protected $_inboundLinks;
+    protected $inboundLinks;
 
 
     /**
@@ -82,7 +82,7 @@ class BlogInfoResult
         $xpath = new DOMXPath($dom);
         $result = $xpath->query('//result/weblog');
         if ($result->length == 1) {
-            $this->_weblog = new Weblog($result->item(0));
+            $this->weblog = new Weblog($result->item(0));
         } else {
             // follow the same behavior of blogPostTags
             // and raise an Exception if the URL is not a valid weblog
@@ -95,19 +95,19 @@ class BlogInfoResult
             try {
                 // fetched URL often doens't include schema
                 // and this issue causes the following line to fail
-                $this->_url = Utils::normalizeUriHttp($result->item(0)->data);
+                $this->url = Utils::normalizeUriHttp($result->item(0)->data);
             } catch(Exception $e) {
                 if ($this->getWeblog() instanceof Weblog) {
-                    $this->_url = $this->getWeblog()->getUrl();
+                    $this->url = $this->getWeblog()->getUrl();
                 }
             }
         }
 
         $result = $xpath->query('//result/inboundblogs/text()');
-        if ($result->length == 1) $this->_inboundBlogs = (int) $result->item(0)->data;
+        if ($result->length == 1) $this->inboundBlogs = (int) $result->item(0)->data;
 
         $result = $xpath->query('//result/inboundlinks/text()');
-        if ($result->length == 1) $this->_inboundLinks = (int) $result->item(0)->data;
+        if ($result->length == 1) $this->inboundLinks = (int) $result->item(0)->data;
 
     }
 
@@ -118,7 +118,7 @@ class BlogInfoResult
      * @return  Uri\Http
      */
     public function getUrl() {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -127,7 +127,7 @@ class BlogInfoResult
      * @return  Weblog
      */
     public function getWeblog() {
-        return $this->_weblog;
+        return $this->weblog;
     }
 
     /**
@@ -137,7 +137,7 @@ class BlogInfoResult
      */
     public function getInboundBlogs()
     {
-        return (int) $this->_inboundBlogs;
+        return (int) $this->inboundBlogs;
     }
 
     /**
@@ -147,7 +147,7 @@ class BlogInfoResult
      */
     public function getInboundLinks()
     {
-        return (int) $this->_inboundLinks;
+        return (int) $this->inboundLinks;
     }
 
 }

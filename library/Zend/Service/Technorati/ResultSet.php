@@ -52,7 +52,7 @@ abstract class ResultSet implements SeekableIterator
      * @var     int
      * @access  protected
      */
-    protected $_totalResultsAvailable;
+    protected $totalResultsAvailable;
 
     /**
      * The number of results in this result set
@@ -60,7 +60,7 @@ abstract class ResultSet implements SeekableIterator
      * @var     int
      * @access  protected
      */
-    protected $_totalResultsReturned;
+    protected $totalResultsReturned;
 
     /**
      * The offset in the total result set of this search set
@@ -76,7 +76,7 @@ abstract class ResultSet implements SeekableIterator
      * @var     DomNodeList
      * @access  protected
      */
-    protected $_results;
+    protected $results;
 
     /**
      * Technorati API response document
@@ -84,23 +84,23 @@ abstract class ResultSet implements SeekableIterator
      * @var     DomDocument
      * @access  protected
      */
-    protected $_dom;
+    protected $dom;
 
     /**
-     * Object for $this->_dom
+     * Object for $this->dom
      *
      * @var     DOMXpath
      * @access  protected
      */
-    protected $_xpath;
+    protected $xpath;
 
     /**
-     * XML string representation for $this->_dom
+     * XML string representation for $this->dom
      *
      * @var     string
      * @access  protected
      */
-    protected $_xml;
+    protected $xml;
 
     /**
      * Current Item
@@ -108,7 +108,7 @@ abstract class ResultSet implements SeekableIterator
      * @var     int
      * @access  protected
      */
-    protected $_currentIndex = 0;
+    protected $currentIndex = 0;
 
 
     /**
@@ -119,7 +119,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function __construct(DomDocument $dom, $options = array())
     {
-        $this->_init($dom, $options);
+        $this->init($dom, $options);
 
         // Technorati loves to make developer's life really hard
         // I must read query options in order to normalize a single way
@@ -138,7 +138,7 @@ abstract class ResultSet implements SeekableIterator
 
         //$start = isset($options['start']) ? $options['start'] : 1;
         //$limit = isset($options['limit']) ? $options['limit'] : 20;
-        //$this->_firstResultPosition = $start;
+        //$this->firstResultPosition = $start;
     }
 
     /**
@@ -153,12 +153,12 @@ abstract class ResultSet implements SeekableIterator
      * @param   array $options   query options as associative array
      *      * @return  void
      */
-    protected function _init(DomDocument $dom, $options = array())
+    protected function init(DomDocument $dom, $options = array())
     {
-        $this->_dom     = $dom;
-        $this->_xpath   = new DOMXPath($dom);
+        $this->dom     = $dom;
+        $this->xpath   = new DOMXPath($dom);
 
-        $this->_results = $this->_xpath->query("//item");
+        $this->results = $this->xpath->query("//item");
     }
 
     /**
@@ -168,7 +168,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function totalResults()
     {
-        return (int) $this->_totalResultsReturned;
+        return (int) $this->totalResultsReturned;
     }
 
 
@@ -179,7 +179,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function totalResultsAvailable()
     {
-        return (int) $this->_totalResultsAvailable;
+        return (int) $this->totalResultsAvailable;
     }
 
     /**
@@ -198,7 +198,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function key()
     {
-        return $this->_currentIndex;
+        return $this->currentIndex;
     }
 
     /**
@@ -208,7 +208,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function next()
     {
-        $this->_currentIndex += 1;
+        $this->currentIndex += 1;
     }
 
     /**
@@ -218,7 +218,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function rewind()
     {
-        $this->_currentIndex = 0;
+        $this->currentIndex = 0;
         return true;
     }
 
@@ -232,8 +232,8 @@ abstract class ResultSet implements SeekableIterator
     public function seek($index)
     {
         $indexInt = (int) $index;
-        if ($indexInt >= 0 && $indexInt < $this->_results->length) {
-            $this->_currentIndex = $indexInt;
+        if ($indexInt >= 0 && $indexInt < $this->results->length) {
+            $this->currentIndex = $indexInt;
         } else {
             throw new OutOfBoundsException("Illegal index '$index'");
         }
@@ -246,7 +246,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function valid()
     {
-        return null !== $this->_results && $this->_currentIndex < $this->_results->length;
+        return null !== $this->results && $this->currentIndex < $this->results->length;
     }
 
     /**
@@ -256,7 +256,7 @@ abstract class ResultSet implements SeekableIterator
      */
     public function getXml()
     {
-        return $this->_dom->saveXML();
+        return $this->dom->saveXML();
     }
 
     /**
@@ -268,7 +268,7 @@ abstract class ResultSet implements SeekableIterator
      * @return void
      */
     public function __sleep() {
-        $this->_xml     = $this->getXml();
+        $this->xml     = $this->getXml();
         $vars = array_keys(get_object_vars($this));
         return array_diff($vars, array('_dom', '_xpath'));
     }
@@ -284,8 +284,8 @@ abstract class ResultSet implements SeekableIterator
      */
     public function __wakeup() {
         $dom = new DOMDocument();
-        $dom->loadXml($this->_xml);
-        $this->_init($dom);
-        $this->_xml = null; // reset XML content
+        $dom->loadXml($this->xml);
+        $this->init($dom);
+        $this->xml = null; // reset XML content
     }
 }

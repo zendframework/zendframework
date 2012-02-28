@@ -47,7 +47,7 @@ abstract class Result
      * @var     array
      * @access  protected
      */
-    protected $_fields;
+    protected $fields;
 
     /**
      * The ReST fragment for this result object
@@ -55,39 +55,39 @@ abstract class Result
      * @var     DomElement
      * @access  protected
      */
-    protected $_dom;
+    protected $dom;
 
     /**
-     * Object for $this->_dom
+     * Object for $this->dom
      *
      * @var     DOMXpath
      * @access  protected
      */
-    protected $_xpath;
+    protected $xpath;
 
 
     /**
      * Constructs a new object from DOM Element.
      * Properties are automatically fetched from XML
-     * according to array of $_fields to be read.
+     * according to array of $fields to be read.
      *
      * @param   DomElement $result  the ReST fragment for this object
      */
     public function __construct(DomElement $dom)
     {
-        $this->_xpath = new DOMXPath($dom->ownerDocument);
-        $this->_dom = $dom;
+        $this->xpath = new DOMXPath($dom->ownerDocument);
+        $this->dom = $dom;
 
         // default fields for all search results
         $fields = array();
 
         // merge with child's object fields
-        $this->_fields = array_merge($this->_fields, $fields);
+        $this->fields = array_merge($this->fields, $fields);
 
         // add results to appropriate fields
-        foreach($this->_fields as $phpName => $xmlName) {
+        foreach($this->fields as $phpName => $xmlName) {
             $query = "./$xmlName/text()";
-            $node = $this->_xpath->query($query, $this->_dom);
+            $node = $this->xpath->query($query, $this->dom);
             if ($node->length == 1) {
                 $this->{$phpName} = (string) $node->item(0)->data;
             }
@@ -99,14 +99,14 @@ abstract class Result
      *
      * @return  void
      */
-    protected function _parseWeblog()
+    protected function parseWeblog()
     {
         // weblog object field
-        $result = $this->_xpath->query('./weblog', $this->_dom);
+        $result = $this->xpath->query('./weblog', $this->dom);
         if ($result->length == 1) {
-            $this->_weblog = new Weblog($result->item(0));
+            $this->weblog = new Weblog($result->item(0));
         } else {
-            $this->_weblog = null;
+            $this->weblog = null;
         }
     }
 
@@ -118,6 +118,6 @@ abstract class Result
      */
     public function getXml()
     {
-        return $this->_dom->ownerDocument->saveXML($this->_dom);
+        return $this->dom->ownerDocument->saveXML($this->dom);
     }
 }

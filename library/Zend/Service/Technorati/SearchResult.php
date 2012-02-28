@@ -46,7 +46,7 @@ class SearchResult extends Result
      * @var     Weblog
      * @access  protected
      */
-    protected $_weblog;
+    protected $weblog;
 
     /**
      * The title of the entry.
@@ -54,7 +54,7 @@ class SearchResult extends Result
      * @var     string
      * @access  protected
      */
-    protected $_title;
+    protected $title;
 
     /**
      * The blurb from entry with search term highlighted.
@@ -62,7 +62,7 @@ class SearchResult extends Result
      * @var     string
      * @access  protected
      */
-    protected $_excerpt;
+    protected $excerpt;
 
     /**
      * The datetime the entry was created.
@@ -70,7 +70,7 @@ class SearchResult extends Result
      * @var     ZendDate
      * @access  protected
      */
-    protected $_created;
+    protected $created;
 
     /**
      * The permalink of the blog entry.
@@ -78,7 +78,7 @@ class SearchResult extends Result
      * @var     Uri\Http
      * @access  protected
      */
-    protected $_permalink;
+    protected $permalink;
 
 
     /**
@@ -88,18 +88,18 @@ class SearchResult extends Result
      */
     public function __construct(DomElement $dom)
     {
-        $this->_fields = array( '_permalink'    => 'permalink',
-                                '_excerpt'      => 'excerpt',
-                                '_created'      => 'created',
-                                '_title'        => 'title');
+        $this->fields = array( 'permalink'    => 'permalink',
+                               'excerpt'      => 'excerpt',
+                               'created'      => 'created',
+                               'title'        => 'title');
         parent::__construct($dom);
 
         // weblog object field
-        $this->_parseWeblog();
+        $this->parseWeblog();
 
         // filter fields
-        $this->_permalink = Utils::normalizeUriHttp($this->_permalink);
-        $this->_created   = Utils::normalizeDate($this->_created);
+        $this->permalink = Utils::normalizeUriHttp($this->permalink);
+        $this->created   = Utils::normalizeDate($this->created);
     }
 
     /**
@@ -108,7 +108,7 @@ class SearchResult extends Result
      * @return  Weblog
      */
     public function getWeblog() {
-        return $this->_weblog;
+        return $this->weblog;
     }
 
     /**
@@ -117,7 +117,7 @@ class SearchResult extends Result
      * @return  string
      */
     public function getTitle() {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -126,7 +126,7 @@ class SearchResult extends Result
      * @return  string
      */
     public function getExcerpt() {
-        return $this->_excerpt;
+        return $this->excerpt;
     }
 
     /**
@@ -135,7 +135,7 @@ class SearchResult extends Result
      * @return  ZendDate
      */
     public function getCreated() {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
@@ -144,7 +144,7 @@ class SearchResult extends Result
      * @return  Uri\Http
      */
     public function getPermalink() {
-        return $this->_permalink;
+        return $this->permalink;
     }
 
 }

@@ -46,7 +46,7 @@ class DailyCountsResult extends Result
      * @var     ZendDate
      * @access  protected
      */
-    protected $_date;
+    protected $date;
 
     /**
      * Number of posts containing query on given date.
@@ -54,7 +54,7 @@ class DailyCountsResult extends Result
      * @var     int
      * @access  protected
      */
-    protected $_count;
+    protected $count;
 
 
     /**
@@ -64,13 +64,13 @@ class DailyCountsResult extends Result
      */
     public function __construct(DomElement $dom)
     {
-        $this->_fields = array( '_date'   => 'date',
-                                '_count'  => 'count');
+        $this->fields = array( 'date'   => 'date',
+                               'count'  => 'count');
         parent::__construct($dom);
 
         // filter fields
-        $this->_date  = new ZendDate(strtotime($this->_date));
-        $this->_count = (int) $this->_count;
+        $this->date  = new ZendDate(strtotime($this->date));
+        $this->count = (int) $this->count;
     }
 
     /**
@@ -79,7 +79,7 @@ class DailyCountsResult extends Result
      * @return  ZendDate
      */
     public function getDate() {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
@@ -88,6 +88,6 @@ class DailyCountsResult extends Result
      * @return  int
      */
     public function getCount() {
-        return $this->_count;
+        return $this->count;
     }
 }

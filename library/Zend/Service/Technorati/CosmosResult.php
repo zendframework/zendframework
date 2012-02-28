@@ -46,7 +46,7 @@ class CosmosResult extends Result
      * @var     Weblog
      * @access  protected
      */
-    protected $_weblog;
+    protected $weblog;
 
     /**
      * The nearest permalink tracked for queried URL.
@@ -54,7 +54,7 @@ class CosmosResult extends Result
      * @var     Uri\Http
      * @access  protected
      */
-    protected $_nearestPermalink;
+    protected $nearestPermalink;
 
     /**
      * The excerpt of the blog/page linking queried URL.
@@ -62,7 +62,7 @@ class CosmosResult extends Result
      * @var     string
      * @access  protected
      */
-    protected $_excerpt;
+    protected $excerpt;
 
     /**
      * The the datetime the link was created.
@@ -70,7 +70,7 @@ class CosmosResult extends Result
      * @var     ZendDate
      * @access  protected
      */
-    protected $_linkCreated;
+    protected $linkCreated;
 
     /**
      * The URL of the specific link target page
@@ -78,7 +78,7 @@ class CosmosResult extends Result
      * @var     Uri\Http
      * @access  protected
      */
-    protected $_linkUrl;
+    protected $linkUrl;
 
 
     /**
@@ -88,19 +88,19 @@ class CosmosResult extends Result
      */
     public function __construct(DomElement $dom)
     {
-        $this->_fields = array( '_nearestPermalink' => 'nearestpermalink',
-                                '_excerpt'          => 'excerpt',
-                                '_linkCreated'      => 'linkcreated',
-                                '_linkUrl'          => 'linkurl');
+        $this->fields = array( 'nearestPermalink' => 'nearestpermalink',
+                               'excerpt'          => 'excerpt',
+                               'linkCreated'      => 'linkcreated',
+                               'linkUrl'          => 'linkurl');
         parent::__construct($dom);
 
         // weblog object field
-        $this->_parseWeblog();
+        $this->parseWeblog();
 
         // filter fields
-        $this->_nearestPermalink = Utils::normalizeUriHttp($this->_nearestPermalink);
-        $this->_linkUrl          = Utils::normalizeUriHttp($this->_linkUrl);
-        $this->_linkCreated      = Utils::normalizeDate($this->_linkCreated);
+        $this->nearestPermalink = Utils::normalizeUriHttp($this->nearestPermalink);
+        $this->linkUrl          = Utils::normalizeUriHttp($this->linkUrl);
+        $this->linkCreated      = Utils::normalizeDate($this->linkCreated);
     }
 
     /**
@@ -109,7 +109,7 @@ class CosmosResult extends Result
      * @return  Weblog
      */
     public function getWeblog() {
-        return $this->_weblog;
+        return $this->weblog;
     }
 
     /**
@@ -118,7 +118,7 @@ class CosmosResult extends Result
      * @return  Uri\Http
      */
     public function getNearestPermalink() {
-        return $this->_nearestPermalink;
+        return $this->nearestPermalink;
     }
 
     /**
@@ -127,7 +127,7 @@ class CosmosResult extends Result
      * @return  string
      */
     public function getExcerpt() {
-        return $this->_excerpt;
+        return $this->excerpt;
     }
 
     /**
@@ -136,7 +136,7 @@ class CosmosResult extends Result
      * @return  ZendDate
      */
     public function getLinkCreated() {
-        return $this->_linkCreated;
+        return $this->linkCreated;
     }
 
     /**
@@ -146,7 +146,7 @@ class CosmosResult extends Result
      * @return  Uri\Http
      */
     public function getLinkUrl() {
-        return $this->_linkUrl;
+        return $this->linkUrl;
     }
 
 }

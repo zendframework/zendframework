@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement;
+use DomElement;
 
 /**
  * Represents a single Technorati TopTags or BlogPostTags query result object.
@@ -77,7 +77,8 @@ class TagsResult extends Result
      *
      * @return  string
      */
-    public function getTag() {
+    public function getTag()
+    {
         return $this->tag;
     }
 
@@ -86,7 +87,8 @@ class TagsResult extends Result
      *
      * @return  int
      */
-    public function getPosts() {
+    public function getPosts()
+    {
         return $this->posts;
     }
 }

@@ -24,8 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement,
-    Zend\Uri;
+use DomElement;
 
 /**
  * Represents a Weblog object successful recognized by Technorati.
@@ -49,7 +48,7 @@ class Weblog
     /**
      * Base blog URL.
      *
-     * @var     Uri\Http
+     * @var     \Zend\\Zend\Uri\Http
      * @access  protected
      */
     protected $url;
@@ -57,7 +56,7 @@ class Weblog
     /**
      * RSS feed URL, if any.
      *
-     * @var     null|Uri\Http
+     * @var     null|\Zend\Uri\Http
      * @access  protected
      */
     protected $rssUrl;
@@ -65,7 +64,7 @@ class Weblog
     /**
      * Atom feed URL, if any.
      *
-     * @var     null|Uri\Http
+     * @var     null|\Zend\Uri\Http
      * @access  protected
      */
     protected $atomUrl;
@@ -217,7 +216,7 @@ class Weblog
     /**
      * Returns weblog URL.
      *
-     * @return  null|Uri\Http object representing weblog base URL
+     * @return  null|\Zend\Uri\Http object representing weblog base URL
      */
     public function getUrl()
     {
@@ -247,7 +246,7 @@ class Weblog
     /**
      * Returns weblog Rss URL.
      *
-     * @return  null|Uri\Http object representing the URL
+     * @return  null|\Zend\Uri\Http object representing the URL
      *          of the RSS feed for given blog
      */
     public function getRssUrl()
@@ -258,7 +257,7 @@ class Weblog
     /**
      * Returns weblog Atom URL.
      *
-     * @return  null|Uri\Http object representing the URL
+     * @return  null|\Zend\Uri\Http object representing the URL
      *          of the Atom feed for given blog
      */
     public function getAtomUrl()
@@ -350,7 +349,7 @@ class Weblog
     /**
      * Sets weblog URL.
      *
-     * @param   string|Uri\Http $url
+     * @param   string|\Zend\Uri\Http $url
      * @return  void
      * @throws  Exception\RuntimeException if $input is an invalid URI
      *          (via Utils::normalizeUriHttp)
@@ -388,7 +387,7 @@ class Weblog
     /**
      * Sets weblog Rss URL.
      *
-     * @param   string|Uri\Http $url
+     * @param   string|\Zend\Uri\Http $url
      * @return  Weblog $this instance
      * @throws  Exception\RuntimeException if $input is an invalid URI
      *          (via Utils::normalizeUriHttp)
@@ -402,7 +401,7 @@ class Weblog
     /**
      * Sets weblog Atom URL.
      *
-     * @param   string|Uri\Http $url
+     * @param   string|\Zend\Uri\Http $url
      * @return  Weblog $this instance
      * @throws  Exception\RuntimeException if $input is an invalid URI
      *          (via Utils::normalizeUriHttp)

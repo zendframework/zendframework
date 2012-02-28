@@ -24,8 +24,8 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement,
-    \DOMXPath;
+use DomElement,
+    DOMXPath;
 
 /**
  * Represents a single Technorati Search query result object.

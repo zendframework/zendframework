@@ -24,9 +24,8 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement,
-    \DOMXPath,
-    Zend\Uri;
+use DomElement,
+    DOMXPath;
 
 /**
  * Represents a weblog Author object. It usually belongs to a Technorati account.
@@ -82,7 +81,7 @@ class Author
     /**
      * Technorati account thumbnail picture URL, if any
      *
-     * @var     null|Uri\Http
+     * @var     null|\Zend\Uri\Http
      * @access  protected
      */
     protected $thumbnailPicture;
@@ -170,7 +169,7 @@ class Author
     /**
      * Returns Technorati account thumbnail picture.
      *
-     * @return  null|Uri\Http  Technorati account thumbnail picture
+     * @return  null|\Zend\Uri\Http  Technorati account thumbnail picture
      */
     public function getThumbnailPicture()
     {
@@ -241,7 +240,7 @@ class Author
     /**
      * Sets Technorati account thumbnail picture.
      *
-     * @param   string|Uri\Http $input thumbnail picture URI
+     * @param   string|\Zend\Uri\Http $input thumbnail picture URI
      * @return  Author  $this instance
      * @throws  Exception\RuntimeException if $input is an invalid URI
      *          (via Utils::normalizeUriHttp)

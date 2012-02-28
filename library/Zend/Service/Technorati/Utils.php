@@ -117,11 +117,18 @@ class Utils
 
         // due to a BC break as of ZF 1.5 it's not safe to use ZendDate::isDate() here
         // see ZF-2524, ZF-2334
-        if (@strtotime($input) !== FALSE) {
-            return new ZendDate($input);
-        } else {
-            throw new Exception\RuntimeException("'$input' is not a valid Date/Time");
+        set_error_handler(function () { return true; }, E_NOTICE|E_WARNING|E_STRICT);
+        if (strtotime($input) === FALSE) {
+            restore_error_handler();
+            throw new Exception\RuntimeException(sprintf(
+                '%s: "%s" is not a valid Date/Time',
+                __METHOD__, 
+                (string) $input
+            ));
         }
+        restore_error_handler();
+
+        return new ZendDate($input);
     }
 
     /**

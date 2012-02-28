@@ -24,8 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement,
-    Zend\Uri;
+use DomElement;
 
 /**
  * Represents a single Technorati Tag query result object.
@@ -85,7 +84,7 @@ class TagResult extends Result
     /**
      * The permalink of the blog entry.
      *
-     * @var     Uri\Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $permalink;
@@ -119,7 +118,8 @@ class TagResult extends Result
      *
      * @return  Weblog
      */
-    public function getWeblog() {
+    public function getWeblog()
+    {
         return $this->weblog;
     }
 
@@ -128,7 +128,8 @@ class TagResult extends Result
      *
      * @return  string
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
@@ -137,7 +138,8 @@ class TagResult extends Result
      *
      * @return  string
      */
-    public function getExcerpt() {
+    public function getExcerpt()
+    {
         return $this->excerpt;
     }
 
@@ -146,7 +148,8 @@ class TagResult extends Result
      *
      * @return  ZendDate
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -155,16 +158,18 @@ class TagResult extends Result
      *
      * @return  ZendDate
      */
-    public function getUpdated() {
+    public function getUpdated()
+    {
         return $this->updated;
     }
 
     /**
      * Returns the permalink of the blog entry.
      *
-     * @return  Uri\Http
+     * @return  \Zend\Uri\Http
      */
-    public function getPermalink() {
+    public function getPermalink()
+    {
         return $this->permalink;
     }
 

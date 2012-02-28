@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument;
+use DomDocument;
 
 /**
  * Represents a Technorati Tag query result set.
@@ -80,7 +80,8 @@ class TagResultSet extends ResultSet
      *
      * @return  int
      */
-    public function getPostsMatched() {
+    public function getPostsMatched()
+    {
         return $this->postsMatched;
     }
 
@@ -89,7 +90,8 @@ class TagResultSet extends ResultSet
      *
      * @return  int
      */
-    public function getBlogsMatched() {
+    public function getBlogsMatched()
+    {
         return $this->blogsMatched;
     }
 

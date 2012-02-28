@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument;
+use DomDocument;
 
 /**
  * Represents a Technorati Search query result set.
@@ -56,7 +56,9 @@ class SearchResultSet extends ResultSet
         parent::__construct($dom, $options);
 
         $result = $this->xpath->query('/tapi/document/result/querycount/text()');
-        if ($result->length == 1) $this->queryCount = (int) $result->item(0)->data;
+        if ($result->length == 1) {
+            $this->queryCount = (int) $result->item(0)->data;
+        }
 
         $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/item)");
         $this->totalResultsAvailable = (int) $this->queryCount;

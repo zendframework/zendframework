@@ -24,10 +24,10 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument,
-    \DOMXPath,
-    \SeekableIterator,
-    \OutOfBoundsException;
+use DomDocument,
+    DOMXPath,
+    OutOfBoundsException,
+    SeekableIterator;
 
 /**
  * This is the most essential result set.
@@ -267,7 +267,8 @@ abstract class ResultSet implements SeekableIterator
      *
      * @return void
      */
-    public function __sleep() {
+    public function __sleep()
+    {
         $this->xml     = $this->getXml();
         $vars = array_keys(get_object_vars($this));
         return array_diff($vars, array('_dom', '_xpath'));
@@ -282,7 +283,8 @@ abstract class ResultSet implements SeekableIterator
      *
      * @return void
      */
-    public function __wakeup() {
+    public function __wakeup()
+    {
         $dom = new DOMDocument();
         $dom->loadXml($this->xml);
         $this->init($dom);

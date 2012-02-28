@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument;
+use DomDocument;
 
 /**
  * Represents a Technorati TopTags or BlogPostTags queries result set.

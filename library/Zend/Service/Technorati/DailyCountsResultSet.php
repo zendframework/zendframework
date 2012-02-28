@@ -24,8 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument,
-    Zend\Uri;
+use DomDocument;
 
 /**
  * Represents a Technorati Tag query result set.
@@ -41,7 +40,7 @@ class DailyCountsResultSet extends ResultSet
     /**
      * Technorati search URL for given query.
      *
-     * @var     Uri\Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $searchUrl;
@@ -80,7 +79,7 @@ class DailyCountsResultSet extends ResultSet
     /**
      * Returns the search URL for given query.
      *
-     * @return  Uri\Http
+     * @return  \Zend\Uri\Http
      */
     public function getSearchUrl() {
         return $this->searchUrl;

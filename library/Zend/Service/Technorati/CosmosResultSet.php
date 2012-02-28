@@ -24,8 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument,
-    Zend\Uri;
+use DomDocument;
 
 /**
  * Represents a Technorati Cosmos query result set.
@@ -41,7 +40,7 @@ class CosmosResultSet extends ResultSet
     /**
      * Technorati weblog url, if queried URL is a valid weblog.
      *
-     * @var     Uri\Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $url;
@@ -121,9 +120,10 @@ class CosmosResultSet extends ResultSet
     /**
      * Returns the weblog URL.
      *
-     * @return  Uri\Http
+     * @return  \Zend\Uri\Http
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
@@ -132,7 +132,8 @@ class CosmosResultSet extends ResultSet
      *
      * @return  Weblog
      */
-    public function getWeblog() {
+    public function getWeblog()
+    {
         return $this->weblog;
     }
 

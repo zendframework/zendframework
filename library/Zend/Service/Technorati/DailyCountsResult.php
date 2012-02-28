@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement,
+use DomElement,
     Zend\Date\Date as ZendDate;
 
 /**
@@ -78,7 +78,8 @@ class DailyCountsResult extends Result
      *
      * @return  ZendDate
      */
-    public function getDate() {
+    public function getDate()
+    {
         return $this->date;
     }
 
@@ -87,7 +88,8 @@ class DailyCountsResult extends Result
      *
      * @return  int
      */
-    public function getCount() {
+    public function getCount()
+    {
         return $this->count;
     }
 }

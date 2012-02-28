@@ -24,8 +24,8 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument,
-    \DOMXPath;
+use DomDocument,
+    DOMXPath;
 
 /**
  * Represents a single Technorati KeyInfo query result object.
@@ -86,7 +86,8 @@ class KeyInfoResult
      *
      * @return  string  API Key string
      */
-    public function getApiKey() {
+    public function getApiKey()
+    {
         return $this->apiKey;
     }
 
@@ -95,7 +96,8 @@ class KeyInfoResult
      *
      * @return  int     number of queries sent today
      */
-    public function getApiQueries() {
+    public function getApiQueries()
+    {
         return $this->apiQueries;
     }
 
@@ -104,7 +106,8 @@ class KeyInfoResult
      *
      * @return  int     maximum number of available queries per day
      */
-    public function getMaxQueries() {
+    public function getMaxQueries()
+    {
         return $this->maxQueries;
     }
 
@@ -115,7 +118,8 @@ class KeyInfoResult
      * @param   string $apiKey  the API Key
      * @return  KeyInfoResult $this instance
      */
-    public function setApiKey($apiKey) {
+    public function setApiKey($apiKey)
+    {
         $this->apiKey = $apiKey;
         return $this;
     }

@@ -24,8 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement,
-    Zend\Uri;
+use DomElement;
 
 /**
  * Represents a single Technorati Cosmos query result object.
@@ -51,7 +50,7 @@ class CosmosResult extends Result
     /**
      * The nearest permalink tracked for queried URL.
      *
-     * @var     Uri\Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $nearestPermalink;
@@ -67,7 +66,7 @@ class CosmosResult extends Result
     /**
      * The the datetime the link was created.
      *
-     * @var     ZendDate
+     * @var     \Zend\Date\Date
      * @access  protected
      */
     protected $linkCreated;
@@ -75,7 +74,7 @@ class CosmosResult extends Result
     /**
      * The URL of the specific link target page
      *
-     * @var     Uri\Http
+     * @var     \Zend\Uri\Http
      * @access  protected
      */
     protected $linkUrl;
@@ -108,16 +107,18 @@ class CosmosResult extends Result
      *
      * @return  Weblog
      */
-    public function getWeblog() {
+    public function getWeblog()
+    {
         return $this->weblog;
     }
 
     /**
      * Returns the nearest permalink tracked for queried URL.
      *
-     * @return  Uri\Http
+     * @return  \Zend\Uri\Http
      */
-    public function getNearestPermalink() {
+    public function getNearestPermalink()
+    {
         return $this->nearestPermalink;
     }
 
@@ -126,16 +127,18 @@ class CosmosResult extends Result
      *
      * @return  string
      */
-    public function getExcerpt() {
+    public function getExcerpt()
+    {
         return $this->excerpt;
     }
 
     /**
      * Returns the datetime the link was created.
      *
-     * @return  ZendDate
+     * @return  \Zend\Date\Date
      */
-    public function getLinkCreated() {
+    public function getLinkCreated()
+    {
         return $this->linkCreated;
     }
 
@@ -143,9 +146,10 @@ class CosmosResult extends Result
      * If queried URL is a valid blog,
      * returns the URL of the specific link target page.
      *
-     * @return  Uri\Http
+     * @return  \Zend\Uri\Http
      */
-    public function getLinkUrl() {
+    public function getLinkUrl()
+    {
         return $this->linkUrl;
     }
 

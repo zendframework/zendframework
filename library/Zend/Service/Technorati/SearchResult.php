@@ -24,7 +24,7 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomElement,
+use DomElement,
     Zend\Uri;
 
 /**
@@ -107,7 +107,8 @@ class SearchResult extends Result
      *
      * @return  Weblog
      */
-    public function getWeblog() {
+    public function getWeblog()
+    {
         return $this->weblog;
     }
 
@@ -116,7 +117,8 @@ class SearchResult extends Result
      *
      * @return  string
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
@@ -125,7 +127,8 @@ class SearchResult extends Result
      *
      * @return  string
      */
-    public function getExcerpt() {
+    public function getExcerpt()
+    {
         return $this->excerpt;
     }
 
@@ -134,7 +137,8 @@ class SearchResult extends Result
      *
      * @return  ZendDate
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -143,7 +147,8 @@ class SearchResult extends Result
      *
      * @return  Uri\Http
      */
-    public function getPermalink() {
+    public function getPermalink()
+    {
         return $this->permalink;
     }
 

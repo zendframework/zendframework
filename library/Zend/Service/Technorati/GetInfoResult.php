@@ -24,8 +24,8 @@
  */
 namespace Zend\Service\Technorati;
 
-use \DomDocument,
-    \DOMXPath;
+use DomDocument,
+    DOMXPath;
 
 /**
  * Represents a single Technorati GetInfo query result object.
@@ -83,7 +83,8 @@ class GetInfoResult
      *
      * @return  Author
      */
-    public function getAuthor() {
+    public function getAuthor()
+    {
         return $this->author;
     }
 
@@ -92,7 +93,8 @@ class GetInfoResult
      *
      * @return  array of Weblog
      */
-    public function getWeblogs() {
+    public function getWeblogs()
+    {
         return $this->weblogs;
     }
 

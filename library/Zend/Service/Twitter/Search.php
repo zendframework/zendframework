@@ -35,9 +35,9 @@ namespace Zend\Service\Twitter;
 use Zend\Feed,
     Zend\Http,
     Zend\Json,
-    Zend\Rest;
+    Zend\Rest\Client;
 
-class Search extends Rest\Client\RestClient
+class Search extends Client\RestClient
 {
     /**
      * Return Type
@@ -102,26 +102,13 @@ class Search extends Rest\Client\RestClient
     }
 
     /**
-     * Get the current twitter trends.  Currnetly only supports json as the return.
-     *
-     * @throws Http\Client\Exception
-     * @return array
-     */
-    public function trends()
-    {
-        $response     = $this->restGet('/trends.json');
-
-        return Json::decode($response->getBody());
-    }
-
-    /**
      * Performs a Twitter search query.
      *
      * @throws Http\Client\Exception
+     * @return mixed
      */
     public function execute($query, array $params = array())
     {
-
         $_query = array();
 
         $_query['q'] = $query;
@@ -148,10 +135,10 @@ class Search extends Rest\Client\RestClient
 
         switch($this->responseType) {
             case 'json':
-                return Json\Json::decode($response->getBody());
+                return Json\Json::decode($response->getBody(), Json\Json::TYPE_ARRAY);
                 break;
             case 'atom':
-                return Feed\Reader::importString($response->getBody());
+                return Feed\Reader\Reader::importString($response->getBody());
                 break;
         }
 

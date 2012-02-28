@@ -86,7 +86,7 @@ class MemcachedTest extends CommonAdapterTest
     {
         $memcached = new Cache\Storage\Adapter\Memcached();
 
-        $this->assertEquals($memcached->getOptions()->getServers(), array(array('localhost', 11211)));
+        $this->assertEquals($memcached->getOptions()->getServers(), array(array('127.0.0.1', 11211)));
     }
 
     public function tearDown()

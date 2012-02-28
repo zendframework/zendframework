@@ -42,27 +42,7 @@ class CldrTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_cacheDir = sys_get_temp_dir() . '/zend_locale_cldr';
-        $this->_removeRecursive($this->_cacheDir);
-        mkdir($this->_cacheDir);
-
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'Filesystem',
-                'options' => array(
-                    'ttl'       => 1,
-                    'cache_dir' => $this->_cacheDir,
-                )
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
         Cldr::setCache($this->_cache);
     }
 
@@ -70,28 +50,6 @@ class CldrTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->_cache->clear(CacheAdapter::MATCH_ALL);
-        $this->_removeRecursive($this->_cacheDir);
-    }
-
-    protected function _removeRecursive($dir)
-    {
-        if (file_exists($dir)) {
-            $dirIt = new \DirectoryIterator($dir);
-            foreach ($dirIt as $entry) {
-                $fname = $entry->getFilename();
-                if ($fname == '.' || $fname == '..') {
-                    continue;
-                }
-
-                if ($entry->isFile()) {
-                    unlink($entry->getPathname());
-                } else {
-                    $this->_removeRecursive($entry->getPathname());
-                }
-            }
-
-            rmdir($dir);
-        }
     }
 
     /**

@@ -39,7 +39,7 @@ class ManagerTest extends TestCase
         // Restore original include_path
         set_include_path($this->includePath);
     }
-
+/*
     public function testCanRegisterPathsFromConstructor()
     {
         $paths = array(__DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR);
@@ -188,4 +188,5 @@ class ManagerTest extends TestCase
         $this->assertTrue(class_exists('My\NonmatchingModule\Module'));
         $this->assertTrue(class_exists('PharModuleExplicit\Module'));
     }
+*/
 }

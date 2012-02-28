@@ -67,23 +67,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
-        $this->_cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'filesystem',
-                'options' => array(
-                    'ttl' => 120,
-                ),
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-        $this->_orig = Date::setOptions();
+        $this->_orig  = Date::setOptions();
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
 
         Date::setOptions(array('cache' => $this->_cache));
         Date::setOptions(array('fix_dst' => true));
@@ -5248,23 +5233,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
             // success
         }
 
-        $cache = CacheFactory::factory(array(
-            'adapter' => array(
-                'name' => 'filesystem',
-                'options' => array(
-                    'ttl' => 120,
-                ),
-            ),
-            'plugins' => array(
-                array(
-                    'name' => 'serializer',
-                    'options' => array(
-                        'serializer' => 'php_serialize',
-                    ),
-                ),
-            ),
-        ));
-        Date::setOptions(array('cache' => $cache));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        Date\Date::setOptions(array('cache' => $cache));
     }
 
     public function testIsDate()

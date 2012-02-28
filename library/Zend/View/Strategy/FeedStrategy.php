@@ -64,16 +64,11 @@ class FeedStrategy implements ListenerAggregate
      * Attach the aggregate to the specified event manager
      * 
      * @param  EventCollection $events 
+     * @param  int $priority 
      * @return void
      */
-    public function attach(EventCollection $events, $priority = null)
+    public function attach(EventCollection $events, $priority = 1)
     {
-        if (null === $priority) {
-            $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'));
-            $this->listeners[] = $events->attach('response', array($this, 'injectResponse'));
-            return;
-        }
-
         $this->listeners[] = $events->attach('renderer', array($this, 'selectRenderer'), $priority);
         $this->listeners[] = $events->attach('response', array($this, 'injectResponse'), $priority);
     }

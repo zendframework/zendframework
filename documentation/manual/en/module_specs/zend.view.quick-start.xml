@@ -67,6 +67,18 @@
                     for injecting the Response with the result of rendering.
                 </para>
             </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Renderer and Response Strategies</emphasis>.
+                    Renderer Strategies listen to the "renderer" event of the
+                    View, and decide what Renderer should be selected, based on
+                    the Request or other criteria. Response strategies are used
+                    to inject the Response object with the results of rendering
+                    -- which may also include taking actions such as setting
+                    Content-Type headers.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -100,8 +112,8 @@
                 be added to your configuration to accomplish this. We recommend
                 adding it to a site-specific module, such as the "Application"
                 module from the framework's "ZendSkeletonApplication", or to one
-                of your autoloaded configurations from
-                <filename>config/autoload/</filename>.
+                of your autoloaded configurations within the
+                <filename>config/autoload/</filename> directory.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -383,6 +395,53 @@ class ArticleController extends ActionController
                 model is injected.
             </para>
 
+            <para>
+                Here are the templates:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+<?php // "article/view" template ?>
+<div class="sixteen columns content">
+    <?php echo $this->article ?>
+
+    <?php echo $this->sidebar_primary ?>
+
+    <?php echo $this->sidebar_secondary ?>
+</div>
+
+<?php // "content/article" template ?>
+    <!-- This is from the $articleView view model, and the "content/article" 
+         template -->
+    <article class="twelve columns">
+        <?php echo $this->escape('article') ?>
+    </article>
+
+<?php // "content/main-sidebar template ?>
+    <!-- This is from the $primarySidebarView view model, and the
+         "content/main-sidebar template -->
+    <div class="two columns sidebar">
+        sidebar content...
+    </div>
+
+<?php // "content/secondary-sidebar template ?>
+    <!-- This is from the $secondarySidebarView view model, and the
+         "content/secondary-sidebar template -->
+    <div class="two columns sidebar">
+        <?php echo $this->block ?>
+    </div>
+
+<?php // "content/block template ?>
+        <!-- This is from the $sidebarBlockView view model, and the
+            "content/block template -->
+        <div class="block">
+            block content...
+        </div>
+]]></programlisting>
+
+            <para>
+                And here is the aggregate, generated content:
+            </para>
+
             <programlisting language="html"><![CDATA[
 <!-- This is from the $view view model, and the "article/view" template -->
 <div class="sixteen columns content">
@@ -435,7 +494,8 @@ class ArticleController extends ActionController
                     example</link> for examples of view model nesting). The MVC
                 event composes a View Model which acts as the "root" for nested
                 view models, as such, it should contain the skeleton, or layout,
-                template for the site. All other content is then rendered and
+                template for the site (configuration refers to this as the
+                "baseTemplate"). All other content is then rendered and
                 captured to view variables ov this root view model.
             </para>
 

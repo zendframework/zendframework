@@ -40,12 +40,14 @@ class Base
      * Configuration options
      * @param array
      */
-    protected $options = array('username' => null,
-                                'password' => null,
-                                'client'   => null,
-                                'options'  => null,
-                                'headers'  => null,
-                                'wsdl'     => null);
+    protected $options = array(
+        'username' => null,
+        'password' => null,
+        'client'   => null,
+        'options'  => null,
+        'headers'  => null,
+        'wsdl'     => null,
+    );
 
     /**
      * Output headers returned by the last call to SOAPClient->_soapCall()
@@ -57,7 +59,7 @@ class Base
      * Class constructor
      *
      * @param  array  $options  Key/value pair options
-     * @throws StrikeIron\Exception
+     * @throws Exception\RuntimeException if soap extension is not loaded
      */
     public function __construct($options = array())
     {
@@ -78,7 +80,7 @@ class Base
      * @param  string  $method  Method name
      * @param  array   $params  Parameters for method
      * @return mixed            Result
-     * @throws StrikeIron\Exception
+     * @throws Exception\RuntimeException if error occurs during soap call
      */
     public function __call($method, $params)
     {
@@ -88,11 +90,13 @@ class Base
 
         // make soap call, capturing the result and output headers
         try {
-            $result = $this->options['client']->__soapCall($method,
-                                                            $params,
-                                                            $this->options['options'],
-                                                            $this->options['headers'],
-                                                            $this->outputHeaders);
+            $result = $this->options['client']->__soapCall(
+                $method,
+                $params,
+                $this->options['options'],
+                $this->options['headers'],
+                $this->outputHeaders
+            );
         } catch (\Exception $e) {
             $message = get_class($e) . ': ' . $e->getMessage();
             throw new Exception\RuntimeException($message, $e->getCode(), $e);
@@ -110,13 +114,15 @@ class Base
      */
     protected function initSoapClient()
     {
-        if (! isset($this->options['options'])) {
+        if (!isset($this->options['options'])) {
             $this->options['options'] = array();
         }
 
-        if (! isset($this->options['client'])) {
-            $this->options['client'] = new SoapClient($this->options['wsdl'],
-                                                       $this->options['options']);
+        if (!isset($this->options['client'])) {
+            $this->options['client'] = new SoapClient(
+                $this->options['wsdl'],
+                $this->options['options']
+            );
         }
     }
 
@@ -124,7 +130,7 @@ class Base
      * Initialize the headers to pass to SOAPClient->_soapCall()
      *
      * @return void
-     * @throws StrikeIron\Exception
+     * @throws Exception\RuntimeException if invalid headers encountered
      */
     protected function initSoapHeaders()
     {
@@ -136,9 +142,9 @@ class Base
             }
 
             foreach ($this->options['headers'] as $header) {
-                if (! $header instanceof SoapHeader) {
+                if (!$header instanceof SoapHeader) {
                     throw new Exception\RuntimeException('Header must be instance of SoapHeader');
-                } else if ($header->name == 'LicenseInfo') {
+                } elseif ($header->name == 'LicenseInfo') {
                     $foundLicenseInfo = true;
                     break;
                 }
@@ -148,11 +154,17 @@ class Base
         }
 
         // add default LicenseInfo header if a custom one was not supplied
-        if (! $foundLicenseInfo) {
-            $this->options['headers'][] = new SoapHeader('http://ws.strikeiron.com',
-                            'LicenseInfo',
-                            array('RegisteredUser' => array('UserID'   => $this->options['username'],
-                                                            'Password' => $this->options['password'])));
+        if (!$foundLicenseInfo) {
+            $this->options['headers'][] = new SoapHeader(
+                'http://ws.strikeiron.com',
+                'LicenseInfo',
+                array(
+                    'RegisteredUser' => array(
+                        'UserID'   => $this->options['username'],
+                        'Password' => $this->options['password'],
+                    ),
+                )
+            );
         }
     }
 
@@ -233,10 +245,10 @@ class Base
      * and returned from the cache.  Otherwise, the getRemainingHits()
      * method is called as a dummy to get the subscription info headers.
      *
-     * @param  boolean  $now          Force a call to getRemainingHits instead of cache?
-     * @param  string   $queryMethod  Method that will cause SubscriptionInfo header to be sent
-     * @return StrikeIron\Decorator  Decorated subscription info
-     * @throws StrikeIron\Exception
+     * @param  boolean    $now          Force a call to getRemainingHits instead of cache?
+     * @param  string     $queryMethod  Method that will cause SubscriptionInfo header to be sent
+     * @return Decorator  Decorated subscription info
+     * @throws Exception\RuntimeException if no subscription information headers present
      */
     public function getSubscriptionInfo($now = false, $queryMethod = 'GetRemainingHits')
     {

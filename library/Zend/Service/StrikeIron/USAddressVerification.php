@@ -37,10 +37,12 @@ class USAddressVerification extends Base
      * Configuration options
      * @param array
      */
-    protected $options = array('username' => null,
-                                'password' => null,
-                                'client'   => null,
-                                'options'  => null,
-                                'headers'  => null,
-                                'wsdl'     => 'http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL');
+    protected $options = array(
+        'username' => null,
+        'password' => null,
+        'client'   => null,
+        'options'  => null,
+        'headers'  => null,
+        'wsdl'     => 'http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL',
+    );
 }

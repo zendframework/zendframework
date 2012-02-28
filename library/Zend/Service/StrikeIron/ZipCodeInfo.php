@@ -37,10 +37,12 @@ class ZipCodeInfo extends Base
      * Configuration options
      * @param array
      */
-    protected $options = array('username' => null,
-                                'password' => null,
-                                'client'   => null,
-                                'options'  => null,
-                                'headers'  => null,
-                                'wsdl'     => 'http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL');
+    protected $options = array(
+        'username' => null,
+        'password' => null,
+        'client'   => null,
+        'options'  => null,
+        'headers'  => null,
+        'wsdl'     => 'http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL',
+    );
 }

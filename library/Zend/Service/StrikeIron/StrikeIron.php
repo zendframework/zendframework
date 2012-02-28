@@ -58,8 +58,8 @@ class StrikeIron
      * instance.
      *
      * @param  null|string  $options  Service options
-     * @return object       Zend\Service\StrikeIron_* instance
-     * @throws StrikeIron\Exception
+     * @return object       Zend\Service\StrikeIron\* instance
+     * @throws Exception\RuntimeException if service class not found
      */
     public function getService($options = array())
     {

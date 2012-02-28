@@ -85,5 +85,17 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $config['base']['foo']);
         $this->assertEquals('baz', $config['test']['bar']);
     }
+
+    public function testNonExistentFileThrowsRuntimeException()
+    {
+        $this->setExpectedException('RuntimeException');
+        $config = Factory::fromFile('foo.bar');
+    }
+
+    public function testInvalidFileExtensionThrowsInvalidArgumentException()
+    {
+        $this->setExpectedException('RuntimeException');
+        $config = Factory::fromFile(__DIR__ . '/TestAssets/bad.ext');
+    }
 }
 

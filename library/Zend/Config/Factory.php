@@ -71,7 +71,7 @@ class Factory
                 break;
         }
 
-        return null;
+        throw new Exception\RuntimeException(sprintf('Unsupported config file extension: .%s', $pathinfo['extension']));
     }
 
     /**

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,15 +24,16 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomElement,
+    Zend\Uri;
+
 /**
  * Represents a single Technorati Tag query result object.
  * It is never returned as a standalone object,
- * but it always belongs to a valid Zend_Service_Technorati_TagResultSet object.
+ * but it always belongs to a valid TagResultSet object.
  *
- * @uses       \Zend\Service\Technorati\Result
- * @uses       \Zend\Service\Technorati\Utils
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -42,7 +43,7 @@ class TagResult extends Result
     /**
      * Technorati weblog object corresponding to queried keyword.
      *
-     * @var     \Zend\Service\Technorati\Weblog
+     * @var     Weblog
      * @access  protected
      */
     protected $_weblog;
@@ -66,7 +67,7 @@ class TagResult extends Result
     /**
      * The datetime the entry was created.
      *
-     * @var     Zend_Date
+     * @var     ZendDate
      * @access  protected
      */
     protected $_created;
@@ -76,7 +77,7 @@ class TagResult extends Result
      * Called 'postupdate' in original XML response,
      * it has been renamed to provide more coherence.
      *
-     * @var     Zend_Date
+     * @var     ZendDate
      * @access  protected
      */
     protected $_updated;
@@ -84,7 +85,7 @@ class TagResult extends Result
     /**
      * The permalink of the blog entry.
      *
-     * @var     \Zend\Uri\Http
+     * @var     Uri\Http
      * @access  protected
      */
     protected $_permalink;
@@ -95,7 +96,7 @@ class TagResult extends Result
      *
      * @param   DomElement $dom the ReST fragment for this object
      */
-    public function __construct(\DomElement $dom)
+    public function __construct(DomElement $dom)
     {
         $this->_fields = array( '_permalink'    => 'permalink',
                                 '_excerpt'      => 'excerpt',
@@ -116,7 +117,7 @@ class TagResult extends Result
     /**
      * Returns the weblog object that links queried URL.
      *
-     * @return  \Zend\Service\Technorati\Weblog
+     * @return  Weblog
      */
     public function getWeblog() {
         return $this->_weblog;
@@ -143,7 +144,7 @@ class TagResult extends Result
     /**
      * Returns the datetime the entry was created.
      *
-     * @return  Zend_Date
+     * @return  ZendDate
      */
     public function getCreated() {
         return $this->_created;
@@ -152,7 +153,7 @@ class TagResult extends Result
     /**
      * Returns the datetime the entry was updated.
      *
-     * @return  Zend_Date
+     * @return  ZendDate
      */
     public function getUpdated() {
         return $this->_updated;
@@ -161,7 +162,7 @@ class TagResult extends Result
     /**
      * Returns the permalink of the blog entry.
      *
-     * @return  \Zend\Uri\Http
+     * @return  Uri\Http
      */
     public function getPermalink() {
         return $this->_permalink;

@@ -23,13 +23,14 @@
  * @namespace
  */
 namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see \Zend\Service\Technorati\GetInfoResult
+ * @see Technorati\GetInfoResult
  */
 
 
@@ -56,7 +57,7 @@ class GetInfoResultTest extends TestCase
 
     public function testGetInfoResult()
     {
-        $object = new \Zend\Service\Technorati\GetInfoResult($this->dom);
+        $object = new Technorati\GetInfoResult($this->dom);
 
         // check author
         $author = $object->getAuthor();

@@ -30,7 +30,7 @@ use Zend\Service\Technorati;
  */
 
 /**
- * @see \Zend\Service\Technorati\TagsResult
+ * @see Technorati\TagsResult
  */
 
 

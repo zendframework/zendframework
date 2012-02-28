@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,15 +24,14 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomDocument,
+    Zend\Uri;
+
 /**
  * Represents a Technorati Tag query result set.
  *
- * @uses       Zend_Date
- * @uses       \Zend\Service\Technorati\DailyCountsResult
- * @uses       \Zend\Service\Technorati\ResultSet
- * @uses       \Zend\Service\Technorati\Utils
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -42,7 +41,7 @@ class DailyCountsResultSet extends ResultSet
     /**
      * Technorati search URL for given query.
      *
-     * @var     \Zend\Uri\Http
+     * @var     Uri\Http
      * @access  protected
      */
     protected $_searchUrl;
@@ -50,7 +49,7 @@ class DailyCountsResultSet extends ResultSet
     /**
      * Number of days for which counts provided.
      *
-     * @var     \Zend\Service\Technorati\Weblog
+     * @var     Weblog
      * @access  protected
      */
     protected $_days;
@@ -61,7 +60,7 @@ class DailyCountsResultSet extends ResultSet
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(\DomDocument $dom, $options = array())
+    public function __construct(DomDocument $dom, $options = array())
     {
         parent::__construct($dom, $options);
 
@@ -81,7 +80,7 @@ class DailyCountsResultSet extends ResultSet
     /**
      * Returns the search URL for given query.
      *
-     * @return  \Zend\Uri\Http
+     * @return  Uri\Http
      */
     public function getSearchUrl() {
         return $this->_searchUrl;
@@ -97,9 +96,9 @@ class DailyCountsResultSet extends ResultSet
     }
 
     /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
+     * Implements ResultSet::current().
      *
-     * @return \Zend\Service\Technorati\DailyCountsResult current result
+     * @return DailyCountsResult current result
      */
     public function current()
     {

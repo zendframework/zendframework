@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,14 +24,14 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomDocument,
+    \DOMXPath;
+
 /**
  * Represents a single Technorati GetInfo query result object.
  *
- * @uses       DOMXPath
- * @uses       \Zend\Service\Technorati\Author
- * @uses       \Zend\Service\Technorati\Weblog
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -41,7 +41,7 @@ class GetInfoResult
     /**
      * Technorati author
      *
-     * @var     \Zend\Service\Technorati\Author
+     * @var     Author
      * @access  protected
      */
     protected $_author;
@@ -60,9 +60,9 @@ class GetInfoResult
      *
      * @param   DomDocument $dom the ReST fragment for this object
      */
-    public function __construct(\DomDocument $dom)
+    public function __construct(DomDocument $dom)
     {
-        $xpath = new \DOMXPath($dom);
+        $xpath = new DOMXPath($dom);
 
         $result = $xpath->query('//result');
         if ($result->length == 1) {
@@ -81,7 +81,7 @@ class GetInfoResult
     /**
      * Returns the author associated with queried username.
      *
-     * @return  \Zend\Service\Technorati\Author
+     * @return  Author
      */
     public function getAuthor() {
         return $this->_author;
@@ -90,7 +90,7 @@ class GetInfoResult
     /**
      * Returns the collection of weblogs authored by queried username.
      *
-     * @return  array of \Zend\Service\Technorati\Weblog
+     * @return  array of Weblog
      */
     public function getWeblogs() {
         return $this->_weblogs;

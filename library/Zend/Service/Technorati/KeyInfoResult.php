@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,13 +24,15 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomDocument,
+    \DOMXPath;
+
 /**
  * Represents a single Technorati KeyInfo query result object.
  * It provides information about your Technorati API Key daily usage.
  *
- * @uses       DOMXPath
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -69,9 +71,9 @@ class KeyInfoResult
      * @param   DomElement $dom the ReST fragment for this object
      * @param   string $apiKey  the API Key string
      */
-    public function __construct(\DomDocument $dom, $apiKey = null)
+    public function __construct(DomDocument $dom, $apiKey = null)
     {
-        $xpath = new \DOMXPath($dom);
+        $xpath = new DOMXPath($dom);
 
         $this->_apiQueries   = (int) $xpath->query('/tapi/document/result/apiqueries/text()')->item(0)->data;
         $this->_maxQueries   = (int) $xpath->query('/tapi/document/result/maxqueries/text()')->item(0)->data;
@@ -111,7 +113,7 @@ class KeyInfoResult
      * Sets API Key string.
      *
      * @param   string $apiKey  the API Key
-     * @return  \Zend\Service\Technorati\KeyInfoResult $this instance
+     * @return  KeyInfoResult $this instance
      */
     public function setApiKey($apiKey) {
         $this->_apiKey = $apiKey;

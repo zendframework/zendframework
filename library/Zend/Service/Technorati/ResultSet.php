@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,26 +24,27 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomDocument,
+    \DOMXPath,
+    \SeekableIterator,
+    \OutOfBoundsException;
+
 /**
  * This is the most essential result set.
  * The scope of this class is to be extended by a query-specific child result set class,
  * and it should never be used to initialize a standalone object.
  *
  * Each of the specific result sets represents a collection of query-specific
- * Zend_Service_Technorati_Result objects.
+ * Result objects.
  *
- * @uses       DOMDocument
- * @uses       DOMXpath
- * @uses       OutOfBoundsException
- * @uses       \Zend\Service\Technorati\Result
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @abstract
  */
-abstract class ResultSet implements \SeekableIterator
+abstract class ResultSet implements SeekableIterator
 {
     /**
      * The total number of results available
@@ -116,7 +117,7 @@ abstract class ResultSet implements \SeekableIterator
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(\DomDocument $dom, $options = array())
+    public function __construct(DomDocument $dom, $options = array())
     {
         $this->_init($dom, $options);
 
@@ -152,10 +153,10 @@ abstract class ResultSet implements \SeekableIterator
      * @param   array $options   query options as associative array
      *      * @return  void
      */
-    protected function _init(\DomDocument $dom, $options = array())
+    protected function _init(DomDocument $dom, $options = array())
     {
         $this->_dom     = $dom;
-        $this->_xpath   = new \DOMXPath($dom);
+        $this->_xpath   = new DOMXPath($dom);
 
         $this->_results = $this->_xpath->query("//item");
     }
@@ -234,7 +235,7 @@ abstract class ResultSet implements \SeekableIterator
         if ($indexInt >= 0 && $indexInt < $this->_results->length) {
             $this->_currentIndex = $indexInt;
         } else {
-            throw new \OutOfBoundsException("Illegal index '$index'");
+            throw new OutOfBoundsException("Illegal index '$index'");
         }
     }
 
@@ -282,7 +283,7 @@ abstract class ResultSet implements \SeekableIterator
      * @return void
      */
     public function __wakeup() {
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $dom->loadXml($this->_xml);
         $this->_init($dom);
         $this->_xml = null; // reset XML content

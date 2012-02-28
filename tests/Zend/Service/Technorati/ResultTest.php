@@ -23,17 +23,18 @@
  * @namespace
  */
 namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see \Zend\Service\Technorati\Result
+ * @see Technorati\Result
  */
 
 /**
- * @see \Zend\Service\Technorati\SearchResult
+ * @see Technorati\SearchResult
  */
 
 
@@ -56,7 +57,7 @@ class ResultTest extends TestCase
     {
         $this->ref = new \ReflectionClass('Zend\Service\Technorati\Result');
         $this->domElements = self::getTestFileElementsAsDom('TestSearchResultSet.xml');
-        $this->object = new \Zend\Service\Technorati\SearchResult($this->domElements->item(0));
+        $this->object = new Technorati\SearchResult($this->domElements->item(0));
         $this->objectRef = new \ReflectionObject($this->object);
     }
 

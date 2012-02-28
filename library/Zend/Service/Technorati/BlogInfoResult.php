@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,15 +24,15 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomDocument,
+    \DOMXPath,
+    Zend\Uri;
+
 /**
  * Represents a single Technorati BlogInfo query result object.
  *
- * @uses       DOMXPath
- * @uses       \Zend\Service\Technorati\Exception\RuntimeException
- * @uses       \Zend\Service\Technorati\Utils
- * @uses       \Zend\Service\Technorati\Weblog
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -42,7 +42,7 @@ class BlogInfoResult
     /**
      * Technorati weblog url, if queried URL is a valid weblog.
      *
-     * @var     \Zend\Uri\Http
+     * @var     Uri\Http
      * @access  protected
      */
     protected $_url;
@@ -50,7 +50,7 @@ class BlogInfoResult
     /**
      * Technorati weblog, if queried URL is a valid weblog.
      *
-     * @var     \Zend\Service\Technorati\Weblog
+     * @var     Weblog
      * @access  protected
      */
     protected $_weblog;
@@ -77,9 +77,9 @@ class BlogInfoResult
      *
      * @param   DomDocument $dom the ReST fragment for this object
      */
-    public function __construct(\DomDocument $dom)
+    public function __construct(DomDocument $dom)
     {
-        $xpath = new \DOMXPath($dom);
+        $xpath = new DOMXPath($dom);
         $result = $xpath->query('//result/weblog');
         if ($result->length == 1) {
             $this->_weblog = new Weblog($result->item(0));
@@ -115,7 +115,7 @@ class BlogInfoResult
     /**
      * Returns the weblog URL.
      *
-     * @return  \Zend\Uri\Http
+     * @return  Uri\Http
      */
     public function getUrl() {
         return $this->_url;
@@ -124,7 +124,7 @@ class BlogInfoResult
     /**
      * Returns the weblog.
      *
-     * @return  \Zend\Service\Technorati\Weblog
+     * @return  Weblog
      */
     public function getWeblog() {
         return $this->_weblog;

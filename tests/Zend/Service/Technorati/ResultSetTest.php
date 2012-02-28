@@ -23,17 +23,18 @@
  * @namespace
  */
 namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see \Zend\Service\Technorati\ResultSet
+ * @see Technorati\ResultSet
  */
 
 /**
- * @see \Zend\Service\Technorati\SearchResultSet
+ * @see Technorati\SearchResultSet
  */
 
 
@@ -60,7 +61,7 @@ class ResultSetTest extends TestCase
     {
         $this->ref = new \ReflectionClass('Zend\Service\Technorati\ResultSet');
         $this->dom = self::getTestFileContentAsDom('TestSearchResultSet.xml');
-        $this->object = new \Zend\Service\Technorati\SearchResultSet($this->dom);
+        $this->object = new Technorati\SearchResultSet($this->dom);
         $this->objectRef = new \ReflectionObject($this->object);
     }
 

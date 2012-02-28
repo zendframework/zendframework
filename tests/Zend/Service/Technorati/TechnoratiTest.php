@@ -619,7 +619,7 @@ class TechnoratiTest extends TestCase
      * Do not execute any file validation. Please use this method carefully.
      *
      * @params  string $file
-     * @return  \Zend\Service\Technorati\Technorati
+     * @return  Technorati\Technorati
      */
     private function _setResponseFromFile($file)
     {

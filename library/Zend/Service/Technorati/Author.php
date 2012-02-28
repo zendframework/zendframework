@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,13 +24,15 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomElement,
+    \DOMXPath,
+    Zend\Uri;
+
 /**
  * Represents a weblog Author object. It usually belongs to a Technorati account.
  *
- * @uses       DOMXPath
- * @uses       \Zend\Service\Technorati\Utils
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -80,7 +82,7 @@ class Author
     /**
      * Technorati account thumbnail picture URL, if any
      *
-     * @var     null|\Zend\Uri\Http
+     * @var     null|Uri\Http
      * @access  protected
      */
     protected $_thumbnailPicture;
@@ -91,9 +93,9 @@ class Author
      *
      * @param   DomElement $dom the ReST fragment for this object
      */
-    public function __construct(\DomElement $dom)
+    public function __construct(DomElement $dom)
     {
-        $xpath = new \DOMXPath($dom->ownerDocument);
+        $xpath = new DOMXPath($dom->ownerDocument);
 
         $result = $xpath->query('./firstname/text()', $dom);
         if ($result->length == 1) $this->setFirstName($result->item(0)->data);
@@ -163,7 +165,7 @@ class Author
     /**
      * Returns Technorati account thumbnail picture.
      *
-     * @return  null|\Zend\Uri\Http  Technorati account thumbnail picture
+     * @return  null|Uri\Http  Technorati account thumbnail picture
      */
     public function getThumbnailPicture() {
         return $this->_thumbnailPicture;
@@ -174,7 +176,7 @@ class Author
      * Sets author first name.
      *
      * @param   string $input   first Name input value
-     * @return  \Zend\Service\Technorati\Author  $this instance
+     * @return  Author  $this instance
      */
     public function setFirstName($input) {
         $this->_firstName = (string) $input;
@@ -185,7 +187,7 @@ class Author
      * Sets author last name.
      *
      * @param   string $input   last Name input value
-     * @return  \Zend\Service\Technorati\Author  $this instance
+     * @return  Author  $this instance
      */
     public function setLastName($input) {
         $this->_lastName = (string) $input;
@@ -196,7 +198,7 @@ class Author
      * Sets Technorati account username.
      *
      * @param   string $input   username input value
-     * @return  \Zend\Service\Technorati\Author  $this instance
+     * @return  Author  $this instance
      */
     public function setUsername($input) {
         $this->_username = (string) $input;
@@ -207,7 +209,7 @@ class Author
      * Sets Technorati account biography.
      *
      * @param   string $input   biography input value
-     * @return  \Zend\Service\Technorati\Author  $this instance
+     * @return  Author  $this instance
      */
     public function setBio($input) {
         $this->_bio = (string) $input;
@@ -218,7 +220,7 @@ class Author
      * Sets Technorati account description.
      *
      * @param   string $input   description input value
-     * @return  \Zend\Service\Technorati\Author  $this instance
+     * @return  Author  $this instance
      */
     public function setDescription($input) {
         $this->_description = (string) $input;
@@ -228,10 +230,10 @@ class Author
     /**
      * Sets Technorati account thumbnail picture.
      *
-     * @param   string|\Zend\Uri\Http $input thumbnail picture URI
-     * @return  \Zend\Service\Technorati\Author  $this instance
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if $input is an invalid URI
-     *          (via Zend_Service_Technorati_Utils::normalizeUriHttp)
+     * @param   string|Uri\Http $input thumbnail picture URI
+     * @return  Author  $this instance
+     * @throws  Exception\RuntimeException if $input is an invalid URI
+     *          (via Utils::normalizeUriHttp)
      */
     public function setThumbnailPicture($input) {
         $this->_thumbnailPicture = Utils::normalizeUriHttp($input);

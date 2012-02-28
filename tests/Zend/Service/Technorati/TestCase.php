@@ -48,7 +48,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         try {
             $object = $reflection->newInstanceArgs($args);
             $this->assertInstanceOf($className, $object);
-        } catch (\Zend\Service\Technorati\Exception\RuntimeException $e) {
+        } catch (Technorati\Exception\RuntimeException $e) {
             $this->fail("Exception " . $e->getMessage() . " thrown");
         }
     }

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -23,29 +23,19 @@
  * @namespace
  */
 namespace Zend\Service\Technorati;
-use Zend\Http\Response;
+use Zend\Http\Response,
+    Zend\Rest\Client\RestClient,
+    \DomDocument;
 
 /**
- * Zend_Service_Technorati provides an easy, intuitive and object-oriented interface
+ * Zend\Service\Technorati provides an easy, intuitive and object-oriented interface
  * for using the Technorati API.
  *
  * It provides access to all available Technorati API queries
  * and returns the original XML response as a friendly PHP object.
  *
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Rest_Client
- * @uses       \Zend\Service\Technorati\BlogInfoResult
- * @uses       \Zend\Service\Technorati\CosmosResultSet
- * @uses       \Zend\Service\Technorati\DailyCountsResultSet
- * @uses       \Zend\Service\Technorati\Exception\RuntimeException
- * @uses       \Zend\Service\Technorati\GetInfoResult
- * @uses       \Zend\Service\Technorati\KeyInfoResult
- * @uses       \Zend\Service\Technorati\SearchResultSet
- * @uses       \Zend\Service\Technorati\TagResultSet
- * @uses       \Zend\Service\Technorati\TagsResultSet
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -83,16 +73,16 @@ class Technorati
     protected $_apiKey;
 
     /**
-     * Zend_Rest_Client instance
+     * RestClient instance
      *
-     * @var     Zend_Rest_Client
+     * @var     RestClient
      * @access  protected
      */
     protected $_restClient;
 
 
     /**
-     * Constructs a new Zend_Service_Technorati instance
+     * Constructs a new Zend\Service\Technorati instance
      * and setup character encoding.
      *
      * @param  string $apiKey  Your Technorati API key
@@ -149,8 +139,8 @@ class Technorati
      *
      * @param   string $url     the URL you are searching for. Prefixes http:// and www. are optional.
      * @param   array $options  additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\CosmosResultSet
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  CosmosResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/cosmos.html Technorati API: Cosmos Query reference
      */
     public function cosmos($url, $options = null)
@@ -211,8 +201,8 @@ class Technorati
      *
      * @param   string $query   the words you are searching for.
      * @param   array $options  additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\SearchResultSet
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  SearchResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/search.html Technorati API: Search Query reference
      */
     public function search($query, $options = null)
@@ -254,8 +244,8 @@ class Technorati
      *
      * @param   string $tag     the tag term you are searching posts for.
      * @param   array $options  additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\TagResultSet
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  TagResultSet
+     * @throws  Exception\RuntimeException
      *  @link    http://technorati.com/developers/api/tag.html Technorati API: Tag Query reference
      */
     public function tag($tag, $options = null)
@@ -288,8 +278,8 @@ class Technorati
      *
      * @param   string $q       the keyword query
      * @param   array $options  additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\DailyCountsResultSet
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  DailyCountsResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/dailycounts.html Technorati API: DailyCounts Query reference
      */
     public function dailyCounts($query, $options = null)
@@ -323,8 +313,8 @@ class Technorati
      *      The default start value is 1.
      *
      * @param   array $options  additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\TagsResultSet
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  TagsResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/toptags.html Technorati API: TopTags Query reference
      */
     public function topTags($options = null)
@@ -348,8 +338,8 @@ class Technorati
      * @param   string $url     the URL you are searching for. Prefixes http:// and www. are optional.
      *                          The URL must be recognized by Technorati as a blog.
      * @param   array $options  additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\BlogInfoResult
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  BlogInfoResult
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/bloginfo.html Technorati API: BlogInfo Query reference
      */
     public function blogInfo($url, $options = null)
@@ -385,8 +375,8 @@ class Technorati
      * @param   string $url     the URL you are searching for. Prefixes http:// and www. are optional.
      *                          The URL must be recognized by Technorati as a blog.
      * @param   array $options  additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\TagsResultSet
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  TagsResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/blogposttags.html Technorati API: BlogPostTags Query reference
      */
     public function blogPostTags($url, $options = null)
@@ -418,8 +408,8 @@ class Technorati
      *
      * @param   string $username    the Technorati user name you are searching for
      * @param   array $options      additional parameters to refine your query
-     * @return  \Zend\Service\Technorati\GetInfoResult
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  GetInfoResult
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/getinfo.html Technorati API: GetInfo reference
      */
     public function getInfo($username, $options = null)
@@ -442,8 +432,8 @@ class Technorati
      *
      * A day is defined as 00:00-23:59 Pacific time.
      *
-     * @return  \Zend\Service\Technorati\KeyInfoResult
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @return  KeyInfoResult
+     * @throws  Exception\RuntimeException
      * @link    http://developers.technorati.com/wiki/KeyInfo Technorati API: Key Info reference
      */
     public function keyInfo()
@@ -475,14 +465,14 @@ class Technorati
      * Returns a reference to the REST client object in use.
      *
      * If the reference hasn't being inizialized yet,
-     * then a new Zend_Rest_Client instance is created.
+     * then a new Client instance is created.
      *
-     * @return Zend_Rest_Client
+     * @return RestClient
      */
     public function getRestClient()
     {
         if ($this->_restClient === null) {
-            $this->_restClient = new \Zend\Rest\Client\RestClient(self::API_URI_BASE);
+            $this->_restClient = new RestClient(self::API_URI_BASE);
         }
 
         return $this->_restClient;
@@ -494,7 +484,7 @@ class Technorati
      * Be aware that this function doesn't validate the key.
      * The key is validated as soon as the first API request is sent.
      * If the key is invalid, the API request method will throw
-     * a Zend_Service_Technorati_Exception exception with Invalid Key message.
+     * a Exception exception with Invalid Key message.
      *
      * @param   string $key     Technorati API Key
      * @return  void
@@ -512,7 +502,7 @@ class Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateCosmos(array $options)
@@ -549,7 +539,7 @@ class Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateSearch(array $options)
@@ -578,7 +568,7 @@ class Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateTag(array $options)
@@ -608,7 +598,7 @@ class Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateDailyCounts(array $options)
@@ -638,7 +628,7 @@ class Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateGetInfo(array $options)
@@ -659,7 +649,7 @@ class Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateTopTags(array $options)
@@ -682,7 +672,7 @@ class Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateBlogInfo(array $options)
@@ -703,7 +693,7 @@ class Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateBlogPostTags(array $options)
@@ -730,7 +720,7 @@ class Technorati
      * @param   array $options
      * @param   array $array    array of valid options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateInArrayOption($name, $options, array $array)
@@ -746,7 +736,7 @@ class Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _validateMandatoryOption($name, $options)
@@ -777,8 +767,8 @@ class Technorati
      *
      * @param   string $path
      * @param   array $options
-     * @return  \Zend\Http\Response
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException on failure
+     * @return  Response
+     * @throws  Exception\RuntimeException on failure
      * @access  protected
      */
     protected function _makeRequest($path, $options = array())
@@ -804,11 +794,11 @@ class Technorati
 
     /**
      * Checks whether 'format' option value is valid.
-     * Be aware that Zend_Service_Technorati supports only XML as format value.
+     * Be aware that Zend\Service\Technorati supports only XML as format value.
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if 'format' value != XML
+     * @throws  Exception\RuntimeException if 'format' value != XML
      * @access  protected
      */
     protected function _validateOptionFormat(array $options)
@@ -816,7 +806,7 @@ class Technorati
         if (isset($options['format']) && $options['format'] != 'xml') {
             throw new Exception\RuntimeException(
                         "Invalid value '" . $options['format'] . "' for 'format' option. " .
-                        "Zend_Service_Technorati supports only 'xml'");
+                        "Zend\Service\Technorati supports only 'xml'");
         }
     }
 
@@ -827,7 +817,7 @@ class Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if 'limit' value is invalid
+     * @throws  Exception\RuntimeException if 'limit' value is invalid
      * @access  protected
      */
     protected function _validateOptionLimit(array $options)
@@ -848,7 +838,7 @@ class Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if 'start' value is invalid
+     * @throws  Exception\RuntimeException if 'start' value is invalid
      * @access  protected
      */
     protected function _validateOptionStart(array $options)
@@ -868,9 +858,9 @@ class Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if 'url' value is invalid
+     * @throws  Exception\RuntimeException if 'url' value is invalid
      * @access  protected
-     * @todo    support for Zend_Uri_Http
+     * @todo    support for Zend\Uri\Http
      */
     protected function _validateOptionUrl(array $options)
     {
@@ -882,11 +872,11 @@ class Technorati
      *
      * @param   DomDocument $dom    the XML response as a DOM document
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/error.html Technorati API: Error response
      * @access  protected
      */
-    protected static function _checkErrors(\DomDocument $dom)
+    protected static function _checkErrors(DomDocument $dom)
     {
         $xpath = new \DOMXPath($dom);
 
@@ -900,9 +890,9 @@ class Technorati
     /**
      * Converts $response body to a DOM object and checks it.
      *
-     * @param   \Zend\Http\Response $response
+     * @param   Response $response
      * @return  DOMDocument
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException if response content contains an error message
+     * @throws  Exception\RuntimeException if response content contains an error message
      * @access  protected
      */
     protected function _convertResponseAndCheckContent(Response $response)
@@ -916,9 +906,9 @@ class Technorati
     /**
      * Checks ReST response for errors.
      *
-     * @param   \Zend\Http\Response $response    the ReST response
+     * @param   Response $response    the ReST response
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected static function _checkResponse(Response $response)
@@ -936,7 +926,7 @@ class Technorati
      * @param   array $options        user options
      * @param   array $validOptions   valid options
      * @return  void
-     * @throws  \Zend\Service\Technorati\Exception\RuntimeException
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
     protected function _compareOptions(array $options, array $validOptions)

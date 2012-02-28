@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,15 +24,16 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomElement,
+    Zend\Date\Date as ZendDate;
+
 /**
  * Represents a single Technorati DailyCounts query result object.
  * It is never returned as a standalone object,
- * but it always belongs to a valid Zend_Service_Technorati_DailyCountsResultSet object.
+ * but it always belongs to a valid DailyCountsResultSet object.
  *
- * @uses       Zend_Date
- * @uses       \Zend\Service\Technorati\Result
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -42,7 +43,7 @@ class DailyCountsResult extends Result
     /**
      * Date of count.
      *
-     * @var     Zend_Date
+     * @var     ZendDate
      * @access  protected
      */
     protected $_date;
@@ -61,21 +62,21 @@ class DailyCountsResult extends Result
      *
      * @param   DomElement $dom the ReST fragment for this object
      */
-    public function __construct(\DomElement $dom)
+    public function __construct(DomElement $dom)
     {
         $this->_fields = array( '_date'   => 'date',
                                 '_count'  => 'count');
         parent::__construct($dom);
 
         // filter fields
-        $this->_date  = new \Zend\Date\Date(strtotime($this->_date));
+        $this->_date  = new ZendDate(strtotime($this->_date));
         $this->_count = (int) $this->_count;
     }
 
     /**
      * Returns the date of count.
      *
-     * @return  Zend_Date
+     * @return  ZendDate
      */
     public function getDate() {
         return $this->_date;

@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,13 +24,13 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomDocument;
+
 /**
  * Represents a Technorati Tag query result set.
  *
- * @uses       \Zend\Service\Technorati\ResultSet
- * @uses       \Zend\Service\Technorati\TagResult
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -59,7 +59,7 @@ class TagResultSet extends ResultSet
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(\DomDocument $dom, $options = array())
+    public function __construct(DomDocument $dom, $options = array())
     {
         parent::__construct($dom, $options);
 
@@ -94,9 +94,9 @@ class TagResultSet extends ResultSet
     }
 
     /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
+     * Implements ResultSet::current().
      *
-     * @return \Zend\Service\Technorati\TagResult current result
+     * @return TagResult current result
      */
     public function current()
     {

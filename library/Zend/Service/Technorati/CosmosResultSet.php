@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,15 +24,14 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomDocument,
+    Zend\Uri;
+
 /**
  * Represents a Technorati Cosmos query result set.
  *
- * @uses       \Zend\Service\Technorati\CosmosResult
- * @uses       \Zend\Service\Technorati\ResultSet
- * @uses       \Zend\Service\Technorati\Utils
- * @uses       \Zend\Service\Technorati\Weblog
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -42,7 +41,7 @@ class CosmosResultSet extends ResultSet
     /**
      * Technorati weblog url, if queried URL is a valid weblog.
      *
-     * @var     \Zend\Uri\Http
+     * @var     Uri\Http
      * @access  protected
      */
     protected $_url;
@@ -50,7 +49,7 @@ class CosmosResultSet extends ResultSet
     /**
      * Technorati weblog, if queried URL is a valid weblog.
      *
-     * @var     \Zend\Service\Technorati\Weblog
+     * @var     Weblog
      * @access  protected
      */
     protected $_weblog;
@@ -77,7 +76,7 @@ class CosmosResultSet extends ResultSet
      * @param   DomDocument $dom    the ReST fragment for this object
      * @param   array $options      query options as associative array
      */
-    public function __construct(\DomDocument $dom, $options = array())
+    public function __construct(DomDocument $dom, $options = array())
     {
         parent::__construct($dom, $options);
 
@@ -122,7 +121,7 @@ class CosmosResultSet extends ResultSet
     /**
      * Returns the weblog URL.
      *
-     * @return  \Zend\Uri\Http
+     * @return  Uri\Http
      */
     public function getUrl() {
         return $this->_url;
@@ -131,7 +130,7 @@ class CosmosResultSet extends ResultSet
     /**
      * Returns the weblog.
      *
-     * @return  \Zend\Service\Technorati\Weblog
+     * @return  Weblog
      */
     public function getWeblog() {
         return $this->_weblog;
@@ -158,9 +157,9 @@ class CosmosResultSet extends ResultSet
     }
 
     /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
+     * Implements ResultSet::current().
      *
-     * @return \Zend\Service\Technorati\CosmosResult current result
+     * @return CosmosResult current result
      */
     public function current()
     {

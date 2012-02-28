@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -24,15 +24,16 @@
  */
 namespace Zend\Service\Technorati;
 
+use \DomElement,
+    \DOMXPath;
+
 /**
  * Represents a single Technorati Search query result object.
  * It is never returned as a standalone object,
- * but it always belongs to a valid Zend_Service_Technorati_SearchResultSet object.
+ * but it always belongs to a valid SearchResultSet object.
  *
- * @uses       DOMXPath
- * @uses       \Zend\Service\Technorati\Weblog
  * @category   Zend
- * @package    Zend_Service
+ * @package    Zend\Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -72,9 +73,9 @@ abstract class Result
      *
      * @param   DomElement $result  the ReST fragment for this object
      */
-    public function __construct(\DomElement $dom)
+    public function __construct(DomElement $dom)
     {
-        $this->_xpath = new \DOMXPath($dom->ownerDocument);
+        $this->_xpath = new DOMXPath($dom->ownerDocument);
         $this->_dom = $dom;
 
         // default fields for all search results

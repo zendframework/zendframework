@@ -641,8 +641,10 @@ abstract class AbstractHelper extends View\Helper\HtmlElement implements Helper
             'target' => $page->getTarget()
         );
 
+        $escaper = $this->view->plugin('escape');
+
         return '<a' . $this->_htmlAttribs($attribs) . '>'
-             . $this->view->vars()->escape($label)
+             . $escaper($label)
              . '</a>';
     }
 

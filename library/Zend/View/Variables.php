@@ -39,23 +39,6 @@ use ArrayObject;
 class Variables extends ArrayObject
 {
     /**
-     * @var string Default encoding (used for escaping)
-     */
-    protected $encoding = 'UTF-8';
-
-    /**
-     * @var callback
-     */
-    protected $escapeCallback;
-
-    /**
-     * Raw values
-     *
-     * @var array
-     */
-    protected $rawValues = array();
-
-    /**
      * Strict variables flag; when on, undefined variables accessed in the view
      * scripts will trigger notices
      *
@@ -73,16 +56,11 @@ class Variables extends ArrayObject
     public function __construct(array $variables = array(), array $options = array()) 
     {
         parent::__construct(
-            array(), 
+            $variables, 
             ArrayObject::STD_PROP_LIST|ArrayObject::ARRAY_AS_PROPS, 
             'ArrayIterator'
         );
-        
-        // Load each variable into the object using offsetSet() so that they
-        // are escaped correctly.
-        foreach ($variables as $key => $value) {
-            $this->$key = $value;
-        }
+
         $this->setOptions($options);
     }
 
@@ -99,12 +77,6 @@ class Variables extends ArrayObject
                 case 'strict_vars':
                     $this->setStrictVars($value);
                     break;
-                case 'encoding':
-                    $this->setEncoding($value);
-                    break;
-                case 'escape':
-                    $this->setEscapeCallback($value);
-                    break;
                 default:
                     // Unknown options are considered variables
                     $this[$key] = $value;
@@ -112,28 +84,6 @@ class Variables extends ArrayObject
             }
         }
         return $this;
-    }
-
-    /**
-     * Set encoding (for escaping)
-     * 
-     * @param  string $encoding 
-     * @return Variables
-     */
-    public function setEncoding($encoding)
-    {
-        $this->encoding = (string) $encoding;
-        return $this;
-    }
-
-    /**
-     * Retrieve encoding
-     * 
-     * @return string
-     */
-    public function getEncoding()
-    {
-        return $this->encoding;
     }
 
     /**
@@ -156,55 +106,6 @@ class Variables extends ArrayObject
     public function isStrict()
     {
         return $this->strictVars;
-    }
-
-    /**
-     * Set escape callback mechanism
-     * 
-     * @param  callback $spec 
-     * @return Variables
-     * @throws Exception\InvalidArgumentException
-     */
-    public function setEscapeCallback($spec)
-    {
-        if (!is_callable($spec)) {
-            throw new Exception\InvalidArgumentException('Escape callback must be callable');
-        }
-        $this->escapeCallback = $spec;
-    }
-
-    /**
-     * Get callback used for escaping variables
-     * 
-     * @return callback
-     */
-    public function getEscapeCallback()
-    {
-        if (null === $this->escapeCallback) {
-            $view = $this;
-            $this->setEscapeCallback(function($value) use ($view) {
-                return htmlspecialchars($value, ENT_COMPAT, $view->getEncoding());
-            });
-        }
-        return $this->escapeCallback;
-    }
-
-    /**
-     * Escape a value
-     *
-     * If the value is not a string, it is immediately returned. Otherwise, it
-     * is passed to the registered escape callback.
-     * 
-     * @param  string $value 
-     * @return string
-     */
-    public function escape($value)
-    {
-        if (!is_string($value)) {
-            return $value;
-        }
-        $escaper = $this->getEscapeCallback();
-        return call_user_func($escaper, $value);
     }
 
     /**
@@ -237,36 +138,6 @@ class Variables extends ArrayObject
     }
 
     /**
-     * Sets the value of the specified key
-     *
-     * If the value is a string, passes it to the escape mechanism before 
-     * storage. The raw value may be obtained by calling getRawValue().
-     * 
-     * @param  mixed $key 
-     * @param  mixed $value 
-     * @return void
-     */
-    public function offsetSet($key, $value)
-    {
-        $this->rawValues[$key] = $value;
-        return parent::offsetSet($key, $this->escape($value));
-    }
-
-    /**
-     * Set a value that should never be escaped
-     * 
-     * @param  mixed $key 
-     * @param  mixed $value 
-     * @return Variables
-     */
-    public function setCleanValue($key, $value)
-    {
-        $this->rawValues[$key] = $value;
-        parent::offsetSet($key, $value);
-        return $this;
-    }
-
-    /**
      * Get the variable value
      *
      * If the value has not been defined, a null value will be returned; if 
@@ -290,47 +161,12 @@ class Variables extends ArrayObject
 
         $return = parent::offsetGet($key);
 
-        // If we have a closure/functor, invoke it, and ensure the return value 
-        // is escaped.
+        // If we have a closure/functor, invoke it, and return its return value
         if (is_object($return) && is_callable($return)) {
             $return = call_user_func($return);
-            return $this->escape($return);
         }
 
         return $return;
-    }
-
-    /**
-     * Get the raw value associated with a variable key
-     *
-     * If the value has not been defined, a null value will be returned; if 
-     * strict vars on in place, a notice will also be raised.
-     * 
-     * @param  mixed $key 
-     * @return mixed
-     */
-    public function getRawValue($key)
-    {
-        if (!$this->offsetExists($key)) {
-            if ($this->isStrict()) {
-                trigger_error(sprintf(
-                    'View variable "%s" does not exist', $key
-                ), E_USER_NOTICE);
-            }
-            return null;
-        }
-
-        return $this->rawValues[$key];
-    }
-
-    /**
-     * Get all raw values
-     * 
-     * @return array
-     */
-    public function getRawValues()
-    {
-        return $this->rawValues;
     }
 
     /**
@@ -341,6 +177,5 @@ class Variables extends ArrayObject
     public function clear()
     {
         $this->exchangeArray(array());
-        $this->rawValues = array();
     }
 }

@@ -36,7 +36,10 @@ use ArrayAccess,
 /**
  * Abstract class for Zend_View to help enforce private constructs.
  *
- * @todo       Allow specifying string names for broker, filter chain, variables
+ * Note: all private variables in this class are prefixed with "__". This is to
+ * mark them as part of the internal implementation, and thus prevent conflict 
+ * with variables injected into the renderer.
+ *
  * @category   Zend
  * @package    Zend_View
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -47,61 +50,61 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
     /**
      * @var string Rendered content
      */
-    private $content = '';
+    private $__content = '';
 
     /**
      * @var bool Whether or not to render trees of view models
      */
-    private $renderTrees = false;
+    private $__renderTrees = false;
 
     /**
      * Template being rendered
      * 
      * @var null|string
      */
-    private $template = null;
+    private $__template = null;
 
     /**
      * Queue of templates to render
      * @var array
      */
-    private $templates = array();
+    private $__templates = array();
 
     /**
      * Template resolver
      *
      * @var Resolver
      */
-    private $templateResolver;
+    private $__templateResolver;
 
     /**
      * Script file name to execute
      *
      * @var string
      */
-    private $file = null;
+    private $__file = null;
 
     /**
      * Helper broker
      *
      * @var HelperBroker
      */
-    private $helperBroker;
+    private $__helperBroker;
 
     /**
      * @var Zend\Filter\FilterChain
      */
-    private $filterChain;
+    private $__filterChain;
 
     /**
      * @var ArrayAccess|array ArrayAccess or associative array representing available variables
      */
-    private $vars;
+    private $__vars;
 
     /**
      * @var array Temporary variable stack; used when variables passed to render()
      */
-    private $varsCache = array();
+    private $__varsCache = array();
 
     /**
      * Constructor.
@@ -151,7 +154,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function setResolver(Resolver $resolver)
     {
-        $this->templateResolver = $resolver;
+        $this->__templateResolver = $resolver;
         return $this;
     }
 
@@ -163,15 +166,15 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function resolver($name = null)
     {
-        if (null === $this->templateResolver) {
+        if (null === $this->__templateResolver) {
             $this->setResolver(new Resolver\TemplatePathStack());
         }
 
         if (null !== $name) {
-            return $this->templateResolver->resolve($name, $this);
+            return $this->__templateResolver->resolve($name, $this);
         }
 
-        return $this->templateResolver;
+        return $this->__templateResolver;
     }
 
     /**
@@ -201,16 +204,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
             $variables = new Variables($variablesAsArray);
         }
 
-        $broker = $this->getBroker();
-        $loader = $broker->getClassLoader();
-        if ($loader->isLoaded('escape')) {
-            $escaper = $broker->load('escape');
-            if (is_callable($escaper)) {
-                $variables->setEscapeCallback($escaper);
-            }
-        }
-        
-        $this->vars = $variables;
+        $this->__vars = $variables;
         return $this;
     }
 
@@ -222,14 +216,14 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function vars($key = null)
     {
-        if (null === $this->vars) {
+        if (null === $this->__vars) {
             $this->setVars(new Variables());
         }
 
         if (null === $key) {
-            return $this->vars;
+            return $this->__vars;
         }
-        return $this->vars[$key];
+        return $this->__vars[$key];
     }
 
     /**
@@ -240,33 +234,11 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function get($key)
     {
-        if (null === $this->vars) {
+        if (null === $this->__vars) {
             $this->setVars(new Variables());
         }
 
-        return $this->vars[$key];
-    }
-
-    /**
-     * Get a single raw (unescaped) value
-     * 
-     * @param  mixed $key 
-     * @return mixed
-     */
-    public function raw($key)
-    {
-        if (null === $this->vars) {
-            $this->setVars(new Variables());
-        }
-
-        if (!$this->vars instanceof Variables) {
-            if (isset($this->vars[$key])) {
-                return $this->vars[$key];
-            }
-            return null;
-        }
-
-        return $this->vars->getRawValue($key);
+        return $this->__vars[$key];
     }
 
     /**
@@ -346,7 +318,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
             ));
         }
         $broker->setView($this);
-        $this->helperBroker = $broker;
+        $this->__helperBroker = $broker;
     }
 
     /**
@@ -356,10 +328,10 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function getBroker()
     {
-        if (null === $this->helperBroker) {
+        if (null === $this->__helperBroker) {
             $this->setBroker(new HelperBroker());
         }
-        return $this->helperBroker;
+        return $this->__helperBroker;
     }
     
     /**
@@ -404,7 +376,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function setFilterChain(FilterChain $filters)
     {
-        $this->filterChain = $filters;
+        $this->__filterChain = $filters;
         return $this;
     }
 
@@ -415,10 +387,10 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function getFilterChain()
     {
-        if (null === $this->filterChain) {
+        if (null === $this->__filterChain) {
             $this->setFilterChain(new FilterChain());
         }
-        return $this->filterChain;
+        return $this->__filterChain;
     }
 
     /**
@@ -470,7 +442,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
         $this->addTemplate($nameOrModel);
         unset($nameOrModel); // remove $name from local scope
 
-        $this->varsCache[] = $this->vars();
+        $this->__varsCache[] = $this->vars();
 
         if (null !== $values) {
             $this->setVars($values);
@@ -486,23 +458,23 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
         extract($__vars);
         unset($__vars); // remove $__vars from local scope
 
-        while ($this->template = array_pop($this->templates)) {
-            $this->file = $this->resolver($this->template);
-            if (!$this->file) {
+        while ($this->__template = array_pop($this->__templates)) {
+            $this->__file = $this->resolver($this->__template);
+            if (!$this->__file) {
                 throw new Exception\RuntimeException(sprintf(
                     '%s: Unable to render template "%s"; resolver could not resolve to a file',
                     __METHOD__,
-                    $this->template
+                    $this->__template
                 ));
             }
             ob_start();
-            include $this->file;
-            $this->content = ob_get_clean();
+            include $this->__file;
+            $this->__content = ob_get_clean();
         }
 
-        $this->setVars(array_pop($this->varsCache));
+        $this->setVars(array_pop($this->__varsCache));
 
-        return $this->getFilterChain()->filter($this->content); // filter output
+        return $this->getFilterChain()->filter($this->__content); // filter output
     }
 
     /**
@@ -518,7 +490,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function setCanRenderTrees($renderTrees)
     {
-        $this->renderTrees = (bool) $renderTrees;
+        $this->__renderTrees = (bool) $renderTrees;
         return $this;
     }
 
@@ -529,7 +501,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function canRenderTrees()
     {
-        return $this->renderTrees;
+        return $this->__renderTrees;
     }
 
     /**
@@ -540,7 +512,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function addTemplate($template)
     {
-        $this->templates[] = $template;
+        $this->__templates[] = $template;
         return $this;
     }
 
@@ -551,7 +523,7 @@ class PhpRenderer implements Renderer, Pluggable, TreeRendererInterface
      */
     public function __clone()
     {
-        $this->vars = clone $this->vars();
+        $this->__vars = clone $this->vars();
     }
 
 }

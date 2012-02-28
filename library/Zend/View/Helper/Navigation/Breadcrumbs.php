@@ -193,7 +193,8 @@ class Breadcrumbs extends AbstractHelper
             if ($this->getUseTranslator() && $t = $this->getTranslator()) {
                 $html = $t->translate($html);
             }
-            $html = $this->view->vars()->escape($html);
+            $escaper = $this->view->plugin('escape');
+            $html    = $escaper($html);
         }
 
         // walk back to root

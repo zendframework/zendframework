@@ -55,15 +55,15 @@ class ExceptionStrategyTest extends TestCase
         $this->assertTrue($this->strategy->displayExceptions());
     }
 
-    public function testErrorTemplateHasASaneDefault()
+    public function testExceptionTemplateHasASaneDefault()
     {
-        $this->assertEquals('error', $this->strategy->getErrorTemplate());
+        $this->assertEquals('error', $this->strategy->getExceptionTemplate());
     }
 
-    public function testErrorTemplateIsMutable()
+    public function testExceptionTemplateIsMutable()
     {
-        $this->strategy->setErrorTemplate('pages/error');
-        $this->assertEquals('pages/error', $this->strategy->getErrorTemplate());
+        $this->strategy->setExceptionTemplate('pages/error');
+        $this->assertEquals('pages/error', $this->strategy->getExceptionTemplate());
     }
 
     public function test404ApplicationErrorsResultInNoOperations()
@@ -100,7 +100,7 @@ class ExceptionStrategyTest extends TestCase
 
         $model = $event->getResult();
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $model);
-        $this->assertEquals($this->strategy->getErrorTemplate(), $model->getTemplate());
+        $this->assertEquals($this->strategy->getExceptionTemplate(), $model->getTemplate());
 
         $variables = $model->getVariables();
         $this->assertArrayHasKey('message', $variables);

@@ -136,9 +136,8 @@ class Twitter extends Client\RestClient
         if (isset($options['username'])) {
             $this->setUsername($options['username']);
         }
-        if (isset($options['accessToken'])
-
-        && $options['accessToken'] instanceof OAuth\Token\Access) {
+        if (isset($options['accessToken']) &&
+            $options['accessToken'] instanceof OAuth\Token\Access) {
             $this->setLocalHttpClient($options['accessToken']->getHttpClient($options));
         } else {
             $this->setLocalHttpClient(clone self::getHttpClient());

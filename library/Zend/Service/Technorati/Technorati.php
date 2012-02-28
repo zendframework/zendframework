@@ -20,31 +20,27 @@
  */
 
 /**
- * Zend_Service_Technorati provides an easy, intuitive and object-oriented interface
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+use Zend\Http\Response,
+    Zend\Rest\Client\RestClient,
+    \DomDocument;
+
+/**
+ * Zend\Service\Technorati provides an easy, intuitive and object-oriented interface
  * for using the Technorati API.
  *
  * It provides access to all available Technorati API queries
  * and returns the original XML response as a friendly PHP object.
  *
- * @uses       DOMDocument
- * @uses       DOMXPath
- * @uses       Zend_Rest_Client
- * @uses       Zend_Service_Technorati_BlogInfoResult
- * @uses       Zend_Service_Technorati_CosmosResultSet
- * @uses       Zend_Service_Technorati_DailyCountsResultSet
- * @uses       Zend_Service_Technorati_Exception
- * @uses       Zend_Service_Technorati_GetInfoResult
- * @uses       Zend_Service_Technorati_KeyInfoResult
- * @uses       Zend_Service_Technorati_SearchResultSet
- * @uses       Zend_Service_Technorati_TagResultSet
- * @uses       Zend_Service_Technorati_TagsResultSet
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati
+class Technorati
 {
     /** Base Technorati API URI */
     const API_URI_BASE = 'http://api.technorati.com';
@@ -74,19 +70,19 @@ class Zend_Service_Technorati
      * @var     string
      * @access  protected
      */
-    protected $_apiKey;
+    protected $apiKey;
 
     /**
-     * Zend_Rest_Client instance
+     * RestClient instance
      *
-     * @var     Zend_Rest_Client
+     * @var     RestClient
      * @access  protected
      */
-    protected $_restClient;
+    protected $restClient;
 
 
     /**
-     * Constructs a new Zend_Service_Technorati instance
+     * Constructs a new Zend\Service\Technorati instance
      * and setup character encoding.
      *
      * @param  string $apiKey  Your Technorati API key
@@ -97,7 +93,7 @@ class Zend_Service_Technorati
         iconv_set_encoding('input_encoding', 'UTF-8');
         iconv_set_encoding('internal_encoding', 'UTF-8');
 
-        $this->_apiKey = $apiKey;
+        $this->apiKey = $apiKey;
     }
 
 
@@ -143,8 +139,8 @@ class Zend_Service_Technorati
      *
      * @param   string $url     the URL you are searching for. Prefixes http:// and www. are optional.
      * @param   array $options  additional parameters to refine your query
-     * @return  Zend_Service_Technorati_CosmosResultSet
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  CosmosResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/cosmos.html Technorati API: Cosmos Query reference
      */
     public function cosmos($url, $options = null)
@@ -160,12 +156,12 @@ class Zend_Service_Technorati
 
         $options['url'] = $url;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateCosmos($options);
-        $response = $this->_makeRequest(self::API_PATH_COSMOS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateCosmos($options);
+        $response = $this->makeRequest(self::API_PATH_COSMOS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_CosmosResultSet($dom, $options);
+        return new CosmosResultSet($dom, $options);
     }
 
     /**
@@ -205,8 +201,8 @@ class Zend_Service_Technorati
      *
      * @param   string $query   the words you are searching for.
      * @param   array $options  additional parameters to refine your query
-     * @return  Zend_Service_Technorati_SearchResultSet
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  SearchResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/search.html Technorati API: Search Query reference
      */
     public function search($query, $options = null)
@@ -218,12 +214,12 @@ class Zend_Service_Technorati
 
         $options['query'] = $query;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateSearch($options);
-        $response = $this->_makeRequest(self::API_PATH_SEARCH, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateSearch($options);
+        $response = $this->makeRequest(self::API_PATH_SEARCH, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_SearchResultSet($dom, $options);
+        return new SearchResultSet($dom, $options);
     }
 
     /**
@@ -248,8 +244,8 @@ class Zend_Service_Technorati
      *
      * @param   string $tag     the tag term you are searching posts for.
      * @param   array $options  additional parameters to refine your query
-     * @return  Zend_Service_Technorati_TagResultSet
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  TagResultSet
+     * @throws  Exception\RuntimeException
      *  @link    http://technorati.com/developers/api/tag.html Technorati API: Tag Query reference
      */
     public function tag($tag, $options = null)
@@ -262,12 +258,12 @@ class Zend_Service_Technorati
 
         $options['tag'] = $tag;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateTag($options);
-        $response = $this->_makeRequest(self::API_PATH_TAG, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateTag($options);
+        $response = $this->makeRequest(self::API_PATH_TAG, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_TagResultSet($dom, $options);
+        return new TagResultSet($dom, $options);
     }
 
     /**
@@ -282,8 +278,8 @@ class Zend_Service_Technorati
      *
      * @param   string $q       the keyword query
      * @param   array $options  additional parameters to refine your query
-     * @return  Zend_Service_Technorati_DailyCountsResultSet
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  DailyCountsResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/dailycounts.html Technorati API: DailyCounts Query reference
      */
     public function dailyCounts($query, $options = null)
@@ -294,12 +290,12 @@ class Zend_Service_Technorati
 
         $options['q'] = $query;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateDailyCounts($options);
-        $response = $this->_makeRequest(self::API_PATH_DAILYCOUNTS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateDailyCounts($options);
+        $response = $this->makeRequest(self::API_PATH_DAILYCOUNTS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_DailyCountsResultSet($dom);
+        return new DailyCountsResultSet($dom);
     }
 
     /**
@@ -317,8 +313,8 @@ class Zend_Service_Technorati
      *      The default start value is 1.
      *
      * @param   array $options  additional parameters to refine your query
-     * @return  Zend_Service_Technorati_TagsResultSet
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  TagsResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/toptags.html Technorati API: TopTags Query reference
      */
     public function topTags($options = null)
@@ -328,12 +324,12 @@ class Zend_Service_Technorati
                                         'format'    => 'xml'
                                         );
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateTopTags($options);
-        $response = $this->_makeRequest(self::API_PATH_TOPTAGS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateTopTags($options);
+        $response = $this->makeRequest(self::API_PATH_TOPTAGS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_TagsResultSet($dom);
+        return new TagsResultSet($dom);
     }
 
     /**
@@ -342,8 +338,8 @@ class Zend_Service_Technorati
      * @param   string $url     the URL you are searching for. Prefixes http:// and www. are optional.
      *                          The URL must be recognized by Technorati as a blog.
      * @param   array $options  additional parameters to refine your query
-     * @return  Zend_Service_Technorati_BlogInfoResult
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  BlogInfoResult
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/bloginfo.html Technorati API: BlogInfo Query reference
      */
     public function blogInfo($url, $options = null)
@@ -353,12 +349,12 @@ class Zend_Service_Technorati
 
         $options['url'] = $url;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateBlogInfo($options);
-        $response = $this->_makeRequest(self::API_PATH_BLOGINFO, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateBlogInfo($options);
+        $response = $this->makeRequest(self::API_PATH_BLOGINFO, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_BlogInfoResult($dom);
+        return new BlogInfoResult($dom);
     }
 
     /**
@@ -379,8 +375,8 @@ class Zend_Service_Technorati
      * @param   string $url     the URL you are searching for. Prefixes http:// and www. are optional.
      *                          The URL must be recognized by Technorati as a blog.
      * @param   array $options  additional parameters to refine your query
-     * @return  Zend_Service_Technorati_TagsResultSet
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  TagsResultSet
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/blogposttags.html Technorati API: BlogPostTags Query reference
      */
     public function blogPostTags($url, $options = null)
@@ -392,12 +388,12 @@ class Zend_Service_Technorati
 
         $options['url'] = $url;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateBlogPostTags($options);
-        $response = $this->_makeRequest(self::API_PATH_BLOGPOSTTAGS, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateBlogPostTags($options);
+        $response = $this->makeRequest(self::API_PATH_BLOGPOSTTAGS, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_TagsResultSet($dom);
+        return new TagsResultSet($dom);
     }
 
     /**
@@ -412,8 +408,8 @@ class Zend_Service_Technorati
      *
      * @param   string $username    the Technorati user name you are searching for
      * @param   array $options      additional parameters to refine your query
-     * @return  Zend_Service_Technorati_GetInfoResult
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  GetInfoResult
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/getinfo.html Technorati API: GetInfo reference
      */
     public function getInfo($username, $options = null)
@@ -422,12 +418,12 @@ class Zend_Service_Technorati
 
         $options['username'] = $username;
 
-        $options = $this->_prepareOptions($options, $defaultOptions);
-        $this->_validateGetInfo($options);
-        $response = $this->_makeRequest(self::API_PATH_GETINFO, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $options = $this->prepareOptions($options, $defaultOptions);
+        $this->validateGetInfo($options);
+        $response = $this->makeRequest(self::API_PATH_GETINFO, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_GetInfoResult($dom);
+        return new GetInfoResult($dom);
     }
 
     /**
@@ -436,22 +432,22 @@ class Zend_Service_Technorati
      *
      * A day is defined as 00:00-23:59 Pacific time.
      *
-     * @return  Zend_Service_Technorati_KeyInfoResult
-     * @throws  Zend_Service_Technorati_Exception
+     * @return  KeyInfoResult
+     * @throws  Exception\RuntimeException
      * @link    http://developers.technorati.com/wiki/KeyInfo Technorati API: Key Info reference
      */
     public function keyInfo()
     {
         static $defaultOptions = array();
 
-        $options = $this->_prepareOptions(array(), $defaultOptions);
+        $options = $this->prepareOptions(array(), $defaultOptions);
         // you don't need to validate this request
         // because key is the only mandatory element
         // and it's already set in #_prepareOptions
-        $response = $this->_makeRequest(self::API_PATH_KEYINFO, $options);
-        $dom = $this->_convertResponseAndCheckContent($response);
+        $response = $this->makeRequest(self::API_PATH_KEYINFO, $options);
+        $dom = $this->convertResponseAndCheckContent($response);
 
-        return new Zend_Service_Technorati_KeyInfoResult($dom, $this->_apiKey);
+        return new KeyInfoResult($dom, $this->apiKey);
     }
 
 
@@ -462,24 +458,24 @@ class Zend_Service_Technorati
      */
     public function getApiKey()
     {
-        return $this->_apiKey;
+        return $this->apiKey;
     }
 
     /**
      * Returns a reference to the REST client object in use.
      *
      * If the reference hasn't being inizialized yet,
-     * then a new Zend_Rest_Client instance is created.
+     * then a new Client instance is created.
      *
-     * @return Zend_Rest_Client
+     * @return RestClient
      */
     public function getRestClient()
     {
-        if ($this->_restClient === null) {
-            $this->_restClient = new Zend_Rest_Client(self::API_URI_BASE);
+        if ($this->restClient === null) {
+            $this->restClient = new RestClient(self::API_URI_BASE);
         }
 
-        return $this->_restClient;
+        return $this->restClient;
     }
 
     /**
@@ -488,7 +484,7 @@ class Zend_Service_Technorati
      * Be aware that this function doesn't validate the key.
      * The key is validated as soon as the first API request is sent.
      * If the key is invalid, the API request method will throw
-     * a Zend_Service_Technorati_Exception exception with Invalid Key message.
+     * a Exception exception with Invalid Key message.
      *
      * @param   string $key     Technorati API Key
      * @return  void
@@ -496,7 +492,7 @@ class Zend_Service_Technorati
      */
     public function setApiKey($key)
     {
-        $this->_apiKey = $key;
+        $this->apiKey = $key;
         return $this;
     }
 
@@ -506,30 +502,30 @@ class Zend_Service_Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateCosmos(array $options)
+    protected function validateCosmos(array $options)
     {
         static $validOptions = array('key', 'url',
             'type', 'limit', 'start', 'current', 'claim', 'highlight', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate url (required)
-        $this->_validateOptionUrl($options);
+        $this->validateOptionUrl($options);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
         // Validate type (optional)
-        $this->_validateInArrayOption('type', $options, array('link', 'weblog'));
+        $this->validateInArrayOption('type', $options, array('link', 'weblog'));
         // Validate claim (optional)
-        $this->_validateOptionClaim($options);
+        $this->validateOptionClaim($options);
         // Validate highlight (optional)
-        $this->_validateIntegerOption('highlight', $options);
+        $this->validateIntegerOption('highlight', $options);
         // Validate current (optional)
         if (isset($options['current'])) {
             $tmp = (int) $options['current'];
@@ -543,28 +539,28 @@ class Zend_Service_Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateSearch(array $options)
+    protected function validateSearch(array $options)
     {
         static $validOptions = array('key', 'query',
             'language', 'authority', 'limit', 'start', 'claim', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate query (required)
-        $this->_validateMandatoryOption('query', $options);
+        $this->validateMandatoryOption('query', $options);
         // Validate authority (optional)
-        $this->_validateInArrayOption('authority', $options, array('n', 'a1', 'a4', 'a7'));
+        $this->validateInArrayOption('authority', $options, array('n', 'a1', 'a4', 'a7'));
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate claim (optional)
-        $this->_validateOptionClaim($options);
+        $this->validateOptionClaim($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -572,28 +568,28 @@ class Zend_Service_Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateTag(array $options)
+    protected function validateTag(array $options)
     {
         static $validOptions = array('key', 'tag',
             'limit', 'start', 'excerptsize', 'topexcerptsize', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate query (required)
-        $this->_validateMandatoryOption('tag', $options);
+        $this->validateMandatoryOption('tag', $options);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate excerptsize (optional)
-        $this->_validateIntegerOption('excerptsize', $options);
+        $this->validateIntegerOption('excerptsize', $options);
         // Validate excerptsize (optional)
-        $this->_validateIntegerOption('topexcerptsize', $options);
+        $this->validateIntegerOption('topexcerptsize', $options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
 
@@ -602,26 +598,26 @@ class Zend_Service_Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateDailyCounts(array $options)
+    protected function validateDailyCounts(array $options)
     {
         static $validOptions = array('key', 'q',
             'days', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate q (required)
-        $this->_validateMandatoryOption('q', $options);
+        $this->validateMandatoryOption('q', $options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
         // Validate days (optional)
         if (isset($options['days'])) {
             $options['days'] = (int) $options['days'];
             if ($options['days'] < self::PARAM_DAYS_MIN_VALUE ||
                 $options['days'] > self::PARAM_DAYS_MAX_VALUE) {
-                throw new Zend_Service_Technorati_Exception(
+                throw new Exception\RuntimeException(
                             "Invalid value '" . $options['days'] . "' for 'days' option");
             }
         }
@@ -632,20 +628,20 @@ class Zend_Service_Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateGetInfo(array $options)
+    protected function validateGetInfo(array $options)
     {
         static $validOptions = array('key', 'username',
             'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate username (required)
-        $this->_validateMandatoryOption('username', $options);
+        $this->validateMandatoryOption('username', $options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -653,22 +649,22 @@ class Zend_Service_Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateTopTags(array $options)
+    protected function validateTopTags(array $options)
     {
         static $validOptions = array('key',
             'limit', 'start', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -676,20 +672,20 @@ class Zend_Service_Technorati
      *
      * @param   array   $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateBlogInfo(array $options)
+    protected function validateBlogInfo(array $options)
     {
         static $validOptions = array('key', 'url',
             'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate url (required)
-        $this->_validateOptionUrl($options);
+        $this->validateOptionUrl($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -697,24 +693,24 @@ class Zend_Service_Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateBlogPostTags(array $options)
+    protected function validateBlogPostTags(array $options)
     {
         static $validOptions = array('key', 'url',
             'limit', 'start', 'format');
 
         // Validate keys in the $options array
-        $this->_compareOptions($options, $validOptions);
+        $this->compareOptions($options, $validOptions);
         // Validate url (required)
-        $this->_validateOptionUrl($options);
+        $this->validateOptionUrl($options);
         // Validate limit (optional)
-        $this->_validateOptionLimit($options);
+        $this->validateOptionLimit($options);
         // Validate start (optional)
-        $this->_validateOptionStart($options);
+        $this->validateOptionStart($options);
         // Validate format (optional)
-        $this->_validateOptionFormat($options);
+        $this->validateOptionFormat($options);
     }
 
     /**
@@ -724,13 +720,13 @@ class Zend_Service_Technorati
      * @param   array $options
      * @param   array $array    array of valid options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateInArrayOption($name, $options, array $array)
+    protected function validateInArrayOption($name, $options, array $array)
     {
         if (isset($options[$name]) && !in_array($options[$name], $array)) {
-            throw new Zend_Service_Technorati_Exception(
+            throw new Exception\RuntimeException(
                         "Invalid value '{$options[$name]}' for '$name' option");
         }
     }
@@ -740,13 +736,13 @@ class Zend_Service_Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _validateMandatoryOption($name, $options)
+    protected function validateMandatoryOption($name, $options)
     {
         if (!isset($options[$name]) || !trim($options[$name])) {
-            throw new Zend_Service_Technorati_Exception(
+            throw new Exception\RuntimeException(
                         "Empty value for '$name' option");
         }
     }
@@ -758,7 +754,7 @@ class Zend_Service_Technorati
      * @return  void
      * @access  protected
      */
-    protected function _validateIntegerOption($name, $options)
+    protected function validateIntegerOption($name, $options)
     {
         if (isset($options[$name])) {
             $options[$name] = (int) $options[$name];
@@ -771,16 +767,16 @@ class Zend_Service_Technorati
      *
      * @param   string $path
      * @param   array $options
-     * @return  Zend_Http_Response
-     * @throws  Zend_Service_Technorati_Exception on failure
+     * @return  Response
+     * @throws  Exception\RuntimeException on failure
      * @access  protected
      */
-    protected function _makeRequest($path, $options = array())
+    protected function makeRequest($path, $options = array())
     {
         $restClient = $this->getRestClient();
         $restClient->getHttpClient()->resetParameters();
         $response = $restClient->restGet($path, $options);
-        self::_checkResponse($response);
+        self::checkResponse($response);
         return $response;
     }
 
@@ -791,26 +787,26 @@ class Zend_Service_Technorati
      * @return  void
      * @access  protected
      */
-    protected function _validateOptionClaim(array $options)
+    protected function validateOptionClaim(array $options)
     {
-        $this->_validateIntegerOption('claim', $options);
+        $this->validateIntegerOption('claim', $options);
     }
 
     /**
      * Checks whether 'format' option value is valid.
-     * Be aware that Zend_Service_Technorati supports only XML as format value.
+     * Be aware that Zend\Service\Technorati supports only XML as format value.
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception if 'format' value != XML
+     * @throws  Exception\RuntimeException if 'format' value != XML
      * @access  protected
      */
-    protected function _validateOptionFormat(array $options)
+    protected function validateOptionFormat(array $options)
     {
         if (isset($options['format']) && $options['format'] != 'xml') {
-            throw new Zend_Service_Technorati_Exception(
+            throw new Exception\RuntimeException(
                         "Invalid value '" . $options['format'] . "' for 'format' option. " .
-                        "Zend_Service_Technorati supports only 'xml'");
+                        "Zend\Service\Technorati supports only 'xml'");
         }
     }
 
@@ -821,17 +817,17 @@ class Zend_Service_Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception if 'limit' value is invalid
+     * @throws  Exception\RuntimeException if 'limit' value is invalid
      * @access  protected
      */
-    protected function _validateOptionLimit(array $options)
+    protected function validateOptionLimit(array $options)
     {
         if (!isset($options['limit'])) return;
 
         $options['limit'] = (int) $options['limit'];
         if ($options['limit'] < self::PARAM_LIMIT_MIN_VALUE ||
             $options['limit'] > self::PARAM_LIMIT_MAX_VALUE) {
-            throw new Zend_Service_Technorati_Exception(
+            throw new Exception\RuntimeException(
                         "Invalid value '" . $options['limit'] . "' for 'limit' option");
         }
     }
@@ -842,16 +838,16 @@ class Zend_Service_Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception if 'start' value is invalid
+     * @throws  Exception\RuntimeException if 'start' value is invalid
      * @access  protected
      */
-    protected function _validateOptionStart(array $options)
+    protected function validateOptionStart(array $options)
     {
         if (!isset($options['start'])) return;
 
         $options['start'] = (int) $options['start'];
         if ($options['start'] < self::PARAM_START_MIN_VALUE) {
-            throw new Zend_Service_Technorati_Exception(
+            throw new Exception\RuntimeException(
                         "Invalid value '" . $options['start'] . "' for 'start' option");
         }
     }
@@ -862,13 +858,13 @@ class Zend_Service_Technorati
      *
      * @param   array $options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception if 'url' value is invalid
+     * @throws  Exception\RuntimeException if 'url' value is invalid
      * @access  protected
-     * @todo    support for Zend_Uri_Http
+     * @todo    support for Zend\Uri\Http
      */
-    protected function _validateOptionUrl(array $options)
+    protected function validateOptionUrl(array $options)
     {
-        $this->_validateMandatoryOption('url', $options);
+        $this->validateMandatoryOption('url', $options);
     }
 
     /**
@@ -876,49 +872,49 @@ class Zend_Service_Technorati
      *
      * @param   DomDocument $dom    the XML response as a DOM document
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @link    http://technorati.com/developers/api/error.html Technorati API: Error response
      * @access  protected
      */
-    protected static function _checkErrors(DomDocument $dom)
+    protected static function checkErrors(DomDocument $dom)
     {
-        $xpath = new DOMXPath($dom);
+        $xpath = new \DOMXPath($dom);
 
         $result = $xpath->query("/tapi/document/result/error");
         if ($result->length >= 1) {
             $error = $result->item(0)->nodeValue;
-            throw new Zend_Service_Technorati_Exception($error);
+            throw new Exception\RuntimeException($error);
         }
     }
 
     /**
      * Converts $response body to a DOM object and checks it.
      *
-     * @param   Zend_Http_Response $response
+     * @param   Response $response
      * @return  DOMDocument
-     * @throws  Zend_Service_Technorati_Exception if response content contains an error message
+     * @throws  Exception\RuntimeException if response content contains an error message
      * @access  protected
      */
-    protected function _convertResponseAndCheckContent(Zend_Http_Response $response)
+    protected function convertResponseAndCheckContent(Response $response)
     {
-        $dom = new DOMDocument();
+        $dom = new \DOMDocument();
         $dom->loadXML($response->getBody());
-        self::_checkErrors($dom);
+        self::checkErrors($dom);
         return $dom;
     }
 
     /**
      * Checks ReST response for errors.
      *
-     * @param   Zend_Http_Response $response    the ReST response
+     * @param   Response $response    the ReST response
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected static function _checkResponse(Zend_Http_Response $response)
+    protected static function checkResponse(Response $response)
     {
-        if ($response->isError()) {
-            throw new Zend_Service_Technorati_Exception(sprintf(
+        if ($response->isServerError() || $response->isClientError()) {
+            throw new Exception\RuntimeException(sprintf(
                         'Invalid response status code (HTTP/%s %s %s)',
                         $response->getVersion(), $response->getStatus(), $response->getMessage()));
         }
@@ -930,14 +926,14 @@ class Zend_Service_Technorati
      * @param   array $options        user options
      * @param   array $validOptions   valid options
      * @return  void
-     * @throws  Zend_Service_Technorati_Exception
+     * @throws  Exception\RuntimeException
      * @access  protected
      */
-    protected function _compareOptions(array $options, array $validOptions)
+    protected function compareOptions(array $options, array $validOptions)
     {
         $difference = array_diff(array_keys($options), $validOptions);
         if ($difference) {
-            throw new Zend_Service_Technorati_Exception(
+            throw new Exception\RuntimeException(
                         "The following parameters are invalid: '" .
                         implode("', '", $difference) . "'");
         }
@@ -951,10 +947,10 @@ class Zend_Service_Technorati
      * @return  array Merged array of user and default/required options.
      * @access  protected
      */
-    protected function _prepareOptions($options, array $defaultOptions)
+    protected function prepareOptions($options, array $defaultOptions)
     {
         $options = (array) $options; // force cast to convert null to array()
-        $options['key'] = $this->_apiKey;
+        $options['key'] = $this->apiKey;
         $options = array_merge($defaultOptions, $options);
         return $options;
     }

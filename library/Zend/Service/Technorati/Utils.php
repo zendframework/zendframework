@@ -20,27 +20,30 @@
  */
 
 /**
- * Collection of utilities for various Zend_Service_Technorati classes.
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+use Zend\Uri,
+    Zend\Date\Date as ZendDate;
+
+/**
+ * Collection of utilities for various Zend\Service\Technorati classes.
  *
- * @uses       Zend_Date
- * @uses       Zend_Locale
- * @uses       Zend_Service_Technorati_Exception
- * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_Utils
+class Utils
 {
     /**
-     * Parses, validates and returns a valid Zend_Uri object
+     * Parses, validates and returns a valid Zend\Uri object
      * from given $input.
      *
-     * @param   string|Zend_Uri_Http $input
-     * @return  null|Zend_Uri_Http
-     * @throws  Zend_Service_Technorati_Exception
+     * @param   string|Uri\Http $input
+     * @return  null|Uri\Http
+     * @throws  Exception\RuntimeException
      * @static
      */
     public static function normalizeUriHttp($input)
@@ -50,52 +53,52 @@ class Zend_Service_Technorati_Utils
             return null;
         }
 
-        if ($input instanceof Zend_Uri_Http) {
+        if ($input instanceof Uri\Http) {
             $uri = $input;
         } else {
             try {
-                $uri = Zend_Uri::factory((string) $input);
+                $uri = Uri\UriFactory::factory((string) $input);
             }
-            // wrap exception under Zend_Service_Technorati_Exception object
-            catch (Exception $e) {
-                throw new Zend_Service_Technorati_Exception($e->getMessage(), 0, $e);
+            // wrap exception under Exception object
+            catch (\Exception $e) {
+                throw new Exception\RuntimeException($e->getMessage(), 0, $e);
             }
         }
 
-        // allow inly Zend_Uri_Http objects or child classes
-        if (!($uri instanceof Zend_Uri_Http)) {
-            throw new Zend_Service_Technorati_Exception(
+        // allow inly Zend\Uri\Http objects or child classes
+        if (!($uri instanceof Uri\Http)) {
+            throw new Exception\RuntimeException(
                 "Invalid URL $uri, only HTTP(S) protocols can be used");
         }
 
         return $uri;
     }
     /**
-     * Parses, validates and returns a valid Zend_Date object
+     * Parses, validates and returns a valid ZendDate object
      * from given $input.
      *
-     * $input can be either a string, an integer or a Zend_Date object.
-     * If $input is string or int, it will be provided to Zend_Date as it is.
-     * If $input is a Zend_Date object, the object instance will be returned.
+     * $input can be either a string, an integer or a ZendDate object.
+     * If $input is string or int, it will be provided to ZendDate as it is.
+     * If $input is a ZendDate object, the object instance will be returned.
      *
-     * @param   mixed|Zend_Date $input
-     * @return  null|Zend_Date
-     * @throws  Zend_Service_Technorati_Exception
+     * @param   mixed|Date $input
+     * @return  null|Date
+     * @throws  Exception\RuntimeException
      * @static
      */
     public static function normalizeDate($input)
     {
-        // allow null as value and return valid Zend_Date objects
-        if (($input === null) || ($input instanceof Zend_Date)) {
+        // allow null as value and return valid ZendDate objects
+        if (($input === null) || ($input instanceof ZendDate)) {
             return $input;
         }
 
-        // due to a BC break as of ZF 1.5 it's not safe to use Zend_Date::isDate() here
+        // due to a BC break as of ZF 1.5 it's not safe to use ZendDate::isDate() here
         // see ZF-2524, ZF-2334
         if (@strtotime($input) !== FALSE) {
-            return new Zend_Date($input);
+            return new ZendDate($input);
         } else {
-            throw new Zend_Service_Technorati_Exception("'$input' is not a valid Date/Time");
+            throw new Exception\RuntimeException("'$input' is not a valid Date/Time");
         }
     }
 

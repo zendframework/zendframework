@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_SearchResult
+ * @see Technorati\SearchResult
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_SearchResultTest extends Zend_Service_Technorati_TestCase
+class SearchResultTest extends TestCase
 {
     public function setUp()
     {
@@ -47,41 +52,36 @@ class Zend_Service_Technorati_SearchResultTest extends Zend_Service_Technorati_T
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_SearchResult', array($this->domElements->item(0)));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_SearchResult', 'DOMElement');
+        $this->_testConstruct('Zend\Service\Technorati\SearchResult', array($this->domElements->item(0)));
     }
 
     public function testSearchResult()
     {
-        $object = new Zend_Service_Technorati_SearchResult($this->domElements->item(0));
+        $object = new Technorati\SearchResult($this->domElements->item(0));
 
         // check properties
         $this->assertInternalType('string', $object->getTitle());
         $this->assertContains('El SDK de Android', $object->getTitle());
         $this->assertInternalType('string', $object->getExcerpt());
         $this->assertContains('[ Android]', $object->getExcerpt());
-        $this->assertInstanceOf('Zend_Uri_Http', $object->getPermalink());
-        $this->assertEquals(Zend_Uri_Http::factory('http://blogs.eurielec.etsit.upm.es/miotroblog/?p=271'), $object->getPermalink());
-        $this->assertInstanceOf('Zend_Date', $object->getCreated());
-        $this->assertEquals(new Zend_Date('2007-11-14 22:18:04 GMT'), $object->getCreated());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getPermalink());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://blogs.eurielec.etsit.upm.es/miotroblog/?p=271'), $object->getPermalink());
+        $this->assertInstanceOf('Zend\Date\Date', $object->getCreated());
+        $this->assertEquals(new \Zend\Date\Date('2007-11-14 22:18:04 GMT'), $object->getCreated());
 
         // check weblog
-        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $object->getWeblog());
+        $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $object->getWeblog());
         $this->assertContains('Mi otro blog', $object->getWeblog()->getName());
     }
 
     public function testSearchResultSerialization()
     {
-        $this->_testResultSerialization(new Zend_Service_Technorati_SearchResult($this->domElements->item(0)));
+        $this->_testResultSerialization(new Technorati\SearchResult($this->domElements->item(0)));
     }
 
     public function testSearchResultSpecialEncoding()
     {
-        $object = new Zend_Service_Technorati_SearchResult($this->domElements->item(1));
+        $object = new Technorati\SearchResult($this->domElements->item(1));
 
         $this->assertContains('質の超濃い読者をどかんと5000件集めます', $object->getTitle());
     }

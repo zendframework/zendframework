@@ -20,27 +20,33 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+use \DomElement,
+    Zend\Uri;
+
+/**
  * Represents a single Technorati Tag query result object.
  * It is never returned as a standalone object,
- * but it always belongs to a valid Zend_Service_Technorati_TagResultSet object.
+ * but it always belongs to a valid TagResultSet object.
  *
- * @uses       Zend_Service_Technorati_Result
- * @uses       Zend_Service_Technorati_Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
+class TagResult extends Result
 {
     /**
      * Technorati weblog object corresponding to queried keyword.
      *
-     * @var     Zend_Service_Technorati_Weblog
+     * @var     Weblog
      * @access  protected
      */
-    protected $_weblog;
+    protected $weblog;
 
     /**
      * The title of the entry.
@@ -48,7 +54,7 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
      * @var     string
      * @access  protected
      */
-    protected $_title;
+    protected $title;
 
     /**
      * The blurb from entry with search term highlighted.
@@ -56,33 +62,33 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
      * @var     string
      * @access  protected
      */
-    protected $_excerpt;
+    protected $excerpt;
 
     /**
      * The datetime the entry was created.
      *
-     * @var     Zend_Date
+     * @var     ZendDate
      * @access  protected
      */
-    protected $_created;
+    protected $created;
 
     /**
      * The datetime the entry was updated.
      * Called 'postupdate' in original XML response,
      * it has been renamed to provide more coherence.
      *
-     * @var     Zend_Date
+     * @var     ZendDate
      * @access  protected
      */
-    protected $_updated;
+    protected $updated;
 
     /**
      * The permalink of the blog entry.
      *
-     * @var     Zend_Uri_Http
+     * @var     Uri\Http
      * @access  protected
      */
-    protected $_permalink;
+    protected $permalink;
 
 
     /**
@@ -92,29 +98,29 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
      */
     public function __construct(DomElement $dom)
     {
-        $this->_fields = array( '_permalink'    => 'permalink',
-                                '_excerpt'      => 'excerpt',
-                                '_created'      => 'created',
-                                '_updated'      => 'postupdate',
-                                '_title'        => 'title');
+        $this->fields = array( 'permalink'    => 'permalink',
+                               'excerpt'      => 'excerpt',
+                               'created'      => 'created',
+                               'updated'      => 'postupdate',
+                               'title'        => 'title');
         parent::__construct($dom);
 
         // weblog object field
-        $this->_parseWeblog();
+        $this->parseWeblog();
 
         // filter fields
-        $this->_permalink = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_permalink);
-        $this->_created   = Zend_Service_Technorati_Utils::normalizeDate($this->_created);
-        $this->_updated   = Zend_Service_Technorati_Utils::normalizeDate($this->_updated);
+        $this->permalink = Utils::normalizeUriHttp($this->permalink);
+        $this->created   = Utils::normalizeDate($this->created);
+        $this->updated   = Utils::normalizeDate($this->updated);
     }
 
     /**
      * Returns the weblog object that links queried URL.
      *
-     * @return  Zend_Service_Technorati_Weblog
+     * @return  Weblog
      */
     public function getWeblog() {
-        return $this->_weblog;
+        return $this->weblog;
     }
 
     /**
@@ -123,7 +129,7 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
      * @return  string
      */
     public function getTitle() {
-        return $this->_title;
+        return $this->title;
     }
 
     /**
@@ -132,34 +138,34 @@ class Zend_Service_Technorati_TagResult extends Zend_Service_Technorati_Result
      * @return  string
      */
     public function getExcerpt() {
-        return $this->_excerpt;
+        return $this->excerpt;
     }
 
     /**
      * Returns the datetime the entry was created.
      *
-     * @return  Zend_Date
+     * @return  ZendDate
      */
     public function getCreated() {
-        return $this->_created;
+        return $this->created;
     }
 
     /**
      * Returns the datetime the entry was updated.
      *
-     * @return  Zend_Date
+     * @return  ZendDate
      */
     public function getUpdated() {
-        return $this->_updated;
+        return $this->updated;
     }
 
     /**
      * Returns the permalink of the blog entry.
      *
-     * @return  Zend_Uri_Http
+     * @return  Uri\Http
      */
     public function getPermalink() {
-        return $this->_permalink;
+        return $this->permalink;
     }
 
 }

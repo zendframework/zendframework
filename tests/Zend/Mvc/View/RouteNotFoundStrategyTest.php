@@ -49,8 +49,9 @@ class RouteNotFoundStrategyTest extends TestCase
         $response = new Response();
         $event    = new MvcEvent();
         $errors   = array(
-            'not-found' => Application::ERROR_CONTROLLER_NOT_FOUND,
-            'invalid'   => Application::ERROR_CONTROLLER_INVALID,
+            'error-controller-not-found' => Application::ERROR_CONTROLLER_NOT_FOUND,
+            'error-controller-invalid'   => Application::ERROR_CONTROLLER_INVALID,
+            'error-router-no-match'      => Application::ERROR_ROUTER_NO_MATCH,
         );
         $event->setResponse($response);
         foreach ($errors as $key => $error) {
@@ -58,6 +59,36 @@ class RouteNotFoundStrategyTest extends TestCase
             $event->setError($error);
             $this->strategy->detectNotFoundError($event);
             $this->assertTrue($response->isNotFound(), 'Failed asserting against ' . $key);
+        }
+    }
+
+    public function testRouterAndDispatchErrorsInjectReasonInViewModelWhenAllowed()
+    {
+        $response = new Response();
+        $event    = new MvcEvent();
+        $errors   = array(
+            'error-controller-not-found' => Application::ERROR_CONTROLLER_NOT_FOUND,
+            'error-controller-invalid'   => Application::ERROR_CONTROLLER_INVALID,
+            'error-router-no-match'      => Application::ERROR_ROUTER_NO_MATCH,
+        );
+        $event->setResponse($response);
+        foreach (array(true, false) as $allow) {
+            $this->strategy->setDisplayNotFoundReason($allow);
+            foreach ($errors as $key => $error) {
+                $response->setStatusCode(200);
+                $event->setError($error);
+                $this->strategy->detectNotFoundError($event);
+                $this->strategy->prepareNotFoundViewModel($event);
+                $viewModel = $event->getResult();
+                $this->assertInstanceOf('Zend\View\Model', $viewModel);
+                $variables = $viewModel->getVariables();
+                if ($allow) {
+                    $this->assertTrue(isset($variables['reason']));
+                    $this->assertEquals($key, $variables['reason']);
+                } else {
+                    $this->assertFalse(isset($variables['reason']));
+                }
+            }
         }
     }
 
@@ -123,6 +154,28 @@ class RouteNotFoundStrategyTest extends TestCase
         $this->assertEquals($this->strategy->getNotFoundTemplate(), $model->getTemplate());
         $variables = $model->getVariables();
         $this->assertTrue(isset($variables['message']));
+    }
+
+    public function test404ResponsePrepares404ViewModelWithReasonWhenAllowed()
+    {
+        $response = new Response();
+        $event    = new MvcEvent();
+
+        foreach (array(true, false) as $allow) {
+            $this->strategy->setDisplayNotFoundReason($allow);
+            $response->setStatusCode(404);
+            $event->setResponse($response);
+            $this->strategy->prepareNotFoundViewModel($event);
+            $model = $event->getResult();
+            $this->assertInstanceOf('Zend\View\Model', $model);
+            $variables = $model->getVariables();
+            if ($allow) {
+                $this->assertTrue(isset($variables['reason']));
+                $this->assertEquals(Application::ERROR_CONTROLLER_CANNOT_DISPATCH, $variables['reason']);
+            } else {
+                $this->assertFalse(isset($variables['reason']));
+            }
+        }
     }
 
     public function testInjectsHttpResponseIntoEventIfNoneAlreadyPresent()

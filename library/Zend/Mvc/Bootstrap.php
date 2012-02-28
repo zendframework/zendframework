@@ -134,6 +134,12 @@ class Bootstrap implements Bootstrapper
                 ),
             ),
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
+                'setDisplayNotFoundReason' => array(
+                    'displayNotFoundReason' => array(
+                        'required' => false,
+                        'type'     => false,
+                    ),
+                ),
                 'setNotFoundTemplate' => array(
                     'notFoundTemplate' => array(
                         'required' => false,

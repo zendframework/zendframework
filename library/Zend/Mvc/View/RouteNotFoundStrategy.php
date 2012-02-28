@@ -44,11 +44,25 @@ class RouteNotFoundStrategy implements ListenerAggregate
     protected $listeners = array();
 
     /**
+     * Whether or not to display the reason for a 404
+     * 
+     * @var bool
+     */
+    protected $displayNotFoundReason = false;
+
+    /**
      * Template to use to report page not found conditions
      * 
      * @var string
      */
     protected $notFoundTemplate = 'error';
+
+    /**
+     * The reason for a not-found condition
+     * 
+     * @var false|string
+     */
+    protected $reason = false;
 
     /**
      * Attach the aggregate to the specified event manager
@@ -76,6 +90,28 @@ class RouteNotFoundStrategy implements ListenerAggregate
                 unset($this->listeners[$index]);
             }
         }
+    }
+
+    /**
+     * Set value indicating whether or not to display the reason for a not-found condition
+     *
+     * @param  bool $displayNotFoundReason
+     * @return RouteNotFoundStrategy
+     */
+    public function setDisplayNotFoundReason($displayNotFoundReason)
+    {
+        $this->displayNotFoundReason = (bool) $displayNotFoundReason;
+        return $this;
+    }
+    
+    /**
+     * Should we display the reason for a not-found condition?
+     *
+     * @return bool
+     */
+    public function displayNotFoundReason()
+    {
+        return $this->displayNotFoundReason;
     }
 
     /**
@@ -119,6 +155,8 @@ class RouteNotFoundStrategy implements ListenerAggregate
         switch ($error) {
             case Application::ERROR_CONTROLLER_NOT_FOUND:
             case Application::ERROR_CONTROLLER_INVALID:
+            case Application::ERROR_ROUTER_NO_MATCH:
+                $this->reason = $error;
                 $response = $e->getResponse();
                 if (!$response) {
                     $response = new HttpResponse();
@@ -154,6 +192,27 @@ class RouteNotFoundStrategy implements ListenerAggregate
         $model = new ViewModel\ViewModel();
         $model->setVariable('message', 'Page not found.');
         $model->setTemplate($this->getNotFoundTemplate());
+
+        // If displaying reasons, inject the reason
+        $this->injectNotFoundReason($model);
+
         $e->setResult($model);
+    }
+
+    protected function injectNotFoundReason($model)
+    {
+        if (!$this->displayNotFoundReason()) {
+            return;
+        }
+
+        // no route match, controller not found, or controller invalid
+        if ($this->reason) {
+            $model->setVariable('reason', $this->reason);
+            return;
+        }
+
+        // otherwise, must be a case of the controller not being able to 
+        // dispatch itself.
+        $model->setVariable('reason', Application::ERROR_CONTROLLER_CANNOT_DISPATCH);
     }
 }

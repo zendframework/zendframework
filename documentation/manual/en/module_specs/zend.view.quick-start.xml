@@ -215,9 +215,13 @@ return array(
             // The default template used in such situations is "error", just
             // like the exception strategy. Let's tell it to use the "site/404"
             // template, (which we mapped via the TemplateMapResolver, above).
+            //
+            // You can opt in to inject the reason for a 404 situation; see the
+            // various Application::ERROR_* constants for a list of values.
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
                 'parameters' => array(
-                    'notFoundTemplate' => 'site/404',
+                    'notFoundTemplate'      => 'site/404',
+                    'displayNotFoundReason' => true,
                 ),
             ),
         ),

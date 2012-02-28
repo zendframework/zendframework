@@ -122,7 +122,8 @@ class Author
      *
      * @return  string  Author first name
      */
-    public function getFirstName() {
+    public function getFirstName()
+    {
         return $this->firstName;
     }
 
@@ -131,7 +132,8 @@ class Author
      *
      * @return  string  Author last name
      */
-    public function getLastName() {
+    public function getLastName()
+    {
         return $this->lastName;
     }
 
@@ -140,7 +142,8 @@ class Author
      *
      * @return  string  Technorati account username
      */
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->username;
     }
 
@@ -149,7 +152,8 @@ class Author
      *
      * @return  string  Technorati account description
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
@@ -158,7 +162,8 @@ class Author
      *
      * @return  string  Technorati account biography
      */
-    public function getBio() {
+    public function getBio()
+    {
         return $this->bio;
     }
 
@@ -167,7 +172,8 @@ class Author
      *
      * @return  null|Uri\Http  Technorati account thumbnail picture
      */
-    public function getThumbnailPicture() {
+    public function getThumbnailPicture()
+    {
         return $this->thumbnailPicture;
     }
 
@@ -178,7 +184,8 @@ class Author
      * @param   string $input   first Name input value
      * @return  Author  $this instance
      */
-    public function setFirstName($input) {
+    public function setFirstName($input)
+    {
         $this->firstName = (string) $input;
         return $this;
     }
@@ -189,7 +196,8 @@ class Author
      * @param   string $input   last Name input value
      * @return  Author  $this instance
      */
-    public function setLastName($input) {
+    public function setLastName($input)
+    {
         $this->lastName = (string) $input;
         return $this;
     }
@@ -200,7 +208,8 @@ class Author
      * @param   string $input   username input value
      * @return  Author  $this instance
      */
-    public function setUsername($input) {
+    public function setUsername($input)
+    {
         $this->username = (string) $input;
         return $this;
     }
@@ -211,7 +220,8 @@ class Author
      * @param   string $input   biography input value
      * @return  Author  $this instance
      */
-    public function setBio($input) {
+    public function setBio($input)
+    {
         $this->bio = (string) $input;
         return $this;
     }
@@ -222,7 +232,8 @@ class Author
      * @param   string $input   description input value
      * @return  Author  $this instance
      */
-    public function setDescription($input) {
+    public function setDescription($input) 
+    {
         $this->description = (string) $input;
         return $this;
     }
@@ -235,7 +246,8 @@ class Author
      * @throws  Exception\RuntimeException if $input is an invalid URI
      *          (via Utils::normalizeUriHttp)
      */
-    public function setThumbnailPicture($input) {
+    public function setThumbnailPicture($input) 
+    {
         $this->thumbnailPicture = Utils::normalizeUriHttp($input);
         return $this;
     }

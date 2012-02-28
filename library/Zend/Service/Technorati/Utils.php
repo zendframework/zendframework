@@ -19,10 +19,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Service\Technorati;
+
 use Zend\Uri,
     Zend\Date\Date as ZendDate;
 
@@ -53,26 +51,50 @@ class Utils
             return null;
         }
 
-        if ($input instanceof Uri\Http) {
-            $uri = $input;
-        } else {
+        $uri = $input;
+
+        // Try to cast
+        if (!$input instanceof Uri\Http) {
             try {
                 $uri = Uri\UriFactory::factory((string) $input);
-            }
-            // wrap exception under Exception object
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
+                // wrap exception under Exception object
                 throw new Exception\RuntimeException($e->getMessage(), 0, $e);
             }
         }
 
-        // allow inly Zend\Uri\Http objects or child classes
-        if (!($uri instanceof Uri\Http)) {
-            throw new Exception\RuntimeException(
-                "Invalid URL $uri, only HTTP(S) protocols can be used");
+        // allow only Zend\Uri\Http objects or child classes (not other URI formats)
+        if (!$uri instanceof Uri\Http) {
+            throw new Exception\RuntimeException(sprintf(
+                "%s: Invalid URL %s, only HTTP(S) protocols can be used",
+                __METHOD__,
+                $uri
+            ));
+        }
+
+        // Validate the URI
+        if (!$uri->isValid()) {
+            $caller = function () { 
+                $traces = debug_backtrace(); 
+
+                if (isset($traces[2])) 
+                { 
+                    return $traces[2]['function']; 
+                } 
+
+                return null; 
+            };
+            throw new Exception\RuntimeException(sprintf(
+                '%s (called by %s): invalid URI ("%s") provided',
+                __METHOD__,
+                $caller(),
+                (string) $input
+            ));
         }
 
         return $uri;
     }
+
     /**
      * Parses, validates and returns a valid ZendDate object
      * from given $input.

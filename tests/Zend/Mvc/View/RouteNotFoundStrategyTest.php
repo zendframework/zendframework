@@ -178,6 +178,61 @@ class RouteNotFoundStrategyTest extends TestCase
         }
     }
 
+    public function test404ResponsePrepares404ViewModelWithExceptionWhenAllowed()
+    {
+        $response  = new Response();
+        $event     = new MvcEvent();
+        $exception = new \Exception();
+        $event->setParam('exception', $exception);
+
+        foreach (array(true, false) as $allow) {
+            $this->strategy->setDisplayExceptions($allow);
+            $response->setStatusCode(404);
+            $event->setResponse($response);
+            $this->strategy->prepareNotFoundViewModel($event);
+            $model = $event->getResult();
+            $this->assertInstanceOf('Zend\View\Model', $model);
+            $variables = $model->getVariables();
+            if ($allow) {
+                $this->assertTrue(isset($variables['exception']));
+                $this->assertSame($exception, $variables['exception']);
+            } else {
+                $this->assertFalse(isset($variables['exception']));
+            }
+        }
+    }
+
+    public function test404ResponsePrepares404ViewModelWithControllerWhenAllowed()
+    {
+        $response        = new Response();
+        $event           = new MvcEvent();
+        $controller      = 'some-or-other';
+        $controllerClass = 'Some\Controller\OrOtherController';
+        $event->setController($controller);
+        $event->setControllerClass($controllerClass);
+
+        foreach (array('setDisplayNotFoundReason', 'setDisplayExceptions') as $method) {
+            foreach (array(true, false) as $allow) {
+                $this->strategy->$method($allow);
+                $response->setStatusCode(404);
+                $event->setResponse($response);
+                $this->strategy->prepareNotFoundViewModel($event);
+                $model = $event->getResult();
+                $this->assertInstanceOf('Zend\View\Model', $model);
+                $variables = $model->getVariables();
+                if ($allow) {
+                    $this->assertTrue(isset($variables['controller']));
+                    $this->assertEquals($controller, $variables['controller']);
+                    $this->assertTrue(isset($variables['controller_class']));
+                    $this->assertEquals($controllerClass, $variables['controller_class']);
+                } else {
+                    $this->assertFalse(isset($variables['controller']));
+                    $this->assertFalse(isset($variables['controller_class']));
+                }
+            }
+        }
+    }
+
     public function testInjectsHttpResponseIntoEventIfNoneAlreadyPresent()
     {
         $event    = new MvcEvent();

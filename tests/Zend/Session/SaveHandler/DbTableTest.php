@@ -22,7 +22,7 @@
 namespace ZendTest\Session\SaveHandler;
 
 use Zend\Session\SaveHandler\DbTable,
-    Zend\Session\SaveHandler\Exception as SaveHandlerException,
+    Zend\Session\Exception as SaveHandlerException,
     Zend\Session\Manager,
     Zend\Db\Db,
     Zend\Db\Adapter\AbstractAdapter,
@@ -110,13 +110,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         $sh = new DbTable($this->_saveHandlerTableConfig);
         $this->assertInstanceOf('Zend\Db\Table\AbstractTable', $sh);
-        $this->assertInstanceOf('Zend\Session\Manager', $sh->getManager());
     }
 
     public function testConstructorThrowsExceptionGivenConfigAsNull()
     {
         $this->setExpectedException(
-            'Zend\Session\SaveHandler\Exception\InvalidArgumentException',
+            'Zend\Session\Exception\InvalidArgumentException',
             '$config must be an instance of Zend\Config or array of key/value pairs containing configuration options for Zend\Session\SaveHandler\DbTable and Zend\Db\Table\Abstract'
             );
         $saveHandler = new DbTable(null);
@@ -129,20 +128,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
     }
 
-    public function testTableEmptyNamePullFromSavePath()
-    {
-        $config = $this->_saveHandlerTableConfig;
-        unset($config['name']);
-        $savePath = ini_get('session.save_path');
-        $this->manager->getConfig()->setSavePath(__DIR__);
-            
-        $this->setExpectedException(
-            'Zend\Session\SaveHandler\Exception',
-            'path'
-            );
-        $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
-    }
-
     public function testPrimaryAssignmentIdNotSet()
     {
         $config = $this->_saveHandlerTableConfig;
@@ -151,7 +136,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
             = DbTable::PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH;
             
         $this->setExpectedException(
-        	'Zend\Session\SaveHandler\Exception\RuntimeException',
+        	'Zend\Session\Exception\RuntimeException',
         	'Value for configuration option \'primaryAssignment\' must have an assignment for the session id (\'sessionId\')'
             );
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
@@ -177,7 +162,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         $config = $this->_saveHandlerTableConfig;
         unset($config[DbTable::MODIFIED_COLUMN]);
         $this->setExpectedException(
-            'Zend\Session\SaveHandler\Exception\RuntimeException',
+            'Zend\Session\Exception\RuntimeException',
        	    'Configuration must define \'modifiedColumn\' which names the session table last modification time column'
             );
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
@@ -192,7 +177,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         unset($config[DbTable::LIFETIME_COLUMN]);
         
         $this->setExpectedException(
-            'Zend\Session\SaveHandler\Exception\RuntimeException',
+            'Zend\Session\Exception\RuntimeException',
             'Configuration must define \'lifetimeColumn\' which names the session table lifetime column'
             );
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
@@ -204,7 +189,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         unset($config[DbTable::DATA_COLUMN]);
         
         $this->setExpectedException(
-            'Zend\Session\SaveHandler\Exception\RuntimeException',
+            'Zend\Session\Exception\RuntimeException',
             'Configuration must define \'dataColumn\' which names the session table data column'
             );
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
@@ -217,7 +202,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         array_pop($config[DbTable::PRIMARY_ASSIGNMENT]);
             
         $this->setExpectedException(
-            'Zend\Session\SaveHandler\Exception\RuntimeException'
+            'Zend\Session\Exception\RuntimeException'
         );
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
     }
@@ -344,8 +329,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
-        $manager = new TestManager();
-        $saveHandler->setManager($manager);
+        $manager = new TestManager(null, null, $saveHandler);
         $manager->start();
 
         /**

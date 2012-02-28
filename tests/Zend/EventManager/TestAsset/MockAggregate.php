@@ -36,9 +36,12 @@ class MockAggregate implements ListenerAggregate
 {
 
     protected $listeners = array();
+    public $priority;
 
-    public function attach(EventCollection $events)
+    public function attach(EventCollection $events, $priority = null)
     {
+        $this->priority = $priority;
+
         $listeners = array();
         $listeners[] = $events->attach('foo.bar', array( $this, 'fooBar' ));
         $listeners[] = $events->attach('foo.baz', array( $this, 'fooBaz' ));

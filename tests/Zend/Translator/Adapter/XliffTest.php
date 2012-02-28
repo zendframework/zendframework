@@ -26,6 +26,7 @@ namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
 use Zend\Locale;
+use Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
  * Zend_Translator_Adapter_Xliff
@@ -67,6 +68,19 @@ class XliffTest extends \PHPUnit_Framework_TestCase
     {
         $adapter = new Adapter\Xliff(__DIR__ . '/_files/translation_en.xliff', 'en');
         $this->assertEquals('Xliff', $adapter->toString());
+    }
+    
+    /**
+     * @group ZF-12012
+     */
+    public function testErrorOnCreateIncludesFilename()
+    {
+        try {
+            $adapter = new Adapter\Xliff(__DIR__ . '/_files/failed.xliff', 'en');
+            $this->fail("exception expected");
+        } catch (InvalidFileTypeException $e) {
+            $this->assertContains('failed.xliff', $e->getMessage());
+        }
     }
 
     public function testTranslate()

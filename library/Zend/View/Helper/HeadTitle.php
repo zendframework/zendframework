@@ -214,11 +214,16 @@ class HeadTitle extends Placeholder\Container\Standalone
 
         $separator = $this->getSeparator();
         $output = '';
-        if(($prefix = $this->getPrefix())) {
+
+        $prefix = $this->getPrefix();
+        if($prefix) {
             $output  .= $prefix;
         }
+
         $output .= implode($separator, $items);
-        if(($postfix = $this->getPostfix())) {
+
+        $postfix = $this->getPostfix();
+        if($postfix) {
             $output .= $postfix;
         }
 

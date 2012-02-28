@@ -17,12 +17,12 @@ class WWWAuthenticate implements MultipleHeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'www-authenticate') {
-            throw new Exception\InvalidArgumentException('Invalid header line for WWW-Authenticate string');
+            throw new Exception\InvalidArgumentException('Invalid header line for WWW-Authenticate string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,7 +40,7 @@ class WWWAuthenticate implements MultipleHeaderDescription
     {
         return 'WWW-Authenticate: ' . $this->getFieldValue();
     }
-    
+
     public function toStringMultipleHeaders(array $headers)
     {
         $strings = array($this->toString());

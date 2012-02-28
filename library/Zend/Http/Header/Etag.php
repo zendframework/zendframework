@@ -17,12 +17,12 @@ class Etag implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'etag') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Etag string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Etag string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Etag implements HeaderDescription
     {
         return 'Etag: ' . $this->getFieldValue();
     }
-    
+
 }

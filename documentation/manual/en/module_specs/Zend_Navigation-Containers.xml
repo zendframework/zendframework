@@ -489,7 +489,7 @@ $container = new Zend_Navigation(array(
 $container->removePage(0);      // removes Page 1
 
 // remove page by instance
-$page3 = $container->findOneByAction('Page 3');
+$page3 = $container->findOneByAction('page3');
 $container->removePage($page3); // removes Page 3
 
 // remove page by explicit page order

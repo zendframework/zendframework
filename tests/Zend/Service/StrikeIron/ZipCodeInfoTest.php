@@ -52,7 +52,7 @@ class Zend_Service_StrikeIron_ZipCodeInfoTest extends PHPUnit_Framework_TestCase
 
     public function testInheritsFromBase()
     {
-        $this->assertType('Zend_Service_StrikeIron_Base', $this->service);
+        $this->assertInstanceOf('Zend_Service_StrikeIron_Base', $this->service);
     }
 
     public function testHasCorrectWsdl()
@@ -66,7 +66,7 @@ class Zend_Service_StrikeIron_ZipCodeInfoTest extends PHPUnit_Framework_TestCase
         $strikeIron = new Zend_Service_StrikeIron(array('client' => $this->soapClient));
         $client = $strikeIron->getService(array('class' => 'ZipCodeInfo'));
 
-        $this->assertType('Zend_Service_StrikeIron_ZipCodeInfo', $client);
+        $this->assertInstanceOf('Zend_Service_StrikeIron_ZipCodeInfo', $client);
     }
 
 }

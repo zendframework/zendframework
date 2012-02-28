@@ -28,6 +28,7 @@ use PHPUnit_Framework_TestCase as TestCase,
     Zend\View\Helper\Url as UrlHelper,
     Zend\Mvc\Router\RouteMatch,
     Zend\Mvc\Router\Http\Regex as RegexRoute,
+    Zend\Mvc\Router\Http\Literal as LiteralRoute,
     Zend\Mvc\Router\Http\TreeRouteStack,
     Zend\Navigation\Page,
     Zend\Navigation,
@@ -129,6 +130,31 @@ class MvcTest extends TestCase
         $this->assertEquals('/lolcat/myaction/1337', $page->getHref());
     }
 
+    public function testIsActiveReturnsTrueWhenMatchingRoute()
+    {
+        $page = new Page\Mvc(array(
+            'label' => 'spiffyjrwashere',
+            'route' => 'lolfish'
+        ));
+
+        $route = new LiteralRoute('/lolfish');
+
+        $router = new TreeRouteStack;
+        $router->addRoute('lolfish', $route);
+
+        $routeMatch = new RouteMatch(array());
+        $routeMatch->setMatchedRouteName('lolfish');
+
+        $urlHelper = new UrlHelper;
+        $urlHelper->setRouter($router);
+        $urlHelper->setRouteMatch($routeMatch);
+
+        $page->setUrlHelper($urlHelper);
+        $page->setRouteMatch($routeMatch);
+
+        $this->assertEquals(true, $page->isActive());
+    }
+
     /**
      * @group ZF-8922
      */
@@ -160,7 +186,7 @@ class MvcTest extends TestCase
 
         $page->setRouteMatch($this->routeMatch);
         $page->setUrlHelper($this->urlHelper);
- 
+
         $this->assertEquals('/lolcat/myaction/1337#qux', $page->getHref());
     }
 
@@ -414,5 +440,46 @@ class MvcTest extends TestCase
         $actual   = $page->getHref();
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testDefaultUrlHelperCanBeSetWithConstructor()
+    {
+        $page = new Page\Mvc(array(
+            'label'            => 'foo',
+            'action'           => 'index',
+            'controller'       => 'index',
+            'defaultUrlHelper' => $this->urlHelper
+        ));
+
+        $this->assertEquals($this->urlHelper, $page->getDefaultUrlHelper());
+        $page->setDefaultUrlHelper(null);
+    }
+
+    public function testDefaultUrlHelperCanBeSetWithGetter()
+    {
+        $page = new Page\Mvc(array(
+            'label'            => 'foo',
+            'action'           => 'index',
+            'controller'       => 'index',
+        ));
+        $page->setDefaultUrlHelper($this->urlHelper);
+
+        $this->assertEquals($this->urlHelper, $page->getDefaultUrlHelper());
+        $page->setDefaultUrlHelper(null);
+    }
+
+    public function testNoExceptionForGetHrefIfDefaultUrlHelperIsSet()
+    {
+        $page = new Page\Mvc(array(
+            'label'            => 'foo',
+            'action'           => 'index',
+            'controller'       => 'index',
+            'defaultUrlHelper' => $this->urlHelper
+        ));
+
+        // If the default url helper is not used an exception will be thrown.
+        // This method intentionally has no assertion.
+        $page->getHref();
+        $page->setDefaultUrlHelper(null);
     }
 }

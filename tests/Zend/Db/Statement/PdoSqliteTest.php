@@ -40,7 +40,7 @@ class PdoSqliteTest extends AbstractPdoTest
     {
         $this->markTestSkipped('This suite is skipped until Zend\DB can be refactored.');
     }
-    
+
     public function testStatementBindParamByName()
     {
         $this->markTestIncomplete($this->getDriver() . ' is having trouble with binding parameters');
@@ -61,7 +61,7 @@ class PdoSqliteTest extends AbstractPdoTest
     public function testStatementCanReturnDriverStatement()
     {
         $statement = parent::testStatementCanReturnDriverStatement();
-        $this->assertType('PDOStatement', $statement->getDriverStatement());
+        $this->assertInstanceOf('PDOStatement', $statement->getDriverStatement());
     }
 
     public function getDriver()

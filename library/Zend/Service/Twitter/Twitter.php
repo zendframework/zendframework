@@ -961,26 +961,26 @@ class Twitter extends Rest\Client\RestClient
     protected function _prepare($path)
     {
         // Get the URI object and configure it
-        if (!$this->_uri instanceof Uri\Uri) {
+        if (!$this->uri instanceof Uri\Uri) {
             throw new Rest\Client\Exception(
                 'URI object must be set before performing call'
             );
         }
 
-        $uri = $this->_uri->toString();
+        $uri = $this->uri->toString();
 
         if ($path[0] != '/' && $uri[strlen($uri) - 1] != '/') {
             $path = '/' . $path;
         }
 
-        $this->_uri->setPath($path);
+        $this->uri->setPath($path);
 
         /**
          * Get the HTTP client and configure it for the endpoint URI.
          * Do this each time because the Zend_Http_Client instance is shared
          * among all Zend_Service_Abstract subclasses.
          */
-        $this->_localHttpClient->resetParameters()->setUri((string) $this->_uri);
+        $this->_localHttpClient->resetParameters()->setUri((string) $this->uri);
     }
 
     /**

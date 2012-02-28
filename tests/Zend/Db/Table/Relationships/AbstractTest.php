@@ -48,15 +48,15 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $table = $this->_table['bugs'];
 
         $childRows = $table->fetchAll("$bug_id = 1");
-        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 
         $childRow1 = $childRows->current();
-        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 
         $parentRow = $childRow1->findParentRow('\ZendTest\Db\Table\TestAsset\TableAccounts');
-        $this->assertType('Zend\Db\Table\AbstractRow', $parentRow,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $parentRow,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($parentRow));
 
         $this->assertEquals('goofy', $parentRow->$account_name);
@@ -72,15 +72,15 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $select = $table->select()->where($account_name_column . ' = ?', 'goofy');
 
         $childRows = $table->fetchAll("$bug_id = 1");
-        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 
         $childRow1 = $childRows->current();
-        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 
         $parentRow = $childRow1->findParentRow('\ZendTest\Db\Table\TestAsset\TableAccounts', null, $select);
-        $this->assertType('Zend\Db\Table\AbstractRow', $parentRow,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $parentRow,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($parentRow));
 
         $this->assertEquals('goofy', $parentRow->$account_name);
@@ -94,15 +94,15 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
 //        $table = $this->_table['bugs'];
 //
 //        $childRows = $table->fetchAll("$bug_id = 1");
-//        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
 //            'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 //
 //        $childRow1 = $childRows->current();
-//        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
 //            'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 //
 //        $parentRow = $childRow1->findParentZend_Db_Table_Asset_TableAccounts();
-//        $this->assertType('Zend\Db\Table\AbstractRow', $parentRow,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $parentRow,
 //            'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($parentRow));
 //
 //        $this->assertEquals('goofy', $parentRow->$account_name);
@@ -118,15 +118,15 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
 //        $select = $table->select()->where($account_name_column . ' = ?', 'goofy');
 //
 //        $childRows = $table->fetchAll("$bug_id = 1");
-//        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
 //            'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 //
 //        $childRow1 = $childRows->current();
-//        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
 //            'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 //
 //        $parentRow = $childRow1->findParentZend_Db_Table_Asset_TableAccounts($select);
-//        $this->assertType('Zend\Db\Table\AbstractRow', $parentRow,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $parentRow,
 //            'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($parentRow));
 //
 //        $this->assertEquals('goofy', $parentRow->$account_name);
@@ -144,7 +144,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
             $result = $parentRow1->nonExistantMethod();
             $this->fail('Expected to catch Zend_Db_Table_Row_Exception');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Table\RowException', $e,
+            $this->assertInstanceOf('Zend\Db\Table\RowException', $e,
                 'Expecting object of type Zend_Db_Table_Row_Exception got '.get_class($e));
             $this->assertEquals("Unrecognized method 'nonExistantMethod()'", $e->getMessage());
         }
@@ -153,7 +153,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindParentRowErrorOnBadString()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $bug_id = $this->_db->quoteIdentifier('bug_id', true);
 
         $table = $this->_table['bugs'];
@@ -167,7 +167,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindParentRowExceptionOnBadClass()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $bug_id = $this->_db->quoteIdentifier('bug_id', true);
 
         $table = $this->_table['bugs'];
@@ -186,7 +186,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $originRow1 = $originRows->current();
 
         $destRows = $originRow1->findManyToManyRowset('\ZendTest\Db\Table\TestAsset\TableProducts', '\ZendTest\Db\Table\TestAsset\TableBugsProducts');
-        $this->assertType('Zend\Db\Table\AbstractRowset', $destRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $destRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($destRows));
 
         $this->assertEquals(3, $destRows->count());
@@ -208,7 +208,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
 
         $destRows = $originRow1->findManyToManyRowset('\ZendTest\Db\Table\TestAsset\TableProducts', '\ZendTest\Db\Table\TestAsset\TableBugsProducts',
                                                       null, null, $select);
-        $this->assertType('Zend\Db\Table\AbstractRowset', $destRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $destRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($destRows));
 
         $this->assertEquals(2, $destRows->count());
@@ -225,7 +225,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
 //        $originRow1 = $originRows->current();
 //
 //        $destRows = $originRow1->findZend_Db_Table_Asset_TableProductsViaZend_Db_Table_Asset_TableBugsProducts();
-//        $this->assertType('Zend\Db\Table\AbstractRowset', $destRows,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $destRows,
 //            'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($destRows));
 //
 //        $this->assertEquals(3, $destRows->count());
@@ -246,7 +246,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
 //        $originRow1 = $originRows->current();
 //
 //        $destRows = $originRow1->findZend_Db_Table_Asset_TableProductsViaZend_Db_Table_Asset_TableBugsProducts($select);
-//        $this->assertType('Zend\Db\Table\AbstractRowset', $destRows,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $destRows,
 //            'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($destRows));
 //
 //        $this->assertEquals(2, $destRows->count());
@@ -259,7 +259,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetErrorOnBadClassNameAsString()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -274,7 +274,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetErrorOnBadClassNameAsStringForIntersection()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -287,7 +287,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetExceptionOnBadClassAsString()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -302,7 +302,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
     public function testTableRelationshipFindManyToManyRowsetExceptionOnBadClassAsStringForIntersection()
     {
         $this->setExpectedException('Zend\Db\Table\Exception');
-        
+
         $table = $this->_table['bugs'];
 
         $originRows = $table->find(1);
@@ -320,18 +320,18 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $product_id = $this->_db->foldCase('product_id');
 
         $parentRows = $table->find(1);
-        $this->assertType('Zend\Db\Table\AbstractRowset', $parentRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $parentRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($parentRows));
         $parentRow1 = $parentRows->current();
 
         $childRows = $parentRow1->findDependentRowset('\ZendTest\Db\Table\TestAsset\TableBugsProducts');
-        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 
         $this->assertEquals(3, $childRows->count());
 
         $childRow1 = $childRows->current();
-        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 
         $this->assertEquals(1, $childRow1->$bug_id);
@@ -348,16 +348,16 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                                   ->order($product_id . ' DESC');
 
         $parentRows = $table->find(1);
-        $this->assertType('Zend\Db\Table\AbstractRowset', $parentRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $parentRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($parentRows));
         $parentRow1 = $parentRows->current();
 
         $childRows = $parentRow1->findDependentRowset('\ZendTest\Db\Table\TestAsset\TableBugsProducts', null, $select);
-        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 
         $childRow1 = $childRows->current();
-        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 
         $this->assertEquals(1, $childRow1->$bug_id);
@@ -374,13 +374,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
 //        $parentRow1 = $parentRows->current();
 //
 //        $childRows = $parentRow1->findZend_Db_Table_Asset_TableBugsProducts();
-//        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
 //            'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 //
 //        $this->assertEquals(3, $childRows->count());
 //
 //        $childRow1 = $childRows->current();
-//        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
 //            'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 //
 //        $this->assertEquals(1, $childRow1->$bug_id);
@@ -399,13 +399,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
 //        $parentRow1 = $parentRows->current();
 //
 //        $childRows = $parentRow1->findZend_Db_Table_Asset_TableBugsProducts($select);
-//        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
 //            'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 //
 //        $this->assertEquals(2, $childRows->count());
 //
 //        $childRow1 = $childRows->current();
-//        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+//        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
 //            'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 //
 //        $this->assertEquals(1, $childRow1->$bug_id);
@@ -673,7 +673,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
             $table->getReference('\ZendTest\Db\Table\TestAsset\TableAccounts', 'Nonexistent');
             $this->fail('Expected to catch Zend\Db\Table\Exception for nonexistent reference rule');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Table\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend\Db\Table\Exception got '.get_class($e));
         }
 
@@ -681,7 +681,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
             $table->getReference('Nonexistent', 'Reporter');
             $this->fail('Expected to catch Zend\Db\Table\Exception for nonexistent rule tableClass');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Table\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend\Db\Table\Exception got '.get_class($e));
         }
 
@@ -689,7 +689,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
             $table->getReference('Nonexistent');
             $this->fail('Expected to catch Zend\Db\Table\Exception for nonexistent rule tableClass');
         } catch (\Exception $e) {
-            $this->assertType('Zend\Db\Table\Exception', $e,
+            $this->assertInstanceOf('Zend\Db\Table\Exception', $e,
                 'Expecting object of type Zend\Db\Table\Exception got '.get_class($e));
         }
     }
@@ -709,7 +709,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                         ->current()
                         ->findParentRow($this->_table['accounts']->setRowClass($myRowClass));
 
-        $this->assertType($myRowClass, $bug1Reporter,
+        $this->assertInstanceOf($myRowClass, $bug1Reporter,
             "Expecting object of type $myRowClass, got ".get_class($bug1Reporter));
     }
 
@@ -729,7 +729,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                         ->current()
                         ->findParentRow(new \ZendTest\Db\Table\TestAsset\TableAccountsCustom(array('db' => $this->_db)));
 
-        $this->assertType($myRowClass, $bug1Reporter,
+        $this->assertInstanceOf($myRowClass, $bug1Reporter,
             "Expecting object of type $myRowClass, got ".get_class($bug1Reporter));
     }
 
@@ -755,13 +755,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                     'Engineer'
                     );
 
-        $this->assertType($myRowsetClass, $bugs,
+        $this->assertInstanceOf($myRowsetClass, $bugs,
             "Expecting object of type $myRowsetClass, got ".get_class($bugs));
 
         $this->assertEquals(3, count($bugs));
 
         foreach ($bugs as $bug) {
-            $this->assertType($myRowClass, $bug,
+            $this->assertInstanceOf($myRowClass, $bug,
                 "Expecting object of type $myRowClass, got ".get_class($bug));
         }
     }
@@ -784,13 +784,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                 ->fetchRow($this->_db->quoteInto("$account_name = ?", 'mmouse'))
                 ->findDependentRowset('\ZendTest\Db\Table\TestAsset\TableBugsCustom', 'Engineer');
 
-        $this->assertType($myRowsetClass, $bugs,
+        $this->assertInstanceOf($myRowsetClass, $bugs,
             "Expecting object of type $myRowsetClass, got ".get_class($bugs));
 
         $this->assertEquals(3, count($bugs));
 
         foreach ($bugs as $bug) {
-            $this->assertType($myRowClass, $bug,
+            $this->assertInstanceOf($myRowClass, $bug,
                 "Expecting object of type $myRowClass, got ".get_class($bug));
         }
     }
@@ -817,13 +817,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                             '\ZendTest\Db\Table\TestAsset\TableBugsProducts'
                             );
 
-        $this->assertType($myRowsetClass, $bug1Products,
+        $this->assertInstanceOf($myRowsetClass, $bug1Products,
             "Expecting object of type $myRowsetClass, got ".get_class($bug1Products));
 
         $this->assertEquals(3, count($bug1Products));
 
         foreach ($bug1Products as $bug1Product) {
-            $this->assertType($myRowClass, $bug1Product,
+            $this->assertInstanceOf($myRowClass, $bug1Product,
                 "Expecting object of type $myRowClass, got ".get_class($bug1Product));
         }
     }
@@ -847,13 +847,13 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
                             '\ZendTest\Db\Table\TestAsset\TableBugsProductsCustom'
                             );
 
-        $this->assertType($myRowsetClass, $bug1Products,
+        $this->assertInstanceOf($myRowsetClass, $bug1Products,
             "Expecting object of type $myRowsetClass, got ".get_class($bug1Products));
 
         $this->assertEquals(3, count($bug1Products));
 
         foreach ($bug1Products as $bug1Product) {
-            $this->assertType($myRowClass, $bug1Product,
+            $this->assertInstanceOf($myRowClass, $bug1Product,
                 "Expecting object of type $myRowClass, got ".get_class($bug1Product));
         }
     }
@@ -871,15 +871,15 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $table = $this->_table['bugs'];
 
         $childRows = $table->fetchAll("$bug_id = 1");
-        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 
         $childRow1 = $childRows->current();
-        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 
         $parentRow = $childRow1->findParentRow('\ZendTest\Db\Table\TestAsset\TableAccounts');
-        $this->assertType('Zend\Db\Table\AbstractRow', $parentRow,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $parentRow,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($parentRow));
 
         $this->assertEquals('goofy', $parentRow->$account_name);
@@ -911,18 +911,18 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $bug_description = $this->_db->foldCase('bug_description');
 
         $parentRows = $table->find('mmouse');
-        $this->assertType('Zend\Db\Table\AbstractRowset', $parentRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $parentRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($parentRows));
         $parentRow1 = $parentRows->current();
 
         $childRows = $parentRow1->findDependentRowset('\ZendTest\Db\Table\TestAsset\TableBugs');
-        $this->assertType('Zend\Db\Table\AbstractRowset', $childRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $childRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($childRows));
 
         $this->assertEquals(1, $childRows->count());
 
         $childRow1 = $childRows->current();
-        $this->assertType('Zend\Db\Table\AbstractRow', $childRow1,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRow', $childRow1,
             'Expecting object of type Zend\Db\Table\AbstractRow, got '.get_class($childRow1));
 
         $childRow1->$bug_description = 'Updated description';
@@ -957,7 +957,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $originRow1 = $originRows->current();
 
         $destRows = $originRow1->findManyToManyRowset('\ZendTest\Db\Table\TestAsset\TableProducts', '\ZendTest\Db\Table\TestAsset\TableBugsProducts');
-        $this->assertType('Zend\Db\Table\AbstractRowset', $destRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $destRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($destRows));
 
         $this->assertEquals(3, $destRows->count());
@@ -1061,7 +1061,7 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $originRow1 = $originRows->current();
 
         $destRows = $originRow1->findManyToManyRowset('\ZendTest\Db\Table\TestAsset\TableBugs', '\ZendTest\Db\Table\TestAsset\TableBugsProducts');
-        $this->assertType('Zend\Db\Table\AbstractRowset', $destRows,
+        $this->assertInstanceOf('Zend\Db\Table\AbstractRowset', $destRows,
             'Expecting object of type Zend\Db\Table\AbstractRowset, got '.get_class($destRows));
 
         $this->assertEquals(1, $destRows->count());
@@ -1221,11 +1221,11 @@ abstract class AbstractTest extends \ZendTest\Db\Table\TestSetup
         $table = $this->_getTable('\ZendTest\Db\Table\TestAsset\TableSpecial', $options);
         return $table;
     }
-    
+
     /**
      * Ensure that the related table returned from the ManyToManyRowset only contains
      * the proper columns for the table.
-     * 
+     *
      * @group ZF-3709
      */
     public function testTableRelationshipReturnsOnlyTheColumnsInTargetTable()

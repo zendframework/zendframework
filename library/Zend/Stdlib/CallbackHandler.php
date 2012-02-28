@@ -168,6 +168,10 @@ class CallbackHandler
 
         $isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
 
+        if ($isPhp54 && is_string($callback)) {
+            $this->validateStringCallbackFor54($callback);
+        }
+
         // Minor performance tweak; use call_user_func() until > 3 arguments 
         // reached
         switch (count($args)) {
@@ -233,5 +237,47 @@ class CallbackHandler
             return $this->metadata[$name];
         }
         return null;
+    }
+
+    /**
+     * Validate a static method call
+     *
+     * Validates that a static method call in PHP 5.4 will actually work
+     * 
+     * @param  string $callback 
+     * @return true
+     * @throws Exception\InvalidCallbackException if invalid
+     */
+    protected function validateStringCallbackFor54($callback)
+    {
+        if (!strstr($callback, '::')) {
+            return true;
+        }
+
+        list($class, $method) = explode('::', $callback, 2);
+
+        if (!class_exists($class)) {
+            throw new Exception\InvalidCallbackException(sprintf(
+                'Static method call "%s" refers to a class that does not exist',
+                $callback
+            ));
+        }
+
+        $r = new ReflectionClass($class);
+        if (!$r->hasMethod($method)) {
+            throw new Exception\InvalidCallbackException(sprintf(
+                'Static method call "%s" refers to a method that does not exist',
+                $callback
+            ));
+        }
+        $m = $r->getMethod($method);
+        if (!$m->isStatic()) {
+            throw new Exception\InvalidCallbackException(sprintf(
+                'Static method call "%s" refers to a method that is not static',
+                $callback
+            ));
+        }
+
+        return true;
     }
 }

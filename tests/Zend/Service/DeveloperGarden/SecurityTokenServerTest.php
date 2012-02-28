@@ -68,18 +68,18 @@ class Zend_Service_DeveloperGarden_SecurityTokenServerTest extends PHPUnit_Frame
     public function testGetTokens()
     {
         $soap = $this->service->getSoapClient();
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Client_Soap',
             $soap
         );
 
         $tokens = $this->service->getTokens();
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SecurityTokenServer_GetTokensResponse',
             $tokens
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SecurityTokenServer_SecurityTokenResponse',
             $tokens->securityToken
         );
@@ -105,7 +105,7 @@ class Zend_Service_DeveloperGarden_SecurityTokenServerTest extends PHPUnit_Frame
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
         );
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Cache_Core',
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::getCache()
         );
@@ -114,12 +114,12 @@ class Zend_Service_DeveloperGarden_SecurityTokenServerTest extends PHPUnit_Frame
         Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::clearCache();
 
         $tokens = $this->service->getTokens();
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SecurityTokenServer_GetTokensResponse',
             $tokens
         );
 
-        $this->assertType(
+        $this->assertInstanceOf(
             'Zend_Service_DeveloperGarden_Response_SecurityTokenServer_SecurityTokenResponse',
             $tokens->securityToken
         );

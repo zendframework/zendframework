@@ -120,6 +120,9 @@ class Part extends TreeRouteStack implements Route
         if (!isset($options['child_routes']) || !$options['child_routes']) {
             $options['child_routes'] = null;
         }
+        if ($options['child_routes'] instanceof Traversable) {
+            $options['child_routes'] = IteratorToArray::convert($options['child_routes']);
+        }
 
         return new static($options['route'], $options['may_terminate'], $options['route_broker'], $options['child_routes']);
     }

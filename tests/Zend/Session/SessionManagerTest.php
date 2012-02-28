@@ -188,6 +188,37 @@ class SessionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($storage, $manager->getStorage());
     }
 
+    public function testCanPassSaveHandlerToConstructor()
+    {
+        $saveHandler = new TestAsset\TestSaveHandler();
+        $manager = new SessionManager(null, null, $saveHandler);
+        $this->assertSame($saveHandler, $manager->getSaveHandler());
+    }
+
+    public function testCanPassStringSessionHandlerNameToConstructor()
+    {
+        $manager = new SessionManager(null, null, 'ZendTest\\Session\\TestAsset\\TestSaveHandler');
+        $sessionHandler = $manager->getSaveHandler();
+        $this->assertTrue($sessionHandler instanceof TestAsset\TestSaveHandler);
+    }
+
+    public function testCanPassSaveHandlerToConfigurationOptions()
+    {
+        $manager = new SessionManager(array('saveHandler' => 'ZendTest\\Session\\TestAsset\\TestSaveHandler'));
+        $saveHandler = $manager->getSaveHandler();
+        $this->assertTrue($saveHandler instanceof TestAsset\TestSaveHandler);
+    }
+    
+    public function testPassingSaveHandlerViaParamOverridesSaveHandlerInConfig()
+    {
+        $saveHandler = new TestAsset\TestSaveHandler();
+        $manager = new TestAsset\TestManager(array(
+            'class' => 'Zend\\Session\\Configuration\\StandardConfiguration',
+            'saveHandler' => 'ZendTest\\Session\\TestAsset\\TestSaveHandler',
+        ), null, $saveHandler);
+        $this->assertSame($saveHandler, $manager->getSaveHandler());
+    }
+
     // Session-related functionality
 
     /**

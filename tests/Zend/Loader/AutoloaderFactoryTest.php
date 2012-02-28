@@ -81,6 +81,22 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($map));
     }
 
+    /**
+     * This tests checks if invalid autoloaders cause exceptions
+     *
+     * @expectedException InvalidArgumentException
+     */
+    public function testFactoryCatchesInvalidClasses()
+    {
+        if (!version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            $this->markTestSkipped('Cannot test invalid interface loader with versions less than 5.3.7');
+        }
+        include __DIR__ . '/_files/InvalidInterfaceAutoloader.php';
+        AutoloaderFactory::factory(array(
+            'InvalidInterfaceAutoloader' => array()            
+        ));
+    }
+
     public function testFactoryDoesNotRegisterDuplicateAutoloaders()
     {
         AutoloaderFactory::factory(array(
@@ -173,5 +189,24 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $reflection = new ReflectionClass('Zend\Loader\AutoloaderFactory');
         $constructor = $reflection->getConstructor();
         $this->assertNull($constructor);
+    }
+
+    public function testPassingNoArgumentsToFactoryInstantiatesAndRegistersStandardAutoloader()
+    {
+        AutoloaderFactory::factory();
+        $loaders = AutoloaderFactory::getRegisteredAutoloaders();
+        $this->assertEquals(1, count($loaders));
+        $loader = array_shift($loaders);
+        $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $loader);
+
+        $test  = array($loader, 'autoload');
+        $found = false;
+        foreach (spl_autoload_functions() as $function) {
+            if ($function === $test) {
+                $found = true;
+                break;
+            }
+        }
+        $this->assertTrue($found, 'StandardAutoloader not registered with spl_autoload');
     }
 }

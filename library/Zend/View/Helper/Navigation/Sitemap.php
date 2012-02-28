@@ -26,7 +26,7 @@ namespace Zend\View\Helper\Navigation;
 
 use DOMDocument,
     RecursiveIteratorIterator,
-    Zend\Navigation\AbstractPage,
+    Zend\Navigation\Page\AbstractPage,
     Zend\Navigation\Container,
     Zend\Uri,
     Zend\View,
@@ -64,44 +64,42 @@ class Sitemap extends AbstractHelper
      *
      * @var bool
      */
-    protected $_formatOutput = false;
+    protected $formatOutput = false;
 
     /**
      * Whether the XML declaration should be included in XML output
      *
      * @var bool
      */
-    protected $_useXmlDeclaration = true;
+    protected $useXmlDeclaration = true;
 
     /**
      * Whether sitemap should be validated using Zend\Validate\Sitemap\*
      *
      * @var bool
      */
-    protected $_useSitemapValidators = true;
+    protected $useSitemapValidators = true;
 
     /**
      * Whether sitemap should be schema validated when generated
      *
      * @var bool
      */
-    protected $_useSchemaValidation = false;
+    protected $useSchemaValidation = false;
 
     /**
      * Server url
      *
      * @var string
      */
-    protected $_serverUrl;
+    protected $serverUrl;
 
     /**
      * View helper entry point:
      * Retrieves helper and optionally sets container to operate on
      *
-     * @param  \Zend\Navigation\Container $container  [optional] container to
-     *                                               operate on
-     * @return \Zend\View\Helper\Navigation\Sitemap   fluent interface, returns
-     *                                               self
+     * @param  Container $container  [optional] container to operate on
+     * @return Sitemap   fluent interface, returns self
      */
     public function __invoke(Container $container = null)
     {
@@ -117,15 +115,12 @@ class Sitemap extends AbstractHelper
     /**
      * Sets whether XML output should be formatted
      *
-     * @param  bool $formatOutput                   [optional] whether output
-     *                                              should be formatted. Default
-     *                                              is true.
-     * @return \Zend\View\Helper\Navigation\Sitemap  fluent interface, returns
-     *                                              self
+     * @param  bool $formatOutput [optional] whether output should be formatted. Default is true.
+     * @return Sitemap  fluent interface, returns self
      */
     public function setFormatOutput($formatOutput = true)
     {
-        $this->_formatOutput = (bool) $formatOutput;
+        $this->formatOutput = (bool) $formatOutput;
         return $this;
     }
 
@@ -136,20 +131,18 @@ class Sitemap extends AbstractHelper
      */
     public function getFormatOutput()
     {
-        return $this->_formatOutput;
+        return $this->formatOutput;
     }
 
     /**
      * Sets whether the XML declaration should be used in output
      *
-     * @param  bool $useXmlDecl                     whether XML delcaration
-     *                                              should be rendered
-     * @return \Zend\View\Helper\Navigation\Sitemap  fluent interface, returns
-     *                                              self
+     * @param  bool $useXmlDecl whether XML delcaration should be rendered
+     * @returnSitemap  fluent interface, returns self
      */
     public function setUseXmlDeclaration($useXmlDecl)
     {
-        $this->_useXmlDeclaration = (bool) $useXmlDecl;
+        $this->useXmlDeclaration = (bool) $useXmlDecl;
         return $this;
     }
 
@@ -160,20 +153,18 @@ class Sitemap extends AbstractHelper
      */
     public function getUseXmlDeclaration()
     {
-        return $this->_useXmlDeclaration;
+        return $this->useXmlDeclaration;
     }
 
     /**
      * Sets whether sitemap should be validated using Zend\Validate\Sitemap_*
      *
-     * @param  bool $useSitemapValidators           whether sitemap validators
-     *                                              should be used
-     * @return \Zend\View\Helper\Navigation\Sitemap  fluent interface, returns
-     *                                              self
+     * @param  bool $useSitemapValidators whether sitemap validators should be used
+     * @returnSitemap  fluent interface, returns self
      */
     public function setUseSitemapValidators($useSitemapValidators)
     {
-        $this->_useSitemapValidators = (bool) $useSitemapValidators;
+        $this->useSitemapValidators = (bool) $useSitemapValidators;
         return $this;
     }
 
@@ -184,20 +175,18 @@ class Sitemap extends AbstractHelper
      */
     public function getUseSitemapValidators()
     {
-        return $this->_useSitemapValidators;
+        return $this->useSitemapValidators;
     }
 
     /**
      * Sets whether sitemap should be schema validated when generated
      *
-     * @param  bool $schemaValidation               whether sitemap should
-     *                                              validated using XSD Schema
-     * @return \Zend\View\Helper\Navigation\Sitemap  fluent interface, returns
-     *                                              self
+     * @param  bool $schemaValidation whether sitemap should validated using XSD Schema
+     * @returnSitemap  fluent interface, returns self
      */
     public function setUseSchemaValidation($schemaValidation)
     {
-        $this->_useSchemaValidation = (bool) $schemaValidation;
+        $this->useSchemaValidation = (bool) $schemaValidation;
         return $this;
     }
 
@@ -208,7 +197,7 @@ class Sitemap extends AbstractHelper
      */
     public function getUseSchemaValidation()
     {
-        return $this->_useSchemaValidation;
+        return $this->useSchemaValidation;
     }
 
     /**
@@ -228,7 +217,7 @@ class Sitemap extends AbstractHelper
         $uri->setQuery('');
 
         if ($uri->isValid()) {
-            $this->_serverUrl = $uri->toString();
+            $this->serverUrl = $uri->toString();
         } else {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid server URL: "%s"',
@@ -246,12 +235,12 @@ class Sitemap extends AbstractHelper
      */
     public function getServerUrl()
     {
-        if (!isset($this->_serverUrl)) {
+        if (!isset($this->serverUrl)) {
             $serverUrlHelper  = $this->getView()->plugin('serverUrl');
-            $this->_serverUrl = $serverUrlHelper();
+            $this->serverUrl = $serverUrlHelper();
         }
 
-        return $this->_serverUrl;
+        return $this->serverUrl;
     }
 
     // Helper methods:
@@ -262,7 +251,7 @@ class Sitemap extends AbstractHelper
      * @param  string $string  string to escape
      * @return string          escaped string
      */
-    protected function _xmlEscape($string)
+    protected function xmlEscape($string)
     {
         $enc = 'UTF-8';
         if ($this->view instanceof View\Renderer
@@ -279,7 +268,7 @@ class Sitemap extends AbstractHelper
     /**
      * Returns an escaped absolute URL for the given page
      *
-     * @param  \Zend\Navigation\AbstractPage $page  page to get URL from
+     * @param  AbstractPage $page  page to get URL from
      * @return string
      */
     public function url(AbstractPage $page)
@@ -305,13 +294,13 @@ class Sitemap extends AbstractHelper
                             . (empty($curDoc) ? '' : '/') . $href;
         }
 
-        return $this->_xmlEscape($url);
+        return $this->xmlEscape($url);
     }
 
     /**
      * Returns a DOMDocument containing the Sitemap XML for the given container
      *
-     * @param  \Zend\Navigation\Container $container  [optional] container to get
+     * @param  Container                 $container  [optional] container to get
      *                                               breadcrumbs from, defaults
      *                                               to what is registered in the
      *                                               helper
@@ -451,13 +440,12 @@ class Sitemap extends AbstractHelper
     /**
      * Renders helper
      *
-     * Implements {@link Zend_View_Helper_Navigation_Helper::render()}.
+     * Implements {@link Helper::render()}.
      *
-     * @param  \Zend\Navigation\Container $container  [optional] container to
-     *                                               render. Default is to
-     *                                               render the container
-     *                                               registered in the helper.
-     * @return string                                helper output
+     * @param  Container $container [optional] container to render. Default is 
+     *                              to render the container registered in the 
+     *                              helper.
+     * @return string               helper output
      */
     public function render(Container $container = null)
     {

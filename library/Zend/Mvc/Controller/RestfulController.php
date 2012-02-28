@@ -13,6 +13,7 @@ use Zend\Di\Locator,
     Zend\Stdlib\Dispatchable,
     Zend\Stdlib\RequestDescription as Request,
     Zend\Stdlib\ResponseDescription as Response,
+    Zend\Mvc\Exception,
     Zend\Mvc\InjectApplicationEvent,
     Zend\Mvc\LocatorAware,
     Zend\Mvc\MvcEvent;
@@ -30,47 +31,47 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
 
     /**
      * Return list of resources
-     * 
+     *
      * @return mixed
      */
     abstract public function getList();
 
     /**
      * Return single resource
-     * 
-     * @param  mixed $id 
+     *
+     * @param  mixed $id
      * @return mixed
      */
     abstract public function get($id);
 
     /**
      * Create a new resource
-     * 
-     * @param  mixed $data 
+     *
+     * @param  mixed $data
      * @return mixed
      */
     abstract public function create($data);
 
     /**
      * Update an existing resource
-     * 
-     * @param  mixed $id 
-     * @param  mixed $data 
+     *
+     * @param  mixed $id
+     * @param  mixed $data
      * @return mixed
      */
     abstract public function update($id, $data);
 
     /**
      * Delete an existing resource
-     * 
-     * @param  mixed $id 
+     *
+     * @param  mixed $id
      * @return mixed
      */
     abstract public function delete($id);
 
     /**
      * Basic functionality for when a page is not available
-     * 
+     *
      * @return array
      */
     public function notFoundAction()
@@ -85,10 +86,10 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
      * If the route match includes an "action" key, then this acts basically like
      * a standard action controller. Otherwise, it introspects the HTTP method
      * to determine how to handle the request, and which method to delegate to.
-     * 
+     *
      * @events dispatch.pre, dispatch.post
-     * @param  Request $request 
-     * @param  null|Response $response 
+     * @param  Request $request
+     * @param  null|Response $response
      * @return mixed|Response
      */
     public function dispatch(Request $request, Response $response = null)
@@ -212,8 +213,8 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
 
     /**
      * Set the event manager instance used by this context
-     * 
-     * @param  EventCollection $events 
+     *
+     * @param  EventCollection $events
      * @return AppContext
      */
     public function setEventManager(EventCollection $events)
@@ -226,7 +227,7 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
      * Retrieve the event manager
      *
      * Lazy-loads an EventManager instance if none registered.
-     * 
+     *
      * @return EventCollection
      */
     public function events()
@@ -241,13 +242,13 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
         }
         return $this->events;
     }
-    
+
     /**
      * Set an event to use during dispatch
      *
      * By default, will re-cast to MvcEvent if another event type is provided.
-     * 
-     * @param  Event $e 
+     *
+     * @param  Event $e
      * @return void
      */
     public function setEvent(Event $e)
@@ -265,7 +266,7 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
      * Get the attached event
      *
      * Will create a new MvcEvent if none provided.
-     * 
+     *
      * @return Event
      */
     public function getEvent()
@@ -278,8 +279,8 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
 
     /**
      * Set locator instance
-     * 
-     * @param  Locator $locator 
+     *
+     * @param  Locator $locator
      * @return void
      */
     public function setLocator(Locator $locator)
@@ -289,7 +290,7 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
 
     /**
      * Retrieve locator instance
-     * 
+     *
      * @return Locator
      */
     public function getLocator()
@@ -361,7 +362,7 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
 
     /**
      * Register the default events for this controller
-     * 
+     *
      * @return void
      */
     protected function attachDefaultListeners()
@@ -372,8 +373,8 @@ abstract class RestfulController implements Dispatchable, InjectApplicationEvent
 
     /**
      * Transform an "action" token into a method name
-     * 
-     * @param  string $action 
+     *
+     * @param  string $action
      * @return string
      */
     public static function getMethodFromAction($action)

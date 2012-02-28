@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -27,25 +27,25 @@ use Zend\Ldap;
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
+ * @group      Zend_Ldap
  */
 class OfflineTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Zend_LDAP instance
+     * Zend_Ldap instance
      *
-     * @var Zend_LDAP
+     * @var Zend_Ldap
      */
     protected $_ldap = null;
 
     /**
      * Setup operations run prior to each test method:
      *
-     * * Creates an instance of Zend_LDAP
+     * * Creates an instance of Zend_Ldap
      *
      * @return void
      */
@@ -65,9 +65,9 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
         $optionName = 'invalid';
         try {
             $this->_ldap->setOptions(array($optionName => 'irrelevant'));
-            $this->fail('Expected Zend_LDAP_Exception not thrown');
+            $this->fail('Expected Zend_Ldap_Exception not thrown');
         } catch (Ldap\Exception $e) {
-            $this->assertEquals("Unknown Zend_LDAP option: $optionName", $e->getMessage());
+            $this->assertEquals("Unknown Zend_Ldap option: $optionName", $e->getMessage());
         }
     }
 
@@ -108,7 +108,8 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'allowEmptyPassword'     => false,
             'useStartTls'            => false,
             'optReferrals'           => false,
-            'tryUsernameSplit'       => true
+            'tryUsernameSplit'       => true,
+            'networkTimeout'         => null,
         ), $ldap->getOptions());
     }
 
@@ -139,7 +140,8 @@ class OfflineTest extends \PHPUnit_Framework_TestCase
             'allowEmptyPassword'     => false,
             'useStartTls'            => false,
             'optReferrals'           => false,
-            'tryUsernameSplit'       => true
+            'tryUsernameSplit'       => true,
+            'networkTimeout'         => null,
         ), $ldap->getOptions());
     }
 }

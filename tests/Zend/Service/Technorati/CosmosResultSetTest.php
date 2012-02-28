@@ -66,13 +66,13 @@ class Zend_Service_Technorati_CosmosResultSetTest extends Zend_Service_Technorat
         $this->assertEquals(278, $object->totalResultsAvailable());
 
         // check properties
-        $this->assertType('Zend_Uri_Http', $object->getUrl());
+        $this->assertInstanceOf('Zend_Uri_Http', $object->getUrl());
         $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
         $this->assertInternalType('integer', $object->getInboundLinks());
         $this->assertEquals(278, $object->getInboundLinks());
 
         // check weblog
-        $this->assertType('Zend_Service_Technorati_Weblog', $object->getWeblog());
+        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $object->getWeblog());
         $this->assertEquals('Simone Carletti\'s Blog', $object->getWeblog()->getName());
     }
 

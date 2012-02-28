@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -26,22 +26,22 @@ namespace ZendTest\Ldap\Node;
 use Zend\Ldap\Node\RootDse;
 
 /**
- * Zend_LDAP_OnlineTestCase
+ * Zend_Ldap_OnlineTestCase
  */
 
 /**
  * @category   Zend
- * @package    Zend_LDAP
+ * @package    Zend_Ldap
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_LDAP
- * @group      Zend_LDAP_Node
+ * @group      Zend_Ldap
+ * @group      Zend_Ldap_Node
  */
 class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 {
     /**
-     * @var Zend_LDAP_Node_Schema
+     * @var Zend_Ldap_Node_Schema
      */
     private $_schema;
 
@@ -126,7 +126,7 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 
         $this->assertArrayHasKey('organizationalUnit', $objectClasses);
         $ou=$objectClasses['organizationalUnit'];
-        $this->assertType('\Zend\Ldap\Node\Schema\ObjectClassOpenLdap', $ou);
+        $this->assertInstanceOf('Zend\Ldap\Node\Schema\ObjectClass\OpenLdap', $ou);
         $this->assertEquals('organizationalUnit', $ou->getName());
         $this->assertEquals('2.5.6.5', $ou->getOid());
         $this->assertEquals(array('objectClass', 'ou'), $ou->getMustContain());
@@ -167,7 +167,7 @@ class SchemaTest extends \ZendTest\Ldap\OnlineTestCase
 
         $this->assertArrayHasKey('ou', $attributeTypes);
         $ou=$attributeTypes['ou'];
-        $this->assertType('\Zend\Ldap\Node\Schema\AttributeTypeOpenLdap', $ou);
+        $this->assertInstanceOf('Zend\Ldap\Node\Schema\AttributeType\OpenLdap', $ou);
         $this->assertEquals('ou', $ou->getName());
         $this->assertEquals('2.5.4.11', $ou->getOid());
         $this->assertEquals('1.3.6.1.4.1.1466.115.121.1.15', $ou->getSyntax());

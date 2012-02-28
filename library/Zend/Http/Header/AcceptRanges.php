@@ -19,7 +19,7 @@ class AcceptRanges implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'accept-ranges') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Accept-Ranges string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Accept-Ranges string: "' . $name . '"');
         }
 
         $header->rangeUnit = trim($value);

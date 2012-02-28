@@ -233,6 +233,7 @@ class Application implements AppContext
         if ($result->stopped()) {
             $response = $result->last();
             if ($response instanceof Response) {
+                $events->trigger('finish', $event);
                 return $response;
             }
             if ($event->getError()) {
@@ -250,6 +251,7 @@ class Application implements AppContext
         // Complete response
         $response = $result->last();
         if ($response instanceof Response) {
+            $events->trigger('finish', $event);
             return $response;
         }
 
@@ -341,6 +343,10 @@ class Application implements AppContext
             goto complete;
         }
 
+        if ($controller instanceof LocatorAware) {
+            $controller->setLocator($locator);
+        }
+
         if (!$controller instanceof Dispatchable) {
             $error = clone $e;
             $error->setError(static::ERROR_CONTROLLER_INVALID)
@@ -354,10 +360,6 @@ class Application implements AppContext
                 $return = $error->getParams();
             }
             goto complete;
-        }
-
-        if ($controller instanceof LocatorAware) {
-            $controller->setLocator($locator);
         }
 
         $request  = $e->getRequest();

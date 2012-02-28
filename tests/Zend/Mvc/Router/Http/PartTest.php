@@ -1,7 +1,8 @@
 <?php
 namespace ZendTest\Mvc\Router\Http;
 
-use PHPUnit_Framework_TestCase as TestCase,
+use ArrayObject,
+    PHPUnit_Framework_TestCase as TestCase,
     Zend\Http\Request as Request,
     Zend\Stdlib\Request as BaseRequest,
     Zend\Mvc\Router\RouteBroker,
@@ -268,5 +269,42 @@ class PartTest extends TestCase
                 'route_broker' => new RouteBroker()
             )
         );
+    }
+
+    /**
+     * @group ZF2-105
+     */
+    public function testFactoryShouldAcceptTraversableChildRoutes()
+    {
+        $children = new ArrayObject(array(
+            'create' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route' => 'create',
+                    'defaults' => array(
+                        'controller' => 'user-admin',
+                        'action'     => 'edit',
+                    ),
+                ),
+            ),
+        ));
+        $options = array(
+            'route'        => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/admin/users',
+                    'defaults' => array(
+                        'controller' => 'Admin\UserController',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'route_broker' => new RouteBroker(),
+            'may_terminate' => true,
+            'child_routes'  => $children,
+        );
+
+        $route = Part::factory($options);
+        $this->assertInstanceOf('Zend\Mvc\Router\Http\Part', $route);
     }
 }

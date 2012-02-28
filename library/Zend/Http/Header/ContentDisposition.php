@@ -17,12 +17,12 @@ class ContentDisposition implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'content-disposition') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Content-Disposition string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Content-Disposition string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class ContentDisposition implements HeaderDescription
     {
         return 'Content-Disposition: ' . $this->getFieldValue();
     }
-    
+
 }

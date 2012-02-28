@@ -105,7 +105,7 @@ class SessionConfigurationTest extends \PHPUnit_Framework_TestCase
     public function testSettingInvalidSaveHandlerRaisesException()
     {
         $this->setExpectedException('Zend\Session\Exception\InvalidArgumentException', 'Invalid save handler specified');
-        $this->config->setSaveHandler('foobar_bogus');
+        $this->config->setPhpSaveHandler('foobar_bogus');
     }
 
     // session.gc_probability

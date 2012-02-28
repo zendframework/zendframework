@@ -17,12 +17,12 @@ class Expect implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'expect') {
-            throw new Exception\InvalidArgumentException('Invalid header line for Expect string');
+            throw new Exception\InvalidArgumentException('Invalid header line for Expect string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class Expect implements HeaderDescription
     {
         return 'Expect: ' . $this->getFieldValue();
     }
-    
+
 }

@@ -54,7 +54,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     {
         // getting instance initializes instance
         $registry = Registry::getInstance();
-        $this->assertType('\\Zend\\Registry', $registry);
+        $this->assertInstanceOf('Zend\Registry', $registry);
     }
 
     public function testRegistryUninitSet()
@@ -62,7 +62,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         // setting value initializes instance
         Registry::set('foo', 'bar');
         $registry = Registry::getInstance();
-        $this->assertType('\\Zend\\Registry', $registry);
+        $this->assertInstanceOf('Zend\Registry', $registry);
     }
 
     public function testRegistryUninitGet()
@@ -77,15 +77,15 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
             $this->assertContains('No entry is registered for key', $e->getMessage());
         }
         $registry = Registry::getInstance();
-        $this->assertType('\\Zend\\Registry', $registry);
+        $this->assertInstanceOf('Zend\Registry', $registry);
     }
 
     public function testRegistrySingletonSameness()
     {
         $registry1 = Registry::getInstance();
         $registry2 = Registry::getInstance();
-        $this->assertType('\\Zend\\Registry', $registry1);
-        $this->assertType('\\Zend\\Registry', $registry2);
+        $this->assertInstanceOf('Zend\Registry', $registry1);
+        $this->assertInstanceOf('Zend\Registry', $registry2);
         $this->assertEquals($registry1, $registry2);
         $this->assertSame($registry1, $registry2);
     }

@@ -73,10 +73,11 @@ class NavigationTest extends \PHPUnit_Framework_TestCase
         $page1->setOrder(1);
         $page3->setOrder(0);
         $page2->setOrder(2);
-        
+
         $pages = $this->_navigation->toArray();
+
         $this->assertSame(3, count($pages));
-        $this->assertEquals('page3', $pages[0]['uri']);
+        $this->assertEquals('page3', $pages[0]['uri'], var_export($pages, 1));
         $this->assertEquals('page1', $pages[1]['uri']);
         $this->assertEquals('page2', $pages[2]['uri']);
     }

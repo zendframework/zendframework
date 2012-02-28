@@ -17,12 +17,12 @@ class From implements HeaderDescription
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== 'from') {
-            throw new Exception\InvalidArgumentException('Invalid header line for From string');
+            throw new Exception\InvalidArgumentException('Invalid header line for From string: "' . $name . '"');
         }
 
         // @todo implementation details
-        $header->value= $value;
-        
+        $header->value = $value;
+
         return $header;
     }
 
@@ -40,5 +40,5 @@ class From implements HeaderDescription
     {
         return 'From: ' . $this->getFieldValue();
     }
-    
+
 }

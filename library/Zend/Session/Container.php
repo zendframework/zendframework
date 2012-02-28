@@ -43,22 +43,22 @@ class Container extends ArrayObject
     /**
      * @var string Container name
      */
-    protected $_name;
+    protected $name;
 
     /**
      * @var Manager
      */
-    protected $_manager;
+    protected $manager;
 
     /**
      * @var string default manager class to use if no manager has been provided
      */
-    protected static $_managerDefaultClass = 'Zend\\Session\\SessionManager';
+    protected static $managerDefaultClass = 'Zend\\Session\\SessionManager';
 
     /**
      * @var Manager Default manager to use when instantiating a container without providing a Manager
      */
-    protected static $_defaultManager;
+    protected static $defaultManager;
 
     /**
      * Constructor
@@ -74,8 +74,8 @@ class Container extends ArrayObject
         if (!preg_match('/^[a-z][a-z0-9_\\\]+$/i', $name)) {
             throw new Exception\InvalidArgumentException('Name passed to container is invalid; must consist of alphanumerics, backslashes and underscores only');
         }
-        $this->_name = $name;
-        $this->_setManager($manager);
+        $this->name = $name;
+        $this->setManager($manager);
 
         // Create namespace
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);
@@ -92,27 +92,27 @@ class Container extends ArrayObject
      */
     public static function setDefaultManager(Manager $manager = null)
     {
-        self::$_defaultManager = $manager;
+        self::$defaultManager = $manager;
     }
 
     /**
      * Get the default Manager instance
      *
-     * If none provided, instantiates one of type {@link $_managerDefaultClass}
+     * If none provided, instantiates one of type {@link $managerDefaultClass}
      * 
      * @return Manager
      * @throws Exception if invalid manager default class provided
      */
     public static function getDefaultManager()
     {
-        if (null === self::$_defaultManager) {
-            $manager = new self::$_managerDefaultClass();
+        if (null === self::$defaultManager) {
+            $manager = new self::$managerDefaultClass();
             if (!$manager instanceof Manager) {
                 throw new Exception\InvalidArgumentException('Invalid manager type provided; must implement Manager');
             }
-            self::$_defaultManager = $manager;
+            self::$defaultManager = $manager;
         }
-        return self::$_defaultManager;
+        return self::$defaultManager;
     }
 
     /**
@@ -122,7 +122,7 @@ class Container extends ArrayObject
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -132,7 +132,7 @@ class Container extends ArrayObject
      */
     public function getManager()
     {
-        return $this->_manager;
+        return $this->manager;
     }
 
     /**
@@ -141,7 +141,7 @@ class Container extends ArrayObject
      * @param  null|string|Manager $manager 
      * @return Container
      */
-    protected function _setManager($manager)
+    protected function setManager($manager)
     {
         if (null === $manager) {
             $manager = self::getDefaultManager();
@@ -149,7 +149,7 @@ class Container extends ArrayObject
         if (!$manager instanceof Manager) {
             throw new Exception\InvalidArgumentException('Manager provided is invalid; must implement Manager interface');
         }
-        $this->_manager = $manager;
+        $this->manager = $manager;
         return $this;
     }
 
@@ -160,7 +160,7 @@ class Container extends ArrayObject
      * 
      * @return Storage
      */
-    protected function _getStorage()
+    protected function getStorage()
     {
         return $this->getManager()->getStorage();
     }
@@ -170,7 +170,7 @@ class Container extends ArrayObject
      * 
      * @return ArrayObject
      */
-    protected function _createContainer()
+    protected function createContainer()
     {
         return new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
     }
@@ -187,15 +187,15 @@ class Container extends ArrayObject
      * @return Storage|null Returns null only if $createContainer is false
      * @throws Exception
      */
-    protected function _verifyNamespace($createContainer = true)
+    protected function verifyNamespace($createContainer = true)
     {
-        $storage = $this->_getStorage();
+        $storage = $this->getStorage();
         $name    = $this->getName();
         if (!isset($storage[$name])) {
             if (!$createContainer) {
                 return;
             }
-            $storage[$name] = $this->_createContainer();
+            $storage[$name] = $this->createContainer();
         }
         if (!is_array($storage[$name]) && !$storage[$name] instanceof ArrayObject) {
             throw new Exception\RuntimeException('Container cannot write to storage due to type mismatch');
@@ -211,9 +211,9 @@ class Container extends ArrayObject
      * @param  null|string $key 
      * @return bool
      */
-    protected function _expireKeys($key = null)
+    protected function expireKeys($key = null)
     {
-        $storage = $this->_verifyNamespace();
+        $storage = $this->verifyNamespace();
         $name    = $this->getName();
 
         // Return early if key not found
@@ -221,11 +221,11 @@ class Container extends ArrayObject
             return true;
         }
 
-        if ($this->_expireByExpiryTime($storage, $name, $key)) {
+        if ($this->expireByExpiryTime($storage, $name, $key)) {
             return true;
         }
 
-        if ($this->_expireByHops($storage, $name, $key)) {
+        if ($this->expireByHops($storage, $name, $key)) {
             return true;
         }
 
@@ -243,7 +243,7 @@ class Container extends ArrayObject
      * @param  string $key Key in container to check
      * @return bool
      */
-    protected function _expireByExpiryTime(Storage $storage, $name, $key)
+    protected function expireByExpiryTime(Storage $storage, $name, $key)
     {
         $metadata = $storage->getMetadata($name);
 
@@ -254,7 +254,7 @@ class Container extends ArrayObject
         ) {
             unset($metadata['EXPIRE']);
             $storage->setMetadata($name, $metadata, true);
-            $storage[$name] = $this->_createContainer();
+            $storage[$name] = $this->createContainer();
             return true;
         }
 
@@ -302,7 +302,7 @@ class Container extends ArrayObject
      * @param  string $key 
      * @return bool
      */
-    protected function _expireByHops(Storage $storage, $name, $key)
+    protected function expireByHops(Storage $storage, $name, $key)
     {
         $ts       = $storage->getRequestAccessTime();
         $metadata = $storage->getMetadata($name);
@@ -316,7 +316,7 @@ class Container extends ArrayObject
             if (-1 === $metadata['EXPIRE_HOPS']['hops']) {
                 unset($metadata['EXPIRE_HOPS']);
                 $storage->setMetadata($name, $metadata, true);
-                $storage[$name] = $this->_createContainer();
+                $storage[$name] = $this->createContainer();
                 return true;
             }
             $metadata['EXPIRE_HOPS']['ts'] = $ts;
@@ -376,8 +376,8 @@ class Container extends ArrayObject
      */
     public function offsetSet($key, $value)
     {
-        $this->_expireKeys($key);
-        $storage = $this->_verifyNamespace();
+        $this->expireKeys($key);
+        $storage = $this->verifyNamespace();
         $name    = $this->getName();
         $storage[$name][$key] = $value;
     }
@@ -391,7 +391,7 @@ class Container extends ArrayObject
     public function offsetExists($key)
     {
         // If no container exists, we can't inspect it
-        if (null === ($storage = $this->_verifyNamespace(false))) {
+        if (null === ($storage = $this->verifyNamespace(false))) {
             return false;
         }
         $name    = $this->getName();
@@ -401,7 +401,7 @@ class Container extends ArrayObject
             return false;
         }
 
-        $expired = $this->_expireKeys($key);
+        $expired = $this->expireKeys($key);
         return !$expired;
     }
 
@@ -416,7 +416,7 @@ class Container extends ArrayObject
         if (!$this->offsetExists($key)) {
             return null;
         }
-        $storage = $this->_getStorage();
+        $storage = $this->getStorage();
         $name    = $this->getName();
         return $storage[$name][$key];
     }
@@ -432,7 +432,7 @@ class Container extends ArrayObject
         if (!$this->offsetExists($key)) {
             return;
         }
-        $storage = $this->_getStorage();
+        $storage = $this->getStorage();
         $name    = $this->getName();
         unset($storage[$name][$key]);
     }
@@ -444,8 +444,8 @@ class Container extends ArrayObject
      */
     public function getIterator()
     {
-        $this->_expireKeys();
-        $storage   = $this->_getStorage();
+        $this->expireKeys();
+        $storage   = $this->getStorage();
         $container = $storage[$this->getName()];
         return $container->getIterator();
     }
@@ -461,7 +461,7 @@ class Container extends ArrayObject
      */
     public function setExpirationSeconds($ttl, $vars = null)
     {
-        $storage = $this->_getStorage();
+        $storage = $this->getStorage();
         $ts      = $_SERVER['REQUEST_TIME'] + $ttl;
         if (is_scalar($vars) && null !== $vars) {
             $vars = (array) $vars;
@@ -506,7 +506,7 @@ class Container extends ArrayObject
      */
     public function setExpirationHops($hops, $vars = null)
     {
-        $storage = $this->_getStorage();
+        $storage = $this->getStorage();
         $ts      = $storage->getRequestAccessTime();
 
         if (is_scalar($vars) && (null !== $vars)) {

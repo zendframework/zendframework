@@ -25,7 +25,8 @@ namespace Zend\Feed\Reader;
 
 use Zend\Cache\Storage\Adapter as CacheAdapter,
     Zend\Http,
-    Zend\Loader;
+    Zend\Loader,
+    Zend\Stdlib\ErrorHandler;
 
 /**
 * @category Zend
@@ -323,11 +324,11 @@ class Reader
      */
     public static function importFile($filename)
     {
-        @ini_set('track_errors', 1);
-        $feed = @file_get_contents($filename);
-        @ini_restore('track_errors');
+        ErrorHandler::start();
+        $feed = file_get_contents($filename);
+        $err  = ErrorHandler::stop();
         if ($feed === false) {
-            throw new Exception("File could not be loaded: $php_errormsg");
+            throw new Exception("File '{$filename}' could not be loaded", 0, $err);
         }
         return self::importString($feed);
     }
@@ -455,7 +456,7 @@ class Reader
         if ($xpath->query('//atom:feed')->length) {
             return self::TYPE_ATOM_10;
         }
-        
+
         if ($xpath->query('//atom:entry')->length) {
             if ($specOnly == true) {
                 return self::TYPE_ATOM_10;
@@ -644,7 +645,7 @@ class Reader
         self::registerExtension('Thread');
         self::registerExtension('Podcast');
     }
-    
+
     /**
      * Utility method to apply array_unique operation to a multidimensional
      * array.
@@ -663,5 +664,5 @@ class Reader
         }
         return $array;
     }
- 
+
 }

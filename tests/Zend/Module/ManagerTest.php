@@ -81,6 +81,9 @@ class ManagerTest extends TestCase
         $loadedModules = $moduleManager->getLoadedModules();
         $this->assertInstanceOf('BarModule\Module', $loadedModules['BarModule']);
         $this->assertInstanceOf('BazModule\Module', $loadedModules['BazModule']);
+        $this->assertInstanceOf('BarModule\Module', $moduleManager->getModule('BarModule'));
+        $this->assertInstanceOf('BazModule\Module', $moduleManager->getModule('BazModule'));
+        $this->assertNull($moduleManager->getModule('NotLoaded'));
         $config = $configListener->getMergedConfig();
         $this->assertSame('foo', $config->bar);
         $this->assertSame('bar', $config->baz);

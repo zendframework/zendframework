@@ -29,9 +29,6 @@ namespace Zend\Service\StrikeIron;
  * in one place and provides a factory for returning instances of different
  * StrikeIron service classes.
  *
- * @uses       Exception
- * @uses       \Zend\Loader\Loader
- * @uses       \Zend\Service\StrikeIron\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
@@ -44,16 +41,16 @@ class StrikeIron
      * Options to pass to Zend_Service_StrikeIron_Base constructor
      * @param array
      */
-    protected $_options;
+    protected $options;
 
     /**
      * Class constructor
      *
-     * @param array  $options  Options to pass to \Zend\Service\StrikeIron\Base constructor
+     * @param array  $options  Options to pass to StrikeIron\Base constructor
      */
     public function __construct($options = array())
     {
-        $this->_options = $options;
+        $this->options = $options;
     }
 
     /**
@@ -62,7 +59,7 @@ class StrikeIron
      *
      * @param  null|string  $options  Service options
      * @return object       Zend\Service\StrikeIron_* instance
-     * @throws \Zend\Service\StrikeIron\Exception
+     * @throws StrikeIron\Exception
      */
     public function getService($options = array())
     {
@@ -78,7 +75,7 @@ class StrikeIron
         }
 
         // instantiate and return the service
-        $service = new $class(array_merge($this->_options, $options));
+        $service = new $class(array_merge($this->options, $options));
         return $service;
     }
 

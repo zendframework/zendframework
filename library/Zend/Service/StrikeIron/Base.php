@@ -24,11 +24,10 @@
  */
 namespace Zend\Service\StrikeIron;
 
+use SoapHeader,
+    SoapClient;
+
 /**
- * @uses       SoapHeader
- * @uses       SoapClient
- * @uses       \Zend\Service\StrikeIron\Decorator
- * @uses       \Zend\Service\StrikeIron\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
@@ -41,7 +40,7 @@ class Base
      * Configuration options
      * @param array
      */
-    protected $_options = array('username' => null,
+    protected $options = array('username' => null,
                                 'password' => null,
                                 'client'   => null,
                                 'options'  => null,
@@ -49,16 +48,16 @@ class Base
                                 'wsdl'     => null);
 
     /**
-     * Output headers returned by the last call to SOAPClient->__soapCall()
+     * Output headers returned by the last call to SOAPClient->_soapCall()
      * @param array
      */
-    protected $_outputHeaders = array();
+    protected $outputHeaders = array();
 
     /**
      * Class constructor
      *
      * @param  array  $options  Key/value pair options
-     * @throws \Zend\Service\StrikeIron\Exception
+     * @throws StrikeIron\Exception
      */
     public function __construct($options = array())
     {
@@ -66,10 +65,10 @@ class Base
             throw new Exception\RuntimeException('SOAP extension is not enabled');
         }
 
-        $this->_options  = array_merge($this->_options, $options);
+        $this->options  = array_merge($this->options, $options);
 
-        $this->_initSoapHeaders();
-        $this->_initSoapClient();
+        $this->initSoapHeaders();
+        $this->initSoapClient();
     }
 
     /**
@@ -79,28 +78,28 @@ class Base
      * @param  string  $method  Method name
      * @param  array   $params  Parameters for method
      * @return mixed            Result
-     * @throws \Zend\Service\StrikeIron\Exception
+     * @throws StrikeIron\Exception
      */
     public function __call($method, $params)
     {
         // prepare method name and parameters for soap call
-        list($method, $params) = $this->_transformCall($method, $params);
+        list($method, $params) = $this->transformCall($method, $params);
         $params = isset($params[0]) ? array($params[0]) : array();
 
         // make soap call, capturing the result and output headers
         try {
-            $result = $this->_options['client']->__soapCall($method,
+            $result = $this->options['client']->__soapCall($method,
                                                             $params,
-                                                            $this->_options['options'],
-                                                            $this->_options['headers'],
-                                                            $this->_outputHeaders);
+                                                            $this->options['options'],
+                                                            $this->options['headers'],
+                                                            $this->outputHeaders);
         } catch (\Exception $e) {
             $message = get_class($e) . ': ' . $e->getMessage();
             throw new Exception\RuntimeException($message, $e->getCode(), $e);
         }
 
         // transform/decorate the result and return it
-        $result = $this->_transformResult($result, $method, $params);
+        $result = $this->transformResult($result, $method, $params);
         return $result;
     }
 
@@ -109,35 +108,35 @@ class Base
      *
      * @return void
      */
-    protected function _initSoapClient()
+    protected function initSoapClient()
     {
-        if (! isset($this->_options['options'])) {
-            $this->_options['options'] = array();
+        if (! isset($this->options['options'])) {
+            $this->options['options'] = array();
         }
 
-        if (! isset($this->_options['client'])) {
-            $this->_options['client'] = new \SoapClient($this->_options['wsdl'],
-                                                       $this->_options['options']);
+        if (! isset($this->options['client'])) {
+            $this->options['client'] = new SoapClient($this->options['wsdl'],
+                                                       $this->options['options']);
         }
     }
 
     /**
-     * Initialize the headers to pass to SOAPClient->__soapCall()
+     * Initialize the headers to pass to SOAPClient->_soapCall()
      *
      * @return void
-     * @throws \Zend\Service\StrikeIron\Exception
+     * @throws StrikeIron\Exception
      */
-    protected function _initSoapHeaders()
+    protected function initSoapHeaders()
     {
         // validate headers and check if LicenseInfo was given
         $foundLicenseInfo = false;
-        if (isset($this->_options['headers'])) {
-            if (! is_array($this->_options['headers'])) {
-                $this->_options['headers'] = array($this->_options['headers']);
+        if (isset($this->options['headers'])) {
+            if (! is_array($this->options['headers'])) {
+                $this->options['headers'] = array($this->options['headers']);
             }
 
-            foreach ($this->_options['headers'] as $header) {
-                if (! $header instanceof \SoapHeader) {
+            foreach ($this->options['headers'] as $header) {
+                if (! $header instanceof SoapHeader) {
                     throw new Exception\RuntimeException('Header must be instance of SoapHeader');
                 } else if ($header->name == 'LicenseInfo') {
                     $foundLicenseInfo = true;
@@ -145,15 +144,15 @@ class Base
                 }
             }
         } else {
-            $this->_options['headers'] = array();
+            $this->options['headers'] = array();
         }
 
         // add default LicenseInfo header if a custom one was not supplied
         if (! $foundLicenseInfo) {
-            $this->_options['headers'][] = new \SoapHeader('http://ws.strikeiron.com',
+            $this->options['headers'][] = new SoapHeader('http://ws.strikeiron.com',
                             'LicenseInfo',
-                            array('RegisteredUser' => array('UserID'   => $this->_options['username'],
-                                                            'Password' => $this->_options['password'])));
+                            array('RegisteredUser' => array('UserID'   => $this->options['username'],
+                                                            'Password' => $this->options['password'])));
         }
     }
 
@@ -165,9 +164,9 @@ class Base
      * @see    __call()
      * @param  string  $method  Method name called from PHP
      * @param  mixed   $param   Parameters passed from PHP
-     * @return array            [$method, $params] for SOAPClient->__soapCall()
+     * @return array            [$method, $params] for SOAPClient->_soapCall()
      */
-    protected function _transformCall($method, $params)
+    protected function transformCall($method, $params)
     {
         return array(ucfirst($method), $params);
     }
@@ -183,11 +182,11 @@ class Base
      *
      * @see    __call()
      * @param  $result  Raw result returned from SOAPClient_>__soapCall()
-     * @param  $method  Method name that was passed to SOAPClient->__soapCall()
-     * @param  $params  Method parameters that were passed to SOAPClient->__soapCall()
+     * @param  $method  Method name that was passed to SOAPClient->_soapCall()
+     * @param  $params  Method parameters that were passed to SOAPClient->_soapCall()
      * @return mixed    Transformed result
      */
-    protected function _transformResult($result, $method, $params)
+    protected function transformResult($result, $method, $params)
     {
         $resultObjectName = "{$method}Result";
         if (isset($result->$resultObjectName)) {
@@ -206,7 +205,7 @@ class Base
      */
     public function getWsdl()
     {
-        return $this->_options['wsdl'];
+        return $this->options['wsdl'];
     }
 
     /**
@@ -214,7 +213,7 @@ class Base
      */
     public function getSoapClient()
     {
-        return $this->_options['client'];
+        return $this->options['client'];
     }
 
     /**
@@ -224,7 +223,7 @@ class Base
      */
     public function getLastOutputHeaders()
     {
-        return $this->_outputHeaders;
+        return $this->outputHeaders;
     }
 
     /**
@@ -236,18 +235,18 @@ class Base
      *
      * @param  boolean  $now          Force a call to getRemainingHits instead of cache?
      * @param  string   $queryMethod  Method that will cause SubscriptionInfo header to be sent
-     * @return \Zend\Service\StrikeIron\Decorator  Decorated subscription info
-     * @throws \Zend\Service\StrikeIron\Exception
+     * @return StrikeIron\Decorator  Decorated subscription info
+     * @throws StrikeIron\Exception
      */
     public function getSubscriptionInfo($now = false, $queryMethod = 'GetRemainingHits')
     {
-        if ($now || empty($this->_outputHeaders['SubscriptionInfo'])) {
+        if ($now || empty($this->outputHeaders['SubscriptionInfo'])) {
             $this->$queryMethod();
         }
 
         // capture subscription info if returned in output headers
-        if (isset($this->_outputHeaders['SubscriptionInfo'])) {
-            $info = (object)$this->_outputHeaders['SubscriptionInfo'];
+        if (isset($this->outputHeaders['SubscriptionInfo'])) {
+            $info = (object)$this->outputHeaders['SubscriptionInfo'];
             $subscriptionInfo = new Decorator($info, 'SubscriptionInfo');
         } else {
             $msg = 'No SubscriptionInfo header found in last output headers';

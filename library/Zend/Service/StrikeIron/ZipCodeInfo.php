@@ -25,7 +25,6 @@
 namespace Zend\Service\StrikeIron;
 
 /**
- * @uses       \Zend\Service\StrikeIron\Base
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
@@ -38,7 +37,7 @@ class ZipCodeInfo extends Base
      * Configuration options
      * @param array
      */
-    protected $_options = array('username' => null,
+    protected $options = array('username' => null,
                                 'password' => null,
                                 'client'   => null,
                                 'options'  => null,

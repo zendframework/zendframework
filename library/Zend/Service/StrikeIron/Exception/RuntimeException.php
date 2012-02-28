@@ -12,7 +12,6 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @uses       \Zend\Service\StrikeIron\Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage StrikeIron
@@ -24,6 +23,7 @@
  * @namespace
  */
 namespace Zend\Service\StrikeIron\Exception;
+use Zend\Service\StrikeIron\Exception as StrikeIronException;
 
 /**
  * @category   Zend
@@ -34,5 +34,5 @@ namespace Zend\Service\StrikeIron\Exception;
  */
 class RuntimeException
     extends \RuntimeException
-    implements \Zend\Service\StrikeIron\Exception
+    implements StrikeIronException
 {}

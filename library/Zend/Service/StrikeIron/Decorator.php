@@ -40,13 +40,13 @@ class Decorator
      * Name of the decorated object
      * @var null|string
      */
-    protected $_name = null;
+    protected $name = null;
 
     /**
      * Object to decorate
      * @var object
      */
-    protected $_object = null;
+    protected $object = null;
 
     /**
      * Class constructor
@@ -56,8 +56,8 @@ class Decorator
      */
     public function __construct($object, $name = null)
     {
-        $this->_object = $object;
-        $this->_name   = $name;
+        $this->object = $object;
+        $this->name   = $name;
     }
 
     /**
@@ -73,13 +73,13 @@ class Decorator
     {
         $result = null;
 
-        if (! isset($this->_object->$property)) {
-            $property = $this->_inflect($property);
+        if (! isset($this->object->$property)) {
+            $property = $this->inflect($property);
         }
 
-        if (isset($this->_object->$property)) {
-            $result = $this->_object->$property;
-            $result = $this->_decorate($result);
+        if (isset($this->object->$property)) {
+            $result = $this->object->$property;
+            $result = $this->decorate($result);
         }
         return $result;
     }
@@ -94,7 +94,7 @@ class Decorator
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array($this->_object, $method), $args);
+        return call_user_func_array(array($this->object, $method), $args);
     }
 
     /**
@@ -105,7 +105,7 @@ class Decorator
      * @param  string $property  Property name to inflect
      * @return string            Inflected property name
      */
-    protected function _inflect($property)
+    protected function inflect($property)
     {
         return ucfirst($property);
     }
@@ -117,7 +117,7 @@ class Decorator
      * @param  mixed  $result  Value to decorate
      * @return mixed           Decorated result
      */
-    protected function _decorate($result)
+    protected function decorate($result)
     {
         if (is_object($result)) {
             $result = new self($result);
@@ -132,7 +132,7 @@ class Decorator
      */
     public function getDecoratedObject()
     {
-        return $this->_object;
+        return $this->object;
     }
 
     /**
@@ -142,6 +142,6 @@ class Decorator
      */
     public function getDecoratedObjectName()
     {
-        return $this->_name;
+        return $this->name;
     }
 }

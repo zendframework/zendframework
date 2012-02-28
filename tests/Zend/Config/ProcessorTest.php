@@ -43,16 +43,16 @@ Zend\Filter\PregReplace;
  */
 class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_nested;
-    protected $_tokenBare, $_tokenPrefix, $_tokenSuffix, $_tokenSurround, $_tokenSurroundMixed;
-    protected $_translator, $_translatorStrings;
-    protected $_userConstants, $_phpConstants;
-    protected $_filter;
+    protected $nested;
+    protected $tokenBare, $tokenPrefix, $tokenSuffix, $tokenSurround, $tokenSurroundMixed;
+    protected $translator, $translatorStrings;
+    protected $userConstants, $phpConstants;
+    protected $filter;
 
     public function setUp()
     {
         // Arrays representing common config configurations
-        $this->_nested = array(
+        $this->nested = array(
             'a' => 1,
             'b' => 2,
             'c' => array(
@@ -71,7 +71,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             'e' => 10
         );
 
-        $this->_tokenBare = array(
+        $this->tokenBare = array(
             'simple' => 'BARETOKEN',
             'inside' => 'some text with BARETOKEN inside',
             'nested' => array(
@@ -80,7 +80,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->_tokenPrefix = array(
+        $this->tokenPrefix = array(
             'simple' => '::TOKEN',
             'inside' => ':: some text with ::TOKEN inside ::',
             'nested' => array(
@@ -89,7 +89,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->_tokenSuffix = array(
+        $this->tokenSuffix = array(
             'simple' => 'TOKEN::',
             'inside' => ':: some text with TOKEN:: inside ::',
             'nested' => array(
@@ -98,7 +98,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->_tokenSurround = array(
+        $this->tokenSurround = array(
             'simple' => '##TOKEN##',
             'inside' => '## some text with ##TOKEN## inside ##',
             'nested' => array(
@@ -107,7 +107,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->_tokenSurroundMixed = array(
+        $this->tokenSurroundMixed = array(
             'simple' => '##TOKEN##',
             'inside' => '## some text with ##TOKEN## inside ##',
             'nested' => array(
@@ -116,7 +116,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->_translator = array(
+        $this->translator = array(
             'pages' => array(
                 array(
                     'id' => 'oneDog',
@@ -131,12 +131,12 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->_translatorStrings = array(
+        $this->translatorStrings = array(
             'one dog' => 'ein Hund',
             'two dogs' => 'zwei Hunde'
         );
 
-        $this->_filter = array(
+        $this->filter = array(
             'simple' => 'some MixedCase VALue',
             'nested' => array(
                 'simple' => 'OTHER mixed Case Value',
@@ -148,7 +148,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ArrayAdapter::removeCache();
         }
 
-        $this->_userConstants = array(
+        $this->userConstants = array(
             'simple' => 'SOME_USERLAND_CONSTANT',
             'inside' => 'some text with SOME_USERLAND_CONSTANT inside',
             'nested' => array(
@@ -157,7 +157,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        $this->_phpConstants = array(
+        $this->phpConstants = array(
             'phpVersion' => 'PHP_VERSION',
             'phpVersionInside' => 'Current PHP version is: PHP_VERSION',
             'nested' => array(
@@ -183,20 +183,47 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testBareTokenPost()
     {
-        $config = new Config($this->_tokenBare, true);
+        $config = new Config($this->tokenBare, true);
         $processor = new TokenProcessor();
         $processor->addToken('BARETOKEN', 'some replaced value');
         $processor->process($config);
 
+        $this->assertEquals(array('BARETOKEN' => 'some replaced value'), $processor->getTokens());
         $this->assertEquals('some replaced value', $config->simple);
         $this->assertEquals('some text with some replaced value inside', $config->inside);
         $this->assertEquals('some replaced value', $config->nested->simple);
         $this->assertEquals('some text with some replaced value inside', $config->nested->inside);
     }
 
+    public function testAddInvalidToken()
+    {
+        $processor = new TokenProcessor();
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot use ' . gettype(array()) . ' as token name.');
+        $processor->addToken(array(), 'bar');
+    }
+    
+    public function testSingleValueToken()
+    {
+        $processor = new TokenProcessor();
+        $processor->addToken('BARETOKEN', 'test');
+        $data = 'BARETOKEN';
+        $out = $processor->processValue($data);
+        $this->assertEquals($out, 'test');
+    }
+    
+    public function testTokenReadOnly()
+    {
+        $config = new Config($this->tokenBare, false);
+        $processor = new TokenProcessor();
+        $processor->addToken('BARETOKEN', 'some replaced value');
+        
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+        $processor->process($config);
+    }
+    
     public function testTokenPrefix()
     {
-        $config = new Config($this->_tokenPrefix, true);
+        $config = new Config($this->tokenPrefix, true);
         $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '::');
         $processor->process($config);
 
@@ -208,7 +235,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTokenSuffix()
     {
-        $config = new Config($this->_tokenSuffix, true);
+        $config = new Config($this->tokenSuffix, true);
         $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '', '::');
         $processor->process($config);
 
@@ -224,7 +251,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testTokenSurround()
     {
-        $config = new Config($this->_tokenSurround, true);
+        $config = new Config($this->tokenSurround, true);
         $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '##', '##');
         $processor->process($config);
 
@@ -239,7 +266,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testTokenChangeParams()
     {
-        $config = new Config($this->_tokenSurroundMixed, true);
+        $config = new Config($this->tokenSurroundMixed, true);
         $processor = new TokenProcessor(array('TOKEN' => 'some replaced value'), '##', '##');
         $processor->process($config);
         $this->assertEquals('some replaced value', $config->simple);
@@ -271,10 +298,15 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     {
         define('SOME_USERLAND_CONSTANT', 'some constant value');
 
-        $config = new Config($this->_userConstants, true);
-        $processor = new ConstantProcessor();
+        $config = new Config($this->userConstants, true);
+        $processor = new ConstantProcessor(false);
         $processor->process($config);
 
+        $tokens = $processor->getTokens();
+        $this->assertTrue(is_array($tokens));
+        $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
+        $this->assertTrue(!$processor->getUserOnly());
+        
         $this->assertEquals('some constant value', $config->simple);
         $this->assertEquals('some text with some constant value inside', $config->inside);
         $this->assertEquals('some constant value', $config->nested->simple);
@@ -282,11 +314,33 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @depends testUserConstants
+     */
+    public function testUserOnlyConstants()
+    {
+
+        $config = new Config($this->userConstants, true);
+        $processor = new ConstantProcessor();
+        $processor->process($config);
+
+        $tokens = $processor->getTokens();
+        
+        $this->assertTrue(is_array($tokens));
+        $this->assertTrue(in_array('SOME_USERLAND_CONSTANT', $tokens));
+        $this->assertTrue($processor->getUserOnly());
+        
+        $this->assertEquals('some constant value', $config->simple);
+        $this->assertEquals('some text with some constant value inside', $config->inside);
+        $this->assertEquals('some constant value', $config->nested->simple);
+        $this->assertEquals('some text with some constant value inside', $config->nested->inside);
+    }
+    
+    /**
      * @depends testTokenSurround
      */
     public function testPHPConstants()
     {
-        $config = new Config($this->_phpConstants, true);
+        $config = new Config($this->phpConstants, true);
         $processor = new ConstantProcessor(false);
         $processor->process($config);
 
@@ -298,8 +352,8 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
-        $config = new Config($this->_translator, true);
-        $translator = new Translator(Translator::AN_ARRAY, $this->_translatorStrings, 'de_DE');
+        $config = new Config($this->translator, true);
+        $translator = new Translator(Translator::AN_ARRAY, $this->translatorStrings, 'de_DE');
         $processor = new TranslatorProcessor($translator);
 
         $processor->process($config);
@@ -310,24 +364,62 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('twoDogs', $config->pages[1]->id);
         $this->assertEquals('zwei Hunde', $config->pages[1]->label);
     }
+    
+    public function testTranslatorReadOnly()
+    {
+        $config = new Config($this->translator, false);
+        $translator = new Translator(Translator::AN_ARRAY, $this->translatorStrings, 'de_DE');
+        $processor = new TranslatorProcessor($translator);
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+        $processor->process($config);
+    }
 
+    public function testTranslatorSingleValue()
+    {        
+        $translator = new Translator(Translator::AN_ARRAY, $this->translatorStrings, 'de_DE');
+        $processor = new TranslatorProcessor($translator);
+        $word = 'one dog'; 
+        $this->assertEquals('ein Hund', $processor->processValue($word));
+    }
+    
     public function testFilter()
     {
-        $config = new Config($this->_filter, true);
+        $config = new Config($this->filter, true);
         $filter = new StringToLower();
         $processor = new FilterProcessor($filter);
+        
+        $this->assertTrue($processor->getFilter() instanceof StringToLower);
         $processor->process($config);
 
         $this->assertEquals('some mixedcase value', $config->simple);
         $this->assertEquals('other mixed case value', $config->nested->simple);
     }
 
+    public function testFilterReadOnly()
+    {
+        $config = new Config($this->filter, false);
+        $filter = new StringToLower();
+        $processor = new FilterProcessor($filter);
+        
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+        $processor->process($config);
+    }
+    
+    public function testFilterValue()
+    {
+        $filter = new StringToLower();
+        $processor = new FilterProcessor($filter);
+        
+        $value = 'TEST';
+        $this->assertEquals('test', $processor->processValue($value));
+    }
+    
     /**
      * @depends testFilter
      */
-    public function testProcessorsQueueFIFO()
+    public function testQueueFIFO()
     {
-        $config = new Config($this->_filter, true);
+        $config = new Config($this->filter, true);
         $lower = new StringToLower();
         $upper = new StringToUpper();
         $lowerProcessor = new FilterProcessor($lower);
@@ -344,13 +436,47 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('some mixedcase value', $config->simple);
         $this->assertEquals('other mixed case value', $config->nested->simple);
     }
-
-    /**
-     * @depends testProcessorsQueueFIFO
-     */
-    public function testProcessorsQueuePriorities()
+    
+    public function testQueueReadOnly()
     {
-        $config = new Config($this->_filter, 1);
+        $config = new Config($this->filter, false);
+        $lower = new StringToLower();
+        $lowerProcessor = new FilterProcessor($lower);
+
+        /**
+         * Default queue order (FIFO)
+         */
+        $queue = new Queue();
+        $queue->insert($lowerProcessor);
+        
+        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'Cannot parse config because it is read-only');
+        $queue->process($config);
+    }
+
+    public function testQueueSingleValue()
+    {
+        $lower = new StringToLower();
+        $upper = new StringToUpper();
+        $lowerProcessor = new FilterProcessor($lower);
+        $upperProcessor = new FilterProcessor($upper);
+
+        /**
+         * Default queue order (FIFO)
+         */
+        $queue = new Queue();
+        $queue->insert($upperProcessor);
+        $queue->insert($lowerProcessor);
+        
+        $data ='TeSt';
+        $this->assertEquals('test', $queue->processValue($data));
+        
+    }
+    /**
+     * @depends testQueueFIFO
+     */
+    public function testQueuePriorities()
+    {
+        $config = new Config($this->filter, 1);
         $lower = new StringToLower();
         $upper = new StringToUpper();
         $replace = new PregReplace('/[a-z]/', '');

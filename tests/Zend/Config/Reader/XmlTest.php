@@ -15,14 +15,13 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace ZendTest\Config\Reader;
 
 use \Zend\Config\Reader\Xml;
-
 
 /**
  * @category   Zend
@@ -50,10 +49,41 @@ class XmlTest extends AbstractReaderTestCase
         return __DIR__ . '/TestAssets/Xml/' . $name . '.xml';
     }
     
-    public function testNonExistentConstant()
+    public function testInvalidXmlFile()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Constant with name "ZEND_CONFIG_TEST_NON_EXISTENT_CONSTANT" was not defined');
-        $config = $this->reader->readFile($this->getTestAssetPath('non-existent-constant'));
-        var_dump($config);
+        $this->reader = new Xml();
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $arrayXml = $this->reader->fromFile($this->getTestAssetPath('invalid'));
+    }
+    
+    public function testFromString()
+    {
+        $xml = <<<ECS
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <test>foo</test>
+    <bar>baz</bar>
+    <bar>foo</bar>
+</zend-config>
+
+ECS;
+        
+        $arrayXml= $this->reader->fromString($xml);
+        $this->assertEquals($arrayXml['test'], 'foo');
+        $this->assertEquals($arrayXml['bar'][0], 'baz');
+        $this->assertEquals($arrayXml['bar'][1], 'foo');
+    }
+    
+    public function testInvalidString()
+    {
+        $xml = <<<ECS
+<?xml version="1.0" encoding="UTF-8"?>
+<zend-config>
+    <bar>baz</baz>
+</zend-config>
+
+ECS;
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $arrayXml = $this->reader->fromString($xml);
     }
 }

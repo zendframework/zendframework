@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,7 @@ namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
     Zend\Config\Processor,
-    Zend\Config\Exception\InvalidArgumentException,
+    Zend\Config\Exception,
     Zend\Filter\Filter as ZendFilter,
     \Traversable,
     \ArrayObject;
@@ -59,7 +59,7 @@ class Filter implements Processor
      */
     public function getFilter()
     {
-        return $this->translator;
+        return $this->filter;
     }
 
     /**
@@ -70,10 +70,16 @@ class Filter implements Processor
         $this->filter = $filter;
     }
 
+    /**
+     * Process
+     * 
+     * @param  Config $config
+     * @return Config 
+     */
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {
-            throw new InvalidArgumentException('Cannot parse config because it is read-only');
+            throw new Exception\InvalidArgumentException('Cannot parse config because it is read-only');
         }
 
         /**
@@ -90,15 +96,14 @@ class Filter implements Processor
         return $config;
     }
 
-	/**
-	 * Process a single value
-	 *
-	 * @param $value
-	 * @return mixed
-	 */
-	public function processValue($value)
-	{
-		return $this->filter->filter($value);
-	}
-
+    /**
+     * Process a single value
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function processValue($value)
+    {
+        return $this->filter->filter($value);
+    }
 }

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -22,7 +22,9 @@ namespace Zend\Config\Writer;
 
 use Zend\Config\Writer,
     Zend\Config\Exception,
-    Zend\Stdlib\IteratorToArray;
+    Zend\Config\Config,
+    Zend\Stdlib\IteratorToArray,
+    Traversable;
 
 /**
  * @category   Zend
@@ -43,17 +45,26 @@ abstract class AbstractWriter implements Writer
      */
     public function toFile($filename, $config, $exclusiveLock = true)
     {
-        if (!is_writable($filename)) {
-            throw new Exception\RuntimeException(sprintf('File "%s" is not writable', $filename));
+        if (empty($filename)) {
+            throw new Exception\InvalidArgumentException('No file name specified');
         }
-
+        
         $flags = 0;
 
         if ($exclusiveLock) {
             $flags |= LOCK_EX;
         }
-
+        
+        set_error_handler(
+            function($error, $message = '', $file = '', $line = 0) use ($filename) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Error writing to "%s": %s',
+                    $filename, $message
+                ), $error);
+            }, E_WARNING
+        );
         file_put_contents($filename, $this->toString($config), $exclusiveLock);
+        restore_error_handler();
     }
 
     /**

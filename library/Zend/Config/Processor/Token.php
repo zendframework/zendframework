@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -25,7 +25,7 @@ namespace Zend\Config\Processor;
 
 use Zend\Config\Config,
     Zend\Config\Processor,
-    Zend\Config\Exception\InvalidArgumentException,
+    Zend\Config\Exception,
     \Traversable,
     \ArrayObject;
 
@@ -142,7 +142,7 @@ class Token implements Processor
                 $this->tokens[$key] = $val;
             }
         } else {
-            throw new InvalidArgumentException('Cannot use ' . gettype($tokens) . ' as token registry.');
+            throw new Exception\InvalidArgumentException('Cannot use ' . gettype($tokens) . ' as token registry.');
         }
 
         // reset map
@@ -168,7 +168,7 @@ class Token implements Processor
     public function addToken($token, $value)
     {
         if (!is_scalar($token)) {
-            throw new InvalidArgumentException('Cannot use ' . gettype($token) . ' as token name.');
+            throw new Exception\InvalidArgumentException('Cannot use ' . gettype($token) . ' as token name.');
         }
         $this->tokens[$token] = $value;
 
@@ -188,24 +188,31 @@ class Token implements Processor
         return $this->addToken($token, $value);
     }
 
-	/**
-	 * Build replacement map
-	 */
-	protected function buildMap(){
-		if (!$this->suffix && !$this->prefix) {
-			$this->map = $this->tokens;
-		} else {
-			$this->map = array();
-			foreach ($this->tokens as $token => $value) {
-				$this->map[$this->prefix . $token . $this->suffix] = $value;
-			}
-		}
+    /**
+     * Build replacement map
+     */
+    protected function buildMap()
+    {
+        if (!$this->suffix && !$this->prefix) {
+            $this->map = $this->tokens;
+        } else {
+            $this->map = array();
+            foreach ($this->tokens as $token => $value) {
+                $this->map[$this->prefix . $token . $this->suffix] = $value;
+            }
 	}
+    }
 
+    /**
+     * Process
+     * 
+     * @param  Config $config
+     * @return Config 
+     */
     public function process(Config $config)
     {
         if ($config->isReadOnly()) {
-            throw new InvalidArgumentException('Cannot parse config because it is read-only');
+            throw new Exception\InvalidArgumentException('Cannot parse config because it is read-only');
         }
 
         if ($this->map === null) {
@@ -228,20 +235,19 @@ class Token implements Processor
         return $config;
     }
 
-	/**
-	 * Process a single value
-	 *
-	 * @param $value
-	 * @return mixed
-	 */
-	public function processValue($value)
-	{
-		if ($this->map === null) {
-			$this->buildMap();
-		}
-		$keys = array_keys($this->map);
-		$values = array_values($this->map);
-		return str_replace($keys,$values,$value);
-	}
-
+    /**
+     * Process a single value
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function processValue($value)
+    {
+        if ($this->map === null) {
+            $this->buildMap();
+        }
+        $keys = array_keys($this->map);
+        $values = array_values($this->map);
+        return str_replace($keys,$values,$value);
+    }
 }

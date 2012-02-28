@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
-    <base>
-        <foo>foo-<zf:const name="ZEND_CONFIG_TEST_CONSTANT"/>-bar-<zf:const name="ZEND_CONFIG_TEST_CONSTANT"/></foo>
-        <bar><const name="ZEND_CONFIG_TEST_CONSTANT"/></bar>
-    </base>
-</config>

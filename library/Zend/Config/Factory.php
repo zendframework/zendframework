@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Config
- * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,7 +33,7 @@ class Factory
      *
      * @var array
      */
-    protected $readers = array();
+    protected static $readers = array();
 
     /**
      * Read a config from a file.
@@ -41,8 +41,12 @@ class Factory
      * @param string $filename
      * @return array
      */
-    public function fromFile($filename)
+    public static function fromFile($filename)
     {
+        if (!file_exists($filename)) {
+            throw new Exception\RuntimeException("The file $filename doesn't exists.");
+        }
+        
         $pathinfo = pathinfo($filename);
 
         switch (strtolower($pathinfo['extension'])) {
@@ -51,19 +55,19 @@ class Factory
                 break;
 
             case 'ini':
-                if (!isset($this->readers['ini'])) {
-                    $this->readers['ini'] = new Reader\Ini();
+                if (!isset(self::$readers['ini'])) {
+                    self::$readers['ini'] = new Reader\Ini();
                 }
 
-                return $this->readers['ini']->fromFile($filename);
+                return self::$readers['ini']->fromFile($filename);
                 break;
 
             case 'xml':
-                if (!isset($this->readers['xml'])) {
-                    $this->readers['xml'] = new Reader\Xml();
+                if (!isset(self::$readers['xml'])) {
+                    self::$readers['xml'] = new Reader\Xml();
                 }
 
-                return $this->readers['xml']->fromFile($filename);
+                return self::$readers['xml']->fromFile($filename);
                 break;
         }
 
@@ -76,7 +80,7 @@ class Factory
      * @param  array $files
      * @return array
      */
-    public function fromFiles(array $files)
+    public static function fromFiles(array $files)
     {
         $config = array();
 

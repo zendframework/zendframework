@@ -15,13 +15,14 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage Reader
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Config\Reader;
 
 use XMLReader,
+    Zend\Config\Reader,    
     Zend\Config\Exception;
 
 /**
@@ -33,7 +34,7 @@ use XMLReader,
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Xml extends AbstractReader
+class Xml implements Reader
 {
     /**
      * XML Reader instance.
@@ -66,14 +67,29 @@ class Xml extends AbstractReader
      * @param  string $filename
      * @return array
      */
-    protected function fromFile($filename)
+    public function fromFile($filename)
     {
+        if (!file_exists($filename)) {
+            throw new Exception\RuntimeException("The file $filename doesn't exists.");
+        }
         $this->reader = new XMLReader();
-        $this->reader->open($filename, null, LIBXML_XINCLUDE);
+
+        $this->reader->open($filename, null, LIBXML_XINCLUDE);   
 
         $this->directory = dirname($filename);
 
-        return $this->process();
+        set_error_handler(
+            function($error, $message = '', $file = '', $line = 0) use ($filename) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Error reading XML file "%s": %s',
+                    $filename, $message
+                ), $error);
+            }, E_WARNING
+        );
+        $return = $this->process();
+        restore_error_handler();
+        
+        return $return;
     }
 
     /**
@@ -83,14 +99,29 @@ class Xml extends AbstractReader
      * @param  string $string
      * @return array
      */
-    protected function fromString($string)
+    public function fromString($string)
     {
+        if (empty($string)) {
+            return array();
+        }
         $this->reader = new XMLReader();
+        
         $this->reader->xml($string, null, LIBXML_XINCLUDE);
 
         $this->directory = null;
 
-        return $this->process();
+        set_error_handler(
+            function($error, $message = '', $file = '', $line = 0) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Error reading XML string: %s',
+                    $message
+                ), $error);
+            }, E_WARNING
+        );
+        $return = $this->process();
+        restore_error_handler();
+        
+        return $return;
     }
 
     /**
@@ -100,8 +131,6 @@ class Xml extends AbstractReader
      */
     protected function process()
     {
-        $this->extends = array();
-
         return $this->processNextElement();
     }
 
@@ -153,7 +182,7 @@ class Xml extends AbstractReader
                 $text .= $this->reader->value;
             }
         }
-
+        
         return $children ?: $text;
     }
 

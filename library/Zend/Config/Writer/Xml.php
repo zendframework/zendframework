@@ -14,14 +14,13 @@
  *
  * @category   Zend
  * @package    Zend_Config
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 namespace Zend\Config\Writer;
 
-use Zend\Config\Reader\Xml,
-    Zend\Config\Exception,
+use Zend\Config\Exception,
     XMLWriter;
 
 /**
@@ -79,7 +78,7 @@ class Xml extends AbstractWriter
                 if (is_numeric($key)) {
                     $branchType = 'numeric';
                 } else {
-                    $writer->addElement($branchName);
+                    $writer->startElement($branchName);
                     $branchType = 'string';
                 }
             } else if ($branchType !== (is_numeric($key) ? 'numeric' : 'string')) {
@@ -88,13 +87,13 @@ class Xml extends AbstractWriter
 
             if ($branchType === 'numeric') {
                 if (is_array($value)) {
-                    $this->addBranch($value, $data, $writer);
+                    $this->addBranch($value, $value, $writer);
                 } else {
                     $writer->writeElement($branchName, (string) $value);
                 }
             } else {
                 if (is_array($value)) {
-                    $this->addBranch($key, $data, $writer);
+                    $this->addBranch($key, $value, $writer);
                 } else {
                     $writer->writeElement($key, (string) $value);
                 }

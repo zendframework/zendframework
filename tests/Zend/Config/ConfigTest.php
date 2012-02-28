@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -33,13 +33,13 @@ use \Zend\Config\Config;
  */
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
-    protected $_iniFileConfig;
-    protected $_iniFileNested;
+    protected $iniFileConfig;
+    protected $iniFileNested;
 
     public function setUp()
     {
         // Arrays representing common config configurations
-        $this->_all = array(
+        $this->all = array(
             'hostname' => 'all',
             'name' => 'thisname',
             'db' => array(
@@ -55,12 +55,12 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 )
             );
 
-        $this->_numericData = array(
+        $this->numericData = array(
              0 => 34,
              1 => 'test',
             );
 
-        $this->_menuData1 = array(
+        $this->menuData1 = array(
             'button' => array(
                 'b0' => array(
                     'L1' => 'button0-1',
@@ -77,14 +77,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
                 )
             );
 
-        $this->_leadingdot = array('.test' => 'dot-test');
-        $this->_invalidkey = array(' ' => 'test', ''=>'test2');
+        $this->leadingdot = array('.test' => 'dot-test');
+        $this->invalidkey = array(' ' => 'test', ''=>'test2');
 
     }
 
     public function testLoadSingleSection()
     {
-        $config = new Config($this->_all, false);
+        $config = new Config($this->all, false);
 
         $this->assertEquals('all', $config->hostname);
         $this->assertEquals('live', $config->db->name);
@@ -94,7 +94,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testIsset()
     {
-        $config = new Config($this->_all, false);
+        $config = new Config($this->all, false);
 
         $this->assertFalse(isset($config->notarealkey));
         $this->assertTrue(isset($config->hostname)); // top level
@@ -103,7 +103,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testModification()
     {
-        $config = new Config($this->_all, true);
+        $config = new Config($this->all, true);
 
         // overwrite an existing key
         $this->assertEquals('thisname', $config->name);
@@ -123,35 +123,35 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testNoModifications()
     {
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
-        $config = new Config($this->_all);
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $config = new Config($this->all);
         $config->hostname = 'test';
     }
 
     public function testNoNestedModifications()
     {
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
-        $config = new Config($this->_all);
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $config = new Config($this->all);
         $config->db->host = 'test';
     }
 
     public function testNumericKeys()
     {
-        $data = new Config($this->_numericData);
+        $data = new Config($this->numericData);
         $this->assertEquals('test', $data->{1});
         $this->assertEquals(34, $data->{0});
     }
 
     public function testCount()
     {
-        $data = new Config($this->_menuData1);
+        $data = new Config($this->menuData1);
         $this->assertEquals(3, count($data->button));
     }
 
     public function testIterator()
     {
         // top level
-        $config = new Config($this->_all);
+        $config = new Config($this->all);
         $var = '';
         foreach ($config as $key=>$value) {
             if (is_string($value)) {
@@ -168,7 +168,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('key = host, value = 127.0.0.1', $var);
 
         // 2 nests
-        $config = new Config($this->_menuData1);
+        $config = new Config($this->menuData1);
         $var = '';
         foreach ($config->button->b1 as $key=>$value) {
             $var .= "\nkey = $key, value = $value";
@@ -178,7 +178,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testArray()
     {
-        $config = new Config($this->_all);
+        $config = new Config($this->all);
 
         ob_start();
         print_r($config->toArray());
@@ -192,8 +192,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorWriteToReadOnly()
     {
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'read only');
-        $config = new Config($this->_all);
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $config = new Config($this->all);
         $config->test = '32';
     }
 
@@ -236,14 +236,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testZf1019_HandlingInvalidKeyNames()
     {
-        $config = new Config($this->_leadingdot);
+        $config = new Config($this->leadingdot);
         $array = $config->toArray();
         $this->assertContains('dot-test', $array['.test']);
     }
 
     public function testZF1019_EmptyKeys()
     {
-        $config = new Config($this->_invalidkey);
+        $config = new Config($this->invalidkey);
         $array = $config->toArray();
         $this->assertContains('test', $array[' ']);
         $this->assertContains('test', $array['']);
@@ -251,7 +251,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testZF1417_DefaultValues()
     {
-        $config = new Config($this->_all);
+        $config = new Config($this->all);
         $value = $config->get('notthere', 'default');
         $this->assertTrue($value === 'default');
         $this->assertTrue($config->notThere === null);
@@ -261,7 +261,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testUnsetException()
     {
         // allow modifications is off - expect an exception
-        $config = new Config($this->_all, false);
+        $config = new Config($this->all, false);
 
         $this->assertTrue(isset($config->hostname)); // top level
 
@@ -272,7 +272,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testUnset()
     {
         // allow modifications is on
-        $config = new Config($this->_all, true);
+        $config = new Config($this->all, true);
 
         $this->assertTrue(isset($config->hostname));
         $this->assertTrue(isset($config->db->name));
@@ -319,7 +319,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     
     public function testArrayAccess()
     {
-        $config = new Config($this->_all, true);
+        $config = new Config($this->all, true);
 
         $this->assertEquals('thisname', $config['name']);
         $config['name'] = 'anothername';
@@ -370,7 +370,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config->b = 'b';
 
         $config->setReadOnly();
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
         $config->c = 'c';
     }
 
@@ -508,12 +508,12 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetReadOnlyAppliesToChildren()
     {
-        $config = new Config($this->_all, true);
+        $config = new Config($this->all, true);
 
         $config->setReadOnly();
-        $this->assertTrue($config->readOnly());
-        $this->assertTrue($config->one->readOnly(), 'First level children are writable');
-        $this->assertTrue($config->one->two->readOnly(), 'Second level children are writable');
+        $this->assertTrue($config->isReadOnly());
+        $this->assertTrue($config->one->isReadOnly(), 'First level children are writable');
+        $this->assertTrue($config->one->two->isReadOnly(), 'Second level children are writable');
     }
 
     public function testZF6995_toArrayDoesNotDisturbInternalIterator()

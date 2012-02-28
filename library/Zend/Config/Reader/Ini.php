@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage Reader
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -78,11 +78,25 @@ class Ini implements Reader
      * @param  string $filename
      * @return array
      */
-    protected function fromFile($filename)
+    public function fromFile($filename)
     {
+        if (!file_exists($filename)) {
+            throw new Exception\RuntimeException("The file $filename doesn't exists.");
+        }
         $this->directory = dirname($filename);
 
-        return $this->process(parse_ini_file($filename, true));
+        set_error_handler(
+            function($error, $message = '', $file = '', $line = 0) use ($filename) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Error reading INI file "%s": %s',
+                    $filename, $message
+                ), $error);
+            }, E_WARNING
+        );
+        $ini = parse_ini_file($filename, true);
+        restore_error_handler();
+        
+        return $this->process($ini);
     }
 
     /**
@@ -92,11 +106,25 @@ class Ini implements Reader
      * @param  string $string
      * @return array
      */
-    protected function fromString($string)
+    public function fromString($string)
     {
+        if (empty($string)) {
+            return array();
+        }
         $this->directory = null;
 
-        return $this->process(parse_ini_string($string, true));
+        set_error_handler(
+            function($error, $message = '', $file = '', $line = 0) {
+                throw new Exception\RuntimeException(sprintf(
+                    'Error reading INI string: %s',
+                    $message
+                ), $error);
+            }, E_WARNING
+        );
+        $ini = parse_ini_string($string, true);
+        restore_error_handler();
+        
+        return $this->process($ini);
     }
 
     /**

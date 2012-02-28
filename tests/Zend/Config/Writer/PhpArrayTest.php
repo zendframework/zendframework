@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\Ini as IniWriter,
+use \Zend\Config\Writer\PhpArray,
     \Zend\Config\Config,
-    \Zend\Config\Reader\Ini as IniReader;
+    ZendTest\Config\Writer\files\PhpReader;
 
 /**
  * @category   Zend
@@ -33,38 +33,36 @@ use \Zend\Config\Writer\Ini as IniWriter,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class IniTest extends AbstractWriterTestCase
+class PhpArrayTest extends AbstractWriterTestCase
 {
+    protected $_tempName;
 
     public function setUp()
     {
-        $this->reader = new IniReader();
-        $this->writer = new IniWriter();
+        $this->writer = new PhpArray();
+        $this->reader = new PhpReader();
     }
 
-   
-
-    public function testNoSection()
+    /**
+     * @group ZF-8234
+     */
+    public function testRender()
     {
-        $config = new Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
+        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
+        
+        $configString = $this->writer->toString($config);
 
-        $this->writer->toFile($this->getTestAssetFileName(), $config);
-
-        $config = $this->reader->fromFile($this->getTestAssetFileName());
-
-        $this->assertEquals('foo', $config['test']);
-        $this->assertEquals('bar', $config['test2']['test3']);
-    }
-
-    public function testWriteAndReadOriginalFile()
-    {
-        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.ini');
-
-        $this->writer->toFile($this->getTestAssetFileName(), $config);
-
-        $config = $this->reader->fromFile($this->getTestAssetFileName());
-
-        $this->assertEquals('multi', $config['all']['one']['two']['three']);
-
+        // build string line by line as we are trailing-whitespace sensitive.
+        $expected = "<?php\n";
+        $expected .= "return array (\n";
+        $expected .= "  'test' => 'foo',\n";
+        $expected .= "  'bar' => \n";
+        $expected .= "  array (\n";
+        $expected .= "    0 => 'baz',\n";
+        $expected .= "    1 => 'foo',\n";
+        $expected .= "  ),\n";
+        $expected .= ");\n";
+        
+        $this->assertEquals($expected, $configString);
     }
 }

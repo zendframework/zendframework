@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Config
- * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -29,7 +29,7 @@ namespace Zend\Config;
 interface Reader
 {
     /**
-     * Read from a file and create a config object.
+     * Read from a file and create an array
      *
      * @param  string $filename
      * @return array
@@ -37,10 +37,10 @@ interface Reader
     public function fromFile($filename);
 
     /**
-     * Read from a string and create a config object.
+     * Read from a string and create an array
      *
      * @param  string $string
-     * @return array
+     * @return array|boolean
      */
     public function fromString($string);
 }

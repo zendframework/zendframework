@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Config
  * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -46,37 +46,23 @@ abstract class AbstractReaderTestCase extends TestCase
      * @return string
      */
     abstract protected function getTestAssetPath($name);
-    
-    public function testInclude()
+       
+    public function testMissingFile()
     {
-        $config = $this->reader->readFile($this->getTestAssetPath('include-base'));
-        $this->assertEquals('foo', $config->base->foo);
-    }
-  
-    public function testCurrentDirInFile()
-    {
-        $config = $this->reader->readFile($this->getTestAssetPath('current-dir'));
-
-        $this->assertEquals(dirname($this->getTestAssetPath('current-dir')), $config->base->foo);
+        $filename = $this->getTestAssetPath('no-file');
+        $this->setExpectedException('Zend\Config\Exception\RuntimeException', "The file $filename doesn't exists.");
+        $config = $this->reader->fromFile($filename); 
     }
     
-    public function testCurrentDirInString()
+    public function testFromFile()
     {
-        $config          = $this->reader->readString(file_get_contents($this->getTestAssetPath('current-dir')));
-        $reflectionClass = new ReflectionClass($this->reader);
-
-        $this->assertEquals(dirname($reflectionClass->getFileName()), $config->base->foo);
+        $config = $this->reader->fromFile($this->getTestAssetPath('include-base'));
+        $this->assertEquals('foo', $config['base']['foo']);
     }
     
-    public function testConstants()
+    public function testFromEmptyString()
     {
-        if (!defined('ZEND_CONFIG_TEST_CONSTANT')) {
-            define('ZEND_CONFIG_TEST_CONSTANT', 'test');
-        }
-
-        $config = $this->reader->readFile($this->getTestAssetPath('constants'));
-
-        $this->assertEquals('foo-test-bar-test', $config->base->foo);
-        $this->assertEquals('ZEND_CONFIG_TEST_CONSTANT', $config->base->bar->const->name);
+        $config = $this->reader->fromString('');
+        $this->assertTrue(!$config);
     }
 }

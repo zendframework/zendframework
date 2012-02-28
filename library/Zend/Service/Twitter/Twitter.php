@@ -27,7 +27,9 @@ namespace Zend\Service\Twitter;
 use Zend\Http,
     Zend\OAuth,
     Zend\Rest,
-    Zend\Uri;
+    Zend\Uri,
+    Zend\Config,
+    Zend\Rest\Client;
 
 /**
  * @category   Zend
@@ -36,7 +38,7 @@ use Zend\Http,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Twitter extends Rest\Client\RestClient
+class Twitter extends Client\RestClient
 {
 
     /**
@@ -48,51 +50,51 @@ class Twitter extends Rest\Client\RestClient
      * This should be reviewed in the future...
      */
     const STATUS_MAX_CHARACTERS = 246;
-    
+
     /**
      * OAuth Endpoint
      */
     const OAUTH_BASE_URI = 'http://twitter.com/oauth';
-    
+
     /**
      * @var array
      */
-    protected $_cookieJar;
-    
+    protected $cookieJar;
+
     /**
      * Date format for 'since' strings
      *
      * @var string
      */
-    protected $_dateFormat = 'D, d M Y H:i:s T';
-    
+    protected $dateFormat = 'D, d M Y H:i:s T';
+
     /**
      * Username
      *
      * @var string
      */
-    protected $_username;
-    
+    protected $username;
+
     /**
      * Current method type (for method proxying)
      *
      * @var string
      */
-    protected $_methodType;
-    
+    protected $methodType;
+
     /**
-     * Zend_Oauth Consumer
+     * Zend\Oauth Consumer
      *
      * @var \Zend\OAuth\Consumer
      */
-    protected $_oauthConsumer = null;
-    
+    protected $oauthConsumer = null;
+
     /**
      * Types of API methods
      *
      * @var array
      */
-    protected $_methodTypes = array(
+    protected $methodTypes = array(
         'status',
         'user',
         'directMessage',
@@ -101,20 +103,20 @@ class Twitter extends Rest\Client\RestClient
         'favorite',
         'block',
     );
-    
+
     /**
      * Options passed to constructor
      *
      * @var array
      */
-    protected $_options = array();
+    protected $options = array();
 
     /**
      * Local HTTP Client cloned from statically set client
      *
      * @var \Zend\Http\Client
      */
-    protected $_localHttpClient = null;
+    protected $localHttpClient = null;
 
     /**
      * Constructor
@@ -122,15 +124,15 @@ class Twitter extends Rest\Client\RestClient
      * @param  array $options Optional options array
      * @return void
      */
-    public function __construct($options = null, Zend_Oauth_Consumer $consumer = null)
+    public function __construct($options = null, Oauth\Consumer $consumer = null)
     {
         $this->setUri('http://api.twitter.com');
         if (!is_array($options)) $options = array();
         $options['siteUrl'] = self::OAUTH_BASE_URI;
-        if ($options instanceof \Zend\Config\Config) {
+        if ($options instanceof Config\Config) {
             $options = $options->toArray();
         }
-        $this->_options = $options;
+        $this->options = $options;
         if (isset($options['username'])) {
             $this->setUsername($options['username']);
         }
@@ -141,9 +143,9 @@ class Twitter extends Rest\Client\RestClient
         } else {
             $this->setLocalHttpClient(clone self::getHttpClient());
             if ($consumer === null) {
-                $this->_oauthConsumer = new OAuth\Consumer($options);
+                $this->oauthConsumer = new OAuth\Consumer($options);
             } else {
-                $this->_oauthConsumer = $consumer;
+                $this->oauthConsumer = $consumer;
             }
         }
     }
@@ -152,16 +154,16 @@ class Twitter extends Rest\Client\RestClient
      * Set local HTTP client as distinct from the static HTTP client
      * as inherited from Zend_Rest_Client.
      *
-     * @param Zend_Http_Client $client
+     * @param Zend\Http\Client $client
      * @return self
      */
     public function setLocalHttpClient(Http\Client $client)
     {
-        $this->_localHttpClient = $client;
-        $this->_localHttpClient->setHeaders(array('Accept-Charset' => 'ISO-8859-1,utf-8'));
+        $this->localHttpClient = $client;
+        $this->localHttpClient->setHeaders(array('Accept-Charset' => 'ISO-8859-1,utf-8'));
         return $this;
     }
-    
+
     /**
      * Get the local HTTP client as distinct from the static HTTP client
      * inherited from \Zend\Rest\Client
@@ -170,9 +172,9 @@ class Twitter extends Rest\Client\RestClient
      */
     public function getLocalHttpClient()
     {
-        return $this->_localHttpClient;
+        return $this->localHttpClient;
     }
-    
+
     /**
      * Checks for an authorised state
      *
@@ -193,7 +195,7 @@ class Twitter extends Rest\Client\RestClient
      */
     public function getUsername()
     {
-        return $this->_username;
+        return $this->username;
     }
 
     /**
@@ -204,7 +206,7 @@ class Twitter extends Rest\Client\RestClient
      */
     public function setUsername($value)
     {
-        $this->_username = $value;
+        $this->username = $value;
         return $this;
     }
 
@@ -217,12 +219,12 @@ class Twitter extends Rest\Client\RestClient
      */
     public function __get($type)
     {
-        if (!in_array($type, $this->_methodTypes)) {
+        if (!in_array($type, $this->methodTypes)) {
             throw new Exception\DomainException(
                 'Invalid method type "' . $type . '"'
             );
         }
-        $this->_methodType = $type;
+        $this->methodType = $type;
         return $this;
     }
 
@@ -236,19 +238,19 @@ class Twitter extends Rest\Client\RestClient
      */
     public function __call($method, $params)
     {
-        if (method_exists($this->_oauthConsumer, $method)) {
-            $return = call_user_func_array(array($this->_oauthConsumer, $method), $params);
+        if (method_exists($this->oauthConsumer, $method)) {
+            $return = call_user_func_array(array($this->oauthConsumer, $method), $params);
             if ($return instanceof OAuth\Token\Access) {
-                $this->setLocalHttpClient($return->getHttpClient($this->_options));
+                $this->setLocalHttpClient($return->getHttpClient($this->options));
             }
             return $return;
         }
-        if (empty($this->_methodType)) {
+        if (empty($this->methodType)) {
             throw new Exception\BadMethodCallException(
                 'Invalid method "' . $method . '"'
             );
         }
-        $test = $this->_methodType . ucfirst($method);
+        $test = $this->methodType . ucfirst($method);
         if (!method_exists($this, $test)) {
             throw new Exception\BadMethodCallException(
                 'Invalid method "' . $test . '"'
@@ -264,7 +266,7 @@ class Twitter extends Rest\Client\RestClient
      * @return void
      * @throws exception\DomainException
      */
-    protected function _init()
+    protected function init()
     {
         if (!$this->isAuthorised() && $this->getUsername() !== null) {
             throw new Exception\DomainException(
@@ -274,13 +276,13 @@ class Twitter extends Rest\Client\RestClient
                 . 'attempting any API actions that require authorisation'
             );
         }
-        $client = $this->_localHttpClient;
+        $client = $this->localHttpClient;
         $client->resetParameters();
-        if (null == $this->_cookieJar) {
+        if (null == $this->cookieJar) {
             $client->clearCookies();
-            $this->_cookieJar = $client->getCookies();
+            $this->cookieJar = $client->getCookies();
         } else {
-            $client->setCookies($this->_cookieJar);
+            $client->setCookies($this->cookieJar);
         }
     }
 
@@ -291,28 +293,28 @@ class Twitter extends Rest\Client\RestClient
      * @deprecated Not supported by Twitter since April 08, 2009
      * @return void
      */
-    protected function _setDate($value)
+    protected function setDate($value)
     {
         if (is_int($value)) {
-            $date = date($this->_dateFormat, $value);
+            $date = date($this->dateFormat, $value);
         } else {
-            $date = date($this->_dateFormat, strtotime($value));
+            $date = date($this->dateFormat, strtotime($value));
         }
-        $this->_localHttpClient->setHeaders(array('If-Modified-Since' => $date));
+        $this->localHttpClient->setHeaders(array('If-Modified-Since' => $date));
     }
 
     /**
      * Public Timeline status
      *
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function statusPublicTimeline()
     {
-        $this->_init();
+        $this->init();
         $path = '/1/statuses/public_timeline.xml';
-        $response = $this->_get($path);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -326,11 +328,11 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  array $params
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function statusFriendsTimeline(array $params = array())
     {
-        $this->_init();
+        $this->init();
         $path = '/1/statuses/friends_timeline';
         $_params = array();
         foreach ($params as $key => $value) {
@@ -345,7 +347,7 @@ class Twitter extends Rest\Client\RestClient
                     $_params['count'] = (int) $count;
                     break;
                 case 'since_id':
-                    $_params['since_id'] = $this->_validInteger($value);
+                    $_params['since_id'] = $this->validInteger($value);
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -355,8 +357,8 @@ class Twitter extends Rest\Client\RestClient
             }
         }
         $path .= '.xml';
-        $response = $this->_get($path, $_params);
-        $return = new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $_params);
+        $return = new Client\Result($response->getBody());
         return $return;
     }
 
@@ -373,11 +375,11 @@ class Twitter extends Rest\Client\RestClient
      * - screen_name: specfies the screen name of the user for whom to return the user_timeline
      *
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function statusUserTimeline(array $params = array())
     {
-        $this->_init();
+        $this->init();
         $path = '/1/statuses/user_timeline';
         $_params = array();
         foreach ($params as $key => $value) {
@@ -398,24 +400,24 @@ class Twitter extends Rest\Client\RestClient
                     $_params['count'] = $count;
                     break;
                 case 'user_id':
-                    $_params['user_id'] = $this->_validInteger($value);
+                    $_params['user_id'] = $this->validInteger($value);
                     break;
                 case 'screen_name':
-                    $_params['screen_name'] = $this->_validateScreenName($value);
+                    $_params['screen_name'] = $this->validateScreenName($value);
                     break;
                 case 'since_id':
-                    $_params['since_id'] = $this->_validInteger($value);
+                    $_params['since_id'] = $this->validInteger($value);
                     break;
                 case 'max_id':
-                    $_params['max_id'] = $this->_validInteger($value);
+                    $_params['max_id'] = $this->validInteger($value);
                     break;
                 default:
                     break;
             }
         }
         $path .= '.xml';
-        $response = $this->_get($path, $_params);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $_params);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -423,14 +425,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int $id Id of status to show
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function statusShow($id)
     {
-        $this->_init();
-        $path = '/1/statuses/show/' . $this->_validInteger($id) . '.xml';
-        $response = $this->_get($path);
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $path = '/1/statuses/show/' . $this->validInteger($id) . '.xml';
+        $response = $this->get($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -438,14 +440,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  string $status
      * @param  int $in_reply_to_status_id
-     * @return Rest\Client\Result
+     * @return Client\Result
      * @throws Http\Client\Exception if HTTP request fails or times out
      * @throws Exception\OutOfRangeException if message is too long
      * @throws Exception\InvalidArgumentException if message is empty
      */
     public function statusUpdate($status, $inReplyToStatusId = null)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/statuses/update.xml';
         $len = iconv_strlen(htmlspecialchars($status, ENT_QUOTES, 'UTF-8'), 'UTF-8');
         if ($len > self::STATUS_MAX_CHARACTERS) {
@@ -463,8 +465,8 @@ class Twitter extends Rest\Client\RestClient
         if (is_numeric($inReplyToStatusId) && !empty($inReplyToStatusId)) {
             $data['in_reply_to_status_id'] = $inReplyToStatusId;
         }
-        $response = $this->_post($path, $data);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->post($path, $data);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -475,17 +477,17 @@ class Twitter extends Rest\Client\RestClient
      * - page: return page X of results
      *
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function statusReplies(array $params = array())
     {
-        $this->_init();
+        $this->init();
         $path = '/1/statuses/mentions.xml';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
                 case 'since_id':
-                    $_params['since_id'] = $this->_validInteger($value);
+                    $_params['since_id'] = $this->validInteger($value);
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -494,8 +496,8 @@ class Twitter extends Rest\Client\RestClient
                     break;
             }
         }
-        $response = $this->_get($path, $_params);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $_params);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -503,14 +505,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int $id ID of status to destroy
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function statusDestroy($id)
     {
-        $this->_init();
-        $path = '/1/statuses/destroy/' . $this->_validInteger($id) . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $path = '/1/statuses/destroy/' . $this->validInteger($id) . '.xml';
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -518,11 +520,11 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int|string $id Id or username of user for whom to fetch friends
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function userFriends(array $params = array())
     {
-        $this->_init();
+        $this->init();
         $path = '/1/statuses/friends';
         $_params = array();
 
@@ -540,8 +542,8 @@ class Twitter extends Rest\Client\RestClient
         }
         $path .= '.xml';
 
-        $response = $this->_get($path, $_params);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $_params);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -549,17 +551,17 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  bool $lite If true, prevents inline inclusion of current status for followers; defaults to false
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function userFollowers($lite = false)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/statuses/followers.xml';
         if ($lite) {
             $this->lite = 'true';
         }
-        $response = $this->_get($path);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -567,14 +569,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int|string $id User ID or name
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function userShow($id)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/users/show.xml';
-        $response = $this->_get($path, array('id'=>$id));
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, array('id'=>$id));
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -586,17 +588,17 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  array $params
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function directMessageMessages(array $params = array())
     {
-        $this->_init();
+        $this->init();
         $path = '/1/direct_messages.xml';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
                 case 'since_id':
-                    $_params['since_id'] = $this->_validInteger($value);
+                    $_params['since_id'] = $this->validInteger($value);
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -605,8 +607,8 @@ class Twitter extends Rest\Client\RestClient
                     break;
             }
         }
-        $response = $this->_get($path, $_params);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $_params);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -618,17 +620,17 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  array $params
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function directMessageSent(array $params = array())
     {
-        $this->_init();
+        $this->init();
         $path = '/1/direct_messages/sent.xml';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
                 case 'since_id':
-                    $_params['since_id'] = $this->_validInteger($value);
+                    $_params['since_id'] = $this->validInteger($value);
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -637,8 +639,8 @@ class Twitter extends Rest\Client\RestClient
                     break;
             }
         }
-        $response = $this->_get($path, $_params);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $_params);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -646,14 +648,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int|string $user User to whom to send message
      * @param  string $text Message to send to user
-     * @return Rest\Client\Result
+     * @return Client\Result
      * @throws Exception\InvalidArgumentException if message is empty
      * @throws Exception\OutOfRangeException if message is too long
      * @throws Http\Client\Exception if HTTP request fails or times out
      */
     public function directMessageNew($user, $text)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/direct_messages/new.xml';
         $len = iconv_strlen($text, 'UTF-8');
         if (0 == $len) {
@@ -666,8 +668,8 @@ class Twitter extends Rest\Client\RestClient
             );
         }
         $data = array('user' => $user, 'text' => $text);
-        $response = $this->_post($path, $data);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->post($path, $data);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -675,14 +677,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int $id ID of message to destroy
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function directMessageDestroy($id)
     {
-        $this->_init();
-        $path = '/1/direct_messages/destroy/' . $this->_validInteger($id) . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $path = '/1/direct_messages/destroy/' . $this->validInteger($id) . '.xml';
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -690,14 +692,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int|string $id User ID or name of new friend
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function friendshipCreate($id)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/friendships/create/' . $id . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -705,14 +707,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int|string $id User ID or name of friend to remove
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function friendshipDestroy($id)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/friendships/destroy/' . $id . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -720,27 +722,27 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param int|string $id User ID or name of friend to see if they are your friend
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function friendshipExists($id)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/friendships/exists.xml';
         $data = array('user_a' => $this->getUsername(), 'user_b' => $id);
-        $response = $this->_get($path, $data);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $data);
+        return new Client\Result($response->getBody());
     }
 
     /**
      * Verify Account Credentials
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function accountVerifyCredentials()
     {
-        $this->_init();
-        $response = $this->_get('/1/account/verify_credentials.xml');
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $response = $this->get('/1/account/verify_credentials.xml');
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -751,8 +753,8 @@ class Twitter extends Rest\Client\RestClient
      */
     public function accountEndSession()
     {
-        $this->_init();
-        $this->_get('/1/account/end_session');
+        $this->init();
+        $this->get('/1/account/end_session');
         return true;
     }
 
@@ -760,13 +762,13 @@ class Twitter extends Rest\Client\RestClient
      * Returns the number of api requests you have left per hour.
      *
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function accountRateLimitStatus()
     {
-        $this->_init();
-        $response = $this->_get('/1/account/rate_limit_status.xml');
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $response = $this->get('/1/account/rate_limit_status.xml');
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -778,17 +780,17 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  array $params
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function favoriteFavorites(array $params = array())
     {
-        $this->_init();
+        $this->init();
         $path = '/1/favorites';
         $_params = array();
         foreach ($params as $key => $value) {
             switch (strtolower($key)) {
                 case 'id':
-                    $path .= '/' . $this->_validInteger($value);
+                    $path .= '/' . $this->validInteger($value);
                     break;
                 case 'page':
                     $_params['page'] = (int) $value;
@@ -798,8 +800,8 @@ class Twitter extends Rest\Client\RestClient
             }
         }
         $path .= '.xml';
-        $response = $this->_get($path, $_params);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, $_params);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -807,14 +809,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int $id Status ID you want to mark as a favorite
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function favoriteCreate($id)
     {
-        $this->_init();
-        $path = '/1/favorites/create/' . $this->_validInteger($id) . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $path = '/1/favorites/create/' . $this->validInteger($id) . '.xml';
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -822,14 +824,14 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param  int $id Status ID you want to de-list as a favorite
      * @throws Http\Client\Exception if HTTP request fails or times out
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function favoriteDestroy($id)
     {
-        $this->_init();
-        $path = '/1/favorites/destroy/' . $this->_validInteger($id) . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $path = '/1/favorites/destroy/' . $this->validInteger($id) . '.xml';
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -837,28 +839,28 @@ class Twitter extends Rest\Client\RestClient
      * Destroys a friendship to the blocked user if it exists.
      *
      * @param integer|string $id       The ID or screen name of a user to block.
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function blockCreate($id)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/blocks/create/' . $id . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
      * Un-blocks the user specified in the ID parameter for the authenticating user
      *
      * @param integer|string $id       The ID or screen_name of the user to un-block.
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function blockDestroy($id)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/blocks/destroy/' . $id . '.xml';
-        $response = $this->_post($path);
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->post($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -866,15 +868,15 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param string|integer $id    The ID or screen_name of the potentially blocked user.
      * @param boolean $returnResult Instead of returning a boolean return the rest response from twitter
-     * @return Boolean|Rest\Client\Result
+     * @return Boolean|Client\Result
      */
     public function blockExists($id, $returnResult = false)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/blocks/exists/' . $id . '.xml';
-        $response = $this->_get($path);
+        $response = $this->get($path);
 
-        $cr = new Rest\Client\Result($response->getBody());
+        $cr = new Client\Result($response->getBody());
 
         if ($returnResult === true)
             return $cr;
@@ -891,32 +893,32 @@ class Twitter extends Rest\Client\RestClient
      *
      * @param integer $page         Optional. Specifies the page number of the results beginning at 1. A single page contains 20 ids.
      * @param boolean $returnUserIds  Optional. Returns only the userid's instead of the whole user object
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function blockBlocking($page = 1, $returnUserIds = false)
     {
-        $this->_init();
+        $this->init();
         $path = '/1/blocks/blocking';
         if ($returnUserIds === true) {
             $path .= '/ids';
         }
         $path .= '.xml';
-        $response = $this->_get($path, array('page' => $page));
-        return new Rest\Client\Result($response->getBody());
+        $response = $this->get($path, array('page' => $page));
+        return new Client\Result($response->getBody());
     }
 
     /**
      * Returns an array of user objects that retweeted the tweets identified with the given $id
      *
      * @param integer $id  The Id of the tweet we want to know who retweeted
-     * @return Rest\Client\Result
+     * @return Client\Result
      */
     public function statusRetweetedBy($id)
     {
-        $this->_init();
-        $path = '/1/statuses/' . $this->_validInteger($id) . '/retweeted_by.xml';
-        $response = $this->_get($path);
-        return new Rest\Client\Result($response->getBody());
+        $this->init();
+        $path = '/1/statuses/' . $this->validInteger($id) . '/retweeted_by.xml';
+        $response = $this->get($path);
+        return new Client\Result($response->getBody());
     }
 
     /**
@@ -925,7 +927,7 @@ class Twitter extends Rest\Client\RestClient
      * @throws Http\Client\Exception if HTTP request fails or times out
      * @return integer
      */
-    protected function _validInteger($int)
+    protected function validInteger($int)
     {
         if (preg_match("/(\d+)/", $int)) {
             return $int;
@@ -940,7 +942,7 @@ class Twitter extends Rest\Client\RestClient
      * @return string
      * @throws Exception\InvalidArgumentException
      */
-    protected function _validateScreenName($name)
+    protected function validateScreenName($name)
     {
         if (!preg_match('/^[a-zA-Z0-9_]{0,20}$/', $name)) {
             throw new Exception\InvalidArgumentException(
@@ -955,14 +957,14 @@ class Twitter extends Rest\Client\RestClient
      * Call a remote REST web service URI and return the Zend_Http_Response object
      *
      * @param  string $path            The path to append to the URI
-     * @throws Rest\Client\Exception
+     * @throws Client\Exception
      * @return void
      */
-    protected function _prepare($path)
+    protected function prepare($path)
     {
         // Get the URI object and configure it
         if (!$this->uri instanceof Uri\Uri) {
-            throw new Rest\Client\Exception(
+            throw new Client\Exception(
                 'URI object must be set before performing call'
             );
         }
@@ -977,10 +979,10 @@ class Twitter extends Rest\Client\RestClient
 
         /**
          * Get the HTTP client and configure it for the endpoint URI.
-         * Do this each time because the Zend_Http_Client instance is shared
+         * Do this each time because the Zend\Http\Client instance is shared
          * among all Zend_Service_Abstract subclasses.
          */
-        $this->_localHttpClient->resetParameters()->setUri((string) $this->uri);
+        $this->localHttpClient->resetParameters()->setUri((string) $this->uri);
     }
 
     /**
@@ -991,10 +993,10 @@ class Twitter extends Rest\Client\RestClient
      * @throws Http\Client\Exception
      * @return Http\Response
      */
-    protected function _get($path, array $query = array())
+    protected function get($path, array $query = array())
     {
-        $this->_prepare($path);
-        $client = $this->_localHttpClient;
+        $this->prepare($path);
+        $client = $this->localHttpClient;
         $client->setParameterGet($query);
         $client->setMethod(Http\Request::METHOD_GET);
         $response = $client->send();
@@ -1009,10 +1011,10 @@ class Twitter extends Rest\Client\RestClient
      * @throws Http\Client\Exception
      * @return Http\Response
      */
-    protected function _post($path, $data = null)
+    protected function post($path, $data = null)
     {
-        $this->_prepare($path);
-        return $this->_performPost(Http\Request::METHOD_POST, $data);
+        $this->prepare($path);
+        return $this->performPost(Http\Request::METHOD_POST, $data);
     }
 
     /**
@@ -1026,9 +1028,9 @@ class Twitter extends Rest\Client\RestClient
      * @param mixed $data
      * @return Http\Response
      */
-    protected function _performPost($method, $data = null)
+    protected function performPost($method, $data = null)
     {
-        $client = $this->_localHttpClient;
+        $client = $this->localHttpClient;
         if (is_string($data)) {
             $client->setRawData($data);
         } elseif (is_array($data) || is_object($data)) {

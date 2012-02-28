@@ -20,6 +20,14 @@
  */
 
 /**
+ * @namespace
+ */
+namespace ZendTest\Service\Twitter;
+
+use Zend\Service\Twitter,
+    Zend\Feed;
+
+/**
  * @category   Zend
  * @package    Zend_Service_Twitter
  * @subpackage UnitTests
@@ -28,7 +36,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Twitter
  */
-class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
+class SearchTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Sets up the fixture, for example, open a network connection.
@@ -45,16 +53,16 @@ class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->twitter = new Zend_Service_Twitter_Search();
+        $this->twitter = new Twitter\Search();
     }
 
-    public function testSetResponseTypeToJSON()
+    public function testSetResponseTypeToJson()
     {
         $this->twitter->setResponseType('json');
         $this->assertEquals('json', $this->twitter->getResponseType());
     }
 
-    public function testSetResponseTypeToATOM()
+    public function testSetResponseTypeToAtom()
     {
         $this->twitter->setResponseType('atom');
         $this->assertEquals('atom', $this->twitter->getResponseType());
@@ -97,8 +105,7 @@ class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
         $this->twitter->setResponseType('atom');
         $response = $this->twitter->search('zend');
 
-        $this->assertTrue($response instanceof Zend_Feed_Atom);
-
+        $this->assertTrue($response instanceof Feed\Atom);
     }
 
     public function testJsonSearchRestrictsLanguageReturnsArray()
@@ -112,10 +119,10 @@ class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
     public function testAtomSearchRestrictsLanguageReturnsObject()
     {
         $this->twitter->setResponseType('atom');
-        /* @var $response Zend_Feed_Atom */
+        /* @var $response Zend\Feed\Atom */
         $response = $this->twitter->search('zend', array('lang' => 'de'));
 
-        $this->assertTrue($response instanceof Zend_Feed_Atom);
+        $this->assertTrue($response instanceof Feed\Atom);
         $this->assertTrue((strpos($response->link('self'), 'lang=de') !== false));
 
     }
@@ -131,10 +138,10 @@ class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
     public function testAtomSearchReturnThirtyResultsReturnsObject()
     {
         $this->twitter->setResponseType('atom');
-        /* @var $response Zend_Feed_Atom */
+        /* @var $response Zend\Feed\Atom */
         $response = $this->twitter->search('zend', array('rpp' => '30'));
 
-        $this->assertTrue($response instanceof Zend_Feed_Atom);
+        $this->assertTrue($response instanceof Feed\Atom);
         $this->assertTrue(($response->count() == 30));
 
     }
@@ -142,10 +149,10 @@ class Zend_Service_Twitter_TwitterSearchTest extends PHPUnit_Framework_TestCase
     public function testAtomSearchShowUserReturnsObject()
     {
         $this->twitter->setResponseType('atom');
-        /* @var $response Zend_Feed_Atom */
+        /* @var $response Zend\Feed\Atom */
         $response = $this->twitter->search('zend', array('show_user' => 'true'));
 
-        $this->assertTrue($response instanceof Zend_Feed_Atom);
+        $this->assertTrue($response instanceof Feed\Atom);
 
     }
 }

@@ -189,7 +189,11 @@ class Di implements DependencyInjection
                     isset($instantiator[1]) ? $instantiator[1] : 'NoMethodGiven'
                 );
             } else {
-                $msg = 'Invalid instantiator';
+                $msg = sprintf(
+                    'Invalid instantiator of type "%s" for "%s".',
+                    gettype($instantiator),
+                    $name
+                );
             }
             throw new \RuntimeException($msg);
         }

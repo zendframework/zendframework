@@ -221,7 +221,6 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     {
         $this->renderer->foo = '<p>Bar</p>';
         $this->assertEquals($this->renderer->vars('foo'), $this->renderer->foo);
-        $this->assertSame('<p>Bar</p>', $this->renderer->vars()->getRawValue('foo'));
     }
 
     /**
@@ -259,33 +258,14 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
     /**
      * @group convenience-api
      */
-    public function testRawMethodShouldRetrieveRawVariableFromVariableContainer()
-    {
-        $this->renderer->foo = '<p>Bar</p>';
-        $foo = $this->renderer->raw('foo');
-        $this->assertSame($this->renderer->vars()->getRawValue('foo'), $foo);
-    }
-    
-    /**
-     * @group convenience-api
-     */
     public function testRenderingLocalVariables()
     {
-        $expected = '10 &gt; 9';
+        $expected = '10 > 9';
         $this->renderer->vars()->assign(array('foo' => '10 > 9'));
         $this->renderer->resolver()->addPath(__DIR__ . '/_templates');
         $test = $this->renderer->render('testLocalVars.phtml');
         $this->assertContains($expected, $test);
     }    
-
-    public function testInjectsVariablesContainerWithEscapeHelperAsEscapeCallbackWhenPresent()
-    {
-        if (!$this->renderer->getBroker()->getClassLoader()->isLoaded('escape')) {
-            $this->markTestSkipped('Cannot test as escape helper is not loaded');
-        }
-        $escapeHelper = $this->renderer->plugin('escape');
-        $this->assertSame($escapeHelper, $this->renderer->vars()->getEscapeCallback());
-    }
 
     public function testRendersTemplatesInAStack()
     {
@@ -398,9 +378,6 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         $model = new ViewModel();
         $model->setTemplate('template');
         $vars  = $model->getVariables();
-        $vars->setEscapeCallback(function ($value) {
-            return strtolower($value);
-        });
         $vars['foo'] = 'BAR-BAZ-BAT';
 
         $resolver = new TemplateMapResolver(array(
@@ -408,6 +385,6 @@ class PhpRendererTest extends \PHPUnit_Framework_TestCase
         ));
         $this->renderer->setResolver($resolver);
         $test = $this->renderer->render($model);
-        $this->assertContains('bar-baz-bat', $test);
+        $this->assertContains('BAR-BAZ-BAT', $test);
     }
 }

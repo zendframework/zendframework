@@ -166,21 +166,21 @@ class SessionConfiguration extends StandardConfiguration
     /**
      * Set session.save_handler
      * 
-     * @param  string $saveHandler 
+     * @param  string $phpSaveHandler 
      * @return SessionConfiguration
      * @throws SessionException
      */
-    public function setPhpSaveHandler($saveHandler)
+    public function setPhpSaveHandler($phpSaveHandler)
     {
-        $saveHandler = (string) $saveHandler;
+        $phpSaveHandler = (string) $phpSaveHandler;
         set_error_handler(array($this, 'handleError'));
-        ini_set('session.save_handler', $saveHandler);
+        ini_set('session.save_handler', $phpSaveHandler);
         restore_error_handler();
         if ($this->phpErrorCode >= E_WARNING) {
             throw new Exception\InvalidArgumentException('Invalid save handler specified');
         }
 
-        $this->setOption('save_handler', $saveHandler);
+        $this->setOption('save_handler', $phpSaveHandler);
         return $this;
     }
 

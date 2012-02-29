@@ -29,11 +29,14 @@ namespace Zend\Config;
 class Factory
 {
     /**
-     * Reader instances used for files.
+     * Readers used for config files.
      *
      * @var array
      */
-    protected static $readers = array();
+    protected static $readers = array(
+        'ini' => 'Ini',
+        'xml' => 'Xml'
+    );
 
     /**
      * Read a config from a file.
@@ -43,35 +46,36 @@ class Factory
      */
     public static function fromFile($filename)
     {
-        if (!file_exists($filename)) {
-            throw new Exception\RuntimeException("The file $filename doesn't exists.");
+        $pathinfo = pathinfo($filename);
+        
+        if (!isset($pathinfo['extension'])) {
+            throw new Exception\RuntimeException(sprintf(
+                'Filename "%s" is missing an extension and cannot be auto-detected',
+                $filename
+            ));
         }
         
-        $pathinfo = pathinfo($filename);
-
-        switch (strtolower($pathinfo['extension'])) {
-            case 'php':
-                return include $filename;
-                break;
-
-            case 'ini':
-                if (!isset(self::$readers['ini'])) {
-                    self::$readers['ini'] = new Reader\Ini();
-                }
-
-                return self::$readers['ini']->fromFile($filename);
-                break;
-
-            case 'xml':
-                if (!isset(self::$readers['xml'])) {
-                    self::$readers['xml'] = new Reader\Xml();
-                }
-
-                return self::$readers['xml']->fromFile($filename);
-                break;
+        $extension = strtolower($pathinfo['extension']);
+       
+        if ($extension === 'php') {
+            if (!is_file($filename) || !is_readable($filename)) {
+                throw new Exception\RuntimeException(sprintf('Filename "%s" is either not a file or not readable', $filename));
+            }
+            
+            return include $filename;
+        } elseif (isset(self::$readers[$extension])) {
+            if (is_string(self::$readers[$extension])) {
+                $classname = __NAMESPACE__ . '\\Reader\\' . self::$readers[$extension];
+                self::$readers[$extension] = new $classname();
+            }
+            
+            return self::$readers[$extension]->fromFile($filename);
+        } else {
+            throw new Exception\RuntimeException(sprintf(
+                'Unsupported config file extension: .%s',
+                $pathinfo['extension']
+            ));
         }
-
-        throw new Exception\RuntimeException(sprintf('Unsupported config file extension: .%s', $pathinfo['extension']));
     }
 
     /**

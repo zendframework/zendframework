@@ -114,8 +114,9 @@ class StorageFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Zend\Cache\Storage\Adapter\Memory', $cache);
 
         // test plugin structure
-        foreach ($cache->getPlugins() as $i => $plugin) {
-            $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\' . $plugins[$i], $plugin);
+        $i = 0;
+        foreach ($cache->getPlugins() as $plugin) {
+            $this->assertInstanceOf('Zend\Cache\Storage\Plugin\\' . $plugins[$i++], $plugin);
         }
     }
 

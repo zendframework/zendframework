@@ -65,4 +65,46 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertEquals($expected, $test);
     }
+    
+    public function testLevel()
+    {
+        $acceptHeader = new Accept();
+        $acceptHeader->addMediaType('text/html', 0.8, 1)
+                     ->addMediaType('text/html', 0.4, 2)
+                     ->addMediaType('application/atom+xml', 0.9);
+
+        $this->assertEquals('Accept: text/html;level=1;q=0.8,text/html;level=2;q=0.4,application/atom+xml;q=0.9', $acceptHeader->toString());
+    }
+    
+    public function testPrioritizedLevel()
+    {
+        $header = Accept::fromString('Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1,text/html;level=2;q=0.4, */*;q=0.5');
+        
+        $expected = array (
+            'text/html;level=1',
+            'text/html',
+            '*/*',
+            'text/html;level=2',
+            'text/*'
+        );
+        
+        $test = array();
+        foreach($header->getPrioritized() as $type) {
+            $test[] = $type;
+        }
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function testWildcharMediaType()
+    {
+        $acceptHeader = new Accept();
+        $acceptHeader->addMediaType('text/*', 0.8)
+                     ->addMediaType('application/*', 1)
+                     ->addMediaType('*/*', 0.4);
+        
+        $this->assertTrue($acceptHeader->hasMediaType('text/html'));
+        $this->assertTrue($acceptHeader->hasMediaType('application/atom+xml'));
+        $this->assertTrue($acceptHeader->hasMediaType('audio/basic'));
+        $this->assertEquals('Accept: text/*;q=0.8,application/*,*/*;q=0.4', $acceptHeader->toString());
+    }
 }

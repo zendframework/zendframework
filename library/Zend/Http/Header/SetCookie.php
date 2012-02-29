@@ -25,6 +25,20 @@ class SetCookie implements MultipleHeaderDescription
     protected $value = null;
 
     /**
+     * Version
+     * 
+     * @var integer
+     */
+    protected $version = null;
+    
+    /**
+     * Max Age
+     * 
+     * @var integer
+     */
+    protected $maxAge = null;
+    
+    /**
      * Cookie expiry date
      *
      * @var int
@@ -60,8 +74,8 @@ class SetCookie implements MultipleHeaderDescription
     /**
      * @static
      * @throws Exception\InvalidArgumentException
-     * @param $headerLine
-     * @param bool $bypassHeaderFieldName
+     * @param  $headerLine
+     * @param  bool $bypassHeaderFieldName
      * @return array|SetCookie
      */
     public static function fromString($headerLine, $bypassHeaderFieldName = false)
@@ -83,11 +97,13 @@ class SetCookie implements MultipleHeaderDescription
                     }
 
                     switch (str_replace(array('-', '_'), '', strtolower($headerKey))) {
-                        case 'expires':  $header->setExpires($headerValue); break;
-                        case 'domain':   $header->setDomain($headerValue); break;
-                        case 'path':     $header->setPath($headerValue); break;
-                        case 'secure':   $header->setSecure(true); break;
+                        case 'expires' : $header->setExpires($headerValue); break;
+                        case 'domain'  : $header->setDomain($headerValue); break;
+                        case 'path'    : $header->setPath($headerValue); break;
+                        case 'secure'  : $header->setSecure(true); break;
                         case 'httponly': $header->setHttponly(true); break;
+                        case 'version' : $header->setVersion((int) $headerValue); break;
+                        case 'maxage'  : $header->setMaxAge((int) $headerValue); break;
                         default:
                             $header->setName($headerKey);
                             $header->setValue($headerValue);
@@ -132,7 +148,7 @@ class SetCookie implements MultipleHeaderDescription
      * @param bool $httponly
      * @return SetCookie
      */
-    public function __construct($name = null, $value = null, $domain = null, $expires = null, $path = null, $secure = false, $httponly = true)
+    public function __construct($name = null, $value = null, $version = null, $maxAge = null, $domain = null, $expires = null, $path = null, $secure = false, $httponly = true)
     {
         $this->type = 'Cookie';
 
@@ -144,6 +160,14 @@ class SetCookie implements MultipleHeaderDescription
             $this->setValue($value); // in parent
         }
 
+        if ($version!==null) {
+            $this->setVersion($version);
+        }
+        
+        if ($maxAge!==null) {
+            $this->setMaxAge($maxAge);
+        }
+        
         if ($domain) {
             $this->setDomain($domain);
         }
@@ -174,8 +198,25 @@ class SetCookie implements MultipleHeaderDescription
         if ($this->getName() == '') {
             throw new Exception\RuntimeException('A cookie name is required to generate a field value for this cookie');
         }
-        $fieldValue = $this->getName() . '=' . urlencode($this->getValue());
+        
+        $value = $this->getValue();
+        if (strpos($value,'"')!==false) {
+            $value = '"'.urlencode(str_replace('"', '', $value)).'"';
+        } else {
+            $value = urlencode($value);
+        }
+        $fieldValue = $this->getName() . '=' . $value;
 
+        $version = $this->getVersion();
+        if ($version!==null) {
+            $fieldValue .= '; Version=' . $version;
+        }
+        
+        $maxAge = $this->getMaxAge();
+        if ($maxAge!==null) {
+            $fieldValue .= '; Max-Age=' . $maxAge;
+        }
+        
         $expires = $this->getExpires();
         if ($expires) {
             $fieldValue .= '; Expires=' . $expires;
@@ -240,6 +281,52 @@ class SetCookie implements MultipleHeaderDescription
         return $this->value;
     }
 
+    /**
+     * Set version
+     * 
+     * @param integer $version
+     */
+    public function setVersion($version)
+    {
+        if (!is_int($version)) {
+            throw new Exception\InvalidArgumentException('Invalid Version number specified');
+        }
+        $this->version = $version;
+    }
+    
+    /**
+     * Get version
+     * 
+     * @return integer
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+    
+    /**
+     * Set Max-Age
+     * 
+     * @param integer $maxAge
+     */
+    public function setMaxAge($maxAge)
+    {
+        if (!is_int($maxAge) || ($maxAge<0)) {
+            throw new Exception\InvalidArgumentException('Invalid Max-Age number specified');
+        }
+        $this->maxAge = $maxAge;
+    }
+    
+    /**
+     * Get Max-Age
+     * 
+     * @return integer
+     */
+    public function getMaxAge()
+    {
+        return $this->maxAge;
+    }
+    
     /**
      * @param int $expires
      * @return SetCookie

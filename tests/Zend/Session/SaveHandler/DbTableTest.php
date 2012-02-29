@@ -27,6 +27,7 @@ use Zend\Session\SaveHandler\DbTable,
     Zend\Db\Db,
     Zend\Db\Adapter\AbstractAdapter,
     Zend\Db\Table\AbstractTable,
+    Zend\Config\Config,
     ZendTest\Session\TestAsset\TestManager;
 
 /**
@@ -44,7 +45,7 @@ use Zend\Session\SaveHandler\DbTable,
 class DbTableTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var array
+     * @var Zend\Config\Config
      */
     protected $_saveHandlerTableConfig = array(
         'name'              => 'sessions',
@@ -86,6 +87,23 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Zend\Session\SaveHandler\DbTable tests are not enabled due to missing PDO_Sqlite extension');
         }
+
+        $this->_saveHandlerTableConfig = new Config(array(
+            'name'              => 'sessions',
+            'primary'           => array(
+                'id',
+                'save_path',
+                'name',
+            ),
+            DbTable::MODIFIED_COLUMN    => 'modified',
+            DbTable::LIFETIME_COLUMN    => 'lifetime',
+            DbTable::DATA_COLUMN        => 'data',
+            DbTable::PRIMARY_ASSIGNMENT => array(
+                DbTable::PRIMARY_ASSIGNMENT_SESSION_ID,
+                DbTable::PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH,
+                DbTable::PRIMARY_ASSIGNMENT_SESSION_NAME,
+            ),
+        ), true);
         
         // $this->markTestSkipped('Skipped until Zend\Db is refactored, this tests assumptions are generally bad, more assertions are needed');
 
@@ -110,15 +128,6 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         $sh = new DbTable($this->_saveHandlerTableConfig);
         $this->assertInstanceOf('Zend\Db\Table\AbstractTable', $sh);
-    }
-
-    public function testConstructorThrowsExceptionGivenConfigAsNull()
-    {
-        $this->setExpectedException(
-            'Zend\Session\Exception\InvalidArgumentException',
-            '$config must be an instance of Zend\Config or array of key/value pairs containing configuration options for Zend\Session\SaveHandler\DbTable and Zend\Db\Table\Abstract'
-            );
-        $saveHandler = new DbTable(null);
     }
 
     public function testTableNameSchema()
@@ -199,8 +208,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         //different number of args between primary and primaryAssignment
         $config = $this->_saveHandlerTableConfig;
-        array_pop($config[DbTable::PRIMARY_ASSIGNMENT]);
-            
+        unset($config[DbTable::PRIMARY_ASSIGNMENT]);
+        
         $this->setExpectedException(
             'Zend\Session\Exception\RuntimeException'
         );
@@ -491,7 +500,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testZendConfig()
     {
         $this->_usedSaveHandlers[] =
-            $saveHandler = new DbTable(new \Zend\Config\Config($this->_saveHandlerTableConfig));
+            $saveHandler = new DbTable($this->_saveHandlerTableConfig);
         /**
          * @todo Test something other than that an exception is not thrown
          */
@@ -500,11 +509,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the database connection and creates the table for session data
      *
-     * @param  array $primary
+     * @param  Zend\Config\Config $primary
      * @return void
      */
-    protected function _setupDb(array $primary)
+    protected function _setupDb(Config $primary)
     {
+        $primary = $primary->toArray();
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('The pdo_sqlite extension must be available and enabled for this test');
         }

@@ -66,10 +66,10 @@ class Container extends ArrayObject
      * Provide a name ('Default' if none provided) and a Manager instance.
      * 
      * @param  null|string $name 
-     * @param  null|Manager $manager 
+     * @param  Manager $manager 
      * @return void
      */
-    public function __construct($name = 'Default', $manager = null)
+    public function __construct($name = 'Default', Manager $manager = null)
     {
         if (!preg_match('/^[a-z][a-z0-9_\\\]+$/i', $name)) {
             throw new Exception\InvalidArgumentException('Name passed to container is invalid; must consist of alphanumerics, backslashes and underscores only');
@@ -108,7 +108,7 @@ class Container extends ArrayObject
         if (null === self::$defaultManager) {
             $manager = new self::$managerDefaultClass();
             if (!$manager instanceof Manager) {
-                throw new Exception\InvalidArgumentException('Invalid manager type provided; must implement Manager');
+                throw new Exception\InvalidArgumentException('Invalid default manager type provided; must implement Manager');
             }
             self::$defaultManager = $manager;
         }
@@ -138,16 +138,16 @@ class Container extends ArrayObject
     /**
      * Set session manager
      * 
-     * @param  null|string|Manager $manager 
+     * @param  null|Manager $manager 
      * @return Container
      */
-    protected function setManager($manager)
+    protected function setManager(Manager $manager = null)
     {
         if (null === $manager) {
             $manager = self::getDefaultManager();
-        }
-        if (!$manager instanceof Manager) {
-            throw new Exception\InvalidArgumentException('Manager provided is invalid; must implement Manager interface');
+            if (!$manager instanceof Manager) {
+                throw new Exception\InvalidArgumentException('Manager provided is invalid; must implement Manager interface');
+            }
         }
         $this->manager = $manager;
         return $this;

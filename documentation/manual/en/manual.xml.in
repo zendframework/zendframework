@@ -2447,11 +2447,11 @@
                 </xi:fallback>
             </xi:include>
 
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_View-Helpers.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_View-Helpers.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.view.helpers.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.view.helpers.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_View-Abstract.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_View-Abstract.xml" parse="xml"/>-->

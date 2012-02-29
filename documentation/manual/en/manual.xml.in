@@ -2440,11 +2440,13 @@
                     <!--<xi:include href="../en/module_specs/Zend_View-Controllers.xml" parse="xml"/>-->
                 <!--</xi:fallback>-->
             <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_View-Scripts.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_View-Scripts.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
+
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.view.php-renderer.scripts.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.view.php-renderer.scripts.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
+
             <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_View-Helpers.xml" parse="xml">-->
                 <!--<xi:fallback>-->
                     <!--<xi:include href="../en/module_specs/Zend_View-Helpers.xml" parse="xml"/>-->

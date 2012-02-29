@@ -15,10 +15,10 @@
         
 
         <para>
-            Normally it is expected that users would use one of the adapter classes to read a configuration file using <link linkend="zend.config.reader.ini"><classname>Zend\Config\Reader\Ini</classname></link> or
+            Normally it is expected that users would use one of the reader classes to read a configuration file using <link linkend="zend.config.reader.ini"><classname>Zend\Config\Reader\Ini</classname></link> or
             <link linkend="zend.config.reader.xml"><classname>Zend\Config\Reader\Xml</classname></link>,
             but if configuration data are available in a <acronym>PHP</acronym> array, one may
-            simply pass the data to the <classname>Zend\Config</classname> constructor in order to
+            simply pass the data to the <classname>Zend\Config\Config</classname> constructor in order to
             utilize a simple object-oriented interface:
         </para>
 
@@ -63,7 +63,7 @@ $host = $config->database->get('host', 'localhost');
 ]]>
 </programlisting>
 
-    <example xml:id="zend.config.introduction.example.file.php"><info><title>Using Zend\Config with a PHP Configuration File</title></info>
+    <example xml:id="zend.config.introduction.example.file.php"><info><title>Using Zend\Config\Config with a PHP Configuration File</title></info>
         
 
         <para>
@@ -90,7 +90,7 @@ return array(
 
         <programlisting language="php"><![CDATA[
 // Configuration consumption
-$config = new Zend\Config\Config(require 'config.php');
+$config = new Zend\Config\Config(include 'config.php');
 
 // Print a configuration datum (results in 'www.example.com')
 echo $config->webhost;

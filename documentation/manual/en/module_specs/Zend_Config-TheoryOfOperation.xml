@@ -10,7 +10,7 @@
         organizing the data from general to specific. Concrete adapter classes
         adapt configuration data from storage to produce the associative array for the
         <classname>Zend\Config\Config</classname> constructor. User scripts may provide such arrays
-        directly to the <classname>Zend\Config\Config</classname> constructor, without using an adapter
+        directly to the <classname>Zend\Config\Config</classname> constructor, without using a reader
         class, since it may be appropriate to do so in certain situations.
     </para>
 
@@ -57,13 +57,6 @@
             storage media.
         </para>
     </note>
-
-    <para>
-        The <classname>Zend\Config\Config</classname> family of classes enables configuration data to be
-        organized into sections. <classname>Zend\Config</classname> adapter objects may be loaded
-        with a single specified section, multiple specified sections, or all sections
-        (if none are specified).
-    </para>
 
     <para>
         If you have two <classname>Zend\Config\Config</classname> objects, you can merge them into a single

@@ -76,33 +76,6 @@ abstract class AbstractManager implements Manager
      */
     public function __construct(Configuration $config = null, Storage $storage = null, SaveHandler $saveHandler = null)
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-        }
-        if (is_array($config)) {
-            foreach ($config as $key => $value) {
-                switch (strtolower($key)) {
-                    case 'storage':
-                        if (null === $storage) {
-                            $storage = $value;
-                        }
-                        unset($config[$key]);
-                        break;
-                    case 'savehandler':
-                        if (null === $saveHandler) {
-                            $saveHandler = $value;
-                        }
-                        unset($config[$key]);
-                        break;
-                }
-            }
-        } elseif (is_string($config)) {
-            if (!class_exists($config)) {
-                throw new Exception\InvalidArgumentException('Configuration class provided is invalid; not found');
-            }
-            $config = new $config;
-        }
-        
         $this->setConfig($config);
         $this->setStorage($storage);
         if ($saveHandler) {

@@ -24,7 +24,7 @@
  */
 namespace Zend\GData;
 
-use Zend\Http\Client;
+use Zend\Http;
 
 /**
  * Gdata Http Client object.

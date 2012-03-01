@@ -56,18 +56,22 @@ $filtered = $view->lowercase('some value');
         A large number of helpers are provided in the standard distribution of Zend Framework.  You
         can also register helpers by adding them to the <link
             linkend="zend.loader.plugin-broker">plugin broker</link>, or the plugin locator the
-        broker composes. Please refer to the linked plugin broker documentation for details.
+        broker composes. Please refer to the <link linkend="zend.loader.plugin-broker">plugin broker
+            documentation</link> for details.
     </para>
 
     <section xml:id="zend.view.helpers.initial">
-        <info><title>Initial Helpers</title></info>
+        <info><title>Included Helpers</title></info>
 
         <para>
             Zend Framework comes with an initial set of helper classes, most of which relate to form
             element generation and perform the appropriate output escaping automatically. In
             addition, there are helpers for creating route-based <acronym>URL</acronym>s and
-            <acronym>HTML</acronym> lists, as well as declaring variables. The currently shipped
-            helpers include:
+            <acronym>HTML</acronym> lists, as well as declaring variables. Additionally, there are a
+            rich set of helpers for providing values for, and rendering, the various HTML
+            <code>&lt;head&gt;</code> tags, such as <classname>HeadTitle</classname>,
+            <classname>HeadLink</classname>, and <classname>HeadScript</classname>. The currently
+            shipped helpers include:
         </para>
 
         <itemizedlist>
@@ -470,8 +474,9 @@ return array(
         <info><title>Writing Custom Helpers</title></info>
 
         <para>
-            Writing custom helpers is easy. Simply implement the
-            <classname>Zend\View\Helper</classname> interface:
+            Writing custom helpers is easy. We recommend extending
+            <classname>Zend\View\Helper\AbstractHelper</classname>, but at the minimum, you need
+            only implement the <classname>Zend\View\Helper</classname> interface:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -498,14 +503,14 @@ interface Helper
 
         <para>
             If you want your helper to be capable of being invoked as if it were a method call of
-            the <classname>PhpRenderer</classname>, you should also implement a
+            the <classname>PhpRenderer</classname>, you should also implement an
             <methodname>__invoke()</methodname> method within your helper.
         </para>
 
         <para>
-            We recommend extending <classname>Zend\View\Helper\AbstractHelper</classname>, as it
-            implements the methods defined in <classname>Helper</classname>, giving you a headstart
-            in your development.
+            As previously noted, we recommend extending
+            <classname>Zend\View\Helper\AbstractHelper</classname>, as it implements the methods
+            defined in <classname>Helper</classname>, giving you a headstart in your development.
         </para>
 
         <para>
@@ -530,7 +535,7 @@ class SpecialPurpose extends AbstractHelper
     {
         $this->count++;
         $output = sprintf("I have seen 'The Jerk' %d time(s).", $this->count);
-        return htmlspecialchars($output);
+        return htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
     }
 }
 ]]></programlisting>

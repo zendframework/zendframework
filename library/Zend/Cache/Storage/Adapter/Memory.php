@@ -1403,6 +1403,12 @@ class Memory extends AbstractAdapter
     protected function hasFreeCapacity()
     {
         $total = $this->getOptions()->getMemoryLimit();
+
+        // check memory limit disabled
+        if ($total <= 0) {
+            return true;
+        }
+
         $free  = $total - (float) memory_get_usage(true);
         return ($free > 0);
     }

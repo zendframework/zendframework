@@ -66,7 +66,7 @@ class SlideShareTest extends \PHPUnit_Framework_TestCase
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_PASSWORD,
                                                  TESTS_ZEND_SERVICE_SLIDESHARE_SLIDESHOWID);
 
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         $ss->setCacheObject($cache);
 
         return $ss;

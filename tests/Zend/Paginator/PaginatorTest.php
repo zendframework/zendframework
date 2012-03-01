@@ -79,7 +79,7 @@ class PaginatorTest extends TestCase
 
         $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
-        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         $this->_cache->clear(CacheAdapter::MATCH_ALL);
         Paginator\Paginator::setCache($this->_cache);
 

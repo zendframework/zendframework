@@ -56,7 +56,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
             Adapter\ArrayAdapter::removeCache();
         }
 
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
     }
 
@@ -246,7 +246,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
 
     public function testTestingCacheHandling()
     {
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
 
         $cache = Translator\Translator::getCache();
@@ -383,7 +383,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOptionsFromCache()
     {
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Translator\Translator::setCache($cache);
 
         $lang = new Translator\Translator(Translator\Translator::AN_CSV, __DIR__ . '/Adapter/_files', 'en', array('delimiter' => ','));
@@ -862,7 +862,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetCacheThroughOptions()
     {
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         $translate = new Translator\Translator(array(
             'adapter' => Translator\Translator::AN_ARRAY,

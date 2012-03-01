@@ -48,7 +48,7 @@ class AccessControllerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
     }
 
     public function tearDown()

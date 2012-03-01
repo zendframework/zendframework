@@ -49,7 +49,7 @@ class DateObjectTest extends \PHPUnit_Framework_TestCase
         $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Europe/Paris');
 
-        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         DateObjectTestHelper::setOptions(array('cache' => $this->_cache));
     }
 

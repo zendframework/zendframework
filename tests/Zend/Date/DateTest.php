@@ -68,7 +68,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->_originaltimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
         $this->_orig  = Date::setOptions();
-        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         Date::setOptions(array('cache' => $this->_cache));
         Date::setOptions(array('fix_dst' => true));
@@ -5233,7 +5233,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
             // success
         }
 
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Date\Date::setOptions(array('cache' => $cache));
     }
 

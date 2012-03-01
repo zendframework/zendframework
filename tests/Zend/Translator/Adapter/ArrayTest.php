@@ -272,7 +272,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testCaching()
     {
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         $this->assertFalse(Adapter\ArrayAdapter::hasCache());
         Adapter\ArrayAdapter::setCache($cache);
@@ -302,7 +302,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadingFilesIntoCacheAfterwards()
     {
-        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         $this->assertFalse(Adapter\ArrayAdapter::hasCache());
         Adapter\ArrayAdapter::setCache($cache);

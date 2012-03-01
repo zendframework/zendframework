@@ -66,7 +66,7 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
     {
         $this->clearRegistry();
 
-        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
         Currency\Currency::setCache($this->_cache);
 
         $this->helper = new Helper\Currency('de_AT');

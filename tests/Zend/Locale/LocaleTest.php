@@ -45,7 +45,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->_locale = setlocale(LC_ALL, 0);
         setlocale(LC_ALL, 'de');
 
-        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 1073741824));
+        $this->_cache = CacheFactory::adapterFactory('memory', array('memory_limit' => 0));
 
         LocaleTestHelper::resetObject();
         LocaleTestHelper::setCache($this->_cache);

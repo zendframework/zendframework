@@ -24,6 +24,8 @@
  */
 namespace Zend\GData\App;
 
+use Zend\Http\Header\Etag;
+
 /**
  * Concrete class for working with Atom entries.
  *
@@ -228,7 +230,7 @@ class Entry extends FeedEntryParent
 
         // Append ETag, if present (Gdata v2 and above, only) and doesn't
         // conflict with existing headers
-        if ($this->_etag != null
+        if (($etag instanceof Etag)
                 && !array_key_exists('If-Match', $extraHeaders)
                 && !array_key_exists('If-None-Match', $extraHeaders)) {
             $extraHeaders['If-None-Match'] = $this->_etag;

@@ -25,6 +25,8 @@
  */
 namespace Zend\GData;
 
+use Zend\Http\Header\Etag;
+
 /**
  * The Gdata flavor of an Atom Feed
  *
@@ -149,7 +151,7 @@ class Feed extends App\Feed
             // ETags are special, since they can be conveyed by either the
             // HTTP ETag header or as an XML attribute.
             $etag = $attribute->nodeValue;
-            if ($this->_etag === null) {
+            if (!($this->_etag instanceof Etag)) {
                 $this->_etag = $etag;
             }
             elseif ($this->_etag != $etag) {

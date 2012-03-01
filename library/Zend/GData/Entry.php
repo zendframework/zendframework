@@ -29,9 +29,6 @@ use Zend\Http\Header\Etag;
 /**
  * Represents the Gdata flavor of an Atom entry
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\GData\App\MediaEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

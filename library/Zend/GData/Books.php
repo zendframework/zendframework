@@ -28,11 +28,6 @@ namespace Zend\GData;
 /**
  * Service class for interacting with the Books service
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\Books\CollectionEntry
- * @uses       \Zend\GData\Books\CollectionFeed
- * @uses       \Zend\GData\Books\VolumeEntry
- * @uses       \Zend\GData\Books\VolumeFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

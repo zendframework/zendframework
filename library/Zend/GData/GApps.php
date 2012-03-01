@@ -35,17 +35,6 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\GData\GApps\EmailListFeed
- * @uses       \Zend\GData\GApps\EmailListRecipientFeed
- * @uses       \Zend\GData\GApps\Error
- * @uses       \Zend\GData\GApps\NicknameFeed
- * @uses       \Zend\GData\GApps\ServiceException
- * @uses       \Zend\GData\GApps\UserFeed
- * @uses       \Zend\Loader
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage GApps

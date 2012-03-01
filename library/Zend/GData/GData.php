@@ -34,8 +34,6 @@ namespace Zend\GData;
  *
  * @link http://code.google.com/apis/gdata/overview.html
  *
- * @uses       \Zend\GData\App
- * @uses       \Zend\GData\App\InvalidArgumentException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

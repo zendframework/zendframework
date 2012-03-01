@@ -31,10 +31,6 @@ use Zend\Http\Client;
  *
  * @see http://code.google.com/apis/accounts/AuthForWebApps.html
  *
- * @uses       \Zend\GData\App\AuthException
- * @uses       \Zend\GData\App\HttpException
- * @uses       \Zend\GData\HttpClient
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

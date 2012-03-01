@@ -30,9 +30,6 @@ namespace Zend\GData;
  * Class to extend the generic Zend Http Client with the ability to perform
  * secure AuthSub requests
  *
- * @uses       \Zend\GData\App\Exception
- * @uses       \Zend\GData\App\InvalidArgumentException
- * @uses       \Zend\Http\Client
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

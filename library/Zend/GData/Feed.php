@@ -30,13 +30,6 @@ use Zend\Http\Header\Etag;
 /**
  * The Gdata flavor of an Atom Feed
  *
- * @uses       \Zend\GData\GData
- * @uses       \Zend\GData\App\Feed
- * @uses       \Zend\GData\App\IOException
- * @uses       \Zend\GData\Entry
- * @uses       \Zend\GData\Extension\OpenSearchStartIndex
- * @uses       \Zend\GData\Extension\OpenSearchItemsPerPage
- * @uses       \Zend\GData\Extension\OpenSearchTotalResults
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

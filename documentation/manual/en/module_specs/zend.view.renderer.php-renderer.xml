@@ -22,7 +22,7 @@
         <info><title>Usage</title></info>
 
         <para>
-            Basic usage consists of instatiating or otherwise obtaining an instance of the
+            Basic usage consists of instantiating or otherwise obtaining an instance of the
             <classname>PhpRenderer</classname>, providing it with a resolver which will resolve
             templates to PHP view scripts, and then calling its <methodname>render()</methodname>
             method. 
@@ -155,8 +155,9 @@ return array(
         <itemizedlist>
             <listitem>
                 <para>
-                    Pass an array (or <classname>ArrayAccess</classname> instance) of items as the
-                    second argument to <methodname>render()</methodname>:
+                    Pass an associative array (or <classname>ArrayAccess</classname> instance, or
+                    <classname>Zend\View\Variables</classname> instance) of items as the second
+                    argument to <methodname>render()</methodname>:
                     <code>$renderer-&gt;render($templateName, array('foo' => 'bar))</code>
                 </para>
             </listitem>
@@ -188,14 +189,13 @@ use Zend\View\Model\ViewModel,
     Zend\View\Renderer\PhpRenderer;
 
 $renderer = new PhpRenderer();
+
 $model    = new ViewModel();
 $model->setVariable('foo', 'bar');
-
 // or
 $model = new ViewModel(array('foo' => 'bar'));
 
 $model->setTemplate($templateName);
-
 $renderer->render($model);
 ]]></programlisting>
             </listitem>
@@ -223,7 +223,7 @@ $data = array(
     )
 );
 
-// now assign the book data to a Zend_View instance
+// now assign the book data to a renderer instance
 $renderer->books = $data;
 
 // and render the template "booklist"
@@ -237,19 +237,22 @@ echo $renderer->render('booklist');
         </para>
 
         <programlisting language="php"><![CDATA[
+namespace Bookstore\Controller;
+
 use Zend\Mvc\Controller\ActionController;
 
-class SomeController extends ActionController
+class BookController extends ActionController
 {
     public function listAction()
     {
         // do some work...
 
         // Assume $data is the list of books from the previous example
-        $model = new ViewModel($data);
+        $model = new ViewModel(array('books' => $data));
 
         // Optionally specify a template; if we don't, by default it will be 
-        // auto-determined based on the controller name and this action.
+        // auto-determined based on the controller name and this action; in
+        // this example, "book/list".
         $model->setTemplate('booklist');
 
         return $model
@@ -414,8 +417,13 @@ $renderer->render($model);
                     </methodsynopsis>
 
                     <para>
-                        Set whether or not the renderer can recursively render a ViewModel instance
-                        containing children.
+                        Set flag indicating whether or not we should render trees of view models. If
+                        set to true, the <classname>Zend\View\View</classname> instance will not
+                        attempt to render children separately, but instead pass the root view model
+                        directly to the <classname>PhpRenderer</classname>. It is then up to the
+                        developer to render the children from within the view script. This is
+                        typically done using the <classname>RenderChildModel</classname> helper:
+                        <code>$this-&gt;renderChildModel('child_name')</code>.
                     </para>
                 </listitem>
             </varlistentry>

@@ -17,7 +17,7 @@
         Variables assigned to the view -- either via a <link linkend="zend.view.model">View
             Model</link>, <link linkend="zend.view.variables">Variables container</link>, or simply
         by passing an array of variables to <methodname>render()</methodname> -- may be retrieved in
-        two ways:
+        three ways:
     </para>
 
     <itemizedlist>

@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.view.renderer.php-renderer">
+    <info><title>The PhpRenderer</title></info>
+
+    <para>
+        <classname>Zend\View\Renderer\PhpRenderer</classname> "renders" view scripts written in PHP,
+        capturing and returning the output. It composes Variable containers and/or View Models, a
+        plugin broker for <link linkend="zend.view.helpers">helpers</link>, and optional filtering
+        of the captured output.
+    </para>
+
+    <para>
+        The <classname>PhpRenderer</classname> is template system agnostic; you may use
+        <acronym>PHP</acronym> as your template language, or create instances of other template
+        systems and manipulate them within your view script. Anything you can do with PHP is
+        available to you.
+    </para>
+
+
+    <section xml:id="zend.view.renderer.php-renderer.usage">
+        <info><title>Usage</title></info>
+
+        <para>
+            Basic usage consists of instantiating or otherwise obtaining an instance of the
+            <classname>PhpRenderer</classname>, providing it with a resolver which will resolve
+            templates to PHP view scripts, and then calling its <methodname>render()</methodname>
+            method. 
+        </para>
+
+        <para>
+            Instantiating a renderer is trivial:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\View\Renderer\PhpRenderer;
+
+$renderer = new PhpRenderer();
+]]></programlisting>
+
+        <para>
+            Zend Framework ships with several types of "resolvers", which are used to resolve a
+            template name to a resource a renderer can consume. The ones we will usually use with
+            the <classname>PhpRenderer</classname> are:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend\View\Resolver\TemplateMapResolver</classname>, which simply maps
+                    template names directly to view scripts.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend\View\Resolver\TemplatePathStack</classname>, which creates a
+                    LIFO stack of script directories in which to search for a view script. By
+                    default, it appends the suffix ".phtml" to the requested template name, and then
+                    loops through the script directories; if it finds a file matching the requested
+                    template, it returns the full file path.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend\View\Resolver\AggregateResolver</classname>, which allows
+                    attaching a FIFO queue of resolvers to consult.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            We suggest using the <classname>AggregateResolver</classname>, as it allows you to
+            create a multi-tiered strategy for resolving template names.
+        </para>
+
+        <para>
+            Programmatically, you would then do something like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+use Zend\View\Renderer\PhpRenderer,
+    Zend\View\Resolver;
+
+$renderer = new PhpRenderer();
+
+$resolver = new Resolver\AggregateResolver();
+
+$map = new Resolver\TemplateMapResolver(array(
+    'layout'      => __DIR__ . '/view/layout.phtml',
+    'index/index' => __DIR__ . '/view/index/index.phtml',
+));
+$stack = new Resolver\TemplatePathStack(array(
+    __DIR__ . '/view',
+    $someOtherPath,
+));
+
+$resolver->attach($map)    // this will be consulted first
+         ->attach($stack);
+]]></programlisting>
+
+        <para>
+            You can also specify a specific priority value when registering resolvers, with high,
+            positive integers getting higher priority, and low, negative integers getting low
+            priority, when resolving.
+        </para>
+
+        <para>
+            In an MVC application, you can configure this via DI quite easily:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+return array(
+    'di' => array(
+        'instance' => array(
+            'Zend\View\Resolver\AggregateResolver' => array(
+                'injections' => array(
+                    'Zend\View\Resolver\TemplateMapResolver',
+                    'Zend\View\Resolver\TemplatePathStack',
+                ),
+            ),
+
+            'Zend\View\Resolver\TemplateMapResolver' => array(
+                'parameters' => array(
+                    'map'  => array(
+                        'layout'      => __DIR__ . '/view/layout.phtml',
+                        'index/index' => __DIR__ . '/view/index/index.phtml',
+                    ),
+                ),
+            ),
+            'Zend\View\Resolver\TemplatePathStack' => array(
+                'parameters' => array(
+                    'paths'  => array(
+                        'application' => __DIR__ . '/view',
+                        'elsewhere'   => $someOtherPath,
+                    ),
+                ),
+            ),
+            'Zend\View\Renderer\PhpRenderer' => array(
+                'parameters' => array(
+                    'resolver' => 'Zend\View\Resolver\AggregateResolver',
+                ),
+            ),
+        ),
+    ),
+);
+]]></programlisting>
+
+        <para>
+            Now that we have our <classname>PhpRenderer</classname> instance, and it can find
+            templates, let's inject some variables. This can be done in 4 different ways.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Pass an associative array (or <classname>ArrayAccess</classname> instance, or
+                    <classname>Zend\View\Variables</classname> instance) of items as the second
+                    argument to <methodname>render()</methodname>:
+                    <code>$renderer-&gt;render($templateName, array('foo' => 'bar))</code>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Assign a <classname>Zend\View\Variables</classname> instance, associative array,
+                    or <classname>ArrayAccess</classname> instance to the
+                    <methodname>setVars()</methodname> method.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Assign variables as instance properties of the renderer: <code>$renderer-&gt;foo
+                        = 'bar'</code>. This essentially proxies to an instance of
+                    <classname>Variables</classname> composed internally in the renderer by default.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Create a ViewModel instance, assign variables to that, and pass the ViewModel to
+                    the <methodname>render()</methodname> method:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+use Zend\View\Model\ViewModel,
+    Zend\View\Renderer\PhpRenderer;
+
+$renderer = new PhpRenderer();
+
+$model    = new ViewModel();
+$model->setVariable('foo', 'bar');
+// or
+$model = new ViewModel(array('foo' => 'bar'));
+
+$model->setTemplate($templateName);
+$renderer->render($model);
+]]></programlisting>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Now, let's render something.  As a simple example, let us say you have a list of book
+            data. 
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// use a model to get the data for book authors and titles.
+$data = array(
+    array(
+        'author' => 'Hernando de Soto',
+        'title' => 'The Mystery of Capitalism'
+    ),
+    array(
+        'author' => 'Henry Hazlitt',
+        'title' => 'Economics in One Lesson'
+    ),
+    array(
+        'author' => 'Milton Friedman',
+        'title' => 'Free to Choose'
+    )
+);
+
+// now assign the book data to a renderer instance
+$renderer->books = $data;
+
+// and render the template "booklist"
+echo $renderer->render('booklist');
+]]></programlisting>
+
+        <para>
+            More often than not, you'll likely be using the MVC layer. As such, you should be
+            thinking in terms of view models. Let's consider the following code from within an
+            action method of a controller.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace Bookstore\Controller;
+
+use Zend\Mvc\Controller\ActionController;
+
+class BookController extends ActionController
+{
+    public function listAction()
+    {
+        // do some work...
+
+        // Assume $data is the list of books from the previous example
+        $model = new ViewModel(array('books' => $data));
+
+        // Optionally specify a template; if we don't, by default it will be 
+        // auto-determined based on the controller name and this action. In
+        // this example, the template would resolve to "book/list", and thus 
+        // the file "book/list.phtml"; the following overrides that to set 
+        // the template to "booklist", and thus the file "booklist.phtml"
+        // (note the lack of directory preceding the filename).
+        $model->setTemplate('booklist');
+
+        return $model
+    }
+}
+]]></programlisting>
+
+        <para>
+            This will then be rendered as if the following were executed:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$renderer->render($model);
+]]></programlisting>
+
+        <para>
+            Now we need the associated view script. At this point, we'll assume that the template
+            "booklist" resolves to the file <filename>booklist.phtml</filename>.  This is a
+            <acronym>PHP</acronym> script like any other, with one exception: it executes inside the
+            scope of the <classname>PhpRenderer</classname> instance, which means that references to
+            <varname>$this</varname> point to the <classname>PhpRenderer</classname> instance
+            properties and methods. Thus, a very basic view script could look like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php if ($this->books): ?>
+
+    <!-- A table of some books. -->
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+        </tr>
+
+        <?php foreach ($this->books as $key => $val): ?>
+        <tr>
+            <td><?php echo $this->escape($val['author']) ?></td>
+            <td><?php echo $this->escape($val['title']) ?></td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+<?php else: ?>
+
+    <p>There are no books to display.</p>
+
+<?php endif;?>
+]]></programlisting>
+
+        <note xml:id="zend.view.renderer.php-renderer.usage.escape">
+            <info><title>Escape Output</title></info>
+
+            <para>
+                The security mantra is "Filter input, escape output." If you are unsure of the
+                source of a given variable -- which is likely most of the time -- you should escape
+                it.
+            </para>
+
+            <para>
+                In the example above, there are calls to an <methodname>escape()</methodname>
+                method. The method is actually a <link linkend="zend.view.helpers">helper</link>,
+                a plugin available via method overloading, but the salient point is: use it to
+                escape your output, and thus help prevent cross-site scripting (XSS) attacks.
+            </para>
+        </note>
+
+        <para>
+            We've now toured the basic usage of the <classname>PhpRenderer</classname>. By now you
+            should know how to instantiate the renderer, provide it with a resolver, assign
+            variables and/or create view models, create view scripts, and render view scripts.
+        </para>
+    </section>
+
+    <section xml:id="zend.view.renderer.php-renderer.options">
+        <info><title>Options and Configuration</title></info>
+
+        <para>
+            <classname>Zend\View\Renderer\PhpRenderer</classname> utilizes several collaborators in
+            order to do its work. use the following methods to configure the renderer.
+        </para>
+
+        <variablelist>
+            <varlistentry xml:id="zend.view.renderer.php-renderer.options.broker">
+                <term>broker</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setBroker</methodname>
+                        <methodparam>
+                            <funcparams>Zend\View\HelperBroker $broker</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Set the broker instance used to load, register, and retrieve <link
+                            linkend="zend.view.helpers">helpers</link>.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.view.renderer.php-renderer.options.resolver">
+                <term>resolver</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setResolver</methodname>
+                        <methodparam>
+                            <funcparams>Zend\View\Resolver $resolver</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Set the resolver instance.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.view.renderer.php-renderer.options.filter-chain">
+                <term>filters</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setFilterChain</methodname>
+                        <methodparam>
+                            <funcparams>Zend\Filter\FilterChain $filters</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Set a filter chain to use as an output filter on rendered content.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.view.renderer.php-renderer.options.vars">
+                <term>vars</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setVars</methodname>
+                        <methodparam>
+                            <funcparams>array|ArrayAccess|Zend\View\Variables $variables</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Set the variables to use when rendering a view script/template.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.view.renderer.php-renderer.options.can-render-trees">
+                <term>canRenderTrees</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>setCanRenderTrees</methodname>
+                        <methodparam>
+                            <funcparams>bool $canRenderTrees</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Set flag indicating whether or not we should render trees of view models. If
+                        set to true, the <classname>Zend\View\View</classname> instance will not
+                        attempt to render children separately, but instead pass the root view model
+                        directly to the <classname>PhpRenderer</classname>. It is then up to the
+                        developer to render the children from within the view script. This is
+                        typically done using the <classname>RenderChildModel</classname> helper:
+                        <code>$this-&gt;renderChildModel('child_name')</code>.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+
+    <section xml:id="zend.view.renderer.php-renderer.methods">
+        <info><title>Additional Methods</title></info>
+        
+        <para>
+            Typically, you'll only ever access variables and <link
+                linkend="zend.view.helpers">helpers</link> within your view scripts or when
+            interacting with the <classname>PhpRenderer</classname>. However, there are a few
+            additional methods you may be interested in.
+        </para>
+
+        <variablelist>
+            <varlistentry xml:id="zend.view.renderer.php-renderer.methods.render">
+                <term>render</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>render</methodname>
+                        <methodparam>
+                            <funcparams>string|Zend\View\Model $nameOrModel, $values = null</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Render a template/view model. 
+                    </para>
+                        
+                    <para>
+                        If <varname>$nameOrModel</varname> is a string, it is assumed to be a
+                        template name. That template will be resolved using the current resolver,
+                        and then rendered. If <varname>$values</varname> is non-null, those values,
+                        and those values only, will be used during rendering, and will replace
+                        whatever variable container previously was in the renderer; however,
+                        the previous variable container will be reset when done. If
+                        <varname>$values</varname> is empty, the current variables container (see
+                        <link
+                            linkend="zend.view.renderer.php-renderer.options.vars">setVars()</link>)
+                        will be injected when rendering.
+                    </para>
+
+                    <para>
+                        If <varname>$nameOrModel</varname> is a <classname>Model</classname>
+                        instance, the template name will be retrieved from it and used.
+                        Additionally, if the model contains any variables, these will be used when
+                        rendering; otherwise, the variables container already present, if any, will
+                        be used.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.view.renderer.php-renderer.methods.resolver">
+                <term>resolver</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>resolver</methodname>
+                        <void/>
+                    </methodsynopsis>
+
+                    <para>
+                        Retrieves the <classname>Resolver</classname> instance.
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.view.renderer.php-renderer.methods.vars">
+                <term>vars</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>vars</methodname>
+                        <methodparam>
+                            <funcparams>string $key = null</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Retrieve the variables container, or a single variable from the container..
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry xml:id="zend.view.renderer.php-renderer.methods.plugin">
+                <term>plugin</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>plugin</methodname>
+                        <methodparam>
+                            <funcparams>string $name, array $options = null</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Get a plugin/helper instance. Proxies to the broker's
+                        <methodname>load()</methodname> method; as such, any
+                        <varname>$options</varname> you pass will be passed to the plugin's
+                        constructor if this is the first time the plugin has been retrieved. See the
+                        section on <link linkend="zend.view.helpers">helpers</link> for more
+                        information.
+                    </para>
+                </listitem>
+            </varlistentry>
+            
+            <varlistentry xml:id="zend.view.renderer.php-renderer.methods.add-template">
+                <term>addTemplate</term>
+
+                <listitem>
+                    <methodsynopsis>
+                        <methodname>addTemplate</methodname>
+                        <methodparam>
+                            <funcparams>string $template</funcparams>
+                        </methodparam>
+                    </methodsynopsis>
+
+                    <para>
+                        Add a template to the stack. When used, the next call to
+                        <method>render()</method> will loop through all template added using this
+                        method, rendering them one by one; the output of the last will be returned.
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+    </section>
+</section>

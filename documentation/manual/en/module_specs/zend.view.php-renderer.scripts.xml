@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.view.php-renderer.scripts">
+    <info><title>PhpRenderer View Scripts</title></info>
+
+    <para>
+        Once you call <methodname>render()</methodname>,
+        <classname>Zend\View\Renderer\PhpRenderer</classname> then <funcname>include()</funcname>s
+        the requested view script and executes it "inside" the scope of the
+        <classname>PhpRenderer</classname> instance. Therefore, in your view scripts, references to
+        <varname>$this</varname> actually point to the <classname>PhpRenderer</classname> instance
+        itself.
+    </para>
+
+    <para>
+        Variables assigned to the view -- either via a <link linkend="zend.view.model">View
+            Model</link>, <link linkend="zend.view.variables">Variables container</link>, or simply
+        by passing an array of variables to <methodname>render()</methodname> -- may be retrieved in
+        three ways:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Explicitly, by retrieving them from the <classname>Variables</classname> container
+                composed in the <classname>PhpRenderer</classname>:
+                <code>$this-&gt;vars()-&gt;varname</code>.
+            </para>
+        </listitem>
+
+        <lisitem>
+            <para>
+                As instance properties of the <classname>PhpRenderer</classname> instance:
+                <code>$this-&gt;varname</code>. (In this situation, instance property access is
+                simply proxying to the composed <classname>Variables</classname> instance.)
+            </para>
+        </lisitem>
+
+        <listitem>
+            <para>
+                As local PHP variables: <code>$varname</code>. The
+                <classname>PhpRenderer</classname> extracts the members of the
+                <classname>Variables</classname> container locally.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        We generally recommend using the second notation, as it's less verbose than the first, but
+        differentiates between variables in the view script scope and those assigned to the renderer
+        from elsewhere.
+    </para>
+
+    <para>
+        By way of reminder, here is the example view script from the
+        <classname>PhpRenderer</classname> introduction.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+<?php if ($this->books): ?>
+
+    <!-- A table of some books. -->
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+        </tr>
+
+        <?php foreach ($this->books as $key => $val): ?>
+        <tr>
+            <td><?php echo $this->escape($val['author']) ?></td>
+            <td><?php echo $this->escape($val['title']) ?></td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+<?php else: ?>
+
+    <p>There are no books to display.</p>
+
+<?php endif;?>
+]]></programlisting>
+
+    <section xml:id="zend.view.php-renderer.scripts.escaping">
+        <info><title>Escaping Output</title></info>
+
+        <para>
+            One of the most important tasks to perform in a view script is to make sure that output
+            is escaped properly; among other things, this helps to avoid cross-site scripting
+            attacks.  Unless you are using a function, method, or helper that does escaping on its
+            own, you should always escape variables when you output them.
+        </para>
+
+        <para>
+            The <classname>PhpRenderer</classname> includes an <classname>Escape</classname> helper
+            you can utilize for this purpose.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// bad view-script practice:
+echo $this->variable;
+
+// good view-script practice:
+echo $this->escape($this->variable);
+]]></programlisting>
+
+        <para>
+            By default, the escape() method uses the <acronym>PHP</acronym>
+            <funcname>htmlspecialchars()</funcname> function for escaping, using UTF-8 as the
+            characterset, and the <constname>ENT_QUOTES</constname> setting. However, depending on
+            your environment, you may wish for escaping to occur in a different way. You may change
+            either the encoding or callback used, using the <methodname>setEncoding()</methodname>
+            or <methodname>setCallback()</methodname> method of the helper.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// $view is a PhpRenderer instance
+$escaper = $view->plugin('escape');
+
+// specify a different encoding to use for the default htmlspecialchars usage
+$escaper->setEncoding('ISO-8859-1');
+
+// tell it to use htmlentities as the escaping callback
+$escaper->setCallback('htmlentities');
+
+// or tell it to use a static class method as the callback
+$escaper->setCallback(array('SomeClass', 'methodName'));
+
+// or an instance method
+$obj = new SomeClass();
+$escaper->setCallback(array($obj, 'methodName'));
+
+// or use a closure to curry arguments to another function, 
+// or inline an escaping mechanism.
+$escaper->setCallback(function ($value) {
+    $value = str_rot13($value);
+    return base64_encode($value);
+});
+]]></programlisting>
+
+        <para>
+            The callback function or method should take the value to be escaped as its first
+            parameter, and all other parameters should be optional.
+        </para>
+    </section>
+</section>

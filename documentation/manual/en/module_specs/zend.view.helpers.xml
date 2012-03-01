@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.view.helpers"><info><title>View Helpers</title></info>
-
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.view.helpers">
+    <info><title>View Helpers</title></info>
 
     <para>
-        In your view scripts, often it is necessary to perform certain
-        complex functions over and over: e.g., formatting a date,
-        generating form elements, or displaying action links. You can
-        use helper classes to perform these behaviors for you.
+        In your view scripts, often it is necessary to perform certain complex functions over and
+        over: e.g., formatting a date, generating form elements, or displaying action links. You can
+        use helper, or plugin, classes to perform these behaviors for you.
     </para>
 
     <para>
-        A helper is simply a class. Let's say we want a helper named 'fooBar'.
-        By default, the class is prefixed with 'Zend_View_Helper_'
-        (you can specify a custom prefix when setting a helper path), and the
-        last segment of the class name is the helper name; this segment should
-        be TitleCapped; the full class name is then:
-        <classname>Zend_View_Helper_FooBar</classname>. This class should contain at the
-        minimum a single method, named after the helper, and camelCased:
-        <methodname>fooBar()</methodname>.
+        A helper is simply a class that implements the interface <classname>Zend\View\Helper</classname>. 
+        <classname>Helper</classname> simply defines two methods,
+        <methodname>setView()</methodname>, which accepts a
+        <classname>Zend\View\Renderer</classname> instance/implementation, and
+        <methodname>getView()</methodname>, used to retrieve that instance.
+        <classname>Zend\View\PhpRenderer</classname> composes a <link
+            linkend="zend.loader.plugin-broker">plugin broker</link>, allowing you to
+        retrieve helpers, and also provides some method overloading capabilities that allow proxying
+        method calls to helpers.
     </para>
-
-    <note><info><title>Watch the Case</title></info>
-
-
-        <para>
-            Helper names are always camelCased, i.e., they never begin with an
-            uppercase character. The class name itself is MixedCased, but the
-            method that is actually executed is camelCased.
-        </para>
-    </note>
-
-    <note><info><title>Default Helper Path</title></info>
-
-
-        <para>
-            The default helper path always points to the Zend Framework view
-            helpers, i.e., 'Zend/View/Helper/'. Even if you call
-            <methodname>setHelperPath()</methodname> to overwrite the existing paths, this
-            path will be set to ensure the default helpers work.
-        </para>
-    </note>
 
     <para>
-        To use a helper in your view script, call it using
-        <command>$this-&gt;helperName()</command>. Behind the scenes,
-        <classname>Zend_View</classname> will load the
-        <classname>Zend_View_Helper_HelperName</classname> class, create an object
-        instance of it, and call its <methodname>helperName()</methodname> method. The
-        object instance is persistent within the <classname>Zend_View</classname>
-        instance, and is reused for all future calls to
-        <command>$this-&gt;helperName()</command>.
+        As an example, let's say we have a helper class named
+        <classname>My\Helper\LowerCase</classname>, which we map in our plugin broker to the name
+        "lowercase". We can retrieve or invoke it in one of the following ways:
     </para>
 
-    <section xml:id="zend.view.helpers.initial"><info><title>Initial Helpers</title></info>
+    <programlisting language="php"><![CDATA[
+// $view is a PhpRenderer instance
 
+// Via the plugin broker:
+$broker = $view->getBroker();
+$helper = $broker->load('lowercase');
+
+// Retrieve the helper instance, via the method "plugin", 
+// which proxies to the plugin broker:
+$helper = $view->plugin('lowercase');
+
+// If the helper does not define __invoke(), the following also retrieves it:
+$helper = $view->lowercase();
+
+// If the helper DOES define __invoke, you can call the helper 
+// as if it is a method:
+$filtered = $view->lowercase('some value');
+]]></programlisting>
+
+    <para>
+        The last two examples demonstrate how the <classname>PhpRenderer</classname> uses method
+        overloading to retrieve and/or invoke helpers directly, offering a convenience API for end
+        users.
+    </para>
+        
+    <para>
+        A large number of helpers are provided in the standard distribution of Zend Framework.  You
+        can also register helpers by adding them to the <link
+            linkend="zend.loader.plugin-broker">plugin broker</link>, or the plugin locator the
+        broker composes. Please refer to the <link linkend="zend.loader.plugin-broker">plugin broker
+            documentation</link> for details.
+    </para>
+
+    <section xml:id="zend.view.helpers.initial">
+        <info><title>Included Helpers</title></info>
 
         <para>
-            <classname>Zend_View</classname> comes with an initial set of helper classes,
-            most of which relate to form element generation and perform
-            the appropriate output escaping automatically. In addition, there
-            are helpers for creating route-based <acronym>URL</acronym>s and <acronym>HTML</acronym>
-            lists, as well as declaring variables. The currently shipped helpers include:
+            Zend Framework comes with an initial set of helper classes, most of which relate to form
+            element generation and perform the appropriate output escaping automatically. In
+            addition, there are helpers for creating route-based <acronym>URL</acronym>s and
+            <acronym>HTML</acronym> lists, as well as declaring variables. Additionally, there are a
+            rich set of helpers for providing values for, and rendering, the various HTML
+            <code>&lt;head&gt;</code> tags, such as <classname>HeadTitle</classname>,
+            <classname>HeadLink</classname>, and <classname>HeadScript</classname>. The currently
+            shipped helpers include:
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    <methodname>declareVars()</methodname>: Primarily for use when using
-                    <methodname>strictVars()</methodname>, this helper can be used to declare
-                    template variables that may or may not already be set in the
-                    view object, as well as to set default values. Arrays passed as
-                    arguments to the method will be used to set default values;
-                    otherwise, if the variable does not exist, it is set to an empty string.
-                </para>
-            </listitem>
-
             <listitem>
                 <para>
                     <methodname>fieldset($name, $content, $attribs)</methodname>: Creates an
@@ -346,9 +346,10 @@ echo $this->formCheckbox('foo',
         </para>
 
         <programlisting language="php"><![CDATA[
-// inside your view script, $this refers to the Zend_View instance.
+// Inside this view script, $this refers to the Zend\View\Renderer\PhpRenderer 
+// instance rendering the view script.
 //
-// say that you have already assigned a series of select options under
+// Say that you have already assigned a series of select options under
 // the name $countries as array('us' => 'United States', 'il' =>
 // 'Israel', 'de' => 'Germany').
 ?>
@@ -407,145 +408,148 @@ echo $this->formCheckbox('foo',
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Zend_View-Helpers-Translator.xml"/>
     </section>
 
-    <section xml:id="zend.view.helpers.paths"><info><title>Helper Paths</title></info>
-
+    <section xml:id="zend.view.helpers.register">
+        <info><title>Registering Helpers</title></info>
 
         <para>
-            As with view scripts, your controller can specify a stack of paths
-            for <classname>Zend_View</classname> to search for helper classes. By default,
-            <classname>Zend_View</classname> looks in "Zend/View/Helper/*" for helper
-            classes. You can tell <classname>Zend_View</classname> to look in other
-            locations using the <methodname>setHelperPath()</methodname> and
-            <methodname>addHelperPath()</methodname> methods. Additionally, you can
-            indicate a class prefix to use for helpers in the path provided, to
-            allow namespacing your helper classes. By default, if no class
-            prefix is provided, 'Zend_View_Helper_' is assumed.
+            <classname>Zend\View\Renderer\PhpRenderer</classname> composes a <link
+                linkend="zend.loader.plugin-broker">plugin broker</link> for managing helpers,
+            specifically an instance of <classname>Zend\View\HelperBroker</classname>, which extends
+            the base plugin broker in order to ensure we have valid helpers available. The
+            <classname>HelperBroker</classname> by default uses
+            <classname>Zend\View\HelperLoader</classname> as its helper locator. The
+            <classname>HelperLoader</classname> is a map-based loader, which means that you will
+            simply map the helper/plugin name by which you wish to refer to it to the actual class
+            name of the helper/plugin.
+        </para>
+
+        <para>
+            Programmatically, this is done as follows:
         </para>
 
         <programlisting language="php"><![CDATA[
-$view = new Zend_View();
+// $view is an instance of PhpRenderer
+$broker = $view->getBroker();
+$loader = $broker->getClassLoader();
 
-// Set path to /path/to/more/helpers, with prefix 'My_View_Helper'
-$view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
+// Register singly:
+$loader->registerPlugin('lowercase', 'My\Helper\LowerCase');
+
+// Register several:
+$loader->registerPlugins(array(
+    'lowercase' => 'My\Helper\LowerCase',
+    'uppercase' => 'My\Helper\UpperCase',
+));
 ]]></programlisting>
 
         <para>
-            In fact, you can "stack" paths using the
-            <methodname>addHelperPath()</methodname> method. As you add paths to the stack,
-            <classname>Zend_View</classname> will look at the most-recently-added path for
-            the requested helper class. This allows you to add to (or even
-            override) the initial distribution of helpers with your own custom
-            helpers.
+            Within an MVC application, you will typically simply pass a map of plugins to the class
+            via your configuration.
         </para>
 
         <programlisting language="php"><![CDATA[
-$view = new Zend_View();
-// Add /path/to/some/helpers with class prefix 'My_View_Helper'
-$view->addHelperPath('/path/to/some/helpers', 'My_View_Helper');
-// Add /other/path/to/helpers with class prefix 'Your_View_Helper'
-$view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
-
-// now when you call $this->helperName(), Zend_View will look first for
-// "/path/to/some/helpers/HelperName" using class name
-// "Your_View_Helper_HelperName", then for
-// "/other/path/to/helpers/HelperName.php" using class name
-// "My_View_Helper_HelperName", and finally for
-// "Zend/View/Helper/HelperName.php" using class name
-// "Zend_View_Helper_HelperName".
+// From within a configuration file
+return array(
+    'di' => array('instance' => array(
+        'Zend\View\HelperLoader' => array('parameters' => array(
+            'map' => array(
+                'lowercase' => 'My\Helper\LowerCase',
+                'uppercase' => 'My\Helper\UpperCase',
+            ),
+        )),
+    )),
+);
 ]]></programlisting>
+
+        <para>
+            The above can be done in each module that needs to register helpers with the
+            <classname>PhpRenderer</classname>; however, be aware that another module can register
+            helpers with the same name, so order of modules can impact which helper class will
+            actually be registered!
+        </para>
+
     </section>
 
-    <section xml:id="zend.view.helpers.custom"><info><title>Writing Custom Helpers</title></info>
-
-
-        <para>
-            Writing custom helpers is easy; just follow these rules:
-        </para>
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    While not strictly necessary, we recommend either implementing
-                    <classname>Zend_View_Helper_Interface</classname> or extending
-                    <classname>Zend_View_Helper_Abstract</classname> when creating your
-                    helpers. Introduced in 1.6.0, these simply define a
-                    <methodname>setView()</methodname> method; however, in upcoming releases, we
-                    plan to implement a strategy pattern that will simplify much of
-                    the naming schema detailed below. Building off these now will
-                    help you future-proof your code.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    The class name must, at the very minimum, end with the helper
-                    name itself, using MixedCaps. E.g., if you were writing a
-                    helper called "specialPurpose", the class name would minimally
-                    need to be "SpecialPurpose". You may, and should, give the class
-                    name a prefix, and it is recommended that you use 'View_Helper'
-                    as part of that prefix: "My_View_Helper_SpecialPurpose". (You
-                    will need to pass in the prefix, with or without the trailing
-                    underscore, to <methodname>addHelperPath()</methodname> or
-                    <methodname>setHelperPath()</methodname>).
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    The class must have a public method that matches the
-                    helper name; this is the method that will be called when
-                    your template calls "$this-&gt;specialPurpose()". In our
-                    "specialPurpose" helper example, the required method
-                    declaration would be "public function specialPurpose()".
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    In general, the class should not echo or print or otherwise
-                    generate output. Instead, it should return values to be
-                    printed or echoed. The returned values should be escaped
-                    appropriately.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    The class must be in a file named after the helper class. Again
-                    using our "specialPurpose" helper example, the file has to be
-                    named "SpecialPurpose.php".
-                </para>
-            </listitem>
-        </itemizedlist>
+    <section xml:id="zend.view.helpers.custom">
+        <info><title>Writing Custom Helpers</title></info>
 
         <para>
-            Place the helper class file somewhere in your helper path stack, and
-            <classname>Zend_View</classname> will automatically load, instantiate,
-            persist, and execute it for you.
-        </para>
-
-        <para>
-            Here is an example of our <classname>SpecialPurpose</classname> helper code:
+            Writing custom helpers is easy. We recommend extending
+            <classname>Zend\View\Helper\AbstractHelper</classname>, but at the minimum, you need
+            only implement the <classname>Zend\View\Helper</classname> interface:
         </para>
 
         <programlisting language="php"><![CDATA[
-class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
+namespace Zend\View;
+
+interface Helper
 {
-    protected $_count = 0;
-    public function specialPurpose()
+    /**
+     * Set the View object
+     *
+     * @param  Renderer $view
+     * @return Helper
+     */
+    public function setView(Renderer $view);
+
+    /**
+     * Get the View object
+     *
+     * @return Renderer
+     */
+    public function getView();
+}
+]]></programlisting>
+
+        <para>
+            If you want your helper to be capable of being invoked as if it were a method call of
+            the <classname>PhpRenderer</classname>, you should also implement an
+            <methodname>__invoke()</methodname> method within your helper.
+        </para>
+
+        <para>
+            As previously noted, we recommend extending
+            <classname>Zend\View\Helper\AbstractHelper</classname>, as it implements the methods
+            defined in <classname>Helper</classname>, giving you a headstart in your development.
+        </para>
+
+        <para>
+            Once you have defined your helper class, make sure you can autoload it, and then <link
+                linkend="zend.view.helpers.register">register it with the plugin broker</link>.
+        </para>
+
+        <para>
+            Here is an example helper, which we're titling "SpecialPurpose"
+        </para>
+
+        <programlisting language="php"><![CDATA[
+namespace My\View\Helper;
+
+use Zend\View\Helper\AbstractHelper;
+
+class SpecialPurpose extends AbstractHelper
+{
+    protected $count = 0;
+
+    public function __invoke()
     {
-        $this->_count++;
-        $output = "I have seen 'The Jerk' {$this->_count} time(s).";
-        return htmlspecialchars($output);
+        $this->count++;
+        $output = sprintf("I have seen 'The Jerk' %d time(s).", $this->count);
+        return htmlspecialchars($output, ENT_QUOTES, 'UTF-8');
     }
 }
 ]]></programlisting>
 
         <para>
-            Then in a view script, you can call the <classname>SpecialPurpose</classname>
-            helper as many times as you like; it will be instantiated once, and
-            then it persists for the life of that <classname>Zend_View</classname>
-            instance.
+            Then assume that when we <link
+                linkend="zend.view.helpers.register">register it with the plugin broker</link>, we
+            map it to the string "specialpurpose".
+        </para>
+
+        <para>
+            Within a view script, you can call the <classname>SpecialPurpose</classname> helper as
+            many times as you like; it will be instantiated once, and then it persists for the life
+            of that <classname>PhpRenderer</classname> instance.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -566,74 +570,54 @@ I have seen 'The Jerk' 3 time(s).
 ]]></programlisting>
 
         <para>
-            Sometimes you will need access to the calling <classname>Zend_View</classname>
-            object -- for instance, if you need to use the registered encoding,
-            or want to render another view script as part of your helper. To get
-            access to the view object, your helper class should have a
-            <methodname>setView($view)</methodname> method, like the following:
+            Sometimes you will need access to the calling <classname>PhpRenderer</classname> object --
+            for instance, if you need to use the registered encoding, or want to render another view
+            script as part of your helper. This is why we define the
+            <methodname>setView()</methodname> and <methodname>getView()</methodname> methods. As an
+            example, we could rewrite the <classname>SpecialPurpose</classname> helper as follows to
+            take advantage of the <classname>Escape</classname> helper:
         </para>
 
         <programlisting language="php"><![CDATA[
-class My_View_Helper_ScriptPath
+namespace My\View\Helper;
+
+use Zend\View\Helper\AbstractHelper;
+
+class SpecialPurpose extends AbstractHelper
 {
-    public $view;
+    protected $count = 0;
 
-    public function setView(Zend_View_Interface $view)
+    public function __invoke()
     {
-        $this->view = $view;
-    }
-
-    public function scriptPath($script)
-    {
-        return $this->view->getScriptPath($script);
+        $this->count++;
+        $output  = sprintf("I have seen 'The Jerk' %d time(s).", $this->count);
+        $escaper = $this->getView()->plugin('escape');
+        return $escaper($output);
     }
 }
 ]]></programlisting>
-
-        <para>
-            If your helper class has a <methodname>setView()</methodname> method, it will be
-            called when the helper class is first instantiated, and passed the
-            current view object. It is up to you to persist the object in your
-            class, as well as determine how it should be accessed.
-        </para>
-
-        <para>
-            If you are extending <classname>Zend_View_Helper_Abstract</classname>, you do
-            not need to define this method, as it is defined for you.
-        </para>
     </section>
 
-    <section xml:id="zend.view.helpers.registering-concrete"><info><title>Registering Concrete Helpers</title></info>
-
+    <section xml:id="zend.view.helpers.registering-concrete">
+        <info><title>Registering Concrete Helpers</title></info>
 
         <para>
             Sometimes it is convenient to instantiate a view helper, and then register it with the
-            view. As of version 1.10.0, this is now possible using the
-            <methodname>registerHelper()</methodname> method, which expects two arguments: the
-            helper object, and the name by which it will be registered.
+            renderer. This can be done by injecting it directly into the plugin broker.
         </para>
 
         <programlisting language="php"><![CDATA[
+// $view is a PhpRenderer instance
+
 $helper = new My_Helper_Foo();
 // ...do some configuration or dependency injection...
 
-$view->registerHelper($helper, 'foo');
+$view->getBroker()->register('foo', $helper);
 ]]></programlisting>
 
         <para>
-            If the helper has a <methodname>setView()</methodname> method, the view object will call
-            this and inject itself into the helper on registration.
+            When registered, the plugin broker will inject the <classname>PhpRenderer</classname>
+            instance into the helper.
         </para>
-
-        <note><info><title>Helper name should match a method</title></info>
-
-
-            <para>
-                The second argument to <methodname>registerHelper()</methodname> is the name of the
-                helper. A corresponding method name should exist in the helper; otherwise,
-                <classname>Zend_View</classname> will call a non-existent method when invoking the
-                helper, raising a fatal <acronym>PHP</acronym> error.
-            </para>
-        </note>
     </section>
 </section>

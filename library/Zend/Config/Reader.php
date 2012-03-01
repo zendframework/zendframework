@@ -18,7 +18,7 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Config\Exception;
+namespace Zend\Config;
 
 /**
  * @category  Zend
@@ -26,8 +26,21 @@ namespace Zend\Config\Exception;
  * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Config\Exception
+interface Reader
 {
+    /**
+     * Read from a file and create an array
+     *
+     * @param  string $filename
+     * @return array
+     */
+    public function fromFile($filename);
+
+    /**
+     * Read from a string and create an array
+     *
+     * @param  string $string
+     * @return array|boolean
+     */
+    public function fromString($string);
 }

@@ -18,7 +18,7 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Config\Exception;
+namespace Zend\Config;
 
 /**
  * @category  Zend
@@ -26,8 +26,23 @@ namespace Zend\Config\Exception;
  * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class RuntimeException
-    extends \RuntimeException
-    implements \Zend\Config\Exception
+interface Writer
 {
+    /**
+     * Write a config object to a file.
+     *
+     * @param  string  $filename
+     * @param  mixed   $config
+     * @param  boolean $exclusiveLock
+     * @return void
+     */
+    public function toFile($filename, $config, $exclusiveLock = true);
+
+    /**
+     * Write a config object to a string.
+     *
+     * @param  mixed $config
+     * @return string
+     */
+    public function toString($config);
 }

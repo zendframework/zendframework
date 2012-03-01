@@ -18,7 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Config;
+namespace Zend\Config\Writer;
 
 /**
  * @category   Zend
@@ -26,5 +26,20 @@ namespace Zend\Config;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-{}
+class PhpArray extends AbstractWriter
+{
+    /**
+     * processConfig(): defined by AbstractWriter.
+     *
+     * @param  array $config
+     * @return string
+     */
+    public function processConfig(array $config)
+    {
+
+        $arrayString = "<?php\n"
+                     . "return " . var_export($config, true) . ";\n";
+
+        return $arrayString;
+    }
+}

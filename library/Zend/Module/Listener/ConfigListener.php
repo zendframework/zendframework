@@ -4,6 +4,7 @@ namespace Zend\Module\Listener;
 
 use ArrayAccess,
     Traversable,
+    Zend\Config\Config,
     Zend\Config\Factory as ConfigFactory,
     Zend\Module\ModuleEvent,
     Zend\Stdlib\IteratorToArray,

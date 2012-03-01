@@ -24,6 +24,8 @@
  */
 namespace Zend\GData;
 
+use Zend\Http\Client;
+
 /**
  * Gdata Http Client object.
  *
@@ -36,7 +38,7 @@ namespace Zend\GData;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class HttpClient extends \Zend\Http\Client
+class HttpClient extends Http\Client
 {
 
     /**
@@ -121,7 +123,7 @@ class HttpClient extends \Zend\Http\Client
      * @throws \Zend\GData\App\InvalidArgumentException
      * @return \Zend\GData\HttpClient Provides a fluent interface
      */
-    public function setAuthSubPrivateKey($key, $passphrase = null) 
+    public function setAuthSubPrivateKey($key, $passphrase = null)
     {
         if ($key != null && !function_exists('openssl_pkey_get_private')) {
             throw new App\InvalidArgumentException(

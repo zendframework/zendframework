@@ -27,6 +27,7 @@ use Zend\Session\SaveHandler\DbTable,
     Zend\Db\Db,
     Zend\Db\Adapter\AbstractAdapter,
     Zend\Db\Table\AbstractTable,
+    Zend\Config\Config,
     ZendTest\Session\TestAsset\TestManager;
 
 /**
@@ -44,9 +45,9 @@ use Zend\Session\SaveHandler\DbTable,
 class DbTableTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var array
+     * @var Zend\Config\Config
      */
-    protected $_saveHandlerTableConfig = array(
+    protected $saveHandlerTableConfig = array(
         'name'              => 'sessions',
         'primary'           => array(
             'id',
@@ -86,12 +87,29 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('Zend\Session\SaveHandler\DbTable tests are not enabled due to missing PDO_Sqlite extension');
         }
+
+        $this->saveHandlerTableConfig = new Config(array(
+            'name'              => 'sessions',
+            'primary'           => array(
+                'id',
+                'save_path',
+                'name',
+            ),
+            DbTable::MODIFIED_COLUMN    => 'modified',
+            DbTable::LIFETIME_COLUMN    => 'lifetime',
+            DbTable::DATA_COLUMN        => 'data',
+            DbTable::PRIMARY_ASSIGNMENT => array(
+                DbTable::PRIMARY_ASSIGNMENT_SESSION_ID,
+                DbTable::PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH,
+                DbTable::PRIMARY_ASSIGNMENT_SESSION_NAME,
+            ),
+        ), true);
         
         // $this->markTestSkipped('Skipped until Zend\Db is refactored, this tests assumptions are generally bad, more assertions are needed');
 
         $this->manager = $manager = new TestManager();
-        $this->_saveHandlerTableConfig['manager'] = $this->manager;
-        $this->_setupDb($this->_saveHandlerTableConfig['primary']);
+        $this->saveHandlerTableConfig['manager'] = $this->manager;
+        $this->setupDb($this->saveHandlerTableConfig['primary']);
     }
 
     /**
@@ -102,35 +120,26 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         if ($this->_db instanceof AbstractAdapter) {
-            $this->_dropTable();
+            $this->dropTable();
         }
     }
 
     public function testConfigPrimaryAssignmentFullConfig()
     {
-        $sh = new DbTable($this->_saveHandlerTableConfig);
+        $sh = new DbTable($this->saveHandlerTableConfig);
         $this->assertInstanceOf('Zend\Db\Table\AbstractTable', $sh);
-    }
-
-    public function testConstructorThrowsExceptionGivenConfigAsNull()
-    {
-        $this->setExpectedException(
-            'Zend\Session\Exception\InvalidArgumentException',
-            '$config must be an instance of Zend\Config or array of key/value pairs containing configuration options for Zend\Session\SaveHandler\DbTable and Zend\Db\Table\Abstract'
-            );
-        $saveHandler = new DbTable(null);
     }
 
     public function testTableNameSchema()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         $config['name'] = 'schema.session';
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
     }
 
     public function testPrimaryAssignmentIdNotSet()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         $config['primary'] = array('id');
         $config[DbTable::PRIMARY_ASSIGNMENT]
             = DbTable::PRIMARY_ASSIGNMENT_SESSION_SAVE_PATH;
@@ -147,7 +156,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testPrimaryAssignmentNotArray()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         $config['primary'] = array('id');
         $config[DbTable::PRIMARY_ASSIGNMENT]
             = DbTable::PRIMARY_ASSIGNMENT_SESSION_ID;
@@ -159,7 +168,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testModifiedColumnNotSet()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::MODIFIED_COLUMN]);
         $this->setExpectedException(
             'Zend\Session\Exception\RuntimeException',
@@ -173,7 +182,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testLifetimeColumnNotSet()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::LIFETIME_COLUMN]);
         
         $this->setExpectedException(
@@ -185,7 +194,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testDataColumnNotSet()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::DATA_COLUMN]);
         
         $this->setExpectedException(
@@ -198,9 +207,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testDifferentArraySize()
     {
         //different number of args between primary and primaryAssignment
-        $config = $this->_saveHandlerTableConfig;
-        array_pop($config[DbTable::PRIMARY_ASSIGNMENT]);
-            
+        $config = $this->saveHandlerTableConfig;
+        unset($config[DbTable::PRIMARY_ASSIGNMENT]);
+        
         $this->setExpectedException(
             'Zend\Session\Exception\RuntimeException'
         );
@@ -210,7 +219,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testEmptyPrimaryAssignment()
     {
         //test the default - no primaryAssignment
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::PRIMARY_ASSIGNMENT]);
         $config['primary'] = $config['primary'][0];
         $this->_usedSaveHandlers[] = $saveHandler = new DbTable($config);
@@ -220,7 +229,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         //test that the session Id must be in the primary assignment config
         try {
-            $config = $this->_saveHandlerTableConfig;
+            $config = $this->saveHandlerTableConfig;
             $config[DbTable::PRIMARY_ASSIGNMENT] = array(
                 DbTable::PRIMARY_ASSIGNMENT_SESSION_NAME,
             );
@@ -237,7 +246,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         //test the default - no primaryAssignment
         try {
-            $config = $this->_saveHandlerTableConfig;
+            $config = $this->saveHandlerTableConfig;
             unset($config[DbTable::PRIMARY_ASSIGNMENT]);
             unset($config[DbTable::MODIFIED_COLUMN]);
             $this->_usedSaveHandlers[] =
@@ -254,7 +263,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         //test the default - no primaryAssignment
         try {
-            $config = $this->_saveHandlerTableConfig;
+            $config = $this->saveHandlerTableConfig;
             unset($config[DbTable::PRIMARY_ASSIGNMENT]);
             unset($config[DbTable::LIFETIME_COLUMN]);
             $this->_usedSaveHandlers[] =
@@ -271,7 +280,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     {
         //test the default - no primaryAssignment
         try {
-            $config = $this->_saveHandlerTableConfig;
+            $config = $this->saveHandlerTableConfig;
             unset($config[DbTable::PRIMARY_ASSIGNMENT]);
             unset($config[DbTable::DATA_COLUMN]);
             $this->_usedSaveHandlers[] =
@@ -286,7 +295,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testLifetime()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config['lifetime']);
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
@@ -294,7 +303,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
             'lifetime must default to session.gc_maxlifetime'
         );
 
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         $lifetime = $config['lifetime'] = 1242;
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
@@ -304,7 +313,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testOverrideLifetime()
     {
         try {
-            $config = $this->_saveHandlerTableConfig;
+            $config = $this->saveHandlerTableConfig;
             $config['overrideLifetime'] = true;
             $this->_usedSaveHandlers[] =
                 $saveHandler = new DbTable($config);
@@ -319,13 +328,13 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testSessionSaving()
     {
-        $this->_dropTable();
+        $this->dropTable();
 
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::PRIMARY_ASSIGNMENT]);
         $config['primary'] = array($config['primary'][0]);
 
-        $this->_setupDb($config['primary']);
+        $this->setupDb($config['primary']);
 
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
@@ -337,9 +346,9 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
          */
 
         $session = new \Zend\Session\Container('SaveHandler', $manager);
-        $session->testArray = $this->_saveHandlerTableConfig;
+        $session->testArray = $this->saveHandlerTableConfig;
 
-        $tmp = array('SaveHandler' => serialize(array('testArray' => $this->_saveHandlerTableConfig)));
+        $tmp = array('SaveHandler' => serialize(array('testArray' => $this->saveHandlerTableConfig)));
         $testAgainst = '';
         foreach ($tmp as $key => $val) {
             $testAgainst .= $key . "|" . $val;
@@ -356,10 +365,10 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWrite()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::PRIMARY_ASSIGNMENT]);
         $config['primary'] = array($config['primary'][0]);
-        $this->_setupDb($config['primary']);
+        $this->setupDb($config['primary']);
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
 
@@ -373,8 +382,8 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteComplex()
     {
-        $config = $this->_saveHandlerTableConfig;
-        $this->_setupDb($config['primary']);
+        $config = $this->saveHandlerTableConfig;
+        $this->setupDb($config['primary']);
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
         $saveHandler->open('savepath', 'sessionname');
@@ -388,10 +397,10 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteTwice()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::PRIMARY_ASSIGNMENT]);
         $config['primary'] = array($config['primary'][0]);
-        $this->_setupDb($config['primary']);
+        $this->setupDb($config['primary']);
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
 
@@ -408,12 +417,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteTwiceAndExpire()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::PRIMARY_ASSIGNMENT]);
         $config['primary'] = array($config['primary'][0]);
         $config['lifetime'] = 1;
 
-        $this->_setupDb($config['primary']);
+        $this->setupDb($config['primary']);
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
 
@@ -432,12 +441,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWriteThreeTimesAndGc()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::PRIMARY_ASSIGNMENT]);
         $config['primary'] = array($config['primary'][0]);
         $config['lifetime'] = 1;
 
-        $this->_setupDb($config['primary']);
+        $this->setupDb($config['primary']);
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
 
@@ -473,12 +482,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
 
     public function testSetLifetime()
     {
-        $config = $this->_saveHandlerTableConfig;
+        $config = $this->saveHandlerTableConfig;
         unset($config[DbTable::PRIMARY_ASSIGNMENT]);
         $config['primary'] = array($config['primary'][0]);
         $config['lifetime'] = 1;
 
-        $this->_setupDb($config['primary']);
+        $this->setupDb($config['primary']);
         $this->_usedSaveHandlers[] =
             $saveHandler = new DbTable($config);
         $this->assertSame(1, $saveHandler->getLifetime());
@@ -491,7 +500,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     public function testZendConfig()
     {
         $this->_usedSaveHandlers[] =
-            $saveHandler = new DbTable(new \Zend\Config\Config($this->_saveHandlerTableConfig));
+            $saveHandler = new DbTable($this->saveHandlerTableConfig);
         /**
          * @todo Test something other than that an exception is not thrown
          */
@@ -500,11 +509,12 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the database connection and creates the table for session data
      *
-     * @param  array $primary
+     * @param  Zend\Config\Config $primary
      * @return void
      */
-    protected function _setupDb(array $primary)
+    protected function setupDb(Config $primary)
     {
+        $primary = $primary->toArray();
         if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('The pdo_sqlite extension must be available and enabled for this test');
         }
@@ -533,7 +543,7 @@ class DbTableTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected function _dropTable()
+    protected function dropTable()
     {
         if (!$this->_db instanceof AbstractAdapter) {
             return;

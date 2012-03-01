@@ -20,7 +20,8 @@
 
 namespace Zend\Session\SaveHandler;
 
-use Zend\Session\SaveHandler as Savable,
+use Zend\Config\Config as Configuration,
+    Zend\Session\SaveHandler as Savable,
     Zend\Session\Container,
     Zend\Session\Exception,
     Zend\Db\Table\AbstractTable,
@@ -29,10 +30,6 @@ use Zend\Session\SaveHandler as Savable,
 /**
  * DB Table session save handler
  *
- * @uses       Zend\Config
- * @uses       Zend_Db_Table_Abstract
- * @uses       Zend_Db_Table_Row_Abstract
- * @uses       Zend\Session\SaveHandler\Exception
  * @category   Zend
  * @package    Zend_Session
  * @subpackage SaveHandler
@@ -128,9 +125,8 @@ class DbTable
     /**
      * Constructor
      *
-     * $config is an instance of Zend_Config or an array of key/value pairs containing configuration options for
-     * Zend_Session_SaveHandler_DbTable and Zend_Db_Table_Abstract. These are the configuration options for
-     * Zend_Session_SaveHandler_DbTable:
+     * $config is an instance of Zend\Config\Config. These are the configuration options for
+     * Zend\Session\SaveHandler\DbTable:
      *
      * name              => (string) Session table name
      *
@@ -157,19 +153,13 @@ class DbTable
      * overrideLifetime  => (boolean) Whether or not the lifetime of an existing session should be overridden
      *      (optional; default: false)
      *
-     * @param  Zend_Config|array $config      User-provided configuration
+     * @param  Configuration      User-provided configuration
      * @return void
      * @throws Zend_Session_SaveHandler_Exception
      */
-    public function __construct($config)
+    public function __construct(Configuration $config)
     {
-        if ($config instanceof \Zend\Config\Config) {
-            $config = $config->toArray();
-        } else if (!is_array($config)) {
-            throw new Exception\InvalidArgumentException(
-                '$config must be an instance of Zend\\Config or array of key/value pairs containing '
-              . 'configuration options for Zend\\Session\\SaveHandler\\DbTable and Zend\\Db\\Table\\Abstract.');
-        }
+        $config = $config->toArray();
 
         foreach ($config as $key => $value) {
             do {
@@ -515,7 +505,7 @@ class DbTable
     /**
      * Retrieve session lifetime considering DbTable::OVERRIDE_LIFETIME
      *
-     * @param Zend_Db_Table_Row_Abstract $row
+     * @param Zend\Db\Table\Row\Abstract $row
      * @return int
      */
     protected function _getLifetime(AbstractRow $row)
@@ -532,7 +522,7 @@ class DbTable
     /**
      * Retrieve session expiration time
      *
-     * @param Zend_Db_Table_Row_Abstract $row
+     * @param Zend\Db\Table\Row\Abstract $row
      * @return int
      */
     protected function _getExpirationTime(AbstractRow $row)

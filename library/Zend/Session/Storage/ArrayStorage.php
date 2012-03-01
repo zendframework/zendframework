@@ -149,6 +149,12 @@ class ArrayStorage extends ArrayObject implements Storable
         return array_key_exists($key, $locks);
     }
 
+    /**
+     * Unlock an object or key marked as locked
+     * 
+     * @param  null|int|string $key 
+     * @return ArrayStorage
+     */
     public function unlock($key = null)
     {
         if (null === $key) {

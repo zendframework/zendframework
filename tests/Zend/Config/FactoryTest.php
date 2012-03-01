@@ -74,16 +74,30 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $config['test']['bar']);
     }
     
-    public function testFromIniAndXmlFiles()
+    public function testFromPhpFiles()
     {
         $files = array (
-            __DIR__ . '/TestAssets/Ini/include-base.ini',
-            __DIR__ . '/TestAssets/Xml/include-base2.xml'
+            __DIR__ . '/TestAssets/Php/include-base.php',
+            __DIR__ . '/TestAssets/Php/include-base2.php'
         );
         
         $config = Factory::fromFiles($files);
         $this->assertEquals('bar', $config['base']['foo']);
         $this->assertEquals('baz', $config['test']['bar']);
+    }
+    
+    public function testFromIniAndXmlAndPhpFiles()
+    {
+        $files = array (
+            __DIR__ . '/TestAssets/Ini/include-base.ini',
+            __DIR__ . '/TestAssets/Xml/include-base2.xml',
+            __DIR__ . '/TestAssets/Php/include-base3.php',
+        );
+        
+        $config = Factory::fromFiles($files);
+        $this->assertEquals('bar', $config['base']['foo']);
+        $this->assertEquals('baz', $config['test']['bar']);
+        $this->assertEquals('baz', $config['last']['bar']);
     }
 
     public function testNonExistentFileThrowsRuntimeException()

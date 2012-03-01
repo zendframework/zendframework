@@ -21,12 +21,14 @@
 namespace Zend\Config;
 
 /**
+ * Declared abstract to prevent instantiation
+ * 
  * @category  Zend
  * @package   Zend_Config
  * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Factory
+abstract class Factory
 {
     /**
      * Readers used for config files.

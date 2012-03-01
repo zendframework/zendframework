@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_GData_App
+ * @package    Zend_GData
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -22,21 +22,29 @@
 /**
  * @namespace
  */
-namespace ZendTest\GData\App\TestAsset;
-
-use Zend\GData\App\Base;
+namespace ZendTest\GData;
 
 /**
- * Minimal implementation of Zend_GData_App_Base
- *
- * @category   Zend
- * @package    Zend_GData
- * @subpackage Unittests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * PHPUnit test case
  */
 
-class MockBase extends Base
+/**
+ * @category   Zend
+ * @package    Zend_GData
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_GData
+ */
+class SkipClientLoginTest extends \PHPUnit_Framework_TestCase
 {
-    // This space intentionally left blank.
+    public function setUp()
+    {
+        $this->markTestSkipped("Zend_GData authenticated tests are not enabled in TestConfiguration.php");
+    }
+
+    public function testClientLogin()
+    {
+        // this is here only so we have at least one test
+    }
 }

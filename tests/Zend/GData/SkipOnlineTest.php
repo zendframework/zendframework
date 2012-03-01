@@ -48,16 +48,3 @@ class SkipOnlineTest extends \PHPUnit_Framework_TestCase
         // this is here only so we have at least one test
     }
 }
-
-class SkipClientLoginTest extends \PHPUnit_Framework_TestCase
-{
-    public function setUp()
-    {
-        $this->markTestSkipped("Zend_GData authenticated tests are not enabled in TestConfiguration.php");
-    }
-
-    public function testClientLogin()
-    {
-        // this is here only so we have at least one test
-    }
-}

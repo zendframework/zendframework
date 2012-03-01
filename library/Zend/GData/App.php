@@ -675,7 +675,7 @@ class App
             }
             throw new App\HttpException($e->getMessage(), $e);
         }
-        if ($response->isRedirect() && $response->getStatus() != '304') {
+        if ($response->isRedirect() && $response->getStatusCode() != '304') {
             if ($remainingRedirects > 0) {
                 $newUrl = $response->headers()->get('Location');
                 $response = $this->performHttpRequest(

@@ -138,8 +138,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if (strstr($header, 'GData-Version:'))
+        foreach ($headers as $header => $value) {
+            if ($header == 'GData-Version:')
                 $found = true;
         }
         $this->assertFalse($found, 'Version header found in V1 feed');
@@ -155,8 +155,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if (strstr($header, 'GData-Version:'))
+        foreach ($headers as $header => $value) {
+            if ($header == 'GData-Version:')
                 $found = true;
         }
         $this->assertTrue(!$found, 'Version header found in V1 feed');
@@ -221,7 +221,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnUpdate()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -234,8 +234,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->service->updateEntry($entry);
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertTrue($found, 'If-Match header not found or incorrect');
@@ -255,8 +255,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->service->updateEntry($entry);
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertFalse($found, 'If-Match header found');
@@ -264,7 +264,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnSave()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -278,8 +278,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $entry->save();
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertTrue($found, 'If-Match header not found or incorrect');
@@ -300,8 +300,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $entry->delete();
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertFalse($found, 'If-Match header found on delete');
@@ -309,7 +309,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnManualPost()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -319,8 +319,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->service->post($entry, 'http://www.example.com');
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertTrue($found, 'If-Match header not found or incorrect');
@@ -328,7 +328,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHttpHeaderSetOnManualPut()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->adapter->setResponse("HTTP/1.1 201 Created");
         $this->service->setMajorProtocolVersion(2);
@@ -342,8 +342,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->service->put($entry);
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertTrue($found, 'If-Match header not found or incorrect');
@@ -364,8 +364,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->service->delete($entry);
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertFalse($found, 'If-Match header found on delete');
@@ -373,7 +373,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHeaderCanBeSetOnInsert()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -386,8 +386,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
                 array('If-Match' => $etagOverride));
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etagOverride)
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertTrue($found, 'If-Match header not found or incorrect');
@@ -395,7 +395,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfNoneMatchHeaderCanBeSetOnInsert()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -408,8 +408,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
                 array('If-None-Match' => $etagOverride));
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-None-Match: ' . $etagOverride)
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-None-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertTrue($found, 'If-None-Match header not found or incorrect ');
@@ -417,7 +417,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfMatchHeaderCanBeSetOnUpdate()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -430,8 +430,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
                 array('If-Match' => $etagOverride));
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etagOverride)
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etagOverride)
                 $found = true;
         }
         $this->assertTrue($found, 'If-Match header not found or incorrect or incorrect');
@@ -439,7 +439,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testIfNoneMatchHeaderCanBeSetOnUpdate()
     {
-        $this->markTestIncomplete('Problem with Etag');
+        $this->markTestIncomplete('Problem with Etag and If-Match');
         $etagOverride = 'foo';
         $etag = Etag::fromString('Etag: ABCD1234');
         $this->service->setMajorProtocolVersion(2);
@@ -452,8 +452,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
                 array('If-None-Match' => $etagOverride));
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-None-Match: ' . $etagOverride)
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-None-Match' && $value == $etagOverride)
                 $found = true;
         }
         $this->assertTrue($found, 'If-None-Match header not found or incorrect');
@@ -482,8 +482,8 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $entry = $this->service->getEntry('http://www.example.com');
         $headers = $this->adapter->popRequest()->headers;
         $found = false;
-        foreach ($headers as $header) {
-            if ($header == 'If-Match: ' . $etag->getFieldValue())
+        foreach ($headers as $header => $value) {
+            if ($header == 'If-Match' && $value == $etag->getFieldValue())
                 $found = true;
         }
         $this->assertFalse($found, 'If-Match header found');

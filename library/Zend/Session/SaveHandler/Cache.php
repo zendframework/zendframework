@@ -145,10 +145,6 @@ class Cache implements Savable
      */
     public function setStorageAdapter(StorageAdapter $storageAdapter)
     {
-        if (!$storageAdapter instanceof StorageAdapter) {
-            throw new Exception\InvalidArgumentException('StorageAdapter type provided is invalid; must implement Zend\\Cache\\Storage\\Adapter');
-        }
-
         $this->storageAdapter = $storageAdapter;
     }
 

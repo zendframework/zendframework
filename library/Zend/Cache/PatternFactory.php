@@ -82,7 +82,8 @@ class PatternFactory
     public static function getBroker()
     {
         if (static::$broker === null) {
-            static::$broker = static::getDefaultBroker();
+            static::$broker = new PatternBroker();
+            static::$broker->setRegisterPluginsOnLoad(false);
         }
 
         return static::$broker;
@@ -107,15 +108,5 @@ class PatternFactory
     public static function resetBroker()
     {
         static::$broker = null;
-    }
-
-    /**
-     * Get internal pattern broker
-     *
-     * @return PatternBroker
-     */
-    protected static function getDefaultBroker()
-    {
-        return new PatternBroker();
     }
 }

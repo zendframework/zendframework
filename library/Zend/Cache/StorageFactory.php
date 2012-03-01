@@ -87,7 +87,7 @@ class StorageFactory
             $adapterOptions = array_merge($adapterOptions, $cfg['options']);
         }
 
-        $adapter = static::adapterFactory($adapterName, $adapterOptions);
+        $adapter = static::adapterFactory((string)$adapterName, $adapterOptions);
 
         // add plugins
         if (isset($cfg['plugins'])) {
@@ -185,7 +185,7 @@ class StorageFactory
      */
     public static function resetAdapterBroker()
     {
-        static::$adapterBroker = new Storage\AdapterBroker();
+        static::$adapterBroker = null;
     }
 
     /**
@@ -246,6 +246,6 @@ class StorageFactory
      */
     public static function resetPluginBroker()
     {
-        static::$pluginBroker = new Storage\PluginBroker();
+        static::$pluginBroker = null;
     }
 }

@@ -19,22 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
 namespace Zend\Navigation\Page;
 
-use Zend\Navigation\Page\AbstractPage,
-    Zend\Navigation\Exception\InvalidArgumentException,
+use Zend\Navigation\Exception,
     Zend\Controller\Front as FrontController;
 
 /**
  * Represents a page that is defined using module, controller, action, route
  * name and route params to assemble the href
- *
- * @uses       \Zend\Navigation\Page\AbstractPage
- * @uses       \Zend\Navigation\Exception\InvalidArgumentException
- * @uses       \Zend\Controller\Front
  *
  * @category   Zend
  * @package    Zend_Navigation
@@ -174,7 +166,7 @@ class Mvc extends AbstractPage
     /**
      * Returns href for this page
      *
-     * This method uses {@link Zend_Controller_Action_Helper_Url} to assemble
+     * This method uses {@link \Zend\Controller\Action\Helper\Url} to assemble
      * the href based on the page's properties.
      *
      * @return string  page href
@@ -226,16 +218,15 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string $action             action name
+     * @param  string $action   action name
      *
-     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
-     *                                                              $action is given
+     * @return Page\Mvc   fluent interface, returns self
+     * @throws Exception\InvalidArgumentException  if invalid $action is given
      */
     public function setAction($action)
     {
         if (null !== $action && !is_string($action)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: $action must be a string or null'
             );
         }
@@ -262,17 +253,16 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string|null $controller    controller name
+     * @param  string|null $controller  controller name
      *
-     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
-     *                                                              controller
-     *                                                              name is given
+     * @return Page\Mvc   fluent interface, returns self
+     * @throws Exception\InvalidArgumentException   if invalid controller name
+     *                                              is given
      */
     public function setController($controller)
     {
         if (null !== $controller && !is_string($controller)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: $controller must be a string or null'
             );
         }
@@ -299,17 +289,16 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string|null $module        module name
+     * @param  string|null $module  module name
      *
-     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
-     *                                                              module name
-     *                                                              is given
+     * @return Page\Mvc   fluent interface, returns self
+     * @throws Exception\InvalidArgumentException   if invalid module name
+     *                                              is given
      */
     public function setModule($module)
     {
         if (null !== $module && !is_string($module)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: $module must be a string or null'
             );
         }
@@ -336,10 +325,10 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  array|null $params        [optional] page params. Default is null
-     *                                   which sets no params.
+     * @param  array|null $params   [optional] page params. Default is null
+     *                              which sets no params.
      *
-     * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
+     * @return Page\Mvc  fluent interface, returns self
      */
     public function setParams(array $params = null)
     {
@@ -371,16 +360,15 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  string $route              route name to use when assembling URL
+     * @param  string $route    route name to use when assembling URL
      *
-     * @return \Zend\Navigation\Page\Mvc   fluent interface, returns self
-     * @throws \Zend\Navigation\Exception\InvalidArgumentException  if invalid
-     *                                                              $route is given
+     * @return Page\Mvc   fluent interface, returns self
+     * @throws Exception\InvalidArgumentException  if invalid $route is given
      */
     public function setRoute($route)
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
-            throw new InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Invalid argument: $route must be a non-empty string or null'
             );
         }
@@ -407,10 +395,10 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param  bool $resetParams         whether params should be reset when
-     *                                   assembling URL
+     * @param  bool $resetParams    whether params should be reset when
+     *                              assembling URL
      *
-     * @return \Zend\Navigation\Page\Mvc  fluent interface, returns self
+     * @return Page\Mvc  fluent interface, returns self
      */
     public function setResetParams($resetParams)
     {
@@ -436,10 +424,10 @@ class Mvc extends AbstractPage
      *
      * @see getHref()
      *
-     * @param bool $resetParams         whether href should be encoded when
-     *                                  assembling URL
+     * @param bool $resetParams whether href should be encoded when
+     *                          assembling URL
      *
-     * @return \Zend\Navigation\Page\Mvc fluent interface, returns self
+     * @return Page\Mvc fluent interface, returns self
      */
     public function setEncodeUrl($encodeUrl)
     {

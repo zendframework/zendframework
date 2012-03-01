@@ -21,9 +21,6 @@
 
 namespace Zend\Db\ResultSet;
 
-use ArrayAccess,
-    Countable;
-
 /**
  * @category   Zend
  * @package    Zend_Db
@@ -31,7 +28,5 @@ use ArrayAccess,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface RowObjectInterface extends Countable, ArrayAccess
-{
-    public function exchangeArray($input);
-}
+interface Exception
+{}

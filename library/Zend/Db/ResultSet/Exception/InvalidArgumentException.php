@@ -19,10 +19,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Db\ResultSet;
+namespace Zend\Db\ResultSet\Exception;
 
-use ArrayAccess,
-    Countable;
+use Zend\Db\ResultSet\Exception;
 
 /**
  * @category   Zend
@@ -31,7 +30,7 @@ use ArrayAccess,
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface RowObjectInterface extends Countable, ArrayAccess
-{
-    public function exchangeArray($input);
-}
+class InvalidArgumentException 
+    extends \InvalidArgumentException 
+    implements Exception
+{}

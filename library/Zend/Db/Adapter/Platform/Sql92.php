@@ -6,7 +6,7 @@ class Sql92 implements PlatformInterface
 {
     public function getName()
     {
-        return 'Sql92';
+        return 'SQL92';
     }
     
     public function getQuoteIdentifierSymbol()

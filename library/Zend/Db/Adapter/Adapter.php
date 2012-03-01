@@ -133,17 +133,17 @@ class Adapter
      * query() is a convenience function
      *
      * @param string $sql
-     * @param string|array $parametersOrPrepareExecuteFlag
+     * @param string|array $parametersOrQueryMode
      * @return Driver\StatementInterface
      */
-    public function query($sql, $parametersOrPrepareExecuteFlag = self::QUERY_MODE_PREPARE)
+    public function query($sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE)
     {
-        if (is_string($parametersOrPrepareExecuteFlag) && in_array($parametersOrPrepareExecuteFlag, array(self::QUERY_MODE_PREPARE, self::QUERY_MODE_EXECUTE))) {
-            $mode = $parametersOrPrepareExecuteFlag;
+        if (is_string($parametersOrQueryMode) && in_array($parametersOrQueryMode, array(self::QUERY_MODE_PREPARE, self::QUERY_MODE_EXECUTE))) {
+            $mode = $parametersOrQueryMode;
             $parameters = null;
-        } elseif (is_array($parametersOrPrepareExecuteFlag)) {
+        } elseif (is_array($parametersOrQueryMode)) {
             $mode = self::QUERY_MODE_PREPARE;
-            $parameters = $parametersOrPrepareExecuteFlag;
+            $parameters = $parametersOrQueryMode;
         } else {
             throw new \Exception('Parameter 2 to this method must be a flag, an array, or ParameterContainer');
         }

@@ -39,7 +39,6 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $this->mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
         $this->mockDriver->expects($this->any())->method('checkEnvironment')->will($this->returnValue(true));
         $this->mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($this->mockConnection));
-        $this->mockConnection->expects($this->any())->method('getDefaultSchema')->will($this->returnValue('FooSchema'));
         $this->mockPlatform = $this->getMock('Zend\Db\Adapter\Platform\PlatformInterface');
         $this->mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
         $this->mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($this->mockStatement));
@@ -70,18 +69,21 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
     public function testAdapterWillConstructDriverFromArray()
     {
         if (extension_loaded('mysqli')) {
-            $mysqliadapter = new Adapter(array('driver' => 'mysqli'), $this->mockPlatform);
-            $this->assertInstanceOf('Zend\Db\Adapter\Driver\Mysqli\Mysqli', $mysqliadapter->driver);
+            $adapter = new Adapter(array('driver' => 'mysqli'), $this->mockPlatform);
+            $this->assertInstanceOf('Zend\Db\Adapter\Driver\Mysqli\Mysqli', $adapter->driver);
+            unset($adapter);
         }
 
         if (extension_loaded('sqlsrv')) {
-            $mysqliadapter = new Adapter(array('driver' => 'sqlsrv'), $this->mockPlatform);
-            $this->assertInstanceOf('Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv', $mysqliadapter->driver);
+            $adapter = new Adapter(array('driver' => 'sqlsrv'), $this->mockPlatform);
+            $this->assertInstanceOf('Zend\Db\Adapter\Driver\Sqlsrv\Sqlsrv', $adapter->driver);
+            unset($adapter);
         }
 
         if (extension_loaded('pdo')) {
-            $mysqliadapter = new Adapter(array('driver' => 'pdo_sqlite'), $this->mockPlatform);
-            $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Pdo', $mysqliadapter->driver);
+            $adapter = new Adapter(array('driver' => 'pdo_sqlite'), $this->mockPlatform);
+            $this->assertInstanceOf('Zend\Db\Adapter\Driver\Pdo\Pdo', $adapter->driver);
+            unset($adapter);
         }
     }
 
@@ -97,7 +99,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         unset($adapter, $driver);
 
         $driver = clone $this->mockDriver;
-                $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('SqlServer'));
+        $driver->expects($this->any())->method('getDatabasePlatformName')->will($this->returnValue('SqlServer'));
         $adapter = new Adapter($driver);
         $this->assertInstanceOf('Zend\Db\Adapter\Platform\SqlServer', $adapter->platform);
         unset($adapter, $driver);
@@ -150,6 +152,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetDefaultSchema()
     {
+        $this->mockConnection->expects($this->any())->method('getDefaultSchema')->will($this->returnValue('FooSchema'));
         $this->assertEquals('FooSchema', $this->adapter->getDefaultSchema());
     }
 

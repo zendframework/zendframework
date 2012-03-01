@@ -120,7 +120,7 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
 
     public function valid()
     {
-        return (isset($this->data));
+        return (current($this->data) !== false);
     }
 
     public function rewind()

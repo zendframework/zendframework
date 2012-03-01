@@ -251,8 +251,11 @@ class BookController extends ActionController
         $model = new ViewModel(array('books' => $data));
 
         // Optionally specify a template; if we don't, by default it will be 
-        // auto-determined based on the controller name and this action; in
-        // this example, "book/list".
+        // auto-determined based on the controller name and this action. In
+        // this example, the template would resolve to "book/list", and thus 
+        // the file "book/list.phtml"; the following overrides that to set 
+        // the template to "booklist", and thus the file "booklist.phtml"
+        // (note the lack of directory preceding the filename).
         $model->setTemplate('booklist');
 
         return $model

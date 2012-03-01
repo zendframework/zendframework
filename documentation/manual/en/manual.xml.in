@@ -2430,16 +2430,11 @@
                 </xi:fallback>
             </xi:include>
 
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_View-Introduction.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_View-Introduction.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_View-Controllers.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_View-Controllers.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.view.renderer.php-renderer.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/zend.view.renderer.php-renderer.xml" parse="xml"/>
+                </xi:fallback>
+            </xi:include>
 
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/zend.view.php-renderer.scripts.xml" parse="xml">
                 <xi:fallback>
@@ -2452,11 +2447,6 @@
                     <xi:include href="../en/module_specs/zend.view.helpers.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
-            <!--<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_View-Abstract.xml" parse="xml">-->
-                <!--<xi:fallback>-->
-                    <!--<xi:include href="../en/module_specs/Zend_View-Abstract.xml" parse="xml"/>-->
-                <!--</xi:fallback>-->
-            <!--</xi:include>-->
         </chapter>
 
         <!--<chapter xml:id="zend.wildfire"><info><title>Zend_Wildfire</title></info>-->

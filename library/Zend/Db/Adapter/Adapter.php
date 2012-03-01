@@ -69,7 +69,9 @@ class Adapter
         }
 
         if (!$driver instanceof Driver\DriverInterface) {
-            throw new \InvalidArgumentException('Invalid driver');
+            throw new \InvalidArgumentException(
+                'The supplied or instantiated driver object does not implement Zend\Db\Adapter\Driver\DriverInterface'
+            );
         }
 
         $driver->checkEnvironment();
@@ -83,39 +85,6 @@ class Adapter
         $this->queryResultSetPrototype = ($queryResultPrototype) ?: new ResultSet\ResultSet();
     }
 
-    /**
-     * @param array $parameters
-     * @return Driver\DriverInterface
-     * @throws \InvalidArgumentException
-     */
-    protected function createDriverFromParameters(array $parameters)
-    {
-        if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
-            throw new \InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
-        }
-
-        $driverName = strtolower($parameters['driver']);
-        switch ($driverName) {
-            case 'mysqli':
-                $driver = new Driver\Mysqli\Mysqli($parameters);
-                break;
-            case 'sqlsrv':
-                $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
-                break;
-            case 'pdo':
-            default:
-                if ($driverName == 'pdo' || strpos($driverName, 'pdo') === 0) {
-                    $driver = new Driver\Pdo\Pdo($parameters);
-                }
-        }
-
-        if (!isset($driver) || !$driver instanceof Driver\DriverInterface) {
-            throw new \InvalidArgumentException('DriverInterface expected', null, null);
-        }
-
-        return $driver;
-    }
-    
     /**
      * getDriver()
      * 
@@ -138,7 +107,9 @@ class Adapter
     public function setQueryMode($queryMode)
     {
         if (!in_array($queryMode, array(self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE))) {
-            throw new \InvalidArgumentException('mode must be one of query_execute or query_prepare');
+            throw new \InvalidArgumentException(
+                sprintf('Query Mode must be one of "%s" or "%s"', self::QUERY_MODE_EXECUTE, self::QUERY_MODE_PREPARE)
+            );
         }
         
         $this->queryMode = $queryMode;
@@ -151,26 +122,6 @@ class Adapter
     public function getPlatform()
     {
         return $this->platform;
-    }
-
-    /**
-     * @param Driver\DriverInterface $driver
-     * @return Platform\PlatformInterface
-     */
-    protected function createPlatformFromDriver(Driver\DriverInterface $driver)
-    {
-        // consult driver for platform implementation
-        $platformName = $driver->getDatabasePlatformName(Driver\DriverInterface::NAME_FORMAT_CAMELCASE);
-        switch ($platformName) {
-            case 'Mysql':
-                return new Platform\Mysql();
-            case 'SqlServer':
-                return new Platform\SqlServer();
-            case 'Sqlite':
-                return new Platform\Sqlite();
-            default:
-                return new Platform\Sql92();
-        }
     }
 
     public function getDefaultSchema()
@@ -242,9 +193,62 @@ class Adapter
             case 'platform':
                 return $this->platform;
             default:
-                throw new \Exception('Invalid magic property on adapter');
+                throw new \InvalidArgumentException('Invalid magic property on adapter');
         }
 
+    }
+
+    /**
+     * @param array $parameters
+     * @return Driver\DriverInterface
+     * @throws \InvalidArgumentException
+     */
+    protected function createDriverFromParameters(array $parameters)
+    {
+        if (!isset($parameters['driver']) || !is_string($parameters['driver'])) {
+            throw new \InvalidArgumentException('createDriverFromParameters() expects a "driver" key to be present inside the parameters');
+        }
+
+        $driverName = strtolower($parameters['driver']);
+        switch ($driverName) {
+            case 'mysqli':
+                $driver = new Driver\Mysqli\Mysqli($parameters);
+                break;
+            case 'sqlsrv':
+                $driver = new Driver\Sqlsrv\Sqlsrv($parameters);
+                break;
+            case 'pdo':
+            default:
+                if ($driverName == 'pdo' || strpos($driverName, 'pdo') === 0) {
+                    $driver = new Driver\Pdo\Pdo($parameters);
+                }
+        }
+
+        if (!isset($driver) || !$driver instanceof Driver\DriverInterface) {
+            throw new \InvalidArgumentException('DriverInterface expected', null, null);
+        }
+
+        return $driver;
+    }
+
+    /**
+     * @param Driver\DriverInterface $driver
+     * @return Platform\PlatformInterface
+     */
+    protected function createPlatformFromDriver(Driver\DriverInterface $driver)
+    {
+        // consult driver for platform implementation
+        $platformName = $driver->getDatabasePlatformName(Driver\DriverInterface::NAME_FORMAT_CAMELCASE);
+        switch ($platformName) {
+            case 'Mysql':
+                return new Platform\Mysql();
+            case 'SqlServer':
+                return new Platform\SqlServer();
+            case 'Sqlite':
+                return new Platform\Sqlite();
+            default:
+                return new Platform\Sql92();
+        }
     }
 
 }

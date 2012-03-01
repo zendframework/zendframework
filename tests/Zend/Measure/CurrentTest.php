@@ -33,7 +33,7 @@ use Zend\Measure;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class CurrentTest extends \PHPUnit_Framework_TestCase
+class CurrentTest extends CommonTestCase
 {
     /**
      * test for Current initialisation

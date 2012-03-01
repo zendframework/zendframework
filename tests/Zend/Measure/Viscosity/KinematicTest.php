@@ -23,8 +23,9 @@
  * @namespace
  */
 namespace ZendTest\Measure\Viscosity;
-use Zend\Measure\Viscosity;
-use Zend\Measure;
+use Zend\Measure,
+    Zend\Measure\Viscosity,
+    ZendTest\Measure\CommonTestCase;
 
 /**
  * @category   Zend
@@ -34,7 +35,7 @@ use Zend\Measure;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Measure
  */
-class KinematicTest extends \PHPUnit_Framework_TestCase
+class KinematicTest extends CommonTestCase
 {
     /**
      * test for Mass initialisation

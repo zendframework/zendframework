@@ -14,24 +14,34 @@
  *
  * @category   Zend
  * @package    Zend_Db
- * @subpackage ResultSet
+ * @subpackage UnitTest
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Db\ResultSet;
+namespace ZendTest\Db\ResultSet\TestAsset;
 
-use ArrayAccess,
-    Countable;
+use IteratorAggregate,
+    Traversable;
 
 /**
  * @category   Zend
  * @package    Zend_Db
- * @subpackage ResultSet
+ * @subpackage UnitTest
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface RowObjectInterface extends Countable, ArrayAccess
+class AggregateDataSource implements IteratorAggregate
 {
-    public function exchangeArray($input);
+    protected $iterator;
+
+    public function __construct(Traversable $iterator)
+    {
+        $this->iterator = $iterator;
+    }
+
+    public function getIterator()
+    {
+        return $this->iterator;
+    }
 }

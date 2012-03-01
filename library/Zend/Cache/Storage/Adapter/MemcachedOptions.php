@@ -141,7 +141,7 @@ class MemcachedOptions extends AdapterOptions
      *
      * @var int
      */
-    protected $pollTimeout = 0;
+    protected $pollTimeout = 1000;
 
     /**
      * Maximum allowed time for a recv operation, in ms

@@ -361,7 +361,7 @@ class ArticleController extends ActionController
         $view = new ViewModel();
 
         $articleView = new ViewModel(array('article' => $article));
-        $view->setTemplate('content/article');
+        $articleView->setTemplate('content/article');
 
         $primarySidebarView = new ViewModel();
         $primarySidebarView->setTemplate('content/main-sidebar');

@@ -22,51 +22,51 @@
 namespace ZendTest\Db\Sql\Predicate;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Db\Sql\Predicate\IsNull;
+    Zend\Db\Sql\Predicate\IsNotNull;
 
-class IsNullTest extends TestCase
+class IsNotNullTest extends TestCase
 {
     public function setUp()
     {
-        $this->isnull = new IsNull();
+        $this->predicate = new IsNotNull();
     }
 
     public function testEmptyConstructorYieldsNullIdentifier()
     {
-        $this->assertNull($this->isnull->getIdentifier());
+        $this->assertNull($this->predicate->getIdentifier());
     }
 
     public function testSpecificationHasSaneDefaultValue()
     {
-        $this->assertEquals('%1$s IS NULL', $this->isnull->getSpecification());
+        $this->assertEquals('%1$s IS NOT NULL', $this->predicate->getSpecification());
     }
 
     public function testCanPassIdentifierToConstructor()
     {
-        $isnull = new IsNull('foo.bar');
+        $isnull = new IsNotNull('foo.bar');
         $this->assertEquals('foo.bar', $isnull->getIdentifier());
     }
 
     public function testIdentifierIsMutable()
     {
-        $this->isnull->setIdentifier('foo.bar');
-        $this->assertEquals('foo.bar', $this->isnull->getIdentifier());
+        $this->predicate->setIdentifier('foo.bar');
+        $this->assertEquals('foo.bar', $this->predicate->getIdentifier());
     }
 
     public function testSpecificationIsMutable()
     {
-        $this->isnull->setSpecification('%1$s NULL');
-        $this->assertEquals('%1$s NULL', $this->isnull->getSpecification());
+        $this->predicate->setSpecification('%1$s NOT NULL');
+        $this->assertEquals('%1$s NOT NULL', $this->predicate->getSpecification());
     }
 
     public function testRetrievingWherePartsReturnsSpecificationArrayOfIdentifierAndArrayOfTypes()
     {
-        $this->isnull->setIdentifier('foo.bar');
+        $this->predicate->setIdentifier('foo.bar');
         $expected = array(array(
-            $this->isnull->getSpecification(),
+            $this->predicate->getSpecification(),
             array('foo.bar'),
-            array(IsNull::TYPE_IDENTIFIER),
+            array(IsNotNull::TYPE_IDENTIFIER),
         ));
-        $this->assertEquals($expected, $this->isnull->getWhereParts());
+        $this->assertEquals($expected, $this->predicate->getWhereParts());
     }
 }

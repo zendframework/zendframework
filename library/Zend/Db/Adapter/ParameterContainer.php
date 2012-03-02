@@ -35,7 +35,7 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
     protected $data = array();
     protected $errata = array();
 
-    public function __construct(array $data)
+    public function __construct(array $data = array())
     {
         if ($data) {
             $this->setFromArray($data);

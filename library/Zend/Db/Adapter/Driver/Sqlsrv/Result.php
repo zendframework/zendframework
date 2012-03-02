@@ -36,24 +36,45 @@ class Result implements \Iterator, ResultInterface
      * @var resource
      */
     protected $resource = null;
-    
+    /**
+     * @var boolean 
+     */
     protected $currentData = false;
-    
+    /**
+     *
+     * @var boolean
+     */
     protected $currentComplete = false;
-
+    /**
+     *
+     * @var integer
+     */
     protected $position = -1;
-
+    /**
+     * Initialize
+     * 
+     * @param  resource $resource
+     * @return Result 
+     */
     public function initialize($resource)
     {
         $this->resource = $resource;
         return $this;
     }
-    
+    /**
+     * Get resource
+     * 
+     * @return resource 
+     */
     public function getResource()
     {
         return $this->resource;
     }
-    
+    /**
+     * Current
+     * 
+     * @return mixed 
+     */
     public function current()
     {
         if ($this->currentComplete) {
@@ -63,13 +84,22 @@ class Result implements \Iterator, ResultInterface
         $this->load();
         return $this->currentData;
     }
-    
+    /**
+     * Next
+     * 
+     * @return boolean
+     */
     public function next()
     {
         $this->load();
         return true;
     }
-    
+    /**
+     * Load
+     * 
+     * @param  string $row
+     * @return mixed 
+     */
     protected function load($row = SQLSRV_SCROLL_NEXT)
     {
         $this->currentData = sqlsrv_fetch_array($this->resource, SQLSRV_FETCH_ASSOC, $row);
@@ -77,19 +107,31 @@ class Result implements \Iterator, ResultInterface
         $this->position++;
         return ($this->currentData);
     }
-    
+    /**
+     * Key
+     * 
+     * @return mixed 
+     */
     public function key()
     {
         return $this->position;
     }
-    
+    /**
+     * Rewind
+     * 
+     * @return boolean 
+     */
     public function rewind()
     {
         $this->position = 0;
         $this->load(SQLSRV_SCROLL_FIRST);
         return true;
     }
-    
+    /**
+     * Valid
+     * 
+     * @return boolean 
+     */
     public function valid()
     {
         if ($this->currentComplete && $this->currentData) {
@@ -98,12 +140,20 @@ class Result implements \Iterator, ResultInterface
 
         return $this->load();
     }
-    
+    /**
+     * Count
+     * 
+     * @return integer
+     */
     public function count()
     {
         return sqlsrv_num_rows($this->resource);
     }
-
+    /**
+     * Is query result
+     * 
+     * @return boolean 
+     */
     public function isQueryResult()
     {
         if (is_bool($this->resource)) {
@@ -111,7 +161,11 @@ class Result implements \Iterator, ResultInterface
         }
         return (sqlsrv_num_fields($this->resource) > 0);
     }
-
+    /**
+     * Get affected rows
+     * 
+     * @return integer 
+     */
     public function getAffectedRows()
     {
         return sqlsrv_rows_affected($this->resource);

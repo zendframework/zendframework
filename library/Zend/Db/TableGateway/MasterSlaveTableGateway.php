@@ -43,6 +43,15 @@ class MasterSlaveTableGateway extends TableGateway
      */
     protected $masterAdapter = null;
 
+    /**
+     * Constructor
+     * 
+     * @param string $tableName
+     * @param Adapter $masterAdapter
+     * @param Adapter $slaveAdapter
+     * @param type $databaseSchema
+     * @param ResultSet $selectResultPrototype 
+     */
     public function __construct($tableName, Adapter $masterAdapter, Adapter $slaveAdapter, $databaseSchema = null, ResultSet $selectResultPrototype = null)
     {
         $this->masterAdapter = $masterAdapter;
@@ -52,25 +61,46 @@ class MasterSlaveTableGateway extends TableGateway
         parent::__construct($tableName, $masterAdapter, $databaseSchema, $selectResultPrototype);
     }
 
-
+    /**
+     * Select
+     * 
+     * @param  string $where
+     * @return type 
+     */
     public function select($where)
     {
         $this->adapter = $this->slaveAdapter;
         return parent::select($where);
     }
-
+    /**
+     * Insert
+     * 
+     * @param  string $set
+     * @return type 
+     */
     public function insert($set)
     {
         $this->adapter = $this->masterAdapter;
         return parent::insert($set);
     }
-
+    /**
+     * Update
+     * 
+     * @param  string $set
+     * @param  string $where
+     * @return type 
+     */
     public function update($set, $where)
     {
         $this->adapter = $this->masterAdapter;
         return parent::update($set, $where);
     }
-
+    /**
+     * Delete
+     * 
+     * @param  string $where
+     * @return type 
+     */
     public function delete($where)
     {
         $this->adapter = $this->masterAdapter;

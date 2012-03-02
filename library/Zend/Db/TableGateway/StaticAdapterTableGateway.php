@@ -38,6 +38,11 @@ class StaticAdapterTableGateway extends TableGateway
      */
     protected static $staticAdapters = array();
 
+    /**
+     * Set static adapter
+     * 
+     * @param Adapter $adapter 
+     */
     public static function setStaticAdapter(Adapter $adapter)
     {
         $class = get_called_class();
@@ -47,7 +52,11 @@ class StaticAdapterTableGateway extends TableGateway
             static::$staticAdapters[__CLASS__] = $adapter;
         }
     }
-
+    /**
+     * Get static adapter
+     * 
+     * @return type 
+     */
     public static function getStaticAdapter()
     {
         $class = get_called_class();
@@ -64,12 +73,16 @@ class StaticAdapterTableGateway extends TableGateway
 
         throw new \Exception('No database adapter was found.');
     }
-
+    /**
+     * Constructor
+     * 
+     * @param string $tableName
+     * @param string $databaseSchema
+     * @param ResultSet $selectResultPrototype 
+     */
     public function __construct($tableName, $databaseSchema = null, ResultSet $selectResultPrototype = null)
     {
         $adapter = static::getStaticAdapter();
         parent::__construct($tableName, $adapter, $databaseSchema, $selectResultPrototype);
     }
-
-
 }

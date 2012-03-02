@@ -34,21 +34,67 @@ class ColumnObject
     protected $catalogName = null;
     protected $schemaName = null;
     */
-
+    /**
+     *
+     * @var string
+     */
     protected $name = null;
+    /**
+     *
+     * @var string
+     */
     protected $tableName = null;
+    /**
+     *
+     * @var string
+     */
     protected $schemaName = null;
-
+    /**
+     *
+     * @var 
+     */
     protected $ordinalPosition = null;
+    /**
+     *
+     * @var string
+     */
     protected $columnDefault = null;
+    /**
+     *
+     * @var boolean 
+     */
     protected $isNullable = null;
+    /**
+     *
+     * @var string
+     */
     protected $dataType = null;
+    /**
+     *
+     * @var integer
+     */
     protected $characterMaximumLength = null;
+    /**
+     *
+     * @var integer
+     */
     protected $characterOctetLength = null;
+    /**
+     *
+     * @var type
+     */
     protected $numericPrecision = null;
+    /**
+     *
+     * @var type 
+     */
     protected $numericScale = null;
 //    protected $characterSetName = null;
 //    protected $collationName = null;
+    /**
+     *
+     * @var array
+     */
     protected $errata = array();
 
 
@@ -76,25 +122,42 @@ class ColumnObject
     }
     */
 
+    /**
+     * Constructor
+     * 
+     * @param string $name
+     * @param string $tableName
+     * @param string $schemaName 
+     */
     public function __construct($name, $tableName, $schemaName = null)
     {
         $this->setName($name);
         $this->setTableName($tableName);
         $this->setSchemaName($schemaName);
     }
-
+    /**
+     * Set name
+     * 
+     * @param string $name 
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
-
+    /**
+     * Get name
+     * 
+     * @return string 
+     */
     public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @return the $table
+     * Get table name
+     * 
+     * @return string
      */
     public function getTableName()
     {
@@ -102,19 +165,29 @@ class ColumnObject
     }
 
     /**
-     * @param $table the $table to set
+     * Set table name
+     * 
+     * @param string $tableName
      */
     public function setTableName($tableName)
     {
         $this->tableName = $tableName;
         return $this;
     }
-
+    /**
+     * Set schema name
+     * 
+     * @param string $schemaName 
+     */
     public function setSchemaName($schemaName)
     {
         $this->schemaName = $schemaName;
     }
-
+    /**
+     * Get schema name
+     * 
+     * @return string 
+     */
     public function getSchemaName()
     {
         return $this->schemaName;

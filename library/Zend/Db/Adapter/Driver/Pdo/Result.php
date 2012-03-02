@@ -41,6 +41,10 @@ class Result implements Iterator, ResultInterface
     const STATEMENT_MODE_SCROLLABLE = 'scrollable';
     const STATEMENT_MODE_FORWARD    = 'forward';
 
+    /**
+     *
+     * @var string
+     */
     protected $statementMode = self::STATEMENT_MODE_FORWARD;
 
     /**
@@ -70,13 +74,23 @@ class Result implements Iterator, ResultInterface
      * @var int
      */
     protected $position = -1;
-
+    
+    /**
+     * Initialize
+     * 
+     * @param  PDOStatement $resource
+     * @return Result 
+     */
     public function initialize(PDOStatement $resource)
     {
         $this->resource = $resource;
         return $this;
     }
-
+    /**
+     * Get resource
+     * 
+     * @return mixed 
+     */
     public function getResource()
     {
         return $this->resource;
@@ -94,7 +108,11 @@ class Result implements Iterator, ResultInterface
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
         return $this->currentData;
     }
-    
+    /**
+     * Next
+     * 
+     * @return mixed 
+     */
     public function next()
     {
         $this->currentData = $this->resource->fetch(\PDO::FETCH_ASSOC);
@@ -102,7 +120,11 @@ class Result implements Iterator, ResultInterface
         $this->position++;
         return $this->currentData;
     }
-    
+    /** 
+     * Key
+     * 
+     * @return mixed 
+     */
     public function key()
     {
         return $this->position;
@@ -120,22 +142,38 @@ class Result implements Iterator, ResultInterface
         $this->currentComplete = true;
         $this->position = 0;
     }
-    
+    /**
+     * Valid
+     * 
+     * @return boolean
+     */
     public function valid()
     {
         return ($this->currentData != false);
     }
-    
+    /**
+     * Count
+     * 
+     * @return integer 
+     */
     public function count()
     {
         return $this->resource->rowCount();
     }
-
+    /**
+     * Is query result
+     * 
+     * @return boolean 
+     */
     public function isQueryResult()
     {
         return ($this->resource->columnCount() > 0);
     }
-
+    /**
+     * Get affected rows
+     * 
+     * @return integer 
+     */
     public function getAffectedRows()
     {
         return $this->resource->rowCount();

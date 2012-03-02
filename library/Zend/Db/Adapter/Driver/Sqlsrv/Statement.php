@@ -69,8 +69,18 @@ class Statement implements StatementInterface
      */
     protected $resource = null;
 
+    /**
+     *
+     * @var boolean
+     */
     protected $isPrepared = false;
 
+    /**
+     * Set driver
+     * 
+     * @param  Sqlsrv $driver
+     * @return Statement 
+     */
     public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
@@ -91,6 +101,11 @@ class Statement implements StatementInterface
         $this->sqlsrv = $resource;
     }
 
+    /**
+     * Set parameter container
+     * 
+     * @param ParameterContainerInterface $parameterContainer 
+     */
     public function setParameterContainer(ParameterContainerInterface $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
@@ -103,7 +118,11 @@ class Statement implements StatementInterface
     {
         return $this->parameterContainer;
     }
-    
+    /**
+     * Get resource
+     * 
+     * @return resource
+     */
     public function getResource()
     {
         return $this->resource;
@@ -116,7 +135,11 @@ class Statement implements StatementInterface
     {
         $this->sql = $sql;
     }
-
+    /**
+     * Get sql
+     * 
+     * @return string 
+     */
     public function getSQL()
     {
         return $this->sql;
@@ -149,7 +172,12 @@ class Statement implements StatementInterface
     {
         return $this->isPrepared;
     }
-
+    /**
+     * Execute
+     * 
+     * @param  array|ParameterContainerInterface $parameters
+     * @return type 
+     */
     public function execute($parameters = null)
     {
         if (!$this->isPrepared) {
@@ -183,7 +211,10 @@ class Statement implements StatementInterface
         $result = $this->driver->createResult($this->resource);
         return $result;
     }
-    
+    /**
+     * Bind parameters from container
+     * 
+     */
     protected function bindParametersFromContainer()
     {
         $values = $this->parameterContainer->toArray();

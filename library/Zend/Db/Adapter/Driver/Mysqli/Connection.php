@@ -36,7 +36,11 @@ class Connection implements ConnectionInterface
      * @var Mysqli
      */
     protected $driver = null;
-    
+    /**
+     * Connection paramters
+     * 
+     * @var array 
+     */
     protected $connectionParameters = array();
     
     /**
@@ -44,8 +48,18 @@ class Connection implements ConnectionInterface
      */
     protected $resource = null;
 
+    /**
+     * In transcaction
+     * 
+     * @var boolean
+     */
     protected $inTransaction = false;    
 
+    /**
+     * Constructor
+     * 
+     * @param mysqli $connectionInfo 
+     */
     public function __construct($connectionInfo = null)
     {
         if (is_array($connectionInfo)) {
@@ -65,22 +79,42 @@ class Connection implements ConnectionInterface
         return $this;
     }
     
+    /**
+     * Set connection parameters
+     * 
+     * @param  array $connectionParameters
+     * @return Connection 
+     */
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
         return $this;
     }
 
+    /**
+     * Get connection parameters
+     * 
+     * @return array 
+     */
     public function getConnectionParameters()
     {
         return $this->connectionParameters;
     }
-    
+    /**
+     * Get default catalog
+     * 
+     * @return null 
+     */
     public function getDefaultCatalog()
     {
         return null;
     }
     
+    /**
+     * Get default schema
+     * 
+     * @return string 
+     */
     public function getDefaultSchema()
     {
         if (!$this->isConnected()) {
@@ -93,6 +127,12 @@ class Connection implements ConnectionInterface
         return $r[0];
     }
 
+    /**
+     * Set resource
+     * 
+     * @param  mysqli $resource
+     * @return Connection 
+     */
     public function setResource(mysqli $resource)
     {
         $this->resource = $resource;
@@ -100,6 +140,8 @@ class Connection implements ConnectionInterface
     }
 
     /**
+     * Get resource
+     * 
      * @return \mysqli
      */
     public function getResource()
@@ -107,7 +149,11 @@ class Connection implements ConnectionInterface
         $this->connect();
         return $this->resource;
     }
-    
+    /**
+     * Connect
+     * 
+     * @return null 
+     */
     public function connect()
     {
         if ($this->resource instanceof \mysqli) {
@@ -146,11 +192,19 @@ class Connection implements ConnectionInterface
 
     }
     
+    /**
+     * Is connected
+     * 
+     * @return boolean 
+     */
     public function isConnected()
     {
         return ($this->resource instanceof \Mysqli);
     }
     
+    /**
+     * Disconnect
+     */
     public function disconnect()
     {
         if ($this->resource instanceof \PDO) {
@@ -159,12 +213,18 @@ class Connection implements ConnectionInterface
         unset($this->resource);
     }
     
+    /**
+     * Begin transaction
+     */
     public function beginTransaction()
     {
         $this->resource->autocommit(false);
         $this->inTransaction = true;
     }
     
+    /**
+     * Commit
+     */
     public function commit()
     {
         if (!$this->resource) {
@@ -176,6 +236,11 @@ class Connection implements ConnectionInterface
         $this->inTransaction = false;
     }
     
+    /**
+     * Rollback
+     * 
+     * @return Connection 
+     */
     public function rollback()
     {
         if (!$this->resource) {
@@ -190,7 +255,12 @@ class Connection implements ConnectionInterface
         return $this;
     }
     
-    
+    /**
+     * Execute
+     * 
+     * @param  string $sql
+     * @return Result 
+     */
     public function execute($sql)
     {
         if (!$this->isConnected()) {
@@ -207,7 +277,11 @@ class Connection implements ConnectionInterface
         $resultPrototype = $this->driver->createResult(($resultResource === true) ? $this->resource : $resultResource);
         return $resultPrototype;
     }
-
+    /**
+     * Get last generated id
+     * 
+     * @return integer 
+     */
     public function getLastGeneratedId()
     {
         return $this->resource->insert_id;

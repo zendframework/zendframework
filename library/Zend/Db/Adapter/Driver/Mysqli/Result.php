@@ -35,8 +35,18 @@ class Result implements \Iterator, ResultInterface
     const MODE_STATEMENT = 'statement';
     const MODE_RESULT = 'result';
     
+    /**
+     * Mode
+     * 
+     * @var string
+     */
     protected $mode = null;
 
+    /**
+     * Is query result
+     * 
+     * @var boolean 
+     */
     protected $isQueryResult = true;
 
     /**
@@ -67,11 +77,24 @@ class Result implements \Iterator, ResultInterface
      * @var bool
      */
     protected $nextComplete = false;
-    
+    /**
+     *
+     * @var bool
+     */
     protected $currentData = false;
     
+    /**
+     *
+     * @var array
+     */
     protected $statementBindValues = array('keys' => null, 'values' => array());
 
+    /**
+     * Initialize
+     * 
+     * @param  mixed $resource
+     * @return Result 
+     */
     public function initialize($resource)
     {
         if (!$resource instanceof \mysqli && !$resource instanceof \mysqli_result && !$resource instanceof \mysqli_stmt) {
@@ -85,21 +108,40 @@ class Result implements \Iterator, ResultInterface
         return $this;
     }
     
+    /**
+     *
+     * @return mixed 
+     */
     public function getResource()
     {
         return $this->resource;
     }
 
+    /**
+     * Set is query result
+     * 
+     * @param boolean $isQueryResult 
+     */
     public function setIsQueryResult($isQueryResult)
     {
         $this->isQueryResult = $isQueryResult;
     }
 
+    /**
+     * Is query result
+     * 
+     * @return boolean 
+     */
     public function isQueryResult()
     {
         return $this->isQueryResult;
     }
 
+    /**
+     * Get affected rows
+     * 
+     * @return integer 
+     */
     public function getAffectedRows()
     {
         if ($this->resource instanceof \mysqli || $this->resource instanceof \mysqli_stmt) {
@@ -108,7 +150,11 @@ class Result implements \Iterator, ResultInterface
             return $this->resource->num_rows;
         }
     }
-
+    /**
+     * Current
+     * 
+     * @return mixed 
+     */
     public function current()
     {
         if ($this->currentComplete) {
@@ -167,7 +213,11 @@ class Result implements \Iterator, ResultInterface
         $this->position++;
         return true;
     }
-    
+    /**
+     * Load from mysqli result
+     * 
+     * @return boolean 
+     */
     protected function loadFromMysqliResult()
     {
         $this->currentData = null;
@@ -183,7 +233,9 @@ class Result implements \Iterator, ResultInterface
         $this->position++;
         return true;
     }
-    
+    /**
+     * Next
+     */
     public function next()
     {
         $this->currentComplete = false;
@@ -194,12 +246,19 @@ class Result implements \Iterator, ResultInterface
         
         $this->nextComplete = false;
     }
-    
+    /**
+     * Key
+     * 
+     * @return mixed 
+     */
     public function key()
     {
         return $this->position;
     }
-    
+    /**
+     * Rewind
+     * 
+     */
     public function rewind()
     {
         $this->currentComplete = false;
@@ -210,7 +269,11 @@ class Result implements \Iterator, ResultInterface
             $this->resource->data_seek(0); // works for both mysqli_result & mysqli_stmt
         }
     }
-    
+    /**
+     * Valid
+     * 
+     * @return boolean 
+     */
     public function valid()
     {
         if ($this->currentComplete) {
@@ -223,7 +286,11 @@ class Result implements \Iterator, ResultInterface
             return $this->loadFromMysqliResult();
         }
     }
-    
+    /**
+     * Count
+     * 
+     * @return integer 
+     */
     public function count()
     {
         return $this->resource->num_rows;

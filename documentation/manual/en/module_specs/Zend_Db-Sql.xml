@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.tablegateway"><info><title>Zend\Db\TableGateway</title></info>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xml:id="zend.db.sql">
+    <info><title>Zend\Db\Sql</title></info>
 
     <para>
         Zend\Db\Sql is a abstraction layer for building vendor and driver specific queries.
@@ -7,7 +9,8 @@
         capable of producing SQL strings.
     </para>
 
-    <section xml:id="zend.db.sql.primary"><info><title>Primary Objects: Select, Insert, Update, Delete, Where</title></info>
+    <section xml:id="zend.db.sql.primary">
+        <info><title>Primary Objects: Select, Insert, Update, Delete, Where</title></info>
 
         <para>
             The primary objects that to interact with are:
@@ -19,21 +22,25 @@
                     Zend\Db\Sql\Select - SELECT abstraction
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Zend\Db\Sql\Insert - INSERT abstraction
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Zend\Db\Sql\Update - UPDATE abstraction
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Zend\Db\Sql\Delete - DELETE abstraction
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Zend\Db\Sql\Where - WHERE abstraction to be used with Select, Update and Delete
@@ -118,10 +125,10 @@
         }
 
 ]]></programlisting>
-
     </section>
 
-    <section xml:id="zend.db.sql.where"><info><title>Where, Predicates and the Fluent Interface</title></info>
+    <section xml:id="zend.db.sql.where">
+        <info><title>Where, Predicates and the Fluent Interface</title></info>
 
         <para>
             The Zend\Db\Sql\Where object is where much of the focus of getting
@@ -138,15 +145,16 @@
         </para>
         
         <para>
-            Built-In Predicates
-                    Between - Check if an identifier is between two values - Zend\Db\Sql\Predicate\Between
-                    In - Check if an identifier is in an array of values - Zend\Db\Sql\Predicate\In
-                    IsNotNull - Check if an identifier is not null -= Zend\Db\Sql\Predicate\IsNotNull
-                    IsNull - Check if an identifier is null - Zend\Db\Sql\Predicate\IsNull
-                    Like - Check if an identifier matches a SQL LIKE expression value - Zend\Db\Sql\Predicate\Like
-                    Literal - Use an SQL fragment exactly as typed, using ? as parameter interpoation - Zend\Db\Sql\Predicate\Literal
-                    Operator - Check how a particular value compares to another value, possible operators (=, !=, >, <, >=, <=) - Zend\Db\Sql\Predicate\Operator
-                    PredicateSet - A nested set of additional Predicates that will be inside a SQL nest - Zend\Db\Sql\Predicate\PredicateSet
+            Built-In Predicates Between - Check if an identifier is between two values -
+            Zend\Db\Sql\Predicate\Between In - Check if an identifier is in an array of values -
+            Zend\Db\Sql\Predicate\In IsNotNull - Check if an identifier is not null -=
+            Zend\Db\Sql\Predicate\IsNotNull IsNull - Check if an identifier is null -
+            Zend\Db\Sql\Predicate\IsNull Like - Check if an identifier matches a SQL LIKE expression
+            value - Zend\Db\Sql\Predicate\Like Literal - Use an SQL fragment exactly as typed, using
+            ? as parameter interpoation - Zend\Db\Sql\Predicate\Literal Operator - Check how a
+            particular value compares to another value, possible operators (=, !=, &gt;, &lt;,
+            &gt;=, &lt;=) - Zend\Db\Sql\Predicate\Operator PredicateSet - A nested set of additional
+            Predicates that will be inside a SQL nest - Zend\Db\Sql\Predicate\PredicateSet.
         </para>
 
         <para>
@@ -155,9 +163,14 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-            $where = new Zend\Db\Sql\Where();
-            $where->like('name', 'Ralph%')
-                ->OR->NEST->greaterThanOrEqualTo('age', 30)->AND->lessThanOrEqualTo('age', 50)->UNNEST;
+$where = new Zend\Db\Sql\Where();
+$where->like('name', 'Ralph%')
+      ->OR
+      ->NEST
+            ->greaterThanOrEqualTo('age', 30)
+            ->AND
+            ->lessThanOrEqualTo('age', 50)
+      ->UNNEST;
 ]]></programlisting>
 
         <para>
@@ -165,85 +178,83 @@
         </para>
 
         <programlisting language="php"><![CDATA[
-            class Zend\Db\Sql\Where\Predicate
-                public $OR;
-                public $AND;
-                public $NEST;
-                public $UNNSET;
+class Zend\Db\Sql\Where\Predicate
+{
+    public $OR;
+    public $AND;
+    public $NEST;
+    public $UNNSET;
 
-                public function nest();
-                public function setUnnest(Predicate $predicate);
-                public function unnest();
+    public function nest();
+    public function setUnnest(Predicate $predicate);
+    public function unnest();
 
-                public function equalTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
-                public function lessThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
-                public function greaterThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
-                public function lessThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
-                public function greaterThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
-                public function like($identifier, $like);
-                public function literal($literal, $parameter);
-                public function isNull($identifier);
-                public function isNotNull($identifier);
-                public function in($identifier, array $valueSet = array());
-                public function between($identifier, $minValue, $maxValue);
-            }
+    public function equalTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function lessThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function greaterThan($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function lessThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function greaterThanOrEqualTo($left, $right, $leftType = self::TYPE_IDENTIFIER, $rightType = self::TYPE_VALUE);
+    public function like($identifier, $like);
+    public function literal($literal, $parameter);
+    public function isNull($identifier);
+    public function isNotNull($identifier);
+    public function in($identifier, array $valueSet = array());
+    public function between($identifier, $minValue, $maxValue);
+}
 ]]></programlisting>
     </section>
 
+    <section xml:id="zend.db.sql.examples">
+        <info><title>Examples</title></info>
 
-    <section xml:id="zend.db.sql.examples"><info><title>Examples</title></info>
+        <section xml:id="zend.db.sql.examples.complex-where">
+            <info><title>Complex Where</title></info>
 
-        <section xml:id="zend.db.sql.examples.complex-where"><info><title>Complex Where</title></info>
             <programlisting language="php"><![CDATA[
-            $where = new Zend\Db\Sql\Where();
-            $where->equalTo('id', 1)->OR->equalTo('id', 2);
-            echo $where->getSqlString() // WHERE "id" = '1' OR "id" = '2'
+$where = new Zend\Db\Sql\Where();
+$where->equalTo('id', 1)->OR->equalTo('id', 2);
+echo $where->getSqlString() // WHERE "id" = '1' OR "id" = '2'
 
-            $where = new Zend\Db\Sql\Where();
-            $where->like('name', 'Ralph%')
-                ->OR->NEST->greaterThanOrEqualTo('age', 30)->AND->lessThanOrEqualTo('age', 50)->UNNEST;
-            echo $where->getSqlString() // WHERE "name" LIKE 'Ralph%' OR ("age" >= '30' AND "age" <= '50')
+$where = new Zend\Db\Sql\Where();
+$where->like('name', 'Ralph%')
+      ->OR
+      ->NEST
+            ->greaterThanOrEqualTo('age', 30)
+            ->AND
+            ->lessThanOrEqualTo('age', 50)
+      ->UNNEST;
+echo $where->getSqlString() // WHERE "name" LIKE 'Ralph%' OR ("age" >= '30' AND "age" <= '50')
 ]]></programlisting>
-
         </section>
 
-        <section xml:id="zend.db.sql.examples.select"><info><title>Select Prepare</title></info>
+        <section xml:id="zend.db.sql.examples.select">
+            <info><title>Select Prepare</title></info>
+
             <programlisting language="php"><![CDATA[
-            use Zend\Db\Sql\Select,
-                Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Sql\Select,
+    Zend\Db\ResultSet\ResultSet;
 
-            // instntiate select object
-            $select = new Select;
-            $select->from('artist')
-                ->join('album', 'artist.id = album.artist_id')
-                ->where->like('artist.name', 'Foo%');
+// instantiate select object
+$select = new Select;
+$select->from('artist')
+    ->join('album', 'artist.id = album.artist_id')
+    ->where->like('artist.name', 'Foo%');
 
-            // create a statement to use
-            $statment = $adapter->createStatement();
+// create a statement to use
+$statment = $adapter->createStatement();
 
-            // prepare statement with $select
-            $select->prepareStatement($adapter, $statment);
+// prepare statement with $select
+$select->prepareStatement($adapter, $statment);
 
-            // instantiate a result set for result-as-object iteration
-            $resultSet = new ResultSet();
-            $resultSet->setDataSource($statment->execute());
+// instantiate a result set for result-as-object iteration
+$resultSet = new ResultSet();
+$resultSet->setDataSource($statment->execute());
 
-            $albums = array();
-            foreach ($resultSet as $row) {
-                $albums[] = $row->title;
-            }
-            ]]></programlisting>
+$albums = array();
+foreach ($resultSet as $row) {
+    $albums[] = $row->title;
+}
+]]></programlisting>
         </section>
-
     </section>
-
 </section>
-
-
-
-
-
-
-
-
-

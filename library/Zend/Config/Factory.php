@@ -43,10 +43,11 @@ abstract class Factory
     /**
      * Read a config from a file.
      *
-     * @param string $filename
-     * @return array
+     * @param string  $filename
+     * @param boolean $returnConfigObject 
+     * @return array|Config
      */
-    public static function fromFile($filename)
+    public static function fromFile($filename, $returnConfigObject = false)
     {
         $pathinfo = pathinfo($filename);
         
@@ -64,29 +65,32 @@ abstract class Factory
                 throw new Exception\RuntimeException(sprintf('Filename "%s" is either not a file or not readable', $filename));
             }
             
-            return include $filename;
+            $config = include $filename;
         } elseif (isset(self::$readers[$extension])) {
             if (is_string(self::$readers[$extension])) {
                 $classname = __NAMESPACE__ . '\\Reader\\' . self::$readers[$extension];
                 self::$readers[$extension] = new $classname();
             }
             
-            return self::$readers[$extension]->fromFile($filename);
+            $config = self::$readers[$extension]->fromFile($filename);
         } else {
             throw new Exception\RuntimeException(sprintf(
                 'Unsupported config file extension: .%s',
                 $pathinfo['extension']
             ));
         }
+
+        return ($returnConfigObject) ? new Config($config) : $config;
     }
 
     /**
      * Read configuration from multiple files and merge them.
      *
-     * @param  array $files
-     * @return array
+     * @param array   $files
+     * @param boolean $returnConfigObject 
+     * @return array|Config
      */
-    public static function fromFiles(array $files)
+    public static function fromFiles(array $files, $returnConfigObject = false)
     {
         $config = array();
 
@@ -94,6 +98,6 @@ abstract class Factory
             $config = array_replace_recursive($config, self::fromFile($file));
         }
 
-        return $config;
+        return ($returnConfigObject) ? new Config($config) : $config;
     }
 }

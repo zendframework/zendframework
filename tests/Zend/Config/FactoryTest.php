@@ -100,6 +100,25 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('baz', $config['last']['bar']);
     }
 
+    public function testReturnsConfigObjectIfRequestedAndArrayOtherwise()
+    {
+        $files = array (
+            __DIR__ . '/TestAssets/Ini/include-base.ini',
+        );
+        
+        $configArray = Factory::fromFile($files[0]);
+        $this->assertTrue(is_array($configArray));
+
+        $configArray = Factory::fromFiles($files);
+        $this->assertTrue(is_array($configArray));
+
+        $configObject = Factory::fromFile($files[0], true);
+        $this->assertInstanceOf('Zend\Config\Config', $configObject);
+
+        $configObject = Factory::fromFiles($files, true);
+        $this->assertInstanceOf('Zend\Config\Config', $configObject);
+    }
+
     public function testNonExistentFileThrowsRuntimeException()
     {
         $this->setExpectedException('RuntimeException');

@@ -51,28 +51,28 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testXMLHasNoEtagsWhenUsingV1() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 1, null);
         $this->assertNull($domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName));
     }
 
     public function testXMLHasNoEtagsWhenUsingV1X() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 1, 1);
         $this->assertNull($domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName));
     }
 
     public function testXMLHasEtagsWhenUsingV2() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 2, null);
         $this->assertEquals($etagData, $domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName)->nodeValue);
     }
 
     public function testXMLHasEtagsWhenUsingV2X() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->entry->setEtag($etagData);
         $domNode = $this->entry->getDOM(null, 2, 1);
         $this->assertEquals($etagData, $domNode->attributes->getNamedItemNS($this->gdNamespace, $this->etagLocalName)->nodeValue);

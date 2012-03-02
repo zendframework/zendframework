@@ -53,7 +53,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testXMLHasNoEtagsWhenUsingV1() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 1, null);
         $this->assertNull(
@@ -62,7 +62,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testXMLHasNoEtagsWhenUsingV1X() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 1, 1);
         $this->assertNull(
@@ -71,7 +71,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testXMLHasEtagsWhenUsingV2() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 2, null);
         $this->assertEquals(
@@ -81,7 +81,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testXMLHasEtagsWhenUsingV2X() {
-        $etagData = 'Quux';
+        $etagData = Etag::fromString('Quux');
         $this->feed->setEtag($etagData);
         $domNode = $this->feed->getDOM(null, 2, 1);
         $this->assertEquals(

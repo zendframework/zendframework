@@ -29,7 +29,6 @@ namespace Zend\GData;
  * Service class for interacting with the services which use the EXIF extensions
  * @link http://code.google.com/apis/picasaweb/reference.html#exif_reference
  *
- * @uses       \Zend\GData\GData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif

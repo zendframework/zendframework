@@ -33,9 +33,20 @@ use Zend\Db\Adapter\Adapter,
  */
 abstract class AbstractTableGateway extends TableGateway
 {
+    /**
+     *
+     * @var boolean
+     */
     protected $initialized = false;
+    /**
+     *
+     * @var boolean
+     */
     protected $lazyInitialize = false;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->setup();
@@ -43,7 +54,11 @@ abstract class AbstractTableGateway extends TableGateway
             $this->initialize();
         }
     }
-
+    /**
+     * Set adapter
+     * 
+     * @param Adapter $adapter 
+     */
     public function setAdapter(Adapter $adapter)
     {
         $this->adapter = $adapter;
@@ -56,7 +71,11 @@ abstract class AbstractTableGateway extends TableGateway
     {
         // filled in by the child class
     }
-
+    /**
+     * Initialize
+     * 
+     * @return null 
+     */
     public function initialize()
     {
         if ($this->initialized == true) {
@@ -83,31 +102,49 @@ abstract class AbstractTableGateway extends TableGateway
         $this->initializeSqlObjects();
         $this->initialized = true;
     }
-
+    /**
+     * Select
+     * 
+     * @param  string $where
+     * @return type 
+     */
     public function select($where = null)
     {
         $this->initialize();
         return parent::select($where);
     }
-
+    /**
+     * Insert
+     * 
+     * @param type $set
+     * @return type 
+     */
     public function insert($set)
     {
         $this->initialize();
         return parent::insert($set);
     }
-
+    /**
+     * Update
+     * 
+     * @param  string $set
+     * @param  string $where
+     * @return type 
+     */
     public function update($set, $where)
     {
         $this->initialize();
         return parent::update($set, $where);
     }
-
+    /**
+     * Delete
+     * 
+     * @param  string $where
+     * @return type 
+     */
     public function delete($where)
     {
         $this->initialize();
         return parent::delete($where);
     }
-
-
-
 }

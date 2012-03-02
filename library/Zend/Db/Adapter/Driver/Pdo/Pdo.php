@@ -67,24 +67,43 @@ class Pdo implements DriverInterface
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 
+    /**
+     * Register connection
+     * 
+     * @param  Connection $connection
+     * @return Pdo 
+     */
     public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
         return $this;
     }
-
+    /**
+     * Register statement prototype
+     * 
+     * @param Statement $statementPrototype 
+     */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
     }
-
+    /**
+     * Register result prototype
+     * 
+     * @param Result $resultPrototype 
+     */
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
     }
-
+    /**
+     * Get database platform name
+     * 
+     * @param  string $nameFormat
+     * @return string 
+     */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
         $name = $this->getConnection()->getResource()->getAttribute(\PDO::ATTR_DRIVER_NAME);
@@ -101,7 +120,9 @@ class Pdo implements DriverInterface
             }
         }
     }
-    
+    /**
+     * Check environment
+     */
     public function checkEnvironment()
     {
         if (!extension_loaded('PDO')) {

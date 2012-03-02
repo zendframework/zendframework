@@ -51,6 +51,11 @@ class Statement implements StatementInterface
      */
     protected $sql = '';
 
+    /**
+     * Parameter container
+     * 
+     * @var ParameterContainerInterface 
+     */
     protected $parameterContainer = null;
     
     /**
@@ -58,43 +63,81 @@ class Statement implements StatementInterface
      */
     protected $resource = null;
 
+    /**
+     * Is prepared
+     * 
+     * @var boolean 
+     */
     protected $isPrepared = false;
 
+    /**
+     * Set driver
+     * 
+     * @param  Mysqli $driver
+     * @return Statement 
+     */
     public function setDriver(Mysqli $driver)
     {
         $this->driver = $driver;
         return $this;
     }
-
+    /**
+     * Initialize
+     * 
+     * @param  \mysqli $mysqli
+     * @return Statement 
+     */
     public function initialize(\mysqli $mysqli)
     {
         $this->mysqli = $mysqli;
         return $this;
     }
-    
+    /**
+     * Set sql
+     * 
+     * @param  string $sql
+     * @return Statement 
+     */
     public function setSql($sql)
     {
         $this->sql = $sql;
         return $this;
     }
-    
+    /**
+     * Set Parameter container
+     * 
+     * @param ParameterContainerInterface $parameterContainer 
+     */
     public function setParameterContainer(ParameterContainerInterface $parameterContainer)
     {
         $this->parameterContainer = $parameterContainer;
     }
-
+    /**
+     * Get resource
+     * 
+     * @return mixed 
+     */
     public function getResource()
     {
         return $this->resource;
     }
-
+    /**
+     * Set resource
+     * 
+     * @param  \mysqli_stmt $mysqliStatement
+     * @return Statement 
+     */
     public function setResource(\mysqli_stmt $mysqliStatement)
     {
         $this->resource = $mysqliStatement;
         $this->isPrepared = true;
         return $this;
     }
-
+    /**
+     * Get sql
+     * 
+     * @return string 
+     */
     public function getSQL()
     {
         return $this->sql;
@@ -139,6 +182,12 @@ class Statement implements StatementInterface
         $this->isPrepared = true;
     }
 
+    /**
+     * Execute
+     * 
+     * @param  ParameterContainer $parameters
+     * @return mixed 
+     */
     public function execute($parameters = null)
     {
         if (!$this->isPrepared) {
@@ -164,7 +213,11 @@ class Statement implements StatementInterface
         $result = $this->driver->createResult($this->resource);
         return $result;
     }
-    
+    /**
+     * Bind parameters from container
+     * 
+     * @param ParameterContainerInterface $pContainer 
+     */
     protected function bindParametersFromContainer(ParameterContainerInterface $pContainer)
     {
         $parameters = $pContainer->toArray();

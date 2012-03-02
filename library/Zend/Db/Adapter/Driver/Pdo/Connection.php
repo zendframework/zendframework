@@ -114,7 +114,12 @@ class Connection implements ConnectionInterface
         $r = $result->fetch_row();
         return $r[0];
     }
-
+    /**
+     * Set resource
+     * 
+     * @param  \PDO $resource
+     * @return Connection 
+     */
     public function setResource(\PDO $resource)
     {
         $this->resource = $resource;
@@ -301,7 +306,11 @@ class Connection implements ConnectionInterface
         $statement = $this->driver->createStatement($sql);
         return $statement;
     }
-
+    /**
+     * Get last generated id
+     * 
+     * @return integer 
+     */
     public function getLastGeneratedId()
     {
         return $this->resource->lastInsertId();

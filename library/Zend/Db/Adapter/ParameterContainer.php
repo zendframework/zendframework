@@ -32,9 +32,24 @@ use Iterator;
  */
 class ParameterContainer implements Iterator, ParameterContainerInterface
 {
+    /**
+     * Data
+     * 
+     * @var array
+     */
     protected $data = array();
+    /**
+     * Errata
+     * 
+     * @var array 
+     */
     protected $errata = array();
 
+    /**
+     * Constructor
+     * 
+     * @param array $data 
+     */
     public function __construct(array $data = array())
     {
         if ($data) {
@@ -42,16 +57,34 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         }
     }
 
+    /**
+     * Offset exists
+     * 
+     * @param  string $nameOrPosition
+     * @return boolean 
+     */
     public function offsetExists($nameOrPosition)
     {
         return (isset($this->data[$nameOrPosition]));
     }
-
+    /**
+     * Offset get
+     * 
+     * @param  string $nameOrPosition
+     * @return mixed 
+     */
     public function offsetGet($nameOrPosition)
     {
         return $this->data[$nameOrPosition];
     }
 
+    /**
+     * Offset set
+     * 
+     * @param string|integer $nameOrPosition
+     * @param mixed $value
+     * @param mixed $errata 
+     */
     public function offsetSet($nameOrPosition, $value, $errata = null)
     {
         if ($nameOrPosition === null) {
@@ -68,12 +101,24 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         }
     }
 
+    /**
+     * Offset unset
+     * 
+     * @param  string $nameOrPosition
+     * @return ParameterContainer 
+     */
     public function offsetUnset($nameOrPosition)
     {
         unset($this->data[$nameOrPosition]);
         return $this;
     }
 
+    /**
+     * Set from array
+     * 
+     * @param  array $data
+     * @return ParameterContainer 
+     */
     public function setFromArray(Array $data)
     {
         foreach ($data as $n => $v) {
@@ -81,7 +126,12 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         }
         return $this;
     }
-
+    /**
+     * Offset set errata
+     * 
+     * @param string|integer $nameOrPosition
+     * @param mixed $errata 
+     */
     public function offsetSetErrata($nameOrPosition, $errata)
     {
         if (!array_key_exists($nameOrPosition, $this->errata)) {
@@ -89,7 +139,13 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         }
         $this->errata[$nameOrPosition] = $errata;
     }
-
+    
+    /**
+     * Offset get errata
+     * 
+     * @param  string|integer $nameOrPosition
+     * @return mixed 
+     */
     public function offsetGetErrata($nameOrPosition)
     {
         if (!array_key_exists($nameOrPosition, $this->errata)) {
@@ -97,7 +153,12 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         }
         return $this->errata[$nameOrPosition];
     }
-
+    /**
+     * Offset has errata
+     * 
+     * @param  string|integer $nameOrPosition
+     * @return boolean 
+     */
     public function offsetHasErrata($nameOrPosition)
     {
         if (!array_key_exists($nameOrPosition, $this->errata)) {
@@ -106,6 +167,11 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         return (isset($this->errata[$nameOrPosition]));
     }
 
+    /**
+     * Offset unset errata
+     * 
+     * @param string|integer $nameOrPosition 
+     */
     public function offsetUnsetErrata($nameOrPosition)
     {
         if (!array_key_exists($nameOrPosition, $this->errata)) {
@@ -114,41 +180,79 @@ class ParameterContainer implements Iterator, ParameterContainerInterface
         $this->errata[$nameOrPosition] = null;
     }
 
+    /**
+     * Get errata iterator
+     * 
+     * @return \ArrayIterator 
+     */
     public function getErrataIterator()
     {
         return new \ArrayIterator($this->errata);
     }
 
+    /**
+     * toArray
+     * 
+     * @return array 
+     */
     public function toArray()
     {
         return $this->data;
     }
 
+    /**
+     * count
+     * 
+     * @return integer 
+     */
     public function count()
     {
         return count($this->data);
     }
 
+    /**
+     * Current
+     * 
+     * @return mixed 
+     */
     public function current()
     {
         return current($this->data);
     }
 
+    /**
+     * Next
+     * 
+     * @return mixed 
+     */    
     public function next()
     {
         return next($this->data);
     }
 
+    /**
+     * Key
+     * 
+     * @return mixed 
+     */
     public function key()
     {
         return key($this->data);
     }
 
+    /**
+     * Valid
+     * 
+     * @return boolean 
+     */
     public function valid()
     {
         return (current($this->data) !== false);
     }
 
+    /**
+     * Rewind
+     */
     public function rewind()
     {
         reset($this->data);

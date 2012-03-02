@@ -30,17 +30,30 @@ namespace Zend\Db\Metadata\Display;
  */
 class TextUi
 {
-    
+    /**
+     *
+     * @var 
+     */
     protected $camelCaseFilter = null;
 
-    
+    /**
+     * Render
+     * 
+     * @param  \Zend\Db\Metadata\Metadata $metadata
+     * @return string 
+     */
     public function render(\Zend\Db\Metadata\Metadata $metadata)
     {
         $output = '';
         $output .= $this->renderTables($metadata->getTables());
         return $output;
     }
-    
+    /**
+     * Render tables
+     * 
+     * @param  array $tables
+     * @return string 
+     */
     public function renderTables(array $tables)
     {
         $output = '';
@@ -49,7 +62,12 @@ class TextUi
         }
         return $output;
     }
-    
+    /**
+     * Render table
+     * 
+     * @param  \Zend\Db\Metadata\Table $table
+     * @return string 
+     */
     public function renderTable(\Zend\Db\Metadata\Table $table)
     {
         $output = '';
@@ -58,7 +76,12 @@ class TextUi
         $output .= $this->renderConstraints($table->getConstraintCollection()) . "\n\n";
         return $output;
     }
-    
+    /**
+     * Render columns
+     * 
+     * @param  \Zend\Db\Metadata\ColumnCollection $columnCollection
+     * @return string 
+     */
     public function renderColumns(\Zend\Db\Metadata\ColumnCollection $columnCollection)
     {
         $columnAttributes = array(
@@ -108,7 +131,12 @@ class TextUi
         
         return 'Columns' . PHP_EOL . $table->render();
     }
-    
+    /**
+     * Render constraints
+     * 
+     * @param  \Zend\Db\Metadata\ConstraintCollection $constraints
+     * @return string 
+     */
     public function renderConstraints(\Zend\Db\Metadata\ConstraintCollection $constraints)
     {
         $rows = array();

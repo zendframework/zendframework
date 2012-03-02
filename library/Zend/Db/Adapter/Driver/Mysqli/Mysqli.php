@@ -69,6 +69,12 @@ class Mysqli implements DriverInterface
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
 
+    /**
+     * Register connection
+     * 
+     * @param  Connection $connection
+     * @return Mysqli 
+     */
     public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
@@ -76,17 +82,33 @@ class Mysqli implements DriverInterface
         return $this;
     }
 
+    /**
+     * Register statement prototype
+     * 
+     * @param Statement $statementPrototype 
+     */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this); // needs access to driver to createResult()
     }
 
+    /**
+     * Register result prototype
+     * 
+     * @param Result $resultPrototype 
+     */
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
     }
 
+    /**
+     * Get database platform name
+     * 
+     * @param  string $nameFormat
+     * @return string 
+     */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
@@ -96,6 +118,9 @@ class Mysqli implements DriverInterface
         }
     }
     
+    /**
+     * Check environment
+     */
     public function checkEnvironment()
     {
         if (!extension_loaded('mysqli')) {

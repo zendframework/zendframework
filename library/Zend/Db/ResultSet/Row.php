@@ -32,6 +32,9 @@ use ArrayObject;
  */
 class Row extends ArrayObject implements RowObjectInterface
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct(array(), ArrayObject::ARRAY_AS_PROPS);

@@ -45,8 +45,20 @@ class Statement implements StatementInterface
      * @var Pdo
      */
     protected $driver = null;
+    /**
+     *
+     * @var string
+     */
     protected $sql = '';
+    /**
+     *
+     * @var boolean 
+     */
     protected $isQuery = null;
+    /**
+     *
+     * @var ParameterContainer 
+     */
     protected $parameterContainer = null;
     
     /**
@@ -54,14 +66,28 @@ class Statement implements StatementInterface
      */
     protected $resource = null;
 
+    /**
+     *
+     * @var boolean
+     */
     protected $isPrepared = false;
-
+    /**
+     * Set driver
+     * 
+     * @param  Pdo $driver
+     * @return Statement 
+     */
     public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
         return $this;
     }
-
+    /**
+     * Initialize
+     * 
+     * @param  \PDO $connectionResource
+     * @return Statement 
+     */
     public function initialize(\PDO $connectionResource)
     {
         $this->pdo = $connectionResource;
@@ -74,13 +100,22 @@ class Statement implements StatementInterface
         $this->parameterContainer = $parameterContainer;
     }
     */
-
+    /**
+     * Set resource
+     * 
+     * @param  \PDOStatement $pdoStatement
+     * @return Statement 
+     */
     public function setResource(\PDOStatement $pdoStatement)
     {
         $this->resource = $pdoStatement;
         return $this;
     }
-    
+    /**
+     * Get resource
+     * 
+     * @return mixed 
+     */
     public function getResource()
     {
         return $this->resource;
@@ -88,6 +123,8 @@ class Statement implements StatementInterface
 
 
     /**
+     * Set sql
+     * 
      * @param string $sql
      */
     public function setSql($sql)
@@ -95,12 +132,15 @@ class Statement implements StatementInterface
         $this->sql = $sql;
         return $this;
     }
-
+    /**
+     * Get sql
+     * 
+     * @return string 
+     */
     public function getSql()
     {
         return $this->sql;
     }
-
 
     /**
      * @param ParameterContainerInterface $parameterContainer
@@ -183,7 +223,11 @@ class Statement implements StatementInterface
         return $result;
     }
 
-
+    /**
+     * Bind parameters from container
+     * 
+     * @param ParameterContainerInterface $container 
+     */
     protected function bindParametersFromContainer(ParameterContainerInterface $container)
     {
         $parameters = $container->toArray();

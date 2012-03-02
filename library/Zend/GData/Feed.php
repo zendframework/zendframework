@@ -92,7 +92,7 @@ class Feed extends App\Feed
             if ($this->_etag != null) {
                 $element->setAttributeNS($this->lookupNamespace('gd'),
                                          'gd:etag',
-                                         $this->_etag);
+                                         $this->_etag->getFieldValue());
             }
         }
 
@@ -147,7 +147,7 @@ class Feed extends App\Feed
             if (!($this->_etag instanceof Etag)) {
                 $this->_etag = $etag;
             }
-            elseif ($this->_etag != $etag) {
+            elseif ($this->_etag->getFieldValue() != $etag) {
                 throw new App\IOException("ETag mismatch");
             }
             break;

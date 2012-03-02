@@ -98,14 +98,14 @@ class Select implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
-    /**
+    /*
      * @todo do Union
      * @throws \RuntimeException Unimplemented
-     */
     public function union($select = array(), $type = self::SQL_UNION)
     {
         throw new \RuntimeException(sprintf('%s is not yet implemented'), __METHOD__);
     }
+     */
 
     /**
      * Create join clause

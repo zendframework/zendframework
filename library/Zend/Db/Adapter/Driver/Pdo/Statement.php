@@ -176,7 +176,6 @@ class Statement implements StatementInterface
 
         if ($this->resource === false) {
             $error = $this->pdo->errorInfo();
-            var_dump($error);
             throw new \Exception($error[2]);
         }
 

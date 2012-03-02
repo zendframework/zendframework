@@ -64,8 +64,15 @@ class TableGateway implements TableGatewayInterface
 
     public function __construct($tableName, Adapter $adapter, $databaseSchema = null, ResultSet $selectResultPrototype = null)
     {
-        $this->setTableName($tableName);
-        $this->setAdapter($adapter);
+        if (!is_string($tableName)) {
+            throw new \InvalidArgumentException('Table name must be a string');
+        }
+        $this->tableName = $tableName;
+        $this->adapter = $adapter;
+
+        // perhaps this might be useful, but not right now, the primary injection is ctor injection
+        // $this->setTableName($tableName);
+        // $this->setAdapter($adapter);
 
         if (is_string($databaseSchema)) {
             $this->databaseSchema = $databaseSchema;
@@ -74,34 +81,14 @@ class TableGateway implements TableGatewayInterface
         $this->initializeSqlObjects();
     }
 
-    public function setTableName($tableName)
-    {
-        $this->tableName = $tableName;
-        return $this;
-    }
-
     public function getTableName()
     {
         return $this->tableName;
     }
 
-    public function setAdapter(Adapter $adapter)
-    {
-        $this->adapter = $adapter;
-        return $this;
-    }
-
     public function getAdapter()
     {
         return $this->adapter;
-    }
-
-    /**
-     * @param null|string $databaseSchema
-     */
-    public function setDatabaseSchema($databaseSchema)
-    {
-        $this->databaseSchema = $databaseSchema;
     }
 
     /**

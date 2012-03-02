@@ -32,10 +32,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->mockDriver = $this->getMock(
-            'Zend\Db\Adapter\Driver\DriverInterface',
-            array('getDatabasePlatformName', 'checkEnvironment', 'getConnection', 'createStatement', 'createResult', 'getPrepareType', 'formatParameterName')
-        );
+        $this->mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
         $this->mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
         $this->mockDriver->expects($this->any())->method('checkEnvironment')->will($this->returnValue(true));
         $this->mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($this->mockConnection));

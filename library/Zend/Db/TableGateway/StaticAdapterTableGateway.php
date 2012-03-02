@@ -2,7 +2,8 @@
 
 namespace Zend\Db\TableGateway;
 
-use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\Adapter,
+    Zend\Db\ResultSet\ResultSet;
 
 class StaticAdapterTableGateway extends TableGateway
 {

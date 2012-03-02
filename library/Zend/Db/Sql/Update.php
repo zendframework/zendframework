@@ -83,6 +83,7 @@ class Update implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /*
     public function isValid($throwException = self::VALID_RETURN_BOOLEAN)
     {
         if ($this->table == null || !is_string($this->table)) {
@@ -102,6 +103,7 @@ class Update implements SqlInterface, PreparableSqlInterface
 
         return true;
     }
+    */
 
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {

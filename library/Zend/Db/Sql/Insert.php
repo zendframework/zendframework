@@ -100,7 +100,8 @@ class Insert implements SqlInterface, PreparableSqlInterface
         return $this->values[$name];
     }
 
-
+    /*
+     * @todo Figure out if validity is something we want?
     public function isValid($throwException = self::VALID_RETURN_BOOLEAN)
     {
         if ($this->table == null || !is_string($this->table)) {
@@ -122,6 +123,7 @@ class Insert implements SqlInterface, PreparableSqlInterface
 
         return true;
     }
+    */
 
     /**
      * @param \Zend\Db\Adapter\Adapter $adapter

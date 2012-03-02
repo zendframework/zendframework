@@ -67,14 +67,14 @@ class Predicate extends PredicateSet
      * Indicate end of nested predicate
      *
      * @return Predicate
-     * @throws \Exception
+     * @throws \RuntimeException
      */
     public function unnest()
     {
         if ($this->unnest == null) {
-            throw new \Exception('Not nested');
+            throw new \RuntimeException('Not nested');
         }
-        $unnset = $this->unnest;
+        $unnset       = $this->unnest;
         $this->unnest = null;
         return $unnset;
     }
@@ -300,7 +300,7 @@ class Predicate extends PredicateSet
     public function between($identifier, $minValue, $maxValue)
     {
         $this->addPredicate(
-            new In($identifier, $minValue, $maxValue),
+            new Between($identifier, $minValue, $maxValue),
             ($this->nextPredicateCombineOperator) ?: $this->defaultCombination
         );
         $this->nextPredicateCombineOperator = null;
@@ -314,7 +314,7 @@ class Predicate extends PredicateSet
      * Overloads "or", "and", "nest", and "unnest"
      * 
      * @param  string $name 
-     * @return mixed
+     * @return Predicate
      */
     public function __get($name)
     {

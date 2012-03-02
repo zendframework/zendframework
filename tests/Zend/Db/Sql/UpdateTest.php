@@ -9,7 +9,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Update
      */
-    protected $object;
+    protected $update;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Update;
+        $this->update = new Update;
     }
 
     /**
@@ -30,50 +30,82 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Update::table
-     * @todo   Implement testTable().
      */
     public function testTable()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->update->table('foo', 'bar');
+        $this->assertEquals('foo', $this->readAttribute($this->update, 'table'));
+        $this->assertEquals('bar', $this->readAttribute($this->update, 'databaseOrSchema'));
     }
 
     /**
      * @covers Zend\Db\Sql\Update::set
-     * @todo   Implement testSet().
      */
     public function testSet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->update->set(array('foo' => 'bar'));
+        $this->assertEquals(array('foo' => 'bar'), $this->readAttribute($this->update, 'set'));
     }
 
     /**
      * @covers Zend\Db\Sql\Update::where
-     * @todo   Implement testWhere().
      */
     public function testWhere()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->update->where('x = y');
+        $this->update->where(array('foo > ?' => 5));
+        $this->update->where(array('id' => 2));
+        $this->update->where(array('a = b'), Where::OP_OR);
+        $where = $this->update->where;
+
+        $predicates = $this->readAttribute($where, 'predicates');
+        $this->assertEquals('AND', $predicates[0][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+
+        $this->assertEquals('AND', $predicates[1][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[1][1]);
+
+        $this->assertEquals('AND', $predicates[2][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
+
+        $this->assertEquals('OR', $predicates[3][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[3][1]);
+
+        $where = new Where;
+        $this->update->where($where);
+        $this->assertSame($where, $this->update->where);
+
+        $test = $this;
+        $this->update->where(function ($what) use ($test, $where) {
+            $test->assertSame($where, $what);
+        });
     }
 
     /**
      * @covers Zend\Db\Sql\Update::prepareStatement
-     * @todo   Implement testPrepareStatement().
      */
     public function testPrepareStatement()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('UPDATE "foo" SET "bar" = ?'));
+        $mockStatement->expects($this->at(4))
+            ->method('setSql')
+            ->with($this->equalTo(' WHERE x = y'));
+
+        $this->update->table('foo')
+            ->set(array('bar' => 'baz'))
+            ->where('x = y');
+
+        $this->update->prepareStatement($mockAdapter, $mockStatement);
     }
 
     /**
@@ -82,9 +114,10 @@ class UpdateTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->update->table('foo')
+            ->set(array('bar' => 'baz'))
+            ->where('x = y');
+
+        $this->assertEquals('UPDATE "foo" SET "bar" = \'baz\' WHERE x = y', $this->update->getSqlString());
     }
 }

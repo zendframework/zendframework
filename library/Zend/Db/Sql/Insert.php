@@ -1,4 +1,23 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Sql
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Db\Sql;
 
@@ -8,6 +27,13 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Platform\Sql92,
     Zend\Db\Adapter\ParameterContainer;
 
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Sql
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Insert implements SqlInterface, PreparableSqlInterface
 {
     const VALUES_MERGE = 'merge';
@@ -15,9 +41,9 @@ class Insert implements SqlInterface, PreparableSqlInterface
 
     protected $specification = 'INSERT INTO %1$s (%2$s) VALUES (%3$s)';
 
-    protected $databaseOrSchema = null;
-
     protected $table = null;
+
+    protected $databaseOrSchema = null;
 
     protected $columns = array();
 
@@ -70,64 +96,10 @@ class Insert implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
-    public function __set($name, $value)
-    {
-        $values = array($name => $value);
-        $this->values($values, self::VALUES_MERGE);
-        return $this;
-    }
-
-    public function __unset($name)
-    {
-        if (!($position = array_search($name, $this->columns))) {
-            throw new \InvalidArgumentException('Not in statement');
-        }
-
-        unset($this->columns[$position]);
-        unset($this->values[$name]);
-    }
-
-    public function __isset($name)
-    {
-        return in_array($name, $this->columns);
-    }
-
-    public function __get($name)
-    {
-        if (!($position = array_search($name, $this->columns))) {
-            throw new \InvalidArgumentException('Not in statement');
-        }
-        return $this->values[$name];
-    }
-
-    /*
-     * @todo Figure out if validity is something we want?
-    public function isValid($throwException = self::VALID_RETURN_BOOLEAN)
-    {
-        if ($this->table == null || !is_string($this->table)) {
-            if ($throwException) throw new \Exception('A valid table name is required');
-            return false;
-        }
-
-        if (count($this->values) == 0) {
-            if ($throwException) throw new \Exception('Values are required for this insert object to be valid');
-            return false;
-        }
-
-        if (count($this->columns) > 0 && count($this->columns) != count($this->values)) {
-            if ($throwException) {
-                throw new \Exception('When columns are present, there needs to be an equal number of columns and values');
-            }
-            return false;
-        }
-
-        return true;
-    }
-    */
 
     /**
-     * @param \Zend\Db\Adapter\Adapter $adapter
-     * @return \Zend\Db\Adapter\Driver\StatementInterface
+     * @param Adapter $adapter
+     * @param StatementInterface $statement
      */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
@@ -147,7 +119,7 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $values  = array();
 
         foreach ($this->columns as $cIndex => $column) {
-            $columns[$cIndex] = $column;
+            $columns[$cIndex] = $platform->quoteIdentifier($column);
             if ($prepareType == 'positional') {
                 $parameterContainer->offsetSet(null, $this->values[$cIndex]);
                 $values[$cIndex] = $driver->formatParameterName(null);
@@ -182,5 +154,34 @@ class Insert implements SqlInterface, PreparableSqlInterface
 
 
 
+    public function __set($name, $value)
+    {
+        $values = array($name => $value);
+        $this->values($values, self::VALUES_MERGE);
+        return $this;
+    }
+
+    public function __unset($name)
+    {
+        if (($position = array_search($name, $this->columns)) === false) {
+            throw new \InvalidArgumentException('The key ' . $name . ' was not found in this objects column list');
+        }
+
+        unset($this->columns[$position]);
+        unset($this->values[$position]);
+    }
+
+    public function __isset($name)
+    {
+        return in_array($name, $this->columns);
+    }
+
+    public function __get($name)
+    {
+        if (($position = array_search($name, $this->columns)) === false) {
+            throw new \InvalidArgumentException('The key ' . $name . ' was not found in this objects column list');
+        }
+        return $this->values[$position];
+    }
 
 }

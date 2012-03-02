@@ -9,7 +9,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Delete
      */
-    protected $object;
+    protected $delete;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Delete;
+        $this->delete = new Delete;
     }
 
     /**
@@ -34,10 +34,9 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
      */
     public function testFrom()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->delete->from('foo', 'bar');
+        $this->assertEquals('foo', $this->readAttribute($this->delete, 'table'));
+        $this->assertEquals('bar', $this->readAttribute($this->delete, 'databaseOrSchema'));
     }
 
     /**
@@ -46,45 +45,65 @@ class DeleteTest extends \PHPUnit_Framework_TestCase
      */
     public function testWhere()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+        $this->delete->where('x = y');
+        $this->delete->where(array('foo > ?' => 5));
+        $this->delete->where(array('id' => 2));
+        $this->delete->where(array('a = b'), Where::OP_OR);
+        $where = $this->delete->where;
 
-    /**
-     * @covers Zend\Db\Sql\Delete::isValid
-     * @todo   Implement testIsValid().
-     */
-    public function testIsValid()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $predicates = $this->readAttribute($where, 'predicates');
+        $this->assertEquals('AND', $predicates[0][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[0][1]);
+
+        $this->assertEquals('AND', $predicates[1][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[1][1]);
+
+        $this->assertEquals('AND', $predicates[2][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Operator', $predicates[2][1]);
+
+        $this->assertEquals('OR', $predicates[3][0]);
+        $this->assertInstanceOf('Zend\Db\Sql\Predicate\Literal', $predicates[3][1]);
+
+        $where = new Where;
+        $this->delete->where($where);
+        $this->assertSame($where, $this->delete->where);
+
+        $test = $this;
+        $this->delete->where(function ($what) use ($test, $where) {
+            $test->assertSame($where, $what);
+        });
     }
 
     /**
      * @covers Zend\Db\Sql\Delete::prepareStatement
-     * @todo   Implement testPrepareStatement().
      */
     public function testPrepareStatement()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockStatement->expects($this->at(0))
+            ->method('setSql')
+            ->with($this->equalTo('DELETE FROM "foo"'));
+        $mockStatement->expects($this->at(3))
+            ->method('setSql')
+            ->with($this->equalTo(' WHERE x = y'));
+
+        $this->delete->from('foo')
+            ->where('x = y');
+
+        $this->delete->prepareStatement($mockAdapter, $mockStatement);
     }
 
     /**
      * @covers Zend\Db\Sql\Delete::getSqlString
-     * @todo   Implement testGetSqlString().
      */
     public function testGetSqlString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->delete->from('foo')
+            ->where('x = y');
+        $this->assertEquals('DELETE FROM "foo" WHERE x = y', $this->delete->getSqlString());
+
     }
 }

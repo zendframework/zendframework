@@ -122,9 +122,10 @@ class ResultSetTest extends TestCase
 
     public function testCanProvideIteratorAggregateAsDataSource()
     {
-        $it = new TestAsset\AggregateDataSource(new SplStack);
-        $this->set->setDataSource($it);
-        $this->assertSame($it->getIterator(), $this->set->getDataSource());
+        $iteratorAggregate = $this->getMock('IteratorAggregate', array('getIterator'), array(new SplStack));
+        $iteratorAggregate->expects($this->any())->method('getIterator')->will($this->returnValue($iteratorAggregate));
+        $this->set->setDataSource($iteratorAggregate);
+        $this->assertSame($iteratorAggregate->getIterator(), $this->set->getDataSource());
     }
 
     /**

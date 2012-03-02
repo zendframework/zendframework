@@ -1,4 +1,23 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Adapter
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
@@ -6,7 +25,13 @@ use Zend\Db\Adapter\Driver\ConnectionInterface,
     Zend\Db\Adapter\Driver\DriverInterface,
     Zend\Db\Adapter\Exception\InvalidQueryException;
 
-
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Adapter
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Connection implements ConnectionInterface
 {
     /**
@@ -18,7 +43,7 @@ class Connection implements ConnectionInterface
      * @var array
      */
     protected $connectionParameters = array();
-    
+
     /**
      * @var \PDO
      */
@@ -215,7 +240,7 @@ class Connection implements ConnectionInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-        
+
         $this->resource->commit();
         $this->inTransaction = false;
         return $this;
@@ -230,15 +255,15 @@ class Connection implements ConnectionInterface
         if (!$this->isConnected()) {
             throw new \Exception('Must be connected before you can rollback');
         }
-        
+
         if (!$this->inTransaction) {
             throw new \Exception('Must call commit() before you can rollback');
         }
-        
+
         $this->resource->rollBack();
         return $this;
     }
-    
+
     /**
      * @param $sql
      * @return Result
@@ -249,9 +274,9 @@ class Connection implements ConnectionInterface
         if (!$this->isConnected()) {
             $this->connect();
         }
-        
+
         $resultResource = $this->resource->query($sql);
-        
+
         if ($resultResource === false) {
             $errorInfo = $this->resource->errorInfo();
             throw new InvalidQueryException($errorInfo[2]);
@@ -261,7 +286,7 @@ class Connection implements ConnectionInterface
         return $result;
 
     }
-    
+
     /**
      * @todo PDO_SQLite does not support scrollable cursors; make this configurable based on dsn?
      * @param string $sql

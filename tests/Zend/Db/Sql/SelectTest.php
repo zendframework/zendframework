@@ -134,7 +134,6 @@ class SelectTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Select::__get
-     * @todo   Implement test__get().
      */
     public function test__get()
     {

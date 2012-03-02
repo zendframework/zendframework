@@ -9,7 +9,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Insert
      */
-    protected $object;
+    protected $insert;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -17,7 +17,7 @@ class InsertTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Insert;
+        $this->insert = new Insert;
     }
 
     /**
@@ -30,98 +30,55 @@ class InsertTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Zend\Db\Sql\Insert::into
-     * @todo   Implement testInto().
      */
     public function testInto()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->insert->into('table', 'schema');
+        $this->assertEquals('table', $this->readAttribute($this->insert, 'table'));
+        $this->assertEquals('schema', $this->readAttribute($this->insert, 'databaseOrSchema'));
     }
 
     /**
      * @covers Zend\Db\Sql\Insert::columns
-     * @todo   Implement testColumns().
      */
     public function testColumns()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->insert->columns(array('foo', 'bar'));
+        $this->assertEquals(array('foo', 'bar'), $this->readAttribute($this->insert, 'columns'));
     }
 
     /**
      * @covers Zend\Db\Sql\Insert::values
-     * @todo   Implement testValues().
      */
     public function testValues()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->insert->values(array('foo' => 'bar'));
+        $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
     }
 
-    /**
-     * @covers Zend\Db\Sql\Insert::__set
-     * @todo   Implement test__set().
-     */
-    public function test__set()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Zend\Db\Sql\Insert::__unset
-     * @todo   Implement test__unset().
-     */
-    public function test__unset()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Zend\Db\Sql\Insert::__isset
-     * @todo   Implement test__isset().
-     */
-    public function test__isset()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Zend\Db\Sql\Insert::__get
-     * @todo   Implement test__get().
-     */
-    public function test__get()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
 
     /**
      * @covers Zend\Db\Sql\Insert::prepareStatement
-     * @todo   Implement testPrepareStatement().
      */
     public function testPrepareStatement()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockDriver->expects($this->any())->method('getPrepareType')->will($this->returnValue('positional'));
+        $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
+        $mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, array($mockDriver));
+
+        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $pContainer = new \Zend\Db\Adapter\ParameterContainer(array());
+        $mockStatement->expects($this->any())->method('getParameterContainer')->will($this->returnValue($pContainer));
+        $mockStatement->expects($this->at(1))
+            ->method('setSql')
+            ->with($this->equalTo('INSERT INTO "foo" ("bar") VALUES (?)'));
+
+        $this->insert->into('foo')
+            ->values(array('bar' => 'baz'));
+
+        $this->insert->prepareStatement($mockAdapter, $mockStatement);
     }
 
     /**
@@ -130,9 +87,52 @@ class InsertTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSqlString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->insert->into('foo')
+            ->values(array('bar' => 'baz'));
+
+        $this->assertEquals('INSERT INTO "foo" ("bar") VALUES (\'baz\')', $this->insert->getSqlString());
+    }
+
+
+    /**
+     * @covers Zend\Db\Sql\Insert::__set
+     */
+    public function test__set()
+    {
+        $this->insert->foo = 'bar';
+        $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::__unset
+     */
+    public function test__unset()
+    {
+        $this->insert->foo = 'bar';
+        $this->assertEquals(array('foo'), $this->readAttribute($this->insert, 'columns'));
+        $this->assertEquals(array('bar'), $this->readAttribute($this->insert, 'values'));
+        unset($this->insert->foo);
+        $this->assertEquals(array(), $this->readAttribute($this->insert, 'columns'));
+        $this->assertEquals(array(), $this->readAttribute($this->insert, 'values'));
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::__isset
+     */
+    public function test__isset()
+    {
+        $this->insert->foo = 'bar';
+        $this->assertTrue(isset($this->insert->foo));
+    }
+
+    /**
+     * @covers Zend\Db\Sql\Insert::__get
+     * @todo   Implement test__get().
+     */
+    public function test__get()
+    {
+        $this->insert->foo = 'bar';
+        $this->assertEquals('bar', $this->insert->foo);
     }
 }

@@ -781,9 +781,9 @@
                 </xi:fallback>
             </xi:include>
 
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db-TableDataGateway.xml" parse="xml">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="module_specs/Zend_Db-TableGateway.xml" parse="xml">
                 <xi:fallback>
-                    <xi:include href="../en/module_specs/Zend_Db-TableDataGateway.xml" parse="xml"/>
+                    <xi:include href="../en/module_specs/Zend_Db-TableGateway.xml" parse="xml"/>
                 </xi:fallback>
             </xi:include>
         </chapter>

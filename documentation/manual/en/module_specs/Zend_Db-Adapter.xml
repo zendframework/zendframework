@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="zend.db.adapter"><info><title>Zend\Db\Adapter</title></info>
+
+    <para>
+        The Adapter object is the most important sub-component of Zend\Db.
+        It is responsible for adapting any code written in or for Zend\Db
+        to the targeted php extensions and vendor databases.  In doing this,
+        it creates an abstraction layer for the PHP extensions, which is called
+        the "Driver" portion of the Zend\Db adapter.  It also creates a lightweight
+        abstraction layer for the various idiosyncrasies that each vendor specific
+        platform might have in it's SQL/RDBMS implementation which is called the
+        "Platform" portion of the adapter.
+    </para>
+
+    <section xml:id="zend.db.adapter.quickstart"><info><title>Creating an Adapter (Quickstart)</title></info>
+
+        <para>
+            Creating an adapter can simply be done by instantiating the
+            Zend\Db\Adapter\Adapter class.  The most common use case, while not the
+            most explicit, is to pass an array of information to the Adapter.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+            $adapter = new Zend\Db\Adapter\Adapter($driverArray);
+]]></programlisting>
+
+        <para>
+            This driver array is an abstraction for the extension level required
+            parameters.  Here is a table for the
+        </para>
+
+        <table frame='all'><title>Connection Array Keys</title>
+            <!--<tgroup cols="3" align="left">-->
+            <!---->
+            <!--</tgroup>-->
+            <thead>
+                <entry>Name</entry>
+                <entry>Required</entry>
+                <entry>Notes</entry>
+            </thead>
+            <row>
+                <entry>
+                    driver
+                </entry>
+                <entry>
+                    required
+                </entry>
+                <entry>
+                    Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo-OtherPdoDriver
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    database
+                </entry>
+                <entry>
+                    generally required
+                </entry>
+                <entry>
+                    the name of the database (schema)
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    username
+                </entry>
+                <entry>
+                    generally required
+                </entry>
+                <entry>
+                    the connection username
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    password
+                </entry>
+                <entry>
+                    generally required
+                </entry>
+                <entry>
+                    the connection password
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    hostname
+                </entry>
+                <entry>
+                    not generally requried
+                </entry>
+                <entry>
+                    the ip address or hostname to connect to
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    port
+                </entry>
+                <entry>
+                    not generally requried
+                </entry>
+                <entry>
+                    not generally required  the port to connect to (if applicable)
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    characterset
+                </entry>
+                <entry>
+                    not generally requried
+                </entry>
+                <entry>
+                    not generally required  the character set to use
+                </entry>
+            </row>
+        </table>
+
+         <para>
+            * other names will work as well.  Effectively, if the PHP manual
+            uses a particular naming, this naming will be supported by our Driver.
+            For example, dbname in most cases will also work for 'database'.  Another
+            example is that in the case of Sqlsrv, UID will work in place of username.
+            Which format you chose is up to you, but the above table represents the
+            offical abstraction names.
+         </para>
+
+        <para>
+            So, for example, a MySQL connection using ext/mysqli:
+        </para>
+
+            <programlisting language="php"><![CDATA[
+            $adapter = new Zend\Db\Adapter\Adapter(array(
+                'driver' => 'Mysqli',
+                'database' => 'zend_db_example',
+                'username' => 'developer',
+                'password' => 'developer-password'
+            ));
+]]></programlisting>
+
+        <para>
+            Another example, of a Sqlite connection via PDO:
+        </para>
+
+            <programlisting language="php"><![CDATA[
+            $adapter = new Zend\Db\Adapter\Adapter(array(
+                'driver' => 'Pdo_Sqlite',
+                'database' => 'path/to/sqlite.db'
+            ));
+]]></programlisting>
+
+        <para>
+            It is important to know that by using this style of adapter creation, the Adapter
+            will attempt to create any dependencies that were not explicitly provided.  A Driver
+            object will be created from the contents of the $driver array provided in the
+            constructor. A Platform object will be created based off the type of Driver object
+            that was instantiated.  And lastly, a default ResultSet object is created and utilized.
+            Any of these objects can be injected, to do this, see the next section.
+        </para>
+
+
+    </section>
+
+    <section xml:id="zend.db.adapter.instantiating"><info><title>Creating an Adapter (By Injecting Dependencies)</title></info>
+
+        <para>
+            The more expressive and explicit way of creating an adapter is by injecting all your
+            dependencies up front.  Zend\Db\Adapter\Adapter uses constructor injection, and all
+            required dependencies are injected through the constructor, which has the following
+            signature (in pseudo-code):
+        </para>
+
+
+            <programlisting language="php"><![CDATA[
+            use Zend\Db\Adapter\Platform\PlatformInterface,
+                Zend\Db\ResultSet\ResultSet;
+
+            class Zend\Db\Adapter\Adapter {
+                public function __construct($driver, PlatformInterface $platform = null, ResultSet $queryResultSetPrototype = null)
+            }
+]]></programlisting>
+
+        <para>
+        What can be injected:
+        </para>
+
+        <para>
+            $driver - an array or an instance of Zend\Db\Adapter\Driver\DriverInterface
+            $platform - (optional) an instance of Zend\Db\Platform\PlatformInterface, the default will be created based off the driver implementation
+            $queryResultSetPrototype - (optional) an instance of Zend\Db\ResultSet\ResultSet, to understand this object's role, see the section below on querying through the adapter
+        </para>
+
+    </section>
+
+    <section xml:id="zend.db.adapter.query-preparing"><info><title>Query Preparation Through Zend\Db\Adapter\Adapter::query()</title></info>
+
+        <para>
+            By default, query() prefers that you use "preparation" as a means for processing SQL
+            statements.  This generally means that you will supply a SQL statement with the values
+            substituted by placeholders, and then the parameters for those placeholders are
+            supplied separately.  An example of this workflow with Zend\Db\Adapter\Adapter is:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+    $adapter->query('SELECT * FROM `artist` WHERE `id` = ?', array(5));
+]]></programlisting>
+
+        <para>
+            The above example will go through the following steps:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    create a new Statement object
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    prepare an array into a ParameterContainer if necessary
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    inject the ParameterContainer into the Statement object
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    execute the Statement object, producing a Result object
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    check the Result object to check if the supplied sql was a "query", or a result set producing statement
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    if it is a result set producing query, clone the ResultSet prototype, inject Result as datasource, return it
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    else, return the Result
+                </para>
+            </listitem>
+        </itemizedlist>
+
+
+    </section>
+
+
+    <section xml:id="zend.db.adapter.query-execution"><info><title>Query Execution Through Zend\Db\Adapter\Adapter::query()</title></info>
+
+        <para>
+            In some cases, you have to execute statements directly.  The primary purpose for
+            needing to execute sql instead of prepare and execute a sql statement, might be
+            because you are attempting to execute a DDL statement (which in most extensions
+            and vendor platforms), are un-preparable.  An example of executing:
+        </para>
+
+
+            <programlisting language="php"><![CDATA[
+            $adapter->query('ALTER TABLE ADD INDEX(`foo_index`) ON (`foo_column`))', Adapter::QUERY_MODE_EXECUTE);
+]]></programlisting>
+
+        <para>
+            The primary difference to notice is that you must provide the Adapter::QUERY_MODE_EXECUTE
+            (execute) as the second parameter.
+        </para>
+
+    </section>
+
+
+    <section xml:id="zend.db.adapter.statement-creation"><info><title>Creating Statements</title></info>
+
+        <para>
+            While query() is highly useful for one-off and quick querying of a
+            database through Adapter, it generally makes more sense to create a
+            statement and interact with it directly, so that you have greater control
+            over the prepare-then-execute workflow.  To do this, Adapter gives you a
+            routine called createStatement() that allows you to create a Driver
+            specific Statement to use so you can manage your own prepare-then-execute workflow.
+        </para>
+
+            <programlisting language="php"><![CDATA[
+            $statement = $adapter->createStatement($sql, $optionalParameters);
+            $result = $statement->execute();
+]]></programlisting>
+
+    </section>
+
+
+    <section xml:id="zend.db.adapter.platform"><info><title>Using The Platform Object</title></info>
+
+        <para>
+            The Platform object provides an API to assist in crafting queries in a way that
+            is specific to the SQL implemetation of a particular vendor.  Nuances such
+            as how identifiers or values are quoted, or what the identifier separator
+            character is are handled by this object.  To get an idea of the capabilities,
+            the interface for a platform object looks like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+        interface Zend\Db\Adapter\Platform\PlatformInterface
+        {
+            public function getName();
+            public function getQuoteIdentifierSymbol();
+            public function quoteIdentifier($identifier);
+            public function getQuoteValueSymbol();
+            public function quoteValue($value);
+            public function getIdentifierSeparator();
+            public function quoteIdentifierInFragment($identifier, array $additionalSafeWords = array());
+        }
+]]></programlisting>
+
+        <para>
+            For example, to quote a column name, specific to MySQL's way of quoting:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+        $platform = new Zend\Db\Adapter\Platform\Mysql;
+        $column = $platform->quoteIdentifier('first_name'); // returns `first_name`
+]]></programlisting>
+
+        <para>
+            Generally speaking, it is easier to get the proper Platform instance from the adapter:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+        $platform = $adapter->getPlatform();
+        // or
+        $platform = $adapter->platform; // magic property access
+]]></programlisting>
+
+    </section>
+
+
+    <section xml:id="zend.db.adapter.parameter-container"><info><title>Using The Parameter Container</title></info>
+
+        <para>
+            The ParameterContainer object is a container for the various parameters that
+            need to be passed into a Statement object to fulfill all the various
+            parameterized parts of the SQL statement.  This object implements the
+            ArrayAccess interface.
+        </para>
+
+    </section>
+
+    <section xml:id="zend.db.adapter.parameter-container.examples"><info><title>Examples</title></info>
+
+        <para>
+            Creating a Driver and Vendor portable Query, Preparing and Iterating Result
+        </para>
+
+        <programlisting language="php"><![CDATA[
+        $adapter = new Zend\Db\Adapter\Adapter($driverConfig);
+
+        $qi = function($name) use ($adapter) { return $adapter->platform->quoteIdentifier($name); };
+        $fp = function($name) use ($adapter) { return $adapter->driver->formatParameterName($name); };
+
+        $sql = 'UPDATE ' . $qi('artist')
+            . ' SET ' . $qi('name') . ' = ' . $fp('name')
+            . ' WHERE ' . $qi('id') . ' = ' . $fp('id');
+
+        /* @var $statement Zend\Db\Adapter\DriverStatementInterface */
+        $statement = $adapter->query($sql);
+
+        $parameters = array(
+            'name' => 'Updated Artist',
+            'id' => 1
+        );
+
+        $statement->execute($parameters);
+
+        // DATA INSERTED, NOW CHECK
+
+        /* @var $statement Zend\Db\Adapter\DriverStatementInterface */
+        $statement = $adapter->query('SELECT * FROM '
+            . $qi('artist')
+            . ' WHERE id = ' . $fp('id'));
+
+        /* @var $results Zend\Db\ResultSet\ResultSet */
+        $results = $statement->execute(array('id' => 1));
+
+        $row = $results->current();
+        $name = $row['name'];
+]]></programlisting>
+
+    </section>
+
+</section>

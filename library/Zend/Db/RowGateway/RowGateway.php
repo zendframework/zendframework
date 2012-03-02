@@ -65,7 +65,7 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
     public function __construct(TableGateway $tableGateway, $primaryKey)
     {
         $this->tableGateway = clone $tableGateway;
-        $this->tableGateway->getSelectResultPrototype()->setReturnType(new Row());
+        $this->tableGateway->getSelectResultPrototype()->setRowObjectPrototype(new Row());
         $this->primaryKey = $primaryKey;
     }
 

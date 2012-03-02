@@ -158,7 +158,7 @@ class Result implements \Iterator, ResultInterface
             throw new \RuntimeException($this->resource->error);
         }
 
-        // derefernece
+        // dereference
         for ($i = 0; $i < count($this->statementBindValues['keys']); $i++) {
             $this->currentData[$this->statementBindValues['keys'][$i]] = $this->statementBindValues['values'][$i];
         }

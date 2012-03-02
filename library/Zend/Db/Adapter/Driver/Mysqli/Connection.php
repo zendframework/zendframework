@@ -21,8 +21,7 @@
 
 namespace Zend\Db\Adapter\Driver\Mysqli;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface,
-    Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\ConnectionInterface;
 
 /**
  * @category   Zend
@@ -56,7 +55,11 @@ class Connection implements ConnectionInterface
         }
     }
 
-    public function setDriver(DriverInterface $driver)
+    /**
+     * @param Mysqli $driver
+     * @return Connection
+     */
+    public function setDriver(Mysqli $driver)
     {
         $this->driver = $driver;
         return $this;
@@ -150,7 +153,9 @@ class Connection implements ConnectionInterface
     
     public function disconnect()
     {
-        $this->resource->close();
+        if ($this->resource instanceof \PDO) {
+            $this->resource->close();
+        }
         unset($this->resource);
     }
     

@@ -87,7 +87,19 @@ class Pdo implements DriverInterface
 
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
-        return ucwords($this->getConnection()->getResource()->getAttribute(\PDO::ATTR_DRIVER_NAME));
+        $name = $this->getConnection()->getResource()->getAttribute(\PDO::ATTR_DRIVER_NAME);
+        if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
+            return ucfirst($name);
+        } else {
+            switch ($name) {
+                case 'sqlite':
+                    return 'SQLite';
+                case 'mysql':
+                    return 'MySQL';
+                default:
+                    return ucfirst($name);
+            }
+        }
     }
     
     public function checkEnvironment()

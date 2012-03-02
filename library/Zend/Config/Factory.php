@@ -43,8 +43,8 @@ abstract class Factory
     /**
      * Read a config from a file.
      *
-     * @param string  $filename
-     * @param boolean $returnConfigObject 
+     * @param  string  $filename
+     * @param  boolean $returnConfigObject 
      * @return array|Config
      */
     public static function fromFile($filename, $returnConfigObject = false)
@@ -86,8 +86,8 @@ abstract class Factory
     /**
      * Read configuration from multiple files and merge them.
      *
-     * @param array   $files
-     * @param boolean $returnConfigObject 
+     * @param  array   $files
+     * @param  boolean $returnConfigObject 
      * @return array|Config
      */
     public static function fromFiles(array $files, $returnConfigObject = false)

@@ -24,7 +24,7 @@
  */
 namespace ZendTest\GData\App;
 
-use Zend\Gdata,
+use Zend\GData,
     Zend\GData\App,
     Zend\GData\App\Extension,
     Zend\Http,

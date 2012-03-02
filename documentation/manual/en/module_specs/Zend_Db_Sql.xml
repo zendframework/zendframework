@@ -11,12 +11,35 @@
 
         <para>
             The primary objects that to interact with are:
-                Zend\Db\Sql\Select - SELECT abstraction
-                Zend\Db\Sql\Insert - INSERT abstraction
-                Zend\Db\Sql\Update - UPDATE abstraction
-                Zend\Db\Sql\Delete - DELETE abstraction
-                Zend\Db\Sql\Where - WHERE abstraction to be used with Select, Update and Delete
         </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Select - SELECT abstraction
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Insert - INSERT abstraction
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Update - UPDATE abstraction
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Delete - DELETE abstraction
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Zend\Db\Sql\Where - WHERE abstraction to be used with Select, Update and Delete
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <para>
             Each of these objects present their API in a fluent style, for example

@@ -29,16 +29,93 @@
             parameters.  Here is a table for the
         </para>
 
-        <para>
-            driver          required                Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo-OtherPdoDriver
-            database        generally required      the name of the database (schema)
-            username        generally required      the connection username
-            password        generally required      the connection password
-            hostname        not generally requried  the ip address or hostname to connect to
-            port            not generally required  the port to connect to (if applicable)
-            characterset    not generally required  the character set to use
-            others*
-        </para>
+        <table frame='all'><title>Connection Array Keys</title>
+            <!--<tgroup cols="3" align="left">-->
+            <!---->
+            <!--</tgroup>-->
+            <thead>
+                <entry>Name</entry>
+                <entry>Required</entry>
+                <entry>Notes</entry>
+            </thead>
+            <row>
+                <entry>
+                    driver
+                </entry>
+                <entry>
+                    required
+                </entry>
+                <entry>
+                    Mysqli, Sqlsrv, Pdo_Sqlite, Pdo_Mysql, Pdo-OtherPdoDriver
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    database
+                </entry>
+                <entry>
+                    generally required
+                </entry>
+                <entry>
+                    the name of the database (schema)
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    username
+                </entry>
+                <entry>
+                    generally required
+                </entry>
+                <entry>
+                    the connection username
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    password
+                </entry>
+                <entry>
+                    generally required
+                </entry>
+                <entry>
+                    the connection password
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    hostname
+                </entry>
+                <entry>
+                    not generally requried
+                </entry>
+                <entry>
+                    the ip address or hostname to connect to
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    port
+                </entry>
+                <entry>
+                    not generally requried
+                </entry>
+                <entry>
+                    not generally required  the port to connect to (if applicable)
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    characterset
+                </entry>
+                <entry>
+                    not generally requried
+                </entry>
+                <entry>
+                    not generally required  the character set to use
+                </entry>
+            </row>
+        </table>
 
          <para>
             * other names will work as well.  Effectively, if the PHP manual
@@ -133,15 +210,43 @@
             The above example will go through the following steps:
         </para>
 
-        <para>
-            1. create a new Statement object
-            2. prepare an array into a ParameterContainer if necessary
-            3. inject the ParameterContainer into the Statement object
-            4. execute the Statement object, producing a Result object
-            5. check the Result object to check if the supplied sql was a "query", or a result set producing statement
-            6. if it is a result set producing query, clone the ResultSet prototype, inject Result as datasource, return it
-            7. else, return the Result
-        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    create a new Statement object
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    prepare an array into a ParameterContainer if necessary
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    inject the ParameterContainer into the Statement object
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    execute the Statement object, producing a Result object
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    check the Result object to check if the supplied sql was a "query", or a result set producing statement
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    if it is a result set producing query, clone the ResultSet prototype, inject Result as datasource, return it
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    else, return the Result
+                </para>
+            </listitem>
+        </itemizedlist>
 
 
     </section>

@@ -37,6 +37,13 @@ class Where extends Predicate\Predicate implements PreparableSqlInterface
 {
     protected $specification = ' WHERE %s';
 
+    /**
+     * Prepare statement
+     *
+     * @param \Zend\Db\Adapter\Adapter $adapter
+     * @param \Zend\Db\Adapter\Driver\StatementInterface $statement
+     * @return void
+     */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
         $driver = $adapter->getDriver();
@@ -76,6 +83,12 @@ class Where extends Predicate\Predicate implements PreparableSqlInterface
         $statement->setSql($sql);
     }
 
+    /**
+     * Get SQL string for statement
+     * 
+     * @param  null|PlatformInterface $platform If null, defaults to Sql92
+     * @return string
+     */
     public function getSqlString(PlatformInterface $platform = null)
     {
         $platform = ($platform) ?: new Sql92;
@@ -100,5 +113,4 @@ class Where extends Predicate\Predicate implements PreparableSqlInterface
 
         return sprintf($this->specification, $wherePart);
     }
-
 }

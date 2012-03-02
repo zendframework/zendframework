@@ -38,14 +38,20 @@ use Zend\Db\Adapter\Adapter,
  */
 class Delete implements SqlInterface, PreparableSqlInterface
 {
-    protected $specification = 'DELETE FROM %1$s';
-
-    protected $databaseOrSchema = null;
-    protected $table = null;
+    protected $specification        = 'DELETE FROM %1$s';
+    protected $databaseOrSchema     = null;
+    protected $table                = null;
     protected $emptyWhereProtection = true;
-    protected $set = array();
-    protected $where = null;
+    protected $set                  = array();
+    protected $where                = null;
 
+    /**
+     * Constructor
+     * 
+     * @param  null|string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return void
+     */
     public function __construct($table = null, $databaseOrSchema = null)
     {
         if ($table) {
@@ -54,6 +60,13 @@ class Delete implements SqlInterface, PreparableSqlInterface
         $this->where = new Where();
     }
 
+    /**
+     * Create from statement
+     * 
+     * @param  string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return Delete
+     */
     public function from($table, $databaseOrSchema = null)
     {
         $this->table = $table;
@@ -63,6 +76,13 @@ class Delete implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Create where clause
+     * 
+     * @param  Where|Closure|string|array $predicate 
+     * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @return Delete
+     */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
         if ($predicate instanceof Where) {
@@ -88,6 +108,13 @@ class Delete implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Prepare the delete statement
+     * 
+     * @param  Adapter $adapter 
+     * @param  StatementInterface $statement 
+     * @return void
+     */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
         $driver   = $adapter->getDriver();
@@ -105,6 +132,14 @@ class Delete implements SqlInterface, PreparableSqlInterface
         $this->where->prepareStatement($adapter, $statement);
     }
 
+    /**
+     * Get the SQL string, based on the platform
+     *
+     * Platform defaults to Sql92 if none provided
+     * 
+     * @param  null|PlatformInterface $platform 
+     * @return string
+     */
     public function getSqlString(PlatformInterface $platform = null)
     {
         $platform = ($platform) ?: new Sql92;
@@ -118,6 +153,14 @@ class Delete implements SqlInterface, PreparableSqlInterface
         return $sql . $this->where->getSqlString($platform);
     }
 
+    /**
+     * Property overloading
+     *
+     * Overloads "where" only.
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
     public function __get($name)
     {
         switch (strtolower($name)) {
@@ -125,5 +168,4 @@ class Delete implements SqlInterface, PreparableSqlInterface
                 return $this->where;
         }
     }
-
 }

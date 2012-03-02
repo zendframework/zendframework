@@ -20,17 +20,22 @@
  */
 
 /**
+ * @namespace
+ */
+namespace Zend\Service\Technorati;
+
+use DomDocument;
+
+/**
  * Represents a Technorati Search query result set.
  *
- * @uses       Zend_Service_Technorati_ResultSet
- * @uses       Zend_Service_Technorati_SearchResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_Technorati_SearchResultSet extends Zend_Service_Technorati_ResultSet
+class SearchResultSet extends ResultSet
 {
     /**
      * Number of query results.
@@ -38,7 +43,7 @@ class Zend_Service_Technorati_SearchResultSet extends Zend_Service_Technorati_Re
      * @var     int
      * @access  protected
      */
-    protected $_queryCount;
+    protected $queryCount;
 
     /**
      * Parses the search response and retrieve the results for iteration.
@@ -50,20 +55,22 @@ class Zend_Service_Technorati_SearchResultSet extends Zend_Service_Technorati_Re
     {
         parent::__construct($dom, $options);
 
-        $result = $this->_xpath->query('/tapi/document/result/querycount/text()');
-        if ($result->length == 1) $this->_queryCount = (int) $result->item(0)->data;
+        $result = $this->xpath->query('/tapi/document/result/querycount/text()');
+        if ($result->length == 1) {
+            $this->queryCount = (int) $result->item(0)->data;
+        }
 
-        $this->_totalResultsReturned  = (int) $this->_xpath->evaluate("count(/tapi/document/item)");
-        $this->_totalResultsAvailable = (int) $this->_queryCount;
+        $this->totalResultsReturned  = (int) $this->xpath->evaluate("count(/tapi/document/item)");
+        $this->totalResultsAvailable = (int) $this->queryCount;
     }
 
     /**
-     * Implements Zend_Service_Technorati_ResultSet::current().
+     * Implements ResultSet::current().
      *
-     * @return Zend_Service_Technorati_SearchResult current result
+     * @return SearchResult current result
      */
     public function current()
     {
-        return new Zend_Service_Technorati_SearchResult($this->_results->item($this->_currentIndex));
+        return new SearchResult($this->results->item($this->currentIndex));
     }
 }

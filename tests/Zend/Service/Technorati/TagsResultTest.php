@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_TagsResult
+ * @see Technorati\TagsResult
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_TagsResultTest extends Zend_Service_Technorati_TestCase
+class TagsResultTest extends TestCase
 {
     public function setUp()
     {
@@ -47,17 +52,12 @@ class Zend_Service_Technorati_TagsResultTest extends Zend_Service_Technorati_Tes
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_TagsResult', array($this->domElements->item(0)));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_TagsResult', 'DOMElement');
+        $this->_testConstruct('Zend\Service\Technorati\TagsResult', array($this->domElements->item(0)));
     }
 
     public function testTagsResult()
     {
-        $object = new Zend_Service_Technorati_TagsResult($this->domElements->item(2));
+        $object = new Technorati\TagsResult($this->domElements->item(2));
 
         // check properties
         $this->assertInternalType('string', $object->getTag());
@@ -68,12 +68,12 @@ class Zend_Service_Technorati_TagsResultTest extends Zend_Service_Technorati_Tes
 
     public function testTagsResultSerialization()
     {
-        $this->_testResultSerialization(new Zend_Service_Technorati_TagsResult($this->domElements->item(0)));
+        $this->_testResultSerialization(new Technorati\TagsResult($this->domElements->item(0)));
     }
 
     public function testTagsResultSpecialEncoding()
     {
-        $object = new Zend_Service_Technorati_TagsResult($this->domElements->item(0));
+        $object = new Technorati\TagsResult($this->domElements->item(0));
         $this->assertEquals('練習用', $object->getTag());
         $this->assertEquals(19655999, $object->getPosts());
     }

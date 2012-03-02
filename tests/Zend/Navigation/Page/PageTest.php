@@ -813,7 +813,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'label' => 'bar',
             'action' => 'baz',
             'controller' => 'bat',
-            'module' => 'test',
             'id' => 'foo-test'
         );
 
@@ -823,7 +822,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'label'       => 'bar',
             'action'      => 'baz',
             'controller'  => 'bat',
-            'module'      => 'test',
             'id'          => 'foo-test'
         );
 
@@ -831,7 +829,6 @@ class PageTest extends \PHPUnit_Framework_TestCase
             'label'       => $page->getLabel(),
             'action'      => $page->getAction(),
             'controller'  => $page->getController(),
-            'module'      => $page->getModule(),
             'id'          => $page->getId()
         );
 

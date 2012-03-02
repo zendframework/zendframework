@@ -19,13 +19,18 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+/**
+ * @namespace
+ */
+namespace ZendTest\Service\Technorati;
+use Zend\Service\Technorati;
 
 /**
  * Test helper
  */
 
 /**
- * @see Zend_Service_Technorati_BlogInfoResult
+ * @see Technorati\BlogInfoResult
  */
 
 
@@ -38,7 +43,7 @@
  * @group      Zend_Service
  * @group      Zend_Service_Technorati
  */
-class Zend_Service_Technorati_BlogInfoResultTest extends Zend_Service_Technorati_TestCase
+class BlogInfoResultTest extends TestCase
 {
     public function setUp()
     {
@@ -47,26 +52,21 @@ class Zend_Service_Technorati_BlogInfoResultTest extends Zend_Service_Technorati
 
     public function testConstruct()
     {
-        $this->_testConstruct('Zend_Service_Technorati_BlogInfoResult', array($this->dom));
-    }
-
-    public function testConstructThrowsExceptionWithInvalidDom()
-    {
-        $this->_testConstructThrowsExceptionWithInvalidDom('Zend_Service_Technorati_BlogInfoResult', 'DOMDocument');
+        $this->_testConstruct('Zend\Service\Technorati\BlogInfoResult', array($this->dom));
     }
 
     public function testBlogInfoResult()
     {
-        $object = new Zend_Service_Technorati_BlogInfoResult($this->dom);
+        $object = new Technorati\BlogInfoResult($this->dom);
 
         // check weblog
         $weblog = $object->getWeblog();
-        $this->assertInstanceOf('Zend_Service_Technorati_Weblog', $weblog);
+        $this->assertInstanceOf('Zend\Service\Technorati\Weblog', $weblog);
         $this->assertEquals('Simone Carletti\'s Blog', $weblog->getName());
 
         // check url
-        $this->assertInstanceOf('Zend_Uri_Http', $object->getUrl());
-        $this->assertEquals(Zend_Uri::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getUrl());
+        $this->assertEquals(\Zend\Uri\UriFactory::factory('http://www.simonecarletti.com/blog'), $object->getUrl());
 
         // check inboundblogs
         $this->assertInternalType('integer', $object->getInboundBlogs());
@@ -80,10 +80,10 @@ class Zend_Service_Technorati_BlogInfoResultTest extends Zend_Service_Technorati
     public function testBlogInfoResultUrlWithInvalidSchemaEqualsToWeblogUrl()
     {
         $dom = self::getTestFileContentAsDom('TestBlogInfoResultUrlWithInvalidSchema.xml');
-        $object = new Zend_Service_Technorati_BlogInfoResult($dom);
+        $object = new Technorati\BlogInfoResult($dom);
 
         // check url
-        $this->assertInstanceOf('Zend_Uri_Http', $object->getUrl());
+        $this->assertInstanceOf('Zend\Uri\Http', $object->getUrl());
         $this->assertEquals($object->getWeblog()->getUrl(), $object->getUrl());
     }
 }

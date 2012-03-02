@@ -45,10 +45,10 @@ class ExceptionStrategy implements ListenerAggregate
     protected $displayExceptions = false;
 
     /**
-     * Name of error template
+     * Name of exception template
      * @var string
      */
-    protected $errorTemplate = 'error';
+    protected $exceptionTemplate = 'error';
 
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
@@ -104,29 +104,29 @@ class ExceptionStrategy implements ListenerAggregate
     }
 
     /**
-     * Set the error template
+     * Set the exception template
      * 
-     * @param  string $template 
+     * @param  string $exceptionTemplate 
      * @return ExceptionStrategy
      */
-    public function setErrorTemplate($template)
+    public function setExceptionTemplate($exceptionTemplate)
     {
-        $this->errorTemplate = (string) $template;
+        $this->exceptionTemplate = (string) $exceptionTemplate;
         return $this;
     }
 
     /**
-     * Retrieve the error template
+     * Retrieve the exception template
      * 
      * @return string
      */
-    public function getErrorTemplate()
+    public function getExceptionTemplate()
     {
-        return $this->errorTemplate;
+        return $this->exceptionTemplate;
     }
 
     /**
-     * Create an error view model, and set the HTTP status code
+     * Create an exception view model, and set the HTTP status code
      * 
      * @todo   dispatch.error does not halt dispatch unless a response is 
      *         returned. As such, we likely need to trigger rendering as a low
@@ -163,7 +163,7 @@ class ExceptionStrategy implements ListenerAggregate
                     'exception'          => $e->getParam('exception'),
                     'display_exceptions' => $this->displayExceptions(),
                 ));
-                $model->setTemplate($this->getErrorTemplate());
+                $model->setTemplate($this->getExceptionTemplate());
                 $e->setResult($model);
 
                 $response = $e->getResponse();

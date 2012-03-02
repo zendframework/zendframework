@@ -106,7 +106,7 @@ class Escape extends AbstractHelper
         if (!is_callable($this->callback)) {
             $encoding = $this->getEncoding();
             $callback = function($value) use ($encoding) {
-                return htmlspecialchars($value, ENT_COMPAT, $encoding, false);
+                return htmlspecialchars($value, ENT_QUOTES, $encoding, false);
             };
             $this->setCallback($callback);
         }

@@ -75,8 +75,9 @@ class FormErrors extends FormElement
         }
 
         if ($escape) {
+            $escaper = $this->view->plugin('escape');
             foreach ($errors as $key => $error) {
-                $errors[$key] = $this->view->vars()->escape($error);
+                $errors[$key] = $escaper($error);
             }
         }
 

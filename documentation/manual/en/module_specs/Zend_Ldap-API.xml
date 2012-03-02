@@ -197,6 +197,14 @@
                             binding. The default value is <constant>TRUE</constant>.
                         </entry>
                     </row>
+                    <row>
+                        <entry><property>networkTimeout</property></entry>
+
+                        <entry>
+                            Number of seconds to wait for LDAP connection before fail. If not set
+                            the default value is the system value.
+                        </entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>

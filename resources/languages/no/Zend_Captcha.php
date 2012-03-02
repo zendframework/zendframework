@@ -24,12 +24,12 @@
  */
 return array(
     // Zend_Captcha_ReCaptcha
-    "Missing captcha fields" => "Savnede captcha felter",
+    "Missing captcha fields" => "Mangler captcha felter",
     "Failed to validate captcha" => "Validering av captcha feilet",
     "Captcha value is wrong: %value%" => "Feil Captcha verdi for: %value%",
 
     // Zend_Captcha_Word
-    "Empty captcha value" => "Tom captcha verdi",
-    "Captcha ID field is missing" => "Feltet for Captcha id er ikke tilstede",
-    "Captcha value is wrong" => "Verdien til Captcha er feil",
+    "Empty captcha value" => "Tomt captcha verdi",
+    "Captcha ID field is missing" => "Feltet for captcha id er ikke tilstede",
+    "Captcha value is wrong" => "Verdien til captcha er feil",
 );

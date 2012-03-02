@@ -43,13 +43,11 @@ class DefaultRenderingStrategy implements ListenerAggregate
     protected $listeners = array();
 
     /**
-     * Base template - template used in root ViewModel of MVC event.
+     * Layout template - template used in root ViewModel of MVC event.
      *
-     * This is typically a layout template.
-     * 
      * @var string
      */
-    protected $baseTemplate = 'layout';
+    protected $layoutTemplate = 'layout';
 
     /**
      * @var View
@@ -95,25 +93,25 @@ class DefaultRenderingStrategy implements ListenerAggregate
     }
 
     /**
-     * Set base template value
+     * Set layout template value
      *
-     * @param  string $baseTemplate
+     * @param  string $layoutTemplate
      * @return DefaultRenderingStrategy
      */
-    public function setBaseTemplate($baseTemplate)
+    public function setLayoutTemplate($layoutTemplate)
     {
-        $this->baseTemplate = (string) $baseTemplate;
+        $this->layoutTemplate = (string) $layoutTemplate;
         return $this;
     }
     
     /**
-     * Get base template value
+     * Get layout template value
      *
      * @return string
      */
-    public function getBaseTemplate()
+    public function getLayoutTemplate()
     {
-        return $this->baseTemplate;
+        return $this->layoutTemplate;
     }
 
     /**

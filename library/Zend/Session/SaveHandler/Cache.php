@@ -21,7 +21,8 @@
 namespace Zend\Session\SaveHandler;
 
 use Zend\Session\SaveHandler as Savable,
-    Zend\Cache\Storage\Adapter as StorageAdapter;
+    Zend\Cache\Storage\Adapter as StorageAdapter,
+    Zend\Session\Exception;
 
 /**
  * Cache session save handler
@@ -54,13 +55,13 @@ class Cache implements Savable
     /**
      * Constructor
      *
-     * @param  Zend\Cache\Storage\Adapter|null $storageAdapter
+     * @param  Zend\Cache\Storage\Adapter $storageAdapter
      * @return void
-     * @throws Zend\Session\SaveHandler\Exception
+     * @throws Zend\Session\Exception
      */
-    public function __construct($storageAdapter)
+    public function __construct(StorageAdapter $storageAdapter)
     {
-        $this->_setStorageAdapter($storageAdapter);
+        $this->setStorageAdapter($storageAdapter);
     }
 
     /**
@@ -139,22 +140,11 @@ class Cache implements Savable
      *
      * Allows passing a string class name or StorageAdapter object.
      *
-     * @param string|Zend\Cache\Storage\Adapter
+     * @param Zend\Cache\Storage\Adapter
      * @return void
      */
-    public function _setStorageAdapter($storageAdapter)
+    public function setStorageAdapter(StorageAdapter $storageAdapter)
     {
-        if (is_string($storageAdapter)) {
-            if (!class_exists($storageAdapter)) {
-                throw new Exception\InvalidArgumentException('Class provided for StorageAdapter does not exist');
-            }
-            $storageAdapter = new $storageAdapter;
-        }
-
-        if (!$storageAdapter instanceof StorageAdapter) {
-            throw new Exception\InvalidArgumentException('StorageAdapter type provided is invalid; must implement Zend\\Cache\\Storage\\Adapter');
-        }
-
         $this->storageAdapter = $storageAdapter;
     }
 

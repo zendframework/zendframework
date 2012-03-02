@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xml:id="zend.config.reader.introduction">
+    <info><title>Zend\Config\Reader</title></info>
+    
+    <para>
+        <classname>Zend\Config\Reader</classname> gives you the ability to read a config
+        file. It works with concrete implementations for different file format.
+        The <classname>Zend\Config\Reader</classname> is only an interface, that define
+        the two methods <methodname>fromFile()</methodname> and <methodname>fromString()</methodname>.
+        The concrete implementations of this interface are:
+    </para>
+    
+    <itemizedlist>
+        <listitem>
+            <para>
+                <classname>Zend\Config\Reader\Ini</classname>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend\Config\Reader\Xml</classname>
+            </para>
+        </listitem>
+    </itemizedlist>
+            
+    <para>
+        The <methodname>fromFile()</methodname> and <methodname>fromString()</methodname> return a PHP array contains the
+        data of the configuration file.
+    </para>
+    
+    <section xml:id="zend.config.reader.ini">
+        <info><title>Zend\Config\Reader\Ini</title></info>
+        
+        <para>
+            <classname>Zend\Config\Reader\Ini</classname> enables developers to store configuration data in a
+            familiar <acronym>INI</acronym> format and read them in the application by using an array syntax.
+        </para>
+        
+        <para>
+            <classname>Zend\Config\Reader\Ini</classname> utilizes the <link
+                xlink:href="http://php.net/parse_ini_file"><function>parse_ini_file()</function></link>
+            <acronym>PHP</acronym> function. Please review this documentation to be aware of its
+            specific behaviors, which propagate to <classname>Zend\Config\Reader\Ini</classname>, such as
+            how the special values of "<constant>TRUE</constant>", "<constant>FALSE</constant>",
+            "yes", "no", and "<constant>NULL</constant>" are handled.
+        </para>
+        
+        <note>
+            <info><title>Key Separator</title></info>
+        
+            <para>
+                By default, the key separator character is the period character
+                ("<emphasis>.</emphasis>"). This can be changed, however, using the
+                <methodname>setNestSeparator()</methodname> method. For example:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$reader = new Zend\Config\Reader\Ini();
+$reader->setNestSeparator('-');       
+]]></programlisting>
+        </note>
+    
+        <para>
+            The following example illustrates a basic use of <classname>Zend\Config\Reader\Ini</classname> for
+            loading configuration data from an <acronym>INI</acronym> file. In this example there
+            are configuration data for both a production system and for a staging system.
+            Suppose we have the following INI configuration file:
+        </para>
+        
+        <programlisting language="ini"><![CDATA[
+webhost                  = 'www.example.com'
+database.adapter         = 'pdo_mysql'
+database.params.host     = 'db.example.com'
+database.params.username = 'dbuser'
+database.params.password = 'secret'
+database.params.dbname   = 'dbproduction'
+]]></programlisting>
+
+        <para>
+            We can use the <classname>Zend\Config\Reader\Ini</classname> to read this INI file:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$reader = new Zend\Config\Reader\Ini();
+$data   = $reader->fromFile('/path/to/config.ini');
+
+echo $data['webhost']  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"
+]]></programlisting>
+
+        <para>
+            The <classname>Zend\Config\Reader\Ini</classname> supports a feature to include the
+            content of a INI file in a specific section of another INI file.
+            For instance, suppose we have an INI file with the database configuration:
+        </para>
+        
+        <programlisting language="ini"><![CDATA[
+database.adapter         = 'pdo_mysql'
+database.params.host     = 'db.example.com'
+database.params.username = 'dbuser'
+database.params.password = 'secret'
+database.params.dbname   = 'dbproduction'
+]]></programlisting>
+        
+        <para>
+            We can include this configuration in another INI file, for instance:
+        </para>
+        
+        <programlisting language="ini"><![CDATA[
+webhost  = 'www.example.com'
+@include = 'database.ini'
+]]></programlisting>
+                
+        <para>
+            If we read this file using the component <classname>Zend\Config\Reader\Ini</classname>
+            we will obtain the same configuration data structure of the previous example.
+        </para>
+        
+        <para>
+            The <command>@include = 'file-to-include.ini'</command> can be used also in
+            a subelement of a value. For instance we can have an INI file like that:
+        </para>
+        
+        <programlisting language="ini"><![CDATA[
+adapter         = 'pdo_mysql'
+params.host     = 'db.example.com'
+params.username = 'dbuser'
+params.password = 'secret'
+params.dbname   = 'dbproduction'
+]]></programlisting>
+        
+        <para>
+            And assign the <command>@include</command> as sublement of the database value:
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+webhost           = 'www.example.com'
+database.@include = 'database.ini'
+]]></programlisting>
+    </section>
+    
+    <section xml:id="zend.config.reader.xml">
+        <info><title>Zend\Config\Reader\Xml</title></info>
+        
+        <para>
+            <classname>Zend\Config\Reader\Xml</classname> enables developers to read configuration data in a
+            familiar <acronym>XML</acronym> format and read them in the application by using an array syntax.
+            The root element of the <acronym>XML</acronym> file or string is irrelevant and may be named
+            arbitrarily.
+        </para>
+                
+        <para>
+            The following example illustrates a basic use of <classname>Zend\Config\Reader\Xml</classname> for
+            loading configuration data from an <acronym>XML</acronym> file. In this example there
+            are configuration data for both a production system and for a staging system.
+            Suppose we have the following <acronym>XML</acronym> configuration file:
+        </para>
+        
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>?>
+<config>
+    <webhost>www.example.com</webhost>
+    <database>
+        <adapter value="pdo_mysql"/>
+        <params>
+            <host value="db.example.com"/>
+            <username value="dbuser"/>
+            <password value="secret"/>
+            <dbname value="dbproduction"/>
+        </params>
+    </database>
+</config>
+]]></programlisting>
+        
+        <para>
+            We can use the <classname>Zend\Config\Reader\Xml</classname> to read this XML file:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$reader = new Zend\Config\Reader\Xml();
+$data   = $reader->fromFile('/path/to/config.xml');
+
+echo $data['webhost']  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"
+]]></programlisting>
+        
+        <para>
+            <classname>Zend\Config\Reader\Xml</classname> utilizes the <link xlink:href="http://php.net/xmlreader"><classname>XMLReader</classname></link>
+            <acronym>PHP</acronym> class. Please review this documentation to be aware of its
+            specific behaviors, which propagate to <classname>Zend\Config\Reader\Xml</classname>.
+        </para>
+        
+        <para>
+            Using <classname>Zend\Config\Reader\Xml</classname> we can include the content of XML files
+            in a specific XML element. This is provided using the standard function <link xlink:href="http://www.w3.org/TR/xinclude/">XInclude</link> of XML.
+            To use this function you have to add the namespace <command>xmlns:xi="http://www.w3.org/2001/XInclude"</command>
+            to the XML file. Suppose we have an XML files that contains only the database configuration:
+        </para>
+        
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <database>
+        <adapter>pdo_mysql</adapter>
+        <params>
+            <host>db.example.com</host>
+            <username>dbuser</username>
+            <password>secret</password>
+            <dbname>dbproduction</dbname>
+        </params>
+    </database>
+</config>        
+]]></programlisting>
+        
+         <para>
+            We can include this configuration in another XML file, for instance:
+        </para>
+               
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xi="http://www.w3.org/2001/XInclude">
+    <webhost>www.example.com</webhost>
+    <xi:include href="database.xml"/>
+</config>     
+]]></programlisting>
+        
+        <para>
+            The syntax to include an XML file in a specific element is <command>&lt;xi:include href="file-to-include.xml"/&gt;</command>
+        </para>
+        
+    </section>
+    
+    <note>
+        <info><title>Differences from ZF1</title></info>
+        
+        <para>
+            The <classname>Zend\Config\Reader</classname> component no longer supports the following
+            features:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Inheritance of sections.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Reading of specific sections.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </note>
+</section>

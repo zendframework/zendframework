@@ -26,6 +26,7 @@ namespace ZendTest\Translator\Adapter;
 use Zend\Translator\Adapter;
 use Zend\Translator;
 use Zend\Locale;
+use Zend\Translator\Exception\InvalidFileTypeException;
 
 /**
  * Zend_Translator_Adapter_Tbx
@@ -63,6 +64,19 @@ class TbxTest extends \PHPUnit_Framework_TestCase
         $adapter = new Adapter\Tbx(__DIR__ . '/_files/failed.tbx', 'en');
     }
 
+    /**
+     * @group ZF-12012
+     */
+    public function testErrorOnCreateIncludesFilename()
+    {
+        try {
+            $adapter = new Adapter\Tbx(__DIR__ . '/_files/failed.tbx', 'en');
+            $this->fail("exception expected");
+        } catch (InvalidFileTypeException $e) {
+            $this->assertContains('failed.tbx', $e->getMessage());
+        }
+    }
+    
     public function testToString()
     {
         $adapter = new Adapter\Tbx(__DIR__ . '/_files/translation_en.tbx', 'fr');

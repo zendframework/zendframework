@@ -266,6 +266,28 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($myDate->equals($entry->getDateCreated()));
     }
 
+    /**
+     * @group ZF-12070
+     */
+    public function testSetDateCreatedUsesGivenUnixTimestampWhenItIsLessThanTenDigits()
+    {
+        $entry = new Writer\Entry;
+        $entry->setDateCreated(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+    }
+
+    /**
+     * @group ZF-11610
+     */
+    public function testSetDateCreatedUsesGivenUnixTimestampWhenItIsAVerySmallInteger()
+    {
+        $entry = new Writer\Entry;
+        $entry->setDateCreated(123);
+        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getDateCreated()));
+    }
+
     public function testSetDateCreatedUsesZendDateObject()
     {
         $entry = new Writer\Entry;
@@ -287,6 +309,28 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         $entry->setDateModified(1234567890);
         $myDate = new Date\Date('1234567890', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getDateModified()));
+    }
+
+    /**
+     * @group ZF-12070
+     */
+    public function testSetDateModifiedUsesGivenUnixTimestampWhenItIsLessThanTenDigits()
+    {
+        $entry = new Writer\Entry;
+        $entry->setDateModified(123456789);
+        $myDate = new Date\Date('123456789', Date\Date::TIMESTAMP);
+        $this->assertTrue($myDate->equals($entry->getDateModified()));
+    }
+
+    /**
+     * @group ZF-11610
+     */
+    public function testSetDateModifiedUsesGivenUnixTimestampWhenItIsAVerySmallInteger()
+    {
+        $entry = new Writer\Entry;
+        $entry->setDateModified(123);
+        $myDate = new Date\Date('123', Date\Date::TIMESTAMP);
         $this->assertTrue($myDate->equals($entry->getDateModified()));
     }
 

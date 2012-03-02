@@ -23,6 +23,7 @@
 namespace ZendTest\Session;
 
 use Zend\Session\Container,
+    Zend\Session\Configuration\StandardConfiguration,
     Zend\Session\Manager,
     Zend\Session;
 
@@ -41,10 +42,12 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $this->forceAutoloader();
         $_SESSION = array();
         Container::setDefaultManager(null);
-        $this->manager = $manager = new TestAsset\TestManager(array(
-            'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
+
+        $config = new StandardConfiguration(array(
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
         ));
+
+        $this->manager = $manager = new TestAsset\TestManager($config);
         $this->container = new Container('Default', $manager);
     }
 
@@ -185,10 +188,10 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testContainerAllowsInjectingManagerViaConstructor()
     {
-        $manager = new TestAsset\TestManager(array(
-            'class'   => 'Zend\\Session\\Configuration\\StandardConfiguration',
+        $config = new StandardConfiguration(array(
             'storage' => 'Zend\\Session\\Storage\\ArrayStorage',
         ));
+        $manager = new TestAsset\TestManager($config);
         $container = new Container('Foo', $manager);
         $this->assertSame($manager, $container->getManager());
     }

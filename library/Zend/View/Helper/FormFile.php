@@ -67,12 +67,13 @@ class FormFile extends FormElement
         }
 
         // build the element
-        $xhtml = '<input type="file"'
-                . ' name="' . $this->view->vars()->escape($name) . '"'
-                . ' id="' . $this->view->vars()->escape($id) . '"'
-                . $disabled
-                . $this->_htmlAttribs($attribs)
-                . $endTag;
+        $escaper = $this->view->plugin('escape');
+        $xhtml   = '<input type="file"'
+                 . ' name="' . $escaper($name) . '"'
+                 . ' id="' . $escaper($id) . '"'
+                 . $disabled
+                 . $this->_htmlAttribs($attribs)
+                 . $endTag;
 
         return $xhtml;
     }

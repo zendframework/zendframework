@@ -55,10 +55,11 @@ class FormLabel extends FormElement
             return  '';
         }
 
-        $value = ($escape) ? $this->view->vars()->escape($value) : $value;
-        $for   = (empty($attribs['disableFor']) || !$attribs['disableFor'])
-               ? ' for="' . $this->view->vars()->escape($id) . '"'
-               : '';
+        $escaper = $this->view->plugin('escape');
+        $value   = ($escape) ? $escaper($value) : $value;
+        $for     = (empty($attribs['disableFor']) || !$attribs['disableFor'])
+                 ? ' for="' . $escaper($id) . '"'
+                 : '';
         if (array_key_exists('disableFor', $attribs)) {
             unset($attribs['disableFor']);
         }

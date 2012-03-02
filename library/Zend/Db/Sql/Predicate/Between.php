@@ -1,73 +1,162 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Sql
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Db\Sql\Predicate;
 
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Sql
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Between implements PredicateInterface
 {
     protected $specification = '%1$s BETWEEN %2$s AND %3$s';
-    protected $subject = null;
-    protected $leftValue = null;
-    protected $rightValue = null;
+    protected $identifier    = null;
+    protected $minValue      = null;
+    protected $maxValue      = null;
     
-    public function __construct($subject = null, $leftValue = null, $rightValue = null)
+    /**
+     * Constructor
+     * 
+     * @param  string $identifier 
+     * @param  string $minValue 
+     * @param  string $maxValue 
+     * @return void
+     */
+    public function __construct($identifier = null, $minValue = null, $maxValue = null)
     {
-        if ($subject) {
-            $this->setSubject($subject);
+        if ($identifier) {
+            $this->setIdentifier($identifier);
         }
-        if ($leftValue) {
-            $this->setLeftValue($leftValue);
+        if ($minValue) {
+            $this->setMinValue($minValue);
         }
-        if ($rightValue) {
-            $this->setRightValue($rightValue);
+        if ($maxValue) {
+            $this->setMaxValue($maxValue);
         }
     }
 
-    public function setSubject($subject)
+    /**
+     * Set identifier for comparison
+     * 
+     * @param  string $identifier 
+     * @return Between
+     */
+    public function setIdentifier($identifier)
     {
-        $this->subject = $subject;
+        $this->identifier = $identifier;
+        return $this;
     }
 
-    public function getSubject()
+    /**
+     * Get identifier of comparison
+     * 
+     * @return null|string
+     */
+    public function getIdentifier()
     {
-        return $this->subject;
+        return $this->identifier;
     }
 
-    public function setLeftValue($leftValue)
+    /**
+     * Set minimum boundary for comparison
+     * 
+     * @param  int|float|string $minValue 
+     * @return Between
+     */
+    public function setMinValue($minValue)
     {
-        $this->leftValue = $leftValue;
+        $this->minValue = $minValue;
+        return $this;
     }
 
-    public function getLeftValue()
+    /**
+     * Get minimum boundary for comparison
+     * 
+     * @return null|int|float|string
+     */
+    public function getMinValue()
     {
-        return $this->leftValue;
+        return $this->minValue;
     }
 
-    public function setRightValue($rightValue)
+    /**
+     * Set maximum boundary for comparison
+     * 
+     * @param  int|float|string $maxValue 
+     * @return Between
+     */
+    public function setMaxValue($maxValue)
     {
-        $this->rightValue = $rightValue;
+        $this->maxValue = $maxValue;
+        return $this;
     }
 
-    public function getRightValue()
+    /**
+     * Get maximum boundary for comparison
+     * 
+     * @return null|int|float|string
+     */
+    public function getMaxValue()
     {
-        return $this->rightValue;
+        return $this->maxValue;
     }
 
+    /**
+     * Set specification string to use in forming SQL predicate
+     * 
+     * @param  string $specification 
+     * @return Between
+     */
     public function setSpecification($specification)
     {
         $this->specification = $specification;
+        return $this;
     }
 
+    /**
+     * Get specification string to use in forming SQL predicate
+     * 
+     * @return string
+     */
     public function getSpecification()
     {
         return $this->specification;
     }
 
-
     /**
+     * Return "where" parts
+     *
      * @return array
      */
     public function getWhereParts()
     {
-        // TODO: Implement getWhereParts() method.
+        return array(
+            array(
+                $this->getSpecification(),
+                array($this->identifier, $this->minValue, $this->maxValue),
+                array(self::TYPE_IDENTIFIER, self::TYPE_VALUE, self::TYPE_VALUE),
+            ),
+        );
     }
 }

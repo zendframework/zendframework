@@ -13,8 +13,8 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ * @package    Zend_GData
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -22,35 +22,29 @@
 /**
  * @namespace
  */
-namespace Zend\GData;
+namespace ZendTest\GData;
 
 /**
- * Represents a Gdata extension
- *
+ * PHPUnit test case
+ */
+
+/**
  * @category   Zend
- * @package    Zend_Gdata
- * @subpackage Gdata
+ * @package    Zend_GData
+ * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_GData
  */
-class Extension extends App\Extension
+class SkipClientLoginTest extends \PHPUnit_Framework_TestCase
 {
-
-    protected $_rootNamespace = 'gd';
-
-    public function __construct()
+    public function setUp()
     {
-        /* NOTE: namespaces must be registered before calling parent */
-        $this->registerNamespace('gd',
-                'http://schemas.google.com/g/2005');
-        $this->registerNamespace('openSearch',
-                'http://a9.com/-/spec/opensearchrss/1.0/', 1, 0);
-        $this->registerNamespace('openSearch',
-                'http://a9.com/-/spec/opensearch/1.1/', 2, 0);
-        $this->registerNamespace('rss',
-                'http://blogs.law.harvard.edu/tech/rss');
-
-        parent::__construct();
+        $this->markTestSkipped("Zend_GData authenticated tests are not enabled in TestConfiguration.php");
     }
 
+    public function testClientLogin()
+    {
+        // this is here only so we have at least one test
+    }
 }

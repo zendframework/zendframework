@@ -39,16 +39,19 @@ class Insert implements SqlInterface, PreparableSqlInterface
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
 
-    protected $specification = 'INSERT INTO %1$s (%2$s) VALUES (%3$s)';
-
-    protected $table = null;
-
+    protected $specification    = 'INSERT INTO %1$s (%2$s) VALUES (%3$s)';
+    protected $table            = null;
     protected $databaseOrSchema = null;
+    protected $columns          = array();
+    protected $values           = array();
 
-    protected $columns = array();
-
-    protected $values = array();
-
+    /**
+     * Constructor
+     * 
+     * @param  null|string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return void
+     */
     public function __construct($table = null, $databaseOrSchema = null)
     {
         if ($table) {
@@ -56,6 +59,13 @@ class Insert implements SqlInterface, PreparableSqlInterface
         }
     }
 
+    /**
+     * Crete INTO clause
+     * 
+     * @param  string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return Insert
+     */
     public function into($table, $databaseOrSchema = null)
     {
         $this->table = $table;
@@ -65,12 +75,25 @@ class Insert implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Specify columns
+     * 
+     * @param  array $columns 
+     * @return Insert
+     */
     public function columns(array $columns)
     {
         $this->columns = $columns;
         return $this;
     }
 
+    /**
+     * Specify values to insert
+     * 
+     * @param  array $values 
+     * @param  string $flag one of VALUES_MERGE or VALUES_SET; defaults to VALUES_SET
+     * @return Insert
+     */
     public function values(array $values, $flag = self::VALUES_SET)
     {
         if ($values == null) {
@@ -98,8 +121,11 @@ class Insert implements SqlInterface, PreparableSqlInterface
 
 
     /**
-     * @param Adapter $adapter
-     * @param StatementInterface $statement
+     * Prepare statement
+     *
+     * @param  Adapter $adapter
+     * @param  StatementInterface $statement
+     * @return void
      */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
@@ -134,6 +160,12 @@ class Insert implements SqlInterface, PreparableSqlInterface
         $statement->setSql($sql);
     }
 
+    /**
+     * Get SQL string for this statement
+     * 
+     * @param  null|PlatformInterface $platform Defaults to Sql92 if none provided
+     * @return string
+     */
     public function getSqlString(PlatformInterface $platform = null)
     {
         $platform = ($platform) ?: new Sql92;
@@ -152,8 +184,15 @@ class Insert implements SqlInterface, PreparableSqlInterface
         return sprintf($this->specification, $table, $columns, $values);
     }
 
-
-
+    /**
+     * Overloading: variable setting
+     *
+     * Proxies to values, using VALUES_MERGE strategy
+     * 
+     * @param  string $name 
+     * @param  mixed $value 
+     * @return Insert
+     */
     public function __set($name, $value)
     {
         $values = array($name => $value);
@@ -161,6 +200,14 @@ class Insert implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Overloading: variable unset
+     *
+     * Proxies to values and columns
+     * 
+     * @param  string $name 
+     * @return void
+     */
     public function __unset($name)
     {
         if (($position = array_search($name, $this->columns)) === false) {
@@ -171,11 +218,27 @@ class Insert implements SqlInterface, PreparableSqlInterface
         unset($this->values[$position]);
     }
 
+    /**
+     * Overloading: variable isset
+     *
+     * Proxies to columns; does a column of that name exist?
+     * 
+     * @param  string $name 
+     * @return bool
+     */
     public function __isset($name)
     {
         return in_array($name, $this->columns);
     }
 
+    /**
+     * Overloading: variable retrieval
+     *
+     * Retrieves value by column name
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
     public function __get($name)
     {
         if (($position = array_search($name, $this->columns)) === false) {
@@ -183,5 +246,4 @@ class Insert implements SqlInterface, PreparableSqlInterface
         }
         return $this->values[$position];
     }
-
 }

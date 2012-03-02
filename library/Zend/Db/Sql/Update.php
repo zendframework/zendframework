@@ -41,14 +41,20 @@ class Update implements SqlInterface, PreparableSqlInterface
     const VALUES_MERGE = 'merge';
     const VALUES_SET   = 'set';
 
-    protected $specification = 'UPDATE %1$s SET %2$s';
-
-    protected $databaseOrSchema = null;
-    protected $table = null;
+    protected $specification        = 'UPDATE %1$s SET %2$s';
+    protected $databaseOrSchema     = null;
+    protected $table                = null;
     protected $emptyWhereProtection = true;
-    protected $set = array();
-    protected $where = null;
+    protected $set                  = array();
+    protected $where                = null;
 
+    /**
+     * Constructor
+     * 
+     * @param  null|string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return void
+     */
     public function __construct($table = null, $databaseOrSchema = null)
     {
         if ($table) {
@@ -57,6 +63,13 @@ class Update implements SqlInterface, PreparableSqlInterface
         $this->where = new Where();
     }
 
+    /**
+     * Specify table for statement
+     * 
+     * @param  string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return Update
+     */
     public function table($table, $databaseOrSchema = null)
     {
         $this->table = $table;
@@ -66,6 +79,13 @@ class Update implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Set key/value pairs to update
+     * 
+     * @param  array $values Associative array of key values
+     * @param  string $flag One of the VALUES_* constants
+     * @return Update
+     */
     public function set(array $values, $flag = self::VALUES_SET)
     {
         if ($values == null) {
@@ -86,6 +106,13 @@ class Update implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Create where clause
+     * 
+     * @param  Where|\Closure|string|array $predicate 
+     * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @return Select
+     */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
         if ($predicate instanceof Where) {
@@ -133,6 +160,13 @@ class Update implements SqlInterface, PreparableSqlInterface
     }
     */
 
+    /**
+     * Prepare statement
+     *
+     * @param \Zend\Db\Adapter\Adapter $adapter
+     * @param \Zend\Db\Adapter\Driver\StatementInterface $statement
+     * @return void
+     */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
         $driver   = $adapter->getDriver();
@@ -170,6 +204,12 @@ class Update implements SqlInterface, PreparableSqlInterface
         $this->where->prepareStatement($adapter, $statement);
     }
 
+    /**
+     * Get SQL string for statement
+     * 
+     * @param  null|PlatformInterface $platform If null, defaults to Sql92
+     * @return string
+     */
     public function getSqlString(PlatformInterface $platform = null)
     {
         $platform = ($platform) ?: new Sql92;
@@ -195,6 +235,14 @@ class Update implements SqlInterface, PreparableSqlInterface
         return $sql;
     }
 
+    /**
+     * Variable overloading
+     *
+     * Proxies to "where" only
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
     public function __get($name)
     {
         switch (strtolower($name)) {
@@ -202,5 +250,4 @@ class Update implements SqlInterface, PreparableSqlInterface
                 return $this->where;
         }
     }
-
 }

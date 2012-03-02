@@ -57,6 +57,13 @@ class Select implements SqlInterface, PreparableSqlInterface
     protected $order = null;
     protected $limit = null;
 
+    /**
+     * Constructor
+     * 
+     * @param  null|string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return void
+     */
     public function __construct($table = null, $databaseOrSchema = null)
     {
         if ($table) {
@@ -65,6 +72,13 @@ class Select implements SqlInterface, PreparableSqlInterface
         $this->where = new Where;
     }
 
+    /**
+     * Create from clause
+     * 
+     * @param  string $table 
+     * @param  null|string $databaseOrSchema 
+     * @return Select
+     */
     public function from($table, $databaseOrSchema = null)
     {
         $this->table = $table;
@@ -72,20 +86,36 @@ class Select implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Specify columns from which to select
+     * 
+     * @param  array $columns 
+     * @return Select
+     */
     public function columns(array $columns)
     {
         $this->columns = $columns;
         return $this;
     }
 
-    /*
+    /**
      * @todo do Union
+     * @throws \RuntimeException Unimplemented
+     */
     public function union($select = array(), $type = self::SQL_UNION)
     {
-
+        throw new \RuntimeException(sprintf('%s is not yet implemented'), __METHOD__);
     }
-    */
 
+    /**
+     * Create join clause
+     * 
+     * @param  string $name 
+     * @param  string $on 
+     * @param  string|array $columns 
+     * @param  string $type one of the JOIN_* constants
+     * @return Select
+     */
     public function join($name, $on, $columns = self::SQL_WILDCARD, $type = self::JOIN_INNER)
     {
         if (!is_array($columns)) {
@@ -95,6 +125,13 @@ class Select implements SqlInterface, PreparableSqlInterface
         return $this;
     }
 
+    /**
+     * Create where clause
+     * 
+     * @param  Where|\Closure|string|array $predicate 
+     * @param  string $combination One of the OP_* constants from Predicate\PredicateSet
+     * @return Select
+     */
     public function where($predicate, $combination = Predicate\PredicateSet::OP_AND)
     {
         if ($predicate instanceof Where) {
@@ -121,8 +158,11 @@ class Select implements SqlInterface, PreparableSqlInterface
     }
 
     /**
+     * Prepare statement
+     *
      * @param \Zend\Db\Adapter\Adapter $adapter
      * @param \Zend\Db\Adapter\Driver\StatementInterface $statement
+     * @return void
      */
     public function prepareStatement(Adapter $adapter, StatementInterface $statement)
     {
@@ -188,6 +228,12 @@ class Select implements SqlInterface, PreparableSqlInterface
         $statement->setSql($sql);
     }
 
+    /**
+     * Get SQL string for statement
+     * 
+     * @param  null|PlatformInterface $platform If null, defaults to Sql92
+     * @return string
+     */
     public function getSqlString(PlatformInterface $platform = null)
     {
         // get platform, or create default
@@ -249,6 +295,14 @@ class Select implements SqlInterface, PreparableSqlInterface
         return $sql;
     }
 
+    /**
+     * Variable overloading
+     *
+     * Proxies to "where" only
+     * 
+     * @param  string $name 
+     * @return mixed
+     */
     public function __get($name)
     {
         switch (strtolower($name)) {
@@ -256,5 +310,4 @@ class Select implements SqlInterface, PreparableSqlInterface
                 return $this->where;
         }
     }
-
 }

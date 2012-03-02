@@ -377,7 +377,7 @@ class HelloController extends ActionController
     <info><title>Create a view script</title></info>
 
     <para>
-      Create the directory <filename>views/hello</filename>.  Inside that
+      Create the directory <filename>view/hello</filename>.  Inside that
       directory, create a file named <filename>world.phtml</filename>. Inside
       that, paste in the following:
     </para>

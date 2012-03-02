@@ -21,7 +21,7 @@
 
 namespace ZendTest\Cloud\StorageService;
 
-use Zend\Config\Ini,
+use Zend\Config\Factory as ConfigFactory,
     Zend\Cloud\StorageService\Factory,
     Zend\Cloud\StorageService\Adapter\FileSystem,
     Zend\Cloud\StorageService\Adapter\Nirvanix,
@@ -69,7 +69,7 @@ class FactoryTest extends PHPUnitTestCase
         $httptest = new HttpClientTest();
 
         // Nirvanix adapter
-        $nirvanixConfig = new Ini(realpath(dirname(__FILE__) . '/_files/config/nirvanix.ini'));
+        $nirvanixConfig = ConfigFactory::fromFile(realpath(dirname(__FILE__) . '/_files/config/nirvanix.ini'), true);
         $nirvanixConfig = $nirvanixConfig->toArray();
         $nirvanixConfig[Nirvanix::HTTP_ADAPTER] = $httptest;
 
@@ -89,18 +89,18 @@ class FactoryTest extends PHPUnitTestCase
         $this->assertEquals('Zend\Cloud\StorageService\Adapter\Nirvanix', get_class($nirvanixAdapter));
 
         // S3 adapter
-        $s3Config = new Ini(realpath(dirname(__FILE__) . '/_files/config/s3.ini'));
+        $s3Config = ConfigFactory::fromFile(realpath(dirname(__FILE__) . '/_files/config/s3.ini'), true);
         $s3Adapter = Factory::getAdapter($s3Config);
         $this->assertEquals('Zend\Cloud\StorageService\Adapter\S3', get_class($s3Adapter));
 
         // file system adapter
-        $fileSystemConfig = new Ini(realpath(dirname(__FILE__) . '/_files/config/filesystem.ini'));
+        $fileSystemConfig = ConfigFactory::fromFile(realpath(dirname(__FILE__) . '/_files/config/filesystem.ini'), true);
         $fileSystemAdapter = Factory::getAdapter($fileSystemConfig);
         $this->assertEquals('Zend\Cloud\StorageService\Adapter\FileSystem', get_class($fileSystemAdapter));
 
         // Azure adapter
         /*
-        $azureConfig    = new Ini(realpath(dirname(__FILE__) . '/_files/config/windowsazure.ini'));
+        $azureConfig    = ConfigFactory::fromFile(realpath(dirname(__FILE__) . '/_files/config/windowsazure.ini'), true);
         $azureConfig    = $azureConfig->toArray();
         $azureContainer = $azureConfig[WindowsAzure::CONTAINER];
         $azureConfig[WindowsAzure::HTTP_ADAPTER] = $httptest;

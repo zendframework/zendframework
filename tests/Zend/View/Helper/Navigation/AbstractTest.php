@@ -28,8 +28,7 @@ use Zend\Navigation\Navigation,
     Zend\Acl\Acl,
     Zend\Acl\Role\GenericRole,
     Zend\Acl\Resource\GenericResource,
-    Zend\Config\Config,
-    Zend\Config\Reader\Xml as XmlConfig,
+    Zend\Config\Factory as ConfigFactory,
     Zend\Translator\Translator,
     Zend\View\Renderer\PhpRenderer;
 
@@ -95,8 +94,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
 
         // read navigation config
         $this->_files = $cwd . '/_files';
-        $xml    = new XmlConfig();
-        $config = new Config($xml->fromFile($this->_files . '/navigation.xml'));
+        $config = ConfigFactory::fromFile($this->_files . '/navigation.xml', true);
 
         // setup containers from config
         $this->_nav1 = new Navigation($config->get('nav_test1'));

@@ -1,56 +1,88 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Sql
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 
 namespace Zend\Db\Sql\Predicate;
 
+/**
+ * @category   Zend
+ * @package    Zend_Db
+ * @subpackage Sql
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class In implements PredicateInterface
 {
     protected $specification = '%1$s IN (%2$s)';
-    protected $subject;
+    protected $identifier;
     protected $valueSet;
 
-    public function __construct($subject = null, array $valueSet = array())
+    /**
+     * Constructor
+     * 
+     * @param  null|string $identifier 
+     * @param  array $valueSet 
+     * @return void
+     */
+    public function __construct($identifier = null, array $valueSet = array())
     {
-        if ($subject) {
-            $this->setSubject($subject);
+        if ($identifier) {
+            $this->setIdentifier($identifier);
         }
-        if ($valueSet) {
+        if (!empty($valueSet)) {
             $this->setValueSet($valueSet);
         }
     }
 
-    public function getParameterizedSqlString(Adapter $adapter)
+    /**
+     * Set identifier for comparison
+     * 
+     * @param  string $identifier 
+     * @return In
+     */
+    public function setIdentifier($identifier)
     {
-        // TODO: Implement getParameterizedSqlString() method.
+        $this->identifier = $identifier;
+        return $this;
     }
 
-    public function getParameterContainer()
+    /**
+     * Get identifier of comparison
+     * 
+     * @return null|string
+     */
+    public function getIdentifier()
     {
-        // TODO: Implement getParameterContainer() method.
+        return $this->identifier;
     }
 
-    public function setSpecification($specification)
-    {
-        $this->specification = $specification;
-    }
-
-    public function getSpecification()
-    {
-        return $this->specification;
-    }
-
-    public function setSubject($subject)
-    {
-        $this->subject = $subject;
-    }
-
-    public function getSubject()
-    {
-        return $this->subject;
-    }
-
-    public function setValueSet($valueSet)
+    /**
+     * Set set of values for IN comparison
+     * 
+     * @param  array $valueSet 
+     * @return In
+     */
+    public function setValueSet(array $valueSet)
     {
         $this->valueSet = $valueSet;
+        return $this;
     }
 
     public function getValueSet()
@@ -59,10 +91,45 @@ class In implements PredicateInterface
     }
 
     /**
+     * Set specification string to use in forming SQL predicate
+     * 
+     * @param  string $specification 
+     * @return In
+     */
+    public function setSpecification($specification)
+    {
+        $this->specification = $specification;
+        return $this;
+    }
+
+    /**
+     * Get specification string to use in forming SQL predicate
+     * 
+     * @return string
+     */
+    public function getSpecification()
+    {
+        return $this->specification;
+    }
+
+    /**
+     * Return array of parts for where statement
+     *
      * @return array
      */
     public function getWhereParts()
     {
-        // TODO: Implement getWhereParts() method.
+        $values = $this->getValueSet();
+        $types  = array_fill(0, count($values), self::TYPE_VALUE);
+
+        $identifier = $this->getIdentifier();
+        array_unshift($values, $identifier);
+        array_unshift($types, self::TYPE_IDENTIFIER);
+
+        return array(array(
+            $this->getSpecification(),
+            $values,
+            $types,
+        ));
     }
 }

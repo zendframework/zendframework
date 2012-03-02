@@ -32,12 +32,12 @@ interface ParameterContainerInterface extends \ArrayAccess, \Countable, \Travers
 {
     const POSITION_APPEND = null;
 
-    const TYPE_AUTO = 'auto';
-    const TYPE_NULL = 'null';
-    const TYPE_DOUBLE = 'double';
+    const TYPE_AUTO    = 'auto';
+    const TYPE_NULL    = 'null';
+    const TYPE_DOUBLE  = 'double';
     const TYPE_INTEGER = 'integer';
-    const TYPE_STRING = 'string';
-    const TYPE_LOB = 'lob';
+    const TYPE_STRING  = 'string';
+    const TYPE_LOB     = 'lob';
 
     public function setFromArray(Array $data);
     

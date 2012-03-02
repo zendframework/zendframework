@@ -52,6 +52,11 @@ class Connection implements ConnectionInterface
      */
     protected $inTransaction = false;
     
+    /**
+     * Constructor
+     * 
+     * @param mixed $connectionInfo 
+     */
     public function __construct($connectionInfo)
     {
         if (is_array($connectionInfo)) {
@@ -60,29 +65,51 @@ class Connection implements ConnectionInterface
             $this->setResource($connectionInfo);
         }
     }
-    
+    /**
+     * Set driver
+     * 
+     * @param  Sqlsrv $driver
+     * @return Connection 
+     */
     public function setDriver(Sqlsrv $driver)
     {
         $this->driver = $driver;
         return $this;
     }
-    
+    /**
+     * Set connection parameters
+     * 
+     * @param  array $connectionParameters
+     * @return Connection 
+     */
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
         return $this;
     }
-    
+    /**
+     * Get connection parameters
+     * 
+     * @return array 
+     */
     public function getConnectionParameters()
     {
         return $this->connectionParameters;
     }
-    
+    /**
+     * Get default catalog
+     * 
+     * @return null 
+     */
     public function getDefaultCatalog()
     {
         return null;
     }
-    
+    /**
+     * Get dafault schema
+     * 
+     * @return string 
+     */
     public function getDefaultSchema()
     {
         if (!$this->isConnected()) {
@@ -93,7 +120,12 @@ class Connection implements ConnectionInterface
         $r = sqlsrv_fetch_array($result);
         return $r[0];
     }
-
+    /**
+     * Set resource
+     * 
+     * @param  resource $resource
+     * @return Connection 
+     */
     public function setResource($resource)
     {
         if (get_resource_type($resource) !== 'SQL Server Connection') {
@@ -110,7 +142,11 @@ class Connection implements ConnectionInterface
     {
         return $this->resource;
     }
-    
+    /**
+     * Connect
+     * 
+     * @return null 
+     */
     public function connect()
     {
         if ($this->resource) {
@@ -148,18 +184,29 @@ class Connection implements ConnectionInterface
         }
 
     }
-    
+    /**
+     * Is connected
+     * 
+     * @return boolean 
+     */
     public function isConnected()
     {
         return (is_resource($this->resource));
     }
-    
+    /**
+     * Disconnect
+     * 
+     */
     public function disconnect()
     {
         sqlsrv_close($this->resource);
         unset($this->resource);
     }
     
+    /**
+     * Begin transaction
+     * 
+     */
     public function beginTransaction()
     {
         // http://msdn.microsoft.com/en-us/library/cc296151.aspx
@@ -168,7 +215,9 @@ class Connection implements ConnectionInterface
         $this->inTransaction = true;
         */
     }
-    
+    /**
+     * Commit
+     */
     public function commit()
     {
         // http://msdn.microsoft.com/en-us/library/cc296194.aspx
@@ -182,7 +231,9 @@ class Connection implements ConnectionInterface
         $this->inTransaction = false;
         */
     }
-    
+    /**
+     * Rollback 
+     */
     public function rollback()
     {
         // http://msdn.microsoft.com/en-us/library/cc296176.aspx
@@ -200,7 +251,12 @@ class Connection implements ConnectionInterface
         */
     }
     
-    
+    /**
+     * Execute
+     * 
+     * @param  string $sql
+     * @return mixed 
+     */
     public function execute($sql)
     {
         if (!$this->isConnected()) {
@@ -221,7 +277,12 @@ class Connection implements ConnectionInterface
         $result = $this->driver->createResult($returnValue);
         return $result;
     }
-    
+    /**
+     * Prepare
+     * 
+     * @param  string $sql
+     * @return string 
+     */
     public function prepare($sql)
     {
         if (!$this->isConnected()) {
@@ -231,7 +292,11 @@ class Connection implements ConnectionInterface
         $statement = $this->driver->createStatement($sql);
         return $statement;
     }
-
+    /**
+     * Get last generated id
+     * 
+     * @return mixed 
+     */
     public function getLastGeneratedId()
     {
         $sql = 'SELECT SCOPE_IDENTITY() as Current_Identity';

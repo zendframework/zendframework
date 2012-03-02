@@ -35,12 +35,33 @@ use Zend\Db\Adapter\Adapter,
  */
 class RowGateway implements RowGatewayInterface, RowObjectInterface
 {
+    /**
+     *
+     * @var type 
+     */
     protected $tableGateway = null;
+    /**
+     *
+     * @var string
+     */
     protected $primaryKey = null;
-
+    /**
+     *
+     * @var type 
+     */
     protected $originalData = null;
+    /**
+     *
+     * @var type 
+     */
     protected $currentData = null;
 
+    /**
+     * Constructor
+     * 
+     * @param TableGateway $tableGateway
+     * @param type $primaryKey 
+     */
     public function __construct(TableGateway $tableGateway, $primaryKey)
     {
         $this->tableGateway = clone $tableGateway;
@@ -48,6 +69,13 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
         $this->primaryKey = $primaryKey;
     }
 
+    /**
+     * Populate Original Data
+     * 
+     * @param  type $originalData
+     * @param  boolean $originalDataIsCurrent
+     * @return RowGateway 
+     */
     public function populateOriginalData($originalData, $originalDataIsCurrent = true)
     {
         $this->originalData = $originalData;
@@ -56,13 +84,22 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
         }
         return $this;
     }
-
+    /**
+     * Populate current data
+     * 
+     * @param  type $currentData
+     * @return RowGateway 
+     */
     public function populateCurrentData($currentData)
     {
         $this->currentData = $currentData;
         return $this;
     }
-
+    /**
+     * Save
+     * 
+     * @return integer 
+     */
     public function save()
     {
         if (is_array($this->primaryKey)) {
@@ -89,7 +126,11 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
 
         return $rowsAffected;
     }
-
+    /**
+     * Delete
+     * 
+     * @return type 
+     */
     public function delete()
     {
         if (is_array($this->primaryKey)) {
@@ -99,29 +140,55 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
         $where = array($this->primaryKey => $this->originalData[$this->primaryKey]);
         return $this->tableGateway->delete($where);
     }
-
+    /**
+     * Offset Exists
+     * 
+     * @param  string $offset
+     * @return boolean
+     */
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->currentData);
     }
-
+    /**
+     * Offset get
+     * 
+     * @param  string $offset
+     * @return type 
+     */
     public function offsetGet($offset)
     {
         return $this->currentData[$offset];
     }
-
+    /**
+     * Offset set
+     * 
+     * @param  string $offset
+     * @param  type $value
+     * @return RowGateway 
+     */
     public function offsetSet($offset, $value)
     {
         $this->currentData[$offset] = $value;
         return $this;
     }
-
+    /**
+     * Offset unset
+     * 
+     * @param  string $offset
+     * @return RowGateway 
+     */
     public function offsetUnset($offset)
     {
         $this->currentData[$offset] = null;
         return $this;
     }
-
+    /**
+     * Exchange array
+     * 
+     * @param  string $input
+     * @return RowGateway 
+     */
     public function exchangeArray($input)
     {
         $this->originalData = $this->currentData = $input;
@@ -141,12 +208,21 @@ class RowGateway implements RowGatewayInterface, RowObjectInterface
     {
         return count($this->currentData);
     }
-
+    /**
+     * To array
+     * 
+     * @return array 
+     */
     public function toArray()
     {
         return $this->currentData;
     }
-
+    /**
+     * __get
+     * 
+     * @param  string $name
+     * @return type 
+     */
     public function __get($name)
     {
         if (array_key_exists($name, $this->currentData)) {

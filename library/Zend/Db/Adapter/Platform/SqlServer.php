@@ -30,36 +30,69 @@ namespace Zend\Db\Adapter\Platform;
  */
 class SqlServer implements PlatformInterface
 {
+    /**
+     * Get name
+     * 
+     * @return string 
+     */
     public function getName()
     {
         return 'SQLServer';
     }
-
+    /**
+     * Get quote identifier symbol
+     * 
+     * @return string 
+     */
     public function getQuoteIdentifierSymbol()
     {
         return array('[', ']');
     }
-
+    /**
+     * Quote identifier
+     * 
+     * @param  string $identifier
+     * @return string 
+     */
     public function quoteIdentifier($identifier)
     {
         return '[' . $identifier . ']';
     }
-
+    /**
+     * Get quote value symbol
+     * 
+     * @return string 
+     */
     public function getQuoteValueSymbol()
     {
         return '\'';
     }
-
+    /**
+     * Quote value
+     * 
+     * @param  string $value
+     * @return string 
+     */
     public function quoteValue($value)
     {
         return '\'' . str_replace('\'', '\'\'', $value) . '\'';
     }
-
+    /**
+     * Get identifier separator
+     * 
+     * @return string 
+     */
     public function getIdentifierSeparator()
     {
         return '.';
     }
-
+    /**
+     * Quote identifier in fragment
+     * 
+     * @param  string $identifier
+     * @param  array $safeWords
+     * @return string 
+     */
     public function quoteIdentifierInFragment($identifier, array $safeWords = array())
     {
         $parts = preg_split('#([\.\s])#', $identifier, -1, PREG_SPLIT_DELIM_CAPTURE);

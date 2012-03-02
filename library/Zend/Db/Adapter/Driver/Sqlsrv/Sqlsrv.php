@@ -67,25 +67,43 @@ class Sqlsrv implements DriverInterface
         $this->registerStatementPrototype(($statementPrototype) ?: new Statement());
         $this->registerResultPrototype(($resultPrototype) ?: new Result());
     }
-
+    /**
+     * Register connection
+     * 
+     * @param  Connection $connection
+     * @return Sqlsrv 
+     */
     public function registerConnection(Connection $connection)
     {
         $this->connection = $connection;
         $this->connection->setDriver($this);
         return $this;
     }
-
+    /**
+     * Register statement prototype
+     * 
+     * @param Statement $statementPrototype 
+     */
     public function registerStatementPrototype(Statement $statementPrototype)
     {
         $this->statementPrototype = $statementPrototype;
         $this->statementPrototype->setDriver($this);
     }
-
+    /**
+     * Register result prototype
+     * 
+     * @param Result $resultPrototype 
+     */
     public function registerResultPrototype(Result $resultPrototype)
     {
         $this->resultPrototype = $resultPrototype;
     }
-
+    /**
+     * Get database paltform name
+     * 
+     * @param  string $nameFormat
+     * @return string 
+     */
     public function getDatabasePlatformName($nameFormat = self::NAME_FORMAT_CAMELCASE)
     {
         if ($nameFormat == self::NAME_FORMAT_CAMELCASE) {
@@ -94,7 +112,9 @@ class Sqlsrv implements DriverInterface
             return 'SQLServer';
         }
     }
-
+    /**
+     * Check environment
+     */
     public function checkEnvironment()
     {
         if (!extension_loaded('sqlsrv')) {

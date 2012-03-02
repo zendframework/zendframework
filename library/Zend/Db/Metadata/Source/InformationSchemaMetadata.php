@@ -34,22 +34,48 @@ use Zend\Db\Metadata\MetadataInterface,
  */
 class InformationSchemaMetadata implements MetadataInterface
 {
+    /**
+     *
+     * @var Adapter 
+     */
     protected $adapter = null;
+    /**
+     *
+     * @var string
+     */
     protected $defaultSchema = null;
+    /**
+     *
+     * @var array
+     */
     protected $data = array();
 
+    /**
+     * Constructor
+     * 
+     * @param Adapter $adapter 
+     */
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
         $this->defaultSchema = ($adapter->getDefaultSchema()) ?: '__DEFAULT_SCHEMA__';
     }
 
-
+    /**
+     * Get schemas
+     * 
+     */
     public function getSchemas()
     {
         // TODO: Implement getSchemas() method.
     }
-
+    /**
+     * Get table names
+     * 
+     * @param  string $schema
+     * @param  string $database
+     * @return array 
+     */
     public function getTableNames($schema = null, $database = null)
     {
         // set values for database & schema
@@ -84,7 +110,13 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->data[$database][$schema]['tables'] = $tables;
         return $tables;
     }
-
+    /**
+     * Get tables
+     * 
+     * @param  string $schema
+     * @param  string $database
+     * @return array 
+     */
     public function getTables($schema = null, $database = null)
     {
         // set values for database & schema
@@ -99,7 +131,14 @@ class InformationSchemaMetadata implements MetadataInterface
         }
         return $tables;
     }
-
+    /**
+     * Get table
+     * 
+     * @param  string $tableName
+     * @param  string $schema
+     * @param  string $database
+     * @return Object\TableObject 
+     */
     public function getTable($tableName, $schema = null, $database = null)
     {
         // set values for database & schema
@@ -112,22 +151,45 @@ class InformationSchemaMetadata implements MetadataInterface
         $table->setColumns($this->getColumns($tableName, $schema, $database));
         return $table;
     }
-
+    /**
+     * Get view names
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     public function getViewNames($schema = null, $database = null)
     {
         // TODO: Implement getViewNames() method.
     }
-
+    /**
+     * Get views
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     public function getViews($schema = null, $database = null)
     {
         // TODO: Implement getViews() method.
     }
-
+    /**
+     * Get view
+     * 
+     * @param string $viewName
+     * @param string $schema
+     * @param string $database 
+     */
     public function getView($viewName, $schema = null, $database = null)
     {
         // TODO: Implement getView() method.
     }
-
+    /**
+     * Gt column names
+     * 
+     * @param  string $table
+     * @param  string $schema
+     * @param  string $database
+     * @return array 
+     */
     public function getColumnNames($table, $schema = null, $database = null)
     {
         // set values for database & schema
@@ -146,7 +208,14 @@ class InformationSchemaMetadata implements MetadataInterface
         }
         return $columns;
     }
-
+    /**
+     * Get columns
+     * 
+     * @param  string $table
+     * @param  string $schema
+     * @param  string $database
+     * @return array 
+     */
     public function getColumns($table, $schema = null, $database = null)
     {
         // set values for database & schema
@@ -165,7 +234,15 @@ class InformationSchemaMetadata implements MetadataInterface
         }
         return $columns;
     }
-
+    /**
+     * Get column
+     * 
+     * @param  string $columnName
+     * @param  string $table
+     * @param  string $schema
+     * @param  string $database
+     * @return Object\ColumnObject 
+     */
     public function getColumn($columnName, $table, $schema = null, $database = null)
     {
         // set values for database & schema
@@ -196,7 +273,14 @@ class InformationSchemaMetadata implements MetadataInterface
         return $column;
     }
 
-
+    /**
+     * Get constraints
+     * 
+     * @param  string $table
+     * @param  string $schema
+     * @param  string $database
+     * @return array 
+     */
     public function getConstraints($table, $schema = null, $database = null)
     {
         // set values for database & schema
@@ -218,7 +302,15 @@ class InformationSchemaMetadata implements MetadataInterface
 
         return $constraints;
     }
-
+    /**
+     * Get constraint
+     * 
+     * @param  string $constraintName
+     * @param  string $table
+     * @param  string $schema
+     * @param  string $database
+     * @return Object\ConstraintObject 
+     */
     public function getConstraint($constraintName, $table, $schema = null, $database = null)
     {
         // set values for database & schema
@@ -248,7 +340,15 @@ class InformationSchemaMetadata implements MetadataInterface
         $constraint->setKeys($this->getConstraintKeys($constraintName, $table, $schema, $database));
         return $constraint;
     }
-
+    /**
+     * Get constraint keys
+     * 
+     * @param  string $constraint
+     * @param  string $table
+     * @param  string $schema
+     * @param  string $database
+     * @return Object\ConstraintKeyObject 
+     */
     public function getConstraintKeys($constraint, $table, $schema = null, $database = null)
     {
         // set values for database & schema
@@ -287,23 +387,43 @@ class InformationSchemaMetadata implements MetadataInterface
         return $keys;
     }
 
-
-
+    /**
+     * Get trigger names
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     public function getTriggerNames($schema = null, $database = null)
     {
         // TODO: Implement getTriggerNames() method.
     }
-
+    /**
+     * Get triggers
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     public function getTriggers($schema = null, $database = null)
     {
         // TODO: Implement getTriggers() method.
     }
-
+    /**
+     * Get trigger
+     * 
+     * @param string $triggerName
+     * @param string $schema
+     * @param string $database 
+     */
     public function getTrigger($triggerName, $schema = null, $database = null)
     {
         // TODO: Implement getTrigger() method.
     }
-
+    /**
+     * Load column data
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     protected function loadColumnData($schema, $database)
     {
         $platform = $this->adapter->getPlatform();
@@ -350,16 +470,26 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('columns'));
         $this->data[$database][$schema]['columns'] = $columnByTableInfos;
     }
-
+    
+    /**
+     * Load constraint data
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     protected function loadConstraintData($schema, $database)
     {
         $this->loadConstraintDataNames($schema, $database);
         $this->loadConstraintDataKeys($schema, $database);
         $this->loadConstraintReferences($schema, $database);
-
-
     }
-
+    
+    /**
+     * Load constraint data names
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     protected function loadConstraintDataNames($schema, $database)
     {
         $platform = $this->adapter->getPlatform();
@@ -394,7 +524,12 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('constraints', 'names'));
         $this->data[$database][$schema]['constraints']['names'] = $constraintData;
     }
-
+    /**
+     * Load constraint data keys
+     * 
+     * @param string $schema
+     * @param string $database 
+     */
     protected function loadConstraintDataKeys($schema, $database)
     {
         $platform = $this->adapter->getPlatform();
@@ -433,7 +568,13 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('constraints', 'keys'));
         $this->data[$database][$schema]['constraints']['keys'] = $constraintKeyData;
     }
-
+    /**
+     * Load constraint references
+     * 
+     * @param  string $schema
+     * @param  string $database
+     * @return type 
+     */
     protected function loadConstraintReferences($schema, $database)
     {
         /** @var $platform \Zend\Db\Adapter\PlatformInterface */
@@ -488,7 +629,13 @@ class InformationSchemaMetadata implements MetadataInterface
         $this->prepareDataHeirarchy($database, $schema, array('constraints', 'keys'));
         $this->data[$database][$schema]['constraints']['references'] = $constraintRefData;
     }
-
+    /**
+     * Prepare data heirarchy
+     * 
+     * @param string $database
+     * @param string $schema
+     * @param array $rest 
+     */
     protected function prepareDataHeirarchy($database, $schema, array $rest)
     {
         $data = &$this->data;

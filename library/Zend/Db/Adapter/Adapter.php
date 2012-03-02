@@ -192,6 +192,13 @@ class Adapter
         return $result;
     }
 
+    /**
+     * Create statement
+     * 
+     * @param  string $initialSql
+     * @param  ParameterContainerInterface $initialParameters
+     * @return Driver\StatementInterface 
+     */
     public function createStatement($initialSql = null, $initialParameters = null)
     {
         $statement = $this->driver->createStatement($initialSql);

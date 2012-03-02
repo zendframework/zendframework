@@ -77,7 +77,7 @@ class PaginatorTest extends TestCase
         $this->_testCollection = range(1, 101);
         $this->_paginator = Paginator\Paginator::factory($this->_testCollection);
 
-        $this->_config = new Config\Xml(__DIR__ . '/_files/config.xml');
+        $this->_config = Config\Factory::fromFile(__DIR__ . '/_files/config.xml', true);
 
         $this->_cache = CacheFactory::factory(array(
             'adapter' => array(

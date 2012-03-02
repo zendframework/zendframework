@@ -1173,14 +1173,15 @@ class App
      */
     public function generateIfMatchHeaderData($data, $allowWeek)
     {
-        $result = '';
+        $result = null;
         // Set an If-Match header if an ETag has been set (version >= 2 only)
         if ($this->_majorProtocolVersion >= 2 && $data instanceof App\Entry) {
             $etag = $data->getEtag();
             if ($etag instanceof Etag) {
                 $etag = $etag->getFieldValue();
-                if (($etag !== null) &&
-                    ($allowWeek || (substr($etag, 0, 2) != 'W/'))) {
+                if (!empty($etag) 
+                    && ($allowWeek || (substr($etag, 0, 2) != 'W/'))
+                ) {
                     $result = $etag;
                 }
             }

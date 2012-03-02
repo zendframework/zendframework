@@ -518,7 +518,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
 
     public function testGenerateIfMatchHeaderDataReturnsNullIfWeak()
     {
-        $etag = Etag::fromString('Etag: ABCD1234');
+        $etag = Etag::fromString('Etag: W/ABCD1234');
         $this->service->setMajorProtocolVersion(2);
         $entry = new App\Entry();
         $entry->setEtag($etag);

@@ -67,7 +67,7 @@ class Spreadsheets extends GData
         $this->registerPackage('\Zend\GData\Spreadsheets');
         $this->registerPackage('\Zend\GData\Spreadsheets\Extension');
         parent::__construct($client, $applicationId);
-        $this->_httpClient->setParameterPost('service', self::AUTH_SERVICE_NAME);
+        $this->_httpClient->setParameterPost(array('service' => self::AUTH_SERVICE_NAME));
         $this->_server = 'spreadsheets.google.com';
     }
 

@@ -8,10 +8,8 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\Adapter\Platform\Sql92,
     Zend\Db\Adapter\ParameterContainer;
 
-
 /**
  * @property Where $where
- * @todo http://pastie.org/private/oua4j2p3bvueoyw19nefw
  */
 class Select implements SqlInterface, PreparableSqlInterface
 {
@@ -56,6 +54,7 @@ class Select implements SqlInterface, PreparableSqlInterface
     }
 
     /*
+     * @todo do Union
     public function union($select = array(), $type = self::SQL_UNION)
     {
 

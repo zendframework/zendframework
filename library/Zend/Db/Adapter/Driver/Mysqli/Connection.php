@@ -187,7 +187,7 @@ class Connection implements ConnectionInterface
         }
 
         if (!empty($p['charset'])) {
-            $this->resource->set_charset($this->resource, $p['charset']);
+            $this->resource->set_charset($p['charset']);
         }
 
     }

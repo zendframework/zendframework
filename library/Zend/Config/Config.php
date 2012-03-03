@@ -335,10 +335,10 @@ class Config implements Countable, Iterator, ArrayAccess
     }
 
     /**
-     * Replace values from in this config with values from other config.
+     * Replace values in this config with values from another config.
      *
-     * If an item exists in current config, it will be replaced by an item from $replace.
-     * If an item contains numerical list (array), respective elements will be REPLACED with values from $replace.
+     * If an item with the same key exists in current config, it will be replaced by an item from $replace.
+     * If an item contains a list (numerical array), elements will be REPLACED with values from $replace.
      *
      * @param  Config $replace
      * @return Config
@@ -369,7 +369,7 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Merge values from another config into this one, replacing named values and appending items in lists.
      *
-     * If an item exists in current config, it will be replaced by item from $merge.
+     * If an item with the same key exists in current config, it will be replaced by item from $merge.
      * If an item contains numerical list (array), list will be APPENDED with items from $merge.
      *
      * @param  Config $merge

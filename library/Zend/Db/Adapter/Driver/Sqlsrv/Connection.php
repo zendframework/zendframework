@@ -173,6 +173,11 @@ class Connection implements ConnectionInterface
                 case 'dbname':
                     $params['Database'] = (string) $value;
                     break;
+                case 'driver_options':
+                case 'options':
+                    $params = array_merge($params, (array) $value);
+                    break;
+
             }
         }
 

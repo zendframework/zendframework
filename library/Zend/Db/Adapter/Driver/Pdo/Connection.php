@@ -179,7 +179,8 @@ class Connection implements ConnectionInterface
                     break;
                 case 'driver_options':
                 case 'options':
-                    $options = array_merge($options, (array) $value);
+                    $value = (array) $value;
+                    $options = array_diff_key($options, $value) + $value;
                     break;
                 default:
                     $options[$key] = $value;

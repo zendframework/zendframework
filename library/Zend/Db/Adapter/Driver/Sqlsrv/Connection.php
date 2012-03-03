@@ -155,23 +155,23 @@ class Connection implements ConnectionInterface
         
         $serverName = '.';
         $params = array();
-        foreach ($this->connectionParameters as $cpName => $cpValue) {
-            switch (strtolower($cpName)) {
+        foreach ($this->connectionParameters as $key => $value) {
+            switch (strtolower($key)) {
                 case 'hostname':
                 case 'servername':
-                    $serverName = $cpValue;
+                    $serverName = (string) $value;
                     break;
                 case 'username':
                 case 'uid':
-                    $params['UID'] = $cpValue;
+                    $params['UID'] = (string) $value;
                     break;
                 case 'password':
                 case 'pwd':
-                    $params['PWD'] = $cpValue;
+                    $params['PWD'] = (string) $value;
                     break;
                 case 'database':
                 case 'dbname':
-                    $params['Database'] = $cpValue;
+                    $params['Database'] = (string) $value;
                     break;
             }
         }

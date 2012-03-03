@@ -24,7 +24,7 @@ abstract class IsAssocArray
             if ($allowEmpty && count($value) == 0) {
                 return true;
             }
-            return count(array_filter(array_keys($value), 'is_string')) > 0;
+            return (array_values($value) !== $value);
         }
         return false;
     }

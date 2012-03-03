@@ -672,33 +672,32 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      * @link http://framework.zend.com/issues/browse/ZF2-186
      */
     public function testZF2_186_mergeReplacingUnnamedConfigSettings(){
-$arrayA = array(
-    'flag' => true,
-    'text' => 'foo',
-    'list' => array( 'a', 'b', 'c' ),
-    'aSpecific' => 12
-);
+        $arrayA = array(
+            'flag' => true,
+            'text' => 'foo',
+            'list' => array( 'a', 'b', 'c' ),
+            'aSpecific' => 12
+        );
 
-$arrayB = array(
-    'flag' => false,
-    'text' => 'bar',
-    'list' => array( 'd', 'e' ),
-    'bSpecific' => 100
-);
+        $arrayB = array(
+            'flag' => false,
+            'text' => 'bar',
+            'list' => array( 'd', 'e' ),
+            'bSpecific' => 100
+        );
 
-$mergeResult = array(
-    'flag' => false,
-    'text' => 'bar',
-    'list' => array( 'a', 'b', 'c', 'd', 'e' ),
-    'aSpecific' => 12,
-    'bSpecific' => 100
-);
+        $mergeResult = array(
+            'flag' => false,
+            'text' => 'bar',
+            'list' => array( 'a', 'b', 'c', 'd', 'e' ),
+            'aSpecific' => 12,
+            'bSpecific' => 100
+        );
 
-$configA = new Config($arrayA);
-$configB = new Config($arrayB);
+        $configA = new Config($arrayA);
+        $configB = new Config($arrayB);
 
-$configA->merge($configB); // merge B onto A
-
+        $configA->merge($configB); // merge B onto A
         $this->assertEquals($mergeResult, $configA->toArray());
     }
 }

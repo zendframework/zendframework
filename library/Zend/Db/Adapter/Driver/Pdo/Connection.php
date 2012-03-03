@@ -149,7 +149,7 @@ class Connection implements ConnectionInterface
 
         // @todo method createKnownDsn
 
-        $dsn = $username = $password = $database = null;
+        $dsn = $username = $password = $hostname = $database = null;
         $options = array();
         foreach ($this->connectionParameters as $key => $value) {
             switch (strtolower($key)) {
@@ -173,6 +173,10 @@ class Connection implements ConnectionInterface
                 case 'password':
                     $password = (string) $value;
                     break;
+                case 'host':
+                case 'hostname':
+                    $hostname = (string) $value;
+                    break;
                 case 'database':
                 case 'dbname':
                     $database = (string) $value;
@@ -190,8 +194,11 @@ class Connection implements ConnectionInterface
 
         if (!isset($dsn) && isset($pdoDriver)) {
             $dsn = $pdoDriver . ':';
+            if (isset($hostname)) {
+                $dsn .= "hostname=$hostname;";
+            }
             if (isset($database)) {
-                $dsn .= $database;
+                $dsn .= "dbname=$database;";
             }
         } elseif (!isset($dsn)) {
             throw new \Exception('A dsn was not provided or could not be constructed from your parameters');

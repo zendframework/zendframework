@@ -250,8 +250,9 @@ class Statement implements StatementInterface
                 }
             }
 
-            // position is named or positional, value is reference
-            $this->resource->bindParam((is_int($position) ? ($position + 1) : $position), $value, $type);
+            // parameter is named or positional, value is reference
+            $parameter = is_int($position) ? ($position + 1) : $position;
+            $this->resource->bindParam($parameter, $value, $type);
         }
     }
 

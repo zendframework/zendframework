@@ -20,6 +20,8 @@
 
 namespace Zend\Config;
 
+use Zend\Stdlib\ArrayReplergeRecursive;
+
 /**
  * Declared abstract to prevent instantiation
  * 
@@ -95,7 +97,7 @@ abstract class Factory
         $config = array();
 
         foreach ($files as $file) {
-            $config = array_replace_recursive($config, self::fromFile($file));
+            $config = ArrayReplergeRecursive::replerge($config, self::fromFile($file));
         }
 
         return ($returnConfigObject) ? new Config($config) : $config;

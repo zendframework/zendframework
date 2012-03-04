@@ -126,6 +126,12 @@ class SegmentTest extends TestCase
                 null,
                 array('foo-bar' => 'baz')
             ),
+            'url-encoded-parameters-are-decoded' => array(
+                new Segment('/:foo'),
+                '/foo+bar',
+                null,
+                array('foo' => 'foo bar')
+            ),
         );
     }
 

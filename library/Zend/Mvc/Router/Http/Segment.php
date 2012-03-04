@@ -339,7 +339,7 @@ class Segment implements Route
 
         foreach ($this->paramMap as $index => $name) {
             if (isset($matches[$index])) {
-                $params[$name] = $matches[$index];
+                $params[$name] = urldecode($matches[$index]);
             }
         }
 

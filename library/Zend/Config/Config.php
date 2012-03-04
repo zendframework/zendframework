@@ -336,19 +336,31 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Merge another Config with this one.
      *
-     * @see    ArrayReplergeRecursive::replerge()
      * @param  self $merge
      * @return self
      */
     public function merge(self $merge)
     {
-        $data = ArrayReplergeRecursive::replerge(
-            $this->toArray(),
-            $merge->toArray()
-        );
-        
-        foreach ($data as $key => $value) {
-            $this->__set($key, $value);
+        foreach ($merge as $key => $value) {
+            if (array_key_exists($key, $this->data)) {
+                if (is_int($key)) {
+                    $this->data[] = $value;
+                } elseif ($value instanceof self && $this->data[$key] instanceof self) {
+                    $this->data[$key] = $this->data[$key]->merge($value);
+                } else {
+                    if ($value instanceof self) {
+                        $this->data[$key] = new self($value->toArray(), $this->allowModifications);
+                    } else {
+                        $this->data[$key] = $value;
+                    }
+                }
+            } else {
+                if ($value instanceof self) {
+                    $this->data[$key] = new self($value->toArray(), $this->allowModifications);
+                } else {
+                    $this->data[$key] = $value;
+                }
+            }
         }
 
         return $this;

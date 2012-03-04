@@ -84,7 +84,8 @@ class FeedSet extends ArrayObject
      */
     protected function absolutiseUri($link, $uri = null)
     {
-        if (!Uri\UriFactory::factory($link)->isValid()) {
+        $linkUri = Uri\UriFactory::factory($link);
+        if (!$linkUri->isAbsolute() or !$linkUri->isValid()) {
             if ($uri !== null) {
                 $uri = Uri\UriFactory::factory($uri);
 

@@ -279,7 +279,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
             );
 
-        $row = new \Zend\Db\ResultSet\Row($rowdata);
+        $row = new \Zend\Db\ResultSet\Row;
+        $row->exchangeArray($rowdata);
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -293,12 +294,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('update')
             ->with(
                 $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t->get(Date\Date::TIMESTAMP),'lease_seconds'=>1234567,'subscription_state'=>'verified','expiration_time'=>$t->add(1234567,Date\Date::SECOND)->get('yyyy-MM-dd HH:mm:ss'))),
-                $this->equalTo('id = \'verifytokenkey\'')
+                $this->equalTo(array('id' => 'verifytokenkey'))
             );
-        $this->_adapter->expects($this->once())
-            ->method('quoteInto')
-            ->with($this->equalTo('id = ?'), $this->equalTo('verifytokenkey'))
-            ->will($this->returnValue('id = \'verifytokenkey\''));
 
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
@@ -319,7 +316,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
             );
 
-        $row = new \Zend\Db\ResultSet\Row($rowdata);
+        $row = new \Zend\Db\ResultSet\Row;
+        $row->exchangeArray($rowdata);
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -333,12 +331,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             ->method('update')
             ->with(
                 $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t->get(Date\Date::TIMESTAMP),'lease_seconds'=>1234567,'subscription_state'=>'verified','expiration_time'=>$t->add(1234567,Date\Date::SECOND)->get('yyyy-MM-dd HH:mm:ss'))),
-                $this->equalTo('id = \'verifytokenkey\'')
+                $this->equalTo(array('id' => 'verifytokenkey'))
             );
-        $this->_adapter->expects($this->once())
-            ->method('quoteInto')
-            ->with($this->equalTo('id = ?'), $this->equalTo('verifytokenkey'))
-            ->will($this->returnValue('id = \'verifytokenkey\''));
+        
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getBody() == 'abc');
     }

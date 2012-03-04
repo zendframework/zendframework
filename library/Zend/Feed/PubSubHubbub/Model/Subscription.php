@@ -53,7 +53,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
                 'ID must be set before attempting a save'
             );
         }
-        $result = $this->_db->find($data['id']);
+        $result = $this->_db->select(array('id' => $data['id']));
         if ($result && (0 < count($result))) {
             $data['created_time'] = $result->current()->created_time;
             $now = new Date\Date;
@@ -65,7 +65,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
             }
             $this->_db->update(
                 $data,
-                $this->_db->getAdapter()->quoteInto('id = ?', $data['id'])
+                array('id' => $data['id'])
             );
             return false;
         }
@@ -123,7 +123,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
         $result = $this->_db->select(array('id' => $key));
         if (count($result)) {
             $this->_db->delete(
-                $this->_db->getAdapter()->quoteInto('id = ?', $key)
+                array('id' => $key)
             );
             return true;
         }

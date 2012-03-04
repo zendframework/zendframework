@@ -52,7 +52,14 @@ class Segment implements Route
      *
      * @var string
      */
-    protected $string;
+    protected $regex;
+    
+    /**
+     * Map from regex groups to parameter names.
+     * 
+     * @var array
+     */
+    protected $paramMap = array();
 
     /**
      * Default values.
@@ -187,11 +194,12 @@ class Segment implements Route
     /**
      * Build the matching regex from parsed parts.
      *
-     * @param  array $parts
-     * @param  array $constraints
+     * @param  array   $parts
+     * @param  array   $constraints
+     * @param  integer $groupIndex
      * @return string
      */
-    protected function buildRegex(array $parts, array $constraints)
+    protected function buildRegex(array $parts, array $constraints, &$groupIndex = 1)
     {
         $regex = '';
 
@@ -203,16 +211,18 @@ class Segment implements Route
 
                 case 'parameter':
                     if (isset($constraints[$part[1]])) {
-                        $regex .= '(?<' . $part[1] . '>' . $constraints[$part[1]] . ')';
+                        $regex .= '(' . $constraints[$part[1]] . ')';
                     } elseif ($part[2] === null) {
-                        $regex .= '(?<' . $part[1] . '>[^/]+)';
+                        $regex .= '([^/]+)';
                     } else {
-                        $regex .= '(?<' . $part[1] . '>[^' . $part[2] . ']+)';
+                        $regex .= '([^' . $part[2] . ']+)';
                     }
+                    
+                    $this->paramMap[$groupIndex++] = $part[1];
                     break;
 
                 case 'optional':
-                    $regex .= '(?:' . $this->buildRegex($part[1], $constraints) . ')?';
+                    $regex .= '(?:' . $this->buildRegex($part[1], $constraints, $groupIndex) . ')?';
                     break;
 
                 // @codeCoverageIgnoreStart
@@ -325,16 +335,15 @@ class Segment implements Route
         }
 
         $matchedLength = strlen($matches[0]);
+        $params        = array();
 
-        foreach ($matches as $key => $value) {
-            if (is_numeric($key) || is_int($key)) {
-                unset($matches[$key]);
-            } else {
-                $matches[$key] = urldecode($matches[$key]);
+        foreach ($this->paramMap as $index => $name) {
+            if (isset($matches[$index])) {
+                $params[$name] = $matches[$index];
             }
         }
 
-        return new RouteMatch(array_merge($this->defaults, $matches), $matchedLength);
+        return new RouteMatch(array_merge($this->defaults, $params), $matchedLength);
     }
 
     /**

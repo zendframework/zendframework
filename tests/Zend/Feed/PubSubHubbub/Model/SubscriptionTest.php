@@ -68,6 +68,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
 
     protected function _initDb()
     {
+        $this->markTestSkipped('Skip until not ported to new Zend\Db');
         if (!extension_loaded('pdo')
             || !in_array('sqlite', \PDO::getAvailableDrivers())
         ) {

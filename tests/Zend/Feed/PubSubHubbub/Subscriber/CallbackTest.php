@@ -45,13 +45,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_callback = new \Zend\Feed\PubSubHubbub\Subscriber\Callback;
 
         $this->_adapter = $this->_getCleanMock(
-            'Zend\Db\Adapter\AbstractAdapter'
+            '\Zend\Db\Adapter\Adapter'
         );
         $this->_tableGateway = $this->_getCleanMock(
-            'Zend\Db\Table\AbstractTable'
+            '\Zend\Db\TableGateway\TableGateway'
         );
         $this->_rowset = $this->_getCleanMock(
-            'Zend\Db\Table\AbstractRowset'
+            'Zend\Db\ResultSet\ResultSet'
         );
 
         $this->_tableGateway->expects($this->any())->method('getAdapter')
@@ -144,7 +144,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetStorageImplementation()
     {
-	    $storage = new Model\Subscription($this->_tableGateway);
+	$storage = new Model\Subscription($this->_tableGateway);
         $this->_callback->setStorage($storage);
         $this->assertThat($this->_callback->getStorage(), $this->identicalTo($storage));
     }
@@ -154,14 +154,14 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatesValidHttpGetData()
     {
-        $mockReturnValue = $this->getMock('Result', array('toArray'));
-        $mockReturnValue->expects($this->any())->method('toArray')->will($this->returnValue(array(
+        $mockReturnValue = $this->getMock('Result', array('getArrayCopy'));
+        $mockReturnValue->expects($this->any())->method('getArrayCopy')->will($this->returnValue(array(
                 'verify_token' => hash('sha256', 'cba')
             )));
 
         $this->_tableGateway->expects($this->any())
-            ->method('find')
-            ->with($this->equalTo('verifytokenkey'))
+            ->method('select')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -205,15 +205,15 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnsTrueIfModeSetAsUnsubscribeFromHttpGetData()
     {
-        $mockReturnValue = $this->getMock('Result', array('toArray'));
-        $mockReturnValue->expects($this->any())->method('toArray')->will($this->returnValue(array(
+        $mockReturnValue = $this->getMock('Result', array('getArrayCopy'));
+        $mockReturnValue->expects($this->any())->method('getArrayCopy')->will($this->returnValue(array(
                 'verify_token' => hash('sha256', 'cba')
             )));
 
         $this->_get['hub_mode'] = 'unsubscribe';
         $this->_tableGateway->expects($this->any())
-            ->method('find')
-            ->with($this->equalTo('verifytokenkey'))
+            ->method('select')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -267,8 +267,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $this->_get['hub_mode'] = 'unsubscribe';
         $this->_tableGateway->expects($this->any())
-            ->method('find')
-            ->with($this->equalTo('verifytokenkey'))
+            ->method('select')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
         $t = new Date\Date;
@@ -279,7 +279,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
             );
 
-        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+        $row = new \Zend\Db\ResultSet\Row($rowdata);
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -307,8 +307,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testRespondsToValidConfirmationWithBodyContainingHubChallenge()
     {
         $this->_tableGateway->expects($this->any())
-            ->method('find')
-            ->with($this->equalTo('verifytokenkey'))
+            ->method('select')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
         $t = new Date\Date;
@@ -319,7 +319,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
             );
 
-        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+        $row = new \Zend\Db\ResultSet\Row($rowdata);
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -352,8 +352,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml; // dirty  alternative to php://input
 
         $this->_tableGateway->expects($this->any())
-            ->method('find')
-            ->with($this->equalTo('verifytokenkey'))
+            ->method('select')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
         $t = new Date\Date;
@@ -363,7 +363,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'created_time' => time()
             );
 
-        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+        $row = new \Zend\Db\ResultSet\Row(array('data' => $rowdata));
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -415,8 +415,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
 
         $this->_tableGateway->expects($this->any())
-            ->method('find')
-            ->with($this->equalTo('verifytokenkey'))
+            ->method('select')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
         $rowdata = array(
@@ -426,7 +426,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
             );
 
-        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+        $row = new \Zend\Db\ResultSet\Row(array('data' => $rowdata));
 
         $this->_rowset->expects($this->any())
             ->method('current')
@@ -449,8 +449,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
 
         $this->_tableGateway->expects($this->any())
-            ->method('find')
-            ->with($this->equalTo('verifytokenkey'))
+            ->method('select')
+            ->with($this->equalTo(array('id' => 'verifytokenkey')))
             ->will($this->returnValue($this->_rowset));
 
         $rowdata = array(
@@ -460,7 +460,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
             'lease_seconds' => 10000
             );
 
-        $row = new \Zend\Db\Table\Row(array('data' => $rowdata));
+        $row = new \Zend\Db\ResultSet\Row(array('data' => $rowdata));
 
         $this->_rowset->expects($this->any())
             ->method('current')

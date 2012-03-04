@@ -86,9 +86,9 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
             throw new PubSubHubbub\Exception('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
-        $result = $this->_db->find($key);
+        $result = $this->_db->select(array('id' => $key));
         if (count($result)) {
-            return $result->current()->toArray();
+            return $result->current()->getArrayCopy();
         }
         return false;
     }
@@ -105,7 +105,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
             throw new PubSubHubbub\Exception('Invalid parameter "key"'
                 .' of "' . $key . '" must be a non-empty string');
         }
-        $result = $this->_db->find($key);
+        $result = $this->_db->select(array('id' => $key));
         if (count($result)) {
             return true;
         }
@@ -120,7 +120,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistence
      */
     public function deleteSubscription($key)
     {
-        $result = $this->_db->find($key);
+        $result = $this->_db->select(array('id' => $key));
         if (count($result)) {
             $this->_db->delete(
                 $this->_db->getAdapter()->quoteInto('id = ?', $key)

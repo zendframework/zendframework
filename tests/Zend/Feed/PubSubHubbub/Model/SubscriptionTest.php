@@ -21,6 +21,8 @@
 namespace ZendTest\Feed\PubSubHubbub\Model;
 
 use Zend\Feed\PubSubHubbub\Model\Subscription;
+use \Zend\Db\Adapter\Adapter as DbAdapter;
+use \Zend\Db\TableGateway\TableGateway;
 
 /**
  * @category   Zend
@@ -38,8 +40,11 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllOperations()
     {
-        $this->_initDb();
-        $subscription = new Subscription();
+        $adapter = $this->_initDb();
+        $table = new TableGateway('subscription', $adapter);
+        
+        $subscription = new Subscription($table);
+        
         $id = uniqid();
         $this->assertFalse($subscription->hasSubscription($id));
         $this->assertFalse($subscription->getSubscription($id));
@@ -73,12 +78,13 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         ) {
             $this->markTestSkipped('Test only with pdo_sqlite');
         }
-        $db = \Zend\Db\Db::factory('Pdo\Sqlite', array('dbname' => ':memory:'));
-        \Zend\Db\Table\AbstractTable::setDefaultAdapter($db);
-        $this->_createTable();
+        $db = new DbAdapter(array('driver' => 'pdo_sqlite', 'dsn' => 'sqlite::memory:'));
+        $this->_createTable($db);
+        
+        return $db;
     }
 
-    protected function _createTable()
+    protected function _createTable($db)
     {
         $sql = "CREATE TABLE subscription ("
              .      "id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "
@@ -92,6 +98,6 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
              .      "subscription_state varchar(12) DEFAULT NULL"
              . ");";
 
-       \Zend\Db\Table\AbstractTable::getDefaultAdapter()->getConnection()->query($sql);
+        $db->query($sql)->execute();
     }
 }

@@ -36,6 +36,6 @@ class JsonModel implements JsonSerializable
 
     public function jsonSerialize()
     {
-        return $value;
+        return $this->value;
     }
 }

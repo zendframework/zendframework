@@ -22,8 +22,7 @@ namespace Zend\Config;
 
 use Countable,
     Iterator,
-    ArrayAccess,
-    Zend\Stdlib\ArrayReplergeRecursive;
+    ArrayAccess;
 
 /**
  * @category   Zend

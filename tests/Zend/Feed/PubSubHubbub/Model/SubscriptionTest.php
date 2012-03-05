@@ -40,7 +40,9 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllOperations()
     {
-        $adapter = $this->_initDb();
+        $this->markTestIncomplete('PDO_Sqlite does not return row count, and no solution in Zend\Db yet for this');
+
+        $adapter = $this->initDb();
         $table = new TableGateway('subscription', $adapter);
         
         $subscription = new Subscription($table);
@@ -71,7 +73,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         unset($reflection);
     }
 
-    protected function _initDb()
+    protected function initDb()
     {
         if (!extension_loaded('pdo')
             || !in_array('sqlite', \PDO::getAvailableDrivers())
@@ -79,12 +81,12 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Test only with pdo_sqlite');
         }
         $db = new DbAdapter(array('driver' => 'pdo_sqlite', 'dsn' => 'sqlite::memory:'));
-        $this->_createTable($db);
+        $this->createTable($db);
         
         return $db;
     }
 
-    protected function _createTable($db)
+    protected function createTable($db)
     {
         $sql = "CREATE TABLE subscription ("
              .      "id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "

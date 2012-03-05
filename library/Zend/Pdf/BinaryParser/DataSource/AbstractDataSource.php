@@ -39,7 +39,16 @@ use Zend\Pdf;
  * Subclasses should also override {@link moveToOffset()} and
  * {@link __toString()} as appropriate.
  *
- * @uses       \Zend\Pdf\Exception
+ * The constructor is not defined in this abstract class. However, implementing
+ * classes should provide one. It should do the following:
+ * - Open the data source for parsing.
+ * - Should set $this->_size to the total size in bytes of the data source.
+ * - If the data source cannot be opened for any reason (such as insufficient
+ *   permissions, missing file, etc.), it should throw an appropriate exception.
+ *
+ * The destructor is also not defined in this abstract class. However, 
+ * implementing classes should define one, and have it close the data source.
+ *
  * @package    Zend_PDF
  * @subpackage Zend_PDF_BinaryParser
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
@@ -68,28 +77,6 @@ abstract class AbstractDataSource
 
 
     /* Abstract Methods */
-
-    /**
-     * Object constructor. Opens the data source for parsing.
-     *
-     * Must set $this->_size to the total size in bytes of the data source.
-     *
-     * Upon return the data source can be interrogated using the primitive
-     * methods described here.
-     *
-     * If the data source cannot be opened for any reason (such as insufficient
-     * permissions, missing file, etc.), will throw an appropriate exception.
-     *
-     * @throws \Zend\Pdf\Exception
-     */
-    //abstract public function __construct();
-
-    /**
-     * Object destructor. Closes the data source.
-     *
-     * May also perform cleanup tasks such as deleting temporary files.
-     */
-    //abstract public function __destruct();
 
     /**
      * Returns the specified number of raw bytes from the data source at the

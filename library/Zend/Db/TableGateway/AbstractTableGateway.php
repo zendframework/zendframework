@@ -131,7 +131,7 @@ abstract class AbstractTableGateway extends TableGateway
      * @param  string $where
      * @return type 
      */
-    public function update($set, $where)
+    public function update($set, $where = null)
     {
         $this->initialize();
         return parent::update($set, $where);

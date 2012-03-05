@@ -115,15 +115,15 @@ class Audioscrobbler extends \Zend\Service\AbstractService
             $this->getHttpClient()->setUri("http://ws.audioscrobbler.com{$service}?{$params}");
         }
 
-        $response     = $this->getHttpClient()->request();
+        $response     = $this->getHttpClient()->send();
         $responseBody = $response->getBody();
 
         if (preg_match('/No such path/', $responseBody)) {
             throw new Exception\RuntimeException('Could not find: ' . $this->getHttpClient()->getUri());
         } elseif (preg_match('/No user exists with this name/', $responseBody)) {
             throw new Exception\RuntimeException('No user exists with this name');
-        } elseif (!$response->isSuccessful()) {
-            throw new Exception\RuntimeException('The web service ' . $this->getHttpClient()->getUri() . ' returned the following status code: ' . $response->getStatus());
+        } elseif (!$response->isSuccess()) {
+            throw new Exception\RuntimeException('The web service ' . $this->getHttpClient()->getUri() . ' returned the following status code: ' . $response->getStatusCode());
         }
 
         set_error_handler(array($this, '_errorHandler'));

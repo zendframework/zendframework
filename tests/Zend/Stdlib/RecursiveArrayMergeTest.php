@@ -3,9 +3,9 @@
 namespace ZendTest\Stdlib;
 
 use PHPUnit_Framework_TestCase as TestCase,
-    Zend\Stdlib\ArrayReplergeRecursive;
+    Zend\Stdlib\RecursiveArrayMerge;
 
-class ArrayReplergeRecursiveTest extends TestCase
+class RecursiveArrayMergeTest extends TestCase
 {
     public static function mergeArrays()
     {
@@ -64,8 +64,8 @@ class ArrayReplergeRecursiveTest extends TestCase
     /**
      * @dataProvider mergeArrays
      */
-    public function testReplerge($a, $b, $expected)
+    public function testMerge($a, $b, $expected)
     {
-        $this->assertEquals($expected, ArrayReplergeRecursive::replerge($a, $b));
+        $this->assertEquals($expected, RecursiveArrayMerge::merge($a, $b));
     }
 }

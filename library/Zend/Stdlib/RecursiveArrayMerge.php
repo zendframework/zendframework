@@ -22,17 +22,17 @@ namespace Zend\Stdlib;
 
 
 /**
- * Simple combination of array_merge_recursive and array_replace_recursive.
+ * Simple class for merging two arrays.
  *
  * @category   Zend
  * @package    Zend_Stdlib
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class ArrayReplergeRecursive
+abstract class RecursiveArrayMerge
 {
     /**
-     * Merge two arrays together with a mixed merge/replace behaviour.
+     * Merge two arrays together.
      * 
      * If an integer key exists in both arrays, the value from the second array
      * will be appended the the first array. If both values are arrays, they
@@ -43,14 +43,14 @@ class ArrayReplergeRecursive
      * @param  array $b 
      * @return array
      */
-    public static function replerge(array $a, array $b)
+    public static function merge(array $a, array $b)
     {
         foreach ($b as $key => $value) {
             if (array_key_exists($key, $a)) {
                 if (is_int($key)) {
                     $a[] = $value;
                 } elseif (is_array($value) && is_array($a[$key])) {
-                    $a[$key] = self::replerge($a[$key], $value);
+                    $a[$key] = self::merge($a[$key], $value);
                 } else {
                     $a[$key] = $value;
                 }

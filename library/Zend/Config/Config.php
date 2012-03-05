@@ -336,6 +336,7 @@ class Config implements Countable, Iterator, ArrayAccess
     /**
      * Merge another Config with this one.
      *
+     * @see    Zend\Stdlib\RecursiveArrayMerge::merge()
      * @param  self $merge
      * @return self
      */

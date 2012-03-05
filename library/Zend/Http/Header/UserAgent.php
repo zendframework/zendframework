@@ -16,7 +16,7 @@ class UserAgent implements HeaderDescription
         list($name, $value) = preg_split('#: #', $headerLine, 2);
 
         // check to ensure proper header type for this factory
-        if (strtolower($name) !== 'user-agent') {
+        if (str_replace(array('_', ' ', '.'), '-', strtolower($name)) !== 'user-agent') {
             throw new Exception\InvalidArgumentException('Invalid header line for User-Agent string');
         }
 

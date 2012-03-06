@@ -352,7 +352,7 @@ class Config implements Countable, Iterator, ArrayAccess
                 if (is_int($key)) {
                     $this->data[] = $value;
                 } elseif ($value instanceof self && $this->data[$key] instanceof self) {
-                    $this->data[$key] = $this->data[$key]->merge($value);
+                    $this->data[$key]->merge($value);
                 } else {
                     if ($value instanceof self) {
                         $this->data[$key] = new self($value->toArray(), $this->allowModifications);
